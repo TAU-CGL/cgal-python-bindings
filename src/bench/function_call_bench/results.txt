@@ -1,0 +1,16 @@
+many small tasks: swig
+13.140625
+many small tasks: boost python
+13.65625
+many small tasks: pybind11
+26.71875
+many small tasks: native python
+13.359375
+one big task: swig
+0.734375
+one big task: boost python
+0.71875
+one big task: pybind11
+0.71875
+one big task: native python
+17.84375
