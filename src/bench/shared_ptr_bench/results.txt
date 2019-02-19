@@ -10,3 +10,8 @@ many references to many objects - swig
 15.6875
 many references to a single object - swig
 9.640625
+
+generated file size comparison:
+pybind11: 134kb
+boost python: 162kb
+swig : 47kb
