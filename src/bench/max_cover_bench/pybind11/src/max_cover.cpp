@@ -164,10 +164,6 @@ PYBIND11_MODULE(max_cover, m)
   class_<CGAL::Point_2<CGAL::Epeck>>(m, "Point_2")
     ;
 
-  //class_<CGAL::Lazy_exact_nt<CGAL::Gmpq>>(m, "exact_nt")
-  //  .def("fds", py::overload_cast<>(&CGAL::Lazy_exact_nt<CGAL::Gmpq>::approx))
-  //  ;
-
   class_<Inner_ccb_iterator>(m, "Inner_ccb_iterator")
     .def("val", [](Inner_ccb_iterator& a) {Ccb_halfedge_circulator b = *a; return b; }, return_value_policy::copy)
     .def("inc", [](Inner_ccb_iterator& a) { return ++a; })
