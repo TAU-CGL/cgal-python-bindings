@@ -180,7 +180,7 @@ PYBIND11_MODULE(max_cover, m)
 
   class_<Ccb_halfedge_circulator>(m, "Ccb_halfedge_circulator")
     .def("val", [](Ccb_halfedge_circulator &a) {return *a; }, return_value_policy::copy)
-    .def("inc", [](Ccb_halfedge_circulator &a) { ++a; })
+    .def("inc", [](Ccb_halfedge_circulator &a) {return ++a; })
     .def(self == self)
     .def(self != self)
     .def("copy", [](Ccb_halfedge_circulator &a) {return a; }, return_value_policy::copy)
@@ -246,6 +246,4 @@ PYBIND11_MODULE(max_cover, m)
   m.def("pp2", [](Point_2 &p) { std::cout << p << std::endl; });
   m.def("insert", [](Arrangement_2 &arr, Curve &s) {CGAL::insert(arr, s); });
   m.def("initialize", &initialize, return_value_policy::take_ownership);
-  m.def("init2", &init2, return_value_policy::take_ownership);
-  m.def("init3", &init3, return_value_policy::take_ownership);
 }
