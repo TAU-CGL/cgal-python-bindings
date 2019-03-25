@@ -47,9 +47,6 @@ def main(r ,filename):
   for i in range(len(curves)):
     insert(arr, curves[i])
   t2 = time.time()
-  it = arr.vertices_begin()
-  while it != arr.vertices_end():
-    it.inc()
 
   is_equal = traits.equal_2_object()
   it = arr.edges_begin()
@@ -66,19 +63,15 @@ def main(r ,filename):
     # print("edge data:", it.val().data())
     it.val().twin().val().set_data(not inner)
     it.inc()
-
   it = arr.faces_begin()
   while it != arr.faces_end():
     it.val().set_data(-1)
     it.inc()
-
   breadth_first_Search(arr)
-
   it = arr.vertices_begin()
   while it != arr.vertices_end():
     it.val().set_data(0)
     it.inc()
-
   is_ker_equal = kernel.equal_2_object()
   it = arr.vertices_begin()
   while it != arr.vertices_end():
@@ -121,7 +114,7 @@ def main(r ,filename):
   t3 = time.time()
   print("Arrangement Initialization time:", t2-t1, "\nRemaining Execution time:", t3-t2, "\nTotal execution time:", t3-t1 )
 
-main(0.5, "points_circle_ap_256.txt")
+#main(0.5, "points_circle_ap_256.txt")
 
 
 

@@ -44,8 +44,10 @@ def main(r ,filename):
   kernel = Kernel()
   traits = Traits()
   arr = Arrangement(traits)
+
   for i in range(len(curves)):
     insert(arr, curves[i])
+  # insert_list(arr, curves)
   t2 = time.time()
 
   is_equal = traits.equal_2_object()
@@ -118,7 +120,7 @@ def main(r ,filename):
   t3 = time.time()
   print("Arrangement Initialization time:", t2-t1, "\nRemaining Execution time:", t3-t2, "\nTotal execution time:", t3-t1 )
 
-main(0.5, "points_circle_ap_256.txt")
+#main(0.5, "points_circle_ap_256.txt")
 
 
 

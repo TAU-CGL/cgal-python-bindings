@@ -3,6 +3,7 @@
 #include <boost/python.hpp>
 #define CGAL_HEADER_ONLY 1
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
+#include <boost/python/stl_iterator.hpp>
 #include <fstream>
 #include <sstream>
 #include <ostream>
@@ -104,7 +105,15 @@ boost::python::list initialize1(double i, std::string filename)
 
 }
 
-void insert(Arrangement_2 &arr, Curve &s) { CGAL::insert(arr, s); }
+void insert_list(Arrangement_2& arr, boost::python::list& lst)
+{
+  auto v = std::vector< Curve >(boost::python::stl_input_iterator< Curve >(lst),
+    boost::python::stl_input_iterator< Curve >());
+  CGAL::insert(arr, v.begin(), v.end());
+  //CGAL::insert(arr, boost::python::stl_input_iterator<Curve>(lst), boost::python::stl_input_iterator<Curve>());
+}
+
+void insert(Arrangement_2& arr, Curve& s) { CGAL::insert(arr, s); }
 
 //Kernel
 Kernel::Equal_2 k_eq2(Kernel& k)
@@ -289,5 +298,6 @@ BOOST_PYTHON_MODULE(max_cover)
   boost::python::def("pp", &print_point);
   boost::python::def("pp2",&print_point1);
   boost::python::def("insert", &insert);
+  boost::python::def("insert_list", &insert_list);
   boost::python::def("initialize", &initialize);
 }
