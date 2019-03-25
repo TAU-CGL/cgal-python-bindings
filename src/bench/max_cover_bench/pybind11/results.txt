@@ -1,7 +1,0 @@
-for points_circle_128 with r = 0.5:
-max_cover.exe: 0.202 seconds
-pybind11: 10.561 seconds
-
-for points_circle_ap_256 with r = 0.5:
-max_cover.exe: 0.722 seconds
-pybind11: 40.921 seconds

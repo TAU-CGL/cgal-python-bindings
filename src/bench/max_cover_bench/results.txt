@@ -1,0 +1,50 @@
+for points_mix_63 with r = 1.0:
+
+max_cover.exe:
+Execution time: 0.069
+
+pybind11:
+Arrangement Initialization time: 0.2553141117095947 
+Remaining Execution time: 1.6395933628082275 
+Total execution time: 1.8949074745178223
+
+boost python:
+Arrangement Initialization time: 0.24436354637145996 
+Remaining Execution time: 0.06680512428283691 
+Total execution time: 0.3111686706542969
+
+for points_circle_128 with r = 0.5:
+
+max_cover.exe: 
+Execution time: 0.202
+
+pybind11:
+Arrangement Initialization time: 1.09906005859375 
+Remaining Execution time: 9.892582654953003 
+Total execution time: 10.991642713546753
+
+boost python:
+Arrangement Initialization time: 1.0980257987976074 
+Remaining Execution time: 0.41588711738586426 
+Total execution time: 1.5139129161834717
+
+for points_circle_ap_256 with r = 0.5:
+
+max_cover.exe:
+Execution time: 0.722
+
+pybind11: 
+Arrangement Initialization time: 4.266622066497803 
+Remaining Execution time: 39.88527059555054 
+Total execution time: 44.15189266204834
+
+boost python:
+Arrangement Initialization time: 4.243680000305176 
+Remaining Execution time: 1.6704959869384766 
+Total execution time: 5.914175987243652
+
+
+
+
+
+
