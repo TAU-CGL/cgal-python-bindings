@@ -1,24 +1,22 @@
-#define BOOST_PYTHON_STATIC_LIB //maybe??
-#include <boost/python.hpp>
 #include <math.h>
 
-double square(double i) {
-	return sqrt(i);
-}
+#include <boost/python.hpp>
 
-double squareTimes(double i, int times) {
-	double res = 0;
-	for (int j = 0; j < times; j++)
-	{
-		res += i;
-		res = sqrt(res);
-	}
-	return res;
+namespace bp = boost::python;
+
+double square(double i) { return sqrt(i); }
+
+double square_times(double i, int times) {
+  double res(0);
+  for (auto j = 0; j < times; ++j) {
+    res += i;
+    res = sqrt(res);
+  }
+  return res;
 }
 
 BOOST_PYTHON_MODULE(square_boost)
 {
-	using namespace boost::python;
-	def("square", square);
-	def("squareTimes", squareTimes);
+  bp::def("square", square);
+  bp::def("squareTimes", square_times);
 }
