@@ -11,16 +11,17 @@ include(${CGAL_USE_FILE})
 
 set(Boost_USE_STATIC_LIBS OFF)
 set(CGALPY_BOOST_LIBRARIES system thread)
-if (CGALPY_DEF_PYBINDINGS)
-  find_package(PythonLibs ${PY_VERSION} REQUIRED)
-  if (PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
-    set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python)
-  else()
-    set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python35)
-  endif()
-  include_directories(${PYTHON_INCLUDE_DIRS})
-  add_definitions(-DCGALPY_DEF_PYBINDINGS)
+
+find_package(Python3 COMPONENTS Interpreter Development)
+
+find_package(PythonLibs ${PY_VERSION} REQUIRED)
+if (PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
+  set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python)
+else()
+  set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python35)
 endif()
+include_directories(${PYTHON_INCLUDE_DIRS})
+add_definitions(-DCGALPY_DEF_PYBINDINGS)
 find_package(Boost ${BOOST_VERSION} REQUIRED COMPONENTS ${CGALPY_BOOST_LIBRARIES})
 
 if (NOT Boost_FOUND)
@@ -28,12 +29,10 @@ if (NOT Boost_FOUND)
   return()
 endif()
 
-find_package(ImageMagick REQUIRED COMPONENTS Magick++)
 find_package(OpenGL REQUIRED)
 
 # Add includes and libs
 include_directories(${Boost_INCLUDE_DIR})
-include_directories(${ImageMagick_Magick++_INCLUDE_DIRS})
 
 if (WIN32)
   include_directories(libs/GL/include)
