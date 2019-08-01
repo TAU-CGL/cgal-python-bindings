@@ -41,10 +41,14 @@ endif(WIN32)
 
 # Add Python bindings
 add_library(arr_2-ecep-seg_PYBINDINGS SHARED lib/Polygon_2.cpp)
+if(WIN32)
+set_target_properties(arr_2-ecep-seg_PYBINDINGS PROPERTIES SUFFIX ".pyd")
+endif()
 target_link_libraries(arr_2-ecep-seg_PYBINDINGS
                       ${arr_2-ecep-seg}
 		      ${NON_WIN32_LIBRARIES}
-                      ${Boost_LIBRARIES})
+                      ${Boost_LIBRARIES}
+					  ${PYTHON_LIBRARIES})
 set_target_properties(arr_2-ecep-seg_PYBINDINGS PROPERTIES OUTPUT_NAME
 		      arr_2-ecep-seg)
 # don't prepend wrapper library name with lib
