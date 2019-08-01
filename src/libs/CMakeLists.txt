@@ -1,2 +1,2 @@
 # Add SFG subdirectory
-add_subdirectory(arr_2-ecep-seg)
+add_subdirectory(arr2_epec_seg)

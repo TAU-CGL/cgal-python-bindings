@@ -1,17 +1,17 @@
 # packages
 
 # Add source files
-# set(arr_2-ecep-seg_SRC_FILES ${arr_2-ecep-seg_SRC_FILES} lib/xxx.cpp)
+# set(arr2_epec_seg_SRC_FILES ${arr2_epec_seg_SRC_FILES} lib/xxx.cpp)
 
 # Add the generated files
-set(arr_2-ecep-seg_SRC_FILES ${arr_2-ecep-seg_SRC_FILES} ${arr_2-ecep-seg_AUTO_GENERATED_SRC_FILES})
+set(arr2_epec_seg_SRC_FILES ${arr2_epec_seg_SRC_FILES} ${arr2_epec_seg_AUTO_GENERATED_SRC_FILES})
 
 # Add all include directories
 include_directories(lib)
 include_directories(include)
 
 # Add defines
-add_definitions(-DCGALPY_arr_2-ecep-seg_SOURCE)
+add_definitions(-DCGALPY_arr2_epec_seg_SOURCE)
 
 if (WIN32)
   add_definitions(/wd4251)
@@ -22,14 +22,14 @@ endif(WIN32)
 # Add library
 # if (BUILD_SHARED_LIBS)
 #   add_definitions(-DCGALPY_ALL_DYN_LINK)
-#   add_library(arr_2-ecep-seg SHARED ${arr_2-ecep-seg_SRC_FILES})
+#   add_library(arr2_epec_seg SHARED ${arr2_epec_seg_SRC_FILES})
 # else(BUILD_SHARED_LIBS)
-#   add_library(arr_2-ecep-seg STATIC ${arr_2-ecep-seg_SRC_FILES})
+#   add_library(arr2_epec_seg STATIC ${arr2_epec_seg_SRC_FILES})
 # endif(BUILD_SHARED_LIBS)
 
-# set_target_properties(arr_2-ecep-seg PROPERTIES
-#   VERSION "${arr_2-ecep-seg_SOVERSION}"
-#   SOVERSION "${arr_2-ecep-seg_SONAME_VERSION}")
+# set_target_properties(arr2_epec_seg PROPERTIES
+#   VERSION "${arr2_epec_seg_SOVERSION}"
+#   SOVERSION "${arr2_epec_seg_SONAME_VERSION}")
 
 # Add links
 # if (NOT WIN32)
@@ -40,19 +40,19 @@ endif(WIN32)
 # endif(NOT WIN32)
 
 # Add Python bindings
-add_library(arr_2-ecep-seg_PYBINDINGS SHARED lib/Polygon_2.cpp)
+add_library(arr2_epec_seg_PYBINDINGS SHARED lib/Polygon_2.cpp)
 if(WIN32)
-set_target_properties(arr_2-ecep-seg_PYBINDINGS PROPERTIES SUFFIX ".pyd")
+set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES SUFFIX ".pyd")
 endif()
-target_link_libraries(arr_2-ecep-seg_PYBINDINGS
-                      ${arr_2-ecep-seg}
+target_link_libraries(arr2_epec_seg_PYBINDINGS
+                      ${arr2_epec_seg}
 		      ${NON_WIN32_LIBRARIES}
                       ${Boost_LIBRARIES}
 					  ${PYTHON_LIBRARIES})
-set_target_properties(arr_2-ecep-seg_PYBINDINGS PROPERTIES OUTPUT_NAME
-		      arr_2-ecep-seg)
+set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES OUTPUT_NAME
+		      arr2_epec_seg)
 # don't prepend wrapper library name with lib
-set_target_properties(arr_2-ecep-seg_PYBINDINGS PROPERTIES PREFIX "")
+set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES PREFIX "")
 
 # target_link_libraries(arr_2-ecep-seg ${NON_WIN32_LIBRARIES})
 
@@ -73,21 +73,21 @@ endif(DOXYGEN_FOUND)
 
 # Add Python bindings
 if (CGALPY_DEF_PYBINDINGS)
-  set_property(TARGET arr_2-ecep-seg_PYBINDINGS PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
-  set_property(TARGET arr_2-ecep-seg_PYBINDINGS PROPERTY INSTALL_RPATH "${CGAL_DIR}/lib")
+  set_property(TARGET arr2_epec_seg_PYBINDINGS PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
+  set_property(TARGET arr2_epec_seg_PYBINDINGS PROPERTY INSTALL_RPATH "${CGAL_DIR}/lib")
 endif()
 
-# set_property(TARGET arr_2-ecep-seg PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
-# set_property(TARGET arr_2-ecep-seg PROPERTY INSTALL_RPATH "${CGAL_DIR}/lib")
+# set_property(TARGET arr2_epec_seg PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
+# set_property(TARGET arr2_epec_seg PROPERTY INSTALL_RPATH "${CGAL_DIR}/lib")
 
 if (CGALPY_DEF_PYBINDINGS)
-  install(TARGETS arr_2-ecep-seg_PYBINDINGS
+  install(TARGETS arr2_epec_seg_PYBINDINGS
           RUNTIME DESTINATION ${CGALPY_INSTALL_BIN_DIR}
           LIBRARY DESTINATION ${CGALPY_INSTALL_LIB_DIR}
           ARCHIVE DESTINATION ${CGALPY_INSTALL_LIB_DIR})
 endif()
 
-# install(TARGETS arr_2-ecep-seg
+# install(TARGETS arr2_epec_seg
 #         RUNTIME DESTINATION ${CGALPY_INSTALL_BIN_DIR}
 #         LIBRARY DESTINATION ${CGALPY_INSTALL_LIB_DIR}
 #         ARCHIVE DESTINATION ${CGALPY_INSTALL_LIB_DIR})
