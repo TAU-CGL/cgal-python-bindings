@@ -40,7 +40,8 @@ endif(WIN32)
 # endif(NOT WIN32)
 
 # Add Python bindings
-add_library(arr2_epec_seg_PYBINDINGS SHARED lib/Polygon_2.cpp)
+add_library(arr2_epec_seg_PYBINDINGS SHARED lib/arr2_epec_seg.cpp lib/Arrangement_2_bindings.cpp lib/Intersections_2_bindings.cpp
+lib/Vertex_bindings.cpp lib/Halfedge_bindings.cpp lib/Face_bindings.cpp)
 if(WIN32)
 set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES SUFFIX ".pyd")
 endif()

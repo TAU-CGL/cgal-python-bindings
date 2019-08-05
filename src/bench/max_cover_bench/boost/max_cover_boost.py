@@ -47,7 +47,7 @@ def main(r ,filename):
 
   for i in range(len(curves)):
     insert(arr, curves[i])
-  # insert_list(arr, curves)
+  #insert_list(arr, curves)
   t2 = time.time()
 
   is_equal = traits.equal_2_object()
