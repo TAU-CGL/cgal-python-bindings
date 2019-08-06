@@ -8,32 +8,112 @@
 //#include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Arr_segment_traits_2.h>
+#include <CGAL/Arr_overlay_2.h>
+#include <CGAL/Arr_default_overlay_traits.h>
+#include <CGAL/Arr_trapezoid_ric_point_location.h>
+#include <CGAL/Arr_landmarks_point_location.h>
 
-typedef CGAL::Exact_predicates_exact_constructions_kernel   Kernel;
-typedef Kernel::FT                                          FT;
-typedef Kernel::Point_2                                     Point_2;
-typedef Kernel::Segment_2                                   Segment_2;
-typedef Kernel::Line_2                                      Line_2;
-typedef Kernel::Ray_2                                       Ray_2;
-typedef CGAL::Arr_segment_traits_2<Kernel>                  Traits;
-typedef Traits::Curve_2                                     Curve;
-typedef CGAL::Arrangement_2<Traits>                         Arrangement_2;
-typedef Kernel::Intersect_2                                 Intersect_2;
+typedef typename CGAL::Exact_predicates_exact_constructions_kernel      Kernel;
+typedef typename Kernel::FT                                             FT;
+typedef typename Kernel::Point_2                                        Point_2;
+typedef typename Kernel::Segment_2                                      Segment_2;
+typedef typename Kernel::Line_2                                         Line_2;
+typedef typename Kernel::Ray_2                                          Ray_2;
+typedef typename CGAL::Arr_segment_traits_2<Kernel>                     Traits;
+typedef typename Traits::Curve_2                                        Curve;
+typedef typename CGAL::Arrangement_2<Traits>                            Arrangement_2;
+typedef typename Kernel::Intersect_2                                    Intersect_2;
+typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2>      Landmarks_pl;
+typedef typename CGAL::Arr_point_location_result<Arrangement_2>         Pl_result;
+typedef typename std::pair<Point_2, Pl_result::Type>                    Pl_query_result;
 
-typedef CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type Line_line_intersection_result;
-typedef CGAL::cpp11::result_of<Intersect_2(Line_2, Ray_2)>::type Line_ray_intersection_result;
-typedef CGAL::cpp11::result_of<Intersect_2(Line_2, Segment_2)>::type Line_segment_intersection_result;
-typedef CGAL::cpp11::result_of<Intersect_2(Ray_2, Ray_2)>::type Ray_ray_intersection_result;
-typedef CGAL::cpp11::result_of<Intersect_2(Ray_2, Segment_2)>::type Ray_segment_intersection_result;
-typedef CGAL::cpp11::result_of<Intersect_2(Segment_2, Segment_2)>::type Segment_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
+Line_line_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Ray_2)>::type
+Line_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Segment_2)>::type
+Line_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Ray_2)>::type
+Ray_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Segment_2)>::type
+Ray_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Segment_2)>::type
+Segment_segment_intersection_result;
 
-typedef Arrangement_2::Vertex_iterator							            Vertex_iterator;
-typedef Arrangement_2::Vertex									                  Vertex;
-typedef Arrangement_2::Inner_ccb_iterator						            Inner_ccb_iterator;
-typedef Arrangement_2::Halfedge_iterator						            Halfedge_iterator;
-typedef Arrangement_2::Ccb_halfedge_circulator					        Ccb_halfedge_circulator;
-typedef Arrangement_2::Halfedge_around_vertex_circulator		    Halfedge_around_vertex_circulator;
-typedef Arrangement_2::Halfedge									                Halfedge;
-typedef Arrangement_2::Edge_iterator							              Edge_iterator;
-typedef Arrangement_2::Face_iterator							              Face_iterator;
-typedef Arrangement_2::Face										                  Face;
+typedef typename Arrangement_2::Vertex_iterator							              Vertex_iterator;
+typedef typename Arrangement_2::Isolated_vertex_iterator                  Isolated_vertex_iterator;
+typedef typename Arrangement_2::Vertex									                  Vertex;
+typedef typename Arrangement_2::Inner_ccb_iterator						            Inner_ccb_iterator;
+typedef typename Arrangement_2::Halfedge_iterator						              Halfedge_iterator;
+typedef typename Arrangement_2::Ccb_halfedge_circulator					          Ccb_halfedge_circulator;
+typedef typename Arrangement_2::Halfedge_around_vertex_circulator		      Halfedge_around_vertex_circulator;
+typedef typename Arrangement_2::Halfedge									                Halfedge;
+typedef typename Arrangement_2::Edge_iterator							                Edge_iterator;
+typedef typename Arrangement_2::Face_iterator							                Face_iterator;
+typedef typename Arrangement_2::Face										                  Face;
+
+inline boost::python::object pass_through(boost::python::object const& o) { return o; }
+
+//these template classes are used to allow more natural iteration in python
+
+template <class circulator>
+class Iterator_from_circulator
+{
+  bool first = true;
+  circulator m_first;
+  circulator m_curr;
+public:
+  Iterator_from_circulator(circulator first) : m_first(first), m_curr(first) {}
+  typename circulator::value_type& next()
+  {
+    if (m_curr != 0)
+    {
+      if (first || m_curr != m_first)
+      {
+        first = false;
+        return *(m_curr++);
+      }
+    }
+    PyErr_SetString(PyExc_StopIteration, "No more data.");
+    boost::python::throw_error_already_set();
+    return *m_curr;
+  }
+};
+
+template <class iterator>
+class Iterator_of_circulators
+{
+  typedef typename Iterator_from_circulator<typename iterator::value_type> modified_circulator;
+  iterator m_curr;
+  iterator m_end;
+public:
+  Iterator_of_circulators(iterator begin, iterator end) : m_curr(begin), m_end(end) {}
+  modified_circulator* next()
+  {
+    if (m_curr != m_end)
+      return new modified_circulator(modified_circulator(*(m_curr++)));
+    PyErr_SetString(PyExc_StopIteration, "No more data.");
+    boost::python::throw_error_already_set();
+    return new modified_circulator(modified_circulator(*m_curr));
+  }
+};
+
+template<typename iterator>
+void bind_iterator_of_circulators(const char* python_name)
+{
+  using namespace boost::python;
+  class_<iterator>(python_name, no_init)
+    .def("__iter__", &pass_through)
+    .def("__next__", &iterator::next, return_value_policy<manage_new_object>())
+    ;
+}
+
+template<typename iterator>
+void bind_iterator(const char* python_name)
+{
+  using namespace boost::python;
+  class_<iterator>(python_name, no_init)
+    .def("__iter__", &pass_through)
+    .def("__next__", &iterator::next, return_value_policy<reference_existing_object>())
+    ;
+}
