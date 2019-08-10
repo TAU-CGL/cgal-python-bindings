@@ -93,6 +93,8 @@ Vertex_iterator vertices_begin(Arrangement_2& arr) { return arr.vertices_begin()
 Vertex_iterator vertices_end(Arrangement_2& arr) { return arr.vertices_end(); }
 Halfedge_iterator halfedges_begin(Arrangement_2& arr) { return arr.halfedges_begin(); }
 Halfedge_iterator halfedges_end(Arrangement_2& arr) { return arr.halfedges_end(); }
+Halfedge_iterator edges_begin(Arrangement_2& arr) { return arr.edges_begin(); }
+Halfedge_iterator edges_end(Arrangement_2& arr) { return arr.edges_end(); }
 Face_iterator faces_begin(Arrangement_2& arr) { return arr.faces_begin(); }
 Face_iterator faces_end(Arrangement_2& arr) { return arr.faces_end(); }
 Face& unbounded_face(Arrangement_2& arr) { return *(arr.unbounded_face()); }
@@ -106,6 +108,7 @@ void export_Arrangement_2()
     .def("halfedges", range<return_value_policy<reference_existing_object>>(&halfedges_begin, &halfedges_end))
     .def("vertices", range<return_value_policy<reference_existing_object>>(&vertices_begin, &vertices_end))
     .def("faces", range<return_value_policy<reference_existing_object>>(&faces_begin, &faces_end))
+    .def("edges", range<return_value_policy<reference_existing_object>>(&edges_begin, &edges_end))
     .def("unbounded_face", &unbounded_face, return_value_policy<reference_existing_object>())
     .def("insert_from_left_vertex", &insert_from_left_vertex, return_value_policy<reference_existing_object>())
     .def("insert_from_right_vertex", &insert_from_right_vertex, return_value_policy<reference_existing_object>())
