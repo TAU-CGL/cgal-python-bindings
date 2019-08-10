@@ -3,6 +3,7 @@
 void export_Kernel();
 void export_Arrangement_2();
 void export_Intersections_2();
+void export_Point_location();
 void export_Vertex();
 void export_Halfedge();
 void export_Face();
@@ -18,5 +19,6 @@ BOOST_PYTHON_MODULE(arr2_epec_seg)
   export_Halfedge();
   export_Face();
   export_Intersections_2();
+  export_Point_location();
 
 }

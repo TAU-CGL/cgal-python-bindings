@@ -4,28 +4,47 @@
 #include <boost/make_shared.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/stl_iterator.hpp>
-#include <CGAL/Arrangement_2.h>
-//#include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Arr_segment_traits_2.h>
+#include <CGAL/Bbox_2.h>
+#include <CGAL/Circle_2.h>
+#include <CGAL/Triangle_2.h>
+#include <CGAL/Direction_2.h>
+#include <CGAL/Vector_2.h>
+#include <CGAL/Aff_transformation_2.h>
+#include <CGAL/Arrangement_2.h>
+//#include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_default_overlay_traits.h>
+#include <CGAL/Arr_naive_point_location.h>
+#include <CGAL/Arr_walk_along_line_point_location.h>
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
 
-typedef typename CGAL::Exact_predicates_exact_constructions_kernel      Kernel;
-typedef typename Kernel::FT                                             FT;
-typedef typename Kernel::Point_2                                        Point_2;
-typedef typename Kernel::Segment_2                                      Segment_2;
-typedef typename Kernel::Line_2                                         Line_2;
-typedef typename Kernel::Ray_2                                          Ray_2;
-typedef typename CGAL::Arr_segment_traits_2<Kernel>                     Traits;
-typedef typename Traits::Curve_2                                        Curve;
-typedef typename CGAL::Arrangement_2<Traits>                            Arrangement_2;
-typedef typename Kernel::Intersect_2                                    Intersect_2;
-typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2>      Landmarks_pl;
-typedef typename CGAL::Arr_point_location_result<Arrangement_2>         Pl_result;
-typedef typename std::pair<Point_2, Pl_result::Type>                    Pl_query_result;
+typedef typename CGAL::Exact_predicates_exact_constructions_kernel       Kernel;
+typedef typename Kernel::FT                                              FT;
+typedef typename Kernel::RT                                              RT;
+typedef typename Kernel::Point_2                                         Point_2;
+typedef typename Kernel::Segment_2                                       Segment_2;
+typedef typename Kernel::Line_2                                          Line_2;
+typedef typename Kernel::Ray_2                                           Ray_2;
+typedef typename CGAL::Bbox_2                                            Bbox_2;
+typedef typename Kernel::Direction_2                                     Direction_2;
+typedef typename Kernel::Vector_2                                        Vector_2;
+typedef typename Kernel::Circle_2                                        Circle_2;
+typedef typename Kernel::Triangle_2                                      Triangle_2;
+typedef typename Kernel::Iso_rectangle_2                                 Iso_rectangle_2;
+typedef typename CGAL::Aff_transformation_2<Kernel>                      Transformation;
+typedef typename CGAL::Arr_segment_traits_2<Kernel>                      Traits;
+typedef typename Traits::Curve_2                                         Curve;
+typedef typename CGAL::Arrangement_2<Traits>                             Arrangement_2;
+typedef typename Kernel::Intersect_2                                     Intersect_2;
+typedef typename CGAL::Arr_naive_point_location<Arrangement_2>           Naive_pl;
+typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
+typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2>       Landmarks_pl;
+typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>   Trapezoid_pl;
+//typedef typename CGAL::Arr_point_location_result<Arrangement_2>          Pl_result;
+//typedef typename std::pair<Point_2, Pl_result::Type>                     Pl_query_result;
 
 typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
 Line_line_intersection_result;
@@ -39,17 +58,22 @@ typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Segment_2)>::type
 Ray_segment_intersection_result;
 typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Segment_2)>::type
 Segment_segment_intersection_result;
+typedef typename CGAL::Arr_point_location_result<Arrangement_2>::Type
+Pl_result;
 
 typedef typename Arrangement_2::Vertex_iterator							              Vertex_iterator;
+typedef typename Arrangement_2::Vertex_const_handle                       Vertex_const_handle;
 typedef typename Arrangement_2::Isolated_vertex_iterator                  Isolated_vertex_iterator;
 typedef typename Arrangement_2::Vertex									                  Vertex;
 typedef typename Arrangement_2::Inner_ccb_iterator						            Inner_ccb_iterator;
-typedef typename Arrangement_2::Halfedge_iterator						              Halfedge_iterator;
 typedef typename Arrangement_2::Ccb_halfedge_circulator					          Ccb_halfedge_circulator;
 typedef typename Arrangement_2::Halfedge_around_vertex_circulator		      Halfedge_around_vertex_circulator;
+typedef typename Arrangement_2::Halfedge_iterator									        Halfedge_iterator;
+typedef typename Arrangement_2::Halfedge_const_handle                     Halfedge_const_handle;
 typedef typename Arrangement_2::Halfedge									                Halfedge;
-typedef typename Arrangement_2::Edge_iterator							                Edge_iterator;
+//typedef typename Arrangement_2::Edge_iterator							                Edge_iterator;
 typedef typename Arrangement_2::Face_iterator							                Face_iterator;
+typedef typename Arrangement_2::Face_const_handle                         Face_const_handle;
 typedef typename Arrangement_2::Face										                  Face;
 
 inline boost::python::object pass_through(boost::python::object const& o) { return o; }
