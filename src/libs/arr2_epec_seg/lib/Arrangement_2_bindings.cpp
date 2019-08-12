@@ -105,22 +105,22 @@ void export_Arrangement_2()
   using namespace boost::python;
   class_<Arrangement_2>("Arrangement_2")
     .def(init<>())
-    .def("halfedges", range<return_value_policy<reference_existing_object>>(&halfedges_begin, &halfedges_end))
-    .def("vertices", range<return_value_policy<reference_existing_object>>(&vertices_begin, &vertices_end))
-    .def("faces", range<return_value_policy<reference_existing_object>>(&faces_begin, &faces_end))
-    .def("edges", range<return_value_policy<reference_existing_object>>(&edges_begin, &edges_end))
-    .def("unbounded_face", &unbounded_face, return_value_policy<reference_existing_object>())
-    .def("insert_from_left_vertex", &insert_from_left_vertex, return_value_policy<reference_existing_object>())
-    .def("insert_from_right_vertex", &insert_from_right_vertex, return_value_policy<reference_existing_object>())
-    .def("insert_in_face_interior", &insert_edge_in_face_interior, return_value_policy<reference_existing_object>())
-    .def("insert_in_face_interior", &insert_vertex_in_face_interior, return_value_policy<reference_existing_object>())
-    .def("insert_at_vertices", &insert_at_vertices, return_value_policy<reference_existing_object>())
-    .def("modify_vertex", &modify_vertex, return_value_policy<reference_existing_object>())
-    .def("remove_isolated_vertex", &remove_isolated_vertex, return_value_policy<reference_existing_object>())
-    .def("modify_edge", &modify_edge, return_value_policy<reference_existing_object>())
-    .def("split_edge", &split_edge, return_value_policy<reference_existing_object>())
-    .def("merge_edge", &merge_edge, return_value_policy<reference_existing_object>())
-    .def("remove_edge", &remove_edge, return_value_policy<reference_existing_object>())
+    .def("halfedges", range<return_internal_reference<>>(&halfedges_begin, &halfedges_end))
+    .def("vertices", range<return_internal_reference<>>(&vertices_begin, &vertices_end))
+    .def("faces", range<return_internal_reference<>>(&faces_begin, &faces_end))
+    .def("edges", range<return_internal_reference<>>(&edges_begin, &edges_end))
+    .def("unbounded_face", &unbounded_face, return_internal_reference<>())
+    .def("insert_from_left_vertex", &insert_from_left_vertex, return_internal_reference<>())
+    .def("insert_from_right_vertex", &insert_from_right_vertex, return_internal_reference<>())
+    .def("insert_in_face_interior", &insert_edge_in_face_interior, return_internal_reference<>())
+    .def("insert_in_face_interior", &insert_vertex_in_face_interior, return_internal_reference<>())
+    .def("insert_at_vertices", &insert_at_vertices, return_internal_reference<>())
+    .def("modify_vertex", &modify_vertex, return_internal_reference<>())
+    .def("remove_isolated_vertex", &remove_isolated_vertex, return_internal_reference<>())
+    .def("modify_edge", &modify_edge, return_internal_reference<>())
+    .def("split_edge", &split_edge, return_internal_reference<>())
+    .def("merge_edge", &merge_edge, return_internal_reference<>())
+    .def("remove_edge", &remove_edge, return_internal_reference<>())
     .def("is_empty", &Arrangement_2::is_empty)
     .def("is_valid", &Arrangement_2::is_valid)
     .def("number_of_edges", &Arrangement_2::number_of_edges)
@@ -135,13 +135,13 @@ void export_Arrangement_2()
     .def(self_ns::str(self_ns::self))
     ;
 
-  def("insert_point", &insert_point, return_value_policy<reference_existing_object>());
+  def("insert_point", &insert_point, return_internal_reference<>());
   def("insert", &insert_segment);
   def("insert", &insert_segments);
-  def("insert_non_intersecting_curve", &insert_non_intersecting_segment, return_value_policy<reference_existing_object>());
+  def("insert_non_intersecting_curve", &insert_non_intersecting_segment, return_internal_reference<>());
   def("insert_non_intersecting_curves", &insert_non_intersecting_segments);
   def("overlay", &overlay);
   def("do_intersect", &do_intersect);
-  def("remove_edge", &remove_edge_free, return_value_policy<reference_existing_object>());
+  def("remove_edge", &remove_edge_free, return_internal_reference<>());
   def("remove_vertex", &remove_vertex_free);
 }

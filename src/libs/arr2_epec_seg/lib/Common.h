@@ -13,7 +13,9 @@
 #include <CGAL/Vector_2.h>
 #include <CGAL/Aff_transformation_2.h>
 #include <CGAL/Arrangement_2.h>
-//#include <CGAL/Arr_extended_dcel.h>
+#ifdef EXTENDED_DCEL
+#include <CGAL/Arr_extended_dcel.h>
+#endif // EXTENDED_DCEL
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_default_overlay_traits.h>
 #include <CGAL/Arr_naive_point_location.h>
@@ -34,10 +36,18 @@ typedef typename Kernel::Vector_2                                        Vector_
 typedef typename Kernel::Circle_2                                        Circle_2;
 typedef typename Kernel::Triangle_2                                      Triangle_2;
 typedef typename Kernel::Iso_rectangle_2                                 Iso_rectangle_2;
-typedef typename CGAL::Aff_transformation_2<Kernel>                      Transformation;
+typedef typename CGAL::Aff_transformation_2<Kernel>                      Aff_Transformation_2;
+typedef typename CGAL::Rotation                                          Rotation;
+typedef typename CGAL::Scaling                                           Scaling;
+typedef typename CGAL::Translation                                       Translation;
 typedef typename CGAL::Arr_segment_traits_2<Kernel>                      Traits;
 typedef typename Traits::Curve_2                                         Curve;
+#ifdef EXTENDED_DCEL
+typedef CGAL::Arr_extended_dcel<Traits, int, int, int>                   Dcel;
+typedef CGAL::Arrangement_2<Traits, Dcel>                                Arrangement_2;
+#else
 typedef typename CGAL::Arrangement_2<Traits>                             Arrangement_2;
+#endif // EXTENDED_DCEL
 typedef typename Kernel::Intersect_2                                     Intersect_2;
 typedef typename CGAL::Arr_naive_point_location<Arrangement_2>           Naive_pl;
 typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
