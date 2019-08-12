@@ -8,7 +8,11 @@ void export_Vertex();
 void export_Halfedge();
 void export_Face();
 
+#ifdef EXTENDED_DCEL
+BOOST_PYTHON_MODULE(arr2_epec_seg_ex)
+#else
 BOOST_PYTHON_MODULE(arr2_epec_seg)
+#endif // EXTENDED_DCEL
 {
   using namespace boost::python;
 

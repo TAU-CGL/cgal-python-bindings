@@ -21,6 +21,7 @@ void export_Face()
 {
   using namespace boost::python;
   class_<Face>("Face")
+    .def(init<>())
     .def("assign", &Face::assign)
     .def("is_unbounded", &Face::is_unbounded)
     .def("has_outer_ccb", &Face::has_outer_ccb)
@@ -31,9 +32,11 @@ void export_Face()
     .def("outer_ccb", &outer_ccb, return_value_policy<manage_new_object>())
     .def("inner_ccbs", &inner_ccbs, return_value_policy<manage_new_object>())
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
-    .def("isolated_vertices", range<return_value_policy<reference_existing_object>>(&isolated_vertices_begin, &isolated_vertices_end))
-    //.def("set_data", &Face::set_data)
-    //.def<Face::Data& (Face::*)()>("data", &Face::data, return_value_policy<copy_non_const_reference>()) //elementary type
+    .def("isolated_vertices", range<return_internal_reference<>>(&isolated_vertices_begin, &isolated_vertices_end))
+#ifdef EXTENDED_DCEL
+    .def("set_data", &Face::set_data)
+    .def<Face::Data& (Face::*)()>("data", &Face::data, return_value_policy<copy_non_const_reference>()) //elementary type
+#endif // EXTENDED_DCEL
     ;
   bind_iterator<Iterator_from_circulator<Ccb_halfedge_circulator>>("Ccb_halfedge_iterator");
   bind_iterator_of_circulators<Iterator_of_circulators<Inner_ccb_iterator>>("Inner_ccbs_iterator");

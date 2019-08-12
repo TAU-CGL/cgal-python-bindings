@@ -27,6 +27,20 @@ void bind_squared_distance_types()
   bind_squared_distance_first_type< T5, T2, T3, T4, T1 >();
 }
 
+typename FT::Exact_type& FT_exact(FT& ft)
+{
+  return ft.exact();
+}
+
+typename FT::Approximate_type& FT_approx(FT& ft)
+{
+  return ft.approx();
+}
+
+Point_2 transform_point(Aff_Transformation_2& t, Point_2& p) { return t.transform(p); }
+Vector_2 transform_vector(Aff_Transformation_2& t, Vector_2 & v) { return t.transform(v); }
+Direction_2 transform_direction(Aff_Transformation_2& t, Direction_2& d) { return t.transform(d); }
+Line_2 transform_line(Aff_Transformation_2& t, Line_2& l) { return t.transform(l); }
 
 void export_Kernel()
 {
@@ -43,20 +57,35 @@ void export_Kernel()
 
   class_<FT>("FT")
     .def(init<FT::Exact_type>())
+    .def("exact", &FT_exact, return_internal_reference<>())
+    //.def("approx", &FT_approx, return_internal_reference<>())
     .def(self_ns::str(self_ns::self))
     .def(self == self)
     ;
 
-  class_<RT>("RT")
-    .def(init<RT::Exact_type>())
-    .def(self_ns::str(self_ns::self))
-    .def(self == self)
-    ;
+  //class_<RT>("RT")
+  //  .def(init<RT::Exact_type>())
+  //  .def(self_ns::str(self_ns::self))
+  //  .def(self == self)
+  //  ;
 
-  enum_<CGAL::Sign>("Sign")
+  enum_<CGAL::Sign>("Result")
+
+    //CGAL::Sign
     .value("NEGATIVE", CGAL::NEGATIVE)
     .value("ZERO", CGAL::ZERO)
     .value("POSITIVE", CGAL::POSITIVE)
+
+    //CGAL::Comparison_result
+    .value("SMALLER", CGAL::SMALLER)
+    .value("EQUAL", CGAL::EQUAL)
+    .value("LARGER", CGAL::LARGER)
+
+    //CGAL::Oriented_side
+    .value("ON_NEGATIVE_SIDE", CGAL::ON_NEGATIVE_SIDE)
+    .value("ON_ORIENTED_BOUNDARY", CGAL::ON_ORIENTED_BOUNDARY)
+    .value("ON_POSITIVE_SIDE", CGAL::ON_POSITIVE_SIDE)
+
     .export_values()
     ;
 
@@ -67,19 +96,19 @@ void export_Kernel()
     .export_values()
     ;
 
-  enum_<CGAL::Comparison_result>("Comparison_result")
-    .value("SMALLER", CGAL::SMALLER)
-    .value("EQUAL", CGAL::EQUAL)
-    .value("LARGER", CGAL::LARGER)
-    .export_values()
-    ;
+  //enum_<CGAL::Comparison_result>("Comparison_result")
+  //  .value("SMALLER", CGAL::SMALLER)
+  //  .value("EQUAL", CGAL::EQUAL)
+  //  .value("LARGER", CGAL::LARGER)
+  //  .export_values()
+  //  ;
 
-  enum_<CGAL::Oriented_side>("Oriented_side")
-    .value("ON_NEGATIVE_SIDE", CGAL::ON_NEGATIVE_SIDE)
-    .value("ON_ORIENTED_BOUNDARY", CGAL::ON_ORIENTED_BOUNDARY)
-    .value("ON_POSITIVE_SIDE", CGAL::ON_POSITIVE_SIDE)
-    .export_values()
-    ;
+  //enum_<CGAL::Oriented_side>("Oriented_side")
+  //  .value("ON_NEGATIVE_SIDE", CGAL::ON_NEGATIVE_SIDE)
+  //  .value("ON_ORIENTED_BOUNDARY", CGAL::ON_ORIENTED_BOUNDARY)
+  //  .value("ON_POSITIVE_SIDE", CGAL::ON_POSITIVE_SIDE)
+  //  .export_values()
+  //  ;
 
   enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
@@ -90,6 +119,18 @@ void export_Kernel()
     .value("ARR_MIN_END", CGAL::Arr_curve_end::ARR_MIN_END)
     .value("ARR_MAX_END", CGAL::Arr_curve_end::ARR_MAX_END)
     .export_values()
+    ;
+
+  class_<Rotation>("Rotation")
+    .def(init<>())
+    ;
+
+  class_<Scaling>("Scaling")
+    .def(init<>())
+    ;
+
+  class_<Translation>("Translation")
+    .def(init<>())
     ;
 
   class_<Kernel>("Kernel")
@@ -111,14 +152,15 @@ void export_Kernel()
     .def<bool (Traits::Equal_2::*)(const Point_2&, const Point_2&) const>("__call__", &Traits::Equal_2::operator())
     ;
 
-  class_<Kernel::Equal_2>("Kernel_equal_2_object", no_init)
-    //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
-    ;
+  //class_<Kernel::Equal_2>("Kernel_equal_2_object", no_init)
+  //  //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
+  //  ;
 
   class_<Point_2>("Point_2")
     .def(init<>())
     .def(init<double, double>())
-    .def(init<FT, FT>())
+    .def(init<FT&, FT&>())
+    .def(init<RT&, RT&>())
     .def("x", &Point_2::x)
     .def("y", &Point_2::y)
     .def("hx", &Point_2::hx)
@@ -133,7 +175,7 @@ void export_Kernel()
     ;
 
   class_<Segment_2>("Segment_2")
-    .def(init<Point_2, Point_2>())
+    .def(init<Point_2&, Point_2&>())
     .def("source", &Segment_2::source)
     .def("target", &Segment_2::target)
     .def("supporting_line", &Segment_2::supporting_line)
@@ -151,13 +193,13 @@ void export_Kernel()
     ;
 
   class_<Curve>("Curve")
-    .def("source", &Curve::source, return_value_policy<copy_const_reference>())
-    .def("target", &Curve::target, return_value_policy<copy_const_reference>())
-    .def("line", &Curve::line, return_value_policy<reference_existing_object>())
+    .def("source", &Curve::source, return_internal_reference<>())
+    .def("target", &Curve::target, return_internal_reference<>())
+    .def("line", &Curve::line, return_internal_reference<>())
     .def("is_vertical", &Curve::is_vertical)
     .def("flip", &Curve::flip)
-    .def("left", &Curve::left, return_value_policy<reference_existing_object>())
-    .def("right", &Curve::right, return_value_policy<reference_existing_object>())
+    .def("left", &Curve::left, return_internal_reference<>())
+    .def("right", &Curve::right, return_internal_reference<>())
     .def("is_directed_right", &Curve::is_directed_right)
     .def("is_in_x_range", &Curve::is_in_x_range)
     .def("is_in_y_range", &Curve::is_in_y_range)
@@ -166,6 +208,12 @@ void export_Kernel()
     ;
 
   class_<Line_2>("Line_2")
+    .def(init<RT&, RT&, RT&>())
+    .def(init<Point_2&, Point_2&>())
+    .def(init<Point_2&, Direction_2&>())
+    .def(init<Point_2&, Vector_2&>())
+    .def(init<Segment_2&>())
+    .def(init<Ray_2&>())
     .def("a", &Line_2::a)
     .def("b", &Line_2::b)
     .def("c", &Line_2::c)
@@ -182,6 +230,11 @@ void export_Kernel()
     ;
 
   class_<Ray_2>("Ray_2")
+    .def(init<Point_2&, Point_2&>())
+    .def(init<Point_2&, Direction_2&>())
+    .def(init<Point_2&, Vector_2&>())
+    .def(init<Point_2&, Line_2&>())
+
     .def("is_degenerate", &Ray_2::is_degenerate)
     .def("is_horizontal", &Ray_2::is_horizontal)
     .def("is_vertical", &Ray_2::is_horizontal)
@@ -195,12 +248,34 @@ void export_Kernel()
     .def(self != self)
     ;
 
+  class_<Triangle_2>("Triangle_2")
+    .def(init < Point_2&, Point_2&, Point_2&>())
+    .def("vertex", &Triangle_2::vertex)
+    .def("__getitem__", &Triangle_2::operator[])
+    .def("is_degenerate", &Triangle_2::is_degenerate)
+    .def("orientation", &Triangle_2::orientation)
+    .def("oriented_side", &Triangle_2::oriented_side)
+    .def("bounded_side", &Triangle_2::bounded_side)
+    .def("has_on_positive_side", &Triangle_2::has_on_positive_side)
+    .def("has_on_negative_side", &Triangle_2::has_on_negative_side)
+    .def("has_on_boundary", &Triangle_2::has_on_boundary)
+    .def("has_on_bounded_side", &Triangle_2::has_on_bounded_side)
+    .def("has_on_unbounded_side", &Triangle_2::has_on_unbounded_side)
+    .def("opposite", &Triangle_2::opposite)
+    .def("area", &Triangle_2::area)
+    .def("bbox", &Triangle_2::bbox)
+    .def("transform", &Triangle_2::transform)
+    .def(self_ns::str(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    ;
+
   class_<Direction_2>("Direction_2")
     .def(init<Vector_2>())
     .def(init<Line_2>())
     .def(init<Ray_2>())
     .def(init<Segment_2>())
-    .def(init<RT, RT>())
+    .def(init<RT&, RT&>())
     .def("dx", &Direction_2::dx)
     .def("dy", &Direction_2::dy)
     .def("vector", &Direction_2::vector)
@@ -216,6 +291,50 @@ void export_Kernel()
     .def(self <= self)
     .def(self >= self)
     .def(-self)
+    ;
+
+  class_<Vector_2>("Vector_2")
+    .def(init<Point_2&, Point_2&>())
+    .def(init<Line_2>())
+    .def(init<Ray_2>())
+    .def(init<Segment_2>())
+    .def(init<FT&, FT&, FT&>())
+    .def(init<FT&, FT&>())
+    .def(init<double, double>())
+    .def("hx", &Vector_2::hx)
+    .def("hy", &Vector_2::hy)
+    .def("hw", &Vector_2::hw)
+    .def("x", &Vector_2::x)
+    .def("y", &Vector_2::y)
+    .def("squared_length", &Vector_2::squared_length)
+    .def("homogeneous", &Vector_2::homogeneous)
+    .def("cartesian", &Vector_2::cartesian)
+    .def("__getitem__", &Vector_2::operator[])
+    //.def("cartesian_coordinates", range(&Vector_2::cartesian_begin, &Vector_2::cartesian_end))
+    .def("dimension", &Vector_2::dimension)
+    .def("direction", &Vector_2::direction)
+    .def("transform", &Vector_2::transform)
+    .def("perpendicular", &Vector_2::perpendicular)
+    .def(self_ns::str(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    .def(self != self)
+    .def(self + self)
+    .def(self += self)
+    .def(self - self)
+    .def(self -= self)
+    .def(-self)
+    .def(self * self)
+    //.def(self*RT())
+    .def(self*FT())
+    //.def(RT()*self)
+    .def(FT()*self)
+    //.def(self*=RT())
+    .def(self*=FT())
+    //.def(self/RT())
+    .def(self/FT())
+    //.def(self/=RT())
+    .def(self /= FT())
     ;
 
   class_<Bbox_2>("Bbox_2")
@@ -236,7 +355,30 @@ void export_Kernel()
     .def(self + self)
     ;
 
-  //TODO: aff_transformation, triangle_2, iso_rectangle(?), weighted_point(?)
+  class_<Aff_Transformation_2>("Aff_Transformation_2")
+    .def(init<>())
+    .def(init<RT&, RT&, RT&, RT&, RT&>())
+    .def(init<RT&, RT&, RT&, RT&, RT&, RT&, RT&>())
+    .def(init<const Translation, const Vector_2&>())
+    .def(init<const Rotation, const Direction_2&, const RT&, const RT&>())
+    .def(init<const Rotation, const RT&, const RT&, const RT&>())
+    .def(init<Scaling, const RT&, const RT&>())
+    .def("transform", transform_point)
+    .def("transform", transform_vector)
+    .def("transform", transform_direction)
+    .def("transform", transform_line)
+    .def("inverse", &Aff_Transformation_2::inverse)
+    .def("is_even", &Aff_Transformation_2::is_even)
+    .def("is_odd", &Aff_Transformation_2::is_odd)
+    .def("cartesian", &Aff_Transformation_2::cartesian)
+    .def("m", &Aff_Transformation_2::m)
+    .def("homogeneous", &Aff_Transformation_2::homogeneous)
+    .def("hm", &Aff_Transformation_2::hm)
+    .def(self_ns::str(self_ns::self))
+    //.def(self == self)
+    .def(self * self)
+    ;
+  //TODO: iso_rectangle(?), weighted_point(?)
 
 
   //Global kernel functions
@@ -370,18 +512,6 @@ void export_Kernel()
   def<bool(const Point_2&, const Point_2&)>("x_equal", &CGAL::x_equal);
   
   def<bool(const Point_2&, const Point_2&)>("y_equal", &CGAL::y_equal);
-
-
-
-
-
-
-
-
-  //def<FT(const Point_2&, const Point_2&)>("squared_distance", &CGAL::squared_distance);
-  //def<FT(const Point_2&, const Segment_2&)>("squared_distance", &CGAL::squared_distance);
-  
-
 
   def<bool(const Bbox_2&, const Bbox_2&)>("do_overlap", &CGAL::do_overlap);
   
