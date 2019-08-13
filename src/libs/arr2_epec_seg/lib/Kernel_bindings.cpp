@@ -48,14 +48,29 @@ Line_2 transform_line(Aff_Transformation_2& t, Line_2& l) { return t.transform(l
 void export_Kernel()
 {
   using namespace boost::python;
-  class_<CGAL::Gmpq>("Gmpq")
+
+  class_<Gmpq>("Gmpq")
     //.def(init<>())
     .def(init<int, int>())
     .def(init<const std::string&>())
     .def(init<double>())
-    .def("to_double", &CGAL::Gmpq::to_double)
+    .def("to_double", &Gmpq::to_double)
     .def(self_ns::str(self_ns::self))
     .def(self == self)
+    .def(self != self)
+    .def(self != self)
+    .def(self < self)
+    .def(self > self)
+    .def(self <= self)
+    .def(self >= self)
+    .def(self + self)
+    .def(self += self)
+    .def(self - self)
+    .def(self -= self)
+    .def(self * self)
+    .def(self *= self)
+    .def(self / self)
+    .def(self /= self)
     ;
 
 #ifndef INEXACT_KERNEL
@@ -73,6 +88,16 @@ void export_Kernel()
   //  .def(self_ns::str(self_ns::self))
   //  .def(self == self)
   //  ;
+
+  enum_<CGAL::Orientation>("Orientation")
+    .value("LEFT_TURN", CGAL::LEFT_TURN)
+    .value("RIGHT_TURN", CGAL::RIGHT_TURN)
+    .value("COLLINEAR", CGAL::COLLINEAR)
+    .value("CLOCKWISE", CGAL::CLOCKWISE)
+    .value("COUNTERCLOCKWISE", CGAL::COUNTERCLOCKWISE)
+    .value("COPLANAR", CGAL::COPLANAR)
+    .export_values()
+    ;
 
   enum_<CGAL::Sign>("Result")
 
@@ -101,20 +126,6 @@ void export_Kernel()
     .export_values()
     ;
 
-  //enum_<CGAL::Comparison_result>("Comparison_result")
-  //  .value("SMALLER", CGAL::SMALLER)
-  //  .value("EQUAL", CGAL::EQUAL)
-  //  .value("LARGER", CGAL::LARGER)
-  //  .export_values()
-  //  ;
-
-  //enum_<CGAL::Oriented_side>("Oriented_side")
-  //  .value("ON_NEGATIVE_SIDE", CGAL::ON_NEGATIVE_SIDE)
-  //  .value("ON_ORIENTED_BOUNDARY", CGAL::ON_ORIENTED_BOUNDARY)
-  //  .value("ON_POSITIVE_SIDE", CGAL::ON_POSITIVE_SIDE)
-  //  .export_values()
-  //  ;
-
   enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
     .value("ARR_LEFT_TO_RIGHT", CGAL::Arr_halfedge_direction::ARR_LEFT_TO_RIGHT)
@@ -138,24 +149,24 @@ void export_Kernel()
     .def(init<>())
     ;
 
-  class_<Kernel>("Kernel")
-    .def(init<>())
-    .def("equal_2_object", &kernel_equal_2)
-    ;
+  //class_<Kernel>("Kernel")
+  //  .def(init<>())
+  //  .def("equal_2_object", &kernel_equal_2)
+  //  ;
 
-  class_<Traits>("Traits")
-    .def(init<>())
-    .def("equal_2_object", &Traits::equal_2_object)
-    .def("compare_xy_2_object", &Traits::compare_xy_2_object)
-    ;
+  //class_<Traits>("Traits")
+  //  .def(init<>())
+  //  .def("equal_2_object", &Traits::equal_2_object)
+  //  .def("compare_xy_2_object", &Traits::compare_xy_2_object)
+  //  ;
 
-  class_<Traits::Compare_xy_2>("Traits_compare_xy_2", no_init)
-    .def<CGAL::Sign(Traits::Compare_xy_2::*)(const Point_2&, const Point_2&) const>("__call__", &Traits::Compare_xy_2::operator())
-    ;
+  //class_<Traits::Compare_xy_2>("Traits_compare_xy_2", no_init)
+  //  .def<CGAL::Sign(Traits::Compare_xy_2::*)(const Point_2&, const Point_2&) const>("__call__", &Traits::Compare_xy_2::operator())
+  //  ;
 
-  class_<Traits::Equal_2>("Traits_equal_2_object", no_init)
-    .def<bool (Traits::Equal_2::*)(const Point_2&, const Point_2&) const>("__call__", &Traits::Equal_2::operator())
-    ;
+  //class_<Traits::Equal_2>("Traits_equal_2_object", no_init)
+  //  .def<bool (Traits::Equal_2::*)(const Point_2&, const Point_2&) const>("__call__", &Traits::Equal_2::operator())
+  //  ;
 
   //class_<Kernel::Equal_2>("Kernel_equal_2_object", no_init)
   //  //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
@@ -195,21 +206,6 @@ void export_Kernel()
     .def(self_ns::str(self_ns::self))
     .def(self == self)
     .def(self != self)
-    ;
-
-  class_<Curve>("Curve")
-    .def("source", &Curve::source, return_internal_reference<>())
-    .def("target", &Curve::target, return_internal_reference<>())
-    .def("line", &Curve::line, return_internal_reference<>())
-    .def("is_vertical", &Curve::is_vertical)
-    .def("flip", &Curve::flip)
-    .def("left", &Curve::left, return_internal_reference<>())
-    .def("right", &Curve::right, return_internal_reference<>())
-    .def("is_directed_right", &Curve::is_directed_right)
-    .def("is_in_x_range", &Curve::is_in_x_range)
-    .def("is_in_y_range", &Curve::is_in_y_range)
-    .def("bbox", &Curve::bbox)
-    .def(self_ns::str(self_ns::self))
     ;
 
   class_<Line_2>("Line_2")
@@ -269,6 +265,55 @@ void export_Kernel()
     .def("area", &Triangle_2::area)
     .def("bbox", &Triangle_2::bbox)
     .def("transform", &Triangle_2::transform)
+    .def(self_ns::str(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    ;
+
+  class_<Iso_rectangle_2>("Iso_rectangle_2")
+    .def(init<Point_2&, Point_2&>())
+    .def(init<Point_2&, Point_2&, int>())
+    .def(init<Point_2&, Point_2&, Point_2&, Point_2&>())
+    .def(init<RT&, RT&, RT&, RT&, RT&>())
+    .def(init<Bbox_2&>())
+    .def("vertex", &Iso_rectangle_2::vertex)
+    .def("__getitem__", &Iso_rectangle_2::operator[])
+    .def("xmin", &Iso_rectangle_2::xmin, Kernel_return_value_policy())
+    .def("ymin", &Iso_rectangle_2::ymin, Kernel_return_value_policy())
+    .def("xmax", &Iso_rectangle_2::xmax, Kernel_return_value_policy())
+    .def("ymax", &Iso_rectangle_2::ymax, Kernel_return_value_policy())
+    .def("min", &Iso_rectangle_2::min, Kernel_return_value_policy())
+    .def("max", &Iso_rectangle_2::max, Kernel_return_value_policy())
+    .def("min_coord", &Iso_rectangle_2::min_coord, Kernel_return_value_policy())
+    .def("max_coord", &Iso_rectangle_2::max_coord, Kernel_return_value_policy())
+    .def("is_degenerate", &Iso_rectangle_2::is_degenerate)
+    .def("bounded_side", &Iso_rectangle_2::bounded_side)
+    .def("has_on_boundary", &Iso_rectangle_2::has_on_boundary)
+    .def("has_on_bounded_side", &Iso_rectangle_2::has_on_bounded_side)
+    .def("has_on_unbounded_side", &Iso_rectangle_2::has_on_unbounded_side)
+    .def(self_ns::str(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    ;
+
+  class_<Circle_2>("Circle_2")
+    .def(init<>())
+    .def(init<Point_2&, FT&, CGAL::Orientation&>())
+    .def(init<Point_2&, Point_2&, Point_2&>())
+    .def(init<Point_2&, Point_2&, CGAL::Orientation&>())
+    .def(init<Point_2&, CGAL::Orientation&>())
+    .def("center", &Circle_2::center)
+    .def("squared_radius", &Circle_2::squared_radius)
+    .def("Orientation", &Circle_2::orientation)
+    .def("is_degenerate", &Circle_2::is_degenerate)
+    .def("oriented_side", &Circle_2::oriented_side)
+    .def("bounded_side", &Circle_2::bounded_side)
+    .def("has_on_positive_side", &Circle_2::has_on_positive_side)
+    .def("has_on_negative_side", &Circle_2::has_on_negative_side)
+    .def("has_on_boundary", &Circle_2::has_on_boundary)
+    .def("has_on_bounded_side", &Circle_2::has_on_bounded_side)
+    .def("has_on_unbounded_side", &Circle_2::has_on_unbounded_side)
+    .def("orthogonal_transform", &Circle_2::orthogonal_transform)
     .def(self_ns::str(self_ns::self))
     .def(self == self)
     .def(self != self)
@@ -382,7 +427,7 @@ void export_Kernel()
     //.def(self == self)
     .def(self * self)
     ;
-  //TODO: iso_rectangle(?), weighted_point(?)
+  //TODO: weighted_point(?)
 
 
   //Global kernel functions

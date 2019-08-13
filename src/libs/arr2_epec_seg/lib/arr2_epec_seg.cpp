@@ -8,6 +8,10 @@ void export_Vertex();
 void export_Halfedge();
 void export_Face();
 
+void export_Arr_linear_traits();
+void export_Arr_segment_traits();
+void export_Arr_circle_segment_traits();
+
 #ifdef EXTENDED_DCEL
 BOOST_PYTHON_MODULE(arr2_epec_seg_ex)
 #else
@@ -24,5 +28,15 @@ BOOST_PYTHON_MODULE(arr2_epec_seg)
   export_Face();
   export_Intersections_2();
   export_Point_location();
+
+#ifdef ARR_LINEAR_TRAITS
+  export_Arr_linear_traits();
+#endif
+#ifdef ARR_SEGMENT_TRAITS
+  export_Arr_segment_traits();
+#endif
+#ifdef ARR_CIRCLE_SEGMENT_TRAITS
+  export_Arr_circle_segment_traits();
+#endif
 
 }

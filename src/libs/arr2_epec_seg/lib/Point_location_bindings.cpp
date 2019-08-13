@@ -23,22 +23,25 @@ bool get_type(Pl_result& pl_result, typename type::value_type& t)
   return res;
 }
 
-void Landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
-{
-  pl.attach(arr);
-}
+//void Landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
+//{
+//  pl.attach(arr);
+//}
 
 
 void export_Point_location()
 {
   using namespace boost::python;
-  class_<Landmarks_pl>("Arr_landmarks_point_location")
-    .def(init<>())
-    .def(init<Arrangement_2&>())
-    .def("attach", &Landmarks_pl_attach)
-    .def("detach", &Landmarks_pl::detach)
-    .def("locate", &Landmarks_pl::locate)
-    ;
+
+  //supported only by some of the traits
+
+  //class_<Landmarks_pl>("Arr_landmarks_point_location")
+  //  .def(init<>())
+  //  .def(init<Arrangement_2&>())
+  //  .def("attach", &Landmarks_pl_attach)
+  //  .def("detach", &Landmarks_pl::detach)
+  //  .def("locate", &Landmarks_pl::locate)
+  //  ;
 
   class_<Trapezoid_pl, boost::noncopyable>("Arr_trapezoid_ric_point_location")
     .def(init<>())

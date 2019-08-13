@@ -21,7 +21,7 @@ void export_Vertex()
   using namespace boost::python;
   class_<Vertex>("Vertex")
     .def(init<>())
-    .def<Point_2& (Vertex::*)()>("point", &Vertex::point, return_internal_reference<>())
+    .def<TPoint_2& (Vertex::*)()>("point", &Vertex::point, return_internal_reference<>())
     .def("is_isolated", &Vertex::is_isolated)
     .def("degree", &Vertex::degree)
     .def("incident_halfedges", &halfedge_around_vertex_iterator, return_value_policy<manage_new_object>())

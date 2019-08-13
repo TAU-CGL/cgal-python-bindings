@@ -41,7 +41,8 @@ endif(WIN32)
 
 # Add Python bindings
 add_library(arr2_epec_seg_PYBINDINGS SHARED lib/arr2_epec_seg.cpp lib/Kernel_bindings.cpp lib/Arrangement_2_bindings.cpp
-lib/Vertex_bindings.cpp lib/Halfedge_bindings.cpp lib/Face_bindings.cpp lib/Intersections_2_bindings.cpp lib/Point_location_bindings.cpp)
+lib/Vertex_bindings.cpp lib/Halfedge_bindings.cpp lib/Face_bindings.cpp lib/Intersections_2_bindings.cpp lib/Point_location_bindings.cpp
+lib/Arr_segment_traits_bindings.cpp lib/Arr_linear_traits_bindings.cpp lib/Arr_circle_segment_traits.cpp)
 if(WIN32)
 set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES SUFFIX ".pyd")
 endif()
