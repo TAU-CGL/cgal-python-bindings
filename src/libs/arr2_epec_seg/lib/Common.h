@@ -1,6 +1,7 @@
 //#define BOOST_PYTHON_STATIC_LIB
 #define CGAL_HEADER_ONLY 1
-#define INEXACT_KERNEL 1
+//#define INEXACT_KERNEL 1
+//#define EXTENDED_DCEL 1
 #include <boost/python.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
