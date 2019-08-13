@@ -1,10 +1,12 @@
 //#define BOOST_PYTHON_STATIC_LIB
 #define CGAL_HEADER_ONLY 1
+#define INEXACT_KERNEL 1
 #include <boost/python.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/stl_iterator.hpp>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
+#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Arr_segment_traits_2.h>
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Circle_2.h>
@@ -23,7 +25,14 @@
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
 
+using namespace boost::python;
+#ifdef INEXACT_KERNEL
+typedef typename CGAL::Exact_predicates_inexact_constructions_kernel     Kernel;
+typedef typename return_value_policy<copy_const_reference>               Kernel_return_value_policy;
+#else
 typedef typename CGAL::Exact_predicates_exact_constructions_kernel       Kernel;
+typedef typename return_value_policy<return_by_value>                    Kernel_return_value_policy;
+#endif
 typedef typename Kernel::FT                                              FT;
 typedef typename Kernel::RT                                              RT;
 typedef typename Kernel::Point_2                                         Point_2;
