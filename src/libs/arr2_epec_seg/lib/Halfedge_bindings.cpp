@@ -7,7 +7,7 @@ Halfedge& next(Halfedge& e) { return (*(e.next())); }
 Halfedge& prev(Halfedge& e) { return (*(e.prev())); }
 Halfedge& twin(Halfedge& e) { return (*(e.twin())); }
 Face& face(Halfedge& e) { return (*(e.face())); }
-Curve& curve(Halfedge& e) { return (e.curve()); }
+X_monotone_curve_2& curve(Halfedge& e) { return (e.curve()); }
 
 Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
 {
