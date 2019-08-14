@@ -3,8 +3,10 @@
 //#define INEXACT_KERNEL 1
 //#define EXTENDED_DCEL 1
 //#define ARR_LINEAR_TRAITS 1
-#define ARR_SEGMENT_TRAITS 1
+//#define ARR_SEGMENT_TRAITS 1
 //#define ARR_NON_CACHING_SEGMENT_TRAITS 1
+//#define ARR_CONIC_TRAITS 1
+#define ARR_ALGEBRAIC_SEGMENT_TRAITS 1
 //#define ARR_CIRCLE_SEGMENT_TRAITS 1
 #include <boost/python.hpp>
 #include <boost/make_shared.hpp>
@@ -15,11 +17,14 @@
 #else
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #endif // INEXACT_KERNEL
+#include <CGAL/CORE_BigInt.h>
 #include <CGAL/Sqrt_extension.h>
 #include <CGAL/Arr_linear_traits_2.h>
 #include <CGAL/Arr_segment_traits_2.h>
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
 #include <CGAL/Arr_circle_segment_traits_2.h>
+#include <CGAL/Arr_conic_traits_2.h>
+#include <CGAL/Arr_algebraic_segment_traits_2.h>
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Circle_2.h>
 #include <CGAL/Triangle_2.h>
@@ -46,6 +51,8 @@ typedef typename CGAL::Exact_predicates_exact_constructions_kernel       Kernel;
 typedef typename return_value_policy<return_by_value>                    Kernel_return_value_policy;
 #endif
 
+typedef typename CORE::BigInt                                            BigInt;
+typedef typename CGAL::Gmpz                                              Gmpz;
 typedef typename CGAL::Gmpq                                              Gmpq;
 typedef typename Kernel::FT                                              FT;
 //typedef typename CGAL::Sqrt_extension <FT, FT>                           CoordNT;
@@ -67,7 +74,7 @@ typedef typename CGAL::Translation                                       Transla
 #ifdef ARR_SEGMENT_TRAITS
 typedef typename CGAL::Arr_segment_traits_2<Kernel>                      Traits;
 # endif // ARR_SEGMENT_TRAITS
-#ifdef ARR_NON_CHACHING_SEGMENT_TRAITS
+#ifdef ARR_NON_CACHING_SEGMENT_TRAITS
 typedef typename CGAL::Arr_non_caching_segment_traits_2<Kernel>          Traits;
 # endif // ARR_NON_CHACHING_SEGMENT_TRAITS
 #ifdef ARR_LINEAR_TRAITS
@@ -77,6 +84,9 @@ typedef typename CGAL::Arr_linear_traits_2<Kernel>                       Traits;
 typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>               Traits;
 typedef typename Traits::CoordNT                                         CoordNT;
 #endif // ARR_CIRCLE_SEGMENT_TRAITS
+#ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
+typedef typename CGAL::Arr_algebraic_segment_traits_2<BigInt>            Traits;
+#endif // ARR_ALGEBRAIC_SEMGNET_TRAITS
 typedef typename Traits::Point_2                                         TPoint_2;
 typedef typename Traits::Curve_2                                         Curve_2;
 typedef typename Traits::X_monotone_curve_2                              X_monotone_curve_2;

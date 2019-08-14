@@ -152,7 +152,7 @@ boost::python::class_<result> bind_intersection_result(const char* python_name)
 {
   using namespace boost::python;
   auto c = class_<result>(python_name, no_init)
-    .def("empty", &empty<result>)
+    .def<bool (result&)>("empty", &empty<result>)
     ;
   return c;
 }
