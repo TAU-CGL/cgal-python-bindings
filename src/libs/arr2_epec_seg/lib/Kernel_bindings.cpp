@@ -49,10 +49,34 @@ void export_Kernel()
 {
   using namespace boost::python;
 
+  class_<Gmpq>("Gmpz")
+    //.def(init<>())
+    .def(init<int>())
+    //.def(init<Gmpz&>())
+    .def("to_double", &Gmpz::to_double)
+    .def(self_ns::str(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    .def(self != self)
+    .def(self < self)
+    .def(self > self)
+    .def(self <= self)
+    .def(self >= self)
+    .def(self + self)
+    .def(self += self)
+    .def(self - self)
+    .def(self -= self)
+    .def(self * self)
+    .def(self *= self)
+    .def(self / self)
+    .def(self /= self)
+    ;
+
   class_<Gmpq>("Gmpq")
     //.def(init<>())
     .def(init<int, int>())
     .def(init<const std::string&>())
+    //.def(init<Gmpq&>())
     .def(init<double>())
     .def("to_double", &Gmpq::to_double)
     .def(self_ns::str(self_ns::self))
@@ -89,16 +113,6 @@ void export_Kernel()
   //  .def(self == self)
   //  ;
 
-  enum_<CGAL::Orientation>("Orientation")
-    .value("LEFT_TURN", CGAL::LEFT_TURN)
-    .value("RIGHT_TURN", CGAL::RIGHT_TURN)
-    .value("COLLINEAR", CGAL::COLLINEAR)
-    .value("CLOCKWISE", CGAL::CLOCKWISE)
-    .value("COUNTERCLOCKWISE", CGAL::COUNTERCLOCKWISE)
-    .value("COPLANAR", CGAL::COPLANAR)
-    .export_values()
-    ;
-
   enum_<CGAL::Sign>("Result")
 
     //CGAL::Sign
@@ -115,6 +129,15 @@ void export_Kernel()
     .value("ON_NEGATIVE_SIDE", CGAL::ON_NEGATIVE_SIDE)
     .value("ON_ORIENTED_BOUNDARY", CGAL::ON_ORIENTED_BOUNDARY)
     .value("ON_POSITIVE_SIDE", CGAL::ON_POSITIVE_SIDE)
+
+
+    //CGAL::Orientation
+    .value("LEFT_TURN", CGAL::LEFT_TURN)
+    .value("RIGHT_TURN", CGAL::RIGHT_TURN)
+    .value("COLLINEAR", CGAL::COLLINEAR)
+    .value("CLOCKWISE", CGAL::CLOCKWISE)
+    .value("COUNTERCLOCKWISE", CGAL::COUNTERCLOCKWISE)
+    .value("COPLANAR", CGAL::COPLANAR)
 
     .export_values()
     ;
