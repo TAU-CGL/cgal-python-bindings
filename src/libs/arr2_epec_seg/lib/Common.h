@@ -3,9 +3,9 @@
 //#define INEXACT_KERNEL 1
 //#define EXTENDED_DCEL 1
 //#define ARR_LINEAR_TRAITS 1
-//#define ARR_SEGMENT_TRAITS 1
+#define ARR_SEGMENT_TRAITS 1
 //#define ARR_NON_CACHING_SEGMENT_TRAITS 1
-#define ARR_CIRCLE_SEGMENT_TRAITS 1
+//#define ARR_CIRCLE_SEGMENT_TRAITS 1
 #include <boost/python.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
