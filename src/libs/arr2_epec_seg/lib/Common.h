@@ -38,12 +38,14 @@
 #include <CGAL/Arr_landmarks_point_location.h>
 
 using namespace boost::python;
+namespace bp = boost::python;
+
 #ifdef INEXACT_KERNEL
 typedef typename CGAL::Exact_predicates_inexact_constructions_kernel     Kernel;
-typedef typename return_value_policy<copy_const_reference>               Kernel_return_value_policy;
+typedef typename bp::return_value_policy<bp::copy_const_reference>       Kernel_return_value_policy;
 #else
 typedef typename CGAL::Exact_predicates_exact_constructions_kernel       Kernel;
-typedef typename return_value_policy<return_by_value>                    Kernel_return_value_policy;
+typedef typename bp::return_value_policy<bp::return_by_value>            Kernel_return_value_policy;
 #endif
 
 typedef typename CGAL::Gmpq                                              Gmpq;
@@ -158,12 +160,14 @@ inline boost::python::object pass_through(boost::python::object const& o) { retu
 
 //these template classes are used to allow more natural iteration in python
 
-template <class circulator>
+template <typename circulator>
 class Iterator_from_circulator
 {
+private:
   bool first = true;
   circulator m_first;
   circulator m_curr;
+
 public:
   Iterator_from_circulator(circulator first) : m_first(first), m_curr(first) {}
   typename circulator::value_type& next()
@@ -177,15 +181,15 @@ public:
       }
     }
     PyErr_SetString(PyExc_StopIteration, "No more data.");
-    boost::python::throw_error_already_set();
+    bp::throw_error_already_set();
     return *m_curr;
   }
 };
 
-template <class iterator>
+template <typename iterator>
 class Iterator_of_circulators
 {
-  typedef typename Iterator_from_circulator<typename iterator::value_type> modified_circulator;
+  typedef Iterator_from_circulator<typename iterator::value_type> modified_circulator;
   iterator m_curr;
   iterator m_end;
 public:
