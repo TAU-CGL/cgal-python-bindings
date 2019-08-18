@@ -1,4 +1,11 @@
+cmake_minimum_required(VERSION 3.5)
+set(BOOST_VERSION 1.69.0)
+set(PY_VERSION 3.7)
 # packages
+
+find_package(Boost ${BOOST_VERSION} REQUIRED COMPONENTS system thread python37)
+find_package(Python3 COMPONENTS Interpreter Development)
+find_package(PythonLibs ${PY_VERSION} REQUIRED)
 
 # Add source files
 # set(shared_vector_SRC_FILES ${shared_vector_SRC_FILES} lib/xxx.cpp)
@@ -8,6 +15,8 @@ set(shared_vector_SRC_FILES ${shared_vector_SRC_FILES} ${shared_vector_AUTO_GENE
 
 # Add all include directories
 include_directories(lib)
+include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${PYTHON_INCLUDE_DIRS})
 include_directories(include)
 
 # Add defines
