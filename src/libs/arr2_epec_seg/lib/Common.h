@@ -19,12 +19,27 @@
 #endif // INEXACT_KERNEL
 #include <CGAL/CORE_BigInt.h>
 #include <CGAL/Sqrt_extension.h>
+#ifdef ARR_LINEAR_TRAITS
 #include <CGAL/Arr_linear_traits_2.h>
+#endif
+#ifdef ARR_SEGMENT_TRAITS
 #include <CGAL/Arr_segment_traits_2.h>
+#endif
+#ifdef ARR_NON_CACHING_SEGMENT_TRAITS
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
+#endif
+#ifdef ARR_CIRCLE_SEGMENT_TRAITS
 #include <CGAL/Arr_circle_segment_traits_2.h>
+#endif
+#ifdef ARR_CONIC_TRAITS
 #include <CGAL/Arr_conic_traits_2.h>
+#endif
+#ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
 #include <CGAL/Arr_algebraic_segment_traits_2.h>
+#include <CGAL/Polynomial.h>
+#include <CGAL/Polynomial_traits_d.h>
+#include <CGAL/Polynomial_type_generator.h>
+#endif
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Circle_2.h>
 #include <CGAL/Triangle_2.h>
@@ -87,7 +102,21 @@ typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>               Traits;
 typedef typename Traits::CoordNT                                         CoordNT;
 #endif // ARR_CIRCLE_SEGMENT_TRAITS
 #ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
-typedef typename CGAL::Arr_algebraic_segment_traits_2<BigInt>            Traits;
+typedef typename BigInt                                                  Number;
+typedef typename CGAL::Arr_algebraic_segment_traits_2<Number>            Traits;
+typedef typename Traits::Construct_curve_2                               Construct_curve_2;
+typedef typename Traits::Construct_point_2                               Construct_point_2;
+typedef typename Traits::Construct_x_monotone_segment_2                  Construct_x_monotone_segment_2;
+typedef typename Traits::Polynomial_2                                    Polynomial_2;
+typedef CGAL::Polynomial_traits_d<Polynomial_2>                          PT_2;
+typedef PT_2::Construct_polynomial                                       Construct_polynomial_2;
+typedef PT_2::Coefficient_type                                           Polynomial_1;
+typedef CGAL::Polynomial_traits_d<Polynomial_1>                          PT_1;
+typedef PT_1::Construct_polynomial                                       Construct_polynomial_1;
+typedef typename Traits::Algebraic_kernel_d_1                            Algebraic_kernel_d_1;
+typedef typename Algebraic_kernel_d_1::Polynomial_1                      Polynomial_1;
+typedef typename Traits::Algebraic_real_1                                Algebraic_real_1;
+typedef typename Traits::Bound                                           Bound;
 #endif // ARR_ALGEBRAIC_SEMGNET_TRAITS
 typedef typename Traits::Point_2                                         TPoint_2;
 typedef typename Traits::Curve_2                                         Curve_2;

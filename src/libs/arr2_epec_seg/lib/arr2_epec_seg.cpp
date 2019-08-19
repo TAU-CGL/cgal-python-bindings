@@ -11,6 +11,7 @@ void export_Face();
 void export_Arr_linear_traits();
 void export_Arr_segment_traits();
 void export_Arr_circle_segment_traits();
+void export_Arr_algebraic_segment_traits();
 
 #ifdef EXTENDED_DCEL
 BOOST_PYTHON_MODULE(arr2_epec_seg_ex)
@@ -37,6 +38,9 @@ BOOST_PYTHON_MODULE(arr2_epec_seg)
 #endif
 #ifdef ARR_CIRCLE_SEGMENT_TRAITS
   export_Arr_circle_segment_traits();
+#endif
+#ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
+  export_Arr_algebraic_segment_traits();
 #endif
 
 }
