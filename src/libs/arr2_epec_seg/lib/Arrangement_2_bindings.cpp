@@ -1,4 +1,4 @@
-#include <Common.h>
+#include <Common.hpp>
 
 //Free functions
 Vertex& insert_point(Arrangement_2& arr, TPoint_2& p)

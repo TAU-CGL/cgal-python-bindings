@@ -1,4 +1,4 @@
-#include <Common.h>
+#include <Common.hpp>
 
 Point_iso_rectangle_intersection_result point_iso_rectangle_intersection(Point_2& p1, Iso_rectangle_2& i1)
 {

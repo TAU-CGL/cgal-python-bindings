@@ -1,6 +1,6 @@
-#include <Common.h>
-#ifdef ARR_CONIC_TRAITS
-
+#include <Config.hpp>
+#if CGALPY_TRAITS == CGALPY_ARR_CONIC_TRAITS
+#include <Common.hpp>
 void export_Arr_conic_traits()
 {
   using namespace boost::python;

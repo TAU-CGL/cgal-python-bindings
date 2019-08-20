@@ -1,40 +1,31 @@
-//#define BOOST_PYTHON_STATIC_LIB
-#define CGAL_HEADER_ONLY 1
-//#define INEXACT_KERNEL 1
-//#define EXTENDED_DCEL 1
-//#define ARR_LINEAR_TRAITS 1
-//#define ARR_SEGMENT_TRAITS 1
-//#define ARR_NON_CACHING_SEGMENT_TRAITS 1
-//#define ARR_CONIC_TRAITS 1
-#define ARR_ALGEBRAIC_SEGMENT_TRAITS 1
-//#define ARR_CIRCLE_SEGMENT_TRAITS 1
+#include <Config.hpp>
 #include <boost/python.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/stl_iterator.hpp>
-#ifdef INEXACT_KERNEL
+#if CGALPY_KERNEL == CGALPY_EPIEC_KERNEL
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #else
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
-#endif // INEXACT_KERNEL
+#endif
 #include <CGAL/CORE_BigInt.h>
 #include <CGAL/Sqrt_extension.h>
-#ifdef ARR_LINEAR_TRAITS
+#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
 #include <CGAL/Arr_linear_traits_2.h>
 #endif
-#ifdef ARR_SEGMENT_TRAITS
+#if CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
 #include <CGAL/Arr_segment_traits_2.h>
 #endif
-#ifdef ARR_NON_CACHING_SEGMENT_TRAITS
+#if CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
 #endif
-#ifdef ARR_CIRCLE_SEGMENT_TRAITS
+#if CGALPY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
 #include <CGAL/Arr_circle_segment_traits_2.h>
 #endif
-#ifdef ARR_CONIC_TRAITS
+#if CGALPY_TRAITS == CGALPY_ARR_CONIC_TRAITS
 #include <CGAL/Arr_conic_traits_2.h>
 #endif
-#ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
+#if CGALPY_TRAITS == CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
 #include <CGAL/Arr_algebraic_segment_traits_2.h>
 #include <CGAL/Polynomial.h>
 #include <CGAL/Polynomial_traits_d.h>
@@ -47,9 +38,9 @@
 #include <CGAL/Vector_2.h>
 #include <CGAL/Aff_transformation_2.h>
 #include <CGAL/Arrangement_2.h>
-#ifdef EXTENDED_DCEL
+#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
 #include <CGAL/Arr_extended_dcel.h>
-#endif // EXTENDED_DCEL
+#endif
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_default_overlay_traits.h>
 #include <CGAL/Arr_naive_point_location.h>
@@ -60,10 +51,11 @@
 using namespace boost::python;
 namespace bp = boost::python;
 
-#ifdef INEXACT_KERNEL
+#if CGALPY_KERNEL == CGALPY_EPIEC_KERNEL
 typedef typename CGAL::Exact_predicates_inexact_constructions_kernel     Kernel;
 typedef typename bp::return_value_policy<bp::copy_const_reference>       Kernel_return_value_policy;
-#else
+#endif
+#if CGALPY_KERNEL == CGALPY_EPEC_KERNEL
 typedef typename CGAL::Exact_predicates_exact_constructions_kernel       Kernel;
 typedef typename bp::return_value_policy<bp::return_by_value>            Kernel_return_value_policy;
 #endif
@@ -88,20 +80,20 @@ typedef typename CGAL::Aff_transformation_2<Kernel>                      Aff_Tra
 typedef typename CGAL::Rotation                                          Rotation;
 typedef typename CGAL::Scaling                                           Scaling;
 typedef typename CGAL::Translation                                       Translation;
-#ifdef ARR_SEGMENT_TRAITS
+#if CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
 typedef typename CGAL::Arr_segment_traits_2<Kernel>                      Traits;
-# endif // ARR_SEGMENT_TRAITS
-#ifdef ARR_NON_CACHING_SEGMENT_TRAITS
+# endif
+#if CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
 typedef typename CGAL::Arr_non_caching_segment_traits_2<Kernel>          Traits;
-# endif // ARR_NON_CHACHING_SEGMENT_TRAITS
-#ifdef ARR_LINEAR_TRAITS
+# endif
+#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
 typedef typename CGAL::Arr_linear_traits_2<Kernel>                       Traits;
-#endif // ARR_LINEAR_TRAITS
-#ifdef ARR_CIRCLE_SEGMENT_TRAITS
+#endif
+#if CGALPY_TRAITS ==  CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
 typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>               Traits;
 typedef typename Traits::CoordNT                                         CoordNT;
-#endif // ARR_CIRCLE_SEGMENT_TRAITS
-#ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
+#endif
+#if CGALPY_TRAITS ==  CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
 typedef typename BigInt                                                  Integer;
 typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>           Traits;
 typedef typename Traits::Construct_curve_2                               Construct_curve_2;
@@ -117,16 +109,17 @@ typedef typename Traits::Algebraic_kernel_d_1                            Algebra
 typedef typename Algebraic_kernel_d_1::Polynomial_1                      Polynomial_1;
 typedef typename Traits::Algebraic_real_1                                Algebraic_real_1;
 typedef typename Traits::Bound                                           Bound;
-#endif // ARR_ALGEBRAIC_SEMGNET_TRAITS
+#endif
 typedef typename Traits::Point_2                                         TPoint_2;
 typedef typename Traits::Curve_2                                         Curve_2;
 typedef typename Traits::X_monotone_curve_2                              X_monotone_curve_2;
-#ifdef EXTENDED_DCEL
+#if CGALPY_DCEL ==  CGALPY_EXTENDED_DCEL
 typedef CGAL::Arr_extended_dcel<Traits, int, int, int>                   Dcel;
 typedef CGAL::Arrangement_2<Traits, Dcel>                                Arrangement_2;
-#else
+#endif
+#if CGALPY_DCEL == CGALPY_DEFAULT_DCEL
 typedef typename CGAL::Arrangement_2<Traits>                             Arrangement_2;
-#endif // EXTENDED_DCEL
+#endif
 typedef typename Kernel::Intersect_2                                     Intersect_2;
 typedef typename CGAL::Arr_naive_point_location<Arrangement_2>           Naive_pl;
 typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
@@ -190,7 +183,6 @@ typedef typename Arrangement_2::Halfedge_around_vertex_circulator		      Halfedg
 typedef typename Arrangement_2::Halfedge_iterator									        Halfedge_iterator;
 typedef typename Arrangement_2::Halfedge_const_handle                     Halfedge_const_handle;
 typedef typename Arrangement_2::Halfedge									                Halfedge;
-//typedef typename Arrangement_2::Edge_iterator							                Edge_iterator;
 typedef typename Arrangement_2::Face_iterator							                Face_iterator;
 typedef typename Arrangement_2::Face_const_handle                         Face_const_handle;
 typedef typename Arrangement_2::Face										                  Face;
