@@ -1,6 +1,6 @@
-#include <Common.h>
-#ifdef ARR_SEGMENT_TRAITS
-
+#include <Config.hpp>
+#if CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
+#include <Common.hpp>
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 

@@ -18,7 +18,7 @@ include_directories(lib)
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${PYTHON_INCLUDE_DIRS})
 include_directories(include)
-
+link_directories(${Boost_LIBRARY_DIRS})
 # Add defines
 add_definitions(-DCGALPY_shared_vector_SOURCE)
 

@@ -1,6 +1,6 @@
-#include <Common.h>
-#ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
-
+#include <Config.hpp>
+#if CGALPY_TRAITS == CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
+#include <Common.hpp>
 bp::list to_double(TPoint_2& p)
 {
   bp::list lst = bp::list();

@@ -1,5 +1,6 @@
-#include <Common.h>
-#ifdef ARR_CIRCLE_SEGMENT_TRAITS
+#include <Config.hpp>
+#if CGALPY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
+#incdlue <Common.hpp>
 void export_Arr_circle_segment_traits()
 {
   using namespace boost::python;
