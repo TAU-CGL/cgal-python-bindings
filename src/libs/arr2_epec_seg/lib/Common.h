@@ -102,8 +102,8 @@ typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>               Traits;
 typedef typename Traits::CoordNT                                         CoordNT;
 #endif // ARR_CIRCLE_SEGMENT_TRAITS
 #ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
-typedef typename BigInt                                                  Number;
-typedef typename CGAL::Arr_algebraic_segment_traits_2<Number>            Traits;
+typedef typename BigInt                                                  Integer;
+typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>           Traits;
 typedef typename Traits::Construct_curve_2                               Construct_curve_2;
 typedef typename Traits::Construct_point_2                               Construct_point_2;
 typedef typename Traits::Construct_x_monotone_segment_2                  Construct_x_monotone_segment_2;
