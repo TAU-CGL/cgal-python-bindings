@@ -24,18 +24,6 @@ void export_Construct_point_2_call_operator(boost::python::class_<Construct_poin
   cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&, R)>("__call__", &Construct_point_2::operator());
 }
 
-template <typename PT>
-boost::python::class_<typename PT::Construct_polynomial> bind_construct_polynomial(const char* name)
-{
-  typedef typename PT:Construct_polynomial T;
-  using namespace boost::python;
-  return class_<T>(name)
-    .def(init<>)
-    ;
-
-}
-
-
 void construct_x_monotone_segment_2_call_operator0(Construct_x_monotone_segment_2& construct, Curve_2& cv, TPoint_2& end_min, TPoint_2& end_max, bp::list& lst)
 {
   auto v = std::vector<X_monotone_curve_2>();
@@ -58,60 +46,115 @@ void construct_x_monotone_segment_2_call_operator1(Construct_x_monotone_segment_
   }
 }
 
-template <typename PT>
-boost::python::class_<typename PT::Type> bind_polynomial(const char* name)
+void construct_x_monotone_segment_2_call_operator2(Construct_x_monotone_segment_2& construct, Curve_2& cv, TPoint_2& p, Traits::Site_of_point& site_of_p, bp::list& lst)
 {
-  typedef typename PT::Type T;
+  auto v = std::vector<X_monotone_curve_2>();
+  auto it = std::back_inserter(v);
+  construct(cv, p, site_of_p, it);
+  for (auto xcv : v)
+  {
+    lst.append(xcv);
+  }
+}
+
+//template <typename PT>
+//boost::python::class_<typename PT::Construct_polynomial> bind_construct_polynomial(const char* name)
+//{
+//  typedef typename PT::Construct_polynomial T;
+//  typedef typename PT::Type P;
+//  using namespace boost::python;
+//  return class_<T>(name)
+//    .def(init<>())
+//    ;
+//}
+
+template <typename PT>
+typename PT::Type* init_polynomial(bp::list& lst)
+{
+  typedef typename PT::Type P;
+  typedef typename PT::Coefficient_type CT;
+  bp::stl_input_iterator<CT> begin(lst), end;
+  return new P(begin, end);
+}
+
+template <typename PT>
+bp::class_<typename PT::Type> bind_polynomial(const char* name)
+{
+  typedef typename PT::Type P;
+  typedef typename PT::Coefficient_type CT;
   using namespace boost::python;
-  return class_<T>(name)
+  return class_<P>(name)
     .def(init<>())
-    .def(init<PT::Coefficient_type&>())
-    .def(init<PT::Coefficient_type&, PT::Coefficient_type&>())
-    .def(init<PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&>())
-    .def(init<PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&>())
-    .def(init<PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&>())
-    .def(init<PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&>())
-    .def(init<PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&,
-      PT::Coefficient_type&>())
-    .def(init<PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&, PT::Coefficient_type&,
-      PT::Coefficient_type&, PT::Coefficient_type&>())
-    //.def(init<Number&>())
-    //.def(init<const Number&, const Number&, const Number&>())
-    .def("abs", &T::abs)
-    .def("coefficients", range<return_value_policy<copy_const_reference>>(&T::begin, &T::end))
-    .def<CGAL::Comparison_result(T::*)(const T::NT&) const>("compare", &T::compare)
-    .def("degree", &T::degree)
-    .def("diff", &T::diff)
-    .def("divide_by_x", &T::divide_by_x)
-    .def("is_zero", &T::is_zero)
-    .def("reversal", &T::reversal)
-    .def("scalar_div", &T::scalar_div)
-    .def("scale", &T::scale)
-    .def("scale_down", &T::scale_down)
-    .def("scale_up", &T::scale_up)
-    .def("sign", &T::sign)
-    .def<CGAL::Sign(T::*)(const T::NT&) const>("sign_at", &T::sign_at)
-    .def("simplify_coefficients", &T::simplify_coefficients)
+    .def(init<CT&>())
+    .def(init<CT&, CT&>())
+    .def(init<CT&, CT&, CT&>())
+    .def(init<CT&, CT&, CT&, CT&>())
+    .def(init<CT&, CT&, CT&, CT&, CT&>())
+    .def(init<CT&, CT&, CT&, CT&, CT&, CT&>())
+    .def(init<CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
+    .def(init<CT&, CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
+    .def("__init__", make_constructor(&init_polynomial<PT>))
+    .def("abs", &P::abs)
+    .def("coefficients", range<return_value_policy<copy_const_reference>>(&P::begin, &P::end))
+    .def<CGAL::Comparison_result(P::*)(const P::NT&) const>("compare", &P::compare)
+    .def("degree", &P::degree)
+    .def("diff", &P::diff)
+    .def("divide_by_x", &P::divide_by_x)
+    .def("is_zero", &P::is_zero)
+    .def("reversal", &P::reversal)
+    .def("scalar_div", &P::scalar_div)
+    .def("scale", &P::scale)
+    .def("scale_down", &P::scale_down)
+    .def("scale_up", &P::scale_up)
+    .def("sign", &P::sign)
+    .def<CGAL::Sign(P::*)(const P::NT&) const>("sign_at", &P::sign_at)
+    .def("simplify_coefficients", &P::simplify_coefficients)
     .def(self + self)
     .def(self += self)
     .def(self - self)
     .def(self -= self)
     .def(self * self)
     .def(int() * self)
-    .def(PT::Coefficient_type() * self)
+    .def(CT() * self)
     .def(self *= self)
-    .def("__getitem__", &T::operator[], return_value_policy<copy_const_reference>())
+    .def("__getitem__", &P::operator[], return_value_policy<copy_const_reference>())
     .def(self_ns::str(self_ns::self))
     ;
 }
 
+template<typename PT>
+bp::class_<typename PT::Shift> bind_shift(const char* name)
+{
+  return class_<typename PT::Shift>(name)
+    .def(init<>())
+    .def("__call__", &PT::Shift::operator())
+    ;
+}
+
+template<typename PT>
+bp::class_<typename PT::Swap> bind_swap(const char* name)
+{
+  return class_<typename PT::Swap>(name)
+    .def(init<>())
+    .def("__call__", &PT::Swap::operator())
+    ;
+}
+
+template<typename T>
+T ipower(T& p, int i)
+{
+  return CGAL::ipower(p, i);
+}
+
+
+
 void export_Arr_algebraic_segment_traits()
 {
   using namespace boost::python;
-  class_<Number>("Number")
+  class_<Integer>("Integer")
     .def(init<>())
     .def(init<int>())
-    .def("value", &Number::longValue)
+    .def("value", &Integer::longValue)
     .def(self_ns::str(self_ns::self))
     .def(self + self)
     .def(self += self)
@@ -152,7 +195,6 @@ void export_Arr_algebraic_segment_traits()
     .def(self >= self)
     ;
 
-
   class_<Bound>("Bound")
     .def(init<>())
     .def("value", &Bound::longValue)
@@ -164,19 +206,24 @@ void export_Arr_algebraic_segment_traits()
     .def(self *= self)
     ;
 
-
-  class_<Construct_polynomial_2>("Construct_polynomial_2")
-    .def(init<>())
-    .def<Polynomial_2(Construct_polynomial_2::*)(const Polynomial_1&, const Polynomial_1&) const>("__call__", &Construct_polynomial_2::operator())
+  enum_<Traits::Site_of_point>("Site_of_point")
+    .value("POINT_IN_INTERIOR", Traits::Site_of_point::POINT_IN_INTERIOR)
+    .value("MIN_ENDPOINT", Traits::Site_of_point::MIN_ENDPOINT)
+    .value("MAX_ENDPOINT", Traits::Site_of_point::MAX_ENDPOINT)
+    .export_values()
     ;
 
-  class_<Construct_polynomial_1>("Construct_polynomial_1")
-    .def(init<>())
-    .def<Polynomial_1(Construct_polynomial_1::*)(const Number&, const Number&) const>("__call__", &Construct_polynomial_1::operator())
-    ;
+  //bind_construct_polynomial<PT_1>("Construct_polynomial_1");
+  //bind_construct_polynomial<PT_2>("Construct_polynomial_2");
 
   bind_polynomial<PT_1>("Polynomial_1");
   bind_polynomial<PT_2>("Polynomial_2");
+
+  bind_shift<PT_1>("PT_1_Shift");
+  bind_shift<PT_2>("PT_2_Shift");
+
+  bind_swap<PT_1>("PT_1_Swap");
+  bind_swap<PT_2>("PT_2_Swap");
 
   class_<TPoint_2>("TPoint_2")
     .def(init<TPoint_2&>())
@@ -220,6 +267,7 @@ void export_Arr_algebraic_segment_traits()
   class_<Construct_x_monotone_segment_2>("Construct_x_monotone_segment_2", no_init)
     .def("__call__", &construct_x_monotone_segment_2_call_operator0)
     .def("__call__", &construct_x_monotone_segment_2_call_operator1)
+    .def("__call__", &construct_x_monotone_segment_2_call_operator2)
     ;
 
   class_<Traits>("Traits")
@@ -228,8 +276,9 @@ void export_Arr_algebraic_segment_traits()
     .def("construct_tpoint_2_object", &Traits::construct_point_2_object)
     .def("construct_x_monotone_segment_2_object", &Traits::construct_x_monotone_segment_2_object)
     ;
-
   
+  def("ipower", &ipower<Polynomial_1>);
+  def("ipower", &ipower<Polynomial_2>);
 }
 
 #endif
