@@ -1,3 +1,6 @@
+#ifndef CONFIG_HPP
+#define CONFIG_HPP
+
 #define CGAL_HEADER_ONLY 1
 
 #define CGALPY_EPEC_KERNEL 0
@@ -22,5 +25,35 @@
 #define CGALPY_ARR_CIRCLE_SEGMENT_TRAITS 5
 
 #ifndef CGALPY_TRAITS
-#define CGALPY_TRAITS 0
+#define CGALPY_TRAITS 1
 #endif
+
+#if CGALPY_KERNEL == 0
+#define CGALPY_KERNEL_SHORT_NAME epec
+#elif CGALPY_KERNEL == 1
+#define CGALPY_KERNEL_SHORT_NAME epiec
+#endif
+
+#if CGALPY_TRAITS == 0
+#define CGALPY_TRAITS_SHORT_NAME linear
+#elif CGALPY_TRAITS == 1
+#define CGALPY_TRAITS_SHORT_NAME seg
+#elif CGALPY_TRAITS == 2
+#define CGALPY_TRAITS_SHORT_NAME ncseg
+#elif CGALPY_TRAITS == 3
+#define CGALPY_TRAITS_SHORT_NAME conic
+#elif CGALPY_TRAITS == 4
+#define CGALPY_TRAITS_SHORT_NAME alg
+#elif CGALPY_TRAITS == 5
+#define CGALPY_TRAITS_SHORT_NAME cs
+#endif
+
+#define CONCAT_2(a, b) a ## _ ## b
+#define SET_EX(a, b, c) CONCAT_2(a, b)
+
+#define CONCAT_3(a, b, c) a ## _ ## b ## _ ## c
+#define SET_MODULE_NAME(a, b, c) CONCAT_3(a, b, c)
+
+#define CGALPY_MODULE_NAME SET_MODULE_NAME(arr2, CGALPY_KERNEL_SHORT_NAME, CGALPY_TRAITS_SHORT_NAME)
+
+#endif //CONFIG_HPP

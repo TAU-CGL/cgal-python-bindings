@@ -1,3 +1,6 @@
+#ifndef COMMON_HPP
+#define COMMON_HPP
+
 #include <Config.hpp>
 #include <boost/python.hpp>
 #include <boost/make_shared.hpp>
@@ -254,3 +257,5 @@ void bind_iterator(const char* python_name)
     .def("__next__", &iterator::next, return_value_policy<reference_existing_object>())
     ;
 }
+
+#endif //COMMON_HPP
