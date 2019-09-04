@@ -1,6 +1,8 @@
 #include <Config.hpp>
 #include <Common.hpp>
 
+
+
 void export_Kernel();
 void export_Arrangement_2();
 void export_Intersections_2();
@@ -14,7 +16,7 @@ void export_Arr_segment_traits();
 void export_Arr_circle_segment_traits();
 void export_Arr_algebraic_segment_traits();
 
-BOOST_PYTHON_MODULE(arr2_epec_seg)
+BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 {
   using namespace boost::python;
   
