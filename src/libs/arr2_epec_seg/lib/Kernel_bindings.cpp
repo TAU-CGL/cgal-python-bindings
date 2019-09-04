@@ -38,6 +38,11 @@ typename FT::Approximate_type& FT_approx(FT& ft)
 {
   return ft.approx();
 }
+
+double FT_to_double(FT& ft)
+{
+  return ft.exact().to_double();
+}
 #endif
 
 Point_2 transform_point(Aff_Transformation_2& t, Point_2& p) { return t.transform(p); }
@@ -100,6 +105,7 @@ void export_Kernel()
     .def(init<FT::Exact_type>())
     .def("exact", &FT_exact, return_internal_reference<>())
     //.def("approx", &FT_approx, return_internal_reference<>())
+    .def("to_double", &FT_to_double)
     .def(self_ns::str(self_ns::self))
     .def(self == self)
     ;
