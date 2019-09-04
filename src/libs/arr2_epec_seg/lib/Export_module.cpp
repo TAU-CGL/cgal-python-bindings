@@ -16,6 +16,10 @@ void export_Arr_segment_traits();
 void export_Arr_circle_segment_traits();
 void export_Arr_algebraic_segment_traits();
 
+void export_Polygon_2();
+void export_Polygon_with_holes_2();
+void export_Minkowski_sum_2();
+
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 {
   using namespace boost::python;
@@ -41,4 +45,9 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   export_Arr_algebraic_segment_traits();
 #endif
 
+#ifdef MINKOWSKI_SUM
+  export_Polygon_2();
+  export_Polygon_with_holes_2();
+  export_Minkowski_sum_2();
+#endif
 }

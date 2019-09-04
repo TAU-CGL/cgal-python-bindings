@@ -48,12 +48,18 @@
 #define CGALPY_TRAITS_SHORT_NAME cs
 #endif
 
-#define CONCAT_2(a, b) a ## _ ## b
-#define SET_EX(a, b, c) CONCAT_2(a, b)
+#define MINKOWSKI_SUM 1
 
 #define CONCAT_3(a, b, c) a ## _ ## b ## _ ## c
 #define SET_MODULE_NAME(a, b, c) CONCAT_3(a, b, c)
 
+#define CONCAT_4(a, b, c, d) a ## _ ## b _ ## c ## _ ## d
+#define SET_MODULE_NAME_EX(a, b, c) CONCAT_4(a, b, c, ex)
+
+#if CGALPY_DCEL == 0
 #define CGALPY_MODULE_NAME SET_MODULE_NAME(arr2, CGALPY_KERNEL_SHORT_NAME, CGALPY_TRAITS_SHORT_NAME)
+#elif CGALPY_DCEL == 1
+#define CGALPY_MODULE_NAME SET_MODULE_NAME_EX(arr2, CGALPY_KERNEL_SHORT_NAME, CGALPY_TRAITS_SHORT_NAME)
+#endif
 
 #endif //CONFIG_HPP

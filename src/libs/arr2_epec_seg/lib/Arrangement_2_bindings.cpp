@@ -11,9 +11,9 @@ void insert_curve(Arrangement_2& arr, Curve_2& c)
 }
 void insert_curves(Arrangement_2& arr, boost::python::list& lst)
 {
-  auto v = std::vector< X_monotone_curve_2 >(boost::python::stl_input_iterator< X_monotone_curve_2 >(lst),
-    boost::python::stl_input_iterator< X_monotone_curve_2 >());
-  CGAL::insert(arr, v.begin(), v.end());
+  auto begin = boost::python::stl_input_iterator< X_monotone_curve_2 >(lst);
+  auto end = boost::python::stl_input_iterator< X_monotone_curve_2 >();
+  CGAL::insert(arr, begin, end);
 }
 Halfedge& insert_non_intersecting_curve(Arrangement_2& arr, X_monotone_curve_2& c)
 {
@@ -21,9 +21,9 @@ Halfedge& insert_non_intersecting_curve(Arrangement_2& arr, X_monotone_curve_2& 
 }
 void insert_non_intersecting_curves(Arrangement_2& arr, boost::python::list& lst)
 {
-  auto v = std::vector< X_monotone_curve_2 >(boost::python::stl_input_iterator< X_monotone_curve_2 >(lst),
-    boost::python::stl_input_iterator< X_monotone_curve_2 >());
-  CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
+  auto begin = boost::python::stl_input_iterator< X_monotone_curve_2 >(lst);
+  auto end = boost::python::stl_input_iterator< X_monotone_curve_2 >();
+  CGAL::insert_non_intersecting_curves(arr, begin, end);
 }
 bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c)
 {

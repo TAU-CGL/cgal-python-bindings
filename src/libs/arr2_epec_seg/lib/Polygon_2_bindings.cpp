@@ -1,0 +1,50 @@
+#include <Config.hpp>
+#ifdef MINKOWSKI_SUM
+#include <Common.hpp>
+
+
+Point_2& left_vertex(Polygon_2& p) { return *(p.left_vertex()); }
+Point_2& right_vertex(Polygon_2& p) { return *(p.right_vertex()); }
+Point_2& top_vertex(Polygon_2& p) { return *(p.top_vertex()); }
+Point_2& bottom_vertex(Polygon_2& p) { return *(p.bottom_vertex()); }
+
+void export_Polygon_2()
+{
+  using namespace boost::python;
+  class_<Polygon_2>("Polygon_2")
+    .def(init<>())
+    .def("push_back", &Polygon_2::push_back)
+    .def("is_simple", &Polygon_2::is_simple)
+    .def("is_convex", &Polygon_2::is_convex)
+    .def("orientation", &Polygon_2::orientation)
+    .def("oriented_side", &Polygon_2::oriented_side)
+    .def("bounded_side", &Polygon_2::bounded_side)
+    .def("is_empty", &Polygon_2::is_empty)
+    .def("is_counterclockwise_oriented", &Polygon_2::is_counterclockwise_oriented)
+    .def("is_clockwise_oriented", &Polygon_2::is_clockwise_oriented)
+    .def("is_collinear_oriented", &Polygon_2::is_collinear_oriented)
+    .def("has_on_positive_side", &Polygon_2::has_on_positive_side)
+    .def("has_on_negative_side", &Polygon_2::has_on_negative_side)
+    .def("has_on_boundary", &Polygon_2::has_on_boundary)
+    .def("has_on_bounded_side", &Polygon_2::has_on_bounded_side)
+    .def("has_on_unbounded_side", &Polygon_2::has_on_unbounded_side)
+    .def("size", &Polygon_2::size)
+    .def("area", &Polygon_2::area)
+    .def("bbox", &Polygon_2::bbox)
+    .def("vertices", range<return_internal_reference<>>(&Polygon_2::vertices_begin, &Polygon_2::vertices_end))
+    //.def("edges", range(&Polygon_2::edges_begin, &Polygon_2::edges_end))
+    .def("__getitem__", &Polygon_2::operator[], return_internal_reference<>())
+    .def("left_vertex", &left_vertex, return_internal_reference<>())
+    .def("right_vertex", &right_vertex, return_internal_reference<>())
+    .def("top_vertex", &top_vertex, return_internal_reference<>())
+    .def("bottom_vertex", &bottom_vertex, return_internal_reference<>())
+    .def("vertex", &Polygon_2::vertex, return_internal_reference<>())
+    .def("edge", &Polygon_2::edge)
+    .def("clear", &Polygon_2::clear)
+    .def("reverse_orientation", &Polygon_2::reverse_orientation)
+    .def(self_ns::str(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    ;
+}
+#endif
