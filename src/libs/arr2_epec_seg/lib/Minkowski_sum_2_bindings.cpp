@@ -30,9 +30,6 @@ void export_Minkowski_sum_2()
   def("minkowski_sum_2", &minkowski_sum_2<Polygon_with_holes_2, Polygon_with_holes_2>);
 
   def("minkowski_sum_by_full_convolution_2", &minkowski_sum_by_full_convolution_2<Polygon_2, Polygon_2>);
-  //def("minkowski_sum_by_full_convolution_2", &minkowski_sum_by_full_convolution_2<Polygon_2, Polygon_with_holes_2>);
-  //def("minkowski_sum_by_full_convolution_2", &minkowski_sum_by_full_convolution_2<Polygon_with_holes_2, Polygon_2>);
-  //def("minkowski_sum_by_full_convolution_2", &minkowski_sum_by_full_convolution_2<Polygon_with_holes_2, Polygon_with_holes_2>);
 
   def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_2, Polygon_2>);
   def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_2, Polygon_with_holes_2>);
