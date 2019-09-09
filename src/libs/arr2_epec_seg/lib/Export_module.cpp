@@ -7,6 +7,7 @@ void export_Kernel();
 void export_Arrangement_2();
 void export_Intersections_2();
 void export_Point_location();
+void export_Object();
 void export_Vertex();
 void export_Halfedge();
 void export_Face();
@@ -26,6 +27,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   
   export_Kernel();
   export_Arrangement_2();
+  export_Object();
   export_Vertex();
   export_Halfedge();
   export_Face();

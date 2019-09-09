@@ -1,0 +1,44 @@
+#include <Config.hpp>
+#include <Common.hpp>
+
+template<typename T0, typename T1>
+bool is_type(Object& o)
+{
+  return o.is<T0>() || o.is<T1>();
+}
+
+template<typename T0, typename T1>
+bool get_type(Object& o, typename T0::value_type& t)
+{
+  T0 get0;
+  bool res = CGAL::assign<T0>(get0, o);
+  if (res)
+  {
+    t = *(get0);
+    return res;
+  }
+  else
+  {
+    T1 get1;
+    bool res = CGAL::assign<T1>(get1, o);
+    if (res)
+    {
+      t = *(get1);
+    }
+  }
+  return res;
+}
+
+void export_Object()
+{
+  using namespace boost::python;
+  class_<Object>("Object", no_init)
+    .def("empty", &Object::empty)
+    .def("is_vertex", &is_type<Arrangement_2::Vertex_handle, Vertex_const_handle>)
+    .def("get_vertex", &get_type<Arrangement_2::Vertex_handle, Vertex_const_handle>)
+    .def("is_halfedge", &is_type<Arrangement_2::Halfedge_handle, Halfedge_const_handle>)
+    .def("get_halfedge", &get_type<Arrangement_2::Halfedge_handle, Halfedge_const_handle>)
+    .def("is_face", &is_type<Arrangement_2::Face_handle, Face_const_handle>)
+    .def("get_face", &get_type<Arrangement_2::Face_handle, Face_const_handle>)
+    ;
+}

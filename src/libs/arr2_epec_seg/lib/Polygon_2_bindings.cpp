@@ -8,11 +8,19 @@ Point_2& right_vertex(Polygon_2& p) { return *(p.right_vertex()); }
 Point_2& top_vertex(Polygon_2& p) { return *(p.top_vertex()); }
 Point_2& bottom_vertex(Polygon_2& p) { return *(p.bottom_vertex()); }
 
+Polygon_2* init_from_list(boost::python::list& lst)
+{
+  auto begin = boost::python::stl_input_iterator< Point_2 >(lst);
+  auto end = boost::python::stl_input_iterator< Point_2 >();
+  return new Polygon_2(begin, end);
+}
+
 void export_Polygon_2()
 {
   using namespace boost::python;
   class_<Polygon_2>("Polygon_2")
     .def(init<>())
+    .def("__init__", make_constructor(&init_from_list))
     .def("push_back", &Polygon_2::push_back)
     .def("is_simple", &Polygon_2::is_simple)
     .def("is_convex", &Polygon_2::is_convex)
