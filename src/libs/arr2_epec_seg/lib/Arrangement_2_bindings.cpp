@@ -11,9 +11,11 @@ void insert_curve(Arrangement_2& arr, Curve_2& c)
 }
 void insert_curves(Arrangement_2& arr, boost::python::list& lst)
 {
+  //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
   auto begin = boost::python::stl_input_iterator< X_monotone_curve_2 >(lst);
   auto end = boost::python::stl_input_iterator< X_monotone_curve_2 >();
-  CGAL::insert(arr, begin, end);
+  auto v = std::vector<X_monotone_curve_2>(begin, end);
+  CGAL::insert(arr, v.begin(), v.end());
 }
 Halfedge& insert_non_intersecting_curve(Arrangement_2& arr, X_monotone_curve_2& c)
 {
@@ -21,9 +23,11 @@ Halfedge& insert_non_intersecting_curve(Arrangement_2& arr, X_monotone_curve_2& 
 }
 void insert_non_intersecting_curves(Arrangement_2& arr, boost::python::list& lst)
 {
+  //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
   auto begin = boost::python::stl_input_iterator< X_monotone_curve_2 >(lst);
   auto end = boost::python::stl_input_iterator< X_monotone_curve_2 >();
-  CGAL::insert_non_intersecting_curves(arr, begin, end);
+  auto v = std::vector<X_monotone_curve_2>(begin, end);
+  CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
 }
 bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c)
 {
@@ -35,14 +39,40 @@ void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res)
 }
 Face& remove_edge_free(Arrangement_2& arr, Halfedge& e)
 {
-  return *(CGAL::remove_edge(arr, Halfedge_iterator(&e)));
+  auto handle = e.twin();
+  return *(CGAL::remove_edge(arr, handle));
 }
 bool remove_vertex_free(Arrangement_2& arr, Vertex& v)
 {
   return CGAL::remove_vertex(arr, Vertex_iterator(&v));
 }
 
-//decompose? zone?
+void decompose(Arrangement_2& arr, boost::python::list& lst)
+{
+  namespace bp = boost::python;
+  auto v = std::vector < pair<Arrangement_2::Vertex_const_handle, pair<Object, Object>>>();
+  CGAL::decompose(arr, std::back_inserter(v));
+  for (auto& p : v)
+  {
+    bp::tuple outer;
+    bp::tuple inner;
+    inner = bp::make_tuple(p.second.first, p.second.second);
+    outer = bp::make_tuple(*(p.first), inner);
+    lst.append(outer);
+  }
+}
+
+
+void zone(Arrangement_2& arr, X_monotone_curve_2& c, boost::python::list& lst)
+{
+  namespace bp = boost::python;
+  auto v = std::vector<Object>();
+  CGAL::zone(arr, c, std::back_inserter(v));
+  for (auto o : v)
+  {
+    lst.append(o);
+  }
+}
 
 //Arrangement methods
 Halfedge& insert_from_left_vertex(Arrangement_2& arr, X_monotone_curve_2& c, Vertex& v)
@@ -87,7 +117,8 @@ Halfedge& merge_edge(Arrangement_2& arr, Halfedge& e1, Halfedge& e2, X_monotone_
 }
 Face& remove_edge(Arrangement_2& arr, Halfedge& e)
 {
-  return *(arr.remove_edge(Halfedge_iterator(&e)));
+  auto handle = e.twin();
+  return *(CGAL::remove_edge(arr, handle));
 }
 Vertex_iterator vertices_begin(Arrangement_2& arr) { return arr.vertices_begin(); }
 Vertex_iterator vertices_end(Arrangement_2& arr) { return arr.vertices_end(); }
@@ -147,6 +178,8 @@ void export_Arrangement_2()
   def("insert", &insert_curves);
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve, return_internal_reference<>());
   def("insert_non_intersecting_curves", &insert_non_intersecting_curves);
+  def("decompose", &decompose);
+  def("zone", &zone);
   def("overlay", &overlay);
   def("do_intersect", &do_intersect);
   def("remove_edge", &remove_edge_free, return_internal_reference<>());

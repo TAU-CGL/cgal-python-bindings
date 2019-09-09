@@ -6,6 +6,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/stl_iterator.hpp>
+#include <boost/python/tuple.hpp>
 #if CGALPY_KERNEL == CGALPY_EPIEC_KERNEL
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #else
@@ -48,6 +49,7 @@
 #include <CGAL/Arr_extended_dcel.h>
 #endif
 #include <CGAL/Arr_overlay_2.h>
+#include <CGAL/Arr_vertical_decomposition_2.h>
 #include <CGAL/Arr_default_overlay_traits.h>
 #include <CGAL/Arr_naive_point_location.h>
 #include <CGAL/Arr_walk_along_line_point_location.h>
@@ -72,6 +74,7 @@ typedef typename CGAL::Gmpq                                              Gmpq;
 typedef typename Kernel::FT                                              FT;
 //typedef typename CGAL::Sqrt_extension <FT, FT>                           CoordNT;
 typedef typename Kernel::RT                                              RT;
+typedef typename CGAL::Object                                            Object;
 typedef typename Kernel::Point_2                                         Point_2;
 typedef typename Kernel::Segment_2                                       Segment_2;
 typedef typename Kernel::Line_2                                          Line_2;
