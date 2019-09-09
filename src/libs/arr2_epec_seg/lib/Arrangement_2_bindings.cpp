@@ -33,6 +33,7 @@ bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c)
 {
   return CGAL::do_intersect(arr, c);
 }
+//https://stackoverflow.com/a/26833886 regarding functor for extended DCEL case
 void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res)
 {
   CGAL::overlay(arr1, arr2, arr_res);
