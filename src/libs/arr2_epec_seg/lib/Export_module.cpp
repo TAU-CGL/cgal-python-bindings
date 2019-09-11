@@ -19,6 +19,7 @@ void export_Arr_algebraic_segment_traits();
 
 void export_Polygon_2();
 void export_Polygon_with_holes_2();
+void export_Polygon_set_2();
 void export_Minkowski_sum_2();
 void export_Boolean_set_operations_2();
 
@@ -51,6 +52,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 #ifdef MINKOWSKI_SUM
   export_Polygon_2();
   export_Polygon_with_holes_2();
+  export_Polygon_set_2();
   export_Minkowski_sum_2();
   export_Boolean_set_operations_2();
 #endif
