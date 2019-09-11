@@ -40,7 +40,9 @@
 #include <CGAL/Triangle_2.h>
 #include <CGAL/Polygon_2.h>
 #include <CGAL/Polygon_with_holes_2.h>
+#include <CGAL/Polygon_set_2.h>
 #include <CGAL/Minkowski_sum_2.h>
+#include <CGAL/connect_holes.h>
 #include <CGAL/Direction_2.h>
 #include <CGAL/Vector_2.h>
 #include <CGAL/Aff_transformation_2.h>
@@ -86,6 +88,7 @@ typedef typename Kernel::Circle_2                                        Circle_
 typedef typename Kernel::Triangle_2                                      Triangle_2;
 typedef typename CGAL::Polygon_2<Kernel>                                 Polygon_2;
 typedef typename CGAL::Polygon_with_holes_2<Kernel>                      Polygon_with_holes_2;
+typedef typename CGAL::Polygon_set_2<Kernel>                             Polygon_set_2;
 typedef typename Kernel::Iso_rectangle_2                                 Iso_rectangle_2;
 typedef typename CGAL::Aff_transformation_2<Kernel>                      Aff_Transformation_2;
 typedef typename CGAL::Rotation                                          Rotation;
