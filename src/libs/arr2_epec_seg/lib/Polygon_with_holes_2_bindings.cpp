@@ -1,5 +1,4 @@
 #include <Config.hpp>
-#ifdef MINKOWSKI_SUM
 #include <Common.hpp>
 
 Polygon_with_holes_2* init_Polygon_with_holes_2(Polygon_2& p, boost::python::list& lst)
@@ -34,5 +33,3 @@ void export_Polygon_with_holes_2()
     .def("bbox", &Polygon_with_holes_2::bbox)
     ;
 }
-
-#endif

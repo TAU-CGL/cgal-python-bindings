@@ -25,10 +25,10 @@ void export_Vertex()
     .def("is_isolated", &Vertex::is_isolated)
     .def("degree", &Vertex::degree)
     .def("incident_halfedges", &halfedge_around_vertex_iterator, return_value_policy<manage_new_object>())
-#ifdef EXTENDED_DCEL
+#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
     .def<Vertex::Data& (Vertex::*)()>("data", &Vertex::data, return_value_policy<copy_non_const_reference>()) //elementary type
     .def("set_data", &Vertex::set_data)
-#endif // EXTENDED_DCEL
+#endif
     ;
   bind_iterator<Iterator_from_circulator<Halfedge_around_vertex_circulator>>("Halfedge_around_vertex_iterator");
 }

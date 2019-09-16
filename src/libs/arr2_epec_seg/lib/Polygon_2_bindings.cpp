@@ -1,5 +1,4 @@
 #include <Config.hpp>
-#ifdef MINKOWSKI_SUM
 #include <Common.hpp>
 
 
@@ -55,4 +54,3 @@ void export_Polygon_2()
     .def(self != self)
     ;
 }
-#endif

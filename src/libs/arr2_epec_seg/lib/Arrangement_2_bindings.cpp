@@ -1,4 +1,14 @@
 #include <Common.hpp>
+#include <CGAL/Arr_overlay_2.h>
+#include <CGAL/Arr_vertical_decomposition_2.h>
+#include <CGAL/Arr_default_overlay_traits.h>
+#include <Arr_python_overlay_traits.hpp>
+#include <Python_functor.hpp>
+
+typedef typename Arr_python_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2, int> Arr_face_overlay_traits;
+
+//typedef typename Arr_python_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2, int>
+//Arr_python_overlay_traits;
 
 //Free functions
 Vertex& insert_point(Arrangement_2& arr, TPoint_2& p)
@@ -37,6 +47,10 @@ bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c)
 void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res)
 {
   CGAL::overlay(arr1, arr2, arr_res);
+}
+void overlay_ex(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res, Arr_face_overlay_traits& traits)
+{
+  CGAL::overlay(arr1, arr2, arr_res, traits);
 }
 Face& remove_edge_free(Arrangement_2& arr, Halfedge& e)
 {
@@ -182,7 +196,11 @@ void export_Arrangement_2()
   def("decompose", &decompose);
   def("zone", &zone);
   def("overlay", &overlay);
+  def("overlay", &overlay_ex);
   def("do_intersect", &do_intersect);
   def("remove_edge", &remove_edge_free, return_internal_reference<>());
   def("remove_vertex", &remove_vertex_free);
+
+  class_<Arr_face_overlay_traits>("Arr_face_overlay_traits", init<bp::object>())
+    ;
 }
