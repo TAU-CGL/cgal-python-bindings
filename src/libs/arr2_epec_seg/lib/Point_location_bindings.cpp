@@ -1,4 +1,19 @@
 #include <Common.hpp>
+#include <CGAL/Arr_naive_point_location.h>
+#include <CGAL/Arr_walk_along_line_point_location.h>
+#include <CGAL/Arr_trapezoid_ric_point_location.h>
+#include <CGAL/Arr_landmarks_point_location.h>
+
+
+typedef typename CGAL::Arr_naive_point_location<Arrangement_2>           Naive_pl;
+typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
+typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2>       Landmarks_pl;
+typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>   Trapezoid_pl;
+//typedef typename CGAL::Arr_point_location_result<Arrangement_2>          Pl_result;
+//typedef typename std::pair<Point_2, Pl_result::Type>                     Pl_query_result;
+
+typedef typename CGAL::Arr_point_location_result<Arrangement_2>::Type
+Pl_result;
 
 //void locate(Arrangement_2& arr, boost::python::list& lst)
 //{

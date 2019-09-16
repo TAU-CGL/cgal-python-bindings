@@ -20,6 +20,9 @@ void export_Arr_algebraic_segment_traits();
 void export_Polygon_2();
 void export_Polygon_with_holes_2();
 void export_Polygon_set_2();
+void export_General_polygon_2();
+void export_General_polygon_with_holes_2();
+void export_Polygon_with_holes_2();
 void export_Minkowski_sum_2();
 void export_Boolean_set_operations_2();
 

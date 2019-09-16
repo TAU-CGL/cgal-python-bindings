@@ -1,4 +1,45 @@
 #include <Common.hpp>
+typedef typename Kernel::Intersect_2                                     Intersect_2;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Iso_rectangle_2)>::type
+Point_iso_rectangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Line_2)>::type
+Point_line_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Ray_2)>::type
+Point_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Segment_2)>::type
+Point_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Triangle_2)>::type
+Point_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Iso_rectangle_2)>::type
+Iso_rectangle_iso_rectangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Line_2)>::type
+Iso_rectangle_line_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Ray_2)>::type
+Iso_rectangle_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Segment_2)>::type
+Iso_rectangle_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Triangle_2)>::type
+Iso_rectangle_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
+Line_line_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Ray_2)>::type
+Line_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Segment_2)>::type
+Line_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Triangle_2)>::type
+Line_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Ray_2)>::type
+Ray_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Segment_2)>::type
+Ray_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Triangle_2)>::type
+Ray_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Segment_2)>::type
+Segment_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Triangle_2)>::type
+Segment_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Triangle_2, Triangle_2)>::type
+Triangle_triangle_intersection_result;
 
 Point_iso_rectangle_intersection_result point_iso_rectangle_intersection(Point_2& p1, Iso_rectangle_2& i1)
 {
