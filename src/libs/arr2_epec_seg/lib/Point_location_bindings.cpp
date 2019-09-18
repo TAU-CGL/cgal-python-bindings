@@ -37,11 +37,13 @@ bool get_type(Pl_result& pl_result, typename type::value_type& t)
   if (res) t = *(*get);
   return res;
 }
-
-//void Landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
-//{
-//  pl.attach(arr);
-//}
+#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
+|| CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+void Landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
+{
+  pl.attach(arr);
+}
+#endif
 
 
 void export_Point_location()
@@ -49,15 +51,16 @@ void export_Point_location()
   using namespace boost::python;
 
   //supported only by some of the traits
-
-  //class_<Landmarks_pl>("Arr_landmarks_point_location")
-  //  .def(init<>())
-  //  .def(init<Arrangement_2&>())
-  //  .def("attach", &Landmarks_pl_attach)
-  //  .def("detach", &Landmarks_pl::detach)
-  //  .def("locate", &Landmarks_pl::locate)
-  //  ;
-
+#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
+|| CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+  class_<Landmarks_pl>("Arr_landmarks_point_location")
+    .def(init<>())
+    .def(init<Arrangement_2&>())
+    .def("attach", &Landmarks_pl_attach)
+    .def("detach", &Landmarks_pl::detach)
+    .def("locate", &Landmarks_pl::locate)
+    ;
+#endif
   class_<Trapezoid_pl, boost::noncopyable>("Arr_trapezoid_ric_point_location")
     .def(init<>())
     .def(init<Arrangement_2&>())

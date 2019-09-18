@@ -7,6 +7,8 @@ bool is_type(Object& o)
   return o.is<T0>() || o.is<T1>();
 }
 
+//asssigns the value to t
+//returns true iff assignment was successful
 template<typename T0, typename T1>
 bool get_type(Object& o, typename T0::value_type& t)
 {

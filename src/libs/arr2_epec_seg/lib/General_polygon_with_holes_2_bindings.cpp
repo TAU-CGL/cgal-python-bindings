@@ -14,12 +14,12 @@ General_polygon_with_holes_2* init_General_polygon_with_holes_2(General_polygon_
   return new General_polygon_with_holes_2(p, begin, end);
 }
 
-General_polygon_with_holes_2::Hole_const_iterator holes_begin(General_polygon_with_holes_2& p)
+General_polygon_with_holes_2::Hole_iterator holes_begin(General_polygon_with_holes_2& p)
 {
   return p.holes_begin();
 }
 
-General_polygon_with_holes_2::Hole_const_iterator holes_end(General_polygon_with_holes_2& p)
+General_polygon_with_holes_2::Hole_iterator holes_end(General_polygon_with_holes_2& p)
 {
   return p.holes_end();
 }

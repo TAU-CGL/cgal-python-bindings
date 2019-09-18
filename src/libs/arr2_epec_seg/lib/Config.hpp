@@ -15,7 +15,7 @@
 #define CGALPY_EXTENDED_DCEL 2
 
 #ifndef CGALPY_DCEL
-#define CGALPY_DCEL 2
+#define CGALPY_DCEL 0
 #endif
 
 #define CGALPY_ARR_LINEAR_TRAITS 0

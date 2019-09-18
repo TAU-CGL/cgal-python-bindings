@@ -3,6 +3,8 @@
 
 #include <boost/python.hpp>
 namespace bp = boost::python;
+
+//https://stackoverflow.com/a/26833886 regarding calling a python functor in C++
 template<typename T>
 class Python_functor
 {

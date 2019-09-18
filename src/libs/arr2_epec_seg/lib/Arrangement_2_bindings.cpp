@@ -2,18 +2,32 @@
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_vertical_decomposition_2.h>
 #include <CGAL/Arr_default_overlay_traits.h>
-#include <Arr_python_overlay_traits.hpp>
 #include <Python_functor.hpp>
+#include <CGAL/Arr_naive_point_location.h>
+#include <CGAL/Arr_walk_along_line_point_location.h>
+#include <CGAL/Arr_trapezoid_ric_point_location.h>
+#include <CGAL/Arr_landmarks_point_location.h>
 
+
+typedef typename CGAL::Arr_naive_point_location<Arrangement_2>           Naive_pl;
+typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
+typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2>       Landmarks_pl;
+typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>   Trapezoid_pl;
+
+#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL || CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL
+#include <Arr_python_overlay_traits.hpp>
 typedef typename Arr_python_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2, int> Arr_face_overlay_traits;
-
-//typedef typename Arr_python_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2, int>
-//Arr_python_overlay_traits;
+#endif
 
 //Free functions
-Vertex& insert_point(Arrangement_2& arr, TPoint_2& p)
+Vertex& insert_point_default(Arrangement_2& arr, TPoint_2& p)
 {
   return *(CGAL::insert_point(arr, p));
+}
+template <typename PointLocation>
+Vertex& insert_point(Arrangement_2& arr, TPoint_2& p, PointLocation& pl)
+{
+  return *(CGAL::insert_point(arr, p, pl));
 }
 void insert_curve(Arrangement_2& arr, Curve_2& c)
 {
@@ -27,10 +41,16 @@ void insert_curves(Arrangement_2& arr, boost::python::list& lst)
   auto v = std::vector<X_monotone_curve_2>(begin, end);
   CGAL::insert(arr, v.begin(), v.end());
 }
-Halfedge& insert_non_intersecting_curve(Arrangement_2& arr, X_monotone_curve_2& c)
+Halfedge& insert_non_intersecting_curve_default(Arrangement_2& arr, X_monotone_curve_2& c)
 {
   return *(CGAL::insert_non_intersecting_curve(arr, c));
 }
+template <typename PointLocation>
+Halfedge& insert_non_intersecting_curve(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl)
+{
+  return *(CGAL::insert_non_intersecting_curve(arr, c, pl));
+}
+
 void insert_non_intersecting_curves(Arrangement_2& arr, boost::python::list& lst)
 {
   //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
@@ -39,19 +59,26 @@ void insert_non_intersecting_curves(Arrangement_2& arr, boost::python::list& lst
   auto v = std::vector<X_monotone_curve_2>(begin, end);
   CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
 }
-bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c)
+bool do_intersect_default(Arrangement_2& arr, X_monotone_curve_2& c)
 {
   return CGAL::do_intersect(arr, c);
 }
-//https://stackoverflow.com/a/26833886 regarding functor for extended DCEL case
+template <typename PointLocation>
+bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl)
+{
+  return CGAL::do_intersect(arr, c, pl);
+}
 void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res)
 {
   CGAL::overlay(arr1, arr2, arr_res);
 }
+#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL || CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL
 void overlay_ex(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res, Arr_face_overlay_traits& traits)
 {
   CGAL::overlay(arr1, arr2, arr_res, traits);
 }
+#endif
+
 Face& remove_edge_free(Arrangement_2& arr, Halfedge& e)
 {
   auto handle = e.twin();
@@ -77,12 +104,23 @@ void decompose(Arrangement_2& arr, boost::python::list& lst)
   }
 }
 
-
-void zone(Arrangement_2& arr, X_monotone_curve_2& c, boost::python::list& lst)
+void zone_default(Arrangement_2& arr, X_monotone_curve_2& c, boost::python::list& lst)
 {
   namespace bp = boost::python;
   auto v = std::vector<Object>();
   CGAL::zone(arr, c, std::back_inserter(v));
+  for (auto o : v)
+  {
+    lst.append(o);
+  }
+}
+
+template <typename PointLocation>
+void zone(Arrangement_2& arr, X_monotone_curve_2& c, boost::python::list& lst, PointLocation& pl)
+{
+  namespace bp = boost::python;
+  auto v = std::vector<Object>();
+  CGAL::zone(arr, c, std::back_inserter(v), pl);
   for (auto o : v)
   {
     lst.append(o);
@@ -185,22 +223,45 @@ void export_Arrangement_2()
     .def("clear", &Arrangement_2::clear)
 
     //supported only by some traits
-    //.def(self_ns::str(self_ns::self))
+#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
+|| CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+    .def(self_ns::str(self_ns::self))
+#endif
     ;
-
-  def("insert_point", &insert_point, return_internal_reference<>());
+  //free functions
+  def("insert_point", &insert_point_default, return_internal_reference<>());
+  def("insert_point", &insert_point<Naive_pl>, return_internal_reference<>());
+  def("insert_point", &insert_point<Wal_pl>, return_internal_reference<>());
+  def("insert_point", &insert_point<Landmarks_pl>, return_internal_reference<>());
+  def("insert_point", &insert_point<Trapezoid_pl>, return_internal_reference<>());
   def("insert", &insert_curve);
   def("insert", &insert_curves);
-  def("insert_non_intersecting_curve", &insert_non_intersecting_curve, return_internal_reference<>());
+  def("insert_non_intersecting_curve", &insert_non_intersecting_curve_default, return_internal_reference<>());
+  def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Naive_pl>, return_internal_reference<>());
+  def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Wal_pl>, return_internal_reference<>());
+  def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Landmarks_pl>, return_internal_reference<>());
+  def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Trapezoid_pl>, return_internal_reference<>());
   def("insert_non_intersecting_curves", &insert_non_intersecting_curves);
   def("decompose", &decompose);
-  def("zone", &zone);
+  def("zone", &zone_default);
+  def("zone", &zone<Naive_pl>);
+  def("zone", &zone<Wal_pl>);
+  def("zone", &zone<Landmarks_pl>);
+  def("zone", &zone<Trapezoid_pl>);
   def("overlay", &overlay);
+#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL || CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL
   def("overlay", &overlay_ex);
-  def("do_intersect", &do_intersect);
+#endif
+  def("do_intersect", &do_intersect_default);
+  def("do_intersect", &do_intersect<Naive_pl>);
+  def("do_intersect", &do_intersect<Wal_pl>);
+  def("do_intersect", &do_intersect<Landmarks_pl>);
+  def("do_intersect", &do_intersect<Trapezoid_pl>);
   def("remove_edge", &remove_edge_free, return_internal_reference<>());
   def("remove_vertex", &remove_vertex_free);
 
+#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL || CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL
   class_<Arr_face_overlay_traits>("Arr_face_overlay_traits", init<bp::object>())
+#endif
     ;
 }
