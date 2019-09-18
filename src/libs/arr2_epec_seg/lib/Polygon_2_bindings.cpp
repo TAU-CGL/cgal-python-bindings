@@ -14,6 +14,41 @@ Polygon_2* init_from_list(boost::python::list& lst)
   return new Polygon_2(begin, end);
 }
 
+template <typename iterator>
+class CopyIterator
+{
+private:
+  iterator m_curr;
+  iterator m_end;
+public:
+  CopyIterator(iterator begin, iterator end) : m_curr(begin), m_end(end) {}
+  typename iterator::value_type next()
+  {
+    if (m_curr != m_end)
+    {
+      return *(m_curr++);
+    }
+    PyErr_SetString(PyExc_StopIteration, "No more data.");
+    bp::throw_error_already_set();
+    return *m_curr;
+  }
+};
+
+CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& p)
+{
+  return new CopyIterator<Polygon_2::Edge_const_iterator>(p.edges_begin(), p.edges_end());
+}
+
+template<typename iterator>
+void bind_copy_iterator(const char* python_name)
+{
+  using namespace boost::python;
+  class_<iterator>(python_name, no_init)
+    .def("__iter__", &pass_through)
+    .def("__next__", &iterator::next)
+    ;
+}
+
 void export_Polygon_2()
 {
   using namespace boost::python;
@@ -39,7 +74,7 @@ void export_Polygon_2()
     .def("area", &Polygon_2::area)
     .def("bbox", &Polygon_2::bbox)
     .def("vertices", range<return_internal_reference<>>(&Polygon_2::vertices_begin, &Polygon_2::vertices_end))
-    //.def("edges", range(&Polygon_2::edges_begin, &Polygon_2::edges_end))
+    .def("edges", &edges_iterator, return_value_policy<manage_new_object>())
     .def("__getitem__", &Polygon_2::operator[], return_internal_reference<>())
     .def("left_vertex", &left_vertex, return_internal_reference<>())
     .def("right_vertex", &right_vertex, return_internal_reference<>())
@@ -53,4 +88,6 @@ void export_Polygon_2()
     .def(self == self)
     .def(self != self)
     ;
+
+  bind_copy_iterator<CopyIterator<Polygon_2::Edge_const_iterator>>("Polygon_edges_iterator");
 }
