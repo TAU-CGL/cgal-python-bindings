@@ -1,6 +1,7 @@
 #include <Config.hpp>
 #include <Common.hpp>
-
+#include <CGAL/connect_holes.h>
+#include <CGAL/Boolean_set_operations_2.h>
 void complement0(Polygon_2& pgn, Polygon_with_holes_2& res)
 {
   CGAL::complement(pgn, res);

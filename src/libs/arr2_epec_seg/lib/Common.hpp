@@ -41,23 +41,13 @@
 #include <CGAL/Polygon_2.h>
 #include <CGAL/Polygon_with_holes_2.h>
 #include <CGAL/Polygon_set_2.h>
-#include <CGAL/Minkowski_sum_2.h>
-#include <CGAL/connect_holes.h>
 #include <CGAL/Direction_2.h>
 #include <CGAL/Vector_2.h>
 #include <CGAL/Aff_transformation_2.h>
 #include <CGAL/Arrangement_2.h>
-#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
+#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL || CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL
 #include <CGAL/Arr_extended_dcel.h>
 #endif
-#include <CGAL/Arr_overlay_2.h>
-#include <CGAL/Arr_vertical_decomposition_2.h>
-#include <CGAL/Arr_default_overlay_traits.h>
-#include <CGAL/Arr_naive_point_location.h>
-#include <CGAL/Arr_walk_along_line_point_location.h>
-#include <CGAL/Arr_trapezoid_ric_point_location.h>
-#include <CGAL/Arr_landmarks_point_location.h>
-
 using namespace boost::python;
 namespace bp = boost::python;
 
@@ -76,6 +66,7 @@ typedef typename CGAL::Gmpq                                              Gmpq;
 typedef typename Kernel::FT                                              FT;
 //typedef typename CGAL::Sqrt_extension <FT, FT>                           CoordNT;
 typedef typename Kernel::RT                                              RT;
+//typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>::CoordNT      CoordNT;
 typedef typename CGAL::Object                                            Object;
 typedef typename Kernel::Point_2                                         Point_2;
 typedef typename Kernel::Segment_2                                       Segment_2;
@@ -105,7 +96,6 @@ typedef typename CGAL::Arr_linear_traits_2<Kernel>                       Traits;
 #endif
 #if CGALPY_TRAITS ==  CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
 typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>               Traits;
-typedef typename Traits::CoordNT                                         CoordNT;
 #endif
 #if CGALPY_TRAITS ==  CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
 typedef typename BigInt                                                  Integer;
@@ -131,61 +121,13 @@ typedef typename Traits::X_monotone_curve_2                              X_monot
 typedef CGAL::Arr_extended_dcel<Traits, int, int, int>                   Dcel;
 typedef CGAL::Arrangement_2<Traits, Dcel>                                Arrangement_2;
 #endif
+#if CGALPY_DCEL ==  CGALPY_FACE_EXTENDED_DCEL
+typedef CGAL::Arr_face_extended_dcel<Traits, int>                        Dcel;
+typedef CGAL::Arrangement_2<Traits, Dcel>                                Arrangement_2;
+#endif
 #if CGALPY_DCEL == CGALPY_DEFAULT_DCEL
 typedef typename CGAL::Arrangement_2<Traits>                             Arrangement_2;
 #endif
-typedef typename Kernel::Intersect_2                                     Intersect_2;
-typedef typename CGAL::Arr_naive_point_location<Arrangement_2>           Naive_pl;
-typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
-typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2>       Landmarks_pl;
-typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>   Trapezoid_pl;
-//typedef typename CGAL::Arr_point_location_result<Arrangement_2>          Pl_result;
-//typedef typename std::pair<Point_2, Pl_result::Type>                     Pl_query_result;
-
-
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Iso_rectangle_2)>::type
-Point_iso_rectangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Line_2)>::type
-Point_line_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Ray_2)>::type
-Point_ray_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Segment_2)>::type
-Point_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Triangle_2)>::type
-Point_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Iso_rectangle_2)>::type
-Iso_rectangle_iso_rectangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Line_2)>::type
-Iso_rectangle_line_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Ray_2)>::type
-Iso_rectangle_ray_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Segment_2)>::type
-Iso_rectangle_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Triangle_2)>::type
-Iso_rectangle_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
-Line_line_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Ray_2)>::type
-Line_ray_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Segment_2)>::type
-Line_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Triangle_2)>::type
-Line_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Ray_2)>::type
-Ray_ray_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Segment_2)>::type
-Ray_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Triangle_2)>::type
-Ray_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Segment_2)>::type
-Segment_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Triangle_2)>::type
-Segment_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Triangle_2, Triangle_2)>::type
-Triangle_triangle_intersection_result;
-
-typedef typename CGAL::Arr_point_location_result<Arrangement_2>::Type
-Pl_result;
 
 typedef typename Arrangement_2::Vertex_iterator							              Vertex_iterator;
 typedef typename Arrangement_2::Vertex_const_handle                       Vertex_const_handle;

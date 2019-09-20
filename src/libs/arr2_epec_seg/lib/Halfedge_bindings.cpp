@@ -28,10 +28,10 @@ void export_Halfedge()
     .def("prev", &prev, return_value_policy<reference_existing_object>())
     .def("curve", &curve, return_value_policy<reference_existing_object>())
     .def("ccb", &ccb, return_value_policy<manage_new_object>())
-#ifdef EXTENDED_DCEL
+#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
     .def("set_data", &Halfedge::set_data)
     .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, return_value_policy<copy_non_const_reference>()) //elementary type
-#endif // EXTENDED_DCEL
+#endif
     ;
 }
 
