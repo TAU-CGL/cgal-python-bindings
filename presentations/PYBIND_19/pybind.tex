@@ -1,0 +1,58 @@
+\documentclass{beamer}
+%
+% ======= Specific ============================================================
+%
+\def\companyName{Tel Aviv University}
+\def\courseTitle{Python Binding}
+\def\courseSubTitle{}
+\def\lessonAuthors{\textbf{Efi Fogel}}
+\def\lessonTitle{}
+\def\lessonSubTitle{}
+\def\lessonDate{Sep.\ 2019}
+\def\lessonLocation{}
+\def\lessonDuration{}
+%\raisebox{-1.5pt}{\pgfuseimage{cgal-logo-small}}
+\input{../header}
+\input{../my_tikz}
+%
+% ======= Specific ============================================================
+%
+\makeatletter
+\sffamily
+\DeclareFontShape{T1}{lmss}{m}{scsl}{<->ssub*lmr/m/scsl}{}
+\makeatother
+%% \let\Tiny=\tiny
+%
+\graphicspath{%
+  {./figs/}%
+}
+%
+\pgfdeclareimage[height=0.35cm]{company-logo-small}{../../figs/logos/tau_logo}
+\pgfdeclareimage[height=0.5cm]{company-logo}{../../figs/logos/tau_logo}
+%
+\newboolean{styleCode}
+\setboolean{styleCode}{false}
+%
+\AtBeginSection[]{%
+  \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+\AtBeginSubsection[]{%
+  \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+\setbeamercolor{footnote mark}{fg=purple}
+\definecolor{tablerow1}{RGB}{225,217,205}
+\definecolor{tablerow2}{RGB}{236,229,221}
+\begin{document}
+\frame[plain]{\titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Python Binding}
+%\subsection{Introduction}
+\input{comparison}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
