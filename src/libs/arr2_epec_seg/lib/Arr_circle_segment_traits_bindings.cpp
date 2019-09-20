@@ -1,6 +1,9 @@
 #include <Config.hpp>
 #if CGALPY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
-#incdlue <Common.hpp>
+#include <Common.hpp>
+
+typedef typename Traits::CoordNT CoordNT;
+
 void export_Arr_circle_segment_traits()
 {
   using namespace boost::python;

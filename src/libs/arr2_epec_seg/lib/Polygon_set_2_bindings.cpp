@@ -21,7 +21,7 @@ void insert1(Polygon_set_2& ps, Polygon_with_holes_2& pwh)
   ps.insert(pwh);
 }
 
-void insert_range(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
+void insert_range0(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
 {
   auto begin0 = boost::python::stl_input_iterator<Polygon_2>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<Polygon_2>();
@@ -31,7 +31,15 @@ void insert_range(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::py
   auto v1 = std::vector<Polygon_with_holes_2>(begin1, end1);
 
   ps.insert(v0.begin(), v0.end(), v1.begin(), v1.end());
+}
 
+template <typename T>
+void insert_range(Polygon_set_2& ps, boost::python::list& lst)
+{
+  auto begin = boost::python::stl_input_iterator<T>(lst);
+  auto end = boost::python::stl_input_iterator<T>();
+  auto v = std::vector<T>(begin, end);
+  ps.insert(v.begin(), v.end());
 }
 
 void complement0(Polygon_set_2& ps0, Polygon_set_2& ps1)
@@ -50,7 +58,7 @@ void intersection(Polygon_set_2& ps0, Polygon_set_2& ps1, Polygon_set_2& ps2)
   ps0.intersection(ps1, ps2);
 }
 
-void intersection_range(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
+void intersection_range0(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
 {
   auto begin0 = boost::python::stl_input_iterator<Polygon_2>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<Polygon_2>();
@@ -59,6 +67,15 @@ void intersection_range(Polygon_set_2& ps, boost::python::list& polygon_lst, boo
   auto v0 = std::vector<Polygon_2>(begin0, end0);
   auto v1 = std::vector<Polygon_with_holes_2>(begin1, end1);
   ps.intersection(v0.begin(), v0.end(), v1.begin(), v1.end());
+}
+
+template <typename T>
+void intersection_range(Polygon_set_2& ps, boost::python::list& lst)
+{
+  auto begin = boost::python::stl_input_iterator<T>(lst);
+  auto end = boost::python::stl_input_iterator<T>();
+  auto v = std::vector<T>(begin, end);
+  ps.intersection(v.begin(), v.end());
 }
 
 template <typename T>
@@ -72,7 +89,7 @@ void join(Polygon_set_2& ps0, Polygon_set_2& ps1, Polygon_set_2& ps2)
   ps0.join(ps1, ps2);
 }
 
-void join_range(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
+void join_range0(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
 {
   auto begin0 = boost::python::stl_input_iterator<Polygon_2>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<Polygon_2>();
@@ -81,6 +98,15 @@ void join_range(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::pyth
   auto v0 = std::vector<Polygon_2>(begin0, end0);
   auto v1 = std::vector<Polygon_with_holes_2>(begin1, end1);
   ps.join(v0.begin(), v0.end(), v1.begin(), v1.end());
+}
+
+template <typename T>
+void join_range(Polygon_set_2& ps, boost::python::list& lst)
+{
+  auto begin = boost::python::stl_input_iterator<T>(lst);
+  auto end = boost::python::stl_input_iterator<T>();
+  auto v = std::vector<T>(begin, end);
+  ps.join(v.begin(), v.end());
 }
 
 template <typename T>
@@ -105,7 +131,7 @@ void symmetric_difference(Polygon_set_2& ps0, Polygon_set_2& ps1, Polygon_set_2&
   ps0.symmetric_difference(ps1, ps2);
 }
 
-void symmetric_difference_range(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
+void symmetric_difference_range0(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
 {
   auto begin0 = boost::python::stl_input_iterator<Polygon_2>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<Polygon_2>();
@@ -117,12 +143,21 @@ void symmetric_difference_range(Polygon_set_2& ps, boost::python::list& polygon_
 }
 
 template <typename T>
+void symmetric_difference_range(Polygon_set_2& ps, boost::python::list& lst)
+{
+  auto begin = boost::python::stl_input_iterator<T>(lst);
+  auto end = boost::python::stl_input_iterator<T>();
+  auto v = std::vector<T>(begin, end);
+  ps.symmetric_difference(v.begin(), v.end());
+}
+
+template <typename T>
 bool do_intersect(Polygon_set_2& ps, T& other)
 {
   return ps.do_intersect(other);
 }
 
-bool do_intersect_range(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
+bool do_intersect_range0(Polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
 {
   auto begin0 = boost::python::stl_input_iterator<Polygon_2>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<Polygon_2>();
@@ -131,6 +166,15 @@ bool do_intersect_range(Polygon_set_2& ps, boost::python::list& polygon_lst, boo
   auto v0 = std::vector<Polygon_2>(begin0, end0);
   auto v1 = std::vector<Polygon_with_holes_2>(begin1, end1);
   return ps.do_intersect(v0.begin(), v0.end(), v1.begin(), v1.end());
+}
+
+template <typename T>
+void do_intersect_range(Polygon_set_2& ps, boost::python::list& lst)
+{
+  auto begin = boost::python::stl_input_iterator<T>(lst);
+  auto end = boost::python::stl_input_iterator<T>();
+  auto v = std::vector<T>(begin, end);
+  ps.do_intersect(v.begin(), v.end());
 }
 
 template<typename T>
@@ -155,19 +199,25 @@ void export_Polygon_set_2()
     .def("is_valid", &Polygon_set_2::is_valid)
     .def("insert", &insert0)
     .def("insert", &insert1)
-    .def("insert", &insert_range)
+    .def("insert", &insert_range0)
+    .def("insert_polygons", &insert_range<Polygon_2>)
+    .def("insert_polygons_with_holes", &insert_range<Polygon_with_holes_2>)
     .def<void (Polygon_set_2::*) ()>("complement", &Polygon_set_2::complement)
     .def("complement", &complement0)
     .def("intersection", &intersection<Polygon_set_2>)
     .def("intersection", &intersection<Polygon_2>)
     .def("intersection", &intersection<Polygon_with_holes_2>)
     .def("intersection", &intersection)
-    .def("intersection", &intersection_range)
+    .def("intersection", &intersection_range0)
+    .def("intersection_polygons", &intersection_range<Polygon_2>)
+    .def("intersection_polygons_with_holes", &intersection_range<Polygon_with_holes_2>)
     .def("join", &join<Polygon_set_2>)
     .def("join", &join<Polygon_2>)
     .def("join", &join<Polygon_with_holes_2>)
     .def("join", &join)
-    .def("join", &join_range)
+    .def("join", &join_range0)
+    .def("join_polygons", &join_range<Polygon_2>)
+    .def("join_polygons_with_holes", &join_range<Polygon_with_holes_2>)
     .def("difference", &difference<Polygon_set_2>)
     .def("difference", &difference<Polygon_2>)
     .def("difference", &difference<Polygon_with_holes_2>)
@@ -176,11 +226,15 @@ void export_Polygon_set_2()
     .def("symmetric_difference", &symmetric_difference<Polygon_2>)
     .def("symmetric_difference", &symmetric_difference<Polygon_with_holes_2>)
     .def("symmetric_difference", &symmetric_difference)
-    .def("symmetric_difference", &symmetric_difference_range)
+    .def("symmetric_difference", &symmetric_difference_range0)
+    .def("symmetric_difference_polygons", &symmetric_difference_range<Polygon_2>)
+    .def("symmetric_difference_polygons_with_holes", &symmetric_difference_range<Polygon_with_holes_2>)
     .def("do_intersect", &do_intersect<Polygon_set_2>)
     .def("do_intersect", &do_intersect<Polygon_2>)
     .def("do_intersect", &do_intersect<Polygon_with_holes_2>)
-    .def("do_intersect", &do_intersect_range)
+    .def("do_intersect", &do_intersect_range0)
+    .def("do_intersect_polygons", &do_intersect_range<Polygon_2>)
+    .def("do_intersect_polygons_with_holes", &do_intersect_range<Polygon_with_holes_2>)
     .def("locate", &Polygon_set_2::locate)
     .def("oriented_side", &oriented_side<Point_2>)
     .def("oriented_side", &oriented_side<Polygon_set_2>)
