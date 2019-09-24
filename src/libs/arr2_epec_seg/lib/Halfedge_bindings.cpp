@@ -30,7 +30,7 @@ void export_Halfedge()
     .def("ccb", &ccb, return_value_policy<manage_new_object>())
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
     .def("set_data", &Halfedge::set_data)
-    .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, return_value_policy<copy_non_const_reference>()) //elementary type
+    .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, return_value_policy<copy_non_const_reference>())
 #endif
     ;
 }

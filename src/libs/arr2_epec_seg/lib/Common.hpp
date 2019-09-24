@@ -118,11 +118,11 @@ typedef typename Traits::Point_2                                         TPoint_
 typedef typename Traits::Curve_2                                         Curve_2;
 typedef typename Traits::X_monotone_curve_2                              X_monotone_curve_2;
 #if CGALPY_DCEL ==  CGALPY_EXTENDED_DCEL
-typedef CGAL::Arr_extended_dcel<Traits, int, int, int>                   Dcel;
+typedef CGAL::Arr_extended_dcel<Traits, bp::object, bp::object, bp::object>  Dcel;
 typedef CGAL::Arrangement_2<Traits, Dcel>                                Arrangement_2;
 #endif
 #if CGALPY_DCEL ==  CGALPY_FACE_EXTENDED_DCEL
-typedef CGAL::Arr_face_extended_dcel<Traits, int>                        Dcel;
+typedef CGAL::Arr_face_extended_dcel<Traits, bp::object>                 Dcel;
 typedef CGAL::Arrangement_2<Traits, Dcel>                                Arrangement_2;
 #endif
 #if CGALPY_DCEL == CGALPY_DEFAULT_DCEL
