@@ -1,0 +1,57 @@
+\begin{frame}
+  \frametitle{Comparison}
+
+  \tikzset{
+    table/.style={
+      matrix of nodes,
+      row sep=-\pgflinewidth,
+      column sep=-\pgflinewidth,
+      nodes={
+        rectangle,
+        draw=black,
+        align=center
+      },
+      minimum height=1.5em,
+      text depth=0.5ex,
+      text height=2ex,
+      nodes in empty cells,
+%%
+      every even row/.style={
+        nodes={fill=gray!20}
+      },
+      column 1/.style={
+        nodes={text width=11em,font=\bfseries}
+      },
+      row 1/.style={
+        nodes={
+          fill=black,
+          text=white,
+          font=\bfseries
+        }
+      }
+    }
+  }
+  References
+
+  \begin{tikzpicture}[ampersand replacement=\&]
+    \matrix (first) [table,text width=4em] {
+                              \& pybind11 \& boost    \& swig      \& native\\
+      many refs to many objs  \& 6.03125  \& 4.453125 \& 15.6875   \& \\
+      many refs to single obj \& 4.90625  \& 2.796875 \& 9.640625  \& \\
+    };
+  \end{tikzpicture}
+
+  Function calls
+
+  \begin{tikzpicture}[ampersand replacement=\&]
+    \matrix (first) [table,text width=4em] {
+                              \& pybind11 \& boost    \& swig      \& native\\
+      many small tasks        \& 26.71875 \& 13.65625 \& 13.140625 \& 13.359375\\
+      one large task          \& 0.71875  \& 0.71875  \& 0.734375  \& 17.84375\\
+    };
+  \end{tikzpicture}
+
+  \begin{itemize}
+  \item Boost.Python handles shared\_ptr and other smart pointers extremely gracefully
+  \end{itemize}
+\end{frame}
