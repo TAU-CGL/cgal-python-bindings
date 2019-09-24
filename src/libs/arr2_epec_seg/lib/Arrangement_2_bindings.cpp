@@ -16,12 +16,12 @@ typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>   Trapezo
 
 #if CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL || CGALPY_DCEL == CGALPY_EXTENDED_DCEL
 #include <Arr_python_face_overlay_traits.hpp>
-typedef typename Arr_python_face_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2, Face::Data> Arr_face_overlay_traits;
+typedef Arr_python_face_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2, Face::Data> Arr_face_overlay_traits;
 #endif
 
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
 #include <Arr_python_overlay_traits.hpp>
-typedef typename Arr_python_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2, Face::Data> Arr_overlay_traits;
+typedef Arr_python_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2, Face::Data> Arr_overlay_traits;
 #endif
 
 //Free functions
@@ -46,17 +46,20 @@ void insert_curves(Arrangement_2& arr, boost::python::list& lst)
   auto v = std::vector<X_monotone_curve_2>(begin, end);
   CGAL::insert(arr, v.begin(), v.end());
 }
-Halfedge& insert_non_intersecting_curve_default(Arrangement_2& arr, X_monotone_curve_2& c)
+Halfedge& insert_non_intersecting_curve_default(Arrangement_2& arr,
+                                                X_monotone_curve_2& c)
 {
   return *(CGAL::insert_non_intersecting_curve(arr, c));
 }
 template <typename PointLocation>
-Halfedge& insert_non_intersecting_curve(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl)
+Halfedge& insert_non_intersecting_curve(Arrangement_2& arr,
+                                        X_monotone_curve_2& c, PointLocation& pl)
 {
   return *(CGAL::insert_non_intersecting_curve(arr, c, pl));
 }
 
-void insert_non_intersecting_curves(Arrangement_2& arr, boost::python::list& lst)
+void insert_non_intersecting_curves(Arrangement_2& arr,
+                                    boost::python::list& lst)
 {
   //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
   auto begin = boost::python::stl_input_iterator< X_monotone_curve_2 >(lst);
@@ -78,13 +81,15 @@ void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res)
   CGAL::overlay(arr1, arr2, arr_res);
 }
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL || CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL
-void overlay_fex(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res, Arr_face_overlay_traits& traits)
+void overlay_fex(Arrangement_2& arr1, Arrangement_2& arr2,
+                 Arrangement_2& arr_res, Arr_face_overlay_traits& traits)
 {
   CGAL::overlay(arr1, arr2, arr_res, traits);
 }
 #endif
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
-void overlay_ex(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res, Arr_overlay_traits& traits)
+void overlay_ex(Arrangement_2& arr1, Arrangement_2& arr2,
+                Arrangement_2& arr_res, Arr_overlay_traits& traits)
 {
   CGAL::overlay(arr1, arr2, arr_res, traits);
 }
@@ -103,7 +108,8 @@ bool remove_vertex_free(Arrangement_2& arr, Vertex& v)
 void decompose(Arrangement_2& arr, boost::python::list& lst)
 {
   namespace bp = boost::python;
-  auto v = std::vector < pair<Arrangement_2::Vertex_const_handle, pair<Object, Object>>>();
+  auto v = std::vector < std::pair<Arrangement_2::Vertex_const_handle,
+                                   std::pair<Object, Object>>>();
   CGAL::decompose(arr, std::back_inserter(v));
   for (auto& p : v)
   {
@@ -115,7 +121,8 @@ void decompose(Arrangement_2& arr, boost::python::list& lst)
   }
 }
 
-void zone_default(Arrangement_2& arr, X_monotone_curve_2& c, boost::python::list& lst)
+void zone_default(Arrangement_2& arr, X_monotone_curve_2& c,
+                  boost::python::list& lst)
 {
   namespace bp = boost::python;
   auto v = std::vector<Object>();
@@ -127,7 +134,8 @@ void zone_default(Arrangement_2& arr, X_monotone_curve_2& c, boost::python::list
 }
 
 template <typename PointLocation>
-void zone(Arrangement_2& arr, X_monotone_curve_2& c, boost::python::list& lst, PointLocation& pl)
+void zone(Arrangement_2& arr, X_monotone_curve_2& c, boost::python::list& lst,
+          PointLocation& pl)
 {
   namespace bp = boost::python;
   auto v = std::vector<Object>();
@@ -139,15 +147,18 @@ void zone(Arrangement_2& arr, X_monotone_curve_2& c, boost::python::list& lst, P
 }
 
 //Arrangement methods
-Halfedge& insert_from_left_vertex(Arrangement_2& arr, X_monotone_curve_2& c, Vertex& v)
+Halfedge& insert_from_left_vertex(Arrangement_2& arr, X_monotone_curve_2& c,
+                                  Vertex& v)
 {
   return *(arr.insert_from_left_vertex(c,(Vertex_iterator(&v))));
 }
-Halfedge& insert_from_right_vertex(Arrangement_2& arr, X_monotone_curve_2& c, Vertex& v)
+Halfedge& insert_from_right_vertex(Arrangement_2& arr, X_monotone_curve_2& c,
+                                   Vertex& v)
 {
   return *(arr.insert_from_right_vertex(c, (Vertex_iterator(&v))));
 }
-Halfedge& insert_edge_in_face_interior(Arrangement_2& arr, X_monotone_curve_2& c, Face& f)
+Halfedge& insert_edge_in_face_interior(Arrangement_2& arr,
+                                       X_monotone_curve_2& c, Face& f)
 {
   return *(arr.insert_in_face_interior(c, (Face_iterator(&f))));
 }
@@ -155,7 +166,8 @@ Vertex& insert_vertex_in_face_interior(Arrangement_2& arr, TPoint_2& p, Face& f)
 {
   return *(arr.insert_in_face_interior(p, (Face_iterator(&f))));
 }
-Halfedge& insert_at_vertices(Arrangement_2& arr, X_monotone_curve_2& c, Vertex& v1, Vertex& v2)
+Halfedge& insert_at_vertices(Arrangement_2& arr, X_monotone_curve_2& c,
+                             Vertex& v1, Vertex& v2)
 {
   return *(arr.insert_at_vertices(c, (Vertex_iterator(&v1)), (Vertex_iterator(&v2))));
 }
@@ -171,11 +183,13 @@ Halfedge& modify_edge(Arrangement_2& arr, Halfedge& e, X_monotone_curve_2& c)
 {
   return *(arr.modify_edge(Halfedge_iterator(&e), c));
 }
-Halfedge& split_edge(Arrangement_2& arr, Halfedge& e, X_monotone_curve_2& c1, X_monotone_curve_2& c2)
+Halfedge& split_edge(Arrangement_2& arr, Halfedge& e, X_monotone_curve_2& c1,
+                     X_monotone_curve_2& c2)
 {
   return *(arr.split_edge(Halfedge_iterator(&e), c1, c2));
 }
-Halfedge& merge_edge(Arrangement_2& arr, Halfedge& e1, Halfedge& e2, X_monotone_curve_2& c)
+Halfedge& merge_edge(Arrangement_2& arr, Halfedge& e1, Halfedge& e2,
+                     X_monotone_curve_2& c)
 {
   return *(arr.merge_edge(Halfedge_iterator(&e1), Halfedge_iterator(&e2), c));
 }
@@ -281,7 +295,7 @@ void export_Arrangement_2()
 
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
   class_<Arr_overlay_traits>("Arr_overlay_traits", init<bp::object, bp::object,
-    bp::object, bp::object, bp::object, bp::object, bp::object, bp::object, 
+    bp::object, bp::object, bp::object, bp::object, bp::object, bp::object,
     bp::object, bp::object>())
     ;
 #endif
