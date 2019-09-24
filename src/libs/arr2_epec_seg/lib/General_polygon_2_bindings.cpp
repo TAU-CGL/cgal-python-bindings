@@ -2,9 +2,10 @@
 #include <Common.hpp>
 #include <CGAL/Gps_circle_segment_traits_2.h>
 
-typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2 General_polygon_2;
-typedef General_polygon_2::X_monotone_curve_2 CS_traits_X_monotone_curve_2;
-typedef General_polygon_2::Curve_iterator Curve_iterator;
+typedef typename CGAL::Gps_circle_segment_traits_2<Kernel> CSTraits;
+typedef typename CSTraits::Polygon_2                       General_polygon_2;
+typedef General_polygon_2::X_monotone_curve_2              CS_traits_X_monotone_curve_2;
+typedef General_polygon_2::Curve_iterator                  Curve_iterator;
 
 General_polygon_2* init_from_list(boost::python::list& lst)
 {
