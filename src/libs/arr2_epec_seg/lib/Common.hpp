@@ -1,7 +1,8 @@
 #ifndef COMMON_HPP
 #define COMMON_HPP
 
-#include <Config.hpp>
+#include "Config.hpp"
+
 #include <boost/python.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>

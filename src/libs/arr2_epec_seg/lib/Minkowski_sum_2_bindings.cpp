@@ -1,7 +1,7 @@
 #include <Config.hpp>
 #ifdef MINKOWSKI_SUM
 #include <Common.hpp>
-#include <CGAL/Minkowski_sum_2.h>
+#include <CGAL/minkowski_sum_2.h>
 #include <CGAL/approximated_offset_2.h>
 
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_with_holes_2 General_polygon_with_holes_2;
