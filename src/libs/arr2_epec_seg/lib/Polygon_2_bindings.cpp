@@ -7,7 +7,7 @@ Point_2& right_vertex(Polygon_2& p) { return *(p.right_vertex()); }
 Point_2& top_vertex(Polygon_2& p) { return *(p.top_vertex()); }
 Point_2& bottom_vertex(Polygon_2& p) { return *(p.bottom_vertex()); }
 
-Polygon_2* init_from_list(boost::python::list& lst)
+static Polygon_2* init_from_list(boost::python::list& lst)
 {
   auto begin = boost::python::stl_input_iterator< Point_2 >(lst);
   auto end = boost::python::stl_input_iterator< Point_2 >();
@@ -75,12 +75,12 @@ void export_Polygon_2()
     .def("bbox", &Polygon_2::bbox)
     .def("vertices", range<return_internal_reference<>>(&Polygon_2::vertices_begin, &Polygon_2::vertices_end))
     .def("edges", &edges_iterator, return_value_policy<manage_new_object>())
-    //.def("__getitem__", &Polygon_2::operator[], return_internal_reference<>())
+    .def<Point_2& (Polygon_2::*)(std::size_t)>("__getitem__", &Polygon_2::operator[], return_internal_reference<>())
     .def("left_vertex", &left_vertex, return_internal_reference<>())
     .def("right_vertex", &right_vertex, return_internal_reference<>())
     .def("top_vertex", &top_vertex, return_internal_reference<>())
     .def("bottom_vertex", &bottom_vertex, return_internal_reference<>())
-    //.def("vertex", &Polygon_2::vertex, return_internal_reference<>())
+    .def<Point_2& (Polygon_2::*)(std::size_t)>("vertex", &Polygon_2::vertex, return_internal_reference<>())
     .def("edge", &Polygon_2::edge)
     .def("clear", &Polygon_2::clear)
     .def("reverse_orientation", &Polygon_2::reverse_orientation)
