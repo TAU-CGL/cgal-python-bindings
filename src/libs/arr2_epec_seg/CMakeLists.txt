@@ -40,11 +40,33 @@ endif(WIN32)
 # endif(NOT WIN32)
 
 # Add Python bindings
-add_library(arr2_epec_seg_PYBINDINGS SHARED lib/Export_module.cpp lib/Kernel_bindings.cpp lib/Arrangement_2_bindings.cpp
-lib/Vertex_bindings.cpp lib/Halfedge_bindings.cpp lib/Face_bindings.cpp lib/Intersections_2_bindings.cpp lib/Point_location_bindings.cpp
-lib/Arr_segment_traits_bindings.cpp lib/Arr_linear_traits_bindings.cpp lib/Arr_circle_segment_traits_bindings.cpp
-lib/Arr_non_caching_segment_traits_bindings.cpp lib/Arr_conic_traits_bindings.cpp lib/Arr_Bezier_curve_traits_bindings.cpp
-lib/Arr_algebraic_segment_traits_bindings.cpp lib/Arr_rational_function_traits_bindings.cpp lib/Polygon_2_bindings.cpp lib/Polygon_with_holes_2_bindings.cpp lib/Minkowski_sum_2_bindings.cpp lib/Boolean_set_operations_2_bindings.cpp lib/Object_bindings.cpp lib/General_polygon_2_bindings.cpp lib/General_polygon_with_holes_2_bindings.cpp lib/Polygon_set_2_bindings.cpp lib/General_polygon_set_2_bindings.cpp)
+add_library(arr2_epec_seg_PYBINDINGS SHARED
+  lib/Export_module.cpp
+  lib/Kernel_bindings.cpp
+  lib/Arrangement_2_bindings.cpp
+  lib/Vertex_bindings.cpp
+  lib/Halfedge_bindings.cpp
+  lib/Face_bindings.cpp
+  lib/Intersections_2_bindings.cpp
+  lib/Point_location_bindings.cpp
+  lib/Arr_segment_traits_bindings.cpp
+  lib/Arr_linear_traits_bindings.cpp
+  lib/Arr_circle_segment_traits_bindings.cpp
+  lib/Arr_non_caching_segment_traits_bindings.cpp
+  lib/Arr_conic_traits_bindings.cpp
+  lib/Arr_Bezier_curve_traits_bindings.cpp
+  lib/Arr_algebraic_segment_traits_bindings.cpp
+  lib/Arr_rational_function_traits_bindings.cpp
+  lib/Polygon_2_bindings.cpp
+  lib/Polygon_with_holes_2_bindings.cpp
+  lib/Minkowski_sum_2_bindings.cpp
+  lib/Boolean_set_operations_2_bindings.cpp
+  lib/Object_bindings.cpp
+  lib/General_polygon_2_bindings.cpp
+  lib/General_polygon_with_holes_2_bindings.cpp
+  lib/Polygon_set_2_bindings.cpp
+  lib/General_polygon_set_2_bindings.cpp)
+
 if(WIN32)
 set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES SUFFIX ".pyd")
 endif()
@@ -52,7 +74,7 @@ target_link_libraries(arr2_epec_seg_PYBINDINGS
                       ${arr2_epec_seg}
 		      ${NON_WIN32_LIBRARIES}
                       ${Boost_LIBRARIES}
-					  ${PYTHON_LIBRARIES})
+		      ${PYTHON_LIBRARIES})
 set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES OUTPUT_NAME
 		      arr2_epec_seg)
 # don't prepend wrapper library name with lib
