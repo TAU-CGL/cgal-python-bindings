@@ -1,5 +1,5 @@
-set(PY_VERSION 3.7)
-set(BOOST_VERSION 1.69.0)
+set(PY_MIN_VERSION 3.5)
+set(BOOST_MIN_VERSION 1.68.0)
 
 # Find required libraries
 find_package(CGAL REQUIRED COMPONENTS Core)
@@ -14,15 +14,24 @@ set(CGALPY_BOOST_LIBRARIES system thread)
 
 find_package(Python3 COMPONENTS Interpreter Development)
 
-find_package(PythonLibs ${PY_VERSION} REQUIRED)
+find_package(PythonLibs ${PY_MIN_VERSION} REQUIRED)
+## Print all accessible variables
+# get_cmake_property(_variableNames VARIABLES)
+# list (SORT _variableNames)
+# foreach (_variableName ${_variableNames})
+#     message(STATUS "${_variableName}=${${_variableName}}")
+# endforeach()
+
 if (PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
   set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python)
 else()
-  set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python37)
+  # Set the Boost python library name (e.g., python35)
+  set (CGALPY_BOOST_PYTHON_LIB_NAME python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR})
+  set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} ${CGALPY_BOOST_PYTHON_LIB_NAME})
 endif()
 include_directories(${PYTHON_INCLUDE_DIRS})
 add_definitions(-DCGALPY_DEF_PYBINDINGS)
-find_package(Boost ${BOOST_VERSION} REQUIRED COMPONENTS ${CGALPY_BOOST_LIBRARIES})
+find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS ${CGALPY_BOOST_LIBRARIES})
 
 if (NOT Boost_FOUND)
   message(STATUS "This library cannot be compiled, as it requires Boost.")
