@@ -41,7 +41,7 @@ typename FT::Approximate_type& FT_approx(FT& ft)
 
 double FT_to_double(FT& ft)
 {
-  return ft.exact().to_double();
+  return CGAL::to_double(ft);
 }
 #endif
 
@@ -542,10 +542,10 @@ void export_Kernel()
   def<FT(const Vector_2&, const Vector_2&)>("determinant", &CGAL::determinant);
 
   def<bool (const Point_2&, const Point_2&, const Point_2&)>("has_larger_distace_to_point", &CGAL::has_larger_distance_to_point);
-  
+
   def<bool(const Line_2&, const Point_2&, const Point_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line);
   def<bool(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line);
-  
+
   def<bool(const Point_2&, const Point_2&, const Point_2&)>("has_smaller_distace_to_point", &CGAL::has_smaller_distance_to_point);
 
   def<bool(const Line_2&, const Point_2&, const Point_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line);
@@ -597,10 +597,10 @@ void export_Kernel()
   def<FT(const Point_2&)>("squared_radius", &CGAL::squared_radius);
 
   def<bool(const Point_2&, const Point_2&)>("x_equal", &CGAL::x_equal);
-  
+
   def<bool(const Point_2&, const Point_2&)>("y_equal", &CGAL::y_equal);
 
   def<bool(const Bbox_2&, const Bbox_2&)>("do_overlap", &CGAL::do_overlap);
-  
+
 
 }
