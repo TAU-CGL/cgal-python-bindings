@@ -8,7 +8,7 @@
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/stl_iterator.hpp>
 #include <boost/python/tuple.hpp>
-#if CGALPY_KERNEL == CGALPY_EPIEC_KERNEL
+#if CGALPY_KERNEL == CGALPY_EPIC_KERNEL
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #else
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
@@ -52,7 +52,7 @@
 using namespace boost::python;
 namespace bp = boost::python;
 
-#if CGALPY_KERNEL == CGALPY_EPIEC_KERNEL
+#if CGALPY_KERNEL == CGALPY_EPIC_KERNEL
 typedef typename CGAL::Exact_predicates_inexact_constructions_kernel     Kernel;
 typedef typename bp::return_value_policy<bp::copy_const_reference>       Kernel_return_value_policy;
 #endif
