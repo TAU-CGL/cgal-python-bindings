@@ -6,11 +6,14 @@ project(cgalpy)
 
 # Define options
 option(BUILD_SHARED_LIBS "Build shared libs instead of static libs" ON)
-option(SNAPFIXT_DEF_PYBINDINGS "Define Python bindings" OFF)
+option(CGALPY_DEF_PYBINDINGS "Define Python bindings" OFF)
+
+SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
+SET(CGALPY_TRAITS_NAME "seg" CACHE STRING "The geometry traits to use")
 
 # General
-set(SNAPFIXT_MODULES_REL_DIR cmake/modules)
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/${SNAPFIXT_MODULES_REL_DIR})
+set(CGALPY_MODULES_REL_DIR cmake/modules)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/${CGALPY_MODULES_REL_DIR})
 
 # SONAME, SOVERSION
 #
@@ -28,12 +31,12 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/${SNAPFIXT_MODULES_REL_DIR})
 #   numbers to 0.
 #
 # SOVERSION history:
-#   SNAPFIXT-0.1  : 0.1.0
+#   CGALPY-0.1  : 0.1.0
 #
-set(SNAPFIXT_SONAME_VERSION "0")
-set(SNAPFIXT_SOVERSION "0.1.0")
-message(STATUS "SNAPFIXT_SONAME_VERSION=${SNAPFIXT_SONAME_VERSION}")
-message(STATUS "SNAPFIXT_SOVERSION=${SNAPFIXT_SOVERSION}")
+set(CGALPY_SONAME_VERSION "0")
+set(CGALPY_SOVERSION "0.1.0")
+message(STATUS "CGALPY_SONAME_VERSION=${CGALPY_SONAME_VERSION}")
+message(STATUS "CGALPY_SOVERSION=${CGALPY_SOVERSION}")
 
 # Add src subdirectory
 add_subdirectory(src)
