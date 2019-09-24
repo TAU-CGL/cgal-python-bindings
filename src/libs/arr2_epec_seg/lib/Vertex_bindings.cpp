@@ -26,7 +26,7 @@ void export_Vertex()
     .def("degree", &Vertex::degree)
     .def("incident_halfedges", &halfedge_around_vertex_iterator, return_value_policy<manage_new_object>())
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
-    .def<Vertex::Data& (Vertex::*)()>("data", &Vertex::data, return_value_policy<copy_non_const_reference>()) //elementary type
+    .def<Vertex::Data& (Vertex::*)()>("data", &Vertex::data, return_value_policy<copy_non_const_reference>())
     .def("set_data", &Vertex::set_data)
 #endif
     ;

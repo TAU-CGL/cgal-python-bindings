@@ -1,5 +1,5 @@
 #include <Config.hpp>
-#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL || CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL
+#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
 #ifndef ARR_PYTHON_OVERLAY_TRAITS
 #define ARR_PYTHON_OVERLAY_TRAITS
 
@@ -11,18 +11,16 @@
 /*! \class
  *
  * An overlay-traits class for computing the overlay of two arrangement whose
- * face records are extended with auxiliary data fields, of type Data1 and
- * Data2, respectively. The resulting arrangement is also assumed to be
- * templated with the face-extended DCEL, where each face stores an auxiliary
- * Res_data field.
+ * all records are extended with auxiliary data fields, of type data_type.
+ * The resulting arrangement is also assumed to be
+ * templated with the extended DCEL.
  * The resulting data object that corresponds to the overlay of two data
- * object of type Data1 and Data2 is computed using the python functor
- * Overlay_face_data.
+ * object of type data_type is computed using the corresponding python functor
  */
 namespace bp = boost::python;
 
 template <typename ArrangementA, typename ArrangementB, typename ArrangementR, typename data_type>
-  class Arr_python_overlay_traits :
+class Arr_python_overlay_traits :
   public CGAL::_Arr_default_overlay_traits_base<ArrangementA, ArrangementB,
   ArrangementR>
 {
@@ -31,18 +29,102 @@ public:
   typedef typename ArrangementB::Face_const_handle    Face_handle_B;
   typedef typename ArrangementR::Face_handle          Face_handle_R;
 
-  typedef  Python_functor<data_type>                  Overlay_face_data;
+  typedef  Python_functor<data_type>                  Overlay_data;
 
 private:
   typedef CGAL::_Arr_default_overlay_traits_base<ArrangementA, ArrangementB,
     ArrangementR>           Arr_default_overlay_traits;
 
-  Overlay_face_data         overlay_face_data;
+  Overlay_data         overlay_vertex_data0;
+  Overlay_data         overlay_vertex_data1;
+  Overlay_data         overlay_vertex_data2;
+  Overlay_data         overlay_vertex_data3;
+  Overlay_data         overlay_vertex_data4;
+  Overlay_data         overlay_vertex_data5;
+  Overlay_data         overlay_edge_data0;
+  Overlay_data         overlay_edge_data1;
+  Overlay_data         overlay_edge_data2;
+  Overlay_data         overlay_face_data;
 
 public:
-  Arr_python_overlay_traits(bp::object py_functor) : Arr_default_overlay_traits()
+  Arr_python_overlay_traits(bp::object py_functor0, bp::object py_functor1,
+    bp::object py_functor2, bp::object py_functor3, bp::object py_functor4, 
+    bp::object py_functor5, bp::object py_functor6, bp::object py_functor7,
+    bp::object py_functor8, bp::object py_functor9) : Arr_default_overlay_traits()
   {
-    overlay_face_data = Overlay_face_data(py_functor);
+    overlay_vertex_data0 = Overlay_data(py_functor0);
+    overlay_vertex_data1 = Overlay_data(py_functor1);
+    overlay_vertex_data2 = Overlay_data(py_functor2);
+    overlay_vertex_data3 = Overlay_data(py_functor3);
+    overlay_vertex_data4 = Overlay_data(py_functor4);
+    overlay_vertex_data5 = Overlay_data(py_functor5);
+    overlay_edge_data0 = Overlay_data(py_functor6);
+    overlay_edge_data1 = Overlay_data(py_functor7);
+    overlay_edge_data2 = Overlay_data(py_functor8);
+    overlay_face_data = Overlay_data(py_functor9);
+  }
+
+  /*!constructs the vertex v induced by the coinciding vertices v1 and v2.
+   */
+  virtual void create_vertex(Vertex_handle_A v1, Vertex_handle_B v2, Vertex_handle_R v)
+  {
+    v->set_data(overlay_vertex_data0(v1->data(), v2->data()));
+  }
+
+  /*!constructs the vertex v induced by the vertex v1 that lies on the halfedge e2.
+ */
+  virtual void create_vertex(Vertex_handle_A v1, Halfedge_handle_B e2, Vertex_handle_R v)
+  {
+    v->set_data(overlay_vertex_data1(v1->data(), e2->data()));
+  }
+
+  /*!constructs the vertex v induced by the vertex v1 that lies inside the face f2.
+*/
+  virtual void create_vertex(Vertex_handle_A v1, Face_handle_B f2, Vertex_handle_R v)
+  {
+    v->set_data(overlay_vertex_data2(v1->data(), f2->data()));
+  }
+
+  /*constructs the vertex v induced by the vertex v2 that lies on the halfedge e1.
+*/
+  virtual void create_vertex(Halfedge_handle_A e1, Vertex_handle_B v2, Vertex_handle_R v)
+  {
+    v->set_data(overlay_vertex_data3(e1->data(), v2->data()));
+  }
+
+  /*constructs the vertex v induced by the vertex v2 that lies inside the face f1.
+*/
+  virtual void create_vertex(Face_handle_A f1, Vertex_handle_B v2, Vertex_handle_R v)
+  {
+    v->set_data(overlay_vertex_data4(f1->data(), v2->data()));
+  }
+
+  /*constructs the vertex v induced by the intersection of the halfedges e1 and e2.
+*/
+  virtual void create_vertex(Halfedge_handle_A e1, Halfedge_handle_B e2, Vertex_handle_R v)
+  {
+    v->set_data(overlay_vertex_data5(e1->data(), e2->data()));
+  }
+
+  /*constructs the halfedge e induced by an overlap between the halfedges e1 and e2.
+  */
+  virtual void create_edge(Halfedge_handle_A e1, Halfedge_handle_B e2, Halfedge_handle_R e)
+  {
+    e->set_data(overlay_edge_data0(e1->data(), e2->data()));
+  }
+
+  /*constructs the halfedge e induced by the halfedge e1 that lies inside the face f2.
+*/
+  virtual void create_edge(Halfedge_handle_A e1, Face_handle_B f2, Halfedge_handle_R e)
+  {
+    e->set_data(overlay_edge_data1(e1->data(), f2->data()));
+  }
+
+  /*constructs the halfedge e induced by the halfedge e2 that lies inside the face f1.
+*/
+  virtual void create_edge(Face_handle_A f1, Halfedge_handle_B e2, Halfedge_handle_R e)
+  {
+    e->set_data(overlay_edge_data1(f1->data(), e2->data()));
   }
 
   /*! Create a face f that matches the overlapping region between f1 and f2.

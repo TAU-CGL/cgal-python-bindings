@@ -36,7 +36,7 @@ void export_Face()
     .def("isolated_vertices", range<return_internal_reference<>>(&isolated_vertices_begin, &isolated_vertices_end))
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL || CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL
     .def("set_data", &Face::set_data)
-    .def<Face::Data& (Face::*)()>("data", &Face::data, return_value_policy<copy_non_const_reference>()) //elementary type
+    .def<Face::Data& (Face::*)()>("data", &Face::data, return_value_policy<copy_non_const_reference>())
 #endif
     ;
   bind_iterator<Iterator_from_circulator<Ccb_halfedge_circulator>>("Ccb_halfedge_iterator");
