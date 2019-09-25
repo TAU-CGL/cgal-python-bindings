@@ -1,5 +1,12 @@
-#include <Config.hpp>
-#include <Common.hpp>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+
+#include "config.hpp"
+#include "common.hpp"
 
 template<typename T0, typename T1>
 bool is_type(Object& o)

@@ -1,9 +1,16 @@
-#include <Common.hpp>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+
+#include "common.hpp"
+
 #include <CGAL/Arr_naive_point_location.h>
 #include <CGAL/Arr_walk_along_line_point_location.h>
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
-
 
 typedef typename CGAL::Arr_naive_point_location<Arrangement_2>           Naive_pl;
 typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
@@ -44,7 +51,6 @@ void Landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
   pl.attach(arr);
 }
 #endif
-
 
 void export_Point_location()
 {

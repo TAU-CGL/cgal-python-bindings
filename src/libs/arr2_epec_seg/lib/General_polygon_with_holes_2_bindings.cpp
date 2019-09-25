@@ -1,13 +1,22 @@
-#include <Config.hpp>
-#include <Common.hpp>
-#include <CGAL/Gps_circle_segment_traits_2.h>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
+#include "config.hpp"
+#include "common.hpp"
+
+#include <CGAL/Gps_circle_segment_traits_2.h>
 
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel> CSTraits;
 typedef typename CSTraits::Polygon_2                       General_polygon_2;
-typedef typename CSTraits::Polygon_with_holes_2            General_polygon_with_holes_2;
+typedef typename CSTraits::Polygon_with_holes_2
+  General_polygon_with_holes_2;
 typedef typename CGAL::General_polygon_set_2<CSTraits>     General_polygon_set_2;
-typedef General_polygon_2::X_monotone_curve_2              CS_traits_X_monotone_curve_2;
+typedef General_polygon_2::X_monotone_curve_2
+  CS_traits_X_monotone_curve_2;
 typedef General_polygon_2::Curve_iterator                  Curve_iterator;
 
 General_polygon_with_holes_2* init_General_polygon_with_holes_2(General_polygon_2& p, boost::python::list& lst)

@@ -1,47 +1,56 @@
-#include <Common.hpp>
-typedef typename Kernel::Intersect_2                                     Intersect_2;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Iso_rectangle_2)>::type
-Point_iso_rectangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Line_2)>::type
-Point_line_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Ray_2)>::type
-Point_ray_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Segment_2)>::type
-Point_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Triangle_2)>::type
-Point_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Iso_rectangle_2)>::type
-Iso_rectangle_iso_rectangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Line_2)>::type
-Iso_rectangle_line_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Ray_2)>::type
-Iso_rectangle_ray_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Segment_2)>::type
-Iso_rectangle_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Triangle_2)>::type
-Iso_rectangle_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
-Line_line_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Ray_2)>::type
-Line_ray_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Segment_2)>::type
-Line_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Triangle_2)>::type
-Line_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Ray_2)>::type
-Ray_ray_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Segment_2)>::type
-Ray_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Triangle_2)>::type
-Ray_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Segment_2)>::type
-Segment_segment_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Triangle_2)>::type
-Segment_triangle_intersection_result;
-typedef typename CGAL::cpp11::result_of<Intersect_2(Triangle_2, Triangle_2)>::type
-Triangle_triangle_intersection_result;
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-Point_iso_rectangle_intersection_result point_iso_rectangle_intersection(Point_2& p1, Iso_rectangle_2& i1)
+#include "common.hpp"
+
+typedef typename Kernel::Intersect_2                               Intersect_2;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Iso_rectangle_2)>::type
+  Point_iso_rectangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Line_2)>::type
+  Point_line_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Ray_2)>::type
+  Point_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Segment_2)>::type
+  Point_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Triangle_2)>::type
+  Point_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Iso_rectangle_2)>::type
+  Iso_rectangle_iso_rectangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Line_2)>::type
+  Iso_rectangle_line_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Ray_2)>::type
+  Iso_rectangle_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Segment_2)>::type
+  Iso_rectangle_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Iso_rectangle_2, Triangle_2)>::type
+  Iso_rectangle_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
+  Line_line_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Ray_2)>::type
+  Line_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Segment_2)>::type
+  Line_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Line_2, Triangle_2)>::type
+  Line_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Ray_2)>::type
+  Ray_ray_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Segment_2)>::type
+  Ray_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Ray_2, Triangle_2)>::type
+  Ray_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Segment_2)>::type
+  Segment_segment_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Segment_2, Triangle_2)>::type
+  Segment_triangle_intersection_result;
+typedef typename CGAL::cpp11::result_of<Intersect_2(Triangle_2, Triangle_2)>::type
+  Triangle_triangle_intersection_result;
+
+Point_iso_rectangle_intersection_result
+point_iso_rectangle_intersection(Point_2& p1, Iso_rectangle_2& i1)
 {
   return intersection(p1, i1);
 }
@@ -56,37 +65,45 @@ Point_ray_intersection_result point_ray_intersection(Point_2& p1, Ray_2& r1)
   return intersection(p1, r1);
 }
 
-Point_segment_intersection_result point_segment_intersection(Point_2& p1, Segment_2& s1)
+Point_segment_intersection_result point_segment_intersection(Point_2& p1,
+                                                             Segment_2& s1)
 {
   return intersection(p1, s1);
 }
 
-Point_triangle_intersection_result point_triangle_intersection(Point_2& p1, Triangle_2& t1)
+Point_triangle_intersection_result point_triangle_intersection(Point_2& p1,
+                                                               Triangle_2& t1)
 {
   return intersection(p1, t1);
 }
 
-Iso_rectangle_iso_rectangle_intersection_result iso_rectangle_iso_rectangle_intersection(Iso_rectangle_2& i1, Iso_rectangle_2& i2)
+Iso_rectangle_iso_rectangle_intersection_result
+iso_rectangle_iso_rectangle_intersection(Iso_rectangle_2& i1,
+                                         Iso_rectangle_2& i2)
 {
   return intersection(i1, i2);
 }
 
-Iso_rectangle_line_intersection_result iso_rectangle_line_intersection(Iso_rectangle_2& i1, Line_2& l1)
+Iso_rectangle_line_intersection_result
+iso_rectangle_line_intersection(Iso_rectangle_2& i1, Line_2& l1)
 {
   return intersection(i1, l1);
 }
 
-Iso_rectangle_ray_intersection_result iso_rectangle_ray_intersection(Iso_rectangle_2& i1, Ray_2& r1)
+Iso_rectangle_ray_intersection_result
+iso_rectangle_ray_intersection(Iso_rectangle_2& i1, Ray_2& r1)
 {
   return intersection(i1, r1);
 }
 
-Iso_rectangle_segment_intersection_result iso_rectangle_segment_intersection(Iso_rectangle_2& i1, Segment_2& s1)
+Iso_rectangle_segment_intersection_result
+iso_rectangle_segment_intersection(Iso_rectangle_2& i1, Segment_2& s1)
 {
   return intersection(i1, s1);
 }
 
-Iso_rectangle_triangle_intersection_result iso_rectangle_triangle_intersection(Iso_rectangle_2& i1, Triangle_2& t1)
+Iso_rectangle_triangle_intersection_result
+iso_rectangle_triangle_intersection(Iso_rectangle_2& i1, Triangle_2& t1)
 {
   return intersection(i1, t1);
 }
@@ -101,12 +118,14 @@ Line_ray_intersection_result line_ray_intersection(Line_2& l1, Ray_2& r1)
   return intersection(l1, r1);
 }
 
-Line_segment_intersection_result line_segment_intersection(Line_2& l1, Segment_2& s1)
+Line_segment_intersection_result line_segment_intersection(Line_2& l1,
+                                                           Segment_2& s1)
 {
   return intersection(l1, s1);
 }
 
-Line_triangle_intersection_result line_triangle_intersection(Line_2& l1, Triangle_2& t1)
+Line_triangle_intersection_result line_triangle_intersection(Line_2& l1,
+                                                             Triangle_2& t1)
 {
   return intersection(l1, t1);
 }
@@ -116,27 +135,32 @@ Ray_ray_intersection_result ray_ray_intersection(Ray_2& r1, Ray_2& r2)
   return intersection(r1, r2);
 }
 
-Ray_segment_intersection_result ray_segment_intersection(Ray_2& r1, Segment_2& s1)
+Ray_segment_intersection_result ray_segment_intersection(Ray_2& r1,
+                                                         Segment_2& s1)
 {
   return intersection(r1, s1);
 }
 
-Ray_triangle_intersection_result ray_triangle_intersection(Ray_2& r1, Triangle_2& t1)
+Ray_triangle_intersection_result ray_triangle_intersection(Ray_2& r1,
+                                                           Triangle_2& t1)
 {
   return intersection(r1, t1);
 }
 
-Segment_segment_intersection_result segment_segment_intersection(Segment_2& s1, Segment_2& s2)
+Segment_segment_intersection_result segment_segment_intersection(Segment_2& s1,
+                                                                 Segment_2& s2)
 {
   return intersection(s1, s2);
 }
 
-Segment_triangle_intersection_result segment_triangle_intersection(Segment_2& s1, Triangle_2& t1)
+Segment_triangle_intersection_result
+segment_triangle_intersection(Segment_2& s1, Triangle_2& t1)
 {
   return intersection(s1, t1);
 }
 
-Triangle_triangle_intersection_result triangle_triangle_intersection(Triangle_2& t1, Triangle_2& t2)
+Triangle_triangle_intersection_result
+triangle_triangle_intersection(Triangle_2& t1, Triangle_2& t2)
 {
   return intersection(t1, t2);
 }

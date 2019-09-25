@@ -75,6 +75,11 @@ target_link_libraries(arr2_epec_seg_PYBINDINGS
 		      ${NON_WIN32_LIBRARIES}
                       ${Boost_LIBRARIES}
 		      ${PYTHON_LIBRARIES})
+
+list (GET CGALPY_KERNEL_SHORT_NAMES ${CGALPY_KERNEL} CGALPY_KERNEL_PART)
+list (GET CGALPY_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_GEOMETRY_TRAITS} CGALPY_GT_PART)
+list (GET CGALPY_DCEL_SHORT_NAMES ${CGALPY_DCEL} CGALPY_DCEL_PART)
+
 set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES OUTPUT_NAME
 		      arr2_epec_seg)
 # don't prepend wrapper library name with lib
