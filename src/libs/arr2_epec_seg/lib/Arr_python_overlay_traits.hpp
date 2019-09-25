@@ -1,4 +1,4 @@
-#include <Config.hpp>
+#include "config.hpp"
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
 #ifndef ARR_PYTHON_OVERLAY_TRAITS
 #define ARR_PYTHON_OVERLAY_TRAITS
@@ -19,10 +19,11 @@
  */
 namespace bp = boost::python;
 
-template <typename ArrangementA, typename ArrangementB, typename ArrangementR, typename data_type>
+template <typename ArrangementA, typename ArrangementB, typename ArrangementR,
+          typename data_type>
 class Arr_python_overlay_traits :
   public CGAL::_Arr_default_overlay_traits_base<ArrangementA, ArrangementB,
-  ArrangementR>
+                                                ArrangementR>
 {
 public:
   typedef typename ArrangementA::Vertex_const_handle    Vertex_handle_A;
@@ -41,25 +42,27 @@ public:
 
 private:
   typedef CGAL::_Arr_default_overlay_traits_base<ArrangementA, ArrangementB,
-    ArrangementR>           Arr_default_overlay_traits;
+                                                 ArrangementR>
+    Arr_default_overlay_traits;
 
-  Overlay_data         overlay_vertex_data0;
-  Overlay_data         overlay_vertex_data1;
-  Overlay_data         overlay_vertex_data2;
-  Overlay_data         overlay_vertex_data3;
-  Overlay_data         overlay_vertex_data4;
-  Overlay_data         overlay_vertex_data5;
-  Overlay_data         overlay_edge_data0;
-  Overlay_data         overlay_edge_data1;
-  Overlay_data         overlay_edge_data2;
-  Overlay_data         overlay_face_data;
+  Overlay_data overlay_vertex_data0;
+  Overlay_data overlay_vertex_data1;
+  Overlay_data overlay_vertex_data2;
+  Overlay_data overlay_vertex_data3;
+  Overlay_data overlay_vertex_data4;
+  Overlay_data overlay_vertex_data5;
+  Overlay_data overlay_edge_data0;
+  Overlay_data overlay_edge_data1;
+  Overlay_data overlay_edge_data2;
+  Overlay_data overlay_face_data;
 
 public:
   Arr_python_overlay_traits(bp::object py_functor0, bp::object py_functor1,
                             bp::object py_functor2, bp::object py_functor3,
                             bp::object py_functor4, bp::object py_functor5,
                             bp::object py_functor6, bp::object py_functor7,
-                            bp::object py_functor8, bp::object py_functor9) : Arr_default_overlay_traits()
+                            bp::object py_functor8, bp::object py_functor9) :
+    Arr_default_overlay_traits()
   {
     overlay_vertex_data0 = Overlay_data(py_functor0);
     overlay_vertex_data1 = Overlay_data(py_functor1);

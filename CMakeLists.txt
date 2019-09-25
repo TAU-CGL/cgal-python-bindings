@@ -8,8 +8,39 @@ project(cgalpy)
 option(BUILD_SHARED_LIBS "Build shared libs instead of static libs" ON)
 option(CGALPY_DEF_PYBINDINGS "Define Python bindings" OFF)
 
+# Kernel options
+set(CGALPY_EPEC_KERNEL 0)
+set(CGALPY_EPIC_KERNEL 1)
+set(CGALPY_KERNEL_SHORT_NAMES "epec" "epic")
+set(CGALPY_KERNEL_NAMES "epec" "epic")
+# Default
+set(CGALPY_KERNEL ${CGALPY_EPEC_KERNEL})
 SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
-SET(CGALPY_TRAITS_NAME "seg" CACHE STRING "The geometry traits to use")
+
+# Geometry Traits
+set(CGALPY_ARR_LINEAR_GEOMETRY_TRAITS 0)
+set(CGALPY_ARR_SEGMENT_GEOMETRY_TRAITS 1)
+set(CGALPY_ARR_NON_CACHING_SEGMENT_GEOMETRY_TRAITS 2)
+set(CGALPY_ARR_CONIC_GEOMETRY_TRAITS 3)
+set(CGALPY_ARR_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS 4)
+set(CGALPY_ARR_CIRCLE_SEGMENT_GEOMETRY_TRAITS 5)
+set(CGALPY_GEOMETRY_TRAITS_SHORT_NAMES linear seg ncseg conic alg cs)
+set(CGALPY_GEOMETRY_TRAITS_NAMES linear segment nonCachingSegment conic algebraic circleSegment)
+# Default
+SET(CGALPY_GEOMETRY_TRAITS ${CGALPY_ARR_SEGMENT_GEOMETRY_TRAITS})
+SET(CGALPY_GEOMETRY_TRAITS_NAME "segment" CACHE STRING "The geometry traits to use")
+
+# DCEL
+set(CGALPY_ARR_PLAIN_DCEL 0)
+set(CGALPY_ARR_FACE_EXTENDED_DCEL 1)
+set(CGALPY_ARR_HALFEDGE_EXTENDED_DCEL 2)
+set(CGALPY_ARR_VERTEX_EXTENDED_DCEL 3)
+set(CGALPY_ARR_ALL_EXTENDED_DCEL 4)
+set(CGALPY_DCEL_SHORT_NAMES "" "fex" "hex" "vex" "ex")
+set(CGALPY_DCEL_NAMES "plain" "faceExtended" "halfedgeExtended" "vertexExtended" "allExtended")
+#
+SET(CGALPY_DCEL ${CGALPY_ARR_PLAIN_DCEL})
+SET(CGALPY_DCEL_NAME "plain" CACHE STRING "The DCEL to use")
 
 # General
 set(CGALPY_MODULES_REL_DIR cmake/modules)

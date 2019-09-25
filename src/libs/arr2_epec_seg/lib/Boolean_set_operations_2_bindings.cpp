@@ -1,7 +1,16 @@
-#include <Config.hpp>
-#include <Common.hpp>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+
+#include "config.hpp"
+#include "common.hpp"
+
 #include <CGAL/connect_holes.h>
 #include <CGAL/Boolean_set_operations_2.h>
+
 void complement0(Polygon_2& pgn, Polygon_with_holes_2& res)
 {
   CGAL::complement(pgn, res);
@@ -11,10 +20,7 @@ void complement1(Polygon_with_holes_2& pgn, boost::python::list& lst)
 {
   auto v = std::vector<Polygon_with_holes_2>();
   CGAL::complement(pgn, std::back_inserter(v));
-  for (auto p : v)
-  {
-    lst.append(p);
-  }
+  for (auto p : v) { lst.append(p); }
 }
 
 template <typename T0, typename T1>
@@ -24,7 +30,8 @@ bool do_intersect(T0& p0, T1& p1)
 }
 
 template<typename T0, typename T1>
-bool do_intersect_range(boost::python::list& polygon_lst, boost::python::list& pwh_lst)
+bool do_intersect_range(boost::python::list& polygon_lst,
+                        boost::python::list& pwh_lst)
 {
   auto begin0 = boost::python::stl_input_iterator<T0>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<T0>();
@@ -78,7 +85,8 @@ bool join_linear(T0& p0, T1& p1, Polygon_with_holes_2& pwh)
 }
 
 template<typename T0, typename T1>
-void join_range(boost::python::list& polygon_lst, boost::python::list& pwh_lst, boost::python::list& lst)
+void join_range(boost::python::list& polygon_lst, boost::python::list& pwh_lst,
+                boost::python::list& lst)
 {
   auto begin0 = boost::python::stl_input_iterator<T0>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<T0>();
@@ -87,7 +95,8 @@ void join_range(boost::python::list& polygon_lst, boost::python::list& pwh_lst, 
   auto v0 = std::vector<T0>(begin0, end0);
   auto v1 = std::vector<T1>(begin1, end1);
   auto res = std::vector<T1>();
-  CGAL::join(v0.begin(), v0.end(), v1.begin(), v1.end(), std::back_inserter(res));
+  CGAL::join(v0.begin(), v0.end(), v1.begin(), v1.end(),
+             std::back_inserter(res));
   for (auto p : res) lst.append(p);
 }
 
@@ -103,7 +112,9 @@ void symmetric_difference_linear(T0& p0, T1& p1, boost::python::list& lst)
 }
 
 template<typename T0, typename T1>
-void symmetric_difference_range(boost::python::list& polygon_lst, boost::python::list& pwh_lst, boost::python::list& lst)
+void symmetric_difference_range(boost::python::list& polygon_lst,
+                                boost::python::list& pwh_lst,
+                                boost::python::list& lst)
 {
   auto begin0 = boost::python::stl_input_iterator<T0>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<T0>();
@@ -112,7 +123,8 @@ void symmetric_difference_range(boost::python::list& polygon_lst, boost::python:
   auto v0 = std::vector<T0>(begin0, end0);
   auto v1 = std::vector<T1>(begin1, end1);
   auto res = std::vector<T1>();
-  CGAL::symmetric_difference(v0.begin(), v0.end(), v1.begin(), v1.end(), std::back_inserter(res));
+  CGAL::symmetric_difference(v0.begin(), v0.end(), v1.begin(), v1.end(),
+                             std::back_inserter(res));
   for (auto p : res) lst.append(p);
 }
 

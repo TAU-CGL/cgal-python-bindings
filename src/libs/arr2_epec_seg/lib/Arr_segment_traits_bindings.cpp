@@ -1,6 +1,15 @@
-#include <Config.hpp>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
+
+#include "config.hpp"
 #if CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
-#include <Common.hpp>
+#include "common.hpp"
+
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 

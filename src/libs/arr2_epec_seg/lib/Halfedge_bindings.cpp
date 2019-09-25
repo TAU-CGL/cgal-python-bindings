@@ -1,5 +1,11 @@
-#include <Common.hpp>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
+#include "common.hpp"
 
 Vertex& source(Halfedge& e) { return (*(e.source())); }
 Vertex& target(Halfedge& e) { return (*(e.target())); }
@@ -34,4 +40,3 @@ void export_Halfedge()
 #endif
     ;
 }
-
