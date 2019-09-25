@@ -79,9 +79,10 @@ target_link_libraries(arr2_epec_seg_PYBINDINGS
 list (GET CGALPY_KERNEL_SHORT_NAMES ${CGALPY_KERNEL} CGALPY_KERNEL_PART)
 list (GET CGALPY_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_GEOMETRY_TRAITS} CGALPY_GT_PART)
 list (GET CGALPY_DCEL_SHORT_NAMES ${CGALPY_DCEL} CGALPY_DCEL_PART)
+set(CGALPY_LIB_NAME "${CGALPY_KERNEL_PART}_${CGALPY_GT_PART}_${CGALPY_DCEL_PART}")
 
 set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES OUTPUT_NAME
-		      arr2_epec_seg)
+		      ${CGALPY_LIB_NAME})
 # don't prepend wrapper library name with lib
 set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES PREFIX "")
 
