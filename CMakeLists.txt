@@ -36,7 +36,7 @@ set(CGALPY_ARR_FACE_EXTENDED_DCEL 1)
 set(CGALPY_ARR_HALFEDGE_EXTENDED_DCEL 2)
 set(CGALPY_ARR_VERTEX_EXTENDED_DCEL 3)
 set(CGALPY_ARR_ALL_EXTENDED_DCEL 4)
-set(CGALPY_DCEL_SHORT_NAMES "" "fex" "hex" "vex" "ex")
+set(CGALPY_DCEL_SHORT_NAMES "" "_fex" "_hex" "_vex" "_ex")
 set(CGALPY_DCEL_NAMES "plain" "faceExtended" "halfedgeExtended" "vertexExtended" "allExtended")
 #
 SET(CGALPY_DCEL ${CGALPY_ARR_PLAIN_DCEL})
