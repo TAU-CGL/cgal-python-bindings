@@ -204,7 +204,6 @@ void export_Kernel()
   //  ;
 
   class_<Point_2>("Point_2")
-    .enable_pickling()
     .def(init<>())
     .def(init<double, double>())
     .def(init<FT&, FT&>())
