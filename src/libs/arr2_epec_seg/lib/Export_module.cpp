@@ -1,7 +1,12 @@
-#include <Config.hpp>
-#include <Common.hpp>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-
+#include "config.hpp"
+#include "common.hpp"
 
 void export_Kernel();
 void export_Arrangement_2();
@@ -30,7 +35,7 @@ void export_Boolean_set_operations_2();
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 {
   using namespace boost::python;
-  
+
   export_Kernel();
   export_Arrangement_2();
   export_Object();

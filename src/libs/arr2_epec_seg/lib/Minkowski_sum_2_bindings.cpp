@@ -1,6 +1,13 @@
-#include <Config.hpp>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+
+#include "config.hpp"
 #ifdef MINKOWSKI_SUM
-#include <Common.hpp>
+#include "common.hpp"
 #include <CGAL/minkowski_sum_2.h>
 #include <CGAL/approximated_offset_2.h>
 

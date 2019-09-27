@@ -1,4 +1,11 @@
-#include <Common.hpp>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+
+#include "common.hpp"
 
 Iterator_from_circulator<Ccb_halfedge_circulator>* outer_ccb(Face& f)
 {
