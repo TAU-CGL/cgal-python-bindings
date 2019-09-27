@@ -146,6 +146,7 @@ typedef typename Arrangement_2::Inner_ccb_iterator						            Inner_ccb_it
 typedef typename Arrangement_2::Ccb_halfedge_circulator					          Ccb_halfedge_circulator;
 typedef typename Arrangement_2::Halfedge_around_vertex_circulator		      Halfedge_around_vertex_circulator;
 typedef typename Arrangement_2::Halfedge_iterator									        Halfedge_iterator;
+typedef typename Arrangement_2::Edge_iterator                             Edge_iterator;
 typedef typename Arrangement_2::Halfedge_const_handle                     Halfedge_const_handle;
 typedef typename Arrangement_2::Halfedge									                Halfedge;
 typedef typename Arrangement_2::Face_iterator							                Face_iterator;
