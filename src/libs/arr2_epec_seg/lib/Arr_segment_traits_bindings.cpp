@@ -13,6 +13,8 @@
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
+Segment_2 to_segment(Curve_2& c) { return Segment_2(c); }
+
 void export_Arr_segment_traits()
 {
   using namespace boost::python;
@@ -34,6 +36,7 @@ void export_Arr_segment_traits()
   .def("is_in_x_range", &Curve_2::is_in_x_range)
   .def("is_in_y_range", &Curve_2::is_in_y_range)
   .def("bbox", &Curve_2::bbox)
+  .def("segment", &to_segment)
   .def(self_ns::str(self_ns::self))
   ;
 }

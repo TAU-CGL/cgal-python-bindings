@@ -115,6 +115,7 @@ Face& remove_edge_free(Arrangement_2& arr, Halfedge& e)
   auto handle = e.twin();
   return *(CGAL::remove_edge(arr, handle));
 }
+
 bool remove_vertex_free(Arrangement_2& arr, Vertex& v)
 {
   return CGAL::remove_vertex(arr, Vertex_iterator(&v));
@@ -211,14 +212,14 @@ Halfedge& merge_edge(Arrangement_2& arr, Halfedge& e1, Halfedge& e2,
 Face& remove_edge(Arrangement_2& arr, Halfedge& e)
 {
   auto handle = e.twin();
-  return *(CGAL::remove_edge(arr, handle));
+  return *(arr.remove_edge(handle));
 }
 Vertex_iterator vertices_begin(Arrangement_2& arr) { return arr.vertices_begin(); }
 Vertex_iterator vertices_end(Arrangement_2& arr) { return arr.vertices_end(); }
 Halfedge_iterator halfedges_begin(Arrangement_2& arr) { return arr.halfedges_begin(); }
 Halfedge_iterator halfedges_end(Arrangement_2& arr) { return arr.halfedges_end(); }
-Halfedge_iterator edges_begin(Arrangement_2& arr) { return arr.edges_begin(); }
-Halfedge_iterator edges_end(Arrangement_2& arr) { return arr.edges_end(); }
+Edge_iterator edges_begin(Arrangement_2& arr) { return arr.edges_begin(); }
+Edge_iterator edges_end(Arrangement_2& arr) { return arr.edges_end(); }
 Face_iterator faces_begin(Arrangement_2& arr) { return arr.faces_begin(); }
 Face_iterator faces_end(Arrangement_2& arr) { return arr.faces_end(); }
 Face_iterator unbounded_faces_begin(Arrangement_2& arr) { return arr.unbounded_faces_begin(); }
