@@ -1,13 +1,23 @@
-#include <Config.hpp>
-#include <Common.hpp>
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+
+#include "config.hpp"
+#include "common.hpp"
+
 #include <CGAL/Gps_circle_segment_traits_2.h>
 #include <CGAL/General_polygon_set_2.h>
 
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel> CSTraits;
 typedef typename CSTraits::Polygon_2                       General_polygon_2;
-typedef typename CSTraits::Polygon_with_holes_2            General_polygon_with_holes_2;
+typedef typename CSTraits::Polygon_with_holes_2
+  General_polygon_with_holes_2;
 typedef typename CGAL::General_polygon_set_2<CSTraits>     General_polygon_set_2;
-typedef General_polygon_2::X_monotone_curve_2              CS_traits_X_monotone_curve_2;
+typedef General_polygon_2::X_monotone_curve_2
+  CS_traits_X_monotone_curve_2;
 typedef General_polygon_2::Curve_iterator                  Curve_iterator;
 typedef CSTraits::Point_2                                  CSPoint_2;
 
@@ -63,12 +73,15 @@ void intersection(General_polygon_set_2& ps, T& other)
   ps.intersection(other);
 }
 
-void intersection(General_polygon_set_2& ps0, General_polygon_set_2& ps1, General_polygon_set_2& ps2)
+void intersection(General_polygon_set_2& ps0, General_polygon_set_2& ps1,
+                  General_polygon_set_2& ps2)
 {
   ps0.intersection(ps1, ps2);
 }
 
-void intersection_range0(General_polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
+void intersection_range0(General_polygon_set_2& ps,
+                         boost::python::list& polygon_lst,
+                         boost::python::list& pwh_lst)
 {
   auto begin0 = boost::python::stl_input_iterator<General_polygon_2>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<General_polygon_2>();
@@ -94,12 +107,14 @@ void join(General_polygon_set_2& ps, T& other)
   ps.join(other);
 }
 
-void join(General_polygon_set_2& ps0, General_polygon_set_2& ps1, General_polygon_set_2& ps2)
+void join(General_polygon_set_2& ps0, General_polygon_set_2& ps1,
+          General_polygon_set_2& ps2)
 {
   ps0.join(ps1, ps2);
 }
 
-void join_range0(General_polygon_set_2& ps, boost::python::list& polygon_lst, boost::python::list& pwh_lst)
+void join_range0(General_polygon_set_2& ps, boost::python::list& polygon_lst,
+                 boost::python::list& pwh_lst)
 {
   auto begin0 = boost::python::stl_input_iterator<General_polygon_2>(polygon_lst);
   auto end0 = boost::python::stl_input_iterator<General_polygon_2>();
@@ -125,7 +140,8 @@ void difference(General_polygon_set_2& ps, T& other)
   ps.difference(other);
 }
 
-void difference(General_polygon_set_2& ps0, General_polygon_set_2& ps1, General_polygon_set_2& ps2)
+void difference(General_polygon_set_2& ps0, General_polygon_set_2& ps1,
+                General_polygon_set_2& ps2)
 {
   ps0.difference(ps1, ps2);
 }
@@ -136,7 +152,9 @@ void symmetric_difference(General_polygon_set_2& ps, T& other)
   ps.symmetric_difference(other);
 }
 
-void symmetric_difference(General_polygon_set_2& ps0, General_polygon_set_2& ps1, General_polygon_set_2& ps2)
+void symmetric_difference(General_polygon_set_2& ps0,
+                          General_polygon_set_2& ps1,
+                          General_polygon_set_2& ps2)
 {
   ps0.symmetric_difference(ps1, ps2);
 }
