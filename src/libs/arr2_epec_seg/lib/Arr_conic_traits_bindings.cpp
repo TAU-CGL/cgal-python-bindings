@@ -24,6 +24,7 @@ void export_Arr_conic_traits()
     .def("set_source", &Curve_2::set_source)
     .def("set_target", &Curve_2::set_target)
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     ;
 
   class_<X_monotone_curve_2>("Curve_2")

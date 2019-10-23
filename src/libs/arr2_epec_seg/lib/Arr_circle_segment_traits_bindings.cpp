@@ -32,6 +32,7 @@ void export_Arr_circle_segment_traits()
     .def("abs", &CoordNT::abs)
     //.def("compare", &CoordNT::compare)
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
     .def(self != self)
@@ -58,6 +59,7 @@ void export_Arr_circle_segment_traits()
     .def(self == self)
     .def(self != self)
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     ;
 
   class_<X_monotone_curve_2>("X_monotone_curve_2")
@@ -77,6 +79,7 @@ void export_Arr_circle_segment_traits()
     .def("supporting_circle", &X_monotone_curve_2::supporting_circle)
     .def("bbox", &X_monotone_curve_2::bbox)
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     ;
 
   class_<Curve_2>("Curve_2")

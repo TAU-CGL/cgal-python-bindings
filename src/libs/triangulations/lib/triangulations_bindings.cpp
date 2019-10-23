@@ -133,6 +133,12 @@ typename T::Triangle triangle(T& t, All_faces_iterator& f)
   return res;
 }
 
+template<typename T>
+void insert_point(T& t, Point_2& p)
+{
+  t.insert(p);
+}
+
 template <typename T, typename C>
 void bind_triangulation(C c)
 {
@@ -143,6 +149,7 @@ void bind_triangulation(C c)
     .def(init<>())
     .def("clear", &T::clear)
     .def("insert", &insert_list<T>)
+    .def("insert", &insert_point<T>)
     //.def("flip", &flip<T>)
     //.def("triangle", &triangle<T>)
     .def("all_vertices", range<return_internal_reference<>>(&T::all_vertices_begin, &T::all_vertices_end))
@@ -151,7 +158,6 @@ void bind_triangulation(C c)
     .def("finite_edges", &finite_edges_iterator<T>, return_value_policy<manage_new_object>())
     .def("all_faces", range<return_internal_reference<>>(&T::all_faces_begin, &T::all_faces_end))
     .def("finite_faces", range<return_internal_reference<>>(&T::finite_faces_begin, &T::finite_faces_end))
-    .def("finite_faces_begin", &T::finite_faces_begin)
     .def("points", range<return_internal_reference<>>(&T::points_begin, &T::points_end))
     .def<Segment_2(T::*)(const Edge&) const>("segment", &T::segment)
     .def<bool (T::*)(const Edge&) const>("is_infinite", &T::is_infinite)
@@ -176,8 +182,6 @@ BOOST_PYTHON_MODULE(triangulations)
     ;
   class_<Face>("Triangulation_face")
     ;
-
-  class_<Finite_faces_iterator>("ffi");
 
   bind_copy_iterator<CopyIterator<All_edges_iterator>>("Triangulation_all_edges_iterator");
   bind_copy_iterator<CopyIterator<Finite_edges_iterator>>("Triangulation_finite_edges_iterator");
