@@ -227,12 +227,17 @@ Face_iterator unbounded_faces_end(Arrangement_2& arr) { return arr.unbounded_fac
 Face& unbounded_face(Arrangement_2& arr) { return *(arr.unbounded_face()); }
 Face& fictitious_face(Arrangement_2& arr) { return *(arr.fictitious_face()); }
 
+void assign(Arrangement_2& arr, Arrangement_2& input_arr)
+{
+  arr.assign(input_arr);
+}
 
 void export_Arrangement_2()
 {
   using namespace boost::python;
   class_<Arrangement_2>("Arrangement_2")
     .def(init<>())
+    .def(init<Arrangement_2&>())
     .def("halfedges", range<return_internal_reference<>>(&halfedges_begin, &halfedges_end))
     .def("vertices", range<return_internal_reference<>>(&vertices_begin, &vertices_end))
     .def("faces", range<return_internal_reference<>>(&faces_begin, &faces_end))
@@ -260,7 +265,7 @@ void export_Arrangement_2()
     .def("number_of_unbounded_faces", &Arrangement_2::number_of_unbounded_faces)
     .def("number_of_vertices", &Arrangement_2::number_of_vertices)
     .def("number_of_vertices_at_infinity", &Arrangement_2::number_of_vertices_at_infinity)
-    .def("assign", &Arrangement_2::assign)
+    .def("assign", &assign)
     .def("clear", &Arrangement_2::clear)
 
     //supported only by some traits
