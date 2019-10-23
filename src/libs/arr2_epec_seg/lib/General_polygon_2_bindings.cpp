@@ -49,6 +49,7 @@ void export_General_polygon_2()
     .def("clear", &General_polygon_2::clear)
     .def("reverse_orientation", &General_polygon_2::reverse_orientation)
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     ;
 
 #if CGALPY_TRAITS != CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
@@ -65,6 +66,7 @@ void export_General_polygon_2()
     .def(self == self)
     .def(self != self)
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     ;
 
   class_< CS_traits_X_monotone_curve_2 >("CS_traits_X_monotone_curve_2")
@@ -84,6 +86,7 @@ void export_General_polygon_2()
     .def("supporting_circle", &CS_traits_X_monotone_curve_2::supporting_circle)
     .def("bbox", &CS_traits_X_monotone_curve_2::bbox)
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     ;
 #endif
 }

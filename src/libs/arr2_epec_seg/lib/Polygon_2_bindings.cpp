@@ -91,6 +91,7 @@ void export_Polygon_2()
     .def("clear", &Polygon_2::clear)
     .def("reverse_orientation", &Polygon_2::reverse_orientation)
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
     ;

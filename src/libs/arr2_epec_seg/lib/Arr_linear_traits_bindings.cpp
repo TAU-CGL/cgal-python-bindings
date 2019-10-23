@@ -38,6 +38,7 @@ void export_Arr_linear_traits()
     .def("is_degenerate", &Curve_2::is_degenerate)
     .def("bbox", &Curve_2::bbox)
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     ;
 }
 #endif // ARR_LINEAR_TRAITS
