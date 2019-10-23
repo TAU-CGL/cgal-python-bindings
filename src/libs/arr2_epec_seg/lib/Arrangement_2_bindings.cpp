@@ -272,6 +272,7 @@ void export_Arrangement_2()
 #if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
 || CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
     .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
 #endif
     ;
   //free functions
