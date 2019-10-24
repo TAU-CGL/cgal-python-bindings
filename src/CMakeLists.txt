@@ -9,7 +9,12 @@ if (NOT CGAL_FOUND)
 endif()
 include(${CGAL_USE_FILE})
 
-set(Boost_USE_STATIC_LIBS OFF)
+if (BUILD_SHARED_LIBS)
+  set(Boost_USE_STATIC_LIBS OFF)
+else()
+  set(Boost_USE_STATIC_LIBS ON)
+  set(BOOST_PYTHON_STATIC_LIB 1)
+endif()
 set(CGALPY_BOOST_LIBRARIES system thread)
 
 find_package(Python3 COMPONENTS Interpreter Development)
