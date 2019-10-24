@@ -32,6 +32,8 @@ void export_Polygon_with_holes_2();
 void export_Minkowski_sum_2();
 void export_Boolean_set_operations_2();
 
+void export_Triangulations();
+
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 {
   using namespace boost::python;
@@ -50,6 +52,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 #endif
 #if CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
   export_Arr_segment_traits();
+  export_Triangulations();
 #endif
 #if CGALPY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
   export_Arr_circle_segment_traits();
