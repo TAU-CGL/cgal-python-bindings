@@ -7,17 +7,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include "common.hpp"
-
-Halfedge_around_vertex_circulator Halfedge_around_vertex_circulator_begin(Vertex& v)
-{
-  return v.incident_halfedges();
-}
-
-Halfedge_around_vertex_circulator Halfedge_around_vertex_circulator_end(Vertex& v)
-{
-  return v.incident_halfedges();
-}
-
+#include "python_iterator_templates.hpp"
 Iterator_from_circulator<Halfedge_around_vertex_circulator>* halfedge_around_vertex_iterator(Vertex& v)
 {
   return new Iterator_from_circulator<Halfedge_around_vertex_circulator>(v.incident_halfedges());

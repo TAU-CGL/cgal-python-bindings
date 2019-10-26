@@ -7,6 +7,7 @@
 
 #include "config.hpp"
 #include "common.hpp"
+#include "python_iterator_templates.hpp"
 
 Point_2& left_vertex(Polygon_2& p) { return *(p.left_vertex()); }
 Point_2& right_vertex(Polygon_2& p) { return *(p.right_vertex()); }
@@ -20,39 +21,10 @@ static Polygon_2* init_from_list(boost::python::list& lst)
   return new Polygon_2(begin, end);
 }
 
-template <typename iterator>
-class CopyIterator
-{
-private:
-  iterator m_curr;
-  iterator m_end;
-public:
-  CopyIterator(iterator begin, iterator end) : m_curr(begin), m_end(end) {}
-  typename iterator::value_type next()
-  {
-    if (m_curr != m_end)
-    {
-      return *(m_curr++);
-    }
-    PyErr_SetString(PyExc_StopIteration, "No more data.");
-    bp::throw_error_already_set();
-    return *m_curr;
-  }
-};
 
 CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& p)
 {
   return new CopyIterator<Polygon_2::Edge_const_iterator>(p.edges_begin(), p.edges_end());
-}
-
-template<typename iterator>
-void bind_copy_iterator(const char* python_name)
-{
-  using namespace boost::python;
-  class_<iterator>(python_name, no_init)
-    .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next)
-    ;
 }
 
 void export_Polygon_2()
