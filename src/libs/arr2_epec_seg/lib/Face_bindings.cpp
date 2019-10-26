@@ -6,6 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "common.hpp"
+#include "python_iterator_templates.hpp"
 
 Iterator_from_circulator<Ccb_halfedge_circulator>* outer_ccb(Face& f)
 {

@@ -6,6 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "common.hpp"
+#include "python_iterator_templates.hpp"
 
 Vertex& source(Halfedge& e) { return (*(e.source())); }
 Vertex& target(Halfedge& e) { return (*(e.target())); }

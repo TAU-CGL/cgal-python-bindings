@@ -10,6 +10,7 @@ set(arr2_epec_seg_SRC_FILES ${arr2_epec_seg_SRC_FILES} ${arr2_epec_seg_AUTO_GENE
 include_directories(lib)
 include_directories(include)
 
+link_directories(${Boost_LIBRARY_DIRS})
 # Add defines
 add_definitions(-DCGALPY_arr2_epec_seg_SOURCE)
 
@@ -71,6 +72,7 @@ add_library(arr2_epec_seg_PYBINDINGS SHARED
 if(WIN32)
 set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES SUFFIX ".pyd")
 endif()
+
 target_link_libraries(arr2_epec_seg_PYBINDINGS
                       ${arr2_epec_seg}
 		      ${NON_WIN32_LIBRARIES}
