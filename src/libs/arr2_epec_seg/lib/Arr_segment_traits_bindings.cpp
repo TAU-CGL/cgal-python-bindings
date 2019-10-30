@@ -7,7 +7,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include "config.hpp"
-#if CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
 #include "common.hpp"
 
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }

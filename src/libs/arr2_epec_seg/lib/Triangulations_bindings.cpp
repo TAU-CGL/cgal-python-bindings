@@ -1,5 +1,5 @@
 #include "common.hpp"
-#if CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
 #include <CGAL/Triangulation_2.h>
 #include <CGAL/Delaunay_triangulation_2.h>
 #include <CGAL/Constrained_triangulation_2.h>

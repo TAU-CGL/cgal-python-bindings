@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "config.hpp"
-#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
 #include "common.hpp"
 
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }

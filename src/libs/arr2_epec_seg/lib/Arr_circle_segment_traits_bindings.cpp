@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "config.hpp"
-#if CGALPY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
 #include "common.hpp"
 
 typedef typename Traits::CoordNT CoordNT;
