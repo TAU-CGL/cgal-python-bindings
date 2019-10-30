@@ -44,8 +44,8 @@ bool get_type(Pl_result& pl_result, typename type::value_type& t)
   if (res) t = *(*get);
   return res;
 }
-#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
-|| CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
+|| CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
 void Landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
 {
   pl.attach(arr);
@@ -57,8 +57,8 @@ void export_Point_location()
   using namespace boost::python;
 
   //supported only by some of the traits
-#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
-|| CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
+|| CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
   class_<Landmarks_pl>("Arr_landmarks_point_location")
     .def(init<>())
     .def(init<Arrangement_2&>())

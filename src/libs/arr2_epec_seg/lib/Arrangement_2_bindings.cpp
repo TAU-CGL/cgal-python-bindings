@@ -269,8 +269,8 @@ void export_Arrangement_2()
     .def("clear", &Arrangement_2::clear)
 
     //supported only by some traits
-#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
-|| CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
+|| CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
 #endif

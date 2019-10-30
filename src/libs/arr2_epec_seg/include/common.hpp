@@ -23,22 +23,22 @@
 #endif
 #include <CGAL/CORE_BigInt.h>
 #include <CGAL/Sqrt_extension.h>
-#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
 #include <CGAL/Arr_linear_traits_2.h>
 #endif
-#if CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
 #include <CGAL/Arr_segment_traits_2.h>
 #endif
-#if CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
 #endif
-#if CGALPY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
 #include <CGAL/Arr_circle_segment_traits_2.h>
 #endif
-#if CGALPY_TRAITS == CGALPY_ARR_CONIC_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_CONIC_TRAITS
 #include <CGAL/Arr_conic_traits_2.h>
 #endif
-#if CGALPY_TRAITS == CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
 #include <CGAL/Arr_algebraic_segment_traits_2.h>
 #include <CGAL/Polynomial.h>
 #include <CGAL/Polynomial_traits_d.h>
@@ -94,19 +94,19 @@ typedef typename CGAL::Aff_transformation_2<Kernel>                      Aff_Tra
 typedef typename CGAL::Rotation                                          Rotation;
 typedef typename CGAL::Scaling                                           Scaling;
 typedef typename CGAL::Translation                                       Translation;
-#if CGALPY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
 typedef typename CGAL::Arr_segment_traits_2<Kernel>                      Traits;
 # endif
-#if CGALPY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
 typedef typename CGAL::Arr_non_caching_segment_traits_2<Kernel>          Traits;
 # endif
-#if CGALPY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
 typedef typename CGAL::Arr_linear_traits_2<Kernel>                       Traits;
 #endif
-#if CGALPY_TRAITS ==  CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS ==  CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
 typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>               Traits;
 #endif
-#if CGALPY_TRAITS ==  CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
+#if CGALPY_GEOMETRY_TRAITS ==  CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
 typedef typename BigInt                                                  Integer;
 typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>           Traits;
 typedef typename Traits::Construct_curve_2                               Construct_curve_2;
