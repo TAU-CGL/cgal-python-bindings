@@ -16,7 +16,7 @@ set(CGALPY_KERNEL_NAMES "epec" "epic")
 # Default
 set(CGALPY_KERNEL ${CGALPY_EPEC_KERNEL})
 SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
-
+set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epec epic)
 # Geometry Traits
 set(CGALPY_ARR_LINEAR_GEOMETRY_TRAITS 0)
 set(CGALPY_ARR_SEGMENT_GEOMETRY_TRAITS 1)
@@ -29,7 +29,7 @@ set(CGALPY_GEOMETRY_TRAITS_NAMES linear segment nonCachingSegment conic algebrai
 # Default
 SET(CGALPY_GEOMETRY_TRAITS ${CGALPY_ARR_SEGMENT_GEOMETRY_TRAITS})
 SET(CGALPY_GEOMETRY_TRAITS_NAME "segment" CACHE STRING "The geometry traits to use")
-
+set_property(CACHE CGALPY_GEOMETRY_TRAITS_NAME PROPERTY STRINGS linear segment nonCachingSegment conic algebraic circleSegment)
 # DCEL
 set(CGALPY_ARR_PLAIN_DCEL 0)
 set(CGALPY_ARR_FACE_EXTENDED_DCEL 1)
@@ -41,7 +41,7 @@ set(CGALPY_DCEL_NAMES "plain" "faceExtended" "halfedgeExtended" "vertexExtended"
 #
 SET(CGALPY_DCEL ${CGALPY_ARR_PLAIN_DCEL})
 SET(CGALPY_DCEL_NAME "plain" CACHE STRING "The DCEL to use")
-
+set_property(CACHE CGALPY_DCEL_NAME PROPERTY STRINGS plain faceExtended halfedgeExtended vertexExtended allExtended)
 # General
 set(CGALPY_MODULES_REL_DIR cmake/modules)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/${CGALPY_MODULES_REL_DIR})
