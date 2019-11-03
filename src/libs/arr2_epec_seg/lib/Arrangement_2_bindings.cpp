@@ -279,21 +279,26 @@ void export_Arrangement_2()
   def("insert_point", &insert_point_default, return_internal_reference<>());
   def("insert_point", &insert_point<Naive_pl>, return_internal_reference<>());
   def("insert_point", &insert_point<Wal_pl>, return_internal_reference<>());
-  def("insert_point", &insert_point<Landmarks_pl>, return_internal_reference<>());
   def("insert_point", &insert_point<Trapezoid_pl>, return_internal_reference<>());
   def("insert", &insert_curve);
   def("insert", &insert_curves);
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve_default, return_internal_reference<>());
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Naive_pl>, return_internal_reference<>());
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Wal_pl>, return_internal_reference<>());
-  def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Landmarks_pl>, return_internal_reference<>());
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Trapezoid_pl>, return_internal_reference<>());
   def("insert_non_intersecting_curves", &insert_non_intersecting_curves);
   def("decompose", &decompose);
   def("zone", &zone_default);
   def("zone", &zone<Naive_pl>);
   def("zone", &zone<Wal_pl>);
+  //supported only by some traits
+#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
+|| CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
   def("zone", &zone<Landmarks_pl>);
+  def("do_intersect", &do_intersect<Landmarks_pl>);
+  def("insert_point", &insert_point<Landmarks_pl>, return_internal_reference<>());
+  def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Landmarks_pl>, return_internal_reference<>());
+#endif
   def("zone", &zone<Trapezoid_pl>);
   def("overlay", &overlay);
 #if (CGALPY_DCEL == CGALPY_EXTENDED_DCEL) || \
@@ -306,7 +311,6 @@ void export_Arrangement_2()
   def("do_intersect", &do_intersect_default);
   def("do_intersect", &do_intersect<Naive_pl>);
   def("do_intersect", &do_intersect<Wal_pl>);
-  def("do_intersect", &do_intersect<Landmarks_pl>);
   def("do_intersect", &do_intersect<Trapezoid_pl>);
   def("remove_edge", &remove_edge_free, return_internal_reference<>());
   def("remove_vertex", &remove_vertex_free);
