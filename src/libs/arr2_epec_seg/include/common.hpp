@@ -8,7 +8,7 @@
 
 #ifndef CGALPY_COMMON_HPP
 #define CGALPY_COMMON_HPP
-
+#define BOOST_PYTHON_STATIC_LIB 1
 #include "config.hpp"
 
 #include <boost/python.hpp>

@@ -8,7 +8,7 @@
 #include "config.hpp"
 #include "common.hpp"
 
-#define BOOST_PYTHON_STATIC_LIB 1
+
 
 void export_Kernel();
 void export_Arrangement_2();
