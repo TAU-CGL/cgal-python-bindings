@@ -136,7 +136,7 @@ public:
 */
   virtual void create_edge(Face_handle_A f1, Halfedge_handle_B e2, Halfedge_handle_R e)
   {
-    e->set_data(overlay_edge_data1(f1->data(), e2->data()));
+    e->set_data(overlay_edge_data2(f1->data(), e2->data()));
   }
 
   /*! Create a face f that matches the overlapping region between f1 and f2.
