@@ -16,6 +16,10 @@ void export_Arr_linear_traits()
 {
   using namespace boost::python;
   class_<Curve_2>("Curve_2")
+    .def(init<>())
+    .def(init<Segment_2&>())
+    .def(init<Ray_2&>())
+    .def(init<Line_2&>())
     .def("source", &Curve_2::source, return_value_policy<copy_const_reference>())
     .def("target", &Curve_2::target, return_value_policy<copy_const_reference>())
     .def("line", &Curve_2::line)
