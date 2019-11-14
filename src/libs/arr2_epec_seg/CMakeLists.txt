@@ -60,6 +60,7 @@ add_library(arr2_epec_seg_PYBINDINGS SHARED
   lib/Arr_rational_function_traits_bindings.cpp
   lib/Polygon_2_bindings.cpp
   lib/Polygon_with_holes_2_bindings.cpp
+  lib/Polygon_partitioning_bindings.cpp
   lib/Minkowski_sum_2_bindings.cpp
   lib/Boolean_set_operations_2_bindings.cpp
   lib/Object_bindings.cpp
