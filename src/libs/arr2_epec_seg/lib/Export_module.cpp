@@ -36,6 +36,7 @@ void export_Minkowski_sum_2();
 void export_Boolean_set_operations_2();
 
 void export_Triangulations();
+void export_Convex_hull_2_bindings();
 
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 {
@@ -49,13 +50,14 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   export_Face();
   export_Intersections_2();
   export_Point_location();
+  export_Convex_hull_2_bindings();
+  export_Triangulations();
 
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
   export_Arr_linear_traits();
 #endif
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
   export_Arr_segment_traits();
-  export_Triangulations();
 #endif
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
   export_Arr_circle_segment_traits();
