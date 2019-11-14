@@ -86,9 +86,10 @@ typedef typename Kernel::Direction_2                                     Directi
 typedef typename Kernel::Vector_2                                        Vector_2;
 typedef typename Kernel::Circle_2                                        Circle_2;
 typedef typename Kernel::Triangle_2                                      Triangle_2;
-typedef typename CGAL::Polygon_2<Kernel>                                 Polygon_2;
-typedef typename CGAL::Polygon_with_holes_2<Kernel>                      Polygon_with_holes_2;
-typedef typename CGAL::Polygon_set_2<Kernel>                             Polygon_set_2;
+typedef typename std::list<Point_2>                                      Point_2_container;
+typedef typename CGAL::Polygon_2<Kernel, Point_2_container>              Polygon_2;
+typedef typename CGAL::Polygon_with_holes_2<Kernel, Point_2_container>   Polygon_with_holes_2;
+typedef typename CGAL::Polygon_set_2<Kernel, Point_2_container>          Polygon_set_2;
 typedef typename Kernel::Iso_rectangle_2                                 Iso_rectangle_2;
 typedef typename CGAL::Aff_transformation_2<Kernel>                      Aff_Transformation_2;
 typedef typename CGAL::Rotation                                          Rotation;
