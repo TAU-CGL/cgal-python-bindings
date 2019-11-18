@@ -9,6 +9,7 @@
 #ifndef CGALPY_COMMON_HPP
 #define CGALPY_COMMON_HPP
 #define BOOST_PYTHON_STATIC_LIB 1
+#define CGAL_DO_NOT_USE_BOOST_MP 1
 #include "config.hpp"
 
 #include <boost/python.hpp>
@@ -73,6 +74,10 @@ typedef typename CORE::BigInt                                            BigInt;
 typedef typename CGAL::Gmpz                                              Gmpz;
 typedef typename CGAL::Gmpq                                              Gmpq;
 typedef typename Kernel::FT                                              FT;
+#if CGALPY_KERNEL == CGALPY_EPEC_KERNEL
+typedef typename CGAL::Exact_predicates_exact_constructions_kernel       Kernel;
+typedef typename bp::return_value_policy<bp::return_by_value>            Kernel_return_value_policy;
+#endif
 //typedef typename CGAL::Sqrt_extension <FT, FT>                           CoordNT;
 typedef typename Kernel::RT                                              RT;
 //typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>::CoordNT      CoordNT;

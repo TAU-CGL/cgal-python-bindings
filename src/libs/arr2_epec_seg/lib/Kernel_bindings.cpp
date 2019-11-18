@@ -34,7 +34,7 @@ void bind_squared_distance_types()
 }
 
 
-#ifndef INEXACT_KERNEL
+#if CGALPY_KERNEL == CGALPY_EPEC_KERNEL
 typename FT::Exact_type& FT_exact(FT& ft)
 {
   return ft.exact();
@@ -82,7 +82,7 @@ void export_Kernel()
     .def(self / self)
     .def(self /= self)
     ;
-
+  
   class_<Gmpq>("Gmpq")
     //.def(init<>())
     .def(init<Gmpz, Gmpz>())
@@ -111,8 +111,7 @@ void export_Kernel()
     .def(self / self)
     .def(self /= self)
     ;
-
-#ifndef INEXACT_KERNEL
+#if CGALPY_KERNEL == CGALPY_EPEC_KERNEL
   class_<FT>("FT")
     .def(init<FT::Exact_type>())
     .def("exact", &FT_exact, return_internal_reference<>())
@@ -121,6 +120,19 @@ void export_Kernel()
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
+    .def(self != self)
+    .def(self < self)
+    .def(self > self)
+    .def(self <= self)
+    .def(self >= self)
+    .def(self + self)
+    .def(self += self)
+    .def(self - self)
+    .def(self -= self)
+    .def(self * self)
+    .def(self *= self)
+    .def(self / self)
+    .def(self /= self)
     ;
 #endif
 
