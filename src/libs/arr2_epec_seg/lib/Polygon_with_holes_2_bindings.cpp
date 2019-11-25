@@ -40,5 +40,9 @@ void export_Polygon_with_holes_2()
     .def("holes", range<return_internal_reference<>>(&holes_begin, &holes_end))
     .def("number_of_holes", &Polygon_with_holes_2::number_of_holes)
     .def("bbox", &Polygon_with_holes_2::bbox)
+    .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
+    .def(self == self)
+    .def(self != self)
     ;
 }
