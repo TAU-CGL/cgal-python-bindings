@@ -48,5 +48,7 @@ void export_General_polygon_with_holes_2()
     .def("outer_boundary", &outer_boundary, return_internal_reference<>())
     .def("holes", range<return_internal_reference<>>(&holes_begin, &holes_end))
     .def("number_of_holes", &General_polygon_with_holes_2::number_of_holes)
+    .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
     ;
 }
