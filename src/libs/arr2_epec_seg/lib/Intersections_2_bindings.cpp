@@ -175,6 +175,7 @@ bool empty(result& res)
 template<typename result, typename type>
 bool is_type(result& intersection)
 {
+  if (!intersection) return false;
   type* get;
   bool res = (get = boost::get<type>(&*intersection));
   return res;
@@ -183,6 +184,7 @@ bool is_type(result& intersection)
 template<typename result, typename type>
 bool get_type(result& intersection, type& t)
 {
+  if (!intersection) return false;
   type* get;
   bool res = (get = boost::get<type>(&*intersection));
   if (res) t = *get;
@@ -192,6 +194,7 @@ bool get_type(result& intersection, type& t)
 template<typename result>
 bool is_points(result& intersection)
 {
+  if (!intersection) return false;
   std::vector<Point_2>* get;
   bool res = (get = boost::get< std::vector<Point_2> >(&*intersection));
   return res;
@@ -200,6 +203,7 @@ bool is_points(result& intersection)
 template<typename result>
 bool get_points(result& intersection, boost::python::list& lst)
 {
+  if (!intersection) return false;
   std::vector<Point_2>* get;
   bool res = (get = boost::get< std::vector<Point_2> >(&*intersection));
   if (res)
@@ -248,7 +252,7 @@ void export_Intersections_2()
     .def("is_point", &is_type<Iso_rectangle_line_intersection_result, Point_2>)
     .def("get_point", &get_type<Iso_rectangle_line_intersection_result, Point_2>)
     .def("is_segment", &is_type<Iso_rectangle_line_intersection_result, Segment_2>)
-    .def("get_segment", &get_type<Iso_rectangle_triangle_intersection_result, Segment_2>)
+    .def("get_segment", &get_type<Iso_rectangle_line_intersection_result, Segment_2>)
     ;
 
   def("intersection", &iso_rectangle_ray_intersection);
