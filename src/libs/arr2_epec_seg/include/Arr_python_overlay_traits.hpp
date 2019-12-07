@@ -38,7 +38,7 @@ public:
   typedef typename ArrangementB::Face_const_handle      Face_handle_B;
   typedef typename ArrangementR::Face_handle            Face_handle_R;
 
-  typedef Python_functor<data_type>                     Overlay_data;
+  typedef Python_functor_2<data_type, data_type, data_type>    Overlay_data;
 
 private:
   typedef CGAL::_Arr_default_overlay_traits_base<ArrangementA, ArrangementB,

@@ -12,18 +12,43 @@
 namespace bp = boost::python;
 
 //https://stackoverflow.com/a/26833886 regarding calling a python functor in C++
-template <typename T>
-class Python_functor {
+template <typename T0, typename T1>
+class Python_functor_1 {
 private:
   bp::object m_python_functor;
 
 public:
-  Python_functor() {}
-
-  Python_functor(bp::object python_functor) : m_python_functor(python_functor)
+  Python_functor_1() {}
+  Python_functor_1(bp::object python_functor) : m_python_functor(python_functor)
   {}
 
-  T operator()(T a, T b) { return bp::extract<T>(m_python_functor(a, b)); }
+  T1 operator()(T0 a) { return bp::extract<T1>(m_python_functor(a)); }
+};
+
+template <typename T0, typename T1, typename T2>
+class Python_functor_2 {
+private:
+  bp::object m_python_functor;
+
+public:
+  Python_functor_2() {}
+  Python_functor_2(bp::object python_functor) : m_python_functor(python_functor)
+  {}
+
+  T2 operator()(T0 a, T1 b) { return bp::extract<T2>(m_python_functor(a, b)); }
+};
+
+template <typename T0, typename T1, typename T2>
+class Python_functor_2_ref {
+private:
+  bp::object m_python_functor;
+
+public:
+  Python_functor_2_ref() {}
+  Python_functor_2_ref(bp::object python_functor) : m_python_functor(python_functor)
+  {}
+
+  T2 operator()(const T0& a, const T1& b) { return bp::extract<T2>(m_python_functor(a, b)); }
 };
 
 #endif // !PYTHON_FUNCTOR
