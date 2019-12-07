@@ -38,6 +38,8 @@ void export_Boolean_set_operations_2();
 void export_Triangulations();
 void export_Convex_hull_2_bindings();
 
+void export_Spatial_searching();
+
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 {
   using namespace boost::python;
@@ -52,6 +54,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   export_Point_location();
   export_Convex_hull_2_bindings();
   export_Triangulations();
+  export_Spatial_searching();
 
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
   export_Arr_linear_traits();

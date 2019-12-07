@@ -83,6 +83,7 @@ typedef typename Kernel::RT                                              RT;
 //typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>::CoordNT      CoordNT;
 typedef typename CGAL::Object                                            Object;
 typedef typename Kernel::Point_2                                         Point_2;
+typedef typename Kernel::Point_3                                         Point_3;
 typedef typename Kernel::Segment_2                                       Segment_2;
 typedef typename Kernel::Line_2                                          Line_2;
 typedef typename Kernel::Ray_2                                           Ray_2;
