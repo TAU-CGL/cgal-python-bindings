@@ -82,11 +82,20 @@ void bind_kd_tree(const char* python_name)
 }
 
 template <typename T>
+void k_neighbors(T& neighbor_search, bp::list& lst)
+{
+  for (auto it = neighbor_search.begin(); it != neighbor_search.end(); ++it)
+  {
+    lst.append(bp::make_tuple(it->first, it->second));
+  }
+}
+
+template <typename T>
 void bind_neighbor_search(const char* python_name)
 {
   using namespace bp;
   class_<T>(python_name, init<const T::Tree&, T::Query_item, unsigned int, FT, bool, T::Distance, bool>())
-    .def("k_neighbors", range<>(&T::begin, &T::end))
+    .def("k_neighbors", &k_neighbors<T>)
     ;
 }
 
@@ -119,8 +128,6 @@ void export_Spatial_searching()
 
   bind_kd_tree<Kd_tree>("Kd_tree");
 
-  bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
-
   class_<Distance_python>("Distance_python")
     .def(init<bp::object, bp::object, bp::object, bp::object, bp::object>())
     .def<FT (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)>("transformed_distance", &Distance_python::transformed_distance)
@@ -131,6 +138,7 @@ void export_Spatial_searching()
     ;
 
   class_<Euclidean_distance>("Euclidean_distance")
+    .def(init<>())
     //.def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Euclidean_distance::Point_d&) const>("transformed_distance", &Euclidean_distance::transformed_distance)
     /*.def("min_distance_to_rectangle", &Euclidean_distance::min_distance_to_rectangle)
     .def("max_distance_to_rectangle", &Euclidean_distance::max_distance_to_rectangle)
@@ -139,4 +147,6 @@ void export_Spatial_searching()
     ;
 
   bind_neighbor_search<K_neighbor_search_python>("K_neighbor_search_python");
+  
+  bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
 }
