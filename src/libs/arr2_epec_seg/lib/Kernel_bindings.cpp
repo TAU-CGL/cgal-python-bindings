@@ -44,12 +44,12 @@ typename FT::Approximate_type& FT_approx(FT& ft)
 {
   return ft.approx();
 }
+#endif
 
 double FT_to_double(FT& ft)
 {
   return CGAL::to_double(ft);
 }
-#endif
 
 Point_2 transform_point(Aff_Transformation_2& t, Point_2& p) { return t.transform(p); }
 Vector_2 transform_vector(Aff_Transformation_2& t, Vector_2 & v) { return t.transform(v); }
@@ -114,6 +114,7 @@ void export_Kernel()
     ;
 #if CGALPY_KERNEL == CGALPY_EPEC_KERNEL
   class_<FT>("FT")
+    .def(init<double>())
     .def(init<FT::Exact_type>())
     .def("exact", &FT_exact, return_internal_reference<>())
     //.def("approx", &FT_approx, return_internal_reference<>())
@@ -400,13 +401,13 @@ void export_Kernel()
 
   class_<Circle_2>("Circle_2")
     .def(init<>())
-    .def(init<Point_2&, FT&, CGAL::Orientation&>())
+    .def(init<Point_2&, FT&, CGAL::Orientation>())
     .def(init<Point_2&, Point_2&, Point_2&>())
-    .def(init<Point_2&, Point_2&, CGAL::Orientation&>())
-    .def(init<Point_2&, CGAL::Orientation&>())
+    .def(init<Point_2&, Point_2&, CGAL::Orientation>())
+    .def(init<Point_2&, CGAL::Orientation>())
     .def("center", &Circle_2::center)
     .def("squared_radius", &Circle_2::squared_radius)
-    .def("Orientation", &Circle_2::orientation)
+    .def("orientation", &Circle_2::orientation)
     .def("is_degenerate", &Circle_2::is_degenerate)
     .def("oriented_side", &Circle_2::oriented_side)
     .def("bounded_side", &Circle_2::bounded_side)
