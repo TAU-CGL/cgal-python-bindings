@@ -135,6 +135,7 @@ void export_Kernel()
     .def(self *= self)
     .def(self / self)
     .def(self /= self)
+    .def(-self)
     ;
 #endif
 
