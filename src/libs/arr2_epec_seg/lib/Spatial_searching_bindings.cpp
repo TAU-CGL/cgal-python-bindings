@@ -10,7 +10,7 @@
 #include "CGAL/Kd_tree.h"
 #include <CGAL/Kd_tree_rectangle.h>
 #include <CGAL/Search_traits_3.h>
-#include <CGAL/k_neighbor_search.h>
+#include <CGAL/K_neighbor_search.h>
 #include <CGAL/Fuzzy_iso_box.h>
 #include <CGAL/Euclidean_distance.h>
 #include <CGAL/Fuzzy_sphere.h>
@@ -38,8 +38,8 @@ static T* init_tree()
 template <typename T>
 static T* init_tree_from_list(bp::list& lst)
 {
-  auto begin = boost::python::stl_input_iterator< T::Point_d >(lst);
-  auto end = boost::python::stl_input_iterator< T::Point_d >();
+  auto begin = boost::python::stl_input_iterator<typename T::Point_d >(lst);
+  auto end = boost::python::stl_input_iterator<typename T::Point_d >();
   return new T(begin, end);
 }
 
@@ -47,16 +47,16 @@ template <typename T>
 void tree_insert(T& tree, bp::list& lst)
 {
   //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
-  auto begin = boost::python::stl_input_iterator< T::Point_d >(lst);
-  auto end = boost::python::stl_input_iterator< T::Point_d >();
-  auto v = std::vector<T::Point_d>(begin, end);
+  auto begin = boost::python::stl_input_iterator<typename T::Point_d >(lst);
+  auto end = boost::python::stl_input_iterator<typename T::Point_d >();
+  auto v = std::vector<typename T::Point_d>(begin, end);
   tree.insert(v.begin(), v.end());
 }
 
 template <typename T, typename FQI>
 void tree_search(T& tree, FQI& q, bp::list& lst)
 {
-  auto v = std::vector<T::Point_d>();
+  auto v = std::vector<typename T::Point_d>();
   tree.search(std::back_inserter(v), q);
   for (auto p : v)
     lst.append(p); 
@@ -70,9 +70,9 @@ void bind_kd_tree(const char* python_name)
     //.def("__init__", make_constructor(&init_tree<T>))
     .def(init<>())
     .def("__init__", make_constructor(&init_tree_from_list<T>))
-    .def("insert", static_cast<void (T::*) (const T::Point_d&)>(&T::insert))
+    .def("insert", static_cast<void (T::*) (const typename T::Point_d&)>(&T::insert))
     .def("insert", &tree_insert<T>)
-    //.def("remove", static_cast<void (T::*) (const T::Point_d&) > (&T::remove)) // returning address of local variable or temporary warning
+    //.def("remove", static_cast<void (T::*) (const typename T::Point_d&) > (&T::remove)) // returning address of local variable or temporary warning
     .def("build", &T::build)
     .def("points", range<return_internal_reference<>>(&T::begin, &T::end))
     .def("search", &tree_search<T, Fuzzy_iso_box>)
@@ -94,7 +94,8 @@ template <typename T>
 void bind_neighbor_search(const char* python_name)
 {
   using namespace bp;
-  class_<T>(python_name, init<const T::Tree&, T::Query_item, unsigned int, FT, bool, T::Distance, bool>())
+  class_<T>(python_name, init<const typename T::Tree&, typename T::Query_item,
+   unsigned int, FT, bool, typename T::Distance, bool>())
     .def("k_neighbors", &k_neighbors<T>)
     ;
 }
