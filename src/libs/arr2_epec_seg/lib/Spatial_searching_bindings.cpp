@@ -16,6 +16,7 @@
 #include <CGAL/Fuzzy_sphere.h>
 #include "General_distance_python.hpp"
 
+
 typedef CGAL::Search_traits_3<Kernel> Search_traits_3;
 //typedef CGAL::Orthogonal_incremental_neighbor_search<Search_traits_3> Orthogonal_incremental_neighbor_search;
 //typedef Orthogonal_incremental_neighbor_search::iterator NN_iterator;
@@ -28,6 +29,76 @@ typedef CGAL::K_neighbor_search<Search_traits_3> K_neighbor_search;
 typedef General_distance_python<CGAL::Dimension_tag<3>, FT, Point_3, Point_3> Distance_python;
 typedef CGAL::K_neighbor_search<Search_traits_3, Distance_python> K_neighbor_search_python;
 typedef CGAL::Euclidean_distance<Search_traits_3> Euclidean_distance;
+
+// performance test
+/*
+#define _USE_MATH_DEFINES
+#include <math.h>
+bool cd(Polygon_set_2& ps, Point_3& p_3, FT l, FT epsilon)
+{
+  auto x = p_3.x();
+  auto y = p_3.y();
+  auto a = p_3.z();
+  auto p_2 = Point_2(x, y);
+  auto r0 = Vector_2(-epsilon, epsilon);
+  auto r1 = Vector_2(-epsilon, -epsilon);
+  auto r2 = Vector_2(l + epsilon, -epsilon);
+  auto r3 = Vector_2(l + epsilon, epsilon);
+  auto p = Point_2(x, y);
+  auto at = Aff_Transformation_2(Rotation(), FT(sin(to_double(a))), FT(cos(to_double(a))), FT(1));
+  auto p0 = p_2 + at.transform(r0);
+  auto p1 = p_2 + at.transform(r1);
+  auto p2 = p_2 + at.transform(r2);
+  auto p3 = p_2 + at.transform(r3);
+
+  std::vector<Point_2> v = { p0, p1, p2, p3 };
+
+  auto rectangle = Polygon_2(v.begin(), v.end());
+  if (ps.do_intersect(rectangle)) return false;
+  return true;
+}
+
+bool lp(Polygon_set_2& ps, Point_3& start, Point_3& end, FT length, FT epsilon, bool clockwise)
+{
+  auto x1 = start.x().exact();
+  auto y1 = start.y().exact();
+  auto a1 = start.z().exact();
+
+  auto x2 = end.x().exact();
+  auto y2 = end.y().exact();
+  auto a2 = end.z().exact();
+
+  if (!clockwise && a2 < a1) a1 = a1 - Gmpq(2 * M_PI);
+  if (clockwise && a2 > a1) a1 = a1 + Gmpq(2 * M_PI);
+
+  auto dx = x2 - x1;
+  auto dy = y2 - y1;
+  auto dz = abs((a2 - a1).to_double());
+
+  auto sample_count = int(
+    (
+    sqrt(pow(dx.to_double(), 2) + pow(dy.to_double(), 2))
+    + dz * (to_double(length) + to_double(epsilon))
+    )
+    / ((int(2)) * int(to_double(epsilon)))
+    )
+    + 1;
+
+  Gmpq x, y, a;
+  for (int i = 0; i < sample_count + 1; i++)
+  {
+    x = Gmpq(sample_count - i, sample_count) * x1 + Gmpq(i, sample_count) * x2;
+    y = Gmpq(sample_count - i, sample_count) * y1 + Gmpq(i, sample_count) * y2;
+    a = Gmpq(sample_count - i, sample_count) * a1 + Gmpq(i, sample_count) * a2;
+    auto p = Point_3(FT(x), FT(y), FT(a));
+    if (!cd(ps, p, length, epsilon)) return false;
+  }
+  return true;
+}
+
+*/
+
+
 
 template <typename T>
 static T* init_tree()
@@ -62,6 +133,13 @@ void tree_search(T& tree, FQI& q, bp::list& lst)
     lst.append(p); 
 }
 
+template<typename T>
+void points(T& tree, bp::list& lst)
+{
+  for (auto p : tree)
+    lst.append(p);
+}
+
 template <typename T>
 void bind_kd_tree(const char* python_name)
 {
@@ -74,7 +152,7 @@ void bind_kd_tree(const char* python_name)
     .def("insert", &tree_insert<T>)
     //.def("remove", static_cast<void (T::*) (const typename T::Point_d&) > (&T::remove)) // returning address of local variable or temporary warning
     .def("build", &T::build)
-    .def("points", range<return_internal_reference<>>(&T::begin, &T::end))
+    .def("points", &points<T>)
     .def("search", &tree_search<T, Fuzzy_iso_box>)
     .def("size", &T::size)
     .def("capacity", &T::capacity)
@@ -150,4 +228,7 @@ void export_Spatial_searching()
   bind_neighbor_search<K_neighbor_search_python>("K_neighbor_search_python");
   
   bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
+
+  //def("cd", &cd);
+  //def("lp", &lp);
 }
