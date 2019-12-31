@@ -38,7 +38,7 @@ set(CGALPY_ARR_VERTEX_EXTENDED_DCEL 3)
 set(CGALPY_ARR_ALL_EXTENDED_DCEL 4)
 set(CGALPY_DCEL_SHORT_NAMES "" "_fex" "_hex" "_vex" "_ex")
 set(CGALPY_DCEL_NAMES "plain" "faceExtended" "halfedgeExtended" "vertexExtended" "allExtended")
-#
+#Default
 SET(CGALPY_DCEL ${CGALPY_ARR_PLAIN_DCEL})
 SET(CGALPY_DCEL_NAME "plain" CACHE STRING "The DCEL to use")
 set_property(CACHE CGALPY_DCEL_NAME PROPERTY STRINGS plain faceExtended halfedgeExtended vertexExtended allExtended)

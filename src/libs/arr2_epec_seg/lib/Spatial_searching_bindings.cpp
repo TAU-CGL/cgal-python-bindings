@@ -5,30 +5,33 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+#define DIMENSION 4
 
 #include "common.hpp"
+#include "CGAL/Cartesian_d.h"
 #include "CGAL/Kd_tree.h"
 #include <CGAL/Kd_tree_rectangle.h>
-#include <CGAL/Search_traits_3.h>
+#include <CGAL/Search_traits_d.h>
 #include <CGAL/K_neighbor_search.h>
 #include <CGAL/Fuzzy_iso_box.h>
 #include <CGAL/Euclidean_distance.h>
 #include <CGAL/Fuzzy_sphere.h>
 #include "General_distance_python.hpp"
 
-
-typedef CGAL::Search_traits_3<Kernel> Search_traits_3;
-//typedef CGAL::Orthogonal_incremental_neighbor_search<Search_traits_3> Orthogonal_incremental_neighbor_search;
+typedef CGAL::Cartesian_d<FT> K;
+typedef K::Point_d Point_d;
+typedef CGAL::Search_traits_d<K, CGAL::Dimension_tag<DIMENSION>> Search_traits_d;
+//typedef CGAL::Orthogonal_incremental_neighbor_search<Search_traits_d> Orthogonal_incremental_neighbor_search;
 //typedef Orthogonal_incremental_neighbor_search::iterator NN_iterator;
 //typedef Orthogonal_incremental_neighbor_search::Tree Orthogonal_incremental_neighbor_search_tree;
-typedef CGAL::Kd_tree<Search_traits_3> Kd_tree;
-typedef CGAL::Sliding_midpoint<Search_traits_3> Splitter;
-typedef CGAL::Fuzzy_iso_box<Search_traits_3> Fuzzy_iso_box;
-typedef CGAL::Kd_tree_rectangle<FT, CGAL::Dimension_tag<3>> Kd_tree_rectangle;
-typedef CGAL::K_neighbor_search<Search_traits_3> K_neighbor_search;
-typedef General_distance_python<CGAL::Dimension_tag<3>, FT, Point_3, Point_3> Distance_python;
-typedef CGAL::K_neighbor_search<Search_traits_3, Distance_python> K_neighbor_search_python;
-typedef CGAL::Euclidean_distance<Search_traits_3> Euclidean_distance;
+typedef CGAL::Kd_tree<Search_traits_d> Kd_tree;
+typedef CGAL::Sliding_midpoint<Search_traits_d> Splitter;
+typedef CGAL::Fuzzy_iso_box<Search_traits_d> Fuzzy_iso_box;
+typedef CGAL::Kd_tree_rectangle<FT, CGAL::Dimension_tag<DIMENSION>> Kd_tree_rectangle;
+typedef CGAL::K_neighbor_search<Search_traits_d> K_neighbor_search;
+typedef General_distance_python<CGAL::Dimension_tag<DIMENSION>, FT, Point_d, Point_d> Distance_python;
+typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python> K_neighbor_search_python;
+typedef CGAL::Euclidean_distance<Search_traits_d> Euclidean_distance;
 
 // performance test
 /*
@@ -98,7 +101,12 @@ bool lp(Polygon_set_2& ps, Point_3& start, Point_3& end, FT length, FT epsilon, 
 
 */
 
-
+static Point_d* init_point_d(int d, bp::list& lst)
+{
+  auto begin = boost::python::stl_input_iterator<FT>(lst);
+  auto end = boost::python::stl_input_iterator<FT>();
+  return new Point_d(d, begin, end);
+}
 
 template <typename T>
 static T* init_tree()
@@ -181,11 +189,23 @@ void bind_neighbor_search(const char* python_name)
 void export_Spatial_searching()
 {
   using namespace bp;
-  class_< Search_traits_3>("Search_traits_3")
+  class_<Point_d>("Point_d")
+    .def(init<>())
+    .def("__init__", make_constructor(&init_point_d))
+    .def("dimension", &Point_d::dimension)
+    .def("cartesian", &Point_d::cartesian)
+    .def("__getitem__", &Point_d::operator[])
+    .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    ;
+
+  class_< Search_traits_d>("Search_traits")
     .def(init<>())
     ;
 
-  class_<Fuzzy_iso_box>("Fuzzy_iso_box_3")
+  class_<Fuzzy_iso_box>("Fuzzy_iso_box")
     .def(init <Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
     .def(init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT>())
     .def("contains", &Fuzzy_iso_box::contains)
