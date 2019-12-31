@@ -52,12 +52,26 @@ void insert_curve(Arrangement_2& arr, Curve_2& c)
 }
 void insert_curves(Arrangement_2& arr, boost::python::list& lst)
 {
-  //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
-  auto begin = boost::python::stl_input_iterator< X_monotone_curve_2 >(lst);
-  auto end = boost::python::stl_input_iterator< X_monotone_curve_2 >();
-  auto v = std::vector<X_monotone_curve_2>(begin, end);
-  CGAL::insert(arr, v.begin(), v.end());
+  if (!lst) return;
+  if (extract<X_monotone_curve_2>(lst[0]).check())
+  {
+    //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
+    auto begin = boost::python::stl_input_iterator< X_monotone_curve_2 >(lst);
+    auto end = boost::python::stl_input_iterator< X_monotone_curve_2 >();
+    auto v = std::vector<X_monotone_curve_2>(begin, end);
+    CGAL::insert(arr, v.begin(), v.end());
+  }
+  else if (extract<Curve_2>(lst[0]).check())
+  {
+    //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
+    auto begin = boost::python::stl_input_iterator< Curve_2 >(lst);
+    auto end = boost::python::stl_input_iterator< Curve_2 >();
+    auto v = std::vector<Curve_2>(begin, end);
+    CGAL::insert(arr, v.begin(), v.end());
+  }
 }
+
+
 Halfedge& insert_non_intersecting_curve_default(Arrangement_2& arr,
                                                 X_monotone_curve_2& c)
 {
@@ -79,15 +93,18 @@ void insert_non_intersecting_curves(Arrangement_2& arr,
   auto v = std::vector<X_monotone_curve_2>(begin, end);
   CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
 }
-bool do_intersect_default(Arrangement_2& arr, X_monotone_curve_2& c)
+
+bool do_intersect_default(Arrangement_2& arr, Curve_2& c)
 {
   return CGAL::do_intersect(arr, c);
 }
+
 template <typename PointLocation>
-bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl)
+bool do_intersect(Arrangement_2& arr, Curve_2& c, PointLocation& pl)
 {
   return CGAL::do_intersect(arr, c, pl);
 }
+
 void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res)
 {
   CGAL::overlay(arr1, arr2, arr_res);
