@@ -232,17 +232,17 @@ void export_Spatial_searching()
     .def<FT (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)>("transformed_distance", &Distance_python::transformed_distance)
     .def("min_distance_to_rectangle", &Distance_python::min_distance_to_rectangle)
     .def("max_distance_to_rectangle", &Distance_python::max_distance_to_rectangle)
-    .def<FT(Distance_python::*) (const FT&)>("transformed_distance", &Distance_python::transformed_distance)
+    .def<FT (Distance_python::*) (const FT&)>("transformed_distance", &Distance_python::transformed_distance)
     .def("inverse_of_transformed_distance", &Distance_python::inverse_of_transformed_distance)
     ;
 
   class_<Euclidean_distance>("Euclidean_distance")
     .def(init<>())
-    //.def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Euclidean_distance::Point_d&) const>("transformed_distance", &Euclidean_distance::transformed_distance)
-    /*.def("min_distance_to_rectangle", &Euclidean_distance::min_distance_to_rectangle)
-    .def("max_distance_to_rectangle", &Euclidean_distance::max_distance_to_rectangle)
-    .def("transformed_distance", &Euclidean_distance::transformed_distance)
-    .def("inverse_of_transformed_distance", &Euclidean_distance::inverse_of_transformed_distance)*/
+    .def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Euclidean_distance::Point_d&) const>("transformed_distance", &Euclidean_distance::transformed_distance)
+    .def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("min_distance_to_rectangle", &Euclidean_distance::min_distance_to_rectangle)
+    .def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("max_distance_to_rectangle", &Euclidean_distance::max_distance_to_rectangle)
+    .def<FT (Euclidean_distance::*) (FT) const>("transformed_distance", &Euclidean_distance::transformed_distance)
+    //.def("inverse_of_transformed_distance", &Euclidean_distance::inverse_of_transformed_distance)
     ;
 
   bind_neighbor_search<K_neighbor_search_python>("K_neighbor_search_python");
