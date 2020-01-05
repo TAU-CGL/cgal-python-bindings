@@ -5,7 +5,6 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
-#define DIMENSION 4
 
 #include "common.hpp"
 #include "CGAL/Cartesian_d.h"
@@ -20,16 +19,16 @@
 
 typedef CGAL::Cartesian_d<FT> K;
 typedef K::Point_d Point_d;
-typedef CGAL::Search_traits_d<K, CGAL::Dimension_tag<DIMENSION>> Search_traits_d;
+typedef CGAL::Search_traits_d<K, CGAL::Dimension_tag<CGALPY_DIMENSION>> Search_traits_d;
 //typedef CGAL::Orthogonal_incremental_neighbor_search<Search_traits_d> Orthogonal_incremental_neighbor_search;
 //typedef Orthogonal_incremental_neighbor_search::iterator NN_iterator;
 //typedef Orthogonal_incremental_neighbor_search::Tree Orthogonal_incremental_neighbor_search_tree;
 typedef CGAL::Kd_tree<Search_traits_d> Kd_tree;
 typedef CGAL::Sliding_midpoint<Search_traits_d> Splitter;
 typedef CGAL::Fuzzy_iso_box<Search_traits_d> Fuzzy_iso_box;
-typedef CGAL::Kd_tree_rectangle<FT, CGAL::Dimension_tag<DIMENSION>> Kd_tree_rectangle;
+typedef CGAL::Kd_tree_rectangle<FT, CGAL::Dimension_tag<CGALPY_DIMENSION>> Kd_tree_rectangle;
 typedef CGAL::K_neighbor_search<Search_traits_d> K_neighbor_search;
-typedef General_distance_python<CGAL::Dimension_tag<DIMENSION>, FT, Point_d, Point_d> Distance_python;
+typedef General_distance_python<CGAL::Dimension_tag<CGALPY_DIMENSION>, FT, Point_d, Point_d> Distance_python;
 typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python> K_neighbor_search_python;
 typedef CGAL::Euclidean_distance<Search_traits_d> Euclidean_distance;
 
@@ -100,6 +99,15 @@ bool lp(Polygon_set_2& ps, Point_3& start, Point_3& end, FT length, FT epsilon, 
 }
 
 */
+
+template<typename T>
+size_t hash(T& immutable)
+{
+  std::ostringstream stream;
+  stream << immutable;
+  std::string s = stream.str();
+  return boost::hash<std::string>()(s);
+}
 
 static Point_d* init_point_d(int d, bp::list& lst)
 {
@@ -199,10 +207,7 @@ void export_Spatial_searching()
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
-    ;
-
-  class_< Search_traits_d>("Search_traits")
-    .def(init<>())
+    .def("__hash__", &hash<Point_d>)
     ;
 
   class_<Fuzzy_iso_box>("Fuzzy_iso_box")

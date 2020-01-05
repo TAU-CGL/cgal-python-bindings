@@ -100,6 +100,9 @@ elseif ("${CGALPY_DCEL_NAME}" STREQUAL "allExtended")
 endif()
 add_definitions(-DCGALPY_DCEL=${CGALPY_DCEL})
 
+# Select Dimension
+add_definitions(-DCGALPY_DIMENSION=${CGALPY_DIMENSION})
+
 set (CGALPY_INSTALL_INC_DIR "include" CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
 set (CGALPY_INSTALL_LIB_DIR "lib"     CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
 set (CGALPY_INSTALL_BIN_DIR "bin"
