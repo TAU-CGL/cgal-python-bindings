@@ -42,6 +42,9 @@ set(CGALPY_DCEL_NAMES "plain" "faceExtended" "halfedgeExtended" "vertexExtended"
 SET(CGALPY_DCEL ${CGALPY_ARR_PLAIN_DCEL})
 SET(CGALPY_DCEL_NAME "plain" CACHE STRING "The DCEL to use")
 set_property(CACHE CGALPY_DCEL_NAME PROPERTY STRINGS plain faceExtended halfedgeExtended vertexExtended allExtended)
+#Dimension
+SET(CGALPY_DIMENSION 4 CACHE STRING "The dimension of spatial search objects")
+set_property(CACHE CGALPY_DIMENSION PROPERTY VALUE 4)
 # General
 set(CGALPY_MODULES_REL_DIR cmake/modules)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/${CGALPY_MODULES_REL_DIR})
