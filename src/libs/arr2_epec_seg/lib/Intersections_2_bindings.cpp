@@ -226,6 +226,35 @@ boost::python::class_<result> bind_intersection_result(const char* python_name)
   return c;
 }
 
+template<typename T1, typename T2>
+void bind_do_intersect_2T()
+{
+  using namespace boost::python;
+  def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
+}
+
+template <typename T>
+void bind_do_intersect_1T()
+{
+  bind_do_intersect_2T<T, Point_2>();
+  bind_do_intersect_2T<T, Line_2>();
+  bind_do_intersect_2T<T, Ray_2>();
+  bind_do_intersect_2T<T, Segment_2>();
+  bind_do_intersect_2T<T, Triangle_2>();
+  bind_do_intersect_2T<T, Iso_rectangle_2>();
+  //bind_do_intersect_2T<T, Circle_2>(); no do_intersect for Circle_2 and Segment_2, Ray_2, Triangle_2
+}
+
+void bind_do_intersect()
+{
+  bind_do_intersect_1T<Point_2>();
+  bind_do_intersect_1T<Line_2>();
+  bind_do_intersect_1T<Segment_2>();
+  bind_do_intersect_1T<Triangle_2>();
+  bind_do_intersect_1T<Iso_rectangle_2>();
+  //bind_do_intersect_1T<Circle_2>();
+}
+
 void export_Intersections_2()
 {
   using namespace boost::python;
@@ -313,4 +342,6 @@ void export_Intersections_2()
     .def("is_points", &is_points< Triangle_triangle_intersection_result>)
     .def("get_points", &get_points< Triangle_triangle_intersection_result>)
     ;
+
+  bind_do_intersect();
 }
