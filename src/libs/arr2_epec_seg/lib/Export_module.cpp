@@ -39,6 +39,7 @@ void export_Triangulations();
 void export_Convex_hull_2_bindings();
 
 void export_Spatial_searching();
+void export_Bounding_volumes();
 
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 {
@@ -55,6 +56,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   export_Convex_hull_2_bindings();
   export_Triangulations();
   export_Spatial_searching();
+  export_Bounding_volumes();
 
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
   export_Arr_linear_traits();

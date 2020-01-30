@@ -70,7 +70,8 @@ add_library(arr2_epec_seg_PYBINDINGS SHARED
   lib/General_polygon_set_2_bindings.cpp
   lib/Triangulations_bindings.cpp
   lib/Convex_hull_2_bindings.cpp
-  lib/Spatial_searching_bindings.cpp)
+  lib/Spatial_searching_bindings.cpp
+  lib/Bounding_volumes_bindings.cpp)
 
 if(WIN32)
 set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES SUFFIX ".pyd")
