@@ -44,7 +44,22 @@ SET(CGALPY_DCEL_NAME "plain" CACHE STRING "The DCEL to use")
 set_property(CACHE CGALPY_DCEL_NAME PROPERTY STRINGS plain faceExtended halfedgeExtended vertexExtended allExtended)
 #Dimension
 SET(CGALPY_DIMENSION 4 CACHE STRING "The dimension of spatial search objects")
-#set_property(CACHE CGALPY_DIMENSION PROPERTY VALUE 4)
+#Minkowsi sum
+SET(CGALPY_MINKOWSKI_SUM_BINDINGS true CACHE BOOL "Compile bindings for Minkowski sum")
+#Triangulations
+SET(CGALPY_TRIANGULATIONS_BINDINGS true CACHE BOOL "Compile bindings for triangulations")
+#Spatial_searching_bindings
+SET(CGALPY_SPATIAL_SEARCHING_BINDINGS true CACHE BOOL "Compile bindings for spatial searching")
+#Convex hull
+SET(CGALPY_CONVEX_HULL_BINDINGS true CACHE BOOL "Compile bindings for convex hull")
+#Bounding volumes
+SET(CGALPY_BOUNDING_VOLUMES_BINDINGS true CACHE BOOL "Compile bindings for bounding volumes")
+#Boolean set operations
+SET(CGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS true CACHE BOOL "Compile bindings for boolean set operations")
+#Polygon partitioning
+SET(CGALPY_POLYGON_PARTITIONING_BINDINGS true CACHE BOOL "Compile bindings for polygon partitioning")
+#Point location
+SET(CGALPY_POINT_LOCATION_BINDINGS true CACHE BOOL "Compile bindings for point location")
 # General
 set(CGALPY_MODULES_REL_DIR cmake/modules)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/${CGALPY_MODULES_REL_DIR})

@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "config.hpp"
-#ifdef MINKOWSKI_SUM
+#ifdef CGALPY_MINKOWSKI_SUM_BINDINGS
 #include "common.hpp"
 #include <CGAL/minkowski_sum_2.h>
 #include <CGAL/approximated_offset_2.h>

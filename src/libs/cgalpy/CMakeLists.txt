@@ -1,10 +1,10 @@
 # packages
 
 # Add source files
-# set(arr2_epec_seg_SRC_FILES ${arr2_epec_seg_SRC_FILES} lib/xxx.cpp)
+# set(cgalpy_SRC_FILES ${cgalpy_SRC_FILES} lib/xxx.cpp)
 
 # Add the generated files
-set(arr2_epec_seg_SRC_FILES ${arr2_epec_seg_SRC_FILES} ${arr2_epec_seg_AUTO_GENERATED_SRC_FILES})
+set(cgalpy_SRC_FILES ${cgalpy_SRC_FILES} ${cgalpy_AUTO_GENERATED_SRC_FILES})
 
 # Add all include directories
 include_directories(lib)
@@ -12,7 +12,7 @@ include_directories(include)
 
 link_directories(${Boost_LIBRARY_DIRS})
 # Add defines
-add_definitions(-DCGALPY_arr2_epec_seg_SOURCE)
+add_definitions(-DCGALPY_cgalpy_SOURCE)
 
 if (WIN32)
   add_definitions(/wd4251)
@@ -23,14 +23,14 @@ endif(WIN32)
 # Add library
 # if (BUILD_SHARED_LIBS)
 #   add_definitions(-DCGALPY_ALL_DYN_LINK)
-#   add_library(arr2_epec_seg SHARED ${arr2_epec_seg_SRC_FILES})
+#   add_library(cgalpy SHARED ${cgalpy_SRC_FILES})
 # else(BUILD_SHARED_LIBS)
-#   add_library(arr2_epec_seg STATIC ${arr2_epec_seg_SRC_FILES})
+#   add_library(cgalpy STATIC ${cgalpy_SRC_FILES})
 # endif(BUILD_SHARED_LIBS)
 
-# set_target_properties(arr2_epec_seg PROPERTIES
-#   VERSION "${arr2_epec_seg_SOVERSION}"
-#   SOVERSION "${arr2_epec_seg_SONAME_VERSION}")
+# set_target_properties(cgalpy PROPERTIES
+#   VERSION "${cgalpy_SOVERSION}"
+#   SOVERSION "${cgalpy_SONAME_VERSION}")
 
 # Add links
 # if (NOT WIN32)
@@ -41,7 +41,7 @@ endif(WIN32)
 # endif(NOT WIN32)
 
 # Add Python bindings
-add_library(arr2_epec_seg_PYBINDINGS SHARED
+add_library(cgalpy_PYBINDINGS SHARED
   lib/Export_module.cpp
   lib/Kernel_bindings.cpp
   lib/Arrangement_2_bindings.cpp
@@ -74,11 +74,11 @@ add_library(arr2_epec_seg_PYBINDINGS SHARED
   lib/Bounding_volumes_bindings.cpp)
 
 if(WIN32)
-set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES SUFFIX ".pyd")
+set_target_properties(cgalpy_PYBINDINGS PROPERTIES SUFFIX ".pyd")
 endif()
 
-target_link_libraries(arr2_epec_seg_PYBINDINGS
-                      ${arr2_epec_seg}
+target_link_libraries(cgalpy_PYBINDINGS
+                      ${cgalpy}
 		      ${NON_WIN32_LIBRARIES}
                       ${Boost_LIBRARIES}
 		      ${PYTHON_LIBRARIES})
@@ -88,10 +88,10 @@ list (GET CGALPY_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_GEOMETRY_TRAITS} CGALPY_GT
 list (GET CGALPY_DCEL_SHORT_NAMES ${CGALPY_DCEL} CGALPY_DCEL_PART)
 set(CGALPY_LIB_NAME "arr2_${CGALPY_KERNEL_PART}_${CGALPY_GT_PART}${CGALPY_DCEL_PART}")
 
-set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES OUTPUT_NAME
+set_target_properties(cgalpy_PYBINDINGS PROPERTIES OUTPUT_NAME
 		      ${CGALPY_LIB_NAME})
 # don't prepend wrapper library name with lib
-set_target_properties(arr2_epec_seg_PYBINDINGS PROPERTIES PREFIX "")
+set_target_properties(cgalpy_PYBINDINGS PROPERTIES PREFIX "")
 
 # target_link_libraries(arr_2-ecep-seg ${NON_WIN32_LIBRARIES})
 
@@ -112,21 +112,21 @@ endif(DOXYGEN_FOUND)
 
 # Add Python bindings
 if (CGALPY_DEF_PYBINDINGS)
-  set_property(TARGET arr2_epec_seg_PYBINDINGS PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
-  set_property(TARGET arr2_epec_seg_PYBINDINGS PROPERTY INSTALL_RPATH "${CGAL_DIR}/lib")
+  set_property(TARGET cgalpy_PYBINDINGS PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
+  set_property(TARGET cgalpy_PYBINDINGS PROPERTY INSTALL_RPATH "${CGAL_DIR}/lib")
 endif()
 
-# set_property(TARGET arr2_epec_seg PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
-# set_property(TARGET arr2_epec_seg PROPERTY INSTALL_RPATH "${CGAL_DIR}/lib")
+# set_property(TARGET cgalpy PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
+# set_property(TARGET cgalpy PROPERTY INSTALL_RPATH "${CGAL_DIR}/lib")
 
 if (CGALPY_DEF_PYBINDINGS)
-  install(TARGETS arr2_epec_seg_PYBINDINGS
+  install(TARGETS cgalpy_PYBINDINGS
           RUNTIME DESTINATION ${CGALPY_INSTALL_BIN_DIR}
           LIBRARY DESTINATION ${CGALPY_INSTALL_LIB_DIR}
           ARCHIVE DESTINATION ${CGALPY_INSTALL_LIB_DIR})
 endif()
 
-# install(TARGETS arr2_epec_seg
+# install(TARGETS cgalpy
 #         RUNTIME DESTINATION ${CGALPY_INSTALL_BIN_DIR}
 #         LIBRARY DESTINATION ${CGALPY_INSTALL_LIB_DIR}
 #         ARCHIVE DESTINATION ${CGALPY_INSTALL_LIB_DIR})

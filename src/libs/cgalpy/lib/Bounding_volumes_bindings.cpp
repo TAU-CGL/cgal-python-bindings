@@ -5,6 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
+#include "config.hpp"
+#ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
 #include "common.hpp"
 #include <CGAL/Min_circle_2.h>
 #include <CGAL/Min_circle_2_traits_2.h>
@@ -66,4 +68,4 @@ void export_Bounding_volumes()
     .def("is_valid", &Min_circle_2::is_valid)
     ;
 }
-
+#endif

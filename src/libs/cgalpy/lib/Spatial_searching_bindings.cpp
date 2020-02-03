@@ -6,6 +6,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include "config.hpp"
+#ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
 #include "common.hpp"
 #include "CGAL/Cartesian_d.h"
 #include "CGAL/Kd_tree.h"
@@ -32,73 +34,10 @@ typedef General_distance_python<CGAL::Dimension_tag<CGALPY_DIMENSION>, FT, Point
 typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python> K_neighbor_search_python;
 typedef CGAL::Euclidean_distance<Search_traits_d> Euclidean_distance;
 
-// performance test
-/*
-#define _USE_MATH_DEFINES
-#include <math.h>
-bool cd(Polygon_set_2& ps, Point_3& p_3, FT l, FT epsilon)
+int get_kd_tree_dimension()
 {
-  auto x = p_3.x();
-  auto y = p_3.y();
-  auto a = p_3.z();
-  auto p_2 = Point_2(x, y);
-  auto r0 = Vector_2(-epsilon, epsilon);
-  auto r1 = Vector_2(-epsilon, -epsilon);
-  auto r2 = Vector_2(l + epsilon, -epsilon);
-  auto r3 = Vector_2(l + epsilon, epsilon);
-  auto p = Point_2(x, y);
-  auto at = Aff_Transformation_2(Rotation(), FT(sin(to_double(a))), FT(cos(to_double(a))), FT(1));
-  auto p0 = p_2 + at.transform(r0);
-  auto p1 = p_2 + at.transform(r1);
-  auto p2 = p_2 + at.transform(r2);
-  auto p3 = p_2 + at.transform(r3);
-
-  std::vector<Point_2> v = { p0, p1, p2, p3 };
-
-  auto rectangle = Polygon_2(v.begin(), v.end());
-  if (ps.do_intersect(rectangle)) return false;
-  return true;
+  return CGALPY_DIMENSION;
 }
-
-bool lp(Polygon_set_2& ps, Point_3& start, Point_3& end, FT length, FT epsilon, bool clockwise)
-{
-  auto x1 = start.x().exact();
-  auto y1 = start.y().exact();
-  auto a1 = start.z().exact();
-
-  auto x2 = end.x().exact();
-  auto y2 = end.y().exact();
-  auto a2 = end.z().exact();
-
-  if (!clockwise && a2 < a1) a1 = a1 - Gmpq(2 * M_PI);
-  if (clockwise && a2 > a1) a1 = a1 + Gmpq(2 * M_PI);
-
-  auto dx = x2 - x1;
-  auto dy = y2 - y1;
-  auto dz = abs((a2 - a1).to_double());
-
-  auto sample_count = int(
-    (
-    sqrt(pow(dx.to_double(), 2) + pow(dy.to_double(), 2))
-    + dz * (to_double(length) + to_double(epsilon))
-    )
-    / ((int(2)) * int(to_double(epsilon)))
-    )
-    + 1;
-
-  Gmpq x, y, a;
-  for (int i = 0; i < sample_count + 1; i++)
-  {
-    x = Gmpq(sample_count - i, sample_count) * x1 + Gmpq(i, sample_count) * x2;
-    y = Gmpq(sample_count - i, sample_count) * y1 + Gmpq(i, sample_count) * y2;
-    a = Gmpq(sample_count - i, sample_count) * a1 + Gmpq(i, sample_count) * a2;
-    auto p = Point_3(FT(x), FT(y), FT(a));
-    if (!cd(ps, p, length, epsilon)) return false;
-  }
-  return true;
-}
-
-*/
 
 template<typename T>
 size_t hash(T& immutable)
@@ -254,6 +193,6 @@ void export_Spatial_searching()
   
   bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
 
-  //def("cd", &cd);
-  //def("lp", &lp);
+  def("get_kd_tree_dimension", &get_kd_tree_dimension);
 }
+#endif

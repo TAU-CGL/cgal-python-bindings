@@ -7,6 +7,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include "config.hpp"
+#ifdef CGALPY_CONVEX_HULL_BINDINGS
 #include "common.hpp"
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/ch_eddy.h>
@@ -134,3 +135,4 @@ void export_Convex_hull_2_bindings()
   def("lower_hull_points_2", lower_hull_points_2);
   def("upper_hull_points_2", upper_hull_points_2);
 }
+#endif

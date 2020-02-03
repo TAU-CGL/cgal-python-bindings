@@ -52,11 +52,10 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   export_Halfedge();
   export_Face();
   export_Intersections_2();
-  export_Point_location();
-  export_Convex_hull_2_bindings();
-  export_Triangulations();
-  export_Spatial_searching();
-  export_Bounding_volumes();
+
+  export_Polygon_2();
+  export_Polygon_with_holes_2();
+  export_Polygon_set_2();
 
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
   export_Arr_linear_traits();
@@ -71,15 +70,31 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   export_Arr_algebraic_segment_traits();
 #endif
 
-#ifdef MINKOWSKI_SUM
-  export_Polygon_2();
-  export_Polygon_with_holes_2();
+#ifdef CGALPY_CONVEX_HULL_BINDINGS
+  export_Convex_hull_2_bindings();
+#endif
+#ifdef CGALPY_TRIANGULATIONS_BINDINGS
+  export_Triangulations();
+#endif
+#ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
+  export_Spatial_searching();
+#endif
+#ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
+  export_Bounding_volumes();
+#endif
+#ifdef CGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS
+  export_Boolean_set_operations_2();
+#endif
+#ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
   export_Polygon_partition_2();
-  export_Polygon_set_2();
+#endif
+#ifdef CGALPY_POINT_LOCATION_BINDINGS
+  export_Point_location();
+#endif
+#ifdef CGALPY_MINKOWSKI_SUM_BINDINGS
+  export_Minkowski_sum_2();
   export_General_polygon_2();
   export_General_polygon_with_holes_2();
   export_General_polygon_set_2();
-  export_Minkowski_sum_2();
-  export_Boolean_set_operations_2();
 #endif
 }

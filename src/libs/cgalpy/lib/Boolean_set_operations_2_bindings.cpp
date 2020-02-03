@@ -6,6 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "config.hpp"
+#ifdef CGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS
 #include "common.hpp"
 
 #include <CGAL/connect_holes.h>
@@ -182,3 +183,4 @@ void export_Boolean_set_operations_2()
 
 
 }
+#endif
