@@ -6,6 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "config.hpp"
+#ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
 #include "common.hpp"
 #include <CGAL/partition_2.h>
 #include <CGAL/Polygon_vertical_decomposition_2.h>
@@ -155,3 +156,4 @@ void export_Polygon_partition_2()
     .def("__call__", &small_side_angle_bisector_decomposition_2)
     ;
 }
+#endif

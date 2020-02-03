@@ -5,7 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
-
+#include "config.hpp"
+#ifdef CGALPY_TRIANGULATIONS_BINDINGS
 #include "common.hpp"
 #include <CGAL/Triangulation_2.h>
 #include <CGAL/Delaunay_triangulation_2.h>
@@ -218,3 +219,4 @@ void export_Triangulations()
   bind_iterator<Iterator_from_circulator<TFace_circulator>>("Triangulation_faces_iterator");
   bind_iterator<Iterator_from_circulator<TVertex_circulator>>("Triangulation_vertices_iterator");
 }
+#endif

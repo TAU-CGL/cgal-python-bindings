@@ -103,6 +103,46 @@ add_definitions(-DCGALPY_DCEL=${CGALPY_DCEL})
 # Select Dimension
 add_definitions(-DCGALPY_DIMENSION=${CGALPY_DIMENSION})
 
+# Minkowsi sum
+if (${CGALPY_MINKOWSKI_SUM_BINDINGS})
+  add_definitions(-DCGALPY_MINKOWSKI_SUM_BINDINGS)
+endif()
+
+# Triangulations bindings
+if (${CGALPY_TRIANGULATIONS_BINDINGS})
+  add_definitions(-DCGALPY_TRIANGULATIONS_BINDINGS)
+endif()
+
+# Spatial searching bindings
+if (${CGALPY_SPATIAL_SEARCHING_BINDINGS})
+  add_definitions(-DCGALPY_SPATIAL_SEARCHING_BINDINGS)
+endif()
+
+# Convex hull bindings
+if (${CGALPY_CONVEX_HULL_BINDINGS})
+  add_definitions(-DCGALPY_CONVEX_HULL_BINDINGS)
+endif()
+
+# Bounding volumes bindings
+if (${CGALPY_BINDING_VOLUMES_BINDINGS})
+  add_definitions(-DCGALPY_BINDING_VOLUMES_BINDINGS)
+endif()
+
+# Boolean set operations bindings
+if (${CGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS})
+  add_definitions(-DCGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS)
+endif()
+
+# Polygon partitioning operations bindings
+if (${CGALPY_POLYGON_PARTITIONING_BINDINGS})
+  add_definitions(-DCGALPY_POLYGON_PARTITIONING_BINDINGS)
+endif()
+
+# Point location bindings
+if (${CGALPY_POINT_LOCATION_BINDINGS})
+  add_definitions(-DCGALPY_POINT_LOCATION_BINDINGS)
+endif()
+
 set (CGALPY_INSTALL_INC_DIR "include" CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
 set (CGALPY_INSTALL_LIB_DIR "lib"     CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
 set (CGALPY_INSTALL_BIN_DIR "bin"

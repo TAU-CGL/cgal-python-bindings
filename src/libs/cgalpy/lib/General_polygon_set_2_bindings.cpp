@@ -6,6 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "config.hpp"
+#ifdef CGALPY_MINKOWSKI_SUM_BINDINGS
 #include "common.hpp"
 
 #include <CGAL/Gps_circle_segment_traits_2.h>
@@ -270,3 +271,4 @@ void export_General_polygon_set_2()
     .def("oriented_side", &oriented_side<General_polygon_with_holes_2>)
     ;
 }
+#endif

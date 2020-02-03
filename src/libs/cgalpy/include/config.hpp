@@ -61,8 +61,6 @@
 #define CGALPY_GEOMETRY_TRAITS_SHORT_NAME cs
 #endif
 
-#define MINKOWSKI_SUM 1
-
 #define CONCAT_3(a, b, c) a ## _ ## b ## _ ## c
 #define SET_MODULE_NAME(a, b, c) CONCAT_3(a, b, c)
 

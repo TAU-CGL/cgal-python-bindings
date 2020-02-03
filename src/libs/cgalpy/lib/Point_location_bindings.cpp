@@ -5,6 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
+#include "config.hpp"
+#ifdef CGALPY_POINT_LOCATION_BINDINGS
 #include "common.hpp"
 
 #include <CGAL/Arr_naive_point_location.h>
@@ -109,3 +111,4 @@ void export_Point_location()
     .def("get_vertex", &get_type<Vertex_const_handle>)
     ;
 }
+#endif
