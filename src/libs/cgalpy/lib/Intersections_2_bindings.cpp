@@ -226,23 +226,28 @@ boost::python::class_<result> bind_intersection_result(const char* python_name)
   return c;
 }
 
+// Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2) are not a valid overload for do_intersect
+// in which case the second version (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
-void bind_do_intersect_2T()
+void bind_do_intersect_2T(decltype(CGAL::do_intersect<Kernel>(T1(), T2())))
 {
   using namespace boost::python;
   def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
 }
 
+template<typename, typename>
+void bind_do_intersect_2T(...) {}
+
 template <typename T>
 void bind_do_intersect_1T()
 {
-  bind_do_intersect_2T<T, Point_2>();
-  bind_do_intersect_2T<T, Line_2>();
-  bind_do_intersect_2T<T, Ray_2>();
-  bind_do_intersect_2T<T, Segment_2>();
-  bind_do_intersect_2T<T, Triangle_2>();
-  bind_do_intersect_2T<T, Iso_rectangle_2>();
-  //bind_do_intersect_2T<T, Circle_2>(); no do_intersect for Circle_2 and Segment_2, Ray_2, Triangle_2
+  bind_do_intersect_2T<T, Point_2>(true);
+  bind_do_intersect_2T<T, Line_2>(true);
+  bind_do_intersect_2T<T, Ray_2>(true);
+  bind_do_intersect_2T<T, Segment_2>(true);
+  bind_do_intersect_2T<T, Triangle_2>(true);
+  bind_do_intersect_2T<T, Iso_rectangle_2>(true);
+  bind_do_intersect_2T<T, Circle_2>(true);
 }
 
 void bind_do_intersect()
@@ -252,7 +257,7 @@ void bind_do_intersect()
   bind_do_intersect_1T<Segment_2>();
   bind_do_intersect_1T<Triangle_2>();
   bind_do_intersect_1T<Iso_rectangle_2>();
-  //bind_do_intersect_1T<Circle_2>();
+  bind_do_intersect_1T<Circle_2>();
 }
 
 void export_Intersections_2()
