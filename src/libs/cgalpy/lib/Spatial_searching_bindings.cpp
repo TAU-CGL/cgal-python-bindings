@@ -28,6 +28,7 @@ typedef CGAL::Search_traits_d<K, CGAL::Dimension_tag<CGALPY_DIMENSION>> Search_t
 typedef CGAL::Kd_tree<Search_traits_d> Kd_tree;
 typedef CGAL::Sliding_midpoint<Search_traits_d> Splitter;
 typedef CGAL::Fuzzy_iso_box<Search_traits_d> Fuzzy_iso_box;
+typedef CGAL::Fuzzy_sphere<Search_traits_d> Fuzzy_sphere;
 typedef CGAL::Kd_tree_rectangle<FT, CGAL::Dimension_tag<CGALPY_DIMENSION>> Kd_tree_rectangle;
 typedef CGAL::K_neighbor_search<Search_traits_d> K_neighbor_search;
 typedef General_distance_python<CGAL::Dimension_tag<CGALPY_DIMENSION>, FT, Point_d, Point_d> Distance_python;
@@ -109,6 +110,7 @@ void bind_kd_tree(const char* python_name)
     .def("build", &T::build)
     .def("points", &points<T>)
     .def("search", &tree_search<T, Fuzzy_iso_box>)
+    .def("search", &tree_search<T, Fuzzy_sphere>)
     .def("size", &T::size)
     .def("capacity", &T::capacity)
     ;
@@ -150,11 +152,18 @@ void export_Spatial_searching()
     ;
 
   class_<Fuzzy_iso_box>("Fuzzy_iso_box")
-    .def(init <Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
+    .def(init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
     .def(init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT>())
     .def("contains", &Fuzzy_iso_box::contains)
     .def("inner_range_intersects", &Fuzzy_iso_box::inner_range_intersects)
     .def("outer_range_contains", &Fuzzy_iso_box::outer_range_contains)
+    ;
+
+  class_<Fuzzy_sphere>("Fuzzy_sphere")
+    .def(init<Point_d, FT, FT>())
+    .def("contains", &Fuzzy_sphere::contains)
+    .def("inner_range_intersects", &Fuzzy_sphere::inner_range_intersects)
+    .def("outer_range_intersects", &Fuzzy_sphere::outer_range_contains)
     ;
 
   class_<Kd_tree_rectangle>("Kd_tree_rectangle")
