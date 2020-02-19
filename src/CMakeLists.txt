@@ -124,8 +124,8 @@ if (${CGALPY_CONVEX_HULL_BINDINGS})
 endif()
 
 # Bounding volumes bindings
-if (${CGALPY_BINDING_VOLUMES_BINDINGS})
-  add_definitions(-DCGALPY_BINDING_VOLUMES_BINDINGS)
+if (${CGALPY_BOUNDING_VOLUMES_BINDINGS})
+  add_definitions(-DCGALPY_BOUNDING_VOLUMES_BINDINGS)
 endif()
 
 # Boolean set operations bindings

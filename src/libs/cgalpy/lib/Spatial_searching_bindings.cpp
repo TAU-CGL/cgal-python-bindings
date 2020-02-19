@@ -35,6 +35,7 @@ typedef General_distance_python<CGAL::Dimension_tag<CGALPY_DIMENSION>, FT, Point
 typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python> K_neighbor_search_python;
 typedef CGAL::Euclidean_distance<Search_traits_d> Euclidean_distance;
 
+
 int get_kd_tree_dimension()
 {
   return CGALPY_DIMENSION;
@@ -101,18 +102,19 @@ void bind_kd_tree(const char* python_name)
 {
   using namespace bp;
   class_<T, boost::noncopyable>(python_name)
-    //.def("__init__", make_constructor(&init_tree<T>))
     .def(init<>())
     .def("__init__", make_constructor(&init_tree_from_list<T>))
     .def("insert", static_cast<void (T::*) (const typename T::Point_d&)>(&T::insert))
     .def("insert", &tree_insert<T>)
-    //.def("remove", static_cast<void (T::*) (const typename T::Point_d&) > (&T::remove)) // returning address of local variable or temporary warning
+    .def("remove", static_cast<void (T::*) (const typename T::Point_d&)>(&T::remove))
     .def("build", &T::build)
+    .def("invalidate_build", &T::invalidate_build)
     .def("points", &points<T>)
     .def("search", &tree_search<T, Fuzzy_iso_box>)
     .def("search", &tree_search<T, Fuzzy_sphere>)
     .def("size", &T::size)
     .def("capacity", &T::capacity)
+    .def("reserve", &T::reserve)
     ;
 }
 
