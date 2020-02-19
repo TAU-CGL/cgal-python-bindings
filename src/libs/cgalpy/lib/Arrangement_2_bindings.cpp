@@ -46,10 +46,13 @@ Vertex& insert_point(Arrangement_2& arr, TPoint_2& p, PointLocation& pl)
 {
   return *(CGAL::insert_point(arr, p, pl));
 }
-void insert_curve(Arrangement_2& arr, Curve_2& c)
+
+template<typename CurveType>
+void insert_curve(Arrangement_2& arr, CurveType& c)
 {
   CGAL::insert(arr, c);
 }
+
 void insert_curves(Arrangement_2& arr, boost::python::list& lst)
 {
   if (!lst) return;
@@ -94,13 +97,13 @@ void insert_non_intersecting_curves(Arrangement_2& arr,
   CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
 }
 
-bool do_intersect_default(Arrangement_2& arr, Curve_2& c)
+bool do_intersect_default(Arrangement_2& arr, X_monotone_curve_2& c)
 {
   return CGAL::do_intersect(arr, c);
 }
 
 template <typename PointLocation>
-bool do_intersect(Arrangement_2& arr, Curve_2& c, PointLocation& pl)
+bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl)
 {
   return CGAL::do_intersect(arr, c, pl);
 }
@@ -297,7 +300,8 @@ void export_Arrangement_2()
   def("insert_point", &insert_point<Naive_pl>, return_internal_reference<>());
   def("insert_point", &insert_point<Wal_pl>, return_internal_reference<>());
   def("insert_point", &insert_point<Trapezoid_pl>, return_internal_reference<>());
-  def("insert", &insert_curve);
+  def("insert", &insert_curve<X_monotone_curve_2>);
+  def("insert", &insert_curve<Curve_2>);
   def("insert", &insert_curves);
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve_default, return_internal_reference<>());
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Naive_pl>, return_internal_reference<>());
