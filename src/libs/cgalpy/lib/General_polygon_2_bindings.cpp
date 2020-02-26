@@ -40,6 +40,7 @@ void export_General_polygon_2()
   using namespace boost::python;
   class_<General_polygon_2>("General_polygon_2")
     .def(init<>())
+    .def(init<General_polygon_2>())
     .def("__init__", make_constructor(&init_from_list))
     .def("push_back", &General_polygon_2::push_back)
     .def("orientation", &General_polygon_2::orientation)

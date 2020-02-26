@@ -32,6 +32,7 @@ void export_Polygon_2()
   using namespace boost::python;
   class_<Polygon_2>("Polygon_2")
     .def(init<>())
+    .def(init<const Polygon_2&>())
     .def("__init__", make_constructor(&init_from_list))
     .def("push_back", &Polygon_2::push_back)
     .def("is_simple", &Polygon_2::is_simple)
