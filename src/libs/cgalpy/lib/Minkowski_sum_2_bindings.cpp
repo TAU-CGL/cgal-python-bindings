@@ -33,17 +33,17 @@ Polygon_with_holes_2 minkowski_sum_by_reduced_convolution_2(T1& P, T2& Q)
   return CGAL::minkowski_sum_by_reduced_convolution_2(P, Q);
 }
 
-General_polygon_with_holes_2 approximated_offset_2(Polygon_2& p, FT& r, double& eps)
+General_polygon_with_holes_2 approximated_offset_2(Polygon_2& p, FT& r, double eps)
 {
   return CGAL::approximated_offset_2(p, r, eps);
 }
 
-General_polygon_with_holes_2 approximated_offset_2_pwh(Polygon_with_holes_2& pwh, FT& r, double& eps)
+General_polygon_with_holes_2 approximated_offset_2_pwh(Polygon_with_holes_2& pwh, FT& r, double eps)
 {
   return CGAL::approximated_offset_2(pwh, r, eps);
 }
 
-void approximated_inset_2(Polygon_2& p, FT& r, double& eps, boost::python::list& lst)
+void approximated_inset_2(Polygon_2& p, FT& r, double eps, boost::python::list& lst)
 {
   auto v = std::vector<General_polygon_2>();
   CGAL::approximated_inset_2(p, r, eps, std::back_inserter(v));
