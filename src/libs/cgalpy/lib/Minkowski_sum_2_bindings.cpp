@@ -43,7 +43,7 @@ General_polygon_with_holes_2 approximated_offset_2_pwh(Polygon_with_holes_2& pwh
   return CGAL::approximated_offset_2(pwh, r, eps);
 }
 
-void approximated_inset_2(Polygon_2& p, FT& r, double& eps, boost::python::list& lst)
+void approximated_inset_2(Polygon_2& p, FT& r, double eps, boost::python::list& lst)
 {
   auto v = std::vector<General_polygon_2>();
   CGAL::approximated_inset_2(p, r, eps, std::back_inserter(v));
