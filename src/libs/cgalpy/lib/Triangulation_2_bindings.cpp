@@ -5,8 +5,9 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+
 #include "config.hpp"
-#ifdef CGALPY_TRIANGULATIONS_BINDINGS
+#ifdef CGALPY_TRIANGULATION_2_BINDINGS
 #include "common.hpp"
 #include <CGAL/Triangulation_2.h>
 #include <CGAL/Delaunay_triangulation_2.h>
@@ -211,7 +212,7 @@ void export_Triangulations()
     .def("is_valid", &TFace::is_valid)
     ;
 
-  
+
   bind_copy_iterator<CopyIterator<All_edges_iterator>>("Triangulation_all_edges_iterator");
   bind_copy_iterator<CopyIterator<Finite_edges_iterator>>("Triangulation_finite_edges_iterator");
   bind_copy_iterator<Copy_iterator_from_circulator<TEdge_circulator>>("Triangulation_edges_iterator");

@@ -6,7 +6,6 @@ project(cgalpy)
 
 # Define options
 option(BUILD_SHARED_LIBS "Build shared libs instead of static libs" ON)
-option(CGALPY_DEF_PYBINDINGS "Define Python bindings" OFF)
 
 # Kernel options
 set(CGALPY_EPEC_KERNEL 0)
@@ -38,28 +37,42 @@ set(CGALPY_ARR_VERTEX_EXTENDED_DCEL 3)
 set(CGALPY_ARR_ALL_EXTENDED_DCEL 4)
 set(CGALPY_DCEL_SHORT_NAMES "" "_fex" "_hex" "_vex" "_ex")
 set(CGALPY_DCEL_NAMES "plain" "faceExtended" "halfedgeExtended" "vertexExtended" "allExtended")
-#Default
+
+# Default
 SET(CGALPY_DCEL ${CGALPY_ARR_PLAIN_DCEL})
 SET(CGALPY_DCEL_NAME "plain" CACHE STRING "The DCEL to use")
 set_property(CACHE CGALPY_DCEL_NAME PROPERTY STRINGS plain faceExtended halfedgeExtended vertexExtended allExtended)
-#Dimension
+
+# Dimension
 SET(CGALPY_DIMENSION 4 CACHE STRING "The dimension of spatial search objects")
-#Minkowsi sum
-SET(CGALPY_MINKOWSKI_SUM_BINDINGS true CACHE BOOL "Compile bindings for Minkowski sum")
-#Triangulations
-SET(CGALPY_TRIANGULATIONS_BINDINGS true CACHE BOOL "Compile bindings for triangulations")
-#Spatial_searching_bindings
+
+# 2D Minkowsi sums
+SET(CGALPY_MINKOWSKI_SUM_2_BINDINGS true CACHE BOOL "Compile bindings for 2D Minkowski sum")
+
+# Triangulations
+SET(CGALPY_TRIANGULATION_2_BINDINGS true CACHE BOOL "Compile bindings for triangulations")
+
+# 3D Alpha Shapes
+SET(CGALPY_ALPHA_SHAPES_3_BINDINGS true CACHE BOOL "Compile bindings for 3D Alpha Shapes")
+
+# Spatial_searching_bindings
 SET(CGALPY_SPATIAL_SEARCHING_BINDINGS true CACHE BOOL "Compile bindings for spatial searching")
-#Convex hull
+
+# Convex hull
 SET(CGALPY_CONVEX_HULL_BINDINGS true CACHE BOOL "Compile bindings for convex hull")
-#Bounding volumes
+
+# Bounding volumes
 SET(CGALPY_BOUNDING_VOLUMES_BINDINGS true CACHE BOOL "Compile bindings for bounding volumes")
-#Boolean set operations
+
+# 2D Regularized Boolean set operations
 SET(CGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS true CACHE BOOL "Compile bindings for boolean set operations")
-#Polygon partitioning
+
+# Polygon partitioning
 SET(CGALPY_POLYGON_PARTITIONING_BINDINGS true CACHE BOOL "Compile bindings for polygon partitioning")
-#Point location
+
+# Point location
 SET(CGALPY_POINT_LOCATION_BINDINGS true CACHE BOOL "Compile bindings for point location")
+
 # General
 set(CGALPY_MODULES_REL_DIR cmake/modules)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/${CGALPY_MODULES_REL_DIR})
@@ -93,7 +106,7 @@ add_subdirectory(src)
 include (InstallRequiredSystemLibraries)
 
 set (CPACK_GENERATOR TGZ)
-set (CPACK_PACKAGE_VENDOR "Xenia Optimal Ltd")
+set (CPACK_PACKAGE_VENDOR "Tel Aviv University")
 set (CPACK_PACKAGE_VERSION_MAJOR "0")
 set (CPACK_PACKAGE_VERSION_MINOR "1")
 set (CPACK_PACKAGE_VERSION_PATCH "0")

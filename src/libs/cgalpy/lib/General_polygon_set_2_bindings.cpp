@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "config.hpp"
-#ifdef CGALPY_MINKOWSKI_SUM_BINDINGS
+#ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
 #include "common.hpp"
 
 #include <CGAL/Gps_circle_segment_traits_2.h>
