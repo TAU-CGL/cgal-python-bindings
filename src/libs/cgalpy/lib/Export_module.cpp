@@ -8,8 +8,6 @@
 #include "config.hpp"
 #include "common.hpp"
 
-
-
 void export_Kernel();
 void export_Arrangement_2();
 void export_Intersections_2();
@@ -73,7 +71,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 #ifdef CGALPY_CONVEX_HULL_BINDINGS
   export_Convex_hull_2_bindings();
 #endif
-#ifdef CGALPY_TRIANGULATIONS_BINDINGS
+#ifdef CGALPY_TRIANGULATION_2_BINDINGS
   export_Triangulations();
 #endif
 #ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
@@ -91,7 +89,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 #ifdef CGALPY_POINT_LOCATION_BINDINGS
   export_Point_location();
 #endif
-#ifdef CGALPY_MINKOWSKI_SUM_BINDINGS
+#ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
   export_Minkowski_sum_2();
   export_General_polygon_2();
   export_General_polygon_with_holes_2();

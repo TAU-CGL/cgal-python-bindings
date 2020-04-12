@@ -9,7 +9,7 @@ if (NOT CGAL_FOUND)
 endif()
 include(${CGAL_USE_FILE})
 
-if (BUILD_SHARED_LIBS)
+if(BUILD_SHARED_LIBS)
   set(Boost_USE_STATIC_LIBS OFF)
 else()
   set(Boost_USE_STATIC_LIBS ON)
@@ -28,34 +28,29 @@ find_package(PythonLibs ${PY_MIN_VERSION} REQUIRED)
 # endforeach()
 
 if (PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
-  set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python)
+  set (CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python)
 else()
   # Set the Boost python library name (e.g., python35)
-  set (CGALPY_BOOST_PYTHON_LIB_NAME python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR})
+  set(CGALPY_BOOST_PYTHON_LIB_NAME python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR})
   set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} ${CGALPY_BOOST_PYTHON_LIB_NAME})
 endif()
 include_directories(${PYTHON_INCLUDE_DIRS})
-add_definitions(-DCGALPY_DEF_PYBINDINGS)
 find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS ${CGALPY_BOOST_LIBRARIES})
 
-if (NOT Boost_FOUND)
-  message(STATUS "This library cannot be compiled, as it requires Boost.")
+if(NOT Boost_FOUND)
+  message (STATUS "This library cannot be compiled, as it requires Boost.")
   return()
 endif()
-
-find_package(OpenGL REQUIRED)
 
 # Add includes and libs
 include_directories(${Boost_INCLUDE_DIR})
 
-if (WIN32)
-  include_directories(libs/GL/include)
-endif(WIN32)
-
 # Add some compiler options
-if (WIN32)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   add_definitions(-GR)
   add_definitions(-vmg)
+# elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+#
 endif()
 
 # Use C++14 for this directory and its sub-directories.
@@ -103,51 +98,56 @@ add_definitions(-DCGALPY_DCEL=${CGALPY_DCEL})
 # Select Dimension
 add_definitions(-DCGALPY_DIMENSION=${CGALPY_DIMENSION})
 
-# Minkowsi sum
-if (${CGALPY_MINKOWSKI_SUM_BINDINGS})
-  add_definitions(-DCGALPY_MINKOWSKI_SUM_BINDINGS)
+# 2D Minkowsi sums
+if(${CGALPY_MINKOWSKI_SUM_2_BINDINGS})
+  add_definitions(-DCGALPY_MINKOWSKI_SUM_2_BINDINGS)
 endif()
 
 # Triangulations bindings
-if (${CGALPY_TRIANGULATIONS_BINDINGS})
-  add_definitions(-DCGALPY_TRIANGULATIONS_BINDINGS)
+if (${CGALPY_TRIANGULATION_2_BINDINGS})
+  add_definitions(-DCGALPY_TRIANGULATION_2_BINDINGS)
+endif()
+
+# 3D Alpha Shapes
+if(${CGALPY_ALPHA_SHAPES_3_BINDINGS})
+  add_definitions(-DCGALPY_ALPHA_SHAPES_3_BINDINGS)
 endif()
 
 # Spatial searching bindings
-if (${CGALPY_SPATIAL_SEARCHING_BINDINGS})
+if(${CGALPY_SPATIAL_SEARCHING_BINDINGS})
   add_definitions(-DCGALPY_SPATIAL_SEARCHING_BINDINGS)
 endif()
 
 # Convex hull bindings
-if (${CGALPY_CONVEX_HULL_BINDINGS})
+if(${CGALPY_CONVEX_HULL_BINDINGS})
   add_definitions(-DCGALPY_CONVEX_HULL_BINDINGS)
 endif()
 
 # Bounding volumes bindings
-if (${CGALPY_BOUNDING_VOLUMES_BINDINGS})
+if(${CGALPY_BOUNDING_VOLUMES_BINDINGS})
   add_definitions(-DCGALPY_BOUNDING_VOLUMES_BINDINGS)
 endif()
 
 # Boolean set operations bindings
-if (${CGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS})
+if(${CGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS})
   add_definitions(-DCGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS)
 endif()
 
 # Polygon partitioning operations bindings
-if (${CGALPY_POLYGON_PARTITIONING_BINDINGS})
+if(${CGALPY_POLYGON_PARTITIONING_BINDINGS})
   add_definitions(-DCGALPY_POLYGON_PARTITIONING_BINDINGS)
 endif()
 
 # Point location bindings
-if (${CGALPY_POINT_LOCATION_BINDINGS})
+if(${CGALPY_POINT_LOCATION_BINDINGS})
   add_definitions(-DCGALPY_POINT_LOCATION_BINDINGS)
 endif()
 
-set (CGALPY_INSTALL_INC_DIR "include" CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
-set (CGALPY_INSTALL_LIB_DIR "lib"     CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
-set (CGALPY_INSTALL_BIN_DIR "bin"
+set(CGALPY_INSTALL_INC_DIR "include" CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
+set(CGALPY_INSTALL_LIB_DIR "lib"     CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
+set(CGALPY_INSTALL_BIN_DIR "bin"
   CACHE STRING "The folder where CGALPY executables, e.g., binaried and scripts, will be installed, relative to CMAKE_INSTALL_PREFIX")
-set (CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
+set(CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
   CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
 
 # Add subdirectories
