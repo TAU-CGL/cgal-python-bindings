@@ -289,8 +289,9 @@ void export_Arrangement_2()
     .def("clear", &Arrangement_2::clear)
 
     //supported only by some traits
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
-|| CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+#if (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS) || \
+    (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS) || \
+    (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS)
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
 #endif
@@ -313,8 +314,9 @@ void export_Arrangement_2()
   def("zone", &zone<Naive_pl>);
   def("zone", &zone<Wal_pl>);
   //supported only by some traits
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
-|| CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+#if (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS) || \
+    (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS) || \
+    (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS)
   def("zone", &zone<Landmarks_pl>);
   def("do_intersect", &do_intersect<Landmarks_pl>);
   def("insert_point", &insert_point<Landmarks_pl>, return_internal_reference<>());
@@ -337,7 +339,7 @@ void export_Arrangement_2()
   def("remove_vertex", &remove_vertex_free);
 
 #if (CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL) || \
-  (CGALPY_DCEL == CGALPY_EXTENDED_DCEL)
+    (CGALPY_DCEL == CGALPY_EXTENDED_DCEL)
   class_<Arr_face_overlay_traits>("Arr_face_overlay_traits", init<bp::object>())
     ;
 #endif
