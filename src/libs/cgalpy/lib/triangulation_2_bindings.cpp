@@ -193,7 +193,7 @@ void export_triangulation(C c)
     ;
 }
 
-void export_Triangulations()
+void export_triangulations()
 {
   using namespace boost::python;
   auto c0 = class_<Triangulation_2>("Triangulation_2");

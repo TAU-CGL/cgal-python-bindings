@@ -127,7 +127,7 @@ void small_side_angle_bisector_decomposition_2(Small_side_angle_bisector_decompo
   }
 }
 
-void export_Polygon_partition_2()
+void export_polygon_partition_2()
 {
   using namespace boost::python;
   def("approx_convex_partition_2", &approx_convex_partition_2);
