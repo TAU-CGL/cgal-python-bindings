@@ -156,8 +156,6 @@ T ipower(T& p, int i)
   return CGAL::ipower(p, i);
 }
 
-
-
 void export_Arr_algebraic_segment_traits()
 {
   using namespace boost::python;
