@@ -16,6 +16,7 @@ set(CGALPY_KERNEL_NAMES "epec" "epic")
 set(CGALPY_KERNEL ${CGALPY_EPEC_KERNEL})
 SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
 set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epec epic)
+
 # Geometry Traits
 set(CGALPY_ARR_LINEAR_GEOMETRY_TRAITS 0)
 set(CGALPY_ARR_SEGMENT_GEOMETRY_TRAITS 1)
@@ -29,6 +30,7 @@ set(CGALPY_GEOMETRY_TRAITS_NAMES linear segment nonCachingSegment conic algebrai
 SET(CGALPY_GEOMETRY_TRAITS ${CGALPY_ARR_SEGMENT_GEOMETRY_TRAITS})
 SET(CGALPY_GEOMETRY_TRAITS_NAME "segment" CACHE STRING "The geometry traits to use")
 set_property(CACHE CGALPY_GEOMETRY_TRAITS_NAME PROPERTY STRINGS linear segment nonCachingSegment conic algebraic circleSegment)
+
 # DCEL
 set(CGALPY_ARR_PLAIN_DCEL 0)
 set(CGALPY_ARR_FACE_EXTENDED_DCEL 1)
@@ -52,9 +54,6 @@ SET(CGALPY_MINKOWSKI_SUM_2_BINDINGS true CACHE BOOL "Compile bindings for 2D Min
 # Triangulations
 SET(CGALPY_TRIANGULATION_2_BINDINGS true CACHE BOOL "Compile bindings for triangulations")
 
-# 3D Alpha Shapes
-SET(CGALPY_ALPHA_SHAPES_3_BINDINGS true CACHE BOOL "Compile bindings for 3D Alpha Shapes")
-
 # Spatial_searching_bindings
 SET(CGALPY_SPATIAL_SEARCHING_BINDINGS true CACHE BOOL "Compile bindings for spatial searching")
 
@@ -72,6 +71,93 @@ SET(CGALPY_POLYGON_PARTITIONING_BINDINGS true CACHE BOOL "Compile bindings for p
 
 # Point location
 SET(CGALPY_POINT_LOCATION_BINDINGS true CACHE BOOL "Compile bindings for point location")
+
+# 3D Triangulation Vertex Base
+set(CGALPY_TRI3_VERTEX_BASE_PLAIN                                0)
+set(CGALPY_TRI3_VERTEX_BASE_PLAIN_WITH_INFO                      1)
+set(CGALPY_TRI3_VERTEX_BASE_REGULAR                              2)
+set(CGALPY_TRI3_VERTEX_BASE_REGULAR_WITH_INFO                    3)
+set(CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE                          4)
+set(CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE_WITH_INFO                5)
+set(CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE_REGULAR                  6)
+set(CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE_REGULAR_WITH_INFO        7)
+set(CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE                    8)
+set(CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE_WITH_INFO          9)
+set(CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE_REGULAR           10)
+set(CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE_REGULAR_WITH_INFO 11)
+
+set(CGALPY_TRI3_VERTEX_BASE_SHORT_NAMES plain pwi reg rwi as aswh asr asrwi fas faswi fasr fasrwi)
+set(CGALPY_TRI3_VERTEX_BASE_NAMES plain plainWithInfo regular regualrWithInfo alphaShape alphaShapeWithInfo alphaShapeRegular alphaShapeRegularWithInfo fixedAlphaShape fixedAlphaShapeWithInfo fixedAlphaShapeRegular fixedAlphaShapeRegularWithInfo)
+# Default
+SET(CGALPY_TRI3VERTEX_BASE_ ${CGALPY_TRI3_VERTEX_BASE_PLAIN})
+SET(CGALPY_TRI3_VERTEX_BASE_NAME "plain" CACHE STRING "The 3D Triangulation vertex base")
+set_property(CACHE CGALPY_TRI3_VERTEX_BASE_NAME PROPERTY STRINGS plain plainWithInfo regular regualrWithInfo alphaShape alphaShapeWithInfo alphaShapeRegular alphaShapeRegularWithInfo fixedAlphaShape fixedAlphaShapeWithInfo fixedAlphaShapeRegular fixedAlphaShapeRegularWithInfo)
+
+# 3D Triangulation Cell Base
+set(CGALPY_TRI3_CELL_BASE_PLAIN                                0)
+set(CGALPY_TRI3_CELL_BASE_PLAIN_WITH_INFO                      1)
+set(CGALPY_TRI3_CELL_BASE_REGULAR                              2)
+set(CGALPY_TRI3_CELL_BASE_REGULAR_WITH_INFO                    3)
+set(CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE                          4)
+set(CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE_WITH_INFO                5)
+set(CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE_REGULAR                  6)
+set(CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE_REGULAR_WITH_INFO        7)
+set(CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE                    8)
+set(CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_WITH_INFO          9)
+set(CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR           10)
+set(CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR_WITH_INFO 11)
+
+set(CGALPY_TRI3_CELL_BASE_SHORT_NAMES plain pwi reg rwi as aswh asr asrwi fas faswi fasr fasrwi)
+set(CGALPY_TRI3_CELL_BASE_NAMES plain plainWithInfo regular regualrWithInfo alphaShape alphaShapeWithInfo alphaShapeRegular alphaShapeRegularWithInfo fixedAlphaShape fixedAlphaShapeWithInfo fixedAlphaShapeRegular fixedAlphaShapeRegularWithInfo)
+# Default
+SET(CGALPY_TRI3CELL_BASE_ ${CGALPY_TRI3_CELL_BASE_PLAIN})
+SET(CGALPY_TRI3_CELL_BASE_NAME "plain" CACHE STRING "The 3D Triangulation cell base")
+set_property(CACHE CGALPY_TRI3_CELL_BASE_NAME PROPERTY STRINGS plain plainWithInfo regular regualrWithInfo alphaShape alphaShapeWithInfo alphaShapeRegular alphaShapeRegularWithInfo fixedAlphaShape fixedAlphaShapeWithInfo fixedAlphaShapeRegular fixedAlphaShapeRegularWithInfo)
+
+# 3D Triangulation traits
+set(CGALPY_TRI3_TRAITS_KERNEL             0)
+set(CGALPY_TRI3_TRAITS_PERIODIC3_DELAUNAY 1)
+
+set(CGALPY_TRI3_TRAITS_SHORT_NAMES kernel p3d)
+set(CGALPY_TRI3_TRAITS_NAMES kernel periodic3Delaunay)
+# Default
+SET(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_KERNEL})
+SET(CGALPY_TRI3_TRAITS_NAME "kernel" CACHE STRING "The 3D Triangulation traits")
+set_property(CACHE CGALPY_TRI3_TRAITS_NAME PROPERTY STRINGS kernel periodic3Delaunay)
+
+# 3D Triangulations
+set(CGALPY_TRI3_PLAIN              0)
+set(CGALPY_TRI3_REGULAR            1)
+set(CGALPY_TRI3_DELAUNAY           2)
+set(CGALPY_TRI3_PERIODIC3_DELAUNAY 3)
+set(CGALPY_TRI3_SHORT_NAMES plain reg del p3del)
+set(CGALPY_TRI3_NAMES plain regular delaunay periodic3Delaunay)
+# Default
+SET(CGALPY_TRI3 ${CGALPY_TRI3_REGULAR})
+SET(CGALPY_TRI3_NAME "regular" CACHE STRING "The 3D Triangulation")
+set_property(CACHE CGALPY_TRI3_NAME PROPERTY STRINGS plain regular delaunay periodic3Delaunay)
+
+# 3D Alpha Shape comparison tag
+set(CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_TRUE  0)
+set(CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_FALSE 1)
+set(CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_SHORT_NAMES true false)
+set(CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_NAMES true false)
+# Default
+SET(CGALPY_ALPHA_SHAPE_EXACT_COMPARISON ${CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_TRUE})
+SET(CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_NAME "true" CACHE STRING "The 3D Alpha shape exact comparison tag")
+set_property(CACHE CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_NAME PROPERTY STRINGS true false)
+
+# 3D Alpha Shapes
+set(CGALPY_ALPHA_SHAPE_PLAIN 0)
+set(CGALPY_ALPHA_SHAPE_FIXED 1)
+set(CGALPY_ALPHA_SHAPE_SHORT_NAMES plain fixed)
+set(CGALPY_ALPHA_SHAPE_NAMES plain fixed)
+# Default
+SET(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_PLAIN})
+SET(CGALPY_ALPHA_SHAPE_NAME "plain" CACHE STRING "The 3D Alpha shape construct")
+set_property(CACHE CGALPY_ALPHA_SHAPE_NAME PROPERTY STRINGS plain fixed)
+
+SET(CGALPY_ALPHA_SHAPES_3_BINDINGS false CACHE BOOL "Compile bindings for 3D Alpha Shapes")
 
 # General
 set(CGALPY_MODULES_REL_DIR cmake/modules)
