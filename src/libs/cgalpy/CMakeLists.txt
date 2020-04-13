@@ -31,7 +31,6 @@ set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/Triangulation_2_bindings.cpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/Convex_hull_2_bindings.cpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/Spatial_searching_bindings.cpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/Bounding_volumes_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/Alpha_shapes_3_bindings.cpp)
 
 # Add all include directories
 include_directories(include)
