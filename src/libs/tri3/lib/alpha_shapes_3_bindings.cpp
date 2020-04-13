@@ -234,6 +234,16 @@ typedef CGAL::Fixed_alpha_shape_3<Triangulation_3>      Alpha_shape_3;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ALPHA_SHAPE");
 #endif
 
+void make_alpha_shape(Alpha_shape_3& as, boost::python::list& lst)
+{
+  if (! lst) return;
+  if (! extract<Point_2>(lst[0]).check()) return;
+  auto begin = boost::python::stl_input_iterator<Point_3>(lst);
+  auto end = boost::python::stl_input_iterator<Point_3>();
+  auto v = std::vector<Point_3>(begin, end);
+  as.make_alpha_shape(v.begin(), v.end());
+}
+
 void export_alpha_shapes_3()
 {
   std::list<Point_3> lp;
@@ -250,41 +260,43 @@ void export_alpha_shapes_3()
     .def(init<>())
     .def(init<optional<double, Alpha_shape_3::Mode>>())
     .def(init<optional<FT&, Alpha_shape_3::Mode>>())
+    .def(init<Triangulation_3&, optional<double, Alpha_shape_3::Mode>>())
     .def(init<Triangulation_3&, optional<FT&, Alpha_shape_3::Mode>>())
-    // .def(init<A&>())
-    // // Modifiers
-    // .def("make_alpha_shape", &A:make_alpha_shape)
-    // .def("clear", &A:clear)
-    // .def("set_alpha", &A:set_alpha)
-    // .def("set_mode", &A:set_mode)
-    // // Query Functions
-    // .def("get_mode", &A:get_mode)
-    // .def("get_alpha", &A:get_alpha)
-    // .def("get_nth_alpha", &A:get_nth_alpha)
-    // .def("number_of_alphas", &A:number_of_alphas)
-    // .def("classify", &A:classify)
-    // .def("classify", &A:classify)
-    // .def("classify", &A:classify)
-    // .def("classify", &A:classify)
-    // .def("classify", &A:classify)
-    // .def("classify", &A:classify)
-    // .def("get_alpha_status", &A:get_alpha_status)
-    // .def("get_alpha_status", &A:get_alpha_status)
-    // .def("get_alpha_shape_cells", &A:get_alpha_shape_cells)
-    // .def("get_alpha_shape_facets", &A:get_alpha_shape_facets)
-    // .def("get_alpha_shape_edges", &A:get_alpha_shape_edges)
-    // .def("get_alpha_shape_vertices", &A:get_alpha_shape_vertices)
-    // .def("filtration", &A:filtration)
-    // .def("filtration_with_alpha_values", &A:filtration_with_alpha_values)
+    // .def(init<begin, end, <optional<double, Alpha_shape_3::Mode>>())
+    // .def(init<begin, end, optional<FT&, Alpha_shape_3::Mode>>())
+    // Modifiers
+    .def("make_alpha_shape", &make_alpha_shape)
+    .def("clear", &Alpha_shape_3::clear)
+    .def("set_alpha", &Alpha_shape_3::set_alpha)
+    .def("set_mode", &Alpha_shape_3::set_mode)
+    // Query Functions
+    .def("get_mode", &Alpha_shape_3::get_mode)
+    .def("get_alpha", &Alpha_shape_3::get_alpha, return_value_policy<copy_const_reference>())
+    .def("get_nth_alpha", &Alpha_shape_3::get_nth_alpha, return_value_policy<copy_const_reference>())
+    .def("number_of_alphas", &Alpha_shape_3::number_of_alphas)
+    // .def("classify", &Alpha_shape_3::classify)
+    // .def("classify", &Alpha_shape_3::classify)
+    // .def("classify", &Alpha_shape_3::classify)
+    // .def("classify", &Alpha_shape_3::classify)
+    // .def("classify", &Alpha_shape_3::classify)
+    // .def("classify", &Alpha_shape_3::classify)
+    // .def("get_alpha_status", &Alpha_shape_3::get_alpha_status)
+    // .def("get_alpha_status", &Alpha_shape_3::get_alpha_status)
+    // .def("get_alpha_shape_cells", &Alpha_shape_3::get_alpha_shape_cells)
+    // .def("get_alpha_shape_facets", &Alpha_shape_3::get_alpha_shape_facets)
+    // .def("get_alpha_shape_edges", &Alpha_shape_3::get_alpha_shape_edges)
+    // .def("get_alpha_shape_vertices", &Alpha_shape_3::get_alpha_shape_vertices)
+    // .def("filtration", &Alpha_shape_3::filtration)
+    // .def("filtration_with_alpha_values", &Alpha_shape_3::filtration_with_alpha_values)
     // // Traversal of the alpha-Values
-    // .def("alpha_begin", &A:alpha_begin)
-    // .def("alpha_end", &A:alpha_end)
-    // .def("alpha_find", &A:alpha_find)
-    // .def("alpha_lower_bound", &A:alpha_lower_bound)
-    // .def("alpha_upper_bound", &A:alpha_upper_bound)
+    // .def("alpha_begin", &Alpha_shape_3::alpha_begin)
+    // .def("alpha_end", &Alpha_shape_3::alpha_end)
+    // .def("alpha_find", &Alpha_shape_3::alpha_find)
+    // .def("alpha_lower_bound", &Alpha_shape_3::alpha_lower_bound)
+    // .def("alpha_upper_bound", &Alpha_shape_3::alpha_upper_bound)
     // // Operations
-    // .def("number_of_solid_components", &A:number_of_solid_components)
-    // .def("find_optimal_alpha", &A:find_optimal_alpha)
+    // .def("number_of_solid_components", &Alpha_shape_3::number_of_solid_components)
+    // .def("find_optimal_alpha", &Alpha_shape_3::find_optimal_alpha)
     ;
 }
 
