@@ -7,9 +7,9 @@
 
 #include <boost/static_assert.hpp>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #ifdef CGALPY_ALPHA_SHAPES_3_BINDINGS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
 
 // Config:
 #define CGALPY_TRI3_VERTEX_BASE_PLAIN                                 0

@@ -6,9 +6,10 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #ifdef CGALPY_CONVEX_HULL_BINDINGS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
+
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/ch_eddy.h>
 #include <CGAL/ch_jarvis.h>

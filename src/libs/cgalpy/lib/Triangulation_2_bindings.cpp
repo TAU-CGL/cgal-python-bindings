@@ -6,13 +6,15 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
+
 #include <CGAL/Triangulation_2.h>
 #include <CGAL/Delaunay_triangulation_2.h>
 #include <CGAL/Constrained_triangulation_2.h>
-#include "python_iterator_templates.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
+
 namespace bp = boost::python;
 
 typedef CGAL::Triangulation_2<Kernel>                           Triangulation_2;

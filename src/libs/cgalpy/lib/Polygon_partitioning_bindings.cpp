@@ -5,9 +5,10 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
+
 #include <CGAL/partition_2.h>
 #include <CGAL/Polygon_vertical_decomposition_2.h>
 #include <CGAL/Polygon_triangulation_decomposition_2.h>
@@ -92,7 +93,7 @@ bool is_convex_2(Polygon_2& p)
   return CGAL::is_convex_2(p.vertices_begin(), p.vertices_end());
 }
 
-template<typename T> 
+template<typename T>
 void polygon_vertical_decomposition_2(Polygon_vertical_decomposition_2& pvd, T& polygon, bp::list& res)
 {
   auto v = std::vector<Polygon_2>();

@@ -5,9 +5,9 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "config.hpp"
-#include "common.hpp"
-#include "python_iterator_templates.hpp"
+#include "CGALPY/config.hpp"
+#include "CGALPY/common.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
 
 Point_2& left_vertex(Polygon_2& p) { return *(p.left_vertex()); }
 Point_2& right_vertex(Polygon_2& p) { return *(p.right_vertex()); }

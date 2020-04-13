@@ -6,9 +6,9 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
 
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }

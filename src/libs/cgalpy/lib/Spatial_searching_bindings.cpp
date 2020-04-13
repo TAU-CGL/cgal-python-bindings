@@ -6,9 +6,10 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
+
 #include "CGAL/Cartesian_d.h"
 #include "CGAL/Kd_tree.h"
 #include <CGAL/Kd_tree_rectangle.h>
@@ -17,7 +18,7 @@
 #include <CGAL/Fuzzy_iso_box.h>
 #include <CGAL/Euclidean_distance.h>
 #include <CGAL/Fuzzy_sphere.h>
-#include "General_distance_python.hpp"
+#include "CGALPY/General_distance_python.hpp"
 
 typedef CGAL::Cartesian_d<FT> K;
 typedef K::Point_d Point_d;
@@ -87,7 +88,7 @@ void tree_search(T& tree, FQI& q, bp::list& lst)
   auto v = std::vector<typename T::Point_d>();
   tree.search(std::back_inserter(v), q);
   for (auto p : v)
-    lst.append(p); 
+    lst.append(p);
 }
 
 template<typename T>
@@ -201,7 +202,7 @@ void export_Spatial_searching()
     ;
 
   bind_neighbor_search<K_neighbor_search_python>("K_neighbor_search_python");
-  
+
   bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
 
   def("get_kd_tree_dimension", &get_kd_tree_dimension);

@@ -6,9 +6,9 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
 
 bp::list to_double(TPoint_2& p)
 {
