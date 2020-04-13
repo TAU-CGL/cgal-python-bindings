@@ -29,7 +29,7 @@ Polygon_with_holes_2::Hole_const_iterator holes_end(Polygon_with_holes_2& p)
 
 Polygon_2& outer_boundary(Polygon_with_holes_2& p) { return p.outer_boundary(); }
 
-void export_Polygon_with_holes_2()
+void export_polygon_with_holes_2()
 {
   using namespace boost::python;
   class_<Polygon_with_holes_2>("Polygon_with_holes_2")

@@ -29,7 +29,7 @@ void insert_list(Min_circle_2& mc, bp::list& lst)
   mc.insert(begin, end);
 }
 
-void export_Bounding_volumes()
+void export_bounding_volumes()
 {
   using namespace boost::python;
   class_<Optimisation_circle_2>("Optimization_circle_2")

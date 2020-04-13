@@ -54,7 +54,7 @@ void Landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
 }
 #endif
 
-void export_Point_location()
+void export_point_location()
 {
   using namespace boost::python;
 

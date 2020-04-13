@@ -146,7 +146,7 @@ void connect_holes(Polygon_with_holes_2& pwh, boost::python::list& lst)
 }
 
 
-void export_Boolean_set_operations_2()
+void export_boolean_set_operations_2()
 {
   using namespace boost::python;
   def("complement", complement0);

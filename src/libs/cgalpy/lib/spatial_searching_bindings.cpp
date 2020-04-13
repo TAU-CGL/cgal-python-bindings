@@ -138,7 +138,7 @@ void bind_neighbor_search(const char* python_name)
     ;
 }
 
-void export_Spatial_searching()
+void export_spatial_searching()
 {
   using namespace bp;
   class_<Point_d>("Point_d")

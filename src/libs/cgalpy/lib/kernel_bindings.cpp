@@ -65,7 +65,7 @@ Vector_2 transform_vector(Aff_Transformation_2& t, Vector_2 & v) { return t.tran
 Direction_2 transform_direction(Aff_Transformation_2& t, Direction_2& d) { return t.transform(d); }
 Line_2 transform_line(Aff_Transformation_2& t, Line_2& l) { return t.transform(l); }
 
-void export_Kernel()
+void export_kernel()
 {
   using namespace boost::python;
 

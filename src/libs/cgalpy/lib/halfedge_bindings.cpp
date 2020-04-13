@@ -21,7 +21,7 @@ Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
   return new Iterator_from_circulator<Ccb_halfedge_circulator>(e.ccb());
 }
 
-void export_Halfedge()
+void export_halfedge()
 {
   using namespace boost::python;
   class_<Halfedge>("Halfedge")

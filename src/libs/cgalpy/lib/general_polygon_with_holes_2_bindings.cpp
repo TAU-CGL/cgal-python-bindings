@@ -39,7 +39,7 @@ General_polygon_with_holes_2::Hole_iterator holes_end(General_polygon_with_holes
 
 General_polygon_2& outer_boundary(General_polygon_with_holes_2& p) { return p.outer_boundary(); }
 
-void export_General_polygon_with_holes_2()
+void export_general_polygon_with_holes_2()
 {
   using namespace boost::python;
   class_<General_polygon_with_holes_2>("General_polygon_with_holes_2")
