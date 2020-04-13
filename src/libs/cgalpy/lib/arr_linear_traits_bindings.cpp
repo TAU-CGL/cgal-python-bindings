@@ -6,7 +6,6 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "CGALPY/config.hpp"
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
 #include "CGALPY/common.hpp"
 
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
@@ -45,4 +44,3 @@ void export_arr_linear_traits()
     .def(self_ns::repr(self_ns::self))
     ;
 }
-#endif // ARR_LINEAR_TRAITS
