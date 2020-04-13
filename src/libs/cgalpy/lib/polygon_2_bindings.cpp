@@ -27,7 +27,7 @@ CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& p)
   return new CopyIterator<Polygon_2::Edge_const_iterator>(p.edges_begin(), p.edges_end());
 }
 
-void export_Polygon_2()
+void export_polygon_2()
 {
   using namespace boost::python;
   class_<Polygon_2>("Polygon_2")

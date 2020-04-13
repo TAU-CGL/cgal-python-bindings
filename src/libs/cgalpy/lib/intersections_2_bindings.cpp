@@ -260,7 +260,7 @@ void bind_do_intersect()
   bind_do_intersect_1T<Circle_2>();
 }
 
-void export_Intersections_2()
+void export_intersections_2()
 {
   using namespace boost::python;
   //intersections

@@ -12,7 +12,7 @@
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
-void export_Arr_linear_traits()
+void export_arr_linear_traits()
 {
   using namespace boost::python;
   class_<Curve_2>("Curve_2")

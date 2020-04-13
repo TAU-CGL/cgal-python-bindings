@@ -54,7 +54,7 @@ void approximated_inset_2(Polygon_2& p, FT& r, double eps, boost::python::list& 
   }
 }
 
-void export_Minkowski_sum_2()
+void export_minkowski_sum_2()
 {
   using namespace boost::python;
   def("minkowski_sum_2", &minkowski_sum_2<Polygon_2, Polygon_2>);

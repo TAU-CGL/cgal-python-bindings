@@ -20,14 +20,14 @@ bp::list to_double(TPoint_2& p)
 }
 
 template<typename T, typename S>
-void export_Construct_point_2_call_operator(boost::python::class_<Construct_point_2>& cp_2_binding)
+void export_construct_point_2_call_operator(boost::python::class_<Construct_point_2>& cp_2_binding)
 {
   namespace bp = boost::python;
   cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&)>("__call__", &Construct_point_2::operator());
 }
 
 template<typename T, typename S, typename R>
-void export_Construct_point_2_call_operator(boost::python::class_<Construct_point_2>& cp_2_binding)
+void export_construct_point_2_call_operator(boost::python::class_<Construct_point_2>& cp_2_binding)
 {
   namespace bp = boost::python;
   cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&, R)>("__call__", &Construct_point_2::operator());
@@ -156,7 +156,7 @@ T ipower(T& p, int i)
   return CGAL::ipower(p, i);
 }
 
-void export_Arr_algebraic_segment_traits()
+void export_arr_algebraic_segment_traits()
 {
   using namespace boost::python;
   class_<Integer>("Integer")
@@ -270,11 +270,11 @@ void export_Arr_algebraic_segment_traits()
     ;
 
   auto cp_2_binding = class_<Construct_point_2>("Construct_tpoint_2", no_init);
-  export_Construct_point_2_call_operator<Algebraic_real_1, Curve_2, int>(cp_2_binding);
-  export_Construct_point_2_call_operator<Algebraic_real_1, X_monotone_curve_2>(cp_2_binding);
-  export_Construct_point_2_call_operator<Algebraic_real_1, Algebraic_real_1>(cp_2_binding);
-  export_Construct_point_2_call_operator<Bound, Bound>(cp_2_binding);
-  export_Construct_point_2_call_operator<int, int>(cp_2_binding);
+  export_construct_point_2_call_operator<Algebraic_real_1, Curve_2, int>(cp_2_binding);
+  export_construct_point_2_call_operator<Algebraic_real_1, X_monotone_curve_2>(cp_2_binding);
+  export_construct_point_2_call_operator<Algebraic_real_1, Algebraic_real_1>(cp_2_binding);
+  export_construct_point_2_call_operator<Bound, Bound>(cp_2_binding);
+  export_construct_point_2_call_operator<int, int>(cp_2_binding);
 
   class_<Construct_x_monotone_segment_2>("Construct_x_monotone_segment_2", no_init)
     .def("__call__", &construct_x_monotone_segment_2_call_operator0)

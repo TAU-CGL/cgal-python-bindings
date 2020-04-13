@@ -14,7 +14,7 @@ Iterator_from_circulator<Halfedge_around_vertex_circulator>* halfedge_around_ver
   return new Iterator_from_circulator<Halfedge_around_vertex_circulator>(v.incident_halfedges());
 }
 
-void export_Vertex()
+void export_vertex()
 {
   using namespace boost::python;
   class_<Vertex>("Vertex")

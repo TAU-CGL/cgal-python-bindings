@@ -35,7 +35,7 @@ Curve_iterator curves_end(General_polygon_2& p)
   return p.curves_end();
 }
 
-void export_General_polygon_2()
+void export_general_polygon_2()
 {
   using namespace boost::python;
   class_<General_polygon_2>("General_polygon_2")

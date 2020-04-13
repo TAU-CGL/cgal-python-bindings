@@ -252,7 +252,7 @@ void assign(Arrangement_2& arr, Arrangement_2& input_arr)
   arr.assign(input_arr);
 }
 
-void export_Arrangement_2()
+void export_arrangement_2()
 {
   using namespace boost::python;
   class_<Arrangement_2>("Arrangement_2")

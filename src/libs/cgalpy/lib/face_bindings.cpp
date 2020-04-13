@@ -25,7 +25,7 @@ Isolated_vertex_iterator isolated_vertices_end(Face& f)
 {
   return f.isolated_vertices_end();
 }
-void export_Face()
+void export_face()
 {
   using namespace boost::python;
   class_<Face>("Face")

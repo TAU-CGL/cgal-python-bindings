@@ -11,7 +11,7 @@
 
 typedef typename Traits::CoordNT CoordNT;
 
-void export_Arr_circle_segment_traits()
+void export_arr_circle_segment_traits()
 {
   using namespace boost::python;
 

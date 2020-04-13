@@ -38,7 +38,7 @@ bool get_type(Object& o, typename T0::value_type& t)
   return res;
 }
 
-void export_Object()
+void export_object()
 {
   using namespace boost::python;
   class_<Object>("Object", no_init)
