@@ -5,7 +5,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "common.h"
+#include "CGALPY/common.h"
 
 #ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
 

@@ -1,5 +1,7 @@
-#include <Python_functor.hpp>
+#include "CGALPY/Python_functor.hpp"
+
 #include <CGAL/Kd_tree_rectangle.h>
+
 template <typename D_, typename FT_, typename Point_d_, typename Query_item_>
 class General_distance_python
 {
@@ -12,7 +14,7 @@ public:
   typedef CGAL::Kd_tree_rectangle<FT, D> Kd_tree_rectangle;
 
 private:
-  
+
   Python_functor_2_ref<Query_item, Point_d, FT> f0;
   Python_functor_2_ref<Query_item, Kd_tree_rectangle, FT> f1;
   Python_functor_2_ref<Query_item, Kd_tree_rectangle, FT> f2;

@@ -5,7 +5,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "common.hpp"
+#include "CGALPY/common.hpp"
 
 Kernel::Equal_2 kernel_equal_2(Kernel& k)
 {
@@ -91,7 +91,7 @@ void export_Kernel()
     .def(self / self)
     .def(self /= self)
     ;
-  
+
   class_<Gmpq>("Gmpq")
     //.def(init<>())
     .def(init<Gmpz, Gmpz>())

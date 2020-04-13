@@ -5,9 +5,10 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
+
 #include <CGAL/minkowski_sum_2.h>
 #include <CGAL/approximated_offset_2.h>
 

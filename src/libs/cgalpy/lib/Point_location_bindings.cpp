@@ -5,9 +5,9 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #ifdef CGALPY_POINT_LOCATION_BINDINGS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
 
 #include <CGAL/Arr_naive_point_location.h>
 #include <CGAL/Arr_walk_along_line_point_location.h>

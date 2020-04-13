@@ -6,8 +6,9 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "common.hpp"
-#include "python_iterator_templates.hpp"
+#include "CGALPY/common.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
+
 Iterator_from_circulator<Halfedge_around_vertex_circulator>* halfedge_around_vertex_iterator(Vertex& v)
 {
   return new Iterator_from_circulator<Halfedge_around_vertex_circulator>(v.incident_halfedges());

@@ -5,9 +5,9 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_CONIC_TRAITS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
 
 void export_Arr_conic_traits()
 {

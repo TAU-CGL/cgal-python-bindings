@@ -5,14 +5,15 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "config.hpp"
+#include "CGALPY/config.hpp"
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
-#include "common.hpp"
+#include "CGALPY/common.hpp"
+
 #include <CGAL/Min_circle_2.h>
 #include <CGAL/Min_circle_2_traits_2.h>
-typedef typename CGAL::Min_circle_2_traits_2<Kernel>      Min_circle_2_traits_2;
-typedef typename Min_circle_2_traits_2::Circle              Optimisation_circle_2;
-typedef typename CGAL::Min_circle_2<Min_circle_2_traits_2>  Min_circle_2;
+typedef typename CGAL::Min_circle_2_traits_2<Kernel>       Min_circle_2_traits_2;
+typedef typename Min_circle_2_traits_2::Circle             Optimisation_circle_2;
+typedef typename CGAL::Min_circle_2<Min_circle_2_traits_2> Min_circle_2;
 
 Min_circle_2* init_min_circle_2_from_list(bp::list& lst, bool random)
 {

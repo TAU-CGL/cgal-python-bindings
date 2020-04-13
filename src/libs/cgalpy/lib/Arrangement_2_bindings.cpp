@@ -5,8 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "common.hpp"
-#include "Python_functor.hpp"
+#include "CGALPY/common.hpp"
+#include "CGALPY/Python_functor.hpp"
 
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_vertical_decomposition_2.h>

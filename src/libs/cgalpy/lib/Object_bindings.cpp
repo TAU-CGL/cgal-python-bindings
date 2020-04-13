@@ -5,8 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "config.hpp"
-#include "common.hpp"
+#include "CGALPY/config.hpp"
+#include "CGALPY/common.hpp"
 
 template<typename T0, typename T1>
 bool is_type(Object& o)
