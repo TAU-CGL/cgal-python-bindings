@@ -6,7 +6,6 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "CGALPY/config.hpp"
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_CONIC_TRAITS
 #include "CGALPY/common.hpp"
 
 void export_Arr_conic_traits()
@@ -33,4 +32,3 @@ void export_Arr_conic_traits()
     .def("right", &X_monotone_curve_2::right, return_value_policy<copy_const_reference>())
     ;
 }
-#endif // ARR_CONIC_TRAITS

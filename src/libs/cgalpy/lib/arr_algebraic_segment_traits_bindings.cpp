@@ -7,7 +7,6 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
 #include "CGALPY/common.hpp"
 
 bp::list to_double(TPoint_2& p)
@@ -292,5 +291,3 @@ void export_arr_algebraic_segment_traits()
   def("ipower", &ipower<Polynomial_1>);
   def("ipower", &ipower<Polynomial_2>);
 }
-
-#endif

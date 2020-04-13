@@ -7,7 +7,6 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
 #include "CGALPY/common.hpp"
 
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
@@ -41,4 +40,3 @@ void export_arr_segment_traits()
     .def(self_ns::repr(self_ns::self))
   ;
 }
-#endif // ARR_SEGMENT_TRAITS

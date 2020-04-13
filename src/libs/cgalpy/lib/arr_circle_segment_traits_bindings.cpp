@@ -6,7 +6,6 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "CGALPY/config.hpp"
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
 #include "CGALPY/common.hpp"
 
 typedef typename Traits::CoordNT CoordNT;
@@ -102,4 +101,3 @@ void export_arr_circle_segment_traits()
     .def("supporting_circle", &Curve_2::supporting_circle, return_value_policy<copy_const_reference>())
     ;
 }
-#endif // ARR_CIRCLE_SEGMENT_TRAITS
