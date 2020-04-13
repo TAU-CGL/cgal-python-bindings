@@ -212,7 +212,7 @@ CGAL::Oriented_side oriented_side(General_polygon_set_2& ps, T& other)
   return ps.oriented_side(other);
 }
 
-void export_General_polygon_set_2()
+void export_general_polygon_set_2()
 {
   using namespace boost::python;
   class_<General_polygon_set_2>("General_polygon_set_2")

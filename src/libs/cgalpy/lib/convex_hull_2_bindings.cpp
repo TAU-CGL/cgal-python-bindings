@@ -121,7 +121,7 @@ void upper_hull_points_2(bp::list& lst, bp::list& res)
   for (auto p : v1) res.append(p);
 }
 
-void export_Convex_hull_2_bindings()
+void export_convex_hull_2_bindings()
 {
   using namespace boost::python;
   def("ch_akl_toussaint", &ch_akl_toussaint);
