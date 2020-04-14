@@ -8,8 +8,8 @@
 #include <boost/static_assert.hpp>
 
 #include "CGALPY/config.hpp"
-#ifdef CGALPY_ALPHA_SHAPES_3_BINDINGS
 #include "CGALPY/common.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
 
 // Config:
 #define CGALPY_TRI3_VERTEX_BASE_PLAIN                                 0
@@ -217,6 +217,8 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_TRAITS");
 typedef CGAL::Triangulation_3<Tri_traits, Tds>                     Triangulation_3;
 #elif CGALPY_TRI3 == CGALPY_TRI3_REGULAR
 typedef CGAL::Regular_triangulation_3<Tri_traits, Tds>             Triangulation_3;
+typedef Triangulation_3::Weighted_point                            Weighted_point;
+typedef Triangulation_3::Bare_point                                Bare_point;
 #elif CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 typedef CGAL::Delaunay_triangulation_3<Tri_traits, Tds>            Triangulation_3;
 #elif CGALPY_TRI3 == CGALPY_TRI3_PERIODIC3_DELAUNAY
@@ -234,36 +236,115 @@ typedef CGAL::Fixed_alpha_shape_3<Triangulation_3>      Alpha_shape_3;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ALPHA_SHAPE");
 #endif
 
+typedef Alpha_shape_3::size_type                size_type;
+typedef Alpha_shape_3::NT                       NT;
+typedef Alpha_shape_3::Alpha_iterator           Alpha_iterator;
+typedef Alpha_shape_3::Mode                     Mode;
+typedef Alpha_shape_3::Classification_type      Classification_type;
+
+typedef Alpha_shape_3::Cell_handle              Cell_handle;
+typedef Alpha_shape_3::Vertex_handle            Vertex_handle;
+typedef Alpha_shape_3::Facet                    Facet;
+typedef Alpha_shape_3::Edge                     Edge;
+
+typedef CGAL::Alpha_status<FT>                  Alpha_status;
+
 void make_alpha_shape(Alpha_shape_3& as, boost::python::list& lst)
 {
   if (! lst) return;
   if (! extract<Point_2>(lst[0]).check()) return;
   auto begin = boost::python::stl_input_iterator<Point_3>(lst);
   auto end = boost::python::stl_input_iterator<Point_3>();
-  auto v = std::vector<Point_3>(begin, end);
-  as.make_alpha_shape(v.begin(), v.end());
+  // auto v = std::vector<Point_3>(begin, end);
+  // as.make_alpha_shape(v.begin(), v.end());
+  as.make_alpha_shape(begin, end);
 }
+
+Alpha_shape_3* init1(boost::python::list& lst)
+{
+  auto begin = boost::python::stl_input_iterator<Point_3>(lst);
+  auto end = boost::python::stl_input_iterator<Point_3>();
+  return new Alpha_shape_3(begin, end);
+}
+
+Alpha_shape_3* init2(boost::python::list& lst, const FT& alpha)
+{
+  auto begin = boost::python::stl_input_iterator<Point_3>(lst);
+  auto end = boost::python::stl_input_iterator<Point_3>();
+  return new Alpha_shape_3(begin, end, alpha);
+}
+
+Alpha_shape_3* init3(boost::python::list& lst, const FT& alpha, Alpha_shape_3::Mode m)
+{
+  auto begin = boost::python::stl_input_iterator<Point_3>(lst);
+  auto end = boost::python::stl_input_iterator<Point_3>();
+  return new Alpha_shape_3(begin, end, alpha, m);
+}
+
+typedef Alpha_shape_3                           As_3;
+size_type (As_3::*number_of_solid_components1)() const                = &As_3::number_of_solid_components;
+size_type (As_3::*number_of_solid_components2)(const NT& alpha) const = &As_3::number_of_solid_components;
+
+Classification_type (As_3::*classify1)(const Point_3& p, const FT& alpha) const            = &As_3::classify;
+Classification_type (As_3::*classify2)(const Edge& s, const FT& alpha) const               = &As_3::classify;
+Classification_type (As_3::*classify3)(const Facet& s, const FT& alpha) const              = &As_3::classify;
+Classification_type (As_3::*classify4)(const Vertex_handle& s, const FT& alpha) const      = &As_3::classify;
+Classification_type (As_3::*classify5)(const Cell_handle& s, const FT& alpha) const        = &As_3::classify;
+Classification_type (As_3::*classify6)(const Cell_handle& s, int i, const FT& alpha) const = &As_3::classify;
+
+Classification_type (As_3:: *classify7)(const Point_3& p) const            = &As_3::classify;
+Classification_type (As_3:: *classify8)(const Edge& s) const               = &As_3::classify;
+Classification_type (As_3:: *classify9)(const Facet& s) const              = &As_3::classify;
+Classification_type (As_3::*classify10)(const Vertex_handle& s) const      = &As_3::classify;
+Classification_type (As_3::*classify11)(const Cell_handle& s) const        = &As_3::classify;
+Classification_type (As_3::*classify12)(const Cell_handle& s, int i) const = &As_3::classify;
+
+Alpha_status (As_3::*get_alpha_status1)(const Edge& e) const  = &As_3::get_alpha_status;
+Alpha_status (As_3::*get_alpha_status2)(const Facet& f) const = &As_3::get_alpha_status;
 
 void export_alpha_shapes_3()
 {
-  std::list<Point_3> lp;
-  Alpha_shape_3 as(lp.begin(),lp.end());
+  using namespace boost::python;
 
-  enum_<Alpha_shape_3::Mode>("Mode")
+  enum_<Mode>("Mode")
     .value("GENERAL", Alpha_shape_3::GENERAL)
     .value("REGULARIZED", Alpha_shape_3::REGULARIZED)
     .export_values()
     ;
 
-  using namespace boost::python;
+  enum_<Classification_type>("Classification_type")
+    .value("EXTERIOR", Alpha_shape_3::EXTERIOR)
+    .value("SINGULAR", Alpha_shape_3::SINGULAR)
+    .value("REGULAR", Alpha_shape_3::REGULAR)
+    .value("INTERIOR", Alpha_shape_3::INTERIOR)
+    .export_values()
+    ;
+
+  class_<Alpha_status>("Alpha_status")
+    .def(init<>())
+    // Modifiers
+    .def("set_is_Gabriel", &Alpha_status::set_is_Gabriel)
+    .def("set_is_on_chull", &Alpha_status::set_is_on_chull)
+    .def("set_alpha_min", &Alpha_status::set_alpha_min)
+    .def("set_alpha_mid", &Alpha_status::set_alpha_mid)
+    .def("set_alpha_max", &Alpha_status::set_alpha_max)
+    // Access Functions
+    .def("is_Gabriel", &Alpha_status::is_Gabriel)
+    .def("is_on_chull", &Alpha_status::is_on_chull)
+    .def("alpha_min", &Alpha_status::alpha_min)
+    .def("alpha_mid", &Alpha_status::alpha_mid)
+    .def("alpha_max", &Alpha_status::alpha_max)
+    ;
+
   class_<Alpha_shape_3, boost::noncopyable>("Alpha_shape_3")
     .def(init<>())
     .def(init<optional<double, Alpha_shape_3::Mode>>())
     .def(init<optional<FT&, Alpha_shape_3::Mode>>())
     .def(init<Triangulation_3&, optional<double, Alpha_shape_3::Mode>>())
     .def(init<Triangulation_3&, optional<FT&, Alpha_shape_3::Mode>>())
-    // .def(init<begin, end, <optional<double, Alpha_shape_3::Mode>>())
-    // .def(init<begin, end, optional<FT&, Alpha_shape_3::Mode>>())
+    .def("__init__", make_constructor(&init1))
+    .def("__init__", make_constructor(&init2))
+    .def("__init__", make_constructor(&init3))
     // Modifiers
     .def("make_alpha_shape", &make_alpha_shape)
     .def("clear", &Alpha_shape_3::clear)
@@ -274,30 +355,37 @@ void export_alpha_shapes_3()
     .def("get_alpha", &Alpha_shape_3::get_alpha, return_value_policy<copy_const_reference>())
     .def("get_nth_alpha", &Alpha_shape_3::get_nth_alpha, return_value_policy<copy_const_reference>())
     .def("number_of_alphas", &Alpha_shape_3::number_of_alphas)
-    // .def("classify", &Alpha_shape_3::classify)
-    // .def("classify", &Alpha_shape_3::classify)
-    // .def("classify", &Alpha_shape_3::classify)
-    // .def("classify", &Alpha_shape_3::classify)
-    // .def("classify", &Alpha_shape_3::classify)
-    // .def("classify", &Alpha_shape_3::classify)
-    // .def("get_alpha_status", &Alpha_shape_3::get_alpha_status)
-    // .def("get_alpha_status", &Alpha_shape_3::get_alpha_status)
+    .def("classify", classify1)
+    .def("classify", classify2)
+    .def("classify", classify3)
+    .def("classify", classify4)
+    .def("classify", classify5)
+    .def("classify", classify6)
+    .def("classify", classify7)
+    .def("classify", classify8)
+    .def("classify", classify9)
+    .def("classify", classify10)
+    .def("classify", classify11)
+    .def("classify", classify12)
+    .def("get_alpha_status", get_alpha_status1)
+    .def("get_alpha_status", get_alpha_status2)
     // .def("get_alpha_shape_cells", &Alpha_shape_3::get_alpha_shape_cells)
     // .def("get_alpha_shape_facets", &Alpha_shape_3::get_alpha_shape_facets)
     // .def("get_alpha_shape_edges", &Alpha_shape_3::get_alpha_shape_edges)
     // .def("get_alpha_shape_vertices", &Alpha_shape_3::get_alpha_shape_vertices)
     // .def("filtration", &Alpha_shape_3::filtration)
     // .def("filtration_with_alpha_values", &Alpha_shape_3::filtration_with_alpha_values)
-    // // Traversal of the alpha-Values
-    // .def("alpha_begin", &Alpha_shape_3::alpha_begin)
-    // .def("alpha_end", &Alpha_shape_3::alpha_end)
-    // .def("alpha_find", &Alpha_shape_3::alpha_find)
-    // .def("alpha_lower_bound", &Alpha_shape_3::alpha_lower_bound)
-    // .def("alpha_upper_bound", &Alpha_shape_3::alpha_upper_bound)
+    // Traversal of the alpha-Values
+    .def("alpha_begin", &Alpha_shape_3::alpha_begin)
+    .def("alpha_end", &Alpha_shape_3::alpha_end)
+    .def("alpha_find", &Alpha_shape_3::alpha_find)
+    .def("alpha_lower_bound", &Alpha_shape_3::alpha_lower_bound)
+    .def("alpha_upper_bound", &Alpha_shape_3::alpha_upper_bound)
     // // Operations
-    // .def("number_of_solid_components", &Alpha_shape_3::number_of_solid_components)
-    // .def("find_optimal_alpha", &Alpha_shape_3::find_optimal_alpha)
+    .def("number_of_solid_components", number_of_solid_components1)
+    .def("number_of_solid_components", number_of_solid_components2)
+    // .def("find_optimal_alpha", &Alpha_shape_3::find_optimal_alpha, return_value_policy<manage_new_object>())
     ;
-}
 
-#endif
+  // bind_iterator<CopyIterator<Alpha_iterator>>("Alpha_iterator");
+}
