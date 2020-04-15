@@ -248,92 +248,118 @@ typedef CGAL::Fixed_alpha_shape_3<Triangulation_3>      Alpha_shape_3;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ALPHA_SHAPE");
 #endif
 
-typedef Alpha_shape_3::size_type                size_type;
-typedef Alpha_shape_3::NT                       NT;
-typedef Alpha_shape_3::Alpha_iterator           Alpha_iterator;
-typedef Alpha_shape_3::Mode                     Mode;
-typedef Alpha_shape_3::Classification_type      Classification_type;
+typedef Alpha_shape_3::Point                    As_point;
 
-typedef Alpha_shape_3::Cell_handle              Cell_handle;
-typedef Alpha_shape_3::Vertex_handle            Vertex_handle;
-typedef Alpha_shape_3::Facet                    Facet;
-typedef Alpha_shape_3::Edge                     Edge;
+typedef Alpha_shape_3::Cell_handle              As_cell_handle;
+typedef Alpha_shape_3::Vertex_handle            As_vertex_handle;
+typedef Alpha_shape_3::Facet                    As_facet;
+typedef Alpha_shape_3::Edge                     As_edge;
 
-typedef CGAL::Alpha_status<FT>                  Alpha_status;
+typedef Alpha_shape_3::Cell_circulator          As_cell_circulator;
+typedef Alpha_shape_3::Facet_circulator         As_facet_circulator;
 
+typedef Alpha_shape_3::Cell_iterator            As_cell_iterator;
+typedef Alpha_shape_3::Facet_iterator           As_facet_iterator;
+typedef Alpha_shape_3::Edge_iterator            As_edge_iterator;
+typedef Alpha_shape_3::Vertex_iterator          As_vertex_iterator;
+
+typedef Alpha_shape_3::Finite_cells_iterator    As_finite_cells_iterator;
+typedef Alpha_shape_3::Finite_facets_iterator   As_finite_facets_iterator;
+typedef Alpha_shape_3::Finite_edges_iterator    As_finite_edges_iterator;
+typedef Alpha_shape_3::Finite_vertices_iterator As_finite_vertices_iterator;
+
+typedef Alpha_shape_3::size_type                As_size_type;
+typedef Alpha_shape_3::Locate_type              As_locate_type;
+typedef Alpha_shape_3::Weighted_tag             As_weighted_tag;
+
+typedef Alpha_shape_3::NT                       As_nt;
+
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+typedef Alpha_shape_3::Mode                     As_mode;
+typedef Alpha_shape_3::Classification_type      As_classification_type;
+typedef Alpha_shape_3::Alpha_iterator           As_alpha_iterator;
+typedef CGAL::Alpha_status<FT>                  As_alpha_status;
+#endif
+
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
 void make_alpha_shape(Alpha_shape_3& as, boost::python::list& lst)
 {
   if (! lst) return;
-  if (! extract<Point_2>(lst[0]).check()) return;
-  auto begin = boost::python::stl_input_iterator<Point_3>(lst);
-  auto end = boost::python::stl_input_iterator<Point_3>();
-  // auto v = std::vector<Point_3>(begin, end);
+  if (! extract<As_point>(lst[0]).check()) return;
+  auto begin = boost::python::stl_input_iterator<As_point>(lst);
+  auto end = boost::python::stl_input_iterator<As_point>();
+  // auto v = std::vector<As_point>(begin, end);
   // as.make_alpha_shape(v.begin(), v.end());
   as.make_alpha_shape(begin, end);
 }
+#endif
 
 Alpha_shape_3* init1(boost::python::list& lst)
 {
-  auto begin = boost::python::stl_input_iterator<Point_3>(lst);
-  auto end = boost::python::stl_input_iterator<Point_3>();
+  auto begin = boost::python::stl_input_iterator<As_point>(lst);
+  auto end = boost::python::stl_input_iterator<As_point>();
   return new Alpha_shape_3(begin, end);
 }
 
 Alpha_shape_3* init2(boost::python::list& lst, const FT& alpha)
 {
-  auto begin = boost::python::stl_input_iterator<Point_3>(lst);
-  auto end = boost::python::stl_input_iterator<Point_3>();
+  auto begin = boost::python::stl_input_iterator<As_point>(lst);
+  auto end = boost::python::stl_input_iterator<As_point>();
   return new Alpha_shape_3(begin, end, alpha);
 }
 
-Alpha_shape_3* init3(boost::python::list& lst, const FT& alpha, Alpha_shape_3::Mode m)
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+Alpha_shape_3* init3(boost::python::list& lst, const FT& alpha, As_mode m)
 {
-  auto begin = boost::python::stl_input_iterator<Point_3>(lst);
-  auto end = boost::python::stl_input_iterator<Point_3>();
+  auto begin = boost::python::stl_input_iterator<As_point>(lst);
+  auto end = boost::python::stl_input_iterator<As_point>();
   return new Alpha_shape_3(begin, end, alpha, m);
 }
 
 typedef Alpha_shape_3                           As_3;
-size_type (As_3::*number_of_solid_components1)() const                = &As_3::number_of_solid_components;
-size_type (As_3::*number_of_solid_components2)(const NT& alpha) const = &As_3::number_of_solid_components;
+As_size_type (As_3::*number_of_solid_components1)() const                = &As_3::number_of_solid_components;
+As_size_type (As_3::*number_of_solid_components2)(const FT& alpha) const = &As_3::number_of_solid_components;
 
-Classification_type (As_3::*classify1)(const Point_3& p, const FT& alpha) const            = &As_3::classify;
-Classification_type (As_3::*classify2)(const Edge& s, const FT& alpha) const               = &As_3::classify;
-Classification_type (As_3::*classify3)(const Facet& s, const FT& alpha) const              = &As_3::classify;
-Classification_type (As_3::*classify4)(const Vertex_handle& s, const FT& alpha) const      = &As_3::classify;
-Classification_type (As_3::*classify5)(const Cell_handle& s, const FT& alpha) const        = &As_3::classify;
-Classification_type (As_3::*classify6)(const Cell_handle& s, int i, const FT& alpha) const = &As_3::classify;
+As_classification_type (As_3::*classify1)(const As_point& p, const FT& alpha) const              = &As_3::classify;
+As_classification_type (As_3::*classify2)(const As_edge& s, const FT& alpha) const               = &As_3::classify;
+As_classification_type (As_3::*classify3)(const As_facet& s, const FT& alpha) const              = &As_3::classify;
+As_classification_type (As_3::*classify4)(const As_vertex_handle& s, const FT& alpha) const      = &As_3::classify;
+As_classification_type (As_3::*classify5)(const As_cell_handle& s, const FT& alpha) const        = &As_3::classify;
+As_classification_type (As_3::*classify6)(const As_cell_handle& s, int i, const FT& alpha) const = &As_3::classify;
 
-Classification_type (As_3:: *classify7)(const Point_3& p) const            = &As_3::classify;
-Classification_type (As_3:: *classify8)(const Edge& s) const               = &As_3::classify;
-Classification_type (As_3:: *classify9)(const Facet& s) const              = &As_3::classify;
-Classification_type (As_3::*classify10)(const Vertex_handle& s) const      = &As_3::classify;
-Classification_type (As_3::*classify11)(const Cell_handle& s) const        = &As_3::classify;
-Classification_type (As_3::*classify12)(const Cell_handle& s, int i) const = &As_3::classify;
+As_classification_type (As_3:: *classify7)(const As_point& p) const              = &As_3::classify;
+As_classification_type (As_3:: *classify8)(const As_edge& s) const               = &As_3::classify;
+As_classification_type (As_3:: *classify9)(const As_facet& s) const              = &As_3::classify;
+As_classification_type (As_3::*classify10)(const As_vertex_handle& s) const      = &As_3::classify;
+As_classification_type (As_3::*classify11)(const As_cell_handle& s) const        = &As_3::classify;
+As_classification_type (As_3::*classify12)(const As_cell_handle& s, int i) const = &As_3::classify;
 
-Alpha_status (As_3::*get_alpha_status1)(const Edge& e) const  = &As_3::get_alpha_status;
-Alpha_status (As_3::*get_alpha_status2)(const Facet& f) const = &As_3::get_alpha_status;
+As_alpha_status (As_3::*get_alpha_status1)(const As_edge& e) const  = &As_3::get_alpha_status;
+As_alpha_status (As_3::*get_alpha_status2)(const As_facet& f) const = &As_3::get_alpha_status;
 
-const FT& next(Alpha_iterator it)
+const FT& next(As_alpha_iterator it)
 {
-  if (it == Alpha_iterator()) {
+  if (it == As_alpha_iterator()) {
     PyErr_SetString(PyExc_StopIteration, "Invalid alpha iterator");
     bp::throw_error_already_set();
   }
   return *it++;
 }
 
+#endif
+
 void export_alpha_shapes_3()
 {
   using namespace boost::python;
 
-  enum_<Mode>("Mode")
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+  enum_<As_mode>("Mode")
     .value("GENERAL", Alpha_shape_3::GENERAL)
     .value("REGULARIZED", Alpha_shape_3::REGULARIZED)
     .export_values()
     ;
 
-  enum_<Classification_type>("Classification_type")
+  enum_<As_classification_type>("Classification_type")
     .value("EXTERIOR", Alpha_shape_3::EXTERIOR)
     .value("SINGULAR", Alpha_shape_3::SINGULAR)
     .value("REGULAR", Alpha_shape_3::REGULAR)
@@ -341,44 +367,52 @@ void export_alpha_shapes_3()
     .export_values()
     ;
 
-  class_<Alpha_status>("Alpha_status")
+  class_<As_alpha_status>("Alpha_status")
     .def(init<>())
     // Modifiers
-    .def("set_is_Gabriel", &Alpha_status::set_is_Gabriel)
-    .def("set_is_on_chull", &Alpha_status::set_is_on_chull)
-    .def("set_alpha_min", &Alpha_status::set_alpha_min)
-    .def("set_alpha_mid", &Alpha_status::set_alpha_mid)
-    .def("set_alpha_max", &Alpha_status::set_alpha_max)
+    .def("set_is_Gabriel", &As_alpha_status::set_is_Gabriel)
+    .def("set_is_on_chull", &As_alpha_status::set_is_on_chull)
+    .def("set_alpha_min", &As_alpha_status::set_alpha_min)
+    .def("set_alpha_mid", &As_alpha_status::set_alpha_mid)
+    .def("set_alpha_max", &As_alpha_status::set_alpha_max)
     // Access Functions
-    .def("is_Gabriel", &Alpha_status::is_Gabriel)
-    .def("is_on_chull", &Alpha_status::is_on_chull)
-    .def("alpha_min", &Alpha_status::alpha_min)
-    .def("alpha_mid", &Alpha_status::alpha_mid)
-    .def("alpha_max", &Alpha_status::alpha_max)
+    .def("is_Gabriel", &As_alpha_status::is_Gabriel)
+    .def("is_on_chull", &As_alpha_status::is_on_chull)
+    .def("alpha_min", &As_alpha_status::alpha_min)
+    .def("alpha_mid", &As_alpha_status::alpha_mid)
+    .def("alpha_max", &As_alpha_status::alpha_max)
     ;
 
-  class_<Alpha_iterator>("Alpha_iterator")
+  class_<As_alpha_iterator>("Alpha_iterator")
     .def("__iter__", &pass_through)
     .def("__next__", &next, return_value_policy<copy_const_reference>())
     ;
+#endif
 
   class_<Alpha_shape_3, boost::noncopyable>("Alpha_shape_3")
     .def(init<>())
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
     .def(init<optional<double, Alpha_shape_3::Mode>>())
     .def(init<optional<FT&, Alpha_shape_3::Mode>>())
     .def(init<Triangulation_3&, optional<double, Alpha_shape_3::Mode>>())
     .def(init<Triangulation_3&, optional<FT&, Alpha_shape_3::Mode>>())
+#endif
     .def("__init__", make_constructor(&init1))
     .def("__init__", make_constructor(&init2))
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
     .def("__init__", make_constructor(&init3))
+#endif
     // Modifiers
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
     .def("make_alpha_shape", &make_alpha_shape)
-    .def("clear", &Alpha_shape_3::clear)
-    .def("set_alpha", &Alpha_shape_3::set_alpha)
     .def("set_mode", &Alpha_shape_3::set_mode)
+    .def("set_alpha", &Alpha_shape_3::set_alpha)
+#endif
+    .def("clear", &Alpha_shape_3::clear)
     // Query Functions
-    .def("get_mode", &Alpha_shape_3::get_mode)
     .def("get_alpha", &Alpha_shape_3::get_alpha, return_value_policy<copy_const_reference>())
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+    .def("get_mode", &Alpha_shape_3::get_mode)
     .def("get_nth_alpha", &Alpha_shape_3::get_nth_alpha, return_value_policy<copy_const_reference>())
     .def("number_of_alphas", &Alpha_shape_3::number_of_alphas)
     .def("classify", classify1)
@@ -395,12 +429,14 @@ void export_alpha_shapes_3()
     .def("classify", classify12)
     .def("get_alpha_status", get_alpha_status1)
     .def("get_alpha_status", get_alpha_status2)
+#endif
     // .def("get_alpha_shape_cells", &Alpha_shape_3::get_alpha_shape_cells)
     // .def("get_alpha_shape_facets", &Alpha_shape_3::get_alpha_shape_facets)
     // .def("get_alpha_shape_edges", &Alpha_shape_3::get_alpha_shape_edges)
     // .def("get_alpha_shape_vertices", &Alpha_shape_3::get_alpha_shape_vertices)
     // .def("filtration", &Alpha_shape_3::filtration)
     // .def("filtration_with_alpha_values", &Alpha_shape_3::filtration_with_alpha_values)
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
     // Traversal of the alpha-Values
     .def("alpha_begin", &Alpha_shape_3::alpha_begin)
     .def("alpha_end", &Alpha_shape_3::alpha_end)
@@ -412,5 +448,6 @@ void export_alpha_shapes_3()
     .def("number_of_solid_components", number_of_solid_components2)
     .def("find_optimal_alpha", &Alpha_shape_3::find_optimal_alpha)
     .def("find_alpha_solid", &Alpha_shape_3::find_alpha_solid)
+#endif
     ;
 }
