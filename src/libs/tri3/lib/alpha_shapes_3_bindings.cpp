@@ -38,6 +38,9 @@
 #define CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR               10
 #define CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR_WITH_INFO     11
 
+#define CGALPY_TRI3_TRAITS_SEQUENTIAL                   0
+#define CGALPY_TRI3_TRAITS_PARALLEL                     1
+
 #define CGALPY_TRI3_TRAITS_KERNEL                       0
 #define CGALPY_TRI3_TRAITS_PERIODIC3_DELAUNAY           1
 
@@ -201,13 +204,22 @@ typedef CGAL::Fixed_alpha_shape_cell_base_3<Kernel, Cb1>        Cell_base;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_CELL_BASE");
 #endif
 
-typedef CGAL::Triangulation_data_structure_3<Vertex_base, Cell_base> Tds;
+// 3D triangulation concurrency
+#if CGALPY_TRI3_CONCURRENCY == CGALPY_TRI3_TRAITS_SEQUENTIAL
+typedef CGAL::Sequential_tag                                       Concurrency_tag;
+#elif CGALPY_TRI3_CONCURRENCY == CGALPY_TRI3_TRAITS_PARALLEL
+typedef CGAL::Parallel_tag                                         Concurrency_tag;
+#else
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_CONCURRENCY");
+#endif
+
+typedef CGAL::Triangulation_data_structure_3<Vertex_base, Cell_base, Concurrency_tag> Tds;
 
 // 3D triangulation traits
 #if CGALPY_TRI3_TRAITS == CGALPY_TRI3_TRAITS_KERNEL
-typedef Kernel                                                   Tri_traits;
+typedef Kernel                                                     Tri_traits;
 #elif CGALPY_TRI3_TRAITS == CGALPY_TRI3_TRAITS_PERIODIC3_DELAUNAY
-typedef CGAL::Periodic_3_Delaunay_triangulation_traits_3<Kernel> Tri_traits;
+typedef CGAL::Periodic_3_Delaunay_triangulation_traits_3<Kernel>   Tri_traits;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_TRAITS");
 #endif
@@ -399,5 +411,6 @@ void export_alpha_shapes_3()
     .def("number_of_solid_components", number_of_solid_components1)
     .def("number_of_solid_components", number_of_solid_components2)
     .def("find_optimal_alpha", &Alpha_shape_3::find_optimal_alpha)
+    .def("find_alpha_solid", &Alpha_shape_3::find_alpha_solid)
     ;
 }
