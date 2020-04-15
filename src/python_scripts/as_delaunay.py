@@ -1,6 +1,6 @@
 #!/usr/bin/python3.7
 
-# export PYTHONPATH="/home/efif/build/cgalpy/ALPHA_SHAPE_release/src/libs/tri3:/home/efif/build/cgalpy/ALPHA_SHAPE_release/src/libs/cgalpy"
+# export PYTHONPATH="/home/efif/build/cgalpy/delaunay_release/src/libs/tri3:/home/efif/build/cgalpy/delaunay_release/src/libs/cgalpy"
 
 from tri3_epic import *
 p1 = Point_3(1, 0, 0)
@@ -14,7 +14,7 @@ print("Alpha shape computed in REGULARIZED mode by default")
 optHandle = alphaShape.find_optimal_alpha(1);
 print(optHandle)
 # optIter = optHandle.__iter__();
-optAlpha = optHandle.next()
+optAlpha = next(optHandle)
 print("Optimal alpha value to get one connected component is ", optAlpha)
 alphaShape.set_alpha(optAlpha);
 num = alphaShape.number_of_solid_components()
