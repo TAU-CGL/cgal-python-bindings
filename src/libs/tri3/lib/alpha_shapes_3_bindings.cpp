@@ -302,6 +302,15 @@ Classification_type (As_3::*classify12)(const Cell_handle& s, int i) const = &As
 Alpha_status (As_3::*get_alpha_status1)(const Edge& e) const  = &As_3::get_alpha_status;
 Alpha_status (As_3::*get_alpha_status2)(const Facet& f) const = &As_3::get_alpha_status;
 
+const FT& next(Alpha_iterator it)
+{
+  if (it == Alpha_iterator()) {
+    PyErr_SetString(PyExc_StopIteration, "Invalid alpha iterator");
+    bp::throw_error_already_set();
+  }
+  return *it++;
+}
+
 void export_alpha_shapes_3()
 {
   using namespace boost::python;
@@ -334,6 +343,11 @@ void export_alpha_shapes_3()
     .def("alpha_min", &Alpha_status::alpha_min)
     .def("alpha_mid", &Alpha_status::alpha_mid)
     .def("alpha_max", &Alpha_status::alpha_max)
+    ;
+
+  class_<Alpha_iterator>("Alpha_iterator")
+    .def("__iter__", &pass_through)
+    .def("__next__", &next, return_value_policy<copy_const_reference>())
     ;
 
   class_<Alpha_shape_3, boost::noncopyable>("Alpha_shape_3")
@@ -384,8 +398,6 @@ void export_alpha_shapes_3()
     // // Operations
     .def("number_of_solid_components", number_of_solid_components1)
     .def("number_of_solid_components", number_of_solid_components2)
-    // .def("find_optimal_alpha", &Alpha_shape_3::find_optimal_alpha, return_value_policy<manage_new_object>())
+    .def("find_optimal_alpha", &Alpha_shape_3::find_optimal_alpha)
     ;
-
-  // bind_iterator<CopyIterator<Alpha_iterator>>("Alpha_iterator");
 }
