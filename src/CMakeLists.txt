@@ -158,11 +158,19 @@ if(${CGALPY_ALPHA_SHAPES_3_BINDINGS})
   endif()
 
   # Check validity of triangulation
-  if((${CGALPY_TRI3_NAME} STREQUAL "regular") AND
+  if((${CGALPY_TRI3_NAME} STREQUAL "[Rr]egular") AND
      (NOT ${CGALPY_TRI3_VERTEX_BASE_NAME} MATCHES "regular"))
     message("Error: Triangulation (${CGALPY_TRI3_NAME}) does not match vertex base (${CGALPY_TRI3_VERTEX_BASE_NAME})")
     return()
   endif()
+
+  # Check validity of triangulation
+  if((${CGALPY_TRI3_NAME} STREQUAL "[Rr]egular") AND
+     (NOT ${CGALPY_TRI3_CELL_BASE_NAME} MATCHES "regular"))
+    message("Error: Triangulation (${CGALPY_TRI3_NAME}) does not match cell base (${CGALPY_TRI3_CELL_BASE_NAME})")
+    return()
+  endif()
+
   add_definitions(-DCGALPY_ALPHA_SHAPES_3_BINDINGS)
 endif()
 
