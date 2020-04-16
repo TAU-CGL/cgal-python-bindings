@@ -10,6 +10,7 @@
 #include "CGALPY/common.hpp"
 
 void export_kernel();
+void export_triangulation_3();
 void export_alpha_shapes_3();
 
 BOOST_PYTHON_MODULE(CGALPY_TRI3_MODULE_NAME)
@@ -17,6 +18,7 @@ BOOST_PYTHON_MODULE(CGALPY_TRI3_MODULE_NAME)
   using namespace boost::python;
 
   export_kernel();
+  export_triangulation_3();
 #ifdef CGALPY_ALPHA_SHAPES_3_BINDINGS
   export_alpha_shapes_3();
 #endif
