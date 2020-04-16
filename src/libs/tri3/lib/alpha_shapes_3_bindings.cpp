@@ -44,6 +44,9 @@
 #define CGALPY_TRI3_TRAITS_KERNEL                       0
 #define CGALPY_TRI3_TRAITS_PERIODIC3_DELAUNAY           1
 
+#define CGALPY_TRI3_LOCATION_POLICY_FAST                0
+#define CGALPY_TRI3_LOCATION_POLICY_COMPACT             1
+
 #define CGALPY_TRI3_PLAIN                               0
 #define CGALPY_TRI3_REGULAR                             1
 #define CGALPY_TRI3_DELAUNAY                            2
@@ -227,24 +230,34 @@ typedef CGAL::Triangulation_data_structure_3<Vertex_base, Cell_base, Concurrency
 
 // 3D triangulation traits
 #if CGALPY_TRI3_TRAITS == CGALPY_TRI3_TRAITS_KERNEL
-typedef Kernel                                                     Tri_traits;
+typedef Kernel                                                     Tri3_traits;
 #elif CGALPY_TRI3_TRAITS == CGALPY_TRI3_TRAITS_PERIODIC3_DELAUNAY
-typedef CGAL::Periodic_3_Delaunay_triangulation_traits_3<Kernel>   Tri_traits;
+typedef CGAL::Periodic_3_Delaunay_triangulation_traits_3<Kernel>   Tri3_traits;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_TRAITS");
 #endif
 
+// 3D triangulation location policy
+#if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_FAST
+typedef CGAL::Fast_location                                        Location_policy;
+#elif CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
+typedef CGAL::Compact_location                                     Location_policy;
+#else
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_CONCURRENCY");
+#endif
+
 // 3D triangulation
 #if CGALPY_TRI3 == CGALPY_TRI3_PLAIN
-typedef CGAL::Triangulation_3<Tri_traits, Tds>                     Triangulation_3;
+typedef CGAL::Triangulation_3<Tri3_traits, Tds>                           Triangulation_3;
 #elif CGALPY_TRI3 == CGALPY_TRI3_REGULAR
-typedef CGAL::Regular_triangulation_3<Tri_traits, Tds>             Triangulation_3;
-typedef Triangulation_3::Weighted_point                            Weighted_point;
-typedef Triangulation_3::Bare_point                                Bare_point;
+typedef CGAL::Regular_triangulation_3<Tri3_traits, Tds>                   Triangulation_3;
+typedef Triangulation_3::Weighted_point                                   Weighted_point;
+typedef Triangulation_3::Bare_point                                       Bare_point;
 #elif CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
-typedef CGAL::Delaunay_triangulation_3<Tri_traits, Tds>            Triangulation_3;
+typedef CGAL::Delaunay_triangulation_3<Tri3_traits, Tds, Location_policy> Delaunay_triangulation_3;
+typedef Delaunay_triangulation_3                                          Triangulation_3;
 #elif CGALPY_TRI3 == CGALPY_TRI3_PERIODIC3_DELAUNAY
-typedef CGAL::Periodic_3_Delaunay_triangulation_3<Tri_traits, Tds> Triangulation_3;
+typedef CGAL::Periodic_3_Delaunay_triangulation_3<Tri3_traits, Tds>       Triangulation_3;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3");
 #endif
@@ -252,9 +265,12 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3");
 typedef Triangulation_3::Point          Tri3_point;
 typedef Triangulation_3::Vertex         Tri3_vertex;
 typedef Triangulation_3::Cell           Tri3_cell;
+typedef Triangulation_3::Facet          Tri3_facet;
 
 typedef Triangulation_3::Vertex_handle  Tri3_vertex_handle;
 typedef Triangulation_3::Cell_handle    Tri3_cell_handle;
+
+typedef Triangulation_3::Locate_type    Tri3_locate_type;
 
 // Alpha shape type
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
@@ -311,14 +327,14 @@ void make_alpha_shape(Alpha_shape_3& as, boost::python::list& lst)
 }
 #endif
 
-Alpha_shape_3* init1(boost::python::list& lst)
+Alpha_shape_3* as_init1(boost::python::list& lst)
 {
   auto begin = boost::python::stl_input_iterator<As_point>(lst);
   auto end = boost::python::stl_input_iterator<As_point>();
   return new Alpha_shape_3(begin, end);
 }
 
-Alpha_shape_3* init2(boost::python::list& lst, const As_nt& alpha)
+Alpha_shape_3* as_init2(boost::python::list& lst, const As_nt& alpha)
 {
   auto begin = boost::python::stl_input_iterator<As_point>(lst);
   auto end = boost::python::stl_input_iterator<As_point>();
@@ -326,7 +342,7 @@ Alpha_shape_3* init2(boost::python::list& lst, const As_nt& alpha)
 }
 
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
-Alpha_shape_3* init3(boost::python::list& lst, const As_nt& alpha, As_mode m)
+Alpha_shape_3* as_init3(boost::python::list& lst, const As_nt& alpha, As_mode m)
 {
   auto begin = boost::python::stl_input_iterator<As_point>(lst);
   auto end = boost::python::stl_input_iterator<As_point>();
@@ -342,6 +358,78 @@ const As_nt& next(As_alpha_iterator it)
   return *it++;
 }
 
+#endif
+
+Delaunay_triangulation_3* dt3_init(boost::python::list& lst)
+{
+  auto begin = boost::python::stl_input_iterator<Tri3_point>(lst);
+  auto end = boost::python::stl_input_iterator<Tri3_point>();
+  return new Delaunay_triangulation_3(begin, end);
+}
+
+#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
+std::ptrdiff_t insert_points(Delaunay_triangulation_3& dt, boost::python::list& lst)
+{
+  if (! lst) return 0;
+  if (! extract<Tri3_point>(lst[0]).check()) return 0;
+  auto begin = boost::python::stl_input_iterator<Tri3_point>(lst);
+  auto end = boost::python::stl_input_iterator<Tri3_point>();
+  return dt.insert(begin, end);
+}
+
+void export_delaunay_triangulation_3()
+{
+  using namespace boost::python;
+
+  CGAL::Bounded_side(Delaunay_triangulation_3::*side_of_sphere)(Tri3_cell_handle, const Tri3_point&, bool) const =
+    &Delaunay_triangulation_3::side_of_sphere;
+  CGAL::Bounded_side(Delaunay_triangulation_3::*side_of_circle1)(const Tri3_facet&, const Tri3_point&, bool) const =
+    &Delaunay_triangulation_3::side_of_circle;
+  CGAL::Bounded_side(Delaunay_triangulation_3::*side_of_circle2)(Tri3_cell_handle, int, const Tri3_point& p, bool) const =
+    &Delaunay_triangulation_3::side_of_circle;
+
+  Tri3_vertex_handle(Delaunay_triangulation_3::*insert1)(const Tri3_point&, Tri3_cell_handle) =
+    &Delaunay_triangulation_3::insert;
+  Tri3_vertex_handle(Delaunay_triangulation_3::*insert2)(const Tri3_point&, Tri3_vertex_handle) =
+    &Delaunay_triangulation_3::insert;
+  Tri3_vertex_handle(Delaunay_triangulation_3::*insert3)(const Tri3_point&, Tri3_locate_type, Tri3_cell_handle, int, int) =
+    &Delaunay_triangulation_3::insert;
+
+  class_<Delaunay_triangulation_3>("Delaunay_triangulation_3")
+    .def(init<>())
+    .def(init<const Tri3_traits&>())
+    .def("__init__", make_constructor(&dt3_init))
+    // Insertion
+    .def("insert", insert1)
+    .def("insert", insert2)
+    .def("insert", insert3)
+    .def("insert_points", &insert_points)
+
+    // template<class PointWithInfoInputIterator >
+    // std::ptrdiff_t 	insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
+
+    // Displacement
+    .def("move_if_no_collision", &Delaunay_triangulation_3::move_if_no_collision)
+    .def("move", &Delaunay_triangulation_3::move)
+
+    // Removal
+    .def<void(Delaunay_triangulation_3::*)(Tri3_vertex_handle)>("remove", &Delaunay_triangulation_3::remove)
+    // .def<bool(Delaunay_triangulation_3::*)(Tri3_vertex_handle, bool*)>("remove", &Delaunay_triangulation_3::remove)
+
+    // template<typename InputIterator >
+    // int 	remove (InputIterator first, InputIterator beyond)
+
+    // template<typename InputIterator >
+    // int 	remove_cluster (InputIterator first, InputIterator beyond)
+
+    // Queries
+    .def("side_of_sphere", side_of_sphere)
+    .def("side_of_circle", side_of_circle1)
+    .def("side_of_circle", side_of_circle2)
+    .def("nearest_vertex", &Delaunay_triangulation_3::nearest_vertex)
+    .def("nearest_vertex_in_cell", &Delaunay_triangulation_3::nearest_vertex_in_cell)
+    ;
+}
 #endif
 
 template <typename Handle_>
@@ -397,6 +485,10 @@ void export_triangulation_3()
     //  Checking
     .def("is_valid", &Tri3_cell::is_valid)
     ;
+
+#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
+  export_delaunay_triangulation_3();
+#endif
 }
 
 void export_alpha_shapes_3()
@@ -470,10 +562,10 @@ void export_alpha_shapes_3()
     .def(init<Triangulation_3&, optional<double, Alpha_shape_3::Mode>>())
     .def(init<Triangulation_3&, optional<As_nt&, Alpha_shape_3::Mode>>())
 #endif
-    .def("__init__", make_constructor(&init1))
-    .def("__init__", make_constructor(&init2))
+    .def("__init__", make_constructor(&as_init1))
+    .def("__init__", make_constructor(&as_init2))
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
-    .def("__init__", make_constructor(&init3))
+    .def("__init__", make_constructor(&as_init3))
 #endif
     // Modifiers
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
