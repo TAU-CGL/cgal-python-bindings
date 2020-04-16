@@ -60,10 +60,10 @@ double FT_to_double(FT& ft)
   return CGAL::to_double(ft);
 }
 
-Point_2 transform_point(Aff_Transformation_2& t, Point_2& p) { return t.transform(p); }
-Vector_2 transform_vector(Aff_Transformation_2& t, Vector_2 & v) { return t.transform(v); }
-Direction_2 transform_direction(Aff_Transformation_2& t, Direction_2& d) { return t.transform(d); }
-Line_2 transform_line(Aff_Transformation_2& t, Line_2& l) { return t.transform(l); }
+Point_2 transform_point(Aff_transformation_2& t, Point_2& p) { return t.transform(p); }
+Vector_2 transform_vector(Aff_transformation_2& t, Vector_2 & v) { return t.transform(v); }
+Direction_2 transform_direction(Aff_transformation_2& t, Direction_2& d) { return t.transform(d); }
+Line_2 transform_line(Aff_transformation_2& t, Line_2& l) { return t.transform(l); }
 
 void export_kernel()
 {
@@ -264,31 +264,6 @@ void export_kernel()
     .def(self + Vector_2())
     .def(self - Vector_2())
     .setattr("__hash__", &hash<Point_2>)
-    ;
-
-  class_<Point_3>("Point_3")
-    .def(init<>())
-    .def(init<double, double, double>())
-    .def(init<FT&, FT&, FT&>())
-    .def(init<RT&, RT&, RT&>())
-    .def("x", &Point_3::x, Kernel_return_value_policy())
-    .def("y", &Point_3::y, Kernel_return_value_policy())
-    .def("z", &Point_3::z, Kernel_return_value_policy())
-    .def("hx", &Point_3::hx, Kernel_return_value_policy())
-    .def("hy", &Point_3::hy, Kernel_return_value_policy())
-    .def("hz", &Point_3::hz, Kernel_return_value_policy())
-    .def("hw", &Point_3::hw, Kernel_return_value_policy())
-    .def("dimension", &Point_2::dimension)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self == self)
-    .def(self != self)
-    .def(self > self)
-    .def(self < self)
-    .def(self <= self)
-    .def(self >= self)
-    .def(self - self)
-    .setattr("__hash__", &hash<Point_3>)
     ;
 
   class_<Segment_2>("Segment_2")
@@ -537,7 +512,65 @@ void export_kernel()
     .def(self + self)
     ;
 
-  class_<Aff_Transformation_2>("Aff_Transformation_2")
+  class_<Point_3>("Point_3")
+    .def(init<>())
+    .def(init<double, double, double>())
+    .def(init<FT&, FT&, FT&>())
+    .def(init<RT&, RT&, RT&>())
+    .def("x", &Point_3::x, Kernel_return_value_policy())
+    .def("y", &Point_3::y, Kernel_return_value_policy())
+    .def("z", &Point_3::z, Kernel_return_value_policy())
+    .def("hx", &Point_3::hx, Kernel_return_value_policy())
+    .def("hy", &Point_3::hy, Kernel_return_value_policy())
+    .def("hz", &Point_3::hz, Kernel_return_value_policy())
+    .def("hw", &Point_3::hw, Kernel_return_value_policy())
+    .def("dimension", &Point_2::dimension)
+    .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    .def(self > self)
+    .def(self < self)
+    .def(self <= self)
+    .def(self >= self)
+    .def(self - self)
+    .setattr("__hash__", &hash<Point_3>)
+    ;
+
+  class_<Weighted_point_3>("Weighted_point_3")
+    .def(init<>())
+    .def(init<const CGAL::Origin&>())
+    .def(init<const Point_3&>())
+    .def(init<const Point_3&, const FT&>())
+    .def(init<const FT&, const FT&, const FT&>())
+    // Accessors
+    .def("point", &Weighted_point_3::point, Kernel_return_value_policy())
+    .def("weight", &Weighted_point_3::weight, Kernel_return_value_policy())
+    .def("x", &Weighted_point_3::x, Kernel_return_value_policy())
+    .def("y", &Weighted_point_3::y, Kernel_return_value_policy())
+    .def("z", &Weighted_point_3::z, Kernel_return_value_policy())
+    .def("hx", &Weighted_point_3::hx, Kernel_return_value_policy())
+    .def("hy", &Weighted_point_3::hy, Kernel_return_value_policy())
+    .def("hz", &Weighted_point_3::hz, Kernel_return_value_policy())
+    .def("hw", &Weighted_point_3::hw, Kernel_return_value_policy())
+    // Operations
+    .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    // Convenient operations
+    .def("homogeneous", &Weighted_point_3::homogeneous)
+    .def("cartesian", &Weighted_point_3::cartesian, Kernel_return_value_policy())
+    // Kernel::FT 	operator[] (int i) const
+    // Cartesian_const_iterator 	cartesian_begin () const
+    // Cartesian_const_iterator 	cartesian_end () const
+    .def("dimension", &Weighted_point_3::dimension)
+    .def("bbox", &Weighted_point_3::bbox)
+    // .def("transform", &Weighted_point_3::transform)
+    .setattr("__hash__", &hash<Point_3>)
+    ;
+
+  class_<Aff_transformation_2>("Aff_transformation_2")
     .def(init<>())
     .def(init<RT&, RT&, RT&, RT&, RT&>())
     .def(init<RT, RT, RT, RT>())
@@ -554,20 +587,22 @@ void export_kernel()
     .def("transform", transform_vector)
     .def("transform", transform_direction)
     .def("transform", transform_line)
-    .def("inverse", &Aff_Transformation_2::inverse)
-    .def("is_even", &Aff_Transformation_2::is_even)
-    .def("is_odd", &Aff_Transformation_2::is_odd)
-    .def("cartesian", &Aff_Transformation_2::cartesian)
-    .def("m", &Aff_Transformation_2::m)
-    .def("homogeneous", &Aff_Transformation_2::homogeneous)
-    .def("hm", &Aff_Transformation_2::hm)
+    .def("inverse", &Aff_transformation_2::inverse)
+    .def("is_even", &Aff_transformation_2::is_even)
+    .def("is_odd", &Aff_transformation_2::is_odd)
+    .def("cartesian", &Aff_transformation_2::cartesian)
+    .def("m", &Aff_transformation_2::m)
+    .def("homogeneous", &Aff_transformation_2::homogeneous)
+    .def("hm", &Aff_transformation_2::hm)
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
     //.def(self == self)
     .def(self * self)
     ;
-  //TODO: weighted_point(?)
 
+  class_<Aff_transformation_3>("Aff_transformation_3")
+    .def(init<>())
+    ;
 
   //Global kernel functions
   def<CGAL::Angle(const Vector_2&, const Vector_2&)>("angle", &CGAL::angle);

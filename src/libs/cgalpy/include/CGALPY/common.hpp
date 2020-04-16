@@ -83,7 +83,6 @@ typedef typename Kernel::RT                                              RT;
 //typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>::CoordNT      CoordNT;
 typedef typename CGAL::Object                                            Object;
 typedef typename Kernel::Point_2                                         Point_2;
-typedef typename Kernel::Point_3                                         Point_3;
 typedef typename Kernel::Segment_2                                       Segment_2;
 typedef typename Kernel::Line_2                                          Line_2;
 typedef typename Kernel::Ray_2                                           Ray_2;
@@ -97,7 +96,12 @@ typedef typename CGAL::Polygon_2<Kernel, Point_2_container>              Polygon
 typedef typename CGAL::Polygon_with_holes_2<Kernel, Point_2_container>   Polygon_with_holes_2;
 typedef typename CGAL::Polygon_set_2<Kernel, Point_2_container>          Polygon_set_2;
 typedef typename Kernel::Iso_rectangle_2                                 Iso_rectangle_2;
-typedef typename CGAL::Aff_transformation_2<Kernel>                      Aff_Transformation_2;
+typedef typename CGAL::Aff_transformation_2<Kernel>                      Aff_transformation_2;
+
+typedef typename Kernel::Point_3                                         Point_3;
+typedef typename Kernel::Weighted_point_3                                Weighted_point_3;
+typedef typename CGAL::Aff_transformation_3<Kernel>                      Aff_transformation_3;
+
 typedef typename CGAL::Rotation                                          Rotation;
 typedef typename CGAL::Scaling                                           Scaling;
 typedef typename CGAL::Translation                                       Translation;
