@@ -11,3 +11,7 @@ p3 = Point_3(49.4264, 32.6279, 4.6205)
 p4 = Point_3(49.3127, 30.3271, 6.05503)
 alphaShape  = Alpha_shape_3([p1, p2, p3, p4], 0, Mode.GENERAL)
 print("Alpha shape computed in GENERAL mode")
+alphas = alphaShape.alphas()
+# print(alphas)
+for x in alphas:
+  print(x)
