@@ -1,6 +1,6 @@
 #!/usr/bin/python3.7
 
-# export PYTHONPATH="/home/efif/build/cgalpy/delaunay_release/src/libs/tri3"
+# export PYTHONPATH="/home/efif/build/cgalpy/delaunay_fast_location_release/src/libs/tri3"
 
 from tri3_epic import *
 p1 = Point_3(1, 0, 0)
@@ -10,6 +10,9 @@ alphaShape  = Alpha_shape_3([p1, p2, p3])
 # alphaShape.make_alpha_shape([p1, p2, p3])
 
 print("Alpha shape computed in REGULARIZED mode by default")
+# Find alpha solid
+alphaSolid = alphaShape.find_alpha_solid()
+print("Smallest alpha value to get a solid through data points is ", alphaSolid)
 # find optimal alpha value
 optHandle = alphaShape.find_optimal_alpha(1);
 print(optHandle)
