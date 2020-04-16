@@ -238,6 +238,7 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_TRAITS");
 #endif
 
 // 3D triangulation location policy
+#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 #if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_FAST
 typedef CGAL::Fast_location                                        Location_policy;
 #elif CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
@@ -245,14 +246,15 @@ typedef CGAL::Compact_location                                     Location_poli
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_CONCURRENCY");
 #endif
+#endif
 
 // 3D triangulation
 #if CGALPY_TRI3 == CGALPY_TRI3_PLAIN
 typedef CGAL::Triangulation_3<Tri3_traits, Tds>                           Triangulation_3;
 #elif CGALPY_TRI3 == CGALPY_TRI3_REGULAR
 typedef CGAL::Regular_triangulation_3<Tri3_traits, Tds>                   Triangulation_3;
-typedef Triangulation_3::Weighted_point                                   Weighted_point;
-typedef Triangulation_3::Bare_point                                       Bare_point;
+typedef Triangulation_3::Weighted_point                                   Tri3_weighted_point;
+typedef Triangulation_3::Bare_point                                       Tri3_bare_point;
 #elif CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 typedef CGAL::Delaunay_triangulation_3<Tri3_traits, Tds, Location_policy> Delaunay_triangulation_3;
 typedef Delaunay_triangulation_3                                          Triangulation_3;
@@ -360,6 +362,8 @@ const As_nt& next(As_alpha_iterator it)
 
 #endif
 
+#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
+
 Delaunay_triangulation_3* dt3_init(boost::python::list& lst)
 {
   auto begin = boost::python::stl_input_iterator<Tri3_point>(lst);
@@ -367,7 +371,6 @@ Delaunay_triangulation_3* dt3_init(boost::python::list& lst)
   return new Delaunay_triangulation_3(begin, end);
 }
 
-#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 std::ptrdiff_t insert_points(Delaunay_triangulation_3& dt, boost::python::list& lst)
 {
   if (! lst) return 0;
@@ -430,6 +433,7 @@ void export_delaunay_triangulation_3()
     .def("nearest_vertex_in_cell", &Delaunay_triangulation_3::nearest_vertex_in_cell)
     ;
 }
+
 #endif
 
 template <typename Handle_>
