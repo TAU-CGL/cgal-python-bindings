@@ -38,9 +38,6 @@
 #define CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR               10
 #define CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR_WITH_INFO     11
 
-#define CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_FALSE       0
-#define CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_TRUE        1
-
 #define CGALPY_TRI3_TRAITS_SEQUENTIAL                   0
 #define CGALPY_TRI3_TRAITS_PARALLEL                     1
 
@@ -147,12 +144,12 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3");
 // Type definitions:
 
 // Exact comparison
-#if CGALPY_ALPHA_SHAPE_EXACT_COMPARISON == CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_FALSE
+#if CGALPY_EXACT_COMPARISON == 0
 typedef CGAL::Tag_false         Exact_comparison;
-#elif CGALPY_ALPHA_SHAPE_EXACT_COMPARISON == CGALPY_ALPHA_SHAPE_EXACT_COMPARISON_TRUE
+#elif CGALPY_EXACT_COMPARISON == 1
 typedef CGAL::Tag_true          Exact_comparison;
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ALPHA_SHAPE_EXACT_COMPARISON");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_EXACT_COMPARISON");
 #endif
 
 // 3D triangulation vertex base
@@ -252,6 +249,13 @@ typedef CGAL::Periodic_3_Delaunay_triangulation_3<Tri_traits, Tds> Triangulation
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3");
 #endif
 
+typedef Triangulation_3::Point          Tri3_point;
+typedef Triangulation_3::Vertex         Tri3_vertex;
+typedef Triangulation_3::Cell           Tri3_cell;
+
+typedef Triangulation_3::Vertex_handle  Tri3_vertex_handle;
+typedef Triangulation_3::Cell_handle    Tri3_cell_handle;
+
 // Alpha shape type
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
 typedef CGAL::Alpha_shape_3<Triangulation_3, Exact_comparison>     Alpha_shape_3;
@@ -291,7 +295,7 @@ typedef Alpha_shape_3::NT                       As_nt;
 typedef Alpha_shape_3::Mode                     As_mode;
 typedef Alpha_shape_3::Classification_type      As_classification_type;
 typedef Alpha_shape_3::Alpha_iterator           As_alpha_iterator;
-typedef CGAL::Alpha_status<FT>                  As_alpha_status;
+typedef CGAL::Alpha_status<As_nt>               As_alpha_status;
 #endif
 
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
@@ -314,7 +318,7 @@ Alpha_shape_3* init1(boost::python::list& lst)
   return new Alpha_shape_3(begin, end);
 }
 
-Alpha_shape_3* init2(boost::python::list& lst, const FT& alpha)
+Alpha_shape_3* init2(boost::python::list& lst, const As_nt& alpha)
 {
   auto begin = boost::python::stl_input_iterator<As_point>(lst);
   auto end = boost::python::stl_input_iterator<As_point>();
@@ -322,35 +326,14 @@ Alpha_shape_3* init2(boost::python::list& lst, const FT& alpha)
 }
 
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
-Alpha_shape_3* init3(boost::python::list& lst, const FT& alpha, As_mode m)
+Alpha_shape_3* init3(boost::python::list& lst, const As_nt& alpha, As_mode m)
 {
   auto begin = boost::python::stl_input_iterator<As_point>(lst);
   auto end = boost::python::stl_input_iterator<As_point>();
   return new Alpha_shape_3(begin, end, alpha, m);
 }
 
-typedef Alpha_shape_3                           As_3;
-As_size_type (As_3::*number_of_solid_components1)() const                = &As_3::number_of_solid_components;
-As_size_type (As_3::*number_of_solid_components2)(const FT& alpha) const = &As_3::number_of_solid_components;
-
-As_classification_type (As_3::*classify1)(const As_point& p, const FT& alpha) const              = &As_3::classify;
-As_classification_type (As_3::*classify2)(const As_edge& s, const FT& alpha) const               = &As_3::classify;
-As_classification_type (As_3::*classify3)(const As_facet& s, const FT& alpha) const              = &As_3::classify;
-As_classification_type (As_3::*classify4)(const As_vertex_handle& s, const FT& alpha) const      = &As_3::classify;
-As_classification_type (As_3::*classify5)(const As_cell_handle& s, const FT& alpha) const        = &As_3::classify;
-As_classification_type (As_3::*classify6)(const As_cell_handle& s, int i, const FT& alpha) const = &As_3::classify;
-
-As_classification_type (As_3:: *classify7)(const As_point& p) const              = &As_3::classify;
-As_classification_type (As_3:: *classify8)(const As_edge& s) const               = &As_3::classify;
-As_classification_type (As_3:: *classify9)(const As_facet& s) const              = &As_3::classify;
-As_classification_type (As_3::*classify10)(const As_vertex_handle& s) const      = &As_3::classify;
-As_classification_type (As_3::*classify11)(const As_cell_handle& s) const        = &As_3::classify;
-As_classification_type (As_3::*classify12)(const As_cell_handle& s, int i) const = &As_3::classify;
-
-As_alpha_status (As_3::*get_alpha_status1)(const As_edge& e) const  = &As_3::get_alpha_status;
-As_alpha_status (As_3::*get_alpha_status2)(const As_facet& f) const = &As_3::get_alpha_status;
-
-const FT& next(As_alpha_iterator it)
+const As_nt& next(As_alpha_iterator it)
 {
   if (it == As_alpha_iterator()) {
     PyErr_SetString(PyExc_StopIteration, "Invalid alpha iterator");
@@ -360,6 +343,61 @@ const FT& next(As_alpha_iterator it)
 }
 
 #endif
+
+template <typename Handle_>
+const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
+
+void export_triangulation_3()
+{
+  using namespace boost::python;
+
+  class_<Tri3_vertex_handle>("Vertex_handle")
+    .def(init<>())
+    .def("value", &value<Tri3_vertex_handle>, return_value_policy<reference_existing_object>())
+    ;
+
+  class_<Tri3_cell_handle>("Cell_handle")
+    .def(init<>())
+    .def("value", &value<Tri3_cell_handle>, return_value_policy<reference_existing_object>())
+    ;
+
+  class_<Tri3_vertex>("Vertex")
+    .def(init<>())
+    // Access Functions
+    .def<Tri3_cell_handle(Tri3_vertex::*)()const>("cell", &Tri3_vertex::cell)
+    .def<const Tri3_point&(Tri3_vertex::*)() const>("point", &Tri3_vertex::point, return_internal_reference<>())
+    // Setting
+    .def("set_cell", &Tri3_vertex::set_cell)
+    .def("set_point", &Tri3_vertex::set_point)
+    // Checking
+    .def("is_valid", &Tri3_vertex::is_valid)
+    ;
+
+  void(Tri3_cell::*set_vertices)(Tri3_vertex_handle, Tri3_vertex_handle, Tri3_vertex_handle, Tri3_vertex_handle) =
+    &Tri3_cell::set_vertices;
+  void(Tri3_cell::*set_neighbors)(Tri3_cell_handle, Tri3_cell_handle, Tri3_cell_handle, Tri3_cell_handle) =
+    &Tri3_cell::set_neighbors;
+
+  class_<Tri3_cell>("Cell")
+    .def(init<>())
+    // Access Functions
+    .def("vertex", &Tri3_cell::vertex)
+    .def<int(Tri3_cell::*)(Tri3_vertex_handle) const>("index", &Tri3_cell::index)
+    .def<int(Tri3_cell::*)(Tri3_cell_handle) const>("index", &Tri3_cell::index)
+    .def<bool(Tri3_cell::*)(Tri3_vertex_handle) const>("has_vertex", &Tri3_cell::has_vertex)
+    .def<bool(Tri3_cell::*)(Tri3_vertex_handle, int&) const>("has_vertex", &Tri3_cell::has_vertex)
+    .def("neighbor", &Tri3_cell::neighbor)
+    .def<bool(Tri3_cell::*)(Tri3_cell_handle n) const>("has_neighbor", &Tri3_cell::has_neighbor)
+    .def<bool(Tri3_cell::*)(Tri3_cell_handle n, int &i) const>("has_neighbor", &Tri3_cell::has_neighbor)
+    // Setting
+    .def("set_vertex", &Tri3_cell::set_vertex)
+    .def("set_vertices", set_vertices)
+    .def("set_neighbor", &Tri3_cell::set_neighbor)
+    .def("set_neighbors", set_neighbors)
+    //  Checking
+    .def("is_valid", &Tri3_cell::is_valid)
+    ;
+}
 
 void export_alpha_shapes_3()
 {
@@ -400,15 +438,37 @@ void export_alpha_shapes_3()
     .def("__iter__", &pass_through)
     .def("__next__", &next, return_value_policy<copy_const_reference>())
     ;
+
+  typedef Alpha_shape_3                           As_3;
+  As_size_type (As_3::*number_of_solid_components1)() const                   = &As_3::number_of_solid_components;
+  As_size_type (As_3::*number_of_solid_components2)(const As_nt& alpha) const = &As_3::number_of_solid_components;
+
+  As_classification_type (As_3::*classify1)(const As_point& p, const As_nt& alpha) const              = &As_3::classify;
+  As_classification_type (As_3::*classify2)(const As_edge& s, const As_nt& alpha) const               = &As_3::classify;
+  As_classification_type (As_3::*classify3)(const As_facet& s, const As_nt& alpha) const              = &As_3::classify;
+  As_classification_type (As_3::*classify4)(const As_vertex_handle& s, const As_nt& alpha) const      = &As_3::classify;
+  As_classification_type (As_3::*classify5)(const As_cell_handle& s, const As_nt& alpha) const        = &As_3::classify;
+  As_classification_type (As_3::*classify6)(const As_cell_handle& s, int i, const As_nt& alpha) const = &As_3::classify;
+
+  As_classification_type (As_3:: *classify7)(const As_point& p) const              = &As_3::classify;
+  As_classification_type (As_3:: *classify8)(const As_edge& s) const               = &As_3::classify;
+  As_classification_type (As_3:: *classify9)(const As_facet& s) const              = &As_3::classify;
+  As_classification_type (As_3::*classify10)(const As_vertex_handle& s) const      = &As_3::classify;
+  As_classification_type (As_3::*classify11)(const As_cell_handle& s) const        = &As_3::classify;
+  As_classification_type (As_3::*classify12)(const As_cell_handle& s, int i) const = &As_3::classify;
+
+  As_alpha_status (As_3::*get_alpha_status1)(const As_edge& e) const  = &As_3::get_alpha_status;
+  As_alpha_status (As_3::*get_alpha_status2)(const As_facet& f) const = &As_3::get_alpha_status;
+
 #endif
 
   class_<Alpha_shape_3, boost::noncopyable>("Alpha_shape_3")
     .def(init<>())
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
     .def(init<optional<double, Alpha_shape_3::Mode>>())
-    .def(init<optional<FT&, Alpha_shape_3::Mode>>())
+    .def(init<optional<As_nt&, Alpha_shape_3::Mode>>())
     .def(init<Triangulation_3&, optional<double, Alpha_shape_3::Mode>>())
-    .def(init<Triangulation_3&, optional<FT&, Alpha_shape_3::Mode>>())
+    .def(init<Triangulation_3&, optional<As_nt&, Alpha_shape_3::Mode>>())
 #endif
     .def("__init__", make_constructor(&init1))
     .def("__init__", make_constructor(&init2))
@@ -444,6 +504,7 @@ void export_alpha_shapes_3()
     .def("get_alpha_status", get_alpha_status2)
 #endif
     // .def("get_alpha_shape_cells", &Alpha_shape_3::get_alpha_shape_cells)
+    // .def("alpha_shape_cells", &cells_range)
     // .def("get_alpha_shape_facets", &Alpha_shape_3::get_alpha_shape_facets)
     // .def("get_alpha_shape_edges", &Alpha_shape_3::get_alpha_shape_edges)
     // .def("get_alpha_shape_vertices", &Alpha_shape_3::get_alpha_shape_vertices)
