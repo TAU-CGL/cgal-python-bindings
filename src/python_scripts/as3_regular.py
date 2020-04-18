@@ -11,18 +11,12 @@ p5 = Weighted_point_3(Point_3( 2,  2,  2), 1)
 alphaShape  = Alpha_shape_3([p1, p2, p3, p4, p5])
 
 # explore the 0-shape - It is dual to the boundary of the union.
-# std::list<Cell_handle> cells;
-# std::list<Facet>       facets;
-# std::list<Edge>        edges;
-# as.get_alpha_shape_cells(std::back_inserter(cells),
-#                          Alpha_shape_3::INTERIOR);
-# as.get_alpha_shape_facets(std::back_inserter(facets),
-#                           Alpha_shape_3::REGULAR);
-# as.get_alpha_shape_facets(std::back_inserter(facets),
-#                           Alpha_shape_3::SINGULAR);
-# as.get_alpha_shape_edges(std::back_inserter(edges),
-#                          Alpha_shape_3::SINGULAR);
-# print(" The 0-shape has : ")
-# print(cells.len(), " interior tetrahedra")
-# print(facets.len(), " boundary facets")
-# print(edges.len(), " singular edges")
+interiorCells = alphaShape.alpha_shape_cells(Classification_type.INTERIOR, 1);
+regularFacets = alphaShape.alpha_shape_facets(Classification_type.REGULAR, 1);
+singularFects = alphaShape.alpha_shape_facets(Classification_type.SINGULAR, 1);
+singularEdges = alphaShape.alpha_shape_edges(Classification_type.SINGULAR, 1);
+print("The 0-shape has : ")
+print(len(interiorCells), "interior tetrahedra")
+print(len(regularFacets), "regular facets")
+print(len(singularFects), "singular facets")
+print(len(singularEdges), "singular edges")
