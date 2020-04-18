@@ -270,6 +270,7 @@ typedef Triangulation_3::Point          Tri3_point;
 typedef Triangulation_3::Vertex         Tri3_vertex;
 typedef Triangulation_3::Cell           Tri3_cell;
 typedef Triangulation_3::Facet          Tri3_facet;
+typedef Triangulation_3::Edge           Tri3_edge;
 
 typedef Triangulation_3::Vertex_handle  Tri3_vertex_handle;
 typedef Triangulation_3::Cell_handle    Tri3_cell_handle;
@@ -495,6 +496,14 @@ void export_triangulation_3()
     .def("is_valid", &Tri3_cell::is_valid)
     ;
 
+  class_<Tri3_facet>("Facet")
+    .def(init<>())
+    ;
+
+  class_<Tri3_edge>("Edge")
+    .def(init<>())
+    ;
+
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
   export_delaunay_triangulation_3();
 #endif
@@ -689,9 +698,9 @@ void export_alpha_shapes_3()
     .def("get_alpha_status", get_alpha_status2)
 #endif
     .def("alpha_shape_cells", &alpha_shape_cells)
-    .def("get_alpha_shape_facets", &alpha_shape_facets)
-    .def("get_alpha_shape_edges", &alpha_shape_edges)
-    .def("get_alpha_shape_vertices", &alpha_shape_vertices)
+    .def("alpha_shape_facets", &alpha_shape_facets)
+    .def("alpha_shape_edges", &alpha_shape_edges)
+    .def("alpha_shape_vertices", &alpha_shape_vertices)
     // .def("filtration", &Alpha_shape_3::filtration)
     // .def("filtration_with_alpha_values", &Alpha_shape_3::filtration_with_alpha_values)
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
