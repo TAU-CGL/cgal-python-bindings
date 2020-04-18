@@ -7,6 +7,8 @@
 
 #include <boost/static_assert.hpp>
 
+#include <CGAL/iterator.h>
+
 #include "CGALPY/config.hpp"
 #include "CGALPY/common.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
@@ -391,12 +393,15 @@ void export_delaunay_triangulation_3()
   CGAL::Bounded_side(Delaunay_triangulation_3::*side_of_circle2)(Tri3_cell_handle, int, const Tri3_point& p, bool) const =
     &Delaunay_triangulation_3::side_of_circle;
 
-  Tri3_vertex_handle(Delaunay_triangulation_3::*insert1)(const Tri3_point&, Tri3_cell_handle) =
+  Tri3_vertex_handle(Delaunay_triangulation_3::*insert1)(const Tri3_point&, Tri3_cell_handle, bool*) =
     &Delaunay_triangulation_3::insert;
-  Tri3_vertex_handle(Delaunay_triangulation_3::*insert2)(const Tri3_point&, Tri3_vertex_handle) =
+  Tri3_vertex_handle(Delaunay_triangulation_3::*insert2)(const Tri3_point&, Tri3_vertex_handle, bool*) =
     &Delaunay_triangulation_3::insert;
-  Tri3_vertex_handle(Delaunay_triangulation_3::*insert3)(const Tri3_point&, Tri3_locate_type, Tri3_cell_handle, int, int) =
+  Tri3_vertex_handle(Delaunay_triangulation_3::*insert3)(const Tri3_point&, Tri3_locate_type, Tri3_cell_handle, int, int, bool*) =
     &Delaunay_triangulation_3::insert;
+
+  Tri3_vertex_handle(Delaunay_triangulation_3::*nearest_vertex)(const Tri3_point&, Tri3_cell_handle) const =
+    &Delaunay_triangulation_3::nearest_vertex;
 
   class_<Delaunay_triangulation_3>("Delaunay_triangulation_3")
     .def(init<>())
@@ -420,16 +425,16 @@ void export_delaunay_triangulation_3()
     // .def<bool(Delaunay_triangulation_3::*)(Tri3_vertex_handle, bool*)>("remove", &Delaunay_triangulation_3::remove)
 
     // template<typename InputIterator >
-    // int 	remove (InputIterator first, InputIterator beyond)
+    // int remove (InputIterator first, InputIterator beyond)
 
     // template<typename InputIterator >
-    // int 	remove_cluster (InputIterator first, InputIterator beyond)
+    // int remove_cluster (InputIterator first, InputIterator beyond)
 
     // Queries
     .def("side_of_sphere", side_of_sphere)
     .def("side_of_circle", side_of_circle1)
     .def("side_of_circle", side_of_circle2)
-    .def("nearest_vertex", &Delaunay_triangulation_3::nearest_vertex)
+    .def("nearest_vertex", nearest_vertex)
     .def("nearest_vertex_in_cell", &Delaunay_triangulation_3::nearest_vertex_in_cell)
     ;
 }
@@ -493,6 +498,90 @@ void export_triangulation_3()
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
   export_delaunay_triangulation_3();
 #endif
+}
+
+template <typename AlphaShape_3>
+class Alpha_shape_3_test {
+private:
+  typedef AlphaShape_3                                          Alpha_shape_3;
+  typedef typename Alpha_shape_3::Classification_type           Classification_type;
+  typedef typename Alpha_shape_3::NT                            NT;
+  typedef typename Alpha_shape_3::Finite_cells_iterator         Finite_cells_iterator;
+  typedef typename Alpha_shape_3::Finite_facets_iterator        Finite_facets_iterator;
+  typedef typename Alpha_shape_3::Finite_edges_iterator         Finite_edges_iterator;
+  typedef typename Alpha_shape_3::Finite_vertices_iterator      Finite_vertices_iterator;
+
+  const Alpha_shape_3& m_alpha_shape;
+  Classification_type m_type;
+  const NT& m_alpha;
+
+public:
+  Alpha_shape_3_test(const Alpha_shape_3& as, Classification_type type, const NT& alpha) :
+    m_alpha_shape(as),
+    m_type(type),
+    m_alpha(alpha)
+  {}
+
+  bool operator()(Finite_cells_iterator cit) const
+  { return m_alpha_shape.classify(cit, m_alpha) == m_type; }
+
+  bool operator()(Finite_facets_iterator fit) const
+  { return m_alpha_shape.classify(*fit, m_alpha) == m_type; }
+
+  bool operator()(Finite_edges_iterator eit) const
+  { return m_alpha_shape.classify(*eit, m_alpha) == m_type; }
+
+  bool operator()(Finite_vertices_iterator vit) const
+  { return m_alpha_shape.classify(vit, m_alpha) == m_type; }
+};
+
+typedef Alpha_shape_3_test<Alpha_shape_3>                               As_test;
+typedef CGAL::Filter_iterator<As_finite_cells_iterator, As_test>        As_filter_cell_iterator;
+typedef CGAL::Filter_iterator<As_finite_facets_iterator, As_test>       As_filter_facet_iterator;
+typedef CGAL::Filter_iterator<As_finite_edges_iterator, As_test>        As_filter_edge_iterator;
+typedef CGAL::Filter_iterator<As_finite_vertices_iterator, As_test>     As_filter_vertex_iterator;
+
+boost::python::list alpha_shape_cells(const Alpha_shape_3& as, As_classification_type type, const As_nt& alpha)
+{
+  As_test test_as_cell(as, type, alpha);
+  As_filter_cell_iterator first(as.finite_cells_end(), test_as_cell, as.finite_cells_begin());
+  As_filter_cell_iterator last(as.finite_cells_end(), test_as_cell, as.finite_cells_end());
+  // return boost::python::range<return_internal_reference<>, Alpha_shape_3>(&Alpha_shape_3::finite_cells_begin,
+  //                                                                         &Alpha_shape_3::finite_cells_end);
+  // return boost::python::range<return_internal_reference<>>(first, last);
+  boost::python::list lst;
+  for (auto it = first; it != last; ++it) lst.append(*it);
+  return lst;
+}
+
+boost::python::list alpha_shape_facets(const Alpha_shape_3& as, As_classification_type type, const As_nt& alpha)
+{
+  As_test test_as_facet(as, type, alpha);
+  As_filter_facet_iterator first(as.finite_facets_end(), test_as_facet, as.finite_facets_begin());
+  As_filter_facet_iterator last(as.finite_facets_end(), test_as_facet, as.finite_facets_end());
+  boost::python::list lst;
+  for (auto it = first; it != last; ++it) lst.append(*it);
+  return lst;
+}
+
+boost::python::list alpha_shape_edges(const Alpha_shape_3& as, As_classification_type type, const As_nt& alpha)
+{
+  As_test test_as_edge(as, type, alpha);
+  As_filter_edge_iterator first(as.finite_edges_end(), test_as_edge, as.finite_edges_begin());
+  As_filter_edge_iterator last(as.finite_edges_end(), test_as_edge, as.finite_edges_end());
+  boost::python::list lst;
+  for (auto it = first; it != last; ++it) lst.append(*it);
+  return lst;
+}
+
+boost::python::list alpha_shape_vertices(const Alpha_shape_3& as, As_classification_type type, const As_nt& alpha)
+{
+  As_test test_as_vertex(as, type, alpha);
+  As_filter_vertex_iterator first(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_begin());
+  As_filter_vertex_iterator last(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_end());
+  boost::python::list lst;
+  for (auto it = first; it != last; ++it) lst.append(*it);
+  return lst;
 }
 
 void export_alpha_shapes_3()
@@ -599,10 +688,10 @@ void export_alpha_shapes_3()
     .def("get_alpha_status", get_alpha_status1)
     .def("get_alpha_status", get_alpha_status2)
 #endif
-    // .def("get_alpha_shape_cells", &Alpha_shape_3::get_alpha_shape_cells)
-    // .def("get_alpha_shape_facets", &Alpha_shape_3::get_alpha_shape_facets)
-    // .def("get_alpha_shape_edges", &Alpha_shape_3::get_alpha_shape_edges)
-    // .def("get_alpha_shape_vertices", &Alpha_shape_3::get_alpha_shape_vertices)
+    .def("alpha_shape_cells", &alpha_shape_cells)
+    .def("get_alpha_shape_facets", &alpha_shape_facets)
+    .def("get_alpha_shape_edges", &alpha_shape_edges)
+    .def("get_alpha_shape_vertices", &alpha_shape_vertices)
     // .def("filtration", &Alpha_shape_3::filtration)
     // .def("filtration_with_alpha_values", &Alpha_shape_3::filtration_with_alpha_values)
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
@@ -613,7 +702,7 @@ void export_alpha_shapes_3()
     .def("alpha_find", &Alpha_shape_3::alpha_find)
     .def("alpha_lower_bound", &Alpha_shape_3::alpha_lower_bound)
     .def("alpha_upper_bound", &Alpha_shape_3::alpha_upper_bound)
-    // // Operations
+    // Operations
     .def("number_of_solid_components", number_of_solid_components1)
     .def("number_of_solid_components", number_of_solid_components2)
     .def("find_optimal_alpha", &Alpha_shape_3::find_optimal_alpha)
