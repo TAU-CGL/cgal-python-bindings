@@ -35,27 +35,27 @@ public:
     f4 = Python_functor_1<FT, FT>(py_functor4);
   }
 
-  FT transformed_distance(const Query_item& q, const Point_d& r)
+  FT transformed_distance(const Query_item& q, const Point_d& r) const
   {
     return f0(q, r);
   }
 
-  FT min_distance_to_rectangle(const Query_item& q, const Kd_tree_rectangle& r)
+  FT min_distance_to_rectangle(const Query_item& q, const Kd_tree_rectangle& r) const
   {
     return f1(q, r);
   }
 
-  FT max_distance_to_rectangle(const Query_item& q, const Kd_tree_rectangle& r)
+  FT max_distance_to_rectangle(const Query_item& q, const Kd_tree_rectangle& r) const
   {
     return f2(q, r);
   }
 
-  FT transformed_distance(const FT& d)
+  FT transformed_distance(const FT& d) const
   {
     return f3(d);
   }
 
-  FT inverse_of_transformed_distance(const FT& d)
+  FT inverse_of_transformed_distance(const FT& d) const
   {
     return f4(d);
   }

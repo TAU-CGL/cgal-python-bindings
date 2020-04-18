@@ -185,10 +185,10 @@ void export_spatial_searching()
 
   class_<Distance_python>("Distance_python")
     .def(init<bp::object, bp::object, bp::object, bp::object, bp::object>())
-    .def<FT (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)>("transformed_distance", &Distance_python::transformed_distance)
+    .def<FT (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)const>("transformed_distance", &Distance_python::transformed_distance)
     .def("min_distance_to_rectangle", &Distance_python::min_distance_to_rectangle)
     .def("max_distance_to_rectangle", &Distance_python::max_distance_to_rectangle)
-    .def<FT (Distance_python::*) (const FT&)>("transformed_distance", &Distance_python::transformed_distance)
+    .def<FT (Distance_python::*) (const FT&)const>("transformed_distance", &Distance_python::transformed_distance)
     .def("inverse_of_transformed_distance", &Distance_python::inverse_of_transformed_distance)
     ;
 
