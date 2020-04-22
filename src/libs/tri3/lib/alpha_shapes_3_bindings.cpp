@@ -312,9 +312,10 @@ typedef Alpha_shape_3::Weighted_tag             As_weighted_tag;
 
 typedef Alpha_shape_3::NT                       As_nt;
 
+typedef Alpha_shape_3::Classification_type      As_classification_type;
+
 #if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
 typedef Alpha_shape_3::Mode                     As_mode;
-typedef Alpha_shape_3::Classification_type      As_classification_type;
 typedef Alpha_shape_3::Alpha_iterator           As_alpha_iterator;
 typedef CGAL::Alpha_status<As_nt>               As_alpha_status;
 #endif
@@ -394,12 +395,16 @@ void export_delaunay_triangulation_3()
   CGAL::Bounded_side(Delaunay_triangulation_3::*side_of_circle2)(Tri3_cell_handle, int, const Tri3_point& p, bool) const =
     &Delaunay_triangulation_3::side_of_circle;
 
+#if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
+  //! \todo The following is suppressed for fast location policy, cause it causes a compilation error.
+  // I have no idea why...
   Tri3_vertex_handle(Delaunay_triangulation_3::*insert1)(const Tri3_point&, Tri3_cell_handle, bool*) =
     &Delaunay_triangulation_3::insert;
   Tri3_vertex_handle(Delaunay_triangulation_3::*insert2)(const Tri3_point&, Tri3_vertex_handle, bool*) =
     &Delaunay_triangulation_3::insert;
   Tri3_vertex_handle(Delaunay_triangulation_3::*insert3)(const Tri3_point&, Tri3_locate_type, Tri3_cell_handle, int, int, bool*) =
     &Delaunay_triangulation_3::insert;
+#endif
 
   Tri3_vertex_handle(Delaunay_triangulation_3::*nearest_vertex)(const Tri3_point&, Tri3_cell_handle) const =
     &Delaunay_triangulation_3::nearest_vertex;
@@ -409,9 +414,11 @@ void export_delaunay_triangulation_3()
     .def(init<const Tri3_traits&>())
     .def("__init__", make_constructor(&dt3_init))
     // Insertion
+#if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
     .def("insert", insert1)
     .def("insert", insert2)
     .def("insert", insert3)
+#endif
     .def("insert_points", &insert_points)
 
     // template<class PointWithInfoInputIterator >
@@ -522,26 +529,59 @@ private:
 
   const Alpha_shape_3& m_alpha_shape;
   Classification_type m_type;
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
   const NT& m_alpha;
+#endif
 
 public:
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
   Alpha_shape_3_test(const Alpha_shape_3& as, Classification_type type, const NT& alpha) :
     m_alpha_shape(as),
     m_type(type),
     m_alpha(alpha)
   {}
+#else
+  Alpha_shape_3_test(const Alpha_shape_3& as, Classification_type type) :
+    m_alpha_shape(as),
+    m_type(type)
+  {}
+#endif
 
   bool operator()(Finite_cells_iterator cit) const
-  { return m_alpha_shape.classify(cit, m_alpha) == m_type; }
+  {
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+    return m_alpha_shape.classify(cit, m_alpha) == m_type;
+#else
+    return m_alpha_shape.classify(cit) == m_type;
+#endif
+  }
 
   bool operator()(Finite_facets_iterator fit) const
-  { return m_alpha_shape.classify(*fit, m_alpha) == m_type; }
+  {
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+    return m_alpha_shape.classify(*fit, m_alpha) == m_type;
+#else
+    return m_alpha_shape.classify(*fit) == m_type;
+#endif
+  }
 
   bool operator()(Finite_edges_iterator eit) const
-  { return m_alpha_shape.classify(*eit, m_alpha) == m_type; }
+  {
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+    return m_alpha_shape.classify(*eit, m_alpha) == m_type;
+#else
+    return m_alpha_shape.classify(*eit) == m_type;
+#endif
+  }
 
   bool operator()(Finite_vertices_iterator vit) const
-  { return m_alpha_shape.classify(vit, m_alpha) == m_type; }
+  {
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+    return m_alpha_shape.classify(vit, m_alpha) == m_type;
+#else
+    return m_alpha_shape.classify(vit) == m_type;
+#endif
+  }
 };
 
 typedef Alpha_shape_3_test<Alpha_shape_3>                               As_test;
@@ -550,9 +590,18 @@ typedef CGAL::Filter_iterator<As_finite_facets_iterator, As_test>       As_filte
 typedef CGAL::Filter_iterator<As_finite_edges_iterator, As_test>        As_filter_edge_iterator;
 typedef CGAL::Filter_iterator<As_finite_vertices_iterator, As_test>     As_filter_vertex_iterator;
 
-boost::python::list alpha_shape_cells(const Alpha_shape_3& as, As_classification_type type, const As_nt& alpha)
+
+boost::python::list alpha_shape_cells(const Alpha_shape_3& as, As_classification_type type
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+                                      , const As_nt& alpha
+#endif
+                                      )
 {
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
   As_test test_as_cell(as, type, alpha);
+#else
+  As_test test_as_cell(as, type);
+#endif
   As_filter_cell_iterator first(as.finite_cells_end(), test_as_cell, as.finite_cells_begin());
   As_filter_cell_iterator last(as.finite_cells_end(), test_as_cell, as.finite_cells_end());
   // return boost::python::range<return_internal_reference<>, Alpha_shape_3>(&Alpha_shape_3::finite_cells_begin,
@@ -563,9 +612,17 @@ boost::python::list alpha_shape_cells(const Alpha_shape_3& as, As_classification
   return lst;
 }
 
-boost::python::list alpha_shape_facets(const Alpha_shape_3& as, As_classification_type type, const As_nt& alpha)
+boost::python::list alpha_shape_facets(const Alpha_shape_3& as, As_classification_type type
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+                                       , const As_nt& alpha
+#endif
+                                       )
 {
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
   As_test test_as_facet(as, type, alpha);
+#else
+  As_test test_as_facet(as, type);
+#endif
   As_filter_facet_iterator first(as.finite_facets_end(), test_as_facet, as.finite_facets_begin());
   As_filter_facet_iterator last(as.finite_facets_end(), test_as_facet, as.finite_facets_end());
   boost::python::list lst;
@@ -573,9 +630,17 @@ boost::python::list alpha_shape_facets(const Alpha_shape_3& as, As_classificatio
   return lst;
 }
 
-boost::python::list alpha_shape_edges(const Alpha_shape_3& as, As_classification_type type, const As_nt& alpha)
+boost::python::list alpha_shape_edges(const Alpha_shape_3& as, As_classification_type type
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+                                      , const As_nt& alpha
+#endif
+                                      )
 {
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
   As_test test_as_edge(as, type, alpha);
+#else
+  As_test test_as_edge(as, type);
+#endif
   As_filter_edge_iterator first(as.finite_edges_end(), test_as_edge, as.finite_edges_begin());
   As_filter_edge_iterator last(as.finite_edges_end(), test_as_edge, as.finite_edges_end());
   boost::python::list lst;
@@ -583,9 +648,17 @@ boost::python::list alpha_shape_edges(const Alpha_shape_3& as, As_classification
   return lst;
 }
 
-boost::python::list alpha_shape_vertices(const Alpha_shape_3& as, As_classification_type type, const As_nt& alpha)
+boost::python::list alpha_shape_vertices(const Alpha_shape_3& as, As_classification_type type
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
+                                         , const As_nt& alpha
+#endif
+                                         )
 {
+#if CGALPY_ALPHA_SHAPE == CGALPY_ALPHA_SHAPE_PLAIN
   As_test test_as_vertex(as, type, alpha);
+#else
+  As_test test_as_vertex(as, type);
+#endif
   As_filter_vertex_iterator first(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_begin());
   As_filter_vertex_iterator last(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_end());
   boost::python::list lst;
