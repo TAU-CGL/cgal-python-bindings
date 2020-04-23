@@ -474,6 +474,14 @@ void export_delaunay_triangulation_3()
 template <typename Handle_>
 const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
 
+bool vertex_is_valid1(const Tri3_vertex& vertex, bool verbose, int level) { return vertex.is_valid(verbose, level); }
+bool vertex_is_valid2(const Tri3_vertex& vertex, bool verbose) { return vertex.is_valid(verbose); }
+bool vertex_is_valid3(const Tri3_vertex& vertex) { return vertex.is_valid(); }
+
+bool cell_is_valid1(const Tri3_cell& cell, bool verbose, int level) { return cell.is_valid(verbose, level); }
+bool cell_is_valid2(const Tri3_cell& cell, bool verbose) { return cell.is_valid(verbose); }
+bool cell_is_valid3(const Tri3_cell& cell) { return cell.is_valid(); }
+
 void export_triangulation_3()
 {
   using namespace boost::python;
@@ -497,7 +505,9 @@ void export_triangulation_3()
     .def("set_cell", &Tri3_vertex::set_cell)
     .def("set_point", &Tri3_vertex::set_point)
     // Checking
-    .def("is_valid", &Tri3_vertex::is_valid)
+    .def("is_valid", &vertex_is_valid1)
+    .def("is_valid", &vertex_is_valid2)
+    .def("is_valid", &vertex_is_valid3)
     ;
 
   void(Tri3_cell::*set_vertices)(Tri3_vertex_handle, Tri3_vertex_handle, Tri3_vertex_handle, Tri3_vertex_handle) =
@@ -522,15 +532,20 @@ void export_triangulation_3()
     .def("set_neighbor", &Tri3_cell::set_neighbor)
     .def("set_neighbors", set_neighbors)
     //  Checking
-    .def("is_valid", &Tri3_cell::is_valid)
+    .def("is_valid", &cell_is_valid1)
+    .def("is_valid", &cell_is_valid2)
+    .def("is_valid", &cell_is_valid3)
     ;
 
   class_<Tri3_facet>("Facet")
-    .def(init<>())
+    .def_readwrite("first", &Tri3_facet::first)
+    .def_readwrite("second", &Tri3_facet::second)
     ;
 
   class_<Tri3_edge>("Edge")
-    .def(init<>())
+    .def_readwrite("first", &Tri3_edge::first)
+    .def_readwrite("second", &Tri3_edge::second)
+    .def_readwrite("third", &Tri3_edge::third)
     ;
 
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY

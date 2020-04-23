@@ -20,3 +20,12 @@ print(len(interiorCells), "interior tetrahedra")
 print(len(regularFacets), "regular facets")
 print(len(singularFects), "singular facets")
 print(len(singularEdges), "singular edges")
+
+for cell in interiorCells:
+  print(cell.is_valid())
+
+for facet in regularFacets:
+  print(facet.second)
+
+for edge in singularEdges:
+  print(edge.second, edge.third)
