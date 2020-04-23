@@ -384,6 +384,20 @@ std::ptrdiff_t insert_points(Delaunay_triangulation_3& dt, boost::python::list& 
   return dt.insert(begin, end);
 }
 
+#if ((CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY) && \
+     (CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT))
+
+Tri3_vertex_handle insert4(Delaunay_triangulation_3& dt, const Tri3_point& p, Tri3_cell_handle start)
+{ return dt.insert(p, start); }
+
+Tri3_vertex_handle insert5(Delaunay_triangulation_3& dt, const Tri3_point& p, Tri3_vertex_handle hint)
+{ return dt.insert(p, hint); }
+
+Tri3_vertex_handle insert6(Delaunay_triangulation_3& dt, const Tri3_point& p, Tri3_locate_type lt, Tri3_cell_handle c, int li, int lj)
+{ return dt.insert(p, lt, c, li, lj); }
+
+#endif
+
 void export_delaunay_triangulation_3()
 {
   using namespace boost::python;
@@ -396,13 +410,18 @@ void export_delaunay_triangulation_3()
     &Delaunay_triangulation_3::side_of_circle;
 
 #if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
-  //! \todo The following is suppressed for fast location policy, cause it causes a compilation error.
-  // I have no idea why...
   Tri3_vertex_handle(Delaunay_triangulation_3::*insert1)(const Tri3_point&, Tri3_cell_handle, bool*) =
     &Delaunay_triangulation_3::insert;
   Tri3_vertex_handle(Delaunay_triangulation_3::*insert2)(const Tri3_point&, Tri3_vertex_handle, bool*) =
     &Delaunay_triangulation_3::insert;
   Tri3_vertex_handle(Delaunay_triangulation_3::*insert3)(const Tri3_point&, Tri3_locate_type, Tri3_cell_handle, int, int, bool*) =
+    &Delaunay_triangulation_3::insert;
+#else
+  Tri3_vertex_handle(Delaunay_triangulation_3::*insert1)(const Tri3_point&, Tri3_cell_handle) =
+    &Delaunay_triangulation_3::insert;
+  Tri3_vertex_handle(Delaunay_triangulation_3::*insert2)(const Tri3_point&, Tri3_vertex_handle) =
+    &Delaunay_triangulation_3::insert;
+  Tri3_vertex_handle(Delaunay_triangulation_3::*insert3)(const Tri3_point&, Tri3_locate_type, Tri3_cell_handle, int, int) =
     &Delaunay_triangulation_3::insert;
 #endif
 
@@ -414,10 +433,13 @@ void export_delaunay_triangulation_3()
     .def(init<const Tri3_traits&>())
     .def("__init__", make_constructor(&dt3_init))
     // Insertion
-#if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
     .def("insert", insert1)
     .def("insert", insert2)
     .def("insert", insert3)
+#if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
+    .def("insert", &insert4)
+    .def("insert", &insert5)
+    .def("insert", &insert6)
 #endif
     .def("insert_points", &insert_points)
 
