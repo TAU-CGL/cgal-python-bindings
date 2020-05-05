@@ -24,14 +24,14 @@ typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
 
 #if (CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL) || \
   (CGALPY_DCEL == CGALPY_EXTENDED_DCEL)
-#include <Arr_python_face_overlay_traits.hpp>
+#include <CGALPY/Arr_python_face_overlay_traits.hpp>
 typedef Arr_python_face_overlay_traits< Arrangement_2, Arrangement_2,
                                         Arrangement_2, Face::Data>
   Arr_face_overlay_traits;
 #endif
 
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
-#include <Arr_python_overlay_traits.hpp>
+#include <CGALPY/Arr_python_overlay_traits.hpp>
 typedef Arr_python_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2,
                                    Face::Data> Arr_overlay_traits;
 #endif

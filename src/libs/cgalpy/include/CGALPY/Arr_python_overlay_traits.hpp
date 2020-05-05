@@ -6,7 +6,7 @@
 #include <CGAL/Arr_default_dcel.h>
 #include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Surface_sweep_2/Arr_default_overlay_traits_base.h>
-#include <Python_functor.hpp>
+#include <CGALPY/Python_functor.hpp>
 #include <boost/python.hpp>
 /*! \class
  *
