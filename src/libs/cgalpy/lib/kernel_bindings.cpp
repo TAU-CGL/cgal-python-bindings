@@ -714,7 +714,7 @@ void export_kernel()
 
   def<Line_2 (const Circle_2&, const Circle_2&)>("radical_line", &CGAL::radical_line);
 
-  //rational_rotation_approximation() (?)
+  def<void(const RT&, const RT&, RT&, RT&, RT&, const RT&, const RT&)>("rational_rotation_approximation", &CGAL::rational_rotation_approximation);
 
   def<bool(const Point_2&, const Point_2&, const Point_2&)>("right_turn", &CGAL::right_turn);
 
