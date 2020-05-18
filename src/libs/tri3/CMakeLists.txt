@@ -1,7 +1,9 @@
 # packages
 
 # Add source files
-set(CGALPY_TRI3_SRC_FILES ${CGALPY_TRI3_SRC_FILES} lib/alpha_shapes_3_bindings.cpp)
+if (CGALPY_ALPHA_SHAPES_3_BINDINGS)
+  set(CGALPY_TRI3_SRC_FILES ${CGALPY_TRI3_SRC_FILES} lib/alpha_shapes_3_bindings.cpp)
+endif()
 set(CGALPY_TRI3_SRC_FILES ${CGALPY_TRI3_SRC_FILES} lib/export_module.cpp)
 set(CGALPY_TRI3_SRC_FILES ${CGALPY_TRI3_SRC_FILES} ../cgalpy/lib/kernel_bindings.cpp)
 # set(CGALPY_TRI3_SRC_FILES ${CGALPY_TRI3_SRC_FILES} lib/triangulation_3_bindings.cpp)
