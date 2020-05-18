@@ -15,7 +15,7 @@ else()
   set(Boost_USE_STATIC_LIBS ON)
   set(BOOST_PYTHON_STATIC_LIB 1)
 endif()
-set(CGALPY_BOOST_LIBRARIES system thread)
+set(CGALPY_BOOST_LIBRARIES)
 
 find_package(Python3 COMPONENTS Interpreter Development)
 
