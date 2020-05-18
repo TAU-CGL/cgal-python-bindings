@@ -76,7 +76,6 @@ if(WIN32)
 endif()
 
 target_link_libraries(CGALPY
-		      ${NON_WIN32_LIBRARIES}
                       ${Boost_LIBRARIES}
 		      ${PYTHON_LIBRARIES})
 
