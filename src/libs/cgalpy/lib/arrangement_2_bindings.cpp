@@ -97,12 +97,13 @@ void insert_non_intersecting_curves(Arrangement_2& arr,
   CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
 }
 
-bool do_intersect_default(Arrangement_2& arr, X_monotone_curve_2& c)
+template <typename CurveType>
+bool do_intersect_default(Arrangement_2& arr, CurveType& c)
 {
   return CGAL::do_intersect(arr, c);
 }
 
-template <typename PointLocation>
+template <typename CurveType, typename PointLocation>
 bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl)
 {
   return CGAL::do_intersect(arr, c, pl);
@@ -313,6 +314,7 @@ void export_arrangement_2()
   def("zone", &zone_default);
   def("zone", &zone<Naive_pl>);
   def("zone", &zone<Wal_pl>);
+  def("zone", &zone<Trapezoid_pl>);
   //supported only by some traits
 #if (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS) || \
     (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS) || \
@@ -322,7 +324,6 @@ void export_arrangement_2()
   def("insert_point", &insert_point<Landmarks_pl>, return_internal_reference<>());
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Landmarks_pl>, return_internal_reference<>());
 #endif
-  def("zone", &zone<Trapezoid_pl>);
   def("overlay", &overlay);
 #if (CGALPY_DCEL == CGALPY_EXTENDED_DCEL) || \
   (CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL)
@@ -331,10 +332,17 @@ void export_arrangement_2()
 #if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
   def("overlay", &overlay_ex);
 #endif
-  def("do_intersect", &do_intersect_default);
-  def("do_intersect", &do_intersect<Naive_pl>);
-  def("do_intersect", &do_intersect<Wal_pl>);
-  def("do_intersect", &do_intersect<Trapezoid_pl>);
+  def("do_intersect", &do_intersect_default<X_monotone_curve_2>);
+  def("do_intersect", &do_intersect<X_monotone_curve_2, Naive_pl>);
+  def("do_intersect", &do_intersect<X_monotone_curve_2, Wal_pl>);
+  def("do_intersect", &do_intersect<X_monotone_curve_2, Trapezoid_pl>);
+  // These fail for some reason (no matching function found)
+  /*
+  def("do_intersect", &do_intersect_default<Curve_2>);
+  def("do_intersect", &do_intersect<Curve_2, Naive_pl>);
+  def("do_intersect", &do_intersect<Curve_2, Wal_pl>);
+  def("do_intersect", &do_intersect<Curve_2, Trapezoid_pl>);
+  */
   def("remove_edge", &remove_edge_free, return_internal_reference<>());
   def("remove_vertex", &remove_vertex_free);
 
