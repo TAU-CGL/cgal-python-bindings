@@ -320,7 +320,7 @@ void export_arrangement_2()
     (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS) || \
     (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS)
   def("zone", &zone<Landmarks_pl>);
-  def("do_intersect", &do_intersect<Landmarks_pl>);
+  def("do_intersect", &do_intersect<X_monotone_curve_2, Landmarks_pl>);
   def("insert_point", &insert_point<Landmarks_pl>, return_internal_reference<>());
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Landmarks_pl>, return_internal_reference<>());
 #endif
