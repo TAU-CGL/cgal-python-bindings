@@ -1,4 +1,3 @@
-# Add SFG subdirectory
 add_subdirectory(cgalpy)
 #add_subdirectory(shared_vector)
 #add_subdirectory(triangulations)
