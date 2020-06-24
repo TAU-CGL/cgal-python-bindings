@@ -6,7 +6,6 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include "CGALPY/config.hpp"
-#ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
 #include "CGALPY/common.hpp"
 
 #include <CGAL/Gps_circle_segment_traits_2.h>
@@ -54,7 +53,7 @@ void export_general_polygon_2()
     .def(self_ns::repr(self_ns::self))
     ;
 
-#if CGALPY_GEOMETRY_TRAITS != CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
+#if CGALPY_ARR_2_GEOMETRY_TRAITS != CGALPY_ARR_2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
 
   typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>::Point_2 CSPoint_2;
   typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>::CoordNT CoordNT;
@@ -127,4 +126,3 @@ void export_general_polygon_2()
     ;
 #endif
 }
-#endif

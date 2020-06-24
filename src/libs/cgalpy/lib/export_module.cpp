@@ -5,6 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
+#include <boost/static_assert.hpp>
+
 #include "CGALPY/config.hpp"
 #include "CGALPY/common.hpp"
 
@@ -57,18 +59,16 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   export_halfedge();
   export_face();
 
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
+#if CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_LINEAR_GEOMETRY_TRAITS
   export_arr_linear_traits();
-#endif
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS
+#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_SEGMENT_GEOMETRY_TRAITS
   export_arr_segment_traits();
-#endif
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_CIRCLE_SEGMENT_TRAITS
+#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
   export_arr_circle_segment_traits();
-#endif
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
+#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
   export_arr_algebraic_segment_traits();
-#endif
+#else
+  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR_2_GEOMETRY_TRAITS");
 #endif
 
 #ifdef CGALPY_POLYGON_2_BINDINGS
