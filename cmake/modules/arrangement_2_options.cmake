@@ -1,3 +1,6 @@
+if(NOT ARRANGEMENT_2_OPTIONS_FILE_INCLUDED)
+set(ARRANGEMENT_2_OPTIONS_FILE_INCLUDED)
+
 # Geometry Traits Options
 set(CGALPY_ARR_2_LINEAR_GEOMETRY_TRAITS              0)
 set(CGALPY_ARR_2_SEGMENT_GEOMETRY_TRAITS             1)
@@ -35,3 +38,50 @@ set_property(CACHE CGALPY_ARR_2_DCEL_NAME PROPERTY STRINGS plain faceExtended ha
 
 # Point location
 option(CGALPY_ARR_2_POINT_LOCATION_BINDINGS "Compile bindings for point location" ON)
+
+# Selection
+function(select_arr_2_geometry_traits)
+  if     ("${CGALPY_ARR_2_GEOMETRY_TRAITS_NAME}" STREQUAL "linear")
+    set(CGALPY_ARR_2_GEOMETRY_TRAITS ${CGALPY_ARR_2_LINEAR_GEOMETRY_TRAITS})
+  elseif ("${CGALPY_ARR_2_GEOMETRY_TRAITS_NAME}" STREQUAL "segment")
+    set(CGALPY_ARR_2_GEOMETRY_TRAITS ${CGALPY_ARR_2_SEGMENT_GEOMETRY_TRAITS})
+  elseif ("${CGALPY_ARR_2_GEOMETRY_TRAITS_NAME}" STREQUAL "nonCachingSegment")
+    set(CGALPY_ARR_2_GEOMETRY_TRAITS ${CGALPY_ARR_2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
+  elseif ("${CGALPY_ARR_2_GEOMETRY_TRAITS_NAME}" STREQUAL "conic")
+    set(CGALPY_ARR_2_GEOMETRY_TRAITS ${CGALPY_ARR_2_CONIC_GEOMETRY_TRAITS})
+  elseif ("${CGALPY_ARR_2_GEOMETRY_TRAITS_NAME}" STREQUAL "algebraic")
+    set(CGALPY_ARR_2_GEOMETRY_TRAITS ${CGALPY_ARR_2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
+  elseif ("${CGALPY_ARR_2_GEOMETRY_TRAITS_NAME}" STREQUAL "circleSegment")
+    set(CGALPY_ARR_2_GEOMETRY_TRAITS ${CGALPY_ARR_2_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
+  endif()
+  add_definitions(-DCGALPY_ARR_2_GEOMETRY_TRAITS=${CGALPY_ARR_2_GEOMETRY_TRAITS})
+endfunction()
+
+function(select_arr_2_dcel)
+  if     ("${CGALPY_ARR_2_DCEL_NAME}" STREQUAL "plain")
+    set(CGALPY_ARR_2_DCEL ${CGALPY_ARR_2_PLAIN_DCEL})
+  elseif ("${CGALPY_ARR_2_DCEL_NAME}" STREQUAL "faceExtended")
+    set(CGALPY_ARR_2_DCEL ${CGALPY_ARR_2_FACE_EXTENDED_DCEL})
+  elseif ("${CGALPY_ARR_2_DCEL_NAME}" STREQUAL "halfedgeExtended")
+    set(CGALPY_ARR_2_DCEL ${CGALPY_ARR_2_HALFEDGE_EXTENDED_DCEL})
+  elseif ("${CGALPY_ARR_2_DCEL_NAME}" STREQUAL "vertexExtended")
+    set(CGALPY_ARR_2_DCEL ${CGALPY_ARR_2_VERTEX_EXTENDED_DCEL})
+  elseif ("${CGALPY_ARR_2_DCEL_NAME}" STREQUAL "allExtended")
+    set(CGALPY_ARR_2_DCEL ${CGALPY_ARR_2_ALL_EXTENDED_DCEL})
+  endif()
+  add_definitions(-DCGALPY_ARR_2_DCEL=${CGALPY_ARR_2_DCEL})
+endfunction()
+
+function(select_arr_2_point_location)
+  if(${CGALPY_ARR_2_POINT_LOCATION_BINDINGS})
+    add_definitions(-DCGALPY_ARR_2_POINT_LOCATION_BINDINGS)
+  endif()
+endfunction()
+
+function(select_arrangement_2)
+  select_arr_2_geometry_traits()
+  select_arr_2_dcel()
+  select_arr_2_point_location()
+endfunction()
+
+endif()

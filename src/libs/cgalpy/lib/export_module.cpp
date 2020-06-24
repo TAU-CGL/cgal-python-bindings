@@ -68,7 +68,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   export_arr_algebraic_segment_traits();
 #endif
 
-#ifdef CGALPY_CONVEX_HULL_BINDINGS
+#ifdef CGALPY_CONVEX_HULL_2_BINDINGS
   export_convex_hull_2_bindings();
 #endif
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
@@ -80,13 +80,13 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
   export_bounding_volumes();
 #endif
-#ifdef CGALPY_BOOLEAN_SET_OPERATIONS_BINDINGS
+#ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
   export_boolean_set_operations_2();
 #endif
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
   export_polygon_partition_2();
 #endif
-#ifdef CGALPY_POINT_LOCATION_BINDINGS
+#ifdef CGALPY_ARR_2_POINT_LOCATION_BINDINGS
   export_point_location();
 #endif
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS

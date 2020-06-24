@@ -7,7 +7,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
-#ifdef CGALPY_CONVEX_HULL_BINDINGS
+#ifdef CGALPY_CONVEX_HULL_2_BINDINGS
 #include "CGALPY/common.hpp"
 
 #include <CGAL/convex_hull_2.h>

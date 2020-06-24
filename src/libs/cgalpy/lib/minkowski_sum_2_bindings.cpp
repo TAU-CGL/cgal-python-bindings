@@ -4,9 +4,9 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
-#ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
 #include "CGALPY/common.hpp"
 
 #include <CGAL/minkowski_sum_2.h>
@@ -14,7 +14,6 @@
 
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_with_holes_2 General_polygon_with_holes_2;
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2 General_polygon_2;
-
 
 template <typename T1, typename T2>
 Polygon_with_holes_2 minkowski_sum_2(T1& P, T2& Q)
@@ -48,10 +47,7 @@ void approximated_inset_2(Polygon_2& p, FT& r, double eps, boost::python::list& 
 {
   auto v = std::vector<General_polygon_2>();
   CGAL::approximated_inset_2(p, r, eps, std::back_inserter(v));
-  for (auto p : v)
-  {
-    lst.append(p);
-  }
+  for (auto p : v) lst.append(p);
 }
 
 void export_minkowski_sum_2()
@@ -73,5 +69,3 @@ void export_minkowski_sum_2()
   def("approximated_offset_2", &approximated_offset_2_pwh);
   //def("approximated_inset_2", &approximated_inset_2);
 }
-
-#endif

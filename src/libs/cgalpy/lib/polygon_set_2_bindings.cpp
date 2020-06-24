@@ -4,6 +4,7 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/common.hpp"
@@ -12,10 +13,7 @@ void polygons_with_holes(Polygon_set_2& ps, boost::python::list& lst)
 {
   auto v = std::vector<Polygon_with_holes_2>();
   ps.polygons_with_holes(std::back_inserter(v));
-  for (auto pwh : v)
-  {
-    lst.append(pwh);
-  }
+  for (auto pwh : v) lst.append(pwh);
 }
 
 void insert0(Polygon_set_2& ps, Polygon_2& pgn)

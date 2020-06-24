@@ -30,14 +30,6 @@ else(WIN32)
   add_definitions(-DGL_GLEXT_PROTOTYPES)
 endif(WIN32)
 
-# Add library
-# if (BUILD_SHARED_LIBS)
-#   add_definitions(-DCGALPY_ALL_DYN_LINK)
-#   add_library(shared_vector SHARED ${shared_vector_SRC_FILES})
-# else(BUILD_SHARED_LIBS)
-#   add_library(shared_vector STATIC ${shared_vector_SRC_FILES})
-# endif(BUILD_SHARED_LIBS)
-
 # set_target_properties(shared_vector PROPERTIES
 #   VERSION "${shared_vector_SOVERSION}"
 #   SOVERSION "${shared_vector_SONAME_VERSION}")
@@ -51,6 +43,7 @@ endif(WIN32)
 # endif(NOT WIN32)
 
 # Add Python bindings
+# Always build a shared library
 add_library(shared_vector_PYBINDINGS SHARED lib/shared_vector.cpp)
 if(WIN32)
 set_target_properties(shared_vector_PYBINDINGS PROPERTIES SUFFIX ".pyd")

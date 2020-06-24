@@ -4,6 +4,7 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/common.hpp"
@@ -21,19 +22,14 @@ bool get_type(Object& o, typename T0::value_type& t)
 {
   T0 get0;
   bool res = CGAL::assign<T0>(get0, o);
-  if (res)
-  {
+  if (res) {
     t = *(get0);
     return res;
   }
-  else
-  {
+  else {
     T1 get1;
     bool res = CGAL::assign<T1>(get1, o);
-    if (res)
-    {
-      t = *(get1);
-    }
+    if (res) t = *(get1);
   }
   return res;
 }

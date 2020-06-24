@@ -4,9 +4,9 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
-#ifdef CGALPY_POINT_LOCATION_BINDINGS
 #include "CGALPY/common.hpp"
 
 #include <CGAL/Arr_naive_point_location.h>
@@ -46,8 +46,9 @@ bool get_type(Pl_result& pl_result, typename type::value_type& t)
   if (res) t = *(*get);
   return res;
 }
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
-|| CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+#if CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_LINEAR_TRAITS || \
+  CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_SEGMENT_TRAITS || \
+  CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_NON_CACHING_SEGMENT_TRAITS
 void Landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
 {
   pl.attach(arr);
@@ -59,8 +60,9 @@ void export_point_location()
   using namespace boost::python;
 
   //supported only by some of the traits
-#if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS || CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS \
-|| CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS
+#if CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_LINEAR_TRAITS || \
+  CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_SEGMENT_TRAITS || \
+  CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_NON_CACHING_SEGMENT_TRAITS
   class_<Landmarks_pl>("Arr_landmarks_point_location")
     .def(init<>())
     .def(init<Arrangement_2&>()[with_custodian_and_ward<1, 2>()])
@@ -77,7 +79,9 @@ void export_point_location()
     .def("depth", &Trapezoid_pl::depth)
     .def("longest_query_path_length", &Trapezoid_pl::longest_query_path_length)
     .def("with_guarantees", &Trapezoid_pl::with_guarantees)
-    .def<Arrangement_2* (Trapezoid_pl::*)()>("arrangement", &Trapezoid_pl::arrangement, return_value_policy<reference_existing_object>())
+    .def<Arrangement_2* (Trapezoid_pl::*)()>("arrangement",
+                                             &Trapezoid_pl::arrangement,
+                                             return_value_policy<reference_existing_object>())
     .def("locate", &Trapezoid_pl::locate)
     .def("ray_shoot_up", &Trapezoid_pl::ray_shoot_up)
     .def("ray_shoot_down", &Trapezoid_pl::ray_shoot_down)
@@ -111,4 +115,3 @@ void export_point_location()
     .def("get_vertex", &get_type<Vertex_const_handle>)
     ;
 }
-#endif

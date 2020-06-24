@@ -30,11 +30,8 @@ else(WIN32)
 endif(WIN32)
 
 # Add library
-if (BUILD_SHARED_LIBS)
-  add_library(CGALPY_TRIANGULATIONS_PYBINDINGS SHARED ${triangulations_bindings_SRC_FILES})
-else(BUILD_SHARED_LIBS)
-  add_library(CGALPY_TRIANGULATIONS_PYBINDINGS STATIC ${triangulations_bindings_SRC_FILES})
-endif(BUILD_SHARED_LIBS)
+# Always build a shared library
+add_library(CGALPY_TRIANGULATIONS_PYBINDINGS SHARED ${triangulations_bindings_SRC_FILES})
 
 # set_target_properties(triangulations_bindings PROPERTIES
 #   VERSION "${triangulations_bindings_SOVERSION}"

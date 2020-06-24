@@ -1,54 +1,89 @@
 # packages
 
 # Add source files
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arrangement_2_bindings.cpp)
+if (CGALPY_ARRANGEMENT_2_BINDINGS)
+  # Geometry Traits
+  if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_algebraic_segment_traits_bindings.cpp)
+  endif()
+  if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_BEZIER_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_Bezier_curve_traits_bindings.cpp)
+  endif()
+  if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_circle_segment_traits_bindings.cpp)
+  endif()
+  if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_CONIC_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_conic_traits_bindings.cpp)
+  endif()
+  if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_LINEAR_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_linear_traits_bindings.cpp)
+  endif()
+  if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_non_caching_segment_traits_bindings.cpp)
+  endif()
+  if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_RATIONAL_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_rational_function_traits_bindings.cpp)
+  endif()
+  if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_segment_traits_bindings.cpp)
+  endif()
 
-if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_algebraic_segment_traits_bindings.cpp)
-endif()
-if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_BEZIER_GEOMETRY_TRAITS})
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_Bezier_curve_traits_bindings.cpp)
-endif()
-if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_circle_segment_traits_bindings.cpp)
-endif()
-if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_CONIC_GEOMETRY_TRAITS})
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_conic_traits_bindings.cpp)
-endif()
-if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_LINEAR_GEOMETRY_TRAITS})
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_linear_traits_bindings.cpp)
-endif()
-if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_non_caching_segment_traits_bindings.cpp)
-endif()
-if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_RATIONAL_GEOMETRY_TRAITS})
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_rational_function_traits_bindings.cpp)
-endif()
-if(${CGALPY_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR_SEGMENT_GEOMETRY_TRAITS})
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_segment_traits_bindings.cpp)
+  # Cells
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_vertex_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_halfedge_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_face_bindings.cpp)
+
+  # Point Location
+  if (CGALPY_ARR_2_POINT_LOCATION)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_point_location_bindings.cpp)
+  #endif
+
+  # Object
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_object_bindings.cpp)
+
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arrangement_2_bindings.cpp)
 endif()
 
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/boolean_set_operations_2_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/bounding_volumes_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/convex_hull_2_bindings.cpp)
+if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/boolean_set_operations_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_set_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_with_holes_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_set_2_bindings.cpp)
+endif()
+
+if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/bounding_volumes_bindings.cpp)
+endif()
+
+if (CGALPY_CONVEX_HULL_2_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/convex_hull_2_bindings.cpp)
+endif()
+
+if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/minkowski_sum_2_bindings.cpp)
+endif()
+
+if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
+endif
+
+if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_searching_bindings.cpp)
+endif()
+
+if (CGALPY_TRIANGULATION_2_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_2_bindings.cpp)
+endif()
+
+if (CGALPY_POLYGON_2_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
+endif()
+
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/face_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_2_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_set_2_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_with_holes_2_bindings.cpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/halfedge_bindings.cpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/object_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/minkowski_sum_2_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/point_location_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_set_2_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_searching_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_2_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/vertex_bindings.cpp)
 
 # Add all include directories
 include_directories(include)
@@ -60,7 +95,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   add_definitions(/wd4251)
 endif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 
-# Add Python bindings
+# Add the library target
+# Always build a shared library
 add_library(CGALPY SHARED ${CGALPY_SRC_FILES})
 
 # set_target_properties(cgalpy PROPERTIES
