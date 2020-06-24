@@ -1,0 +1,15 @@
+# Options
+set(CGALPY_ALPHA_SHAPE_3_PLAIN 0)
+set(CGALPY_ALPHA_SHAPE_3_FIXED 1)
+
+# Names
+set(CGALPY_ALPHA_SHAPE_3_SHORT_NAMES plain fixed)
+set(CGALPY_ALPHA_SHAPE_3_NAMES plain fixed)
+
+# Default
+SET(CGALPY_ALPHA_SHAPE_3 ${CGALPY_ALPHA_SHAPE_3_PLAIN})
+SET(CGALPY_ALPHA_SHAPE_3_NAME "plain" CACHE STRING "The 3D Alpha shape construct")
+set_property(CACHE CGALPY_ALPHA_SHAPE_3_NAME PROPERTY STRINGS plain fixed)
+
+# 3D comparison tag
+set(CGALPY_ALPHA_SHAPE_3_EXACT_COMPARISON true CACHE BOOL "The exact comparison tag")
