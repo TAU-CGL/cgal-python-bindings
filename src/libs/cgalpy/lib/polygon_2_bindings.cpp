@@ -4,6 +4,7 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/common.hpp"
@@ -20,7 +21,6 @@ static Polygon_2* init_from_list(boost::python::list& lst)
   auto end = boost::python::stl_input_iterator< Point_2 >();
   return new Polygon_2(begin, end);
 }
-
 
 CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& p)
 {

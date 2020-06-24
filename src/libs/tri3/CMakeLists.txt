@@ -20,11 +20,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 
 # Add Python bindings
-if(BUILD_SHARED_LIBS)
-  add_library(CGALPY_TRI3 SHARED ${CGALPY_TRI3_SRC_FILES})
-else (BUILD_SHARED_LIBS)
-  add_library(CGALPY_TRI3 STATIC ${CGALPY_TRI3_SRC_FILES})
-endif(BUILD_SHARED_LIBS)
+# Always build a shared library
+add_library(CGALPY_TRI3 SHARED ${CGALPY_TRI3_SRC_FILES})
 
 # set_target_properties(cgalpy PROPERTIES
 #   VERSION "${cgalpy_SOVERSION}"

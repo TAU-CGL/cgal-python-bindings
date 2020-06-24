@@ -4,6 +4,7 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/common.hpp"
 #include "CGALPY/Python_functor.hpp"
@@ -22,15 +23,15 @@ typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2> Landmarks_pl;
 typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
   Trapezoid_pl;
 
-#if (CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL) || \
-  (CGALPY_DCEL == CGALPY_EXTENDED_DCEL)
+#if (CGALPY_ARR_2_DCEL == CGALPY_ARR_2_FACE_EXTENDED_DCEL) || \
+  (CGALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL)
 #include <CGALPY/Arr_python_face_overlay_traits.hpp>
 typedef Arr_python_face_overlay_traits< Arrangement_2, Arrangement_2,
                                         Arrangement_2, Face::Data>
   Arr_face_overlay_traits;
 #endif
 
-#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
+#if CGALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL
 #include <CGALPY/Arr_python_overlay_traits.hpp>
 typedef Arr_python_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2,
                                    Face::Data> Arr_overlay_traits;
@@ -114,8 +115,8 @@ void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res)
   CGAL::overlay(arr1, arr2, arr_res);
 }
 
-#if (CGALPY_DCEL == CGALPY_EXTENDED_DCEL) ||    \
-  (CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL)
+#if (CGALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL) ||    \
+  (CGALPY_ARR_2_DCEL == CGALPY_ARR_2_FACE_EXTENDED_DCEL)
 void overlay_fex(Arrangement_2& arr1, Arrangement_2& arr2,
                  Arrangement_2& arr_res, Arr_face_overlay_traits& traits)
 {
@@ -123,7 +124,7 @@ void overlay_fex(Arrangement_2& arr1, Arrangement_2& arr2,
 }
 #endif
 
-#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
+#if CGALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL
 void overlay_ex(Arrangement_2& arr1, Arrangement_2& arr2,
                 Arrangement_2& arr_res, Arr_overlay_traits& traits)
 {
@@ -290,9 +291,9 @@ void export_arrangement_2()
     .def("clear", &Arrangement_2::clear)
 
     //supported only by some traits
-#if (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS) || \
-    (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS) || \
-    (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS)
+#if (CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_LINEAR_TRAITS) || \
+    (CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_SEGMENT_TRAITS) || \
+    (CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_NON_CACHING_SEGMENT_TRAITS)
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
 #endif
@@ -316,20 +317,20 @@ void export_arrangement_2()
   def("zone", &zone<Wal_pl>);
   def("zone", &zone<Trapezoid_pl>);
   //supported only by some traits
-#if (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS) || \
-    (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_SEGMENT_TRAITS) || \
-    (CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_NON_CACHING_SEGMENT_TRAITS)
+#if (CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_LINEAR_TRAITS) || \
+    (CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_SEGMENT_TRAITS) || \
+    (CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_NON_CACHING_SEGMENT_TRAITS)
   def("zone", &zone<Landmarks_pl>);
   def("do_intersect", &do_intersect<X_monotone_curve_2, Landmarks_pl>);
   def("insert_point", &insert_point<Landmarks_pl>, return_internal_reference<>());
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Landmarks_pl>, return_internal_reference<>());
 #endif
   def("overlay", &overlay);
-#if (CGALPY_DCEL == CGALPY_EXTENDED_DCEL) || \
-  (CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL)
+#if (CGALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL) || \
+  (CGALPY_ARR_2_DCEL == CGALPY_ARR_2_FACE_EXTENDED_DCEL)
   def("overlay", &overlay_fex);
 #endif
-#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
+#if CGALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL
   def("overlay", &overlay_ex);
 #endif
   def("do_intersect", &do_intersect_default<X_monotone_curve_2>);
@@ -346,13 +347,13 @@ void export_arrangement_2()
   def("remove_edge", &remove_edge_free, return_internal_reference<>());
   def("remove_vertex", &remove_vertex_free);
 
-#if (CGALPY_DCEL == CGALPY_FACE_EXTENDED_DCEL) || \
-    (CGALPY_DCEL == CGALPY_EXTENDED_DCEL)
+#if (CGALPY_ARR_2_DCEL == CGALPY_ARR_2_FACE_EXTENDED_DCEL) || \
+    (CGALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL)
   class_<Arr_face_overlay_traits>("Arr_face_overlay_traits", init<bp::object>())
     ;
 #endif
 
-#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
+#if CGALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL
   class_<Arr_overlay_traits>("Arr_overlay_traits", init<bp::object, bp::object,
     bp::object, bp::object, bp::object, bp::object, bp::object, bp::object,
     bp::object, bp::object>())

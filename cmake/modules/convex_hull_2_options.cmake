@@ -1,0 +1,10 @@
+if(NOT CONVEX_HULL_2_OPTIONS_FILE_INCLUDED)
+set(CONVEX_HULL_2_OPTIONS_FILE_INCLUDED)
+
+function()
+  if(${CGALPY_CONVEX_HULL_2_BINDINGS})
+    add_definitions(-DCGALPY_CONVEX_HULL_2_BINDINGS)
+  endif()
+endfunction()
+
+endif()

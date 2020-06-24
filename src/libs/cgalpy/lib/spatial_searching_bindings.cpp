@@ -7,7 +7,6 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
-#ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
 #include "CGALPY/common.hpp"
 
 #include "CGAL/Cartesian_d.h"
@@ -22,7 +21,7 @@
 
 typedef CGAL::Cartesian_d<FT> K;
 typedef K::Point_d Point_d;
-typedef CGAL::Search_traits_d<K, CGAL::Dimension_tag<CGALPY_DIMENSION>> Search_traits_d;
+typedef CGAL::Search_traits_d<K, CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIMENSION>> Search_traits_d;
 //typedef CGAL::Orthogonal_incremental_neighbor_search<Search_traits_d> Orthogonal_incremental_neighbor_search;
 //typedef Orthogonal_incremental_neighbor_search::iterator NN_iterator;
 //typedef Orthogonal_incremental_neighbor_search::Tree Orthogonal_incremental_neighbor_search_tree;
@@ -30,16 +29,15 @@ typedef CGAL::Kd_tree<Search_traits_d> Kd_tree;
 typedef CGAL::Sliding_midpoint<Search_traits_d> Splitter;
 typedef CGAL::Fuzzy_iso_box<Search_traits_d> Fuzzy_iso_box;
 typedef CGAL::Fuzzy_sphere<Search_traits_d> Fuzzy_sphere;
-typedef CGAL::Kd_tree_rectangle<FT, CGAL::Dimension_tag<CGALPY_DIMENSION>> Kd_tree_rectangle;
+typedef CGAL::Kd_tree_rectangle<FT, CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIMENSION>> Kd_tree_rectangle;
 typedef CGAL::K_neighbor_search<Search_traits_d> K_neighbor_search;
-typedef General_distance_python<CGAL::Dimension_tag<CGALPY_DIMENSION>, FT, Point_d, Point_d> Distance_python;
+typedef General_distance_python<CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIMENSION>, FT, Point_d, Point_d> Distance_python;
 typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python> K_neighbor_search_python;
 typedef CGAL::Euclidean_distance<Search_traits_d> Euclidean_distance;
 
-
 int get_kd_tree_dimension()
 {
-  return CGALPY_DIMENSION;
+  return CGALPY_SPATIAL_SEARCHING_DIMENSION;
 }
 
 template<typename T>
@@ -87,15 +85,13 @@ void tree_search(T& tree, FQI& q, bp::list& lst)
 {
   auto v = std::vector<typename T::Point_d>();
   tree.search(std::back_inserter(v), q);
-  for (auto p : v)
-    lst.append(p);
+  for (auto p : v) lst.append(p);
 }
 
 template<typename T>
 void points(T& tree, bp::list& lst)
 {
-  for (auto p : tree)
-    lst.append(p);
+  for (auto p : tree) lst.append(p);
 }
 
 template <typename T>
@@ -123,9 +119,7 @@ template <typename T>
 void k_neighbors(T& neighbor_search, bp::list& lst)
 {
   for (auto it = neighbor_search.begin(); it != neighbor_search.end(); ++it)
-  {
     lst.append(bp::make_tuple(it->first, it->second));
-  }
 }
 
 template <typename T>
@@ -207,4 +201,3 @@ void export_spatial_searching()
 
   def("get_kd_tree_dimension", &get_kd_tree_dimension);
 }
-#endif

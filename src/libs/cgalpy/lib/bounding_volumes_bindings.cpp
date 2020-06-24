@@ -4,9 +4,9 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
-#ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
 #include "CGALPY/common.hpp"
 
 #include <CGAL/Min_circle_2.h>
@@ -69,4 +69,3 @@ void export_bounding_volumes()
     .def("is_valid", &Min_circle_2::is_valid)
     ;
 }
-#endif

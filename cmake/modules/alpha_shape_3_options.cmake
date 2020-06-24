@@ -1,3 +1,6 @@
+if(NOT ALPHA_SHAPE_3_OPTIONS_FILE_INCLUDED)
+set(ALPHA_SHAPE_3_OPTIONS_FILE_INCLUDED)
+
 # Options
 set(CGALPY_ALPHA_SHAPE_3_PLAIN 0)
 set(CGALPY_ALPHA_SHAPE_3_FIXED 1)
@@ -13,3 +16,75 @@ set_property(CACHE CGALPY_ALPHA_SHAPE_3_NAME PROPERTY STRINGS plain fixed)
 
 # 3D comparison tag
 set(CGALPY_ALPHA_SHAPE_3_EXACT_COMPARISON true CACHE BOOL "The exact comparison tag")
+
+# Verification
+function(verify_alpha_shape_3)
+  if(${CGALPY_ALPHA_SHAPE_3_BINDINGS})
+    # Check validity of vertex-base settings
+    if((${CGALPY_TRI_3_VERTEX_BASE_NAME} STREQUAL "plain") OR
+       (${CGALPY_TRI_3_VERTEX_BASE_NAME} STREQUAL "plainWithInfo") OR
+       (${CGALPY_TRI_3_VERTEX_BASE_NAME} STREQUAL "regular")  OR
+       (${CGALPY_TRI_3_VERTEX_BASE_NAME} STREQUAL "regularWithInfo"))
+      message("Error: Invalid vertex base (${CGALPY_TRI_3_VERTEX_BASE_NAME})")
+      return()
+    endif()
+    # Check validity of cell-base settings
+    if((${CGALPY_TRI_3_CELL_BASE_NAME} STREQUAL "plain") OR
+       (${CGALPY_TRI_3_CELL_BASE_NAME} STREQUAL "plainWithInfo") OR
+       (${CGALPY_TRI_3_CELL_BASE_NAME} STREQUAL "regular")  OR
+       (${CGALPY_TRI_3_CELL_BASE_NAME} STREQUAL "regularWithInfo"))
+      message("Error: Invalid vertex base (${CGALPY_TRI_3_VERTEX_BASE_NAME})")
+      return()
+    endif()
+
+    # Check validity of triangulation
+    if((${CGALPY_TRI_3_NAME} STREQUAL "[Rr]egular") AND
+       (NOT ${CGALPY_TRI_3_VERTEX_BASE_NAME} MATCHES "regular"))
+      message("Error: Triangulation (${CGALPY_TRI_3_NAME}) does not match vertex base (${CGALPY_TRI_3_VERTEX_BASE_NAME})")
+      return()
+    endif()
+
+    # Check validity of triangulation
+    if((${CGALPY_TRI_3_NAME} STREQUAL "[Rr]egular") AND
+       (NOT ${CGALPY_TRI_3_CELL_BASE_NAME} MATCHES "regular"))
+      message("Error: Triangulation (${CGALPY_TRI_3_NAME}) does not match cell base (${CGALPY_TRI_3_CELL_BASE_NAME})")
+      return()
+    endif()
+  endif()
+endfunction()
+
+function(select_alpha_shape_3_comparison)
+  if(${CGALPY_EXACT_COMPARISON})
+    set(CGALPY_EXACT_COMPARISON 1)
+  else()
+    set(CGALPY_EXACT_COMPARISON 0)
+  endif()
+  add_definitions(-DCGALPY_EXACT_COMPARISON=${CGALPY_EXACT_COMPARISON})
+endfunction()
+
+# Selection
+function(select_alpha_shape_3)
+  verify_alpha_shape_3();
+  select_alpha_shape_3_comparison()
+
+  if(${CGALPY_ALPHA_SHAPE_3_BINDINGS})
+    add_definitions(-DCGALPY_ALPHA_SHAPE_3_BINDINGS)
+  endif()
+
+  # Select Alpha shape
+  if    ("${CGALPY_ALPHA_SHAPE_NAME}" STREQUAL "plain")
+    set(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_PLAIN})
+  elseif("${CGALPY_ALPHA_SHAPE_NAME}" STREQUAL "fixed")
+    set(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_FIXED})
+  endif()
+  add_definitions(-DCGALPY_ALPHA_SHAPE=${CGALPY_ALPHA_SHAPE})
+
+  set(CGALPY_INSTALL_INC_DIR "include" CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
+  set(CGALPY_INSTALL_LIB_DIR "lib"     CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
+  set(CGALPY_INSTALL_BIN_DIR "bin"
+    CACHE STRING "The folder where CGALPY executables, e.g., binaried and scripts, will be installed, relative to CMAKE_INSTALL_PREFIX")
+set(CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
+    CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
+endfunction()
+
+endif()

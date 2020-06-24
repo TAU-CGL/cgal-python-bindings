@@ -7,7 +7,6 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/config.hpp"
-#ifdef CGALPY_TRIANGULATION_2_BINDINGS
 #include "CGALPY/common.hpp"
 
 #include <CGAL/Triangulation_2.h>
@@ -44,10 +43,8 @@ TFace_handle face_to_handle(TFace& f)
 {
   TFace_handle res;
   auto n = f.neighbor(0);
-  for (auto i = 0; i < 3; ++i)
-  {
-    if (equal(*(n->neighbor(i)), f))
-    {
+  for (auto i = 0; i < 3; ++i) {
+    if (equal(*(n->neighbor(i)), f)) {
       res = n->neighbor(i);
       continue;
     }
@@ -156,8 +153,7 @@ void export_triangulation(C c)
   using namespace boost::python;
   //class_<Triangulation_2>("Triangulation");
 
-  c
-    .def(init<>())
+  c.def(init<>())
     .def(init<T&>())
     .def("dimension", &T::dimension)
     .def("number_of_vertices", &T::number_of_vertices)
@@ -214,7 +210,6 @@ void export_triangulations()
     .def("is_valid", &TFace::is_valid)
     ;
 
-
   bind_copy_iterator<CopyIterator<All_edges_iterator>>("Triangulation_all_edges_iterator");
   bind_copy_iterator<CopyIterator<Finite_edges_iterator>>("Triangulation_finite_edges_iterator");
   bind_copy_iterator<Copy_iterator_from_circulator<TEdge_circulator>>("Triangulation_edges_iterator");
@@ -222,4 +217,3 @@ void export_triangulations()
   bind_iterator<Iterator_from_circulator<TFace_circulator>>("Triangulation_faces_iterator");
   bind_iterator<Iterator_from_circulator<TVertex_circulator>>("Triangulation_vertices_iterator");
 }
-#endif

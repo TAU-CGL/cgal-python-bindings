@@ -4,10 +4,9 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/common.h"
-
-#ifdef ARR_ALGEBRAIC_SEGMENT_TRAITS
 
 bp::list to_double(TPoint_2& p)
 {
@@ -85,7 +84,6 @@ void export_Arr_algebraic_segment_traits()
     .def(self_ns::str(self_ns::self))
     ;
 
-
   //Algebraic_real_1::Algebraic_real_d_1
   class_<Algebraic_real_1>("Algebraic_real_1")
     .def(init<>())
@@ -150,5 +148,3 @@ void export_Arr_algebraic_segment_traits()
   def("construct_point_2_object", &Traits::construct_point_2_object);
   def("construct_x_monotone_segment_2_object", &Traits::construct_x_monotone_segment_2_object);
 }
-
-#endif
