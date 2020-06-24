@@ -22,7 +22,7 @@
 
 #if CGALPY_KERNEL == CGALPY_EPIC_KERNEL
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#if CGALPY_KERNEL == CGALPY_EPEC_KERNEL
+#elif CGALPY_KERNEL == CGALPY_EPEC_KERNEL
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
