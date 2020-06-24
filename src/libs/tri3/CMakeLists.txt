@@ -1,7 +1,7 @@
 # packages
 
 # Add source files
-if (CGALPY_ALPHA_SHAPES_3_BINDINGS)
+if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
   set(CGALPY_TRI3_SRC_FILES ${CGALPY_TRI3_SRC_FILES} lib/alpha_shapes_3_bindings.cpp)
 endif()
 set(CGALPY_TRI3_SRC_FILES ${CGALPY_TRI3_SRC_FILES} lib/export_module.cpp)

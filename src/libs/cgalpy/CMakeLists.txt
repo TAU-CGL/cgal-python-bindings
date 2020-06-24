@@ -36,7 +36,7 @@ if (CGALPY_ARRANGEMENT_2_BINDINGS)
   # Point Location
   if (CGALPY_ARR_2_POINT_LOCATION)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_point_location_bindings.cpp)
-  #endif
+  endif()
 
   # Object
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_object_bindings.cpp)
@@ -66,7 +66,7 @@ endif()
 
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
-endif
+endif()
 
 if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_searching_bindings.cpp)
@@ -79,6 +79,10 @@ endif()
 if (CGALPY_POLYGON_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
+endif()
+
+if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_3_bindings.cpp)
 endif()
 
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
@@ -112,9 +116,9 @@ target_link_libraries(CGALPY
 		      ${PYTHON_LIBRARIES})
 
 list (GET CGALPY_KERNEL_SHORT_NAMES ${CGALPY_KERNEL} CGALPY_KERNEL_PART)
-list (GET CGALPY_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_GEOMETRY_TRAITS} CGALPY_GT_PART)
-list (GET CGALPY_DCEL_SHORT_NAMES ${CGALPY_DCEL} CGALPY_DCEL_PART)
-set(CGALPY_LIB_NAME "arr2_${CGALPY_KERNEL_PART}_${CGALPY_GT_PART}${CGALPY_DCEL_PART}")
+list (GET CGALPY_ARR_2_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_ARR_2_GEOMETRY_TRAITS} CGALPY_GT_PART)
+list (GET CGALPY_ARR_2_DCEL_SHORT_NAMES ${CGALPY_ARR_2_DCEL} CGALPY_ARR_2_DCEL_PART)
+set(CGALPY_LIB_NAME "arr2_${CGALPY_KERNEL_PART}_${CGALPY_GT_PART}${CGALPY_ARR_2_DCEL_PART}")
 set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 
 # don't prepend wrapper library name with lib
