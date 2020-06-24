@@ -1,0 +1,12 @@
+# Options
+set(CGALPY_EPEC_KERNEL 0)
+set(CGALPY_EPIC_KERNEL 1)
+
+# Names
+set(CGALPY_KERNEL_SHORT_NAMES "epec" "epic")
+set(CGALPY_KERNEL_NAMES "epec" "epic")
+
+# Default
+set(CGALPY_KERNEL ${CGALPY_EPEC_KERNEL})
+SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
+set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epec epic)
