@@ -28,10 +28,17 @@ option(CGALPY_POLYGON_2_BINDINGS                "Compile bindings for 2D polygon
 option(CGALPY_POLYGON_PARTITIONING_BINDINGS     "Compile bindings for polygon partitioning")
 option(CGALPY_ALPHA_SHAPE_3_BINDINGS            "Compile bindings for 3D Alpha Shapes")
 
-include(kernel_options)
-include(arrangement_2_options)
-include(triangulation_3_options)
 include(alpha_shape_3_options)
+include(arrangement_2_options)
+include(boolean_set_operations_2_options)
+include(bounding_volumes_options)
+include(convex_hull_2_options)
+include(kernel_options)
+include(minkowski_sum_2)
+include(polygon_partitioning_options)
+include(spatial_searching_options)
+include(triangulation_2_options)
+include(triangulation_3_options)
 
 # SONAME, SOVERSION
 #

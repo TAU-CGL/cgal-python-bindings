@@ -39,21 +39,23 @@ void export_convex_hull_2_bindings();
 void export_spatial_searching();
 void export_bounding_volumes();
 
+void export_kernel();
+void export_triangulation_3();
+void export_alpha_shapes_3();
+
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 {
   using namespace boost::python;
 
   export_kernel();
+  export_intersections_2();
+
+#ifdef CGALPY_ARRANGEMENT_2_BINDINGS
   export_arrangement_2();
   export_object();
   export_vertex();
   export_halfedge();
   export_face();
-  export_intersections_2();
-
-  export_polygon_2();
-  export_polygon_with_holes_2();
-  export_polygon_set_2();
 
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_LINEAR_TRAITS
   export_arr_linear_traits();
@@ -67,32 +69,57 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 #if CGALPY_GEOMETRY_TRAITS == CGALPY_ARR_ALGEBRAIC_SEGMENT_TRAITS
   export_arr_algebraic_segment_traits();
 #endif
+#endif
+
+#ifdef CGALPY_POLYGON_2_BINDINGS
+  export_polygon_2();
+  export_polygon_with_holes_2();
+#endif
+
+#ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
+  export_polygon_set_2();
+  export_general_polygon_2();
+  export_general_polygon_with_holes_2();
+  export_general_polygon_set_2();
+#endif
 
 #ifdef CGALPY_CONVEX_HULL_2_BINDINGS
   export_convex_hull_2_bindings();
 #endif
+
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   export_triangulations();
 #endif
+
 #ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
   export_spatial_searching();
 #endif
+
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
   export_bounding_volumes();
 #endif
+
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
   export_boolean_set_operations_2();
 #endif
+
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
   export_polygon_partition_2();
 #endif
+
 #ifdef CGALPY_ARR_2_POINT_LOCATION_BINDINGS
   export_point_location();
 #endif
+
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
   export_minkowski_sum_2();
-  export_general_polygon_2();
-  export_general_polygon_with_holes_2();
-  export_general_polygon_set_2();
+#endif
+
+#ifdef CGALPY_TRIANGULATION_3_BINDINGS
+  export_triangulation_3();
+#endif
+
+#ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
+  export_alpha_shapes_3();
 #endif
 }

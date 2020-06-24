@@ -64,7 +64,7 @@ endfunction()
 
 # Selection
 function(select_alpha_shape_3)
-  verify_alpha_shape_3();
+  verify_alpha_shape_3()
   select_alpha_shape_3_comparison()
 
   if(${CGALPY_ALPHA_SHAPE_3_BINDINGS})

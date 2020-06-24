@@ -19,7 +19,4 @@ BOOST_PYTHON_MODULE(CGALPY_TRI3_MODULE_NAME)
 
   export_kernel();
   export_triangulation_3();
-#ifdef CGALPY_ALPHA_SHAPES_3_BINDINGS
-  export_alpha_shapes_3();
-#endif
 }

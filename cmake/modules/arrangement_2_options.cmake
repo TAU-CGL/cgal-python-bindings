@@ -82,6 +82,10 @@ function(select_arrangement_2)
   select_arr_2_geometry_traits()
   select_arr_2_dcel()
   select_arr_2_point_location()
+
+  if (CGALPY_ARRANGEMENT_2_BINDINGS)
+    add_definitions(-DCGALPY_ARRANGEMENT_2_BINDINGS)
+  endif()
 endfunction()
 
 endif()
