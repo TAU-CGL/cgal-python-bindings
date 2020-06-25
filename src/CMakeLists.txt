@@ -9,7 +9,7 @@ if (NOT CGAL_FOUND)
 endif()
 include(${CGAL_USE_FILE})
 
-if(USE_SHARED_LIBS)
+if(CGALPY_USE_SHARED_LIBS)
   set(Boost_USE_STATIC_LIBS OFF)
 else()
   set(Boost_USE_STATIC_LIBS ON)

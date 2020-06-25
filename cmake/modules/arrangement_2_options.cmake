@@ -29,7 +29,7 @@ set(CGALPY_ARR_2_ALL_EXTENDED_DCEL 4)
 
 # DCEL Names
 set(CGALPY_ARR_2_DCEL_SHORT_NAMES "" "_fex" "_hex" "_vex" "_ex")
-set(CGALPY_ARR_2_DCEL_NAMES "plain" "faceExtended" "halfedgeExtended" "vertexExtended" "allExtended")
+set(CGALPY_ARR_2_DCEL_NAMES plain faceExtended halfedgeExtended vertexExtended allExtended)
 
 # DCEL Default
 SET(CGALPY_ARR_2_DCEL ${CGALPY_ARR_2_PLAIN_DCEL})
@@ -79,11 +79,10 @@ function(select_arr_2_point_location)
 endfunction()
 
 function(select_arrangement_2)
-  select_arr_2_geometry_traits()
-  select_arr_2_dcel()
-  select_arr_2_point_location()
-
   if (CGALPY_ARRANGEMENT_2_BINDINGS)
+    select_arr_2_geometry_traits()
+    select_arr_2_dcel()
+    select_arr_2_point_location()
     add_definitions(-DCGALPY_ARRANGEMENT_2_BINDINGS)
   endif()
 endfunction()

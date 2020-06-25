@@ -11,22 +11,23 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/${CGALPY_MODULES_REL_DIR})
 # Define options
 
 # General options
-option(USE_SHARED_LIBS "Use shared libs versus static libs" ON)
-option(BUILD_SHARED_LIBS "Build shared libs versus static libs" ON)
+option(CGALPY_USE_SHARED_LIBS "Use shared libs versus static libs" ON)
+option(CGALPY_BUILD_SHARED_LIBS "Build shared libs versus static libs" ON)
+option(CGALPY_FIXED_LIBRARY_NAME "The library name is fixed" ON)
 
 # Binding options. Notice that The default value of option is OFF.
 option(CGALPY_ARRANGEMENT_2_BINDINGS            "Compile bindings for 2D Arrangements")
-option(CGALPY_MINKOWSKI_SUM_2_BINDINGS          "Compile bindings for 2D Minkowski sum")
-option(CGALPY_TRIANGULATION_2_BINDINGS          "Compile bindings for 2D triangulations")
-option(CGALPY_TRIANGULATION_3_BINDINGS          "Compile bindings for 3D triangulations")
-option(CGALPY_SPATIAL_SEARCHING_BINDINGS        "Compile bindings for spatial searching")
+option(CGALPY_ALPHA_SHAPE_3_BINDINGS            "Compile bindings for 3D Alpha Shapes")
+option(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS "Compile bindings for 2D boolean set operations")
+option(CGALPY_BOUNDING_VOLUMES_BINDINGS         "Compile bindings for bounding volumes")
 option(CGALPY_CONVEX_HULL_2_BINDINGS            "Compile bindings for 2D convex hull")
 option(CGALPY_CONVEX_HULL_3_BINDINGS            "Compile bindings for 3D convex hull")
-option(CGALPY_BOUNDING_VOLUMES_BINDINGS         "Compile bindings for bounding volumes")
-option(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS "Compile bindings for 2D boolean set operations")
 option(CGALPY_POLYGON_2_BINDINGS                "Compile bindings for 2D polygon")
 option(CGALPY_POLYGON_PARTITIONING_BINDINGS     "Compile bindings for polygon partitioning")
-option(CGALPY_ALPHA_SHAPE_3_BINDINGS            "Compile bindings for 3D Alpha Shapes")
+option(CGALPY_MINKOWSKI_SUM_2_BINDINGS          "Compile bindings for 2D Minkowski sum")
+option(CGALPY_SPATIAL_SEARCHING_BINDINGS        "Compile bindings for spatial searching")
+option(CGALPY_TRIANGULATION_2_BINDINGS          "Compile bindings for 2D triangulations")
+option(CGALPY_TRIANGULATION_3_BINDINGS          "Compile bindings for 3D triangulations")
 
 include(alpha_shape_3_options)
 include(arrangement_2_options)
