@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 project(square)
 
 # Generate a shared library
-option(BUILD_SHARED_LIBS "Build shared libs instead of static libs" ON)
+option(CGALPY_BUILD_SHARED_LIBS "Build shared libs instead of static libs" ON)
 
 # Use C++11 for this directory and its sub-directories.
 list(FIND CMAKE_CXX_COMPILE_FEATURES cxx_generalized_initializers has_cpp11)
