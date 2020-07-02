@@ -35,7 +35,7 @@ typedef General_distance_python<CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIM
 typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python> K_neighbor_search_python;
 typedef CGAL::Euclidean_distance<Search_traits_d> Euclidean_distance;
 
-int get_kd_tree_dimension()
+int get_spatial_searching_dimension()
 {
   return CGALPY_SPATIAL_SEARCHING_DIMENSION;
 }
@@ -199,5 +199,5 @@ void export_spatial_searching()
 
   bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
 
-  def("get_kd_tree_dimension", &get_kd_tree_dimension);
+  def("get_spatial_searching_dimension", &get_spatial_searching_dimension);
 }
