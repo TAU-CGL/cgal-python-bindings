@@ -162,16 +162,16 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR_2_DCEL");
 typedef typename Arrangement_2::Vertex_iterator                         Vertex_iterator;
 typedef typename Arrangement_2::Vertex_const_handle                     Vertex_const_handle;
 typedef typename Arrangement_2::Isolated_vertex_iterator                Isolated_vertex_iterator;
-typedef typename Arrangement_2::Vertex					Vertex;
-typedef typename Arrangement_2::Inner_ccb_iterator			Inner_ccb_iterator;
-typedef typename Arrangement_2::Ccb_halfedge_circulator			Ccb_halfedge_circulator;
-typedef typename Arrangement_2::Halfedge_around_vertex_circulator	Halfedge_around_vertex_circulator;
-typedef typename Arrangement_2::Halfedge_iterator			Halfedge_iterator;
+typedef typename Arrangement_2::Vertex					                Vertex;
+typedef typename Arrangement_2::Inner_ccb_iterator			            Inner_ccb_iterator;
+typedef typename Arrangement_2::Ccb_halfedge_circulator			        Ccb_halfedge_circulator;
+typedef typename Arrangement_2::Halfedge_around_vertex_circulator	    Halfedge_around_vertex_circulator;
+typedef typename Arrangement_2::Halfedge_iterator			            Halfedge_iterator;
 typedef typename Arrangement_2::Edge_iterator                           Edge_iterator;
 typedef typename Arrangement_2::Halfedge_const_handle                   Halfedge_const_handle;
-typedef typename Arrangement_2::Halfedge				Halfedge;
-typedef typename Arrangement_2::Face_iterator				Face_iterator;
+typedef typename Arrangement_2::Halfedge				                Halfedge;
+typedef typename Arrangement_2::Face_iterator				            Face_iterator;
 typedef typename Arrangement_2::Face_const_handle                       Face_const_handle;
-typedef typename Arrangement_2::Face					Face;
+typedef typename Arrangement_2::Face					                Face;
 
 #endif //COMMON_HPP
