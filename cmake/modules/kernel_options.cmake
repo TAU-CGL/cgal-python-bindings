@@ -10,15 +10,14 @@ set(CGALPY_KERNEL_SHORT_NAMES "epec" "epic")
 set(CGALPY_KERNEL_NAMES "epec" "epic")
 
 # Default
-set(CGALPY_KERNEL ${CGALPY_EPEC_KERNEL})
 SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
 set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epec epic)
 
 function(select_kernel)
   if ("${CGALPY_KERNEL_NAME}" STREQUAL "epec")
-    set(CGALPY_KERNEL ${CGALPY_EPEC_KERNEL})
+    set(CGALPY_KERNEL ${CGALPY_EPEC_KERNEL} CACHE INTERNAL "")
   elseif ("${CGALPY_KERNEL_NAME}" STREQUAL "epic")
-    set(CGALPY_KERNEL ${CGALPY_EPIC_KERNEL})
+    set(CGALPY_KERNEL ${CGALPY_EPIC_KERNEL} CACHE INTERNAL "")
   endif()
   add_definitions(-DCGALPY_KERNEL=${CGALPY_KERNEL})
 endfunction()
