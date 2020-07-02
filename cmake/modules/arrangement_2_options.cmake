@@ -17,6 +17,7 @@ set(CGALPY_ARR_2_GEOMETRY_TRAITS_NAMES linear segment nonCachingSegment conic al
 
 # Geometry Traits Default
 SET(CGALPY_ARR_2_GEOMETRY_TRAITS_NAME "segment" CACHE STRING "The geometry traits to use")
+set(CGALPY_ARR_2_GEOMETRY_TRAITS ${CGALPY_ARR_2_SEGMENT_GEOMETRY_TRAITS} CACHE INTERNAL "")
 set_property(CACHE CGALPY_ARR_2_GEOMETRY_TRAITS_NAME PROPERTY STRINGS linear segment nonCachingSegment conic algebraic circleSegment)
 
 # DCEL Options
@@ -32,6 +33,7 @@ set(CGALPY_ARR_2_DCEL_NAMES plain faceExtended halfedgeExtended vertexExtended a
 
 # DCEL Default
 SET(CGALPY_ARR_2_DCEL_NAME "plain" CACHE STRING "The DCEL to use")
+set(CGALPY_ARR_2_DCEL ${CGALPY_ARR_2_PLAIN_DCEL} CACHE INTERNAL "")
 set_property(CACHE CGALPY_ARR_2_DCEL_NAME PROPERTY STRINGS plain faceExtended halfedgeExtended vertexExtended allExtended)
 
 # Point location
