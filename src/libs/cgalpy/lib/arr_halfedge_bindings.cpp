@@ -35,7 +35,7 @@ void export_halfedge()
     .def("prev", &prev, return_value_policy<reference_existing_object>())
     .def("curve", &curve, return_value_policy<reference_existing_object>())
     .def("ccb", &ccb, return_value_policy<manage_new_object>())
-#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
+#if GALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL
     .def("set_data", &Halfedge::set_data)
     .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, return_value_policy<copy_non_const_reference>())
 #endif

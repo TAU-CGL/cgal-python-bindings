@@ -11,6 +11,7 @@ set(CGALPY_KERNEL_NAMES "epec" "epic")
 
 # Default
 SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
+set(CGALPY_KERNEL ${CGALPY_EPEC_KERNEL} CACHE INTERNAL "")
 set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epec epic)
 
 function(select_kernel)

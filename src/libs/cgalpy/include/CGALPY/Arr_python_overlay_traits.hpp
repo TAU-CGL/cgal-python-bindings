@@ -1,5 +1,4 @@
 #include "config.hpp"
-#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
 #ifndef ARR_PYTHON_OVERLAY_TRAITS
 #define ARR_PYTHON_OVERLAY_TRAITS
 
@@ -151,4 +150,3 @@ public:
 };
 
 #endif //ARR_PYTHON_OVERLAY_TRAITS
-#endif

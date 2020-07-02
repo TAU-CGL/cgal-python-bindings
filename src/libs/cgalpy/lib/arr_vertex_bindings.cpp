@@ -23,7 +23,7 @@ void export_vertex()
     .def("is_isolated", &Vertex::is_isolated)
     .def("degree", &Vertex::degree)
     .def("incident_halfedges", &halfedge_around_vertex_iterator, return_value_policy<manage_new_object>())
-#if CGALPY_DCEL == CGALPY_EXTENDED_DCEL
+#if GALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL
     .def<Vertex::Data& (Vertex::*)()>("data", &Vertex::data, return_value_policy<copy_non_const_reference>())
     .def("set_data", &Vertex::set_data)
 #endif
