@@ -1,6 +1,7 @@
 from arr2_epec_seg import *
 
-assert(get_kd_tree_dimension() == 2)  # Compile the bindings with the CMake variable CGALPY_DIMENSION set to 2
+# Compile the bindings with the CMake variable CGALPY_SPATIAL_SEARCHING_DIMENSION set to 2
+assert(get_spatial_searching_dimension() == 2)
 
 k = 3  # for k nearest neighbors
 
@@ -33,6 +34,22 @@ print("Found", len(lst), "neighbors")
 for pair in lst:
     print("Neighboring point is: ", pair[0])
     print("Squared distance from query is: ", pair[1])
+
+# Search for points inside a sphere
+s = Fuzzy_sphere(Point_d(2, [FT(0), FT(0)]), FT(5), FT(0))
+res = []
+tree.search(s, res)
+print("Points within distance 5 from (0,0):")
+for p in res:
+    print(p)
+
+# Search for points inside a box/sphere
+s = Fuzzy_iso_box(Point_d(2, [FT(-1), FT(-1)]), Point_d(2, [FT(1), FT(1)]), FT(0))
+res = []
+tree.search(s, res)
+print("Points with no coordinate exceeding absolute value of 1:")
+for p in res:
+    print(p)
 
 
 # In order to use a custom distance metric, define the following:
@@ -71,4 +88,3 @@ for pair in lst:
 #                            inverse_of_transformed_distance_for_value)
 # K_neighbor_search_python(tree, query, k, eps, search_nearest, \
 #                                    distance, sort_neighbors)
-

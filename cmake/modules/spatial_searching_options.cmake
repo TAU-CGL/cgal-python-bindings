@@ -2,7 +2,7 @@ if(NOT SPATIAL_SEARCHING_OPTIONS_FILE_INCLUDED)
 set(SPATIAL_SEARCHING_OPTIONS_FILE_INCLUDED)
 
 # Dimension
-SET(CGALPY_SPATIAL_SEARCHING_DIMENSION 4 CACHE STRING "The dimension of spatial search objects")
+SET(CGALPY_SPATIAL_SEARCHING_DIMENSION 2 CACHE STRING "The dimension of spatial search objects")
 
 function(select_spatial_searching)
   # Select dimension

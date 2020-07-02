@@ -34,7 +34,7 @@ if (CGALPY_ARRANGEMENT_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_face_bindings.cpp)
 
   # Point Location
-  if (CGALPY_ARR_2_POINT_LOCATION)
+  if (CGALPY_ARR_2_POINT_LOCATION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_point_location_bindings.cpp)
   endif()
 
