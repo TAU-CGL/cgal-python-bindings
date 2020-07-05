@@ -115,11 +115,62 @@ target_link_libraries(CGALPY
                       ${Boost_LIBRARIES}
 		      ${PYTHON_LIBRARIES})
 
-list (GET CGALPY_KERNEL_SHORT_NAMES ${CGALPY_KERNEL} CGALPY_KERNEL_PART)
-list (GET CGALPY_ARR_2_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_ARR_2_GEOMETRY_TRAITS} CGALPY_GT_PART)
-list (GET CGALPY_ARR_2_DCEL_SHORT_NAMES ${CGALPY_ARR_2_DCEL} CGALPY_ARR_2_DCEL_PART)
-set(CGALPY_LIB_NAME "arr2_${CGALPY_KERNEL_PART}_${CGALPY_GT_PART}${CGALPY_ARR_2_DCEL_PART}")
-set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
+if (NOT CGALPY_FIXED_LIBRARY_NAME)
+  set(CGALPY_LIB_NAME "CGALPY")
+  list (GET CGALPY_KERNEL_SHORT_NAMES ${CGALPY_KERNEL} CGALPY_KERNEL_PART)
+  set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${CGALPY_KERNEL_PART}")
+  # 3D Alpha shape
+  if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
+    get_alpha_shape_3_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  # 2D Arrangement
+  if (CGALPY_ARRANGEMENT_2_BINDINGS)
+    get_arrangement_2_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  # 2D Regularized Boolean operations
+  if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
+    get_boolean_set_operations_2_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  # Bounding volumes
+  if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
+    get_bounding_volumes_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  # 2D convex hull
+  if (CGALPY_CONVEX_HULL_2_BINDINGS)
+    get_convex_hull_2_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  # 2D Minkowski sum
+  if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
+    get_minkowski_sum_2_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  # 2D polygon partitioning
+  if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
+    get_polygon_partitioning_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  # Spatial searching
+  if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
+    get_spatial_searching_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  # 2D triangulation
+  if (CGALPY_TRIANGULATION_2_BINDINGS)
+    get_triangulation_2_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  # 3D triangulation
+  if (CGALPY_TRIANGULATION_3_BINDINGS)
+    get_triangulation_3_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+  endif()
+  set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
+endif()
 
 # don't prepend wrapper library name with lib
 set_target_properties(CGALPY PROPERTIES PREFIX "")

@@ -7,4 +7,8 @@ function(select_bounding_volumes)
   endif()
 endfunction()
 
+function(get_bounding_volumes_lib_name ret)
+  set(${ret} "bv" PARENT_SCOPE)
+endfunction()
+
 endif()

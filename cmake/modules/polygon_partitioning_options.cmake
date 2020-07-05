@@ -7,4 +7,8 @@ function(select_polygon_partitioning)
   endif()
 endfunction()
 
+function(get_polygon_partitioning_lib_name ret)
+  set(${ret} "pp" PARENT_SCOPE)
+endfunction()
+
 endif()
