@@ -161,20 +161,20 @@ typedef CGAL::Regular_triangulation_vertex_base_3<Kernel>       Vb0;
 typedef CGAL::Triangulation_vertex_base_with_info_3<size_t, Kernel, Vb0> Vertex_base;
 #elif CGALPY_TRI3_VERTEX_BASE == CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE
 typedef CGAL::Triangulation_vertex_base_3<Kernel>               Vb0;
-typedef CGAL::Alpha_shape_vertex_base_3<Kernel, Vb0, as3::Exact_comparison> Vertex_base;
+typedef CGAL::Alpha_shape_vertex_base_3<Kernel, Vb0, As3_exact_comparison> Vertex_base;
 #elif CGALPY_TRI3_VERTEX_BASE == CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE_WITH_INFO
 typedef CGAL::Triangulation_vertex_base_with_info_3<size_t, Kernel> Vb0;
-typedef CGAL::Alpha_shape_vertex_base_3<Kernel, Vb0, as3::Exact_comparison> Vertex_base;
+typedef CGAL::Alpha_shape_vertex_base_3<Kernel, Vb0, As3_exact_comparison> Vertex_base;
 #elif CGALPY_TRI3_VERTEX_BASE == CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE_REGULAR
 typedef CGAL::Regular_triangulation_vertex_base_3<Kernel>       Vb0;
-typedef CGAL::Alpha_shape_vertex_base_3<Kernel, Vb0, as3::Exact_comparison> Vertex_base;
+typedef CGAL::Alpha_shape_vertex_base_3<Kernel, Vb0, As3_exact_comparison> Vertex_base;
 #elif CGALPY_TRI3_VERTEX_BASE == CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE_REGULAR_WITH_INFO
 typedef CGAL::Regular_triangulation_vertex_base_3<Kernel>       Vb0;
 typedef CGAL::Triangulation_vertex_base_with_info_3<size_t, Kernel, Vb0> Vb1;
 typedef CGAL::Fixed_alpha_shape_vertex_base_3<Kernel, Vb1>      Vertex_base;
 #elif CGALPY_TRI3_VERTEX_BASE == CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE
 typedef CGAL::Triangulation_vertex_base_3<Kernel>               Vb0;
-typedef CGAL::Alpha_shape_vertex_base_3<Kernel, Vb0, as3::Exact_comparison> Vertex_base;
+typedef CGAL::Alpha_shape_vertex_base_3<Kernel, Vb0, As3_exact_comparison> Vertex_base;
 #elif CGALPY_TRI3_VERTEX_BASE == CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE_WITH_INFO
 typedef CGAL::Triangulation_vertex_base_with_info_3<size_t, Kernel> Vb0;
 typedef CGAL::Fixed_alpha_shape_vertex_base_3<Kernel, Vb0>     Vertex_base;
@@ -201,20 +201,20 @@ typedef CGAL::Regular_triangulation_cell_base_3<Kernel>         Cb0;
 typedef CGAL::Triangulation_cell_base_with_info_3<size_t, Kernel, Cb0> Cell_base;
 #elif CGALPY_TRI3_CELL_BASE == CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE
 typedef CGAL::Triangulation_cell_base_3<Kernel>                 Cb0;
-typedef CGAL::Alpha_shape_cell_base_3<Kernel, Cb0, as3::Exact_comparison> Cell_base;
+typedef CGAL::Alpha_shape_cell_base_3<Kernel, Cb0, As3_exact_comparison> Cell_base;
 #elif CGALPY_TRI3_CELL_BASE == CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE_WITH_INFO
 typedef CGAL::Triangulation_cell_base_with_info_3<size_t, Kernel> Cb0;
-typedef CGAL::Alpha_shape_cell_base_3<Kernel, Cb0, as3::Exact_comparison> Cell_base;
+typedef CGAL::Alpha_shape_cell_base_3<Kernel, Cb0, As3_exact_comparison> Cell_base;
 #elif CGALPY_TRI3_CELL_BASE == CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE_REGULAR
 typedef CGAL::Regular_triangulation_cell_base_3<Kernel>         Cb0;
-typedef CGAL::Alpha_shape_cell_base_3<Kernel, Cb0, as3::Exact_comparison> Cell_base;
+typedef CGAL::Alpha_shape_cell_base_3<Kernel, Cb0, As3_exact_comparison> Cell_base;
 #elif CGALPY_TRI3_CELL_BASE == CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE_REGULAR_WITH_INFO
 typedef CGAL::Regular_triangulation_cell_base_3<Kernel>         Cb0;
 typedef CGAL::Triangulation_cell_base_with_info_3<size_t, Kernel, Cb0> Cb1;
 typedef CGAL::Fixed_alpha_shape_cell_base_3<Kernel, Cb1>        Cell_base;
 #elif CGALPY_TRI3_CELL_BASE == CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE
 typedef CGAL::Triangulation_cell_base_3<Kernel>                 Cb0;
-typedef CGAL::Alpha_shape_cell_base_3<Kernel, Cb0, as3::Exact_comparison> Cell_base;
+typedef CGAL::Alpha_shape_cell_base_3<Kernel, Cb0, As3_exact_comparison> Cell_base;
 #elif CGALPY_TRI3_CELL_BASE == CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_WITH_INFO
 typedef CGAL::Triangulation_cell_base_with_info_3<size_t, Kernel> Cb0;
 typedef CGAL::Fixed_alpha_shape_cell_base_3<Kernel, Cb0>        Cell_base;
@@ -289,11 +289,11 @@ typedef Triangulation_3::Locate_type    Tri3_locate_type;
 
 // Alpha shape type
 #if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
-typedef CGAL::Alpha_shape_3<Triangulation_3, as3::Exact_comparison> Alpha_shape_3;
+typedef CGAL::Alpha_shape_3<Triangulation_3, As3_exact_comparison> Alpha_shape_3;
 #elif CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_FIXED
-typedef CGAL::Fixed_alpha_shape_3<Triangulation_3>                  Alpha_shape_3;
+typedef CGAL::Fixed_alpha_shape_3<Triangulation_3>                 Alpha_shape_3;
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ALPHA_SHAPE");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AS3_TYPE");
 #endif
 
 typedef Alpha_shape_3::Point                    As_point;
