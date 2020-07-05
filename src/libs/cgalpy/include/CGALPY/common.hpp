@@ -20,12 +20,12 @@
 #include <boost/python/stl_iterator.hpp>
 #include <boost/python/tuple.hpp>
 
-#if CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPIC
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#elif CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPEC
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_TYPE");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif
 
 #include <CGAL/CORE_BigInt.h>
@@ -67,14 +67,14 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR2_GEOMETRY_TRAITS");
 using namespace boost::python;
 namespace bp = boost::python;
 
-#if CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPIC
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
 typedef typename CGAL::Exact_predicates_inexact_constructions_kernel    Kernel;
 typedef typename bp::return_value_policy<bp::copy_const_reference>      Kernel_return_value_policy;
-#elif CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPEC
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 typedef typename CGAL::Exact_predicates_exact_constructions_kernel      Kernel;
 typedef typename bp::return_value_policy<bp::return_by_value>           Kernel_return_value_policy;
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_TYPE");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif
 
 typedef typename CORE::BigInt                                           BigInt;
@@ -82,7 +82,7 @@ typedef typename CGAL::Gmpz                                             Gmpz;
 typedef typename CGAL::Gmpq                                             Gmpq;
 typedef typename Kernel::FT                                             FT;
 
-#if CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPEC
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 typedef typename CGAL::Exact_predicates_exact_constructions_kernel      Kernel;
 typedef typename bp::return_value_policy<bp::return_by_value>           Kernel_return_value_policy;
 #endif
