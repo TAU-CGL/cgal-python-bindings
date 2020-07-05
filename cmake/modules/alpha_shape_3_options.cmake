@@ -10,7 +10,7 @@ set(CGALPY_ALPHA_SHAPE_3_SHORT_NAMES plain fixed)
 set(CGALPY_ALPHA_SHAPE_3_NAMES plain fixed)
 
 # Default
-SET(CGALPY_ALPHA_SHAPE_3 ${CGALPY_ALPHA_SHAPE_3_PLAIN})
+SET(CGALPY_ALPHA_SHAPE_3 ${CGALPY_ALPHA_SHAPE_3_PLAIN} CACHE INTERNAL "")
 SET(CGALPY_ALPHA_SHAPE_3_NAME "plain" CACHE STRING "The 3D Alpha shape construct")
 set_property(CACHE CGALPY_ALPHA_SHAPE_3_NAME PROPERTY STRINGS plain fixed)
 
@@ -64,27 +64,29 @@ endfunction()
 
 # Selection
 function(select_alpha_shape_3)
-  verify_alpha_shape_3()
-  select_alpha_shape_3_comparison()
-
   if(${CGALPY_ALPHA_SHAPE_3_BINDINGS})
+    verify_alpha_shape_3()
+    select_alpha_shape_3_comparison()
+
     add_definitions(-DCGALPY_ALPHA_SHAPE_3_BINDINGS)
-  endif()
 
-  # Select Alpha shape
-  if    ("${CGALPY_ALPHA_SHAPE_NAME}" STREQUAL "plain")
-    set(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_PLAIN})
-  elseif("${CGALPY_ALPHA_SHAPE_NAME}" STREQUAL "fixed")
-    set(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_FIXED})
-  endif()
-  add_definitions(-DCGALPY_ALPHA_SHAPE=${CGALPY_ALPHA_SHAPE})
+    # Select Alpha shape
+    if    ("${CGALPY_ALPHA_SHAPE_NAME}" STREQUAL "plain")
+      set(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_PLAIN} CACHE INTERNAL "")
+    elseif("${CGALPY_ALPHA_SHAPE_NAME}" STREQUAL "fixed")
+      set(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_FIXED} CACHE INTERNAL "")
+    endif()
+    add_definitions(-DCGALPY_ALPHA_SHAPE=${CGALPY_ALPHA_SHAPE})
 
-  set(CGALPY_INSTALL_INC_DIR "include" CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
-  set(CGALPY_INSTALL_LIB_DIR "lib"     CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
-  set(CGALPY_INSTALL_BIN_DIR "bin"
-    CACHE STRING "The folder where CGALPY executables, e.g., binaried and scripts, will be installed, relative to CMAKE_INSTALL_PREFIX")
-set(CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
-    CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
+    set(CGALPY_INSTALL_INC_DIR "include"
+        CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
+    set(CGALPY_INSTALL_LIB_DIR "lib"
+        CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
+    set(CGALPY_INSTALL_BIN_DIR "bin"
+        CACHE STRING "The folder where CGALPY executables, e.g., binaried and scripts, will be installed, relative to CMAKE_INSTALL_PREFIX")
+    set(CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
+        CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
+  endif()
 endfunction()
 
 endif()
