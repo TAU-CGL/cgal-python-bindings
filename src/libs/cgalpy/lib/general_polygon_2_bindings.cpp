@@ -53,7 +53,7 @@ void export_general_polygon_2()
     .def(self_ns::repr(self_ns::self))
     ;
 
-#if CGALPY_ARR_2_GEOMETRY_TRAITS != CGALPY_ARR_2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+#if CGALPY_ARR2_GEOMETRY_TRAITS != CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
 
   typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>::Point_2 CSPoint_2;
   typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>::CoordNT CoordNT;

@@ -20,34 +20,34 @@
 #include <boost/python/stl_iterator.hpp>
 #include <boost/python/tuple.hpp>
 
-#if CGALPY_KERNEL == CGALPY_EPIC_KERNEL
+#if CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPIC
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#elif CGALPY_KERNEL == CGALPY_EPEC_KERNEL
+#elif CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPEC
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_TYPE");
 #endif
 
 #include <CGAL/CORE_BigInt.h>
 #include <CGAL/Sqrt_extension.h>
 
-#if CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_LINEAR_GEOMETRY_TRAITS
+#if CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_GEOMETRY_TRAITS
 #include <CGAL/Arr_linear_traits_2.h>
-#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_GEOMETRY_TRAITS
 #include <CGAL/Arr_segment_traits_2.h>
-#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
-#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
 #include <CGAL/Arr_circle_segment_traits_2.h>
-#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_CONIC_GEOMETRY_TRAITS
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CONIC_GEOMETRY_TRAITS
 #include <CGAL/Arr_conic_traits_2.h>
-#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 #include <CGAL/Arr_algebraic_segment_traits_2.h>
 #include <CGAL/Polynomial.h>
 #include <CGAL/Polynomial_traits_d.h>
 #include <CGAL/Polynomial_type_generator.h>
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR_2_GEOMETRY_TRAITS");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR2_GEOMETRY_TRAITS");
 #endif
 
 #include <CGAL/Bbox_2.h>
@@ -60,21 +60,21 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR_2_GEOMETRY_TRAITS");
 #include <CGAL/Vector_2.h>
 #include <CGAL/Aff_transformation_2.h>
 #include <CGAL/Arrangement_2.h>
-#if CGALPY_ARR_2_DCEL == CGALPY_ARR_2_EXTENDED_DCEL || \
-  CGALPY_ARR_2_DCEL == CGALPY_ARR_2_FACE_EXTENDED_DCEL
+#if CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL || \
+  CGALPY_ARR2_DCEL == CGALPY_ARR2_FACE_EXTENDED_DCEL
 #include <CGAL/Arr_extended_dcel.h>
 #endif
 using namespace boost::python;
 namespace bp = boost::python;
 
-#if CGALPY_KERNEL == CGALPY_EPIC_KERNEL
+#if CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPIC
 typedef typename CGAL::Exact_predicates_inexact_constructions_kernel    Kernel;
 typedef typename bp::return_value_policy<bp::copy_const_reference>      Kernel_return_value_policy;
-#elif CGALPY_KERNEL == CGALPY_EPEC_KERNEL
+#elif CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPEC
 typedef typename CGAL::Exact_predicates_exact_constructions_kernel      Kernel;
 typedef typename bp::return_value_policy<bp::return_by_value>           Kernel_return_value_policy;
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_TYPE");
 #endif
 
 typedef typename CORE::BigInt                                           BigInt;
@@ -82,7 +82,7 @@ typedef typename CGAL::Gmpz                                             Gmpz;
 typedef typename CGAL::Gmpq                                             Gmpq;
 typedef typename Kernel::FT                                             FT;
 
-#if CGALPY_KERNEL == CGALPY_EPEC_KERNEL
+#if CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPEC
 typedef typename CGAL::Exact_predicates_exact_constructions_kernel      Kernel;
 typedef typename bp::return_value_policy<bp::return_by_value>           Kernel_return_value_policy;
 #endif
@@ -115,15 +115,15 @@ typedef typename CGAL::Rotation                                         Rotation
 typedef typename CGAL::Scaling                                          Scaling;
 typedef typename CGAL::Translation                                      Translation;
 
-#if CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_SEGMENT_GEOMETRY_TRAITS
+#if CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_segment_traits_2<Kernel>                     Traits;
-#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_non_caching_segment_traits_2<Kernel>         Traits;
-#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_LINEAR_GEOMETRY_TRAITS
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_linear_traits_2<Kernel>                      Traits;
-#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>              Traits;
-#elif CGALPY_ARR_2_GEOMETRY_TRAITS == CGALPY_ARR_2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 typedef typename BigInt                                                 Integer;
 typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>          Traits;
 typedef typename Traits::Construct_curve_2                              Construct_curve_2;
@@ -140,23 +140,23 @@ typedef typename Algebraic_kernel_d_1::Polynomial_1                     Polynomi
 typedef typename Traits::Algebraic_real_1                               Algebraic_real_1;
 typedef typename Traits::Bound                                          Bound;
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR_2_GEOMETRY_TRAITS");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR2_GEOMETRY_TRAITS");
 #endif
 
 typedef typename Traits::Point_2                                        TPoint_2;
 typedef typename Traits::Curve_2                                        Curve_2;
 typedef typename Traits::X_monotone_curve_2                             X_monotone_curve_2;
 
-#if CGALPY_ARR_2_DCEL ==  CGALPY_ARR_2_EXTENDED_DCEL
+#if CGALPY_ARR2_DCEL ==  CGALPY_ARR2_EXTENDED_DCEL
 typedef CGAL::Arr_extended_dcel<Traits, bp::object, bp::object, bp::object>  Dcel;
 typedef CGAL::Arrangement_2<Traits, Dcel>                               Arrangement_2;
-#elif CGALPY_ARR_2_DCEL ==  CGALPY_ARR_2_FACE_EXTENDED_DCEL
+#elif CGALPY_ARR2_DCEL ==  CGALPY_ARR2_FACE_EXTENDED_DCEL
 typedef CGAL::Arr_face_extended_dcel<Traits, bp::object>                Dcel;
 typedef CGAL::Arrangement_2<Traits, Dcel>                               Arrangement_2;
-#elif CGALPY_ARR_2_DCEL == CGALPY_ARR_2_DEFAULT_DCEL
+#elif CGALPY_ARR2_DCEL == CGALPY_ARR2_DEFAULT_DCEL
 typedef typename CGAL::Arrangement_2<Traits>                            Arrangement_2;
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR_2_DCEL");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR2_DCEL");
 #endif
 
 typedef typename Arrangement_2::Vertex_iterator                         Vertex_iterator;
