@@ -43,7 +43,7 @@ void bind_squared_distance_types()
 }
 
 
-#if CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPEC
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 typename FT::Exact_type& FT_exact(FT& ft)
 {
   return ft.exact();
@@ -121,7 +121,7 @@ void export_kernel()
     .def(self /= self)
     .def(-self)
     ;
-#if CGALPY_KERNEL_TYPE == CGALPY_KERNEL_TYPE_EPEC
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
   class_<FT>("FT")
     .def(init<double>())
     .def(init<FT::Exact_type>())

@@ -49,18 +49,18 @@
 #define CGALPY_TRI3_LOCATION_POLICY_FAST                0
 #define CGALPY_TRI3_LOCATION_POLICY_COMPACT             1
 
-#define CGALPY_TRI3_TYPE_PLAIN                          0
-#define CGALPY_TRI3_TYPE_REGULAR                        1
-#define CGALPY_TRI3_TYPE_DELAUNAY                       2
-#define CGALPY_TRI3_TYPE_PERIODIC3_DELAUNAY             3
+#define CGALPY_TRI3_PLAIN                               0
+#define CGALPY_TRI3_REGULAR                             1
+#define CGALPY_TRI3_DELAUNAY                            2
+#define CGALPY_TRI3_PERIODIC3_DELAUNAY                  3
 
-#define CGALPY_AS3_TYPE_PLAIN                           0
-#define CGALPY_AS3_TYPE_FIXED                           1
+#define CGALPY_AS3_PLAIN                                0
+#define CGALPY_AS3_FIXED                                1
 
 // Alpha shape type
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
 #include <CGAL/Alpha_shape_3.h>
-#elif CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_FIXED
+#elif CGALPY_AS3 == CGALPY_AS3_FIXED
 #include <CGAL/Fixed_alpha_shape_3.h>
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ALPHA_SHAPE");
@@ -124,16 +124,16 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_TRAITS");
 #endif
 
 // 3D Triangulation
-#if CGALPY_TRI3_TYPE == CGALPY_TRI3_TYPE_PLAIN
+#if CGALPY_TRI3 == CGALPY_TRI3_PLAIN
 #include <CGAL/Triangulation_3.h>
-#elif CGALPY_TRI3_TYPE == CGALPY_TRI3_TYPE_REGULAR
+#elif CGALPY_TRI3 == CGALPY_TRI3_REGULAR
 #include <CGAL/Regular_triangulation_3.h>
-#elif CGALPY_TRI3_TYPE == CGALPY_TRI3_TYPE_DELAUNAY
+#elif CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 #include <CGAL/Delaunay_triangulation_3.h>
-#elif CGALPY_TRI3_TYPE == CGALPY_TRI3_PERIODIC3_TYPE_DELAUNAY
+#elif CGALPY_TRI3 == CGALPY_TRI3_PERIODIC3_DELAUNAY
 #include <CGAL/eriodic_3_Delaunay_triangulation_3.h>
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_TYPE");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3");
 #endif
 
 // Type definitions:
@@ -261,19 +261,19 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_LOCATION_POLICY");
 #endif
 
 // 3D triangulation
-#if CGALPY_TRI3_TYPE == CGALPY_TRI3_TYPE_PLAIN
+#if CGALPY_TRI3 == CGALPY_TRI3_PLAIN
 typedef CGAL::Triangulation_3<Tri3_traits, Tds>                           Triangulation_3;
-#elif CGALPY_TRI3_TYPE == CGALPY_TRI3_TYPE_REGULAR
+#elif CGALPY_TRI3 == CGALPY_TRI3_REGULAR
 typedef CGAL::Regular_triangulation_3<Tri3_traits, Tds>                   Triangulation_3;
 typedef Triangulation_3::Weighted_point                                   Tri3_weighted_point;
 typedef Triangulation_3::Bare_point                                       Tri3_bare_point;
-#elif CGALPY_TRI3_TYPE == CGALPY_TRI3_TYPE_DELAUNAY
+#elif CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 typedef CGAL::Delaunay_triangulation_3<Tri3_traits, Tds, Location_policy> Delaunay_triangulation_3;
 typedef Delaunay_triangulation_3                                          Triangulation_3;
-#elif CGALPY_TRI3_TYPE == CGALPY_TRI3_PERIODIC3_TYPE_DELAUNAY
+#elif CGALPY_TRI3 == CGALPY_TRI3_PERIODIC3_DELAUNAY
 typedef CGAL::Periodic_3_Delaunay_triangulation_3<Tri3_traits, Tds>       Triangulation_3;
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_TYPE");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3");
 #endif
 
 typedef Triangulation_3::Point          Tri3_point;
@@ -288,12 +288,12 @@ typedef Triangulation_3::Cell_handle    Tri3_cell_handle;
 typedef Triangulation_3::Locate_type    Tri3_locate_type;
 
 // Alpha shape type
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
 typedef CGAL::Alpha_shape_3<Triangulation_3, As3_exact_comparison> Alpha_shape_3;
-#elif CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_FIXED
+#elif CGALPY_AS3 == CGALPY_AS3_FIXED
 typedef CGAL::Fixed_alpha_shape_3<Triangulation_3>                 Alpha_shape_3;
 #else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AS3_TYPE");
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AS3");
 #endif
 
 typedef Alpha_shape_3::Point                    As_point;
@@ -324,13 +324,13 @@ typedef Alpha_shape_3::NT                       As_nt;
 
 typedef Alpha_shape_3::Classification_type      As_classification_type;
 
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
 typedef Alpha_shape_3::Mode                     As_mode;
 typedef Alpha_shape_3::Alpha_iterator           As_alpha_iterator;
 typedef CGAL::Alpha_status<As_nt>               As_alpha_status;
 #endif
 
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
 void make_alpha_shape(Alpha_shape_3& as, boost::python::list& lst)
 {
   if (! lst) return;
@@ -357,7 +357,7 @@ Alpha_shape_3* as_init2(boost::python::list& lst, const As_nt& alpha)
   return new Alpha_shape_3(begin, end, alpha);
 }
 
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
 Alpha_shape_3* as_init3(boost::python::list& lst, const As_nt& alpha, As_mode m)
 {
   auto begin = boost::python::stl_input_iterator<As_point>(lst);
@@ -576,12 +576,12 @@ private:
 
   const Alpha_shape_3& m_alpha_shape;
   Classification_type m_type;
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
   const NT& m_alpha;
 #endif
 
 public:
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
   Alpha_shape_3_test(const Alpha_shape_3& as, Classification_type type, const NT& alpha) :
     m_alpha_shape(as),
     m_type(type),
@@ -596,7 +596,7 @@ public:
 
   bool operator()(Finite_cells_iterator cit) const
   {
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(cit, m_alpha) == m_type;
 #else
     return m_alpha_shape.classify(cit) == m_type;
@@ -605,7 +605,7 @@ public:
 
   bool operator()(Finite_facets_iterator fit) const
   {
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(*fit, m_alpha) == m_type;
 #else
     return m_alpha_shape.classify(*fit) == m_type;
@@ -614,7 +614,7 @@ public:
 
   bool operator()(Finite_edges_iterator eit) const
   {
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(*eit, m_alpha) == m_type;
 #else
     return m_alpha_shape.classify(*eit) == m_type;
@@ -623,7 +623,7 @@ public:
 
   bool operator()(Finite_vertices_iterator vit) const
   {
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(vit, m_alpha) == m_type;
 #else
     return m_alpha_shape.classify(vit) == m_type;
@@ -639,12 +639,12 @@ typedef CGAL::Filter_iterator<As_finite_vertices_iterator, As_test>     As_filte
 
 
 boost::python::list alpha_shape_cells(const Alpha_shape_3& as, As_classification_type type
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
                                       , const As_nt& alpha
 #endif
                                       )
 {
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
   As_test test_as_cell(as, type, alpha);
 #else
   As_test test_as_cell(as, type);
@@ -660,12 +660,12 @@ boost::python::list alpha_shape_cells(const Alpha_shape_3& as, As_classification
 }
 
 boost::python::list alpha_shape_facets(const Alpha_shape_3& as, As_classification_type type
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
                                        , const As_nt& alpha
 #endif
                                        )
 {
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
   As_test test_as_facet(as, type, alpha);
 #else
   As_test test_as_facet(as, type);
@@ -678,12 +678,12 @@ boost::python::list alpha_shape_facets(const Alpha_shape_3& as, As_classificatio
 }
 
 boost::python::list alpha_shape_edges(const Alpha_shape_3& as, As_classification_type type
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
                                       , const As_nt& alpha
 #endif
                                       )
 {
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
   As_test test_as_edge(as, type, alpha);
 #else
   As_test test_as_edge(as, type);
@@ -696,12 +696,12 @@ boost::python::list alpha_shape_edges(const Alpha_shape_3& as, As_classification
 }
 
 boost::python::list alpha_shape_vertices(const Alpha_shape_3& as, As_classification_type type
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
                                          , const As_nt& alpha
 #endif
                                          )
 {
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
   As_test test_as_vertex(as, type, alpha);
 #else
   As_test test_as_vertex(as, type);
@@ -717,7 +717,7 @@ void export_alpha_shape_3()
 {
   using namespace boost::python;
 
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
   enum_<As_mode>("Mode")
     .value("GENERAL", Alpha_shape_3::GENERAL)
     .value("REGULARIZED", Alpha_shape_3::REGULARIZED)
@@ -778,7 +778,7 @@ void export_alpha_shape_3()
 
   class_<Alpha_shape_3, boost::noncopyable>("Alpha_shape_3")
     .def(init<>())
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def(init<optional<double, Alpha_shape_3::Mode>>())
     .def(init<optional<As_nt&, Alpha_shape_3::Mode>>())
     .def(init<Triangulation_3&, optional<double, Alpha_shape_3::Mode>>())
@@ -786,11 +786,11 @@ void export_alpha_shape_3()
 #endif
     .def("__init__", make_constructor(&as_init1))
     .def("__init__", make_constructor(&as_init2))
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def("__init__", make_constructor(&as_init3))
 #endif
     // Modifiers
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def("make_alpha_shape", &make_alpha_shape)
     .def("set_mode", &Alpha_shape_3::set_mode)
     .def("set_alpha", &Alpha_shape_3::set_alpha)
@@ -798,7 +798,7 @@ void export_alpha_shape_3()
     .def("clear", &Alpha_shape_3::clear)
     // Query Functions
     .def("get_alpha", &Alpha_shape_3::get_alpha, return_value_policy<copy_const_reference>())
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def("get_mode", &Alpha_shape_3::get_mode)
     .def("get_nth_alpha", &Alpha_shape_3::get_nth_alpha, return_value_policy<copy_const_reference>())
     .def("number_of_alphas", &Alpha_shape_3::number_of_alphas)
@@ -823,7 +823,7 @@ void export_alpha_shape_3()
     .def("alpha_shape_vertices", &alpha_shape_vertices)
     // .def("filtration", &Alpha_shape_3::filtration)
     // .def("filtration_with_alpha_values", &Alpha_shape_3::filtration_with_alpha_values)
-#if CGALPY_AS3_TYPE == CGALPY_AS3_TYPE_PLAIN
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     // Traversal of the alpha-Values
     .def("alpha_begin", &Alpha_shape_3::alpha_begin)
     .def("alpha_end", &Alpha_shape_3::alpha_end)
