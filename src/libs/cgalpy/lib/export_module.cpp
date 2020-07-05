@@ -121,6 +121,6 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 #endif
 
 #ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
-  export_alpha_shapes_3();
+  export_alpha_shape_3();
 #endif
 }
