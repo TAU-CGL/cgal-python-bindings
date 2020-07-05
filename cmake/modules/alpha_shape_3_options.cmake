@@ -77,16 +77,12 @@ function(select_alpha_shape_3)
       set(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_FIXED} CACHE INTERNAL "")
     endif()
     add_definitions(-DCGALPY_ALPHA_SHAPE=${CGALPY_ALPHA_SHAPE})
-
-    set(CGALPY_INSTALL_INC_DIR "include"
-        CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
-    set(CGALPY_INSTALL_LIB_DIR "lib"
-        CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
-    set(CGALPY_INSTALL_BIN_DIR "bin"
-        CACHE STRING "The folder where CGALPY executables, e.g., binaried and scripts, will be installed, relative to CMAKE_INSTALL_PREFIX")
-    set(CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
-        CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
   endif()
+endfunction()
+
+function(get_alpha_shape_3_lib_name ret)
+  list(GET CGALPY_ALPHA_SHAPE_3_SHORT_NAMES ${CGALPY_ALPHA_SHAPE_3} CGALPY_ALPHA_SHAPE_3_PART)
+  set(${ret} "as3_${CGALPY_ALPHA_SHAPE_3_PART}" PARENT_SCOPE)
 endfunction()
 
 endif()

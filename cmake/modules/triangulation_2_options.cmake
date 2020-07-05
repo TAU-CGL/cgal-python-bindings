@@ -7,4 +7,8 @@ function(select_triangulation_2)
   endif()
 endfunction()
 
+function(get_triangulation_2_lib_name ret)
+  set(${ret} "tri2" PARENT_SCOPE)
+endfunction()
+
 endif()

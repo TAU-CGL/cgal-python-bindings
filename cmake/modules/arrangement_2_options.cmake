@@ -12,8 +12,8 @@ set(CGALPY_ARR_2_BEZIER_GEOMETRY_TRAITS              6)
 set(CGALPY_ARR_2_RATIONAL_GEOMETRY_TRAITS            7)
 
 # Geometry Traits Names
-set(CGALPY_ARR_2_GEOMETRY_TRAITS_SHORT_NAMES linear seg ncseg conic alg cs)
-set(CGALPY_ARR_2_GEOMETRY_TRAITS_NAMES linear segment nonCachingSegment conic algebraic circleSegment)
+set(CGALPY_ARR_2_GEOMETRY_TRAITS_SHORT_NAMES linear seg ncseg conic alg cs bez rat)
+set(CGALPY_ARR_2_GEOMETRY_TRAITS_NAMES linear segment nonCachingSegment conic algebraic circleSegment bezier rational)
 
 # Geometry Traits Default
 SET(CGALPY_ARR_2_GEOMETRY_TRAITS_NAME "segment" CACHE STRING "The geometry traits to use")
@@ -28,7 +28,7 @@ set(CGALPY_ARR_2_VERTEX_EXTENDED_DCEL 3)
 set(CGALPY_ARR_2_ALL_EXTENDED_DCEL 4)
 
 # DCEL Names
-set(CGALPY_ARR_2_DCEL_SHORT_NAMES "" "_fex" "_hex" "_vex" "_ex")
+set(CGALPY_ARR_2_DCEL_SHORT_NAMES "plain" "fex" "hex" "vex" "ex")
 set(CGALPY_ARR_2_DCEL_NAMES plain faceExtended halfedgeExtended vertexExtended allExtended)
 
 # DCEL Default
@@ -85,6 +85,12 @@ function(select_arrangement_2)
     select_arr_2_point_location()
     add_definitions(-DCGALPY_ARRANGEMENT_2_BINDINGS)
   endif()
+endfunction()
+
+function(get_arrangement_2_lib_name ret)
+  list(GET CGALPY_ARR_2_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_ARR_2_GEOMETRY_TRAITS} CGALPY_GT_PART)
+  list(GET CGALPY_ARR_2_DCEL_SHORT_NAMES ${CGALPY_ARR_2_DCEL} CGALPY_ARR_2_DCEL_PART)
+  set(${ret} "arr2_${CGALPY_GT_PART}_${CGALPY_ARR_2_DCEL_PART}" PARENT_SCOPE)
 endfunction()
 
 endif()

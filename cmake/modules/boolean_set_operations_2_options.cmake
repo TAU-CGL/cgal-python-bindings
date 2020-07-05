@@ -7,4 +7,8 @@ function(select_boolean_set_operations_2)
   endif()
 endfunction()
 
+function(get_boolean_set_operations_2_lib_name ret)
+  set(${ret} "bso2" PARENT_SCOPE)
+endfunction()
+
 endif()

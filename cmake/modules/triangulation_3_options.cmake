@@ -196,4 +196,11 @@ function(select_triangulation_3)
   endif()
 endfunction()
 
+function(get_triangulation_3_lib_name ret)
+  list(GET CGALPY_TRI_3_SHORT_NAMES ${CGALPY_TRI_3} CGALPY_TRI_3)
+  list(GET CGALPY_TRI_3_VERTEX_BASE_SHORT_NAMES ${CGALPY_TRI_3_VERTEX_BASE} CGALPY_VERTEX_BASE_PART)
+  list(GET CGALPY_TRI_3_CELL_BASE_SHORT_NAMES ${CGALPY_TRI_3_CELL_BASE} CGALPY_TRI_3_CELL_BASE_PART)
+  set(${ret} "tri3_${CGALPY_TRI_3}_${CGALPY_VERTEX_BASE_PART}_${CGALPY_TRI_3_CELL_BASE_PART}" PARENT_SCOPE)
+endfunction()
+
 endif()
