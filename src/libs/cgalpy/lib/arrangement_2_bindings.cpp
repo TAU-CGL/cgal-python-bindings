@@ -6,8 +6,9 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/common.hpp"
-#include "CGALPY/Python_functor.hpp"
+#include <CGALPY/Python_functor.hpp>
+#include <CGALPY/arrangement_2_types.hpp>
+#include <boost/python/stl_iterator.hpp>
 
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_vertical_decomposition_2.h>
@@ -57,7 +58,7 @@ void insert_curve(Arrangement_2& arr, CurveType& c)
 void insert_curves(Arrangement_2& arr, boost::python::list& lst)
 {
   if (!lst) return;
-  if (extract<X_monotone_curve_2>(lst[0]).check())
+  if (boost::python::extract<X_monotone_curve_2>(lst[0]).check())
   {
     //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
     auto begin = boost::python::stl_input_iterator< X_monotone_curve_2 >(lst);
@@ -65,7 +66,7 @@ void insert_curves(Arrangement_2& arr, boost::python::list& lst)
     auto v = std::vector<X_monotone_curve_2>(begin, end);
     CGAL::insert(arr, v.begin(), v.end());
   }
-  else if (extract<Curve_2>(lst[0]).check())
+  else if (boost::python::extract<Curve_2>(lst[0]).check())
   {
     //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
     auto begin = boost::python::stl_input_iterator< Curve_2 >(lst);

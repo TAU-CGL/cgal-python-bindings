@@ -5,8 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "CGALPY/common.hpp"
-#include "CGALPY/python_iterator_templates.hpp"
+#include <CGALPY/arrangement_2_types.hpp>
+#include <CGALPY/python_iterator_templates.hpp>
 
 Iterator_from_circulator<Ccb_halfedge_circulator>* outer_ccb(Face& f)
 {

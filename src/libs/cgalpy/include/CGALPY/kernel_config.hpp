@@ -6,9 +6,14 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/arrangement_2_types.hpp>
+#ifndef CGALPY_KERNEL_CONFIG_HPP
+#define CGALPY_KERNEL_CONFIG_HPP
 
-void export_arr_Bezier_traits()
-{
-  using namespace boost::python;
-}
+#define CGALPY_KERNEL_EPEC 0
+#define CGALPY_KERNEL_EPIC 1
+
+#ifndef CGALPY_KERNEL
+#define CGALPY_KERNEL 0
+#endif
+
+#endif //CGALPY_KERNEL_CONFIG_HPP

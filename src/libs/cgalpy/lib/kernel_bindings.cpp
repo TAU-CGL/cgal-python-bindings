@@ -5,7 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "CGALPY/common.hpp"
+#include <CGALPY/kernel_types.hpp>
+#include <CGALPY/common.hpp>
 
 Kernel::Equal_2 kernel_equal_2(Kernel& k)
 {

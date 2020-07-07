@@ -1,5 +1,16 @@
-#include "CGALPY/Python_functor.hpp"
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// This file is private property of Tel Aviv University.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
+#ifndef CGALPY_GENERAL_DISTANCE_PYTHON_HPP
+#define CGALPY_GENERAL_DISTANCE_PYTHON_HPP
+
+
+#include <CGALPY/Python_functor.hpp>
 #include <CGAL/Kd_tree_rectangle.h>
 
 template <typename D_, typename FT_, typename Point_d_, typename Query_item_>
@@ -60,3 +71,5 @@ public:
     return f4(d);
   }
 };
+
+#endif // CGALPY_GENERAL_DISTANCE_PYTHON_HPP

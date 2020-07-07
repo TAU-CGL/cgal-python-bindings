@@ -6,8 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
+#include <CGALPY/arrangement_2_types.hpp>
 
 template<typename T0, typename T1>
 bool is_type(Object& o)
