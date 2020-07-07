@@ -6,8 +6,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
+#include <CGALPY/kernel_types.hpp>
+#include <CGALPY/python_iterator_templates.hpp>
 
 Polygon_with_holes_2* init_Polygon_with_holes_2(Polygon_2& p,
                                                 boost::python::list& lst)

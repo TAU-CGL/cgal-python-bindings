@@ -7,8 +7,8 @@
 
 #include <boost/static_assert.hpp>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
+#include <CGALPY/config.hpp>
+#include <CGALPY/common.hpp>
 
 void export_kernel();
 void export_arrangement_2();

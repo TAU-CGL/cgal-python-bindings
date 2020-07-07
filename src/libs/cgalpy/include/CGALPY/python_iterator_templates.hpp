@@ -1,10 +1,9 @@
 #ifndef PYTHON_ITERATOR_TEMPLATES
 #define PYTHON_ITERATOR_TEMPLATES
-#include "common.hpp"
+#include <boost/python.hpp>
 inline boost::python::object pass_through(boost::python::object const& o) { return o; }
 
 //these template classes are used to allow more natural iteration in python
-//with_custodian_and_ward_postcall<0, 1> ?
 
 template <typename circulator>
 class Iterator_from_circulator
@@ -71,7 +70,7 @@ void bind_iterator(const char* python_name)
 }
 
 
-//for iterators that don't dereference to a reference of an existing object
+// For iterators that don't dereference to a reference of an existing object
 template <typename iterator>
 class CopyIterator
 {
