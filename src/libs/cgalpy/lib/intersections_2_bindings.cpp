@@ -5,7 +5,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "CGALPY/common.hpp"
+#include "CGALPY/kernel_types.hpp"
 
 typedef typename Kernel::Intersect_2                               Intersect_2;
 typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Iso_rectangle_2)>::type
