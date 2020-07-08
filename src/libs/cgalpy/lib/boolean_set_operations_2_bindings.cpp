@@ -6,11 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
-
-#include <CGAL/connect_holes.h>
-#include <CGAL/Boolean_set_operations_2.h>
+#include <CGALPY/boolean_set_operations_2_types.hpp>
 
 void complement0(Polygon_2& pgn, Polygon_with_holes_2& res)
 {

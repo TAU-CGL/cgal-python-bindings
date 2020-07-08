@@ -6,14 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/config.hpp"
-#ifdef CGALPY_CONVEX_HULL_2_BINDINGS
-#include "CGALPY/common.hpp"
-
-#include <CGAL/convex_hull_2.h>
-#include <CGAL/ch_eddy.h>
-#include <CGAL/ch_jarvis.h>
-#include <CGAL/ch_melkman.h>
+#include <CGALPY/convex_hull_2_types.hpp>
 
 void ch_akl_toussaint(bp::list& lst, bp::list& res)
 {
@@ -136,4 +129,3 @@ void export_convex_hull_2_bindings()
   def("lower_hull_points_2", lower_hull_points_2);
   def("upper_hull_points_2", upper_hull_points_2);
 }
-#endif

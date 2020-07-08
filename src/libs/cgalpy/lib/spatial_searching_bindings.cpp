@@ -6,18 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
-
-#include "CGAL/Cartesian_d.h"
-#include "CGAL/Kd_tree.h"
-#include <CGAL/Kd_tree_rectangle.h>
-#include <CGAL/Search_traits_d.h>
-#include <CGAL/K_neighbor_search.h>
-#include <CGAL/Fuzzy_iso_box.h>
-#include <CGAL/Euclidean_distance.h>
-#include <CGAL/Fuzzy_sphere.h>
-#include "CGALPY/General_distance_python.hpp"
+#include <CGALPY/spatial_searching_types.hpp>
 
 typedef CGAL::Cartesian_d<FT> K;
 typedef K::Point_d Point_d;

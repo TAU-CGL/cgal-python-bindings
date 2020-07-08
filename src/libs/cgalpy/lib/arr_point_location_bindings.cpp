@@ -6,12 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/arrangement_2_types.hpp>
-
-#include <CGAL/Arr_naive_point_location.h>
-#include <CGAL/Arr_walk_along_line_point_location.h>
-#include <CGAL/Arr_trapezoid_ric_point_location.h>
-#include <CGAL/Arr_landmarks_point_location.h>
+#include <CGALPY/arr_point_location_types.hpp>
 
 typedef typename CGAL::Arr_naive_point_location<Arrangement_2>           Naive_pl;
 typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;

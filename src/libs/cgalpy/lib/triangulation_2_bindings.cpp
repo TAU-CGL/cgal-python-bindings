@@ -6,13 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
-
-#include <CGAL/Triangulation_2.h>
-#include <CGAL/Delaunay_triangulation_2.h>
-#include <CGAL/Constrained_triangulation_2.h>
-#include "CGALPY/python_iterator_templates.hpp"
+#include <CGALPY/triangulation_2_types.hpp>
 
 namespace bp = boost::python;
 
@@ -151,7 +145,6 @@ template <typename T, typename C>
 void export_triangulation(C c)
 {
   using namespace boost::python;
-  //class_<Triangulation_2>("Triangulation");
 
   c.def(init<>())
     .def(init<T&>())
