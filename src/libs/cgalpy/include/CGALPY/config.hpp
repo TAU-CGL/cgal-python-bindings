@@ -9,16 +9,14 @@
 #ifndef CGALPY_CONFIG_HPP
 #define CGALPY_CONFIG_HPP
 
-#include "kernel_config.hpp"
-#include "arrangement_2_config.hpp"
+#include <CGALPY/kernel_config.hpp>
+#include <CGALPY/arrangement_2_config.hpp>
+#include <CGALPY/spatial_searching_config.hpp>
+#include <CGALPY/convex_hull_2_config.hpp>
 
 #define CGAL_HEADER_ONLY 1
 #define BOOST_PYTHON_STATIC_LIB 1
 #define CGAL_DO_NOT_USE_BOOST_MP 1
-
-#ifndef CGALPY_SPATIAL_SEARCHING_DIMENSION
-#define CGALPY_SPATIAL_SEARCHING_DIMENSION 2
-#endif
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 #define CGALPY_KERNEL_SHORT_NAME epec

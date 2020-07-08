@@ -6,11 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
-
-#include <CGAL/minkowski_sum_2.h>
-#include <CGAL/approximated_offset_2.h>
+#include <CGALPY/minkowski_sum_2_types.hpp>
 
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_with_holes_2 General_polygon_with_holes_2;
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2 General_polygon_2;

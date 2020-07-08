@@ -6,13 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
-
-#include <CGAL/partition_2.h>
-#include <CGAL/Polygon_vertical_decomposition_2.h>
-#include <CGAL/Polygon_triangulation_decomposition_2.h>
-#include <CGAL/Small_side_angle_bisector_decomposition_2.h>
+#include <CGALPY/polygon_partitioning_types.hpp>
 
 typedef typename CGAL::Polygon_vertical_decomposition_2<Kernel, Point_2_container> Polygon_vertical_decomposition_2;
 typedef typename CGAL::Polygon_triangulation_decomposition_2<Kernel, Point_2_container> Polygon_triangulation_decomposition_2;

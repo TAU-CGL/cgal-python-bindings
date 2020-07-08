@@ -5,9 +5,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include "CGALPY/config.hpp"
-#ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
-#include "CGALPY/common.hpp"
+#include <CGALPY/kernel_types.hpp>
 
 #include <CGAL/Gps_circle_segment_traits_2.h>
 
@@ -53,4 +51,3 @@ void export_general_polygon_with_holes_2()
     .def(self_ns::repr(self_ns::self))
     ;
 }
-#endif

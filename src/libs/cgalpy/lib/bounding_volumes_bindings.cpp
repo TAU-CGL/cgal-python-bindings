@@ -6,11 +6,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
+#include <CGALPY/bounding_volumes_types.hpp>
 
-#include <CGAL/Min_circle_2.h>
-#include <CGAL/Min_circle_2_traits_2.h>
 typedef typename CGAL::Min_circle_2_traits_2<Kernel>       Min_circle_2_traits_2;
 typedef typename Min_circle_2_traits_2::Circle             Optimisation_circle_2;
 typedef typename CGAL::Min_circle_2<Min_circle_2_traits_2> Min_circle_2;
