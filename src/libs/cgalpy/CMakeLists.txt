@@ -107,10 +107,6 @@ add_library(CGALPY SHARED ${CGALPY_SRC_FILES})
 #   VERSION "${cgalpy_SOVERSION}"
 #   SOVERSION "${cgalpy_SONAME_VERSION}")
 
-if(WIN32)
-  set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
-endif()
-
 target_link_libraries(CGALPY
                       ${Boost_LIBRARIES}
 		      ${PYTHON_LIBRARIES})
@@ -175,6 +171,10 @@ add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
 # don't prepend wrapper library name with lib
 set_target_properties(CGALPY PROPERTIES PREFIX "")
+
+if(WIN32)
+  set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
+endif()
 
 # Documentation
 find_package(Doxygen)
