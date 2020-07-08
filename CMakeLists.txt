@@ -7,6 +7,7 @@ project(cgalpy)
 # General
 set(CGALPY_MODULES_REL_DIR cmake/modules)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/${CGALPY_MODULES_REL_DIR})
+include(CGALPY_Macros)
 
 # Define options
 
