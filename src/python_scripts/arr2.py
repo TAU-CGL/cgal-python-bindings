@@ -3,6 +3,10 @@
 
 import sys
 import importlib
+
+if len(sys.argv) < 2:
+  sys.exit('Library name missing')
+
 mdl = importlib.import_module(sys.argv[1])
 
 # is there an __all__?  if so respect it
