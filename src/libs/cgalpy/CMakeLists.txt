@@ -114,8 +114,8 @@ target_link_libraries(CGALPY
                       ${Boost_LIBRARIES}
 		      ${PYTHON_LIBRARIES})
 
+set(CGALPY_LIB_NAME "CGALPY")
 if (NOT CGALPY_FIXED_LIBRARY_NAME)
-  set(CGALPY_LIB_NAME "CGALPY")
   list (GET CGALPY_KERNEL_SHORT_NAMES ${CGALPY_KERNEL} CGALPY_KERNEL_PART)
   set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${CGALPY_KERNEL_PART}")
   # 3D Alpha shape
@@ -170,6 +170,7 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   endif()
   set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 endif()
+add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
 # don't prepend wrapper library name with lib
 set_target_properties(CGALPY PROPERTIES PREFIX "")
