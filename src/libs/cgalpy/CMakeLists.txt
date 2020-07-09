@@ -87,7 +87,9 @@ endif()
 
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
+if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
+endif()
 
 # Add all include directories
 include_directories(include)
@@ -113,8 +115,8 @@ target_link_libraries(CGALPY
 
 set(CGALPY_LIB_NAME "CGALPY")
 if (NOT CGALPY_FIXED_LIBRARY_NAME)
-  list (GET CGALPY_KERNEL_SHORT_NAMES ${CGALPY_KERNEL} CGALPY_KERNEL_PART)
-  set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${CGALPY_KERNEL_PART}")
+  get_kernel_lib_name(ret)
+  set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   # 3D Alpha shape
   if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
     get_alpha_shape_3_lib_name(ret)
@@ -167,6 +169,9 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   endif()
   set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 endif()
+set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
+reportWithEmphasis(${CGALPY_LIB_NAME} ${CGALPY_LIB_DIR} ${CGALPY_INSTALL_LIB_DIR})
+
 add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
 # don't prepend wrapper library name with lib

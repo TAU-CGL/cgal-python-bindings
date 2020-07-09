@@ -50,7 +50,9 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   using namespace boost::python;
 
   export_kernel();
+#ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
   export_intersections_2();
+#endif
 
 #ifdef CGALPY_ARRANGEMENT_2_BINDINGS
   export_arrangement_2();
@@ -69,6 +71,10 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   export_arr_algebraic_segment_traits();
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR2_GEOMETRY_TRAITS");
+#endif
+
+#ifdef CGALPY_ARR2_POINT_LOCATION_BINDINGS
+  export_point_location();
 #endif
 #endif
 
@@ -106,10 +112,6 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
   export_polygon_partition_2();
-#endif
-
-#ifdef CGALPY_ARR2_POINT_LOCATION_BINDINGS
-  export_point_location();
 #endif
 
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS

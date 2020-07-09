@@ -1,0 +1,6 @@
+cmake \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCGALPY_USE_SHARED_LIBS:BOOL=ON \
+  -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF \
+  -DCGALPY_KERNEL_NAME:STRING="epec" \
+  ${HOME}/trees/cgal-python-bindings
