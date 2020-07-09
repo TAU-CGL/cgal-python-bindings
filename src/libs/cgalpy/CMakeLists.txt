@@ -107,10 +107,6 @@ add_library(CGALPY SHARED ${CGALPY_SRC_FILES})
 #   VERSION "${cgalpy_SOVERSION}"
 #   SOVERSION "${cgalpy_SONAME_VERSION}")
 
-if(WIN32)
-  set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
-endif()
-
 target_link_libraries(CGALPY
                       ${Boost_LIBRARIES}
 		      ${PYTHON_LIBRARIES})
@@ -118,56 +114,56 @@ target_link_libraries(CGALPY
 set(CGALPY_LIB_NAME "CGALPY")
 if (NOT CGALPY_FIXED_LIBRARY_NAME)
   list (GET CGALPY_KERNEL_SHORT_NAMES ${CGALPY_KERNEL} CGALPY_KERNEL_PART)
-  set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${CGALPY_KERNEL_PART}")
+  set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${CGALPY_KERNEL_PART}")
   # 3D Alpha shape
   if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
     get_alpha_shape_3_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D Arrangement
   if (CGALPY_ARRANGEMENT_2_BINDINGS)
     get_arrangement_2_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D Regularized Boolean operations
   if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
     get_boolean_set_operations_2_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # Bounding volumes
   if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
     get_bounding_volumes_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D convex hull
   if (CGALPY_CONVEX_HULL_2_BINDINGS)
     get_convex_hull_2_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D Minkowski sum
   if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
     get_minkowski_sum_2_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D polygon partitioning
   if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
     get_polygon_partitioning_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # Spatial searching
   if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
     get_spatial_searching_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D triangulation
   if (CGALPY_TRIANGULATION_2_BINDINGS)
     get_triangulation_2_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 3D triangulation
   if (CGALPY_TRIANGULATION_3_BINDINGS)
     get_triangulation_3_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}-${ret}")
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 endif()
@@ -175,6 +171,10 @@ add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
 # don't prepend wrapper library name with lib
 set_target_properties(CGALPY PROPERTIES PREFIX "")
+
+if(WIN32)
+  set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
+endif()
 
 # Documentation
 find_package(Doxygen)
