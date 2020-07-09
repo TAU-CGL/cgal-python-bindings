@@ -5,7 +5,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include <CGALPY/kernel_types.hpp>
+#include <CGALPY/polygon_2_types.hpp>
 
 #include <CGAL/Gps_circle_segment_traits_2.h>
 
