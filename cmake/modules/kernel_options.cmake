@@ -40,7 +40,7 @@ function(get_kernel_lib_name ret)
   if(${CGALPY_KERNEL_INTERSECTION_BINDINGS})
     set(part2 "Int")
   endif()
-  set(${ret} "kernel${part1}${part2}" PARENT_SCOPE)
+  set(${ret} "ker${part1}${part2}" PARENT_SCOPE)
 endfunction()
 
 endif()
