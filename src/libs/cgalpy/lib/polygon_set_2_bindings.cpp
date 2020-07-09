@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/kernel_types.hpp>
+#include <CGALPY/polygon_2_types.hpp>
 #include <CGALPY/python_iterator_templates.hpp>
 
 void polygons_with_holes(Polygon_set_2& ps, boost::python::list& lst)
@@ -191,6 +191,7 @@ CGAL::Oriented_side oriented_side(Polygon_set_2& ps, T& other)
 void export_polygon_set_2()
 {
   using namespace boost::python;
+  scope kernel = class_<Polygon_2_scope>("POL2");
   class_<Polygon_set_2>("Polygon_set_2")
     .def(init<>())
     .def(init<const Polygon_2&>())

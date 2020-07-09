@@ -69,7 +69,7 @@ Line_2 transform_line(Aff_transformation_2& t, Line_2& l) { return t.transform(l
 void export_kernel()
 {
   using namespace boost::python;
-
+  scope kernel = class_<Kernel_scope>("KER");
   class_<Gmpz>("Gmpz")
     //.def(init<>())
     .def(init<int>())
@@ -189,17 +189,6 @@ void export_kernel()
     .value("OBTUSE", CGAL::OBTUSE)
     .value("RIGHT", CGAL::RIGHT)
     .value("ACUTE", CGAL::ACUTE)
-    .export_values()
-    ;
-
-  enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
-    .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
-    .value("ARR_LEFT_TO_RIGHT", CGAL::Arr_halfedge_direction::ARR_LEFT_TO_RIGHT)
-    .export_values()
-    ;
-  enum_<CGAL::Arr_curve_end>("Arr_curve_end")
-    .value("ARR_MIN_END", CGAL::Arr_curve_end::ARR_MIN_END)
-    .value("ARR_MAX_END", CGAL::Arr_curve_end::ARR_MAX_END)
     .export_values()
     ;
 
