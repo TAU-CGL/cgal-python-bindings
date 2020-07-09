@@ -10,7 +10,7 @@
 #define CGALPY_MINKOWSKI_SUM_2_TYPES_HPP
 
 #include <CGALPY/minkowski_sum_2_config.hpp>
-#include <CGALPY/kernel_types.hpp>
+#include <CGALPY/polygon_2_types.hpp>
 #include <CGAL/minkowski_sum_2.h>
 #include <CGAL/approximated_offset_2.h>
 

@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/kernel_types.hpp>
+#include <CGALPY/polygon_2_types.hpp>
 #include <CGALPY/python_iterator_templates.hpp>
 
 Point_2& left_vertex(Polygon_2& p) { return *(p.left_vertex()); }
@@ -29,6 +29,7 @@ CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& p)
 void export_polygon_2()
 {
   using namespace boost::python;
+  scope kernel = class_<Polygon_2_scope>("POL2");
   class_<Polygon_2>("Polygon_2")
     .def(init<>())
     .def(init<const Polygon_2&>())

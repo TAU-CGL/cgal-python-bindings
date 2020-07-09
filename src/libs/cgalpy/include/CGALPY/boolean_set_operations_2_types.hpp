@@ -10,7 +10,7 @@
 #define CGALPY_BOOLEAN_SET_OPERATIONS_2_TYPES_HPP
 
 #include <CGALPY/boolean_set_operations_2_config.hpp>
-#include <CGALPY/kernel_types.hpp>
+#include <CGALPY/polygon_2_types.hpp>
 
 #include <CGAL/connect_holes.h>
 #include <CGAL/Boolean_set_operations_2.h>

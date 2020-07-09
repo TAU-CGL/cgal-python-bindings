@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/kernel_types.hpp>
+#include <CGALPY/polygon_2_types.hpp>
 #include <CGALPY/python_iterator_templates.hpp>
 
 Polygon_with_holes_2* init_Polygon_with_holes_2(Polygon_2& p,
@@ -32,6 +32,7 @@ Polygon_2& outer_boundary(Polygon_with_holes_2& p) { return p.outer_boundary(); 
 void export_polygon_with_holes_2()
 {
   using namespace boost::python;
+  scope kernel = class_<Polygon_2_scope>("POL2");
   class_<Polygon_with_holes_2>("Polygon_with_holes_2")
     .def(init<Polygon_2&>())
     .def("__init__", make_constructor(&init_Polygon_with_holes_2))
