@@ -27,12 +27,11 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Circle_2.h>
 #include <CGAL/Triangle_2.h>
-#include <CGAL/Polygon_2.h>
-#include <CGAL/Polygon_with_holes_2.h>
-#include <CGAL/Polygon_set_2.h>
 #include <CGAL/Direction_2.h>
 #include <CGAL/Vector_2.h>
 #include <CGAL/Aff_transformation_2.h>
+
+struct Kernel_scope{};
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
 typedef typename CGAL::Exact_predicates_inexact_constructions_kernel    Kernel;
@@ -68,9 +67,6 @@ typedef typename Kernel::Vector_2                                       Vector_2
 typedef typename Kernel::Circle_2                                       Circle_2;
 typedef typename Kernel::Triangle_2                                     Triangle_2;
 typedef typename std::list<Point_2>                                     Point_2_container;
-typedef typename CGAL::Polygon_2<Kernel, Point_2_container>             Polygon_2;
-typedef typename CGAL::Polygon_with_holes_2<Kernel, Point_2_container>  Polygon_with_holes_2;
-typedef typename CGAL::Polygon_set_2<Kernel, Point_2_container>         Polygon_set_2;
 typedef typename Kernel::Iso_rectangle_2                                Iso_rectangle_2;
 typedef typename CGAL::Aff_transformation_2<Kernel>                     Aff_transformation_2;
 

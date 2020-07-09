@@ -258,6 +258,19 @@ void assign(Arrangement_2& arr, Arrangement_2& input_arr)
 void export_arrangement_2()
 {
   using namespace boost::python;
+  scope kernel = class_<Arrangement_2_scope>("ARR2");
+
+    enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
+    .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
+    .value("ARR_LEFT_TO_RIGHT", CGAL::Arr_halfedge_direction::ARR_LEFT_TO_RIGHT)
+    .export_values()
+    ;
+  enum_<CGAL::Arr_curve_end>("Arr_curve_end")
+    .value("ARR_MIN_END", CGAL::Arr_curve_end::ARR_MIN_END)
+    .value("ARR_MAX_END", CGAL::Arr_curve_end::ARR_MAX_END)
+    .export_values()
+    ;
+    
   class_<Arrangement_2>("Arrangement_2")
     .def(init<>())
     .def(init<Arrangement_2&>())
@@ -292,9 +305,9 @@ void export_arrangement_2()
     .def("clear", &Arrangement_2::clear)
 
     //supported only by some traits
-#if (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_TRAITS) || \
-    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_TRAITS) || \
-    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_TRAITS)
+#if (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_GEOMETRY_TRAITS) || \
+    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
 #endif
@@ -318,9 +331,9 @@ void export_arrangement_2()
   def("zone", &zone<Wal_pl>);
   def("zone", &zone<Trapezoid_pl>);
   //supported only by some traits
-#if (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_TRAITS) || \
-    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_TRAITS) || \
-    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_TRAITS)
+#if (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_GEOMETRY_TRAITS) || \
+    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
   def("zone", &zone<Landmarks_pl>);
   def("do_intersect", &do_intersect<X_monotone_curve_2, Landmarks_pl>);
   def("insert_point", &insert_point<Landmarks_pl>, return_internal_reference<>());
