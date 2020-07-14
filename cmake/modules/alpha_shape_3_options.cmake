@@ -15,7 +15,7 @@ SET(CGALPY_AS3_NAME "plain" CACHE STRING "The 3D Alpha shape construct")
 set_property(CACHE CGALPY_AS3_NAME PROPERTY STRINGS plain fixed)
 
 # 3D comparison tag
-set(CGALPY_AS3_EXACT_COMPARISON true CACHE BOOL "The exact comparison tag")
+set(CGALPY_AS3_EXACT_COMPARISON false CACHE BOOL "The exact comparison tag")
 
 # Verification
 function(verify_alpha_shape_3)

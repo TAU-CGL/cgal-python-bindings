@@ -1,8 +1,27 @@
 #!/usr/bin/python3.7
+# export PYTHONPATH=...
 
-# export PYTHONPATH="/home/efif/build/cgalpy/delaunay_fast_location_release/src/libs/tri3"
+import sys
+import importlib
 
-from tri3_epic import *
+if len(sys.argv) < 2:
+  sys.exit('Library name missing')
+
+mdl = importlib.import_module(sys.argv[1])
+
+# is there an __all__?  if so respect it
+if "__all__" in mdl.__dict__:
+  names = mdl.__dict__["__all__"]
+else:
+  # otherwise we import all names that don't begin with _
+  names = [x for x in mdl.__dict__ if not x.startswith("_")]
+
+# now drag them in
+globals().update({k: getattr(mdl, k) for k in names})
+
+Point_3 = Ker.Point_3
+Alpha_shape_3 = AS3.Alpha_shape_3
+
 p1 = Point_3(1, 0, 0)
 p2 = Point_3(0, 1, 0)
 p3 = Point_3(0, 0, 1)
