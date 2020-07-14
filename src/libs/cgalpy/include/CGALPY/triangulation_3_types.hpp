@@ -77,6 +77,8 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_TRAITS");
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3");
 #endif
 
+namespace tri3 {
+
 // 3D triangulation vertex base
 #if CGALPY_TRI3_VERTEX_BASE == CGALPY_TRI3_VERTEX_BASE_PLAIN
 typedef CGAL::Triangulation_vertex_base_3<Kernel>               Vertex_base;
@@ -170,9 +172,9 @@ typedef CGAL::Triangulation_data_structure_3<Vertex_base, Cell_base, Concurrency
 
 // 3D triangulation traits
 #if CGALPY_TRI3_TRAITS == CGALPY_TRI3_TRAITS_KERNEL
-typedef Kernel                                                     Tri3_traits;
+typedef Kernel                                                     Traits;
 #elif CGALPY_TRI3_TRAITS == CGALPY_TRI3_TRAITS_PERIODIC3_DELAUNAY
-typedef CGAL::Periodic_3_Delaunay_triangulation_traits_3<Kernel>   Tri3_traits;
+typedef CGAL::Periodic_3_Delaunay_triangulation_traits_3<Kernel>   Traits;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_TRAITS");
 #endif
@@ -190,29 +192,31 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_LOCATION_POLICY");
 
 // 3D triangulation
 #if CGALPY_TRI3 == CGALPY_TRI3_PLAIN
-typedef CGAL::Triangulation_3<Tri3_traits, Tds>                           Triangulation_3;
+typedef CGAL::Triangulation_3<Traits, Tds>                           Triangulation_3;
 #elif CGALPY_TRI3 == CGALPY_TRI3_REGULAR
-typedef CGAL::Regular_triangulation_3<Tri3_traits, Tds>                   Triangulation_3;
-typedef Triangulation_3::Weighted_point                                   Tri3_weighted_point;
-typedef Triangulation_3::Bare_point                                       Tri3_bare_point;
+typedef CGAL::Regular_triangulation_3<Traits, Tds>                   Triangulation_3;
+typedef Triangulation_3::Weighted_point                              Weighted_point;
+typedef Triangulation_3::Bare_point                                  Bare_point;
 #elif CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
-typedef CGAL::Delaunay_triangulation_3<Tri3_traits, Tds, Location_policy> Delaunay_triangulation_3;
-typedef Delaunay_triangulation_3                                          Triangulation_3;
+typedef CGAL::Delaunay_triangulation_3<Traits, Tds, Location_policy> Delaunay_triangulation_3;
+typedef Delaunay_triangulation_3                                     Triangulation_3;
 #elif CGALPY_TRI3 == CGALPY_TRI3_PERIODIC3_DELAUNAY
-typedef CGAL::Periodic_3_Delaunay_triangulation_3<Tri3_traits, Tds>       Triangulation_3;
+typedef CGAL::Periodic_3_Delaunay_triangulation_3<Traits, Tds>       Triangulation_3;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3");
 #endif
 
-typedef Triangulation_3::Point          Tri3_point;
-typedef Triangulation_3::Vertex         Tri3_vertex;
-typedef Triangulation_3::Cell           Tri3_cell;
-typedef Triangulation_3::Facet          Tri3_facet;
-typedef Triangulation_3::Edge           Tri3_edge;
+typedef Triangulation_3::Point          Point;
+typedef Triangulation_3::Vertex         Vertex;
+typedef Triangulation_3::Cell           Cell;
+typedef Triangulation_3::Facet          Facet;
+typedef Triangulation_3::Edge           Edge;
 
-typedef Triangulation_3::Vertex_handle  Tri3_vertex_handle;
-typedef Triangulation_3::Cell_handle    Tri3_cell_handle;
+typedef Triangulation_3::Vertex_handle  Vertex_handle;
+typedef Triangulation_3::Cell_handle    Cell_handle;
 
-typedef Triangulation_3::Locate_type    Tri3_locate_type;
+typedef Triangulation_3::Locate_type    Locate_type;
+
+} // End of namespace tri3
 
 #endif
