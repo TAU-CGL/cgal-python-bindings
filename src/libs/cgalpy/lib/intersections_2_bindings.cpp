@@ -263,7 +263,6 @@ void bind_do_intersect()
 void export_intersections_2()
 {
   using namespace boost::python;
-  scope kernel = class_<Kernel_scope>("KER");
 
   def("intersection", &point_iso_rectangle_intersection);
   bind_intersection_result<Point_iso_rectangle_intersection_result>("Point_iso_rectangle_intersection_result")
