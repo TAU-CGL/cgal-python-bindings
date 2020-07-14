@@ -68,6 +68,7 @@ set(CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
 
 select_kernel()
 select_arrangement_2()
+select_polygon_2()
 select_minkowski_sum_2()
 select_triangulation_2()
 select_spatial_searching()
