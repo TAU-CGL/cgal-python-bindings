@@ -1,6 +1,16 @@
 # packages
 
 # Add source files
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
+if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
+endif()
+
+if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_3_bindings.cpp)
+endif()
+
 if (CGALPY_ARRANGEMENT_2_BINDINGS)
   # Geometry Traits
   if(${CGALPY_ARR2_GEOMETRY_TRAITS} EQUAL ${CGALPY_ARR2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
@@ -64,6 +74,11 @@ if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/minkowski_sum_2_bindings.cpp)
 endif()
 
+if (CGALPY_POLYGON_2_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
+endif()
+
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
 endif()
@@ -76,19 +91,8 @@ if (CGALPY_TRIANGULATION_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_2_bindings.cpp)
 endif()
 
-if (CGALPY_POLYGON_2_BINDINGS)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
-endif()
-
-if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_3_bindings.cpp)
-endif()
-
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
-if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
+if (CGALPY_TRIANGULATION_3_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_3_bindings.cpp)
 endif()
 
 # Add all include directories
