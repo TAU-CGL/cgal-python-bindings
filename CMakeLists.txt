@@ -53,7 +53,7 @@ include(triangulation_3_options)
 
 # SONAME, SOVERSION
 #
-# The rule is that each new release or bug fix release should increse the soversion.
+# The rule is that each new release or bug fix release should increase the soversion.
 #
 # SOVERSION is $(SONAME_VERSION).$(SOVERSION_MINOR).$(SOVERSION_RELEASE)
 #
