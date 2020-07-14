@@ -63,7 +63,7 @@ void export_arr_circle_segment_traits()
     .def(self /= self)
     ;
 
-  class_<TPoint_2>("TPoint")
+  class_<TPoint_2>("Point_2")
     .def(init<>())
     .def(init<FT&, FT&>())
     .def(init<CoordNT&, CoordNT&>())

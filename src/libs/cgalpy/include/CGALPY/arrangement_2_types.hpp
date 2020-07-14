@@ -85,7 +85,7 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR2_DCEL");
 typedef typename Arrangement_2::Vertex_iterator                             Vertex_iterator;
 typedef typename Arrangement_2::Vertex_const_handle                         Vertex_const_handle;
 typedef typename Arrangement_2::Isolated_vertex_iterator                    Isolated_vertex_iterator;
-typedef typename Arrangement_2::Vertex                                      ertex;
+typedef typename Arrangement_2::Vertex                                      Vertex;
 typedef typename Arrangement_2::Inner_ccb_iterator                          Inner_ccb_iterator;
 typedef typename Arrangement_2::Ccb_halfedge_circulator                     Ccb_halfedge_circulator;
 typedef typename Arrangement_2::Halfedge_around_vertex_circulator           Halfedge_around_vertex_circulator;
