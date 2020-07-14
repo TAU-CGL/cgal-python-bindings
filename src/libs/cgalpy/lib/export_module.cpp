@@ -9,6 +9,7 @@
 
 #include <CGALPY/config.hpp>
 #include <CGALPY/common.hpp>
+#include <CGALPY/kernel_types.hpp>
 
 void export_kernel();
 void export_arrangement_2();
@@ -43,6 +44,7 @@ void export_bounding_volumes();
 
 void export_kernel();
 void export_triangulation_3();
+
 void export_alpha_shapes_3();
 
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
