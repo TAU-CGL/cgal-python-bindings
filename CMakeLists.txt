@@ -15,6 +15,15 @@ include(CGALPY_Macros)
 option(CGALPY_USE_SHARED_LIBS "Use shared libs versus static libs" ON)
 option(CGALPY_BUILD_SHARED_LIBS "Build shared libs versus static libs" ON)
 option(CGALPY_FIXED_LIBRARY_NAME "The library name is fixed" ON)
+set(default_build_type "Release")
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
+  set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
+          STRING "Choose the type of build." FORCE)
+  # Set the possible values of build type for cmake-gui
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
+          "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
 
 # Binding options. Notice that The default value of option is OFF.
 option(CGALPY_ARRANGEMENT_2_BINDINGS            "Compile bindings for 2D Arrangements")

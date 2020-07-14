@@ -263,6 +263,7 @@ void bind_do_intersect()
 void export_intersections_2()
 {
   using namespace boost::python;
+
   def("intersection", &point_iso_rectangle_intersection);
   bind_intersection_result<Point_iso_rectangle_intersection_result>("Point_iso_rectangle_intersection_result")
     .def("get_point", &get_type<Point_iso_rectangle_intersection_result, Point_2>)
