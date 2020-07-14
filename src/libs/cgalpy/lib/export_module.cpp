@@ -67,6 +67,13 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 #endif
   }
 
+#ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
+  {
+    SET_SCOPE("AS3")
+    export_alpha_shape_3();
+  }
+#endif
+
 #ifdef CGALPY_ARRANGEMENT_2_BINDINGS
   {
     SET_SCOPE("Arr2")
@@ -162,12 +169,5 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
     SET_SCOPE("Tri3")
     export_triangulation_3();
   };
-#endif
-
-#ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
-  {
-    SET_SCOPE("AS3")
-    export_alpha_shape_3();
-  }
 #endif
 }
