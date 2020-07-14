@@ -146,6 +146,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     get_convex_hull_2_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
+  # 2D Polygon
+  if (CGALPY_POLYGON_2_BINDINGS)
+    get_polygon_2_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
   # 2D Minkowski sum
   if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
     get_minkowski_sum_2_lib_name(ret)
