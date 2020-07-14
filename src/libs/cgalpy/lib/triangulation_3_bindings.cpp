@@ -55,8 +55,8 @@ void export_delaunay_triangulation_3()
 
   bool(tri3::Delaunay_triangulation_3::*is_valid1)(bool, int) const =
     &tri3::Delaunay_triangulation_3::is_valid;
-  bool(tri3::Delaunay_triangulation_3::*is_valid2)(tri3::Cell_handle, bool, int) const =
-    &tri3::Delaunay_triangulation_3::is_valid;
+  // bool(tri3::Delaunay_triangulation_3::*is_valid2)(tri3::Cell_handle, bool, int) const =
+  //   &tri3::Delaunay_triangulation_3::is_valid;
 
 #if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
   tri3::Vertex_handle(tri3::Delaunay_triangulation_3::*insert1)(const tri3::Point&, tri3::Cell_handle, bool*) =
@@ -116,7 +116,7 @@ void export_delaunay_triangulation_3()
     .def("nearest_vertex", nearest_vertex)
     .def("nearest_vertex_in_cell", &tri3::Delaunay_triangulation_3::nearest_vertex_in_cell)
     .def("is_valid", is_valid1)
-    .def("is_valid", is_valid2)
+    // .def("is_valid", is_valid2)
     ;
 }
 

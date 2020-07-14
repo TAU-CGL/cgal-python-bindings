@@ -45,7 +45,7 @@ void export_bounding_volumes();
 void export_kernel();
 void export_triangulation_3();
 
-void export_alpha_shapes_3();
+void export_alpha_shape_3();
 
 #define SET_SCOPE(x)  \
 std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME))+std::string(".")+std::string(x); \
