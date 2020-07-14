@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_POLYGON_PARTITIONING_CONFIG_HPP
-#define CGALPY_POLYGON_PARTITIONING_CONFIG_HPP
+#ifndef CGALPY_TRIANGULATION_2_CONFIG_HPP
+#define CGALPY_TRIANGULATION_2_CONFIG_HPP
 
-#endif //CGALPY_POLYGON_PARTITIONING_CONFIG_HPP
+#endif

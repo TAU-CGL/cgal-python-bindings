@@ -1,5 +1,5 @@
 #!/usr/bin/python3.7
-# export PYTHONPATH=/home/efif/build/cgalpy/release/{fixed/}arr2/src/libs/cgalpy
+# export PYTHONPATH=...
 
 import sys
 import importlib

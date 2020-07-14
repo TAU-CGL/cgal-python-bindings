@@ -9,4 +9,7 @@
 #ifndef CGALPY_ALPHA_SHAPE_3_CONFIG_HPP
 #define CGALPY_ALPHA_SHAPE_3_CONFIG_HPP
 
+#define CGALPY_AS3_PLAIN                                0
+#define CGALPY_AS3_FIXED                                1
+
 #endif //CGALPY_ALPHA_SHAPE_3_CONFIG_HPP
