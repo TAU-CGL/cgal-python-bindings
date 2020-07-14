@@ -36,9 +36,6 @@ SET(CGALPY_ARR2_DCEL_NAME "plain" CACHE STRING "The DCEL to use")
 set(CGALPY_ARR2_DCEL ${CGALPY_ARR2_PLAIN_DCEL} CACHE INTERNAL "")
 set_property(CACHE CGALPY_ARR2_DCEL_NAME PROPERTY STRINGS plain faceExtended halfedgeExtended vertexExtended allExtended)
 
-# Point location
-option(CGALPY_ARR2_POINT_LOCATION_BINDINGS "Compile bindings for point location" ON)
-
 # Selection
 function(select_arr_2_geometry_traits)
   if     ("${CGALPY_ARR2_GEOMETRY_TRAITS_NAME}" STREQUAL "linear")

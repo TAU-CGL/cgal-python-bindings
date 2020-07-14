@@ -38,6 +38,9 @@ option(CGALPY_MINKOWSKI_SUM_2_BINDINGS          "Compile bindings for 2D Minkows
 option(CGALPY_SPATIAL_SEARCHING_BINDINGS        "Compile bindings for spatial searching")
 option(CGALPY_TRIANGULATION_2_BINDINGS          "Compile bindings for 2D triangulations")
 option(CGALPY_TRIANGULATION_3_BINDINGS          "Compile bindings for 3D triangulations")
+option(CGALPY_ARR2_POINT_LOCATION_BINDINGS      "Compile bindings for point location")
+option(CGALPY_KERNEL_INTERSECTION_BINDINGS      "Compile bindings for intersections")
+
 
 include(alpha_shape_3_options)
 include(arrangement_2_options)
