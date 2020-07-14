@@ -47,6 +47,12 @@ void export_triangulation_3();
 
 void export_alpha_shapes_3();
 
+#define SET_SCOPE(x)  \
+std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME))+std::string(".")+std::string(x); \
+bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str())))); \
+bp::scope().attr(x) = module; \
+bp::scope module_scope = module;
+
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 {
   namespace bp = boost::python;
@@ -54,10 +60,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   bp::object package = bp::scope();
   package.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME))+std::string(".Ker");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("Ker") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("Ker")
     export_kernel();
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
     export_intersections_2();
@@ -66,10 +69,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 
 #ifdef CGALPY_ARRANGEMENT_2_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".Arr2");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("Arr2") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("Arr2")
     export_arrangement_2();
     export_object();
     export_vertex();
@@ -96,10 +96,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 
 #ifdef CGALPY_POLYGON_2_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".Pol2");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("Pol2") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("Pol2")
     export_polygon_2();
     export_polygon_with_holes_2();
     export_general_polygon_2();
@@ -109,20 +106,14 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 
 #ifdef CGALPY_CONVEX_HULL_2_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".CH2");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("CH2") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("CH2")
     export_convex_hull_2_bindings();
   };
 #endif
 
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".Tri2");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("Tri2") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("Tri2")
     export_triangulations();
   };
 
@@ -130,20 +121,14 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 
 #ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".SS");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("SS") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("SS")
     export_spatial_searching();
   };
 #endif
 
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".BV");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("BV2") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("BV")
     export_bounding_volumes();
   };
 
@@ -151,10 +136,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".BSO2");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("BSO2") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("BSO2")
     export_polygon_set_2();
     export_general_polygon_set_2();
     export_boolean_set_operations_2();
@@ -163,40 +145,28 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
 
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".PP2");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("PP2") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("PP2")
     export_polygon_partition_2();
   };
 #endif
 
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".MN2");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("MN2") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("MN2")
     export_minkowski_sum_2();
   };
 #endif
 
 #ifdef CGALPY_TRIANGULATION_3_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".Tri3");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("Tri3") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("Tri3")
     export_triangulation_3();
   };
 #endif
 
 #ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
   {
-    std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME)) + std::string(".AS3");
-    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str()))));
-    bp::scope().attr("AS3") = module;
-    bp::scope module_scope = module;
+    SET_SCOPE("AS3")
     export_alpha_shape_3();
   }
 #endif
