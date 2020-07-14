@@ -14,9 +14,6 @@
 #include <CGALPY/spatial_searching_config.hpp>
 #include <CGALPY/convex_hull_2_config.hpp>
 
-#define CGAL_HEADER_ONLY 1
-#define BOOST_PYTHON_STATIC_LIB 1
-#define CGAL_DO_NOT_USE_BOOST_MP 1
 #define STR(s) #s
 #define XSTR(s) STR(s)
 
