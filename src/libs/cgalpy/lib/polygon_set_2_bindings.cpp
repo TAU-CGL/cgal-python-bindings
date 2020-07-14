@@ -191,7 +191,6 @@ CGAL::Oriented_side oriented_side(Polygon_set_2& ps, T& other)
 void export_polygon_set_2()
 {
   using namespace boost::python;
-  scope kernel = class_<Polygon_2_scope>("POL2");
   class_<Polygon_set_2>("Polygon_set_2")
     .def(init<>())
     .def(init<const Polygon_2&>())

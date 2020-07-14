@@ -38,8 +38,6 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR2_GEOMETRY_TRAITS");
 #include <CGAL/Arr_extended_dcel.h>
 #endif
 
-struct Arrangement_2_scope{};
-
 #if CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_segment_traits_2<Kernel>                         Traits;
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS

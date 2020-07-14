@@ -258,7 +258,6 @@ void assign(Arrangement_2& arr, Arrangement_2& input_arr)
 void export_arrangement_2()
 {
   using namespace boost::python;
-  scope kernel = class_<Arrangement_2_scope>("ARR2");
 
     enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
