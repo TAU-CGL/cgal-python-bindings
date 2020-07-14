@@ -14,9 +14,6 @@ SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
 set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC} CACHE INTERNAL "")
 set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epec epic)
 
-# Intersections
-option(CGALPY_KERNEL_INTERSECTION_BINDINGS "Compile bindings for intersections" ON)
-
 # Selection
 function(select_kernel_intersection)
   if(${CGALPY_KERNEL_INTERSECTION_BINDINGS})
