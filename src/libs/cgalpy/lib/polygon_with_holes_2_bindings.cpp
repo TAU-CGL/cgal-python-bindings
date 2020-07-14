@@ -32,7 +32,6 @@ Polygon_2& outer_boundary(Polygon_with_holes_2& p) { return p.outer_boundary(); 
 void export_polygon_with_holes_2()
 {
   using namespace boost::python;
-  scope kernel = class_<Polygon_2_scope>("POL2");
   class_<Polygon_with_holes_2>("Polygon_with_holes_2")
     .def(init<Polygon_2&>())
     .def("__init__", make_constructor(&init_Polygon_with_holes_2))

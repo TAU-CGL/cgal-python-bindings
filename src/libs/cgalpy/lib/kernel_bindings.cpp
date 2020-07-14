@@ -69,7 +69,6 @@ Line_2 transform_line(Aff_transformation_2& t, Line_2& l) { return t.transform(l
 void export_kernel()
 {
   using namespace boost::python;
-  scope kernel = class_<Kernel_scope>("KER");
   class_<Gmpz>("Gmpz")
     //.def(init<>())
     .def(init<int>())
