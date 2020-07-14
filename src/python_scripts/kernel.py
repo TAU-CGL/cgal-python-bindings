@@ -19,9 +19,12 @@ else:
 # now drag them in
 globals().update({k: getattr(mdl, k) for k in names})
 
+Point_2 = KER.Point_2
+Segment_2 = KER.Segment_2
+
 s1 = Segment_2(Point_2(0, 1), Point_2(1,0))
 s2 = Segment_2(Point_2(0, 0), Point_2(1,1))
-ix = intersection(s1, s2)
+ix = KER.intersection(s1, s2)
 if not ix.is_point():
   sys.exit('Wrong intersection')
 p = Point_2()

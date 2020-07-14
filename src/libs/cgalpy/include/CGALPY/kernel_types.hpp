@@ -31,8 +31,6 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #include <CGAL/Vector_2.h>
 #include <CGAL/Aff_transformation_2.h>
 
-struct Kernel_scope{};
-
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
 typedef typename CGAL::Exact_predicates_inexact_constructions_kernel    Kernel;
 typedef typename bp::return_value_policy<bp::copy_const_reference>      Kernel_return_value_policy;
