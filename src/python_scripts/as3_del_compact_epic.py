@@ -21,17 +21,18 @@ globals().update({k: getattr(mdl, k) for k in names})
 
 Point_3 = Ker.Point_3
 Alpha_shape_3 = AS3.Alpha_shape_3
+Mode = AS3.Mode
 
-p1 = Point_3(1, 0, 0)
-p2 = Point_3(0, 1, 0)
-p3 = Point_3(0, 0, 1)
-alphaShape  = Alpha_shape_3([p1, p2, p3])
-# alphaShape.make_alpha_shape([p1, p2, p3])
+p1 = Point_3(492, 291, 677)
+p2 = Point_3(493, 314, 533)
+p3 = Point_3(494, 326, 462)
+p4 = Point_3(493, 303, 605)
+alphaShape  = Alpha_shape_3([p1, p2, p3, p4])
 
 print("Alpha shape computed in REGULARIZED mode by default")
 # find optimal alpha value
 optHandle = alphaShape.find_optimal_alpha(1);
-print(optHandle)
+# print(optHandle)
 # optIter = optHandle.__iter__();
 optAlpha = next(optHandle)
 print("Optimal alpha value to get one connected component is ", optAlpha)

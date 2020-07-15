@@ -55,11 +55,8 @@ endfunction()
 
 function(select_alpha_shape_3_comparison)
   if(${CGALPY_AS3_EXACT_COMPARISON})
-    set(CGALPY_AS3_EXACT_COMPARISON 1)
-  else()
-    set(CGALPY_AS3_EXACT_COMPARISON 0)
+    add_definitions(-DCGALPY_AS3_EXACT_COMPARISON)
   endif()
-  add_definitions(-DCGALPY_AS3_EXACT_COMPARISON=${CGALPY_AS3_EXACT_COMPARISON})
 endfunction()
 
 # Selection
