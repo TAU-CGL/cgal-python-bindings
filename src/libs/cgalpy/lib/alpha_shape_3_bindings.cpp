@@ -44,8 +44,24 @@ as3::Alpha_shape_3* as_init2(boost::python::list& lst, const as3::NT& alpha)
   return new as3::Alpha_shape_3(begin, end, alpha);
 }
 
+as3::Alpha_shape_3* as_init3(boost::python::list& lst, double alpha)
+{
+  auto begin = boost::python::stl_input_iterator<as3::Point>(lst);
+  auto end = boost::python::stl_input_iterator<as3::Point>();
+  return new as3::Alpha_shape_3(begin, end, alpha);
+}
+
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-as3::Alpha_shape_3* as_init3(boost::python::list& lst, const as3::NT& alpha, as3::Mode m)
+as3::Alpha_shape_3* as_init4(boost::python::list& lst,
+                             const as3::NT& alpha, as3::Mode m)
+{
+  auto begin = boost::python::stl_input_iterator<as3::Point>(lst);
+  auto end = boost::python::stl_input_iterator<as3::Point>();
+  return new as3::Alpha_shape_3(begin, end, alpha, m);
+}
+
+as3::Alpha_shape_3* as_init5(boost::python::list& lst,
+                             double alpha, as3::Mode m)
 {
   auto begin = boost::python::stl_input_iterator<as3::Point>(lst);
   auto end = boost::python::stl_input_iterator<as3::Point>();
@@ -217,6 +233,18 @@ boost::python::list alpha_shape_vertices(const as3::Alpha_shape_3& as,
   return lst;
 }
 
+#ifdef CGALPY_AS3_EXACT_COMPARISON
+
+const typename as3::NT::Exact_nt& NT_exact(const as3::NT& ft)
+{ return ft.exact(); }
+
+const typename as3::NT::Approximate_nt& NT_approx(const as3::NT& ft)
+{ return ft.approx(); }
+
+double NT_to_double(as3::NT& ft) { return CGAL::to_double(ft); }
+
+#endif
+
 void export_alpha_shape_3()
 {
   using namespace boost::python;
@@ -280,6 +308,36 @@ void export_alpha_shape_3()
 
 #endif
 
+#ifdef CGALPY_AS3_EXACT_COMPARISON
+  // By default (last time I checked) this is mapped to:
+  // CGAL::internal::Lazy_alpha_nt_3<CGAL::Epick, true, CGAL::Boolean_tag<false>>
+  class_<as3::NT>("NT")
+    .def(init<double>())
+    // .def(init<as3::NT::NT_exact>())
+    .def(init<as3::NT>())
+    .def("exact", &NT_exact, return_internal_reference<>())
+    .def("approx", &NT_approx, return_internal_reference<>())
+    .def("to_double", &NT_to_double)
+    .def(self_ns::str(self_ns::self))
+    .def(self_ns::repr(self_ns::self))
+    .def(self == self)
+    .def(self != self)
+    .def(self < self)
+    .def(self > self)
+    .def(self <= self)
+    .def(self >= self)
+    // .def(self + self)
+    // .def(self += self)
+    // .def(self - self)
+    // .def(self -= self)
+    // .def(self * self)
+    // .def(self *= self)
+    // .def(self / self)
+    // .def(self /= self)
+    // .def(-self)
+    ;
+#endif
+
   class_<as3::Alpha_shape_3, boost::noncopyable>("Alpha_shape_3")
     .def(init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
@@ -290,8 +348,10 @@ void export_alpha_shape_3()
 #endif
     .def("__init__", make_constructor(&as_init1))
     .def("__init__", make_constructor(&as_init2))
-#if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def("__init__", make_constructor(&as_init3))
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
+    .def("__init__", make_constructor(&as_init4))
+    .def("__init__", make_constructor(&as_init5))
 #endif
     // Modifiers
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
