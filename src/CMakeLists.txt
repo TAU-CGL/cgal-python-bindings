@@ -13,7 +13,7 @@ if(CGALPY_USE_SHARED_LIBS)
   set(Boost_USE_STATIC_LIBS OFF)
 else()
   set(Boost_USE_STATIC_LIBS ON)
-  set(BOOST_PYTHON_STATIC_LIB 1)
+  add_definitions(-DBOOST_PYTHON_STATIC_LIB)
 endif()
 set(CGALPY_BOOST_LIBRARIES)
 
