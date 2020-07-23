@@ -71,9 +71,8 @@ void export_kernel()
   using namespace boost::python;
 
   class_<Gmpz>("Gmpz")
-    //.def(init<>())
     .def(init<int>())
-    //.def(init<Gmpz&>())
+    .def(init<Gmpz&>())
     .def("to_double", &Gmpz::to_double)
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
@@ -94,11 +93,10 @@ void export_kernel()
     ;
 
   class_<Gmpq>("Gmpq")
-    //.def(init<>())
     .def(init<Gmpz, Gmpz>())
     .def(init<unsigned long, unsigned long>())
     .def(init<const std::string&>())
-    //.def(init<Gmpq&>())
+    .def(init<Gmpq&>())
     .def(init<double>())
     .def("to_double", &Gmpq::to_double)
     .def("numerator", &Gmpq::numerator)
@@ -610,6 +608,8 @@ void export_kernel()
   def<Point_2(const Point_2&, const FT&, const Point_2&, const FT&, const Point_2&, const FT&, const Point_2&, const FT&)>("barycenter", &CGAL::barycenter);
 
   def<Line_2(const Point_2&, const Point_2&)>("bisector", &CGAL::bisector);
+
+  // Requires sqrt operation
   //def<Line_2(const Line_2&, const Line_2&)>("bisector", &CGAL::bisector);
 
   def<Point_2(const Point_2&, const Point_2&, const Point_2&)>("centroid", &CGAL::centroid);
@@ -677,7 +677,7 @@ void export_kernel()
   def<bool(const Line_2&, const Point_2&, const Point_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line);
   def<bool(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line);
 
-  //l_infinity_distance() ?
+  def<FT(const Point_2&, const Point_2&)>("l_infinity_distance", &CGAL::l_infinity_distance);
 
   def<bool(const Point_2&, const Point_2&, const Point_2&)>("left_turn", &CGAL::left_turn);
 
@@ -708,7 +708,6 @@ void export_kernel()
 
   def<bool(const Point_2&, const Point_2&, const Point_2&)>("right_turn", &CGAL::right_turn);
 
-
   def<FT(const Vector_2&, const Vector_2&)>("scalar_product", &CGAL::scalar_product);
 
   def<CGAL::Bounded_side(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("side_of_bounded_circle", &CGAL::side_of_bounded_circle);
@@ -727,6 +726,4 @@ void export_kernel()
   def<bool(const Point_2&, const Point_2&)>("y_equal", &CGAL::y_equal);
 
   def<bool(const Bbox_2&, const Bbox_2&)>("do_overlap", &CGAL::do_overlap);
-
-
 }
