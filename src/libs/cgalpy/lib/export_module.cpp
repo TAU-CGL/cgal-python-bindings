@@ -23,6 +23,7 @@ void export_face();
 void export_arr_linear_traits();
 void export_arr_segment_traits();
 void export_arr_circle_segment_traits();
+void export_arr_conic_traits();
 void export_arr_algebraic_segment_traits();
 
 void export_polygon_2();
@@ -89,6 +90,8 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
     export_arr_segment_traits();
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
     export_arr_circle_segment_traits();
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CONIC_GEOMETRY_TRAITS
+    export_arr_conic_traits();
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
     export_arr_algebraic_segment_traits();
 #else
