@@ -23,6 +23,8 @@
 #include <CGAL/Arr_circle_segment_traits_2.h>
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CONIC_GEOMETRY_TRAITS
 #include <CGAL/Arr_conic_traits_2.h>
+#include <CGAL/Cartesian.h>
+#include <CGAL/CORE_algebraic_number_traits.h>
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 #include <CGAL/Arr_algebraic_segment_traits_2.h>
 #include <CGAL/Polynomial.h>
@@ -46,6 +48,11 @@ typedef typename CGAL::Arr_non_caching_segment_traits_2<Kernel>             Trai
 typedef typename CGAL::Arr_linear_traits_2<Kernel>                          Traits;
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>                  Traits;
+#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CONIC_GEOMETRY_TRAITS
+typedef typename CGAL::CORE_algebraic_number_traits                         NtTraits;
+typedef typename CGAL::Cartesian <NtTraits::Rational>                       RatKernel;
+typedef typename CGAL::Cartesian <NtTraits::Algebraic>                      AlgKernel;
+typedef typename CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>    Traits;
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 typedef typename BigInt                                                     Integer;
 typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>              Traits;

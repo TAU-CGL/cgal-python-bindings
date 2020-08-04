@@ -17,15 +17,15 @@ typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>   Trapezo
 typedef typename CGAL::Arr_point_location_result<Arrangement_2>::Type    Pl_result;
 typedef typename std::pair<Point_2, Pl_result>                           Pl_query_result;
 
-static void locate(Arrangement_2& arr, boost::python::list& lst, boost::python::list& res)
-{
-  auto v = std::vector< Point_2 >(boost::python::stl_input_iterator< Point_2 >(lst),
-    boost::python::stl_input_iterator< Point_2 >());
-  std::vector<Pl_query_result> temp;
-  locate(arr, v.begin(), v.end(), std::back_inserter(temp));
-  for (auto& p : temp)
-    res.append(bp::make_tuple(p.first, p.second));
-}
+//static void locate(Arrangement_2& arr, boost::python::list& lst, boost::python::list& res)
+//{
+//  auto v = std::vector< Point_2 >(boost::python::stl_input_iterator< Point_2 >(lst),
+//    boost::python::stl_input_iterator< Point_2 >());
+//  std::vector<Pl_query_result> temp;
+//  locate(arr, v.begin(), v.end(), std::back_inserter(temp));
+//  for (auto& p : temp)
+//    res.append(bp::make_tuple(p.first, p.second));
+//}
 
 template <typename type>
 bool is_type(Pl_result& pl_result)
