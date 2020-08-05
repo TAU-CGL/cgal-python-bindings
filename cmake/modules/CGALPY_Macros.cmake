@@ -190,7 +190,7 @@ if(NOT CGALPY_MACROS_FILE_INCLUDED)
     # Get the rest of the macro name.
     string(LENGTH ${str} length)
     # Substract one from the length.
-    execute_process(COMMAND expr ${length} - 1 OUTPUT_VARIABLE length)
+    math(EXPR length "${length} - 1")
     string(SUBSTRING ${str} 1 ${length} rest)
     # Compose macro-name with first letter uppercase.
     set(${param} "${first-letter}${rest}" PARENT_SCOPE)
