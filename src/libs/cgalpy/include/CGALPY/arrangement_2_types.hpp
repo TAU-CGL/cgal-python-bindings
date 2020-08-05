@@ -54,7 +54,7 @@ typedef typename CGAL::Cartesian <NtTraits::Rational>                       RatK
 typedef typename CGAL::Cartesian <NtTraits::Algebraic>                      AlgKernel;
 typedef typename CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>    Traits;
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-typedef typename BigInt                                                     Integer;
+typedef typename CORE::BigInt                                               Integer;
 typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>              Traits;
 typedef typename Traits::Construct_curve_2                                  Construct_curve_2;
 typedef typename Traits::Construct_point_2                                  Construct_point_2;
