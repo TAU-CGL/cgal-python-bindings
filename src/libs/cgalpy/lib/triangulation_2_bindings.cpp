@@ -141,6 +141,24 @@ void remove(T& t, TVertex& v)
   t.remove(v.handle());
 }
 
+template<typename T>
+TFace& infinite_face(T& t)
+{
+  return *(t.infinite_face());
+}
+
+template<typename T>
+TVertex& infinite_vertex(T& t)
+{
+  return *(t.infinite_vertex());
+}
+
+template<typename T>
+TVertex& finite_vertex(T& t)
+{
+  return *(t.finite_vertex());
+}
+
 template <typename T, typename C>
 void export_triangulation(C c)
 {
@@ -151,7 +169,9 @@ void export_triangulation(C c)
     .def("dimension", &T::dimension)
     .def("number_of_vertices", &T::number_of_vertices)
     .def("number_of_faces", &T::number_of_faces)
-    //infinite face, vertex, finite vertex
+    .def("infinite_face", &infinite_face<T>, return_internal_reference<>())
+    .def("infinite_vertex", &infinite_vertex<T>, return_internal_reference<>())
+    .def("finite_vertex", &finite_vertex<T>, return_internal_reference<>())
     .def("clear", &T::clear)
     .def("insert", &insert_list<T>)
     .def("insert", &insert_point<T>, return_internal_reference<>())
@@ -191,15 +211,15 @@ void export_triangulations()
   export_triangulation<Triangulation_2>(c0);
   export_triangulation<Delaunay_triangulation_2>(c1);
 
-  class_<TVertex>("Triangulation_vertex")
+  class_<TVertex>("Vertex")
     .def<Point_2& (TVertex::*) ()>("point", &TVertex::point, return_internal_reference<>())
     ;
 
-  class_<TEdge>("Triangulation_edge")
+  class_<TEdge>("Edge")
     .def_readwrite("first", &TEdge::first)
     .def_readwrite("second", &TEdge::second)
     ;
-  class_<TFace>("Triangulation_face")
+  class_<TFace>("Face")
     .def("is_valid", &TFace::is_valid)
     ;
 
