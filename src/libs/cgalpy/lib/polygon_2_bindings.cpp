@@ -9,10 +9,10 @@
 #include <CGALPY/polygon_2_types.hpp>
 #include <CGALPY/python_iterator_templates.hpp>
 
-Point_2& left_vertex(Polygon_2& p) { return *(p.left_vertex()); }
-Point_2& right_vertex(Polygon_2& p) { return *(p.right_vertex()); }
-Point_2& top_vertex(Polygon_2& p) { return *(p.top_vertex()); }
-Point_2& bottom_vertex(Polygon_2& p) { return *(p.bottom_vertex()); }
+Point_2& left_vertex(Polygon_2& P) { return *(P.left_vertex()); }
+Point_2& right_vertex(Polygon_2& P) { return *(P.right_vertex()); }
+Point_2& top_vertex(Polygon_2& P) { return *(P.top_vertex()); }
+Point_2& bottom_vertex(Polygon_2& P) { return *(P.bottom_vertex()); }
 
 static Polygon_2* init_from_list(boost::python::list& lst)
 {
@@ -21,9 +21,9 @@ static Polygon_2* init_from_list(boost::python::list& lst)
   return new Polygon_2(begin, end);
 }
 
-CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& p)
+CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P)
 {
-  return new CopyIterator<Polygon_2::Edge_const_iterator>(p.edges_begin(), p.edges_end());
+  return new CopyIterator<Polygon_2::Edge_const_iterator>(P.edges_begin(), P.edges_end());
 }
 
 void export_polygon_2()
