@@ -234,7 +234,7 @@ void export_arr_algebraic_segment_traits()
   bind_swap<PT_1>("PT_1_Swap");
   bind_swap<PT_2>("PT_2_Swap");
 
-  class_<TPoint_2>("TPoint_2")
+  class_<TPoint_2>("Point_2")
     .def(init<TPoint_2&>())
     .def("curve", &TPoint_2::curve)
     .def("arcno", &TPoint_2::arcno)
