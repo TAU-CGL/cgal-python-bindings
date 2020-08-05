@@ -133,8 +133,8 @@ bp::class_<typename PT::Type> bind_polynomial(const char* name)
 template<typename PT>
 bp::class_<typename PT::Shift> bind_shift(const char* name)
 {
-  return class_<typename PT::Shift>(name)
-    .def(init<>())
+  return bp::class_<typename PT::Shift>(name)
+    .def(bp::init<>())
     .def("__call__", &PT::Shift::operator())
     ;
 }
@@ -142,8 +142,8 @@ bp::class_<typename PT::Shift> bind_shift(const char* name)
 template<typename PT>
 bp::class_<typename PT::Swap> bind_swap(const char* name)
 {
-  return class_<typename PT::Swap>(name)
-    .def(init<>())
+  return bp::class_<typename PT::Swap>(name)
+    .def(bp::init<>())
     .def("__call__", &PT::Swap::operator())
     ;
 }
