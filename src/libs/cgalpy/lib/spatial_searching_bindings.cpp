@@ -29,13 +29,14 @@ int get_spatial_searching_dimension()
   return CGALPY_SPATIAL_SEARCHING_DIMENSION;
 }
 
-template<typename T>
-size_t hash(T& immutable)
+size_t hash_point_d(Point_d& p)
 {
-  std::ostringstream stream;
-  stream << immutable;
-  std::string s = stream.str();
-  return boost::hash<std::string>()(s);
+  size_t seed = 0;
+  for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c)
+  {
+    boost::hash_combine(seed, CGAL::to_double(*c));
+  }
+  return seed;
 }
 
 static Point_d* init_point_d(int d, bp::list& lst)
@@ -43,6 +44,16 @@ static Point_d* init_point_d(int d, bp::list& lst)
   auto begin = boost::python::stl_input_iterator<FT>(lst);
   auto end = boost::python::stl_input_iterator<FT>();
   return new Point_d(d, begin, end);
+}
+
+static const FT* point_d_cartesian_begin(Point_d& p)
+{
+  return p.cartesian_begin();
+}
+
+static const FT* point_d_cartesian_end(Point_d& p)
+{
+  return p.cartesian_end();
 }
 
 template <typename T>
@@ -130,11 +141,17 @@ void export_spatial_searching()
     .def("dimension", &Point_d::dimension)
     .def("cartesian", &Point_d::cartesian)
     .def("__getitem__", &Point_d::operator[])
+    .def("coordinates", range<return_internal_reference<>>(&point_d_cartesian_begin, &point_d_cartesian_end))
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
-    .def("__hash__", &hash<Point_d>)
+    .def(self > self)
+    .def(self < self)
+    .def(self <= self)
+    .def(self >= self)
+    .def(self - self)
+    .def("__hash__", &hash_point_d)
     ;
 
   class_<Fuzzy_iso_box>("Fuzzy_iso_box")
