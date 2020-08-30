@@ -12,13 +12,12 @@ Kernel::Equal_2 kernel_equal_2(Kernel& k)
   return (Kernel::Equal_2)(k.equal_2_object());
 }
 
-template<typename T>
-size_t hash(T& immutable)
+size_t hash_point_2(Point_2& p)
 {
-  std::ostringstream stream;
-  stream << immutable;
-  std::string s = stream.str();
-  return boost::hash<std::string>()(s);
+  size_t seed = 0;
+  boost::hash_combine(seed, CGAL::to_double(p.x()));
+  boost::hash_combine(seed, CGAL::to_double(p.y()));
+  return seed;
 }
 
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
@@ -263,7 +262,7 @@ void export_Kernel()
     .def(self -= Vector_2())
     .def(self + Vector_2())
     .def(self - Vector_2())
-    .setattr("__hash__", &hash<Point_2>)
+    .setattr("__hash__", &hash_point_2)
     ;
 
   class_<Point_3>("Point_3")
@@ -288,7 +287,7 @@ void export_Kernel()
     .def(self <= self)
     .def(self >= self)
     .def(self - self)
-    .setattr("__hash__", &hash<Point_3>)
+    //.setattr("__hash__", &hash<Point_3>)
     ;
 
   class_<Segment_2>("Segment_2")
@@ -308,7 +307,7 @@ void export_Kernel()
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
-    .setattr("__hash__", &hash<Segment_2>)
+    //.setattr("__hash__", &hash<Segment_2>)
     ;
 
   class_<Line_2>("Line_2")
@@ -340,7 +339,7 @@ void export_Kernel()
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
-    .setattr("__hash__", &hash<Line_2>)
+    //.setattr("__hash__", &hash<Line_2>)
     ;
 
   class_<Ray_2>("Ray_2")
@@ -364,7 +363,7 @@ void export_Kernel()
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
-    .setattr("__hash__", &hash<Ray_2>)
+    //.setattr("__hash__", &hash<Ray_2>)
     ;
 
   class_<Triangle_2>("Triangle_2")
@@ -388,7 +387,7 @@ void export_Kernel()
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
-    .setattr("__hash__", &hash<Triangle_2>)
+    //.setattr("__hash__", &hash<Triangle_2>)
     ;
 
   class_<Iso_rectangle_2>("Iso_rectangle_2")
@@ -417,7 +416,7 @@ void export_Kernel()
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
-    .setattr("__hash__", &hash<Iso_rectangle_2>)
+    //.setattr("__hash__", &hash<Iso_rectangle_2>)
     ;
 
   class_<Circle_2>("Circle_2")
@@ -443,7 +442,7 @@ void export_Kernel()
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
-    .setattr("__hash__", &hash<Circle_2>)
+    //.setattr("__hash__", &hash<Circle_2>)
     ;
 
   class_<Direction_2>("Direction_2")
@@ -469,7 +468,7 @@ void export_Kernel()
     .def(self <= self)
     .def(self >= self)
     .def(-self)
-    .setattr("__hash__", &hash<Direction_2>)
+    //.setattr("__hash__", &hash<Direction_2>)
     ;
 
   class_<Vector_2>("Vector_2")
@@ -515,7 +514,7 @@ void export_Kernel()
     .def(self/FT())
     //.def(self/=RT())
     .def(self /= FT())
-    .setattr("__hash__", &hash<Vector_2>)
+    //.setattr("__hash__", &hash<Vector_2>)
     ;
 
   class_<Bbox_2>("Bbox_2")
