@@ -46,7 +46,7 @@ size_t hash_point_d(Point_d& p)
   size_t seed = 0;
   for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c)
   {
-    boost::hash_combine(seed, CGAL::to_double(*c));
+    boost::hash_combine(seed, CGAL::to_double((*c).exact()));
   }
   return seed;
 }

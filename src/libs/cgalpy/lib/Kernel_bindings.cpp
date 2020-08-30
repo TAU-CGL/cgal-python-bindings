@@ -15,8 +15,8 @@ Kernel::Equal_2 kernel_equal_2(Kernel& k)
 size_t hash_point_2(Point_2& p)
 {
   size_t seed = 0;
-  boost::hash_combine(seed, CGAL::to_double(p.x()));
-  boost::hash_combine(seed, CGAL::to_double(p.y()));
+  boost::hash_combine(seed, CGAL::to_double(p.x().exact()));
+  boost::hash_combine(seed, CGAL::to_double(p.y().exact()));
   return seed;
 }
 
@@ -536,7 +536,7 @@ void export_Kernel()
     .def(self + self)
     ;
 
-  class_<Aff_Transformation_2>("Aff_Transformation_2")
+  class_<Aff_Transformation_2>("Aff_transformation_2")
     .def(init<>())
     .def(init<RT&, RT&, RT&, RT&, RT&>())
     .def(init<RT, RT, RT, RT>())
