@@ -25,8 +25,8 @@ Kernel::Equal_2 kernel_equal_2(Kernel& k)
 size_t hash_point_2(Point_2& p)
 {
   size_t seed = 0;
-  boost::hash_combine(seed, CGAL::to_double(p.x()));
-  boost::hash_combine(seed, CGAL::to_double(p.y()));
+  boost::hash_combine(seed, CGAL::to_double(p.x().exact()));
+  boost::hash_combine(seed, CGAL::to_double(p.y().exact()));
   return seed;
 }
 
