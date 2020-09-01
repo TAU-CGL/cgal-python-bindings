@@ -14,9 +14,15 @@ Kernel::Equal_2 kernel_equal_2(Kernel& k)
 
 size_t hash_point_2(Point_2& p)
 {
+  auto simplify = CGAL::Algebraic_structure_traits<Gmpq>::Simplify();
   size_t seed = 0;
-  boost::hash_combine(seed, CGAL::to_double(p.x().exact()));
-  boost::hash_combine(seed, CGAL::to_double(p.y().exact()));
+  for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c)
+  {
+    auto q = (*c).exact();
+    simplify(q);
+    boost::hash_combine(seed, q.numerator().to_double());
+    boost::hash_combine(seed, q.denominator().to_double());
+  }
   return seed;
 }
 
