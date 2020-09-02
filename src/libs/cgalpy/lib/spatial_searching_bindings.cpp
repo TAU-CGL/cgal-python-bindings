@@ -42,13 +42,18 @@ int get_kd_tree_dimension()
   return CGALPY_DIMENSION;
 }
 
-template<typename T>
-size_t hash(T& immutable)
+size_t hash_point_d(Point_d& p)
 {
-  std::ostringstream stream;
-  stream << immutable;
-  std::string s = stream.str();
-  return boost::hash<std::string>()(s);
+  auto simplify = CGAL::Algebraic_structure_traits<Gmpq>::Simplify();
+  size_t seed = 0;
+  for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c)
+  {
+    auto q = (*c).exact();
+    simplify(q);
+    boost::hash_combine(seed, q.numerator().to_double());
+    boost::hash_combine(seed, q.denominator().to_double());
+  }
+  return seed;
 }
 
 static Point_d* init_point_d(int d, bp::list& lst)
@@ -151,7 +156,7 @@ void export_spatial_searching()
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
     .def(self != self)
-    .def("__hash__", &hash<Point_d>)
+    .def("__hash__", &hash_point_d)
     ;
 
   class_<Fuzzy_iso_box>("Fuzzy_iso_box")

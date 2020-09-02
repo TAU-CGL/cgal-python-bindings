@@ -15,15 +15,6 @@ double coordNT_to_double(CoordNT& c)
   return CGAL::to_double(c);
 }
 
-template<typename T>
-size_t hash(T& immutable)
-{
-  std::ostringstream stream;
-  stream << immutable;
-  std::string s = stream.str();
-  return boost::hash<std::string>()(s);
-}
-
 void export_arr_circle_segment_traits()
 {
   using namespace boost::python;
@@ -74,7 +65,6 @@ void export_arr_circle_segment_traits()
     .def(self != self)
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
-    .setattr("__hash__", &hash<TPoint_2>)
     ;
 
   class_<X_monotone_curve_2>("X_monotone_curve_2")
