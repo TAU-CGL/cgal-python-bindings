@@ -269,7 +269,6 @@ void export_kernel()
     .def(self + Vector_2())
     .def(self - Vector_2())
     .setattr("__hash__", &hash_point_2)
-<<<<<<< HEAD:src/libs/cgalpy/lib/Kernel_bindings.cpp
     ;
 
   class_<Point_3>("Point_3")
@@ -295,8 +294,6 @@ void export_kernel()
     .def(self >= self)
     .def(self - self)
     //.setattr("__hash__", &hash<Point_3>)
-=======
->>>>>>> 4351e5405ae439b171bbdcf9b5ff2e97397f84c4:src/libs/cgalpy/lib/kernel_bindings.cpp
     ;
 
   class_<Segment_2>("Segment_2")
@@ -545,9 +542,6 @@ void export_kernel()
     .def(self + self)
     ;
 
-<<<<<<< HEAD:src/libs/cgalpy/lib/Kernel_bindings.cpp
-  class_<Aff_Transformation_2>("Aff_transformation_2")
-=======
   class_<Point_3>("Point_3")
     .def(init<>())
     .def(init<double, double, double>())
@@ -607,7 +601,6 @@ void export_kernel()
     ;
 
   class_<Aff_transformation_2>("Aff_transformation_2")
->>>>>>> 4351e5405ae439b171bbdcf9b5ff2e97397f84c4:src/libs/cgalpy/lib/kernel_bindings.cpp
     .def(init<>())
     .def(init<RT&, RT&, RT&, RT&, RT&>())
     .def(init<RT, RT, RT, RT>())
