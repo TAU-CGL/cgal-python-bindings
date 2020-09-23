@@ -5,7 +5,7 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-  sys.exit('Library name missing')
+    sys.exit('Library name missing')
 
 AS3 = importlib.import_module(sys.argv[1]+".AS3")
 Ker = importlib.import_module(sys.argv[1]+".Ker")
@@ -25,19 +25,19 @@ alphaShape = Alpha_shape_3([p1, p2, p3, p4, p5])
 # explore the 0-shape - It is dual to the boundary of the union.
 interiorCells = alphaShape.alpha_shape_cells(Classification_type.INTERIOR, 1);
 regularFacets = alphaShape.alpha_shape_facets(Classification_type.REGULAR, 1);
-singularFects = alphaShape.alpha_shape_facets(Classification_type.SINGULAR, 1);
+singularFacets = alphaShape.alpha_shape_facets(Classification_type.SINGULAR, 1);
 singularEdges = alphaShape.alpha_shape_edges(Classification_type.SINGULAR, 1);
 print("The 0-shape has : ")
 print(len(interiorCells), "interior tetrahedra")
 print(len(regularFacets), "regular facets")
-print(len(singularFects), "singular facets")
+print(len(singularFacets), "singular facets")
 print(len(singularEdges), "singular edges")
 
 for cell in interiorCells:
-  print(cell.is_valid())
+    print(cell.is_valid())
 
 for facet in regularFacets:
-  print(facet.second)
+    print(facet.second)
 
 for edge in singularEdges:
-  print(edge.second, edge.third)
+    print(edge.second, edge.third)

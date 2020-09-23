@@ -5,7 +5,7 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-  sys.exit('Library name missing')
+    sys.exit('Library name missing')
 
 Arr2 = importlib.import_module(sys.argv[1]+".Arr2")
 Ker = importlib.import_module(sys.argv[1]+".Ker")
@@ -53,3 +53,11 @@ Arr2.overlay(arr1, arr2, result, overlay_traits)
 
 for f in result.faces():
     print(f.data())
+
+#  0  |----------|
+#     |   1      |
+# |----------|   |
+# |   |  2   |   |
+# |   |------|---|
+# |  1       |
+# |----------|

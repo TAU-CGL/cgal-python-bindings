@@ -5,7 +5,7 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-  sys.exit('Library name missing')
+    sys.exit('Library name missing')
 
 AS3 = importlib.import_module(sys.argv[1]+".AS3")
 Ker = importlib.import_module(sys.argv[1]+".Ker")
@@ -25,4 +25,4 @@ print("Alpha shape computed in GENERAL mode")
 alphas = alphaShape.alphas()
 # print(alphas)
 for x in alphas:
-  print(x)
+    print(x)

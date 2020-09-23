@@ -13,6 +13,8 @@
 #include <boost/python.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/functional/hash/hash.hpp>
+#include <CGALPY/hash_point.hpp>
+
 namespace bp = boost::python;
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
