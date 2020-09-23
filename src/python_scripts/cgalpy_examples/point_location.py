@@ -5,7 +5,7 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-  sys.exit('Library name missing')
+    sys.exit('Library name missing')
 
 Arr2 = importlib.import_module(sys.argv[1]+".Arr2")
 Ker = importlib.import_module(sys.argv[1]+".Ker")
