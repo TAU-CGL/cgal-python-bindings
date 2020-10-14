@@ -9,7 +9,7 @@
 
 typedef typename Traits::CoordNT CoordNT;
 
-double coordNT_to_double(CoordNT& c)
+static double coordNT_to_double(CoordNT& c)
 {
   return CGAL::to_double(c);
 }

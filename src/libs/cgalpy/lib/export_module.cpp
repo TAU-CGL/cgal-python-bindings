@@ -109,8 +109,10 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
     SET_SCOPE("Pol2")
     export_polygon_2();
     export_polygon_with_holes_2();
+#if CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
     export_general_polygon_2();
     export_general_polygon_with_holes_2();
+#endif
   };
 #endif
 
@@ -148,8 +150,10 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   {
     SET_SCOPE("BSO2")
     export_polygon_set_2();
-    export_general_polygon_set_2();
     export_boolean_set_operations_2();
+#if CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+    export_general_polygon_set_2();
+#endif
   };
 #endif
 
