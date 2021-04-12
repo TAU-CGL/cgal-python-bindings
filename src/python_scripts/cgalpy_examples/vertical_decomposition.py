@@ -1,11 +1,12 @@
 #!/usr/bin/python3.9
 # export PYTHONPATH=...
 
+import os
 import sys
 import importlib
 
 if len(sys.argv) < 2:
-    print('Library name missing, assuming CGALPY')
+    sys.path.append(os.path.abspath('../precompiled'))
     lib = 'CGALPY'
 else:
     lib = sys.argv[1]
