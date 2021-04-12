@@ -1,14 +1,18 @@
-#!/usr/bin/python3.7
+#!/usr/bin/python3.9
 # export PYTHONPATH=...
 
 import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.exit('Library name missing')
+    print('Library name missing, assuming CGALPY')
+    lib = 'CGALPY'
+else:
+    lib = sys.argv[1]
 
-Arr2 = importlib.import_module(sys.argv[1]+".Arr2")
-Ker = importlib.import_module(sys.argv[1]+".Ker")
+CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
+Arr2 = CGALPY.Arr2
 
 Arrangement_2 = Arr2.Arrangement_2
 Point_2 = Ker.Point_2
@@ -27,5 +31,20 @@ Arr2.insert(arr, Curve_2(Segment_2(p2, p3)))
 Arr2.insert(arr, Curve_2(Segment_2(p3, p0)))
 
 res = []
-c = Curve_2(Segment_2(Point_2(0, 0.5), Point_2(1, 1.5)))
+c = Curve_2(Segment_2(Point_2(0.5, 0.5), Point_2(1.5, 0.5)))
 Arr2.zone(arr, c, res)
+# res contains the objects of the arrangement that the curve intersects
+# in the order when going from left to right
+for obj in res:
+    if obj.is_vertex():
+        v = Arr2.Vertex()
+        obj.get_vertex(v)
+        print("vertex")
+    elif obj.is_halfedge():
+        he = Arr2.Halfedge()
+        obj.get_halfedge(he)
+        print("halfedge")
+    elif obj.is_face():
+        f = Arr2.Face()
+        obj.get_face(f)
+        print("face")
