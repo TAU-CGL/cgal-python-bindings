@@ -1,4 +1,5 @@
 #define BOOST_PYTHON_STATIC_LIB 1
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
 #include <boost/python.hpp>
 
 int foo() { return 0; }

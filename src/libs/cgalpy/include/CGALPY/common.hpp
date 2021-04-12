@@ -8,6 +8,7 @@
 
 #ifndef CGALPY_COMMON_HPP
 #define CGALPY_COMMON_HPP
+
 #include <CGALPY/config.hpp>
 #include <boost/python.hpp>
 #include <boost/make_shared.hpp>

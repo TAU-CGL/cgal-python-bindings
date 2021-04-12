@@ -1,14 +1,18 @@
-#!/usr/bin/python3.7
+#!/usr/bin/python3.9
 # export PYTHONPATH=...
 
 import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.exit('Library name missing')
+    print('Library name missing, assuming CGALPY')
+    lib = 'CGALPY'
+else:
+    lib = sys.argv[1]
 
-Arr2 = importlib.import_module(sys.argv[1]+".Arr2")
-Ker = importlib.import_module(sys.argv[1]+".Ker")
+CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
+Arr2 = CGALPY.Arr2
 
 Arrangement_2 = Arr2.Arrangement_2
 Point_2 = Ker.Point_2
