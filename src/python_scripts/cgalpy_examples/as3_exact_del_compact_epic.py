@@ -1,14 +1,19 @@
-#!/usr/bin/python3.7
+#!/usr/bin/python3.9
 # export PYTHONPATH=...
 
+import os
 import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.exit('Library name missing')
+    sys.path.append(os.path.abspath('../precompiled'))
+    lib = 'CGALPY_kerEpic_as3PlainExa_pol2_tri3DelAsAsComSeq'
+else:
+    lib = sys.argv[1]
 
-AS3 = importlib.import_module(sys.argv[1]+".AS3")
-Ker = importlib.import_module(sys.argv[1]+".Ker")
+CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
+AS3 = CGALPY.AS3
 
 Point_3 = Ker.Point_3
 Alpha_shape_3 = AS3.Alpha_shape_3
