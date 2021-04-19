@@ -7,6 +7,7 @@ class GUI_demo(GUI):
         super().__init__()
 
     def setupUi(self):
+        self.zoom = 1
         MainWindow = self.mainWindow
         MainWindow.setObjectName("MainWindow")
         # todo: icon
