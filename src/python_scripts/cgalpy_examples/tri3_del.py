@@ -1,19 +1,19 @@
-#!/usr/bin/python3.7
+#!/usr/bin/python3.9
 # export PYTHONPATH=...
 
+import os
 import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.exit('Library name missing')
+    sys.path.append(os.path.abspath('../precompiled'))
+    lib = 'CGALPY_kerEpic_pol2_tri3DelAsAsComSeq'
+else:
+    lib = sys.argv[1]
 
-Tri3 = importlib.import_module(sys.argv[1]+".Tri3")
-Arr2 = importlib.import_module(sys.argv[1]+".Arr2")
-Ker = importlib.import_module(sys.argv[1]+".Ker")
-
-Arrangement_2 = Arr2.Arrangement_2
-Point_2 = Ker.Point_2
-Curve_2 = Arr2.Curve_2
+CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
+Tri3 = CGALPY.Tri3
 
 Point_3 = Ker.Point_3
 
