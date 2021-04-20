@@ -1,14 +1,20 @@
-#!/usr/bin/python3.7
+#!/usr/bin/python3.9
 # export PYTHONPATH=...
-
+import os
 import sys
 import importlib
 
 if len(sys.argv) < 2:
-  sys.exit('Library name missing')
+    print('Library name missing, assuming CGALPY')
+    sys.path.append(os.path.abspath('../precompiled'))
+    lib = 'CGALPY'
+else:
+    lib = sys.argv[1]
 
-Ker = importlib.import_module(sys.argv[1]+".Ker")
-SS = importlib.import_module(sys.argv[1]+".SS")
+CGALPY = importlib.import_module(lib)
+
+Ker = CGALPY.Ker
+SS = CGALPY.SS
 
 FT = Ker.FT
 Gmpq = Ker.Gmpq
