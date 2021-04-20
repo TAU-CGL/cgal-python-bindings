@@ -1,14 +1,18 @@
-#!/usr/bin/python3.7
+#!/usr/bin/python3.9
 # export PYTHONPATH=...
-
+import os
 import sys
 import importlib
 
 if len(sys.argv) < 2:
-  sys.exit('Library name missing')
+    sys.path.append(os.path.abspath('../precompiled'))
+    lib = 'CGALPY'
+else:
+    lib = sys.argv[1]
 
-Arr2 = importlib.import_module(sys.argv[1]+".Arr2")
-Ker = importlib.import_module(sys.argv[1]+".Ker")
+CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
+Arr2 = CGALPY.Arr2
 
 Arrangement_2 = Arr2.Arrangement_2
 Point_2 = Ker.Point_2
@@ -26,10 +30,13 @@ print("Number of vertices in the arrangement:", arr.number_of_vertices())
 
 # Iteration example
 v: Arr2.Vertex
-for v in arr.vertices(): print(v.point())
+for v in arr.vertices():
+    print(v.point())
 
 e: Arr2.Halfedge
-for e in arr.halfedges(): print(e.curve())
+for e in arr.halfedges():
+    print(e.curve())
 
 f: Arr2.Face
-for f in arr.faces(): print(f.is_unbounded())
+for f in arr.faces():
+    print(f.is_unbounded())

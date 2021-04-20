@@ -1,1 +1,7 @@
 .idea/
+cmake-build-debug/CMakeFiles/
+src/python_scripts/cgalpy_examples/__pycache__/
+src/python_scripts/cgalpy_demos/gui/__pycache__/
+src/python_scripts/precompiled/__pycache__/
+src/python_scripts/cgalpy_demos/__pycache__/
+src/python_scripts/__pycache__/

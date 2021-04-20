@@ -22,14 +22,6 @@ Kernel::Equal_2 kernel_equal_2(Kernel& k)
 //  return boost::hash<std::string>()(s); // TODO: two equal objects can have different string representation
 //}
 
-size_t hash_point_2(Point_2& p)
-{
-  size_t seed = 0;
-  boost::hash_combine(seed, CGAL::to_double(p.x()));
-  boost::hash_combine(seed, CGAL::to_double(p.y()));
-  return seed;
-}
-
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
 void bind_squared_distance_first_type()
 {
@@ -50,7 +42,6 @@ void bind_squared_distance_types()
   bind_squared_distance_first_type< T4, T2, T3, T1, T5 >();
   bind_squared_distance_first_type< T5, T2, T3, T4, T1 >();
 }
-
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 typename FT::Exact_type& FT_exact(FT& ft)
@@ -245,6 +236,12 @@ void export_kernel()
     .def("hy", &Point_2::hy, Kernel_return_value_policy())
     .def("hw", &Point_2::hw, Kernel_return_value_policy())
     .def("bbox", &Point_2::bbox)
+    .def("cartesian", &Point_2::cartesian, Kernel_return_value_policy())
+    .def("__getitem__", &Point_2::operator[], Kernel_return_value_policy())
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
+    // TODO: Returning address of local variable or temporary with EPEC kernel
+    .def("coordinates", range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end))
+#endif
     .def("dimension", &Point_2::dimension)
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
@@ -259,7 +256,7 @@ void export_kernel()
     .def(self -= Vector_2())
     .def(self + Vector_2())
     .def(self - Vector_2())
-    .setattr("__hash__", &hash_point_2)
+    .setattr("__hash__", &hash_rational_point<Point_2>)
     ;
 
   class_<Segment_2>("Segment_2")
@@ -467,7 +464,10 @@ void export_kernel()
     .def("homogeneous", &Vector_2::homogeneous, Kernel_return_value_policy())
     .def("cartesian", &Vector_2::cartesian, Kernel_return_value_policy())
     .def("__getitem__", &Vector_2::operator[], Kernel_return_value_policy())
-    //.def("cartesian_coordinates", range(&Vector_2::cartesian_begin, &Vector_2::cartesian_end))
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
+    // TODO: Returning address of local variable or temporary with EPEC kernel
+    .def("cartesian_coordinates", range<>(&Vector_2::cartesian_begin, & Vector_2::cartesian_end))
+#endif
     .def("dimension", &Vector_2::dimension)
     .def("direction", &Vector_2::direction)
     .def("transform", &Vector_2::transform)
