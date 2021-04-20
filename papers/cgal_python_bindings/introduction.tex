@@ -1,0 +1,99 @@
+% =============================================================================
+\section{Introduction}
+\label{sec:intro}
+% =============================================================================
+Bindings are manifested as wrapper libraries that bridge two
+programming languages, so that a software module developed in one
+language can be used in code written in another language, exploiting
+(i) the strengths of both languages, and (ii) the availability of
+modules developed in the former language, if such exist. C++ Python
+bindings enable the invocation of C++ functions from Python code
+taking advantage of Python's quick development cycles and C++'s high
+performance.
+%
+% =============================================================================
+\subsection{\cgal}
+\label{ssec:intro:cgal}
+% =============================================================================
+\cgal{} (Computational Geometry Algorithm Library) is a software
+project that provides easy access to efficient and reliable
+implementations of geometric algorithms in the form of a C++
+library~\cite{cgal:eb-21}. \cgal{} has evolved through the years and
+now represents the state of the art in computational geometry
+software. The software modules of cgal{} rigorously adhere to the
+generic programming paradigm to overcome problems encountered when
+effective computational geometry software is implemented; they are
+stable despite the use of (inexact) floating point arithmetic, found
+in standard hardware, and they are complete as they handle all
+degenerate cases, which typically are in abundance.
+
+When running Python code that use bindings for some C++ modules, one
+or more libraries that provide the bindings must be accessible.  A
+software module that adheres to the generic programming paradigm
+consists of function and class templates; these templates are
+instantiated at compile time of the binding libraries. In other words,
+the type of the C++ objects that are bound, that is, instances
+(instantiated types) of C++ function and class templates, must be
+known when the bindings are generated.
+
+Generic programming identifies an abstraction that consists of a
+formal hierarchy of polymorphic abstract requirements on data types,
+referred to as \emph{concepts}, and a set of classes that conform
+precisely to the specified requirements, referred to as
+\emph{models}~\cite{a-gps-99}. When a class template is instantiated,
+each one of its template parameters is substituted with a model of a
+concept associated with the template parameter.
+
+Instantiated types in \cgal{} are characterized by long instantiation
+chains of C++ class templates. An instantiated type is a template that
+has one or more template parameters and every parameter is substituted
+by another type that is typically an instance of another template.
+
+While the number of models of most concept is small, the number of
+potential types of objects that could be bound, and thus must be
+supported by the bindings, is enormous. Offering bindings for all
+these types in advance is practiaclly impossible. Moreover, in some
+cases models need to be extended with types provided by the
+user. Naturally, bindings for user-extended models must be generated
+dynamically.
+
+% =============================================================================
+\subsection{Results}
+\label{ssec:intro:results}
+% =============================================================================
+We present a system that dynamically generates bindings of desired
+objects according to user prescriptions, which enables the convenient
+use of any subset of bound objects concurrently.
+
+We introduce C++ Python bindings that enables the convenient,
+efficient, and reliable use of \cgal{} software modules in Python's
+code.  There are different ways to go about the implementation of such
+bindings. We present a short study that compares three main methods,
+which leads to the method of choice.
+
+choosing the best method
+
+creating a system that handles multiple choices
+
+With our system it is possible to generate, for example, a single
+library that contains bindings for an instance of the 2D arrangement
+class template and an instance of the 2D triangulation class
+template. If several instances of the same template must be bound,
+several corresponding libraries must be generated. By default, the
+name of the generated library is CGALPY.so. However, the user can
+override the name with a string that maps to the set of bound
+instances. This is useful when more then one instance of the same
+template must be bound. Each execution of cmake followed by make
+generates a single library.
+
+% Example: Arrangement_2<Geometry_traits_2, Dcel>
+%
+% =============================================================================
+\subsection{Outline}
+\label{ssec:intro:outline}
+% =============================================================================
+The rest of this paper is organized as follows. A study that compares
+three main methods for implementing C++ Python bindings is presented
+in Sections~\ref{sec:comp}. Description of the bindings generated by
+our system and instructons for generating bindings dynamically are
+presented in Section~\ref{sec:bind}.
