@@ -1,0 +1,87 @@
+% =============================================================================
+\section{Bindings}
+\label{sec:bind}
+% =============================================================================
+The \cgal{} library consists of several packages.
+%% We use the same
+%% partition and to refer to each package as a module. Each module has a
+%% long (and meaningful) name and a short name; see the list of modules
+%% supported so far below. Each module is associated with a cmake Boolean
+%% flag that determines whether to generate bindings for that particular
+%% module. Each module may be associated with zero or more additional
+%% flags that indicate selections for bindings within the module. For
+%% example, the long name of the 2D Arrangement module is ARRANGEMENT_2;
+%% its short name is ARR2; the Boolean flag that indicates whether to
+%% generate bindings for this module is
+%% CGALPY_ARRANGEMENT_2_BINDINGS. This module is associated with the
+%% Boolean flag CGALPY_ARR2_POINT_LOCATION_BINDINGSthat indicates whether
+%% to generate bindings for point location of 2D Arrangements
+%% package. This module has also a string
+%% flagCGALPY_ARR2_GEOMETRY_TRAITS_NAMEthat indicates the geometry traits
+%% used to instantiate theArrangement_2<>` class template.
+
+%% The Python attribute name of a bound entity of every module are
+%% gathered in a distinct Python scope to prevent name conflicts. The
+%% name of the scope is the short name of the module in lower-case except
+%% for the first letter (which is in upper-case); for example, the scope
+%% names of the bound types and free functions of the 2D Arrangement and
+%% the 3D Triangulation packages are Arr2 and Tri3, respectively. Each of
+%% these two scopes, for example, have the attribute Vertex_handle (i.e.,
+%% Arr2.Vertex_handle and Tri3.Vertex_handle).
+
+%% As mentioned above, the cmake flag CGALPY_FIXED_LIBRARY_NAME
+%% determines whether the name of the generated library is CGALPY.so or
+%% not. If not, it has the suffix CGALPY_ followed by as many as
+%% substrings as modules, the bindings of which are enabled, separated by
+%% an underscore (_). Each such substring starts with the short name of
+%% the module in lower case followed by strings that maps to the
+%% selections for bindings within the module. Each such string is a
+%% single word that starts with a capital letter. For example, the name
+%% CGALPY_kernelEpecInt_Arr2SegPlainPl of a generated library, names a
+%% library that contains bindings for (i) the
+%% Exact-Predicate-Exact-Construction (EPEC) kernel module and
+%% intersections, and (ii) the 2D Arrangement module, where the
+%% Arrangement_2<> class template is instantiated with a traits class
+%% that handles segments and a plain DCEL, and point location queries.
+
+%%   \tikzset{table/.style={
+%%       matrix of nodes,
+%%       row sep=-\pgflinewidth,
+%%       column sep=-\pgflinewidth,
+%%       nodes={minimum height=1.2em,rectangle,draw=black,align=left,anchor=center,font=\tiny},
+%%       %text depth=0.1ex,
+%%       % text height=0.7ex,
+%%       nodes in empty cells,
+%%       every even row/.style={nodes={fill=gray!20}},
+%%       column 1/.style={nodes={text width=4.8em}},
+%%       column 2/.style={nodes={text width=18em}},
+%%       column 3/.style={nodes={text width=4.8em}},
+%%       row 1/.style={nodes={minimum height=2.1em,anchor=center,align=center,fill=darkgray,text=white,font=\bfseries\scriptsize}}
+%%     }}
+%%   \begin{tikzpicture}
+%%     \def\tbs{\textbackslash}
+%%     \matrix (first) [table] {
+%% Function            & Implicitly Defined       & Default Definition\\
+%% Default constructor & if no other constructors & does nothing\\
+%% Destructor          & if no destructor         & does nothing\\
+%% Copy constructor    & if no move constructor and no move assignment & copies all members\\
+%% Copy assignment     & if no move constructor and no move assignment & copies all members\\
+%% move constructor    & if no destructor, no copy constructor, and no copy nor move assignment & moves all members\\
+%% move assignment     & if no destructor, no copy constructor, and no copy nor move assignment & moves all members\\
+%% };
+%%   \end{tikzpicture}
+
+%% Module 	Name 	Short Name
+%% 2D and 3D Kernel 	KERNEL 	KER
+%% 2D Arrangements on Surfaces 	ARRANGEMENT_2 	ARR2
+%% 3D Alpha shapes 	ALPHA_SHAPE_3 	AS2
+%% 2D Regularized Boolean operations 	BOOLEAN_SET_OPERATIONS_2 	BSO2
+%% Bounding Volumes 	BOUNDING_VOLUMES 	BV
+%% 2D Convex hulls 	CONVEX_HULL_2 	CH2
+%% 3D Convex hulls 	CONVEX_HULL_3 	CH3
+%% 2D Polygons 	POLYGON_2 	POL2
+%% Polygon partitioning 	POLYGON_PARTITIONING 	PP
+%% 2D Minkowski sums 	MINKOWSKI_SUM_2 	MS2
+%% Spatial searching 	SPATIAL_SEARCHING 	SS
+%% 2D Triangulations 	TRIANGULATION_2 	TRI2
+%% 3D Triangulations 	TRIANGULATION_3 	TRI3

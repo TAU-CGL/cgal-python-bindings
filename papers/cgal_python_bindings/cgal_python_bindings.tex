@@ -1,0 +1,44 @@
+\documentclass{article}
+\input{../header}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[export]{adjustbox}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsthm}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tikz,graphicx}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{observation}{Observation}
+\newtheorem{func}{Function}
+\newtheorem*{theorem*}{Theorem}
+\def\marrow{\marginpar[\hfill$\longrightarrow$]{$\longleftarrow$}}
+\definecolor{eficolor}{HTML}{EE4035}
+\definecolor{nircolor}{HTML}{F37736}
+\definecolor{dancolor}{HTML}{7BC043}
+\definecolor{todocolor}{HTML}{0392CF}
+\graphicspath{{./figs/}}
+\def\efi#1{\textcolor{eficolor}{\sc Efi says: }{\textcolor{eficolor}{\marrow\sf #1}}}
+\def\tom#1{\textcolor{nircolor}{\sc Nir says: }{\textcolor{nircolor}{\marrow\sf #1}}}
+\def\dan#1{\textcolor{nircolor}{\sc Nir says: }{\textcolor{dancolor}{\marrow\sf #1}}}
+\def\todo#1{\textcolor{todocolor}{\marrow\sf #1}}
+% Paper
+\title{\cgal{} Python Bindings}
+\date{}
+\author{Nir Goren, Efi Fogel, and Dan Halperin}
+\pagestyle{plain}
+\begin{document}
+\maketitle
+\input{abstract}
+\input{introduction}
+\input{comparison}
+\input{bindings}
+\bibliographystyle{abbrv}
+\bibliography{../abrev-short,cgal_python_bindings}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  appendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
