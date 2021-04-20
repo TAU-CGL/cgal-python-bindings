@@ -29,16 +29,6 @@ int get_spatial_searching_dimension()
   return CGALPY_SPATIAL_SEARCHING_DIMENSION;
 }
 
-size_t hash_point_d(Point_d& p)
-{
-  size_t seed = 0;
-  for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c)
-  {
-    boost::hash_combine(seed, CGAL::to_double(*c));
-  }
-  return seed;
-}
-
 static Point_d* init_point_d(int d, bp::list& lst)
 {
   auto begin = boost::python::stl_input_iterator<FT>(lst);
@@ -141,7 +131,7 @@ void export_spatial_searching()
     .def("dimension", &Point_d::dimension)
     .def("cartesian", &Point_d::cartesian)
     .def("__getitem__", &Point_d::operator[])
-    .def("coordinates", range<return_internal_reference<>>(&point_d_cartesian_begin, &point_d_cartesian_end))
+    .def("coordinates", range<>(&point_d_cartesian_begin, &point_d_cartesian_end))
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
     .def(self == self)
@@ -151,7 +141,7 @@ void export_spatial_searching()
     .def(self <= self)
     .def(self >= self)
     .def(self - self)
-    .def("__hash__", &hash_point_d)
+    .def("__hash__", &hash_rational_point<Point_d>)
     ;
 
   class_<Fuzzy_iso_box>("Fuzzy_iso_box")
