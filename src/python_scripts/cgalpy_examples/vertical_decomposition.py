@@ -33,6 +33,7 @@ d = []
 
 Arr2.decompose(arr, d)
 for pair in d:
+    # CGALPY specific:
     # pair is a tuple
     # pair[0] is an arrangement vertex
     # pair[1] is a pair holding the objects (Vertex, Halfedge, or Face) above and below
