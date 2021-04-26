@@ -29,6 +29,7 @@ points = [Point_d(2, [FT(n) for n in [4, 0]]), Point_d(2, [FT(n) for n in [-4, 0
           Point_d(2, [FT(n) for n in [40, 0]]), Point_d(2, [FT(n) for n in [-40, 0]]),
           Point_d(2, [FT(n) for n in [1, 0]])]
 
+# Insert the points into a k-d tree
 tree = SS.Kd_tree(points)
 
 all_points = []
@@ -44,10 +45,10 @@ sort_neighbors = False  # Set this value to True in order to obtain the neighbor
 
 distance = SS.Euclidean_distance()
 
+# Populate <lst> with the k nearest neighbors to <query> based on the distance metric
+lst = []
 search = SS.K_neighbor_search(tree, query, k, eps, search_nearest,
                            distance, sort_neighbors)
-
-lst = []
 search.k_neighbors(lst)
 
 print("Found", len(lst), "neighbors")
@@ -63,7 +64,7 @@ print("Points within distance 5 from (0,0):")
 for p in res:
     print(p)
 
-# Search for points inside a box/sphere
+# Search for points inside a box
 s = SS.Fuzzy_iso_box(Point_d(2, [FT(-1), FT(-1)]), Point_d(2, [FT(1), FT(1)]), FT(0))
 res = []
 tree.search(s, res)
@@ -72,6 +73,7 @@ for p in res:
     print(p)
 
 
+# CGALPY specific:
 # In order to use a custom distance metric, define the following:
 # # The following function returns the transformed distance between two points
 # # (for Euclidean distance the transformed distance is the squared distance)

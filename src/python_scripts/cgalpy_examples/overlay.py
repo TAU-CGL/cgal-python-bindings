@@ -53,6 +53,14 @@ result = Arrangement_2()
 
 # Set the data of a face that is the intersection of two faces
 # from the original arrangements to be the sum of their data
+
+# CGALPY specific:
+# The Arr_face_overlay_traits object behaves much like the one in CGAL
+# https://doc.cgal.org/latest/Arrangement_on_surface_2/classCGAL_1_1Arr__face__overlay__traits.html
+# Only that instead of being templated with a functor, the functor is passed as a parameter to the constructor
+# Similarly the Arr_overlay_traits object accepts the 10 functions to be implemented as described here:
+# https://doc.cgal.org/latest/Arrangement_on_surface_2/classOverlayTraits.html
+# As arguments to its constructor (in the same order as they are listed in the documentation)
 overlay_traits = Arr2.Arr_face_overlay_traits(lambda x, y: x+y)
 Arr2.overlay(arr1, arr2, result, overlay_traits)
 
