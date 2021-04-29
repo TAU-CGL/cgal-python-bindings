@@ -23,6 +23,8 @@ c1 = Curve_2(Point_2(0, 0), Point_2(2, 0))
 c2 = Curve_2(Point_2(1, 2), Point_2(1, -2))
 c3 = Curve_2(Point_2(0, 0), Point_2(1, 2))
 c4 = Curve_2(Point_2(1, -2), Point_2(2, 0))
+
+# Inserting the curves into the arrangement
 Arr2.insert(arr, [c1, c2, c3, c4])
 print("Number of faces in the arrangement:", arr.number_of_faces())
 print("Number of halfedges in the arrangement:", arr.number_of_halfedges())
