@@ -29,6 +29,7 @@ points = [Point_d(2, [FT(n) for n in [4, 0]]), Point_d(2, [FT(n) for n in [-4, 0
           Point_d(2, [FT(n) for n in [40, 0]]), Point_d(2, [FT(n) for n in [-40, 0]]),
           Point_d(2, [FT(n) for n in [1, 0]])]
 
+# Initialize a k-d tree with some points
 tree = SS.Kd_tree(points)
 
 all_points = []
@@ -42,12 +43,14 @@ eps = FT(Gmpq(0.0))  # 0.0 for exact NN, otherwise approximate NN
 search_nearest = True  # Set this value to False in order to search farthest
 sort_neighbors = False  # Set this value to True in order to obtain the neighbors sorted by distance
 
+# The distance metric to use
 distance = SS.Euclidean_distance()
 
 search = SS.K_neighbor_search(tree, query, k, eps, search_nearest,
                            distance, sort_neighbors)
 
 lst = []
+# Populate lst with the k nearest neighbors
 search.k_neighbors(lst)
 
 print("Found", len(lst), "neighbors")
