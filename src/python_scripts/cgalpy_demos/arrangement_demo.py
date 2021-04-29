@@ -49,6 +49,7 @@ def set_up_scene_arr():
         p1y = edge.target().point().y().to_double()
         gui.add_segment(p0x, p0y, p1x, p1y, QtCore.Qt.red)
 
+    # Go over all halfedges in the arrangement
     disc = gui.add_disc(4, 0, 0)
     for face in arr.faces():
         for ccb in face.inner_ccbs():

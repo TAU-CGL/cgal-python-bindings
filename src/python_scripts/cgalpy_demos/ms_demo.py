@@ -57,14 +57,13 @@ def set_up_scene_ms():
     p1 = add_polygon(gui, poly1, QtCore.Qt.red)
     p0 = add_polygon(gui, poly, QtCore.Qt.blue)
 
-
-
     poly2 = MN2.minkowski_sum_2(poly, poly1).outer_boundary()
     p2 = add_polygon(gui, poly2, QtCore.Qt.green)
     p2.visible = 0
     anim = gui.visibility_animation(p2, False)
     gui.queue_animation(anim)
 
+    # Hardcoded animation for the demo
     anim = gui.linear_translation_animation(p0, *point_to_tuple(poly[0]), *point_to_tuple(poly1[0]), 0)
     gui.queue_animation(anim)
     for i in range(11):
