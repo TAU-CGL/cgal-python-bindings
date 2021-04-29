@@ -267,7 +267,7 @@ void export_arr_algebraic_segment_traits()
     .def("__call__", &Construct_curve_2::operator());
     ;
 
-  auto cp_2_binding = class_<Construct_point_2>("Construct_tpoint_2", no_init);
+  auto cp_2_binding = class_<Construct_point_2>("Construct_point_2", no_init);
   export_construct_point_2_call_operator<Algebraic_real_1, Curve_2, int>(cp_2_binding);
   export_construct_point_2_call_operator<Algebraic_real_1, X_monotone_curve_2>(cp_2_binding);
   export_construct_point_2_call_operator<Algebraic_real_1, Algebraic_real_1>(cp_2_binding);
