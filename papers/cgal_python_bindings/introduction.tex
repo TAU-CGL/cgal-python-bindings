@@ -12,6 +12,29 @@ taking advantage of Python's quick development cycles and C++'s high
 performance.
 %
 % =============================================================================
+\subsection{C++ Python Bindings}
+\label{ssec:intro:cgal}
+% =============================================================================
+Although Python is sufficiently efficient for many tasks, low-level
+code written in Python tends to be too slow, largely due to Python's
+extremely dynamic nature. In particular, low-level computational loops
+are simply infeasible. In additiona, the magnitude of existing and
+well-tested code in Fortract, C, and C++, is enourmous. Python
+provides access to its internals from these languages via the Python/C
+API, which enables the exploitation of existing code in Fortrant, C
+and C++, as well as the replacement of critical sections written in
+these languages when speed is essential.
+
+Wrapping existing code has traditionally been the domain of Python
+experts due to a steep learning curve characterizes its Python/C
+API. Although using such wrappers is possible without ever knowing
+their internals, providing such wrappers creates a sharp line between
+developers using Python and developers using C or C++ with the
+Python/C API). Several Tools that ease the creation of such wrappers
+have been proposed; A sample of such tools are listed In
+Section~\ref{sec:comp}.
+
+% =============================================================================
 \subsection{\cgal}
 \label{ssec:intro:cgal}
 % =============================================================================
@@ -19,7 +42,7 @@ performance.
 project that provides easy access to efficient and reliable
 implementations of geometric algorithms in the form of a C++
 library~\cite{cgal:eb-21}. \cgal{} has evolved through the years and
-now represents the state of the art in computational geometry
+now represents the state of the art in applied computational geometry
 software. The software modules of cgal{} rigorously adhere to the
 generic programming paradigm to overcome problems encountered when
 effective computational geometry software is implemented; they are
