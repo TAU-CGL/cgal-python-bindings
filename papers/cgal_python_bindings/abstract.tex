@@ -7,22 +7,22 @@
   There are different ways to go about the implementation of such
   bindings. We present a short study that compares three main methods,
   which leads to the method of choice.
-  %
-  The software modules of \cgal{} are stable despite the use of
-  (inexact) floating point arithmetic, found in standard hardware, and
-  they are complete as they handle all degenerate cases, which
-  typically are in abundance. The code of \cgal{} rigorously adheres
-  to the generic programming paradigm to overcome these problems,
-  which implies that the programmer has to make many choices that are
-  resolved during compile time (of the C++ modules). While bindings
-  take effect at run time (of the Python code), the type of the C++
-  objects that are bound, must be known when the bindings are
-  generated. The types of the bound objects are instances
-  (instantiated types) of C++ function and class templates. This makes
-  the number of object types that potentially can be bound enormous,
-  and the generation of the bindings in advance practiaclly
-  impossible. We present a system that dynamically generates bindings
-  for desired object types according to user prescriptions, which
-  enables the convenient use of any subset of bound object types
-  concurrently.
+  % The implementation of practical algorithms and data structures in
+  computational geometry presents tremendous difficulties, such as
+  obtaining stable software despite the use of (inexact) floating
+  point arithmetic, found in standard hardware, and obtaing complete
+  software that handles all degenerate cases, which typically are in
+  abundance. The code of \cgal{} extenssively uses function and class
+  templates in order to handle these difficulties, which implies that
+  the programmer has to make many choices that are resolved during
+  compile time (of the C++ modules). While bindings take effect at run
+  time (of the Python code), the type of the C++ objects that are
+  bound, must be known when the bindings are generated. The types of
+  the bound objects are instances (instantiated types) of C++ function
+  and class templates. The number of object types that potentially can
+  be bound enormous, and the generation of the bindings in advance
+  practiaclly impossible. We present a system that dynamically
+  generates bindings for desired object types according to user
+  prescriptions, which enables the convenient use of any subset of
+  bound object types concurrently.
 \end{abstract}
