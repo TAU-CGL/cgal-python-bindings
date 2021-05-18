@@ -254,6 +254,7 @@ void bind_do_intersect()
 {
   bind_do_intersect_1T<Point_2>();
   bind_do_intersect_1T<Line_2>();
+  bind_do_intersect_1T<Ray_2>();
   bind_do_intersect_1T<Segment_2>();
   bind_do_intersect_1T<Triangle_2>();
   bind_do_intersect_1T<Iso_rectangle_2>();
