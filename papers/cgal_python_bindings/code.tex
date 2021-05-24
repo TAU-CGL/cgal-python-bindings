@@ -1,0 +1,165 @@
+% =============================================================================
+\section{Binding Code}
+\label{sec:bind-code}
+% =============================================================================
+
+% -----------------------------------------------------------------------------
+\subsection{Return value policy}
+\label{sec:bind-code:rvp}
+% -----------------------------------------------------------------------------
+Return value policy, kernel specific:
+
+In some cases, in order to assure proper behaviour and memory
+management of a return value from a function, explicitly specifying a
+return value policy is needed. The policy may depend on whether the
+returned object is a newly created object, a reference to some already
+existing (internal) object or a const reference to some existing
+object. [Additionally in some cases we need to tie the lifetime of the
+result to the lifetime of the arguments, or the other way around]
+
+For some kernel functions the kind of return value depends on the
+kernel (epec vs epic), and as such the return value policy needs to be
+changed accordingly. This is why for these functions a
+\myLstinline{Kernel_return_value_policy} type is being passed as the
+return value policy. The type is defined differently (via preprocessor
+macros) based on the kernel being exposed.
+
+% -----------------------------------------------------------------------------
+\subsection{Scopes}
+\label{sec:bind-code:scopes}
+% -----------------------------------------------------------------------------
+All functions and classes related to some package were exposed inside
+a \myLstinline{export_[package]()} function. All such calls are
+happening in \myLstinline{export_module.cpp}. We wrap each call with a
+local (c++) scope and call the \myLstinline{SET_SCOPE(module_name)}
+macro, which causes every exposed function/class inside this local
+scope to be exposed inside the \myLstinline{module_name} submodule of
+the CGALPY module. This prevents name clashes of classes with the same
+name in different packages.
+
+% -----------------------------------------------------------------------------
+\subsection{Using Templates to avoid code duplication}
+\label{sec:bind-code:templates}
+% -----------------------------------------------------------------------------
+Some types have the exact same methods exposed (for example
+\myLstinline{Triangulation_2} and
+\myLstinline{Delaunay_triangulation_2}. In those cases we use a
+templated function (i.e \myLstinline{export_triangulation}) templated
+with the type to expose and call the binding functions there.
+
+% -----------------------------------------------------------------------------
+\subsection{SFINAE}
+\label{sec:bind-code:sfinae}
+% -----------------------------------------------------------------------------
+\url{https://en.cppreference.com/w/cpp/language/sfinae}
+\url{https://doc.cgal.org/latest/Kernel_23/group__do__intersect__linear__grp.html}
+
+\myLstinline{CGAL::do_intersect} has an overloaded implementation for
+many supported types, however, not every combination of two supported
+types is implemented.
+
+For conveniently binding all overloaded versions of
+\myLstinline{CGAL::do_intersect}, we used SFINAE: This is how a
+version overloaded with a combination of \myLstinline{T1} and
+\myLstinline{T2} is bound: First \myLstinline{bind_do_intersect()}
+calls \myLstinline{bind_do_intersect_1T} templated with some supported
+type {T1}. \myLstinline{bind_do_intersect_1T()}, templated
+with \myLstinline{T1}, calls \myLstinline{bind_do_intersect_2T}
+templated with \myLstinline{T1} and some supported type
+\myLstinline{T2}, and a \myLstinline{bool} argument.
+
+The declaration of \myLstinline{bind_do_intersect_2T}, templated with
+both \myLstinline{T1} and \myLstinline{T2} is only valid when
+templated with a combination of types for which an overloaded
+implementation of \myLstinline{CGAL::do_intersect} exists. Otherwise,
+due to SFINAE, the blank implementation template of
+\myLstinline{bind_do_intersect_2T} expecting (...) as an argument
+will be invoked (it would normally not be invoked as variadic
+parameters have the lowest rank for the purpose of overload
+resolution).
+
+\url{https://en.cppreference.com/w/cpp/language/variadic_arguments}
+
+% -----------------------------------------------------------------------------
+\subsection{Arrangement Extension}
+\label{sec:bind-code:ae}
+% -----------------------------------------------------------------------------
+The arrangement is always extended with a generic python object. This
+allows for flexibility and helps dealing with not being able to use a
+custom data type as a template parameter.
+
+% -----------------------------------------------------------------------------
+\subsection{Arrangement Overlay traits}
+\label{sec:bind-code:overlay}
+% -----------------------------------------------------------------------------
+Since a custom c++ \myLstinline{overlay_traits} class cannot be
+defined from python, we instead expose a new class called
+\myLstinline{Arr_python_overlay_traits}. This class is a model of the
+OverlayTraits concept.
+\url{https://doc.cgal.org/latest/Arrangement_on_surface_2/classOverlayTraits.html}
+
+It accepts in its constructor 10 python functions, each accepting two
+python objects (the extended arrangement data type) and returning a
+python object. Those 10 functions are saved as class members and are
+then called in the respective 10 [overloaded] versions of
+\myLstinline{create_vertex}, \myLstinline{create_edge},
+\myLstinline{create_face object}) (the matching is done by
+the order of the passed functions and the order of the [overloaded]
+versions in the official concept reference).
+
+This way the user can still define the way the result face/edge/vertex
+data will be calculated.
+
+% -----------------------------------------------------------------------------
+\subsection{kd tree}
+\label{sec:bind-code:kdtree}
+% -----------------------------------------------------------------------------
+The k-d tree dimension and the dimension of related classes is
+templated and can thus only be decided at compile time via the cmake
+variable \myLstinline{CGALPY_SPATIAL_SEARCHING_DIMENSION}.
+
+In order to assert the dimension the bindings were compiled with, a
+free function \myLstinline{get_spatial_searching_dimension()} was
+exposed that returns the dimension as an \myLstinline{int}.
+
+% -----------------------------------------------------------------------------
+\subsection{\myLstinline{Python_distance}}
+\label{sec:bind-code:distance}
+% -----------------------------------------------------------------------------
+Similarly to overlay traits, a user may want to define a custom
+distance class to use with search queries. Here too, as defining a new
+c++ class is not possible from python, we provide a similar solution:
+A \myLstinline{Python_distance} class is exposed, which is a model of
+\myLstinline{GeneralDistance} concept.
+\url{https://doc.cgal.org/5.2/Spatial_searching/classGeneralDistance.html}
+It expects 5 functions in its constructor, and those are saved as
+class members and are used for the respective 5 operations [the
+optional are not included] of the concept.
+
+Making some things more pythonic:
+
+% -----------------------------------------------------------------------------
+\subsection{Iterators and circulators}
+\label{sec:bind-code:iters}
+% -----------------------------------------------------------------------------
+For binding iterators we used the \myLstinline{bind_iterator}
+templated function and its variations, in order to allow pythonic
+iteration. Circulators too are artificially converted to iterators
+supporting \myLstinline{__next__} and throwing a stop iteration when
+reaching the first item again, by being wrapped in a templated
+"\myLstinline{Iterator_from_circulator}" object which is the one being
+exposed to python.
+
+% -----------------------------------------------------------------------------
+\subsection{Functions populating an output iterator}
+\label{sec:bind-code:fnc-out}
+% -----------------------------------------------------------------------------
+Instead, a wrapper that expects a python list and populates it with
+the results is being exposed.
+
+% -----------------------------------------------------------------------------
+\subsection{Functions expecting begin and end iterators}
+\label{sec:bind-code:fnc-range}
+% -----------------------------------------------------------------------------
+Instead, a wrapper that expects a python list as an argument and calls
+the function with the list's begin and end iterators is exposed.
