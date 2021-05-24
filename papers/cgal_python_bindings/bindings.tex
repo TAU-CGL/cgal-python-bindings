@@ -1,4 +1,4 @@
-\tikzset{tableA/.style={
+\tikzset{table/.style={
   matrix of nodes,
   row sep=-\pgflinewidth,
   column sep=-\pgflinewidth,
@@ -10,33 +10,77 @@
   column 3/.style={nodes={text width=3.8em}},
   column 4/.style={nodes={text width=19.2em}},
   row 1/.style={nodes={minimum height=1.6em,anchor=center,align=center,fill=darkgray,text=white,font=\bfseries}}}}
+\tikzset{tableA/.style={table,
+  column 1/.style={nodes={text width=19.8em}},
+  column 2/.style={nodes={text width=4.8em}},
+  column 3/.style={nodes={text width=3.8em}},
+  column 4/.style={nodes={text width=19.2em}}}}
+\tikzset{tableB/.style={table,
+  column 1/.style={nodes={text width=19.8em}},
+  column 2/.style={nodes={text width=4.8em}},
+  column 3/.style={nodes={text width=6.4em}},
+  column 4/.style={nodes={text width=16.6em}}}}
+\tikzset{tableModuleName/.style={table,
+  column 1/.style={nodes={text width=16em}},
+  column 2/.style={nodes={text width=16em}},
+  column 3/.style={nodes={text width=7em}}}}
 % =============================================================================
 \section{Bindings}
 \label{sec:bind}
 % =============================================================================
+The most simple form of building an application written in C++ that
+depends on \cgal{} consists of the stages below. Let
+\myLstinline{\$APP\_SRC\_DIR} point at the root directory of the
+application source tree.
+\begin{enumerate}
+\item Obtain the sources of \cgal{}; let \myLstinline{\$CGAL\_SRC\_DIR}
+  point at the root directory of the \cgal{} source tree.
+\item Create a build directory for \cgal{}; let \myLstinline{\$CGAL\_DIR}
+  point at this build directory.
+\item Change directory to \myLstinline{\$CGAL_DIR} and run
+  '\myLstinline{cmake [options] \$CGAL\_SRC\_DIR}'.
+\item Create a build directory for the application; let
+  \myLstinline{\$APP\_DIR} point at this build directory.
+\item Change directory to \myLstinline{\$APP\_DIR} and run
+  '\myLstinline{cmake [options] \$APP\_SRC\_DIR}' followed by
+  '\myLstinline{make}'.
+\end{enumerate}
+
+In the procedure above \myLstinline{options} refer to optional
+arguments passed to \myLstinline{cmake}, which govern the generation
+of the native build environment. When running an application written
+in Python that depends on \cgal{} instead of building the application,
+the user must build the bindings. Here, \myLstinline{\$APP\_SRC\_DIR}
+needs to point at the root directory of the binding source tree,
+and \myLstinline{\$APP\_DIR} needs to point at the build directory for
+the bindings. The optional arguments passed to \myLstinline{cmake}
+in stage~5 mainly consist of variables that determine the objects
+to be bound and the unique identifier of each such object, and the
+name of the libraries that comprise the bindings, in case the default
+library is insufficient.
 
 % -----------------------------------------------------------------------------
 \subsection{Generation}
 \label{sec:bind:gen}
 % -----------------------------------------------------------------------------
-By default, the name of the
-generated library is CGALPY.so. However, the user can override the
-name with a string that maps to the set of bound instances. This is
-useful when more then one instance of the same template must be
-bound. Each execution of cmake followed by make generates a single
+By default, the name of the generated library
+is \myLstinline{CGALPY.so}. However, the user can override the name
+with a string that maps to the set of bound instances. This is useful
+when more then one instance of the same template must be bound. Each
+execution of \myLstinline{cmake} followed by make generates a single
 library.
 % Example: Arrangement_2<Geometry_traits_2, Dcel>
 %
 
-The \cgal{} library consists of several packages.  We use the same
-partition and to refer to each package as a module. Each module has a
+The source of \cgal{} consists of several packages.  We use the same
+partition and refer to each package as a module. Each module has a
 long (and meaningful) name and a short name; see
-Table~ref{tab:module-name} forthe list of modules supported so
-far. Each module is associated with a cmake Boolean flag that
+Table~ref{tab:module-name} for the list of modules supported so
+far. Each module is associated with a \cmake{} Boolean flag that
 determines whether to generate bindings for that particular
 module. Each module may be associated with zero or more additional
-flags that indicate selections for bindings within the module. For
-example, the long name of the 2D Arrangement module is
+flags that specify selections for bindings within the module. For
+example, the long name of the \iiDArrangementsPackage{} module is
 \myLstinline{ARRANGEMENT\_2}; its short name is \myLstinline{ARR2};
 the Boolean flag that indicates whether to generate bindings for this
 module is \myLstinline{CGALPY\_ARRANGEMENT\_2\_BINDINGS}. This module
@@ -48,49 +92,38 @@ package. This module has also a string flag
 geometry traits used to instantiate the \myLstinline{Arrangement\_2<>}
 class template.
 
-The Python attribute name of a bound entity of every module are
+The Python attribute names of the bound entities of every module are
 gathered in a distinct Python scope to prevent name conflicts. The
 name of the scope is the short name of the module in lower-case except
 for the first letter (which is in upper-case); for example, the scope
-names of the bound types and free functions of the 2D Arrangement and
-the 3D Triangulation packages are \myLstinline{Arr2} and
+names of the bound types and free functions of
+the \iiDArrangementsPackage{} and the \iiiDTriangulationsPackage{}
+packages are \myLstinline{Arr2} and
 \myLstinline{Tri3}, respectively. Each of these two scopes, for
 example, have the attribute \myLstinline{Vertex\_handle} (i.e.,
 \myLstinline{Arr2.Vertex\_handle} and
 \myLstinline{Tri3.Vertex\_handle}).
 
-As mentioned above, the cmake flag
+As mentioned above, the \cmake{} flag
 \myLstinline{CGALPY\_FIXED\_LIBRARY\_NAME} determines whether the name
 of the generated library is \myLstinline{CGALPY.so} or not. If not, it
-has the suffix \myLstinline{CGALPY_} followed by as many as substrings
+has the prefix \myLstinline{CGALPY_} followed by as many as substrings
 as modules, the bindings of which are enabled, separated by an
 underscore (\myLstinline{_}). Each such substring starts with the
 short name of the module in lower case followed by strings that maps
 to the selections for bindings within the module. Each such string is
 a single word that starts with a capital letter. For example, the name
-C\myLstinline{GALPY_kernelEpecInt_Arr2SegPlainPl} of a generated
+\myLstinline{GALPY_kernelEpecInt_Arr2SegPlainPl} of a generated
 library, names a library that contains bindings for (i) the
 Exact-Predicate-Exact-Construction (EPEC) kernel module and
-intersections, and (ii) the 2D Arrangement module, where the
-\myLstinline{Arrangement\_2<>} class template is instantiated with a
-traits class that handles segments and a plain DCEL, and point
+intersections, and (ii) the \iiDArrangementsPackage{} module, where
+the \myLstinline{Arrangement\_2<>} class template is instantiated with
+a traits class that handles segments and a plain DCEL, and point
 location queries.
 
 \begin{table}[!]
-  \tikzset{table/.style={
-      matrix of nodes,
-      row sep=-\pgflinewidth,
-      column sep=-\pgflinewidth,
-      nodes={minimum height=1.6em,rectangle,draw=black,align=left,anchor=center},
-      nodes in empty cells,
-      every even row/.style={nodes={fill=gray!20}},
-      column 1/.style={nodes={text width=16em}},
-      column 2/.style={nodes={text width=16em}},
-      column 3/.style={nodes={text width=7em}},
-      row 1/.style={nodes={minimum height=1.6em,anchor=center,align=center,fill=darkgray,text=white,font=\bfseries}}
-    }}
   \centering\begin{tikzpicture}
-    \matrix (first) [table] {
+    \matrix (first) [tableModuleName] {
 Module                  & Name                             & Short Name\\
 2D and 3D Kernel        & \myLstinline{KERNEL}             & \myLstinline{KER}\\
 2D Arrangements on Surfaces & \myLstinline{ARRANGEMENT\_2} & \myLstinline{ARR2}\\
@@ -125,27 +158,23 @@ indicates whether the generated library is compiled of static or
 dynamic libraries; it is true by default.
 
 The content of the library and its name are governed by flags provided
-to cmake. The number of flags is already large, and it is expected to
-grow in the future. All flags have the prefix
-\myLstinline{CGALPY_}. In the following tables this prefix is omitted.
+to \myLstinline{cmake}. The number of flags is already large, and it
+is expected to grow in the future. All flags have the prefix
+\myLstinline{CGALPY_}. In Tables~\ref{tab:args}, \ref{tab:sel},
+\ref{tab:ker}, \ref{tab:arr}, \ref{tab:tri}, \ref{tab:as}, and
+\ref{tab:ss} this is omitted.
 
 %%%%%%%%
 \begin{table}[!htp]
-  \tikzset{table/.style={
-      matrix of nodes,
-      row sep=-\pgflinewidth,
-      column sep=-\pgflinewidth,
-      nodes={minimum height=2.8em,rectangle,draw=black,align=left,anchor=center},
-      nodes in empty cells,
-      every even row/.style={nodes={fill=gray!20}},
+  \tikzset{tableGA/.style={table,
+      row 2/.style={nodes={minimum height=1.6em}},
+      row 3/.style={nodes={minimum height=1.6em}},
       column 1/.style={nodes={text width=11em}},
       column 2/.style={nodes={text width=4.8em}},
       column 3/.style={nodes={text width=3.8em}},
-      column 4/.style={nodes={text width=28em}},
-      row 1/.style={nodes={minimum height=1.6em,anchor=center,align=center,fill=darkgray,text=white,font=\bfseries}}
-    }}
+      column 4/.style={nodes={text width=28em}}}}
   \centering\begin{tikzpicture}
-    \matrix (first) [table] {
+    \matrix (first) [tableGA] {
 Name & Type & Default & Description\\
 \myLstinline{USE\_SHARED\_LIBS}    & \myLstinline{Boolean} & \myLstinline{true} & Determines whether to compile shared libraries\\
 \myLstinline{BUILD\_SHARED\_LIBS}  & \myLstinline{Boolean} & \myLstinline{true} & Determines whether to generate shared libraries\\
@@ -179,7 +208,16 @@ Name & Type & Default & Description\\
  \label{tab:sel}
 \end{table}
 
-%%%%%%%%
+% -----------------------------------------------------------------------------
+\subsubsection{Kernel Bindings}
+\label{sec:bind:gen:kernel}
+% -----------------------------------------------------------------------------
+The \iiDandiiiDGeometryKernelPackage{} package consists of
+constant-size non-modifiable geometric primitive objects and
+operations on these objects. The objects are sets of points in
+$d$-dimensional affine Euclidean space, where $d = 2,3$.
+
+%%%%%%%% Kernel
 \begin{table}[!htp]
   \centering\begin{tikzpicture}
     \matrix (first) [tableA] {
@@ -192,13 +230,21 @@ Name & Type & Default & Description\\
  \label{tab:ker}
 \end{table}
 
-%%%%%%%%
+%%%%%%%% Arrangement
 \begin{table}[!htp]
   \centering\begin{tikzpicture}
-    \matrix (first) [tableA] {
+    \matrix (first) [tableB] {
 Name & Type &  Default & Description\\
-\myLstinline{ARR2\_GEOMETRY\_TRAITS\_NAME}    & String  & \myLstinline{segment}     & The geometry traits of a 2D arrangement. Options are: linear, segment, nonCachingSegment, conic, algebraic, or circleSegment\\
-\myLstinline{ARR2\_DCEL\_NAME}                & String  & \myLstinline{allExtended} & The DCEL of a 2D arrangement. Options are: plain, faceExtended, halfedgeExtended, vertexExtended, allExtended\\
+\myLstinline{ARR2\_GEOMETRY\_TRAITS\_NAME}    & String  & \myLstinline{segment}     & The geometry traits of a 2D arrangement. Options are:
+  \myLstinline{linear},
+  \myLstinline{segment},
+  \myLstinline{nonCachingSegment},
+  \myLstinline{conic},
+  \myLstinline{algebraic}, or
+  \myLstinline{circleSegment}\\
+\myLstinline{ARR2\_DCEL\_NAME}                & String  & \myLstinline{allExtended} & The DCEL of a 2D arrangement. Options are: \myLstinline{plain},
+\myLstinline{faceExtended}, \myLstinline{halfedgeExtended},
+\myLstinline{vertexExtended}, \myLstinline{allExtended}\\
 \myLstinline{ARR2\_POINT\_LOCATION\_BINDINGS} & Boolean & \myLstinline{true}        & Determines whether to generate bindings for point location and vertical ray shooting queries\\
   };
  \end{tikzpicture}
