@@ -38,44 +38,44 @@ Section~\ref{sec:comp}.
 \subsection{\cmake}
 \label{ssec:intro:cmake}
 % =============================================================================
-\cmake{}~\cite{mh-mc-08} is an open-source, cross-platform suite of tools designed to
-build, test, and package software. The suite of \cmake{} tools were
-created in response to the need for cross-platform build environments
-for open-source projects. However, since its creation it has grown and
-become powerful, rich, and flexible. It is now widely spread and used
-by major commercial psoftware products for their build and test
-environments.
+\cmake{}~\cite{mh-mc-08} is an open-source, cross-platform suite of
+tools designed to build, test, and package software. The suite of
+\cmake{} tools were created to address the need for cross-platform
+build environments for open-source projects. However, since it was
+conceived over two decades ago, it has grown and become powerful,
+rich, and flexible. It is now considered a modern tool; it is widely
+spread and used by major commercial software products for their build
+and test environments.
 
 \cmake{}, for the most part, is a cross-platform build system
-generator.
-
-It is used to control the software building process using
-simple platform and compiler independent configuration files, and
-generate native build environments of the user choice. For example,
-once the \cmake{} configuration files are in place for a certain
-project, \cmake{} can be used to generate \myLstinline{Makefile} files
-required by the \myLstinline{make} utility of the GNU suite to compile
-a project on a Unix system using \myLstinline{g++}.
-
-Users build a
-project by using \cmake{} to generate a build system for a native tool
-on their platform.  The build process of a project is specified with
+generator.  It is used to control the software building process using
+simple platform and compiler independent configuration files, and it
+generates native build environments of the user choice. Users build a
+project by using \cmake{} to generate a build system for native tools
+on their platforms. \cmake{} supports an interpreted, functional,
+scripting language. The build process of a project is specified with
 platform-independent \cmake{} text files, named
-\myLstinline{CMakeLists.txt}, included in each directory of the source
-tree of the project. Perhaps the most popular tool in the suite is the
-\myLstinline{cmake} executable.  It is the command-line interface of
-the cross-platform build system generator of \cmake. For graphical
-user interfaces that may be used in place of cmake
+\myLstinline{CMakeLists.txt}, written in the \cmake{} language,
+included in each directory of the source tree of the project. For
+example, once the \cmake{} configuration files are in place for a
+certain project, \cmake{} can be used to generate
+\myLstinline{Makefile} files required by the \myLstinline{make}
+utility of the GNU suite to compile a project on a Unix system using
+\myLstinline{g++}. The command-line interface of the cross-platform
+build system generator of \cmake{} is an executable called
+\myLstinline{cmake}. It has a counterpart called
+\myLstinline{cmake-gui}, which also includes a graphical user inteface
+(GUI). To generate native project build files, the user invokes
+\myLstinline{cmake} in terminal and specifies the directory which
+contains the root \myLstinline{CMakeLists.txt}.
 
-
-
-To build a software project with CMake, Generate a Project Buildsystem. Optionally use cmake to Build a Project, Install a Project or just run the corresponding build tool (e.g. make) directly.
-
-The other actions are meant for use by software developers writing scripts in the CMake language to support their builds.
-
-we exploit this capability to conveniently generate the C++ Python bindings.
-
-For command-line interfaces to the CMake testing and packaging facilities, see ctest and cpack.
+A key feature of \cmake{} is the ability to (optionally) place
+compiler outputs (such as object files) outside the source tree. This
+enables multiple and concurent builds from the same source tree and
+cross-compilation. It also keeps the source tree clean and ensures
+that removing a build directory will not remove the source files.  We
+exploit this feature, and the scripting capabilities to conveniently
+generate the C++ Python bindings for several objects concurrently
 
 % =============================================================================
 \subsection{\cgal}
@@ -124,11 +124,24 @@ user. Naturally, bindings for user-extended models must be generated
 dynamically.
 
 \cgal{} uses \cmake{} for the build process.  Since version~5.0,
-\cgal{} is header-only be default, which means that there is no need
-to compile any library before \cgal{} can be used by an
-application. However, some dependencies of \cgal{} might need to be
-installed, and the configuration of \cgal{} must be carried out, which
-consists of a single application of xxx cmake.
+\cgal{} is header-only by default, which means that an application
+that depends on \cgal{} only depends on (i) source code of \cgal{}
+that resides in header file (which typically end with the suffix
+\myLstinline{.hpp}), and (ii) native configuration files generated by
+\cmake{} (in particular, the execution of \myLstinline{cmake}). In
+other words, there is no need to compile any library before an
+application that depends on \cgal{} and written in C++ is
+built.\footnote{Some dependencies of \cgal{} might need to be
+  installed in advanced}. On the hand, when running an application
+written in Python that depends on \cgal{} the libraries that contain
+the bindings must be accessible. Typically, those bindings are
+generated ahead of time with little knowledge about the application
+itself. This would impose a severe limitation in cases like ours,
+where the number of objects to be bound is large. In cases where the
+type pf the objects to be bound are closely tied with the application
+itself, generating bindings ahead of time is, naturally,
+impossible. Our system enables easy and convenient (re)generation of
+bindings, thus defeating these problems.
 
 % =============================================================================
 \subsection{Results}
