@@ -1,14 +1,14 @@
 \begin{abstract}
   We introduce bindings that enable the convenient, efficient, and
   reliable use of software modules of \cgal{} (Computational Geometry
-  Algorithm Library), which are written in C++, in code written in
+  Algorithm Library), which are written in C++, from within code written in
   Python.
   %
-  There are different ways to go about the implementation of such
-  bindings. We present a short study that compares three main methods,
-  which leads to the method of choice.
+  There are different tools that facilitate the creation of such
+  bindings. We present a short study that compares three main tools,
+  which leads to the tool of choice.
   % The implementation of practical algorithms and data structures in
-  computational geometry presents tremendous difficulties, such as
+  Computational geometry presents tremendous difficulties, such as
   obtaining stable software despite the use of (inexact) floating
   point arithmetic, found in standard hardware, and obtaing complete
   software that handles all degenerate cases, which typically are in
@@ -17,12 +17,12 @@
   the programmer has to make many choices that are resolved during
   compile time (of the C++ modules). While bindings take effect at run
   time (of the Python code), the type of the C++ objects that are
-  bound, must be known when the bindings are generated. The types of
-  the bound objects are instances (instantiated types) of C++ function
-  and class templates. The number of object types that potentially can
-  be bound enormous, and the generation of the bindings in advance
-  practiaclly impossible. We present a system that dynamically
-  generates bindings for desired object types according to user
-  prescriptions, which enables the convenient use of any subset of
-  bound object types concurrently.
+  bound, must be known when the bindings are generated, that is, when
+  they are compiled. The types of the bound objects are instances
+  (instantiated types) of C++ function and class templates. The number
+  of object types that potentially can be bound is enormous; thus, the
+  generation of the bindings in advance is practiaclly impossible. We
+  present a system that dynamically generates bindings for desired
+  object types according to user prescriptions, which enables the
+  convenient use of any subset of bound object types concurrently.
 \end{abstract}

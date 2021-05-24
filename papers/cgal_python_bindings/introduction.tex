@@ -2,7 +2,7 @@
 \section{Introduction}
 \label{sec:intro}
 % =============================================================================
-Bindings are manifested as wrapper libraries that bridge two
+Bindings are essentially wrapper libraries that bridge two
 programming languages, so that a software module developed in one
 language can be used in code written in another language, exploiting
 (i) the strengths of both languages, and (ii) the availability of
@@ -20,30 +20,73 @@ code written in Python tends to be too slow, largely due to Python's
 extremely dynamic nature. In particular, low-level computational loops
 are simply infeasible. In additiona, the magnitude of existing and
 well-tested code in Fortract, C, and C++, is enourmous. Python
-provides access to its internals from these languages via the Python/C
-API, which enables the exploitation of existing code in Fortrant, C
-and C++, as well as the replacement of critical sections written in
-these languages when speed is essential.
+provides the means to acces its internals from these languages via the
+Python/C API, which enables the exploitation of existing code in
+Fortrant, C and C++, as well as the replacement of critical sections
+written in these languages when speed is essential.
 
 Wrapping existing code has traditionally been the domain of Python
-experts due to a steep learning curve characterizes its Python/C
+experts due to the steep learning curve, which characterizes its Python/C
 API. Although using such wrappers is possible without ever knowing
 their internals, providing such wrappers creates a sharp line between
-developers using Python and developers using C or C++ with the
-Python/C API). Several Tools that ease the creation of such wrappers
-have been proposed; A sample of such tools are listed In
+developers using Python and developers using C or C++ (while the
+Python/C API). Several tools that ease the creation of such wrappers
+have been proposed and introduced; A sample of such tools are listed In
 Section~\ref{sec:comp}.
+
+% =============================================================================
+\subsection{\cmake}
+\label{ssec:intro:cmake}
+% =============================================================================
+\cmake{}~\cite{mh-mc-08} is an open-source, cross-platform suite of tools designed to
+build, test, and package software. The suite of \cmake{} tools were
+created in response to the need for cross-platform build environments
+for open-source projects. However, since its creation it has grown and
+become powerful, rich, and flexible. It is now widely spread and used
+by major commercial psoftware products for their build and test
+environments.
+
+\cmake{}, for the most part, is a cross-platform build system
+generator.
+
+It is used to control the software building process using
+simple platform and compiler independent configuration files, and
+generate native build environments of the user choice. For example,
+once the \cmake{} configuration files are in place for a certain
+project, \cmake{} can be used to generate \myLstinline{Makefile} files
+required by the \myLstinline{make} utility of the GNU suite to compile
+a project on a Unix system using \myLstinline{g++}.
+
+Users build a
+project by using \cmake{} to generate a build system for a native tool
+on their platform.  The build process of a project is specified with
+platform-independent \cmake{} text files, named
+\myLstinline{CMakeLists.txt}, included in each directory of the source
+tree of the project. Perhaps the most popular tool in the suite is the
+\myLstinline{cmake} executable.  It is the command-line interface of
+the cross-platform build system generator of \cmake. For graphical
+user interfaces that may be used in place of cmake
+
+
+
+To build a software project with CMake, Generate a Project Buildsystem. Optionally use cmake to Build a Project, Install a Project or just run the corresponding build tool (e.g. make) directly.
+
+The other actions are meant for use by software developers writing scripts in the CMake language to support their builds.
+
+we exploit this capability to conveniently generate the C++ Python bindings.
+
+For command-line interfaces to the CMake testing and packaging facilities, see ctest and cpack.
 
 % =============================================================================
 \subsection{\cgal}
 \label{ssec:intro:cgal}
 % =============================================================================
-\cgal{} (Computational Geometry Algorithm Library) is a software
-project that provides easy access to efficient and reliable
+\cgal{} (Computational Geometry Algorithm Library) is an open source
+software project that provides easy access to efficient and reliable
 implementations of geometric algorithms in the form of a C++
 library~\cite{cgal:eb-21}. \cgal{} has evolved through the years and
 now represents the state of the art in applied computational geometry
-software. The software modules of cgal{} rigorously adhere to the
+software. The software modules of \cgal{} rigorously adhere to the
 generic programming paradigm to overcome problems encountered when
 effective computational geometry software is implemented; they are
 stable despite the use of (inexact) floating point arithmetic, found
@@ -72,7 +115,7 @@ chains of C++ class templates. An instantiated type is a template that
 has one or more template parameters and every parameter is substituted
 by another type that is typically an instance of another template.
 %
-While the number of models of most concept is small, the number of
+While the number of models of most concepts is small, the number of
 potential types of objects that could be bound, and thus must be
 supported by the bindings, is enormous. Offering bindings for all
 these types in advance is practiaclly impossible. Moreover, in some
@@ -80,15 +123,22 @@ cases models need to be extended with types provided by the
 user. Naturally, bindings for user-extended models must be generated
 dynamically.
 
+\cgal{} uses \cmake{} for the build process.  Since version~5.0,
+\cgal{} is header-only be default, which means that there is no need
+to compile any library before \cgal{} can be used by an
+application. However, some dependencies of \cgal{} might need to be
+installed, and the configuration of \cgal{} must be carried out, which
+consists of a single application of xxx cmake.
+
 % =============================================================================
 \subsection{Results}
 \label{ssec:intro:results}
 % =============================================================================
 We introduce C++ Python bindings that enables the convenient,
 efficient, and reliable use of \cgal{} software modules in Python's
-code. There are different ways to go about the implementation of C++
+code. There are different tools that facilitate the creation of C++
 Python bindings. We present a short study that compares three main
-methods, which leads to the method of choice.
+tools, which leads to the method of choice.
 %
 We present a system that dynamically generates bindings of desired
 objects according to user prescriptions, which enables the convenient
