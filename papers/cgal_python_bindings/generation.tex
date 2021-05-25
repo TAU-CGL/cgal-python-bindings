@@ -27,10 +27,7 @@
   column 1/.style={nodes={text width=16em}},
   column 2/.style={nodes={text width=16em}},
   column 3/.style={nodes={text width=7em}}}}
-\tikzset{tableName/.style={table,
-  nodes={minimum height=1.6em},
-  column 1/.style={nodes={text width=8em}},
-  column 2/.style={nodes={text width=41em}}}}
+\tikzset{tableName/.style={table,nodes={minimum height=1.6em}}}
 % =============================================================================
 \section{Binding Generation}
 \label{sec:bind-gen}
@@ -269,34 +266,136 @@ Name & Type & Default & Description\\
 \myLstinline{KERNEL\_INTERSECTION\_BINDINGS} & Boolean & \myLstinline{true} & Determines whether to generate bindings for intersections\\
   };
  \end{tikzpicture}
-  \centering\begin{tikzpicture}
-    \matrix (first) [tableName] {
-\myLstinline{KERNEL\_NAME} & Predefined Type\\
-\myLstinline{epic} & \myLstinline{Exact_predicates_inexact_constructions_kernel}\\
-\myLstinline{epec} & \myLstinline{Exact_predicates_exact_constructions_kernel}\\
-\myLstinline{epecws} & \myLstinline{Exact_predicates_exact_constructions_kernel_with_sqrt}\\
+ %
+ \centering\begin{tikzpicture}
+   \matrix (first) [tableName,
+     column 1/.style={nodes={text width=8em}},
+     column 2/.style={nodes={text width=41em}}
+   ] {
+   \myLstinline{KERNEL\_NAME} & Predefined Type\\
+   \myLstinline{epic} &
+     \myLstinline{Exact_predicates_inexact_constructions_kernel}\\
+   \myLstinline{epec} &
+     \myLstinline{Exact_predicates_exact_constructions_kernel}\\
+   \myLstinline{epecws} &
+     \myLstinline{Exact_predicates_exact_constructions_kernel_with_sqrt}\\
   };
  \end{tikzpicture}
  \caption{Kernel Arguments}
  \label{tab:ker}
 \end{table}
 
+% -----------------------------------------------------------------------------
+\subsection{2D Arrangement Bindings}
+\label{sec:bind-gen:arr2}
+% -----------------------------------------------------------------------------
+Given a surface $S$ in \Rthree{} and a set $\calC$ of curves embedded
+in this surface, the curves subdivide $S$ into cells of dimension~$0$
+(vertices),~$1$ (edges), and~$2$ (faces). This subdivision is the
+arrangement $\calA(\calC)$ induced by $\calC$ on $S$. Arrangements
+embedded in curved surfaces in \Rthree{} are generalizations of
+arrangements embedded in the plane. The \iiDArrangementsPackage{}
+package~\cite{cgal:wfzh-a2-21a} can be used to construct, maintain,
+alter, and display 2D arrangements embedded in ruled curved
+surfaces. It also supports queries on such arrangements, such as point
+location. One of the main components of the \iiDArrangementsPackage{}
+package is the
+\myLstinline{Arrangement_2<Traits,Dcel>} class template. An instance of this
+template is used to represent an arrangement embedded in the plane.
+Table~\ref{tab:arr} lists the \cmake{} flags associated with
+the \iiDArrangementsPackage{} module.  Currently, only instances of
+the \myLstinline{Arrangement_2<Traits,Dcel>} class template are
+supported. A description of the two template parameters of this class
+template follows.
+
+\begin{itemize}
+  \item The Traits template-parameter determines the family of planar
+  curves that induce the arrangement. The parameter should be
+  substituted with a model of the basic arrangement traits concept,
+  and optionally additional geometry traits concepts. A model of the
+  basic traits concept defines the types of x-monotone curves and
+  two-dimensional points and supports basic geometric predicates on
+  them. The list of supported traits class template follows.
+  %
+  \begin{enumerate}
+  \item \myLstinline{Arr_non_caching_segment_basic_traits_2<Kernel>}---handles
+    segments.
+  \item \myLstinline{Arr_segment_traits_2<Kernel>}---handles segments,
+    where each segment is represented a by its supporting line in
+    addition to its two endpoints.
+  \item \myLstinline{Arr_linear_traits_2<Kernel>}---handles linear curves,
+    i.e., segments, rays, and lines.
+  \item \myLstinline{Arr_polyline_traits_2<SubcurveTraits_2>}
+  \item \myLstinline{Arr_polycurve_traits_2<SubcurveTraits_2>}
+  \item \myLstinline{Arr_circle_segment_traits_2<Kernel>}
+  \item \myLstinline{Arr_conic_traits_2<RatKernel, AlgKernel, NtTraits>}
+  \item \myLstinline{Arr_rational_function_traits_2<AlgebraicKernel_d_1>}
+  \item \myLstinline{Arr_Bezier_curve_traits_2<RatKernel, AlgKernel, NtTraits>}
+  \item \myLstinline{Arr_algebraic_segment_traits_2<Coefficient>}
+  \end{enumerate}
+  %
+\item The Dcel template-parameter should be substituted with a class that
+  models the \myLstinline{ArrangementDcel} concept, which is used to
+  represent the topological layout of the
+  arrangement.\footnote{See \url{https://doc.cgal.org/latest/Arrangement_on_surface_2/classArrangementDcel.html}.}
+  This parameter is substituted
+  with \myLstinline{Arr_default_dcel<Traits>} by default. In many
+  applications it is necessary to extend the DCEL features. This is
+  done by substituting the Dcel parameter with a different type; see
+  Section Extending the DCEL for further explanations and examples.
+\end{itemize}
+
 %%%%%%%% Arrangement
 \begin{table}[!htp]
   \centering\begin{tikzpicture}
-    \matrix (first) [tableB] {
-Name & Type &  Default & Description\\
-\myLstinline{ARR2\_GEOMETRY\_TRAITS\_NAME}    & String  & \myLstinline{segment}     & The geometry traits of a 2D arrangement. Options are:
-  \myLstinline{linear},
-  \myLstinline{segment},
-  \myLstinline{nonCachingSegment},
-  \myLstinline{conic},
-  \myLstinline{algebraic}, or
-  \myLstinline{circleSegment}\\
-\myLstinline{ARR2\_DCEL\_NAME}                & String  & \myLstinline{allExtended} & The DCEL of a 2D arrangement. Options are: \myLstinline{plain},
-\myLstinline{faceExtended}, \myLstinline{halfedgeExtended},
-\myLstinline{vertexExtended}, \myLstinline{allExtended}\\
-\myLstinline{ARR2\_POINT\_LOCATION\_BINDINGS} & Boolean & \myLstinline{true}        & Determines whether to generate bindings for point location and vertical ray shooting queries\\
+  \matrix (first) [tableB,
+    row 3/.style={nodes={minimum height=1.6em}},
+    row 4/.style={nodes={minimum height=4.0em}}
+  ] {
+    Name & Type & Default & Description\\
+    \myLstinline{ARR2\_GEOMETRY\_TRAITS\_NAME}    & String  &
+      \myLstinline{segment}     & The geometry traits of a 2D arrangement\\
+    \myLstinline{ARR2\_DCEL\_NAME}                & String  &
+      \myLstinline{allExtended} & The DCEL of a 2D arrangement\\
+    \myLstinline{ARR2\_POINT\_LOCATION\_BINDINGS} & Boolean &
+      \myLstinline{true}        & Determines whether to generate bindings for point location and vertical ray shooting queries\\
+  };
+ \end{tikzpicture}
+ %
+ \centering\begin{tikzpicture}
+   \matrix (first) [tableName,
+     column 1/.style={nodes={text width=18em}},
+     column 2/.style={nodes={text width=31em}}
+   ] {
+     \myLstinline{ARR2\_GEOMETRY\_TRAITS\_NAME} & Type\\
+     \myLstinline{nonCachingSegment} &
+       \myLstinline{Arr_non_caching_segment_basic_traits_2<Kernel>}\\
+     \myLstinline{segment} & \myLstinline{Arr_segment_traits_2<Kernel>}\\
+     \myLstinline{linear} & \myLstinline{Arr_linear_traits_2<Kernel>}\\
+     \myLstinline{conic} &
+       \myLstinline{Arr_conic_traits_2<RatKernel, AlgKernel, NtTraits>}\\
+     \myLstinline{circleSegment} &
+       \myLstinline{Arr_circle_segment_traits_2<Kernel>}\\
+     \myLstinline{algebraic} &
+       \myLstinline{Arr_algebraic_segment_traits_2<Coefficient>}\\
+   };
+ \end{tikzpicture}
+ %
+ \centering\begin{tikzpicture}
+   \matrix (first) [tableName,
+     column 1/.style={nodes={text width=12em}},
+     column 2/.style={nodes={text width=37em}}
+   ] {
+     \myLstinline{ARR2\_DCEL\_NAME} & Type\\
+     \myLstinline{plain} & \myLstinline{Arr_default_dcel<GeometryTraits>}\\
+     \myLstinline{vertexExtended} &
+       \myLstinline{Arr_vertex_extended_dcel<Traits, Data>}\\
+     \myLstinline{halfedgeExtended} &
+       \myLstinline{Arr_halfedge_extended_dcel<Traits, Data>}\\
+     \myLstinline{faceExtended} &
+       \myLstinline{Arr_face_extended_dcel<Traits, Data>}\\
+     \myLstinline{allExtended} &
+       \myLstinline{Arr_extended_dcel<Traits, VertexData, HalfedgeData, FaceData>}\\
   };
  \end{tikzpicture}
  \caption{2D Arrangement Arguments}
