@@ -27,6 +27,10 @@
   column 1/.style={nodes={text width=16em}},
   column 2/.style={nodes={text width=16em}},
   column 3/.style={nodes={text width=7em}}}}
+\tikzset{tableName/.style={table,
+  nodes={minimum height=1.6em},
+  column 1/.style={nodes={text width=8em}},
+  column 2/.style={nodes={text width=41em}}}}
 % =============================================================================
 \section{Binding Generation}
 \label{sec:bind-gen}
@@ -35,7 +39,7 @@ The most simple form of building an application written in C++ that
 depends on \cgal{} consists of the stages below. Let
 \myLstinline{\$APP\_SRC\_DIR} point at the root directory of the
 application source tree.
-\begin{enumerate}
+\begin{compactenum}
 \item Obtain the sources of \cgal{}; let \myLstinline{\$CGAL\_SRC\_DIR}
   point at the root directory of the \cgal{} source tree.
 \item Create a build directory for \cgal{}; let \myLstinline{\$CGAL\_DIR}
@@ -47,7 +51,7 @@ application source tree.
 \item Change directory to \myLstinline{\$APP\_DIR} and run
   '\myLstinline{cmake [options] \$APP\_SRC\_DIR}' followed by
   '\myLstinline{make}'.
-\end{enumerate}
+\end{compactenum}
 
 In the procedure above \myLstinline{options} refer to optional
 arguments passed to \myLstinline{cmake}, which govern the generation
@@ -64,17 +68,17 @@ library is insufficient.
 
 By default, the name of the generated library
 is \myLstinline{CGALPY.so}. However, the user can override the name
-with a string that maps to the set of bound instances. This is useful
-when more then one instance of the same template must be bound. Each
-execution of \myLstinline{cmake} followed by make generates a single
-library.
+with a generated string that maps to the set of bound instances. This
+is useful when more then one instance of the same template must be
+bound. Each execution of \myLstinline{cmake} followed by make
+generates a single library.
 % Example: Arrangement_2<Geometry_traits_2, Dcel>
 %
 
 The source of \cgal{} consists of several packages.  We use the same
 partition and refer to each package as a module. Each module has a
 long (and meaningful) name and a short name; see
-Table~ref{tab:module-name} for the list of modules supported so
+Table~\ref{tab:module-name} for the list of modules supported so
 far. Each module is associated with a \cmake{} Boolean flag that
 determines whether to generate bindings for that particular
 module. Each module may be associated with zero or more additional
@@ -85,14 +89,14 @@ the Boolean flag that indicates whether to generate bindings for this
 module is \myLstinline{CGALPY\_ARRANGEMENT\_2\_BINDINGS}. This module
 is associated with the Boolean flag
 \myLstinline{CGALPY\_ARR2\_POINT\_LOCATION\_BINDINGS} that indicates
-whether to generate bindings for point location of 2D Arrangements
-package. This module has also a string flag
-\myLstinline{CGALPY\_ARR2\_GEOMETRY\_TRAITS\_NAME} that indicates the
-geometry traits used to instantiate the \myLstinline{Arrangement\_2<>}
-class template.
+whether to generate bindings for point location queries supported by
+the \iiDArrangementsPackage{} package. This module has also a string
+flag \myLstinline{CGALPY\_ARR2\_GEOMETRY\_TRAITS\_NAME} that indicates
+the geometry traits used to instantiate the
+\myLstinline{Arrangement\_2<>} class template.
 
-The Python attribute names of the bound entities of every module are
-gathered in a distinct Python scope to prevent name conflicts. The
+The Python attribute names of the bound entities of different modules
+are gathered in distinct Python scopes to prevent name conflicts. The
 name of the scope is the short name of the module in lower-case except
 for the first letter (which is in upper-case); for example, the scope
 names of the bound types and free functions of
@@ -103,19 +107,21 @@ example, have the attribute \myLstinline{Vertex\_handle} (i.e.,
 \myLstinline{Arr2.Vertex\_handle} and
 \myLstinline{Tri3.Vertex\_handle}).
 
-As mentioned above, the \cmake{} flag
-\myLstinline{CGALPY\_FIXED\_LIBRARY\_NAME} determines whether the name
-of the generated library is \myLstinline{CGALPY.so} or not. If not, it
-has the prefix \myLstinline{CGALPY_} followed by as many as substrings
-as modules, the bindings of which are enabled, separated by an
-underscore (\myLstinline{_}). Each such substring starts with the
+As mentioned above, the default name of the generated library can be
+overriden. The \cmake{}
+flag \myLstinline{CGALPY\_FIXED\_LIBRARY\_NAME} determines whether the
+name of the generated library is \myLstinline{CGALPY.so} or not. If
+not, it has the prefix \myLstinline{CGALPY_} followed by as many as
+substrings as modules, the bindings of which are enabled, separated by
+an underscore (\myLstinline{_}). Each such substring starts with the
 short name of the module in lower case followed by strings that maps
 to the selections for bindings within the module. Each such string is
 a single word that starts with a capital letter. For example, the name
 \myLstinline{GALPY_kernelEpecInt_Arr2SegPlainPl} of a generated
 library, names a library that contains bindings for (i) the
-Exact-Predicate-Exact-Construction (EPEC) kernel module and
-intersections, and (ii) the \iiDArrangementsPackage{} module, where
+Exact-Predicate-Exact-Construction
+(EPEC) \iiDandiiiDGeometryKernelPackage{} module and intersections,
+and (ii) the \iiDArrangementsPackage{} module, where
 the \myLstinline{Arrangement\_2<>} class template is instantiated with
 a traits class that handles segments and a plain DCEL, and point
 location queries.
@@ -161,7 +167,7 @@ to \myLstinline{cmake}. The number of flags is already large, and it
 is expected to grow in the future. All flags have the prefix
 \myLstinline{CGALPY_}. In Tables~\ref{tab:args}, \ref{tab:sel},
 \ref{tab:ker}, \ref{tab:arr}, \ref{tab:tri}, \ref{tab:as}, and
-\ref{tab:ss} this is omitted.
+\ref{tab:ss} this prefix is omitted.
 
 %%%%%%%%
 \begin{table}[!htp]
@@ -214,15 +220,61 @@ Name & Type & Default & Description\\
 The \iiDandiiiDGeometryKernelPackage{} package consists of
 constant-size non-modifiable geometric primitive objects and
 operations on these objects. The objects are sets of points in
-$d$-dimensional affine Euclidean space, where $d = 2,3$.
+$d$-dimensional affine Euclidean space, where $d = 2,3$.  Each point
+is uniquely represented either by Cartesian coordinates or by
+homogeneous coordinates. An object is represented as a type member of
+a kernel type. The kernel type, for example, determines the underlying
+number types used for calculations. Table~\ref{tab:ker} lists the \cmake{}
+flags associated with the \iiDandiiiDGeometryKernelPackage{} module.
+The kernel type is an instance of a chain of C++ class templates. For
+convenience, \cgal{} provides the following predefned types of generally
+useful kernels:
+\begin{compactenum}
+\item \myLstinline{Exact_predicates_inexact_constructions_kernel}---provides
+  exact geometric predicates, but geometric constructions may be inexact
+  due to round-off errors.
+  %
+\item \myLstinline{Exact_predicates_exact_constructions_kernel}---provides
+  exact geometric constructions, in addition to exact geometric predicates.
+  %
+\item \myLstinline{Exact_predicates_exact_constructions_kernel_with_sqrt}---same
+  as\\
+  \myLstinline{Exact_predicates_exact_constructions_kernel}, but the
+  number type is a model of the concept that requires operations that perform
+  square roots, namely \myLstinline{FieldWithSqrt}.\footnote{See \url{https://doc.cgal.org/latest/Algebraic_foundations/classFieldWithSqrt.html}.}
+  %
+\item \myLstinline{Exact_predicates_exact_constructions_kernel_with_kth_root}---same
+  as \\
+  \myLstinline{Exact_predicates_exact_constructions_kernel}, but the number
+  type is a model of the concept that requires operations that perform $k$-th
+  roots, namely
+  \myLstinline{FieldWithKthRoot}.\footnote{See \url{https://doc.cgal.org/latest/Algebraic_foundations/classFieldWithKthRoot.html}}
+  %
+\item \myLstinline{Exact_predicates_exact_constructions_kernel_with_root_of}---same\\
+  as \myLstinline{Exact_predicates_exact_constructions_kernel}, but the number
+  type is a model of the concept that requires operations that computes the root of univariate polynomial, namely \myLstinline{FieldWithRootOf}.\footnote{See \url{https://doc.cgal.org/latest/Algebraic_foundations/classFieldWithRootOf.html}.}
+\end{compactenum}
+
+All the predefined types are of Cartesian
+kernels. The \cmake{} flag \myLstinline{KERNEL\_NAME} specifies which
+kernel type should be used for the generated bindings.  Currently,
+only a limitted predefined types are supported; see Table~\ref{tab:ker}.
 
 %%%%%%%% Kernel
 \begin{table}[!htp]
   \centering\begin{tikzpicture}
-    \matrix (first) [tableA] {
+    \matrix (first) [tableA,row 2/.style={nodes={minimum height=1.6em}}] {
 Name & Type & Default & Description\\
-\myLstinline{KERNEL\_NAME} & String & \myLstinline{epic} & The kernel used, either epic, epec, or epecws\\
+\myLstinline{KERNEL\_NAME} & String & \myLstinline{epic} & The kernel type used\\
 \myLstinline{KERNEL\_INTERSECTION\_BINDINGS} & Boolean & \myLstinline{true} & Determines whether to generate bindings for intersections\\
+  };
+ \end{tikzpicture}
+  \centering\begin{tikzpicture}
+    \matrix (first) [tableName] {
+\myLstinline{KERNEL\_NAME} & Predefined Type\\
+\myLstinline{epic} & \myLstinline{Exact_predicates_inexact_constructions_kernel}\\
+\myLstinline{epec} & \myLstinline{Exact_predicates_exact_constructions_kernel}\\
+\myLstinline{epecws} & \myLstinline{Exact_predicates_exact_constructions_kernel_with_sqrt}\\
   };
  \end{tikzpicture}
  \caption{Kernel Arguments}
