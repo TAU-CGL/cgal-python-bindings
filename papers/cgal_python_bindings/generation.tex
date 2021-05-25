@@ -402,21 +402,99 @@ template follows.
  \label{tab:arr}
 \end{table}
 
-%%%%%%%%
+% -----------------------------------------------------------------------------
+\subsection{3D Triangulation Bindings}
+\label{sec:bind-gen:tri3}
+% -----------------------------------------------------------------------------
+
+%%%%%%%% 3D Triangulation
 \begin{table}[!htp]
   \centering\begin{tikzpicture}
-    \matrix (first) [tableA] {
+    \matrix (first) [tableB,
+       row 2/.style={nodes={minimum height=1.6em}},
+       row 3/.style={nodes={minimum height=1.6em}},
+       row 4/.style={nodes={minimum height=1.6em}},
+       row 6/.style={nodes={minimum height=1.6em}},
+       row 7/.style={nodes={minimum height=1.6em}}
+    ] {
 Name & Type &  Default & Description\\
-\myLstinline{TRI3\_NAME}                   & String & \myLstinline{regular}    & The 3D triangulation type; options are: plain, regular, delaunay, or periodic3Delaunay\\
-\myLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & Options are: plain, plainWithInfo, regular, regualrWithInfo alphaShape, alphaShapeWithInfo, alphaShapeRegular, alphaShapeRegularWithInfo, fixedAlphaShape, fixedAlphaShapeWithInfo, fixedAlphaShapeRegular, or fixedAlphaShapeRegularWithInfo\\
-\myLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & Options are: plain, plainWithInfo, regular, regualrWithInfo alphaShape, alphaShapeWithInfo, alphaShapeRegular, alphaShapeRegularWithInfo, fixedAlphaShape, fixedAlphaShapeWithInfo, fixedAlphaShapeRegular, or fixedAlphaShapeRegularWithInfo\\
-\myLstinline{TRI3\_TRAITS\_NAME}           & String & \myLstinline{kernel}     & The geometry traits of a 2D triangulation, either kernel or periodic3Delaunay\\
-\myLstinline{TRI3\_CONCURRENCY\_NAME}      & String & \myLstinline{sequential} & The concurrency method, either sequential or parallel\\
-\myLstinline{TRI3\_LOCATION\_POLICY\_NAME} & String & \myLstinline{compact}    & The location policy, either fast or compact\\
+\myLstinline{TRI3\_NAME}                   & String & \myLstinline{regular}    & The 3D triangulation type\\
+\myLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & \\
+\myLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & \\
+\myLstinline{TRI3\_TRAITS\_NAME}           & String & \myLstinline{kernel}     & The geometry traits of a 2D triangulation\\
+\myLstinline{TRI3\_CONCURRENCY\_NAME}      & String & \myLstinline{sequential} & The concurrency method\\
+\myLstinline{TRI3\_LOCATION\_POLICY\_NAME} & String & \myLstinline{compact}    & The location policy\\
   };
- \end{tikzpicture}
- \caption{3D Triangulation Arguments}
- \label{tab:tri}
+  \end{tikzpicture}
+  %
+  \centering\begin{tikzpicture}
+    \matrix (first) [tableName,
+      column 1/.style={nodes={text width=12em}},
+      column 2/.style={nodes={text width=37em}}
+    ] {
+    \myLstinline{TRI3\_NAME} & Type\\
+    \myLstinline{plain} & \\
+    \myLstinline{regular} & \\
+    \myLstinline{delaunay} & \\
+    \myLstinline{periodic3Delaunay} & \\
+  };
+  \end{tikzpicture}
+  %
+  \centering\begin{tikzpicture}
+    \matrix (first) [tableName,
+      column 1/.style={nodes={text width=19em}},
+      column 2/.style={nodes={text width=30em}}
+    ] {
+    \myLstinline{TRI3\_VERTEX|CELL\_BASE\_NAME} & Type\\
+    \myLstinline{plain} & \\
+    \myLstinline{plainWithInfo} & \\
+    \myLstinline{regular} & \\
+    \myLstinline{regualrWithInfo} & \\
+    \myLstinline{alphaShape} & \\
+    \myLstinline{alphaShapeWithInfo} & \\
+    \myLstinline{alphaShapeRegular} & \\
+    \myLstinline{alphaShapeRegularWithInfo} & \\
+    \myLstinline{fixedAlphaShape} & \\
+    \myLstinline{fixedAlphaShapeWithInfo} & \\
+    \myLstinline{fixedAlphaShapeRegular} & \\
+    \myLstinline{fixedAlphaShapeRegularWithInfo} & \\
+  };
+  \end{tikzpicture}
+  %
+  \centering\begin{tikzpicture}
+    \matrix (first) [tableName,
+      column 1/.style={nodes={text width=12em}},
+      column 2/.style={nodes={text width=37em}}
+    ] {
+    \myLstinline{TRI3\_TRAITS\_NAME} & Type\\
+    \myLstinline{kernel} & \\
+    \myLstinline{periodic3Delaunay} & \\
+  };
+  \end{tikzpicture}
+  %
+  \centering\begin{tikzpicture}
+    \matrix (first) [tableName,
+      column 1/.style={nodes={text width=15em}},
+      column 2/.style={nodes={text width=34em}}
+    ] {
+    \myLstinline{TRI3\_CONCURRENCY\_NAME} & Type\\
+    \myLstinline{sequential} & \\
+    \myLstinline{parallel} & \\
+  };
+  \end{tikzpicture}
+  %
+  \centering\begin{tikzpicture}
+    \matrix (first) [tableName,
+      column 1/.style={nodes={text width=18em}},
+      column 2/.style={nodes={text width=31em}}
+    ] {
+    \myLstinline{TRI3\_LOCATION\_POLICY\_NAME} & Type\\
+    \myLstinline{fast} & \\
+    \myLstinline{compact} & \\
+  };
+  \end{tikzpicture}
+  \caption{3D Triangulation Arguments}
+  \label{tab:tri}
 \end{table}
 
 %%%%%%%%
