@@ -406,6 +406,35 @@ template follows.
 \subsection{3D Triangulation Bindings}
 \label{sec:bind-gen:tri3}
 % -----------------------------------------------------------------------------
+An instance of the 3D-triangulation class template
+\myLstinline{Triangulation_3<Traits_3,DataStructure_3>}, provided by
+the \iiiDTriangulationsPackage{} package, is used to represent a
+triangulation of a set of points $\calA$ in \Rthree. The triangulation
+is a partition of the convex hull of $\calA$ into tetrahedra whose
+vertices are the points of $\calA$. Together with the unbounded cell
+having the convex hull boundary as its frontier, the triangulation
+forms a partition of \Rthree. Any two cells (3-faces) are either
+disjoint or share a common facet (2-face), edge (1-face) or vertex
+(0-face). When \myLstinline{Triangulation_3<>} is instantiated the
+template parameter \myLstinline{Traits_3} must be substituted with the
+geometric traits class that provides the type of points to use as well
+as elementary operations on them. The type that substitutes the
+\myLstinline{DataStructure_3} parameter stores the combinatorial
+structure of the triangulation. The \iiiDTriangulationsPackage{}
+package also provides the class templates
+\myLstinline{Delaunay_triangulation_3<Traits_3, DataStructure_3, LocationPolicy>},
+an instance of which can be used to represent a Delaunay
+triangulation, and the class
+template \myLstinline{Regular_triangulation_3<Traits_3,
+DataStructure_3>}. In a regular triangulation points have an
+associated weight, and some points can be hidden and do not result in
+vertices in the triangulation.
+
+\myLstinline{Periodic_3_triangulation_3<>},
+\myLstinline{Periodic_3_Delaunay_triangulation_3<>}, and
+\myLstinline{Periodic_3_regular_triangulation_3<>} provide high-level geometric functionality and are responsible for the geometric validity. They are built as layers on top of a triangulation data structure, which stores their combinatorial structure.
+
+The periodic 3D-triangulation class template is designed to represent the triangulations of a set of points in the three-dimensional flat torus. The triangulation forms a partition of the space it is computed in. It is a simplicial complex, i.e. it contains all incident j-simplices (j<k) of any k-simplex and two k-simplices either do not intersect or share a common j-face, j<k. The occurring simplices of dimension up to three are called vertex, edge, facet, and cell, respectively.
 
 %%%%%%%% 3D Triangulation
 \begin{table}[!htp]
@@ -436,7 +465,7 @@ Name & Type &  Default & Description\\
     \myLstinline{plain} & \\
     \myLstinline{regular} & \\
     \myLstinline{delaunay} & \\
-    \myLstinline{periodic3Delaunay} & \\
+    \myLstinline{periodicDelaunay} & \\
   };
   \end{tikzpicture}
   %
