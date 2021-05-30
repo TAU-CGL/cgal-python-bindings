@@ -24,9 +24,9 @@ size_t hash_rational_point(Point& p)
   for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c)
   {
     auto q = (*c).exact();
-    // simplify(q);
-    // boost::hash_combine(seed, q.numerator().to_double());
-    // boost::hash_combine(seed, q.denominator().to_double());
+    simplify(q);
+    boost::hash_combine(seed, q.numerator().to_double());
+    boost::hash_combine(seed, q.denominator().to_double());
   }
   return seed;
 }
