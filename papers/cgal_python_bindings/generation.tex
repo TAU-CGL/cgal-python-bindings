@@ -72,10 +72,11 @@ generates a single library.
 % Example: Arrangement_2<Geometry_traits_2, Dcel>
 %
 
-The source of \cgal{} consists of several packages.  We use the same
-partition and refer to each package as a module. Each module has a
-long (and meaningful) name and a short name; see
-Table~\ref{tab:module-name} for the list of modules supported so
+The source of \cgal{} consists of several packages.  We use a similar
+partition. Typically, we refer to each package as a module. In some
+cases we combine a small number of packages and refer to them as a
+whole. Each module has a long (and meaningful) name and a short name;
+see Table~\ref{tab:module-name} for the list of modules supported so
 far. Each module is associated with a \cmake{} Boolean flag that
 determines whether to generate bindings for that particular
 module. Each module may be associated with zero or more additional
@@ -106,7 +107,7 @@ example, have the attribute \myLstinline{Vertex\_handle} (i.e.,
 
 As mentioned above, the default name of the generated library can be
 overriden. The \cmake{}
-flag \myLstinline{CGALPY\_FIXED\_LIBRARY\_NAME} determines whether the
+flag \\\myLstinline{CGALPY\_FIXED\_LIBRARY\_NAME} determines whether the
 name of the generated library is \myLstinline{CGALPY.so} or not. If
 not, it has the prefix \myLstinline{CGALPY_} followed by as many as
 substrings as modules, the bindings of which are enabled, separated by
@@ -317,7 +318,7 @@ template follows.
   two-dimensional points and supports basic geometric predicates on
   them. The list of supported traits class template follows.
   %
-  \begin{enumerate}
+  \begin{compactenum}
   \item \myLstinline{Arr_non_caching_segment_basic_traits_2<Kernel>}---handles
     segments.
   \item \myLstinline{Arr_segment_traits_2<Kernel>}---handles segments,
@@ -332,7 +333,7 @@ template follows.
   \item \myLstinline{Arr_rational_function_traits_2<AlgebraicKernel_d_1>}
   \item \myLstinline{Arr_Bezier_curve_traits_2<RatKernel, AlgKernel, NtTraits>}
   \item \myLstinline{Arr_algebraic_segment_traits_2<Coefficient>}
-  \end{enumerate}
+  \end{compactenum}
   %
 \item The Dcel template-parameter should be substituted with a class that
   models the \myLstinline{ArrangementDcel} concept, which is used to
@@ -406,47 +407,53 @@ template follows.
 \subsection{3D Triangulation Bindings}
 \label{sec:bind-gen:tri3}
 % -----------------------------------------------------------------------------
-An instance of the 3D-triangulation class template
-\myLstinline{Triangulation_3<Traits_3,DataStructure_3>}, provided by
-the \iiiDTriangulationsPackage{} package, is used to represent a
-triangulation of a set of points $\calA$ in \Rthree. The triangulation
-is a partition of the convex hull of $\calA$ into tetrahedra whose
-vertices are the points of $\calA$. Together with the unbounded cell
-having the convex hull boundary as its frontier, the triangulation
-forms a partition of \Rthree. Any two cells (3-faces) are either
-disjoint or share a common facet (2-face), edge (1-face) or vertex
-(0-face). When \myLstinline{Triangulation_3<>} is instantiated the
-template parameter \myLstinline{Traits_3} must be substituted with the
-geometric traits class that provides the type of points to use as well
-as elementary operations on them. The type that substitutes the
+A triangulation of a set of points $\calP$ in \Rthree is a partition
+of the convex hull of $\calP$ into tetrahedra whose vertices are the
+points of $\calP$. Together with the unbounded cell having the convex
+hull boundary as its frontier, the triangulation forms a partition
+of \Rthree. Any two cells (3-faces) are either disjoint or share a
+common facet (2-face), edge (1-face) or vertex (0-face).
+the \iiiDTriangulationsPackage{} package~\cite{cgal:pt-t3-21a}
+provides several class templates instances of which can be used to
+represent a variaty 3D triangulations. It particular, the package
+provides the following class templates:
+\begin{compactenum}
+\item \myLstinline{Triangulation_3<Traits_3, DataStructure_3, SpatialLockDataStructure>},
+\item \myLstinline{Delaunay_triangulation_3<Traits_3, DataStructure_3, LocationPolicy>}, or
+\item \myLstinline{Regular_triangulation_3<Traits_3, DataStructure_3>}
+\end{compactenum}
+Instance of the \myLstinline{Delaunay_triangulation_3<>} and
+\myLstinline{Regular_triangulation_3<>} class template can be used to
+represent Delaunay and regular triangulation, respectively. In a
+regular triangulation points have an associated weight, and some
+points can be hidden and do not result in vertices in the triangulation.
+
+When any template above is instantiated the template parameter
+\myLstinline{Traits_3} must be substituted with the geometric traits
+class that provides the type of points to use as well as elementary
+operations on them. The type that substitutes the
 \myLstinline{DataStructure_3} parameter stores the combinatorial
-structure of the triangulation. The \iiiDTriangulationsPackage{}
-package also provides the class templates
-\myLstinline{Delaunay_triangulation_3<Traits_3, DataStructure_3, LocationPolicy>},
-an instance of which can be used to represent a Delaunay
-triangulation, and the class
-template \myLstinline{Regular_triangulation_3<Traits_3,
-DataStructure_3>}. In a regular triangulation points have an
-associated weight, and some points can be hidden and do not result in
-vertices in the triangulation.
+structure of the triangulation.
 
-\myLstinline{Periodic_3_triangulation_3<>},
-\myLstinline{Periodic_3_Delaunay_triangulation_3<>}, and
-\myLstinline{Periodic_3_regular_triangulation_3<>} provide high-level geometric functionality and are responsible for the geometric validity. They are built as layers on top of a triangulation data structure, which stores their combinatorial structure.
-
-The periodic 3D-triangulation class template is designed to represent the triangulations of a set of points in the three-dimensional flat torus. The triangulation forms a partition of the space it is computed in. It is a simplicial complex, i.e. it contains all incident j-simplices (j<k) of any k-simplex and two k-simplices either do not intersect or share a common j-face, j<k. The occurring simplices of dimension up to three are called vertex, edge, facet, and cell, respectively.
+The \iiiDPeriodicTriangulationsPackage{}
+package~\cite{cgal:ct-pt3-21a} supports triangulations of sets of
+points in the three-dimensional flat torus. This package provides the
+class templates
+\begin{compactenum}
+\item \myLstinline{Periodic_3_triangulation_3<Traits_3, DataStructure_3>},
+\item \myLstinline{Periodic_3_Delaunay_triangulation_3<Traits_3, DataStructure_3>}, and
+\item \myLstinline{Periodic_3_regular_triangulation_3<Traits_3, DataStructure_3>}.
+\end{compactenum}
 
 %%%%%%%% 3D Triangulation
 \begin{table}[!htp]
-  \centering\begin{tikzpicture}
-    \matrix (first) [tableB,
-       row 2/.style={nodes={minimum height=1.6em}},
-       row 3/.style={nodes={minimum height=1.6em}},
-       row 4/.style={nodes={minimum height=1.6em}},
-       row 6/.style={nodes={minimum height=1.6em}},
-       row 7/.style={nodes={minimum height=1.6em}}
-    ] {
-Name & Type &  Default & Description\\
+  \centering\begin{tikzpicture} \matrix (first) [tableB, row
+    2/.style={nodes={minimum height=1.6em}}, row
+    3/.style={nodes={minimum height=1.6em}}, row
+    4/.style={nodes={minimum height=1.6em}}, row
+    6/.style={nodes={minimum height=1.6em}}, row
+    7/.style={nodes={minimum height=1.6em}} ] { Name & Type & Default
+    & Description\\
 \myLstinline{TRI3\_NAME}                   & String & \myLstinline{regular}    & The 3D triangulation type\\
 \myLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & \\
 \myLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & \\
@@ -458,14 +465,16 @@ Name & Type &  Default & Description\\
   %
   \centering\begin{tikzpicture}
     \matrix (first) [tableName,
-      column 1/.style={nodes={text width=12em}},
-      column 2/.style={nodes={text width=37em}}
+      column 1/.style={nodes={text width=10em}},
+      column 2/.style={nodes={text width=39em}}
     ] {
     \myLstinline{TRI3\_NAME} & Type\\
-    \myLstinline{plain} & \\
-    \myLstinline{regular} & \\
-    \myLstinline{delaunay} & \\
-    \myLstinline{periodicDelaunay} & \\
+    \myLstinline{plain} & \myLstinline{Triangulation_3<Traits_3, DataStructure_3>}\\
+    \myLstinline{regular} & \myLstinline{Regular_triangulation_3<Traits_3, DataStructure_3>}\\
+    \myLstinline{delaunay} & \myLstinline{Delaunay_triangulation_3<Traits_3, DataStructure_3>}\\
+    \myLstinline{periodicPlain} & \myLstinline{Periodic_3_triangulation_3<Traits_3, DataStructure_3>}\\
+    \myLstinline{periodicRegular} & \myLstinline{Periodic_3_regular_triangulation_3<Traits_2, DataStructure_3>}\\
+    \myLstinline{periodicDelaunay} & \myLstinline{Periodic_3_Delaunay_triangulation_3<Traits_2, DataStructure_3>}\\
   };
   \end{tikzpicture}
   %
@@ -526,7 +535,37 @@ Name & Type &  Default & Description\\
   \label{tab:tri}
 \end{table}
 
-%%%%%%%%
+% -----------------------------------------------------------------------------
+\subsection{3D Alpha Shapes}
+\label{sec:bind-gen:as3}
+% -----------------------------------------------------------------------------
+Given a set of points sampled in a 3D body, an alpha shape is
+demarcated by a frontier, which is a linear approximation of the
+original boundary of the body. There are two distinguished versions of
+alpha shapes as follows. Basic alpha shapes are based on the Delaunay
+triangulation. Weighted alpha shapes are based on its generalization,
+the regular triangulation, where the euclidean distance is replaced by
+the power to weighted points. The \iiiDAlphaShapesPackage{}
+package~\cite{cgal:dy-as3-21a} provides the class templates
+\myLstinline{Alpha_shape_3<Dt,ExactAlphaComparisonTag>} and
+\myLstinline{Fixed_alpha_shape_3<Dt>}. Instances of both
+templates can be used to represent a large variaty of alpha shapes for
+a given set of points. The template parameter
+\myLstinline{Dt} must be substituted with an instance of
+one of the class templates that can be used to represent a triangulation,
+namly:
+\begin{compactenum}
+\item \myLstinline{Delaunay_triangulation_3},
+\item \myLstinline{Regular_triangulation_3},
+\item \myLstinline{Periodic_3_Delaunay_triangulation_3}, or
+\item \myLstinline{Periodic_3_regular_triangulation_3}.
+\end{compactenum}
+Note that \myLstinline{Dt::Geom_traits}, \myLstinline{Dt::Vertex}, and
+\myLstinline{Dt::Face} must be models the concepts
+\myLstinline{AlphaShapeTraits_3}, \myLstinline{AlphaShapeVertex_3},
+and \myLstinline{AlphaShapeCell_3}, respectively.
+
+%%%%%%%% 3D Alpha Shapes
 \begin{table}[!htp]
   \centering\begin{tikzpicture}
     \matrix (first) [tableA] {
@@ -538,6 +577,30 @@ Name & Type &  Default & Description\\
  \caption{3D Alpha Shape Arguments}
  \label{tab:as}
 \end{table}
+
+% -----------------------------------------------------------------------------
+\subsection{Spatial Searching}
+\label{sec:bind-gen:ss}
+% -----------------------------------------------------------------------------
+The \dDSpatialSearchingPackage{} package~\cite{cgal:tf-ssd-21a}
+implements exact and approximate distance browsing by providing
+implementations of algorithms supporting
+\begin{compactenum}
+\item both nearest and furthest neighbor searching,
+\item both exact and approximate searching,
+\item (approximate) range searching,
+\item (approximate) k-nearest and k-furthest neighbor searching,
+\item (approximate) incremental nearest and incremental furthest neighbor searching, and
+\item query items representing points and spatial objects.
+\end{compactenum}
+In these searching problems a set $\calP$ of data points in
+$d$-dimensional space is given. These points in $\calP$ are
+preprocessed into a tree data structure, so that given any query item
+$q$ the points of $\calP$ can be browsed efficiently. The approximate
+\dDSpatialSearchingPackage{} package is designed for data sets that
+are small enough to store the search structure in main memory (in
+contrast to approaches from databases that assume that the data
+reside in secondary storage).
 
 %%%%%%%%
 \begin{table}[!htp]

@@ -133,14 +133,14 @@ that resides in header file (which typically end with the suffix
 other words, there is no need to compile any library before an
 application that depends on \cgal{} and written in C++ is
 built.\footnote{Some dependencies of \cgal{} might need to be
-  installed in advanced}. On the hand, when running an application
-written in Python that depends on \cgal{} the libraries that contain
-the bindings must be accessible. Typically, those bindings are
-generated ahead of time with little knowledge about the application
-itself. This would impose a severe limitation in cases like ours,
-where the number of objects to be bound is large. In cases where the
-type pf the objects to be bound are closely tied with the application
-itself, generating bindings ahead of time is, naturally,
+  installed in advanced}. On the other hand, when running an
+application written in Python that depends on \cgal{} the libraries
+that contain the bindings must be accessible. Typically, those
+bindings are generated ahead of time with little knowledge about the
+application itself. This would impose a severe limitation in cases
+like ours, where the number of objects to be bound is large. In cases
+where the type pf the objects to be bound are closely tied with the
+application itself, generating bindings ahead of time is, naturally,
 impossible. Our system enables easy and convenient (re)generation of
 bindings, thus alleviating the burdon caused by these problems.
 
