@@ -25,6 +25,7 @@ cgal_python_bindings.pdf: ../header.tex ../abrev-short.bib \
 	introduction.tex \
 	comparison.tex \
 	generation.tex \
+	modules.tex \
 	code.tex \
 	cgal_python_bindings.bib
 #	$(GRAPHICS_STATIC) $(GRAPHICS_PDF) $(GRAPHICS_PDFTEX)
