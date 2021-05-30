@@ -299,8 +299,8 @@ arrangements embedded in the plane. The \iiDArrangementsPackage{}
 package~\cite{cgal:wfzh-a2-21a} can be used to construct, maintain,
 alter, and display 2D arrangements embedded in ruled curved
 surfaces. It also supports queries on such arrangements, such as point
-location. One of the main components of the \iiDArrangementsPackage{}
-package is the
+location, and other operations. One of the main components of
+the \iiDArrangementsPackage{} package is the
 \myLstinline{Arrangement_2<Traits,Dcel>} class template. An instance of this
 template is used to represent an arrangement embedded in the plane.
 Table~\ref{tab:arr} lists the \cmake{} flags associated with
@@ -316,7 +316,8 @@ template follows.
   and optionally additional geometry traits concepts. A model of the
   basic traits concept defines the types of x-monotone curves and
   two-dimensional points and supports basic geometric predicates on
-  them. The list of supported traits class template follows.
+  them. The list of supported traits class templates follows. For each
+  class template we describe the family of curves it handles.
   %
   \begin{compactenum}
   \item \myLstinline{Arr_non_caching_segment_basic_traits_2<Kernel>}---handles
@@ -342,8 +343,39 @@ template follows.
   This parameter is substituted
   with \myLstinline{Arr_default_dcel<Traits>} by default. In many
   applications it is necessary to extend the DCEL features. This is
-  done by substituting the Dcel parameter with a different type; see
-  Section Extending the DCEL for further explanations and examples.
+  done by substituting the Dcel parameter with a different type, which can
+  be an instance of one of the following class templates:
+  \begin{compactenum}
+  \item \myLstinline{Arr_extended_vertex<VertexBase, VertexData>}---extends
+    the vertex topological-features of the Dcel with a record of type
+    \myLstinline{VertexData}.
+    %
+  \item \myLstinline{Arr_extended_halfedge<HalfedgeBase, HalfedgeData>}---extends
+    the halfedge topological-features of the Dcel with a record of type
+    \myLstinline{HalfedgeData}.
+    %
+  \item \myLstinline{Arr_extended_face<FaceBase, FaceData>}---extends
+    the face topological-features of the Dcel with a record of type
+    \myLstinline{FaceData}.
+    %
+  \item \myLstinline{Arr_extended_dcel<Traits, VertexData, HalfedgeData, FaceData, VertexBase, HalfedgeBase, FaceBase>}---extend
+    all the topological-features of the Dcel.
+  \end{compactenum}
+  The \myLstinline{VertexBase} template parameter must be substituted with
+  either the base vertex type in the default Dcel, or an extended vertex type.
+  Similarly, the \myLstinline{HalfedgeBase} parameter must be substituted with
+  the base halfedge type in the default Dcel, or an extended halfedge type,
+  and the \myLstinline{FaceBase} parameter must be substituted with the base
+  face type in the default Dcel, or an extended face type.
+
+  When the bindings are generated each one of
+  the \myLstinline{VertexData}, \myLstinline{HalfedgeData},
+  and \myLstinline{FaceData} template parameters must be substituted
+  with a known C++ type. Thus, it is impossible to use a custom C++
+  type for the substitution. Instead, any one of these parameters is
+  substituted with the generic Python
+  object \myLstinline{boost::python::object}. This object provides a
+  generalized interface to Python objects and increases flexibility.
 \end{itemize}
 
 %%%%%%%% Arrangement
