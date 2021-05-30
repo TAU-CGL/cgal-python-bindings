@@ -32,6 +32,7 @@
 % ======== Graphics ===========================================================
 \usepackage{etex}
 \usepackage{etoolbox}
+\usepackage{xparse}
 % \usepackage{pst-all}
 % \usepackage{pstricks,pst-node,pst-tree,pst-text,pst-3d,pst-plot,pst-eucl}
 % \usepackage{pst-xkey,pst-jtree}
@@ -317,11 +318,65 @@
 \newtheorem{procedure}{Procedure}
 %
 % ======== Listings ===========================================================
+\lstloadlanguages{[11]{C++}}
 \newlength{\ccBaseWidth}\setlength{\ccBaseWidth}{\textwidth/72}
 \lstset{%
-  language=C++,%
 %  basewidth=\ccBaseWidth,
-  keywordstyle=\color{blue},commentstyle=\color{red}%
+  keywordstyle=\color{blue}\bfseries,  % underlined bold black keywords
+  identifierstyle=,                    % nothing happens
+  commentstyle=\itshape\color{red},    % red comments
+  stringstyle=\ttfamily,               % typewriter type for strings
+  showstringspaces=false,              % no special string spaces
 }
+\def\cppLstinline#1{\lstinline[language=C++,columns=fixed]{#1}}
 \def\myLstinline#1{\lstinline[columns=fixed]{#1}}
+% ========
+\lstdefinestyle{cppStyle}{%
+  language=[11]{C++},
+  identifierstyle=\color{red!50!black},
+  escapechar=~~,
+  moredelim=**[is][\only<+>{\color{red}}]{@}{@}}
+% ========
+\lstdefinestyle{cppNumberedStyle}{%
+  style=cppStyle,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt}
+% ========
+\lstdefinestyle{cppFramedStyle}{%
+  style=cppNumberedStyle,
+  frame=single,
+  frameround=tttt}
+% ========
+\lstdefinestyle{pythonStyle}{%
+  language={Python},
+  identifierstyle=\color{red!50!black},
+  escapechar=~~,
+  moredelim=**[is][\only<+>{\color{red}}]{@}{@}}
 %
+% ========
+\NewDocumentCommand\framedInputPython{O{\scriptsize}O{1}om}{%
+  \IfNoValueTF{#3}{
+    \lstinputlisting[%
+      escapechar=~~,
+      numbers=left,
+      numberstyle=\tiny\color{gray},
+      numbersep=5pt,
+      frame=single,
+      frameround=tttt,
+      language=Python,
+      basicstyle=#1,
+      firstline=#2,
+      identifierstyle=\color{red!50!black}]{#4}}{%
+    \lstinputlisting[%
+      escapechar=~~,
+      numbers=left,
+      numberstyle=\tiny\color{gray},
+      numbersep=5pt,
+      frame=single,
+      frameround=tttt,
+      language=Python,
+      basicstyle=#1,
+      firstline=#2,
+      lastline=#3,
+      identifierstyle=\color{red!50!black}]{#4}}}
