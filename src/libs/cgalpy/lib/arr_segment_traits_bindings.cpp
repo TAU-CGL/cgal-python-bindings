@@ -38,4 +38,18 @@ void export_arr_segment_traits()
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
   ;
+
+  class_<Is_in_x_range_2>("Is_in_x_range_2", no_init)
+    .def("__call__", &Is_in_x_range_2::operator());
+    ;
+
+  class_<Is_in_y_range_2>("Is_in_y_range_2", no_init)
+    .def("__call__", &Is_in_y_range_2::operator());
+    ;
+
+  class_<Traits>("Traits")
+    .def(init<>())
+    .def("is_in_x_range_2_object", &Traits::is_in_x_range_2_object)
+    .def("is_in_y_range_2_object", &Traits::is_in_y_range_2_object)
+    ;
 }
