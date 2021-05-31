@@ -83,45 +83,94 @@ module is \myLstinline{CGALPY\_ARRANGEMENT\_2\_BINDINGS}. This module
 is associated with the Boolean flag
 \myLstinline{CGALPY\_ARR2\_POINT\_LOCATION\_BINDINGS} that indicates
 whether to generate bindings for point location queries supported by
-the \iiDArrangementsPackage{} package. This module has also a string
-flag \myLstinline{CGALPY\_ARR2\_GEOMETRY\_TRAITS\_NAME} that indicates
-the geometry traits used to instantiate the
-\myLstinline{Arrangement\_2<>} class template.
+the \iiDArrangementsPackage{} package. This module has also the string
+flags \myLstinline{CGALPY\_ARR2\_GEOMETRY\_TRAITS\_NAME} and
+\myLstinline{RR2_DCEL_NAME} that indicates the geometry traits and the
+Dcel, respectively, used to instantiate
+the \myLstinline{Arrangement\_2<>} class template; see
+Section~\ref{ssec:modules:arr2}.
 
 \begin{table}[!]
-  \centering\begin{tikzpicture}
-    \matrix (first) [tableModuleName] {
-Module                  & Name                             & Short Name\\
-2D and 3D Kernel        & \myLstinline{KERNEL}             & \myLstinline{KER}\\
-2D Arrangements on Surfaces & \myLstinline{ARRANGEMENT\_2} & \myLstinline{ARR2}\\
-3D Alpha shapes         & \myLstinline{ALPHA\_SHAPE\_3}    & \myLstinline{AS2}\\
-2D Regularized Boolean operations & \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
-Bounding Volumes        & \myLstinline{BOUNDING\_VOLUMES}  & \myLstinline{BV}\\
-2D Convex hulls         & \myLstinline{CONVEX\_HULL\_2}    & \myLstinline{CH2}\\
-3D Convex hulls         & \myLstinline{CONVEX\_HULL\_3}    & \myLstinline{CH3}\\
-2D Polygons             & \myLstinline{POLYGON\_2}         & \myLstinline{POL2}\\
-Polygon partitioning    & \myLstinline{POLYGON\_PARTITIONING} & \myLstinline{PP}\\
-2D Minkowski sums       & \myLstinline{MINKOWSKI\_SUM\_2}  & \myLstinline{MS2}\\
-Spatial searching       & \myLstinline{SPATIAL\_SEARCHING} & \myLstinline{SS}\\
-2D Triangulations       & \myLstinline{TRIANGULATION\_2}   & \myLstinline{TRI2}\\
-3D Triangulations       & \myLstinline{TRIANGULATION\_3}   & \myLstinline{TRI3}\\
-    };
-  \end{tikzpicture}
-  \caption{Module names and short names}
-  \label{tab:module-name}
+  \centering\begin{tikzpicture} \matrix (first) [tableModuleName] {
+    Module & Name & Short Name\\ 2D and 3D Kernel
+    & \myLstinline{KERNEL} & \myLstinline{KER}\\ 2D Arrangements on
+    Surfaces & \myLstinline{ARRANGEMENT\_2} & \myLstinline{ARR2}\\ 3D
+    Alpha shapes & \myLstinline{ALPHA\_SHAPE\_3} & \myLstinline{AS2}\\
+    2D Regularized Boolean operations
+    & \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
+    Bounding Volumes & \myLstinline{BOUNDING\_VOLUMES}
+    & \myLstinline{BV}\\ 2D Convex hulls
+    & \myLstinline{CONVEX\_HULL\_2} & \myLstinline{CH2}\\ 3D Convex
+    hulls & \myLstinline{CONVEX\_HULL\_3} & \myLstinline{CH3}\\ 2D
+    Polygons & \myLstinline{POLYGON\_2} & \myLstinline{POL2}\\ Polygon
+    partitioning & \myLstinline{POLYGON\_PARTITIONING}
+    & \myLstinline{PP}\\ 2D Minkowski sums
+    & \myLstinline{MINKOWSKI\_SUM\_2} & \myLstinline{MS2}\\ Spatial
+    searching & \myLstinline{SPATIAL\_SEARCHING} & \myLstinline{SS}\\
+    2D Triangulations & \myLstinline{TRIANGULATION\_2}
+    & \myLstinline{TRI2}\\ 3D Triangulations
+    & \myLstinline{TRIANGULATION\_3} & \myLstinline{TRI3}\\
+    }; \end{tikzpicture} \caption{Module names and short
+    names} \label{tab:module-name}
 \end{table}
 
-The Python attribute names of the bound entities of different modules
-are gathered in distinct Python scopes to prevent name conflicts. The
-name of the scope is the short name of the module in lower-case except
-for the first letter (which is in upper-case); for example, the scope
-names of the bound types and free functions of
+The exposed names of the bound entities of different modules are
+gathered in distinct Python namespaces to prevent name conflicts. The
+name of the namespace is the short name of the module in lower-case
+except for the first letter (which is in upper-case); for example, the
+namespace names of the bound types and free functions of
 the \iiDArrangementsPackage{} and the \iiiDTriangulationsPackage{}
 packages are \myLstinline{Arr2} and
-\myLstinline{Tri3}, respectively. Each of these two scopes, for
+\myLstinline{Tri3}, respectively. Each of these two namespaces, for
 example, have the attribute \myLstinline{Vertex\_handle} (i.e.,
 \myLstinline{Arr2.Vertex\_handle} and
 \myLstinline{Tri3.Vertex\_handle}).
+
+The above is conveniently acchived with the use of the
+\myLstinline{scope} class of Boost.Python. Constructing an object of
+this class, essentially, changes the Python namespace in which new
+extension classes and wrapped functions are defined as attributes.  An
+object of the \myLstinline{scope} class is associated with a global
+Python object, which is bound to a Python namespace. The global Python
+object associated with default-constructed scopes is bound to the
+global Python namespace, and the global Python object associated with
+a scope constructed with an argument is bound to the a Python
+namespace held by the argument. When a scope object is constructed its
+associated global Python object is pushed onto a stack. When the
+lifetime of the scope ends, the associated global Python object is
+poped from the stack. This mechanism conveniently reflects nesting of
+constructs in C++ in Python code. For example, consider the following
+constructs in C++:
+
+\begin{lstlisting}[style=cppNumberedStyle]
+struct X {
+  struct Y { int g() { return 42; } };
+};
+\end{lstlisting}
+
+\noindent
+Using the following binding code:
+
+\begin{lstlisting}[style=cppNumberedStyle]
+BOOST_PYTHON_MODULE(nested) {
+  scope outer = class_<X>("X");
+  class_<X::Y>("Y").def("g", &X::Y::g);
+}
+\end{lstlisting}
+
+\noindent
+enables the following in Python:
+
+\begin{lstlisting}[style=pythonStyle]
+>>> y = nested.X.Y()
+>>> y.g()
+42
+\end{lstlisting}
+
+\noindent
+We use this mechanism for a different purpose. We simply introduce as many
+namespaces as modules, and nest every exposed name of a bound entity in
+a namespaces according to module of the entity.
 
 % -----------------------------------------------------------------------------
 \subsection{Bindings Library Name}
