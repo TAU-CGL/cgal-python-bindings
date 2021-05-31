@@ -12,18 +12,17 @@
 #include <boost/functional/hash_fwd.hpp>
 
 #include <CGAL/basic.h>
-#include <CGAL/Gmpq.h>
 #include <CGAL/Algebraic_structure_traits.h>
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 template <typename Point>
 size_t hash_rational_point(Point& p)
 {
-  auto simplify = CGAL::Algebraic_structure_traits<CGAL::Gmpq>::Simplify();
   size_t seed = 0;
   for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c)
   {
     auto q = (*c).exact();
+    auto simplify = typename CGAL::Algebraic_structure_traits<decltype(q)>::Simplify();
     simplify(q);
     boost::hash_combine(seed, q.numerator().to_double());
     boost::hash_combine(seed, q.denominator().to_double());
