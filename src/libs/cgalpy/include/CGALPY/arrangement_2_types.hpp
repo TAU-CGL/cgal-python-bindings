@@ -42,6 +42,8 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR2_GEOMETRY_TRAITS");
 
 #if CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_segment_traits_2<Kernel>                         Traits;
+typedef typename Traits::Is_in_x_range_2                                    Is_in_x_range_2;
+typedef typename Traits::Is_in_y_range_2                                    Is_in_y_range_2;
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_non_caching_segment_traits_2<Kernel>             Traits;
 #elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_GEOMETRY_TRAITS
