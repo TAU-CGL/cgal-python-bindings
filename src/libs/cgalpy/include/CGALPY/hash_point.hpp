@@ -13,6 +13,7 @@
 
 #include <CGAL/basic.h>
 #include <CGAL/Algebraic_structure_traits.h>
+#include <CGAL/Rational_traits.h>
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 template <typename Point>
@@ -23,9 +24,10 @@ size_t hash_rational_point(Point& p)
   {
     auto q = (*c).exact();
     auto simplify = typename CGAL::Algebraic_structure_traits<decltype(q)>::Simplify();
+    CGAL::Rational_traits<decltype(q)> traits;
     simplify(q);
-    boost::hash_combine(seed, q.numerator().to_double());
-    boost::hash_combine(seed, q.denominator().to_double());
+    boost::hash_combine(seed, CGAL::to_double(traits.numerator(q)));
+    boost::hash_combine(seed, CGAL::to_double(traits.denominator(q)));
   }
   return seed;
 }
