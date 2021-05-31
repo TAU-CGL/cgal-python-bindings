@@ -13,7 +13,8 @@
 
 // Prevent compilation issues with some kernels
 #define CGAL_DO_NOT_USE_BOOST_MP 1
-#undef CGAL_USE_GMPXX
+// Suppressing GMPXX is not recommended, but if you need to, uncomment the next
+// #undef CGAL_USE_GMPXX
 
 #define CGALPY_KERNEL_EPEC 0
 #define CGALPY_KERNEL_EPIC 1
