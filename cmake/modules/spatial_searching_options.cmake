@@ -14,7 +14,7 @@ function(select_spatial_searching)
 endfunction()
 
 function(get_spatial_searching_lib_name ret)
-  set(${ret} "ss" PARENT_SCOPE)
+  set(${ret} "ss${CGALPY_SPATIAL_SEARCHING_DIMENSION}" PARENT_SCOPE)
 endfunction()
 
 endif()
