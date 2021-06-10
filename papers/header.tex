@@ -10,6 +10,7 @@
 \usepackage{pifont}
 \usepackage{placeins}
 \usepackage{appendix}
+\usepackage{hyphenat}
 %
 % ======== Tables =============================================================
 \usepackage{multirow}
@@ -327,8 +328,11 @@
   commentstyle=\itshape\color{red},    % red comments
   stringstyle=\ttfamily,               % typewriter type for strings
   showstringspaces=false,              % no special string spaces
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
 }
-\def\cppLstinline#1{\lstinline[language=C++,columns=fixed]{#1}}
+\def\pyLstinline#1{\lstinline[language={Python},columns=fixed]{#1}}
+\def\cppLstinline#1{\lstinline[language={C++},columns=fixed]{#1}}
 \def\myLstinline#1{\lstinline[columns=fixed]{#1}}
 % ========
 \lstdefinestyle{cppStyle}{%
