@@ -13,10 +13,8 @@ else:
 CGALPY = importlib.import_module(lib)
 
 Ker = CGALPY.Ker
-
 Point_2 = Ker.Point_2
 Segment_2 = Ker.Segment_2
-
 s1 = Segment_2(Point_2(0, 1), Point_2(1, 0))
 s2 = Segment_2(Point_2(0, 0), Point_2(1, 1))
 ix = Ker.intersection(s1, s2)

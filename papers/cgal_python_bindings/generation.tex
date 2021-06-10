@@ -20,7 +20,7 @@
   nodes={minimum height=2.8em},
   column 1/.style={nodes={text width=19.8em}},
   column 2/.style={nodes={text width=4.8em}},
-  column 3/.style={nodes={text width=6.4em}},
+  column 3/.style={nodes={text width=6.7em}},
   column 4/.style={nodes={text width=16.6em}}}}
 \tikzset{tableModuleName/.style={table,
   nodes={minimum height=1.6em},
@@ -61,7 +61,7 @@ the bindings. The optional arguments passed to \myLstinline{cmake} in
 stage~5 mainly consist of variables that determine (i) the object
 types to be bound and the unique identifier of each such object, and
 (ii) the name of the libraries that comprise the bindings, in case the
-default library is overriden.
+default library name is overriden.
 
 % -----------------------------------------------------------------------------
 \subsection{Bindings Modules and Scopes}
@@ -77,24 +77,25 @@ determines whether to generate bindings for that particular
 module. Each module may be associated with zero or more additional
 flags that specify selections for bindings within the module. For
 example, the long name of the \iiDArrangementsPackage{} module is
-\myLstinline{ARRANGEMENT\_2}; its short name is \myLstinline{ARR2};
-the Boolean flag that indicates whether to generate bindings for this
-module is \myLstinline{CGALPY\_ARRANGEMENT\_2\_BINDINGS}. This module
-is associated with the Boolean flag
-\myLstinline{CGALPY\_ARR2\_POINT\_LOCATION\_BINDINGS} that indicates
+\myLstinline{ARRANGEMENT\_ON\_SURFACE\_2}; its short name is
+\myLstinline{AOS2};
+\myLstinline{CGALPY\_ARRANGEMENT\_ON\_SURFACE\_2\_BINDINGS} is the
+Boolean flag that indicates whether to generate bindings for this
+module.  This module is associated with the Boolean flag
+\myLstinline{CGALPY\_AOS2\_POINT\_LOCATION\_BINDINGS} that indicates
 whether to generate bindings for point location queries supported by
 the \iiDArrangementsPackage{} package. This module has also the string
-flags \myLstinline{CGALPY\_ARR2\_GEOMETRY\_TRAITS\_NAME} and
-\myLstinline{RR2_DCEL_NAME} that indicates the geometry traits and the
-Dcel, respectively, used to instantiate
-the \myLstinline{Arrangement\_2<>} class template; see
+flags \myLstinline{CGALPY\_AOS2\_GEOMETRY\_TRAITS\_NAME} and
+\myLstinline{CGALPY\_AOS2\_DCEL\_NAME} that indicates the geometry
+traits and the Dcel, respectively, used to instantiate
+the \cppLstinline{Arrangement\_2<>} class template; see
 Section~\ref{ssec:modules:arr2}.
 
 \begin{table}[!]
   \centering\begin{tikzpicture} \matrix (first) [tableModuleName] {
     Module & Name & Short Name\\ 2D and 3D Kernel
     & \myLstinline{KERNEL} & \myLstinline{KER}\\ 2D Arrangements on
-    Surfaces & \myLstinline{ARRANGEMENT\_2} & \myLstinline{ARR2}\\ 3D
+    Surfaces & \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2} & \myLstinline{AOS2}\\ 3D
     Alpha shapes & \myLstinline{ALPHA\_SHAPE\_3} & \myLstinline{AS2}\\
     2D Regularized Boolean operations
     & \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
@@ -120,27 +121,28 @@ name of the namespace is the short name of the module in lower-case
 except for the first letter (which is in upper-case); for example, the
 namespace names of the bound types and free functions of
 the \iiDArrangementsPackage{} and the \iiiDTriangulationsPackage{}
-packages are \myLstinline{Arr2} and
-\myLstinline{Tri3}, respectively. Each of these two namespaces, for
+packages are \pyLstinline{Arr2} and
+\pyLstinline{Tri3}, respectively. Each of these two namespaces, for
 example, have the attribute \myLstinline{Vertex\_handle} (i.e.,
-\myLstinline{Arr2.Vertex\_handle} and
+\myLstinline{Aos2.Vertex\_handle} and
 \myLstinline{Tri3.Vertex\_handle}).
 
 The above is conveniently acchived with the use of the
-\myLstinline{scope} class of Boost.Python. Constructing an object of
+\cppLstinline{bp::scope} class of Boost.Python. Constructing an object of
 this class, essentially, changes the Python namespace in which new
 extension classes and wrapped functions are defined as attributes.  An
-object of the \myLstinline{scope} class is associated with a global
-Python object, which is bound to a Python namespace. The global Python
-object associated with default-constructed scopes is bound to the
-global Python namespace, and the global Python object associated with
-a scope constructed with an argument is bound to the a Python
+object of the \cppLstinline{bp::scope} class is associated with a
+global Python object, which is bound to a Python namespace. The global
+Python object associated with default-constructed scopes is bound to
+the global Python namespace, and the global Python object associated
+with a scope constructed with an argument is bound to the Python
 namespace held by the argument. When a scope object is constructed its
 associated global Python object is pushed onto a stack. When the
 lifetime of the scope ends, the associated global Python object is
 poped from the stack. This mechanism conveniently reflects nesting of
 constructs in C++ in Python code. For example, consider the following
-constructs in C++:
+constructs in C++:\footnote{This example is a simplified version
+of the example shown at \url{https://www.boost.org/doc/libs/1_76_0/libs/python/doc/html/reference/high_level_components/boost_python_scope_hpp.html}.}
 
 \begin{lstlisting}[style=cppNumberedStyle]
 struct X {
@@ -168,30 +170,43 @@ enables the following in Python:
 \end{lstlisting}
 
 \noindent
-We use this mechanism for a different purpose. We simply introduce as many
-namespaces as modules, and nest every exposed name of a bound entity in
-a namespaces according to module of the entity.
+We use this mechanism to reflect nesting in C++ code that uses \cgal.
+In addition we introduce as many (Python) namespaces as modules, and
+nest every exposed name of a bound entity in the appropriate
+namespaces according to the module of the entity. For example, assume
+that \myLstinline{CGALPY} includes bindings for an instance of the
+class template \cppLstinline{Arrangement\_2<GeometryTraits>}, where the
+\cppLstinline{GeometryTraits} template parameter is substituted with a
+traits class that handles segments.  The following code exerpt
+construct a the segment $(0,0),(1,0)$.
 
+\begin{lstlisting}[style=pythonStyle]
+>>> import CGALPY
+>>> Aos2 = CGALPY.Aos2        # define the module namespace
+>>> Arr = Aos2.Arrangement_2  # define the arrangement type in the module namespace
+>>> Point = Arr.Point_2       # define the point type in the arrangement class
+>>> Segment = Arr.Curve_2     # define the curve type in the arrangement class
+>>> seg = Segment(Point(0, 0), Point(1, 0))
+\end{lstlisting}
 % -----------------------------------------------------------------------------
 \subsection{Bindings Library Name}
 \label{sec:bind-gen:library-name}
 % -----------------------------------------------------------------------------
-By default, the name of the generated library
-is \myLstinline{CGALPY.so}. However, the user can override the name
-with a generated string that maps to the set of bound types. This is
-useful when more then one instance of the same template must be
+By default, the base name of the generated library
+is \myLstinline{CGALPY}. However, the user can override the name with
+a generated string that maps to the set of bound types. This is
+imperative when more then one instance of the same template must be
 bound. Each execution of \myLstinline{cmake} followed by make
 generates a single library.  The \cmake{}
-flag \\\myLstinline{CGALPY\_FIXED\_LIBRARY\_NAME} determines whether
-the name of the generated library is \myLstinline{CGALPY.so} or
-not. If not, it has the prefix \myLstinline{CGALPY_} followed by as
-many as substrings as modules, the bindings of which are enabled,
-separated by an underscore (\myLstinline{_}). Each such substring
-starts with the short name of the module in lower case followed by
-strings that maps to the selections for bindings within the
-module. Each such string is a single word that starts with a capital
-letter. For example, the name
-\myLstinline{GALPY_kernelEpecInt_Arr2SegPlainPl} of a generated
+flag \myLstinline{CGALPY\_FIXED\_LIBRARY\_NAME} determines whether the
+base name of the generated library is \myLstinline{CGALPY} or not. If
+not, it has the prefix \myLstinline{CGALPY_} followed by as many as
+substrings as modules, the bindings of which are enabled, separated by
+an underscore (\myLstinline{_}). Each such substring starts with the
+short name of the module in lower case followed by strings that maps
+to the selections for bindings within the module. Each such string is
+a single word that starts with a capital letter. For example, the name
+\myLstinline{GALPY_kernelEpecInt_Aos2SegPlainPl} of a generated
 library, names a library that contains bindings for (i) the
 Exact-Predicate-Exact-Construction
 (EPEC) \iiDandiiiDGeometryKernelPackage{} module and intersections,
@@ -205,9 +220,9 @@ the library itself can be compiled of either static or dynamic
 (dependent) libraries. If you intend to generate and use just a single
 library that contains the bindings, you have the freedom to choose
 between generating a library compiled of static libraries or dynamic
-libraries. However, if you intend to generate and use several
-libraries in a single Python module, it is recommended that you use
-libraries compiled of dynamic libraries. (Otherwise, different
+libraries. However, if you intend to generate several libraries and
+use them all in a single Python module, it is recommended using
+binding libraries compiled of dynamic libraries. (Otherwise, different
 generated libraries might be compiled of conflicting static
 libraries.) The cmake flag \myLstinline{CGALPY\_USE\_SHARED\_LIBS}
 indicates whether the generated library is compiled of static or
@@ -246,7 +261,7 @@ Name & Type & Default & Description\\
   \centering\begin{tikzpicture}
     \matrix (first) [tableA] {
 Name & Type & Default & Description\\
-\myLstinline{ARRANGEMENT\_2\_BINDINGS}              & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D arrangement instances\\
+\myLstinline{ARRANGEMENT\_ON\_SURFACE\_2\_BINDINGS}              & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D arrangement instances\\
 \myLstinline{ALPHA\_SHAPE\_3\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 3D Alpha shape instances\\
 \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2\_BINDINGS} & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D Boolean set operation instances\\
 \myLstinline{BOUNDING\_VOLUMES\_BINDINGS}           & Boolean & \myLstinline{false} & Determines whether to generate bindings for bounding volume instances\\
