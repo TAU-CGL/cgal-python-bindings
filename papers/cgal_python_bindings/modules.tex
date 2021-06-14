@@ -106,12 +106,19 @@ only a limitted predefined types are supported; see Table~\ref{tab:ker:name}.
  \label{tab:ker:name}
 \end{table}
 
+The code excerpt below, in the \cmake{} language, sets the \cmake{}
+flags for our first example. When \myLstinline{cmake} is applied with
+these settings followed \myLstinline{cmake} a library called
+\myLstinline{CGALPY}, which consists of the necessary bindings, is
+generated.
+\framedInputCmake[\normalsize]{../../cmake/tests/epec_fixed_release.cmake}
+
 The following example computes the intersection point of two segments.
 \framedInputPython[\normalsize][15]{../../src/python_scripts/cgalpy_examples/kernel_intersection.py}
 
 % -----------------------------------------------------------------------------
 \subsection{2D Arrangement Bindings}
-\label{ssec:modules:arr2}
+\label{ssec:modules:aos2}
 % -----------------------------------------------------------------------------
 Given a surface $S$ in \Rthree{} and a set $\calC$ of curves embedded
 in this surface, the curves subdivide $S$ into cells of dimension~$0$
@@ -277,6 +284,15 @@ template follows.
  \caption{2D Arrangement Flags}
  \label{tab:aos:dcel}
 \end{table}
+
+The following code excerpt in the \cmake{} language sets the \cmake{} flags for our next example.
+\framedInputCmake[\normalsize]{../../cmake/tests/aos2_epec_face_extended_release.cmake}
+
+The following example constructs an arrangement with two faces. The
+arrangement is induced by line segments and its face type is extended
+with an integral label. The unbounded face and the other faced are labeled
+'1' and '0', respectively.
+\framedInputPython[\normalsize][15]{../../src/python_scripts/cgalpy_examples/aos2_fex.py}
 
 % -----------------------------------------------------------------------------
 \subsection{3D Triangulation Bindings}
