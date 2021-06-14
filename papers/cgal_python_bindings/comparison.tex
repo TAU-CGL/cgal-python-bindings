@@ -22,40 +22,84 @@ There are several different tools and options for generating Python
 byndings.  The following is by no means an exhaustive list of such
 tools; however, it gives a taste of the rich possibilities one faces
 when there is a need to make C++ code accessible to Python developers.
-The listed tools are designed to wrap C++ interfaces non-intrusively;
+One goal that all these tools share is transforming Python/C API
+into a relatively more user-friendly interface.
+Most listed tools are designed to wrap C++ interfaces non-intrusively;
 that is, the C++ code of an entity does not change when it is wrapped.
 
 % -----------------------------------------------------------------------------
-\subsection{Some Various Tools}
+\subsection{Various Tools}
 \label{ssec:comp:tools}
 % -----------------------------------------------------------------------------
-% Cython
-Cython~\cite{bbcds-cbbw-11} refers to a programming language and to an
-optimising static compiler for the Cython language.\footnote{See
-  \url{https://cython.org/}.}  The Cython labguage is a superset of
-the Python language. CythonIt extends Python with explicit type
-declarations of native C types. This enables the Cython compiler
-generating efficient C code from Cython code. The C code is generated
-once and then compiles with all major C/C++ compilers in CPython. With
-Cython it is trivial to call back and forth between Python code,
-Cython code, and native library code origianlly developed in Fortrant,
-C, or C++.
+% ctypes
+\pyLstinline{ctypes} is a foreign function module for Python that
+provides C compatible data
+types.\footnote{See \url{https://docs.python.org/3/library/ctypes.html\#module-ctypes}.}
+It supports the loading of shared libraries and marshaling data
+between Python and C.\footnote{Marshaling is the process of
+transforming the memory representation of an object into a data format
+suitable for storage or transmission; see
+\url{https://en.wikipedia.org/wiki/Marshalling\_(computer\_science)}.}
+The \pyLstinline{ctypes} module is part of the Python standard
+library; thus, it can be used to wrap shared libraries in pure Python.
+Using the \pyLstinline{ctypes} module requires manual programming
+labour and detailed knowledge of the \pyLstinline{ctypes}
+interface. However, it does not require writing C code (in addition to
+existing C code that needs to be wrapped).
 
-% Shiboken
+% CFFI
+\pyLstinline{cffi} is another Python module that generates Python
+bindings (it stands for C Foreign Function Interface). It interacts
+with almost any C code from Python, based on C-like declarations that
+can often be copy-pasted from header files. It is compatible with both
+PyPy and CPython; Moreover, in the PyPy (see~\ref{ssec:intro:bind})
+reference implementation it is a first class citizen (and provided by
+defaut), thus, exhibts outstanding preformance. Compared
+to \pyLstinline{ctypes}, the \pyLstinline{cffi} module takes a more
+automated approach to generate Python bindings and it minimized the
+extra bits of API that needs to be mastered; thus, it scales better to
+larger projects than \pyLstinline{ctypes}. Like \pyLstinline{ctypes},
+using \pyLstinline{cffi} directly interfaced with C libraries
+only. Warapping C++ libraries with any one of these modules requires
+the provision of another layer of C wrapper around the C++ code.
 
 % cppyy
-cppyy is an automatic, run-time, C++ Python bindings generator, for
-calling C++ from Python and Python from C++.\footnote{See
-  \url{https://cppyy.readthedocs.io}.} Run-time generation enables
-detailed specialization for higher performance, lazy loading for
-reduced memory use in large scale projects, Python-side
-cross-inheritance and callbacks for working with C++ frameworks,
-run-time template instantiation, automatic object downcasting,
-exception mapping, and interactive exploration of C++ libraries. cppyy
-delivers this without any language extensions, intermediate languages,
-or the need for boiler-plate hand-written code. For design and
-performance, see~\cite{ld-hppcn-16}, albeit that the CPython/cppyy
-performance has been vastly improved since.
+\pyLstinline{cppyy} is yet another external module for generating
+bindings.\footnote{See \url{https://cppyy.readthedocs.io}.} It is an
+automatic, run-time, C++ Python bindings generator, for calling C++
+from Python and Python from
+C++.\footnote{See \url{https://cppyy.readthedocs.io}.} Run-time
+generation enables detailed specialization for higher performance,
+lazy loading for reduced memory use in large scale projects,
+Python-side cross-inheritance and callbacks for working with C++
+frameworks, run-time template instantiation, automatic object
+downcasting, exception mapping, and interactive exploration of C++
+libraries. \pyLstinline{cppyy} delivers this without any language
+extensions, intermediate languages, or the need for boiler-plate
+hand-written code. For design and performance, see~\cite{ld-hppcn-16},
+albeit that the \pyLstinline{cppyy} performance has been vastly
+improved since.  Like \pyLstinline{cffi}, \pyLstinline{cppyy} was
+designed to ease rge binding development on Python programmer,
+minimizing the need for extra C++ code; it is also compatible with
+both CPython and PyPy.
+
+% Cython
+A completely different approach is adopted by
+Cython~\cite{bbcds-cbbw-11}, which refers to a programming language
+and to an optimising static compiler for the Cython
+language.\footnote{See \url{https://cython.org/}.}  The Cython
+language is a superset of the Python language. It extends Python with
+explicit type declarations of native C/C++ types.  Cython is a
+compiled language used to generate CPython extension modules.  The
+Cython compiler generates C/C++ code from Cython code, which in turn
+compiles with any C/C++ compiler, and automatically wrapped in
+interface code, producing extension modules that can be loaded and
+used by regular Python code using the \pyLstinline{import} statement,
+but with significantly less computational overhead at run time. Cython
+also facilitates wrapping independent C or C++ code into
+python-importable modules.  With Cython it is possible to call back
+and forth between Python code, Cython code, and native library code
+origianlly developed in Fortrant, C, or C++.
 
 % SIP
 SIP is a collection of tools that makes it easy to create Python
@@ -77,21 +121,22 @@ being used.
 % SWIG
 SWIG is a software development tool that connects programs written in
 C and C++ with a variety of high-level programming
-languages.\footnote{See \url{http://www.swig.org/}.} SWIG is used with
-different types of target languages including common scripting
-languages such as Javascript, Perl, PHP, Python, Tcl and Ruby. The
-list of supported languages also includes non-scripting languages such
-as C\#, D, Go language, Java including Android, Lua, OCaml, Octave,
-Scilab and R. Also several interpreted and compiled Scheme
-implementations (Guile, MzScheme/Racket) are supported. SWIG is most
-commonly used to create high-level interpreted or compiled programming
-environments, user interfaces, and as a tool for testing and
-prototyping C/C++ software. SWIG is typically used to parse C/C++
-interfaces and generate the 'glue code' required for the above target
-languages to call into the C/C++ code. SWIG can also export its parse
-tree in the form of XML. SWIG is free software and the code that SWIG
-generates is compatible with both commercial and non-commercial
-projects.
+languages.\footnote{See \url{http://www.swig.org/}.}  It is defferent
+than any of the others tools listed here.  SWIG is used to create
+bindings to C and C++ code for different types of target languages,
+and not only Python, including common scripting languages such as
+Javascript, Perl, PHP, Python, Tcl, or Ruby. The list of supported
+languages also includes non-scripting languages such as C\#, D, Go
+language, Java including Android, Lua, OCaml, Octave, Scilab and
+R. Also several interpreted and compiled Scheme implementations
+(Guile, MzScheme/Racket) are supported. SWIG is most commonly used to
+create high-level interpreted or compiled programming environments,
+user interfaces, and as a tool for testing and prototyping C/C++
+software. SWIG is typically used to parse C/C++ interfaces and
+generate the 'glue code' required for the above target languages to
+call into the C/C++ code. SWIG can also export its parse tree in the
+form of XML. SWIG is free software and the code that SWIG generates is
+compatible with both commercial and non-commercial projects.
 
 % Boost.Python
 Boost is a large and complex suite of utility libraries that works
@@ -99,6 +144,9 @@ with almost every C++ compiler in existence. Boost.Python is a member
 of the Boost suit that enables seamless interoperability between C++
 and the Python programming language.\footnote{See
   \url{https://www.boost.org/doc/libs/1_70_0/libs/python/doc/html/index.html}.}
+similar to \pyLstinline{cppyy}, Boost.Python focuses at C++; unlike
+\pyLstinline{cppyy} it uses C++ to specify and build bindings, taking
+advantage of the metaprogramming tools and polymorphism in C++.
 
 The library includes support for:
 \begin{itemize}
@@ -115,9 +163,10 @@ The library includes support for:
 \end{itemize}
 
 % PyBind11
-pybind11 is a lightweight header-only library that exposes C++ types
-in Python and vice versa, mainly to create Python bindings of existing
-C++ code.\footnote{See \url{https://github.com/pybind/pybind11}.} Its
+pybind11 is a lightweight header-only library that exposes C++
+types in Python and vice versa, mainly to create Python bindings of
+existing C++
+code.\footnote{See \url{https://github.com/pybind/pybind11}.} Its
 goal, like the goal of Boost.Python, is to minimize boilerplate code
 in traditional extension modules by inferring type information using
 compile-time introspection. Its syntax is als similar to the syntax of
