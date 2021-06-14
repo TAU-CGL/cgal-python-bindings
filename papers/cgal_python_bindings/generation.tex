@@ -12,8 +12,8 @@
   row 1/.style={nodes={minimum height=1.6em,anchor=center,align=center,fill=darkgray,text=white,font=\bfseries}}}}
 \tikzset{tableA/.style={table,
   nodes={minimum height=2.8em},
-  column 1/.style={nodes={text width=19.8em}},
-  column 2/.style={nodes={text width=4.8em}},
+  column 1/.style={nodes={text width=20em}},
+  column 2/.style={nodes={text width=4.6em}},
   column 3/.style={nodes={text width=3.8em}},
   column 4/.style={nodes={text width=19.2em}}}}
 \tikzset{tableB/.style={table,
@@ -89,30 +89,32 @@ flags \myLstinline{CGALPY\_AOS2\_GEOMETRY\_TRAITS\_NAME} and
 \myLstinline{CGALPY\_AOS2\_DCEL\_NAME} that indicates the geometry
 traits and the Dcel, respectively, used to instantiate
 the \cppLstinline{Arrangement\_2<>} class template; see
-Section~\ref{ssec:modules:arr2}.
+Section~\ref{ssec:modules:aos2}.
 
 \begin{table}[!]
-  \centering\begin{tikzpicture} \matrix (first) [tableModuleName] {
-    Module & Name & Short Name\\ 2D and 3D Kernel
-    & \myLstinline{KERNEL} & \myLstinline{KER}\\ 2D Arrangements on
-    Surfaces & \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2} & \myLstinline{AOS2}\\ 3D
-    Alpha shapes & \myLstinline{ALPHA\_SHAPE\_3} & \myLstinline{AS2}\\
-    2D Regularized Boolean operations
-    & \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
-    Bounding Volumes & \myLstinline{BOUNDING\_VOLUMES}
-    & \myLstinline{BV}\\ 2D Convex hulls
-    & \myLstinline{CONVEX\_HULL\_2} & \myLstinline{CH2}\\ 3D Convex
-    hulls & \myLstinline{CONVEX\_HULL\_3} & \myLstinline{CH3}\\ 2D
-    Polygons & \myLstinline{POLYGON\_2} & \myLstinline{POL2}\\ Polygon
-    partitioning & \myLstinline{POLYGON\_PARTITIONING}
-    & \myLstinline{PP}\\ 2D Minkowski sums
-    & \myLstinline{MINKOWSKI\_SUM\_2} & \myLstinline{MS2}\\ Spatial
-    searching & \myLstinline{SPATIAL\_SEARCHING} & \myLstinline{SS}\\
-    2D Triangulations & \myLstinline{TRIANGULATION\_2}
-    & \myLstinline{TRI2}\\ 3D Triangulations
-    & \myLstinline{TRIANGULATION\_3} & \myLstinline{TRI3}\\
-    }; \end{tikzpicture} \caption{Module names and short
-    names} \label{tab:module-name}
+  \caption{Module names and short names}
+  \centering\begin{tikzpicture}
+  \matrix (first) [tableModuleName] {
+    Module & Name & Short Name\\ 2D and 3D Kernel & \myLstinline{KERNEL} &
+      \myLstinline{KER}\\
+    2D Arrangements on Surfaces & \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2} &
+      \myLstinline{AOS2}\\
+    3D Alpha shapes & \myLstinline{ALPHA\_SHAPE\_3} & \myLstinline{AS2}\\
+    2D Regularized Boolean operations &
+      \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
+    Bounding Volumes & \myLstinline{BOUNDING\_VOLUMES} & \myLstinline{BV}\\
+    2D Convex hulls & \myLstinline{CONVEX\_HULL\_2} & \myLstinline{CH2}\\
+    3D Convex hulls & \myLstinline{CONVEX\_HULL\_3} & \myLstinline{CH3}\\
+    2D Polygons & \myLstinline{POLYGON\_2} & \myLstinline{POL2}\\
+    Polygon partitioning & \myLstinline{POLYGON\_PARTITIONING} &
+      \myLstinline{PP}\\
+    2D Minkowski sums & \myLstinline{MINKOWSKI\_SUM\_2} & \myLstinline{MS2}\\
+    Spatial searching & \myLstinline{SPATIAL\_SEARCHING} & \myLstinline{SS}\\
+    2D Triangulations & \myLstinline{TRIANGULATION\_2} & \myLstinline{TRI2}\\
+    3D Triangulations & \myLstinline{TRIANGULATION\_3} & \myLstinline{TRI3}\\
+  };
+  \end{tikzpicture}
+  \label{tab:module-name}
 \end{table}
 
 The exposed names of the bound entities of different modules are
@@ -237,13 +239,14 @@ is expected to grow in the future. All flags have the prefix
 
 %%%%%%%%
 \begin{table}[!htp]
-  \tikzset{tableGA/.style={table,
-      nodes={minimum height=1.6em},
-      row 4/.style={nodes={minimum height=2.8em}},
-      column 1/.style={nodes={text width=11em}},
-      column 2/.style={nodes={text width=4.8em}},
-      column 3/.style={nodes={text width=3.8em}},
-      column 4/.style={nodes={text width=28em}}}}
+  \caption{General Arguments}
+  \centering\tikzset{%
+    tableGA/.style={table,nodes={minimum height=1.6em},
+    row 4/.style={nodes={minimum height=2.8em}},
+    column 1/.style={nodes={text width=11em}},
+    column 2/.style={nodes={text width=4.8em}},
+    column 3/.style={nodes={text width=3.8em}},
+    column 4/.style={nodes={text width=28em}}}}
   \centering\begin{tikzpicture}
     \matrix (first) [tableGA] {
 Name & Type & Default & Description\\
@@ -252,12 +255,12 @@ Name & Type & Default & Description\\
 \myLstinline{FIXED\_LIBRARY\_NAME} & \myLstinline{Boolean} & \myLstinline{true} & Determines whether the library name is fixed \myLstinline{cgalpy.so} or set based on other selections\\
     };
   \end{tikzpicture}
-  \caption{General Arguments}
   \label{tab:args}
 \end{table}
 
 %%%%%%%%
 \begin{table}[!]
+ \caption{Binding Selection}
   \centering\begin{tikzpicture}
     \matrix (first) [tableA] {
 Name & Type & Default & Description\\
@@ -275,6 +278,5 @@ Name & Type & Default & Description\\
 \myLstinline{TRIANGULATION\_3\_BINDINGS}            & Boolean & \myLstinline{false} & Determines whether to generate bindings for 3D triangulation instances\\
   };
  \end{tikzpicture}
- \caption{Binding Selection}
  \label{tab:sel}
 \end{table}
