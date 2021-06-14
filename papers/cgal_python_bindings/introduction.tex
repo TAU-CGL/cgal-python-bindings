@@ -13,24 +13,36 @@ performance.
 %
 % =============================================================================
 \subsection{C++ Python Bindings}
-\label{ssec:intro:cgal}
+\label{ssec:intro:bind}
 % =============================================================================
-Although Python is sufficiently efficient for many tasks, low-level
-code written in Python tends to be too slow, largely due to Python's
-extremely dynamic nature. In particular, low-level computational loops
-are simply infeasible. In additional, the magnitude of existing and
-well-tested code in Fortract, C, and C++, is enourmous. Python
-provides the means to acces its internals from these languages via the
-Python/C API, which enables the exploitation of existing code in
-Fortrant, C and C++, as well as the replacement of critical sections
-written in these languages when speed is essential.
+Python, like many other languages, was originally defined by a
+reference implementation. The original reference implementation of the
+Python programming language is CPython. Todate, CPython is still the
+default and commonly used reference implementation of the language,
+although new rivals are emerging, see, e.g., PyPy.\footnote{PyPy is a
+  replacement for CPython; see \url{https://www.pypy.org}.}. As the
+Python language evolved its definition has tightened and a well
+defined specification has materialized.
+
+Python is sufficiently efficient for many tasks; nevertheless
+low-level code written in Python tends to be too slow, largely due to
+Python's extremely dynamic nature. In particular, low-level
+computational loops are simply infeasible. In additional, the
+magnitude of existing and well-tested code in Fortract, C, and C++, is
+enourmous. The Python/C API, the module that enables using extension
+modules, developed in Fortrant, C, or C++, from Python code, or
+embedding Python code in code written in other languages is very rich.
+Indeed, the Python/C API module of CPython exposes a vast amount of
+details of CPython internals. It enables the efficient exploitation of
+existing code in Fortrant, C, or C++, as well as the replacement of
+critical sections written in these languages when speed is essential.
 
 Wrapping existing code has traditionally been the domain of Python
 experts due to the steep learning curve, which characterizes its
 Python/C API. Although using such wrappers is possible without ever
 knowing their internals, providing such wrappers creates a sharp line
-between developers using Python and developers using C or C++ (while
-the Python/C API). Several tools that facilitate the creation of such
+between developers using Python and developers using C or C++ with
+the Python/C API. Several tools that facilitate the creation of such
 wrappers have been introduced; A sample of such tools are listed In
 Section~\ref{sec:comp}.
 
