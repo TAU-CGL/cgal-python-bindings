@@ -77,7 +77,7 @@ Name & Type & Default & Description\\
 \myLstinline{KERNEL\_INTERSECTION\_BINDINGS} & Boolean & \myLstinline{true} & Determines whether to generate bindings for intersections\\
   };
  \end{tikzpicture}
- \caption{\iiDandiiiDGeometryKernelPackage{} Module Flags}
+ \caption{\iiDandiiiDGeometryKernelPackage{} module flags}
  \label{tab:ker}
 \end{table}
 
@@ -102,7 +102,7 @@ only a limitted predefined types are supported; see Table~\ref{tab:ker:name}.
      \cppLstinline{Exact_predicates_exact_constructions_kernel_with_sqrt}\\
   };
  \end{tikzpicture}
- \caption{Kernel Name Options}
+ \caption{Kernel name options}
  \label{tab:ker:name}
 \end{table}
 
@@ -155,7 +155,7 @@ template follows.
       \myLstinline{true}        & Determines whether to generate bindings for point location and vertical ray shooting queries\\
   };
  \end{tikzpicture}
- \caption{\iiDArrangementsPackage{} Module Flags}
+ \caption{\iiDArrangementsPackage{} module flags}
  \label{tab:aos}
 \end{table}
 
@@ -258,7 +258,7 @@ template follows.
        \cppLstinline{Arr_algebraic_segment_traits_2<Coefficient>}\\
    };
   \end{tikzpicture}
-  \caption{2D Arrangement Flags}
+  \caption{2D arrangement geometry traits}
   \label{tab:aos:gt}
 \end{table}
 
@@ -281,7 +281,7 @@ template follows.
        \cppLstinline{Arr_extended_dcel<Traits, VertexData, HalfedgeData, FaceData>}\\
   };
  \end{tikzpicture}
- \caption{2D Arrangement Flags}
+ \caption{2D arrangement DCEL}
  \label{tab:aos:dcel}
 \end{table}
 
@@ -336,9 +336,10 @@ class templates
 \item \cppLstinline{Periodic_3_regular_triangulation_3<Traits_3, DataStructure_3>}.
 \end{compactenum}
 
-%%%%%%%% 3D Triangulation
+%%%%%%%% 3D Triangulation Module Flags
 \begin{table}[!htp]
-  \centering\begin{tikzpicture} \matrix (first) [tableB, row
+  \centering\begin{tikzpicture}
+  \matrix (first) [tableB, row
     2/.style={nodes={minimum height=1.6em}}, row
     3/.style={nodes={minimum height=1.6em}}, row
     4/.style={nodes={minimum height=1.6em}}, row
@@ -353,12 +354,17 @@ class templates
 \myLstinline{TRI3\_LOCATION\_POLICY\_NAME} & String & \myLstinline{compact}    & The location policy\\
   };
   \end{tikzpicture}
-  %
+  \caption{\iiiDTriangulationsPackage{} flags}
+  \label{tab:tri}
+\end{table}
+%
+
+\begin{table}[!htp]
   \centering\begin{tikzpicture}
-    \matrix (first) [tableName,
-      column 1/.style={nodes={text width=10em}},
-      column 2/.style={nodes={text width=39em}}
-    ] {
+  \matrix (first) [tableName,
+    column 1/.style={nodes={text width=10em}},
+    column 2/.style={nodes={text width=39em}}
+  ] {
     \myLstinline{TRI3\_NAME} & Type\\
     \myLstinline{plain} & \cppLstinline{Triangulation_3<Traits_3, DataStructure_3>}\\
     \myLstinline{regular} & \cppLstinline{Regular_triangulation_3<Traits_3, DataStructure_3>}\\
@@ -368,12 +374,17 @@ class templates
     \myLstinline{periodicDelaunay} & \cppLstinline{Periodic_3_Delaunay_triangulation_3<Traits_2, DataStructure_3>}\\
   };
   \end{tikzpicture}
-  %
+  \caption{3D triangulation names}
+  \label{tab:tri:names}
+\end{table}
+%
+
+\begin{table}[!htp]
   \centering\begin{tikzpicture}
-    \matrix (first) [tableName,
-      column 1/.style={nodes={text width=19em}},
-      column 2/.style={nodes={text width=30em}}
-    ] {
+  \matrix (first) [tableName,
+    column 1/.style={nodes={text width=19em}},
+    column 2/.style={nodes={text width=30em}}
+  ] {
     \myLstinline{TRI3\_VERTEX|CELL\_BASE\_NAME} & Type\\
     \myLstinline{plain} & \\
     \myLstinline{plainWithInfo} & \\
@@ -389,40 +400,55 @@ class templates
     \myLstinline{fixedAlphaShapeRegularWithInfo} & \\
   };
   \end{tikzpicture}
-  %
+  \caption{3D triangulation vertex and cell base types}
+  \label{tab:tri:vertex}
+\end{table}
+%
+
+\begin{table}[!htp]
   \centering\begin{tikzpicture}
-    \matrix (first) [tableName,
-      column 1/.style={nodes={text width=12em}},
-      column 2/.style={nodes={text width=37em}}
-    ] {
+  \matrix (first) [tableName,
+    column 1/.style={nodes={text width=12em}},
+    column 2/.style={nodes={text width=37em}}
+  ] {
     \myLstinline{TRI3\_TRAITS\_NAME} & Type\\
     \myLstinline{kernel} & \\
     \myLstinline{periodic3Delaunay} & \\
   };
   \end{tikzpicture}
-  %
+  \caption{3D triangulation traits}
+  \label{tab:tri:vertex}
+\end{table}
+%
+
+\begin{table}[!htp]
   \centering\begin{tikzpicture}
-    \matrix (first) [tableName,
-      column 1/.style={nodes={text width=15em}},
-      column 2/.style={nodes={text width=34em}}
-    ] {
+  \matrix (first) [tableName,
+    column 1/.style={nodes={text width=15em}},
+    column 2/.style={nodes={text width=34em}}
+  ] {
     \myLstinline{TRI3\_CONCURRENCY\_NAME} & Type\\
     \myLstinline{sequential} & \\
     \myLstinline{parallel} & \\
   };
   \end{tikzpicture}
-  %
+  \caption{3D triangulation concurrency}
+  \label{tab:tri}
+\end{table}
+%
+
+\begin{table}[!htp]
   \centering\begin{tikzpicture}
-    \matrix (first) [tableName,
-      column 1/.style={nodes={text width=18em}},
-      column 2/.style={nodes={text width=31em}}
-    ] {
+  \matrix (first) [tableName,
+    column 1/.style={nodes={text width=18em}},
+    column 2/.style={nodes={text width=31em}}
+  ] {
     \myLstinline{TRI3\_LOCATION\_POLICY\_NAME} & Type\\
     \myLstinline{fast} & \\
     \myLstinline{compact} & \\
   };
   \end{tikzpicture}
-  \caption{3D Triangulation Flags}
+  \caption{3D Triangulation location policy}
   \label{tab:tri}
 \end{table}
 
