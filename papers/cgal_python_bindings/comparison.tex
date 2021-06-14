@@ -149,7 +149,7 @@ similar to \pyLstinline{cppyy}, Boost.Python focuses at C++; unlike
 advantage of the metaprogramming tools and polymorphism in C++.
 
 The library includes support for:
-\begin{itemize}
+\begin{compactitem}
 \item References and Pointers
 \item Globally Registered Type Coercions
 \item Automatic Cross-Module Type Conversions
@@ -160,7 +160,7 @@ The library includes support for:
 \item Manipulating Python objects in C++
 \item Exporting C++ Iterators as Python Iterators
 \item Documentation Strings
-\end{itemize}
+\end{compactitem}
 
 % PyBind11
 pybind11 is a lightweight header-only library that exposes C++
@@ -237,6 +237,7 @@ seferences to many objects and in the second subset we compared the
 time it took to make many seferences to a single object.
 
 \begin{table}
+  \caption{References}
   \centering\begin{tabular}{|l|r|r|r|}
     \hline
     & \textbf{pybind11} & \textbf{boost} & \textbf{SWIG}\\
@@ -246,7 +247,6 @@ time it took to make many seferences to a single object.
     Many references to a single object & 4.90625  & 2.796875 &  9.640625\\
     \hline
   \end{tabular}
-  \caption{References}
 \end{table}
 
 The second set was further divided into too subsets as well. In the
@@ -256,6 +256,7 @@ call few larfe functions. We also used the second set of experiments to
 measure the time it took to compute the various tasks in native Python.
 
 \begin{table}
+  \caption{Function calls}
   \centering\begin{tabular}{|l|r|r|r|r|}
     \hline
     & \textbf{pybind11} & \textbf{boost} & \textbf{SWIG} & \textbf{Native}\\
@@ -265,7 +266,6 @@ measure the time it took to compute the various tasks in native Python.
     One large task   & 0.71875  & 0.71875  & 0.734375  & 17.84375\\
     \hline
   \end{tabular}
-  \caption{Function calls}
 \end{table}
 
 Boost.Python handles shared\_ptr and other smart pointers extremely gracefully
