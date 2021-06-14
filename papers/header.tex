@@ -357,7 +357,6 @@
   identifierstyle=\color{red!50!black},
   escapechar=~~,
   moredelim=**[is][\only<+>{\color{red}}]{@}{@}}
-%
 % ========
 \NewDocumentCommand\framedInputPython{O{\scriptsize}O{1}om}{%
   \IfNoValueTF{#3}{
@@ -369,6 +368,38 @@
       frame=single,
       frameround=tttt,
       language=Python,
+      basicstyle=#1,
+      firstline=#2,
+      identifierstyle=\color{red!50!black}]{#4}}{%
+    \lstinputlisting[%
+      escapechar=~~,
+      numbers=left,
+      numberstyle=\tiny\color{gray},
+      numbersep=5pt,
+      frame=single,
+      frameround=tttt,
+      language=Python,
+      basicstyle=#1,
+      firstline=#2,
+      lastline=#3,
+      identifierstyle=\color{red!50!black}]{#4}}}
+% ========
+\lstdefinelanguage{Cmake}{
+    morekeywords={},
+    sensitive=false, % keywords are not case-sensitive
+    morecomment=[l]{\#}, % l is for line comment
+    morestring=[b]" % defines that strings are enclosed in double quotes
+} %
+\NewDocumentCommand\framedInputCmake{O{\scriptsize}O{1}om}{%
+  \IfNoValueTF{#3}{
+    \lstinputlisting[%
+      escapechar=~~,
+      numbers=left,
+      numberstyle=\tiny\color{gray},
+      numbersep=5pt,
+      frame=single,
+      frameround=tttt,
+      language=Cmake,
       basicstyle=#1,
       firstline=#2,
       identifierstyle=\color{red!50!black}]{#4}}{%
