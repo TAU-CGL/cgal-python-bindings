@@ -396,8 +396,13 @@ combinatorial structure of the triangulation.
     column 2/.style={nodes={text width=37em}}
   ] {
     \myLstinline{TRI3\_TRAITS\_NAME} & Type\\
-    \myLstinline{kernel} & \\
-    \myLstinline{periodic3Delaunay} & \\
+    \myLstinline{kernel} & Kernel \\
+    \myLstinline{periodic3} &
+      \cppLstinline{Periodic_3_triangulation_traits_3<Kernel, Offset>}\\
+    \myLstinline{periodic3Regular} &
+      \cppLstinline{Periodic_3_regula_triangulation_traits_3<Kernel, Offset>}\\
+    \myLstinline{periodic3Delaunay} &
+      \cppLstinline{Periodic_3_Delaunay_triangulation_traits_3<Kernel, Offset>}\\
   };
   \end{tikzpicture}
   \label{tab:tri3:traits}
