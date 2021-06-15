@@ -34,11 +34,13 @@
 #define CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR               10
 #define CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR_WITH_INFO     11
 
-#define CGALPY_TRI3_TRAITS_SEQUENTIAL                   0
-#define CGALPY_TRI3_TRAITS_PARALLEL                     1
+#define CGALPY_TRI3_CONCURRENCY_SEQUENTIAL              0
+#define CGALPY_TRI3_CONCURRENCY_PARALLEL                1
 
 #define CGALPY_TRI3_TRAITS_KERNEL                       0
-#define CGALPY_TRI3_TRAITS_PERIODIC3_DELAUNAY           1
+#define CGALPY_TRI3_TRAITS_PERIODIC_PLAIN               1
+#define CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY            2
+#define CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY            3
 
 #define CGALPY_TRI3_LOCATION_POLICY_FAST                0
 #define CGALPY_TRI3_LOCATION_POLICY_COMPACT             1
@@ -46,6 +48,8 @@
 #define CGALPY_TRI3_PLAIN                               0
 #define CGALPY_TRI3_REGULAR                             1
 #define CGALPY_TRI3_DELAUNAY                            2
-#define CGALPY_TRI3_PERIODIC3_DELAUNAY                  3
+#define CGALPY_TRI3_PERIODIC_PLAIN                      3
+#define CGALPY_TRI3_PERIODIC_REGULAR                    4
+#define CGALPY_TRI3_PERIODIC_DELAUNAY                   5
 
 #endif
