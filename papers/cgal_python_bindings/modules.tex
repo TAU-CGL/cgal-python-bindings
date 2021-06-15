@@ -401,9 +401,9 @@ Table~\ref{tab:tri3:names}.
 When any template above is instantiated the template parameter
 \cppLstinline{Traits_3} must be substituted with the geometric traits
 class that provides the type of points to use as well as elementary
-operations on them. See table~\ref{tab:tri3:traits}. The type that
-substitutes the \cppLstinline{DataStructure_3} parameter stores the
-combinatorial structure of the triangulation.
+operations on them, referred to as the traits class. The \cmake{} flag
+\myLstinline{TRI3\_TRAITS\_NAME} specifies the type of traits to be
+used for the generated bindings; see table~\ref{tab:tri3:traits}.
 
 \begin{table}[!htp]
   \caption{3D triangulation traits options}
@@ -425,44 +425,90 @@ combinatorial structure of the triangulation.
   \label{tab:tri3:traits}
 \end{table}
 
-Blah blah
+The type that substitutes the \cppLstinline{DataStructure_3} parameter
+stores the combinatorial structure of the triangulation; it is an
+instance of the class template
+\cppLstinline{Triangulation_data_structure_3<VertexBase, CellBase,
+  ConcurrencyTag>}. The types that substitute the
+\cppLstinline{VertexBase} and \cppLstinline{CellBase} template
+parameters when \cppLstinline{Triangulation_data_structure_3<>}
+represent the base type of the vertex and the base type of the cell of
+the triangulation. The \cmake{} flags
+\myLstinline{TRI3\_VERTEX\_BASE\_NAME} and
+\myLstinline{TRI3\_CELL\_BASE\_NAME} specify the vertex and base
+types, respectively; see Table~\ref{tab:tri3:vertex}.
 
 \begin{table}[!htp]
-  \caption{3D triangulation vertex and cell base options}
+  \caption{3D triangulation vertex and cell base options.
+    \cppLstinline{Tri...} stands for \cppLstinline{Triangulation};
+    \cppLstinline{entity} must be replaced with either
+    \cppLstinline{vertex} or \cppLstinline{cell};
+    \cppLstinline{K} and \cppLstinline{Size} are aliases for
+    \cppLstinline{Kernel} and \cppLstinline{size_t}, respectively;
+    \cppLstinline{Ec} is either \cppLstinline{true} or
+    \cppLstinline{false} based on the selection of
+    \cmakeLstinline{AS3\_EXACT\_COMPARISON}; see Table~\ref{tab:as}.
+  }
   \centering\begin{tikzpicture}
   \matrix (first) [tableName,
-    column 1/.style={nodes={text width=19em}},
-    column 2/.style={nodes={text width=30em}}
-  ] {
-    \myLstinline{TRI3\_VERTEX|CELL\_BASE\_NAME} & Type\\
-    \myLstinline{plain} & \\
-    \myLstinline{plainWithInfo} & \\
-    \myLstinline{regular} & \\
-    \myLstinline{regualrWithInfo} & \\
-    \myLstinline{alphaShape} & \\
-    \myLstinline{alphaShapeWithInfo} & \\
-    \myLstinline{alphaShapeRegular} & \\
-    \myLstinline{alphaShapeRegularWithInfo} & \\
-    \myLstinline{fixedAlphaShape} & \\
-    \myLstinline{fixedAlphaShapeWithInfo} & \\
-    \myLstinline{fixedAlphaShapeRegular} & \\
-    \myLstinline{fixedAlphaShapeRegularWithInfo} & \\
+    row 1/.append style={nodes={minimum height=2.8em}},
+    column 1/.style={nodes={text width=18.1em}},
+    column 2/.style={nodes={text width=30.9em}}
+  ] {%
+    \setlength{\tabcolsep}{0pt}\renewcommand{\arraystretch}{0}
+    \begin{tabular}{c}
+      \cmakeLstinline{TRI3\_VERTEX\_BASE\_NAME}
+      \textcolor{white}{or}\\[5pt]
+      \textcolor{white}{\cmakeLstinline{TRI3\_CELL\_BASE\_NAME}}
+    \end{tabular} & Type\\
+    \myLstinline{plain} &
+      \cppLstinline{Vb = Tri...\_entity_base\_3<K>}\\
+    \myLstinline{plainWithInfo} &
+      \cppLstinline{Vbi = Tri..._entity\_base\_with\_info\_3<Size, K>}\\
+    \myLstinline{regular} &
+      \cppLstinline{Rvb = Regular\_triangulation\_entity\_base\_3<K>}\\
+    \myLstinline{regualrWithInfo} &
+      \cppLstinline{Rvbi = Tri..._entity_base_with_info_3<Size, K, Rvb>}\\
+    \myLstinline{alphaShape} &
+      \cppLstinline{Alpha\_shape\_entity\_base\_3<K, Vb, Ec>}\\
+    \myLstinline{alphaShapeWithInfo} &
+      \cppLstinline{Alpha\_shape\_entity\_base\_3<K, Vbi, Ec>}\\
+    \myLstinline{alphaShapeRegular} &
+      \cppLstinline{Alpha\_shape\_entity\_base\_3<K, Rvb, Ec>}\\
+    \myLstinline{alphaShapeRegularWithInfo} &
+      \cppLstinline{Alpha\_shape\_entity\_base\_3<K, Rvbi, Ec>}\\
+    \myLstinline{fixedAlphaShape} &
+      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_3<K, Vb>}\\
+    \myLstinline{fixedAlphaShapeWithInfo} &
+      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_3<K, Vbi>}\\
+    \myLstinline{fixedAlphaShapeRegular} &
+      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_3<K, Rvb>}\\
+    \myLstinline{fixedAlphaShapeRegularWithInfo} &
+      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_3<K, Rvbi>}\\
   };
   \end{tikzpicture}
   \label{tab:tri3:vertex}
 \end{table}
-%
+
+The template parameter \cppLstinline{ConcurrencyTag} is substituted
+with either \cppLstinline{Sequential\_tag} or
+\cppLstinline{Parallel\_tag} when the template
+\cppLstinline{Triangulation\_data\_structure\_3<VertexBase, CellBase,
+  ConcurrencyTag} is instantiated. It enables the use of a concurrent
+container to store vertices and cells. The \cmake{} flag
+\cmakeLstinline{TRI3\_CONCURRENCY\_NAME} determines the selection; see
+Table~\ref{tab:tri3:concurrency}.
 
 \begin{table}[!htp]
   \caption{3D triangulation concurrency options}
   \centering\begin{tikzpicture}
   \matrix (first) [tableName,
-    column 1/.style={nodes={text width=15em}},
-    column 2/.style={nodes={text width=34em}}
+    column 1/.style={nodes={text width=18em}},
+    column 2/.style={nodes={text width=31em}}
   ] {
-    \myLstinline{TRI3\_CONCURRENCY\_NAME} & Type\\
-    \myLstinline{sequential} & \\
-    \myLstinline{parallel} & \\
+    \cmakeLstinline{TRI3\_CONCURRENCY\_NAME} & Type\\
+    \myLstinline{sequential} & \cppLstinline{Sequential\_tag}\\
+    \myLstinline{parallel} & \cppLstinline{Parallel\_tag}\\
   };
   \end{tikzpicture}
   \label{tab:tri3:concurrency}
@@ -476,9 +522,9 @@ Blah blah
     column 1/.style={nodes={text width=18em}},
     column 2/.style={nodes={text width=31em}}
   ] {
-    \myLstinline{TRI3\_LOCATION\_POLICY\_NAME} & Type\\
-    \myLstinline{fast} & \\
-    \myLstinline{compact} & \\
+    \cmakeLstinline{TRI3\_LOCATION\_POLICY\_NAME} & Type\\
+    \myLstinline{fast} & \cppLstinline{Fast\_location}\\
+    \myLstinline{compact} & \cppLstinline{Compact\_location}\\
   };
   \end{tikzpicture}
   \label{tab:tri3:location}
