@@ -308,18 +308,19 @@ The binding module \iiiDTriangulationsPackage{} consists of bindings
 of types provided by the \cgal{} packages \iiiDTriangulationsPackage{}
 and \iiiDPeriodicTriangulationsPackage{}. Table~\ref{tab:tri3} lists
 the \cmake{} flags associated with the \iiiDTriangulationsPackage{}
-module.
+module. The default selection of the traits depends on the
+triangulation selection; see Table~\ref{tab:tri3:traits-default}.
 
 %%%%%%%% 3D Triangulation Module Flags
 \begin{table}[!htp]
-  \caption{\iiiDTriangulationsPackage{} module flags}
+  \caption{\iiiDTriangulationsPackage{} module flags.}
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleFlags] {
     Name & Type & Default & Description\\
 \myLstinline{TRI3\_NAME}                   & String & \myLstinline{regular}    & The 3D triangulation type\\
 \myLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & The base vertex type\\
 \myLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & The base cell type\\
-\myLstinline{TRI3\_TRAITS\_NAME}           & String & \myLstinline{kernel}     & The geometry traits of a 3D triangulation\\
+\myLstinline{TRI3\_TRAITS\_NAME}           & String & *                        & The geometry traits of a 3D triangulation\\
 \myLstinline{TRI3\_CONCURRENCY\_NAME}      & String & \myLstinline{sequential} & The concurrency method\\
 \myLstinline{TRI3\_LOCATION\_POLICY\_NAME} & String & \myLstinline{compact}    & The location policy\\
   };
@@ -327,14 +328,35 @@ module.
   \label{tab:tri3}
 \end{table}
 
+%%%%%%%% 3D triangulation Traits default selection
+\begin{table}
+  \caption{3D triangulation Traits default selection}
+  \centering\begin{tikzpicture}
+  \matrix (first) [tableName,
+    column 1/.style={nodes={text width=30em}},
+    column 2/.style={nodes={text width=19em}}
+  ] {
+    3D Triangulation Type & Default \myLstinline{TRI3\_TRAITS\_NAME}\\
+    \cppLstinline{Periodic\_3\_triangulation\_3<>} &
+      \myLstinline{periodicPlain}\\
+    \cppLstinline{Periodic\_3\_regular_triangulation\_3<>} &
+      \myLstinline{periodicRegular}\\
+    \cppLstinline{Periodic\_3\_Delaunay_triangulation\_3<>} &
+      \myLstinline{periodicDelaunay}\\
+    \textit{Otherwise} & \myLstinline{kernel}\\
+  };
+  \end{tikzpicture}
+  \label{tab:tri3:traits-default}
+\end{table}
+
 The \iiiDTriangulationsPackage{} package~\cite{cgal:pt-t3-21a}
 provides several class templates, instances of which can be used to
-represent a variaty 3D triangulations. It particular, the package
+represent a variaty 3D triangulations. In particular, the package
 provides the following class templates:
 \begin{compactenum}
 \item \cppLstinline{Triangulation_3<Traits_3, DataStructure_3, SpatialLockDataStructure>},
-\item \cppLstinline{Delaunay_triangulation_3<Traits_3, DataStructure_3, LocationPolicy>}, or
-\item \cppLstinline{Regular_triangulation_3<Traits_3, DataStructure_3>}
+\item \cppLstinline{Regular_triangulation_3<Traits_3, DataStructure_3>}, and
+\item \cppLstinline{Delaunay_triangulation_3<Traits_3, DataStructure_3, LocationPolicy>}
 \end{compactenum}
 Instance of the \cppLstinline{Delaunay_triangulation_3<>} and
 \cppLstinline{Regular_triangulation_3<>} class templates can be used
@@ -349,8 +371,8 @@ points in the three-dimensional flat torus. This package provides the
 class templates
 \begin{compactenum}
 \item \cppLstinline{Periodic_3_triangulation_3<Traits_3, DataStructure_3>},
-\item \cppLstinline{Periodic_3_Delaunay_triangulation_3<Traits_3, DataStructure_3>}, and
-\item \cppLstinline{Periodic_3_regular_triangulation_3<Traits_3, DataStructure_3>}
+\item \cppLstinline{Periodic_3_regular_triangulation_3<Traits_3, DataStructure_3>}, and
+\item \cppLstinline{Periodic_3_Delaunay_triangulation_3<Traits_3, DataStructure_3>}
 \end{compactenum}
 
 The \cmake{} flag \myLstinline{TRI3\_NAME} specifies the particular
@@ -392,11 +414,11 @@ combinatorial structure of the triangulation.
   ] {
     \myLstinline{TRI3\_TRAITS\_NAME} & Type\\
     \myLstinline{kernel} & Kernel \\
-    \myLstinline{periodic3} &
+    \myLstinline{periodicPlain} &
       \cppLstinline{Periodic_3_triangulation_traits_3<Kernel, Offset>}\\
-    \myLstinline{periodic3Regular} &
+    \myLstinline{periodicRegular} &
       \cppLstinline{Periodic_3_regula_triangulation_traits_3<Kernel, Offset>}\\
-    \myLstinline{periodic3Delaunay} &
+    \myLstinline{periodicDelaunay} &
       \cppLstinline{Periodic_3_Delaunay_triangulation_traits_3<Kernel, Offset>}\\
   };
   \end{tikzpicture}
