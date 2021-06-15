@@ -1,0 +1,31 @@
+% Tables
+\tikzset{table/.style={
+  matrix of nodes,
+  row sep=-\pgflinewidth,
+  column sep=-\pgflinewidth,
+  nodes={rectangle,draw=black,align=left,anchor=center},
+  nodes in empty cells,
+  every even row/.style={nodes={fill=gray!20}},
+  column 1/.style={nodes={text width=19.8em}},
+  column 2/.style={nodes={text width=4.8em}},
+  column 3/.style={nodes={text width=3.8em}},
+  column 4/.style={nodes={text width=19.2em}},
+  row 1/.style={nodes={minimum height=1.6em,anchor=center,align=center,fill=darkgray,text=white,font=\bfseries}}}}
+\tikzset{tableBindingSelection/.style={table,
+  nodes={minimum height=2.8em},
+  column 1/.style={nodes={text width=20em}},
+  column 2/.style={nodes={text width=4.6em}},
+  column 3/.style={nodes={text width=3.8em}},
+  column 4/.style={nodes={text width=19.2em}}}}
+\tikzset{tableModuleFlags/.style={table,
+  nodes={minimum height=1.6em},
+  column 1/.style={nodes={text width=18.0em}},
+  column 2/.style={nodes={text width=4.6em}},
+  column 3/.style={nodes={text width=6.7em}},
+  column 4/.style={nodes={text width=18.6em}}}}
+\tikzset{tableModuleName/.style={table,
+  nodes={minimum height=1.6em},
+  column 1/.style={nodes={text width=16em}},
+  column 2/.style={nodes={text width=16em}},
+  column 3/.style={nodes={text width=7em}}}}
+\tikzset{tableName/.style={table,nodes={minimum height=1.6em}}}
