@@ -70,9 +70,10 @@ kernels:
 
 %%%%%%%% Kernel Module Flags
 \begin{table}[!htp]
- \caption{\iiDandiiiDGeometryKernelPackage{} module flags}
+  \caption{\iiDandiiiDGeometryKernelPackage{} module flags}
   \centering\begin{tikzpicture}
-  \matrix (first) [tableA,row 2/.style={nodes={minimum height=1.6em}}] {
+  \matrix (first) [tableModuleFlags,
+    row 3/.style={nodes={minimum height=2.8em}}] {
 Name & Type & Default & Description\\
 \myLstinline{KERNEL\_NAME} & String & \myLstinline{epic} & The kernel type used\\
 \myLstinline{KERNEL\_INTERSECTION\_BINDINGS} & Boolean & \myLstinline{true} & Determines whether to generate bindings for intersections\\
@@ -143,8 +144,7 @@ template follows.
 \begin{table}[!htp]
  \caption{\iiDArrangementsPackage{} module flags}
   \centering\begin{tikzpicture}
-  \matrix (first) [tableB,
-    row 3/.style={nodes={minimum height=1.6em}},
+  \matrix (first) [tableModuleFlags,
     row 4/.style={nodes={minimum height=4.0em}}
   ] {
     Name & Type & Default & Description\\
@@ -314,16 +314,11 @@ module.
 \begin{table}[!htp]
   \caption{\iiiDTriangulationsPackage{} module flags}
   \centering\begin{tikzpicture}
-  \matrix (first) [tableB, row
-    2/.style={nodes={minimum height=1.6em}}, row
-    3/.style={nodes={minimum height=1.6em}}, row
-    4/.style={nodes={minimum height=1.6em}}, row
-    6/.style={nodes={minimum height=1.6em}}, row
-    7/.style={nodes={minimum height=1.6em}} ] { Name & Type & Default
-    & Description\\
+  \matrix (first) [tableModuleFlags] {
+    Name & Type & Default & Description\\
 \myLstinline{TRI3\_NAME}                   & String & \myLstinline{regular}    & The 3D triangulation type\\
-\myLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & \\
-\myLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & \\
+\myLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & The base vertex type\\
+\myLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & The base cell type\\
 \myLstinline{TRI3\_TRAITS\_NAME}           & String & \myLstinline{kernel}     & The geometry traits of a 3D triangulation\\
 \myLstinline{TRI3\_CONCURRENCY\_NAME}      & String & \myLstinline{sequential} & The concurrency method\\
 \myLstinline{TRI3\_LOCATION\_POLICY\_NAME} & String & \myLstinline{compact}    & The location policy\\
@@ -501,9 +496,11 @@ and \cppLstinline{AlphaShapeCell_3}, respectively.
 \begin{table}[!htp]
   \caption{\iiiDAlphaShapesPackage{} module flags}
   \centering\begin{tikzpicture}
-    \matrix (first) [tableA] {
+  \matrix (first) [tableModuleFlags,
+    row 3/.style={nodes={minimum height=2.8em}}
+  ] {
 Name & Type &  Default & Description\\
-\myLstinline{AS3\_NAME}              & String  & \myLstinline{plain} & The 3D Alpha shape type, either plain or fixed\\
+\myLstinline{AS3\_NAME}              & String  & \myLstinline{plain} & The 3D Alpha shape type\\
 \myLstinline{AS3\_EXACT\_COMPARISON} & Boolean & \myLstinline{false} & Determines whether to apply exact comparisons\\
   };
  \end{tikzpicture}
@@ -538,7 +535,9 @@ reside in secondary storage).
 \begin{table}[!htp]
   \caption{\dDSpatialSearchingPackage{} module flags}
   \centering\begin{tikzpicture}
-    \matrix (first) [tableA] {
+  \matrix (first) [tableModuleFlags,
+    row 2/.style={nodes={minimum height=2.8em}}
+  ] {
 Name & Type &  Default & Description\\
 \myLstinline{SPATIAL\_SEARCHING\_DIMENSION} & Integer & \myLstinline{2} & The dimension of spatial searching related classes\\
   };
