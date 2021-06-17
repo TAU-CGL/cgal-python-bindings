@@ -329,7 +329,10 @@
   stringstyle=\ttfamily,               % typewriter type for strings
   showstringspaces=false,              % no special string spaces
   breaklines=true,
-  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  breakatwhitespace=false,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+  %prebreak=\space,
+  %postbreak=\space
 }
 % ========
 \lstdefinestyle{cppStyle}{%
