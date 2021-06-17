@@ -354,12 +354,12 @@ provides several class templates, instances of which can be used to
 represent a variaty 3D triangulations. In particular, the package
 provides the following class templates:
 \begin{compactenum}
-\item \cppLstinline{Triangulation_3<Traits_3, DataStructure_3, SpatialLockDataStructure>},
-\item \cppLstinline{Regular_triangulation_3<Traits_3, DataStructure_3>}, and
-\item \cppLstinline{Delaunay_triangulation_3<Traits_3, DataStructure_3, LocationPolicy>}
+\item \cppLstinline{Triangulation\_3<Traits\_3, DataStructure\_3, SpatialLockDataStructure>},
+\item \cppLstinline{Regular\_triangulation\_3<Traits\_3, DataStructure\_3>}, and
+\item \cppLstinline{Delaunay\_triangulation\_3<Traits\_3, DataStructure\_3, LocationPolicy>}
 \end{compactenum}
 Instance of the \cppLstinline{Delaunay_triangulation_3<>} and
-\cppLstinline{Regular_triangulation_3<>} class templates can be used
+\cppLstinline{Regular\_triangulation\_3<>} class templates can be used
 to represent Delaunay and regular triangulation, respectively. In a
 regular triangulation points have an associated weight, and some
 points can be hidden and do not result in vertices in the
@@ -370,9 +370,9 @@ package~\cite{cgal:ct-pt3-21a} supports triangulations of sets of
 points in the three-dimensional flat torus. This package provides the
 class templates
 \begin{compactenum}
-\item \cppLstinline{Periodic_3_triangulation_3<Traits_3, DataStructure_3>},
-\item \cppLstinline{Periodic_3_regular_triangulation_3<Traits_3, DataStructure_3>}, and
-\item \cppLstinline{Periodic_3_Delaunay_triangulation_3<Traits_3, DataStructure_3>}
+\item \cppLstinline{Periodic\_3\_triangulation\_3<Traits\_3, DataStructure\_3>},
+\item \cppLstinline{Periodic\_3\_regular\_triangulation\_3<Traits\_3, DataStructure\_3>}, and
+\item \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_3<Traits\_3, DataStructure\_3>}
 \end{compactenum}
 
 The \cmake{} flag \myLstinline{TRI3\_NAME} specifies the particular
@@ -387,19 +387,19 @@ Table~\ref{tab:tri3:names}.
     column 2/.style={nodes={text width=39em}}
   ] {
     \myLstinline{TRI3\_NAME} & Type\\
-    \myLstinline{plain} & \cppLstinline{Triangulation_3<Traits_3, DataStructure_3>}\\
-    \myLstinline{regular} & \cppLstinline{Regular_triangulation_3<Traits_3, DataStructure_3>}\\
-    \myLstinline{delaunay} & \cppLstinline{Delaunay_triangulation_3<Traits_3, DataStructure_3>}\\
-    \myLstinline{periodicPlain} & \cppLstinline{Periodic_3_triangulation_3<Traits_3, DataStructure_3>}\\
-    \myLstinline{periodicRegular} & \cppLstinline{Periodic_3_regular_triangulation_3<Traits_2, DataStructure_3>}\\
-    \myLstinline{periodicDelaunay} & \cppLstinline{Periodic_3_Delaunay_triangulation_3<Traits_2, DataStructure_3>}\\
+    \myLstinline{plain} & \cppLstinline{Triangulation\_3<Traits\_3, DataStructure\_3>}\\
+    \myLstinline{regular} & \cppLstinline{Regular\_triangulation\_3<Traits\_3, DataStructure\_3>}\\
+    \myLstinline{delaunay} & \cppLstinline{Delaunay\_triangulation\_3<Traits\_3, DataStructure\_3>}\\
+    \myLstinline{periodicPlain} & \cppLstinline{Periodic\_3\_triangulation\_3<Traits\_3, DataStructure\_3>}\\
+    \myLstinline{periodicRegular} & \cppLstinline{Periodic\_3\_regular\_triangulation\_3<Traits\_2, DataStructure\_3>}\\
+    \myLstinline{periodicDelaunay} & \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_3<Traits\_2, DataStructure\_3>}\\
   };
   \end{tikzpicture}
   \label{tab:tri3:names}
 \end{table}
 
 When any template above is instantiated the template parameter
-\cppLstinline{Traits_3} must be substituted with the geometric traits
+\cppLstinline{Traits\_3} must be substituted with the geometric traits
 class that provides the type of points to use as well as elementary
 operations on them, referred to as the traits class. The \cmake{} flag
 \myLstinline{TRI3\_TRAITS\_NAME} specifies the type of traits to be
@@ -415,23 +415,23 @@ used for the generated bindings; see table~\ref{tab:tri3:traits}.
     \myLstinline{TRI3\_TRAITS\_NAME} & Type\\
     \myLstinline{kernel} & Kernel \\
     \myLstinline{periodicPlain} &
-      \cppLstinline{Periodic_3_triangulation_traits_3<Kernel, Offset>}\\
+      \cppLstinline{Periodic\_3\_triangulation\_traits\_3<Kernel, Offset>}\\
     \myLstinline{periodicRegular} &
-      \cppLstinline{Periodic_3_regula_triangulation_traits_3<Kernel, Offset>}\\
+      \cppLstinline{Periodic\_3\_regula\_triangulation\_traits\_3<Kernel, Offset>}\\
     \myLstinline{periodicDelaunay} &
-      \cppLstinline{Periodic_3_Delaunay_triangulation_traits_3<Kernel, Offset>}\\
+      \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_traits\_3<Kernel, Offset>}\\
   };
   \end{tikzpicture}
   \label{tab:tri3:traits}
 \end{table}
 
-The type that substitutes the \cppLstinline{DataStructure_3} parameter
+The type that substitutes the \cppLstinline{DataStructure\_3} parameter
 stores the combinatorial structure of the triangulation; it is an
 instance of the class template
-\cppLstinline{Triangulation_data_structure_3<VertexBase, CellBase,
+\cppLstinline{Triangulation\_data\_structure\_3<VertexBase, CellBase,
   ConcurrencyTag>}. The types that substitute the
 \cppLstinline{VertexBase} and \cppLstinline{CellBase} template
-parameters when \cppLstinline{Triangulation_data_structure_3<>}
+parameters when \cppLstinline{Triangulation\_data\_structure\_3<>}
 represent the base type of the vertex and the base type of the cell of
 the triangulation. The \cmake{} flags
 \myLstinline{TRI3\_VERTEX\_BASE\_NAME} and
@@ -444,7 +444,7 @@ types, respectively; see Table~\ref{tab:tri3:vertex}.
     \cppLstinline{entity} must be replaced with either
     \cppLstinline{vertex} or \cppLstinline{cell};
     \cppLstinline{K} and \cppLstinline{Size} are aliases for
-    \cppLstinline{Kernel} and \cppLstinline{size_t}, respectively;
+    \cppLstinline{Kernel} and \cppLstinline{size\_t}, respectively;
     \cppLstinline{Ec} is either \cppLstinline{true} or
     \cppLstinline{false} based on the selection of
     \cmakeLstinline{AS3\_EXACT\_COMPARISON}; see Table~\ref{tab:as}.
@@ -462,13 +462,13 @@ types, respectively; see Table~\ref{tab:tri3:vertex}.
       \textcolor{white}{\cmakeLstinline{TRI3\_CELL\_BASE\_NAME}}
     \end{tabular} & Type\\
     \myLstinline{plain} &
-      \cppLstinline{Vb = Tri...\_entity_base\_3<K>}\\
+      \cppLstinline{Vb = Tri...\_entity\_base\_3<K>}\\
     \myLstinline{plainWithInfo} &
-      \cppLstinline{Vbi = Tri..._entity\_base\_with\_info\_3<Size, K>}\\
+      \cppLstinline{Vbi = Tri...\_entity\_base\_with\_info\_3<Size, K>}\\
     \myLstinline{regular} &
       \cppLstinline{Rvb = Regular\_triangulation\_entity\_base\_3<K>}\\
     \myLstinline{regualrWithInfo} &
-      \cppLstinline{Rvbi = Tri..._entity_base_with_info_3<Size, K, Rvb>}\\
+      \cppLstinline{Rvbi = Tri...\_entity\_base\_with\_info\_3<Size, K, Rvb>}\\
     \myLstinline{alphaShape} &
       \cppLstinline{Alpha\_shape\_entity\_base\_3<K, Vb, Ec>}\\
     \myLstinline{alphaShapeWithInfo} &
@@ -515,20 +515,35 @@ Table~\ref{tab:tri3:concurrency}.
 \end{table}
 %
 
+The template parameter \cppLstinline{ConcurrencyTag} is substituted
+with either \cppLstinline{Fast\_location} or
+\cppLstinline{Compact\_location} when the template
+\cppLstinline{Delaunay\_triangulation\_3<Traits\_3, DataStructure\_3,
+  LocationPolicy>} is instantiated. It enables a faster point location
+at the account of memory space. This is useful when performing point
+locations or random point insertions in large data sets.  The \cmake{}
+flag \cmakeLstinline{TRI3\_LOCATION\_POLICY\_NAME} determines the
+selection; see Table~\ref{tab:tri3:location}.
+
 \begin{table}[!htp]
   \caption{3D triangulation location policy options}
-  \centering\begin{tikzpicture}
-  \matrix (first) [tableName,
-    column 1/.style={nodes={text width=18em}},
-    column 2/.style={nodes={text width=31em}}
-  ] {
-    \cmakeLstinline{TRI3\_LOCATION\_POLICY\_NAME} & Type\\
-    \myLstinline{fast} & \cppLstinline{Fast\_location}\\
-    \myLstinline{compact} & \cppLstinline{Compact\_location}\\
-  };
+  \centering\begin{tikzpicture} \matrix (first) [tableName, column
+    1/.style={nodes={text width=18em}}, column 2/.style={nodes={text
+        width=31em}} ] { \cmakeLstinline{TRI3\_LOCATION\_POLICY\_NAME}
+    & Type\\ \myLstinline{fast} &
+    \cppLstinline{Fast\_location}\\ \myLstinline{compact} &
+    \cppLstinline{Compact\_location}\\ };
   \end{tikzpicture}
   \label{tab:tri3:location}
 \end{table}
+
+The following code excerpt in the \cmake{} language sets the \cmake{}
+flags for our next example.
+\framedInputCmake[\normalsize]{../../cmake/tests/tri3_del_epic_release.cmake}
+
+The following example constructs a three-dimensional Delaunay
+triangulation from six points and verivies that the triangulation is valid.
+\framedInputPython[\normalsize][15]{../../src/python_scripts/cgalpy_examples/tri3_del.py}
 
 % -----------------------------------------------------------------------------
 \subsection{3D Alpha Shapes}
