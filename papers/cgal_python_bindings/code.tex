@@ -2,24 +2,49 @@
 \section{Binding Code}
 \label{sec:bind-code}
 % =============================================================================
+Boost.Python allows users to expose C++ classes and functions to
+Python using nothing more than a C++ compiler. It exploits the full
+power of C++ metaprogramming techniques using a rich set of features
+and high-level user-friendly interface. Boost.Python exploits as much
+as information as possible from the source code to be wrapped. This
+approach is referred to as \empy{user guided wrapping}. Additional
+information that cannot be automatically extracted is explicitly
+supplied by the user. The interface specification is written in the
+same full-featured C++ language as the code being exposed, which
+has the potential of generating efficient binding. In this section
+we describe some of the techniques we use to ensure that.
 
 % -----------------------------------------------------------------------------
 \subsection{Return value policy}
 \label{sec:bind-code:rvp}
 % -----------------------------------------------------------------------------
-Return value policy, kernel specific:
+Python and C++ use fundamentally different ways of managing the memory
+and lifetime of objects. This can lead to issues when creating
+bindings for functions that return a non-trivial type. Just by looking
+at the type, it is unclear whether Python should take charge of the
+returned value and eventually free its resources, or whether this is
+handled by the C++ code. When writing code in C++, it is usually
+considered a good practice to use smart pointers, which exactly
+describe ownership semantics. Still, even good C++ interfaces use raw
+references and pointers sometimes. In some cases, in order to assure
+proper memory management of a return value from a function, explicitly
+specifying a return value policy is needed. The policy may depend on
+whether the returned object is a newly created object, a reference to
+some already existing (internal) object, or a const reference to some
+existing object. Additionally, in some cases we need to tie the
+lifetime of the result to the lifetime of the arguments, or the other
+way around.
 
-In some cases, in order to assure proper behaviour and memory
-management of a return value from a function, explicitly specifying a
-return value policy is needed. The policy may depend on whether the
-returned object is a newly created object, a reference to some already
-existing (internal) object or a const reference to some existing
-object. [Additionally in some cases we need to tie the lifetime of the
-result to the lifetime of the arguments, or the other way around]
+For some functions of kernel objects the kind of return value depends
+on the kernel type; thus, the return value policy needs to be set
+accordingly. For example, when the kernel type is
+\cppLstinline{Exact\_pre...\_inexact\_constructions\_kernel}, the
+return type of some functions that return a coordinate or a
+coefficient is a const reference, while when the kernel type is
+\cppLstinline{Exact\_pre...\_exact\_constructions\_kernel} the same
+functions return an object by value.
 
-For some kernel functions the kind of return value depends on the
-kernel (epec vs epic), and as such the return value policy needs to be
-changed accordingly. This is why for these functions a
+This is why for these functions a
 \myLstinline{Kernel_return_value_policy} type is being passed as the
 return value policy. The type is defined differently (via preprocessor
 macros) based on the kernel being exposed.
@@ -42,9 +67,9 @@ name in different packages.
 \label{sec:bind-code:templates}
 % -----------------------------------------------------------------------------
 Some types have the exact same methods exposed (for example
-\myLstinline{Triangulation_2} and
-\myLstinline{Delaunay_triangulation_2}. In those cases we use a
-templated function (i.e \myLstinline{export_triangulation}) templated
+\myLstinline{Triangulation\_2} and
+\myLstinline{Delaunay\_triangulation\_2}. In those cases we use a
+function template (i.e \myLstinline{export_triangulation}) templated
 with the type to expose and call the binding functions there.
 
 % -----------------------------------------------------------------------------
