@@ -318,19 +318,43 @@ with an integral label. The unbounded face and the other faced are labeled
 \framedInputPython[\normalsize][15]{../../src/python_scripts/cgalpy_examples/aos2_fex.py}
 
 % -----------------------------------------------------------------------------
+\subsection{2D Regularized Boolean Set Operations}
+\label{ssec:modules:tri2}
+% -----------------------------------------------------------------------------
+
+% -----------------------------------------------------------------------------
+\subsection{2D Triangulation Bindings}
+\label{ssec:modules:tri2}
+% -----------------------------------------------------------------------------
+A triangulation of a set of points $\calP$ in \Rtwo is a partition of
+the convex hull of $\calP$ into triangles whose vertices are the
+points of $\calP$. Together with the unbounded cell having the convex
+hull boundary as its frontier, the triangulation forms a partition of
+\Rtwo. Any two facets (2-face) are either disjoint or share a common
+edge (1-face) or vertex (0-face). A triangulation can be described as
+a simplicial complex. The binding module
+\iiDTriangulationsPackage{} consists of bindings of types provided by
+the \cgal{} packages \iiiDTriangulationsPackage{} and
+\iiDPeriodicTriangulationsPackage{}. Table~\ref{tab:tri2} lists the
+\cmake{} flags associated with the \iiDTriangulationsPackage{}
+module. The default selection of the traits depends on the
+triangulation selection; see Table~\ref{tab:tri2:traits-default}.
+
+% -----------------------------------------------------------------------------
 \subsection{3D Triangulation Bindings}
 \label{ssec:modules:tri3}
 % -----------------------------------------------------------------------------
 A triangulation of a set of points $\calP$ in \Rthree is a partition
 of the convex hull of $\calP$ into tetrahedra whose vertices are the
-points of $\calP$. Together with the unbounded cell having the convex
-hull boundary as its frontier, the triangulation forms a partition
-of \Rthree. Any two cells (3-face) are either disjoint or share a
-common facet (2-face), edge (1-face) or vertex (0-face).
-The binding module \iiiDTriangulationsPackage{} consists of bindings
-of types provided by the \cgal{} packages \iiiDTriangulationsPackage{}
-and \iiiDPeriodicTriangulationsPackage{}. Table~\ref{tab:tri3} lists
-the \cmake{} flags associated with the \iiiDTriangulationsPackage{}
+points of $\calP$. Similar to the two-dimensional triangulation,
+together with the unbounded cell having the convex hull boundary as
+its frontier, the triangulation forms a partition of \Rthree. Any two
+cells (3-face) are either disjoint or share a common facet (2-face),
+edge (1-face) or vertex (0-face).  The binding module
+\iiiDTriangulationsPackage{} consists of bindings of types provided by
+the \cgal{} packages \iiiDTriangulationsPackage{} and
+\iiiDPeriodicTriangulationsPackage{}. Table~\ref{tab:tri3} lists the
+\cmake{} flags associated with the \iiiDTriangulationsPackage{}
 module. The default selection of the traits depends on the
 triangulation selection; see Table~\ref{tab:tri3:traits-default}.
 
