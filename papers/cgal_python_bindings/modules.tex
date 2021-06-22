@@ -437,8 +437,8 @@ concepts \cppLstinline{RegularTriangulationTraits\_3} and
 \cppLstinline{DelaunayTriangulationTraits\_3} refine the concept
 \cppLstinline{TriangulationTraits\_3}.  In addition, when a Delaunay
 triangulation instance is used to define either plain or a fixed alpha
-shape type (see Section~\ref{ssec:as3}, the traits parameter must be
-substituted with a traits class that models either the
+shape type (see Section~\ref{ssec:modules::as3}, the traits parameter
+must be substituted with a traits class that models either the
 \cppLstinline{AlphaShapeTraits\_3} or the
 \cppLstinline{FixedAlphaShapeTraits\_3} concepts, respectively. Notice
 that each of these concepts refines the concept
@@ -458,8 +458,8 @@ choice for the bindings of instances of
 triangulation types). The \cmake{} flag
 \myLstinline{TRI3\_TRAITS\_NAME} specifies the type of traits to be
 used for the generated bindings; see table~\ref{tab:tri3:traits}. This
-type is conveniently defined as \cppLstinline{Dt::Geom\_traits},
-where \cppLstinline{Dt} is the triangulation instance.
+type is conveniently defined as \cppLstinline{Dt::Geom\_traits}, where
+\cppLstinline{Dt} is the triangulation instance.
 
 \begin{table}[!htp]
   \caption{3D triangulation traits options}
