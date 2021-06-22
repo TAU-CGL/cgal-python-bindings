@@ -3,16 +3,16 @@
 \label{sec:bind-code}
 % =============================================================================
 Boost.Python allows users to expose C++ classes and functions to
-Python using nothing more than a C++ compiler. It exploits the full
-power of C++ metaprogramming techniques using a rich set of features
-and high-level user-friendly interface. Boost.Python exploits as much
-as information as possible from the source code to be wrapped. This
+Python using nothing more than a C++ compiler. It exploits
+metaprogramming techniques to implement a rich set of features and
+high-level user-friendly interface. Boost.Python extracts as much as
+information as possible from the source code to be wrapped. This
 approach is referred to as \emph{user guided wrapping}. Additional
 information that cannot be automatically extracted is explicitly
 supplied by the user. The interface specification is written in the
-same full-featured C++ language as the code being exposed, which
-has the potential of generating efficient binding. In this section
-we describe some of the techniques we use to ensure that.
+same full-featured C++ language as the code being exposed, which has
+the potential of generating efficient binding. In this section we
+describe some of the techniques we use to ensure that.
 
 % -----------------------------------------------------------------------------
 \subsection{Return value policy}
@@ -53,24 +53,77 @@ macros) based on the kernel being exposed.
 \subsection{Scopes}
 \label{sec:bind-code:scopes}
 % -----------------------------------------------------------------------------
-All functions and classes related to some package were exposed inside
-a \myLstinline{export_[package]()} function. All such calls are
-happening in \myLstinline{export_module.cpp}. We wrap each call with a
-local (c++) scope and call the \myLstinline{SET_SCOPE(module_name)}
-macro, which causes every exposed function/class inside this local
-scope to be exposed inside the \myLstinline{module_name} submodule of
-the CGALPY module. This prevents name clashes of classes with the same
-name in different packages.
+The Boost.Python mechanism that depends on \cppLstinline{bp::scope} is
+used to (i) reflect nesting in C++ code that uses \cgal, and (ii)
+prevent name conflicts between bound entities in distinct modules; see
+Section~\ref{sec:bind-gen:scopes}. The latter requires a slight
+intervention on our part as explained next. The code that binds all
+functions and classes of different modules is nested in distinct C++
+forced scopes. Within a (C++) scope we first set the Python namespace
+to match the name of a module. Then, we bind all functions and classes
+of \cgal{} packages associated with the module. The following code
+except shows how it is done for the \iiDandiiiDGeometryKernelPackage{}
+module:
+
+\begin{lstlisting}[style=cppNumberedStyle]
+{
+  SET_SCOPE("Ker")
+  export_kernel();
+#ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
+  export_kernel_intersections_2();
+  export_kernel_intersections_3();
+#endif
+}
+\end{lstlisting}
+
+For every module there exsists a function called
+\cppLstinline{export_<name>}, where \cppLstinline{<name>} is the
+module. This function contains the binding code for the essential
+functions and classes of the module. Recall that the
+\iiDandiiiDGeometryKernelPackage{} module is associated with the
+\myLstinline{KERNEL\_INTERSECTION\_BINDINGS} flag, which determines
+whether to generate bindings for intersections; hence, the
+compile-time conditional calls to the functions
+\cppLstinline{export_kernel_intersections_2()} and
+\cppLstinline{export_kernel_intersections_3()}, which contains the
+binding code for intersections.
+
+%% All functions and classes related to some package were exposed inside
+%% a \myLstinline{export_[package]()} function. All such calls are
+%% happening in \myLstinline{export_module.cpp}. We wrap each call with a
+%% local (c++) scope and call the \myLstinline{SET_SCOPE(module_name)}
+%% macro, which causes every exposed function/class inside this local
+%% scope to be exposed inside the \myLstinline{module_name} submodule of
+%% the CGALPY module. This prevents name clashes of classes with the same
+%% name in different packages.
 
 % -----------------------------------------------------------------------------
-\subsection{Using Templates to avoid code duplication}
+\subsection{Avoiding Code Duplication}
 \label{sec:bind-code:templates}
 % -----------------------------------------------------------------------------
-Some types have the exact same methods exposed (for example
-\myLstinline{Triangulation\_2} and
-\myLstinline{Delaunay\_triangulation\_2}. In those cases we use a
-function template (i.e \myLstinline{export_triangulation}) templated
-with the type to expose and call the binding functions there.
+Some types have the exact same nested types and member functions
+exposed, e.g., \cppLstinline{Triangulation\_2} and
+\cppLstinline{Delaunay\_triangulation\_2} class templates each have
+the method \cppLstinline{dimension()} exposed as the Python attribute
+\pyLstinline{dimension}. In these cases we use a function template to
+avoid code duplication. Following the example above, we have the
+function \cppLstinline{export_triangulation<Triangulation>()}, where
+the template parameter \cppLstinline{Triangulation} is substituted
+with one of the two-dimensional triangulation types supported; see
+Table~\ref{xxx}. This function template accepts as its single
+parameter the binding class object, which is constructed separately.
+
+\begin{lstlisting}[style=cppNumberedStyle]
+typedef CGAL::Triangulation_2<Kernel>              Triangulation_2;
+typedef CGAL::Delaunay_triangulation_2<Kernel>     Delaunay_triangulation_2;
+
+auto c0 = bp::class_<Triangulation_2>("Triangulation_2");
+auto c1 = bp::class_<Delaunay_triangulation_2,
+                     bp::bases<Triangulation_2>>("Delaunay_triangulation_2");
+
+export_triangulation_2<Triangulation_2>(c0);
+export_triangulation_2<Delaunay_triangulation_2>(c1);
+\end{lstlisting}
 
 % -----------------------------------------------------------------------------
 \subsection{SFINAE}

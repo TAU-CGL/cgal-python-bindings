@@ -77,10 +77,14 @@ kernels:
   \caption{\iiDandiiiDGeometryKernelPackage{} module flags}
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleFlags,
-    row 3/.style={nodes={minimum height=2.8em}}] {
-Name & Type & Default & Description\\
-\myLstinline{KERNEL\_NAME} & String & \myLstinline{epic} & The kernel type used\\
-\myLstinline{KERNEL\_INTERSECTION\_BINDINGS} & Boolean & \myLstinline{true} & Determines whether to generate bindings for intersections\\
+    row 3/.style={nodes={minimum height=2.8em}}
+  ] {
+    Name & Type & Default & Description\\
+    \cmakeLstinline{KERNEL\_NAME} & String & \myLstinline{epic} &
+      The kernel type used\\
+    \cmakeLstinline{KERNEL\_INTERSECTION\_BINDINGS} & Boolean &
+      \myLstinline{true} &
+      Determines whether to generate bindings for intersections\\
   };
  \end{tikzpicture}
  \label{tab:ker}
@@ -102,7 +106,7 @@ Table~\ref{tab:ker:name}.
      column 1/.style={nodes={text width=19em}},
      column 2/.style={nodes={text width=30em}}
    ] {
-   \myLstinline{KERNEL\_NAME} & Predefined Type\\
+   \cmakeLstinline{KERNEL\_NAME} & Predefined Type\\
    \myLstinline{epic} &
      \cppLstinline{Exact\_pre...\_inexact\_constructions\_kernel}\\
    \myLstinline{epec} &
@@ -161,7 +165,7 @@ template follows.
     row 4/.style={nodes={minimum height=4.0em}}
   ] {
     Name & Type & Default & Description\\
-    \myLstinline{AOS2\_GEOMETRY\_TRAITS\_NAME}    & String  &
+    \cmakeLstinline{AOS2\_GEOMETRY\_TRAITS\_NAME}    & String  &
       \myLstinline{segment}     & The geometry traits of a 2D arrangement\\
     \myLstinline{AOS2\_DCEL\_NAME}                & String  &
       \myLstinline{allExtended} & The DCEL of a 2D arrangement\\
@@ -265,7 +269,7 @@ template follows.
      column 1/.style={nodes={text width=18em}},
      column 2/.style={nodes={text width=31em}}
    ] {
-     \myLstinline{AOS2\_GEOMETRY\_TRAITS\_NAME} & Type\\
+     \cmakeLstinline{AOS2\_GEOMETRY\_TRAITS\_NAME} & Type\\
      \myLstinline{nonCachingSegment} &
        \cppLstinline{Arr\_non\_caching\_segment\_basic\_traits\_2<Kernel>}\\
      \myLstinline{segment} & \cppLstinline{Arr\_segment_traits\_2<Kernel>}\\
@@ -337,12 +341,12 @@ triangulation selection; see Table~\ref{tab:tri3:traits-default}.
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleFlags] {
     Name & Type & Default & Description\\
-\myLstinline{TRI3\_NAME}                   & String & \myLstinline{regular}    & The 3D triangulation type\\
-\myLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & The base vertex type\\
-\myLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & The base cell type\\
-\myLstinline{TRI3\_TRAITS\_NAME}           & String & *                        & The geometry traits of a 3D triangulation\\
-\myLstinline{TRI3\_CONCURRENCY\_NAME}      & String & \myLstinline{sequential} & The concurrency method\\
-\myLstinline{TRI3\_LOCATION\_POLICY\_NAME} & String & \myLstinline{compact}    & The location policy\\
+    \cmakeLstinline{TRI3\_NAME}                   & String & \myLstinline{regular}    & The 3D triangulation type\\
+    \cmakeLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & The base vertex type\\
+    \cmakeLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & The base cell type\\
+    \cmakeLstinline{TRI3\_TRAITS\_NAME}           & String & *                        & The geometry traits of a 3D triangulation\\
+    \cmakeLstinline{TRI3\_CONCURRENCY\_NAME}      & String & \myLstinline{sequential} & The concurrency method\\
+    \cmakeLstinline{TRI3\_LOCATION\_POLICY\_NAME} & String & \myLstinline{compact}    & The location policy\\
   };
   \end{tikzpicture}
   \label{tab:tri3}
