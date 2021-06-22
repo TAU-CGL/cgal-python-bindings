@@ -107,11 +107,12 @@ exposed, e.g., \cppLstinline{Triangulation\_2} and
 the method \cppLstinline{dimension()} exposed as the Python attribute
 \pyLstinline{dimension}. In these cases we use a function template to
 avoid code duplication. Following the example above, we have the
-function \cppLstinline{export_triangulation<Triangulation>()}, where
-the template parameter \cppLstinline{Triangulation} is substituted
-with one of the two-dimensional triangulation types supported; see
-Table~\ref{xxx}. This function template accepts as its single
-parameter the binding class object, which is constructed separately.
+function \cppLstinline{export\_triangulation\_2<Triangulation>()},
+where the template parameter \cppLstinline{Triangulation} is
+substituted with one of the two-dimensional triangulation types
+supported; see Table~\ref{xxx}. This function template accepts as its
+single parameter the binding class object, which is constructed
+separately.
 
 \begin{lstlisting}[style=cppNumberedStyle]
 typedef CGAL::Triangulation_2<Kernel>              Triangulation_2;
@@ -126,37 +127,99 @@ export_triangulation_2<Delaunay_triangulation_2>(c1);
 \end{lstlisting}
 
 % -----------------------------------------------------------------------------
-\subsection{SFINAE}
+\subsection{Substitution Failure Is Not an Error}
 \label{sec:bind-code:sfinae}
 % -----------------------------------------------------------------------------
-\url{https://en.cppreference.com/w/cpp/language/sfinae}
-\url{https://doc.cgal.org/latest/Kernel_23/group__do__intersect__linear__grp.html}
+Substitution failure is not an error (SFINAE) refers to a situation in
+C++ where an invalid substitution of template parameters is not in
+itself an error. In particular, it applies during a process called
+\emph{overload resolution}.  In order to compile a function call, the
+compiler creates a set of candidate functions. This set includes all
+function implementations the name of which match the call and that can
+be accessed by the caller. Then the compiler selects the most viable
+one according to some criteria. When substituting the explicitly
+specified or deduced type for the template parameter fails, the
+specialization is discarded from the overload set instead of causing a
+compile error.\footnote{For more information see, e.g.,
+  \url{https://en.cppreference.com/w/cpp/language/sfinae}.}
 
-\myLstinline{CGAL::do_intersect} has an overloaded implementation for
-many supported types, however, not every combination of two supported
-types is implemented.
+The function \cppLstinline{CGAL::do_intersect(o1, o2)} is overloaded
+with several implementations that handle different combination of
+types of arguments; however, not every combination of two types is
+implemented. For a complete list of valid combinations refer to the
+reference manual at
+\url{https://doc.cgal.org/latest/Kernel_23/group__do__intersect__linear__grp.html}. We
+attempt to create bindings for all combinations and avoid getting
+compilation errors for unsupported combinations with the help of
+SFINAE as follows. Consider two types \cppLstinline{Type1} and
+\cppLstinline{Type2}, and assume that the overloaded version
+\cppLstinline{CGAL::do_intersect(Type1 o1, Type2 o2)} is not
+implmented but all other three are implemented.
 
-For conveniently binding all overloaded versions of
-\myLstinline{CGAL::do_intersect}, we used SFINAE: This is how a
-version overloaded with a combination of \myLstinline{T1} and
-\myLstinline{T2} is bound: First \myLstinline{bind_do_intersect()}
-calls \myLstinline{bind_do_intersect_1T} templated with some supported
-type {T1}. \myLstinline{bind_do_intersect_1T()}, templated
-with \myLstinline{T1}, calls \myLstinline{bind_do_intersect_2T}
-templated with \myLstinline{T1} and some supported type
-\myLstinline{T2}, and a \myLstinline{bool} argument.
+\begin{lstlisting}[style=cppNumberedStyle]
+template <typename T1, typename T2>
+void bind_do_intersect_2T(decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
+  bp.def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
+}
 
-The declaration of \myLstinline{bind_do_intersect_2T}, templated with
-both \myLstinline{T1} and \myLstinline{T2} is only valid when
-templated with a combination of types for which an overloaded
-implementation of \myLstinline{CGAL::do_intersect} exists. Otherwise,
-due to SFINAE, the blank implementation template of
-\myLstinline{bind_do_intersect_2T} expecting (...) as an argument
-will be invoked (it would normally not be invoked as variadic
-parameters have the lowest rank for the purpose of overload
-resolution).
+template <typename, typename>
+void bind_do_intersect_2T(...) {}
 
-\url{https://en.cppreference.com/w/cpp/language/variadic_arguments}
+template <typename T1>
+void bind_do_intersect_1T() {
+  bind_do_intersect_2T<T1, Type1>(true);
+  bind_do_intersect_2T<T1, Type2>(true);
+}
+
+void bind_do_intersect() {
+  bind_do_intersect_1T<Type1>();
+  bind_do_intersect_1T<Type2>();
+}
+\end{lstlisting}
+
+First the function \cppLstinline{bind_do_intersect()} calls the
+instance of \cppLstinline{bind_do_intersect_1T<T1>()}, where
+\cppLstinline{T1} is substituted with \cppLstinline{Type1}.  Then, the
+latter makes two calls and passs a \cppLstinline{bool} argument of
+value \cppLstinline{true}. First it calls the instance of
+\cppLstinline{bind_do_intersect_2T<Type1, T2>(true)}, where
+\cppLstinline{T2} is also substituted with \cppLstinline{Type1}; then,
+it calls the instance of \cppLstinline{bind_do_intersect_2T<Type1,
+  T2>(true)}, where \cppLstinline{T2} is substituted with
+\cppLstinline{Type2}. The function
+\cppLstinline{bind_do_intersect_2T()} accepts a parameter of type
+\cppLstinline{bool} and is overloaded with two implementations.  The
+second uses \emph{variadic arguments} and serves as a fall-through
+when the evaluation of the first implementation fails during the
+resolution process.\footnote{For more information on \emph{variadic
+    arguments} see
+  \url{https://en.cppreference.com/w/cpp/language/variadic_arguments}.}
+The paramater type of the first implementation is defined as the
+return type of \cppLstinline{CGAL::do_intersect<Kernel>(T1(),
+  T2())}. When \cppLstinline{T1} and \cppLstinline{T2} are substituted
+with \cppLstinline{Type1} and \cppLstinline{Type2}, respectively, the
+evaluation fails, and the blank implementation is selected and
+invoked.  In all other three cases the evaluation succeeds. As
+variadic parameters have the lowest rank for the purpose of overload
+resolution, the first implementation will alsways be selected for
+valid combinations.
+
+
+%% templated with some supported type
+%% {T1}. \myLstinline{bind_do_intersect_1T()}, templated with
+%% \myLstinline{T1}, calls \myLstinline{bind_do_intersect_2T} templated
+%% with \myLstinline{T1} and some supported type \myLstinline{T2}, and a
+%% \myLstinline{bool} argument.  The declaration of
+%% \myLstinline{bind_do_intersect_2T}, templated with both
+%% \myLstinline{T1} and \myLstinline{T2} is only valid when templated
+%% with a combination of types for which an overloaded implementation of
+%% \myLstinline{CGAL::do_intersect} exists. Otherwise, due to SFINAE, the
+%% blank implementation template of \myLstinline{bind_do_intersect_2T}
+%% expecting (...) as an argument will be invoked (it would normally not
+%% be invoked as variadic parameters have the lowest rank for the purpose
+%% of overload resolution).
+
+
 
 % -----------------------------------------------------------------------------
 \subsection{Arrangement Extension}
