@@ -318,7 +318,7 @@ with an integral label. The unbounded face and the other faced are labeled
 \framedInputPython[\normalsize][15]{../../src/python_scripts/cgalpy_examples/aos2_fex.py}
 
 % -----------------------------------------------------------------------------
-\subsection{2D Regularized Boolean Set Operations}
+\subsection{2D Regularized Boolean Set Operation Bindings}
 \label{ssec:modules:tri2}
 % -----------------------------------------------------------------------------
 
@@ -339,6 +339,234 @@ the \cgal{} packages \iiiDTriangulationsPackage{} and
 \cmake{} flags associated with the \iiDTriangulationsPackage{}
 module. The default selection of the traits depends on the
 triangulation selection; see Table~\ref{tab:tri2:traits-default}.
+
+%%%%%%%% 2D Triangulation Module Flags
+\begin{table}[!htp]
+  \caption{\iiiDTriangulationsPackage{} module flags. For the default
+  value of the traits name see Table~\ref{tab:tri2:traits-default}.}
+  \centering\begin{tikzpicture}
+  \matrix (first) [tableModuleFlags] {
+    Name & Type & Default & Description\\
+    \cmakeLstinline{TRI2\_NAME} & String & \myLstinline{plain} &
+      The 2D triangulation type\\
+    \cmakeLstinline{TRI2\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & The base vertex type\\
+    \cmakeLstinline{TRI2\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & The base cell type\\
+    \cmakeLstinline{TRI2\_TRAITS\_NAME}           & String & *                        & The geometry traits of a 2D triangulation\\
+    \cmakeLstinline{TRI2\_INTERSECTION\_TAG\_NAME} & String & \myLstinline{ncirc}    & The intersection tag\\
+  };
+  \end{tikzpicture}
+  \label{tab:tri2}
+\end{table}
+
+%%%%%%%% 2D triangulation Traits default selection
+\begin{table}
+  \caption{2D triangulation Traits default selection}
+  \centering\begin{tikzpicture}
+  \matrix (first) [tableName,
+    column 1/.style={nodes={text width=30em}},
+    column 2/.style={nodes={text width=19em}}
+  ] {
+    2D Triangulation Type & Default \myLstinline{TRI3\_TRAITS\_NAME}\\
+    \cppLstinline{Periodic\_2\_triangulation\_2<>} &
+      \myLstinline{periodicPlain}\\
+    \cppLstinline{Periodic\_2\_Delaunay_triangulation\_2<>} &
+      \myLstinline{periodicDelaunay}\\
+    \textit{Otherwise} & \myLstinline{kernel}\\
+  };
+  \end{tikzpicture}
+  \label{tab:tri2:traits-default}
+\end{table}
+
+The \iiDTriangulationsPackage{} package~\cite{cgal:pt-t2-21a}
+provides several class templates, instances of which can be used to
+represent a variaty 2D triangulations. In particular, the package
+provides the following class templates:
+\begin{compactenum}
+\item \cppLstinline{Triangulation\_2<Traits\_2, DataStructure\_2, SpatialLockDataStructure>},
+\item \cppLstinline{Regular\_triangulation\_2<Traits\_2, DataStructure\_2>}, and
+\item \cppLstinline{Delaunay\_triangulation\_2<Traits\_2, DataStructure\_2, LocationPolicy>}
+\end{compactenum}
+Instance of the \cppLstinline{Delaunay\_triangulation\_2<>} and
+\cppLstinline{Regular\_triangulation\_2<>} class templates can be used
+to represent Delaunay and regular triangulation, respectively. In a
+regular triangulation points have an associated weight, and some
+points can be hidden and do not result in vertices in the
+triangulation.
+
+The \iiiDPeriodicTriangulationsPackage{}
+package~\cite{cgal:ct-pt2-21a} supports triangulations of sets of
+points in the three-dimensional flat torus~\cite{ct-cpt-09}. This
+package provides the class templates
+\begin{compactenum}
+\item \cppLstinline{Periodic\_2\_triangulation\_2<Traits\_2, DataStructure\_2>},
+\item \cppLstinline{Periodic\_2\_regular\_triangulation\_2<Traits\_2, DataStructure\_2>}, and
+\item \cppLstinline{Periodic\_2\_Delaunay\_triangulation\_2<Traits\_2, DataStructure\_2>}
+\end{compactenum}
+
+The \cmake{} flag \myLstinline{TRI2\_NAME} specifies the particular
+types of triangulations, bindings for which should be generated; see
+Table~\ref{tab:tri2:names}.
+
+\begin{table}[!htp]
+  \caption{2D triangulation name options}
+  \centering\begin{tikzpicture}
+  \matrix (first) [tableName,
+    column 1/.style={nodes={text width=10em}},
+    column 2/.style={nodes={text width=39em}}
+  ] {
+    \myLstinline{TRI2\_NAME} & Type\\
+    \myLstinline{plain} & \cppLstinline{Triangulation\_2<Traits\_2, DataStructure\_2>}\\
+    \myLstinline{regular} & \cppLstinline{Regular\_triangulation\_2<Traits\_2, DataStructure\_2>}\\
+    \myLstinline{delaunay} & \cppLstinline{Delaunay\_triangulation\_2<Traits\_2, DataStructure\_2>}\\
+    \myLstinline{periodicPlain} & \cppLstinline{Periodic\_2\_triangulation\_2<Traits\_2, DataStructure\_2>}\\
+    \myLstinline{periodicRegular} & \cppLstinline{Periodic\_2\_regular\_triangulation\_2<Traits\_2, DataStructure\_2>}\\
+    \myLstinline{periodicDelaunay} & \cppLstinline{Periodic\_2\_Delaunay\_triangulation\_2<Traits\_2, DataStructure\_2>}\\
+  };
+  \end{tikzpicture}
+  \label{tab:tri2:names}
+\end{table}
+
+When any template above is instantiated the template parameter
+\cppLstinline{Traits\_2} must be substituted with a model of a
+respective geometric traits concept,
+\cppLstinline{TriangulationTraits\_2},
+\cppLstinline{RegularTriangulationTraits\_2},
+\cppLstinline{DelaunayTriangulationTraits\_2},
+\cppLstinline{Periodic\_2TriangulationTraits\_2},
+\cppLstinline{Periodic\_2RegularTriangulationTraits\_2}, or
+\cppLstinline{Periodic\_2DelaunayTriangulationTraits\_2}, referred to
+as the geometric traits class; it provides the type of points to use
+as well as elementary operations on them. Observe that each of the
+concepts \cppLstinline{RegularTriangulationTraits\_2} and
+\cppLstinline{DelaunayTriangulationTraits\_2} refine the concept
+\cppLstinline{TriangulationTraits\_2}.  In addition, when a Delaunay
+triangulation instance is used to define either plain or a fixed alpha
+shape type (see Section~\ref{ssec:modules::as2}, the traits parameter
+must be substituted with a traits class that models either the
+\cppLstinline{AlphaShapeTraits\_2} or the
+\cppLstinline{FixedAlphaShapeTraits\_2} concepts, respectively. Notice
+that each of these concepts refines the concept
+\cppLstinline{DelaunayTriangulationTraits\_2}. Similarly, when a
+regular triangulation instance is used to define either plain or a
+fixed alpha shape type (see Section~\ref{ssec:modules:as2}, the traits
+parameter must be substituted with a traits class that models either
+the \cppLstinline{WeightedAlphaShapeTraits\_2} or the
+\cppLstinline{FixedWeightedAlphaShapeTraits\_2} concepts,
+respectively. Notice that each of these concepts refines the concept
+\cppLstinline{RegularTriangulationTraits\_2}.  Observe that any Kernel
+instance is a model of any non-peridic traits concept and the only
+choice for the bindings of instances of
+\cppLstinline{Triangulation\_2<>},
+\cppLstinline{Regular\_triangulation\_2<>}, or
+\cppLstinline{Delaunay\_triangulation\_2<>} (the non-periodic
+triangulation types). The \cmake{} flag
+\myLstinline{TRI2\_TRAITS\_NAME} specifies the type of traits to be
+used for the generated bindings; see table~\ref{tab:tri2:traits}. This
+type is conveniently defined as \cppLstinline{Dt::Geom\_traits}, where
+\cppLstinline{Dt} is the triangulation instance.
+
+\begin{table}[!htp]
+  \caption{2D triangulation traits options}
+  \centering\begin{tikzpicture}
+  \matrix (first) [tableName,
+    column 1/.style={nodes={text width=12em}},
+    column 2/.style={nodes={text width=37em}}
+  ] {
+    \myLstinline{TRI2\_TRAITS\_NAME} & Type\\
+    \myLstinline{kernel} & Kernel \\
+    \myLstinline{periodicPlain} &
+      \cppLstinline{Periodic\_2\_triangulation\_traits\_2<Kernel, Offset>}\\
+    \myLstinline{periodicRegular} &
+      \cppLstinline{Periodic\_2\_regular\_triangulation\_traits\_2<Kernel, Offset>}\\
+    \myLstinline{periodicDelaunay} &
+      \cppLstinline{Periodic\_2\_Delaunay\_triangulation\_traits\_2<Kernel, Offset>}\\
+  };
+  \end{tikzpicture}
+  \label{tab:tri2:traits}
+\end{table}
+
+The type that substitutes the \cppLstinline{DataStructure\_2}
+parameter models the concept
+\cppLstinline{TriangulationDataStructure\_2}. An object of this type
+stores the combinatorial structure of the triangulation; it is an
+instance of the class template
+\cppLstinline{Triangulation\_data\_structure\_2<VertexBase, CellBase,
+  ConcurrencyTag>}.
+
+The types that substitute the \cppLstinline{VertexBase} and
+\cppLstinline{CellBase} template parameters when the template
+\cppLstinline{Triangulation\_data\_structure\_2<>} is instantiated
+must model the concepts \cppLstinline{TriangulationDSVertexBase\_2}
+and \cppLstinline{TriangulationDSCellBase\_2}, respectively, when the
+triangulation instance is not used to define an alpha shape type. If
+the triangulation is used to define a plain alpha shape type, these
+parameters must be substituted with types that model the concepts
+\cppLstinline{AlphaShapeVertex\_2} and
+\cppLstinline{AlphaShapeCell\_2}, respectively; see
+Section~\ref{ssec:modules:as2}. If the triangulation is used to define
+a fixed alpha shape type, these parameters must be substituted with
+types that model the concepts \cppLstinline{AlphaShapeVertex\_2} and
+\cppLstinline{AlphaShapeCell\_2}, respectively.  These types represent
+the base type of the vertex and the base type of the cell of the
+triangulation, respectively. The \cmake{} flags
+\myLstinline{TRI2\_VERTEX\_BASE\_NAME} and
+\myLstinline{TRI2\_CELL\_BASE\_NAME} specify the vertex and base
+types, respectively; see Table~\ref{tab:tri2:vertex}. These type are
+conveniently defined as \cppLstinline{Dt::Vertex} and
+\cppLstinline{Dt::Face}, where \cppLstinline{Dt} is the triangulation
+instance.
+
+\begin{table}[!htp]
+  \caption{2D triangulation vertex and cell base options.
+    \cppLstinline{Tri...} stands for \cppLstinline{Triangulation};
+    \cppLstinline{entity} must be replaced with either
+    \cppLstinline{vertex} or \cppLstinline{cell};
+    \cppLstinline{K} and \cppLstinline{Size} are aliases for
+    \cppLstinline{Kernel} and \cppLstinline{size\_t}, respectively;
+    \cppLstinline{Ec} is either \cppLstinline{true} or
+    \cppLstinline{false} based on the selection of
+    \cmakeLstinline{AS2\_EXACT\_COMPARISON}; see Table~\ref{tab:as2}.
+  }
+  \centering\begin{tikzpicture}
+  \matrix (first) [tableName,
+    row 1/.append style={nodes={minimum height=2.8em}},
+    column 1/.style={nodes={text width=18.1em}},
+    column 2/.style={nodes={text width=30.9em}}
+  ] {%
+    \setlength{\tabcolsep}{0pt}\renewcommand{\arraystretch}{0}
+    \begin{tabular}{c}
+      \cmakeLstinline{TRI2\_VERTEX\_BASE\_NAME}
+      \textcolor{white}{or}\\[5pt]
+      \textcolor{white}{\cmakeLstinline{TRI2\_CELL\_BASE\_NAME}}
+    \end{tabular} & Type\\
+    \myLstinline{plain} &
+      \cppLstinline{Vb = Tri...\_entity\_base\_2<K>}\\
+    \myLstinline{plainWithInfo} &
+      \cppLstinline{Vbi = Tri...\_entity\_base\_with\_info\_2<Size, K>}\\
+    \myLstinline{regular} &
+      \cppLstinline{Rvb = Regular\_triangulation\_entity\_base\_2<K>}\\
+    \myLstinline{regualrWithInfo} &
+      \cppLstinline{Rvbi = Tri...\_entity\_base\_with\_info\_2<Size, K, Rvb>}\\
+    \myLstinline{alphaShape} &
+      \cppLstinline{Alpha\_shape\_entity\_base\_2<K, Vb, Ec>}\\
+    \myLstinline{alphaShapeWithInfo} &
+      \cppLstinline{Alpha\_shape\_entity\_base\_2<K, Vbi, Ec>}\\
+    \myLstinline{alphaShapeRegular} &
+      \cppLstinline{Alpha\_shape\_entity\_base\_2<K, Rvb, Ec>}\\
+    \myLstinline{alphaShapeRegularWithInfo} &
+      \cppLstinline{Alpha\_shape\_entity\_base\_2<K, Rvbi, Ec>}\\
+    \myLstinline{fixedAlphaShape} &
+      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_2<K, Vb>}\\
+    \myLstinline{fixedAlphaShapeWithInfo} &
+      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_2<K, Vbi>}\\
+    \myLstinline{fixedAlphaShapeRegular} &
+      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_2<K, Rvb>}\\
+    \myLstinline{fixedAlphaShapeRegularWithInfo} &
+      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_2<K, Rvbi>}\\
+  };
+  \end{tikzpicture}
+  \label{tab:tri2:vertex}
+\end{table}
 
 % -----------------------------------------------------------------------------
 \subsection{3D Triangulation Bindings}
@@ -365,7 +593,7 @@ triangulation selection; see Table~\ref{tab:tri3:traits-default}.
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleFlags] {
     Name & Type & Default & Description\\
-    \cmakeLstinline{TRI3\_NAME}                   & String & \myLstinline{regular}    & The 3D triangulation type\\
+    \cmakeLstinline{TRI3\_NAME}                   & String & \myLstinline{plain}    & The 3D triangulation type\\
     \cmakeLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & The base vertex type\\
     \cmakeLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & The base cell type\\
     \cmakeLstinline{TRI3\_TRAITS\_NAME}           & String & *                        & The geometry traits of a 3D triangulation\\
@@ -644,7 +872,7 @@ triangulation from six points and verivies that the triangulation is valid.
 \framedInputPython[\normalsize][15]{../../src/python_scripts/cgalpy_examples/tri3_del.py}
 
 % -----------------------------------------------------------------------------
-\subsection{3D Alpha Shapes}
+\subsection{3D Alpha Shape Bindings}
 \label{ssec:modules:as3}
 % -----------------------------------------------------------------------------
 Given a set of points sampled in a 3D body, an alpha shape
@@ -729,7 +957,7 @@ The following example constructs an alpha shape object.
 \framedInputPython[\normalsize][15]{../../src/python_scripts/cgalpy_examples/as3_del_compact_epic.py}
 
 % -----------------------------------------------------------------------------
-\subsection{Spatial Searching}
+\subsection{Spatial Searching Bindings}
 \label{ssec:modules:ss}
 % -----------------------------------------------------------------------------
 The \dDSpatialSearchingPackage{} package~\cite{cgal:tf-ssd-21a}
