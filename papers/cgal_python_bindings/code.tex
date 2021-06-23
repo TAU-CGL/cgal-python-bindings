@@ -38,10 +38,10 @@ way around.
 For some functions of kernel objects the kind of return value depends
 on the kernel type; thus, the return value policy needs to be set
 accordingly. For example, when the kernel type is
-\cppLstinline{Exact\_pre...\_inexact\_constructions\_kernel}, the
+\cppLstinline{Exact\_predicates\_inexact\_constructions\_kernel}, the
 return type of some functions that return a coordinate or a
 coefficient is a const reference, while when the kernel type is
-\cppLstinline{Exact\_pre...\_exact\_constructions\_kernel} the same
+\cppLstinline{Exact\_predicates\_exact\_constructions\_kernel} the same
 functions return an object by value.
 
 This is why for these functions a
