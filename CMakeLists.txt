@@ -26,7 +26,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # Binding options. Notice that The default value of option is OFF.
-option(CGALPY_ARRANGEMENT_2_BINDINGS            "Compile bindings for 2D Arrangements")
+option(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS "Compile bindings for 2D Arrangements on Surfaces")
 option(CGALPY_ALPHA_SHAPE_3_BINDINGS            "Compile bindings for 3D Alpha Shapes")
 option(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS "Compile bindings for 2D boolean set operations")
 option(CGALPY_BOUNDING_VOLUMES_BINDINGS         "Compile bindings for bounding volumes")
@@ -38,7 +38,7 @@ option(CGALPY_MINKOWSKI_SUM_2_BINDINGS          "Compile bindings for 2D Minkows
 option(CGALPY_SPATIAL_SEARCHING_BINDINGS        "Compile bindings for spatial searching")
 option(CGALPY_TRIANGULATION_2_BINDINGS          "Compile bindings for 2D triangulations")
 option(CGALPY_TRIANGULATION_3_BINDINGS          "Compile bindings for 3D triangulations")
-option(CGALPY_ARR2_POINT_LOCATION_BINDINGS      "Compile bindings for point location")
+option(CGALPY_AOS2_POINT_LOCATION_BINDINGS      "Compile bindings for point location")
 option(CGALPY_KERNEL_INTERSECTION_BINDINGS      "Compile bindings for intersections")
 
 

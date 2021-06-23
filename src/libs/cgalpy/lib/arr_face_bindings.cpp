@@ -5,7 +5,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include <CGALPY/arrangement_2_types.hpp>
+#include <CGALPY/arrangement_on_surface_2_types.hpp>
 #include <CGALPY/python_iterator_templates.hpp>
 
 Iterator_from_circulator<Ccb_halfedge_circulator>* outer_ccb(Face& f)
@@ -42,7 +42,7 @@ void export_face()
     .def("inner_ccbs", &inner_ccbs, return_value_policy<manage_new_object>())
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
     .def("isolated_vertices", range<return_internal_reference<>>(&isolated_vertices_begin, &isolated_vertices_end))
-#if CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL || CGALPY_ARR2_DCEL == CGALPY_ARR2_FACE_EXTENDED_DCEL
+#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL || CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL
     .def("set_data", &Face::set_data)
     .def<Face::Data& (Face::*)()>("data", &Face::data, return_value_policy<copy_non_const_reference>())
 #endif
