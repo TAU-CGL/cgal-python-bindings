@@ -13,11 +13,11 @@ else:
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-Arr2 = CGALPY.Arr2
+Aos2 = CGALPY.Aos2
 
-Arrangement_2 = Arr2.Arrangement_2
+Arrangement_2 = Aos2.Arrangement_2
 Point_2 = Ker.Point_2
-Curve_2 = Arr2.Curve_2
+Curve_2 = Aos2.Curve_2
 
 arr = Arrangement_2()
 c1 = Curve_2(Point_2(0, 0), Point_2(2, 0))
@@ -25,13 +25,13 @@ c2 = Curve_2(Point_2(2, 0), Point_2(2, 2))
 c3 = Curve_2(Point_2(2, 2), Point_2(0, 2))
 c4 = Curve_2(Point_2(0, 2), Point_2(0, 0))
 
-Arr2.insert(arr, [c1, c2, c3, c4])
+Aos2.insert(arr, [c1, c2, c3, c4])
 
-Arr2.insert_point(arr, Point_2(1, 1))
+Aos2.insert_point(arr, Point_2(1, 1))
 
 d = []
 
-Arr2.decompose(arr, d)
+Aos2.decompose(arr, d)
 for pair in d:
     # CGALPY specific:
     # pair is a tuple
@@ -41,11 +41,11 @@ for pair in d:
     v0 = pair[0]
     for obj in pair[1]:
         if obj.is_vertex():
-            v1 = Arr2.Vertex()
+            v1 = Aos2.Vertex()
             obj.get_vertex(v1)
         elif obj.is_halfedge():
-            he = Arr2.Halfedge()
+            he = Aos2.Halfedge()
             obj.get_halfedge(he)
         elif obj.is_face():
-            f = Arr2.Face()
+            f = Aos2.Face()
             obj.get_face(f)

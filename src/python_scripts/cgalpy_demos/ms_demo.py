@@ -13,15 +13,15 @@ else:
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-Arr2 = CGALPY.Arr2
+Aos2 = CGALPY.Aos2
 Pol2 = CGALPY.Pol2
 MN2 = CGALPY.MN2
 
-Arrangement_2 = Arr2.Arrangement_2
+Arrangement_2 = Aos2.Arrangement_2
 Point_2 = Ker.Point_2
 Vector_2 = Ker.Vector_2
 Segment_2 = Ker.Segment_2
-Curve_2 = Arr2.Curve_2
+Curve_2 = Aos2.Curve_2
 Polygon_2 = Pol2.Polygon_2
 
 from gui_demo import GUI_demo, QtWidgets, QtCore

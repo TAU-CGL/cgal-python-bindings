@@ -5,7 +5,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include <CGALPY/arrangement_2_types.hpp>
+#include <CGALPY/arrangement_on_surface_2_types.hpp>
 
 typedef typename Traits::CoordNT CoordNT;
 

@@ -39,7 +39,7 @@
 
 #define CGALPY_TRI3_TRAITS_KERNEL                       0
 #define CGALPY_TRI3_TRAITS_PERIODIC_PLAIN               1
-#define CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY            2
+#define CGALPY_TRI3_TRAITS_PERIODIC_REGULAR             2
 #define CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY            3
 
 #define CGALPY_TRI3_LOCATION_POLICY_FAST                0
