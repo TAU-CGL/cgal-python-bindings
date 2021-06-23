@@ -8,17 +8,15 @@
 
 #include <CGALPY/arrangement_on_surface_2_types.hpp>
 
+namespace bp = boost::python;
+
 template<typename T0, typename T1>
-bool is_type(Object& o)
-{
-  return o.is<T0>() || o.is<T1>();
-}
+bool is_type(Object& o) { return o.is<T0>() || o.is<T1>(); }
 
 // Assign the value to t
 // Return true iff assignment was successful
 template<typename T0, typename T1>
-bool get_type(Object& o, typename T0::value_type& t)
-{
+bool get_type(Object& o, typename T0::value_type& t) {
   T0 get0;
   bool res = CGAL::assign<T0>(get0, o);
   if (res) {
@@ -33,10 +31,8 @@ bool get_type(Object& o, typename T0::value_type& t)
   return res;
 }
 
-void export_object()
-{
-  using namespace boost::python;
-  class_<Object>("Object", no_init)
+void export_object() {
+  bp::class_<Object>("Object", bp::no_init)
     .def("empty", &Object::empty)
     .def("is_vertex", &is_type<Arrangement_2::Vertex_handle, Vertex_const_handle>)
     .def("get_vertex", &get_type<Arrangement_2::Vertex_handle, Vertex_const_handle>)
