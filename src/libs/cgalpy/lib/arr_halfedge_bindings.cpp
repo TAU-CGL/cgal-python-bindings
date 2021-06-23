@@ -5,7 +5,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include <CGALPY/arrangement_2_types.hpp>
+#include <CGALPY/arrangement_on_surface_2_types.hpp>
 #include <CGALPY/python_iterator_templates.hpp>
 
 Vertex& source(Halfedge& e) { return (*(e.source())); }
@@ -35,7 +35,7 @@ void export_halfedge()
     .def("prev", &prev, return_value_policy<reference_existing_object>())
     .def("curve", &curve, return_value_policy<reference_existing_object>())
     .def("ccb", &ccb, return_value_policy<manage_new_object>())
-#if CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL
+#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
     .def("set_data", &Halfedge::set_data)
     .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, return_value_policy<copy_non_const_reference>())
 #endif

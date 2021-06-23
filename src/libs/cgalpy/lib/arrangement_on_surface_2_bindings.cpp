@@ -7,7 +7,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <CGALPY/Python_functor.hpp>
-#include <CGALPY/arrangement_2_types.hpp>
+#include <CGALPY/arrangement_on_surface_2_types.hpp>
 #include <boost/python/stl_iterator.hpp>
 
 #include <CGAL/Arr_overlay_2.h>
@@ -24,15 +24,15 @@ typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2> Landmarks_pl;
 typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
   Trapezoid_pl;
 
-#if (CGALPY_ARR2_DCEL == CGALPY_ARR2_FACE_EXTENDED_DCEL) || \
-  (CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL)
+#if (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL) || \
+  (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL)
 #include <CGALPY/Arr_python_face_overlay_traits.hpp>
 typedef Arr_python_face_overlay_traits< Arrangement_2, Arrangement_2,
                                         Arrangement_2, Face::Data>
   Arr_face_overlay_traits;
 #endif
 
-#if CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL
+#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
 #include <CGALPY/Arr_python_overlay_traits.hpp>
 typedef Arr_python_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2,
                                    Face::Data> Arr_overlay_traits;
@@ -76,12 +76,12 @@ void insert_curves(Arrangement_2& arr, boost::python::list& lst)
   }
 }
 
-
 Halfedge& insert_non_intersecting_curve_default(Arrangement_2& arr,
                                                 X_monotone_curve_2& c)
 {
   return *(CGAL::insert_non_intersecting_curve(arr, c));
 }
+
 template <typename PointLocation>
 Halfedge& insert_non_intersecting_curve(Arrangement_2& arr,
                                         X_monotone_curve_2& c, PointLocation& pl)
@@ -116,8 +116,8 @@ void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res)
   CGAL::overlay(arr1, arr2, arr_res);
 }
 
-#if (CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL) ||    \
-  (CGALPY_ARR2_DCEL == CGALPY_ARR2_FACE_EXTENDED_DCEL)
+#if (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL) ||    \
+  (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL)
 void overlay_fex(Arrangement_2& arr1, Arrangement_2& arr2,
                  Arrangement_2& arr_res, Arr_face_overlay_traits& traits)
 {
@@ -125,7 +125,7 @@ void overlay_fex(Arrangement_2& arr1, Arrangement_2& arr2,
 }
 #endif
 
-#if CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL
+#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
 void overlay_ex(Arrangement_2& arr1, Arrangement_2& arr2,
                 Arrangement_2& arr_res, Arr_overlay_traits& traits)
 {
@@ -250,16 +250,12 @@ Face_iterator unbounded_faces_end(Arrangement_2& arr) { return arr.unbounded_fac
 Face& unbounded_face(Arrangement_2& arr) { return *(arr.unbounded_face()); }
 Face& fictitious_face(Arrangement_2& arr) { return *(arr.fictitious_face()); }
 
-void assign(Arrangement_2& arr, Arrangement_2& input_arr)
-{
-  arr.assign(input_arr);
-}
+void assign(Arrangement_2& arr, Arrangement_2& input_arr) { arr.assign(input_arr); }
 
-void export_arrangement_2()
-{
+void export_arrangement_on_surface_2() {
   using namespace boost::python;
 
-    enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
+  enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
     .value("ARR_LEFT_TO_RIGHT", CGAL::Arr_halfedge_direction::ARR_LEFT_TO_RIGHT)
     .export_values()
@@ -269,7 +265,7 @@ void export_arrangement_2()
     .value("ARR_MAX_END", CGAL::Arr_curve_end::ARR_MAX_END)
     .export_values()
     ;
-    
+
   class_<Arrangement_2>("Arrangement_2")
     .def(init<>())
     .def(init<Arrangement_2&>())
@@ -304,9 +300,9 @@ void export_arrangement_2()
     .def("clear", &Arrangement_2::clear)
 
     //supported only by some traits
-#if (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
     .def(self_ns::str(self_ns::self))
     .def(self_ns::repr(self_ns::self))
 #endif
@@ -330,20 +326,20 @@ void export_arrangement_2()
   def("zone", &zone<Wal_pl>);
   def("zone", &zone<Trapezoid_pl>);
   //supported only by some traits
-#if (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
   def("zone", &zone<Landmarks_pl>);
   def("do_intersect", &do_intersect<X_monotone_curve_2, Landmarks_pl>);
   def("insert_point", &insert_point<Landmarks_pl>, return_internal_reference<>());
   def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Landmarks_pl>, return_internal_reference<>());
 #endif
   def("overlay", &overlay);
-#if (CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL) || \
-  (CGALPY_ARR2_DCEL == CGALPY_ARR2_FACE_EXTENDED_DCEL)
+#if (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL) || \
+  (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL)
   def("overlay", &overlay_fex);
 #endif
-#if CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL
+#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
   def("overlay", &overlay_ex);
 #endif
   def("do_intersect", &do_intersect_default<X_monotone_curve_2>);
@@ -360,13 +356,13 @@ void export_arrangement_2()
   def("remove_edge", &remove_edge_free, return_internal_reference<>());
   def("remove_vertex", &remove_vertex_free);
 
-#if (CGALPY_ARR2_DCEL == CGALPY_ARR2_FACE_EXTENDED_DCEL) || \
-    (CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL)
+#if (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL) || \
+    (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL)
   class_<Arr_face_overlay_traits>("Arr_face_overlay_traits", init<bp::object>())
     ;
 #endif
 
-#if CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL
+#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
   class_<Arr_overlay_traits>("Arr_overlay_traits", init<bp::object, bp::object,
     bp::object, bp::object, bp::object, bp::object, bp::object, bp::object,
     bp::object, bp::object>())
