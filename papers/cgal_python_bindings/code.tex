@@ -204,7 +204,6 @@ variadic parameters have the lowest rank for the purpose of overload
 resolution, the first implementation will alsways be selected for
 valid combinations.
 
-
 %% templated with some supported type
 %% {T1}. \myLstinline{bind_do_intersect_1T()}, templated with
 %% \myLstinline{T1}, calls \myLstinline{bind_do_intersect_2T} templated
@@ -219,15 +218,33 @@ valid combinations.
 %% be invoked as variadic parameters have the lowest rank for the purpose
 %% of overload resolution).
 
-
-
 % -----------------------------------------------------------------------------
 \subsection{Arrangement Extension}
 \label{sec:bind-code:ae}
 % -----------------------------------------------------------------------------
-The arrangement is always extended with a generic python object. This
-allows for flexibility and helps dealing with not being able to use a
-custom data type as a template parameter.
+In many applications it is necessary to extend the type that
+represents certain \cgal{} data structures with some properties. In
+\cgal{} it is more convenient, and thus more common, extending the
+types of the topological features of the data structures, for example,
+the DCEL of the arrangement or the triangulation data structure of a
+triangulation. When developing code in pure C++, there is no
+restriction on the property used to extend the data structure.
+However, when the data structure interface is wrapped with Python
+bindings, the property type must be known when the bindings are
+compiled. Nevertheless, we support extentions with generic Python
+objects. If a certain feature must be extended with a certain
+property, the type of which is defined in the C++ code, it is always
+possible to use an external propery map, where the properties are
+indexed by a Python object, such as an integer or a string. When
+generating the bindings the user must set the flag that enables the
+extension (unless extension is the default setting). Attaching indices
+to and extracting an index from a feature is done via the
+\cppLstinline{set_data()} and \cppLstinline{data()} exposed functions.
+
+Consider, for example, the \cppLstinline{Arrangement\_2<Traits,Dcel>};
+see Section~\ref{ssec:modules:aos2}. An instance of this template is
+used to represent an arrangement embedded in the plane. The following
+example ...
 
 % -----------------------------------------------------------------------------
 \subsection{Arrangement Overlay traits}
