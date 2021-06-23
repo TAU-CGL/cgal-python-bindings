@@ -15,12 +15,12 @@ else:
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-Arr2 = CGALPY.Arr2
+Aos2 = CGALPY.Aos2
 
-Arrangement_2 = Arr2.Arrangement_2
+Arrangement_2 = Aos2.Arrangement_2
 Point_2 = Ker.Point_2
 Segment_2 = Ker.Segment_2
-Curve_2 = Arr2.Curve_2
+Curve_2 = Aos2.Curve_2
 
 from gui_demo import GUI_demo, QtWidgets, QtCore
 
@@ -36,7 +36,7 @@ def set_up_arrangement():
     c2 = Curve_2(Segment_2(p2, p3))
     c3 = Curve_2(Segment_2(p3, p0))
 
-    Arr2.insert(arr0, [c0, c1, c2, c3])
+    Aos2.insert(arr0, [c0, c1, c2, c3])
 
 # Set the data for the faces. The data can be any python object
     for f in arr0.faces():
@@ -62,7 +62,7 @@ def set_up_arrangement():
     c2 = Curve_2(Segment_2(p2, p3))
     c3 = Curve_2(Segment_2(p3, p0))
 
-    Arr2.insert(arr1, [c0, c1, c2, c3])
+    Aos2.insert(arr1, [c0, c1, c2, c3])
 
     for f in arr1.faces():
         if f.is_unbounded():
@@ -73,14 +73,14 @@ def set_up_arrangement():
     result = Arrangement_2()
     # Set the data of a face that is the intersection of two faces
     # from the original arrangements to be the sum of their data
-    overlay_traits = Arr2.Arr_face_overlay_traits(lambda x, y: x+y)
-    Arr2.overlay(arr0, arr1, result, overlay_traits)
+    overlay_traits = Aos2.Arr_face_overlay_traits(lambda x, y: x+y)
+    Aos2.overlay(arr0, arr1, result, overlay_traits)
 
     # Splitting a preexisting face setting the data of the two new faces to match the old face data
     p1 = Point_2(200, 100)
     p2 = Point_2(250, 100)
     c = Curve_2(Segment_2(p1, p2))
-    he = Arr2.insert_non_intersecting_curve(result, c)
+    he = Aos2.insert_non_intersecting_curve(result, c)
     face_data = he.face().data() if he.face().data() is not None else he.twin().face().data()
     he.face().set_data(face_data)
     he.twin().face().set_data(face_data)

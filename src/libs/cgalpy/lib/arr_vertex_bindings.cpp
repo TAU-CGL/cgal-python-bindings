@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/arrangement_2_types.hpp>
+#include <CGALPY/arrangement_on_surface_2_types.hpp>
 #include <CGALPY/python_iterator_templates.hpp>
 
 Iterator_from_circulator<Halfedge_around_vertex_circulator>* halfedge_around_vertex_iterator(Vertex& v)
@@ -23,7 +23,7 @@ void export_vertex()
     .def("is_isolated", &Vertex::is_isolated)
     .def("degree", &Vertex::degree)
     .def("incident_halfedges", &halfedge_around_vertex_iterator, return_value_policy<manage_new_object>())
-#if CGALPY_ARR2_DCEL == CGALPY_ARR2_EXTENDED_DCEL
+#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
     .def<Vertex::Data& (Vertex::*)()>("data", &Vertex::data, return_value_policy<copy_non_const_reference>())
     .def("set_data", &Vertex::set_data)
 #endif

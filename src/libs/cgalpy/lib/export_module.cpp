@@ -12,7 +12,7 @@
 #include <CGALPY/kernel_types.hpp>
 
 void export_kernel();
-void export_arrangement_2();
+void export_arrangement_on_surface_2();
 void export_intersections_2();
 void export_point_location();
 void export_object();
@@ -75,30 +75,30 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
   }
 #endif
 
-#ifdef CGALPY_ARRANGEMENT_2_BINDINGS
+#ifdef CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS
   {
-    SET_SCOPE("Arr2")
-    export_arrangement_2();
+    SET_SCOPE("Aos2")
+    export_arrangement_on_surface_2();
     export_object();
     export_vertex();
     export_halfedge();
     export_face();
 
-#if CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_LINEAR_GEOMETRY_TRAITS
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
     export_arr_linear_traits();
-#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
     export_arr_segment_traits();
-#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
     export_arr_circle_segment_traits();
-#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CONIC_GEOMETRY_TRAITS
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
     export_arr_conic_traits();
-#elif CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
     export_arr_algebraic_segment_traits();
 #else
-  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ARR2_GEOMETRY_TRAITS");
+  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-#ifdef CGALPY_ARR2_POINT_LOCATION_BINDINGS
+#ifdef CGALPY_AOS2_POINT_LOCATION_BINDINGS
     export_point_location();
 #endif
   }
@@ -109,7 +109,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
     SET_SCOPE("Pol2")
     export_polygon_2();
     export_polygon_with_holes_2();
-#if CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
     export_general_polygon_2();
     export_general_polygon_with_holes_2();
 #endif
@@ -151,7 +151,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
     SET_SCOPE("BSO2")
     export_polygon_set_2();
     export_boolean_set_operations_2();
-#if CGALPY_ARR2_GEOMETRY_TRAITS == CGALPY_ARR2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
     export_general_polygon_set_2();
 #endif
   };

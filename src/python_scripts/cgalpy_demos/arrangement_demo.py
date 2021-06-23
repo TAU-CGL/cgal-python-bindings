@@ -13,13 +13,13 @@ else:
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-Arr2 = CGALPY.Arr2
+Aos2 = CGALPY.Aos2
 MN2 = CGALPY.MN2
 
-Arrangement_2 = Arr2.Arrangement_2
+Arrangement_2 = Aos2.Arrangement_2
 Point_2 = Ker.Point_2
 Segment_2 = Ker.Segment_2
-Curve_2 = Arr2.Curve_2
+Curve_2 = Aos2.Curve_2
 
 from gui_demo import GUI_demo, QtWidgets, QtCore
 
@@ -39,8 +39,8 @@ def set_up_scene_arr():
     c0 = Curve_2(s0)
     c1 = Curve_2(Segment_2(p2, p3))
     arr = Arrangement_2()
-    Arr2.insert(arr, c0)
-    Arr2.insert(arr, c1)
+    Aos2.insert(arr, c0)
+    Aos2.insert(arr, c1)
 
     for edge in arr.edges():
         p0x = edge.source().point().x().to_double()
