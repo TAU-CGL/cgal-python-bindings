@@ -321,8 +321,29 @@ with an integral label. The bounded face and the unbounded face are labeled
 
 % -----------------------------------------------------------------------------
 \subsection{2D Regularized Boolean Set Operation Bindings}
-\label{ssec:modules:tri2}
+\label{ssec:modules:bso2}
 % -----------------------------------------------------------------------------
+The \cgal{} package \iiDRegularizedBooleanSetOperationsPackage{}
+consists of the implementation of regularized Boolean set-operations,
+intersection predicates, and point containment predicates predicates
+on point sets bounded by weakly $x$-monotone curves in two-dimensional
+Euclidean space~\cite{cgal:fwzh-rbso2-21a}. At this point the
+\iiDRegularizedBooleanSetOperationsPackage{} module is not associated
+with any \cmake{} flags.
+
+% -----------------------------------------------------------------------------
+\subsection{2D Minkowski Sums}
+\label{ssec:modules:ms2}
+% -----------------------------------------------------------------------------
+Given two sets of points $\calA, \calB \in \Rd$ their Minkowski sum,
+denoted by $\calA \oplus \calB$, is their point-wise sum, namely the
+set $\{a+b |\, a \in A\cal,b \in \calB\}$. The \cgal{} package
+\iiDMinkowskiSumsPackage{} contains functions that compute the planar
+Minkowski sums of two polygons and the planar Minkowski sum of a
+simple polygon and a disc---an operation also referred to as
+offsetting or dilating a polygon~\cite{cgal:w-rms2-21a}. At this point
+the \iiDMinkowskiSumsPackage{} module is not associated with any
+\cmake{} flags.
 
 % -----------------------------------------------------------------------------
 \subsection{2D Triangulation Bindings}
