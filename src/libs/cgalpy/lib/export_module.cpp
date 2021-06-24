@@ -4,7 +4,9 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
+#include <boost/python.hpp>
 #include <boost/static_assert.hpp>
 
 #include <CGALPY/config.hpp>
@@ -16,15 +18,6 @@ void export_arrangement_on_surface_2();
 void export_intersections_2();
 void export_point_location();
 void export_object();
-void export_vertex();
-void export_halfedge();
-void export_face();
-
-void export_arr_linear_traits();
-void export_arr_segment_traits();
-void export_arr_circle_segment_traits();
-void export_arr_conic_traits();
-void export_arr_algebraic_segment_traits();
 
 void export_polygon_2();
 void export_polygon_with_holes_2();
@@ -80,23 +73,6 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
     SET_SCOPE("Aos2")
     export_arrangement_on_surface_2();
     export_object();
-    export_vertex();
-    export_halfedge();
-    export_face();
-
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-    export_arr_linear_traits();
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-    export_arr_segment_traits();
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-    export_arr_circle_segment_traits();
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-    export_arr_conic_traits();
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-    export_arr_algebraic_segment_traits();
-#else
-  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
-#endif
 
 #ifdef CGALPY_AOS2_POINT_LOCATION_BINDINGS
     export_point_location();
