@@ -12,9 +12,22 @@
 
 namespace bp = boost::python;
 
+extern void export_point();
+
 Segment_2 to_segment(Curve_2& c) { return Segment_2(c); }
 
 void export_arr_segment_traits() {
+  bp::scope traits_scope = bp::class_<Traits>("Traits")
+    .def(bp::init<>())
+    .def("is_in_x_range_2_object", &Traits::is_in_x_range_2_object)
+    .def("is_in_y_range_2_object", &Traits::is_in_y_range_2_object)
+    ;
+
+  const bp::type_info info = bp::type_id<TPoint_2>();
+  const bp::converter::registration* reg = bp::converter::registry::query(info);
+  if (reg == NULL || (*reg).m_to_python == NULL) export_point();
+  else traits_scope.attr("Point_2") = bp::handle<>(reg->m_class_object);
+
   bp::class_<Curve_2>("Curve_2")
     .def(bp::init<>())
     .def(bp::init<Segment_2&>())
@@ -47,11 +60,5 @@ void export_arr_segment_traits() {
 
   bp::class_<Is_in_y_range_2>("Is_in_y_range_2", bp::no_init)
     .def("__call__", &Is_in_y_range_2::operator());
-    ;
-
-  bp::class_<Traits>("Traits")
-    .def(bp::init<>())
-    .def("is_in_x_range_2_object", &Traits::is_in_x_range_2_object)
-    .def("is_in_y_range_2_object", &Traits::is_in_y_range_2_object)
     ;
 }
