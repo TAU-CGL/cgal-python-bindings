@@ -266,9 +266,9 @@ two arrangements in form of the free function template
 \cppLstinline{CGAL::overlay(arr_r, arr_b, arr_o, traits)} constructs
 the arrangement \cppLstinline{arr_o}, which is the overlay of two
 input arrangement \cppLstinline{arr_r} and \cppLstinline{arr_b}. The
-last argument, namely \cppLstinline{traits}, enables the creation of
-extended DCEL records of the output arrangement from the properties of
-the corresponding DCEL records of the input arrangements. All three
+last argument, namely \cppLstinline{traits}, enables the population of
+properies in the extended DCEL records of the output arrangement from
+properties of the DCEL records of the input arrangements. All three
 arrangements must use the same geometric primitives.  In other words,
 their types are instances of the \cppLstinline{Arrangement_2<Traits,
   Dcel>} class template, where the \cppLstinline{Traits} parameter is
