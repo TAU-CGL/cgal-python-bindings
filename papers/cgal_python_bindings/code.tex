@@ -225,10 +225,11 @@ valid combinations.
 In many applications it is necessary to extend the type that
 represents certain \cgal{} data structures with some properties. In
 \cgal{} it is more convenient, and thus more common, extending the
-types of the topological features of the data structures, for example,
-the DCEL of the arrangement or the triangulation data structure of a
-triangulation. When developing code in pure C++, there is no
-restriction on the property used to extend the data structure.
+types that represent the topological features of the data structures
+(rather then the types that represent the geometric features), for
+example, the DCEL of the arrangement or the triangulation data
+structure of a triangulation. When developing code in pure C++, there
+is no restriction on the property used to extend the data structure.
 However, when the data structure interface is wrapped with Python
 bindings, the property type must be known when the bindings are
 compiled. Nevertheless, we support extentions with generic Python
@@ -247,26 +248,79 @@ used to represent an arrangement embedded in the plane. The following
 example ...
 
 % -----------------------------------------------------------------------------
-\subsection{Arrangement Overlay traits}
+\subsection{Arrangement Overlay Traits}
 \label{sec:bind-code:overlay}
 % -----------------------------------------------------------------------------
-Since a custom c++ \myLstinline{overlay_traits} class cannot be
-defined from python, we instead expose a new class called
-\myLstinline{Arr_python_overlay_traits}. This class is a model of the
-OverlayTraits concept.
-\url{https://doc.cgal.org/latest/Arrangement_on_surface_2/classOverlayTraits.html}
+Formally, the map overlay of two spatial subdivisions $\calS_1$ and
+$\calS_2$ is a third subdivision $S$, such that there is a cell $c$ in
+$\calS$ iff there are cells $c_1$ and $c_2$ in $\calS_1$ and
+$\calS_2$, respectively, such that $c$ is a maximal connected
+component of $c_1 \cap c_2$. Arrangements are subdivisions of some
+ambiant space (see Section~\ref{ssec:modules:aos2}) and computing the
+overlay of two arrangements is useful for many applications, including
+the application of Boolean operations; see
+Section~\ref{ssec:modules:bso2}. Indeed, the \iiDArrangementsPackage{}
+\cgal{} package supports an operation that computes the map overlay of
+two arrangements in form of the free function template
+\cppLstinline{CGAL::overlay()}. In particular, the call
+\cppLstinline{CGAL::overlay(arr_r, arr_b, arr_o, traits)} constructs
+the arrangement \cppLstinline{arr_o}, which is the overlay of two
+input arrangement \cppLstinline{arr_r} and \cppLstinline{arr_b}. The
+last argument, namely \cppLstinline{traits}, enables the creation of
+extended DCEL records of the output arrangement from the properties of
+the corresponding DCEL records of the input arrangements. All three
+arrangements must use the same geometric primitives.  In other words,
+their types are instances of the \cppLstinline{Arrangement_2<Traits,
+  Dcel>} class template, where the \cppLstinline{Traits} parameter is
+substituted with three geometry-traits classes, respectively. The
+geometry-traits classes of the input arrangements must be convertible
+to the geometry-traits class of the resulting arrangement. This is the
+only restriction that must be enforced when the function is used in
+pure C++ code.  We only wrap instances of the overlay function with
+Python bindings, where all three arrangements use the same
+geometry-traits classes.
 
-It accepts in its constructor 10 python functions, each accepting two
-python objects (the extended arrangement data type) and returning a
-python object. Those 10 functions are saved as class members and are
-then called in the respective 10 [overloaded] versions of
-\myLstinline{create_vertex}, \myLstinline{create_edge},
-\myLstinline{create_face object}) (the matching is done by
-the order of the passed functions and the order of the [overloaded]
-versions in the official concept reference).
+The type of the overlay traits models the \cppLstinline{OverlayTraits}
+concept, which requires the provision of ten functions that handle all
+possible cases as listed below. Let $v_r$, $e_r$, and $f_r$ denote
+input \textcolor{red}{red} features, i.e.,~a vertex, an edge, and a
+face, respectively, $v_b$, $e_b$, and $f_b$ denote input
+\textcolor{blue}{blue} features, and $v$, $e$, and $f$ denote output
+features.
+\begin{compactenum}
+\item A new vertex $v$ is induced by coinciding vertices $v_r$ and $v_b$.
+\item A new vertex $v$ is induced by a vertex $v_r$ that lies on an edge $e_b$.
+\item An analogous case of a vertex $v_b$ that lies on an edge $e_r$.
+\item A new vertex $v$ is induced by a vertex $v_r$ that is contained in a
+  face $f_b$.
+\item An analogous case of a vertex $v_b$ contained in a face $f_r$.
+\item A new vertex $v$ is induced by the intersection of two edges $e_r$ and
+  $e_b$.
+\item A new edge $e$ is induced by the (possibly partial) overlap of two edges $e_r$ and $e_b$.
+\item A new edge $e$ is induced by the an edge $e_r$ that is contained in a
+  face $f_b$.
+\item An analogous case of an edge $e_b$ contained in a face $f_r$.
+\item A new face $f$ is induced by the overlap of two faces $f_r$ and $f_b$.
+\end{compactenum}
+Evidently a custom C++ overlay traits cannot be defined in Python;
+thus, the traits type must be known when the bindings are compiled. We
+introduce a new class, namely \myLstinline{Arr_python_overlay_traits},
+that is a model of the \cppLstinline{OverlayTraits} concept. Its
+constructor accepts ten Python functions, each accepting two Python
+objects and returning a Python object. As a result, the user (that is,
+a Python programmer) can still computes the properties of the output
+extended arrangement. Recall that these properties are represented by
+Python objects to start with; see Section~\ref{sec:bind-code:ae}.
 
-This way the user can still define the way the result face/edge/vertex
-data will be calculated.
+%% (the extended arrangement data type) Those 10 functions are saved as
+%% class members and are then called in the respective 10 [overloaded]
+%% versions of \myLstinline{create_vertex}, \myLstinline{create_edge},
+%% \myLstinline{create_face object}) (the matching is done by the order
+%% of the passed functions and the order of the [overloaded] versions in
+%% the official concept reference).
+
+%% This way the user can still define the way the result face/edge/vertex
+%% data will be calculated.
 
 % -----------------------------------------------------------------------------
 \subsection{kd tree}
