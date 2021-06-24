@@ -6,8 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/Python_functor.hpp>
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
+#include <boost/python.hpp>
 #include <boost/python/stl_iterator.hpp>
 
 #include <CGAL/Arr_overlay_2.h>
@@ -17,6 +16,19 @@
 #include <CGAL/Arr_walk_along_line_point_location.h>
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
+
+#include <CGALPY/Python_functor.hpp>
+#include <CGALPY/arrangement_on_surface_2_types.hpp>
+
+void export_vertex();
+void export_halfedge();
+void export_face();
+
+void export_arr_linear_traits();
+void export_arr_segment_traits();
+void export_arr_circle_segment_traits();
+void export_arr_conic_traits();
+void export_arr_algebraic_segment_traits();
 
 namespace bp = boost::python;
 
@@ -240,7 +252,7 @@ void export_arrangement_on_surface_2() {
     ;
 
   {
-    auto scope = bp::class_<Arrangement_2>("Arrangement_2")
+    bp::scope aos_scope = bp::class_<Arrangement_2>("Arrangement_2")
       .def(bp::init<>())
       .def(bp::init<Arrangement_2&>())
       .def("halfedges", bp::range<bp::return_internal_reference<>>(&halfedges_begin, &halfedges_end))
@@ -281,6 +293,24 @@ void export_arrangement_on_surface_2() {
       .def(bp::self_ns::repr(bp::self_ns::self))
 #endif
       ;
+
+    export_vertex();
+    export_halfedge();
+    export_face();
+
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
+    export_arr_linear_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+    export_arr_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+    export_arr_circle_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
+    export_arr_conic_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+    export_arr_algebraic_segment_traits();
+#else
+    BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
+#endif
   }
 
   //free functions
@@ -288,7 +318,8 @@ void export_arrangement_on_surface_2() {
   bp::def("insert_point", &insert_point<Naive_pl>, bp::return_internal_reference<>());
   bp::def("insert_point", &insert_point<Wal_pl>, bp::return_internal_reference<>());
   bp::def("insert_point", &insert_point<Trapezoid_pl>, bp::return_internal_reference<>());
-  bp::def("insert", &insert_curve<X_monotone_curve_2>); bp::def("insert", &insert_curve<Curve_2>);
+  bp::def("insert", &insert_curve<X_monotone_curve_2>);
+  bp::def("insert", &insert_curve<Curve_2>);
   bp::def("insert", &insert_curves);
   bp::def("insert_non_intersecting_curve", &insert_non_intersecting_curve_default, bp::return_internal_reference<>());
   bp::def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Naive_pl>, bp::return_internal_reference<>());
@@ -338,7 +369,7 @@ void export_arrangement_on_surface_2() {
 
 #if (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL) || \
     (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL)
-  bp::class_<Arr_face_overlay_traits>("Arr_face_overlay_traits", init<bp::object>())
+  bp::class_<Arr_face_overlay_traits>("Arr_face_overlay_traits", bp::init<bp::object>())
     ;
 #endif
 
