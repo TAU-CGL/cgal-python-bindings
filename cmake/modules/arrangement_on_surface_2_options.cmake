@@ -18,18 +18,18 @@ set(CGALPY_AOS2_GEOMETRY_TRAITS_NAMES linear segment nonCachingSegment conic alg
 # Geometry Traits Default
 SET(CGALPY_AOS2_GEOMETRY_TRAITS_NAME "segment" CACHE STRING "The geometry traits to use")
 set(CGALPY_AOS2_GEOMETRY_TRAITS ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS} CACHE INTERNAL "")
-set_property(CACHE CGALPY_AOS2_GEOMETRY_TRAITS_NAME PROPERTY STRINGS linear segment nonCachingSegment conic algebraic circleSegment)
+set_property(CACHE CGALPY_AOS2_GEOMETRY_TRAITS_NAME PROPERTY STRINGS linear segment nonCachingSegment conic algebraic circleSegment bezier rational)
 
 # DCEL Options
 set(CGALPY_AOS2_PLAIN_DCEL 0)
-set(CGALPY_AOS2_FACE_EXTENDED_DCEL 1)
+set(CGALPY_AOS2_VERTEX_EXTENDED_DCEL 1)
 set(CGALPY_AOS2_HALFEDGE_EXTENDED_DCEL 2)
-set(CGALPY_AOS2_VERTEX_EXTENDED_DCEL 3)
+set(CGALPY_AOS2_FACE_EXTENDED_DCEL 3)
 set(CGALPY_AOS2_ALL_EXTENDED_DCEL 4)
 
 # DCEL Names
-set(CGALPY_AOS2_DCEL_SHORT_NAMES "plain" "fex" "hex" "vex" "ex")
-set(CGALPY_AOS2_DCEL_NAMES plain faceExtended halfedgeExtended vertexExtended allExtended)
+set(CGALPY_AOS2_DCEL_SHORT_NAMES "plain" "vex" "hex" "fex" "ex")
+set(CGALPY_AOS2_DCEL_NAMES plain vertexExtended halfedgeExtended faceExtended allExtended)
 
 # DCEL Default
 SET(CGALPY_AOS2_DCEL_NAME "plain" CACHE STRING "The DCEL to use")
@@ -92,7 +92,7 @@ function(get_arrangement_on_surface_2_lib_name ret)
   if(${CGALPY_AOS2_POINT_LOCATION_BINDINGS})
     set(part3 "Pl")
   endif()
-  set(${ret} "arr2${part1}${part2}${part3}" PARENT_SCOPE)
+  set(${ret} "aos2${part1}${part2}${part3}" PARENT_SCOPE)
 endfunction()
 
 endif()

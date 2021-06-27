@@ -6,35 +6,36 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/triangulation_2_types.hpp>
+#include <boost/python.hpp>
+
+#include "CGALPY/triangulation_2_types.hpp"
 
 namespace bp = boost::python;
 
-typedef CGAL::Triangulation_2<Kernel>                           Triangulation_2;
-typedef CGAL::Delaunay_triangulation_2<Kernel>                  Delaunay_triangulation_2;
-typedef Triangulation_2::Vertex                                 TVertex;
-typedef Triangulation_2::Vertex_circulator                      TVertex_circulator;
-typedef Triangulation_2::All_vertices_iterator                  All_vertices_iterator;
-typedef Triangulation_2::Finite_vertices_iterator               Finite_vertices_iterator;
-typedef Triangulation_2::Edge                                   TEdge;
-typedef Triangulation_2::Edge_circulator                        TEdge_circulator;
-typedef Triangulation_2::All_edges_iterator                     All_edges_iterator;
-typedef Triangulation_2::Finite_edges_iterator                  Finite_edges_iterator;
-typedef Triangulation_2::Face                                   TFace;
-typedef Triangulation_2::Face_circulator                        TFace_circulator;
-typedef Triangulation_2::Face_handle                            TFace_handle;
-typedef Triangulation_2::All_faces_iterator                     All_faces_iterator;
-typedef Triangulation_2::Finite_faces_iterator                  Finite_faces_iterator;
-typedef Triangulation_2::Point_iterator                         Point_iterator;
+typedef CGAL::Triangulation_2<Kernel>                 Triangulation_2;
+typedef CGAL::Delaunay_triangulation_2<Kernel>        Delaunay_triangulation_2;
+typedef Triangulation_2::Vertex                       TVertex;
+typedef Triangulation_2::Vertex_circulator            TVertex_circulator;
+typedef Triangulation_2::All_vertices_iterator        All_vertices_iterator;
+typedef Triangulation_2::Finite_vertices_iterator     Finite_vertices_iterator;
+typedef Triangulation_2::Edge                         TEdge;
+typedef Triangulation_2::Edge_circulator              TEdge_circulator;
+typedef Triangulation_2::All_edges_iterator           All_edges_iterator;
+typedef Triangulation_2::Finite_edges_iterator        Finite_edges_iterator;
+typedef Triangulation_2::Face                         TFace;
+typedef Triangulation_2::Face_circulator              TFace_circulator;
+typedef Triangulation_2::Face_handle                  TFace_handle;
+typedef Triangulation_2::All_faces_iterator           All_faces_iterator;
+typedef Triangulation_2::Finite_faces_iterator        Finite_faces_iterator;
+typedef Triangulation_2::Point_iterator               Point_iterator;
 
-bool equal(TFace& f1, TFace& f2)
-{
-  return (f1.has_vertex(f2.vertex(0)) && f1.has_vertex(f2.vertex(1)) && f1.has_vertex(f2.vertex(2)));
+bool equal(TFace& f1, TFace& f2) {
+  return (f1.has_vertex(f2.vertex(0)) && f1.has_vertex(f2.vertex(1)) &&
+          f1.has_vertex(f2.vertex(2)));
 }
 
 //workaround to get a face handle from a face
-TFace_handle face_to_handle(TFace& f)
-{
+TFace_handle face_to_handle(TFace& f) {
   TFace_handle res;
   auto n = f.neighbor(0);
   for (auto i = 0; i < 3; ++i) {
@@ -57,7 +58,6 @@ CopyIterator<Finite_edges_iterator>* finite_edges_iterator(T& t)
 {
   return new CopyIterator<Finite_edges_iterator>(t.finite_edges_begin(), t.finite_edges_end());
 }
-
 
 template<typename T>
 Copy_iterator_from_circulator<TEdge_circulator>* edges_around_vertex_iterator0(T& t ,TVertex& v)
@@ -101,8 +101,8 @@ Iterator_from_circulator<TVertex_circulator>* vertices_around_vertex_iterator1(T
 template <typename T>
 void insert_list(T& t, bp::list& lst)
 {
-  auto v = std::vector< Point_2 >(bp::stl_input_iterator< Point_2 >(lst),
-    bp::stl_input_iterator< Point_2 >());
+  auto v = std::vector< Point_2 >(bp::stl_input_iterator<Point_2>(lst),
+                                  bp::stl_input_iterator<Point_2>());
   t.insert(v.begin(), v.end());
 }
 
@@ -122,46 +122,29 @@ typename T::Triangle triangle(T& t, TFace& f)
 }
 
 template <typename T>
-Point_2 circumcenter(T& t, TFace& f)
-{
+Point_2 circumcenter(T& t, TFace& f) {
 auto fh = face_to_handle(f);
 auto res = t.circumcenter(fh);
 return res;
 }
 
 template<typename T>
-TVertex& insert_point(T& t, Point_2& p)
-{
-  return *(t.insert(p));
-}
+TVertex& insert_point(T& t, Point_2& p) { return *(t.insert(p)); }
 
 template<typename T>
-void remove(T& t, TVertex& v)
-{
-  t.remove(v.handle());
-}
+void remove(T& t, TVertex& v) { t.remove(v.handle()); }
 
 template<typename T>
-TFace& infinite_face(T& t)
-{
-  return *(t.infinite_face());
-}
+TFace& infinite_face(T& t) { return *(t.infinite_face()); }
 
 template<typename T>
-TVertex& infinite_vertex(T& t)
-{
-  return *(t.infinite_vertex());
-}
+TVertex& infinite_vertex(T& t) { return *(t.infinite_vertex()); }
 
 template<typename T>
-TVertex& finite_vertex(T& t)
-{
-  return *(t.finite_vertex());
-}
+TVertex& finite_vertex(T& t) { return *(t.finite_vertex()); }
 
 template <typename T, typename C>
-void export_triangulation(C c)
-{
+void export_triangulation(C c) {
   using namespace boost::python;
 
   c.def(init<>())
@@ -202,8 +185,7 @@ void export_triangulation(C c)
     ;
 }
 
-void export_triangulations()
-{
+void export_triangulations() {
   using namespace boost::python;
   auto c0 = class_<Triangulation_2>("Triangulation_2");
   auto c1 = class_<Delaunay_triangulation_2, bases<Triangulation_2>>("Delaunay_triangulation_2");

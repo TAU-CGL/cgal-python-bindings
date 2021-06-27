@@ -43,7 +43,7 @@ option(CGALPY_KERNEL_INTERSECTION_BINDINGS      "Compile bindings for intersecti
 
 
 include(alpha_shape_3_options)
-include(arrangement_2_options)
+include(arrangement_on_surface_2_options)
 include(boolean_set_operations_2_options)
 include(bounding_volumes_options)
 include(convex_hull_2_options)

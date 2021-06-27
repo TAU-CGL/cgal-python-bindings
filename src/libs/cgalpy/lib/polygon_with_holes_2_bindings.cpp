@@ -6,31 +6,29 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/polygon_2_types.hpp>
-#include <CGALPY/python_iterator_templates.hpp>
+#include <boost/python.hpp>
 
-Polygon_with_holes_2* init_Polygon_with_holes_2(Polygon_2& p,
-                                                boost::python::list& lst)
-{
-  auto begin = boost::python::stl_input_iterator< Polygon_2 >(lst);
-  auto end = boost::python::stl_input_iterator< Polygon_2 >();
+#include "CGALPY/polygon_2_types.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
+
+namespace bp = boost::python;
+
+Polygon_with_holes_2* init_Polygon_with_holes_2(Polygon_2& p, bp::list& lst) {
+  auto begin = bp::stl_input_iterator< Polygon_2 >(lst);
+  auto end = bp::stl_input_iterator< Polygon_2 >();
   return new Polygon_with_holes_2(p, begin, end);
 }
 
 Polygon_with_holes_2::Hole_const_iterator holes_begin(Polygon_with_holes_2& p)
-{
-  return p.holes_begin();
-}
+{ return p.holes_begin(); }
 
 Polygon_with_holes_2::Hole_const_iterator holes_end(Polygon_with_holes_2& p)
-{
-  return p.holes_end();
-}
+{ return p.holes_end(); }
 
-Polygon_2& outer_boundary(Polygon_with_holes_2& p) { return p.outer_boundary(); }
+Polygon_2& outer_boundary(Polygon_with_holes_2& p)
+{ return p.outer_boundary(); }
 
-void export_polygon_with_holes_2()
-{
+void export_polygon_with_holes_2() {
   using namespace boost::python;
   class_<Polygon_with_holes_2>("Polygon_with_holes_2")
     .def(init<Polygon_2&>())

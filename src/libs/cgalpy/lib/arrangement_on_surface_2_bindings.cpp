@@ -7,6 +7,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <boost/python.hpp>
+#include <boost/static_assert.hpp>
 #include <boost/python/stl_iterator.hpp>
 
 #include <CGAL/Arr_overlay_2.h>
@@ -17,8 +18,8 @@
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
 
-#include <CGALPY/Python_functor.hpp>
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
+#include "CGALPY/Python_functor.hpp"
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
 
 void export_vertex();
 void export_halfedge();
@@ -41,15 +42,15 @@ typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
 #if (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL) || \
   (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL)
 #include <CGALPY/Arr_python_face_overlay_traits.hpp>
-typedef Arr_python_face_overlay_traits< Arrangement_2, Arrangement_2,
-                                        Arrangement_2, Face::Data>
+typedef Arr_python_face_overlay_traits<Arrangement_2, Arrangement_2,
+                                       Arrangement_2, Face::Data>
   Arr_face_overlay_traits;
 #endif
 
 #if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
 #include <CGALPY/Arr_python_overlay_traits.hpp>
-typedef Arr_python_overlay_traits< Arrangement_2, Arrangement_2, Arrangement_2,
-                                   Face::Data> Arr_overlay_traits;
+typedef Arr_python_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
+                                  Face::Data> Arr_overlay_traits;
 #endif
 
 // Free functions

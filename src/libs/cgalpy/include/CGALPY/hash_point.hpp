@@ -17,8 +17,7 @@
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 template <typename Point>
-size_t hash_rational_point(Point& p)
-{
+size_t hash_rational_point(Point& p) {
   size_t seed = 0;
   for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c)
   {
@@ -36,11 +35,7 @@ size_t hash_rational_point(Point& p)
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
 template <typename Point>
 size_t hash_rational_point(Point& p)
-{
-  return boost::hash_range(p.cartesian_begin(), p.cartesian_end());
-}
+{ return boost::hash_range(p.cartesian_begin(), p.cartesian_end()); }
 #endif
-
-
 
 #endif

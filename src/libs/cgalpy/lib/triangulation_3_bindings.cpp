@@ -5,7 +5,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#include <boost/static_assert.hpp>
+#include <boost/python.hpp>
 
 #include "CGALPY/triangulation_3_types.hpp"
 
@@ -13,37 +13,38 @@ namespace bp = boost::python;
 
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 
-tri3::Delaunay_triangulation_3* dt3_init(boost::python::list& lst)
-{
-  auto begin = boost::python::stl_input_iterator<tri3::Point>(lst);
-  auto end = boost::python::stl_input_iterator<tri3::Point>();
+tri3::Delaunay_triangulation_3* dt3_init(bp::list& lst) {
+  auto begin = bp::stl_input_iterator<tri3::Point>(lst);
+  auto end = bp::stl_input_iterator<tri3::Point>();
   return new tri3::Delaunay_triangulation_3(begin, end);
 }
 
-std::ptrdiff_t insert_points(tri3::Delaunay_triangulation_3& dt, boost::python::list& lst)
-{
+std::ptrdiff_t insert_points(tri3::Delaunay_triangulation_3& dt, bp::list& lst) {
   if (! lst) return 0;
   if (! bp::extract<tri3::Point>(lst[0]).check()) return 0;
-  auto begin = boost::python::stl_input_iterator<tri3::Point>(lst);
-  auto end = boost::python::stl_input_iterator<tri3::Point>();
+  auto begin = bp::stl_input_iterator<tri3::Point>(lst);
+  auto end = bp::stl_input_iterator<tri3::Point>();
   return dt.insert(begin, end);
 }
 
 #if (CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT)
 
-tri3::Vertex_handle insert4(tri3::Delaunay_triangulation_3& dt, const tri3::Point& p, tri3::Cell_handle start)
+tri3::Vertex_handle insert4(tri3::Delaunay_triangulation_3& dt,
+                            const tri3::Point& p, tri3::Cell_handle start)
 { return dt.insert(p, start); }
 
-tri3::Vertex_handle insert5(tri3::Delaunay_triangulation_3& dt, const tri3::Point& p, tri3::Vertex_handle hint)
+tri3::Vertex_handle insert5(tri3::Delaunay_triangulation_3& dt,
+                            const tri3::Point& p, tri3::Vertex_handle hint)
 { return dt.insert(p, hint); }
 
-tri3::Vertex_handle insert6(tri3::Delaunay_triangulation_3& dt, const tri3::Point& p, tri3::Locate_type lt, tri3::Cell_handle c, int li, int lj)
+tri3::Vertex_handle insert6(tri3::Delaunay_triangulation_3& dt,
+                            const tri3::Point& p, tri3::Locate_type lt,
+                            tri3::Cell_handle c, int li, int lj)
 { return dt.insert(p, lt, c, li, lj); }
 
 #endif
 
-void export_delaunay_triangulation_3()
-{
+void export_delaunay_triangulation_3() {
   using namespace boost::python;
 
   CGAL::Bounded_side(tri3::Delaunay_triangulation_3::*side_of_sphere)(tri3::Cell_handle, const tri3::Point&, bool) const =
@@ -133,8 +134,7 @@ bool cell_is_valid1(const tri3::Cell& cell, bool verbose, int level) { return ce
 bool cell_is_valid2(const tri3::Cell& cell, bool verbose) { return cell.is_valid(verbose); }
 bool cell_is_valid3(const tri3::Cell& cell) { return cell.is_valid(); }
 
-void export_triangulation_3()
-{
+void export_triangulation_3() {
   using namespace boost::python;
 
   class_<tri3::Vertex_handle>("Vertex_handle")

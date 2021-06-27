@@ -9,11 +9,12 @@
 #ifndef CGALPY_COMMON_HPP
 #define CGALPY_COMMON_HPP
 
-#include <CGALPY/config.hpp>
 #include <boost/python.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/stl_iterator.hpp>
 #include <boost/python/tuple.hpp>
+
+#include "CGALPY/config.hpp"
 
 #endif //COMMON_HPP
