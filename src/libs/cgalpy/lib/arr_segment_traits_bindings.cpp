@@ -8,11 +8,10 @@
 
 #include <boost/python.hpp>
 
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/export_point_2.hpp"
 
 namespace bp = boost::python;
-
-extern void export_point();
 
 Segment_2 to_segment(Curve_2& c) { return Segment_2(c); }
 
@@ -25,7 +24,8 @@ void export_arr_segment_traits() {
 
   const bp::type_info info = bp::type_id<TPoint_2>();
   const bp::converter::registration* reg = bp::converter::registry::query(info);
-  if (reg == NULL || (*reg).m_to_python == NULL) export_point();
+  if ((reg == nullptr) || ((*reg).m_to_python == nullptr))
+    export_point_2<TPoint_2>();
   else traits_scope.attr("Point_2") = bp::handle<>(reg->m_class_object);
 
   bp::class_<Curve_2>("Curve_2")

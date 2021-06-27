@@ -9,8 +9,8 @@
 #ifndef CGALPY_CONVEX_HULL_2_TYPES_HPP
 #define CGALPY_CONVEX_HULL_2_TYPES_HPP
 
-#include <CGALPY/convex_hull_2_config.hpp>
-#include <CGALPY/kernel_types.hpp>
+#include "CGALPY/convex_hull_2_config.hpp"
+#include "CGALPY/kernel_types.hpp"
 
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/ch_eddy.h>

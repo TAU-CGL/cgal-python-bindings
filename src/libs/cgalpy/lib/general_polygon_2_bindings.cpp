@@ -5,8 +5,13 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include <CGALPY/polygon_2_types.hpp>
+#include <boost/python.hpp>
+
+#include "CGALPY/polygon_2_types.hpp"
+
 #include <CGAL/Gps_circle_segment_traits_2.h>
+
+namespace bp = boost::python;
 
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel> CSTraits;
 typedef typename CSTraits::Polygon_2                       General_polygon_2;
@@ -14,26 +19,17 @@ typedef General_polygon_2::X_monotone_curve_2
   CS_traits_X_monotone_curve_2;
 typedef General_polygon_2::Curve_iterator                  Curve_iterator;
 
-static General_polygon_2* init_from_list(boost::python::list& lst)
-{
-  auto begin =
-    boost::python::stl_input_iterator<CS_traits_X_monotone_curve_2>(lst);
-  auto end = boost::python::stl_input_iterator<CS_traits_X_monotone_curve_2>();
+static General_polygon_2* init_from_list(bp::list& lst) {
+  auto begin = bp::stl_input_iterator<CS_traits_X_monotone_curve_2>(lst);
+  auto end = bp::stl_input_iterator<CS_traits_X_monotone_curve_2>();
   return new General_polygon_2(begin, end);
 }
 
-Curve_iterator curves_begin(General_polygon_2& p)
-{
-  return p.curves_begin();
-}
+Curve_iterator curves_begin(General_polygon_2& p) { return p.curves_begin(); }
 
-Curve_iterator curves_end(General_polygon_2& p)
-{
-  return p.curves_end();
-}
+Curve_iterator curves_end(General_polygon_2& p) { return p.curves_end(); }
 
-void export_general_polygon_2()
-{
+void export_general_polygon_2() {
   using namespace boost::python;
   class_<General_polygon_2>("General_polygon_2")
     .def(init<>())

@@ -6,10 +6,13 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <boost/python.hpp>
+
 #include "CGALPY/common.h"
 
-bp::list to_double(TPoint_2& p)
-{
+namespace bp = boost::python;
+
+bp::list to_double(TPoint_2& p) {
   auto lst = bp::list();
   auto pair = p.to_double();
   lst.append(pair.first);
@@ -18,21 +21,19 @@ bp::list to_double(TPoint_2& p)
 }
 
 template<typename T, typename S>
-void export_Construct_point_2_call_operator(boost::python::class_<Construct_point_2>& cp_2_binding)
+void export_Construct_point_2_call_operator(bp::class_<Construct_point_2>& cp_2_binding)
 {
   namespace bp = boost::python;
   cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&)>("__call__", &Construct_point_2::operator());
 }
 
 template <typename T>
-boost::python::class_<T> bind_polynomial(const std::string& name)
-{
+bp::class_<T> bind_polynomial(const std::string& name) {
   return class_<T>("name")
     ;
 }
 
-void export_Arr_algebraic_segment_traits()
-{
+void export_Arr_algebraic_segment_traits() {
   using namespace boost::python;
   class_<Number>("Number")
     .def(init<>())

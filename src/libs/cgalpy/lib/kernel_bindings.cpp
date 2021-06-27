@@ -7,8 +7,10 @@
 
 #include <boost/python.hpp>
 
-#include <CGALPY/kernel_types.hpp>
-#include <CGALPY/common.hpp>
+#include "CGALPY/common.hpp"
+#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/export_point_2.hpp"
+#include "CGALPY/export_segment_2.hpp"
 
 namespace bp = boost::python;
 
@@ -25,8 +27,7 @@ Kernel::Equal_2 kernel_equal_2(Kernel& k)
 //}
 
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
-void bind_squared_distance_first_type()
-{
+void bind_squared_distance_first_type() {
   using namespace boost::python;
   def<FT(const T1&, const T1&)>("squared_distance", &CGAL::squared_distance);
   def<FT(const T1&, const T2&)>("squared_distance", &CGAL::squared_distance);
@@ -36,8 +37,7 @@ void bind_squared_distance_first_type()
 }
 
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
-void bind_squared_distance_types()
-{
+void bind_squared_distance_types() {
   bind_squared_distance_first_type< T1, T2, T3, T4, T5 >();
   bind_squared_distance_first_type< T2, T1, T3, T4, T5 >();
   bind_squared_distance_first_type< T3, T2, T1, T4, T5 >();
@@ -46,63 +46,24 @@ void bind_squared_distance_types()
 }
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
-typename FT::Exact_type& FT_exact(FT& ft)
-{
-  return ft.exact();
-}
+typename FT::Exact_type& FT_exact(FT& ft) { return ft.exact(); }
 
-typename FT::Approximate_type& FT_approx(FT& ft)
-{
-  return ft.approx();
-}
+typename FT::Approximate_type& FT_approx(FT& ft) { return ft.approx(); }
 #endif
 
-double FT_to_double(FT& ft)
-{
-  return CGAL::to_double(ft);
-}
+double FT_to_double(FT& ft) { return CGAL::to_double(ft); }
 
-Point_2 transform_point(Aff_transformation_2& t, Point_2& p) { return t.transform(p); }
-Vector_2 transform_vector(Aff_transformation_2& t, Vector_2 & v) { return t.transform(v); }
-Direction_2 transform_direction(Aff_transformation_2& t, Direction_2& d) { return t.transform(d); }
-Line_2 transform_line(Aff_transformation_2& t, Line_2& l) { return t.transform(l); }
+Point_2 transform_point(Aff_transformation_2& t, Point_2& p)
+{ return t.transform(p); }
 
-void export_point() {
-  bp::class_<Point_2>("Point_2")
-    .def(bp::init<>())
-    .def(bp::init<double, double>())
-    .def(bp::init<FT&, FT&>())
-    .def(bp::init<RT&, RT&>())
-    .def(bp::init<Point_2&>())
-    .def("x", &Point_2::x, Kernel_return_value_policy())
-    .def("y", &Point_2::y, Kernel_return_value_policy())
-    .def("hx", &Point_2::hx, Kernel_return_value_policy())
-    .def("hy", &Point_2::hy, Kernel_return_value_policy())
-    .def("hw", &Point_2::hw, Kernel_return_value_policy())
-    .def("bbox", &Point_2::bbox)
-    .def("cartesian", &Point_2::cartesian, Kernel_return_value_policy())
-    .def("__getitem__", &Point_2::operator[], Kernel_return_value_policy())
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
-    // TODO: Returning address of local variable or temporary with EPEC kernel
-    .def("coordinates", bp::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end))
-#endif
-    .def("dimension", &Point_2::dimension)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self += Vector_2())
-    .def(bp::self -= Vector_2())
-    .def(bp::self + Vector_2())
-    .def(bp::self - Vector_2())
-    .setattr("__hash__", &hash_rational_point<Point_2>)
-    ;
-}
+Vector_2 transform_vector(Aff_transformation_2& t, Vector_2 & v)
+{ return t.transform(v); }
+
+Direction_2 transform_direction(Aff_transformation_2& t, Direction_2& d)
+{ return t.transform(d); }
+
+Line_2 transform_line(Aff_transformation_2& t, Line_2& l)
+{ return t.transform(l); }
 
 void export_kernel() {
   using namespace boost::python;
@@ -262,34 +223,8 @@ void export_kernel() {
   //  //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
   //  ;
 
-  export_point();
-
-  class_<Segment_2>("Segment_2")
-    .def(init<Point_2&, Point_2&>())
-    .def("source", &Segment_2::source, Kernel_return_value_policy())
-    .def("target", &Segment_2::target, Kernel_return_value_policy())
-    .def("vertex", &Segment_2::vertex, Kernel_return_value_policy())
-    .def("point", &Segment_2::point, Kernel_return_value_policy())
-    .def("__getitem__", &Segment_2::operator[], Kernel_return_value_policy())
-    .def("min", &Segment_2::min, Kernel_return_value_policy())
-    .def("max", &Segment_2::max, Kernel_return_value_policy())
-    .def("opposite", &Segment_2::opposite)
-    .def("to_vector", &Segment_2::to_vector)
-    .def("supporting_line", &Segment_2::supporting_line)
-    .def("squared_length", &Segment_2::squared_length)
-    .def("direction", &Segment_2::direction)
-    .def("has_on", &Segment_2::has_on)
-    .def("collinear_has_on", &Segment_2::collinear_has_on)
-    .def("is_degenerate", &Segment_2::is_degenerate)
-    .def("is_horizontal", &Segment_2::is_horizontal)
-    .def("is_vertical", &Segment_2::is_vertical)
-    .def("bbox", &Segment_2::bbox)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self == self)
-    .def(self != self)
-    //.setattr("__hash__", &hash<Segment_2>)
-    ;
+  export_point_2<Point_2>();
+  export_segment_2<Segment_2, Point_2>();
 
   class_<Line_2>("Line_2")
     .def(init<RT&, RT&, RT&>())

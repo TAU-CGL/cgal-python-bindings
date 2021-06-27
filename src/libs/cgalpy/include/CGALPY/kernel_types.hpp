@@ -9,11 +9,12 @@
 #ifndef CGALPY_KERNEL_TYPES_HPP
 #define CGALPY_KERNEL_TYPES_HPP
 
-#include <CGALPY/kernel_config.hpp>
 #include <boost/python.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/functional/hash/hash.hpp>
-#include <CGALPY/hash_point.hpp>
+
+#include "CGALPY/kernel_config.hpp"
+#include "CGALPY/hash_point.hpp"
 
 namespace bp = boost::python;
 

@@ -6,28 +6,29 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/polygon_2_types.hpp>
-#include <CGALPY/python_iterator_templates.hpp>
+#include <boost/python.hpp>
+
+#include "CGALPY/polygon_2_types.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
+
+namespace bp = boost::python;
 
 Point_2& left_vertex(Polygon_2& P) { return *(P.left_vertex()); }
 Point_2& right_vertex(Polygon_2& P) { return *(P.right_vertex()); }
 Point_2& top_vertex(Polygon_2& P) { return *(P.top_vertex()); }
 Point_2& bottom_vertex(Polygon_2& P) { return *(P.bottom_vertex()); }
 
-static Polygon_2* init_from_list(boost::python::list& lst)
-{
-  auto begin = boost::python::stl_input_iterator< Point_2 >(lst);
-  auto end = boost::python::stl_input_iterator< Point_2 >();
+static Polygon_2* init_from_list(bp::list& lst) {
+  auto begin = bp::stl_input_iterator< Point_2 >(lst);
+  auto end = bp::stl_input_iterator< Point_2 >();
   return new Polygon_2(begin, end);
 }
 
-CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P)
-{
+CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
   return new CopyIterator<Polygon_2::Edge_const_iterator>(P.edges_begin(), P.edges_end());
 }
 
-void export_polygon_2()
-{
+void export_polygon_2() {
   using namespace boost::python;
   class_<Polygon_2>("Polygon_2")
     .def(init<>())
