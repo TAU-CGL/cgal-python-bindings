@@ -9,6 +9,7 @@
 #include <boost/python.hpp>
 
 #include "CGALPY/spatial_searching_types.hpp"
+#include "CGALPY/hash_rational_point.hpp"
 
 namespace bp = boost::python;
 
@@ -109,43 +110,42 @@ void bind_neighbor_search(const char* python_name) {
 }
 
 void export_spatial_searching() {
-  using namespace bp;
-  class_<Point_d>("Point_d")
-    .def(init<>())
+  bp::class_<Point_d>("Point_d")
+    .def(bp::init<>())
     .def("__init__", make_constructor(&init_point_d))
     .def("dimension", &Point_d::dimension)
     .def("cartesian", &Point_d::cartesian)
     .def("__getitem__", &Point_d::operator[])
-    .def("coordinates", range<>(&point_d_cartesian_begin, &point_d_cartesian_end))
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self == self)
-    .def(self != self)
-    .def(self > self)
-    .def(self < self)
-    .def(self <= self)
-    .def(self >= self)
-    .def(self - self)
+    .def("coordinates", bp::range<>(&point_d_cartesian_begin, &point_d_cartesian_end))
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(bp::self == bp::self)
+    .def(bp::self != bp::self)
+    .def(bp::self > bp::self)
+    .def(bp::self < bp::self)
+    .def(bp::self <= bp::self)
+    .def(bp::self >= bp::self)
+    .def(bp::self - bp::self)
     .def("__hash__", &hash_rational_point<Point_d>)
     ;
 
-  class_<Fuzzy_iso_box>("Fuzzy_iso_box")
-    .def(init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
-    .def(init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT>())
+  bp::class_<Fuzzy_iso_box>("Fuzzy_iso_box")
+    .def(bp::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
+    .def(bp::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT>())
     .def("contains", &Fuzzy_iso_box::contains)
     .def("inner_range_intersects", &Fuzzy_iso_box::inner_range_intersects)
     .def("outer_range_contains", &Fuzzy_iso_box::outer_range_contains)
     ;
 
-  class_<Fuzzy_sphere>("Fuzzy_sphere")
-    .def(init<Point_d, FT, FT>())
+  bp::class_<Fuzzy_sphere>("Fuzzy_sphere")
+    .def(bp::init<Point_d, FT, FT>())
     .def("contains", &Fuzzy_sphere::contains)
     .def("inner_range_intersects", &Fuzzy_sphere::inner_range_intersects)
     .def("outer_range_intersects", &Fuzzy_sphere::outer_range_contains)
     ;
 
-  class_<Kd_tree_rectangle>("Kd_tree_rectangle")
-    .def(init<int>())
+  bp::class_<Kd_tree_rectangle>("Kd_tree_rectangle")
+    .def(bp::init<int>())
     .def("min_coord", &Kd_tree_rectangle::min_coord)
     .def("max_coord", &Kd_tree_rectangle::max_coord)
     .def("set_upper_bound", &Kd_tree_rectangle::set_upper_bound)
@@ -158,8 +158,8 @@ void export_spatial_searching() {
 
   bind_kd_tree<Kd_tree>("Kd_tree");
 
-  class_<Distance_python>("Distance_python")
-    .def(init<bp::object, bp::object, bp::object, bp::object, bp::object>())
+  bp::class_<Distance_python>("Distance_python")
+    .def(bp::init<bp::object, bp::object, bp::object, bp::object, bp::object>())
     .def<FT (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)const>("transformed_distance", &Distance_python::transformed_distance)
     .def("min_distance_to_rectangle", &Distance_python::min_distance_to_rectangle)
     .def("max_distance_to_rectangle", &Distance_python::max_distance_to_rectangle)
@@ -167,8 +167,8 @@ void export_spatial_searching() {
     .def("inverse_of_transformed_distance", &Distance_python::inverse_of_transformed_distance)
     ;
 
-  class_<Euclidean_distance>("Euclidean_distance")
-    .def(init<>())
+  bp::class_<Euclidean_distance>("Euclidean_distance")
+    .def(bp::init<>())
     .def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Euclidean_distance::Point_d&) const>("transformed_distance", &Euclidean_distance::transformed_distance)
     .def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("min_distance_to_rectangle", &Euclidean_distance::min_distance_to_rectangle)
     .def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("max_distance_to_rectangle", &Euclidean_distance::max_distance_to_rectangle)
@@ -180,5 +180,5 @@ void export_spatial_searching() {
 
   bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
 
-  def("get_spatial_searching_dimension", &get_spatial_searching_dimension);
+  bp::def("get_spatial_searching_dimension", &get_spatial_searching_dimension);
 }

@@ -2,17 +2,19 @@ if(NOT KERNEL_OPTIONS_FILE_INCLUDED)
 set(KERNEL_OPTIONS_FILE_INCLUDED)
 
 # Options
-set(CGALPY_KERNEL_EPEC 0)
-set(CGALPY_KERNEL_EPIC 1)
+set(CGALPY_KERNEL_EPIC 0)
+set(CGALPY_KERNEL_EPEC 1)
+set(CGALPY_KERNEL_EPEC_WITH_SQRT 2)
+set(CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ 3)
 
 # Names
-set(CGALPY_KERNEL_SHORT_NAMES "epec" "epic")
-set(CGALPY_KERNEL_NAMES "epec" "epic")
+set(CGALPY_KERNEL_SHORT_NAMES "epic" "epec" "epecws" "fsclg")
+set(CGALPY_KERNEL_NAMES "epic" "epec" "epecWithSqrt" "filteredSimpleCartesianLazyGmpq")
 
 # Default
 SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
 set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC} CACHE INTERNAL "")
-set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epec epic)
+set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epic epec epecWithSqrt filteredSimpleCartesianLazyGmpq)
 
 # Selection
 function(select_kernel_intersection)
@@ -22,10 +24,14 @@ function(select_kernel_intersection)
 endfunction()
 
 function(select_kernel)
-  if ("${CGALPY_KERNEL_NAME}" STREQUAL "epec")
-    set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC} CACHE INTERNAL "")
-  elseif ("${CGALPY_KERNEL_NAME}" STREQUAL "epic")
+  if ("${CGALPY_KERNEL_NAME}" STREQUAL "epic")
     set(CGALPY_KERNEL ${CGALPY_KERNEL_EPIC} CACHE INTERNAL "")
+  elseif ("${CGALPY_KERNEL_NAME}" STREQUAL "epec")
+    set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC} CACHE INTERNAL "")
+  elseif ("${CGALPY_KERNEL_NAME}" STREQUAL "epecWithSqrt")
+    set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC_WITH_SQRT} CACHE INTERNAL "")
+  elseif ("${CGALPY_KERNEL_NAME}" STREQUAL "filteredSimpleCartesianLazyGmpq")
+    set(CGALPY_KERNEL ${CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ} CACHE INTERNAL "")
   endif()
   add_definitions(-DCGALPY_KERNEL=${CGALPY_KERNEL})
   select_kernel_intersection()
