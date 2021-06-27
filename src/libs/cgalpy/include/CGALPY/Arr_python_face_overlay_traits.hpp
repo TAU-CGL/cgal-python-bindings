@@ -38,28 +38,22 @@ public:
 
 private:
   typedef CGAL::_Arr_default_overlay_traits_base<ArrangementA, ArrangementB,
-    ArrangementR>           Arr_default_overlay_traits;
+                                                 ArrangementR>
+    Arr_default_overlay_traits;
 
   Overlay_face_data         overlay_face_data;
 
 public:
   Arr_python_face_overlay_traits(bp::object py_functor) :
     Arr_default_overlay_traits()
-  {
-    overlay_face_data = Overlay_face_data(py_functor);
-  }
+  { overlay_face_data = Overlay_face_data(py_functor); }
 
 
   /*! Create a face f that matches the overlapping region between f1 and f2.
    */
   virtual void create_face(Face_handle_A f1, Face_handle_B f2,
-    Face_handle_R f)
-  {
-    // Overlay the data objects associated with f1 and f2 and store the result
-    // with f.
-    f->set_data(overlay_face_data(f1->data(), f2->data()));
-    return;
-  }
+                           Face_handle_R f)
+  { f->set_data(overlay_face_data(f1->data(), f2->data())); }
 };
 
 #endif //ARR_PYTHON_FACE_OVERLAY_TRAITS

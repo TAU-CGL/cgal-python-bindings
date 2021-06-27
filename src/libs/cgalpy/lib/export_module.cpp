@@ -47,7 +47,6 @@ bp::scope().attr(x) = module; \
 bp::scope module_scope = module;
 
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
-  namespace bp = boost::python;
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
   bp::object package = bp::scope();
   package.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
