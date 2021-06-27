@@ -29,10 +29,9 @@ CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
 }
 
 void export_polygon_2() {
-  using namespace boost::python;
-  class_<Polygon_2>("Polygon_2")
-    .def(init<>())
-    .def(init<const Polygon_2&>())
+  bp::class_<Polygon_2>("Polygon_2")
+    .def(bp::init<>())
+    .def(bp::init<const Polygon_2&>())
     .def("__init__", make_constructor(&init_from_list))
     .def("push_back", &Polygon_2::push_back)
     .def("is_simple", &Polygon_2::is_simple)
@@ -53,20 +52,20 @@ void export_polygon_2() {
     .def("area", &Polygon_2::area)
     .def("bbox", &Polygon_2::bbox)
     .def("vertices", range<return_internal_reference<>>(&Polygon_2::vertices_begin, &Polygon_2::vertices_end))
-    .def("edges", &edges_iterator, return_value_policy<manage_new_object>())
-    .def<const Point_2& (Polygon_2::*)(std::size_t) const>("__getitem__", &Polygon_2::operator[], return_value_policy<copy_const_reference>())
-    .def("left_vertex", &left_vertex, return_internal_reference<>())
-    .def("right_vertex", &right_vertex, return_internal_reference<>())
-    .def("top_vertex", &top_vertex, return_internal_reference<>())
-    .def("bottom_vertex", &bottom_vertex, return_internal_reference<>())
-    .def<const Point_2& (Polygon_2::*)(std::size_t) const>("vertex", &Polygon_2::vertex, return_value_policy<copy_const_reference>())
+    .def("edges", &edges_iterator, bp::return_value_policy<bp::manage_new_object>())
+    .def<const Point_2& (Polygon_2::*)(std::size_t) const>("__getitem__", &Polygon_2::operator[], bp::return_value_policy<bp::copy_const_reference>())
+    .def("left_vertex", &left_vertex, bp::return_internal_reference<>())
+    .def("right_vertex", &right_vertex, bp::return_internal_reference<>())
+    .def("top_vertex", &top_vertex, bp::return_internal_reference<>())
+    .def("bottom_vertex", &bottom_vertex, bp::return_internal_reference<>())
+    .def<const Point_2& (Polygon_2::*)(std::size_t) const>("vertex", &Polygon_2::vertex, bp::return_value_policy<bp::copy_const_reference>())
     .def("edge", &Polygon_2::edge)
     .def("clear", &Polygon_2::clear)
     .def("reverse_orientation", &Polygon_2::reverse_orientation)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self == self)
-    .def(self != self)
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(bp::self == bp::self)
+    .def(bp::self != bp::self)
     ;
 
   bind_copy_iterator<CopyIterator<Polygon_2::Edge_const_iterator>>("Polygon_edges_iterator");

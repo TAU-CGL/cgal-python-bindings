@@ -3,8 +3,9 @@
 
 #include <boost/python.hpp>
 
-inline boost::python::object pass_through(boost::python::object const& o)
-{ return o; }
+namespace bp = boost::python;
+
+inline bp::object pass_through(bp::object const& o) { return o; }
 
 //these template classes are used to allow more natural iteration in python
 
@@ -46,26 +47,24 @@ public:
     if (m_curr != m_end)
       return new modified_circulator(modified_circulator(*(m_curr++)));
     PyErr_SetString(PyExc_StopIteration, "No more data.");
-    boost::python::throw_error_already_set();
+    bp::throw_error_already_set();
     return new modified_circulator(modified_circulator(*m_curr));
   }
 };
 
 template<typename iterator>
 void bind_iterator_of_circulators(const char* python_name) {
-  using namespace boost::python;
-  class_<iterator>(python_name, no_init)
+  bp::class_<iterator>(python_name, bp::no_init)
     .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next, return_value_policy<manage_new_object>())
+    .def("__next__", &iterator::next, bp::return_value_policy<bp::manage_new_object>())
     ;
 }
 
 template<typename iterator>
 void bind_iterator(const char* python_name) {
-  using namespace boost::python;
-  class_<iterator>(python_name, no_init)
+  bp::class_<iterator>(python_name, bp::no_init)
     .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next, return_value_policy<reference_existing_object>())
+    .def("__next__", &iterator::next, bp::return_value_policy<bp::reference_existing_object>())
     ;
 }
 
@@ -114,8 +113,7 @@ public:
 
 template<typename iterator>
 void bind_copy_iterator(const char* python_name) {
-  using namespace boost::python;
-  class_<iterator>(python_name, no_init)
+  bp::class_<iterator>(python_name, bp::no_init)
     .def("__iter__", &pass_through)
     .def("__next__", &iterator::next)
     ;

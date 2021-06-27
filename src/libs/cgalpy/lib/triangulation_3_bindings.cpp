@@ -45,8 +45,6 @@ tri3::Vertex_handle insert6(tri3::Delaunay_triangulation_3& dt,
 #endif
 
 void export_delaunay_triangulation_3() {
-  using namespace boost::python;
-
   CGAL::Bounded_side(tri3::Delaunay_triangulation_3::*side_of_sphere)(tri3::Cell_handle, const tri3::Point&, bool) const =
     &tri3::Delaunay_triangulation_3::side_of_sphere;
   CGAL::Bounded_side(tri3::Delaunay_triangulation_3::*side_of_circle1)(const tri3::Facet&, const tri3::Point&, bool) const =
@@ -78,9 +76,9 @@ void export_delaunay_triangulation_3() {
   tri3::Vertex_handle(tri3::Delaunay_triangulation_3::*nearest_vertex)(const tri3::Point&, tri3::Cell_handle) const =
     &tri3::Delaunay_triangulation_3::nearest_vertex;
 
-  class_<tri3::Delaunay_triangulation_3>("Delaunay_triangulation_3")
-    .def(init<>())
-    .def(init<const tri3::Traits&>())
+  bp::class_<tri3::Delaunay_triangulation_3>("Delaunay_triangulation_3")
+    .def(bp::init<>())
+    .def(bp::init<const tri3::Traits&>())
     .def("__init__", make_constructor(&dt3_init))
     // Insertion
     .def("insert", insert1)
@@ -135,23 +133,21 @@ bool cell_is_valid2(const tri3::Cell& cell, bool verbose) { return cell.is_valid
 bool cell_is_valid3(const tri3::Cell& cell) { return cell.is_valid(); }
 
 void export_triangulation_3() {
-  using namespace boost::python;
-
-  class_<tri3::Vertex_handle>("Vertex_handle")
-    .def(init<>())
-    .def("value", &value<tri3::Vertex_handle>, return_value_policy<reference_existing_object>())
+  bp::class_<tri3::Vertex_handle>("Vertex_handle")
+    .def(bp::init<>())
+    .def("value", &value<tri3::Vertex_handle>, bp::return_value_policy<bp::reference_existing_object>())
     ;
 
-  class_<tri3::Cell_handle>("Cell_handle")
-    .def(init<>())
-    .def("value", &value<tri3::Cell_handle>, return_value_policy<reference_existing_object>())
+  bp::class_<tri3::Cell_handle>("Cell_handle")
+    .def(bp::init<>())
+    .def("value", &value<tri3::Cell_handle>, bp::return_value_policy<bp::reference_existing_object>())
     ;
 
-  class_<tri3::Vertex>("Vertex")
-    .def(init<>())
+  bp::class_<tri3::Vertex>("Vertex")
+    .def(bp::init<>())
     // Access Functions
     .def<tri3::Cell_handle(tri3::Vertex::*)()const>("cell", &tri3::Vertex::cell)
-    .def<const tri3::Point&(tri3::Vertex::*)() const>("point", &tri3::Vertex::point, return_internal_reference<>())
+    .def<const tri3::Point&(tri3::Vertex::*)() const>("point", &tri3::Vertex::point, bp::return_internal_reference<>())
     // Setting
     .def("set_cell", &tri3::Vertex::set_cell)
     .def("set_point", &tri3::Vertex::set_point)
@@ -166,8 +162,8 @@ void export_triangulation_3() {
   void(tri3::Cell::*set_neighbors)(tri3::Cell_handle, tri3::Cell_handle, tri3::Cell_handle, tri3::Cell_handle) =
     &tri3::Cell::set_neighbors;
 
-  class_<tri3::Cell>("Cell")
-    .def(init<>())
+  bp::class_<tri3::Cell>("Cell")
+    .def(bp::init<>())
     // Access Functions
     .def("vertex", &tri3::Cell::vertex)
     .def<int(tri3::Cell::*)(tri3::Vertex_handle) const>("index", &tri3::Cell::index)
@@ -188,12 +184,12 @@ void export_triangulation_3() {
     .def("is_valid", &cell_is_valid3)
     ;
 
-  class_<tri3::Facet>("Facet")
+  bp::class_<tri3::Facet>("Facet")
     .def_readwrite("first", &tri3::Facet::first)
     .def_readwrite("second", &tri3::Facet::second)
     ;
 
-  class_<tri3::Edge>("Edge")
+  bp::class_<tri3::Edge>("Edge")
     .def_readwrite("first", &tri3::Edge::first)
     .def_readwrite("second", &tri3::Edge::second)
     .def_readwrite("third", &tri3::Edge::third)

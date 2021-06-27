@@ -6,7 +6,11 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <boost/python.hpp>
+
 #include "CGALPY/minkowski_sum_2_types.hpp"
+
+namespace bp = boost::python;
 
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_with_holes_2 General_polygon_with_holes_2;
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2 General_polygon_2;
@@ -29,28 +33,26 @@ General_polygon_with_holes_2 approximated_offset_2(Polygon_2& p, FT& r, double e
 General_polygon_with_holes_2 approximated_offset_2_pwh(Polygon_with_holes_2& pwh, FT& r, double eps)
 { return CGAL::approximated_offset_2(pwh, r, eps); }
 
-void approximated_inset_2(Polygon_2& p, FT& r, double eps, boost::python::list& lst)
-{
+void approximated_inset_2(Polygon_2& p, FT& r, double eps, bp::list& lst) {
   auto v = std::vector<General_polygon_2>();
   CGAL::approximated_inset_2(p, r, eps, std::back_inserter(v));
   for (auto p : v) lst.append(p);
 }
 
 void export_minkowski_sum_2() {
-  using namespace boost::python;
-  def("minkowski_sum_2", &minkowski_sum_2<Polygon_2, Polygon_2>);
-  def("minkowski_sum_2", &minkowski_sum_2<Polygon_2, Polygon_with_holes_2>);
-  def("minkowski_sum_2", &minkowski_sum_2<Polygon_with_holes_2, Polygon_2>);
-  def("minkowski_sum_2", &minkowski_sum_2<Polygon_with_holes_2, Polygon_with_holes_2>);
+  bp::def("minkowski_sum_2", &minkowski_sum_2<Polygon_2, Polygon_2>);
+  bp::def("minkowski_sum_2", &minkowski_sum_2<Polygon_2, Polygon_with_holes_2>);
+  bp::def("minkowski_sum_2", &minkowski_sum_2<Polygon_with_holes_2, Polygon_2>);
+  bp::def("minkowski_sum_2", &minkowski_sum_2<Polygon_with_holes_2, Polygon_with_holes_2>);
 
-  def("minkowski_sum_by_full_convolution_2", &minkowski_sum_by_full_convolution_2<Polygon_2, Polygon_2>);
+  bp::def("minkowski_sum_by_full_convolution_2", &minkowski_sum_by_full_convolution_2<Polygon_2, Polygon_2>);
 
-  def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_2, Polygon_2>);
-  def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_2, Polygon_with_holes_2>);
-  def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_with_holes_2, Polygon_2>);
-  def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_with_holes_2, Polygon_with_holes_2>);
+  bp::def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_2, Polygon_2>);
+  bp::def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_2, Polygon_with_holes_2>);
+  bp::def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_with_holes_2, Polygon_2>);
+  bp::def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_with_holes_2, Polygon_with_holes_2>);
 
-  def("approximated_offset_2", &approximated_offset_2);
-  def("approximated_offset_2", &approximated_offset_2_pwh);
+  bp::def("approximated_offset_2", &approximated_offset_2);
+  bp::def("approximated_offset_2", &approximated_offset_2_pwh);
   //def("approximated_inset_2", &approximated_inset_2);
 }

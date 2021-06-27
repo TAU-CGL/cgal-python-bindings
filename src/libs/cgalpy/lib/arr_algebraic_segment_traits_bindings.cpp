@@ -23,14 +23,12 @@ bp::list to_double(TPoint_2& p) {
 template<typename T, typename S>
 void export_construct_point_2_call_operator(bp::class_<Construct_point_2>& cp_2_binding)
 {
-  namespace bp = boost::python;
   cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&)>("__call__", &Construct_point_2::operator());
 }
 
 template<typename T, typename S, typename R>
 void export_construct_point_2_call_operator(bp::class_<Construct_point_2>& cp_2_binding)
 {
-  namespace bp = boost::python;
   cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&, R)>("__call__", &Construct_point_2::operator());
 }
 
@@ -63,8 +61,7 @@ void construct_x_monotone_segment_2_call_operator2(Construct_x_monotone_segment_
 //{
 //  typedef typename PT::Construct_polynomial T;
 //  typedef typename PT::Type P;
-//  using namespace boost::python;
-//  return class_<T>(name)
+//  return bp::class_<T>(name)
 //    .def(init<>())
 //    ;
 //}
@@ -81,20 +78,19 @@ template <typename PT>
 bp::class_<typename PT::Type> bind_polynomial(const char* name) {
   typedef typename PT::Type P;
   typedef typename PT::Coefficient_type CT;
-  using namespace boost::python;
-  return class_<P>(name)
-    .def(init<>())
-    .def(init<CT&>())
-    .def(init<CT&, CT&>())
-    .def(init<CT&, CT&, CT&>())
-    .def(init<CT&, CT&, CT&, CT&>())
-    .def(init<CT&, CT&, CT&, CT&, CT&>())
-    .def(init<CT&, CT&, CT&, CT&, CT&, CT&>())
-    .def(init<CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
-    .def(init<CT&, CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
+  return bp::class_<P>(name)
+    .def(bp::init<>())
+    .def(bp::init<CT&>())
+    .def(bp::init<CT&, CT&>())
+    .def(bp::init<CT&, CT&, CT&>())
+    .def(bp::init<CT&, CT&, CT&, CT&>())
+    .def(bp::init<CT&, CT&, CT&, CT&, CT&>())
+    .def(bp::init<CT&, CT&, CT&, CT&, CT&, CT&>())
+    .def(bp::init<CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
+    .def(bp::init<CT&, CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
     .def("__init__", make_constructor(&init_polynomial<PT>))
     .def("abs", &P::abs)
-    .def("coefficients", range<return_value_policy<copy_const_reference>>(&P::begin, &P::end))
+    .def("coefficients", bp::range<bp::return_value_policy<bp::copy_const_reference>>(&P::begin, &P::end))
     .def("compare", static_cast<CGAL::Comparison_result (P::*) (const typename P::NT&) const>(&P::compare))
     .def("degree", &P::degree)
     .def("diff", &P::diff)
@@ -108,17 +104,17 @@ bp::class_<typename PT::Type> bind_polynomial(const char* name) {
     .def("sign", &P::sign)
     .def("sign_at", static_cast<CGAL::Sign(P::*)(const typename P::NT&) const>(&P::sign_at))
     .def("simplify_coefficients", &P::simplify_coefficients)
-    .def(self + self)
-    .def(self += self)
-    .def(self - self)
-    .def(self -= self)
-    .def(self * self)
-    .def(int() * self)
-    .def(CT() * self)
-    .def(self *= self)
-    .def("__getitem__", &P::operator[], return_value_policy<copy_const_reference>())
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
+    .def(bp::self + bp::self)
+    .def(bp::self += bp::self)
+    .def(bp::self - bp::self)
+    .def(bp::self -= bp::self)
+    .def(bp::self * bp::self)
+    .def(int() * bp::self)
+    .def(CT() * bp::self)
+    .def(bp::self *= bp::self)
+    .def("__getitem__", &P::operator[], bp::return_value_policy<bp::copy_const_reference>())
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
     ;
 }
 

@@ -178,14 +178,12 @@ template<typename T>
 CGAL::Oriented_side oriented_side(General_polygon_set_2& ps, T& other)
 { return ps.oriented_side(other); }
 
-void export_general_polygon_set_2()
-{
-  using namespace boost::python;
-  class_<General_polygon_set_2>("General_polygon_set_2")
-    .def(init<>())
-    .def(init<const General_polygon_2&>())
-    .def(init<const General_polygon_with_holes_2&>())
-    .def(init<const General_polygon_set_2&>())
+void export_general_polygon_set_2() {
+  bp::class_<General_polygon_set_2>("General_polygon_set_2")
+    .def(bp::init<>())
+    .def(bp::init<const General_polygon_2&>())
+    .def(bp::init<const General_polygon_with_holes_2&>())
+    .def(bp::init<const General_polygon_set_2&>())
     .def("is_empty", &General_polygon_set_2::is_empty)
     .def("is_plane", &General_polygon_set_2::is_plane)
     .def("number_of_polygons_with_holes", &General_polygon_set_2::number_of_polygons_with_holes)

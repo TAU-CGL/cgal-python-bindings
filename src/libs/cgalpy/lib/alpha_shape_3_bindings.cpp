@@ -231,16 +231,14 @@ double NT_to_double(as3::NT& ft) { return CGAL::to_double(ft); }
 #endif
 
 void export_alpha_shape_3() {
-  using namespace boost::python;
-
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  enum_<as3::Mode>("Mode")
+  bp::enum_<as3::Mode>("Mode")
     .value("GENERAL", as3::Alpha_shape_3::GENERAL)
     .value("REGULARIZED", as3::Alpha_shape_3::REGULARIZED)
     .export_values()
     ;
 
-  enum_<as3::Classification_type>("Classification_type")
+  bp::enum_<as3::Classification_type>("Classification_type")
     .value("EXTERIOR", as3::Alpha_shape_3::EXTERIOR)
     .value("SINGULAR", as3::Alpha_shape_3::SINGULAR)
     .value("REGULAR", as3::Alpha_shape_3::REGULAR)
@@ -248,8 +246,8 @@ void export_alpha_shape_3() {
     .export_values()
     ;
 
-  class_<as3::Alpha_status>("Alpha_status")
-    .def(init<>())
+  bp::class_<as3::Alpha_status>("Alpha_status")
+    .def(bp::init<>())
     // Modifiers
     .def("set_is_Gabriel", &as3::Alpha_status::set_is_Gabriel)
     .def("set_is_on_chull", &as3::Alpha_status::set_is_on_chull)
@@ -264,9 +262,9 @@ void export_alpha_shape_3() {
     .def("alpha_max", &as3::Alpha_status::alpha_max)
     ;
 
-  class_<as3::Alpha_iterator>("Alpha_iterator")
+  bp::class_<as3::Alpha_iterator>("Alpha_iterator")
     .def("__iter__", &pass_through)
-    .def("__next__", &next, return_value_policy<copy_const_reference>())
+    .def("__next__", &next, bp::return_value_policy<bp::copy_const_reference>())
     ;
 
   typedef as3::Alpha_shape_3                    As_3;
@@ -295,40 +293,40 @@ void export_alpha_shape_3() {
 #ifdef CGALPY_AS3_EXACT_COMPARISON
   // By default (last time I checked) this is mapped to:
   // CGAL::internal::Lazy_alpha_nt_3<CGAL::Epick, true, CGAL::Boolean_tag<false>>
-  class_<as3::NT>("NT")
-    .def(init<double>())
+  bp::class_<as3::NT>("NT")
+    .def(bp::init<double>())
     // .def(init<as3::NT::NT_exact>())
-    .def(init<as3::NT>())
-    .def("exact", &NT_exact, return_internal_reference<>())
-    .def("approx", &NT_approx, return_internal_reference<>())
+    .def(bp::init<as3::NT>())
+    .def("exact", &NT_exact, bp::return_internal_reference<>())
+    .def("approx", &NT_approx, bp::return_internal_reference<>())
     .def("to_double", &NT_to_double)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self == self)
-    .def(self != self)
-    .def(self < self)
-    .def(self > self)
-    .def(self <= self)
-    .def(self >= self)
-    // .def(self + self)
-    // .def(self += self)
-    // .def(self - self)
-    // .def(self -= self)
-    // .def(self * self)
-    // .def(self *= self)
-    // .def(self / self)
-    // .def(self /= self)
-    // .def(-self)
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(bp::self == bp::self)
+    .def(bp::self != bp::self)
+    .def(bp::self < bp::self)
+    .def(bp::self > bp::self)
+    .def(bp::self <= bp::self)
+    .def(bp::self >= bp::self)
+    // .def(bp::self + bp::self)
+    // .def(bp::self += bp::self)
+    // .def(bp::self - bp::self)
+    // .def(bp::self -= bp::self)
+    // .def(bp::self * bp::self)
+    // .def(bp::self *= bp::self)
+    // .def(bp::self / bp::self)
+    // .def(bp::self /= bp::self)
+    // .def(-bp::self)
     ;
 #endif
 
-  class_<as3::Alpha_shape_3, boost::noncopyable>("Alpha_shape_3")
-    .def(init<>())
+  bp::class_<as3::Alpha_shape_3, boost::noncopyable>("Alpha_shape_3")
+    .def(bp::init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def(init<optional<double, as3::Mode>>())
-    .def(init<optional<as3::NT&, as3::Mode>>())
-    .def(init<tri3::Triangulation_3&, optional<double, as3::Mode>>())
-    .def(init<tri3::Triangulation_3&, optional<as3::NT&, as3::Mode>>())
+    .def(bp::init<bp::optional<double, as3::Mode>>())
+    .def(bp::init<bp::optional<as3::NT&, as3::Mode>>())
+    .def(bp::init<tri3::Triangulation_3&, bp::optional<double, as3::Mode>>())
+    .def(bp::init<tri3::Triangulation_3&, bp::optional<as3::NT&, as3::Mode>>())
 #endif
     .def("__init__", make_constructor(&as_init1))
     .def("__init__", make_constructor(&as_init2))
@@ -345,10 +343,10 @@ void export_alpha_shape_3() {
 #endif
     .def("clear", &as3::Alpha_shape_3::clear)
     // Query Functions
-    .def("get_alpha", &as3::Alpha_shape_3::get_alpha, return_value_policy<copy_const_reference>())
+    .def("get_alpha", &as3::Alpha_shape_3::get_alpha, bp::return_value_policy<bp::copy_const_reference>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def("get_mode", &as3::Alpha_shape_3::get_mode)
-    .def("get_nth_alpha", &as3::Alpha_shape_3::get_nth_alpha, return_value_policy<copy_const_reference>())
+    .def("get_nth_alpha", &as3::Alpha_shape_3::get_nth_alpha, bp::return_value_policy<bp::copy_const_reference>())
     .def("number_of_alphas", &as3::Alpha_shape_3::number_of_alphas)
     .def("classify", classify1)
     .def("classify", classify2)
@@ -375,7 +373,7 @@ void export_alpha_shape_3() {
     // Traversal of the alpha-Values
     .def("alpha_begin", &as3::Alpha_shape_3::alpha_begin)
     .def("alpha_end", &as3::Alpha_shape_3::alpha_end)
-    .def("alphas", range(&as3::Alpha_shape_3::alpha_begin, &as3::Alpha_shape_3::alpha_end))
+    .def("alphas", bp::range(&as3::Alpha_shape_3::alpha_begin, &as3::Alpha_shape_3::alpha_end))
     .def("alpha_find", &as3::Alpha_shape_3::alpha_find)
     .def("alpha_lower_bound", &as3::Alpha_shape_3::alpha_lower_bound)
     .def("alpha_upper_bound", &as3::Alpha_shape_3::alpha_upper_bound)
