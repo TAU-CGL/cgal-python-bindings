@@ -29,18 +29,17 @@ Polygon_2& outer_boundary(Polygon_with_holes_2& p)
 { return p.outer_boundary(); }
 
 void export_polygon_with_holes_2() {
-  using namespace boost::python;
-  class_<Polygon_with_holes_2>("Polygon_with_holes_2")
-    .def(init<Polygon_2&>())
+  bp::class_<Polygon_with_holes_2>("Polygon_with_holes_2")
+    .def(bp::init<Polygon_2&>())
     .def("__init__", make_constructor(&init_Polygon_with_holes_2))
     .def("is_unbounded", &Polygon_with_holes_2::is_unbounded)
     .def("outer_boundary", &outer_boundary, return_internal_reference<>())
     .def("holes", range<return_internal_reference<>>(&holes_begin, &holes_end))
     .def("number_of_holes", &Polygon_with_holes_2::number_of_holes)
     .def("bbox", &Polygon_with_holes_2::bbox)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self == self)
-    .def(self != self)
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(bp::self == bp::self)
+    .def(bp::self != bp::self)
     ;
 }
