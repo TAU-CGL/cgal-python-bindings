@@ -9,8 +9,8 @@
 #ifndef CGALPY_SPATIAL_SEARCHING_TYPES_HPP
 #define CGALPY_SPATIAL_SEARCHING_TYPES_HPP
 
-#include <CGALPY/spatial_searching_config.hpp>
-#include <CGALPY/kernel_types.hpp>
+#include "CGALPY/spatial_searching_config.hpp"
+#include "CGALPY/kernel_types.hpp"
 
 #include <CGAL/Cartesian_d.h>
 #include <CGAL/Kd_tree.h>

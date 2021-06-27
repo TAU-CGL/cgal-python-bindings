@@ -4,8 +4,13 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
+
+#include <boost/python.hpp>
 
 #include "CGALPY/kernel_types.hpp"
+
+namespace bp = boost::python;
 
 typedef typename Kernel::Intersect_2                               Intersect_2;
 typedef typename CGAL::cpp11::result_of<Intersect_2(Point_2, Iso_rectangle_2)>::type
@@ -201,24 +206,18 @@ bool is_points(result& intersection)
 }
 
 template<typename result>
-bool get_points(result& intersection, boost::python::list& lst)
-{
+bool get_points(result& intersection, bp::list& lst) {
   if (!intersection) return false;
   std::vector<Point_2>* get;
   bool res = (get = boost::get< std::vector<Point_2> >(&*intersection));
-  if (res)
-  {
-    for (Point_2 p : *get)
-    {
-      lst.append(p);
-    }
+  if (res) {
+    for (Point_2 p : *get) lst.append(p);
   }
   return res;
 }
 
 template<typename result>
-boost::python::class_<result> bind_intersection_result(const char* python_name)
-{
+bp::class_<result> bind_intersection_result(const char* python_name) {
   using namespace boost::python;
   auto c = class_<result>(python_name, no_init)
     .def("empty", &empty<result>)
@@ -239,8 +238,7 @@ template<typename, typename>
 void bind_do_intersect_2T(...) {}
 
 template <typename T>
-void bind_do_intersect_1T()
-{
+void bind_do_intersect_1T() {
   bind_do_intersect_2T<T, Point_2>(true);
   bind_do_intersect_2T<T, Line_2>(true);
   bind_do_intersect_2T<T, Ray_2>(true);
@@ -250,8 +248,7 @@ void bind_do_intersect_1T()
   bind_do_intersect_2T<T, Circle_2>(true);
 }
 
-void bind_do_intersect()
-{
+void bind_do_intersect() {
   bind_do_intersect_1T<Point_2>();
   bind_do_intersect_1T<Line_2>();
   bind_do_intersect_1T<Ray_2>();
@@ -261,8 +258,7 @@ void bind_do_intersect()
   bind_do_intersect_1T<Circle_2>();
 }
 
-void export_intersections_2()
-{
+void export_intersections_2() {
   using namespace boost::python;
 
   def("intersection", &point_iso_rectangle_intersection);

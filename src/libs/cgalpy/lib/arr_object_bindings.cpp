@@ -6,7 +6,9 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
+#include <boost/python.hpp>
+
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
 
 namespace bp = boost::python;
 

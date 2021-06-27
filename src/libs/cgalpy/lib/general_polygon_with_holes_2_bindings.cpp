@@ -5,9 +5,13 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include <CGALPY/polygon_2_types.hpp>
+#include <boost/python.hpp>
+
+#include "CGALPY/polygon_2_types.hpp"
 
 #include <CGAL/Gps_circle_segment_traits_2.h>
+
+namespace bp = boost::python;
 
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel> CSTraits;
 typedef typename CSTraits::Polygon_2                       General_polygon_2;
@@ -18,27 +22,23 @@ typedef General_polygon_2::X_monotone_curve_2
   CS_traits_X_monotone_curve_2;
 typedef General_polygon_2::Curve_iterator                  Curve_iterator;
 
-General_polygon_with_holes_2* init_General_polygon_with_holes_2(General_polygon_2& p, boost::python::list& lst)
-{
-  auto begin = boost::python::stl_input_iterator< General_polygon_2 >(lst);
-  auto end = boost::python::stl_input_iterator< General_polygon_2 >();
+General_polygon_with_holes_2*
+init_General_polygon_with_holes_2(General_polygon_2& p, bp::list& lst) {
+  auto begin = bp::stl_input_iterator< General_polygon_2 >(lst);
+  auto end = bp::stl_input_iterator< General_polygon_2 >();
   return new General_polygon_with_holes_2(p, begin, end);
 }
 
-General_polygon_with_holes_2::Hole_iterator holes_begin(General_polygon_with_holes_2& p)
-{
-  return p.holes_begin();
-}
+General_polygon_with_holes_2::Hole_iterator
+holes_begin(General_polygon_with_holes_2& p) { return p.holes_begin(); }
 
-General_polygon_with_holes_2::Hole_iterator holes_end(General_polygon_with_holes_2& p)
-{
-  return p.holes_end();
-}
+General_polygon_with_holes_2::Hole_iterator
+holes_end(General_polygon_with_holes_2& p) { return p.holes_end(); }
 
-General_polygon_2& outer_boundary(General_polygon_with_holes_2& p) { return p.outer_boundary(); }
+General_polygon_2& outer_boundary(General_polygon_with_holes_2& p)
+{ return p.outer_boundary(); }
 
-void export_general_polygon_with_holes_2()
-{
+void export_general_polygon_with_holes_2() {
   using namespace boost::python;
   class_<General_polygon_with_holes_2>("General_polygon_with_holes_2")
     .def(init<General_polygon_2&>())

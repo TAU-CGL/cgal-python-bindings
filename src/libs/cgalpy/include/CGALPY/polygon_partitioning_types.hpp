@@ -9,8 +9,8 @@
 #ifndef CGALPY_POLYGON_PARTITIONING_TYPES_HPP
 #define CGALPY_POLYGON_PARTITIONING_TYPES_HPP
 
-#include <CGALPY/polygon_partitioning_config.hpp>
-#include <CGALPY/polygon_2_types.hpp>
+#include "CGALPY/polygon_partitioning_config.hpp"
+#include "CGALPY/polygon_2_types.hpp"
 
 #include <CGAL/partition_2.h>
 #include <CGAL/Polygon_vertical_decomposition_2.h>

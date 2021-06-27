@@ -7,11 +7,10 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <boost/python.hpp>
-#include <boost/static_assert.hpp>
 
-#include <CGALPY/config.hpp>
-#include <CGALPY/common.hpp>
-#include <CGALPY/kernel_types.hpp>
+#include "CGALPY/config.hpp"
+#include "CGALPY/common.hpp"
+#include "CGALPY/kernel_types.hpp"
 
 void export_kernel();
 void export_arrangement_on_surface_2();
@@ -47,8 +46,7 @@ bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str
 bp::scope().attr(x) = module; \
 bp::scope module_scope = module;
 
-BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME)
-{
+BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
   namespace bp = boost::python;
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
   bp::object package = bp::scope();

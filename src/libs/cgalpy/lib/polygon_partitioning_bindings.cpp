@@ -6,58 +6,55 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/polygon_partitioning_types.hpp>
+#include <boost/python.hpp>
+
+#include "CGALPY/polygon_partitioning_types.hpp"
+
+namespace bp = boost::python;
 
 typedef typename CGAL::Polygon_vertical_decomposition_2<Kernel, Point_2_container> Polygon_vertical_decomposition_2;
 typedef typename CGAL::Polygon_triangulation_decomposition_2<Kernel, Point_2_container> Polygon_triangulation_decomposition_2;
 typedef typename CGAL::Small_side_angle_bisector_decomposition_2<Kernel, Point_2_container> Small_side_angle_bisector_decomposition_2;
 
-void approx_convex_partition_2(Polygon_2& p, bp::list& res)
-{
+void approx_convex_partition_2(Polygon_2& p, bp::list& res) {
   auto v = std::vector<Polygon_2>();
   CGAL::approx_convex_partition_2(p.vertices_begin(), p.vertices_end(), std::back_inserter(v));
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
-void greene_approx_convex_partition_2(Polygon_2& p, bp::list& res)
-{
+void greene_approx_convex_partition_2(Polygon_2& p, bp::list& res) {
   auto v = std::vector<Polygon_2>();
   CGAL::greene_approx_convex_partition_2(p.vertices_begin(), p.vertices_end(), std::back_inserter(v));
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
-void optimal_convex_partition_2(Polygon_2& p, bp::list& res)
-{
+void optimal_convex_partition_2(Polygon_2& p, bp::list& res) {
   auto v = std::vector<Polygon_2>();
   CGAL::optimal_convex_partition_2(p.vertices_begin(), p.vertices_end(), std::back_inserter(v));
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
-void y_monotone_partition_2(Polygon_2& p, bp::list& res)
-{
+void y_monotone_partition_2(Polygon_2& p, bp::list& res) {
   auto v = std::vector<Polygon_2>();
   CGAL::y_monotone_partition_2(p.vertices_begin(), p.vertices_end(), std::back_inserter(v));
   for (auto ym_polygon : v) res.append(ym_polygon);
 }
 
-bool partition_is_valid_2(Polygon_2& p, bp::list& polygon_lst)
-{
+bool partition_is_valid_2(Polygon_2& p, bp::list& polygon_lst) {
   auto begin = bp::stl_input_iterator<Polygon_2>(polygon_lst);
   auto end = bp::stl_input_iterator<Polygon_2>();
   auto v = std::vector<Polygon_2>(begin, end);
   return CGAL::partition_is_valid_2(p.vertices_begin(), p.vertices_end(), v.begin(), v.end());
 }
 
-bool convex_partition_is_valid_2(Polygon_2& p, bp::list& polygon_lst)
-{
+bool convex_partition_is_valid_2(Polygon_2& p, bp::list& polygon_lst) {
   auto begin = bp::stl_input_iterator<Polygon_2>(polygon_lst);
   auto end = bp::stl_input_iterator<Polygon_2>();
   auto v = std::vector<Polygon_2>(begin, end);
   return CGAL::convex_partition_is_valid_2(p.vertices_begin(), p.vertices_end(), v.begin(), v.end());
 }
 
-bool y_monotone_partition_is_valid_2(Polygon_2& p, bp::list& polygon_lst)
-{
+bool y_monotone_partition_is_valid_2(Polygon_2& p, bp::list& polygon_lst) {
   auto begin = bp::stl_input_iterator<Polygon_2>(polygon_lst);
   auto end = bp::stl_input_iterator<Polygon_2>();
   auto v = std::vector<Polygon_2>(begin, end);
@@ -65,18 +62,14 @@ bool y_monotone_partition_is_valid_2(Polygon_2& p, bp::list& polygon_lst)
 }
 
 bool is_y_monotone_2(Polygon_2& p)
-{
-  return CGAL::is_y_monotone_2(p.vertices_begin(), p.vertices_end());
-}
+{ return CGAL::is_y_monotone_2(p.vertices_begin(), p.vertices_end()); }
 
 bool is_convex_2(Polygon_2& p)
-{
-  return CGAL::is_convex_2(p.vertices_begin(), p.vertices_end());
-}
+{ return CGAL::is_convex_2(p.vertices_begin(), p.vertices_end()); }
 
 template<typename T>
-void polygon_vertical_decomposition_2(Polygon_vertical_decomposition_2& pvd, T& polygon, bp::list& res)
-{
+void polygon_vertical_decomposition_2(Polygon_vertical_decomposition_2& pvd,
+                                      T& polygon, bp::list& res) {
   auto v = std::vector<Polygon_2>();
   pvd(polygon, std::back_inserter(v));
   for (auto trapezoid : v) res.append(trapezoid);
@@ -97,8 +90,7 @@ void small_side_angle_bisector_decomposition_2(Small_side_angle_bisector_decompo
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
-void export_polygon_partition_2()
-{
+void export_polygon_partition_2() {
   using namespace boost::python;
   def("approx_convex_partition_2", &approx_convex_partition_2);
   def("greene_approx_convex_partition_2", &greene_approx_convex_partition_2);

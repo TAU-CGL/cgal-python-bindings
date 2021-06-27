@@ -6,10 +6,13 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
+#include <boost/python.hpp>
 
-bp::list to_double(TPoint_2& p)
-{
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
+
+namespace bp = boost::python;
+
+bp::list to_double(TPoint_2& p) {
   bp::list lst = bp::list();
   auto pair = p.to_double();
   lst.append(pair.first);
@@ -18,14 +21,14 @@ bp::list to_double(TPoint_2& p)
 }
 
 template<typename T, typename S>
-void export_construct_point_2_call_operator(boost::python::class_<Construct_point_2>& cp_2_binding)
+void export_construct_point_2_call_operator(bp::class_<Construct_point_2>& cp_2_binding)
 {
   namespace bp = boost::python;
   cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&)>("__call__", &Construct_point_2::operator());
 }
 
 template<typename T, typename S, typename R>
-void export_construct_point_2_call_operator(boost::python::class_<Construct_point_2>& cp_2_binding)
+void export_construct_point_2_call_operator(bp::class_<Construct_point_2>& cp_2_binding)
 {
   namespace bp = boost::python;
   cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&, R)>("__call__", &Construct_point_2::operator());
@@ -36,10 +39,7 @@ void construct_x_monotone_segment_2_call_operator0(Construct_x_monotone_segment_
   auto v = std::vector<X_monotone_curve_2>();
   auto it = std::back_inserter(v);
   construct(cv, end_min, end_max, it);
-  for (auto xcv : v)
-  {
-    lst.append(xcv);
-  }
+  for (auto xcv : v) lst.append(xcv);
 }
 
 void construct_x_monotone_segment_2_call_operator1(Construct_x_monotone_segment_2& construct, TPoint_2& p, TPoint_2& q, bp::list& lst)
@@ -47,10 +47,7 @@ void construct_x_monotone_segment_2_call_operator1(Construct_x_monotone_segment_
   auto v = std::vector<X_monotone_curve_2>();
   auto it = std::back_inserter(v);
   construct(p, q, it);
-  for (auto xcv : v)
-  {
-    lst.append(xcv);
-  }
+  for (auto xcv : v) lst.append(xcv);
 }
 
 void construct_x_monotone_segment_2_call_operator2(Construct_x_monotone_segment_2& construct, Curve_2& cv, TPoint_2& p, Traits::Site_of_point& site_of_p, bp::list& lst)
@@ -58,14 +55,11 @@ void construct_x_monotone_segment_2_call_operator2(Construct_x_monotone_segment_
   auto v = std::vector<X_monotone_curve_2>();
   auto it = std::back_inserter(v);
   construct(cv, p, site_of_p, it);
-  for (auto xcv : v)
-  {
-    lst.append(xcv);
-  }
+  for (auto xcv : v) lst.append(xcv);
 }
 
 //template <typename PT>
-//boost::python::class_<typename PT::Construct_polynomial> bind_construct_polynomial(const char* name)
+//bp::class_<typename PT::Construct_polynomial> bind_construct_polynomial(const char* name)
 //{
 //  typedef typename PT::Construct_polynomial T;
 //  typedef typename PT::Type P;
@@ -76,8 +70,7 @@ void construct_x_monotone_segment_2_call_operator2(Construct_x_monotone_segment_
 //}
 
 template <typename PT>
-typename PT::Type* init_polynomial(bp::list& lst)
-{
+typename PT::Type* init_polynomial(bp::list& lst) {
   typedef typename PT::Type P;
   typedef typename PT::Coefficient_type CT;
   bp::stl_input_iterator<CT> begin(lst), end;
@@ -85,8 +78,7 @@ typename PT::Type* init_polynomial(bp::list& lst)
 }
 
 template <typename PT>
-bp::class_<typename PT::Type> bind_polynomial(const char* name)
-{
+bp::class_<typename PT::Type> bind_polynomial(const char* name) {
   typedef typename PT::Type P;
   typedef typename PT::Coefficient_type CT;
   using namespace boost::python;
@@ -131,8 +123,7 @@ bp::class_<typename PT::Type> bind_polynomial(const char* name)
 }
 
 template<typename PT>
-bp::class_<typename PT::Shift> bind_shift(const char* name)
-{
+bp::class_<typename PT::Shift> bind_shift(const char* name) {
   return bp::class_<typename PT::Shift>(name)
     .def(bp::init<>())
     .def("__call__", &PT::Shift::operator())
@@ -140,8 +131,7 @@ bp::class_<typename PT::Shift> bind_shift(const char* name)
 }
 
 template<typename PT>
-bp::class_<typename PT::Swap> bind_swap(const char* name)
-{
+bp::class_<typename PT::Swap> bind_swap(const char* name) {
   return bp::class_<typename PT::Swap>(name)
     .def(bp::init<>())
     .def("__call__", &PT::Swap::operator())
@@ -149,33 +139,28 @@ bp::class_<typename PT::Swap> bind_swap(const char* name)
 }
 
 template<typename T>
-T ipower(T& p, int i)
-{
-  return CGAL::ipower(p, i);
-}
+T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 
-void export_arr_algebraic_segment_traits()
-{
-  using namespace boost::python;
-  class_<Integer>("Integer")
-    .def(init<>())
-    .def(init<int>())
+void export_arr_algebraic_segment_traits() {
+  bp::class_<Integer>("Integer")
+    .def(bp::init<>())
+    .def(bp::init<int>())
     .def("value", &Integer::longValue)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self + self)
-    .def(self += self)
-    .def(self - self)
-    .def(self -= self)
-    .def(self *= self)
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(bp::self + bp::self)
+    .def(bp::self += bp::self)
+    .def(bp::self - bp::self)
+    .def(bp::self -= bp::self)
+    .def(bp::self *= bp::self)
     ;
 
-  class_<Algebraic_real_1>("Algebraic_real_1")
-    .def(init<>())
-    .def(init<Algebraic_real_1&>())
-    .def(init<int>())
-    .def(init<Algebraic_real_1::Rational&>())
-    .def(init<const Polynomial_1&, Algebraic_real_1::Rational, Algebraic_real_1::Rational>())
+  bp::class_<Algebraic_real_1>("Algebraic_real_1")
+    .def(bp::init<>())
+    .def(bp::init<Algebraic_real_1&>())
+    .def(bp::init<int>())
+    .def(bp::init<Algebraic_real_1::Rational&>())
+    .def(bp::init<const Polynomial_1&, Algebraic_real_1::Rational, Algebraic_real_1::Rational>())
     .def("bisect", &Algebraic_real_1::bisect)
     .def< CGAL::Comparison_result(Algebraic_real_1::*)(const Algebraic_real_1&) const>("compare", &Algebraic_real_1::compare)
     .def("degree", &Algebraic_real_1::degree)
@@ -183,7 +168,7 @@ void export_arr_algebraic_segment_traits()
     .def("is_rational", &Algebraic_real_1::is_rational)
     .def("is_root_of", &Algebraic_real_1::is_root_of)
     .def("low", &Algebraic_real_1::low)
-    .def("polynomial", &Algebraic_real_1::polynomial, return_value_policy<copy_const_reference>())
+    .def("polynomial", &Algebraic_real_1::polynomial, bp::return_value_policy<bp::copy_const_reference>())
     .def("rational", &Algebraic_real_1::rational)
     .def("rational_between", &Algebraic_real_1::rational_between)
     .def("refine", &Algebraic_real_1::refine)
@@ -192,30 +177,30 @@ void export_arr_algebraic_segment_traits()
     .def("simplify", &Algebraic_real_1::simplify)
     .def("to_double", &Algebraic_real_1::to_double)
     .def("upper", &Algebraic_real_1::upper)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self == self)
-    .def(self != self)
-    .def(self != self)
-    .def(self < self)
-    .def(self > self)
-    .def(self <= self)
-    .def(self >= self)
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(bp::self == bp::self)
+    .def(bp::self != bp::self)
+    .def(bp::self != bp::self)
+    .def(bp::self < bp::self)
+    .def(bp::self > bp::self)
+    .def(bp::self <= bp::self)
+    .def(bp::self >= bp::self)
     ;
 
-  class_<Bound>("Bound")
-    .def(init<>())
+  bp::class_<Bound>("Bound")
+    .def(bp::init<>())
     .def("value", &Bound::longValue)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self + self)
-    .def(self += self)
-    .def(self - self)
-    .def(self -= self)
-    .def(self *= self)
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(bp::self + bp::self)
+    .def(bp::self += bp::self)
+    .def(bp::self - bp::self)
+    .def(bp::self -= bp::self)
+    .def(bp::self *= bp::self)
     ;
 
-  enum_<Traits::Site_of_point>("Site_of_point")
+  bp::enum_<Traits::Site_of_point>("Site_of_point")
     .value("POINT_IN_INTERIOR", Traits::Site_of_point::POINT_IN_INTERIOR)
     .value("MIN_ENDPOINT", Traits::Site_of_point::MIN_ENDPOINT)
     .value("MAX_ENDPOINT", Traits::Site_of_point::MAX_ENDPOINT)
@@ -234,59 +219,59 @@ void export_arr_algebraic_segment_traits()
   bind_swap<PT_1>("PT_1_Swap");
   bind_swap<PT_2>("PT_2_Swap");
 
-  class_<TPoint_2>("Point_2")
-    .def(init<TPoint_2&>())
+  bp::def("ipower", &ipower<Polynomial_1>);
+  bp::def("ipower", &ipower<Polynomial_2>);
+
+  bp::scope traits_scope = bp::class_<Traits>("Traits")
+    .def(bp::init<>())
+    .def("construct_curve_2_object", &Traits::construct_curve_2_object)
+    .def("construct_tpoint_2_object", &Traits::construct_point_2_object)
+    .def("construct_x_monotone_segment_2_object", &Traits::construct_x_monotone_segment_2_object)
+    ;
+
+  bp::class_<TPoint_2>("Point_2")
+    .def(bp::init<TPoint_2&>())
     .def("curve", &TPoint_2::curve)
     .def("arcno", &TPoint_2::arcno)
     .def("to_double", &to_double)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
-    .def(self == self)
-    .def(self != self)
-    .def(self != self)
-    .def(self < self)
-    .def(self > self)
-    .def(self <= self)
-    .def(self >= self)
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(bp::self == bp::self)
+    .def(bp::self != bp::self)
+    .def(bp::self != bp::self)
+    .def(bp::self < bp::self)
+    .def(bp::self > bp::self)
+    .def(bp::self <= bp::self)
+    .def(bp::self >= bp::self)
     ;
 
-  class_<Curve_2>("Curve_2", no_init)
+  bp::class_<Curve_2>("Curve_2", bp::no_init)
     .def("polynomial_2", &Curve_2::polynomial_2)
     ;
 
-  class_<X_monotone_curve_2>("X_monotone_curve_2", no_init)
-    .def("curve", &X_monotone_curve_2::curve, return_internal_reference<>())
+  bp::class_<X_monotone_curve_2>("X_monotone_curve_2", bp::no_init)
+    .def("curve", &X_monotone_curve_2::curve, bp::return_internal_reference<>())
     .def("is_vertical", &X_monotone_curve_2::is_vertical)
     .def("is_finite", &X_monotone_curve_2::is_finite)
     .def("curve_end", &X_monotone_curve_2::curve_end)
     .def<int (X_monotone_curve_2::*)() const>("arcno", &X_monotone_curve_2::arcno)
-    .def("x", &X_monotone_curve_2::x, return_value_policy<copy_const_reference>())
+    .def("x", &X_monotone_curve_2::x, bp::return_value_policy<bp::copy_const_reference>())
     ;
 
-  class_<Construct_curve_2>("Construct_curve_2", no_init)
+  bp::class_<Construct_curve_2>("Construct_curve_2", bp::no_init)
     .def("__call__", &Construct_curve_2::operator());
     ;
 
-  auto cp_2_binding = class_<Construct_point_2>("Construct_point_2", no_init);
+  auto cp_2_binding = bp::class_<Construct_point_2>("Construct_point_2", bp::no_init);
   export_construct_point_2_call_operator<Algebraic_real_1, Curve_2, int>(cp_2_binding);
   export_construct_point_2_call_operator<Algebraic_real_1, X_monotone_curve_2>(cp_2_binding);
   export_construct_point_2_call_operator<Algebraic_real_1, Algebraic_real_1>(cp_2_binding);
   export_construct_point_2_call_operator<Bound, Bound>(cp_2_binding);
   export_construct_point_2_call_operator<int, int>(cp_2_binding);
 
-  class_<Construct_x_monotone_segment_2>("Construct_x_monotone_segment_2", no_init)
+  bp::class_<Construct_x_monotone_segment_2>("Construct_x_monotone_segment_2", bp::no_init)
     .def("__call__", &construct_x_monotone_segment_2_call_operator0)
     .def("__call__", &construct_x_monotone_segment_2_call_operator1)
     .def("__call__", &construct_x_monotone_segment_2_call_operator2)
     ;
-
-  class_<Traits>("Traits")
-    .def(init<>())
-    .def("construct_curve_2_object", &Traits::construct_curve_2_object)
-    .def("construct_tpoint_2_object", &Traits::construct_point_2_object)
-    .def("construct_x_monotone_segment_2_object", &Traits::construct_x_monotone_segment_2_object)
-    ;
-
-  def("ipower", &ipower<Polynomial_1>);
-  def("ipower", &ipower<Polynomial_2>);
 }

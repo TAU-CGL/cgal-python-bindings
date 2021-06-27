@@ -9,8 +9,8 @@
 #ifndef CGALPY_POLYGON_2_TYPES_HPP
 #define CGALPY_POLYGON_2_TYPES_HPP
 
-#include <CGALPY/polygon_2_config.hpp>
-#include <CGALPY/kernel_types.hpp>
+#include "CGALPY/polygon_2_config.hpp"
+#include "CGALPY/kernel_types.hpp"
 
 #include <CGAL/Polygon_2.h>
 #include <CGAL/Polygon_with_holes_2.h>
