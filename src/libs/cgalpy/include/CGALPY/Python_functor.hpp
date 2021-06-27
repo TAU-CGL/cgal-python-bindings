@@ -9,6 +9,7 @@
 #define CGALPY_PYTHON_FUNCTOR
 
 #include <boost/python.hpp>
+
 namespace bp = boost::python;
 
 //https://stackoverflow.com/a/26833886 regarding calling a python functor in C++

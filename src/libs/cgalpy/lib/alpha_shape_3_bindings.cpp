@@ -5,7 +5,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#include <boost/static_assert.hpp>
+#include <boost/python.hpp>
 
 #include <CGAL/iterator.h>
 
@@ -18,53 +18,45 @@
 namespace bp = boost::python;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-void make_alpha_shape(as3::Alpha_shape_3& as, boost::python::list& lst)
-{
+void make_alpha_shape(as3::Alpha_shape_3& as, bp::list& lst) {
   if (! lst) return;
   if (! bp::extract<as3::Point>(lst[0]).check()) return;
-  auto begin = boost::python::stl_input_iterator<as3::Point>(lst);
-  auto end = boost::python::stl_input_iterator<as3::Point>();
+  auto begin = bp::stl_input_iterator<as3::Point>(lst);
+  auto end = bp::stl_input_iterator<as3::Point>();
   // auto v = std::vector<as3::point>(begin, end);
   // as.make_alpha_shape(v.begin(), v.end());
   as.make_alpha_shape(begin, end);
 }
 #endif
 
-as3::Alpha_shape_3* as_init1(boost::python::list& lst)
-{
-  auto begin = boost::python::stl_input_iterator<as3::Point>(lst);
-  auto end = boost::python::stl_input_iterator<as3::Point>();
+as3::Alpha_shape_3* as_init1(bp::list& lst) {
+  auto begin = bp::stl_input_iterator<as3::Point>(lst);
+  auto end = bp::stl_input_iterator<as3::Point>();
   return new as3::Alpha_shape_3(begin, end);
 }
 
-as3::Alpha_shape_3* as_init2(boost::python::list& lst, const as3::NT& alpha)
-{
-  auto begin = boost::python::stl_input_iterator<as3::Point>(lst);
-  auto end = boost::python::stl_input_iterator<as3::Point>();
+as3::Alpha_shape_3* as_init2(bp::list& lst, const as3::NT& alpha) {
+  auto begin = bp::stl_input_iterator<as3::Point>(lst);
+  auto end = bp::stl_input_iterator<as3::Point>();
   return new as3::Alpha_shape_3(begin, end, alpha);
 }
 
-as3::Alpha_shape_3* as_init3(boost::python::list& lst, double alpha)
-{
-  auto begin = boost::python::stl_input_iterator<as3::Point>(lst);
-  auto end = boost::python::stl_input_iterator<as3::Point>();
+as3::Alpha_shape_3* as_init3(bp::list& lst, double alpha) {
+  auto begin = bp::stl_input_iterator<as3::Point>(lst);
+  auto end = bp::stl_input_iterator<as3::Point>();
   return new as3::Alpha_shape_3(begin, end, alpha);
 }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-as3::Alpha_shape_3* as_init4(boost::python::list& lst,
-                             const as3::NT& alpha, as3::Mode m)
-{
-  auto begin = boost::python::stl_input_iterator<as3::Point>(lst);
-  auto end = boost::python::stl_input_iterator<as3::Point>();
+as3::Alpha_shape_3* as_init4(bp::list& lst, const as3::NT& alpha, as3::Mode m) {
+  auto begin = bp::stl_input_iterator<as3::Point>(lst);
+  auto end = bp::stl_input_iterator<as3::Point>();
   return new as3::Alpha_shape_3(begin, end, alpha, m);
 }
 
-as3::Alpha_shape_3* as_init5(boost::python::list& lst,
-                             double alpha, as3::Mode m)
-{
-  auto begin = boost::python::stl_input_iterator<as3::Point>(lst);
-  auto end = boost::python::stl_input_iterator<as3::Point>();
+as3::Alpha_shape_3* as_init5(bp::list& lst, double alpha, as3::Mode m) {
+  auto begin = bp::stl_input_iterator<as3::Point>(lst);
+  auto end = bp::stl_input_iterator<as3::Point>();
   return new as3::Alpha_shape_3(begin, end, alpha, m);
 }
 
@@ -98,7 +90,8 @@ private:
 
 public:
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  Alpha_shape_3_test(const Alpha_shape_3& as, Classification_type type, const NT& alpha) :
+  Alpha_shape_3_test(const Alpha_shape_3& as, Classification_type type,
+                     const NT& alpha) :
     m_alpha_shape(as),
     m_type(type),
     m_alpha(alpha)
@@ -110,8 +103,7 @@ public:
   {}
 #endif
 
-  bool operator()(Finite_cells_iterator cit) const
-  {
+  bool operator()(Finite_cells_iterator cit) const {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(cit, m_alpha) == m_type;
 #else
@@ -119,8 +111,7 @@ public:
 #endif
   }
 
-  bool operator()(Finite_facets_iterator fit) const
-  {
+  bool operator()(Finite_facets_iterator fit) const {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(*fit, m_alpha) == m_type;
 #else
@@ -128,8 +119,7 @@ public:
 #endif
   }
 
-  bool operator()(Finite_edges_iterator eit) const
-  {
+  bool operator()(Finite_edges_iterator eit) const {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(*eit, m_alpha) == m_type;
 #else
@@ -137,8 +127,7 @@ public:
 #endif
   }
 
-  bool operator()(Finite_vertices_iterator vit) const
-  {
+  bool operator()(Finite_vertices_iterator vit) const {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(vit, m_alpha) == m_type;
 #else
@@ -154,13 +143,12 @@ typedef CGAL::Filter_iterator<as3::Finite_edges_iterator, Test>     Filter_edge_
 typedef CGAL::Filter_iterator<as3::Finite_vertices_iterator, Test>  Filter_vertex_iterator;
 
 
-boost::python::list alpha_shape_cells(const as3::Alpha_shape_3& as,
-                                      as3::Classification_type type
+bp::list alpha_shape_cells(const as3::Alpha_shape_3& as,
+                           as3::Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-                                      , const as3::NT& alpha
+                           , const as3::NT& alpha
 #endif
-                                      )
-{
+                           ) {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   Test test_as_cell(as, type, alpha);
 #else
@@ -168,21 +156,20 @@ boost::python::list alpha_shape_cells(const as3::Alpha_shape_3& as,
 #endif
   Filter_cell_iterator first(as.finite_cells_end(), test_as_cell, as.finite_cells_begin());
   Filter_cell_iterator last(as.finite_cells_end(), test_as_cell, as.finite_cells_end());
-  // return boost::python::range<return_internal_reference<>, Alpha_shape_3>(&Alpha_shape_3::finite_cells_begin,
+  // return bp::range<return_internal_reference<>, Alpha_shape_3>(&Alpha_shape_3::finite_cells_begin,
   //                                                                         &Alpha_shape_3::finite_cells_end);
-  // return boost::python::range<return_internal_reference<>>(first, last);
-  boost::python::list lst;
+  // return bp::range<return_internal_reference<>>(first, last);
+  bp::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
-  boost::python::list alpha_shape_facets(const as3::Alpha_shape_3& as,
-                                         as3::Classification_type type
+  bp::list alpha_shape_facets(const as3::Alpha_shape_3& as,
+                              as3::Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-                                         , const as3::NT& alpha
+                              , const as3::NT& alpha
 #endif
-                                       )
-{
+                              ) {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   Test test_as_facet(as, type, alpha);
 #else
@@ -190,18 +177,17 @@ boost::python::list alpha_shape_cells(const as3::Alpha_shape_3& as,
 #endif
   Filter_facet_iterator first(as.finite_facets_end(), test_as_facet, as.finite_facets_begin());
   Filter_facet_iterator last(as.finite_facets_end(), test_as_facet, as.finite_facets_end());
-  boost::python::list lst;
+  bp::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
-boost::python::list alpha_shape_edges(const as3::Alpha_shape_3& as,
-                                      as3::Classification_type type
+bp::list alpha_shape_edges(const as3::Alpha_shape_3& as,
+                           as3::Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-                                      , const as3::NT& alpha
+                           , const as3::NT& alpha
 #endif
-                                      )
-{
+                           ) {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   Test test_as_edge(as, type, alpha);
 #else
@@ -209,18 +195,17 @@ boost::python::list alpha_shape_edges(const as3::Alpha_shape_3& as,
 #endif
   Filter_edge_iterator first(as.finite_edges_end(), test_as_edge, as.finite_edges_begin());
   Filter_edge_iterator last(as.finite_edges_end(), test_as_edge, as.finite_edges_end());
-  boost::python::list lst;
+  bp::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
-boost::python::list alpha_shape_vertices(const as3::Alpha_shape_3& as,
-                                         as3::Classification_type type
+bp::list alpha_shape_vertices(const as3::Alpha_shape_3& as,
+                              as3::Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-                                         , const as3::NT& alpha
+                              , const as3::NT& alpha
 #endif
-                                         )
-{
+                              ) {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   Test test_as_vertex(as, type, alpha);
 #else
@@ -228,7 +213,7 @@ boost::python::list alpha_shape_vertices(const as3::Alpha_shape_3& as,
 #endif
   Filter_vertex_iterator first(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_begin());
   Filter_vertex_iterator last(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_end());
-  boost::python::list lst;
+  bp::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
@@ -245,8 +230,7 @@ double NT_to_double(as3::NT& ft) { return CGAL::to_double(ft); }
 
 #endif
 
-void export_alpha_shape_3()
-{
+void export_alpha_shape_3() {
   using namespace boost::python;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN

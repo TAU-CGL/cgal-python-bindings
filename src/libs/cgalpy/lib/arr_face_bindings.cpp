@@ -4,32 +4,32 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
-#include <CGALPY/python_iterator_templates.hpp>
+#include <boost/python.hpp>
+
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
+
+namespace bp = boost::python;
 
 Iterator_from_circulator<Ccb_halfedge_circulator>* outer_ccb(Face& f)
-{
-  return new Iterator_from_circulator<Ccb_halfedge_circulator>(f.outer_ccb());
-}
+{ return new Iterator_from_circulator<Ccb_halfedge_circulator>(f.outer_ccb()); }
+
 Iterator_of_circulators<Inner_ccb_iterator>* inner_ccbs(Face& f)
 {
   return new Iterator_of_circulators<Inner_ccb_iterator>(f.inner_ccbs_begin(), f.inner_ccbs_end());
 }
 
 Isolated_vertex_iterator isolated_vertices_begin(Face& f)
-{
-  return f.isolated_vertices_begin();
-}
+{ return f.isolated_vertices_begin(); }
+
 Isolated_vertex_iterator isolated_vertices_end(Face& f)
-{
-  return f.isolated_vertices_end();
-}
-void export_face()
-{
-  using namespace boost::python;
-  class_<Face>("Face")
-    .def(init<>())
+{ return f.isolated_vertices_end(); }
+
+void export_face() {
+  bp::class_<Face>("Face")
+    .def(bp::init<>())
     .def("assign", &Face::assign)
     .def("is_unbounded", &Face::is_unbounded)
     .def("is_fititious", &Face::is_fictitious)
@@ -38,13 +38,13 @@ void export_face()
     .def("number_of_outer_ccbs", &Face::number_of_outer_ccbs)
     .def("splice_isolated_vertices", &Face::splice_isolated_vertices)
     .def("splice_inner_ccbs", &Face::splice_inner_ccbs)
-    .def("outer_ccb", &outer_ccb, return_value_policy<manage_new_object>())
-    .def("inner_ccbs", &inner_ccbs, return_value_policy<manage_new_object>())
+    .def("outer_ccb", &outer_ccb, bp::return_value_policy<bp::manage_new_object>())
+    .def("inner_ccbs", &inner_ccbs, bp::return_value_policy<bp::manage_new_object>())
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
-    .def("isolated_vertices", range<return_internal_reference<>>(&isolated_vertices_begin, &isolated_vertices_end))
+    .def("isolated_vertices", bp::range<bp::return_internal_reference<>>(&isolated_vertices_begin, &isolated_vertices_end))
 #if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL || CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL
     .def("set_data", &Face::set_data)
-    .def<Face::Data& (Face::*)()>("data", &Face::data, return_value_policy<copy_non_const_reference>())
+    .def<Face::Data& (Face::*)()>("data", &Face::data, bp::return_value_policy<bp::copy_non_const_reference>())
 #endif
     ;
   bind_iterator<Iterator_from_circulator<Ccb_halfedge_circulator>>("Ccb_halfedge_iterator");

@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/boolean_set_operations_2_types.hpp>
+#include "CGALPY/boolean_set_operations_2_types.hpp"
 
 void complement0(Polygon_2& pgn, Polygon_with_holes_2& res)
 {

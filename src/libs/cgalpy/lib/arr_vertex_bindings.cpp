@@ -6,25 +6,27 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
-#include <CGALPY/python_iterator_templates.hpp>
+#include <boost/python.hpp>
 
-Iterator_from_circulator<Halfedge_around_vertex_circulator>* halfedge_around_vertex_iterator(Vertex& v)
-{
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
+
+namespace bp = boost::python;
+
+Iterator_from_circulator<Halfedge_around_vertex_circulator>*
+halfedge_around_vertex_iterator(Vertex& v) {
   return new Iterator_from_circulator<Halfedge_around_vertex_circulator>(v.incident_halfedges());
 }
 
-void export_vertex()
-{
-  using namespace boost::python;
-  class_<Vertex>("Vertex")
-    .def(init<>())
-    .def<TPoint_2& (Vertex::*)()>("point", &Vertex::point, return_internal_reference<>())
+void export_vertex() {
+  bp::class_<Vertex>("Vertex")
+    .def(bp::init<>())
+    .def<TPoint_2& (Vertex::*)()>("point", &Vertex::point, bp::return_internal_reference<>())
     .def("is_isolated", &Vertex::is_isolated)
     .def("degree", &Vertex::degree)
-    .def("incident_halfedges", &halfedge_around_vertex_iterator, return_value_policy<manage_new_object>())
+    .def("incident_halfedges", &halfedge_around_vertex_iterator, bp::return_value_policy<bp::manage_new_object>())
 #if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
-    .def<Vertex::Data& (Vertex::*)()>("data", &Vertex::data, return_value_policy<copy_non_const_reference>())
+    .def<Vertex::Data& (Vertex::*)()>("data", &Vertex::data, bp::return_value_policy<bp::copy_non_const_reference>())
     .def("set_data", &Vertex::set_data)
 #endif
     ;

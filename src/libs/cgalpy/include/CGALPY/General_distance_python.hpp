@@ -9,14 +9,12 @@
 #ifndef CGALPY_GENERAL_DISTANCE_PYTHON_HPP
 #define CGALPY_GENERAL_DISTANCE_PYTHON_HPP
 
+#include "CGALPY/Python_functor.hpp"
 
-#include <CGALPY/Python_functor.hpp>
 #include <CGAL/Kd_tree_rectangle.h>
 
 template <typename D_, typename FT_, typename Point_d_, typename Query_item_>
-class General_distance_python
-{
-
+class General_distance_python {
 public:
   typedef D_ D;
   typedef FT_ FT;

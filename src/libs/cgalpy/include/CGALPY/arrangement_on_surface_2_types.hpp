@@ -9,9 +9,10 @@
 #ifndef CGALPY_ARRANGEMENT_ON_SURFACE_2_TYPES_HPP
 #define CGALPY_ARRANGEMENT_ON_SURFACE_2_TYPES_HPP
 
-#include <CGALPY/kernel_types.hpp>
-#include <CGALPY/arrangement_on_surface_2_config.hpp>
 #include <boost/static_assert.hpp>
+
+#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/arrangement_on_surface_2_config.hpp"
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
 #include <CGAL/Arr_linear_traits_2.h>

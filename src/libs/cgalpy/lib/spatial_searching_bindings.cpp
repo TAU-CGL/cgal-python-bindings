@@ -6,87 +6,75 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/spatial_searching_types.hpp>
+#include <boost/python.hpp>
 
-typedef CGAL::Cartesian_d<FT> K;
-typedef K::Point_d Point_d;
+#include "CGALPY/spatial_searching_types.hpp"
+
+namespace bp = boost::python;
+
+typedef CGAL::Cartesian_d<FT>                           K;
+typedef K::Point_d                                      Point_d;
 typedef CGAL::Search_traits_d<K, CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIMENSION>> Search_traits_d;
 //typedef CGAL::Orthogonal_incremental_neighbor_search<Search_traits_d> Orthogonal_incremental_neighbor_search;
 //typedef Orthogonal_incremental_neighbor_search::iterator NN_iterator;
 //typedef Orthogonal_incremental_neighbor_search::Tree Orthogonal_incremental_neighbor_search_tree;
-typedef CGAL::Kd_tree<Search_traits_d> Kd_tree;
-typedef CGAL::Sliding_midpoint<Search_traits_d> Splitter;
-typedef CGAL::Fuzzy_iso_box<Search_traits_d> Fuzzy_iso_box;
-typedef CGAL::Fuzzy_sphere<Search_traits_d> Fuzzy_sphere;
+typedef CGAL::Kd_tree<Search_traits_d>                  Kd_tree;
+typedef CGAL::Sliding_midpoint<Search_traits_d>         Splitter;
+typedef CGAL::Fuzzy_iso_box<Search_traits_d>            Fuzzy_iso_box;
+typedef CGAL::Fuzzy_sphere<Search_traits_d>             Fuzzy_sphere;
 typedef CGAL::Kd_tree_rectangle<FT, CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIMENSION>> Kd_tree_rectangle;
-typedef CGAL::K_neighbor_search<Search_traits_d> K_neighbor_search;
+typedef CGAL::K_neighbor_search<Search_traits_d>        K_neighbor_search;
 typedef General_distance_python<CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIMENSION>, FT, Point_d, Point_d> Distance_python;
-typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python> K_neighbor_search_python;
-typedef CGAL::Euclidean_distance<Search_traits_d> Euclidean_distance;
+typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python>
+                                                        K_neighbor_search_python;
+typedef CGAL::Euclidean_distance<Search_traits_d>       Euclidean_distance;
 
 int get_spatial_searching_dimension()
-{
-  return CGALPY_SPATIAL_SEARCHING_DIMENSION;
-}
+{ return CGALPY_SPATIAL_SEARCHING_DIMENSION; }
 
-static Point_d* init_point_d(int d, bp::list& lst)
-{
-  auto begin = boost::python::stl_input_iterator<FT>(lst);
-  auto end = boost::python::stl_input_iterator<FT>();
+static Point_d* init_point_d(int d, bp::list& lst) {
+  auto begin = bp::stl_input_iterator<FT>(lst);
+  auto end = bp::stl_input_iterator<FT>();
   return new Point_d(d, begin, end);
 }
 
 static const FT* point_d_cartesian_begin(Point_d& p)
-{
-  return p.cartesian_begin();
-}
+{ return p.cartesian_begin(); }
 
 static const FT* point_d_cartesian_end(Point_d& p)
-{
-  return p.cartesian_end();
-}
+{ return p.cartesian_end(); }
 
 template <typename T>
-static T* init_tree()
-{
-  return new T();
-}
+static T* init_tree() { return new T(); }
 
 template <typename T>
-static T* init_tree_from_list(bp::list& lst)
-{
-  auto begin = boost::python::stl_input_iterator<typename T::Point_d >(lst);
-  auto end = boost::python::stl_input_iterator<typename T::Point_d >();
+static T* init_tree_from_list(bp::list& lst) {
+  auto begin = bp::stl_input_iterator<typename T::Point_d >(lst);
+  auto end = bp::stl_input_iterator<typename T::Point_d >();
   return new T(begin, end);
 }
 
 template <typename T>
-void tree_insert(T& tree, bp::list& lst)
-{
-  //copying into a vector because of an apparent bug with boost::python::stl_input_iterator
-  auto begin = boost::python::stl_input_iterator<typename T::Point_d >(lst);
-  auto end = boost::python::stl_input_iterator<typename T::Point_d >();
+void tree_insert(T& tree, bp::list& lst) {
+  //copying into a vector because of an apparent bug with bp::stl_input_iterator
+  auto begin = bp::stl_input_iterator<typename T::Point_d >(lst);
+  auto end = bp::stl_input_iterator<typename T::Point_d >();
   auto v = std::vector<typename T::Point_d>(begin, end);
   tree.insert(v.begin(), v.end());
 }
 
 template <typename T, typename FQI>
-void tree_search(T& tree, FQI& q, bp::list& lst)
-{
+void tree_search(T& tree, FQI& q, bp::list& lst) {
   auto v = std::vector<typename T::Point_d>();
   tree.search(std::back_inserter(v), q);
   for (auto p : v) lst.append(p);
 }
 
 template<typename T>
-void points(T& tree, bp::list& lst)
-{
-  for (auto p : tree) lst.append(p);
-}
+void points(T& tree, bp::list& lst) { for (auto p : tree) lst.append(p); }
 
 template <typename T>
-void bind_kd_tree(const char* python_name)
-{
+void bind_kd_tree(const char* python_name) {
   using namespace bp;
   class_<T, boost::noncopyable>(python_name)
     .def(init<>())
@@ -106,15 +94,13 @@ void bind_kd_tree(const char* python_name)
 }
 
 template <typename T>
-void k_neighbors(T& neighbor_search, bp::list& lst)
-{
+void k_neighbors(T& neighbor_search, bp::list& lst) {
   for (auto it = neighbor_search.begin(); it != neighbor_search.end(); ++it)
     lst.append(bp::make_tuple(it->first, it->second));
 }
 
 template <typename T>
-void bind_neighbor_search(const char* python_name)
-{
+void bind_neighbor_search(const char* python_name) {
   using namespace bp;
   class_<T>(python_name, init<const typename T::Tree&, typename T::Query_item,
    unsigned int, FT, bool, typename T::Distance, bool>())
@@ -122,8 +108,7 @@ void bind_neighbor_search(const char* python_name)
     ;
 }
 
-void export_spatial_searching()
-{
+void export_spatial_searching() {
   using namespace bp;
   class_<Point_d>("Point_d")
     .def(init<>())

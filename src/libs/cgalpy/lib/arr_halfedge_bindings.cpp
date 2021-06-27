@@ -5,8 +5,12 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
-#include <CGALPY/python_iterator_templates.hpp>
+#include <boost/python.hpp>
+
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
+
+namespace bp = boost::python;
 
 Vertex& source(Halfedge& e) { return (*(e.source())); }
 Vertex& target(Halfedge& e) { return (*(e.target())); }
@@ -17,27 +21,23 @@ Face& face(Halfedge& e) { return (*(e.face())); }
 X_monotone_curve_2& curve(Halfedge& e) { return (e.curve()); }
 
 Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
-{
-  return new Iterator_from_circulator<Ccb_halfedge_circulator>(e.ccb());
-}
+{ return new Iterator_from_circulator<Ccb_halfedge_circulator>(e.ccb()); }
 
-void export_halfedge()
-{
-  using namespace boost::python;
-  class_<Halfedge>("Halfedge")
-    .def(init<>())
+void export_halfedge() {
+  bp::class_<Halfedge>("Halfedge")
+    .def(bp::init<>())
     .def("direction", &Halfedge::direction)
-    .def("source", &source, return_value_policy<reference_existing_object>())
-    .def("target", &target, return_value_policy<reference_existing_object>())
-    .def("twin", &twin, return_value_policy<reference_existing_object>())
-    .def("face", &face, return_value_policy<reference_existing_object>())
-    .def("next", &next, return_value_policy<reference_existing_object>())
-    .def("prev", &prev, return_value_policy<reference_existing_object>())
-    .def("curve", &curve, return_value_policy<reference_existing_object>())
-    .def("ccb", &ccb, return_value_policy<manage_new_object>())
+    .def("source", &source, bp::return_value_policy<bp::reference_existing_object>())
+    .def("target", &target, bp::return_value_policy<bp::reference_existing_object>())
+    .def("twin", &twin, bp::return_value_policy<bp::reference_existing_object>())
+    .def("face", &face, bp::return_value_policy<bp::reference_existing_object>())
+    .def("next", &next, bp::return_value_policy<bp::reference_existing_object>())
+    .def("prev", &prev, bp::return_value_policy<bp::reference_existing_object>())
+    .def("curve", &curve, bp::return_value_policy<bp::reference_existing_object>())
+    .def("ccb", &ccb, bp::return_value_policy<bp::manage_new_object>())
 #if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
     .def("set_data", &Halfedge::set_data)
-    .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, return_value_policy<copy_non_const_reference>())
+    .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, bp::return_value_policy<bp::copy_non_const_reference>())
 #endif
     ;
 }

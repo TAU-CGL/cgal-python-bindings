@@ -6,9 +6,14 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
+#include <boost/python.hpp>
 
-void export_arr_Bezier_traits()
-{
-  using namespace boost::python;
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
+
+namespace bp = boost::python;
+
+void export_arr_Bezier_traits() {
+  bp::scope traits_scope = bp::class_<Traits>("Traits")
+    .def(bp::init<>())
+    ;
 }

@@ -6,28 +6,29 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/bounding_volumes_types.hpp>
+#include <boost/python.hpp>
+
+#include "CGALPY/bounding_volumes_types.hpp"
+
+namespace bp = boost::python;
 
 typedef typename CGAL::Min_circle_2_traits_2<Kernel>       Min_circle_2_traits_2;
 typedef typename Min_circle_2_traits_2::Circle             Optimisation_circle_2;
 typedef typename CGAL::Min_circle_2<Min_circle_2_traits_2> Min_circle_2;
 
-Min_circle_2* init_min_circle_2_from_list(bp::list& lst, bool random)
-{
-  auto begin = boost::python::stl_input_iterator<Point_2>(lst);
-  auto end = boost::python::stl_input_iterator<Point_2>();
+Min_circle_2* init_min_circle_2_from_list(bp::list& lst, bool random) {
+  auto begin = bp::stl_input_iterator<Point_2>(lst);
+  auto end = bp::stl_input_iterator<Point_2>();
   return new Min_circle_2(begin, end, random);
 }
 
-void insert_list(Min_circle_2& mc, bp::list& lst)
-{
-  auto begin = boost::python::stl_input_iterator<Point_2>(lst);
-  auto end = boost::python::stl_input_iterator<Point_2>();
+void insert_list(Min_circle_2& mc, bp::list& lst) {
+  auto begin = bp::stl_input_iterator<Point_2>(lst);
+  auto end = bp::stl_input_iterator<Point_2>();
   mc.insert(begin, end);
 }
 
-void export_bounding_volumes()
-{
+void export_bounding_volumes() {
   using namespace boost::python;
   class_<Optimisation_circle_2>("Optimization_circle_2")
     .def(init<>())

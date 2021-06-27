@@ -9,8 +9,9 @@
 #ifndef CGALPY_BOUNDING_VOLUMES_TYPES_HPP
 #define CGALPY_BOUNDING_VOLUMES_TYPES_HPP
 
-#include <CGALPY/bounding_volumes_config.hpp>
-#include <CGALPY/kernel_types.hpp>
+#include "CGALPY/bounding_volumes_config.hpp"
+#include "CGALPY/kernel_types.hpp"
+
 #include <CGAL/Min_circle_2.h>
 #include <CGAL/Min_circle_2_traits_2.h>
 

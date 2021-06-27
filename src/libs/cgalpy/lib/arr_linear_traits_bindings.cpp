@@ -6,21 +6,23 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <CGALPY/arrangement_on_surface_2_types.hpp>
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
 
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
-void export_arr_linear_traits()
-{
-  using namespace boost::python;
-  class_<Curve_2>("Curve_2")
-    .def(init<>())
-    .def(init<Segment_2&>())
-    .def(init<Ray_2&>())
-    .def(init<Line_2&>())
-    .def("source", &Curve_2::source, return_value_policy<copy_const_reference>())
-    .def("target", &Curve_2::target, return_value_policy<copy_const_reference>())
+void export_arr_linear_traits() {
+  bp::scope traits_scope = bp::class_<Traits>("Traits")
+    .def(bp::init<>())
+    ;
+
+  bp::class_<Curve_2>("Curve_2")
+    .def(bp::init<>())
+    .def(bp::init<Segment_2&>())
+    .def(bp::init<Ray_2&>())
+    .def(bp::init<Line_2&>())
+    .def("source", &Curve_2::source, bp::return_value_policy<bp::copy_const_reference>())
+    .def("target", &Curve_2::target, bp::return_value_policy<bp::copy_const_reference>())
     .def("line", &Curve_2::line)
     .def("is_vertical", &Curve_2::is_vertical)
     .def("is_segment", &Curve_2::is_segment)
@@ -28,9 +30,9 @@ void export_arr_linear_traits()
     .def("is_ray", &Curve_2::ray)
     .def("is_line", &Curve_2::is_line)
     .def("line", &Curve_2::line)
-    .def("supporting_line", &Curve_2::supporting_line, return_value_policy<copy_const_reference>())
-    .def("left", &Curve_2::left, return_value_policy<copy_const_reference>())
-    .def("right", &Curve_2::right, return_value_policy<copy_const_reference>())
+    .def("supporting_line", &Curve_2::supporting_line, bp::return_value_policy<bp::copy_const_reference>())
+    .def("left", &Curve_2::left, bp::return_value_policy<bp::copy_const_reference>())
+    .def("right", &Curve_2::right, bp::return_value_policy<bp::copy_const_reference>())
     .def<void (Curve_2::*)()>("set_left", &Curve_2::set_left)
     .def("set_left", set_left)
     .def<void (Curve_2::*)()>("set_right", &Curve_2::set_right)
@@ -40,7 +42,7 @@ void export_arr_linear_traits()
     .def("is_in_y_range", &Curve_2::is_in_y_range)
     .def("is_degenerate", &Curve_2::is_degenerate)
     .def("bbox", &Curve_2::bbox)
-    .def(self_ns::str(self_ns::self))
-    .def(self_ns::repr(self_ns::self))
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
     ;
 }

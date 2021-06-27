@@ -9,11 +9,11 @@
 #ifndef CGALPY_TRIANGULATION_2_TYPES_HPP
 #define CGALPY_TRIANGULATION_2_TYPES_HPP
 
-#include <CGALPY/triangulation_2_config.hpp>
-#include <CGALPY/kernel_types.hpp>
-#include <CGAL/Triangulation_2.h>
-#include <CGAL/Delaunay_triangulation_2.h>
-#include <CGAL/Constrained_triangulation_2.h>
-#include <CGALPY/python_iterator_templates.hpp>
+#include "CGALPY/triangulation_2_config.hpp"
+#include "CGALPY/kernel_types.hpp"
+#include "CGAL/Triangulation_2.h"
+#include "CGAL/Delaunay_triangulation_2.h"
+#include "CGAL/Constrained_triangulation_2.h"
+#include "CGALPY/python_iterator_templates.hpp"
 
 #endif //CGALPY_TRIANGULATION_2_TYPES_HPP
