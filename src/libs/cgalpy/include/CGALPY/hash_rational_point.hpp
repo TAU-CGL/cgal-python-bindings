@@ -6,23 +6,26 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_HASH_POINT
-#define CGALPY_HASH_POINT
+#ifndef CGALPY_HASH_RATIONAL_POINT_HPP
+#define CGALPY_HASH_RATIONAL_POINT_HPP
 
 #include <boost/functional/hash_fwd.hpp>
+#include <boost/functional/hash/hash.hpp>
 
 #include <CGAL/basic.h>
 #include <CGAL/Algebraic_structure_traits.h>
 #include <CGAL/Rational_traits.h>
 
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
+#if (CGALPY_KERNEL == CGALPY_KERNEL_EPEC) || \
+  (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) || \
+  (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ)
 template <typename Point>
 size_t hash_rational_point(Point& p) {
   size_t seed = 0;
-  for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c)
-  {
+  for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c) {
     auto q = (*c).exact();
-    auto simplify = typename CGAL::Algebraic_structure_traits<decltype(q)>::Simplify();
+    auto simplify =
+      typename CGAL::Algebraic_structure_traits<decltype(q)>::Simplify();
     CGAL::Rational_traits<decltype(q)> traits;
     simplify(q);
     boost::hash_combine(seed, CGAL::to_double(traits.numerator(q)));

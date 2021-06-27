@@ -11,6 +11,8 @@
 
 #include <boost/python.hpp>
 
+#include "CGALPY/hash_rational_point.hpp"
+
 namespace bp = boost::python;
 
 template <typename Point>
