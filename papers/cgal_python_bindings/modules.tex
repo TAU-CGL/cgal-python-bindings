@@ -986,20 +986,21 @@ implementations of algorithms supporting
 \item query items representing points and spatial objects.
 \end{compactenum}
 In these searching problems a set $\calP$ of data points in
-$d$-dimensional space is given. These points in $\calP$ are
-preprocessed into a tree data structure, so that given any query item
-$q$ the points of $\calP$ can be browsed efficiently. The approximate
+$d$-dimensional space is given. The points in $\calP$ are preprocessed
+into a tree data structure, so that given any query item $q$ the
+points of $\calP$ can be browsed efficiently. The approximate
 \dDSpatialSearchingPackage{} package is designed for data sets that
 are small enough to store the search structure in main memory (in
-contrast to approaches from databases that assume that the data
-reside in secondary storage).
+contrast to approaches from databases that assume that the data reside
+in secondary storage).
 
 %%%%%%%%
 \begin{table}[!htp]
   \caption{\dDSpatialSearchingPackage{} module flags}
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleFlags,
-    row 2/.style={nodes={minimum height=2.8em}}
+    column 3/.style={nodes={text width=3.5em}},
+    column 4/.style={nodes={text width=21.8em}}
   ] {
 Name & Type &  Default & Description\\
 \myLstinline{SPATIAL\_SEARCHING\_DIMENSION} & Integer & \myLstinline{2} & The dimension of spatial searching related classes\\

@@ -11,10 +11,8 @@
 
 #include <boost/python.hpp>
 #include <boost/static_assert.hpp>
-#include <boost/functional/hash/hash.hpp>
 
 #include "CGALPY/kernel_config.hpp"
-#include "CGALPY/hash_point.hpp"
 
 namespace bp = boost::python;
 
@@ -22,6 +20,13 @@ namespace bp = boost::python;
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
+#include <CGAL/Exact_predicates_exact_constructions_kernel_with_sqrt.h>
+#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
+#include <CGAL/Filtered_kernel.h>
+#include <CGAL/Simple_cartesian.h>
+#include <CGAL/Lazy_exact_nt.h>
+#include <CGAL/Gmpq.h>
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif
@@ -41,6 +46,14 @@ typedef typename bp::return_value_policy<bp::copy_const_reference>      Kernel_r
 #elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 typedef typename CGAL::Exact_predicates_exact_constructions_kernel      Kernel;
 typedef typename bp::return_value_policy<bp::return_by_value>           Kernel_return_value_policy;
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
+typedef typename CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt
+                                                                        Kernel;
+typedef typename bp::return_value_policy<bp::copy_const_reference>      Kernel_return_value_policy;
+#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
+typedef CGAL::Simple_cartesian<CGAL::Lazy_exact_nt<CGAL::Gmpq>>         NT;
+typedef CGAL::Filtered_kernel<NT>                                       Kernel;
+typedef bp::return_value_policy<bp::copy_const_reference>               Kernel_return_value_policy;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif
