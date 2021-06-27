@@ -218,8 +218,7 @@ bool get_points(result& intersection, bp::list& lst) {
 
 template<typename result>
 bp::class_<result> bind_intersection_result(const char* python_name) {
-  using namespace boost::python;
-  auto c = class_<result>(python_name, no_init)
+  auto c = bp::class_<result>(python_name, bp::no_init)
     .def("empty", &empty<result>)
     ;
   return c;
@@ -230,8 +229,7 @@ bp::class_<result> bind_intersection_result(const char* python_name) {
 template<typename T1, typename T2>
 void bind_do_intersect_2T(decltype(CGAL::do_intersect<Kernel>(T1(), T2())))
 {
-  using namespace boost::python;
-  def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
+  bp::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
 }
 
 template<typename, typename>
@@ -259,25 +257,23 @@ void bind_do_intersect() {
 }
 
 void export_intersections_2() {
-  using namespace boost::python;
-
-  def("intersection", &point_iso_rectangle_intersection);
+  bp::def("intersection", &point_iso_rectangle_intersection);
   bind_intersection_result<Point_iso_rectangle_intersection_result>("Point_iso_rectangle_intersection_result")
     .def("get_point", &get_type<Point_iso_rectangle_intersection_result, Point_2>)
     ;
-  def("intersection", &point_iso_rectangle_intersection);
-  def("intersection", &point_line_intersection);
-  def("intersection", &point_ray_intersection);
-  def("intersection", &point_segment_intersection);
-  def("intersection", &point_triangle_intersection);
+  bp::def("intersection", &point_iso_rectangle_intersection);
+  bp::def("intersection", &point_line_intersection);
+  bp::def("intersection", &point_ray_intersection);
+  bp::def("intersection", &point_segment_intersection);
+  bp::def("intersection", &point_triangle_intersection);
 
-  def("intersection", &iso_rectangle_iso_rectangle_intersection);
+  bp::def("intersection", &iso_rectangle_iso_rectangle_intersection);
   bind_intersection_result<Iso_rectangle_iso_rectangle_intersection_result>("Iso_rectangle_iso_rectangle_intersection_result")
     .def("is_iso_rectangle", &is_type<Iso_rectangle_iso_rectangle_intersection_result, Iso_rectangle_2>)
     .def("get_iso_rectangle", &get_type<Iso_rectangle_iso_rectangle_intersection_result, Iso_rectangle_2>)
     ;
 
-  def("intersection", &iso_rectangle_line_intersection);
+  bp::def("intersection", &iso_rectangle_line_intersection);
   bind_intersection_result<Iso_rectangle_line_intersection_result>("Iso_rectangle_line_intersection_result")
     .def("is_point", &is_type<Iso_rectangle_line_intersection_result, Point_2>)
     .def("get_point", &get_type<Iso_rectangle_line_intersection_result, Point_2>)
@@ -285,10 +281,10 @@ void export_intersections_2() {
     .def("get_segment", &get_type<Iso_rectangle_line_intersection_result, Segment_2>)
     ;
 
-  def("intersection", &iso_rectangle_ray_intersection);
-  def("intersection", &iso_rectangle_segment_intersection);
+  bp::def("intersection", &iso_rectangle_ray_intersection);
+  bp::def("intersection", &iso_rectangle_segment_intersection);
 
-  def("intersection", &iso_rectangle_triangle_intersection);
+  bp::def("intersection", &iso_rectangle_triangle_intersection);
   bind_intersection_result<Iso_rectangle_triangle_intersection_result>("Iso_rectangle_triangle_intersection_result")
     .def("is_point", &is_type<Iso_rectangle_triangle_intersection_result, Point_2>)
     .def("get_point", &get_type<Iso_rectangle_triangle_intersection_result, Point_2>)
@@ -307,7 +303,7 @@ void export_intersections_2() {
     .def("get_line", &get_type<Line_line_intersection_result, Line_2>)
     ;
 
-  def("intersection", &line_ray_intersection);
+  bp::def("intersection", &line_ray_intersection);
   bind_intersection_result<Line_ray_intersection_result>("Line_ray_intersection_result")
     .def("is_point", &is_type<Line_ray_intersection_result, Point_2>)
     .def("get_point", &get_type<Line_ray_intersection_result, Point_2>)
@@ -315,10 +311,10 @@ void export_intersections_2() {
     .def("get_ray", &get_type<Line_ray_intersection_result, Ray_2>)
     ;
 
-  def("intersection", &line_segment_intersection);
-  def("intersection", &line_triangle_intersection);
+  bp::def("intersection", &line_segment_intersection);
+  bp::def("intersection", &line_triangle_intersection);
 
-  def("intersection", &ray_ray_intersection);
+  bp::def("intersection", &ray_ray_intersection);
   bind_intersection_result<Ray_ray_intersection_result>("Ray_ray_intersection_result")
     .def("is_point", &is_type<Ray_ray_intersection_result, Point_2>)
     .def("get_point", &get_type<Ray_ray_intersection_result, Point_2>)
@@ -327,13 +323,13 @@ void export_intersections_2() {
     .def("is_ray", &is_type<Ray_ray_intersection_result, Ray_2>)
     .def("get_ray", &get_type<Ray_ray_intersection_result, Ray_2>)
     ;
-  def("intersection", &ray_segment_intersection);
-  def("intersection", &ray_triangle_intersection);
+  bp::def("intersection", &ray_segment_intersection);
+  bp::def("intersection", &ray_triangle_intersection);
 
-  def("intersection", &segment_segment_intersection);
-  def("intersection", &segment_triangle_intersection);
+  bp::def("intersection", &segment_segment_intersection);
+  bp::def("intersection", &segment_triangle_intersection);
 
-  def("intersection", &triangle_triangle_intersection);
+  bp::def("intersection", &triangle_triangle_intersection);
   bind_intersection_result<Triangle_triangle_intersection_result>("Triangle_triangle_intersection_result")
     .def("is_point", &is_type<Triangle_triangle_intersection_result, Point_2>)
     .def("get_point", &get_type<Triangle_triangle_intersection_result, Point_2>)

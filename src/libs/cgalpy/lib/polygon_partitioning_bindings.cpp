@@ -91,31 +91,30 @@ void small_side_angle_bisector_decomposition_2(Small_side_angle_bisector_decompo
 }
 
 void export_polygon_partition_2() {
-  using namespace boost::python;
-  def("approx_convex_partition_2", &approx_convex_partition_2);
-  def("greene_approx_convex_partition_2", &greene_approx_convex_partition_2);
-  def("optimal_convex_partition_2", &optimal_convex_partition_2);
-  def("y_monotone_partition_2", &y_monotone_partition_2);
-  def("partition_is_valid_2", &partition_is_valid_2);
-  def("convex_partition_is_valid_2", &convex_partition_is_valid_2);
-  def("y_monotone_partition_is_valid_2", &y_monotone_partition_is_valid_2);
-  def("is_y_monotone_2", &is_y_monotone_2);
-  def("is_convex_2", &is_convex_2);
+  bp::def("approx_convex_partition_2", &approx_convex_partition_2);
+  bp::def("greene_approx_convex_partition_2", &greene_approx_convex_partition_2);
+  bp::def("optimal_convex_partition_2", &optimal_convex_partition_2);
+  bp::def("y_monotone_partition_2", &y_monotone_partition_2);
+  bp::def("partition_is_valid_2", &partition_is_valid_2);
+  bp::def("convex_partition_is_valid_2", &convex_partition_is_valid_2);
+  bp::def("y_monotone_partition_is_valid_2", &y_monotone_partition_is_valid_2);
+  bp::def("is_y_monotone_2", &is_y_monotone_2);
+  bp::def("is_convex_2", &is_convex_2);
 
-  class_<Polygon_vertical_decomposition_2>("Polygon_vertical_decomposition")
-    .def(init<>())
+  bp::class_<Polygon_vertical_decomposition_2>("Polygon_vertical_decomposition")
+    .def(bp::init<>())
     .def("__call__", &polygon_vertical_decomposition_2<Polygon_2>)
     .def("__call__", &polygon_vertical_decomposition_2<Polygon_with_holes_2>)
     ;
 
-  class_<Polygon_triangulation_decomposition_2>("Polygon_triangulation_decomposition")
-    .def(init<>())
+  bp::class_<Polygon_triangulation_decomposition_2>("Polygon_triangulation_decomposition")
+    .def(bp::init<>())
     .def("__call__", &polygon_triangulation_decomposition_2<Polygon_2>)
     .def("__call__", &polygon_triangulation_decomposition_2<Polygon_with_holes_2>)
     ;
 
-  class_<Small_side_angle_bisector_decomposition_2>("Small_side_angle_bisector_decomposition")
-    .def(init<>())
+  bp::class_<Small_side_angle_bisector_decomposition_2>("Small_side_angle_bisector_decomposition")
+    .def(bp::init<>())
     .def("__call__", &small_side_angle_bisector_decomposition_2)
     ;
 }

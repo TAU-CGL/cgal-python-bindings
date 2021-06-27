@@ -145,37 +145,35 @@ TVertex& finite_vertex(T& t) { return *(t.finite_vertex()); }
 
 template <typename T, typename C>
 void export_triangulation(C c) {
-  using namespace boost::python;
-
-  c.def(init<>())
-    .def(init<T&>())
+  c.def(bp::init<>())
+    .def(bp::init<T&>())
     .def("dimension", &T::dimension)
     .def("number_of_vertices", &T::number_of_vertices)
     .def("number_of_faces", &T::number_of_faces)
-    .def("infinite_face", &infinite_face<T>, return_internal_reference<>())
-    .def("infinite_vertex", &infinite_vertex<T>, return_internal_reference<>())
-    .def("finite_vertex", &finite_vertex<T>, return_internal_reference<>())
+    .def("infinite_face", &infinite_face<T>, bp::return_internal_reference<>())
+    .def("infinite_vertex", &infinite_vertex<T>, bp::return_internal_reference<>())
+    .def("finite_vertex", &finite_vertex<T>, bp::return_internal_reference<>())
     .def("clear", &T::clear)
     .def("insert", &insert_list<T>)
-    .def("insert", &insert_point<T>, return_internal_reference<>())
+    .def("insert", &insert_point<T>, bp::return_internal_reference<>())
     .def("triangle", &triangle<T>)
     .def("circumcenter", &circumcenter<T>)
     .def("flip", &flip<T>)
     .def("remove", &remove<T>)
-    .def("all_vertices", range<return_internal_reference<>>(&T::all_vertices_begin, &T::all_vertices_end))
-    .def("finite_vertices", range<return_internal_reference<>>(&T::finite_vertices_begin, &T::finite_vertices_end))
-    .def("all_edges", &all_edges_iterator<T>, return_value_policy<manage_new_object>())
-    .def("finite_edges", &finite_edges_iterator<T>, return_value_policy<manage_new_object>())
-    .def("all_faces", range<return_internal_reference<>>(&T::all_faces_begin, &T::all_faces_end))
-    .def("finite_faces", range<return_internal_reference<>>(&T::finite_faces_begin, &T::finite_faces_end))
-    .def("points", range<return_internal_reference<>>(&T::points_begin, &T::points_end))
+    .def("all_vertices", bp::range<bp::return_internal_reference<>>(&T::all_vertices_begin, &T::all_vertices_end))
+    .def("finite_vertices", bp::range<bp::return_internal_reference<>>(&T::finite_vertices_begin, &T::finite_vertices_end))
+    .def("all_edges", &all_edges_iterator<T>, bp::return_value_policy<bp::manage_new_object>())
+    .def("finite_edges", &finite_edges_iterator<T>, bp::return_value_policy<bp::manage_new_object>())
+    .def("all_faces", bp::range<bp::return_internal_reference<>>(&T::all_faces_begin, &T::all_faces_end))
+    .def("finite_faces", bp::range<bp::return_internal_reference<>>(&T::finite_faces_begin, &T::finite_faces_end))
+    .def("points", bp::range<bp::return_internal_reference<>>(&T::points_begin, &T::points_end))
     //circulators
-    .def("incident_vertices", &vertices_around_vertex_iterator0<T>, return_value_policy<manage_new_object>())
-    .def("incident_vertices", &vertices_around_vertex_iterator1<T>, return_value_policy<manage_new_object>())
-    .def("incident_edges", &edges_around_vertex_iterator0<T>, return_value_policy<manage_new_object>())
-    .def("incident_edges", &edges_around_vertex_iterator1<T>, return_value_policy<manage_new_object>())
-    .def("incident_faces", &faces_around_vertex_iterator0<T>, return_value_policy<manage_new_object>())
-    .def("incident_faces", &faces_around_vertex_iterator1<T>, return_value_policy<manage_new_object>())
+    .def("incident_vertices", &vertices_around_vertex_iterator0<T>, bp::return_value_policy<bp::manage_new_object>())
+    .def("incident_vertices", &vertices_around_vertex_iterator1<T>, bp::return_value_policy<bp::manage_new_object>())
+    .def("incident_edges", &edges_around_vertex_iterator0<T>, bp::return_value_policy<bp::manage_new_object>())
+    .def("incident_edges", &edges_around_vertex_iterator1<T>, bp::return_value_policy<bp::manage_new_object>())
+    .def("incident_faces", &faces_around_vertex_iterator0<T>, bp::return_value_policy<bp::manage_new_object>())
+    .def("incident_faces", &faces_around_vertex_iterator1<T>, bp::return_value_policy<bp::manage_new_object>())
     .def("mirror_edge", &T::mirror_edge)
     .def("segment", static_cast<Segment_2(T::*)(const TEdge&) const>(&T::segment))
     .def("is_infinite", static_cast<bool (T::*)(const TEdge&) const>(&T::is_infinite))
@@ -187,21 +185,21 @@ void export_triangulation(C c) {
 
 void export_triangulations() {
   using namespace boost::python;
-  auto c0 = class_<Triangulation_2>("Triangulation_2");
-  auto c1 = class_<Delaunay_triangulation_2, bases<Triangulation_2>>("Delaunay_triangulation_2");
+  auto c0 = bp::class_<Triangulation_2>("Triangulation_2");
+  auto c1 = bp::class_<Delaunay_triangulation_2, bases<Triangulation_2>>("Delaunay_triangulation_2");
 
   export_triangulation<Triangulation_2>(c0);
   export_triangulation<Delaunay_triangulation_2>(c1);
 
-  class_<TVertex>("Vertex")
+  bp::class_<TVertex>("Vertex")
     .def<Point_2& (TVertex::*) ()>("point", &TVertex::point, return_internal_reference<>())
     ;
 
-  class_<TEdge>("Edge")
+  bp::class_<TEdge>("Edge")
     .def_readwrite("first", &TEdge::first)
     .def_readwrite("second", &TEdge::second)
     ;
-  class_<TFace>("Face")
+  bp::class_<TFace>("Face")
     .def("is_valid", &TFace::is_valid)
     ;
 
