@@ -44,7 +44,9 @@ void bind_squared_distance_types() {
   bind_squared_distance_first_type< T5, T2, T3, T4, T1 >();
 }
 
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
+#if (CGALPY_KERNEL == CGALPY_KERNEL_EPEC) || \
+  (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) || \
+  (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ)
 typename FT::Exact_type& FT_exact(FT& ft) { return ft.exact(); }
 
 typename FT::Approximate_type& FT_approx(FT& ft) { return ft.approx(); }
@@ -115,7 +117,10 @@ void export_kernel() {
     .def(bp::self /= bp::self)
     .def(-bp::self)
     ;
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
+
+#if (CGALPY_KERNEL == CGALPY_KERNEL_EPEC) || \
+  (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) || \
+  (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ)
   bp::class_<FT>("FT")
     .def(bp::init<double>())
     .def(bp::init<FT::Exact_type>())
