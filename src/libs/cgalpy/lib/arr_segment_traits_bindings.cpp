@@ -7,6 +7,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <boost/python.hpp>
+#include <boost/assert.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/export_point_2.hpp"
@@ -24,9 +25,8 @@ void export_arr_segment_traits() {
 
   const bp::type_info info = bp::type_id<TPoint_2>();
   const bp::converter::registration* reg = bp::converter::registry::query(info);
-  if ((reg == nullptr) || ((*reg).m_to_python == nullptr))
-    export_point_2<TPoint_2>();
-  else traits_scope.attr("Point_2") = bp::handle<>(reg->m_class_object);
+  BOOST_ASSERT((reg == nullptr) || ((*reg).m_to_python == nullptr));
+  traits_scope.attr("Point_2") = bp::handle<>(reg->m_class_object);
 
   bp::class_<Curve_2>("Curve_2")
     .def(bp::init<>())
@@ -53,6 +53,12 @@ void export_arr_segment_traits() {
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
   ;
+
+  const bp::type_info cv_info = bp::type_id<X_monotone_curve_2>();
+  const bp::converter::registration* cv_reg =
+    bp::converter::registry::query(cv_info);
+  BOOST_ASSERT((cv_reg != nullptr) || ((*cv_reg).m_to_python != nullptr));
+  traits_scope.attr("X_monotone_curve_2") = bp::handle<>(cv_reg->m_class_object);
 
   bp::class_<Is_in_x_range_2>("Is_in_x_range_2", bp::no_init)
     .def("__call__", &Is_in_x_range_2::operator());
