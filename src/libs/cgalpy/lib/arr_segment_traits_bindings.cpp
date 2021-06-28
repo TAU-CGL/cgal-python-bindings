@@ -10,7 +10,6 @@
 #include <boost/assert.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/export_point_2.hpp"
 
 namespace bp = boost::python;
 

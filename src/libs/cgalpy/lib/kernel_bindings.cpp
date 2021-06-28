@@ -9,8 +9,7 @@
 
 #include "CGALPY/common.hpp"
 #include "CGALPY/kernel_types.hpp"
-#include "CGALPY/export_point_2.hpp"
-#include "CGALPY/export_segment_2.hpp"
+#include "CGALPY/hash_rational_point.hpp"
 
 namespace bp = boost::python;
 
