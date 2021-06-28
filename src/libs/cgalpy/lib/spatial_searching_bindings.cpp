@@ -76,9 +76,8 @@ void points(T& tree, bp::list& lst) { for (auto p : tree) lst.append(p); }
 
 template <typename T>
 void bind_kd_tree(const char* python_name) {
-  using namespace bp;
-  class_<T, boost::noncopyable>(python_name)
-    .def(init<>())
+  bp::class_<T, boost::noncopyable>(python_name)
+    .def(bp::init<>())
     .def("__init__", make_constructor(&init_tree_from_list<T>))
     .def("insert", static_cast<void (T::*) (const typename T::Point_d&)>(&T::insert))
     .def("insert", &tree_insert<T>)
