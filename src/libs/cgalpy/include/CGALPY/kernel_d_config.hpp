@@ -11,6 +11,7 @@
 
 #define CGALPY_KERNEL_D_EPIC_D                  0
 #define CGALPY_KERNEL_D_EPEC_D                  1
+#define CGALPY_KERNEL_D_SPACE_HOLDER            2
 #define CGALPY_KERNEL_D_CARTESIAN_D_DOUBLE      3
 #define CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ   4
 

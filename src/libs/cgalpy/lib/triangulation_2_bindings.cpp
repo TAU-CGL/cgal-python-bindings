@@ -199,6 +199,7 @@ void export_triangulations() {
     .def_readwrite("first", &TEdge::first)
     .def_readwrite("second", &TEdge::second)
     ;
+
   bp::class_<TFace>("Face")
     .def("is_valid", &TFace::is_valid)
     ;

@@ -4,16 +4,17 @@ set(KERNEL_D_OPTIONS_FILE_INCLUDED)
 # Options
 set(CGALPY_KERNEL_D_EPIC_D 0)
 set(CGALPY_KERNEL_D_EPEC_D 1)
-set(CGALPY_KERNEL_D_CARTESIAN_D_DOUBLE 2)
-set(CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ 3)
+set(CGALPY_KERNEL_D_SPACE_HOLDER 2)
+set(CGALPY_KERNEL_D_CARTESIAN_D_DOUBLE 3)
+set(CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ 4)
 
 # Names
-set(CGALPY_KERNEL_D_SHORT_NAMES "epicd" "epecd" "cd" "clg")
-set(CGALPY_KERNEL_D_NAMES "epic" "epec" "cartesiandDouble" "cartesiandLazyGmpq")
+set(CGALPY_KERNEL_D_SHORT_NAMES "epicd" "epecd" "invalid" "cd" "clg")
+set(CGALPY_KERNEL_D_NAMES "epicd" "epecd" "invalid" "cartesiandDouble" "cartesiandLazyGmpq")
 
 # Default
-SET(CGALPY_KERNEL_D_NAME "epec" CACHE STRING "The kernel to use")
-set(CGALPY_KERNEL_D ${CGALPY_KERNEL_D_EPEC} CACHE INTERNAL "")
+SET(CGALPY_KERNEL_D_NAME "epecd" CACHE STRING "The kernel to use")
+set(CGALPY_KERNEL_D ${CGALPY_KERNEL_D_EPEC_D} CACHE INTERNAL "")
 set_property(CACHE CGALPY_KERNEL_D_NAME PROPERTY STRINGS epicd epecd cartesiandDouble cartesiandLazyGmpq)
 
 # Selection

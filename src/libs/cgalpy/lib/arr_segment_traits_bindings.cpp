@@ -24,7 +24,7 @@ void export_arr_segment_traits() {
 
   const bp::type_info info = bp::type_id<TPoint_2>();
   const bp::converter::registration* reg = bp::converter::registry::query(info);
-  BOOST_ASSERT((reg == nullptr) || ((*reg).m_to_python == nullptr));
+  BOOST_ASSERT((reg != nullptr) && ((*reg).m_to_python != nullptr));
   traits_scope.attr("Point_2") = bp::handle<>(reg->m_class_object);
 
   bp::class_<Curve_2>("Curve_2")

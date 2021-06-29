@@ -24,7 +24,8 @@ set(CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY 3)
 
 set(CGALPY_TRI3_TRAITS_SHORT_NAMES ker p3d)
 set(CGALPY_TRI3_TRAITS_NAMES kernel periodicPlain periodicRegular periodicDelaunay)
-# Default (depends on the selected triangulation
+
+# Default (depends on the selected triangulation)
 if("${CGALPY_TRI3}" EQUAL ${CGALPY_TRI3_PERIODIC_PLAIN})
   SET(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_PERIODIC_PLAIN} CACHE INTERNAL "")
   SET(CGALPY_TRI3_TRAITS_NAME "periodicPlain" CACHE STRING "The 3D Triangulation traits")

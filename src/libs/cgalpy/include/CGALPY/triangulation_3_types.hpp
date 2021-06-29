@@ -8,6 +8,8 @@
 #ifndef CGALPY_TRIANGULATION_3_TYPES_HPP
 #define CGALPY_TRIANGULATION_3_TYPES_HPP
 
+#include <boost/static_assert.hpp>
+
 #include "CGALPY/triangulation_3_config.hpp"
 #include "CGALPY/alpha_shape_3_exact_comparison.hpp"
 #include "CGALPY/kernel_types.hpp"
