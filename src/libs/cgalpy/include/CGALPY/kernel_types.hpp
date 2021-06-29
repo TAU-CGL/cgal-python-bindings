@@ -52,11 +52,11 @@ typedef CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt
                                                                 Kernel;
 typedef Copy_const_reference                Kernel_return_value_policy;
 #elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE
-typedef double                                                      NT;
+typedef double                                                  NT;
 typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
 typedef Copy_const_reference                Kernel_return_value_policy;
 #elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
-typedef CGAL::Lazy_exact_nt<CGAL::Gmpq> NT;
+typedef CGAL::Lazy_exact_nt<CGAL::Gmpq>                         NT;
 typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
 typedef Copy_const_reference                Kernel_return_value_policy;
 #else
@@ -64,8 +64,7 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif
 
 typedef CORE::BigInt                                   BigInt;
-typedef CGAL::Gmpz                                     Gmpz;
-typedef CGAL::Gmpq                                     Gmpq;
+
 typedef Kernel::FT                                     FT;
 typedef Kernel::RT                                     RT;
 typedef Kernel::Point_2                                Point_2;

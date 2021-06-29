@@ -13,11 +13,11 @@
 #include "CGALPY/kernel_types.hpp"
 
 void export_kernel();
+void export_kernel_d();
 void export_arrangement_on_surface_2();
 void export_intersections_2();
 void export_point_location();
 void export_object();
-
 void export_polygon_2();
 void export_polygon_with_holes_2();
 void export_polygon_partition_2();
@@ -28,16 +28,11 @@ void export_general_polygon_set_2();
 void export_polygon_with_holes_2();
 void export_minkowski_sum_2();
 void export_boolean_set_operations_2();
-
 void export_triangulations();
 void export_convex_hull_2_bindings();
-
 void export_spatial_searching();
 void export_bounding_volumes();
-
-void export_kernel();
 void export_triangulation_3();
-
 void export_alpha_shape_3();
 
 #define SET_SCOPE(x)  \
@@ -50,6 +45,8 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
   bp::object package = bp::scope();
   package.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
+
+#ifdef CGALPY_KERNEL_BINDINGS
   {
     SET_SCOPE("Ker")
     export_kernel();
@@ -57,6 +54,14 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
     export_intersections_2();
 #endif
   }
+#endif
+
+#ifdef CGALPY_KERNEL_D_BINDINGS
+  {
+    SET_SCOPE("Kerd")
+    export_kernel_d();
+  }
+#endif
 
 #ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
   {

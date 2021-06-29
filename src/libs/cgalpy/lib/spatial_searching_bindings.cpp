@@ -8,14 +8,22 @@
 
 #include <boost/python.hpp>
 
-#include "CGALPY/spatial_searching_types.hpp"
-#include "CGALPY/hash_rational_point.hpp"
+#include <CGAL/Cartesian_d.h>
+#include <CGAL/Kd_tree.h>
+#include <CGAL/Kd_tree_rectangle.h>
+#include <CGAL/Search_traits_d.h>
+#include <CGAL/K_neighbor_search.h>
+#include <CGAL/Fuzzy_iso_box.h>
+#include <CGAL/Euclidean_distance.h>
+#include <CGAL/Fuzzy_sphere.h>
+
+#include "CGALPY/spatial_searching_config.hpp"
+#include "CGALPY/kernel_d_types.hpp"
+#include "CGALPY/General_distance_python.hpp"
 
 namespace bp = boost::python;
 
-typedef CGAL::Cartesian_d<FT>                           K;
-typedef K::Point_d                                      Point_d;
-typedef CGAL::Search_traits_d<K, CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIMENSION>> Search_traits_d;
+typedef CGAL::Search_traits_d<Kernel_d, Dimension_tag>  Search_traits_d;
 //typedef CGAL::Orthogonal_incremental_neighbor_search<Search_traits_d> Orthogonal_incremental_neighbor_search;
 //typedef Orthogonal_incremental_neighbor_search::iterator NN_iterator;
 //typedef Orthogonal_incremental_neighbor_search::Tree Orthogonal_incremental_neighbor_search_tree;
@@ -23,27 +31,16 @@ typedef CGAL::Kd_tree<Search_traits_d>                  Kd_tree;
 typedef CGAL::Sliding_midpoint<Search_traits_d>         Splitter;
 typedef CGAL::Fuzzy_iso_box<Search_traits_d>            Fuzzy_iso_box;
 typedef CGAL::Fuzzy_sphere<Search_traits_d>             Fuzzy_sphere;
-typedef CGAL::Kd_tree_rectangle<FT, CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIMENSION>> Kd_tree_rectangle;
+typedef CGAL::Kd_tree_rectangle<FT_d, Dimension_tag>    Kd_tree_rectangle;
 typedef CGAL::K_neighbor_search<Search_traits_d>        K_neighbor_search;
-typedef General_distance_python<CGAL::Dimension_tag<CGALPY_SPATIAL_SEARCHING_DIMENSION>, FT, Point_d, Point_d> Distance_python;
+typedef General_distance_python<Dimension_tag, FT_d, Point_d, Point_d>
+                                                        Distance_python;
 typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python>
                                                         K_neighbor_search_python;
 typedef CGAL::Euclidean_distance<Search_traits_d>       Euclidean_distance;
 
 int get_spatial_searching_dimension()
 { return CGALPY_SPATIAL_SEARCHING_DIMENSION; }
-
-static Point_d* init_point_d(int d, bp::list& lst) {
-  auto begin = bp::stl_input_iterator<FT>(lst);
-  auto end = bp::stl_input_iterator<FT>();
-  return new Point_d(d, begin, end);
-}
-
-static const FT* point_d_cartesian_begin(Point_d& p)
-{ return p.cartesian_begin(); }
-
-static const FT* point_d_cartesian_end(Point_d& p)
-{ return p.cartesian_end(); }
 
 template <typename T>
 static T* init_tree() { return new T(); }
@@ -103,41 +100,27 @@ template <typename T>
 void bind_neighbor_search(const char* python_name) {
   using namespace bp;
   class_<T>(python_name, init<const typename T::Tree&, typename T::Query_item,
-   unsigned int, FT, bool, typename T::Distance, bool>())
+   unsigned int, FT_d, bool, typename T::Distance, bool>())
     .def("k_neighbors", &k_neighbors<T>)
     ;
 }
 
 void export_spatial_searching() {
-  bp::class_<Point_d>("Point_d")
-    .def(bp::init<>())
-    .def("__init__", make_constructor(&init_point_d))
-    .def("dimension", &Point_d::dimension)
-    .def("cartesian", &Point_d::cartesian)
-    .def("__getitem__", &Point_d::operator[])
-    .def("coordinates", bp::range<>(&point_d_cartesian_begin, &point_d_cartesian_end))
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self - bp::self)
-    .def("__hash__", &hash_rational_point<Point_d>)
-    ;
+  const bp::type_info info = bp::type_id<Point_d>();
+  const bp::converter::registration* reg = bp::converter::registry::query(info);
+  BOOST_ASSERT((reg != nullptr) && ((*reg).m_to_python != nullptr));
+  bp::scope().attr("Point_d") = bp::handle<>(reg->m_class_object);
 
   bp::class_<Fuzzy_iso_box>("Fuzzy_iso_box")
     .def(bp::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
-    .def(bp::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT>())
+    .def(bp::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT_d>())
     .def("contains", &Fuzzy_iso_box::contains)
     .def("inner_range_intersects", &Fuzzy_iso_box::inner_range_intersects)
     .def("outer_range_contains", &Fuzzy_iso_box::outer_range_contains)
     ;
 
   bp::class_<Fuzzy_sphere>("Fuzzy_sphere")
-    .def(bp::init<Point_d, FT, FT>())
+    .def(bp::init<Point_d, FT_d, FT_d>())
     .def("contains", &Fuzzy_sphere::contains)
     .def("inner_range_intersects", &Fuzzy_sphere::inner_range_intersects)
     .def("outer_range_intersects", &Fuzzy_sphere::outer_range_contains)
@@ -159,19 +142,19 @@ void export_spatial_searching() {
 
   bp::class_<Distance_python>("Distance_python")
     .def(bp::init<bp::object, bp::object, bp::object, bp::object, bp::object>())
-    .def<FT (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)const>("transformed_distance", &Distance_python::transformed_distance)
+    .def<FT_d (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)const>("transformed_distance", &Distance_python::transformed_distance)
     .def("min_distance_to_rectangle", &Distance_python::min_distance_to_rectangle)
     .def("max_distance_to_rectangle", &Distance_python::max_distance_to_rectangle)
-    .def<FT (Distance_python::*) (const FT&)const>("transformed_distance", &Distance_python::transformed_distance)
+    .def<FT_d (Distance_python::*) (const FT_d&)const>("transformed_distance", &Distance_python::transformed_distance)
     .def("inverse_of_transformed_distance", &Distance_python::inverse_of_transformed_distance)
     ;
 
   bp::class_<Euclidean_distance>("Euclidean_distance")
     .def(bp::init<>())
-    .def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Euclidean_distance::Point_d&) const>("transformed_distance", &Euclidean_distance::transformed_distance)
-    .def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("min_distance_to_rectangle", &Euclidean_distance::min_distance_to_rectangle)
-    .def<FT (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("max_distance_to_rectangle", &Euclidean_distance::max_distance_to_rectangle)
-    .def<FT (Euclidean_distance::*) (FT) const>("transformed_distance", &Euclidean_distance::transformed_distance)
+    .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Euclidean_distance::Point_d&) const>("transformed_distance", &Euclidean_distance::transformed_distance)
+    .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("min_distance_to_rectangle", &Euclidean_distance::min_distance_to_rectangle)
+    .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("max_distance_to_rectangle", &Euclidean_distance::max_distance_to_rectangle)
+    .def<FT_d (Euclidean_distance::*) (FT_d) const>("transformed_distance", &Euclidean_distance::transformed_distance)
     //.def("inverse_of_transformed_distance", &Euclidean_distance::inverse_of_transformed_distance)
     ;
 
