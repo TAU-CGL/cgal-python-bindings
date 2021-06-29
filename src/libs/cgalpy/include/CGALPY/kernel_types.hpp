@@ -9,13 +9,10 @@
 #ifndef CGALPY_KERNEL_TYPES_HPP
 #define CGALPY_KERNEL_TYPES_HPP
 
-#include <boost/python.hpp>
 #include <boost/static_assert.hpp>
 
 #include "CGALPY/types.hpp"
 #include "CGALPY/kernel_config.hpp"
-
-namespace bp = boost::python;
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
@@ -23,6 +20,9 @@ namespace bp = boost::python;
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
 #include <CGAL/Exact_predicates_exact_constructions_kernel_with_sqrt.h>
+#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE
+#include <CGAL/Filtered_kernel.h>
+#include <CGAL/Simple_cartesian.h>
 #elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
 #include <CGAL/Filtered_kernel.h>
 #include <CGAL/Simple_cartesian.h>
@@ -51,9 +51,13 @@ typedef Return_by_value                     Kernel_return_value_policy;
 typedef CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt
                                                                 Kernel;
 typedef Copy_const_reference                Kernel_return_value_policy;
+#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE
+typedef double                                                      NT;
+typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
+typedef Copy_const_reference                Kernel_return_value_policy;
 #elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
-typedef CGAL::Simple_cartesian<CGAL::Lazy_exact_nt<CGAL::Gmpq>> NT;
-typedef CGAL::Filtered_kernel<NT>                               Kernel;
+typedef CGAL::Lazy_exact_nt<CGAL::Gmpq> NT;
+typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
 typedef Copy_const_reference                Kernel_return_value_policy;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");

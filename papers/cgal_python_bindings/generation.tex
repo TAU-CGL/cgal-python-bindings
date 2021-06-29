@@ -68,8 +68,9 @@ see Section~\ref{ssec:modules:aos2} for more details on the
   \caption{Module names and short names}
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleName] {
-    Module & Name & Short Name\\ 2D and 3D Kernel & \myLstinline{KERNEL} &
-      \myLstinline{KER}\\
+    Module & Name & Short Name\\
+    2D and 3D Kernel & \myLstinline{KERNEL} & \myLstinline{KER}\\
+    $D$ Kernel & \myLstinline{KERNEL\_D} & \myLstinline{KERD}\\
     2D Arrangements on Surfaces & \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2} &
       \myLstinline{AOS2}\\
     3D Alpha shapes & \myLstinline{ALPHA\_SHAPE\_3} & \myLstinline{AS2}\\
@@ -242,18 +243,20 @@ Name & Type & Default & Description\\
   \centering\begin{tikzpicture}
     \matrix (first) [tableBindingSelection] {
 Name & Type & Default & Description\\
-\myLstinline{ARRANGEMENT\_ON\_SURFACE\_2\_BINDINGS}              & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D arrangement instances\\
-\myLstinline{ALPHA\_SHAPE\_3\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 3D Alpha shape instances\\
-\myLstinline{BOOLEAN\_SET\_OPERATIONS\_2\_BINDINGS} & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D Boolean set operation instances\\
-\myLstinline{BOUNDING\_VOLUMES\_BINDINGS}           & Boolean & \myLstinline{false} & Determines whether to generate bindings for bounding volume instances\\
-\myLstinline{CONVEX\_HULL\_2\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D convex hull instances\\
-\myLstinline{CONVEX\_HULL\_3\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 3D convex hull instances\\
-\myLstinline{POLYGON\_2\_BINDINGS}                  & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D polygon instances\\
-\myLstinline{POLYGON\_PARTITIONING\_BINDINGS}       & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D polygon partitioning instances\\
-\myLstinline{MINKOWSKI\_SUM\_2\_BINDINGS}           & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D Minkowski sum instances\\
-\myLstinline{SPATIAL\_SEARCHING\_BINDINGS}          & Boolean & \myLstinline{false} & Determines whether to generate bindings for spatial searching instances\\
-\myLstinline{TRIANGULATION\_2\_BINDINGS}            & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D triangulation instances\\
-\myLstinline{TRIANGULATION\_3\_BINDINGS}            & Boolean & \myLstinline{false} & Determines whether to generate bindings for 3D triangulation instances\\
+\cmakeLstinline{KERNEL\_BINDINGS}                      & Boolean & \myLstinline{true}  & Determines whether to generate bindings for 2,3 Kernel types\\
+\cmakeLstinline{KERNEL\_D\_BINDINGS}                   & Boolean & \myLstinline{true}  & Determines whether to generate bindings for dD Kernel types\\
+\cmakeLstinline{ARRANGEMENT\_ON\_SURFACE\_2\_BINDINGS} & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D arrangement instances\\
+\cmakeLstinline{ALPHA\_SHAPE\_3\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 3D Alpha shape instances\\
+\cmakeLstinline{BOOLEAN\_SET\_OPERATIONS\_2\_BINDINGS} & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D Boolean set operation instances\\
+\cmakeLstinline{BOUNDING\_VOLUMES\_BINDINGS}           & Boolean & \myLstinline{false} & Determines whether to generate bindings for bounding volume instances\\
+\cmakeLstinline{CONVEX\_HULL\_2\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D convex hull instances\\
+\cmakeLstinline{CONVEX\_HULL\_3\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 3D convex hull instances\\
+\cmakeLstinline{POLYGON\_2\_BINDINGS}                  & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D polygon instances\\
+\cmakeLstinline{POLYGON\_PARTITIONING\_BINDINGS}       & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D polygon partitioning instances\\
+\cmakeLstinline{MINKOWSKI\_SUM\_2\_BINDINGS}           & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D Minkowski sum instances\\
+\cmakeLstinline{SPATIAL\_SEARCHING\_BINDINGS}          & Boolean & \myLstinline{false} & Determines whether to generate bindings for spatial searching instances\\
+\cmakeLstinline{TRIANGULATION\_2\_BINDINGS}            & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D triangulation instances\\
+\cmakeLstinline{TRIANGULATION\_3\_BINDINGS}            & Boolean & \myLstinline{false} & Determines whether to generate bindings for 3D triangulation instances\\
   };
  \end{tikzpicture}
  \label{tab:sel}

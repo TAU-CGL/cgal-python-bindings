@@ -20,6 +20,7 @@
 #include <CGAL/Fuzzy_iso_box.h>
 #include <CGAL/Euclidean_distance.h>
 #include <CGAL/Fuzzy_sphere.h>
+
 #include <CGALPY/General_distance_python.hpp>
 
 #endif //CGALPY_SPATIAL_SEARCHING_TYPES_HPP
