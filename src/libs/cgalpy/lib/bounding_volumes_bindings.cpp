@@ -8,7 +8,11 @@
 
 #include <boost/python.hpp>
 
-#include "CGALPY/bounding_volumes_types.hpp"
+#include "CGALPY/bounding_volumes_config.hpp"
+#include "CGALPY/kernel_types.hpp"
+
+#include <CGAL/Min_circle_2.h>
+#include <CGAL/Min_circle_2_traits_2.h>
 
 namespace bp = boost::python;
 
