@@ -6,12 +6,15 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_KERNEL_D_D_TYPES_HPP
-#define CGALPY_KERNEL_D_D_TYPES_HPP
+#ifndef CGALPY_KERNEL_D_TYPES_HPP
+#define CGALPY_KERNEL_D_TYPES_HPP
 
 #include <boost/static_assert.hpp>
 
+#include <CGAL/Dimension.h>
+
 #include "CGALPY/kernel_d_config.hpp"
+
 #if CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPIC_D
 #include <CGAL/Epick_d.h>
 #elif CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D
@@ -25,8 +28,19 @@
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D");
 #endif
+
 #include "CGALPY/types.hpp"
 
+// Dimention tag
+#if CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_DYNAMIC
+typedef CGAL::Dimension_tag<CGALPY_KERNEL_D_DIMENSION>          Dimension_tag;
+#elif CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_STATIC
+typedef CGAL::Dynamic_dimension_tag                             Dimension_tag;
+#else
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D_DIMENSION_TAG");
+#endif
+
+// dD Kernel
 #if CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPIC_D
 typedef CGAL::Epicd_d<Dimension_tag>                            Kernel_d;
 typedef Copy_const_reference                Kernel_return_value_policy;

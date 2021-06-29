@@ -13,11 +13,11 @@ else:
 
 CGALPY = importlib.import_module(lib)
 
-Ker = CGALPY.Ker
+Kerd = CGALPY.Kerd
 SS = CGALPY.SS
 
-FT = Ker.FT
-Gmpq = Ker.Gmpq
+FT = Kerd.FT
+Gmpq = Kerd.Gmpq
 Point_d = SS.Point_d
 
 # Compile the bindings with the CMake variable CGALPY_SPATIAL_SEARCHING_DIMENSION set to 2

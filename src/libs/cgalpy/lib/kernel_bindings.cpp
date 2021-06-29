@@ -9,9 +9,13 @@
 
 #include "CGALPY/common.hpp"
 #include "CGALPY/kernel_types.hpp"
-#include "CGALPY/hash_rational_point.hpp"
+#include "CGALPY/Hash_rational_point.hpp"
+#include "CGALPY/export_ft.hpp"
 
 namespace bp = boost::python;
+
+extern void export_gmpz();
+extern void export_gmpq();
 
 Kernel::Equal_2 kernel_equal_2(Kernel& k)
 { return (Kernel::Equal_2)(k.equal_2_object()); }
@@ -43,16 +47,6 @@ void bind_squared_distance_types() {
   bind_squared_distance_first_type< T5, T2, T3, T4, T1 >();
 }
 
-#if (CGALPY_KERNEL == CGALPY_KERNEL_EPEC) || \
-  (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) || \
-  (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ)
-typename FT::Exact_type& FT_exact(FT& ft) { return ft.exact(); }
-
-typename FT::Approximate_type& FT_approx(FT& ft) { return ft.approx(); }
-#endif
-
-double FT_to_double(FT& ft) { return CGAL::to_double(ft); }
-
 Point_2 transform_point(Aff_transformation_2& t, Point_2& p)
 { return t.transform(p); }
 
@@ -65,86 +59,37 @@ Direction_2 transform_direction(Aff_transformation_2& t, Direction_2& d)
 Line_2 transform_line(Aff_transformation_2& t, Line_2& l)
 { return t.transform(l); }
 
+// Determine whether the dD kernel is an an EPEC type.
+// An EPEC type has a non trivial FT
+constexpr bool is_epec_type() {
+  return ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||
+          (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||
+          (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ));
+}
+
 void export_kernel() {
-  bp::class_<Gmpz>("Gmpz")
-    .def(bp::init<int>())
-    .def(bp::init<Gmpz&>())
-    .def("to_double", &Gmpz::to_double)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self + bp::self)
-    .def(bp::self += bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self -= bp::self)
-    .def(bp::self * bp::self)
-    .def(bp::self *= bp::self)
-    .def(bp::self / bp::self)
-    .def(bp::self /= bp::self)
-    ;
+  const bp::type_info info_gmpz = bp::type_id<CGAL::Gmpz>();
+  const auto* reg_gmpz = bp::converter::registry::query(info_gmpz);
+  if ((reg_gmpz == nullptr) || ((*reg_gmpz).m_to_python == nullptr))
+    export_gmpz();
+  else bp::scope().attr("Gmpz") = bp::handle<>(reg_gmpz->m_class_object);
 
-  bp::class_<Gmpq>("Gmpq")
-    .def(bp::init<Gmpz, Gmpz>())
-    .def(bp::init<unsigned long, unsigned long>())
-    .def(bp::init<const std::string&>())
-    .def(bp::init<Gmpq&>())
-    .def(bp::init<double>())
-    .def("to_double", &Gmpq::to_double)
-    .def("numerator", &Gmpq::numerator)
-    .def("denominator", &Gmpq::denominator)
-    .def("size", &Gmpq::size)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self + bp::self)
-    .def(bp::self += bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self -= bp::self)
-    .def(bp::self * bp::self)
-    .def(bp::self *= bp::self)
-    .def(bp::self / bp::self)
-    .def(bp::self /= bp::self)
-    .def(-bp::self)
-    ;
+  const bp::type_info info_gmpq = bp::type_id<CGAL::Gmpq>();
+  const auto* reg_gmpq = bp::converter::registry::query(info_gmpq);
+  if ((reg_gmpq == nullptr) || ((*reg_gmpq).m_to_python == nullptr))
+    export_gmpq();
+  else bp::scope().attr("Gmpq") = bp::handle<>(reg_gmpq->m_class_object);
 
-#if (CGALPY_KERNEL == CGALPY_KERNEL_EPEC) || \
-  (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) || \
-  (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ)
-  bp::class_<FT>("FT")
-    .def(bp::init<double>())
-    .def(bp::init<FT::Exact_type>())
-    .def(bp::init<FT>())
-    .def("exact", &FT_exact, bp::return_internal_reference<>())
-    //.def("approx", &FT_approx, return_internal_reference<>())
-    .def("to_double", &FT_to_double)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self + bp::self)
-    .def(bp::self += bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self -= bp::self)
-    .def(bp::self * bp::self)
-    .def(bp::self *= bp::self)
-    .def(bp::self / bp::self)
-    .def(bp::self /= bp::self)
-    .def(-bp::self)
-    ;
+#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                           \
+     (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||                 \
+     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
+  const bp::type_info info_ft = bp::type_id<FT>();
+  const auto* reg_ft = bp::converter::registry::query(info_gmpq);
+  if ((reg_ft == nullptr) || ((*reg_ft).m_to_python == nullptr)) {
+    auto ftc = bp::class_<FT>("FT");
+    export_ft<FT>(ftc);
+  }
+  else bp::scope().attr("FT") = bp::handle<>(reg_ft->m_class_object);
 #endif
 
   //class_<RT>("RT")
@@ -169,7 +114,6 @@ void export_kernel() {
     .value("ON_NEGATIVE_SIDE", CGAL::ON_NEGATIVE_SIDE)
     .value("ON_ORIENTED_BOUNDARY", CGAL::ON_ORIENTED_BOUNDARY)
     .value("ON_POSITIVE_SIDE", CGAL::ON_POSITIVE_SIDE)
-
 
     //CGAL::Orientation
     .value("LEFT_TURN", CGAL::LEFT_TURN)
@@ -256,7 +200,7 @@ void export_kernel() {
     .def(bp::self -= Vector_2())
     .def(bp::self + Vector_2())
     .def(bp::self - Vector_2())
-    .setattr("__hash__", &hash_rational_point<Point_2>)
+    .setattr("__hash__", &Hash_rational_point<is_epec_type()>::operator()<Point_2>)
     ;
 
   bp::class_<Segment_2>("Segment_2")
@@ -283,7 +227,7 @@ void export_kernel() {
     .def(bp::self_ns::repr(bp::self_ns::self))
     .def(bp::self == bp::self)
     .def(bp::self != bp::self)
-    //.setattr("__hash__", &hash<Segment_2>)
+    // .setattr("__hash__", &hash<Segment_2>)
     ;
 
   bp::class_<Line_2>("Line_2")

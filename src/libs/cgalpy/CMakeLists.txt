@@ -3,6 +3,10 @@
 # Add source files
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
 
+if (GMP_FOUND)
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gmp.cpp)
+endif()
+
 if (CGALPY_KERNEL_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
   if (CGALPY_KERNEL_INTERSECTION_BINDINGS)

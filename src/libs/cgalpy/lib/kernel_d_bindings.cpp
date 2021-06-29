@@ -9,18 +9,13 @@
 
 #include "CGALPY/common.hpp"
 #include "CGALPY/kernel_d_types.hpp"
-#include "CGALPY/hash_rational_point.hpp"
+#include "CGALPY/Hash_rational_point.hpp"
+#include "CGALPY/export_ft.hpp"
 
 namespace bp = boost::python;
 
-#if (CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) || \
-  (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_LAZY_GMPQ)
-typename FT_d::Exact_type& FT_exact(FT_d& ft) { return ft.exact(); }
-
-typename FT_d::Approximate_type& FT_approx(FT_d& ft) { return ft.approx(); }
-#endif
-
-double FT_to_double(FT_d& ft) { return CGAL::to_double(ft); }
+extern void export_gmpz();
+extern void export_gmpq();
 
 static Point_d* init_point_d(int d, bp::list& lst) {
   auto begin = bp::stl_input_iterator<FT_d>(lst);
@@ -34,34 +29,35 @@ static const FT_d* point_d_cartesian_begin(Point_d& p)
 static const FT_d* point_d_cartesian_end(Point_d& p)
 { return p.cartesian_end(); }
 
+// Determine whether the dD kernel is an an EPEC type.
+// An EPEC type has a non trivial FT
+constexpr bool is_epec_d_type() {
+  return ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||
+          (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ));
+}
+
 void export_kernel_d() {
-#if (CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) || \
-  (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_LAZY_GMPQ)
-  bp::class_<FT_d>("FT")
-    .def(bp::init<double>())
-    .def(bp::init<FT_d::Exact_type>())
-    .def(bp::init<FT_d>())
-    .def("exact", &FT_exact, bp::return_internal_reference<>())
-    //.def("approx", &FT_approx, return_internal_reference<>())
-    .def("to_double", &FT_to_double)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self + bp::self)
-    .def(bp::self += bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self -= bp::self)
-    .def(bp::self * bp::self)
-    .def(bp::self *= bp::self)
-    .def(bp::self / bp::self)
-    .def(bp::self /= bp::self)
-    .def(-bp::self)
-    ;
+  const bp::type_info info_gmpz = bp::type_id<CGAL::Gmpz>();
+  const auto* reg_gmpz = bp::converter::registry::query(info_gmpz);
+  if ((reg_gmpz == nullptr) || ((*reg_gmpz).m_to_python == nullptr))
+    export_gmpz();
+  else bp::scope().attr("Gmpz") = bp::handle<>(reg_gmpz->m_class_object);
+
+  const bp::type_info info_gmpq = bp::type_id<CGAL::Gmpq>();
+  const auto* reg_gmpq = bp::converter::registry::query(info_gmpq);
+  if ((reg_gmpq == nullptr) || ((*reg_gmpq).m_to_python == nullptr))
+    export_gmpq();
+  else bp::scope().attr("Gmpq") = bp::handle<>(reg_gmpq->m_class_object);
+
+#if (CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||              \
+  (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ)
+  const bp::type_info info_ftd = bp::type_id<FT_d>();
+  const auto* reg_ftd = bp::converter::registry::query(info_ftd);
+  if ((reg_ftd == nullptr) || ((*reg_ftd).m_to_python == nullptr)) {
+    auto ftc = bp::class_<FT_d>("FT");
+    export_ft<FT_d>(ftc);
+  }
+  else bp::scope().attr("FT") = bp::handle<>(reg_ftd->m_class_object);
 #endif
 
   bp::class_<Point_d>("Point_d")
@@ -80,6 +76,6 @@ void export_kernel_d() {
     .def(bp::self <= bp::self)
     .def(bp::self >= bp::self)
     .def(bp::self - bp::self)
-    .def("__hash__", &hash_rational_point<Point_d>)
+    .setattr("__hash__", &Hash_rational_point<is_epec_d_type()>::operator()<Point_d>)
     ;
 }
