@@ -67,6 +67,7 @@ set(CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
     CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
 
 select_kernel()
+select_kernel_d()
 select_arrangement_2()
 select_polygon_2()
 select_minkowski_sum_2()
