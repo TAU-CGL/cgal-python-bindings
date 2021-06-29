@@ -6,9 +6,17 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <std/vector.hpp>
+
 #include <boost/python.hpp>
 
-#include "CGALPY/convex_hull_2_types.hpp"
+#include "CGALPY/convex_hull_2_config.hpp"
+#include "CGALPY/kernel_types.hpp"
+
+#include <CGAL/convex_hull_2.h>
+#include <CGAL/ch_eddy.h>
+#include <CGAL/ch_jarvis.h>
+#include <CGAL/ch_melkman.h>
 
 namespace bp = boost::python;
 
