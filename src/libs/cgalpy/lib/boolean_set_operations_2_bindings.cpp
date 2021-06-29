@@ -6,9 +6,15 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <std/vector>
+
 #include <boost/python.hpp>
 
-#include "CGALPY/boolean_set_operations_2_types.hpp"
+#include "CGALPY/boolean_set_operations_2_config.hpp"
+#include "CGALPY/polygon_2_types.hpp"
+
+#include <CGAL/connect_holes.h>
+#include <CGAL/Boolean_set_operations_2.h>
 
 namespace bp = boost::python;
 

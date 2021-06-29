@@ -8,7 +8,13 @@
 
 #include <boost/python.hpp>
 
-#include "CGALPY/polygon_partitioning_types.hpp"
+#include "CGALPY/polygon_partitioning_config.hpp"
+#include "CGALPY/polygon_2_types.hpp"
+
+#include <CGAL/partition_2.h>
+#include <CGAL/Polygon_vertical_decomposition_2.h>
+#include <CGAL/Polygon_triangulation_decomposition_2.h>
+#include <CGAL/Small_side_angle_bisector_decomposition_2.h>
 
 namespace bp = boost::python;
 
