@@ -26,6 +26,8 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # Binding options. Notice that The default value of option is OFF.
+option(CGALPY_KERNEL_BINDINGS                   "Compile bindings for 2,3 Kernel" ON)
+option(CGALPY_KERNEL_D_BINDINGS                 "Compile bindings for dD Kernel")
 option(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS "Compile bindings for 2D Arrangements on Surfaces")
 option(CGALPY_ALPHA_SHAPE_3_BINDINGS            "Compile bindings for 3D Alpha Shapes")
 option(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS "Compile bindings for 2D boolean set operations")
@@ -40,6 +42,7 @@ option(CGALPY_TRIANGULATION_2_BINDINGS          "Compile bindings for 2D triangu
 option(CGALPY_TRIANGULATION_3_BINDINGS          "Compile bindings for 3D triangulations")
 option(CGALPY_AOS2_POINT_LOCATION_BINDINGS      "Compile bindings for point location")
 option(CGALPY_KERNEL_INTERSECTION_BINDINGS      "Compile bindings for intersections")
+option(CGALPY_KERNEL_D_BINDINGS                 "Compile bindings for dD Kernel")
 
 
 include(alpha_shape_3_options)
@@ -48,6 +51,7 @@ include(boolean_set_operations_2_options)
 include(bounding_volumes_options)
 include(convex_hull_2_options)
 include(kernel_options)
+include(kernel_d_options)
 include(polygon_2_options)
 include(minkowski_sum_2)
 include(polygon_partitioning_options)

@@ -2,9 +2,16 @@
 
 # Add source files
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
-if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
+
+if (CGALPY_KERNEL_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
+  if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
+  endif()
+endif()
+
+if (CGALPY_KERNEL_D_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_d_bindings.cpp)
 endif()
 
 if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
@@ -119,8 +126,15 @@ target_link_libraries(CGALPY
 
 set(CGALPY_LIB_NAME "CGALPY")
 if (NOT CGALPY_FIXED_LIBRARY_NAME)
-  get_kernel_lib_name(ret)
-  set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  if (CGALPY_KERNEL_BINDINGS)
+    get_kernel_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
+  # dD Kernel
+  if (CGALPY_KERNEL_D_BINDINGS)
+    get_kernel_d_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
   # 3D Alpha shape
   if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
     get_alpha_shape_3_lib_name(ret)

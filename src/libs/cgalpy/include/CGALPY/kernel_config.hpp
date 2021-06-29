@@ -19,7 +19,8 @@
 #define CGALPY_KERNEL_EPIC                                  0
 #define CGALPY_KERNEL_EPEC                                  1
 #define CGALPY_KERNEL_EPEC_WITH_SQRT                        2
-#define CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ   3
+#define CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE      3
+#define CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ   4
 
 #ifndef CGALPY_KERNEL
 #define CGALPY_KERNEL 0
