@@ -80,5 +80,16 @@ select_polygon_partitioning()
 select_triangulation_3()
 select_alpha_shape_3()
 
+if ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
+    (${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPEC_D}))
+  find_package(Eigen3 3.3.5)
+  if (NOT EIGEN3_FOUND)
+    SET(CGALPY_KERNEL_D_BINDINGS OFF)
+    SET(CGALPY_SPATIAL_SEARCHING_BINDINGS OFF)
+    message(WARNING "Eigen3 not found!\nTurning of the generations of\n(i) dD Kernel, and\n(ii) spatial searching bindings")
+  endif()
+  include(CGAL_Eigen3_support)
+endif()
+
 # Add subdirectories
 add_subdirectory(libs)
