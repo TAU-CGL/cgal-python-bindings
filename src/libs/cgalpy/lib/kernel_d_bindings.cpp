@@ -78,4 +78,26 @@ void export_kernel_d() {
     .def(bp::self - bp::self)
     .setattr("__hash__", &Hash_rational_point<is_epec_d_type()>::operator()<Point_d>)
     ;
+
+  bp::class_<Segment_d>("Segment_d")
+    .def(bp::init<Point_d&, Point_d&>())
+    .def("source", &Segment_d::source, Return_by_value())
+    .def("target", &Segment_d::target, Kernel_d_return_value_policy())
+    .def("vertex", &Segment_d::vertex, Kernel_d_return_value_policy())
+    .def("point", &Segment_d::point, Kernel_d_return_value_policy())
+    .def("__getitem__", &Segment_d::operator[], Kernel_d_return_value_policy())
+    .def("min", &Segment_d::min, Kernel_d_return_value_policy())
+    .def("max", &Segment_d::max, Kernel_d_return_value_policy())
+    .def("opposite", &Segment_d::opposite)
+    .def("supporting_line", &Segment_d::supporting_line)
+    .def("squared_length", &Segment_d::squared_length)
+    .def("direction", &Segment_d::direction)
+    .def("has_on", &Segment_d::has_on)
+    .def("is_degenerate", &Segment_d::is_degenerate)
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(bp::self == bp::self)
+    .def(bp::self != bp::self)
+    // .setattr("__hash__", &hash<Segment_d>)
+    ;
 }
