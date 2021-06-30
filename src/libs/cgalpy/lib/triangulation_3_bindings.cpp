@@ -79,7 +79,7 @@ void export_delaunay_triangulation_3() {
   bp::class_<tri3::Delaunay_triangulation_3>("Delaunay_triangulation_3")
     .def(bp::init<>())
     .def(bp::init<const tri3::Traits&>())
-    .def("__init__", make_constructor(&dt3_init))
+    .def("__init__", bp::make_constructor(&dt3_init))
     // Insertion
     .def("insert", insert1)
     .def("insert", insert2)
