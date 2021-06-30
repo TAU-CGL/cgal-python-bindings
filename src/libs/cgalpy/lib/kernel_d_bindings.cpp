@@ -74,6 +74,8 @@ void bind_do_intersect_d() {
 }
 
 void export_kernel_d() {
+#if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
+     (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
   const bp::type_info info_gmpz = bp::type_id<CGAL::Gmpz>();
   const auto* reg_gmpz = bp::converter::registry::query(info_gmpz);
   if ((reg_gmpz == nullptr) || ((*reg_gmpz).m_to_python == nullptr))
@@ -86,8 +88,6 @@ void export_kernel_d() {
     export_gmpq();
   else bp::scope().attr("Gmpq") = bp::handle<>(reg_gmpq->m_class_object);
 
-#if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
-     (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
   const bp::type_info info_ftd = bp::type_id<FT_d>();
   const auto* reg_ftd = bp::converter::registry::query(info_ftd);
   if ((reg_ftd == nullptr) || ((*reg_ftd).m_to_python == nullptr)) {
