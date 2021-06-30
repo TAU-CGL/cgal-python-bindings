@@ -182,7 +182,8 @@ void export_kernel() {
     .def("bbox", &Point_2::bbox)
     .def("cartesian", &Point_2::cartesian, Kernel_return_value_policy())
     .def("__getitem__", &Point_2::operator[], Kernel_return_value_policy())
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
+#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
+     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
     // TODO: Returning address of local variable or temporary with EPEC kernel
     .def("coordinates", bp::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end))
 #endif
