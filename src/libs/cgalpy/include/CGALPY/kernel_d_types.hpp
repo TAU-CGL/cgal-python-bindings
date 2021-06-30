@@ -43,21 +43,22 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D_DIMENSION_TAG");
 // dD Kernel
 #if CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPIC_D
 typedef CGAL::Epicd_d<Dimension_tag>                            Kernel_d;
-typedef Copy_const_reference                Kernel_return_value_policy;
+typedef Copy_by_value                       Kernel_d_return_value_policy;
 #elif CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D
 typedef CGAL::Epecd_d<Dimension_tag>                            Kernel_d;
-typedef Return_by_value                     Kernel_return_value_policy;
+typedef Return_by_value                     Kernel_d_return_value_policy;
 #elif CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_DOUBLE
 typedef CGAL::Cartesian_d<double>                               Kernel_d;
-typedef Copy_const_reference                Kernel_return_value_policy;
+typedef Return_by_value                     Kernel_d_return_value_policy;
 #elif CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ
 typedef CGAL::Cartesian_d<CGAL::Lazy_exact_nt<CGAL::Gmpq>>      Kernel_d;
-typedef Copy_const_reference                Kernel_return_value_policy;
+typedef Return_by_value                     Kernel_d_return_value_policy;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D");
 #endif
 
 typedef Kernel_d::FT                                            FT_d;
 typedef Kernel_d::Point_d                                       Point_d;
+typedef Kernel_d::Segment_d                                     Segment_d;
 
 #endif
