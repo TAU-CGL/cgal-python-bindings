@@ -39,6 +39,7 @@ function(select_kernel)
     endif()
     add_definitions(-DCGALPY_KERNEL=${CGALPY_KERNEL})
     select_kernel_intersection()
+    add_definitions(-DCGALPY_KERNEL_BINDINGS)
   endif()
 endfunction()
 
