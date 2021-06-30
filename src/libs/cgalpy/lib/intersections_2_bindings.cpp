@@ -295,7 +295,7 @@ void export_intersections_2() {
     .def("get_points", &get_points< Iso_rectangle_triangle_intersection_result>)
     ;
 
-  def("intersection", &line_line_intersection);
+  bp::def("intersection", &line_line_intersection);
   bind_intersection_result<Line_line_intersection_result>("Line_line_intersection_result")
     .def("is_point", &is_type<Line_line_intersection_result, Point_2>)
     .def("get_point", &get_type<Line_line_intersection_result, Point_2>)
