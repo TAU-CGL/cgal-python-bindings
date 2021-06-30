@@ -32,9 +32,9 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D");
 #include "CGALPY/types.hpp"
 
 // Dimention tag
-#if CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_DYNAMIC
+#if CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_STATIC
 typedef CGAL::Dimension_tag<CGALPY_KERNEL_D_DIMENSION>          Dimension_tag;
-#elif CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_STATIC
+#elif CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_DYNAMIC
 typedef CGAL::Dynamic_dimension_tag                             Dimension_tag;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D_DIMENSION_TAG");
@@ -42,10 +42,10 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D_DIMENSION_TAG");
 
 // dD Kernel
 #if CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPIC_D
-typedef CGAL::Epicd_d<Dimension_tag>                            Kernel_d;
-typedef Copy_by_value                       Kernel_d_return_value_policy;
+typedef CGAL::Epick_d<Dimension_tag>                            Kernel_d;
+typedef Return_by_value                     Kernel_d_return_value_policy;
 #elif CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D
-typedef CGAL::Epecd_d<Dimension_tag>                            Kernel_d;
+typedef CGAL::Epeck_d<Dimension_tag>                            Kernel_d;
 typedef Return_by_value                     Kernel_d_return_value_policy;
 #elif CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_DOUBLE
 typedef CGAL::Cartesian_d<double>                               Kernel_d;
