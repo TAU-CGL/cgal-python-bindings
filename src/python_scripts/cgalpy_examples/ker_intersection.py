@@ -9,7 +9,6 @@ if len(sys.argv) < 2:
     lib = 'CGALPY'
 else:
     lib = sys.argv[1]
-
 CGALPY = importlib.import_module(lib)
 
 Ker = CGALPY.Ker
