@@ -19,20 +19,20 @@ namespace bp = boost::python;
 extern void export_gmpz();
 extern void export_gmpq();
 
+#if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
+     (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
 Point_d* init_point_d(int d, bp::list& lst) {
   auto begin = bp::stl_input_iterator<FT_d>(lst);
   auto end = bp::stl_input_iterator<FT_d>();
   return new Point_d(d, begin, end);
 }
-
-#if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
-     (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
-const FT_d* point_d_cartesian_begin(Point_d& p)
-{ return p.cartesian_begin(); }
-
-const FT_d* point_d_cartesian_end(Point_d& p)
-{ return p.cartesian_end(); }
 #endif
+
+// const FT_d* point_d_cartesian_begin(Point_d& p)
+// { return p.cartesian_begin(); }
+
+// const FT_d* point_d_cartesian_end(Point_d& p)
+// { return p.cartesian_end(); }
 
 // Determine whether the dD kernel is an an EPEC type.
 // An EPEC type has a non trivial FT
@@ -99,24 +99,24 @@ void export_kernel_d() {
 
   bp::class_<Point_d>("Point_d")
     .def(bp::init<>())
+#if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
+     (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
     .def("__init__", bp::make_constructor(&init_point_d))
+#endif
     .def("dimension", &Point_d::dimension)
     .def("cartesian", &Point_d::cartesian, Kernel_d_return_value_policy())
     .def("__getitem__", &Point_d::operator[], Kernel_d_return_value_policy())
-#if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
-     (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
-    .def("coordinates", bp::range<>(&point_d_cartesian_begin, &point_d_cartesian_end))
-#else
     .def("coordinates", bp::range<>(&Point_d::cartesian_begin, &Point_d::cartesian_end))
-#endif
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
     .def(bp::self == bp::self)
     .def(bp::self != bp::self)
+#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
     .def(bp::self > bp::self)
     .def(bp::self < bp::self)
     .def(bp::self <= bp::self)
     .def(bp::self >= bp::self)
+#endif
     .setattr("__hash__", &Hash_rational_point<is_epec_d_type()>::operator()<Point_d>)
     ;
 
@@ -124,12 +124,16 @@ void export_kernel_d() {
     .def(bp::init<Point_d&, Point_d&>())
     .def("source", &Segment_d::source, Kernel_d_return_value_policy())
     .def("target", &Segment_d::target, Kernel_d_return_value_policy())
+#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
+    .def("opposite", &Segment_d::opposite)
+    .def("__getitem__", &Segment_d::operator[], Kernel_d_return_value_policy())
+#endif
+#if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
+     (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
     .def("vertex", &Segment_d::vertex, Kernel_d_return_value_policy())
     .def("point", &Segment_d::point, Kernel_d_return_value_policy())
-    .def("__getitem__", &Segment_d::operator[], Kernel_d_return_value_policy())
     .def("min", &Segment_d::min, Kernel_d_return_value_policy())
     .def("max", &Segment_d::max, Kernel_d_return_value_policy())
-    .def("opposite", &Segment_d::opposite)
     .def("supporting_line", &Segment_d::supporting_line)
     .def("squared_length", &Segment_d::squared_length)
     .def("direction", &Segment_d::direction)
@@ -139,6 +143,7 @@ void export_kernel_d() {
     .def(bp::self_ns::repr(bp::self_ns::self))
     .def(bp::self == bp::self)
     .def(bp::self != bp::self)
+#endif
     // .setattr("__hash__", &hash<Segment_d>)
     ;
 
