@@ -10,7 +10,6 @@ if len(sys.argv) < 2:
     lib = 'CGALPY'
 else:
     lib = sys.argv[1]
-
 CGALPY = importlib.import_module(lib)
 
 Kerd = CGALPY.Kerd
@@ -20,36 +19,31 @@ FT = Kerd.FT
 Gmpq = Kerd.Gmpq
 Point_d = SS.Point_d
 
-# Compile the bindings with the CMake variable CGALPY_SPATIAL_SEARCHING_DIMENSION set to 2
+# Verify that the bindings are generated with the CMake flag
+# CGALPY_SPATIAL_SEARCHING_DIMENSION set to 2
 assert(SS.get_spatial_searching_dimension() == 2)
 
-k = 3  # for k nearest neighbors
-
-points = [Point_d(2, [FT(n) for n in [4, 0]]), Point_d(2, [FT(n) for n in [-4, 0]]),
-          Point_d(2, [FT(n) for n in [40, 0]]), Point_d(2, [FT(n) for n in [-40, 0]]),
+k = 3  				# for k nearest neighbors
+points = [Point_d(2, [FT(n) for n in [4, 0]]),
+          Point_d(2, [FT(n) for n in [-4, 0]]),
+          Point_d(2, [FT(n) for n in [40, 0]]),
+          Point_d(2, [FT(n) for n in [-40, 0]]),
           Point_d(2, [FT(n) for n in [1, 0]])]
-
-# Insert the points into a k-d tree
-tree = SS.Kd_tree(points)
-
+tree = SS.Kd_tree(points)	# Insert the points into a k-d tree
 all_points = []
 tree.points(all_points)
 for x in all_points:
     print(x)
-
 query = Point_d(2, [FT(n) for n in [0, 0]])
-
-eps = FT(Gmpq(0.0))  # 0.0 for exact NN, otherwise approximate NN
-search_nearest = True  # Set this value to False in order to search farthest
-sort_neighbors = False  # Set this value to True in order to obtain the neighbors sorted by distance
-
-# The distance metric to use
-distance = SS.Euclidean_distance()
+eps = FT(Gmpq(0.0))  	# 0.0 for exact NN, otherwise approximate NN
+search_nearest = True  	# set to False to search farthest
+sort_neighbors = False  # set to True to obtain the neighbors sorted by distance
+distance = SS.Euclidean_distance()	# The distance metric to use
 
 # Populate <lst> with the k nearest neighbors to <query> based on the distance metric
 lst = []
 search = SS.K_neighbor_search(tree, query, k, eps, search_nearest,
-                           distance, sort_neighbors)
+                              distance, sort_neighbors)
 search.k_neighbors(lst)
 
 print("Found", len(lst), "neighbors")
@@ -72,7 +66,6 @@ tree.search(s, res)
 print("Points with no coordinate exceeding absolute value of 1:")
 for p in res:
     print(p)
-
 
 # CGALPY specific:
 # In order to use a custom distance metric, define the following:
