@@ -19,14 +19,18 @@ namespace bp = boost::python;
 extern void export_gmpz();
 extern void export_gmpq();
 
-#if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
-     (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
 Point_d* init_point_d(int d, bp::list& lst) {
   auto begin = bp::stl_input_iterator<FT_d>(lst);
   auto end = bp::stl_input_iterator<FT_d>();
+#if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
+     (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
   return new Point_d(d, begin, end);
-}
+#else
+  // Workaround a bug in CGAL
+  std::list<FT_d> tmp(begin, end);
+  return new Point_d(d, tmp.begin(), tmp.end());
 #endif
+}
 
 // const FT_d* point_d_cartesian_begin(Point_d& p)
 // { return p.cartesian_begin(); }
