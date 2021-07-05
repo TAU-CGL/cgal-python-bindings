@@ -28,7 +28,7 @@ void export_general_polygon_set_2();
 void export_polygon_with_holes_2();
 void export_minkowski_sum_2();
 void export_boolean_set_operations_2();
-void export_triangulations();
+void export_triangulation_2();
 void export_convex_hull_2_bindings();
 void export_spatial_searching();
 void export_bounding_volumes();
@@ -104,7 +104,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   {
     SET_SCOPE("Tri2")
-    export_triangulations();
+    export_triangulation_2();
   };
 
 #endif
