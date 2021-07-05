@@ -1,7 +1,7 @@
 if(NOT TRIANGULATION_3_OPTIONS_FILE_INCLUDED)
 set(TRIANGULATION_3_OPTIONS_FILE_INCLUDED)
 
-# 3D Triangulations types
+######## 3D Triangulations types
 set(CGALPY_TRI3_PLAIN             0)
 set(CGALPY_TRI3_REGULAR           1)
 set(CGALPY_TRI3_DELAUNAY          2)
@@ -9,14 +9,15 @@ set(CGALPY_TRI3_PERIODIC_PLAIN    3)
 set(CGALPY_TRI3_PERIODIC_REGULAR  4)
 set(CGALPY_TRI3_PERIODIC_DELAUNAY 5)
 
-set(CGALPY_TRI3_SHORT_NAMES plain reg del p3del)
+set(CGALPY_TRI3_SHORT_NAMES plain reg del pp preg pdel)
 set(CGALPY_TRI3_NAMES plain regular delaunay periodicPlain periodicRegular periodicDelaunay)
+
 # Default
-SET(CGALPY_TRI3 ${CGALPY_TRI3_REGULAR} CACHE INTERNAL "")
-SET(CGALPY_TRI3_NAME "regular" CACHE STRING "The 3D Triangulation")
+SET(CGALPY_TRI3 ${CGALPY_TRI3_PLAIN} CACHE INTERNAL "")
+SET(CGALPY_TRI3_NAME "plain" CACHE STRING "The 3D Triangulation")
 set_property(CACHE CGALPY_TRI3_NAME PROPERTY STRINGS plain regular delaunay periodicPlain periodicRegular periodicDelaunay)
 
-# 3D Triangulation traits
+######## 3D Triangulation traits
 set(CGALPY_TRI3_TRAITS_KERNEL            0)
 set(CGALPY_TRI3_TRAITS_PERIODIC_PLAIN    1)
 set(CGALPY_TRI3_TRAITS_PERIODIC_REGULAR  2)
@@ -59,7 +60,7 @@ set(CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE_REGULAR_WITH_INFO 11)
 set(CGALPY_TRI3_VERTEX_BASE_SHORT_NAMES plain pwi reg rwi as aswh asr asrwi fas faswi fasr fasrwi)
 set(CGALPY_TRI3_VERTEX_BASE_NAMES plain plainWithInfo regular regualrWithInfo alphaShape alphaShapeWithInfo alphaShapeRegular alphaShapeRegularWithInfo fixedAlphaShape fixedAlphaShapeWithInfo fixedAlphaShapeRegular fixedAlphaShapeRegularWithInfo)
 # Default
-SET(CGALPY_TRI3_VERTEX_BASE_ ${CGALPY_TRI3_VERTEX_BASE_PLAIN} CACHE INTERNAL "")
+SET(CGALPY_TRI3_VERTEX_BASE ${CGALPY_TRI3_VERTEX_BASE_PLAIN} CACHE INTERNAL "")
 SET(CGALPY_TRI3_VERTEX_BASE_NAME "plain" CACHE STRING "The 3D Triangulation vertex base")
 set_property(CACHE CGALPY_TRI3_VERTEX_BASE_NAME PROPERTY STRINGS plain plainWithInfo regular regualrWithInfo alphaShape alphaShapeWithInfo alphaShapeRegular alphaShapeRegularWithInfo fixedAlphaShape fixedAlphaShapeWithInfo fixedAlphaShapeRegular fixedAlphaShapeRegularWithInfo)
 
@@ -230,15 +231,17 @@ endfunction()
 function(get_triangulation_3_lib_name ret)
   list(GET CGALPY_TRI3_SHORT_NAMES ${CGALPY_TRI3} part1)
   capitalize_first(part1)
-  list(GET CGALPY_TRI3_VERTEX_BASE_SHORT_NAMES ${CGALPY_TRI3_VERTEX_BASE} part2)
+  list(GET CGALPY_TRI3_TRAITS_SHORT_NAMES ${CGALPY_TRI3_TRAITS} part2)
   capitalize_first(part2)
-  list(GET CGALPY_TRI3_CELL_BASE_SHORT_NAMES ${CGALPY_TRI3_CELL_BASE} part3)
+  list(GET CGALPY_TRI3_VERTEX_BASE_SHORT_NAMES ${CGALPY_TRI3_VERTEX_BASE} part3)
   capitalize_first(part3)
-  list(GET CGALPY_TRI3_LOCATION_POLICY_SHORT_NAMES ${CGALPY_TRI3_LOCATION_POLICY} part4)
+  list(GET CGALPY_TRI3_CELL_BASE_SHORT_NAMES ${CGALPY_TRI3_CELL_BASE} part4)
   capitalize_first(part4)
-  list(GET CGALPY_TRI3_CONCURRENCY_SHORT_NAMES ${CGALPY_TRI3_CONCURRENCY} part5)
+  list(GET CGALPY_TRI3_LOCATION_POLICY_SHORT_NAMES ${CGALPY_TRI3_LOCATION_POLICY} part5)
   capitalize_first(part5)
-  set(${ret} "tri3${part1}${part2}${part3}${part4}${part5}" PARENT_SCOPE)
+  list(GET CGALPY_TRI3_CONCURRENCY_SHORT_NAMES ${CGALPY_TRI3_CONCURRENCY} part6)
+  capitalize_first(part6)
+  set(${ret} "tri3${part1}${part2}${part3}${part4}${part5}${part6}" PARENT_SCOPE)
 endfunction()
 
 endif()
