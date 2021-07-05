@@ -70,10 +70,11 @@ see Section~\ref{ssec:modules:aos2} for more details on the
   \matrix (first) [tableModuleName] {
     Module & Name & Short Name\\
     2D and 3D Kernel & \myLstinline{KERNEL} & \myLstinline{KER}\\
-    $D$ Kernel & \myLstinline{KERNEL\_D} & \myLstinline{KERD}\\
+    $d$D Kernel & \myLstinline{KERNEL\_D} & \myLstinline{KERD}\\
     2D Arrangements on Surfaces & \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2} &
       \myLstinline{AOS2}\\
-    3D Alpha shapes & \myLstinline{ALPHA\_SHAPE\_3} & \myLstinline{AS2}\\
+    2D Alpha shapes & \myLstinline{ALPHA\_SHAPE\_2} & \myLstinline{AS2}\\
+    3D Alpha shapes & \myLstinline{ALPHA\_SHAPE\_3} & \myLstinline{AS3}\\
     2D Regularized Boolean operations &
       \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
     Bounding Volumes & \myLstinline{BOUNDING\_VOLUMES} & \myLstinline{BV}\\
@@ -246,6 +247,7 @@ Name & Type & Default & Description\\
 \cmakeLstinline{KERNEL\_BINDINGS}                      & Boolean & \myLstinline{true}  & Determines whether to generate bindings for 2,3 Kernel types\\
 \cmakeLstinline{KERNEL\_D\_BINDINGS}                   & Boolean & \myLstinline{false} & Determines whether to generate bindings for dD Kernel types\\
 \cmakeLstinline{ARRANGEMENT\_ON\_SURFACE\_2\_BINDINGS} & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D arrangement instances\\
+\cmakeLstinline{ALPHA\_SHAPE\_2\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D Alpha shape instances\\
 \cmakeLstinline{ALPHA\_SHAPE\_3\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 3D Alpha shape instances\\
 \cmakeLstinline{BOOLEAN\_SET\_OPERATIONS\_2\_BINDINGS} & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D Boolean set operation instances\\
 \cmakeLstinline{BOUNDING\_VOLUMES\_BINDINGS}           & Boolean & \myLstinline{false} & Determines whether to generate bindings for bounding volume instances\\
