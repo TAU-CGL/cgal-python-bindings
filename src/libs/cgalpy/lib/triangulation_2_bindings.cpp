@@ -13,31 +13,16 @@
 
 namespace bp = boost::python;
 
-typedef CGAL::Triangulation_2<Kernel>                 Triangulation_2;
-typedef CGAL::Delaunay_triangulation_2<Kernel>        Delaunay_triangulation_2;
-typedef Triangulation_2::Vertex                       TVertex;
-typedef Triangulation_2::Vertex_circulator            TVertex_circulator;
-typedef Triangulation_2::All_vertices_iterator        All_vertices_iterator;
-typedef Triangulation_2::Finite_vertices_iterator     Finite_vertices_iterator;
-typedef Triangulation_2::Edge                         TEdge;
-typedef Triangulation_2::Edge_circulator              TEdge_circulator;
-typedef Triangulation_2::All_edges_iterator           All_edges_iterator;
-typedef Triangulation_2::Finite_edges_iterator        Finite_edges_iterator;
-typedef Triangulation_2::Face                         TFace;
-typedef Triangulation_2::Face_circulator              TFace_circulator;
-typedef Triangulation_2::Face_handle                  TFace_handle;
-typedef Triangulation_2::All_faces_iterator           All_faces_iterator;
-typedef Triangulation_2::Finite_faces_iterator        Finite_faces_iterator;
-typedef Triangulation_2::Point_iterator               Point_iterator;
+namespace tri2 {
 
-bool equal(TFace& f1, TFace& f2) {
+bool equal(Face& f1, Face& f2) {
   return (f1.has_vertex(f2.vertex(0)) && f1.has_vertex(f2.vertex(1)) &&
           f1.has_vertex(f2.vertex(2)));
 }
 
 //workaround to get a face handle from a face
-TFace_handle face_to_handle(TFace& f) {
-  TFace_handle res;
+Face_handle face_to_handle(Face& f) {
+  Face_handle res;
   auto n = f.neighbor(0);
   for (auto i = 0; i < 3; ++i) {
     if (equal(*(n->neighbor(i)), f)) {
@@ -49,100 +34,95 @@ TFace_handle face_to_handle(TFace& f) {
 }
 
 template <typename T>
-CopyIterator<All_edges_iterator>* all_edges_iterator(T& t)
-{
+CopyIterator<All_edges_iterator>* all_edges_iterator(T& t) {
   return new CopyIterator<All_edges_iterator>(t.all_edges_begin(), t.all_edges_end());
 }
 
 template <typename T>
-CopyIterator<Finite_edges_iterator>* finite_edges_iterator(T& t)
-{
+CopyIterator<Finite_edges_iterator>* finite_edges_iterator(T& t) {
   return new CopyIterator<Finite_edges_iterator>(t.finite_edges_begin(), t.finite_edges_end());
 }
 
 template<typename T>
-Copy_iterator_from_circulator<TEdge_circulator>* edges_around_vertex_iterator0(T& t ,TVertex& v)
-{
-  return new Copy_iterator_from_circulator<TEdge_circulator>(t.incident_edges(v.handle()));
+Copy_iterator_from_circulator<Edge_circulator>*
+edges_around_vertex_iterator0(T& t, Vertex& v) {
+  return new Copy_iterator_from_circulator<Edge_circulator>(t.incident_edges(v.handle()));
 }
 
 template<typename T>
-Copy_iterator_from_circulator<TEdge_circulator>* edges_around_vertex_iterator1(T& t, TVertex& v, TFace& f)
-{
+Copy_iterator_from_circulator<Edge_circulator>*
+edges_around_vertex_iterator1(T& t, Vertex& v, Face& f) {
   auto fh = face_to_handle(f);
-  return new Copy_iterator_from_circulator<TEdge_circulator>(t.incident_edges(v.handle(), fh));
+  return new Copy_iterator_from_circulator<Edge_circulator>(t.incident_edges(v.handle(), fh));
 }
 
 template<typename T>
-Iterator_from_circulator<TFace_circulator>* faces_around_vertex_iterator0(T& t, TVertex& v)
-{
-  return new Iterator_from_circulator<TFace_circulator>(t.incident_faces(v.handle()));
+Iterator_from_circulator<Face_circulator>*
+faces_around_vertex_iterator0(T& t, Vertex& v) {
+  return new Iterator_from_circulator<Face_circulator>(t.incident_faces(v.handle()));
 }
 
 template<typename T>
-Iterator_from_circulator<TFace_circulator>* faces_around_vertex_iterator1(T& t, TVertex& v, TFace& f)
-{
+Iterator_from_circulator<Face_circulator>*
+faces_around_vertex_iterator1(T& t, Vertex& v, Face& f) {
   auto fh = face_to_handle(f);
-  return new Iterator_from_circulator<TFace_circulator>(t.incident_faces(v.handle(), fh));
+  return new Iterator_from_circulator<Face_circulator>(t.incident_faces(v.handle(), fh));
 }
 
 template<typename T>
-Iterator_from_circulator<TVertex_circulator>* vertices_around_vertex_iterator0(T& t, TVertex& v)
-{
-  return new Iterator_from_circulator<TVertex_circulator>(t.incident_vertices(v.handle()));
+Iterator_from_circulator<Vertex_circulator>*
+vertices_around_vertex_iterator0(T& t, Vertex& v) {
+  return new Iterator_from_circulator<Vertex_circulator>(t.incident_vertices(v.handle()));
 }
 
 template<typename T>
-Iterator_from_circulator<TVertex_circulator>* vertices_around_vertex_iterator1(T& t, TVertex& v, TFace& f)
-{
+Iterator_from_circulator<Vertex_circulator>*
+vertices_around_vertex_iterator1(T& t, Vertex& v, Face& f) {
   auto fh = face_to_handle(f);
-  return new Iterator_from_circulator<TVertex_circulator>(t.incident_vertices(v.handle(), fh));
+  return new Iterator_from_circulator<Vertex_circulator>(t.incident_vertices(v.handle(), fh));
 }
 
 template <typename T>
-void insert_list(T& t, bp::list& lst)
-{
-  auto v = std::vector< Point_2 >(bp::stl_input_iterator<Point_2>(lst),
-                                  bp::stl_input_iterator<Point_2>());
+void insert_list(T& t, bp::list& lst) {
+  auto v = std::vector<Point_2>(bp::stl_input_iterator<Point_2>(lst),
+                                bp::stl_input_iterator<Point_2>());
   t.insert(v.begin(), v.end());
 }
 
 template <typename T>
-void flip(T& t, TFace& f, int i)
-{
+void flip(T& t, Face& f, int i) {
   auto fh = face_to_handle(f);
   t.flip(fh, i);
 }
 
 template <typename T>
-typename T::Triangle triangle(T& t, TFace& f)
-{
+typename T::Triangle triangle(T& t, Face& f) {
   auto fh = face_to_handle(f);
   auto res = t.triangle(fh);
   return res;
 }
 
 template <typename T>
-Point_2 circumcenter(T& t, TFace& f) {
-auto fh = face_to_handle(f);
-auto res = t.circumcenter(fh);
-return res;
+Point_2 circumcenter(T& t, Face& f) {
+  auto fh = face_to_handle(f);
+  auto res = t.circumcenter(fh);
+  return res;
 }
 
 template<typename T>
-TVertex& insert_point(T& t, Point_2& p) { return *(t.insert(p)); }
+Vertex& insert_point(T& t, Point_2& p) { return *(t.insert(p)); }
 
 template<typename T>
-void remove(T& t, TVertex& v) { t.remove(v.handle()); }
+void remove(T& t, Vertex& v) { t.remove(v.handle()); }
 
 template<typename T>
-TFace& infinite_face(T& t) { return *(t.infinite_face()); }
+Face& infinite_face(T& t) { return *(t.infinite_face()); }
 
 template<typename T>
-TVertex& infinite_vertex(T& t) { return *(t.infinite_vertex()); }
+Vertex& infinite_vertex(T& t) { return *(t.infinite_vertex()); }
 
 template<typename T>
-TVertex& finite_vertex(T& t) { return *(t.finite_vertex()); }
+Vertex& finite_vertex(T& t) { return *(t.finite_vertex()); }
 
 template <typename T, typename C>
 void export_triangulation(C c) {
@@ -176,39 +156,38 @@ void export_triangulation(C c) {
     .def("incident_faces", &faces_around_vertex_iterator0<T>, bp::return_value_policy<bp::manage_new_object>())
     .def("incident_faces", &faces_around_vertex_iterator1<T>, bp::return_value_policy<bp::manage_new_object>())
     .def("mirror_edge", &T::mirror_edge)
-    .def("segment", static_cast<Segment_2(T::*)(const TEdge&) const>(&T::segment))
-    .def("is_infinite", static_cast<bool (T::*)(const TEdge&) const>(&T::is_infinite))
+    .def("segment", static_cast<Segment(T::*)(const Edge&) const>(&T::segment))
+    .def("is_infinite", static_cast<bool (T::*)(const Edge&) const>(&T::is_infinite))
     .def("ccw", &T::ccw)
     .def("cw", &T::cw)
     //.def()
     ;
 }
 
-void export_triangulations() {
+} // End of namespace tri2
+
+void export_triangulation_2() {
   using namespace boost::python;
-  auto c0 = bp::class_<Triangulation_2>("Triangulation_2");
-  auto c1 = bp::class_<Delaunay_triangulation_2, bases<Triangulation_2>>("Delaunay_triangulation_2");
+  auto c0 = bp::class_<tri2::Triangulation_2>("Triangulation_2");
+  tri2::export_triangulation<tri2::Triangulation_2>(c0);
 
-  export_triangulation<Triangulation_2>(c0);
-  export_triangulation<Delaunay_triangulation_2>(c1);
-
-  bp::class_<TVertex>("Vertex")
-    .def<Point_2& (TVertex::*) ()>("point", &TVertex::point, return_internal_reference<>())
+  bp::class_<tri2::Vertex>("Vertex")
+    .def<tri2::Point& (tri2::Vertex::*) ()>("point", &tri2::Vertex::point, return_internal_reference<>())
     ;
 
-  bp::class_<TEdge>("Edge")
-    .def_readwrite("first", &TEdge::first)
-    .def_readwrite("second", &TEdge::second)
+  bp::class_<tri2::Edge>("Edge")
+    .def_readwrite("first", &tri2::Edge::first)
+    .def_readwrite("second", &tri2::Edge::second)
     ;
 
-  bp::class_<TFace>("Face")
-    .def("is_valid", &TFace::is_valid)
+  bp::class_<tri2::Face>("Face")
+    .def("is_valid", &tri2::Face::is_valid)
     ;
 
-  bind_copy_iterator<CopyIterator<All_edges_iterator>>("Triangulation_all_edges_iterator");
-  bind_copy_iterator<CopyIterator<Finite_edges_iterator>>("Triangulation_finite_edges_iterator");
-  bind_copy_iterator<Copy_iterator_from_circulator<TEdge_circulator>>("Triangulation_edges_iterator");
+  bind_copy_iterator<CopyIterator<tri2::All_edges_iterator>>("Triangulation_all_edges_iterator");
+  bind_copy_iterator<CopyIterator<tri2::Finite_edges_iterator>>("Triangulation_finite_edges_iterator");
+  bind_copy_iterator<Copy_iterator_from_circulator<tri2::Edge_circulator>>("Triangulation_edges_iterator");
 
-  bind_iterator<Iterator_from_circulator<TFace_circulator>>("Triangulation_faces_iterator");
-  bind_iterator<Iterator_from_circulator<TVertex_circulator>>("Triangulation_vertices_iterator");
+  bind_iterator<Iterator_from_circulator<tri2::Face_circulator>>("Triangulation_faces_iterator");
+  bind_iterator<Iterator_from_circulator<tri2::Vertex_circulator>>("Triangulation_vertices_iterator");
 }
