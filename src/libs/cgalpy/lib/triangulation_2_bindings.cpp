@@ -9,6 +9,7 @@
 #include <boost/python.hpp>
 
 #include "CGALPY/triangulation_2_types.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
 
 namespace bp = boost::python;
 
