@@ -110,9 +110,9 @@ avoid code duplication. Following the example above, we have the
 function \cppLstinline{export\_triangulation\_2<Triangulation>()},
 where the template parameter \cppLstinline{Triangulation} is
 substituted with one of the two-dimensional triangulation types
-supported; see Table~\ref{xxx}. This function template accepts as its
-single parameter the binding class object, which is constructed
-separately.
+supported; see Table~\ref{tab:tri2:names}. This function template
+accepts as its single parameter the binding class object, which is
+constructed separately.
 
 \begin{lstlisting}[style=cppNumberedStyle]
 typedef CGAL::Triangulation_2<Kernel>              Triangulation_2;
@@ -246,6 +246,8 @@ Consider, for example, the \cppLstinline{Arrangement\_2<Traits,Dcel>};
 see Section~\ref{ssec:modules:aos2}. An instance of this template is
 used to represent an arrangement embedded in the plane. The following
 example ...
+
+- Extending the 2d and 3d vertex and face triangulation types => change the title to be more general
 
 % -----------------------------------------------------------------------------
 \subsection{Arrangement Overlay Traits}
