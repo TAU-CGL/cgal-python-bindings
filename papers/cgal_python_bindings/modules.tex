@@ -669,9 +669,9 @@ face of the triangulation, respectively; they must model the concepts
 \cppLstinline{TriangulationDSFaceBase\_2}, respectively. If the
 binding is generated for a periodic triangulation, these parameters
 must be substituted with types that also model the concepts
-\cppLstinline{Periodic\_2TriangulationVertexBase\_2} and
-\cppLstinline{Periodic\_2TriangulationFaceBase\_2}, respectively.  If
-the triangulation is used to define an alpha shape type, these
+\cppLstinline{Periodic\_2TriangulationDSVertexBase\_2} and
+\cppLstinline{Periodic\_2TriangulationDSFaceBase\_2}, respectively.
+If the triangulation is used to define an alpha shape type, these
 parameters must be substituted with types that also model the concepts
 \cppLstinline{AlphaShapeVertex\_2} and
 \cppLstinline{AlphaShapeFace\_2}, respectively; see
@@ -686,8 +686,9 @@ there is no special requirements on the type that substitutes the
 \cppLstinline{FaceBase} parameter in this case.) Below we describe how
 the final vertex type is selected in details.
 
+%% 3D Triangulation Vertex Selection
 The \cmake{} flag \cmakeLstinline{TRI2\_VERTEX\_BASE\_NAME} specifies
-the base vertex type; see Table~\ref{tab:tri2:vertex}.  The type
+the base vertex type; see Table~\ref{tab:tri2:entity}.  The type
 \cppLstinline{Vb} is defined as the vertex base type (either
 \cppLstinline{Triangulation\_vertex\_base\_2<Kernel>} or
 \cppLstinline{Regular\_triangulation\_vertex\_base\_2<Kernel>}).
@@ -699,15 +700,15 @@ to \myLstinline{true}, the type \cppLstinline{Vbi} is defined as
 object \cppLstinline{bp::object}; see Section~\ref{sec:bind-code:ae};
 otherwise the type \cppLstinline{Vbi} is defined as \cppLstinline{Vb}.
 %
-If the \cmake{} flag \cmakeLstinline{TRI2\_VERTEX\_HIERARCHY} is set
+If the \cmake{} flag \cmakeLstinline{TRI2\_HIERARCHY} is set
 to \myLstinline{true}, the type \cppLstinline{Vbih} is defined as
 \cppLstinline{Triangulation\_hierarchy\_vertex\_base\_2<Vbi>}; otherwise
 the type \cppLstinline{Vbih} is defined as \cppLstinline{Vbi}.
 %
 If bindings is generated for a periodic triangulation, the type
 \cppLstinline{Vbihp} is defined as
-\cppLstinline{Periodic\_2\_triangulation\_vertex\_base\_2<Traits,Vbih};
-otherwise the type \cppLstinline{Vbihp} is defined as
+\cppLstinline{Periodic\_2\_triangulation\_vertex\_base\_2<Traits,
+  Vbih>}; otherwise the type \cppLstinline{Vbihp} is defined as
 \cppLstinline{Vbih}.
 %
 Finally, if the triangulation is used to define an alpha shape type,
@@ -725,12 +726,14 @@ The final vertex type is conveniently available as
 \cppLstinline{Dt::Vertex}, where \cppLstinline{Dt} is the
 triangulation instance.
 
-The final face type is determines in a similar fashion. The only
+The final face type is determined in a similar fashion. The only
 difference between the selections of the vertex and face types is that
-the setting of the \cmake{} flag
-\cmakeLstinline{TRI2\_VERTEX\_HIERARCHY} does not have an effect on
-the face type selection. The final face type is conveniently available
-as \cppLstinline{Dt::Face}.
+the setting of the \cmake{} flag \cmakeLstinline{TRI2\_HIERARCHY} does
+not have an effect on the face type selection. The \cmake{} flag
+\cmakeLstinline{TRI2\_CELL\_BASE\_NAME} specifies the base cell type;
+see Table~\ref{tab:tri2:entity}. The final face type is conveniently
+available as \cppLstinline{Dt::Face}, where \cppLstinline{Dt} is the
+triangulation instance.
 
 \begin{table}[!htp]
   \caption{2D triangulation vertex and face base options.
@@ -753,7 +756,7 @@ as \cppLstinline{Dt::Face}.
     \myLstinline{regular} & \cppLstinline{Regular\_triangulation\_entity\_base\_2<Kernel>}\\
   };
   \end{tikzpicture}
-  \label{tab:tri2:vertex}
+  \label{tab:tri2:entity}
 \end{table}
 
 The \cmake{} Boolean flag \cmakeLstinline{TRI2\_HIERARCHY} indicates
@@ -931,7 +934,7 @@ concepts \cppLstinline{RegularTriangulationTraits\_3} and
 \cppLstinline{DelaunayTriangulationTraits\_3} refine the concept
 \cppLstinline{TriangulationTraits\_3}.  In addition, when a Delaunay
 triangulation instance is used to define either plain or a fixed alpha
-shape type (see Section~\ref{ssec:modules::as3}, the traits parameter
+shape type (see Section~\ref{ssec:modules:as3}), the traits parameter
 must be substituted with a traits class that models either the
 \cppLstinline{AlphaShapeTraits\_3} or the
 \cppLstinline{FixedAlphaShapeTraits\_3} concepts, respectively. Notice
@@ -985,11 +988,16 @@ instance of the class template
 
 The types that substitute the \cppLstinline{VertexBase} and
 \cppLstinline{CellBase} template parameters when the template
-\cppLstinline{Triangulation\_data\_structure\_3<>} is instantiated
-must model the concepts \cppLstinline{TriangulationDSVertexBase\_3}
-and \cppLstinline{TriangulationDSCellBase\_3}, respectively, when the
-triangulation instance is not used to define an alpha shape type. If
-the triangulation is used to define a plain alpha shape type, these
+\cppLstinline{Triangulation\_data\_structure\_3<VertexBase, CellBase>}
+is instantiated represent the base type of the vertex and the base
+type of the cell of the triangulation, respectively; they must model
+the concepts \cppLstinline{TriangulationDSVertexBase\_3} and
+\cppLstinline{TriangulationDSCellBase\_3}, respectively. If the
+binding is generated for a periodic triangulation, these parameters
+must be substituted with types that also model the concepts
+\cppLstinline{Periodic\_3TriangulationDSVertexBase\_3} and
+\cppLstinline{Periodic\_3TriangulationDSCellBase\_3}, respectively.
+If the triangulation is used to define a plain alpha shape type, these
 parameters must be substituted with types that model the concepts
 \cppLstinline{AlphaShapeVertex\_3} and
 \cppLstinline{AlphaShapeCell\_3}, respectively; see
@@ -997,14 +1005,20 @@ Section~\ref{ssec:modules:as3}. If the triangulation is used to define
 a fixed alpha shape type, these parameters must be substituted with
 types that model the concepts \cppLstinline{FixedAlphaShapeVertex\_3}
 and \cppLstinline{FixedAlphaShapeCell\_3}, respectively.  These types
-represent the base type of the vertex and the base type of the cell of
-the triangulation, respectively. The \cmake{} flags
-\myLstinline{TRI3\_VERTEX\_BASE\_NAME} and
+The \cmake{} flags \myLstinline{TRI3\_VERTEX\_BASE\_NAME} and
 \myLstinline{TRI3\_CELL\_BASE\_NAME} specify the vertex and base
-types, respectively; see Table~\ref{tab:tri3:vertex}. These type are
+types, respectively; see Table~\ref{tab:tri3:entity}. These type are
 conveniently defined as \cppLstinline{Dt::Vertex} and
 \cppLstinline{Dt::Face}, where \cppLstinline{Dt} is the triangulation
-instance.
+instance. Finaly, if the binding is generated for a hierarchy
+triangulation, e.g., an instance of the template paramater
+\cppLstinline{Triangulation\_hierarchy\_3<Triangulation\_3>}, the
+\cppLstinline{VertexBase} template parameter must be substituted with
+a model of the concept
+\cppLstinline{TriangulationHierarchyVertexBase\_3}. (Observe that
+there is no special requirements on the type that substitutes the
+\cppLstinline{CellBase} parameter in this case.) Below we describe how
+the final vertex type is selected in details.
 
 \begin{table}[!htp]
   \caption{3D triangulation vertex and cell base options.
@@ -1055,7 +1069,7 @@ instance.
       \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_3<K, Rvbi>}\\
   };
   \end{tikzpicture}
-  \label{tab:tri3:vertex}
+  \label{tab:tri3:entity}
 \end{table}
 
 The template parameter \cppLstinline{ConcurrencyTag} is substituted
@@ -1188,7 +1202,7 @@ Note that \cppLstinline{Dt::Geom\_traits} must be model of a suitable
 alpha-shape traits concept; see Table~\ref{tab:tri3:traits}, and
 \cppLstinline{Dt::Vertex} and \cppLstinline{Dt::Face} must be models
 suitable alpha-shape vertex and cell conceprts, respectively; see
-Table~\ref{tab:tri3:vertex}.
+Table~\ref{tab:tri3:entity}.
 
 The following code excerpt in the \cmake{} language sets the \cmake{}
 flags for our next example.
