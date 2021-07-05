@@ -238,7 +238,7 @@ extracted from the \cmake{KERNEL\_D\_DIMENSION} \cmake{} flag.
 
 %%%%%%%% D Kernel Dimension Tag Options
 \begin{table}[!htp]
-  \caption{$D$-dimensional Kernl dimension tag options.}
+  \caption{$d$D-dimensional Kernl dimension tag options.}
   \centering\begin{tikzpicture}
   \matrix (first) [tableName, column
     1/.style={nodes={text width=19em}},
@@ -714,6 +714,33 @@ instance.
   \end{tikzpicture}
   \label{tab:tri2:vertex}
 \end{table}
+
+% -----------------------------------------------------------------------------
+\subsection{2D Alpha Shape Bindings}
+\label{ssec:modules:as2}
+% -----------------------------------------------------------------------------
+The alpha shape (a.k.a.\ alpha complex) of a set of points is one of
+several notions of the shape formed by the set. Given a set of points
+sampled in a 3D body, an alpha shape is demarcated by a frontier,
+which is a linear approximation of the original boundary of the
+body. A two-dimensional alpha shape object maintains an underlying
+triangulation of a set of input points in the plane. There are two
+distinguished versions of alpha shapes as follows. Basic alpha shapes
+are based on the Delaunay triangulation and weighted alpha shapes are
+based on its generalization, the regular triangulation, where the
+euclidean distance is replaced by the power to weighted points.  In a
+plain alpha shape each $k$-simplex of the underlying triangulation is
+associated with an interval that specifies for which values of
+$\alpha$ the $k$-simplex belongs to the alpha shape. In a fixed alpha
+shape each $k$-simplex is associated with a classification that
+specifies its status in the alpha complex, alpha being fixed.  The
+package \iiDAlphaShapesPackage{}~\cite{cgal:d-as2-21a} provides the
+class templates \cppLstinline{Alpha\_shape\_2<Dt,
+  ExactAlphaComparisonTag>} and
+\cppLstinline{Fixed\_alpha\_shape\_2<Dt>}. Instances of both templates
+can be used to represent a large variaty of alpha shapes for a given
+set of points. Table~\ref{tab:as2} lists the \cmake{} flags associated
+with the \iiDAlphaShapesPackage{} module.
 
 % -----------------------------------------------------------------------------
 \subsection{3D Triangulation Bindings}
