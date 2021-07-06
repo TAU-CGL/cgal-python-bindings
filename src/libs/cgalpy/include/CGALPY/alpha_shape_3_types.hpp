@@ -10,27 +10,12 @@
 #define CGALPY_ALPHA_SHAPE_3_TYPES_HPP
 
 #include "CGALPY/alpha_shape_3_config.hpp"
-
-// Alpha shape type
-#if CGALPY_AS3 == CGALPY_AS3_PLAIN
-#include <CGAL/Alpha_shape_3.h>
-#elif CGALPY_AS3 == CGALPY_AS3_FIXED
-#include <CGAL/Fixed_alpha_shape_3.h>
-#else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ALPHA_SHAPE");
-#endif
+#include "CGALPY/triangulation_3_types.hpp"
 
 namespace as3 {
 
-// Alpha shape type
-#if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  typedef CGAL::Alpha_shape_3<tri3::Triangulation_3, Exact_comparison>
-                                                                Alpha_shape_3;
-#elif CGALPY_AS3 == CGALPY_AS3_FIXED
-  typedef CGAL::Fixed_alpha_shape_3<tri3::Triangulation_3>      Alpha_shape_3;
-#else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AS3");
-#endif
+typedef Exact_comparison<exact_comparison()>::type                 Ec;
+typedef Alpha_shape<CGALPY_AS3, tri3::Triangulation_3, Ec>::type Alpha_shape_3;
 
 typedef Alpha_shape_3::Point                    Point;
 
