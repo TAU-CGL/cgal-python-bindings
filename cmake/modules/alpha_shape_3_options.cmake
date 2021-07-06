@@ -17,42 +17,6 @@ set_property(CACHE CGALPY_AS3_NAME PROPERTY STRINGS plain fixed)
 # 3D comparison tag
 set(CGALPY_AS3_EXACT_COMPARISON false CACHE BOOL "The exact comparison tag")
 
-# Verification
-function(verify_alpha_shape_3)
-  if(${CGALPY_ALPHA_SHAPE_3_BINDINGS})
-    # Check validity of vertex-base settings
-    if((${CGALPY_TRI3_VERTEX_BASE_NAME} STREQUAL "plain") OR
-       (${CGALPY_TRI3_VERTEX_BASE_NAME} STREQUAL "plainWithInfo") OR
-       (${CGALPY_TRI3_VERTEX_BASE_NAME} STREQUAL "regular")  OR
-       (${CGALPY_TRI3_VERTEX_BASE_NAME} STREQUAL "regularWithInfo"))
-      message("Error: Invalid vertex base (${CGALPY_TRI3_VERTEX_BASE_NAME})")
-      return()
-    endif()
-    # Check validity of cell-base settings
-    if((${CGALPY_TRI3_CELL_BASE_NAME} STREQUAL "plain") OR
-       (${CGALPY_TRI3_CELL_BASE_NAME} STREQUAL "plainWithInfo") OR
-       (${CGALPY_TRI3_CELL_BASE_NAME} STREQUAL "regular")  OR
-       (${CGALPY_TRI3_CELL_BASE_NAME} STREQUAL "regularWithInfo"))
-      message("Error: Invalid vertex base (${CGALPY_TRI3_VERTEX_BASE_NAME})")
-      return()
-    endif()
-
-    # Check validity of triangulation
-    if((${CGALPY_TRI3_NAME} STREQUAL "[Rr]egular") AND
-       (NOT ${CGALPY_TRI3_VERTEX_BASE_NAME} MATCHES "regular"))
-      message("Error: Triangulation (${CGALPY_TRI3_NAME}) does not match vertex base (${CGALPY_TRI3_VERTEX_BASE_NAME})")
-      return()
-    endif()
-
-    # Check validity of triangulation
-    if((${CGALPY_TRI3_NAME} STREQUAL "[Rr]egular") AND
-       (NOT ${CGALPY_TRI3_CELL_BASE_NAME} MATCHES "regular"))
-      message("Error: Triangulation (${CGALPY_TRI3_NAME}) does not match cell base (${CGALPY_TRI3_CELL_BASE_NAME})")
-      return()
-    endif()
-  endif()
-endfunction()
-
 function(select_alpha_shape_3_comparison)
   if(${CGALPY_AS3_EXACT_COMPARISON})
     add_definitions(-DCGALPY_AS3_EXACT_COMPARISON)
@@ -62,18 +26,17 @@ endfunction()
 # Selection
 function(select_alpha_shape_3)
   if(${CGALPY_ALPHA_SHAPE_3_BINDINGS})
-    verify_alpha_shape_3()
     select_alpha_shape_3_comparison()
 
     add_definitions(-DCGALPY_ALPHA_SHAPE_3_BINDINGS)
 
     # Select Alpha shape
-    if    ("${CGALPY_ALPHA_SHAPE_NAME}" STREQUAL "plain")
-      set(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_PLAIN} CACHE INTERNAL "")
-    elseif("${CGALPY_ALPHA_SHAPE_NAME}" STREQUAL "fixed")
-      set(CGALPY_ALPHA_SHAPE ${CGALPY_ALPHA_SHAPE_FIXED} CACHE INTERNAL "")
+    if    ("${CGALPY_AS3_NAME}" STREQUAL "plain")
+      set(CGALPY_AS3 ${CGALPY_AS3_PLAIN} CACHE INTERNAL "")
+    elseif("${CGALPY_AS3_NAME}" STREQUAL "fixed")
+      set(CGALPY_AS3 ${CGALPY_AS3_FIXED} CACHE INTERNAL "")
     endif()
-    add_definitions(-DCGALPY_ALPHA_SHAPE=${CGALPY_ALPHA_SHAPE})
+    add_definitions(-DCGALPY_AS3=${CGALPY_AS3})
   endif()
 endfunction()
 

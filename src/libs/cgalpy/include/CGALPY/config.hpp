@@ -9,11 +9,6 @@
 #ifndef CGALPY_CONFIG_HPP
 #define CGALPY_CONFIG_HPP
 
-#include "CGALPY/kernel_config.hpp"
-#include "CGALPY/arrangement_on_surface_2_config.hpp"
-#include "CGALPY/spatial_searching_config.hpp"
-#include "CGALPY/convex_hull_2_config.hpp"
-
 #define STR(s) #s
 #define XSTR(s) STR(s)
 
