@@ -9,31 +9,32 @@
 #ifndef CGALPY_ALPHA_SHAPE_3_CONFIG_HPP
 #define CGALPY_ALPHA_SHAPE_3_CONFIG_HPP
 
-#include "CGALPY/triangulation_3_config.hpp"
+#include <CGAL/tags.h>
+#include <CGAL/Alpha_shape_3.h>
+#include <CGAL/Fixed_alpha_shape_3.h>
+
+#include "CGALPY/config.hpp"
 
 #define CGALPY_AS3_PLAIN                                0
 #define CGALPY_AS3_FIXED                                1
 
-#if ((CGALPY_TRI3_VERTEX_BASE != CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE) && \
-     (CGALPY_TRI3_VERTEX_BASE != CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE_WITH_INFO) && \
-     (CGALPY_TRI3_VERTEX_BASE != CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE_REGULAR) && \
-     (CGALPY_TRI3_VERTEX_BASE != CGALPY_TRI3_VERTEX_BASE_ALPHA_SHAPE_REGULAR_WITH_INFO) && \
-     (CGALPY_TRI3_VERTEX_BASE != CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE) && \
-     (CGALPY_TRI3_VERTEX_BASE != CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE_WITH_INFO) && \
-     (CGALPY_TRI3_VERTEX_BASE != CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE_REGULAR) && \
-     (CGALPY_TRI3_VERTEX_BASE != CGALPY_TRI3_VERTEX_BASE_FIXED_ALPHA_SHAPE_REGULAR_WITH_INFO))
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_VERTEX_BASE");
-#endif
+namespace as3 {
 
-#if ((CGALPY_TRI3_CELL_BASE != CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE) && \
-     (CGALPY_TRI3_CELL_BASE != CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE_WITH_INFO) && \
-     (CGALPY_TRI3_CELL_BASE != CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE_REGULAR) && \
-     (CGALPY_TRI3_CELL_BASE != CGALPY_TRI3_CELL_BASE_ALPHA_SHAPE_REGULAR_WITH_INFO) && \
-     (CGALPY_TRI3_CELL_BASE != CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE) && \
-     (CGALPY_TRI3_CELL_BASE != CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_WITH_INFO) && \
-     (CGALPY_TRI3_CELL_BASE != CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR) && \
-     (CGALPY_TRI3_CELL_BASE != CGALPY_TRI3_CELL_BASE_FIXED_ALPHA_SHAPE_REGULAR_WITH_INFO))
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_TRI3_CELL_BASE");
-#endif
+constexpr bool exact_comparison()
+{ return DETECT_EXIST(CGALPY_AS3_EXACT_COMPARISON); }
+
+// Exact comparison
+template <bool b> struct Exact_comparison {};
+template <> struct Exact_comparison<false> { typedef CGAL::Tag_false type; };
+template <> struct Exact_comparison<true> { typedef CGAL::Tag_true type; };
+
+// Alpha shape types
+template <int i, typename Tr, typename Ec> struct Alpha_shape {};
+template <typename Tr, typename Ec> struct Alpha_shape<CGALPY_AS3_PLAIN, Tr, Ec>
+{ typedef CGAL::Alpha_shape_3<Tr, Ec> type; };
+template <typename Tr, typename Ec> struct Alpha_shape<CGALPY_AS3_FIXED, Tr, Ec>
+{ typedef CGAL::Fixed_alpha_shape_3<Tr> type; };
+
+}
 
 #endif //CGALPY_ALPHA_SHAPE_3_CONFIG_HPP
