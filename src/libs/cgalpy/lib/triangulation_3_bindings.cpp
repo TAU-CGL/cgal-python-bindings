@@ -13,13 +13,13 @@ namespace bp = boost::python;
 
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 
-tri3::Delaunay_triangulation_3* dt3_init(bp::list& lst) {
+tri3::Triangulation_3* dt3_init(bp::list& lst) {
   auto begin = bp::stl_input_iterator<tri3::Point>(lst);
   auto end = bp::stl_input_iterator<tri3::Point>();
-  return new tri3::Delaunay_triangulation_3(begin, end);
+  return new tri3::Triangulation_3(begin, end);
 }
 
-std::ptrdiff_t insert_points(tri3::Delaunay_triangulation_3& dt, bp::list& lst) {
+std::ptrdiff_t insert_points(tri3::Triangulation_3& dt, bp::list& lst) {
   if (! lst) return 0;
   if (! bp::extract<tri3::Point>(lst[0]).check()) return 0;
   auto begin = bp::stl_input_iterator<tri3::Point>(lst);
@@ -29,15 +29,15 @@ std::ptrdiff_t insert_points(tri3::Delaunay_triangulation_3& dt, bp::list& lst) 
 
 #if (CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT)
 
-tri3::Vertex_handle insert4(tri3::Delaunay_triangulation_3& dt,
+tri3::Vertex_handle insert4(tri3::Triangulation_3& dt,
                             const tri3::Point& p, tri3::Cell_handle start)
 { return dt.insert(p, start); }
 
-tri3::Vertex_handle insert5(tri3::Delaunay_triangulation_3& dt,
+tri3::Vertex_handle insert5(tri3::Triangulation_3& dt,
                             const tri3::Point& p, tri3::Vertex_handle hint)
 { return dt.insert(p, hint); }
 
-tri3::Vertex_handle insert6(tri3::Delaunay_triangulation_3& dt,
+tri3::Vertex_handle insert6(tri3::Triangulation_3& dt,
                             const tri3::Point& p, tri3::Locate_type lt,
                             tri3::Cell_handle c, int li, int lj)
 { return dt.insert(p, lt, c, li, lj); }
@@ -45,38 +45,38 @@ tri3::Vertex_handle insert6(tri3::Delaunay_triangulation_3& dt,
 #endif
 
 void export_delaunay_triangulation_3() {
-  CGAL::Bounded_side(tri3::Delaunay_triangulation_3::*side_of_sphere)(tri3::Cell_handle, const tri3::Point&, bool) const =
-    &tri3::Delaunay_triangulation_3::side_of_sphere;
-  CGAL::Bounded_side(tri3::Delaunay_triangulation_3::*side_of_circle1)(const tri3::Facet&, const tri3::Point&, bool) const =
-    &tri3::Delaunay_triangulation_3::side_of_circle;
-  CGAL::Bounded_side(tri3::Delaunay_triangulation_3::*side_of_circle2)(tri3::Cell_handle, int, const tri3::Point& p, bool) const =
-    &tri3::Delaunay_triangulation_3::side_of_circle;
+  CGAL::Bounded_side(tri3::Triangulation_3::*side_of_sphere)(tri3::Cell_handle, const tri3::Point&, bool) const =
+    &tri3::Triangulation_3::side_of_sphere;
+  CGAL::Bounded_side(tri3::Triangulation_3::*side_of_circle1)(const tri3::Facet&, const tri3::Point&, bool) const =
+    &tri3::Triangulation_3::side_of_circle;
+  CGAL::Bounded_side(tri3::Triangulation_3::*side_of_circle2)(tri3::Cell_handle, int, const tri3::Point& p, bool) const =
+    &tri3::Triangulation_3::side_of_circle;
 
-  bool(tri3::Delaunay_triangulation_3::*is_valid1)(bool, int) const =
-    &tri3::Delaunay_triangulation_3::is_valid;
-  // bool(tri3::Delaunay_triangulation_3::*is_valid2)(tri3::Cell_handle, bool, int) const =
-  //   &tri3::Delaunay_triangulation_3::is_valid;
+  bool(tri3::Triangulation_3::*is_valid1)(bool, int) const =
+    &tri3::Triangulation_3::is_valid;
+  // bool(tri3::Triangulation_3::*is_valid2)(tri3::Cell_handle, bool, int) const =
+  //   &tri3::Triangulation_3::is_valid;
 
 #if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
-  tri3::Vertex_handle(tri3::Delaunay_triangulation_3::*insert1)(const tri3::Point&, tri3::Cell_handle, bool*) =
-    &tri3::Delaunay_triangulation_3::insert;
-  tri3::Vertex_handle(tri3::Delaunay_triangulation_3::*insert2)(const tri3::Point&, tri3::Vertex_handle, bool*) =
-    &tri3::Delaunay_triangulation_3::insert;
-  tri3::Vertex_handle(tri3::Delaunay_triangulation_3::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int, bool*) =
-    &tri3::Delaunay_triangulation_3::insert;
+  tri3::Vertex_handle(tri3::Triangulation_3::*insert1)(const tri3::Point&, tri3::Cell_handle, bool*) =
+    &tri3::Triangulation_3::insert;
+  tri3::Vertex_handle(tri3::Triangulation_3::*insert2)(const tri3::Point&, tri3::Vertex_handle, bool*) =
+    &tri3::Triangulation_3::insert;
+  tri3::Vertex_handle(tri3::Triangulation_3::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int, bool*) =
+    &tri3::Triangulation_3::insert;
 #else
-  tri3::Vertex_handle(tri3::Delaunay_triangulation_3::*insert1)(const tri3::Point&, tri3::Cell_handle) =
-    &tri3::Delaunay_triangulation_3::insert;
-  tri3::Vertex_handle(tri3::Delaunay_triangulation_3::*insert2)(const tri3::Point&, tri3::Vertex_handle) =
-    &tri3::Delaunay_triangulation_3::insert;
-  tri3::Vertex_handle(tri3::Delaunay_triangulation_3::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int) =
-    &tri3::Delaunay_triangulation_3::insert;
+  tri3::Vertex_handle(tri3::Triangulation_3::*insert1)(const tri3::Point&, tri3::Cell_handle) =
+    &tri3::Triangulation_3::insert;
+  tri3::Vertex_handle(tri3::Triangulation_3::*insert2)(const tri3::Point&, tri3::Vertex_handle) =
+    &tri3::Triangulation_3::insert;
+  tri3::Vertex_handle(tri3::Triangulation_3::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int) =
+    &tri3::Triangulation_3::insert;
 #endif
 
-  tri3::Vertex_handle(tri3::Delaunay_triangulation_3::*nearest_vertex)(const tri3::Point&, tri3::Cell_handle) const =
-    &tri3::Delaunay_triangulation_3::nearest_vertex;
+  tri3::Vertex_handle(tri3::Triangulation_3::*nearest_vertex)(const tri3::Point&, tri3::Cell_handle) const =
+    &tri3::Triangulation_3::nearest_vertex;
 
-  bp::class_<tri3::Delaunay_triangulation_3>("Delaunay_triangulation_3")
+  bp::class_<tri3::Triangulation_3>("Triangulation_3")
     .def(bp::init<>())
     .def(bp::init<const tri3::Traits&>())
     .def("__init__", bp::make_constructor(&dt3_init))
@@ -95,12 +95,12 @@ void export_delaunay_triangulation_3() {
     // std::ptrdiff_t 	insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
 
     // Displacement
-    .def("move_if_no_collision", &tri3::Delaunay_triangulation_3::move_if_no_collision)
-    .def("move", &tri3::Delaunay_triangulation_3::move)
+    .def("move_if_no_collision", &tri3::Triangulation_3::move_if_no_collision)
+    .def("move", &tri3::Triangulation_3::move)
 
     // Removal
-    .def<void(tri3::Delaunay_triangulation_3::*)(tri3::Vertex_handle)>("remove", &tri3::Delaunay_triangulation_3::remove)
-    // .def<bool(tri3::Delaunay_triangulation_3::*)(tri3::Vertex_handle, bool*)>("remove", &tri3::Delaunay_triangulation_3::remove)
+    .def<void(tri3::Triangulation_3::*)(tri3::Vertex_handle)>("remove", &tri3::Triangulation_3::remove)
+    // .def<bool(tri3::Triangulation_3::*)(tri3::Vertex_handle, bool*)>("remove", &tri3::Triangulation_3::remove)
 
     // template<typename InputIterator >
     // int remove (InputIterator first, InputIterator beyond)
@@ -113,7 +113,7 @@ void export_delaunay_triangulation_3() {
     .def("side_of_circle", side_of_circle1)
     .def("side_of_circle", side_of_circle2)
     .def("nearest_vertex", nearest_vertex)
-    .def("nearest_vertex_in_cell", &tri3::Delaunay_triangulation_3::nearest_vertex_in_cell)
+    .def("nearest_vertex_in_cell", &tri3::Triangulation_3::nearest_vertex_in_cell)
     .def("is_valid", is_valid1)
     // .def("is_valid", is_valid2)
     ;

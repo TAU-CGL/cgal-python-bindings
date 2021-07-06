@@ -9,10 +9,6 @@
 #ifndef CGALPY_TRIANGULATION_2_TYPES_HPP
 #define CGALPY_TRIANGULATION_2_TYPES_HPP
 
-#include <CGAL/Triangulation_2.h>
-#include <CGAL/Delaunay_triangulation_2.h>
-#include <CGAL/Constrained_triangulation_2.h>
-
 #include <CGAL/Triangulation_vertex_base_2.h>
 #include <CGAL/Regular_triangulation_vertex_base_2.h>
 #include <CGAL/Triangulation_vertex_base_with_info_2.h>
@@ -40,9 +36,10 @@
 #include <CGAL/Periodic_2_triangulation_2.h>
 #include <CGAL/Periodic_2_Delaunay_triangulation_traits_2.h>
 
+#include "CGALPY/config.hpp"
 #include "CGALPY/triangulation_2_config.hpp"
+#include "CGALPY/alpha_shape_2_config.hpp"
 #include "CGALPY/kernel_types.hpp"
-#include "CGALPY/alpha_shape_2_types.hpp"
 
 namespace tri2 {
 
@@ -64,13 +61,13 @@ constexpr bool is_periodic() {
 }
 
 // Traits
-template <int i> struct Tr {};
-template <> struct Tr<CGALPY_TRI2_TRAITS_KERNEL>
-{ typedef Kernel type; };
-template <> struct Tr<CGALPY_TRI2_TRAITS_PERIODIC_PLAIN>
-{ typedef CGAL::Periodic_2_triangulation_traits_2<Kernel> type; };
-template <> struct Tr<CGALPY_TRI2_TRAITS_PERIODIC_DELAUNAY>
-{ typedef CGAL::Periodic_2_Delaunay_triangulation_traits_2<Kernel> type; };
+template <int i, typename K> struct Tr {};
+template <typename K> struct Tr<CGALPY_TRI2_TRAITS_KERNEL, K>
+{ typedef K type; };
+template <typename K> struct Tr<CGALPY_TRI2_TRAITS_PERIODIC_PLAIN, K>
+{ typedef CGAL::Periodic_2_triangulation_traits_2<K> type; };
+template <typename K> struct Tr<CGALPY_TRI2_TRAITS_PERIODIC_DELAUNAY, K>
+{ typedef CGAL::Periodic_2_Delaunay_triangulation_traits_2<K> type; };
 
 // Vertex base selection
 template <int i, typename Tr> struct Vertex_base_name {};
@@ -90,20 +87,20 @@ template <typename Vb, typename Data, typename Tr>
 struct Vertex_with_info<true, Vb, Data, Tr>
 { typedef CGAL::Triangulation_vertex_base_with_info_2<Data, Tr, Vb> type; };
 
-// Triangulation hierarchy
+// Vertex triangulation hierarchy
 template <bool b, typename Vb> struct Vertex_hierarchy {};
 template <typename Vb> struct Vertex_hierarchy<false, Vb> { typedef Vb type; };
 template <typename Vb> struct Vertex_hierarchy<true, Vb>
 { typedef CGAL::Triangulation_hierarchy_vertex_base_2<Vb> type; };
 
-// Periodic triangulation
+// Vertex periodic triangulation
 template <bool b, typename Vb, typename Tr> struct Vertex_periodic {};
 template <typename Vb, typename Tr> struct Vertex_periodic<false, Vb, Tr>
 { typedef Vb type; };
 template <typename Vb, typename Tr> struct Vertex_periodic<true, Vb, Tr>
 { typedef CGAL::Periodic_2_triangulation_vertex_base_2<Tr, Vb> type; };
 
-// Alpha shape
+// Vertex alpha shape
 template <bool b, typename Vb, typename Tr, typename ExactComparison>
 struct Vertex_alpha_shape {};
 template <typename Vb, typename Tr, typename ExactComparison>
@@ -113,7 +110,7 @@ template <typename Vb, typename Tr, typename ExactComparison>
 struct Vertex_alpha_shape<true, Vb, Tr, ExactComparison>
 { typedef CGAL::Alpha_shape_vertex_base_2<Tr, Vb, ExactComparison> type; };
 
-// Vertex base selection
+// Face base selection
 template <int i, typename Tr> struct Face_base_name {};
 template <typename Tr>
 struct Face_base_name<CGALPY_TRI2_FACE_BASE_PLAIN, Tr>
@@ -131,14 +128,14 @@ template <typename Fb, typename Data, typename Tr>
 struct Face_with_info<true, Fb, Data, Tr>
 { typedef CGAL::Triangulation_face_base_with_info_2<Data, Tr, Fb> type; };
 
-// Periodic triangulation
+// Face periodic triangulation
 template <bool b, typename Fb, typename Tr> struct Face_periodic {};
 template <typename Fb, typename Tr> struct Face_periodic<false, Fb, Tr>
 { typedef Fb type; };
 template <typename Fb, typename Tr> struct Face_periodic<true, Fb, Tr>
 { typedef CGAL::Periodic_2_triangulation_face_base_2<Tr, Fb> type; };
 
-// Alpha shape
+// Face alpha shape
 template <bool b, typename Fb, typename Tr, typename ExactComparison>
 struct Face_alpha_shape {};
 template <typename Fb, typename Tr, typename ExactComparison>
@@ -160,7 +157,6 @@ template <> struct Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG_EXACT_INTERSECT
 { typedef CGAL::Exact_intersections_tag type; };
 
 // Main triangulation
-
 template <int i, typename Tr, typename Tds, typename Itag>
 struct Base_tri {};
 template <typename Tr, typename Tds, typename Itag>
@@ -193,13 +189,14 @@ template <typename Tr> struct Tri<true, Tr>
 { typedef CGAL::Triangulation_hierarchy_2<Tr> type; };
 
 // Final types
+typedef as2::Exact_comparison<as2::exact_comparison()>::type    Ec;
 
-typedef Tr<CGALPY_TRI2_TRAITS>::type                            Traits;
+typedef Tr<CGALPY_TRI2_TRAITS, Kernel>::type                    Traits;
 
 typedef Vertex_base_name<CGALPY_TRI2_VERTEX_BASE, Traits>::type Vb;
 typedef Vertex_with_info<vertex_with_info(), Vb, bp::object, Traits>::type
                                                                 Vbi;
-typedef Vertex_alpha_shape<alpha_shape_2_bindings(), Vbi, Traits, as2::Ec>::type
+typedef Vertex_alpha_shape<alpha_shape_2_bindings(), Vbi, Traits, Ec>::type
                                                                 Vbia;
 typedef Vertex_hierarchy<hierarchy(), Vbia>::type               Vbiah;
 typedef Vertex_periodic<is_periodic(), Vbiah, Traits>::type     V;
@@ -207,7 +204,7 @@ typedef Vertex_periodic<is_periodic(), Vbiah, Traits>::type     V;
 typedef Face_base_name<CGALPY_TRI2_FACE_BASE, Traits>::type     Fb;
 typedef Face_with_info<face_with_info(), Fb, bp::object, Traits>::type
                                                                 Fbi;
-typedef Face_alpha_shape<alpha_shape_2_bindings(), Fbi, Traits, as2::Ec>::type
+typedef Face_alpha_shape<alpha_shape_2_bindings(), Fbi, Traits, Ec>::type
                                                                 Fbia;
 typedef Face_periodic<is_periodic(), Fbia, Traits>::type        F;
 
