@@ -17,24 +17,32 @@ namespace tri3 {
 typedef as3::Exact_comparison<as3::exact_comparison()>::type    Ec;
 typedef Tr<CGALPY_TRI3_TRAITS, Kernel>::type                    Traits;
 
-typedef Vertex_base_name<CGALPY_TRI3_VERTEX_BASE, Traits>::type Vb;
+// Vertex type
+typedef Vertex_periodic<is_periodic()>::type                    Vbd;
+typedef Vertex_base_name<CGALPY_TRI3_VERTEX_BASE, Vbd, Traits>::type
+                                                                Vb;
 typedef Vertex_with_info<vertex_with_info(), Vb, bp::object, Traits>::type
                                                                 Vbi;
-typedef Vertex_hierarchy<hierarchy(), Vbi>::type                V;
-// typedef Vertex_alpha_shape<alpha_shape_3_bindings(), CGALPY_AS3, Vbi, Traits,
-//                            Ec>::type                            Vbia;
-// typedef Vertex_hierarchy<hierarchy(), Vbia>::type               Vbiah;
-// typedef Vertex_periodic<is_periodic(), Vbiah, Traits>::type     V;
+#ifdef CGALPY_AS3
+typedef Vertex_alpha_shape<CGALPY_AS3, Vbi, Traits, Ec>::type   Vbia;
+#else
+typedef Vbi                                                     Vbia;
+#endif
+typedef Vertex_hierarchy<hierarchy(), Vbia>::type               V;
 
-typedef Cell_base_name<CGALPY_TRI3_CELL_BASE, Traits>::type     Cb;
+// Cell type
+typedef Cell_periodic<is_periodic()>::type                      Cbd;
+typedef Cell_base_name<CGALPY_TRI3_CELL_BASE, Cbd, Traits>::type
+                                                                Cb;
 typedef Cell_with_info<cell_with_info(), Cb, bp::object, Traits>::type
-                                                                C;
-// typedef Cell_with_info<cell_with_info(), Cb, bp::object, Traits>::type
-//                                                                 Cbi;
-// typedef Cell_alpha_shape<alpha_shape_3_bindings(), Cbi, Traits, Ec>::type
-//                                                                 Cbia;
-// typedef Cell_periodic<is_periodic(), Cbia, Traits>::type        C;
+                                                                Cbi;
+# ifdef CGALPY_AS3
+typedef Cell_alpha_shape<CGALPY_AS3, Cbi, Traits, Ec>::type     C;
+#else
+typedef Cbi                                                     C;
+#endif
 
+// Concurency
 typedef Concurrency<CGALPY_TRI3_CONCURRENCY>::type              Con;
 typedef CGAL::Triangulation_data_structure_3<V, C, Con>         Tds;
 typedef Location_policy<CGALPY_TRI3_LOCATION_POLICY>::type      Lp;
