@@ -506,14 +506,12 @@ module.
     column 1/.style={nodes={text width=16.0em}},
     column 3/.style={nodes={text width=5.7em}},
     column 4/.style={nodes={text width=21.6em}},
-    row 8/.append style={nodes={minimum height=2.8em}}
+    row 6/.append style={nodes={minimum height=2.8em}}
   ] {
     Name & Type & Default & Description\\
     \cmakeLstinline{TRI2\_NAME} & String & \myLstinline{plain} &
       The 2D triangulation type\\
-    \cmakeLstinline{TRI2\_VERTEX\_BASE\_NAME}      & String  & \myLstinline{plain} & The base vertex type\\
     \cmakeLstinline{TRI2\_VERTEX\_WITH\_INFO}      & Boolean & \myLstinline{false} & Determines whether the vertex type is extented\\
-    \cmakeLstinline{TRI2\_FACE\_BASE\_NAME}        & String  & \myLstinline{plain} & The base face type\\
     \cmakeLstinline{TRI2\_FACE\_WITH\_INFO}        & Boolean & \myLstinline{false} & Determines whether the face type is extented\\
     \cmakeLstinline{TRI2\_INTERSECTION\_TAG\_NAME} & String  & \myLstinline{ncirc} & The intersection tag\\
     \cmakeLstinline{TRI2\_HIERARCHY}               & Boolean & \myLstinline{false} & Determines whether to generate the binding for a hierarchy triangulation\\
@@ -601,7 +599,7 @@ triangulation instance. This type is exposed as a Python attribute
 with the same name under \pyLstinline{Triangulation_2} (which in turn
 is nested under the Python namespace \pyLstinline{Tri2}).
 Figure~\ref{tab:tri2:concept-hierarchy} depicts the 2D triangulation
-traits concept hierarchy. Any Kernel instance is a model of any
+traits concept hierarchy. Any kernel instance is a model of any
 non-periodic traits concept; thus, when one of the templates
 \begin{compactenum}
 \item \cppLstinline{Triangulation\_2<Traits, Tds>},
@@ -611,7 +609,7 @@ non-periodic traits concept; thus, when one of the templates
 \item \cppLstinline{Constrained\_Delaunay\_triangulation\_2<Traits, Tds, Itag>}
 \end{compactenum}
 is instantiated, the \cppLstinline{Traits} parameter is substituted
-with \cppLstinline{Kernel} (the selected kernel; see
+with the \cppLstinline{Kernel} type (the selected kernel; see
 Section~\ref{ssec:modules:kernel}). When one of the templates
 \begin{compactenum}
 \item \cppLstinline{Periodic\_2\_triangulation\_2<Traits, Tds>} or
@@ -629,7 +627,8 @@ parameter must be substituted with a traits class that models the
 triangulation instance is used to define an alpha shape type (see
 Section~\ref{ssec:modules:as2}, the traits parameter must be
 substituted with a traits class that models the
-\cppLstinline{WeightedAlphaShapeTraits\_2} concept. Also in these cases
+\cppLstinline{WeightedAlphaShapeTraits\_2} concept. Also in these
+cases the selected kernel serves as the traits.
 
 \begin{figure}[!htp]
   \tikzset{
@@ -712,15 +711,24 @@ paramater
 a model of the concept
 \cppLstinline{TriangulationHierarchyVertexBase\_2}. (Observe that
 there is no special requirements on the type that substitutes the
-\cppLstinline{FaceBase} parameter in this case.) Below we describe how
-the final vertex type is selected in details.
+\cppLstinline{FaceBase} parameter in this case.) The final vertex
+type is selected accordingly as follows.
 
 %% 3D Triangulation Vertex Selection
-The \cmake{} flag \cmakeLstinline{TRI2\_VERTEX\_BASE\_NAME} specifies
-the base vertex type; see Table~\ref{tab:tri2:entity}.  The type
-\cppLstinline{Vb} is defined as the vertex base type (either
-\cppLstinline{Triangulation\_vertex\_base\_2<Kernel>} or
-\cppLstinline{Regular\_triangulation\_vertex\_base\_2<Kernel>}).
+%
+otherwise the type \cppLstinline{Vbihp} is defined as
+\cppLstinline{Vbih}.
+%
+The type \cppLstinline{Vb} is defined as the vertex base type.  If
+bindings is generated for a periodic triangulation, the type
+\cppLstinline{Vb} is defined as
+\cppLstinline{Periodic\_2\_triangulation\_vertex\_base\_2<Traits>};
+otherwise, if bindings is generated for an instance of
+\cppLstinline{Regular\_triangulation\_vertex\_base\_2<Kernel>}, the
+type \cppLstinline{Vb} is defined as
+\cppLstinline{Regular\_triangulation\_vertex\_base\_2<Traits>};
+otherwise, the type \cppLstinline{Vb} is defined as
+\cppLstinline{Triangulation\_vertex\_base\_2<Traits>}.
 %
 If the \cmake{} flag \cmakeLstinline{TRI2\_VERTEX\_WITH\_INFO} is set
 to \myLstinline{true}, the type \cppLstinline{Vbi} is defined as
@@ -734,59 +742,30 @@ to \myLstinline{true}, the type \cppLstinline{Vbih} is defined as
 \cppLstinline{Triangulation\_hierarchy\_vertex\_base\_2<Vbi>}; otherwise
 the type \cppLstinline{Vbih} is defined as \cppLstinline{Vbi}.
 %
-If bindings is generated for a periodic triangulation, the type
-\cppLstinline{Vbihp} is defined as
-\cppLstinline{Periodic\_2\_triangulation\_vertex\_base\_2<Traits,
-  Vbih>}; otherwise the type \cppLstinline{Vbihp} is defined as
-\cppLstinline{Vbih}.
-%
 Finally, if the triangulation is used to define an alpha shape type,
 the final type \cppLstinline{V} (that substitutes the
 \cppLstinline{VertexBase} paramater) is defined as
-\cppLstinline{Alpha\_shape\_vertex\_base\_2<Traits, Vbihp,
+\cppLstinline{Alpha\_shape\_vertex\_base\_2<Traits, Vbih,
   ExactComparison>}, where \cppLstinline{ExactComparison} is
 substituted with either \cppLstinline{true} or \cppLstinline{false}
 based on the setting of the \cmake{} flag
 \cmakeLstinline{AS\_EXACT\_COMPARISON}; see
 Table~\ref{tab:as2}. Otherwise, \cppLstinline{V} is defined as
-\cppLstinline{Vbihp}.
+\cppLstinline{Vbih}.
 %
-The final vertex type is conveniently available as
+The final vertex type is conveniently defined in C++ as
 \cppLstinline{Dt::Vertex}, where \cppLstinline{Dt} is the
-triangulation instance.
+triangulation instance. This type is exposed as a Python attribute
+with the same name under \pyLstinline{Triangulation_2}.
 
 The final face type is determined in a similar fashion. The only
 difference between the selections of the vertex and face types is that
 the setting of the \cmake{} flag \cmakeLstinline{TRI2\_HIERARCHY} does
-not have an effect on the face type selection. The \cmake{} flag
-\cmakeLstinline{TRI2\_CELL\_BASE\_NAME} specifies the base cell type;
-see Table~\ref{tab:tri2:entity}. The final face type is conveniently
-available as \cppLstinline{Dt::Face}, where \cppLstinline{Dt} is the
-triangulation instance.
-
-\begin{table}[!htp]
-  \caption{2D triangulation vertex and face base options.
-    \cppLstinline{entity} must be replaced with either
-    \cppLstinline{vertex} or \cppLstinline{face}.
-  }
-  \centering\begin{tikzpicture}
-  \matrix (first) [tableName,
-    row 1/.append style={nodes={minimum height=2.8em}},
-    column 1/.style={nodes={text width=18.1em}},
-    column 2/.style={nodes={text width=30.9em}}
-  ] {%
-    \setlength{\tabcolsep}{0pt}\renewcommand{\arraystretch}{0}
-    \begin{tabular}{c}
-      \cmakeLstinline{TRI2\_VERTEX\_BASE\_NAME}
-      \textcolor{white}{or}\\[5pt]
-      \textcolor{white}{\cmakeLstinline{TRI2\_FACE\_BASE\_NAME}}
-    \end{tabular} & Type\\
-    \myLstinline{plain} & \cppLstinline{Triangulation\_entity\_base\_2<Kernel>}\\
-    \myLstinline{regular} & \cppLstinline{Regular\_triangulation\_entity\_base\_2<Kernel>}\\
-  };
-  \end{tikzpicture}
-  \label{tab:tri2:entity}
-\end{table}
+not have an effect on the face type selection. The final face type is
+conveniently defined in C++ as \cppLstinline{Dt::Face}, where
+\cppLstinline{Dt} is the triangulation instance. This type is also
+exposed as a Python attribute with the same name under
+\pyLstinline{Triangulation_2}.
 
 The \cmake{} Boolean flag \cmakeLstinline{TRI2\_HIERARCHY} indicates
 whether the type of triangulation, bindings for which should be
