@@ -22,7 +22,7 @@ typedef as2::Exact_comparison<as2::exact_comparison()>::type    Ec;
 typedef Tr<CGALPY_TRI2, Kernel>::type                           Traits;
 
 // Vertex
-typedef Vertex_base_name<is_periodic(), CGALPY_TRI2_VERTEX_BASE, Traits>::type
+typedef Vertex_base_name<is_periodic(), CGALPY_TRI2, Traits>::type
                                                                 Vb;
 typedef Vertex_with_info<vertex_with_info(), Vb, bp::object, Traits>::type
                                                                 Vbi;
@@ -31,7 +31,7 @@ typedef Vertex_alpha_shape<alpha_shape_2_bindings(), Vbi, Traits, Ec>::type
 typedef Vertex_hierarchy<hierarchy(), Vbia>::type               V;
 
 // Face
-typedef Face_base_name<is_periodic(), CGALPY_TRI2_FACE_BASE, Traits>::type
+typedef Face_base_name<is_periodic(), CGALPY_TRI2, Traits>::type
                                                                 Fb;
 typedef Face_with_info<face_with_info(), Fb, bp::object, Traits>::type
                                                                 Fbi;
