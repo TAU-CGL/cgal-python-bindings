@@ -95,14 +95,21 @@ template <typename K> struct Tr<CGALPY_TRI3_TRAITS_PERIODIC_REGULAR, K>
 template <typename K> struct Tr<CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY, K>
 { typedef CGAL::Periodic_3_Delaunay_triangulation_traits_3<K> type; };
 
+// Vertex periodic triangulation
+template <bool b> struct Vertex_periodic {};
+template <> struct Vertex_periodic<false>
+{ typedef CGAL::Triangulation_ds_vertex_base_3<> type; };
+template <> struct Vertex_periodic<true>
+{ typedef CGAL::Periodic_3_triangulation_ds_vertex_base_3<> type; };
+
 // Vertex base selection
-template <int i, typename Tr> struct Vertex_base_name {};
-template <typename Tr>
-struct Vertex_base_name<CGALPY_TRI3_VERTEX_BASE_PLAIN, Tr>
-{ typedef CGAL::Triangulation_vertex_base_3<Tr> type; };
-template <typename Tr>
-struct Vertex_base_name<CGALPY_TRI3_VERTEX_BASE_REGULAR, Tr>
-{ typedef CGAL::Regular_triangulation_vertex_base_3<Tr> type; };
+template <int i, typename Vb, typename Tr> struct Vertex_base_name {};
+template <typename Vb, typename Tr>
+struct Vertex_base_name<CGALPY_TRI3_VERTEX_BASE_PLAIN, Vb, Tr>
+{ typedef CGAL::Triangulation_vertex_base_3<Tr, Vb> type; };
+template <typename Vb, typename Tr>
+struct Vertex_base_name<CGALPY_TRI3_VERTEX_BASE_REGULAR, Vb, Tr>
+{ typedef CGAL::Regular_triangulation_vertex_base_3<Tr, Vb> type; };
 
 // Vertex with info
 template <bool b, typename Vb, typename Data, typename Tr>
@@ -119,13 +126,6 @@ template <typename Vb> struct Vertex_hierarchy<false, Vb> { typedef Vb type; };
 template <typename Vb> struct Vertex_hierarchy<true, Vb>
 { typedef CGAL::Triangulation_hierarchy_vertex_base_3<Vb> type; };
 
-// // Vertex periodic triangulation
-// template <bool b, typename Vb, typename Tr> struct Vertex_periodic {};
-// template <typename Vb, typename Tr> struct Vertex_periodic<false, Vb, Tr>
-// { typedef Vb type; };
-// template <typename Vb, typename Tr> struct Vertex_periodic<true, Vb, Tr>
-// { typedef CGAL::Periodic_3_triangulation_ds_vertex_base_3<Tr, Vb> type; };
-
 // Vertex alpha shape
 template <bool b, int i, typename Vb, typename Tr, typename ExactComparison>
 struct Vertex_alpha_shape {};
@@ -139,14 +139,21 @@ template <typename Vb, typename Tr, typename ExactComparison>
 struct Vertex_alpha_shape<true, CGALPY_AS3_FIXED, Vb, Tr, ExactComparison>
 { typedef CGAL::Fixed_alpha_shape_vertex_base_3<Tr, Vb> type; };
 
+// Cell periodic triangulation
+template <bool b> struct Cell_periodic {};
+template <> struct Cell_periodic<false>
+{ typedef CGAL::Triangulation_ds_cell_base_3<> type; };
+template <> struct Cell_periodic<true>
+{ typedef CGAL::Periodic_3_triangulation_ds_cell_base_3<> type; };
+
 // Cell base selection
-template <int i, typename Tr> struct Cell_base_name {};
-template <typename Tr>
-struct Cell_base_name<CGALPY_TRI3_CELL_BASE_PLAIN, Tr>
-{ typedef CGAL::Triangulation_cell_base_3<Tr> type; };
-template <typename Tr>
-struct Cell_base_name<CGALPY_TRI3_CELL_BASE_REGULAR, Tr>
-{ typedef CGAL::Regular_triangulation_cell_base_3<Tr> type; };
+template <int i, typename Cb, typename Tr> struct Cell_base_name {};
+template <typename Cb, typename Tr>
+struct Cell_base_name<CGALPY_TRI3_CELL_BASE_PLAIN, Cb, Tr>
+{ typedef CGAL::Triangulation_cell_base_3<Tr, Cb> type; };
+template <typename Cb, typename Tr>
+struct Cell_base_name<CGALPY_TRI3_CELL_BASE_REGULAR, Cb, Tr>
+{ typedef CGAL::Regular_triangulation_cell_base_3<Tr, Cb> type; };
 
 // Cell with info
 template <bool b, typename Fb, typename Data, typename Tr>
@@ -157,25 +164,15 @@ template <typename Fb, typename Data, typename Tr>
 struct Cell_with_info<true, Fb, Data, Tr>
 { typedef CGAL::Triangulation_cell_base_with_info_3<Data, Tr, Fb> type; };
 
-// // Cell periodic triangulation
-// template <bool b, typename Fb, typename Tr> struct Cell_periodic {};
-// template <typename Fb, typename Tr> struct Cell_periodic<false, Fb, Tr>
-// { typedef Fb type; };
-// template <typename Fb, typename Tr> struct Cell_periodic<true, Fb, Tr>
-// { typedef CGAL::Periodic_3_triangulation_ds_cell_base_3<Tr, Fb> type; };
-
 // Cell alpha shape
-template <bool b, int i, typename Fb, typename Tr, typename ExactComparison>
+template <int i, typename Cb, typename Tr, typename ExactComparison>
 struct Cell_alpha_shape {};
-template <int i, typename Fb, typename Tr, typename ExactComparison>
-struct Cell_alpha_shape<false, i, Fb, Tr, ExactComparison>
-{ typedef Fb type; };
-template <typename Fb, typename Tr, typename ExactComparison>
-struct Cell_alpha_shape<true, CGALPY_AS3_PLAIN, Fb, Tr, ExactComparison>
-{ typedef CGAL::Alpha_shape_cell_base_3<Tr, Fb, ExactComparison> type; };
-template <typename Fb, typename Tr, typename ExactComparison>
-struct Cell_alpha_shape<true, CGALPY_AS3_FIXED, Fb, Tr, ExactComparison>
-{ typedef CGAL::Alpha_shape_cell_base_3<Tr, Fb, ExactComparison> type; };
+template <typename Cb, typename Tr, typename ExactComparison>
+struct Cell_alpha_shape<CGALPY_AS3_PLAIN, Cb, Tr, ExactComparison>
+{ typedef CGAL::Alpha_shape_cell_base_3<Tr, Cb, ExactComparison> type; };
+template <typename Cb, typename Tr, typename ExactComparison>
+struct Cell_alpha_shape<CGALPY_AS3_FIXED, Cb, Tr, ExactComparison>
+{ typedef CGAL::Alpha_shape_cell_base_3<Tr, Cb, ExactComparison> type; };
 
 // Concurrency
 template <int i> struct Concurrency {};
