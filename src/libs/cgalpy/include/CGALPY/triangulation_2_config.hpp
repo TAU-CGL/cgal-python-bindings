@@ -47,9 +47,6 @@
 #define CGALPY_TRI2_PERIODIC_PLAIN              5
 #define CGALPY_TRI2_PERIODIC_DELAUNAY           6
 
-#define CGALPY_TRI2_VERTEX_BASE_PLAIN           0
-#define CGALPY_TRI2_VERTEX_BASE_REGULAR         1
-
 #define CGALPY_TRI2_FACE_BASE_PLAIN             0
 #define CGALPY_TRI2_FACE_BASE_REGULAR           1
 
@@ -89,11 +86,11 @@ template <bool b, int i, typename Tr> struct Vertex_base_name {};
 template <typename Tr>
 struct Vertex_base_name<true, 0, Tr>
 { typedef CGAL::Periodic_2_triangulation_vertex_base_2<Tr> type; };
-template <typename Tr>
-struct Vertex_base_name<false, CGALPY_TRI2_VERTEX_BASE_PLAIN, Tr>
+template <int i, typename Tr>
+struct Vertex_base_name<false, i, Tr>
 { typedef CGAL::Triangulation_vertex_base_2<Tr> type; };
 template <typename Tr>
-struct Vertex_base_name<false, CGALPY_TRI2_VERTEX_BASE_REGULAR, Tr>
+struct Vertex_base_name<false, CGALPY_TRI2_REGULAR, Tr>
 { typedef CGAL::Regular_triangulation_vertex_base_2<Tr> type; };
 
 // Vertex with info
@@ -126,11 +123,11 @@ template <bool b, int i, typename Tr> struct Face_base_name {};
 template <typename Tr>
 struct Face_base_name<true, 0, Tr>
 { typedef CGAL::Periodic_2_triangulation_face_base_2<Tr> type; };
-template <typename Tr>
-struct Face_base_name<false, CGALPY_TRI2_FACE_BASE_PLAIN, Tr>
+template <int i, typename Tr>
+struct Face_base_name<false, i, Tr>
 { typedef CGAL::Triangulation_face_base_2<Tr> type; };
 template <typename Tr>
-struct Face_base_name<false, CGALPY_TRI2_FACE_BASE_REGULAR, Tr>
+struct Face_base_name<false, CGALPY_TRI2_REGULAR, Tr>
 { typedef CGAL::Regular_triangulation_face_base_2<Tr> type; };
 
 // Face with info
