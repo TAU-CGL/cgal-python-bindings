@@ -6,11 +6,13 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+
 #include <boost/python.hpp>
 
 #include "CGALPY/config.hpp"
-#include "CGALPY/common.hpp"
-#include "CGALPY/kernel_types.hpp"
+
+namespace bp = boost::python;
 
 void export_kernel();
 void export_kernel_d();
