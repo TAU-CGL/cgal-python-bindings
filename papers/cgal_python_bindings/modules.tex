@@ -529,9 +529,8 @@ provides the following class templates:
 \item \cppLstinline{Regular\_triangulation\_2<Traits, Tds>},
 \item \cppLstinline{Delaunay\_triangulation\_2<Traits, Tds>},
 \item \cppLstinline{Constrained\_triangulation\_2<Traits, Tds, Itag>},
-\item \cppLstinline{Constrained\_Delaunay\_triangulation\_2<Traits,
-  Tds, Itag>}, and
-\item \cppLstinline{Triangulation_hierarchy_2<Triangulation\_2>}
+\item \cppLstinline{Constrained\_Delaunay\_triangulation\_2<Traits, Tds, Itag>}, and
+\item \cppLstinline{Triangulation\_hierarchy\_2<Triangulation\_2>}
 \end{compactenum}
 Instance of the \cppLstinline{Delaunay\_triangulation\_2<>} and
 \cppLstinline{Regular\_triangulation\_2<>} class templates can be used
@@ -577,16 +576,16 @@ Table~\ref{tab:tri2:names}.
   \label{tab:tri2:names}
 \end{table}
 
-%% \cppLstinline{TriangulationTraits\_2},
-%% \cppLstinline{RegularTriangulationTraits\_2},
-%% \cppLstinline{DelaunayTriangulationTraits\_2},
-%% \cppLstinline{Periodic\_2TriangulationTraits\_2},
-%% \cppLstinline{Periodic\_2DelaunayTriangulationTraits\_2}
-%% \cppLstinline{AlphaShapeTraits\_2}
-%% \cppLstinline{PeriodicAlphaShapeTraits\_2}
-%% \cppLstinline{WeightedAlphaShapeTraits\_2}
+%% \cppLstinline{TriangulationTraits\_2}
+%% \cppLstinline{RegularTriangulationTraits\_2}
+%% \cppLstinline{DelaunayTriangulationTraits\_2}
 %% \cppLstinline{ConstrainedTriangulationTraits\_2}
 %% \cppLstinline{ConstrainedDelaunayTriangulationTraits_2}
+%% \cppLstinline{AlphaShapeTraits\_2}
+%% \cppLstinline{WeightedAlphaShapeTraits\_2}
+%% \cppLstinline{Periodic\_2TriangulationTraits\_2}
+%% \cppLstinline{Periodic\_2DelaunayTriangulationTraits\_2}
+%% \cppLstinline{Periodic\_3AlphaShapeTraits\_2}
 When any template above is instantiated the template parameter
 \cppLstinline{Traits} must be substituted with a model of a suitable
 geometric traits concept; this model is referred to as the geometric
@@ -596,7 +595,7 @@ generated bindings is determined based on the selection of the
 triangulation type as explained below. It is conveniently defined in
 C++ as \cppLstinline{Dt::Geom\_traits}, where \cppLstinline{Dt} is a
 triangulation instance. This type is exposed as a Python attribute
-with the same name under \pyLstinline{Triangulation_2} (which in turn
+with the same name under \pyLstinline{Triangulation\_2} (which in turn
 is nested under the Python namespace \pyLstinline{Tri2}).
 Figure~\ref{tab:tri2:concept-hierarchy} depicts the 2D triangulation
 traits concept hierarchy. Any kernel instance is a model of any
@@ -624,8 +623,8 @@ Observe that when a Delaunay triangulation instance is used to define
 an alpha shape type (see Section~\ref{ssec:modules:as2}), the traits
 parameter must be substituted with a traits class that models the
 \cppLstinline{AlphaShapeTraits\_2} concept. Similarly, when a regular
-triangulation instance is used to define an alpha shape type (see
-Section~\ref{ssec:modules:as2}, the traits parameter must be
+triangulation instance is used to define an fixed alpha shape type
+(see Section~\ref{ssec:modules:as2}, the traits parameter must be
 substituted with a traits class that models the
 \cppLstinline{WeightedAlphaShapeTraits\_2} concept. Also in these
 cases the selected kernel serves as the traits.
@@ -644,7 +643,7 @@ cases the selected kernel serves as the traits.
         child anchor=north,
         edge={->,>=stealth,black,thick},
         edge path={% |-| style branches from parent to child
-          \noexpand\path [draw, \forestoption{edge}] (!u.parent anchor) -- +(0,-5pt) -| (.child anchor)\forestoption{edge label};
+          \noexpand\path [draw, \forestoption{edge}] (!u.parent anchor)--(.child anchor)\forestoption{edge label};
         },
         if n children=3{% if a node has 3 children
           for children={% align the middle child with its parent
@@ -661,23 +660,25 @@ cases the selected kernel serves as the traits.
       [ {\cppLstinline{RegularTriTr2}}
         [ {\cppLstinline{WeightedAlphaShapeTr2}} ]
       ]
+      [ {\cppLstinline{Pr2TriTr2}},name=p ]
       [ {\cppLstinline{DelaunayTriTr2}},name=d
-        [ {\cppLstinline{AlphaShapeTr2}} ]
-        [ {\cppLstinline{Periodic\_2DelaunayTriTr2}}
-	  [ {\cppLstinline{PeriodicAlphaShapeTr2}} ]
+        [ {\cppLstinline{Pr2DelaunayTriTr2}},name=pd
+	  [ {\cppLstinline{Pr2AlphaShapeTr2}} ]
         ]
+        [ {\cppLstinline{AlphaShapeTr2}} ]
       ]
       [ {\cppLstinline{ConstrainedTriTr2}}
         [ {\cppLstinline{ConstrainedDelaunayTriTr2}},name=cd ]
       ]
-      [ {\cppLstinline{Periodic\_2TriTr2}} ]
     ]
-    \draw (d.parent anchor)-- +(0,-5pt) -| (cd.child anchor);
+    \draw[->,>=stealth] (d.parent anchor)--(cd.child anchor);
+    \draw[->,>=stealth] (p.parent anchor)--(pd.child anchor);
   \end{forest}
   \label{tab:tri2:concept-hierarchy}
   \caption{The 2D triangulation traits concept hierarchy.
-    \cppLstinline{Triangulation} and \cppLstinline{Traits\_2} are
-    abbreviated as \cppLstinline{Tri} and \cppLstinline{Tr2},
+    \cppLstinline{Triangulation}, \cppLstinline{Periodic\_2} and
+    \cppLstinline{Traits\_2} are abbreviated as \cppLstinline{Tri},
+    \cppLstinline{Pr2}, and \cppLstinline{Tr2},
     respectively.}
 \end{figure}
 
@@ -714,11 +715,7 @@ there is no special requirements on the type that substitutes the
 \cppLstinline{FaceBase} parameter in this case.) The final vertex
 type is selected accordingly as follows.
 
-%% 3D Triangulation Vertex Selection
-%
-otherwise the type \cppLstinline{Vbihp} is defined as
-\cppLstinline{Vbih}.
-%
+%% 2D Triangulation Vertex Selection
 The type \cppLstinline{Vb} is defined as the vertex base type.  If
 bindings is generated for a periodic triangulation, the type
 \cppLstinline{Vb} is defined as
@@ -749,7 +746,7 @@ the final type \cppLstinline{V} (that substitutes the
   ExactComparison>}, where \cppLstinline{ExactComparison} is
 substituted with either \cppLstinline{true} or \cppLstinline{false}
 based on the setting of the \cmake{} flag
-\cmakeLstinline{AS\_EXACT\_COMPARISON}; see
+\cmakeLstinline{AS2\_EXACT\_COMPARISON}; see
 Table~\ref{tab:as2}. Otherwise, \cppLstinline{V} is defined as
 \cppLstinline{Vbih}.
 %
@@ -833,8 +830,7 @@ edge (1-face) or vertex (0-face).  The binding module
 the \cgal{} packages \iiiDTriangulationsPackage{} and
 \iiiDPeriodicTriangulationsPackage{}. Table~\ref{tab:tri3} lists the
 \cmake{} flags associated with the \iiiDTriangulationsPackage{}
-module. The default selection of the traits depends on the
-triangulation selection; see Table~\ref{tab:tri3:traits-default}.
+module.
 
 %%%%%%%% 3D Triangulation Module Flags
 \begin{table}[!htp]
@@ -844,35 +840,11 @@ triangulation selection; see Table~\ref{tab:tri3:traits-default}.
   \matrix (first) [tableModuleFlags] {
     Name & Type & Default & Description\\
     \cmakeLstinline{TRI3\_NAME}                   & String & \myLstinline{plain}    & The 3D triangulation type\\
-    \cmakeLstinline{TRI3\_VERTEX\_BASE\_NAME}     & String & \myLstinline{plain}      & The base vertex type\\
-    \cmakeLstinline{TRI3\_CELL\_BASE\_NAME}       & String & \myLstinline{plain}      & The base cell type\\
-    \cmakeLstinline{TRI3\_TRAITS\_NAME}           & String & *                        & The geometry traits of a 3D triangulation\\
     \cmakeLstinline{TRI3\_CONCURRENCY\_NAME}      & String & \myLstinline{sequential} & The concurrency method\\
     \cmakeLstinline{TRI3\_LOCATION\_POLICY\_NAME} & String & \myLstinline{compact}    & The location policy\\
   };
   \end{tikzpicture}
   \label{tab:tri3}
-\end{table}
-
-%%%%%%%% 3D triangulation Traits default selection
-\begin{table}
-  \caption{3D triangulation Traits default selection}
-  \centering\begin{tikzpicture}
-  \matrix (first) [tableName,
-    column 1/.style={nodes={text width=30em}},
-    column 2/.style={nodes={text width=19em}}
-  ] {
-    3D Triangulation Type & Default \myLstinline{TRI3\_TRAITS\_NAME}\\
-    \cppLstinline{Periodic\_3\_triangulation\_3<>} &
-      \myLstinline{periodicPlain}\\
-    \cppLstinline{Periodic\_3\_regular_triangulation\_3<>} &
-      \myLstinline{periodicRegular}\\
-    \cppLstinline{Periodic\_3\_Delaunay_triangulation\_3<>} &
-      \myLstinline{periodicDelaunay}\\
-    \textit{Otherwise} & \myLstinline{kernel}\\
-  };
-  \end{tikzpicture}
-  \label{tab:tri3:traits-default}
 \end{table}
 
 The \iiiDTriangulationsPackage{} package~\cite{cgal:pt-t3-21a}
@@ -883,13 +855,16 @@ provides the following class templates:
 \item \cppLstinline{Triangulation\_3<Traits, Tds, Slds>},
 \item \cppLstinline{Regular\_triangulation\_3<Traits, Tds, Slds>}, and
 \item \cppLstinline{Delaunay\_triangulation\_3<Traits, Tds, LocationPolicy, Slds>}
+\item \cppLstinline{Triangulation\_hierarchy\_3<Triangulation\_3>}
 \end{compactenum}
 Instance of the \cppLstinline{Delaunay\_triangulation\_3<>} and
 \cppLstinline{Regular\_triangulation\_3<>} class templates can be used
 to represent Delaunay and regular triangulation, respectively. In a
 regular triangulation points have an associated weight, and some
 points can be hidden and do not result in vertices in the
-triangulation.
+triangulation. When instantiated its template parameter must be
+substituted with an instance of any other triangulation class
+template.
 
 The \iiiDPeriodicTriangulationsPackage{}
 package~\cite{cgal:ct-pt3-21a} supports triangulations of sets of
@@ -899,6 +874,7 @@ package provides the class templates
 \item \cppLstinline{Periodic\_3\_triangulation\_3<Traits, Tds>},
 \item \cppLstinline{Periodic\_3\_regular\_triangulation\_3<Traits, Tds>}, and
 \item \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_3<Traits, Tds>}
+\item \cppLstinline{Periodic\_3\_triangulation\_hierarchy\_3<PeriodicTriangulation>}
 \end{compactenum}
 
 The \cmake{} flag \myLstinline{TRI3\_NAME} specifies the particular
@@ -913,12 +889,9 @@ Table~\ref{tab:tri3:names}.
     column 2/.style={nodes={text width=39em}}
   ] {
     \myLstinline{TRI3\_NAME} & Type\\
-    \myLstinline{plain} &
-      \cppLstinline{Triangulation\_3<Traits, Tds, Slds>}\\
-    \myLstinline{regular} &
-      \cppLstinline{Regular\_triangulation\_3<Traits, Tds, Slds>}\\
-    \myLstinline{delaunay} &
-      \cppLstinline{Delaunay\_triangulation\_3<Traits, Tds, LocationPolicy, Slds>}\\
+    \myLstinline{plain} & \cppLstinline{Triangulation\_3<Traits, Tds, Slds>}\\
+    \myLstinline{regular} & \cppLstinline{Regular\_triangulation\_3<Traits, Tds, Slds>}\\
+    \myLstinline{delaunay} & \cppLstinline{Delaunay\_triangulation\_3<Traits, Tds, LocationPolicy, Slds>}\\
     \myLstinline{periodicPlain} & \cppLstinline{Periodic\_3\_triangulation\_3<Traits, Tds>}\\
     \myLstinline{periodicRegular} & \cppLstinline{Periodic\_3\_regular\_triangulation\_3<Traits, Tds>}\\
     \myLstinline{periodicDelaunay} & \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_3<Traits, Tds>}\\
@@ -927,64 +900,118 @@ Table~\ref{tab:tri3:names}.
   \label{tab:tri3:names}
 \end{table}
 
+%% \cppLstinline{TriangulationTraits\_3}
+%% \cppLstinline{RegularTriangulationTraits\_3}
+%% \cppLstinline{DelaunayTriangulationTraits\_3}
+%% \cppLstinline{AlphaShapeTraits\_3}
+%% \cppLstinline{FixedAlphaShapeTraits\_3}
+%% \cppLstinline{WeightedAlphaShapeTraits\_3}
+%% \cppLstinline{FixedWeightedAlphaShapeTraits\_3}
+%% \cppLstinline{Periodic\_3TriangulationTraits\_3}
+%% \cppLstinline{Periodic\_3RegularTriangulationTraits\_3}
+%% \cppLstinline{Periodic\_3DelaunayTriangulationTraits\_3}
+%% \cppLstinline{Periodic\_3AlphaShapeTraits\_3}
 When any template above is instantiated the template parameter
-\cppLstinline{Traits} must be substituted with a model of a
-respective geometric traits concept,
-\cppLstinline{TriangulationTraits\_3},
-\cppLstinline{RegularTriangulationTraits\_3},
-\cppLstinline{DelaunayTriangulationTraits\_3},
-\cppLstinline{Periodic\_3TriangulationTraits\_3},
-\cppLstinline{Periodic\_3RegularTriangulationTraits\_3}, or
-\cppLstinline{Periodic\_3DelaunayTriangulationTraits\_3}, referred to
-as the geometric traits class; it provides the type of points to use
-as well as elementary operations on them. Observe that each of the
-concepts \cppLstinline{RegularTriangulationTraits\_3} and
-\cppLstinline{DelaunayTriangulationTraits\_3} refine the concept
-\cppLstinline{TriangulationTraits\_3}.  In addition, when a Delaunay
-triangulation instance is used to define either plain or a fixed alpha
-shape type (see Section~\ref{ssec:modules:as3}), the traits parameter
-must be substituted with a traits class that models either the
+\cppLstinline{Traits} must be substituted with a model of a suitable
+geometric traits concept; this model is referred to as the geometric
+traits class; it provides the type of points to use as well as
+elementary operations on them. The type of traits used for the
+generated bindings is determined based on the selection of the
+triangulation type as explained below. It is conveniently defined in
+C++ as \cppLstinline{Dt::Geom\_traits}, where \cppLstinline{Dt} is the
+triangulation instance. This type is exposed as a Python attribute
+with the same name under \pyLstinline{Triangulation\_3} (which in turn
+is nested under the Python namespace \pyLstinline{Tri3}).
+Figure~\ref{tab:tri3:concept-hierarchy} depicts the 2D triangulation
+traits concept hierarchy. Any kernel instance is a model of any
+non-periodic traits concept; thus, when one of the templates
+\begin{compactenum}
+\item \cppLstinline{Triangulation\_3<Traits, Tds>},
+\item \cppLstinline{Regular\_triangulation\_3<Traits, Tds>}, abd
+\item \cppLstinline{Delaunay\_triangulation\_3<Traits, Tds>}
+\end{compactenum}
+is instantiated, the \cppLstinline{Traits} parameter is substituted
+with the \cppLstinline{Kernel} type (the selected kernel; see
+Section~\ref{ssec:modules:kernel}). When one of the templates
+\begin{compactenum}
+\item \cppLstinline{Periodic\_3\_triangulation\_3<Traits, Tds>},
+\item \cppLstinline{Periodic\_3\_regular\_triangulation\_3<Traits, Tds>}, or
+\item \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_3<Traits, Tds>}
+\end{compactenum}
+is instantiated, the \cppLstinline{Traits} parameter is substituted
+with \cppLstinline{Periodic\_3\_triangulation\_traits\_3<Kernel>},
+\cppLstinline{Periodic\_3\_regular\_triangulation\_traits_3<Kernel>}, or
+\cppLstinline{Periodic\_3\_Delaunay\_triangulation\_traits_3<Kernel>},
+respectively.
+%
+Observe that when a Delaunay triangulation instance is used to define
+either a plain or a fixed alpha shape type (see
+Section~\ref{ssec:modules:as3}), the traits parameter must be
+substituted with a traits class that models either the
 \cppLstinline{AlphaShapeTraits\_3} or the
-\cppLstinline{FixedAlphaShapeTraits\_3} concepts, respectively. Notice
-that each of these concepts refines the concept
-\cppLstinline{DelaunayTriangulationTraits\_3}. Similarly, when a
-regular triangulation instance is used to define either plain or a
-fixed alpha shape type (see Section~\ref{ssec:modules:as3}, the traits
-parameter must be substituted with a traits class that models either
-the \cppLstinline{WeightedAlphaShapeTraits\_3} or the
-\cppLstinline{FixedWeightedAlphaShapeTraits\_3} concepts,
-respectively. Notice that each of these concepts refines the concept
-\cppLstinline{RegularTriangulationTraits\_3}.  Observe that any Kernel
-instance is a model of any non-peridic traits concept and the only
-choice for the bindings of instances of
-\cppLstinline{Triangulation\_3<>},
-\cppLstinline{Regular\_triangulation\_3<>}, or
-\cppLstinline{Delaunay\_triangulation\_3<>} (the non-periodic
-triangulation types). The \cmake{} flag
-\myLstinline{TRI3\_TRAITS\_NAME} specifies the type of traits to be
-used for the generated bindings; see table~\ref{tab:tri3:traits}. This
-type is conveniently defined as \cppLstinline{Dt::Geom\_traits}, where
-\cppLstinline{Dt} is the triangulation instance.
+\cppLstinline{FixedAlphaShapeTraits\_3} concept,
+respectively. Similarly, when a regular triangulation instance is used
+to define either a plain or a fixed alpha shape type (see
+Section~\ref{ssec:modules:as3}, the traits parameter must be
+substituted with a traits class that models either the
+\cppLstinline{WeightedAlphaShapeTraits\_3} or the
+\cppLstinline{FixedWeightedAlphaShapeTraits\_3} concept,
+respectively. Also in these cases the selected kernel serves as the
+traits.
 
-\begin{table}[!htp]
-  \caption{3D triangulation traits options}
-  \centering\begin{tikzpicture}
-  \matrix (first) [tableName,
-    column 1/.style={nodes={text width=12em}},
-    column 2/.style={nodes={text width=37em}}
-  ] {
-    \myLstinline{TRI3\_TRAITS\_NAME} & Type\\
-    \myLstinline{kernel} & Kernel \\
-    \myLstinline{periodicPlain} &
-      \cppLstinline{Periodic\_3\_triangulation\_traits\_3<Kernel, Offset>}\\
-    \myLstinline{periodicRegular} &
-      \cppLstinline{Periodic\_3\_regular\_triangulation\_traits\_3<Kernel, Offset>}\\
-    \myLstinline{periodicDelaunay} &
-      \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_traits\_3<Kernel, Offset>}\\
-  };
-  \end{tikzpicture}
-  \label{tab:tri3:traits}
-\end{table}
+\begin{figure}[!htp]
+  \tikzset{
+    my node style/.style={font=\scriptsize,minimum size=6mm,align=center,
+      top color=white, bottom color=blue!25, draw=blue!75, drop shadow,
+      rectangle, rounded corners, very thick
+    }
+  }
+  \forestset{
+    my tree style/.style={
+      for tree={my node style,
+        parent anchor=south,
+        child anchor=north,
+        edge={->,>=stealth,black,thick},
+        edge path={% |-| style branches from parent to child
+          \noexpand\path [draw, \forestoption{edge}] (!u.parent anchor)--(.child anchor)\forestoption{edge label};
+        },
+        if n children=3{% if a node has 3 children
+          for children={% align the middle child with its parent
+            if n=2{calign with current}{}
+          }
+        }{},
+      }
+    }
+  }
+  \centering
+  \begin{forest}
+    my tree style
+    [ {\cppLstinline{TriTr3}}
+      [ {\cppLstinline{RegularTriTr3}},name=r
+        [ {\cppLstinline{WeightedASTr3}} ]
+        [ {\cppLstinline{FixedWeightedASTr3}} ]
+      ]
+      [ {\cppLstinline{Periodic\_3TriTr3}},name=p
+        [ {\cppLstinline{Pr3RegularTriTr3}},name=pr ]
+      ]
+      [ {\cppLstinline{DelaunayTriTr3}},name=d
+        [ {\cppLstinline{Pr3DelaunayTriTr3}},name=pd
+	  [ {\cppLstinline{Pr3ASTr3}} ]
+        ]
+        [ {\cppLstinline{ASTr3}} ]
+        [ {\cppLstinline{FixedASTr3}} ]
+      ]
+    ]
+    \draw[->,>=stealth] (r.parent anchor)--(pr.child anchor);
+    \draw[->,>=stealth] (p.parent anchor)--(pd.child anchor);
+  \end{forest}
+  \label{tab:tri3:concept-hierarchy}
+  \caption{The 3D triangulation traits concept hierarchy.
+    \cppLstinline{Triangulation}, \cppLstinline{AlphaShape},
+    \cppLstinline{Traits\_3} and \cppLstinline{Periodic\_3} are
+    abbreviated as \cppLstinline{Tri}, \cppLstinline{AS},
+    \cppLstinline{Pr3}, and \cppLstinline{Tr3}, respectively.}
+\end{figure}
 
 The type that substitutes the \cppLstinline{Tds}
 parameter models the concept
@@ -997,9 +1024,9 @@ instance of the class template
 The types that substitute the \cppLstinline{VertexBase} and
 \cppLstinline{CellBase} template parameters when the template
 \cppLstinline{Triangulation\_data\_structure\_3<VertexBase, CellBase>}
-is instantiated represent the base type of the vertex and the base
-type of the cell of the triangulation, respectively; they must model
-the concepts \cppLstinline{TriangulationDSVertexBase\_3} and
+is instantiated represent the type of the vertex and the type of the
+cell of the triangulation, respectively; they must model the concepts
+\cppLstinline{TriangulationDSVertexBase\_3} and
 \cppLstinline{TriangulationDSCellBase\_3}, respectively. If the
 binding is generated for a periodic triangulation, these parameters
 must be substituted with types that also model the concepts
@@ -1012,14 +1039,9 @@ parameters must be substituted with types that model the concepts
 Section~\ref{ssec:modules:as3}. If the triangulation is used to define
 a fixed alpha shape type, these parameters must be substituted with
 types that model the concepts \cppLstinline{FixedAlphaShapeVertex\_3}
-and \cppLstinline{FixedAlphaShapeCell\_3}, respectively.  These types
-The \cmake{} flags \myLstinline{TRI3\_VERTEX\_BASE\_NAME} and
-\myLstinline{TRI3\_CELL\_BASE\_NAME} specify the vertex and base
-types, respectively; see Table~\ref{tab:tri3:entity}. These type are
-conveniently defined as \cppLstinline{Dt::Vertex} and
-\cppLstinline{Dt::Face}, where \cppLstinline{Dt} is the triangulation
-instance. Finaly, if the binding is generated for a hierarchy
-triangulation, e.g., an instance of the template paramater
+and \cppLstinline{FixedAlphaShapeCell\_3}, respectively. Finaly, if
+the binding is generated for a hierarchy triangulation, e.g., an
+instance of the template paramater
 \cppLstinline{Triangulation\_hierarchy\_3<Triangulation\_3>}, the
 \cppLstinline{VertexBase} template parameter must be substituted with
 a model of the concept
@@ -1028,57 +1050,73 @@ there is no special requirements on the type that substitutes the
 \cppLstinline{CellBase} parameter in this case.) Below we describe how
 the final vertex type is selected in details.
 
-\begin{table}[!htp]
-  \caption{3D triangulation vertex and cell base options.
-    \cppLstinline{Tri...} stands for \cppLstinline{Triangulation};
-    \cppLstinline{entity} must be replaced with either
-    \cppLstinline{vertex} or \cppLstinline{cell};
-    \cppLstinline{K} and \cppLstinline{Size} are aliases for
-    \cppLstinline{Kernel} and \cppLstinline{size\_t}, respectively;
-    \cppLstinline{Ec} is either \cppLstinline{true} or
-    \cppLstinline{false} based on the selection of
-    \cmakeLstinline{AS3\_EXACT\_COMPARISON}; see Table~\ref{tab:as3}.
-  }
-  \centering\begin{tikzpicture}
-  \matrix (first) [tableName,
-    row 1/.append style={nodes={minimum height=2.8em}},
-    column 1/.style={nodes={text width=18.1em}},
-    column 2/.style={nodes={text width=30.9em}}
-  ] {%
-    \setlength{\tabcolsep}{0pt}\renewcommand{\arraystretch}{0}
-    \begin{tabular}{c}
-      \cmakeLstinline{TRI3\_VERTEX\_BASE\_NAME}
-      \textcolor{white}{or}\\[5pt]
-      \textcolor{white}{\cmakeLstinline{TRI3\_CELL\_BASE\_NAME}}
-    \end{tabular} & Type\\
-    \myLstinline{plain} &
-      \cppLstinline{Vb = Tri...\_entity\_base\_3<K>}\\
-    \myLstinline{plainWithInfo} &
-      \cppLstinline{Vbi = Tri...\_entity\_base\_with\_info\_3<Size, K>}\\
-    \myLstinline{regular} &
-      \cppLstinline{Rvb = Regular\_triangulation\_entity\_base\_3<K>}\\
-    \myLstinline{regualrWithInfo} &
-      \cppLstinline{Rvbi = Tri...\_entity\_base\_with\_info\_3<Size, K, Rvb>}\\
-    \myLstinline{alphaShape} &
-      \cppLstinline{Alpha\_shape\_entity\_base\_3<K, Vb, Ec>}\\
-    \myLstinline{alphaShapeWithInfo} &
-      \cppLstinline{Alpha\_shape\_entity\_base\_3<K, Vbi, Ec>}\\
-    \myLstinline{alphaShapeRegular} &
-      \cppLstinline{Alpha\_shape\_entity\_base\_3<K, Rvb, Ec>}\\
-    \myLstinline{alphaShapeRegularWithInfo} &
-      \cppLstinline{Alpha\_shape\_entity\_base\_3<K, Rvbi, Ec>}\\
-    \myLstinline{fixedAlphaShape} &
-      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_3<K, Vb>}\\
-    \myLstinline{fixedAlphaShapeWithInfo} &
-      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_3<K, Vbi>}\\
-    \myLstinline{fixedAlphaShapeRegular} &
-      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_3<K, Rvb>}\\
-    \myLstinline{fixedAlphaShapeRegularWithInfo} &
-      \cppLstinline{Fixed\_alpha\_shape\_entity\_base\_3<K, Rvbi>}\\
-  };
-  \end{tikzpicture}
-  \label{tab:tri3:entity}
-\end{table}
+%% 3D Triangulation Vertex Selection
+If bindings is generated for a periodic triangulation, the type
+\cppLstinline{Vbp} is defined as
+\cppLstinline{Periodic\_3\_triangulation\_ds\_vertex\_base\_2<>};
+otherwise, \cppLstinline{Vbp} is defined as
+\cppLstinline{Triangulation\_ds\_vertex\_base\_3<>}.
+%
+If bindings is generated for an instance of either
+\cppLstinline{Regular\_triangulation\_vertex\_base\_3<Kernel>} or
+\cppLstinline{Periodic\_3_Regular\_triangulation\_vertex\_base\_3<Kernel>},
+the type \cppLstinline{Vb} is defined as
+\cppLstinline{Regular\_triangulation\_vertex\_base\_2<Traits, Vbp>};
+otherwise, the type \cppLstinline{Vb} is defined as
+\cppLstinline{Triangulation\_vertex\_base\_3<Traits, Vbp>}.
+%
+If the \cmake{} flag \cmakeLstinline{TRI2\_VERTEX\_WITH\_INFO} is set
+to \myLstinline{true}, the type \cppLstinline{Vbi} is defined as
+\cppLstinline{Triangulation\_vertex\_base\_with\_info\_3<Data, Traits,
+  Vb>}, where \cppLstinline{Data} is defined as the generic Python
+object \cppLstinline{bp::object}; see Section~\ref{sec:bind-code:ae};
+otherwise the type \cppLstinline{Vbi} is defined as \cppLstinline{Vb}.
+%
+If the \cmake{} flag \cmakeLstinline{TRI2\_HIERARCHY} is set
+to \myLstinline{true}, the type \cppLstinline{Vbih} is defined as
+\cppLstinline{Triangulation\_hierarchy\_vertex\_base\_2<Vbi>}; otherwise
+the type \cppLstinline{Vbih} is defined as \cppLstinline{Vbi}.
+%
+Finally, if the triangulation is used to define an alpha shape type,
+the final type \cppLstinline{V} (that substitutes the
+\cppLstinline{VertexBase} paramater) is defined as either
+\cppLstinline{Alpha\_shape\_vertex\_base\_2<Traits, Vbih,
+  ExactComparison>} or
+\cppLstinline{Fixed\_Alpha\_shape\_vertex\_base\_2<Traits, Vbih,
+  ExactComparison>} based on the selection of the setting of the
+\cmake{} flag \cmakeLstinline{AS3\_NAME}; see Table~\ref{tab:as3};
+\cppLstinline{ExactComparison} is substituted with either
+\cppLstinline{true} or \cppLstinline{false} based on the setting of
+the \cmake{} flag \cmakeLstinline{AS3\_EXACT\_COMPARISON}; see
+Table~\ref{tab:as2}. Otherwise, \cppLstinline{V} is defined as
+\cppLstinline{Vbih}.
+%
+The final vertex type is conveniently defined in C++ as
+\cppLstinline{Dt::Vertex}, where \cppLstinline{Dt} is the
+triangulation instance. This type is exposed as a Python attribute
+with the same name under \pyLstinline{Triangulation_2}.
+
+The final face type is determined in a similar fashion. The only
+difference between the selections of the vertex and face types is that
+the setting of the \cmake{} flag \cmakeLstinline{TRI2\_HIERARCHY} does
+not have an effect on the face type selection. The final face type is
+conveniently defined in C++ as \cppLstinline{Dt::Face}, where
+\cppLstinline{Dt} is the triangulation instance. This type is also
+exposed as a Python attribute with the same name under
+\pyLstinline{Triangulation_2}.
+
+The \cmake{} Boolean flag \cmakeLstinline{TRI2\_HIERARCHY} indicates
+whether the type of triangulation, bindings for which should be
+generated, is an instance of one of the triangulation hierarchy
+templates, namely,
+\cppLstinline{Triangulation\_hierarchy\_2<Triangulation\_2>} and
+\cppLstinline{Periodic_triangulation\_hierarchy\_2<PeriodicTriangulation\_2>}.
+The template parameter in both cases is substituted with the
+triangulation selected via the \cmake{} flag
+\cmakeLstinline{TRI2\_NAME}, which also determines whether to use the
+non-perirodic or peridoc version above.
+
+xxx
 
 The template parameter \cppLstinline{ConcurrencyTag} is substituted
 with either \cppLstinline{Sequential\_tag} or
@@ -1105,7 +1143,7 @@ Table~\ref{tab:tri3:concurrency}.
 \end{table}
 %
 
-The template parameter \cppLstinline{ConcurrencyTag} is substituted
+The template parameter \cppLstinline{LocationPolicy} is substituted
 with either \cppLstinline{Fast\_location} or
 \cppLstinline{Compact\_location} when the template
 \cppLstinline{Delaunay\_triangulation\_3<Traits, Tds, LocationPolicy>}
