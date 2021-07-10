@@ -34,25 +34,15 @@
 
 #include <CGAL/Triangulation_hierarchy_3.h>
 #include <CGAL/Periodic_3_triangulation_3.h>
+#include <CGAL/Periodic_3_triangulation_traits_3.h>
 #include <CGAL/Periodic_3_regular_triangulation_traits_3.h>
 #include <CGAL/Periodic_3_Delaunay_triangulation_traits_3.h>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/alpha_shape_3_config.hpp"
 
-#define CGALPY_TRI3_VERTEX_BASE_PLAIN                   0
-#define CGALPY_TRI3_VERTEX_BASE_REGULAR                 1
-
-#define CGALPY_TRI3_CELL_BASE_PLAIN                     0
-#define CGALPY_TRI3_CELL_BASE_REGULAR                   1
-
 #define CGALPY_TRI3_CONCURRENCY_SEQUENTIAL              0
 #define CGALPY_TRI3_CONCURRENCY_PARALLEL                1
-
-#define CGALPY_TRI3_TRAITS_KERNEL                       0
-#define CGALPY_TRI3_TRAITS_PERIODIC_PLAIN               1
-#define CGALPY_TRI3_TRAITS_PERIODIC_REGULAR             2
-#define CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY            3
 
 #define CGALPY_TRI3_LOCATION_POLICY_FAST                0
 #define CGALPY_TRI3_LOCATION_POLICY_COMPACT             1
@@ -84,15 +74,19 @@ constexpr bool is_periodic() {
           (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_DELAUNAY));
 }
 
+// Indicates whether the selected triangulation is regular
+constexpr bool is_regular() {
+  return ((CGALPY_TRI3 == CGALPY_TRI3_REGULAR) ||               \
+          (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_REGULAR));
+}
+
 // Traits
-  template <int i, typename K> struct Tr {};
-  template <typename K> struct Tr<CGALPY_TRI3_TRAITS_KERNEL, K>
-{ typedef K type; };
-template <typename K> struct Tr<CGALPY_TRI3_TRAITS_PERIODIC_PLAIN, K>
+template <int i, typename K> struct Tr { typedef K type; };
+template <typename K> struct Tr<CGALPY_TRI3_PERIODIC_PLAIN, K>
 { typedef CGAL::Periodic_3_triangulation_traits_3<K> type; };
-template <typename K> struct Tr<CGALPY_TRI3_TRAITS_PERIODIC_REGULAR, K>
+template <typename K> struct Tr<CGALPY_TRI3_PERIODIC_REGULAR, K>
 { typedef CGAL::Periodic_3_regular_triangulation_traits_3<K> type; };
-template <typename K> struct Tr<CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY, K>
+template <typename K> struct Tr<CGALPY_TRI3_PERIODIC_DELAUNAY, K>
 { typedef CGAL::Periodic_3_Delaunay_triangulation_traits_3<K> type; };
 
 // Vertex periodic triangulation
@@ -103,13 +97,13 @@ template <> struct Vertex_periodic<true>
 { typedef CGAL::Periodic_3_triangulation_ds_vertex_base_3<> type; };
 
 // Vertex base selection
-template <int i, typename Vb, typename Tr> struct Vertex_base_name {};
+template <bool b, typename Vb, typename Tr> struct Vertex_base_name {};
 template <typename Vb, typename Tr>
-struct Vertex_base_name<CGALPY_TRI3_VERTEX_BASE_PLAIN, Vb, Tr>
-{ typedef CGAL::Triangulation_vertex_base_3<Tr, Vb> type; };
-template <typename Vb, typename Tr>
-struct Vertex_base_name<CGALPY_TRI3_VERTEX_BASE_REGULAR, Vb, Tr>
+struct Vertex_base_name<true, Vb, Tr>
 { typedef CGAL::Regular_triangulation_vertex_base_3<Tr, Vb> type; };
+template <typename Vb, typename Tr>
+struct Vertex_base_name<false, Vb, Tr>
+{ typedef CGAL::Triangulation_vertex_base_3<Tr, Vb> type; };
 
 // Vertex with info
 template <bool b, typename Vb, typename Data, typename Tr>
@@ -147,13 +141,13 @@ template <> struct Cell_periodic<true>
 { typedef CGAL::Periodic_3_triangulation_ds_cell_base_3<> type; };
 
 // Cell base selection
-template <int i, typename Cb, typename Tr> struct Cell_base_name {};
+template <bool i, typename Cb, typename Tr> struct Cell_base_name {};
 template <typename Cb, typename Tr>
-struct Cell_base_name<CGALPY_TRI3_CELL_BASE_PLAIN, Cb, Tr>
-{ typedef CGAL::Triangulation_cell_base_3<Tr, Cb> type; };
-template <typename Cb, typename Tr>
-struct Cell_base_name<CGALPY_TRI3_CELL_BASE_REGULAR, Cb, Tr>
+struct Cell_base_name<true, Cb, Tr>
 { typedef CGAL::Regular_triangulation_cell_base_3<Tr, Cb> type; };
+template <typename Cb, typename Tr>
+struct Cell_base_name<false, Cb, Tr>
+{ typedef CGAL::Triangulation_cell_base_3<Tr, Cb> type; };
 
 // Cell with info
 template <bool b, typename Fb, typename Data, typename Tr>
