@@ -11,7 +11,7 @@
 
 #include <boost/python.hpp>
 
-#include <CGALPY/config.hpp>
+#include "CGALPY/config.hpp"
 
 namespace bp = boost::python;
 
