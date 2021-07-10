@@ -5,6 +5,8 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+
 #include <boost/python.hpp>
 
 #include "CGALPY/triangulation_3_types.hpp"
