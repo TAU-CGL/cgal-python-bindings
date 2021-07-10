@@ -17,73 +17,6 @@ SET(CGALPY_TRI3 ${CGALPY_TRI3_PLAIN} CACHE INTERNAL "")
 SET(CGALPY_TRI3_NAME "plain" CACHE STRING "The 3D Triangulation")
 set_property(CACHE CGALPY_TRI3_NAME PROPERTY STRINGS plain regular delaunay periodicPlain periodicRegular periodicDelaunay)
 
-######## 3D Triangulation traits
-set(CGALPY_TRI3_TRAITS_KERNEL            0)
-set(CGALPY_TRI3_TRAITS_PERIODIC_PLAIN    1)
-set(CGALPY_TRI3_TRAITS_PERIODIC_REGULAR  2)
-set(CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY 3)
-
-set(CGALPY_TRI3_TRAITS_SHORT_NAMES ker p3d)
-set(CGALPY_TRI3_TRAITS_NAMES kernel periodicPlain periodicRegular periodicDelaunay)
-
-# Verification
-function(verify_triangulation_3)
-  if(${CGALPY_TRIANGULATION_3_BINDINGS})
-    # Check validity of triangulation
-    if((${CGALPY_TRI3_NAME} STREQUAL "[Rr]egular") AND
-       (NOT ${CGALPY_TRI3_VERTEX_BASE_NAME} MATCHES "regular"))
-      message("Error: Triangulation (${CGALPY_TRI3_NAME}) does not match vertex base (${CGALPY_TRI3_VERTEX_BASE_NAME})")
-      return()
-    endif()
-
-    # Check validity of triangulation
-    if((${CGALPY_TRI3_NAME} STREQUAL "[Rr]egular") AND
-       (NOT ${CGALPY_TRI3_CELL_BASE_NAME} MATCHES "regular"))
-      message("Error: Triangulation (${CGALPY_TRI3_NAME}) does not match cell base (${CGALPY_TRI3_CELL_BASE_NAME})")
-      return()
-    endif()
-  endif()
-endfunction()
-
-# Default (depends on the selected triangulation)
-if("${CGALPY_TRI3}" EQUAL ${CGALPY_TRI3_PERIODIC_PLAIN})
-  SET(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_PERIODIC_PLAIN} CACHE INTERNAL "")
-  SET(CGALPY_TRI3_TRAITS_NAME "periodicPlain" CACHE STRING "The 3D Triangulation traits")
-elseif("${CGALPY_TRI3}" EQUAL ${CGALPY_TRI3_PERIODIC_REGULAR})
-  SET(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_REGULAR} CACHE INTERNAL "")
-  SET(CGALPY_TRI3_TRAITS_NAME "periodicRegular" CACHE STRING "The 3D Triangulation traits")
-elseif("${CGALPY_TRI3}" EQUAL ${CGALPY_TRI3_PERIODIC_DELAUNAY})
-  SET(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_DELAUNAY} CACHE INTERNAL "")
-  SET(CGALPY_TRI3_TRAITS_NAME "periodicDelaunay" CACHE STRING "The 3D Triangulation traits")
-else()
-  SET(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_KERNEL} CACHE INTERNAL "")
-  SET(CGALPY_TRI3_TRAITS_NAME "kernel" CACHE STRING "The 3D Triangulation traits")
-endif()
-
-set_property(CACHE CGALPY_TRI3_TRAITS_NAME PROPERTY STRINGS kernel periodicPlain periodicRegular periodicDelaunay)
-
-# 3D Triangulation Vertex Base
-set(CGALPY_TRI3_VERTEX_BASE_PLAIN                              0)
-set(CGALPY_TRI3_VERTEX_BASE_REGULAR                            1)
-
-set(CGALPY_TRI3_VERTEX_BASE_SHORT_NAMES plain reg)
-set(CGALPY_TRI3_VERTEX_BASE_NAMES plain regular)
-# Default
-SET(CGALPY_TRI3_VERTEX_BASE ${CGALPY_TRI3_VERTEX_BASE_PLAIN} CACHE INTERNAL "")
-SET(CGALPY_TRI3_VERTEX_BASE_NAME "plain" CACHE STRING "The 3D Triangulation vertex base")
-set_property(CACHE CGALPY_TRI3_VERTEX_BASE_NAME PROPERTY STRINGS plain regular)
-
-# 3D Triangulation Cell Base
-set(CGALPY_TRI3_CELL_BASE_PLAIN                                0)
-set(CGALPY_TRI3_CELL_BASE_REGULAR                              1)
-
-set(CGALPY_TRI3_CELL_BASE_SHORT_NAMES plain reg)
-set(CGALPY_TRI3_CELL_BASE_NAMES plain regular)
-# Default
-SET(CGALPY_TRI3_CELL_BASE ${CGALPY_TRI3_CELL_BASE_PLAIN} CACHE INTERNAL "")
-SET(CGALPY_TRI3_CELL_BASE_NAME "plain" CACHE STRING "The 3D Triangulation cell base")
-set_property(CACHE CGALPY_TRI3_CELL_BASE_NAME PROPERTY STRINGS plain regular)
-
 # 3D Triangulation concurrency
 set(CGALPY_TRI3_CONCURRENCY_SEQUENTIAL 0)
 set(CGALPY_TRI3_CONCURRENCY_PARALLEL   1)
@@ -106,37 +39,6 @@ set(CGALPY_TRI3_LOCATION_POLICY_NAMES fast compact)
 SET(CGALPY_TRI3_LOCATION_POLICY ${CGALPY_TRI3_LOCATION_POLICY_COMPACT} CACHE INTERNAL "")
 SET(CGALPY_TRI3_LOCATION_POLICY_NAME "compact" CACHE STRING "The 3D Triangulation point location strategy")
 set_property(CACHE CGALPY_TRI3_LOCATION_POLICY_NAME PROPERTY STRINGS fast compact)
-
-function(select_tri3_vertex_base)
-  if     ("${CGALPY_TRI3_VERTEX_BASE_NAME}" STREQUAL "plain")
-    set(CGALPY_TRI3_VERTEX_BASE ${CGALPY_TRI3_VERTEX_BASE_PLAIN} CACHE INTERNAL "")
-  elseif ("${CGALPY_TRI3_VERTEX_BASE_NAME}" STREQUAL "regular")
-    set(CGALPY_TRI3_VERTEX_BASE ${CGALPY_TRI3_VERTEX_BASE_REGULAR} CACHE INTERNAL "")
-  endif()
-  add_definitions(-DCGALPY_TRI3_VERTEX_BASE=${CGALPY_TRI3_VERTEX_BASE})
-endfunction()
-
-function(select_tri3_cell_base)
-  if     ("${CGALPY_TRI3_CELL_BASE_NAME}" STREQUAL "plain")
-    set(CGALPY_TRI3_CELL_BASE ${CGALPY_TRI3_CELL_BASE_PLAIN} CACHE INTERNAL "")
-  elseif ("${CGALPY_TRI3_CELL_BASE_NAME}" STREQUAL "regular")
-    set(CGALPY_TRI3_CELL_BASE ${CGALPY_TRI3_CELL_BASE_REGULAR} CACHE INTERNAL "")
-  endif()
-  add_definitions(-DCGALPY_TRI3_CELL_BASE=${CGALPY_TRI3_CELL_BASE})
-endfunction()
-
-function(select_tri3_traits)
-  if     ("${CGALPY_TRI3_TRAITS_NAME}" STREQUAL "kernel")
-    set(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_KERNEL} CACHE INTERNAL "")
-  elseif ("${CGALPY_TRI3_TRAITS_NAME}" STREQUAL "periodicPlain")
-    set(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_PERIODIC_PLAIN} CACHE INTERNAL "")
-  elseif ("${CGALPY_TRI3_TRAITS_NAME}" STREQUAL "periodicRegular")
-    set(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_PERIODIC_REGULAR} CACHE INTERNAL "")
-  elseif ("${CGALPY_TRI3_TRAITS_NAME}" STREQUAL "periodicDelaunay")
-    set(CGALPY_TRI3_TRAITS ${CGALPY_TRI3_TRAITS_PERIODIC_DELAUNAY} CACHE INTERNAL "")
-  endif()
-  add_definitions(-DCGALPY_TRI3_TRAITS=${CGALPY_TRI3_TRAITS})
-endfunction()
 
 function(select_tri3_concurrency)
   # Select 3D triangulation concurrency
@@ -176,12 +78,7 @@ endfunction()
 
 function(select_triangulation_3)
   if (${CGALPY_TRIANGULATION_3_BINDINGS})
-    verify_triangulation_3()
-    # Do not change the order (tri3_traits depends on tri3)
     select_tri3()
-    select_tri3_traits()
-    select_tri3_vertex_base()
-    select_tri3_cell_base()
     select_tri3_concurrency()
     select_tri3_location_policy()
     if (${CGALPY_TRI3_VERTEX_WITH_INFO})
@@ -200,17 +97,11 @@ endfunction()
 function(get_triangulation_3_lib_name ret)
   list(GET CGALPY_TRI3_SHORT_NAMES ${CGALPY_TRI3} part1)
   capitalize_first(part1)
-  list(GET CGALPY_TRI3_TRAITS_SHORT_NAMES ${CGALPY_TRI3_TRAITS} part2)
+  list(GET CGALPY_TRI3_LOCATION_POLICY_SHORT_NAMES ${CGALPY_TRI3_LOCATION_POLICY} part2)
   capitalize_first(part2)
-  list(GET CGALPY_TRI3_VERTEX_BASE_SHORT_NAMES ${CGALPY_TRI3_VERTEX_BASE} part3)
+  list(GET CGALPY_TRI3_CONCURRENCY_SHORT_NAMES ${CGALPY_TRI3_CONCURRENCY} part3)
   capitalize_first(part3)
-  list(GET CGALPY_TRI3_CELL_BASE_SHORT_NAMES ${CGALPY_TRI3_CELL_BASE} part4)
-  capitalize_first(part4)
-  list(GET CGALPY_TRI3_LOCATION_POLICY_SHORT_NAMES ${CGALPY_TRI3_LOCATION_POLICY} part5)
-  capitalize_first(part5)
-  list(GET CGALPY_TRI3_CONCURRENCY_SHORT_NAMES ${CGALPY_TRI3_CONCURRENCY} part6)
-  capitalize_first(part6)
-  set(${ret} "tri3${part1}${part2}${part3}${part4}${part5}${part6}" PARENT_SCOPE)
+  set(${ret} "tri3${part1}${part2}${part3}" PARENT_SCOPE)
 endfunction()
 
 endif()
