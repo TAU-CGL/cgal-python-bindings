@@ -34,6 +34,7 @@
 
 #include <CGAL/Triangulation_hierarchy_2.h>
 #include <CGAL/Periodic_2_triangulation_hierarchy_2.h>
+#include <CGAL/Periodic_2_triangulation_traits_2.h>
 #include <CGAL/Periodic_2_Delaunay_triangulation_traits_2.h>
 
 #include "CGALPY/config.hpp"
