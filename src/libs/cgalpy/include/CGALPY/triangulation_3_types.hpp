@@ -15,12 +15,11 @@
 namespace tri3 {
 
 typedef as3::Exact_comparison<as3::exact_comparison()>::type    Ec;
-typedef Tr<CGALPY_TRI3_TRAITS, Kernel>::type                    Traits;
+typedef Tr<CGALPY_TRI3, Kernel>::type                           Traits;
 
 // Vertex type
 typedef Vertex_periodic<is_periodic()>::type                    Vbd;
-typedef Vertex_base_name<CGALPY_TRI3_VERTEX_BASE, Vbd, Traits>::type
-                                                                Vb;
+typedef Vertex_base_name<is_regular(), Vbd, Traits>::type       Vb;
 typedef Vertex_with_info<vertex_with_info(), Vb, bp::object, Traits>::type
                                                                 Vbi;
 #ifdef CGALPY_AS3
@@ -32,8 +31,7 @@ typedef Vertex_hierarchy<hierarchy(), Vbia>::type               V;
 
 // Cell type
 typedef Cell_periodic<is_periodic()>::type                      Cbd;
-typedef Cell_base_name<CGALPY_TRI3_CELL_BASE, Cbd, Traits>::type
-                                                                Cb;
+typedef Cell_base_name<is_regular(), Cbd, Traits>::type         Cb;
 typedef Cell_with_info<cell_with_info(), Cb, bp::object, Traits>::type
                                                                 Cbi;
 # ifdef CGALPY_AS3
