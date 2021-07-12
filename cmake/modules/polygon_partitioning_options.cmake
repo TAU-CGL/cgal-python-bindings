@@ -3,7 +3,7 @@ set(POLYGON_PARTITIONING_OPTIONS_FILE_INCLUDED)
 
 function(select_polygon_partitioning)
   if(${CGALPY_POLYGON_PARTITIONING_BINDINGS})
-    add_definitions(-DCGALPY_POLYGON_PARTITIONING_BINDINGS)
+    add_definitions(-DCGALPY_POLYGON_PARTITIONING_BINDINGS=)
   endif()
 endfunction()
 

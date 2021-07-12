@@ -3,7 +3,7 @@ if(NOT POLYGON_2_OPTIONS_FILE_INCLUDED)
 
     function(select_polygon_2)
         if(${CGALPY_POLYGON_2_BINDINGS})
-            add_definitions(-DCGALPY_POLYGON_2_BINDINGS)
+            add_definitions(-DCGALPY_POLYGON_2_BINDINGS=)
         endif()
     endfunction()
 
