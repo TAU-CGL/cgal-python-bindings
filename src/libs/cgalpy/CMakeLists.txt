@@ -18,6 +18,10 @@ if (CGALPY_KERNEL_D_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_d_bindings.cpp)
 endif()
 
+if (CGALPY_ALPHA_SHAPE_2_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_2_bindings.cpp)
+endif()
+
 if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_3_bindings.cpp)
 endif()
@@ -137,6 +141,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   # dD Kernel
   if (CGALPY_KERNEL_D_BINDINGS)
     get_kernel_d_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
+  # 2D Alpha shape
+  if (CGALPY_ALPHA_SHAPE_2_BINDINGS)
+    get_alpha_shape_2_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 3D Alpha shape
