@@ -231,18 +231,20 @@ double NT_to_double(as3::NT& ft) { return CGAL::to_double(ft); }
 #endif
 
 void export_alpha_shape_3() {
+  typedef as3::Alpha_shape_3                    As3;
+
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   bp::enum_<as3::Mode>("Mode")
-    .value("GENERAL", as3::Alpha_shape_3::GENERAL)
-    .value("REGULARIZED", as3::Alpha_shape_3::REGULARIZED)
+    .value("GENERAL", as3::As3::GENERAL)
+    .value("REGULARIZED", as3::As3::REGULARIZED)
     .export_values()
     ;
 
   bp::enum_<as3::Classification_type>("Classification_type")
-    .value("EXTERIOR", as3::Alpha_shape_3::EXTERIOR)
-    .value("SINGULAR", as3::Alpha_shape_3::SINGULAR)
-    .value("REGULAR", as3::Alpha_shape_3::REGULAR)
-    .value("INTERIOR", as3::Alpha_shape_3::INTERIOR)
+    .value("EXTERIOR", as3::As3::EXTERIOR)
+    .value("SINGULAR", as3::As3::SINGULAR)
+    .value("REGULAR", as3::As3::REGULAR)
+    .value("INTERIOR", as3::As3::INTERIOR)
     .export_values()
     ;
 
@@ -267,26 +269,25 @@ void export_alpha_shape_3() {
     .def("__next__", &next, bp::return_value_policy<bp::copy_const_reference>())
     ;
 
-  typedef as3::Alpha_shape_3                    As_3;
-  as3::Size_type (As_3::*number_of_solid_components1)() const                     = &As_3::number_of_solid_components;
-  as3::Size_type (As_3::*number_of_solid_components2)(const as3::NT& alpha) const = &As_3::number_of_solid_components;
+  as3::size_type (As3::*number_of_solid_components1)() const                     = &As3::number_of_solid_components;
+  as3::size_type (As3::*number_of_solid_components2)(const as3::NT& alpha) const = &As3::number_of_solid_components;
 
-  as3::Classification_type (As_3::*classify1)(const as3::Point& p, const as3::NT& alpha) const              = &As_3::classify;
-  as3::Classification_type (As_3::*classify2)(const as3::Edge& s, const as3::NT& alpha) const               = &As_3::classify;
-  as3::Classification_type (As_3::*classify3)(const as3::Facet& s, const as3::NT& alpha) const              = &As_3::classify;
-  as3::Classification_type (As_3::*classify4)(const as3::Vertex_handle& s, const as3::NT& alpha) const      = &As_3::classify;
-  as3::Classification_type (As_3::*classify5)(const as3::Cell_handle& s, const as3::NT& alpha) const        = &As_3::classify;
-  as3::Classification_type (As_3::*classify6)(const as3::Cell_handle& s, int i, const as3::NT& alpha) const = &As_3::classify;
+  as3::Classification_type (As3::*classify1)(const as3::Point& p, const as3::NT& alpha) const              = &As3::classify;
+  as3::Classification_type (As3::*classify2)(const as3::Edge& s, const as3::NT& alpha) const               = &As3::classify;
+  as3::Classification_type (As3::*classify3)(const as3::Facet& s, const as3::NT& alpha) const              = &As3::classify;
+  as3::Classification_type (As3::*classify4)(const as3::Vertex_handle& s, const as3::NT& alpha) const      = &As3::classify;
+  as3::Classification_type (As3::*classify5)(const as3::Cell_handle& s, const as3::NT& alpha) const        = &As3::classify;
+  as3::Classification_type (As3::*classify6)(const as3::Cell_handle& s, int i, const as3::NT& alpha) const = &As3::classify;
 
-  as3::Classification_type (As_3:: *classify7)(const as3::Point& p) const              = &As_3::classify;
-  as3::Classification_type (As_3:: *classify8)(const as3::Edge& s) const               = &As_3::classify;
-  as3::Classification_type (As_3:: *classify9)(const as3::Facet& s) const              = &As_3::classify;
-  as3::Classification_type (As_3::*classify10)(const as3::Vertex_handle& s) const      = &As_3::classify;
-  as3::Classification_type (As_3::*classify11)(const as3::Cell_handle& s) const        = &As_3::classify;
-  as3::Classification_type (As_3::*classify12)(const as3::Cell_handle& s, int i) const = &As_3::classify;
+  as3::Classification_type (As3:: *classify7)(const as3::Point& p) const              = &As3::classify;
+  as3::Classification_type (As3:: *classify8)(const as3::Edge& s) const               = &As3::classify;
+  as3::Classification_type (As3:: *classify9)(const as3::Facet& s) const              = &As3::classify;
+  as3::Classification_type (As3::*classify10)(const as3::Vertex_handle& s) const      = &As3::classify;
+  as3::Classification_type (As3::*classify11)(const as3::Cell_handle& s) const        = &As3::classify;
+  as3::Classification_type (As3::*classify12)(const as3::Cell_handle& s, int i) const = &As3::classify;
 
-  as3::Alpha_status (As_3::*get_alpha_status1)(const as3::Edge& e) const  = &As_3::get_alpha_status;
-  as3::Alpha_status (As_3::*get_alpha_status2)(const as3::Facet& f) const = &As_3::get_alpha_status;
+  as3::Alpha_status (As3::*get_alpha_status1)(const as3::Edge& e) const  = &As3::get_alpha_status;
+  as3::Alpha_status (As3::*get_alpha_status2)(const as3::Facet& f) const = &As3::get_alpha_status;
 
 #endif
 
@@ -320,7 +321,7 @@ void export_alpha_shape_3() {
     ;
 #endif
 
-  bp::class_<as3::Alpha_shape_3, boost::noncopyable>("Alpha_shape_3")
+  bp::class_<as3::As3, boost::noncopyable>("As3")
     .def(bp::init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def(bp::init<bp::optional<double, as3::Mode>>())
@@ -338,16 +339,16 @@ void export_alpha_shape_3() {
     // Modifiers
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def("make_alpha_shape", &make_alpha_shape)
-    .def("set_mode", &as3::Alpha_shape_3::set_mode)
-    .def("set_alpha", &as3::Alpha_shape_3::set_alpha)
+    .def("set_mode", &as3::As3::set_mode)
+    .def("set_alpha", &as3::As3::set_alpha)
 #endif
-    .def("clear", &as3::Alpha_shape_3::clear)
+    .def("clear", &as3::As3::clear)
     // Query Functions
-    .def("get_alpha", &as3::Alpha_shape_3::get_alpha, bp::return_value_policy<bp::copy_const_reference>())
+    .def("get_alpha", &as3::As3::get_alpha, Copy_const_reference>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("get_mode", &as3::Alpha_shape_3::get_mode)
-    .def("get_nth_alpha", &as3::Alpha_shape_3::get_nth_alpha, bp::return_value_policy<bp::copy_const_reference>())
-    .def("number_of_alphas", &as3::Alpha_shape_3::number_of_alphas)
+    .def("get_mode", &as3::As3::get_mode)
+    .def("get_nth_alpha", &as3::As3::get_nth_alpha, Copy_const_reference>())
+    .def("number_of_alphas", &as3::As3::number_of_alphas)
     .def("classify", classify1)
     .def("classify", classify2)
     .def("classify", classify3)
@@ -367,21 +368,21 @@ void export_alpha_shape_3() {
     .def("alpha_shape_facets", &alpha_shape_facets)
     .def("alpha_shape_edges", &alpha_shape_edges)
     .def("alpha_shape_vertices", &alpha_shape_vertices)
-    // .def("filtration", &Alpha_shape_3::filtration)
-    // .def("filtration_with_alpha_values", &Alpha_shape_3::filtration_with_alpha_values)
+    // .def("filtration", &As3::filtration)
+    // .def("filtration_with_alpha_values", &As3::filtration_with_alpha_values)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     // Traversal of the alpha-Values
-    .def("alpha_begin", &as3::Alpha_shape_3::alpha_begin)
-    .def("alpha_end", &as3::Alpha_shape_3::alpha_end)
-    .def("alphas", bp::range(&as3::Alpha_shape_3::alpha_begin, &as3::Alpha_shape_3::alpha_end))
-    .def("alpha_find", &as3::Alpha_shape_3::alpha_find)
-    .def("alpha_lower_bound", &as3::Alpha_shape_3::alpha_lower_bound)
-    .def("alpha_upper_bound", &as3::Alpha_shape_3::alpha_upper_bound)
+    .def("alpha_begin", &as3::As3::alpha_begin)
+    .def("alpha_end", &as3::As3::alpha_end)
+    .def("alphas", bp::range(&as3::As3::alpha_begin, &as3::As3::alpha_end))
+    .def("alpha_find", &as3::As3::alpha_find)
+    .def("alpha_lower_bound", &as3::As3::alpha_lower_bound)
+    .def("alpha_upper_bound", &as3::As3::alpha_upper_bound)
     // Operations
     .def("number_of_solid_components", number_of_solid_components1)
     .def("number_of_solid_components", number_of_solid_components2)
-    .def("find_optimal_alpha", &as3::Alpha_shape_3::find_optimal_alpha)
-    .def("find_alpha_solid", &as3::Alpha_shape_3::find_alpha_solid)
+    .def("find_optimal_alpha", &as3::As3::find_optimal_alpha)
+    .def("find_alpha_solid", &as3::As3::find_alpha_solid)
 #endif
     ;
 }
