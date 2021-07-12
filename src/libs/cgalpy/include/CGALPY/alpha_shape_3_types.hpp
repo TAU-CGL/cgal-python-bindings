@@ -37,7 +37,7 @@ typedef Alpha_shape_3::Finite_facets_iterator   Finite_facets_iterator;
 typedef Alpha_shape_3::Finite_edges_iterator    Finite_edges_iterator;
 typedef Alpha_shape_3::Finite_vertices_iterator Finite_vertices_iterator;
 
-typedef Alpha_shape_3::size_type                Size_type;
+typedef Alpha_shape_3::size_type                size_type;
 typedef Alpha_shape_3::Locate_type              Locate_type;
 typedef Alpha_shape_3::Weighted_tag             Weighted_tag;
 
