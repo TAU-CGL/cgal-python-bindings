@@ -3,7 +3,7 @@ set(BOOLEAN_SET_OPERATIONS_2_OPTIONS_FILE_INCLUDED)
 
 function(select_boolean_set_operations_2)
   if(${CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS})
-    add_definitions(-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
+    add_definitions(-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS=)
   endif()
 endfunction()
 

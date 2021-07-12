@@ -59,7 +59,7 @@ function(select_kernel_d)
   if (CGALPY_KERNEL_D_BINDINGS)
     select_kernel_d_name()
     select_kernel_d_dimension_tag()
-    add_definitions(-DCGALPY_KERNEL_D_BINDINGS)
+    add_definitions(-DCGALPY_KERNEL_D_BINDINGS=)
   endif()
 endfunction()
 

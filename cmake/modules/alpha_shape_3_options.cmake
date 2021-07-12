@@ -19,7 +19,7 @@ set(CGALPY_AS3_EXACT_COMPARISON false CACHE BOOL "The exact comparison tag")
 
 function(select_alpha_shape_3_comparison)
   if(${CGALPY_AS3_EXACT_COMPARISON})
-    add_definitions(-DCGALPY_AS3_EXACT_COMPARISON)
+    add_definitions(-DCGALPY_AS3_EXACT_COMPARISON=)
   endif()
 endfunction()
 
@@ -28,7 +28,7 @@ function(select_alpha_shape_3)
   if(${CGALPY_ALPHA_SHAPE_3_BINDINGS})
     select_alpha_shape_3_comparison()
 
-    add_definitions(-DCGALPY_ALPHA_SHAPE_3_BINDINGS)
+    add_definitions(-DCGALPY_ALPHA_SHAPE_3_BINDINGS=)
 
     # Select Alpha shape
     if    ("${CGALPY_AS3_NAME}" STREQUAL "plain")
