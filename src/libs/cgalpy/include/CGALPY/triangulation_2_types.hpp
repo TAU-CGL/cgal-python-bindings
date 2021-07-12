@@ -42,7 +42,7 @@ typedef Face_alpha_shape<alpha_shape_2_bindings(), Fbi, Traits, Ec>::type
 typedef CGAL::Triangulation_data_structure_2<V, F>              Tds;
 typedef Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG>::type    Itag;
 typedef Base_tri<CGALPY_TRI2, Traits, Tds, Itag>::type          Btr;
-  typedef Tri<hierarchy(), is_periodic(), Btr>::type            Triangulation_2;
+typedef Tri<hierarchy(), is_periodic(), Btr>::type              Triangulation_2;
 
 typedef Triangulation_2::Point                        Point;
 typedef Triangulation_2::Segment                      Segment;
