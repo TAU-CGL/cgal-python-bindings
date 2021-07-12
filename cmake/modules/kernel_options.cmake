@@ -20,7 +20,7 @@ set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epic epec epecWithSqrt fi
 # Selection
 function(select_kernel_intersection)
   if(${CGALPY_KERNEL_INTERSECTION_BINDINGS})
-    add_definitions(-DCGALPY_KERNEL_INTERSECTION_BINDINGS)
+    add_definitions(-DCGALPY_KERNEL_INTERSECTION_BINDINGS=)
   endif()
 endfunction()
 
@@ -39,7 +39,7 @@ function(select_kernel)
     endif()
     add_definitions(-DCGALPY_KERNEL=${CGALPY_KERNEL})
     select_kernel_intersection()
-    add_definitions(-DCGALPY_KERNEL_BINDINGS)
+    add_definitions(-DCGALPY_KERNEL_BINDINGS=)
   endif()
 endfunction()
 
