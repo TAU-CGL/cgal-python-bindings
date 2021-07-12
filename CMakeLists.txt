@@ -30,6 +30,7 @@ endif()
 option(CGALPY_KERNEL_BINDINGS                   "Compile bindings for 2,3 Kernel" ON)
 option(CGALPY_KERNEL_D_BINDINGS                 "Compile bindings for dD Kernel")
 option(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS "Compile bindings for 2D Arrangements on Surfaces")
+option(CGALPY_ALPHA_SHAPE_2_BINDINGS            "Compile bindings for 2D Alpha Shapes")
 option(CGALPY_ALPHA_SHAPE_3_BINDINGS            "Compile bindings for 3D Alpha Shapes")
 option(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS "Compile bindings for 2D boolean set operations")
 option(CGALPY_BOUNDING_VOLUMES_BINDINGS         "Compile bindings for bounding volumes")
@@ -46,6 +47,7 @@ option(CGALPY_KERNEL_INTERSECTION_BINDINGS      "Compile bindings for intersecti
 option(CGALPY_KERNEL_D_BINDINGS                 "Compile bindings for dD Kernel")
 
 
+include(alpha_shape_2_options)
 include(alpha_shape_3_options)
 include(arrangement_on_surface_2_options)
 include(boolean_set_operations_2_options)

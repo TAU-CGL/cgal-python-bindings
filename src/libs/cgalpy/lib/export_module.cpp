@@ -35,6 +35,7 @@ void export_convex_hull_2_bindings();
 void export_spatial_searching();
 void export_bounding_volumes();
 void export_triangulation_3();
+void export_alpha_shape_2();
 void export_alpha_shape_3();
 
 #define SET_SCOPE(x)  \
@@ -62,13 +63,6 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
   {
     SET_SCOPE("Kerd")
     export_kernel_d();
-  }
-#endif
-
-#ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
-  {
-    SET_SCOPE("AS3")
-    export_alpha_shape_3();
   }
 #endif
 
@@ -109,6 +103,14 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
     export_triangulation_2();
   };
 
+#endif
+
+  // 2D Alpha shape must be bound after 2D triangulation!
+#ifdef CGALPY_ALPHA_SHAPE_2_BINDINGS
+  {
+    SET_SCOPE("AS2")
+    export_alpha_shape_2();
+  }
 #endif
 
 #ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
@@ -157,4 +159,13 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
     export_triangulation_3();
   };
 #endif
+
+  // 3D Alpha shape must be bound after 3D triangulation!
+#ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
+  {
+    SET_SCOPE("AS3")
+    export_alpha_shape_3();
+  }
+#endif
+
 }
