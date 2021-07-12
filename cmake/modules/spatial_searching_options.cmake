@@ -9,7 +9,7 @@ function(select_spatial_searching)
     # Select dimension
     add_definitions(-DCGALPY_SPATIAL_SEARCHING_DIMENSION=${CGALPY_SPATIAL_SEARCHING_DIMENSION})
 
-    add_definitions(-DCGALPY_SPATIAL_SEARCHING_BINDINGS)
+    add_definitions(-DCGALPY_SPATIAL_SEARCHING_BINDINGS=)
   endif()
 endfunction()
 
