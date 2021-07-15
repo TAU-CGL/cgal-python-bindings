@@ -44,29 +44,43 @@ typedef Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG>::type    Itag;
 typedef Base_tri<CGALPY_TRI2, Traits, Tds, Itag>::type          Btr;
 typedef Tri<hierarchy(), is_periodic(), Btr>::type              Triangulation_2;
 
+typedef Triangulation_2::Geom_traits                  Geom_traits;
+typedef Triangulation_2::Triangulation_data_structure
+  Triangulation_data_structure;
+typedef Triangulation_2::Locate_type                  Locate_type;
+
 typedef Triangulation_2::Point                        Point;
 typedef Triangulation_2::Segment                      Segment;
 typedef Triangulation_2::Triangle                     Triangle;
 typedef Triangulation_2::Vertex                       Vertex;
-typedef Triangulation_2::Face                         Face;
 typedef Triangulation_2::Edge                         Edge;
+typedef Triangulation_2::Face                         Face;
 typedef Triangulation_2::size_type                    size_type;
 typedef Triangulation_2::difference_type              difference_type;
 
 typedef Triangulation_2::Vertex_handle                Vertex_handle;
 typedef Triangulation_2::Face_handle                  Face_handle;
 
-typedef Triangulation_2::Vertex_circulator            Vertex_circulator;
 typedef Triangulation_2::All_vertices_iterator        All_vertices_iterator;
-typedef Triangulation_2::Finite_vertices_iterator     Finite_vertices_iterator;
-typedef Triangulation_2::Edge_circulator              Edge_circulator;
 typedef Triangulation_2::All_edges_iterator           All_edges_iterator;
-typedef Triangulation_2::Finite_edges_iterator        Finite_edges_iterator;
-typedef Triangulation_2::Face_circulator              Face_circulator;
-typedef Triangulation_2::Face_handle                  Face_handle;
 typedef Triangulation_2::All_faces_iterator           All_faces_iterator;
+typedef Triangulation_2::Finite_vertices_iterator     Finite_vertices_iterator;
+typedef Triangulation_2::Finite_edges_iterator        Finite_edges_iterator;
 typedef Triangulation_2::Finite_faces_iterator        Finite_faces_iterator;
 typedef Triangulation_2::Point_iterator               Point_iterator;
+
+typedef Triangulation_2::Vertex_circulator            Vertex_circulator;
+typedef Triangulation_2::Edge_circulator              Edge_circulator;
+typedef Triangulation_2::Face_circulator              Face_circulator;
+
+typedef Triangulation_2::Points                       Points;
+typedef Triangulation_2::Line_face_circulator         Line_face_circulator;
+typedef Triangulation_2::All_vertex_handles           All_vertex_handles;
+typedef Triangulation_2::Finite_vertex_handles        Finite_vertex_handles;
+typedef Triangulation_2::All_edges                    All_edges;
+typedef Triangulation_2::Finite_edges                 Finite_edges;
+typedef Triangulation_2::All_face_handles             All_face_handles;
+typedef Triangulation_2::Finite_face_handles          Finite_face_handles;
 
 } // End of namespace tri2
 
