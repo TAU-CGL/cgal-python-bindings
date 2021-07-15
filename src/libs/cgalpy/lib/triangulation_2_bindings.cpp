@@ -111,6 +111,9 @@ Vertex& infinite_vertex(Triangulation_2& t) { return *(t.infinite_vertex()); }
 
 Vertex& finite_vertex(Triangulation_2& t) { return *(t.finite_vertex()); }
 
+template <typename Handle_>
+const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
+
 } // End of namespace tri2
 
 void export_triangulation_2() {
@@ -188,6 +191,16 @@ void export_triangulation_2() {
 
   bp::class_<tri2::Face>("Face")
     .def("is_valid", &tri2::Face::is_valid)
+    ;
+
+  bp::class_<tri2::Vertex_handle>("Vertex_handle")
+    .def(bp::init<>())
+    .def("value", &tri2::value<tri2::Vertex_handle>, Reference_existing_object())
+    ;
+
+  bp::class_<tri2::Face_handle>("Face_handle")
+    .def(bp::init<>())
+    .def("value", &tri2::value<tri2::Face_handle>, Reference_existing_object())
     ;
 
   bind_copy_iterator<CopyIterator<tri2::All_edges_iterator>>("Triangulation_all_edges_iterator");
