@@ -17,6 +17,7 @@ namespace bp = boost::python;
 
 typedef bp::return_value_policy<bp::copy_const_reference> Copy_const_reference;
 typedef bp::return_value_policy<bp::return_by_value>      Return_by_value;
+typedef bp::return_value_policy<bp::manage_new_object>    Manage_new_object;
 
 constexpr bool kernel_bindings()
 { return DETECT_EXIST(CGALPY_KERNEL_BINDINGS); }

@@ -9,6 +9,8 @@
 #ifndef CGALPY_ALPHA_SHAPE_2_CONFIG_HPP
 #define CGALPY_ALPHA_SHAPE_2_CONFIG_HPP
 
+#include <CGAL/tags.h>
+
 namespace as2 {
 
 constexpr bool exact_comparison()
