@@ -121,16 +121,13 @@ template <typename Vb> struct Vertex_hierarchy<true, Vb>
 { typedef CGAL::Triangulation_hierarchy_vertex_base_3<Vb> type; };
 
 // Vertex alpha shape
-template <bool b, int i, typename Vb, typename Tr, typename ExactComparison>
-struct Vertex_alpha_shape {};
 template <int i, typename Vb, typename Tr, typename ExactComparison>
-struct Vertex_alpha_shape<false, i, Vb, Tr, ExactComparison>
-{ typedef Vb type; };
+struct Vertex_alpha_shape {};
 template <typename Vb, typename Tr, typename ExactComparison>
-struct Vertex_alpha_shape<true, CGALPY_AS3_PLAIN, Vb, Tr, ExactComparison>
+struct Vertex_alpha_shape<CGALPY_AS3_PLAIN, Vb, Tr, ExactComparison>
 { typedef CGAL::Alpha_shape_vertex_base_3<Tr, Vb, ExactComparison> type; };
 template <typename Vb, typename Tr, typename ExactComparison>
-struct Vertex_alpha_shape<true, CGALPY_AS3_FIXED, Vb, Tr, ExactComparison>
+struct Vertex_alpha_shape<CGALPY_AS3_FIXED, Vb, Tr, ExactComparison>
 { typedef CGAL::Fixed_alpha_shape_vertex_base_3<Tr, Vb> type; };
 
 // Cell periodic triangulation

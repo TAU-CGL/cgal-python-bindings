@@ -50,7 +50,7 @@ bp::list alpha_shape_vertices(const as2::Alpha_shape_2& as) {
   return lst;
 }
 
-}
+} // end of as2 namespace
 
 void export_alpha_shape_2() {
   typedef as2::Alpha_shape_2                    As2;
@@ -65,10 +65,10 @@ void export_alpha_shape_2() {
   as2::Classification_type (As2::*classify4)(const as2::Face_handle& s, const as2::FT& alpha) const        = &As2::classify;
   as2::Classification_type (As2::*classify5)(const as2::Face_handle& s, int i, const as2::FT& alpha) const = &As2::classify;
 
-  as2::Classification_type (As2:: *classify6)(const as2::Point& p) const              = &As2::classify;
-  as2::Classification_type (As2:: *classify7)(const as2::Edge& s) const               = &As2::classify;
-  as2::Classification_type (As2::*classify8)(const as2::Vertex_handle& s) const      = &As2::classify;
-  as2::Classification_type (As2::*classify9)(const as2::Face_handle& s) const        = &As2::classify;
+  as2::Classification_type (As2::*classify6)(const as2::Point& p) const               = &As2::classify;
+  as2::Classification_type (As2::*classify7)(const as2::Edge& s) const                = &As2::classify;
+  as2::Classification_type (As2::*classify8)(const as2::Vertex_handle& s) const       = &As2::classify;
+  as2::Classification_type (As2::*classify9)(const as2::Face_handle& s) const         = &As2::classify;
   as2::Classification_type (As2::*classify10)(const as2::Face_handle& s, int i) const = &As2::classify;
 
   bp::scope as2_scope =
@@ -131,12 +131,19 @@ void export_alpha_shape_2() {
     ;
 
   // Types that have been registered already:
+  // Types that have been registered already:
+#if ((CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_REGULAR) ||       \
+     (CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_DELAUNAY))
+  // \todo: generate bindings for periodic traits
+  ;
+#else
   add_attr<as2::Gt>("Gt", as2_scope);
+#endif
   add_attr<as2::Point>("Point", as2_scope);
   add_attr<as2::FT>("FT", as2_scope);
   add_attr<as2::Tds>("Tds", as2_scope);
-  add_attr<as2::Tds>("Vertex", as2_scope);
-  add_attr<as2::Tds>("Edge", as2_scope);
-  // Vertex_handle
-  // Face_handle
+  add_attr<as2::Vertex>("Vertex", as2_scope);
+  add_attr<as2::Edge>("Edge", as2_scope);
+  add_attr<as2::Vertex_handle>("Vertex_handle", as2_scope);
+  add_attr<as2::Face_handle>("Face_handle", as2_scope);
 }
