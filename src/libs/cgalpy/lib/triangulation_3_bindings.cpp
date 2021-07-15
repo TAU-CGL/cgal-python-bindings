@@ -80,7 +80,7 @@ void export_triangulation_3() {
   // bool(Tri3::*is_valid2)(tri3::Cell_handle, bool, int) const =
   //   &Tri3::is_valid;
 
-#if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
+#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
   tri3::Vertex_handle(Tri3::*insert1)(const tri3::Point&, tri3::Cell_handle, bool*) =
     &Tri3::insert;
   tri3::Vertex_handle(Tri3::*insert2)(const tri3::Point&, tri3::Vertex_handle, bool*) =
@@ -145,7 +145,16 @@ void export_triangulation_3() {
 
   // Triangulation_data_structure
   // Lock_data_structure
-  // Locate_type
+  bp::enum_<tri3::Locate_type>("Locate_type")
+    .value("VERTEX", Tri3::VERTEX)
+    .value("EDGE", Tri3::EDGE)
+    .value("FACET", Tri3::FACET)
+    .value("CELL", Tri3::CELL)
+    .value("OUTSIDE_CONVEX_HULL", Tri3::OUTSIDE_CONVEX_HULL)
+    .value("OUTSIDE_AFFINE_HULL", Tri3::OUTSIDE_AFFINE_HULL)
+    .export_values()
+    ;
+
 
   // Types that have been registered already:
 #if ((CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_PLAIN) ||         \
