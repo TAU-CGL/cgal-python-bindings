@@ -154,9 +154,6 @@ void export_triangulation_2() {
     .def("cw", &Tri2::cw)
     ;
 
-  // Distinguish between kernel traits and non-kernel traits
-  // Triangulation_data_structure
-
   bp::enum_<tri2::Locate_type>("Locate_type")
     .value("VERTEX", Tri2::VERTEX)
     .value("EDGE", Tri2::EDGE)
@@ -167,6 +164,15 @@ void export_triangulation_2() {
     ;
 
   // Types that have been registered already:
+#if ((CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_REGULAR) ||       \
+     (CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_DELAUNAY))
+  // \todo: generate bindings for periodic traits
+  ;
+#else
+  // In the case of non-priodic triangulation the kernel serves as the traits.
+  add_attr<tri2::Geom_traits>("Geom_traits", tri2_scope);
+#endif
+
   add_attr<tri2::Point>("Point", tri2_scope);
   add_attr<tri2::Segment>("Segment", tri2_scope);
   add_attr<tri2::Triangle>("Triangle", tri2_scope);
