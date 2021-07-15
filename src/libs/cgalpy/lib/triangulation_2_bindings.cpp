@@ -10,6 +10,8 @@
 
 #include <boost/python.hpp>
 
+#include "CGALPY/types.hpp"
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 
@@ -35,146 +37,142 @@ Face_handle face_to_handle(Face& f) {
   return res;
 }
 
-template <typename T>
-CopyIterator<All_edges_iterator>* all_edges_iterator(T& t) {
+CopyIterator<All_edges_iterator>* all_edges_iterator(Triangulation_2& t) {
   return new CopyIterator<All_edges_iterator>(t.all_edges_begin(), t.all_edges_end());
 }
 
-template <typename T>
-CopyIterator<Finite_edges_iterator>* finite_edges_iterator(T& t) {
+CopyIterator<Finite_edges_iterator>* finite_edges_iterator(Triangulation_2& t) {
   return new CopyIterator<Finite_edges_iterator>(t.finite_edges_begin(), t.finite_edges_end());
 }
 
-template<typename T>
 Copy_iterator_from_circulator<Edge_circulator>*
-edges_around_vertex_iterator0(T& t, Vertex& v) {
+edges_around_vertex_iterator0(Triangulation_2& t, Vertex& v) {
   return new Copy_iterator_from_circulator<Edge_circulator>(t.incident_edges(v.handle()));
 }
 
-template<typename T>
 Copy_iterator_from_circulator<Edge_circulator>*
-edges_around_vertex_iterator1(T& t, Vertex& v, Face& f) {
+edges_around_vertex_iterator1(Triangulation_2& t, Vertex& v, Face& f) {
   auto fh = face_to_handle(f);
   return new Copy_iterator_from_circulator<Edge_circulator>(t.incident_edges(v.handle(), fh));
 }
 
-template<typename T>
 Iterator_from_circulator<Face_circulator>*
-faces_around_vertex_iterator0(T& t, Vertex& v) {
+faces_around_vertex_iterator0(Triangulation_2& t, Vertex& v) {
   return new Iterator_from_circulator<Face_circulator>(t.incident_faces(v.handle()));
 }
 
-template<typename T>
 Iterator_from_circulator<Face_circulator>*
-faces_around_vertex_iterator1(T& t, Vertex& v, Face& f) {
+faces_around_vertex_iterator1(Triangulation_2& t, Vertex& v, Face& f) {
   auto fh = face_to_handle(f);
   return new Iterator_from_circulator<Face_circulator>(t.incident_faces(v.handle(), fh));
 }
 
-template<typename T>
 Iterator_from_circulator<Vertex_circulator>*
-vertices_around_vertex_iterator0(T& t, Vertex& v) {
+vertices_around_vertex_iterator0(Triangulation_2& t, Vertex& v) {
   return new Iterator_from_circulator<Vertex_circulator>(t.incident_vertices(v.handle()));
 }
 
-template<typename T>
 Iterator_from_circulator<Vertex_circulator>*
-vertices_around_vertex_iterator1(T& t, Vertex& v, Face& f) {
+vertices_around_vertex_iterator1(Triangulation_2& t, Vertex& v, Face& f) {
   auto fh = face_to_handle(f);
   return new Iterator_from_circulator<Vertex_circulator>(t.incident_vertices(v.handle(), fh));
 }
 
-template <typename T>
-void insert_list(T& t, bp::list& lst) {
-  auto v = std::vector<Point_2>(bp::stl_input_iterator<Point_2>(lst),
-                                bp::stl_input_iterator<Point_2>());
+void insert_list(Triangulation_2& t, bp::list& lst) {
+  auto v = std::vector<Point>(bp::stl_input_iterator<Point>(lst),
+                              bp::stl_input_iterator<Point>());
   t.insert(v.begin(), v.end());
 }
 
-template <typename T>
-void flip(T& t, Face& f, int i) {
+void flip(Triangulation_2& t, Face& f, int i) {
   auto fh = face_to_handle(f);
   t.flip(fh, i);
 }
 
-template <typename T>
-typename T::Triangle triangle(T& t, Face& f) {
+Triangle triangle(Triangulation_2& t, Face& f) {
   auto fh = face_to_handle(f);
   auto res = t.triangle(fh);
   return res;
 }
 
-template <typename T>
-Point_2 circumcenter(T& t, Face& f) {
+Point circumcenter(Triangulation_2& t, Face& f) {
   auto fh = face_to_handle(f);
   auto res = t.circumcenter(fh);
   return res;
 }
 
-template<typename T>
-Vertex& insert_point(T& t, Point_2& p) { return *(t.insert(p)); }
+Vertex& insert_point(Triangulation_2& t, Point& p) { return *(t.insert(p)); }
 
-template<typename T>
-void remove(T& t, Vertex& v) { t.remove(v.handle()); }
+void remove(Triangulation_2& t, Vertex& v) { t.remove(v.handle()); }
 
-template<typename T>
-Face& infinite_face(T& t) { return *(t.infinite_face()); }
+Face& infinite_face(Triangulation_2& t) { return *(t.infinite_face()); }
 
-template<typename T>
-Vertex& infinite_vertex(T& t) { return *(t.infinite_vertex()); }
+Vertex& infinite_vertex(Triangulation_2& t) { return *(t.infinite_vertex()); }
 
-template<typename T>
-Vertex& finite_vertex(T& t) { return *(t.finite_vertex()); }
-
-template <typename T, typename C>
-void export_triangulation(C c) {
-  c.def(bp::init<>())
-    .def(bp::init<T&>())
-    .def("dimension", &T::dimension)
-    .def("number_of_vertices", &T::number_of_vertices)
-    .def("number_of_faces", &T::number_of_faces)
-    .def("infinite_face", &infinite_face<T>, bp::return_internal_reference<>())
-    .def("infinite_vertex", &infinite_vertex<T>, bp::return_internal_reference<>())
-    .def("finite_vertex", &finite_vertex<T>, bp::return_internal_reference<>())
-    .def("clear", &T::clear)
-    .def("insert", &insert_list<T>)
-    .def("insert", &insert_point<T>, bp::return_internal_reference<>())
-    .def("triangle", &triangle<T>)
-    .def("circumcenter", &circumcenter<T>)
-    .def("flip", &flip<T>)
-    .def("remove", &remove<T>)
-    .def("all_vertices", bp::range<bp::return_internal_reference<>>(&T::all_vertices_begin, &T::all_vertices_end))
-    .def("finite_vertices", bp::range<bp::return_internal_reference<>>(&T::finite_vertices_begin, &T::finite_vertices_end))
-    .def("all_edges", &all_edges_iterator<T>, bp::return_value_policy<bp::manage_new_object>())
-    .def("finite_edges", &finite_edges_iterator<T>, bp::return_value_policy<bp::manage_new_object>())
-    .def("all_faces", bp::range<bp::return_internal_reference<>>(&T::all_faces_begin, &T::all_faces_end))
-    .def("finite_faces", bp::range<bp::return_internal_reference<>>(&T::finite_faces_begin, &T::finite_faces_end))
-    .def("points", bp::range<bp::return_internal_reference<>>(&T::points_begin, &T::points_end))
-    //circulators
-    .def("incident_vertices", &vertices_around_vertex_iterator0<T>, bp::return_value_policy<bp::manage_new_object>())
-    .def("incident_vertices", &vertices_around_vertex_iterator1<T>, bp::return_value_policy<bp::manage_new_object>())
-    .def("incident_edges", &edges_around_vertex_iterator0<T>, bp::return_value_policy<bp::manage_new_object>())
-    .def("incident_edges", &edges_around_vertex_iterator1<T>, bp::return_value_policy<bp::manage_new_object>())
-    .def("incident_faces", &faces_around_vertex_iterator0<T>, bp::return_value_policy<bp::manage_new_object>())
-    .def("incident_faces", &faces_around_vertex_iterator1<T>, bp::return_value_policy<bp::manage_new_object>())
-    .def("mirror_edge", &T::mirror_edge)
-    .def("segment", static_cast<Segment(T::*)(const Edge&) const>(&T::segment))
-    .def("is_infinite", static_cast<bool (T::*)(const Edge&) const>(&T::is_infinite))
-    .def("ccw", &T::ccw)
-    .def("cw", &T::cw)
-    //.def()
-    ;
-}
+Vertex& finite_vertex(Triangulation_2& t) { return *(t.finite_vertex()); }
 
 } // End of namespace tri2
 
 void export_triangulation_2() {
-  using namespace boost::python;
-  auto c0 = bp::class_<tri2::Triangulation_2>("Triangulation_2");
-  tri2::export_triangulation<tri2::Triangulation_2>(c0);
+  typedef tri2::Triangulation_2                 Tri2;
+
+  bp::scope tri2_scope =
+    bp::class_<Tri2>("Triangulation_2")
+    .def(bp::init<>())
+    .def(bp::init<Tri2&>())
+    .def("dimension", &Tri2::dimension)
+    .def("number_of_vertices", &Tri2::number_of_vertices)
+    .def("number_of_faces", &Tri2::number_of_faces)
+    .def("infinite_face", &tri2::infinite_face, bp::return_internal_reference<>())
+    .def("infinite_vertex", &tri2::infinite_vertex, bp::return_internal_reference<>())
+    .def("finite_vertex", &tri2::finite_vertex, bp::return_internal_reference<>())
+    .def("clear", &Tri2::clear)
+    .def("insert", &tri2::insert_list)
+    .def("insert", &tri2::insert_point, bp::return_internal_reference<>())
+    .def("triangle", &tri2::triangle)
+    .def("circumcenter", &tri2::circumcenter)
+    .def("flip", &tri2::flip)
+    .def("remove", &tri2::remove)
+    .def("all_vertices", bp::range<bp::return_internal_reference<>>(&Tri2::all_vertices_begin, &Tri2::all_vertices_end))
+    .def("finite_vertices", bp::range<bp::return_internal_reference<>>(&Tri2::finite_vertices_begin, &Tri2::finite_vertices_end))
+    .def("all_edges", &tri2::all_edges_iterator, Manage_new_object())
+    .def("finite_edges", &tri2::finite_edges_iterator, Manage_new_object())
+    .def("all_faces", bp::range<bp::return_internal_reference<>>(&Tri2::all_faces_begin, &Tri2::all_faces_end))
+    .def("finite_faces", bp::range<bp::return_internal_reference<>>(&Tri2::finite_faces_begin, &Tri2::finite_faces_end))
+    .def("points", bp::range<bp::return_internal_reference<>>(&Tri2::points_begin, &Tri2::points_end))
+    //circulators
+    .def("incident_vertices", &tri2::vertices_around_vertex_iterator0, Manage_new_object())
+    .def("incident_vertices", &tri2::vertices_around_vertex_iterator1, Manage_new_object())
+    .def("incident_edges", &tri2::edges_around_vertex_iterator0, Manage_new_object())
+    .def("incident_edges", &tri2::edges_around_vertex_iterator1, Manage_new_object())
+    .def("incident_faces", &tri2::faces_around_vertex_iterator0, Manage_new_object())
+    .def("incident_faces", &tri2::faces_around_vertex_iterator1, Manage_new_object())
+    .def("mirror_edge", &Tri2::mirror_edge)
+    .def("segment", static_cast<tri2::Segment(Tri2::*)(const tri2::Edge&) const>(&Tri2::segment))
+    .def("is_infinite", static_cast<bool (Tri2::*)(const tri2::Edge&) const>(&Tri2::is_infinite))
+    .def("ccw", &Tri2::ccw)
+    .def("cw", &Tri2::cw)
+    ;
+
+  // Distinguish between kernel traits and non-kernel traits
+  // Triangulation_data_structure
+
+  bp::enum_<tri2::Locate_type>("Locate_type")
+    .value("VERTEX", Tri2::VERTEX)
+    .value("EDGE", Tri2::EDGE)
+    .value("FACE", Tri2::FACE)
+    .value("OUTSIDE_CONVEX_HULL", Tri2::OUTSIDE_CONVEX_HULL)
+    .value("OUTSIDE_AFFINE_HULL", Tri2::OUTSIDE_AFFINE_HULL)
+    .export_values()
+    ;
+
+  // Types that have been registered already:
+  add_attr<tri2::Point>("Point", tri2_scope);
+  add_attr<tri2::Segment>("Segment", tri2_scope);
+  add_attr<tri2::Triangle>("Triangle", tri2_scope);
 
   bp::class_<tri2::Vertex>("Vertex")
-    .def<tri2::Point& (tri2::Vertex::*) ()>("point", &tri2::Vertex::point, return_internal_reference<>())
+    .def<tri2::Point&(tri2::Vertex::*)()>("point", &tri2::Vertex::point, bp::return_internal_reference<>())
     ;
 
   bp::class_<tri2::Edge>("Edge")

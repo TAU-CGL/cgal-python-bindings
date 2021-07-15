@@ -18,6 +18,8 @@
 #define CGALPY_AS3_PLAIN                                0
 #define CGALPY_AS3_FIXED                                1
 
+#include <CGAL/tags.h>
+
 namespace as3 {
 
 constexpr bool exact_comparison()

@@ -9,7 +9,6 @@
 #ifndef CGALPY_ALPHA_SHAPE_2_TYPES_HPP
 #define CGALPY_ALPHA_SHAPE_2_TYPES_HPP
 
-#include <CGAL/tags.h>
 #include <CGAL/Alpha_shape_2.h>
 
 #include "CGALPY/config.hpp"
