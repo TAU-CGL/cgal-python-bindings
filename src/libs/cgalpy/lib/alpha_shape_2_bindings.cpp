@@ -14,6 +14,7 @@
 #include "CGALPY/types.hpp"
 #include "CGALPY/alpha_shape_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/add_attr.hpp"
 
 namespace bp = boost::python;
 
@@ -49,14 +50,6 @@ bp::list alpha_shape_vertices(const as2::Alpha_shape_2& as) {
   return lst;
 }
 
-}
-
-template <typename T>
-void add_attr(const char* name, bp::scope& my_scope) {
-  const bp::type_info info = bp::type_id<T>();
-  const bp::converter::registration* reg = bp::converter::registry::query(info);
-  BOOST_ASSERT((reg != nullptr) && ((*reg).m_to_python != nullptr));
-  my_scope.attr(name) = bp::handle<>(reg->m_class_object);
 }
 
 void export_alpha_shape_2() {
@@ -137,15 +130,13 @@ void export_alpha_shape_2() {
     .export_values()
     ;
 
-  // Types that have been registered already
-  // Point
+  // Types that have been registered already:
   add_attr<as2::Gt>("Gt", as2_scope);
   add_attr<as2::Point>("Point", as2_scope);
   add_attr<as2::FT>("FT", as2_scope);
   add_attr<as2::Tds>("Tds", as2_scope);
-
-  // Vertex
-  // Edge
+  add_attr<as2::Tds>("Vertex", as2_scope);
+  add_attr<as2::Tds>("Edge", as2_scope);
   // Vertex_handle
   // Face_handle
 }
