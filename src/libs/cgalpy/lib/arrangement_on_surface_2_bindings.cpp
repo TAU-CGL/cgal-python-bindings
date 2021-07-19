@@ -38,6 +38,8 @@ typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
 typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2> Landmarks_pl;
 typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
   Trapezoid_pl;
+typedef typename boost::variant<Vertex_const_handle, Halfedge_const_handle,
+  Face_const_handle> variant;
 
 #if (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL) || \
   (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL)
@@ -135,32 +137,100 @@ Face& remove_edge_free(Arrangement_2& arr, Halfedge& e) {
   return *(CGAL::remove_edge(arr, handle));
 }
 
-bool remove_vertex_free(Arrangement_2& arr, Vertex& v)
-{ return CGAL::remove_vertex(arr, Vertex_iterator(&v)); }
+bool remove_vertex_free(Arrangement_2& arr, Vertex& v) {
+  return CGAL::remove_vertex(arr, Vertex_iterator(&v));
+}
 
-void decompose(Arrangement_2& arr, bp::list& lst) {
-  auto v = std::vector<std::pair<Arrangement_2::Vertex_const_handle,
-                                 std::pair<Object, Object>>>();
-  CGAL::decompose(arr, std::back_inserter(v));
-  for (auto& p : v) {
-    bp::tuple inner = bp::make_tuple(p.second.first, p.second.second);
-    bp::tuple outer = bp::make_tuple(*(p.first), inner);
-    lst.append(outer);
+template<typename T1, typename T2>
+void decompose_helper2(const Vertex& vertex, T1& below,
+                       T2& above, bp::list& lst) {
+  bp::tuple inner = bp::make_tuple(below, above);
+  bp::tuple outer = bp::make_tuple(vertex, inner);
+  lst.append(outer);
+}
+
+template<typename T1>
+void decompose_helper1(const Vertex& vertex, T1& below,
+                       boost::optional<variant>& above, bp::list& lst) {
+  if (!above) {
+    bp::object none;
+    decompose_helper2<T1, bp::object>(vertex, below, none, lst);
+    return;
+  }
+  auto var = (above.get());
+  if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&var)) {
+    decompose_helper2<T1, const Vertex>(vertex, below, *(*v), lst);
+  }
+  else if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
+    decompose_helper2<T1, const Halfedge>(vertex, below, *(*e), lst);
+  }
+  else if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
+    decompose_helper2<T1, const Face>(vertex, below, *(*f), lst);
   }
 }
 
-void zone_default(Arrangement_2& arr, X_monotone_curve_2& c, bp::list& lst) {
-  auto v = std::vector<Object>();
+void decompose_helper(const Vertex& vertex, boost::optional<variant>& below,
+                      boost::optional<variant>& above, bp::list& lst) {
+  if (!below) {
+    bp::object none;
+    decompose_helper1<bp::object>(vertex, none, above, lst);
+    return;
+  }
+  auto var = (below.get());
+  if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&var)) {
+    decompose_helper1<const Vertex>(vertex, *(*v), above, lst);
+   }
+  else if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
+    decompose_helper1<const Halfedge>(vertex, *(*e), above, lst);
+  }
+  else if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
+    decompose_helper1<const Face>(vertex, *(*f), above, lst);
+  }
+}
+
+void decompose(Arrangement_2& arr, bp::list& lst) {
+  auto v = std::vector<std::pair<Arrangement_2::Vertex_const_handle,
+                                 std::pair<boost::optional<variant>,
+                                   boost::optional<variant>>>>();
+  CGAL::decompose(arr, std::back_inserter(v));
+  for (auto o : v) {
+    const Vertex& vertex = *(o.first);
+    boost::optional<variant>& below = o.second.first;
+    boost::optional<variant>& above = o.second.second;
+    decompose_helper(vertex, below, above, lst);
+  }
+}
+
+void zone_default(Arrangement_2& arr, X_monotone_curve_2& c, bp::list& res) {
+  auto v = std::vector<variant>();
   CGAL::zone(arr, c, std::back_inserter(v));
-  for (auto o : v) lst.append(o);
+  for (auto o : v) {
+    if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&o)) {
+      res.append(*(*(v)));
+    } else if (Halfedge_const_handle* h =
+        boost::get<Halfedge_const_handle>(&o)) {
+          res.append(*(*(h)));
+    } else if (Face_const_handle* f = boost::get<Face_const_handle>(&o)) {
+        res.append(*(*(f)));
+    }
+  }
 }
 
 template <typename PointLocation>
-void zone(Arrangement_2& arr, X_monotone_curve_2& c, bp::list& lst,
+void zone(Arrangement_2& arr, X_monotone_curve_2& c, bp::list& res,
           PointLocation& pl) {
-  auto v = std::vector<Object>();
+  auto v = std::vector<variant>();
   CGAL::zone(arr, c, std::back_inserter(v), pl);
-  for (auto o : v) lst.append(o);
+  for (auto o : v) {
+    if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&o)) {
+      res.append(*(*(v)));
+    } else if (Halfedge_const_handle* h =
+      boost::get<Halfedge_const_handle>(&o)) {
+      res.append(*(*(h)));
+    } else if (Face_const_handle* f = boost::get<Face_const_handle>(&o)) {
+      res.append(*(*(f)));
+    }
+  }
 }
 
 //Arrangement methods

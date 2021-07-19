@@ -7,8 +7,8 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <boost/python.hpp>
-
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/arrangement_2_concepts/export_ArrangementTraits_2.hpp"
 
 namespace bp = boost::python;
 
@@ -218,8 +218,10 @@ void export_arr_algebraic_segment_traits() {
   bp::def("ipower", &ipower<Polynomial_1>);
   bp::def("ipower", &ipower<Polynomial_2>);
 
-  bp::scope traits_scope = bp::class_<Traits>("Traits")
-    .def(bp::init<>())
+  auto traits = bp::class_<Traits>("Traits");
+  bp::scope traits_scope;
+  export_ArrangementTraits_2<Traits, bp::return_value_policy<bp::return_by_value>>(traits);
+  traits
     .def("construct_curve_2_object", &Traits::construct_curve_2_object)
     .def("construct_tpoint_2_object", &Traits::construct_point_2_object)
     .def("construct_x_monotone_segment_2_object", &Traits::construct_x_monotone_segment_2_object)
@@ -256,7 +258,7 @@ void export_arr_algebraic_segment_traits() {
 
   bp::class_<Construct_curve_2>("Construct_curve_2", bp::no_init)
     .def("__call__", &Construct_curve_2::operator());
-    ;
+  ;
 
   auto cp_2_binding = bp::class_<Construct_point_2>("Construct_point_2", bp::no_init);
   export_construct_point_2_call_operator<Algebraic_real_1, Curve_2, int>(cp_2_binding);

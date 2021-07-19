@@ -8,6 +8,8 @@
 #include <boost/python.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/arrangement_2_concepts/export_ArrangementTraits_2.hpp"
+#include "CGALPY/arrangement_2_concepts/export_ArrangementDirectionalXMonotoneTraits_2.hpp"
 
 namespace bp = boost::python;
 
@@ -16,9 +18,10 @@ typedef typename Traits::CoordNT CoordNT;
 static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 
 void export_arr_circle_segment_traits() {
-  bp::scope traits_scope = bp::class_<Traits>("Traits")
-    .def(bp::init<>())
-    ;
+  auto traits = bp::class_<Traits>("Traits");
+  bp::scope traits_scope;
+  export_ArrangementTraits_2<Traits, bp::return_value_policy<bp::return_by_value>>(traits);
+  export_ArrangementDirectionalXMonotoneTraits_2<Traits, bp::return_value_policy<bp::return_by_value>>(traits);
 
   bp::class_<CoordNT>("CoordNT")
     .def(bp::init<>())
@@ -60,6 +63,7 @@ void export_arr_circle_segment_traits() {
     .def(bp::init<>())
     .def(bp::init<FT&, FT&>())
     .def(bp::init<CoordNT&, CoordNT&>())
+    .def(bp::init<double, double>())
     .def("x", &TPoint_2::x, bp::return_value_policy<bp::copy_const_reference>())
     .def("y", &TPoint_2::y, bp::return_value_policy<bp::copy_const_reference>())
     .def(bp::self == bp::self)
