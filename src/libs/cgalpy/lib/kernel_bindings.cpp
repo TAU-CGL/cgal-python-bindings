@@ -86,7 +86,7 @@ void export_kernel() {
      (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||                 \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
   const bp::type_info info_ft = bp::type_id<FT>();
-  const auto* reg_ft = bp::converter::registry::query(info_gmpq);
+  const auto* reg_ft = bp::converter::registry::query(info_ft);
   if ((reg_ft == nullptr) || ((*reg_ft).m_to_python == nullptr)) {
     auto ftc = bp::class_<FT>("FT");
     export_ft<FT>(ftc);
