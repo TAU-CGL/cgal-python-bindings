@@ -10,14 +10,21 @@
 #include <boost/assert.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/arrangement_2_concepts/export_ArrangementTraits_2.hpp"
+#include "CGALPY/arrangement_2_concepts/export_ArrangementLandmarkTraits_2.hpp"
+#include "CGALPY/arrangement_2_concepts/export_ArrangementDirectionalXMonotoneTraits_2.hpp"
 
 namespace bp = boost::python;
 
 Segment_2 to_segment(Curve_2& c) { return Segment_2(c); }
 
 void export_arr_segment_traits() {
-  bp::scope traits_scope = bp::class_<Traits>("Traits")
-    .def(bp::init<>())
+  auto traits = bp::class_<Traits>("Traits");
+  bp::scope traits_scope;
+  export_ArrangementTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
+  export_ArrangementLandmarkTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
+  export_ArrangementDirectionalXMonotoneTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
+  traits
     .def("is_in_x_range_2_object", &Traits::is_in_x_range_2_object)
     .def("is_in_y_range_2_object", &Traits::is_in_y_range_2_object)
     ;
@@ -53,10 +60,11 @@ void export_arr_segment_traits() {
     .def(bp::self_ns::repr(bp::self_ns::self))
   ;
 
+
   const bp::type_info cv_info = bp::type_id<X_monotone_curve_2>();
   const bp::converter::registration* cv_reg =
     bp::converter::registry::query(cv_info);
-  BOOST_ASSERT((cv_reg != nullptr) || ((*cv_reg).m_to_python != nullptr));
+  BOOST_ASSERT((cv_reg != nullptr) && ((*cv_reg).m_to_python != nullptr));
   traits_scope.attr("X_monotone_curve_2") = bp::handle<>(cv_reg->m_class_object);
 
   bp::class_<Is_in_x_range_2>("Is_in_x_range_2", bp::no_init)

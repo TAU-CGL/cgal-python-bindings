@@ -70,7 +70,6 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
   {
     SET_SCOPE("Aos2")
     export_arrangement_on_surface_2();
-    export_object();
 
 #ifdef CGALPY_AOS2_POINT_LOCATION_BINDINGS
     export_point_location();

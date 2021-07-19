@@ -6,7 +6,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <std/vector.hpp>
+#include <vector>
 
 #include <boost/python.hpp>
 

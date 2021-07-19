@@ -51,7 +51,7 @@ void export_polygon_2() {
     .def("size", &Polygon_2::size)
     .def("area", &Polygon_2::area)
     .def("bbox", &Polygon_2::bbox)
-    .def("vertices", range<return_internal_reference<>>(&Polygon_2::vertices_begin, &Polygon_2::vertices_end))
+    .def("vertices", bp::range<bp::return_internal_reference<>>(&Polygon_2::vertices_begin, &Polygon_2::vertices_end))
     .def("edges", &edges_iterator, bp::return_value_policy<bp::manage_new_object>())
     .def<const Point_2& (Polygon_2::*)(std::size_t) const>("__getitem__", &Polygon_2::operator[], bp::return_value_policy<bp::copy_const_reference>())
     .def("left_vertex", &left_vertex, bp::return_internal_reference<>())
