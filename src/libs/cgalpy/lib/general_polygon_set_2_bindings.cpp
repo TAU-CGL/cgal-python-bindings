@@ -144,12 +144,10 @@ void symmetric_difference_range(General_polygon_set_2& ps, bp::list& lst) {
 
 template <typename T>
 bool do_intersect(General_polygon_set_2& ps, T& other)
-{
-  return ps.do_intersect(other);
-}
+{ return ps.do_intersect(other); }
 
-bool do_intersect_range0(General_polygon_set_2& ps, bp::list& polygon_lst, bp::list& pwh_lst)
-{
+bool do_intersect_range0(General_polygon_set_2& ps,
+                         bp::list& polygon_lst, bp::list& pwh_lst) {
   auto begin0 = bp::stl_input_iterator<General_polygon_2>(polygon_lst);
   auto end0 = bp::stl_input_iterator<General_polygon_2>();
   auto begin1 = bp::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
@@ -160,8 +158,7 @@ bool do_intersect_range0(General_polygon_set_2& ps, bp::list& polygon_lst, bp::l
 }
 
 template <typename T>
-void do_intersect_range(General_polygon_set_2& ps, bp::list& lst)
-{
+void do_intersect_range(General_polygon_set_2& ps, bp::list& lst) {
   auto begin = bp::stl_input_iterator<T>(lst);
   auto end = bp::stl_input_iterator<T>();
   auto v = std::vector<T>(begin, end);

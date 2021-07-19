@@ -15,6 +15,31 @@ the potential of generating efficient binding. In this section we
 describe some of the techniques we use to ensure that.
 
 % -----------------------------------------------------------------------------
+\subsection{Following Generic Concepts}
+\label{sec:bind-code:concepts}
+% -----------------------------------------------------------------------------
+As mentioned in the introduction, \cgal{} rigorously adheres to the
+generic programming paradigm. As a consequence, almost all components
+of \cgal{} are (either class or function) templates. Many of the
+parameters of these templates are described in terms of models of
+concepts. When a class or a function template is instantiated, each
+one of its template parameters is substituted with a model of one or
+more concepts associated with the template parameter. These concepts
+are organized in clusters that describe the refinment relations among
+the concepts within a cluster. Close to~1,000 concepts can be
+identified in \cgal{} at the time this article is written. Most
+clusters are small. Few clusters, such as the hierarcy of concepts
+of the geometry traits of the \iiDArrangementsPackage{} package is
+quite large with intricate refinement relations. We have (at least
+for some of the bindings modules) introduced a template function that
+generates bindings for each concept. The function generates the
+bindings for all the member types and functions listed in the concept.
+Then, we call this function for every model of the concept. This
+systematic approach guaranties that all the documented functions and
+types, but nothing else, are exposed. Consider for example the
+\todo here comes an example
+
+% -----------------------------------------------------------------------------
 \subsection{Return value policy}
 \label{sec:bind-code:rvp}
 % -----------------------------------------------------------------------------
