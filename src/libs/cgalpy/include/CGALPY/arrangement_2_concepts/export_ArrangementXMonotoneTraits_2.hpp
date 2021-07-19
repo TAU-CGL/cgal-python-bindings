@@ -13,10 +13,14 @@
 
 template <typename T>
 void intersect_2_call_operator(typename T::Intersect_2& i,
-                           typename T::X_monotone_curve_2& xc1,
-                           typename T::X_monotone_curve_2& xc2, bp::list& res) {
-  typedef std::pair<typename T::Point_2, typename T::Multiplicity> pair;
-  typedef typename T::X_monotone_curve_2 X_monotone_curve_2;
+                               typename T::X_monotone_curve_2& xc1,
+                               typename T::X_monotone_curve_2& xc2,
+                               bp::list& res) {
+  typedef typename T::Point_2                   Point_2;
+  typedef typename T::X_monotone_curve_2        X_monotone_curve_2;
+  typedef typename T::Multiplicity              Multiplicity;
+
+  typedef std::pair<Point_2, Multiplicity> pair;
   auto v = std::vector<boost::variant<pair, X_monotone_curve_2>>();
   i(xc1, xc2, std::back_inserter(v));
   for (auto o : v) {
@@ -42,8 +46,9 @@ void export_Merge_2(C c, CGAL::Tag_false) {}
 
 template<typename T, typename C>
 void export_Are_mergeable_2(C c, CGAL::Tag_true) {
+  typedef typename T::Are_mergeable_2   Are_mergeable_2;
   bp::class_<typename T::Are_mergeable_2>("Are_mergeable_2", bp::no_init)
-    .def("__call__", &T::Are_mergeable_2::operator())
+    .def("__call__", &Are_mergeable_2::operator())
     ;
   c.def("are_mergeable_2_object", &T::are_mergeable_2_object);
 }
@@ -57,18 +62,23 @@ void export_ArrangementXMonotoneTraits_2(C c) {
   if (exported) return;
 
   export_ArrangementBasicTraits<T, RVP>(c);
-  bp::class_<typename T::Intersect_2>("Intersect_2", bp::no_init)
+
+  typedef typename T::Has_merge_category        Has_merge_category;
+  typedef typename T::Intersect_2               Intersect_2;
+  typedef typename T::Split_2                   Split_2;
+
+  bp::class_<Intersect_2>("Intersect_2", bp::no_init)
     .def("__call__", &intersect_2_call_operator<T>)
     ;
-  bp::class_<typename T::Split_2>("Split_2", bp::no_init)
-    .def("__call__", &T::Split_2::operator())
+  bp::class_<Split_2>("Split_2", bp::no_init)
+    .def("__call__", &Split_2::operator())
     ;
 
   c.def("intersect_2_object", &T::intersect_2_object);
   c.def("split_2_object", &T::split_2_object);
 
-  export_Are_mergeable_2<T>(c, T::Has_merge_category());
-  export_Merge_2<T>(c, T::Has_merge_category());
+  export_Are_mergeable_2<T>(c, Has_merge_category());
+  export_Merge_2<T>(c, Has_merge_category());
 
   exported = true;
 }
