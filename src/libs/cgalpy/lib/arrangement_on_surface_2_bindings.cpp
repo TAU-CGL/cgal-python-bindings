@@ -23,6 +23,8 @@
 #include "CGALPY/Python_functor.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
+namespace aos2 {
+
 void export_vertex();
 void export_halfedge();
 void export_face();
@@ -35,23 +37,17 @@ void export_arr_algebraic_segment_traits();
 
 namespace bp = boost::python;
 
-typedef typename CGAL::Arr_naive_point_location<Arrangement_2>         Naive_pl;
-typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
-typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2> Landmarks_pl;
-typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
-  Trapezoid_pl;
 typedef typename boost::variant<Vertex_const_handle, Halfedge_const_handle,
   Face_const_handle> variant;
 
-#if (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL) || \
-  (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL)
+#ifdef CGALPY_AOS2_FACE_EXTENDED
 #include <CGALPY/Arr_python_face_overlay_traits.hpp>
 typedef Arr_python_face_overlay_traits<Arrangement_2, Arrangement_2,
                                        Arrangement_2, Face::Data>
   Arr_face_overlay_traits;
 #endif
 
-#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
+#ifdef CGALPY_AOS2_FACE_EXTENDED
 #include <CGALPY/Arr_python_overlay_traits.hpp>
 typedef Arr_python_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
                                   Face::Data> Arr_overlay_traits;
@@ -117,8 +113,7 @@ bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl)
 void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res)
 { CGAL::overlay(arr1, arr2, arr_res); }
 
-#if (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL) ||    \
-  (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL)
+#ifdef CGALPY_AOS2_FACE_EXTENDED
 
 void overlay_fex(Arrangement_2& arr1, Arrangement_2& arr2,
                  Arrangement_2& arr_res, Arr_face_overlay_traits& traits)
@@ -126,7 +121,7 @@ void overlay_fex(Arrangement_2& arr1, Arrangement_2& arr2,
 
 #endif
 
-#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
+#ifdef CGALPY_AOS2_FACE_EXTENDED
 
 void overlay_ex(Arrangement_2& arr1, Arrangement_2& arr2,
                 Arrangement_2& arr_res, Arr_overlay_traits& traits)
@@ -311,7 +306,19 @@ Face& fictitious_face(Arrangement_2& arr) { return *(arr.fictitious_face()); }
 void assign(Arrangement_2& arr, Arrangement_2& input_arr)
 { arr.assign(input_arr); }
 
+}
+
 void export_arrangement_on_surface_2() {
+  typedef aos2::Arrangement_2                             Arr2;
+  typedef Arr2::Geometry_traits_2                         Tr;
+  typedef Tr::Point_2                                     Point;
+  typedef Tr::Curve_2                                     Curve;
+  typedef Tr::X_monotone_curve_2                          X_monotone_curve;
+  typedef CGAL::Arr_naive_point_location<Arr2>            Naive_pl;
+  typedef CGAL::Arr_walk_along_line_point_location<Arr2>  Wal_pl;
+  typedef CGAL::Arr_landmarks_point_location<Arr2>        Landmarks_pl;
+  typedef CGAL::Arr_trapezoid_ric_point_location<Arr2>    Trapezoid_pl;
+
   bp::enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
     .value("ARR_LEFT_TO_RIGHT", CGAL::Arr_halfedge_direction::ARR_LEFT_TO_RIGHT)
@@ -325,38 +332,38 @@ void export_arrangement_on_surface_2() {
     ;
 
   {
-    bp::scope aos_scope = bp::class_<Arrangement_2>("Arrangement_2")
+    bp::scope aos_scope = bp::class_<Arr2>("Arrangement_2")
       .def(bp::init<>())
-      .def(bp::init<Arrangement_2&>())
-      .def("halfedges", bp::range<bp::return_internal_reference<>>(&halfedges_begin, &halfedges_end))
-      .def("vertices", bp::range<bp::return_internal_reference<>>(&vertices_begin, &vertices_end))
-      .def("faces", bp::range<bp::return_internal_reference<>>(&faces_begin, &faces_end))
-      .def("edges", bp::range<bp::return_internal_reference<>>(&edges_begin, &edges_end))
-      .def("unbounded_face", &unbounded_face, bp::return_internal_reference<>())
-      .def("unbounded_faces", bp::range<bp::return_internal_reference<>>(&unbounded_faces_begin, &unbounded_faces_end))
-      .def("fictitious_face", &fictitious_face, bp::return_internal_reference<>())
-      .def("insert_from_left_vertex", &insert_from_left_vertex, bp::return_internal_reference<>())
-      .def("insert_from_right_vertex", &insert_from_right_vertex, bp::return_internal_reference<>())
-      .def("insert_in_face_interior", &insert_edge_in_face_interior, bp::return_internal_reference<>())
-      .def("insert_in_face_interior", &insert_vertex_in_face_interior, bp::return_internal_reference<>())
-      .def("insert_at_vertices", &insert_at_vertices, bp::return_internal_reference<>())
-      .def("modify_vertex", &modify_vertex, bp::return_internal_reference<>())
-      .def("remove_isolated_vertex", &remove_isolated_vertex, bp::return_internal_reference<>())
-      .def("modify_edge", &modify_edge, bp::return_internal_reference<>())
-      .def("split_edge", &split_edge, bp::return_internal_reference<>())
-      .def("merge_edge", &merge_edge, bp::return_internal_reference<>())
-      .def("remove_edge", &remove_edge, bp::return_internal_reference<>())
-      .def("is_empty", &Arrangement_2::is_empty)
-      .def("is_valid", &Arrangement_2::is_valid)
-      .def("number_of_edges", &Arrangement_2::number_of_edges)
-      .def("number_of_faces", &Arrangement_2::number_of_faces)
-      .def("number_of_halfedges", &Arrangement_2::number_of_halfedges)
-      .def("number_of_isolated_vertices", &Arrangement_2::number_of_isolated_vertices)
-      .def("number_of_unbounded_faces", &Arrangement_2::number_of_unbounded_faces)
-      .def("number_of_vertices", &Arrangement_2::number_of_vertices)
-      .def("number_of_vertices_at_infinity", &Arrangement_2::number_of_vertices_at_infinity)
-      .def("assign", &assign)
-      .def("clear", &Arrangement_2::clear)
+      .def(bp::init<Arr2&>())
+      .def("halfedges", bp::range<bp::return_internal_reference<>>(&aos2::halfedges_begin, &aos2::halfedges_end))
+      .def("vertices", bp::range<bp::return_internal_reference<>>(&aos2::vertices_begin, &aos2::vertices_end))
+      .def("faces", bp::range<bp::return_internal_reference<>>(&aos2::faces_begin, &aos2::faces_end))
+      .def("edges", bp::range<bp::return_internal_reference<>>(&aos2::edges_begin, &aos2::edges_end))
+      .def("unbounded_face", &aos2::unbounded_face, bp::return_internal_reference<>())
+      .def("unbounded_faces", bp::range<bp::return_internal_reference<>>(&aos2::unbounded_faces_begin, &aos2::unbounded_faces_end))
+      .def("fictitious_face", &aos2::fictitious_face, bp::return_internal_reference<>())
+      .def("insert_from_left_vertex", &aos2::insert_from_left_vertex, bp::return_internal_reference<>())
+      .def("insert_from_right_vertex", &aos2::insert_from_right_vertex, bp::return_internal_reference<>())
+      .def("insert_in_face_interior", &aos2::insert_edge_in_face_interior, bp::return_internal_reference<>())
+      .def("insert_in_face_interior", &aos2::insert_vertex_in_face_interior, bp::return_internal_reference<>())
+      .def("insert_at_vertices", &aos2::insert_at_vertices, bp::return_internal_reference<>())
+      .def("modify_vertex", &aos2::modify_vertex, bp::return_internal_reference<>())
+      .def("remove_isolated_vertex", &aos2::remove_isolated_vertex, bp::return_internal_reference<>())
+      .def("modify_edge", &aos2::modify_edge, bp::return_internal_reference<>())
+      .def("split_edge", &aos2::split_edge, bp::return_internal_reference<>())
+      .def("merge_edge", &aos2::merge_edge, bp::return_internal_reference<>())
+      .def("remove_edge", &aos2::remove_edge, bp::return_internal_reference<>())
+      .def("is_empty", &Arr2::is_empty)
+      .def("is_valid", &Arr2::is_valid)
+      .def("number_of_edges", &Arr2::number_of_edges)
+      .def("number_of_faces", &Arr2::number_of_faces)
+      .def("number_of_halfedges", &Arr2::number_of_halfedges)
+      .def("number_of_isolated_vertices", &Arr2::number_of_isolated_vertices)
+      .def("number_of_unbounded_faces", &Arr2::number_of_unbounded_faces)
+      .def("number_of_vertices", &Arr2::number_of_vertices)
+      .def("number_of_vertices_at_infinity", &Arr2::number_of_vertices_at_infinity)
+      .def("assign", &aos2::assign)
+      .def("clear", &Arr2::clear)
 
       //supported only by some traits
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
@@ -367,90 +374,88 @@ void export_arrangement_on_surface_2() {
 #endif
       ;
 
-    export_vertex();
-    export_halfedge();
-    export_face();
+    aos2::export_vertex();
+    aos2::export_halfedge();
+    aos2::export_face();
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-    export_arr_linear_traits();
+    aos2::export_arr_linear_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-    export_arr_segment_traits();
+    aos2::export_arr_segment_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-    export_arr_circle_segment_traits();
+    aos2::export_arr_circle_segment_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-    export_arr_conic_traits();
+    aos2::export_arr_conic_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-    export_arr_algebraic_segment_traits();
+    aos2::export_arr_algebraic_segment_traits();
 #else
     BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
   }
 
   //free functions
-  bp::def("insert_point", &insert_point_default, bp::return_internal_reference<>());
-  bp::def("insert_point", &insert_point<Naive_pl>, bp::return_internal_reference<>());
-  bp::def("insert_point", &insert_point<Wal_pl>, bp::return_internal_reference<>());
-  bp::def("insert_point", &insert_point<Trapezoid_pl>, bp::return_internal_reference<>());
-  bp::def("insert", &insert_curve<X_monotone_curve_2>);
-  bp::def("insert", &insert_curve<Curve_2>);
-  bp::def("insert", &insert_curves);
-  bp::def("insert_non_intersecting_curve", &insert_non_intersecting_curve_default, bp::return_internal_reference<>());
-  bp::def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Naive_pl>, bp::return_internal_reference<>());
-  bp::def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Wal_pl>, bp::return_internal_reference<>());
-  bp::def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Trapezoid_pl>, bp::return_internal_reference<>());
-  bp::def("insert_non_intersecting_curves", &insert_non_intersecting_curves);
-  bp::def("decompose", &decompose);
-  bp::def("zone", &zone_default);
-  bp::def("zone", &zone<Naive_pl>);
-  bp::def("zone", &zone<Wal_pl>);
-  bp::def("zone", &zone<Trapezoid_pl>);
+  bp::def("insert_point", &aos2::insert_point_default, bp::return_internal_reference<>());
+  bp::def("insert_point", &aos2::insert_point<Naive_pl>, bp::return_internal_reference<>());
+  bp::def("insert_point", &aos2::insert_point<Wal_pl>, bp::return_internal_reference<>());
+  bp::def("insert_point", &aos2::insert_point<Trapezoid_pl>, bp::return_internal_reference<>());
+  bp::def("insert", &aos2::insert_curve<X_monotone_curve>);
+  bp::def("insert", &aos2::insert_curve<Curve>);
+  bp::def("insert", &aos2::insert_curves);
+  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve_default, bp::return_internal_reference<>());
+  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Naive_pl>, bp::return_internal_reference<>());
+  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Wal_pl>, bp::return_internal_reference<>());
+  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Trapezoid_pl>, bp::return_internal_reference<>());
+  bp::def("insert_non_intersecting_curves", &aos2::insert_non_intersecting_curves);
+  bp::def("decompose", &aos2::decompose);
+  bp::def("zone", &aos2::zone_default);
+  bp::def("zone", &aos2::zone<Naive_pl>);
+  bp::def("zone", &aos2::zone<Wal_pl>);
+  bp::def("zone", &aos2::zone<Trapezoid_pl>);
   //supported only by some traits
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-  bp::def("zone", &zone<Landmarks_pl>);
-  bp::def("do_intersect", &do_intersect<X_monotone_curve_2, Landmarks_pl>);
-  bp::def("insert_point", &insert_point<Landmarks_pl>, bp::return_internal_reference<>());
-  bp::def("insert_non_intersecting_curve", &insert_non_intersecting_curve<Landmarks_pl>, bp::return_internal_reference<>());
+  bp::def("zone", &aos2::zone<Landmarks_pl>);
+  bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Landmarks_pl>);
+  bp::def("insert_point", &aos2::insert_point<Landmarks_pl>, bp::return_internal_reference<>());
+  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Landmarks_pl>, bp::return_internal_reference<>());
 #endif
 
-  bp::def("overlay", &overlay);
+  bp::def("overlay", &aos2::overlay);
 
-#if (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL) ||  \
-  (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL)
-  bp::def("overlay", &overlay_fex);
+#ifdef CGALPY_AOS2_FACE_EXTENDED
+  bp::def("overlay", &aos2::overlay_fex);
 #endif
 
-#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
-  bp::def("overlay", &overlay_ex);
+#if CGALPY_AOS2_FACE_EXTENDED
+  bp::def("overlay", &aos2::overlay_ex);
 #endif
 
-  bp::def("do_intersect", &do_intersect_default<X_monotone_curve_2>);
-  bp::def("do_intersect", &do_intersect<X_monotone_curve_2, Naive_pl>);
-  bp::def("do_intersect", &do_intersect<X_monotone_curve_2, Wal_pl>);
-  bp::def("do_intersect", &do_intersect<X_monotone_curve_2, Trapezoid_pl>);
+  bp::def("do_intersect", &aos2::do_intersect_default<X_monotone_curve>);
+  bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Naive_pl>);
+  bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Wal_pl>);
+  bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Trapezoid_pl>);
   // These fail for some reason (no matching function found)
   /*
-  def("do_intersect", &do_intersect_default<Curve_2>);
-  def("do_intersect", &do_intersect<Curve_2, Naive_pl>);
-  def("do_intersect", &do_intersect<Curve_2, Wal_pl>);
-  def("do_intersect", &do_intersect<Curve_2, Trapezoid_pl>);
+  def("do_intersect", &aos2::do_intersect_default<Curve>);
+  def("do_intersect", &aos2::do_intersect<Curve, Naive_pl>);
+  def("do_intersect", &aos2::do_intersect<Curve, Wal_pl>);
+  def("do_intersect", &aos2::do_intersect<Curve, Trapezoid_pl>);
   */
-  bp::def("remove_edge", &remove_edge_free, bp::return_internal_reference<>());
-  bp::def("remove_vertex", &remove_vertex_free);
+  bp::def("remove_edge", &aos2::remove_edge_free, bp::return_internal_reference<>());
+  bp::def("remove_vertex", &aos2::remove_vertex_free);
 
-#if (CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL) || \
-    (CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL)
-  bp::class_<Arr_face_overlay_traits>("Arr_face_overlay_traits", bp::init<bp::object>())
+#ifdef CGALPY_AOS2_FACE_EXTENDED
+  bp::class_<aos2::Arr_face_overlay_traits>("Arr_face_overlay_traits", bp::init<bp::object>())
     ;
 #endif
 
-#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
-  bp::class_<Arr_overlay_traits>("Arr_overlay_traits", bp::init<bp::object,
-                                 bp::object, bp::object, bp::object,
-                                 bp::object, bp::object, bp::object,
-                                 bp::object, bp::object, bp::object>())
+#ifdef CGALPY_AOS2_FACE_EXTENDED
+  bp::class_<aos2::Arr_overlay_traits>("Arr_overlay_traits", bp::init<bp::object,
+                                       bp::object, bp::object, bp::object,
+                                       bp::object, bp::object, bp::object,
+                                       bp::object, bp::object, bp::object>())
     ;
 #endif
 }
