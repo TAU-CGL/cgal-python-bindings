@@ -26,4 +26,10 @@
 #define CGALPY_KERNEL 0
 #endif
 
+constexpr bool is_exact_ft() {
+  return ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                      \
+          (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||            \
+          (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ));
+}
+
 #endif //CGALPY_KERNEL_CONFIG_HPP
