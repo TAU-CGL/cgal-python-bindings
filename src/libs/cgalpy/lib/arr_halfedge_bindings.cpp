@@ -5,12 +5,16 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+
 #include <boost/python.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 
 namespace bp = boost::python;
+
+namespace aos2 {
 
 Vertex& source(Halfedge& e) { return (*(e.source())); }
 Vertex& target(Halfedge& e) { return (*(e.target())); }
@@ -23,21 +27,26 @@ X_monotone_curve_2& curve(Halfedge& e) { return (e.curve()); }
 Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
 { return new Iterator_from_circulator<Ccb_halfedge_circulator>(e.ccb()); }
 
+}
+
 void export_halfedge() {
+  typedef aos2::Arrangement_2   Arr2;
+  typedef Arr2::Halfedge        Halfedge;
+
   bp::class_<Halfedge>("Halfedge")
     .def(bp::init<>())
     .def("direction", &Halfedge::direction)
-    .def("source", &source, bp::return_value_policy<bp::reference_existing_object>())
-    .def("target", &target, bp::return_value_policy<bp::reference_existing_object>())
-    .def("twin", &twin, bp::return_value_policy<bp::reference_existing_object>())
-    .def("face", &face, bp::return_value_policy<bp::reference_existing_object>())
-    .def("next", &next, bp::return_value_policy<bp::reference_existing_object>())
-    .def("prev", &prev, bp::return_value_policy<bp::reference_existing_object>())
-    .def("curve", &curve, bp::return_value_policy<bp::reference_existing_object>())
-    .def("ccb", &ccb, bp::return_value_policy<bp::manage_new_object>())
-#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL
+    .def("source", &aos2::source, Reference_existing_object())
+    .def("target", &aos2::target, Reference_existing_object())
+    .def("twin", &aos2::twin, Reference_existing_object())
+    .def("face", &aos2::face, Reference_existing_object())
+    .def("next", &aos2::next, Reference_existing_object())
+    .def("prev", &aos2::prev, Reference_existing_object())
+    .def("curve", &aos2::curve, Reference_existing_object())
+    .def("ccb", &aos2::ccb, Manage_new_object())
+#ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
     .def("set_data", &Halfedge::set_data)
-    .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, bp::return_value_policy<bp::copy_non_const_reference>())
+    .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, Copy_non_const_reference())
 #endif
     ;
 }
