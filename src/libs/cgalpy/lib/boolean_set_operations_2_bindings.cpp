@@ -6,15 +6,19 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+
 #include <vector>
 
 #include <boost/python.hpp>
 
-#include "CGALPY/boolean_set_operations_2_config.hpp"
-#include "CGALPY/polygon_2_types.hpp"
-
 #include <CGAL/connect_holes.h>
 #include <CGAL/Boolean_set_operations_2.h>
+
+#include "CGALPY/boolean_set_operations_2_config.hpp"
+#include "CGALPY/polygon_2_types.hpp"
+#include "CGALPY/polygon_set_2_types.hpp"
 
 namespace bp = boost::python;
 
