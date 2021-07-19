@@ -131,16 +131,12 @@ void export_alpha_shape_2() {
     ;
 
   // Types that have been registered already:
-  // Types that have been registered already:
-#if ((CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_REGULAR) ||       \
-     (CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_DELAUNAY))
-  // \todo: generate bindings for periodic traits
-  ;
-#else
-  add_attr<as2::Gt>("Gt", as2_scope);
-#endif
+  if (tri2::is_periodic())
+    // \todo: generate bindings for periodic traits
+    ;
+  else add_attr<as2::Gt>("Gt", as2_scope);
   add_attr<as2::Point>("Point", as2_scope);
-  add_attr<as2::FT>("FT", as2_scope);
+  if (is_exact_ft()) add_attr<as2::FT>("FT", as2_scope);
   add_attr<as2::Tds>("Tds", as2_scope);
   add_attr<as2::Vertex>("Vertex", as2_scope);
   add_attr<as2::Edge>("Edge", as2_scope);
