@@ -101,16 +101,21 @@ implementations of geometric algorithms in the form of a C++
 library~\cite{cgal:eb-21}. \cgal{} has evolved through the years and
 now represents the state of the art in applied computational geometry
 software. The software modules of \cgal{} rigorously adhere to the
-generic programming paradigm to overcome problems encountered when
-effective computational geometry software is implemented; they are
-stable despite the use of (inexact) floating point arithmetic, found
-in standard hardware, and they are complete as they handle all
-degenerate cases, which typically are in abundance.
+generic programming paradigm---a discipline that consists of the
+gradual lifting of concrete algorithms abstracting over details, while
+retaining the algorithm semantics and efficiency. The software modules
+of \cgal{} also follow the exact geometric-computation paradigm, which
+simply amounts to ensuring that errors in predicate evaluations do not
+occur; it guarantees robustness of the applied algorithms.  As a
+result, the software of \cgal{} is stable despite the use of (inexact)
+floating point arithmetic, found in standard hardware, it is complete
+as it handles all degenerate cases, which typically are in abundance,
+and it is efficient---all at the same time.
 
 When running Python code that use bindings for some C++ modules, one
 or more libraries that provide the bindings must be accessible.  A
-software module that adheres to the generic programming paradigm
-consists of function and class templates; these templates are
+software module in C++ that adheres to the generic programming
+paradigm consists of function and class templates; these templates are
 instantiated at compile time of the binding libraries. In other words,
 the type of the C++ objects that are bound, that is, instances
 (instantiated types) of C++ function and class templates, must be
@@ -121,8 +126,8 @@ formal hierarchy of polymorphic abstract requirements on data types,
 referred to as \emph{concepts}, and a set of classes that conform
 precisely to the specified requirements, referred to as
 \emph{models}~\cite{a-gps-99}. When a class template is instantiated,
-each one of its template parameters is substituted with a model of a
-concept associated with the template parameter.
+each one of its template parameters is substituted with a model of one
+or more concepts associated with the template parameter.
 
 Instantiated types in \cgal{} are characterized by long instantiation
 chains of C++ class templates. An instantiated type is a template that
