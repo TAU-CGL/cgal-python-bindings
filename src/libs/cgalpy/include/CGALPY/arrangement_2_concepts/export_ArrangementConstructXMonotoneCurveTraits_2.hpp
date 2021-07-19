@@ -17,12 +17,15 @@ void export_ArrangementConstructXMonotoneTraits_2(C c) {
   if (exported) return;
 
   export_ArrangementBasicTraits<T, RVP>(c);
-  bp::class_<typename T::Construct_x_monotone_curve_2>
-    ("Construct_x_monotone_curve_2", bp::no_init)
-    .def<typename T::X_monotone_curve_2 (T::Construct_x_monotone_curve_2::*)
-      (const T::Point_2&, const T::Point_2&) const>
-      ("__call__", &T::Construct_x_monotone_curve_2::operator())
-      ;
+
+  typedef typename T::Point_2                       Point_2;
+  typedef typename T::X_monotone_curve_2            X_monotone_curve_2;
+  typedef typename T::Construct_x_monotone_curve_2  Construct_x_monotone_curve_2;
+
+  using Ctr_xcv = X_monotone_curve_2 (Construct_x_monotone_curve_2::*)(const Point_2&, const Point_2&) const;
+  bp::class_<Construct_x_monotone_curve_2>("Construct_x_monotone_curve_2", bp::no_init)
+    .def("__call__", static_cast<Ctr_xcv>(&Construct_x_monotone_curve_2::operator()))
+    ;
 
   c.def("construct_x_monotone_curve_2_object", &T::construct_x_monotone_curve_2_object)
   ;
