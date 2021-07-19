@@ -6,24 +6,18 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <boost/python.hpp>
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 
-#include "CGALPY/polygon_2_types.hpp"
+#include <boost/python.hpp>
 
 #include <CGAL/Gps_circle_segment_traits_2.h>
 #include <CGAL/General_polygon_set_2.h>
 
+#include "CGALPY/general_polygon_set_2_types.hpp"
+
 namespace bp = boost::python;
 
-typedef typename CGAL::Gps_circle_segment_traits_2<Kernel> CSTraits;
-typedef typename CSTraits::Polygon_2                       General_polygon_2;
-typedef typename CSTraits::Polygon_with_holes_2
-  General_polygon_with_holes_2;
-typedef typename CGAL::General_polygon_set_2<CSTraits>     General_polygon_set_2;
-typedef General_polygon_2::X_monotone_curve_2
-  CS_traits_X_monotone_curve_2;
-typedef General_polygon_2::Curve_iterator                  Curve_iterator;
-typedef CSTraits::Point_2                                  CSPoint_2;
+namespace bso2 {
 
 void polygons_with_holes(General_polygon_set_2& ps, bp::list& lst) {
   auto v = std::vector<General_polygon_with_holes_2>();
@@ -178,61 +172,65 @@ template<typename T>
 CGAL::Oriented_side oriented_side(General_polygon_set_2& ps, T& other)
 { return ps.oriented_side(other); }
 
+}
+
 void export_general_polygon_set_2() {
-  bp::class_<General_polygon_set_2>("General_polygon_set_2")
+  typedef bso2::General_polygon_set_2                               Gps2;
+
+  bp::scope ps2_scope = bp::class_<Gps2>("General_polygon_set_2")
     .def(bp::init<>())
-    .def(bp::init<const General_polygon_2&>())
-    .def(bp::init<const General_polygon_with_holes_2&>())
-    .def(bp::init<const General_polygon_set_2&>())
-    .def("is_empty", &General_polygon_set_2::is_empty)
-    .def("is_plane", &General_polygon_set_2::is_plane)
-    .def("number_of_polygons_with_holes", &General_polygon_set_2::number_of_polygons_with_holes)
-    .def("polygons_with_holes", &polygons_with_holes)
-    //.def("arrangement", &General_polygon_set_2::arrangement)
-    .def("clear", &General_polygon_set_2::clear)
-    .def("is_valid", &General_polygon_set_2::is_valid)
-    .def("insert", &insert0)
-    .def("insert", &insert1)
-    .def("insert", &insert_range0)
-    .def("insert_polygons", &insert_range<General_polygon_2>)
-    .def("insert_polygons_with_holes", &insert_range<General_polygon_with_holes_2>)
-    .def<void (General_polygon_set_2::*) ()>("complement", &General_polygon_set_2::complement)
-    .def("complement", &complement0)
-    .def("intersection", &intersection<General_polygon_set_2>)
-    .def("intersection", &intersection<General_polygon_2>)
-    .def("intersection", &intersection<General_polygon_with_holes_2>)
-    .def<void (General_polygon_set_2&, General_polygon_set_2&, General_polygon_set_2&)>("intersection", &intersection)
-    .def("intersection", &intersection_range0)
-    .def("intersection_polygons", &intersection_range<General_polygon_2>)
-    .def("intersection_polygons_with_holes", &intersection_range<General_polygon_with_holes_2>)
-    .def("join", &join<General_polygon_set_2>)
-    .def("join", &join<General_polygon_2>)
-    .def("join", &join<General_polygon_with_holes_2>)
-    .def<void (General_polygon_set_2&, General_polygon_set_2&, General_polygon_set_2&)>("join", &join)
-    .def("join", &join_range0)
-    .def("join_polygons", &join_range<General_polygon_2>)
-    .def("join_polygons_with_holes", &join_range<General_polygon_with_holes_2>)
-    .def("difference", &difference<General_polygon_set_2>)
-    .def("difference", &difference<General_polygon_2>)
-    .def("difference", &difference<General_polygon_with_holes_2>)
-    .def<void (General_polygon_set_2&, General_polygon_set_2&, General_polygon_set_2&)>("difference", &difference)
-    .def("symmetric_difference", &symmetric_difference<General_polygon_set_2>)
-    .def("symmetric_difference", &symmetric_difference<General_polygon_2>)
-    .def("symmetric_difference", &symmetric_difference<General_polygon_with_holes_2>)
-    .def<void (General_polygon_set_2&, General_polygon_set_2&, General_polygon_set_2&)>("symmetric_difference", &symmetric_difference)
-    .def("symmetric_difference", &symmetric_difference_range0)
-    .def("symmetric_difference_polygons", &symmetric_difference_range<General_polygon_2>)
-    .def("symmetric_difference_polygons_with_holes", &symmetric_difference_range<General_polygon_with_holes_2>)
-    .def("do_intersect", &do_intersect<General_polygon_set_2>)
-    .def("do_intersect", &do_intersect<General_polygon_2>)
-    .def("do_intersect", &do_intersect<General_polygon_with_holes_2>)
-    .def("do_intersect", &do_intersect_range0)
-    .def("do_intersect_polygons", &do_intersect_range<General_polygon_2>)
-    .def("do_intersect_polygons_with_holes", &do_intersect_range<General_polygon_with_holes_2>)
-    .def("locate", &General_polygon_set_2::locate)
-    .def("oriented_side", &oriented_side<CSPoint_2>)
-    .def("oriented_side", &oriented_side<General_polygon_set_2>)
-    .def("oriented_side", &oriented_side<General_polygon_2>)
-    .def("oriented_side", &oriented_side<General_polygon_with_holes_2>)
+    .def(bp::init<const bso2::General_polygon_2&>())
+    .def(bp::init<const bso2::General_polygon_with_holes_2&>())
+    .def(bp::init<const Gps2&>())
+    .def("is_empty", &Gps2::is_empty)
+    .def("is_plane", &Gps2::is_plane)
+    .def("number_of_polygons_with_holes", &Gps2::number_of_polygons_with_holes)
+    .def("polygons_with_holes", &bso2::polygons_with_holes)
+    //.def("arrangement", &Gps2::arrangement)
+    .def("clear", &Gps2::clear)
+    .def("is_valid", &Gps2::is_valid)
+    .def("insert", &bso2::insert0)
+    .def("insert", &bso2::insert1)
+    .def("insert", &bso2::insert_range0)
+    .def("insert_polygons", &bso2::insert_range<bso2::General_polygon_2>)
+    .def("insert_polygons_with_holes", &bso2::insert_range<bso2::General_polygon_with_holes_2>)
+    .def<void (Gps2::*) ()>("complement", &Gps2::complement)
+    .def("complement", &bso2::complement0)
+    .def("intersection", &bso2::intersection<Gps2>)
+    .def("intersection", &bso2::intersection<bso2::General_polygon_2>)
+    .def("intersection", &bso2::intersection<bso2::General_polygon_with_holes_2>)
+    .def<void (Gps2&, Gps2&, Gps2&)>("intersection", &bso2::intersection)
+    .def("intersection", &bso2::intersection_range0)
+    .def("intersection_polygons", &bso2::intersection_range<bso2::General_polygon_2>)
+    .def("intersection_polygons_with_holes", &bso2::intersection_range<bso2::General_polygon_with_holes_2>)
+    .def("join", &bso2::join<Gps2>)
+    .def("join", &bso2::join<bso2::General_polygon_2>)
+    .def("join", &bso2::join<bso2::General_polygon_with_holes_2>)
+    .def<void (Gps2&, Gps2&, Gps2&)>("join", &bso2::join)
+    .def("join", &bso2::join_range0)
+    .def("join_polygons", &bso2::join_range<bso2::General_polygon_2>)
+    .def("join_polygons_with_holes", &bso2::join_range<bso2::General_polygon_with_holes_2>)
+    .def("difference", &bso2::difference<Gps2>)
+    .def("difference", &bso2::difference<bso2::General_polygon_2>)
+    .def("difference", &bso2::difference<bso2::General_polygon_with_holes_2>)
+    .def<void (Gps2&, Gps2&, Gps2&)>("difference", &bso2::difference)
+    .def("symmetric_difference", &bso2::symmetric_difference<Gps2>)
+    .def("symmetric_difference", &bso2::symmetric_difference<bso2::General_polygon_2>)
+    .def("symmetric_difference", &bso2::symmetric_difference<bso2::General_polygon_with_holes_2>)
+    .def<void (Gps2&, Gps2&, Gps2&)>("symmetric_difference", &bso2::symmetric_difference)
+    .def("symmetric_difference", &bso2::symmetric_difference_range0)
+    .def("symmetric_difference_polygons", &bso2::symmetric_difference_range<bso2::General_polygon_2>)
+    .def("symmetric_difference_polygons_with_holes", &bso2::symmetric_difference_range<bso2::General_polygon_with_holes_2>)
+    .def("do_intersect", &bso2::do_intersect<Gps2>)
+    .def("do_intersect", &bso2::do_intersect<bso2::General_polygon_2>)
+    .def("do_intersect", &bso2::do_intersect<bso2::General_polygon_with_holes_2>)
+    .def("do_intersect", &bso2::do_intersect_range0)
+    .def("do_intersect_polygons", &bso2::do_intersect_range<bso2::General_polygon_2>)
+    .def("do_intersect_polygons_with_holes", &bso2::do_intersect_range<bso2::General_polygon_with_holes_2>)
+    .def("locate", &Gps2::locate)
+    .def("oriented_side", &bso2::oriented_side<bso2::CSPoint_2>)
+    .def("oriented_side", &bso2::oriented_side<Gps2>)
+    .def("oriented_side", &bso2::oriented_side<bso2::General_polygon_2>)
+    .def("oriented_side", &bso2::oriented_side<bso2::General_polygon_with_holes_2>)
     ;
 }

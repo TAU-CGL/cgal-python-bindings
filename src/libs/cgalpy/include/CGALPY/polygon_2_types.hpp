@@ -16,8 +16,7 @@
 #include <CGAL/Polygon_with_holes_2.h>
 #include <CGAL/Polygon_set_2.h>
 
-typedef typename CGAL::Polygon_2<Kernel, Point_2_container>             Polygon_2;
-typedef typename CGAL::Polygon_with_holes_2<Kernel, Point_2_container>  Polygon_with_holes_2;
-typedef typename CGAL::Polygon_set_2<Kernel, Point_2_container>         Polygon_set_2;
+typedef CGAL::Polygon_2<Kernel, Point_2_container>             Polygon_2;
+typedef CGAL::Polygon_with_holes_2<Kernel, Point_2_container>  Polygon_with_holes_2;
 
 #endif //CGALPY_POLYGON_2_TYPES_HPP
