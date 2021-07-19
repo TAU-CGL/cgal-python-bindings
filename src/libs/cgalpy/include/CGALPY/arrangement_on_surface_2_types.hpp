@@ -11,6 +11,9 @@
 
 #include <boost/static_assert.hpp>
 
+#include <CGAL/Arr_default_dcel.h>
+#include <CGAL/Arrangement_2.h>
+
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/arrangement_on_surface_2_config.hpp"
 
@@ -35,11 +38,7 @@
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-#include <CGAL/Arrangement_2.h>
-#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL || \
-  CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL
-#include <CGAL/Arr_extended_dcel.h>
-#endif
+namespace aos2 {
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_segment_traits_2<Kernel>             Traits;
@@ -80,32 +79,36 @@ typedef typename Traits::Point_2                                TPoint_2;
 typedef typename Traits::Curve_2                                Curve_2;
 typedef typename Traits::X_monotone_curve_2                     X_monotone_curve_2;
 
-#if CGALPY_AOS2_DCEL ==  CGALPY_AOS2_EXTENDED_DCEL
-typedef CGAL::Arr_extended_dcel<Traits, bp::object, bp::object, bp::object> Dcel;
-typedef CGAL::Arrangement_2<Traits, Dcel>                       Arrangement_2;
-#elif CGALPY_AOS2_DCEL ==  CGALPY_AOS2_FACE_EXTENDED_DCEL
-typedef CGAL::Arr_face_extended_dcel<Traits, bp::object>        Dcel;
-typedef CGAL::Arrangement_2<Traits, Dcel>                       Arrangement_2;
-#elif CGALPY_AOS2_DCEL == CGALPY_AOS2_DEFAULT_DCEL
-typedef typename CGAL::Arrangement_2<Traits>                    Arrangement_2;
-#else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_DCEL");
-#endif
+typedef CGAL::Arr_vertex_base<Traits::Point_2>                          Vb;
+typedef Vertex_extended<is_vertex_extended(), Vb, bp::object>::type     V;
 
-typedef typename Arrangement_2::Point_2                         Arr_point_2;
-typedef typename Arrangement_2::Vertex_iterator                 Vertex_iterator;
-typedef typename Arrangement_2::Vertex_const_handle             Vertex_const_handle;
-typedef typename Arrangement_2::Isolated_vertex_iterator        Isolated_vertex_iterator;
-typedef typename Arrangement_2::Vertex                          Vertex;
-typedef typename Arrangement_2::Inner_ccb_iterator              Inner_ccb_iterator;
-typedef typename Arrangement_2::Ccb_halfedge_circulator         Ccb_halfedge_circulator;
-typedef typename Arrangement_2::Halfedge_around_vertex_circulator Halfedge_around_vertex_circulator;
-typedef typename Arrangement_2::Halfedge_iterator               Halfedge_iterator;
-typedef typename Arrangement_2::Edge_iterator                   Edge_iterator;
-typedef typename Arrangement_2::Halfedge_const_handle           Halfedge_const_handle;
-typedef typename Arrangement_2::Halfedge                        Halfedge;
-typedef typename Arrangement_2::Face_iterator                   Face_iterator;
-typedef typename Arrangement_2::Face_const_handle               Face_const_handle;
-typedef typename Arrangement_2::Face                            Face;
+typedef CGAL::Arr_halfedge_base<Traits::X_monotone_curve_2>             Hb;
+typedef Halfedge_extended<is_halfedge_extended(), Hb, bp::object>::type He;
+  typedef Halfedge_gps<boolean_set_operations_2_bindings(), He>::type   H;
+
+typedef CGAL::Arr_face_base                                             Fb;
+typedef Face_extended<is_face_extended(), Fb, bp::object>::type         Fe;
+  typedef Face_gps<boolean_set_operations_2_bindings(), Fe>::type       F;
+
+typedef CGAL::Arr_dcel_base<V, H, F>                        Dcel;
+typedef CGAL::Arrangement_2<Traits, Dcel>                   Arrangement_2;
+
+typedef Arrangement_2::Point_2                              Arr_point_2;
+typedef Arrangement_2::Vertex_iterator                      Vertex_iterator;
+typedef Arrangement_2::Vertex_const_handle                  Vertex_const_handle;
+typedef Arrangement_2::Isolated_vertex_iterator             Isolated_vertex_iterator;
+typedef Arrangement_2::Vertex                               Vertex;
+typedef Arrangement_2::Inner_ccb_iterator                   Inner_ccb_iterator;
+typedef Arrangement_2::Ccb_halfedge_circulator              Ccb_halfedge_circulator;
+typedef Arrangement_2::Halfedge_around_vertex_circulator    Halfedge_around_vertex_circulator;
+typedef Arrangement_2::Halfedge_iterator                    Halfedge_iterator;
+typedef Arrangement_2::Edge_iterator                        Edge_iterator;
+typedef Arrangement_2::Halfedge_const_handle                Halfedge_const_handle;
+typedef Arrangement_2::Halfedge                             Halfedge;
+typedef Arrangement_2::Face_iterator                        Face_iterator;
+typedef Arrangement_2::Face_const_handle                    Face_const_handle;
+typedef Arrangement_2::Face                                 Face;
+
+}
 
 #endif //CGALPY_ARRANGEMENT_ON_SURFACE_2_TYPES_HPP

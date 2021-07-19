@@ -36,13 +36,15 @@ bool get_type(Object& o, typename T0::value_type& t) {
 }
 
 void export_object() {
+  typedef aos2::Arrangement_2   Arr2;
+
   bp::class_<Object>("Object", bp::no_init)
     .def("empty", &Object::empty)
-    .def("is_vertex", &is_type<Arrangement_2::Vertex_handle, Vertex_const_handle>)
-    .def("get_vertex", &get_type<Arrangement_2::Vertex_handle, Vertex_const_handle>)
-    .def("is_halfedge", &is_type<Arrangement_2::Halfedge_handle, Halfedge_const_handle>)
-    .def("get_halfedge", &get_type<Arrangement_2::Halfedge_handle, Halfedge_const_handle>)
-    .def("is_face", &is_type<Arrangement_2::Face_handle, Face_const_handle>)
-    .def("get_face", &get_type<Arrangement_2::Face_handle, Face_const_handle>)
+    .def("is_vertex", &is_type<Arr2::Vertex_handle, aos2::Vertex_const_handle>)
+    .def("get_vertex", &get_type<Arr2::Vertex_handle, aos2::Vertex_const_handle>)
+    .def("is_halfedge", &is_type<Arr2::Halfedge_handle, aos2::Halfedge_const_handle>)
+    .def("get_halfedge", &get_type<Arr2::Halfedge_handle, aos2::Halfedge_const_handle>)
+    .def("is_face", &is_type<Arr2::Face_handle, aos2::Face_const_handle>)
+    .def("get_face", &get_type<Arr2::Face_handle, aos2::Face_const_handle>)
     ;
 }
