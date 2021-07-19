@@ -12,9 +12,9 @@
 #include "CGALPY/polygon_2_types.hpp"
 
 #include <CGAL/minkowski_sum_2.h>
-#include <CGAL/approximated_offset_2.h>
-
 namespace bp = boost::python;
+
+#include <CGAL/approximated_offset_2.h>
 
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_with_holes_2 General_polygon_with_holes_2;
 typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2 General_polygon_2;
