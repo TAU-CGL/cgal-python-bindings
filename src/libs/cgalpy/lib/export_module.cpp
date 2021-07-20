@@ -130,9 +130,10 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
   {
     SET_SCOPE("BSO2")
-    export_polygon_set_2();
     export_boolean_set_operations_2();
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+    export_polygon_set_2();
+#else
     export_general_polygon_set_2();
 #endif
   };
