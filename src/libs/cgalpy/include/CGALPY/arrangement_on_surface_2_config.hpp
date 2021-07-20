@@ -37,6 +37,22 @@ constexpr bool is_halfedge_extended()
 constexpr bool is_face_extended()
 { return DETECT_EXIST(CGALPY_AOS2_FACE_EXTENDED); }
 
+// Boolean set operation
+
+template <bool b, typename Tr> struct Halfedge_gps {};
+template <typename Tr>
+struct Halfedge_gps<false, Tr>
+{ typedef CGAL::Arr_halfedge_base<typename Tr::X_monotone_curve_2> type; };
+template <typename Tr>
+struct Halfedge_gps<true, Tr>
+{ typedef CGAL::Gps_halfedge_base<typename Tr::X_monotone_curve_2> type; };
+
+template <bool b> struct Face_gps {};
+template <> struct Face_gps<false> { typedef CGAL::Arr_face_base type; };
+template <> struct Face_gps<true> { typedef CGAL::Gps_face_base type; };
+
+// General extension
+
 template <bool b, typename Vb, typename Data> struct Vertex_extended {};
 template <typename Vb, typename Data>
 struct Vertex_extended<false, Vb, Data> { typedef Vb type; };
@@ -55,22 +71,6 @@ template <typename Fb, typename Data>
 struct Face_extended<false, Fb, Data> { typedef Fb type; };
 template <typename Fb, typename Data> struct Face_extended<true, Fb, Data>
 { typedef CGAL::Arr_extended_vertex<Fb, Data> type; };
-
-// Boolean set operation
-
-template <bool b, typename Hb> struct Halfedge_gps {};
-template <typename Hb>
-struct Halfedge_gps<false, Hb> { typedef Hb type; };
-template <typename Hb>
-struct Halfedge_gps<true, Hb>
-{ typedef CGAL::Gps_halfedge_base<Hb> type; };
-
-template <bool b, typename Fb> struct Face_gps {};
-template <typename Fb>
-struct Face_gps<false, Fb> { typedef Fb type; };
-template <typename Fb>
-struct Face_gps<true, Fb>
-{ typedef CGAL::Gps_halfedge_base<Fb> type; };
 
 } // end of aos2 namespace
 
