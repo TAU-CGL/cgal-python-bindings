@@ -47,7 +47,9 @@ typedef Arr_python_face_overlay_traits<Arrangement_2, Arrangement_2,
   Arr_face_overlay_traits;
 #endif
 
-#ifdef CGALPY_AOS2_FACE_EXTENDED
+#if (defined(CGALPY_AOS2_VERTEX_EXTENDED) && \
+     defined(CGALPY_AOS2_HALFEDGE_EXTENDED) && \
+     defined(CGALPY_AOS2_FACE_EXTENDED))
 #include <CGALPY/Arr_python_overlay_traits.hpp>
 typedef Arr_python_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
                                   Face::Data> Arr_overlay_traits;
@@ -121,7 +123,9 @@ void overlay_fex(Arrangement_2& arr1, Arrangement_2& arr2,
 
 #endif
 
-#ifdef CGALPY_AOS2_FACE_EXTENDED
+#if (defined(CGALPY_AOS2_VERTEX_EXTENDED) && \
+     defined(CGALPY_AOS2_HALFEDGE_EXTENDED) && \
+     defined(CGALPY_AOS2_FACE_EXTENDED))
 
 void overlay_ex(Arrangement_2& arr1, Arrangement_2& arr2,
                 Arrangement_2& arr_res, Arr_overlay_traits& traits)
@@ -428,7 +432,9 @@ void export_arrangement_on_surface_2() {
   bp::def("overlay", &aos2::overlay_fex);
 #endif
 
-#if CGALPY_AOS2_FACE_EXTENDED
+#if (defined(CGALPY_AOS2_VERTEX_EXTENDED) && \
+     defined(CGALPY_AOS2_HALFEDGE_EXTENDED) && \
+     defined(CGALPY_AOS2_FACE_EXTENDED))
   bp::def("overlay", &aos2::overlay_ex);
 #endif
 
@@ -451,7 +457,9 @@ void export_arrangement_on_surface_2() {
     ;
 #endif
 
-#ifdef CGALPY_AOS2_FACE_EXTENDED
+#if (defined(CGALPY_AOS2_VERTEX_EXTENDED) && \
+     defined(CGALPY_AOS2_HALFEDGE_EXTENDED) && \
+     defined(CGALPY_AOS2_FACE_EXTENDED))
   bp::class_<aos2::Arr_overlay_traits>("Arr_overlay_traits", bp::init<bp::object,
                                        bp::object, bp::object, bp::object,
                                        bp::object, bp::object, bp::object,
