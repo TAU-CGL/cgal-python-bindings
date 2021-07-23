@@ -18,7 +18,7 @@ struct Hash_rational_point {};
 template <>
 struct Hash_rational_point<true> {
   template <typename Point>
-  size_t operator()(Point& p) {
+  static size_t hash_rational_point(Point& p) {
     size_t seed = 0;
     for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c) {
       auto q = (*c).exact();
@@ -36,8 +36,13 @@ struct Hash_rational_point<true> {
 template <>
 struct Hash_rational_point<false> {
   template <typename Point>
-  size_t operator()(Point& p)
+  static size_t hash_rational_point(Point& p)
   { return boost::hash_range(p.cartesian_begin(), p.cartesian_end()); }
+};
+
+template<bool b, typename Point>
+size_t hash_rational_point(Point& p) {
+  return Hash_rational_point<b>::hash_rational_point(p);
 };
 
 // #if (CGALPY_KERNEL == CGALPY_KERNEL_EPEC) || \
