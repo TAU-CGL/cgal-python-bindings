@@ -121,7 +121,7 @@ void export_kernel_d() {
     .def(bp::self <= bp::self)
     .def(bp::self >= bp::self)
 #endif
-    .setattr("__hash__", &Hash_rational_point<is_epec_d_type()>::operator()<Point_d>)
+    .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Point_d>)
     ;
 
   bp::class_<Segment_d>("Segment_d")
