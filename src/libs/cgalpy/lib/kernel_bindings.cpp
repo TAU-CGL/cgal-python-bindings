@@ -203,7 +203,7 @@ void export_kernel() {
     .def(bp::self -= Vector_2())
     .def(bp::self + Vector_2())
     .def(bp::self - Vector_2())
-    .setattr("__hash__", &Hash_rational_point<is_epec_type()>::operator()<Point_2>)
+    .setattr("__hash__", &hash_rational_point<is_epec_type(), Point_2>)
     ;
 
   bp::class_<Segment_2>("Segment_2")
