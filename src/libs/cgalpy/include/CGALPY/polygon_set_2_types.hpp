@@ -13,6 +13,7 @@
 
 #include "CGALPY/polygon_set_2_config.hpp"
 #include "CGALPY/kernel_types.hpp"
+#include "CGALPY/polygon_2_types.hpp"
 
 namespace bso2 {
 
