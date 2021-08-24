@@ -31,7 +31,7 @@ the bindings. The optional arguments passed to \myLstinline{cmake} in
 stage~5 mainly consist of variables that determine (i) the object
 types to be bound and the unique identifier of each such object, and
 (ii) the name of the libraries that comprise the bindings, in case the
-default library name is overriden.
+default library name is overridden.
 
 % -----------------------------------------------------------------------------
 \subsection{Bindings Modules and Scopes}
@@ -108,7 +108,7 @@ in the appropriate (Python) namespace according to the module of the
 entity; See Section~\ref{sec:bind-code:scopes} for the implementation
 details.
 
-The above is conveniently acchived with the use of the
+The above is conveniently achieved with the use of the
 \cppLstinline{bp::scope} class of Boost.Python. Constructing an object
 of this class, essentially, changes the Python namespace in which new
 extension classes and wrapped functions are defined as attributes.  An
@@ -120,7 +120,7 @@ with a scope constructed with an argument is bound to the Python
 namespace held by the argument. When a scope object is constructed its
 associated global Python object is pushed onto a stack. When the
 lifetime of the scope ends, the associated global Python object is
-poped from the stack. This mechanism conveniently reflects nesting of
+popped from the stack. This mechanism conveniently reflects nesting of
 constructs in C++ in Python code. For example, consider the following
 constructs in C++:\footnote{This example is a simplified version of
   the example shown at
@@ -159,7 +159,7 @@ class template \cppLstinline{Arrangement\_2<GeometryTraits, Dcel>},
 where the \cppLstinline{GeometryTraits} template parameter is
 substituted with a traits class that handles segments, and the
 \cppLstinline{Dcel} template parameter is substituted with the default
-Dcel; see Section~\ref{ssec:modules:aos2}. The following code exerpt
+Dcel; see Section~\ref{ssec:modules:aos2}. The following code excerpt
 constructs the segment $(0,0),(1,0)$.
 
 \begin{lstlisting}[style=pythonStyle]
