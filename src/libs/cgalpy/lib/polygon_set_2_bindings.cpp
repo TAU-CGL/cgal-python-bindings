@@ -223,8 +223,8 @@ void export_polygon_set_2() {
     ;
 
   // Types that have been registered already:
-  add_attr<Ps2::Traits_2>("Traits_2", ps2_scope);
-  add_attr<Ps2::Polygon_2>("Polygon_2", ps2_scope);
-  add_attr<Ps2::Polygon_with_holes_2>("Polygon_with_holes_2", ps2_scope);
-  add_attr<Ps2::Arrangement_2>("Arrangement_2", ps2_scope);
+  //add_attr<Ps2::Traits_2>("Traits_2", ps2_scope);
+  //add_attr<Ps2::Polygon_2>("Polygon_2", ps2_scope);
+  //add_attr<Ps2::Polygon_with_holes_2>("Polygon_with_holes_2", ps2_scope);
+  //add_attr<Ps2::Arrangement_2>("Arrangement_2", ps2_scope);
 }
