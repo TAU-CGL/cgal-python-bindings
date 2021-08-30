@@ -18,8 +18,9 @@ typedef typename Traits::CoordNT CoordNT;
 static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 
 void export_arr_circle_segment_traits() {
-  auto traits = bp::class_<Traits>("Traits");
-  bp::scope traits_scope;
+  auto traits = bp::class_<Traits>("Traits")
+    .def(bp::init<>());
+  bp::scope traits_scope = traits;
   export_ArrangementTraits_2<Traits, bp::return_value_policy<bp::return_by_value>>(traits);
   export_ArrangementDirectionalXMonotoneTraits_2<Traits, bp::return_value_policy<bp::return_by_value>>(traits);
 
