@@ -83,8 +83,8 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
     export_polygon_2();
     export_polygon_with_holes_2();
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-    export_general_polygon_2();
-    export_general_polygon_with_holes_2();
+    //export_general_polygon_2();
+    //export_general_polygon_with_holes_2();
 #endif
   };
 #endif
@@ -130,10 +130,12 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
   {
     SET_SCOPE("BSO2")
-    export_polygon_set_2();
     export_boolean_set_operations_2();
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-    export_general_polygon_set_2();
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+    export_polygon_set_2();
+#else
+    export_polygon_set_2();
+    //export_general_polygon_set_2();
 #endif
   };
 #endif
