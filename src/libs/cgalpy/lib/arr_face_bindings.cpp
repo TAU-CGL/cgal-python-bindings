@@ -32,7 +32,7 @@ void export_face() {
     .def(bp::init<>())
     .def("assign", &Face::assign)
     .def("is_unbounded", &Face::is_unbounded)
-    .def("is_fititious", &Face::is_fictitious)
+    .def("is_fictitious", &Face::is_fictitious)
     .def("has_outer_ccb", &Face::has_outer_ccb)
     .def("number_of_inner_ccbs", &Face::number_of_inner_ccbs)
     .def("number_of_outer_ccbs", &Face::number_of_outer_ccbs)
@@ -40,6 +40,7 @@ void export_face() {
     .def("splice_inner_ccbs", &Face::splice_inner_ccbs)
     .def("outer_ccb", &outer_ccb, bp::return_value_policy<bp::manage_new_object>())
     .def("inner_ccbs", &inner_ccbs, bp::return_value_policy<bp::manage_new_object>())
+    .def("holes", &inner_ccbs, bp::return_value_policy<bp::manage_new_object>())
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
     .def("isolated_vertices", bp::range<bp::return_internal_reference<>>(&isolated_vertices_begin, &isolated_vertices_end))
 #if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL || CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL
