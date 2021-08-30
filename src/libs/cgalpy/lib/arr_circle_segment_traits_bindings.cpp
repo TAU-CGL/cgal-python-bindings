@@ -13,16 +13,16 @@
 
 namespace bp = boost::python;
 
-typedef typename Traits::CoordNT CoordNT;
+typedef typename aos2::Traits::CoordNT CoordNT;
 
 static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 
 void export_arr_circle_segment_traits() {
-  auto traits = bp::class_<Traits>("Traits")
+  auto traits = bp::class_<aos2::Traits>("Traits")
     .def(bp::init<>());
   bp::scope traits_scope = traits;
-  export_ArrangementTraits_2<Traits, bp::return_value_policy<bp::return_by_value>>(traits);
-  export_ArrangementDirectionalXMonotoneTraits_2<Traits, bp::return_value_policy<bp::return_by_value>>(traits);
+  export_ArrangementTraits_2<aos2::Traits, bp::return_value_policy<bp::return_by_value>>(traits);
+  export_ArrangementDirectionalXMonotoneTraits_2<aos2::Traits, bp::return_value_policy<bp::return_by_value>>(traits);
 
   bp::class_<CoordNT>("CoordNT")
     .def(bp::init<>())
@@ -60,13 +60,13 @@ void export_arr_circle_segment_traits() {
     .def(bp::self /= bp::self)
     ;
 
-  bp::class_<TPoint_2>("Point_2")
+  bp::class_<aos2::TPoint_2>("Point_2")
     .def(bp::init<>())
     .def(bp::init<FT&, FT&>())
     .def(bp::init<CoordNT&, CoordNT&>())
     .def(bp::init<double, double>())
-    .def("x", &TPoint_2::x, bp::return_value_policy<bp::copy_const_reference>())
-    .def("y", &TPoint_2::y, bp::return_value_policy<bp::copy_const_reference>())
+    .def("x", &aos2::TPoint_2::x, bp::return_value_policy<bp::copy_const_reference>())
+    .def("y", &aos2::TPoint_2::y, bp::return_value_policy<bp::copy_const_reference>())
     .def(bp::self == bp::self)
     .def(bp::self != bp::self)
     .def(bp::self_ns::str(bp::self_ns::self))
@@ -74,43 +74,43 @@ void export_arr_circle_segment_traits() {
     .setattr("__hash__", bp::object());
     ;
 
-  bp::class_<X_monotone_curve_2>("X_monotone_curve_2")
+  bp::class_<aos2::X_monotone_curve_2>("X_monotone_curve_2")
     .def(bp::init<>())
     .def(bp::init<Point_2&, Point_2&>())
-    .def(bp::init<Line_2&, TPoint_2&, TPoint_2&>())
-    .def(bp::init<Circle_2&, TPoint_2&, TPoint_2&, CGAL::Orientation>())
-    .def("source", &X_monotone_curve_2::source, bp::return_value_policy<bp::copy_const_reference>())
-    .def("target", &X_monotone_curve_2::target, bp::return_value_policy<bp::copy_const_reference>())
-    .def("is_directed_right", &X_monotone_curve_2::is_directed_right)
-    .def("left", &X_monotone_curve_2::left, bp::return_value_policy<bp::copy_const_reference>())
-    .def("right", &X_monotone_curve_2::right, bp::return_value_policy<bp::copy_const_reference>())
-    .def("orientation", &X_monotone_curve_2::orientation)
-    .def("is_linear", &X_monotone_curve_2::is_linear)
-    .def("is_circular", &X_monotone_curve_2::is_circular)
-    .def("supporting_line", &X_monotone_curve_2::supporting_line)
-    .def("supporting_circle", &X_monotone_curve_2::supporting_circle)
-    .def("bbox", &X_monotone_curve_2::bbox)
+    .def(bp::init<Line_2&, aos2::TPoint_2&, aos2::TPoint_2&>())
+    .def(bp::init<Circle_2&, aos2::TPoint_2&, aos2::TPoint_2&, CGAL::Orientation>())
+    .def("source", &aos2::X_monotone_curve_2::source, bp::return_value_policy<bp::copy_const_reference>())
+    .def("target", &aos2::X_monotone_curve_2::target, bp::return_value_policy<bp::copy_const_reference>())
+    .def("is_directed_right", &aos2::X_monotone_curve_2::is_directed_right)
+    .def("left", &aos2::X_monotone_curve_2::left, bp::return_value_policy<bp::copy_const_reference>())
+    .def("right", &aos2::X_monotone_curve_2::right, bp::return_value_policy<bp::copy_const_reference>())
+    .def("orientation", &aos2::X_monotone_curve_2::orientation)
+    .def("is_linear", &aos2::X_monotone_curve_2::is_linear)
+    .def("is_circular", &aos2::X_monotone_curve_2::is_circular)
+    .def("supporting_line", &aos2::X_monotone_curve_2::supporting_line)
+    .def("supporting_circle", &aos2::X_monotone_curve_2::supporting_circle)
+    .def("bbox", &aos2::X_monotone_curve_2::bbox)
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
     ;
 
-  bp::class_<Curve_2>("Curve_2")
+  bp::class_<aos2::Curve_2>("Curve_2")
     .def(bp::init<>())
     .def(bp::init<Segment_2&>())
     .def(bp::init<Point_2&, Point_2&>())
-    .def(bp::init<Line_2&, TPoint_2&, TPoint_2&>())
+    .def(bp::init<Line_2&, aos2::TPoint_2&, aos2::TPoint_2&>())
     .def(bp::init<Circle_2&>())
     .def(bp::init<Point_2&, FT&, CGAL::Orientation>())
-    .def(bp::init<Circle_2&, TPoint_2&, TPoint_2&>())
-    .def(bp::init<Point_2&, FT&, CGAL::Orientation, TPoint_2&, TPoint_2&>())
+    .def(bp::init<Circle_2&, aos2::TPoint_2&, aos2::TPoint_2&>())
+    .def(bp::init<Point_2&, FT&, CGAL::Orientation, aos2::TPoint_2&, aos2::TPoint_2&>())
     .def(bp::init<Point_2&, Point_2&, Point_2&>())
-    .def("is_full", &Curve_2::is_full)
-    .def("source", &Curve_2::source, bp::return_value_policy<bp::copy_const_reference>())
-    .def("target", &Curve_2::target, bp::return_value_policy<bp::copy_const_reference>())
-    .def("orientation", &Curve_2::orientation)
-    .def("is_linear", &Curve_2::is_linear)
-    .def("is_circular", &Curve_2::is_circular)
-    .def("supporting_line", &Curve_2::supporting_line, bp::return_value_policy<bp::copy_const_reference>())
-    .def("supporting_circle", &Curve_2::supporting_circle, bp::return_value_policy<bp::copy_const_reference>())
+    .def("is_full", &aos2::Curve_2::is_full)
+    .def("source", &aos2::Curve_2::source, bp::return_value_policy<bp::copy_const_reference>())
+    .def("target", &aos2::Curve_2::target, bp::return_value_policy<bp::copy_const_reference>())
+    .def("orientation", &aos2::Curve_2::orientation)
+    .def("is_linear", &aos2::Curve_2::is_linear)
+    .def("is_circular", &aos2::Curve_2::is_circular)
+    .def("supporting_line", &aos2::Curve_2::supporting_line, bp::return_value_policy<bp::copy_const_reference>())
+    .def("supporting_circle", &aos2::Curve_2::supporting_circle, bp::return_value_policy<bp::copy_const_reference>())
     ;
 }

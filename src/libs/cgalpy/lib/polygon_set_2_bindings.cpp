@@ -10,7 +10,7 @@
 
 #include <boost/python.hpp>
 
-#include "CGALPY/polygon_2_types.hpp"
+// #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/polygon_set_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 #include "CGALPY/add_attr.hpp"
@@ -163,7 +163,9 @@ CGAL::Oriented_side oriented_side(Polygon_set_2& ps, T& other)
 }
 
 void export_polygon_set_2() {
-  typedef bso2::Polygon_set_2                               Ps2;
+  typedef bso2::Polygon_set_2        Ps2;
+  typedef bso2::Polygon_2            Polygon_2;
+  typedef bso2::Polygon_with_holes_2 Polygon_with_holes_2;
 
   bp::scope ps2_scope = bp::class_<Ps2>("Polygon_set_2")
     .def(bp::init<>())

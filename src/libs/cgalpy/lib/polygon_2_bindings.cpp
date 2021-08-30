@@ -8,7 +8,7 @@
 
 #include <boost/python.hpp>
 
-#include "CGALPY/polygon_set_2_types.hpp"
+#include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 
 namespace bp = boost::python;

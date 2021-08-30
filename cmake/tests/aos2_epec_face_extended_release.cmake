@@ -4,4 +4,4 @@ set(CGALPY_FIXED_LIBRARY_NAME OFF               CACHE BOOL "use name CGALPY" FOR
 set(CGALPY_KERNEL_NAME "epec"                   CACHE STRING "use EPEC kernel" FORCE)
 set(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS ON CACHE BOOL "2D Arrangements" FORCE)
 set(CGALPY_AOS2_GEOMETRY_TRAITS_NAME "segment"  CACHE STRING "use segments" FORCE)
-set(CGALPY_AOS2_DCEL_NAME "faceExtended"        CACHE STRING "extend face type" FORCE)
+set(CGALPY_AOS2_FACE_EXTENDED ON                CACHE BOOL "extend face type" FORCE)
