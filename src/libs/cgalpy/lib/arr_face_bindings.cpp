@@ -6,12 +6,16 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+
 #include <boost/python.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 
 namespace bp = boost::python;
+
+namespace aos2 {
 
 Iterator_from_circulator<Ccb_halfedge_circulator>* outer_ccb(Face& f)
 { return new Iterator_from_circulator<Ccb_halfedge_circulator>(f.outer_ccb()); }
@@ -27,7 +31,12 @@ Isolated_vertex_iterator isolated_vertices_begin(Face& f)
 Isolated_vertex_iterator isolated_vertices_end(Face& f)
 { return f.isolated_vertices_end(); }
 
+}
+
 void export_face() {
+  typedef aos2::Arrangement_2   Arr2;
+  typedef Arr2::Face            Face;
+
   bp::class_<Face>("Face")
     .def(bp::init<>())
     .def("assign", &Face::assign)
@@ -38,16 +47,17 @@ void export_face() {
     .def("number_of_outer_ccbs", &Face::number_of_outer_ccbs)
     .def("splice_isolated_vertices", &Face::splice_isolated_vertices)
     .def("splice_inner_ccbs", &Face::splice_inner_ccbs)
-    .def("outer_ccb", &outer_ccb, bp::return_value_policy<bp::manage_new_object>())
-    .def("inner_ccbs", &inner_ccbs, bp::return_value_policy<bp::manage_new_object>())
-    .def("holes", &inner_ccbs, bp::return_value_policy<bp::manage_new_object>())
+    .def("outer_ccb", &aos2::outer_ccb, Manage_new_object())
+    .def("inner_ccbs", &aos2::inner_ccbs, Manage_new_object())
+    .def("holes", &aos2::inner_ccbs, Manage_new_object())
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
-    .def("isolated_vertices", bp::range<bp::return_internal_reference<>>(&isolated_vertices_begin, &isolated_vertices_end))
-#if CGALPY_AOS2_DCEL == CGALPY_AOS2_EXTENDED_DCEL || CGALPY_AOS2_DCEL == CGALPY_AOS2_FACE_EXTENDED_DCEL
+    .def("isolated_vertices", bp::range<bp::return_internal_reference<>>(&aos2::isolated_vertices_begin, &aos2::isolated_vertices_end))
+#ifdef CGALPY_AOS2_FACE_EXTENDED
     .def("set_data", &Face::set_data)
-    .def<Face::Data& (Face::*)()>("data", &Face::data, bp::return_value_policy<bp::copy_non_const_reference>())
+    .def<Face::Data& (Face::*)()>("data", &Face::data, Copy_non_const_reference())
 #endif
     ;
-  bind_iterator<Iterator_from_circulator<Ccb_halfedge_circulator>>("Ccb_halfedge_iterator");
-  bind_iterator_of_circulators<Iterator_of_circulators<Inner_ccb_iterator>>("Inner_ccbs_iterator");
+
+  bind_iterator<Iterator_from_circulator<Arr2::Ccb_halfedge_circulator>>("Ccb_halfedge_iterator");
+  bind_iterator_of_circulators<Iterator_of_circulators<Arr2::Inner_ccb_iterator>>("Inner_ccbs_iterator");
 }

@@ -17,6 +17,10 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
 namespace bp = boost::python;
+typedef typename aos2::Arrangement_2 Arrangement_2;
+typedef typename aos2::Face_const_handle Face_const_handle;
+typedef typename aos2::Halfedge_const_handle Halfedge_const_handle;
+typedef typename aos2::Vertex_const_handle Vertex_const_handle;
 
 typedef typename CGAL::Arr_naive_point_location<Arrangement_2>         Naive_pl;
 typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
