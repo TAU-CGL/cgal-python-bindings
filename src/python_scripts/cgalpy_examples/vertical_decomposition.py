@@ -12,12 +12,10 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.Ker
 Aos2 = CGALPY.Aos2
-
 Arrangement_2 = Aos2.Arrangement_2
-Point_2 = Ker.Point_2
-Curve_2 = Aos2.Curve_2
+Point_2 = Arrangement_2.Traits.Point_2
+Curve_2 = Arrangement_2.Traits.Curve_2
 
 arr = Arrangement_2()
 c1 = Curve_2(Point_2(0, 0), Point_2(2, 0))
@@ -39,13 +37,16 @@ for pair in d:
     # pair[1] is a pair holding the objects (Vertex, Halfedge, or Face) above and below
     # the vertex(respectively), that is, the objects hit by the vertical walls emanating from the vertex
     v0 = pair[0]
+    print(v0.point())
     for obj in pair[1]:
-        if obj.is_vertex():
-            v1 = Aos2.Vertex()
-            obj.get_vertex(v1)
-        elif obj.is_halfedge():
-            he = Aos2.Halfedge()
-            obj.get_halfedge(he)
-        elif obj.is_face():
-            f = Aos2.Face()
-            obj.get_face(f)
+        if type(obj) is Arrangement_2.Vertex:
+            v = obj
+            print("  ", v.point())
+        elif type(obj) is Arrangement_2.Halfedge:
+            he = obj
+            print("  ", he.curve())
+        elif type(obj) is Arrangement_2.Face:
+            f = obj
+            print("  unbounded face")
+        else:
+            print("  none")

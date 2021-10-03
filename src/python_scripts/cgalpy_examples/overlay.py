@@ -15,10 +15,9 @@ CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Aos2 = CGALPY.Aos2
 
-Point_2 = Ker.Point_2
-Curve_2 = Aos2.Curve_2
 Arrangement_2 = Aos2.Arrangement_2
-
+Point_2 = Arrangement_2.Traits.Point_2
+Curve_2 = Arrangement_2.Traits.Curve_2
 
 arr1 = Arrangement_2()
 c1 = Curve_2(Point_2(0, 0), Point_2(2, 0))
