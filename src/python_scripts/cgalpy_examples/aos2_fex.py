@@ -6,7 +6,7 @@ import importlib
 
 if len(sys.argv) < 2:
     sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY_kerEpec_aos2SegFe'
+    lib = 'CGALPY'
 else:
     lib = sys.argv[1]
 
