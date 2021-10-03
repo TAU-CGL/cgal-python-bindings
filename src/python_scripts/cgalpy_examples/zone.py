@@ -16,9 +16,9 @@ Ker = CGALPY.Ker
 Aos2 = CGALPY.Aos2
 
 Arrangement_2 = Aos2.Arrangement_2
-Point_2 = Ker.Point_2
 Segment_2 = Ker.Segment_2
-Curve_2 = Aos2.Curve_2
+Point_2 = Arrangement_2.Traits.Point_2
+Curve_2 = Arrangement_2.Traits.Curve_2
 
 arr = Arrangement_2()
 p0 = Point_2(0, 0)
@@ -37,15 +37,11 @@ Aos2.zone(arr, c, res)
 # res contains the objects of the arrangement that the curve intersects
 # in the order when going from left to right
 for obj in res:
-    if obj.is_vertex():
-        v = Aos2.Vertex()
-        obj.get_vertex(v)
+    if type(obj) is Arrangement_2.Vertex:
         print("vertex")
-    elif obj.is_halfedge():
-        he = Aos2.Halfedge()
-        obj.get_halfedge(he)
+    elif type(obj) is Arrangement_2.Halfedge:
         print("halfedge")
-    elif obj.is_face():
-        f = Aos2.Face()
-        obj.get_face(f)
+    elif type(obj) is Arrangement_2.Face:
         print("face")
+    else:
+        print("Error: unknown type")
