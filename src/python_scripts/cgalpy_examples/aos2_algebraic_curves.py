@@ -1,4 +1,4 @@
-#!/usr/bin/python3.9
+#!/usr/bin/python3
 # export PYTHONPATH=...
 import os
 import sys
@@ -6,22 +6,22 @@ import importlib
 
 if len(sys.argv) < 2:
     sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY_kerEpec_arr2AlgEx'
+    lib = 'CGALPY_kerEpec_aos2Alg'
 else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
-Traits = Aos2.Traits
-PT_2_Shift = Aos2.PT_2_Shift
-Polynomial_2 = Aos2.Polynomial_2
-Polynomial_1 = Aos2.Polynomial_1
-Integer = Aos2.Integer
 Arrangement_2 = Aos2.Arrangement_2
-ipower = Aos2.ipower
+Traits = Arrangement_2.Traits
+PT_2_Shift = Arrangement_2.PT_2_Shift
+Polynomial_2 = Arrangement_2.Polynomial_2
+Polynomial_1 = Arrangement_2.Polynomial_1
+Integer = Arrangement_2.Integer
+ipower = Arrangement_2.ipower
 
 # based on https://doc.cgal.org/latest/Arrangement_on_surface_2/Arrangement_on_surface_2_2algebraic_curves_8cpp-example.html#_a2
-traits = Aos2.Traits()
+traits = Traits()
 
 # Functor to create a curve from a Polynomial_2
 construct_curve = traits.construct_curve_2_object()
