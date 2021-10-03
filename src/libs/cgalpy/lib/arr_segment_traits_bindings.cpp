@@ -26,7 +26,7 @@ Segment_2 to_segment(Curve_2& c) { return Segment_2(c); }
 
 void export_arr_segment_traits() {
   auto traits = bp::class_<aos2::Traits>("Traits");
-  bp::scope traits_scope;
+  bp::scope traits_scope = traits;
   export_ArrangementTraits_2<aos2::Traits, Copy_const_reference>(traits);
   export_ArrangementLandmarkTraits_2<aos2::Traits, Copy_const_reference>(traits);
   export_ArrangementDirectionalXMonotoneTraits_2<aos2::Traits, Copy_const_reference>(traits);
