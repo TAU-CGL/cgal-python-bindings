@@ -75,9 +75,9 @@ typedef typename Traits::Bound                                  Bound;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-typedef typename Traits::Point_2                                TPoint_2;
-typedef typename Traits::Curve_2                                Curve_2;
-typedef typename Traits::X_monotone_curve_2                     X_monotone_curve_2;
+typedef typename Traits::Point_2                            TPoint_2;
+typedef typename Traits::Curve_2                            Curve_2;
+typedef typename Traits::X_monotone_curve_2                 X_monotone_curve_2;
 
 typedef CGAL::Arr_vertex_base<Traits::Point_2>                          Vb;
 typedef Vertex_extended<is_vertex_extended(), Vb, bp::object>::type     V;
