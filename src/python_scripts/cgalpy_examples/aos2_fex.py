@@ -1,4 +1,4 @@
-#!/usr/bin/python3.9
+#!/usr/bin/python3
 # export PYTHONPATH=...
 import os
 import sys
@@ -6,7 +6,7 @@ import importlib
 
 if len(sys.argv) < 2:
     sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+    lib = 'CGALPY_kerEpec_aos2SegFe'
 else:
     lib = sys.argv[1]
 
