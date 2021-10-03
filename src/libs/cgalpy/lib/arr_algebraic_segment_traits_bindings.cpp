@@ -6,13 +6,16 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+
 #include <boost/python.hpp>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/arrangement_2_concepts/export_ArrangementTraits_2.hpp"
 
 namespace bp = boost::python;
 
-bp::list to_double(TPoint_2& p) {
+bp::list to_double(aos2::TPoint_2& p) {
   bp::list lst = bp::list();
   auto pair = p.to_double();
   lst.append(pair.first);
@@ -21,36 +24,36 @@ bp::list to_double(TPoint_2& p) {
 }
 
 template<typename T, typename S>
-void export_construct_point_2_call_operator(bp::class_<Construct_point_2>& cp_2_binding)
+void export_construct_point_2_call_operator(bp::class_<aos2::Construct_point_2>& cp_2_binding)
 {
-  cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&)>("__call__", &Construct_point_2::operator());
+  cp_2_binding.def<aos2::TPoint_2(aos2::Construct_point_2::*)(const T&, const S&)>("__call__", &aos2::Construct_point_2::operator());
 }
 
 template<typename T, typename S, typename R>
-void export_construct_point_2_call_operator(bp::class_<Construct_point_2>& cp_2_binding)
+void export_construct_point_2_call_operator(bp::class_<aos2::Construct_point_2>& cp_2_binding)
 {
-  cp_2_binding.def<TPoint_2(Construct_point_2::*)(const T&, const S&, R)>("__call__", &Construct_point_2::operator());
+  cp_2_binding.def<aos2::TPoint_2(aos2::Construct_point_2::*)(const T&, const S&, R)>("__call__", &aos2::Construct_point_2::operator());
 }
 
-void construct_x_monotone_segment_2_call_operator0(Construct_x_monotone_segment_2& construct, Curve_2& cv, TPoint_2& end_min, TPoint_2& end_max, bp::list& lst)
+void construct_x_monotone_segment_2_call_operator0(aos2::Construct_x_monotone_segment_2& construct, aos2::Curve_2& cv, aos2::TPoint_2& end_min, aos2::TPoint_2& end_max, bp::list& lst)
 {
-  auto v = std::vector<X_monotone_curve_2>();
+  auto v = std::vector<aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
   construct(cv, end_min, end_max, it);
   for (auto xcv : v) lst.append(xcv);
 }
 
-void construct_x_monotone_segment_2_call_operator1(Construct_x_monotone_segment_2& construct, TPoint_2& p, TPoint_2& q, bp::list& lst)
+void construct_x_monotone_segment_2_call_operator1(aos2::Construct_x_monotone_segment_2& construct, aos2::TPoint_2& p, aos2::TPoint_2& q, bp::list& lst)
 {
-  auto v = std::vector<X_monotone_curve_2>();
+  auto v = std::vector<aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
   construct(p, q, it);
   for (auto xcv : v) lst.append(xcv);
 }
 
-void construct_x_monotone_segment_2_call_operator2(Construct_x_monotone_segment_2& construct, Curve_2& cv, TPoint_2& p, Traits::Site_of_point& site_of_p, bp::list& lst)
+void construct_x_monotone_segment_2_call_operator2(aos2::Construct_x_monotone_segment_2& construct, aos2::Curve_2& cv, aos2::TPoint_2& p, aos2::Traits::Site_of_point& site_of_p, bp::list& lst)
 {
-  auto v = std::vector<X_monotone_curve_2>();
+  auto v = std::vector<aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
   construct(cv, p, site_of_p, it);
   for (auto xcv : v) lst.append(xcv);
@@ -90,7 +93,7 @@ bp::class_<typename PT::Type> bind_polynomial(const char* name) {
     .def(bp::init<CT&, CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
     .def("__init__", make_constructor(&init_polynomial<PT>))
     .def("abs", &P::abs)
-    .def("coefficients", bp::range<bp::return_value_policy<bp::copy_const_reference>>(&P::begin, &P::end))
+    .def("coefficients", bp::range<Copy_const_reference>(&P::begin, &P::end))
     .def("compare", static_cast<CGAL::Comparison_result (P::*) (const typename P::NT&) const>(&P::compare))
     .def("degree", &P::degree)
     .def("diff", &P::diff)
@@ -112,7 +115,7 @@ bp::class_<typename PT::Type> bind_polynomial(const char* name) {
     .def(int() * bp::self)
     .def(CT() * bp::self)
     .def(bp::self *= bp::self)
-    .def("__getitem__", &P::operator[], bp::return_value_policy<bp::copy_const_reference>())
+    .def("__getitem__", &P::operator[], Copy_const_reference())
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
     ;
@@ -138,10 +141,13 @@ template<typename T>
 T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 
 void export_arr_algebraic_segment_traits() {
-  bp::class_<Integer>("Integer")
+  typedef aos2::Algebraic_real_1        AR1;
+  typedef aos2::Traits                  Tr;
+
+  bp::class_<aos2::Integer>("Integer")
     .def(bp::init<>())
     .def(bp::init<int>())
-    .def("value", &Integer::longValue)
+    .def("value", &aos2::Integer::longValue)
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
     .def(bp::self + bp::self)
@@ -151,28 +157,28 @@ void export_arr_algebraic_segment_traits() {
     .def(bp::self *= bp::self)
     ;
 
-  bp::class_<Algebraic_real_1>("Algebraic_real_1")
+  bp::class_<aos2::Algebraic_real_1>("Algebraic_real_1")
     .def(bp::init<>())
-    .def(bp::init<Algebraic_real_1&>())
+    .def(bp::init<AR1&>())
     .def(bp::init<int>())
-    .def(bp::init<Algebraic_real_1::Rational&>())
-    .def(bp::init<const Polynomial_1&, Algebraic_real_1::Rational, Algebraic_real_1::Rational>())
-    .def("bisect", &Algebraic_real_1::bisect)
-    .def< CGAL::Comparison_result(Algebraic_real_1::*)(const Algebraic_real_1&) const>("compare", &Algebraic_real_1::compare)
-    .def("degree", &Algebraic_real_1::degree)
-    .def("high", &Algebraic_real_1::high)
-    .def("is_rational", &Algebraic_real_1::is_rational)
-    .def("is_root_of", &Algebraic_real_1::is_root_of)
-    .def("low", &Algebraic_real_1::low)
-    .def("polynomial", &Algebraic_real_1::polynomial, bp::return_value_policy<bp::copy_const_reference>())
-    .def("rational", &Algebraic_real_1::rational)
-    .def("rational_between", &Algebraic_real_1::rational_between)
-    .def("refine", &Algebraic_real_1::refine)
-    .def("refine_to", &Algebraic_real_1::refine_to)
-    .def("sign_at_low", &Algebraic_real_1::sign_at_low)
-    .def("simplify", &Algebraic_real_1::simplify)
-    .def("to_double", &Algebraic_real_1::to_double)
-    .def("upper", &Algebraic_real_1::upper)
+    .def(bp::init<AR1::Rational&>())
+    .def(bp::init<const aos2::Polynomial_1&, AR1::Rational, AR1::Rational>())
+    .def("bisect", &AR1::bisect)
+    .def< CGAL::Comparison_result(AR1::*)(const AR1&) const>("compare", &AR1::compare)
+    .def("degree", &AR1::degree)
+    .def("high", &AR1::high)
+    .def("is_rational", &AR1::is_rational)
+    .def("is_root_of", &AR1::is_root_of)
+    .def("low", &AR1::low)
+    .def("polynomial", &AR1::polynomial, Copy_const_reference())
+    .def("rational", &AR1::rational)
+    .def("rational_between", &AR1::rational_between)
+    .def("refine", &AR1::refine)
+    .def("refine_to", &AR1::refine_to)
+    .def("sign_at_low", &AR1::sign_at_low)
+    .def("simplify", &AR1::simplify)
+    .def("to_double", &AR1::to_double)
+    .def("upper", &AR1::upper)
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
     .def(bp::self == bp::self)
@@ -184,9 +190,9 @@ void export_arr_algebraic_segment_traits() {
     .def(bp::self >= bp::self)
     ;
 
-  bp::class_<Bound>("Bound")
+  bp::class_<aos2::Bound>("Bound")
     .def(bp::init<>())
-    .def("value", &Bound::longValue)
+    .def("value", &aos2::Bound::longValue)
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
     .def(bp::self + bp::self)
@@ -196,41 +202,41 @@ void export_arr_algebraic_segment_traits() {
     .def(bp::self *= bp::self)
     ;
 
-  bp::enum_<Traits::Site_of_point>("Site_of_point")
-    .value("POINT_IN_INTERIOR", Traits::Site_of_point::POINT_IN_INTERIOR)
-    .value("MIN_ENDPOINT", Traits::Site_of_point::MIN_ENDPOINT)
-    .value("MAX_ENDPOINT", Traits::Site_of_point::MAX_ENDPOINT)
+  bp::enum_<Tr::Site_of_point>("Site_of_point")
+    .value("POINT_IN_INTERIOR", Tr::Site_of_point::POINT_IN_INTERIOR)
+    .value("MIN_ENDPOINT", Tr::Site_of_point::MIN_ENDPOINT)
+    .value("MAX_ENDPOINT", Tr::Site_of_point::MAX_ENDPOINT)
     .export_values()
     ;
 
   //bind_construct_polynomial<PT_1>("Construct_polynomial_1");
   //bind_construct_polynomial<PT_2>("Construct_polynomial_2");
 
-  bind_polynomial<PT_1>("Polynomial_1");
-  bind_polynomial<PT_2>("Polynomial_2");
+  bind_polynomial<aos2::PT_1>("Polynomial_1");
+  bind_polynomial<aos2::PT_2>("Polynomial_2");
 
-  bind_shift<PT_1>("PT_1_Shift");
-  bind_shift<PT_2>("PT_2_Shift");
+  bind_shift<aos2::PT_1>("PT_1_Shift");
+  bind_shift<aos2::PT_2>("PT_2_Shift");
 
-  bind_swap<PT_1>("PT_1_Swap");
-  bind_swap<PT_2>("PT_2_Swap");
+  bind_swap<aos2::PT_1>("PT_1_Swap");
+  bind_swap<aos2::PT_2>("PT_2_Swap");
 
-  bp::def("ipower", &ipower<Polynomial_1>);
-  bp::def("ipower", &ipower<Polynomial_2>);
+  bp::def("ipower", &ipower<aos2::Polynomial_1>);
+  bp::def("ipower", &ipower<aos2::Polynomial_2>);
 
-  auto traits = bp::class_<Traits>("Traits");
+  auto traits = bp::class_<Tr>("Traits");
   bp::scope traits_scope;
-  export_ArrangementTraits_2<Traits, bp::return_value_policy<bp::return_by_value>>(traits);
+  export_ArrangementTraits_2<Tr, Return_by_value>(traits);
   traits
-    .def("construct_curve_2_object", &Traits::construct_curve_2_object)
-    .def("construct_tpoint_2_object", &Traits::construct_point_2_object)
-    .def("construct_x_monotone_segment_2_object", &Traits::construct_x_monotone_segment_2_object)
+    .def("construct_curve_2_object", &Tr::construct_curve_2_object)
+    .def("construct_tpoint_2_object", &Tr::construct_point_2_object)
+    .def("construct_x_monotone_segment_2_object", &Tr::construct_x_monotone_segment_2_object)
     ;
 
-  bp::class_<TPoint_2>("Point_2")
-    .def(bp::init<TPoint_2&>())
-    .def("curve", &TPoint_2::curve)
-    .def("arcno", &TPoint_2::arcno)
+  bp::class_<aos2::TPoint_2>("Point_2")
+    .def(bp::init<aos2::TPoint_2&>())
+    .def("curve", &aos2::TPoint_2::curve)
+    .def("arcno", &aos2::TPoint_2::arcno)
     .def("to_double", &to_double)
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
@@ -243,31 +249,31 @@ void export_arr_algebraic_segment_traits() {
     .def(bp::self >= bp::self)
     ;
 
-  bp::class_<Curve_2>("Curve_2", bp::no_init)
-    .def("polynomial_2", &Curve_2::polynomial_2)
+  bp::class_<aos2::Curve_2>("Curve_2", bp::no_init)
+    .def("polynomial_2", &aos2::Curve_2::polynomial_2)
     ;
 
-  bp::class_<X_monotone_curve_2>("X_monotone_curve_2", bp::no_init)
-    .def("curve", &X_monotone_curve_2::curve, bp::return_internal_reference<>())
-    .def("is_vertical", &X_monotone_curve_2::is_vertical)
-    .def("is_finite", &X_monotone_curve_2::is_finite)
-    .def("curve_end", &X_monotone_curve_2::curve_end)
-    .def<int (X_monotone_curve_2::*)() const>("arcno", &X_monotone_curve_2::arcno)
-    .def("x", &X_monotone_curve_2::x, bp::return_value_policy<bp::copy_const_reference>())
+  bp::class_<aos2::X_monotone_curve_2>("X_monotone_curve_2", bp::no_init)
+    .def("curve", &aos2::X_monotone_curve_2::curve, bp::return_internal_reference<>())
+    .def("is_vertical", &aos2::X_monotone_curve_2::is_vertical)
+    .def("is_finite", &aos2::X_monotone_curve_2::is_finite)
+    .def("curve_end", &aos2::X_monotone_curve_2::curve_end)
+    .def<int (aos2::X_monotone_curve_2::*)() const>("arcno", &aos2::X_monotone_curve_2::arcno)
+    .def("x", &aos2::X_monotone_curve_2::x, Copy_const_reference())
     ;
 
-  bp::class_<Construct_curve_2>("Construct_curve_2", bp::no_init)
-    .def("__call__", &Construct_curve_2::operator());
+  bp::class_<aos2::Construct_curve_2>("Construct_curve_2", bp::no_init)
+    .def("__call__", &aos2::Construct_curve_2::operator());
   ;
 
-  auto cp_2_binding = bp::class_<Construct_point_2>("Construct_point_2", bp::no_init);
-  export_construct_point_2_call_operator<Algebraic_real_1, Curve_2, int>(cp_2_binding);
-  export_construct_point_2_call_operator<Algebraic_real_1, X_monotone_curve_2>(cp_2_binding);
-  export_construct_point_2_call_operator<Algebraic_real_1, Algebraic_real_1>(cp_2_binding);
-  export_construct_point_2_call_operator<Bound, Bound>(cp_2_binding);
+  auto cp_2_binding = bp::class_<aos2::Construct_point_2>("Construct_point_2", bp::no_init);
+  export_construct_point_2_call_operator<AR1, aos2::Curve_2, int>(cp_2_binding);
+  export_construct_point_2_call_operator<AR1, aos2::X_monotone_curve_2>(cp_2_binding);
+  export_construct_point_2_call_operator<AR1, AR1>(cp_2_binding);
+  export_construct_point_2_call_operator<aos2::Bound, aos2::Bound>(cp_2_binding);
   export_construct_point_2_call_operator<int, int>(cp_2_binding);
 
-  bp::class_<Construct_x_monotone_segment_2>("Construct_x_monotone_segment_2", bp::no_init)
+  bp::class_<aos2::Construct_x_monotone_segment_2>("Construct_x_monotone_segment_2", bp::no_init)
     .def("__call__", &construct_x_monotone_segment_2_call_operator0)
     .def("__call__", &construct_x_monotone_segment_2_call_operator1)
     .def("__call__", &construct_x_monotone_segment_2_call_operator2)
