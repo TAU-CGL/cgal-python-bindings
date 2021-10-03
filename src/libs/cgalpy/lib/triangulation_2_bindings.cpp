@@ -38,11 +38,13 @@ Face_handle face_to_handle(Face& f) {
 }
 
 CopyIterator<All_edges_iterator>* all_edges_iterator(Triangulation_2& t) {
-  return new CopyIterator<All_edges_iterator>(t.all_edges_begin(), t.all_edges_end());
+  return new CopyIterator<All_edges_iterator>(t.all_edges_begin(),
+                                              t.all_edges_end());
 }
 
 CopyIterator<Finite_edges_iterator>* finite_edges_iterator(Triangulation_2& t) {
-  return new CopyIterator<Finite_edges_iterator>(t.finite_edges_begin(), t.finite_edges_end());
+  return new CopyIterator<Finite_edges_iterator>(t.finite_edges_begin(),
+                                                 t.finite_edges_end());
 }
 
 Copy_iterator_from_circulator<Edge_circulator>*
