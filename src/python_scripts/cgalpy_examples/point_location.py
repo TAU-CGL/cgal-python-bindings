@@ -43,7 +43,7 @@ q2 = Point_2(50, 50)
 res = naive_pl.locate(q2)
 assert(res.is_vertex())
 if res.is_vertex():
-    v = Aos2.Vertex()
+    v = Arrangement_2.Vertex()
     res.get_vertex(v)
     print(v.point())
 
