@@ -1,6 +1,6 @@
 % =============================================================================
 \section{Binding Generation}
-\label{sec:bind-gen}
+\label{sec:gen}
 % =============================================================================
 The most simple form of building an application written in C++ that
 depends on \cgal{} consists of the stages below. Let
@@ -35,13 +35,13 @@ default library name is overridden.
 
 % -----------------------------------------------------------------------------
 \subsection{Bindings Modules and Scopes}
-\label{sec:bind-gen:scopes}
+\label{sec:gen:scopes}
 % -----------------------------------------------------------------------------
 The source of \cgal{} consists of several packages.  We use a similar
 partition. Typically, we refer to each package as a module. In some
 cases we combine a small number of packages and refer to them as one
 module. Each module has a long (and meaningful) name and a short name;
-see Table~\ref{tab:module-name} for the list of modules supported so
+see Table~\ref{tab:moduleName} for the list of modules supported so
 far. Each module is associated with a \cmake{} Boolean flag that
 determines whether to generate bindings for that particular
 module. Each module may be associated with zero or more additional
@@ -89,7 +89,7 @@ see Section~\ref{ssec:modules:aos2} for more details on the
     3D Triangulations & \myLstinline{TRIANGULATION\_3} & \myLstinline{TRI3}\\
   };
   \end{tikzpicture}
-  \label{tab:module-name}
+  \label{tab:moduleName}
 \end{table}
 
 The exposed names of the bound entities of different modules are
@@ -105,7 +105,7 @@ two namespaces has the attribute \myLstinline{intersection} (i.e.,
 \myLstinline{Bso2.intersection()}). We introduce as many (Python)
 namespaces as modules, and nest every exposed name of a bound entity
 in the appropriate (Python) namespace according to the module of the
-entity; See Section~\ref{sec:bind-code:scopes} for the implementation
+entity; See Section~\ref{sec:code:scopes} for the implementation
 details.
 
 The above is conveniently achieved with the use of the
@@ -172,7 +172,7 @@ constructs the segment $(0,0),(1,0)$.
 \end{lstlisting}
 % -----------------------------------------------------------------------------
 \subsection{Bindings Library Name}
-\label{sec:bind-gen:library-name}
+\label{sec:gen:libraryName}
 % -----------------------------------------------------------------------------
 By default, the base name of the generated library is
 \myLstinline{CGALPY}. However, the user can override the name with a
