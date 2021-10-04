@@ -225,7 +225,7 @@ void export_arr_algebraic_segment_traits() {
   bp::def("ipower", &ipower<aos2::Polynomial_2>);
 
   auto traits = bp::class_<Tr>("Traits");
-  bp::scope traits_scope;
+  bp::scope traits_scope = traits;
   export_ArrangementTraits_2<Tr, Return_by_value>(traits);
   traits
     .def("construct_curve_2_object", &Tr::construct_curve_2_object)

@@ -1,6 +1,6 @@
 % =============================================================================
 \section{Binding Code}
-\label{sec:bind-code}
+\label{sec:code}
 % =============================================================================
 Boost.Python allows users to expose C++ classes and functions to
 Python using nothing more than a C++ compiler. It exploits
@@ -16,7 +16,7 @@ describe some of the techniques we use to ensure that.
 
 % -----------------------------------------------------------------------------
 \subsection{Following Generic Concepts}
-\label{sec:bind-code:concepts}
+\label{sec:code:concepts}
 % -----------------------------------------------------------------------------
 As mentioned in the introduction, \cgal{} rigorously adheres to the
 generic programming paradigm. As a consequence, almost all components
@@ -41,7 +41,7 @@ types, but nothing else, are exposed. Consider for example the
 
 % -----------------------------------------------------------------------------
 \subsection{Return value policy}
-\label{sec:bind-code:rvp}
+\label{sec:code:rvp}
 % -----------------------------------------------------------------------------
 Python and C++ use fundamentally different ways of managing the memory
 and lifetime of objects. This can lead to issues when creating
@@ -76,7 +76,7 @@ macros) based on the kernel being exposed.
 
 % -----------------------------------------------------------------------------
 \subsection{Scopes}
-\label{sec:bind-code:scopes}
+\label{sec:code:scopes}
 % -----------------------------------------------------------------------------
 The Boost.Python mechanism that depends on \cppLstinline{bp::scope} is
 used to (i) reflect nesting in C++ code that uses \cgal, and (ii)
@@ -124,7 +124,7 @@ binding code for intersections.
 
 % -----------------------------------------------------------------------------
 \subsection{Avoiding Code Duplication}
-\label{sec:bind-code:templates}
+\label{sec:code:templates}
 % -----------------------------------------------------------------------------
 Some types have the exact same nested types and member functions
 exposed, e.g., \cppLstinline{Triangulation\_2} and
@@ -153,7 +153,7 @@ export_triangulation_2<Delaunay_triangulation_2>(c1);
 
 % -----------------------------------------------------------------------------
 \subsection{Substitution Failure Is Not an Error}
-\label{sec:bind-code:sfinae}
+\label{sec:code:sfinae}
 % -----------------------------------------------------------------------------
 Substitution failure is not an error (SFINAE) refers to a situation in
 C++ where an invalid substitution of template parameters is not in
@@ -245,7 +245,7 @@ valid combinations.
 
 % -----------------------------------------------------------------------------
 \subsection{Arrangement Extension}
-\label{sec:bind-code:ae}
+\label{sec:code:ae}
 % -----------------------------------------------------------------------------
 In many applications it is necessary to extend the type that
 represents certain \cgal{} data structures with some properties. In
@@ -276,7 +276,7 @@ example ...
 
 % -----------------------------------------------------------------------------
 \subsection{Arrangement Overlay Traits}
-\label{sec:bind-code:overlay}
+\label{sec:code:overlay}
 % -----------------------------------------------------------------------------
 Formally, the map overlay of two spatial subdivisions $\calS_1$ and
 $\calS_2$ is a third subdivision $S$, such that there is a cell $c$ in
@@ -337,7 +337,7 @@ constructor accepts ten Python functions, each accepting two Python
 objects and returning a Python object. As a result, the user (that is,
 a Python programmer) can still computes the properties of the output
 extended arrangement. Recall that these properties are represented by
-Python objects to start with; see Section~\ref{sec:bind-code:ae}.
+Python objects to start with; see Section~\ref{sec:code:ae}.
 
 %% (the extended arrangement data type) Those 10 functions are saved as
 %% class members and are then called in the respective 10 [overloaded]
@@ -351,7 +351,7 @@ Python objects to start with; see Section~\ref{sec:bind-code:ae}.
 
 % -----------------------------------------------------------------------------
 \subsection{kd tree}
-\label{sec:bind-code:kdtree}
+\label{sec:code:kdtree}
 % -----------------------------------------------------------------------------
 The k-d tree dimension and the dimension of related classes is
 templated and can thus only be decided at compile time via the cmake
@@ -363,7 +363,7 @@ exposed that returns the dimension as an \myLstinline{int}.
 
 % -----------------------------------------------------------------------------
 \subsection{\myLstinline{Python_distance}}
-\label{sec:bind-code:distance}
+\label{sec:code:distance}
 % -----------------------------------------------------------------------------
 Similarly to overlay traits, a user may want to define a custom
 distance class to use with search queries. Here too, as defining a new
@@ -379,7 +379,7 @@ Making some things more pythonic:
 
 % -----------------------------------------------------------------------------
 \subsection{Iterators and circulators}
-\label{sec:bind-code:iters}
+\label{sec:code:iters}
 % -----------------------------------------------------------------------------
 For binding iterators we used the \myLstinline{bind_iterator}
 templated function and its variations, in order to allow pythonic
@@ -391,14 +391,14 @@ exposed to python.
 
 % -----------------------------------------------------------------------------
 \subsection{Functions populating an output iterator}
-\label{sec:bind-code:fnc-out}
+\label{sec:code:fnc-out}
 % -----------------------------------------------------------------------------
 Instead, a wrapper that expects a python list and populates it with
 the results is being exposed.
 
 % -----------------------------------------------------------------------------
 \subsection{Functions expecting begin and end iterators}
-\label{sec:bind-code:fnc-range}
+\label{sec:code:fnc-range}
 % -----------------------------------------------------------------------------
 Instead, a wrapper that expects a python list as an argument and calls
 the function with the list's begin and end iterators is exposed.

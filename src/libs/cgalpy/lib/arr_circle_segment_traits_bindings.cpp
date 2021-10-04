@@ -5,6 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+
 #include <boost/python.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
