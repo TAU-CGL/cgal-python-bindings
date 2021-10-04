@@ -11,10 +11,10 @@ bindings enable the invocation of C++ functions from Python code
 taking advantage of Python's quick development cycles and C++'s high
 performance.
 %
-% =============================================================================
+% -----------------------------------------------------------------------------
 \subsection{C++ Python Bindings}
 \label{ssec:intro:bind}
-% =============================================================================
+% -----------------------------------------------------------------------------
 Python, like many other languages, was originally defined by a
 reference implementation. The original reference implementation of the
 Python programming language is CPython. To date, CPython is still the
@@ -47,10 +47,10 @@ the Python/C API. Several tools that facilitate the creation of such
 wrappers have been introduced; A sample of such tools are listed In
 Section~\ref{sec:comp}.
 
-% =============================================================================
+% -----------------------------------------------------------------------------
 \subsection{\cmake}
 \label{ssec:intro:cmake}
-% =============================================================================
+% -----------------------------------------------------------------------------
 \cmake{}~\cite{mh-mc-08} is an open-source, cross-platform suite of
 tools designed to build, test, and package software. The suite of
 \cmake{} tools were created to address the need for cross-platform
@@ -91,10 +91,10 @@ exploit this feature, and the scripting capabilities to conveniently
 generate the C++ Python bindings for several \cgal{} objects
 concurrently
 
-% =============================================================================
+% -----------------------------------------------------------------------------
 \subsection{\cgal}
 \label{ssec:intro:cgal}
-% =============================================================================
+% -----------------------------------------------------------------------------
 \cgal{} (Computational Geometry Algorithm Library) is an open source
 software project that provides easy access to efficient and reliable
 implementations of geometric algorithms in the form of a C++
@@ -162,10 +162,10 @@ application itself, generating bindings ahead of time is, naturally,
 impossible. Our system enables easy and convenient (re)generation of
 bindings, thus alleviating the burden caused by these problems.
 
-% =============================================================================
-\subsection{Results}
+% -----------------------------------------------------------------------------
+\subsection{Contribution}
 \label{ssec:intro:results}
-% =============================================================================
+% -----------------------------------------------------------------------------
 We introduce C++ Python bindings that enable the convenient,
 efficient, and reliable use of \cgal{} software modules in Python's
 code. There are different tools that facilitate the creation of C++
@@ -188,10 +188,10 @@ implementation exploits advanced features in C++. This results with
 elegant and compact code that is easy to maintain and extend with
 additional bindings.
 
-% =============================================================================
+% -----------------------------------------------------------------------------
 \subsection{Outline}
 \label{ssec:intro:outline}
-% =============================================================================
+% -----------------------------------------------------------------------------
 The rest of this paper is organized as follows. A study that compares
 three main methods for implementing C++ Python bindings is presented
 in Section~\ref{sec:comp}. General instructions for dynamically
@@ -201,10 +201,10 @@ modules are given in Section~\ref{sec:modules}. Highlighted modern C++
 techniques and idioms used in the binding implementation are described
 in Section~\ref{sec:bind-code}.
 
-% =============================================================================
+% -----------------------------------------------------------------------------
 \subsection{Conventions}
 \label{ssec:intro:conventions}
-% =============================================================================
+% -----------------------------------------------------------------------------
 The paper is packed with code samples written either in the \cmake{},
 Python, or C++ languages. We use several conventions to improve
 readability.  Code excerpt written in C++ is always numbered, while
