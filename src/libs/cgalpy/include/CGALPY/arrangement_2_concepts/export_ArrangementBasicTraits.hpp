@@ -38,10 +38,15 @@ void export_ArrangementBasicTraits(C c) {
   typedef typename T::Compare_y_at_x_2          Compare_y_at_x_2;
   typedef typename T::Compare_y_at_x_right_2    Compare_y_at_x_right_2;
 
-//  bp::class_<Point_2>("Point_2")
-//    .def(bp::init<>())
-//    .def(bp::init<Point_2&>())
-//    ;
+  // const bp::type_info info_point_2 = bp::type_id<Point_2>();
+  // const auto* reg_point_2 = bp::converter::registry::query(info_point_2);
+  // if ((reg_point_2 == nullptr) || ((*reg_point_2).m_to_python == nullptr))
+  //   bp::class_<Point_2>("Point_2")
+  //     .def(bp::init<>())
+  //     .def(bp::init<Point_2&>())
+  //     ;
+  // else bp::scope().attr("Point_2") = bp::handle<>(reg_point_2->m_class_object);
+
 //  bp::class_<X_monotone_curve_2>("X_monotone_curve_2")
 //    .def(bp::init<>())
 //    .def(bp::init<X_monotone_curve_2&>())
