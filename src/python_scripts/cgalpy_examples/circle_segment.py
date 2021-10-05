@@ -57,7 +57,7 @@ S.join(ctr_quad_polygon(Point(1, 4), Point(5, 4), Point(5, 6), Point(1, 6)));
 S.join(ctr_quad_polygon(Point(0, 1), Point(2, 1), Point(2, 5), Point(0, 5)));
 S.join(ctr_quad_polygon(Point(4, 1), Point(6, 1), Point(6, 5), Point(4, 5)));
 
-print(S.number_of_polygons_with_holes())
+assert(S.number_of_polygons_with_holes() == 1)
 pwhs = []
 S.polygons_with_holes(pwhs)
 print(pwhs)
