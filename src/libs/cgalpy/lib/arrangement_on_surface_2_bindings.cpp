@@ -27,11 +27,11 @@ void export_vertex();
 void export_halfedge();
 void export_face();
 
-void export_arr_linear_traits();
-void export_arr_segment_traits();
-void export_arr_circle_segment_traits();
-void export_arr_conic_traits();
-void export_arr_algebraic_segment_traits();
+bp::object export_arr_linear_traits();
+bp::object export_arr_segment_traits();
+bp::object export_arr_circle_segment_traits();
+bp::object export_arr_conic_traits();
+bp::object export_arr_algebraic_segment_traits();
 
 namespace aos2 {
 
@@ -335,6 +335,21 @@ void export_arrangement_on_surface_2() {
     .export_values()
     ;
 
+  // Export the traits classes
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
+  auto traits_object = export_arr_linear_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+  auto traits_object = export_arr_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+  auto traits_object = export_arr_circle_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
+  auto traits_object = export_arr_conic_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+  auto traits_object = export_arr_algebraic_segment_traits();
+#else
+  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
+#endif
+
   {
     bp::scope aos_scope = bp::class_<Arr2>("Arrangement_2")
       .def(bp::init<>())
@@ -382,19 +397,8 @@ void export_arrangement_on_surface_2() {
     export_halfedge();
     export_face();
 
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-    export_arr_linear_traits();
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-    export_arr_segment_traits();
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-    export_arr_circle_segment_traits();
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-    export_arr_conic_traits();
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-    export_arr_algebraic_segment_traits();
-#else
-    BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
-#endif
+    // Expose "Traits" within "Arrangement_2"
+    aos_scope.attr("Geometry_traits_2") = traits_object;
   }
 
   //free functions
