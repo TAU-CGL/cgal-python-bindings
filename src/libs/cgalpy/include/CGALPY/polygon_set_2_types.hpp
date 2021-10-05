@@ -17,12 +17,12 @@
 
 namespace bso2 {
 
-typedef typename aos2::Dcel                                            Dcel;
-// If we use the Dcel in the definition there are conversion issues (when compiling with circle segment traits)
-// typedef typename CGAL::Polygon_set_2<Kernel, Point_2_container, Dcel>  Polygon_set_2;
-typedef typename CGAL::Polygon_set_2<Kernel, Point_2_container>        Polygon_set_2;
-typedef typename Polygon_set_2::Polygon_with_holes_2                   Polygon_with_holes_2;
-typedef typename Polygon_set_2::Polygon_2                              Polygon_2;
+typedef typename aos2::Dcel                                           Dcel;
+typedef typename CGAL::Polygon_set_2<Kernel, Point_2_container, Dcel>
+  Polygon_set_2;
+typedef typename Polygon_set_2::Polygon_with_holes_2
+  Polygon_with_holes_2;
+typedef typename Polygon_set_2::Polygon_2                             Polygon_2;
 
 }
 
