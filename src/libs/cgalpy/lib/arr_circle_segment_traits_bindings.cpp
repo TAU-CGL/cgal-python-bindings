@@ -19,10 +19,10 @@ typedef typename aos2::Traits::CoordNT CoordNT;
 
 static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 
-void export_arr_circle_segment_traits() {
-  auto traits = bp::class_<aos2::Traits>("Traits")
+bp::object export_arr_circle_segment_traits() {
+  auto traits = bp::class_<aos2::Traits>("Geometry_traits_2")
     .def(bp::init<>());
-  bp::scope traits_scope = traits;
+  bp::scope traits_scope(traits);
   export_ArrangementTraits_2<aos2::Traits, bp::return_value_policy<bp::return_by_value>>(traits);
   export_ArrangementDirectionalXMonotoneTraits_2<aos2::Traits, bp::return_value_policy<bp::return_by_value>>(traits);
 
@@ -115,4 +115,6 @@ void export_arr_circle_segment_traits() {
     .def("supporting_line", &aos2::Curve_2::supporting_line, bp::return_value_policy<bp::copy_const_reference>())
     .def("supporting_circle", &aos2::Curve_2::supporting_circle, bp::return_value_policy<bp::copy_const_reference>())
     ;
+
+  return traits;
 }

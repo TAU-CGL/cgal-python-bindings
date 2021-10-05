@@ -140,7 +140,7 @@ bp::class_<typename PT::Swap> bind_swap(const char* name) {
 template<typename T>
 T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 
-void export_arr_algebraic_segment_traits() {
+bp::object export_arr_algebraic_segment_traits() {
   typedef aos2::Algebraic_real_1        AR1;
   typedef aos2::Traits                  Tr;
 
@@ -224,8 +224,8 @@ void export_arr_algebraic_segment_traits() {
   bp::def("ipower", &ipower<aos2::Polynomial_1>);
   bp::def("ipower", &ipower<aos2::Polynomial_2>);
 
-  auto traits = bp::class_<Tr>("Traits");
-  bp::scope traits_scope = traits;
+  auto traits = bp::class_<Tr>("Geometry_traits_2");
+  bp::scope traits_scope(traits);
   export_ArrangementTraits_2<Tr, Return_by_value>(traits);
   traits
     .def("construct_curve_2_object", &Tr::construct_curve_2_object)
@@ -278,4 +278,6 @@ void export_arr_algebraic_segment_traits() {
     .def("__call__", &construct_x_monotone_segment_2_call_operator1)
     .def("__call__", &construct_x_monotone_segment_2_call_operator2)
     ;
+
+  return traits;
 }

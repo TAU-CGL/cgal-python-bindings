@@ -12,12 +12,13 @@
 
 namespace bp = boost::python;
 
-void export_arr_conic_traits() {
+bp::object export_arr_conic_traits() {
   //TODO export RatKernel, AlgKernel
 
-  bp::scope traits_scope = bp::class_<Traits>("Traits")
-    .def(bp::init<>())
+   auto traits = bp::class_<Traits>("Geometry_traits_2")
+     .def(bp::init<>())
     ;
+  bp::scope traits_scope(traits);
 
   bp::class_<Traits::Integer>("Integer")
     .def(bp::init<>())
@@ -54,4 +55,6 @@ void export_arr_conic_traits() {
     .def("left", &X_monotone_curve_2::left, bp::return_value_policy<bp::copy_const_reference>())
     .def("right", &X_monotone_curve_2::right, bp::return_value_policy<bp::copy_const_reference>())
     ;
+
+  return traits;
 }

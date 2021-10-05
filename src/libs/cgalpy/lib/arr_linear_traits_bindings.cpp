@@ -14,9 +14,9 @@
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
-void export_arr_linear_traits() {
-  auto traits = bp::class_<Traits>("Traits");
-  bp::scope traits_scope = traits;
+bp::object export_arr_linear_traits() {
+  auto traits = bp::class_<Traits>("Geometry_traits_2");
+  bp::scope traits_scope(traits);
   export_ArrangementTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
   export_ArrangementLandmarkTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
   export_ArrangementOpenBoundaryTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
@@ -50,4 +50,6 @@ void export_arr_linear_traits() {
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
     ;
+
+  return traits;
 }
