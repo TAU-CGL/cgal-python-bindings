@@ -17,8 +17,8 @@ Aos2 = CGALPY.Aos2
 
 Arrangement_2 = Aos2.Arrangement_2
 Segment_2 = Ker.Segment_2
-Point_2 = Arrangement_2.Traits.Point_2
-Curve_2 = Arrangement_2.Traits.Curve_2
+Point_2 = Arrangement_2.Geometry_traits_2.Point_2
+Curve_2 = Arrangement_2.Geometry_traits_2.Curve_2
 
 arr = Arrangement_2()
 p0 = Point_2(0, 0)
