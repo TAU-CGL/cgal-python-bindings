@@ -13,7 +13,7 @@ else:
 CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
 Arrangement_2 = Aos2.Arrangement_2
-Traits = Arrangement_2.Traits
+Traits = Arrangement_2.Geometry_traits_2
 PT_2_Shift = Arrangement_2.PT_2_Shift
 Polynomial_2 = Arrangement_2.Polynomial_2
 Polynomial_1 = Arrangement_2.Polynomial_1
