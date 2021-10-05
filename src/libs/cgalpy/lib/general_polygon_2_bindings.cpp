@@ -5,11 +5,13 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+
 #include <boost/python.hpp>
 
-#include "CGALPY/polygon_2_types.hpp"
-
 #include <CGAL/Gps_circle_segment_traits_2.h>
+
+#include "CGALPY/polygon_2_types.hpp"
 
 namespace bp = boost::python;
 
