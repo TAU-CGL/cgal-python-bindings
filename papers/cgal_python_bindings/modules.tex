@@ -156,7 +156,7 @@ of two segments using the generated binding.
 \framedInputPython[\normalsize][14]{../../src/python_scripts/cgalpy_examples/ker_intersection.py}
 
 % -----------------------------------------------------------------------------
-\subsection{$D$-Dimensional Kernel Bindings}
+\subsection{$d$-Dimensional Kernel Bindings}
 \label{ssec:modules:kerneld}
 % -----------------------------------------------------------------------------
 \cgal{} includes a separate package that consists of constant-size
@@ -208,7 +208,7 @@ Table~\ref{tab:kerd:name}.
 
 %%%%%%%% D Kernel Name Options
 \begin{table}[!htp]
-  \caption{$D$-dimensional Kernel name options.}
+  \caption{$d$-dimensional Kernel name options.}
   \centering\begin{tikzpicture}
   \matrix (first) [tableName, column
     1/.style={nodes={text width=19em}},
@@ -234,11 +234,12 @@ dimension of the space is specified for each point when it is
 constructed, so it does not need to be known at compile-time of the
 bindings. The \cmake{KERNEL\_D\_DIMENSION\_TAG} flag specifies whether
 the dimension is static or dynamic. If it is static, the dimension is
-extracted from the \cmake{KERNEL\_D\_DIMENSION} \cmake{} flag.
+extracted from the \cmake{KERNEL\_D\_DIMENSION} \cmake{} flag; ; see
+Table~\ref{tab:kerd:dim}.
 
 %%%%%%%% D Kernel Dimension Tag Options
 \begin{table}[!htp]
-  \caption{$d$D-dimensional Kernl dimension tag options.}
+  \caption{$d$-dimensional Kernel dimension tag options.}
   \centering\begin{tikzpicture}
   \matrix (first) [tableName, column
     1/.style={nodes={text width=19em}},
@@ -248,7 +249,7 @@ extracted from the \cmake{KERNEL\_D\_DIMENSION} \cmake{} flag.
     \cmakeLstinline{dynamic} & \cppLstinline{Dynamic\_dimension\_tag}\\
   };
  \end{tikzpicture}
- \label{tab:kerd:name}
+ \label{tab:kerd:dim}
 \end{table}
 
 The kernel type determines the underlying number type. It
@@ -674,12 +675,12 @@ cases the selected kernel serves as the traits.
     \draw[->,>=stealth] (d.parent anchor)--(cd.child anchor);
     \draw[->,>=stealth] (p.parent anchor)--(pd.child anchor);
   \end{forest}
-  \label{tab:tri2:concept-hierarchy}
   \caption{The 2D triangulation traits concept hierarchy.
     \cppLstinline{Triangulation}, \cppLstinline{Periodic\_2} and
     \cppLstinline{Traits\_2} are abbreviated as \cppLstinline{Tri},
     \cppLstinline{Pr2}, and \cppLstinline{Tr2},
     respectively.}
+  \label{tab:tri2:concept-hierarchy}
 \end{figure}
 
 The type that substitutes the \cppLstinline{Tds}
@@ -1005,12 +1006,12 @@ traits.
     \draw[->,>=stealth] (r.parent anchor)--(pr.child anchor);
     \draw[->,>=stealth] (p.parent anchor)--(pd.child anchor);
   \end{forest}
-  \label{tab:tri3:concept-hierarchy}
   \caption{The 3D triangulation traits concept hierarchy.
     \cppLstinline{Triangulation}, \cppLstinline{AlphaShape},
     \cppLstinline{Traits\_3} and \cppLstinline{Periodic\_3} are
     abbreviated as \cppLstinline{Tri}, \cppLstinline{AS},
     \cppLstinline{Pr3}, and \cppLstinline{Tr3}, respectively.}
+  \label{tab:tri3:concept-hierarchy}
 \end{figure}
 
 The type that substitutes the \cppLstinline{Tds}
