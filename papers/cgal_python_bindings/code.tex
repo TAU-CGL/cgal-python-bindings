@@ -81,7 +81,7 @@ macros) based on the kernel being exposed.
 The Boost.Python mechanism that depends on \cppLstinline{bp::scope} is
 used to (i) reflect nesting in C++ code that uses \cgal, and (ii)
 prevent name conflicts between bound entities in distinct modules; see
-Section~\ref{sec:bind-gen:scopes}. The latter requires a slight
+Section~\ref{sec:gen:scopes}. The latter requires a slight
 intervention on our part as explained next. The code that binds all
 functions and classes of different modules is nested in distinct C++
 forced scopes. Within a (C++) scope we first set the Python namespace
@@ -179,7 +179,7 @@ compilation errors for unsupported combinations with the help of
 SFINAE as follows. Consider two types \cppLstinline{Type1} and
 \cppLstinline{Type2}, and assume that the overloaded version
 \cppLstinline{CGAL::do_intersect(Type1 o1, Type2 o2)} is not
-implmented but all other three are implemented.
+implemented but all other three are implemented.
 
 \begin{lstlisting}[style=cppNumberedStyle]
 template <typename T1, typename T2>
@@ -205,7 +205,7 @@ void bind_do_intersect() {
 First the function \cppLstinline{bind_do_intersect()} calls the
 instance of \cppLstinline{bind_do_intersect_1T<T1>()}, where
 \cppLstinline{T1} is substituted with \cppLstinline{Type1}.  Then, the
-latter makes two calls and passs a \cppLstinline{bool} argument of
+latter makes two calls and passes a \cppLstinline{bool} argument of
 value \cppLstinline{true}. First it calls the instance of
 \cppLstinline{bind_do_intersect_2T<Type1, T2>(true)}, where
 \cppLstinline{T2} is also substituted with \cppLstinline{Type1}; then,
@@ -219,14 +219,14 @@ when the evaluation of the first implementation fails during the
 resolution process.\footnote{For more information on \emph{variadic
     arguments} see
   \url{https://en.cppreference.com/w/cpp/language/variadic_arguments}.}
-The paramater type of the first implementation is defined as the
+The parameter type of the first implementation is defined as the
 return type of \cppLstinline{CGAL::do_intersect<Kernel>(T1(),
   T2())}. When \cppLstinline{T1} and \cppLstinline{T2} are substituted
 with \cppLstinline{Type1} and \cppLstinline{Type2}, respectively, the
 evaluation fails, and the blank implementation is selected and
 invoked.  In all other three cases the evaluation succeeds. As
 variadic parameters have the lowest rank for the purpose of overload
-resolution, the first implementation will alsways be selected for
+resolution, the first implementation will always be selected for
 valid combinations.
 
 %% templated with some supported type
@@ -283,7 +283,7 @@ $\calS_2$ is a third subdivision $S$, such that there is a cell $c$ in
 $\calS$ iff there are cells $c_1$ and $c_2$ in $\calS_1$ and
 $\calS_2$, respectively, such that $c$ is a maximal connected
 component of $c_1 \cap c_2$. Arrangements are subdivisions of some
-ambiant space (see Section~\ref{ssec:modules:aos2}) and computing the
+ambient space (see Section~\ref{ssec:modules:aos2}) and computing the
 overlay of two arrangements is useful for many applications, including
 the application of Boolean operations; see
 Section~\ref{ssec:modules:bso2}. Indeed, the \iiDArrangementsPackage{}
