@@ -10,7 +10,6 @@
 #define CGALPY_GENERAL_POLYGON_SET_2_TYPES_HPP
 
 #include <CGAL/General_polygon_set_2.h>
-#include <CGAL/Gps_traits_2.h>
 
 #include "CGALPY/general_polygon_set_2_config.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
@@ -18,7 +17,7 @@
 namespace bso2 {
 
 typedef aos2::Dcel                                      Dcel;
-typedef CGAL::Gps_traits_2<aos2::Traits>                Traits;
+typedef aos2::Traits_2                                  Traits;
 typedef CGAL::General_polygon_set_2<Traits, Dcel>       General_polygon_set_2;
 
 }

@@ -56,11 +56,11 @@ typedef Arr_python_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
 #endif
 
 // Free functions
-Vertex& insert_point_default(Arrangement_2& arr, TPoint_2& p)
+Vertex& insert_point_default(Arrangement_2& arr, Point_2& p)
 { return *(CGAL::insert_point(arr, p)); }
 
 template <typename PointLocation>
-Vertex& insert_point(Arrangement_2& arr, TPoint_2& p, PointLocation& pl)
+Vertex& insert_point(Arrangement_2& arr, Point_2& p, PointLocation& pl)
 { return *(CGAL::insert_point(arr, p, pl)); }
 
 template<typename CurveType>
@@ -247,7 +247,7 @@ Halfedge& insert_edge_in_face_interior(Arrangement_2& arr,
                                        X_monotone_curve_2& c, Face& f)
 { return *(arr.insert_in_face_interior(c, (Face_iterator(&f)))); }
 
-Vertex& insert_vertex_in_face_interior(Arrangement_2& arr, TPoint_2& p, Face& f)
+Vertex& insert_vertex_in_face_interior(Arrangement_2& arr, Point_2& p, Face& f)
 { return *(arr.insert_in_face_interior(p, (Face_iterator(&f)))); }
 
 Halfedge& insert_at_vertices(Arrangement_2& arr, X_monotone_curve_2& c,
@@ -256,7 +256,7 @@ Halfedge& insert_at_vertices(Arrangement_2& arr, X_monotone_curve_2& c,
                                   (Vertex_iterator(&v2))));
 }
 
-Vertex& modify_vertex(Arrangement_2& arr, Vertex& v, TPoint_2& p)
+Vertex& modify_vertex(Arrangement_2& arr, Vertex& v, Point_2& p)
 { return *(arr.modify_vertex(Vertex_iterator(&v), p)); }
 
 Face& remove_isolated_vertex(Arrangement_2& arr, Vertex& v)
