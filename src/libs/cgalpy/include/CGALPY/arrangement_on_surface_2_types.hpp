@@ -41,56 +41,61 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 namespace aos2 {
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-typedef typename CGAL::Arr_segment_traits_2<Kernel>             Traits;
-typedef typename Traits::Is_in_x_range_2                        Is_in_x_range_2;
-typedef typename Traits::Is_in_y_range_2                        Is_in_y_range_2;
+typedef typename CGAL::Arr_segment_traits_2<Kernel>             BGT;
+typedef typename BGT::Is_in_x_range_2                           Is_in_x_range_2;
+typedef typename BGT::Is_in_y_range_2                           Is_in_y_range_2;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-typedef typename CGAL::Arr_non_caching_segment_traits_2<Kernel> Traits;
+typedef typename CGAL::Arr_non_caching_segment_traits_2<Kernel> BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-typedef typename CGAL::Arr_linear_traits_2<Kernel>              Traits;
+typedef typename CGAL::Arr_linear_traits_2<Kernel>              BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>      Traits;
+typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>      BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
 typedef typename CGAL::CORE_algebraic_number_traits             NtTraits;
 typedef typename CGAL::Cartesian <NtTraits::Rational>           RatKernel;
 typedef typename CGAL::Cartesian <NtTraits::Algebraic>          AlgKernel;
-typedef typename CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>    Traits;
+typedef typename CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>    BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 typedef typename CORE::BigInt                                   Integer;
-typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>  Traits;
-typedef typename Traits::Construct_curve_2                      Construct_curve_2;
-typedef typename Traits::Construct_point_2                      Construct_point_2;
-typedef typename Traits::Construct_x_monotone_segment_2         Construct_x_monotone_segment_2;
-typedef typename Traits::Polynomial_2                           Polynomial_2;
+typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>  BGT;
+typedef typename BGT::Construct_curve_2                         Construct_curve_2;
+typedef typename BGT::Construct_point_2                         Construct_point_2;
+typedef typename BGT::Construct_x_monotone_segment_2            Construct_x_monotone_segment_2;
+typedef typename BGT::Polynomial_2                              Polynomial_2;
 typedef CGAL::Polynomial_traits_d<Polynomial_2>                 PT_2;
 typedef PT_2::Construct_polynomial                              Construct_polynomial_2;
 typedef PT_2::Coefficient_type                                  Polynomial_1;
 typedef CGAL::Polynomial_traits_d<Polynomial_1>                 PT_1;
 typedef PT_1::Construct_polynomial                              Construct_polynomial_1;
-typedef typename Traits::Algebraic_kernel_d_1                   Algebraic_kernel_d_1;
+typedef typename BGT::Algebraic_kernel_d_1                      Algebraic_kernel_d_1;
 typedef typename Algebraic_kernel_d_1::Polynomial_1             Polynomial_1;
-typedef typename Traits::Algebraic_real_1                       Algebraic_real_1;
-typedef typename Traits::Bound                                  Bound;
+typedef typename BGT::Algebraic_real_1                          Algebraic_real_1;
+typedef typename BGT::Bound                                     Bound;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-typedef typename Traits::Point_2                            TPoint_2;
-typedef typename Traits::Curve_2                            Curve_2;
-typedef typename Traits::X_monotone_curve_2                 X_monotone_curve_2;
+typedef Tr<boolean_set_operations_2_bindings(), BGT>::type      GT;
+typedef typename GT::Point_2                                    Point_2;
+typedef typename GT::Curve_2                                    Curve_2;
+typedef typename GT::X_monotone_curve_2                         X_monotone_curve_2;
 
-typedef CGAL::Arr_vertex_base<Traits::Point_2>                          Vb;
+typedef CGAL::Arr_vertex_base<GT::Point_2>                              Vb;
 typedef Vertex_extended<is_vertex_extended(), Vb, bp::object>::type     V;
 
-typedef Halfedge_gps<boolean_set_operations_2_bindings(), Traits>::type Hb;
+typedef Halfedge_gps<boolean_set_operations_2_bindings(), GT>::type     Hb;
 typedef Halfedge_extended<is_halfedge_extended(), Hb, bp::object>::type H;
 
 typedef Face_gps<boolean_set_operations_2_bindings()>::type             Fb;
 typedef Face_extended<is_face_extended(), Fb, bp::object>::type         F;
 
 typedef CGAL::Arr_dcel_base<V, H, F>                        Dcel;
-typedef CGAL::Arrangement_2<Traits, Dcel>                   Arrangement_2;
+typedef CGAL::Arrangement_2<GT, Dcel>                       Arrangement_2;
 
+// Backward compatibility:
+typedef Arrangement_2::Traits_2                             Traits_2;
+
+typedef Arrangement_2::Geometry_traits_2                    Geometry_traits_2;
 typedef Arrangement_2::Point_2                              Arr_point_2;
 typedef Arrangement_2::Vertex_iterator                      Vertex_iterator;
 typedef Arrangement_2::Vertex_const_handle                  Vertex_const_handle;

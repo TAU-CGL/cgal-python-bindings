@@ -61,3 +61,6 @@ assert(S.number_of_polygons_with_holes() == 1)
 pwhs = []
 S.polygons_with_holes(pwhs)
 print(pwhs)
+
+arr = S.arrangement()
+print("# Cells: ", arr.number_of_vertices(), arr.number_of_edges(), arr.number_of_faces())

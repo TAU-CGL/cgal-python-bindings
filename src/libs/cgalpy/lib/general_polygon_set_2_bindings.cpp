@@ -185,7 +185,8 @@ void export_general_polygon_set_2() {
     .def("is_plane", &Gps2::is_plane)
     .def("number_of_polygons_with_holes", &Gps2::number_of_polygons_with_holes)
     .def("polygons_with_holes", &bso2::polygons_with_holes)
-    //.def("arrangement", &Gps2::arrangement)
+    .def<aos2::Arrangement_2&(Gps2::*)()>("arrangement", &Gps2::arrangement,
+                                          Reference_existing_object())
     .def("clear", &Gps2::clear)
     .def("is_valid", &Gps2::is_valid)
     .def("insert", &bso2::insert0)
@@ -193,7 +194,7 @@ void export_general_polygon_set_2() {
     .def("insert", &bso2::insert_range0)
     .def("insert_polygons", &bso2::insert_range<Traits::Polygon_2>)
     .def("insert_polygons_with_holes", &bso2::insert_range<Traits::Polygon_with_holes_2>)
-    .def<void (Gps2::*) ()>("complement", &Gps2::complement)
+    .def<void(Gps2::*)()>("complement", &Gps2::complement)
     .def("complement", &bso2::complement0)
     .def("intersection", &bso2::intersection<Gps2>)
     .def("intersection", &bso2::intersection<Traits::Polygon_2>)
