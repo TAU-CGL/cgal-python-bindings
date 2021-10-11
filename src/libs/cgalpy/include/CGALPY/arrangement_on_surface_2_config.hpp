@@ -10,7 +10,9 @@
 #define CGALPY_ARRANGEMENT_ON_SURFACE_2_CONFIG_HPP
 
 #include <CGAL/Arr_extended_dcel.h>
+#include <CGAL/Gps_traits_2.h>
 #include <CGAL/Boolean_set_operations_2/Gps_default_dcel.h>
+
 #include "config.hpp"
 
 #define CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS              0
@@ -39,6 +41,12 @@ constexpr bool is_face_extended()
 { return DETECT_EXIST(CGALPY_AOS2_FACE_EXTENDED); }
 
 // Boolean set operation
+
+template <bool b, typename BaseTr> struct Tr {};
+template <typename Base>
+struct Tr<false, Base>{ typedef Base type; };
+template <typename Base>
+struct Tr<true, Base>{ typedef CGAL::Gps_traits_2<Base> type; };
 
 template <bool b, typename Tr> struct Halfedge_gps {};
 template <typename Tr>
