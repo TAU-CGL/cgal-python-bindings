@@ -12,9 +12,9 @@
 #include <boost/assert.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/arrangement_2_concepts/export_ArrangementTraits_2.hpp"
-#include "CGALPY/arrangement_2_concepts/export_ArrangementLandmarkTraits_2.hpp"
-#include "CGALPY/arrangement_2_concepts/export_ArrangementDirectionalXMonotoneTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
 
 namespace bp = boost::python;
 
@@ -27,15 +27,15 @@ Segment_2 to_segment(Curve_2& c) { return Segment_2(c); }
 bp::object export_arr_segment_traits() {
   auto traits = bp::class_<aos2::Traits>("Geometry_traits_2");
   bp::scope traits_scope(traits);
-  export_ArrangementTraits_2<aos2::Traits, Copy_const_reference>(traits);
-  export_ArrangementLandmarkTraits_2<aos2::Traits, Copy_const_reference>(traits);
-  export_ArrangementDirectionalXMonotoneTraits_2<aos2::Traits, Copy_const_reference>(traits);
+  export_AosTraits_2<aos2::Traits, Copy_const_reference>(traits);
+  export_AosLandmarkTraits_2<aos2::Traits, Copy_const_reference>(traits);
+  export_AosDirectionalXMonotoneTraits_2<aos2::Traits, Copy_const_reference>(traits);
   traits
     .def("is_in_x_range_2_object", &aos2::Traits::is_in_x_range_2_object)
     .def("is_in_y_range_2_object", &aos2::Traits::is_in_y_range_2_object)
     ;
 
-  const bp::type_info info = bp::type_id<aos2::TPoint_2>();
+  const bp::type_info info = bp::type_id<aos2::Point_2>();
   const bp::converter::registration* reg = bp::converter::registry::query(info);
   BOOST_ASSERT((reg != nullptr) && ((*reg).m_to_python != nullptr));
   traits_scope.attr("Point_2") = bp::handle<>(reg->m_class_object);
@@ -43,8 +43,8 @@ bp::object export_arr_segment_traits() {
   bp::class_<aos2::Curve_2>("Curve_2")
     .def(bp::init<>())
     .def(bp::init<Segment_2&>())
-    .def(bp::init<aos2::TPoint_2&, aos2::TPoint_2&>())
-    .def(bp::init<Line_2&, aos2::TPoint_2&, aos2::TPoint_2&>())
+    .def(bp::init<aos2::Point_2&, aos2::Point_2&>())
+    .def(bp::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
     .def("source", &aos2::Curve_2::source, Copy_const_reference())
     .def("target", &aos2::Curve_2::target, Copy_const_reference())
     .def("line", &aos2::Curve_2::line, Copy_const_reference())

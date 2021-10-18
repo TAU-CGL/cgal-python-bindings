@@ -20,7 +20,7 @@ void export_arr_non_caching_segment_traits() {
     .def(bp::init<>())
     ;
 
-  const bp::type_info pt_info = bp::type_id<TPoint_2>();
+  const bp::type_info pt_info = bp::type_id<Point_2>();
   const bp::converter::registration* pt_reg =
     bp::converter::registry::query(pt_info);
   BOOST_ASSERT((pt_reg != nullptr) || ((*pt_reg).m_to_python != nullptr));
