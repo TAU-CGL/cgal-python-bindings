@@ -15,19 +15,20 @@ void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
 bp::object export_arr_linear_traits() {
-  auto traits = bp::class_<Traits>("Geometry_traits_2");
+  typedef aos2::Geometry_traits_2       GT;
+  auto traits = bp::class_<GT>("Geometry_traits_2");
   bp::scope traits_scope(traits);
-  export_AosTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
-  export_AosLandmarkTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
-  export_AosOpenBoundaryTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
+  export_AosTraits_2<GT, Copy_const_reference>(traits);
+  export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits);
+  export_AosOpenBoundaryTraits_2<GT, Copy_const_reference>(traits);
 
   bp::class_<Curve_2>("Curve_2")
     .def(bp::init<>())
     .def(bp::init<Segment_2&>())
     .def(bp::init<Ray_2&>())
     .def(bp::init<Line_2&>())
-    .def("source", &Curve_2::source, bp::return_value_policy<bp::copy_const_reference>())
-    .def("target", &Curve_2::target, bp::return_value_policy<bp::copy_const_reference>())
+    .def("source", &Curve_2::source, Copy_const_reference())
+    .def("target", &Curve_2::target, Copy_const_reference())
     .def("line", &Curve_2::line)
     .def("is_vertical", &Curve_2::is_vertical)
     .def("is_segment", &Curve_2::is_segment)
@@ -35,9 +36,9 @@ bp::object export_arr_linear_traits() {
     .def("is_ray", &Curve_2::ray)
     .def("is_line", &Curve_2::is_line)
     .def("line", &Curve_2::line)
-    .def("supporting_line", &Curve_2::supporting_line, bp::return_value_policy<bp::copy_const_reference>())
-    .def("left", &Curve_2::left, bp::return_value_policy<bp::copy_const_reference>())
-    .def("right", &Curve_2::right, bp::return_value_policy<bp::copy_const_reference>())
+    .def("supporting_line", &Curve_2::supporting_line, Copy_const_reference())
+    .def("left", &Curve_2::left, Copy_const_reference())
+    .def("right", &Curve_2::right, Copy_const_reference())
     .def<void (Curve_2::*)()>("set_left", &Curve_2::set_left)
     .def("set_left", set_left)
     .def<void (Curve_2::*)()>("set_right", &Curve_2::set_right)

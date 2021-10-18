@@ -21,7 +21,6 @@ static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 
 bp::object export_arr_circle_segment_traits() {
   typedef aos2::Geometry_traits_2       GT;
-
   auto traits = bp::class_<GT>("Geometry_traits_2")
     .def(bp::init<>());
   bp::scope traits_scope(traits);

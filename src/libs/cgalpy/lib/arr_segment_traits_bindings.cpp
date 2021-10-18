@@ -25,20 +25,21 @@ Segment_2 to_segment(Curve_2& c) { return Segment_2(c); }
 }
 
 bp::object export_arr_segment_traits() {
-  auto traits = bp::class_<aos2::Traits>("Geometry_traits_2");
+  typedef aos2::Geometry_traits_2       GT;
+  auto traits = bp::class_<GT>("Geometry_traits_2");
   bp::scope traits_scope(traits);
-  export_AosTraits_2<aos2::Traits, Copy_const_reference>(traits);
-  export_AosLandmarkTraits_2<aos2::Traits, Copy_const_reference>(traits);
-  export_AosDirectionalXMonotoneTraits_2<aos2::Traits, Copy_const_reference>(traits);
+  export_AosTraits_2<GT, Copy_const_reference>(traits);
+  export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits);
+  export_AosDirectionalXMonotoneTraits_2<GT, Copy_const_reference>(traits);
   traits
-    .def("is_in_x_range_2_object", &aos2::Traits::is_in_x_range_2_object)
-    .def("is_in_y_range_2_object", &aos2::Traits::is_in_y_range_2_object)
+    .def("is_in_x_range_2_object", &GT::is_in_x_range_2_object)
+    .def("is_in_y_range_2_object", &GT::is_in_y_range_2_object)
     ;
 
   const bp::type_info info = bp::type_id<aos2::Point_2>();
   const bp::converter::registration* reg = bp::converter::registry::query(info);
   BOOST_ASSERT((reg != nullptr) && ((*reg).m_to_python != nullptr));
-  traits_scope.attr("Point_2") = bp::handle<>(reg->m_class_object);
+  traits_scope.attr("Point_2") = bp::handle<>(reg->get_class_object());
 
   bp::class_<aos2::Curve_2>("Curve_2")
     .def(bp::init<>())
@@ -72,12 +73,12 @@ bp::object export_arr_segment_traits() {
   BOOST_ASSERT((cv_reg != nullptr) && ((*cv_reg).m_to_python != nullptr));
   traits_scope.attr("X_monotone_curve_2") = bp::handle<>(cv_reg->m_class_object);
 
-  bp::class_<aos2::Traits::Is_in_x_range_2>("Is_in_x_range_2", bp::no_init)
-    .def("__call__", &aos2::Traits::Is_in_x_range_2::operator());
+  bp::class_<GT::Is_in_x_range_2>("Is_in_x_range_2", bp::no_init)
+    .def("__call__", &GT::Is_in_x_range_2::operator());
     ;
 
-    bp::class_<aos2::Traits::Is_in_y_range_2>("Is_in_y_range_2", bp::no_init)
-    .def("__call__", &aos2::Traits::Is_in_y_range_2::operator());
+    bp::class_<GT::Is_in_y_range_2>("Is_in_y_range_2", bp::no_init)
+    .def("__call__", &GT::Is_in_y_range_2::operator());
     ;
 
   return traits;
