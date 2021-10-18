@@ -6,17 +6,17 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_EXPORT_ARRANGEMENTAPPROXIMATETRAITS_2_HPP
-#define CGALPY_EXPORT_ARRANGEMENTAPPROXIMATETRAITS_2_HPP
+#ifndef CGALPY_EXPORT_AOSAPPROXIMATETRAITS_2_HPP
+#define CGALPY_EXPORT_AOSAPPROXIMATETRAITS_2_HPP
 
-#include "export_ArrangementBasicTraits.hpp"
+#include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
 
 template <typename T, typename RVP, typename C>
-void export_ArrangementApproximateTraits_2 (C c) {
+void export_AosApproximateTraits_2 (C c) {
   static bool exported = false;
   if (exported) return;
 
-  export_ArrangementBasicTraits<T, RVP>(c);
+  export_AosBasicTraits<T, RVP>(c);
   bp::class_<typename T::Approximate_2>("Approximate_2", bp::no_init)
     .def("__call__", &T::Approximate_2::operator())
     ;
@@ -26,4 +26,4 @@ void export_ArrangementApproximateTraits_2 (C c) {
   exported = true;
 }
 
-#endif //CGALPY_EXPORT_ARRANGEMENTAPPROXIMATETRAITS_2_HPP
+#endif
