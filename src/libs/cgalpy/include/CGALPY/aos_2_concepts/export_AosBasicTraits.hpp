@@ -6,8 +6,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_EXPORT_ARRANGEMENTBASICTRAITS_HPP
-#define CGALPY_EXPORT_ARRANGEMENTBASICTRAITS_HPP
+#ifndef CGALPY_EXPORT_AOSBASICTRAITS_HPP
+#define CGALPY_EXPORT_AOSBASICTRAITS_HPP
 
 template<typename T, typename C>
 void export_Compare_at_x_left_2(C c, CGAL::Tag_true) {
@@ -22,7 +22,7 @@ template<typename T, typename C>
 void export_Compare_at_x_left_2(C c, CGAL::Tag_false) {}
 
 template <typename T, typename RVP, typename C>
-void export_ArrangementBasicTraits(C c) {
+void export_AosBasicTraits(C c) {
   static bool exported = false;
   if (exported) return;
 
@@ -97,4 +97,4 @@ void export_ArrangementBasicTraits(C c) {
   exported = true;
 }
 
-#endif //CGALPY_EXPORT_ARRANGEMENTBASICTRAITS_HPP
+#endif

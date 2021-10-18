@@ -6,17 +6,17 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_EXPORT_ARRANGEMENTDIRECTIONALXMONOTONETRAITS_2_HPP
-#define CGALPY_EXPORT_ARRANGEMENTDIRECTIONALXMONOTONETRAITS_2_HPP
+#ifndef CGALPY_EXPORT_AOSDIRECTIONALXMONOTONETRAITS_2_HPP
+#define CGALPY_EXPORT_AOSDIRECTIONALXMONOTONETRAITS_2_HPP
 
-#include "export_ArrangementXMonotoneTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosXMonotoneTraits_2.hpp"
 
 template <typename T, typename RVP, typename C>
-void export_ArrangementDirectionalXMonotoneTraits_2(C c) {
+void export_AosDirectionalXMonotoneTraits_2(C c) {
   static bool exported = false;
   if (exported) return;
 
-  export_ArrangementXMonotoneTraits_2<T, RVP>(c);
+  export_AosXMonotoneTraits_2<T, RVP>(c);
   bp::class_<typename T::Compare_endpoints_xy_2>("Compare_endpoints_xy_2",
                                                  bp::no_init)
     .def("__call__", &T::Compare_endpoints_xy_2::operator());
@@ -32,4 +32,4 @@ void export_ArrangementDirectionalXMonotoneTraits_2(C c) {
   exported = true;
 }
 
-#endif //CGALPY_EXPORT_ARRANGEMENTDIRECTIONALXMONOTONETRAITS_2_HPP
+#endif

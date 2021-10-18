@@ -6,17 +6,17 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_EXPORT_ARRANGEMENTCONSTRUCTXMONOTONECURVETRAITS_2_HPP
-#define CGALPY_EXPORT_ARRANGEMENTCONSTRUCTXMONOTONECURVETRAITS_2_HPP
+#ifndef CGALPY_EXPORT_AOSCONSTRUCTXMONOTONECURVETRAITS_2_HPP
+#define CGALPY_EXPORT_AOSCONSTRUCTXMONOTONECURVETRAITS_2_HPP
 
-#include "export_ArrangementBasicTraits.hpp"
+#include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
 
 template <typename T, typename RVP, typename C>
-void export_ArrangementConstructXMonotoneTraits_2(C c) {
+void export_AosConstructXMonotoneTraits_2(C c) {
   static bool exported = false;
   if (exported) return;
 
-  export_ArrangementBasicTraits<T, RVP>(c);
+  export_AosBasicTraits<T, RVP>(c);
 
   typedef typename T::Point_2                       Point_2;
   typedef typename T::X_monotone_curve_2            X_monotone_curve_2;
@@ -33,4 +33,4 @@ void export_ArrangementConstructXMonotoneTraits_2(C c) {
   exported = true;
 }
 
-#endif //CGALPY_EXPORT_ARRANGEMENTCONSTRUCTXMONOTONECURVETRAITS_2_HPP
+#endif

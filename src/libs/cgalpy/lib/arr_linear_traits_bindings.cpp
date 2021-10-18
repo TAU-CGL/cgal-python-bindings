@@ -7,9 +7,9 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/arrangement_2_concepts/export_ArrangementTraits_2.hpp"
-#include "CGALPY/arrangement_2_concepts/export_ArrangementLandmarkTraits_2.hpp"
-#include "CGALPY/arrangement_2_concepts/export_ArrangementOpenBoundaryTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosOpenBoundaryTraits_2.hpp"
 
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
@@ -17,9 +17,9 @@ void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 bp::object export_arr_linear_traits() {
   auto traits = bp::class_<Traits>("Geometry_traits_2");
   bp::scope traits_scope(traits);
-  export_ArrangementTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
-  export_ArrangementLandmarkTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
-  export_ArrangementOpenBoundaryTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
+  export_AosTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
+  export_AosLandmarkTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
+  export_AosOpenBoundaryTraits_2<Traits, bp::return_value_policy<bp::copy_const_reference>>(traits);
 
   bp::class_<Curve_2>("Curve_2")
     .def(bp::init<>())

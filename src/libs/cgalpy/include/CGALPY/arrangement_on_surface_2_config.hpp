@@ -73,13 +73,13 @@ template <bool b, typename Hb, typename Data> struct Halfedge_extended {};
 template <typename Hb, typename Data>
 struct Halfedge_extended<false, Hb, Data> { typedef Hb type; };
 template <typename Hb, typename Data> struct Halfedge_extended<true, Hb, Data>
-{ typedef CGAL::Arr_extended_vertex<Hb, Data> type; };
+{ typedef CGAL::Arr_extended_halfedge<Hb, Data> type; };
 
 template <bool b, typename Fb, typename Data> struct Face_extended {};
 template <typename Fb, typename Data>
 struct Face_extended<false, Fb, Data> { typedef Fb type; };
 template <typename Fb, typename Data> struct Face_extended<true, Fb, Data>
-{ typedef CGAL::Arr_extended_vertex<Fb, Data> type; };
+{ typedef CGAL::Arr_extended_face<Fb, Data> type; };
 
 } // end of aos2 namespace
 

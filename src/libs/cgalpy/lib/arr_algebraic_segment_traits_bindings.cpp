@@ -11,11 +11,11 @@
 #include <boost/python.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/arrangement_2_concepts/export_ArrangementTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 
 namespace bp = boost::python;
 
-bp::list to_double(aos2::TPoint_2& p) {
+bp::list to_double(aos2::Point_2& p) {
   bp::list lst = bp::list();
   auto pair = p.to_double();
   lst.append(pair.first);
@@ -26,16 +26,16 @@ bp::list to_double(aos2::TPoint_2& p) {
 template<typename T, typename S>
 void export_construct_point_2_call_operator(bp::class_<aos2::Construct_point_2>& cp_2_binding)
 {
-  cp_2_binding.def<aos2::TPoint_2(aos2::Construct_point_2::*)(const T&, const S&)>("__call__", &aos2::Construct_point_2::operator());
+  cp_2_binding.def<aos2::Point_2(aos2::Construct_point_2::*)(const T&, const S&)>("__call__", &aos2::Construct_point_2::operator());
 }
 
 template<typename T, typename S, typename R>
 void export_construct_point_2_call_operator(bp::class_<aos2::Construct_point_2>& cp_2_binding)
 {
-  cp_2_binding.def<aos2::TPoint_2(aos2::Construct_point_2::*)(const T&, const S&, R)>("__call__", &aos2::Construct_point_2::operator());
+  cp_2_binding.def<aos2::Point_2(aos2::Construct_point_2::*)(const T&, const S&, R)>("__call__", &aos2::Construct_point_2::operator());
 }
 
-void construct_x_monotone_segment_2_call_operator0(aos2::Construct_x_monotone_segment_2& construct, aos2::Curve_2& cv, aos2::TPoint_2& end_min, aos2::TPoint_2& end_max, bp::list& lst)
+void construct_x_monotone_segment_2_call_operator0(aos2::Construct_x_monotone_segment_2& construct, aos2::Curve_2& cv, aos2::Point_2& end_min, aos2::Point_2& end_max, bp::list& lst)
 {
   auto v = std::vector<aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
@@ -43,7 +43,7 @@ void construct_x_monotone_segment_2_call_operator0(aos2::Construct_x_monotone_se
   for (auto xcv : v) lst.append(xcv);
 }
 
-void construct_x_monotone_segment_2_call_operator1(aos2::Construct_x_monotone_segment_2& construct, aos2::TPoint_2& p, aos2::TPoint_2& q, bp::list& lst)
+void construct_x_monotone_segment_2_call_operator1(aos2::Construct_x_monotone_segment_2& construct, aos2::Point_2& p, aos2::Point_2& q, bp::list& lst)
 {
   auto v = std::vector<aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
@@ -51,7 +51,7 @@ void construct_x_monotone_segment_2_call_operator1(aos2::Construct_x_monotone_se
   for (auto xcv : v) lst.append(xcv);
 }
 
-void construct_x_monotone_segment_2_call_operator2(aos2::Construct_x_monotone_segment_2& construct, aos2::Curve_2& cv, aos2::TPoint_2& p, aos2::Traits::Site_of_point& site_of_p, bp::list& lst)
+void construct_x_monotone_segment_2_call_operator2(aos2::Construct_x_monotone_segment_2& construct, aos2::Curve_2& cv, aos2::Point_2& p, aos2::Traits::Site_of_point& site_of_p, bp::list& lst)
 {
   auto v = std::vector<aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
@@ -226,17 +226,17 @@ bp::object export_arr_algebraic_segment_traits() {
 
   auto traits = bp::class_<Tr>("Geometry_traits_2");
   bp::scope traits_scope(traits);
-  export_ArrangementTraits_2<Tr, Return_by_value>(traits);
+  export_AosTraits_2<Tr, Return_by_value>(traits);
   traits
     .def("construct_curve_2_object", &Tr::construct_curve_2_object)
     .def("construct_tpoint_2_object", &Tr::construct_point_2_object)
     .def("construct_x_monotone_segment_2_object", &Tr::construct_x_monotone_segment_2_object)
     ;
 
-  bp::class_<aos2::TPoint_2>("Point_2")
-    .def(bp::init<aos2::TPoint_2&>())
-    .def("curve", &aos2::TPoint_2::curve)
-    .def("arcno", &aos2::TPoint_2::arcno)
+  bp::class_<aos2::Point_2>("Point_2")
+    .def(bp::init<aos2::Point_2&>())
+    .def("curve", &aos2::Point_2::curve)
+    .def("arcno", &aos2::Point_2::arcno)
     .def("to_double", &to_double)
     .def(bp::self_ns::str(bp::self_ns::self))
     .def(bp::self_ns::repr(bp::self_ns::self))
