@@ -16,7 +16,8 @@
 namespace bp = boost::python;
 
 void export_arr_non_caching_segment_traits() {
-  bp::scope traits_scope = bp::class_<Traits>("Traits")
+  typedef aos2::Geometry_traits_2       GT;
+  bp::scope traits_scope = bp::class_<GT>("Traits")
     .def(bp::init<>())
     ;
 

@@ -12,13 +12,13 @@ else:
 
 CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
+PT_2_Shift = Aos2.PT_2_Shift
 Arrangement_2 = Aos2.Arrangement_2
+Polynomial_1 = Aos2.Polynomial_1
+Polynomial_2 = Aos2.Polynomial_2
+Integer = Aos2.Integer
+ipower = Aos2.ipower
 Traits = Arrangement_2.Geometry_traits_2
-PT_2_Shift = Arrangement_2.PT_2_Shift
-Polynomial_2 = Arrangement_2.Polynomial_2
-Polynomial_1 = Arrangement_2.Polynomial_1
-Integer = Arrangement_2.Integer
-ipower = Arrangement_2.ipower
 
 # based on https://doc.cgal.org/latest/Arrangement_on_surface_2/Arrangement_on_surface_2_2algebraic_curves_8cpp-example.html#_a2
 traits = Traits()
@@ -57,5 +57,7 @@ cv4 = construct_curve(f4)
 print('Adding curve', f4, "to the arrangement")
 Aos2.insert(arr, cv4)
 
-print( "The arrangement size:")
-print("V =", arr.number_of_vertices(), "E=", arr.number_of_edges(), "F=", arr.number_of_faces())
+print("The arrangement size: ", end='')
+print('V = {}, E = {}, F = {}'.format(arr.number_of_vertices(),
+                                      arr.number_of_edges(),
+                                      arr.number_of_faces()))

@@ -56,21 +56,24 @@ typedef typename CGAL::Cartesian <NtTraits::Rational>           RatKernel;
 typedef typename CGAL::Cartesian <NtTraits::Algebraic>          AlgKernel;
 typedef typename CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>    BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-typedef typename CORE::BigInt                                   Integer;
-typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>  BGT;
-typedef typename BGT::Construct_curve_2                         Construct_curve_2;
-typedef typename BGT::Construct_point_2                         Construct_point_2;
-typedef typename BGT::Construct_x_monotone_segment_2            Construct_x_monotone_segment_2;
-typedef typename BGT::Polynomial_2                              Polynomial_2;
+typedef CORE::BigInt                                            Integer;
+typedef CGAL::Algebraic_kernel_d_1<Integer>                     Algebraic_kernel_d_1;
+typedef CGAL::Algebraic_curve_kernel_2<Algebraic_kernel_d_1>    Algebraic_kernel_d_2;
+typedef Algebraic_kernel_d_1::Polynomial_1                      Polynomial_1;
+typedef Algebraic_kernel_d_2::Polynomial_2                      Polynomial_2;
+typedef Algebraic_kernel_d_2::Algebraic_real_1                  Algebraic_real_1;
+typedef Algebraic_kernel_d_2::Bound                             Bound;
+
 typedef CGAL::Polynomial_traits_d<Polynomial_2>                 PT_2;
 typedef PT_2::Construct_polynomial                              Construct_polynomial_2;
 typedef PT_2::Coefficient_type                                  Polynomial_1;
 typedef CGAL::Polynomial_traits_d<Polynomial_1>                 PT_1;
 typedef PT_1::Construct_polynomial                              Construct_polynomial_1;
-typedef typename BGT::Algebraic_kernel_d_1                      Algebraic_kernel_d_1;
-typedef typename Algebraic_kernel_d_1::Polynomial_1             Polynomial_1;
-typedef typename BGT::Algebraic_real_1                          Algebraic_real_1;
-typedef typename BGT::Bound                                     Bound;
+
+typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>  BGT;
+typedef typename BGT::Construct_curve_2                         Construct_curve_2;
+typedef typename BGT::Construct_point_2                         Construct_point_2;
+typedef typename BGT::Construct_x_monotone_segment_2            Construct_x_monotone_segment_2;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
