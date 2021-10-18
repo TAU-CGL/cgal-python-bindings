@@ -13,7 +13,8 @@
 namespace bp = boost::python;
 
 void export_arr_rational_function_traits() {
-  bp::scope traits_scope = bp::class_<Traits>("Traits")
+  typedef aos2::Geometry_traits_2       GT;
+  bp::scope traits_scope = bp::class_<GT>("Traits")
     .def(bp::init<>())
     ;
 }
