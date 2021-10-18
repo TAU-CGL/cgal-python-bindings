@@ -10,8 +10,8 @@
 #include <boost/python.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/arrangement_2_concepts/export_ArrangementTraits_2.hpp"
-#include "CGALPY/arrangement_2_concepts/export_ArrangementDirectionalXMonotoneTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
 
 namespace bp = boost::python;
 
@@ -25,8 +25,8 @@ bp::object export_arr_circle_segment_traits() {
   auto traits = bp::class_<GT>("Geometry_traits_2")
     .def(bp::init<>());
   bp::scope traits_scope(traits);
-  export_ArrangementTraits_2<GT, Return_by_value>(traits);
-  export_ArrangementDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits);
+  export_AosTraits_2<GT, Return_by_value>(traits);
+  export_AosDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits);
 
   bp::class_<CoordNT>("CoordNT")
     .def(bp::init<>())

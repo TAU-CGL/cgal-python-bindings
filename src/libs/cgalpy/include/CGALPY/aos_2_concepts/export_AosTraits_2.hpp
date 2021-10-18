@@ -1,11 +1,15 @@
+// Copyright (c) 2021 Israel.
+// All rights reserved to Tel Aviv University.
 //
-// Created by Nir on 12-Jul-21.
+// This file is private property of Tel Aviv University.
 //
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_EXPORT_ARRANGEMENTTRAITS_2_HPP
-#define CGALPY_EXPORT_ARRANGEMENTTRAITS_2_HPP
+#ifndef CGALPY_EXPORT_AOSTRAITS_2_HPP
+#define CGALPY_EXPORT_AOSTRAITS_2_HPP
 
-#include "export_ArrangementXMonotoneTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosXMonotoneTraits_2.hpp"
 
 template <typename T>
 void export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
@@ -25,11 +29,11 @@ void export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
 }
 
 template <typename T, typename RVP, typename C>
-void export_ArrangementTraits_2(C c) {
+void export_AosTraits_2(C c) {
   static bool exported = false;
   if (exported) return;
 
-  export_ArrangementXMonotoneTraits_2<T, RVP>(c);
+  export_AosXMonotoneTraits_2<T, RVP>(c);
 //    bp::class_<typename T::Curve_2>("Curve_2")
 //    .def(bp::init<>())
 //    .def(bp::init<Curve_2&>())
@@ -42,4 +46,4 @@ void export_ArrangementTraits_2(C c) {
   exported = true;
 }
 
-#endif //CGALPY_EXPORT_ARRANGEMENTTRAITS_2_HPP
+#endif

@@ -6,10 +6,10 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_EXPORT_ARRANGEMENTXMONOTONETRAITS_2_HPP
-#define CGALPY_EXPORT_ARRANGEMENTXMONOTONETRAITS_2_HPP
+#ifndef CGALPY_EXPORT_AOSXMONOTONETRAITS_2_HPP
+#define CGALPY_EXPORT_AOSXMONOTONETRAITS_2_HPP
 
-#include "export_ArrangementBasicTraits.hpp"
+#include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
 
 template <typename T>
 void intersect_2_call_operator(typename T::Intersect_2& i,
@@ -57,11 +57,11 @@ template<typename T, typename C>
 void export_Are_mergeable_2(C c, CGAL::Tag_false) {}
 
 template <typename T, typename RVP, typename C>
-void export_ArrangementXMonotoneTraits_2(C c) {
+void export_AosXMonotoneTraits_2(C c) {
   static bool exported = false;
   if (exported) return;
 
-  export_ArrangementBasicTraits<T, RVP>(c);
+  export_AosBasicTraits<T, RVP>(c);
 
   typedef typename T::Has_merge_category        Has_merge_category;
   typedef typename T::Intersect_2               Intersect_2;
@@ -83,4 +83,4 @@ void export_ArrangementXMonotoneTraits_2(C c) {
   exported = true;
 }
 
-#endif //CGALPY_EXPORT_ARRANGEMENTXMONOTONETRAITS_2_HPP
+#endif
