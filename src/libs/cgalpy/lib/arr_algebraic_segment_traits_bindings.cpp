@@ -51,7 +51,7 @@ void construct_x_monotone_segment_2_call_operator1(aos2::Construct_x_monotone_se
   for (auto xcv : v) lst.append(xcv);
 }
 
-void construct_x_monotone_segment_2_call_operator2(aos2::Construct_x_monotone_segment_2& construct, aos2::Curve_2& cv, aos2::Point_2& p, aos2::Traits::Site_of_point& site_of_p, bp::list& lst)
+void construct_x_monotone_segment_2_call_operator2(aos2::Construct_x_monotone_segment_2& construct, aos2::Curve_2& cv, aos2::Point_2& p, aos2::Geometry_traits_2::Site_of_point& site_of_p, bp::list& lst)
 {
   auto v = std::vector<aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
@@ -142,7 +142,7 @@ T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 
 bp::object export_arr_algebraic_segment_traits() {
   typedef aos2::Algebraic_real_1        AR1;
-  typedef aos2::Traits                  Tr;
+  typedef aos2::Geometry_traits_2       GT;
 
   bp::class_<aos2::Integer>("Integer")
     .def(bp::init<>())
@@ -202,13 +202,6 @@ bp::object export_arr_algebraic_segment_traits() {
     .def(bp::self *= bp::self)
     ;
 
-  bp::enum_<Tr::Site_of_point>("Site_of_point")
-    .value("POINT_IN_INTERIOR", Tr::Site_of_point::POINT_IN_INTERIOR)
-    .value("MIN_ENDPOINT", Tr::Site_of_point::MIN_ENDPOINT)
-    .value("MAX_ENDPOINT", Tr::Site_of_point::MAX_ENDPOINT)
-    .export_values()
-    ;
-
   //bind_construct_polynomial<PT_1>("Construct_polynomial_1");
   //bind_construct_polynomial<PT_2>("Construct_polynomial_2");
 
@@ -224,13 +217,13 @@ bp::object export_arr_algebraic_segment_traits() {
   bp::def("ipower", &ipower<aos2::Polynomial_1>);
   bp::def("ipower", &ipower<aos2::Polynomial_2>);
 
-  auto traits = bp::class_<Tr>("Geometry_traits_2");
+  auto traits = bp::class_<GT>("Geometry_traits_2");
   bp::scope traits_scope(traits);
-  export_AosTraits_2<Tr, Return_by_value>(traits);
+  export_AosTraits_2<GT, Return_by_value>(traits);
   traits
-    .def("construct_curve_2_object", &Tr::construct_curve_2_object)
-    .def("construct_tpoint_2_object", &Tr::construct_point_2_object)
-    .def("construct_x_monotone_segment_2_object", &Tr::construct_x_monotone_segment_2_object)
+    .def("construct_curve_2_object", &GT::construct_curve_2_object)
+    .def("construct_tpoint_2_object", &GT::construct_point_2_object)
+    .def("construct_x_monotone_segment_2_object", &GT::construct_x_monotone_segment_2_object)
     ;
 
   bp::class_<aos2::Point_2>("Point_2")
@@ -249,11 +242,13 @@ bp::object export_arr_algebraic_segment_traits() {
     .def(bp::self >= bp::self)
     ;
 
-  bp::class_<aos2::Curve_2>("Curve_2", bp::no_init)
+  bp::class_<aos2::Curve_2>("Curve_2")
+    .def(bp::init<aos2::Curve_2&>())
     .def("polynomial_2", &aos2::Curve_2::polynomial_2)
     ;
 
-  bp::class_<aos2::X_monotone_curve_2>("X_monotone_curve_2", bp::no_init)
+  bp::class_<aos2::X_monotone_curve_2>("X_monotone_curve_2")
+    .def(bp::init<aos2::X_monotone_curve_2&>())
     .def("curve", &aos2::X_monotone_curve_2::curve, bp::return_internal_reference<>())
     .def("is_vertical", &aos2::X_monotone_curve_2::is_vertical)
     .def("is_finite", &aos2::X_monotone_curve_2::is_finite)
@@ -277,6 +272,13 @@ bp::object export_arr_algebraic_segment_traits() {
     .def("__call__", &construct_x_monotone_segment_2_call_operator0)
     .def("__call__", &construct_x_monotone_segment_2_call_operator1)
     .def("__call__", &construct_x_monotone_segment_2_call_operator2)
+    ;
+
+  bp::enum_<GT::Site_of_point>("Site_of_point")
+    .value("POINT_IN_INTERIOR", GT::Site_of_point::POINT_IN_INTERIOR)
+    .value("MIN_ENDPOINT", GT::Site_of_point::MIN_ENDPOINT)
+    .value("MAX_ENDPOINT", GT::Site_of_point::MAX_ENDPOINT)
+    .export_values()
     ;
 
   return traits;
