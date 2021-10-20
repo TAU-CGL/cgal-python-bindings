@@ -10,6 +10,7 @@
 #define CGALPY_EXPORT_AOSTRAITS_2_HPP
 
 #include "CGALPY/aos_2_concepts/export_AosXMonotoneTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 
 template <typename T>
 void export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
@@ -28,17 +29,21 @@ void export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
   }
 }
 
-template <typename T, typename RVP, typename C>
-void export_AosTraits_2(C c) {
+template <typename T, typename RVP, typename C, typename Concepts>
+void export_AosTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosXMonotoneTraits_2<T, RVP>(c);
-//    bp::class_<typename T::Curve_2>("Curve_2")
-//    .def(bp::init<>())
-//    .def(bp::init<Curve_2&>())
-//    ;
-  bp::class_<typename T::Make_x_monotone_2>("Make_x_monotone_2", bp::no_init)
+  export_AosXMonotoneTraits_2<T, RVP>(c, concepts);
+
+  // bp::class_<typename T::Curve_2>("Curve_2")
+  //  .def(bp::init<>())
+  //  .def(bp::init<Curve_2&>())
+  //  ;
+  auto& classes = concepts.m_traits_classes;
+
+  classes.m_make_x_monotone_2 =
+    &bp::class_<typename T::Make_x_monotone_2>("Make_x_monotone_2", bp::no_init)
     .def("__call__", &export_Make_x_monotone_2_call_operator<T>);
 
   c.def("make_x_monotone_2_object", &T::make_x_monotone_2_object);

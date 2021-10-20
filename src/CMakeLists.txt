@@ -53,8 +53,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 #
 endif()
 
-# Use C++14 for this directory and its sub-directories.
-set(CMAKE_CXX_STANDARD 14)
+# Use C++17 for this directory and its sub-directories.
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 set(CGALPY_INSTALL_INC_DIR "include"
