@@ -9,7 +9,7 @@
 #ifndef CGALPY_EXPORT_AOSAPPROXIMATETRAITS_2_HPP
 #define CGALPY_EXPORT_AOSAPPROXIMATETRAITS_2_HPP
 
-#include "CGALPY/aos_2_concepts/Aos_aosapproximate_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 
 template <typename T, typename RVP, typename C, typename Concepts>
 void export_AosApproximateTraits_2(C c, Concepts& concepts) {
