@@ -10,19 +10,22 @@
 #define CGALPY_EXPORT_AOSDIRECTIONALXMONOTONETRAITS_2_HPP
 
 #include "CGALPY/aos_2_concepts/export_AosXMonotoneTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 
-template <typename T, typename RVP, typename C>
-void export_AosDirectionalXMonotoneTraits_2(C c) {
+template <typename T, typename RVP, typename C, typename Concepts>
+void export_AosDirectionalXMonotoneTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosXMonotoneTraits_2<T, RVP>(c);
-  bp::class_<typename T::Compare_endpoints_xy_2>("Compare_endpoints_xy_2",
-                                                 bp::no_init)
+  export_AosXMonotoneTraits_2<T, RVP>(c, concepts);
+
+  typedef typename T::Compare_endpoints_xy_2    Compare_endpoints_xy_2;
+  typedef typename T::Construct_opposite_2      Construct_opposite_2;
+
+  bp::class_<Compare_endpoints_xy_2>("Compare_endpoints_xy_2", bp::no_init)
     .def("__call__", &T::Compare_endpoints_xy_2::operator());
 
-  bp::class_<typename T::Construct_opposite_2>("Construct_opposite_2",
-                                                 bp::no_init)
+  bp::class_<Construct_opposite_2>("Construct_opposite_2", bp::no_init)
     .def("__call__", &T::Construct_opposite_2::operator());
 
   c.def("compare_endpoints_xy_2_object", &T::compare_endpoints_xy_2_object)

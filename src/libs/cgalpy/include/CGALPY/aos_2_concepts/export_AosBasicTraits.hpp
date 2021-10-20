@@ -9,7 +9,9 @@
 #ifndef CGALPY_EXPORT_AOSBASICTRAITS_HPP
 #define CGALPY_EXPORT_AOSBASICTRAITS_HPP
 
-template<typename T, typename C>
+#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
+
+template <typename T, typename C>
 void export_Compare_at_x_left_2(C c, CGAL::Tag_true) {
   bp::class_<typename T::Compare_y_at_x_left_2>("Compare_y_at_x_left_2",
                                                 bp::no_init)
@@ -21,8 +23,8 @@ void export_Compare_at_x_left_2(C c, CGAL::Tag_true) {
 template<typename T, typename C>
 void export_Compare_at_x_left_2(C c, CGAL::Tag_false) {}
 
-template <typename T, typename RVP, typename C>
-void export_AosBasicTraits(C c) {
+template <typename T, typename RVP, typename C, typename Concepts>
+void export_AosBasicTraits(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
@@ -51,31 +53,45 @@ void export_AosBasicTraits(C c) {
 //    .def(bp::init<>())
 //    .def(bp::init<X_monotone_curve_2&>())
 //    ;
-  bp::class_<Compare_x_2>("Compare_x_2", bp::no_init)
+
+  auto& classes = concepts.m_basic_traits_classes;
+  classes.m_compare_x_2 = &bp::class_<Compare_x_2>("Compare_x_2", bp::no_init)
     .def("__call__", &Compare_x_2::operator())
     ;
-  bp::class_<Compare_xy_2>("Compare_xy_2", bp::no_init)
+
+  classes.m_compare_xy_2 =
+    &bp::class_<Compare_xy_2>("Compare_xy_2", bp::no_init)
     .def("__call__", &Compare_xy_2::operator())
     ;
-  bp::class_<Construct_min_vertex_2>("Construct_min_vertex_2", bp::no_init)
+
+  classes.m_construct_min_vertex_2 =
+    &bp::class_<Construct_min_vertex_2>("Construct_min_vertex_2", bp::no_init)
     .def("__call__", &Construct_min_vertex_2::operator(), RVP())
     ;
-  bp::class_<Construct_max_vertex_2>("Construct_max_vertex_2", bp::no_init)
+
+  classes.m_construct_max_vertex_2 =
+    &bp::class_<Construct_max_vertex_2>("Construct_max_vertex_2", bp::no_init)
     .def("__call__", &Construct_max_vertex_2::operator(), RVP())
     ;
-  bp::class_<Is_vertical_2>("Is_vertical_2", bp::no_init)
+
+  classes.m_is_vertical_2 =
+    &bp::class_<Is_vertical_2>("Is_vertical_2", bp::no_init)
     .def("__call__", &Is_vertical_2::operator())
     ;
-  bp::class_<Compare_y_at_x_2>("Compare_y_at_x_2", bp::no_init)
+
+  classes.m_compare_y_at_x_2 =
+    &bp::class_<Compare_y_at_x_2>("Compare_y_at_x_2", bp::no_init)
     .def("__call__", &Compare_y_at_x_2::operator())
     ;
-  bp::class_<Compare_y_at_x_right_2>("Compare_y_at_x_right_2", bp::no_init)
+
+  classes.m_compare_y_at_x_right_2 =
+    &bp::class_<Compare_y_at_x_right_2>("Compare_y_at_x_right_2", bp::no_init)
     .def("__call__", &Compare_y_at_x_right_2::operator())
     ;
 
   using Equal1 = bool(Equal_2::*)(const Point_2&, const Point_2&) const;
   using Equal2 = bool(Equal_2::*)(const X_monotone_curve_2&, const X_monotone_curve_2&) const;
-  bp::class_<Equal_2>("Equal_2", bp::no_init)
+  classes.m_equal_2 = &bp::class_<Equal_2>("Equal_2", bp::no_init)
     .def("__call__", static_cast<Equal1>(&Equal_2::operator()))
     .def("__call__", static_cast<Equal2>(&Equal_2::operator()))
     ;
