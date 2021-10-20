@@ -6,11 +6,11 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_AOS_AOSAPPROXIMATE_TRAITS_CLASSES_HPP
-#define CGALPY_AOS_AOSAPPROXIMATE_TRAITS_CLASSES_HPP
+#ifndef CGALPY_AOS_APPROXIMATE_TRAITS_CLASSES_HPP
+#define CGALPY_AOS_APPROXIMATE_TRAITS_CLASSES_HPP
 
 template <typename T>
-struct Aos_aosapproximate_traits_classes {
+struct Aos_approximate_traits_classes {
 };
 
 #endif
