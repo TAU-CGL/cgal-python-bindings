@@ -11,14 +11,15 @@
 
 #include "CGALPY/aos_2_concepts/export_AosApproximateTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosConstructXMonotoneCurveTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/Aos_landmark_traits_classes.hpp"
 
-template <typename T, typename RVP, typename C>
-void export_AosLandmarkTraits_2 (C c) {
+template <typename T, typename RVP, typename C, typename Concepts>
+void export_AosLandmarkTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosApproximateTraits_2<T, RVP>(c);
-  export_AosConstructXMonotoneTraits_2<T, RVP>(c);
+  export_AosApproximateTraits_2<T, RVP>(c, concepts);
+  export_AosConstructXMonotoneTraits_2<T, RVP>(c, concepts);
 
   exported = true;
 }

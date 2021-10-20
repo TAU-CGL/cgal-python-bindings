@@ -10,6 +10,7 @@
 #define CGALPY_EXPORT_AOSXMONOTONETRAITS_2_HPP
 
 #include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
+#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
 
 template <typename T>
 void intersect_2_call_operator(typename T::Intersect_2& i,
@@ -56,21 +57,26 @@ void export_Are_mergeable_2(C c, CGAL::Tag_true) {
 template<typename T, typename C>
 void export_Are_mergeable_2(C c, CGAL::Tag_false) {}
 
-template <typename T, typename RVP, typename C>
-void export_AosXMonotoneTraits_2(C c) {
+template <typename T, typename RVP, typename C, typename Concepts>
+void export_AosXMonotoneTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T, RVP>(c);
+  export_AosBasicTraits<T, RVP>(c, concepts);
 
   typedef typename T::Has_merge_category        Has_merge_category;
   typedef typename T::Intersect_2               Intersect_2;
   typedef typename T::Split_2                   Split_2;
 
-  bp::class_<Intersect_2>("Intersect_2", bp::no_init)
+  auto& classes = concepts.m_x_monotone_traits_classes;
+
+  classes.m_intersect_2 =
+    &bp::class_<Intersect_2>("Intersect_2", bp::no_init)
     .def("__call__", &intersect_2_call_operator<T>)
     ;
-  bp::class_<Split_2>("Split_2", bp::no_init)
+
+  classes.m_split_2 =
+    &bp::class_<Split_2>("Split_2", bp::no_init)
     .def("__call__", &Split_2::operator())
     ;
 

@@ -9,15 +9,18 @@
 #ifndef CGALPY_EXPORT_AOSAPPROXIMATETRAITS_2_HPP
 #define CGALPY_EXPORT_AOSAPPROXIMATETRAITS_2_HPP
 
-#include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
+#include "CGALPY/aos_2_concepts/Aos_aosapproximate_traits_classes.hpp"
 
-template <typename T, typename RVP, typename C>
-void export_AosApproximateTraits_2 (C c) {
+template <typename T, typename RVP, typename C, typename Concepts>
+void export_AosApproximateTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T, RVP>(c);
-  bp::class_<typename T::Approximate_2>("Approximate_2", bp::no_init)
+  export_AosBasicTraits<T, RVP>(c, concepts);
+
+  typedef typename T::Approximate_2             Approximate_2;
+
+  bp::class_<Approximate_2>("Approximate_2", bp::no_init)
     .def("__call__", &T::Approximate_2::operator())
     ;
 

@@ -10,13 +10,14 @@
 #define CGALPY_EXPORT_AOSCONSTRUCTXMONOTONECURVETRAITS_2_HPP
 
 #include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
+#include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 
-template <typename T, typename RVP, typename C>
-void export_AosConstructXMonotoneTraits_2(C c) {
+template <typename T, typename RVP, typename C, typename Concepts>
+void export_AosConstructXMonotoneTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T, RVP>(c);
+  export_AosBasicTraits<T, RVP>(c, concepts);
 
   typedef typename T::Point_2                       Point_2;
   typedef typename T::X_monotone_curve_2            X_monotone_curve_2;
