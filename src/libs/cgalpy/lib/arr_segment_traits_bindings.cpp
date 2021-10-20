@@ -8,6 +8,9 @@
 
 #define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
 
+#include <unordered_set>
+#include <any>
+
 #include <boost/python.hpp>
 #include <boost/assert.hpp>
 
@@ -15,6 +18,12 @@
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
+
+#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_landmark_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 
 namespace bp = boost::python;
 
@@ -28,9 +37,17 @@ bp::object export_arr_segment_traits() {
   typedef aos2::Geometry_traits_2       GT;
   auto traits = bp::class_<GT>("Geometry_traits_2");
   bp::scope traits_scope(traits);
-  export_AosTraits_2<GT, Copy_const_reference>(traits);
-  export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits);
-  export_AosDirectionalXMonotoneTraits_2<GT, Copy_const_reference>(traits);
+  struct Concepts {
+    Aos_basic_traits_classes<GT> m_basic_traits_classes;
+    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
+    Aos_traits_classes<GT> m_traits_classes;
+    Aos_landmark_traits_classes<GT> m_landmark_traits_classes;
+    Aos_directional_x_monotone_traits_classes<GT> m_directional_x_monotone_traits_classes;
+  };
+  Concepts concepts;
+  export_AosTraits_2<GT, Copy_const_reference>(traits, concepts);
+  export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits, concepts);
+  export_AosDirectionalXMonotoneTraits_2<GT, Copy_const_reference>(traits, concepts);
   traits
     .def("is_in_x_range_2_object", &GT::is_in_x_range_2_object)
     .def("is_in_y_range_2_object", &GT::is_in_y_range_2_object)
@@ -51,7 +68,7 @@ bp::object export_arr_segment_traits() {
     .def("line", &aos2::Curve_2::line, Copy_const_reference())
     .def("is_vertical", &aos2::Curve_2::is_vertical)
     .def("flip", &aos2::Curve_2::flip)
-    .def("left", &aos2::Curve_2::left, Copy_const_reference())
+    // .def("left", &aos2::Curve_2::left, Copy_const_reference())
     .def("right", &aos2::Curve_2::right, Copy_const_reference())
     .def("set_left", &aos2::Curve_2::set_left)
     .def("set_right", &aos2::Curve_2::set_right)
