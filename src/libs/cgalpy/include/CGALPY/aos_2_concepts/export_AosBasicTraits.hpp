@@ -11,20 +11,6 @@
 
 #include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
 
-//
-template <typename T, typename C>
-void export_Compare_at_x_left_2(C c, CGAL::Tag_true) {
-  bp::class_<typename T::Compare_y_at_x_left_2>("Compare_y_at_x_left_2", bp::no_init)
-    .def("__call__", &T::Compare_y_at_x_left_2::operator())
-    ;
-
-  c.def("compare_y_at_x_left_2_object", &T::compare_y_at_x_left_2_object);
-}
-
-//
-template <typename T, typename C>
-void export_Compare_at_x_left_2(C c, CGAL::Tag_false) {}
-
 // Introduce a new class object
 // Observe that bp::no_init is passed to the constructor of the class object, which makes this
 // template function unsuitable for Point_2 and X_montone_curve_2.
@@ -35,6 +21,24 @@ bp::class_<Type>* add_class_object(bp::scope& my_scope) {
   my_scope.attr(Name) = tco;
   return nullptr;
 }
+
+//
+template <typename T, typename C, typename Classes>
+void export_compare_at_x_left_2(C c, Classes& classes, CGAL::Tag_true) {
+  typedef typename T::Compare_y_at_x_left_2     Compare_y_at_x_left_2;
+  bp::scope traits_scope(c);
+  static const char compare_y_at_x_left_2[] = "Compare_y_at_x_left_2";
+  classes.m_compare_y_at_x_left_2 =
+    add_class_object<Compare_y_at_x_left_2, compare_y_at_x_left_2>(traits_scope);
+  if (classes.m_compare_y_at_x_left_2)
+    classes.m_compare_y_at_x_left_2->def("__call__", &T::Compare_y_at_x_left_2::operator());
+
+  c.def("compare_y_at_x_left_2_object", &T::compare_y_at_x_left_2_object);
+}
+
+//
+template <typename T, typename C, typename Classes>
+void export_compare_at_x_left_2(C c, Classes& classes, CGAL::Tag_false) {}
 
 //! Export the basic traits function objects
 template <typename T, typename RVP, typename C, typename Concepts>
@@ -141,7 +145,7 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
     .def("equal_2_object", &T::equal_2_object)
     ;
 
-  export_Compare_at_x_left_2<T>(c, Has_left_category());
+  export_compare_at_x_left_2<T>(c, classes.m_compare_y_at_x_left_2_class, Has_left_category());
 
   exported = true;
 }
