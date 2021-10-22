@@ -28,8 +28,8 @@ struct Aos_x_monotone_traits_classes {
   ~Aos_x_monotone_traits_classes() {
     if (m_intersect_2) delete m_intersect_2;
     if (m_split_2) delete m_split_2;
-    if (m_are_mergeable_2) delete m_are_mergeable_2;
-    if (m_merge_2) delete m_merge_2;
+    //if (m_are_mergeable_2) delete m_are_mergeable_2;
+    //if (m_merge_2) delete m_merge_2;
   }
 
   bp::class_<Intersect_2>* m_intersect_2;

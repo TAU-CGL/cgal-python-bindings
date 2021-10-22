@@ -28,7 +28,8 @@ void intersect_2_call_operator(typename T::Intersect_2& i,
     if (pair* pa = boost::get<pair>(&o)) {
       bp::tuple tup = bp::make_tuple(pa->first, pa->second);
       res.append(tup);
-    } else if (X_monotone_curve_2* curve = boost::get<X_monotone_curve_2>(&o)){
+    }
+    else if (X_monotone_curve_2* curve = boost::get<X_monotone_curve_2>(&o)){
       res.append(*curve);
     }
   }
@@ -70,15 +71,11 @@ void export_AosXMonotoneTraits_2(C c, Concepts& concepts) {
 
   auto& classes = concepts.m_x_monotone_traits_classes;
 
-  classes.m_intersect_2 =
-    &bp::class_<Intersect_2>("Intersect_2", bp::no_init)
-    .def("__call__", &intersect_2_call_operator<T>)
-    ;
+  classes.m_intersect_2 = new bp::class_<Intersect_2>("Intersect_2", bp::no_init);
+  classes.m_intersect_2->def("__call__", &intersect_2_call_operator<T>);
 
-  classes.m_split_2 =
-    &bp::class_<Split_2>("Split_2", bp::no_init)
-    .def("__call__", &Split_2::operator())
-    ;
+  classes.m_split_2 = new bp::class_<Split_2>("Split_2", bp::no_init);
+  classes.m_split_2->def("__call__", &Split_2::operator());
 
   c.def("intersect_2_object", &T::intersect_2_object);
   c.def("split_2_object", &T::split_2_object);
