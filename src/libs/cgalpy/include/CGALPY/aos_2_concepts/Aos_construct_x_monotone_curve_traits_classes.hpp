@@ -11,6 +11,22 @@
 
 template <typename T>
 struct Aos_construct_x_monotone_curve_traits_classes {
+  typedef typename T::Point_2                       Point_2;
+  typedef typename T::X_monotone_curve_2            X_monotone_curve_2;
+  typedef typename T::Construct_x_monotone_curve_2  Construct_x_monotone_curve_2;
+
+  // Constructor
+  Aos_construct_x_monotone_curve_traits_classes() :
+    m_construct_x_monotone_curve_2(nullptr)
+  {}
+
+  // Destructor
+  ~Aos_construct_x_monotone_curve_traits_classes() {
+    if (m_construct_x_monotone_curve_2) delete m_construct_x_monotone_curve_2;
+  }
+
+  // Class objects
+  bp::class_<Construct_x_monotone_curve_2>* m_construct_x_monotone_curve_2;
 };
 
 #endif

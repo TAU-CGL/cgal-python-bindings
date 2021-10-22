@@ -25,6 +25,7 @@
 #include "CGALPY/aos_2_concepts/Aos_landmark_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 
 namespace bp = boost::python;
 
@@ -41,6 +42,8 @@ bp::object export_arr_segment_traits() {
     Aos_landmark_traits_classes<GT> m_landmark_traits_classes;
     Aos_directional_x_monotone_traits_classes<GT> m_directional_x_monotone_traits_classes;
     Aos_approximate_traits_classes<GT> m_approximate_traits_classes;
+    Aos_construct_x_monotone_curve_traits_classes<GT>
+      m_construct_x_monotone_curve_traits_classes;
   };
   Concepts concepts;
   export_AosTraits_2<GT, Copy_const_reference>(traits, concepts);
