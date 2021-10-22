@@ -9,6 +9,16 @@
 #ifndef CGALPY_AOS_BASIC_TRAITS_CLASSES_HPP
 #define CGALPY_AOS_BASIC_TRAITS_CLASSES_HPP
 
+template <typename T, typename Tag = CGAL::Tag_false>
+struct Compare_y_at_x_left_2_class { /* empty */ };
+
+template <typename T>
+struct Compare_y_at_x_left_2_class<T, CGAL::Tag_true> {
+  typedef typename T::Compare_y_at_x_left_2     Compare_y_at_x_left_2;
+
+  bp::class_<Compare_y_at_x_left_2>* m_compare_y_at_x_left_2;
+};
+
 template <typename T>
 struct Aos_basic_traits_classes {
   typedef typename T::Point_2                   Point_2;
@@ -21,7 +31,6 @@ struct Aos_basic_traits_classes {
   typedef typename T::Is_vertical_2             Is_vertical_2;
   typedef typename T::Compare_y_at_x_2          Compare_y_at_x_2;
   typedef typename T::Compare_y_at_x_right_2    Compare_y_at_x_right_2;
-  // typedef typename T::Compare_y_at_x_left_2     Compare_y_at_x_left_2;
 
   // Constructor
   Aos_basic_traits_classes() :
@@ -63,7 +72,8 @@ struct Aos_basic_traits_classes {
   bp::class_<Compare_y_at_x_2>* m_compare_y_at_x_2;
   bp::class_<Compare_y_at_x_right_2>* m_compare_y_at_x_right_2;
 
-  // bp::class_<Compare_y_at_x_left_2>* m_compare_y_at_x_left_2;
+  typedef typename T::Has_left_category         Has_left_category;
+  Compare_y_at_x_left_2_class<T, Has_left_category> m_compare_y_at_x_left_2_class;
 };
 
 #endif
