@@ -14,13 +14,13 @@ CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
 Arrangement_2 = Aos2.Arrangement_2
 Point_2 = Arrangement_2.Geometry_traits_2.Point_2
-Curve_2 = Arrangement_2.Geometry_traits_2.Curve_2
+X_monotone_curve_2 = Arrangement_2.Geometry_traits_2.X_monotone_curve_2
 
 arr = Arrangement_2()
-c1 = Curve_2(Point_2(0, 0), Point_2(2, 0))
-c2 = Curve_2(Point_2(1, 2), Point_2(1, -2))
-c3 = Curve_2(Point_2(0, 0), Point_2(1, 2))
-c4 = Curve_2(Point_2(1, -2), Point_2(2, 0))
+c1 = X_monotone_curve_2(Point_2(0, 0), Point_2(2, 0))
+c2 = X_monotone_curve_2(Point_2(1, 2), Point_2(1, -2))
+c3 = X_monotone_curve_2(Point_2(0, 0), Point_2(1, 2))
+c4 = X_monotone_curve_2(Point_2(1, -2), Point_2(2, 0))
 
 # Inserting the curves into the arrangement
 Aos2.insert(arr, [c1, c2, c3, c4])
