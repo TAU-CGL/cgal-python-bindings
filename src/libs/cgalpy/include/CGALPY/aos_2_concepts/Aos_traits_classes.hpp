@@ -14,6 +14,18 @@ struct Aos_traits_classes {
   typedef typename T::Curve_2                   Curve_2;
   typedef typename T::Make_x_monotone_2         Make_x_monotone_2;
 
+  // Constructor
+  Aos_traits_classes() :
+    m_curve_2(nullptr),
+    m_make_x_monotone_2(nullptr)
+  {}
+
+  // Destructor
+  ~Aos_traits_classes() {
+    if (m_curve_2) delete m_curve_2;
+    if (m_make_x_monotone_2) delete m_make_x_monotone_2;
+  }
+
   bp::class_<Curve_2>* m_curve_2;
   bp::class_<Make_x_monotone_2>* m_make_x_monotone_2;
 };
