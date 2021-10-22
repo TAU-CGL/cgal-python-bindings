@@ -19,7 +19,7 @@ void export_AosLandmarkTraits_2(C c, Concepts& concepts) {
   if (exported) return;
 
   export_AosApproximateTraits_2<T, RVP>(c, concepts);
-  export_AosConstructXMonotoneTraits_2<T, RVP>(c, concepts);
+  export_AosConstructXMonotoneCurveTraits_2<T, RVP>(c, concepts);
 
   exported = true;
 }
