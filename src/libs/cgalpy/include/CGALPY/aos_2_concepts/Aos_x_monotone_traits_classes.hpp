@@ -16,6 +16,22 @@ struct Aos_x_monotone_traits_classes {
   typedef typename T::Are_mergeable_2           Are_mergeable_2;
   typedef typename T::Merge_2                   Merge_2;
 
+  // Constructor
+  Aos_x_monotone_traits_classes() :
+    m_intersect_2(nullptr),
+    m_split_2(nullptr),
+    m_are_mergeable_2(nullptr),
+    m_merge_2(nullptr)
+  {}
+
+  // Destructor
+  ~Aos_x_monotone_traits_classes() {
+    if (m_intersect_2) delete m_intersect_2;
+    if (m_split_2) delete m_split_2;
+    if (m_are_mergeable_2) delete m_are_mergeable_2;
+    if (m_merge_2) delete m_merge_2;
+  }
+
   bp::class_<Intersect_2>* m_intersect_2;
   bp::class_<Split_2>* m_split_2;
   bp::class_<Are_mergeable_2>* m_are_mergeable_2;

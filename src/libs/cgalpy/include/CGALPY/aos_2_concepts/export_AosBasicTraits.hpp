@@ -58,20 +58,18 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   bp::handle<> point_co(bp::objects::registered_class_object(bp::type_id<Point_2>()));
   if (point_co.get() != 0) traits_scope.attr("Point_2") = point_co;
   else {
-    auto point_co = new bp::class_<Point_2>("Point_2");
-    point_co->def(bp::init<>());
-    point_co->def(bp::init<Point_2&>());
-    classes.m_point_2 =  point_co;
+    classes.m_point_2 = new bp::class_<Point_2>("Point_2");
+    classes.m_point_2->def(bp::init<>());
+    classes.m_point_2->def(bp::init<Point_2&>());
   }
 
   // X_monotone_curve_2
   bp::handle<> xcv_co(bp::objects::registered_class_object(bp::type_id<X_monotone_curve_2>()));
   if (xcv_co.get() != 0) traits_scope.attr("X_monotone_curve_2") = xcv_co;
   else {
-    auto xcv_co = new bp::class_<X_monotone_curve_2>("X_monotone_curve_2");
-    xcv_co->def(bp::init<>());
-    xcv_co->def(bp::init<X_monotone_curve_2&>());
-    classes.m_x_monotone_curve_2 =  xcv_co;
+    classes.m_x_monotone_curve_2 = new bp::class_<X_monotone_curve_2>("X_monotone_curve_2");
+    classes.m_x_monotone_curve_2->def(bp::init<>());
+    classes.m_x_monotone_curve_2->def(bp::init<X_monotone_curve_2&>());
   }
 
   // Compare_x_2
