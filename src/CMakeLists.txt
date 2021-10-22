@@ -91,7 +91,9 @@ if (${CGALPY_KERNEL_D_BINDINGS} AND
     SET(CGALPY_SPATIAL_SEARCHING_BINDINGS OFF)
     message(WARNING "Eigen3 not found!\nTurning of the generations of\n(i) dD Kernel, and\n(ii) spatial searching bindings")
   endif()
-  include(CGAL_Eigen3_support)
+  # include(CGAL_Eigen3_support)
+  find_package(Eigen3)
+  include( ${EIGEN3_USE_FILE} )
 endif()
 
 # Add subdirectories
