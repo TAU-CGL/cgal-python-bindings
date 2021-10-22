@@ -13,7 +13,7 @@
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 
 template <typename T, typename RVP, typename C, typename Concepts>
-void export_AosConstructXMonotoneTraits_2(C c, Concepts& concepts) {
+void export_AosConstructXMonotoneCurveTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 

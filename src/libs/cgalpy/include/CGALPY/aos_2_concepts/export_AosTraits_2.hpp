@@ -34,16 +34,23 @@ void export_AosTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
+  typedef typename T::Curve_2                   Curve_2;
+  typedef typename T::Make_x_monotone_2         Make_x_monotone_2;
+
   export_AosXMonotoneTraits_2<T, RVP>(c, concepts);
 
-  // bp::class_<typename T::Curve_2>("Curve_2")
-  //  .def(bp::init<>())
-  //  .def(bp::init<Curve_2&>())
-  //  ;
+  bp::scope traits_scope(c);
   auto& classes = concepts.m_traits_classes;
 
+  // bp::handle<> cv_co(bp::objects::registered_class_object(bp::type_id<Curve_2>()));
+  // if (cv_co.get() != 0) traits_scope.attr("Curve_2") = cv_co;
+  // else classes.m_curve_2 = &bp::class_<Curve_2>("Curve_2")
+  //        .def(bp::init<>())
+  //        .def(bp::init<Curve_2&>())
+  //        ;
+
   classes.m_make_x_monotone_2 =
-    &bp::class_<typename T::Make_x_monotone_2>("Make_x_monotone_2", bp::no_init)
+    &bp::class_<Make_x_monotone_2>("Make_x_monotone_2", bp::no_init)
     .def("__call__", &export_Make_x_monotone_2_call_operator<T>);
 
   c.def("make_x_monotone_2_object", &T::make_x_monotone_2_object);
