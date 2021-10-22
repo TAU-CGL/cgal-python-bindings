@@ -21,9 +21,8 @@ void export_AosApproximateTraits_2(C c, Concepts& concepts) {
   typedef typename T::Approximate_2             Approximate_2;
 
   auto& classes = concepts.m_approximate_traits_classes;
-  classes.m_approximate_2 = &bp::class_<Approximate_2>("Approximate_2", bp::no_init)
-    .def("__call__", &T::Approximate_2::operator())
-    ;
+  classes.m_approximate_2 = new bp::class_<Approximate_2>("Approximate_2", bp::no_init);
+  classes.m_approximate_2->def("__call__", &T::Approximate_2::operator());
 
   c.def("Approximate_2", &T::approximate_2_object);
 

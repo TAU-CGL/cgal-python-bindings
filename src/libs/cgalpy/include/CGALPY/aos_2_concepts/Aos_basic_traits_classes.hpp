@@ -62,6 +62,7 @@ struct Aos_basic_traits_classes {
   bp::class_<Is_vertical_2>* m_is_vertical_2;
   bp::class_<Compare_y_at_x_2>* m_compare_y_at_x_2;
   bp::class_<Compare_y_at_x_right_2>* m_compare_y_at_x_right_2;
+
   // bp::class_<Compare_y_at_x_left_2>* m_compare_y_at_x_left_2;
 };
 

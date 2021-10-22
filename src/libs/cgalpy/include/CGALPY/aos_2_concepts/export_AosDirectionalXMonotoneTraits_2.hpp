@@ -22,11 +22,15 @@ void export_AosDirectionalXMonotoneTraits_2(C c, Concepts& concepts) {
   typedef typename T::Compare_endpoints_xy_2    Compare_endpoints_xy_2;
   typedef typename T::Construct_opposite_2      Construct_opposite_2;
 
-  bp::class_<Compare_endpoints_xy_2>("Compare_endpoints_xy_2", bp::no_init)
-    .def("__call__", &T::Compare_endpoints_xy_2::operator());
+  auto& classes = concepts.m_directional_x_monotone_traits_classes;
 
-  bp::class_<Construct_opposite_2>("Construct_opposite_2", bp::no_init)
-    .def("__call__", &T::Construct_opposite_2::operator());
+  classes.m_compare_endpoints_xy_2 =
+    new bp::class_<Compare_endpoints_xy_2>("Compare_endpoints_xy_2", bp::no_init);
+  classes.m_compare_endpoints_xy_2->def("__call__", &T::Compare_endpoints_xy_2::operator());
+
+  classes.m_construct_opposite_2 =
+    new bp::class_<Construct_opposite_2>("Construct_opposite_2", bp::no_init);
+  classes.m_construct_opposite_2->def("__call__", &T::Construct_opposite_2::operator());
 
   c.def("compare_endpoints_xy_2_object", &T::compare_endpoints_xy_2_object)
     .def("construct_opposite_2_object", &T::construct_opposite_2_object)
