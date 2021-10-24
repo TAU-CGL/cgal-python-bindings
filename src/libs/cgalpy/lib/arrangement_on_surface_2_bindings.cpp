@@ -351,7 +351,7 @@ void export_arrangement_on_surface_2() {
 #endif
 
   {
-    bp::scope aos_scope = bp::class_<Arr2>("Arrangement_2")
+    bp::scope arr_scope = bp::class_<Arr2>("Arrangement_2")
       .def(bp::init<>())
       .def(bp::init<Arr2&>())
       .def("halfedges", bp::range<bp::return_internal_reference<>>(&aos2::halfedges_begin, &aos2::halfedges_end))
@@ -398,7 +398,7 @@ void export_arrangement_on_surface_2() {
     export_face();
 
     // Expose "Traits" within "Arrangement_2"
-    aos_scope.attr("Geometry_traits_2") = traits_object;
+    arr_scope.attr("Geometry_traits_2") = traits_object;
   }
 
   //free functions
