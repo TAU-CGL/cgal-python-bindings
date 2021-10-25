@@ -12,6 +12,8 @@
 #include "CGALPY/aos_2_concepts/export_AosXMonotoneTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 
+#include "CGALPY/add_class_object.hpp"
+
 template <typename T>
 void export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
                                             typename T::Curve_2& c,
@@ -42,13 +44,8 @@ void export_AosTraits_2(C c, Concepts& concepts) {
   bp::scope traits_scope(c);
   auto& classes = concepts.m_traits_classes;
 
-  bp::handle<> cv_co(bp::objects::registered_class_object(bp::type_id<Curve_2>()));
-  if (cv_co.get() != 0) traits_scope.attr("Curve_2") = cv_co;
-  else {
-    classes.m_curve_2 = new bp::class_<Curve_2>("Curve_2");
-    classes.m_curve_2->def(bp::init<>());
-    classes.m_curve_2->def(bp::init<Curve_2&>());
-  }
+  static const char curve_2[] = "Curve_2";
+  add_class_object<Curve_2, curve_2>(traits_scope, classes.m_curve_2);
 
   classes.m_make_x_monotone_2 =
     new bp::class_<Make_x_monotone_2>("Make_x_monotone_2", bp::no_init);

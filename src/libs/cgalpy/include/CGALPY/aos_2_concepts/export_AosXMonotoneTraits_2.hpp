@@ -35,28 +35,27 @@ void intersect_2_call_operator(typename T::Intersect_2& i,
   }
 }
 
-template<typename T, typename C>
-void export_Merge_2(C c, CGAL::Tag_true) {
-  bp::class_<typename T::Merge_2>("Merge_2", bp::no_init)
-    .def("__call__", &T::Merge_2::operator())
-    ;
+template<typename T, typename C, typename Classes>
+void export_Merge_2(C c, Classes& classes, CGAL::Tag_true) {
+  typedef typename T::Merge_2   Merge_2;
+  classes.m_merge_2 = new bp::class_<Merge_2>("Merge_2", bp::no_init);
+  classes.m_merge_2->def("__call__", &Merge_2::operator());
   c.def("merge_2_object", &T::merge_2_object);
 }
 
-template<typename T, typename C>
-void export_Merge_2(C c, CGAL::Tag_false) {}
+template<typename T, typename C, typename Classes>
+void export_Merge_2(C c, Classes& classes, CGAL::Tag_false) {}
 
-template<typename T, typename C>
-void export_Are_mergeable_2(C c, CGAL::Tag_true) {
+template<typename T, typename C, typename Classes>
+void export_Are_mergeable_2(C c, Classes& classes, CGAL::Tag_true) {
   typedef typename T::Are_mergeable_2   Are_mergeable_2;
-  bp::class_<typename T::Are_mergeable_2>("Are_mergeable_2", bp::no_init)
-    .def("__call__", &Are_mergeable_2::operator())
-    ;
+  classes.m_are_mergeable_2 = new bp::class_<Are_mergeable_2>("Are_mergeable_2", bp::no_init);
+  classes.m_are_mergeable_2->def("__call__", &Are_mergeable_2::operator());
   c.def("are_mergeable_2_object", &T::are_mergeable_2_object);
 }
 
-template<typename T, typename C>
-void export_Are_mergeable_2(C c, CGAL::Tag_false) {}
+template<typename T, typename C, typename Classes>
+void export_Are_mergeable_2(C c, Classes& classes, CGAL::Tag_false) {}
 
 template <typename T, typename RVP, typename C, typename Concepts>
 void export_AosXMonotoneTraits_2(C c, Concepts& concepts) {
@@ -80,8 +79,8 @@ void export_AosXMonotoneTraits_2(C c, Concepts& concepts) {
   c.def("intersect_2_object", &T::intersect_2_object);
   c.def("split_2_object", &T::split_2_object);
 
-  export_Are_mergeable_2<T>(c, Has_merge_category());
-  export_Merge_2<T>(c, Has_merge_category());
+  export_Are_mergeable_2<T>(c, classes, Has_merge_category());
+  export_Merge_2<T>(c, classes, Has_merge_category());
 
   exported = true;
 }

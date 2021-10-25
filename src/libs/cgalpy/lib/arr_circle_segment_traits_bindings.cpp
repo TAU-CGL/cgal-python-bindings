@@ -13,6 +13,11 @@
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
 
+#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
+
 namespace bp = boost::python;
 
 typedef typename aos2::Geometry_traits_2::CoordNT CoordNT;
@@ -24,8 +29,15 @@ bp::object export_arr_circle_segment_traits() {
   auto traits = bp::class_<GT>("Geometry_traits_2")
     .def(bp::init<>());
   bp::scope traits_scope(traits);
-  export_AosTraits_2<GT, Return_by_value>(traits);
-  export_AosDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits);
+  struct Concepts {
+    Aos_basic_traits_classes<GT> m_basic_traits_classes;
+    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
+    Aos_traits_classes<GT> m_traits_classes;
+    Aos_directional_x_monotone_traits_classes<GT> m_directional_x_monotone_traits_classes;
+  };
+  Concepts concepts;
+  export_AosTraits_2<GT, Return_by_value>(traits, concepts);
+  export_AosDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits, concepts);
 
   bp::class_<CoordNT>("CoordNT")
     .def(bp::init<>())
@@ -63,8 +75,8 @@ bp::object export_arr_circle_segment_traits() {
     .def(bp::self /= bp::self)
     ;
 
-  bp::class_<aos2::Point_2>("Point_2")
-    .def(bp::init<>())
+  auto& p2_co = *(concepts.m_basic_traits_classes.m_point_2);
+  p2_co
     .def(bp::init<FT&, FT&>())
     .def(bp::init<CoordNT&, CoordNT&>())
     .def(bp::init<double, double>())
@@ -77,8 +89,8 @@ bp::object export_arr_circle_segment_traits() {
     .setattr("__hash__", bp::object());
     ;
 
-  bp::class_<aos2::X_monotone_curve_2>("X_monotone_curve_2")
-    .def(bp::init<>())
+  auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
+  xcv_co
     .def(bp::init<Point_2&, Point_2&>())
     .def(bp::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
     .def(bp::init<Circle_2&, aos2::Point_2&, aos2::Point_2&, CGAL::Orientation>())
@@ -97,8 +109,8 @@ bp::object export_arr_circle_segment_traits() {
     .def(bp::self_ns::repr(bp::self_ns::self))
     ;
 
-  bp::class_<aos2::Curve_2>("Curve_2")
-    .def(bp::init<>())
+  auto& cv_co = *(concepts.m_traits_classes.m_curve_2);
+  cv_co
     .def(bp::init<Segment_2&>())
     .def(bp::init<Point_2&, Point_2&>())
     .def(bp::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
