@@ -6,6 +6,14 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+
+#include <unordered_set>
+#include <any>
+
+#include <boost/python.hpp>
+#include <boost/assert.hpp>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
