@@ -29,7 +29,7 @@ void export_face();
 
 bp::object export_arr_linear_traits();
 bp::object export_arr_segment_traits();
-bp::object export_arr_circle_segment_traits();
+bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits();
 bp::object export_arr_conic_traits();
 bp::object export_arr_algebraic_segment_traits();
 

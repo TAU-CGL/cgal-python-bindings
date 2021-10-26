@@ -17,17 +17,17 @@
 
 namespace bp = boost::python;
 
-bp::object export_arr_circle_segment_traits();
+bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits();
 
 bp::object export_gps_circle_segment_traits() {
   auto traits = export_arr_circle_segment_traits();
 
-  // typedef bso2::Traits_2       GT;
-  // bp::scope traits_scope(traits);
-  // struct Concepts {
-  //   Gps_traits_classes<GT> m_traits_classes;
-  // };
-  // Concepts concepts;
-  // export_GpsTraits_2<GT, Copy_const_reference>(traits, concepts);
+  typedef bso2::Traits_2       GT;
+  bp::scope traits_scope(traits);
+  struct Concepts {
+    Gps_traits_classes<GT> m_traits_classes;
+  };
+  Concepts concepts;
+  export_GpsTraits_2<GT, Copy_const_reference>(traits, concepts);
   return traits;
 }

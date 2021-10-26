@@ -12,21 +12,20 @@ else:
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-Pol2 = CGALPY.Pol2
 Aos2 = CGALPY.Aos2
-Aos_traits = Aos2.Geometry_traits_2
 BSO2 = CGALPY.BSO2
 General_polygon_set = BSO2.General_polygon_set_2
-Polygon = Pol2.General_polygon_2
-X_monotone_curve = Aos_traits.X_monotone_curve_2
-curve = Aos_traits.Curve_2
+Traits = General_polygon_set.Traits_2
+Polygon = General_polygon_set.Polygon_2
+X_monotone_curve = Traits.X_monotone_curve_2
+curve = Traits.Curve_2
 Point = Ker.Point_2
 Circle = Ker.Circle_2
 
 def ctr_circle_circle(circle):
     # Subdivide the circle into two x-monotone arcs.
     cv = curve(circle)	# circle orientation is counterclockwise
-    traits = Aos_traits()
+    traits = Traits()
     make_x_monotone = traits.make_x_monotone_2_object()
     objects = []
     make_x_monotone(cv, objects);

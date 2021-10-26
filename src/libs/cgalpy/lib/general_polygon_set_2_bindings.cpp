@@ -176,6 +176,7 @@ CGAL::Oriented_side oriented_side(General_polygon_set_2& ps, T& other)
 
 void export_general_polygon_set_2() {
   typedef bso2::General_polygon_set_2   Gps2;
+  typedef bso2::Traits_2                Traits_2;
   typedef bso2::Polygon_2               Polygon_2;
   typedef bso2::Polygon_with_holes_2    Polygon_with_holes_2;
 
@@ -231,11 +232,21 @@ void export_general_polygon_set_2() {
     .def("do_intersect_polygons", &bso2::do_intersect_range<Polygon_2>)
     .def("do_intersect_polygons_with_holes", &bso2::do_intersect_range<Polygon_with_holes_2>)
     .def("locate", &Gps2::locate)
-    .def("oriented_side", &bso2::oriented_side<bso2::Traits_2::Point_2>)
+    .def("oriented_side", &bso2::oriented_side<Traits_2::Point_2>)
     .def("oriented_side", &bso2::oriented_side<Gps2>)
     .def("oriented_side", &bso2::oriented_side<Polygon_2>)
     .def("oriented_side", &bso2::oriented_side<Polygon_with_holes_2>)
     ;
 
-  // ps2_scope.attr("Traits_2") = traits_object;
+  bp::handle<> tco_t(bp::objects::registered_class_object(bp::type_id<Traits_2>()));
+  BOOST_ASSERT(tco_t.get() != 0);
+  ps2_scope.attr("Traits_2") = tco_t;
+
+  bp::handle<> tco_p(bp::objects::registered_class_object(bp::type_id<Polygon_2>()));
+  BOOST_ASSERT(tco_p.get() != 0);
+  ps2_scope.attr("Polygon_2") = tco_p;
+
+  bp::handle<> tco_pwh(bp::objects::registered_class_object(bp::type_id<Polygon_with_holes_2>()));
+  BOOST_ASSERT(tco_pwh.get() != 0);
+  ps2_scope.attr("Polygon_with_holes_2") = tco_pwh;
 }

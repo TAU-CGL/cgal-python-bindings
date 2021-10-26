@@ -21,6 +21,7 @@ typedef aos2::Traits_2                                  Traits_2;
 typedef CGAL::General_polygon_set_2<Traits_2, Dcel>     General_polygon_set_2;
 typedef General_polygon_set_2::Polygon_2                Polygon_2;
 typedef General_polygon_set_2::Polygon_with_holes_2     Polygon_with_holes_2;
+typedef Polygon_2::Curve_iterator                       Curve_iterator;
 
 }
 
