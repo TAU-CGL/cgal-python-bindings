@@ -19,19 +19,45 @@
 #include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosOpenBoundaryTraits_2.hpp"
 
+#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_landmark_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_open_boundary_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
+
+namespace bp = boost::python;
+
+typedef typename aos2::Geometry_traits_2::Curve_2 Curve_2;
+using overload = void (Curve_2::*)();
+
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
+
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
 bp::object export_arr_linear_traits() {
   typedef aos2::Geometry_traits_2       GT;
   auto traits = bp::class_<GT>("Geometry_traits_2");
   bp::scope traits_scope(traits);
-  export_AosTraits_2<GT, Copy_const_reference>(traits);
-  export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits);
-  export_AosOpenBoundaryTraits_2<GT, Copy_const_reference>(traits);
+  struct Concepts {
+    Aos_basic_traits_classes<GT> m_basic_traits_classes;
+    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
+    Aos_traits_classes<GT> m_traits_classes;
+    Aos_landmark_traits_classes<GT> m_landmark_traits_classes;
+    Aos_open_boundary_traits_classes<GT> m_open_boundary_traits_classes;
+    Aos_approximate_traits_classes<GT> m_approximate_traits_classes;
+    Aos_construct_x_monotone_curve_traits_classes<GT>
+      m_construct_x_monotone_curve_traits_classes;
+  };
+  Concepts concepts;
+  export_AosTraits_2<GT, Copy_const_reference>(traits, concepts);
+  export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits, concepts);
+  export_AosOpenBoundaryTraits_2<GT, Copy_const_reference>(traits, concepts);
 
-  bp::class_<Curve_2>("Curve_2")
-    .def(bp::init<>())
+
+  auto& cv_co = *(concepts.m_traits_classes.m_curve_2);
+  cv_co
     .def(bp::init<Segment_2&>())
     .def(bp::init<Ray_2&>())
     .def(bp::init<Line_2&>())
@@ -47,9 +73,9 @@ bp::object export_arr_linear_traits() {
     .def("supporting_line", &Curve_2::supporting_line, Copy_const_reference())
     .def("left", &Curve_2::left, Copy_const_reference())
     .def("right", &Curve_2::right, Copy_const_reference())
-    .def<void (Curve_2::*)()>("set_left", &Curve_2::set_left)
+    .def("set_left", static_cast<overload>(&Curve_2::set_left))
     .def("set_left", set_left)
-    .def<void (Curve_2::*)()>("set_right", &Curve_2::set_right)
+    .def("set_right", static_cast<overload>(&Curve_2::set_right))
     .def("set_right", set_right)
     .def("is_directed_right", &Curve_2::is_directed_right)
     .def("is_in_x_range", &Curve_2::is_in_x_range)
