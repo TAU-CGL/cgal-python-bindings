@@ -33,6 +33,10 @@ bp::object export_arr_circle_segment_traits();
 bp::object export_arr_conic_traits();
 bp::object export_arr_algebraic_segment_traits();
 
+bp::object export_gps_segment_traits();
+bp::object export_gps_circle_segment_traits();
+bp::object export_gps_traits();
+
 namespace aos2 {
 
 namespace bp = boost::python;
@@ -336,10 +340,25 @@ void export_arrangement_on_surface_2() {
     ;
 
   // Export the traits classes
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-  auto traits_object = export_arr_linear_traits();
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+#ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+  auto traits_object = export_gps_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+  auto traits_object = export_gps_circle_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
+  auto traits_object = export_gps_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
+  auto traits_object = export_gps_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+  auto traits_object = export_gps_traits();
+#else
+  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_GPS_TRAITS");
+#endif
+#else
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
   auto traits_object = export_arr_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
+  auto traits_object = export_arr_linear_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
   auto traits_object = export_arr_circle_segment_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
@@ -348,6 +367,7 @@ void export_arrangement_on_surface_2() {
   auto traits_object = export_arr_algebraic_segment_traits();
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
+#endif
 #endif
 
   {

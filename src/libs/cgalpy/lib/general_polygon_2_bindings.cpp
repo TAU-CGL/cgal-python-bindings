@@ -9,21 +9,19 @@
 
 #include <boost/python.hpp>
 
-#include <CGAL/Gps_circle_segment_traits_2.h>
-
 #include "CGALPY/polygon_2_types.hpp"
+#include "CGALPY/general_polygon_set_2_types.hpp"
 
 namespace bp = boost::python;
 
-typedef typename CGAL::Gps_circle_segment_traits_2<Kernel> CSTraits;
-typedef typename CSTraits::Polygon_2                       General_polygon_2;
-typedef General_polygon_2::X_monotone_curve_2
-  CS_traits_X_monotone_curve_2;
-typedef General_polygon_2::Curve_iterator                  Curve_iterator;
+//typedef CGAL::General_polygon_2<aos2::Geometry_traits_2> General_polygon_2;
+typedef bso2::Traits_2::Polygon_2                       General_polygon_2;
+typedef General_polygon_2::X_monotone_curve_2           X_monotone_curve_2;
+typedef General_polygon_2::Curve_iterator               Curve_iterator;
 
 static General_polygon_2* init_from_list(bp::list& lst) {
-  auto begin = bp::stl_input_iterator<CS_traits_X_monotone_curve_2>(lst);
-  auto end = bp::stl_input_iterator<CS_traits_X_monotone_curve_2>();
+  auto begin = bp::stl_input_iterator<X_monotone_curve_2>(lst);
+  auto end = bp::stl_input_iterator<X_monotone_curve_2>();
   return new General_polygon_2(begin, end);
 }
 
