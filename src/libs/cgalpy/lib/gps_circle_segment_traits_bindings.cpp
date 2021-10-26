@@ -28,6 +28,6 @@ bp::object export_gps_circle_segment_traits() {
     Gps_traits_classes<GT> m_traits_classes;
   };
   Concepts concepts;
-  export_GpsTraits_2<GT, Copy_const_reference>(traits, concepts);
+  export_GpsTraits_2<GT>(traits, concepts);
   return traits;
 }
