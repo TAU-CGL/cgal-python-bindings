@@ -59,7 +59,7 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   }
 
   // X_monotone_curve_2
-  static const char x_monotone_curve_2[] = " X_monotone_curve_2";
+  static const char x_monotone_curve_2[] = "X_monotone_curve_2";
   if (add_class_object<X_monotone_curve_2, x_monotone_curve_2>
     (traits_scope, classes.m_x_monotone_curve_2)) {
     classes.m_x_monotone_curve_2->def(bp::init<>());
@@ -83,7 +83,7 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   if (add_class_object<Construct_min_vertex_2, construct_min_vertex_2>
     (traits_scope, classes.m_construct_min_vertex_2)) {
     classes.m_construct_min_vertex_2->def("__call__", &Construct_min_vertex_2::operator(), RVP());
-  } 
+  }
 
   // Construct_max_vertex_2
   static const char construct_max_vertex_2[] = "Construct_max_vertex_2";
