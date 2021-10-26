@@ -8,28 +8,34 @@
 
 #ifndef CGALPY_ADD_CLASS_OBJECT_HPP
 #define CGALPY_ADD_CLASS_OBJECT_HPP
-// Will be used if the class has a constructor
-template <typename Type, const char* Name>
-bp::class_<Type>* new_class_object(decltype(*bp::class_<Type>(Name))) {
-  return new bp::class_<Type>(Name);
-}
 
-// Will be used otherwise
-template <typename Type, const char* Name>
-bp::class_<Type>* new_class_object(...) {
-  return new bp::class_<Type>(Name, bp::no_init);
-}
+template <typename Type, const char* Name, bool no_init>
+struct New_class_object {};
+
+template<typename Type, const char* Name>
+struct New_class_object<Type, Name, false> {
+  bp::class_<Type>* operator()() {
+    return new bp::class_<Type>(Name);
+  }
+};
+
+template<typename Type, const char* Name>
+struct New_class_object<Type, Name, true> {
+  bp::class_<Type>* operator()() {
+    return new bp::class_<Type>(Name, bp::no_init);
+  }
+};
 
 // Introduce a new class object
 // Return true iff the class object was not already registered
-template <typename Type, const char* Name>
+template <typename Type, const char* Name, bool no_init=false>
 bool add_class_object(bp::scope& my_scope, bp::class_<Type>*& co) {
   bp::handle<> tco(bp::objects::registered_class_object(bp::type_id<Type>()));
   if (tco.get() != 0) {
     my_scope.attr(Name) = tco;
     return false;
   } else {
-    co = new_class_object<Type, Name>(nullptr);
+    co = New_class_object<Type, Name, no_init>()();
   }
   return true;
 }
