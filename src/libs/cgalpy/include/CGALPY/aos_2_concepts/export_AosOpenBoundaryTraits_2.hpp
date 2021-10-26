@@ -10,109 +10,112 @@
 
 #include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
 
-CGAL::Tag_false approach_side(CGAL::Arr_oblivious_side_tag, CGAL::Arr_oblivious_side_tag) {
-  return CGAL::Tag_false();
+template <typename T1, typename T2>
+struct approach_side {
+  typedef CGAL::Tag_false type;
+};
+
+template<>
+struct approach_side<CGAL::Arr_open_side_tag, CGAL::Arr_oblivious_side_tag> {
+  typedef CGAL::Tag_true type;
+};
+
+template<>
+struct approach_side<CGAL::Arr_oblivious_side_tag, CGAL::Arr_open_side_tag> {
+  typedef CGAL::Tag_true type;
+};
+
+template<>
+struct approach_side<CGAL::Arr_open_side_tag, CGAL::Arr_open_side_tag> {
+  typedef CGAL::Tag_true type;
+};
+
+template<typename T, typename C, typename Classes>
+void export_Compare_x_near_limit_2(C c, Classes& classes, CGAL::Tag_true) {
+  classes.m_compare_x_near_limit_2 = new bp::class_<typename T::Compare_x_near_limit_2>("Compare_x_near_boundary_2",
+                                                bp::no_init);
+  classes.m_compare_x_near_limit_2->def("__call__", &T::Compare_x_near_limit_2::operator());
+  c.def("compare_x_near_limit_2_object", &T::compare_x_near_limit_2_object);
 }
 
-CGAL::Tag_true approach_side(CGAL::Arr_open_side_tag, CGAL::Arr_oblivious_side_tag) {
-  return CGAL::Tag_true();
-}
+template<typename T, typename C, typename Classes>
+void export_Compare_x_near_limit_2(C c, Classes& classes, CGAL::Tag_false) {}
 
-CGAL::Tag_true approach_side(CGAL::Arr_oblivious_side_tag, CGAL::Arr_open_side_tag) {
-  return CGAL::Tag_true();
-}
-
-CGAL::Tag_true approach_side(CGAL::Arr_open_side_tag, CGAL::Arr_open_side_tag) {
-  return CGAL::Tag_true();
-}
-
-template<typename T, typename C>
-void export_Compare_x_near_boundary_2(C c, CGAL::Tag_true) {
-  bp::class_<typename T::Compare_x_near_boundary_2>("Compare_x_near_boundary_2",
-                                                bp::no_init)
-    .def("__call__", &T::Compare_x_near_boundary_2::operator())
-    ;
-  c.def("compare_x_near_boundary_2_object", &T::compare_x_near_boundary_2_object);
-}
-
-template<typename T, typename C>
-void export_Compare_x_near_boundary_2(C c, CGAL::Tag_false) {}
-
-template<typename T, typename C>
-void export_Compare_x_at_boundary_2(C c, CGAL::Tag_true) {
-  bp::class_<typename T::Compare_x_at_boundary_2>("Compare_x_at_boundary_2",
-                                                bp::no_init)
-  .def<CGAL::Comparison_result (T::Compare_x_at_boundary_2::*)
+template<typename T, typename C, typename Classes>
+void export_Compare_x_at_limit_2(C c, Classes& classes, CGAL::Tag_true) {
+  classes.m_compare_x_at_limit_2 = new bp::class_<typename T::Compare_x_at_limit_2>("Compare_x_at_limit_2",
+                                                bp::no_init);
+  using overload1 = CGAL::Comparison_result(T::Compare_x_at_limit_2::*)
     (const typename T::X_monotone_curve_2&, CGAL::Arr_curve_end,
-    const typename T::X_monotone_curve_2&, CGAL::Arr_curve_end) const>
-    ("__call__", &T::Compare_x_at_boundary_2::operator())
-  .def<CGAL::Comparison_result (T::Compare_x_at_boundary_2::*)
+    const typename T::X_monotone_curve_2&, CGAL::Arr_curve_end) const;
+  using overload2 = CGAL::Comparison_result (T::Compare_x_at_limit_2::*)
     (const typename T::Point_2&, const typename T::X_monotone_curve_2&,
-      CGAL::Arr_curve_end) const>
-  ("__call__", &T::Compare_x_at_boundary_2::operator())
-    ;
-  c.def("compare_x_at_boundary_2_object", &T::compare_x_at_boundary_2_object);
+      CGAL::Arr_curve_end) const;
+  classes.m_compare_x_at_limit_2->def("__call__", static_cast<overload1>(&T::Compare_x_at_limit_2::operator()));
+  classes.m_compare_x_at_limit_2->def("__call__", static_cast<overload2>(&T::Compare_x_at_limit_2::operator()));
+  c.def("compare_x_at_limit_2_object", &T::compare_x_at_limit_2_object);
 }
 
-template<typename T, typename C>
-void export_Compare_x_at_boundary_2(C c, CGAL::Tag_false) {}
+template<typename T, typename C, typename Classes>
+void export_Compare_x_at_limit_2(C c, Classes& classes, CGAL::Tag_false) {}
 
-template<typename T, typename C>
-void export_Compare_y_near_boundary_2(C c, CGAL::Tag_true) {
-  bp::class_<typename T::Compare_y_near_boundary_2>("Compare_y_near_boundary_2",
-                                                 bp::no_init)
-    .def("__call__", &T::Compare_y_near_boundary_2::operator())
-    ;
+template<typename T, typename C, typename Classes>
+void export_Compare_y_near_boundary_2(C c, Classes& classes, CGAL::Tag_true) {
+  classes.m_compare_y_near_boundary_2 = new bp::class_<typename T::Compare_y_near_boundary_2>("Compare_y_near_boundary_2",
+                                                 bp::no_init);
+  classes.m_compare_y_near_boundary_2->def("__call__", &T::Compare_y_near_boundary_2::operator());
   c.def("compare_y_near_boundary_2_object", &T::compare_y_near_boundary_2_object);
 }
 
-template<typename T, typename C>
-void export_Compare_y_near_boundary_2(C c, CGAL::Tag_false) {}
+template<typename T, typename C, typename Classes>
+void export_Compare_y_near_boundary_2(C c, Classes& classes, CGAL::Tag_false) {}
 
-template<typename T, typename C>
-void export_Parameter_space_in_x_2(C c, CGAL::Tag_true) {
-  bp::class_<typename T::Parameter_space_in_x_2>("Parameter_space_in_x_2",
-                                                    bp::no_init)
-    .def<CGAL::Arr_parameter_space (T::Parameter_space_in_x_2::*)
-    (const T::X_monotone_curve_2&, CGAL::Arr_curve_end) const>
-    ("__call__", &T::Parameter_space_in_x_2::operator())
-    ;
+template<typename T, typename C, typename Classes>
+void export_Parameter_space_in_x_2(C c, Classes& classes, CGAL::Tag_true) {
+  using overload = CGAL::Arr_parameter_space (T::Parameter_space_in_x_2::*)
+    (const typename T::X_monotone_curve_2&, CGAL::Arr_curve_end) const;
+  classes.m_parameter_space_in_x_2 = new bp::class_<typename T::Parameter_space_in_x_2>("Parameter_space_in_x_2",
+                                                    bp::no_init);
+  classes.m_parameter_space_in_x_2->def("__call__", static_cast<overload>(&T::Parameter_space_in_x_2::operator()));
   c.def("parameter_space_in_x_2_object", &T::parameter_space_in_x_2_object);
 }
 
-template<typename T, typename C>
-void export_Parameter_space_in_x_2(C c, CGAL::Tag_false) {}
+template<typename T, typename C, typename Classes>
+void export_Parameter_space_in_x_2(C c, Classes& classes, CGAL::Tag_false) {}
 
-template<typename T, typename C>
-void export_Parameter_space_in_y_2(C c, CGAL::Tag_true) {
-  bp::class_<typename T::Parameter_space_in_y_2>("Parameter_space_in_y_2",
-                                                 bp::no_init)
-    .def<CGAL::Arr_parameter_space (T::Parameter_space_in_y_2::*)
-    (const T::X_monotone_curve_2&, CGAL::Arr_curve_end) const>
-  ("__call__", &T::Parameter_space_in_y_2::operator())
-    ;
+template<typename T, typename C, typename Classes>
+void export_Parameter_space_in_y_2(C c, Classes& classes, CGAL::Tag_true) {
+  using overload = CGAL::Arr_parameter_space (T::Parameter_space_in_y_2::*)
+    (const typename T::X_monotone_curve_2&, CGAL::Arr_curve_end) const;
+  classes.m_parameter_space_in_y_2 = new bp::class_<typename T::Parameter_space_in_y_2>("Parameter_space_in_y_2",
+                                                 bp::no_init);
+  classes.m_parameter_space_in_y_2->def("__call__", static_cast<overload>(&T::Parameter_space_in_y_2::operator()));
   c.def("parameter_space_in_y_2_object", &T::parameter_space_in_y_2_object);
 }
 
-template<typename T, typename C>
-void export_Parameter_space_in_y_2(C c, CGAL::Tag_false) {}
+template<typename T, typename C, typename Classes>
+void export_Parameter_space_in_y_2(C c, Classes& classes, CGAL::Tag_false) {}
 
-template <typename T, typename RVP, typename C>
-void export_AosOpenBoundaryTraits_2 (C c) {
+template <typename T, typename RVP, typename C, typename Concepts>
+void export_AosOpenBoundaryTraits_2 (C c, Concepts& concepts) {
+  typedef typename T::Bottom_side_category Bottom_side_category;
+  typedef typename T::Top_side_category Top_side_category;
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T, RVP>(c);
-  export_Compare_x_at_boundary_2<T>(c, approach_side(T::Bottom_side_category(),
-                                                     T::Top_side_category()));
-  export_Compare_x_near_boundary_2<T>(c, approach_side(T::Bottom_side_category(),
-                                                       T::Top_side_category()));
-  export_Compare_y_near_boundary_2<T>(c, approach_side(T::Left_side_category(),
-                                                    T::Right_side_category()));
-  export_Parameter_space_in_x_2<T>(c, approach_side(T::Left_side_category(),
-                                                    T::Right_side_category()));
-  export_Parameter_space_in_y_2<T>(c, approach_side(T::Left_side_category(),
-                                                    T::Right_side_category()));
+  auto& classes = concepts.m_open_boundary_traits_classes;
+
+  export_AosBasicTraits<T, RVP>(c, concepts);
+  export_Compare_x_at_limit_2<T>(c, classes, typename approach_side<Bottom_side_category,
+                                                     Top_side_category>::type());
+  export_Compare_x_near_limit_2<T>(c, classes, typename approach_side<Bottom_side_category,
+                                                     Top_side_category>::type());
+  export_Compare_y_near_boundary_2<T>(c, classes, typename approach_side<Bottom_side_category,
+                                                     Top_side_category>::type());
+  export_Parameter_space_in_x_2<T>(c, classes, typename approach_side<Bottom_side_category,
+                                                     Top_side_category>::type());
+  export_Parameter_space_in_y_2<T>(c, classes, typename approach_side<Bottom_side_category,
+                                                     Top_side_category>::type());
 
   exported = true;
 }
