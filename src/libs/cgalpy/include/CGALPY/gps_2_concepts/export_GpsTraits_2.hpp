@@ -13,6 +13,7 @@
 
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
 #include "CGALPY/add_class_object.hpp"
+#include "CGALPY/general_polygon_set_2_types.hpp"
 
 namespace bp = boost::python;
 
@@ -37,6 +38,41 @@ export_ctr_gpwh_2_op(typename T::Construct_general_polygon_with_holes_2 m,
   return m(boundary, begin, end);
 }
 
+template <typename T>
+typename T::Polygon_2* init_from_list(bp::list& lst) {
+  auto begin = bp::stl_input_iterator<typename T::X_monotone_curve_2>(lst);
+  auto end = bp::stl_input_iterator<typename T::X_monotone_curve_2>();
+  return new typename T::Polygon_2(begin, end);
+}
+
+template <typename T>
+typename T::Polygon_2::Curve_iterator curves_begin(typename T::Polygon_2& p)
+{ return p.curves_begin(); }
+
+template <typename T>
+typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
+{ return p.curves_end(); }
+
+template <typename T>
+typename T::Polygon_with_holes_2*
+init_polygon_with_holes_2(typename T::Polygon_2& p, bp::list& lst) {
+  auto begin = bp::stl_input_iterator<typename T::Polygon_2>(lst);
+  auto end = bp::stl_input_iterator<typename T::Polygon_2>();
+  return new typename T::Polygon_with_holes_2(p, begin, end);
+}
+
+template <typename T>
+typename T::Polygon_with_holes_2::Hole_iterator
+holes_begin(typename T::Polygon_with_holes_2& p) { return p.holes_begin(); }
+
+template <typename T>
+typename T::Polygon_with_holes_2::Hole_iterator
+holes_end(typename T::Polygon_with_holes_2& p) { return p.holes_end(); }
+
+template <typename T>
+typename T::Polygon_2& outer_boundary(typename T::Polygon_with_holes_2& p)
+{ return p.outer_boundary(); }
+
 }
 
 template <typename T, typename RVP, typename C, typename Concepts>
@@ -58,12 +94,37 @@ void export_GpsTraits_2(C c, Concepts& concepts) {
 
   // Polygon_2
   static const char polygon_2[] = "Polygon_2";
-  add_class_object<Polygon_2, polygon_2>(traits_scope, classes.m_polygon_2);
+  if (add_class_object<Polygon_2, polygon_2>(traits_scope, classes.m_polygon_2)) {
+    classes.m_polygon_2->def(bp::init<>());
+    classes.m_polygon_2->def(bp::init<Polygon_2>());
+    classes.m_polygon_2->def("__init__", make_constructor(&bso2::init_from_list<T>));
+    classes.m_polygon_2->def("push_back", &Polygon_2::push_back);
+    classes.m_polygon_2->def("orientation", &Polygon_2::orientation);
+    classes.m_polygon_2->def("is_empty", &Polygon_2::is_empty);
+    classes.m_polygon_2->def("size", &Polygon_2::size);
+    classes.m_polygon_2->def("bbox", &Polygon_2::bbox);
+    classes.m_polygon_2->def("curves", bp::range<bp::return_internal_reference<>>
+                             (&bso2::curves_begin<T>, &bso2::curves_end<T>));
+    classes.m_polygon_2->def("clear", &Polygon_2::clear);
+    classes.m_polygon_2->def("reverse_orientation", &Polygon_2::reverse_orientation);
+    classes.m_polygon_2->def(bp::self_ns::str(bp::self_ns::self));
+    classes.m_polygon_2->def(bp::self_ns::repr(bp::self_ns::self));
+  }
 
   // Polygon_with_holes_2
   static const char polygon_with_holes_2[] = "Polygon_with_holes_2";
-  add_class_object<Polygon_with_holes_2, polygon_with_holes_2>
-    (traits_scope, classes.m_polygon_with_holes_2);
+  if (add_class_object<Polygon_with_holes_2, polygon_with_holes_2>
+      (traits_scope, classes.m_polygon_with_holes_2)) {
+    classes.m_polygon_with_holes_2->def(bp::init<Polygon_2&>());
+    classes.m_polygon_with_holes_2->def("__init__", make_constructor(&bso2::init_polygon_with_holes_2<T>));
+    classes.m_polygon_with_holes_2->def("is_unbounded", &Polygon_with_holes_2::is_unbounded);
+    classes.m_polygon_with_holes_2->def("outer_boundary", &bso2::outer_boundary<T>, bp::return_internal_reference<>());
+    classes.m_polygon_with_holes_2->def("holes", bp::range<bp::return_internal_reference<>>
+                                        (&bso2::holes_begin<T>, &bso2::holes_end<T>));
+    classes.m_polygon_with_holes_2->def("number_of_holes", &Polygon_with_holes_2::number_of_holes);
+    classes.m_polygon_with_holes_2->def(bp::self_ns::str(bp::self_ns::self));
+    classes.m_polygon_with_holes_2->def(bp::self_ns::repr(bp::self_ns::self));
+  }
 
   // Construct_polygon_2
   classes.m_construct_polygon_2 =
