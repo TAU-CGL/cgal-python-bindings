@@ -13,7 +13,6 @@
 
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
 #include "CGALPY/add_class_object.hpp"
-#include "CGALPY/general_polygon_set_2_types.hpp"
 
 namespace bp = boost::python;
 
@@ -75,7 +74,7 @@ typename T::Polygon_2& outer_boundary(typename T::Polygon_with_holes_2& p)
 
 }
 
-template <typename T, typename RVP, typename C, typename Concepts>
+template <typename T, typename C, typename Concepts>
 void export_GpsTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
