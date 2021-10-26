@@ -14,35 +14,10 @@
 
 namespace bp = boost::python;
 
-//typedef CGAL::General_polygon_2<aos2::Geometry_traits_2> General_polygon_2;
-typedef bso2::Traits_2::Polygon_2                       General_polygon_2;
-typedef General_polygon_2::X_monotone_curve_2           X_monotone_curve_2;
-typedef General_polygon_2::Curve_iterator               Curve_iterator;
-
-static General_polygon_2* init_from_list(bp::list& lst) {
-  auto begin = bp::stl_input_iterator<X_monotone_curve_2>(lst);
-  auto end = bp::stl_input_iterator<X_monotone_curve_2>();
-  return new General_polygon_2(begin, end);
-}
-
-Curve_iterator curves_begin(General_polygon_2& p) { return p.curves_begin(); }
-
-Curve_iterator curves_end(General_polygon_2& p) { return p.curves_end(); }
+typedef bso2::Polygon_2    General_polygon_2;
 
 void export_general_polygon_2() {
-  bp::class_<General_polygon_2>("General_polygon_2")
-    .def(bp::init<>())
-    .def(bp::init<General_polygon_2>())
-    .def("__init__", make_constructor(&init_from_list))
-    .def("push_back", &General_polygon_2::push_back)
-    .def("orientation", &General_polygon_2::orientation)
-    .def("is_empty", &General_polygon_2::is_empty)
-    .def("size", &General_polygon_2::size)
-    .def("bbox", &General_polygon_2::bbox)
-    .def("curves", bp::range<bp::return_internal_reference<>>(&curves_begin, &curves_end))
-    .def("clear", &General_polygon_2::clear)
-    .def("reverse_orientation", &General_polygon_2::reverse_orientation)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    ;
+  bp::handle<> tco(bp::objects::registered_class_object(bp::type_id<General_polygon_2>()));
+  BOOST_ASSERT(tco.get() != 0);
+  bp::scope().attr("General_polygon_2") = tco;
 }
