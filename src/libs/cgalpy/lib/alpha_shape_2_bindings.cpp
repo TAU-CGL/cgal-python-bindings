@@ -134,12 +134,23 @@ void export_alpha_shape_2() {
   if (tri2::is_periodic())
     // \todo: generate bindings for periodic traits
     ;
-  else add_attr<as2::Gt>("Gt", as2_scope);
+  else {
+    if (! add_attr<as2::Gt>("Gt", as2_scope))
+      std::cerr << "'as2::Gt' not registered!\n";
+  }
   add_attr<as2::Point>("Point", as2_scope);
-  if (is_exact_ft()) add_attr<as2::FT>("FT", as2_scope);
-  add_attr<as2::Tds>("Tds", as2_scope);
-  add_attr<as2::Vertex>("Vertex", as2_scope);
-  add_attr<as2::Edge>("Edge", as2_scope);
-  add_attr<as2::Vertex_handle>("Vertex_handle", as2_scope);
-  add_attr<as2::Face_handle>("Face_handle", as2_scope);
+  if (is_exact_ft()) {
+    if (! add_attr<as2::FT>("FT", as2_scope))
+      std::cerr << "'as2::FT' not registered!\n";
+  }
+  if (! add_attr<as2::Tds>("Tds", as2_scope))
+    std::cerr << "'as2::Tds' not registered!\n";
+  if (! add_attr<as2::Vertex>("Vertex", as2_scope))
+    std::cerr << "'as2::Vertex' not registered!\n";
+  if (! add_attr<as2::Edge>("Edge", as2_scope))
+    std::cerr << "'as2::Edge' not registered!\n";
+  if (! add_attr<as2::Vertex_handle>("Vertex_handle", as2_scope))
+    std::cerr << "'as2::Vertex_handle' not registered!\n";
+  if (! add_attr<as2::Face_handle>("Face_handle", as2_scope))
+    std::cerr << "'as2::Face_handle' not registered!\n";
 }
