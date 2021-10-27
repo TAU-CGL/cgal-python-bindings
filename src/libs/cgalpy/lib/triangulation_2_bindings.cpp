@@ -175,12 +175,16 @@ void export_triangulation_2() {
   ;
 #else
   // In the case of non-priodic triangulation the kernel serves as the traits.
-  add_attr<tri2::Geom_traits>("Geom_traits", tri2_scope);
+  if (! add_attr<tri2::Geom_traits>("Geom_traits", tri2_scope))
+    std::cerr << "'tri2::Geom_traits' not registered!\n";
 #endif
 
-  add_attr<tri2::Point>("Point", tri2_scope);
-  add_attr<tri2::Segment>("Segment", tri2_scope);
-  add_attr<tri2::Triangle>("Triangle", tri2_scope);
+  if (! add_attr<tri2::Point>("Point", tri2_scope))
+    std::cerr << "'tri2::Point' not registered!\n";
+  if (! add_attr<tri2::Segment>("Segment", tri2_scope))
+    std::cerr << "'tri2::Segment' not registered!\n";
+  if (! add_attr<tri2::Triangle>("Triangle", tri2_scope))
+    std::cerr << "'tri2::Triangle' not registered!\n";
 
   bp::class_<tri2::Vertex>("Vertex")
     .def<tri2::Point&(tri2::Vertex::*)()>("point", &tri2::Vertex::point, bp::return_internal_reference<>())
