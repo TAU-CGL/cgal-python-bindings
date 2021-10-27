@@ -13,6 +13,7 @@
 #include <CGAL/General_polygon_set_2.h>
 
 #include "CGALPY/general_polygon_set_2_types.hpp"
+#include "CGALPY/add_attr.hpp"
 
 bp::object export_gps_segment_traits();
 bp::object export_gps_circle_segment_traits();
@@ -179,6 +180,7 @@ void export_general_polygon_set_2() {
   typedef bso2::Traits_2                Traits_2;
   typedef bso2::Polygon_2               Polygon_2;
   typedef bso2::Polygon_with_holes_2    Polygon_with_holes_2;
+  typedef bso2::Arrangement_2           Arrangement_2;
 
   bp::scope ps2_scope = bp::class_<Gps2>("General_polygon_set_2")
     .def(bp::init<>())
@@ -189,8 +191,8 @@ void export_general_polygon_set_2() {
     .def("is_plane", &Gps2::is_plane)
     .def("number_of_polygons_with_holes", &Gps2::number_of_polygons_with_holes)
     .def("polygons_with_holes", &bso2::polygons_with_holes)
-    .def<aos2::Arrangement_2&(Gps2::*)()>("arrangement", &Gps2::arrangement,
-                                          Reference_existing_object())
+    .def<Arrangement_2&(Gps2::*)()>("arrangement", &Gps2::arrangement,
+                                    Reference_existing_object())
     .def("clear", &Gps2::clear)
     .def("is_valid", &Gps2::is_valid)
     .def("insert", &bso2::insert0)
@@ -238,15 +240,13 @@ void export_general_polygon_set_2() {
     .def("oriented_side", &bso2::oriented_side<Polygon_with_holes_2>)
     ;
 
-  bp::handle<> tco_t(bp::objects::registered_class_object(bp::type_id<Traits_2>()));
-  BOOST_ASSERT(tco_t.get() != 0);
-  ps2_scope.attr("Traits_2") = tco_t;
-
-  bp::handle<> tco_p(bp::objects::registered_class_object(bp::type_id<Polygon_2>()));
-  BOOST_ASSERT(tco_p.get() != 0);
-  ps2_scope.attr("Polygon_2") = tco_p;
-
-  bp::handle<> tco_pwh(bp::objects::registered_class_object(bp::type_id<Polygon_with_holes_2>()));
-  BOOST_ASSERT(tco_pwh.get() != 0);
-  ps2_scope.attr("Polygon_with_holes_2") = tco_pwh;
+  // Types that have been registered already:
+  if (! add_attr<Traits_2>("Traits_2", ps2_scope))
+    std::cerr << "bso2::Traits_2 not registered!\n";
+  if (! add_attr<Polygon_2>("Polygon_2", ps2_scope))
+    std::cerr << "bso2::Polygon_2 not registered!\n";
+  if (! add_attr<Polygon_with_holes_2>("Polygon_with_holes_2", ps2_scope))
+    std::cerr << "bso2::Polygon_with_holes_2 not registered!\n";
+  if (! add_attr<bso2::Arrangement_2>("Arrangement_2", ps2_scope))
+    std::cerr << "bso2::Arrangement_2 not registered!\n";
 }

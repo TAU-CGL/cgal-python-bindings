@@ -10,7 +10,9 @@
 
 #include <boost/python.hpp>
 
-// #include "CGALPY/polygon_2_types.hpp"
+#include <CGAL/Polygon_set_2.h>
+
+#include "CGALPY/types.hpp"
 #include "CGALPY/polygon_set_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 #include "CGALPY/add_attr.hpp"
@@ -163,9 +165,11 @@ CGAL::Oriented_side oriented_side(Polygon_set_2& ps, T& other)
 }
 
 void export_polygon_set_2() {
-  typedef bso2::Polygon_set_2        Ps2;
-  typedef bso2::Polygon_2            Polygon_2;
-  typedef bso2::Polygon_with_holes_2 Polygon_with_holes_2;
+  typedef bso2::Polygon_set_2           Ps2;
+  typedef bso2::Traits_2                Traits_2;
+  typedef bso2::Polygon_2               Polygon_2;
+  typedef bso2::Polygon_with_holes_2    Polygon_with_holes_2;
+  typedef bso2::Arrangement_2           Arrangement_2;
 
   bp::scope ps2_scope = bp::class_<Ps2>("Polygon_set_2")
     .def(bp::init<>())
@@ -176,7 +180,8 @@ void export_polygon_set_2() {
     .def("is_plane", &Ps2::is_plane)
     .def("number_of_polygons_with_holes", &Ps2::number_of_polygons_with_holes)
     .def("polygons_with_holes", &bso2::polygons_with_holes)
-    //.def("arrangement", &Ps2::arrangement)
+    .def<Arrangement_2&(Ps2::*)()>("arrangement", &Ps2::arrangement,
+                                   Reference_existing_object())
     .def("clear", &Ps2::clear)
     .def("is_valid", &Ps2::is_valid)
     .def("insert", &bso2::insert0)
@@ -184,7 +189,7 @@ void export_polygon_set_2() {
     .def("insert", &bso2::insert_range0)
     .def("insert_polygons", &bso2::insert_range<Polygon_2>)
     .def("insert_polygons_with_holes", &bso2::insert_range<Polygon_with_holes_2>)
-    .def<void (Ps2::*) ()>("complement", &Ps2::complement)
+    .def<void(Ps2::*)()>("complement", &Ps2::complement)
     .def("complement", &bso2::complement0)
     .def("intersection", &bso2::intersection<Ps2>)
     .def("intersection", &bso2::intersection<Polygon_2>)
@@ -192,7 +197,8 @@ void export_polygon_set_2() {
     .def<void (Ps2&, Ps2&, Ps2&)>("intersection", &bso2::intersection)
     .def("intersection", &bso2::intersection_range0)
     .def("intersection_polygons", &bso2::intersection_range<Polygon_2>)
-    .def("intersection_polygons_with_holes", &bso2::intersection_range<Polygon_with_holes_2>)
+    .def("intersection_polygons_with_holes",
+         &bso2::intersection_range<Polygon_with_holes_2>)
     .def("join", &bso2::join<Ps2>)
     .def("join", &bso2::join<Polygon_2>)
     .def("join", &bso2::join<Polygon_with_holes_2>)
@@ -206,17 +212,22 @@ void export_polygon_set_2() {
     .def<void (Ps2&, Ps2&, Ps2&)>("difference", &bso2::difference)
     .def("symmetric_difference", &bso2::symmetric_difference<Ps2>)
     .def("symmetric_difference", &bso2::symmetric_difference<Polygon_2>)
-    .def("symmetric_difference", &bso2::symmetric_difference<Polygon_with_holes_2>)
-    .def<void (Ps2&, Ps2&, Ps2&)>("symmetric_difference", &bso2::symmetric_difference)
+    .def("symmetric_difference",
+         &bso2::symmetric_difference<Polygon_with_holes_2>)
+    .def<void (Ps2&, Ps2&, Ps2&)>("symmetric_difference",
+                                  &bso2::symmetric_difference)
     .def("symmetric_difference", &bso2::symmetric_difference_range0)
-    .def("symmetric_difference_polygons", &bso2::symmetric_difference_range<Polygon_2>)
-    .def("symmetric_difference_polygons_with_holes", &bso2::symmetric_difference_range<Polygon_with_holes_2>)
+    .def("symmetric_difference_polygons",
+         &bso2::symmetric_difference_range<Polygon_2>)
+    .def("symmetric_difference_polygons_with_holes",
+         &bso2::symmetric_difference_range<Polygon_with_holes_2>)
     .def("do_intersect", &bso2::do_intersect<Ps2>)
     .def("do_intersect", &bso2::do_intersect<Polygon_2>)
     .def("do_intersect", &bso2::do_intersect<Polygon_with_holes_2>)
     .def("do_intersect", &bso2::do_intersect_range0)
     .def("do_intersect_polygons", &bso2::do_intersect_range<Polygon_2>)
-    .def("do_intersect_polygons_with_holes", &bso2::do_intersect_range<Polygon_with_holes_2>)
+    .def("do_intersect_polygons_with_holes",
+         &bso2::do_intersect_range<Polygon_with_holes_2>)
     .def("locate", &Ps2::locate)
     .def("oriented_side", &bso2::oriented_side<Point_2>)
     .def("oriented_side", &bso2::oriented_side<Ps2>)
@@ -225,8 +236,12 @@ void export_polygon_set_2() {
     ;
 
   // Types that have been registered already:
-  //add_attr<Ps2::Traits_2>("Traits_2", ps2_scope);
-  //add_attr<Ps2::Polygon_2>("Polygon_2", ps2_scope);
-  //add_attr<Ps2::Polygon_with_holes_2>("Polygon_with_holes_2", ps2_scope);
-  //add_attr<Ps2::Arrangement_2>("Arrangement_2", ps2_scope);
+  if (! add_attr<Traits_2>("Traits_2", ps2_scope))
+    std::cerr << "'bso2::Traits_2' not registered!\n";
+  if (! add_attr<Polygon_2>("Polygon_2", ps2_scope))
+    std::cerr << "'bso2::Polygon_2' not registered!\n";
+  if (! add_attr<Polygon_with_holes_2>("Polygon_with_holes_2", ps2_scope))
+    std::cerr << "'bso2::Polygon_with_holes_2' not registered!\n";
+  if (! add_attr<bso2::Arrangement_2>("Arrangement_2", ps2_scope))
+    std::cerr << "'bso2::Arrangement_2' not registered!\n";
 }
