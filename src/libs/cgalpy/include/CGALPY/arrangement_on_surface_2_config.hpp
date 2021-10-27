@@ -11,6 +11,7 @@
 
 #include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Gps_traits_2.h>
+#include <CGAL/Gps_segment_traits_2.h>
 #include <CGAL/Gps_circle_segment_traits_2.h>
 #include <CGAL/Boolean_set_operations_2/Gps_default_dcel.h>
 
@@ -47,6 +48,10 @@ constexpr bool is_face_extended()
 template <bool b, typename BaseTr> struct Tr {};
 template <typename Base>
 struct Tr<false, Base> { typedef Base type; };
+template <>
+struct Tr<true, CGAL::Arr_segment_traits_2<Kernel>> {
+  typedef CGAL::Gps_segment_traits_2<Kernel, Point_2_container> type;
+};
 template <>
 struct Tr<true, CGAL::Arr_circle_segment_traits_2<Kernel>> {
   typedef CGAL::Gps_circle_segment_traits_2<Kernel> type;
