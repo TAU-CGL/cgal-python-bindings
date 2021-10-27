@@ -371,14 +371,26 @@ void export_alpha_shape_3() {
   if (tri3::is_periodic())
     // \todo: generate bindings for periodic traits
     ;
-  else add_attr<tri3::Geom_traits>("Gt", tri3_scope);
-  add_attr<as3::Point>("Point", as3_scope);
-  if (is_exact_ft()) add_attr<as3::FT>("FT", as3_scope);
-  add_attr<as3::Vertex>("Vertex", as3_scope);
-  add_attr<as3::Edge>("Edge", as3_scope);
-  add_attr<as3::Facet>("Facet", as3_scope);
-  add_attr<as3::Vertex_handle>("Vertex_handle", as3_scope);
-  add_attr<as3::Cell_handle>("Cell_handle", as3_scope);
+  else {
+    if (! add_attr<tri3::Geom_traits>("Gt", tri3_scope))
+      std::cerr << "'tri3::Geom_traits' not registered!\n";
+  }
+  if (! add_attr<as3::Point>("Point", as3_scope))
+    std::cerr << "'as3::Point' not registered!\n";
+  if (is_exact_ft()) {
+    if (! add_attr<as3::FT>("FT", as3_scope))
+      std::cerr << "'as3::FT' not registered!\n";
+  }
+  if (! add_attr<as3::Vertex>("Vertex", as3_scope))
+    std::cerr << "'as3::Vertex' not registered!\n";
+  if (! add_attr<as3::Edge>("Edge", as3_scope))
+    std::cerr << "'as3::Edge' not registered!\n";
+  if (! add_attr<as3::Facet>("Facet", as3_scope))
+    std::cerr << "'as3::Facet' not registered!\n";
+  if (! add_attr<as3::Vertex_handle>("Vertex_handle", as3_scope))
+    std::cerr << "'as3::Vertex_handle' not registered!\n";
+  if (! add_attr<as3::Cell_handle>("Cell_handle", as3_scope))
+    std::cerr << "'as3::Cell_handle' not registered!\n";
 
 #endif
 }
