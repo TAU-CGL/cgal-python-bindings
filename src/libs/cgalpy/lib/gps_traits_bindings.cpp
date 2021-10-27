@@ -17,6 +17,25 @@
 
 namespace bp = boost::python;
 
+namespace bso2 {
+
+template <typename T>
+typename T::Polygon_2* init_polygon_2(bp::list& lst) {
+  auto begin = bp::stl_input_iterator<typename T::X_monotone_curve_2>(lst);
+  auto end = bp::stl_input_iterator<typename T::X_monotone_curve_2>();
+  return new typename T::Polygon_2(begin, end);
+}
+
+template <typename T>
+typename T::Polygon_2::Curve_iterator curves_begin(typename T::Polygon_2& p)
+{ return p.curves_begin(); }
+
+template <typename T>
+typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
+{ return p.curves_end(); }
+
+}
+
 bp::object export_gps_traits() {
   typedef bso2::Traits_2       GT;
   auto traits = bp::class_<GT>("Traits_2");
@@ -26,5 +45,11 @@ bp::object export_gps_traits() {
   };
   Concepts concepts;
   export_GpsTraits_2<GT>(traits, concepts);
+  auto* tco = concepts.m_traits_classes.m_polygon_2;
+  if (tco) {
+    tco->def("__init__", make_constructor(&bso2::init_polygon_2<GT>));
+    tco->def("curves", bp::range<bp::return_internal_reference<>>
+             (&bso2::curves_begin<GT>, &bso2::curves_end<GT>));
+  }
   return traits;
 }
