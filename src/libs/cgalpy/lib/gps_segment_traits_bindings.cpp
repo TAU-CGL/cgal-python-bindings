@@ -9,9 +9,9 @@
 #define BOOST_BIND_GLOBAL_PLACEHOLDERS
 
 #include <CGAL/Gps_segment_traits_2.h>
-#include <CGAL/General_polygon_set_2.h>
+#include <CGAL/Polygon_set_2.h>
 
-#include "CGALPY/general_polygon_set_2_types.hpp"
+#include "CGALPY/polygon_set_2_types.hpp"
 #include "CGALPY/gps_2_concepts/export_GpsTraits_2.hpp"
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
 
