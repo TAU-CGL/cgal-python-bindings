@@ -17,10 +17,11 @@
 #include <CGAL/Boolean_set_operations_2.h>
 
 #include "CGALPY/boolean_set_operations_2_config.hpp"
-#include "CGALPY/polygon_2_types.hpp"
-#include "CGALPY/polygon_set_2_types.hpp"
+#include "CGALPY/boolean_set_operations_2_types.hpp"
 
 namespace bp = boost::python;
+
+namespace bso2 {
 
 void complement0(Polygon_2& pgn, Polygon_with_holes_2& res)
 { CGAL::complement(pgn, res); }
@@ -117,42 +118,54 @@ template <typename T0, typename T1>
 CGAL::Oriented_side oriented_side(T0& p0, T1& p1)
 { return CGAL::oriented_side(p0, p1); }
 
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
 void connect_holes(Polygon_with_holes_2& pwh, bp::list& lst) {
-  auto v = std::vector<Point_2>();
+  auto v = std::vector<Traits_2::Point_2>();
   CGAL::connect_holes(pwh, std::back_inserter(v));
   for (auto p : v) lst.append(p);
 }
+#endif
+
+}
 
 void export_boolean_set_operations_2() {
-  bp::def("complement", complement0);
-  bp::def("complement", complement1);
-  bp::def("do_intersect", &do_intersect<Polygon_2, Polygon_2>);
-  bp::def("do_intersect", &do_intersect<Polygon_2, Polygon_with_holes_2>);
-  bp::def("do_intersect", &do_intersect<Polygon_with_holes_2, Polygon_2>);
-  bp::def("do_intersect", &do_intersect<Polygon_with_holes_2, Polygon_with_holes_2>);
-  bp::def("do_intersect", &do_intersect_range<Polygon_2, Polygon_with_holes_2>);
-  bp::def("intersection", &intersection_linear<Polygon_2, Polygon_2>);
-  bp::def("intersection", &intersection_linear<Polygon_2, Polygon_with_holes_2>);
-  bp::def("intersection", &intersection_linear<Polygon_with_holes_2, Polygon_2>);
-  bp::def("intersection", &intersection_linear<Polygon_with_holes_2, Polygon_with_holes_2>);
-  bp::def("intersection", &intersection_range<Polygon_2, Polygon_with_holes_2>);
-  bp::def("difference", &difference_linear<Polygon_2, Polygon_2>);
-  bp::def("difference", &difference_linear<Polygon_2, Polygon_with_holes_2>);
-  bp::def("difference", &difference_linear<Polygon_with_holes_2, Polygon_2>);
-  bp::def("difference", &difference_linear<Polygon_with_holes_2, Polygon_with_holes_2>);
-  bp::def("join", &join_linear<Polygon_2, Polygon_2>);
-  bp::def("join", &join_linear<Polygon_with_holes_2, Polygon_2>);
-  bp::def("join", &join_linear<Polygon_2, Polygon_with_holes_2>);
-  bp::def("join", &join_linear<Polygon_with_holes_2, Polygon_with_holes_2>);
-  bp::def("join", &join_range<Polygon_2, Polygon_with_holes_2>);
-  bp::def("symmetric_difference", &symmetric_difference_linear<Polygon_2, Polygon_2>);
-  bp::def("symmetric_difference", &symmetric_difference_linear<Polygon_2, Polygon_with_holes_2>);
-  bp::def("symmetric_difference", &symmetric_difference_linear<Polygon_with_holes_2, Polygon_2>);
-  bp::def("symmetric_difference", &symmetric_difference_linear<Polygon_with_holes_2, Polygon_with_holes_2>);
-  bp::def("symmetric_difference", &symmetric_difference_range<Polygon_2, Polygon_with_holes_2>);
-  bp::def("oriented_side", &oriented_side<Polygon_2, Polygon_2>);
-  bp::def("oriented_side", &oriented_side<Polygon_2, Polygon_with_holes_2>);
-  bp::def("oriented_side", &oriented_side<Polygon_with_holes_2, Polygon_2>);
-  bp::def("oriented_side", &oriented_side<Polygon_with_holes_2, Polygon_with_holes_2>);
-  bp::def("connect_holes", &connect_holes);
+  typedef bso2::Polygon_2               Pgn;
+  typedef bso2::Polygon_with_holes_2    Pwh;
+
+  bp::def("complement", bso2::complement0);
+  bp::def("complement", bso2::complement1);
+  bp::def("do_intersect", &bso2::do_intersect<Pgn, Pgn>);
+  bp::def("do_intersect", &bso2::do_intersect<Pgn, Pwh>);
+  bp::def("do_intersect", &bso2::do_intersect<Pwh, Pgn>);
+  bp::def("do_intersect", &bso2::do_intersect<Pwh, Pwh>);
+  bp::def("do_intersect", &bso2::do_intersect_range<Pgn, Pwh>);
+  bp::def("intersection", &bso2::intersection_linear<Pgn, Pgn>);
+  bp::def("intersection", &bso2::intersection_linear<Pgn, Pwh>);
+  bp::def("intersection", &bso2::intersection_linear<Pwh, Pgn>);
+  bp::def("intersection", &bso2::intersection_linear<Pwh, Pwh>);
+  bp::def("intersection", &bso2::intersection_range<Pgn, Pwh>);
+  bp::def("difference", &bso2::difference_linear<Pgn, Pgn>);
+  bp::def("difference", &bso2::difference_linear<Pgn, Pwh>);
+  bp::def("difference", &bso2::difference_linear<Pwh, Pgn>);
+  bp::def("difference", &bso2::difference_linear<Pwh, Pwh>);
+  bp::def("join", &bso2::join_linear<Pgn, Pgn>);
+  bp::def("join", &bso2::join_linear<Pwh, Pgn>);
+  bp::def("join", &bso2::join_linear<Pgn, Pwh>);
+  bp::def("join", &bso2::join_linear<Pwh, Pwh>);
+  bp::def("join", &bso2::join_range<Pgn, Pwh>);
+  bp::def("symmetric_difference", &bso2::symmetric_difference_linear<Pgn, Pgn>);
+  bp::def("symmetric_difference", &bso2::symmetric_difference_linear<Pgn, Pwh>);
+  bp::def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pgn>);
+  bp::def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pwh>);
+  bp::def("symmetric_difference", &bso2::symmetric_difference_range<Pgn, Pwh>);
+  bp::def("oriented_side", &bso2::oriented_side<Pgn, Pgn>);
+  bp::def("oriented_side", &bso2::oriented_side<Pgn, Pwh>);
+  bp::def("oriented_side", &bso2::oriented_side<Pwh, Pgn>);
+  bp::def("oriented_side", &bso2::oriented_side<Pwh, Pwh>);
+
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
+  bp::def("connect_holes", &bso2::connect_holes);
+#endif
 }

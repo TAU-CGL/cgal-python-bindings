@@ -15,7 +15,9 @@
 
 namespace bp = boost::python;
 
-Polygon_with_holes_2* init_Polygon_with_holes_2(Polygon_2& p, bp::list& lst) {
+namespace pol2 {
+
+Polygon_with_holes_2* init_polygon_with_holes_2(Polygon_2& p, bp::list& lst) {
   auto begin = bp::stl_input_iterator< Polygon_2 >(lst);
   auto end = bp::stl_input_iterator< Polygon_2 >();
   return new Polygon_with_holes_2(p, begin, end);
@@ -30,13 +32,20 @@ Polygon_with_holes_2::Hole_const_iterator holes_end(Polygon_with_holes_2& p)
 Polygon_2& outer_boundary(Polygon_with_holes_2& p)
 { return p.outer_boundary(); }
 
+}
+
 void export_polygon_with_holes_2() {
+  typedef pol2::Polygon_2               Polygon_2;
+  typedef pol2::Polygon_with_holes_2    Polygon_with_holes_2;
+
   bp::class_<Polygon_with_holes_2>("Polygon_with_holes_2")
     .def(bp::init<Polygon_2&>())
-    .def("__init__", make_constructor(&init_Polygon_with_holes_2))
+    .def("__init__", make_constructor(&pol2::init_polygon_with_holes_2))
     .def("is_unbounded", &Polygon_with_holes_2::is_unbounded)
-    .def("outer_boundary", &outer_boundary, bp::return_internal_reference<>())
-    .def("holes", bp::range<bp::return_internal_reference<>>(&holes_begin, &holes_end))
+    .def("outer_boundary", &pol2::outer_boundary,
+         bp::return_internal_reference<>())
+    .def("holes", bp::range<bp::return_internal_reference<>>(&pol2::holes_begin,
+                                                             &pol2::holes_end))
     .def("number_of_holes", &Polygon_with_holes_2::number_of_holes)
     .def("bbox", &Polygon_with_holes_2::bbox)
     .def(bp::self_ns::str(bp::self_ns::self))

@@ -4,6 +4,7 @@
 // This file is private property of Tel Aviv University.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
 
@@ -12,7 +13,6 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
-
 #include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
@@ -34,8 +34,7 @@ bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
     Aos_traits_classes<GT> m_traits_classes;
     Aos_directional_x_monotone_traits_classes<GT> m_directional_x_monotone_traits_classes;
-  };
-  Concepts concepts;
+  } concepts;
   export_AosTraits_2<GT, Return_by_value>(traits, concepts);
   export_AosDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits, concepts);
 

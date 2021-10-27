@@ -140,7 +140,7 @@ bp::class_<typename PT::Swap> bind_swap(const char* name) {
 template<typename T>
 T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 
-bp::object export_arr_algebraic_segment_traits() {
+bp::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
   typedef aos2::Algebraic_real_1        AR1;
   typedef aos2::Geometry_traits_2       GT;
 

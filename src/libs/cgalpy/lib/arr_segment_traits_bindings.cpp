@@ -31,7 +31,7 @@ namespace bp = boost::python;
 
 namespace aos2 { Segment_2 to_segment(X_monotone_curve_2& c) { return Segment_2(c); } }
 
-bp::object export_arr_segment_traits() {
+bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
   typedef aos2::Geometry_traits_2       GT;
   auto traits = bp::class_<GT>("Geometry_traits_2");
   bp::scope traits_scope(traits);
@@ -44,8 +44,7 @@ bp::object export_arr_segment_traits() {
     Aos_approximate_traits_classes<GT> m_approximate_traits_classes;
     Aos_construct_x_monotone_curve_traits_classes<GT>
       m_construct_x_monotone_curve_traits_classes;
-  };
-  Concepts concepts;
+  } concepts;
   export_AosTraits_2<GT, Copy_const_reference>(traits, concepts);
   export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits, concepts);
   export_AosDirectionalXMonotoneTraits_2<GT, Copy_const_reference>(traits, concepts);

@@ -45,8 +45,7 @@ bp::object export_gps_circle_segment_traits() {
   bp::scope traits_scope(traits);
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;
-  };
-  Concepts concepts;
+  } concepts;
   export_GpsTraits_2<GT>(traits, concepts);
   auto* tco = concepts.m_traits_classes.m_polygon_2;
   if (tco) {
