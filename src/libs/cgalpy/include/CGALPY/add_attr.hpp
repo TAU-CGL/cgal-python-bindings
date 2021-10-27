@@ -14,12 +14,12 @@
 
 namespace bp = boost::python;
 
-template <typename T>
-void add_attr(const char* name, bp::scope& my_scope) {
-  const bp::type_info info = bp::type_id<T>();
-  const bp::converter::registration* reg = bp::converter::registry::query(info);
-  BOOST_ASSERT((reg != nullptr) && ((*reg).m_to_python != nullptr));
-  my_scope.attr(name) = bp::handle<>(reg->m_class_object);
+template <typename Type>
+bool add_attr(const char* name, bp::scope& my_scope) {
+  bp::handle<> tco(bp::objects::registered_class_object(bp::type_id<Type>()));
+  if (tco.get() == 0) return false;
+  my_scope.attr(name) = tco;
+  return true;
 }
 
 #endif
