@@ -29,6 +29,7 @@ void export_face();
 
 bp::class_<aos2::Geometry_traits_2> export_arr_linear_traits();
 bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits();
+bp::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits();
 bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits();
 bp::class_<aos2::Geometry_traits_2> export_arr_conic_traits();
 bp::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits();
@@ -343,6 +344,8 @@ void export_arrangement_on_surface_2() {
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
   auto traits_object = export_gps_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
+  auto traits_object = export_gps_segment_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
   auto traits_object = export_gps_circle_segment_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
@@ -357,6 +360,8 @@ void export_arrangement_on_surface_2() {
 #else
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
   auto traits_object = export_arr_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
+  auto traits_object = export_arr_non_caching_segment_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
   auto traits_object = export_arr_linear_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
