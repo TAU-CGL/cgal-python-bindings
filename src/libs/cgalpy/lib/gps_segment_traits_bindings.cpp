@@ -17,14 +17,16 @@
 
 namespace bp = boost::python;
 
+bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits();
+
 bp::object export_gps_segment_traits() {
   typedef bso2::Traits_2       GT;
-  auto traits = bp::class_<GT>("Traits_2");
+
+  auto traits = export_arr_segment_traits();
   bp::scope traits_scope(traits);
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;
-  };
-  Concepts concepts;
+  } concepts;
   export_GpsTraits_2<GT>(traits, concepts);
   return traits;
 }
