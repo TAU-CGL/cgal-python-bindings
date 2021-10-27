@@ -66,17 +66,6 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
   }
 #endif
 
-#ifdef CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS
-  {
-    SET_SCOPE("Aos2")
-    export_arrangement_on_surface_2();
-
-#ifdef CGALPY_AOS2_POINT_LOCATION_BINDINGS
-    export_point_location();
-#endif
-  }
-#endif
-
 #ifdef CGALPY_POLYGON_2_BINDINGS
   {
     SET_SCOPE("Pol2")
@@ -85,6 +74,18 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
     export_polygon_with_holes_2();
 #endif
   };
+#endif
+
+#ifdef CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS
+  // Aos2 must succeed Pol2
+  {
+    SET_SCOPE("Aos2")
+    export_arrangement_on_surface_2();
+
+#ifdef CGALPY_AOS2_POINT_LOCATION_BINDINGS
+    export_point_location();
+#endif
+  }
 #endif
 
 #ifdef CGALPY_CONVEX_HULL_2_BINDINGS
@@ -104,6 +105,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 
   // 2D Alpha shape must be bound after 2D triangulation!
 #ifdef CGALPY_ALPHA_SHAPE_2_BINDINGS
+  // AS2 must scceed Tri2
   {
     SET_SCOPE("AS2")
     export_alpha_shape_2();
@@ -126,6 +128,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 #endif
 
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
+  // BSO2 must succeed Aos2
   {
     SET_SCOPE("BSO2")
     export_boolean_set_operations_2();
