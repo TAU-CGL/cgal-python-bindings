@@ -15,7 +15,7 @@
 
 namespace bp = boost::python;
 
-typedef bso2::Polygon_with_holes_2    General_polygon_with_holes_2;
+typedef bso2::General_polygon_with_holes_2      General_polygon_with_holes_2;
 
 void export_general_polygon_with_holes_2() {
   bp::handle<> tco(bp::objects::registered_class_object(bp::type_id<General_polygon_with_holes_2>()));
