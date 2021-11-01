@@ -26,17 +26,6 @@ static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 
 bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
   typedef aos2::Geometry_traits_2       GT;
-  auto traits = bp::class_<GT>("Geometry_traits_2")
-    .def(bp::init<>());
-  bp::scope traits_scope(traits);
-  struct Concepts {
-    Aos_basic_traits_classes<GT> m_basic_traits_classes;
-    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
-    Aos_traits_classes<GT> m_traits_classes;
-    Aos_directional_x_monotone_traits_classes<GT> m_directional_x_monotone_traits_classes;
-  } concepts;
-  export_AosTraits_2<GT, Return_by_value>(traits, concepts);
-  export_AosDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits, concepts);
 
   bp::class_<CoordNT>("CoordNT")
     .def(bp::init<>())
@@ -73,6 +62,19 @@ bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
     .def(bp::self / bp::self)
     .def(bp::self /= bp::self)
     ;
+
+  auto traits = bp::class_<GT>("Geometry_traits_2")
+    .def(bp::init<>());
+  bp::scope traits_scope(traits);
+  struct Concepts {
+    Aos_basic_traits_classes<GT> m_basic_traits_classes;
+    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
+    Aos_traits_classes<GT> m_traits_classes;
+    Aos_directional_x_monotone_traits_classes<GT> m_directional_x_monotone_traits_classes;
+  } concepts;
+  export_AosTraits_2<GT, Return_by_value>(traits, concepts);
+  export_AosDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits, concepts);
+
 
   auto& p2_co = *(concepts.m_basic_traits_classes.m_point_2);
   p2_co
