@@ -219,15 +219,21 @@ bp::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
 
   auto traits = bp::class_<GT>("Geometry_traits_2");
   bp::scope traits_scope(traits);
-  export_AosTraits_2<GT, Return_by_value>(traits);
+  struct Concepts {
+    Aos_basic_traits_classes<GT> m_basic_traits_classes;
+    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
+    Aos_traits_classes<GT> m_traits_classes;
+  };
+  Concepts concepts;
+  export_AosTraits_2<GT, Return_by_value>(traits, concepts);
   traits
     .def("construct_curve_2_object", &GT::construct_curve_2_object)
     .def("construct_tpoint_2_object", &GT::construct_point_2_object)
     .def("construct_x_monotone_segment_2_object", &GT::construct_x_monotone_segment_2_object)
     ;
 
-  bp::class_<aos2::Point_2>("Point_2")
-    .def(bp::init<aos2::Point_2&>())
+  auto& p2_co = *(concepts.m_basic_traits_classes.m_point_2);
+  p2_co
     .def("curve", &aos2::Point_2::curve)
     .def("arcno", &aos2::Point_2::arcno)
     .def("to_double", &to_double)
@@ -242,19 +248,19 @@ bp::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
     .def(bp::self >= bp::self)
     ;
 
-  bp::class_<aos2::Curve_2>("Curve_2")
-    .def(bp::init<aos2::Curve_2&>())
-    .def("polynomial_2", &aos2::Curve_2::polynomial_2)
-    ;
-
-  bp::class_<aos2::X_monotone_curve_2>("X_monotone_curve_2")
-    .def(bp::init<aos2::X_monotone_curve_2&>())
+  auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
+  xcv_co
     .def("curve", &aos2::X_monotone_curve_2::curve, bp::return_internal_reference<>())
     .def("is_vertical", &aos2::X_monotone_curve_2::is_vertical)
     .def("is_finite", &aos2::X_monotone_curve_2::is_finite)
     .def("curve_end", &aos2::X_monotone_curve_2::curve_end)
     .def<int (aos2::X_monotone_curve_2::*)() const>("arcno", &aos2::X_monotone_curve_2::arcno)
     .def("x", &aos2::X_monotone_curve_2::x, Copy_const_reference())
+    ;
+
+  auto& cv_co = *(concepts.m_traits_classes.m_curve_2);
+  cv_co
+    .def("polynomial_2", &aos2::Curve_2::polynomial_2)
     ;
 
   bp::class_<aos2::Construct_curve_2>("Construct_curve_2", bp::no_init)
