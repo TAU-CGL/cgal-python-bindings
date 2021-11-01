@@ -22,14 +22,14 @@ template <typename T>
 //! This is completely messed up. The constructor should return a Polygon_2.
 // If it is just for initializing, then it's redundant!
 void export_ctr_gp_2_op(typename T::Construct_polygon_2 m,
-                        bp::list& curves, Polygon_2& pgn) {
+                        bp::list& curves, typename T::Polygon_2& pgn) {
   auto begin = bp::stl_input_iterator<typename T::X_monotone_curve_2>(curves);
   auto end = bp::stl_input_iterator<typename T::X_monotone_curve_2>();
   return m(begin, end, pgn);
 }
 
 template <typename T>
-Polygon_with_holes_2
+typename T::Polygon_with_holes_2
 export_ctr_gpwh_2_op(typename T::Construct_general_polygon_with_holes_2 m,
                      const typename T::Polygon_2& boundary, bp::list& holes) {
   auto begin = bp::stl_input_iterator<typename T::Polygon_2>(holes);
