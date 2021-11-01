@@ -23,11 +23,11 @@ namespace bp = boost::python;
 
 namespace bso2 {
 
-void complement0(Polygon_2& pgn, Polygon_with_holes_2& res)
+void complement0(General_polygon_2& pgn, General_polygon_with_holes_2& res)
 { CGAL::complement(pgn, res); }
 
-void complement1(Polygon_with_holes_2& pgn, bp::list& lst) {
-  auto v = std::vector<Polygon_with_holes_2>();
+void complement1(General_polygon_with_holes_2& pgn, bp::list& lst) {
+  auto v = std::vector<General_polygon_with_holes_2>();
   CGAL::complement(pgn, std::back_inserter(v));
   for (auto p : v) { lst.append(p); }
 }
@@ -49,13 +49,14 @@ bool do_intersect_range(bp::list& polygon_lst, bp::list& pwh_lst) {
 
 template <typename T0, typename T1>
 void intersection_linear(T0& p0, T1& p1, bp::list& lst) {
-  auto v = std::vector<Polygon_with_holes_2>();
+  auto v = std::vector<General_polygon_with_holes_2>();
   CGAL::intersection(p0, p1, std::back_inserter(v));
   for (auto p : v) lst.append(p);
 }
 
 template<typename T0, typename T1>
-void intersection_range(bp::list& polygon_lst, bp::list& pwh_lst, bp::list& lst) {
+void intersection_range(bp::list& polygon_lst, bp::list& pwh_lst, bp::list& lst)
+{
   auto begin0 = bp::stl_input_iterator<T0>(polygon_lst);
   auto end0 = bp::stl_input_iterator<T0>();
   auto begin1 = bp::stl_input_iterator<T1>(pwh_lst);
@@ -63,19 +64,20 @@ void intersection_range(bp::list& polygon_lst, bp::list& pwh_lst, bp::list& lst)
   auto v0 = std::vector<T0>(begin0, end0);
   auto v1 = std::vector<T1>(begin1, end1);
   auto res = std::vector<T1>();
-  CGAL::intersection(v0.begin(), v0.end(), v1.begin(), v1.end(), std::back_inserter(res));
+  CGAL::intersection(v0.begin(), v0.end(), v1.begin(), v1.end(),
+                     std::back_inserter(res));
   for (auto p : res) lst.append(p);
 }
 
 template <typename T0, typename T1>
 void difference_linear(T0& p0, T1& p1, bp::list& lst) {
-  auto v = std::vector<Polygon_with_holes_2>();
+  auto v = std::vector<General_polygon_with_holes_2>();
   CGAL::difference(p0, p1, std::back_inserter(v));
   for (auto p : v) lst.append(p);
 }
 
 template <typename T0, typename T1>
-bool join_linear(T0& p0, T1& p1, Polygon_with_holes_2& pwh)
+bool join_linear(T0& p0, T1& p1, General_polygon_with_holes_2& pwh)
 { return CGAL::join(p0, p1, pwh); }
 
 template<typename T0, typename T1>
@@ -94,7 +96,7 @@ void join_range(bp::list& polygon_lst, bp::list& pwh_lst, bp::list& lst) {
 
 template <typename T0, typename T1>
 void symmetric_difference_linear(T0& p0, T1& p1, bp::list& lst) {
-  auto v = std::vector<Polygon_with_holes_2>();
+  auto v = std::vector<General_polygon_with_holes_2>();
   CGAL::symmetric_difference(p0, p1, std::back_inserter(v));
   for (auto p : v) lst.append(p);
 }
@@ -120,7 +122,7 @@ CGAL::Oriented_side oriented_side(T0& p0, T1& p1)
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-void connect_holes(Polygon_with_holes_2& pwh, bp::list& lst) {
+void connect_holes(General_polygon_with_holes_2& pwh, bp::list& lst) {
   auto v = std::vector<Traits_2::Point_2>();
   CGAL::connect_holes(pwh, std::back_inserter(v));
   for (auto p : v) lst.append(p);
@@ -130,8 +132,8 @@ void connect_holes(Polygon_with_holes_2& pwh, bp::list& lst) {
 }
 
 void export_boolean_set_operations_2() {
-  typedef bso2::Polygon_2               Pgn;
-  typedef bso2::Polygon_with_holes_2    Pwh;
+  typedef bso2::General_polygon_2               Pgn;
+  typedef bso2::General_polygon_with_holes_2    Pwh;
 
   bp::def("complement", bso2::complement0);
   bp::def("complement", bso2::complement1);
