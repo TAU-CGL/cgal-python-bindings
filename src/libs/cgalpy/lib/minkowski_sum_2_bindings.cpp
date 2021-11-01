@@ -6,57 +6,163 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+
 #include <boost/python.hpp>
 
-#include "CGALPY/minkowski_sum_2_config.hpp"
-#include "CGALPY/polygon_2_types.hpp"
+#include "CGALPY/minkowski_sum_2_types.hpp"
+#include "CGALPY/polygon_partitioning_types.hpp"
 
 #include <CGAL/minkowski_sum_2.h>
-namespace bp = boost::python;
-
 #include <CGAL/approximated_offset_2.h>
 
-typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_with_holes_2 General_polygon_with_holes_2;
-typedef typename CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2 General_polygon_2;
+namespace bp = boost::python;
+
+namespace ms2 {
+
+#if 0
+// The binding for Minkowski sum by decomposition is temporarily commented out
+// until a bug in CGAL is fixed. Otherwise, the code does not compile.
+
+//////// By Decomposition ////////
+// ===============================
+
+// One Decomposition Strategy
+template <typename T1, typename T2, typename T3>
+void bind_mink_sum_decomp_one_strategy_3T(...) {}
+
+  template <typename T1, typename T2, typename T3,
+            typename = decltype(T3()(T1(), std::list<Polygon_2>::iterator())),
+            typename = decltype(T3()(T2(), std::list<Polygon_2>::iterator()))>
+void bind_mink_sum_decomp_one_strategy_3T(bool) {
+  bp::def<Polygon_with_holes_2(const T1&, const T2&, const T3&)>
+    ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>);
+}
 
 template <typename T1, typename T2>
-Polygon_with_holes_2 minkowski_sum_2(T1& P, T2& Q)
+void bind_mink_sum_decomp_one_strategy_2T() {
+  bind_mink_sum_decomp_one_strategy_3T<T1, T2, pp2::Polygon_vertical_decomposition_2>(true);
+  bind_mink_sum_decomp_one_strategy_3T<T1, T2, pp2::Polygon_triangulation_decomposition_2>(true);
+  bind_mink_sum_decomp_one_strategy_3T<T1, T2, pp2::Small_side_angle_bisector_decomposition_2>(true);
+}
+
+template <typename T>
+void bind_mink_sum_decomp_one_strategy_1T() {
+  bind_mink_sum_decomp_one_strategy_2T<T, Polygon_2>();
+  bind_mink_sum_decomp_one_strategy_2T<T, Polygon_with_holes_2>();
+}
+
+void bind_mink_sum_decomp_one_strategy() {
+  bind_mink_sum_decomp_one_strategy_1T<Polygon_2>();
+  bind_mink_sum_decomp_one_strategy_1T<Polygon_with_holes_2>();
+}
+
+// Two Decomposition Staretegies
+template <typename T1, typename T2, typename T3, typename T4>
+void bind_mink_sum_decomp_two_strategies_4T(...) {}
+
+template <typename T1, typename T2, typename T3, typename T4,
+          typename = decltype(T3()(T1(), std::list<Polygon_2>::iterator())),
+          typename = decltype(T4()(T2(), std::list<Polygon_2>::iterator()))>
+void bind_mink_sum_decomp_two_strategies_4T(bool) {
+  bp::def<Polygon_with_holes_2(const T1&, const T2&, const T3&, const T4&)>
+    ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>);
+}
+
+template <typename T1, typename T2, typename T3>
+void bind_mink_sum_decomp_two_strategies_3T() {
+  bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, pp2::Polygon_vertical_decomposition_2>(true);
+  bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, pp2::Polygon_triangulation_decomposition_2>(true);
+  bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, pp2::Small_side_angle_bisector_decomposition_2>(true);
+}
+
+template <typename T1, typename T2>
+void bind_mink_sum_decomp_two_strategies_2T() {
+  bind_mink_sum_decomp_two_strategies_3T<T1, T2, pp2::Polygon_vertical_decomposition_2>();
+  bind_mink_sum_decomp_two_strategies_3T<T1, T2, pp2::Polygon_triangulation_decomposition_2>();
+  bind_mink_sum_decomp_two_strategies_3T<T1, T2, pp2::Small_side_angle_bisector_decomposition_2>();
+}
+
+template <typename T>
+void bind_mink_sum_decomp_two_strategies_1T() {
+  bind_mink_sum_decomp_two_strategies_2T<T, Polygon_2>();
+  bind_mink_sum_decomp_two_strategies_2T<T, Polygon_with_holes_2>();
+}
+
+void bind_mink_sum_decomp_two_strategies() {
+  bind_mink_sum_decomp_two_strategies_1T<Polygon_2>();
+  bind_mink_sum_decomp_two_strategies_1T<Polygon_with_holes_2>();
+}
+
+#endif
+
+// Default Minkowski Sum
+template <typename T1, typename T2>
+Polygon_with_holes_2 minkowski_sum_2(const T1& P, const T2& Q)
 { return CGAL::minkowski_sum_2(P, Q); }
 
 template <typename T1, typename T2>
-Polygon_with_holes_2 minkowski_sum_by_full_convolution_2(T1& P, T2& Q)
+Polygon_with_holes_2 minkowski_sum_by_full_convolution_2(const T1& P, const T2& Q)
 { return CGAL::minkowski_sum_by_full_convolution_2(P, Q); }
 
 template <typename T1, typename T2>
-Polygon_with_holes_2 minkowski_sum_by_reduced_convolution_2(T1& P, T2& Q)
+Polygon_with_holes_2 minkowski_sum_by_reduced_convolution_2(const T1& P, const T2& Q)
 { return CGAL::minkowski_sum_by_reduced_convolution_2(P, Q); }
 
-General_polygon_with_holes_2 approximated_offset_2(Polygon_2& p, FT& r, double eps)
+#if 0
+General_polygon_with_holes_2
+approximated_offset_2(const Polygon_2& p, const FT& r, double eps)
 { return CGAL::approximated_offset_2(p, r, eps); }
 
-General_polygon_with_holes_2 approximated_offset_2_pwh(Polygon_with_holes_2& pwh, FT& r, double eps)
+General_polygon_with_holes_2
+approximated_offset_2_pwh(const Polygon_with_holes_2& pwh, const FT& r, double eps)
 { return CGAL::approximated_offset_2(pwh, r, eps); }
 
-void approximated_inset_2(Polygon_2& p, FT& r, double eps, bp::list& lst) {
+void approximated_inset_2(const Polygon_2& p, const FT& r, double eps, bp::list& lst) {
   auto v = std::vector<General_polygon_2>();
   CGAL::approximated_inset_2(p, r, eps, std::back_inserter(v));
   for (auto p : v) lst.append(p);
 }
+#endif
+
+}
 
 void export_minkowski_sum_2() {
-  bp::def("minkowski_sum_2", &minkowski_sum_2<Polygon_2, Polygon_2>);
-  bp::def("minkowski_sum_2", &minkowski_sum_2<Polygon_2, Polygon_with_holes_2>);
-  bp::def("minkowski_sum_2", &minkowski_sum_2<Polygon_with_holes_2, Polygon_2>);
-  bp::def("minkowski_sum_2", &minkowski_sum_2<Polygon_with_holes_2, Polygon_with_holes_2>);
+  typedef ms2::Polygon_2                Polygon_2;
+  typedef ms2::Polygon_with_holes_2     Polygon_with_holes_2;
 
-  bp::def("minkowski_sum_by_full_convolution_2", &minkowski_sum_by_full_convolution_2<Polygon_2, Polygon_2>);
+#if 0
+  // By decomposition
+  // ================
+  ms2::bind_mink_sum_decomp_one_strategy();
+  ms2::bind_mink_sum_decomp_two_strategies();
+#endif
 
-  bp::def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_2, Polygon_2>);
-  bp::def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_2, Polygon_with_holes_2>);
-  bp::def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_with_holes_2, Polygon_2>);
-  bp::def("minkowski_sum_by_reduced_convolution_2", &minkowski_sum_by_reduced_convolution_2<Polygon_with_holes_2, Polygon_with_holes_2>);
+  bp::def("minkowski_sum_2",
+          &ms2::minkowski_sum_2<Polygon_2, Polygon_2>);
+  bp::def("minkowski_sum_2",
+          &ms2::minkowski_sum_2<Polygon_2, Polygon_with_holes_2>);
+  bp::def("minkowski_sum_2",
+          &ms2::minkowski_sum_2<Polygon_with_holes_2, Polygon_2>);
+  bp::def("minkowski_sum_2",
+          &ms2::minkowski_sum_2<Polygon_with_holes_2, Polygon_with_holes_2>);
 
-  bp::def("approximated_offset_2", &approximated_offset_2);
-  bp::def("approximated_offset_2", &approximated_offset_2_pwh);
-  //def("approximated_inset_2", &approximated_inset_2);
+  bp::def("minkowski_sum_by_full_convolution_2",
+          &ms2::minkowski_sum_by_full_convolution_2<Polygon_2, Polygon_2>);
+
+  bp::def("minkowski_sum_by_reduced_convolution_2",
+          &ms2::minkowski_sum_by_reduced_convolution_2<Polygon_2, Polygon_2>);
+  bp::def("minkowski_sum_by_reduced_convolution_2",
+          &ms2::minkowski_sum_by_reduced_convolution_2<Polygon_2,
+          Polygon_with_holes_2>);
+  bp::def("minkowski_sum_by_reduced_convolution_2",
+          &ms2::minkowski_sum_by_reduced_convolution_2<Polygon_with_holes_2,
+          Polygon_2>);
+  bp::def("minkowski_sum_by_reduced_convolution_2",
+          &ms2::minkowski_sum_by_reduced_convolution_2<Polygon_with_holes_2,
+          Polygon_with_holes_2>);
+
+  //bp::def("approximated_offset_2", &ms2::approximated_offset_2);
+  //bp::def("approximated_offset_2", &ms2::approximated_offset_2_pwh);
+  //def("approximated_inset_2", &ms2::approximated_inset_2);
 }
