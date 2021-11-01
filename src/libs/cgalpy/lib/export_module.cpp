@@ -151,7 +151,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
   {
-    SET_SCOPE("MN2")
+    SET_SCOPE("MS2")
     export_minkowski_sum_2();
   };
 #endif
