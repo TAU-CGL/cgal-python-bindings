@@ -25,6 +25,9 @@ typedef CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2
 typedef CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_with_holes_2
   Circle_segment_polygon_with_holes_2;
 
+typedef CGAL::Polygon_nop_decomposition_2<Kernel, Point_2_container>
+  Polygon_nop_decomposition_2;
+
 }
 
 #endif
