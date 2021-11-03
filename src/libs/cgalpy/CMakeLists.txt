@@ -76,8 +76,6 @@ if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_set_2_bindings.cpp)
   else()
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_set_2_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_2_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_with_holes_2_bindings.cpp)
   endif()
 
   # Geometry Traits

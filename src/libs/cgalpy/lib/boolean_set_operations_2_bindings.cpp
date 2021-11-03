@@ -18,6 +18,8 @@
 
 #include "CGALPY/boolean_set_operations_2_config.hpp"
 #include "CGALPY/boolean_set_operations_2_types.hpp"
+#include "CGALPY/export_general_polygon_2.hpp"
+#include "CGALPY/export_general_polygon_with_holes_2.hpp"
 
 namespace bp = boost::python;
 
@@ -135,6 +137,8 @@ void export_boolean_set_operations_2() {
   typedef bso2::General_polygon_2               Pgn;
   typedef bso2::General_polygon_with_holes_2    Pwh;
 
+  bp::scope bso2_scope = bp::scope();
+
   bp::def("complement", bso2::complement0);
   bp::def("complement", bso2::complement1);
   bp::def("do_intersect", &bso2::do_intersect<Pgn, Pgn>);
@@ -169,5 +173,13 @@ void export_boolean_set_operations_2() {
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
   bp::def("connect_holes", &bso2::connect_holes);
+#else
+  static const char pgn[] = "General_polygon_2";
+  bp::class_<Pgn>* co_pgn(nullptr);
+  export_general_polygon_2<Pgn, pgn>(bso2_scope, co_pgn);
+
+  static const char pwh[] = "General_polygon_with_holes_2";
+  bp::class_<Pwh>* co_pwh(nullptr);
+  export_general_polygon_with_holes_2<Pwh, pwh>(bso2_scope, co_pwh);
 #endif
 }
