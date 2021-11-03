@@ -43,6 +43,7 @@ void bind_mink_sum_decomp_one_strategy_3T(bool) {
 
 template <typename T1, typename T2>
 void bind_mink_sum_decomp_one_strategy_2T() {
+  bind_mink_sum_decomp_one_strategy_3T<T1, T2, ms2::Polygon_nop_decomposition_2>(true);
   bind_mink_sum_decomp_one_strategy_3T<T1, T2, pp2::Polygon_vertical_decomposition_2>(true);
   bind_mink_sum_decomp_one_strategy_3T<T1, T2, pp2::Polygon_triangulation_decomposition_2>(true);
   bind_mink_sum_decomp_one_strategy_3T<T1, T2, pp2::Small_side_angle_bisector_decomposition_2>(true);
@@ -73,6 +74,7 @@ void bind_mink_sum_decomp_two_strategies_4T(bool) {
 
 template <typename T1, typename T2, typename T3>
 void bind_mink_sum_decomp_two_strategies_3T() {
+  bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, ms2::Polygon_nop_decomposition_2>(true);
   bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, pp2::Polygon_vertical_decomposition_2>(true);
   bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, pp2::Polygon_triangulation_decomposition_2>(true);
   bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, pp2::Small_side_angle_bisector_decomposition_2>(true);
@@ -80,6 +82,7 @@ void bind_mink_sum_decomp_two_strategies_3T() {
 
 template <typename T1, typename T2>
 void bind_mink_sum_decomp_two_strategies_2T() {
+  bind_mink_sum_decomp_two_strategies_3T<T1, T2, ms2::Polygon_nop_decomposition_2>();
   bind_mink_sum_decomp_two_strategies_3T<T1, T2, pp2::Polygon_vertical_decomposition_2>();
   bind_mink_sum_decomp_two_strategies_3T<T1, T2, pp2::Polygon_triangulation_decomposition_2>();
   bind_mink_sum_decomp_two_strategies_3T<T1, T2, pp2::Small_side_angle_bisector_decomposition_2>();
