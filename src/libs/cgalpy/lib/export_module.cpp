@@ -24,8 +24,6 @@ void export_polygon_2();
 void export_polygon_with_holes_2();
 void export_polygon_partition_2();
 void export_polygon_set_2();
-void export_general_polygon_2();
-void export_general_polygon_with_holes_2();
 void export_general_polygon_set_2();
 void export_polygon_with_holes_2();
 void export_minkowski_sum_2();
@@ -136,8 +134,6 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
     export_polygon_set_2();
 #else
     export_general_polygon_set_2();
-    export_general_polygon_2();
-    export_general_polygon_with_holes_2();
 #endif
   };
 #endif
