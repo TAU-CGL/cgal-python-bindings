@@ -112,10 +112,8 @@ if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
 endif()
 
 if (CGALPY_POLYGON_2_BINDINGS)
-  if(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
-  endif()
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
 endif()
 
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
