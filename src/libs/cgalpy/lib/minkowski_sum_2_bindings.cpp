@@ -17,6 +17,7 @@
 #include "CGALPY/polygon_partitioning_types.hpp"
 #include "CGALPY/export_general_polygon_2.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
+#include "CGALPY/if_.hpp"
 
 namespace bp = boost::python;
 
@@ -28,17 +29,31 @@ namespace ms2 {
 
 //////// By Decomposition ////////
 // ===============================
+// A utility to obtain an output iterator that dereferences a (simple) polygon
+// target<T>::type select:
+//   std::list<T>::iterator if T is Polygon_2
+//   std::list<T::Polygon_2>::iterator if T is Polygon_with_holes_2
+template <typename T, typename = void> struct target {
+  typedef typename std::list<T>::iterator type;
+};
+
+template <typename T>
+struct target<T, typename if_<false, typename T::Polygon_2>::type> {
+  typedef typename std::list<typename T::Polygon_2>::iterator type;
+};
 
 // One Decomposition Strategy
 template <typename T1, typename T2, typename T3>
 void bind_mink_sum_decomp_one_strategy_3T(...) {}
 
-  template <typename T1, typename T2, typename T3,
-            typename = decltype(T3()(T1(), std::list<Polygon_2>::iterator())),
-            typename = decltype(T3()(T2(), std::list<Polygon_2>::iterator()))>
+static int cnt1(0);
+template <typename T1, typename T2, typename T3,
+          typename = decltype(T3()(T1(), typename target<T1>::type())),
+          typename = decltype(T3()(T2(), typename target<T2>::type()))>
 void bind_mink_sum_decomp_one_strategy_3T(bool) {
   bp::def<Polygon_with_holes_2(const T1&, const T2&, const T3&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>);
+  std::cout << "NUM1: " << ++cnt1 << std::endl;
 }
 
 template <typename T1, typename T2>
@@ -64,12 +79,14 @@ void bind_mink_sum_decomp_one_strategy() {
 template <typename T1, typename T2, typename T3, typename T4>
 void bind_mink_sum_decomp_two_strategies_4T(...) {}
 
+static int cnt2(0);
 template <typename T1, typename T2, typename T3, typename T4,
-          typename = decltype(T3()(T1(), std::list<Polygon_2>::iterator())),
-          typename = decltype(T4()(T2(), std::list<Polygon_2>::iterator()))>
+          typename = decltype(T3()(T1(), typename target<T1>::type())),
+          typename = decltype(T4()(T2(), typename target<T1>::type()))>
 void bind_mink_sum_decomp_two_strategies_4T(bool) {
   bp::def<Polygon_with_holes_2(const T1&, const T2&, const T3&, const T4&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>);
+  std::cout << "NUM2: " << ++cnt2 << std::endl;
 }
 
 template <typename T1, typename T2, typename T3>
@@ -146,7 +163,7 @@ void export_minkowski_sum_2() {
   // By decomposition
   // ================
   ms2::bind_mink_sum_decomp_one_strategy();
-  ms2::bind_mink_sum_decomp_two_strategies();
+  // ms2::bind_mink_sum_decomp_two_strategies();
 #endif
 
   bp::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>);
