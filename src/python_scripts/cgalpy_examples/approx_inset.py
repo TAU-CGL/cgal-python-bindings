@@ -35,7 +35,6 @@ def read_polygon(inp):
 filename = sys.argv[2] if len(sys.argv) > 2 else "tight.dat"
 with open(filename, 'r') as inp:
   P = read_polygon(inp)
-  print("No. of vertices: ", P.size())
 
   # Approximate the offset polygon.
   inset_polygons = []
