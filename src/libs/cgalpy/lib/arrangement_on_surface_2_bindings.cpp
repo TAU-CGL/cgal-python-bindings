@@ -302,16 +302,17 @@ void bind_overlay_function_traits() {
     .def(bp::init<>())
     .def(bp::init<bp::object, bp::object, bp::object, bp::object, bp::object,
                   bp::object, bp::object, bp::object, bp::object, bp::object>())
-    .def_readwrite("vv_v", &aos2::Arr_overlay_function_traits::m_vv_v)
-    .def_readwrite("ve_v", &aos2::Arr_overlay_function_traits::m_ve_v)
-    .def_readwrite("vf_v", &aos2::Arr_overlay_function_traits::m_vf_v)
-    .def_readwrite("ev_v", &aos2::Arr_overlay_function_traits::m_ev_v)
-    .def_readwrite("fv_v", &aos2::Arr_overlay_function_traits::m_fv_v)
-    .def_readwrite("ee_v", &aos2::Arr_overlay_function_traits::m_ee_v)
-    .def_readwrite("ee_e", &aos2::Arr_overlay_function_traits::m_ee_e)
-    .def_readwrite("ef_e", &aos2::Arr_overlay_function_traits::m_ef_e)
-    .def_readwrite("fe_e", &aos2::Arr_overlay_function_traits::m_fe_e)
-    .def_readwrite("ff_f", &aos2::Arr_overlay_function_traits::m_ff_f)
+    .def("set_vv_v", &aos2::Arr_overlay_function_traits::set_vv_v)
+    .def("set_vv_v", &aos2::Arr_overlay_function_traits::set_vv_v)
+    .def("set_ve_v", &aos2::Arr_overlay_function_traits::set_ve_v)
+    .def("set_vf_v", &aos2::Arr_overlay_function_traits::set_vf_v)
+    .def("set_ev_v", &aos2::Arr_overlay_function_traits::set_ev_v)
+    .def("set_fv_v", &aos2::Arr_overlay_function_traits::set_fv_v)
+    .def("set_ee_v", &aos2::Arr_overlay_function_traits::set_ee_v)
+    .def("set_ee_e", &aos2::Arr_overlay_function_traits::set_ee_e)
+    .def("set_ef_e", &aos2::Arr_overlay_function_traits::set_ef_e)
+    .def("set_fe_e", &aos2::Arr_overlay_function_traits::set_fe_e)
+    .def("set_ff_f", &aos2::Arr_overlay_function_traits::set_ff_f)
     ;
 }
 
