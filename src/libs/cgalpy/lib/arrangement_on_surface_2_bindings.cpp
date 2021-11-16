@@ -46,7 +46,7 @@ typedef typename boost::variant<Vertex_const_handle, Halfedge_const_handle,
                                 Face_const_handle>      variant;
 
 typedef Arr_function_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
-                                    Face::Data>
+                                    bp::object>
   Arr_function_overlay_traits;
 
 // Free functions
