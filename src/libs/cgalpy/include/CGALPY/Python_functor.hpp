@@ -33,7 +33,8 @@ private:
 
 public:
   Python_functor_2() {}
-  Python_functor_2(bp::object python_functor) : m_python_functor(python_functor)
+  Python_functor_2(bp::object python_functor) :
+    m_python_functor(python_functor)
   {}
 
   T2 operator()(T0 a, T1 b) const
@@ -53,6 +54,21 @@ public:
 
   T2 operator()(const T0& a, const T1& b) const
   { return bp::extract<T2>(m_python_functor(a, b)); }
+};
+
+template <typename T0, typename T1, typename T2>
+class Python_functor_3_ref {
+private:
+  bp::object m_python_functor;
+
+public:
+  Python_functor_3_ref() {}
+  Python_functor_3_ref(bp::object python_functor) :
+    m_python_functor(python_functor)
+  {}
+
+  void operator()(const T0& a, const T1& b, T2& r) const
+  { if (m_python_functor) m_python_functor(a, b, r); }
 };
 
 #endif // !PYTHON_FUNCTOR
