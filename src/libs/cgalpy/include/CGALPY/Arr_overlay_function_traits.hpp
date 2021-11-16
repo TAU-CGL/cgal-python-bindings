@@ -81,7 +81,6 @@ private:
                                                  Arrangement_r>
     Arr_default_overlay_traits;
 
-public:
   Function m_vv_v;
   Function m_ve_v;
   Function m_vf_v;
@@ -92,6 +91,10 @@ public:
   Function m_ef_e;
   Function m_fe_e;
   Function m_ff_f;
+
+public:
+  /// Constructors
+  /// @{
 
   // Default constructor
   Arr_overlay_function_traits() : Arr_default_overlay_traits() {}
@@ -120,6 +123,27 @@ public:
     m_fe_e(py_function8),
     m_ff_f(py_function9)
     {}
+
+  /// @}
+
+  /// Setters
+  /// @{
+
+  void set_vv_v(bp::object vv_v) { m_vv_v = vv_v; }
+  void set_ve_v(bp::object ve_v) { m_ve_v = ve_v; }
+  void set_vf_v(bp::object vf_v) { m_vf_v = vf_v; }
+  void set_ev_v(bp::object ev_v) { m_ev_v = ev_v; }
+  void set_fv_v(bp::object fv_v) { m_fv_v = fv_v; }
+  void set_ee_v(bp::object ee_v) { m_ee_v = ee_v; }
+  void set_ee_e(bp::object ee_e) { m_ee_e = ee_e; }
+  void set_ef_e(bp::object ef_e) { m_ef_e = ef_e; }
+  void set_fe_e(bp::object fe_e) { m_fe_e = fe_e; }
+  void set_ff_f(bp::object ff_f) { m_ff_f = ff_f; }
+
+  /// @}
+
+  /// Creators
+  /// @{
 
   /*! Create the vertex v induced by the coinciding vertices v1 and v2.
    */
@@ -180,6 +204,8 @@ public:
    */
   void create_face(Face_handle_a f1, Face_handle_b f2, Face_handle_r f) const
   { apply<Face_a, Face_b, Face_r, Function>(&*f1, &*f2, &*f, m_ff_f); }
+
+  /// @}
 };
 
 #endif

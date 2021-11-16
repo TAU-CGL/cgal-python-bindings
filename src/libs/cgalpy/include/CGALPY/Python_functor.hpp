@@ -67,8 +67,11 @@ public:
     m_python_functor(python_functor)
   {}
 
-  void operator()(const T0& a, const T1& b, T2& r) const
-  { if (m_python_functor) m_python_functor(a, b, r); }
+  void operator()(const T0& a, const T1& b, T2& r) const {
+    // By default, arguments are copied into new Python objects.
+    // Override this behavior by the use of boost::ref()
+    if (! m_python_functor.is_none()) m_python_functor(a, b, boost::ref(r));
+  }
 };
 
-#endif // !PYTHON_FUNCTOR
+#endif
