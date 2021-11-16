@@ -33,13 +33,16 @@ c3 = Curve_2(Point_2(3, 3), Point_2(1, 3))
 c4 = Curve_2(Point_2(1, 3), Point_2(1, 1))
 Aos2.insert(arr2, [c1, c2, c3, c4])
 
+vertex_extended = True if hasattr(next(arr1.vertices()), 'set_data') else False
+halfedge_extended = True if hasattr(next(arr1.halfedges()), 'set_data') else False
+face_extended = True if hasattr(next(arr1.faces()), 'set_data') else False
+
 # Set the data for the faces. The data can be any python object
+cnt: int = 0
 for arr in [arr1, arr2]:
+  if face_extended:
     for f in arr.faces():
-        if f.is_unbounded():
-            f.set_data(0)
-        else:
-            f.set_data(1)
+      f.set_data(0) if f.is_unbounded() else f.set_data(1)
 
     # Alternative
     # ubf: Face = arr.unbounded_face()
@@ -47,6 +50,10 @@ for arr in [arr1, arr2]:
     # f: Face
     # for ccb in ubf.inner_ccbs():
     #     next(next(ubf.inner_ccbs())).twin().face().set_data(1)
+  if vertex_extended:
+    for v in arr.vertices():
+      v.set_data(cnt)
+      cnt = cnt + 1
 
 result = Arrangement_2()
 
@@ -56,27 +63,45 @@ result = Arrangement_2()
 # CGALPY specific:
 # The Arr_face_overlay_traits object behaves much like the one in CGAL
 # https://doc.cgal.org/latest/Arrangement_on_surface_2/classCGAL_1_1Arr__face__overlay__traits.html
-# Only that instead of being templated with a functor, the functor is passed as a parameter to the constructor
-# Similarly the Arr_overlay_traits object accepts the 10 functions to be implemented as described here:
+# Instead of being templated with a functor, the functor is passed as a
+# parameter to the constructor. Similarly the Arr_overlay_function traits
+# object accepts the 10 functions to be implemented as described here:
 # https://doc.cgal.org/latest/Arrangement_on_surface_2/classOverlayTraits.html
-# As arguments to its constructor (in the same order as they are listed in the documentation)
+# As arguments to its constructor (in the same order as they are listed in the
+# documentation). If you pass just one function, by default, it is the function
+# that accepts the data items of two faces and computes the data item of the
+# overlaid face.
 
-# overlay_function_traits = Aos2.Arr_overlay_function_traits(lambda x, y: x+y)
-# Aos2.overlay(arr1, arr2, result, overlay_function_traits)
+# traits = Aos2.Arr_overlay_function_traits(lambda x, y: x+y)
+# Aos2.overlay(arr1, arr2, result, traits)
 
-# def func(f1, f2, f):
-#     print("f1: ", f1.data())
-#     print("f2: ", f2.data())
-#     f.set_data(f1.data() + f2.data())
-#     print("f: ", f.data())
-#     print(type(f))
+# The Arr_overlay_traits is more generic. Here, you pass functions
+# that accepts three cells. As in the case above, if you pass just one
+# function, by default, it is the function that accepts the data items
+# of two faces and computes the data item of the overlaid face.
+if face_extended:
+  traits = Aos2.Arr_overlay_traits(lambda f1, f2, f: f.set_data(f1.data()+f2.data()))
+  Aos2.overlay(arr1, arr2, result, traits)
 
-# overlay_traits = Aos2.Arr_overlay_traits(func)
-overlay_traits = Aos2.Arr_overlay_traits(lambda f1, f2, f: f.set_data(f1.data()+f2.data()))
-Aos2.overlay(arr1, arr2, result, overlay_traits)
-
-for f in result.faces():
+  for f in result.faces():
     print(f.data())
+
+def func(x, y):
+  if x is None and y is None:
+    return 10
+  if x is None:
+    return 20
+  if y is None:
+    return 30
+  return x + y
+
+if vertex_extended:
+  traits = Aos2.Arr_overlay_function_traits()
+  traits.set_vv_v(lambda x, y: x+y)
+  Aos2.overlay(arr1, arr2, result, traits)
+
+  for v in result.vertices():
+    print(v.data())
 
 #  0  |----------|
 #     |   1      |
