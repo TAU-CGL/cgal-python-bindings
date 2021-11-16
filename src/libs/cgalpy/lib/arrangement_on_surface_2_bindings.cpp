@@ -21,7 +21,7 @@
 
 #include "CGALPY/Python_functor.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include <CGALPY/Arr_python_overlay_traits.hpp>
+#include <CGALPY/Arr_function_overlay_traits.hpp>
 
 void export_vertex();
 void export_halfedge();
@@ -43,10 +43,11 @@ namespace aos2 {
 namespace bp = boost::python;
 
 typedef typename boost::variant<Vertex_const_handle, Halfedge_const_handle,
-  Face_const_handle> variant;
+                                Face_const_handle>      variant;
 
-typedef Arr_python_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
-                                  Face::Data> Arr_overlay_traits;
+typedef Arr_function_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
+                                    Face::Data>
+  Arr_function_overlay_traits;
 
 // Free functions
 Vertex& insert_point_default(Arrangement_2& arr, Point_2& p)
@@ -106,7 +107,7 @@ bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl)
 { return CGAL::do_intersect(arr, c, pl); }
 
 void overlay(Arrangement_2& arr1, Arrangement_2& arr2, Arrangement_2& arr_res,
-             Arr_overlay_traits& traits)
+             Arr_function_overlay_traits& traits)
 { CGAL::overlay(arr1, arr2, arr_res, traits); }
 
 Face& remove_edge_free(Arrangement_2& arr, Halfedge& e) {
@@ -291,30 +292,33 @@ void assign(Arrangement_2& arr, Arrangement_2& input_arr)
 // Overlay traits
 template <bool VertexExtended, bool HalfedgeExtended, bool FaceExtended>
 void bind_overlay_traits() {
-  bp::class_<aos2::Arr_overlay_traits>("Arr_overlay_traits").def(bp::init<>())
+  bp::class_<aos2::Arr_function_overlay_traits>("Arr_function_overlay_traits")
+    .def(bp::init<>())
     .def(bp::init<bp::object, bp::object, bp::object, bp::object, bp::object,
                   bp::object, bp::object, bp::object, bp::object, bp::object>())
-    .def_readwrite("vv_v", &aos2::Arr_overlay_traits::m_vv_v)
-    .def_readwrite("ve_v", &aos2::Arr_overlay_traits::m_ve_v)
-    .def_readwrite("vf_v", &aos2::Arr_overlay_traits::m_vf_v)
-    .def_readwrite("ev_v", &aos2::Arr_overlay_traits::m_ev_v)
-    .def_readwrite("fv_v", &aos2::Arr_overlay_traits::m_fv_v)
-    .def_readwrite("ee_v", &aos2::Arr_overlay_traits::m_ee_v)
-    .def_readwrite("ee_e", &aos2::Arr_overlay_traits::m_ee_e)
-    .def_readwrite("ef_e", &aos2::Arr_overlay_traits::m_ef_e)
-    .def_readwrite("fe_e", &aos2::Arr_overlay_traits::m_fe_e)
-    .def_readwrite("ff_f", &aos2::Arr_overlay_traits::m_ff_f)
+    .def_readwrite("vv_v", &aos2::Arr_function_overlay_traits::m_vv_v)
+    .def_readwrite("ve_v", &aos2::Arr_function_overlay_traits::m_ve_v)
+    .def_readwrite("vf_v", &aos2::Arr_function_overlay_traits::m_vf_v)
+    .def_readwrite("ev_v", &aos2::Arr_function_overlay_traits::m_ev_v)
+    .def_readwrite("fv_v", &aos2::Arr_function_overlay_traits::m_fv_v)
+    .def_readwrite("ee_v", &aos2::Arr_function_overlay_traits::m_ee_v)
+    .def_readwrite("ee_e", &aos2::Arr_function_overlay_traits::m_ee_e)
+    .def_readwrite("ef_e", &aos2::Arr_function_overlay_traits::m_ef_e)
+    .def_readwrite("fe_e", &aos2::Arr_function_overlay_traits::m_fe_e)
+    .def_readwrite("ff_f", &aos2::Arr_function_overlay_traits::m_ff_f)
     ;
 }
 
 template <>
 void bind_overlay_traits<false, false, false>() {
-  bp::class_<aos2::Arr_overlay_traits>("Arr_overlay_traits").def(bp::init<>());
+  bp::class_<aos2::Arr_function_overlay_traits>("Arr_function_overlay_traits")
+    .def(bp::init<>());
 }
 
 template <>
 void bind_overlay_traits<false, false, true>() {
-  bp::class_<aos2::Arr_overlay_traits>("Arr_overlay_traits").def(bp::init<>())
+  bp::class_<aos2::Arr_function_overlay_traits>("Arr_function_overlay_traits")
+    .def(bp::init<>())
     .def(bp::init<bp::object>());
 }
 
