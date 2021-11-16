@@ -60,7 +60,19 @@ result = Arrangement_2()
 # Similarly the Arr_overlay_traits object accepts the 10 functions to be implemented as described here:
 # https://doc.cgal.org/latest/Arrangement_on_surface_2/classOverlayTraits.html
 # As arguments to its constructor (in the same order as they are listed in the documentation)
-overlay_traits = Aos2.Arr_function_overlay_traits(lambda x, y: x+y)
+
+# overlay_function_traits = Aos2.Arr_overlay_function_traits(lambda x, y: x+y)
+# Aos2.overlay(arr1, arr2, result, overlay_function_traits)
+
+# def func(f1, f2, f):
+#     print("f1: ", f1.data())
+#     print("f2: ", f2.data())
+#     f.set_data(f1.data() + f2.data())
+#     print("f: ", f.data())
+#     print(type(f))
+
+# overlay_traits = Aos2.Arr_overlay_traits(func)
+overlay_traits = Aos2.Arr_overlay_traits(lambda f1, f2, f: f.set_data(f1.data()+f2.data()))
 Aos2.overlay(arr1, arr2, result, overlay_traits)
 
 for f in result.faces():
