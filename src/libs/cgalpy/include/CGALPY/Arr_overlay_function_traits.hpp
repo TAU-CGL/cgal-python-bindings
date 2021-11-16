@@ -5,8 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#ifndef ARR_FUNCTION_OVERLAY_TRAITS_HPP
-#define ARR_FUNCTION_OVERLAY_TRAITS_HPP
+#ifndef ARR_OVERLAY_FUNCTION_TRAITS_HPP
+#define ARR_OVERLAY_FUNCTION_TRAITS_HPP
 
 #include <boost/python.hpp>
 
@@ -40,7 +40,7 @@ namespace bp = boost::python;
 
 template <typename ArrangementA, typename ArrangementB, typename ArrangementR,
           typename Data>
-class Arr_function_overlay_traits :
+class Arr_overlay_function_traits :
   public CGAL::_Arr_default_overlay_traits_base<ArrangementA, ArrangementB,
                                                 ArrangementR>
 {
@@ -94,16 +94,16 @@ public:
   Function m_ff_f;
 
   // Default constructor
-  Arr_function_overlay_traits() : Arr_default_overlay_traits() {}
+  Arr_overlay_function_traits() : Arr_default_overlay_traits() {}
 
   // Constructor with one operator
-  Arr_function_overlay_traits(bp::object py_function) :
+  Arr_overlay_function_traits(bp::object py_function) :
     Arr_default_overlay_traits(),
     m_ff_f(py_function)
   {}
 
   // Constructor with all operators
-  Arr_function_overlay_traits(bp::object py_function0, bp::object py_function1,
+  Arr_overlay_function_traits(bp::object py_function0, bp::object py_function1,
                               bp::object py_function2, bp::object py_function3,
                               bp::object py_function4, bp::object py_function5,
                               bp::object py_function6, bp::object py_function7,
