@@ -51,8 +51,7 @@ public:
 
   /*! Create a face f that matches the overlapping region between f1 and f2.
    */
-  virtual void create_face(Face_handle_A f1, Face_handle_B f2,
-                           Face_handle_R f)
+  void create_face(Face_handle_A f1, Face_handle_B f2, Face_handle_R f)
   { f->set_data(overlay_face_data(f1->data(), f2->data())); }
 };
 
