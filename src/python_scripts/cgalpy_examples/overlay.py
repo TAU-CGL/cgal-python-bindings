@@ -86,18 +86,14 @@ if face_extended:
   for f in result.faces():
     print(f.data())
 
-def func(x, y):
-  if x is None and y is None:
-    return 10
-  if x is None:
-    return 20
-  if y is None:
-    return 30
-  return x + y
-
 if vertex_extended:
   traits = Aos2.Arr_overlay_function_traits()
   traits.set_vv_v(lambda x, y: x+y)
+  traits.set_ve_v(lambda x, y: x)
+  traits.set_vf_v(lambda x, y: x)
+  traits.set_ev_v(lambda x, y: y)
+  traits.set_fv_v(lambda x, y: y)
+  traits.set_ee_v(lambda x, y: 0)
   Aos2.overlay(arr1, arr2, result, traits)
 
   for v in result.vertices():
