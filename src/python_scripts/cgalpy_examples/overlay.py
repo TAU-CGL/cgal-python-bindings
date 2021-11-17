@@ -12,7 +12,6 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.Ker
 Aos2 = CGALPY.Aos2
 
 Arrangement_2 = Aos2.Arrangement_2
