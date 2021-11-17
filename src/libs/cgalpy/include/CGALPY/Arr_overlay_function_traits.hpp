@@ -16,16 +16,96 @@
 
 #include "CGALPY/config.hpp"
 #include <CGALPY/Python_functor.hpp>
+#include "CGALPY/if_.hpp"
 
-template <typename A, typename B, typename R, typename Fnc>
-void apply(...) {}
+#if 1
+// Fall through; A::data() does not exist
+template <typename A> bp::object data_a(...) { return bp::object(); }
 
+// A::data() exists
+template <typename A, typename = decltype(std::declval<A>().data())>
+const bp::object& data_a(const A* a) { return a->data(); }
+
+// Fall through; B::data() does not exist
+template <typename B> bp::object data_b(...) { return bp::object(); }
+
+// B::data() exists
+template <typename B, typename = decltype(std::declval<B>().data())>
+const bp::object& data_b(const B* b) { return b->data(); }
+
+// Fall through; target does not exist
+template <typename A, typename B, typename R, typename Fnc> void apply(...) {}
+
+// Target does exsist
 template <typename A, typename B, typename R, typename Fnc,
-          typename = decltype(std::declval<A>().data()),
-          typename = decltype(std::declval<B>().data()),
           typename = decltype(std::declval<R>().set_data(std::declval<typename R::Data>()))>
-void apply(const A* a, const B* b, R* r, Fnc fnc)
-{ r->set_data(fnc(a->data(), b->data())); }
+void apply(const A* a, const B* b, R* r, Fnc fnc) {
+  r->set_data(fnc(data_a<A>(a), data_b<B>(b)));
+}
+
+#else
+// First operand (A) does exist; second operand (B) does not exsist
+template <typename A, typename B, typename R, typename Fnc, typename = void>
+struct ApplyAB {
+  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+    r->set_data(fnc(a->data(), bp::object()));
+  }
+};
+
+// First operand (A) does exist; second operand (B) does exsist
+template <typename A, typename B, typename R, typename Fnc>
+struct ApplyAB<A, B, R, Fnc,
+               typename if_<false, decltype(std::declval<B>().data())>::type> {
+  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+    r->set_data(fnc(a->data(), b->data()));
+  }
+};
+
+// First operand (A) does not exist; second operand (B) does not exsist
+template <typename A, typename B, typename R, typename Fnc, typename = void>
+struct ApplyB {
+  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+    r->set_data(fnc(bp::object(), bp::object()));
+  }
+};
+
+// First operand (A) does not exist; second operand (B) does exsist
+template <typename A, typename B, typename R, typename Fnc>
+struct ApplyB<A, B, R, Fnc,
+              typename if_<false, decltype(std::declval<B>().data())>::type> {
+  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+    r->set_data(fnc(bp::object(), b->data()));
+  }
+};
+
+// First operand (A) does not exsist
+template <typename A, typename B, typename R, typename Fnc, typename = void>
+struct ApplyA {
+  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+    ApplyB<A, B, R, Fnc>()(a, b, r, fnc);
+  }
+};
+
+// First operand (A) does exsist
+template <typename A, typename B, typename R, typename Fnc>
+struct ApplyA<A, B, R, Fnc,
+              typename if_<false, decltype(std::declval<A>().data())>::type> {
+  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+    ApplyAB<A, B, R, Fnc>()(a, b, r, fnc);
+  }
+};
+
+// Fall through; target does not exist
+template <typename A, typename B, typename R, typename Fnc> void apply(...) {}
+
+// Target does exsist
+template <typename A, typename B, typename R, typename Fnc,
+          typename = decltype(std::declval<R>().set_data(std::declval<typename R::Data>()))>
+void apply(const A* a, const B* b, R* r, Fnc fnc) {
+  ApplyA<A, B, R, Fnc>()(a, b, r, fnc);
+}
+
+#endif
 
 /*! \class
  *
