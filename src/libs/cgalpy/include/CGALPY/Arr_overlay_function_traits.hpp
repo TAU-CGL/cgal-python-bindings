@@ -98,7 +98,7 @@ struct ApplyA<A, B, R, Fnc,
 // Fall through; target does not exist
 template <typename A, typename B, typename R, typename Fnc> void apply(...) {}
 
-// Target does exsist
+// Target does exist
 template <typename A, typename B, typename R, typename Fnc,
           typename = decltype(std::declval<R>().set_data(std::declval<typename R::Data>()))>
 void apply(const A* a, const B* b, R* r, Fnc fnc) {
