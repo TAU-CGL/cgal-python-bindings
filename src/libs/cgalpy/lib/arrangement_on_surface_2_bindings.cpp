@@ -303,7 +303,6 @@ void bind_overlay_function_traits() {
     .def(bp::init<bp::object, bp::object, bp::object, bp::object, bp::object,
                   bp::object, bp::object, bp::object, bp::object, bp::object>())
     .def("set_vv_v", &aos2::Arr_overlay_function_traits::set_vv_v)
-    .def("set_vv_v", &aos2::Arr_overlay_function_traits::set_vv_v)
     .def("set_ve_v", &aos2::Arr_overlay_function_traits::set_ve_v)
     .def("set_vf_v", &aos2::Arr_overlay_function_traits::set_vf_v)
     .def("set_ev_v", &aos2::Arr_overlay_function_traits::set_ev_v)
@@ -326,7 +325,8 @@ template <>
 void bind_overlay_function_traits<false, false, true>() {
   bp::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
     .def(bp::init<>())
-    .def(bp::init<bp::object>());
+    .def(bp::init<bp::object>())
+    ;
 }
 
 void export_arrangement_on_surface_2() {
