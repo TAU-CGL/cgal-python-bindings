@@ -22,7 +22,7 @@ curve = Traits.Curve_2
 Point = Ker.Point_2
 Circle = Ker.Circle_2
 
-def ctr_circle_circle(circle):
+def ctr_circle_polygon(circle):
     # Subdivide the circle into two x-monotone arcs.
     cv = curve(circle)	# circle orientation is counterclockwise
     traits = Traits()
@@ -46,10 +46,10 @@ def ctr_quad_polygon(p1, p2, p3, p4):
     return p
 
 S = General_polygon_set()
-S.insert(ctr_circle_circle(Circle(Point(1, 1), 1)));
-S.insert(ctr_circle_circle(Circle(Point(5, 1), 1)));
-S.insert(ctr_circle_circle(Circle(Point(5, 5), 1)));
-S.insert(ctr_circle_circle(Circle(Point(1, 5), 1)));
+S.insert(ctr_circle_polygon(Circle(Point(1, 1), 1)));
+S.insert(ctr_circle_polygon(Circle(Point(5, 1), 1)));
+S.insert(ctr_circle_polygon(Circle(Point(5, 5), 1)));
+S.insert(ctr_circle_polygon(Circle(Point(1, 5), 1)));
 
 S.join(ctr_quad_polygon(Point(1, 0), Point(5, 0), Point(5, 2), Point(1, 2)))
 S.join(ctr_quad_polygon(Point(1, 4), Point(5, 4), Point(5, 6), Point(1, 6)));
