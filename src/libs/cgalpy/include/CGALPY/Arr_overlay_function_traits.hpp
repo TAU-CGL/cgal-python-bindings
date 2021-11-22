@@ -16,22 +16,14 @@
 
 #include "CGALPY/config.hpp"
 #include <CGALPY/Python_functor.hpp>
-#include "CGALPY/if_.hpp"
 
 #if 1
-// Fall through; A::data() does not exist
+// Fall through; T::data() does not exist
 template <typename A> bp::object data_a(...) { return bp::object(); }
 
-// A::data() exists
+// T::data() exists
 template <typename A, typename = decltype(std::declval<A>().data())>
 const bp::object& data_a(const A* a) { return a->data(); }
-
-// Fall through; B::data() does not exist
-template <typename B> bp::object data_b(...) { return bp::object(); }
-
-// B::data() exists
-template <typename B, typename = decltype(std::declval<B>().data())>
-const bp::object& data_b(const B* b) { return b->data(); }
 
 // Fall through; target does not exist
 template <typename A, typename B, typename R, typename Fnc> void apply(...) {}
@@ -40,10 +32,12 @@ template <typename A, typename B, typename R, typename Fnc> void apply(...) {}
 template <typename A, typename B, typename R, typename Fnc,
           typename = decltype(std::declval<R>().set_data(std::declval<typename R::Data>()))>
 void apply(const A* a, const B* b, R* r, Fnc fnc) {
-  r->set_data(fnc(data_a<A>(a), data_b<B>(b)));
+  r->set_data(fnc(data_a<A>(a), data_a<B>(b)));
 }
 
 #else
+#include "CGALPY/if_.hpp"
+
 // First operand (A) does exist; second operand (B) does not exsist
 template <typename A, typename B, typename R, typename Fnc, typename = void>
 struct ApplyAB {
@@ -240,6 +234,7 @@ public:
   /*! Create the vertex v induced by the vertex v1 that lies inside the face f2.
    */
   void create_vertex(Vertex_handle_a v1, Face_handle_b f2, Vertex_handle_r v)
+    const
   { apply<Vertex_a, Face_b, Vertex_r, Function>(&*v1, &*f2, &*v, m_vf_v); }
 
   /* Create the vertex v induced by the vertex v2 that lies on the halfedge e1.
