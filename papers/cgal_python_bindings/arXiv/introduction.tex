@@ -42,8 +42,8 @@ Wrapping existing code has traditionally been the domain of Python
 experts due to the steep learning curve, which characterizes its
 Python/C API. Although using such wrappers is possible without ever
 knowing their internals, providing such wrappers creates a sharp line
-between developers using Python and developers using C or C++ with
-the Python/C API. Several tools that facilitate the creation of such
+between developers using Python and developers using C or C++ with the
+Python/C API. Several tools that facilitate the creation of such
 wrappers have been introduced; A sample of such tools are listed In
 Section~\ref{sec:comp}.
 
@@ -82,14 +82,7 @@ build system generator of \cmake{} is an executable called
 \myLstinline{cmake} in a terminal and specifies the directory that
 contains the root \myLstinline{CMakeLists.txt} file.
 
-A key feature of \cmake{} is the ability to (optionally) place
-compiler outputs (such as object files) outside the source tree. This
-enables multiple and concurrent builds from the same source tree and
-cross-compilation. It also keeps the source tree clean and ensures
-that removing a build directory will not remove the source files.  We
-exploit this feature, and the scripting capabilities to conveniently
-generate the C++ Python bindings for several \cgal{} objects
-concurrently
+A key feature of \cmake{} is the ability to (optionally) place compiler outputs (such as object files) outside the source tree. This enables multiple and concurrent builds from the same source tree and cross-compilation. It also keeps the source tree clean and ensures that removing a build directory will not remove the source files.  We exploit this feature, and the scripting capabilities to conveniently generate the C++ Python bindings for several \cgal{} objects concurrently.
 
 % -----------------------------------------------------------------------------
 \subsection{\cgal}
@@ -125,20 +118,23 @@ Generic programming identifies an abstraction that consists of a
 formal hierarchy of polymorphic abstract requirements on data types,
 referred to as \emph{concepts}, and a set of classes that conform
 precisely to the specified requirements, referred to as
-\emph{models}~\cite{a-gps-99}. When a class template is instantiated,
-each one of its template parameters is substituted with a model of one
-or more concepts associated with the template parameter.
+\emph{models}~\cite{a-gps-99}. A hierarchy of related concepts can be
+viewed as a directed acyclic graph, where a node of the graph
+represents a concept and an arc represents a refinement relation. An
+arc directed from concept A to concept B indicates that concept B
+refines concept A. When a class template is instantiated, each one of
+its template parameters is substituted with a model of one or more
+concepts associated with the template parameter.
 
 Instantiated types in \cgal{} are characterized by long instantiation
 chains of C++ class templates. An instantiated type is a template that
 has one or more template parameters and every parameter is substituted
-by another type that is typically an instance of another template.
-%
-While the number of models of most concepts is small, the number of
-potential types of objects that could be bound, and thus must be
-supported by the bindings, is enormous. Offering bindings for all
-these types in advance is practically impossible. Moreover, in some
-cases models need to be extended with types provided by the
+by another type that is typically an instance of another
+template. While the number of models of most concepts is small, the
+number of potential types of objects that could be bound, and thus
+must be supported by the bindings, is enormous. Offering bindings for
+all these types in advance is practically impossible. Moreover, in
+some cases models need to be extended with types provided by the
 user. Naturally, bindings for user-extended models must be generated
 dynamically.
 
@@ -181,11 +177,9 @@ the 2D arrangement class template and an instance of the 2D
 triangulation class template, or several libraries when one is
 insufficient. If several instances of the same class template must be
 bound, several corresponding libraries must be generated, one for each
-instance.
-%
-Finally, the binding themselves are implemented in C++ and their
-implementation exploits advanced features in C++. This results with
-elegant and compact code that is easy to maintain and extend with
+instance. Finally, the binding themselves are implemented in C++ and
+their implementation exploits advanced features in C++. This results
+with elegant and compact code that is easy to maintain and extend with
 additional bindings.
 
 % -----------------------------------------------------------------------------

@@ -49,7 +49,7 @@
 \usepackage{forest}
 \usetikzlibrary{calc,patterns,decorations.pathmorphing,decorations.markings,matrix,fit,decorations.pathreplacing,arrows,arrows.meta,automata,positioning,shapes,chains,spy}
 \usetikzlibrary{intersections,through,backgrounds}
-\usetikzlibrary{shadows,fadings}
+\usetikzlibrary{shadows,fadings,shadows.blur}
 \usepackage{tikz-3dplot}
 \tikzset{
   invisible/.style={opacity=0},
@@ -73,6 +73,7 @@
 % ======== Miscellaneous ======================================================
 \usepackage{xspace}
 \usepackage{wrapfig}
+\usepackage[outercaption]{sidecap}
 \usepackage{authblk}
 \usepackage{amsthm}
 
@@ -357,8 +358,18 @@
 \lstdefinestyle{pythonStyle}{%
   language={Python},
   identifierstyle=\color{red!50!black},
-  escapechar=~~,
-  moredelim=**[is][\only<+>{\color{red}}]{@}{@}}
+  escapechar=~~}
+% ========
+\lstdefinestyle{pythonNumberedStyle}{%
+  style=pythonStyle,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt}
+% ========
+\lstdefinestyle{pythonFramedStyle}{%
+  style=pythonNumberedStyle,
+  frame=single,
+  frameround=tttt}
 % ========
 \NewDocumentCommand\framedInputPython{O{\scriptsize}O{1}om}{%
   \IfNoValueTF{#3}{
