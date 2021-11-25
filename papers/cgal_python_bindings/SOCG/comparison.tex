@@ -1,0 +1,253 @@
+% =============================================================================
+\section{Python bindings---comparison of tools}
+\label{sec:comp}
+% =============================================================================
+There are several different tools and options for generating Python
+byndings.  The following is by no means an exhaustive list of such
+tools; however, it gives a taste of the rich possibilities one faces
+when there is a need to make C++ code accessible to Python developers.
+One goal that all these tools share is transforming Python/C API
+into a relatively more user-friendly interface.
+Most listed tools are designed to wrap C++ interfaces non-intrusively;
+that is, the C++ code of an entity does not change when it is wrapped.
+
+% -----------------------------------------------------------------------------
+\subsection{Various Tools}
+\label{ssec:comp:tools}
+% -----------------------------------------------------------------------------
+% ctypes
+\pyLstinline{ctypes} is a foreign function module for Python that
+provides C compatible data
+types.\footnote{See \url{https://docs.python.org/3/library/ctypes.html\#module-ctypes}.}
+It supports the loading of shared libraries and marshaling data
+between Python and C.\footnote{Marshaling is the process of
+transforming the memory representation of an object into a data format
+suitable for storage or transmission; see
+\url{https://en.wikipedia.org/wiki/Marshalling\_(computer\_science)}.}
+The \pyLstinline{ctypes} module is part of the Python standard
+library; thus, it can be used to wrap shared libraries in pure Python.
+Using the \pyLstinline{ctypes} module requires manual programming
+labour and detailed knowledge of the \pyLstinline{ctypes}
+interface. However, it does not require writing C code (in addition to
+existing C code that needs to be wrapped).
+
+% CFFI
+\pyLstinline{cffi} is another Python module that generates Python
+bindings (it stands for C Foreign Function Interface). It interacts
+with almost any C code from Python, based on C-like declarations that
+can often be copy-pasted from header files. It is compatible with both
+PyPy and CPython; Moreover, in the PyPy (see~\ref{ssec:intro:bind})
+reference implementation it is a first class citizen (and provided by
+defaut), thus, exhibts outstanding preformance. Compared
+to \pyLstinline{ctypes}, the \pyLstinline{cffi} module takes a more
+automated approach to generate Python bindings and it minimized the
+extra bits of API that needs to be mastered; thus, it scales better to
+larger projects than \pyLstinline{ctypes}. Like \pyLstinline{ctypes},
+using \pyLstinline{cffi} directly interfaced with C libraries
+only. Warapping C++ libraries with any one of these modules requires
+the provision of another layer of C wrapper around the C++ code.
+
+% cppyy
+\pyLstinline{cppyy} is yet another external module for generating
+bindings.\footnote{See \url{https://cppyy.readthedocs.io}.} It is an
+automatic, run-time, C++ Python bindings generator, for calling C++
+from Python and Python from
+C++.\footnote{See \url{https://cppyy.readthedocs.io}.} Run-time
+generation enables detailed specialization for higher performance,
+lazy loading for reduced memory use in large scale projects,
+Python-side cross-inheritance and callbacks for working with C++
+frameworks, run-time template instantiation, automatic object
+downcasting, exception mapping, and interactive exploration of C++
+libraries. \pyLstinline{cppyy} delivers this without any language
+extensions, intermediate languages, or the need for boiler-plate
+hand-written code. For design and performance, see~\cite{ld-hppcn-16},
+albeit that the \pyLstinline{cppyy} performance has been vastly
+improved since.  Like \pyLstinline{cffi}, \pyLstinline{cppyy} was
+designed to ease rge binding development on Python programmer,
+minimizing the need for extra C++ code; it is also compatible with
+both CPython and PyPy.
+
+% Cython
+A completely different approach is adopted by
+Cython~\cite{bbcds-cbbw-11}, which refers to a programming language
+and to an optimising static compiler for the Cython
+language.\footnote{See \url{https://cython.org/}.}  The Cython
+language is a superset of the Python language. It extends Python with
+explicit type declarations of native C/C++ types.  Cython is a
+compiled language used to generate CPython extension modules.  The
+Cython compiler generates C/C++ code from Cython code, which in turn
+compiles with any C/C++ compiler, and automatically wrapped in
+interface code, producing extension modules that can be loaded and
+used by regular Python code using the \pyLstinline{import} statement,
+but with significantly less computational overhead at run time. Cython
+also facilitates wrapping independent C or C++ code into
+python-importable modules.  With Cython it is possible to call back
+and forth between Python code, Cython code, and native library code
+origianlly developed in Fortrant, C, or C++.
+
+% SIP
+SIP is a collection of tools that makes it easy to create Python
+bindings for C and C++ libraries.\footnote{See
+  \url{https://pypi.org/project/sip/}.}  It was originally developed
+in 1998 to create PyQt, the Python bindings for the Qt toolkit, but
+can be used to create bindings for any C or C++ library. SIP comprises
+a set of build tools and a module called sip. The build tools process
+a set of specification files and generates C or C++ code, which is then
+compiled to create the bindings extension module. Several extension
+modules may be installed in the same Python package. Extension modules
+can be built so that they are are independent of the version of Python
+being used.
+% In other words a wheel created from them can be installed with any
+% version of Python starting with v3.5.
+
+% PyBindGen
+
+% SWIG
+SWIG is a software development tool that connects programs written in
+C and C++ with a variety of high-level programming
+languages.\footnote{See \url{http://www.swig.org/}.}  It is defferent
+than any of the others tools listed here.  SWIG is used to create
+bindings to C and C++ code for different types of target languages,
+and not only Python, including common scripting languages such as
+Javascript, Perl, PHP, Python, Tcl, or Ruby. The list of supported
+languages also includes non-scripting languages such as C\#, D, Go
+language, Java including Android, Lua, OCaml, Octave, Scilab and
+R. Also several interpreted and compiled Scheme implementations
+(Guile, MzScheme/Racket) are supported. SWIG is most commonly used to
+create high-level interpreted or compiled programming environments,
+user interfaces, and as a tool for testing and prototyping C/C++
+software. SWIG is typically used to parse C/C++ interfaces and
+generate the 'glue code' required for the above target languages to
+call into the C/C++ code. SWIG can also export its parse tree in the
+form of XML. SWIG is free software and the code that SWIG generates is
+compatible with both commercial and non-commercial projects.
+
+% Boost.Python
+Boost is a large and complex suite of utility libraries that works
+with almost every C++ compiler in existence. Boost.Python~\cite{bhsbp-ag-03} is a member of the Boost suit that enables seamless interoperability between C++
+and the Python programming language.\footnote{See
+  \url{https://www.boost.org/doc/libs/1_70_0/libs/python/doc/html/index.html}.}
+similar to \pyLstinline{cppyy}, Boost.Python focuses at C++; unlike
+\pyLstinline{cppyy} it uses C++ to specify and build bindings, taking
+advantage of the metaprogramming tools and polymorphism in C++.
+
+The library includes support for:
+\begin{itemize}
+\item References and Pointers
+\item Globally Registered Type Coercions
+\item Automatic Cross-Module Type Conversions
+\item Efficient Function Overloading
+\item C++ to Python Exception Translation
+\item Default Arguments
+\item Keyword Arguments
+\item Manipulating Python objects in C++
+\item Exporting C++ Iterators as Python Iterators
+\item Documentation Strings
+\end{itemize}
+
+% PyBind11
+pybind11 is a lightweight header-only library that exposes C++
+types in Python and vice versa, mainly to create Python bindings of
+existing C++
+code.\footnote{See \url{https://github.com/pybind/pybind11}.} Its
+goal, like the goal of Boost.Python, is to minimize boilerplate code
+in traditional extension modules by inferring type information using
+compile-time introspection. Its syntax is als similar to the syntax of
+Boost.Python. In fact, it is a tiny self-contained version of
+Boost.Python with everything stripped away that isn't relevant for
+binding generation. Without comments, the core header files only
+require approximately 4K lines of code and depend on Python and the
+C++ standard library. This compact implementation was possible thanks
+to some of the new C++11 language features (specifically: tuples,
+lambda functions and variadic templates). Since its creation, this
+library has grown beyond Boost.Python in several ways, leading to
+simpler binding code in many common situations.
+
+We have concentrated at three tools, namely (i) SWIG, (ii) PyBind11,
+and (iii) Boost.Python and conducted several experiments to compare
+the performance of the respective generated bindings; see
+Section~\ref{ssec:comp:exp}.
+
+% -----------------------------------------------------------------------------
+\subsection{Experiments}
+\label{ssec:comp:exp}
+% -----------------------------------------------------------------------------
+C++ Python bindings for a certain subset of \cgal{} packages are
+available as part of an experimental project that uses SWIG. While the
+project has been conceived more than a decade ago, it contains
+bindings only for a limited subset of \cgal{} packages. Naturally,
+embarking on the existing venture might have saved time in developing
+new bindings, on the one hand, and in exploiting the new bindings by
+our users on the other. Another advantage of using SWIG, and probably
+the reason for choosing SWIG in the first place in the aforementioned
+project, is the support for multiple languages. Once bindings have
+been developed for one language, generating bindings for additional
+languages does not require additional development resources. However,
+as our experiments show, this profiteering has its cost---the
+generated bindings are not as time or space efficient as their
+counterparts generated with other tools. The PyBind11 tool is
+relatively new. Both the PyBind11 and the Boost.Python tools are
+widely spread and tested, and actively maintained and enhanced. They
+are developed using advanced features of C++11 and higher
+versions. These two tools share the same interface; that is, the C++
+code used to generate the bindings using both tools is similar and in
+some cases even identical. Also, switching between using bindings
+generated by PyBind11 and bindings generated by Boost.Python is
+seemless---it amounts to replacing one libarary by another. As we are
+very much familiar with developing code that exploits advanced feature
+of C++, developing bindings using these tools does not present a major
+hurdle for us. One the other hand, developing bindings using SWIG,
+requires writing code that describe the bindings in a propriatary
+language.  Some developers may avoid using Boost.Python, because it
+requires dealing with a large and complex system. This does not
+present a drawback for us, because \cgal{} itself depends on several
+other libraries of Boost; thus, we are familiar with Boost and must
+deal with it anyway.  The compatibility of Boost with almost every C++
+compiler in general has its cost; arcane template tricks and
+workarounds are necessary to support the oldest and buggiest of
+compiler specimens.  Now that C++11-compatible compilers are widely
+available, this heavy machinery has become an excessively large and
+unnecessary dependency. However, our main concern was the efficiency
+of the generated bindings in terms of execution time and memory space.
+
+We have conducted two sets of experiments. In the first set we
+compared the time it took to refer to C++ objects from Python code and
+in the second set we compared the time it took to call C++ functions
+from Python code. The first set was further divided into two subsets.
+In the first subset we compared the time it took to make many
+references to many objects and in the second subset we compared the
+time it took to make many references to a single object.
+
+\begin{table}
+  \caption{References}
+  \centering\begin{tabular}{|l|r|r|r|}
+    \hline
+    & \textbf{pybind11} & \textbf{boost} & \textbf{SWIG}\\
+    \hline
+    \hline
+    Many references to many objects    & 6.03125  & 4.453125 & 15.6875\\
+    Many references to a single object & 4.90625  & 2.796875 &  9.640625\\
+    \hline
+  \end{tabular}
+\end{table}
+
+The second set was further divided into too subsets as well. In the
+first subset we compared the time it took to call many small
+functions, and in the second subset we compared the time it took to
+call few large functions. We also used the second set of experiments to
+measure the time it took to compute the various tasks in native Python.
+
+\begin{table}
+  \caption{Function calls}
+  \centering\begin{tabular}{|l|r|r|r|r|}
+    \hline
+    & \textbf{pybind11} & \textbf{boost} & \textbf{SWIG} & \textbf{Native}\\
+    \hline
+    \hline
+    Many small tasks & 26.71875 & 13.65625 & 13.140625 & 13.359375\\
+    One large task   & 0.71875  & 0.71875  & 0.734375  & 17.84375\\
+    \hline
+  \end{tabular}
+\end{table}
+
+% Boost.Python handles shared\_ptr and other smart pointers extremely gracefully
