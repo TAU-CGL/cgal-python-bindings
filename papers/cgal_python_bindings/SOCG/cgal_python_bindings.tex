@@ -1,0 +1,133 @@
+\documentclass[a4paper,UKenglish,cleveref,autoref,thm-restate]{socg-lipics-v2021}
+%This is a template for producing LIPIcs articles.
+%See lipics-v2021-authors-guidelines.pdf for further information.
+%for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+%for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+%for section-numbered lemmas etc., use "numberwithinsect"
+%for enabling cleveref support, use "cleveref"
+%for enabling autoref support, use "autoref"
+%for anonymousing the authors (e.g. for double-blind review), add "anonymous"
+%for enabling thm-restate support, use "thm-restate"
+%for enabling a two-column layout for the author/affilation part (only applicable for > 6 authors), use "authorcolumns"
+%for producing a PDF according the PDF/A standard, add "pdfa"
+
+%\pdfoutput=1 %uncomment to ensure pdflatex processing (mandatatory e.g. to submit to arXiv)
+%\hideLIPIcs  %uncomment to remove references to LIPIcs series (logo, DOI, ...), e.g. when preparing a pre-final version to be uploaded to arXiv or another public repository
+
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+
+\bibliographystyle{plainurl}% the mandatory bibstyle
+
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{green}{rgb}{0.0, 0.5, 0.0}
+\newcommand{\efi}[1]{{\color{green}\textbf{Efi: }\sf#1}}
+\newcommand{\nir}[1]{{\color{blue}\textbf{Nir: }\sf#1}}
+\newcommand{\danny}[1]{{\color{red}\textbf{Danny: }\sf#1}}
+
+\title{CGAL Arrangements Made More Accessible} %TODO Please add
+
+%\titlerunning{Dummy short title} %TODO optional, please use if title is longer than one line
+
+%\author{Jane {Open Access}}{Dummy University Computing Laboratory, [optional: Address], Country \and My second affiliation, Country \and \url{http://www.myhomepage.edu} }{johnqpublic@dummyuni.org}{https://orcid.org/0000-0002-1825-0097}{(Optional) author-specific funding acknowledgements}%TODO mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty. Please provide at least the name of the affiliation and the country. The full address is optional. Use additional curly braces to indicate the correct name splitting when the last name consists of multiple name parts.
+
+%\author{Joan R. Public\footnote{Optional footnote, e.g. to mark corresponding author}}{Department of Informatics, Dummy College, [optional: Address], Country}{joanrpublic@dummycollege.org}{[orcid]}{[funding]}
+
+\author{Nir Goren}{Tel Aviv University, Israel}{nirgoren@mail.tau.ac.il}
+{}%{ORCID}
+{}%{(Optional) author-specific funding acknowledgements}
+
+\author{Efi Fogel}{Tel Aviv University, Israel}{efif@mail.tau.ac.il}
+{0000-0001-7228-8806}%{ORCID}
+{}%{(Optional) author-specific funding acknowledgements}
+
+\author{Dan Halperin}{Tel Aviv University, Israel}{danha@tauex.tau.ac.il}
+{0000-0002-3345-3765}%{ORCID}
+{}%{(Optional) author-specific funding acknowledgements}
+
+\authorrunning{N. Goren and E. Fogel and D. Halperin} %TODO mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et al.'
+
+\Copyright{N. Goren and E. Fogel and D. Halperin} %TODO mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\ccsdesc[100]{\textcolor{red}{Replace ccsdesc macro with valid one}} %TODO mandatory: Please choose ACM 2012 classifications from https://dl.acm.org/ccs/ccs_flat.cfm
+\keywords{computational geometry, arrangements, python bindings, Minkowski sums, CGAL} %TODO mandatory; please add comma-separated list of keywords
+
+\category{} %optional, e.g. invited paper
+
+\relatedversion{} %optional, e.g. full version hosted on arXiv, HAL, or other respository/website
+%\relatedversiondetails[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93]{Classification (e.g. Full Version, Extended Version, Previous Version}{URL to related version} %linktext and cite are optional
+
+%\supplement{}%optional, e.g. related research data, source code, ... hosted on a repository like zenodo, figshare, GitHub, ...
+%\supplementdetails[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93, subcategory={Description, Subcategory}, swhid={Software Heritage Identifier}]{General Classification (e.g. Software, Dataset, Model, ...)}{URL to related version} %linktext, cite, and subcategory are optional
+
+%\funding{(Optional) general funding statement \dots}%optional, to capture a funding statement, which applies to all authors. Please enter author specific funding statements as fifth argument of the \author macro.
+
+\funding{Work on this paper has been supported in part by the Israel Science
+Foundation (grant no.~1736/19),
+by NSF/US-Israel-BSF (grant no.~2019754),
+by the Israel Ministry of Science and Technology (grant no.~103129),
+by the Blavatnik Computer Science Research Fund, and by
+the Yandex Machine Learning Initiative for Machine Learning
+at Tel Aviv University.}
+%
+\acknowledgements{I want to thank \dots}%optional
+
+%\nolinenumbers %uncomment to disable line numbering
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\EventEditors{Xavier Goaoc and Michael Kerber}
+\EventNoEds{2}
+\EventLongTitle{38th Symposium on Computational Geometry (SoCG 2022)}
+\EventShortTitle{SoCG 2022}
+\EventAcronym{SoCG}
+\EventYear{2022}
+\EventDate{June 7--10, 2022}
+\EventLocation{Berlin, Germany}
+\EventLogo{}
+\SeriesVolume{xx}
+\ArticleNo{xx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings}
+\let\compactenum\enumerate
+\let\endcompactenum\endenumerate
+% ===============================================
+\begin{document}
+\maketitle
+% =============================================================================
+\input{tables}
+\input{tables}
+\input{introduction}
+\input{comparison}
+\input{generation}
+\input{modules}
+\input{code}
+
+% =============================================================================
+\section{Applications}
+\label{sec:app}
+
+\subsection{DiscoPygal---a platform for multi robot motion planning}
+
+\subsection{Neural collision detection}
+
+\subsection{More?}
+% =============================================================================
+
+%\section{Experiments}
+%\label{sec:experiments}
+%
+%\subsection{The cost of binding}
+%\danny{how much we add in running time due to binding}
+%
+%\subsection{Other comparisons}
+
+% =============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% =============================================================================
+
+\bibliography{../../abrev-short,../../cgal,../cgal_python_bindings}
+\appendix
+\input{kernel_modules}
+% \input{triangulation_module}
+\end{document}
