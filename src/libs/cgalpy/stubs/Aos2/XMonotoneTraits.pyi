@@ -1,0 +1,6 @@
+import Basic_traits
+
+class _XMonotoneTraits(Basic_traits._Basic_traits):
+    class X_monotone_curve_2(Basic_traits._Basic_traits.X_monotone_curve_2): ...
+    class Intersect_2():
+        def __call__(self, xc1: _XMonotoneTraits.X_monotone_curve_2, xc2: _XMonotoneTraits.X_monotone_curve_2, res: list) -> None: ...
