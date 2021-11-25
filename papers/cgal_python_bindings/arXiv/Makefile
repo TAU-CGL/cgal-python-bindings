@@ -19,7 +19,9 @@ GRAPHICS_PDFTEX = $(foreach g, \
 	, \
 	graphics/$g.pdf_tex)
 
-cgal_python_bindings.pdf: ../header.tex ../abrev-short.bib \
+cgal_python_bindings.pdf: \
+	../../header.tex \
+	../../abrev-short.bib \
 	cgal_python_bindings.tex \
 	abstract.tex \
 	introduction.tex \
@@ -27,7 +29,7 @@ cgal_python_bindings.pdf: ../header.tex ../abrev-short.bib \
 	generation.tex \
 	modules.tex \
 	code.tex \
-	cgal_python_bindings.bib
+	../../cgal.bib ../cgal_python_bindings.bib
 #	$(GRAPHICS_STATIC) $(GRAPHICS_PDF) $(GRAPHICS_PDFTEX)
 
 .DEFAULT_GOAL = all

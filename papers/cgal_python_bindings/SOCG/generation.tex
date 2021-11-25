@@ -2,8 +2,7 @@
 \section{Binding Generation}
 \label{sec:gen}
 % =============================================================================
-The most simple form of building an application written in C++ that depends on \cgal{} consists of the stages below. Let \myLstinline{\$APP\_SRC\_DIR} point at the root directory of the
-application source tree.
+The most simple form of building an application written in C++ that depends on \cgal{} consists of the stages below. Let \myLstinline{\$APP\_SRC\_DIR} point at the root directory of the application source tree.
 \begin{enumerate}
 \item Obtain the sources of \cgal{}; let \myLstinline{\$CGAL\_SRC\_DIR} point at the root directory of the \cgal{} source tree.
 \item Create a build directory for \cgal{}; let \myLstinline{\$CGAL\_DIR} point at this build directory.
@@ -19,7 +18,7 @@ In the procedure above \myLstinline{options} refer to optional arguments passed 
 \label{sec:gen:scopes}
 % -----------------------------------------------------------------------------
 Our binding code is divided into modules, which correspond to \cgal{} packages.  Each module has a long (and meaningful) name and a short name; see Table~\ref{tab:moduleName} for the list of relevant modules. Each module is associated with a \cmake{} Boolean flag that determines whether to generate bindings for that particular module. Each module may be associated with zero or more additional flags that specify selections for bindings of entities of the corresponding \cgal{} packages.  For example, the long name of the \iiDArrangementsPackage{} module is \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2}; its short name is \myLstinline{AOS2}; \myLstinline{CGALPY\_ARRANGEMENT\_ON\_ SURFACE\_2\_BINDINGS} is the Boolean flag that indicates whether to generate bindings for this module.  This module is associated with the Boolean flag \myLstinline{CGALPY\_AOS2\_POINT\_ LOCATION\_BINDINGS}, which indicates whether to generate bindings for point location queries supported by the \iiDArrangementsPackage{} package. This module is also associated with the string flags \myLstinline{CGALPY\_AOS2\_GEOMETRY\_TRAITS\_NAME} and \myLstinline{CGALPY\_AOS2\_DCEL\_NAME}, which specify the name of the geometry traits and Dcel, respectively, used to instantiate the
-\cppLstinline{Arrangement\_2<GeometryTraits, Dcel>} class template; see Section~\ref{ssec:modules:aos2} for more details on the \iiDArrangementsPackage{} module.
+\cppLstinline{Arrangement\_2<GeometryTraits_2, Dcel>} class template; see Section~\ref{ssec:modules:aos2} for more details on the \iiDArrangementsPackage{} module.
 
 \begin{table}[!]
   \caption{Module names and short names}
@@ -34,7 +33,7 @@ Our binding code is divided into modules, which correspond to \cgal{} packages. 
     \iiDRegularizedBooleanSetOperationsPackage & \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
 %    Bounding Volumes & \myLstinline{BOUNDING\_VOLUMES} & \myLstinline{BV}\\
 %   \iiDConvexHullsandExtremePointsPackage & \myLstinline{CONVEX\_HULL\_2} & \myLstinline{CH2}\\
-%   \iiiDConvexHulls & \myLstinline{CONVEX\_HULL\_3} & \myLstinline{CH3}\\
+%   \iiiDConvexHullsPackage & \myLstinline{CONVEX\_HULL\_3} & \myLstinline{CH3}\\
     \iiDPolygonsPackage & \myLstinline{POLYGON\_2} & \myLstinline{POL2}\\
 %   \iiDPolygonPartitioningPackage & \myLstinline{POLYGON\_PARTITIONING} & \myLstinline{PP}\\
     \iiDMinkowskiSumsPackage & \myLstinline{MINKOWSKI\_SUM\_2} & \myLstinline{MS2}\\
@@ -46,12 +45,9 @@ Our binding code is divided into modules, which correspond to \cgal{} packages. 
   \label{tab:moduleName}
 \end{table}
 
-The exposed names of the bound entities of different modules are gathered in distinct Python namespaces to prevent name conflicts. The namespace is the short name of the module in lower-case except for the first letter (which is in upper-case); for example, the namespaces of the bound types and free functions of the
-\iiDandiiiDGeometryKernelPackage{} and the \iiDRegularizedBooleanSetOperationsPackage{} packages are \pyLstinline{Ker} and \pyLstinline{Bso2}, respectively.  Each of these
-two namespaces has the attribute \myLstinline{intersection} (i.e., \myLstinline{Ker.intersection()} and \myLstinline{Bso2.intersection()}). We introduce as many (Python) namespaces as modules, and nest every exposed name of a bound entity in the appropriate (Python) namespace according to the module of the entity; See Section~\ref{sec:code:scopes} for the implementation details.
+The exposed names of the bound entities of different modules are gathered in distinct Python namespaces to prevent name conflicts. The namespace is the short name of the module in lower-case except for the first letter (which is in upper-case); for example, the namespaces of the bound types and free functions of the \iiDandiiiDGeometryKernelPackage{} and the \iiDRegularizedBooleanSetOperationsPackage{} packages are \pyLstinline{Ker} and \pyLstinline{Bso2}, respectively.  Each of these two namespaces has the attribute \myLstinline{intersection} (i.e., \myLstinline{Ker.intersection()} and \myLstinline{Bso2.intersection()}). We introduce as many (Python) namespaces as modules, and nest every exposed name of a bound entity in the appropriate (Python) namespace according to the module of the entity; See Section~\ref{sec:code:scopes} for the implementation details.
 
-The above is conveniently achieved with the use of the \cppLstinline{bp::scope} class of Boost.Python. Constructing an object of this class, essentially, changes the Python namespace in which new extension classes and wrapped functions are defined as attributes.  An object of the \cppLstinline{bp::scope} class is associated with a global Python object, which is bound to a Python namespace. The global Python object associated with default-constructed scopes is bound to
-the global Python namespace, and the global Python object associated with a scope constructed with an argument is bound to the Python namespace held by the argument. When a scope object is constructed its associated global Python object is pushed onto a stack. When the lifetime of the scope ends, the associated global Python object is popped from the stack. This mechanism conveniently reflects nesting of constructs in C++ in Python code. For example, consider the following constructs in C++:\footnote{This example is a simplified version of the example shown at \url{https://www.boost.org/doc/libs/1_76_0/libs/python/doc/html/reference/high_level_components/boost_python_scope_hpp.html}.}
+The above is conveniently achieved with the use of the \cppLstinline{bp::scope} class of Boost.Python. Constructing an object of this class, essentially, changes the Python namespace in which new extension classes and wrapped functions are defined as attributes.  An object of the \cppLstinline{bp::scope} class is associated with a global Python object, which is bound to a Python namespace. The global Python object associated with default-constructed scopes is bound to the global Python namespace, and the global Python object associated with a scope constructed with an argument is bound to the Python namespace held by the argument. When a scope object is constructed its associated global Python object is pushed onto a stack. When the lifetime of the scope ends, the associated global Python object is popped from the stack. This mechanism conveniently reflects nesting of constructs in C++ in Python code. For example, consider the following constructs in C++:\footnote{This example is a simplified version of the example shown at \url{https://www.boost.org/doc/libs/1_76_0/libs/python/doc/html/reference/high_level_components/boost_python_scope_hpp.html}.}
 
 \begin{lstlisting}[style=cppNumberedStyle]
 struct X {
