@@ -25,9 +25,9 @@ arguments passed to \myLstinline{cmake}, which govern the generation
 of the native build environment. When running an application written
 in Python that depends on \cgal{} instead of building the application,
 the user must build the bindings. Here, \myLstinline{\$APP\_SRC\_DIR}
-needs to point at the root directory of the binding source tree,
-and \myLstinline{\$APP\_DIR} needs to point at the build directory for
-the bindings. The optional arguments passed to \myLstinline{cmake} in
+needs to point at the root directory of the binding source tree, and
+\myLstinline{\$APP\_DIR} needs to point at the build directory for the
+bindings. The optional arguments passed to \myLstinline{cmake} in
 stage~5 mainly consist of variables that determine (i) the object
 types to be bound and the unique identifier of each such object, and
 (ii) the name of the libraries that comprise the bindings, in case the
@@ -37,12 +37,10 @@ default library name is overridden.
 \subsection{Bindings Modules and Scopes}
 \label{sec:gen:scopes}
 % -----------------------------------------------------------------------------
-The source of \cgal{} consists of several packages.  We use a similar
-partition. Typically, we refer to each package as a module. In some
-cases we combine a small number of packages and refer to them as one
-module. Each module has a long (and meaningful) name and a short name;
-see Table~\ref{tab:moduleName} for the list of modules supported so
-far. Each module is associated with a \cmake{} Boolean flag that
+Our binding code is divided into modules, which correspond to \cgal{}
+packages. Each module has a long (and meaningful) name and a short
+name; see Table~\ref{tab:moduleName} for the list of modules supported
+so far. Each module is associated with a \cmake{} Boolean flag that
 determines whether to generate bindings for that particular
 module. Each module may be associated with zero or more additional
 flags that specify selections for bindings of entities of the
@@ -53,14 +51,14 @@ corresponding \cgal{} packages.  For example, the long name of the
 \myLstinline{CGALPY\_ARRANGEMENT\_ON\_SURFACE\_2\_BINDINGS} is the
 Boolean flag that indicates whether to generate bindings for this
 module.  This module is associated with the Boolean flag
-\myLstinline{CGALPY\_AOS2\_POINT\_LOCATION\_BINDINGS} that indicates
+\myLstinline{CGALPY\_AOS2\_POINT\_\-LOCATION\_BINDINGS}, which indicates
 whether to generate bindings for point location queries supported by
 the \iiDArrangementsPackage{} package. This module is also associated
 with the string flags
-\myLstinline{CGALPY\_AOS2\_GEOMETRY\_TRAITS\_NAME} and
-\myLstinline{CGALPY\_AOS2\_DCEL\_NAME} that specify the name of the
+\myLstinline{CGALPY\_AOS2\_GEOMETRY\_TRAITS\_\-NAME} and
+\myLstinline{CGALPY\_AOS2\_DCEL\_NAME}, which specify the name of the
 geometry traits and Dcel, respectively, used to instantiate the
-\cppLstinline{Arrangement\_2<GeometryTraits, Dcel>} class template;
+\cppLstinline{Arrangement\_2<GeometryTraits_2, Dcel>} class template;
 see Section~\ref{ssec:modules:aos2} for more details on the
 \iiDArrangementsPackage{} module.
 
@@ -69,24 +67,21 @@ see Section~\ref{ssec:modules:aos2} for more details on the
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleName] {
     Module & Name & Short Name\\
-    2D and 3D Kernel & \myLstinline{KERNEL} & \myLstinline{KER}\\
-    $d$D Kernel & \myLstinline{KERNEL\_D} & \myLstinline{KERD}\\
-    2D Arrangements on Surfaces & \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2} &
-      \myLstinline{AOS2}\\
-    2D Alpha shapes & \myLstinline{ALPHA\_SHAPE\_2} & \myLstinline{AS2}\\
-    3D Alpha shapes & \myLstinline{ALPHA\_SHAPE\_3} & \myLstinline{AS3}\\
-    2D Regularized Boolean operations &
-      \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
+    \iiDandiiiDGeometryKernelPackage & \myLstinline{KERNEL} & \myLstinline{KER}\\
+    \dDGeometryKernelPackage & \myLstinline{KERNEL\_D} & \myLstinline{KERD}\\
+    \iiDArrangementsPackage & \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2} & \myLstinline{AOS2}\\
+    \iiDAlphaShapesPackage & \myLstinline{ALPHA\_SHAPE\_2} & \myLstinline{AS2}\\
+    \iiiDAlphaShapesPackage & \myLstinline{ALPHA\_SHAPE\_3} & \myLstinline{AS3}\\
+    \iiDRegularizedBooleanSetOperationsPackage & \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
     Bounding Volumes & \myLstinline{BOUNDING\_VOLUMES} & \myLstinline{BV}\\
-    2D Convex hulls & \myLstinline{CONVEX\_HULL\_2} & \myLstinline{CH2}\\
-    3D Convex hulls & \myLstinline{CONVEX\_HULL\_3} & \myLstinline{CH3}\\
-    2D Polygons & \myLstinline{POLYGON\_2} & \myLstinline{POL2}\\
-    Polygon partitioning & \myLstinline{POLYGON\_PARTITIONING} &
-      \myLstinline{PP}\\
-    2D Minkowski sums & \myLstinline{MINKOWSKI\_SUM\_2} & \myLstinline{MS2}\\
+    \iiDConvexHullsandExtremePointsPackage & \myLstinline{CONVEX\_HULL\_2} & \myLstinline{CH2}\\
+    \iiiDConvexHullsPackage & \myLstinline{CONVEX\_HULL\_3} & \myLstinline{CH3}\\
+    \iiDPolygonsPackage & \myLstinline{POLYGON\_2} & \myLstinline{POL2}\\
+    \iiDPolygonPartitioningPackage & \myLstinline{POLYGON\_PARTITIONING} & \myLstinline{PP}\\
+    \iiDMinkowskiSumsPackage & \myLstinline{MINKOWSKI\_SUM\_2} & \myLstinline{MS2}\\
     Spatial searching & \myLstinline{SPATIAL\_SEARCHING} & \myLstinline{SS}\\
-    2D Triangulations & \myLstinline{TRIANGULATION\_2} & \myLstinline{TRI2}\\
-    3D Triangulations & \myLstinline{TRIANGULATION\_3} & \myLstinline{TRI3}\\
+    \iiDTriangulationsPackage & \myLstinline{TRIANGULATION\_2} & \myLstinline{TRI2}\\
+    \iiiDTriangulationsPackage & \myLstinline{TRIANGULATION\_3} & \myLstinline{TRI3}\\
   };
   \end{tikzpicture}
   \label{tab:moduleName}
@@ -179,7 +174,7 @@ By default, the base name of the generated library is
 generated string that maps to the set of bound types. This is
 imperative when more then one instance of the same template must be
 bound. Each execution of \myLstinline{cmake} followed by make
-generates a single library.  The \cmake{} flag
+generates a single library. The \cmake{} flag
 \myLstinline{CGALPY\_FIXED\_LIBRARY\_NAME} determines whether the base
 name of the generated library is \myLstinline{CGALPY} or not. If not,
 it has the prefix \myLstinline{CGALPY_} followed by as many as
@@ -211,8 +206,7 @@ indicates whether the generated library is compiled of static or
 dynamic libraries; it is true by default.
 
 The content of the library and its name are governed by flags provided
-to \myLstinline{cmake}. The number of flags is already large, and it
-is expected to grow in the future. All flags have the prefix
+to \myLstinline{cmake}. All flags have the prefix
 \myLstinline{CGALPY_}. In Tables~\ref{tab:args}, \ref{tab:sel},
 \ref{tab:ker}, \ref{tab:kerd}, \ref{tab:aos}, \ref{tab:tri2},
 \ref{tab:as2}, \ref{tab:tri3}, \ref{tab:as3}, and \ref{tab:ss} this
@@ -241,7 +235,7 @@ Name & Type & Default & Description\\
 
 %%%%%%%%
 \begin{table}[!]
-  \caption{Binding Selection}
+  \caption{Binding Selection. \textbf{Def.} stands for \textbf{Default Value}.}
   \centering\begin{tikzpicture}
     \matrix (first) [tableBindingSelection] {
 Name & Type & Default & Description\\
