@@ -246,6 +246,7 @@ void export_kernel() {
     .def("is_degenerate", &Line_2::is_degenerate)
     .def("is_horizontal", &Line_2::is_horizontal)
     .def("is_vertical", &Line_2::is_vertical)
+    .def("oriented_side", &Line_2::oriented_side)
     .def("has_on", &Line_2::has_on)
     .def("has_on_boundary", &Line_2::has_on_boundary)
     .def("has_on_negative_side", &Line_2::has_on_negative_side)
