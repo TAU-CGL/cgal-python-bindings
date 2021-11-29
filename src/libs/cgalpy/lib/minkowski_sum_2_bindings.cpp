@@ -17,7 +17,6 @@
 #include "CGALPY/polygon_partitioning_types.hpp"
 #include "CGALPY/export_general_polygon_2.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
-#include "CGALPY/if_.hpp"
 
 namespace bp = boost::python;
 
@@ -33,12 +32,14 @@ namespace ms2 {
 // target<T>::type select:
 //   std::list<T>::iterator if T is Polygon_2
 //   std::list<T::Polygon_2>::iterator if T is Polygon_with_holes_2
+template <typename T> class has { typedef void type; };
+
 template <typename T, typename = void> struct target {
   typedef typename std::list<T>::iterator type;
 };
 
 template <typename T>
-struct target<T, typename if_<false, typename T::Polygon_2>::type> {
+struct target<T, typename has<typename T::Polygon_2>::type> {
   typedef typename std::list<typename T::Polygon_2>::iterator type;
 };
 
@@ -163,7 +164,7 @@ void export_minkowski_sum_2() {
   // By decomposition
   // ================
   ms2::bind_mink_sum_decomp_one_strategy();
-  // ms2::bind_mink_sum_decomp_two_strategies();
+  ms2::bind_mink_sum_decomp_two_strategies();
 #endif
 
   bp::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>);
