@@ -32,27 +32,17 @@ c3 = Curve_2(Point_2(3, 3), Point_2(1, 3))
 c4 = Curve_2(Point_2(1, 3), Point_2(1, 1))
 Aos2.insert(arr2, [c1, c2, c3, c4])
 
-vertex_extended = True if hasattr(next(arr1.vertices()), 'set_data') else False
-halfedge_extended = True if hasattr(next(arr1.halfedges()), 'set_data') else False
-face_extended = True if hasattr(next(arr1.faces()), 'set_data') else False
-
 # Set the data for the faces. The data can be any python object
-cnt: int = 0
 for arr in [arr1, arr2]:
-  if face_extended:
-    for f in arr.faces():
-      f.set_data(0) if f.is_unbounded() else f.set_data(1)
+  for f in arr.faces():
+    f.set_data(0) if f.is_unbounded() else f.set_data(1)
 
-    # Alternative
-    # ubf: Face = arr.unbounded_face()
-    # ubf.set_data(0)
-    # f: Face
-    # for ccb in ubf.inner_ccbs():
-    #     next(next(ubf.inner_ccbs())).twin().face().set_data(1)
-  if vertex_extended:
-    for v in arr.vertices():
-      v.set_data(cnt)
-      cnt = cnt + 1
+  # Alternative
+  # ubf: Face = arr.unbounded_face()
+  # ubf.set_data(0)
+  # f: Face
+  # for ccb in ubf.inner_ccbs():
+  #     next(next(ubf.inner_ccbs())).twin().face().set_data(1)
 
 result = Arrangement_2()
 
@@ -78,25 +68,11 @@ result = Arrangement_2()
 # that accepts three cells. As in the case above, if you pass just one
 # function, by default, it is the function that accepts the data items
 # of two faces and computes the data item of the overlaid face.
-if face_extended:
-  traits = Aos2.Arr_overlay_traits(lambda f1, f2, f: f.set_data(f1.data()+f2.data()))
-  Aos2.overlay(arr1, arr2, result, traits)
+traits = Aos2.Arr_overlay_traits(lambda f1, f2, f: f.set_data(f1.data()+f2.data()))
+Aos2.overlay(arr1, arr2, result, traits)
 
-  for f in result.faces():
-    print(f.data())
-
-if vertex_extended:
-  traits = Aos2.Arr_overlay_function_traits()
-  traits.set_vv_v(lambda x, y: x+y)
-  traits.set_ve_v(lambda x, y: x)
-  traits.set_vf_v(lambda x, y: x)
-  traits.set_ev_v(lambda x, y: y)
-  traits.set_fv_v(lambda x, y: y)
-  traits.set_ee_v(lambda x, y: 0)
-  Aos2.overlay(arr1, arr2, result, traits)
-
-  for v in result.vertices():
-    print(v.data())
+for f in result.faces():
+  print(f.data())
 
 #  0  |----------|
 #     |   1      |
