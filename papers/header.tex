@@ -403,7 +403,25 @@
     sensitive=false, % keywords are not case-sensitive
     morecomment=[l]{\#}, % l is for line comment
     morestring=[b]" % defines that strings are enclosed in double quotes
-} %
+}
+% ========
+\lstdefinestyle{cmakeStyle}{%
+  language={Cmake},
+  identifierstyle=\color{red!50!black},
+  escapechar=~~,
+  %moredelim=**[is][\only<+>{\color{red}}]{@}{@}%
+}
+% ========
+\lstdefinestyle{cmakeNumberedStyle}{%
+  style=cmakeStyle,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt}
+% ========
+\lstdefinestyle{cmakeFramedStyle}{%
+  style=cmakeNumberedStyle,
+  frame=single,
+  frameround=tttt}
 % ========
 \NewDocumentCommand\framedInputCmake{O{\scriptsize}O{1}om}{%
   \IfNoValueTF{#3}{
@@ -435,3 +453,8 @@
 \def\pyLstinline#1{\lstinline[language={Python},columns=fixed]{#1}}
 \def\cppLstinline#1{\lstinline[language={C++},columns=fixed]{#1}}
 \def\cmakeLstinline#1{\lstinline[language={Cmake},columns=fixed]{#1}}
+
+\usepackage{float}
+\newfloat{lstfloat}{htbp}{lop}
+\floatname{lstfloat}{Listing}
+\def\lstfloatautorefname{Listing} % needed for hyperref/auroref
