@@ -1,4 +1,4 @@
-%% socg-lipics-v2021.cls
+%% socg-lipics-v2021.cls 
 %% Authors: Michael Hoffmann <hoffmann@inf.ethz.ch> and Irina Kostitsyna <i.kostitsyna@tue.nl>
 %% Revision: $Rev: 6990 $ from $Date: 2021-02-16 15:30:31 +0100 (Tue, 16 Feb 2021) $
 %% wrapper around lipics-v2021 to obtain a more consistent line numbering
@@ -145,7 +145,7 @@
   }%
 }
 
-%% don't number frontmatter
+%% don't number frontmatter 
 \let\socgrealmaketitle=\maketitle
 \renewcommand{\maketitle}{\nolinenumbers\socgrealmaketitle\linenumbers}
 
@@ -215,7 +215,7 @@
         \endsocgtcolorbox%
         \endnolinenumbers}%
     }{%
-    }% package tcolorbox loaded
+    }% package tcolorbox loaded 
   }% AtBeginDocument
 }% if socgtcolorbox
 
@@ -234,7 +234,7 @@
         \socgalgorithmic[#1]\internallinenumbers}{%
         \endsocgalgorithmic}% end of environment algorithmic
     }{%
-    }% package algorithmic or algorithmicx loaded
+    }% package algorithmic or algorithmicx loaded 
     \@ifpackageloaded{algorithm}{%
       \socgtypeout{fix algorithm}
       \LetLtxMacro\socgalgorithms\algorithm%
@@ -246,10 +246,10 @@
           \socgcaption[##1]{\internallinenumbers ##2}}%
       }{\endsocgalgorithms}% end of environment algorithm
     }{%
-    }% package algorithm loaded
+    }% package algorithm loaded 
   }% AtBeginDocument
 }% if socgalgo
-
+    
 %% fix algorithm2e
 \ifthenelse{\boolean{socgnoalgorithm2e}}{%
 }{%
@@ -289,10 +289,10 @@
         \setcounter{linenumber}{\value{AlgoLine}}\stepcounter{linenumber}%
         \socgalgocaption{#1}{#2}%
       }% end of algocf@makecaption
-    }{}% package algorithm2e loaded
+    }{}% package algorithm2e loaded 
   }% AtBeginDocument
 }% if socgalgo2e
-
+    
 \endinput
 
 % Local Variables:
