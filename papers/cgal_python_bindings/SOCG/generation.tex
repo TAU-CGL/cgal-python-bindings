@@ -2,6 +2,17 @@
 \section{Binding Generation}
 \label{sec:gen}
 % =============================================================================
+
+% -----------------------------------------------------------------------------
+\subsection{\cmake}
+\label{ssec:intro:cmake}
+% -----------------------------------------------------------------------------
+\cmake{}~\cite{mh-mc-08} is an open-source, cross-platform suite of tools designed to build, test, and package software. The suite of \cmake{} tools were created to address the need for cross-platform build environments for open-source projects. However, since it was conceived over two decades ago, it has grown and become powerful, rich, and flexible. It is now considered a modern tool; it is widely spread and used by major commercial software products for their build and test environments.
+
+\cmake{}, for the most part, is a cross-platform build system generator.  It is used to control the software build process using simple platform and compiler independent configuration files, and it generates native build environments of the user choice. Users build a project by using \cmake{} to generate a build system for native tools on their platforms. \cmake{} supports an interpreted, functional, scripting language. The build process of a project is specified with platform-independent \cmake{} text files, named \myLstinline{CMakeLists.txt}, written in the \cmake{} language, included in each directory of the source tree of the project. For example, once the \cmake{} configuration files are in place for a certain project, \cmake{} can be used to generate \myLstinline{Makefile} files required by the \myLstinline{make} utility of the GNU suite to compile a project on a Unix system using \myLstinline{g++}. The command-line interface of the cross-platform build system generator of \cmake{} is an executable called \myLstinline{cmake}. It has a counterpart called \myLstinline{cmake-gui}, which includes a graphical user interface (GUI). To generate native project build files, the user invokes \myLstinline{cmake} in a terminal and specifies the directory that contains the root \myLstinline{CMakeLists.txt} file.
+
+A key feature of \cmake{} is the ability to (optionally) place compiler outputs (such as object files) outside the source tree. This enables multiple and concurrent builds from the same source tree and cross-compilation. It also keeps the source tree clean and ensures that removing a build directory will not remove the source files.  We exploit this feature, and the scripting capabilities to conveniently generate the C++ Python bindings for several \cgal{} objects concurrently.
+
 The most simple form of building an application written in C++ that depends on \cgal{} consists of the stages below. Let \myLstinline{\$APP\_SRC\_DIR} point at the root directory of the application source tree.
 \begin{enumerate}
 \item Obtain the sources of \cgal{}; let \myLstinline{\$CGAL\_SRC\_DIR} point at the root directory of the \cgal{} source tree.
@@ -14,13 +25,13 @@ The most simple form of building an application written in C++ that depends on \
 In the procedure above \myLstinline{options} refer to optional arguments passed to \myLstinline{cmake}, which govern the generation of the native build environment. When running an application written in Python that depends on \cgal{} instead of building the application, the user must build the bindings. Here, \myLstinline{\$APP\_SRC\_DIR} needs to point at the root directory of the binding source tree, and \myLstinline{\$APP\_DIR} needs to point at the build directory for the bindings. The optional arguments passed to \myLstinline{cmake} in stage~5 mainly consist of variables that determine (i) the object types to be bound and the unique identifier of each such object, and (ii) the name of the libraries that comprise the bindings, in case the default library name is overridden.
 
 % -----------------------------------------------------------------------------
-\subsection{Bindings Modules and Scopes}
-\label{sec:gen:scopes}
+\subsection{Bindings Components}
+\label{sec:gen:components}
 % -----------------------------------------------------------------------------
 Our binding code is divided into modules, which correspond to \cgal{} packages.  Each module has a long (and meaningful) name and a short name; see Table~\ref{tab:moduleName} for the list of relevant modules. Each module is associated with a \cmake{} Boolean flag that determines whether to generate bindings for that particular module. Each module may be associated with zero or more additional flags that specify selections for bindings of entities of the corresponding \cgal{} packages.  For example, the long name of the \iiDArrangementsPackage{} module is \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2}; its short name is \myLstinline{AOS2}; \myLstinline{CGALPY\_ARRANGEMENT\_ON\_ SURFACE\_2\_BINDINGS} is the Boolean flag that indicates whether to generate bindings for this module.  This module is associated with the Boolean flag \myLstinline{CGALPY\_AOS2\_POINT\_ LOCATION\_BINDINGS}, which indicates whether to generate bindings for point location queries supported by the \iiDArrangementsPackage{} package. This module is also associated with the string flags \myLstinline{CGALPY\_AOS2\_GEOMETRY\_TRAITS\_NAME} and \myLstinline{CGALPY\_AOS2\_DCEL\_NAME}, which specify the name of the geometry traits and Dcel, respectively, used to instantiate the
 \cppLstinline{Arrangement\_2<GeometryTraits_2, Dcel>} class template; see Section~\ref{ssec:modules:aos2} for more details on the \iiDArrangementsPackage{} module.
 
-\begin{table}[!]
+\begin{table}[!htp]
   \caption{Module names and short names}
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleName] {
@@ -33,7 +44,7 @@ Our binding code is divided into modules, which correspond to \cgal{} packages. 
     \iiDRegularizedBooleanSetOperationsPackage & \myLstinline{BOOLEAN\_SET\_OPERATIONS\_2} & \myLstinline{BSO2}\\
 %    Bounding Volumes & \myLstinline{BOUNDING\_VOLUMES} & \myLstinline{BV}\\
 %   \iiDConvexHullsandExtremePointsPackage & \myLstinline{CONVEX\_HULL\_2} & \myLstinline{CH2}\\
-%   \iiiDConvexHullsPackage & \myLstinline{CONVEX\_HULL\_3} & \myLstinline{CH3}\\
+%   \iiiDConvexHulls & \myLstinline{CONVEX\_HULL\_3} & \myLstinline{CH3}\\
     \iiDPolygonsPackage & \myLstinline{POLYGON\_2} & \myLstinline{POL2}\\
 %   \iiDPolygonPartitioningPackage & \myLstinline{POLYGON\_PARTITIONING} & \myLstinline{PP}\\
     \iiDMinkowskiSumsPackage & \myLstinline{MINKOWSKI\_SUM\_2} & \myLstinline{MS2}\\
@@ -45,8 +56,12 @@ Our binding code is divided into modules, which correspond to \cgal{} packages. 
   \label{tab:moduleName}
 \end{table}
 
-The exposed names of the bound entities of different modules are gathered in distinct Python namespaces to prevent name conflicts. The namespace is the short name of the module in lower-case except for the first letter (which is in upper-case); for example, the namespaces of the bound types and free functions of the \iiDandiiiDGeometryKernelPackage{} and the \iiDRegularizedBooleanSetOperationsPackage{} packages are \pyLstinline{Ker} and \pyLstinline{Bso2}, respectively.  Each of these two namespaces has the attribute \myLstinline{intersection} (i.e., \myLstinline{Ker.intersection()} and \myLstinline{Bso2.intersection()}). We introduce as many (Python) namespaces as modules, and nest every exposed name of a bound entity in the appropriate (Python) namespace according to the module of the entity; See Section~\ref{sec:code:scopes} for the implementation details.
+The exposed names of the bound entities of different modules are gathered in distinct Python namespaces to prevent name conflicts. The namespace is the short name of the module in lower-case except for the first letter (which is in upper-case); for example, the namespaces of the bound types and free functions of the \iiDandiiiDGeometryKernelPackage{} and the \iiDRegularizedBooleanSetOperationsPackage{} packages are \pyLstinline{Ker} and \pyLstinline{Bso2}, respectively.  Each of these two namespaces has the attribute \myLstinline{intersection} (i.e., \myLstinline{Ker.intersection()} and \myLstinline{Bso2.intersection()}). We introduce as many (Python) namespaces as modules, and nest every exposed name of a bound entity in the appropriate (Python) namespace according to the module of the entity. We provide implementation details in the next section.
 
+% -----------------------------------------------------------------------------
+\subsection{Bindings Scopes}
+\label{sec:gen:scopes}
+% -----------------------------------------------------------------------------
 The above is conveniently achieved with the use of the \cppLstinline{bp::scope} class of Boost.Python. Constructing an object of this class, essentially, changes the Python namespace in which new extension classes and wrapped functions are defined as attributes.  An object of the \cppLstinline{bp::scope} class is associated with a global Python object, which is bound to a Python namespace. The global Python object associated with default-constructed scopes is bound to the global Python namespace, and the global Python object associated with a scope constructed with an argument is bound to the Python namespace held by the argument. When a scope object is constructed its associated global Python object is pushed onto a stack. When the lifetime of the scope ends, the associated global Python object is popped from the stack. This mechanism conveniently reflects nesting of constructs in C++ in Python code. For example, consider the following constructs in C++:\footnote{This example is a simplified version of the example shown at \url{https://www.boost.org/doc/libs/1_76_0/libs/python/doc/html/reference/high_level_components/boost_python_scope_hpp.html}.}
 
 \begin{lstlisting}[style=cppNumberedStyle]
@@ -85,6 +100,32 @@ We use this mechanism to reflect nesting in C++ code that uses \cgal. For exampl
 >>> Segment = Arr.Curve_2     # define the curve type
 >>> seg = Segment(Point(0, 0), Point(1, 0))
 \end{lstlisting}
+
+The Boost.Python mechanism that depends on \cppLstinline{bp::scope} is used to (i) reflect nesting in C++ code that uses \cgal, and (ii) prevent name conflicts between bound entities in distinct modules; see Section~\ref{sec:gen:scopes}. The latter requires a slight intervention on our part as explained next. The code that binds all functions and classes of different modules is nested in distinct C++ forced scopes. Within a (C++) scope we first set the Python namespace to match the name of a module. Then, we bind all functions and classes of \cgal{} packages associated with the module. The following code except shows how it is done for the \iiDandiiiDGeometryKernelPackage{}
+module:
+
+\begin{lstlisting}[style=cppNumberedStyle]
+{
+  SET_SCOPE("Ker")
+  export_kernel();
+#ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
+  export_kernel_intersections_2();
+  export_kernel_intersections_3();
+#endif
+}
+\end{lstlisting}
+
+For every module there exists a function called \cppLstinline{export_<name>}, where \cppLstinline{<name>} is the module. This function contains the binding code for the essential functions and classes of the module. The \iiDandiiiDGeometryKernelPackage{} module is associated with the \cmake{} \myLstinline{KERNEL\_INTERSECTION\_BINDINGS} flag (see Table~\ref{tab:ker}), which determines whether to generate bindings for intersections; hence, the compile-time conditional calls to the functions \cppLstinline{export_kernel_intersections_2()} and \cppLstinline{export_kernel_intersections_3()}, which contains the binding code for intersections. This code presents a certain challenge described in the next section.
+
+%% All functions and classes related to some package were exposed inside
+%% a \myLstinline{export_[package]()} function. All such calls are
+%% happening in \myLstinline{export_module.cpp}. We wrap each call with a
+%% local (c++) scope and call the \myLstinline{SET_SCOPE(module_name)}
+%% macro, which causes every exposed function/class inside this local
+%% scope to be exposed inside the \myLstinline{module_name} submodule of
+%% the CGALPY module. This prevents name clashes of classes with the same
+%% name in different packages.
+
 % -----------------------------------------------------------------------------
 \subsection{Bindings Library Name}
 \label{sec:gen:libraryName}
