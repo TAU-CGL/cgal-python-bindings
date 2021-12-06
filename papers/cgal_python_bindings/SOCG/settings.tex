@@ -1,6 +1,7 @@
 % ======== Custom commands ====================================================
 \newcommand{\cgal}{{\sc Cgal}}
 \newcommand{\cmake}{{\sc CMake}}
+\newcommand{\disco}{{\sc DiscoPygal}}
 % ======== Miscellaneous ======================================================
 \usepackage{xspace}
 \usepackage{todonotes}
@@ -229,28 +230,14 @@
 \NewDocumentCommand\framedInputPython{O{\scriptsize}O{1}om}{%
   \IfNoValueTF{#3}{
     \lstinputlisting[%
-      escapechar=~~,
-      numbers=left,
-      numberstyle=\tiny\color{gray},
-      numbersep=5pt,
-      frame=single,
-      frameround=tttt,
-      language=Python,
+      style=pythonFramedStyle,
       basicstyle=#1,
-      firstline=#2,
-      identifierstyle=\color{red!50!black}]{#4}}{%
+      firstline=#2]{#4}}{%
     \lstinputlisting[%
-      escapechar=~~,
-      numbers=left,
-      numberstyle=\tiny\color{gray},
-      numbersep=5pt,
-      frame=single,
-      frameround=tttt,
-      language=Python,
+      style=pythonFramedStyle,
       basicstyle=#1,
       firstline=#2,
-      lastline=#3,
-      identifierstyle=\color{red!50!black}]{#4}}}
+      lastline=#3]{#4}}}
 % ========
 \lstdefinelanguage{Cmake}{
     morekeywords={},
@@ -259,31 +246,35 @@
     morestring=[b]" % defines that strings are enclosed in double quotes
 } %
 % ========
+\lstdefinestyle{cmakeStyle}{%
+  language={Cmake},
+  identifierstyle=\color{red!50!black},
+  escapechar=~~,
+  %moredelim=**[is][\only<+>{\color{red}}]{@}{@}%
+}
+% ========
+\lstdefinestyle{cmakeNumberedStyle}{%
+  style=cmakeStyle,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt}
+% ========
+\lstdefinestyle{cmakeFramedStyle}{%
+  style=cmakeNumberedStyle,
+  frame=single,
+  frameround=tttt}
+% ========
 \NewDocumentCommand\framedInputCmake{O{\scriptsize}O{1}om}{%
   \IfNoValueTF{#3}{
     \lstinputlisting[%
-      escapechar=~~,
-      numbers=left,
-      numberstyle=\tiny\color{gray},
-      numbersep=5pt,
-      frame=single,
-      frameround=tttt,
-      language=Cmake,
+      style=cmakeFramedStyle,
       basicstyle=#1,
-      firstline=#2,
-      identifierstyle=\color{red!50!black}]{#4}}{%
+      firstline=#2]{#4}}{%
     \lstinputlisting[%
-      escapechar=~~,
-      numbers=left,
-      numberstyle=\tiny\color{gray},
-      numbersep=5pt,
-      frame=single,
-      frameround=tttt,
-      language=Python,
+      style=cmakeFramedStyle,
       basicstyle=#1,
       firstline=#2,
-      lastline=#3,
-      identifierstyle=\color{red!50!black}]{#4}}}
+      lastline=#3]{#4}}}
 % ========
 \def\myLstinline#1{\lstinline[columns=fixed]{#1}}
 \def\pyLstinline#1{\lstinline[language={Python},columns=fixed]{#1}}
@@ -293,3 +284,8 @@
 \tikzset{
   point/.style={circle,inner sep=1.5pt,minimum size=1.5pt,draw,fill=#1},
   point/.default=red}
+  
+\usepackage{float}
+\newfloat{lstfloat}{htbp}{lop}
+\floatname{lstfloat}{Listing}
+\def\lstfloatautorefname{Listing} % needed for hyperref/auroref
