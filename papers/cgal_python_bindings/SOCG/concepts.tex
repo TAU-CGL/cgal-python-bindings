@@ -1,0 +1,99 @@
+% =============================================================================
+\section{Concepts and Binding Coupling}
+\label{sec:concepts}
+% =============================================================================
+Generic programming identifies an abstraction that consists of a formal hierarchy of polymorphic abstract requirements on data types, referred to as \emph{concepts}, and a set of classes that conform precisely to the specified requirements, referred to as \emph{models}~\cite{a-gps-99}. A hierarchy of related concepts can be viewed as a directed acyclic graph, where a node of the graph represents a concept and an arc represents a refinement relation. An arc directed from concept A to concept B indicates that concept B refines concept A. When a class template is instantiated, each one of its template parameters is substituted with a model of one or more concepts associated with the template parameter.
+
+As mentioned in the introduction, \cgal{} rigorously adheres to the generic programming paradigm. As a consequence, most components of \cgal{} are either class or function templates. Many of the parameters of these templates are described in terms of models of concepts. When a class or a function template is instantiated, each one of its template parameters is substituted with a model of one or more concepts associated with the template parameter. Close to~750 concepts can be identified in \cgal{} at the time this article is written. Most hierarchy graphs of concepts are small. Few graphs, such as the graph of concepts of the geometry traits of the \iiDArrangementsPackage{} package is quite large with intricate refinement relations. Therefore, these concepts are organized in clusters that describe the refinement relations among the concepts within a cluster. We have introduced tight coupling between concepts and (i) binding generations and (ii) type annotation. We describe these relations in this section.
+
+% -----------------------------------------------------------------------------
+\subsection{Following Generic Concepts}
+\label{sec:code:concepts}
+% -----------------------------------------------------------------------------
+For each concept we have introduced a template function that generates bindings for all the type and function members required by the concept. We call this function for every model of the concept. This systematic approach guaranties that all the documented functions and types, but nothing else, are exposed. Consider for example the cluster of geometry traits concepts depicted in Figure~\ref{fig:atc:central}. The template functions \cppLstinline{export_AosBasicTraits\_2()}, \cppLstinline{export_AosXMonotoneTraits\_2()}, and \cppLstinline{export_AosTraits\_2()} accept a binding class object\footnote{A binding class object of type \cppLstinline{bp:class_<T>} is used to expose the C++ type \cppLstinline{T} to Python.} for a particular geometry traits model and populate it with all attributes that correspond to the requirements of the concepts \cppLstinline{AosBasicTraits\_2}, \cppLstinline{AosXMonotoneTraits\_2}, and \cppLstinline{AosTraits\_2}, respectively. If a concept \cppLstinline{B} refines a concept \cppLstinline{A}, then the function \cppLstinline{export_B()} calls the function \cppLstinline{export_A()}. The bindings of different traits models are generated in separate compilation units. As nodes in the concept refinement graphs may have more than a single parent, we ensure that a function that corresponds to a concept is not invoked more than once in a given compilation unit; see Lines~3--4 in the definition of the function \cppLstinline{export_AosBasicTraits\_2()} in Listing~\ref{lst:cpp:exportBasic}.
+
+\begin{lstfloat}
+\begin{lstlisting}[style=cppFramedStyle,%
+                   basicstyle=\scriptsize,%
+                   label={lst:cpp:exportBasic},%
+                   caption={Exposing attributes that correspond to the concept \cppLstinline{AosBasicTraits_2}.}]
+template <typename GeometryTraits_2, typename ClassObject, typename Concepts>
+void export_AosBasicTraits_2(ClassObject c, Concepts& concepts) {
+  // Sentinel
+  static bool exported = false;
+  if (exported) return;
+
+  // Expose attributes that correspond to the traits
+  auto& classes = concepts.m_basic_traits_classes;
+  classes.m_point_2 = bp::class_<Point_2>("Point_2")
+    .def(bp::init<>())
+    .def(bp::init<const Point_2&>());
+  ~~$\cdots$~~
+}
+\end{lstlisting}
+\end{lstfloat}
+
+Typically, a concept in our case requires the provision of nested types that are themselves models of other concepts. For example, the concept \cppLstinline{AosBasicTraits\_2} requires the provision of the nested type \cppLstinline{Point_2} used to represent a two-dimensional point. The type \cppLstinline{Point_2} must be \cppLstinline{DefaultConstructible} and \cppLstinline{CopyConstructible}. Let \cppLstinline{p} be an object of type  \cppLstinline{Point_2} required by the \cppLstinline{AosBasicTraits\_2} concept. Most traits models also support the calls \cppLstinline{p.x()} and \cppLstinline{p.y()}; they return the $x$ and $y$ exact Cartesian coordinates of the points $p$, respectively. However, the \cppLstinline{Point_2} type nested in the traits model \cppLstinline{Arr_Bezier_curve_traits\_2} does not maintain an exact representation of the coordinates. Thus, it instead supports the call \cppLstinline{p.approximate()}, which returns a pair of floating point numbers that only approximate the real coordinates. The function \cppLstinline{export_AosBasicTraits\_2()} constructs a class object for the \cppLstinline{Point\_2} type, but adds nothing but Python attributes for the default and copy constructors of this type; see Lines~9--10 in the definition of the function \cppLstinline{export_AosBasicTraits\_2()} above. It also saves the class object of the \cppLstinline{Point_2} type (see Line~7), so that later on the functions responsible for the bindings of the various traits models can add additional Python attributes (such as the \cppLstinline{x()}, \cppLstinline{y()}, and \cppLstinline{approximate()} functions) to the class object.
+
+The concept \cppLstinline{AosHorizontalSideTraits\_2} requires the provision of the   \cppLstinline{Compare\_ x\_on\_boundary\_2} functor,\footnote{A functor is a class that has one or more \cppLstinline{operator()} members; thus, it acts as a function.} which has two versions of the overloaded members \cppLstinline{operator()} as follows; one accepts two ends of curves (refer to the manual for the precise encoding of a curve end) and one accepts an end of a curve end and a point. The former compares the $x$-coordinates of the curves at their respective limits or ends and the latter compares the $x$-coordinates of the point and the $x$-coordinates of the curve at its respective limit or end.
+%
+The concept \cppLstinline{AosIdentifiedHorizontalTraits\_2} indirectly refines the concept \cppLstinline{AosHorizontalSideTraits\_2} mentioned above. (The former would be used to define a traits model that handles arcs on a sphere with poles on the left and right sides;  Figure~\ref{fig:atc:sphericalBoundary} depicts a cluster of concepts for models that handle arcs on a sphere with poles on the top and bottom sides.) In addition to the two versions of the overloaded members \cppLstinline{operator()} of the functor  \cppLstinline{Compare\_x\_on\_boundary\_2} it requires the provision of a third version that accepts two points and compares their $x$ coordinates. Similar to the case described in the previous paragraph, where the class object that handles the bindings for the \cppLstinline{Point_2} type must be available in two separate functions, also here the class object that handles the bindings for the functor \cppLstinline{Compare\_x\_on\_boundary\_2} must be available in both functions \cppLstinline{export_AosHorizontalSideTraits\_2()} and  \cppLstinline{export_AosIdentifiedHorizontalTraits\_2()}. Saving the class object in one function so that it can be reused latter on in the other addresses this necessity.
+
+% -----------------------------------------------------------------------------
+\subsection{Type Annotation}
+\label{ssec:concepts:annotation}
+% -----------------------------------------------------------------------------
+\cgal{} is a large library to start with. It is divided into approximately~150 packages with countless function and class templates. The vast number of function and type instances that can be defined using this templates can be overwhelming. The development of non critical code that is based on \cgal{} can be expedited using Python and \cgal{} Python bindings.  Using code completion (which is based on type annotations) offered by several Python IDEs can accelerate the process much further. Type annotation in Python refers to annotations of Python functions, arguments, and variables in a way that can be used by various tools. It is an optional feature of Python that has been introduced in Version~3.5 and enhanced in successive versions. With this feature implemented a type checker, a tool separate from the Python interpreter, can be used to statically analyze code base to find bugs during early development stages and spelunk code of large projects. Naturally, it can be used by IDEs to interactively provide hints and suggestions to programmers and type check the code as it is being developed. Annotations can and should be placed near the code if possible. Observe that the Python interpreter ignores these annotations. Annotations can also be placed in external files (that have the extension \lstinline{pyi}), referred to as stubs, for cases where the code base is inaccessible, such as the case with bindings. Stub files contain the signatures of the annotated functions with the body of the functions discarded. They also list the attributes of annotated types. In our case they contain the annotated interface of the \cgal{} bindings. Stub files have the same syntax as regular Python modules. There is one feature of the typing module that is different in stub files, namely, the \pyLstinline{@overload} decorator. This decorator allows describing functions that support multiple different combinations of argument types. Consider, for example, the overloaded free C++ functions \cppLstinline{overlay()}; see Section~\ref{sec:code:overlay}. The annotation for the corresponding Python function \pyLstinline{overlay()} in the stub file is shown in Listing~\ref{lst:py:overloading}.
+
+\begin{lstfloat}
+\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize,%
+                   label={lst:py:overloading},%
+                   caption={Type annotation of the overloaded overlay function.}]
+@overload
+def overlay(r:Arrangement_2, b:Arrangement_2, o:Arrangement_2) -> None: pass
+@overload
+def overlay(r:Arrangement_2, b:Arrangement_2, o:Arrangement_2, t:Arr_overlay_traits) -> None: pass
+@overload
+def overlay(r:Arrangement_2, b:Arrangement_2, o:Arrangement_2, t:Arr_overlay_function_traits) -> None: pass
+\end{lstlisting}
+\end{lstfloat}
+
+Annotating a Python type that wraps a C++ type, which is a model of some concepts is guided by the concepts. Similar to the C++ code of the bindings, we have introduced a tight coupling between concepts and Python type annotations; see Section~\ref{sec:code:concepts}. In particular, we have introduced a Python annotation class for each concept that annotates all the requirements of the concept. The refinement relations between concepts are not reflected using inheritance between concept annotation classes. 
+% (This would invalidate the annotation code, as a concept \cppLstinline{A} may refine concepts \cppLstinline{B} and \cppLstinline{C} and both, \cppLstinline{B} and \cppLstinline{C}, may refine concept \cppLstinline{D}.)
+Instead, every model annotation-class that annotates a certain type, say \cppLstinline{T}, inherits from all the concept annotation-classes that correspond to the concepts that \cppLstinline{T} models. For example, assume that bindings are generated for the \cppLstinline{Arrangement_2<GeometryGtaits_2, Dcel>} type instantiated with a the geometry traits type that is an instance of the \cppLstinline{Arr_segment_traits_2} class template. This type models several concepts; see, e.g., Figure~\ref{fig:atc:central}. Partial Python type annotation for the type \pyLstinline{Arr_segment_traits_2} is shown in Listing~\ref{lst:py:aosSegmentTraits}.
+
+\begin{lstfloat}
+\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize,%
+                   label={lst:py:aosSegmentTraits},%
+                   caption={Partial Python type annotation for the type \pyLstinline{Arr_segment_traits_2}.}]
+class Arr_segment_traits_2(AosBasicTraits_2._AosBasicTraits_2,
+                           AosXMonotoneTraits_2._AosXMonotoneTraits_2,
+                           AosTraits_2._AosTraits_2,
+                           AosLandmarkTraits_2._AosLandmarkTraits_2,
+                           AosVerticalSideTraits_2._AosVerticalSideTraits_2,
+                           AosVerticalSideTraits_2._AosHorizontalSideTraits_2) :
+  class Point_2(AosBasicTraits_2._AosBasicTraits_2.Point_2):
+    def x(self) -> Ker.FT: ...
+    def y(self) -> Ker.FT: ...
+\end{lstlisting}
+\end{lstfloat}
+
+The type annotation for the concept \cppLstinline{AosBasicTraits_2} contains the annotations for the default constructor and copy constructor of the type \cppLstinline{Point_2} defined by every model of the concept \cppLstinline{AosBasicTraits_2}; Listing~\ref{lst:py:aosBasicTraits}.
+
+\begin{lstfloat}
+\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize,%
+                   label={lst:py:aosBasicTraits},%
+                   caption={Partial type annotation for the attributes that correspond to the concept \cppLstinline{AosBasicTraits_2}.}]
+class _AosBasicTraits_2():
+  class Point_2():
+    def __init__(): ...
+  class X_monotone_curve_2():
+    def __init__(): ...
+  class Equal_2(): 
+    @overload
+    def __call__(self, p: _AosBasicTraits_2.Point_2, q: _AosBasicTraits_2.Point_2) -> bool: ...
+    @overload
+    def __call__(self, p: _AosBasicTraits_2.X_monotone_curve_2, q: _AosBasicTraits_2.X_monotone_curve_2) -> bool: ...
+  def equal_2_object(self) -> _AosBasicTraits_2.Equal_2: ...
+\end{lstlisting}
+\end{lstfloat}
