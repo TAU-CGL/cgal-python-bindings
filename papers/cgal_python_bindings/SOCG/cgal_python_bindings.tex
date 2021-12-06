@@ -49,7 +49,8 @@
 
 \Copyright{N. Goren and E. Fogel and D. Halperin} %TODO mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
 
-\ccsdesc[100]{\textcolor{red}{Replace ccsdesc macro with valid one}} %TODO mandatory: Please choose ACM 2012 classifications from https://dl.acm.org/ccs/ccs_flat.cfm
+\ccsdesc[100]{Software and its engineering $\rightarrow$ Software creation and management}
+%TODO mandatory: Please choose ACM 2012 classifications from https://dl.acm.org/ccs/ccs_flat.cfm
 \keywords{computational geometry, arrangements, python bindings, Minkowski sums, CGAL} %TODO mandatory; please add comma-separated list of keywords
 
 \category{} %optional, e.g. invited paper
@@ -70,7 +71,7 @@ by the Blavatnik Computer Science Research Fund, and by
 the Yandex Machine Learning Initiative for Machine Learning
 at Tel Aviv University.}
 %
-\acknowledgements{I want to thank \dots}%optional
+% \acknowledgements{I want to thank \dots}%optional
 
 %\nolinenumbers %uncomment to disable line numbering
 
@@ -94,40 +95,24 @@ at Tel Aviv University.}
 \begin{document}
 \maketitle
 % =============================================================================
-\input{tables}
+\input{abstract}
 \input{tables}
 \input{introduction}
 \input{comparison}
-\input{generation}
-\input{modules}
 \input{code}
-
-% =============================================================================
-\section{Applications}
-\label{sec:app}
-
-\subsection{DiscoPygal---a platform for multi robot motion planning}
-
-\subsection{Neural collision detection}
-
-\subsection{More?}
-% =============================================================================
-
+\input{applications}
 %\section{Experiments}
 %\label{sec:experiments}
-%
 %\subsection{The cost of binding}
 %\danny{how much we add in running time due to binding}
-%
+%\ef{We talk about it in the comparison section}
 %\subsection{Other comparisons}
-
-% =============================================================================
-\section{Conclusion}
-\label{sec:conclusion}
-% =============================================================================
-
+%\input{conclusions.tex}
 \bibliography{../../abrev-short,../../cgal,../cgal_python_bindings}
 \appendix
-\input{kernel_modules}
+\input{tools}
+\input{generation}
+\input{modules}
+\input{concepts}
 % \input{triangulation_module}
 \end{document}
