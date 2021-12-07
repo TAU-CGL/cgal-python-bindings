@@ -1,0 +1,79 @@
+{
+    "concepts": {
+        "MyConcept": {
+            "concepts": {
+                "otherConcept": 0
+            },
+            "classes": {
+                "InnerClass": {
+                    "concepts": {},
+                    "classes": {},
+                    "methods": {
+                        "inner_method": [
+                            {
+                                "variables": {
+                                },
+                                "return": {
+                                    "r": "str"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "methods": {}
+        },
+        "otherConcept": {
+            "concepts": {},
+            "classes": {},
+            "methods": {
+                "other_method": [
+                    {
+                        "variables": {
+                        },
+                        "return": {
+                            "r": "int"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "classes": {
+        "myclass": {
+            "concepts": {
+                "MyConcept": 0
+            },
+            "classes": {
+                "InnerClass": {
+                    "concepts": {},
+                    "classes": {},
+                    "methods": {
+                        "inner_method": [
+                            {
+                                "variables": {
+                                    "i": "int",
+                                    "j": "int"
+                                },
+                                "return": {
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "methods": {
+                "my_method": [
+                    {
+                        "variables": {
+                            "i": "int"
+                        },
+                        "return": {
+                            "r": "int"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
