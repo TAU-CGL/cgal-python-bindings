@@ -1,10 +1,4 @@
 import json
-f = open('./definitions.json')
-definitions = json.load(f)
-f.close()
-
-module_concepts = definitions["concepts"]
-module_classes = definitions["classes"]
 
 def merge_classes(c1, c2):
     for class_name, class_def in c2["classes"].items():
@@ -16,7 +10,7 @@ def merge_classes(c1, c2):
         if method in c1["methods"]:
             c1["methods"][method].extend(method_overloads)
         else:
-            c1[method] = json.loads(json.dumps(method_overloads))
+            c1["methods"][method] = json.loads(json.dumps(method_overloads))
 
 def get_all_concepts(concept):
     concepts = concept["concepts"]
@@ -33,9 +27,37 @@ def resolve_class(class_def):
 
     class_def["resolved"] = True
 
+def print_class(class_name, class_def, indent=0):
+    print("    "*indent + 'class ' + class_name + '():')
+    # print("    "*indent + '#models: ' + str(class_def["concepts"]))
+    for inner_class_name, inner_class_def in class_def["classes"].items():
+        print_class(inner_class_name, inner_class_def, indent+1)
+    for method, overloads in class_def["methods"].items():
+        for overload in overloads:
+            if (len(overloads)) > 1:
+                print("    "*(indent+1) + '@overload')
+            print("    "*(indent+1) + 'def ' + method + '(' ,end='')
+            variables = []
+            for variable, variable_type in overload["variables"].items():
+                variables.append(variable + ": " + variable_type)
+            print(", ".join(variables), end='')
+            print(') -> ' + overload["return"])
+
+
 if __name__ == "__main__":
+    f = open('./definitions.json')
+    definitions = json.load(f)
+    f.close()
+
+    module_concepts = definitions["concepts"]
+    module_classes = definitions["classes"]
+
     for class_name, class_def in module_classes.items():
         resolve_class(class_def)
 
-    print(json.dumps(definitions, indent=4, sort_keys=True))
+    # print(json.dumps(definitions, indent=4, sort_keys=True))
+
+    classes = module_classes.items()
+    for class_name, class_def in module_classes.items():
+        print_class(class_name, class_def)
 
