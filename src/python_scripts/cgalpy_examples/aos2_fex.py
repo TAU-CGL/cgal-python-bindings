@@ -27,7 +27,7 @@ print("Number of halfedges in the arrangement:", arr.number_of_halfedges())
 print("Number of faces in the arrangement:", arr.number_of_faces())
 
 unb_face = arr.unbounded_face()
-unb_face.set_data(1)
-next(next(unb_face.inner_ccbs())).twin().face().set_data(0)
+unb_face.set_data(0)
+next(next(unb_face.inner_ccbs())).twin().face().set_data(1)
 for f in arr.faces():
   print(f.is_unbounded(), f.data())
