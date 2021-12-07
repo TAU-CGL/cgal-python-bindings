@@ -13,9 +13,7 @@
                             {
                                 "variables": {
                                 },
-                                "return": {
-                                    "r": "str"
-                                }
+                                "return": "str"
                             }
                         ]
                     }
@@ -31,16 +29,14 @@
                     {
                         "variables": {
                         },
-                        "return": {
-                            "r": "int"
-                        }
+                        "return": "int"
                     }
                 ]
             }
         }
     },
     "classes": {
-        "myclass": {
+        "MyClass": {
             "concepts": {
                 "MyConcept": 0
             },
@@ -55,8 +51,7 @@
                                     "i": "int",
                                     "j": "int"
                                 },
-                                "return": {
-                                }
+                                "return": "None"
                             }
                         ]
                     }
@@ -68,9 +63,7 @@
                         "variables": {
                             "i": "int"
                         },
-                        "return": {
-                            "r": "int"
-                        }
+                        "return": "int"
                     }
                 ]
             }
