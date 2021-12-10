@@ -1,4 +1,7 @@
 {
+    "imports": [
+        "OtherModule"
+    ],
     "concepts": {
         "MyConcept": {
             "concepts": {
@@ -8,27 +11,28 @@
                 "InnerClass": {
                     "concepts": {},
                     "classes": {},
+                    "typedefs": {},
                     "methods": {
                         "inner_method": [
                             {
-                                "variables": {
-                                },
+                                "variables": {},
                                 "return": "str"
                             }
                         ]
                     }
                 }
             },
+            "typedefs": {},
             "methods": {}
         },
         "otherConcept": {
             "concepts": {},
             "classes": {},
+            "typedefs": {},
             "methods": {
                 "other_method": [
                     {
-                        "variables": {
-                        },
+                        "variables": {},
                         "return": "int"
                     }
                 ]
@@ -44,6 +48,7 @@
                 "InnerClass": {
                     "concepts": {},
                     "classes": {},
+                    "typedefs": {},
                     "methods": {
                         "inner_method": [
                             {
@@ -57,6 +62,9 @@
                     }
                 }
             },
+            "typedefs": {
+                "InnerClassFromOtherModule": "OtherModule.TheirClass"
+            },
             "methods": {
                 "my_method": [
                     {
@@ -68,5 +76,16 @@
                 ]
             }
         }
+    },
+    "functions": {
+        "free_function": [
+            {
+                "variables": {
+                    "i": "int",
+                    "j": "int"
+                },
+                "return": "None"
+            }
+        ]
     }
 }
