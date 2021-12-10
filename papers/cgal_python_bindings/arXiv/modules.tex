@@ -45,31 +45,31 @@ Table~\ref{tab:ker} lists the \cmake{} flags associated with the
 instance of a chain of C++ class templates. For convenience, \cgal{}
 provides the following predefned types of generally useful kernels:
 \begin{compactenum}
-\item \cppLstinline{Exact\_predicates\_inexact\_constructions\_kernel}---provides exact geometric predicates, but geometric constructions may be inexact due to round-off errors.
+\item \cppLstinline{Exact_predicates_inexact_constructions_kernel}---provides exact geometric predicates, but geometric constructions may be inexact due to round-off errors.
   %
 \item
-  \cppLstinline{Exact\_predicates\_exact\_constructions\_kernel}---provides
+  \cppLstinline{Exact_predicates_exact_constructions_kernel}---provides
   exact geometric constructions, in addition to exact geometric
   predicates.
   %
 \item
-  \cppLstinline{Exact\_predicates\_exact\_constructions\_kernel\_with\_sqrt}---same
-  as \cppLstinline{Exact\_predicates\_exact \_constructions\_kernel},
+  \cppLstinline{Exact_predicates_exact_constructions_kernel_with_sqrt}---same
+  as \cppLstinline{Exact_predicates_exact _constructions_kernel},
   but the number type is a model of the concept that requires
   operations that perform square roots, namely
   \cppLstinline{FieldWithSqrt}.\footnote{See
     \url{https://doc.cgal.org/latest/Algebraic_foundations/classFieldWithSqrt.html}.}
   %
 \item
-  \cppLstinline{Exact\_predicates\_exact\_constructions\_kernel\_with\_kth\_root}---same as
-  \cppLstinline{Exact\_predicates\_ exact\_constructions\_kernel}, but
+  \cppLstinline{Exact_predicates_exact_constructions_kernel_with_kth_root}---same as
+  \cppLstinline{Exact_predicates_ exact_constructions_kernel}, but
   the number type is a model of the concept that requires operations
   that perform $k$-th roots, namely
   \cppLstinline{FieldWithKthRoot}.\footnote{See
     \url{https://doc.cgal.org/latest/Algebraic_foundations/classFieldWithKthRoot.html}}
   %
-\item \cppLstinline{Exact\_predicates\_exact\_constructions\_kernel\_with\_root\_of}---same as
-\cppLstinline{Exact\_predicates\_ exact\_constructions\_kernel}, but the number type is a model of the concept that requires operations that computes the root of univariate polynomial, namely \cppLstinline{FieldWithRootOf}.\footnote{See \url{https://doc.cgal.org/latest/Algebraic_foundations/classFieldWithRootOf.html}.}
+\item \cppLstinline{Exact_predicates_exact_constructions_kernel_with_root_of}---same as
+\cppLstinline{Exact_predicates_ exact_constructions_kernel}, but the number type is a model of the concept that requires operations that computes the root of univariate polynomial, namely \cppLstinline{FieldWithRootOf}.\footnote{See \url{https://doc.cgal.org/latest/Algebraic_foundations/classFieldWithRootOf.html}.}
 \end{compactenum}
 
 %%%%%%%% Kernel Module Flags
@@ -84,9 +84,9 @@ provides the following predefned types of generally useful kernels:
     row 3/.style={nodes={minimum height=2.8em}}
   ] {
     Name & Type & Default & Description\\
-    \cmakeLstinline{KERNEL\_NAME} & String & \myLstinline{epic} &
+    \cmakeLstinline{KERNEL_NAME} & String & \myLstinline{epic} &
       The kernel type used\\
-    \cmakeLstinline{KERNEL\_INTERSECTION\_BINDINGS} & Boolean &
+    \cmakeLstinline{KERNEL_INTERSECTION_BINDINGS} & Boolean &
       \myLstinline{true} &
       Determines whether to generate bindings for intersections\\
   };
@@ -94,7 +94,10 @@ provides the following predefned types of generally useful kernels:
  \label{tab:ker}
 \end{table}
 
-All the predefined types are of Cartesian kernels. The \cmake{} flag \myLstinline{KERNEL\_NAME} specifies which kernel type should be used for the generated bindings.  Currently, only a limited predefined types and two specific types are supported; see Table~\ref{tab:ker:name}.
+All the predefined types are of Cartesian kernels. The \cmake{} flag
+\myLstinline{KERNEL_NAME} specifies which kernel type should be used
+for the generated bindings.  Currently, only three predefined types
+and two specific types are supported; see Table~\ref{tab:ker:name}.
 
 %%%%%%%% Kernel Name Options
 \begin{table}[!htp]
@@ -104,13 +107,13 @@ All the predefined types are of Cartesian kernels. The \cmake{} flag \myLstinlin
       column 1/.style={nodes={text width=8em}},
       column 2/.style={nodes={text width=34em}}
     ] {
-    \cmakeLstinline{KERNEL\_NAME} & Predefined Type\\
+    \cmakeLstinline{KERNEL_NAME} & Predefined Type\\
     \myLstinline{epic} &
-      \cppLstinline{Exact\_predicates\_inexact\_constructions\_kernel}\\
+      \cppLstinline{Exact_predicates_inexact_constructions_kernel}\\
     \myLstinline{epec} &
-      \cppLstinline{Exact\_predicates\_exact\_constructions\_kernel}\\
+      \cppLstinline{Exact_predicates_exact_constructions_kernel}\\
     \myLstinline{epecws} &
-      \cppLstinline{Exact\_predicates\_exact\_constructions\_kernel\_with\_sqrt}\\
+      \cppLstinline{Exact_predicates_exact_constructions_kernel_with_sqrt}\\
    };
  \end{tikzpicture}
    \centering\begin{tikzpicture}
@@ -120,18 +123,18 @@ All the predefined types are of Cartesian kernels. The \cmake{} flag \myLstinlin
       column 1/.style={nodes={text width=19em}},
       column 2/.style={nodes={text width=23em}}
     ] {
-    \cmakeLstinline{KERNEL\_NAME} & Predefined Type\\
+    \cmakeLstinline{KERNEL_NAME} & Predefined Type\\
     \myLstinline{filteredSimpleCartesianDouble} &
       \setlength{\tabcolsep}{0pt}\renewcommand{\arraystretch}{0}
       \begin{tabular}{l}
         \cppLstinline{NT = double}\\[5pt]
-        \cppLstinline{Filtered\_kernel<Simple\_cartesian<NT>>}
+        \cppLstinline{Filtered_kernel<Simple_cartesian<NT>>}
       \end{tabular}\\
     \myLstinline{filteredSimpleCartesianLazyGmpq} &
       \setlength{\tabcolsep}{0pt}\renewcommand{\arraystretch}{0}
       \begin{tabular}{l}
-        \cppLstinline{NT = Lazy\_exact\_nt<Gmpq>}\\[5pt]
-        \cppLstinline{Filtered\_kernel<Simple\_cartesian<NT>>}
+        \cppLstinline{NT = Lazy_exact_nt<Gmpq>}\\[5pt]
+        \cppLstinline{Filtered_kernel<Simple_cartesian<NT>>}
       \end{tabular}\\
    };
  \end{tikzpicture}
@@ -145,9 +148,9 @@ and coordinates. The Python attribute \pyLstinline{FT}, nested in the
 Python namespace \pyLstinline{Ker}, exposes the C++ underlying number
 type when it is not a primitive data type; that is, when the selected
 kernel is nor
-\cppLstinline{Exact\_predicates\_inexact\_constructions\_kernel}
+\cppLstinline{Exact_predicates_inexact_constructions_kernel}
 neither
-\cppLstinline{Filtered\_kernel<Simple\_cartesian<double>>}. (In both
+\cppLstinline{Filtered_kernel<Simple_cartesian<double>>}. (In both
 cases the underlying number type is \cppLstinline{double}.) Similar to
 the Python code above, the code below defines a two-dimensional point;
 here, the coordinates are explicitly converted to the underlying
@@ -159,23 +162,21 @@ number type.
 The code excerpt shown in Listing~\ref{lst:cmake:epecFixed}, in the
 \cmake{} language, sets the \cmake{} flags for our first example. When
 \myLstinline{cmake} is applied with these settings followed by the
-native build commands (e.g., \myLstinline{make} on Linux platforms) a
-library called \myLstinline{CGALPY} is generated. This library
-consists of the bindings necessary to run the Python example that
-follows. Observe that bindings of the
-\iiDandiiiDGeometryKernelPackage{} module are generated by default,
-whereas bindings for all other modules must be specifically requested.
+native build commands (e.g., \bashLstinline{make} on Linux platforms)
+a library called \myLstinline{CGALPY} is generated. This library
+consists of the bindings necessary to run the Python example shown in
+Listing~\ref{lst:py:kerIntersection}, which computes the intersection
+point of two segments using the generated binding. Observe that
+bindings of the \iiDandiiiDGeometryKernelPackage{} module are
+generated by default, whereas bindings for all other modules must be
+specifically requested.
 
 \begin{lstfloat}
   \lstinputlisting[style=cmakeFramedStyle,basicstyle=\normalsize,
                    label={lst:cmake:epecFixed},
-                   caption={\cmake{} flag settings used to generate bindings for the exact-predicates and  exact-constructions kernel.}]
+                   caption={\cmake{} flag settings used to generate bindings for the exact-predicates and exact-constructions kernel.}]
                   {../../../cmake/tests/release/epec_fixed_release.cmake}
 \end{lstfloat}
-
-The code example in Python shown in
-Listing~\ref{lst:py:kerIntersection} computes the intersection point
-of two segments using the generated binding.
 
 \begin{lstfloat}
   \lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,
@@ -201,11 +202,11 @@ represented either by Cartesian coordinates or by homogeneous
 coordinates. For convenience, \cgal{} provides the following
 predefined types of generally useful kernels:
 \begin{compactenum}
-\item \cppLstinline{Epick\_d<DimensionTag>}---provides exact geometric
+\item \cppLstinline{Epick_d<DimensionTag>}---provides exact geometric
   predicates, but geometric constructions may be inexact due to
   round-off errors.
   %
-\item \cppLstinline{Epeck\_d<DimensionTag>}---provides exact geometric
+\item \cppLstinline{Epeck_d<DimensionTag>}---provides exact geometric
   constructions, in addition to exact geometric predicates.
   %
 \end{compactenum}
@@ -221,18 +222,18 @@ Table~\ref{tab:kerd} lists the \cmake{} flags associated with the
     column 4/.style={nodes={text width=20.8em}}
   ] {
     Name & Type & Default & Description\\
-    \cmakeLstinline{KERNEL\_D\_NAME} & String & \myLstinline{epicd} &
+    \cmakeLstinline{KERNEL_D_NAME} & String & \myLstinline{epicd} &
       The kernel type used\\
-    \cmakeLstinline{KERNEL\_D\_DIMENSION\_TAG} & String & dynamic &
+    \cmakeLstinline{KERNEL_D_DIMENSION_TAG} & String & dynamic &
       Determines whether the dimension is dynamic\\
-    \cmakeLstinline{KERNEL\_D\_DIMENSION} & Integer & \myLstinline{2} &
+    \cmakeLstinline{KERNEL_D_DIMENSION} & Integer & \myLstinline{2} &
       The dimension of the ambient Euclidean space\\
   };
  \end{tikzpicture}
  \label{tab:kerd}
 \end{table}
 
-The \cmake{} flag \cmakeLstinline{KERNEL\_D\_NAME} specifies which
+The \cmake{} flag \cmakeLstinline{KERNEL_D_NAME} specifies which
 kernel type should be used for the generated bindings; see
 Table~\ref{tab:kerd:name}.
 
@@ -243,28 +244,29 @@ Table~\ref{tab:kerd:name}.
   \matrix (first) [tableName, column
     1/.style={nodes={text width=19em}},
     column 2/.style={nodes={text width=30em}}
-  ] { \cmakeLstinline{KERNEL\_D\_NAME} & Predefined Type\\
-    \cmakeLstinline{epicd} & \cppLstinline{Epick\_d<DimensionTag>}\\
-    \cmakeLstinline{epecd} & \cppLstinline{Epeck\_d<DimensionTag>}\\
+  ] { \cmakeLstinline{KERNEL_D_NAME} & Predefined Type\\
+    \cmakeLstinline{epicd} & \cppLstinline{Epick_d<DimensionTag>}\\
+    \cmakeLstinline{epecd} & \cppLstinline{Epeck_d<DimensionTag>}\\
     \cmakeLstinline{cartesiandDouble} & \cppLstinline{Cartesian_d<double>}\\
     \cmakeLstinline{cartesiandLazyGmpq} &
-      \cppLstinline{Cartesian\_d<Lazy\_exact\_nt<Gmpq>>}\\
+      \cppLstinline{Cartesian_d<Lazy_exact_nt<Gmpq>>}\\
   };
  \end{tikzpicture}
  \label{tab:kerd:name}
 \end{table}
 
-When either \cppLstinline{Epick\_d<DimensionTag>} or
-\cppLstinline{Epeck\_d<DimensionTag>} are instantiated the template
+When either \cppLstinline{Epick_d<DimensionTag>} or
+\cppLstinline{Epeck_d<DimensionTag>} are instantiated the template
 parameter must be substituted with a type that represents the
 dimension of the ambient Euclidean space. It may be either
-\cppLstinline{Dimension\_tag<d>} where $d$ is an integer or
-\cppLstinline{Dynamic\_dimension\_tag}. In the latter case, the
+\cppLstinline{Dimension_tag<d>} where $d$ is an integer or
+\cppLstinline{Dynamic_dimension_tag}. In the latter case, the
 dimension of the space is specified for each point when it is
 constructed, so it does not need to be known at compile-time of the
-bindings. The \cmake{KERNEL\_D\_DIMENSION\_TAG} flag specifies whether
-the dimension is static or dynamic. If it is static, the dimension is
-extracted from the \cmake{KERNEL\_D\_DIMENSION} \cmake{} flag; ; see
+bindings. The \cmake{} \cmakeLstinline{KERNEL_D_DIMENSION_TAG} flag
+specifies whether the dimension is static or dynamic. If it is static,
+the dimension is extracted from the \cmake{}
+\cmakeLstinline{KERNEL_D_DIMENSION} \cmake{} flag; ; see
 Table~\ref{tab:kerd:dim}.
 
 %%%%%%%% D Kernel Dimension Tag Options
@@ -274,32 +276,42 @@ Table~\ref{tab:kerd:dim}.
   \matrix (first) [tableName, column
     1/.style={nodes={text width=19em}},
     column 2/.style={nodes={text width=30em}}
-  ] { \cmakeLstinline{KERNEL\_D\_DIMENSION\_TAG} & Predefined Type\\
+  ] { \cmakeLstinline{KERNEL_D_DIMENSION_TAG} & Predefined Type\\
     \cmakeLstinline{static} & \cppLstinline{Dimension_tag<d>}\\
-    \cmakeLstinline{dynamic} & \cppLstinline{Dynamic\_dimension\_tag}\\
+    \cmakeLstinline{dynamic} & \cppLstinline{Dynamic_dimension_tag}\\
   };
  \end{tikzpicture}
  \label{tab:kerd:dim}
 \end{table}
 
-The kernel type determines the underlying number type. It
-is possible to have different underlying number types for the
+The kernel type determines the underlying number type. It is possible
+to have different underlying number types for the
 \iiDandiiiDGeometryKernelPackage{} and the \dDGeometryKernelPackage{}
 models. However, when the number types differ, expensive conversions
 might be necessary to combine operations from both kernels, or it may
 not be possible at all using the current bindings.
 
-The code excerpt below, in the \cmake{} language, sets the \cmake{}
-flags for our second example. When \myLstinline{cmake} is applied with
-these settings followed by the native build commands a library called
+The code excerpt in the \cmake{} language shown in
+Listing~\ref{lst:cmake:cdlg}, sets the \cmake{} flags for our second
+example. When \myLstinline{cmake} is applied with these settings
+followed by the native build commands a library called
 \myLstinline{CGALPY_kerdCdlgDynamic} is generated. This library
-consists of the bindings necessary to run the Python example that
-follows.
-\framedInputCmake[\normalsize]{../../../cmake/tests/release/cdlg_release.cmake}
+consists of the bindings necessary to run the Python example shown in
+Listing~\ref{lst:py:kerdDoIntersect}, which determines whether two
+segments in four dimensions intersect using the generated binding.
 
-The following code example in Python determines whether two segments
-in four dimensions intersect using the generated binding.
-\framedInputPython[\normalsize][14]{../../../src/python_scripts/cgalpy_examples/kerd_do_intersect.py}
+\begin{lstfloat}
+\lstinputlisting[style=cmakeFramedStyle,basicstyle=\normalsize,
+                 label={lst:cmake:cdlg},
+                 caption={\cmake{} flag settings used to generate bindings for the $d$-dimensional kernel.}] {../../../cmake/tests/release/cdlg_release.cmake}
+\end{lstfloat}
+
+\begin{lstfloat}
+\lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,firstline=14,
+                 label={lst:py:kerdDoIntersect},
+                 caption={Determining whether two segments in 4D itersect.}]
+                {../../../src/python_scripts/cgalpy_examples/kerd_do_intersect.py}
+\end{lstfloat}
 
 % -----------------------------------------------------------------------------
 \subsection{2D Arrangement Bindings}
@@ -317,11 +329,12 @@ embedded in ruled curved surfaces, such as, spheres, ellipses, tori,
 cones, and paraboloids. It also supports queries on such arrangements,
 such as point location, and other operations. One of the main
 components of the \iiDArrangementsPackage{} package is the
-\cppLstinline{Arrangement\_2<Traits, Dcel>} class template. An
+\cppLstinline{Arrangement_2<Traits, Dcel>} class template. An
 instance of this template is used to represent an arrangement embedded
 in the plane.  Table~\ref{tab:aos} lists the \cmake{} flags associated
 with the \iiDArrangementsPackage{} module.
-% Currently, only instances of the \cppLstinline{Arrangement\_2<Traits,Dcel>} class template are supported.
+% Currently, only instances of the
+% \cppLstinline{Arrangement_2<Traits,Dcel>} class template are supported.
 A description of the two template parameters of this class template follows.
 
 %%%%%%%% Arrangement Module Flags
@@ -336,28 +349,28 @@ A description of the two template parameters of this class template follows.
     row 6/.style={nodes={minimum height=2.8em}}
   ] {
     Name & Type & Default & Description\\
-    \cmakeLstinline{AOS2\_GEOMETRY\_TRAITS\_NAME} & \cmakeLstinline{String} &       \myLstinline{segment} & The basic geometry traits\\
+    \cmakeLstinline{AOS2_GEOMETRY_TRAITS_NAME} & \cmakeLstinline{String} &       \myLstinline{segment} & The basic geometry traits\\
     \myLstinline{AOS2_EXTEND_VERTEX} & \cmakeLstinline{Boolean} & \myLstinline{false} & Determines whether to extend the vertex type\\
     \myLstinline{AOS2_EXTEND_HALFEDGE} & \cmakeLstinline{Boolean} & \myLstinline{false} & Determines whether to extend the halfedge type\\
     \myLstinline{AOS2_EXTEND_FACE} & \cmakeLstinline{Boolean} & \myLstinline{false} & Determines whether to extend the face type\\
-    \myLstinline{AOS2\_POINT\_LOCATION\_BINDINGS} & \cmakeLstinline{Boolean} &       \myLstinline{true} & Determines whether to generate bindings for point location and vertical ray shooting queries\\
+    \myLstinline{AOS2_POINT_LOCATION_BINDINGS} & \cmakeLstinline{Boolean} &       \myLstinline{true} & Determines whether to generate bindings for point location and vertical ray shooting queries\\
   };
  \end{tikzpicture}
  \label{tab:aos}
 \end{table}
 
 \begin{itemize}
-  \item The Traits template-parameter determines the family of curves
-    that induce the arrangement. The parameter should be substituted
-    with a model of the basic arrangement traits concept or one or
-    more concepts that refine the basic concept. A model of the basic
-    traits concept defines the types of x-monotone curves and
-    two-dimensional points and supports basic geometric predicates on
-    them. A rather large directed acyclic graph is required to capture
-    the entire hierarchy of the geometry traits-class
-    concepts. Figure~\ref{fig:atc} depicts two clusters.
-    The list of supported traits class templates follows. For
-    each class template we describe the family of curves it handles.
+  \item The \cppLstinline{Traits} template-parameter determines the
+    family of curves that induce the arrangement. The parameter should
+    be substituted with a model of the basic arrangement traits
+    concept or one or more concepts that refine the basic concept. A
+    model of the basic traits concept defines the types of x-monotone
+    curves and two-dimensional points and supports basic geometric
+    predicates on them. A rather large directed acyclic graph is
+    required to capture the entire hierarchy of the geometry
+    traits-class concepts. Figure~\ref{fig:atc} depicts four clusters.
+    The list of supported traits class templates follows. For each
+    class template we describe the family of curves it handles.
   %
   \begin{compactenum}
   \item \cppLstinline{Arr_non_caching_segment_basic_traits_2<>}---handles
@@ -376,7 +389,7 @@ A description of the two template parameters of this class template follows.
   \item \cppLstinline{Arr_algebraic_segment_traits_2<>}---handles algebraic curves of arbitrary degrees.
   \end{compactenum}
 
-  The \cmake{} flag \cmakeLstinline{AOS2\_GEOMETRY\_TRAITS\_NAME}
+  The \cmake{} flag \cmakeLstinline{AOS2_GEOMETRY_TRAITS_NAME}
   specifies which geometry traits should be used for the generated
   bindings; see Table~\ref{tab:aos:gt}. Observe that an instance of
   the \cppLstinline{General_polygon_set_2<>} class template (see
@@ -386,47 +399,51 @@ A description of the two template parameters of this class template follows.
   bindings for the \iiDRegularizedBooleanSetOperationsPackage{}
   package. When bindings for this package is enabled, the traits
   parameter must be substituted with a traits class that also models
-  the \cppLstinline{GeneralPolygonSetTraits\_2} concept; see
+  the \cppLstinline{GeneralPolygonSetTraits_2} concept; see
   Figure~\ref{fig:bso2}. The appropriate final traits type is
   automatically defined by the system.
   %
+
 \item The \cppLstinline{Dcel} template-parameter should be substituted
-  with a class that models the \cppLstinline{ArrangementDcel} concept,
+  with a type that models the \cppLstinline{ArrangementDcel} concept,
   which is used to represent the topological layout of the
   arrangement.\footnote{See
     \url{https://doc.cgal.org/latest/Arrangement_on_surface_2/classArrangementDcel.html}.}
-  This parameter is substituted with an instance of the template
-  \cppLstinline{CGAL::Arr_dcel_base<V, H, F>}, where \cppLstinline{V},
-  \cppLstinline{H}, and \cppLstinline{F} are models of the
-  concepts\linebreak \cppLstinline{ArrangementDcelVertex},
+  This layout is, in particular, represented by a doubly-connected
+  edge list data-structure (DCEL for short), which consists of
+  containers of vertices, edges and faces and maintains the incidence
+  relations among these objects. The substituted type must be an
+  instance of the template \cppLstinline{CGAL::Arr_dcel_base<V, H,
+    F>}, where \cppLstinline{V}, \cppLstinline{H}, and
+  \cppLstinline{F} are models of the concepts\linebreak
+  \cppLstinline{ArrangementDcelVertex},
   \cppLstinline{ArrangementDcelHalfedge}, and
   \cppLstinline{ArrangementDcelFace}, respectively; by default they
   are substituted with
   \cppLstinline{Arr_vertex_base<Traits::Point_2>},
   \cppLstinline{Arr_halfedge_base<Traits::X_monotone_curve_2>}, and
-  \cppLstinline{Arr_ face_base}, respectively. In many applications it
+  \cppLstinline{Arr_face_base}, respectively. In many applications it
   is necessary to extend the types of the DCEL main features. This is
   governed by three \cmake{} Boolean flags as follows. If any one of
-  the \cmake{} variables \cmakeLstinline{AOS2\_VERTEX\_EXTENDED},
-  \cmakeLstinline{AOS2\_HALFEDGE\_EXTENDED}, or
+  the \cmake{} variables \cmakeLstinline{AOS2_VERTEX_EXTENDED},
+  \cmakeLstinline{AOS2_HALFEDGE_EXTENDED}, or
   \cmakeLstinline{AOS2_FACE_EXTENDED} is set to true, the
   corresponding template parameter, \cppLstinline{V},
   \cppLstinline{H}, or \cppLstinline{F}, is substituted with instances
-  of \cppLstinline{Arr_extended_vertex<Vb, VertexData>},
+  of \cppLstinline{Arr_extended_ vertex<Vb, VertexData>},
   \cppLstinline{Arr_extended_halfedge<Hb, HalfedgeData>}, or
-  \cppLstinline{Arr_extended_face<Fb, FaceData>}, respectively, where
+  \cppLstinline{Arr_extended_ face<Fb, FaceData>}, respectively, where
   \cppLstinline{Vb}, \cppLstinline{Hb}, and \cppLstinline{Fb} are the
   basic types above.
-  %
-  It is impossible to define a custom C++ type from Python
+  % It is impossible to define a custom C++ type from Python
   code. Therefore, when the bindings are generated each one of the
   \cppLstinline{VertexData}, \cppLstinline{HalfedgeData}, and
   \cppLstinline{FaceData} template parameters must be substituted with
   a C++ type known at the time the bindings were
   implemented. Flexibility is nevertheless retained by substituting
   every one of these parameters with the generic Python object
-  \cppLstinline{bp::object} when extended. This object provides a
-  generalized interface to Python objects.
+  \cppLstinline{bp::object} when the respective cell is extended. This
+  object provides a generalized interface to Python objects.
   %
   If bindings for the \iiDRegularizedBooleanSetOperationsPackage{}
   package is enabled, the template parameters \cppLstinline{H} and
@@ -445,47 +462,47 @@ A description of the two template parameters of this class template follows.
   \centering%
   \subfloat[]{\label{fig:atc:central}
     \begin{forest}
-      [\name{AosBasicTraits\_2},for tree={concept,edge={-latex}}
+      [\name{AosBasicTraits_2},for tree={concept,edge={-latex}}
         % forked edges
-        [\name{AosXMonotoneTraits\_2}
-          [\name{AosTraits\_2}]
+        [\name{AosXMonotoneTraits_2}
+          [\name{AosTraits_2}]
         ]
       ]
     \end{forest}}\quad
   \subfloat[]{\label{fig:atc:landmark}
     \begin{forest}
-      [\name{AosBasicTraits\_2},name=abt,for tree={concept,edge={-latex}}
+      [\name{AosBasicTraits_2},name=abt,for tree={concept,edge={-latex}}
         % forked edges
-        [\name{AosApproximateTraits\_2}
+        [\name{AosApproximateTraits_2}
           [,phantom]
-          [\name{AosLandmarkTraits\_2},name=alt,before drawing tree={x=0}]
+          [\name{AosLandmarkTraits_2},name=alt,before drawing tree={x=0}]
         ]
-        [\name{AosConstructXMonotoneCurveTraits\_2},name=acxmt]
+        [\name{AosConstructXMonotoneCurveTraits_2},name=acxmt]
       ]
       \draw[-latex] (acxmt) to (alt);
       \end{forest}}\\
     %
   \subfloat[]{\label{fig:atc:openBoundary}
     \begin{forest}
-      [\name{AosBasicTraits\_2},name=abt,before drawing tree={x=0pt},for tree={concept,edge={-latex}}
+      [\name{AosBasicTraits_2},name=abt,before drawing tree={x=0pt},for tree={concept,edge={-latex}}
         % forked edges
-        [\name{AosVerticalSideTraits\_2}
-          [\name{AosLeftSideTraits\_2}
-            [\name{AosOpenLeftTraits\_2},name=olt
+        [\name{AosVerticalSideTraits_2}
+          [\name{AosLeftSideTraits_2}
+            [\name{AosOpenLeftTraits_2},name=olt
               [,phantom]
-              [\name{AosOpenBoundaryTraits\_2},name=oyt,before drawing tree={x=0pt}]
+              [\name{AosOpenBoundaryTraits_2},name=oyt,before drawing tree={x=0pt}]
             ]
           ]
-          [\name{AosRightSideTraits\_2}
-            [\name{AosOpenRightTraits\_2},name=ort]
+          [\name{AosRightSideTraits_2}
+            [\name{AosOpenRightTraits_2},name=ort]
           ]
         ]
-        [\name{AosHorizontalSideTraits\_2}
-          [\name{AosBottomSideTraits\_2}
-            [\name{AosOpenBottomTraits\_2},name=obt]
+        [\name{AosHorizontalSideTraits_2}
+          [\name{AosBottomSideTraits_2}
+            [\name{AosOpenBottomTraits_2},name=obt]
           ]
-          [\name{AosTopSideTraits\_2}
-            [\name{AosOpenTopTraits\_2},name=ott]
+          [\name{AosTopSideTraits_2}
+            [\name{AosOpenTopTraits_2},name=ott]
           ]
         ]
       ]
@@ -496,24 +513,24 @@ A description of the two template parameters of this class template follows.
     %
   \subfloat[]{\label{fig:atc:sphericalBoundary}
     \begin{forest}
-      [\name{AosBasicTraits\_2},name=abt,before drawing tree={x=0pt},for tree={concept,edge={-latex}}
+      [\name{AosBasicTraits_2},name=abt,before drawing tree={x=0pt},for tree={concept,edge={-latex}}
         % forked edges
-        [\name{AosVerticalSideTraits\_2}
-          [\name{AosLeftSideTraits\_2}
+        [\name{AosVerticalSideTraits_2}
+          [\name{AosLeftSideTraits_2}
             [,phantom]
-            [\name{AosIdentifiedVerticalTraits\_2},name=ivt
+            [\name{AosIdentifiedVerticalTraits_2},name=ivt
               [,phantom]
-              [\name{AosSphericalBoundaryTraits\_2},name=sbt,before drawing tree={x=0pt}]
+              [\name{AosSphericalBoundaryTraits_2},name=sbt,before drawing tree={x=0pt}]
             ]
           ]
-          [\name{AosRightSideTraits\_2},name=rst]
+          [\name{AosRightSideTraits_2},name=rst]
         ]
-        [\name{AosHorizontalSideTraits\_2}
-          [\name{AosBottomSideTraits\_2}
-            [\name{AosContractedBottomCurveTraits\_2},name=cbt]
+        [\name{AosHorizontalSideTraits_2}
+          [\name{AosBottomSideTraits_2}
+            [\name{AosContractedBottomCurveTraits_2},name=cbt]
           ]
-          [\name{AosTopSideTraits\_2}
-            [\name{AosContractedTopCurveTraits\_2},name=ctt]
+          [\name{AosTopSideTraits_2}
+            [\name{AosContractedTopCurveTraits_2},name=ctt]
           ]
         ]
       ]
@@ -537,17 +554,17 @@ A description of the two template parameters of this class template follows.
      column 1/.style={nodes={text width=18em}},
      column 2/.style={nodes={text width=31em}}
    ] {
-     \cmakeLstinline{AOS2\_GEOMETRY\_TRAITS\_NAME} & Type\\
+     \cmakeLstinline{AOS2_GEOMETRY_TRAITS_NAME} & Type\\
      \myLstinline{nonCachingSegment} &
-       \cppLstinline{Arr\_non\_caching\_segment\_basic\_traits\_2<Kernel>}\\
-     \myLstinline{segment} & \cppLstinline{Arr\_segment_traits\_2<Kernel>}\\
-     \myLstinline{linear} & \cppLstinline{Arr\_linear\_traits\_2<Kernel>}\\
+       \cppLstinline{Arr_non_caching_segment_basic_traits_2<Kernel>}\\
+     \myLstinline{segment} & \cppLstinline{Arr_segment_traits_2<Kernel>}\\
+     \myLstinline{linear} & \cppLstinline{Arr_linear_traits_2<Kernel>}\\
      \myLstinline{conic} &
-       \cppLstinline{Arr\_conic\_traits\_2<RatKernel, AlgKernel, NtTraits>}\\
+       \cppLstinline{Arr_conic_traits_2<RatKernel, AlgKernel, NtTraits>}\\
      \myLstinline{circleSegment} &
-       \cppLstinline{Arr\_circle\_segment_traits\_2<Kernel>}\\
+       \cppLstinline{Arr_circle_segment_traits_2<Kernel>}\\
      \myLstinline{algebraic} &
-       \cppLstinline{Arr\_algebraic\_segment\_traits\_2<Coefficient>}\\
+       \cppLstinline{Arr_algebraic_segment_traits_2<Coefficient>}\\
    };
   \end{tikzpicture}
   \label{tab:aos:gt}
@@ -561,7 +578,7 @@ A description of the two template parameters of this class template follows.
      column 1/.style={nodes={text width=12em}},
      column 2/.style={nodes={text width=37em}}
    ] {
-     \myLstinline{AOS2\_DCEL\_NAME} & Type\\
+     \myLstinline{AOS2_DCEL_NAME} & Type\\
      \myLstinline{plain} & \cppLstinline{Arr_default_dcel<GeometryTraits>}\\
      \myLstinline{vertexExtended} &
        \cppLstinline{Arr_vertex_extended_dcel<Traits, Data>}\\
@@ -576,7 +593,13 @@ A description of the two template parameters of this class template follows.
  \label{tab:aos:dcel}
 \end{table}
 
-The code excerpt in Listing~\ref{lst:cmake:aos2EpecFaceExtended} in the \cmake{} language sets the \cmake{} flags for our next example shown in Listing~\ref{lst:py:aos2Fex}. This example constructs an arrangement with two faces. The arrangement is induced by line segments and its face type is extended. The properties of the bounded face and the unbounded face are initialized with Python integer objects '0' and '1', respectively.
+The code excerpt shown in Listing~\ref{lst:cmake:aos2EpecFaceExtended} in
+the \cmake{} language sets the \cmake{} flags for our next example
+shown in Listing~\ref{lst:py:aos2Fex}. This example constructs an
+arrangement with two faces. The arrangement is induced by line
+segments and its face type is extended. The properties of the bounded
+face and the unbounded face are initialized with Python integer
+objects '0' and '1', respectively.
 
 \begin{lstfloat}
 \lstinputlisting[style=cmakeFramedStyle,%
@@ -615,11 +638,11 @@ package. Recall, that both further depends on the
 these packages must be enabled as well when bindings for the
 \iiDRegularizedBooleanSetOperationsPackage{} package are enabled.
 
-The code excerpt in Listing~\ref{lst:cmake:bso2EpecCs} in the \cmake{}
-language sets the \cmake{} flags for our next example. Applying these
-settings followed by the execution of \myLstinline{make} will generate
-a library, the basename of which is
-\myLstinline{CGALPY_kerEpec_aos2Cs_bso2_pol2}. It supports bindings
+The code excerpt shown in Listing~\ref{lst:cmake:bso2EpecCs} in the
+\cmake{} language sets the \cmake{} flags for our next
+example. Applying these settings followed by the native build commands
+generates a library, the basename of which is
+\myLstinline{CGALPY_kerEpec_ aos2Cs_bso2_pol2}. It supports bindings
 for the types below and operations on these types, but nothing else.
 \begin{itemize}
 \item kernel types
@@ -643,11 +666,12 @@ Listing~\ref{lst:py:circleSegmentPolygons}; the example constructs a
 general polygon-set that represents the point set depicted in
 Figure~\ref{fig:csp}. It is the result of the union of four disjoint
 circles and four rectangles. Each circle is represented as a
-generalized polygon having two x-monotone circular arcs. The union is
-computed incrementally, resulting with a single generalized polygon
+generalized polygon bounded by two x-monotone circular arcs. The union
+is computed incrementally, resulting with a single generalized polygon
 with a single hole. Note that as the four circles are disjoint, their
-union is computed with the insert operation, while the union with the
-rectangles is computed with the join operation.
+union is computed with the \cppLstinline{insert()} function, while the
+union with the rectangles is computed with the \cppLstinline{join()}
+function.
 
 \begin{lstfloat}
 \lstinputlisting[style=pythonFramedStyle,%
@@ -681,10 +705,10 @@ rectangles is computed with the join operation.
     \end{tikzpicture}}\quad
   \subfloat[]{\label{fig:atc:gps}
     \begin{forest}
-      [\name{AosXMonotoneTraits\_2},for tree={concept,edge={-latex}}
+      [\name{AosXMonotoneTraits_2},for tree={concept,edge={-latex}}
         % forked edges
-        [\name{AosDirectionalXMonotoneTraits\_2}
-          [\name{GeneralPolygonSetTraits\_2}]
+        [\name{AosDirectionalXMonotoneTraits_2}
+          [\name{GeneralPolygonSetTraits_2}]
         ]
       ]
     \end{forest}}
@@ -697,7 +721,7 @@ rectangles is computed with the join operation.
 An arrangement data structure is internally used to represent the
 point set maintained by the general polygon-set; it is possible to
 obtain it and apply further operations on it, as demonstrated by the
-code excerpt in Listing~\ref{lst:py:circleSegmentPolygonsArr}.
+code excerpt shown in Listing~\ref{lst:py:circleSegmentPolygonsArr}.
 
 \begin{lstfloat}
 \lstinputlisting[style=pythonFramedStyle,%
@@ -711,7 +735,7 @@ code excerpt in Listing~\ref{lst:py:circleSegmentPolygonsArr}.
 The bindings for the \iiDArrangementsPackage{} package includes
 bindings for the geometry traits and the DCEL suitable for Boolean
 operations. In particular, the traits must model the concept
-\cppLstinline{GeneralPolygonSetTraits\_2}; see
+\cppLstinline{GeneralPolygonSetTraits_2}; see
 Figure~\ref{fig:atc:gps}.
 
 % -----------------------------------------------------------------------------
@@ -720,7 +744,7 @@ Figure~\ref{fig:atc:gps}.
 % -----------------------------------------------------------------------------
 Given two sets of points $\calA, \calB \in \Rd$ their Minkowski sum,
 denoted by $\calA \oplus \calB$, is their point-wise sum, namely the
-set $\{a+b |\, a \in \calA,b \in \calB\}$. The \cgal{} package
+set $\{a+b|\, a \in \calA,b \in \calB\}$. The \cgal{} package
 \iiDMinkowskiSumsPackage{} contains functions that compute the planar
 Minkowski sums of two polygons and the planar Minkowski sum of a
 simple polygon and a disc---an operation also referred to as
@@ -740,28 +764,31 @@ the bindings for the \iiDArrangementsPackage{} module (similar to the
 case of generating bindings of Boolean operations on (linear) polygons
 supported by the \iiDRegularizedBooleanSetOperationsPackage{}
 package). The result of the inset and offset operations is a general
-polygon bounded by line segments and circular arc. Thus, binding for
-such a type is generated as well.
+polygon bounded by line segments and circular arc. Binding for a type
+that represents such polygons, that is, an instance of
+\cppLstinline{CGAL::General_polygon_with_holes_2<>} is generated as
+well.
 
-The function instance \cppLstinline{CGAL::minkowski_sum()} is
-extremely overloaded. It can be used to compute the Minkowski sum of
-two polygons either applying the \emph{convex-decomposition} approach
-or the \emph{reduced-convolution} approach. When applying the
+The function \cppLstinline{CGAL::minkowski_sum()} is extremely
+overloaded. It can be used to compute the Minkowski sum of two
+polygons either applying the \emph{convex-decomposition} approach or
+the \emph{reduced-convolution} approach. When applying the
 \emph{convex-decomposition} approach we first decompose each summand
 into convex sub-polygons. The function template
-\cppLstinline{CGAL::minkowski\_sum_by_full_convolution_2()} applies a
+\cppLstinline{CGAL::minkowski_sum_by_full_convolution_2()} applies a
 third approach, namely \emph{full convolution}. For more information
 on the various approaches refer to the manual.
 
 There are two overloaded function templates
 \cppLstinline{CGAL::minkowski_sum()} that apply the
-\emph{reduced-convolution} approach; both accepts the two polygons as
-input; one also accepts a specific geometry traits as input (while the
-other constructs and uses a default one). Each type of the summands
-must represent either a simple polygon or a polygon with holes. The
-signature of the former is shown in Listing~\ref{lst:cpp:minkSum},
-where \cppLstinline{PolygonType1} and \cppLstinline{PolygonType2} can
-be substituted either with \cppLstinline{Polygon_2} or with
+\emph{reduced-convolution} approach; both accepts the two input
+polygons as input; one also accepts a specific geometry traits as
+input (while the other constructs and uses a default traits
+object). Each type of the summands must represent either a simple
+polygon or a polygon with holes. The signature of the former is shown
+in Listing~\ref{lst:cpp:minkSum}, where each of
+\cppLstinline{PolygonType1} and \cppLstinline{PolygonType2} can be
+substituted either with \cppLstinline{Polygon_2} or with
 \cppLstinline{Polygon_with_holes_2}.
 %
 Thus, given a specific kernel and container types, we get eight
@@ -783,7 +810,7 @@ minkowski_sum_2(const PolygonType1<Kernel, Container>& p,
 There are two sets of function templates
 \cppLstinline{CGAL::minkowski_sum()} that apply the
 \emph{convex-decomposition} approach; all functions accepts the two
-polygons as input; functions in one set also accept a specific
+input polygons as input; functions in one set also accept a specific
 geometry traits as input. As with the functions that apply the
 \emph{reduced-convolution} approach, each type of the summands must be
 substituted either with a type that represents a simple polygon or a
@@ -793,9 +820,10 @@ a single decomposition strategy that should be applied to both
 summands and another one that is parameterized with two types that
 represents two decomposition strategies that should be applied to the
 two summands, respectively. The package provides four types of
-decomposition strategies; however, only two can be applies to polygon
-width holes. Bellow are the signatures of the two functions that do
-not accept a traits parameter.
+decomposition strategies; however, only two can be applied to polygon
+width holes. Listing~\ref{lst:minkSumConvexDecomposition} shows the
+signatures of the two function templates that do not accept a traits
+parameter.
 
 We get 10~overloaded instances of functions that apply the
 \emph{convex-decomposition} approach, do not accept a traits
@@ -810,16 +838,16 @@ the \emph{convex-decomposition} approach.
 The \cppLstinline{approximated_inset_2(P, r, eps, oi)} function
 template accepts a polygon $P$, an inset radius $r$, (a floating-point
 number\index{number!floating-point}) $\epsilon > 0$, and an output
-iterator\index{iterator!output} \cppLstinline{oi}, whose value-type
-must be an instance of the class template
+iterator\index{iterator!output} \cppLstinline{oi}; dereferencing the
+iterator must yield an instance of the class template
 \cppLstinline{Gps_circle_segment_traits_2::Polygon_2}. It constructs
 an approximation of the inset of $P$ by the radius $r$, where the
 approximation error is bounded by $\epsilon$. The function returns the
 polygons that approximate the inset polygon through the output
 iterator \cppLstinline{oi}.
 
-The code excerpt in Listing~\ref{lst:py:approxInset} demonstrates the
-construction of an approximated inner offset; see
+The code excerpt shown in Listing~\ref{lst:py:approxInset}
+demonstrates the construction of an approximated inner offset; see
 Figure~\ref{fig:ms2:inset}.
 
 \begin{lstfloat}
@@ -902,12 +930,12 @@ module.
     row 6/.append style={nodes={minimum height=2.8em}}
   ] {
     Name & Type & Default & Description\\
-    \cmakeLstinline{TRI2\_NAME} & String & \myLstinline{plain} &
+    \cmakeLstinline{TRI2_NAME} & String & \myLstinline{plain} &
       The 2D triangulation type\\
-    \cmakeLstinline{TRI2\_VERTEX\_WITH\_INFO}      & Boolean & \myLstinline{false} & Determines whether the vertex type is extented\\
-    \cmakeLstinline{TRI2\_FACE\_WITH\_INFO}        & Boolean & \myLstinline{false} & Determines whether the face type is extented\\
-    \cmakeLstinline{TRI2\_INTERSECTION\_TAG\_NAME} & String  & \myLstinline{ncirc} & The intersection tag\\
-    \cmakeLstinline{TRI2\_HIERARCHY}               & Boolean & \myLstinline{false} & Determines whether to generate the binding for a hierarchy triangulation\\
+    \cmakeLstinline{TRI2_VERTEX_WITH_INFO}      & Boolean & \myLstinline{false} & Determines whether the vertex type is extented\\
+    \cmakeLstinline{TRI2_FACE_WITH_INFO}        & Boolean & \myLstinline{false} & Determines whether the face type is extented\\
+    \cmakeLstinline{TRI2_INTERSECTION_TAG_NAME} & String  & \myLstinline{ncirc} & The intersection tag\\
+    \cmakeLstinline{TRI2_HIERARCHY}               & Boolean & \myLstinline{false} & Determines whether to generate the binding for a hierarchy triangulation\\
   };
   \end{tikzpicture}
   \label{tab:tri2}
@@ -918,20 +946,20 @@ provides several class templates, instances of which can be used to
 represent a variety of 2D triangulations. In particular, the package
 provides the following class templates:
 \begin{compactenum}
-\item \cppLstinline{Triangulation\_2<Traits, Tds>},
-\item \cppLstinline{Regular\_triangulation\_2<Traits, Tds>},
-\item \cppLstinline{Delaunay\_triangulation\_2<Traits, Tds>},
-\item \cppLstinline{Constrained\_triangulation\_2<Traits, Tds, Itag>},
-\item \cppLstinline{Constrained\_Delaunay\_triangulation\_2<Traits, Tds, Itag>}, and
-\item \cppLstinline{Triangulation\_hierarchy\_2<Triangulation\_2>}
+\item \cppLstinline{Triangulation_2<Traits, Tds>},
+\item \cppLstinline{Regular_triangulation_2<Traits, Tds>},
+\item \cppLstinline{Delaunay_triangulation_2<Traits, Tds>},
+\item \cppLstinline{Constrained_triangulation_2<Traits, Tds, Itag>},
+\item \cppLstinline{Constrained_Delaunay_triangulation_2<Traits, Tds, Itag>}, and
+\item \cppLstinline{Triangulation_hierarchy_2<Triangulation_2>}
 \end{compactenum}
-Instance of the \cppLstinline{Delaunay\_triangulation\_2<>} and
-\cppLstinline{Regular\_triangulation\_2<>} class templates can be used
+Instance of the \cppLstinline{Delaunay_triangulation_2<>} and
+\cppLstinline{Regular_triangulation_2<>} class templates can be used
 to represent Delaunay and regular triangulation, respectively. In a
 regular triangulation points have an associated weight, and some
 points can be hidden and do not result in vertices in the
 triangulation. The class template
-\cppLstinline{Triangulation\_hierarchy\_2} enables fast point location
+\cppLstinline{Triangulation_hierarchy_2} enables fast point location
 queries. When instantiated its template parameter must be substituted
 with an instance of any other triangulation class template.
 
@@ -940,12 +968,12 @@ package~\cite{cgal:k-pt2-13-21a} supports triangulations of sets of
 points in the two-dimensional flat torus~\cite{ct-cpt-09}. This
 package provides the class templates
 \begin{compactenum}
-\item \cppLstinline{Periodic\_2\_triangulation\_2<Traits, Tds>},
-\item \cppLstinline{Periodic\_2\_Delaunay\_triangulation\_2<Traits, Tds>}
-\item \cppLstinline{Periodic\_2\_triangulation\_hierarchy\_2<PeriodicTriangulation>}
+\item \cppLstinline{Periodic_2_triangulation_2<Traits, Tds>},
+\item \cppLstinline{Periodic_2_Delaunay_triangulation_2<Traits, Tds>}
+\item \cppLstinline{Periodic_2_triangulation_hierarchy_2<PeriodicTriangulation>}
 \end{compactenum}
 
-The \cmake{} flag \cmakeLstinline{TRI2\_NAME} specifies the particular
+The \cmake{} flag \cmakeLstinline{TRI2_NAME} specifies the particular
 type of triangulation, bindings for which should be generated; see
 Table~\ref{tab:tri2:names}.
 
@@ -956,29 +984,29 @@ Table~\ref{tab:tri2:names}.
     column 1/.style={nodes={text width=11.5em}},
     column 2/.style={nodes={text width=37.5em}}
   ] {
-    \cmakeLstinline{TRI2\_NAME} & Type\\
-    \myLstinline{plain} & \cppLstinline{Triangulation\_2<Traits, Tds>}\\
-    \myLstinline{regular} & \cppLstinline{Regular\_triangulation\_2<Traits, Tds>}\\
-    \myLstinline{delaunay} & \cppLstinline{Delaunay\_triangulation\_2<Traits, Tds>}\\
-    \myLstinline{constrained} & \cppLstinline{Constrained\_triangulation\_2<Traits, Tds, Itag>}\\
-    \myLstinline{constrainedDelaunay} & \cppLstinline{Constrained\_Delaunay\_triangulation\_2<Traits, Tds, Itag>}\\
-    \myLstinline{periodicPlain} & \cppLstinline{Periodic\_2\_triangulation\_2<Traits, Tds>}\\
-    \myLstinline{periodicDelaunay} & \cppLstinline{Periodic\_2\_Delaunay\_triangulation\_2<Traits, Tds>}\\
+    \cmakeLstinline{TRI2_NAME} & Type\\
+    \myLstinline{plain} & \cppLstinline{Triangulation_2<Traits, Tds>}\\
+    \myLstinline{regular} & \cppLstinline{Regular_triangulation_2<Traits, Tds>}\\
+    \myLstinline{delaunay} & \cppLstinline{Delaunay_triangulation_2<Traits, Tds>}\\
+    \myLstinline{constrained} & \cppLstinline{Constrained_triangulation_2<Traits, Tds, Itag>}\\
+    \myLstinline{constrainedDelaunay} & \cppLstinline{Constrained_Delaunay_triangulation_2<Traits, Tds, Itag>}\\
+    \myLstinline{periodicPlain} & \cppLstinline{Periodic_2_triangulation_2<Traits, Tds>}\\
+    \myLstinline{periodicDelaunay} & \cppLstinline{Periodic_2_Delaunay_triangulation_2<Traits, Tds>}\\
   };
   \end{tikzpicture}
   \label{tab:tri2:names}
 \end{table}
 
-%% \cppLstinline{TriangulationTraits\_2}
-%% \cppLstinline{RegularTriangulationTraits\_2}
-%% \cppLstinline{DelaunayTriangulationTraits\_2}
-%% \cppLstinline{ConstrainedTriangulationTraits\_2}
+%% \cppLstinline{TriangulationTraits_2}
+%% \cppLstinline{RegularTriangulationTraits_2}
+%% \cppLstinline{DelaunayTriangulationTraits_2}
+%% \cppLstinline{ConstrainedTriangulationTraits_2}
 %% \cppLstinline{ConstrainedDelaunayTriangulationTraits_2}
-%% \cppLstinline{AlphaShapeTraits\_2}
-%% \cppLstinline{WeightedAlphaShapeTraits\_2}
-%% \cppLstinline{Periodic\_2TriangulationTraits\_2}
-%% \cppLstinline{Periodic\_2DelaunayTriangulationTraits\_2}
-%% \cppLstinline{Periodic\_3AlphaShapeTraits\_2}
+%% \cppLstinline{AlphaShapeTraits_2}
+%% \cppLstinline{WeightedAlphaShapeTraits_2}
+%% \cppLstinline{Periodic_2TriangulationTraits_2}
+%% \cppLstinline{Periodic_2DelaunayTriangulationTraits_2}
+%% \cppLstinline{Periodic_3AlphaShapeTraits_2}
 When any template above is instantiated the template parameter
 \cppLstinline{Traits} must be substituted with a model of a suitable
 geometric traits concept; this model is referred to as the geometric
@@ -986,40 +1014,40 @@ traits class; it provides the type of points to use as well as
 elementary operations on them. The type of traits used for the
 generated bindings is determined based on the selection of the
 triangulation type as explained below. It is conveniently defined in
-C++ as \cppLstinline{Dt::Geom\_traits}, where \cppLstinline{Dt} is a
+C++ as \cppLstinline{Dt::Geom_traits}, where \cppLstinline{Dt} is a
 triangulation instance. This type is exposed as a Python attribute
-with the same name under \pyLstinline{Triangulation\_2} (which in turn
+with the same name under \pyLstinline{Triangulation_2} (which in turn
 is nested under the Python namespace \pyLstinline{Tri2}).
 Figure~\ref{tab:tri2:concept-hierarchy} depicts the 2D triangulation
 traits concept hierarchy. Any kernel instance is a model of any
 non-periodic traits concept; thus, when one of the templates
 \begin{compactenum}
-\item \cppLstinline{Triangulation\_2<Traits, Tds>},
-\item \cppLstinline{Regular\_triangulation\_2<Traits, Tds>},
-\item \cppLstinline{Delaunay\_triangulation\_2<Traits, Tds>},
-\item \cppLstinline{Constrained\_triangulation\_2<Traits, Tds, Itag>}, or
-\item \cppLstinline{Constrained\_Delaunay\_triangulation\_2<Traits, Tds, Itag>}
+\item \cppLstinline{Triangulation_2<Traits, Tds>},
+\item \cppLstinline{Regular_triangulation_2<Traits, Tds>},
+\item \cppLstinline{Delaunay_triangulation_2<Traits, Tds>},
+\item \cppLstinline{Constrained_triangulation_2<Traits, Tds, Itag>}, or
+\item \cppLstinline{Constrained_Delaunay_triangulation_2<Traits, Tds, Itag>}
 \end{compactenum}
 is instantiated, the \cppLstinline{Traits} parameter is substituted
 with the \cppLstinline{Kernel} type (the selected kernel; see
 Section~\ref{ssec:modules:kernel}). When one of the templates
 \begin{compactenum}
-\item \cppLstinline{Periodic\_2\_triangulation\_2<Traits, Tds>} or
-\item \cppLstinline{Periodic\_2\_Delaunay\_triangulation\_2<Traits, Tds>}
+\item \cppLstinline{Periodic_2_triangulation_2<Traits, Tds>} or
+\item \cppLstinline{Periodic_2_Delaunay_triangulation_2<Traits, Tds>}
 \end{compactenum}
 is instantiated, the \cppLstinline{Traits} parameter is substituted
-with \cppLstinline{Periodic\_2\_triangulation\_traits\_2<Kernel>} or
-\cppLstinline{Periodic\_2\_Delaunay\_triangulation\_traits_2<Kernel>},
+with \cppLstinline{Periodic_2_triangulation_traits_2<Kernel>} or
+\cppLstinline{Periodic_2_Delaunay_triangulation_traits_2<Kernel>},
 respectively.
 %
 Observe that when a Delaunay triangulation instance is used to define
 an alpha shape type (see Section~\ref{ssec:modules:as2}), the traits
 parameter must be substituted with a traits class that models the
-\cppLstinline{AlphaShapeTraits\_2} concept. Similarly, when a regular
+\cppLstinline{AlphaShapeTraits_2} concept. Similarly, when a regular
 triangulation instance is used to define an fixed alpha shape type
-(see Section~\ref{ssec:modules:as2}, the traits parameter must be
+(see Section~\ref{ssec:modules:as2}), the traits parameter must be
 substituted with a traits class that models the
-\cppLstinline{WeightedAlphaShapeTraits\_2} concept. Also in these
+\cppLstinline{WeightedAlphaShapeTraits_2} concept. Also in these
 cases the selected kernel serves as the traits.
 
 \begin{figure}[!htp]
@@ -1068,8 +1096,8 @@ cases the selected kernel serves as the traits.
     \draw[->,>=stealth] (p.parent anchor)--(pd.child anchor);
   \end{forest}
   \caption{The 2D triangulation traits concept hierarchy.
-    \cppLstinline{Triangulation}, \cppLstinline{Periodic\_2} and
-    \cppLstinline{Traits\_2} are abbreviated as \cppLstinline{Tri},
+    \cppLstinline{Triangulation}, \cppLstinline{Periodic_2} and
+    \cppLstinline{Traits_2} are abbreviated as \cppLstinline{Tri},
     \cppLstinline{Pr2}, and \cppLstinline{Tr2},
     respectively.}
   \label{tab:tri2:concept-hierarchy}
@@ -1077,33 +1105,33 @@ cases the selected kernel serves as the traits.
 
 The type that substitutes the \cppLstinline{Tds}
 parameter models the concept
-\cppLstinline{TriangulationDataStructure\_2}. An object of this type
+\cppLstinline{TriangulationDataStructure_2}. An object of this type
 stores the combinatorial structure of the triangulation; it is an
 instance of the class template
-\cppLstinline{Triangulation\_data\_structure\_2<VertexBase, FaceBase>}.
-
+\cppLstinline{Triangulation_data_structure_2<VertexBase, FaceBase>}.
+%
 The types that substitute the \cppLstinline{VertexBase} and
 \cppLstinline{FaceBase} template parameters when the template
-\cppLstinline{Triangulation\_data\_structure\_2<VertexBase, FaceBase>}
+\cppLstinline{Triangulation_data_structure_2<VertexBase, FaceBase>}
 is instantiated represent the type of the vertex and the type of the
 face of the triangulation, respectively; they must model the concepts
-\cppLstinline{TriangulationDSVertexBase\_2} and
-\cppLstinline{TriangulationDSFaceBase\_2}, respectively. If the
+\cppLstinline{TriangulationDSVertexBase_2} and
+\cppLstinline{TriangulationDSFaceBase_2}, respectively. If the
 binding is generated for a periodic triangulation, these parameters
 must be substituted with types that also model the concepts
-\cppLstinline{Periodic\_2TriangulationDSVertexBase\_2} and
-\cppLstinline{Periodic\_2TriangulationDSFaceBase\_2}, respectively.
+\cppLstinline{Periodic_2TriangulationDSVertexBase_2} and
+\cppLstinline{Periodic_2TriangulationDSFace Base_2}, respectively.
 If the triangulation is used to define an alpha shape type, these
 parameters must be substituted with types that also model the concepts
-\cppLstinline{AlphaShapeVertex\_2} and
-\cppLstinline{AlphaShapeFace\_2}, respectively; see
+\cppLstinline{AlphaShapeVertex_2} and
+\cppLstinline{AlphaShapeFace_2}, respectively; see
 Section~\ref{ssec:modules:as2}. Finally, if the binding is generated
 for a hierarchy triangulation, e.g., an instance of the template
 parameter
-\cppLstinline{Triangulation\_hierarchy\_2<Triangulation\_2>}, the
+\cppLstinline{Triangulation_hierarchy_2<Triangulation_2>}, the
 \cppLstinline{VertexBase} template parameter must be substituted with
 a model of the concept
-\cppLstinline{TriangulationHierarchyVertexBase\_2}. (Observe that
+\cppLstinline{TriangulationHierarchyVertexBase_2}. (Observe that
 there is no special requirements on the type that substitutes the
 \cppLstinline{FaceBase} parameter in this case.) The final vertex
 type is selected accordingly as follows.
@@ -1112,34 +1140,34 @@ type is selected accordingly as follows.
 The type \cppLstinline{Vb} is defined as the vertex base type.  If
 bindings is generated for a periodic triangulation, the type
 \cppLstinline{Vb} is defined as
-\cppLstinline{Periodic\_2\_triangulation\_vertex\_base\_2<Traits>};
+\cppLstinline{Periodic_2_triangulation_vertex_base_2<Traits>};
 otherwise, if bindings is generated for an instance of
-\cppLstinline{Regular\_triangulation\_vertex\_base\_2<Kernel>}, the
+\cppLstinline{Regular_triangulation_vertex_base_2<Kernel>}, the
 type \cppLstinline{Vb} is defined as
-\cppLstinline{Regular\_triangulation\_vertex\_base\_2<Traits>};
+\cppLstinline{Regular_ triangulation_vertex_base_2<Traits>};
 otherwise, the type \cppLstinline{Vb} is defined as
-\cppLstinline{Triangulation\_vertex\_base\_2<Traits>}.
+\cppLstinline{Triangulation_vertex_ base_2<Traits>}.
 %
-If the \cmake{} flag \cmakeLstinline{TRI2\_VERTEX\_WITH\_INFO} is set
+If the \cmake{} flag \cmakeLstinline{TRI2_VERTEX_WITH_INFO} is set
 to \myLstinline{true}, the type \cppLstinline{Vbi} is defined as
-\cppLstinline{Triangulation\_vertex\_base\_with\_info\_2<Data, Kernel,
+\cppLstinline{Triangulation_vertex_base_with_info_2<Data, Kernel,
   Vb>}, where \cppLstinline{Data} is defined as the generic Python
 object \cppLstinline{bp::object}; see Section~\ref{sec:code:ae};
 otherwise the type \cppLstinline{Vbi} is defined as \cppLstinline{Vb}.
 %
-If the \cmake{} flag \cmakeLstinline{TRI2\_HIERARCHY} is set
+If the \cmake{} flag \cmakeLstinline{TRI2_HIERARCHY} is set
 to \myLstinline{true}, the type \cppLstinline{Vbih} is defined as
-\cppLstinline{Triangulation\_hierarchy\_vertex\_base\_2<Vbi>}; otherwise
+\cppLstinline{Triangulation_hierarchy_vertex_base_2<Vbi>}; otherwise
 the type \cppLstinline{Vbih} is defined as \cppLstinline{Vbi}.
 %
 Finally, if the triangulation is used to define an alpha shape type,
 the final type \cppLstinline{V} (that substitutes the
 \cppLstinline{VertexBase} parameter) is defined as
-\cppLstinline{Alpha\_shape\_vertex\_base\_2<Traits, Vbih,
+\cppLstinline{Alpha_shape_vertex_base_2<Traits, Vbih,
   ExactComparison>}, where \cppLstinline{ExactComparison} is
 substituted with either \cppLstinline{true} or \cppLstinline{false}
 based on the setting of the \cmake{} flag
-\cmakeLstinline{AS2\_EXACT\_COMPARISON}; see
+\cmakeLstinline{AS2_EXACT_COMPARISON}; see
 Table~\ref{tab:as2}. Otherwise, \cppLstinline{V} is defined as
 \cppLstinline{Vbih}.
 %
@@ -1150,22 +1178,22 @@ with the same name under \pyLstinline{Triangulation_2}.
 
 The final face type is determined in a similar fashion. The only
 difference between the selections of the vertex and face types is that
-the setting of the \cmake{} flag \cmakeLstinline{TRI2\_HIERARCHY} does
+the setting of the \cmake{} flag \cmakeLstinline{TRI2_HIERARCHY} does
 not have an effect on the face type selection. The final face type is
 conveniently defined in C++ as \cppLstinline{Dt::Face}, where
 \cppLstinline{Dt} is the triangulation instance. This type is also
 exposed as a Python attribute with the same name under
 \pyLstinline{Triangulation_2}.
 
-The \cmake{} Boolean flag \cmakeLstinline{TRI2\_HIERARCHY} indicates
+The \cmake{} Boolean flag \cmakeLstinline{TRI2_HIERARCHY} indicates
 whether the type of triangulation, bindings for which should be
 generated, is an instance of one of the triangulation hierarchy
 templates, namely,
-\cppLstinline{Triangulation\_hierarchy\_2<Triangulation\_2>} and
-\cppLstinline{Periodic_triangulation\_hierarchy\_2<PeriodicTriangulation\_2>}.
+\cppLstinline{Triangulation_hierarchy_2<Triangulation_2>} and
+\cppLstinline{Periodic_triangulation_hierarchy_2<PeriodicTriangulation_2>}.
 The template parameter in both cases is substituted with the
 triangulation selected via the \cmake{} flag
-\cmakeLstinline{TRI2\_NAME}, which also determines whether to use the
+\cmakeLstinline{TRI2_NAME}, which also determines whether to use the
 non-periodic or periodic version above.
 
 % -----------------------------------------------------------------------------
@@ -1183,7 +1211,7 @@ are based on the Delaunay triangulation and weighted alpha shapes are
 based on its generalization, the regular triangulation, where the
 euclidean distance is replaced by the power to weighted points.  The
 package \iiDAlphaShapesPackage{}~\cite{cgal:d-as2-21a} provides the
-class template \cppLstinline{Alpha\_shape\_2<Dt,
+class template \cppLstinline{Alpha_shape_2<Dt,
   ExactAlphaComparisonTag>}. In a 2D alpha shape object represented by
 an instance of this class template each $k$-simplex of the underlying
 triangulation is associated with an interval that specifies for which
@@ -1201,7 +1229,7 @@ Table~\ref{tab:as2} lists the \cmake{} flags associated with the
     column 4/.style={nodes={text width=21.6em}}
   ] {
     Name & Type &  Default & Description\\
-    \myLstinline{AS2\_EXACT\_COMPARISON} & Boolean & \myLstinline{false} &
+    \myLstinline{AS2_EXACT_COMPARISON} & Boolean & \myLstinline{false} &
       Determines whether to apply exact comparisons\\
   };
  \end{tikzpicture}
@@ -1227,14 +1255,13 @@ module.
 
 %%%%%%%% 3D Triangulation Module Flags
 \begin{table}[!htp]
-  \caption{\iiiDTriangulationsPackage{} module flags. For the default
-  value of the traits name see Table~\ref{tab:tri3:traits-default}.}
+  \caption{\iiiDTriangulationsPackage{} module flags.}
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleFlags] {
     Name & Type & Default & Description\\
-    \cmakeLstinline{TRI3\_NAME}                   & String & \myLstinline{plain}    & The 3D triangulation type\\
-    \cmakeLstinline{TRI3\_CONCURRENCY\_NAME}      & String & \myLstinline{sequential} & The concurrency method\\
-    \cmakeLstinline{TRI3\_LOCATION\_POLICY\_NAME} & String & \myLstinline{compact}    & The location policy\\
+    \cmakeLstinline{TRI3_NAME}                   & String & \myLstinline{plain}    & The 3D triangulation type\\
+    \cmakeLstinline{TRI3_CONCURRENCY_NAME}      & String & \myLstinline{sequential} & The concurrency method\\
+    \cmakeLstinline{TRI3_LOCATION_POLICY_NAME} & String & \myLstinline{compact}    & The location policy\\
   };
   \end{tikzpicture}
   \label{tab:tri3}
@@ -1245,13 +1272,13 @@ provides several class templates, instances of which can be used to
 represent a variety 3D triangulations. In particular, the package
 provides the following class templates:
 \begin{compactenum}
-\item \cppLstinline{Triangulation\_3<Traits, Tds, Slds>},
-\item \cppLstinline{Regular\_triangulation\_3<Traits, Tds, Slds>}, and
-\item \cppLstinline{Delaunay\_triangulation\_3<Traits, Tds, LocationPolicy, Slds>}
-\item \cppLstinline{Triangulation\_hierarchy\_3<Triangulation\_3>}
+\item \cppLstinline{Triangulation_3<Traits, Tds, Slds>},
+\item \cppLstinline{Regular_triangulation_3<Traits, Tds, Slds>}, and
+\item \cppLstinline{Delaunay_triangulation_3<Traits, Tds, LocationPolicy, Slds>}
+\item \cppLstinline{Triangulation_hierarchy_3<Triangulation_3>}
 \end{compactenum}
-Instance of the \cppLstinline{Delaunay\_triangulation\_3<>} and
-\cppLstinline{Regular\_triangulation\_3<>} class templates can be used
+Instance of the \cppLstinline{Delaunay_triangulation_3<>} and
+\cppLstinline{Regular_triangulation_3<>} class templates can be used
 to represent Delaunay and regular triangulation, respectively. In a
 regular triangulation points have an associated weight, and some
 points can be hidden and do not result in vertices in the
@@ -1264,13 +1291,13 @@ package~\cite{cgal:ct-pt3-21a} supports triangulations of sets of
 points in the three-dimensional flat torus~\cite{ct-cpt-09}. This
 package provides the class templates
 \begin{compactenum}
-\item \cppLstinline{Periodic\_3\_triangulation\_3<Traits, Tds>},
-\item \cppLstinline{Periodic\_3\_regular\_triangulation\_3<Traits, Tds>}, and
-\item \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_3<Traits, Tds>}
-\item \cppLstinline{Periodic\_3\_triangulation\_hierarchy\_3<PeriodicTriangulation>}
+\item \cppLstinline{Periodic_3_triangulation_3<Traits, Tds>},
+\item \cppLstinline{Periodic_3_regular_triangulation_3<Traits, Tds>}, and
+\item \cppLstinline{Periodic_3_Delaunay_triangulation_3<Traits, Tds>}
+\item \cppLstinline{Periodic_3_triangulation_hierarchy_3<PeriodicTriangulation>}
 \end{compactenum}
 
-The \cmake{} flag \myLstinline{TRI3\_NAME} specifies the particular
+The \cmake{} flag \myLstinline{TRI3_NAME} specifies the particular
 types of triangulations, bindings for which should be generated; see
 Table~\ref{tab:tri3:names}.
 
@@ -1281,29 +1308,29 @@ Table~\ref{tab:tri3:names}.
     column 1/.style={nodes={text width=10em}},
     column 2/.style={nodes={text width=39em}}
   ] {
-    \myLstinline{TRI3\_NAME} & Type\\
-    \myLstinline{plain} & \cppLstinline{Triangulation\_3<Traits, Tds, Slds>}\\
-    \myLstinline{regular} & \cppLstinline{Regular\_triangulation\_3<Traits, Tds, Slds>}\\
-    \myLstinline{delaunay} & \cppLstinline{Delaunay\_triangulation\_3<Traits, Tds, LocationPolicy, Slds>}\\
-    \myLstinline{periodicPlain} & \cppLstinline{Periodic\_3\_triangulation\_3<Traits, Tds>}\\
-    \myLstinline{periodicRegular} & \cppLstinline{Periodic\_3\_regular\_triangulation\_3<Traits, Tds>}\\
-    \myLstinline{periodicDelaunay} & \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_3<Traits, Tds>}\\
+    \myLstinline{TRI3_NAME} & Type\\
+    \myLstinline{plain} & \cppLstinline{Triangulation_3<Traits, Tds, Slds>}\\
+    \myLstinline{regular} & \cppLstinline{Regular_triangulation_3<Traits, Tds, Slds>}\\
+    \myLstinline{delaunay} & \cppLstinline{Delaunay_triangulation_3<Traits, Tds, LocationPolicy, Slds>}\\
+    \myLstinline{periodicPlain} & \cppLstinline{Periodic_3_triangulation_3<Traits, Tds>}\\
+    \myLstinline{periodicRegular} & \cppLstinline{Periodic_3_regular_triangulation_3<Traits, Tds>}\\
+    \myLstinline{periodicDelaunay} & \cppLstinline{Periodic_3_Delaunay_triangulation_3<Traits, Tds>}\\
   };
   \end{tikzpicture}
   \label{tab:tri3:names}
 \end{table}
 
-%% \cppLstinline{TriangulationTraits\_3}
-%% \cppLstinline{RegularTriangulationTraits\_3}
-%% \cppLstinline{DelaunayTriangulationTraits\_3}
-%% \cppLstinline{AlphaShapeTraits\_3}
-%% \cppLstinline{FixedAlphaShapeTraits\_3}
-%% \cppLstinline{WeightedAlphaShapeTraits\_3}
-%% \cppLstinline{FixedWeightedAlphaShapeTraits\_3}
-%% \cppLstinline{Periodic\_3TriangulationTraits\_3}
-%% \cppLstinline{Periodic\_3RegularTriangulationTraits\_3}
-%% \cppLstinline{Periodic\_3DelaunayTriangulationTraits\_3}
-%% \cppLstinline{Periodic\_3AlphaShapeTraits\_3}
+%% \cppLstinline{TriangulationTraits_3}
+%% \cppLstinline{RegularTriangulationTraits_3}
+%% \cppLstinline{DelaunayTriangulationTraits_3}
+%% \cppLstinline{AlphaShapeTraits_3}
+%% \cppLstinline{FixedAlphaShapeTraits_3}
+%% \cppLstinline{WeightedAlphaShapeTraits_3}
+%% \cppLstinline{FixedWeightedAlphaShapeTraits_3}
+%% \cppLstinline{Periodic_3TriangulationTraits_3}
+%% \cppLstinline{Periodic_3RegularTriangulationTraits_3}
+%% \cppLstinline{Periodic_3DelaunayTriangulationTraits_3}
+%% \cppLstinline{Periodic_3AlphaShapeTraits_3}
 When any template above is instantiated the template parameter
 \cppLstinline{Traits} must be substituted with a model of a suitable
 geometric traits concept; this model is referred to as the geometric
@@ -1311,44 +1338,44 @@ traits class; it provides the type of points to use as well as
 elementary operations on them. The type of traits used for the
 generated bindings is determined based on the selection of the
 triangulation type as explained below. It is conveniently defined in
-C++ as \cppLstinline{Dt::Geom\_traits}, where \cppLstinline{Dt} is the
+C++ as \cppLstinline{Dt::Geom_traits}, where \cppLstinline{Dt} is the
 triangulation instance. This type is exposed as a Python attribute
-with the same name under \pyLstinline{Triangulation\_3} (which in turn
+with the same name under \pyLstinline{Triangulation_3} (which in turn
 is nested under the Python namespace \pyLstinline{Tri3}).
-Figure~\ref{tab:tri3:concept-hierarchy} depicts the 2D triangulation
+Figure~\ref{fig:tri3:concept-hierarchy} depicts the 2D triangulation
 traits concept hierarchy. Any kernel instance is a model of any
 non-periodic traits concept; thus, when one of the templates
 \begin{compactenum}
-\item \cppLstinline{Triangulation\_3<Traits, Tds>},
-\item \cppLstinline{Regular\_triangulation\_3<Traits, Tds>}, abd
-\item \cppLstinline{Delaunay\_triangulation\_3<Traits, Tds>}
+\item \cppLstinline{Triangulation_3<Traits, Tds>},
+\item \cppLstinline{Regular_triangulation_3<Traits, Tds>}, abd
+\item \cppLstinline{Delaunay_triangulation_3<Traits, Tds>}
 \end{compactenum}
 is instantiated, the \cppLstinline{Traits} parameter is substituted
 with the \cppLstinline{Kernel} type (the selected kernel; see
 Section~\ref{ssec:modules:kernel}). When one of the templates
 \begin{compactenum}
-\item \cppLstinline{Periodic\_3\_triangulation\_3<Traits, Tds>},
-\item \cppLstinline{Periodic\_3\_regular\_triangulation\_3<Traits, Tds>}, or
-\item \cppLstinline{Periodic\_3\_Delaunay\_triangulation\_3<Traits, Tds>}
+\item \cppLstinline{Periodic_3_triangulation_3<Traits, Tds>},
+\item \cppLstinline{Periodic_3_regular_triangulation_3<Traits, Tds>}, or
+\item \cppLstinline{Periodic_3_Delaunay_triangulation_3<Traits, Tds>}
 \end{compactenum}
 is instantiated, the \cppLstinline{Traits} parameter is substituted
-with \cppLstinline{Periodic\_3\_triangulation\_traits\_3<Kernel>},
-\cppLstinline{Periodic\_3\_regular\_triangulation\_traits_3<Kernel>}, or
-\cppLstinline{Periodic\_3\_Delaunay\_triangulation\_traits_3<Kernel>},
+with \cppLstinline{Periodic_3_triangulation_traits_3<Kernel>},
+\cppLstinline{Periodic_3_regular_triangulation_traits_3<Kernel>}, or
+\cppLstinline{Periodic_3_Delaunay_triangulation_ traits_3<Kernel>},
 respectively.
 %
 Observe that when a Delaunay triangulation instance is used to define
 either a plain or a fixed alpha shape type (see
 Section~\ref{ssec:modules:as3}), the traits parameter must be
 substituted with a traits class that models either the
-\cppLstinline{AlphaShapeTraits\_3} or the
-\cppLstinline{FixedAlphaShapeTraits\_3} concept,
+\cppLstinline{AlphaShapeTraits_3} or the
+\cppLstinline{FixedAlphaShapeTraits_3} concept,
 respectively. Similarly, when a regular triangulation instance is used
 to define either a plain or a fixed alpha shape type (see
 Section~\ref{ssec:modules:as3}, the traits parameter must be
 substituted with a traits class that models either the
-\cppLstinline{WeightedAlphaShapeTraits\_3} or the
-\cppLstinline{FixedWeightedAlphaShapeTraits\_3} concept,
+\cppLstinline{WeightedAlphaShapeTraits_3} or the
+\cppLstinline{FixedWeightedAlphaShapeTraits_3} concept,
 respectively. Also in these cases the selected kernel serves as the
 traits.
 
@@ -1384,7 +1411,7 @@ traits.
         [ \name{WeightedASTr3} ]
         [ \name{FixedWeightedASTr3} ]
       ]
-      [ \name{Periodic\_3TriTr3},name=p
+      [ \name{Periodic_3TriTr3},name=p
         [ \name{Pr3RegularTriTr3},name=pr ]
       ]
       [ \name{DelaunayTriTr3},name=d
@@ -1400,45 +1427,45 @@ traits.
   \end{forest}
   \caption{The 3D triangulation traits concept hierarchy.
     \cppLstinline{Triangulation}, \cppLstinline{AlphaShape},
-    \cppLstinline{Traits\_3} and \cppLstinline{Periodic\_3} are
+    \cppLstinline{Traits_3} and \cppLstinline{Periodic_3} are
     abbreviated as \cppLstinline{Tri}, \cppLstinline{AS},
     \cppLstinline{Pr3}, and \cppLstinline{Tr3}, respectively.}
-  \label{tab:tri3:concept-hierarchy}
+  \label{fig:tri3:concept-hierarchy}
 \end{figure}
 
 The type that substitutes the \cppLstinline{Tds}
 parameter models the concept
-\cppLstinline{TriangulationDataStructure\_3}. An object of this type
+\cppLstinline{TriangulationDataStructure_3}. An object of this type
 stores the combinatorial structure of the triangulation; it is an
 instance of the class template
-\cppLstinline{Triangulation\_data\_structure\_3<VertexBase, CellBase,
+\cppLstinline{Triangulation_data_structure_3<VertexBase, CellBase,
   ConcurrencyTag>}.
 
 The types that substitute the \cppLstinline{VertexBase} and
-\cppLstinline{CellBase} template parameters when the template
-\cppLstinline{Triangulation\_data\_structure\_3<VertexBase, CellBase>}
+\cppLstinline{CellBase} template parameters when the
+\cppLstinline{Triangulation_data_ structure_3<VertexBase, CellBase>} template
 is instantiated represent the type of the vertex and the type of the
 cell of the triangulation, respectively; they must model the concepts
-\cppLstinline{TriangulationDSVertexBase\_3} and
-\cppLstinline{TriangulationDSCellBase\_3}, respectively. If the
+\cppLstinline{TriangulationDSVertexBase_3} and
+\cppLstinline{TriangulationDSCellBase_3}, respectively. If the
 binding is generated for a periodic triangulation, these parameters
 must be substituted with types that also model the concepts
-\cppLstinline{Periodic\_3TriangulationDSVertexBase\_3} and
-\cppLstinline{Periodic\_3TriangulationDSCellBase\_3}, respectively.
+\cppLstinline{Periodic_3TriangulationDSVertexBase_3} and
+\cppLstinline{Periodic_3TriangulationDSCellBase_3}, respectively.
 If the triangulation is used to define a plain alpha shape type, these
 parameters must be substituted with types that model the concepts
-\cppLstinline{AlphaShapeVertex\_3} and
-\cppLstinline{AlphaShapeCell\_3}, respectively; see
+\cppLstinline{AlphaShapeVertex_3} and
+\cppLstinline{AlphaShapeCell_3}, respectively; see
 Section~\ref{ssec:modules:as3}. If the triangulation is used to define
 a fixed alpha shape type, these parameters must be substituted with
-types that model the concepts \cppLstinline{FixedAlphaShapeVertex\_3}
-and \cppLstinline{FixedAlphaShapeCell\_3}, respectively. Finally, if
+types that model the concepts \cppLstinline{FixedAlphaShapeVertex_3}
+and \cppLstinline{FixedAlphaShapeCell_3}, respectively. Finally, if
 the binding is generated for a hierarchy triangulation, e.g., an
 instance of the template parameter
-\cppLstinline{Triangulation\_hierarchy\_3<Triangulation\_3>}, the
+\cppLstinline{Triangulation_hierarchy_3<Triangulation_3>}, the
 \cppLstinline{VertexBase} template parameter must be substituted with
 a model of the concept
-\cppLstinline{TriangulationHierarchyVertexBase\_3}. (Observe that
+\cppLstinline{TriangulationHierarchyVertexBase_3}. (Observe that
 there is no special requirements on the type that substitutes the
 \cppLstinline{CellBase} parameter in this case.) Below we describe how
 the final vertex type is selected in details.
@@ -1446,41 +1473,41 @@ the final vertex type is selected in details.
 %% 3D Triangulation Vertex Selection
 If bindings is generated for a periodic triangulation, the type
 \cppLstinline{Vbp} is defined as
-\cppLstinline{Periodic\_3\_triangulation\_ds\_vertex\_base\_2<>};
+\cppLstinline{Periodic_3_triangulation_ds_ vertex_base_2<>};
 otherwise, \cppLstinline{Vbp} is defined as
-\cppLstinline{Triangulation\_ds\_vertex\_base\_3<>}.
+\cppLstinline{Triangulation_ds_vertex_base_3<>}.
 %
 If bindings is generated for an instance of either
-\cppLstinline{Regular\_triangulation\_vertex\_base\_3<Kernel>} or
-\cppLstinline{Periodic\_3_Regular\_triangulation\_vertex\_base\_3<Kernel>},
+\cppLstinline{Regular_triangulation_vertex_base_3<Kernel>} or
+\cppLstinline{Periodic_3_Regular_ triangulation_vertex_base_3<Kernel>},
 the type \cppLstinline{Vb} is defined as
-\cppLstinline{Regular\_triangulation\_vertex\_base\_2<Traits, Vbp>};
+\cppLstinline{Regular_triangulation_vertex_ base_2<Traits, Vbp>};
 otherwise, the type \cppLstinline{Vb} is defined as
-\cppLstinline{Triangulation\_vertex\_base\_3<Traits, Vbp>}.
+\cppLstinline{Triangulation_ vertex_base_3<Traits, Vbp>}.
 %
-If the \cmake{} flag \cmakeLstinline{TRI2\_VERTEX\_WITH\_INFO} is set
+If the \cmake{} flag \cmakeLstinline{TRI2_VERTEX_WITH_INFO} is set
 to \myLstinline{true}, the type \cppLstinline{Vbi} is defined as
-\cppLstinline{Triangulation\_vertex\_base\_with\_info\_3<Data, Traits,
+\cppLstinline{Triangulation_ vertex_base_with_info_3<Data, Traits,
   Vb>}, where \cppLstinline{Data} is defined as the generic Python
 object \cppLstinline{bp::object}; see Section~\ref{sec:code:ae};
 otherwise the type \cppLstinline{Vbi} is defined as \cppLstinline{Vb}.
 %
-If the \cmake{} flag \cmakeLstinline{TRI2\_HIERARCHY} is set
+If the \cmake{} flag \cmakeLstinline{TRI2_HIERARCHY} is set
 to \myLstinline{true}, the type \cppLstinline{Vbih} is defined as
-\cppLstinline{Triangulation\_hierarchy\_vertex\_base\_2<Vbi>}; otherwise
+\cppLstinline{Triangulation_hierarchy_vertex_base_2<Vbi>}; otherwise
 the type \cppLstinline{Vbih} is defined as \cppLstinline{Vbi}.
 %
 Finally, if the triangulation is used to define an alpha shape type,
 the final type \cppLstinline{V} (that substitutes the
 \cppLstinline{VertexBase} parameter) is defined as either
-\cppLstinline{Alpha\_shape\_vertex\_base\_2<Traits, Vbih,
+\cppLstinline{Alpha_shape_vertex_base_2<Traits, Vbih,
   ExactComparison>} or
-\cppLstinline{Fixed\_Alpha\_shape\_vertex\_base\_2<Traits, Vbih,
+\cppLstinline{Fixed_Alpha_shape_vertex_base_2<Traits, Vbih,
   ExactComparison>} based on the selection of the setting of the
-\cmake{} flag \cmakeLstinline{AS3\_NAME}; see Table~\ref{tab:as3};
+\cmake{} flag \cmakeLstinline{AS3_NAME}; see Table~\ref{tab:as3};
 \cppLstinline{ExactComparison} is substituted with either
 \cppLstinline{true} or \cppLstinline{false} based on the setting of
-the \cmake{} flag \cmakeLstinline{AS3\_EXACT\_COMPARISON}; see
+the \cmake{} flag \cmakeLstinline{AS3_EXACT_COMPARISON}; see
 Table~\ref{tab:as2}. Otherwise, \cppLstinline{V} is defined as
 \cppLstinline{Vbih}.
 %
@@ -1491,33 +1518,31 @@ with the same name under \pyLstinline{Triangulation_2}.
 
 The final face type is determined in a similar fashion. The only
 difference between the selections of the vertex and face types is that
-the setting of the \cmake{} flag \cmakeLstinline{TRI2\_HIERARCHY} does
+the setting of the \cmake{} flag \cmakeLstinline{TRI2_HIERARCHY} does
 not have an effect on the face type selection. The final face type is
 conveniently defined in C++ as \cppLstinline{Dt::Face}, where
 \cppLstinline{Dt} is the triangulation instance. This type is also
 exposed as a Python attribute with the same name under
 \pyLstinline{Triangulation_2}.
 
-The \cmake{} Boolean flag \cmakeLstinline{TRI2\_HIERARCHY} indicates
+The \cmake{} Boolean flag \cmakeLstinline{TRI2_HIERARCHY} indicates
 whether the type of triangulation, bindings for which should be
 generated, is an instance of one of the triangulation hierarchy
 templates, namely,
-\cppLstinline{Triangulation\_hierarchy\_2<Triangulation\_2>} and
-\cppLstinline{Periodic_triangulation\_hierarchy\_2<PeriodicTriangulation\_2>}.
+\cppLstinline{Triangulation_hierarchy_2<Triangulation_2>} and
+\cppLstinline{Periodic_triangulation_hierarchy_2<PeriodicTriangulation_2>}.
 The template parameter in both cases is substituted with the
 triangulation selected via the \cmake{} flag
-\cmakeLstinline{TRI2\_NAME}, which also determines whether to use the
+\cmakeLstinline{TRI2_NAME}, which also determines whether to use the
 non-periodic or periodic version above.
 
-xxx
-
 The template parameter \cppLstinline{ConcurrencyTag} is substituted
-with either \cppLstinline{Sequential\_tag} or
-\cppLstinline{Parallel\_tag} when the template
-\cppLstinline{Triangulation\_data\_structure\_3<VertexBase, CellBase,
+with either \cppLstinline{Sequential_tag} or
+\cppLstinline{Parallel_tag} when the template
+\cppLstinline{Triangulation_data_structure_3<VertexBase, CellBase,
   ConcurrencyTag} is instantiated. It enables the use of a concurrent
 container to store vertices and cells. The \cmake{} flag
-\cmakeLstinline{TRI3\_CONCURRENCY\_NAME} determines the selection; see
+\cmakeLstinline{TRI3_CONCURRENCY_NAME} determines the selection; see
 Table~\ref{tab:tri3:concurrency}.
 
 \begin{table}[!htp]
@@ -1527,9 +1552,9 @@ Table~\ref{tab:tri3:concurrency}.
     column 1/.style={nodes={text width=18em}},
     column 2/.style={nodes={text width=31em}}
   ] {
-    \cmakeLstinline{TRI3\_CONCURRENCY\_NAME} & Type\\
-    \myLstinline{sequential} & \cppLstinline{Sequential\_tag}\\
-    \myLstinline{parallel} & \cppLstinline{Parallel\_tag}\\
+    \cmakeLstinline{TRI3_CONCURRENCY_NAME} & Type\\
+    \myLstinline{sequential} & \cppLstinline{Sequential_tag}\\
+    \myLstinline{parallel} & \cppLstinline{Parallel_tag}\\
   };
   \end{tikzpicture}
   \label{tab:tri3:concurrency}
@@ -1537,34 +1562,47 @@ Table~\ref{tab:tri3:concurrency}.
 %
 
 The template parameter \cppLstinline{LocationPolicy} is substituted
-with either \cppLstinline{Fast\_location} or
-\cppLstinline{Compact\_location} when the template
-\cppLstinline{Delaunay\_triangulation\_3<Traits, Tds, LocationPolicy>}
+with either \cppLstinline{Fast_location} or
+\cppLstinline{Compact_location} when the template
+\cppLstinline{Delaunay_triangulation_3<Traits, Tds, LocationPolicy>}
 is instantiated. It enables a faster point location at the account of
 memory space. This is useful when performing point locations or random
 point insertions in large data sets.  The \cmake{} flag
-\cmakeLstinline{TRI3\_LOCATION\_POLICY\_NAME} determines the
+\cmakeLstinline{TRI3_LOCATION_POLICY_NAME} determines the
 selection; see Table~\ref{tab:tri3:location}.
 
 \begin{table}[!htp]
   \caption{3D triangulation location policy options}
   \centering\begin{tikzpicture} \matrix (first) [tableName, column
     1/.style={nodes={text width=18em}}, column 2/.style={nodes={text
-        width=31em}} ] { \cmakeLstinline{TRI3\_LOCATION\_POLICY\_NAME}
+        width=31em}} ] { \cmakeLstinline{TRI3_LOCATION_POLICY_NAME}
     & Type\\ \myLstinline{fast} &
-    \cppLstinline{Fast\_location}\\ \myLstinline{compact} &
-    \cppLstinline{Compact\_location}\\ };
+    \cppLstinline{Fast_location}\\ \myLstinline{compact} &
+    \cppLstinline{Compact_location}\\ };
   \end{tikzpicture}
   \label{tab:tri3:location}
 \end{table}
 
-The following code excerpt in the \cmake{} language sets the \cmake{}
-flags for our next example.
-\framedInputCmake[\normalsize]{../../../cmake/tests/release/tri3_del_epic_release.cmake}
+The code excerpt in the \cmake{} language shown in
+Listing~\ref{lst:cmake:tri2} sets the \cmake{} flags for our next
+example in Python shown in Listing~\ref{lst:py:tri3}. The example
+constructs a three-dimensional Delaunay triangulation from six points
+and verifies that the triangulation is valid.
 
-The following example constructs a three-dimensional Delaunay
-triangulation from six points and verifies that the triangulation is valid.
-\framedInputPython[\normalsize][15]{../../../src/python_scripts/cgalpy_examples/tri3_del.py}
+\begin{lstfloat}
+  \lstinputlisting[style=cmakeFramedStyle,basicstyle=\normalsize,
+                   label={lst:cmake:tri2},
+                   caption={\cmake{} flag settings used to generate bindings for 3D triangulations.}]
+                  {../../../cmake/tests/release/tri3_del_epic_release.cmake}
+\end{lstfloat}
+
+\begin{lstfloat}
+  \lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,
+                   firstline=15,
+                   label={lst:py:tri3},
+                   caption={Constructing a 3D~triangulations of six vertices.}]
+                  {../../../src/python_scripts/cgalpy_examples/tri3_del.py}
+\end{lstfloat}
 
 % -----------------------------------------------------------------------------
 \subsection{3D Alpha Shape Bindings}
@@ -1579,8 +1617,8 @@ on the Delaunay triangulation and weighted alpha shapes are based on
 regular triangulation, where the euclidean distance is replaced by the
 power to weighted points. The package
 \iiiDAlphaShapesPackage{}~\cite{cgal:dy-as3-21a} provides the class
-templates \cppLstinline{Alpha\_shape\_3<Dt, ExactAlphaComparisonTag>}
-and \cppLstinline{Fixed\_alpha\_shape\_3<Dt>}. Instances of both
+templates \cppLstinline{Alpha_shape_3<Dt, ExactAlphaComparisonTag>}
+and \cppLstinline{Fixed_alpha_shape_3<Dt>}. Instances of both
 templates can be used to represent a large variety of alpha shapes for
 a given set of points. In a plain alpha shape each $k$-face of this
 triangulation is associated with an interval specifying for which
@@ -1600,14 +1638,14 @@ the \iiiDAlphaShapesPackage{} module.
     column 4/.style={nodes={text width=21.6em}}
   ] {
 Name & Type &  Default & Description\\
-\myLstinline{AS3\_NAME}              & String  & \myLstinline{plain} & The 3D Alpha shape type\\
-\myLstinline{AS3\_EXACT\_COMPARISON} & Boolean & \myLstinline{false} & Determines whether to apply exact comparisons\\
+\myLstinline{AS3_NAME}              & String  & \myLstinline{plain} & The 3D Alpha shape type\\
+\myLstinline{AS3_EXACT_COMPARISON} & Boolean & \myLstinline{false} & Determines whether to apply exact comparisons\\
   };
  \end{tikzpicture}
  \label{tab:as3}
 \end{table}
 
-The \cmake{} flag \myLstinline{AS3\_NAME} specifies which alpha shape
+The \cmake{} flag \myLstinline{AS3_NAME} specifies which alpha shape
 should be used for the generated bindings; see
 Table~\ref{tab:as3:types}
 
@@ -1619,9 +1657,9 @@ Table~\ref{tab:as3:types}
     column 1/.style={nodes={text width=12em}},
     column 2/.style={nodes={text width=37em}}
   ] {
-     \myLstinline{AS3\_NAME} & Type\\
-     \myLstinline{plain} & \cppLstinline{Alpha\_shape\_3<>}\\
-     \myLstinline{fixed} & \cppLstinline{Fixed\_alpha\_shape\_3<>}\\
+     \myLstinline{AS3_NAME} & Type\\
+     \myLstinline{plain} & \cppLstinline{Alpha_shape_3<>}\\
+     \myLstinline{fixed} & \cppLstinline{Fixed_alpha_shape_3<>}\\
   };
  \end{tikzpicture}
  \label{tab:as3:types}
@@ -1631,24 +1669,36 @@ The template parameter \cppLstinline{Dt} must be substituted with an
 instance of one of the following class templates that can be used to
 represent a triangulation:
 \begin{compactenum}
-\item \cppLstinline{Delaunay\_triangulation\_3},
-\item \cppLstinline{Regular\_triangulation\_3},
-\item \cppLstinline{Periodic\_3_Delaunay_triangulation\_3}, or
-\item \cppLstinline{Periodic_3\_regular_triangulation_3};
+\item \cppLstinline{Delaunay_triangulation_3},
+\item \cppLstinline{Regular_triangulation_3},
+\item \cppLstinline{Periodic_3_Delaunay_triangulation_3}, or
+\item \cppLstinline{Periodic_3_regular_triangulation_3};
 \end{compactenum}
-see Section~\ref{ssec:modules:tri3}.
-Note that \cppLstinline{Dt::Geom\_traits} must be model of a suitable
-alpha-shape traits concept; see Table~\ref{tab:tri3:traits}, and
-\cppLstinline{Dt::Vertex} and \cppLstinline{Dt::Face} must be models
-suitable alpha-shape vertex and cell concepts, respectively; see
-Table~\ref{tab:tri3:entity}.
+see Section~\ref{ssec:modules:tri3}.  Note that
+\cppLstinline{Dt::Geom_traits} must be model of a suitable alpha-shape
+traits concept, and \cppLstinline{Dt::Vertex} and
+\cppLstinline{Dt::Face} must be models suitable alpha-shape vertex and
+cell concepts, respectively; see Section~\ref{ssec:modules:tri3}.
 
-The following code excerpt in the \cmake{} language sets the \cmake{}
-flags for our next example.
-\framedInputCmake[\normalsize]{../../../cmake/tests/release/as3_del_compact_parallel_epic_release.cmake}
+The following code excerpt in the \cmake{} language shown in
+Listing~\ref{lst:cmake:as3} sets the \cmake{} flags for our next
+Python example shown in Listing~\ref{lst:py:as3}. The examples
+constructs an alpha shape object.
 
-The following example constructs an alpha shape object.
-\framedInputPython[\normalsize][15]{../../../src/python_scripts/cgalpy_examples/as3_del_compact_epic.py}
+\begin{lstfloat}
+  \lstinputlisting[style=cmakeFramedStyle,basicstyle=\normalsize,
+                   label={lst:cmake:as3},
+                   caption={\cmake{} flag settings used to generate bindings for 3D alpha shapes.}]
+                  {../../../cmake/tests/release/as3_del_compact_parallel_epic_release.cmake}
+\end{lstfloat}
+
+\begin{lstfloat}
+  \lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,
+                   firstline=15,
+                   label={lst:py:as3},
+                   caption={Constructing a 3D alpha shape object.}]
+                  {../../../src/python_scripts/cgalpy_examples/as3_del_compact_epic.py}
+\end{lstfloat}
 
 % -----------------------------------------------------------------------------
 \subsection{Spatial Searching Bindings}
@@ -1683,14 +1733,32 @@ in secondary storage).
     column 4/.style={nodes={text width=21.8em}}
   ] {
     Name & Type &  Default & Description\\
-    \cmakeLstinline{SPATIAL\_SEARCHING\_DIMENSION} & Integer & \cppLstinline{2} &
+    \cmakeLstinline{SPATIAL_SEARCHING_DIMENSION} & Integer & \cppLstinline{2} &
       The dimension of spatial searching related classes\\
   };
  \end{tikzpicture}
  \label{tab:ss}
 \end{table}
 
-\framedInputCmake[\normalsize]{../../../cmake/tests/release/ss_2_cdlg_release.cmake}
+The code excerpt in the \cmake{} language shown in
+Listing~\ref{lst:cmake:ss}, sets the \cmake{} flags for our last
+example shown in Listing~\ref{lst:py:ss}. The example constructs a
+\kdtree{} of 2D points and applies various queries on the tree.
 
-\framedInputPython[\normalsize][15][67]{../../../src/python_scripts/cgalpy_examples/kd_tree.py}
+\begin{lstfloat}
+  \lstinputlisting[style=cmakeFramedStyle,basicstyle=\normalsize,
+                   label={lst:cmake:ss},
+                   caption={\cmake{} flag settings used to generate bindings for spatial searching types.}]
+                  {../../../cmake/tests/release/ss_2_cdlg_release.cmake}
+\end{lstfloat}
+
+\begin{lstfloat}
+  \lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,
+                   label={lst:py:ss},
+                   firstline=15,
+                   lastline=68,
+                   caption={Applying various queries on a \kdtree of 2D points.}]
+                  {../../../src/python_scripts/cgalpy_examples/kd_tree.py}
+\end{lstfloat}
+
 %% 2. kernel-d is used by spatial searching
