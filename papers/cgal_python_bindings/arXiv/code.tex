@@ -15,125 +15,6 @@ the potential of generating efficient binding. In this section we
 describe some of the techniques we use to ensure that.
 
 % -----------------------------------------------------------------------------
-\subsection{Following Generic Concepts}
-\label{sec:code:concepts}
-% -----------------------------------------------------------------------------
-As mentioned in the introduction, \cgal{} rigorously adheres to the
-generic programming paradigm. As a consequence, most components of
-\cgal{} are either class or function templates. Many of the parameters
-of these templates are described in terms of models of concepts. When
-a class or a function template is instantiated, each one of its
-template parameters is substituted with a model of one or more
-concepts associated with the template parameter. These concepts are
-organized in clusters that describe the refinement relations among the
-concepts within a cluster. Close to~750 concepts can be identified in
-\cgal{} at the time this article is written. Most hierarchies are
-small. Few hierarchies, such as the hierarchy of concepts of the
-geometry traits of the \iiDArrangementsPackage{} package is quite
-large with intricate refinement relations. We have introduced a tight
-coupling between concepts and binding generations. In particular, we
-have introduced a template function that generates bindings for each
-concept. The function generates the bindings for all the type and
-function members listed in the concept. We call this function for
-every model of the concept. This systematic approach guaranties that
-all the documented functions and types, but nothing else, are
-exposed. Consider for example the cluster hierarchy of geometry traits
-concepts depicted in Figure~\ref{fig:atc:central}. The template
-functions \cppLstinline{export_AosBasicTraits\_2()},
-\cppLstinline{export_AosXMonotoneTraits\_2()}, and
-\cppLstinline{export_AosTraits\_2()} accept a binding class object for
-a particular geometry traits model and populate it with all attributes
-that correspond to the requirements of the concepts
-\cppLstinline{AosBasicTraits\_2},
-\cppLstinline{AosXMonotoneTraits\_2}, and \cppLstinline{AosTraits\_2},
-respectively. If a concept \cppLstinline{B} refines a concept
-\cppLstinline{A}, then the function \cppLstinline{export_B()} calls
-the function \cppLstinline{export_A()}. The bindings of different
-traits models are generated in separate compilation units. As nodes in
-the concept refinement graphs may have more than a single parent, we
-ensure that a function that corresponds to a concept is not invoked
-more than once in a given compilation unit; see Lines~3 and 4 in the
-definition of the function \cppLstinline{export_AosBasicTraits\_2()}
-below.
-
-\begin{lstlisting}[style=cppNumberedStyle,basicstyle=\scriptsize]
-template <typename GeometryTraits_2, typename ClassObject, typename Concepts>
-void export_AosTraits_2(ClassObject c, Concepts& concepts) {
-  namespace bp = boost::python;
-
-  static bool exported = false;
-  if (exported) return;
-
-  export_AosXMonotoneTraits_2<GeometryTraits_2>(c, concepts);
-
-  bp::scope traits_scope(c);
-  auto& classes = concepts.m_basic_traits_classes;
-
-  // Attribute added to the traits scope follow
-  classes.m_point_2 = bp::class_<Point_2>("Point_2")
-    .def(bp::init<>())
-    .def(bp::init<const Point_2&>());
-}
-\end{lstlisting}
-
-Typically, a concept in our case requires the provision of nested
-types that are themselves models of other concepts. For example, the
-concept \cppLstinline{AosBasicTraits\_2} requires the provision of the
-nested type \cppLstinline{Point_2} used to represent a two-dimensional
-point. The type \cppLstinline{Point_2} must be
-\cppLstinline{DefaultConstructible} and
-\cppLstinline{CopyConstructible}. Let \cppLstinline{p} be an object of
-type \cppLstinline{Point_2} required by the
-\cppLstinline{AosBasicTraits\_2} concept. Most traits models also
-support the calls \cppLstinline{p.x()} and \cppLstinline{p.y()}; they
-return the $x$ and $y$ exact Cartesian coordinates of the points $p$,
-respectively. However, the \cppLstinline{Point_2} type nested in the
-traits model \cppLstinline{Arr_Bezier_curve_traits\_2} does not
-maintain an exact representation of the coordinates. Thus, it instead
-supports the call \cppLstinline{p.approximate()}, which returns a pair
-of floating point numbers that only approximate the real
-coordinates. The function \cppLstinline{export_AosBasicTraits\_2()}
-constructs a class object for the \cppLstinline{Point\_2} type, but
-adds Python attributes only for the default and copy constructors of
-this type; see Lines~15 and 16 in the definition of the function
-\cppLstinline{export_AosBasicTraits\_2()} above. It also saves the
-class object of the \cppLstinline{Point_2} type (see Line~14), so that
-later on the functions responsible for the bindings of the various
-traits models can add additional Python attributes (such as the
-\cppLstinline{x()}, \cppLstinline{y()}, and
-\cppLstinline{approximate()} functions) to the class object.
-
-The concept \cppLstinline{AosHorizontalSideTraits\_2} requires the
-provision of the \cppLstinline{Compare\_ x\_on\_boundary\_2}
-functor,\footnote{A functor is a class that has one or more
-  \cppLstinline{operator()} members; thus, it acts as a function.}
-which has two versions of the overloaded members
-\cppLstinline{operator()}: one accepts two ends of curves (refer to
-the manual for the precise encoding of a curve end) and one accepts an
-end of a curve end and a point. The former compares the
-$x$-coordinates of the curves at their respective limits or ends and
-the latter compares the $x$-coordinates of the point and the
-$x$-coordinates of the curve at its respective limit or end.
-%
-The concept \cppLstinline{ArrangementIdentifiedHorizontalTraits\_2}
-indirectly refines the concept
-\cppLstinline{AosHorizontalSideTraits\_2} mentioned above. In addition
-to the two versions of the overloaded members
-\cppLstinline{operator()} of the functor
-\cppLstinline{Compare\_x\_on\_boundary\_2} it requires the provision
-of a third version that accepts two points and compares their $x$
-coordinates. Similar to the case described in the previous paragraph,
-where the class object that handles the bindings for the
-\cppLstinline{Point_2} type must be available in two separate
-functions, also here the class object that handles the bindings for
-the functor \cppLstinline{Compare\_x\_on\_boundary\_2} must be
-available in both functions
-\cppLstinline{export_AosHorizontalSideTraits\_2()} and
-\cppLstinline{export_ArrangementIdentifiedHorizontalTraits\_2()}. Saving
-the class object in one function so that it can be reused latter on in
-the other addresses this necessity.
-
-% -----------------------------------------------------------------------------
 \subsection{Return value policy}
 \label{sec:code:rvp}
 % -----------------------------------------------------------------------------
@@ -156,56 +37,16 @@ way around.
 
 For some functions of kernel objects the kind of return value depends
 on the kernel type; thus, the return value policy needs to be set
-accordingly. For example, when the kernel type is
-\cppLstinline{Exact\_predicates\_inexact\_constructions\_kernel}, the
-return type of some functions that return a coordinate or a
-coefficient is a const reference, while when the kernel type is
+accordingly. For example, when
+\cppLstinline{Exact\_predicates\_inexact\_constructions\_kernel} is
+the kernel type, the return type of some functions that return a
+coordinate or a coefficient is a const reference, while when the
+kernel type is
 \cppLstinline{Exact\_predicates\_exact\_constructions\_kernel} the
-same functions return an object by value.
-
-This is why for these functions a
-\myLstinline{Kernel_return_value_policy} type is being passed as the
-return value policy. The type is defined differently (via preprocessor
-macros) based on the kernel being exposed.
-
-% -----------------------------------------------------------------------------
-\subsection{Scopes}
-\label{sec:code:scopes}
-% -----------------------------------------------------------------------------
-The Boost.Python mechanism that depends on \cppLstinline{bp::scope} is
-used to (i) reflect nesting in C++ code that uses \cgal, and (ii)
-prevent name conflicts between bound entities in distinct modules; see
-Section~\ref{sec:gen:scopes}. The latter requires a slight
-intervention on our part as explained next. The code that binds all
-functions and classes of different modules is nested in distinct C++
-forced scopes. Within a (C++) scope we first set the Python namespace
-to match the name of a module. Then, we bind all functions and classes
-of \cgal{} packages associated with the module. The following code
-except shows how it is done for the \iiDandiiiDGeometryKernelPackage{}
-module:
-
-\begin{lstlisting}[style=cppNumberedStyle]
-{
-  SET_SCOPE("Ker")
-  export_kernel();
-#ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
-  export_kernel_intersections_2();
-  export_kernel_intersections_3();
-#endif
-}
-\end{lstlisting}
-
-For every module there exsists a function called
-\cppLstinline{export_<name>}, where \cppLstinline{<name>} is the
-module. This function contains the binding code for the essential
-functions and classes of the module. Recall that the
-\iiDandiiiDGeometryKernelPackage{} module is associated with the
-\myLstinline{KERNEL\_INTERSECTION\_BINDINGS} flag, which determines
-whether to generate bindings for intersections; hence, the
-compile-time conditional calls to the functions
-\cppLstinline{export_kernel_intersections_2()} and
-\cppLstinline{export_kernel_intersections_3()}, which contains the
-binding code for intersections.
+same functions return an object by value. This is why for these
+functions a \myLstinline{Kernel_return_value_policy} type is being
+passed as the return value policy. The type is defined differently
+based on the kernel being exposed.
 
 %% All functions and classes related to some package were exposed inside
 %% a \myLstinline{export_[package]()} function. All such calls are
@@ -246,43 +87,97 @@ binding code for intersections.
 %% \end{lstlisting}
 
 % -----------------------------------------------------------------------------
-\subsection{Substitution Failure Is Not an Error}
-\label{sec:code:sfinae}
+\subsection{Intersection Detection}
+\label{sec:code:intersectionDetection}
 % -----------------------------------------------------------------------------
 Substitution failure is not an error (SFINAE) refers to a situation in
 C++ where an invalid substitution of template parameters is not in
 itself an error. In particular, it applies during a process called
 \emph{overload resolution}.  In order to compile a function call, the
-compiler creates a set of candidate functions. This set includes all
-function implementations the name of which match the call and that can
-be accessed by the caller. Then the compiler selects the most viable
-one according to some criteria. When substituting the explicitly
-specified or deduced type for the template parameter fails, the
-specialization is discarded from the overload set instead of causing a
-compile error.\footnote{For more information see, e.g.,
+compiler creates a set of candidate functions the names of which match
+the call and that can be accessed by the caller. Then, it reduces the
+candidate set to a set of viable functions that includes all function
+instances the parameters of which match the call arguments. Finally,
+the compiler selects the best match among the viable functions
+according to the C++ standard;\footnote{For the full specification of
+  the C++ standard see \url{https://isocpp.org/std/the-standard}.} a
+flowchart that describes the process is shown in
+Figure~\ref{fig:ors}. When the substitution of an explicitly specified
+or deduced type for the template parameter fails, the specialization
+is discarded from the overload set instead of causing a compilation
+error.\footnote{For more information on SFINAE see, e.g.,
   \url{https://en.cppreference.com/w/cpp/language/sfinae}.}
 
-The function \cppLstinline{CGAL::do_intersect(o1, o2)} is overloaded
-with several implementations that handle different combination of
-types of arguments; however, not every combination of two types is
-implemented. For a complete list of valid combinations refer to the
-reference manual at
-\url{https://doc.cgal.org/latest/Kernel_23/group__do__intersect__linear__grp.html}. We
-use SFINAE to create bindings for all supported combinations and avoid
-getting compilation errors for unsupported combinations as
-follows. Consider two types \cppLstinline{Type1} and
-\cppLstinline{Type2}, and assume that the overloaded version
-\cppLstinline{CGAL::do_intersect(Type1 o1, Type2 o2)} is not
-implemented but all other three are implemented.
+\begin{figure}[!htp]
+    \centerline{\begin{tikzpicture}[%
+    >=stealth,align=center,every node/.style={font=\sffamily}]
+    \tikzstyle{state}=[text centered,node distance=0.5cm,%
+      rectangle,rounded corners,fill=white,draw=black,%
+      minimum width=1.0cm,minimum height=0.45cm]
+    % All state styles
+    \tikzstyle{lookup}=[state,bottom color=purple!40]
+    \tikzstyle{deduction}=[state,fill=orange!40]
+    \tikzstyle{reduction}=[state,fill=yellow!40]
+    \tikzstyle{selection}=[state,fill=green!40]
+    % All states
+    \node (lookup)[lookup]{Name Lookup};
+    \node (lookupFailure)[below left=0.5 and -1 of lookup]
+      {\textcolor{red}{Error: Lookup failure}};
+    \node (deduction)[deduction,below right=1 and -1.2 of lookup]
+      {Template Argument Deduction};
+    \node (deductionFailure)[below left=0.5 and -2.8 of deduction]
+      {\textcolor{red}{Error: Deduction failure}};
+    \node (reduction)[reduction,below right=1 and -1.2 of deduction] {Reduction};
+    \node (reductionFailure)[below left=0.5 and -1.6 of reduction]
+      {\textcolor{red}{Error: Substitution failure}};
+    \node (selection)[selection,below right=1 and 0.0 of reduction]
+      {Final Selection};
+    \node (success)[below right=0.5 and -0.7 of selection]{\textcolor{blue}{Best Match}};
+    \node (slectionFailure)[below left=0.5 and -1.6 of selection]
+      {\textcolor{red}{Error: Ambiguity failure}};
+    % Edges
+    \draw [thick,->,>=Stealth] (lookup) -- (deduction);
+    \draw [thick,->,>=Stealth] (lookup) -- (lookupFailure);
+    \draw [thick,->,>=Stealth] (deduction) -- node[anchor=west]{Non-empty candidate Set}(reduction);
+    \draw [thick,->,>=Stealth] (deduction) -- (deductionFailure);
+    \draw [thick,->,>=Stealth] (reduction) -- node[anchor=west]{Non-empty viable Set} (selection);
+    \draw [thick,->,>=Stealth] (reduction) -- (reductionFailure);
+    \draw [thick,->,>=Stealth] (selection) -- (success);
+    \draw [thick,->,>=Stealth] (selection) -- (slectionFailure);
+  \end{tikzpicture}}
+  \caption{Overload resolution steps}
+  \label{fig:ors}
+\end{figure}
 
-\begin{lstlisting}[style=cppNumberedStyle,basicstyle=\scriptsize]
+The function \cppLstinline{CGAL::do_intersect(o1, o2)}, provided by
+the \iiDandiiiDGeometryKernelPackage{} package (see
+Section~\ref{ssec:modules:kernel}), is overloaded with several
+implementations that handle different combination of types of
+arguments; however, not every combination of two types is implemented
+in this package. For example, the intersection of a line segment and a
+circle in the general case is a point with algebraic coordinates, and
+thus not supported by the package.\footnote{For a complete list of
+  valid combinations of \cppLstinline{do_intersect()} argument types
+  refer to the reference manual at
+  \url{https://doc.cgal.org/latest/Kernel_23/group__do__intersect__linear__grp.html}.}
+We use SFINAE to generate bindings for all supported combinations
+while avoiding getting compilation errors for unsupported combinations
+as follows. Consider two types \cppLstinline{Type1} and
+\cppLstinline{Type2}, and assume that the
+\cppLstinline{CGAL::do_intersect(Type1 o1, Type2 o2)} overloaded
+version is not implemented but all other three are, and refer to
+Listing~\ref{lst:do_intersect}.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:do_intersect},%
+                     caption={Automatic generation of binding  for \cppLstinline{CGAL::do_intersect()} exploiting SFINAE}]
+template <typename, typename> void bind_do_intersect_2T(...) {}
+
 template <typename T1, typename T2>
 void bind_do_intersect_2T(decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
   bp.def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
 }
-
-template <typename, typename>
-void bind_do_intersect_2T(...) {}
 
 template <typename T1>
 void bind_do_intersect_1T() {
@@ -294,131 +189,185 @@ void bind_do_intersect() {
   bind_do_intersect_1T<Type1>();
   bind_do_intersect_1T<Type2>();
 }
-\end{lstlisting}
+  \end{lstlisting}
+\end{lstfloat}
 
-First the function \cppLstinline{bind_do_intersect()} calls the
-instance of \cppLstinline{bind_do_intersect_1T<T1>()}, where
-\cppLstinline{T1} is substituted with \cppLstinline{Type1}.  Then, the
-latter makes two calls and passes a \cppLstinline{bool} argument of
-value \cppLstinline{true}. (This value can be \cppLstinline{false}
-just as well.) First it calls the instance of
-\cppLstinline{bind_do_intersect_2T<Type1, T2>(true)}, where
-\cppLstinline{T2} is also substituted with \cppLstinline{Type1}; then,
-it calls the instance of \cppLstinline{bind_do_intersect_2T<Type1,
-  T2>(true)}, where \cppLstinline{T2} is substituted with
-\cppLstinline{Type2}. The function
-\cppLstinline{bind_do_intersect_2T()} accepts a parameter of type
-\cppLstinline{bool} and is overloaded with two implementations. The
-second uses \emph{variadic arguments} and serves as a fall-through
-when the evaluation of the first implementation fails during the
+The function \cppLstinline{bind_do_intersect()} calls
+\cppLstinline{bind_do_intersect_1T<T1>()} twice; in the first call
+\cppLstinline{T1} is substituted with \cppLstinline{Type1} (Line~15)
+and in the second call \cppLstinline{T1} it is substituted with
+\cppLstinline{Type2} (Line~16).  The function template
+\cppLstinline{bind_do_intersect_1T()} calls a third function, called
+\cppLstinline{bind_do_intersect_2T()}, twice; first it calls
+\cppLstinline{bind_do_intersect_2T<T1, Type1>(true)} (Line~10); then,
+it calls \cppLstinline{bind_do_intersect_2T<T1, Type2>(true)}
+(Line~11). The function \cppLstinline{bind_do_intersect_2T()} is
+overloaded with two implementations. As a consequence, assuming that
+the code compiles, one overload of
+\cppLstinline{bind_do_intersect_2T()} is selected for every
+permutation of (\cppLstinline{Type1}, \cppLstinline{Type2}). The
+primary implementation of \cppLstinline{bind_do_intersect_2T()}
+(Line~1) uses \emph{variadic arguments} and serves as a fall-through
+when the evaluation of the second implementation fails during the
 resolution process.\footnote{For more information on \emph{variadic
     arguments} see
   \url{https://en.cppreference.com/w/cpp/language/variadic_arguments}.}
-The parameter type of the first implementation is defined as the
+The parameter type of the second implementation is defined as the
 return type of \cppLstinline{CGAL::do_intersect<Kernel>(T1(),
   T2())}. When \cppLstinline{T1} and \cppLstinline{T2} are substituted
 with \cppLstinline{Type1} and \cppLstinline{Type2}, respectively, the
-evaluation fails, and the blank implementation is selected and
-invoked.  In all other three cases the evaluation succeeds. As
-variadic parameters have the lowest rank for the purpose of overload
-resolution, the first implementation will always be selected for valid
-combinations. Here, the return type of
-\cppLstinline{CGAL::do_intersect<Kernel>(T1(), T2())} is always
-resolved at compile time (to \cppLstinline{bool}) when the function is
-defined.
+evaluation fails, and the blank implementation is selected, as this is
+the only candidate left. In all other three cases the evaluation
+succeeds and the second implementation is selected, as functions that
+accept variadic parameters have a lower rank for the purpose of
+overload resolution.
+% The return type of \cppLstinline{CGAL::do_intersect<Kernel>(T1(),
+% T2())} is resolved at compile time.
+Observe that in both calls to \cppLstinline{bind_do_intersect_2T()}
+(Lines~10-11) we pass a \cppLstinline{bool} argument of value
+\cppLstinline{true}. This value can be \cppLstinline{false} just as
+well, but its type, that is \cppLstinline{bool}, must match the return
+type of \cppLstinline{CGAL::do_intersect<Kernel>(T1(), T2())} when
+defined. The result is not only compact code that is easy to maintain,
+but also code that supports bindings for every potential
+\cppLstinline{do_intersect()} overload that might be implemented in
+the future.
 
+% -----------------------------------------------------------------------------
+\subsection{Minkowski Sum Construction}
+\label{sec:code:minkSumComputation}
+% -----------------------------------------------------------------------------
 The situation presented by the function template
-\cppLstinline{minkowski_sum_2()} that applies the
+\cppLstinline{CGAL::minkowski_sum_2()} that applies the
 \emph{convex-decomposition approach} (see
-Section~\ref{ssec:modules:ms2}) is a bit more complicated. Consider
-for example the function shown at Line~1 of
-Listing~\ref{lst:msSignatures}. We need to generate bindings for
-instances of this function only for valid combinations of
-\cppLstinline{PolygonType1}, \cppLstinline{PolygonType2}, and
-\cppLstinline{PolygonConvexDecomposition_2} types. In the code below
-we use the respective short names \cppLstinline{PT1},
+Section~\ref{ssec:modules:ms2}) is a bit more complicated. The
+function template shown in Line~1 of
+Listing~\ref{lst:minkSumConvexDecomposition} has 10 instances of valid
+combinations of argument types. There is another set, of the same
+cardinality, of function templates that also accept a forth traits
+parameter. The number of instances of the function template shown in
+Line~8 is 36, and also here there is another set, of the same
+cardinality, of function templates that accept an additional traits
+parameter. Consider the function template shown in Line~1. We need to
+generate bindings for instances of this function only for valid
+combinations of \cppLstinline{PolygonType1},
+\cppLstinline{PolygonType2}, and
+\cppLstinline{PolygonConvexDecomposition_2} types. Here after and in
+the code listing we use the respective short names \cppLstinline{PT1},
 \cppLstinline{PT2}, and \cppLstinline{PP} instead. A valid combination
-exists only if the latter is a polygon-partition unary function that
-can be applied to a polygon of type \cppLstinline{PolygonType1} and to
-a polygon of type \cppLstinline{PolygonType2}. In particular, if
+exists only if \cppLstinline{PP} is a type of a polygon-partition
+unary function that can be applied to a polygon of type
+\cppLstinline{PT1} and to a polygon of type \cppLstinline{PT2}. Some
+supported polygon-partition functions cannot be applied to polygon
+with holes, hence invalid combinations. In particular, if
 \cppLstinline{pp} is a polygon-partition function, the calls
-\cppLstinline{pp.(pgn1, it)} and \cppLstinline{pp.(pgn2, it)} must be
-valid, where \cppLstinline{pgn1} is the input polygon of type
-\cppLstinline{PolygonType1}, \cppLstinline{pgn2} is the input polygon
-of type \cppLstinline{PolygonType2}, and \cppLstinline{it} is an
-output iterator of a container of the resulting
-polygons. Dereferencing the iterator must yield a type that can
-represent a simple polygon. If \cppLstinline{PolygonType1} is
-identical to \cppLstinline{Polygon_2}, then
-\cppLstinline{std::list<PolygonType1>::iterator} can serve as an
-output iterator; otherwise, \cppLstinline{PolygonType1} must represent
-a polygon with holes, and in this case
-\cppLstinline{std::list<PolygonType1::Polygon_2>::iterator} can serve
-as an output iterator. We use SFIAE for the second time to make this
-distinction.
-%
+\cppLstinline{pp(pgn1, it)} and \cppLstinline{pp(pgn2, it)} must be
+valid, where \cppLstinline{pgn1} and \cppLstinline{pgn2} are input
+polygons of types \cppLstinline{PT1} and \cppLstinline{PT2},
+respectively, and \cppLstinline{it} is an output iterator of a
+container of the resulting polygons. Dereferencing the iterator must
+yield a type that can represent a simple polygon. If \cppLstinline{PT}
+is identical to \cppLstinline{Polygon_2}, then
+\cppLstinline{std::list<PT>::iterator} can serve as an output
+iterator; otherwise, \cppLstinline{PT} must represent a polygon with
+holes, and in this case
+\cppLstinline{std::list<PT::Polygon_2>::iterator} can serve as an
+output iterator. We use SFINAE yet again to make this distinction and
+we use SFINAE one more time to generate binding for
+\cppLstinline{CGAL::minkowski_sum_2()} only for valid combinations of
+argument types.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppframedStyle,basicstyle=\normalsize,%
+                     label={lst:minkSumConvexDecomposition},%
+                     caption={Signatures of function templates that compute the 2D Minkwoski sum using the convex-decomposition approach.}]
+template <typename Kernel, typename Container,
+          typename PolygonConvexDecomposition_2>
+Polygon_with_holes_2<Kernel, Container>
+minkowski_sum_2(const PolygonType1<Kernel, Container>& p,
+                const PolygonType2<Kernel, Container>& q,
+                const PolygonConvexDecomposition_2& decomp)
+
+template <typename Kernel, typename Container,
+          typename PolygonConvexDecompositionP_2,
+          typename PolygonConvexDecompositionQ_2>
+Polygon_with_holes_2<Kernel, Container>
+minkowski_sum_2(const PolygonType1<Kernel, Container>& p,
+                const PolygonType2<Kernel, Container>& q,
+                const PolygonConvexDecompositionP_2& decomp_p,
+                const PolygonConvexDecompositionQ_2& decomp_q)
+  \end{lstlisting}
+\end{lstfloat}
+
 First, we introduce a class template called \cppLstinline{target}; see
-Line~6 in the Listing below; it is parameterized with a named
-parameter \cppLstinline{T} and an unnamed parameter that defaults to
-\cppLstinline{void}. It delegates the type
-\cppLstinline{std::list<T>::iterator}. We also introduce a partial
-specialization (see Line 9) that delegates the type
+Line~3 in Listing~\ref{minkSumResolution}. it is parameterized with a
+named parameter \cppLstinline{T} and an unnamed parameter that
+defaults to \cppLstinline{void}. It delegates the type
+\cppLstinline{std::list<T>::iterator}. We also introduce a
+specialization (Line 7) that delegates the type
 \cppLstinline{std::list<T::Polygon_2>::iterator}. The second parameter
-is implicitly substituted with a type provided by a utility template
-class called \cppLstinline{if_}; see Lines~1--4 in the Listing
-below. If the type \cppLstinline{T::Polygon_2} is not defined, the
-instance of the specialization is discarded from the overloaded
-resolution set. Otherwise, it is selected over the default
-implementation, as it has a higher rank.
+is substituted with a type provided by a utility class template called
+\cppLstinline{has<>} (Line~1). If the type \cppLstinline{T::Polygon_2}
+is undefined, the evaluation of \cppLstinline{has<T::Polygon_2>}
+fails, and in turn the instance of the \cppLstinline{Target<>}
+specialization is discarded from the overloaded resolution
+set. Otherwise, \cppLstinline{has<T::Polygon_2>} successfully
+evaluates (to \cppLstinline{void}). In this case the
+\cppLstinline{Target<>} specialization remains a viable option, and it
+is selected over the primary implementation, since specializations are
+ranked higher. Observe that the type delegated by the
+\cppLstinline{has<>} class template and the type of the unnamed
+template parameter of the primary implementation of
+\cppLstinline{target<>} must match for the ordering to apply. These
+types are arbitrarily chosen to be \cppLstinline{void}.
 %
 We need to capture valid combinations of three types. Recall that the
-code listed in the previous section captures valid combinations of two
-types. Following the idea presented in the previous section, we
+code in Listing~\ref{lst:do_intersect} captures valid combinations of
+two types. Following the idea presented in the previous section, we
 introduce three template functions, where
-\cppLstinline{bind\_mink\_sum\_decomp\_one\_strategy_3T()} is the last
-one called; see Line~14 for the default implementation and Line~17 for
-the partially specialized implementation in the listing below. The
-polygon-partition function returns an output iterator that points to
-next to the last element of the container. Passing an argument the
-type of which matches the type of the returned value of the
-polygon-partition function to the function
-\cppLstinline{bind\_mink\_sum\_decomp\_one\_strategy_3T()} is
+\cppLstinline{bind\_mink\_sum\_3T()} is the last one called; see
+Line~12 and Line~15 in Listing~\ref{minkSumResolution} for the primary
+and specialized implementation, respectively. The polygon-partition
+function returns an output iterator that points to next to the last
+element of the container. Passing an argument, the type of which
+matches the type of the returned value of the polygon-partition
+function, to the function \cppLstinline{bind\_mink\_sum\_3T()} is
 complicated, as this type is not a simple type (e.g.,
-\cppLstinline{bool}) any more. Instead of using the return type, we
-introduce two unnamed template parameters with default values, that
-evaluate to the return type of the polygon-partition function when
-applied to a polygon of type \cppLstinline{PolygonType1} or type
-\cppLstinline{PolygonType1}, respectively; see Lines~15 and 16 in the
-listing below. Observe that the outcome of the evaluation is
-irrelevant. The only thing we are concerned about is weather the
-evaluation succeeds---it succeeds only if the matching function is
-defined.
+\cppLstinline{bool}) any more. Instead, we introduce two unnamed
+template parameters with default values, that evaluate to the return
+type of the polygon-partition function when applied to a polygon of
+type \cppLstinline{PT1} or type \cppLstinline{PT2}, respectively; see
+Lines~16 and 17. Observe that the outcome of the evaluation is
+irrelevant. The only thing that matters is weather the evaluation
+succeeds---it succeeds only if the matching function is defined.
 
-\begin{lstlisting}[style=cppNumberedStyle,basicstyle=\scriptsize]
-template <bool Condition, typename Then, typename Else = void>
-struct if_ { typedef Then type; };
-template <typename Then, typename Else>
-struct if_<false, Then, Else > { typedef Else type; };
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,
+                     label=minkSumResolution,
+                     caption={Automatic generation of binding for \cppLstinline{CGAL::minkowski_sum_2} exploiting SFINAE.}]
+template <typename T> class has { typedef void type; };
 
 template <typename T, typename = void> struct target {
   typedef typename std::list<T>::iterator type;
 };
+
 template <typename T>
-struct target<T, typename if_<false, typename T::Polygon_2>::type> {
+struct target<T, typename has<typename T::Polygon_2>::type> {
   typedef typename std::list<typename T::Polygon_2>::iterator type;
 };
 
 template <typename T1, typename T2, typename T3>
-void bind_mink_sum_decomp_one_strategy_3T(...) {}
+void bind_mink_sum_3T(...) {}
 
 template <typename PT1, typename PT2, typename PP,
           typename = decltype(PP()(PT1(), typename target<PT1>::type())),
           typename = decltype(PP()(PT2(), typename target<PT2>::type()))>
-void bind_mink_sum_decomp_one_strategy_3T(bool) {
+void bind_mink_sum_3T(bool) {
   bp::def<Polygon_with_holes_2(const PT1&, const PT2&, const PP&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, PP>);
 }
-\end{lstlisting}
+  \end{lstlisting}
+\end{lstfloat}
 
 %% templated with some supported type
 %% {T1}. \myLstinline{bind_do_intersect_1T()}, templated with
@@ -434,7 +383,8 @@ void bind_mink_sum_decomp_one_strategy_3T(bool) {
 %% be invoked as variadic parameters have the lowest rank for the purpose
 %% of overload resolution).
 
-We use SFINAE to efficiently generate bindings of other types as described in the following sections.
+\noindent%
+We exploit SFINAE to generate bindings of other types as described in the following sections.
 
 % -----------------------------------------------------------------------------
 \subsection{Arrangement Extension}
@@ -445,59 +395,127 @@ represents certain \cgal{} data structures with some types that
 represent new properties. In \cgal{} it is more convenient, and thus
 more common, extending the types that represent the topological
 features of the data structures (rather then the types that represent
-the geometric features), for example, the DCEL of the arrangement or
-the triangulation data structure of a triangulation. When developing
-code in pure C++, there is no restriction on the property types used
-to extend the data structure. However, when the data structure
-interface is wrapped with Python bindings, the property type must be
-known when the bindings are compiled. Nevertheless, we support
-extensions with generic Python objects. If a certain feature must be
-extended with a certain property, the type of which is defined in the
-C++ code, it is always possible to use an external property map, where
-the properties are indexed by a Python object, such as an integer or a
-string. When generating the bindings the user must set the flag that
-enables the extension (unless extension is the default
-setting). Attaching indices to and extracting an index from a feature
-is done via the \cppLstinline{set_data()} and \cppLstinline{data()}
-exposed functions. Each cell type, namely, \cppLstinline{Vertex},
+the geometric features), e.g., the DCEL of the arrangement data
+structure; see Section~\ref{ssec:modules:aos2}. When developing code
+in pure C++, there is no restriction on the property types used to
+extend the data structure. However, when the data structure interface
+is wrapped with Python bindings, the property type must be known when
+the bindings are compiled. Nevertheless, we support extensions with
+generic Python objects. If a certain feature must be extended with a
+certain property, the type of which is defined in the C++ code, it is
+always possible to use an external property map, where the properties
+are indexed by a Python object, such as an integer or a string. When
+generating the bindings the user must set the flag that enables the
+extension; see Table~\ref{tab:aos}. Attaching an index to and
+extracting an index from a feature is done via the
+\cppLstinline{set_data()} and \cppLstinline{data()} exposed
+functions. Each cell type, namely, \cppLstinline{Vertex},
 \cppLstinline{Halfedge}, or \cppLstinline{Face}, can be extended
-independently (see Table~\ref{tab:aos}), which implies that there are
-eight plausible combinations that the user can select form to form the
-final DCEL type of the arrangement.
+independently, which implies that there are eight plausible
+combinations that the user can select from to form the final DCEL type
+of the arrangement.
 
-In the following we assume that the face type of the
-\cppLstinline{Arrangement_2} instance is extended. The Python code
-excerpt below constructs two arrangements. For each arrangement the
-properties of the unbounded face and the other face are initialized
-with a Python integer objects 0 and 1, respectively. The code computes
-their overlay (see Figure~\ref{fig:faceExt}) and updates the face
-property to indicate the number of overlapping bounded faces.
+Extending the arrangement features is useful for many applications,
+but essential for applications that compute the overlay of
+arrangements as discussed in the next Section.
 
-\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize,label={lst:arrExtend},caption={Constructing two extended arrangements and initializing the extended data.}]
-CGALPY = importlib.import_module(lib)
-Aos2 = CGALPY.Aos2
-Arrangement_2 = Aos2.Arrangement_2
-Point_2 = Arrangement_2.Geometry_traits_2.Point_2
-Curve_2 = Arrangement_2.Geometry_traits_2.Curve_2
+% Add a discussion about extanding the triangulation data structure in 2D and 3D
+% Change the title to be more general to reflect other extensions
 
-arr1 = Arrangement_2()
-c1 = Curve_2(Point_2(0, 0), Point_2(2, 0))
-c2 = Curve_2(Point_2(2, 0), Point_2(2, 2))
-c3 = Curve_2(Point_2(2, 2), Point_2(0, 2))
-c4 = Curve_2(Point_2(0, 2), Point_2(0, 0))
-Aos2.insert(arr1, [c1, c2, c3, c4])
+% -----------------------------------------------------------------------------
+\subsection{Arrangement Overlay Traits}
+\label{sec:code:overlay}
+% -----------------------------------------------------------------------------
+The map overlay of two arrangements $\calA_1$ and $\calA_2$,
+conveniently referred to as the \textcolor{red}{red} and
+\textcolor{blue}{blue} arrangements, is a third arrangement $\calA$,
+such that there is a cell $c$ in $\calA$ iff there are cells $c_1$ and
+$c_2$ in $\calA_1$ and $\calA_2$, respectively, such that $c$ is a
+maximal connected component of $c_1 \cap c_2$.
+% Arrangements are subdivisions of some ambient space (see Section~\ref{ssec:modules:aos2})
+Computing the overlay of two arrangements is useful for many
+applications, including Boolean operations; see
+Section~\ref{ssec:modules:bso2}. Indeed, the \iiDArrangementsPackage{}
+package provides function templates that computes the overlay of two
+arrangements, namely overloaded \cppLstinline{CGAL::overlay()}. In
+particular, the call \cppLstinline{CGAL::overlay(arr_r, arr_b, arr)}
+computes the overlay of the arrangements \cppLstinline{arr_r} and
+\cppLstinline{arr_b} and stores the result in the arrangement
+\cppLstinline{arr}. All three types must be instances of the
+\cppLstinline{Arrangement_2<Traits, Dcel>} class template; see
+Section~\ref{ssec:modules:aos2}. When the function is used in pure C++
+code, the geometry-traits classes that substitute the
+\cppLstinline{Traits} template parameters of the input arrangements
+must be convertible to the geometry-traits class of the resulting
+arrangement. We only wrap instances of the overlay function with
+Python bindings, where all three arrangements use the exact same
+geometry-traits classes and the same DCEL structures, and thus the
+types of the three arrangements of the exposed
+\cppLstinline{CGAL::overlay()} function are identical.
 
-arr2 = Arrangement_2()
-c1 = Curve_2(Point_2(1, 1), Point_2(3, 1))
-c2 = Curve_2(Point_2(3, 1), Point_2(3, 3))
-c3 = Curve_2(Point_2(3, 3), Point_2(1, 3))distance=-1pt
-c4 = Curve_2(Point_2(1, 3), Point_2(1, 1))
-Aos2.insert(arr2, [c1, c2, c3, c4])
+The \cppLstinline{CGAL::overlay()} function template is overloaded
+with a variant that accepts four arguments. The last argument,
+referred to as the overlay traits, enables the update of cells of the
+output arrangement, and in particular their properties. Using the
+overlay traits is typically accompanied with the extension of one or
+more types of the arrangement cells that hold the properties. The
+overlay traits must model the \cppLstinline{OverlayTraits} concept,
+which requires the provision of ten functions that handle all possible
+overlapping cases as listed below. Let $v_r$, $e_r$, and $f_r$ denote
+input \textcolor{red}{red} cells, i.e.,~a vertex, an edge, and a face,
+respectively, $v_b$, $e_b$, and $f_b$ denote input
+\textcolor{blue}{blue} cells, and $v$, $e$, and $f$ denote output
+cells.
+\begin{enumerate}
+\item A new vertex $v$ is induced by coinciding vertices $v_r$ and $v_b$.
+\item A new vertex $v$ is induced by a vertex $v_r$ that lies on an edge $e_b$.
+\item An analogous case of a vertex $v_b$ that lies on an edge $e_r$.
+\item A new vertex $v$ is induced by a vertex $v_r$ that is contained in a face $f_b$.
+\item An analogous case of a vertex $v_b$ contained in a face $f_r$.
+\item A new vertex $v$ is induced by the intersection of two edges $e_r$ and $e_b$.
+\item A new edge $e$ is induced by the (possibly partial) overlap of two edges $e_r$ and $e_b$.
+\item A new edge $e$ is induced by the an edge $e_r$ that is contained in a face $f_b$.
+\item An analogous case of an edge $e_b$ contained in a face $f_r$.
+\item A new face $f$ is induced by the overlap of two faces $f_r$ and $f_b$.
+\end{enumerate}
 
-for arr in [arr1, arr2]:
-  for f in arr.faces():
-    f.set_data(0) if f.is_unbounded() else f.set_data(1)
-\end{lstlisting}
+Evidently a custom C++ overlay traits cannot be defined in Python;
+more precisely, the traits type must be known when the bindings are
+compiled. We introduce and expose with Python bindings two models of
+the \cppLstinline{OverlayTraits} concept. The most general among the
+two, called \cppLstinline{Arr_overlay_traits}, defines ten functions
+that correspond to the list above, each accepting three arguments,
+namely, two objects that represent input cells, and one object that
+represents an output cell. By default these functions are idle. A user
+(that is, a Python programmer) can override any subset of these
+functions. One constructor of this model accepts all the ten functions
+at once. Another constructor accepts a single function, which
+corresponds to Function (10) in the list above.
+
+In the following we assume that the face type of the arrangement
+% \cppLstinline{Arrangement_2} instance
+is extended. The code excerpt in Listing~\ref{lst:twoFaceExtend} constructs two arrangements with two faces each. For each arrangement the properties of the unbounded face and the bounded face are initialized with Python integer objects~$0$ and~$1$, respectively.
+%
+The code excerpt in Listing~\ref{lst:overlayTraits} computes the overlay of the two arrangements constructed by the code in Listing~\ref{lst:twoFaceExtend} using the overlay traits. The property of each face of the resulting arrangement is updated as part of the overlay computation to indicate the number of overlapping bounded faces; see Figure~\ref{fig:faceExt}.
+%
+Observe that while the computation of the overlay is carried out by the compiled C++ code, the summation is carried out by a Python \pyLstinline{lambda} function, which accepts as the third argument the face to be updated. By default, arguments are copied into new Python objects. We pass the new face by reference, overriding the default, to enforce persistent updates.
+
+\begin{lstfloat}
+  \lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,
+                   firstline=14,lastline=39,
+                   label={lst:twoFaceExtend},
+                   caption={Constructing two arrangements with their faces extended and initializing their data.}]
+                  {../../../src/python_scripts/cgalpy_examples/overlay.py}
+\end{lstfloat}
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=pythonFramedStyle,basicstyle=\normalsize,
+                     label={lst:overlayTraits},
+                     caption={Computing the map overlay of two arrangements using the general overlay traits.}]
+traits = Aos2.Arr_overlay_traits(lambda f1,f2,f: f.set_data(f1.data()+f2.data()))
+Aos2.overlay(arr1, arr2, result, traits)
+  \end{lstlisting}
+\end{lstfloat}
 
 \begin{figure}[!htp]
   \captionsetup[subfigure]{justification=centering}
@@ -549,119 +567,26 @@ for arr in [arr1, arr2]:
   \label{fig:extend}
 \end{figure}
 
-Extending the arrangement features is useful for many applications,
-but essential for applications that compute the overlay of
-arrangements as discussed in the next Section.
-
-%% Extending the 2d and 3d vertex and face triangulation types => change
-%% the title to be more general in the full article
-
-% -----------------------------------------------------------------------------
-\subsection{Arrangement Overlay Traits}
-\label{sec:code:overlay}
-% -----------------------------------------------------------------------------
-The map overlay of two arrangements $\calA_1$ and $\calA_2$,
-conveniently referred to as the \textcolor{red}{red} and
-\textcolor{blue}{blue} arrangements, is a third arrangement $\calA$,
-such that there is a cell $c$ in $\calA$ iff there are cells $c_1$ and
-$c_2$ in $\calA_1$ and $\calA_2$, respectively, such that $c$ is a
-maximal connected component of $c_1 \cap c_2$. Arrangements are
-subdivisions of some ambient space (see
-Section~\ref{ssec:modules:aos2}) and computing the overlay of two
-arrangements is useful for many applications, including the
-application of Boolean operations; see
-Section~\ref{ssec:modules:bso2}. Indeed, the \iiDArrangementsPackage{}
-package supports an operation that computes the map overlay of two
-arrangements in form of the free function template
-\cppLstinline{CGAL::overlay()}. In particular, the call
-\cppLstinline{CGAL::overlay(arr_r, arr_b, arr)} computes the overlay
-of the arrangements \cppLstinline{arr_r} and \cppLstinline{arr_b} and
-stores the result in the arrangement \cppLstinline{arr}. All three
-types must be instances of the \cppLstinline{Arrangement_2<Traits,
-  Dcel>} class template. When the function is used in pure C++ code,
-the geometry-traits classes that substitute the \cppLstinline{Traits}
-template parameters of the input arrangements must be convertible to
-the geometry-traits class of the resulting arrangement. We only wrap
-instances of the overlay function with Python bindings, where all
-three arrangements use the exact same geometry-traits classes, and
-thus the types of the three arrangements of the exposed
-\cppLstinline{overlay()} function are identical.
-
-The \cppLstinline{overlay()} function template is overloaded with a
-variant that accepts four arguments. The last argument, referred to as
-the overlay traits, enables the update of properties of the output
-arrangement from the properties of the input arrangements. Using the
-overlay traits is typically accompanied with the extension of one or
-more types of the arrangement cells that hold the properties. The
-overlay traits must model the \cppLstinline{OverlayTraits} concept,
-which requires the provision of ten functions that handle all possible
-cases as listed below. Let $v_r$, $e_r$, and $f_r$ denote input
-\textcolor{red}{red} cells, i.e.,~a vertex, an edge, and a face,
-respectively, $v_b$, $e_b$, and $f_b$ denote input
-\textcolor{blue}{blue} features, and $v$, $e$, and $f$ denote output
-cells.
-\begin{enumerate}
-\item A new vertex $v$ is induced by coinciding vertices $v_r$ and $v_b$.
-\item A new vertex $v$ is induced by a vertex $v_r$ that lies on an edge $e_b$.
-\item An analogous case of a vertex $v_b$ that lies on an edge $e_r$.
-\item A new vertex $v$ is induced by a vertex $v_r$ that is contained in a face $f_b$.
-\item An analogous case of a vertex $v_b$ contained in a face $f_r$.
-\item A new vertex $v$ is induced by the intersection of two edges $e_r$ and $e_b$.
-\item A new edge $e$ is induced by the (possibly partial) overlap of two edges $e_r$ and $e_b$.
-\item A new edge $e$ is induced by the an edge $e_r$ that is contained in a face $f_b$.
-\item An analogous case of an edge $e_b$ contained in a face $f_r$.
-\item A new face $f$ is induced by the overlap of two faces $f_r$ and $f_b$.
-\end{enumerate}
-Evidently a custom C++ overlay traits cannot be defined in Python;
-more precisely, the traits type must be known when the bindings are
-compiled. We introduce and expose with Python bindings two models of
-the \cppLstinline{OverlayTraits} concept. The most general among the
-two, called \cppLstinline{Arr_overlay_traits}, defines ten functions
-that correspond to the list above, each accepting three arguments,
-namely, two objects that represent input cells, and one object that
-represents an output cell. By default these functions are idle. A user
-(that is, a Python programmer) can override any subset of these
-functions. One constructor of this model accepts all the ten functions
-at once. Another constructor accepts a single function, which
-corresponds to function (10) in the list above. In the following we
-assume that the face type of the \cppLstinline{Arrangement_2} instance
-is extended. The code excerpt below computes the overlay of the two
-arrangements constructed by the code in Listing~\ref{lst:arrExtend}
-using the overlay traits. Recall that the properties that comprise the
-extension are represented by Python objects to start with; see
-Section~\ref{sec:code:ae} and that the property of each face in the
-input arrangement is initialized with an integer Python object. The
-property of each face of the resulting arrangement is then set with
-the sum of the integers associated with its overlapping faces during
-the overlay computation process.
-
-\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize]
-traits = Aos2.Arr_overlay_traits(lambda f1,f2,f: f.set_data(f1.data()+f2.data()))
-Aos2.overlay(arr1, arr2, result, traits)
-\end{lstlisting}
-
-Observe that while the computation of the overlay is carried out by
-the compiled C++ code; however, the summation is carried out by a
-Python \pyLstinline{lambda} function, which accepts as the third
-argument the face to be updated. By default, arguments are copied into
-new Python objects. We change this behaviour and pass the third object
-by value to ensure that the update is persistent.
-
 In many cases, such as in the example above, the property of the new
 cell depends solely on the properties of the overlapping two cells. To
 this end we introduce (and expose) a second model of the
 \cppLstinline{OverlayTraits} concept called
 \cppLstinline{Arr_overlay_function_traits}. This model also defines
 ten functions that correspond to the list above. However, here each
-function accepts the two Python objects that extends the overlapping
+function accepts the two Python objects that extend the overlapping
 cells as input arguments and returns the Python object that extends
-the resulting cell. The code excerpt below has the same affect the
-code above has, but is more compact.
+the resulting cell. The code excerpt in
+Listing~\ref{lst:overlayFunctionTraits} has the same effect the code
+in Listing~\ref{lst:overlayTraits} has, but is more compact.
 
-\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize]
+\begin{lstfloat}
+  \begin{lstlisting}[style=pythonFramedStyle,basicstyle=\normalsize,
+                     label={lst:overlayFunctionTraits},
+                     caption={Computing the map overlay of two arrangements using the functional overlay traits.}]
 traits = Aos2.Arr_overlay_function_traits(lambda x, y: x+y)
 os2.overlay(arr1, arr2, result, traits)
-\end{lstlisting}
+  \end{lstlisting}
+\end{lstfloat}
 
 Each one of the ten functions supported by the
 \cppLstinline{Arr_overlay_function_traits} model returns a Python
@@ -669,24 +594,29 @@ object that is passed back to the compiled C++ code. Then, the object
 is stored with the new cell. Thus, there is no need to pass arguments
 by reference (even thought it could be more efficient in certain
 cases); however, the implementation of this model presents a new
-coding challenge.
-
+coding challenge---if a certain cell is not extended, attempting to
+access its non-existing extension would cause a compilation error.
+%
 Assume that only the vertex type of the \cppLstinline{Arrangement_2}
-instance is extended. The Python code excerpt below computes the
-overlay of two arrangements and updates the property of each vertex of
-the resulting arrangement to indicate the weighted degree of the
-vertex, where blue incident edges weigh twice as much as red incident
-edges; see Figure~\ref{fig:vertexExt}. We set all the six functions
-that update output vertices in the
-\cppLstinline{Arr_overlay_function_traits} object using dedicated
-setters. The name of a setter matches the pattern
+instance is extended. The Python code excerpt in
+Listing~\ref{lst::overlayCircleSegment} computes the overlay of two
+arrangements and updates the property of each vertex of the resulting
+arrangement to indicate the weighted degree of the vertex, where blue
+incident edges weigh twice as much as red incident edges; see
+Figure~\ref{fig:vertexExt}. We set all the six functions that update
+output vertices in the \cppLstinline{Arr_overlay_function_traits}
+object using dedicated setters. The name of a setter matches the
+pattern
 \lstinline[language={C++},mathescape=true,columns=fixed]{set_$c_rc_b$_$c$()},
 where each of $c_r$, $c_b$, and $c$ can be substituted with
 \cppLstinline{v}, \cppLstinline{e}, or \cppLstinline{f}. $c_r$ and
 $c_b$ determine the input red and blue cell types, respectively, and
 $c$ determines the output cell type.
 
-\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize]
+\begin{lstfloat}
+  \begin{lstlisting}[style=pythonFramedStyle,basicstyle=\normalsize,
+                     label={lst::overlayCircleSegment},
+                     caption={Constructing two arrangements with their vertices extended and computing their map overlay using the overlay function traits.}]
 Aos2.insert(arr1,[Curve(Circle(Point(3,4),25)),Curve(Circle(Point(-3,-4),25))])
 Aos2.insert(arr2, [Curve(Circle(Point(3,4),25)), Curve(Circle(Point(3,4),25))])
 for arr in [arr1, arr2]:
@@ -700,7 +630,8 @@ traits.set_ev_v(lambda x, y: 4+y)
 traits.set_fv_v(lambda x, y: y)
 traits.set_ee_v(lambda x, y: 6)
 Aos2.overlay(arr1, arr2, result, traits)
-\end{lstlisting}
+  \end{lstlisting}
+\end{lstfloat}
 
 Consider a generic function called \cppLstinline{apply()} that accepts
 two objects that represent input cells, namely \cppLstinline{r} and
@@ -714,31 +645,34 @@ obtained and set via the calls \cppLstinline{c.data()} and
 \cppLstinline{c.set_data()}, respectively. If the type of the output
 cell is not extended, however, \cppLstinline{apply()} should become
 idle. Similarly, if the type of an input cell is not extended, the
-\pyLstinline{None} python object (represented by
+\pyLstinline{None} Python object (represented by
 \cppLstinline{bp::object}) should be passed to \cppLstinline{f}
-instead. We use SFINAE yet again, several times, to address the
-above. First, we introduce an overload of \cppLstinline{apply()} that
-is idle and serves as a fall-through; see Line~9 in the listing
-below. When a call to \cppLstinline{apply()} is made. The idle
-overload is selected by the overload resolution process if the output
-cell does not have a member called \cppLstinline{set_data()}. If the
-output cell does have this member the other version is selected and
-calls \cppLstinline{data_a(r)} and \cppLstinline{data_a(b)} to obtain
-the properties of the red and blue input cells, respectively. Second,
-we introduce an overload of \cppLstinline{data_a()} that serves as a
-fall-through; see Lines 2. It does nothing but return the
-\pyLstinline{None} Python object. It is selected if the corresponding
-cell does not have a member called \cppLstinline{data()}. If the cell
-does have this member the other version is selected; it returns the
-property of the cell.
+instead. We use SFINAE yet again, twice, to address the above. First,
+we introduce an overload of \cppLstinline{apply()} that is idle and
+serves as a fall-through; see Line~9 in Listing~\ref{lst:data}. When a
+call to \cppLstinline{apply()} is made, the idle overload is selected
+by the overload resolution process if the output cell does not have a
+member called \cppLstinline{set_data()}. If the output cell does have
+this member the other implementation is selected and calls
+\cppLstinline{data(r)} and \cppLstinline{data(b)} to obtain the
+properties of the \textcolor{red}{red} and \textcolor{blue}{blue}
+input cells, respectively. Second, we introduce an overload of
+\cppLstinline{data()} that serves as a fall-through (Line~2). It does
+nothing but return the \pyLstinline{None} Python object. It is
+selected if the corresponding cell does not have a member called
+\cppLstinline{data()}. If the cell does have this member the other
+implementation is selected; it returns the property of the cell.
 
-\begin{lstlisting}[style=cppFramedStyle,basicstyle=\scriptsize]
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,
+                     label={lst:data},
+                     caption={Automatic generation of bindings for the overlay function traits exploiting SFINAE.}]
 // Fall-through; A::data() does not exist
-template <typename A> bp::object data_a(...) { return bp::object(); }
+template <typename A> bp::object data(...) { return bp::object(); }
 
 // A::data() exists
 template <typename A, typename = decltype(std::declval<A>().data())>
-const bp::object& data_a(const A* a) { return a->data(); }
+const bp::object& data(const A* a) { return a->data(); }
 
 // Fall-through; O::set_data() does not exist
 template <typename R, typename B, typename O, typename F> void apply(...) {}
@@ -747,9 +681,10 @@ template <typename R, typename B, typename O, typename F> void apply(...) {}
 template <typename R, typename B, typename O, typename F,
           typename = decltype(std::declval<O>().set_data(std::declval<typename O::Data>()))>
 void apply(const R* r, const B* b, O* o, F f) {
-  o->set_data(f(data_a<R>(r), data_a<B>(b)));
+  o->set_data(f(data<R>(r), data<B>(b)));
 }
-\end{lstlisting}
+  \end{lstlisting}
+\end{lstfloat}
 
 %% (the extended arrangement data type) Those 10 functions are saved as
 %% class members and are then called in the respective 10 [overloaded]
@@ -761,13 +696,14 @@ void apply(const R* r, const B* b, O* o, F f) {
 %% This way the user can still define the way the result face/edge/vertex
 %% data will be calculated.
 
+\begin{mdframed}[hidealllines=true,backgroundcolor=red!20]
 % -----------------------------------------------------------------------------
-\subsection{kd tree}
+\subsection{kd Trees}
 \label{sec:code:kdtree}
 % -----------------------------------------------------------------------------
-The k-d tree dimension and the dimension of related classes is
-templated and can thus only be decided at compile time via the cmake
-variable \myLstinline{CGALPY_SPATIAL_SEARCHING_DIMENSION}.
+The \kdtree{} dimension and the dimension of related classes is
+templated and can thus only be decided at compile time via the
+\cmake{} variable \myLstinline{CGALPY_SPATIAL_SEARCHING_DIMENSION}.
 
 In order to assert the dimension the bindings were compiled with, a
 free function \myLstinline{get_spatial_searching_dimension()} was
@@ -777,13 +713,20 @@ exposed that returns the dimension as an \myLstinline{int}.
 \subsection{\myLstinline{Python_distance}}
 \label{sec:code:distance}
 % -----------------------------------------------------------------------------
-Similarly to overlay traits, a user may want to define a custom distance class to use with search queries. Here too, as defining a new C++ class is not possible from python, we provide a similar solution: A \myLstinline{Python_distance} class is exposed, which is a model of
-\myLstinline{GeneralDistance} concept. \url{https://doc.cgal.org/5.2/Spatial_searching/classGeneralDistance.html} It expects 5 functions in its constructor, and those are saved as class members and are used for the respective 5 operations [the optional are not included] of the concept.
+Similarly to overlay traits, a user may want to define a custom
+distance class to use with search queries. Here too, as defining a new
+C++ class is not possible from python, we provide a similar solution:
+A \myLstinline{Python_distance} class is exposed, which is a model of
+\myLstinline{GeneralDistance}
+concept. \url{https://doc.cgal.org/5.2/Spatial_searching/classGeneralDistance.html}
+It expects 5 functions in its constructor, and those are saved as
+class members and are used for the respective 5 operations [the
+  optional are not included] of the concept.
 
 Making some things more pythonic:
 
 % -----------------------------------------------------------------------------
-\subsection{Iterators and circulators}
+\subsection{Iterators and Circulators}
 \label{sec:code:iters}
 % -----------------------------------------------------------------------------
 For binding iterators we used the \myLstinline{bind_iterator}
@@ -805,100 +748,15 @@ the results is being exposed.
 \subsection{Functions expecting begin and end iterators}
 \label{sec:code:fnc-range}
 % -----------------------------------------------------------------------------
-Instead, a wrapper that expects a python list as an argument and calls
-the function with the list's begin and end iterators is exposed.
+Instead, a wrapper that expects a python list as an argument and calls the function with the list's begin and end iterators is exposed.
 
-% -----------------------------------------------------------------------------
-\subsection{Type Annotation}
-\label{sec:code:typeAnnotation}
-% -----------------------------------------------------------------------------
-\cgal{} is a large library to start with. It is divided into
-approximately~150 packages with countless function and class
-templates. The vast number of function and type instances that can be
-defined using this templates can be overwhelming. The development of
-non critical code that is based on \cgal{} can be expedited using
-Python and \cgal{} Python bindings.  Using code completion (which is
-based on type annotations) offered by several Python IDEs can
-accelerate the process much further. Type annotation in Python refers
-to annotations of Python functions, arguments, and variables in a way
-that can be used by various tools. It is an optional feature of Python
-that has been introduced in Version~3.5 and enhanced in successive
-version. With this feature implemented a type checker, a tool separate
-from the Python interpreter, can be used to statically analyze code
-base to find bugs during early development stages and spelunk code of
-large projects. Naturally, it can be used by IDEs to interactively
-provide hints and suggestions to programmers and type check the code
-as it is being developed. Annotations can and should be placed near
-the code if possible. Observe that the Python interpreter ignores
-these annotations. Annotations can also be placed in external files
-(that have the extension \lstinline{pyi}), referred to as stubs, for
-cases where the code base is inaccessible, such as the case with our
-bindings. Stub files contain the signatures of the annotated functions
-with the body of the functions discarded. They also list the
-attributes of annotated types. In our case they contain the annotated
-interface of the \cgal{} bindings. Stub files have the same syntax as
-regular Python modules. There is one feature of the typing module that
-is different in stub files, namely, the \pyLstinline{@overload}
-decorator. This decorator allows describing functions that support
-multiple different combinations of argument types. Consider, for
-example, the overloaded free C++ functions \cppLstinline{overlay()};
-see Section~\ref{sec:code:overlay}. The annotation for the
-corresponding Python function \pyLstinline{overlay()} in the stub file
-follows.
-\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize]
-Aos2 = CGALPY.Aos2
-Arr = Aos2.Arrangement_2
-@overload
-def Aos2.overlay(r: Arr, b: Arr, o: Arr) -> None: pass
-@overload
-def Aos2.overlay(r: Arr, b: Arr, o: Arr, t: Aos2.Arr_overlay_traits) -> None: pass
-@overload
-def Aos2.overlay(r: Arr, b: Arr, o: Arr, t: Aos2.Arr_overlay_function_traits) -> None: pass
-\end{lstlisting}
+%% (the extended arrangement data type) Those 10 functions are saved as
+%% class members and are then called in the respective 10 [overloaded]
+%% versions of \myLstinline{create_vertex}, \myLstinline{create_edge},
+%% \myLstinline{create_face object}) (the matching is done by the order
+%% of the passed functions and the order of the [overloaded] versions in
+%% the official concept reference).
 
-Annotating a Python type that wraps a C++ type, which is a model of
-some concepts is guided by the concepts. Similar to the C++ code of
-the bindings, we have introduced a tight coupling between concepts and
-Python type annotations; see Section~\ref{sec:code:concepts}. In
-particular, we have introduced a Python annotation class for each
-concept that annotates all the requirements of the concept. The
-refinement relations between concepts are not reflected using
-inheritance between concept annotation classes. (This would invalidate
-the annotation code, as a concept \cppLstinline{A} may refine concepts
-\cppLstinline{B} and \cppLstinline{C} and both, \cppLstinline{B} and
-\cppLstinline{C}, may refine concept \cppLstinline{D}.) Instead, every
-model annotation class that annotates a certain type, say
-\cppLstinline{T}, inherits from all the concept annotation classes
-that correspond to the concepts that model \cppLstinline{T}. For
-example, assume that bindings are generated for the
-\cppLstinline{Arrangement_2<GeometryGtaits_2, Dcel>} type instantiated
-with a the geometry traits type that is an instance of the
-\cppLstinline{Arr_segment_traits_2} class template. This type models
-several concepts; , e.g., Figure~\ref{fig:atc:central}. Partial Python
-type annotation for the type \pyLstinline{Arr_segment_traits_2}
-follows.
-\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize]
-class Arr_segment_traits_2(AosBasicTraits_2._AosBasicTraits_2,
-                           AosXMonotoneTraits_2._AosXMonotoneTraits_2,
-                           AosTraits_2._AosTraits_2,
-                           AosLandmarkTraits_2._AosLandmarkTraits_2,
-                           AosVerticalSideTraits_2._AosVerticalSideTraits_2,
-                           AosVerticalSideTraits_2._AosHorizontalSideTraits_2) :
-  class Point_2(AosBasicTraits_2._AosBasicTraits_2.Point_2):
-    def x(self) -> Ker.FT: ...
-    def y(self) -> Ker.FT: ...
-\end{lstlisting}
-The type annotation for the concept \cppLstinline{AosBasicTraits_2} contains the annotations for the default constructor and copy constructor of the type \cppLstinline{Point_2} defined by every model of the concept \cppLstinline{AosBasicTraits_2}.
-\begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize]
-class _AosBasicTraits_2():
-  class Point_2():
-    def __init__(): ...
-  class X_monotone_curve_2():
-    def __init__(): ...
-  class Equal_2():
-    @overload
-    def __call__(self, p: _AosBasicTraits_2.Point_2, q: _AosBasicTraits_2.Point_2) -> bool: ...
-    @overload
-    def __call__(self, p: _AosBasicTraits_2.X_monotone_curve_2, q: _AosBasicTraits_2.X_monotone_curve_2) -> bool: ...
-  def equal_2_object(self) -> _AosBasicTraits_2.Equal_2: ...
-\end{lstlisting}
+%% This way the user can still define the way the result face/edge/vertex
+%% data will be calculated.
+\end{mdframed}

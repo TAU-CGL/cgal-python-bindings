@@ -24,6 +24,7 @@ cgal_python_bindings.pdf: \
 	../../abrev-short.bib \
 	cgal_python_bindings.tex \
 	abstract.tex \
+	concepts.tex \
 	introduction.tex \
 	comparison.tex \
 	generation.tex \
