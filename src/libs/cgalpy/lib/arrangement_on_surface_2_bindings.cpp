@@ -493,7 +493,7 @@ void export_arrangement_on_surface_2() {
     auto arr_co = bp::class_<Arr>("Arrangement_2");
     export_aos<Arr>(arr_co);
     arr_co
-      .def("unbounded_face", &aos2::unbounded_face<Aos>, RIR())
+      .def("unbounded_face", &aos2::unbounded_face<Arr>, RIR())
       .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity);
 
     bp::scope arr_scope = arr_co;
