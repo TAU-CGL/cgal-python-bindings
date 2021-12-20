@@ -34,6 +34,7 @@ bp::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits();
 bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits();
 bp::class_<aos2::Geometry_traits_2> export_arr_conic_traits();
 bp::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits();
+bp::class_<aos2::Geometry_traits_2> export_arr_geodesic_arc_on_sphere_traits();
 
 bp::object export_gps_segment_traits();
 bp::object export_gps_circle_segment_traits();
@@ -217,82 +218,174 @@ void zone(Arrangement_2& arr, X_monotone_curve_2& c, bp::list& res,
   }
 }
 
-//Arrangement methods
-Halfedge& insert_from_left_vertex(Arrangement_2& arr, X_monotone_curve_2& c,
-                                  Vertex& v)
+// Arrangement methods
+template <typename Aos>
+typename Aos::Halfedge& insert_from_left_vertex(Aos& arr,
+                                                typename Aos::X_monotone_curve_2& c,
+                                                Vertex& v)
 { return *(arr.insert_from_left_vertex(c,(Vertex_iterator(&v)))); }
 
-Halfedge& insert_from_right_vertex(Arrangement_2& arr, X_monotone_curve_2& c,
-                                   Vertex& v)
+template <typename Aos>
+typename Aos::Halfedge& insert_from_right_vertex(Aos& arr,
+                                                 typename Aos::X_monotone_curve_2& c,
+                                                 Vertex& v)
 { return *(arr.insert_from_right_vertex(c, (Vertex_iterator(&v)))); }
 
-Halfedge& insert_edge_in_face_interior(Arrangement_2& arr,
-                                       X_monotone_curve_2& c, Face& f)
+template <typename Aos>
+typename Aos::Halfedge& insert_edge_in_face_interior(Aos& arr,
+                                                     typename Aos::X_monotone_curve_2& c,
+                                                     typename Aos::Face& f)
 { return *(arr.insert_in_face_interior(c, (Face_iterator(&f)))); }
 
-Vertex& insert_vertex_in_face_interior(Arrangement_2& arr, Point_2& p, Face& f)
+template <typename Aos>
+typename Aos::Vertex& insert_vertex_in_face_interior(Aos& arr,
+                                                     typename Aos::Point_2& p,
+                                                     typename Aos::Face& f)
 { return *(arr.insert_in_face_interior(p, (Face_iterator(&f)))); }
 
-Halfedge& insert_at_vertices(Arrangement_2& arr, X_monotone_curve_2& c,
-                             Vertex& v1, Vertex& v2) {
+template <typename Aos>
+typename Aos::Halfedge& insert_at_vertices(Aos& arr,
+                                           typename Aos::X_monotone_curve_2& c,
+                                           typename Aos::Vertex& v1,
+                                           typename Aos::Vertex& v2) {
   return *(arr.insert_at_vertices(c, (Vertex_iterator(&v1)),
                                   (Vertex_iterator(&v2))));
 }
 
-Vertex& modify_vertex(Arrangement_2& arr, Vertex& v, Point_2& p)
+template <typename Aos>
+typename Aos::Vertex& modify_vertex(Aos& arr,
+                                    typename Aos::Vertex& v,
+                                    typename Aos::Point_2& p)
 { return *(arr.modify_vertex(Vertex_iterator(&v), p)); }
 
-Face& remove_isolated_vertex(Arrangement_2& arr, Vertex& v)
+template <typename Aos>
+typename Aos::Face& remove_isolated_vertex(Aos& arr,
+                                           typename Aos::Vertex& v)
 { return *(arr.remove_isolated_vertex(Vertex_iterator(&v))); }
 
-Halfedge& modify_edge(Arrangement_2& arr, Halfedge& e, X_monotone_curve_2& c)
+template <typename Aos>
+typename Aos::Halfedge& modify_edge(Aos& arr,
+                                    typename Aos::Halfedge& e,
+                                    typename Aos::X_monotone_curve_2& c)
 { return *(arr.modify_edge(Halfedge_iterator(&e), c)); }
 
-Halfedge& split_edge(Arrangement_2& arr, Halfedge& e, X_monotone_curve_2& c1,
+template <typename Aos>
+typename Aos::Halfedge& split_edge(Aos& arr,
+                                   typename Aos::Halfedge& e,
+                                   typename Aos::X_monotone_curve_2& c1,
                      X_monotone_curve_2& c2)
 { return *(arr.split_edge(Halfedge_iterator(&e), c1, c2)); }
 
-Halfedge& merge_edge(Arrangement_2& arr, Halfedge& e1, Halfedge& e2,
+template <typename Aos>
+typename Aos::Halfedge& merge_edge(Aos& arr,
+                                   typename Aos::Halfedge& e1,
+                                   typename Aos::Halfedge& e2,
                      X_monotone_curve_2& c)
 { return *(arr.merge_edge(Halfedge_iterator(&e1), Halfedge_iterator(&e2), c)); }
 
-Face& remove_edge(Arrangement_2& arr, Halfedge& e) {
+template <typename Aos>
+typename Aos::Face& remove_edge(Aos& arr,
+                                typename Aos::Halfedge& e) {
   auto handle = e.twin();
   return *(arr.remove_edge(handle));
 }
 
-Vertex_iterator vertices_begin(Arrangement_2& arr)
+template <typename Aos>
+typename Aos::Vertex_iterator vertices_begin(Aos& arr)
 { return arr.vertices_begin(); }
 
-Vertex_iterator vertices_end(Arrangement_2& arr) { return arr.vertices_end(); }
+template <typename Aos>
+typename Aos::Vertex_iterator vertices_end(Aos& arr)
+{ return arr.vertices_end(); }
 
-Halfedge_iterator halfedges_begin(Arrangement_2& arr)
+template <typename Aos>
+typename Aos::Halfedge_iterator halfedges_begin(Aos& arr)
 { return arr.halfedges_begin(); }
 
-Halfedge_iterator halfedges_end(Arrangement_2& arr)
+template <typename Aos>
+typename Aos::Halfedge_iterator halfedges_end(Aos& arr)
 { return arr.halfedges_end(); }
 
-Edge_iterator edges_begin(Arrangement_2& arr) { return arr.edges_begin(); }
+template <typename Aos>
+typename Aos::Edge_iterator edges_begin(Aos& arr) { return arr.edges_begin(); }
 
-Edge_iterator edges_end(Arrangement_2& arr) { return arr.edges_end(); }
+template <typename Aos>
+typename Aos::Edge_iterator edges_end(Aos& arr) { return arr.edges_end(); }
 
-Face_iterator faces_begin(Arrangement_2& arr) { return arr.faces_begin(); }
+template <typename Aos>
+typename Aos::Face_iterator faces_begin(Aos& arr) { return arr.faces_begin(); }
 
-Face_iterator faces_end(Arrangement_2& arr) { return arr.faces_end(); }
+template <typename Aos>
+typename Aos::Face_iterator faces_end(Aos& arr) { return arr.faces_end(); }
 
-Face_iterator unbounded_faces_begin(Arrangement_2& arr)
+template <typename Aos>
+typename Aos::Face_iterator unbounded_faces_begin(Aos& arr)
 { return arr.unbounded_faces_begin(); }
 
-Face_iterator unbounded_faces_end(Arrangement_2& arr)
+template <typename Aos>
+typename Aos::Face_iterator unbounded_faces_end(Aos& arr)
 { return arr.unbounded_faces_end(); }
 
-Face& unbounded_face(Arrangement_2& arr) { return *(arr.unbounded_face()); }
+template <typename Aos>
+typename Aos::Face& unbounded_face(Aos& arr)
+{ return *(arr.unbounded_face()); }
 
-Face& fictitious_face(Arrangement_2& arr) { return *(arr.fictitious_face()); }
+template <typename Aos>
+typename Aos::Face& fictitious_face(Aos& arr)
+{ return *(arr.fictitious_face()); }
 
-void assign(Arrangement_2& arr, Arrangement_2& input_arr)
-{ arr.assign(input_arr); }
+template <typename Aos>
+void assign(Aos& arr, Aos& input_arr) { arr.assign(input_arr); }
 
+}
+
+// Export common members of Aos types
+template <typename Aos>
+void export_aos(bp::class_<Aos>& co) {
+  typedef bp::return_internal_reference<>                 RIR;
+
+  co
+#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
+    .def(bp::init<>())
+    .def(bp::init<Aos&>())
+    .def("halfedges", bp::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>))
+    .def("vertices", bp::range<RIR>(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>))
+    .def("faces", bp::range<RIR>(&aos2::faces_begin<Aos>, &aos2::faces_end<Aos>))
+    .def("edges", bp::range<RIR>(&aos2::edges_begin<Aos>, &aos2::edges_end<Aos>))
+    .def("unbounded_faces", bp::range<RIR>(&aos2::unbounded_faces_begin<Aos>, &aos2::unbounded_faces_end<Aos>))
+    .def("fictitious_face", &aos2::fictitious_face<Aos>, RIR())
+    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex<Aos>, RIR())
+    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex<Aos>, RIR())
+    .def("insert_in_face_interior", &aos2::insert_edge_in_face_interior<Aos>, RIR())
+    .def("insert_in_face_interior", &aos2::insert_vertex_in_face_interior<Aos>, RIR())
+    .def("insert_at_vertices", &aos2::insert_at_vertices<Aos>, RIR())
+    .def("modify_vertex", &aos2::modify_vertex<Aos>, RIR())
+    .def("remove_isolated_vertex", &aos2::remove_isolated_vertex<Aos>, RIR())
+    .def("modify_edge", &aos2::modify_edge<Aos>, RIR())
+    .def("split_edge", &aos2::split_edge<Aos>, RIR())
+    .def("merge_edge", &aos2::merge_edge<Aos>, RIR())
+    .def("remove_edge", &aos2::remove_edge<Aos>, RIR())
+    .def("is_empty", &Aos::is_empty)
+    .def("is_valid", &Aos::is_valid)
+    .def("number_of_edges", &Aos::number_of_edges)
+    .def("number_of_faces", &Aos::number_of_faces)
+    .def("number_of_halfedges", &Aos::number_of_halfedges)
+    .def("number_of_isolated_vertices", &Aos::number_of_isolated_vertices)
+    .def("number_of_unbounded_faces", &Aos::number_of_unbounded_faces)
+    .def("number_of_vertices", &Aos::number_of_vertices)
+    .def("assign", &aos2::assign<Aos>)
+    .def("clear", &Aos::clear)
+#endif
+
+    // supported only by some traits
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
+    .def(bp::self_ns::str(bp::self_ns::self))
+    .def(bp::self_ns::repr(bp::self_ns::self))
+#endif
+
+    ;
 }
 
 // Overlay traits
@@ -330,17 +423,18 @@ void bind_overlay_function_traits<false, false, true>() {
 }
 
 void export_arrangement_on_surface_2() {
-  typedef aos2::Arrangement_2                             Arr2;
-  typedef Arr2::Geometry_traits_2                         Tr;
-  typedef Tr::Point_2                                     Point;
-  typedef Tr::Curve_2                                     Curve;
-  typedef Tr::X_monotone_curve_2                          X_monotone_curve;
-  typedef CGAL::Arr_naive_point_location<Arr2>            Naive_pl;
-  typedef CGAL::Arr_walk_along_line_point_location<Arr2>  Wal_pl;
-  typedef CGAL::Arr_landmarks_point_location<Arr2>        Landmarks_pl;
-  typedef CGAL::Arr_trapezoid_ric_point_location<Arr2>    Trapezoid_pl;
+  typedef aos2::Arrangement_2                           Arr;
+  typedef aos2::Arrangement_with_history_2              Awh;
+  typedef Arr::Geometry_traits_2                        Tr;
+  typedef Tr::Point_2                                   Point;
+  typedef Tr::Curve_2                                   Curve;
+  typedef Tr::X_monotone_curve_2                        X_monotone_curve;
+  typedef CGAL::Arr_naive_point_location<Arr>           Naive_pl;
+  typedef CGAL::Arr_walk_along_line_point_location<Arr> Wal_pl;
+  typedef CGAL::Arr_landmarks_point_location<Arr>       Landmarks_pl;
+  typedef CGAL::Arr_trapezoid_ric_point_location<Arr>   Trapezoid_pl;
 
-  typedef bp::return_internal_reference<>                 RIR;
+  typedef bp::return_internal_reference<>               RIR;
 
   bp::enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
@@ -368,6 +462,8 @@ void export_arrangement_on_surface_2() {
   auto traits_object = export_gps_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
   auto traits_object = export_gps_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+  auto traits_object = export_gps_traits();
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_GPS_TRAITS");
 #endif
@@ -384,80 +480,68 @@ void export_arrangement_on_surface_2() {
   auto traits_object = export_arr_conic_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
   auto traits_object = export_arr_algebraic_segment_traits();
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+  auto traits_object = export_arr_geodesic_arc_on_sphere_traits();
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 #endif
 
+#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
   {
-    bp::scope arr_scope = bp::class_<Arr2>("Arrangement_2")
-      .def(bp::init<>())
-      .def(bp::init<Arr2&>())
-      .def("halfedges", bp::range<RIR>(&aos2::halfedges_begin, &aos2::halfedges_end))
-      .def("vertices", bp::range<RIR>(&aos2::vertices_begin, &aos2::vertices_end))
-      .def("faces", bp::range<RIR>(&aos2::faces_begin, &aos2::faces_end))
-      .def("edges", bp::range<RIR>(&aos2::edges_begin, &aos2::edges_end))
-      .def("unbounded_face", &aos2::unbounded_face, RIR())
-      .def("unbounded_faces", bp::range<RIR>(&aos2::unbounded_faces_begin, &aos2::unbounded_faces_end))
-      .def("fictitious_face", &aos2::fictitious_face, RIR())
-      .def("insert_from_left_vertex", &aos2::insert_from_left_vertex, RIR())
-      .def("insert_from_right_vertex", &aos2::insert_from_right_vertex, RIR())
-      .def("insert_in_face_interior", &aos2::insert_edge_in_face_interior, RIR())
-      .def("insert_in_face_interior", &aos2::insert_vertex_in_face_interior, RIR())
-      .def("insert_at_vertices", &aos2::insert_at_vertices, RIR())
-      .def("modify_vertex", &aos2::modify_vertex, RIR())
-      .def("remove_isolated_vertex", &aos2::remove_isolated_vertex, RIR())
-      .def("modify_edge", &aos2::modify_edge, RIR())
-      .def("split_edge", &aos2::split_edge, RIR())
-      .def("merge_edge", &aos2::merge_edge, RIR())
-      .def("remove_edge", &aos2::remove_edge, RIR())
-      .def("is_empty", &Arr2::is_empty)
-      .def("is_valid", &Arr2::is_valid)
-      .def("number_of_edges", &Arr2::number_of_edges)
-      .def("number_of_faces", &Arr2::number_of_faces)
-      .def("number_of_halfedges", &Arr2::number_of_halfedges)
-      .def("number_of_isolated_vertices", &Arr2::number_of_isolated_vertices)
-      .def("number_of_unbounded_faces", &Arr2::number_of_unbounded_faces)
-      .def("number_of_vertices", &Arr2::number_of_vertices)
-      .def("number_of_vertices_at_infinity", &Arr2::number_of_vertices_at_infinity)
-      .def("assign", &aos2::assign)
-      .def("clear", &Arr2::clear)
+    // Arrangement
+    auto arr_co = bp::class_<Arr>("Arrangement_2");
+    export_aos<Arr>(arr_co);
+    arr_co
+      .def("unbounded_face", &aos2::unbounded_face<Aos>, RIR())
+      .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity);
 
-      //supported only by some traits
-#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-      .def(bp::self_ns::str(bp::self_ns::self))
-      .def(bp::self_ns::repr(bp::self_ns::self))
-#endif
-      ;
-
+    bp::scope arr_scope = arr_co;
     export_vertex();
     export_halfedge();
     export_face();
-
-    // Expose "Traits" within "Arrangement_2"
     arr_scope.attr("Geometry_traits_2") = traits_object;
   }
+#elif CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT_ON_SURFACE
+  {
+    // Arrangement
+    auto arr_co = bp::class_<Arr>("Arrangement_2");
+    export_aos<Arr>(arr_co);
+
+    bp::scope arr_scope = arr_co;
+    export_vertex();
+    export_halfedge();
+    export_face();
+    arr_scope.attr("Geometry_traits_2") = traits_object;
+  }
+#else
+  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_TYPE");
+#endif
 
   //free functions
-  bp::def("insert_point", &aos2::insert_point_default, RIR());
   bp::def("insert_point", &aos2::insert_point<Naive_pl>, RIR());
+#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
+  bp::def("insert_point", &aos2::insert_point_default, RIR());
   bp::def("insert_point", &aos2::insert_point<Wal_pl>, RIR());
   bp::def("insert_point", &aos2::insert_point<Trapezoid_pl>, RIR());
+#endif
   bp::def("insert", &aos2::insert_curve<X_monotone_curve>);
   bp::def("insert", &aos2::insert_curve<Curve>);
   bp::def("insert", &aos2::insert_curves);
-  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve_default, RIR());
   bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Naive_pl>, RIR());
+#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
+  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve_default, RIR());
   bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Wal_pl>, RIR());
   bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Trapezoid_pl>, RIR());
+#endif
   bp::def("insert_non_intersecting_curves", &aos2::insert_non_intersecting_curves);
   bp::def("decompose", &aos2::decompose);
-  bp::def("zone", &aos2::zone_default);
   bp::def("zone", &aos2::zone<Naive_pl>);
+#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
+  bp::def("zone", &aos2::zone_default);
   bp::def("zone", &aos2::zone<Wal_pl>);
   bp::def("zone", &aos2::zone<Trapezoid_pl>);
+#endif
   //supported only by some traits
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
@@ -470,10 +554,12 @@ void export_arrangement_on_surface_2() {
           &aos2::insert_non_intersecting_curve<Landmarks_pl>, RIR());
 #endif
 
-  bp::def("do_intersect", &aos2::do_intersect_default<X_monotone_curve>);
   bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Naive_pl>);
+#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
+  bp::def("do_intersect", &aos2::do_intersect_default<X_monotone_curve>);
   bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Wal_pl>);
   bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Trapezoid_pl>);
+#endif
 
   bp::def("remove_edge", &aos2::remove_edge_free, RIR());
   bp::def("remove_vertex", &aos2::remove_vertex_free);

@@ -10,6 +10,11 @@
 #define CGALPY_ARRANGEMENT_ON_SURFACE_2_CONFIG_HPP
 
 #include <CGAL/Arr_extended_dcel.h>
+#include <CGAL/Arrangement_on_surface_2.h>
+#include <CGAL/Arrangement_on_surface_with_history_2.h>
+#include <CGAL/Arrangement_2.h>
+#include <CGAL/Arrangement_with_history_2.h>
+#include <CGAL/Arr_spherical_topology_traits_2.h>
 #include <CGAL/Gps_traits_2.h>
 #include <CGAL/Gps_segment_traits_2.h>
 #include <CGAL/Gps_circle_segment_traits_2.h>
@@ -18,15 +23,27 @@
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
 
-#define CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS              0
-#define CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS             1
-#define CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS 2
-#define CGALPY_AOS2_CONIC_GEOMETRY_TRAITS               3
-#define CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS   4
-#define CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS      5
+// Arrangement type options
+#define CGALPY_AOS2_ARRANGEMENT                         0
+#define CGALPY_AOS2_ARRANGEMENT_ON_SURFACE              1
+
+#ifndef CGALPY_AOS2_TYPE
+#define CGALPY_AOS2_TYPE                                0
+#endif
+
+// Geometry traits options
+#define CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS                      0
+#define CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS                     1
+#define CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS         2
+#define CGALPY_AOS2_CONIC_GEOMETRY_TRAITS                       3
+#define CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS           4
+#define CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS              5
+#define CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS                      6
+#define CGALPY_AOS2_RATIONAL_GEOMETRY_TRAITS                    7
+#define CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS      8
 
 #ifndef CGALPY_AOS2_GEOMETRY_TRAITS
-#define CGALPY_AOS2_GEOMETRY_TRAITS 1
+#define CGALPY_AOS2_GEOMETRY_TRAITS                             1
 #endif
 
 namespace aos2 {
@@ -91,6 +108,18 @@ template <typename Fb, typename Data>
 struct Face_extended<false, Fb, Data> { typedef Fb type; };
 template <typename Fb, typename Data> struct Face_extended<true, Fb, Data>
 { typedef CGAL::Arr_extended_face<Fb, Data> type; };
+
+// Aos type
+template <int i, typename GeomTraits, typename Dcel> struct Aos {
+  typedef CGAL::Arrangement_2<GeomTraits, Dcel> aos;
+  typedef CGAL::Arrangement_with_history_2<GeomTraits, Dcel> aos_with_history;
+};
+template <typename GeomTraits, typename Dcel>
+struct Aos<CGALPY_AOS2_ARRANGEMENT_ON_SURFACE, GeomTraits, Dcel> {
+  typedef CGAL::Arr_spherical_topology_traits_2<GeomTraits, Dcel>               Topol_traits;
+  typedef CGAL::Arrangement_on_surface_2<GeomTraits, Topol_traits>              aos;
+  typedef CGAL::Arrangement_on_surface_with_history_2<GeomTraits, Topol_traits> aos_with_history;
+};
 
 } // end of aos2 namespace
 
