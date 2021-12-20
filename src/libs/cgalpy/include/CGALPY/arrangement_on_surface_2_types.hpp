@@ -13,6 +13,7 @@
 
 #include <CGAL/Arr_default_dcel.h>
 #include <CGAL/Arrangement_2.h>
+#include <CGAL/Arrangement_with_history_2.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/arrangement_on_surface_2_config.hpp"
@@ -34,6 +35,8 @@
 #include <CGAL/Polynomial.h>
 #include <CGAL/Polynomial_traits_d.h>
 #include <CGAL/Polynomial_type_generator.h>
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+#include <CGAL/Arr_geodesic_arc_on_sphere_traits_2.h>
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
@@ -74,6 +77,8 @@ typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>  BGT;
 typedef typename BGT::Construct_curve_2                         Construct_curve_2;
 typedef typename BGT::Construct_point_2                         Construct_point_2;
 typedef typename BGT::Construct_x_monotone_segment_2            Construct_x_monotone_segment_2;
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+typedef CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>       BGT;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
@@ -93,11 +98,10 @@ typedef Face_gps<boolean_set_operations_2_bindings()>::type             Fb;
 typedef Face_extended<is_face_extended(), Fb, bp::object>::type         F;
 
 typedef CGAL::Arr_dcel_base<V, H, F>                        Dcel;
-typedef CGAL::Arrangement_2<GT, Dcel>                       Arrangement_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos                Arrangement_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos_with_history   Arrangement_with_history_2;
 
 // Backward compatibility:
-typedef Arrangement_2::Traits_2                             Traits_2;
-
 typedef Arrangement_2::Geometry_traits_2                    Geometry_traits_2;
 typedef Arrangement_2::Point_2                              Arr_point_2;
 typedef Arrangement_2::Vertex_iterator                      Vertex_iterator;
