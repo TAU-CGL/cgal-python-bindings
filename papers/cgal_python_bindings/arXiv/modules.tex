@@ -368,9 +368,12 @@ A description of the two template parameters of this class template follows.
     curves and two-dimensional points and supports basic geometric
     predicates on them. A rather large directed acyclic graph is
     required to capture the entire hierarchy of the geometry
-    traits-class concepts. Figure~\ref{fig:atc} depicts four clusters.
-    The list of supported traits class templates follows. For each
-    class template we describe the family of curves it handles.
+    traits-class concepts; therefore, we typically use subgraphs to
+    describe the refinement relations among closely related concepts,
+    and refer to these subgraph as clusters. Figure~\ref{fig:atc}
+    depicts four clusters. The list of supported traits class
+    templates follows. For each class template we describe the family
+    of curves it handles.
   %
   \begin{compactenum}
   \item \cppLstinline{Arr_non_caching_segment_basic_traits_2<>}---handles
