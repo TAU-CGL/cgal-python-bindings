@@ -4,14 +4,12 @@
     ],
     "concepts": {
         "MyConcept": {
-            "concepts": {
-                "otherConcept": 0
+            "models": {
+                "otherConcept": true
             },
             "classes": {
                 "InnerClass": {
-                    "concepts": {},
-                    "classes": {},
-                    "typedefs": {},
+                    "required": true,
                     "methods": {
                         "inner_method": [
                             {
@@ -21,17 +19,13 @@
                         ]
                     }
                 }
-            },
-            "typedefs": {},
-            "methods": {}
+            }
         },
         "otherConcept": {
-            "concepts": {},
-            "classes": {},
-            "typedefs": {},
             "methods": {
                 "other_method": [
                     {
+                        "required": true,
                         "variables": {},
                         "return": "int"
                     }
@@ -41,14 +35,11 @@
     },
     "classes": {
         "MyClass": {
-            "concepts": {
-                "MyConcept": 0
+            "models": {
+                "MyConcept": true
             },
             "classes": {
                 "InnerClass": {
-                    "concepts": {},
-                    "classes": {},
-                    "typedefs": {},
                     "methods": {
                         "inner_method": [
                             {
@@ -77,7 +68,7 @@
             }
         }
     },
-    "functions": {
+    "methods": {
         "free_function": [
             {
                 "variables": {
