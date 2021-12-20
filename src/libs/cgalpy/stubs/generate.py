@@ -89,8 +89,8 @@ def resolve_class(class_def):
 
 
 def print_class(class_name, class_def, indent=0):
-    print(INDENTATION*indent + 'class ' + class_name + '():')
     print(INDENTATION*indent + '#models: ' + str(class_def["concepts"]))
+    print(INDENTATION*indent + 'class ' + class_name + '():')
     for typedef, value in class_def["typedefs"].items():
         print(INDENTATION*(indent+1) + typedef + " = " + value)
     if class_def["typedefs"]:
@@ -112,8 +112,10 @@ def print_class(class_name, class_def, indent=0):
 
 if __name__ == "__main__":
     import os
+    import sys
+    filename = sys.argv[1]
     script_dir = os.path.dirname(__file__)
-    file_path = os.path.join(script_dir, './definitions.json')
+    file_path = os.path.join(script_dir, filename)
     f = open(file_path)
     definitions_string = f.read()
     f.close()
@@ -136,7 +138,7 @@ if __name__ == "__main__":
 
     # print(json.dumps(definitions, indent=4, sort_keys=True))
 
-    print("from typing import overload")
+    print("from typing import Iterator, overload")
     for module in imports:
         print('import ' + module)
 
