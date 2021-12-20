@@ -359,7 +359,7 @@
                 "transform": [
                     {
                         "variables": {
-                            "t": "Aff_transformation_2"
+                            "at": "Aff_transformation_2"
                         },
                         "return": "Line_2"
                     }
@@ -482,7 +482,7 @@
                 "transform": [
                     {
                         "variables": {
-                            "t": "Aff_transformation_2"
+                            "at": "Aff_transformation_2"
                         },
                         "return": "Ray_2"
                     }
@@ -490,6 +490,134 @@
                 "source": [
                     {
                         "return": "Point_2"
+                    }
+                ],
+                "__str__": [
+                    {
+                        "return": "str"
+                    }
+                ],
+                "__repr__": [
+                    {
+                        "return": "str"
+                    }
+                ]
+            }
+        },
+        "Triangle_2": {
+            "methods": {
+                "__init__": [
+                    {
+                        "variables": {
+                            "p": "Point_2",
+                            "q": "Point_2",
+                            "r": "Point_2"
+                        }
+                    }
+                ],
+                "vertex": [
+                    {
+                        "variables": {
+                            "i": "int"
+                        },
+                        "return": "Point_2"
+                    }
+                ],
+                "__getitem__": [
+                    {
+                        "variables": {
+                            "i": "int"
+                        },
+                        "return": "Point_2"
+                    }
+                ],
+                "is_degenerate": [
+                    {
+                        "return": "bool"
+                    }
+                ],
+                "orientation": [
+                    {
+                        "return": "Orientation"
+                    }
+                ],
+                "oriented_side": [
+                    {
+                        "variables": {
+                            "p": "Point_2"
+                        },
+                        "return": "Oriented_side"
+                    }
+                ],
+                "bounded_side": [
+                    {
+                        "variables": {
+                            "p": "Point_2"
+                        },
+                        "return": "Bounded_side"
+                    }
+                ],
+                "has_on_positive_side": [
+                    {
+                        "variables": {
+                            "p": "Point_2"
+                        },
+                        "return": "bool"
+                    }
+                ],
+                "has_on_negative_side": [
+                    {
+                        "variables": {
+                            "p": "Point_2"
+                        },
+                        "return": "bool"
+                    }
+                ],
+                "has_on_boundary": [
+                    {
+                        "variables": {
+                            "p": "Point_2"
+                        },
+                        "return": "bool"
+                    }
+                ],
+                "has_on_bounded_side": [
+                    {
+                        "variables": {
+                            "p": "Point_2"
+                        },
+                        "return": "bool"
+                    }
+                ],
+                "has_on_unbounded_side": [
+                    {
+                        "variables": {
+                            "p": "Point_2"
+                        },
+                        "return": "bool"
+                    }
+                ],
+                "opposite": [
+                    {
+                        "return": "Triangle_2"
+                    }
+                ],
+                "area": [
+                    {
+                        "return": "FT"
+                    }
+                ],
+                "bbox": [
+                    {
+                        "return": "Bbox_2"
+                    }
+                ],
+                "transform": [
+                    {
+                        "variables": {
+                            "at": "Aff_transformation_2"
+                        },
+                        "return": "Triangle_2"
                     }
                 ],
                 "__str__": [
