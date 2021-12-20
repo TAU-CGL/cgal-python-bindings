@@ -1,0 +1,56 @@
+{
+  "concepts": {
+    "AosBasicTraits_2": {
+      "models": {},
+      "classes": {
+        "Point_2": {
+          "required": true,
+          "__init__": [
+            {},
+            {
+              "variables": { "p": "Point_2" }
+            }
+          ]
+        },
+        "X_monotone_curve_2": {
+          "required": true,
+          "__init__": [
+            {},
+            {
+              "variables": { "xcv": "X_monotone_curve_2" }
+            }
+          ]
+        },
+        "Equal_2": {
+          "required": true,
+          "__call__": [
+            {
+              "required": true,
+              "variables": {
+                "p": "Point_2",
+                "Q": "Point_2"
+              },
+              "return": "Boolean"
+            }
+          ]
+        }
+      },
+      "methods": {
+        "equal_2_object": [
+          {
+            "required": true,
+            "variables": {},
+            "return": "Equal_2"
+          }
+        ]
+      }
+    }
+  },
+  "classes": {
+    "Arr_segment_traits_2": {
+      "models": {
+        "AosBasicTraits_2": true
+      }
+    }
+  }
+}
