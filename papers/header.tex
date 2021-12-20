@@ -460,3 +460,9 @@
 \newfloat{lstfloat}{htbp}{lop}
 \floatname{lstfloat}{Listing}
 \def\lstfloatautorefname{Listing} % needed for hyperref/auroref
+\newsavebox{\draftbox}
+\savebox{\draftbox}{\color{red}\huge $\times$}% create image for overlay
+
+\newenvironment{draft}{\begin{lrbox}{0}\minipage[b]{\linewidth}}%
+  {\endminipage\end{lrbox}%
+  \leavevmode\rlap{\resizebox{\wd0}{\ht0}{\usebox\draftbox}}\usebox0}
