@@ -18,6 +18,17 @@
                             }
                         ]
                     }
+                },
+                "InnerClassOther": {
+                    "required": true,
+                    "methods": {
+                        "inner_method": [
+                            {
+                                "variables": {},
+                                "return": "str"
+                            }
+                        ]
+                    }
                 }
             }
         },
