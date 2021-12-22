@@ -62,7 +62,7 @@ def merge_classes(c1, c2):
         if class_name in c1["classes"]:
             merge_classes(c1["classes"][class_name], class_def)
         else:
-            c1[class_name] = json.loads(json.dumps(class_def))
+            c1["classes"][class_name] = json.loads(json.dumps(class_def))
     for method, method_overloads in c2["methods"].items():
         if method in c1["methods"]:
             c1["methods"][method].extend(method_overloads)
