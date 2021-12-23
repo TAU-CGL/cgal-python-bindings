@@ -4,35 +4,50 @@
       "models": {},
       "classes": {
         "Point_2": {
-          "required": true,
-          "__init__": [
-            {},
-            {
-              "variables": { "p": "Point_2" }
-            }
-          ]
+          "methods": {
+            "__init__": [
+              {},
+              {
+                "variables": { "p": "Point_2" }
+              }
+            ],
+            "x": [
+              {
+                "required": true,
+                "return": "FT"
+              }
+            ],
+            "y": [
+              {
+                "required": true,
+                "return": "FT"
+              }
+            ]
+          }
         },
         "X_monotone_curve_2": {
-          "required": true,
-          "__init__": [
-            {},
-            {
-              "variables": { "xcv": "X_monotone_curve_2" }
-            }
-          ]
+          "methods": {
+            "__init__": [
+              {},
+              {
+                "variables": { "xcv": "X_monotone_curve_2" }
+              }
+            ]
+          }
         },
         "Equal_2": {
-          "required": true,
-          "__call__": [
-            {
-              "required": true,
-              "variables": {
-                "p": "Point_2",
-                "Q": "Point_2"
-              },
-              "return": "Boolean"
-            }
-          ]
+          "methods": {
+            "__call__": [
+              {
+                "required": true,
+                "variables": {
+                  "p": "Point_2",
+                  "Q": "Point_2"
+                },
+                "return": "Boolean"
+              }
+            ]
+          }
         }
       },
       "methods": {
@@ -50,6 +65,32 @@
     "Arr_segment_traits_2": {
       "models": {
         "AosBasicTraits_2": true
+      },
+      "classes": {
+        "Point_2": {
+          "methods": {
+            "__init__": [
+              {
+                "variables": {
+                  "x": "float",
+                  "y": "float"
+                }
+              },
+              {
+                "variables": {
+                  "x": "FT",
+                  "y": "FT"
+                }
+              },
+              {
+                "variables": {
+                  "x": "RT",
+                  "y": "RT"
+                }
+              }
+            ]
+          }
+        }
       }
     }
   }
