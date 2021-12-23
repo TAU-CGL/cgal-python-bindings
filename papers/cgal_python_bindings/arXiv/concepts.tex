@@ -162,17 +162,17 @@ by IDEs to interactively provide hints and suggestions to programmers
 and type check the code as it is being developed. Annotations can and
 should be placed near the code if possible. Observe that the Python
 interpreter ignores these annotations. Annotations can also be placed
-in external files (which have the extension \lstinline{pyi}), referred
-to as stubs, for cases where the code base is inaccessible, such as
-the case with bindings. Stub files contain the signatures of the
-annotated functions with the body of the functions discarded. They
+in external files (which have the extension \lstinline{.pyi}),
+referred to as stubs, for cases where the code base is inaccessible,
+such as the case with bindings. Stub files contain the signatures of
+the annotated functions with the body of the functions discarded. They
 also list the attributes of annotated types. In our case they contain
 the annotated interface of the \cgal{} bindings. Stub files have the
 same syntax as regular Python modules. There is one feature of the
 typing module that is different in stub files, namely, the
 \pyLstinline{@overload} decorator. This decorator allows describing
-functions that support multiple different combinations of argument
-types. Consider, for example, the overloaded free C++ functions
+functions that have different combinations of argument types.
+Consider, for example, the overloaded free C++ functions
 \cppLstinline{overlay()}; see Section~\ref{sec:code:overlay}. The
 annotation for the corresponding Python function
 \pyLstinline{overlay()} in the stub file is shown in
@@ -197,53 +197,50 @@ generates the bindings, we have introduced a tight coupling between
 concepts and Python type annotations; see
 Section~\ref{sec:code:concepts}. As opposed to the C++ binding code,
 we have introduced a framework for the automatic generation of the
-anotation stubs. The framework includes a Python script called
+annotation stubs. The framework includes a Python script called
 \bashLstinline{generate.py} that accepts as input static data files in
 json format that describe the concepts, their refinement relations,
 the exposed C++ classes, and their medeling relations with
-concepts. The scripts generates anotation stubs for the bindings of
+concepts. The script generates annotation stubs for the bindings of
 modules selected by the user. As mentioned in Section~\ref{sec:gen},
-\cmake{} is used to generate the native build environment successively
-used to build the libraries that comprise the bindings. We have
-augmented the scope of \cmake, and now \cmake is also used to generate
-the anotation stubs. Before we delve into the deatils of our anotation
-stub generation system, we continue with a short description of an
-unsuccessful attempt, which resembled the the C++ binding code. It
-reached a deadend because of limitations of Python. While using a code
-generation approach adds a level of complexity to our binding system,
-it achieves the goal, it is flexible, and it posses an additional
-advantage. Once the input data files for specific concepts and models
-are in place, they can be used for the automatic generation of the
-documentation for those models and concept; we certainly plan to
-persue this goal in the future.
+\cmake{} is used to generate the native build environment. We have
+augmented the scope of \cmake, and now \cmake{} is also used to
+generate the annotation stubs. Before we delve into the deatils of our
+annotation stub generation system, we describe in the following two
+paragraphs an unsuccessful attempt, which resembles the C++ binding
+code. It reached a deadend because of limitations of Python.
 
 Imagine that for each C++ concept we introduce a Python annotation
-class that annotates all the requirements of the concept. Every model
-annotation-class that annotates a certain type, say \cppLstinline{T},
-inherits from all the concept annotation-classes that correspond to
-the concepts that \cppLstinline{T} models. For example, the type
-annotation for the concept \cppLstinline{AosBasicTraits_2} contains
-the annotations for the default constructor and copy constructor of
-the type \cppLstinline{Point_2} defined by every model of the concept
-\cppLstinline{AosBasicTraits_2}; see
-Listing~\ref{lst:py:aosBasicTraits} for partial annotations.  Observe
-that these Python annotation classes only facilitate the annotation
-stubs; they do not exist in reality (thus the \pyLstinline{_} prefix
-in the name of the class \pyLstinline{_AosBasicTraits_2} in the
-listing). Assume that bindings are generated for the
+class that annotates all the requirements of the concept. The anotated
+Python classes do not exist; these annotation classes are introduced
+to facilitate the creation of the annotation classes of real Python
+classes. Every annotation-class that annotates a certain model type,
+say \cppLstinline{T}, inherits from all the annotation-classes that
+correspond to the concepts that \cppLstinline{T} models. For example,
+the type annotation for the concept \cppLstinline{AosBasicTraits_2}
+contains the annotations the nested type \cppLstinline{Point_2}, which
+in turn, contains annotations for the default constructor and copy
+constructor of the type \cppLstinline{Point_2} defined by every model
+of the concept \cppLstinline{AosBasicTraits_2}; see
+Listing~\ref{lst:py:aosBasicTraitsErr} for partial
+annotations. Observe that the anotaed Python class does not exist in
+reality, thus the \pyLstinline{_} prefix in the name of the annotation
+class \pyLstinline{_AosBasicTraits_2} in the listing. Assume that
+bindings are generated for the
 \cppLstinline{Arrangement_2<GeometryGtaits_2, Dcel>} type instantiated
-with a the geometry traits type that is an instance of the
-\cppLstinline{Arr_segment_traits_2} class template. This type models
+with a geometry traits type that is an instance of the
+\cppLstinline{Arr_segment_traits_2} class template.  This type models
 several concepts; see, e.g., Figure~\ref{fig:atc:central}. Partial
-Python type annotation for the type \pyLstinline{Arr_segment_traits_2}
-is shown in Listing~\ref{lst:py:aosSegmentTraits}.
+erroneous Python type annotation for the type
+\pyLstinline{Arr_segment_traits_2} is shown in
+Listing~\ref{lst:py:aosSegmentTraitsErr}.
 
 \begin{lstfloat}
   \begin{draft}
   \begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize,%
                      %backgroundcolor=\color{red!20},
-                     label={lst:py:aosBasicTraits},%
-                     caption={Imaginary partial type annotation for the attributes that correspond to the concept \cppLstinline{AosBasicTraits_2}.}]
+                     label={lst:py:aosBasicTraitsErr},%
+                     caption={Erroneous partial type annotation for the attributes that correspond to the concept \cppLstinline{AosBasicTraits_2}.}]
 class _AosBasicTraits_2():
   class Point_2():
     def __init__(): ...
@@ -262,8 +259,8 @@ class _AosBasicTraits_2():
   \begin{draft}
   \begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize,%
                      %backgroundcolor=\color{red!20},
-                     label={lst:py:aosSegmentTraits},%
-                     caption={Imaginary partial Python type annotation for the type \pyLstinline{Arr_segment_traits_2}.}]
+                     label={lst:py:aosSegmentTraitsErr},%
+                     caption={Erroneous partial Python type annotation for the type \pyLstinline{Arr_segment_traits_2}.}]
 class Arr_segment_traits_2(AosBasicTraits_2._AosBasicTraits_2,
                           AosXMonotoneTraits_2._AosXMonotoneTraits_2,
                           AosTraits_2._AosTraits_2,
@@ -278,20 +275,103 @@ class Arr_segment_traits_2(AosBasicTraits_2._AosBasicTraits_2,
 \end{lstfloat}
 
 Unfortunately, the code presented in
-Listing~\ref{lst:py:aosBasicTraits} and
-Listing~\ref{lst:py:aosSegmentTraits} does not work. Python and static
+Listing~\ref{lst:py:aosBasicTraitsErr} and
+Listing~\ref{lst:py:aosSegmentTraitsErr} does not work. Python and static
 type checkers for Python (e.g., mypy)\footnote{See, e.g.,
   \url{https://mypy.readthedocs.io/en/stable/}.} have made significant
 progress since Python was conceived. However, even with the
 introduction of the \pyLstinline{Typing} module, and in particular the
 \pyLstinline{Generic} class within,\footnote{See
   \url{https://docs.python.org/3/library/typing.html\#module-typing}.}
-there are still barriers that cannot be briged. The barrier that we
+there are still barriers that cannot be bridged. The barrier that we
 encountered is related to deep nesting. The culprit lies in Line~7 and
 Line~9 of Listing~\ref{lst:py:aosBasicTraits}. In Line~7, for example,
 the class \pyLstinline{Point_2} nested in the utility class
 \pyLstinline{_AosBasicTraits_2} is refered to from a method of the
 class \pyLstinline{Equal_2}, which is nested in
-\pyLstinline{_AosBasicTraits_2}. The bootom line is that an object of
-type \pyLstinline{Arr_segment_traits_2/Equal_2} was not annotated
-properly and our ambitious attempt failed flat.
+\pyLstinline{_AosBasicTraits_2}. An object of type
+\pyLstinline{Arr_segment_traits_2.Equal_2} was not recognized
+(probably because \pyLstinline{Arr_segment_traits_2.Equal_2} is not
+substituted by \pyLstinline{_AosBasicTraits_2.Equal_2} even though
+\pyLstinline{Arr_segment_traits_2} is derived from
+\pyLstinline{_AosBasicTraits_2}.) and our ambitious attempt failed
+flat.
+
+Assume that two users select the \iiDArrangementsPackage{} module for
+binding generation. In particular, one user chooses to generate
+bindings for the \cppLstinline{Arrangement_2<GeometryGtaits_2, Dcel>}
+type instantiated, where \cppLstinline{GeometryGtaits_2} is
+substituted with an instance of the
+\cppLstinline{Arr_segment_traits_2} class template and the other user
+chooses to generate bindings for the
+\cppLstinline{Arrangement_2<GeometryGtaits_2, Dcel>} type, where
+\cppLstinline{GeometryGtaits_2} is substituted with an instance of the
+\cppLstinline{Arr_Bezier_curve_traits_2} class template; see
+Listing~\ref{lst:py:aosSegmentTraits} and
+Listing~\ref{lst:py:aosBezierTraits} for the corresponding partial
+valid Python type annotations generated by our system. The input data
+files describe the concepts and the classes. More specifically, for
+each concept $C$, their exists a record that lists the requirements of
+the concept $C$ and the concepts the $C$ refines. For each type $T$,
+there exists a record that lists the concepts that $T$ models and the
+additional members and types nested in $T$ that are not covered by the
+concepts. Type annotations are, naturally, generated only for the
+types. An important feature of the system is the ability to merge
+methods of a class that appears both as a nested type of another class
+and as a type required by a concept. An example of such a scenario is
+the \cppLstinline{Point_2} type required by the concept
+\cppLstinline{Aosbasictraits_2} and nested in every geometry traits
+class, e.g., \cppLstinline{Arr_segment_traits_2} and
+\cppLstinline{Arr_Bezier_curve_2}.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize,%
+                     %backgroundcolor=\color{red!20},
+                     label={lst:py:aosSegmentTraits},%
+                     caption={Valid Python type annotation for the type \pyLstinline{Arr_segment_traits_2}.}]
+from typing import Iterator, overload
+class Arr_segment_traits_2():
+    class Point_2():
+        @overload
+        def __init__(self) -> None: ...
+        @overload
+        def __init__(self, p: Point_2) -> None: ...
+        @overload
+        def __init__(self, x: float, y: float) -> None: ...
+        def x(self) -> FT: ...
+        def y(self) -> FT: ...
+
+    class Equal_2():
+        def __call__(self, p: Point_2, Q: Point_2) -> Boolean: ...
+
+    def equal_2_object(self) -> Equal_2: ...
+  \end{lstlisting}
+\end{lstfloat}
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=pythonFramedStyle,basicstyle=\scriptsize,%
+                     %backgroundcolor=\color{red!20},
+                     label={lst:py:aosBezierTraits},%
+                     caption={Valid Python type annotation for the type \pyLstinline{Arr_segment_traits_2}.}]
+from typing import Iterator, overload
+class Arr_Bezier_curve_traits_2():
+    class Point_2():
+        @overload
+        def __init__(self) -> None: ...
+        @overload
+        def __init__(self, p: Point_2) -> None: ...
+        def approximate(self) -> list[float]: ...
+
+    class Equal_2():
+        def __call__(self, p: Point_2, Q: Point_2) -> Boolean: ...
+
+    def equal_2_object(self) -> Equal_2: ...
+  \end{lstlisting}
+\end{lstfloat}
+
+While using a code-generation approach adds a level of complexity to
+our binding system, it achieves the goal, it is flexible, and it
+posses an additional advantage. Once the input data files for specific
+concepts and models are in place, they can be used to automatically to
+generate the documentation for those models and concept; we certainly
+plan to persue this goal in the future.
