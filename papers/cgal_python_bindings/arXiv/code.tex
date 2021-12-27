@@ -686,20 +686,76 @@ void apply(const R* r, const B* b, O* o, F f) {
   \end{lstlisting}
 \end{lstfloat}
 
-%% (the extended arrangement data type) Those 10 functions are saved as
-%% class members and are then called in the respective 10 [overloaded]
-%% versions of \myLstinline{create_vertex}, \myLstinline{create_edge},
-%% \myLstinline{create_face object}) (the matching is done by the order
-%% of the passed functions and the order of the [overloaded] versions in
-%% the official concept reference).
+% -----------------------------------------------------------------------------
+\subsection{Miscelaneous}
+\label{sec:code:misc}
+% -----------------------------------------------------------------------------
+In this section we list additional techniques used by the binding code.
 
-%% This way the user can still define the way the result face/edge/vertex
-%% data will be calculated.
+% -----------------------------------------------------------------------------
+\subsubsection{Handle, iterators, and Circulators}
+\label{sec:code:misc:iters}
+% -----------------------------------------------------------------------------
+
+The \cppLstinline{Handle} concept describes types that are akin to
+pointers to objects. A handle provides the dereference operator
+(\cpp{operator*()}) and the member access operator
+(\cppLstinline{->()}). Since Python does not have any kind of
+pointers, both a handle to an object in \cgal{} and the object itself
+are converted to the same Python object. For example, both types
+\cppLstinline{Arrangement_2::Vertex} and
+\cppLstinline{Arrangement_2::Vertex_handle} are converted to the
+Python type \pyLstinline{Vertex}, which is an attribute of the Python
+type \pyLstinline{Arrangement_2}.
+
+The \cppLstinline{Iterator} concept and its refinements describe types
+that can be used to identify and traverse the elements of container
+that contains seqential data. An iterator provides the increment or
+decrement operators. In \cgal{} quite often an iterator is convertible
+to a handle, for example,
+\cppLstinline{Arrangement_2::Vertex_iterator} is convertible to
+\cppLstinline{Arrangement_2::Vertex_handle}. Therefore, also
+\cppLstinline{Arrangement_2::Vertex_iterator} is converted to the
+python class \pyLstinline{Vertex}. Every converted iterator is
+supplied with both magic functions \pyLstinline{__iter__} and
+\pyLstinline{__next__}, thus made a \emph{Python
+  iterator}.\footnote{See, e.g.,
+  \url{https://docs.python.org/3/c-api/iterator.html}.}  The
+\pyLstinline{__iter__} function simply returns the input object, and
+the \pyLstinline{__next__} function returns the next object in the
+traversal order of the corresponding iterator.
+
+Similar to the \cppLstinline{Iterator} concept and its refinements,
+the \cppLstinline{Circulator} concept and its refinements, defined in
+\cgal{}, describe types that can be used to identify and traverse the
+elements of container that contains circular data, for example, the
+halfedges incident to a face or the halfedges incident to a vertex in
+an arrangement.  A circulator object does not have a past-the-end
+value. Instead, the range $[a, b)$ of two circulators $a$ and $b$
+  denotes either the empty range, or the sequence of all elements in
+  the container. Boost.Python supports several features that aid in
+  the wrapping if iterators. Circulators are artificially converted to
+  iterators to leverage on those features. In addition, while
+  traversing a circulator, an stop-iteration exception is thrown when
+  a circular refers to an item that has been traversed already.
+
+% -----------------------------------------------------------------------------
+\subsection{Functions populating an output iterator}
+\label{sec:code:fnc-out}
+% -----------------------------------------------------------------------------
+Instead, a wrapper that expects a python list and populates it with
+the results is being exposed.
 
 \begin{mdframed}[hidealllines=true,backgroundcolor=red!20]
 % -----------------------------------------------------------------------------
-\subsection{kd Trees}
-\label{sec:code:kdtree}
+\subsection{Functions expecting begin and end iterators}
+\label{sec:code:fnc-range}
+% -----------------------------------------------------------------------------
+Instead, a wrapper that expects a python list as an argument and calls the function with the list's begin and end iterators is exposed.
+
+% -----------------------------------------------------------------------------
+\subsubsection{kd Trees}
+\label{sec:code:misc:kdtree}
 % -----------------------------------------------------------------------------
 The \kdtree{} dimension and the dimension of related classes is
 templated and can thus only be decided at compile time via the
@@ -724,31 +780,6 @@ class members and are used for the respective 5 operations [the
   optional are not included] of the concept.
 
 Making some things more pythonic:
-
-% -----------------------------------------------------------------------------
-\subsection{Iterators and Circulators}
-\label{sec:code:iters}
-% -----------------------------------------------------------------------------
-For binding iterators we used the \myLstinline{bind_iterator}
-templated function and its variations, in order to allow pythonic
-iteration. Circulators too are artificially converted to iterators
-supporting \myLstinline{__next__} and throwing a stop iteration when
-reaching the first item again, by being wrapped in a templated
-\myLstinline{Iterator_from_circulator} object which is the one being
-exposed to python.
-
-% -----------------------------------------------------------------------------
-\subsection{Functions populating an output iterator}
-\label{sec:code:fnc-out}
-% -----------------------------------------------------------------------------
-Instead, a wrapper that expects a python list and populates it with
-the results is being exposed.
-
-% -----------------------------------------------------------------------------
-\subsection{Functions expecting begin and end iterators}
-\label{sec:code:fnc-range}
-% -----------------------------------------------------------------------------
-Instead, a wrapper that expects a python list as an argument and calls the function with the list's begin and end iterators is exposed.
 
 %% (the extended arrangement data type) Those 10 functions are saved as
 %% class members and are then called in the respective 10 [overloaded]
