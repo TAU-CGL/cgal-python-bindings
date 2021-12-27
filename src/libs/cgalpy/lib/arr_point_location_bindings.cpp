@@ -35,12 +35,13 @@ typedef typename std::pair<Point_2, Pl_result>                  Pl_query_result;
 
 class Point_location_result_visitor : public boost::static_visitor<bp::object>
 {
-  // typename bp::reference_existing_object::apply::type converter;
 public:
   template<typename T>
     bp::object operator()(T& operand) const {
-      // bp::handle handle(converter())
-      return bp::object((*operand));
+      // reference existing object
+      typename bp::reference_existing_object::apply<T*>::type converter;
+      bp::handle<> handle(converter(&(*operand)));
+      return bp::object(handle);
   }
 };
 
