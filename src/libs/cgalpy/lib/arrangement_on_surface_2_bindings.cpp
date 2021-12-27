@@ -186,18 +186,20 @@ void decompose(Arrangement_2& arr, bp::list& lst) {
   }
 }
 
+class Zone_object_visitor : public boost::static_visitor<bp::object>
+{
+public:
+  template<typename T>
+    bp::object operator()(T& operand) const {
+      return bp::object(*operand);
+  }
+};
+
 void zone_default(Arrangement_2& arr, X_monotone_curve_2& c, bp::list& res) {
   auto v = std::vector<variant>();
   CGAL::zone(arr, c, std::back_inserter(v));
-  for (auto o : v) {
-    if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&o)) {
-      res.append(*(*(v)));
-    } else if (Halfedge_const_handle* h =
-        boost::get<Halfedge_const_handle>(&o)) {
-          res.append(*(*(h)));
-    } else if (Face_const_handle* f = boost::get<Face_const_handle>(&o)) {
-        res.append(*(*(f)));
-    }
+  for (auto& o : v) {
+    res.append(boost::apply_visitor(Zone_object_visitor(), o));
   }
 }
 
@@ -206,15 +208,8 @@ void zone(Arrangement_2& arr, X_monotone_curve_2& c, bp::list& res,
           PointLocation& pl) {
   auto v = std::vector<variant>();
   CGAL::zone(arr, c, std::back_inserter(v), pl);
-  for (auto o : v) {
-    if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&o)) {
-      res.append(*(*(v)));
-    } else if (Halfedge_const_handle* h =
-      boost::get<Halfedge_const_handle>(&o)) {
-      res.append(*(*(h)));
-    } else if (Face_const_handle* f = boost::get<Face_const_handle>(&o)) {
-      res.append(*(*(f)));
-    }
+  for (auto& o : v) {
+    res.append(boost::apply_visitor(Zone_object_visitor(), o));
   }
 }
 
