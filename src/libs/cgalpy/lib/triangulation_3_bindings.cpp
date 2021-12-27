@@ -169,12 +169,9 @@ void export_triangulation_3() {
 
   if (! add_attr<tri3::Point>("Point", tri3_scope))
     std::cerr << "'tri3::Point' not registered!\n";
-  if (! add_attr<tri3::Segment>("Segment", tri3_scope))
-    std::cerr << "'tri3::Segment' not registered!\n";
-  if (! add_attr<tri3::Triangle>("Triangle", tri3_scope))
-    std::cerr << "'tri3::Triangle' not registered!\n";
-  if (! add_attr<tri3::Tetrahedron>("Tetrahedron", tri3_scope))
-    std::cerr << "'tri3::Tetrahedron' not registered!\n";
+  add_attr<tri3::Segment>("Segment", tri3_scope);
+  add_attr<tri3::Triangle>("Triangle", tri3_scope);
+  add_attr<tri3::Tetrahedron>("Tetrahedron", tri3_scope);
 
   bp::class_<tri3::Vertex>("Vertex")
     .def(bp::init<>())
