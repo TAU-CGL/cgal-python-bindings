@@ -5,6 +5,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+
 #include <boost/python.hpp>
 
 #include <CGAL/intersections_d.h>
