@@ -48,52 +48,35 @@ void bind_do_intersect() {
   bind_do_intersect_1T<Circle_2>();
 }
 
-template<typename result, typename type>
-bool get_type(result& intersection, type& t)
+class Intersection_visitor : public boost::static_visitor<bp::object>
 {
-  if (!intersection) return false;
-  type* get;
-  bool res = (get = boost::get<type>(&*intersection));
-  if (res) t = get;
-  return res;
-}
+public:
+  template<typename T>
+    bp::object operator()(T& operand) const {
+      return bp::object(operand);
+  }
+
+  // Overload for vector
+  bp::object operator()(std::vector<Point_2>& operand) const {
+    bp::list lst;
+    for (Point_2 p : operand) lst.append(p);
+    return lst;
+  }
+};
 
 template <typename T1, typename T2>
 bp::object cgalpy_intersection(T1& t1, T2& t2) {
   auto result = CGAL::intersection<Kernel>(t1, t2);
-  // Return python object containing the correct result
-  Iso_rectangle_2* ir;
-  if (get_type(result, ir)) {
-    return bp::object(*ir);
+  if (!result) { // No intersection, return None
+    return bp::object();
   }
-  Line_2* l;
-  if (get_type(result, l)) {
-    return bp::object(*l);
-  }
-  Ray_2* r;
-  if (get_type(result, r)) {
-    return bp::object(*r);
-  }
-  Segment_2* s;
-  if (get_type(result, s)) {
-    return bp::object(*s);
-  }
-  Triangle_2* t;
-  if (get_type(result, t)) {
-    return bp::object(*t);
-  }
-  std::vector<Point_2>* v;
-  if (get_type(result, v)) {
-    bp::list lst;
-    for (Point_2 p : *v) lst.append(p);
-    return lst;
-  }
-  // None
-  return bp::object();
+  return boost::apply_visitor(Intersection_visitor(), *result);
 }
 
 template <typename T1, typename T2>
-void bind_intersection_2T(decltype(CGAL::intersection<Kernel>(T1(), T2()))) {
+// We check if CGAL::do_intersect exists for the two types as (currently)
+// do_intersect exists iff CGAL::intersection exists for the two types
+void bind_intersection_2T(decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
   bp::def("intersection", &cgalpy_intersection<T1, T2>);
 }
 
@@ -107,6 +90,7 @@ void bind_intersection_1T() {
   bind_intersection_2T<T, Ray_2>(true);
   bind_intersection_2T<T, Segment_2>(true);
   bind_intersection_2T<T, Triangle_2>(true);
+  bind_intersection_2T<T, Point_2>(true);
 }
 
 void bind_intersection() {
@@ -115,6 +99,7 @@ void bind_intersection() {
   bind_intersection_1T<Ray_2>();
   bind_intersection_1T<Segment_2>();
   bind_intersection_1T<Triangle_2>();
+  bind_intersection_1T<Point_2>();
 }
 
 void export_intersections_2() {
