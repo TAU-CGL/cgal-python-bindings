@@ -41,7 +41,7 @@ typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
 bp::object export_gps_circle_segment_traits() {
   auto traits = export_arr_circle_segment_traits();
 
-  typedef bso2::Traits_2       GT;
+  typedef bso2::Geometry_traits_2       GT;
   bp::scope traits_scope(traits);
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;

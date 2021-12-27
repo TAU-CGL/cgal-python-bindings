@@ -177,7 +177,7 @@ CGAL::Oriented_side oriented_side(General_polygon_set_2& ps, T& other)
 
 void export_general_polygon_set_2() {
   typedef bso2::General_polygon_set_2           Gps2;
-  typedef bso2::Traits_2                        Traits_2;
+  typedef bso2::Geometry_traits_2               GT;
   typedef bso2::General_polygon_2               Pgn;
   typedef bso2::General_polygon_with_holes_2    Pwh;
   typedef bso2::Arrangement_2                   Arrangement_2;
@@ -234,14 +234,16 @@ void export_general_polygon_set_2() {
     .def("do_intersect_polygons", &bso2::do_intersect_range<Pgn>)
     .def("do_intersect_polygons_with_holes", &bso2::do_intersect_range<Pwh>)
     .def("locate", &Gps2::locate)
-    .def("oriented_side", &bso2::oriented_side<Traits_2::Point_2>)
+    .def("oriented_side", &bso2::oriented_side<GT::Point_2>)
     .def("oriented_side", &bso2::oriented_side<Gps2>)
     .def("oriented_side", &bso2::oriented_side<Pgn>)
     .def("oriented_side", &bso2::oriented_side<Pwh>)
     ;
 
   // Types that have been registered already:
-  if (! add_attr<Traits_2>("Traits_2", ps2_scope))
+  if (! add_attr<GT>("Geometry_traits_2", ps2_scope))
+    std::cerr << "bso2::Geometry_traits_2 not registered!\n";
+  if (! add_attr<GT>("Traits_2", ps2_scope))
     std::cerr << "bso2::Traits_2 not registered!\n";
   if (! add_attr<Pgn>("Polygon_2", ps2_scope))
     std::cerr << "bso2::General_polygon_2 not registered!\n";
