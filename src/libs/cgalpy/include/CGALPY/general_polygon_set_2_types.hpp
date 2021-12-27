@@ -17,8 +17,9 @@
 namespace bso2 {
 
 typedef aos2::Dcel                                  Dcel;
-typedef aos2::Traits_2                              Traits_2;
-typedef CGAL::General_polygon_set_2<Traits_2, Dcel> General_polygon_set_2;
+typedef aos2::Geometry_traits_2                     Geometry_traits_2;
+typedef CGAL::General_polygon_set_2<Geometry_traits_2, Dcel>
+                                                    General_polygon_set_2;
 typedef General_polygon_set_2::Polygon_2            General_polygon_2;
 typedef General_polygon_set_2::Polygon_with_holes_2 General_polygon_with_holes_2;
 typedef General_polygon_set_2::Arrangement_2        Arrangement_2;
