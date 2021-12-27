@@ -1,0 +1,7 @@
+set(CMAKE_BUILD_TYPE "Debug"                 CACHE STRING "build type" FORCE)
+set(CGALPY_USE_SHARED_LIBS ON                CACHE BOOL "" FORCE)
+set(CGALPY_FIXED_LIBRARY_NAME OFF            CACHE BOOL "" FORCE)
+set(CGALPY_KERNEL_BINDINGS OFF               CACHE BOOL "Disable kernel" FORCE)
+set(CGALPY_KERNEL_D_BINDINGS ON              CACHE BOOL "Enable dD kernel" FORCE)
+set(CGALPY_KERNEL_D_NAME "epicd"             CACHE STRING "use EPICD kernel" FORCE)
+set(CGALPY_SPATIAL_SEARCHING_BINDINGS ON     CACHE BOOL "Enable SS" FORCE)
