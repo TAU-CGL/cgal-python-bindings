@@ -72,6 +72,8 @@ bp::object cgalpy_intersection(T1& t1, T2& t2) {
 }
 
 template <typename T1, typename T2>
+// We check if CGAL::do_intersect exists for the two types as (currently)
+// do_intersect exists iff CGAL::intersection exists for the two types
 void bind_intersection_2T(decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
   bp::def("intersection", &cgalpy_intersection<T1, T2>);
 }
