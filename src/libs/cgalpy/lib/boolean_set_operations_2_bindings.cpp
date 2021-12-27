@@ -6,7 +6,6 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-
 #define BOOST_BIND_GLOBAL_PLACEHOLDERS
 
 #include <vector>
