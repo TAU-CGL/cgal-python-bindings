@@ -125,7 +125,7 @@ CGAL::Oriented_side oriented_side(T0& p0, T1& p1)
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
 void connect_holes(General_polygon_with_holes_2& pwh, bp::list& lst) {
-  auto v = std::vector<Traits_2::Point_2>();
+  auto v = std::vector<Geometry_traits_2::Point_2>();
   CGAL::connect_holes(pwh, std::back_inserter(v));
   for (auto p : v) lst.append(p);
 }
