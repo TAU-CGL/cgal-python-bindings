@@ -261,7 +261,7 @@ void export_alpha_shape_3() {
 
 #endif
 
-  bp::class_<As3, boost::noncopyable>("As3")
+  bp::class_<As3, boost::noncopyable>("Alpha_shape_3")
     .def(bp::init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def(bp::init<bp::optional<double, as3::Mode>>())
