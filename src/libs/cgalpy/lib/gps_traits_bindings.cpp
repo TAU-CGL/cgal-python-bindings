@@ -40,7 +40,7 @@ bp::class_<aos2::Geometry_traits_2> export_arr_conic_traits();
 bp::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits();
 
 bp::object export_gps_traits() {
-  typedef bso2::Traits_2       GT;
+  typedef bso2::Geometry_traits_2       GT;
   // auto traits = bp::class_<GT>("Traits_2");
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
