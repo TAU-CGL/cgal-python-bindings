@@ -28,7 +28,7 @@ void export_Compare_y_at_x_left_2(C c, Classes& classes, CGAL::Tag_true) {
 
 //
 template <typename T, typename C, typename Classes>
-void export_Compare_at_x_left_2(C c, Classes& classes, CGAL::Tag_false) {}
+void export_Compare_y_at_x_left_2(C c, Classes& classes, CGAL::Tag_false) {}
 
 //! Export the basic traits function objects
 template <typename T, typename RVP, typename C, typename Concepts>
