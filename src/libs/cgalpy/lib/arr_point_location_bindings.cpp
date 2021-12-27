@@ -113,6 +113,7 @@ void export_point_location() {
     .def("locate", &Naive_pl::locate, bp::with_custodian_and_ward_postcall<0, 1>())
     ;
 
+  // TODO return python object matching the type (or None) - like in the zone function
   bp::class_<Pl_result>("Arr_point_location_result")
     .def("empty", &Pl_result::empty)
     .def("is_face", &is_type<Face_const_handle>)
