@@ -166,7 +166,7 @@ CGAL::Oriented_side oriented_side(Polygon_set_2& ps, T& other)
 
 void export_polygon_set_2() {
   typedef bso2::Polygon_set_2                   Ps2;
-  typedef bso2::Traits_2                        Traits_2;
+  typedef bso2::Geometry_traits_2               GT;
   typedef bso2::General_polygon_2               Pgn;
   typedef bso2::General_polygon_with_holes_2    Pwh;
   typedef bso2::Arrangement_2                   Arrangement_2;
@@ -236,7 +236,9 @@ void export_polygon_set_2() {
     ;
 
   // Types that have been registered already:
-  if (! add_attr<Traits_2>("Traits_2", ps2_scope))
+  if (! add_attr<GT>("Geometry_traits_2", ps2_scope))
+    std::cerr << "'bso2::Geometry_traits_2' not registered!\n";
+  if (! add_attr<GT>("Traits_2", ps2_scope))
     std::cerr << "'bso2::Traits_2' not registered!\n";
   if (! add_attr<Pgn>("Polygon_2", ps2_scope))
     std::cerr << "'bso2::General_polygon_2' not registered!\n";
