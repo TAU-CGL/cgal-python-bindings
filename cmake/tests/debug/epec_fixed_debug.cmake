@@ -1,0 +1,5 @@
+set(CMAKE_BUILD_TYPE "Debug"               CACHE STRING "build type" FORCE)
+set(CGALPY_USE_SHARED_LIBS ON              CACHE BOOL "use shared libs" FORCE)
+set(CGALPY_FIXED_LIBRARY_NAME ON           CACHE BOOL "use name CGALPY" FORCE)
+set(CGALPY_KERNEL_NAME "epec"              CACHE STRING "use EPEC kernel" FORCE)
+set(CGALPY_KERNEL_INTERSECTION_BINDINGS ON CACHE BOOL "with intersections" FORCE)
