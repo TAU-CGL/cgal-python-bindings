@@ -30,33 +30,37 @@ typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2> Landmarks_pl;
 typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
   Trapezoid_pl;
 
-//typedef typename CGAL::Arr_point_location_result<Arrangement_2>          Pl_result;
-
 typedef typename CGAL::Arr_point_location_result<Arrangement_2>::Type Pl_result;
 typedef typename std::pair<Point_2, Pl_result>                  Pl_query_result;
 
-//static void locate(Arrangement_2& arr, bp::list& lst, bp::list& res)
-//{
-//  auto v = std::vector<Point_2>(bp::stl_input_iterator< Point_2 >(lst),
-//                                bp::stl_input_iterator< Point_2 >());
-//  std::vector<Pl_query_result> temp;
-//  locate(arr, v.begin(), v.end(), std::back_inserter(temp));
-//  for (auto& p : temp) res.append(bp::make_tuple(p.first, p.second));
-//}
+class Point_location_result_visitor : public boost::static_visitor<bp::object>
+{
+  // typename bp::reference_existing_object::apply::type converter;
+public:
+  template<typename T>
+    bp::object operator()(T& operand) const {
+      // bp::handle handle(converter())
+      return bp::object((*operand));
+  }
+};
 
-template <typename type>
-bool is_type(Pl_result& pl_result) {
-  type* get;
-  bool res = (get = boost::get<type>(&pl_result));
-  return res;
+static void locate_batch(Arrangement_2& arr, bp::list& lst, bp::list& res)
+{
+  auto v = std::vector<Point_2>(bp::stl_input_iterator< Point_2 >(lst),
+                                bp::stl_input_iterator< Point_2 >());
+  std::vector<Pl_query_result> temp;
+  locate(arr, v.begin(), v.end(), std::back_inserter(temp));
+  for (auto& p : temp) {
+    const auto& result = boost::apply_visitor(Point_location_result_visitor(), p.second);
+    res.append(bp::make_tuple(p.first, result));
+  }
 }
 
-template <typename type>
-bool get_type(Pl_result& pl_result, typename type::value_type& t) {
-  type* get;
-  bool res = (get = boost::get<type>(&pl_result));
-  if (res) t = *(*get);
-  return res;
+
+template <typename PL>
+bp::object locate(PL& pl, Point_2& p) {
+  auto result = pl.locate(p);
+  return boost::apply_visitor(Point_location_result_visitor(), result);
 }
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
@@ -76,7 +80,7 @@ void export_point_location() {
     .def(bp::init<Arrangement_2&>()[bp::with_custodian_and_ward<1, 2>()])
     .def("attach", &Landmarks_pl_attach, bp::with_custodian_and_ward<1, 2>())
     .def("detach", &Landmarks_pl::detach)
-    .def("locate", &Landmarks_pl::locate, bp::with_custodian_and_ward_postcall<0,1>())
+    .def("locate", &locate<Landmarks_pl>, bp::with_custodian_and_ward_postcall<0,1>())
     ;
 #endif
   bp::class_<Trapezoid_pl, boost::noncopyable>("Arr_trapezoid_ric_point_location")
@@ -90,7 +94,7 @@ void export_point_location() {
     .def<Arrangement_2* (Trapezoid_pl::*)()>("arrangement",
                                              &Trapezoid_pl::arrangement,
                                              bp::return_value_policy<bp::reference_existing_object>())
-    .def("locate", &Trapezoid_pl::locate, bp::with_custodian_and_ward_postcall<0, 1>())
+    .def("locate", &locate<Trapezoid_pl>, bp::with_custodian_and_ward_postcall<0, 1>())
     .def("ray_shoot_up", &Trapezoid_pl::ray_shoot_up)
     .def("ray_shoot_down", &Trapezoid_pl::ray_shoot_down)
     ;
@@ -100,7 +104,7 @@ void export_point_location() {
     .def(bp::init<Arrangement_2&>()[bp::with_custodian_and_ward<1, 2>()])
     .def("attach", &Wal_pl::attach, bp::with_custodian_and_ward<1, 2>())
     .def("detach", &Wal_pl::detach)
-    .def("locate", &Wal_pl::locate, bp::with_custodian_and_ward_postcall<0, 1>())
+    .def("locate", &locate<Wal_pl>, bp::with_custodian_and_ward_postcall<0, 1>())
     .def("ray_shoot_up", &Wal_pl::ray_shoot_up)
     .def("ray_shoot_down", &Wal_pl::ray_shoot_down)
     ;
@@ -110,20 +114,8 @@ void export_point_location() {
     .def(bp::init<Arrangement_2&>()[bp::with_custodian_and_ward<1, 2>()])
     .def("attach", &Naive_pl::attach, bp::with_custodian_and_ward<1, 2>())
     .def("detach", &Naive_pl::detach)
-    .def("locate", &Naive_pl::locate, bp::with_custodian_and_ward_postcall<0, 1>())
+    .def("locate", &locate<Naive_pl>, bp::with_custodian_and_ward_postcall<0, 1>())
     ;
 
-  // TODO return python object matching the type (or None) - like in the zone function
-  bp::class_<Pl_result>("Arr_point_location_result")
-    .def("empty", &Pl_result::empty)
-    .def("is_face", &is_type<Face_const_handle>)
-    .def("is_halfedge", &is_type<Halfedge_const_handle>)
-    .def("is_vertex", &is_type<Vertex_const_handle>)
-    .def("get_face", &get_type<Face_const_handle>)
-    .def("get_halfedge", &get_type<Halfedge_const_handle>)
-    .def("get_vertex", &get_type<Vertex_const_handle>)
-    ;
-
-  // Need to tie the lifetime of the results with that of the arrangement
-  // def("locate", &locate);
+  def("locate", &locate_batch, bp::with_custodian_and_ward_postcall<0, 1>());
 }

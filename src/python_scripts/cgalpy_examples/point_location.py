@@ -37,17 +37,25 @@ naive_pl = Aos2.Arr_naive_point_location(arr)
 # Perform some point-location queries using the naive strategy.
 q1 = Point_2(1, 4)
 res = naive_pl.locate(q1)
-assert(type(res) == Aos2.Arr_point_location_result)
-assert(res.is_face())
+assert(type(res) == Aos2.Arrangement_2.Face)
 q2 = Point_2(50, 50)
 res = naive_pl.locate(q2)
-assert(res.is_vertex())
-if res.is_vertex():
-    v = Arrangement_2.Vertex()
-    res.get_vertex(v)
-    print(v.point())
+assert(type(res) == Aos2.Arrangement_2.Vertex)
+print(res.point())
 
 # Construct a different type of point location data structure
 landmarks_pl = Aos2.Arr_landmarks_point_location(arr)
 q1 = Point_2(1, 4)
 res = landmarks_pl.locate(q1)
+res.set_data("some data")
+print(res.data())
+for face in arr.faces():
+    print(face.data())
+
+# batch point location
+res = []
+batch_query = [Point_2(1, 4), Point_2(50, 50)]
+Aos2.locate(arr, batch_query, res)
+del arr # the lifetime of the array is tied to the lifetime of the results
+print(res)
+print(res[0][1].data(), res[1][1].point())
