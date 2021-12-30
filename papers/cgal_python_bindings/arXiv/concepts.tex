@@ -211,19 +211,20 @@ paragraphs an unsuccessful attempt, which resembles the C++ binding
 code. It reached a deadend because of limitations of Python.
 
 Imagine that for each C++ concept we introduce a Python annotation
-class that annotates all the requirements of the concept. The anotated
-Python classes do not exist; these annotation classes are introduced
-to facilitate the creation of the annotation classes of real Python
-classes. Every annotation-class that annotates a certain model type,
-say \cppLstinline{T}, inherits from all the annotation-classes that
-correspond to the concepts that \cppLstinline{T} models. For example,
-the type annotation for the concept \cppLstinline{AosBasicTraits_2}
-contains the annotations the nested type \cppLstinline{Point_2}, which
-in turn, contains annotations for the default constructor and copy
-constructor of the type \cppLstinline{Point_2} defined by every model
-of the concept \cppLstinline{AosBasicTraits_2}; see
+class that annotates all the requirements of the concept. The
+annotated Python classes do not exist; these annotation classes are
+introduced to facilitate the creation of the annotation classes of
+real Python classes. Every annotation-class that annotates a certain
+model type, say \cppLstinline{T}, inherits from all the
+annotation-classes that correspond to the concepts that
+\cppLstinline{T} models. For example, the type annotation for the
+concept \cppLstinline{AosBasicTraits_2} contains the annotations the
+nested type \cppLstinline{Point_2}, which in turn, contains
+annotations for the default constructor and copy constructor of the
+type \cppLstinline{Point_2} defined by every model of the concept
+\cppLstinline{AosBasicTraits_2}; see
 Listing~\ref{lst:py:aosBasicTraitsErr} for partial
-annotations. Observe that the anotaed Python class does not exist in
+annotations. Observe that the annotated Python class does not exist in
 reality, thus the \pyLstinline{_} prefix in the name of the annotation
 class \pyLstinline{_AosBasicTraits_2} in the listing. Assume that
 bindings are generated for the
@@ -372,6 +373,10 @@ class Arr_Bezier_curve_traits_2():
 While using a code-generation approach adds a level of complexity to
 our binding system, it achieves the goal, it is flexible, and it
 posses an additional advantage. Once the input data files for specific
-concepts and models are in place, they can be used to automatically to
+concepts and models are in place, they can be used to automatically
 generate the documentation for those models and concept; we certainly
-plan to persue this goal in the future.
+plan to persue this goal in the future. The use of the type-annotation
+subsystem, and in particular the \bashLstinline{generate.py} script or
+the script that generates the documentation that we intend to develop
+are not limited to \cgal{}---they can be used by any binding
+generation system that generates Python bindings for generic C++ code.
