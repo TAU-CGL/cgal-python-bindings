@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.5)
-set(BOOST_MIN_VERSION 1.68.0)
-set(PY_MIN_VERSION 3.5)
+set(CGALPY_BOOST_MIN_VERSION 1.68.0)
+set(CGALPY_PY_MIN_VERSION 3.5)
 # packages
 
 find_package(Python3 COMPONENTS Interpreter Development)
-find_package(PythonLibs ${PY_MIN_VERSION} REQUIRED)
+find_package(PythonLibs ${CGALPY_PY_MIN_VERSION} REQUIRED)
 # Set the Boost python library name (e.g., python35)
 set (CGALPY_BOOST_PYTHON_LIB_NAME python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR})
-find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS system thread ${CGALPY_BOOST_PYTHON_LIB_NAME})
+find_package(Boost ${CGALPY_BOOST_MIN_VERSION} REQUIRED COMPONENTS system thread ${CGALPY_BOOST_PYTHON_LIB_NAME})
 
 # Add source files
 # set(shared_vector_SRC_FILES ${shared_vector_SRC_FILES} lib/xxx.cpp)
