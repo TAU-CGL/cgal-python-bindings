@@ -445,8 +445,11 @@ A description of the two template parameters of this class template follows.
   a C++ type known at the time the bindings were
   implemented. Flexibility is nevertheless retained by substituting
   every one of these parameters with the generic Python object
-  \cppLstinline{bp::object} when the respective cell is extended. This
-  object provides a generalized interface to Python objects.
+  \cppLstinline{bp::object} when the respective cell is
+  extended.\footnote{For more information on Python objects, see,
+    e.g.,
+    \url{https://docs.python.org/3/library/functions.html?highlight=object\#object}.}
+  This object provides a generalized interface to Python objects.
   %
   If bindings for the \iiDRegularizedBooleanSetOperationsPackage{}
   package is enabled, the template parameters \cppLstinline{H} and

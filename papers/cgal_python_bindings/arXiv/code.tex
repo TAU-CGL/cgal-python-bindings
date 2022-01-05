@@ -696,41 +696,44 @@ In this section we list additional techniques used by the binding code.
 \subsubsection{Handle, iterators, and Circulators}
 \label{sec:code:misc:iters}
 % -----------------------------------------------------------------------------
-
-The \cppLstinline{Handle} concept describes types that are akin to
-pointers to objects. A handle provides the dereference operator
-(\cppLstinline{operator*()}) and the member access operator
-(\cppLstinline{->()}). Since Python does not have any kind of
-pointers, both a handle to an object in \cgal{} and the object itself
-are converted to the same Python object. For example, both types
-\cppLstinline{Arrangement_2::Vertex} and
+The \cppLstinline{Handle} concept, provided by the
+\HandlesandCirculatorsPackage{} package~\cite{cgal:dksy-hc-21},
+describes types that are akin to pointers to objects. A handle
+provides the dereference operator (\cppLstinline{operator*()}) and the
+member access operator (\cppLstinline{->()}). Since Python does not
+have any kind of pointers, both a handle to an object in \cgal{} and
+the object itself are converted to the same Python object. For
+example, both types \cppLstinline{Arrangement_2::Vertex} and
 \cppLstinline{Arrangement_2::Vertex_handle} are converted to the
 Python type \pyLstinline{Vertex}, which is an attribute of the Python
 type \pyLstinline{Arrangement_2}.
 
 The \cppLstinline{Iterator} concept and its refinements describe types
 that can be used to identify and traverse the elements of container
-that contains seqential data. An iterator provides the increment or
-decrement operators. In \cgal{} quite often an iterator is convertible
-to a handle, for example,
+that contains seqential data.\footnote{For more information about STL
+  iterators, see, e.g.,
+  \url{https://en.cppreference.com/w/cpp/iterator}.} An iterator
+provides the increment or decrement operators. In \cgal{} quite often
+an iterator is convertible to a handle, for example,
 \cppLstinline{Arrangement_2::Vertex_iterator} is convertible to
 \cppLstinline{Arrangement_2::Vertex_handle}. Therefore, also
 \cppLstinline{Arrangement_2::Vertex_iterator} is converted to the
 python class \pyLstinline{Vertex}. Every converted iterator is
 supplied with both magic functions \pyLstinline{__iter__} and
 \pyLstinline{__next__}, thus made a \emph{Python
-  iterator}.\footnote{See, e.g.,
-  \url{https://docs.python.org/3/c-api/iterator.html}.}  The
-\pyLstinline{__iter__} function simply returns the input object, and
-the \pyLstinline{__next__} function returns the next object in the
+  iterator}.\footnote{For more information about Python iterators,
+  See, e.g., \url{https://docs.python.org/3/c-api/iterator.html}.}
+The \pyLstinline{__iter__} function simply returns the input object,
+and the \pyLstinline{__next__} function returns the next object in the
 traversal order of the corresponding iterator.
 
 Similar to the \cppLstinline{Iterator} concept and its refinements,
-the \cppLstinline{Circulator} concept and its refinements, defined in
-\cgal{}, describe types that can be used to identify and traverse the
-elements of container that contains circular data, for example, the
-halfedges incident to a face or the halfedges incident to a vertex in
-an arrangement.  A circulator object does not have a past-the-end
+the \cppLstinline{Circulator} concept and its refinements, also
+provided by the \HandlesandCirculatorsPackage{} package, describe
+types that can be used to identify and traverse the elements of
+container that contains circular data, for example, the halfedges
+incident to a face or the halfedges incident to a vertex in an
+arrangement.  A circulator object does not have a past-the-end
 value. Instead, the range $[a, b)$ of two circulators $a$ and $b$
   denotes either the empty range, or the sequence of all elements in
   the container. Boost.Python supports several features that aid in
@@ -738,6 +741,95 @@ value. Instead, the range $[a, b)$ of two circulators $a$ and $b$
   iterators to leverage on those features. In addition, while
   traversing a circulator, an stop-iteration exception is thrown when
   a circular refers to an item that has been traversed already.
+
+% -----------------------------------------------------------------------------
+\subsection{Multi Element Input and Output}
+\label{sec:code:range}
+% -----------------------------------------------------------------------------
+The Standard Template Library (STL) provides various type-safe
+containers for storing collections of related objects. The
+\cppLstinline{Container} concept describe types of objects that store
+collections of other objects (their elements).\footnote{For more
+  information about STL containers, see, e.g.,
+  \url{https://en.cppreference.com/w/cpp/container}.} Container models
+are implemented as class templates, which enables great flexibility in
+the elements types and in the implemented algorithms that operate on
+container objects. Traditionally, implementations of algorithms in C++
+manipulate iterators pointing into the containers they operate on. To
+date it is popular to pass a collection of elements to a function via
+two generic input iterators, where the first points at the first
+element of a container and the second points past the end of the
+container. The Boost.Range library provides an alternative modern
+method, which uses \emph{ranges}, for applying algorithms on
+collections of objects. In particular, it utilizes a new family of
+concepts that refine a basic \cppLstinline{Range} concept. The
+\cppLstinline{Range} concept is similar to the
+\cppLstinline{Container} concept; it requires the provision of
+iterators for accessing a half-open range of elements and provides
+information about the number of elements in the range. The new method
+results in code that is more efficient and more expressive (and thus
+more comprehensible).\footnote{See
+  \url{https://www.boost.org/doc/libs/1_78_0/libs/range/doc/html/index.html}
+  for the documentation of Boost.Range.}  Soon, (C++20) ranges will
+become part of the standard.\footnote{For more information about STR
+  ranges, see, e.g., \url{https://en.cppreference.com/w/cpp/ranges}.}
+The \HandlesandCirculatorsPackage{} package of \cgal{} provides a
+variant of a \cppLstinline{Range} concept suitable for \cgal{}. Many
+functions in \cgal{} accept as input collections of elements, and some
+of them already use this concept alreay. The use of ranges is expected
+to grow. For every function in \cgal{} that operates on one or more
+collections of elements, and regardless of the interface of the
+function, that is, whether a pair of generic input iterators, or a
+range, is used to represent each collection, we introduce and expose a
+wrapper function that accepts a Python list \cppLstinline{bp::list} as
+an argument;\footnote{For more information on Python lists, see, e.g.,
+  \url{https://docs.python.org/3/tutorial/datastructures.html\#more-on-lists}.}
+the wrapper function calls the original function passing the input
+collection properly; see Listing~\ref{lst:insert} for an example of
+such a function that uses iterators; the wrapper function is shown in
+Listing~\ref{lst:insertWrapper}; an excerpt code in Python that
+exploits the above is shown in Listing~\ref{lst:insertPython}.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:insert},%
+                     caption={The signature of the global function that inserts a collections of curves into an arrangement.}]
+template <typename InputIterator>
+CGAL::insert(Arrangement_2& arr, InputIterator first, InputIterator past_the_end)
+  \end{lstlisting}
+\end{lstfloat}
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:insertWrapper},%
+                     caption={A function that wraps the function shown in Listing~\ref{lst:insert} and accepts a Python list that contains the input curves.}]
+void insert_curves(Arrangement_2& arr, bp::list& lst) {
+  if (! lst) return;
+  if (bp::extract<X_monotone_curve_2>(lst[0]).check()) {
+    auto begin = bp::stl_input_iterator< X_monotone_curve_2 >(lst);
+    auto end = bp::stl_input_iterator< X_monotone_curve_2 >();
+    CGAL::insert(arr, begin, end);
+  }
+  else if (bp::extract<Curve_2>(lst[0]).check()) {
+    auto begin = bp::stl_input_iterator< Curve_2 >(lst);
+    auto end = bp::stl_input_iterator< Curve_2 >();
+    CGAL::insert(arr, begin, end);
+  }
+}
+  \end{lstlisting}
+\end{lstfloat}
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=pythonFramedStyle,basicstyle=\normalsize,%
+                     label={lst:insertPython},%
+                     caption={An code sample in Python that inserts three curves into an arrangement.}]
+arr = Arrangement_2()
+c1 = X_monotone_curve_2(Point_2(0, 0), Point_2(1, 0))
+c2 = X_monotone_curve_2(Point_2(1, 0), Point_2(0, 1))
+c3 = X_monotone_curve_2(Point_2(0, 1), Point_2(1, 1))
+Aos2.insert(arr, [c1, c2, c3])
+  \end{lstlisting}
+\end{lstfloat}
 
 \begin{mdframed}[hidealllines=true,backgroundcolor=red!20]
 % -----------------------------------------------------------------------------
