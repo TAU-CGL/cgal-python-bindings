@@ -13,22 +13,24 @@
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 
 #include "CGALPY/add_class_object.hpp"
+#include "CGALPY/apply_iterator.hpp"
 
+//! Apply the make_x_monotone operator and append the resulting X-monotone
+// elements to the returned Python list.
 template <typename T>
-void export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
-                                            typename T::Curve_2& c,
-                                            bp::list& res) {
-  typedef typename T::X_monotone_curve_2 X_monotone_curve_2;
-  typedef typename T::Point_2 Point_2;
-  auto v = std::vector<boost::variant<Point_2, X_monotone_curve_2>>();
-  m(c, std::back_inserter(v));
-  for (auto o : v) {
-    if (Point_2* point = boost::get<Point_2>(&o)) {
-      res.append(*point);
-    } else if (X_monotone_curve_2* curve = boost::get<X_monotone_curve_2>(&o)) {
-      res.append(*curve);
-    }
-  }
+bp::list export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
+                                                typename T::Curve_2& c) {
+  typedef typename T::X_monotone_curve_2                X_monotone_curve_2;
+  typedef typename T::Point_2                           Point_2;
+  typedef boost::variant<Point_2, X_monotone_curve_2>   Result;
+  bp::list lst;
+  auto op =
+    [&] (const Result& o) {
+      if (auto* point = boost::get<Point_2>(&o)) lst.append(*point);
+      else if (auto* cv = boost::get<X_monotone_curve_2>(&o)) lst.append(*cv);
+    };
+  m(c, apply_iterator<decltype(op)>(op));
+  return lst;
 }
 
 template <typename T, typename RVP, typename C, typename Concepts>
