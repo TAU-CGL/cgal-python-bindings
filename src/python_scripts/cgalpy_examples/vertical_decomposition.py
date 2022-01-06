@@ -27,9 +27,7 @@ Aos2.insert(arr, [c1, c2, c3, c4])
 
 Aos2.insert_point(arr, Point_2(1, 1))
 
-d = []
-
-Aos2.decompose(arr, d)
+d = Aos2.decompose(arr)
 for pair in d:
     # CGALPY specific:
     # pair is a tuple

@@ -48,7 +48,6 @@ S.complement()               # Compute the complement.
 S.intersection(rect)        # Intersect with the clipping rectangle.
 
 # Print the result.
-res = []
 print("The result contains ", S.number_of_polygons_with_holes(), " components:")
-S.polygons_with_holes(res)
+res = S.polygons_with_holes()
 print(res)

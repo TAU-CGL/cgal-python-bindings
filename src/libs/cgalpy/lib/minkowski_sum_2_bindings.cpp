@@ -17,6 +17,7 @@
 #include "CGALPY/polygon_partitioning_types.hpp"
 #include "CGALPY/export_general_polygon_2.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
+#include "CGALPY/append_iterator.hpp"
 
 namespace bp = boost::python;
 
@@ -143,11 +144,10 @@ approximated_offset_2_pwh(const Polygon_with_holes_2& pwh,
                           const FT& r, double eps)
 { return CGAL::approximated_offset_2(pwh, r, eps); }
 
-void approximated_inset_2(const Polygon_2& p, const FT& r,
-                          double eps, bp::list& lst) {
-  auto v = std::vector<Circle_segment_polygon_2>();
-  CGAL::approximated_inset_2(p, r, eps, std::back_inserter(v));
-  for (auto p : v) lst.append(p);
+bp::list approximated_inset_2(const Polygon_2& p, const FT& r, double eps) {
+  bp::list lst;
+  CGAL::approximated_inset_2(p, r, eps, append_iterator(lst));
+  return lst;
 }
 
 }

@@ -19,6 +19,7 @@
 #include "CGALPY/boolean_set_operations_2_types.hpp"
 #include "CGALPY/export_general_polygon_2.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
+#include "CGALPY/append_iterator.hpp"
 
 namespace bp = boost::python;
 
@@ -49,10 +50,10 @@ bool do_intersect_range(bp::list& polygon_lst, bp::list& pwh_lst) {
 }
 
 template <typename T0, typename T1>
-void intersection_linear(T0& p0, T1& p1, bp::list& lst) {
-  auto v = std::vector<General_polygon_with_holes_2>();
-  CGAL::intersection(p0, p1, std::back_inserter(v));
-  for (auto p : v) lst.append(p);
+bp::list intersection_linear(T0& p0, T1& p1) {
+  bp::list lst;
+  CGAL::intersection(p0, p1, append_iterator(lst));
+  return lst;
 }
 
 template<typename T0, typename T1>

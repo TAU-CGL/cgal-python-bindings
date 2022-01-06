@@ -17,6 +17,7 @@
 
 #include "CGALPY/arr_point_location_config.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/apply_iterator.hpp"
 
 namespace bp = boost::python;
 typedef typename aos2::Arrangement_2 Arrangement_2;
@@ -33,30 +34,30 @@ typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
 typedef typename CGAL::Arr_point_location_result<Arrangement_2>::Type Pl_result;
 typedef typename std::pair<Point_2, Pl_result>                  Pl_query_result;
 
-class Point_location_result_visitor : public boost::static_visitor<bp::object>
-{
+class Point_location_result_visitor : public boost::static_visitor<bp::object> {
 public:
   template<typename T>
-    bp::object operator()(T& operand) const {
-      // reference existing object
-      typename bp::reference_existing_object::apply<T*>::type converter;
-      bp::handle<> handle(converter(&(*operand)));
-      return bp::object(handle);
+  bp::object operator()(T& operand) const {
+    // reference existing object
+    typename bp::reference_existing_object::apply<T*>::type converter;
+    bp::handle<> handle(converter(&(*operand)));
+    return bp::object(handle);
   }
 };
 
-static void locate_batch(Arrangement_2& arr, bp::list& lst, bp::list& res)
-{
+bp::list locate_batch(Arrangement_2& arr, const bp::list& lst) {
+  bp::list res;
   auto v = std::vector<Point_2>(bp::stl_input_iterator< Point_2 >(lst),
                                 bp::stl_input_iterator< Point_2 >());
-  std::vector<Pl_query_result> temp;
-  locate(arr, v.begin(), v.end(), std::back_inserter(temp));
-  for (auto& p : temp) {
-    const auto& result = boost::apply_visitor(Point_location_result_visitor(), p.second);
-    res.append(bp::make_tuple(p.first, result));
-  }
+  auto op =
+    [&] (const Pl_query_result& p) {
+      const auto& result =
+        boost::apply_visitor(Point_location_result_visitor(), p.second);
+      res.append(bp::make_tuple(p.first, result));
+    };
+  locate(arr, v.begin(), v.end(), apply_iterator<decltype(op)>(op));
+  return res;
 }
-
 
 template <typename PL>
 bp::object locate(PL& pl, Point_2& p) {
@@ -67,7 +68,7 @@ bp::object locate(PL& pl, Point_2& p) {
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-void Landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
+void landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
 { pl.attach(arr); }
 #endif
 
@@ -79,7 +80,7 @@ void export_point_location() {
   bp::class_<Landmarks_pl>("Arr_landmarks_point_location")
     .def(bp::init<>())
     .def(bp::init<Arrangement_2&>()[bp::with_custodian_and_ward<1, 2>()])
-    .def("attach", &Landmarks_pl_attach, bp::with_custodian_and_ward<1, 2>())
+    .def("attach", &landmarks_pl_attach, bp::with_custodian_and_ward<1, 2>())
     .def("detach", &Landmarks_pl::detach)
     .def("locate", &locate<Landmarks_pl>, bp::with_custodian_and_ward_postcall<0,1>())
     ;
@@ -118,5 +119,5 @@ void export_point_location() {
     .def("locate", &locate<Naive_pl>, bp::with_custodian_and_ward_postcall<0, 1>())
     ;
 
-  def("locate", &locate_batch, bp::with_custodian_and_ward_postcall<0, 1>());
+  bp::def("locate", &locate_batch, bp::with_custodian_and_ward_postcall<1, 0>());
 }
