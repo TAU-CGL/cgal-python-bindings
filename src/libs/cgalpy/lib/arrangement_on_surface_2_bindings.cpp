@@ -21,8 +21,9 @@
 
 #include "CGALPY/Python_functor.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include <CGALPY/Arr_overlay_traits.hpp>
-#include <CGALPY/Arr_overlay_function_traits.hpp>
+#include "CGALPY/Arr_overlay_traits.hpp"
+#include "CGALPY/Arr_overlay_function_traits.hpp"
+#include "CGALPY/apply_iterator.hpp"
 
 void export_vertex();
 void export_halfedge();
@@ -127,17 +128,17 @@ bool remove_vertex_free(Arrangement_2& arr, Vertex& v) {
 }
 
 template<typename T1, typename T2>
-void decompose_helper2(const Vertex& vertex, T1& below,
-                       T2& above, bp::list& lst) {
+void decompose_helper2(const Vertex& vertex, const T1& below,
+                       const T2& above, bp::list& lst) {
   bp::tuple inner = bp::make_tuple(below, above);
   bp::tuple outer = bp::make_tuple(vertex, inner);
   lst.append(outer);
 }
 
 template<typename T1>
-void decompose_helper1(const Vertex& vertex, T1& below,
-                       boost::optional<variant>& above, bp::list& lst) {
-  if (!above) {
+void decompose_helper1(const Vertex& vertex, const T1& below,
+                       const boost::optional<variant>& above, bp::list& lst) {
+  if (! above) {
     bp::object none;
     decompose_helper2<T1, bp::object>(vertex, below, none, lst);
     return;
@@ -154,9 +155,10 @@ void decompose_helper1(const Vertex& vertex, T1& below,
   }
 }
 
-void decompose_helper(const Vertex& vertex, boost::optional<variant>& below,
-                      boost::optional<variant>& above, bp::list& lst) {
-  if (!below) {
+void decompose_helper(const Vertex& vertex,
+                      const boost::optional<variant>& below,
+                      const boost::optional<variant>& above, bp::list& lst) {
+  if (! below) {
     bp::object none;
     decompose_helper1<bp::object>(vertex, none, above, lst);
     return;
@@ -173,21 +175,23 @@ void decompose_helper(const Vertex& vertex, boost::optional<variant>& below,
   }
 }
 
-void decompose(Arrangement_2& arr, bp::list& lst) {
-  auto v = std::vector<std::pair<Arrangement_2::Vertex_const_handle,
-                                 std::pair<boost::optional<variant>,
-                                   boost::optional<variant>>>>();
-  CGAL::decompose(arr, std::back_inserter(v));
-  for (auto o : v) {
-    const Vertex& vertex = *(o.first);
-    boost::optional<variant>& below = o.second.first;
-    boost::optional<variant>& above = o.second.second;
-    decompose_helper(vertex, below, above, lst);
-  }
+bp::list decompose(Arrangement_2& arr) {
+  typedef std::pair<Arrangement_2::Vertex_const_handle,
+                    std::pair<boost::optional<variant>,
+                              boost::optional<variant>>>        Result;
+  bp::list lst;
+  auto op =
+    [&] (const Result& o) {
+      const Vertex& vertex = *(o.first);
+      const boost::optional<variant>& below = o.second.first;
+      const boost::optional<variant>& above = o.second.second;
+      decompose_helper(vertex, below, above, lst);
+    };
+  CGAL::decompose(arr, apply_iterator<decltype(op)>(op));
+  return lst;
 }
 
-class Zone_object_visitor : public boost::static_visitor<bp::object>
-{
+class Zone_object_visitor : public boost::static_visitor<bp::object> {
 public:
   template<typename T>
     bp::object operator()(T& operand) const {
@@ -195,22 +199,25 @@ public:
   }
 };
 
-void zone_default(Arrangement_2& arr, X_monotone_curve_2& c, bp::list& res) {
-  auto v = std::vector<variant>();
-  CGAL::zone(arr, c, std::back_inserter(v));
-  for (auto& o : v) {
-    res.append(boost::apply_visitor(Zone_object_visitor(), o));
-  }
+bp::list zone_default(Arrangement_2& arr, X_monotone_curve_2& c) {
+  bp::list lst;
+  auto op =
+    [&] (const variant& o) {
+      lst.append(boost::apply_visitor(Zone_object_visitor(), o));
+    };
+  CGAL::zone(arr, c, apply_iterator<decltype(op)>(op));
+  return lst;
 }
 
 template <typename PointLocation>
-void zone(Arrangement_2& arr, X_monotone_curve_2& c, bp::list& res,
-          PointLocation& pl) {
-  auto v = std::vector<variant>();
-  CGAL::zone(arr, c, std::back_inserter(v), pl);
-  for (auto& o : v) {
-    res.append(boost::apply_visitor(Zone_object_visitor(), o));
-  }
+bp::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
+  bp::list lst;
+  auto op =
+    [&] (const variant& o) {
+      lst.append(boost::apply_visitor(Zone_object_visitor(), o));
+    };
+  CGAL::zone(arr, c, apply_iterator<decltype(op)>(op), pl);
+  return lst;
 }
 
 // Arrangement methods

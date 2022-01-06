@@ -37,10 +37,9 @@ with open(filename, 'r') as inp:
   P = read_polygon(inp)
 
   # Approximate the offset polygon.
-  inset_polygons = []
   tic = time.perf_counter()
   radius = Ker.FT(1)
-  MS2.approximated_inset_2(P, radius, 0.00001, inset_polygons)
+  inset_polygons = MS2.approximated_inset_2(P, radius, 0.00001)
   toc = time.perf_counter()
 
   print("The inset comprises", len(inset_polygons), " polygon(s).")

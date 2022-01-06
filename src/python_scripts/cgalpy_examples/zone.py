@@ -31,9 +31,8 @@ Aos2.insert(arr, Curve_2(Segment_2(p1, p2)))
 Aos2.insert(arr, Curve_2(Segment_2(p2, p3)))
 Aos2.insert(arr, Curve_2(Segment_2(p3, p0)))
 
-res = []
 c = Curve_2(Segment_2(Point_2(0.5, 0.5), Point_2(1.5, 0.5)))
-Aos2.zone(arr, c, res)
+res = Aos2.zone(arr, c)
 # res contains the objects of the arrangement that the curve intersects
 # in the order when going from left to right
 for obj in res:

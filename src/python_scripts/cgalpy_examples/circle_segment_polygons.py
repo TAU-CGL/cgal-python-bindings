@@ -27,8 +27,7 @@ def ctr_circle_polygon(circle):
     cv = curve(circle)	# circle orientation is counterclockwise
     traits = Traits()
     make_x_monotone = traits.make_x_monotone_2_object()
-    objects = []
-    make_x_monotone(cv, objects);
+    objects = make_x_monotone(cv);
     assert(len(objects) == 2)
 
     # Construct a polygon that comprises the two x-monotone arcs.
@@ -57,10 +56,8 @@ S.join(ctr_quad_polygon(Point(0, 1), Point(2, 1), Point(2, 5), Point(0, 5)));
 S.join(ctr_quad_polygon(Point(4, 1), Point(6, 1), Point(6, 5), Point(4, 5)));
 
 assert(S.number_of_polygons_with_holes() == 1)
-pwhs = []
-S.polygons_with_holes(pwhs)
+pwhs = S.polygons_with_holes()
 print(pwhs)
-
 arr = S.arrangement()
 print("# Cells: ", arr.number_of_vertices(), arr.number_of_edges(),
       arr.number_of_faces())

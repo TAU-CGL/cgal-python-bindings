@@ -53,9 +53,8 @@ for face in arr.faces():
     print(face.data())
 
 # batch point location
-res3 = []
 batch_query = [Point_2(1, 4), Point_2(50, 50)]
-Aos2.locate(arr, batch_query, res3)
+res3 = Aos2.locate(arr, batch_query)
 del arr # the lifetime of the array is tied to the lifetime of the results
 print(res3)
 print(res3[0][1].data(), res3[1][1].point())
