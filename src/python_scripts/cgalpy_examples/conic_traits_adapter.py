@@ -25,8 +25,7 @@ Point = Traits.Point_2
 def append_conic_arc(polygon, arc):
   traits = Traits()
   make_x_monotone = traits.make_x_monotone_2_object()
-  objects = []
-  make_x_monotone(arc, objects)
+  objects = make_x_monotone(arc)
   for obj in objects:
     # if (CGAL::assign (xarc, *it))
     polygon.push_back(obj)
@@ -53,7 +52,6 @@ append_conic_arc(Q, Curve(-1, -9, 0, 0, 0, 9))
 # Compute the intersection of the two polygons.
 print(type(P))
 
-res = []
-BSO2.intersection(P, Q, res)
+res = BSO2.intersection(P, Q)
 print("The intersection:")
 print(res)

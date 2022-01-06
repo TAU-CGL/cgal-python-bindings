@@ -22,6 +22,7 @@
 #include "CGALPY/spatial_searching_config.hpp"
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/General_distance_python.hpp"
+#include "CGALPY/append_iterator.hpp"
 
 namespace bp = boost::python;
 
@@ -48,14 +49,14 @@ template <typename T>
 static T* init_tree() { return new T(); }
 
 template <typename T>
-static T* init_tree_from_list(bp::list& lst) {
+static T* init_tree_from_list(const bp::list& lst) {
   auto begin = bp::stl_input_iterator<typename T::Point_d >(lst);
   auto end = bp::stl_input_iterator<typename T::Point_d >();
   return new T(begin, end);
 }
 
 template <typename T>
-void tree_insert(T& tree, bp::list& lst) {
+void tree_insert(T& tree, const bp::list& lst) {
   //copying into a vector because of an apparent bug with bp::stl_input_iterator
   auto begin = bp::stl_input_iterator<typename T::Point_d >(lst);
   auto end = bp::stl_input_iterator<typename T::Point_d >();
@@ -64,14 +65,18 @@ void tree_insert(T& tree, bp::list& lst) {
 }
 
 template <typename T, typename FQI>
-void tree_search(T& tree, FQI& q, bp::list& lst) {
-  auto v = std::vector<typename T::Point_d>();
-  tree.search(std::back_inserter(v), q);
-  for (auto p : v) lst.append(p);
+bp::list tree_search(T& tree, FQI& q) {
+  bp::list lst;
+  tree.search(append_iterator(lst), q);
+  return lst;
 }
 
 template<typename T>
-void points(T& tree, bp::list& lst) { for (auto p : tree) lst.append(p); }
+bp::list points(const T& tree) {
+  bp::list lst;
+  for (auto p : tree) lst.append(p);
+  return lst;
+}
 
 template <typename T>
 void bind_kd_tree(const char* python_name) {
@@ -93,9 +98,11 @@ void bind_kd_tree(const char* python_name) {
 }
 
 template <typename T>
-void k_neighbors(T& neighbor_search, bp::list& lst) {
+bp::list k_neighbors(T& neighbor_search) {
+  bp::list lst;
   for (auto it = neighbor_search.begin(); it != neighbor_search.end(); ++it)
     lst.append(bp::make_tuple(it->first, it->second));
+  return lst;
 }
 
 template <typename T>

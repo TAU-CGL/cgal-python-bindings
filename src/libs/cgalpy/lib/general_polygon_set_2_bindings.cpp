@@ -14,6 +14,7 @@
 
 #include "CGALPY/general_polygon_set_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/append_iterator.hpp"
 
 bp::object export_gps_segment_traits();
 bp::object export_gps_circle_segment_traits();
@@ -23,10 +24,10 @@ namespace bp = boost::python;
 
 namespace bso2 {
 
-void polygons_with_holes(General_polygon_set_2& ps, bp::list& lst) {
-  auto v = std::vector<General_polygon_with_holes_2>();
-  ps.polygons_with_holes(std::back_inserter(v));
-  for (auto pwh : v) lst.append(pwh);
+bp::list polygons_with_holes(General_polygon_set_2& ps) {
+  bp::list lst;
+  ps.polygons_with_holes(append_iterator(lst));
+  return lst;
 }
 
 void insert0(General_polygon_set_2& ps, General_polygon_2& pgn)

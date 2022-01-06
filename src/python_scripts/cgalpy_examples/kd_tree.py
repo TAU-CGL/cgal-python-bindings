@@ -30,8 +30,7 @@ points = [Point_d(2, [FT(n) for n in [4, 0]]),
           Point_d(2, [FT(n) for n in [-40, 0]]),
           Point_d(2, [FT(n) for n in [1, 0]])]
 tree = SS.Kd_tree(points)	# Insert the points into a k-d tree
-all_points = []
-tree.points(all_points)
+all_points = tree.points()
 for x in all_points:
     print(x)
 query = Point_d(2, [FT(n) for n in [0, 0]])
@@ -41,10 +40,9 @@ sort_neighbors = False  # set to True to obtain the neighbors sorted by distance
 distance = SS.Euclidean_distance()	# The distance metric to use
 
 # Populate <lst> with the k nearest neighbors to <query> based on the distance metric
-lst = []
 search = SS.K_neighbor_search(tree, query, k, eps, search_nearest,
                               distance, sort_neighbors)
-search.k_neighbors(lst)
+lst = search.k_neighbors()
 
 print("Found", len(lst), "neighbors")
 for pair in lst:
@@ -53,16 +51,14 @@ for pair in lst:
 
 # Search for points inside a sphere
 s = SS.Fuzzy_sphere(Point_d(2, [FT(0), FT(0)]), FT(5), FT(0))
-res = []
-tree.search(s, res)
+res = tree.search(s)
 print("Points within distance 5 from (0,0):")
 for p in res:
     print(p)
 
 # Search for points inside a box
 s = SS.Fuzzy_iso_box(Point_d(2, [FT(-1), FT(-1)]), Point_d(2, [FT(1), FT(1)]), FT(0))
-res = []
-tree.search(s, res)
+res = tree.search(s)
 print("Points with no coordinate exceeding absolute value of 1:")
 for p in res:
     print(p)

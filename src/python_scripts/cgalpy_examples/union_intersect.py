@@ -29,6 +29,5 @@ if res:
     print(unionR)
 else:
     print("P and Q are disjoint and their union is trivial.")
-intersectionR = []
-BSO2.intersection(P, Q, intersectionR)
+intersectionR = BSO2.intersection(P, Q)
 print(intersectionR)
