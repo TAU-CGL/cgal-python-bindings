@@ -592,7 +592,7 @@ Each one of the ten functions supported by the
 \cppLstinline{Arr_overlay_function_traits} model returns a Python
 object that is passed back to the compiled C++ code. Then, the object
 is stored with the new cell. Thus, there is no need to pass arguments
-by reference (even thought it could be more efficient in certain
+by reference (even though it could be more efficient in certain
 cases); however, the implementation of this model presents a new
 coding challenge---if a certain cell is not extended, attempting to
 access its non-existing extension would cause a compilation error.
@@ -781,7 +781,7 @@ become part of the standard.\footnote{For more information about STR
 The \HandlesandCirculatorsPackage{} package of \cgal{} provides a
 variant of a \cppLstinline{Range} concept suitable for \cgal{}. Many
 functions in \cgal{} accept as input collections of elements, and some
-of them already use this concept alreay. The use of ranges is expected
+of them already use this concept. The use of ranges is expected
 to grow. For every function in \cgal{} that operates on one or more
 collections of elements, and regardless of the interface of the
 function, that is, whether a pair of generic input iterators, or a
