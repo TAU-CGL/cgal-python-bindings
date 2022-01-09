@@ -38,10 +38,10 @@ with almost any C code from Python, based on C-like declarations that
 can often be copy-pasted from header files. It is compatible with both
 PyPy and CPython; Moreover, in the PyPy (see~\ref{ssec:intro:bind})
 reference implementation it is a first class citizen (and provided by
-defaut), thus, exhibts outstanding preformance. Compared
+defaut), thus, exhibits outstanding preformance. Compared
 to \pyLstinline{ctypes}, the \pyLstinline{cffi} module takes a more
 automated approach to generate Python bindings and it minimized the
-extra bits of API that needs to be mastered; thus, it scales better to
+extra bits of API that need to be mastered; thus, it scales better to
 larger projects than \pyLstinline{ctypes}. Like \pyLstinline{ctypes},
 using \pyLstinline{cffi} directly interfaced with C libraries
 only. Warapping C++ libraries with any one of these modules requires
@@ -63,7 +63,7 @@ extensions, intermediate languages, or the need for boiler-plate
 hand-written code. For design and performance, see~\cite{ld-hppcn-16},
 albeit that the \pyLstinline{cppyy} performance has been vastly
 improved since.  Like \pyLstinline{cffi}, \pyLstinline{cppyy} was
-designed to ease rge binding development on Python programmer,
+designed to ease binding development for the Python programmer,
 minimizing the need for extra C++ code; it is also compatible with
 both CPython and PyPy.
 
@@ -76,14 +76,14 @@ language is a superset of the Python language. It extends Python with
 explicit type declarations of native C/C++ types.  Cython is a
 compiled language used to generate CPython extension modules.  The
 Cython compiler generates C/C++ code from Cython code, which in turn
-compiles with any C/C++ compiler, and automatically wrapped in
+compiles with any C/C++ compiler, and is automatically wrapped in
 interface code, producing extension modules that can be loaded and
 used by regular Python code using the \pyLstinline{import} statement,
 but with significantly less computational overhead at run time. Cython
 also facilitates wrapping independent C or C++ code into
 python-importable modules.  With Cython it is possible to call back
 and forth between Python code, Cython code, and native library code
-origianally developed in Fortrant, C, or C++.
+origianally developed in Fortran, C, or C++.
 
 % SIP
 SIP is a collection of tools that makes it easy to create Python
@@ -153,7 +153,7 @@ existing C++
 code.\footnote{See \url{https://github.com/pybind/pybind11}.} Its
 goal, like the goal of Boost.Python, is to minimize boilerplate code
 in traditional extension modules by inferring type information using
-compile-time introspection. Its syntax is als similar to the syntax of
+compile-time introspection. Its syntax is also similar to the syntax of
 Boost.Python. In fact, it is a tiny self-contained version of
 Boost.Python with everything stripped away that isn't relevant for
 binding generation. Without comments, the core header files only
@@ -164,7 +164,7 @@ lambda functions and variadic templates). Since its creation, this
 library has grown beyond Boost.Python in several ways, leading to
 simpler binding code in many common situations.
 
-We have concentrated at three tools, namely (i) SWIG, (ii) PyBind11,
+We have concentrated on three tools, namely (i) SWIG, (ii) PyBind11,
 and (iii) Boost.Python and conducted several experiments to compare
 the performance of the respective generated bindings; see
 Section~\ref{ssec:comp:exp}.
@@ -198,7 +198,7 @@ amounts to replacing one library by another.
 %
 As we are very much familiar with developing code that exploits
 advanced feature of C++, developing bindings using these tools does
-not present a major hurdle for us. One the other hand, developing
+not present a major hurdle for us. On the other hand, developing
 bindings using SWIG, requires writing code that describe the bindings
 in a proprietary language.  Some developers may avoid using
 Boost.Python, because it requires dealing with a large and complex
