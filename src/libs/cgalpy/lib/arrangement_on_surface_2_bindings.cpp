@@ -155,9 +155,15 @@ void decompose_helper1(const Vertex& vertex, const T1& below,
   }
 }
 
-void decompose_helper(const Vertex& vertex,
-                      const boost::optional<variant>& below,
-                      const boost::optional<variant>& above, bp::list& lst) {
+typedef std::pair<Arrangement_2::Vertex_const_handle,
+                  std::pair<boost::optional<variant>,
+                            boost::optional<variant>>>        Decompose_result;
+
+void decompose_helper(const Decompose_result& res, bp::list& lst) {
+  const Vertex& vertex = *(res.first);
+  const boost::optional<variant>& below = res.second.first;
+  const boost::optional<variant>& above = res.second.second;
+
   if (! below) {
     bp::object none;
     decompose_helper1<bp::object>(vertex, none, above, lst);
@@ -176,17 +182,8 @@ void decompose_helper(const Vertex& vertex,
 }
 
 bp::list decompose(Arrangement_2& arr) {
-  typedef std::pair<Arrangement_2::Vertex_const_handle,
-                    std::pair<boost::optional<variant>,
-                              boost::optional<variant>>>        Result;
   bp::list lst;
-  auto op =
-    [&] (const Result& o) {
-      const Vertex& vertex = *(o.first);
-      const boost::optional<variant>& below = o.second.first;
-      const boost::optional<variant>& above = o.second.second;
-      decompose_helper(vertex, below, above, lst);
-    };
+  auto op = [&] (const Decompose_result& res) { decompose_helper(res, lst); };
   CGAL::decompose(arr, apply_iterator<decltype(op)>(op));
   return lst;
 }

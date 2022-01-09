@@ -52,6 +52,10 @@
 \usetikzlibrary{shadows,fadings,shadows.blur}
 \usepackage{tikz-3dplot}
 \tikzset{
+  dots/.style args={#1per #2}{%
+    line cap=round,
+    dash pattern=on 0 off #2/#1
+  },
   invisible/.style={opacity=0},
   only/.code args={<#1>#2}{\only<#1>{\pgfkeysalso{#2}}},
   alt/.code args={<#1>#2#3}{\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}},

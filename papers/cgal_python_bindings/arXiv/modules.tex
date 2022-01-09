@@ -1750,6 +1750,14 @@ The code excerpt in the \cmake{} language shown in
 Listing~\ref{lst:cmake:ss}, sets the \cmake{} flags for our last
 example shown in Listing~\ref{lst:py:ss}. The example constructs a
 \kdtree{} of 2D points and applies various queries on the tree.
+Observe that the \kdtree{} dimension (and the dimension of related
+data structures) is set via the \cmake{} flag
+\myLstinline{CGALPY_SPATIAL_SEARCHING_DIMENSION} during compile time.
+The code in the listings assumes that the dimension is~2. In order to
+assert the dimension the bindings were compiled with (see Line~10 in
+the listing), we have introduced and exposed a free function called
+\myLstinline{get_spatial_searching_dimension()} that returns the
+dimension as an \pyLstinline{int}.
 
 \begin{lstfloat}
   \lstinputlisting[style=cmakeFramedStyle,basicstyle=\normalsize,
