@@ -398,9 +398,9 @@ A description of the two template parameters of this class template follows.
   the \cppLstinline{General_polygon_set_2<>} class template (see
   Section~\ref{ssec:modules:bso2}) employs a 2D arrangement
   type. Bindings for instances of
-  \cppLstinline{General_polygon_set_2<>} is enabled as part of the
+  \cppLstinline{General_polygon_set_2<>} are enabled as part of the
   bindings for the \iiDRegularizedBooleanSetOperationsPackage{}
-  package. When bindings for this package is enabled, the traits
+  package. When bindings for this package are enabled, the traits
   parameter must be substituted with a traits class that also models
   the \cppLstinline{GeneralPolygonSetTraits_2} concept; see
   Figure~\ref{fig:bso2}. The appropriate final traits type is
@@ -636,10 +636,10 @@ Euclidean space~\cite{cgal:fwzh-rbso2-21a}. The
 with \cmake{} flags (besides the flag
 \cmakeLstinline{BOOLEAN_SET_OPERATIONS_2_BINDINGS}, which indicates
 whether to generate bindings for this module). The Boolean set
-operations supported by this package depends on the
+operations supported by this package depend on the
 \iiDArrangementsPackage{} package. If the operations are applied on
 (linear) polygons they also depend on the \iiDPolygonsPackage{}
-package. Recall, that both further depends on the
+package. Recall, that both further depend on the
 \iiDandiiiDGeometryKernelPackage{} package. Therefore, bindings for
 these packages must be enabled as well when bindings for the
 \iiDRegularizedBooleanSetOperationsPackage{} package are enabled.
@@ -762,7 +762,7 @@ complement of a polygon~\cite{cgal:w-rms2-21a}. The
 flags (besides the flag \cmakeLstinline{MINKOWSKI_SUM_2_BINDINGS},
 which indicates whether to generate bindings for this module). As with
 the \iiDRegularizedBooleanSetOperationsPackage{} package, the
-operations supported by this package depends on the
+operations supported by this package depend on the
 \iiDandiiiDGeometryKernelPackage{}, \iiDArrangementsPackage{}, and
 \iiDPolygonsPackage{} packages. Generating bindings for the
 \iiDMinkowskiSumsPackage{} module does not require thought enabling
@@ -800,7 +800,7 @@ substituted either with \cppLstinline{Polygon_2} or with
 Thus, given a specific kernel and container types, we get eight
 overloaded instances that apply the \emph{reduced-convolution}
 approach in total. (The Container type determines the representation
-of the polygon extreme points in memory.)
+of the polygon's extreme points in memory.)
 
 \begin{lstfloat}
   \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,
@@ -826,8 +826,8 @@ a single decomposition strategy that should be applied to both
 summands and another one that is parameterized with two types that
 represents two decomposition strategies that should be applied to the
 two summands, respectively. The package provides four types of
-decomposition strategies; however, only two can be applied to polygon
-width holes. Listing~\ref{lst:minkSumConvexDecomposition} shows the
+decomposition strategies; however, only two can be applied to a polygon
+with holes. Listing~\ref{lst:minkSumConvexDecomposition} shows the
 signatures of the two function templates that do not accept a traits
 parameter.
 
@@ -1050,7 +1050,7 @@ Observe that when a Delaunay triangulation instance is used to define
 an alpha shape type (see Section~\ref{ssec:modules:as2}), the traits
 parameter must be substituted with a traits class that models the
 \cppLstinline{AlphaShapeTraits_2} concept. Similarly, when a regular
-triangulation instance is used to define an fixed alpha shape type
+triangulation instance is used to define a fixed alpha shape type
 (see Section~\ref{ssec:modules:as2}), the traits parameter must be
 substituted with a traits class that models the
 \cppLstinline{WeightedAlphaShapeTraits_2} concept. Also in these
@@ -1144,10 +1144,10 @@ type is selected accordingly as follows.
 
 %% 2D Triangulation Vertex Selection
 The type \cppLstinline{Vb} is defined as the vertex base type.  If
-bindings is generated for a periodic triangulation, the type
+bindings are generated for a periodic triangulation, the type
 \cppLstinline{Vb} is defined as
 \cppLstinline{Periodic_2_triangulation_vertex_base_2<Traits>};
-otherwise, if bindings is generated for an instance of
+otherwise, if bindings are generated for an instance of
 \cppLstinline{Regular_triangulation_vertex_base_2<Kernel>}, the
 type \cppLstinline{Vb} is defined as
 \cppLstinline{Regular_ triangulation_vertex_base_2<Traits>};
@@ -1477,13 +1477,13 @@ there is no special requirements on the type that substitutes the
 the final vertex type is selected in details.
 
 %% 3D Triangulation Vertex Selection
-If bindings is generated for a periodic triangulation, the type
+If bindings are generated for a periodic triangulation, the type
 \cppLstinline{Vbp} is defined as
 \cppLstinline{Periodic_3_triangulation_ds_ vertex_base_2<>};
 otherwise, \cppLstinline{Vbp} is defined as
 \cppLstinline{Triangulation_ds_vertex_base_3<>}.
 %
-If bindings is generated for an instance of either
+If bindings are generated for an instance of either
 \cppLstinline{Regular_triangulation_vertex_base_3<Kernel>} or
 \cppLstinline{Periodic_3_Regular_ triangulation_vertex_base_3<Kernel>},
 the type \cppLstinline{Vb} is defined as

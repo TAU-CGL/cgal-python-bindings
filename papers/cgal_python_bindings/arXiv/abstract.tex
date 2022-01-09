@@ -12,10 +12,7 @@ hardware, and meticulous handling of all degenerate cases, which
 typically are in abundance. The code of \cgal{} extensively uses
 function and class templates in order to handle these difficulties,
 which implies that the programmer has to make many choices that are
-resolved during compile time (of the C++ modules). For example, the
-programmer needs to choose among a dozen types of curves (e.g., line
-segments, circular arcs, geodesic arcs on a sphere, or polycurves of
-any curve type) to yield a desired arrangement type. While bindings
+resolved during compile time (of the C++ modules). While bindings
 take effect at run time (of the Python code), the type of the C++
 objects that are bound, must be known when the bindings are generated,
 that is, when they are compiled. The types of the bound objects are
