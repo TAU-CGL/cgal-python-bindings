@@ -16,15 +16,16 @@
 #include "CGALPY/polygon_set_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/append_iterator.hpp"
 
 namespace bp = boost::python;
 
 namespace bso2 {
 
-void polygons_with_holes(Polygon_set_2& ps, bp::list& lst) {
-  auto v = std::vector<General_polygon_with_holes_2>();
-  ps.polygons_with_holes(std::back_inserter(v));
-  for (auto pwh : v) lst.append(pwh);
+bp::list polygons_with_holes(Polygon_set_2& ps) {
+  bp::list lst;
+  ps.polygons_with_holes(append_iterator(lst));
+  return lst;
 }
 
 void insert0(Polygon_set_2& ps, General_polygon_2& pgn) { ps.insert(pgn); }
