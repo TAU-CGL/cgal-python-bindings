@@ -51,7 +51,7 @@ based on the kernel being exposed.
 %% All functions and classes related to some package were exposed inside
 %% a \myLstinline{export_[package]()} function. All such calls are
 %% happening in \myLstinline{export_module.cpp}. We wrap each call with a
-%% local (c++) scope and call the \myLstinline{SET_SCOPE(module_name)}
+%% local (C++) scope and call the \myLstinline{SET_SCOPE(module_name)}
 %% macro, which causes every exposed function/class inside this local
 %% scope to be exposed inside the \myLstinline{module_name} submodule of
 %% the CGALPY module. This prevents name clashes of classes with the same
@@ -743,12 +743,12 @@ value. Instead, the range $[a, b)$ of two circulators $a$ and $b$
   a circular refers to an item that has been traversed already.
 
 % -----------------------------------------------------------------------------
-\subsection{Multi Element Input and Output}
-\label{sec:code:range}
+\subsection{Function Accespting Collections of Elements}
+\label{sec:code:input}
 % -----------------------------------------------------------------------------
 The Standard Template Library (STL) provides various type-safe
 containers for storing collections of related objects. The
-\cppLstinline{Container} concept describe types of objects that store
+\cppLstinline{Container} concept describes types of objects that store
 collections of other objects (their elements).\footnote{For more
   information about STL containers, see, e.g.,
   \url{https://en.cppreference.com/w/cpp/container}.} Container models
@@ -759,16 +759,21 @@ manipulate iterators pointing into the containers they operate on. To
 date it is popular to pass a collection of elements to a function via
 two generic input iterators, where the first points at the first
 element of a container and the second points past the end of the
-container. The Boost.Range library provides an alternative modern
-method, which uses \emph{ranges}, for applying algorithms on
-collections of objects. In particular, it utilizes a new family of
-concepts that refine a basic \cppLstinline{Range} concept. The
-\cppLstinline{Range} concept is similar to the
-\cppLstinline{Container} concept; it requires the provision of
-iterators for accessing a half-open range of elements and provides
-information about the number of elements in the range. The new method
-results in code that is more efficient and more expressive (and thus
-more comprehensible).\footnote{See
+container. An input iterator object, the type of
+which is a model of the the \cppLstinline{InputIterator} concept,
+\footnote{For more information of output iterators, see, e.g.,
+  \url{https://en.cppreference.com/w/cpp/iterator/input_iterator}.}
+supports reading from the location obtained via the dereference
+operator and can be pre- and post incremented.  The Boost.Range
+library provides an alternative modern method, which uses
+\emph{ranges}, for applying algorithms on collections of objects. In
+particular, it utilizes a new family of concepts that refine a basic
+concept called \cppLstinline{Range}. The \cppLstinline{Range} concept
+is similar to the \cppLstinline{Container} concept; it requires the
+provision of iterators for accessing a half-open range of elements and
+provides information about the number of elements in the range. The
+new method results in code that is more efficient and more expressive
+(and thus more comprehensible).\footnote{See
   \url{https://www.boost.org/doc/libs/1_78_0/libs/range/doc/html/index.html}
   for the documentation of Boost.Range.}  Soon, (C++20) ranges will
 become part of the standard.\footnote{For more information about STR
@@ -781,19 +786,20 @@ to grow. For every function in \cgal{} that operates on one or more
 collections of elements, and regardless of the interface of the
 function, that is, whether a pair of generic input iterators, or a
 range, is used to represent each collection, we introduce and expose a
-wrapper function that accepts a Python list \cppLstinline{bp::list} as
-an argument;\footnote{For more information on Python lists, see, e.g.,
+wrapper function that accepts a Python list (of type
+\cppLstinline{bp::list}) as an argument;\footnote{For more information
+  on Python lists, see, e.g.,
   \url{https://docs.python.org/3/tutorial/datastructures.html\#more-on-lists}.}
-the wrapper function calls the original function passing the input
-collection properly; see Listing~\ref{lst:insert} for an example of
-such a function that uses iterators; the wrapper function is shown in
+the wrapper function calls the original function, properly passing the
+input collection; see Listing~\ref{lst:insert} for an example of such
+a function that uses iterators; the wrapper function is shown in
 Listing~\ref{lst:insertWrapper}; an excerpt code in Python that
 exploits the above is shown in Listing~\ref{lst:insertPython}.
 
 \begin{lstfloat}
   \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
                      label={lst:insert},%
-                     caption={The signature of the global function that inserts a collections of curves into an arrangement.}]
+                     caption={The signature of the free function that inserts a collections of curves into an arrangement.}]
 template <typename InputIterator>
 CGAL::insert(Arrangement_2& arr, InputIterator first, InputIterator past_the_end)
   \end{lstlisting}
@@ -822,7 +828,7 @@ void insert_curves(Arrangement_2& arr, bp::list& lst) {
 \begin{lstfloat}
   \begin{lstlisting}[style=pythonFramedStyle,basicstyle=\normalsize,%
                      label={lst:insertPython},%
-                     caption={An code sample in Python that inserts three curves into an arrangement.}]
+                     caption={A code sample in Python that inserts three curves into an arrangement.}]
 arr = Arrangement_2()
 c1 = X_monotone_curve_2(Point_2(0, 0), Point_2(1, 0))
 c2 = X_monotone_curve_2(Point_2(1, 0), Point_2(0, 1))
@@ -831,41 +837,233 @@ Aos2.insert(arr, [c1, c2, c3])
   \end{lstlisting}
 \end{lstfloat}
 
-\begin{mdframed}[hidealllines=true,backgroundcolor=red!20]
 % -----------------------------------------------------------------------------
-\subsection{Functions populating an output iterator}
-\label{sec:code:fnc-out}
+\subsection{Function Resulting in Collections of Elements}
+\label{sec:code:output}
 % -----------------------------------------------------------------------------
-Instead, a wrapper that expects a python list and populates it with
-the results is being exposed.
+Functions may compute collections of elements as results. Using output
+iterators enables an efficient and flexible method for passing output
+collections from functions. An output iterator object, the type of
+which is a model of the the \cppLstinline{OutputIterator}
+concept,\footnote{For more information of output iterators, see, e.g.,
+  \url{https://en.cppreference.com/w/cpp/iterator/output_iterator}.}
+supports writing to the location obtained by the dereference operator
+and can be pre- and post-incremented. A function that computes a
+collection of elements accepts an output iterator as an argument and
+popultes the underlying collection. Moderns C++ compilers support the
+efficient transfer of resources from one object of a certain type to
+another object of the same type, reffered to as \emph{move
+  semantics}.\footnote{For more information of move semantics, see,
+  e.g.,
+  \url{https://en.cppreference.com/w/cpp/language/move_constructor}.}
+If the underlying collection supports move semantics, a function that
+computes a collection of elements can simply return the collection,
+resulting in an elegant yet efficient code. For every function in
+\cgal{} that results in a collection of elements, and regardless of
+the interface of the function, that is, whether an output iterator is
+used or the collection is returned, we introduce and expose a wrapper
+function that returns a Python list (of type \cppLstinline{bp::list});
+the wrapper function calls the original function, properly populating
+a Python list with the output collection, and finally it returns the
+list.
 
-% -----------------------------------------------------------------------------
-\subsubsection{kd Trees}
-\label{sec:code:misc:kdtree}
-% -----------------------------------------------------------------------------
-The \kdtree{} dimension and the dimension of related classes is
-templated and can thus only be decided at compile time via the
-\cmake{} variable \myLstinline{CGALPY_SPATIAL_SEARCHING_DIMENSION}.
+The free function template \cppLstinline{CGAL::decompose()} accepts an
+arrangement $\mathcal{A}$ and computes a collection of polymorphic
+elements via an output iterator. For each vertex $v$ of $\mathcal{A}$
+the output collection contains a pair of features---one that directly
+lies below $v$ and another that directly lies above $v$. Let $v$ be a
+vertex of $\mathcal{A}$. The feature above (respectively below) $v$
+may be one of the following:
+\begin{compactitem}
+\item Another vertex $u$ having the same $x$-coordinate as $v$.
+\item An arrangement edge associated with an $x$-monotone curve that
+  contains $v$ in its $x$-range.
+\item An unbounded face in case $v$ is incident to an unbounded face,
+  and there is no curve lying above (respectively below) it.
+\item An empty object, in case $v$ is the lower (respectively upper)
+  endpoint of a vertical edge in the arrangement.
+\end{compactitem}
+Listing~\ref{lst:decompose} shows the signature of the
+function. Dereferencing the output iterator must yield an object the
+type of which is \cppLstinline{Decompose_result} shown in
+Listing~\ref{lst:decomposeResult}.
 
-In order to assert the dimension the bindings were compiled with, a
-free function \myLstinline{get_spatial_searching_dimension()} was
-exposed that returns the dimension as an \myLstinline{int}.
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:decompose},%
+                     caption={The signature of the free function that decomposes an arrangement into pseudo trapezoids.}]
+template <typename OutputIterator>
+CGAL::decompose(Arrangement_2& arr, OutputIterator oi);
+  \end{lstlisting}
+\end{lstfloat}
 
-% -----------------------------------------------------------------------------
-\subsection{\myLstinline{Python_distance}}
-\label{sec:code:distance}
-% -----------------------------------------------------------------------------
-Similarly to overlay traits, a user may want to define a custom
-distance class to use with search queries. Here too, as defining a new
-C++ class is not possible from python, we provide a similar solution:
-A \myLstinline{Python_distance} class is exposed, which is a model of
-\myLstinline{GeneralDistance}
-concept. \url{https://doc.cgal.org/5.2/Spatial_searching/classGeneralDistance.html}
-It expects 5 functions in its constructor, and those are saved as
-class members and are used for the respective 5 operations [the
-  optional are not included] of the concept.
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:decomposeResult},%
+                     caption={The type of an output element of the
+                       \cppLstinline{CGAL::decompose()} function shown in
+                       Listing~\ref{lst:decompose}.}]
+typedef std::pair<Arrangement_2::Vertex_const_handle,
+                  std::pair<boost::optional<variant>,
+                            boost::optional<variant>>>        Decompose_result;
+  \end{lstlisting}
+\end{lstfloat}
 
-Making some things more pythonic:
+Populating a standard container, say \cppLstinline{container}, the
+elements of which are of the \cppLstinline{Decompose_result}
+polymorphic type, with the data computed by
+\cppLstinline{CGAL::decompose()} function in C++, can be done, for
+example, by passing an object of type
+\cppLstinline{std::back_insert_iterator<Decompose_result>} obtained by
+the call \cppLstinline{std::back_inserter(container)}, as the output
+iterator argument to the function. We introduce a similar iterator
+called \cppLstinline{apply_iterator} shown in
+Listing~\ref{lst:applyIterator} that can be used to efficiently
+populate a Python list instead of a container. The constructor of this
+function object accepts a generic unary function and stores it for
+later use. It applies the operator on every element that needs to be
+appended to the outout Python list. Each element of the list is a
+Python tuple of two items, the first is a vertex and the second is
+another Python tuple of two items, the first is the cell above the
+vertex or \pyLstinline{bp::Object} is none exists and the first is the
+cell below the vertex or \pyLstinline{bp::Object} is none exists.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:applyIterator},%
+                     caption={An output iterator that applies an operation on
+                       every output element.}]
+template <typename UnaryOperation>
+class apply_iterator {
+private:
+  UnaryOperation m_op;
+
+public:
+  apply_iterator(UnaryOperation op) : m_op(op) {}
+
+  // Make sure the assignment operator is available
+  apply_iterator& operator=(const apply_iterator& other) {
+    m_op = other.m_op;
+    return *this;
+  }
+
+  template <typename T>
+  const T& operator=(const T& t) const { m_op(t); return t; }
+
+  apply_iterator& operator*() { return *this; }
+  apply_iterator& operator++() { return *this; }
+  apply_iterator operator++(int) { return *this; }
+};
+  \end{lstlisting}
+\end{lstfloat}
+
+The wrapper function of the \cppLstinline{CGAL::decompose()} function
+is shown in Listing~\ref{lst:decomposeWrapper}. It utilizes a helper
+function called \cppLstinline{decompose_helper()} (not listed) that
+appends the output elements to the outout Python list.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:decomposeWrapper},%
+                     caption={A function that wraps the function shown in Listing~\ref{lst:decompose} and returns a Python list that represents a vertical decomposition.}]
+bp::list decompose(Arrangement_2& arr) {
+  typedef std::pair<Arrangement_2::Vertex_const_handle,
+                    std::pair<boost::optional<variant>,
+                              boost::optional<variant>>>        Decompose_result;
+  bp::list lst;
+  auto op = [&] (const Decompose_result& res) { decompose_helper(res, lst); };
+  CGAL::decompose(arr, apply_iterator<decltype(op)>(op));
+  return lst;
+}
+  \end{lstlisting}
+\end{lstfloat}
+
+The Python code example shown in Listing~\ref{lst:py:decompose}
+exploits the above and computes the vertical decomposition shown in
+Figure~\ref{fig:decompose}.
+
+%% The output:
+%% 0 0
+%%   unbounded face
+%%   unbounded face
+%% 2 0
+%%   unbounded face
+%%    0 0 3 3
+%% 3 3
+%%    2 0 4 2
+%%   unbounded face
+%% 4 2
+%%   unbounded face
+%%   unbounded face
+%% 5 3
+%%    4 2 6 0
+%%   unbounded face
+%% 6 0
+%%   unbounded face
+%%    5 3 8 0
+%% 8 0
+%%   unbounded face
+%%   unbounded face
+
+\begin{lstfloat}
+  \lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,%
+                   label={lst:py:decompose},%
+                   firstline=15,
+                   caption={A code sample in Python that decomposes an
+                     arrangement.}]
+  {../../../src/python_scripts/cgalpy_examples/vertical_decomposition.py}
+\end{lstfloat}
+
+\begin{figure}[!htp]
+  \centerline{%
+    \begin{tikzpicture}
+      \draw node[point=white] (x) at (4,2) {};
+      %
+      \draw node[point] (u1) at (0,0) {};
+      \draw node[point=cyan] (u2) at (2,2) {};
+      \draw node[point] (u3) at (3,3) {};
+      \draw node[point=cyan] (u4) at (5,1) {};
+      \draw node[point] (u5) at (6,0) {};
+      \draw[blue,thick] (u1)--(u2)--(u3)--(x)--(u4)--(u5);
+      %
+      \draw node[point] (v1) at (2,0) {};
+      \draw node[point=cyan] (v2) at (3,1) {};
+      \draw node[point] (v3) at (5,3) {};
+      \draw node[point=cyan] (v4) at (6,2) {};
+      \draw node[point] (v5) at (8,0) {};
+      \draw[blue,thick] (v1)--(v2)--(x)--(v3)--(v4)--(v5);
+      %
+      \draw[dots=10 per 1cm,very thick] (0,-1)--(u1)--(0,4);
+      \draw[dots=10 per 1cm,very thick] (2,-1)--(v1)--(u2)--(2,4);
+      \draw[dots=10 per 1cm,very thick] (3,-1)--(v2)--(u3)--(3,4);
+      \draw[dots=10 per 1cm,very thick] (4,-1)--(x)--(4,4);
+      \draw[dots=10 per 1cm,very thick] (5,-1)--(u4)--(v3)--(5,4);
+      \draw[dots=10 per 1cm,very thick] (6,-1)--(u5)--(v4)--(6,4);
+      \draw[dots=10 per 1cm,very thick] (8,-1)--(v5)--(8,4);
+    \end{tikzpicture}}
+  \caption{An arrangement of four line segments and its vertical
+    decomposition into pseudo trapezoids, as constructed by the Python
+    code shown in Listing~\ref{lst:decomposePython}.  The segments of
+    the arrangement are drawn in solid blue lines and the segments of
+    the vertical decomposition are drawn in dark dotted lines.}
+  \label{fig:decompose}
+\end{figure}
+
+%% % -----------------------------------------------------------------------------
+%% \subsection{\myLstinline{Python_distance}}
+%% \label{sec:code:distance}
+%% % -----------------------------------------------------------------------------
+%% Similarly to overlay traits, a user may want to define a custom
+%% distance class to use with search queries. Here too, as defining a new
+%% C++ class is not possible from python, we provide a similar solution:
+%% A \myLstinline{Python_distance} class is exposed, which is a model of
+%% \myLstinline{GeneralDistance}
+%% concept. \url{https://doc.cgal.org/5.2/Spatial_searching/classGeneralDistance.html}
+%% It expects 5 functions in its constructor, and those are saved as
+%% class members and are used for the respective 5 operations [the
+%%   optional are not included] of the concept.
+
+%% Making some things more pythonic:
 
 %% (the extended arrangement data type) Those 10 functions are saved as
 %% class members and are then called in the respective 10 [overloaded]
@@ -876,4 +1074,3 @@ Making some things more pythonic:
 
 %% This way the user can still define the way the result face/edge/vertex
 %% data will be calculated.
-\end{mdframed}
