@@ -641,8 +641,8 @@ operations supported by this package depend on the
 (linear) polygons they also depend on the \iiDPolygonsPackage{}
 package. Recall, that both further depend on the
 \iiDandiiiDGeometryKernelPackage{} package. Therefore, bindings for
-these packages must be enabled as well when bindings for the
-\iiDRegularizedBooleanSetOperationsPackage{} package are enabled.
+these packages must be explicitly enabled as well when bindings for
+the \iiDRegularizedBooleanSetOperationsPackage{} package are enabled.
 
 The code excerpt shown in Listing~\ref{lst:cmake:bso2EpecCs} in the
 \cmake{} language sets the \cmake{} flags for our next
@@ -760,18 +760,18 @@ equivalent to the complement of the offset of a disk and the
 complement of a polygon~\cite{cgal:w-rms2-21a}. The
 \iiDMinkowskiSumsPackage{} module is not associated with any \cmake{}
 flags (besides the flag \cmakeLstinline{MINKOWSKI_SUM_2_BINDINGS},
-which indicates whether to generate bindings for this module). As with
-the \iiDRegularizedBooleanSetOperationsPackage{} package, the
-operations supported by this package depend on the
+which indicates whether to generate bindings for this module).
+Similar to the case of generating bindings of Boolean operations on
+(linear) polygons supported by the
+\iiDRegularizedBooleanSetOperationsPackage{} package, the operations
+supported by this package depend on the
 \iiDandiiiDGeometryKernelPackage{}, \iiDArrangementsPackage{}, and
-\iiDPolygonsPackage{} packages. Generating bindings for the
-\iiDMinkowskiSumsPackage{} module does not require thought enabling
-the bindings for the \iiDArrangementsPackage{} module (similar to the
-case of generating bindings of Boolean operations on (linear) polygons
-supported by the \iiDRegularizedBooleanSetOperationsPackage{}
-package). The result of the inset and offset operations is a general
-polygon bounded by line segments and circular arc. Binding for a type
-that represents such polygons, that is, an instance of
+\iiDPolygonsPackage{} packages. Therefore, bindings for these packages
+must be explicitly enabled as well when bindings for the
+\iiDMinkowskiSumsPackage{} package are enabled.  The result of the
+inset and offset operations is a general polygon bounded by line
+segments and circular arc. Binding for a type that represents such
+polygons, that is, an instance of
 \cppLstinline{CGAL::General_polygon_with_holes_2<>} is generated as
 well.
 
