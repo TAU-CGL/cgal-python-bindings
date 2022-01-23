@@ -74,7 +74,6 @@ select_polygon_partitioning()
 select_triangulation_3()
 select_alpha_shape_3()
 
-
 if (${CGALPY_KERNEL_D_BINDINGS} AND
     ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
     (${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPEC_D})))
