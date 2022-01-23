@@ -20,10 +20,10 @@ set(default_build_type "Release")
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
   set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
-          STRING "Choose the type of build." FORCE)
+    STRING "Choose the type of build." FORCE)
   # Set the possible values of build type for cmake-gui
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
-          "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+    "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
 # Binding options. Notice that The default value of option is OFF.
@@ -45,7 +45,6 @@ option(CGALPY_TRIANGULATION_3_BINDINGS          "Compile bindings for 3D triangu
 option(CGALPY_AOS2_POINT_LOCATION_BINDINGS      "Compile bindings for point location")
 option(CGALPY_KERNEL_INTERSECTION_BINDINGS      "Compile bindings for intersections")
 option(CGALPY_KERNEL_D_BINDINGS                 "Compile bindings for dD Kernel")
-
 
 include(alpha_shape_2_options)
 include(alpha_shape_3_options)
