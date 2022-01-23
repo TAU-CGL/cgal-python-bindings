@@ -1,636 +1,636 @@
 {
-    "typedefs": {},
-    "classes": {
-        "Point_2": {
-            "methods": {
-                "__init__": [
-                    {},
-                    {
-                        "variables": {
-                            "x": "float",
-                            "y": "float"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "x": "FT",
-                            "y": "FT"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "x": "RT",
-                            "y": "RT"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        }
-                    }
-                ],
-                "x": [
-                    {
-                        "return": "FT"
-                    }
-                ],
-                "y": [
-                    {
-                        "return": "FT"
-                    }
-                ],
-                "hx": [
-                    {
-                        "return": "FT"
-                    }
-                ],
-                "hy": [
-                    {
-                        "return": "FT"
-                    }
-                ],
-                "bbox": [
-                    {
-                        "return": "Bbox_2"
-                    }
-                ],
-                "dimension": [
-                    {
-                        "return": "int"
-                    }
-                ],
-                "cartesian": [
-                    {
-                        "return": "Iterator[FT]"
-                    }
-                ],
-                "coordinates": [
-                    {
-                        "return": "Iterator[FT]"
-                    }
-                ],
-                "__getitem__": [
-                    {
-                        "variables": {
-                            "i": "int"
-                        },
-                        "return": "FT"
-                    }
-                ],
-                "__str__": [
-                    {
-                        "return": "str"
-                    }
-                ],
-                "__repr__": [
-                    {
-                        "return": "str"
-                    }
-                ]
+  "typedefs": {},
+  "classes": {
+    "Point_2": {
+      "methods": {
+        "__init__": [
+          {},
+          {
+            "variables": {
+              "x": "double",
+              "y": "double"
             }
-        },
-        "Segment_2": {
-            "methods": {
-                "__init__": [
-                    {
-                        "variables": {
-                            "p": "Point_2",
-                            "q": "Point_2"
-                        }
-                    }
-                ],
-                "source": [
-                    {
-                        "return": "Point_2"
-                    }
-                ],
-                "target": [
-                    {
-                        "return": "Point_2"
-                    }
-                ],
-                "__getitem__": [
-                    {
-                        "variables": {
-                            "i": "int"
-                        },
-                        "return": "Point_2"
-                    }
-                ],
-                "vertex": [
-                    {
-                        "variables": {
-                            "i": "int"
-                        },
-                        "return": "Point_2"
-                    }
-                ],
-                "point": [
-                    {
-                        "variables": {
-                            "i": "int"
-                        },
-                        "return": "Point_2"
-                    }
-                ],
-                "min": [
-                    {
-                        "return": "Point_2"
-                    }
-                ],
-                "max": [
-                    {
-                        "return": "Point_2"
-                    }
-                ],
-                "opposite": [
-                    {
-                        "return": "Segment_2"
-                    }
-                ],
-                "to_vector": [
-                    {
-                        "return": "Vector_2"
-                    }
-                ],
-                "supporting_line": [
-                    {
-                        "return": "Line_2"
-                    }
-                ],
-                "squared_length": [
-                    {
-                        "return": "FT"
-                    }
-                ],
-                "direction": [
-                    {
-                        "return": "Direction_2"
-                    }
-                ],
-                "has_on": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "collinear_has_on": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "is_degenerate": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "is_horizontal": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "is_vertical": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "bbox": [
-                    {
-                        "return": "Bbox_2"
-                    }
-                ],
-                "__str__": [
-                    {
-                        "return": "str"
-                    }
-                ],
-                "__repr__": [
-                    {
-                        "return": "str"
-                    }
-                ]
+          },
+          {
+            "variables": {
+              "x": "FT",
+              "y": "FT"
             }
-        },
-        "Line_2": {
-            "methods": {
-                "__init__": [
-                    {
-                        "variables": {
-                            "a": "RT",
-                            "b": "RT",
-                            "c": "RT"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "p": "Point_2",
-                            "q": "Point_2"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "p": "Point_2",
-                            "d": "Direction_2"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "p": "Point_2",
-                            "v": "Vector_2"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "s": "Segment_2"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "r": "Ray_2"
-                        }
-                    }
-                ],
-                "a": [
-                    {
-                        "return": "FT"
-                    }
-                ],
-                "b": [
-                    {
-                        "return": "FT"
-                    }
-                ],
-                "c": [
-                    {
-                        "return": "FT"
-                    }
-                ],
-                "is_degenerate": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "is_horizontal": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "is_vertical": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "oriented_side": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "Oriented_side"
-                    }
-                ],
-                "has_on": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "has_on_boundary": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "has_on_negative_side": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "has_on_positive_side": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "projection": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "Point_2"
-                    }
-                ],
-                "direction": [
-                    {
-                        "return": "Direction_2"
-                    }
-                ],
-                "to_vector": [
-                    {
-                        "return": "Vector_2"
-                    }
-                ],
-                "opposite": [
-                    {
-                        "return": "Line_2"
-                    }
-                ],
-                "perpendicular": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "Line_2"
-                    }
-                ],
-                "transform": [
-                    {
-                        "variables": {
-                            "at": "Aff_transformation_2"
-                        },
-                        "return": "Line_2"
-                    }
-                ],
-                "x_at_y": [
-                    {
-                        "variables": {
-                            "y": "FT"
-                        },
-                        "return": "FT"
-                    }
-                ],
-                "y_at_x": [
-                    {
-                        "variables": {
-                            "x": "FT"
-                        },
-                        "return": "FT"
-                    }
-                ],
-                "__str__": [
-                    {
-                        "return": "str"
-                    }
-                ],
-                "__repr__": [
-                    {
-                        "return": "str"
-                    }
-                ]
+          },
+          {
+            "variables": {
+              "x": "RT",
+              "y": "RT"
             }
-        },
-        "Ray_2": {
-            "methods": {
-                "__init__": [
-                    {
-                        "variables": {
-                            "p": "Point_2",
-                            "q": "Point_2"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "p": "Point_2",
-                            "d": "Direction_2"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "p": "Point_2",
-                            "v": "Vector_2"
-                        }
-                    },
-                    {
-                        "variables": {
-                            "p": "Point_2",
-                            "l": "Line_2"
-                        }
-                    }
-                ],
-                "is_degenerate": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "is_horizontal": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "is_vertical": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "direction": [
-                    {
-                        "return": "Direction_2"
-                    }
-                ],
-                "to_vector": [
-                    {
-                        "return": "Vector_2"
-                    }
-                ],
-                "has_on": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "collinear_has_on": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "point": [
-                    {
-                        "variables": {
-                            "i": "FT"
-                        },
-                        "return": "Point_2"
-                    }
-                ],
-                "supporting_line": [
-                    {
-                        "return": "Line_2"
-                    }
-                ],
-                "opposite": [
-                    {
-                        "return": "Ray_2"
-                    }
-                ],
-                "transform": [
-                    {
-                        "variables": {
-                            "at": "Aff_transformation_2"
-                        },
-                        "return": "Ray_2"
-                    }
-                ],
-                "source": [
-                    {
-                        "return": "Point_2"
-                    }
-                ],
-                "__str__": [
-                    {
-                        "return": "str"
-                    }
-                ],
-                "__repr__": [
-                    {
-                        "return": "str"
-                    }
-                ]
+          },
+          {
+            "variables": {
+              "p": "Point_2"
             }
-        },
-        "Triangle_2": {
-            "methods": {
-                "__init__": [
-                    {
-                        "variables": {
-                            "p": "Point_2",
-                            "q": "Point_2",
-                            "r": "Point_2"
-                        }
-                    }
-                ],
-                "vertex": [
-                    {
-                        "variables": {
-                            "i": "int"
-                        },
-                        "return": "Point_2"
-                    }
-                ],
-                "__getitem__": [
-                    {
-                        "variables": {
-                            "i": "int"
-                        },
-                        "return": "Point_2"
-                    }
-                ],
-                "is_degenerate": [
-                    {
-                        "return": "bool"
-                    }
-                ],
-                "orientation": [
-                    {
-                        "return": "Orientation"
-                    }
-                ],
-                "oriented_side": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "Oriented_side"
-                    }
-                ],
-                "bounded_side": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "Bounded_side"
-                    }
-                ],
-                "has_on_positive_side": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "has_on_negative_side": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "has_on_boundary": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "has_on_bounded_side": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "has_on_unbounded_side": [
-                    {
-                        "variables": {
-                            "p": "Point_2"
-                        },
-                        "return": "bool"
-                    }
-                ],
-                "opposite": [
-                    {
-                        "return": "Triangle_2"
-                    }
-                ],
-                "area": [
-                    {
-                        "return": "FT"
-                    }
-                ],
-                "bbox": [
-                    {
-                        "return": "Bbox_2"
-                    }
-                ],
-                "transform": [
-                    {
-                        "variables": {
-                            "at": "Aff_transformation_2"
-                        },
-                        "return": "Triangle_2"
-                    }
-                ],
-                "__str__": [
-                    {
-                        "return": "str"
-                    }
-                ],
-                "__repr__": [
-                    {
-                        "return": "str"
-                    }
-                ]
+          }
+        ],
+        "x": [
+          {
+            "return": "FT"
+          }
+        ],
+        "y": [
+          {
+            "return": "FT"
+          }
+        ],
+        "hx": [
+          {
+            "return": "FT"
+          }
+        ],
+        "hy": [
+          {
+            "return": "FT"
+          }
+        ],
+        "bbox": [
+          {
+            "return": "Bbox_2"
+          }
+        ],
+        "dimension": [
+          {
+            "return": "int"
+          }
+        ],
+        "cartesian": [
+          {
+            "return": "Iterator[FT]"
+          }
+        ],
+        "coordinates": [
+          {
+            "return": "Iterator[FT]"
+          }
+        ],
+        "__getitem__": [
+          {
+            "variables": {
+              "i": "int"
+            },
+            "return": "FT"
+          }
+        ],
+        "__str__": [
+          {
+            "return": "str"
+          }
+        ],
+        "__repr__": [
+          {
+            "return": "str"
+          }
+        ]
+      }
+    },
+    "Segment_2": {
+      "methods": {
+        "__init__": [
+          {
+            "variables": {
+              "p": "Point_2",
+              "q": "Point_2"
             }
-        }
+          }
+        ],
+        "source": [
+          {
+            "return": "Point_2"
+          }
+        ],
+        "target": [
+          {
+            "return": "Point_2"
+          }
+        ],
+        "__getitem__": [
+          {
+            "variables": {
+              "i": "int"
+            },
+            "return": "Point_2"
+          }
+        ],
+        "vertex": [
+          {
+            "variables": {
+              "i": "int"
+            },
+            "return": "Point_2"
+          }
+        ],
+        "point": [
+          {
+            "variables": {
+              "i": "int"
+            },
+            "return": "Point_2"
+          }
+        ],
+        "min": [
+          {
+            "return": "Point_2"
+          }
+        ],
+        "max": [
+          {
+            "return": "Point_2"
+          }
+        ],
+        "opposite": [
+          {
+            "return": "Segment_2"
+          }
+        ],
+        "to_vector": [
+          {
+            "return": "Vector_2"
+          }
+        ],
+        "supporting_line": [
+          {
+            "return": "Line_2"
+          }
+        ],
+        "squared_length": [
+          {
+            "return": "FT"
+          }
+        ],
+        "direction": [
+          {
+            "return": "Direction_2"
+          }
+        ],
+        "has_on": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "collinear_has_on": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "is_degenerate": [
+          {
+            "return": "bool"
+          }
+        ],
+        "is_horizontal": [
+          {
+            "return": "bool"
+          }
+        ],
+        "is_vertical": [
+          {
+            "return": "bool"
+          }
+        ],
+        "bbox": [
+          {
+            "return": "Bbox_2"
+          }
+        ],
+        "__str__": [
+          {
+            "return": "str"
+          }
+        ],
+        "__repr__": [
+          {
+            "return": "str"
+          }
+        ]
+      }
+    },
+    "Line_2": {
+      "methods": {
+        "__init__": [
+          {
+            "variables": {
+              "a": "RT",
+              "b": "RT",
+              "c": "RT"
+            }
+          },
+          {
+            "variables": {
+              "p": "Point_2",
+              "q": "Point_2"
+            }
+          },
+          {
+            "variables": {
+              "p": "Point_2",
+              "d": "Direction_2"
+            }
+          },
+          {
+            "variables": {
+              "p": "Point_2",
+              "v": "Vector_2"
+            }
+          },
+          {
+            "variables": {
+              "s": "Segment_2"
+            }
+          },
+          {
+            "variables": {
+              "r": "Ray_2"
+            }
+          }
+        ],
+        "a": [
+          {
+            "return": "FT"
+          }
+        ],
+        "b": [
+          {
+            "return": "FT"
+          }
+        ],
+        "c": [
+          {
+            "return": "FT"
+          }
+        ],
+        "is_degenerate": [
+          {
+            "return": "bool"
+          }
+        ],
+        "is_horizontal": [
+          {
+            "return": "bool"
+          }
+        ],
+        "is_vertical": [
+          {
+            "return": "bool"
+          }
+        ],
+        "oriented_side": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "Oriented_side"
+          }
+        ],
+        "has_on": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "has_on_boundary": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "has_on_negative_side": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "has_on_positive_side": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "projection": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "Point_2"
+          }
+        ],
+        "direction": [
+          {
+            "return": "Direction_2"
+          }
+        ],
+        "to_vector": [
+          {
+            "return": "Vector_2"
+          }
+        ],
+        "opposite": [
+          {
+            "return": "Line_2"
+          }
+        ],
+        "perpendicular": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "Line_2"
+          }
+        ],
+        "transform": [
+          {
+            "variables": {
+              "at": "Aff_transformation_2"
+            },
+            "return": "Line_2"
+          }
+        ],
+        "x_at_y": [
+          {
+            "variables": {
+              "y": "FT"
+            },
+            "return": "FT"
+          }
+        ],
+        "y_at_x": [
+          {
+            "variables": {
+              "x": "FT"
+            },
+            "return": "FT"
+          }
+        ],
+        "__str__": [
+          {
+            "return": "str"
+          }
+        ],
+        "__repr__": [
+          {
+            "return": "str"
+          }
+        ]
+      }
+    },
+    "Ray_2": {
+      "methods": {
+        "__init__": [
+          {
+            "variables": {
+              "p": "Point_2",
+              "q": "Point_2"
+            }
+          },
+          {
+            "variables": {
+              "p": "Point_2",
+              "d": "Direction_2"
+            }
+          },
+          {
+            "variables": {
+              "p": "Point_2",
+              "v": "Vector_2"
+            }
+          },
+          {
+            "variables": {
+              "p": "Point_2",
+              "l": "Line_2"
+            }
+          }
+        ],
+        "is_degenerate": [
+          {
+            "return": "bool"
+          }
+        ],
+        "is_horizontal": [
+          {
+            "return": "bool"
+          }
+        ],
+        "is_vertical": [
+          {
+            "return": "bool"
+          }
+        ],
+        "direction": [
+          {
+            "return": "Direction_2"
+          }
+        ],
+        "to_vector": [
+          {
+            "return": "Vector_2"
+          }
+        ],
+        "has_on": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "collinear_has_on": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "point": [
+          {
+            "variables": {
+              "i": "FT"
+            },
+            "return": "Point_2"
+          }
+        ],
+        "supporting_line": [
+          {
+            "return": "Line_2"
+          }
+        ],
+        "opposite": [
+          {
+            "return": "Ray_2"
+          }
+        ],
+        "transform": [
+          {
+            "variables": {
+              "at": "Aff_transformation_2"
+            },
+            "return": "Ray_2"
+          }
+        ],
+        "source": [
+          {
+            "return": "Point_2"
+          }
+        ],
+        "__str__": [
+          {
+            "return": "str"
+          }
+        ],
+        "__repr__": [
+          {
+            "return": "str"
+          }
+        ]
+      }
+    },
+    "Triangle_2": {
+      "methods": {
+        "__init__": [
+          {
+            "variables": {
+              "p": "Point_2",
+              "q": "Point_2",
+              "r": "Point_2"
+            }
+          }
+        ],
+        "vertex": [
+          {
+            "variables": {
+              "i": "int"
+            },
+            "return": "Point_2"
+          }
+        ],
+        "__getitem__": [
+          {
+            "variables": {
+              "i": "int"
+            },
+            "return": "Point_2"
+          }
+        ],
+        "is_degenerate": [
+          {
+            "return": "bool"
+          }
+        ],
+        "orientation": [
+          {
+            "return": "Orientation"
+          }
+        ],
+        "oriented_side": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "Oriented_side"
+          }
+        ],
+        "bounded_side": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "Bounded_side"
+          }
+        ],
+        "has_on_positive_side": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "has_on_negative_side": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "has_on_boundary": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "has_on_bounded_side": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "has_on_unbounded_side": [
+          {
+            "variables": {
+              "p": "Point_2"
+            },
+            "return": "bool"
+          }
+        ],
+        "opposite": [
+          {
+            "return": "Triangle_2"
+          }
+        ],
+        "area": [
+          {
+            "return": "FT"
+          }
+        ],
+        "bbox": [
+          {
+            "return": "Bbox_2"
+          }
+        ],
+        "transform": [
+          {
+            "variables": {
+              "at": "Aff_transformation_2"
+            },
+            "return": "Triangle_2"
+          }
+        ],
+        "__str__": [
+          {
+            "return": "str"
+          }
+        ],
+        "__repr__": [
+          {
+            "return": "str"
+          }
+        ]
+      }
     }
+  }
 }
