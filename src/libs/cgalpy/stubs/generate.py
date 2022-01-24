@@ -4,6 +4,7 @@ import json
 import os
 import re
 import argparse
+from pathlib import Path
 
 copyright_text = '''// Copyright (c) 2022 Israel.
 // All rights reserved to TAU.
@@ -161,26 +162,34 @@ if __name__ == "__main__":
                       dest="input_paths", default='./')
   parser.add_argument('--output-path', type=readable_dir,
                       dest='output_path', default='./')
-  parser.add_argument('--name', help='The node name')
+  parser.add_argument('--output-file', dest='output_file',
+                      default='__init__.pyi')
+  parser.add_argument('--name', help='the node name')
+  parser.add_argument('--imports', dest='imports',
+                      help='external imports')
   args = parser.parse_args()
 
   # Extract node name:
   name = args.name
   filename = args.filename
   output_path = args.output_path
+  output_file = args.output_file
+  imports = args.imports
+
+  print(imports)
 
   if not name and not filename:
     parser.error("Both the the class name and the file name are missing!")
 
   if not name:
-    name = os.path.basename(filename)
+    name = Path(filename).stem
 
   # Extract file name:
   filename = None
   if not filename:
     filename = name + ".json"
 
-  # Extract configuration full file name:
+  # Extract configuration input full file name:
   fullname = None
   for path in args.input_paths:
     tmp = os.path.join(path, filename)
@@ -192,6 +201,18 @@ if __name__ == "__main__":
     parser.error("The file %s cannot be found!" % filename)
     exit(-1)
 
+  # Output path
+  if Path(output_file).stem == name:
+    pyi_path = output_path
+  else:
+    pyi_path = os.path.join(output_path, name)
+  if not os.path.isdir(pyi_path):
+    os.mkdir(pyi_path)
+  if not os.access(pyi_path, os.W_OK):
+    parser.error("{0} is not a readable dir".format(pyi_path))
+
+  pyi_filename = os.path.join(pyi_path, output_file)
+
   with open(fullname, 'r') as f:
     # filename = sys.argv[1]
     # script_dir = os.path.dirname(__file__)
@@ -199,8 +220,6 @@ if __name__ == "__main__":
     # f = open(file_path)
     definitions_string = f.read()
     # f.close()
-
-    pyi_filename = os.path.join(output_path, name + ".pyi")
 
     with open(pyi_filename, 'w') as out:
       definitions_string = replace_variables(definitions_string, {})

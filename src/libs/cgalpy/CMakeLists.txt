@@ -94,37 +94,71 @@ if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
 
 endif()
 
+# Modules
+# 2-3D Kernel
+if (CGALPY_KERNEL_BINDINGS)
+  list (APPEND MODULES Ker)
+endif()
+# dD Kernel
+if (CGALPY_KERNEL_D_BINDINGS)
+  list (APPEND MODULES Kerd)
+endif()
+# 2D Alpha shape
+if (CGALPY_ALPHA_SHAPE_2_BINDINGS)
+  list (APPEND MODULES AS2)
+endif()
+# 3D Alpha shape
+if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
+  list (APPEND MODULES AS3)
+endif()
+# 2D Arrangement
+if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
+  list (APPEND MODULES Aos2)
+endif()
+# 2D Regularized Boolean operations
+if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
+  list (APPEND MODULES Bso2)
+endif()
+# Bounding volumes
 if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/bounding_volumes_bindings.cpp)
+  list (APPEND MODULES BV)
 endif()
-
+# 2D convex hull
 if (CGALPY_CONVEX_HULL_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/convex_hull_2_bindings.cpp)
+  list (APPEND MODULES CH2)
 endif()
-
+# 2D Minkowski sum
 if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/minkowski_sum_2_bindings.cpp)
+  list (APPEND MODULES MS2)
 endif()
-
+# 2D Polygon
 if (CGALPY_POLYGON_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
+  list (APPEND MODULES Pol2)
 endif()
-
+# 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
+  list (APPEND MODULES PP)
 endif()
-
+# Spatial searching
 if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_searching_bindings.cpp)
+  list (APPEND MODULES SS)
 endif()
-
+# 2D triangulation
 if (CGALPY_TRIANGULATION_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_2_bindings.cpp)
+  list (APPEND MODULES Tri2)
 endif()
-
+# 3D triangulation
 if (CGALPY_TRIANGULATION_3_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_3_bindings.cpp)
+  list (APPEND MODULES Tri3)
 endif()
 
 # Add all include directories
@@ -251,14 +285,20 @@ set (CGALPY_SRC_STUBS_DIR "${CMAKE_CURRENT_LIST_DIR}/stubs")
 set (CGALPY_MODULES_DIR "${CGALPY_SRC_STUBS_DIR}/modules")
 set (CGALPY_STUBS_GENERATOR "${CGALPY_SRC_STUBS_DIR}/generate.py")
 set (CGALPY_DST_STUBS_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
+set (CGALPY_STUBS "${CGALPY_DST_STUBS_DIR}/CGALPY.pyi")
 
 function(add_module name)
-  set (MODULE_OUTPUT ${CGALPY_DST_STUBS_DIR}/${name}.pyi)
+  set (MODULE_OUTPUT_PATH ${CGALPY_DST_STUBS_DIR}/${name})
+  set (MODULE_OUTPUT ${MODULE_OUTPUT_PATH}/__init__.pyi)
   set (MODULE_INPUT ${CGALPY_MODULES_DIR}/${name}.json)
   set (MODULE_ARGS
     --name ${name}
     --input-path ${CGALPY_MODULES_DIR}
     --output-path ${CGALPY_DST_STUBS_DIR})
+
+  # There is no need to generate the directory, as the Python script is
+  # responsible for this task.
+  # file(MAKE_DIRECTORY ${MODULE_OUTPUT_PATH})
 
   add_custom_command(
     OUTPUT ${MODULE_OUTPUT}
@@ -269,62 +309,25 @@ function(add_module name)
   set(CGALPY_STUBS "${CGALPY_STUBS}" ${MODULE_OUTPUT} PARENT_SCOPE)
 endfunction()
 
-# 2-3D Kernel
-if (CGALPY_KERNEL_BINDINGS)
-  add_module(Ker)
-endif()
-# dD Kernel
-if (CGALPY_KERNEL_D_BINDINGS)
-  add_module(Kerd)
-endif()
-# 2D Alpha shape
-if (CGALPY_ALPHA_SHAPE_2_BINDINGS)
-  add_module(AS2)
-endif()
-# 3D Alpha shape
-if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
-  add_module(AS3)
-endif()
-# 2D Arrangement
-if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
-  add_module(Aos2)
-endif()
-# 2D Regularized Boolean operations
-if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
-  add_module(Bso2)
-endif()
-# Bounding volumes
-if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
-  add_module(BV)
-endif()
-# 2D convex hull
-if (CGALPY_CONVEX_HULL_2_BINDINGS)
-  add_module(CH2)
-endif()
-# 2D Polygon
-if (CGALPY_POLYGON_2_BINDINGS)
-  add_module(Pol2)
-endif()
-# 2D Minkowski sum
-if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
-  add_module(MS2)
-endif()
-# 2D polygon partitioning
-if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
-  add_module(PP)
-endif()
-# Spatial searching
-if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
-  add_module(SS)
-endif()
-# 2D triangulation
-if (CGALPY_TRIANGULATION_2_BINDINGS)
-  add_module(Tri2)
-endif()
-# 3D triangulation
-if (CGALPY_TRIANGULATION_3_BINDINGS)
-  add_module(Tri3)
-endif()
+foreach(MODULE IN LISTS MODULES)
+  add_module(${MODULE})
+endforeach()
+
+set (MODULE_OUTPUT ${CGALPY_DST_STUBS_DIR}/CGALPY.pyi)
+set (MODULE_INPUT ${CGALPY_MODULES_DIR}/CGALPY.json)
+string(REPLACE ";" " " STR_MODULES "${MODULES}")
+set (MODULE_ARGS
+  --name "CGALPY"
+  --input-path ${CGALPY_MODULES_DIR}
+  --output-path ${CGALPY_DST_STUBS_DIR}
+  --output-file "CGALPY.pyi"
+  --imports "${STR_MODULES}")
+
+add_custom_command(
+  OUTPUT ${MODULE_OUTPUT}
+  COMMAND ${CGALPY_STUBS_GENERATOR}
+  ARGS ${MODULE_ARGS}
+  DEPENDS ${CGALPY_STUBS_GENERATOR} ${MODULE_INPUT})
 
 add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS})
 
