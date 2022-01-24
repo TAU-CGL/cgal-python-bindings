@@ -67,6 +67,15 @@
       "models": {
         "AosBasicTraits_2": true
       },
+      "typedefs": {
+        "Point_2": "Ker.Point_2"
+      },
+      "classes": {}
+    },
+    "Arr_circle_segment_traits_2": {
+      "models": {
+        "AosBasicTraits_2": true
+      },
       "classes": {
         "Point_2": {
           "methods": {
