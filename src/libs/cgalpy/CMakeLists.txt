@@ -223,7 +223,7 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 endif()
 set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
-reportWithEmphasis(${CGALPY_LIB_NAME} ${CGALPY_LIB_DIR} ${CGALPY_INSTALL_LIB_DIR})
+reportWithEmphasis(${CGALPY_LIB_NAME} ${CGALPY_LIB_DIR} ${CGALPY_INSTALL_PYTHON_DIR})
 
 add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
@@ -246,18 +246,13 @@ if(DOXYGEN_FOUND)
      		    COMMENT "Generating API documentation with Doxygen" VERBATIM)
 endif(DOXYGEN_FOUND)
 
-# Installation
-set_property(TARGET CGALPY PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
-set_property(TARGET CGALPY PROPERTY INSTALL_RPATH "${CGAL_DIR}/lib")
-
+# Type Annotation
 set (CGALPY_SRC_STUBS_DIR "${CMAKE_CURRENT_LIST_DIR}/stubs")
 set (CGALPY_MODULES_DIR "${CGALPY_SRC_STUBS_DIR}/modules")
 set (CGALPY_STUBS_GENERATOR "${CGALPY_SRC_STUBS_DIR}/generate.py")
 set (CGALPY_DST_STUBS_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
-set (XXXX "")
 
 function(add_module name)
-  set (XXXX ${XXXX} ${name})
   set (MODULE_OUTPUT ${CGALPY_DST_STUBS_DIR}/${name}.pyi)
   set (MODULE_INPUT ${CGALPY_MODULES_DIR}/${name}.json)
   set (MODULE_ARGS
@@ -270,86 +265,73 @@ function(add_module name)
     COMMAND ${CGALPY_STUBS_GENERATOR}
     ARGS ${MODULE_ARGS}
     DEPENDS ${CGALPY_STUBS_GENERATOR} ${MODULE_INPUT})
-endfunction()
 
-install(TARGETS CGALPY
-  RUNTIME DESTINATION ${CGALPY_INSTALL_BIN_DIR}
-  LIBRARY DESTINATION ${CGALPY_INSTALL_LIB_DIR}
-  ARCHIVE DESTINATION ${CGALPY_INSTALL_LIB_DIR})
+  set(CGALPY_STUBS "${CGALPY_STUBS}" ${MODULE_OUTPUT} PARENT_SCOPE)
+endfunction()
 
 # 2-3D Kernel
 if (CGALPY_KERNEL_BINDINGS)
   add_module(Ker)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/Ker.pyi")
 endif()
 # dD Kernel
 if (CGALPY_KERNEL_D_BINDINGS)
   add_module(Kerd)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/Kerd.pyi")
 endif()
 # 2D Alpha shape
 if (CGALPY_ALPHA_SHAPE_2_BINDINGS)
   add_module(AS2)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/AS2.pyi")
 endif()
 # 3D Alpha shape
 if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
   add_module(AS3)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/AS3.pyi")
 endif()
 # 2D Arrangement
 if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
   add_module(Aos2)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/Aos2.pyi")
 endif()
 # 2D Regularized Boolean operations
 if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
   add_module(Bso2)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/Bso2.pyi")
 endif()
 # Bounding volumes
 if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
   add_module(BV)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/BV.pyi")
 endif()
 # 2D convex hull
 if (CGALPY_CONVEX_HULL_2_BINDINGS)
   add_module(CH2)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/CH2.pyi")
 endif()
 # 2D Polygon
 if (CGALPY_POLYGON_2_BINDINGS)
   add_module(Pol2)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/Pol2.pyi")
 endif()
 # 2D Minkowski sum
 if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
   add_module(MS2)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/MS2.pyi")
 endif()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
   add_module(PP)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/PP.pyi")
 endif()
 # Spatial searching
 if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
   add_module(SS)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/SS.pyi")
 endif()
 # 2D triangulation
 if (CGALPY_TRIANGULATION_2_BINDINGS)
   add_module(Tri2)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/Tri2.pyi")
 endif()
 # 3D triangulation
 if (CGALPY_TRIANGULATION_3_BINDINGS)
   add_module(Tri3)
-  set(CGALPY_STUBS "${CGALPY_STUBS}" "${CGALPY_DST_STUBS_DIR}/Tri3.pyi")
 endif()
 
 add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS})
 
-message ("XXXXXXXXXXXXXXXXXXXXXXX${XXXX}XXXXXXXXXXXXXXXXXXXXXXXXXX")
-install(FILES ${CGALPY_STUBS}
-  DESTINATION ${CGALPY_INSTALL_LIB_DIR})
+# Installation
+install(TARGETS CGALPY
+  RUNTIME DESTINATION ${CGALPY_INSTALL_BIN_DIR}
+  LIBRARY DESTINATION ${CGALPY_INSTALL_PYTHON_DIR}
+  ARCHIVE DESTINATION ${CGALPY_INSTALL_LIB_DIR})
+
+install(FILES ${CGALPY_STUBS} DESTINATION ${CGALPY_INSTALL_PYTHON_DIR})
