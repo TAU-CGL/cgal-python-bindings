@@ -23,8 +23,8 @@
           {},
           {
             "variables": {
-              "x": "double",
-              "y": "double"
+              "x": "float",
+              "y": "float"
             }
           },
           {
@@ -634,6 +634,173 @@
               "at": "Aff_transformation_2"
             },
             "return": "Triangle_2"
+          }
+        ],
+        "__str__": [
+          {
+            "return": "str"
+          }
+        ],
+        "__repr__": [
+          {
+            "return": "str"
+          }
+        ]
+      }
+    },
+    "Vector_2": {
+      "methods": {
+        "__init__": [
+          {
+            "variables": {
+              "p": "Point_2",
+              "q": "Point_2"
+            }
+          },
+          {
+            "variables": {
+              "s": "Segment_2"
+            }
+          },
+          {
+            "variables": {
+              "r": "Ray_2"
+            }
+          },
+          {
+            "variables": {
+              "l": "Line_2"
+            }
+          },
+          {
+            "variables": {
+              "x": "int",
+              "y": "int"
+            }
+          },
+          {
+            "variables": {
+              "x": "float",
+              "y": "float"
+            }
+          },
+          {
+            "variables": {
+              "x": "FT",
+              "y": "FT"
+            }
+          },
+          {
+            "variables": {
+              "hx": "RT",
+              "hy": "RT",
+              "hw": "RT"
+            }
+          }
+        ],
+        "squared_length ": [
+          {
+            "return": "FT"
+          }
+        ],
+        "__getitem__": [
+          {
+            "variables": {
+              "i": "int"
+            },
+            "return": "FT"
+          },
+          {
+            "variables": {
+              "v": "Vector_2",
+              "s": "RT"
+            },
+            "return": "Vector_2"
+          },
+          {
+            "variables": {
+              "v": "Vector_2",
+              "s": "FT"
+            },
+            "return": "Vector_2"
+          },
+          {
+            "variables": {
+              "s": "RT",
+              "v": "Vector_2"
+            },
+            "return": "Vector_2"
+          },
+          {
+            "variables": {
+              "s": "FT",
+              "v": "Vector_2"
+            },
+            "return": "Vector_2"
+          }
+        ],
+        "hx": [
+          {
+            "return": "RT"
+          }
+        ],
+        "hy": [
+          {
+            "return": "RT"
+          }
+        ],
+        "hw": [
+          {
+            "return": "RT"
+          }
+        ],
+        "x": [
+          {
+            "return": "FT"
+          }
+        ],
+        "y": [
+          {
+            "return": "FT"
+          }
+        ],
+        "homogeneous": [
+          {
+            "variables": {
+              "i": "int"
+            },
+            "return": "RT"
+          }
+        ],
+        "cartesian": [
+          {
+            "variables": {
+              "i": "int"
+            },
+            "return": "FT"
+          }
+        ],
+        "dimension": [
+          {
+            "return": "int"
+          }
+        ],
+        "direction": [
+          {
+            "return": "Direction_2"
+          }
+        ],
+        "transform": [
+          {
+            "variables": {
+              "t": "Aff_transformation_2"
+            },
+            "return": "Vector_2"
+          }
+        ],
+        "perpendicular": [
+          {
+            "return": "Vector_2"
           }
         ],
         "__str__": [
