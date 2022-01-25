@@ -180,8 +180,8 @@ if __name__ == "__main__":
   parser.add_argument('--filters-file', dest='filters_basename',
                       default='filters.json',
                       help='filters disctionary file name')
-  # parser.add_argument('-f', '--filters', type=json.loads, dest='filters',
-  #                     help='filter dictionary')
+  parser.add_argument('-f', '--filters', type=json.loads, dest='filters',
+                       help='filter dictionary')
   args = parser.parse_args()
 
   # Extract node name:
@@ -191,9 +191,7 @@ if __name__ == "__main__":
   output_path = args.output_path
   pyi_basename = args.pyi_basename
   external_imports = args.imports
-  # filters = {"AosBasicTraits_2.Point_2": "false"}
-  # filters = {}
-  # if args.filters: filters = args.filters
+  external_filters = args.filters
 
   if not name and not spec_basename:
     parser.error("Both the the class name and the file name are missing!")
@@ -212,13 +210,15 @@ if __name__ == "__main__":
     parser.error("The file %s cannot be found!" % spec_basename)
     exit(-1)
 
-  # Obtain filter dictionary input full file name:
+  # Obtain external filters and update the default filters:
   filters_fullname = full_filename(args.input_paths, filters_basename)
   filters = {}
   if filters_fullname:
     with open(filters_fullname, 'r') as f:
       filters_str = f.read()
       filters = json.loads(filters_str)
+  if external_filters:
+    filters.update(external_filters)
 
   # Output path
   if Path(pyi_basename).stem == name:

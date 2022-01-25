@@ -5,6 +5,7 @@
       "models": {},
       "classes": {
         "Point_2": {
+          "required": @AosBasicTraits_2.Point_2@,
           "methods": {
             "__init__": [
               {},
