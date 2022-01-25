@@ -178,7 +178,6 @@ if __name__ == "__main__":
   parser.add_argument('--imports', dest='imports',
                       help='external imports')
   parser.add_argument('--filters-file', dest='filters_basename',
-                      default='filters.json',
                       help='filters disctionary file name')
   parser.add_argument('-f', '--filters', type=json.loads, dest='filters',
                        help='filter dictionary')
@@ -203,6 +202,10 @@ if __name__ == "__main__":
   # Extract the specification file base name:
   if not spec_basename:
     spec_basename = name + ".json"
+
+  # Extract the filters file base name:
+  if not filters_basename:
+    filters_basename = name + "_filters.json"
 
   # Obtain specification input full file name:
   spec_fullname = full_filename(args.input_paths, spec_basename)
