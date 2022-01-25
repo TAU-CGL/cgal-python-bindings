@@ -137,72 +137,91 @@ def print_class(out, class_name, class_def):
       print_line(out, ') -> ' + overload["return"] + ": ...")
   print_empty_line(out, dec=True)
 
-def is_valid_file(parser, arg):
+# Determine whether the given file exist, and if so, return a handle to it.
+def valid_file(parser, arg):
   if not os.path.exists(arg):
-    parser.error("The file %s does not exist!" % arg)
+    parser.error("The file {} does not exist!".format(arg))
   else:
     return open(arg, 'r')  # return an open file handle
 
+# Determine whether the given directory exists and readable
 def readable_dir(prospective_dir):
   if not os.path.isdir(prospective_dir):
-    parser.error("readable_dir:{0} is not a valid path".format(prospective_dir))
+    parser.error("The directory{} does not exist!".format(prospective_dir))
   if os.access(prospective_dir, os.R_OK):
     return prospective_dir
   else:
-    parser.error("readable_dir:{0} is not a readable dir".format(prospective_dir))
+    parser.error("The directory {} is not a readable dir!".format(prospective_dir))
 
+def full_filename(input_paths, basename):
+  fullname = None
+  for path in args.input_paths:
+    tmp = os.path.join(path, basename)
+    if os.path.exists(tmp):
+      return tmp
+
+# Main function
 if __name__ == "__main__":
   import os
   import sys
 
   parser = argparse.ArgumentParser(description='Generate stub file.')
   parser.add_argument('filename', metavar="filename", nargs='?',
-                      help='the specification file name')
+                      help='specification file name')
   parser.add_argument('--input-path', type=readable_dir, nargs='*',
                       dest="input_paths", default='./')
   parser.add_argument('--output-path', type=readable_dir,
                       dest='output_path', default='./')
-  parser.add_argument('--output-file', dest='output_file',
+  parser.add_argument('--output-file', dest='pyi_basename',
                       default='__init__.pyi')
   parser.add_argument('--name', help='the node name')
   parser.add_argument('--imports', dest='imports',
                       help='external imports')
+  parser.add_argument('--filters-file', dest='filters_basename',
+                      default='filters.json',
+                      help='filters disctionary file name')
+  # parser.add_argument('-f', '--filters', type=json.loads, dest='filters',
+  #                     help='filter dictionary')
   args = parser.parse_args()
 
   # Extract node name:
   name = args.name
-  filename = args.filename
+  spec_basename = args.filename
+  filters_basename = args.filters_basename
   output_path = args.output_path
-  output_file = args.output_file
-  imports = args.imports
+  pyi_basename = args.pyi_basename
+  external_imports = args.imports
+  # filters = {"AosBasicTraits_2.Point_2": "false"}
+  # filters = {}
+  # if args.filters: filters = args.filters
 
-  print(imports)
-
-  if not name and not filename:
+  if not name and not spec_basename:
     parser.error("Both the the class name and the file name are missing!")
 
+  # Extract the name of the module:
   if not name:
-    name = Path(filename).stem
+    name = Path(spec_basename).stem
 
-  # Extract file name:
-  filename = None
-  if not filename:
-    filename = name + ".json"
+  # Extract the specification file base name:
+  if not spec_basename:
+    spec_basename = name + ".json"
 
-  # Extract configuration input full file name:
-  fullname = None
-  for path in args.input_paths:
-    tmp = os.path.join(path, filename)
-    if os.path.exists(tmp):
-      fullname = tmp
-      break
-
-  if not fullname:
-    parser.error("The file %s cannot be found!" % filename)
+  # Obtain specification input full file name:
+  spec_fullname = full_filename(args.input_paths, spec_basename)
+  if not spec_fullname:
+    parser.error("The file %s cannot be found!" % spec_basename)
     exit(-1)
 
+  # Obtain filter dictionary input full file name:
+  filters_fullname = full_filename(args.input_paths, filters_basename)
+  filters = {}
+  if filters_fullname:
+    with open(filters_fullname, 'r') as f:
+      filters_str = f.read()
+      filters = json.loads(filters_str)
+
   # Output path
-  if Path(output_file).stem == name:
+  if Path(pyi_basename).stem == name:
     pyi_path = output_path
   else:
     pyi_path = os.path.join(output_path, name)
@@ -211,18 +230,13 @@ if __name__ == "__main__":
   if not os.access(pyi_path, os.W_OK):
     parser.error("{0} is not a readable dir".format(pyi_path))
 
-  pyi_filename = os.path.join(pyi_path, output_file)
+  pyi_fullname = os.path.join(pyi_path, pyi_basename)
 
-  with open(fullname, 'r') as f:
-    # filename = sys.argv[1]
-    # script_dir = os.path.dirname(__file__)
-    # file_path = os.path.join(script_dir, filename)
-    # f = open(file_path)
+  with open(spec_fullname, 'r') as f:
     definitions_string = f.read()
-    # f.close()
 
-    with open(pyi_filename, 'w') as out:
-      definitions_string = replace_variables(definitions_string, {})
+    with open(pyi_fullname, 'w') as out:
+      definitions_string = replace_variables(definitions_string, filters)
       definitions = json.loads(definitions_string)
 
       add_missing_fields(definitions)
@@ -233,6 +247,7 @@ if __name__ == "__main__":
       module_functions = definitions["methods"]
       module_typedefs = definitions["typedefs"]
       imports = definitions["imports"]
+      if external_imports: imports.extend(external_imports.split(" "))
 
       classes = module_classes.items()
 
@@ -243,9 +258,9 @@ if __name__ == "__main__":
 
       print_line(out, "from typing import Iterator, overload")
       for module in imports:
-        print_line(out, 'import ' + module)
-
-      print_empty_line(out)
+        print_line(out, 'import ' + module + ' as ' + module)
+      if imports:
+        print_empty_line(out)
 
       for typedef, value in module_typedefs.items():
         print_line(out, typedef + " = " + value)

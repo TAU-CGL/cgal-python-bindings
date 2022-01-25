@@ -9,7 +9,7 @@
             },
             "classes": {
                 "InnerClass": {
-                    "required": true,
+                    "required": @xxx@,
                     "methods": {
                         "inner_method": [
                             {
