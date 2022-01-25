@@ -38,6 +38,7 @@
           }
         },
         "Equal_2": {
+          "required": @AosBasicTraits_2.Equal_2@,
           "methods": {
             "__call__": [
               {
@@ -69,7 +70,8 @@
         "AosBasicTraits_2": true
       },
       "typedefs": {
-        "Point_2": "Ker.Point_2"
+        "Point_2": "Ker.Point_2",
+        "Equal_2": "Ker.Equal_2"
       },
       "classes": {}
     },
