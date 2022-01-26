@@ -73,11 +73,11 @@ bp::object cgalpy_intersection(T1& t1, T2& t2) {
 
 // The supported overloaded functions CGAL::intersection(T1& t1, T2& t2) have
 // a complicated return value; it's a polymorphic object. It can be nothing or
-// one of several types  that depends on the type of the input parameters.
+// one of several types  that depends on the type of the input arguments.
 // Therefore, the selection is implemented in a different way as follows. We
 // still use the type of the return value (of the particular
 // CGAL::intersection(T1& t1, T2& t2) function, but we do not try to match
-// this type to the type of a parameter. Instead, we use use this type as the
+// this type to the type of an argument. Instead, we use this type as the
 // default value of an unnamed template parameter.
 template <typename T1, typename T2,
           typename = decltype(CGAL::intersection<Kernel>(T1(), T2()))>
