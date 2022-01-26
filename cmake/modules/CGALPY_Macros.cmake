@@ -294,7 +294,7 @@ if(NOT CGALPY_MACROS_FILE_INCLUDED)
   endfunction()
 
   ## Print all accessible variables
-  function(echo_all_variable)
+  function(echo_all_variables)
     get_cmake_property(_variableNames VARIABLES)
     list (SORT _variableNames)
     foreach (_variableName ${_variableNames})
