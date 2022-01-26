@@ -18,7 +18,6 @@ endif()
 set(CGALPY_BOOST_LIBRARIES)
 
 find_package(Python3 ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
-echo_all_variable()
 find_package(PythonLibs ${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} EXACT REQUIRED)
 
 if (PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
