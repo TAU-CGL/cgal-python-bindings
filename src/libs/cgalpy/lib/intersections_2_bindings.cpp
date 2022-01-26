@@ -52,9 +52,7 @@ class Intersection_visitor : public boost::static_visitor<bp::object>
 {
 public:
   template<typename T>
-    bp::object operator()(T& operand) const {
-      return bp::object(operand);
-  }
+  bp::object operator()(T& operand) const { return bp::object(operand); }
 
   // Overload for vector
   bp::object operator()(std::vector<Point_2>& operand) const {
@@ -73,10 +71,17 @@ bp::object cgalpy_intersection(T1& t1, T2& t2) {
   return boost::apply_visitor(Intersection_visitor(), *result);
 }
 
-template <typename T1, typename T2>
-// We check if CGAL::do_intersect exists for the two types as (currently)
-// do_intersect exists iff CGAL::intersection exists for the two types
-void bind_intersection_2T(decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
+// The supported overloaded functions CGAL::intersection(T1& t1, T2& t2) have
+// a complicated return value; it's a polymorphic object. It can be nothing or
+// one of several types  that depends on the type of the input parameters.
+// Therefore, the selection is implemented in a different way as follows. We
+// still use the type of the return value (of the particular
+// CGAL::intersection(T1& t1, T2& t2) function, but we do not try to match
+// this type to the type of a parameter. Instead, we use use this type as the
+// default value of an unnamed template parameter.
+template <typename T1, typename T2,
+          typename = decltype(CGAL::intersection<Kernel>(T1(), T2()))>
+void bind_intersection_2T(bool) {
   bp::def("intersection", &cgalpy_intersection<T1, T2>);
 }
 
