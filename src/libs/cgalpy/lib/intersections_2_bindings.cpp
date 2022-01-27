@@ -62,7 +62,7 @@ public:
 };
 
 template <typename T1, typename T2>
-bp::object cgalpy_intersection(T1& t1, T2& t2) {
+bp::object cgalpy_intersection(const T1& t1, const T2& t2) {
   auto result = CGAL::intersection<Kernel>(t1, t2);
   if (! result) return bp::object();    // no intersection
   return boost::apply_visitor(Intersection_visitor(), *result);
