@@ -48,8 +48,7 @@ void bind_do_intersect() {
   bind_do_intersect_1T<Circle_2>();
 }
 
-class Intersection_visitor : public boost::static_visitor<bp::object>
-{
+class Intersection_visitor : public boost::static_visitor<bp::object> {
 public:
   template<typename T>
   bp::object operator()(T& operand) const { return bp::object(operand); }
@@ -57,7 +56,7 @@ public:
   // Overload for vector
   bp::object operator()(std::vector<Point_2>& operand) const {
     bp::list lst;
-    for (Point_2 p : operand) lst.append(p);
+    for (const auto& p : operand) lst.append(p);
     return lst;
   }
 };
@@ -65,9 +64,7 @@ public:
 template <typename T1, typename T2>
 bp::object cgalpy_intersection(T1& t1, T2& t2) {
   auto result = CGAL::intersection<Kernel>(t1, t2);
-  if (!result) { // No intersection, return None
-    return bp::object();
-  }
+  if (! result) return bp::object();    // no intersection
   return boost::apply_visitor(Intersection_visitor(), *result);
 }
 
