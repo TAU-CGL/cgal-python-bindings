@@ -40,10 +40,11 @@ include_directories(${Boost_INCLUDE_DIR})
 
 # Add some compiler options
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  add_definitions(-GR)
-  add_definitions(-vmg)
-# elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-#
+  add_compile_options(-GR)
+  add_compile_options(-vmg)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
+  add_compile_options(-Wno-error=non-pod-varargs)
+  message(WARNING "detected Clang")
 endif()
 
 # Use C++17 for this directory and its sub-directories.
@@ -79,14 +80,16 @@ select_alpha_shape_3()
 if (${CGALPY_KERNEL_D_BINDINGS} AND
     ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
     (${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPEC_D})))
-  find_package(Eigen3 3.3.5)
+  find_package(Eigen3 3.3 REQUIRED)
   if (NOT EIGEN3_FOUND)
     SET(CGALPY_KERNEL_D_BINDINGS OFF)
     SET(CGALPY_SPATIAL_SEARCHING_BINDINGS OFF)
     message(WARNING "Eigen3 not found!\nTurning of the generations of\n(i) dD Kernel, and\n(ii) spatial searching bindings")
   endif()
-  include(CGAL_Eigen3_support)
+#  include(CGAL_Eigen3_support)
+  include_directories( ${EIGEN3_INCLUDE_DIR})
 endif()
+
 
 # Add subdirectories
 add_subdirectory(libs)
