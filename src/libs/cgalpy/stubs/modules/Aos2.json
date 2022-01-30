@@ -65,7 +65,13 @@
     }
   },
   "classes": {
+    "Arrangement_2": {
+      "typedefs": {
+        "Geometry_traits_2": @Aos2.Geometry_traits_2@
+      }
+    },
     "Arr_segment_traits_2": {
+      "required": @Arr_segment_traits_2@,
       "models": {
         "AosBasicTraits_2": true
       },
@@ -76,6 +82,7 @@
       "classes": {}
     },
     "Arr_circle_segment_traits_2": {
+      "required": @Arr_circle_segment_traits_2@,
       "models": {
         "AosBasicTraits_2": true
       },
