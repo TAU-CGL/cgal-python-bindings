@@ -9,3 +9,8 @@ src/python_scripts/precompiled/__pycache__/
 src/python_scripts/cgalpy_demos/__pycache__/
 src/python_scripts/__pycache__/
 .DS_Store
+*.egg-info/
+*.dylib
+*.pyi
+*.tar.gz
+*.whl
