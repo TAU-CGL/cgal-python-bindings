@@ -3,11 +3,13 @@
 This is the minimal setup needed to compile CGALPY to a *.whl file.
 
 Requirements:
+
 * setuptools
 * wheel
 * build
 
 Instructions:
+
 1. cd python-build
 2. python -m build
 3. The whl file will be in dist/CGALPY-1.0-py3-none-any.whl
