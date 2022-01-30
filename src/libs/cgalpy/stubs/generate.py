@@ -44,6 +44,7 @@ def replace_variables(s: str, variables_map: dict):
   splits = s.split('@')
   variables = [splits[i] for i in range(len(splits)) if i%2 == 1]
   for variable in variables:
+    print(variable)
     s = s.replace('@' + variable + '@', variables_map[variable])
   return s
 
