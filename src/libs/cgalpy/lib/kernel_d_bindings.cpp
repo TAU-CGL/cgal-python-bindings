@@ -105,10 +105,7 @@ void export_kernel_d() {
 
   bp::class_<Point_d>("Point_d")
     .def(bp::init<>())
-#if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
-     (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
     .def("__init__", bp::make_constructor(&init_point_d))
-#endif
     .def("dimension", &Point_d::dimension)
     .def("cartesian", &Point_d::cartesian, Kernel_d_return_value_policy())
     .def("__getitem__", &Point_d::operator[], Kernel_d_return_value_policy())
