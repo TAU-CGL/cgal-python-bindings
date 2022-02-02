@@ -2,6 +2,8 @@ from distutils.core import setup
 import os
 import sys
 
+SEARCH_DIR = '.'
+
 files = []
 for file in os.listdir('.'):
       if '.so' in file or '.pyi' in file:
