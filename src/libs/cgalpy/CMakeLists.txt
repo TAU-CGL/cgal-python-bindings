@@ -322,12 +322,31 @@ if(DOXYGEN_FOUND)
      		    COMMENT "Generating API documentation with Doxygen" VERBATIM)
 endif(DOXYGEN_FOUND)
 
-# Type Annotation
+################################################################################
+# Stubs (Type Annotation)
+################################################################################
 set (CGALPY_SRC_STUBS_DIR "${CMAKE_CURRENT_LIST_DIR}/stubs")
 set (CGALPY_MODULES_DIR "${CGALPY_SRC_STUBS_DIR}/modules")
 set (CGALPY_STUBS_GENERATOR "${CGALPY_SRC_STUBS_DIR}/generate.py")
 set (CGALPY_DST_STUBS_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
-set (CGALPY_STUBS "${CGALPY_DST_STUBS_DIR}/CGALPY.pyi")
+
+set (CGALPY_MODULE_OUTPUT ${CGALPY_DST_STUBS_DIR}/CGALPY.pyi)
+set (CGALPY_MODULE_INPUT ${CGALPY_MODULES_DIR}/CGALPY.json)
+string(REPLACE ";" " " STR_MODULES "${MODULES}")
+set (CGALPY_MODULE_ARGS
+  --name "CGALPY"
+  --input-path ${CGALPY_MODULES_DIR}
+  --output-path ${CGALPY_DST_STUBS_DIR}
+  --output-file "CGALPY.pyi"
+  --imports "${STR_MODULES}")
+
+add_custom_command(
+  OUTPUT ${CGALPY_MODULE_OUTPUT}
+  COMMAND ${CGALPY_STUBS_GENERATOR}
+  ARGS ${CGALPY_MODULE_ARGS}
+  DEPENDS ${CGALPY_STUBS_GENERATOR} ${CGALPY_MODULE_INPUT})
+
+set (CGALPY_STUBS ${CGALPY_MODULE_OUTPUT})
 
 function(add_module name)
   set (MODULE_OUTPUT_PATH ${CGALPY_DST_STUBS_DIR}/${name})
@@ -356,25 +375,61 @@ foreach(MODULE IN LISTS MODULES)
   add_module(${MODULE})
 endforeach()
 
-set (CGALPY_MODULE_OUTPUT ${CGALPY_DST_STUBS_DIR}/CGALPY.pyi)
-set (CGALPY_MODULE_INPUT ${CGALPY_MODULES_DIR}/CGALPY.json)
-string(REPLACE ";" " " STR_MODULES "${MODULES}")
-set (CGALPY_MODULE_ARGS
-  --name "CGALPY"
-  --input-path ${CGALPY_MODULES_DIR}
-  --output-path ${CGALPY_DST_STUBS_DIR}
-  --output-file "CGALPY.pyi"
-  --imports "${STR_MODULES}")
-
-add_custom_command(
-  OUTPUT ${CGALPY_MODULE_OUTPUT}
-  COMMAND ${CGALPY_STUBS_GENERATOR}
-  ARGS ${CGALPY_MODULE_ARGS}
-  DEPENDS ${CGALPY_STUBS_GENERATOR} ${CGALPY_MODULE_INPUT})
-
 add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS})
 
+################################################################################
+# Post build
+################################################################################
+# Setup generation
+set (CGALPY_GEN_SETUP "${CMAKE_SOURCE_DIR}/src/python_scripts/gen_setup.py")
+if (WIN32)
+  set(CGALPY_GEN_SETUP_CMD ${Python3_EXECUTABLE} ${CGALPY_SETUP})
+else()
+  set(CGALPY_GEN_SETUP_CMD ${CGALPY_GEN_SETUP})
+endif()
+set (CGALPY_GEN_SETUP_OUTPUT "${CGALPY_LIB_DIR}/setup.py")
+set (CGALPY_GEN_SETUP_ARGS
+  --input-path ${CGALPY_LIB_DIR}
+  --name ${CGALPY_LIB_NAME})
+foreach(MODULE IN LISTS MODULES)
+  set (CGALPY_GEN_SETUP_ARGS ${CGALPY_GEN_SETUP_ARGS} --module ${MODULE})
+endforeach()
+set (CGALPY_GEN_SETUP_DEPENDS ${CGALPY_GEN_SETUP_CMD})
+
+add_custom_command(
+  OUTPUT ${CGALPY_GEN_SETUP_OUTPUT}
+  COMMAND ${CGALPY_GEN_SETUP_CMD}
+  ARGS ${CGALPY_GEN_SETUP_ARGS}
+  DEPENDS ${CGALPY_GEN_SETUP_DEPENDS})
+
+set (CGALPY_SETUP_README "${CGALPY_LIB_DIR}/README")
+add_custom_command(
+  OUTPUT ${CGALPY_SETUP_README}
+  COMMAND "touch"}
+  ARGS ${CGALPY_SETUP_README})
+
+set (SETUP_CFG_DEPENDS ${CGALPY_GEN_SETUP_OUTPUT} ${CGALPY_SETUP_README})
+add_custom_target(SETUP_CFG ALL DEPENDS ${SETUP_CFG_DEPENDS})
+
+# Setup application
+set (CGALPY_SETUP_OUTPUT_DIR "${CGALPY_LIB_DIR}/dist")
+set (CGALPY_TAR ${CGALPY_SETUP_OUTPUT_DIR}/CGALPY-1.0.tar.gz)
+set (CGALPY_WHL ${CGALPY_SETUP_OUTPUT_DIR}/CGALPY-1.0-py3-none-any.whl)
+set (CGALPY_SETUP_OUTPUT ${CGALPY_TAR} ${CGALPY_WHL})
+set (CGALPY_SETUP_CMD ${Python3_EXECUTABLE})
+set (CGALPY_SETUP_ARGS -m build ${CGALPY_LIB_DIR})
+set (CGALPY_SETUP_DEPENDS CGALPY ${CGALPY_STUBS} ${CGALPY_CFG_DEPENDS})
+add_custom_command(
+  OUTPUT ${CGALPY_SETUP_OUTPUT}
+  COMMAND ${CGALPY_SETUP_CMD}
+  ARGS ${CGALPY_SETUP_ARGS}
+  DEPENDS ${CGALPY_SETUP_DEPENDS})
+
+add_custom_target(SETUP ALL DEPENDS ${CGALPY_SETUP_OUTPUT})
+
+################################################################################
 # Installation
+################################################################################
 install(TARGETS CGALPY
   RUNTIME DESTINATION ${CGALPY_INSTALL_BIN_DIR}
   LIBRARY DESTINATION ${CGALPY_INSTALL_PYTHON_DIR}
