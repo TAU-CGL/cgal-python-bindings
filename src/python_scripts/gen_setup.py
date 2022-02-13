@@ -70,7 +70,7 @@ if __name__ == '__main__':
     indent=6
     print_line(out, "version="      + "\'" + "1.0" + "\'"           + ",")
     print_line(out, "py_modules="   + "[\'" + name + "\']"          + ",")
-    print_line(out, "packages="     + "[]"                          + ",")
+    print_line(out, "packages="     + "[\'\']"                      + ",")
     print_line(out, "author="       + "\'taucgl\'"                  + ",")
     print_line(out, "author_email=" + "\'cgl@tau.ac.il\'"           + ",")
     print_line(out, "url="          + "\'http://acg.cs.tau.ac.il\'" + ",")
