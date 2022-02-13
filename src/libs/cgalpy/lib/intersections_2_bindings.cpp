@@ -14,40 +14,43 @@
 
 namespace bp = boost::python;
 
+/// Handle do_intersect
+///@{
+
 typedef typename Kernel::Intersect_2                               Intersect_2;
 
-// Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2) are not a valid overload for do_intersect
-// in which case the second version (which does nothing) will be used instead (SFINAE)
+// Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2)
+// are not a valid overload for do_intersect in which case the second version
+// (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
-void bind_do_intersect_2T(decltype(CGAL::do_intersect<Kernel>(T1(), T2())))
+void bind_do_intersect_pair(decltype(CGAL::do_intersect<Kernel>(T1(), T2())))
 {
   bp::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
 }
 
 template<typename, typename>
-void bind_do_intersect_2T(...) {}
+void bind_do_intersect_pair(...) {}
 
-template <typename T>
-void bind_do_intersect_1T() {
-  bind_do_intersect_2T<T, Point_2>(true);
-  bind_do_intersect_2T<T, Line_2>(true);
-  bind_do_intersect_2T<T, Ray_2>(true);
-  bind_do_intersect_2T<T, Segment_2>(true);
-  bind_do_intersect_2T<T, Triangle_2>(true);
-  bind_do_intersect_2T<T, Iso_rectangle_2>(true);
-  bind_do_intersect_2T<T, Circle_2>(true);
+template<typename T> void bind_do_intersect_inner(T) {}
+
+template<typename T1, typename T2, typename... Ts>
+void bind_do_intersect_inner(T1 arg1, T2 arg2, Ts... args) {
+  bind_do_intersect_pair<T1, T2>(true);
+  bind_do_intersect_inner(arg1, args...);
 }
 
-void bind_do_intersect() {
-  bind_do_intersect_1T<Point_2>();
-  bind_do_intersect_1T<Line_2>();
-  bind_do_intersect_1T<Ray_2>();
-  bind_do_intersect_1T<Segment_2>();
-  bind_do_intersect_1T<Triangle_2>();
-  bind_do_intersect_1T<Iso_rectangle_2>();
-  bind_do_intersect_1T<Circle_2>();
-}
+template<typename T>
+void bind_do_intersect(T arg) { bind_do_intersect_inner(arg, arg); }
 
+template <typename T1, typename... Ts>
+void bind_do_intersect(T1 arg, Ts... args) {
+  bind_do_intersect_inner(arg, arg, args...);
+  bind_do_intersect(args...);
+}
+///@}
+
+/// Handle intersections
+///@{
 class Intersection_visitor : public boost::static_visitor<bp::object> {
 public:
   template<typename T>
@@ -78,33 +81,34 @@ bp::object cgalpy_intersection(const T1& t1, const T2& t2) {
 // default value of an unnamed template parameter.
 template <typename T1, typename T2,
           typename = decltype(CGAL::intersection<Kernel>(T1(), T2()))>
-void bind_intersection_2T(bool) {
+void bind_intersection_pair(bool) {
   bp::def("intersection", &cgalpy_intersection<T1, T2>);
 }
 
 template<typename, typename>
-void bind_intersection_2T(...) {}
+void bind_intersection_pair(...) {}
 
-template <typename T>
-void bind_intersection_1T() {
-  bind_intersection_2T<T, Iso_rectangle_2>(true);
-  bind_intersection_2T<T, Line_2>(true);
-  bind_intersection_2T<T, Ray_2>(true);
-  bind_intersection_2T<T, Segment_2>(true);
-  bind_intersection_2T<T, Triangle_2>(true);
-  bind_intersection_2T<T, Point_2>(true);
+template<typename T> void bind_intersection_inner(T) {}
+
+template<typename T1, typename T2, typename... Ts>
+void bind_intersection_inner(T1 arg1, T2 arg2, Ts... args) {
+  bind_intersection_pair<T1, T2>(true);
+  bind_intersection_inner(arg1, args...);
 }
 
-void bind_intersection() {
-  bind_intersection_1T<Iso_rectangle_2>();
-  bind_intersection_1T<Line_2>();
-  bind_intersection_1T<Ray_2>();
-  bind_intersection_1T<Segment_2>();
-  bind_intersection_1T<Triangle_2>();
-  bind_intersection_1T<Point_2>();
+template<typename T>
+void bind_intersection(T arg) { bind_intersection_inner(arg, arg); }
+
+template <typename T1, typename... Ts>
+void bind_intersection(T1 arg, Ts... args) {
+  bind_intersection_inner(arg, arg, args...);
+  bind_intersection(args...);
 }
 
 void export_intersections_2() {
-  bind_intersection();
-  bind_do_intersect();
+  bind_intersection(Iso_rectangle_2(), Line_2(), Ray_2(), Segment_2(),
+                    Triangle_2(), Point_2(), Circle_2());
+  bind_do_intersect(Iso_rectangle_2(), Line_2(), Ray_2(), Segment_2(),
+                    Triangle_2(), Point_2(), Circle_2());
 }
+///@}
