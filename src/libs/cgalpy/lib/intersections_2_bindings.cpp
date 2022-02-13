@@ -36,15 +36,16 @@ template<typename T> void bind_do_intersect_inner(T) {}
 template<typename T1, typename T2, typename... Ts>
 void bind_do_intersect_inner(T1 arg1, T2 arg2, Ts... args) {
   bind_do_intersect_pair<T1, T2>(true);
+  bind_do_intersect_pair<T2, T1>(true);
   bind_do_intersect_inner(arg1, args...);
 }
 
 template<typename T>
-void bind_do_intersect(T arg) { bind_do_intersect_inner(arg, arg); }
+void bind_do_intersect(T arg) { bind_do_intersect_pair<T, T>(true); }
 
 template <typename T1, typename... Ts>
 void bind_do_intersect(T1 arg, Ts... args) {
-  bind_do_intersect_inner(arg, arg, args...);
+  bind_do_intersect_inner(arg, args...);
   bind_do_intersect(args...);
 }
 ///@}
@@ -93,15 +94,16 @@ template<typename T> void bind_intersection_inner(T) {}
 template<typename T1, typename T2, typename... Ts>
 void bind_intersection_inner(T1 arg1, T2 arg2, Ts... args) {
   bind_intersection_pair<T1, T2>(true);
+  bind_intersection_pair<T2, T1>(true);
   bind_intersection_inner(arg1, args...);
 }
 
 template<typename T>
-void bind_intersection(T arg) { bind_intersection_inner(arg, arg); }
+void bind_intersection(T arg) { bind_intersection_pair<T, T>(true); }
 
 template <typename T1, typename... Ts>
 void bind_intersection(T1 arg, Ts... args) {
-  bind_intersection_inner(arg, arg, args...);
+  bind_intersection_inner(arg, args...);
   bind_intersection(args...);
 }
 
