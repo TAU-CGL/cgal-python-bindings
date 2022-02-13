@@ -47,6 +47,7 @@ template <typename T1, typename... Ts>
 void bind_do_intersect(T1 arg, Ts... args) {
   bind_do_intersect_inner(arg, args...);
   bind_do_intersect(args...);
+  bind_do_intersect_pair<T1, T1>(true);
 }
 ///@}
 
@@ -105,6 +106,7 @@ template <typename T1, typename... Ts>
 void bind_intersection(T1 arg, Ts... args) {
   bind_intersection_inner(arg, args...);
   bind_intersection(args...);
+  bind_intersection_pair<T1, T1>(true);
 }
 
 void export_intersections_2() {
