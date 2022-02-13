@@ -225,7 +225,7 @@ if __name__ == "__main__":
     filters.update(external_filters)
 
   # Output path
-  if Path(pyi_basename).stem == name:
+  if Path(pyi_basename).stem.startswith(name):
     pyi_path = output_path
   else:
     pyi_path = os.path.join(output_path, name)
@@ -235,7 +235,6 @@ if __name__ == "__main__":
     parser.error("{0} is not a readable dir".format(pyi_path))
 
   pyi_fullname = os.path.join(pyi_path, pyi_basename)
-
   with open(spec_fullname, 'r') as f:
     definitions_string = f.read()
 
