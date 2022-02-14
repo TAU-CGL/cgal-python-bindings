@@ -41,7 +41,10 @@ with open(filename, 'r') as inp:
 
   # Compute the Minkowski sum using the decomposition approach.
   # Minkowski sum by decompisition is temporarily commented out
-  # ssab_decomp = PP2.Small_side_angle_bisector_decomposition()
-  # sum = MS2.minkowski_sum_2(P, Q, ssab_decomp)
-  sum = MS2.minkowski_sum_2(P, Q)
-  print("P (+) Q = ", sum)
+  ssab_decomp = PP2.Small_side_angle_bisector_decomposition()
+  sum1 = MS2.minkowski_sum_2(P, Q, ssab_decomp, ssab_decomp)
+  sum2 = MS2.minkowski_sum_2(P, Q, ssab_decomp)
+  sum3 = MS2.minkowski_sum_2(P, Q)
+  print("P (+) Q = ", sum1)
+  print("P (+) Q = ", sum2)
+  print("P (+) Q = ", sum3)
