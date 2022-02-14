@@ -35,19 +35,25 @@ template<typename T> void bind_do_intersect_inner(T) {}
 
 template<typename T1, typename T2, typename... Ts>
 void bind_do_intersect_inner(T1 arg1, T2 arg2, Ts... args) {
-  bind_do_intersect_pair<T1, T2>(true);
-  bind_do_intersect_pair<T2, T1>(true);
+  typedef typename std::remove_pointer<T1>::type        PT1;
+  typedef typename std::remove_pointer<T2>::type        PT2;
+  bind_do_intersect_pair<PT1, PT2>(true);
+  bind_do_intersect_pair<PT2, PT1>(true);
   bind_do_intersect_inner(arg1, args...);
 }
 
 template<typename T>
-void bind_do_intersect(T arg) { bind_do_intersect_pair<T, T>(true); }
+void bind_do_intersect(T arg) {
+  typedef typename std::remove_pointer<T>::type         PT;
+  bind_do_intersect_pair<PT, PT>(true);
+}
 
 template <typename T1, typename... Ts>
 void bind_do_intersect(T1 arg, Ts... args) {
   bind_do_intersect_inner(arg, args...);
   bind_do_intersect(args...);
-  bind_do_intersect_pair<T1, T1>(true);
+  typedef typename std::remove_pointer<T1>::type         PT1;
+  bind_do_intersect_pair<PT1, PT1>(true);
 }
 ///@}
 
@@ -94,25 +100,38 @@ template<typename T> void bind_intersection_inner(T) {}
 
 template<typename T1, typename T2, typename... Ts>
 void bind_intersection_inner(T1 arg1, T2 arg2, Ts... args) {
-  bind_intersection_pair<T1, T2>(true);
-  bind_intersection_pair<T2, T1>(true);
+  typedef typename std::remove_pointer<T1>::type        PT1;
+  typedef typename std::remove_pointer<T2>::type        PT2;
+  bind_intersection_pair<PT1, PT2>(true);
+  bind_intersection_pair<PT2, PT1>(true);
   bind_intersection_inner(arg1, args...);
 }
 
 template<typename T>
-void bind_intersection(T arg) { bind_intersection_pair<T, T>(true); }
+void bind_intersection(T arg) {
+  typedef typename std::remove_pointer<T>::type         PT;
+  bind_intersection_pair<PT, PT>(true);
+}
 
 template <typename T1, typename... Ts>
 void bind_intersection(T1 arg, Ts... args) {
   bind_intersection_inner(arg, args...);
   bind_intersection(args...);
-  bind_intersection_pair<T1, T1>(true);
+  typedef typename std::remove_pointer<T1>::type        PT1;
+  bind_intersection_pair<PT1, PT1>(true);
 }
 
 void export_intersections_2() {
-  bind_intersection(Iso_rectangle_2(), Line_2(), Ray_2(), Segment_2(),
-                    Triangle_2(), Point_2(), Circle_2());
-  bind_do_intersect(Iso_rectangle_2(), Line_2(), Ray_2(), Segment_2(),
-                    Triangle_2(), Point_2(), Circle_2());
+  Iso_rectangle_2* iso_rectangle_2(nullptr);
+  Line_2* line_2(nullptr);
+  Ray_2* ray_2(nullptr);
+  Segment_2* segment_2(nullptr);
+  Triangle_2* triangle_2(nullptr);
+  Point_2* point_2(nullptr);
+  Circle_2* circle_2(nullptr);
+  bind_intersection(iso_rectangle_2, line_2, ray_2, segment_2,
+                    triangle_2, point_2, circle_2);
+  bind_do_intersect(iso_rectangle_2, line_2, ray_2, segment_2,
+                    triangle_2, point_2, circle_2);
 }
 ///@}

@@ -23,7 +23,7 @@ namespace bp = boost::python;
 
 namespace ms2 {
 
-#if 0
+#if CGAL_VERSION_NR > 1050500000
 // The binding for Minkowski sum by decomposition is temporarily commented out
 // until a bug in CGAL is fixed. Otherwise, the code does not compile.
 
@@ -33,7 +33,7 @@ namespace ms2 {
 // target<T>::type select:
 //   std::list<T>::iterator if T is Polygon_2
 //   std::list<T::Polygon_2>::iterator if T is Polygon_with_holes_2
-template <typename T> class has { typedef void type; };
+template <typename T> struct has { typedef void type; };
 
 template <typename T, typename = void> struct target {
   typedef typename std::list<T>::iterator type;
@@ -48,14 +48,12 @@ struct target<T, typename has<typename T::Polygon_2>::type> {
 template <typename T1, typename T2, typename T3>
 void bind_mink_sum_decomp_one_strategy_3T(...) {}
 
-static int cnt1(0);
 template <typename T1, typename T2, typename T3,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T3()(T2(), typename target<T2>::type()))>
 void bind_mink_sum_decomp_one_strategy_3T(bool) {
   bp::def<Polygon_with_holes_2(const T1&, const T2&, const T3&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>);
-  std::cout << "NUM1: " << ++cnt1 << std::endl;
 }
 
 template <typename T1, typename T2>
@@ -79,32 +77,50 @@ void bind_mink_sum_decomp_one_strategy() {
 
 // Two Decomposition Staretegies
 template <typename T1, typename T2, typename T3, typename T4>
-void bind_mink_sum_decomp_two_strategies_4T(...) {}
+void bind_mink_sum_decomp_two_strategies_pair(...) {}
 
-static int cnt2(0);
 template <typename T1, typename T2, typename T3, typename T4,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T4()(T2(), typename target<T1>::type()))>
-void bind_mink_sum_decomp_two_strategies_4T(bool) {
+void bind_mink_sum_decomp_two_strategies_pair(bool) {
   bp::def<Polygon_with_holes_2(const T1&, const T2&, const T3&, const T4&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>);
-  std::cout << "NUM2: " << ++cnt2 << std::endl;
 }
 
-template <typename T1, typename T2, typename T3>
-void bind_mink_sum_decomp_two_strategies_3T() {
-  bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, ms2::Polygon_nop_decomposition_2>(true);
-  bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, pp2::Polygon_vertical_decomposition_2>(true);
-  bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, pp2::Polygon_triangulation_decomposition_2>(true);
-  bind_mink_sum_decomp_two_strategies_4T<T1, T2, T3, pp2::Small_side_angle_bisector_decomposition_2>(true);
+template <typename P1, typename P2, typename T> void
+bind_mink_sum_decomp_two_strategies_inner(T) {}
+
+template <typename P1, typename P2, typename T1, typename T2, typename... Ts>
+void bind_mink_sum_decomp_two_strategies_inner(T1 arg1, T2 arg2, Ts... args) {
+  typedef typename std::remove_pointer<T1>::type        PT1;
+  typedef typename std::remove_pointer<T2>::type        PT2;
+  bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT1, PT2>(true);
+  bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT2, PT1>(true);
+  bind_mink_sum_decomp_two_strategies_inner<P1, P2>(arg1, args...);
 }
 
-template <typename T1, typename T2>
+template <typename P1, typename P2, typename T>
+void bind_mink_sum_decomp_two_strategies_outer(T arg) {
+  typedef typename std::remove_pointer<T>::type         PT;
+  bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT, PT>(true);
+}
+
+template <typename P1, typename P2, typename T1, typename... Ts>
+void bind_mink_sum_decomp_two_strategies_outer(T1 arg, Ts... args) {
+  bind_mink_sum_decomp_two_strategies_inner<P1, P2>(arg, args...);
+  bind_mink_sum_decomp_two_strategies_outer<P1, P2>(args...);
+  typedef typename std::remove_pointer<T1>::type        PT1;
+  bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT1, PT1>(true);
+}
+
+template <typename P1, typename P2>
 void bind_mink_sum_decomp_two_strategies_2T() {
-  bind_mink_sum_decomp_two_strategies_3T<T1, T2, ms2::Polygon_nop_decomposition_2>();
-  bind_mink_sum_decomp_two_strategies_3T<T1, T2, pp2::Polygon_vertical_decomposition_2>();
-  bind_mink_sum_decomp_two_strategies_3T<T1, T2, pp2::Polygon_triangulation_decomposition_2>();
-  bind_mink_sum_decomp_two_strategies_3T<T1, T2, pp2::Small_side_angle_bisector_decomposition_2>();
+  ms2::Polygon_nop_decomposition_2* pnp(nullptr);
+  pp2::Polygon_vertical_decomposition_2* pvd(nullptr);
+  pp2::Polygon_triangulation_decomposition_2* ptd(nullptr);
+  pp2::Small_side_angle_bisector_decomposition_2* ssabd(nullptr);
+
+  bind_mink_sum_decomp_two_strategies_outer<P1, P2>(pnp, pvd, ptd, ssabd);
 }
 
 template <typename T>
@@ -160,7 +176,7 @@ void export_minkowski_sum_2() {
 
   bp::scope ms_scope = bp::scope();
 
-#if 0
+#if CGAL_VERSION_NR > 1050500000
   // By decomposition
   // ================
   ms2::bind_mink_sum_decomp_one_strategy();
