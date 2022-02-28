@@ -1,0 +1,206 @@
+\begin{thebibliography}{10}
+
+\bibitem{bhsbp-ag-03}
+D.~Abrahams and R.~W. Grosse-Kunstleve.
+\newblock Building hybrid systems with boost.python.
+\newblock {\em C/C++ Users Journal}, pages 31--39, 2003.
+
+\bibitem{a-gps-99}
+M.~H. Austern.
+\newblock {\em Generic Programming and the {\slshape\scshape Stl}}.
+\newblock Addison-Wesley, Boston, MA, USA, 1999.
+
+\bibitem{bfhhm-epsph-15}
+A.~Baram, E.~Fogel, D.~Halperin, M.~Hemmer, and S.~Morr.
+\newblock Exact {M}inkowski sums of polygons with holes.
+\newblock {\em Comput. Geom. Theory Appl.}, 1:01--01, 2015.
+
+\bibitem{bbcds-cbbw-11}
+S.~Behnel, R.~Bradshaw, C.~Citro, L.~Dalc{\'{\i}}n, D.~S. Seljebotn, and
+  K.~Smith.
+\newblock Cython: The best of both worlds.
+\newblock {\em Comput. Sci. Eng.}, 13(2):31--39, 2011.
+
+\bibitem{bfhks-apsca-10}
+E.~Berberich, E.~Fogel, D.~Halperin, M.~Kerber, and O.~Setter.
+\newblock Arrangements on parametric surfaces {II}: Concretizations and
+  applications.
+\newblock {\em Math. in Comput. Sci.}, 4:67--91, 2010.
+
+\bibitem{bfhmw-apsgf-10}
+E.~Berberich, E.~Fogel, D.~Halperin, K.~Mehlhorn, and R.~Wein.
+\newblock Arrangements on parametric surfaces {I}: General framework and
+  infrastructure.
+\newblock {\em Math. in Comput. Sci.}, 4:45--66, 2010.
+
+\bibitem{by-ag-98}
+J.-D. Boissonnat and M.~Yvinec.
+\newblock Triangulations.
+\newblock In {\em Algorithmic Geometry}. Cambridge University Press, 1998.
+\newblock Translated by Herv{\'e} Br{\"o}nnimann.
+
+\bibitem{cgal:bfghhkps-lgk23-21a}
+H.~Br{\"o}nnimann, A.~Fabri, G.-J. Giezeman, S.~Hert, M.~Hoffmann, L.~Kettner,
+  S.~Pion, and S.~Schirra.
+\newblock {2D} and {3D} linear geometry kernel.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{cgal:ct-pt3-21a}
+M.~Caroli, A.~Pell{\'e}, M.~Rouxel-Labb{\'e}, and M.~Teillaud.
+\newblock {3D} periodic triangulations.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{ct-cpt-09}
+M.~Caroli and M.~Teillaud.
+\newblock Computing 3d periodic triangulations.
+\newblock In {\em Proc. 17{th} Annu. Eur. Symp. Alg.}, volume 5757 of {\em
+  LNCS}, pages 37--48. Springer, 2009.
+
+\bibitem{cgal:d-as2-21a}
+T.~K.~F. Da.
+\newblock {2D} alpha shapes.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{cgal:dy-as3-21a}
+T.~K.~F. Da, S.~Loriot, and M.~Yvinec.
+\newblock {3D} alpha shapes.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{cgal:dksy-hc-21a}
+O.~Devillers, L.~Kettner, S.~Pion, M.~Seel, and M.~Yvinec.
+\newblock Handles and circulators.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{DBLP:journals/jea/FlatoHHNE00}
+E.~Flato, D.~Halperin, I.~Hanniel, O.~Nechushtan, and E.~Ezra.
+\newblock The design and implementation of planar maps in {CGAL}.
+\newblock {\em {ACM} J. Exp. Algorithmics}, 5:13, 2000.
+
+\bibitem{fhw-caass-12}
+E.~Fogel, D.~Halperin, and R.~Wein.
+\newblock {\em {\slshape\scshape Cgal} Arrangements and Their Applications, A
+  Step by Step Guide}.
+\newblock Springer, Berlin Heidelberg, Germany, 2012.
+
+\bibitem{cgal:fwzh-rbso2-21a}
+E.~Fogel, O.~Setter, R.~Wein, G.~Zucker, B.~Zukerman, and D.~Halperin.
+\newblock {2D} regularized boolean set-operations.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{hlw-gfapm-00}
+D.~Halperin, J.-C. Latombe, and R.~H. Wilson.
+\newblock A general framework for assembly planning: {T}he motion space
+  approach.
+\newblock {\em Algorithmica}, 26:577--601, 2000.
+
+\bibitem{my-hs-atarr-95}
+D.~Halperin and M.~Sharir.
+\newblock Arrangements and their applications in robotics: Recent developments.
+\newblock In K.~Goldbergs, D.~Halperin, J.-C. Latombe, and R.~Wilson, editors,
+  {\em Workshop on Alg. Foundations Robotics}, pages 495--511. A.K. Peters,
+  Boston, MA, 1995.
+
+\bibitem{hs-a-18}
+D.~Halperin and M.~Sharir.
+\newblock Arrangements".
+\newblock In J.~E. Goodman, J.~O'Rourke, and C.~T\'oth, editors, {\em Handb.
+  Comput. Geom.}, chapter~28. Chapman \& Hall/CRC, 3rd edition, 2017.
+
+\bibitem{Har-Gil2021.07.20.452894}
+H.~Har-Gil, Y.~Jacobson, A.~Pr{\"o}nneke, J.~F. Staiger, O.~Tomer, D.~Halperin,
+  and P.~Blinder.
+\newblock Neural collision detection: an open source library to study the
+  three-dimensional interactions of neurons and other tree-like structures.
+\newblock {\em bioRxiv}, 2021.
+
+\bibitem{cgal:pt-t3-21a}
+C.~Jamin, S.~Pion, and M.~Teillaud.
+\newblock {3D} triangulations.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{cgal:k-pt2-13-21a}
+N.~Kruithof.
+\newblock {2D} periodic triangulations.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{ld-hppcn-16}
+W.~Lavrijsen and A.~Dutta.
+\newblock High-performance python-c++ bindings with pypy and cling.
+\newblock In {\em Proc. 6{th} Workshop on Python}, pages 27--35. IEEE Comput.
+  Society Press, 2016.
+
+\bibitem{DBLP:journals/jcb/MartinYBZD11}
+J.~W. Martin, A.~K. Yan, C.~Bailey{-}Kellogg, P.~Zhou, and B.~R. Donald.
+\newblock A geometric arrangement algorithm for structure determination of
+  symmetric protein homo-oligomers from noes and rdcs.
+\newblock {\em J. of Comput. Bio.}, 18(11):1507--1523, 2011.
+
+\bibitem{mh-mc-08}
+K.~Martin and B.~Hoffman.
+\newblock {\em Mastering \textsc{CMake}}.
+\newblock Kitware, Inc, 4th edition, 2008.
+
+\bibitem{m-rgece-06}
+M.~Meyerovitch.
+\newblock Robust, generic and efficient construction of envelopes of surfaces
+  in three-dimensional space.
+\newblock In {\em Proc. 14{th} Annu. Eur. Symp. Alg.}, volume 4168 of {\em
+  LNCS}, pages 792--803. Springer, 2006.
+
+\bibitem{cgal:s-gkd-21a}
+M.~Seel.
+\newblock {dD} geometry kernel.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{cgal:tf-ssd-21a}
+H.~Tangelder and A.~Fabri.
+\newblock {dD} spatial searching.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{cgal:eb-21a}
+{The \textsc{Cgal} Project}.
+\newblock {\em {\slshape\scshape Cgal} User and Reference Manual}.
+\newblock \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{DBLP:conf/gis/KreveldSW04}
+M.~J. van Kreveld, {\'{E}}.~Schramm, and A.~Wolff.
+\newblock Algorithms for the placement of diagrams on maps.
+\newblock In {\em Proc. 12{th} ACM Int. Workshop Geographic Inf. Systems},
+  pages 222--231, Washington, DC, USA, 2004. PUB-ACM.
+
+\bibitem{cgal:w-rms2-21a}
+R.~Wein, A.~Baram, E.~Flato, E.~Fogel, M.~Hemmer, and S.~Morr.
+\newblock {2D} minkowski sums.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{cgal:wfzh-a2-21a}
+R.~Wein, E.~Berberich, E.~Fogel, D.~Halperin, M.~Hemmer, O.~Salzman, and
+  B.~Zukerman.
+\newblock {2D} arrangements.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\bibitem{DBLP:journals/comgeo/WeinFZH07}
+R.~Wein, E.~Fogel, B.~Zukerman, and D.~Halperin.
+\newblock Advanced programming techniques applied to \textsc{Cgal}'s
+  arrangement package.
+\newblock {\em Comput. Geom. Theory Appl.}, 38(1--2):37--63, 2007.
+
+\bibitem{cgal:y-t2-21a}
+M.~Yvinec.
+\newblock {2D} triangulation.
+\newblock In {\em {\slshape\scshape Cgal} User and Reference Manual}.
+  \textsc{Cgal} Editorial Board, {5.3} edition, 2021.
+
+\end{thebibliography}
