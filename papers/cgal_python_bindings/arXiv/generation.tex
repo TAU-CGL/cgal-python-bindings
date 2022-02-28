@@ -6,7 +6,7 @@ The most simple form of building an application written in C++ that
 depends on \cgal{} consists of the stages below. Let
 \myLstinline{\$APP\_SRC\_DIR} point at the root directory of the
 application source tree.
-\begin{enumerate}
+\begin{compactenum}
 \item Obtain the sources of \cgal{}; let
   \myLstinline{\$CGAL\_SRC\_DIR} point at the root directory of the
   \cgal{} source tree.
@@ -23,8 +23,8 @@ application source tree.
 \item Change directory to \myLstinline{\$APP\_DIR} and run
   '\myLstinline{cmake [options] \$APP\_SRC\_DIR}' followed by
   \myLstinline{make}.
-\end{enumerate}
-
+\end{compactenum}
+\noindent
 In the procedure above \myLstinline{options} refer to optional
 arguments passed to \myLstinline{cmake}, which govern the generation
 of the native build environment. When running an application written
@@ -53,21 +53,22 @@ flags that specify selections for bindings of entities of the
 corresponding \cgal{} packages.  For example, the long name of the
 \iiDArrangementsPackage{} module is
 \myLstinline{ARRANGEMENT\_ON\_SURFACE\_2}; its short name is
-\myLstinline{AOS2}; \myLstinline{CGALPY\_ARRANGEMENT\_ON\_
-  SURFACE\_2\_BINDINGS} is the Boolean flag that indicates whether to
-generate bindings for this module.  This module is associated with the
-Boolean flag \myLstinline{CGALPY\_AOS2\_POINT\_ LOCATION\_BINDINGS},
+\myLstinline{AOS2}; 
+\myLstinline{CGALPY\_ARRANGEMENT\_ON\_SURFACE\_2\_BINDINGS} is the 
+\cmake{} Boolean flag that indicates whether to generate bindings for
+this module.  This module is associated with the Boolean flag 
+\myLstinline{CGALPY\_AOS2\_POINT\_ LOCATION\_BINDINGS},
 which indicates whether to generate bindings for point location
 queries supported by the \iiDArrangementsPackage{} package. This
 module is also associated with the string flags
-\myLstinline{CGALPY\_AOS2\_GEOMETRY\_TRAITS\_NAME} and
+\myLstinline{CGALPY\_AOS2\_GEOMETRY\_TRAITS\_ NAME} and
 \myLstinline{CGALPY\_AOS2\_DCEL\_NAME}, which specify the name of the
 geometry traits and Dcel, respectively, used to instantiate the
 \cppLstinline{Arrangement\_2<GeometryTraits_2, Dcel>} class template;
 see Section~\ref{ssec:modules:aos2} for more details on the
 \iiDArrangementsPackage{} module.
 
-\begin{table}[!]
+\begin{table}[!htp]
   \caption{Module names and short names}
   \centering\begin{tikzpicture}
   \matrix (first) [tableModuleName] {
@@ -156,9 +157,9 @@ enables the following in Python:
 
 \noindent
 We use this mechanism to reflect nesting in C++ code that uses
-\cgal. For example, assume that \myLstinline{CGALPY} includes bindings
-for an instance of the class template
-\cppLstinline{Arrangement\_2<GeometryTraits, Dcel>}, where the
+\cgal. For example, assume that the binding module is called 
+\myLstinline{CGALPY} and it includes bindings for an instance of the class 
+template \cppLstinline{Arrangement\_2<GeometryTraits, Dcel>}, where the
 \cppLstinline{GeometryTraits} template parameter is substituted with a
 traits class that handles segments, and the \cppLstinline{Dcel}
 template parameter is substituted with the default Dcel; see
@@ -188,10 +189,18 @@ module:
 }
 \end{lstlisting}
 
-For every module there exists a function called \cppLstinline{export_<name>}, where \cppLstinline{<name>} is the module. This function contains the binding code for the essential functions and classes of the module. The \iiDandiiiDGeometryKernelPackage{} module is associated with the \cmake{} \myLstinline{KERNEL\_INTERSECTION\_BINDINGS} flag (see Table~\ref{tab:ker}), which determines whether to generate bindings for intersections; hence, the compile-time conditional calls to the functions \cppLstinline{export_kernel_intersections_2()} and \cppLstinline{export_kernel_intersections_3()}, which contain the binding code for intersections. For more information on kernel bindings see Section~\ref{ssec:modules:kernel}; for more information of software techniques used to generate bindings for intersections in 2d or 3D see Section~\ref{intersectionDetection}.
+For every module there exists a function called \cppLstinline{export_<name>},
+where \cppLstinline{<name>} is the name of the module. This function contains the binding 
+code for the essential functions and classes of the module. The \iiDandiiiDGeometryKernelPackage{} module is associated with the \cmake{} \myLstinline{CGALPY_KERNEL\_INTERSECTION\_BINDINGS} flag (see Table~\ref{tab:ker}), 
+which determines whether to generate bindings for intersections; hence, the compile-time conditional calls to the functions
+\cppLstinline{export_kernel_intersections_2()} and
+\cppLstinline{export_kernel_intersections_3()}, which contain the binding code 
+for intersections. For more information on kernel bindings see
+Section~\ref{ssec:modules:kernel}; for more information of software techniques 
+used to generate bindings for intersections in 2D or 3D see Section~\ref{sec:code:intersectionDetection}.
 
 % -----------------------------------------------------------------------------
-\subsection{Bindings Library Name}
+\subsection{Binding Library Name}
 \label{sec:gen:libraryName}
 % -----------------------------------------------------------------------------
 By default, the base name of the generated library is
@@ -259,12 +268,12 @@ Name & Type & Default & Description\\
 \end{table}
 
 %%%%%%%%
-\begin{table}[!]
+\begin{table}[!htp]
   \caption{Binding Selection}
   \centering\begin{tikzpicture}
     \matrix (first) [tableBindingSelection] {
 Name & Type & Default & Description\\
-\cmakeLstinline{KERNEL\_BINDINGS}                      & Boolean & \myLstinline{true}  & Determines whether to generate bindings for 2,3 Kernel types\\
+\cmakeLstinline{KERNEL\_BINDINGS}                      & Boolean & \myLstinline{true}  & Determines whether to generate bindings for 2D and 3D Kernel types\\
 \cmakeLstinline{KERNEL\_D\_BINDINGS}                   & Boolean & \myLstinline{false} & Determines whether to generate bindings for dD Kernel types\\
 \cmakeLstinline{ARRANGEMENT\_ON\_SURFACE\_2\_BINDINGS} & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D arrangement instances\\
 \cmakeLstinline{ALPHA\_SHAPE\_2\_BINDINGS}             & Boolean & \myLstinline{false} & Determines whether to generate bindings for 2D Alpha shape instances\\

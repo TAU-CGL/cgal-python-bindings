@@ -460,10 +460,18 @@
 \def\cppLstinline#1{\lstinline[language={C++},columns=fixed]{#1}}
 \def\cmakeLstinline#1{\lstinline[language={Cmake},columns=fixed]{#1}}
 
-\usepackage{float}
-\newfloat{lstfloat}{htbp}{lop}
-\floatname{lstfloat}{Listing}
-\def\lstfloatautorefname{Listing} % needed for hyperref/auroref
+%\usepackage{float}
+%\newfloat{lstfloat}{!htp}{lop}
+%\floatname{lstfloat}{Listing}
+%\def\lstfloatautorefname{Listing} % needed for hyperref/auroref
+
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+  fileext = lop,
+  listname = {!htp},
+  name = Listing
+]{lstfloat}
+
 \newsavebox{\draftbox}
 \savebox{\draftbox}{\color{red}\huge $\times$}% create image for overlay
 
