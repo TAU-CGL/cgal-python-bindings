@@ -1,4 +1,9 @@
 \documentclass{article}
+\def\baseDir{./}
+\def\cmakeRelDir{../../../cmake/tests/release/}
+\def\cmakeDir{\baseDir\cmakeRelDir}
+\def\pythonRelDir{../../../src/python_scripts/cgalpy_examples/}
+\def\pythonDir{\baseDir\pythonRelDir}
 \input{../../header}
 \usepackage[margin=0.7in]{geometry}
 \usepackage{algorithm}
@@ -23,11 +28,11 @@
 \definecolor{todocolor}{HTML}{0392CF}
 \graphicspath{{./figs/}}
 \def\efi#1{\textcolor{eficolor}{\sc Efi says: }{\textcolor{eficolor}{\marrow\sf #1}}}
-\def\tom#1{\textcolor{nircolor}{\sc Nir says: }{\textcolor{nircolor}{\marrow\sf #1}}}
-\def\dan#1{\textcolor{nircolor}{\sc Nir says: }{\textcolor{dancolor}{\marrow\sf #1}}}
+\def\nir#1{\textcolor{nircolor}{\sc Nir says: }{\textcolor{nircolor}{\marrow\sf #1}}}
+\def\dan#1{\textcolor{dancolor}{\sc Dan says: }{\textcolor{dancolor}{\marrow\sf #1}}}
 \def\todo#1{\textcolor{todocolor}{\marrow\sf #1}}
 % Paper
-\title{\cgal{} Python Bindings}
+\title{\cgal{} Made More Accessible}
 \date{}
 \author{Nir Goren, Efi Fogel, and Dan Halperin}
 \pagestyle{plain}
@@ -44,6 +49,8 @@
 \input{applications}
 \bibliographystyle{abbrv}
 \bibliography{../../abrev-short,../../cgal,../cgal_python_bindings}
+\appendix
+\input{extenders}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

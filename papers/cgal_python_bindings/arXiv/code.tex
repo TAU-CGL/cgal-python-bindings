@@ -30,18 +30,18 @@ references and pointers sometimes. In some cases, in order to assure
 proper memory management of a return value from a function, explicitly
 specifying a return value policy is needed. The policy may depend on
 whether the returned object is a newly created object, a reference to
-some already existing (internal) object, or a const reference to some
-existing object. Additionally, in some cases we need to tie the
-lifetime of the result to the lifetime of the arguments, or the other
-way around.
+some already existing (internal) object, or a \cppLstinline{const} 
+reference to some existing object. Additionally, in some cases we need 
+to tie the lifetime of the result to the lifetime of the arguments, or 
+the other way around.
 
 For some functions of kernel objects the kind of return value depends
 on the kernel type; thus, the return value policy needs to be set
 accordingly. For example, when
 \cppLstinline{Exact\_predicates\_inexact\_constructions\_kernel} is
 the kernel type, the return type of some functions that return a
-coordinate or a coefficient is a const reference, while when the
-kernel type is
+coordinate or a coefficient is a \cppLstinline{const} reference, 
+while when the kernel type is
 \cppLstinline{Exact\_predicates\_exact\_constructions\_kernel} the
 same functions return an object by value. This is why for these
 functions a \myLstinline{Kernel_return_value_policy} type is being
@@ -92,8 +92,10 @@ based on the kernel being exposed.
 % -----------------------------------------------------------------------------
 Substitution failure is not an error (SFINAE) refers to a situation in
 C++ where an invalid substitution of template parameters is not in
-itself an error. In particular, it applies during a process called
-\emph{overload resolution}.  In order to compile a function call, the
+itself an error.\footnote{For more information on SFINAE see, e.g.,
+\url{https://en.cppreference.com/w/cpp/language/sfinae}.} In 
+particular, it may occur during a process called 
+\emph{overload resolution}. In order to compile a function call, the
 compiler creates a set of candidate functions the names of which match
 the call and that can be accessed by the caller. Then, it reduces the
 candidate set to a set of viable functions that includes all function
@@ -105,12 +107,10 @@ flowchart that describes the process is shown in
 Figure~\ref{fig:ors}. When the substitution of an explicitly specified
 or deduced type for the template parameter fails, the specialization
 is discarded from the overload set instead of causing a compilation
-error.\footnote{For more information on SFINAE see, e.g.,
-  \url{https://en.cppreference.com/w/cpp/language/sfinae}.}
+error.
 
 \begin{figure}[!htp]
-    \centerline{\begin{tikzpicture}[%
-    >=stealth,align=center,every node/.style={font=\sffamily}]
+  \centerline{\begin{tikzpicture}[>=stealth,align=center,every node/.style={font=\sffamily}]
     \tikzstyle{state}=[text centered,node distance=0.5cm,%
       rectangle,rounded corners,fill=white,draw=black,%
       minimum width=1.0cm,minimum height=0.45cm]
@@ -149,69 +149,131 @@ error.\footnote{For more information on SFINAE see, e.g.,
   \label{fig:ors}
 \end{figure}
 
-The function \cppLstinline{CGAL::do_intersect(o1, o2)}, provided by
-the \iiDandiiiDGeometryKernelPackage{} package (see
-Section~\ref{ssec:modules:kernel}), is overloaded with several
-implementations that handle different combination of types of
-arguments; however, not every combination of two types is implemented
-in this package. For example, the intersection of a line segment and a
-circle in the general case is a point with algebraic coordinates, and
-thus not supported by the package.\footnote{For a complete list of
-  valid combinations of \cppLstinline{do_intersect()} argument types
-  refer to the reference manual at
+The function template 
+\cppLstinline{CGAL::do_intersect(const T1& o1, const T2& o2)} 
+determines whether two geometric objects intersect. The function
+is overloaded with several implementations that handle different 
+combinations of types of arguments. They are provided by the 
+\iiDandiiiDGeometryKernelPackage{} package (see
+Section~\ref{ssec:modules:kernel}). However, not every combination
+of two types is implemented in this package. For example, the 
+intersection of a line segment and a circle in the general case is a 
+point with algebraic coordinates, and thus not supported by the 
+package.\footnote{For a complete list of valid combinations of 
+\cppLstinline{do_intersect()} argument types refer to the reference 
+manual at
   \url{https://doc.cgal.org/latest/Kernel_23/group__do__intersect__linear__grp.html}.}
 We use SFINAE to generate bindings for all supported combinations
 while avoiding getting compilation errors for unsupported combinations
-as follows. Consider two types \cppLstinline{Type1} and
-\cppLstinline{Type2}, and assume that the
-\cppLstinline{CGAL::do_intersect(Type1 o1, Type2 o2)} overloaded
-version is not implemented but all other three are, and refer to
-Listing~\ref{lst:do_intersect}.
+as follows. 
+%
+Our entry point is the function \cppLstinline{export_intersections_2()}
+shown in Listing~\ref{lst:exportIntersection}. It also serves as the
+entry point for the generation of bindings for the function
+\cppLstinline{CGAL::intersection(const T1& o1, const T2& o2)}; see
+Section~\ref{sec:code:intersectionComputation}. The function template
+\cppLstinline{bind_do_intersect()} is overloaded with two 
+implementations. One of these implementations is of indefinite 
+arity.\footnote{A function of indefinite arity is a variadic function. 
+For more information on \emph{variadic functions} see
+  \url{https://en.cppreference.com/w/cpp/language/variadic_arguments}.}
+We call this function and pass a list of arguments, such that every 
+argument is a pointer to a type that represents a planar geometric object,
+and that can be a type of a parameter of 
+\cppLstinline{CGAL::do_intersect()}. Supporting a new type, say 
+\cppLstinline{T}, is as easy as defining a new variable, say 
+\cppLstinline{t}, of type \cppLstinline{T*} and passing 
+\cppLstinline{t} as an additional argument in the call to \cppLstinline{bind_do_intersect()}.
 
 \begin{lstfloat}
   \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
-                     label={lst:do_intersect},%
-                     caption={Automatic generation of binding  for \cppLstinline{CGAL::do_intersect()} exploiting SFINAE}]
-template <typename, typename> void bind_do_intersect_2T(...) {}
-
-template <typename T1, typename T2>
-void bind_do_intersect_2T(decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
-  bp.def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
-}
-
-template <typename T1>
-void bind_do_intersect_1T() {
-  bind_do_intersect_2T<T1, Type1>(true);
-  bind_do_intersect_2T<T1, Type2>(true);
-}
-
-void bind_do_intersect() {
-  bind_do_intersect_1T<Type1>();
-  bind_do_intersect_1T<Type2>();
+                     label={lst:exportIntersection},%
+                     caption={Entry points for the code that automatically generates
+                     binding for \cppLstinline{CGAL::do_intersect()} and
+                     \cppLstinline{CGAL::intersection()} with arguments 
+                     that represent planar geometric objects.}]
+void export_intersections_2() {
+  Iso_rectangle_2* iso_rectangle(nullptr);
+  Line_2* line(nullptr);
+  Ray_2* ray(nullptr);
+  Segment_2* segment(nullptr);
+  Triangle_2* triangle(nullptr);
+  Point_2* point(nullptr);
+  Circle_2* circle(nullptr);
+  bind_do_intersect(iso_rectangle, line, ray, segment, triangle, point, circle);
+  bind_intersection(iso_rectangle, line, ray, segment, triangle, point, circle);
 }
   \end{lstlisting}
 \end{lstfloat}
 
-The function \cppLstinline{bind_do_intersect()} calls
-\cppLstinline{bind_do_intersect_1T<T1>()} twice; in the first call
-\cppLstinline{T1} is substituted with \cppLstinline{Type1} (Line~15)
-and in the second call \cppLstinline{T1} it is substituted with
-\cppLstinline{Type2} (Line~16).  The function template
-\cppLstinline{bind_do_intersect_1T()} calls a third function, called
-\cppLstinline{bind_do_intersect_2T()}, twice; first it calls
-\cppLstinline{bind_do_intersect_2T<T1, Type1>(true)} (Line~10); then,
-it calls \cppLstinline{bind_do_intersect_2T<T1, Type2>(true)}
-(Line~11). The function \cppLstinline{bind_do_intersect_2T()} is
+Our first goal is automatically generating all calls 
+\cppLstinline{bind_do_intersect_pair<T1, T2>(true)}, where
+each of \cppLstinline{T1} and \cppLstinline{T2} is a type 
+pointed by an argument passed to \cppLstinline{bind_do_intersect()}.
+The code excerpts in Listings~\ref{lst:doIntersectExpansion} does it using 
+variadic templates. A variadic template is a function template that accepts
+a function parameter pack and is parameterized with a template parameter pack 
+that represents the type of the function parameter pack. The central idea is 
+to unpack the function parameter pack, process the first item in the list, then 
+pass the rest of the list on to a recursive call until the list vanishes. The 
+last call with a single argument matches the second implementation of the 
+overloaded function and stops the recursion. As we need to obtain combinations 
+of two arguments, we use two pairs of overloaded functions. Each one of the  
+template parameters \cppLstinline{T1} or \cppLstinline{T2} of \cppLstinline{bind_do_intersect_pair()} must be substituted with a type of
+of a candidate parameter of \cppLstinline{CGAL::do_intersect()}. Thus, given
+a pointer type we obtain the pointee type and use the latter when calling
+\cppLstinline{bind_do_intersect_pair<T1, T2>(true)}; see Line~3, 
+Line~4, Line-12, and Line~20. We use pointer types rather than the types 
+themselves to avoid invoking the constructors and destructors of the objects; 
+observe, that using variadic templates requires passing concrete objects.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:doIntersectExpansion},%
+                     caption={Automatic generation of calls
+                     \cppLstinline{bind_do_intersect_pair<T1, T2>(true)}.}]
+template<typename PT>
+void bind_do_intersect_inner(PT) {}
+
+template<typename PT1, typename PT2, typename... PTs>
+void bind_do_intersect_inner(PT1 arg1, PT2 arg2, PTs... args) {
+  typedef typename std::remove_pointer<PT1>::type        T1;
+  typedef typename std::remove_pointer<PT2>::type        T2;
+  bind_do_intersect_pair<T1, T2>(true);
+  bind_do_intersect_pair<T2, T1>(true);
+  bind_do_intersect_inner(arg1, args...);
+}
+
+template<typename PT>
+void bind_do_intersect(PT arg) {
+  typedef typename std::remove_pointer<PT>::type         T;
+  bind_do_intersect_pair<T, T>(true);
+}
+
+template <typename PT1, typename... PTs>
+void bind_do_intersect(PT1 arg, PTs... args) {
+  bind_do_intersect_inner(arg, args...);
+  bind_do_intersect(args...);
+  typedef typename std::remove_pointer<PT1>::type        T1;
+  bind_do_intersect_pair<T1, T1>(true);
+}
+  \end{lstlisting}
+\end{lstfloat}
+
+Consider two types \cppLstinline{Type1} and
+\cppLstinline{Type2}, and assume that the
+\cppLstinline{CGAL::do_intersect(const Type1& o1, const Type2& o2)} 
+overloaded version is not implemented but all other three are, and 
+refer to Listing~\ref{lst:do_intersect}.
+The function name \cppLstinline{bind_do_intersect_pair()} is 
 overloaded with two implementations. As a consequence, assuming that
 the code compiles, one overload of
-\cppLstinline{bind_do_intersect_2T()} is selected for every
+\cppLstinline{bind_do_intersect_pair()} is selected for every
 permutation of (\cppLstinline{Type1}, \cppLstinline{Type2}). The
-primary implementation of \cppLstinline{bind_do_intersect_2T()}
+primary implementation of \cppLstinline{bind_do_intersect_pair()}
 (Line~1) uses \emph{variadic arguments} and serves as a fall-through
 when the evaluation of the second implementation fails during the
-resolution process.\footnote{For more information on \emph{variadic
-    arguments} see
-  \url{https://en.cppreference.com/w/cpp/language/variadic_arguments}.}
+resolution process.
 The parameter type of the second implementation is defined as the
 return type of \cppLstinline{CGAL::do_intersect<Kernel>(T1(),
   T2())}. When \cppLstinline{T1} and \cppLstinline{T2} are substituted
@@ -223,15 +285,133 @@ accept variadic parameters have a lower rank for the purpose of
 overload resolution.
 % The return type of \cppLstinline{CGAL::do_intersect<Kernel>(T1(),
 % T2())} is resolved at compile time.
-Observe that in both calls to \cppLstinline{bind_do_intersect_2T()}
-(Lines~10-11) we pass a \cppLstinline{bool} argument of value
+Observe that in all calls to \cppLstinline{bind_do_intersect_pair()}
+(Lines~8,9,16,24) we pass a \cppLstinline{bool} argument of value
 \cppLstinline{true}. This value can be \cppLstinline{false} just as
 well, but its type, that is \cppLstinline{bool}, must match the return
 type of \cppLstinline{CGAL::do_intersect<Kernel>(T1(), T2())} when
 defined. The result is not only compact code that is easy to maintain,
 but also code that supports bindings for every potential
-\cppLstinline{do_intersect()} overload that might be implemented in
-the future.
+\cppLstinline{CGAL::do_intersect()} overload that might be implemented
+in the future.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:do_intersect},%
+                     caption={Automatic generation of binding  for \cppLstinline{CGAL::do_intersect()} exploiting SFINAE.}]
+template <typename, typename> void bind_do_intersect_pair(...) {}
+
+template <typename T1, typename T2>
+void bind_do_intersect_pair(decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
+  bp::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
+}
+  \end{lstlisting}
+\end{lstfloat}
+
+% function \cppLstinline{bind_do_intersect()} calls
+%\cppLstinline{bind_do_intersect_1T<T1>()} twice; in the first call
+%\cppLstinline{T1} is substituted with \cppLstinline{Type1} (Line~15)
+%and in the second call \cppLstinline{T1} it is substituted with
+%\cppLstinline{Type2} (Line~16).  The function template
+%\cppLstinline{bind_do_intersect_1T()} calls a third function, called
+%\cppLstinline{bind_do_intersect_pair{}, twice; first it calls
+%cppLstinline{bind_do_intersect_pair<T1, Type1>(true)} (Line~10); then,
+% it calls \cppLstinline{bind_do_intersect_pair<T1, Type2>(true)} (Line~11). 
+
+% -----------------------------------------------------------------------------
+\subsection{Intersection Computation}
+\label{sec:code:intersectionComputation}
+% -----------------------------------------------------------------------------
+The situation presented by the overloaded function template
+\cppLstinline{CGAL::intersection(const T1& o1, const T2& o2)} that 
+computes the intersection of two geometric objects is a bit more 
+complicated. The various implementations are also provided by the 
+\iiDandiiiDGeometryKernelPackage{} package. Similar to the 
+\cppLstinline{CGAL::do_intersect()} function templates, different 
+implementations handle different combination of types of arguments
+and not all combinations are supported. The intersection of two 
+geometric objects can be either empty, a single object, or several
+points. Unlike the \cppLstinline{CGAL::do_intersect()} function 
+templates, the return types of which are all simple 
+\cppLstinline{bool}, the return type of each 
+\cppLstinline{CGAL::intersection()} function template is a
+polymorphic type that either implicitly converts to 
+\cppLstinline{false} if the intersection is empty or represents the 
+intersection and depends on the types of the input arguments. 
+Following the idea presented in the previous section, we introduce several 
+template functions, where \cppLstinline{bind\_intersection\_pair()} is 
+the last one called; see Line~1 and Line~3 in 
+Listing~\ref{lst:intersection} for the primary and specialized 
+implementations, respectively. Given a combination of 
+two specific types, \cppLstinline{T1} and \cppLstinline{T2}, we still 
+evaluate the return value of the function template 
+\cppLstinline{CGAL::intersection(const T1& o1, const T2& o2)} 
+as a mean to determine whether the function is defined, but we do not 
+try to match this type to a type of an argument. Instead, we introduce
+an unnamed template parameter with a default value that evaluates to
+the return type of 
+\cppLstinline{CGAL::intersection(const T1& o1, const T2& o2)}; see 
+Line~4 in the listing. Observe that the outcome of the evaluation is
+irrelevant. The only thing that matters is whether the evaluation
+succeeds---it succeeds only if the function template
+\cppLstinline{CGAL::intersection(const T1& o1, const T2& o2)}
+is defined. If it is defined, the specialized implementation is 
+selected by the overload-resolution process, and the function
+\cppLstinline{cgalpy_intersection(const T1& t1, const T2& t2)}, 
+which actually computes the intersection, is exposed; see
+Listing~\ref{lst:intersectionImpl}.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:intersection},%
+                     caption={Automatic generation of binding for \cppLstinline{CGAL::intersection()} exploiting SFINAE}.]
+template <typename, typename> void bind_intersection_pair(...) {}
+
+template <typename T1, typename T2,
+          typename = decltype(CGAL::intersection<Kernel>(T1(), T2()))>
+void bind_intersection_pair(bool) {
+  bp::def("intersection", &cgalpy_intersection<T1, T2>);
+}
+  \end{lstlisting}
+\end{lstfloat}
+
+The exposed Python function that computes the intersection returns 
+\pyLstinline{None} if the intersection is empty; see Line~17 in
+Listing~\ref{lst:intersectionImpl}. If the intersection consists of
+a single geometric object, the function returns a single Python 
+object the type of which is the exposed \cgal{} C++ type of
+the geometric object; see Line~4. Finally, if several points 
+comprise the intersection, the return type is a list of Python 
+objects (see Line~10), where the type of each element in the list 
+is the the exposed type of \cppLstinline{Kernel::Point_2}.
+For more information of functions that return collections of object 
+see Section~\ref{sec:code:output}.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,%
+                     label={lst:intersectionImpl},%
+                     caption={Implementation of the binding for \cppLstinline{CGAL::intersection()}.}]
+class Intersection_visitor : public boost::static_visitor<bp::object> {
+public:
+  template<typename T>
+  bp::object operator()(T& operand) const { return bp::object(operand); }
+
+  // Handle vector of points
+  bp::object operator()(std::vector<Point_2>& operand) const {
+    bp::list lst;
+    for (const auto& p : operand) lst.append(p);
+    return lst;
+  }
+};
+
+template <typename T1, typename T2>
+bp::object cgalpy_intersection(const T1& t1, const T2& t2) {
+  auto result = CGAL::intersection<Kernel>(t1, t2);
+  if (! result) return bp::object();    // no intersection
+  return boost::apply_visitor(Intersection_visitor(), *result);
+}
+  \end{lstlisting}
+\end{lstfloat}
 
 % -----------------------------------------------------------------------------
 \subsection{Minkowski Sum Construction}
@@ -240,11 +420,11 @@ the future.
 The situation presented by the function template
 \cppLstinline{CGAL::minkowski_sum_2()} that applies the
 \emph{convex-decomposition approach} (see
-Section~\ref{ssec:modules:ms2}) is a bit more complicated. The
-function template shown in Line~1 of
+Section~\ref{ssec:modules:ms2}) is even more complicated. The function 
+template shown in Line~1 of 
 Listing~\ref{lst:minkSumConvexDecomposition} has 10 instances of valid
 combinations of argument types. There is another set, of the same
-cardinality, of function templates that also accept a forth traits
+cardinality, of function templates that also accept a fourth traits
 parameter. The number of instances of the function template shown in
 Line~8 is 36, and also here there is another set, of the same
 cardinality, of function templates that accept an additional traits
@@ -252,7 +432,7 @@ parameter. Consider the function template shown in Line~1. We need to
 generate bindings for instances of this function only for valid
 combinations of \cppLstinline{PolygonType1},
 \cppLstinline{PolygonType2}, and
-\cppLstinline{PolygonConvexDecomposition_2} types. Here after and in
+\cppLstinline{PolygonConvexDecomposition_2} types. Hereafter and in
 the code listing we use the respective short names \cppLstinline{PT1},
 \cppLstinline{PT2}, and \cppLstinline{PP} instead. A valid combination
 exists only if \cppLstinline{PP} is a type of a polygon-partition
@@ -299,8 +479,48 @@ minkowski_sum_2(const PolygonType1<Kernel, Container>& p,
   \end{lstlisting}
 \end{lstfloat}
 
-First, we introduce a class template called \cppLstinline{target}; see
-Line~3 in Listing~\ref{minkSumResolution}. it is parameterized with a
+Our entry point is the function \cppLstinline{void bind_mink_sum()};
+see Line~15 in Listing~\ref{lst:minkowskiSumExpansion}. We need to 
+capture valid combinations of three types. In particular, we need to
+generate all calls \cppLstinline{minkowski_sum_triplet<PT1, PT2, PP>(true)}; 
+see Line~12 and Line~15 in Listing~\ref{lst:minkSumResolution} for the 
+primary and specialized implementations, respectively. The first two
+types represent polygons and there are only two types of polygons to 
+choose from, namely, \cppLstinline{Polygon_2} and 
+\cppLstinline{Polygon_with_holes_2}. Therefore, instead of using 
+variadic templates (see Listing~\ref{lst:doIntersectExpansion}, which
+can be used to capture valid combinations of any fixed number of types
+taken from a long list of types), we simply introduce two functions as
+shown in Listing~\ref{lst:minkowskiSumExpansion}.
+
+\begin{lstfloat}
+  \begin{lstlisting}[style=cppframedStyle,basicstyle=\normalsize,%
+                     label={lst:minkowskiSumExpansion},%
+                     caption={Automatic generation of calls
+                     \cppLstinline{minkowski_sum_triplet<PT1, PT2, PP>(true)}.}]
+template <typename T1, typename T2>
+void bind_mink_sum_decomp_one_strategy_2T() {
+  bind_mink_sum_triplet<T1, T2, ms2::Polygon_nop_decomposition_2>(true);
+  bind_mink_sum_triplet<T1, T2, pp2::Polygon_vertical_decomposition_2>(true);
+  bind_mink_sum_triplet<T1, T2, pp2::Polygon_triangulation_decomposition_2>(true);
+  bind_mink_sum_triplet<T1, T2, pp2::Small_side_angle_bisector_decomposition_2>(true);
+}
+
+template <typename T>
+void bind_mink_sum_1T() {
+  bind_mink_sum_2T<T, Polygon_2>();
+  bind_mink_sum_2T<T, Polygon_with_holes_2>();
+}
+
+void bind_mink_sum() {
+  bind_mink_sum_1T<Polygon_2>();
+  bind_mink_sum_1T<Polygon_with_holes_2>();
+}
+  \end{lstlisting}
+\end{lstfloat}
+
+We introduce a class template called \cppLstinline{target}; see
+Line~3 in Listing~\ref{lst:minkSumResolution}. it is parameterized with a
 named parameter \cppLstinline{T} and an unnamed parameter that
 defaults to \cppLstinline{void}. It delegates the type
 \cppLstinline{std::list<T>::iterator}. We also introduce a
@@ -321,29 +541,28 @@ template parameter of the primary implementation of
 \cppLstinline{target<>} must match for the ordering to apply. These
 types are arbitrarily chosen to be \cppLstinline{void}.
 %
-We need to capture valid combinations of three types. Recall that the
-code in Listing~\ref{lst:do_intersect} captures valid combinations of
-two types. Following the idea presented in the previous section, we
-introduce three template functions, where
-\cppLstinline{bind\_mink\_sum\_3T()} is the last one called; see
-Line~12 and Line~15 in Listing~\ref{minkSumResolution} for the primary
-and specialized implementation, respectively. The polygon-partition
-function returns an output iterator that points to next to the last
-element of the container. Passing an argument, the type of which
-matches the type of the returned value of the polygon-partition
-function, to the function \cppLstinline{bind\_mink\_sum\_3T()} is
-complicated, as this type is not a simple type (e.g.,
-\cppLstinline{bool}) any more. Instead, we introduce two unnamed
-template parameters with default values, that evaluate to the return
-type of the polygon-partition function when applied to a polygon of
-type \cppLstinline{PT1} or type \cppLstinline{PT2}, respectively; see
-Lines~16 and 17. Observe that the outcome of the evaluation is
-irrelevant. The only thing that matters is weather the evaluation
-succeeds---it succeeds only if the matching function is defined.
+
+The polygon-partition function returns an output iterator that points 
+to next to the last element of the container. Passing an argument, the 
+type of which matches the type of the returned value of the 
+polygon-partition function, to the function 
+\cppLstinline{bind_mink_sum_triplet()} is complicated, as this type is
+not a simple type, such as the return types of 
+\cppLstinline{CGAL::do_intersect()} (which is always 
+\cppLstinline{bool}). Instead, we use the technique applied for the 
+wrapping of the function templates \cppLstinline{CGAL::intersection()}.
+We introduce two unnamed template parameters with default values, 
+that evaluate to the return type of the polygon-partition function
+when applied to a polygon of type \cppLstinline{PT1} or type 
+\cppLstinline{PT2}, respectively; see Lines~16 and 17. As with the 
+wrapping of the template functions in the previous two sections, 
+the outcome of the evaluation is irrelevant. The only thing that 
+matters is whether the evaluation succeeds---it succeeds only if the 
+matching function is defined.
 
 \begin{lstfloat}
   \begin{lstlisting}[style=cppFramedStyle,basicstyle=\normalsize,
-                     label=minkSumResolution,
+                     label=lst:minkSumResolution,
                      caption={Automatic generation of binding for \cppLstinline{CGAL::minkowski_sum_2} exploiting SFINAE.}]
 template <typename T> class has { typedef void type; };
 
@@ -357,12 +576,12 @@ struct target<T, typename has<typename T::Polygon_2>::type> {
 };
 
 template <typename T1, typename T2, typename T3>
-void bind_mink_sum_3T(...) {}
+void bind_mink_sum_triplet(...) {}
 
 template <typename PT1, typename PT2, typename PP,
           typename = decltype(PP()(PT1(), typename target<PT1>::type())),
           typename = decltype(PP()(PT2(), typename target<PT2>::type()))>
-void bind_mink_sum_3T(bool) {
+void bind_mink_sum_triplet(bool) {
   bp::def<Polygon_with_holes_2(const PT1&, const PT2&, const PP&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, PP>);
 }
@@ -393,8 +612,8 @@ We exploit SFINAE to generate bindings of other types as described in the follow
 In many applications it is necessary to extend the type that
 represents certain \cgal{} data structures with some types that
 represent new properties. In \cgal{} it is more convenient, and thus
-more common, extending the types that represent the topological
-features of the data structures (rather then the types that represent
+more common to extend the types that represent the topological
+features of the data structures (rather than the types that represent
 the geometric features), e.g., the DCEL of the arrangement data
 structure; see Section~\ref{ssec:modules:aos2}. When developing code
 in pure C++, there is no restriction on the property types used to
@@ -419,7 +638,7 @@ Extending the arrangement features is useful for many applications,
 but essential for applications that compute the overlay of
 arrangements as discussed in the next Section.
 
-% Add a discussion about extanding the triangulation data structure in 2D and 3D
+% Add a discussion about extending the triangulation data structure in 2D and 3D
 % Change the title to be more general to reflect other extensions
 
 % -----------------------------------------------------------------------------
@@ -430,7 +649,7 @@ The map overlay of two arrangements $\calA_1$ and $\calA_2$,
 conveniently referred to as the \textcolor{red}{red} and
 \textcolor{blue}{blue} arrangements, is a third arrangement $\calA$,
 such that there is a cell $c$ in $\calA$ iff there are cells $c_1$ and
-$c_2$ in $\calA_1$ and $\calA_2$, respectively, such that $c$ is a
+$c_2$ in $\calA_1$ and $\calA_2$, respectively, and $c$ is a
 maximal connected component of $c_1 \cap c_2$.
 % Arrangements are subdivisions of some ambient space (see Section~\ref{ssec:modules:aos2})
 Computing the overlay of two arrangements is useful for many
@@ -466,7 +685,7 @@ input \textcolor{red}{red} cells, i.e.,~a vertex, an edge, and a face,
 respectively, $v_b$, $e_b$, and $f_b$ denote input
 \textcolor{blue}{blue} cells, and $v$, $e$, and $f$ denote output
 cells.
-\begin{enumerate}
+\begin{compactenum}
 \item A new vertex $v$ is induced by coinciding vertices $v_r$ and $v_b$.
 \item A new vertex $v$ is induced by a vertex $v_r$ that lies on an edge $e_b$.
 \item An analogous case of a vertex $v_b$ that lies on an edge $e_r$.
@@ -477,16 +696,16 @@ cells.
 \item A new edge $e$ is induced by the an edge $e_r$ that is contained in a face $f_b$.
 \item An analogous case of an edge $e_b$ contained in a face $f_r$.
 \item A new face $f$ is induced by the overlap of two faces $f_r$ and $f_b$.
-\end{enumerate}
+\end{compactenum}
 
 Evidently a custom C++ overlay traits cannot be defined in Python;
 more precisely, the traits type must be known when the bindings are
 compiled. We introduce and expose with Python bindings two models of
-the \cppLstinline{OverlayTraits} concept. The most general among the
+the \cppLstinline{OverlayTraits} concept. The most general between the
 two, called \cppLstinline{Arr_overlay_traits}, defines ten functions
 that correspond to the list above, each accepting three arguments,
 namely, two objects that represent input cells, and one object that
-represents an output cell. By default these functions are idle. A user
+represents an output cell. By default these functions do nothing. A user
 (that is, a Python programmer) can override any subset of these
 functions. One constructor of this model accepts all the ten functions
 at once. Another constructor accepts a single function, which
@@ -501,11 +720,12 @@ The code excerpt in Listing~\ref{lst:overlayTraits} computes the overlay of the 
 Observe that while the computation of the overlay is carried out by the compiled C++ code, the summation is carried out by a Python \pyLstinline{lambda} function, which accepts as the third argument the face to be updated. By default, arguments are copied into new Python objects. We pass the new face by reference, overriding the default, to enforce persistent updates.
 
 \begin{lstfloat}
+  \def\filename{overlay.py}%
   \lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,
                    firstline=14,lastline=39,
                    label={lst:twoFaceExtend},
                    caption={Constructing two arrangements with their faces extended and initializing their data.}]
-                  {../../../src/python_scripts/cgalpy_examples/overlay.py}
+                  {\pythonDir\filename}
 \end{lstfloat}
 
 \begin{lstfloat}
@@ -687,7 +907,7 @@ void apply(const R* r, const B* b, O* o, F f) {
 \end{lstfloat}
 
 % -----------------------------------------------------------------------------
-\subsection{Miscelaneous}
+\subsection{Miscellaneous}
 \label{sec:code:misc}
 % -----------------------------------------------------------------------------
 In this section we list additional techniques used by the binding code.
@@ -697,7 +917,7 @@ In this section we list additional techniques used by the binding code.
 \label{sec:code:misc:iters}
 % -----------------------------------------------------------------------------
 The \cppLstinline{Handle} concept, provided by the
-\HandlesandCirculatorsPackage{} package~\cite{cgal:dksy-hc-21},
+\HandlesandCirculatorsPackage{} package~\cite{cgal:dksy-hc-21a},
 describes types that are akin to pointers to objects. A handle
 provides the dereference operator (\cppLstinline{operator*()}) and the
 member access operator (\cppLstinline{->()}). Since Python does not
@@ -710,7 +930,7 @@ type \pyLstinline{Arrangement_2}.
 
 The \cppLstinline{Iterator} concept and its refinements describe types
 that can be used to identify and traverse the elements of container
-that contains seqential data.\footnote{For more information about STL
+that contains sequential data.\footnote{For more information about STL
   iterators, see, e.g.,
   \url{https://en.cppreference.com/w/cpp/iterator}.} An iterator
 provides the increment or decrement operators. In \cgal{} quite often
@@ -743,7 +963,7 @@ value. Instead, the range $[a, b)$ of two circulators $a$ and $b$
   a circular refers to an item that has been traversed already.
 
 % -----------------------------------------------------------------------------
-\subsection{Function Accespting Collections of Elements}
+\subsubsection{Functions Accepting Collections of Elements}
 \label{sec:code:input}
 % -----------------------------------------------------------------------------
 The Standard Template Library (STL) provides various type-safe
@@ -838,7 +1058,7 @@ Aos2.insert(arr, [c1, c2, c3])
 \end{lstfloat}
 
 % -----------------------------------------------------------------------------
-\subsection{Function Resulting in Collections of Elements}
+\subsubsection{Functions Resulting in Collections of Elements}
 \label{sec:code:output}
 % -----------------------------------------------------------------------------
 Functions may compute collections of elements as results. Using output
@@ -850,9 +1070,9 @@ concept,\footnote{For more information of output iterators, see, e.g.,
 supports writing to the location obtained by the dereference operator
 and can be pre- and post-incremented. A function that computes a
 collection of elements accepts an output iterator as an argument and
-popultes the underlying collection. Moderns C++ compilers support the
+populates the underlying collection. Modern C++ compilers support the
 efficient transfer of resources from one object of a certain type to
-another object of the same type, reffered to as \emph{move
+another object of the same type, referred to as \emph{move
   semantics}.\footnote{For more information of move semantics, see,
   e.g.,
   \url{https://en.cppreference.com/w/cpp/language/move_constructor}.}
@@ -1006,12 +1226,13 @@ Figure~\ref{fig:decompose}.
 %%   unbounded face
 
 \begin{lstfloat}
+  \def\filename{vertical_decomposition.py}%
   \lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,%
                    label={lst:py:decompose},%
                    firstline=15,
                    caption={A code sample in Python that decomposes an
                      arrangement.}]
-  {../../../src/python_scripts/cgalpy_examples/vertical_decomposition.py}
+                  {\pythonDir\filename}
 \end{lstfloat}
 
 \begin{figure}[!htp]
