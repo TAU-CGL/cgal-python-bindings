@@ -10,8 +10,8 @@ that imports the binding library, that is,
 \begin{lstlisting}[style=pythonStyle]
 >>> import CGALPY
 \end{lstlisting}
-(assuming the default binding library name is retained) must precede 
-any statement that use the binding. This statement is omitted in all 
+(assuming the default binding library name is retained) must precede
+any statement that use the binding. This statement is omitted in all
 examples hereafter.
 
 % -----------------------------------------------------------------------------
@@ -31,8 +31,8 @@ class-template parameterized by a kernel type, defined in the C++
 \cppLstinline{Kernel} is a kernel type; the type that represents a
 two-dimensional point of this kernel is either
 \cppLstinline{Kernel::Point_2} or
-\cppLstinline{CGAL::Point_2<Kernel>}.  The generated bindings better 
-reflects the latter types; that is, defining a two-dimensional point in 
+\cppLstinline{CGAL::Point_2<Kernel>}.  The generated bindings better
+reflects the latter types; that is, defining a two-dimensional point in
 Python amounts to the code below.\footnote{When writing code in C++ the
   precative style is advantageous, as it enables the extension of
   kernel object types, which is irrelevant when generating bindings.}
@@ -424,21 +424,21 @@ A description of the two template parameters of this class template follows.
   specifies which geometry traits should be used for the generated
   bindings; see Table~\ref{tab:aos:gt}. Observe that instances of
   the class templates \cppLstinline{General_polygon_set_2<>} and
-  \cppLstinline{Polygon_set_2<>} (see Section~\ref{ssec:modules:bso2}) 
+  \cppLstinline{Polygon_set_2<>} (see Section~\ref{ssec:modules:bso2})
   employ 2D arrangement types. Bindings for instances of
-  \cppLstinline{Polygon_set_2<>} and 
+  \cppLstinline{Polygon_set_2<>} and
   \cppLstinline{General_polygon_set_2<>} are enabled as part of the
-  bindings for the \iiDRegularizedBooleanSetOperationsPackage{} package. 
+  bindings for the \iiDRegularizedBooleanSetOperationsPackage{} package.
   When bindings for \iiDRegularizedBooleanSetOperationsPackage{} package
-  are enabled bindings of the \iiDArrangementsPackage{} package must be 
-  explicitly enabled as well. The traits type that substitutes the 
+  are enabled bindings of the \iiDArrangementsPackage{} package must be
+  explicitly enabled as well. The traits type that substitutes the
   traits parameter determines the type of curves that bound the polygons
   or generalized polygons, and the type must be explicitly indicated too
-  (unless the segment type is selected, which is the default). The traits 
-  type must also model the \cppLstinline{GeneralPolygonSetTraits_2} concept; 
+  (unless the segment type is selected, which is the default). The traits
+  type must also model the \cppLstinline{GeneralPolygonSetTraits_2} concept;
   see Figure~\ref{fig:atc:gps} for the relevant traits-concept cluster. The
-  final traits type that is used for the bindings is automatically extended 
-  to respect this requirement. The details of this extension is given in 
+  final traits type that is used for the bindings is automatically extended
+  to respect this requirement. The details of this extension is given in
   Section~\ref{sec:extenders:arrTraits} of the appendix.
   %
 \item The \cppLstinline{Dcel} template-parameter should be substituted
@@ -492,7 +492,7 @@ A description of the two template parameters of this class template follows.
   \cppLstinline{GeneralPolygonSetDcelFace}, respectively; see
   Section~\ref{ssec:modules:bso2}. The final types that are used
   for the bindings are automatically extended to respect this requirement.
-  The details of this extension is given in 
+  The details of this extension is given in
   Section~\ref{sec:extenders:arrDcel} of the appendix.
 \end{itemize}
 
@@ -669,7 +669,7 @@ for the types below and operations on these types, but nothing else.
 \item kernel types,
 \item line segment and circular arc,
 \item arrangement in the plane induced by curves of the above types,
-\item generalized polygon and generalized polygon with holes bounded 
+\item generalized polygon and generalized polygon with holes bounded
   by curves of the above types, and
 \item Boolean operations on generalized polygons of the above types.
 \end{compactitem}
@@ -736,7 +736,7 @@ function.
       ]
     \end{forest}}
   \caption[]{%
-    \subref{fig:csp}~A generalized polygon with holes bounded by circular 
+    \subref{fig:csp}~A generalized polygon with holes bounded by circular
       arcs and line segments.
     \subref{fig:atc:gps}~The general point-set cluster.}
   \label{fig:bso2}
@@ -931,15 +931,15 @@ Figure~\ref{fig:ms2:inset}.
 \subsection{2D Triangulation Bindings}
 \label{ssec:modules:tri2}
 % -----------------------------------------------------------------------------
-Triangulation is perhaps the most common term in the lexicon of 
-computational geometry. Triangulations are ubiquitous geometric data 
-structures, which are used in numerous areas, such as, GIS, robotics, 
-geometric modeling and meshing to name a few; see, e.g.,~\cite{by-ag-98} 
+Triangulation is perhaps the most common term in the lexicon of
+computational geometry. Triangulations are ubiquitous geometric data
+structures, which are used in numerous areas, such as, GIS, robotics,
+geometric modeling and meshing to name a few; see, e.g.,~\cite{by-ag-98}
 for a survey on triangulations. The triangulation packages of \cgal{} are
 integral parts of the library and have constantly improved and enhanced
-since the early days of \cgal{}. In two-dimensions \cgal{} offers basic, 
-Delaunay and regular triangulations, as well as constrained triangulations 
-and constrained Delaunay triangulations. In three dimensions \cgal{} offers 
+since the early days of \cgal{}. In two-dimensions \cgal{} offers basic,
+Delaunay and regular triangulations, as well as constrained triangulations
+and constrained Delaunay triangulations. In three dimensions \cgal{} offers
 basic, Delaunay, and regular triangulations. \cgal{} also offers periodic
 triangulations both in the plane and in space~\cite{ct-cpt-09}.
 
@@ -1048,13 +1048,13 @@ When any template above is instantiated the template parameter
 \cppLstinline{Traits} must be substituted with a model of a suitable
 geometric traits concept; this model is referred to as the geometric
 traits class; it provides the type of points to use as well as
-elementary operations on points of the indicated type. The type of 
-traits used for the generated bindings is determined based on the 
-selection of the triangulation type as explained below. It is 
-conveniently defined in C++ as \cppLstinline{Dt::Geom_traits}, where 
-\cppLstinline{Dt} is a triangulation instance. This type is exposed as 
-a Python attribute with the same name under 
-\pyLstinline{Triangulation_2} (which in turn is nested under the 
+elementary operations on points of the indicated type. The type of
+traits used for the generated bindings is determined based on the
+selection of the triangulation type as explained below. It is
+conveniently defined in C++ as \cppLstinline{Dt::Geom_traits}, where
+\cppLstinline{Dt} is a triangulation instance. This type is exposed as
+a Python attribute with the same name under
+\pyLstinline{Triangulation_2} (which in turn is nested under the
 Python namespace \pyLstinline{Tri2}).
 Figure~\ref{tab:tri2:concept-hierarchy} depicts the 2D triangulation
 traits concept hierarchy. Any kernel instance is a model of any
@@ -1154,8 +1154,8 @@ triangulation selected via the \cmake{} flag
 \cmakeLstinline{CGALPY_TRI2_ NAME}, which also determines whether to use the
 non-periodic or periodic version above.
 
-The type that substitutes the \cppLstinline{Tds} parameter models the 
-concept \cppLstinline{TriangulationDataStructure_2}. An object of this 
+The type that substitutes the \cppLstinline{Tds} parameter models the
+concept \cppLstinline{TriangulationDataStructure_2}. An object of this
 type stores the combinatorial structure of the triangulation; it is an
 instance of the class template
 \cppLstinline{Triangulation_data_structure_2<V, F>}.
@@ -1176,25 +1176,25 @@ parameters must be substituted with types that also model the concepts
 \cppLstinline{AlphaShapeFace_2}, respectively; see
 Section~\ref{ssec:modules:as2}. Finally, if the binding is generated
 for a hierarchy triangulation, e.g., an instance of the template
-parameter \cppLstinline{Triangulation_hierarchy_2<Triangulation_2>}, 
+parameter \cppLstinline{Triangulation_hierarchy_2<Triangulation_2>},
 the \cppLstinline{V} template parameter must be substituted with
-a model of the concept 
+a model of the concept
 \cppLstinline{TriangulationHierarchyVertexBase_2}. (Observe that
 there is no special requirements on the type that substitutes the
 \cppLstinline{F} parameter in this case.) Similar to the 2D
-arrangement data structure, it is possible to extend the vertex and 
-face types of the triangulation. This is governed by two \cmake{} 
-Boolean flags as follows. If any one of the \cmake{} variables 
+arrangement data structure, it is possible to extend the vertex and
+face types of the triangulation. This is governed by two \cmake{}
+Boolean flags as follows. If any one of the \cmake{} variables
 \cmakeLstinline{CGALPY_TRI2_VERTEX_WITH_INFO} or
-\cmakeLstinline{CGALPY_TRI2_FACE_WITH_INFO} is set to true, the 
-corresponding template parameter, \cppLstinline{V} or \cppLstinline{F}, 
-is substituted with instances of 
+\cmakeLstinline{CGALPY_TRI2_FACE_WITH_INFO} is set to true, the
+corresponding template parameter, \cppLstinline{V} or \cppLstinline{F},
+is substituted with instances of
 \cppLstinline{CGAL::Triangulation_vertex_base_with_info_2<bp::object, Traits, Vb>}
 or
 \cppLstinline{CGAL::Triangulation_face_base_with_info_2<bp::object, Traits, Vb>},
 respectively, where
 \cppLstinline{Vb} and \cppLstinline{Fb} are types that model the concepts above.
-The final vertex type is selected accordingly; it is explained in 
+The final vertex type is selected accordingly; it is explained in
 details in Section~\ref{sec:extenders:iitri} of the appendix.
 
 The final vertex type is conveniently defined in C++ as
@@ -1202,9 +1202,9 @@ The final vertex type is conveniently defined in C++ as
 triangulation instance. This type is exposed as a Python attribute
 with the same name under \pyLstinline{Triangulation_2}.
 %
-The final face type is conveniently defined in C++ as 
-\cppLstinline{Dt::Face}, where \cppLstinline{Dt} is the triangulation 
-instance. This type is also exposed as a Python attribute with the 
+The final face type is conveniently defined in C++ as
+\cppLstinline{Dt::Face}, where \cppLstinline{Dt} is the triangulation
+instance. This type is also exposed as a Python attribute with the
 same name under \pyLstinline{Triangulation_2}.
 
 % -----------------------------------------------------------------------------
@@ -1296,8 +1296,8 @@ Instance of the \cppLstinline{Delaunay_triangulation_3<>} and
 to represent Delaunay and regular triangulation, respectively. In a
 regular triangulation points have an associated weight, and some
 points can be hidden and do not result in vertices in the
-triangulation. \cppLstinline{Triangulation_hierarchy_3} enables fast 
-point location queries. When instantiated its template parameter must 
+triangulation. \cppLstinline{Triangulation_hierarchy_3} enables fast
+point location queries. When instantiated its template parameter must
 be substituted with an instance of any other triangulation class template.
 
 The \iiiDPeriodicTriangulationsPackage{}
@@ -1349,13 +1349,13 @@ When any template above is instantiated the template parameter
 \cppLstinline{Traits} must be substituted with a model of a suitable
 geometric traits concept; this model is referred to as the geometric
 traits class; it provides the type of points to use as well as
-elementary operations on points of the indicated types. The type of 
-traits used for the generated bindings is determined based on the 
-selection of the triangulation type as explained below. It is 
-conveniently defined in C++ as \cppLstinline{Dt::Geom_traits}, where 
-\cppLstinline{Dt} is the triangulation instance. This type is exposed 
-as a Python attribute with the same name under 
-\pyLstinline{Triangulation_3} (which in turn is nested under the 
+elementary operations on points of the indicated types. The type of
+traits used for the generated bindings is determined based on the
+selection of the triangulation type as explained below. It is
+conveniently defined in C++ as \cppLstinline{Dt::Geom_traits}, where
+\cppLstinline{Dt} is the triangulation instance. This type is exposed
+as a Python attribute with the same name under
+\pyLstinline{Triangulation_3} (which in turn is nested under the
 Python namespace \pyLstinline{Tri3}).
 Figure~\ref{fig:tri3:concept-hierarchy} depicts the 3D triangulation
 traits concept hierarchy. Any kernel instance is a model of any
@@ -1461,16 +1461,16 @@ triangulation selected via the \cmake{} flag
 \cmakeLstinline{CGALPY_TRI3_ NAME}, which also determines whether to use the
 non-periodic or periodic version above.
 
-The type that substitutes the \cppLstinline{Tds} parameter models the 
-concept \cppLstinline{TriangulationDataStructure_3}. An object of this 
+The type that substitutes the \cppLstinline{Tds} parameter models the
+concept \cppLstinline{TriangulationDataStructure_3}. An object of this
 type stores the combinatorial structure of the triangulation; it is an
 instance of the class template
 \cppLstinline{Triangulation_data_structure_3<V, C, ConcurrencyTag>}.
-The types that substitute the \cppLstinline{V} and \cppLstinline{C} 
+The types that substitute the \cppLstinline{V} and \cppLstinline{C}
 template parameters when the
 \cppLstinline{Triangulation_data_structure_3<V, C>} template
 is instantiated represent the type of the vertex and the type of the
-cell of the triangulation, respectively; they must model the 
+cell of the triangulation, respectively; they must model the
 \cppLstinline{TriangulationDS VertexBase_3} and
 \cppLstinline{TriangulationDSCellBase_3} concepts, respectively. If the
 binding is generated for a periodic triangulation, these parameters
@@ -1488,23 +1488,23 @@ and \cppLstinline{FixedAlphaShapeCell_3}, respectively. Finally, if
 the binding is generated for a hierarchy triangulation, e.g., an
 instance of the template parameter
 \cppLstinline{Triangulation_hierarchy_3<Triangulation_3>}, the
-\cppLstinline{V} template parameter must be substituted with a model 
-of the concept \cppLstinline{Triangulation HierarchyVertexBase_3}. 
-(Observe that there is no special requirements on the type that 
+\cppLstinline{V} template parameter must be substituted with a model
+of the concept \cppLstinline{Triangulation HierarchyVertexBase_3}.
+(Observe that there is no special requirements on the type that
 substitutes the \cppLstinline{C} parameter in this case.)
 Similar to the 2D arrangement and 2D triangulation data structures,
-it is possible to extend the vertex and cell types of the 
-triangulation. This is governed by two \cmake{} Boolean flags as 
-follows. If any one of the \cmake{} variables 
+it is possible to extend the vertex and cell types of the
+triangulation. This is governed by two \cmake{} Boolean flags as
+follows. If any one of the \cmake{} variables
 \cmakeLstinline{CGALPY_TRI3_VERTEX_WITH_INFO} or
 \cmakeLstinline{CGALPY_TRI3_CELL_WITH_INFO} is set to true, the
-corresponding template parameter, \cppLstinline{V} or \cppLstinline{C}, 
-is substituted with instances of 
+corresponding template parameter, \cppLstinline{V} or \cppLstinline{C},
+is substituted with instances of
 \cppLstinline{CGAL::Triangulation_vertex_base_ with_info_3<bp::object, Traits, Vb>}
 or
 \cppLstinline{CGAL::Triangulation_cell_base_with_info_3<bp::object, Traits, Cb>},
 respectively, where
-\cppLstinline{Vb} and \cppLstinline{Cb} are types that model the 
+\cppLstinline{Vb} and \cppLstinline{Cb} are types that model the
 concepts above. The final vertex type is selected accordingly; it is
 explained in details in Section~\ref{sec:extenders:iiitri} of the appendix.
 
@@ -1513,15 +1513,15 @@ The final vertex type is conveniently defined in C++ as
 triangulation instance. This type is exposed as a Python attribute
 with the same name under \pyLstinline{Triangulation_3}.
 %
-The final face type is conveniently defined in C++ as 
+The final face type is conveniently defined in C++ as
 \cppLstinline{Dt::Face}, where \cppLstinline{Dt} is the triangulation
-instance. This type is also exposed as a Python attribute with the 
+instance. This type is also exposed as a Python attribute with the
 same name under \pyLstinline{Triangulation_3}.
 
 The template parameter \cppLstinline{ConcurrencyTag} is substituted
 with either \cppLstinline{Sequential_tag} or
 \cppLstinline{Parallel_tag} when the template
-\cppLstinline{Triangulation_data_structure_3<V, C, ConcurrencyTag} is 
+\cppLstinline{Triangulation_data_structure_3<V, C, ConcurrencyTag} is
 instantiated. It enables the use of a concurrent
 container to store vertices and cells. The \cmake{} flag
 \cmakeLstinline{CGALPY_TRI3_CONCURRENCY_NAME} determines the selection; see
@@ -1556,7 +1556,7 @@ selection; see Table~\ref{tab:tri3:location}.
   \caption{3D triangulation location policy options}
   \centering\begin{tikzpicture} \matrix (first) [tableName, column
     1/.style={nodes={text width=18em}}, column 2/.style={nodes={text
-        width=31em}} ] { 
+        width=31em}} ] {
     \cmakeLstinline{TRI3_LOCATION_POLICY_NAME} & Type\\ \myLstinline{fast} &
     \cppLstinline{Fast_location}\\ \myLstinline{compact} &
     \cppLstinline{Compact_location}\\ };
@@ -1750,8 +1750,8 @@ dimension as an \pyLstinline{int}.
   \def\filename{kd_tree.py}
   \lstinputlisting[style=pythonFramedStyle,basicstyle=\normalsize,
                    label={lst:py:ss},
-                   firstline=15,
-                   lastline=68,
+                   firstline=16,
+                   lastline=69,
                    caption={Applying various queries on a \kdtree of 2D points.}]
                   {\pythonDir\filename}
 \end{lstfloat}
