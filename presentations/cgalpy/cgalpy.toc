@@ -1,0 +1,3 @@
+\babel@toc {english}{}
+\babel@toc {english}{}
+\beamer@sectionintoc {1}{Python Binding}{2}{0}{1}

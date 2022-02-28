@@ -1,0 +1,12 @@
+\begin{frame}[fragile]
+  \frametitle{Binding Scope}
+  \tiny%
+\begin{lstlisting}[style=pythonStyle]
+>>> import CGALPY
+>>> Aos2 = CGALPY.Aos2        # define the module namespace
+>>> Arr = Aos2.Arrangement_2  # define the arrangement type in the module namespace
+>>> Point = Arr.Point_2       # define the point type in the arrangement class
+>>> Segment = Arr.Curve_2     # define the curve type in the arrangement class
+>>> seg = Segment(Point(0, 0), Point(1, 0))
+\end{lstlisting}
+\end{frame}
