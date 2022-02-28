@@ -1,10 +1,13 @@
 \documentclass{article}
 \def\baseDir{./}
-\def\cmakeRelDir{../../../cmake/tests/release/}
+% \def\cmakeRelDir{../../../cmake/tests/release/}
+\def\cmakeRelDir{cmake/}
 \def\cmakeDir{\baseDir\cmakeRelDir}
-\def\pythonRelDir{../../../src/python_scripts/cgalpy_examples/}
+% \def\pythonRelDir{../../../src/python_scripts/cgalpy_examples/}
+\def\pythonRelDir{python/}
 \def\pythonDir{\baseDir\pythonRelDir}
-\input{../../header}
+% \input{../../header}
+\input{./header}
 \usepackage[margin=0.7in]{geometry}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -26,6 +29,7 @@
 \definecolor{nircolor}{HTML}{F37736}
 \definecolor{dancolor}{HTML}{7BC043}
 \definecolor{todocolor}{HTML}{0392CF}
+% \graphicspath{{../figs/}}
 \graphicspath{{./figs/}}
 \def\efi#1{\textcolor{eficolor}{\sc Efi says: }{\textcolor{eficolor}{\marrow\sf #1}}}
 \def\nir#1{\textcolor{nircolor}{\sc Nir says: }{\textcolor{nircolor}{\marrow\sf #1}}}
@@ -47,8 +51,10 @@
 \input{code}
 \input{concepts}
 \input{applications}
-\bibliographystyle{abbrv}
-\bibliography{../../abrev-short,../../cgal,../cgal_python_bindings}
+% \bibliographystyle{abbrv}
+% \bibliography{../../abrev-short,../../cgal,../cgal_python_bindings}
+% \bibliography{./abrev-short,./cgal,./cgal_python_bindings}
+\input{cgal_python_bindings.bbl}
 \appendix
 \input{extenders}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
