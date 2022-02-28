@@ -2,60 +2,50 @@
 \section{Introduction}
 \label{sec:intro}
 % =============================================================================
-
 \cgal{} (Computational Geometry Algorithm Library) is an open source
 software project that provides access to efficient and reliable
 implementations of geometric algorithms in the form of a C++
-library~\cite{cgal:eb-21}. \cgal{} has evolved through the years and
-now represents the state of the art in computational geometry
-software. The software modules of \cgal{} rigorously adhere to the
-generic programming paradigm---a discipline that consists of the
-gradual lifting of concrete algorithms abstracting over details, while
-retaining the algorithm semantics and efficiency. The software modules
-of \cgal{} also follow the exact geometric-computation paradigm, which
-simply amounts to ensuring that errors in predicate evaluations do not
-occur; it guarantees robustness of the applied algorithms.  As a
-result, the software of \cgal{} is stable despite the use of (inexact)
-floating point arithmetic, found in standard hardware, it is complete
-as it handles all degenerate cases, which typically are in abundance,
-and it is efficient---all at the same time.
+library~\cite{cgal:eb-21a}. \cgal{} has evolved through the years and
+now represents the state of the art in computational geometry software. 
+\cgal{} is used in a diverse range of domains requiring geometric 
+computation such as computer graphics, scientific visualization, 
+computer aided design and modeling, geographic information systems,
+molecular biology, medical imaging, and many more. \cgal{} provides
+a large number of components that cover a wide range of areas. The 
+bindings for most components are supported now. The principles for the 
+bindings described in this paper applies to all packages of \cgal{}
+(and perhaps to other generic C++ libraries as well), and can be easily
+adopted to support the bindings of the few components that are still 
+missing.
 
-The \cgal{} \emph{arrangements} packages constitute a large component
-of the \cgal{} library---a component that is particularly intricate,
-partly due to the interplay between combinatorial algorithms and
-algebra~\cite{fhw-caass-12}. Arrangements are space subdivisions
-induced by curves and surfaces, which have been intensively studied in
-discrete and computational geometry~\cite{hs-a-18}, and have
-applications in various domains, from robotics~\cite{my-hs-atarr-95}
-and assembly planning~\cite{hlw-gfapm-00} through Geographic
-Information Systems (GIS)~\cite{DBLP:conf/gis/KreveldSW04} to protein
-structure determination~\cite{DBLP:journals/jcb/MartinYBZD11}, to
-mention just a few uses. The arrangements packages of \cgal{} have
-been developed since the early days of \cgal, first for planar
-arrangements and maps~\cite{DBLP:journals/jea/FlatoHHNE00,
-  DBLP:journals/comgeo/WeinFZH07}, Boolean operations, and Minkowski
-sums~\cite{bfhhm-epsph-15}. Then, envelopes of surfaces in
-three-dimensions have been added~\cite{m-rgece-06}. Finally, a major
-effort has been undertaken to supports two-dimensional arrangements on
-(not necessarily planar)
-surfaces~\cite{bfhks-apsca-10,bfhmw-apsgf-10}.
-
-There is a large community of users of the \cgal{} arrangements
+There is a large community of users of \cgal{} 
 packages in academia and industry, and these packages seem to be
 helpful in many diverse projects. In all the projects that we are
 aware of, the packages have been used by C++ experts or by users who
 have been strongly supported by such experts from the \cgal{}
-developers community, including
+developer community, including
 GeometryFactory.\footnote{GeometryFactory is the company established
   to market and support the usage of \cgal{} packages.} In our
 experience, incorporating \cgal{} in education or in academic projects
 lacking C++ experts has been rugged. We attribute the difficulties
 that arise in such settings to the highly sophisticated usage of C++
 in \cgal. The binding project that we describe in this paper is meant
-to resolve these difficulties and make the arrangements packages more
+to resolve these difficulties and make all \cgal{} packages more
 accessible to a wider audience of programmers. We already see, and
 report below on, first signs that the project is on a good trajectory
 toward achieving this goal.
+
+The software modules of \cgal{} rigorously adhere to the
+generic programming paradigm---a discipline that consists of the
+gradual lifting of concrete algorithms abstracting over details, while
+retaining the algorithm semantics and efficiency. The software modules
+of \cgal{} also follow the exact geometric-computation paradigm, which
+simply amounts to ensuring that errors in predicate evaluations do not
+occur; it guarantees robustness of the applied algorithms.  As a
+result, the software of \cgal{} is robust despite the use of (inexact)
+floating point arithmetic, found in standard hardware, it is complete
+as it handles all degenerate cases, which typically are in abundance,
+and it is efficient---all at the same time.
 
 Generic programming identifies an abstraction that consists of a
 formal hierarchy of polymorphic abstract requirements on data types,
@@ -184,7 +174,7 @@ dynamically.
 \cgal{} uses \cmake~\cite{mh-mc-08} for the build process.  Since
 version~5.0, \cgal{} is header-only by default, which means that an
 application that depends on \cgal{} only depends on (i) the source
-code of \cgal{} that resides in header file, (the name of which
+code of \cgal{} that resides in header files, (the names of which
 typically end with the suffix \myLstinline{.hpp}), and (ii) native
 configuration files generated by \cmake{} (in particular, the
 execution of \myLstinline{cmake}). In other words, there is no need to
@@ -214,12 +204,12 @@ implemented in C++ and their implementation exploits advanced features
 in C++, which we explicate. This results with elegant and compact code
 that is easy to maintain and extend with additional bindings.
 %
-We present a system that dynamically generates bindings of desired
+We present a system that rapidly generates bindings of desired
 objects according to user prescriptions, which enables the convenient
 use of any subset of bound object types concurrently.  With our system
 it is possible to generate a single library that contains bindings for
 instances of different \cgal{} templates, e.g., an instance of the 2D
-arrangement class template and an instance of the 2D polygon-set class
+arrangement class template and an instance of the 2D triangulation class
 template, or several libraries when one is insufficient. If several
 instances of the same class template must be bound, several
 corresponding libraries must be generated, one for each instance.
@@ -232,17 +222,17 @@ The rest of this paper is organized as follows. A study that compares
 several methods for implementing C++ Python bindings is presented
 in Section~\ref{sec:comp}.
 %
-General instructions for dynamically generating bindings are presented
-in Section~\ref{sec:gen}.
+General instructions for rapidly generating bindings with our system 
+are presented in Section~\ref{sec:gen}.
 %
 The description of the bindings generated by our system for various
 modules are given in Section~\ref{sec:modules}.
 %
-The tight coupling between concepts and binding generation is
-described in Section~\ref{sec:concepts}.
-%
 A sample of highlighted modern C++ techniques and idioms used in the
 binding implementation are described in Section~\ref{sec:code}.
+%
+The tight coupling between concepts and binding generation is
+described in Section~\ref{sec:concepts}.
 %
 Applications of the new tools, which are geared toward making the CGAL
 code more accessible are presented in Section~\ref{sec:app}.

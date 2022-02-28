@@ -37,7 +37,7 @@ all_points = tree.points()
 for x in all_points:
     print(x)
 query = Point_d(2, [FT(n) for n in [0, 0]])
-eps = FT(0.0)  	        # 0.0 for exact NN, otherwise approximate NN
+eps = FT(0.0)           # 0.0 for exact NN, otherwise approximate NN
 search_nearest = True  	# set to False to search farthest
 sort_neighbors = False  # set to True to obtain the neighbors sorted by distance
 distance = SS.Euclidean_distance()	# The distance metric to use

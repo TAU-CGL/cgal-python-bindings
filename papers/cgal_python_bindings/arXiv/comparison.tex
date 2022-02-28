@@ -123,7 +123,7 @@ form of XML. SWIG is free software and the code that SWIG generates is
 compatible with both commercial and non-commercial projects.
 
 % Boost.Python
-Boost is a large and complex suite of utility libraries that works
+Boost is a large and sophisticated suite of utility libraries that works
 with almost every C++ compiler in existence.
 Boost.Python~\cite{bhsbp-ag-03} is a member of the Boost suit that
 enables seamless interoperability between C++ and the Python
@@ -159,7 +159,7 @@ Boost.Python with everything stripped away that isn't relevant for
 binding generation. Without comments, the core header files only
 require approximately 4K lines of code and depend on Python and the
 C++ standard library. This compact implementation was possible thanks
-to some of the new C++11 language features (specifically: tuples,
+to some of the new C++11 language features (specifically, tuples,
 lambda functions and variadic templates). Since its creation, this
 library has grown beyond Boost.Python in several ways, leading to
 simpler binding code in many common situations.
@@ -205,14 +205,14 @@ Boost.Python, because it requires dealing with a large and complex
 system. This does not present a drawback for us, because \cgal{}
 itself depends on several other libraries of Boost; thus, we are
 familiar with Boost and must deal with it anyway.
-
+%
 The compatibility of Boost with almost every C++ compiler in general
 has its cost; arcane template tricks and workarounds are necessary to
 support the oldest and buggiest of compiler specimens.  Now that
-C++11-compatible compilers are widely available, this heavy machinery
-has become an excessively large dependency. However, our main concern
-was the efficiency of the generated bindings in terms of execution
-time and memory space.
+C++11-compatible compilers are widely available, the heavy machinery
+required to support the wide range of compilers may take some toll. 
+However, our main concern was the efficiency of the generated bindings 
+in terms of execution time and memory space.
 
 We have conducted two sets of experiments. In the first set we
 compared the time it took to refer to C++ objects from Python code and
@@ -223,7 +223,15 @@ references to many objects and in the second subset we compared the
 time it took to make many references to a single object; see
 Table~\ref{tab:res:refs} for the results.
 %
-The second set was further divided into too subsets as well. In the first subset we compared the time it took to call many small functions, and in the second subset we compared the time it took to call few large functions. We also used the second set of experiments to measure the time it took to compute the various tasks in native Python; see Table~\ref{tab:res:calls} for the results.
+The second set was further divided into too subsets as well. In the 
+first subset we compared the time it took to call many small functions, 
+and in the second subset we compared the time it took to call few large 
+functions. We also used the second set of experiments to measure the time 
+it took to compute the various tasks in native Python; see 
+Table~\ref{tab:res:calls} for the results. 
+%
+All benchmark programs were executed on a machine equipped with an 
+Intel Core~i5 clocked at~3.5GHz with~16GB of RAM.
 %
 The results we obtained left nothing in doubt.
 % We abandoned using SWIG due do its high overhead and we picked Boost.python for its high efficiency in every category.

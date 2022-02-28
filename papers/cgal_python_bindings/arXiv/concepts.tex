@@ -19,7 +19,7 @@ package, are quite large with intricate refinement relations. We use
 clusters of closely related concepts to describe the refinement
 relations among them; see, e.g., Figure~\ref{fig:atc}. We have introduced
 tight coupling between concepts and (i) binding generations and (ii)
-type annotation. We describe these relations in this section.
+type annotation. We describe these relations in the following sections.
 
 % -----------------------------------------------------------------------------
 \subsection{Following Generic Concepts}
@@ -98,12 +98,16 @@ see Lines~10--11 in the definition of the function
 \cppLstinline{export_AosBasicTraits\_2()} in the listing. It also
 saves the class object of the \cppLstinline{Point_2} type (see
 Line~8), so that later on the functions responsible for the bindings
-of the various traits models can add additional Python attributes,
-such as \pyLstinline{x}, \pyLstinline{y}, and
-\pyLstinline{approximate}, which expose the member functions
-\cppLstinline{x()}, \cppLstinline{y()}, and
-\cppLstinline{approximate()}, to the Python object that exposes the
-type  \cppLstinline{Point_2}.
+of the various traits models can add additional Python attributes.
+For example, the function that exposes the 
+\cppLstinline{Arr_segment_traits<Kernel>} instance adds the attributes
+\pyLstinline{x} and \pyLstinline{y}, which expose the member functions
+\cppLstinline{x()}, \cppLstinline{y()}, respectively, to the Python 
+object that exposes the type \cppLstinline{Point_2}. Similarly, the 
+function that exposes the \cppLstinline{Arr_Bezier_curve_traits\_2} 
+instance adds the attribute \pyLstinline{approximate}, which exposes
+the member function \cppLstinline{approximate()} to the Python 
+object that exposes the type \cppLstinline{Point_2}.
 
 The concept \cppLstinline{AosHorizontalSideTraits\_2} requires the
 provision of the \cppLstinline{Compare\_x\_on\_boundary\_2}
@@ -200,15 +204,15 @@ we have introduced a framework for the automatic generation of the
 annotation stubs. The framework includes a Python script called
 \bashLstinline{generate.py} that accepts as input static data files in
 json format that describe the concepts, their refinement relations,
-the exposed C++ classes, and their medeling relations with
+the exposed C++ classes, and their modeling relations with
 concepts. The script generates annotation stubs for the bindings of
 modules selected by the user. As mentioned in Section~\ref{sec:gen},
 \cmake{} is used to generate the native build environment. We have
 augmented the scope of \cmake, and now \cmake{} is also used to
-generate the annotation stubs. Before we delve into the deatils of our
+generate the annotation stubs. Before we delve into the details of our
 annotation stub generation system, we describe in the following two
 paragraphs an unsuccessful attempt, which resembles the C++ binding
-code. It reached a deadend because of limitations of Python.
+code. It reached a dead-end because of limitations of Python.
 
 Imagine that for each C++ concept we introduce a Python annotation
 class that annotates all the requirements of the concept. The
@@ -286,7 +290,7 @@ introduction of the \pyLstinline{Typing} module, and in particular the
   \url{https://docs.python.org/3/library/typing.html\#module-typing}.}
 there are still barriers that cannot be bridged. The barrier that we
 encountered is related to deep nesting. The culprit lies in Line~7 and
-Line~9 of Listing~\ref{lst:py:aosBasicTraits}. In Line~7, for example,
+Line~9 of Listing~\ref{lst:py:aosBasicTraitsErr}. In Line~7, for example,
 the class \pyLstinline{Point_2} nested in the utility class
 \pyLstinline{_AosBasicTraits_2} is refered to from a method of the
 class \pyLstinline{Equal_2}, which is nested in
@@ -301,10 +305,10 @@ flat.
 Assume that two users select the \iiDArrangementsPackage{} module for
 binding generation. In particular, one user chooses to generate
 bindings for the \cppLstinline{Arrangement_2<GeometryGtaits_2, Dcel>}
-type instantiated, where \cppLstinline{GeometryGtaits_2} is
-substituted with an instance of the
-\cppLstinline{Arr_segment_traits_2} class template and the other user
-chooses to generate bindings for the
+type instantiated, where the template parameter 
+\cppLstinline{GeometryGtaits_2} is substituted with an instance of
+the \cppLstinline{Arr_segment_traits_2} class template and the other
+user chooses to generate bindings for the
 \cppLstinline{Arrangement_2<GeometryGtaits_2, Dcel>} type, where
 \cppLstinline{GeometryGtaits_2} is substituted with an instance of the
 \cppLstinline{Arr_Bezier_curve_traits_2} class template; see
@@ -375,7 +379,7 @@ our binding system, it achieves the goal, it is flexible, and it
 posses an additional advantage. Once the input data files for specific
 concepts and models are in place, they can be used to automatically
 generate the documentation for those models and concept; we certainly
-plan to persue this goal in the future. The use of the type-annotation
+plan to pursue this goal in the future. The use of the type-annotation
 subsystem, and in particular the \bashLstinline{generate.py} script or
 the script that generates the documentation that we intend to develop
 are not limited to \cgal{}---they can be used by any binding
