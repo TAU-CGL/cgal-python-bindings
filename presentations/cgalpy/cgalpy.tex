@@ -12,6 +12,11 @@
 \def\lessonLocation{}
 \def\lessonDuration{}
 %\raisebox{-1.5pt}{\pgfuseimage{cgal-logo-small}}
+\def\baseDir{./}
+\def\cmakeRelDir{../../cmake/tests/release/}
+\def\cmakeDir{\baseDir\cmakeRelDir}
+\def\pythonRelDir{../../src/python_scripts/cgalpy_examples/}
+\def\pythonDir{\baseDir\pythonRelDir}
 \input{../header}
 \input{../my_tikz}
 \input{./tables}
@@ -56,6 +61,7 @@
 \input{examples}
 \input{cmake}
 \input{components}
+\input{unsupported}
 \input{scope}
 \input{library}
 \input{concepts}
