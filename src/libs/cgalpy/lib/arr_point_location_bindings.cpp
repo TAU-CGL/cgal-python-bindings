@@ -17,7 +17,6 @@
 
 #include "CGALPY/arr_point_location_config.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/apply_iterator.hpp"
 
 namespace bp = boost::python;
 typedef typename aos2::Arrangement_2 Arrangement_2;
@@ -50,12 +49,15 @@ bp::list locate_batch(Arrangement_2& arr, const bp::list& lst) {
   auto v = std::vector<Point_2>(bp::stl_input_iterator< Point_2 >(lst),
                                 bp::stl_input_iterator< Point_2 >());
   auto op =
-    [&] (const Pl_query_result& p) {
+    [&] (const Pl_query_result& p) mutable {
       const auto& result =
         boost::apply_visitor(Point_location_result_visitor(), p.second);
       res.append(bp::make_tuple(p.first, result));
     };
-  locate(arr, v.begin(), v.end(), apply_iterator<decltype(op)>(op));
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  locate(arr, v.begin(), v.end(), it);
   return res;
 }
 
