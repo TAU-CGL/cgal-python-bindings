@@ -1,0 +1,10 @@
+set(CMAKE_BUILD_TYPE "Debug"                             CACHE STRING "" FORCE)
+set(CGALPY_USE_SHARED_LIBS ON                            CACHE BOOL "" FORCE)
+set(CGALPY_FIXED_LIBRARY_NAME ON                         CACHE BOOL "" FORCE)
+
+set(CGALPY_KERNEL_NAME "epec"                            CACHE STRING "" FORCE)
+set(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS ON          CACHE BOOL "" FORCE)
+set(CGALPY_AOS2_GEOMETRY_TRAITS_NAME "circleSegment"     CACHE STRING "" FORCE)
+set(CGALPY_KERNEL_D_BINDINGS ON              CACHE BOOL "Enable dD kernel" FORCE)
+set(CGALPY_KERNEL_D_NAME "epicd"             CACHE STRING "use EPICD kernel" FORCE)
+set(CGALPY_SPATIAL_SEARCHING_BINDINGS ON     CACHE BOOL "Enable SS" FORCE)
