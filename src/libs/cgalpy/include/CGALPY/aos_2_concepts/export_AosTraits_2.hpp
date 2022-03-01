@@ -13,7 +13,6 @@
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 
 #include "CGALPY/add_class_object.hpp"
-#include "CGALPY/apply_iterator.hpp"
 
 //! Apply the make_x_monotone operator and append the resulting X-monotone
 // elements to the returned Python list.
@@ -25,11 +24,14 @@ bp::list export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
   typedef boost::variant<Point_2, X_monotone_curve_2>   Result;
   bp::list lst;
   auto op =
-    [&] (const Result& o) {
+    [&] (const Result& o) mutable {
       if (auto* point = boost::get<Point_2>(&o)) lst.append(*point);
       else if (auto* cv = boost::get<X_monotone_curve_2>(&o)) lst.append(*cv);
     };
-  m(c, apply_iterator<decltype(op)>(op));
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  m(c, it);
   return lst;
 }
 
