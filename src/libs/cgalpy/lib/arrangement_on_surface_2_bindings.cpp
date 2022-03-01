@@ -23,7 +23,6 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/Arr_overlay_traits.hpp"
 #include "CGALPY/Arr_overlay_function_traits.hpp"
-#include "CGALPY/apply_iterator.hpp"
 
 void export_vertex();
 void export_halfedge();
@@ -183,8 +182,12 @@ void decompose_helper(const Decompose_result& res, bp::list& lst) {
 
 bp::list decompose(Arrangement_2& arr) {
   bp::list lst;
-  auto op = [&] (const Decompose_result& res) { decompose_helper(res, lst); };
-  CGAL::decompose(arr, apply_iterator<decltype(op)>(op));
+  auto op = [&] (const Decompose_result& res) mutable
+            { decompose_helper(res, lst); };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::decompose(arr, it);
   return lst;
 }
 
@@ -199,10 +202,12 @@ public:
 bp::list zone_default(Arrangement_2& arr, X_monotone_curve_2& c) {
   bp::list lst;
   auto op =
-    [&] (const variant& o) {
-      lst.append(boost::apply_visitor(Zone_object_visitor(), o));
-    };
-  CGAL::zone(arr, c, apply_iterator<decltype(op)>(op));
+    [&] (const variant& o) mutable
+    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::zone(arr, c, it);
   return lst;
 }
 
@@ -210,10 +215,12 @@ template <typename PointLocation>
 bp::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
   bp::list lst;
   auto op =
-    [&] (const variant& o) {
-      lst.append(boost::apply_visitor(Zone_object_visitor(), o));
-    };
-  CGAL::zone(arr, c, apply_iterator<decltype(op)>(op), pl);
+    [&] (const variant& o) mutable
+    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::zone(arr, c, it, pl);
   return lst;
 }
 
