@@ -1,0 +1,44 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{forest}
+\usetikzlibrary{calc,patterns,decorations.pathmorphing,decorations.markings,
+  matrix,fit,decorations.pathreplacing,arrows,arrows.meta,automata,positioning,
+  shapes,chains,spy,intersections,through,backgrounds,shadows,fadings,
+  shadows.blur}
+\usepackage{listings}
+\lstloadlanguages{[11]{C++}}
+\def\cppLstinline#1{\lstinline[language={C++},columns=fixed]{#1}}
+\pagestyle{empty}
+\begin{document}
+\def\name#1{\scriptsize\cppLstinline{#1}}
+\tikzset{concept/.style={rectangle split,rectangle split parts=1,draw,
+    fill=white,blur shadow,rounded corners,align=center,thick}}
+\scalebox{1.5}{%
+\begin{forest}
+  [\name{AosBasicTraits_2},name=abt,before drawing tree={x=0pt},for tree={concept,edge={-latex}}
+    % forked edges
+    [\name{AosVerticalSideTraits_2}
+      [\name{AosLeftSideTraits_2}
+        [\name{AosOpenLeftTraits_2},name=olt
+          [,phantom]
+          [\name{AosOpenBoundaryTraits_2},name=oyt,before drawing tree={x=0pt}]
+        ]
+      ]
+      [\name{AosRightSideTraits_2}
+        [\name{AosOpenRightTraits_2},name=ort]
+      ]
+    ]
+    [\name{AosHorizontalSideTraits_2}
+      [\name{AosBottomSideTraits_2}
+        [\name{AosOpenBottomTraits_2},name=obt]
+      ]
+      [\name{AosTopSideTraits_2}
+        [\name{AosOpenTopTraits_2},name=ott]
+      ]
+    ]
+  ]
+  \draw[-latex] (ort) to (oyt);
+  \draw[-latex] (obt) to (oyt);
+  \draw[-latex] (ott) to (oyt);
+\end{forest}}
+\end{document}
