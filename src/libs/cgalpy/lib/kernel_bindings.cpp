@@ -176,7 +176,7 @@ void export_kernel() {
     .def(bp::init<FT&, FT&>())
     .def(bp::init<RT&, RT&>())
     .def(bp::init<Point_2&>())
-    .def("x", &Point_2::x, Kernel_return_value_policy())
+    .def("x", &Point_2::x, Kernel_return_value_policy(), "YYYYYYYYYYYYYYYYYYY")
     .def("y", &Point_2::y, Kernel_return_value_policy())
     .def("hx", &Point_2::hx, Kernel_return_value_policy())
     .def("hy", &Point_2::hy, Kernel_return_value_policy())
@@ -204,6 +204,7 @@ void export_kernel() {
     .def(bp::self + Vector_2())
     .def(bp::self - Vector_2())
     .setattr("__hash__", &hash_rational_point<is_epec_type(), Point_2>)
+    .setattr("__doc__", "AAAAAAAAAAAAAAAA")
     ;
 
   bp::class_<Segment_2>("Segment_2")
