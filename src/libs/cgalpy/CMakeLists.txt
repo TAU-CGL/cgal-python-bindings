@@ -1,5 +1,8 @@
 # packages
 
+# Generate config.hpp
+configure_file(config.hpp.in include/config.hpp)
+
 # Add source files
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
 
@@ -217,13 +220,13 @@ endif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 # Always build a shared library
 add_library(CGALPY SHARED ${CGALPY_SRC_FILES})
 
-# set_target_properties(cgalpy PROPERTIES
-#   VERSION "${cgalpy_SOVERSION}"
-#   SOVERSION "${cgalpy_SONAME_VERSION}")
+set_target_properties(CGALPY PROPERTIES
+  VERSION "${CMAKE_PROJECT_VERSION}"
+  SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
 
 target_link_libraries(CGALPY
-                      ${Boost_LIBRARIES}
-		      ${PYTHON_LIBRARIES})
+  ${Boost_LIBRARIES}
+  ${PYTHON_LIBRARIES})
 
 set(CGALPY_LIB_NAME "CGALPY")
 if (NOT CGALPY_FIXED_LIBRARY_NAME)
@@ -310,7 +313,11 @@ if(WIN32)
   set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
 endif()
 
+################################################################################
 # Documentation
+################################################################################
+
+# Doxygen
 find_package(Doxygen)
 
 if(DOXYGEN_FOUND)
@@ -321,6 +328,21 @@ if(DOXYGEN_FOUND)
      		    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
      		    COMMENT "Generating API documentation with Doxygen" VERBATIM)
 endif(DOXYGEN_FOUND)
+
+# Sphinx
+find_package(Sphinx)
+
+if(Sphinx_FOUND)
+  add_sphinx_document(${CGALPY_LIB_NAME}-manual
+    CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
+    "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst"
+    "${CMAKE_CURRENT_LIST_DIR}/doc/source/ker.rst"
+    # "${CMAKE_CURRENT_LIST_DIR}/doc/user/models.rst"
+    # "${CMAKE_CURRENT_LIST_DIR}/doc/user/api.rst"
+    )
+else()
+  message(WARNING "No Sphinx found. Documentation target not available.")
+endif()
 
 ################################################################################
 # Stubs (Type Annotation)
