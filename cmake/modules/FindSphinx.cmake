@@ -27,35 +27,74 @@ endif()
 
 # add_sphinx_document(
 #   <name>
+#   MODULES <module-list>
 #   CONF_FILE <conf-py-filename>
+#   INDEX_FILE <index-rst-filename>
 #   [C_API <c-api-header-file>]
 #   [SKIP_HTML] [SKIP_PDF]
 #   <rst-src-file>...)
 #
 # Function for creating Sphinx documentation targets.
 function(add_sphinx_document TARGET_NAME)
-  cmake_parse_arguments(${TARGET_NAME} "SKIP_HTML;SKIP_PDF" "CONF_FILE" ""
+  cmake_parse_arguments(${TARGET_NAME}
+    "SKIP_HTML;SKIP_PDF"
+    "SRC_DIR;CONF_FILE;INDEX_FILE"
+    "MODULES"
     ${ARGN})
   get_filename_component(SRCDIR "${${TARGET_NAME}_CONF_FILE}" DIRECTORY)
   set(INTDIR "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}/source")
   set(OUTDIR "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}/build")
+  foreach(line IN LISTS MODULES)
+    string(APPEND MULTILINE_MODULES "   ${line}\\\n")
+  endforeach()
   string(TIMESTAMP SPHINX_TARGET_YEAR "%Y" UTC)
+
+  # handle fonf.py
   add_custom_command(
     OUTPUT "${INTDIR}/conf.py"
     COMMAND "${CMAKE_COMMAND}" -E make_directory "${INTDIR}"
     COMMAND "${CMAKE_COMMAND}"
-    "-DCONFIGURE_FILE_IN=${${TARGET_NAME}_CONF_FILE}"
-    "-DCONFIGURE_FILE_OUT=${INTDIR}/conf.py"
+    "-DFILE_IN=${${TARGET_NAME}_CONF_FILE}"
+    "-DFILE_OUT=${INTDIR}/conf.py"
     "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
     "-DSPHINX_TARGET_VERSION=${PROJECT_VERSION}"
     "-DSPHINX_TARGET_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}"
     "-DSPHINX_TARGET_VERSION_MINOR=${PROJECT_VERSION_MINOR}"
     "-DSPHINX_TARGET_YEAR=${SPHINX_TARGET_YEAR}"
     "-DSPHINX_MODULE_DIR=${CMAKE_CURRENT_BINARY_DIR}"
-    -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeConfigureFile.cmake"
+    -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
     DEPENDS "${${TARGET_NAME}_CONF_FILE}")
 
   set(SPHINX_DEPENDS "${INTDIR}/conf.py")
+
+  # handle index.rst
+  add_custom_command(
+    OUTPUT "${INTDIR}/index.rst"
+    COMMAND "${CMAKE_COMMAND}" -E make_directory "${INTDIR}"
+    COMMAND "${CMAKE_COMMAND}"
+    "-DFILE_IN=${${TARGET_NAME}_INDEX_FILE}"
+    "-DFILE_OUT=${INTDIR}/index.rst"
+    "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
+    "-DSPHINX_MULTILINE_MODULES=${MULTILINE_MODULES}"
+    -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
+    DEPENDS "${${TARGET_NAME}_CONF_FILE}")
+
+  set(SPHINX_DEPENDS ${SPHINX_DEPENDS} "${INTDIR}/index.rst")
+
+  # handle all <module>.rst files
+  foreach(MODULE ${MODULES})
+    add_custom_command(
+      OUTPUT "${INTDIR}/${MODULE}.rst"
+      COMMAND "${CMAKE_COMMAND}" -E make_directory "${INTDIR}"
+      COMMAND "${CMAKE_COMMAND}"
+      "-DFILE_IN=${${TARGET_NAME}_SRC_DIR}/${MODULE}.rst"
+      "-DFILE_OUT=${INTDIR}/${MODULE}.rst"
+      "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
+      -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
+      DEPENDS "${${TARGET_NAME}_CONF_FILE}")
+
+    set(SPHINX_DEPENDS ${SPHINX_DEPENDS} "${INTDIR}/${MODULE}.rst")
+  endforeach()
 
   # Copy the Sphinx source files to the intermediate directory
   foreach(DOCFILE ${${TARGET_NAME}_UNPARSED_ARGUMENTS})
