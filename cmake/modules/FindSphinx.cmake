@@ -44,8 +44,8 @@ function(add_sphinx_document TARGET_NAME)
   get_filename_component(SRCDIR "${${TARGET_NAME}_CONF_FILE}" DIRECTORY)
   set(INTDIR "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}/source")
   set(OUTDIR "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}/build")
-  foreach(line IN LISTS MODULES)
-    string(APPEND MULTILINE_MODULES "   ${line}\\\n")
+  foreach(MODULE ${${TARGET_NAME}_MODULES})
+    string(APPEND MULTILINE_MODULES "   ${MODULE}\\\n")
   endforeach()
   string(TIMESTAMP SPHINX_TARGET_YEAR "%Y" UTC)
 
@@ -75,14 +75,14 @@ function(add_sphinx_document TARGET_NAME)
     "-DFILE_IN=${${TARGET_NAME}_INDEX_FILE}"
     "-DFILE_OUT=${INTDIR}/index.rst"
     "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
-    "-DSPHINX_MULTILINE_MODULES=${MULTILINE_MODULES}"
+    "-DSPHINX_MULTILINE_MODULES='${MULTILINE_MODULES}'"
     -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
-    DEPENDS "${${TARGET_NAME}_CONF_FILE}")
+    DEPENDS "${${TARGET_NAME}_INDEX_FILE}")
 
   set(SPHINX_DEPENDS ${SPHINX_DEPENDS} "${INTDIR}/index.rst")
 
   # handle all <module>.rst files
-  foreach(MODULE ${MODULES})
+  foreach(MODULE ${${TARGET_NAME}_MODULES})
     add_custom_command(
       OUTPUT "${INTDIR}/${MODULE}.rst"
       COMMAND "${CMAKE_COMMAND}" -E make_directory "${INTDIR}"
@@ -91,7 +91,7 @@ function(add_sphinx_document TARGET_NAME)
       "-DFILE_OUT=${INTDIR}/${MODULE}.rst"
       "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
       -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
-      DEPENDS "${${TARGET_NAME}_CONF_FILE}")
+      DEPENDS "${${TARGET_NAME}_SRC_DIR}/${MODULE}.rst")
 
     set(SPHINX_DEPENDS ${SPHINX_DEPENDS} "${INTDIR}/${MODULE}.rst")
   endforeach()
@@ -110,7 +110,6 @@ function(add_sphinx_document TARGET_NAME)
 
     list(APPEND SPHINX_DEPENDS "${DOCFILE_DEST}")
   endforeach()
-
   # Build the Sphinx HTML output
   set(TARGET_DEPENDS)
   if(NOT ${TARGET_NAME}_SKIP_HTML)
@@ -148,10 +147,10 @@ function(add_sphinx_document TARGET_NAME)
 
   # create the CMake targets for the documentation
   add_custom_target(
-    ${TARGET_NAME}
+    ${TARGET_NAME}_DOC
     DEPENDS ${TARGET_DEPENDS})
   if(NOT TARGET doc)
     add_custom_target(doc)
   endif()
-  add_dependencies(doc ${TARGET_NAME})
+  add_dependencies(doc ${TARGET_NAME}_DOC)
 endfunction()

@@ -15,7 +15,7 @@ endif()
 
 # 2-3D Kernel
 if (CGALPY_KERNEL_BINDINGS)
-  list (APPEND MODULES Ker)
+  list (APPEND CGALPY_MODULES Ker)
   set (CGALPY_Ker_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
   if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
@@ -25,28 +25,28 @@ endif()
 
 # dD Kernel
 if (CGALPY_KERNEL_D_BINDINGS)
-  list (APPEND MODULES Kerd)
+  list (APPEND CGALPY_MODULES Kerd)
   set (CGALPY_Kerd_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_d_bindings.cpp)
 endif()
 
 # 2D Alpha shape
 if (CGALPY_ALPHA_SHAPE_2_BINDINGS)
-  list (APPEND MODULES AS2)
+  list (APPEND CGALPY_MODULES AS2)
   set (CGALPY_AS2_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_2_bindings.cpp)
 endif()
 
 # 3D Alpha shape
 if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
-  list (APPEND MODULES AS3)
+  list (APPEND CGALPY_MODULES AS3)
   set (CGALPY_AS3_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_3_bindings.cpp)
 endif()
 
 # 2D Arrangement
 if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
-  list (APPEND MODULES Aos2)
+  list (APPEND CGALPY_MODULES Aos2)
   set (CGALPY_Aos2_FILTERS [=[{}]=])
   # Geometry Traits
   if(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
@@ -125,7 +125,7 @@ endif()
 
 # 2D Regularized Boolean operations
 if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
-  list (APPEND MODULES Bso2)
+  list (APPEND CGALPY_MODULES Bso2)
   set (CGALPY_Bso2_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/boolean_set_operations_2_bindings.cpp)
 
@@ -159,50 +159,50 @@ endif()
 # Bounding volumes
 if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/bounding_volumes_bindings.cpp)
-  list (APPEND MODULES BV)
+  list (APPEND CGALPY_MODULES BV)
   set (CGALPY_BV_FILTERS [=[{}]=])
 endif()
 # 2D convex hull
 if (CGALPY_CONVEX_HULL_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/convex_hull_2_bindings.cpp)
-  list (APPEND MODULES CH2)
+  list (APPEND CGALPY_MODULES CH2)
   set (CGALPY_CH2_FILTERS [=[{}]=])
 endif()
 # 2D Minkowski sum
 if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/minkowski_sum_2_bindings.cpp)
-  list (APPEND MODULES MS2)
+  list (APPEND CGALPY_MODULES MS2)
   set (CGALPY_MS2_FILTERS [=[{}]=])
 endif()
 # 2D Polygon
 if (CGALPY_POLYGON_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
-  list (APPEND MODULES Pol2)
+  list (APPEND CGALPY_MODULES Pol2)
   set (CGALPY_Pol2_FILTERS [=[{}]=])
 endif()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
-  list (APPEND MODULES PP)
+  list (APPEND CGALPY_MODULES PP)
   set (CGALPY_PP_FILTERS [=[{}]=])
 endif()
 # Spatial searching
 if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_searching_bindings.cpp)
-  list (APPEND MODULES SS)
+  list (APPEND CGALPY_MODULES SS)
   set (CGALPY_SS_FILTERS [=[{}]=])
 endif()
 # 2D triangulation
 if (CGALPY_TRIANGULATION_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_2_bindings.cpp)
-  list (APPEND MODULES Tri2)
+  list (APPEND CGALPY_MODULES Tri2)
   set (CGALPY_Tri2_FILTERS [=[{}]=])
 endif()
 # 3D triangulation
 if (CGALPY_TRIANGULATION_3_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_3_bindings.cpp)
-  list (APPEND MODULES Tri3)
+  list (APPEND CGALPY_MODULES Tri3)
   set (CGALPY_Tri3_FILTERS [=[{}]=])
 endif()
 
@@ -321,12 +321,33 @@ endif()
 find_package(Doxygen)
 
 if(DOXYGEN_FOUND)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
-                 ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-  add_custom_target(doc
-		    ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-     		    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-     		    COMMENT "Generating API documentation with Doxygen" VERBATIM)
+  add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+    COMMAND "${CMAKE_COMMAND}"
+    "-DFILE_IN=${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
+    "-DFILE_OUT=${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
+    -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in")
+
+  set(CGALPY_CPP_DOC_DEPENDS
+    ${CGALPY_SRC_FILES}
+    ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+
+  add_custom_command(
+    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+    COMMAND "${CMAKE_COMMAND}" -E touch "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
+    DEPENDS ${CGALPY_CPP_DOC_DEPENDS}
+    COMMENT "Generating API documentation with Doxygen" VERBATIM)
+  list(APPEND CGALPY_CPP_DOC_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp")
+  add_custom_target(
+    CGALPY_CPP_DOC
+    DEPENDS ${CGALPY_CPP_DOC_DEPENDS})
+  if(NOT TARGET doc)
+    add_custom_target(doc)
+  endif()
+  add_dependencies(doc CGALPY_CPP_DOC)
 endif(DOXYGEN_FOUND)
 
 # Sphinx
@@ -334,7 +355,7 @@ find_package(Sphinx)
 
 if(Sphinx_FOUND)
   add_sphinx_document(${CGALPY_LIB_NAME}
-    MODULES "${MODULES}"
+    MODULES "${CGALPY_MODULES}"
     SRC_DIR "${CMAKE_CURRENT_LIST_DIR}/doc/source/"
     CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
     INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst"
@@ -355,7 +376,7 @@ set (CGALPY_DST_STUBS_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
 
 set (CGALPY_MODULE_OUTPUT ${CGALPY_DST_STUBS_DIR}/${CGALPY_LIB_NAME}.pyi)
 set (CGALPY_MODULE_INPUT ${CGALPY_MODULES_DIR}/CGALPY.json)
-string(REPLACE ";" " " STR_MODULES "${MODULES}")
+string(REPLACE ";" " " STR_MODULES "${CGALPY_MODULES}")
 set (CGALPY_MODULE_ARGS
   --output-file ${CGALPY_LIB_NAME}.pyi
   --input-path ${CGALPY_MODULES_DIR}
@@ -394,7 +415,7 @@ function(add_module name)
   set(CGALPY_STUBS "${CGALPY_STUBS}" ${MODULE_OUTPUT} PARENT_SCOPE)
 endfunction()
 
-foreach(MODULE IN LISTS MODULES)
+foreach(MODULE IN LISTS CGALPY_MODULES)
   add_module(${MODULE})
 endforeach()
 
@@ -414,7 +435,7 @@ set (CGALPY_GEN_SETUP_OUTPUT "${CGALPY_LIB_DIR}/setup.py")
 set (CGALPY_GEN_SETUP_ARGS
   --input-path ${CGALPY_LIB_DIR}
   --name ${CGALPY_LIB_NAME}
-  --module ${MODULES})
+  --module ${CGALPY_MODULES})
 set (CGALPY_GEN_SETUP_DEPENDS ${CGALPY_GEN_SETUP_CMD})
 
 add_custom_command(
@@ -423,14 +444,22 @@ add_custom_command(
   ARGS ${CGALPY_GEN_SETUP_ARGS}
   DEPENDS ${CGALPY_GEN_SETUP_DEPENDS})
 
-set (CGALPY_SETUP_README "${CGALPY_LIB_DIR}/README")
+set (CGALPY_SRC_README "${CMAKE_CURRENT_LIST_DIR}/README.rst")
+set (CGALPY_TRG_README "${CGALPY_LIB_DIR}/README.rst")
 add_custom_command(
-  OUTPUT ${CGALPY_SETUP_README}
-  COMMAND "touch"
-  ARGS ${CGALPY_SETUP_README})
+  OUTPUT ${CGALPY_TRG_README}
+  # COMMAND "touch"
+  # ARGS ${CGALPY_TRG_README}
+  # COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CGALPY_SRC_README}" "${CGALPY_TRG_README}"
+  COMMAND "${CMAKE_COMMAND}"
+  "-DFILE_IN=${CGALPY_SRC_README}"
+  "-DFILE_OUT=${CGALPY_TRG_README}"
+  "-DTARGET_NAME=${CGALPY_LIB_NAME}"
+  -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
+  DEPENDS ${CGALPY_SRC_README})
 
-set (CGALPY_SETUP_CFG ${CGALPY_GEN_SETUP_OUTPUT} ${CGALPY_SETUP_README})
-add_custom_target(SETUP_CFG ALL DEPENDS ${CGALPY_SETUP_CFG})
+set (CGALPY_SETUP_CFG ${CGALPY_GEN_SETUP_OUTPUT} ${CGALPY_TRG_README})
+add_custom_target(SETUP_CFG ALL DEPENDS ${CGALPY_GEN_SETUP_OUTPUT})
 
 # Setup application
 set (CGALPY_SETUP_OUTPUT_DIR "${CGALPY_LIB_DIR}/dist")
@@ -457,7 +486,7 @@ install(TARGETS CGALPY
   ARCHIVE DESTINATION ${CGALPY_INSTALL_LIB_DIR})
 
 install(FILES ${CGALPY_MODULE_OUTPUT} DESTINATION ${CGALPY_INSTALL_PYTHON_DIR})
-foreach(MODULE IN LISTS MODULES)
+foreach(MODULE IN LISTS CGALPY_MODULES)
   set (MODULE_OUTPUT_PATH ${CGALPY_DST_STUBS_DIR}/${name})
   install(DIRECTORY ${MODULE_OUTPUT_PATH} DESTINATION ${CGALPY_INSTALL_PYTHON_DIR})
 endforeach()
