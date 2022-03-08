@@ -10,7 +10,7 @@ Welcome to cgalpy's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   ker
+@SPHINX_MULTILINE_MODULES@
 
 Indices and tables
 ==================
