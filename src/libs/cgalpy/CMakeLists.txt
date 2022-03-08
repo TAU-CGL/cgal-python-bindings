@@ -333,12 +333,13 @@ endif(DOXYGEN_FOUND)
 find_package(Sphinx)
 
 if(Sphinx_FOUND)
-  add_sphinx_document(${CGALPY_LIB_NAME}-manual
+  add_sphinx_document(${CGALPY_LIB_NAME}
+    MODULES "${MODULES}"
+    SRC_DIR "${CMAKE_CURRENT_LIST_DIR}/doc/source/"
     CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
-    "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst"
-    "${CMAKE_CURRENT_LIST_DIR}/doc/source/ker.rst"
-    # "${CMAKE_CURRENT_LIST_DIR}/doc/user/models.rst"
-    # "${CMAKE_CURRENT_LIST_DIR}/doc/user/api.rst"
+    INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst"
+    # "${CMAKE_CURRENT_LIST_DIR}/doc/source/Ker.rst"
+    # "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst"
     )
 else()
   message(WARNING "No Sphinx found. Documentation target not available.")

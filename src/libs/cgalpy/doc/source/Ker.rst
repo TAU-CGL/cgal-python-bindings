@@ -1,6 +1,6 @@
 Bindings for CGAL Kernel Module
 ===============================
 
-.. automodule:: CGALPY_kerEpecInt.Ker
+.. automodule:: @SPHINX_TARGET_NAME@.Ker
     :members:
     :undoc-members:
