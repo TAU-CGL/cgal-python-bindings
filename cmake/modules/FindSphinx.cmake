@@ -79,7 +79,7 @@ function(add_sphinx_document TARGET_NAME)
     -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
     DEPENDS "${${TARGET_NAME}_INDEX_FILE}")
 
-  set(SPHINX_DEPENDS ${SPHINX_DEPENDS} "${INTDIR}/index.rst")
+  list(APPEND SPHINX_DEPENDS "${INTDIR}/index.rst")
 
   # handle all <module>.rst files
   foreach(MODULE ${${TARGET_NAME}_MODULES})
@@ -93,7 +93,7 @@ function(add_sphinx_document TARGET_NAME)
       -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
       DEPENDS "${${TARGET_NAME}_SRC_DIR}/${MODULE}.rst")
 
-    set(SPHINX_DEPENDS ${SPHINX_DEPENDS} "${INTDIR}/${MODULE}.rst")
+    list(APPEND SPHINX_DEPENDS "${INTDIR}/${MODULE}.rst")
   endforeach()
 
   # Copy the Sphinx source files to the intermediate directory
