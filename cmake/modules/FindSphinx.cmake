@@ -44,14 +44,11 @@ function(add_sphinx_document TARGET_NAME)
   get_filename_component(SRCDIR "${${TARGET_NAME}_CONF_FILE}" DIRECTORY)
   set(INTDIR "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}/source")
   set(OUTDIR "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}/build")
-  foreach(MODULE ${${TARGET_NAME}_MODULES})
-    string(APPEND MULTILINE_MODULES "   ${MODULE}\\\n")
-  endforeach()
   string(TIMESTAMP SPHINX_TARGET_YEAR "%Y" UTC)
 
   # handle fonf.py
   # Need to place 2 '\' characters, because the shell consumes one.
-  string(REPLACE "_" "\\\\_" TARGET_TITLE "${TARGET_NAME}")
+  # string(REPLACE "_" "\\\\_" TARGET_TITLE "${TARGET_NAME}")
   add_custom_command(
     OUTPUT "${INTDIR}/conf.py"
     COMMAND "${CMAKE_COMMAND}" -E make_directory "${INTDIR}"
@@ -59,7 +56,6 @@ function(add_sphinx_document TARGET_NAME)
     "-DFILE_IN=${${TARGET_NAME}_CONF_FILE}"
     "-DFILE_OUT=${INTDIR}/conf.py"
     "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
-    "-DSPHINX_TARGET_TITLE=${TARGET_TITLE}"
     "-DSPHINX_TARGET_VERSION=${PROJECT_VERSION}"
     "-DSPHINX_TARGET_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}"
     "-DSPHINX_TARGET_VERSION_MINOR=${PROJECT_VERSION_MINOR}"
@@ -71,18 +67,25 @@ function(add_sphinx_document TARGET_NAME)
   set(SPHINX_DEPENDS "${INTDIR}/conf.py")
 
   # handle index.rst
-  add_custom_command(
-    OUTPUT "${INTDIR}/index.rst"
-    COMMAND "${CMAKE_COMMAND}" -E make_directory "${INTDIR}"
-    COMMAND "${CMAKE_COMMAND}"
-    "-DFILE_IN=${${TARGET_NAME}_INDEX_FILE}"
-    "-DFILE_OUT=${INTDIR}/index.rst"
-    "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
-    "-DSPHINX_MULTILINE_MODULES='${MULTILINE_MODULES}'"
-    -P "${_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
-    DEPENDS "${${TARGET_NAME}_INDEX_FILE}")
+  set(INDEX_FILE_IN ${${TARGET_NAME}_INDEX_FILE})
+  set(INDEX_FILE_OUT "${INTDIR}/index.rst")
+  set(CONF_INDEX_ARGS ${INDEX_FILE_IN}
+    --module ${${TARGET_NAME}_MODULES}
+    --output-file ${INDEX_FILE_OUT})
+  set (SPHINX_CONF_INDEX "${CMAKE_SOURCE_DIR}/src/python_scripts/configure_index.py")
+if (WIN32)
+  set(SPHINX_CONF_INDEX_CMD ${Python3_EXECUTABLE} ${SPHINX_CONF_INDEX})
+else()
+  set(SPHINX_CONF_INDEX_CMD ${SPHINX_CONF_INDEX})
+endif()
 
-  list(APPEND SPHINX_DEPENDS "${INTDIR}/index.rst")
+  add_custom_command(
+    OUTPUT ${INDEX_FILE_OUT}
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${INTDIR}
+    COMMAND ${SPHINX_CONF_INDEX_CMD} ${CONF_INDEX_ARGS}
+    DEPENDS ${INDEX_FILE_IN} ${SPHINX_CONF_INDEX})
+
+  list(APPEND SPHINX_DEPENDS "${INDEX_FILE_OUT}")
 
   # handle all <module>.rst files
   foreach(MODULE ${${TARGET_NAME}_MODULES})
