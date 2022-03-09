@@ -1,4 +1,4 @@
-set(CGALPY_SPHINX_SCRIPT_DIR ${CMAKE_CURRENT_LIST_DIR})
+set(_SPHINX_SCRIPT_DIR ${CMAKE_CURRENT_LIST_DIR})
 
 include(FindPackageHandleStandardArgs)
 
@@ -62,7 +62,7 @@ function(add_sphinx_document TARGET_NAME)
     "-DSPHINX_TARGET_VERSION_MINOR=${PROJECT_VERSION_MINOR}"
     "-DSPHINX_TARGET_YEAR=${SPHINX_TARGET_YEAR}"
     "-DSPHINX_MODULE_DIR=${CMAKE_CURRENT_BINARY_DIR}"
-    -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
+    -P "${_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
     DEPENDS "${${TARGET_NAME}_CONF_FILE}")
 
   set(SPHINX_DEPENDS "${INTDIR}/conf.py")
@@ -76,7 +76,7 @@ function(add_sphinx_document TARGET_NAME)
     "-DFILE_OUT=${INTDIR}/index.rst"
     "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
     "-DSPHINX_MULTILINE_MODULES='${MULTILINE_MODULES}'"
-    -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
+    -P "${_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
     DEPENDS "${${TARGET_NAME}_INDEX_FILE}")
 
   list(APPEND SPHINX_DEPENDS "${INTDIR}/index.rst")
@@ -90,7 +90,7 @@ function(add_sphinx_document TARGET_NAME)
       "-DFILE_IN=${${TARGET_NAME}_SRC_DIR}/${MODULE}.rst"
       "-DFILE_OUT=${INTDIR}/${MODULE}.rst"
       "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
-      -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
+      -P "${_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
       DEPENDS "${${TARGET_NAME}_SRC_DIR}/${MODULE}.rst")
 
     list(APPEND SPHINX_DEPENDS "${INTDIR}/${MODULE}.rst")
