@@ -52,5 +52,25 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-title = '@SPHINX_TARGET_TITLE@'
+latex_elements = {
+    'preamble': r'''
+% A command for temporary escaping underscore; for some reason it doesn't work
+% \makeatletter
+% \DeclareRobustCommand*{\escapeus}[1]{%
+%   \begingroup\@activeus\scantokens{#1\endinput}\endgroup}
+% \begingroup\lccode`\~=`\_\relax
+%    \lowercase{\endgroup\def\@activeus{\catcode`\_=\active \let~\_}}
+% \makeatother
+% Instead escape underscore permanently.
+% Requires a T1-encoded:
+% \usepackage[T1]{fontenc}
+% which is the deafult.
+\catcode`\_=12
+''',
+}
+
+# The title may have underscore. One simple way to handle it is to provide
+# a string with the underscore characters escaped:
+# title = '@SPHINX_TARGET_TITLE@'
+title = '@SPHINX_TARGET_NAME@'
 latex_documents = [('index', '@SPHINX_TARGET_NAME@.tex', title, author, 'manual')]
