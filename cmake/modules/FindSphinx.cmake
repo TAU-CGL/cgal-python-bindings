@@ -67,11 +67,11 @@ function(add_sphinx_document TARGET_NAME)
   set(SPHINX_DEPENDS "${INTDIR}/conf.py")
 
   # handle index.rst
-  set(INDEX_FILE_IN ${${TARGET_NAME}_INDEX_FILE})
-  set(INDEX_FILE_OUT "${INTDIR}/index.rst")
-  set(CONF_INDEX_ARGS ${INDEX_FILE_IN}
+  set(SPHINX_INDEX_FILE_IN ${${TARGET_NAME}_INDEX_FILE})
+  set(SPHINX_INDEX_FILE_OUT "${INTDIR}/index.rst")
+  set(SPHINX_CONF_INDEX_ARGS ${SPHINX_INDEX_FILE_IN}
     --module ${${TARGET_NAME}_MODULES}
-    --output-file ${INDEX_FILE_OUT})
+    --output-file ${SPHINX_INDEX_FILE_OUT})
   set (SPHINX_CONF_INDEX "${CMAKE_SOURCE_DIR}/src/python_scripts/configure_index.py")
 if (WIN32)
   set(SPHINX_CONF_INDEX_CMD ${Python3_EXECUTABLE} ${SPHINX_CONF_INDEX})
@@ -80,12 +80,12 @@ else()
 endif()
 
   add_custom_command(
-    OUTPUT ${INDEX_FILE_OUT}
+    OUTPUT ${SPHINX_INDEX_FILE_OUT}
     COMMAND ${CMAKE_COMMAND} -E make_directory ${INTDIR}
-    COMMAND ${SPHINX_CONF_INDEX_CMD} ${CONF_INDEX_ARGS}
-    DEPENDS ${INDEX_FILE_IN} ${SPHINX_CONF_INDEX})
+    COMMAND ${SPHINX_CONF_INDEX_CMD} ${SPHINX_CONF_INDEX_ARGS}
+    DEPENDS ${SPHINX_INDEX_FILE_IN} ${SPHINX_CONF_INDEX})
 
-  list(APPEND SPHINX_DEPENDS "${INDEX_FILE_OUT}")
+  list(APPEND SPHINX_DEPENDS "${SPHINX_INDEX_FILE_OUT}")
 
   # handle all <module>.rst files
   foreach(MODULE ${${TARGET_NAME}_MODULES})
