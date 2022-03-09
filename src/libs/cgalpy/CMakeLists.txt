@@ -428,7 +428,7 @@ list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS})
 # Setup generation
 set (CGALPY_GEN_SETUP "${CMAKE_SOURCE_DIR}/src/python_scripts/gen_setup.py")
 if (WIN32)
-  set(CGALPY_GEN_SETUP_CMD ${Python3_EXECUTABLE} ${CGALPY_SETUP})
+  set(CGALPY_GEN_SETUP_CMD ${Python3_EXECUTABLE} ${CGALPY_GEN_SETUP})
 else()
   set(CGALPY_GEN_SETUP_CMD ${CGALPY_GEN_SETUP})
 endif()
