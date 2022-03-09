@@ -52,4 +52,5 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-latex_documents = [('index', '@SPHINX_TARGET_NAME@.tex', project, author, 'manual')]
+title = '@SPHINX_TARGET_TITLE@'
+latex_documents = [('index', '@SPHINX_TARGET_NAME@.tex', title, author, 'manual')]

@@ -50,6 +50,8 @@ function(add_sphinx_document TARGET_NAME)
   string(TIMESTAMP SPHINX_TARGET_YEAR "%Y" UTC)
 
   # handle fonf.py
+  # Need to place 2 '\' characters, because the shell consumes one.
+  string(REPLACE "_" "\\\\_" TARGET_TITLE "${TARGET_NAME}")
   add_custom_command(
     OUTPUT "${INTDIR}/conf.py"
     COMMAND "${CMAKE_COMMAND}" -E make_directory "${INTDIR}"
@@ -57,6 +59,7 @@ function(add_sphinx_document TARGET_NAME)
     "-DFILE_IN=${${TARGET_NAME}_CONF_FILE}"
     "-DFILE_OUT=${INTDIR}/conf.py"
     "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
+    "-DSPHINX_TARGET_TITLE=${TARGET_TITLE}"
     "-DSPHINX_TARGET_VERSION=${PROJECT_VERSION}"
     "-DSPHINX_TARGET_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}"
     "-DSPHINX_TARGET_VERSION_MINOR=${PROJECT_VERSION_MINOR}"
