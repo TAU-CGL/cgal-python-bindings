@@ -1,4 +1,5 @@
-# packages
+######## Packages ###############################################################
+################################################################################
 
 # Generate config.hpp
 configure_file(config.hpp.in include/config.hpp)
@@ -10,8 +11,9 @@ if (GMP_FOUND)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gmp.cpp)
 endif()
 
-######## Modules ###############################################################
-################################################################################
+#############
+# Add modules
+#############
 
 # 2-3D Kernel
 if (CGALPY_KERNEL_BINDINGS)
@@ -327,7 +329,7 @@ if(DOXYGEN_FOUND)
     COMMAND "${CMAKE_COMMAND}"
     "-DFILE_IN=${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
     "-DFILE_OUT=${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
-    -P "${CGALPY_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
+    -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in")
 
   set(CGALPY_CPP_DOC_DEPENDS
