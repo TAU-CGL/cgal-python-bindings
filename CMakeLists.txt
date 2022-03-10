@@ -5,6 +5,7 @@ endif()
 project(cgalpy VERSION "1.0.0" LANGUAGES CXX)
 
 # General
+set(CGALPY_PROJECT_AUTHORS "Nir Goren and Efi Fogel")
 set(CGALPY_MODULES_REL_DIR cmake/modules)
 set(CGALPY_MODULE_DIR ${CMAKE_SOURCE_DIR}/${CGALPY_MODULES_REL_DIR})
 set(CMAKE_MODULE_PATH ${CGALPY_MODULE_DIR})
