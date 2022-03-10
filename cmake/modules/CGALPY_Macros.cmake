@@ -5,6 +5,7 @@ if(NOT CGALPY_MACROS_FILE_INCLUDED)
     set (${var} ${${var}} CACHE INTERNAL "Variable hidden from user" FORCE)
   endmacro()
 
+  #
   function(echo_target_property tgt prop)
     # v for value, d for defined, s for set
     get_property(v TARGET ${tgt} PROPERTY ${prop})
@@ -180,6 +181,38 @@ if(NOT CGALPY_MACROS_FILE_INCLUDED)
       echo_target("${t}")
     endforeach()
   endfunction()
+
+  #
+  function(get_properties res)
+    ## Get all properties that cmake supports
+    execute_process(COMMAND cmake --help-property-list OUTPUT_VARIABLE props)
+    ## Convert command output into a CMake list
+    STRING(REGEX REPLACE ";" "\\\\;" props "${props}")
+    STRING(REGEX REPLACE "\n" ";" props "${props}")
+    list(REMOVE_DUPLICATES props)
+    set (${res} ${props} PARENT_SCOPE)
+  endfunction()
+
+  #
+  function(print_target_properties tgt)
+    if(NOT TARGET ${tgt})
+      message("There is no target named '${tgt}'")
+      return()
+    endif()
+
+    set(props)
+    get_properties(props)
+    foreach (prop ${props})
+      string(REGEX MATCH "LOCATION.*$" item ${prop})
+      if(NOT item)
+	string(REPLACE "<CONFIG>" "${CMAKE_BUILD_TYPE}" prop ${prop})
+	get_target_property(propval ${tgt} ${prop})
+	if (propval)
+          message ("${tgt} ${prop} = ${propval}")
+	endif()
+      endif()
+    endforeach(prop)
+  endfunction(print_target_properties)
 
   # Capitalize first letter (compatible with cmake 2.6)
   function(capitalize_first param)
