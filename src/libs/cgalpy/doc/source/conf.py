@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('@SPHINX_MODULE_DIR@'))
 
 project = '@SPHINX_TARGET_NAME@'
 copyright = '@SPHINX_TARGET_YEAR@, taucgl'
-author = 'taucgl'
+author = '@SPHINX_TARGET_AUTHORS@'
 version = '@SPHINX_TARGET_VERSION_MAJOR@.@SPHINX_TARGET_VERSION_MINOR@'
 release = '@SPHINX_TARGET_VERSION@'
 
