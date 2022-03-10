@@ -10,4 +10,4 @@ setup(name='@TARGET_NAME@',
       author_email='@TARGET_EMAIL@',
       url='@TARGET_URL@',
       package_data=package_data,
-      license='LGPLv3+')
+      license='GPLv3+')
