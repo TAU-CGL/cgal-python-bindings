@@ -359,7 +359,7 @@ find_package(Sphinx)
 if(Sphinx_FOUND)
   add_sphinx_document(${CGALPY_LIB_NAME}
     MODULES "${CGALPY_MODULES}"
-    SRC_DIR "${CMAKE_CURRENT_LIST_DIR}/doc/source/"
+    AUTHORS "${CGALPY_PROJECT_AUTHORS}"
     CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
     INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst")
 else()
