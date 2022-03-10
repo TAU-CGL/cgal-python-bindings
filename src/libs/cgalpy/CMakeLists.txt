@@ -312,7 +312,9 @@ add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 # don't prepend wrapper library name with lib
 set_target_properties(CGALPY PROPERTIES PREFIX "")
 
+set (CGALPY_LIBRARY_SUFFIX ".so")
 if(WIN32)
+  set (CGALPY_LIBRARY_SUFFIX ".pyd")
   set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
 endif()
 
@@ -426,24 +428,36 @@ list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS})
 # Post build
 ################################################################################
 # Setup generation
-set (CGALPY_GEN_SETUP "${CMAKE_SOURCE_DIR}/src/python_scripts/gen_setup.py")
-if (WIN32)
-  set(CGALPY_GEN_SETUP_CMD ${Python3_EXECUTABLE} ${CGALPY_GEN_SETUP})
-else()
-  set(CGALPY_GEN_SETUP_CMD ${CGALPY_GEN_SETUP})
-endif()
+set (CGALPY_SRC_SETUP "${CMAKE_CURRENT_LIST_DIR}/setup.py")
 set (CGALPY_TRG_SETUP "${CGALPY_LIB_DIR}/setup.py")
-set (CGALPY_GEN_SETUP_ARGS
-  --input-path ${CGALPY_LIB_DIR}
-  --name ${CGALPY_LIB_NAME}
-  --module ${CGALPY_MODULES})
-set (CGALPY_GEN_SETUP_DEPENDS ${CGALPY_GEN_SETUP_CMD})
+
+# It is possible to obtain the linker file name only at run time.
+# This seems an overkill
+# add_custom_command(TARGET CGALPY PRE_BUILD
+#   COMMAND echo "$<TARGET_LINKER_FILE_NAME:CGALPY>" VERBATIM)
+set (CGALPY_LINKER_FILE_NAME ${CGALPY_LIB_NAME}${CGALPY_LIBRARY_SUFFIX})
+
+set (CGALPY_SETUP_DATA "'${CGALPY_LINKER_FILE_NAME}'"
+  "'${CGALPY_LIB_NAME}.pyi'")
+foreach(MODULE IN LISTS CGALPY_MODULES)
+  list(APPEND CGALPY_SETUP_DATA "'${MODULE}/__init__.pyi'")
+endforeach()
+string (REPLACE ";" "," CGALPY_SETUP_DATA "${CGALPY_SETUP_DATA}")
 
 add_custom_command(
   OUTPUT ${CGALPY_TRG_SETUP}
-  COMMAND ${CGALPY_GEN_SETUP_CMD}
-  ARGS ${CGALPY_GEN_SETUP_ARGS}
-  DEPENDS ${CGALPY_GEN_SETUP_DEPENDS})
+  COMMAND "${CMAKE_COMMAND}"
+  "-DFILE_IN=${CGALPY_SRC_SETUP}"
+  "-DFILE_OUT=${CGALPY_TRG_SETUP}"
+  "-DTARGET_NAME=${CGALPY_LIB_NAME}"
+  "-DTARGET_DATA='${CGALPY_SETUP_DATA}'"
+  "-DTARGET_MODULES=${CGALPY_LIB_NAME}"
+  "-DTARGET_AUTHOR=${CGALPY_PROJECT_AUTHORS}"
+  "-DTARGET_EMAIL=${CGALPY_PROJECT_EMAILS}"
+  "-DTARGET_URL=${CGALPY_PROJECT_URL}"
+  -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
+  VERBATIM
+  DEPENDS ${CGALPY_SRC_SETUP})
 
 list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_SETUP})
 
