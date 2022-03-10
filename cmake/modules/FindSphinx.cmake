@@ -38,13 +38,14 @@ endif()
 function(add_sphinx_document TARGET_NAME)
   cmake_parse_arguments(${TARGET_NAME}
     "SKIP_HTML;SKIP_PDF"
-    "SRC_DIR;CONF_FILE;INDEX_FILE"
+    "AUTHORS;CONF_FILE;INDEX_FILE"
     "MODULES"
     ${ARGN})
   get_filename_component(SRCDIR "${${TARGET_NAME}_CONF_FILE}" DIRECTORY)
   set(INTDIR "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}/source")
   set(OUTDIR "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}/build")
-  string(TIMESTAMP SPHINX_TARGET_YEAR "%Y" UTC)
+  string(TIMESTAMP TARGET_YEAR "%Y" UTC)
+  set(PROJECT_AUTHORS ${${TARGET_NAME}_AUTHORS})
 
   # handle fonf.py
   # Need to place 2 '\' characters, because the shell consumes one.
@@ -59,7 +60,8 @@ function(add_sphinx_document TARGET_NAME)
     "-DSPHINX_TARGET_VERSION=${PROJECT_VERSION}"
     "-DSPHINX_TARGET_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}"
     "-DSPHINX_TARGET_VERSION_MINOR=${PROJECT_VERSION_MINOR}"
-    "-DSPHINX_TARGET_YEAR=${SPHINX_TARGET_YEAR}"
+    "-DSPHINX_TARGET_YEAR=${TARGET_YEAR}"
+    "-DSPHINX_TARGET_AUTHORS=${PROJECT_AUTHORS}"
     "-DSPHINX_MODULE_DIR=${CMAKE_CURRENT_BINARY_DIR}"
     -P "${_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
     DEPENDS "${${TARGET_NAME}_CONF_FILE}")
@@ -93,11 +95,11 @@ endif()
       OUTPUT "${INTDIR}/${MODULE}.rst"
       COMMAND "${CMAKE_COMMAND}" -E make_directory "${INTDIR}"
       COMMAND "${CMAKE_COMMAND}"
-      "-DFILE_IN=${${TARGET_NAME}_SRC_DIR}/${MODULE}.rst"
+      "-DFILE_IN=${SRCDIR}/${MODULE}.rst"
       "-DFILE_OUT=${INTDIR}/${MODULE}.rst"
       "-DSPHINX_TARGET_NAME=${TARGET_NAME}"
       -P "${_SPHINX_SCRIPT_DIR}/BuildTimeFile.cmake"
-      DEPENDS "${${TARGET_NAME}_SRC_DIR}/${MODULE}.rst")
+      DEPENDS "${SRCDIR}/${MODULE}.rst")
 
     list(APPEND SPHINX_DEPENDS "${INTDIR}/${MODULE}.rst")
   endforeach()
