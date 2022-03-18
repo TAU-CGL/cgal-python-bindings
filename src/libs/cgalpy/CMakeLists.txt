@@ -305,6 +305,9 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 endif()
 set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
+# Use a generator expression to get rid of per-configuration subdirectory appended by Multi-configuration generators (e.g Visual Studio)
+# https://cmake.org/cmake/help/latest/prop_tgt/LIBRARY_OUTPUT_DIRECTORY.html
+set_target_properties(CGALPY PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
 reportWithEmphasis(${CGALPY_LIB_NAME} ${CGALPY_LIB_DIR} ${CGALPY_INSTALL_PYTHON_DIR})
 
 add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
@@ -437,15 +440,10 @@ list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS})
 # Setup generation
 set (CGALPY_SRC_SETUP "${CMAKE_CURRENT_LIST_DIR}/setup.py")
 set (CGALPY_TRG_SETUP "${CGALPY_LIB_DIR}/setup.py")
+set (CGALPY_TARGET_LINKER_FILE ${CGALPY_LIB_NAME}${CGALPY_LIBRARY_SUFFIX})
+set (CGALPY_SETUP_DATA "'${CGALPY_TARGET_LINKER_FILE}' \
+'${CGALPY_LIB_NAME}.pyi'")
 
-# set (CGALPY_TARGET_LINKER_FILE ${CGALPY_LIB_NAME}${CGALPY_LIBRARY_SUFFIX})
-# if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-#   set (CGALPY_BASE_DIR "$<IF:$<CONFIG:Debug>,Debug,Release>")
-#   set (CGALPY_TARGET_LINKER_FILE ${CGALPY_BASE_DIR}/${CGALPY_TARGET_LINKER_FILE})
-# endif()
-set (CGALPY_TARGET_LINKER_FILE "$<TARGET_LINKER_FILE:CGALPY>")
-
-set (CGALPY_SETUP_DATA "'${CGALPY_LIB_NAME}.pyi'")
 foreach(MODULE IN LISTS CGALPY_MODULES)
   list(APPEND CGALPY_SETUP_DATA "'${MODULE}/__init__.pyi'")
 endforeach()
