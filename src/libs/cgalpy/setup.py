@@ -3,7 +3,6 @@ package_data = {'': [@TARGET_DATA@] }
 setup(name='@TARGET_NAME@',
       version='@SPHINX_TARGET_VERSION_MAJOR@.@SPHINX_TARGET_VERSION_MINOR@',
       description='CGAL Python Bindings',
-      data_files=[('', ['@TARGET_LINKER_FILE@'])],
       py_modules=['@TARGET_MODULES@'],
       packages=[''],
       platforms=['any'],
