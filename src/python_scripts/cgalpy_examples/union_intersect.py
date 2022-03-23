@@ -11,10 +11,10 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-BSO2 = CGALPY.BSO2
-Ker = CGALPY.Ker
+BSO2 = CGALPY.bso2
+Ker = CGALPY.ker
 Point = Ker.Point_2
-Pol2 = CGALPY.Pol2
+Pol2 = CGALPY.pol2
 Polygon = Pol2.Polygon_2
 Polygon_with_holes = Pol2.Polygon_with_holes_2
 ppoints = [Point(0, 0), Point(9, 0), Point(9, 2), Point(7, 4), Point(4.5, 1.5), Point(2, 4), Point(0, 2)]

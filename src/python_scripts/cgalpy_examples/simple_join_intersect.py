@@ -11,12 +11,12 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.Ker
+Ker = CGALPY.ker
 Point = Ker.Point_2
-Pol2 = CGALPY.Pol2
+Pol2 = CGALPY.pol2
 Polygon = Pol2.Polygon_2
 Polygon_with_holes = Pol2.Polygon_with_holes_2
-BSO2 = CGALPY.BSO2
+BSO2 = CGALPY.bso2
 
 # Construct the two input polygons.
 P = Polygon([Point(0, 0), Point(5, 0), Point(3.5, 1.5), Point(2.5, 0.5),
