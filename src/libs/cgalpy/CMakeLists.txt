@@ -319,6 +319,9 @@ set (CGALPY_LIBRARY_SUFFIX ".so")
 if(WIN32)
   set (CGALPY_LIBRARY_SUFFIX ".pyd")
   set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
+elseif(APPLE)
+  set (CMAKE_SHARED_LIBRARY_SUFFIX ".so")
+  set_target_properties(CGALPY PROPERTIES BUNDLE ON)
 endif()
 
 ################################################################################
