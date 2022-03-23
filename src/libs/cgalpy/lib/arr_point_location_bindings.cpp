@@ -20,14 +20,20 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
 namespace bp = boost::python;
+
+namespace aos2 {
+
 typedef typename aos2::Arrangement_2 Arrangement_2;
 typedef typename aos2::Face_const_handle Face_const_handle;
 typedef typename aos2::Halfedge_const_handle Halfedge_const_handle;
 typedef typename aos2::Vertex_const_handle Vertex_const_handle;
 
-typedef typename CGAL::Arr_naive_point_location<Arrangement_2>         Naive_pl;
-typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2> Wal_pl;
-typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2> Landmarks_pl;
+typedef typename CGAL::Arr_naive_point_location<Arrangement_2>
+  Naive_pl;
+typedef typename CGAL::Arr_walk_along_line_point_location<Arrangement_2>
+  Walk_pl;
+typedef typename CGAL::Arr_landmarks_point_location<Arrangement_2>
+  Landmarks_pl;
 typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
   Trapezoid_pl;
 
@@ -75,52 +81,65 @@ void landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
 { pl.attach(arr); }
 #endif
 
+}
+
 void export_point_location() {
+  typedef aos2::Arrangement_2                           Arr;
+  typedef CGAL::Arr_naive_point_location<Arr>           Naive_pl;
+  typedef CGAL::Arr_walk_along_line_point_location<Arr> Walk_pl;
+  typedef CGAL::Arr_landmarks_point_location<Arr>       Landmarks_pl;
+  typedef CGAL::Arr_trapezoid_ric_point_location<Arr>   Trapezoid_pl;
+
+  typedef bp::with_custodian_and_ward<1, 2>             WCW_1_2;
+  typedef bp::with_custodian_and_ward_postcall<0, 1>    WCW_0_1;
+  typedef bp::with_custodian_and_ward_postcall<1, 0>    WCW_1_0;
+
   // Supported only by some of the traits
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
   bp::class_<Landmarks_pl>("Arr_landmarks_point_location")
     .def(bp::init<>())
-    .def(bp::init<Arrangement_2&>()[bp::with_custodian_and_ward<1, 2>()])
-    .def("attach", &landmarks_pl_attach, bp::with_custodian_and_ward<1, 2>())
+    .def(bp::init<Arr&>()[WCW_1_2()])
+    .def("attach", &aos2::landmarks_pl_attach, WCW_1_2())
     .def("detach", &Landmarks_pl::detach)
-    .def("locate", &locate<Landmarks_pl>, bp::with_custodian_and_ward_postcall<0,1>())
+    .def("locate", &aos2::locate<Landmarks_pl>, WCW_0_1())
     ;
 #endif
-  bp::class_<Trapezoid_pl, boost::noncopyable>("Arr_trapezoid_ric_point_location")
+  bp::class_<Trapezoid_pl,
+             boost::noncopyable>("Arr_trapezoid_ric_point_location")
     .def(bp::init<>())
-    .def(bp::init<Arrangement_2&>()[bp::with_custodian_and_ward<1, 2>()])
-    .def("attach", &Trapezoid_pl::attach, bp::with_custodian_and_ward<1,2>())
+    .def(bp::init<Arr&>()[WCW_1_2()])
+    .def("attach", &Trapezoid_pl::attach, WCW_1_2())
     .def("detach", &Trapezoid_pl::detach)
     .def("depth", &Trapezoid_pl::depth)
     .def("longest_query_path_length", &Trapezoid_pl::longest_query_path_length)
     .def("with_guarantees", &Trapezoid_pl::with_guarantees)
-    .def<Arrangement_2* (Trapezoid_pl::*)()>("arrangement",
-                                             &Trapezoid_pl::arrangement,
-                                             bp::return_value_policy<bp::reference_existing_object>())
-    .def("locate", &locate<Trapezoid_pl>, bp::with_custodian_and_ward_postcall<0, 1>())
+    .def<Arr*(Trapezoid_pl::*)()>("arrangement",
+                                  &Trapezoid_pl::arrangement,
+                                  Reference_existing_object())
+    .def("locate", &aos2::locate<Trapezoid_pl>, WCW_0_1())
     .def("ray_shoot_up", &Trapezoid_pl::ray_shoot_up)
     .def("ray_shoot_down", &Trapezoid_pl::ray_shoot_down)
     ;
 
-  bp::class_<Wal_pl>("Arr_walk_along_line_point_location")
+  bp::class_<Walk_pl>("Arr_walk_along_line_point_location")
     .def(bp::init<>())
-    .def(bp::init<Arrangement_2&>()[bp::with_custodian_and_ward<1, 2>()])
-    .def("attach", &Wal_pl::attach, bp::with_custodian_and_ward<1, 2>())
-    .def("detach", &Wal_pl::detach)
-    .def("locate", &locate<Wal_pl>, bp::with_custodian_and_ward_postcall<0, 1>())
-    .def("ray_shoot_up", &Wal_pl::ray_shoot_up)
-    .def("ray_shoot_down", &Wal_pl::ray_shoot_down)
+    .def(bp::init<Arr&>()[WCW_1_2()])
+    .def("attach", &Walk_pl::attach, WCW_1_2())
+    .def("detach", &Walk_pl::detach)
+    .def("locate", &aos2::locate<Walk_pl>, WCW_0_1())
+    .def("ray_shoot_up", &Walk_pl::ray_shoot_up)
+    .def("ray_shoot_down", &Walk_pl::ray_shoot_down)
     ;
 
   bp::class_<Naive_pl>("Arr_naive_point_location")
     .def(bp::init<>())
-    .def(bp::init<Arrangement_2&>()[bp::with_custodian_and_ward<1, 2>()])
-    .def("attach", &Naive_pl::attach, bp::with_custodian_and_ward<1, 2>())
+    .def(bp::init<Arr&>()[WCW_1_2()])
+    .def("attach", &Naive_pl::attach, WCW_1_2())
     .def("detach", &Naive_pl::detach)
-    .def("locate", &locate<Naive_pl>, bp::with_custodian_and_ward_postcall<0, 1>())
+    .def("locate", &aos2::locate<Naive_pl>, WCW_0_1())
     ;
 
-  bp::def("locate", &locate_batch, bp::with_custodian_and_ward_postcall<1, 0>());
+  bp::def("locate", &aos2::locate_batch, WCW_1_0());
 }
