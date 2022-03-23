@@ -1,6 +1,6 @@
 Bindings for CGAL 2D Convex Hull Module
 ========================================
 
-.. automodule:: @SPHINX_TARGET_NAME@.CH2
+.. automodule:: @SPHINX_TARGET_NAME@.ch2
     :members:
     :undoc-members:
