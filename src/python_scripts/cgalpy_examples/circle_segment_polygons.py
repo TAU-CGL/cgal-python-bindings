@@ -12,9 +12,9 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.Ker
-Aos2 = CGALPY.Aos2
-BSO2 = CGALPY.BSO2
+Ker = CGALPY.ker
+Aos2 = CGALPY.aos2
+BSO2 = CGALPY.bso2
 General_polygon_set = BSO2.General_polygon_set_2
 Traits = General_polygon_set.Traits_2
 Polygon = General_polygon_set.Polygon_2
