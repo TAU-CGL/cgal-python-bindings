@@ -13,8 +13,8 @@ else:
     lib = sys.argv[1]
 CGALPY = importlib.import_module(lib)
 
-Kerd = CGALPY.Kerd
-SS = CGALPY.SS
+Kerd = CGALPY.kerd
+SS = CGALPY.ss
 
 if hasattr(Kerd, 'FT'):
     FT = Kerd.FT
