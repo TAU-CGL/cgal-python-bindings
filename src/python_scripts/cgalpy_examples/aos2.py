@@ -11,7 +11,7 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Aos2 = CGALPY.Aos2
+Aos2 = CGALPY.aos2
 Arrangement_2 = Aos2.Arrangement_2
 Point_2 = Arrangement_2.Geometry_traits_2.Point_2
 X_monotone_curve_2 = Arrangement_2.Geometry_traits_2.X_monotone_curve_2
