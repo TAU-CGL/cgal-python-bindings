@@ -7,8 +7,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef ARR_OVERLAY_TRAITS_HPP
-#define ARR_OVERLAY_TRAITS_HPP
+#ifndef CGALPY_ARR_OVERLAY_TRAITS_HPP
+#define CGALPY_ARR_OVERLAY_TRAITS_HPP
 
 #include <boost/python.hpp>
 

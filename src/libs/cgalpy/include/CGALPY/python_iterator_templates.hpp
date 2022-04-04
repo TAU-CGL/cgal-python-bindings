@@ -1,5 +1,14 @@
-#ifndef PYTHON_ITERATOR_TEMPLATES
-#define PYTHON_ITERATOR_TEMPLATES
+// Copyright (c) 2021 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
+
+#ifndef CGALPY_PYTHON_ITERATOR_TEMPLATES
+#define CGALPY_PYTHON_ITERATOR_TEMPLATES
 
 #include <boost/python.hpp>
 
