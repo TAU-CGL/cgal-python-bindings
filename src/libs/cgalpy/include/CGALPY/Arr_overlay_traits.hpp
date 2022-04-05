@@ -17,7 +17,7 @@
 #include <CGAL/Surface_sweep_2/Arr_default_overlay_traits_base.h>
 
 #include "CGALPY/config.hpp"
-#include <CGALPY/Python_functor.hpp>
+#include "CGALPY/Python_functor.hpp"
 
 /*! \class
  *
