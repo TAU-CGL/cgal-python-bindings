@@ -13,18 +13,18 @@ else:
     lib = sys.argv[1]
 CGALPY = importlib.import_module(lib)
 
-Kerd = CGALPY.kerd
-SS = CGALPY.ss
+Kerd = CGALPY.Kerd
+Ss = CGALPY.Ss
 
 if hasattr(Kerd, 'FT'):
     FT = Kerd.FT
 else:
     FT = float
-Point_d = SS.Point_d
+Point_d = Ss.Point_d
 
 # Verify that the bindings are generated with the CMake flag
 # CGALPY_SPATIAL_SEARCHING_DIMENSION set to 2
-assert(SS.get_spatial_searching_dimension() == 2)
+assert(Ss.get_spatial_searching_dimension() == 2)
 
 k = 3  				# for k nearest neighbors
 points = [Point_d(2, [FT(n) for n in [4, 0]]),
@@ -32,7 +32,7 @@ points = [Point_d(2, [FT(n) for n in [4, 0]]),
           Point_d(2, [FT(n) for n in [40, 0]]),
           Point_d(2, [FT(n) for n in [-40, 0]]),
           Point_d(2, [FT(n) for n in [1, 0]])]
-tree = SS.Kd_tree(points)	# Insert the points into a k-d tree
+tree = Ss.Kd_tree(points)	# Insert the points into a k-d tree
 all_points = tree.points()
 for x in all_points:
     print(x)
@@ -40,11 +40,11 @@ query = Point_d(2, [FT(n) for n in [0, 0]])
 eps = FT(0.0)           # 0.0 for exact NN, otherwise approximate NN
 search_nearest = True  	# set to False to search farthest
 sort_neighbors = False  # set to True to obtain the neighbors sorted by distance
-distance = SS.Euclidean_distance()	# The distance metric to use
+distance = Ss.Euclidean_distance()	# The distance metric to use
 
 starttime = timeit.default_timer()
 # Populate <lst> with the k nearest neighbors to <query> based on the distance metric
-search = SS.K_neighbor_search(tree, query, k, eps, search_nearest,
+search = Ss.K_neighbor_search(tree, query, k, eps, search_nearest,
                               distance, sort_neighbors)
 lst = search.k_neighbors()
 print("Neighbors search took ", timeit.default_timer() - starttime)
@@ -55,14 +55,14 @@ for pair in lst:
     print("Squared distance from query is: ", pair[1])
 
 # Search for points inside a sphere
-s = SS.Fuzzy_sphere(Point_d(2, [FT(0), FT(0)]), FT(5), FT(0))
+s = Ss.Fuzzy_sphere(Point_d(2, [FT(0), FT(0)]), FT(5), FT(0))
 res = tree.search(s)
 print("Points within distance 5 from (0,0):")
 for p in res:
     print(p)
 
 # Search for points inside a box
-s = SS.Fuzzy_iso_box(Point_d(2, [FT(-1), FT(-1)]), Point_d(2, [FT(1), FT(1)]), FT(0))
+s = Ss.Fuzzy_iso_box(Point_d(2, [FT(-1), FT(-1)]), Point_d(2, [FT(1), FT(1)]), FT(0))
 res = tree.search(s)
 print("Points with no coordinate exceeding absolute value of 1:")
 for p in res:
@@ -100,7 +100,7 @@ for p in res:
 #     return FT(1)  # replace this with your implementation
 #
 #
-# distance = SS.Distance_python(transformed_distance, min_distance_to_rectangle, \
+# distance = Ss.Distance_python(transformed_distance, min_distance_to_rectangle, \
 #                            max_distance_to_rectangle, transformed_distance_for_value, \
 #                            inverse_of_transformed_distance_for_value)
 # K_neighbor_search_python(tree, query, k, eps, search_nearest, \

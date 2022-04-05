@@ -50,7 +50,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 
 #ifdef CGALPY_KERNEL_BINDINGS
   {
-    SET_SCOPE("ker")
+    SET_SCOPE("Ker")
     export_kernel();
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
     export_intersections_2();
@@ -60,14 +60,14 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 
 #ifdef CGALPY_KERNEL_D_BINDINGS
   {
-    SET_SCOPE("kerd")
+    SET_SCOPE("Kerd")
     export_kernel_d();
   }
 #endif
 
 #ifdef CGALPY_POLYGON_2_BINDINGS
   {
-    SET_SCOPE("pol2")
+    SET_SCOPE("Pol2")
     export_polygon_2();
     export_polygon_with_holes_2();
   };
@@ -76,7 +76,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 #ifdef CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS
   // Aos2 must succeed Pol2
   {
-    SET_SCOPE("aos2")
+    SET_SCOPE("Aos2")
     export_arrangement_on_surface_2();
 
 #ifdef CGALPY_AOS2_POINT_LOCATION_BINDINGS
@@ -87,14 +87,14 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 
 #ifdef CGALPY_CONVEX_HULL_2_BINDINGS
   {
-    SET_SCOPE("ch2")
+    SET_SCOPE("Ch2")
     export_convex_hull_2_bindings();
   };
 #endif
 
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   {
-    SET_SCOPE("tri2")
+    SET_SCOPE("Tri2")
     export_triangulation_2();
   };
 
@@ -104,21 +104,21 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 #ifdef CGALPY_ALPHA_SHAPE_2_BINDINGS
   // AS2 must scceed Tri2
   {
-    SET_SCOPE("as2")
+    SET_SCOPE("As2")
     export_alpha_shape_2();
   }
 #endif
 
 #ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
   {
-    SET_SCOPE("ss")
+    SET_SCOPE("Ss")
     export_spatial_searching();
   };
 #endif
 
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
   {
-    SET_SCOPE("bv")
+    SET_SCOPE("Bv")
     export_bounding_volumes();
   };
 
@@ -127,7 +127,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
   // BSO2 must succeed Aos2
   {
-    SET_SCOPE("bso2")
+    SET_SCOPE("Bso2")
     export_boolean_set_operations_2();
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
     export_polygon_set_2();
@@ -139,21 +139,21 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
 
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
   {
-    SET_SCOPE("pp2")
+    SET_SCOPE("Pp2")
     export_polygon_partition_2();
   };
 #endif
 
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
   {
-    SET_SCOPE("ms2")
+    SET_SCOPE("Ms2")
     export_minkowski_sum_2();
   };
 #endif
 
 #ifdef CGALPY_TRIANGULATION_3_BINDINGS
   {
-    SET_SCOPE("tri3")
+    SET_SCOPE("Tri3")
     export_triangulation_3();
   };
 #endif
@@ -161,7 +161,7 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
   // 3D Alpha shape must be bound after 3D triangulation!
 #ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
   {
-    SET_SCOPE("as3")
+    SET_SCOPE("As3")
     export_alpha_shape_3();
   }
 #endif

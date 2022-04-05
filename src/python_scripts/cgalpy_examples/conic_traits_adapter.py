@@ -11,10 +11,10 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.ker
-Aos2 = CGALPY.aos2
-BSO2 = CGALPY.bso2
-General_polygon_set = BSO2.General_polygon_set_2
+Ker = CGALPY.Ker
+Aos2 = CGALPY.Aos2
+Bso2 = CGALPY.Bso2
+General_polygon_set = Bso2.General_polygon_set_2
 Traits = General_polygon_set.Traits_2
 Polygon = General_polygon_set.Polygon_2
 Curve = Traits.Curve_2
@@ -52,6 +52,6 @@ append_conic_arc(Q, Curve(-1, -9, 0, 0, 0, 9))
 # Compute the intersection of the two polygons.
 print(type(P))
 
-res = BSO2.intersection(P, Q)
+res = Bso2.intersection(P, Q)
 print("The intersection:")
 print(res)
