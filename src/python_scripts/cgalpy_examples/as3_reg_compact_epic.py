@@ -12,13 +12,13 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.ker
-AS3 = CGALPY.as3
+Ker = CGALPY.Ker
+As3 = CGALPY.As3
 
 Point_3 = Ker.Point_3
 Weighted_point_3 = Ker.Weighted_point_3
-Alpha_shape_3 = AS3.Alpha_shape_3
-Classification_type = AS3.Classification_type
+Alpha_shape_3 = As3.Alpha_shape_3
+Classification_type = As3.Classification_type
 
 p1 = Weighted_point_3(Point_3( 1, -1, -1), 4)
 p2 = Weighted_point_3(Point_3(-1,  1, -1), 4)

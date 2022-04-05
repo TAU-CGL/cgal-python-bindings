@@ -12,8 +12,8 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.ker
-AS3 = CGALPY.as3
+Ker = CGALPY.Ker
+AS3 = CGALPY.As3
 Point_3 = Ker.Point_3
 Alpha_shape_3 = AS3.Alpha_shape_3
 Mode = AS3.Mode
