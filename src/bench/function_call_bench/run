@@ -1,0 +1,8 @@
+#!/bin/bash
+
+base_dir=/home/efif/build/cgalpy/bensh/function_call_bench
+boost_dir=$base_dir/boost/release
+nanobind_dir=$base_dir/nanobind/release
+pybind11_dir=$base_dir/pybind11/release
+export PYTHONPATH=$boost_dir:$nanobind_dir:$pybind11_dir
+python3 binding_bench.py

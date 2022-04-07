@@ -1,6 +1,10 @@
-import square
+#!/usr/bin/python3
+# export PYTHONPATH=...
+
+import square_pybind11
 import square_swig
 import square_boost
+import square_nanobind
 import time
 import math
 
@@ -26,7 +30,14 @@ print(t2-t1)
 print(small + "pybind11")
 t1 = time.process_time()
 for i in range(j, times):
-    square.square(i)
+    square_pybind11.square(i)
+t2 = time.process_time()
+print(t2-t1)
+
+print(small + "nanobind")
+t1 = time.process_time()
+for i in range(j, times):
+    square_nanobind.square(i)
 t2 = time.process_time()
 print(t2-t1)
 
@@ -54,7 +65,13 @@ print(t2-t1)
 
 print(big + "pybind11")
 t1 = time.process_time()
-square.squareTimes(j, times)
+square_pybind11.squareTimes(j, times)
+t2 = time.process_time()
+print(t2-t1)
+
+print(big + "nanobind")
+t1 = time.process_time()
+square_nanobind.squareTimes(j, times)
 t2 = time.process_time()
 print(t2-t1)
 
@@ -64,9 +81,5 @@ res = 0
 for i in range(0, times):
     res += j
     res = math.sqrt(res)
-t2 = time.process_time()
+T2 = time.process_time()
 print(t2-t1)
-
-
-
-
