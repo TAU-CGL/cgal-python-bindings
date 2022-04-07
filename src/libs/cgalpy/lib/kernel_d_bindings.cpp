@@ -12,7 +12,7 @@
 
 #include <CGAL/intersections_d.h>
 
-#include "CGALPY/common.hpp"
+#include "CGALPY/config.hpp"
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/export_ft.hpp"

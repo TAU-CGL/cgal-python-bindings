@@ -10,11 +10,16 @@
 #ifndef CGALPY_TRIANGULATION_2_TYPES_HPP
 #define CGALPY_TRIANGULATION_2_TYPES_HPP
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+
+#include <boost/python.hpp>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/triangulation_2_config.hpp"
 #include "CGALPY/alpha_shape_2_config.hpp"
 #include "CGALPY/kernel_types.hpp"
+
+namespace bp = boost::python;
 
 namespace tri2 {
 
