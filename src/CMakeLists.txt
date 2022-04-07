@@ -17,22 +17,18 @@ else()
 endif()
 set(CGALPY_BOOST_LIBRARIES)
 
-find_package(Python3 ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
-find_package(PythonLibs ${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} EXACT REQUIRED)
+find_package(Python ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
+# find_package(PythonLibs ${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} EXACT REQUIRED)
 
-if (PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
-  set (CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python)
-else()
-  # Set the Boost python library name (e.g., python35)
-  set(CGALPY_BOOST_PYTHON_LIB_NAME python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR})
-  set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} ${CGALPY_BOOST_PYTHON_LIB_NAME})
-endif()
-find_package(Boost ${CGALPY_BOOST_MIN_VERSION} REQUIRED COMPONENTS ${CGALPY_BOOST_LIBRARIES})
+find_package(Boost ${CGALPY_BOOST_MIN_VERSION})
 
 if(NOT Boost_FOUND)
   message (STATUS "This library cannot be compiled, as it requires Boost.")
   return()
 endif()
+
+find_package(tsl-robin-map CONFIG REQUIRED)
+find_package(nanobind CONFIG REQUIRED)
 
 # Add includes and libs
 include_directories(${PYTHON_INCLUDE_DIRS})

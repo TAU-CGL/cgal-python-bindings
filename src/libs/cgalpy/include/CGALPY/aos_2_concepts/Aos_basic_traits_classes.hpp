@@ -10,6 +10,10 @@
 #ifndef CGALPY_AOS_BASIC_TRAITS_CLASSES_HPP
 #define CGALPY_AOS_BASIC_TRAITS_CLASSES_HPP
 
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
+
 template <typename T, typename Tag = CGAL::Tag_false>
 struct Compare_y_at_x_left_2_class { /* empty */ };
 
@@ -17,7 +21,7 @@ template <typename T>
 struct Compare_y_at_x_left_2_class<T, CGAL::Tag_true> {
   typedef typename T::Compare_y_at_x_left_2     Compare_y_at_x_left_2;
 
-  bp::class_<Compare_y_at_x_left_2>* m_compare_y_at_x_left_2;
+  py::class_<Compare_y_at_x_left_2>* m_compare_y_at_x_left_2;
 };
 
 template <typename T>
@@ -62,16 +66,16 @@ struct Aos_basic_traits_classes {
   }
 
   // Class objects
-  bp::class_<Point_2>* m_point_2;
-  bp::class_<X_monotone_curve_2>* m_x_monotone_curve_2;
-  bp::class_<Compare_x_2>* m_compare_x_2;
-  bp::class_<Compare_xy_2>* m_compare_xy_2;
-  bp::class_<Equal_2>* m_equal_2;
-  bp::class_<Construct_min_vertex_2>* m_construct_min_vertex_2;
-  bp::class_<Construct_max_vertex_2>* m_construct_max_vertex_2;
-  bp::class_<Is_vertical_2>* m_is_vertical_2;
-  bp::class_<Compare_y_at_x_2>* m_compare_y_at_x_2;
-  bp::class_<Compare_y_at_x_right_2>* m_compare_y_at_x_right_2;
+  py::class_<Point_2>* m_point_2;
+  py::class_<X_monotone_curve_2>* m_x_monotone_curve_2;
+  py::class_<Compare_x_2>* m_compare_x_2;
+  py::class_<Compare_xy_2>* m_compare_xy_2;
+  py::class_<Equal_2>* m_equal_2;
+  py::class_<Construct_min_vertex_2>* m_construct_min_vertex_2;
+  py::class_<Construct_max_vertex_2>* m_construct_max_vertex_2;
+  py::class_<Is_vertical_2>* m_is_vertical_2;
+  py::class_<Compare_y_at_x_2>* m_compare_y_at_x_2;
+  py::class_<Compare_y_at_x_right_2>* m_compare_y_at_x_right_2;
 
   typedef typename T::Has_left_category         Has_left_category;
   Compare_y_at_x_left_2_class<T, Has_left_category> m_compare_y_at_x_left_2_class;

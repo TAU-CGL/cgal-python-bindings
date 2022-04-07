@@ -7,13 +7,11 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 template<typename T0, typename T1>
 bool is_type(Object& o) { return o.is<T0>() || o.is<T1>(); }
@@ -39,7 +37,7 @@ bool get_type(Object& o, typename T0::value_type& t) {
 void export_object() {
   typedef aos2::Arrangement_2   Arr2;
 
-  bp::class_<Object>("Object", bp::no_init)
+  py::class_<Object>("Object", py::no_init)
     .def("empty", &Object::empty)
     .def("is_vertex", &is_type<Arr2::Vertex_handle, aos2::Vertex_const_handle>)
     .def("get_vertex", &get_type<Arr2::Vertex_handle, aos2::Vertex_const_handle>)

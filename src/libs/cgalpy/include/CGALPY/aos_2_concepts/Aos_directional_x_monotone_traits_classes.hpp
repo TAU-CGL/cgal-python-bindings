@@ -10,6 +10,10 @@
 #ifndef CGALPY_AOS_DIRECTIONAL_X_MONOTONE_TRAITS_CLASSES_HPP
 #define CGALPY_AOS_DIRECTIONAL_X_MONOTONE_TRAITS_CLASSES_HPP
 
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
+
 template <typename T>
 struct Aos_directional_x_monotone_traits_classes {
   typedef typename T::Compare_endpoints_xy_2    Compare_endpoints_xy_2;
@@ -28,8 +32,8 @@ struct Aos_directional_x_monotone_traits_classes {
   }
 
   // Class objects
-  bp::class_<Compare_endpoints_xy_2>* m_compare_endpoints_xy_2;
-  bp::class_<Construct_opposite_2>* m_construct_opposite_2;
+  py::class_<Compare_endpoints_xy_2>* m_compare_endpoints_xy_2;
+  py::class_<Construct_opposite_2>* m_construct_opposite_2;
 };
 
 #endif

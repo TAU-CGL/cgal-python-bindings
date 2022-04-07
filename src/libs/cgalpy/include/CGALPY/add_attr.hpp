@@ -10,14 +10,15 @@
 #ifndef CGALPY_ADD_ATTR_HPP
 #define CGALPY_ADD_ATTR_HPP
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
+
 #include <boost/static_assert.hpp>
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 template <typename Type>
-bool add_attr(const char* name, bp::scope& my_scope) {
-  bp::handle<> tco(bp::objects::registered_class_object(bp::type_id<Type>()));
+bool add_attr(const char* name, py::scope& my_scope) {
+  py::handle<> tco(py::objects::registered_class_object(py::type_id<Type>()));
   if (tco.get() == 0) return false;
   my_scope.attr(name) = tco;
   return true;

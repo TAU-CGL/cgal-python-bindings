@@ -7,9 +7,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include <CGAL/minkowski_sum_2.h>
 #include <CGAL/approximated_offset_2.h>
@@ -20,7 +18,7 @@
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
 #include "CGALPY/append_iterator.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace ms2 {
 
@@ -53,7 +51,7 @@ template <typename T1, typename T2, typename T3,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T3()(T2(), typename target<T2>::type()))>
 void bind_mink_sum_decomp_one_strategy_3T(bool) {
-  bp::def<Polygon_with_holes_2(const T1&, const T2&, const T3&)>
+  py::def<Polygon_with_holes_2(const T1&, const T2&, const T3&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>);
 }
 
@@ -84,7 +82,7 @@ template <typename T1, typename T2, typename T3, typename T4,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T4()(T2(), typename target<T1>::type()))>
 void bind_mink_sum_decomp_two_strategies_pair(bool) {
-  bp::def<Polygon_with_holes_2(const T1&, const T2&, const T3&, const T4&)>
+  py::def<Polygon_with_holes_2(const T1&, const T2&, const T3&, const T4&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>);
 }
 
@@ -161,8 +159,8 @@ approximated_offset_2_pwh(const Polygon_with_holes_2& pwh,
                           const FT& r, double eps)
 { return CGAL::approximated_offset_2(pwh, r, eps); }
 
-bp::list approximated_inset_2(const Polygon_2& p, const FT& r, double eps) {
-  bp::list lst;
+py::list approximated_inset_2(const Polygon_2& p, const FT& r, double eps) {
+  py::list lst;
   CGAL::approximated_inset_2(p, r, eps, append_iterator(lst));
   return lst;
 }
@@ -175,7 +173,7 @@ void export_minkowski_sum_2() {
   typedef ms2::Circle_segment_polygon_2                 CS_pgn;
   typedef ms2::Circle_segment_polygon_with_holes_2      CS_pwh;
 
-  bp::scope ms_scope = bp::scope();
+  py::scope ms_scope = py::scope();
 
 #if CGAL_VERSION_NR > 1050500000
   // By decomposition
@@ -184,32 +182,32 @@ void export_minkowski_sum_2() {
   ms2::bind_mink_sum_decomp_two_strategies();
 #endif
 
-  bp::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>);
-  bp::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pwh>);
-  bp::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pgn>);
-  bp::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pwh>);
+  py::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>);
+  py::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pwh>);
+  py::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pgn>);
+  py::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pwh>);
 
-  bp::def("minkowski_sum_by_full_convolution_2",
+  py::def("minkowski_sum_by_full_convolution_2",
           &ms2::minkowski_sum_by_full_convolution_2<Pgn, Pgn>);
 
-  bp::def("minkowski_sum_by_reduced_convolution_2",
+  py::def("minkowski_sum_by_reduced_convolution_2",
           &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pgn>);
-  bp::def("minkowski_sum_by_reduced_convolution_2",
+  py::def("minkowski_sum_by_reduced_convolution_2",
           &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pwh>);
-  bp::def("minkowski_sum_by_reduced_convolution_2",
+  py::def("minkowski_sum_by_reduced_convolution_2",
           &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pgn>);
-  bp::def("minkowski_sum_by_reduced_convolution_2",
+  py::def("minkowski_sum_by_reduced_convolution_2",
           &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pwh>);
 
-  bp::def("approximated_offset_2", &ms2::approximated_offset_2);
-  bp::def("approximated_offset_2", &ms2::approximated_offset_2_pwh);
-  bp::def("approximated_inset_2", &ms2::approximated_inset_2);
+  py::def("approximated_offset_2", &ms2::approximated_offset_2);
+  py::def("approximated_offset_2", &ms2::approximated_offset_2_pwh);
+  py::def("approximated_inset_2", &ms2::approximated_inset_2);
 
   static const char pgn[] = "Circle_segment_polygon_2";
-  bp::class_<CS_pgn>* co_pgn(nullptr);
+  py::class_<CS_pgn>* co_pgn(nullptr);
   export_general_polygon_2<CS_pgn, pgn>(ms_scope, co_pgn);
 
   static const char pwh[] = "Circle_segment_polygon_with_holes_2";
-  bp::class_<CS_pwh>* co_pwh(nullptr);
+  py::class_<CS_pwh>* co_pwh(nullptr);
   export_general_polygon_with_holes_2<CS_pwh, pwh>(ms_scope, co_pwh);
 }

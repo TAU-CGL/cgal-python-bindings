@@ -7,66 +7,64 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 void export_gmpz() {
-  bp::class_<CGAL::Gmpz>("Gmpz")
-    .def(bp::init<int>())
-    .def(bp::init<CGAL::Gmpz&>())
+  py::class_<CGAL::Gmpz>("Gmpz")
+    .def(py::init<int>())
+    .def(py::init<CGAL::Gmpz&>())
     .def("to_double", &CGAL::Gmpz::to_double)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self + bp::self)
-    .def(bp::self += bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self -= bp::self)
-    .def(bp::self * bp::self)
-    .def(bp::self *= bp::self)
-    .def(bp::self / bp::self)
-    .def(bp::self /= bp::self)
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
+    .def(py::self == py::self)
+    .def(py::self != py::self)
+    .def(py::self < py::self)
+    .def(py::self > py::self)
+    .def(py::self <= py::self)
+    .def(py::self >= py::self)
+    .def(py::self + py::self)
+    .def(py::self += py::self)
+    .def(py::self - py::self)
+    .def(py::self -= py::self)
+    .def(py::self * py::self)
+    .def(py::self *= py::self)
+    .def(py::self / py::self)
+    .def(py::self /= py::self)
     ;
 }
 
 void export_gmpq() {
-  bp::class_<CGAL::Gmpq>("Gmpq")
-    .def(bp::init<CGAL::Gmpz, CGAL::Gmpz>())
-    .def(bp::init<unsigned long, unsigned long>())
-    .def(bp::init<const std::string&>())
-    .def(bp::init<CGAL::Gmpq&>())
-    .def(bp::init<double>())
+  py::class_<CGAL::Gmpq>("Gmpq")
+    .def(py::init<CGAL::Gmpz, CGAL::Gmpz>())
+    .def(py::init<unsigned long, unsigned long>())
+    .def(py::init<const std::string&>())
+    .def(py::init<CGAL::Gmpq&>())
+    .def(py::init<double>())
     .def("to_double", &CGAL::Gmpq::to_double)
     .def("numerator", &CGAL::Gmpq::numerator)
     .def("denominator", &CGAL::Gmpq::denominator)
     .def("size", &CGAL::Gmpq::size)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self + bp::self)
-    .def(bp::self += bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self -= bp::self)
-    .def(bp::self * bp::self)
-    .def(bp::self *= bp::self)
-    .def(bp::self / bp::self)
-    .def(bp::self /= bp::self)
-    .def(-bp::self)
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
+    .def(py::self == py::self)
+    .def(py::self != py::self)
+    .def(py::self < py::self)
+    .def(py::self > py::self)
+    .def(py::self <= py::self)
+    .def(py::self >= py::self)
+    .def(py::self + py::self)
+    .def(py::self += py::self)
+    .def(py::self - py::self)
+    .def(py::self -= py::self)
+    .def(py::self * py::self)
+    .def(py::self *= py::self)
+    .def(py::self / py::self)
+    .def(py::self /= py::self)
+    .def(-py::self)
     ;
 }

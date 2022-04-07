@@ -7,20 +7,18 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
-bp::class_<aos2::Geometry_traits_2> export_arr_geodesic_arc_on_sphere_traits() {
+py::class_<aos2::Geometry_traits_2> export_arr_geodesic_arc_on_sphere_traits() {
   typedef aos2::Geometry_traits_2       GT;
 
-  auto traits = bp::class_<GT>("Geometry_traits_2")
-    .def(bp::init<>());
-  bp::scope traits_scope(traits);
+  auto traits = py::class_<GT>("Geometry_traits_2")
+    .def(py::init<>());
+  py::scope traits_scope(traits);
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;

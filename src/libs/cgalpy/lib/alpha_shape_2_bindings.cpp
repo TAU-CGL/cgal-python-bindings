@@ -7,9 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 //            Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 #include <boost/assert.hpp>
 
 #include "CGALPY/types.hpp"
@@ -17,34 +15,34 @@
 #include "CGALPY/python_iterator_templates.hpp"
 #include "CGALPY/add_attr.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace as2 {
 
-Alpha_shape_2* as_init(bp::list& lst) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
+Alpha_shape_2* as_init(py::list& lst) {
+  auto begin = py::stl_input_iterator<Point>(lst);
+  auto end = py::stl_input_iterator<Point>();
   return new Alpha_shape_2(begin, end);
 }
 
 const FT& next(Alpha_iterator it) {
   if (it == Alpha_iterator()) {
     PyErr_SetString(PyExc_StopIteration, "Invalid alpha iterator");
-    bp::throw_error_already_set();
+    py::throw_error_already_set();
   }
   return *it++;
 }
 
-bp::list alpha_shape_edges(const as2::Alpha_shape_2& as) {
-  bp::list lst;
+py::list alpha_shape_edges(const as2::Alpha_shape_2& as) {
+  py::list lst;
   for (auto it = as.alpha_shape_edges_begin(); it != as.alpha_shape_edges_end();
        ++it)
     lst.append(*it);
   return lst;
 }
 
-bp::list alpha_shape_vertices(const as2::Alpha_shape_2& as) {
-  bp::list lst;
+py::list alpha_shape_vertices(const as2::Alpha_shape_2& as) {
+  py::list lst;
   for (auto it = as.alpha_shape_vertices_begin();
        it != as.alpha_shape_vertices_end(); ++it)
     lst.append(*it);
@@ -72,13 +70,13 @@ void export_alpha_shape_2() {
   as2::Classification_type (As2::*classify9)(const as2::Face_handle& s) const         = &As2::classify;
   as2::Classification_type (As2::*classify10)(const as2::Face_handle& s, int i) const = &As2::classify;
 
-  bp::scope as2_scope =
-    bp::class_<As2, boost::noncopyable>("Alpha_shape_2")
-    .def(bp::init<>())
-    .def(bp::init<bp::optional<double, as2::Mode>>())
-    .def(bp::init<bp::optional<as2::FT&, as2::Mode>>())
-    .def(bp::init<Tri2&, bp::optional<double, as2::Mode>>())
-    .def(bp::init<Tri2&, bp::optional<as2::FT&, as2::Mode>>())
+  py::scope as2_scope =
+    py::class_<As2, boost::noncopyable>("Alpha_shape_2")
+    .def(py::init<>())
+    .def(py::init<py::optional<double, as2::Mode>>())
+    .def(py::init<py::optional<as2::FT&, as2::Mode>>())
+    .def(py::init<Tri2&, py::optional<double, as2::Mode>>())
+    .def(py::init<Tri2&, py::optional<as2::FT&, as2::Mode>>())
     .def("__init__", make_constructor(&as2::as_init))
     .def("clear", &As2::clear)
     .def("set_mode", &As2::set_mode)
@@ -112,12 +110,12 @@ void export_alpha_shape_2() {
   // Alpha_shape_vertices_iterator;
   // Alpha_shape_edges_iterator;
 
-  bp::class_<as2::Alpha_iterator>("Alpha_iterator")
+  py::class_<as2::Alpha_iterator>("Alpha_iterator")
     .def("__iter__", &pass_through)
     .def("__next__", &as2::next, Copy_const_reference())
     ;
 
-  bp::enum_<as2::Classification_type>("Classification_type")
+  py::enum_<as2::Classification_type>("Classification_type")
     .value("EXTERIOR", As2::EXTERIOR)
     .value("SINGULAR", As2::SINGULAR)
     .value("REGULAR", As2::REGULAR)
@@ -125,7 +123,7 @@ void export_alpha_shape_2() {
     .export_values()
     ;
 
-  bp::enum_<as2::Mode>("Mode")
+  py::enum_<as2::Mode>("Mode")
     .value("GENERAL", As2::GENERAL)
     .value("REGULARIZED", As2::REGULARIZED)
     .export_values()

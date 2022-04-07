@@ -10,11 +10,11 @@
 #ifndef CGALPY_PYTHON_ITERATOR_TEMPLATES
 #define CGALPY_PYTHON_ITERATOR_TEMPLATES
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
-inline bp::object pass_through(bp::object const& o) { return o; }
+inline py::object pass_through(py::object const& o) { return o; }
 
 //these template classes are used to allow more natural iteration in python
 
@@ -35,7 +35,7 @@ public:
       }
     }
     PyErr_SetString(PyExc_StopIteration, "No more data.");
-    bp::throw_error_already_set();
+    py::throw_error_already_set();
     return *m_curr;
   }
 };
@@ -56,24 +56,24 @@ public:
     if (m_curr != m_end)
       return new modified_circulator(modified_circulator(*(m_curr++)));
     PyErr_SetString(PyExc_StopIteration, "No more data.");
-    bp::throw_error_already_set();
+    py::throw_error_already_set();
     return new modified_circulator(modified_circulator(*m_curr));
   }
 };
 
 template<typename iterator>
 void bind_iterator_of_circulators(const char* python_name) {
-  bp::class_<iterator>(python_name, bp::no_init)
+  py::class_<iterator>(python_name, py::no_init)
     .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next, bp::return_value_policy<bp::manage_new_object>())
+    .def("__next__", &iterator::next, py::return_value_policy<py::manage_new_object>())
     ;
 }
 
 template<typename iterator>
 void bind_iterator(const char* python_name) {
-  bp::class_<iterator>(python_name, bp::no_init)
+  py::class_<iterator>(python_name, py::no_init)
     .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next, bp::return_value_policy<bp::reference_existing_object>())
+    .def("__next__", &iterator::next, py::return_value_policy<py::reference_existing_object>())
     ;
 }
 
@@ -89,7 +89,7 @@ public:
   typename iterator::value_type next() {
     if (m_curr != m_end) return *(m_curr++);
     PyErr_SetString(PyExc_StopIteration, "No more data.");
-    bp::throw_error_already_set();
+    py::throw_error_already_set();
     return *m_curr;
   }
 };
@@ -115,14 +115,14 @@ public:
       }
     }
     PyErr_SetString(PyExc_StopIteration, "No more data.");
-    bp::throw_error_already_set();
+    py::throw_error_already_set();
     return *m_curr;
   }
 };
 
 template<typename iterator>
 void bind_copy_iterator(const char* python_name) {
-  bp::class_<iterator>(python_name, bp::no_init)
+  py::class_<iterator>(python_name, py::no_init)
     .def("__iter__", &pass_through)
     .def("__next__", &iterator::next)
     ;

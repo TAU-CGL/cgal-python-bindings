@@ -10,18 +10,18 @@
 #ifndef CGALPY_TYPES_HPP
 #define CGALPY_TYPES_HPP
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/config.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
-typedef bp::return_value_policy<bp::copy_const_reference> Copy_const_reference;
-typedef bp::return_value_policy<bp::return_by_value>      Return_by_value;
-typedef bp::return_value_policy<bp::manage_new_object>    Manage_new_object;
-typedef bp::return_value_policy<bp::reference_existing_object>
+typedef py::return_value_policy<py::copy_const_reference> Copy_const_reference;
+typedef py::return_value_policy<py::return_by_value>      Return_by_value;
+typedef py::return_value_policy<py::manage_new_object>    Manage_new_object;
+typedef py::return_value_policy<py::reference_existing_object>
   Reference_existing_object;
-typedef bp::return_value_policy<bp::copy_non_const_reference>
+typedef py::return_value_policy<py::copy_non_const_reference>
   Copy_non_const_reference;
 
 constexpr bool kernel_bindings()

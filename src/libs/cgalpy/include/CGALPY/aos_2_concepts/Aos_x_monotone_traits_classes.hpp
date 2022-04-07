@@ -10,6 +10,10 @@
 #ifndef CGALPY_AOS_X_MONOTONE_TRAITS_CLASSES_HPP
 #define CGALPY_AOS_X_MONOTONE_TRAITS_CLASSES_HPP
 
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
+
 template <typename T>
 struct Aos_x_monotone_traits_classes {
   typedef typename T::Intersect_2               Intersect_2;
@@ -33,10 +37,10 @@ struct Aos_x_monotone_traits_classes {
     //if (m_merge_2) delete m_merge_2;
   }
 
-  bp::class_<Intersect_2>* m_intersect_2;
-  bp::class_<Split_2>* m_split_2;
-  bp::class_<Are_mergeable_2>* m_are_mergeable_2;
-  bp::class_<Merge_2>* m_merge_2;
+  py::class_<Intersect_2>* m_intersect_2;
+  py::class_<Split_2>* m_split_2;
+  py::class_<Are_mergeable_2>* m_are_mergeable_2;
+  py::class_<Merge_2>* m_merge_2;
 };
 
 #endif

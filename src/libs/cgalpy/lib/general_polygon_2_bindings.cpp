@@ -6,19 +6,17 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/general_polygon_set_2_types.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 typedef bso2::General_polygon_2 General_polygon_2;
 
 void export_general_polygon_2() {
-  bp::handle<> tco(bp::objects::registered_class_object(bp::type_id<General_polygon_2>()));
+  py::handle<> tco(py::objects::registered_class_object(py::type_id<General_polygon_2>()));
   BOOST_ASSERT(tco.get() != 0);
-  bp::scope().attr("General_polygon_2") = tco;
+  py::scope().attr("General_polygon_2") = tco;
 }

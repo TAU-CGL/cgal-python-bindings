@@ -7,14 +7,12 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace aos2 {
 
@@ -38,8 +36,8 @@ void export_face() {
   typedef aos2::Arrangement_2   Arr2;
   typedef Arr2::Face            Face;
 
-  bp::class_<Face>("Face")
-    .def(bp::init<>())
+  py::class_<Face>("Face")
+    .def(py::init<>())
     .def("assign", &Face::assign)
     .def("is_unbounded", &Face::is_unbounded)
     .def("is_fictitious", &Face::is_fictitious)
@@ -52,7 +50,7 @@ void export_face() {
     .def("inner_ccbs", &aos2::inner_ccbs, Manage_new_object())
     .def("holes", &aos2::inner_ccbs, Manage_new_object())
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
-    .def("isolated_vertices", bp::range<bp::return_internal_reference<>>(&aos2::isolated_vertices_begin, &aos2::isolated_vertices_end))
+    .def("isolated_vertices", py::range<py::return_internal_reference<>>(&aos2::isolated_vertices_begin, &aos2::isolated_vertices_end))
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     .def("set_data", &Face::set_data)
     .def<Face::Data& (Face::*)()>("data", &Face::data, Copy_non_const_reference())

@@ -9,9 +9,9 @@
 #ifndef CGALPY_EXPORT_FT_HPP
 #define CGALPY_EXPORT_FT_HPP
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 template <typename FT_>
 const typename FT_::Exact_type& ft_exact(const FT_& ft)
@@ -27,29 +27,29 @@ double ft_to_double(const FT_& ft)
 
 template <typename FT_, typename C>
 void export_ft(C c) {
-  c.def(bp::init<double>())
-    .def(bp::init<typename FT_::Exact_type>())
-    .def(bp::init<FT_>())
-    .def("exact", &ft_exact<FT_>, bp::return_internal_reference<>())
-    //.def("approx", &ft__approx<FT_>, bp::return_internal_reference<>())
+  c.def(py::init<double>())
+    .def(py::init<typename FT_::Exact_type>())
+    .def(py::init<FT_>())
+    .def("exact", &ft_exact<FT_>, py::return_internal_reference<>())
+    //.def("approx", &ft__approx<FT_>, py::return_internal_reference<>())
     .def("to_double", &ft_to_double<FT_>)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self + bp::self)
-    .def(bp::self += bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self -= bp::self)
-    .def(bp::self * bp::self)
-    .def(bp::self *= bp::self)
-    .def(bp::self / bp::self)
-    .def(bp::self /= bp::self)
-    .def(-bp::self)
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
+    .def(py::self == py::self)
+    .def(py::self != py::self)
+    .def(py::self < py::self)
+    .def(py::self > py::self)
+    .def(py::self <= py::self)
+    .def(py::self >= py::self)
+    .def(py::self + py::self)
+    .def(py::self += py::self)
+    .def(py::self - py::self)
+    .def(py::self -= py::self)
+    .def(py::self * py::self)
+    .def(py::self *= py::self)
+    .def(py::self / py::self)
+    .def(py::self /= py::self)
+    .def(-py::self)
     ;
 }
 

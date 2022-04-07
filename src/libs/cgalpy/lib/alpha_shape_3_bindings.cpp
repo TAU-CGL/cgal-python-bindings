@@ -6,9 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include <CGAL/iterator.h>
 
@@ -17,57 +15,57 @@
 #include "CGALPY/alpha_shape_3_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace as3 {
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-void make_alpha_shape(Alpha_shape_3& as, bp::list& lst) {
+void make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
   if (! lst) return;
-  if (! bp::extract<Point>(lst[0]).check()) return;
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
+  if (! py::extract<Point>(lst[0]).check()) return;
+  auto begin = py::stl_input_iterator<Point>(lst);
+  auto end = py::stl_input_iterator<Point>();
   // auto v = std::vector<Point>(begin, end);
   // as.make_alpha_shape(v.begin(), v.end());
   as.make_alpha_shape(begin, end);
 }
 #endif
 
-Alpha_shape_3* as_init1(bp::list& lst) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
+Alpha_shape_3* as_init1(py::list& lst) {
+  auto begin = py::stl_input_iterator<Point>(lst);
+  auto end = py::stl_input_iterator<Point>();
   return new Alpha_shape_3(begin, end);
 }
 
-Alpha_shape_3* as_init2(bp::list& lst, const FT& alpha) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
+Alpha_shape_3* as_init2(py::list& lst, const FT& alpha) {
+  auto begin = py::stl_input_iterator<Point>(lst);
+  auto end = py::stl_input_iterator<Point>();
   return new Alpha_shape_3(begin, end, alpha);
 }
 
-Alpha_shape_3* as_init3(bp::list& lst, double alpha) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
+Alpha_shape_3* as_init3(py::list& lst, double alpha) {
+  auto begin = py::stl_input_iterator<Point>(lst);
+  auto end = py::stl_input_iterator<Point>();
   return new Alpha_shape_3(begin, end, alpha);
 }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-Alpha_shape_3* as_init4(bp::list& lst, const FT& alpha, Mode m) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
+Alpha_shape_3* as_init4(py::list& lst, const FT& alpha, Mode m) {
+  auto begin = py::stl_input_iterator<Point>(lst);
+  auto end = py::stl_input_iterator<Point>();
   return new Alpha_shape_3(begin, end, alpha, m);
 }
 
-Alpha_shape_3* as_init5(bp::list& lst, double alpha, Mode m) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
+Alpha_shape_3* as_init5(py::list& lst, double alpha, Mode m) {
+  auto begin = py::stl_input_iterator<Point>(lst);
+  auto end = py::stl_input_iterator<Point>();
   return new Alpha_shape_3(begin, end, alpha, m);
 }
 
 const FT& next(Alpha_iterator it) {
   if (it == Alpha_iterator()) {
     PyErr_SetString(PyExc_StopIteration, "Invalid alpha iterator");
-    bp::throw_error_already_set();
+    py::throw_error_already_set();
   }
   return *it++;
 }
@@ -146,7 +144,7 @@ typedef CGAL::Filter_iterator<Finite_edges_iterator, Test>     Filter_edge_itera
 typedef CGAL::Filter_iterator<Finite_vertices_iterator, Test>  Filter_vertex_iterator;
 
 
-bp::list alpha_shape_cells(const Alpha_shape_3& as,
+py::list alpha_shape_cells(const Alpha_shape_3& as,
                            Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
                            , const FT& alpha
@@ -159,15 +157,15 @@ bp::list alpha_shape_cells(const Alpha_shape_3& as,
 #endif
   Filter_cell_iterator first(as.finite_cells_end(), test_as_cell, as.finite_cells_begin());
   Filter_cell_iterator last(as.finite_cells_end(), test_as_cell, as.finite_cells_end());
-  // return bp::range<return_internal_reference<>, Alpha_shape_3>(&Alpha_shape_3::finite_cells_begin,
+  // return py::range<return_internal_reference<>, Alpha_shape_3>(&Alpha_shape_3::finite_cells_begin,
   //                                                                         &Alpha_shape_3::finite_cells_end);
-  // return bp::range<return_internal_reference<>>(first, last);
-  bp::list lst;
+  // return py::range<return_internal_reference<>>(first, last);
+  py::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
-  bp::list alpha_shape_facets(const Alpha_shape_3& as,
+  py::list alpha_shape_facets(const Alpha_shape_3& as,
                               Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
                               , const FT& alpha
@@ -180,12 +178,12 @@ bp::list alpha_shape_cells(const Alpha_shape_3& as,
 #endif
   Filter_facet_iterator first(as.finite_facets_end(), test_as_facet, as.finite_facets_begin());
   Filter_facet_iterator last(as.finite_facets_end(), test_as_facet, as.finite_facets_end());
-  bp::list lst;
+  py::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
-bp::list alpha_shape_edges(const Alpha_shape_3& as,
+py::list alpha_shape_edges(const Alpha_shape_3& as,
                            Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
                            , const FT& alpha
@@ -198,12 +196,12 @@ bp::list alpha_shape_edges(const Alpha_shape_3& as,
 #endif
   Filter_edge_iterator first(as.finite_edges_end(), test_as_edge, as.finite_edges_begin());
   Filter_edge_iterator last(as.finite_edges_end(), test_as_edge, as.finite_edges_end());
-  bp::list lst;
+  py::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
-bp::list alpha_shape_vertices(const Alpha_shape_3& as,
+py::list alpha_shape_vertices(const Alpha_shape_3& as,
                               Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
                               , const FT& alpha
@@ -216,7 +214,7 @@ bp::list alpha_shape_vertices(const Alpha_shape_3& as,
 #endif
   Filter_vertex_iterator first(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_begin());
   Filter_vertex_iterator last(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_end());
-  bp::list lst;
+  py::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
@@ -262,13 +260,13 @@ void export_alpha_shape_3() {
 
 #endif
 
-  bp::class_<As3, boost::noncopyable>("Alpha_shape_3")
-    .def(bp::init<>())
+  py::class_<As3, boost::noncopyable>("Alpha_shape_3")
+    .def(py::init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def(bp::init<bp::optional<double, as3::Mode>>())
-    .def(bp::init<bp::optional<as3::FT&, as3::Mode>>())
-    .def(bp::init<tri3::Triangulation_3&, bp::optional<double, as3::Mode>>())
-    .def(bp::init<tri3::Triangulation_3&, bp::optional<as3::FT&, as3::Mode>>())
+    .def(py::init<py::optional<double, as3::Mode>>())
+    .def(py::init<py::optional<as3::FT&, as3::Mode>>())
+    .def(py::init<tri3::Triangulation_3&, py::optional<double, as3::Mode>>())
+    .def(py::init<tri3::Triangulation_3&, py::optional<as3::FT&, as3::Mode>>())
 #endif
     .def("__init__", make_constructor(&as3::as_init1))
     .def("__init__", make_constructor(&as3::as_init2))
@@ -315,7 +313,7 @@ void export_alpha_shape_3() {
     // Traversal of the alpha-Values
     .def("alpha_begin", &As3::alpha_begin)
     .def("alpha_end", &As3::alpha_end)
-    .def("alphas", bp::range(&As3::alpha_begin, &As3::alpha_end))
+    .def("alphas", py::range(&As3::alpha_begin, &As3::alpha_end))
     .def("alpha_find", &As3::alpha_find)
     .def("alpha_lower_bound", &As3::alpha_lower_bound)
     .def("alpha_upper_bound", &As3::alpha_upper_bound)
@@ -327,7 +325,7 @@ void export_alpha_shape_3() {
 #endif
     ;
 
-  bp::enum_<as3::Classification_type>("Classification_type")
+  py::enum_<as3::Classification_type>("Classification_type")
     .value("EXTERIOR", As3::EXTERIOR)
     .value("SINGULAR", As3::SINGULAR)
     .value("REGULAR", As3::REGULAR)
@@ -336,14 +334,14 @@ void export_alpha_shape_3() {
     ;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  bp::enum_<as3::Mode>("Mode")
+  py::enum_<as3::Mode>("Mode")
     .value("GENERAL", As3::GENERAL)
     .value("REGULARIZED", As3::REGULARIZED)
     .export_values()
     ;
 
-  bp::class_<as3::Alpha_status>("Alpha_status")
-    .def(bp::init<>())
+  py::class_<as3::Alpha_status>("Alpha_status")
+    .def(py::init<>())
     // Modifiers
     .def("set_is_Gabriel", &as3::Alpha_status::set_is_Gabriel)
     .def("set_is_on_chull", &as3::Alpha_status::set_is_on_chull)
@@ -358,9 +356,9 @@ void export_alpha_shape_3() {
     .def("alpha_max", &as3::Alpha_status::alpha_max)
     ;
 
-  bp::class_<as3::Alpha_iterator>("Alpha_iterator")
+  py::class_<as3::Alpha_iterator>("Alpha_iterator")
     .def("__iter__", &pass_through)
-    .def("__next__", &as3::next, bp::return_value_policy<bp::copy_const_reference>())
+    .def("__next__", &as3::next, py::return_value_policy<py::copy_const_reference>())
     ;
 
 #endif

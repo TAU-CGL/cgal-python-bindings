@@ -219,8 +219,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 
 # Add the library target
-# Always build a shared library
-add_library(CGALPY SHARED ${CGALPY_SRC_FILES})
+nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
 set(CGALPY_BUILD_DEPENDS CGALPY)
 
 set_target_properties(CGALPY PROPERTIES

@@ -10,14 +10,18 @@
 #ifndef CGALPY_EXPORT_AOSBASICTRAITS_HPP
 #define CGALPY_EXPORT_AOSBASICTRAITS_HPP
 
+#include <nanobind/nanobind.h>
+
 #include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
 #include "CGALPY/add_class_object.hpp"
+
+namespace py = nanobind;
 
 //
 template <typename T, typename C, typename Classes>
 void export_Compare_y_at_x_left_2(C c, Classes& classes, CGAL::Tag_true) {
   typedef typename T::Compare_y_at_x_left_2     Compare_y_at_x_left_2;
-  bp::scope traits_scope(c);
+  py::scope traits_scope(c);
   static const char compare_y_at_x_left_2[] = "Compare_y_at_x_left_2";
   if (add_class_object<Compare_y_at_x_left_2, compare_y_at_x_left_2, true>
     (traits_scope, classes.m_compare_y_at_x_left_2)) {
@@ -49,22 +53,22 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   typedef typename T::Compare_y_at_x_2          Compare_y_at_x_2;
   typedef typename T::Compare_y_at_x_right_2    Compare_y_at_x_right_2;
 
-  bp::scope traits_scope(c);
+  py::scope traits_scope(c);
   auto& classes = concepts.m_basic_traits_classes;
 
   // Point_2
   static const char point_2[] = "Point_2";
   if (add_class_object<Point_2, point_2>(traits_scope, classes.m_point_2)) {
-    classes.m_point_2->def(bp::init<>());
-    classes.m_point_2->def(bp::init<Point_2&>());
+    classes.m_point_2->def(py::init<>());
+    classes.m_point_2->def(py::init<Point_2&>());
   }
 
   // X_monotone_curve_2
   static const char x_monotone_curve_2[] = "X_monotone_curve_2";
   if (add_class_object<X_monotone_curve_2, x_monotone_curve_2>
     (traits_scope, classes.m_x_monotone_curve_2)) {
-    classes.m_x_monotone_curve_2->def(bp::init<>());
-    classes.m_x_monotone_curve_2->def(bp::init<X_monotone_curve_2&>());
+    classes.m_x_monotone_curve_2->def(py::init<>());
+    classes.m_x_monotone_curve_2->def(py::init<X_monotone_curve_2&>());
   }
 
   // Compare_x_2
@@ -122,8 +126,8 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
     classes.m_equal_2->def("__call__", static_cast<Equal2>(&Equal_2::operator()));
   }
 
-  c.def(bp::init<>())
-    .def(bp::init<T&>())
+  c.def(py::init<>())
+    .def(py::init<T&>())
     .def("compare_x_2_object", &T::compare_x_2_object)
     .def("compare_xy_2_object", &T::compare_xy_2_object)
     .def("construct_min_vertex_2_object", &T::construct_min_vertex_2_object)

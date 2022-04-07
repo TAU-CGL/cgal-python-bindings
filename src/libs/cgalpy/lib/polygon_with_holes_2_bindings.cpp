@@ -7,20 +7,18 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace pol2 {
 
-Polygon_with_holes_2* init_polygon_with_holes_2(Polygon_2& p, bp::list& lst) {
-  auto begin = bp::stl_input_iterator< Polygon_2 >(lst);
-  auto end = bp::stl_input_iterator< Polygon_2 >();
+Polygon_with_holes_2* init_polygon_with_holes_2(Polygon_2& p, py::list& lst) {
+  auto begin = py::stl_input_iterator< Polygon_2 >(lst);
+  auto end = py::stl_input_iterator< Polygon_2 >();
   return new Polygon_with_holes_2(p, begin, end);
 }
 
@@ -39,19 +37,19 @@ void export_polygon_with_holes_2() {
   typedef pol2::Polygon_2               Polygon_2;
   typedef pol2::Polygon_with_holes_2    Polygon_with_holes_2;
 
-  bp::class_<Polygon_with_holes_2>("Polygon_with_holes_2")
-    .def(bp::init<Polygon_2&>())
+  py::class_<Polygon_with_holes_2>("Polygon_with_holes_2")
+    .def(py::init<Polygon_2&>())
     .def("__init__", make_constructor(&pol2::init_polygon_with_holes_2))
     .def("is_unbounded", &Polygon_with_holes_2::is_unbounded)
     .def("outer_boundary", &pol2::outer_boundary,
-         bp::return_internal_reference<>())
-    .def("holes", bp::range<bp::return_internal_reference<>>(&pol2::holes_begin,
+         py::return_internal_reference<>())
+    .def("holes", py::range<py::return_internal_reference<>>(&pol2::holes_begin,
                                                              &pol2::holes_end))
     .def("number_of_holes", &Polygon_with_holes_2::number_of_holes)
     .def("bbox", &Polygon_with_holes_2::bbox)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
+    .def(py::self == py::self)
+    .def(py::self != py::self)
     ;
 }

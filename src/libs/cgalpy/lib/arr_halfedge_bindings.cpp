@@ -6,14 +6,12 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace aos2 {
 
@@ -34,8 +32,8 @@ void export_halfedge() {
   typedef aos2::Arrangement_2   Arr2;
   typedef Arr2::Halfedge        Halfedge;
 
-  bp::class_<Halfedge>("Halfedge")
-    .def(bp::init<>())
+  py::class_<Halfedge>("Halfedge")
+    .def(py::init<>())
     .def("direction", &Halfedge::direction)
     .def("source", &aos2::source, Reference_existing_object())
     .def("target", &aos2::target, Reference_existing_object())

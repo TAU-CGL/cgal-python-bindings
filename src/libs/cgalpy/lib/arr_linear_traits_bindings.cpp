@@ -7,13 +7,12 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
 #include <unordered_set>
 #include <any>
 
-#include <boost/python.hpp>
 #include <boost/assert.hpp>
+
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
@@ -28,7 +27,7 @@
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 typedef typename aos2::Geometry_traits_2::Curve_2 Curve_2;
 using overload = void (Curve_2::*)();
@@ -37,10 +36,10 @@ void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
-bp::object export_arr_linear_traits() {
+py::object export_arr_linear_traits() {
   typedef aos2::Geometry_traits_2       GT;
-  auto traits = bp::class_<GT>("Geometry_traits_2");
-  bp::scope traits_scope(traits);
+  auto traits = py::class_<GT>("Geometry_traits_2");
+  py::scope traits_scope(traits);
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
@@ -59,9 +58,9 @@ bp::object export_arr_linear_traits() {
 
   auto& cv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
   cv_co
-    .def(bp::init<Segment_2&>())
-    .def(bp::init<Ray_2&>())
-    .def(bp::init<Line_2&>())
+    .def(py::init<Segment_2&>())
+    .def(py::init<Ray_2&>())
+    .def(py::init<Line_2&>())
     .def("source", &Curve_2::source, Copy_const_reference())
     .def("target", &Curve_2::target, Copy_const_reference())
     .def("line", &Curve_2::line)
@@ -83,8 +82,8 @@ bp::object export_arr_linear_traits() {
     .def("is_in_y_range", &Curve_2::is_in_y_range)
     .def("is_degenerate", &Curve_2::is_degenerate)
     .def("bbox", &Curve_2::bbox)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
     ;
 
   return traits;

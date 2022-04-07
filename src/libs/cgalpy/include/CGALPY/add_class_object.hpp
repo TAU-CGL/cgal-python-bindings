@@ -10,28 +10,32 @@
 #ifndef CGALPY_ADD_CLASS_OBJECT_HPP
 #define CGALPY_ADD_CLASS_OBJECT_HPP
 
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
+
 template <typename Type, const char* Name, bool no_init>
 struct New_class_object {};
 
 template<typename Type, const char* Name>
 struct New_class_object<Type, Name, false> {
-  bp::class_<Type>* operator()() {
-    return new bp::class_<Type>(Name);
+  py::class_<Type>* operator()() {
+    return new py::class_<Type>(Name);
   }
 };
 
 template<typename Type, const char* Name>
 struct New_class_object<Type, Name, true> {
-  bp::class_<Type>* operator()() {
-    return new bp::class_<Type>(Name, bp::no_init);
+  py::class_<Type>* operator()() {
+    return new py::class_<Type>(Name, py::no_init);
   }
 };
 
 // Introduce a new class object
 // Return true iff the class object was not already registered
 template <typename Type, const char* Name, bool no_init=false>
-bool add_class_object(bp::scope& my_scope, bp::class_<Type>*& co) {
-  bp::handle<> tco(bp::objects::registered_class_object(bp::type_id<Type>()));
+bool add_class_object(py::scope& my_scope, py::class_<Type>*& co) {
+  py::handle<> tco(py::objects::registered_class_object(py::type_id<Type>()));
   if (tco.get() != 0) {
     my_scope.attr(Name) = tco;
     return false;

@@ -90,13 +90,13 @@ typedef typename GT::Curve_2                                    Curve_2;
 typedef typename GT::X_monotone_curve_2                         X_monotone_curve_2;
 
 typedef CGAL::Arr_vertex_base<GT::Point_2>                              Vb;
-typedef Vertex_extended<is_vertex_extended(), Vb, bp::object>::type     V;
+typedef Vertex_extended<is_vertex_extended(), Vb, py::object>::type     V;
 
 typedef Halfedge_gps<boolean_set_operations_2_bindings(), GT>::type     Hb;
-typedef Halfedge_extended<is_halfedge_extended(), Hb, bp::object>::type H;
+typedef Halfedge_extended<is_halfedge_extended(), Hb, py::object>::type H;
 
 typedef Face_gps<boolean_set_operations_2_bindings()>::type             Fb;
-typedef Face_extended<is_face_extended(), Fb, bp::object>::type         F;
+typedef Face_extended<is_face_extended(), Fb, py::object>::type         F;
 
 typedef CGAL::Arr_dcel_base<V, H, F>                        Dcel;
 typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos                Arrangement_2;
