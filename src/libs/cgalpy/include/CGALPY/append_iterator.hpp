@@ -10,19 +10,19 @@
 #ifndef CGALPY_APPEND_ITTERATOR_HPP
 #define CGALPY_APPEND_ITTERATOR_HPP
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 // append_iterator is similar to back_insert_iterator.
 // Instead of applying 'container.push_back(element)' it applies
 // lst.append(element), where lst is the bound Python list.
 class append_iterator {
 private:
-  bp::list& m_lst;
+  py::list& m_lst;
 
 public:
-  append_iterator(bp::list& lst) : m_lst(lst) {}
+  append_iterator(py::list& lst) : m_lst(lst) {}
 
   template <typename T>
   const T& operator=(const T& t) const { m_lst.append(t); return t; }

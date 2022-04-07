@@ -7,15 +7,15 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 void export_arr_Bezier_traits() {
   typedef aos2::Geometry_traits_2       GT;
-  bp::scope traits_scope = bp::class_<GT>("Traits")
-    .def(bp::init<>())
+  py::scope traits_scope = py::class_<GT>("Traits")
+    .def(py::init<>())
     ;
 }

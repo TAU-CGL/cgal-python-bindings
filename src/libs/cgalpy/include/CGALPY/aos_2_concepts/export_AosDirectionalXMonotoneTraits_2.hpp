@@ -10,8 +10,12 @@
 #ifndef CGALPY_EXPORT_AOSDIRECTIONALXMONOTONETRAITS_2_HPP
 #define CGALPY_EXPORT_AOSDIRECTIONALXMONOTONETRAITS_2_HPP
 
+#include <nanobind/nanobind.h>
+
 #include "CGALPY/aos_2_concepts/export_AosXMonotoneTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
+
+namespace py = nanobind;
 
 template <typename T, typename RVP, typename C, typename Concepts>
 void export_AosDirectionalXMonotoneTraits_2(C c, Concepts& concepts) {
@@ -26,11 +30,11 @@ void export_AosDirectionalXMonotoneTraits_2(C c, Concepts& concepts) {
   auto& classes = concepts.m_directional_x_monotone_traits_classes;
 
   classes.m_compare_endpoints_xy_2 =
-    new bp::class_<Compare_endpoints_xy_2>("Compare_endpoints_xy_2", bp::no_init);
+    new py::class_<Compare_endpoints_xy_2>("Compare_endpoints_xy_2", py::no_init);
   classes.m_compare_endpoints_xy_2->def("__call__", &T::Compare_endpoints_xy_2::operator());
 
   classes.m_construct_opposite_2 =
-    new bp::class_<Construct_opposite_2>("Construct_opposite_2", bp::no_init);
+    new py::class_<Construct_opposite_2>("Construct_opposite_2", py::no_init);
   classes.m_construct_opposite_2->def("__call__", &T::Construct_opposite_2::operator());
 
   c.def("compare_endpoints_xy_2_object", &T::compare_endpoints_xy_2_object)

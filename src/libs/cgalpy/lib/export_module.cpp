@@ -7,13 +7,12 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+#include <nanobind/nanobind.h>
 
-#include <boost/python.hpp>
 #include "CGALPY/arrangement_on_surface_2_config.hpp"
 #include "CGALPY/config.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 void export_kernel();
 void export_kernel_d();
@@ -39,13 +38,13 @@ void export_alpha_shape_3();
 
 #define SET_SCOPE(x)  \
 std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME))+std::string(".")+std::string(x); \
-bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str())))); \
-bp::scope().attr(x) = module; \
-bp::scope module_scope = module;
+py::object module(py::handle<>(py::borrowed(PyImport_AddModule(module_name.c_str())))); \
+py::scope().attr(x) = module; \
+py::scope module_scope = module;
 
 BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
-  bp::object package = bp::scope();
+  py::object package = py::scope();
   package.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
 #ifdef CGALPY_KERNEL_BINDINGS

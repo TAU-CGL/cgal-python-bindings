@@ -7,9 +7,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include <CGAL/Cartesian_d.h>
 #include <CGAL/Kd_tree.h>
@@ -22,10 +20,10 @@
 
 #include "CGALPY/spatial_searching_config.hpp"
 #include "CGALPY/kernel_d_types.hpp"
-#include "CGALPY/General_distance_python.hpp"
+#include "CGALPY/General_distance_nanobind.h"
 #include "CGALPY/append_iterator.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 typedef CGAL::Search_traits_d<Kernel_d, Dimension_tag>  Search_traits_d;
 //typedef CGAL::Orthogonal_incremental_neighbor_search<Search_traits_d> Orthogonal_incremental_neighbor_search;
@@ -50,39 +48,39 @@ template <typename T>
 static T* init_tree() { return new T(); }
 
 template <typename T>
-static T* init_tree_from_list(const bp::list& lst) {
-  auto begin = bp::stl_input_iterator<typename T::Point_d >(lst);
-  auto end = bp::stl_input_iterator<typename T::Point_d >();
+static T* init_tree_from_list(const py::list& lst) {
+  auto begin = py::stl_input_iterator<typename T::Point_d >(lst);
+  auto end = py::stl_input_iterator<typename T::Point_d >();
   return new T(begin, end);
 }
 
 template <typename T>
-void tree_insert(T& tree, const bp::list& lst) {
-  //copying into a vector because of an apparent bug with bp::stl_input_iterator
-  auto begin = bp::stl_input_iterator<typename T::Point_d >(lst);
-  auto end = bp::stl_input_iterator<typename T::Point_d >();
+void tree_insert(T& tree, const py::list& lst) {
+  //copying into a vector because of an apparent bug with py::stl_input_iterator
+  auto begin = py::stl_input_iterator<typename T::Point_d >(lst);
+  auto end = py::stl_input_iterator<typename T::Point_d >();
   auto v = std::vector<typename T::Point_d>(begin, end);
   tree.insert(v.begin(), v.end());
 }
 
 template <typename T, typename FQI>
-bp::list tree_search(T& tree, FQI& q) {
-  bp::list lst;
+py::list tree_search(T& tree, FQI& q) {
+  py::list lst;
   tree.search(append_iterator(lst), q);
   return lst;
 }
 
 template<typename T>
-bp::list points(const T& tree) {
-  bp::list lst;
+py::list points(const T& tree) {
+  py::list lst;
   for (auto p : tree) lst.append(p);
   return lst;
 }
 
 template <typename T>
 void bind_kd_tree(const char* python_name) {
-  bp::class_<T, boost::noncopyable>(python_name)
-    .def(bp::init<>())
+  py::class_<T, boost::noncopyable>(python_name)
+    .def(py::init<>())
     .def("__init__", make_constructor(&init_tree_from_list<T>))
     .def("insert", static_cast<void (T::*) (const typename T::Point_d&)>(&T::insert))
     .def("insert", &tree_insert<T>)
@@ -99,10 +97,10 @@ void bind_kd_tree(const char* python_name) {
 }
 
 template <typename T>
-bp::list k_neighbors(T& neighbor_search) {
-  bp::list lst;
+py::list k_neighbors(T& neighbor_search) {
+  py::list lst;
   for (auto it = neighbor_search.begin(); it != neighbor_search.end(); ++it)
-    lst.append(bp::make_tuple(it->first, it->second));
+    lst.append(py::make_tuple(it->first, it->second));
   return lst;
 }
 
@@ -116,28 +114,28 @@ void bind_neighbor_search(const char* python_name) {
 }
 
 void export_spatial_searching() {
-  const bp::type_info info = bp::type_id<Point_d>();
-  const bp::converter::registration* reg = bp::converter::registry::query(info);
+  const py::type_info info = py::type_id<Point_d>();
+  const py::converter::registration* reg = py::converter::registry::query(info);
   BOOST_ASSERT((reg != nullptr) && ((*reg).m_to_python != nullptr));
-  bp::scope().attr("Point_d") = bp::handle<>(reg->m_class_object);
+  py::scope().attr("Point_d") = py::handle<>(reg->m_class_object);
 
-  bp::class_<Fuzzy_iso_box>("Fuzzy_iso_box")
-    .def(bp::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
-    .def(bp::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT_d>())
+  py::class_<Fuzzy_iso_box>("Fuzzy_iso_box")
+    .def(py::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
+    .def(py::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT_d>())
     .def("contains", &Fuzzy_iso_box::contains)
     .def("inner_range_intersects", &Fuzzy_iso_box::inner_range_intersects)
     .def("outer_range_contains", &Fuzzy_iso_box::outer_range_contains)
     ;
 
-  bp::class_<Fuzzy_sphere>("Fuzzy_sphere")
-    .def(bp::init<Point_d, FT_d, FT_d>())
+  py::class_<Fuzzy_sphere>("Fuzzy_sphere")
+    .def(py::init<Point_d, FT_d, FT_d>())
     .def("contains", &Fuzzy_sphere::contains)
     .def("inner_range_intersects", &Fuzzy_sphere::inner_range_intersects)
     .def("outer_range_intersects", &Fuzzy_sphere::outer_range_contains)
     ;
 
-  bp::class_<Kd_tree_rectangle>("Kd_tree_rectangle")
-    .def(bp::init<int>())
+  py::class_<Kd_tree_rectangle>("Kd_tree_rectangle")
+    .def(py::init<int>())
     .def("min_coord", &Kd_tree_rectangle::min_coord)
     .def("max_coord", &Kd_tree_rectangle::max_coord)
     .def("set_upper_bound", &Kd_tree_rectangle::set_upper_bound)
@@ -150,8 +148,8 @@ void export_spatial_searching() {
 
   bind_kd_tree<Kd_tree>("Kd_tree");
 
-  bp::class_<Distance_python>("Distance_python")
-    .def(bp::init<bp::object, bp::object, bp::object, bp::object, bp::object>())
+  py::class_<Distance_python>("Distance_python")
+    .def(py::init<py::object, py::object, py::object, py::object, py::object>())
     .def<FT_d (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)const>("transformed_distance", &Distance_python::transformed_distance)
     .def("min_distance_to_rectangle", &Distance_python::min_distance_to_rectangle)
     .def("max_distance_to_rectangle", &Distance_python::max_distance_to_rectangle)
@@ -159,8 +157,8 @@ void export_spatial_searching() {
     .def("inverse_of_transformed_distance", &Distance_python::inverse_of_transformed_distance)
     ;
 
-  bp::class_<Euclidean_distance>("Euclidean_distance")
-    .def(bp::init<>())
+  py::class_<Euclidean_distance>("Euclidean_distance")
+    .def(py::init<>())
     .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Euclidean_distance::Point_d&) const>("transformed_distance", &Euclidean_distance::transformed_distance)
     .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("min_distance_to_rectangle", &Euclidean_distance::min_distance_to_rectangle)
     .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("max_distance_to_rectangle", &Euclidean_distance::max_distance_to_rectangle)
@@ -172,5 +170,5 @@ void export_spatial_searching() {
 
   bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
 
-  bp::def("get_spatial_searching_dimension", &get_spatial_searching_dimension);
+  py::def("get_spatial_searching_dimension", &get_spatial_searching_dimension);
 }

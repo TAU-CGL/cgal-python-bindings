@@ -6,31 +6,29 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace tri3 {
 
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 
-tri3::Triangulation_3* dt3_init(bp::list& lst) {
-  auto begin = bp::stl_input_iterator<tri3::Point>(lst);
-  auto end = bp::stl_input_iterator<tri3::Point>();
+tri3::Triangulation_3* dt3_init(py::list& lst) {
+  auto begin = py::stl_input_iterator<tri3::Point>(lst);
+  auto end = py::stl_input_iterator<tri3::Point>();
   return new tri3::Triangulation_3(begin, end);
 }
 
-std::ptrdiff_t insert_points(tri3::Triangulation_3& dt, bp::list& lst) {
+std::ptrdiff_t insert_points(tri3::Triangulation_3& dt, py::list& lst) {
   if (! lst) return 0;
-  if (! bp::extract<tri3::Point>(lst[0]).check()) return 0;
-  auto begin = bp::stl_input_iterator<tri3::Point>(lst);
-  auto end = bp::stl_input_iterator<tri3::Point>();
+  if (! py::extract<tri3::Point>(lst[0]).check()) return 0;
+  auto begin = py::stl_input_iterator<tri3::Point>(lst);
+  auto end = py::stl_input_iterator<tri3::Point>();
   return dt.insert(begin, end);
 }
 
@@ -100,11 +98,11 @@ void export_triangulation_3() {
   tri3::Vertex_handle(Tri3::*nearest_vertex)(const tri3::Point&, tri3::Cell_handle) const =
     &Tri3::nearest_vertex;
 
-  bp::scope tri3_scope = bp::class_<Tri3>("Triangulation_3")
-    .def(bp::init<>())
-    .def(bp::init<const tri3::Traits&>())
+  py::scope tri3_scope = py::class_<Tri3>("Triangulation_3")
+    .def(py::init<>())
+    .def(py::init<const tri3::Traits&>())
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
-    .def("__init__", bp::make_constructor(&tri3::dt3_init))
+    .def("__init__", py::make_constructor(&tri3::dt3_init))
 #endif
     // Insertion
     .def("insert", insert1)
@@ -146,7 +144,7 @@ void export_triangulation_3() {
 
   // Triangulation_data_structure
   // Lock_data_structure
-  bp::enum_<tri3::Locate_type>("Locate_type")
+  py::enum_<tri3::Locate_type>("Locate_type")
     .value("VERTEX", Tri3::VERTEX)
     .value("EDGE", Tri3::EDGE)
     .value("FACET", Tri3::FACET)
@@ -174,11 +172,11 @@ void export_triangulation_3() {
   add_attr<tri3::Triangle>("Triangle", tri3_scope);
   add_attr<tri3::Tetrahedron>("Tetrahedron", tri3_scope);
 
-  bp::class_<tri3::Vertex>("Vertex")
-    .def(bp::init<>())
+  py::class_<tri3::Vertex>("Vertex")
+    .def(py::init<>())
     // Access Functions
     .def<tri3::Cell_handle(tri3::Vertex::*)()const>("cell", &tri3::Vertex::cell)
-    .def<const tri3::Point&(tri3::Vertex::*)() const>("point", &tri3::Vertex::point, bp::return_internal_reference<>())
+    .def<const tri3::Point&(tri3::Vertex::*)() const>("point", &tri3::Vertex::point, py::return_internal_reference<>())
     // Setting
     .def("set_cell", &tri3::Vertex::set_cell)
     .def("set_point", &tri3::Vertex::set_point)
@@ -195,8 +193,8 @@ void export_triangulation_3() {
                                    tri3::Cell_handle, tri3::Cell_handle) =
     &tri3::Cell::set_neighbors;
 
-  bp::class_<tri3::Cell>("Cell")
-    .def(bp::init<>())
+  py::class_<tri3::Cell>("Cell")
+    .def(py::init<>())
     // Access Functions
     .def("vertex", &tri3::Cell::vertex)
     .def<int(tri3::Cell::*)(tri3::Vertex_handle) const>("index", &tri3::Cell::index)
@@ -217,24 +215,24 @@ void export_triangulation_3() {
     .def("is_valid", &tri3::cell_is_valid3)
     ;
 
-  bp::class_<tri3::Facet>("Facet")
+  py::class_<tri3::Facet>("Facet")
     .def_readwrite("first", &tri3::Facet::first)
     .def_readwrite("second", &tri3::Facet::second)
     ;
 
-  bp::class_<tri3::Edge>("Edge")
+  py::class_<tri3::Edge>("Edge")
     .def_readwrite("first", &tri3::Edge::first)
     .def_readwrite("second", &tri3::Edge::second)
     .def_readwrite("third", &tri3::Edge::third)
     ;
 
-  bp::class_<tri3::Vertex_handle>("Vertex_handle")
-    .def(bp::init<>())
+  py::class_<tri3::Vertex_handle>("Vertex_handle")
+    .def(py::init<>())
     .def("value", &tri3::value<tri3::Vertex_handle>, Reference_existing_object())
     ;
 
-  bp::class_<tri3::Cell_handle>("Cell_handle")
-    .def(bp::init<>())
+  py::class_<tri3::Cell_handle>("Cell_handle")
+    .def(py::init<>())
     .def("value", &tri3::value<tri3::Cell_handle>, Reference_existing_object())
     ;
 

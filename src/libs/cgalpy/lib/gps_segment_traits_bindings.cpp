@@ -7,7 +7,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#include <nanobind/nanobind.h>
 
 #include <CGAL/Gps_segment_traits_2.h>
 #include <CGAL/Polygon_set_2.h>
@@ -16,12 +16,12 @@
 #include "CGALPY/gps_2_concepts/export_GpsTraits_2.hpp"
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
-bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits();
-bp::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_segment_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits();
 
-bp::object export_gps_segment_traits() {
+py::object export_gps_segment_traits() {
   typedef bso2::Geometry_traits_2       GT;
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
@@ -32,7 +32,7 @@ bp::object export_gps_segment_traits() {
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-  bp::scope traits_scope(traits);
+  py::scope traits_scope(traits);
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;
   } concepts;

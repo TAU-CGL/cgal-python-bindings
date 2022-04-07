@@ -44,13 +44,13 @@ struct Gps_traits_classes {
     if (m_is_unbounded) delete m_is_unbounded;
   }
 
-  bp::class_<Polygon_2>* m_polygon_2;
-  bp::class_<Polygon_with_holes_2>* m_polygon_with_holes_2;
-  bp::class_<Construct_polygon_2>* m_construct_polygon_2;
-  bp::class_<Construct_general_polygon_with_holes_2>* m_construct_general_polygon_with_holes_2;
-  bp::class_<Construct_outer_boundary>* m_construct_outer_boundary;
-  bp::class_<Construct_holes>* m_construct_holes;
-  bp::class_<Is_unbounded>* m_is_unbounded;
+  py::class_<Polygon_2>* m_polygon_2;
+  py::class_<Polygon_with_holes_2>* m_polygon_with_holes_2;
+  py::class_<Construct_polygon_2>* m_construct_polygon_2;
+  py::class_<Construct_general_polygon_with_holes_2>* m_construct_general_polygon_with_holes_2;
+  py::class_<Construct_outer_boundary>* m_construct_outer_boundary;
+  py::class_<Construct_holes>* m_construct_holes;
+  py::class_<Is_unbounded>* m_is_unbounded;
 };
 
 #endif

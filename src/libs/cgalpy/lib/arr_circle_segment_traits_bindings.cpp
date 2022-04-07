@@ -7,9 +7,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
@@ -19,22 +17,22 @@
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 typedef typename aos2::Geometry_traits_2::CoordNT CoordNT;
 
 static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 
-bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
+py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
   typedef aos2::Geometry_traits_2       GT;
 
-  bp::class_<CoordNT>("CoordNT")
-    .def(bp::init<>())
-    .def(bp::init<CoordNT&>())
-    .def(bp::init<int&>())
-    .def(bp::init<CoordNT::NT&>())
-    .def(bp::init<int, int, int>())
-    .def(bp::init< CoordNT::NT, CoordNT::NT, CoordNT::ROOT>())
+  py::class_<CoordNT>("CoordNT")
+    .def(py::init<>())
+    .def(py::init<CoordNT&>())
+    .def(py::init<int&>())
+    .def(py::init<CoordNT::NT&>())
+    .def(py::init<int, int, int>())
+    .def(py::init< CoordNT::NT, CoordNT::NT, CoordNT::ROOT>())
     .def<FT& (CoordNT::*)()>("a0", &CoordNT::a0, Copy_non_const_reference())
     .def<FT& (CoordNT::*)()>("a1", &CoordNT::a1, Copy_non_const_reference())
     .def<const FT& (CoordNT::*)() const>("root", &CoordNT::root, Copy_const_reference())
@@ -45,28 +43,28 @@ bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
     .def("abs", &CoordNT::abs)
     .def("to_double", &coordNT_to_double)
     //.def("compare", &CoordNT::compare)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self + bp::self)
-    .def(bp::self += bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self -= bp::self)
-    .def(bp::self * bp::self)
-    .def(bp::self *= bp::self)
-    .def(bp::self / bp::self)
-    .def(bp::self /= bp::self)
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
+    .def(py::self == py::self)
+    .def(py::self != py::self)
+    .def(py::self != py::self)
+    .def(py::self < py::self)
+    .def(py::self > py::self)
+    .def(py::self <= py::self)
+    .def(py::self >= py::self)
+    .def(py::self + py::self)
+    .def(py::self += py::self)
+    .def(py::self - py::self)
+    .def(py::self -= py::self)
+    .def(py::self * py::self)
+    .def(py::self *= py::self)
+    .def(py::self / py::self)
+    .def(py::self /= py::self)
     ;
 
-  auto traits = bp::class_<GT>("Geometry_traits_2")
-    .def(bp::init<>());
-  bp::scope traits_scope(traits);
+  auto traits = py::class_<GT>("Geometry_traits_2")
+    .def(py::init<>());
+  py::scope traits_scope(traits);
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
@@ -79,23 +77,23 @@ bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
 
   auto& p2_co = *(concepts.m_basic_traits_classes.m_point_2);
   p2_co
-    .def(bp::init<FT&, FT&>())
-    .def(bp::init<CoordNT&, CoordNT&>())
-    .def(bp::init<double, double>())
+    .def(py::init<FT&, FT&>())
+    .def(py::init<CoordNT&, CoordNT&>())
+    .def(py::init<double, double>())
     .def("x", &aos2::Point_2::x, Copy_const_reference())
     .def("y", &aos2::Point_2::y, Copy_const_reference())
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .setattr("__hash__", bp::object());
+    .def(py::self == py::self)
+    .def(py::self != py::self)
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
+    .setattr("__hash__", py::object());
     ;
 
   auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
   xcv_co
-    .def(bp::init<Point_2&, Point_2&>())
-    .def(bp::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
-    .def(bp::init<Circle_2&, aos2::Point_2&, aos2::Point_2&, CGAL::Orientation>())
+    .def(py::init<Point_2&, Point_2&>())
+    .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
+    .def(py::init<Circle_2&, aos2::Point_2&, aos2::Point_2&, CGAL::Orientation>())
     .def("source", &aos2::X_monotone_curve_2::source, Copy_const_reference())
     .def("target", &aos2::X_monotone_curve_2::target, Copy_const_reference())
     .def("is_directed_right", &aos2::X_monotone_curve_2::is_directed_right)
@@ -107,20 +105,20 @@ bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
     .def("supporting_line", &aos2::X_monotone_curve_2::supporting_line)
     .def("supporting_circle", &aos2::X_monotone_curve_2::supporting_circle)
     .def("bbox", &aos2::X_monotone_curve_2::bbox)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
     ;
 
   auto& cv_co = *(concepts.m_traits_classes.m_curve_2);
   cv_co
-    .def(bp::init<Segment_2&>())
-    .def(bp::init<Point_2&, Point_2&>())
-    .def(bp::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
-    .def(bp::init<Circle_2&>())
-    .def(bp::init<Point_2&, FT&, CGAL::Orientation>())
-    .def(bp::init<Circle_2&, aos2::Point_2&, aos2::Point_2&>())
-    .def(bp::init<Point_2&, FT&, CGAL::Orientation, aos2::Point_2&, aos2::Point_2&>())
-    .def(bp::init<Point_2&, Point_2&, Point_2&>())
+    .def(py::init<Segment_2&>())
+    .def(py::init<Point_2&, Point_2&>())
+    .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
+    .def(py::init<Circle_2&>())
+    .def(py::init<Point_2&, FT&, CGAL::Orientation>())
+    .def(py::init<Circle_2&, aos2::Point_2&, aos2::Point_2&>())
+    .def(py::init<Point_2&, FT&, CGAL::Orientation, aos2::Point_2&, aos2::Point_2&>())
+    .def(py::init<Point_2&, Point_2&, Point_2&>())
     .def("is_full", &aos2::Curve_2::is_full)
     .def("source", &aos2::Curve_2::source, Copy_const_reference())
     .def("target", &aos2::Curve_2::target, Copy_const_reference())

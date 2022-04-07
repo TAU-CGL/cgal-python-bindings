@@ -7,13 +7,11 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/kernel_types.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 /// Handle do_intersect
 ///@{
@@ -26,7 +24,7 @@ typedef typename Kernel::Intersect_2                               Intersect_2;
 template<typename T1, typename T2>
 void bind_do_intersect_pair(decltype(CGAL::do_intersect<Kernel>(T1(), T2())))
 {
-  bp::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
+  py::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
 }
 
 template<typename, typename>
@@ -60,23 +58,23 @@ void bind_do_intersect(T1 arg, Ts... args) {
 
 /// Handle intersections
 ///@{
-class Intersection_visitor : public boost::static_visitor<bp::object> {
+class Intersection_visitor : public boost::static_visitor<py::object> {
 public:
   template<typename T>
-  bp::object operator()(T& operand) const { return bp::object(operand); }
+  py::object operator()(T& operand) const { return py::object(operand); }
 
   // Overload for vector
-  bp::object operator()(std::vector<Point_2>& operand) const {
-    bp::list lst;
+  py::object operator()(std::vector<Point_2>& operand) const {
+    py::list lst;
     for (const auto& p : operand) lst.append(p);
     return lst;
   }
 };
 
 template <typename T1, typename T2>
-bp::object cgalpy_intersection(const T1& t1, const T2& t2) {
+py::object cgalpy_intersection(const T1& t1, const T2& t2) {
   auto result = CGAL::intersection<Kernel>(t1, t2);
-  if (! result) return bp::object();    // no intersection
+  if (! result) return py::object();    // no intersection
   return boost::apply_visitor(Intersection_visitor(), *result);
 }
 
@@ -91,7 +89,7 @@ bp::object cgalpy_intersection(const T1& t1, const T2& t2) {
 template <typename T1, typename T2,
           typename = decltype(CGAL::intersection<Kernel>(T1(), T2()))>
 void bind_intersection_pair(bool) {
-  bp::def("intersection", &cgalpy_intersection<T1, T2>);
+  py::def("intersection", &cgalpy_intersection<T1, T2>);
 }
 
 template<typename, typename>

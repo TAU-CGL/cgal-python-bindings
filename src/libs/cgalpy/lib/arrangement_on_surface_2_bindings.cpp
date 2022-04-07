@@ -7,9 +7,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 #include <boost/static_assert.hpp>
 #include <boost/python/stl_iterator.hpp>
 
@@ -29,29 +27,29 @@ void export_vertex();
 void export_halfedge();
 void export_face();
 
-bp::class_<aos2::Geometry_traits_2> export_arr_linear_traits();
-bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits();
-bp::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits();
-bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits();
-bp::class_<aos2::Geometry_traits_2> export_arr_conic_traits();
-bp::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits();
-bp::class_<aos2::Geometry_traits_2> export_arr_geodesic_arc_on_sphere_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_linear_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_segment_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_conic_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_geodesic_arc_on_sphere_traits();
 
-bp::object export_gps_segment_traits();
-bp::object export_gps_circle_segment_traits();
-bp::object export_gps_traits();
+py::object export_gps_segment_traits();
+py::object export_gps_circle_segment_traits();
+py::object export_gps_traits();
 
 namespace aos2 {
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 typedef typename boost::variant<Vertex_const_handle, Halfedge_const_handle,
                                 Face_const_handle>      variant;
 
 typedef Arr_overlay_function_traits<Arrangement_2, Arrangement_2, Arrangement_2,
-                                    bp::object> Arr_overlay_function_traits;
+                                    py::object> Arr_overlay_function_traits;
 typedef Arr_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
-                                    bp::object> Arr_overlay_traits;
+                                    py::object> Arr_overlay_traits;
 
 // Free functions
 Vertex& insert_point_default(Arrangement_2& arr, Point_2& p)
@@ -64,21 +62,21 @@ Vertex& insert_point(Arrangement_2& arr, Point_2& p, PointLocation& pl)
 template<typename CurveType>
 void insert_curve(Arrangement_2& arr, CurveType& c) { CGAL::insert(arr, c); }
 
-void insert_curves(Arrangement_2& arr, bp::list& lst) {
+void insert_curves(Arrangement_2& arr, py::list& lst) {
   if (!lst) return;
-  if (bp::extract<X_monotone_curve_2>(lst[0]).check()) {
+  if (py::extract<X_monotone_curve_2>(lst[0]).check()) {
     // copying into a vector because of an apparent bug with
-    // bp::stl_input_iterator
-    auto begin = bp::stl_input_iterator< X_monotone_curve_2 >(lst);
-    auto end = bp::stl_input_iterator< X_monotone_curve_2 >();
+    // py::stl_input_iterator
+    auto begin = py::stl_input_iterator< X_monotone_curve_2 >(lst);
+    auto end = py::stl_input_iterator< X_monotone_curve_2 >();
     auto v = std::vector<X_monotone_curve_2>(begin, end);
     CGAL::insert(arr, v.begin(), v.end());
   }
-  else if (bp::extract<Curve_2>(lst[0]).check()) {
+  else if (py::extract<Curve_2>(lst[0]).check()) {
     // copying into a vector because of an apparent bug with
-    // bp::stl_input_iterator
-    auto begin = bp::stl_input_iterator< Curve_2 >(lst);
-    auto end = bp::stl_input_iterator< Curve_2 >();
+    // py::stl_input_iterator
+    auto begin = py::stl_input_iterator< Curve_2 >(lst);
+    auto end = py::stl_input_iterator< Curve_2 >();
     auto v = std::vector<Curve_2>(begin, end);
     CGAL::insert(arr, v.begin(), v.end());
   }
@@ -93,11 +91,11 @@ Halfedge& insert_non_intersecting_curve(Arrangement_2& arr,
                                         X_monotone_curve_2& c, PointLocation& pl)
 { return *(CGAL::insert_non_intersecting_curve(arr, c, pl)); }
 
-void insert_non_intersecting_curves(Arrangement_2& arr, bp::list& lst) {
+void insert_non_intersecting_curves(Arrangement_2& arr, py::list& lst) {
   // copying into a vector because of an apparent bug with
-  // bp::stl_input_iterator
-  auto begin = bp::stl_input_iterator< X_monotone_curve_2 >(lst);
-  auto end = bp::stl_input_iterator< X_monotone_curve_2 >();
+  // py::stl_input_iterator
+  auto begin = py::stl_input_iterator< X_monotone_curve_2 >(lst);
+  auto end = py::stl_input_iterator< X_monotone_curve_2 >();
   auto v = std::vector<X_monotone_curve_2>(begin, end);
   CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
 }
@@ -129,18 +127,18 @@ bool remove_vertex_free(Arrangement_2& arr, Vertex& v) {
 
 template<typename T1, typename T2>
 void decompose_helper2(const Vertex& vertex, const T1& below,
-                       const T2& above, bp::list& lst) {
-  bp::tuple inner = bp::make_tuple(below, above);
-  bp::tuple outer = bp::make_tuple(vertex, inner);
+                       const T2& above, py::list& lst) {
+  py::tuple inner = py::make_tuple(below, above);
+  py::tuple outer = py::make_tuple(vertex, inner);
   lst.append(outer);
 }
 
 template<typename T1>
 void decompose_helper1(const Vertex& vertex, const T1& below,
-                       const boost::optional<variant>& above, bp::list& lst) {
+                       const boost::optional<variant>& above, py::list& lst) {
   if (! above) {
-    bp::object none;
-    decompose_helper2<T1, bp::object>(vertex, below, none, lst);
+    py::object none;
+    decompose_helper2<T1, py::object>(vertex, below, none, lst);
     return;
   }
   auto var = (above.get());
@@ -159,14 +157,14 @@ typedef std::pair<Arrangement_2::Vertex_const_handle,
                   std::pair<boost::optional<variant>,
                             boost::optional<variant>>>        Decompose_result;
 
-void decompose_helper(const Decompose_result& res, bp::list& lst) {
+void decompose_helper(const Decompose_result& res, py::list& lst) {
   const Vertex& vertex = *(res.first);
   const boost::optional<variant>& below = res.second.first;
   const boost::optional<variant>& above = res.second.second;
 
   if (! below) {
-    bp::object none;
-    decompose_helper1<bp::object>(vertex, none, above, lst);
+    py::object none;
+    decompose_helper1<py::object>(vertex, none, above, lst);
     return;
   }
   auto var = (below.get());
@@ -181,8 +179,8 @@ void decompose_helper(const Decompose_result& res, bp::list& lst) {
   }
 }
 
-bp::list decompose(Arrangement_2& arr) {
-  bp::list lst;
+py::list decompose(Arrangement_2& arr) {
+  py::list lst;
   auto op = [&] (const Decompose_result& res) mutable
             { decompose_helper(res, lst); };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
@@ -192,16 +190,16 @@ bp::list decompose(Arrangement_2& arr) {
   return lst;
 }
 
-class Zone_object_visitor : public boost::static_visitor<bp::object> {
+class Zone_object_visitor : public boost::static_visitor<py::object> {
 public:
   template<typename T>
-    bp::object operator()(T& operand) const {
-      return bp::object(*operand);
+    py::object operator()(T& operand) const {
+      return py::object(*operand);
   }
 };
 
-bp::list zone_default(Arrangement_2& arr, X_monotone_curve_2& c) {
-  bp::list lst;
+py::list zone_default(Arrangement_2& arr, X_monotone_curve_2& c) {
+  py::list lst;
   auto op =
     [&] (const variant& o) mutable
     { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
@@ -213,8 +211,8 @@ bp::list zone_default(Arrangement_2& arr, X_monotone_curve_2& c) {
 }
 
 template <typename PointLocation>
-bp::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
-  bp::list lst;
+py::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
+  py::list lst;
   auto op =
     [&] (const variant& o) mutable
     { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
@@ -348,18 +346,18 @@ void assign(Aos& arr, Aos& input_arr) { arr.assign(input_arr); }
 
 // Export common members of Aos types
 template <typename Aos>
-void export_aos(bp::class_<Aos>& co) {
-  typedef bp::return_internal_reference<>                 RIR;
+void export_aos(py::class_<Aos>& co) {
+  typedef py::return_internal_reference<>                 RIR;
 
   co
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-    .def(bp::init<>())
-    .def(bp::init<Aos&>())
-    .def("halfedges", bp::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>))
-    .def("vertices", bp::range<RIR>(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>))
-    .def("faces", bp::range<RIR>(&aos2::faces_begin<Aos>, &aos2::faces_end<Aos>))
-    .def("edges", bp::range<RIR>(&aos2::edges_begin<Aos>, &aos2::edges_end<Aos>))
-    .def("unbounded_faces", bp::range<RIR>(&aos2::unbounded_faces_begin<Aos>, &aos2::unbounded_faces_end<Aos>))
+    .def(py::init<>())
+    .def(py::init<Aos&>())
+    .def("halfedges", py::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>))
+    .def("vertices", py::range<RIR>(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>))
+    .def("faces", py::range<RIR>(&aos2::faces_begin<Aos>, &aos2::faces_end<Aos>))
+    .def("edges", py::range<RIR>(&aos2::edges_begin<Aos>, &aos2::edges_end<Aos>))
+    .def("unbounded_faces", py::range<RIR>(&aos2::unbounded_faces_begin<Aos>, &aos2::unbounded_faces_end<Aos>))
     .def("fictitious_face", &aos2::fictitious_face<Aos>, RIR())
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex<Aos>, RIR())
     .def("insert_from_right_vertex", &aos2::insert_from_right_vertex<Aos>, RIR())
@@ -388,8 +386,8 @@ void export_aos(bp::class_<Aos>& co) {
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
 #endif
 
     ;
@@ -398,10 +396,10 @@ void export_aos(bp::class_<Aos>& co) {
 // Overlay traits
 template <bool VertexExtended, bool HalfedgeExtended, bool FaceExtended>
 void bind_overlay_function_traits() {
-  bp::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
-    .def(bp::init<>())
-    .def(bp::init<bp::object, bp::object, bp::object, bp::object, bp::object,
-                  bp::object, bp::object, bp::object, bp::object, bp::object>())
+  py::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
+    .def(py::init<>())
+    .def(py::init<py::object, py::object, py::object, py::object, py::object,
+                  py::object, py::object, py::object, py::object, py::object>())
     .def("set_vv_v", &aos2::Arr_overlay_function_traits::set_vv_v)
     .def("set_ve_v", &aos2::Arr_overlay_function_traits::set_ve_v)
     .def("set_vf_v", &aos2::Arr_overlay_function_traits::set_vf_v)
@@ -417,15 +415,15 @@ void bind_overlay_function_traits() {
 
 template <>
 void bind_overlay_function_traits<false, false, false>() {
-  bp::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
-    .def(bp::init<>());
+  py::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
+    .def(py::init<>());
 }
 
 template <>
 void bind_overlay_function_traits<false, false, true>() {
-  bp::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
-    .def(bp::init<>())
-    .def(bp::init<bp::object>())
+  py::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
+    .def(py::init<>())
+    .def(py::init<py::object>())
     ;
 }
 
@@ -441,15 +439,15 @@ void export_arrangement_on_surface_2() {
   typedef CGAL::Arr_landmarks_point_location<Arr>       Landmarks_pl;
   typedef CGAL::Arr_trapezoid_ric_point_location<Arr>   Trapezoid_pl;
 
-  typedef bp::return_internal_reference<>               RIR;
+  typedef py::return_internal_reference<>               RIR;
 
-  bp::enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
+  py::enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
     .value("ARR_LEFT_TO_RIGHT", CGAL::Arr_halfedge_direction::ARR_LEFT_TO_RIGHT)
     .export_values()
     ;
 
-  bp::enum_<CGAL::Arr_curve_end>("Arr_curve_end")
+  py::enum_<CGAL::Arr_curve_end>("Arr_curve_end")
     .value("ARR_MIN_END", CGAL::Arr_curve_end::ARR_MIN_END)
     .value("ARR_MAX_END", CGAL::Arr_curve_end::ARR_MAX_END)
     .export_values()
@@ -497,13 +495,13 @@ void export_arrangement_on_surface_2() {
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
   {
     // Arrangement
-    auto arr_co = bp::class_<Arr>("Arrangement_2");
+    auto arr_co = py::class_<Arr>("Arrangement_2");
     export_aos<Arr>(arr_co);
     arr_co
       .def("unbounded_face", &aos2::unbounded_face<Arr>, RIR())
       .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity);
 
-    bp::scope arr_scope = arr_co;
+    py::scope arr_scope = arr_co;
     export_vertex();
     export_halfedge();
     export_face();
@@ -512,10 +510,10 @@ void export_arrangement_on_surface_2() {
 #elif CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT_ON_SURFACE
   {
     // Arrangement
-    auto arr_co = bp::class_<Arr>("Arrangement_2");
+    auto arr_co = py::class_<Arr>("Arrangement_2");
     export_aos<Arr>(arr_co);
 
-    bp::scope arr_scope = arr_co;
+    py::scope arr_scope = arr_co;
     export_vertex();
     export_halfedge();
     export_face();
@@ -526,60 +524,60 @@ void export_arrangement_on_surface_2() {
 #endif
 
   //free functions
-  bp::def("insert_point", &aos2::insert_point<Naive_pl>, RIR());
+  py::def("insert_point", &aos2::insert_point<Naive_pl>, RIR());
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  bp::def("insert_point", &aos2::insert_point_default, RIR());
-  bp::def("insert_point", &aos2::insert_point<Wal_pl>, RIR());
-  bp::def("insert_point", &aos2::insert_point<Trapezoid_pl>, RIR());
+  py::def("insert_point", &aos2::insert_point_default, RIR());
+  py::def("insert_point", &aos2::insert_point<Wal_pl>, RIR());
+  py::def("insert_point", &aos2::insert_point<Trapezoid_pl>, RIR());
 #endif
-  bp::def("insert", &aos2::insert_curve<X_monotone_curve>);
-  bp::def("insert", &aos2::insert_curve<Curve>);
-  bp::def("insert", &aos2::insert_curves);
-  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Naive_pl>, RIR());
+  py::def("insert", &aos2::insert_curve<X_monotone_curve>);
+  py::def("insert", &aos2::insert_curve<Curve>);
+  py::def("insert", &aos2::insert_curves);
+  py::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Naive_pl>, RIR());
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve_default, RIR());
-  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Wal_pl>, RIR());
-  bp::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Trapezoid_pl>, RIR());
+  py::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve_default, RIR());
+  py::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Wal_pl>, RIR());
+  py::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Trapezoid_pl>, RIR());
 #endif
-  bp::def("insert_non_intersecting_curves", &aos2::insert_non_intersecting_curves);
-  bp::def("decompose", &aos2::decompose);
-  bp::def("zone", &aos2::zone<Naive_pl>);
+  py::def("insert_non_intersecting_curves", &aos2::insert_non_intersecting_curves);
+  py::def("decompose", &aos2::decompose);
+  py::def("zone", &aos2::zone<Naive_pl>);
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  bp::def("zone", &aos2::zone_default);
-  bp::def("zone", &aos2::zone<Wal_pl>);
-  bp::def("zone", &aos2::zone<Trapezoid_pl>);
+  py::def("zone", &aos2::zone_default);
+  py::def("zone", &aos2::zone<Wal_pl>);
+  py::def("zone", &aos2::zone<Trapezoid_pl>);
 #endif
   //supported only by some traits
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-  bp::def("zone", &aos2::zone<Landmarks_pl>);
-  bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Landmarks_pl>);
-  bp::def("insert_point", &aos2::insert_point<Landmarks_pl>, RIR());
-  bp::def("insert_non_intersecting_curve",
+  py::def("zone", &aos2::zone<Landmarks_pl>);
+  py::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Landmarks_pl>);
+  py::def("insert_point", &aos2::insert_point<Landmarks_pl>, RIR());
+  py::def("insert_non_intersecting_curve",
           &aos2::insert_non_intersecting_curve<Landmarks_pl>, RIR());
 #endif
 
-  bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Naive_pl>);
+  py::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Naive_pl>);
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  bp::def("do_intersect", &aos2::do_intersect_default<X_monotone_curve>);
-  bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Wal_pl>);
-  bp::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Trapezoid_pl>);
+  py::def("do_intersect", &aos2::do_intersect_default<X_monotone_curve>);
+  py::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Wal_pl>);
+  py::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Trapezoid_pl>);
 #endif
 
-  bp::def("remove_edge", &aos2::remove_edge_free, RIR());
-  bp::def("remove_vertex", &aos2::remove_vertex_free);
+  py::def("remove_edge", &aos2::remove_edge_free, RIR());
+  py::def("remove_vertex", &aos2::remove_vertex_free);
 
   // Export overlay & overlay traits
   bind_overlay_function_traits<aos2::is_vertex_extended(),
                                aos2::is_halfedge_extended(),
                                aos2::is_face_extended()>();
-  bp::class_<aos2::Arr_overlay_traits>("Arr_overlay_traits")
-    .def(bp::init<>())
-    .def(bp::init<bp::object>())
-    .def(bp::init<bp::object, bp::object, bp::object, bp::object, bp::object,
-                  bp::object, bp::object, bp::object, bp::object, bp::object>())
+  py::class_<aos2::Arr_overlay_traits>("Arr_overlay_traits")
+    .def(py::init<>())
+    .def(py::init<py::object>())
+    .def(py::init<py::object, py::object, py::object, py::object, py::object,
+                  py::object, py::object, py::object, py::object, py::object>())
     .def("set_vv_v", &aos2::Arr_overlay_traits::set_vv_v)
     .def("set_ve_v", &aos2::Arr_overlay_traits::set_ve_v)
     .def("set_vf_v", &aos2::Arr_overlay_traits::set_vf_v)
@@ -592,6 +590,6 @@ void export_arrangement_on_surface_2() {
     .def("set_ff_f", &aos2::Arr_overlay_traits::set_ff_f)
     ;
 
-  bp::def("overlay", &aos2::overlay<aos2::Arr_overlay_function_traits>);
-  bp::def("overlay", &aos2::overlay<aos2::Arr_overlay_traits>);
+  py::def("overlay", &aos2::overlay<aos2::Arr_overlay_function_traits>);
+  py::def("overlay", &aos2::overlay<aos2::Arr_overlay_traits>);
 }

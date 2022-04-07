@@ -6,9 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include <CGAL/intersections_d.h>
 
@@ -17,14 +15,14 @@
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/export_ft.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 extern void export_gmpz();
 extern void export_gmpq();
 
-Point_d* init_point_d(int d, bp::list& lst) {
-  auto begin = bp::stl_input_iterator<FT_d>(lst);
-  auto end = bp::stl_input_iterator<FT_d>();
+Point_d* init_point_d(int d, py::list& lst) {
+  auto begin = py::stl_input_iterator<FT_d>(lst);
+  auto end = py::stl_input_iterator<FT_d>();
 #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
   return new Point_d(d, begin, end);
@@ -53,7 +51,7 @@ constexpr bool is_epec_d_type() {
 template<typename T1, typename T2>
 void bind_do_intersect_d_2T(decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
 {
-  bp::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel_d>);
+  py::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel_d>);
 }
 
 template<typename, typename>
@@ -83,49 +81,49 @@ void bind_do_intersect_d() {
 void export_kernel_d() {
 #if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
      (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
-  const bp::type_info info_gmpz = bp::type_id<CGAL::Gmpz>();
-  const auto* reg_gmpz = bp::converter::registry::query(info_gmpz);
+  const py::type_info info_gmpz = py::type_id<CGAL::Gmpz>();
+  const auto* reg_gmpz = py::converter::registry::query(info_gmpz);
   if ((reg_gmpz == nullptr) || ((*reg_gmpz).m_to_python == nullptr))
     export_gmpz();
-  else bp::scope().attr("Gmpz") = bp::handle<>(reg_gmpz->m_class_object);
+  else py::scope().attr("Gmpz") = py::handle<>(reg_gmpz->m_class_object);
 
-  const bp::type_info info_gmpq = bp::type_id<CGAL::Gmpq>();
-  const auto* reg_gmpq = bp::converter::registry::query(info_gmpq);
+  const py::type_info info_gmpq = py::type_id<CGAL::Gmpq>();
+  const auto* reg_gmpq = py::converter::registry::query(info_gmpq);
   if ((reg_gmpq == nullptr) || ((*reg_gmpq).m_to_python == nullptr))
     export_gmpq();
-  else bp::scope().attr("Gmpq") = bp::handle<>(reg_gmpq->m_class_object);
+  else py::scope().attr("Gmpq") = py::handle<>(reg_gmpq->m_class_object);
 
-  const bp::type_info info_ftd = bp::type_id<FT_d>();
-  const auto* reg_ftd = bp::converter::registry::query(info_ftd);
+  const py::type_info info_ftd = py::type_id<FT_d>();
+  const auto* reg_ftd = py::converter::registry::query(info_ftd);
   if ((reg_ftd == nullptr) || ((*reg_ftd).m_to_python == nullptr)) {
-    auto ftc = bp::class_<FT_d>("FT");
+    auto ftc = py::class_<FT_d>("FT");
     export_ft<FT_d>(ftc);
   }
-  else bp::scope().attr("FT") = bp::handle<>(reg_ftd->m_class_object);
+  else py::scope().attr("FT") = py::handle<>(reg_ftd->m_class_object);
 #endif
 
-  bp::class_<Point_d>("Point_d")
-    .def(bp::init<>())
-    .def("__init__", bp::make_constructor(&init_point_d))
+  py::class_<Point_d>("Point_d")
+    .def(py::init<>())
+    .def("__init__", py::make_constructor(&init_point_d))
     .def("dimension", &Point_d::dimension)
     .def("cartesian", &Point_d::cartesian, Kernel_d_return_value_policy())
     .def("__getitem__", &Point_d::operator[], Kernel_d_return_value_policy())
-    .def("coordinates", bp::range<>(&Point_d::cartesian_begin, &Point_d::cartesian_end))
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
+    .def("coordinates", py::range<>(&Point_d::cartesian_begin, &Point_d::cartesian_end))
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
+    .def(py::self == py::self)
+    .def(py::self != py::self)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
-    .def(bp::self > bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
+    .def(py::self > py::self)
+    .def(py::self < py::self)
+    .def(py::self <= py::self)
+    .def(py::self >= py::self)
 #endif
     .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Point_d>)
     ;
 
-  bp::class_<Segment_d>("Segment_d")
-    .def(bp::init<Point_d&, Point_d&>())
+  py::class_<Segment_d>("Segment_d")
+    .def(py::init<Point_d&, Point_d&>())
     .def("source", &Segment_d::source, Kernel_d_return_value_policy())
     .def("target", &Segment_d::target, Kernel_d_return_value_policy())
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
@@ -143,10 +141,10 @@ void export_kernel_d() {
     .def("direction", &Segment_d::direction)
     .def("has_on", &Segment_d::has_on)
     .def("is_degenerate", &Segment_d::is_degenerate)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
+    .def(py::self == py::self)
+    .def(py::self != py::self)
 #endif
     // .setattr("__hash__", &hash<Segment_d>)
     ;

@@ -10,14 +10,18 @@
 #ifndef CGALPY_EXPORT_AOSXMONOTONETRAITS_2_HPP
 #define CGALPY_EXPORT_AOSXMONOTONETRAITS_2_HPP
 
+#include <nanobind/nanobind.h>
+
 #include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
 #include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
+
+namespace py = nanobind;
 
 template <typename T>
 void intersect_2_call_operator(typename T::Intersect_2& i,
                                typename T::X_monotone_curve_2& xc1,
                                typename T::X_monotone_curve_2& xc2,
-                               bp::list& res) {
+                               py::list& res) {
   typedef typename T::Point_2                   Point_2;
   typedef typename T::X_monotone_curve_2        X_monotone_curve_2;
   typedef typename T::Multiplicity              Multiplicity;
@@ -27,7 +31,7 @@ void intersect_2_call_operator(typename T::Intersect_2& i,
   i(xc1, xc2, std::back_inserter(v));
   for (auto o : v) {
     if (pair* pa = boost::get<pair>(&o)) {
-      bp::tuple tup = bp::make_tuple(pa->first, pa->second);
+      py::tuple tup = py::make_tuple(pa->first, pa->second);
       res.append(tup);
     }
     else if (X_monotone_curve_2* curve = boost::get<X_monotone_curve_2>(&o)){
@@ -39,7 +43,7 @@ void intersect_2_call_operator(typename T::Intersect_2& i,
 template<typename T, typename C, typename Classes>
 void export_Merge_2(C c, Classes& classes, CGAL::Tag_true) {
   typedef typename T::Merge_2   Merge_2;
-  classes.m_merge_2 = new bp::class_<Merge_2>("Merge_2", bp::no_init);
+  classes.m_merge_2 = new py::class_<Merge_2>("Merge_2", py::no_init);
   classes.m_merge_2->def("__call__", &Merge_2::operator());
   c.def("merge_2_object", &T::merge_2_object);
 }
@@ -50,7 +54,7 @@ void export_Merge_2(C c, Classes& classes, CGAL::Tag_false) {}
 template<typename T, typename C, typename Classes>
 void export_Are_mergeable_2(C c, Classes& classes, CGAL::Tag_true) {
   typedef typename T::Are_mergeable_2   Are_mergeable_2;
-  classes.m_are_mergeable_2 = new bp::class_<Are_mergeable_2>("Are_mergeable_2", bp::no_init);
+  classes.m_are_mergeable_2 = new py::class_<Are_mergeable_2>("Are_mergeable_2", py::no_init);
   classes.m_are_mergeable_2->def("__call__", &Are_mergeable_2::operator());
   c.def("are_mergeable_2_object", &T::are_mergeable_2_object);
 }
@@ -71,10 +75,10 @@ void export_AosXMonotoneTraits_2(C c, Concepts& concepts) {
 
   auto& classes = concepts.m_x_monotone_traits_classes;
 
-  classes.m_intersect_2 = new bp::class_<Intersect_2>("Intersect_2", bp::no_init);
+  classes.m_intersect_2 = new py::class_<Intersect_2>("Intersect_2", py::no_init);
   classes.m_intersect_2->def("__call__", &intersect_2_call_operator<T>);
 
-  classes.m_split_2 = new bp::class_<Split_2>("Split_2", bp::no_init);
+  classes.m_split_2 = new py::class_<Split_2>("Split_2", py::no_init);
   classes.m_split_2->def("__call__", &Split_2::operator());
 
   c.def("intersect_2_object", &T::intersect_2_object);

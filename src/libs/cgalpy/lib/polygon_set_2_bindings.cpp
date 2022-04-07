@@ -7,9 +7,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include <CGAL/Polygon_set_2.h>
 
@@ -19,12 +17,12 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/append_iterator.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace bso2 {
 
-bp::list polygons_with_holes(Polygon_set_2& ps) {
-  bp::list lst;
+py::list polygons_with_holes(Polygon_set_2& ps) {
+  py::list lst;
   ps.polygons_with_holes(append_iterator(lst));
   return lst;
 }
@@ -33,11 +31,11 @@ void insert0(Polygon_set_2& ps, General_polygon_2& pgn) { ps.insert(pgn); }
 
 void insert1(Polygon_set_2& ps, General_polygon_with_holes_2& pwh) { ps.insert(pwh); }
 
-void insert_range0(Polygon_set_2& ps, bp::list& polygon_lst, bp::list& pwh_lst) {
-  auto begin0 = bp::stl_input_iterator<General_polygon_2>(polygon_lst);
-  auto end0 = bp::stl_input_iterator<General_polygon_2>();
-  auto begin1 = bp::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = bp::stl_input_iterator<General_polygon_with_holes_2>();
+void insert_range0(Polygon_set_2& ps, py::list& polygon_lst, py::list& pwh_lst) {
+  auto begin0 = py::stl_input_iterator<General_polygon_2>(polygon_lst);
+  auto end0 = py::stl_input_iterator<General_polygon_2>();
+  auto begin1 = py::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
+  auto end1 = py::stl_input_iterator<General_polygon_with_holes_2>();
   auto v0 = std::vector<General_polygon_2>(begin0, end0);
   auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
 
@@ -45,9 +43,9 @@ void insert_range0(Polygon_set_2& ps, bp::list& polygon_lst, bp::list& pwh_lst) 
 }
 
 template <typename T>
-void insert_range(Polygon_set_2& ps, bp::list& lst) {
-  auto begin = bp::stl_input_iterator<T>(lst);
-  auto end = bp::stl_input_iterator<T>();
+void insert_range(Polygon_set_2& ps, py::list& lst) {
+  auto begin = py::stl_input_iterator<T>(lst);
+  auto end = py::stl_input_iterator<T>();
   auto v = std::vector<T>(begin, end);
   ps.insert(v.begin(), v.end());
 }
@@ -60,21 +58,21 @@ void intersection(Polygon_set_2& ps, T& other) { ps.intersection(other); }
 void intersection(Polygon_set_2& ps0, Polygon_set_2& ps1, Polygon_set_2& ps2)
 { ps0.intersection(ps1, ps2); }
 
-void intersection_range0(Polygon_set_2& ps, bp::list& polygon_lst,
-                         bp::list& pwh_lst) {
-  auto begin0 = bp::stl_input_iterator<General_polygon_2>(polygon_lst);
-  auto end0 = bp::stl_input_iterator<General_polygon_2>();
-  auto begin1 = bp::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = bp::stl_input_iterator<General_polygon_with_holes_2>();
+void intersection_range0(Polygon_set_2& ps, py::list& polygon_lst,
+                         py::list& pwh_lst) {
+  auto begin0 = py::stl_input_iterator<General_polygon_2>(polygon_lst);
+  auto end0 = py::stl_input_iterator<General_polygon_2>();
+  auto begin1 = py::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
+  auto end1 = py::stl_input_iterator<General_polygon_with_holes_2>();
   auto v0 = std::vector<General_polygon_2>(begin0, end0);
   auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
   ps.intersection(v0.begin(), v0.end(), v1.begin(), v1.end());
 }
 
 template <typename T>
-void intersection_range(Polygon_set_2& ps, bp::list& lst) {
-  auto begin = bp::stl_input_iterator<T>(lst);
-  auto end = bp::stl_input_iterator<T>();
+void intersection_range(Polygon_set_2& ps, py::list& lst) {
+  auto begin = py::stl_input_iterator<T>(lst);
+  auto end = py::stl_input_iterator<T>();
   auto v = std::vector<T>(begin, end);
   ps.intersection(v.begin(), v.end());
 }
@@ -85,21 +83,21 @@ void join(Polygon_set_2& ps, T& other) { ps.join(other); }
 void join(Polygon_set_2& ps0, Polygon_set_2& ps1, Polygon_set_2& ps2)
 { ps0.join(ps1, ps2); }
 
-void join_range0(Polygon_set_2& ps, bp::list& polygon_lst,
-                 bp::list& pwh_lst) {
-  auto begin0 = bp::stl_input_iterator<General_polygon_2>(polygon_lst);
-  auto end0 = bp::stl_input_iterator<General_polygon_2>();
-  auto begin1 = bp::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = bp::stl_input_iterator<General_polygon_with_holes_2>();
+void join_range0(Polygon_set_2& ps, py::list& polygon_lst,
+                 py::list& pwh_lst) {
+  auto begin0 = py::stl_input_iterator<General_polygon_2>(polygon_lst);
+  auto end0 = py::stl_input_iterator<General_polygon_2>();
+  auto begin1 = py::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
+  auto end1 = py::stl_input_iterator<General_polygon_with_holes_2>();
   auto v0 = std::vector<General_polygon_2>(begin0, end0);
   auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
   ps.join(v0.begin(), v0.end(), v1.begin(), v1.end());
 }
 
 template <typename T>
-void join_range(Polygon_set_2& ps, bp::list& lst) {
-  auto begin = bp::stl_input_iterator<T>(lst);
-  auto end = bp::stl_input_iterator<T>();
+void join_range(Polygon_set_2& ps, py::list& lst) {
+  auto begin = py::stl_input_iterator<T>(lst);
+  auto end = py::stl_input_iterator<T>();
   auto v = std::vector<T>(begin, end);
   ps.join(v.begin(), v.end());
 }
@@ -118,21 +116,21 @@ void symmetric_difference(Polygon_set_2& ps0, Polygon_set_2& ps1,
                           Polygon_set_2& ps2)
 { ps0.symmetric_difference(ps1, ps2); }
 
-void symmetric_difference_range0(Polygon_set_2& ps, bp::list& polygon_lst, bp::list& pwh_lst)
+void symmetric_difference_range0(Polygon_set_2& ps, py::list& polygon_lst, py::list& pwh_lst)
 {
-  auto begin0 = bp::stl_input_iterator<General_polygon_2>(polygon_lst);
-  auto end0 = bp::stl_input_iterator<General_polygon_2>();
-  auto begin1 = bp::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = bp::stl_input_iterator<General_polygon_with_holes_2>();
+  auto begin0 = py::stl_input_iterator<General_polygon_2>(polygon_lst);
+  auto end0 = py::stl_input_iterator<General_polygon_2>();
+  auto begin1 = py::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
+  auto end1 = py::stl_input_iterator<General_polygon_with_holes_2>();
   auto v0 = std::vector<General_polygon_2>(begin0, end0);
   auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
   ps.symmetric_difference(v0.begin(), v0.end(), v1.begin(), v1.end());
 }
 
 template <typename T>
-void symmetric_difference_range(Polygon_set_2& ps, bp::list& lst) {
-  auto begin = bp::stl_input_iterator<T>(lst);
-  auto end = bp::stl_input_iterator<T>();
+void symmetric_difference_range(Polygon_set_2& ps, py::list& lst) {
+  auto begin = py::stl_input_iterator<T>(lst);
+  auto end = py::stl_input_iterator<T>();
   auto v = std::vector<T>(begin, end);
   ps.symmetric_difference(v.begin(), v.end());
 }
@@ -141,21 +139,21 @@ template <typename T>
 bool do_intersect(Polygon_set_2& ps, T& other)
 { return ps.do_intersect(other); }
 
-bool do_intersect_range0(Polygon_set_2& ps, bp::list& polygon_lst,
-                         bp::list& pwh_lst) {
-  auto begin0 = bp::stl_input_iterator<General_polygon_2>(polygon_lst);
-  auto end0 = bp::stl_input_iterator<General_polygon_2>();
-  auto begin1 = bp::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = bp::stl_input_iterator<General_polygon_with_holes_2>();
+bool do_intersect_range0(Polygon_set_2& ps, py::list& polygon_lst,
+                         py::list& pwh_lst) {
+  auto begin0 = py::stl_input_iterator<General_polygon_2>(polygon_lst);
+  auto end0 = py::stl_input_iterator<General_polygon_2>();
+  auto begin1 = py::stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
+  auto end1 = py::stl_input_iterator<General_polygon_with_holes_2>();
   auto v0 = std::vector<General_polygon_2>(begin0, end0);
   auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
   return ps.do_intersect(v0.begin(), v0.end(), v1.begin(), v1.end());
 }
 
 template <typename T>
-void do_intersect_range(Polygon_set_2& ps, bp::list& lst) {
-  auto begin = bp::stl_input_iterator<T>(lst);
-  auto end = bp::stl_input_iterator<T>();
+void do_intersect_range(Polygon_set_2& ps, py::list& lst) {
+  auto begin = py::stl_input_iterator<T>(lst);
+  auto end = py::stl_input_iterator<T>();
   auto v = std::vector<T>(begin, end);
   ps.do_intersect(v.begin(), v.end());
 }
@@ -173,11 +171,11 @@ void export_polygon_set_2() {
   typedef bso2::General_polygon_with_holes_2    Pwh;
   typedef bso2::Arrangement_2                   Arrangement_2;
 
-  bp::scope ps2_scope = bp::class_<Ps2>("Polygon_set_2")
-    .def(bp::init<>())
-    .def(bp::init<const Pgn&>())
-    .def(bp::init<const Pwh&>())
-    .def(bp::init<const Ps2&>())
+  py::scope ps2_scope = py::class_<Ps2>("Polygon_set_2")
+    .def(py::init<>())
+    .def(py::init<const Pgn&>())
+    .def(py::init<const Pwh&>())
+    .def(py::init<const Ps2&>())
     .def("is_empty", &Ps2::is_empty)
     .def("is_plane", &Ps2::is_plane)
     .def("number_of_polygons_with_holes", &Ps2::number_of_polygons_with_holes)

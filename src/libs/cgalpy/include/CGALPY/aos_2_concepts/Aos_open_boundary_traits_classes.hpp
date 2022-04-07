@@ -10,6 +10,10 @@
 #ifndef CGALPY_AOS_OPEN_BOUNDARY_TRAITS_CLASSES_HPP
 #define CGALPY_AOS_OPEN_BOUNDARY_TRAITS_CLASSES_HPP
 
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
+
 template <typename T>
 struct Aos_open_boundary_traits_classes {
   typedef typename T::Parameter_space_in_x_2    Parameter_space_in_x_2;
@@ -37,11 +41,11 @@ struct Aos_open_boundary_traits_classes {
   }
 
   // Class objects
-  bp::class_<Parameter_space_in_x_2>* m_parameter_space_in_x_2;
-  bp::class_<Compare_y_near_boundary_2>* m_compare_y_near_boundary_2;
-  bp::class_<Parameter_space_in_y_2>* m_parameter_space_in_y_2;
-  bp::class_<Compare_x_at_limit_2>* m_compare_x_at_limit_2;
-  bp::class_<Compare_x_near_limit_2>* m_compare_x_near_limit_2;
+  py::class_<Parameter_space_in_x_2>* m_parameter_space_in_x_2;
+  py::class_<Compare_y_near_boundary_2>* m_compare_y_near_boundary_2;
+  py::class_<Parameter_space_in_y_2>* m_parameter_space_in_y_2;
+  py::class_<Compare_x_at_limit_2>* m_compare_x_at_limit_2;
+  py::class_<Compare_x_near_limit_2>* m_compare_x_near_limit_2;
 };
 
 #endif

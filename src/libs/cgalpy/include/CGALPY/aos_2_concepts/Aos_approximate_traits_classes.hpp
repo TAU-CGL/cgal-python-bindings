@@ -10,11 +10,15 @@
 #ifndef CGALPY_AOS_APPROXIMATE_TRAITS_CLASSES_HPP
 #define CGALPY_AOS_APPROXIMATE_TRAITS_CLASSES_HPP
 
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
+
 template <typename T>
 struct Aos_approximate_traits_classes {
   typedef typename T::Approximate_2             Approximate_2;
 
-  bp::class_<Approximate_2>* m_approximate_2;
+  py::class_<Approximate_2>* m_approximate_2;
 };
 
 #endif

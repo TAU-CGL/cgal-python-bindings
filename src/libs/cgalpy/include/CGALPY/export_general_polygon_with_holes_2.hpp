@@ -11,12 +11,12 @@
 
 #include <type_traits>
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/if_.hpp"
 #include "CGALPY/add_class_object.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 template <typename T, typename = void>
 struct target { typedef typename T::General_polygon_2 type; };
@@ -29,10 +29,10 @@ struct target<T, typename if_<false, typename T::Polygon_2>::type> {
 template <typename GeneralPolygonWithHoles_2>
 GeneralPolygonWithHoles_2*
 ctr_polygon_with_holes_2(typename target<GeneralPolygonWithHoles_2>::type& p,
-                         bp::list& lst) {
+                         py::list& lst) {
   typedef typename target<GeneralPolygonWithHoles_2>::type   Polygon_2;
-  auto begin = bp::stl_input_iterator<Polygon_2>(lst);
-  auto end = bp::stl_input_iterator<Polygon_2>();
+  auto begin = py::stl_input_iterator<Polygon_2>(lst);
+  auto end = py::stl_input_iterator<Polygon_2>();
   return new GeneralPolygonWithHoles_2(p, begin, end);
 }
 
@@ -49,22 +49,22 @@ typename target<GeneralPolygonWithHoles_2>::type&
 outer_boundary(GeneralPolygonWithHoles_2& p) { return p.outer_boundary(); }
 
 template <typename Type, const char* Name>
-void export_general_polygon_with_holes_2(bp::scope& my_scope,
-                                         bp::class_<Type>*& co) {
+void export_general_polygon_with_holes_2(py::scope& my_scope,
+                                         py::class_<Type>*& co) {
   typedef typename target<Type>::type   Polygon_2;
 
   if (! add_class_object<Type, Name>(my_scope, co)) return;
 
-  co->def(bp::init<Polygon_2&>());
+  co->def(py::init<Polygon_2&>());
   co->def("__init__", make_constructor(&ctr_polygon_with_holes_2<Type>));
   co->def("is_unbounded", &Type::is_unbounded);
   co->def("outer_boundary", &outer_boundary<Type>,
-          bp::return_internal_reference<>());
-  co->def("holes", bp::range<bp::return_internal_reference<>>
+          py::return_internal_reference<>());
+  co->def("holes", py::range<py::return_internal_reference<>>
           (&holes_begin<Type>, &holes_end<Type>));
   co->def("number_of_holes", &Type::number_of_holes);
-  co->def(bp::self_ns::str(bp::self_ns::self));
-  co->def(bp::self_ns::repr(bp::self_ns::self));
+  co->def(py::self_ns::str(py::self_ns::self));
+  co->def(py::self_ns::repr(py::self_ns::self));
 }
 
 #endif

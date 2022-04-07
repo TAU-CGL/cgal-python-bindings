@@ -10,6 +10,10 @@
 #ifndef CGALPY_AOS_TRAITS_CLASSES_HPP
 #define CGALPY_AOS_TRAITS_CLASSES_HPP
 
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
+
 template <typename T>
 struct Aos_traits_classes {
   typedef typename T::Curve_2                   Curve_2;
@@ -27,8 +31,8 @@ struct Aos_traits_classes {
     if (m_make_x_monotone_2) delete m_make_x_monotone_2;
   }
 
-  bp::class_<Curve_2>* m_curve_2;
-  bp::class_<Make_x_monotone_2>* m_make_x_monotone_2;
+  py::class_<Curve_2>* m_curve_2;
+  py::class_<Make_x_monotone_2>* m_make_x_monotone_2;
 };
 
 #endif

@@ -10,62 +10,62 @@
 #ifndef CGALPY_PYTHON_FUNCTOR
 #define CGALPY_PYTHON_FUNCTOR
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 //https://stackoverflow.com/a/26833886 regarding calling a python functor in C++
 template <typename T0, typename T1>
 class Python_functor_1 {
 private:
-  bp::object m_python_functor;
+  py::object m_python_functor;
 
 public:
   Python_functor_1() {}
-  Python_functor_1(bp::object python_functor) : m_python_functor(python_functor)
+  Python_functor_1(py::object python_functor) : m_python_functor(python_functor)
   {}
 
-  T1 operator()(T0 a) const { return bp::extract<T1>(m_python_functor(a)); }
+  T1 operator()(T0 a) const { return py::extract<T1>(m_python_functor(a)); }
 };
 
 template <typename T0, typename T1, typename T2>
 class Python_functor_2 {
 private:
-  bp::object m_python_functor;
+  py::object m_python_functor;
 
 public:
   Python_functor_2() {}
-  Python_functor_2(bp::object python_functor) :
+  Python_functor_2(py::object python_functor) :
     m_python_functor(python_functor)
   {}
 
   T2 operator()(T0 a, T1 b) const
-  { return bp::extract<T2>(m_python_functor(a, b)); }
+  { return py::extract<T2>(m_python_functor(a, b)); }
 };
 
 template <typename T0, typename T1, typename T2>
 class Python_functor_2_ref {
 private:
-  bp::object m_python_functor;
+  py::object m_python_functor;
 
 public:
   Python_functor_2_ref() {}
-  Python_functor_2_ref(bp::object python_functor) :
+  Python_functor_2_ref(py::object python_functor) :
     m_python_functor(python_functor)
   {}
 
   T2 operator()(const T0& a, const T1& b) const
-  { return bp::extract<T2>(m_python_functor(a, b)); }
+  { return py::extract<T2>(m_python_functor(a, b)); }
 };
 
 template <typename T0, typename T1, typename T2>
 class Python_functor_3_ref {
 private:
-  bp::object m_python_functor;
+  py::object m_python_functor;
 
 public:
   Python_functor_3_ref() {}
-  Python_functor_3_ref(bp::object python_functor) :
+  Python_functor_3_ref(py::object python_functor) :
     m_python_functor(python_functor)
   {}
 

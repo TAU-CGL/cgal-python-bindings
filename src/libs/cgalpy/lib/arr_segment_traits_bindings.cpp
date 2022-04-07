@@ -7,12 +7,10 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
 #include <unordered_set>
 #include <any>
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 #include <boost/assert.hpp>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
@@ -28,14 +26,14 @@
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace aos2 { Segment_2 to_segment(X_monotone_curve_2& c) { return Segment_2(c); } }
 
-bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
+py::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
   typedef aos2::Geometry_traits_2       GT;
-  auto traits = bp::class_<GT>("Geometry_traits_2");
-  bp::scope traits_scope(traits);
+  auto traits = py::class_<GT>("Geometry_traits_2");
+  py::scope traits_scope(traits);
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
@@ -56,9 +54,9 @@ bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
 
   auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
   xcv_co
-    .def(bp::init<Segment_2&>())
-    .def(bp::init<aos2::Point_2&, aos2::Point_2&>())
-    .def(bp::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
+    .def(py::init<Segment_2&>())
+    .def(py::init<aos2::Point_2&, aos2::Point_2&>())
+    .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
     .def("source", &aos2::X_monotone_curve_2::source, Copy_const_reference())
     .def("target", &aos2::X_monotone_curve_2::target, Copy_const_reference())
     .def("line", &aos2::X_monotone_curve_2::line, Copy_const_reference())
@@ -76,15 +74,15 @@ bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
 
     .def("bbox", &aos2::X_monotone_curve_2::bbox)
     .def("segment", &aos2::to_segment)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(py::self_ns::str(py::self_ns::self))
+    .def(py::self_ns::repr(py::self_ns::self))
   ;
 
-  bp::class_<GT::Is_in_x_range_2>("Is_in_x_range_2", bp::no_init)
+  py::class_<GT::Is_in_x_range_2>("Is_in_x_range_2", py::no_init)
     .def("__call__", &GT::Is_in_x_range_2::operator());
   ;
 
-  bp::class_<GT::Is_in_y_range_2>("Is_in_y_range_2", bp::no_init)
+  py::class_<GT::Is_in_y_range_2>("Is_in_y_range_2", py::no_init)
     .def("__call__", &GT::Is_in_y_range_2::operator());
   ;
 

@@ -7,14 +7,12 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace aos2 {
 
@@ -30,9 +28,9 @@ void export_vertex() {
   typedef Arr2::Vertex          Vertex;
   typedef Arr2::Point_2         Point;
 
-  bp::class_<Vertex>("Vertex")
-    .def(bp::init<>())
-    .def<Point& (Vertex::*)()>("point", &Vertex::point, bp::return_internal_reference<>())
+  py::class_<Vertex>("Vertex")
+    .def(py::init<>())
+    .def<Point& (Vertex::*)()>("point", &Vertex::point, py::return_internal_reference<>())
     .def("is_isolated", &Vertex::is_isolated)
     .def("degree", &Vertex::degree)
     .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator, Manage_new_object())

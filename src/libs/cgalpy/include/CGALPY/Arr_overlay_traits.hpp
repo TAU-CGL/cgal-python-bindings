@@ -10,7 +10,7 @@
 #ifndef CGALPY_ARR_OVERLAY_TRAITS_HPP
 #define CGALPY_ARR_OVERLAY_TRAITS_HPP
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include <CGAL/Arr_default_dcel.h>
 #include <CGAL/Arr_extended_dcel.h>
@@ -28,7 +28,7 @@
  * The resulting data object that corresponds to the overlay of two data
  * object of type data_type is computed using the corresponding python functor
  */
-namespace bp = boost::python;
+namespace py = nanobind;
 
 template <typename ArrangementA, typename ArrangementB, typename ArrangementR,
           typename Data>
@@ -101,17 +101,17 @@ public:
   Arr_overlay_traits() : Arr_default_overlay_traits() {}
 
   // Constructor with one operator
-  Arr_overlay_traits(bp::object py_function) :
+  Arr_overlay_traits(py::object py_function) :
     Arr_default_overlay_traits(),
     m_ff_f(py_function)
   {}
 
   // Constructor with all operators
-  Arr_overlay_traits(bp::object py_function0, bp::object py_function1,
-                     bp::object py_function2, bp::object py_function3,
-                     bp::object py_function4, bp::object py_function5,
-                     bp::object py_function6, bp::object py_function7,
-                     bp::object py_function8, bp::object py_function9) :
+  Arr_overlay_traits(py::object py_function0, py::object py_function1,
+                     py::object py_function2, py::object py_function3,
+                     py::object py_function4, py::object py_function5,
+                     py::object py_function6, py::object py_function7,
+                     py::object py_function8, py::object py_function9) :
     Arr_default_overlay_traits(),
     m_vv_v(py_function0),
     m_ve_v(py_function1),
@@ -130,16 +130,16 @@ public:
   /// Setters
   /// @{
 
-  void set_vv_v(bp::object vv_v) { m_vv_v = vv_v; }
-  void set_ve_v(bp::object ve_v) { m_ve_v = ve_v; }
-  void set_vf_v(bp::object vf_v) { m_vf_v = vf_v; }
-  void set_ev_v(bp::object ev_v) { m_ev_v = ev_v; }
-  void set_fv_v(bp::object fv_v) { m_fv_v = fv_v; }
-  void set_ee_v(bp::object ee_v) { m_ee_v = ee_v; }
-  void set_ee_e(bp::object ee_e) { m_ee_e = ee_e; }
-  void set_ef_e(bp::object ef_e) { m_ef_e = ef_e; }
-  void set_fe_e(bp::object fe_e) { m_fe_e = fe_e; }
-  void set_ff_f(bp::object ff_f) { m_ff_f = ff_f; }
+  void set_vv_v(py::object vv_v) { m_vv_v = vv_v; }
+  void set_ve_v(py::object ve_v) { m_ve_v = ve_v; }
+  void set_vf_v(py::object vf_v) { m_vf_v = vf_v; }
+  void set_ev_v(py::object ev_v) { m_ev_v = ev_v; }
+  void set_fv_v(py::object fv_v) { m_fv_v = fv_v; }
+  void set_ee_v(py::object ee_v) { m_ee_v = ee_v; }
+  void set_ee_e(py::object ee_e) { m_ee_e = ee_e; }
+  void set_ef_e(py::object ef_e) { m_ef_e = ef_e; }
+  void set_fe_e(py::object fe_e) { m_fe_e = fe_e; }
+  void set_ff_f(py::object ff_f) { m_ff_f = ff_f; }
 
   /// @}
 
