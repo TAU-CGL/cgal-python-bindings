@@ -15,8 +15,8 @@
 
 namespace py = nanobind;
 
-extern void export_gmpz();
-extern void export_gmpq();
+extern void export_gmpz(py::module_&);
+extern void export_gmpq(py::module_&);
 
 Kernel::Equal_2 kernel_equal_2(Kernel& k)
 { return (Kernel::Equal_2)(k.equal_2_object()); }
@@ -68,17 +68,17 @@ constexpr bool is_epec_type() {
           (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ));
 }
 
-void export_kernel() {
+void export_kernel(py::module_& m) {
   const py::type_info info_gmpz = py::type_id<CGAL::Gmpz>();
   const auto* reg_gmpz = py::converter::registry::query(info_gmpz);
   if ((reg_gmpz == nullptr) || ((*reg_gmpz).m_to_python == nullptr))
-    export_gmpz();
+    export_gmpz(m);
   else py::scope().attr("Gmpz") = py::handle<>(reg_gmpz->m_class_object);
 
   const py::type_info info_gmpq = py::type_id<CGAL::Gmpq>();
   const auto* reg_gmpq = py::converter::registry::query(info_gmpq);
   if ((reg_gmpq == nullptr) || ((*reg_gmpq).m_to_python == nullptr))
-    export_gmpq();
+    export_gmpq(m);
   else py::scope().attr("Gmpq") = py::handle<>(reg_gmpq->m_class_object);
 
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                           \
@@ -175,14 +175,14 @@ void export_kernel() {
     .def(py::init<FT&, FT&>())
     .def(py::init<RT&, RT&>())
     .def(py::init<Point_2&>())
-    .def("x", &Point_2::x, Kernel_return_value_policy(), "YYYYYYYYYYYYYYYYYYY")
-    .def("y", &Point_2::y, Kernel_return_value_policy())
-    .def("hx", &Point_2::hx, Kernel_return_value_policy())
-    .def("hy", &Point_2::hy, Kernel_return_value_policy())
-    .def("hw", &Point_2::hw, Kernel_return_value_policy())
+    .def("x", &Point_2::x)
+    .def("y", &Point_2::y)
+    .def("hx", &Point_2::hx)
+    .def("hy", &Point_2::hy)
+    .def("hw", &Point_2::hw)
     .def("bbox", &Point_2::bbox)
-    .def("cartesian", &Point_2::cartesian, Kernel_return_value_policy())
-    .def("__getitem__", &Point_2::operator[], Kernel_return_value_policy())
+    .def("cartesian", &Point_2::cartesian)
+    .def("__getitem__", &Point_2::operator[])
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
     // TODO: Returning address of local variable or temporary with EPEC kernel
@@ -208,13 +208,13 @@ void export_kernel() {
 
   py::class_<Segment_2>("Segment_2")
     .def(py::init<Point_2&, Point_2&>())
-    .def("source", &Segment_2::source, Kernel_return_value_policy())
-    .def("target", &Segment_2::target, Kernel_return_value_policy())
-    .def("vertex", &Segment_2::vertex, Kernel_return_value_policy())
-    .def("point", &Segment_2::point, Kernel_return_value_policy())
-    .def("__getitem__", &Segment_2::operator[], Kernel_return_value_policy())
-    .def("min", &Segment_2::min, Kernel_return_value_policy())
-    .def("max", &Segment_2::max, Kernel_return_value_policy())
+    .def("source", &Segment_2::source)
+    .def("target", &Segment_2::target)
+    .def("vertex", &Segment_2::vertex)
+    .def("point", &Segment_2::point)
+    .def("__getitem__", &Segment_2::operator[])
+    .def("min", &Segment_2::min)
+    .def("max", &Segment_2::max)
     .def("opposite", &Segment_2::opposite)
     .def("to_vector", &Segment_2::to_vector)
     .def("supporting_line", &Segment_2::supporting_line)
@@ -282,7 +282,7 @@ void export_kernel() {
     .def("supporting_line", &Ray_2::supporting_line)
     .def("opposite", &Ray_2::opposite)
     .def("transform", &Ray_2::transform)
-    .def("source", &Ray_2::source, Kernel_return_value_policy())
+    .def("source", &Ray_2::source)
     .def(py::self_ns::str(py::self_ns::self))
     .def(py::self_ns::repr(py::self_ns::self))
     .def(py::self == py::self)
@@ -292,8 +292,8 @@ void export_kernel() {
 
   py::class_<Triangle_2>("Triangle_2")
     .def(py::init < Point_2&, Point_2&, Point_2&>())
-    .def("vertex", &Triangle_2::vertex, Kernel_return_value_policy())
-    .def("__getitem__", &Triangle_2::operator[], Kernel_return_value_policy())
+    .def("vertex", &Triangle_2::vertex)
+    .def("__getitem__", &Triangle_2::operator[])
     .def("is_degenerate", &Triangle_2::is_degenerate)
     .def("orientation", &Triangle_2::orientation)
     .def("oriented_side", &Triangle_2::oriented_side)
@@ -323,14 +323,14 @@ void export_kernel() {
     .def(py::init<Bbox_2&>())
     .def("vertex", &Iso_rectangle_2::vertex)
     .def("__getitem__", &Iso_rectangle_2::operator[])
-    .def("xmin", &Iso_rectangle_2::xmin, Kernel_return_value_policy())
-    .def("ymin", &Iso_rectangle_2::ymin, Kernel_return_value_policy())
-    .def("xmax", &Iso_rectangle_2::xmax, Kernel_return_value_policy())
-    .def("ymax", &Iso_rectangle_2::ymax, Kernel_return_value_policy())
-    .def("min", &Iso_rectangle_2::min, Kernel_return_value_policy())
-    .def("max", &Iso_rectangle_2::max, Kernel_return_value_policy())
-    .def("min_coord", &Iso_rectangle_2::min_coord, Kernel_return_value_policy())
-    .def("max_coord", &Iso_rectangle_2::max_coord, Kernel_return_value_policy())
+    .def("xmin", &Iso_rectangle_2::xmin)
+    .def("ymin", &Iso_rectangle_2::ymin)
+    .def("xmax", &Iso_rectangle_2::xmax)
+    .def("ymax", &Iso_rectangle_2::ymax)
+    .def("min", &Iso_rectangle_2::min)
+    .def("max", &Iso_rectangle_2::max)
+    .def("min_coord", &Iso_rectangle_2::min_coord)
+    .def("max_coord", &Iso_rectangle_2::max_coord)
     .def("is_degenerate", &Iso_rectangle_2::is_degenerate)
     .def("bounded_side", &Iso_rectangle_2::bounded_side)
     .def("has_on_boundary", &Iso_rectangle_2::has_on_boundary)
@@ -354,7 +354,7 @@ void export_kernel() {
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Point_2&>())
     .def(py::init<Point_2&, Point_2&, Point_2&>())
-    .def("center", &Circle_2::center, Kernel_return_value_policy())
+    .def("center", &Circle_2::center)
     .def("squared_radius", &Circle_2::squared_radius)
     .def("orientation", &Circle_2::orientation)
     .def("is_degenerate", &Circle_2::is_degenerate)
@@ -380,12 +380,12 @@ void export_kernel() {
     .def(py::init<Segment_2>())
     .def(py::init<RT&, RT&>())
     .def(py::init<double, double>())
-    .def("dx", &Direction_2::dx, Kernel_return_value_policy())
-    .def("dy", &Direction_2::dy, Kernel_return_value_policy())
+    .def("dx", &Direction_2::dx)
+    .def("dy", &Direction_2::dy)
     .def("vector", &Direction_2::vector)
     .def("transform", &Direction_2::transform)
     .def("counterclockwise_in_between", &Direction_2::counterclockwise_in_between)
-    .def("delta", &Direction_2::delta, Kernel_return_value_policy())
+    .def("delta", &Direction_2::delta)
     .def(py::self_ns::str(py::self_ns::self))
     .def(py::self_ns::repr(py::self_ns::self))
     .def(py::self == py::self)
@@ -407,15 +407,15 @@ void export_kernel() {
     .def(py::init<FT&, FT&, FT&>())
     .def(py::init<FT&, FT&>())
     .def(py::init<double, double>())
-    .def("hx", &Vector_2::hx, Kernel_return_value_policy())
-    .def("hy", &Vector_2::hy, Kernel_return_value_policy())
-    .def("hw", &Vector_2::hw, Kernel_return_value_policy())
-    .def("x", &Vector_2::x, Kernel_return_value_policy())
-    .def("y", &Vector_2::y, Kernel_return_value_policy())
+    .def("hx", &Vector_2::hx)
+    .def("hy", &Vector_2::hy)
+    .def("hw", &Vector_2::hw)
+    .def("x", &Vector_2::x)
+    .def("y", &Vector_2::y)
     .def("squared_length", &Vector_2::squared_length)
-    .def("homogeneous", &Vector_2::homogeneous, Kernel_return_value_policy())
-    .def("cartesian", &Vector_2::cartesian, Kernel_return_value_policy())
-    .def("__getitem__", &Vector_2::operator[], Kernel_return_value_policy())
+    .def("homogeneous", &Vector_2::homogeneous)
+    .def("cartesian", &Vector_2::cartesian)
+    .def("__getitem__", &Vector_2::operator[])
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
     // TODO: Returning address of local variable or temporary with EPEC kernel
     .def("cartesian_coordinates", py::range<>(&Vector_2::cartesian_begin, & Vector_2::cartesian_end))
@@ -472,13 +472,13 @@ void export_kernel() {
     .def(py::init<double, double, double>())
     .def(py::init<FT&, FT&, FT&>())
     .def(py::init<RT&, RT&, RT&>())
-    .def("x", &Point_3::x, Kernel_return_value_policy())
-    .def("y", &Point_3::y, Kernel_return_value_policy())
-    .def("z", &Point_3::z, Kernel_return_value_policy())
-    .def("hx", &Point_3::hx, Kernel_return_value_policy())
-    .def("hy", &Point_3::hy, Kernel_return_value_policy())
-    .def("hz", &Point_3::hz, Kernel_return_value_policy())
-    .def("hw", &Point_3::hw, Kernel_return_value_policy())
+    .def("x", &Point_3::x)
+    .def("y", &Point_3::y)
+    .def("z", &Point_3::z)
+    .def("hx", &Point_3::hx)
+    .def("hy", &Point_3::hy)
+    .def("hz", &Point_3::hz)
+    .def("hw", &Point_3::hw)
     .def("dimension", &Point_2::dimension)
     .def(py::self_ns::str(py::self_ns::self))
     .def(py::self_ns::repr(py::self_ns::self))
@@ -499,15 +499,15 @@ void export_kernel() {
     .def(py::init<const Point_3&, const FT&>())
     .def(py::init<const FT&, const FT&, const FT&>())
     // Accessors
-    .def("point", &Weighted_point_3::point, Kernel_return_value_policy())
-    .def("weight", &Weighted_point_3::weight, Kernel_return_value_policy())
-    .def("x", &Weighted_point_3::x, Kernel_return_value_policy())
-    .def("y", &Weighted_point_3::y, Kernel_return_value_policy())
-    .def("z", &Weighted_point_3::z, Kernel_return_value_policy())
-    .def("hx", &Weighted_point_3::hx, Kernel_return_value_policy())
-    .def("hy", &Weighted_point_3::hy, Kernel_return_value_policy())
-    .def("hz", &Weighted_point_3::hz, Kernel_return_value_policy())
-    .def("hw", &Weighted_point_3::hw, Kernel_return_value_policy())
+    .def("point", &Weighted_point_3::point)
+    .def("weight", &Weighted_point_3::weight)
+    .def("x", &Weighted_point_3::x)
+    .def("y", &Weighted_point_3::y)
+    .def("z", &Weighted_point_3::z)
+    .def("hx", &Weighted_point_3::hx)
+    .def("hy", &Weighted_point_3::hy)
+    .def("hz", &Weighted_point_3::hz)
+    .def("hw", &Weighted_point_3::hw)
     // Operations
     .def(py::self_ns::str(py::self_ns::self))
     .def(py::self_ns::repr(py::self_ns::self))
@@ -515,7 +515,7 @@ void export_kernel() {
     .def(py::self != py::self)
     // Convenient operations
     .def("homogeneous", &Weighted_point_3::homogeneous)
-    .def("cartesian", &Weighted_point_3::cartesian, Kernel_return_value_policy())
+    .def("cartesian", &Weighted_point_3::cartesian)
     // Kernel::FT 	operator[] (int i) const
     // Cartesian_const_iterator 	cartesian_begin () const
     // Cartesian_const_iterator 	cartesian_end () const

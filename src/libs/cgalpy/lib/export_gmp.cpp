@@ -14,8 +14,8 @@
 
 namespace py = nanobind;
 
-void export_gmpz() {
-  py::class_<CGAL::Gmpz>("Gmpz")
+void export_gmpz(py::module_& m) {
+  py::class_<CGAL::Gmpz>(m, "Gmpz")
     .def(py::init<int>())
     .def(py::init<CGAL::Gmpz&>())
     .def("to_double", &CGAL::Gmpz::to_double)
@@ -38,8 +38,8 @@ void export_gmpz() {
     ;
 }
 
-void export_gmpq() {
-  py::class_<CGAL::Gmpq>("Gmpq")
+void export_gmpq(py::module_& m) {
+  py::class_<CGAL::Gmpq>(m, "Gmpq")
     .def(py::init<CGAL::Gmpz, CGAL::Gmpz>())
     .def(py::init<unsigned long, unsigned long>())
     .def(py::init<const std::string&>())
