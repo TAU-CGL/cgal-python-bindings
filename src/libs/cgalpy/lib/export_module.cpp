@@ -14,7 +14,7 @@
 
 namespace py = nanobind;
 
-void export_kernel();
+void export_kernel(py::module_&);
 void export_kernel_d();
 void export_arrangement_on_surface_2();
 void export_intersections_2();
@@ -42,15 +42,14 @@ py::object module(py::handle<>(py::borrowed(PyImport_AddModule(module_name.c_str
 py::scope().attr(x) = module; \
 py::scope module_scope = module;
 
-BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
+NB_MODULE(CGALPY_MODULE_NAME, m) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
-  py::object package = py::scope();
-  package.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
+  m.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
 #ifdef CGALPY_KERNEL_BINDINGS
   {
     SET_SCOPE("Ker")
-    export_kernel();
+    export_kernel(m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
     export_intersections_2();
 #endif
@@ -164,5 +163,4 @@ BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
     export_alpha_shape_3();
   }
 #endif
-
 }
