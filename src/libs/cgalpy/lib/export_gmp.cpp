@@ -8,9 +8,12 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
 
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
+
+#include "CGALPY/to_string.hpp"
 
 namespace py = nanobind;
 
@@ -19,8 +22,8 @@ void export_gmpz(py::module_& m) {
     .def(py::init<int>())
     .def(py::init<CGAL::Gmpz&>())
     .def("to_double", &CGAL::Gmpz::to_double)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<CGAL::Gmpz>)
+    .def("__repr__", to_string<CGAL::Gmpz>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self < py::self)
@@ -35,6 +38,7 @@ void export_gmpz(py::module_& m) {
     .def(py::self *= py::self)
     .def(py::self / py::self)
     .def(py::self /= py::self)
+    .def(-py::self)
     ;
 }
 
@@ -49,8 +53,8 @@ void export_gmpq(py::module_& m) {
     .def("numerator", &CGAL::Gmpq::numerator)
     .def("denominator", &CGAL::Gmpq::denominator)
     .def("size", &CGAL::Gmpq::size)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<CGAL::Gmpz>)
+    .def("__repr__", to_string<CGAL::Gmpz>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self < py::self)

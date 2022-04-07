@@ -7,6 +7,9 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
+
+#include "CGALPY/to_string.hpp"
 
 #include "CGALPY/common.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -31,21 +34,21 @@ Kernel::Equal_2 kernel_equal_2(Kernel& k)
 //}
 
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
-void bind_squared_distance_first_type() {
-  py::def<FT(const T1&, const T1&)>("squared_distance", &CGAL::squared_distance);
-  py::def<FT(const T1&, const T2&)>("squared_distance", &CGAL::squared_distance);
-  py::def<FT(const T1&, const T3&)>("squared_distance", &CGAL::squared_distance);
-  py::def<FT(const T1&, const T4&)>("squared_distance", &CGAL::squared_distance);
-  py::def<FT(const T1&, const T5&)>("squared_distance", &CGAL::squared_distance);
+void bind_squared_distance_first_type(py::module_& m) {
+  m.def<FT(const T1&, const T1&)>("squared_distance", &CGAL::squared_distance);
+  m.def<FT(const T1&, const T2&)>("squared_distance", &CGAL::squared_distance);
+  m.def<FT(const T1&, const T3&)>("squared_distance", &CGAL::squared_distance);
+  m.def<FT(const T1&, const T4&)>("squared_distance", &CGAL::squared_distance);
+  m.def<FT(const T1&, const T5&)>("squared_distance", &CGAL::squared_distance);
 }
 
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
-void bind_squared_distance_types() {
-  bind_squared_distance_first_type< T1, T2, T3, T4, T5 >();
-  bind_squared_distance_first_type< T2, T1, T3, T4, T5 >();
-  bind_squared_distance_first_type< T3, T2, T1, T4, T5 >();
-  bind_squared_distance_first_type< T4, T2, T3, T1, T5 >();
-  bind_squared_distance_first_type< T5, T2, T3, T4, T1 >();
+void bind_squared_distance_types(py::module_& m) {
+  bind_squared_distance_first_type< T1, T2, T3, T4, T5 >(m);
+  bind_squared_distance_first_type< T2, T1, T3, T4, T5 >(m);
+  bind_squared_distance_first_type< T3, T2, T1, T4, T5 >(m);
+  bind_squared_distance_first_type< T4, T2, T3, T1, T5 >(m);
+  bind_squared_distance_first_type< T5, T2, T3, T4, T1 >(m);
 }
 
 Point_2 transform_point(Aff_transformation_2& t, Point_2& p)
@@ -99,7 +102,7 @@ void export_kernel(py::module_& m) {
   //  .def(self == self)
   //  ;
 
-  py::enum_<CGAL::Sign>("Result")
+  py::enum_<CGAL::Sign>(m, "Result")
 
     //CGAL::Sign
     .value("NEGATIVE", CGAL::NEGATIVE)
@@ -123,26 +126,25 @@ void export_kernel(py::module_& m) {
     .value("CLOCKWISE", CGAL::CLOCKWISE)
     .value("COUNTERCLOCKWISE", CGAL::COUNTERCLOCKWISE)
     .value("COPLANAR", CGAL::COPLANAR)
-
     .export_values()
     ;
 
-  py::enum_<CGAL::Angle>("Angle")
+  py::enum_<CGAL::Angle>(m, "Angle")
     .value("OBTUSE", CGAL::OBTUSE)
     .value("RIGHT", CGAL::RIGHT)
     .value("ACUTE", CGAL::ACUTE)
     .export_values()
     ;
 
-  py::class_<Rotation>("Rotation")
+  py::class_<Rotation>(m, "Rotation")
     .def(py::init<>())
     ;
 
-  py::class_<Scaling>("Scaling")
+  py::class_<Scaling>(m, "Scaling")
     .def(py::init<>())
     ;
 
-  py::class_<Translation>("Translation")
+  py::class_<Translation>(m, "Translation")
     .def(py::init<>())
     ;
 
@@ -169,7 +171,7 @@ void export_kernel(py::module_& m) {
   //  //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
   //  ;
 
-  py::class_<Point_2>("Point_2")
+  py::class_<Point_2>(m, "Point_2")
     .def(py::init<>())
     .def(py::init<double, double>())
     .def(py::init<FT&, FT&>())
@@ -189,8 +191,8 @@ void export_kernel(py::module_& m) {
     .def("coordinates", py::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end))
 #endif
     .def("dimension", &Point_2::dimension)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Point_2>)
+    .def("__repr__", to_string<Point_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self > py::self)
@@ -206,7 +208,7 @@ void export_kernel(py::module_& m) {
     .setattr("__doc__", "AAAAAAAAAAAAAAAA")
     ;
 
-  py::class_<Segment_2>("Segment_2")
+  py::class_<Segment_2>(m, "Segment_2")
     .def(py::init<Point_2&, Point_2&>())
     .def("source", &Segment_2::source)
     .def("target", &Segment_2::target)
@@ -226,14 +228,14 @@ void export_kernel(py::module_& m) {
     .def("is_horizontal", &Segment_2::is_horizontal)
     .def("is_vertical", &Segment_2::is_vertical)
     .def("bbox", &Segment_2::bbox)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Segment_2>)
+    .def("__repr__", to_string<Segment_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     // .setattr("__hash__", &hash<Segment_2>)
     ;
 
-  py::class_<Line_2>("Line_2")
+  py::class_<Line_2>(m, "Line_2")
     .def(py::init<RT&, RT&, RT&>())
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Point_2&, Direction_2&>())
@@ -259,14 +261,14 @@ void export_kernel(py::module_& m) {
     .def("perpendicular", &Line_2::perpendicular)
     .def("x_at_y", &Line_2::x_at_y)
     .def("y_at_x", &Line_2::y_at_x)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Line_2>)
+    .def("__repr__", to_string<Line_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     //.setattr("__hash__", &hash<Line_2>)
     ;
 
-  py::class_<Ray_2>("Ray_2")
+  py::class_<Ray_2>(m, "Ray_2")
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Point_2&, Direction_2&>())
     .def(py::init<Point_2&, Vector_2&>())
@@ -283,14 +285,14 @@ void export_kernel(py::module_& m) {
     .def("opposite", &Ray_2::opposite)
     .def("transform", &Ray_2::transform)
     .def("source", &Ray_2::source)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Ray_2>)
+    .def("__repr__", to_string<Ray_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     //.setattr("__hash__", &hash<Ray_2>)
     ;
 
-  py::class_<Triangle_2>("Triangle_2")
+  py::class_<Triangle_2>(m, "Triangle_2")
     .def(py::init < Point_2&, Point_2&, Point_2&>())
     .def("vertex", &Triangle_2::vertex)
     .def("__getitem__", &Triangle_2::operator[])
@@ -307,14 +309,14 @@ void export_kernel(py::module_& m) {
     .def("area", &Triangle_2::area)
     .def("bbox", &Triangle_2::bbox)
     .def("transform", &Triangle_2::transform)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Triangle_2>)
+    .def("__repr__", to_string<Triangle_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     //.setattr("__hash__", &hash<Triangle_2>)
     ;
 
-  py::class_<Iso_rectangle_2>("Iso_rectangle_2")
+  py::class_<Iso_rectangle_2>(m, "Iso_rectangle_2")
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Point_2&, Point_2&, int>())
     .def(py::init<Point_2&, Point_2&, Point_2&, Point_2&>())
@@ -336,14 +338,14 @@ void export_kernel(py::module_& m) {
     .def("has_on_boundary", &Iso_rectangle_2::has_on_boundary)
     .def("has_on_bounded_side", &Iso_rectangle_2::has_on_bounded_side)
     .def("has_on_unbounded_side", &Iso_rectangle_2::has_on_unbounded_side)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Iso_rectangle_2>)
+    .def("__repr__", to_string<Iso_rectangle_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     //.setattr("__hash__", &hash<Iso_rectangle_2>)
     ;
 
-  py::class_<Circle_2>("Circle_2")
+  py::class_<Circle_2>(m, "Circle_2")
     .def(py::init<>())
     .def(py::init<Point_2&, FT&, CGAL::Orientation>())
     .def(py::init<Point_2&, double, CGAL::Orientation>())
@@ -366,14 +368,14 @@ void export_kernel(py::module_& m) {
     .def("has_on_bounded_side", &Circle_2::has_on_bounded_side)
     .def("has_on_unbounded_side", &Circle_2::has_on_unbounded_side)
     .def("orthogonal_transform", &Circle_2::orthogonal_transform)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Circle_2>)
+    .def("__repr__", to_string<Circle_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     //.setattr("__hash__", &hash<Circle_2>)
     ;
 
-  py::class_<Direction_2>("Direction_2")
+  py::class_<Direction_2>(m, "Direction_2")
     .def(py::init<Vector_2>())
     .def(py::init<Line_2>())
     .def(py::init<Ray_2>())
@@ -386,8 +388,8 @@ void export_kernel(py::module_& m) {
     .def("transform", &Direction_2::transform)
     .def("counterclockwise_in_between", &Direction_2::counterclockwise_in_between)
     .def("delta", &Direction_2::delta)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Direction_2>)
+    .def("__repr__", to_string<Direction_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self != py::self)
@@ -399,7 +401,7 @@ void export_kernel(py::module_& m) {
     //.setattr("__hash__", &hash<Direction_2>)
     ;
 
-  py::class_<Vector_2>("Vector_2")
+  py::class_<Vector_2>(m, "Vector_2")
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Line_2>())
     .def(py::init<Ray_2>())
@@ -424,8 +426,8 @@ void export_kernel(py::module_& m) {
     .def("direction", &Vector_2::direction)
     .def("transform", &Vector_2::transform)
     .def("perpendicular", &Vector_2::perpendicular)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Vector_2>)
+    .def("__repr__", to_string<Vector_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self != py::self)
@@ -448,7 +450,7 @@ void export_kernel(py::module_& m) {
     //.setattr("__hash__", &hash<Vector_2>)
     ;
 
-  py::class_<Bbox_2>("Bbox_2")
+  py::class_<Bbox_2>(m, "Bbox_2")
     .def(py::init<>())
     .def(py::init<double, double, double, double>())
     .def("dimension", &Bbox_2::dimension)
@@ -459,15 +461,15 @@ void export_kernel(py::module_& m) {
     .def("ymax", &Bbox_2::ymax)
     .def("min", &Bbox_2::min)
     .def("max", &Bbox_2::max)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Bbox_2>)
+    .def("__repr__", to_string<Bbox_2>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self += py::self)
     .def(py::self + py::self)
     ;
 
-  py::class_<Point_3>("Point_3")
+  py::class_<Point_3>(m, "Point_3")
     .def(py::init<>())
     .def(py::init<double, double, double>())
     .def(py::init<FT&, FT&, FT&>())
@@ -480,8 +482,8 @@ void export_kernel(py::module_& m) {
     .def("hz", &Point_3::hz)
     .def("hw", &Point_3::hw)
     .def("dimension", &Point_2::dimension)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Point_3>)
+    .def("__repr__", to_string<Point_3>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self > py::self)
@@ -492,7 +494,7 @@ void export_kernel(py::module_& m) {
     //.setattr("__hash__", &hash<Point_3>)
     ;
 
-  py::class_<Weighted_point_3>("Weighted_point_3")
+  py::class_<Weighted_point_3>(m, "Weighted_point_3")
     .def(py::init<>())
     .def(py::init<const CGAL::Origin&>())
     .def(py::init<const Point_3&>())
@@ -509,8 +511,8 @@ void export_kernel(py::module_& m) {
     .def("hz", &Weighted_point_3::hz)
     .def("hw", &Weighted_point_3::hw)
     // Operations
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<Weighted_point_3>)
+    .def("__repr__", to_string<Weighted_point_3>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     // Convenient operations
@@ -525,7 +527,7 @@ void export_kernel(py::module_& m) {
     //.setattr("__hash__", &hash<Point_3>)
     ;
 
-  py::class_<Aff_transformation_2>("Aff_transformation_2")
+  py::class_<Aff_transformation_2>(m, "Aff_transformation_2")
     .def(py::init<>())
     .def(py::init<RT&, RT&, RT&, RT&, RT&>())
     .def(py::init<RT, RT, RT, RT>())
@@ -549,148 +551,147 @@ void export_kernel(py::module_& m) {
     .def("m", &Aff_transformation_2::m)
     .def("homogeneous", &Aff_transformation_2::homogeneous)
     .def("hm", &Aff_transformation_2::hm)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
-    //.def(self == py::self)
+    .def("__str__", to_string<Aff_transformation_2>)
+    .def("__repr__", to_string<Aff_transformation_2>)
     .def(py::self * py::self)
     ;
 
-  py::class_<Aff_transformation_3>("Aff_transformation_3")
+  py::class_<Aff_transformation_3>(m, "Aff_transformation_3")
     .def(py::init<>())
     ;
 
   //Global kernel functions
-  py::def<CGAL::Angle(const Vector_2&, const Vector_2&)>("angle", &CGAL::angle);
-  py::def<CGAL::Angle(const Point_2&, const Point_2&, const Point_2&)>("angle", &CGAL::angle);
-  py::def<CGAL::Angle(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("angle", &CGAL::angle);
+  m.def<CGAL::Angle(const Vector_2&, const Vector_2&)>("angle", &CGAL::angle);
+  m.def<CGAL::Angle(const Point_2&, const Point_2&, const Point_2&)>("angle", &CGAL::angle);
+  m.def<CGAL::Angle(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("angle", &CGAL::angle);
 
-  py::def<FT (const Point_2&, const Point_2&, const Point_2&)>("area", &CGAL::area);
+  m.def<FT (const Point_2&, const Point_2&, const Point_2&)>("area", &CGAL::area);
 
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&)>("are_ordered_along_line", &CGAL::are_ordered_along_line);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&)>("are_ordered_along_line", &CGAL::are_ordered_along_line);
 
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&)>("are_strictly_ordered_along_line", &CGAL::are_strictly_ordered_along_line);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&)>("are_strictly_ordered_along_line", &CGAL::are_strictly_ordered_along_line);
 
-  py::def<Point_2(const Point_2&, const FT&, const Point_2&, const FT&)>("barycenter", &CGAL::barycenter);
-  py::def<Point_2(const Point_2&, const FT&, const Point_2&, const FT&, const Point_2&, const FT&)>("barycenter", &CGAL::barycenter);
-  py::def<Point_2(const Point_2&, const FT&, const Point_2&, const FT&, const Point_2&, const FT&, const Point_2&, const FT&)>("barycenter", &CGAL::barycenter);
+  m.def<Point_2(const Point_2&, const FT&, const Point_2&, const FT&)>("barycenter", &CGAL::barycenter);
+  m.def<Point_2(const Point_2&, const FT&, const Point_2&, const FT&, const Point_2&, const FT&)>("barycenter", &CGAL::barycenter);
+  m.def<Point_2(const Point_2&, const FT&, const Point_2&, const FT&, const Point_2&, const FT&, const Point_2&, const FT&)>("barycenter", &CGAL::barycenter);
 
-  py::def<Line_2(const Point_2&, const Point_2&)>("bisector", &CGAL::bisector);
+  m.def<Line_2(const Point_2&, const Point_2&)>("bisector", &CGAL::bisector);
 
   // Requires sqrt operation
   //def<Line_2(const Line_2&, const Line_2&)>("bisector", &CGAL::bisector);
 
-  py::def<Point_2(const Point_2&, const Point_2&, const Point_2&)>("centroid", &CGAL::centroid);
-  py::def<Point_2(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("centroid", &CGAL::centroid);
-  py::def<Point_2(const Triangle_2&)>("centroid", &CGAL::centroid);
+  m.def<Point_2(const Point_2&, const Point_2&, const Point_2&)>("centroid", &CGAL::centroid);
+  m.def<Point_2(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("centroid", &CGAL::centroid);
+  m.def<Point_2(const Triangle_2&)>("centroid", &CGAL::centroid);
 
-  py::def<Point_2(const Point_2&, const Point_2&)>("circumcenter", &CGAL::circumcenter);
-  py::def<Point_2(const Point_2&, const Point_2&, const Point_2&)>("circumcenter", &CGAL::circumcenter);
-  py::def<Point_2(const Triangle_2&)>("circumcenter", &CGAL::circumcenter);
+  m.def<Point_2(const Point_2&, const Point_2&)>("circumcenter", &CGAL::circumcenter);
+  m.def<Point_2(const Point_2&, const Point_2&, const Point_2&)>("circumcenter", &CGAL::circumcenter);
+  m.def<Point_2(const Triangle_2&)>("circumcenter", &CGAL::circumcenter);
 
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&)>("collinear_are_ordered_along_line", &CGAL::collinear_are_ordered_along_line);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&)>("collinear_are_ordered_along_line", &CGAL::collinear_are_ordered_along_line);
 
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&)>("collinear_are_strictly_ordered_along_line", &CGAL::collinear_are_strictly_ordered_along_line);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&)>("collinear_are_strictly_ordered_along_line", &CGAL::collinear_are_strictly_ordered_along_line);
 
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&)>("collinear", &CGAL::collinear);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&)>("collinear", &CGAL::collinear);
 
-  py::def<CGAL::Comparison_result(const Point_2&, const Point_2&, const Point_2&)>("compare_distance_to_point", &CGAL::compare_distance_to_point);
+  m.def<CGAL::Comparison_result(const Point_2&, const Point_2&, const Point_2&)>("compare_distance_to_point", &CGAL::compare_distance_to_point);
 
-  py::def <CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_lexicographically", &CGAL::compare_lexicographically);
+  m.def <CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_lexicographically", &CGAL::compare_lexicographically);
 
-  py::def<CGAL::Comparison_result(const Line_2&, const Point_2&, const Point_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line);
+  m.def<CGAL::Comparison_result(const Line_2&, const Point_2&, const Point_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line);
 
-  py::def<CGAL::Comparison_result(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line);
-  py::def<CGAL::Comparison_result(const Line_2&, const Point_2&, const Point_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line);
+  m.def<CGAL::Comparison_result(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line);
+  m.def<CGAL::Comparison_result(const Line_2&, const Point_2&, const Point_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line);
 
-  py::def<CGAL::Comparison_result(const Line_2&, const Line_2&)>("compare_slope", &CGAL::compare_slope);
-  py::def<CGAL::Comparison_result(const Segment_2&, const Segment_2&)>("compare_slope", &CGAL::compare_slope);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&)>("compare_slope", &CGAL::compare_slope);
+  m.def<CGAL::Comparison_result(const Segment_2&, const Segment_2&)>("compare_slope", &CGAL::compare_slope);
 
-  py::def<CGAL::Comparison_result(const Point_2&, const Point_2&, const FT&)>("compare_squared_distance", &CGAL::compare_squared_distance);
+  m.def<CGAL::Comparison_result(const Point_2&, const Point_2&, const FT&)>("compare_squared_distance", &CGAL::compare_squared_distance);
 
-  py::def<CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_x", &CGAL::compare_x);
-  py::def<CGAL::Comparison_result(const Point_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x);
-  py::def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x);
-  py::def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x);
+  m.def<CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_x", &CGAL::compare_x);
+  m.def<CGAL::Comparison_result(const Point_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x);
 
-  py::def<CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_xy", &CGAL::compare_xy);
+  m.def<CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_xy", &CGAL::compare_xy);
 
-  py::def<CGAL::Comparison_result(const Point_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
-  py::def<CGAL::Comparison_result(const Point_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
-  py::def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
-  py::def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
+  m.def<CGAL::Comparison_result(const Point_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
+  m.def<CGAL::Comparison_result(const Point_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
 
-  py::def<CGAL::Comparison_result(const Point_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  py::def<CGAL::Comparison_result(const Point_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  py::def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  py::def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  py::def<CGAL::Comparison_result(const Point_2&, const Segment_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  py::def<CGAL::Comparison_result(const Point_2&, const Segment_2&, const Segment_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
+  m.def<CGAL::Comparison_result(const Point_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
+  m.def<CGAL::Comparison_result(const Point_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
+  m.def<CGAL::Comparison_result(const Point_2&, const Segment_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
+  m.def<CGAL::Comparison_result(const Point_2&, const Segment_2&, const Segment_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
 
-  py::def<CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_y", &CGAL::compare_y);
-  py::def<CGAL::Comparison_result(const Point_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y);
-  py::def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y);
-  py::def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y);
+  m.def<CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_y", &CGAL::compare_y);
+  m.def<CGAL::Comparison_result(const Point_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y);
 
-  py::def<CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_yx", &CGAL::compare_yx);
-  py::def<FT(const Vector_2&, const Vector_2&)>("determinant", &CGAL::determinant);
+  m.def<CGAL::Comparison_result(const Point_2&, const Point_2&)>("compare_yx", &CGAL::compare_yx);
+  m.def<FT(const Vector_2&, const Vector_2&)>("determinant", &CGAL::determinant);
 
-  py::def<bool (const Point_2&, const Point_2&, const Point_2&)>("has_larger_distace_to_point", &CGAL::has_larger_distance_to_point);
+  m.def<bool (const Point_2&, const Point_2&, const Point_2&)>("has_larger_distace_to_point", &CGAL::has_larger_distance_to_point);
 
-  py::def<bool(const Line_2&, const Point_2&, const Point_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line);
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line);
+  m.def<bool(const Line_2&, const Point_2&, const Point_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line);
 
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&)>("has_smaller_distace_to_point", &CGAL::has_smaller_distance_to_point);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&)>("has_smaller_distace_to_point", &CGAL::has_smaller_distance_to_point);
 
-  py::def<bool(const Line_2&, const Point_2&, const Point_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line);
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line);
+  m.def<bool(const Line_2&, const Point_2&, const Point_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line);
 
-  py::def<FT(const Point_2&, const Point_2&)>("l_infinity_distance", &CGAL::l_infinity_distance);
+  m.def<FT(const Point_2&, const Point_2&)>("l_infinity_distance", &CGAL::l_infinity_distance);
 
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&)>("left_turn", &CGAL::left_turn);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&)>("left_turn", &CGAL::left_turn);
 
-  py::def<bool(const Point_2&, const Point_2&)>("lexicographically_xy_larger", &CGAL::lexicographically_xy_larger);
+  m.def<bool(const Point_2&, const Point_2&)>("lexicographically_xy_larger", &CGAL::lexicographically_xy_larger);
 
-  py::def<bool(const Point_2&, const Point_2&)>("lexicographically_xy_larger_or_equal", &CGAL::lexicographically_xy_larger_or_equal);
+  m.def<bool(const Point_2&, const Point_2&)>("lexicographically_xy_larger_or_equal", &CGAL::lexicographically_xy_larger_or_equal);
 
-  py::def<bool(const Point_2&, const Point_2&)>("lexicographically_xy_smaller", &CGAL::lexicographically_xy_smaller);
+  m.def<bool(const Point_2&, const Point_2&)>("lexicographically_xy_smaller", &CGAL::lexicographically_xy_smaller);
 
-  py::def<bool(const Point_2&, const Point_2&)>("lexicographically_xy_smaller_or_equal", &CGAL::lexicographically_xy_smaller_or_equal);
+  m.def<bool(const Point_2&, const Point_2&)>("lexicographically_xy_smaller_or_equal", &CGAL::lexicographically_xy_smaller_or_equal);
 
-  py::def<Point_2(const Iso_rectangle_2&)>("max_vertex", &CGAL::max_vertex);
+  m.def<Point_2(const Iso_rectangle_2&)>("max_vertex", &CGAL::max_vertex);
 
-  py::def<Point_2(const Point_2&, const Point_2&)>("midpoint", &CGAL::midpoint);
+  m.def<Point_2(const Point_2&, const Point_2&)>("midpoint", &CGAL::midpoint);
 
-  py::def<Point_2(const Iso_rectangle_2&)>("min_vertex", &CGAL::min_vertex);
+  m.def<Point_2(const Iso_rectangle_2&)>("min_vertex", &CGAL::min_vertex);
 
-  py::def<CGAL::Orientation(const Point_2&, const Point_2&, const Point_2&)>("orientation", CGAL::orientation);
-  py::def<CGAL::Orientation(const Vector_2&, const Vector_2&)>("orientation", CGAL::orientation);
+  m.def<CGAL::Orientation(const Point_2&, const Point_2&, const Point_2&)>("orientation", CGAL::orientation);
+  m.def<CGAL::Orientation(const Vector_2&, const Vector_2&)>("orientation", CGAL::orientation);
 
-  py::def<bool(const Line_2&, const Line_2&)>("parallel", CGAL::parallel);
-  py::def<bool(const Ray_2&, const Ray_2&)>("parallel", CGAL::parallel);
-  py::def<bool(const Segment_2&, const Segment_2&)>("parallel", CGAL::parallel);
+  m.def<bool(const Line_2&, const Line_2&)>("parallel", CGAL::parallel);
+  m.def<bool(const Ray_2&, const Ray_2&)>("parallel", CGAL::parallel);
+  m.def<bool(const Segment_2&, const Segment_2&)>("parallel", CGAL::parallel);
 
-  py::def<Line_2 (const Circle_2&, const Circle_2&)>("radical_line", &CGAL::radical_line);
+  m.def<Line_2 (const Circle_2&, const Circle_2&)>("radical_line", &CGAL::radical_line);
 
-  py::def<void(const RT&, const RT&, RT&, RT&, RT&, const RT&, const RT&)>("rational_rotation_approximation", &CGAL::rational_rotation_approximation);
+  m.def<void(const RT&, const RT&, RT&, RT&, RT&, const RT&, const RT&)>("rational_rotation_approximation", &CGAL::rational_rotation_approximation);
 
-  py::def<bool(const Point_2&, const Point_2&, const Point_2&)>("right_turn", &CGAL::right_turn);
+  m.def<bool(const Point_2&, const Point_2&, const Point_2&)>("right_turn", &CGAL::right_turn);
 
-  py::def<FT(const Vector_2&, const Vector_2&)>("scalar_product", &CGAL::scalar_product);
+  m.def<FT(const Vector_2&, const Vector_2&)>("scalar_product", &CGAL::scalar_product);
 
-  py::def<CGAL::Bounded_side(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("side_of_bounded_circle", &CGAL::side_of_bounded_circle);
-  py::def<CGAL::Bounded_side(const Point_2&, const Point_2&, const Point_2&)>("side_of_bounded_circle", &CGAL::side_of_bounded_circle);
+  m.def<CGAL::Bounded_side(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("side_of_bounded_circle", &CGAL::side_of_bounded_circle);
+  m.def<CGAL::Bounded_side(const Point_2&, const Point_2&, const Point_2&)>("side_of_bounded_circle", &CGAL::side_of_bounded_circle);
 
-  py::def<CGAL::Oriented_side(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("side_of_oriented_circle", &CGAL::side_of_oriented_circle);
+  m.def<CGAL::Oriented_side(const Point_2&, const Point_2&, const Point_2&, const Point_2&)>("side_of_oriented_circle", &CGAL::side_of_oriented_circle);
 
-  bind_squared_distance_types<Point_2, Line_2, Ray_2, Segment_2, Triangle_2>();
+  bind_squared_distance_types<Point_2, Line_2, Ray_2, Segment_2, Triangle_2>(m);
 
-  py::def<FT(const Point_2&, const Point_2&, const Point_2&)>("squared_radius", &CGAL::squared_radius);
-  py::def<FT(const Point_2&, const Point_2&)>("squared_radius", &CGAL::squared_radius);
-  py::def<FT(const Point_2&)>("squared_radius", &CGAL::squared_radius);
+  m.def<FT(const Point_2&, const Point_2&, const Point_2&)>("squared_radius", &CGAL::squared_radius);
+  m.def<FT(const Point_2&, const Point_2&)>("squared_radius", &CGAL::squared_radius);
+  m.def<FT(const Point_2&)>("squared_radius", &CGAL::squared_radius);
 
-  py::def<bool(const Point_2&, const Point_2&)>("x_equal", &CGAL::x_equal);
+  m.def<bool(const Point_2&, const Point_2&)>("x_equal", &CGAL::x_equal);
 
-  py::def<bool(const Point_2&, const Point_2&)>("y_equal", &CGAL::y_equal);
+  m.def<bool(const Point_2&, const Point_2&)>("y_equal", &CGAL::y_equal);
 
-  py::def<bool(const Bbox_2&, const Bbox_2&)>("do_overlap", &CGAL::do_overlap);
+  m.def<bool(const Bbox_2&, const Bbox_2&)>("do_overlap", &CGAL::do_overlap);
 }
