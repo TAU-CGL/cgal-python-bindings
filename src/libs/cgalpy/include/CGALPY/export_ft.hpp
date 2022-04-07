@@ -5,11 +5,15 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #ifndef CGALPY_EXPORT_FT_HPP
 #define CGALPY_EXPORT_FT_HPP
 
 #include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
+
+#include "CGALPY/to_string.hpp"
 
 namespace py = nanobind;
 
@@ -30,11 +34,11 @@ void export_ft(C c) {
   c.def(py::init<double>())
     .def(py::init<typename FT_::Exact_type>())
     .def(py::init<FT_>())
-    .def("exact", &ft_exact<FT_>, py::return_internal_reference<>())
-    //.def("approx", &ft__approx<FT_>, py::return_internal_reference<>())
+    .def("exact", &ft_exact<FT_>)
+    //.def("approx", &ft__approx<FT_>)
     .def("to_double", &ft_to_double<FT_>)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("__str__", to_string<FT_>)
+    .def("__repr__", to_string<FT_>)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self < py::self)

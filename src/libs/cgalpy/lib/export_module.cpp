@@ -48,7 +48,7 @@ NB_MODULE(CGALPY_MODULE_NAME, m) {
 
 #ifdef CGALPY_KERNEL_BINDINGS
   {
-    SET_SCOPE("Ker")
+    // SET_SCOPE("Ker")
     export_kernel(m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
     export_intersections_2();
