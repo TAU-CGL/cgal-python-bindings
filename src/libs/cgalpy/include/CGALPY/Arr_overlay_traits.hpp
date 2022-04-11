@@ -7,8 +7,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef ARR_OVERLAY_TRAITS_HPP
-#define ARR_OVERLAY_TRAITS_HPP
+#ifndef CGALPY_ARR_OVERLAY_TRAITS_HPP
+#define CGALPY_ARR_OVERLAY_TRAITS_HPP
 
 #include <boost/python.hpp>
 
@@ -17,7 +17,7 @@
 #include <CGAL/Surface_sweep_2/Arr_default_overlay_traits_base.h>
 
 #include "CGALPY/config.hpp"
-#include <CGALPY/Python_functor.hpp>
+#include "CGALPY/Python_functor.hpp"
 
 /*! \class
  *

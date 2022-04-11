@@ -1,4 +1,4 @@
-project(square_pybind11)
+project(square)
 cmake_minimum_required(VERSION 3.17...3.22)
 
 # Generate a shared library
@@ -15,14 +15,18 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 set(PY_VERSION 3.8)
-find_package(PythonLibs ${PY_VERSION} REQUIRED)
-find_package(pybind11 REQUIRED)
+find_package(Python ${PY_VERSION} COMPONENTS Interpreter Development REQUIRED)
 
-include_directories(${PYTHON_INCLUDE_DIRS})
-add_library(square_pybind11 SHARED square.cpp)
+find_package(tsl-robin-map REQUIRED)
+find_package(nanobind CONFIG REQUIRED)
+
+include_directories(${tsl-robin-map_INCLUDE_DIRS})
+nanobind_add_module(square_nanobind
+  NB_STATIC # Build static libnanobind (the extension module itself remains a shared library)
+  square.cpp)
 
 # don't prepend wrapper library name with lib
-set_target_properties(square_pybind11 PROPERTIES PREFIX "")
+set_target_properties(square_nanobind PROPERTIES PREFIX "")
 
 # install targets
 # install(TARGETS square

@@ -17,8 +17,8 @@ endif()
 
 # 2-3D Kernel
 if (CGALPY_KERNEL_BINDINGS)
-  list (APPEND CGALPY_MODULES ker)
-  set (CGALPY_ker_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Ker)
+  set (CGALPY_Ker_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
   if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
@@ -27,83 +27,83 @@ endif()
 
 # dD Kernel
 if (CGALPY_KERNEL_D_BINDINGS)
-  list (APPEND CGALPY_MODULES kerd)
-  set (CGALPY_kerd_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Kerd)
+  set (CGALPY_Kerd_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_d_bindings.cpp)
 endif()
 
 # 2D Alpha shape
 if (CGALPY_ALPHA_SHAPE_2_BINDINGS)
-  list (APPEND CGALPY_MODULES as2)
-  set (CGALPY_as2_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES As2)
+  set (CGALPY_As2_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_2_bindings.cpp)
 endif()
 
 # 3D Alpha shape
 if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
-  list (APPEND CGALPY_MODULES as3)
-  set (CGALPY_as3_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES As3)
+  set (CGALPY_As3_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_3_bindings.cpp)
 endif()
 
 # 2D Arrangement
 if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
-  list (APPEND CGALPY_MODULES aos2)
-  set (CGALPY_aos2_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Aos2)
+  set (CGALPY_Aos2_FILTERS [=[{}]=])
   # Geometry Traits
   if(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_aos2_FILTERS [=[\{ \
-      \"aos2.Geometry_traits_2\":\"\\\"Arr_algebraic_segment_traits_2\\\"\", \
+    set (CGALPY_Aos2_FILTERS [=[\{ \
+      \"Aos2.Geometry_traits_2\":\"\\\"Arr_algebraic_segment_traits_2\\\"\", \
       \"Arr_algebraic_segment_traits_2\":\"true\" \
       \}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_algebraic_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS})
-    set (CGALPY_aos2_FILTERS [=[\{ \
-      \"aos2.Geometry_traits_2\":\"\\\"Arr_Bezier_curve_traits_2\\\"\", \
+    set (CGALPY_Aos2_FILTERS [=[\{ \
+      \"Aos2.Geometry_traits_2\":\"\\\"Arr_Bezier_curve_traits_2\\\"\", \
       \"Arr_Bezier_curve_traits_2\":\"true\" \
       \}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_Bezier_curve_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_aos2_FILTERS [=[\{ \
-      \"aos2.Geometry_traits_2\":\"\\\"Arr_circle_segment_traits_2\\\"\", \
+    set (CGALPY_Aos2_FILTERS [=[\{ \
+      \"Aos2.Geometry_traits_2\":\"\\\"Arr_circle_segment_traits_2\\\"\", \
       \"Arr_circle_segment_traits_2\":\"true\" \
       \}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_circle_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CONIC_GEOMETRY_TRAITS})
-    set (CGALPY_aos2_FILTERS [=[\{ \
-      \"aos2.Geometry_traits_2\":\"\\\"Arr_conic_traits_2\\\"\", \
+    set (CGALPY_Aos2_FILTERS [=[\{ \
+      \"Aos2.Geometry_traits_2\":\"\\\"Arr_conic_traits_2\\\"\", \
       \"Arr_conic_traits_2\":\"true\" \
       \}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_conic_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS})
-    set (CGALPY_aos2_FILTERS [=[\{ \
-      \"aos2.Geometry_traits_2\":\"\\\"Arr_linear_traits_2\\\"\", \
+    set (CGALPY_Aos2_FILTERS [=[\{ \
+      \"Aos2.Geometry_traits_2\":\"\\\"Arr_linear_traits_2\\\"\", \
       \"Arr_linear_traits_2\":\"true\" \
       \}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_linear_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_aos2_FILTERS [=[\{ \
+    set (CGALPY_Aos2_FILTERS [=[\{ \
       \"Arr_non_caching_segment_basic_traits_2\":\"true\", \
       \"AosBasicTraits_2.Point_2\":\"false\" \
       \}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_non_caching_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_GEOMETRY_TRAITS})
-    set (CGALPY_aos2_FILTERS [=[\{ \
-      \"aos2.Geometry_traits_2\":\"\\\"Arr_rational_function_traits_2\\\"\", \
+    set (CGALPY_Aos2_FILTERS [=[\{ \
+      \"Aos2.Geometry_traits_2\":\"\\\"Arr_rational_function_traits_2\\\"\", \
       \"Arr_rational_function_traits_2\":\"true\" \
       \}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_rational_function_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_aos2_FILTERS [=[\{ \
-      \"aos2.Geometry_traits_2\":\"\\\"Arr_segment_traits_2\\\"\", \
+    set (CGALPY_Aos2_FILTERS [=[\{ \
+      \"Aos2.Geometry_traits_2\":\"\\\"Arr_segment_traits_2\\\"\", \
       \"Arr_segment_traits_2\":\"true\", \
       \"AosBasicTraits_2.Point_2\":\"false\", \
       \"AosBasicTraits_2.Equal_2\":\"false\" \
       \}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_TRAITS})
-    set (CGALPY_aos2_FILTERS [=[\{ \
-      \"aos2.Geometry_traits_2\":\"\\\"Arr_geodesic_arc_on_sphere_traits_2\\\"\", \
+    set (CGALPY_Aos2_FILTERS [=[\{ \
+      \"Aos2.Geometry_traits_2\":\"\\\"Arr_geodesic_arc_on_sphere_traits_2\\\"\", \
       \"Arr_geodesic_arc_on_sphere_traits_2\":\"true\" \
       \}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_geodesic_arc_on_sphere_traits_bindings.cpp)
@@ -127,8 +127,8 @@ endif()
 
 # 2D Regularized Boolean operations
 if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
-  list (APPEND CGALPY_MODULES bso2)
-  set (CGALPY_bso2_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Bso2)
+  set (CGALPY_Bso2_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/boolean_set_operations_2_bindings.cpp)
 
   if(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
@@ -161,51 +161,51 @@ endif()
 # Bounding volumes
 if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/bounding_volumes_bindings.cpp)
-  list (APPEND CGALPY_MODULES bv)
-  set (CGALPY_bv_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Bv)
+  set (CGALPY_Bv_FILTERS [=[{}]=])
 endif()
 # 2D convex hull
 if (CGALPY_CONVEX_HULL_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/convex_hull_2_bindings.cpp)
-  list (APPEND CGALPY_MODULES ch2)
-  set (CGALPY_ch2_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Ch2)
+  set (CGALPY_Ch2_FILTERS [=[{}]=])
 endif()
 # 2D Minkowski sum
 if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/minkowski_sum_2_bindings.cpp)
-  list (APPEND CGALPY_MODULES ms2)
-  set (CGALPY_ms2_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Ms2)
+  set (CGALPY_Ms2_FILTERS [=[{}]=])
 endif()
 # 2D Polygon
 if (CGALPY_POLYGON_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
-  list (APPEND CGALPY_MODULES pol2)
-  set (CGALPY_pol2_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Pol2)
+  set (CGALPY_Pol2_FILTERS [=[{}]=])
 endif()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
-  list (APPEND CGALPY_MODULES pp2)
-  set (CGALPY_pp2_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Pp2)
+  set (CGALPY_Pp2_FILTERS [=[{}]=])
 endif()
 # Spatial searching
 if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_searching_bindings.cpp)
-  list (APPEND CGALPY_MODULES ss)
-  set (CGALPY_ss_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Ss)
+  set (CGALPY_Ss_FILTERS [=[{}]=])
 endif()
 # 2D triangulation
 if (CGALPY_TRIANGULATION_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_2_bindings.cpp)
-  list (APPEND CGALPY_MODULES tri2)
-  set (CGALPY_tri2_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Tri2)
+  set (CGALPY_Tri2_FILTERS [=[{}]=])
 endif()
 # 3D triangulation
 if (CGALPY_TRIANGULATION_3_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_3_bindings.cpp)
-  list (APPEND CGALPY_MODULES tri3)
-  set (CGALPY_tri3_FILTERS [=[{}]=])
+  list (APPEND CGALPY_MODULES Tri3)
+  set (CGALPY_Tri3_FILTERS [=[{}]=])
 endif()
 
 # Add all include directories

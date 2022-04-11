@@ -12,8 +12,8 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Aos2 = CGALPY.aos2
-Ker = CGALPY.ker
+Aos2 = CGALPY.Aos2
+Ker = CGALPY.Ker
 Point = Ker.Point_2
 Circle = Ker.Circle_2
 Arrangement = Aos2.Arrangement_2

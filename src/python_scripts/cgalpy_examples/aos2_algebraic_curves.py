@@ -11,7 +11,7 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Aos2 = CGALPY.aos2
+Aos2 = CGALPY.Aos2
 PT_2_Shift = Aos2.PT_2_Shift
 Arrangement_2 = Aos2.Arrangement_2
 Polynomial_1 = Aos2.Polynomial_1

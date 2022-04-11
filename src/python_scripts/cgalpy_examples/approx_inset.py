@@ -12,12 +12,12 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.ker
+Ker = CGALPY.Ker
 Point = Ker.Point_2
-Pol2 = CGALPY.pol2
+Pol2 = CGALPY.Pol2
 Polygon = Pol2.Polygon_2
 Polygon_with_holes = Pol2.Polygon_with_holes_2
-MS2 = CGALPY.ms2
+MS2 = CGALPY.Ms2
 
 def read_polygon(inp):
   pgn = Polygon()
