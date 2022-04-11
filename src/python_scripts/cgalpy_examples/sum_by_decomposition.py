@@ -11,13 +11,13 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.ker
+Ker = CGALPY.Ker
 Point = Ker.Point_2
-Pol2 = CGALPY.pol2
+Pol2 = CGALPY.Pol2
 Polygon = Pol2.Polygon_2
 Polygon_with_holes = Pol2.Polygon_with_holes_2
-MS2 = CGALPY.ms2
-PP2 = CGALPY.pp2
+Ms2 = CGALPY.Ms2
+PP2 = CGALPY.Pp2
 
 def read_polygon(inp):
   pgn = Polygon()
@@ -42,9 +42,9 @@ with open(filename, 'r') as inp:
   # Compute the Minkowski sum using the decomposition approach.
   # Minkowski sum by decompisition is temporarily commented out
   ssab_decomp = PP2.Small_side_angle_bisector_decomposition()
-  sum1 = MS2.minkowski_sum_2(P, Q, ssab_decomp, ssab_decomp)
-  sum2 = MS2.minkowski_sum_2(P, Q, ssab_decomp)
-  sum3 = MS2.minkowski_sum_2(P, Q)
+  sum1 = Ms2.minkowski_sum_2(P, Q, ssab_decomp, ssab_decomp)
+  sum2 = Ms2.minkowski_sum_2(P, Q, ssab_decomp)
+  sum3 = Ms2.minkowski_sum_2(P, Q)
   print("P (+) Q = ", sum1)
   print("P (+) Q = ", sum2)
   print("P (+) Q = ", sum3)

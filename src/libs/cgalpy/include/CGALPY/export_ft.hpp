@@ -6,8 +6,8 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#ifndef EXPORT_CGALPY_FT_HPP
-#define EXPORT_CGALPY_FT_HPP
+#ifndef CGALPY_EXPORT_FT_HPP
+#define CGALPY_EXPORT_FT_HPP
 
 #include <boost/python.hpp>
 

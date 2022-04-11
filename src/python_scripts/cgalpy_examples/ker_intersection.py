@@ -11,7 +11,7 @@ else:
     lib = sys.argv[1]
 CGALPY = importlib.import_module(lib)
 
-Ker = CGALPY.ker
+Ker = CGALPY.Ker
 Point_2 = Ker.Point_2
 Segment_2 = Ker.Segment_2
 s1 = Segment_2(Point_2(0, 1), Point_2(1, 0))

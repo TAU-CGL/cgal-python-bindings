@@ -1,1 +1,35 @@
-The benchmark binding_bench.py should be run on windows, with python 3.6 64bit
+We compare four python bindings and a native implementation.
+The four Python bindings are:
+1. Boost.python
+2. pybind11
+3. nanobind
+4. swig
+
+Boost.python
+------------
+We use Boost version 1.78.
+Install Boost
+
+pybind11
+--------
+# Install from sources:
+> git clone git@github.com:pybind/pybind11.git
+# Assume <pybind11_SRC_DIR> points at the repository root directory
+> cd $pybind11_DIR
+> cmake -DCMAKE_BUILD_TYPE=Release -DPYBIND11_TEST:BOOL=Off <pybind11_SRC_DIR>
+# For some reason it does not work without installing, so
+> sudo make install
+# So there is no need to 'export pybind11_DIR=`pwd`'
+
+nanobind
+--------
+# Install from sources:
+git clone git@github.com:wjakob/nanobind.git
+# Assume <nanobind_SRC_DIR> points at the repository root directory
+> cmake -DCMAKE_BUILD_TYPE=Release <nanobind_SRC_DIR>
+> export nanobind_DIR=`pwd`
+
+swig
+----
+# install swig
+> sudo apt install swig

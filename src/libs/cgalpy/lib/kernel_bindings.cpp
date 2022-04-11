@@ -10,7 +10,7 @@
 
 #include <boost/python.hpp>
 
-#include "CGALPY/common.hpp"
+#include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/export_ft.hpp"
@@ -177,7 +177,7 @@ void export_kernel() {
     .def(bp::init<FT&, FT&>())
     .def(bp::init<RT&, RT&>())
     .def(bp::init<Point_2&>())
-    .def("x", &Point_2::x, Kernel_return_value_policy(), "YYYYYYYYYYYYYYYYYYY")
+    .def("x", &Point_2::x, Kernel_return_value_policy())
     .def("y", &Point_2::y, Kernel_return_value_policy())
     .def("hx", &Point_2::hx, Kernel_return_value_policy())
     .def("hy", &Point_2::hy, Kernel_return_value_policy())

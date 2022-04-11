@@ -12,12 +12,12 @@ else:
     lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.ker
-AS3 = CGALPY.as3
+Ker = CGALPY.Ker
+As3 = CGALPY.As3
 
 Point_3 = Ker.Point_3
-Alpha_shape_3 = AS3.Alpha_shape_3
-Mode = AS3.Mode
+Alpha_shape_3 = As3.Alpha_shape_3
+Mode = As3.Mode
 
 p1 = Point_3(492, 291, 677)
 p2 = Point_3(493, 314, 533)
