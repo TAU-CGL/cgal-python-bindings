@@ -38,13 +38,13 @@ Face_handle face_to_handle(Face& f) {
   return res;
 }
 
-CopyIterator<All_edges_iterator>* all_edges_iterator(Triangulation_2& t) {
-  return new CopyIterator<All_edges_iterator>(t.all_edges_begin(),
+Copy_iterator<All_edges_iterator>* all_edges_iterator(Triangulation_2& t) {
+  return new Copy_iterator<All_edges_iterator>(t.all_edges_begin(),
                                               t.all_edges_end());
 }
 
-CopyIterator<Finite_edges_iterator>* finite_edges_iterator(Triangulation_2& t) {
-  return new CopyIterator<Finite_edges_iterator>(t.finite_edges_begin(),
+Copy_iterator<Finite_edges_iterator>* finite_edges_iterator(Triangulation_2& t) {
+  return new Copy_iterator<Finite_edges_iterator>(t.finite_edges_begin(),
                                                  t.finite_edges_end());
 }
 
@@ -210,8 +210,8 @@ void export_triangulation_2() {
     .def("value", &tri2::value<tri2::Face_handle>, Reference_existing_object())
     ;
 
-  bind_copy_iterator<CopyIterator<tri2::All_edges_iterator>>("Triangulation_all_edges_iterator");
-  bind_copy_iterator<CopyIterator<tri2::Finite_edges_iterator>>("Triangulation_finite_edges_iterator");
+  bind_copy_iterator<Copy_iterator<tri2::All_edges_iterator>>("Triangulation_all_edges_iterator");
+  bind_copy_iterator<Copy_iterator<tri2::Finite_edges_iterator>>("Triangulation_finite_edges_iterator");
   bind_copy_iterator<Copy_iterator_from_circulator<tri2::Edge_circulator>>("Triangulation_edges_iterator");
 
   bind_iterator<Iterator_from_circulator<tri2::Face_circulator>>("Triangulation_faces_iterator");

@@ -13,6 +13,7 @@
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/export_unique.hpp"
 
 namespace bp = boost::python;
 
@@ -29,16 +30,16 @@ static Polygon_2* init_from_list(bp::list& lst) {
   return new Polygon_2(begin, end);
 }
 
-CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
-  return new CopyIterator<Polygon_2::Edge_const_iterator>(P.edges_begin(),
+Copy_iterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
+  return new Copy_iterator<Polygon_2::Edge_const_iterator>(P.edges_begin(),
                                                           P.edges_end());
 }
 
 }
-void register_polygon_2() {
+void register_polygon_2(const char* name) {
   typedef pol2::Polygon_2               Polygon_2;
 
-  bp::class_<Polygon_2>("Polygon_2")
+  bp::class_<Polygon_2>(name)
     .def(bp::init<>())
     .def(bp::init<const Polygon_2&>())
     .def("__init__", make_constructor(&pol2::init_from_list))
@@ -85,20 +86,9 @@ void register_polygon_2() {
 
 void export_polygon_2() {
   typedef pol2::Polygon_2               Polygon_2;
+  export_unique<Polygon_2>("Polygon_2", register_polygon_2);
 
-  const bp::type_info info_polygon_2 = bp::type_id<Polygon_2>();
-  const auto* reg_polygon_2 = bp::converter::registry::query(info_polygon_2);
-  if ((reg_polygon_2 == nullptr) || ((*reg_polygon_2).m_to_python == nullptr))
-    register_polygon_2();
-  else
-    bp::scope().attr("Polygon_2") = bp::handle<>(reg_polygon_2->m_class_object);
-
-  typedef CopyIterator<Polygon_2::Edge_const_iterator>  Polygon_edge_iterator;
-
-  const bp::type_info info_pei = bp::type_id<Polygon_2>();
-  const auto* reg_pei = bp::converter::registry::query(info_pei);
-  if ((reg_pei == nullptr) || ((*reg_pei).m_to_python == nullptr))
-    bind_copy_iterator<Polygon_edge_iterator>("Polygon_edge_iterator");
-  else
-    bp::scope().attr("Polygon_edge_iterator") = bp::handle<>(reg_pei->m_class_object);
+  typedef Copy_iterator<Polygon_2::Edge_const_iterator>  Polygon_edge_iterator;
+  export_unique<Polygon_edge_iterator>("Polygon_edge_iterator",
+                                       bind_copy_iterator<Polygon_edge_iterator>);
 }
