@@ -13,6 +13,7 @@
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/export_unique.hpp"
 
 namespace bp = boost::python;
 
@@ -35,11 +36,11 @@ Polygon_2& outer_boundary(Polygon_with_holes_2& p)
 
 }
 
-void register_polygon_with_holes_2() {
+void register_polygon_with_holes_2(const char* name) {
   typedef pol2::Polygon_2               Polygon_2;
   typedef pol2::Polygon_with_holes_2    Polygon_with_holes_2;
 
-  bp::class_<Polygon_with_holes_2>("Polygon_with_holes_2")
+  bp::class_<Polygon_with_holes_2>(name)
     .def(bp::init<Polygon_2&>())
     .def("__init__", make_constructor(&pol2::init_polygon_with_holes_2))
     .def("is_unbounded", &Polygon_with_holes_2::is_unbounded)
@@ -58,11 +59,6 @@ void register_polygon_with_holes_2() {
 
 void export_polygon_with_holes_2() {
   typedef pol2::Polygon_with_holes_2    Polygon_with_holes_2;
-
-  const bp::type_info info = bp::type_id<Polygon_with_holes_2>();
-  const auto* reg = bp::converter::registry::query(info);
-  if ((reg == nullptr) || ((*reg).m_to_python == nullptr))
-    register_polygon_with_holes_2();
-  else
-    bp::scope().attr("Polygon_with_holes_2") = bp::handle<>(reg->m_class_object);
+  export_unique<Polygon_with_holes_2>("Polygon_with_holes_2",
+                                      register_polygon_with_holes_2);
 }
