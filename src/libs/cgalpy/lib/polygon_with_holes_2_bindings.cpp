@@ -35,7 +35,7 @@ Polygon_2& outer_boundary(Polygon_with_holes_2& p)
 
 }
 
-void export_polygon_with_holes_2() {
+void register_polygon_with_holes_2() {
   typedef pol2::Polygon_2               Polygon_2;
   typedef pol2::Polygon_with_holes_2    Polygon_with_holes_2;
 
@@ -54,4 +54,15 @@ void export_polygon_with_holes_2() {
     .def(bp::self == bp::self)
     .def(bp::self != bp::self)
     ;
+}
+
+void export_polygon_with_holes_2() {
+  typedef pol2::Polygon_with_holes_2    Polygon_with_holes_2;
+
+  const bp::type_info info = bp::type_id<Polygon_with_holes_2>();
+  const auto* reg = bp::converter::registry::query(info);
+  if ((reg == nullptr) || ((*reg).m_to_python == nullptr))
+    register_polygon_with_holes_2();
+  else
+    bp::scope().attr("Polygon_with_holes_2") = bp::handle<>(reg->m_class_object);
 }
