@@ -55,10 +55,13 @@ typedef typename CGAL::Arr_linear_traits_2<Kernel>              BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>      BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-typedef typename CGAL::CORE_algebraic_number_traits             NtTraits;
-typedef typename CGAL::Cartesian <NtTraits::Rational>           RatKernel;
-typedef typename CGAL::Cartesian <NtTraits::Algebraic>          AlgKernel;
-typedef typename CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>    BGT;
+typedef typename CGAL::CORE_algebraic_number_traits             Nt_traits;
+typedef typename CGAL::Cartesian <Nt_traits::Rational>          Rat_kernel;
+typedef typename CGAL::Cartesian <Nt_traits::Algebraic>         Alg_kernel;
+typedef typename CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits> BGT;
+typedef typename BGT::Rat_point_2                               Rat_point_2;
+typedef typename BGT::Rat_segment_2                             Rat_segment_2;
+typedef typename BGT::Rat_circle_2                              Rat_circle_2;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 typedef CORE::BigInt                                            Integer;
 typedef CGAL::Algebraic_kernel_d_1<Integer>                     Algebraic_kernel_d_1;
