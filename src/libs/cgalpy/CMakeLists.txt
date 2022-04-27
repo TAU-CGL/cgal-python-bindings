@@ -54,60 +54,31 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
   set (CGALPY_Aos2_FILTERS [=[{}]=])
   # Geometry Traits
   if(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_algebraic_segment_traits_2\\\"\", \
-      \"Arr_algebraic_segment_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_algebraic_segment_traits_2\\\"\",\"Arr_algebraic_segment_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_algebraic_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_Bezier_curve_traits_2\\\"\", \
-      \"Arr_Bezier_curve_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_Bezier_curve_traits_2\\\"\",\"Arr_Bezier_curve_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_Bezier_curve_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_circle_segment_traits_2\\\"\", \
-      \"Arr_circle_segment_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_circle_segment_traits_2\\\"\",\"Arr_circle_segment_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_circle_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CONIC_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_conic_traits_2\\\"\", \
-      \"Arr_conic_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_conic_traits_2\\\"\",\"Arr_conic_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_conic_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_linear_traits_2\\\"\", \
-      \"Arr_linear_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_linear_traits_2\\\"\",\"Arr_linear_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_linear_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Arr_non_caching_segment_basic_traits_2\":\"true\", \
-      \"AosBasicTraits_2.Point_2\":\"false\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Arr_non_caching_segment_basic_traits_2\":\"true\",\"AosBasicTraits_2.Point_2\":\"false\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_non_caching_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_rational_function_traits_2\\\"\", \
-      \"Arr_rational_function_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_rational_function_traits_2\\\"\",\"Arr_rational_function_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_rational_function_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_segment_traits_2\\\"\", \
-      \"Arr_segment_traits_2\":\"true\", \
-      \"AosBasicTraits_2.Point_2\":\"false\", \
-      \"AosBasicTraits_2.Equal_2\":\"false\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_segment_traits_2\\\"\",\"Arr_segment_traits_2\":\"true\",\"AosBasicTraits_2.Point_2\":\"false\",\"AosBasicTraits_2.Equal_2\":\"false\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_geodesic_arc_on_sphere_traits_2\\\"\", \
-      \"Arr_geodesic_arc_on_sphere_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_geodesic_arc_on_sphere_traits_2\\\"\",\"Arr_geodesic_arc_on_sphere_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_geodesic_arc_on_sphere_traits_bindings.cpp)
   endif()
 
@@ -447,6 +418,7 @@ set (CGALPY_SRC_SETUP "${CMAKE_CURRENT_LIST_DIR}/setup.py")
 set (CGALPY_TRG_SETUP "${CGALPY_LIB_DIR}/setup.py")
 set (CGALPY_TARGET_LINKER_FILE ${CGALPY_LIB_NAME}${CGALPY_LIBRARY_SUFFIX})
 set (CGALPY_SETUP_DATA "'${CGALPY_TARGET_LINKER_FILE}'")
+list(APPEND CGALPY_SETUP_DATA "'CGALPY_add_dlls/__init__.py'")
 list(APPEND CGALPY_SETUP_DATA "'${CGALPY_LIB_NAME}.pyi'")
 foreach(MODULE IN LISTS CGALPY_MODULES)
   list(APPEND CGALPY_SETUP_DATA "'${MODULE}/__init__.pyi'")
@@ -474,6 +446,7 @@ add_custom_command(
 
 list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_SETUP})
 
+# Add README.rst
 set (CGALPY_SRC_README "${CMAKE_CURRENT_LIST_DIR}/README.rst")
 set (CGALPY_TRG_README "${CGALPY_LIB_DIR}/README.rst")
 add_custom_command(
@@ -487,6 +460,24 @@ add_custom_command(
 
 list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_README})
 
+# Add CGALPY_add_dlls.py
+get_filename_component(GMP_LIBRARY_DIR ${GMP_LIBRARIES} PATH CACHE )
+get_filename_component(MPFR_LIBRARY_DIR ${MPFR_LIBRARIES} PATH CACHE )
+set (CGALPY_SRC_ADD_DLLS "${CMAKE_CURRENT_LIST_DIR}/CGALPY_add_dlls/__init__.py")
+set (CGALPY_TRG_ADD_DLLS "${CGALPY_LIB_DIR}/CGALPY_add_dlls/__init__.py")
+add_custom_command(
+  OUTPUT ${CGALPY_TRG_ADD_DLLS}
+  COMMAND "${CMAKE_COMMAND}"
+  "-DFILE_IN=${CGALPY_SRC_ADD_DLLS}"
+  "-DFILE_OUT=${CGALPY_TRG_ADD_DLLS}"
+  "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
+  "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
+  "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
+  -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
+  DEPENDS ${CGALPY_SRC_ADD_DLLS})
+
+list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_ADD_DLLS})
+
 # Setup application
 set (CGALPY_BUILD_OUTPUT_DIR "${CGALPY_LIB_DIR}/dist")
 set (CGALPY_TAR ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_LIB_NAME}-1.0.tar.gz)
@@ -494,7 +485,7 @@ set (CGALPY_WHL ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_LIB_NAME}-1.0-py3-none-any.w
 set (CGALPY_BUILD_OUTPUT ${CGALPY_TAR} ${CGALPY_WHL})
 set (CGALPY_BUILD_CMD ${Python3_EXECUTABLE})
 set (CGALPY_BUILD_ARGS -m build ${CGALPY_LIB_DIR})
-set (CGALPY_BUILD_DEPENDS CGALPY ${CGALPY_STUBS} ${CGALPY_TRG_SETUP} ${CGALPY_TRG_README})
+set (CGALPY_BUILD_DEPENDS CGALPY ${CGALPY_STUBS} ${CGALPY_TRG_SETUP} ${CGALPY_TRG_README} ${CGALPY_TRG_ADD_DLLS})
 add_custom_command(
   OUTPUT ${CGALPY_BUILD_OUTPUT}
   COMMAND ${CGALPY_BUILD_CMD}
