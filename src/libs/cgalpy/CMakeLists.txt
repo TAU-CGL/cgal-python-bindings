@@ -461,8 +461,8 @@ add_custom_command(
 list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_README})
 
 # Add CGALPY_add_dlls.py
-get_filename_component(GMP_LIBRARY_DIR ${GMP_LIBRARIES} PATH CACHE )
-get_filename_component(MPFR_LIBRARY_DIR ${MPFR_LIBRARIES} PATH CACHE )
+get_directory("${GMP_LIBRARIES}" GMP_LIBRARY_DIR)
+get_directory("${MPFR_LIBRARIES}" MPFR_LIBRARY_DIR)
 set (CGALPY_SRC_ADD_DLLS "${CMAKE_CURRENT_LIST_DIR}/CGALPY_add_dlls/__init__.py")
 set (CGALPY_TRG_ADD_DLLS "${CGALPY_LIB_DIR}/CGALPY_add_dlls/__init__.py")
 add_custom_command(
