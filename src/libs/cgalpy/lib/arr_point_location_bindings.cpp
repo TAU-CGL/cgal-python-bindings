@@ -10,6 +10,7 @@
 #define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
 
 #include <boost/python.hpp>
+#include <boost/function_output_iterator.hpp>
 
 #include <CGAL/Arr_naive_point_location.h>
 #include <CGAL/Arr_walk_along_line_point_location.h>
