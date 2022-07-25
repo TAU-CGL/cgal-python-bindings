@@ -22,37 +22,37 @@ typedef typename Kernel::Intersect_2                               Intersect_2;
 // are not a valid overload for do_intersect in which case the second version
 // (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
-void bind_do_intersect_pair(decltype(CGAL::do_intersect<Kernel>(T1(), T2())))
+void bind_do_intersect_pair(py::module_& m, decltype(CGAL::do_intersect<Kernel>(T1(), T2())))
 {
-  py::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
+  m.def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
 }
 
 template<typename, typename>
-void bind_do_intersect_pair(...) {}
+void bind_do_intersect_pair(py::module_&, ...) {}
 
-template<typename T> void bind_do_intersect_inner(T) {}
+template<typename T> void bind_do_intersect_inner(py::module_&, T) {}
 
 template<typename T1, typename T2, typename... Ts>
-void bind_do_intersect_inner(T1 arg1, T2 arg2, Ts... args) {
+void bind_do_intersect_inner(py::module_& m, T1 arg1, T2 arg2, Ts... args) {
   typedef typename std::remove_pointer<T1>::type        PT1;
   typedef typename std::remove_pointer<T2>::type        PT2;
-  bind_do_intersect_pair<PT1, PT2>(true);
-  bind_do_intersect_pair<PT2, PT1>(true);
-  bind_do_intersect_inner(arg1, args...);
+  bind_do_intersect_pair<PT1, PT2>(m, true);
+  bind_do_intersect_pair<PT2, PT1>(m, true);
+  bind_do_intersect_inner(m, arg1, args...);
 }
 
 template<typename T>
-void bind_do_intersect(T arg) {
+void bind_do_intersect(py::module_& m, T arg) {
   typedef typename std::remove_pointer<T>::type         PT;
-  bind_do_intersect_pair<PT, PT>(true);
+  bind_do_intersect_pair<PT, PT>(m, true);
 }
 
 template <typename T1, typename... Ts>
-void bind_do_intersect(T1 arg, Ts... args) {
-  bind_do_intersect_inner(arg, args...);
-  bind_do_intersect(args...);
+void bind_do_intersect(py::module_& m, T1 arg, Ts... args) {
+  bind_do_intersect_inner(m, arg, args...);
+  bind_do_intersect(m, args...);
   typedef typename std::remove_pointer<T1>::type         PT1;
-  bind_do_intersect_pair<PT1, PT1>(true);
+  bind_do_intersect_pair<PT1, PT1>(m, true);
 }
 ///@}
 
@@ -88,39 +88,39 @@ py::object cgalpy_intersection(const T1& t1, const T2& t2) {
 // default value of an unnamed template parameter.
 template <typename T1, typename T2,
           typename = decltype(CGAL::intersection<Kernel>(T1(), T2()))>
-void bind_intersection_pair(bool) {
-  py::def("intersection", &cgalpy_intersection<T1, T2>);
+void bind_intersection_pair(py::module_& m, bool) {
+  m.def("intersection", &cgalpy_intersection<T1, T2>);
 }
 
 template<typename, typename>
-void bind_intersection_pair(...) {}
+void bind_intersection_pair(py::module_&, ...) {}
 
-template<typename T> void bind_intersection_inner(T) {}
+template<typename T> void bind_intersection_inner(py::module_&, T) {}
 
 template<typename T1, typename T2, typename... Ts>
-void bind_intersection_inner(T1 arg1, T2 arg2, Ts... args) {
+void bind_intersection_inner(py::module_& m, T1 arg1, T2 arg2, Ts... args) {
   typedef typename std::remove_pointer<T1>::type        PT1;
   typedef typename std::remove_pointer<T2>::type        PT2;
-  bind_intersection_pair<PT1, PT2>(true);
-  bind_intersection_pair<PT2, PT1>(true);
-  bind_intersection_inner(arg1, args...);
+  bind_intersection_pair<PT1, PT2>(m, true);
+  bind_intersection_pair<PT2, PT1>(m, true);
+  bind_intersection_inner(m, arg1, args...);
 }
 
 template<typename T>
-void bind_intersection(T arg) {
+void bind_intersection(py::module_& m, T arg) {
   typedef typename std::remove_pointer<T>::type         PT;
-  bind_intersection_pair<PT, PT>(true);
+  bind_intersection_pair<PT, PT>(m, true);
 }
 
 template <typename T1, typename... Ts>
-void bind_intersection(T1 arg, Ts... args) {
-  bind_intersection_inner(arg, args...);
-  bind_intersection(args...);
+void bind_intersection(py::module_& m, T1 arg, Ts... args) {
+  bind_intersection_inner(m, arg, args...);
+  bind_intersection(m, args...);
   typedef typename std::remove_pointer<T1>::type        PT1;
-  bind_intersection_pair<PT1, PT1>(true);
+  bind_intersection_pair<PT1, PT1>(m, true);
 }
 
-void export_intersections_2() {
+void export_intersections_2(py::module_& m) {
   Iso_rectangle_2* iso_rectangle_2(nullptr);
   Line_2* line_2(nullptr);
   Ray_2* ray_2(nullptr);
@@ -128,9 +128,9 @@ void export_intersections_2() {
   Triangle_2* triangle_2(nullptr);
   Point_2* point_2(nullptr);
   Circle_2* circle_2(nullptr);
-  bind_intersection(iso_rectangle_2, line_2, ray_2, segment_2,
+  bind_intersection(m, iso_rectangle_2, line_2, ray_2, segment_2,
                     triangle_2, point_2, circle_2);
-  bind_do_intersect(iso_rectangle_2, line_2, ray_2, segment_2,
+  bind_do_intersect(m, iso_rectangle_2, line_2, ray_2, segment_2,
                     triangle_2, point_2, circle_2);
 }
 ///@}

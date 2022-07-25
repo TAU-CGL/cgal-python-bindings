@@ -90,13 +90,13 @@ void export_kernel(py::module_& m) {
   const py::type_info info_ft = py::type_id<FT>();
   const auto* reg_ft = py::converter::registry::query(info_ft);
   if ((reg_ft == nullptr) || ((*reg_ft).m_to_python == nullptr)) {
-    auto ftc = py::class_<FT>("FT");
+    auto ftc = py::class_<FT>(m, "FT");
     export_ft<FT>(ftc);
   }
   else py::scope().attr("FT") = py::handle<>(reg_ft->m_class_object);
 #endif
 
-  //class_<RT>("RT")
+  //class_<RT>(m, "RT")
   //  .def(init<RT::Exact_type>())
   //  .def(self_ns::str(self_ns::self))
   //  .def(self == self)
