@@ -17,7 +17,7 @@ namespace py = nanobind;
 void export_kernel(py::module_&);
 void export_kernel_d();
 void export_arrangement_on_surface_2();
-void export_intersections_2();
+void export_intersections_2(py::module_&);
 void export_point_location();
 void export_object();
 void export_polygon_2();
@@ -51,7 +51,7 @@ NB_MODULE(CGALPY_MODULE_NAME, m) {
     // SET_SCOPE("Ker")
     export_kernel(m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
-    export_intersections_2();
+    export_intersections_2(m);
 #endif
   }
 #endif
