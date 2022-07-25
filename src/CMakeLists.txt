@@ -27,7 +27,7 @@ if(NOT Boost_FOUND)
   return()
 endif()
 
-find_package(tsl-robin-map CONFIG REQUIRED)
+# find_package(tsl-robin-map CONFIG REQUIRED)
 find_package(nanobind CONFIG REQUIRED)
 
 # Add includes and libs
