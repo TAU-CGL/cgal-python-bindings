@@ -51,7 +51,7 @@ template <typename T1, typename T2, typename T3,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T3()(T2(), typename target<T2>::type()))>
 void bind_mink_sum_decomp_one_strategy_3T(bool) {
-  py::def<Polygon_with_holes_2(const T1&, const T2&, const T3&)>
+  m.def<Polygon_with_holes_2(const T1&, const T2&, const T3&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>);
 }
 
@@ -82,7 +82,7 @@ template <typename T1, typename T2, typename T3, typename T4,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T4()(T2(), typename target<T1>::type()))>
 void bind_mink_sum_decomp_two_strategies_pair(bool) {
-  py::def<Polygon_with_holes_2(const T1&, const T2&, const T3&, const T4&)>
+  m.def<Polygon_with_holes_2(const T1&, const T2&, const T3&, const T4&)>
     ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>);
 }
 
@@ -167,7 +167,7 @@ py::list approximated_inset_2(const Polygon_2& p, const FT& r, double eps) {
 
 }
 
-void export_minkowski_sum_2() {
+void export_minkowski_sum_2(py::module_& m) {
   typedef ms2::Polygon_2                                Pgn;
   typedef ms2::Polygon_with_holes_2                     Pwh;
   typedef ms2::Circle_segment_polygon_2                 CS_pgn;
@@ -182,26 +182,26 @@ void export_minkowski_sum_2() {
   ms2::bind_mink_sum_decomp_two_strategies();
 #endif
 
-  py::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>);
-  py::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pwh>);
-  py::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pgn>);
-  py::def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pwh>);
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>);
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pwh>);
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pgn>);
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pwh>);
 
-  py::def("minkowski_sum_by_full_convolution_2",
-          &ms2::minkowski_sum_by_full_convolution_2<Pgn, Pgn>);
+  m.def("minkowski_sum_by_full_convolution_2",
+        &ms2::minkowski_sum_by_full_convolution_2<Pgn, Pgn>);
 
-  py::def("minkowski_sum_by_reduced_convolution_2",
-          &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pgn>);
-  py::def("minkowski_sum_by_reduced_convolution_2",
-          &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pwh>);
-  py::def("minkowski_sum_by_reduced_convolution_2",
-          &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pgn>);
-  py::def("minkowski_sum_by_reduced_convolution_2",
-          &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pwh>);
+  m.def("minkowski_sum_by_reduced_convolution_2",
+        &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pgn>);
+  m.def("minkowski_sum_by_reduced_convolution_2",
+        &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pwh>);
+  m.def("minkowski_sum_by_reduced_convolution_2",
+        &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pgn>);
+  m.def("minkowski_sum_by_reduced_convolution_2",
+        &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pwh>);
 
-  py::def("approximated_offset_2", &ms2::approximated_offset_2);
-  py::def("approximated_offset_2", &ms2::approximated_offset_2_pwh);
-  py::def("approximated_inset_2", &ms2::approximated_inset_2);
+  m.def("approximated_offset_2", &ms2::approximated_offset_2);
+  m.def("approximated_offset_2", &ms2::approximated_offset_2_pwh);
+  m.def("approximated_inset_2", &ms2::approximated_inset_2);
 
   static const char pgn[] = "Circle_segment_polygon_2";
   py::class_<CS_pgn>* co_pgn(nullptr);

@@ -96,36 +96,36 @@ void small_side_angle_bisector_decomposition_2
 
 }
 
-void export_polygon_partition_2() {
+void export_polygon_partition_2(py::module_& m) {
   typedef pp2::Polygon_2                                        Pgn_2;
   typedef pp2::Polygon_with_holes_2                             Pwh_2;
   typedef pp2::Polygon_vertical_decomposition_2                 PVD_2;
   typedef pp2::Polygon_triangulation_decomposition_2            PTD_2;
   typedef pp2::Small_side_angle_bisector_decomposition_2        SSABD_2;
 
-  py::def("approx_convex_partition_2", &pp2::approx_convex_partition_2);
-  py::def("greene_approx_convex_partition_2", &pp2::greene_approx_convex_partition_2);
-  py::def("optimal_convex_partition_2", &pp2::optimal_convex_partition_2);
-  py::def("y_monotone_partition_2", &pp2::y_monotone_partition_2);
-  py::def("partition_is_valid_2", &pp2::partition_is_valid_2);
-  py::def("convex_partition_is_valid_2", &pp2::convex_partition_is_valid_2);
-  py::def("y_monotone_partition_is_valid_2", &pp2::y_monotone_partition_is_valid_2);
-  py::def("is_y_monotone_2", &pp2::is_y_monotone_2);
-  py::def("is_convex_2", &pp2::is_convex_2);
+  m.def("approx_convex_partition_2", &pp2::approx_convex_partition_2);
+  m.def("greene_approx_convex_partition_2", &pp2::greene_approx_convex_partition_2);
+  m.def("optimal_convex_partition_2", &pp2::optimal_convex_partition_2);
+  m.def("y_monotone_partition_2", &pp2::y_monotone_partition_2);
+  m.def("partition_is_valid_2", &pp2::partition_is_valid_2);
+  m.def("convex_partition_is_valid_2", &pp2::convex_partition_is_valid_2);
+  m.def("y_monotone_partition_is_valid_2", &pp2::y_monotone_partition_is_valid_2);
+  m.def("is_y_monotone_2", &pp2::is_y_monotone_2);
+  m.def("is_convex_2", &pp2::is_convex_2);
 
-  py::class_<PVD_2>("Polygon_vertical_decomposition")
+  py::class_<PVD_2>(m, "Polygon_vertical_decomposition")
     .def(py::init<>())
     .def("__call__", &pp2::polygon_vertical_decomposition_2<Pgn_2>)
     .def("__call__", &pp2::polygon_vertical_decomposition_2<Pwh_2>)
     ;
 
-  py::class_<PTD_2>("Polygon_triangulation_decomposition")
+  py::class_<PTD_2>(m, "Polygon_triangulation_decomposition")
     .def(py::init<>())
     .def("__call__", &pp2::polygon_triangulation_decomposition_2<Pgn_2>)
     .def("__call__", &pp2::polygon_triangulation_decomposition_2<Pwh_2>)
     ;
 
-  py::class_<SSABD_2>("Small_side_angle_bisector_decomposition")
+  py::class_<SSABD_2>(m, "Small_side_angle_bisector_decomposition")
     .def(py::init<>())
     .def("__call__", &pp2::small_side_angle_bisector_decomposition_2)
     ;

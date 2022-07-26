@@ -28,21 +28,21 @@ Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
 
 }
 
-void export_halfedge() {
+void export_halfedge(py::module_& m) {
   typedef aos2::Arrangement_2   Arr2;
   typedef Arr2::Halfedge        Halfedge;
 
-  py::class_<Halfedge>("Halfedge")
+  py::class_<Halfedge>(m, "Halfedge")
     .def(py::init<>())
     .def("direction", &Halfedge::direction)
-    .def("source", &aos2::source, Reference_existing_object())
-    .def("target", &aos2::target, Reference_existing_object())
-    .def("twin", &aos2::twin, Reference_existing_object())
-    .def("face", &aos2::face, Reference_existing_object())
-    .def("next", &aos2::next, Reference_existing_object())
-    .def("prev", &aos2::prev, Reference_existing_object())
-    .def("curve", &aos2::curve, Reference_existing_object())
-    .def("ccb", &aos2::ccb, Manage_new_object())
+    .def("source", &aos2::source)
+    .def("target", &aos2::target)
+    .def("twin", &aos2::twin)
+    .def("face", &aos2::face)
+    .def("next", &aos2::next)
+    .def("prev", &aos2::prev)
+    .def("curve", &aos2::curve)
+    .def("ccb", &aos2::ccb)
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
     .def("set_data", &Halfedge::set_data)
     .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, Copy_non_const_reference())

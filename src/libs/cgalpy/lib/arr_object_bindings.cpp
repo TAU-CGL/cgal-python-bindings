@@ -34,10 +34,10 @@ bool get_type(Object& o, typename T0::value_type& t) {
   return res;
 }
 
-void export_object() {
+void export_object(py::module_& m) {
   typedef aos2::Arrangement_2   Arr2;
 
-  py::class_<Object>("Object", py::no_init)
+  py::class_<Object>(m, "Object")
     .def("empty", &Object::empty)
     .def("is_vertex", &is_type<Arr2::Vertex_handle, aos2::Vertex_const_handle>)
     .def("get_vertex", &get_type<Arr2::Vertex_handle, aos2::Vertex_const_handle>)

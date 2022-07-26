@@ -13,7 +13,6 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
-#include "CGALPY/add_class_object.hpp"
 #include "CGALPY/export_general_polygon_2.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
 
@@ -72,13 +71,13 @@ void export_GpsTraits_2(C c, Concepts& concepts) {
 
   // Construct_polygon_2
   classes.m_construct_polygon_2 =
-    new py::class_<Construct_polygon_2>("Construct_polygon_2", py::no_init);
+    new py::class_<Construct_polygon_2>("Construct_polygon_2");
   classes.m_construct_polygon_2->def("__call__", &bso2::export_ctr_gp_2_op<T>);
 
   // Construct_general_polygon_with_holes_2
   classes.m_construct_general_polygon_with_holes_2 =
     new py::class_<Construct_general_polygon_with_holes_2>
-    ("Construct_general_polygon_with_holes_2", py::no_init);
+    ("Construct_general_polygon_with_holes_2");
   using Ctr_gpwh1 =
     Polygon_with_holes_2(Construct_general_polygon_with_holes_2::*)
     (const Polygon_2&) const;
@@ -91,18 +90,18 @@ void export_GpsTraits_2(C c, Concepts& concepts) {
   // Construct_outer_boundary
   classes.m_construct_outer_boundary =
     new py::class_<Construct_outer_boundary>
-    ("Construct_outer_boundary", py::no_init);
+    ("Construct_outer_boundary");
   classes.m_construct_outer_boundary->
     def("__call__", &Construct_outer_boundary::operator());
 
   // Construct_holes
   classes.m_construct_holes =
-    new py::class_<Construct_holes>("Construct_holes", py::no_init);
+    new py::class_<Construct_holes>("Construct_holes");
   classes.m_construct_holes->def("__call__", &Construct_holes::operator());
 
   // Is unbounded
   classes.m_is_unbounded =
-    new py::class_<Is_unbounded>("Is_unbounded", py::no_init);
+    new py::class_<Is_unbounded>("Is_unbounded");
   classes.m_is_unbounded->def("__call__", &Is_unbounded::operator());
 
   // // The following is a typo. Should be instead

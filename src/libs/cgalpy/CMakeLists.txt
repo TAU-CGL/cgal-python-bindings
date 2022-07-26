@@ -188,23 +188,10 @@ include_directories(include)
 link_directories(${Boost_LIBRARY_DIRS})
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  add_definitions(/wd4251)
+  add_compile_options(/wd4251)
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   add_compile_options(-fvisibility=hidden)
 endif()
-
-# Add the library target
-# Always build a shared library
-nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
-set(CGALPY_BUILD_DEPENDS CGALPY)
-
-set_target_properties(CGALPY PROPERTIES
-  VERSION "${CMAKE_PROJECT_VERSION}"
-  SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
-
-target_link_libraries(CGALPY PRIVATE
-  ${Boost_LIBRARIES}
-  ${PYTHON_LIBRARIES})
 
 set(CGALPY_LIB_NAME "CGALPY")
 if (NOT CGALPY_FIXED_LIBRARY_NAME)
@@ -278,14 +265,27 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
 endif()
+add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
+
+# Add the library target
+# Always build a shared library
+nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
+set(CGALPY_BUILD_DEPENDS CGALPY)
+
+set_target_properties(CGALPY PROPERTIES
+  VERSION "${CMAKE_PROJECT_VERSION}"
+  SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
+
+target_link_libraries(CGALPY PRIVATE
+  ${Boost_LIBRARIES}
+  ${PYTHON_LIBRARIES})
+
 set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
 # Use a generator expression to get rid of per-configuration subdirectory appended by Multi-configuration generators (e.g Visual Studio)
 # https://cmake.org/cmake/help/latest/prop_tgt/LIBRARY_OUTPUT_DIRECTORY.html
 set_target_properties(CGALPY PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
 reportWithEmphasis(${CGALPY_LIB_NAME} ${CGALPY_LIB_DIR} ${CGALPY_INSTALL_PYTHON_DIR})
-
-add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
 # Don't prepend wrapper library name with lib
 set_target_properties(CGALPY PROPERTIES PREFIX "")

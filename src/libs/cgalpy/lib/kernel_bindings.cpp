@@ -144,26 +144,26 @@ void export_kernel(py::module_& m) {
     .def(py::init<>())
     ;
 
-  //py::class_<Kernel>("Kernel")
+  //py::class_<Kernel>(m, "Kernel")
   //  .def(py::init<>())
   //  .def("equal_2_object", &kernel_equal_2)
   //  ;
 
-  //py::class_<Traits>("Traits")
+  //py::class_<Traits>(m, "Traits")
   //  .def(py::init<>())
   //  .def("equal_2_object", &Traits::equal_2_object)
   //  .def("compare_xy_2_object", &Traits::compare_xy_2_object)
   //  ;
 
-  //py::class_<Traits::Compare_xy_2>("Traits_compare_xy_2", no_init)
+  //py::class_<Traits::Compare_xy_2>(m, "Traits_compare_xy_2")
   //  .def<CGAL::Sign(Traits::Compare_xy_2::*)(const Point_2&, const Point_2&) const>("__call__", &Traits::Compare_xy_2::operator())
   //  ;
 
-  //py::class_<Traits::Equal_2>("Traits_equal_2_object", no_init)
+  //py::class_<Traits::Equal_2>(m, "Traits_equal_2_object")
   //  .def<bool (Traits::Equal_2::*)(const Point_2&, const Point_2&) const>("__call__", &Traits::Equal_2::operator())
   //  ;
 
-  //py::class_<Kernel::Equal_2>("Kernel_equal_2_object", no_init)
+  //py::class_<Kernel::Equal_2>(m, "Kernel_equal_2_object")
   //  //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
   //  ;
 

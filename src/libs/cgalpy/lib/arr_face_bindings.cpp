@@ -32,11 +32,11 @@ Isolated_vertex_iterator isolated_vertices_end(Face& f)
 
 }
 
-void export_face() {
+void export_face(py::module_& m) {
   typedef aos2::Arrangement_2   Arr2;
   typedef Arr2::Face            Face;
 
-  py::class_<Face>("Face")
+  py::class_<Face>(m, "Face")
     .def(py::init<>())
     .def("assign", &Face::assign)
     .def("is_unbounded", &Face::is_unbounded)
@@ -46,14 +46,14 @@ void export_face() {
     .def("number_of_outer_ccbs", &Face::number_of_outer_ccbs)
     .def("splice_isolated_vertices", &Face::splice_isolated_vertices)
     .def("splice_inner_ccbs", &Face::splice_inner_ccbs)
-    .def("outer_ccb", &aos2::outer_ccb, Manage_new_object())
-    .def("inner_ccbs", &aos2::inner_ccbs, Manage_new_object())
-    .def("holes", &aos2::inner_ccbs, Manage_new_object())
+    .def("outer_ccb", &aos2::outer_ccb)
+    .def("inner_ccbs", &aos2::inner_ccbs)
+    .def("holes", &aos2::inner_ccbs)
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
-    .def("isolated_vertices", py::range<py::return_internal_reference<>>(&aos2::isolated_vertices_begin, &aos2::isolated_vertices_end))
+    // .def("isolated_vertices", py::range<py::return_internal_reference<>>(&aos2::isolated_vertices_begin, &aos2::isolated_vertices_end)) NB
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     .def("set_data", &Face::set_data)
-    .def<Face::Data& (Face::*)()>("data", &Face::data, Copy_non_const_reference())
+    .def<Face::Data& (Face::*)()>("data", &Face::data)
 #endif
     ;
 

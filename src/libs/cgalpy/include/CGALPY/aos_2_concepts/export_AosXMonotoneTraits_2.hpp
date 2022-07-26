@@ -43,7 +43,7 @@ void intersect_2_call_operator(typename T::Intersect_2& i,
 template<typename T, typename C, typename Classes>
 void export_Merge_2(C c, Classes& classes, CGAL::Tag_true) {
   typedef typename T::Merge_2   Merge_2;
-  classes.m_merge_2 = new py::class_<Merge_2>("Merge_2", py::no_init);
+  classes.m_merge_2 = new py::class_<Merge_2>(c, "Merge_2");
   classes.m_merge_2->def("__call__", &Merge_2::operator());
   c.def("merge_2_object", &T::merge_2_object);
 }
@@ -54,7 +54,7 @@ void export_Merge_2(C c, Classes& classes, CGAL::Tag_false) {}
 template<typename T, typename C, typename Classes>
 void export_Are_mergeable_2(C c, Classes& classes, CGAL::Tag_true) {
   typedef typename T::Are_mergeable_2   Are_mergeable_2;
-  classes.m_are_mergeable_2 = new py::class_<Are_mergeable_2>("Are_mergeable_2", py::no_init);
+  classes.m_are_mergeable_2 = new py::class_<Are_mergeable_2>(c, "Are_mergeable_2");
   classes.m_are_mergeable_2->def("__call__", &Are_mergeable_2::operator());
   c.def("are_mergeable_2_object", &T::are_mergeable_2_object);
 }
@@ -62,12 +62,12 @@ void export_Are_mergeable_2(C c, Classes& classes, CGAL::Tag_true) {
 template<typename T, typename C, typename Classes>
 void export_Are_mergeable_2(C c, Classes& classes, CGAL::Tag_false) {}
 
-template <typename T, typename RVP, typename C, typename Concepts>
+template <typename T, typename C, typename Concepts>
 void export_AosXMonotoneTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T, RVP>(c, concepts);
+  export_AosBasicTraits<T>(c, concepts);
 
   typedef typename T::Has_merge_category        Has_merge_category;
   typedef typename T::Intersect_2               Intersect_2;
@@ -75,10 +75,10 @@ void export_AosXMonotoneTraits_2(C c, Concepts& concepts) {
 
   auto& classes = concepts.m_x_monotone_traits_classes;
 
-  classes.m_intersect_2 = new py::class_<Intersect_2>("Intersect_2", py::no_init);
+  classes.m_intersect_2 = new py::class_<Intersect_2>(c, "Intersect_2");
   classes.m_intersect_2->def("__call__", &intersect_2_call_operator<T>);
 
-  classes.m_split_2 = new py::class_<Split_2>("Split_2", py::no_init);
+  classes.m_split_2 = new py::class_<Split_2>(c, "Split_2");
   classes.m_split_2->def("__call__", &Split_2::operator());
 
   c.def("intersect_2_object", &T::intersect_2_object);

@@ -40,7 +40,7 @@ py::list export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
   return lst;
 }
 
-template <typename T, typename RVP, typename C, typename Concepts>
+template <typename T, typename C, typename Concepts>
 void export_AosTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
@@ -48,16 +48,15 @@ void export_AosTraits_2(C c, Concepts& concepts) {
   typedef typename T::Curve_2                   Curve_2;
   typedef typename T::Make_x_monotone_2         Make_x_monotone_2;
 
-  export_AosXMonotoneTraits_2<T, RVP>(c, concepts);
+  export_AosXMonotoneTraits_2<T>(c, concepts);
 
-  py::scope traits_scope(c);
   auto& classes = concepts.m_traits_classes;
 
   static const char curve_2[] = "Curve_2";
-  add_class_object<Curve_2, curve_2>(traits_scope, classes.m_curve_2);
+  add_class_object<Curve_2, curve_2>(c, classes.m_curve_2);
 
   classes.m_make_x_monotone_2 =
-    new py::class_<Make_x_monotone_2>("Make_x_monotone_2", py::no_init);
+    new py::class_<Make_x_monotone_2>(c, "Make_x_monotone_2");
   classes.m_make_x_monotone_2->def("__call__", &export_Make_x_monotone_2_call_operator<T>);
 
   c.def("make_x_monotone_2_object", &T::make_x_monotone_2_object);

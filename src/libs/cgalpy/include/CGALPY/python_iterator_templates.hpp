@@ -16,7 +16,7 @@ namespace py = nanobind;
 
 inline py::object pass_through(py::object const& o) { return o; }
 
-//these template classes are used to allow more natural iteration in python
+// These template classes are used to allow more natural iteration in Python
 
 template <typename circulator>
 class Iterator_from_circulator {
@@ -31,11 +31,10 @@ public:
     if (m_curr != 0) {
       if (first || m_curr != m_first) {
         first = false;
-        return *(m_curr++);
+        return *m_curr++;
       }
     }
-    PyErr_SetString(PyExc_StopIteration, "No more data.");
-    py::throw_error_already_set();
+    throw py::stop_iteration();
     return *m_curr;
   }
 };
@@ -55,25 +54,24 @@ public:
   modified_circulator* next() {
     if (m_curr != m_end)
       return new modified_circulator(modified_circulator(*(m_curr++)));
-    PyErr_SetString(PyExc_StopIteration, "No more data.");
-    py::throw_error_already_set();
+    throw py::stop_iteration();
     return new modified_circulator(modified_circulator(*m_curr));
   }
 };
 
 template<typename iterator>
-void bind_iterator_of_circulators(const char* python_name) {
-  py::class_<iterator>(python_name, py::no_init)
+void bind_iterator_of_circulators(py::module_& m, const char* python_name) {
+  py::class_<iterator>(m, python_name)
     .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next, py::return_value_policy<py::manage_new_object>())
+    .def("__next__", &iterator::next)
     ;
 }
 
 template<typename iterator>
-void bind_iterator(const char* python_name) {
-  py::class_<iterator>(python_name, py::no_init)
+void bind_iterator(py::module_& m, const char* python_name) {
+  py::class_<iterator>(m, python_name)
     .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next, py::return_value_policy<py::reference_existing_object>())
+    .def("__next__", &iterator::next)
     ;
 }
 
@@ -87,9 +85,8 @@ private:
 public:
   CopyIterator(iterator begin, iterator end) : m_curr(begin), m_end(end) {}
   typename iterator::value_type next() {
-    if (m_curr != m_end) return *(m_curr++);
-    PyErr_SetString(PyExc_StopIteration, "No more data.");
-    py::throw_error_already_set();
+    if (m_curr != m_end) return *m_curr++;
+    throw py::stop_iteration();
     return *m_curr;
   }
 };
@@ -114,15 +111,14 @@ public:
         return *(m_curr++);
       }
     }
-    PyErr_SetString(PyExc_StopIteration, "No more data.");
-    py::throw_error_already_set();
+    throw py::stop_iteration();
     return *m_curr;
   }
 };
 
 template<typename iterator>
-void bind_copy_iterator(const char* python_name) {
-  py::class_<iterator>(python_name, py::no_init)
+void bind_copy_iterator(py::module_& m, const char* python_name) {
+  py::class_<iterator>(m, python_name)
     .def("__iter__", &pass_through)
     .def("__next__", &iterator::next)
     ;
