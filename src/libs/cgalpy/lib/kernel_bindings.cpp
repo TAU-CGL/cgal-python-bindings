@@ -72,28 +72,24 @@ constexpr bool is_epec_type() {
 }
 
 void export_kernel(py::module_& m) {
-  const py::type_info info_gmpz = py::type_id<CGAL::Gmpz>();
-  const auto* reg_gmpz = py::converter::registry::query(info_gmpz);
-  if ((reg_gmpz == nullptr) || ((*reg_gmpz).m_to_python == nullptr))
+  const py::handle info_gmpz = py::type<CGAL::Gmpz>();
+  if (! info_gmpz.is_valid() || ! py::type_check(info_gmpz))
     export_gmpz(m);
-  else py::scope().attr("Gmpz") = py::handle<>(reg_gmpz->m_class_object);
+  else m.attr("Gmpz") = info_gmpz;
 
-  const py::type_info info_gmpq = py::type_id<CGAL::Gmpq>();
-  const auto* reg_gmpq = py::converter::registry::query(info_gmpq);
-  if ((reg_gmpq == nullptr) || ((*reg_gmpq).m_to_python == nullptr))
-    export_gmpq(m);
-  else py::scope().attr("Gmpq") = py::handle<>(reg_gmpq->m_class_object);
+  const py::handle info_gmpq = py::type<CGAL::Gmpq>();
+  if (! info_gmpq.is_valid() || ! py::type_check(info_gmpq)) export_gmpq(m);
+  else m.attr("Gmpq") = info_gmpq;
 
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                           \
      (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||                 \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
-  const py::type_info info_ft = py::type_id<FT>();
-  const auto* reg_ft = py::converter::registry::query(info_ft);
-  if ((reg_ft == nullptr) || ((*reg_ft).m_to_python == nullptr)) {
-    auto ftc = py::class_<FT>(m, "FT");
+  const py::handle info_ft = py::type<FT>();
+  if (! info_ft.is_valid() || ! py::type_check(info_ft)) {
+    py::class_<FT> ftc(m, "FT");
     export_ft<FT>(ftc);
   }
-  else py::scope().attr("FT") = py::handle<>(reg_ft->m_class_object);
+  else m.attr("FT") = info_ft;
 #endif
 
   //class_<RT>(m, "RT")
@@ -204,8 +200,8 @@ void export_kernel(py::module_& m) {
     .def(py::self -= Vector_2())
     .def(py::self + Vector_2())
     .def(py::self - Vector_2())
-    .setattr("__hash__", &hash_rational_point<is_epec_type(), Point_2>)
-    .setattr("__doc__", "AAAAAAAAAAAAAAAA")
+    /* .setattr("__hash__", &hash_rational_point<is_epec_type(), Point_2>) NB */
+    /* .setattr("__doc__", "AAAAAAAAAAAAAAAA") NB */
     ;
 
   py::class_<Segment_2>(m, "Segment_2")
