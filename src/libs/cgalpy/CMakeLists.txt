@@ -189,7 +189,9 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   add_definitions(/wd4251)
-endif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  add_compile_options(-fvisibility=hidden)
+endif()
 
 # Add the library target
 # Always build a shared library
@@ -275,8 +277,8 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     get_triangulation_3_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
-  set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 endif()
+set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
 # Use a generator expression to get rid of per-configuration subdirectory appended by Multi-configuration generators (e.g Visual Studio)
 # https://cmake.org/cmake/help/latest/prop_tgt/LIBRARY_OUTPUT_DIRECTORY.html
@@ -285,17 +287,17 @@ reportWithEmphasis(${CGALPY_LIB_NAME} ${CGALPY_LIB_DIR} ${CGALPY_INSTALL_PYTHON_
 
 add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
-# don't prepend wrapper library name with lib
+# Don't prepend wrapper library name with lib
 set_target_properties(CGALPY PROPERTIES PREFIX "")
 
-set (CGALPY_LIBRARY_SUFFIX ".so")
-if(WIN32)
-  set (CGALPY_LIBRARY_SUFFIX ".pyd")
-  set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
-elseif(APPLE)
-  set (CMAKE_SHARED_LIBRARY_SUFFIX ".so")
-  set_target_properties(CGALPY PROPERTIES BUNDLE ON)
-endif()
+set (CGALPY_LIBRARY_SUFFIX ${NB_SUFFIX})
+# if(WIN32)
+#   set (CGALPY_LIBRARY_SUFFIX ".pyd")
+#   set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
+# elseif(APPLE)
+#   set (CMAKE_SHARED_LIBRARY_SUFFIX ".so")
+#   set_target_properties(CGALPY PROPERTIES BUNDLE ON)
+# endif()
 
 ################################################################################
 # Documentation
