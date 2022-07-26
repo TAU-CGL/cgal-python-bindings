@@ -200,7 +200,7 @@ set_target_properties(CGALPY PROPERTIES
   VERSION "${CMAKE_PROJECT_VERSION}"
   SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
 
-target_link_libraries(CGALPY
+target_link_libraries(CGALPY PRIVATE
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES})
 
