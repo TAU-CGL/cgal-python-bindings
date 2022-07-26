@@ -1,7 +1,7 @@
 from distutils.core import setup
 package_data = {'': [@TARGET_DATA@] }
 setup(name='@TARGET_NAME@',
-      version='@SPHINX_TARGET_VERSION_MAJOR@.@SPHINX_TARGET_VERSION_MINOR@',
+      version='@TARGET_VERSION_MAJOR@.@TARGET_VERSION_MINOR@',
       description='CGAL Python Bindings',
       py_modules=['@TARGET_MODULES@'],
       packages=[''],
