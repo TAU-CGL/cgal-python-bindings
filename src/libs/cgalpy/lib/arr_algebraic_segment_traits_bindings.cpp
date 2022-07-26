@@ -63,7 +63,7 @@ void construct_x_monotone_segment_2_call_operator2(aos2::Construct_x_monotone_se
 //{
 //  typedef typename PT::Construct_polynomial T;
 //  typedef typename PT::Type P;
-//  return py::class_<T>(name)
+//  return py::class_<T>(m, name)
 //    .def(init<>())
 //    ;
 //}
@@ -77,10 +77,10 @@ typename PT::Type* init_polynomial(py::list& lst) {
 }
 
 template <typename PT>
-py::class_<typename PT::Type> bind_polynomial(const char* name) {
+py::class_<typename PT::Type> bind_polynomial(py::module_&m, const char* name) {
   typedef typename PT::Type P;
   typedef typename PT::Coefficient_type CT;
-  return py::class_<P>(name)
+  return py::class_<P>(m, name)
     .def(py::init<>())
     .def(py::init<CT&>())
     .def(py::init<CT&, CT&>())
@@ -121,16 +121,16 @@ py::class_<typename PT::Type> bind_polynomial(const char* name) {
 }
 
 template<typename PT>
-py::class_<typename PT::Shift> bind_shift(const char* name) {
-  return py::class_<typename PT::Shift>(name)
+py::class_<typename PT::Shift> bind_shift(py::module_& m, const char* name) {
+  return py::class_<typename PT::Shift>(m, name)
     .def(py::init<>())
     .def("__call__", &PT::Shift::operator())
     ;
 }
 
 template<typename PT>
-py::class_<typename PT::Swap> bind_swap(const char* name) {
-  return py::class_<typename PT::Swap>(name)
+py::class_<typename PT::Swap> bind_swap(py::module_& m, const char* name) {
+  return py::class_<typename PT::Swap>(m, name)
     .def(py::init<>())
     .def("__call__", &PT::Swap::operator())
     ;
@@ -204,19 +204,19 @@ py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
   //bind_construct_polynomial<PT_1>("Construct_polynomial_1");
   //bind_construct_polynomial<PT_2>("Construct_polynomial_2");
 
-  bind_polynomial<aos2::PT_1>("Polynomial_1");
-  bind_polynomial<aos2::PT_2>("Polynomial_2");
+  bind_polynomial<aos2::PT_1>(m, "Polynomial_1");
+  bind_polynomial<aos2::PT_2>(m, "Polynomial_2");
 
-  bind_shift<aos2::PT_1>("PT_1_Shift");
-  bind_shift<aos2::PT_2>("PT_2_Shift");
+  bind_shift<aos2::PT_1>(m, "PT_1_Shift");
+  bind_shift<aos2::PT_2>(m, "PT_2_Shift");
 
-  bind_swap<aos2::PT_1>("PT_1_Swap");
-  bind_swap<aos2::PT_2>("PT_2_Swap");
+  bind_swap<aos2::PT_1>(m, "PT_1_Swap");
+  bind_swap<aos2::PT_2>(m, "PT_2_Swap");
 
-  py::def("ipower", &ipower<aos2::Polynomial_1>);
-  py::def("ipower", &ipower<aos2::Polynomial_2>);
+  m.def("ipower", &ipower<aos2::Polynomial_1>);
+  m.def("ipower", &ipower<aos2::Polynomial_2>);
 
-  auto traits = py::class_<GT>("Geometry_traits_2");
+  auto traits = py::class_<GT>(m, "Geometry_traits_2");
   py::scope traits_scope(traits);
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
@@ -262,24 +262,24 @@ py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
     .def("polynomial_2", &aos2::Curve_2::polynomial_2)
     ;
 
-  py::class_<aos2::Construct_curve_2>("Construct_curve_2", py::no_init)
+  py::class_<aos2::Construct_curve_2>(m, "Construct_curve_2")
     .def("__call__", &aos2::Construct_curve_2::operator());
   ;
 
-  auto cp_2_binding = py::class_<aos2::Construct_point_2>("Construct_point_2", py::no_init);
+  auto cp_2_binding = py::class_<aos2::Construct_point_2>(m, "Construct_point_2");
   export_construct_point_2_call_operator<AR1, aos2::Curve_2, int>(cp_2_binding);
   export_construct_point_2_call_operator<AR1, aos2::X_monotone_curve_2>(cp_2_binding);
   export_construct_point_2_call_operator<AR1, AR1>(cp_2_binding);
   export_construct_point_2_call_operator<aos2::Bound, aos2::Bound>(cp_2_binding);
   export_construct_point_2_call_operator<int, int>(cp_2_binding);
 
-  py::class_<aos2::Construct_x_monotone_segment_2>("Construct_x_monotone_segment_2", py::no_init)
+  py::class_<aos2::Construct_x_monotone_segment_2>(m, "Construct_x_monotone_segment_2")
     .def("__call__", &construct_x_monotone_segment_2_call_operator0)
     .def("__call__", &construct_x_monotone_segment_2_call_operator1)
     .def("__call__", &construct_x_monotone_segment_2_call_operator2)
     ;
 
-  py::enum_<GT::Site_of_point>("Site_of_point")
+  py::enum_<GT::Site_of_point>(m, "Site_of_point")
     .value("POINT_IN_INTERIOR", GT::Site_of_point::POINT_IN_INTERIOR)
     .value("MIN_ENDPOINT", GT::Site_of_point::MIN_ENDPOINT)
     .value("MAX_ENDPOINT", GT::Site_of_point::MAX_ENDPOINT)

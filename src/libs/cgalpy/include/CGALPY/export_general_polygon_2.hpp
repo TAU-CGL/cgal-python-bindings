@@ -16,8 +16,8 @@
 namespace py = nanobind;
 
 template <typename Type, const char* Name>
-void export_general_polygon_2(py::scope& my_scope, py::class_<Type>*& co) {
-  if (! add_class_object<Type, Name>(my_scope, co)) return;
+void export_general_polygon_2(py::module_& m, py::class_<Type>*& co) {
+  if (! add_class_object<Type, Name>(m, co)) return;
 
   co->def(py::init<>());
   co->def(py::init<Type>());

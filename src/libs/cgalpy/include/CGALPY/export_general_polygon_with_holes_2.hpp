@@ -49,11 +49,11 @@ typename target<GeneralPolygonWithHoles_2>::type&
 outer_boundary(GeneralPolygonWithHoles_2& p) { return p.outer_boundary(); }
 
 template <typename Type, const char* Name>
-void export_general_polygon_with_holes_2(py::scope& my_scope,
+void export_general_polygon_with_holes_2(py::module_& m,
                                          py::class_<Type>*& co) {
   typedef typename target<Type>::type   Polygon_2;
 
-  if (! add_class_object<Type, Name>(my_scope, co)) return;
+  if (! add_class_object<Type, Name>(m, co)) return;
 
   co->def(py::init<Polygon_2&>());
   co->def("__init__", make_constructor(&ctr_polygon_with_holes_2<Type>));

@@ -113,13 +113,13 @@ void bind_neighbor_search(const char* python_name) {
     ;
 }
 
-void export_spatial_searching() {
+void export_spatial_searching(py::module_& m) {
   const py::type_info info = py::type_id<Point_d>();
   const py::converter::registration* reg = py::converter::registry::query(info);
   BOOST_ASSERT((reg != nullptr) && ((*reg).m_to_python != nullptr));
   py::scope().attr("Point_d") = py::handle<>(reg->m_class_object);
 
-  py::class_<Fuzzy_iso_box>("Fuzzy_iso_box")
+  py::class_<Fuzzy_iso_box>(m, "Fuzzy_iso_box")
     .def(py::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
     .def(py::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT_d>())
     .def("contains", &Fuzzy_iso_box::contains)
@@ -127,14 +127,14 @@ void export_spatial_searching() {
     .def("outer_range_contains", &Fuzzy_iso_box::outer_range_contains)
     ;
 
-  py::class_<Fuzzy_sphere>("Fuzzy_sphere")
+  py::class_<Fuzzy_sphere>(m, "Fuzzy_sphere")
     .def(py::init<Point_d, FT_d, FT_d>())
     .def("contains", &Fuzzy_sphere::contains)
     .def("inner_range_intersects", &Fuzzy_sphere::inner_range_intersects)
     .def("outer_range_intersects", &Fuzzy_sphere::outer_range_contains)
     ;
 
-  py::class_<Kd_tree_rectangle>("Kd_tree_rectangle")
+  py::class_<Kd_tree_rectangle>(m, "Kd_tree_rectangle")
     .def(py::init<int>())
     .def("min_coord", &Kd_tree_rectangle::min_coord)
     .def("max_coord", &Kd_tree_rectangle::max_coord)
@@ -148,7 +148,7 @@ void export_spatial_searching() {
 
   bind_kd_tree<Kd_tree>("Kd_tree");
 
-  py::class_<Distance_python>("Distance_python")
+  py::class_<Distance_python>(m, "Distance_python")
     .def(py::init<py::object, py::object, py::object, py::object, py::object>())
     .def<FT_d (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)const>("transformed_distance", &Distance_python::transformed_distance)
     .def("min_distance_to_rectangle", &Distance_python::min_distance_to_rectangle)
@@ -157,7 +157,7 @@ void export_spatial_searching() {
     .def("inverse_of_transformed_distance", &Distance_python::inverse_of_transformed_distance)
     ;
 
-  py::class_<Euclidean_distance>("Euclidean_distance")
+  py::class_<Euclidean_distance>(m, "Euclidean_distance")
     .def(py::init<>())
     .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Euclidean_distance::Point_d&) const>("transformed_distance", &Euclidean_distance::transformed_distance)
     .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("min_distance_to_rectangle", &Euclidean_distance::min_distance_to_rectangle)
@@ -170,5 +170,5 @@ void export_spatial_searching() {
 
   bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
 
-  py::def("get_spatial_searching_dimension", &get_spatial_searching_dimension);
+  m.def("get_spatial_searching_dimension", &get_spatial_searching_dimension);
 }

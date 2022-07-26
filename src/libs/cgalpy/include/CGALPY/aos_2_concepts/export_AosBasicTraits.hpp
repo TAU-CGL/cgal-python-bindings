@@ -21,10 +21,9 @@ namespace py = nanobind;
 template <typename T, typename C, typename Classes>
 void export_Compare_y_at_x_left_2(C c, Classes& classes, CGAL::Tag_true) {
   typedef typename T::Compare_y_at_x_left_2     Compare_y_at_x_left_2;
-  py::scope traits_scope(c);
   static const char compare_y_at_x_left_2[] = "Compare_y_at_x_left_2";
-  if (add_class_object<Compare_y_at_x_left_2, compare_y_at_x_left_2, true>
-    (traits_scope, classes.m_compare_y_at_x_left_2)) {
+  if (add_class_object<Compare_y_at_x_left_2, compare_y_at_x_left_2>
+    (c, classes.m_compare_y_at_x_left_2)) {
     classes.m_compare_y_at_x_left_2->def("__call__", &Compare_y_at_x_left_2::operator());
   }
 
@@ -36,7 +35,7 @@ template <typename T, typename C, typename Classes>
 void export_Compare_y_at_x_left_2(C c, Classes& classes, CGAL::Tag_false) {}
 
 //! Export the basic traits function objects
-template <typename T, typename RVP, typename C, typename Concepts>
+template <typename T, typename C, typename Concepts>
 void export_AosBasicTraits(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
@@ -53,12 +52,11 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   typedef typename T::Compare_y_at_x_2          Compare_y_at_x_2;
   typedef typename T::Compare_y_at_x_right_2    Compare_y_at_x_right_2;
 
-  py::scope traits_scope(c);
   auto& classes = concepts.m_basic_traits_classes;
 
   // Point_2
   static const char point_2[] = "Point_2";
-  if (add_class_object<Point_2, point_2>(traits_scope, classes.m_point_2)) {
+  if (add_class_object<Point_2, point_2>(c, classes.m_point_2)) {
     classes.m_point_2->def(py::init<>());
     classes.m_point_2->def(py::init<Point_2&>());
   }
@@ -66,60 +64,61 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   // X_monotone_curve_2
   static const char x_monotone_curve_2[] = "X_monotone_curve_2";
   if (add_class_object<X_monotone_curve_2, x_monotone_curve_2>
-    (traits_scope, classes.m_x_monotone_curve_2)) {
+    (c, classes.m_x_monotone_curve_2)) {
     classes.m_x_monotone_curve_2->def(py::init<>());
     classes.m_x_monotone_curve_2->def(py::init<X_monotone_curve_2&>());
   }
 
   // Compare_x_2
   static const char compare_x_2[] = "Compare_x_2";
-  if (add_class_object<Compare_x_2, compare_x_2, true>(traits_scope, classes.m_compare_x_2)) {
+  if (add_class_object<Compare_x_2, compare_x_2>(c, classes.m_compare_x_2)) {
     classes.m_compare_x_2->def("__call__", &Compare_x_2::operator());
   }
 
   // Compare_xy_2
   static const char compare_xy_2[] = "Compare_xy_2";
-  if (add_class_object<Compare_xy_2, compare_x_2, true>(traits_scope, classes.m_compare_xy_2)) {
+  if (add_class_object<Compare_xy_2, compare_x_2>(c, classes.m_compare_xy_2)) {
     classes.m_compare_xy_2->def("__call__", &Compare_xy_2::operator());
   }
 
   // Construct_min_vertex_2
   static const char construct_min_vertex_2[] = "Construct_min_vertex_2";
-  if (add_class_object<Construct_min_vertex_2, construct_min_vertex_2, true>
-    (traits_scope, classes.m_construct_min_vertex_2)) {
-    classes.m_construct_min_vertex_2->def("__call__", &Construct_min_vertex_2::operator(), RVP());
+  if (add_class_object<Construct_min_vertex_2, construct_min_vertex_2>
+    (c, classes.m_construct_min_vertex_2)) {
+    classes.m_construct_min_vertex_2->def("__call__", &Construct_min_vertex_2::operator());
   }
 
   // Construct_max_vertex_2
   static const char construct_max_vertex_2[] = "Construct_max_vertex_2";
-  if (add_class_object<Construct_max_vertex_2, construct_max_vertex_2, true>
-    (traits_scope, classes.m_construct_max_vertex_2)) {
-    classes.m_construct_max_vertex_2->def("__call__", &Construct_max_vertex_2::operator(), RVP());
+  if (add_class_object<Construct_max_vertex_2, construct_max_vertex_2>
+    (c, classes.m_construct_max_vertex_2)) {
+    classes.m_construct_max_vertex_2->def("__call__", &Construct_max_vertex_2::operator());
   }
 
   // Is_vertical_2
   static const char is_vertical_2[] = "Is_vertical_2";
-  if (add_class_object<Is_vertical_2, is_vertical_2, true>(traits_scope, classes.m_is_vertical_2)) {
+  if (add_class_object<Is_vertical_2, is_vertical_2>
+      (c, classes.m_is_vertical_2)) {
     classes.m_is_vertical_2->def("__call__", &Is_vertical_2::operator());
   }
 
   // Compare_y_at_x_2
   static const char compare_y_at_x_2[] = "Compare_y_at_x_2";
-  if (add_class_object<Compare_y_at_x_2, compare_y_at_x_2, true>
-    (traits_scope, classes.m_compare_y_at_x_2)) {
+  if (add_class_object<Compare_y_at_x_2, compare_y_at_x_2>
+    (c, classes.m_compare_y_at_x_2)) {
     classes.m_compare_y_at_x_2->def("__call__", &Compare_y_at_x_2::operator());
   }
 
   // Compare_y_at_x_right_2
   static const char compare_y_at_x_right_2[] = "Compare_y_at_x_right_2";
-  if (add_class_object<Compare_y_at_x_right_2, compare_y_at_x_right_2, true>
-    (traits_scope, classes.m_compare_y_at_x_right_2)) {
+  if (add_class_object<Compare_y_at_x_right_2, compare_y_at_x_right_2>
+    (c, classes.m_compare_y_at_x_right_2)) {
     classes.m_compare_y_at_x_right_2->def("__call__", &Compare_y_at_x_right_2::operator());
   }
 
   // Equal_2
   static const char equal_2[] = "Equal_2";
-  if (add_class_object<Equal_2, equal_2, true>(traits_scope, classes.m_equal_2)) {
+  if (add_class_object<Equal_2, equal_2>(c, classes.m_equal_2)) {
     using Equal1 = bool(Equal_2::*)(const Point_2&, const Point_2&) const;
     using Equal2 = bool(Equal_2::*)(const X_monotone_curve_2&, const X_monotone_curve_2&) const;
     classes.m_equal_2->def("__call__", static_cast<Equal1>(&Equal_2::operator()));
@@ -138,7 +137,8 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
     .def("equal_2_object", &T::equal_2_object)
     ;
 
-  export_Compare_y_at_x_left_2<T>(c, classes.m_compare_y_at_x_left_2_class, Has_left_category());
+  export_Compare_y_at_x_left_2<T>(c, classes.m_compare_y_at_x_left_2_class,
+                                  Has_left_category());
 
   exported = true;
 }

@@ -117,16 +117,16 @@ void upper_hull_points_2(py::list& lst, py::list& res) {
   for (auto p : v1) res.append(p);
 }
 
-void export_convex_hull_2_bindings() {
-  py::def("ch_akl_toussaint", &ch_akl_toussaint);
-  py::def("ch_bykat", &ch_bykat);
-  py::def("ch_eddy", &ch_eddy);
-  py::def("ch_graham_andrew", &ch_graham_andrew);
-  py::def("ch_jarvis", &ch_jarvis);
-  py::def("ch_melkman", &ch_melkman);
-  py::def("convex_hull_2", &convex_hull_2);
-  py::def("is_ccw_strongly_convex_2", &is_ccw_strongly_convex_2);
-  py::def("is_cw_strongly_convex_2", &is_cw_strongly_convex_2);
-  py::def("lower_hull_points_2", lower_hull_points_2);
-  py::def("upper_hull_points_2", upper_hull_points_2);
+void export_convex_hull_2_bindings(py::module_& m) {
+  m.def("ch_akl_toussaint", &ch_akl_toussaint);
+  m.def("ch_bykat", &ch_bykat);
+  m.def("ch_eddy", &ch_eddy);
+  m.def("ch_graham_andrew", &ch_graham_andrew);
+  m.def("ch_jarvis", &ch_jarvis);
+  m.def("ch_melkman", &ch_melkman);
+  m.def("convex_hull_2", &convex_hull_2);
+  m.def("is_ccw_strongly_convex_2", &is_ccw_strongly_convex_2);
+  m.def("is_cw_strongly_convex_2", &is_cw_strongly_convex_2);
+  m.def("lower_hull_points_2", lower_hull_points_2);
+  m.def("upper_hull_points_2", upper_hull_points_2);
 }

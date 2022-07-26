@@ -30,9 +30,9 @@ namespace py = nanobind;
 
 namespace aos2 { Segment_2 to_segment(X_monotone_curve_2& c) { return Segment_2(c); } }
 
-py::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
+py::class_<aos2::Geometry_traits_2> export_arr_segment_traits(py::module_& m) {
   typedef aos2::Geometry_traits_2       GT;
-  auto traits = py::class_<GT>("Geometry_traits_2");
+  auto traits = py::class_<GT>(m, "Geometry_traits_2");
   py::scope traits_scope(traits);
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
@@ -44,9 +44,9 @@ py::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
     Aos_construct_x_monotone_curve_traits_classes<GT>
       m_construct_x_monotone_curve_traits_classes;
   } concepts;
-  export_AosTraits_2<GT, Copy_const_reference>(traits, concepts);
-  export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits, concepts);
-  export_AosDirectionalXMonotoneTraits_2<GT, Copy_const_reference>(traits, concepts);
+  export_AosTraits_2<GT>(traits, concepts);
+  export_AosLandmarkTraits_2<GT>(traits, concepts);
+  export_AosDirectionalXMonotoneTraits_2<GT>(traits, concepts);
   traits
     .def("is_in_x_range_2_object", &GT::is_in_x_range_2_object)
     .def("is_in_y_range_2_object", &GT::is_in_y_range_2_object)
@@ -57,13 +57,13 @@ py::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
     .def(py::init<Segment_2&>())
     .def(py::init<aos2::Point_2&, aos2::Point_2&>())
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
-    .def("source", &aos2::X_monotone_curve_2::source, Copy_const_reference())
-    .def("target", &aos2::X_monotone_curve_2::target, Copy_const_reference())
-    .def("line", &aos2::X_monotone_curve_2::line, Copy_const_reference())
+    .def("source", &aos2::X_monotone_curve_2::source)
+    .def("target", &aos2::X_monotone_curve_2::target)
+    .def("line", &aos2::X_monotone_curve_2::line)
     .def("is_vertical", &aos2::X_monotone_curve_2::is_vertical)
     .def("flip", &aos2::X_monotone_curve_2::flip)
-    .def("left", &aos2::X_monotone_curve_2::left, Copy_const_reference())
-    .def("right", &aos2::X_monotone_curve_2::right, Copy_const_reference())
+    .def("left", &aos2::X_monotone_curve_2::left)
+    .def("right", &aos2::X_monotone_curve_2::right)
     .def("set_left", &aos2::X_monotone_curve_2::set_left)
     .def("set_right", &aos2::X_monotone_curve_2::set_right)
     .def("is_directed_right", &aos2::X_monotone_curve_2::is_directed_right)
@@ -78,11 +78,11 @@ py::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
     .def(py::self_ns::repr(py::self_ns::self))
   ;
 
-  py::class_<GT::Is_in_x_range_2>("Is_in_x_range_2", py::no_init)
+  py::class_<GT::Is_in_x_range_2>(m, "Is_in_x_range_2")
     .def("__call__", &GT::Is_in_x_range_2::operator());
   ;
 
-  py::class_<GT::Is_in_y_range_2>("Is_in_y_range_2", py::no_init)
+  py::class_<GT::Is_in_y_range_2>(m, "Is_in_y_range_2")
     .def("__call__", &GT::Is_in_y_range_2::operator());
   ;
 

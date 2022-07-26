@@ -16,17 +16,17 @@ namespace py = nanobind;
 
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 
-template <typename T, typename RVP, typename C, typename Concepts>
+template <typename T, typename C, typename Concepts>
 void export_AosApproximateTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T, RVP>(c, concepts);
+  export_AosBasicTraits<T>(c, concepts);
 
   typedef typename T::Approximate_2             Approximate_2;
 
   auto& classes = concepts.m_approximate_traits_classes;
-  classes.m_approximate_2 = new py::class_<Approximate_2>("Approximate_2", py::no_init);
+  classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
   classes.m_approximate_2->def("__call__", &T::Approximate_2::operator());
 
   c.def("Approximate_2", &T::approximate_2_object);

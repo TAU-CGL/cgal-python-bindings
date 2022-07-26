@@ -17,12 +17,12 @@
 
 namespace py = nanobind;
 
-template <typename T, typename RVP, typename C, typename Concepts>
+template <typename T, typename C, typename Concepts>
 void export_AosDirectionalXMonotoneTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosXMonotoneTraits_2<T, RVP>(c, concepts);
+  export_AosXMonotoneTraits_2<T>(c, concepts);
 
   typedef typename T::Compare_endpoints_xy_2    Compare_endpoints_xy_2;
   typedef typename T::Construct_opposite_2      Construct_opposite_2;
@@ -30,11 +30,11 @@ void export_AosDirectionalXMonotoneTraits_2(C c, Concepts& concepts) {
   auto& classes = concepts.m_directional_x_monotone_traits_classes;
 
   classes.m_compare_endpoints_xy_2 =
-    new py::class_<Compare_endpoints_xy_2>("Compare_endpoints_xy_2", py::no_init);
+    new py::class_<Compare_endpoints_xy_2>(c, "Compare_endpoints_xy_2");
   classes.m_compare_endpoints_xy_2->def("__call__", &T::Compare_endpoints_xy_2::operator());
 
   classes.m_construct_opposite_2 =
-    new py::class_<Construct_opposite_2>("Construct_opposite_2", py::no_init);
+    new py::class_<Construct_opposite_2>(c, "Construct_opposite_2");
   classes.m_construct_opposite_2->def("__call__", &T::Construct_opposite_2::operator());
 
   c.def("compare_endpoints_xy_2_object", &T::compare_endpoints_xy_2_object)

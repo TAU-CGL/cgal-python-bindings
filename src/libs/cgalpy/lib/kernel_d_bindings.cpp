@@ -49,36 +49,37 @@ constexpr bool is_epec_d_type() {
 // Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2) are not a valid overload for do_intersect
 // in which case the second version (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
-void bind_do_intersect_d_2T(decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
+void bind_do_intersect_d_2T(py::module_& m,
+                            decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
 {
-  py::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel_d>);
+  m.def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel_d>);
 }
 
 template<typename, typename>
-void bind_do_intersect_d_2T(...) {}
+void bind_do_intersect_d_2T(py::module_& m, ...) {}
 
 template <typename T>
-void bind_do_intersect_d_1T() {
-  bind_do_intersect_d_2T<T, Point_d>(true);
-  bind_do_intersect_d_2T<T, Segment_d>(true);
-  // bind_do_intersect_d_2T<T, Line_d>(true);
-  // bind_do_intersect_d_2T<T, Ray_d>(true);
-  // bind_do_intersect_d_2T<T, Triangle_d>(true);
-  // bind_do_intersect_d_2T<T, Iso_rectangle_d>(true);
-  // bind_do_intersect_d_2T<T, Circle_d>(true);
+void bind_do_intersect_d_1T(py::module_& m) {
+  bind_do_intersect_d_2T<T, Point_d>(m, true);
+  bind_do_intersect_d_2T<T, Segment_d>(m, true);
+  // bind_do_intersect_d_2T<T, Line_d>(m, true);
+  // bind_do_intersect_d_2T<T, Ray_d>(m, true);
+  // bind_do_intersect_d_2T<T, Triangle_d>(m, true);
+  // bind_do_intersect_d_2T<T, Iso_rectangle_d>(m, true);
+  // bind_do_intersect_d_2T<T, Circle_d>(m, true);
 }
 
-void bind_do_intersect_d() {
-  bind_do_intersect_d_1T<Point_d>();
-  bind_do_intersect_d_1T<Segment_d>();
-  // bind_do_intersect_d_1T<Line_d>();
-  // bind_do_intersect_d_1T<Ray_d>();
-  // bind_do_intersect_d_1T<Triangle_d>();
-  // bind_do_intersect_d_1T<Iso_rectangle_d>();
-  // bind_do_intersect_d_1T<Circle_d>();
+void bind_do_intersect_d(py::module_& m) {
+  bind_do_intersect_d_1T<Point_d>(m);
+  bind_do_intersect_d_1T<Segment_d>(m);
+  // bind_do_intersect_d_1T<Line_d>(m);
+  // bind_do_intersect_d_1T<Ray_d>(m);
+  // bind_do_intersect_d_1T<Triangle_d>(m);
+  // bind_do_intersect_d_1T<Iso_rectangle_d>(m);
+  // bind_do_intersect_d_1T<Circle_d>(m);
 }
 
-void export_kernel_d() {
+void export_kernel_d(py::module_& m) {
 #if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
      (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
   const py::type_info info_gmpz = py::type_id<CGAL::Gmpz>();
@@ -102,7 +103,7 @@ void export_kernel_d() {
   else py::scope().attr("FT") = py::handle<>(reg_ftd->m_class_object);
 #endif
 
-  py::class_<Point_d>("Point_d")
+  py::class_<Point_d>(m, "Point_d")
     .def(py::init<>())
     .def("__init__", py::make_constructor(&init_point_d))
     .def("dimension", &Point_d::dimension)
@@ -122,7 +123,7 @@ void export_kernel_d() {
     .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Point_d>)
     ;
 
-  py::class_<Segment_d>("Segment_d")
+  py::class_<Segment_d>(m, "Segment_d")
     .def(py::init<Point_d&, Point_d&>())
     .def("source", &Segment_d::source, Kernel_d_return_value_policy())
     .def("target", &Segment_d::target, Kernel_d_return_value_policy())
@@ -149,5 +150,5 @@ void export_kernel_d() {
     // .setattr("__hash__", &hash<Segment_d>)
     ;
 
-  bind_do_intersect_d();
+  bind_do_intersect_d(m);
 }

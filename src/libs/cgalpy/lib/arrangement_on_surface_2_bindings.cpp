@@ -9,7 +9,6 @@
 
 #include <nanobind/nanobind.h>
 #include <boost/static_assert.hpp>
-#include <boost/python/stl_iterator.hpp>
 
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_vertical_decomposition_2.h>
@@ -23,21 +22,21 @@
 #include "CGALPY/Arr_overlay_traits.hpp"
 #include "CGALPY/Arr_overlay_function_traits.hpp"
 
-void export_vertex();
-void export_halfedge();
-void export_face();
+void export_vertex(py::module_&);
+void export_halfedge(py::module_&);
+void export_face(py::module_&);
 
-py::class_<aos2::Geometry_traits_2> export_arr_linear_traits();
-py::class_<aos2::Geometry_traits_2> export_arr_segment_traits();
-py::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits();
-py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits();
-py::class_<aos2::Geometry_traits_2> export_arr_conic_traits();
-py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits();
-py::class_<aos2::Geometry_traits_2> export_arr_geodesic_arc_on_sphere_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_linear_traits(py::module_&);
+py::class_<aos2::Geometry_traits_2> export_arr_segment_traits(py::module_&);
+py::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits(py::module_&);
+py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits(py::module_&);
+py::class_<aos2::Geometry_traits_2> export_arr_conic_traits(py::module_&);
+py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits(py::module_&);
+py::class_<aos2::Geometry_traits_2> export_arr_geodesic_arc_on_sphere_traits(py::module_&);
 
-py::object export_gps_segment_traits();
-py::object export_gps_circle_segment_traits();
-py::object export_gps_traits();
+py::object export_gps_segment_traits(py::module_&);
+py::object export_gps_circle_segment_traits(py::module_&);
+py::object export_gps_traits(py::module_&);
 
 namespace aos2 {
 
@@ -62,25 +61,25 @@ Vertex& insert_point(Arrangement_2& arr, Point_2& p, PointLocation& pl)
 template<typename CurveType>
 void insert_curve(Arrangement_2& arr, CurveType& c) { CGAL::insert(arr, c); }
 
-void insert_curves(Arrangement_2& arr, py::list& lst) {
-  if (!lst) return;
-  if (py::extract<X_monotone_curve_2>(lst[0]).check()) {
-    // copying into a vector because of an apparent bug with
-    // py::stl_input_iterator
-    auto begin = py::stl_input_iterator< X_monotone_curve_2 >(lst);
-    auto end = py::stl_input_iterator< X_monotone_curve_2 >();
-    auto v = std::vector<X_monotone_curve_2>(begin, end);
-    CGAL::insert(arr, v.begin(), v.end());
-  }
-  else if (py::extract<Curve_2>(lst[0]).check()) {
-    // copying into a vector because of an apparent bug with
-    // py::stl_input_iterator
-    auto begin = py::stl_input_iterator< Curve_2 >(lst);
-    auto end = py::stl_input_iterator< Curve_2 >();
-    auto v = std::vector<Curve_2>(begin, end);
-    CGAL::insert(arr, v.begin(), v.end());
-  }
-}
+// void insert_curves(Arrangement_2& arr, py::list& lst) {
+//   if (!lst) return;
+//   if (py::extract<X_monotone_curve_2>(lst[0]).check()) {
+//     // copying into a vector because of an apparent bug with
+//     // py::iterator
+//     auto begin = py::iterator< X_monotone_curve_2 >(lst);
+//     auto end = py::iterator< X_monotone_curve_2 >();
+//     auto v = std::vector<X_monotone_curve_2>(begin, end);
+//     CGAL::insert(arr, v.begin(), v.end());
+//   }
+//   else if (py::extract<Curve_2>(lst[0]).check()) {
+//     // copying into a vector because of an apparent bug with
+//     // py::iterator
+//     auto begin = py::iterator< Curve_2 >(lst);
+//     auto end = py::iterator< Curve_2 >();
+//     auto v = std::vector<Curve_2>(begin, end);
+//     CGAL::insert(arr, v.begin(), v.end());
+//   }
+// } NB
 
 Halfedge& insert_non_intersecting_curve_default(Arrangement_2& arr,
                                                 X_monotone_curve_2& c)
@@ -93,9 +92,9 @@ Halfedge& insert_non_intersecting_curve(Arrangement_2& arr,
 
 void insert_non_intersecting_curves(Arrangement_2& arr, py::list& lst) {
   // copying into a vector because of an apparent bug with
-  // py::stl_input_iterator
-  auto begin = py::stl_input_iterator< X_monotone_curve_2 >(lst);
-  auto end = py::stl_input_iterator< X_monotone_curve_2 >();
+  // py::iterator
+  auto begin = py::iterator<X_monotone_curve_2>(lst);
+  auto end = py::iterator<X_monotone_curve_2>();
   auto v = std::vector<X_monotone_curve_2>(begin, end);
   CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
 }
@@ -194,7 +193,7 @@ class Zone_object_visitor : public boost::static_visitor<py::object> {
 public:
   template<typename T>
     py::object operator()(T& operand) const {
-      return py::object(*operand);
+      return py::handle(*operand);
   }
 };
 
@@ -347,29 +346,27 @@ void assign(Aos& arr, Aos& input_arr) { arr.assign(input_arr); }
 // Export common members of Aos types
 template <typename Aos>
 void export_aos(py::class_<Aos>& co) {
-  typedef py::return_internal_reference<>                 RIR;
-
   co
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
     .def(py::init<>())
     .def(py::init<Aos&>())
-    .def("halfedges", py::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>))
-    .def("vertices", py::range<RIR>(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>))
-    .def("faces", py::range<RIR>(&aos2::faces_begin<Aos>, &aos2::faces_end<Aos>))
-    .def("edges", py::range<RIR>(&aos2::edges_begin<Aos>, &aos2::edges_end<Aos>))
-    .def("unbounded_faces", py::range<RIR>(&aos2::unbounded_faces_begin<Aos>, &aos2::unbounded_faces_end<Aos>))
-    .def("fictitious_face", &aos2::fictitious_face<Aos>, RIR())
-    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex<Aos>, RIR())
-    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex<Aos>, RIR())
-    .def("insert_in_face_interior", &aos2::insert_edge_in_face_interior<Aos>, RIR())
-    .def("insert_in_face_interior", &aos2::insert_vertex_in_face_interior<Aos>, RIR())
-    .def("insert_at_vertices", &aos2::insert_at_vertices<Aos>, RIR())
-    .def("modify_vertex", &aos2::modify_vertex<Aos>, RIR())
-    .def("remove_isolated_vertex", &aos2::remove_isolated_vertex<Aos>, RIR())
-    .def("modify_edge", &aos2::modify_edge<Aos>, RIR())
-    .def("split_edge", &aos2::split_edge<Aos>, RIR())
-    .def("merge_edge", &aos2::merge_edge<Aos>, RIR())
-    .def("remove_edge", &aos2::remove_edge<Aos>, RIR())
+    // .def("halfedges", py::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>)) NB
+    // .def("vertices", py::range<RIR>(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>)) NB
+    // .def("faces", py::range<RIR>(&aos2::faces_begin<Aos>, &aos2::faces_end<Aos>)) NB
+    // .def("edges", py::range<RIR>(&aos2::edges_begin<Aos>, &aos2::edges_end<Aos>)) NB
+    // .def("unbounded_faces", py::range<RIR>(&aos2::unbounded_faces_begin<Aos>, &aos2::unbounded_faces_end<Aos>)) NB
+    .def("fictitious_face", &aos2::fictitious_face<Aos>)
+    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex<Aos>)
+    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex<Aos>)
+    .def("insert_in_face_interior", &aos2::insert_edge_in_face_interior<Aos>)
+    .def("insert_in_face_interior", &aos2::insert_vertex_in_face_interior<Aos>)
+    .def("insert_at_vertices", &aos2::insert_at_vertices<Aos>)
+    .def("modify_vertex", &aos2::modify_vertex<Aos>)
+    .def("remove_isolated_vertex", &aos2::remove_isolated_vertex<Aos>)
+    .def("modify_edge", &aos2::modify_edge<Aos>)
+    .def("split_edge", &aos2::split_edge<Aos>)
+    .def("merge_edge", &aos2::merge_edge<Aos>)
+    .def("remove_edge", &aos2::remove_edge<Aos>)
     .def("is_empty", &Aos::is_empty)
     .def("is_valid", &Aos::is_valid)
     .def("number_of_edges", &Aos::number_of_edges)
@@ -386,8 +383,8 @@ void export_aos(py::class_<Aos>& co) {
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
 #endif
 
     ;
@@ -395,8 +392,8 @@ void export_aos(py::class_<Aos>& co) {
 
 // Overlay traits
 template <bool VertexExtended, bool HalfedgeExtended, bool FaceExtended>
-void bind_overlay_function_traits() {
-  py::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
+void bind_overlay_function_traits(py::module_& m) {
+  py::class_<aos2::Arr_overlay_function_traits>(m, "Arr_overlay_function_traits")
     .def(py::init<>())
     .def(py::init<py::object, py::object, py::object, py::object, py::object,
                   py::object, py::object, py::object, py::object, py::object>())
@@ -414,20 +411,20 @@ void bind_overlay_function_traits() {
 }
 
 template <>
-void bind_overlay_function_traits<false, false, false>() {
-  py::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
+void bind_overlay_function_traits<false, false, false>(py::module_& m) {
+  py::class_<aos2::Arr_overlay_function_traits>(m, "Arr_overlay_function_traits")
     .def(py::init<>());
 }
 
 template <>
-void bind_overlay_function_traits<false, false, true>() {
-  py::class_<aos2::Arr_overlay_function_traits>("Arr_overlay_function_traits")
+void bind_overlay_function_traits<false, false, true>(py::module_& m) {
+  py::class_<aos2::Arr_overlay_function_traits>(m, "Arr_overlay_function_traits")
     .def(py::init<>())
     .def(py::init<py::object>())
     ;
 }
 
-void export_arrangement_on_surface_2() {
+void export_arrangement_on_surface_2(py::module_& m) {
   typedef aos2::Arrangement_2                           Arr;
   typedef aos2::Arrangement_with_history_2              Awh;
   typedef Arr::Geometry_traits_2                        Tr;
@@ -439,15 +436,13 @@ void export_arrangement_on_surface_2() {
   typedef CGAL::Arr_landmarks_point_location<Arr>       Landmarks_pl;
   typedef CGAL::Arr_trapezoid_ric_point_location<Arr>   Trapezoid_pl;
 
-  typedef py::return_internal_reference<>               RIR;
-
-  py::enum_<CGAL::Arr_halfedge_direction>("Arr_halfedge_direction")
+  py::enum_<CGAL::Arr_halfedge_direction>(m, "Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
     .value("ARR_LEFT_TO_RIGHT", CGAL::Arr_halfedge_direction::ARR_LEFT_TO_RIGHT)
     .export_values()
     ;
 
-  py::enum_<CGAL::Arr_curve_end>("Arr_curve_end")
+  py::enum_<CGAL::Arr_curve_end>(m, "Arr_curve_end")
     .value("ARR_MIN_END", CGAL::Arr_curve_end::ARR_MIN_END)
     .value("ARR_MAX_END", CGAL::Arr_curve_end::ARR_MAX_END)
     .export_values()
@@ -456,37 +451,37 @@ void export_arrangement_on_surface_2() {
   // Export the traits classes
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_gps_segment_traits();
+  auto traits_object = export_gps_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_gps_segment_traits();
+  auto traits_object = export_gps_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_gps_circle_segment_traits();
+  auto traits_object = export_gps_circle_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-  auto traits_object = export_gps_traits();
+  auto traits_object = export_gps_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-  auto traits_object = export_gps_traits();
+  auto traits_object = export_gps_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_gps_traits();
+  auto traits_object = export_gps_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  auto traits_object = export_gps_traits();
+  auto traits_object = export_gps_traits(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_GPS_TRAITS");
 #endif
 #else
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_arr_segment_traits();
+  auto traits_object = export_arr_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_arr_non_caching_segment_traits();
+  auto traits_object = export_arr_non_caching_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-  auto traits_object = export_arr_linear_traits();
+  auto traits_object = export_arr_linear_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_arr_circle_segment_traits();
+  auto traits_object = export_arr_circle_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-  auto traits_object = export_arr_conic_traits();
+  auto traits_object = export_arr_conic_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
   auto traits_object = export_arr_algebraic_segment_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  auto traits_object = export_arr_geodesic_arc_on_sphere_traits();
+  auto traits_object = export_arr_geodesic_arc_on_sphere_traits(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
@@ -495,85 +490,83 @@ void export_arrangement_on_surface_2() {
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
   {
     // Arrangement
-    auto arr_co = py::class_<Arr>("Arrangement_2");
+    auto arr_co = py::class_<Arr>(m, "Arrangement_2");
     export_aos<Arr>(arr_co);
     arr_co
-      .def("unbounded_face", &aos2::unbounded_face<Arr>, RIR())
+      .def("unbounded_face", &aos2::unbounded_face<Arr>)
       .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity);
 
-    py::scope arr_scope = arr_co;
-    export_vertex();
-    export_halfedge();
-    export_face();
-    arr_scope.attr("Geometry_traits_2") = traits_object;
+    export_vertex(m);
+    export_halfedge(m);
+    export_face(m);
+    m.attr("Geometry_traits_2") = traits_object;
   }
 #elif CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT_ON_SURFACE
   {
     // Arrangement
-    auto arr_co = py::class_<Arr>("Arrangement_2");
+    auto arr_co = py::class_<Arr>(m, "Arrangement_2");
     export_aos<Arr>(arr_co);
 
-    py::scope arr_scope = arr_co;
     export_vertex();
     export_halfedge();
     export_face();
-    arr_scope.attr("Geometry_traits_2") = traits_object;
+    m.attr("Geometry_traits_2") = traits_object;
   }
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_TYPE");
 #endif
 
   //free functions
-  py::def("insert_point", &aos2::insert_point<Naive_pl>, RIR());
+  m.def("insert_point", &aos2::insert_point<Naive_pl>);
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  py::def("insert_point", &aos2::insert_point_default, RIR());
-  py::def("insert_point", &aos2::insert_point<Wal_pl>, RIR());
-  py::def("insert_point", &aos2::insert_point<Trapezoid_pl>, RIR());
+  m.def("insert_point", &aos2::insert_point_default);
+  m.def("insert_point", &aos2::insert_point<Wal_pl>);
+  m.def("insert_point", &aos2::insert_point<Trapezoid_pl>);
 #endif
-  py::def("insert", &aos2::insert_curve<X_monotone_curve>);
-  py::def("insert", &aos2::insert_curve<Curve>);
-  py::def("insert", &aos2::insert_curves);
-  py::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Naive_pl>, RIR());
+  m.def("insert", &aos2::insert_curve<X_monotone_curve>);
+  m.def("insert", &aos2::insert_curve<Curve>);
+  // m.def("insert", &aos2::insert_curves); NB
+  m.def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Naive_pl>);
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  py::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve_default, RIR());
-  py::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Wal_pl>, RIR());
-  py::def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Trapezoid_pl>, RIR());
+  m.def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve_default);
+  m.def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Wal_pl>);
+  m.def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Trapezoid_pl>);
 #endif
-  py::def("insert_non_intersecting_curves", &aos2::insert_non_intersecting_curves);
-  py::def("decompose", &aos2::decompose);
-  py::def("zone", &aos2::zone<Naive_pl>);
+  m.def("insert_non_intersecting_curves", &aos2::insert_non_intersecting_curves);
+  m.def("decompose", &aos2::decompose);
+  m.def("zone", &aos2::zone<Naive_pl>);
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  py::def("zone", &aos2::zone_default);
-  py::def("zone", &aos2::zone<Wal_pl>);
-  py::def("zone", &aos2::zone<Trapezoid_pl>);
+  m.def("zone", &aos2::zone_default);
+  m.def("zone", &aos2::zone<Wal_pl>);
+  m.def("zone", &aos2::zone<Trapezoid_pl>);
 #endif
   //supported only by some traits
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-  py::def("zone", &aos2::zone<Landmarks_pl>);
-  py::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Landmarks_pl>);
-  py::def("insert_point", &aos2::insert_point<Landmarks_pl>, RIR());
-  py::def("insert_non_intersecting_curve",
-          &aos2::insert_non_intersecting_curve<Landmarks_pl>, RIR());
+  m.def("zone", &aos2::zone<Landmarks_pl>);
+  m.def("do_intersect", &aos2::do_intersect<X_monotone_curve, Landmarks_pl>);
+  m.def("insert_point", &aos2::insert_point<Landmarks_pl>);
+  m.def("insert_non_intersecting_curve",
+          &aos2::insert_non_intersecting_curve<Landmarks_pl>);
 #endif
 
-  py::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Naive_pl>);
+  m.def("do_intersect", &aos2::do_intersect<X_monotone_curve, Naive_pl>);
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  py::def("do_intersect", &aos2::do_intersect_default<X_monotone_curve>);
-  py::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Wal_pl>);
-  py::def("do_intersect", &aos2::do_intersect<X_monotone_curve, Trapezoid_pl>);
+  m.def("do_intersect", &aos2::do_intersect_default<X_monotone_curve>);
+  m.def("do_intersect", &aos2::do_intersect<X_monotone_curve, Wal_pl>);
+  m.def("do_intersect", &aos2::do_intersect<X_monotone_curve, Trapezoid_pl>);
 #endif
 
-  py::def("remove_edge", &aos2::remove_edge_free, RIR());
-  py::def("remove_vertex", &aos2::remove_vertex_free);
+  m.def("remove_edge", &aos2::remove_edge_free);
+  m.def("remove_vertex", &aos2::remove_vertex_free);
 
   // Export overlay & overlay traits
   bind_overlay_function_traits<aos2::is_vertex_extended(),
                                aos2::is_halfedge_extended(),
-                               aos2::is_face_extended()>();
-  py::class_<aos2::Arr_overlay_traits>("Arr_overlay_traits")
+                               aos2::is_face_extended()>(m);
+  py::class_<aos2::Arr_overlay_traits>(m, "Arr_overlay_traits")
     .def(py::init<>())
     .def(py::init<py::object>())
     .def(py::init<py::object, py::object, py::object, py::object, py::object,
@@ -590,6 +583,6 @@ void export_arrangement_on_surface_2() {
     .def("set_ff_f", &aos2::Arr_overlay_traits::set_ff_f)
     ;
 
-  py::def("overlay", &aos2::overlay<aos2::Arr_overlay_function_traits>);
-  py::def("overlay", &aos2::overlay<aos2::Arr_overlay_traits>);
+  m.def("overlay", &aos2::overlay<aos2::Arr_overlay_function_traits>);
+  m.def("overlay", &aos2::overlay<aos2::Arr_overlay_traits>);
 }

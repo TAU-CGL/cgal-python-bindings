@@ -23,22 +23,22 @@ halfedge_around_vertex_iterator(Vertex& v) {
 
 }
 
-void export_vertex() {
+void export_vertex(py::module_& m) {
   typedef aos2::Arrangement_2   Arr2;
   typedef Arr2::Vertex          Vertex;
   typedef Arr2::Point_2         Point;
 
-  py::class_<Vertex>("Vertex")
+  py::class_<Vertex>(m, "Vertex")
     .def(py::init<>())
-    .def<Point& (Vertex::*)()>("point", &Vertex::point, py::return_internal_reference<>())
+    .def<Point& (Vertex::*)()>("point", &Vertex::point)
     .def("is_isolated", &Vertex::is_isolated)
     .def("degree", &Vertex::degree)
-    .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator, Manage_new_object())
+    .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator)
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
     .def<Vertex::Data& (Vertex::*)()>("data", &Vertex::data, Copy_non_const_reference())
     .def("set_data", &Vertex::set_data)
 #endif
     ;
 
-  bind_iterator<Iterator_from_circulator<Arr2::Halfedge_around_vertex_circulator>>("Halfedge_around_vertex_iterator");
+  bind_iterator<Iterator_from_circulator<Arr2::Halfedge_around_vertex_circulator>>(m, "Halfedge_around_vertex_iterator");
 }

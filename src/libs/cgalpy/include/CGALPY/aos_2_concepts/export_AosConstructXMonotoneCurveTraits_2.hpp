@@ -17,12 +17,12 @@
 
 namespace py = nanobind;
 
-template <typename T, typename RVP, typename C, typename Concepts>
+template <typename T, typename C, typename Concepts>
 void export_AosConstructXMonotoneCurveTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T, RVP>(c, concepts);
+  export_AosBasicTraits<T>(c, concepts);
 
   typedef typename T::Point_2                       Point_2;
   typedef typename T::X_monotone_curve_2            X_monotone_curve_2;
@@ -30,9 +30,9 @@ void export_AosConstructXMonotoneCurveTraits_2(C c, Concepts& concepts) {
 
   auto& classes = concepts.m_construct_x_monotone_curve_traits_classes;
 
-  using Ctr_xcv = X_monotone_curve_2 (Construct_x_monotone_curve_2::*)(const Point_2&, const Point_2&) const;
+  using Ctr_xcv = X_monotone_curve_2(Construct_x_monotone_curve_2::*)(const Point_2&, const Point_2&) const;
   classes.m_construct_x_monotone_curve_2 =
-    new py::class_<Construct_x_monotone_curve_2>("Construct_x_monotone_curve_2", py::no_init);
+    new py::class_<Construct_x_monotone_curve_2>(c, "Construct_x_monotone_curve_2");
   classes.m_construct_x_monotone_curve_2->
     def("__call__", static_cast<Ctr_xcv>(&Construct_x_monotone_curve_2::operator()));
 

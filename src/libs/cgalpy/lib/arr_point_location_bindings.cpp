@@ -41,18 +41,13 @@ typedef typename std::pair<Point_2, Pl_result>                  Pl_query_result;
 class Point_location_result_visitor : public boost::static_visitor<py::object> {
 public:
   template<typename T>
-  py::object operator()(T& operand) const {
-    // reference existing object
-    typename py::reference_existing_object::apply<T*>::type converter;
-    py::handle<> handle(converter(&(*operand)));
-    return py::object(handle);
-  }
+  py::object operator()(T& operand) const { return py::handle(*operand); }
 };
 
 py::list locate_batch(Arrangement_2& arr, const py::list& lst) {
   py::list res;
-  auto v = std::vector<Point_2>(py::stl_input_iterator< Point_2 >(lst),
-                                py::stl_input_iterator< Point_2 >());
+  auto v = std::vector<Point_2>(py::iterator<Point_2>(lst),
+                                py::iterator<Point_2>());
   auto op =
     [&] (const Pl_query_result& p) mutable {
       const auto& result =
@@ -81,63 +76,56 @@ void landmarks_pl_attach(Landmarks_pl& pl, Arrangement_2& arr)
 
 }
 
-void export_point_location() {
+void export_point_location(py::module_& m) {
   typedef aos2::Arrangement_2                           Arr;
   typedef CGAL::Arr_naive_point_location<Arr>           Naive_pl;
   typedef CGAL::Arr_walk_along_line_point_location<Arr> Walk_pl;
   typedef CGAL::Arr_landmarks_point_location<Arr>       Landmarks_pl;
   typedef CGAL::Arr_trapezoid_ric_point_location<Arr>   Trapezoid_pl;
 
-  typedef py::with_custodian_and_ward<1, 2>             WCW_1_2;
-  typedef py::with_custodian_and_ward_postcall<0, 1>    WCW_0_1;
-  typedef py::with_custodian_and_ward_postcall<1, 0>    WCW_1_0;
-
   // Supported only by some of the traits
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  py::class_<Landmarks_pl>("Arr_landmarks_point_location")
+  py::class_<Landmarks_pl>(m, "Arr_landmarks_point_location")
     .def(py::init<>())
-    .def(py::init<Arr&>()[WCW_1_2()])
-    .def("attach", &aos2::landmarks_pl_attach, WCW_1_2())
+    .def(py::init<Arr&>())
+    .def("attach", &aos2::landmarks_pl_attach)
     .def("detach", &Landmarks_pl::detach)
-    .def("locate", &aos2::locate<Landmarks_pl>, WCW_0_1())
+    .def("locate", &aos2::locate<Landmarks_pl>)
     ;
 #endif
-  py::class_<Trapezoid_pl,
-             boost::noncopyable>("Arr_trapezoid_ric_point_location")
+  py::class_<Trapezoid_pl>(m, "Arr_trapezoid_ric_point_location")
     .def(py::init<>())
-    .def(py::init<Arr&>()[WCW_1_2()])
-    .def("attach", &Trapezoid_pl::attach, WCW_1_2())
+    .def(py::init<Arr&>())
+    .def("attach", &Trapezoid_pl::attach)
     .def("detach", &Trapezoid_pl::detach)
     .def("depth", &Trapezoid_pl::depth)
     .def("longest_query_path_length", &Trapezoid_pl::longest_query_path_length)
     .def("with_guarantees", &Trapezoid_pl::with_guarantees)
-    .def<Arr*(Trapezoid_pl::*)()>("arrangement",
-                                  &Trapezoid_pl::arrangement,
-                                  Reference_existing_object())
-    .def("locate", &aos2::locate<Trapezoid_pl>, WCW_0_1())
+    .def<Arr*(Trapezoid_pl::*)()>("arrangement", &Trapezoid_pl::arrangement)
+    .def("locate", &aos2::locate<Trapezoid_pl>)
     .def("ray_shoot_up", &Trapezoid_pl::ray_shoot_up)
     .def("ray_shoot_down", &Trapezoid_pl::ray_shoot_down)
     ;
 
-  py::class_<Walk_pl>("Arr_walk_along_line_point_location")
+  py::class_<Walk_pl>(m, "Arr_walk_along_line_point_location")
     .def(py::init<>())
-    .def(py::init<Arr&>()[WCW_1_2()])
-    .def("attach", &Walk_pl::attach, WCW_1_2())
+    .def(py::init<Arr&>())
+    .def("attach", &Walk_pl::attach)
     .def("detach", &Walk_pl::detach)
-    .def("locate", &aos2::locate<Walk_pl>, WCW_0_1())
+    .def("locate", &aos2::locate<Walk_pl>)
     .def("ray_shoot_up", &Walk_pl::ray_shoot_up)
     .def("ray_shoot_down", &Walk_pl::ray_shoot_down)
     ;
 
-  py::class_<Naive_pl>("Arr_naive_point_location")
+  py::class_<Naive_pl>(m, "Arr_naive_point_location")
     .def(py::init<>())
-    .def(py::init<Arr&>()[WCW_1_2()])
-    .def("attach", &Naive_pl::attach, WCW_1_2())
+    .def(py::init<Arr&>())
+    .def("attach", &Naive_pl::attach)
     .def("detach", &Naive_pl::detach)
-    .def("locate", &aos2::locate<Naive_pl>, WCW_0_1())
+    .def("locate", &aos2::locate<Naive_pl>)
     ;
 
-  py::def("locate", &aos2::locate_batch, WCW_1_0());
+  m.def("locate", &aos2::locate_batch);
 }

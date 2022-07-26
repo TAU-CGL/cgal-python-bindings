@@ -36,13 +36,8 @@ void export_triangulation_3(py::module_&);
 void export_alpha_shape_2(py::module_&);
 void export_alpha_shape_3(py::module_&);
 
-// #define SET_SCOPE(x)  \
-//   std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME))+std::string(".")+std::string(x); \
-//   py::object module(py::handle<>(py::borrowed(PyImport_AddModule(module_name.c_str()))));       \
-//   py::scope().attr(x) = module;                                                                 \
-//   py::scope module_scope = module;
-
-NB_MODULE(CGALPY_MODULE_NAME, m) {
+#define MODULE_NAME BOOST_PP_CAT(CGALPY_MODULE_NAME,)
+NB_MODULE(MODULE_NAME, m) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
   m.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
