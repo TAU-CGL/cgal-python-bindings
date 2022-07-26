@@ -61,7 +61,7 @@ void bind_do_intersect(py::module_& m, T1 arg, Ts... args) {
 class Intersection_visitor : public boost::static_visitor<py::object> {
 public:
   template<typename T>
-  py::object operator()(T& operand) const { return py::object(operand); }
+  py::object operator()(T& operand) const { return py::cast(operand); }
 
   // Overload for vector
   py::object operator()(std::vector<Point_2>& operand) const {
