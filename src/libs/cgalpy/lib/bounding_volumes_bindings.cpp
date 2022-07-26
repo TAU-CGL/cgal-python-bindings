@@ -17,8 +17,8 @@
 
 namespace py = nanobind;
 
-typedef typename CGAL::Min_circle_2_traits_2<Kernel>       Min_circle_2_traits_2;
-typedef typename Min_circle_2_traits_2::Circle             Optimisation_circle_2;
+typedef typename CGAL::Min_circle_2_traits_2<Kernel>     Min_circle_2_traits_2;
+typedef typename Min_circle_2_traits_2::Circle           Optimisation_circle_2;
 typedef typename CGAL::Min_circle_2<Min_circle_2_traits_2> Min_circle_2;
 
 Min_circle_2* init_min_circle_2_from_list(py::list& lst, bool random) {
@@ -42,7 +42,7 @@ void export_bounding_volumes() {
     .def<void (Optimisation_circle_2::*) (const Point_2&, const Point_2&, const Point_2&)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&, const FT&)>("set", &Optimisation_circle_2::set)
     .def("center", &Optimisation_circle_2::center, py::return_internal_reference<>())
-    .def("squared_radius", &Optimisation_circle_2::squared_radius, Kernel_return_value_policy())
+    .def("squared_radius", &Optimisation_circle_2::squared_radius)
     .def("is_empty", &Optimisation_circle_2::is_empty)
     .def("is_degenerate", &Optimisation_circle_2::is_degenerate)
     .def(py::self == py::self)
