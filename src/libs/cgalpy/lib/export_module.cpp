@@ -15,32 +15,32 @@
 namespace py = nanobind;
 
 void export_kernel(py::module_&);
-void export_kernel_d();
-void export_arrangement_on_surface_2();
+void export_kernel_d(py::module_&);
+void export_arrangement_on_surface_2(py::module_&);
 void export_intersections_2(py::module_&);
-void export_point_location();
-void export_object();
-void export_polygon_2();
-void export_polygon_with_holes_2();
-void export_polygon_partition_2();
-void export_polygon_set_2();
-void export_general_polygon_set_2();
-void export_polygon_with_holes_2();
-void export_minkowski_sum_2();
-void export_boolean_set_operations_2();
-void export_triangulation_2();
-void export_convex_hull_2_bindings();
-void export_spatial_searching();
-void export_bounding_volumes();
-void export_triangulation_3();
-void export_alpha_shape_2();
-void export_alpha_shape_3();
+void export_point_location(py::module_&);
+void export_object(py::module_&);
+void export_polygon_2(py::module_&);
+void export_polygon_with_holes_2(py::module_&);
+void export_polygon_partition_2(py::module_&);
+void export_polygon_set_2(py::module_&);
+void export_general_polygon_set_2(py::module_&);
+void export_polygon_with_holes_2(py::module_&);
+void export_minkowski_sum_2(py::module_&);
+void export_boolean_set_operations_2(py::module_&);
+void export_triangulation_2(py::module_&);
+void export_convex_hull_2_bindings(py::module_&);
+void export_spatial_searching(py::module_&);
+void export_bounding_volumes(py::module_&);
+void export_triangulation_3(py::module_&);
+void export_alpha_shape_2(py::module_&);
+void export_alpha_shape_3(py::module_&);
 
-#define SET_SCOPE(x)  \
-std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME))+std::string(".")+std::string(x); \
-py::object module(py::handle<>(py::borrowed(PyImport_AddModule(module_name.c_str())))); \
-py::scope().attr(x) = module; \
-py::scope module_scope = module;
+// #define SET_SCOPE(x)  \
+//   std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME))+std::string(".")+std::string(x); \
+//   py::object module(py::handle<>(py::borrowed(PyImport_AddModule(module_name.c_str()))));       \
+//   py::scope().attr(x) = module;                                                                 \
+//   py::scope module_scope = module;
 
 NB_MODULE(CGALPY_MODULE_NAME, m) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
@@ -48,52 +48,52 @@ NB_MODULE(CGALPY_MODULE_NAME, m) {
 
 #ifdef CGALPY_KERNEL_BINDINGS
   {
-    // SET_SCOPE("Ker")
-    export_kernel(m);
+    auto sub_m = m.def_submodule("Ker");
+    export_kernel(sub_m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
-    export_intersections_2(m);
+    export_intersections_2(sub_m);
 #endif
   }
 #endif
 
 #ifdef CGALPY_KERNEL_D_BINDINGS
   {
-    SET_SCOPE("Kerd")
-    export_kernel_d();
+    auto sub_m = m.def_submodule("Kerd");
+    export_kernel_d(sub_m);
   }
 #endif
 
 #ifdef CGALPY_POLYGON_2_BINDINGS
   {
-    SET_SCOPE("Pol2")
-    export_polygon_2();
-    export_polygon_with_holes_2();
+    auto sub_m = m.def_submodule("Pol2");
+    export_polygon_2(sub_m);
+    export_polygon_with_holes_2(sub_m);
   };
 #endif
 
 #ifdef CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS
   // Aos2 must succeed Pol2
   {
-    SET_SCOPE("Aos2")
-    export_arrangement_on_surface_2();
+    auto sub_m = m.def_submodule("Aos2");
+    export_arrangement_on_surface_2(sub_m);
 
 #ifdef CGALPY_AOS2_POINT_LOCATION_BINDINGS
-    export_point_location();
+    export_point_location(sub_m);
 #endif
   }
 #endif
 
 #ifdef CGALPY_CONVEX_HULL_2_BINDINGS
   {
-    SET_SCOPE("Ch2")
-    export_convex_hull_2_bindings();
+    auto sub_m = m.def_submodule("Ch2");
+    export_convex_hull_2_bindings(sub_m);
   };
 #endif
 
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   {
-    SET_SCOPE("Tri2")
-    export_triangulation_2();
+    auto sub_m = m.def_submodule("Tri2");
+    export_triangulation_2(sub_m);
   };
 
 #endif
@@ -102,22 +102,22 @@ NB_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_ALPHA_SHAPE_2_BINDINGS
   // AS2 must scceed Tri2
   {
-    SET_SCOPE("As2")
-    export_alpha_shape_2();
+    auto sub_m = m.def_submodule("As2");
+    export_alpha_shape_2(sub_m);
   }
 #endif
 
 #ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
   {
-    SET_SCOPE("Ss")
-    export_spatial_searching();
+    auto sub_m = m.def_submodule("Ss");
+    export_spatial_searching(sub_m);
   };
 #endif
 
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
   {
-    SET_SCOPE("Bv")
-    export_bounding_volumes();
+    auto sub_m = m.def_submodule("Bv");
+    export_bounding_volumes(sub_m);
   };
 
 #endif
@@ -125,42 +125,42 @@ NB_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
   // BSO2 must succeed Aos2
   {
-    SET_SCOPE("Bso2")
-    export_boolean_set_operations_2();
+    auto sub_m = m.def_submodule("Bso2");
+    export_boolean_set_operations_2(sub_m);
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-    export_polygon_set_2();
+    export_polygon_set_2(sub_m);
 #else
-    export_general_polygon_set_2();
+    export_general_polygon_set_2(sub_m);
 #endif
   };
 #endif
 
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
   {
-    SET_SCOPE("Pp2")
-    export_polygon_partition_2();
+    auto sub_m = m.def_submodule("Pp2");
+    export_polygon_partition_2(sub_m);
   };
 #endif
 
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
   {
-    SET_SCOPE("Ms2")
-    export_minkowski_sum_2();
+    auto sub_m = m.def_submodule("Ms2");
+    export_minkowski_sum_2(sub_m);
   };
 #endif
 
 #ifdef CGALPY_TRIANGULATION_3_BINDINGS
   {
-    SET_SCOPE("Tri3")
-    export_triangulation_3();
+    auto sub_m = m.def_submodule("Tri3");
+    export_triangulation_3(sub_m);
   };
 #endif
 
   // 3D Alpha shape must be bound after 3D triangulation!
 #ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
   {
-    SET_SCOPE("As3")
-    export_alpha_shape_3();
+    auto sub_m = m.def_submodule("As3");
+    export_alpha_shape_3(sub_m);
   }
 #endif
 }
