@@ -10,7 +10,7 @@
 #ifndef CGALPY_EXPORT_AOSTRAITS_2_HPP
 #define CGALPY_EXPORT_AOSTRAITS_2_HPP
 
-#include <boost/function_output_iterator.hpp>
+#include <boost/iterator/function_output_iterator.hpp>
 
 #include "CGALPY/aos_2_concepts/export_AosXMonotoneTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
