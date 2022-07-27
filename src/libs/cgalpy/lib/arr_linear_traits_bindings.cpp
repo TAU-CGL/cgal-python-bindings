@@ -61,8 +61,8 @@ py::object export_arr_linear_traits() {
     .def(py::init<Segment_2&>())
     .def(py::init<Ray_2&>())
     .def(py::init<Line_2&>())
-    .def("source", &Curve_2::source, Copy_const_reference())
-    .def("target", &Curve_2::target, Copy_const_reference())
+    .def("source", &Curve_2::source)
+    .def("target", &Curve_2::target)
     .def("line", &Curve_2::line)
     .def("is_vertical", &Curve_2::is_vertical)
     .def("is_segment", &Curve_2::is_segment)
@@ -70,9 +70,9 @@ py::object export_arr_linear_traits() {
     .def("is_ray", &Curve_2::ray)
     .def("is_line", &Curve_2::is_line)
     .def("line", &Curve_2::line)
-    .def("supporting_line", &Curve_2::supporting_line, Copy_const_reference())
-    .def("left", &Curve_2::left, Copy_const_reference())
-    .def("right", &Curve_2::right, Copy_const_reference())
+    .def("supporting_line", &Curve_2::supporting_line)
+    .def("left", &Curve_2::left)
+    .def("right", &Curve_2::right)
     .def("set_left", static_cast<overload>(&Curve_2::set_left))
     .def("set_left", set_left)
     .def("set_right", static_cast<overload>(&Curve_2::set_right))
@@ -82,8 +82,8 @@ py::object export_arr_linear_traits() {
     .def("is_in_y_range", &Curve_2::is_in_y_range)
     .def("is_degenerate", &Curve_2::is_degenerate)
     .def("bbox", &Curve_2::bbox)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
   return traits;

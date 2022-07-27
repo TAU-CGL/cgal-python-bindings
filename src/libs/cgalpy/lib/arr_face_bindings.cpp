@@ -57,6 +57,6 @@ void export_face(py::module_& m) {
 #endif
     ;
 
-  bind_iterator<Iterator_from_circulator<Arr2::Ccb_halfedge_circulator>>("Ccb_halfedge_iterator");
-  bind_iterator_of_circulators<Iterator_of_circulators<Arr2::Inner_ccb_iterator>>("Inner_ccbs_iterator");
+  bind_iterator<Iterator_from_circulator<Arr2::Ccb_halfedge_circulator>>(m, "Ccb_halfedge_iterator");
+  bind_iterator_of_circulators<Iterator_of_circulators<Arr2::Inner_ccb_iterator>>(m, "Inner_ccbs_iterator");
 }

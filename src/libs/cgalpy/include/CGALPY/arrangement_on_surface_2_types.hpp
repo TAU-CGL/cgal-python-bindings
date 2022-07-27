@@ -99,8 +99,9 @@ typedef Face_gps<boolean_set_operations_2_bindings()>::type             Fb;
 typedef Face_extended<is_face_extended(), Fb, py::object>::type         F;
 
 typedef CGAL::Arr_dcel_base<V, H, F>                        Dcel;
-typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos                Arrangement_2;
-typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos_with_history   Arrangement_with_history_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos                Arrangement_on_surface_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::arr                Arrangement_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::arr_with_history   Arrangement_with_history_2;
 
 // Backward compatibility:
 typedef Arrangement_2::Geometry_traits_2                    Geometry_traits_2;

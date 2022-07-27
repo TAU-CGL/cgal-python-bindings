@@ -74,8 +74,8 @@ py::class_<aos2::Geometry_traits_2> export_arr_segment_traits(py::module_& m) {
 
     .def("bbox", &aos2::X_monotone_curve_2::bbox)
     .def("segment", &aos2::to_segment)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
   ;
 
   py::class_<GT::Is_in_x_range_2>(m, "Is_in_x_range_2")
