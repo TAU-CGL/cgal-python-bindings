@@ -112,8 +112,10 @@ template <typename Fb, typename Data> struct Face_extended<true, Fb, Data>
 
 // Aos type
 template <int i, typename GeomTraits, typename Dcel> struct Aos {
-  typedef CGAL::Arrangement_2<GeomTraits, Dcel> aos;
-  typedef CGAL::Arrangement_with_history_2<GeomTraits, Dcel> aos_with_history;
+  typedef typename CGAL::Default_planar_topology<GeomTraits, Dcel>::Traits      Topol_traits;
+  typedef CGAL::Arrangement_on_surface_2<GeomTraits, Topol_traits>              aos;
+  typedef CGAL::Arrangement_2<GeomTraits, Dcel>                                 arr;
+  typedef CGAL::Arrangement_with_history_2<GeomTraits, Dcel>                    arr_with_history;
 };
 template <typename GeomTraits, typename Dcel>
 struct Aos<CGALPY_AOS2_ARRANGEMENT_ON_SURFACE, GeomTraits, Dcel> {

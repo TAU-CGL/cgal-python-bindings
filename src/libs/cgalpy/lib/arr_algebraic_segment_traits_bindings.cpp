@@ -115,8 +115,8 @@ py::class_<typename PT::Type> bind_polynomial(py::module_&m, const char* name) {
     .def(CT() * py::self)
     .def(py::self *= py::self)
     .def("__getitem__", &P::operator[], Copy_const_reference())
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 }
 
@@ -147,13 +147,13 @@ py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
     .def(py::init<>())
     .def(py::init<int>())
     .def("value", &aos2::Integer::longValue)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
     .def(py::self -= py::self)
     .def(py::self *= py::self)
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
   py::class_<aos2::Algebraic_real_1>("Algebraic_real_1")
@@ -178,8 +178,6 @@ py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
     .def("simplify", &AR1::simplify)
     .def("to_double", &AR1::to_double)
     .def("upper", &AR1::upper)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self != py::self)
@@ -187,18 +185,20 @@ py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
     .def(py::self > py::self)
     .def(py::self <= py::self)
     .def(py::self >= py::self)
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
   py::class_<aos2::Bound>("Bound")
     .def(py::init<>())
     .def("value", &aos2::Bound::longValue)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
     .def(py::self -= py::self)
     .def(py::self *= py::self)
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
   //bind_construct_polynomial<PT_1>("Construct_polynomial_1");
@@ -236,8 +236,6 @@ py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
     .def("curve", &aos2::Point_2::curve)
     .def("arcno", &aos2::Point_2::arcno)
     .def("to_double", &to_double)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self != py::self)
@@ -245,11 +243,13 @@ py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
     .def(py::self > py::self)
     .def(py::self <= py::self)
     .def(py::self >= py::self)
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
   auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
   xcv_co
-    .def("curve", &aos2::X_monotone_curve_2::curve, py::return_internal_reference<>())
+    .def("curve", &aos2::X_monotone_curve_2::curve)
     .def("is_vertical", &aos2::X_monotone_curve_2::is_vertical)
     .def("is_finite", &aos2::X_monotone_curve_2::is_finite)
     .def("curve_end", &aos2::X_monotone_curve_2::curve_end)

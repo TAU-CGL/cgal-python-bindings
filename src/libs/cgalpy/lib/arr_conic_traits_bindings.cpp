@@ -54,8 +54,8 @@ py::class_<aos2::Geometry_traits_2> export_arr_conic_traits() {
 
   auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
   xcv_co
-    .def("left", &X_monotone_curve_2::left, Copy_const_reference())
-    .def("right", &X_monotone_curve_2::right, Copy_const_reference())
+    .def("left", &X_monotone_curve_2::left)
+    .def("right", &X_monotone_curve_2::right)
     ;
 
   auto& cv_co = *(concepts.m_traits_classes.m_curve_2);
@@ -69,8 +69,8 @@ py::class_<aos2::Geometry_traits_2> export_arr_conic_traits() {
     .def(py::init<const Rational&, const Rational&, const Rational&,
          const Rational&, const Rational&, const Rational&,
          CGAL::Orientation, const GT::Point_2&, const GT::Point_2&>())
-    .def("source", &Curve_2::source, Copy_const_reference())
-    .def("target", &Curve_2::target, Copy_const_reference())
+    .def("source", &Curve_2::source)
+    .def("target", &Curve_2::target)
     .def("orientation", &Curve_2::orientation)
     .def("is_valid", &Curve_2::is_valid)
     .def("is_x_monotone", &Curve_2::is_x_monotone)
@@ -79,14 +79,14 @@ py::class_<aos2::Geometry_traits_2> export_arr_conic_traits() {
     .def("bbox", &Curve_2::bbox)
     .def("set_source", &Curve_2::set_source)
     .def("set_target", &Curve_2::set_target)
-    .def("r", &Curve_2::r, Copy_const_reference())
-    .def("s", &Curve_2::s, Copy_const_reference())
-    .def("t", &Curve_2::t, Copy_const_reference())
-    .def("u", &Curve_2::u, Copy_const_reference())
-    .def("v", &Curve_2::v, Copy_const_reference())
-    .def("w", &Curve_2::w, Copy_const_reference())
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    .def("r", &Curve_2::r)
+    .def("s", &Curve_2::s)
+    .def("t", &Curve_2::t)
+    .def("u", &Curve_2::u)
+    .def("v", &Curve_2::v)
+    .def("w", &Curve_2::w)
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
     return traits;

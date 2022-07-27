@@ -33,25 +33,25 @@ void insert_list(Min_circle_2& mc, py::list& lst) {
   mc.insert(begin, end);
 }
 
-void export_bounding_volumes() {
-  py::class_<Optimisation_circle_2>("Optimization_circle_2")
+void export_bounding_volumes(py::module_& m) {
+  py::class_<Optimisation_circle_2>(m, "Optimization_circle_2")
     .def(py::init<>())
     .def<void (Optimisation_circle_2::*) (void)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&, const Point_2&)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&, const Point_2&, const Point_2&)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&, const FT&)>("set", &Optimisation_circle_2::set)
-    .def("center", &Optimisation_circle_2::center, py::return_internal_reference<>())
+    .def("center", &Optimisation_circle_2::center)
     .def("squared_radius", &Optimisation_circle_2::squared_radius)
     .def("is_empty", &Optimisation_circle_2::is_empty)
     .def("is_degenerate", &Optimisation_circle_2::is_degenerate)
     .def(py::self == py::self)
     .def(py::self != py::self)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
-  py::class_<Min_circle_2, boost::noncopyable>("Min_circle_2")
+  py::class_<Min_circle_2, boost::noncopyable>(m, "Min_circle_2")
     .def(py::init<>())
     .def(py::init<const Point_2&>())
     .def(py::init<const Point_2&, const Point_2&>())
@@ -62,7 +62,7 @@ void export_bounding_volumes() {
     .def("points", py::range<py::return_internal_reference<>>(&Min_circle_2::points_begin, &Min_circle_2::points_end))
     .def("support_points", py::range<py::return_internal_reference<>>(&Min_circle_2::support_points_begin, &Min_circle_2::support_points_end))
     .def("support_point", &Min_circle_2::support_point, py::return_internal_reference<>())
-    .def("circle", &Min_circle_2::circle, py::return_value_policy<py::copy_const_reference>())
+    .def("circle", &Min_circle_2::circle)
     .def("bounded_side", &Min_circle_2::bounded_side)
     .def("has_on_bounded_side", &Min_circle_2::has_on_bounded_side)
     .def("has_on_boundary", &Min_circle_2::has_on_boundary)

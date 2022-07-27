@@ -74,8 +74,8 @@ void export_polygon_2() {
     .def("edge", &Polygon_2::edge)
     .def("clear", &Polygon_2::clear)
     .def("reverse_orientation", &Polygon_2::reverse_orientation)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
+    // .def(py::self_ns::str(py::self_ns::self)) NB
+    // .def(py::self_ns::repr(py::self_ns::self)) NB
     .def(py::self == py::self)
     .def(py::self != py::self)
     ;

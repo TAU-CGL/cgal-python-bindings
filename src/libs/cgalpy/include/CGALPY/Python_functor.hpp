@@ -10,6 +10,8 @@
 #ifndef CGALPY_PYTHON_FUNCTOR
 #define CGALPY_PYTHON_FUNCTOR
 
+#include <boost/core/ref.hpp>
+
 #include <nanobind/nanobind.h>
 
 namespace py = nanobind;
@@ -25,7 +27,7 @@ public:
   Python_functor_1(py::object python_functor) : m_python_functor(python_functor)
   {}
 
-  T1 operator()(T0 a) const { return py::extract<T1>(m_python_functor(a)); }
+  T1 operator()(T0 a) const { return py::isinstance<T1>(m_python_functor(a)); }
 };
 
 template <typename T0, typename T1, typename T2>
@@ -40,7 +42,7 @@ public:
   {}
 
   T2 operator()(T0 a, T1 b) const
-  { return py::extract<T2>(m_python_functor(a, b)); }
+  { return py::isinstance<T2>(m_python_functor(a, b)); }
 };
 
 template <typename T0, typename T1, typename T2>
@@ -55,7 +57,7 @@ public:
   {}
 
   T2 operator()(const T0& a, const T1& b) const
-  { return py::extract<T2>(m_python_functor(a, b)); }
+  { return py::isinstance<T2>(m_python_functor(a, b)); }
 };
 
 template <typename T0, typename T1, typename T2>

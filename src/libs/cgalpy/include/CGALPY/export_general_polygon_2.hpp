@@ -28,8 +28,8 @@ void export_general_polygon_2(py::module_& m, py::class_<Type>*& co) {
   co->def("bbox", &Type::bbox);
   co->def("clear", &Type::clear);
   co->def("reverse_orientation", &Type::reverse_orientation);
-  co->def(py::self_ns::str(py::self_ns::self));
-  co->def(py::self_ns::repr(py::self_ns::self));
+  // co->def(py::self_ns::str(py::self_ns::self)); NB
+  // co->def(py::self_ns::repr(py::self_ns::self)); NB
 }
 
 #endif

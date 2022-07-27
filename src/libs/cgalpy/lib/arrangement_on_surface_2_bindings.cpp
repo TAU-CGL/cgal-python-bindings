@@ -22,9 +22,9 @@
 #include "CGALPY/Arr_overlay_traits.hpp"
 #include "CGALPY/Arr_overlay_function_traits.hpp"
 
-void export_vertex(py::module_&);
-void export_halfedge(py::module_&);
-void export_face(py::module_&);
+void export_vertex(py::class_<aos2::Arrangement_on_surface_2>&);
+void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>&);
+void export_face(py::class_<aos2::Arrangement_on_surface_2>&);
 
 py::class_<aos2::Geometry_traits_2> export_arr_linear_traits(py::module_&);
 py::class_<aos2::Geometry_traits_2> export_arr_segment_traits(py::module_&);
@@ -63,15 +63,15 @@ void insert_curve(Arrangement_2& arr, CurveType& c) { CGAL::insert(arr, c); }
 
 // void insert_curves(Arrangement_2& arr, py::list& lst) {
 //   if (!lst) return;
-//   if (py::extract<X_monotone_curve_2>(lst[0]).check()) {
+//   if (py::isinstance<X_monotone_curve_2>(lst[0]).check()) {
 //     // copying into a vector because of an apparent bug with
 //     // py::iterator
-//     auto begin = py::iterator< X_monotone_curve_2 >(lst);
-//     auto end = py::iterator< X_monotone_curve_2 >();
+//     auto begin = py::iterator<X_monotone_curve_2>(lst);
+//     auto end = py::iterator<X_monotone_curve_2>();
 //     auto v = std::vector<X_monotone_curve_2>(begin, end);
 //     CGAL::insert(arr, v.begin(), v.end());
 //   }
-//   else if (py::extract<Curve_2>(lst[0]).check()) {
+//   else if (py::isinstance<Curve_2>(lst[0]).check()) {
 //     // copying into a vector because of an apparent bug with
 //     // py::iterator
 //     auto begin = py::iterator< Curve_2 >(lst);
@@ -90,14 +90,14 @@ Halfedge& insert_non_intersecting_curve(Arrangement_2& arr,
                                         X_monotone_curve_2& c, PointLocation& pl)
 { return *(CGAL::insert_non_intersecting_curve(arr, c, pl)); }
 
-void insert_non_intersecting_curves(Arrangement_2& arr, py::list& lst) {
-  // copying into a vector because of an apparent bug with
-  // py::iterator
-  auto begin = py::iterator<X_monotone_curve_2>(lst);
-  auto end = py::iterator<X_monotone_curve_2>();
-  auto v = std::vector<X_monotone_curve_2>(begin, end);
-  CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
-}
+// void insert_non_intersecting_curves(Arrangement_2& arr, py::list& lst) {
+//   // copying into a vector because of an apparent bug with
+//   // py::iterator
+//   auto begin = py::iterator<X_monotone_curve_2>(lst);
+//   auto end = py::iterator<X_monotone_curve_2>();
+//   auto v = std::vector<X_monotone_curve_2>(begin, end);
+//   CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
+// }
 
 template <typename CurveType>
 bool do_intersect_default(Arrangement_2& arr, CurveType& c)
@@ -189,38 +189,38 @@ py::list decompose(Arrangement_2& arr) {
   return lst;
 }
 
-class Zone_object_visitor : public boost::static_visitor<py::object> {
-public:
-  template<typename T>
-    py::object operator()(T& operand) const {
-      return py::handle(*operand);
-  }
-};
+// class Zone_object_visitor : public boost::static_visitor<py::object> {
+// public:
+//   template<typename T>
+//     py::object operator()(T& operand) const {
+//       return py::handle(*operand);
+//   }
+// }; NB
 
-py::list zone_default(Arrangement_2& arr, X_monotone_curve_2& c) {
-  py::list lst;
-  auto op =
-    [&] (const variant& o) mutable
-    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
-  // The argument type of boost::function_output_iterator (UnaryFunction) must
-  // be Assignable and Copy Constructible; hence the application of std::ref().
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  CGAL::zone(arr, c, it);
-  return lst;
-}
+// py::list zone_default(Arrangement_2& arr, X_monotone_curve_2& c) {
+//   py::list lst;
+//   auto op =
+//     [&] (const variant& o) mutable
+//     { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+//   // The argument type of boost::function_output_iterator (UnaryFunction) must
+//   // be Assignable and Copy Constructible; hence the application of std::ref().
+//   auto it = boost::make_function_output_iterator(std::ref(op));
+//   CGAL::zone(arr, c, it);
+//   return lst;
+// } NB
 
-template <typename PointLocation>
-py::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
-  py::list lst;
-  auto op =
-    [&] (const variant& o) mutable
-    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
-  // The argument type of boost::function_output_iterator (UnaryFunction) must
-  // be Assignable and Copy Constructible; hence the application of std::ref().
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  CGAL::zone(arr, c, it, pl);
-  return lst;
-}
+// template <typename PointLocation>
+// py::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
+//   py::list lst;
+//   auto op =
+//     [&] (const variant& o) mutable
+//     { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+//   // The argument type of boost::function_output_iterator (UnaryFunction) must
+//   // be Assignable and Copy Constructible; hence the application of std::ref().
+//   auto it = boost::make_function_output_iterator(std::ref(op));
+//   CGAL::zone(arr, c, it, pl);
+//   return lst;
+// } NB
 
 // Arrangement methods
 template <typename Aos>
@@ -344,12 +344,16 @@ void assign(Aos& arr, Aos& input_arr) { arr.assign(input_arr); }
 }
 
 // Export common members of Aos types
-template <typename Aos>
-void export_aos(py::class_<Aos>& co) {
-  co
+template <typename Aos, typename C>
+void export_aos(C& c) {
+  c
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
     .def(py::init<>())
     .def(py::init<Aos&>())
+    // .def("halfedges", [](Aos& arr) {
+    //                     return py::iterator(arr.halfedges_begin(),
+    //                                         arr.halfedges_end());
+    //                   })
     // .def("halfedges", py::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>)) NB
     // .def("vertices", py::range<RIR>(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>)) NB
     // .def("faces", py::range<RIR>(&aos2::faces_begin<Aos>, &aos2::faces_end<Aos>)) NB
@@ -425,6 +429,7 @@ void bind_overlay_function_traits<false, false, true>(py::module_& m) {
 }
 
 void export_arrangement_on_surface_2(py::module_& m) {
+  typedef aos2::Arrangement_on_surface_2                Aos;
   typedef aos2::Arrangement_2                           Arr;
   typedef aos2::Arrangement_with_history_2              Awh;
   typedef Arr::Geometry_traits_2                        Tr;
@@ -487,33 +492,20 @@ void export_arrangement_on_surface_2(py::module_& m) {
 #endif
 #endif
 
+  // Arrangement on surface
+  py::class_<Aos> aos_co(m, "Arrangement_on_surface_2");
+  export_aos<Aos>(aos_co);
+  aos_co.attr("Geometry_traits_2") = traits_object;
+  export_vertex(aos_co);
+  export_halfedge(aos_co);
+  export_face(aos_co);
+
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  {
-    // Arrangement
-    auto arr_co = py::class_<Arr>(m, "Arrangement_2");
-    export_aos<Arr>(arr_co);
-    arr_co
-      .def("unbounded_face", &aos2::unbounded_face<Arr>)
-      .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity);
-
-    export_vertex(m);
-    export_halfedge(m);
-    export_face(m);
-    m.attr("Geometry_traits_2") = traits_object;
-  }
-#elif CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT_ON_SURFACE
-  {
-    // Arrangement
-    auto arr_co = py::class_<Arr>(m, "Arrangement_2");
-    export_aos<Arr>(arr_co);
-
-    export_vertex();
-    export_halfedge();
-    export_face();
-    m.attr("Geometry_traits_2") = traits_object;
-  }
-#else
-  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_TYPE");
+  auto arr_co = py::class_<Arr, Aos>(m, "Arrangement_2")
+    .def(py::init<>())
+    .def(py::init<Arr&>())
+    .def("unbounded_face", &aos2::unbounded_face<Arr>)
+    .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity);
 #endif
 
   //free functions
@@ -532,24 +524,24 @@ void export_arrangement_on_surface_2(py::module_& m) {
   m.def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Wal_pl>);
   m.def("insert_non_intersecting_curve", &aos2::insert_non_intersecting_curve<Trapezoid_pl>);
 #endif
-  m.def("insert_non_intersecting_curves", &aos2::insert_non_intersecting_curves);
+  // m.def("insert_non_intersecting_curves", &aos2::insert_non_intersecting_curves); NB
   m.def("decompose", &aos2::decompose);
-  m.def("zone", &aos2::zone<Naive_pl>);
+  // m.def("zone", &aos2::zone<Naive_pl>); NB
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  m.def("zone", &aos2::zone_default);
-  m.def("zone", &aos2::zone<Wal_pl>);
-  m.def("zone", &aos2::zone<Trapezoid_pl>);
+  // m.def("zone", &aos2::zone_default); NB
+  // m.def("zone", &aos2::zone<Wal_pl>); NB
+  // m.def("zone", &aos2::zone<Trapezoid_pl>); NB
 #endif
   //supported only by some traits
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-  m.def("zone", &aos2::zone<Landmarks_pl>);
+  // m.def("zone", &aos2::zone<Landmarks_pl>); NB
   m.def("do_intersect", &aos2::do_intersect<X_monotone_curve, Landmarks_pl>);
   m.def("insert_point", &aos2::insert_point<Landmarks_pl>);
   m.def("insert_non_intersecting_curve",
-          &aos2::insert_non_intersecting_curve<Landmarks_pl>);
+        &aos2::insert_non_intersecting_curve<Landmarks_pl>);
 #endif
 
   m.def("do_intersect", &aos2::do_intersect<X_monotone_curve, Naive_pl>);

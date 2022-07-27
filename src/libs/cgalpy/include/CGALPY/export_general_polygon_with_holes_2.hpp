@@ -63,8 +63,8 @@ void export_general_polygon_with_holes_2(py::module_& m,
   co->def("holes", py::range<py::return_internal_reference<>>
           (&holes_begin<Type>, &holes_end<Type>));
   co->def("number_of_holes", &Type::number_of_holes);
-  co->def(py::self_ns::str(py::self_ns::self));
-  co->def(py::self_ns::repr(py::self_ns::self));
+  // co->def(py::self_ns::str(py::self_ns::self)); NB
+  // co->def(py::self_ns::repr(py::self_ns::self)); NB
 }
 
 #endif

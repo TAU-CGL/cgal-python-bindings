@@ -38,34 +38,34 @@ typedef typename CGAL::Arr_trapezoid_ric_point_location<Arrangement_2>
 typedef typename CGAL::Arr_point_location_result<Arrangement_2>::Type Pl_result;
 typedef typename std::pair<Point_2, Pl_result>                  Pl_query_result;
 
-class Point_location_result_visitor : public boost::static_visitor<py::object> {
-public:
-  template<typename T>
-  py::object operator()(T& operand) const { return py::handle(*operand); }
-};
+// class Point_location_result_visitor : public boost::static_visitor<py::object> {
+// public:
+//   template<typename T>
+//   py::object operator()(T& operand) const { return py::handle(*operand); }
+// };
 
-py::list locate_batch(Arrangement_2& arr, const py::list& lst) {
-  py::list res;
-  auto v = std::vector<Point_2>(py::iterator<Point_2>(lst),
-                                py::iterator<Point_2>());
-  auto op =
-    [&] (const Pl_query_result& p) mutable {
-      const auto& result =
-        boost::apply_visitor(Point_location_result_visitor(), p.second);
-      res.append(py::make_tuple(p.first, result));
-    };
-  // The argument type of boost::function_output_iterator (UnaryFunction) must
-  // be Assignable and Copy Constructible; hence the application of std::ref().
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  locate(arr, v.begin(), v.end(), it);
-  return res;
-}
+// py::list locate_batch(Arrangement_2& arr, const py::list& lst) {
+//   py::list res;
+//   auto v = std::vector<Point_2>(py::iterator<Point_2>(lst),
+//                                 py::iterator<Point_2>());
+//   auto op =
+//     [&] (const Pl_query_result& p) mutable {
+//       const auto& result =
+//         boost::apply_visitor(Point_location_result_visitor(), p.second);
+//       res.append(py::make_tuple(p.first, result));
+//     };
+//   // The argument type of boost::function_output_iterator (UnaryFunction) must
+//   // be Assignable and Copy Constructible; hence the application of std::ref().
+//   auto it = boost::make_function_output_iterator(std::ref(op));
+//   locate(arr, v.begin(), v.end(), it);
+//   return res;
+// } NB
 
-template <typename PL>
-py::object locate(PL& pl, Point_2& p) {
-  auto result = pl.locate(p);
-  return boost::apply_visitor(Point_location_result_visitor(), result);
-}
+// template <typename PL>
+// py::object locate(PL& pl, Point_2& p) {
+//   auto result = pl.locate(p);
+//   return boost::apply_visitor(Point_location_result_visitor(), result);
+// } NB
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS || \
@@ -92,7 +92,7 @@ void export_point_location(py::module_& m) {
     .def(py::init<Arr&>())
     .def("attach", &aos2::landmarks_pl_attach)
     .def("detach", &Landmarks_pl::detach)
-    .def("locate", &aos2::locate<Landmarks_pl>)
+    // .def("locate", &aos2::locate<Landmarks_pl>) NB
     ;
 #endif
   py::class_<Trapezoid_pl>(m, "Arr_trapezoid_ric_point_location")
@@ -104,7 +104,7 @@ void export_point_location(py::module_& m) {
     .def("longest_query_path_length", &Trapezoid_pl::longest_query_path_length)
     .def("with_guarantees", &Trapezoid_pl::with_guarantees)
     .def<Arr*(Trapezoid_pl::*)()>("arrangement", &Trapezoid_pl::arrangement)
-    .def("locate", &aos2::locate<Trapezoid_pl>)
+    // .def("locate", &aos2::locate<Trapezoid_pl>) NB
     .def("ray_shoot_up", &Trapezoid_pl::ray_shoot_up)
     .def("ray_shoot_down", &Trapezoid_pl::ray_shoot_down)
     ;
@@ -114,7 +114,7 @@ void export_point_location(py::module_& m) {
     .def(py::init<Arr&>())
     .def("attach", &Walk_pl::attach)
     .def("detach", &Walk_pl::detach)
-    .def("locate", &aos2::locate<Walk_pl>)
+    // .def("locate", &aos2::locate<Walk_pl>) NB
     .def("ray_shoot_up", &Walk_pl::ray_shoot_up)
     .def("ray_shoot_down", &Walk_pl::ray_shoot_down)
     ;
@@ -124,8 +124,8 @@ void export_point_location(py::module_& m) {
     .def(py::init<Arr&>())
     .def("attach", &Naive_pl::attach)
     .def("detach", &Naive_pl::detach)
-    .def("locate", &aos2::locate<Naive_pl>)
+    // .def("locate", &aos2::locate<Naive_pl>) NB
     ;
 
-  m.def("locate", &aos2::locate_batch);
+  // m.def("locate", &aos2::locate_batch); NB
 }
