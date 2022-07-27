@@ -12,7 +12,7 @@
 #include <boost/python.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/python/stl_iterator.hpp>
-#include <boost/function_output_iterator.hpp>
+#include <boost/iterator/function_output_iterator.hpp>
 
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_vertical_decomposition_2.h>
