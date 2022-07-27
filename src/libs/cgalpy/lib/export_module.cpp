@@ -36,8 +36,9 @@ void export_triangulation_3(py::module_&);
 void export_alpha_shape_2(py::module_&);
 void export_alpha_shape_3(py::module_&);
 
-#define MODULE_NAME BOOST_PP_CAT(CGALPY_MODULE_NAME,)
-NB_MODULE(MODULE_NAME, m) {
+#define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
+
+MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
   m.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
