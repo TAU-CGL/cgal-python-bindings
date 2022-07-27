@@ -269,7 +269,7 @@ add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
 # Add the library target
 # Always build a shared library
-nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
+nanobind_add_module(CGALPY ${CGALPY_SRC_FILES})
 set(CGALPY_BUILD_DEPENDS CGALPY)
 
 set_target_properties(CGALPY PROPERTIES
