@@ -12,6 +12,7 @@
 #include <boost/python.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/python/stl_iterator.hpp>
+#include <boost/iterator/function_output_iterator.hpp>
 
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_vertical_decomposition_2.h>
@@ -351,9 +352,7 @@ template <typename Aos>
 void export_aos(bp::class_<Aos>& co) {
   typedef bp::return_internal_reference<>                 RIR;
 
-  co
-#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-    .def(bp::init<>())
+  co.def(bp::init<>())
     .def(bp::init<Aos&>())
     .def("halfedges", bp::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>))
     .def("vertices", bp::range<RIR>(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>))
@@ -382,7 +381,6 @@ void export_aos(bp::class_<Aos>& co) {
     .def("number_of_vertices", &Aos::number_of_vertices)
     .def("assign", &aos2::assign<Aos>)
     .def("clear", &Aos::clear)
-#endif
 
     // supported only by some traits
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
@@ -430,8 +428,10 @@ void bind_overlay_function_traits<false, false, true>() {
 }
 
 void export_arrangement_on_surface_2() {
+  typedef aos2::Arrangement_on_surface_2                Aos;
+  typedef aos2::Arrangement_with_history_2              Aos_wh;
   typedef aos2::Arrangement_2                           Arr;
-  typedef aos2::Arrangement_with_history_2              Awh;
+  typedef aos2::Arrangement_with_history_2              Arr_wh;
   typedef Arr::Geometry_traits_2                        Tr;
   typedef Tr::Point_2                                   Point;
   typedef Tr::Curve_2                                   Curve;
@@ -494,38 +494,28 @@ void export_arrangement_on_surface_2() {
 #endif
 #endif
 
+  {
+    // Arrangement on surface
+    bp::class_<Aos> aos_co("Arrangement_on_surface_2");
+    export_aos<Aos>(aos_co);
+    bp::scope aos_scope = aos_co;
+    export_vertex();
+    export_halfedge();
+    export_face();
+    aos_scope.attr("Geometry_traits_2") = traits_object;
+  }
+
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
   {
-    // Arrangement
-    auto arr_co = bp::class_<Arr>("Arrangement_2");
-    export_aos<Arr>(arr_co);
-    arr_co
+    auto arr_co = bp::class_<Arr, bp::bases<Aos>>("Arrangement_2")
+      .def(bp::init<>())
+      .def(bp::init<Arr&>())
       .def("unbounded_face", &aos2::unbounded_face<Arr>, RIR())
       .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity);
-
-    bp::scope arr_scope = arr_co;
-    export_vertex();
-    export_halfedge();
-    export_face();
-    arr_scope.attr("Geometry_traits_2") = traits_object;
   }
-#elif CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT_ON_SURFACE
-  {
-    // Arrangement
-    auto arr_co = bp::class_<Arr>("Arrangement_2");
-    export_aos<Arr>(arr_co);
-
-    bp::scope arr_scope = arr_co;
-    export_vertex();
-    export_halfedge();
-    export_face();
-    arr_scope.attr("Geometry_traits_2") = traits_object;
-  }
-#else
-  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_TYPE");
 #endif
 
-  //free functions
+  // Free functions
   bp::def("insert_point", &aos2::insert_point<Naive_pl>, RIR());
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
   bp::def("insert_point", &aos2::insert_point_default, RIR());

@@ -12,13 +12,14 @@
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
-#include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/export_ft.hpp"
 
 namespace bp = boost::python;
 
 extern void export_gmpz();
 extern void export_gmpq();
+extern void export_point_2();
+extern void export_vector_2();
 
 Kernel::Equal_2 kernel_equal_2(Kernel& k)
 { return (Kernel::Equal_2)(k.equal_2_object()); }
@@ -61,14 +62,6 @@ Direction_2 transform_direction(Aff_transformation_2& t, Direction_2& d)
 
 Line_2 transform_line(Aff_transformation_2& t, Line_2& l)
 { return t.transform(l); }
-
-// Determine whether the dD kernel is an an EPEC type.
-// An EPEC type has a non trivial FT
-constexpr bool is_epec_type() {
-  return ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||
-          (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||
-          (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ));
-}
 
 void export_kernel() {
   const bp::type_info info_gmpz = bp::type_id<CGAL::Gmpz>();
@@ -171,42 +164,13 @@ void export_kernel() {
   //  //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
   //  ;
 
-  bp::class_<Point_2>("Point_2")
-    .def(bp::init<>())
-    .def(bp::init<double, double>())
-    .def(bp::init<FT&, FT&>())
-    .def(bp::init<RT&, RT&>())
-    .def(bp::init<Point_2&>())
-    .def("x", &Point_2::x, Kernel_return_value_policy())
-    .def("y", &Point_2::y, Kernel_return_value_policy())
-    .def("hx", &Point_2::hx, Kernel_return_value_policy())
-    .def("hy", &Point_2::hy, Kernel_return_value_policy())
-    .def("hw", &Point_2::hw, Kernel_return_value_policy())
-    .def("bbox", &Point_2::bbox)
-    .def("cartesian", &Point_2::cartesian, Kernel_return_value_policy())
-    .def("__getitem__", &Point_2::operator[], Kernel_return_value_policy())
-#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
-     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
-    // TODO: Returning address of local variable or temporary with EPEC kernel
-    .def("coordinates", bp::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end))
-#endif
-    .def("dimension", &Point_2::dimension)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self > bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self += Vector_2())
-    .def(bp::self -= Vector_2())
-    .def(bp::self + Vector_2())
-    .def(bp::self - Vector_2())
-    .setattr("__hash__", &hash_rational_point<is_epec_type(), Point_2>)
-    .setattr("__doc__", "AAAAAAAAAAAAAAAA")
-    ;
+  // Point_2
+  const bp::type_info info_point_2 = bp::type_id<Point_2>();
+  const auto* reg_point_2 = bp::converter::registry::query(info_point_2);
+  if ((reg_point_2 == nullptr) || ((*reg_point_2).m_to_python == nullptr))
+    export_point_2();
+  else
+    bp::scope().attr("Point_2") = bp::handle<>(reg_point_2->m_class_object);
 
   bp::class_<Segment_2>("Segment_2")
     .def(bp::init<Point_2&, Point_2&>())
@@ -401,54 +365,13 @@ void export_kernel() {
     //.setattr("__hash__", &hash<Direction_2>)
     ;
 
-  bp::class_<Vector_2>("Vector_2")
-    .def(bp::init<Point_2&, Point_2&>())
-    .def(bp::init<Line_2>())
-    .def(bp::init<Ray_2>())
-    .def(bp::init<Segment_2>())
-    .def(bp::init<FT&, FT&, FT&>())
-    .def(bp::init<FT&, FT&>())
-    .def(bp::init<double, double>())
-    .def("hx", &Vector_2::hx, Kernel_return_value_policy())
-    .def("hy", &Vector_2::hy, Kernel_return_value_policy())
-    .def("hw", &Vector_2::hw, Kernel_return_value_policy())
-    .def("x", &Vector_2::x, Kernel_return_value_policy())
-    .def("y", &Vector_2::y, Kernel_return_value_policy())
-    .def("squared_length", &Vector_2::squared_length)
-    .def("homogeneous", &Vector_2::homogeneous, Kernel_return_value_policy())
-    .def("cartesian", &Vector_2::cartesian, Kernel_return_value_policy())
-    .def("__getitem__", &Vector_2::operator[], Kernel_return_value_policy())
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
-    // TODO: Returning address of local variable or temporary with EPEC kernel
-    .def("cartesian_coordinates", bp::range<>(&Vector_2::cartesian_begin, & Vector_2::cartesian_end))
-#endif
-    .def("dimension", &Vector_2::dimension)
-    .def("direction", &Vector_2::direction)
-    .def("transform", &Vector_2::transform)
-    .def("perpendicular", &Vector_2::perpendicular)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self + bp::self)
-    .def(bp::self += bp::self)
-    .def(bp::self - bp::self)
-    .def(bp::self -= bp::self)
-    .def(-bp::self)
-    .def(bp::self * bp::self)
-    //.def(self*RT())
-    .def(bp::self * FT())
-    //.def(RT() * bp::self)
-    .def(FT()*bp::self)
-    //.def(bp::self *= RT())
-    .def(bp::self*=FT())
-    //.def(bp::self / RT())
-    .def(bp::self / FT())
-    //.def(bp::self /= RT())
-    .def(bp::self /= FT())
-    //.setattr("__hash__", &hash<Vector_2>)
-    ;
+  // Vector_2
+  const bp::type_info info_vector_2 = bp::type_id<Vector_2>();
+  const auto* reg_vector_2 = bp::converter::registry::query(info_vector_2);
+  if ((reg_vector_2 == nullptr) || ((*reg_vector_2).m_to_python == nullptr))
+    export_vector_2();
+  else
+    bp::scope().attr("Vector_2") = bp::handle<>(reg_vector_2->m_class_object);
 
   bp::class_<Bbox_2>("Bbox_2")
     .def(bp::init<>())

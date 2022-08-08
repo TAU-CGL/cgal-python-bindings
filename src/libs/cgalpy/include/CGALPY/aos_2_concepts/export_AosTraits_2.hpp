@@ -10,9 +10,10 @@
 #ifndef CGALPY_EXPORT_AOSTRAITS_2_HPP
 #define CGALPY_EXPORT_AOSTRAITS_2_HPP
 
+#include <boost/iterator/function_output_iterator.hpp>
+
 #include "CGALPY/aos_2_concepts/export_AosXMonotoneTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
-
 #include "CGALPY/add_class_object.hpp"
 
 //! Apply the make_x_monotone operator and append the resulting X-monotone

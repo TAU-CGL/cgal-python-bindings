@@ -80,12 +80,12 @@ void bind_iterator(const char* python_name) {
 
 // For iterators that don't dereference to a reference of an existing object
 template <typename iterator>
-class CopyIterator {
+class Copy_iterator {
 private:
   iterator m_curr;
   iterator m_end;
 public:
-  CopyIterator(iterator begin, iterator end) : m_curr(begin), m_end(end) {}
+  Copy_iterator(iterator begin, iterator end) : m_curr(begin), m_end(end) {}
   typename iterator::value_type next() {
     if (m_curr != m_end) return *(m_curr++);
     PyErr_SetString(PyExc_StopIteration, "No more data.");
