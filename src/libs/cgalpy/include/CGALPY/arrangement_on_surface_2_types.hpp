@@ -55,10 +55,13 @@ typedef typename CGAL::Arr_linear_traits_2<Kernel>              BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
 typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>      BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-typedef typename CGAL::CORE_algebraic_number_traits             NtTraits;
-typedef typename CGAL::Cartesian <NtTraits::Rational>           RatKernel;
-typedef typename CGAL::Cartesian <NtTraits::Algebraic>          AlgKernel;
-typedef typename CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>    BGT;
+typedef typename CGAL::CORE_algebraic_number_traits             Nt_traits;
+typedef typename CGAL::Cartesian <Nt_traits::Rational>          Rat_kernel;
+typedef typename CGAL::Cartesian <Nt_traits::Algebraic>         Alg_kernel;
+typedef typename CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits> BGT;
+typedef typename BGT::Rat_point_2                               Rat_point_2;
+typedef typename BGT::Rat_segment_2                             Rat_segment_2;
+typedef typename BGT::Rat_circle_2                              Rat_circle_2;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 typedef CORE::BigInt                                            Integer;
 typedef CGAL::Algebraic_kernel_d_1<Integer>                     Algebraic_kernel_d_1;
@@ -99,8 +102,10 @@ typedef Face_gps<boolean_set_operations_2_bindings()>::type             Fb;
 typedef Face_extended<is_face_extended(), Fb, bp::object>::type         F;
 
 typedef CGAL::Arr_dcel_base<V, H, F>                        Dcel;
-typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos                Arrangement_2;
-typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos_with_history   Arrangement_with_history_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos                Arrangement_on_surface_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos_with_history   Arrangement_on_surface_with_history_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::arr                Arrangement_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::arr_with_history   Arrangement_with_history_2;
 
 // Backward compatibility:
 typedef Arrangement_2::Geometry_traits_2                    Geometry_traits_2;

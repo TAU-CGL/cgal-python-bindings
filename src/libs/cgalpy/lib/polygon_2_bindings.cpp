@@ -13,6 +13,7 @@
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/export_unique.hpp"
 
 namespace bp = boost::python;
 
@@ -29,16 +30,16 @@ static Polygon_2* init_from_list(bp::list& lst) {
   return new Polygon_2(begin, end);
 }
 
-CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
-  return new CopyIterator<Polygon_2::Edge_const_iterator>(P.edges_begin(), P.edges_end());
+Copy_iterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
+  return new Copy_iterator<Polygon_2::Edge_const_iterator>(P.edges_begin(),
+                                                          P.edges_end());
 }
 
 }
-
-void export_polygon_2() {
+void register_polygon_2(const char* name) {
   typedef pol2::Polygon_2               Polygon_2;
 
-  bp::class_<Polygon_2>("Polygon_2")
+  bp::class_<Polygon_2>(name)
     .def(bp::init<>())
     .def(bp::init<const Polygon_2&>())
     .def("__init__", make_constructor(&pol2::init_from_list))
@@ -81,6 +82,13 @@ void export_polygon_2() {
     .def(bp::self == bp::self)
     .def(bp::self != bp::self)
     ;
+}
 
-  bind_copy_iterator<CopyIterator<Polygon_2::Edge_const_iterator>>("Polygon_edges_iterator");
+void export_polygon_2() {
+  typedef pol2::Polygon_2               Polygon_2;
+  export_unique<Polygon_2>("Polygon_2", register_polygon_2);
+
+  typedef Copy_iterator<Polygon_2::Edge_const_iterator>  Polygon_edge_iterator;
+  export_unique<Polygon_edge_iterator>("Polygon_edge_iterator",
+                                       bind_copy_iterator<Polygon_edge_iterator>);
 }

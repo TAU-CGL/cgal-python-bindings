@@ -33,7 +33,7 @@ void export_ctr_gp_2_op(typename T::Construct_polygon_2 m,
 
 template <typename T>
 typename T::Polygon_with_holes_2
-export_ctr_gpwh_2_op(typename T::Construct_general_polygon_with_holes_2 m,
+export_ctr_gpwh_2_op(typename T::Construct_polygon_with_holes_2 m,
                      const typename T::Polygon_2& boundary, bp::list& holes) {
   auto begin = bp::stl_input_iterator<typename T::Polygon_2>(holes);
   auto end = bp::stl_input_iterator<typename T::Polygon_2>();
@@ -50,8 +50,8 @@ void export_GpsTraits_2(C c, Concepts& concepts) {
   typedef typename T::Polygon_2                         Polygon_2;
   typedef typename T::Polygon_with_holes_2              Polygon_with_holes_2;
   typedef typename T::Construct_polygon_2               Construct_polygon_2;
-  typedef typename T::Construct_general_polygon_with_holes_2
-    Construct_general_polygon_with_holes_2;
+  typedef typename T::Construct_polygon_with_holes_2
+    Construct_polygon_with_holes_2;
   typedef typename T::Construct_outer_boundary          Construct_outer_boundary;
   typedef typename T::Construct_holes                   Construct_holes;
   typedef typename T::Is_unbounded                      Is_unbounded;
@@ -75,17 +75,17 @@ void export_GpsTraits_2(C c, Concepts& concepts) {
     new bp::class_<Construct_polygon_2>("Construct_polygon_2", bp::no_init);
   classes.m_construct_polygon_2->def("__call__", &bso2::export_ctr_gp_2_op<T>);
 
-  // Construct_general_polygon_with_holes_2
-  classes.m_construct_general_polygon_with_holes_2 =
-    new bp::class_<Construct_general_polygon_with_holes_2>
-    ("Construct_general_polygon_with_holes_2", bp::no_init);
+  // Construct_polygon_with_holes_2
+  classes.m_construct_polygon_with_holes_2 =
+    new bp::class_<Construct_polygon_with_holes_2>
+    ("Construct_polygon_with_holes_2", bp::no_init);
   using Ctr_gpwh1 =
-    Polygon_with_holes_2(Construct_general_polygon_with_holes_2::*)
+    Polygon_with_holes_2(Construct_polygon_with_holes_2::*)
     (const Polygon_2&) const;
-  classes.m_construct_general_polygon_with_holes_2->
+  classes.m_construct_polygon_with_holes_2->
     def("__call__", static_cast<Ctr_gpwh1>
-        (&Construct_general_polygon_with_holes_2::operator()));
-  classes.m_construct_general_polygon_with_holes_2->
+        (&Construct_polygon_with_holes_2::operator()));
+  classes.m_construct_polygon_with_holes_2->
     def("__call__", &bso2::export_ctr_gpwh_2_op<T>);
 
   // Construct_outer_boundary

@@ -20,6 +20,8 @@ if (CGALPY_KERNEL_BINDINGS)
   list (APPEND CGALPY_MODULES Ker)
   set (CGALPY_Ker_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_point_2.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_vector_2.cpp)
   if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
   endif()
@@ -52,60 +54,31 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
   set (CGALPY_Aos2_FILTERS [=[{}]=])
   # Geometry Traits
   if(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_algebraic_segment_traits_2\\\"\", \
-      \"Arr_algebraic_segment_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_algebraic_segment_traits_2\\\"\",\"Arr_algebraic_segment_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_algebraic_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_Bezier_curve_traits_2\\\"\", \
-      \"Arr_Bezier_curve_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_Bezier_curve_traits_2\\\"\",\"Arr_Bezier_curve_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_Bezier_curve_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_circle_segment_traits_2\\\"\", \
-      \"Arr_circle_segment_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_circle_segment_traits_2\\\"\",\"Arr_circle_segment_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_circle_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CONIC_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_conic_traits_2\\\"\", \
-      \"Arr_conic_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_conic_traits_2\\\"\",\"Arr_conic_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_conic_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_linear_traits_2\\\"\", \
-      \"Arr_linear_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_linear_traits_2\\\"\",\"Arr_linear_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_linear_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Arr_non_caching_segment_basic_traits_2\":\"true\", \
-      \"AosBasicTraits_2.Point_2\":\"false\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Arr_non_caching_segment_basic_traits_2\":\"true\",\"AosBasicTraits_2.Point_2\":\"false\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_non_caching_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_rational_function_traits_2\\\"\", \
-      \"Arr_rational_function_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_rational_function_traits_2\\\"\",\"Arr_rational_function_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_rational_function_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_segment_traits_2\\\"\", \
-      \"Arr_segment_traits_2\":\"true\", \
-      \"AosBasicTraits_2.Point_2\":\"false\", \
-      \"AosBasicTraits_2.Equal_2\":\"false\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_segment_traits_2\\\"\",\"Arr_segment_traits_2\":\"true\",\"AosBasicTraits_2.Point_2\":\"false\",\"AosBasicTraits_2.Equal_2\":\"false\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_TRAITS})
-    set (CGALPY_Aos2_FILTERS [=[\{ \
-      \"Aos2.Geometry_traits_2\":\"\\\"Arr_geodesic_arc_on_sphere_traits_2\\\"\", \
-      \"Arr_geodesic_arc_on_sphere_traits_2\":\"true\" \
-      \}]=])
+    set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_geodesic_arc_on_sphere_traits_2\\\"\",\"Arr_geodesic_arc_on_sphere_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_geodesic_arc_on_sphere_traits_bindings.cpp)
   endif()
 
@@ -220,14 +193,15 @@ endif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 
 # Add the library target
 # Always build a shared library
-add_library(CGALPY SHARED ${CGALPY_SRC_FILES})
+# add_library(CGALPY SHARED ${CGALPY_SRC_FILES})
+Python_add_library(CGALPY MODULE ${CGALPY_SRC_FILES})
 set(CGALPY_BUILD_DEPENDS CGALPY)
 
 set_target_properties(CGALPY PROPERTIES
   VERSION "${CMAKE_PROJECT_VERSION}"
   SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
 
-target_link_libraries(CGALPY
+target_link_libraries(CGALPY PRIVATE
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES})
 
@@ -328,50 +302,57 @@ endif()
 # Documentation
 ################################################################################
 
-# Doxygen
-find_package(Doxygen)
+if (CGALPY_BUILD_DEV_DOC)
+  # Doxygen
+  find_package(Doxygen)
 
-if(DOXYGEN_FOUND)
-  add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-    COMMAND "${CMAKE_COMMAND}"
-    "-DFILE_IN=${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
-    "-DFILE_OUT=${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
-    -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in")
+  set (CGALPY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-  set(CGALPY_CPP_DOC_DEPENDS
-    ${CGALPY_SRC_FILES}
-    ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+  if(DOXYGEN_FOUND)
+    add_custom_command(
+      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+      COMMAND "${CMAKE_COMMAND}"
+      "-DFILE_IN=${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
+      "-DFILE_OUT=${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
+      "-DCGALPY_SOURCE_DIR=${CGALPY_SOURCE_DIR}"
+      -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
+      DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in")
 
-  add_custom_command(
-    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-    COMMAND "${CMAKE_COMMAND}" -E touch "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
-    DEPENDS ${CGALPY_CPP_DOC_DEPENDS}
-    COMMENT "Generating API documentation with Doxygen" VERBATIM)
-  list(APPEND CGALPY_CPP_DOC_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp")
-  add_custom_target(
-    CGALPY_CPP_DOC
-    DEPENDS ${CGALPY_CPP_DOC_DEPENDS})
-  if(NOT TARGET doc)
-    add_custom_target(doc)
+    set(CGALPY_CPP_DOC_DEPENDS
+      ${CGALPY_SRC_FILES}
+      ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+
+    add_custom_command(
+      OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+      COMMAND "${CMAKE_COMMAND}" -E touch "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
+      DEPENDS ${CGALPY_CPP_DOC_DEPENDS}
+      COMMENT "Generating API documentation with Doxygen" VERBATIM)
+    list(APPEND CGALPY_CPP_DOC_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp")
+    add_custom_target(
+      CGALPY_CPP_DOC
+      DEPENDS ${CGALPY_CPP_DOC_DEPENDS})
+    if(NOT TARGET doc)
+      add_custom_target(doc)
+    endif()
+    add_dependencies(doc CGALPY_CPP_DOC)
+  endif(DOXYGEN_FOUND)
+endif()
+
+if (CGALPY_BUILD_DOC)
+  # Sphinx
+  find_package(Sphinx)
+
+  if(Sphinx_FOUND)
+    add_sphinx_document(${CGALPY_LIB_NAME}
+      MODULES "${CGALPY_MODULES}"
+      AUTHORS "${CGALPY_PROJECT_AUTHORS}"
+      CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
+      INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst")
+  else()
+    message(WARNING "No Sphinx found. Documentation target not available.")
   endif()
-  add_dependencies(doc CGALPY_CPP_DOC)
-endif(DOXYGEN_FOUND)
-
-# Sphinx
-find_package(Sphinx)
-
-if(Sphinx_FOUND)
-  add_sphinx_document(${CGALPY_LIB_NAME}
-    MODULES "${CGALPY_MODULES}"
-    AUTHORS "${CGALPY_PROJECT_AUTHORS}"
-    CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
-    INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst")
-else()
-  message(WARNING "No Sphinx found. Documentation target not available.")
 endif()
 
 ################################################################################
@@ -381,7 +362,7 @@ set (CGALPY_SRC_STUBS_DIR "${CMAKE_CURRENT_LIST_DIR}/stubs")
 set (CGALPY_MODULES_DIR "${CGALPY_SRC_STUBS_DIR}/modules")
 set (CGALPY_STUBS_GENERATOR "${CGALPY_SRC_STUBS_DIR}/generate.py")
 if (WIN32)
-  set(CGALPY_STUBS_GENERATOR_CMD ${Python3_EXECUTABLE} ${CGALPY_STUBS_GENERATOR})
+  set(CGALPY_STUBS_GENERATOR_CMD ${Python_EXECUTABLE} ${CGALPY_STUBS_GENERATOR})
 else()
   set(CGALPY_STUBS_GENERATOR_CMD ${CGALPY_STUBS_GENERATOR})
 endif()
@@ -445,6 +426,7 @@ set (CGALPY_SRC_SETUP "${CMAKE_CURRENT_LIST_DIR}/setup.py")
 set (CGALPY_TRG_SETUP "${CGALPY_LIB_DIR}/setup.py")
 set (CGALPY_TARGET_LINKER_FILE ${CGALPY_LIB_NAME}${CGALPY_LIBRARY_SUFFIX})
 set (CGALPY_SETUP_DATA "'${CGALPY_TARGET_LINKER_FILE}'")
+list(APPEND CGALPY_SETUP_DATA "'CGALPY_add_dlls/__init__.py'")
 list(APPEND CGALPY_SETUP_DATA "'${CGALPY_LIB_NAME}.pyi'")
 foreach(MODULE IN LISTS CGALPY_MODULES)
   list(APPEND CGALPY_SETUP_DATA "'${MODULE}/__init__.pyi'")
@@ -458,8 +440,8 @@ add_custom_command(
   "-DFILE_OUT=${CGALPY_TRG_SETUP}"
   "-DTARGET_NAME=${CGALPY_LIB_NAME}"
   "-DTARGET_VERSION=${PROJECT_VERSION}"
-  "-DSPHINX_TARGET_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}"
-  "-DSPHINX_TARGET_VERSION_MINOR=${PROJECT_VERSION_MINOR}"
+  "-DTARGET_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}"
+  "-DTARGET_VERSION_MINOR=${PROJECT_VERSION_MINOR}"
   "-DTARGET_DATA='${CGALPY_SETUP_DATA}'"
   "-DTARGET_LINKER_FILE=${CGALPY_TARGET_LINKER_FILE}"
   "-DTARGET_MODULES=${CGALPY_LIB_NAME}"
@@ -472,6 +454,7 @@ add_custom_command(
 
 list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_SETUP})
 
+# Add README.rst
 set (CGALPY_SRC_README "${CMAKE_CURRENT_LIST_DIR}/README.rst")
 set (CGALPY_TRG_README "${CGALPY_LIB_DIR}/README.rst")
 add_custom_command(
@@ -485,14 +468,32 @@ add_custom_command(
 
 list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_README})
 
+# Add CGALPY_add_dlls.py
+get_directory("${GMP_LIBRARIES}" GMP_LIBRARY_DIR)
+get_directory("${MPFR_LIBRARIES}" MPFR_LIBRARY_DIR)
+set (CGALPY_SRC_ADD_DLLS "${CMAKE_CURRENT_LIST_DIR}/CGALPY_add_dlls/__init__.py")
+set (CGALPY_TRG_ADD_DLLS "${CGALPY_LIB_DIR}/CGALPY_add_dlls/__init__.py")
+add_custom_command(
+  OUTPUT ${CGALPY_TRG_ADD_DLLS}
+  COMMAND "${CMAKE_COMMAND}"
+  "-DFILE_IN=${CGALPY_SRC_ADD_DLLS}"
+  "-DFILE_OUT=${CGALPY_TRG_ADD_DLLS}"
+  "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
+  "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
+  "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
+  -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
+  DEPENDS ${CGALPY_SRC_ADD_DLLS})
+
+list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_ADD_DLLS})
+
 # Setup application
 set (CGALPY_BUILD_OUTPUT_DIR "${CGALPY_LIB_DIR}/dist")
 set (CGALPY_TAR ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_LIB_NAME}-1.0.tar.gz)
 set (CGALPY_WHL ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_LIB_NAME}-1.0-py3-none-any.whl)
 set (CGALPY_BUILD_OUTPUT ${CGALPY_TAR} ${CGALPY_WHL})
-set (CGALPY_BUILD_CMD ${Python3_EXECUTABLE})
+set (CGALPY_BUILD_CMD ${Python_EXECUTABLE})
 set (CGALPY_BUILD_ARGS -m build ${CGALPY_LIB_DIR})
-set (CGALPY_BUILD_DEPENDS CGALPY ${CGALPY_STUBS} ${CGALPY_TRG_SETUP} ${CGALPY_TRG_README})
+set (CGALPY_BUILD_DEPENDS CGALPY ${CGALPY_STUBS} ${CGALPY_TRG_SETUP} ${CGALPY_TRG_README} ${CGALPY_TRG_ADD_DLLS})
 add_custom_command(
   OUTPUT ${CGALPY_BUILD_OUTPUT}
   COMMAND ${CGALPY_BUILD_CMD}
