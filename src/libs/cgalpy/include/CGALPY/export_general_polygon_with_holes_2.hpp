@@ -30,7 +30,7 @@ struct target<T, typename if_<false, typename T::Polygon_2>::type> {
 // GeneralPolygonWithHoles_2*
 // ctr_polygon_with_holes_2(typename target<GeneralPolygonWithHoles_2>::type& p,
 //                          py::list& lst) {
-//   typedef typename target<GeneralPolygonWithHoles_2>::type   Polygon_2;
+//   using Polygon_2 = typename target<GeneralPolygonWithHoles_2>::type;
 //   auto begin = py::stl_input_iterator<Polygon_2>(lst);
 //   auto end = py::stl_input_iterator<Polygon_2>();
 //   return new GeneralPolygonWithHoles_2(p, begin, end);
@@ -51,7 +51,7 @@ void export_general_polygon_with_holes_2(Parent& parent, py::class_<Type>*& co) 
   if (! add_class_object<Type, Name>(parent, co)) return;
 
   co->def(py::init<Polygon_2&>());
-  // co->def("__init__", make_constructor(&ctr_polygon_with_holes_2<Type>)); NB
+  // co->def("__init__", make_constructor(&ctr_polygon_with_holes_2<Type>));
   co->def("is_unbounded", &Type::is_unbounded);
 
   // Use `py::overload_cast` to cast overloaded functions.
