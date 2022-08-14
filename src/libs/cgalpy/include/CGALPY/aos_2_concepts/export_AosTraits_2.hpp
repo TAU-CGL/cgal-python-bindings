@@ -24,9 +24,10 @@ namespace py = nanobind;
 template <typename T>
 py::list export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
                                                 typename T::Curve_2& c) {
-  typedef typename T::X_monotone_curve_2                X_monotone_curve_2;
-  typedef typename T::Point_2                           Point_2;
-  typedef boost::variant<Point_2, X_monotone_curve_2>   Result;
+  using X_monotone_curve_2 = typename T::X_monotone_curve_2;
+  using Point_2 = typename T::Point_2;
+  using Result = boost::variant<Point_2, X_monotone_curve_2>;
+
   py::list lst;
   auto op =
     [&] (const Result& o) mutable {
@@ -40,26 +41,26 @@ py::list export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
   return lst;
 }
 
-template <typename T, typename C, typename Concepts>
-void export_AosTraits_2(C c, Concepts& concepts) {
+template <typename T, typename Parent, typename Concepts>
+void export_AosTraits_2(Parent& parent, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  typedef typename T::Curve_2                   Curve_2;
-  typedef typename T::Make_x_monotone_2         Make_x_monotone_2;
+  using Curve_2 = typename T::Curve_2;
+  using Make_x_monotone_2 = typename T::Make_x_monotone_2;
 
-  export_AosXMonotoneTraits_2<T>(c, concepts);
+  export_AosXMonotoneTraits_2<T>(parent, concepts);
 
   auto& classes = concepts.m_traits_classes;
 
   static const char curve_2[] = "Curve_2";
-  add_class_object<Curve_2, curve_2>(c, classes.m_curve_2);
+  add_class_object<Curve_2, curve_2>(parent, classes.m_curve_2);
 
   classes.m_make_x_monotone_2 =
-    new py::class_<Make_x_monotone_2>(c, "Make_x_monotone_2");
+    new py::class_<Make_x_monotone_2>(parent, "Make_x_monotone_2");
   classes.m_make_x_monotone_2->def("__call__", &export_Make_x_monotone_2_call_operator<T>);
 
-  c.def("make_x_monotone_2_object", &T::make_x_monotone_2_object);
+  parent.def("make_x_monotone_2_object", &T::make_x_monotone_2_object);
 
   exported = true;
 }
