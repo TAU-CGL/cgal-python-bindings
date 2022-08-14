@@ -36,10 +36,9 @@ void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
-py::object export_arr_linear_traits() {
+py::object export_arr_linear_traits(py::module_& m) {
   typedef aos2::Geometry_traits_2       GT;
-  auto traits = py::class_<GT>("Geometry_traits_2");
-  py::scope traits_scope(traits);
+  auto traits = py::class_<GT>(m, "Geometry_traits_2");
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;

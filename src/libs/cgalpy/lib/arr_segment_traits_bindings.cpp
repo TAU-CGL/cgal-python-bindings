@@ -33,7 +33,6 @@ namespace aos2 { Segment_2 to_segment(X_monotone_curve_2& c) { return Segment_2(
 py::class_<aos2::Geometry_traits_2> export_arr_segment_traits(py::module_& m) {
   typedef aos2::Geometry_traits_2       GT;
   auto traits = py::class_<GT>(m, "Geometry_traits_2");
-  py::scope traits_scope(traits);
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;

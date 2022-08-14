@@ -17,9 +17,10 @@
 
 namespace py = nanobind;
 
-py::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits() {
+py::class_<aos2::Geometry_traits_2>
+export_arr_non_caching_segment_traits(py::module_& m) {
   typedef aos2::Geometry_traits_2       GT;
-  py::scope traits_scope = py::class_<GT>("Traits")
+  py::scope traits_scope = py::class_<GT>(m, "Traits")
     .def(py::init<>())
     ;
 

@@ -15,9 +15,9 @@
 
 namespace py = nanobind;
 
-template <typename Type, const char* Name>
-void export_general_polygon_2(py::module_& m, py::class_<Type>*& co) {
-  if (! add_class_object<Type, Name>(m, co)) return;
+template <typename Type, const char* Name, typename Parent>
+void export_general_polygon_2(Parent& parent, py::class_<Type>*& co) {
+  if (! add_class_object<Type, Name>(parent, co)) return;
 
   co->def(py::init<>());
   co->def(py::init<Type>());

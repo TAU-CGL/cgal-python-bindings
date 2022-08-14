@@ -173,8 +173,6 @@ void export_minkowski_sum_2(py::module_& m) {
   typedef ms2::Circle_segment_polygon_2                 CS_pgn;
   typedef ms2::Circle_segment_polygon_with_holes_2      CS_pwh;
 
-  py::scope ms_scope = py::scope();
-
 #if CGAL_VERSION_NR > 1050500000
   // By decomposition
   // ================
@@ -205,9 +203,9 @@ void export_minkowski_sum_2(py::module_& m) {
 
   static const char pgn[] = "Circle_segment_polygon_2";
   py::class_<CS_pgn>* co_pgn(nullptr);
-  export_general_polygon_2<CS_pgn, pgn>(ms_scope, co_pgn);
+  export_general_polygon_2<CS_pgn, pgn>(m, co_pgn);
 
   static const char pwh[] = "Circle_segment_polygon_with_holes_2";
   py::class_<CS_pwh>* co_pwh(nullptr);
-  export_general_polygon_with_holes_2<CS_pwh, pwh>(ms_scope, co_pwh);
+  export_general_polygon_with_holes_2<CS_pwh, pwh>(m, co_pwh);
 }
