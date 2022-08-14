@@ -16,7 +16,7 @@ namespace py = nanobind;
 
 typedef bso2::General_polygon_with_holes_2      General_polygon_with_holes_2;
 
-void export_general_polygon_with_holes_2() {
+void export_general_polygon_with_holes_2(py::module_& m) {
   py::handle<> tco(py::objects::registered_class_object(py::type_id<General_polygon_with_holes_2>()));
   BOOST_ASSERT(tco.get() != 0);
   py::scope().attr("General_polygon_with_holes_2") = tco;

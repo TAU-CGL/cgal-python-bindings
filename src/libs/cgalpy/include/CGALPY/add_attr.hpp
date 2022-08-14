@@ -16,11 +16,11 @@
 
 namespace py = nanobind;
 
-template <typename Type>
-bool add_attr(const char* name, py::scope& my_scope) {
-  py::handle<> tco(py::objects::registered_class_object(py::type_id<Type>()));
-  if (tco.get() == 0) return false;
-  my_scope.attr(name) = tco;
+template <typename Type, typename Parent>
+bool add_attr(const char* name, Parent& parent) {
+  const py::handle info = py::type<Type>();
+  if (info.is_valid() && py::type_check(info)) return false;
+  parent.attr(name) = info;
   return true;
 }
 

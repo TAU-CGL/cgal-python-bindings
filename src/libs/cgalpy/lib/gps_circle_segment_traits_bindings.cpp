@@ -43,7 +43,6 @@ py::object export_gps_circle_segment_traits() {
   auto traits = export_arr_circle_segment_traits();
 
   typedef bso2::Geometry_traits_2       GT;
-  py::scope traits_scope(traits);
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;
   } concepts;

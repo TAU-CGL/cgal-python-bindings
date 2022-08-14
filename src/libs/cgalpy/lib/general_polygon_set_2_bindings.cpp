@@ -175,15 +175,15 @@ CGAL::Oriented_side oriented_side(General_polygon_set_2& ps, T& other)
 
 }
 
-void export_general_polygon_set_2() {
+void export_general_polygon_set_2(py::module_& m) {
   typedef bso2::General_polygon_set_2           Gps2;
   typedef bso2::Geometry_traits_2               GT;
   typedef bso2::General_polygon_2               Pgn;
   typedef bso2::General_polygon_with_holes_2    Pwh;
   typedef bso2::Arrangement_2                   Arrangement_2;
 
-  py::scope ps2_scope = py::class_<Gps2>("General_polygon_set_2")
-    .def(py::init<>())
+  py::class_<Gps2> gps2_co(m, "General_polygon_set_2");
+  gps2_co.def(py::init<>())
     .def(py::init<const Pgn&>())
     .def(py::init<const Pwh&>())
     .def(py::init<const Gps2&>())
@@ -191,8 +191,16 @@ void export_general_polygon_set_2() {
     .def("is_plane", &Gps2::is_plane)
     .def("number_of_polygons_with_holes", &Gps2::number_of_polygons_with_holes)
     .def("polygons_with_holes", &bso2::polygons_with_holes)
-    .def<Arrangement_2&(Gps2::*)()>("arrangement", &Gps2::arrangement,
-                                    Reference_existing_object())
+
+    // Use `py::overload_cast` to cast overloaded functions.
+    // 1. As a convention, add the suffix `_mutable` to the mutable version.
+    // 2. Wrap the mutable method with the `reference_internal` call policy.
+    // 3. Add the `const_` tag to the overloaded const function, as the
+    //    overloading is based on constness.
+    .def("arrangement_mutable", py::overload_cast<>(&Gps2::arrangement),
+         py::rv_policy::reference_internal)
+    .def("arrangement", py::overload_cast<>(&Gps2::arrangement, py::const_));
+
     .def("clear", &Gps2::clear)
     .def("is_valid", &Gps2::is_valid)
     .def("insert", &bso2::insert0)
@@ -241,14 +249,14 @@ void export_general_polygon_set_2() {
     ;
 
   // Types that have been registered already:
-  if (! add_attr<GT>("Geometry_traits_2", ps2_scope))
+  if (! add_attr<GT>("Geometry_traits_2", gps2_co))
     std::cerr << "bso2::Geometry_traits_2 not registered!\n";
-  if (! add_attr<GT>("Traits_2", ps2_scope))
+  if (! add_attr<GT>("Traits_2", gps2_co))
     std::cerr << "bso2::Traits_2 not registered!\n";
-  if (! add_attr<Pgn>("Polygon_2", ps2_scope))
+  if (! add_attr<Pgn>("Polygon_2", gps2_co))
     std::cerr << "bso2::General_polygon_2 not registered!\n";
-  if (! add_attr<Pwh>("Polygon_with_holes_2", ps2_scope))
+  if (! add_attr<Pwh>("Polygon_with_holes_2", gps2_co))
     std::cerr << "bso2::General_polygon_with_holes_2 not registered!\n";
-  if (! add_attr<bso2::Arrangement_2>("Arrangement_2", ps2_scope))
+  if (! add_attr<bso2::Arrangement_2>("Arrangement_2", gps2_co))
     std::cerr << "bso2::Arrangement_2 not registered!\n";
 }

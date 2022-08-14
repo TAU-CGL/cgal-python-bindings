@@ -13,9 +13,9 @@
 
 namespace py = nanobind;
 
-void export_arr_rational_function_traits() {
+void export_arr_rational_function_traits(py::module_& m) {
   typedef aos2::Geometry_traits_2       GT;
-  py::scope traits_scope = py::class_<GT>("Traits")
+  py::class_<GT>(m, "Traits")
     .def(py::init<>())
     ;
 }
