@@ -18,16 +18,16 @@
 
 namespace py = nanobind;
 
-py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits(py::module_&);
 
 namespace bso2 {
 
-template <typename T>
-typename T::Polygon_2* init_polygon_2(py::list& lst) {
-  auto begin = py::stl_input_iterator<typename T::X_monotone_curve_2>(lst);
-  auto end = py::stl_input_iterator<typename T::X_monotone_curve_2>();
-  return new typename T::Polygon_2(begin, end);
-}
+// template <typename T>
+// typename T::Polygon_2* init_polygon_2(py::list& lst) {
+//   auto begin = py::stl_input_iterator<typename T::X_monotone_curve_2>(lst);
+//   auto end = py::stl_input_iterator<typename T::X_monotone_curve_2>();
+//   return new typename T::Polygon_2(begin, end);
+// }
 
 template <typename T>
 typename T::Polygon_2::Curve_iterator curves_begin(typename T::Polygon_2& p)
@@ -39,19 +39,20 @@ typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
 
 }
 
-py::object export_gps_circle_segment_traits() {
-  auto traits = export_arr_circle_segment_traits();
+py::object export_gps_circle_segment_traits(py::module_& m) {
+  auto traits = export_arr_circle_segment_traits(m);
 
-  typedef bso2::Geometry_traits_2       GT;
+  using GT = bso2::Geometry_traits_2;
+
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;
   } concepts;
   export_GpsTraits_2<GT>(traits, concepts);
   auto* tco = concepts.m_traits_classes.m_polygon_2;
   if (tco) {
-    tco->def("__init__", make_constructor(&bso2::init_polygon_2<GT>));
-    tco->def("curves", py::range<py::return_internal_reference<>>
-             (&bso2::curves_begin<GT>, &bso2::curves_end<GT>));
+    // tco->def("__init__", make_constructor(&bso2::init_polygon_2<GT>)); NB
+    // tco->def("curves", py::range<py::return_internal_reference<>>
+    //          (&bso2::curves_begin<GT>, &bso2::curves_end<GT>)); NB
   }
   return traits;
 }
