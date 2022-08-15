@@ -172,11 +172,11 @@ CGAL::Oriented_side oriented_side(General_polygon_set_2& ps, T& other)
 }
 
 void export_general_polygon_set_2(py::module_& m) {
-  typedef bso2::General_polygon_set_2           Gps2;
-  typedef bso2::Geometry_traits_2               GT;
-  typedef bso2::General_polygon_2               Pgn;
-  typedef bso2::General_polygon_with_holes_2    Pwh;
-  typedef bso2::Arrangement_2                   Arrangement_2;
+  using Gps2 = bso2::General_polygon_set_2;
+  using GT = bso2::Geometry_traits_2;
+  using Pgn = bso2::General_polygon_2;
+  using Pwh = bso2::General_polygon_with_holes_2;
+  using Arrangement_2 = bso2::Arrangement_2;
 
   py::class_<Gps2> gps2_co(m, "General_polygon_set_2");
   gps2_co.def(py::init<>())

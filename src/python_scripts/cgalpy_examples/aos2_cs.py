@@ -24,7 +24,7 @@ gt = Geometry_traits_2()
 cmp_y_at_x = gt.compare_y_at_x_2_object()
 cmp_y_at_x_left = gt.compare_y_at_x_left_2_object()
 
-p = Point(0.0, 0.0)
+p = Point(0, 0)
 p0 = Ker_point(0, 0)
 p1 = Ker_point(-1, 0)
 p2 = Ker_point(1, 0)

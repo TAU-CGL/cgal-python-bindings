@@ -133,8 +133,8 @@ void connect_holes(General_polygon_with_holes_2& pwh, py::list& lst) {
 }
 
 void export_boolean_set_operations_2(py::module_& m) {
-  typedef bso2::General_polygon_2               Pgn;
-  typedef bso2::General_polygon_with_holes_2    Pwh;
+  using Pgn = bso2::General_polygon_2;
+  using Pwh = bso2::General_polygon_with_holes_2;
 
   m.def("complement", bso2::complement0);
   m.def("complement", bso2::complement1);
