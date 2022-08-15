@@ -19,7 +19,7 @@ namespace py = nanobind;
 template <typename Type, typename Parent>
 bool add_attr(const char* name, Parent& parent) {
   const py::handle info = py::type<Type>();
-  if (info.is_valid() && py::type_check(info)) return false;
+  if (! info.is_valid() || ! py::type_check(info)) return false;
   parent.attr(name) = info;
   return true;
 }

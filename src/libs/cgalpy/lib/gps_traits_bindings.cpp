@@ -40,8 +40,8 @@ typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
 py::class_<aos2::Geometry_traits_2> export_arr_conic_traits();
 py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits();
 
-py::object export_gps_traits() {
-  typedef bso2::Geometry_traits_2       GT;
+py::object export_gps_traits(py::module_& m) {
+  using GT = bso2::Geometry_traits_2;
   // auto traits = py::class_<GT>("Traits_2");
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
@@ -52,7 +52,6 @@ py::object export_gps_traits() {
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-  py::scope traits_scope(traits);
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;
   } concepts;
