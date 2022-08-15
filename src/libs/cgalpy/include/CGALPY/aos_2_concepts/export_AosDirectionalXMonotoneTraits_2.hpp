@@ -18,14 +18,14 @@
 namespace py = nanobind;
 
 template <typename T, typename C, typename Concepts>
-void export_AosDirectionalXMonotoneTraits_2(C c, Concepts& concepts) {
+void export_AosDirectionalXMonotoneTraits_2(C& c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
   export_AosXMonotoneTraits_2<T>(c, concepts);
 
-  typedef typename T::Compare_endpoints_xy_2    Compare_endpoints_xy_2;
-  typedef typename T::Construct_opposite_2      Construct_opposite_2;
+  using Compare_endpoints_xy_2 = typename T::Compare_endpoints_xy_2;
+  using Construct_opposite_2 = typename T::Construct_opposite_2;
 
   auto& classes = concepts.m_directional_x_monotone_traits_classes;
 

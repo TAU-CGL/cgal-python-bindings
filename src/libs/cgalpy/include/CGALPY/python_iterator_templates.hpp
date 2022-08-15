@@ -59,17 +59,17 @@ public:
   }
 };
 
-template<typename iterator>
-void bind_iterator_of_circulators(py::module_& m, const char* python_name) {
-  py::class_<iterator>(m, python_name)
+template<typename iterator, typename Parent>
+void bind_iterator_of_circulators(Parent& parent, const char* python_name) {
+  py::class_<iterator>(parent, python_name)
     .def("__iter__", &pass_through)
     .def("__next__", &iterator::next)
     ;
 }
 
-template<typename iterator>
-void bind_iterator(py::module_& m, const char* python_name) {
-  py::class_<iterator>(m, python_name)
+template<typename iterator, typename Parent>
+void bind_iterator(Parent& parent, const char* python_name) {
+  py::class_<iterator>(parent, python_name)
     .def("__iter__", &pass_through)
     .def("__next__", &iterator::next)
     ;

@@ -344,12 +344,13 @@ void assign(Aos& arr, Aos& input_arr) { arr.assign(input_arr); }
 }
 
 // Export common members of Aos types
-template <typename Aos, typename C>
-void export_aos(C& c) {
-  c
-#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-    .def(py::init<>())
-    .def(py::init<Aos&>())
+void export_aos(py::class_<aos2::Arrangement_on_surface_2>& c) {
+  using Aos = aos2::Arrangement_on_surface_2;
+  using GT = aos2::Geometry_traits_2;
+
+  c.def(py::init<>())
+    .def(py::init<const Aos&>())
+    .def(py::init<const GT*>())
     // .def("halfedges", [](Aos& arr) {
     //                     return py::iterator(arr.halfedges_begin(),
     //                                         arr.halfedges_end());
@@ -381,7 +382,6 @@ void export_aos(C& c) {
     .def("number_of_vertices", &Aos::number_of_vertices)
     .def("assign", &aos2::assign<Aos>)
     .def("clear", &Aos::clear)
-#endif
 
     // supported only by some traits
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
@@ -429,17 +429,17 @@ void bind_overlay_function_traits<false, false, true>(py::module_& m) {
 }
 
 void export_arrangement_on_surface_2(py::module_& m) {
-  typedef aos2::Arrangement_on_surface_2                Aos;
-  typedef aos2::Arrangement_2                           Arr;
-  typedef aos2::Arrangement_with_history_2              Awh;
-  typedef Arr::Geometry_traits_2                        Tr;
-  typedef Tr::Point_2                                   Point;
-  typedef Tr::Curve_2                                   Curve;
-  typedef Tr::X_monotone_curve_2                        X_monotone_curve;
-  typedef CGAL::Arr_naive_point_location<Arr>           Naive_pl;
-  typedef CGAL::Arr_walk_along_line_point_location<Arr> Wal_pl;
-  typedef CGAL::Arr_landmarks_point_location<Arr>       Landmarks_pl;
-  typedef CGAL::Arr_trapezoid_ric_point_location<Arr>   Trapezoid_pl;
+  using Aos = aos2::Arrangement_on_surface_2;
+  using Arr = aos2::Arrangement_2;
+  using Awh = aos2::Arrangement_with_history_2;
+  using GT = Arr::Geometry_traits_2;
+  using Point = GT::Point_2;
+  using Curve = GT::Curve_2;
+  using X_monotone_curve = GT::X_monotone_curve_2;
+  using Naive_pl = CGAL::Arr_naive_point_location<Arr>;
+  using Wal_pl = CGAL::Arr_walk_along_line_point_location<Arr>;
+  using Landmarks_pl = CGAL::Arr_landmarks_point_location<Arr>;
+  using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Arr>;
 
   py::enum_<CGAL::Arr_halfedge_direction>(m, "Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
@@ -456,37 +456,37 @@ void export_arrangement_on_surface_2(py::module_& m) {
   // Export the traits classes
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_gps_segment_traits(m);
+  auto traits_co = export_gps_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_gps_segment_traits(m);
+  auto traits_co = export_gps_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_gps_circle_segment_traits(m);
+  auto traits_co = export_gps_circle_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-  auto traits_object = export_gps_traits(m);
+  auto traits_co = export_gps_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-  auto traits_object = export_gps_traits(m);
+  auto traits_co = export_gps_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_gps_traits(m);
+  auto traits_co = export_gps_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  auto traits_object = export_gps_traits(m);
+  auto traits_co = export_gps_traits(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_GPS_TRAITS");
 #endif
 #else
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_arr_segment_traits(m);
+  auto traits_co = export_arr_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_arr_non_caching_segment_traits(m);
+  auto traits_co = export_arr_non_caching_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-  auto traits_object = export_arr_linear_traits(m);
+  auto traits_co = export_arr_linear_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_arr_circle_segment_traits(m);
+  auto traits_co = export_arr_circle_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-  auto traits_object = export_arr_conic_traits(m);
+  auto traits_co = export_arr_conic_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  auto traits_object = export_arr_algebraic_segment_traits();
+  auto traits_co = export_arr_algebraic_segment_traits();
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  auto traits_object = export_arr_geodesic_arc_on_sphere_traits(m);
+  auto traits_co = export_arr_geodesic_arc_on_sphere_traits(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
@@ -494,8 +494,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
 
   // Arrangement on surface
   py::class_<Aos> aos_co(m, "Arrangement_on_surface_2");
-  export_aos<Aos>(aos_co);
-  aos_co.attr("Geometry_traits_2") = traits_object;
+  export_aos(aos_co);
+  aos_co.attr("Geometry_traits_2") = traits_co;
   export_vertex(aos_co);
   export_halfedge(aos_co);
   export_face(aos_co);
@@ -503,7 +503,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
   auto arr_co = py::class_<Arr, Aos>(m, "Arrangement_2")
     .def(py::init<>())
-    .def(py::init<Arr&>())
+    .def(py::init<const Arr&>())
+    .def(py::init<const GT*>())
     .def("unbounded_face", &aos2::unbounded_face<Arr>)
     .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity);
 #endif

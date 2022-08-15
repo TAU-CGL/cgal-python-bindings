@@ -16,8 +16,8 @@ namespace py = nanobind;
 
 template <typename T>
 struct Aos_traits_classes {
-  typedef typename T::Curve_2                   Curve_2;
-  typedef typename T::Make_x_monotone_2         Make_x_monotone_2;
+  using Curve_2 = typename T::Curve_2;
+  using Make_x_monotone_2 = typename T::Make_x_monotone_2;
 
   // Constructor
   Aos_traits_classes() :

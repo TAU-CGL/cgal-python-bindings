@@ -14,33 +14,53 @@
 
 namespace py = nanobind;
 
+template <typename T, typename Tag = CGAL::Tag_false>
+struct Merge_2_class { /* empty */ };
+
+template <typename T>
+struct Merge_2_class<T, CGAL::Tag_true> {
+  using Merge_2 = typename T::Merge_2;
+  using Are_mergeable_2 = typename T::Are_mergeable_2;
+
+  // Constructor
+  Merge_2_class() :
+    m_merge_2(nullptr),
+    m_are_mergeable_2(nullptr)
+  {}
+
+  // Destructor
+  ~Merge_2_class() {
+    if (m_merge_2) delete m_merge_2;
+    if (m_are_mergeable_2) delete m_are_mergeable_2;
+  }
+
+  py::class_<Merge_2>* m_merge_2;
+  py::class_<Are_mergeable_2>* m_are_mergeable_2;
+};
+
 template <typename T>
 struct Aos_x_monotone_traits_classes {
-  typedef typename T::Intersect_2               Intersect_2;
-  typedef typename T::Split_2                   Split_2;
-  typedef typename T::Are_mergeable_2           Are_mergeable_2;
-  typedef typename T::Merge_2                   Merge_2;
+  using Intersect_2 = typename T::Intersect_2;
+  using Split_2 = typename T::Split_2;
 
   // Constructor
   Aos_x_monotone_traits_classes() :
     m_intersect_2(nullptr),
-    m_split_2(nullptr),
-    m_are_mergeable_2(nullptr),
-    m_merge_2(nullptr)
+    m_split_2(nullptr)
   {}
 
   // Destructor
   ~Aos_x_monotone_traits_classes() {
     if (m_intersect_2) delete m_intersect_2;
     if (m_split_2) delete m_split_2;
-    //if (m_are_mergeable_2) delete m_are_mergeable_2;
-    //if (m_merge_2) delete m_merge_2;
   }
 
   py::class_<Intersect_2>* m_intersect_2;
   py::class_<Split_2>* m_split_2;
-  py::class_<Are_mergeable_2>* m_are_mergeable_2;
-  py::class_<Merge_2>* m_merge_2;
+
+  using Has_merge_category = typename T::Has_merge_category;
+
+  Merge_2_class<T, Has_merge_category> m_merge_2_class;
 };
 
 #endif
