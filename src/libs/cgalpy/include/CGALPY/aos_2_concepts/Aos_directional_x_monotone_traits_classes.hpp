@@ -16,8 +16,8 @@ namespace py = nanobind;
 
 template <typename T>
 struct Aos_directional_x_monotone_traits_classes {
-  typedef typename T::Compare_endpoints_xy_2    Compare_endpoints_xy_2;
-  typedef typename T::Construct_opposite_2      Construct_opposite_2;
+  using Compare_endpoints_xy_2 = typename T::Compare_endpoints_xy_2;
+  using Construct_opposite_2 = typename T::Construct_opposite_2;
 
   // Constructor
   Aos_directional_x_monotone_traits_classes() :

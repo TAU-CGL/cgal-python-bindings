@@ -23,22 +23,42 @@ halfedge_around_vertex_iterator(Vertex& v) {
 
 }
 
-void export_vertex(py::module_& m) {
-  typedef aos2::Arrangement_2   Arr2;
-  typedef Arr2::Vertex          Vertex;
-  typedef Arr2::Point_2         Point;
+void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
+  using Arr2 = aos2::Arrangement_2;
+  using Vertex = Arr2::Vertex;
+  using Point = Arr2::Point_2;
+  using Halfedge_around_vertex_circulator =
+    Arr2::Halfedge_around_vertex_circulator;
 
-  py::class_<Vertex>(m, "Vertex")
+  py::class_<Vertex>(c, "Vertex")
     .def(py::init<>())
-    .def<Point& (Vertex::*)()>("point", &Vertex::point)
+
+    // Use `py::overload_cast` to cast overloaded functions.
+    // 1. As a convention, add the suffix `_mutable` to the mutable version.
+    // 2. Wrap the mutable method with the `reference_internal` call policy.
+    // 3. Add the `const_` tag to the overloaded const function, as the
+    //    overloading is based on constness.
+    .def("point_mutual", py::overload_cast<>(&Vertex::point),
+         py::rv_policy::reference_internal)
+    .def("point", py::overload_cast<>(&Vertex::point, py::const_))
+
     .def("is_isolated", &Vertex::is_isolated)
     .def("degree", &Vertex::degree)
     .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator)
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
-    .def<Vertex::Data& (Vertex::*)()>("data", &Vertex::data, Copy_non_const_reference())
+    // Use `py::overload_cast` to cast overloaded functions.
+    // 1. As a convention, add the suffix `_mutable` to the mutable version.
+    // 2. Wrap the mutable method with the `reference_internal` call policy.
+    // 3. Add the `const_` tag to the overloaded const function, as the
+    //    overloading is based on constness.
+    .def("data_mutual", py::overload_cast<>(&Vertex::data),
+         py::rv_policy::reference_internal)
+    .def("data", py::overload_cast<>(&Vertex::data, py::const_))
+
     .def("set_data", &Vertex::set_data)
 #endif
     ;
 
-  bind_iterator<Iterator_from_circulator<Arr2::Halfedge_around_vertex_circulator>>(m, "Halfedge_around_vertex_iterator");
+  bind_iterator<Iterator_from_circulator<Halfedge_around_vertex_circulator>>
+    (c, "Halfedge_around_vertex_iterator");
 }

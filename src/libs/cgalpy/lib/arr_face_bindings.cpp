@@ -32,11 +32,12 @@ Isolated_vertex_iterator isolated_vertices_end(Face& f)
 
 }
 
-void export_face(py::module_& m) {
-  typedef aos2::Arrangement_2   Arr2;
-  typedef Arr2::Face            Face;
+void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
+  using Arr2 = aos2::Arrangement_2;
+  using Face = Arr2::Face;
+  using Inner_ccb_iterator = Arr2::Inner_ccb_iterator;
 
-  py::class_<Face>(m, "Face")
+  py::class_<Face>(c, "Face")
     .def(py::init<>())
     .def("assign", &Face::assign)
     .def("is_unbounded", &Face::is_unbounded)
@@ -57,6 +58,8 @@ void export_face(py::module_& m) {
 #endif
     ;
 
-  bind_iterator<Iterator_from_circulator<Arr2::Ccb_halfedge_circulator>>(m, "Ccb_halfedge_iterator");
-  bind_iterator_of_circulators<Iterator_of_circulators<Arr2::Inner_ccb_iterator>>(m, "Inner_ccbs_iterator");
+  bind_iterator<Iterator_from_circulator<Arr2::Ccb_halfedge_circulator>>
+    (c, "Ccb_halfedge_iterator");
+  bind_iterator_of_circulators<Iterator_of_circulators<Inner_ccb_iterator>>
+    (c, "Inner_ccbs_iterator");
 }

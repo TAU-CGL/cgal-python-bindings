@@ -17,7 +17,7 @@ namespace py = nanobind;
 // Introduce a new class object
 // Return true iff the class object was not already registered
 template <typename Type, const char* Name, typename C>
-bool add_class_object(C c, py::class_<Type>*& co) {
+bool add_class_object(C& c, py::class_<Type>*& co) {
   const py::handle info = py::type<Type>();
   if (info.is_valid() && py::type_check(info)) {
     c.attr(Name) = info;

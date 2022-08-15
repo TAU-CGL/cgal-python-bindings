@@ -8,6 +8,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
@@ -23,10 +24,11 @@ typedef typename aos2::Geometry_traits_2::CoordNT CoordNT;
 
 static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 
-py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
-  typedef aos2::Geometry_traits_2       GT;
+py::class_<aos2::Geometry_traits_2>
+export_arr_circle_segment_traits(py::module_& m) {
+  using GT = aos2::Geometry_traits_2;
 
-  py::class_<CoordNT>("CoordNT")
+  py::class_<CoordNT>(m, "CoordNT")
     .def(py::init<>())
     .def(py::init<CoordNT&>())
     .def(py::init<int&>())
@@ -62,27 +64,28 @@ py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
     // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
-  auto traits = py::class_<GT>("Geometry_traits_2")
-    .def(py::init<>());
+  py::class_<GT> traits_co(m, "Geometry_traits_2");
+  traits_co.def(py::init<>());
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
     Aos_traits_classes<GT> m_traits_classes;
-    Aos_directional_x_monotone_traits_classes<GT> m_directional_x_monotone_traits_classes;
+    Aos_directional_x_monotone_traits_classes<GT>
+      m_directional_x_monotone_traits_classes;
   } concepts;
-  export_AosTraits_2<GT, Return_by_value>(traits, concepts);
-  export_AosDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits, concepts);
+  export_AosTraits_2<GT>(traits_co, concepts);
+  export_AosDirectionalXMonotoneTraits_2<GT>(traits_co, concepts);
 
   auto& p2_co = *(concepts.m_basic_traits_classes.m_point_2);
   p2_co
     .def(py::init<FT&, FT&>())
     .def(py::init<CoordNT&, CoordNT&>())
-    .def(py::init<double, double>())
+    .def(py::init<int, int>())
     .def("x", &aos2::Point_2::x)
     .def("y", &aos2::Point_2::y)
     .def(py::self == py::self)
     .def(py::self != py::self)
-    .setattr("__hash__", py::object())
+    // .setattr("__hash__", py::object()) NB
     // .def(py::self_ns::str(py::self_ns::self)) NB
     // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
@@ -123,11 +126,9 @@ py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits() {
     .def("orientation", &aos2::Curve_2::orientation)
     .def("is_linear", &aos2::Curve_2::is_linear)
     .def("is_circular", &aos2::Curve_2::is_circular)
-    .def("supporting_line", &aos2::Curve_2::supporting_line,
-         Copy_const_reference())
-    .def("supporting_circle", &aos2::Curve_2::supporting_circle,
-         Copy_const_reference())
+    .def("supporting_line", &aos2::Curve_2::supporting_line)
+    .def("supporting_circle", &aos2::Curve_2::supporting_circle)
     ;
 
-  return traits;
+  return traits_co;
 }

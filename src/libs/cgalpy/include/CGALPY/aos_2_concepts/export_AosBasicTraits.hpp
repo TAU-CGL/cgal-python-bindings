@@ -19,12 +19,14 @@ namespace py = nanobind;
 
 //
 template <typename T, typename C, typename Classes>
-void export_Compare_y_at_x_left_2(C c, Classes& classes, CGAL::Tag_true) {
-  typedef typename T::Compare_y_at_x_left_2     Compare_y_at_x_left_2;
+void export_Compare_y_at_x_left_2(C& c, Classes& classes, CGAL::Tag_true) {
+  using Compare_y_at_x_left_2 = typename T::Compare_y_at_x_left_2;
+
   static const char compare_y_at_x_left_2[] = "Compare_y_at_x_left_2";
   if (add_class_object<Compare_y_at_x_left_2, compare_y_at_x_left_2>
     (c, classes.m_compare_y_at_x_left_2)) {
-    classes.m_compare_y_at_x_left_2->def("__call__", &Compare_y_at_x_left_2::operator());
+    classes.m_compare_y_at_x_left_2->
+      def("__call__", &Compare_y_at_x_left_2::operator());
   }
 
   c.def("compare_y_at_x_left_2_object", &T::compare_y_at_x_left_2_object);
@@ -32,25 +34,25 @@ void export_Compare_y_at_x_left_2(C c, Classes& classes, CGAL::Tag_true) {
 
 //
 template <typename T, typename C, typename Classes>
-void export_Compare_y_at_x_left_2(C c, Classes& classes, CGAL::Tag_false) {}
+void export_Compare_y_at_x_left_2(C& c, Classes& classes, CGAL::Tag_false) {}
 
 //! Export the basic traits function objects
 template <typename T, typename C, typename Concepts>
-void export_AosBasicTraits(C c, Concepts& concepts) {
+void export_AosBasicTraits(C& c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  typedef typename T::Has_left_category         Has_left_category;
-  typedef typename T::Point_2                   Point_2;
-  typedef typename T::X_monotone_curve_2        X_monotone_curve_2;
-  typedef typename T::Compare_x_2               Compare_x_2;
-  typedef typename T::Compare_xy_2              Compare_xy_2;
-  typedef typename T::Equal_2                   Equal_2;
-  typedef typename T::Construct_min_vertex_2    Construct_min_vertex_2;
-  typedef typename T::Construct_max_vertex_2    Construct_max_vertex_2;
-  typedef typename T::Is_vertical_2             Is_vertical_2;
-  typedef typename T::Compare_y_at_x_2          Compare_y_at_x_2;
-  typedef typename T::Compare_y_at_x_right_2    Compare_y_at_x_right_2;
+  using Has_left_category = typename T::Has_left_category;
+  using Point_2 = typename T::Point_2;
+  using X_monotone_curve_2 = typename T::X_monotone_curve_2;
+  using Compare_x_2 = typename T::Compare_x_2;
+  using Compare_xy_2 = typename T::Compare_xy_2;
+  using Equal_2 = typename T::Equal_2;
+  using Construct_min_vertex_2 = typename T::Construct_min_vertex_2;
+  using Construct_max_vertex_2 = typename T::Construct_max_vertex_2;
+  using Is_vertical_2 = typename T::Is_vertical_2;
+  using Compare_y_at_x_2 = typename T::Compare_y_at_x_2;
+  using Compare_y_at_x_right_2 = typename T::Compare_y_at_x_right_2;
 
   auto& classes = concepts.m_basic_traits_classes;
 
@@ -58,7 +60,7 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   static const char point_2[] = "Point_2";
   if (add_class_object<Point_2, point_2>(c, classes.m_point_2)) {
     classes.m_point_2->def(py::init<>());
-    classes.m_point_2->def(py::init<Point_2&>());
+    classes.m_point_2->def(py::init<const Point_2&>());
   }
 
   // X_monotone_curve_2
@@ -66,7 +68,7 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   if (add_class_object<X_monotone_curve_2, x_monotone_curve_2>
     (c, classes.m_x_monotone_curve_2)) {
     classes.m_x_monotone_curve_2->def(py::init<>());
-    classes.m_x_monotone_curve_2->def(py::init<X_monotone_curve_2&>());
+    classes.m_x_monotone_curve_2->def(py::init<const X_monotone_curve_2&>());
   }
 
   // Compare_x_2
@@ -85,14 +87,16 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   static const char construct_min_vertex_2[] = "Construct_min_vertex_2";
   if (add_class_object<Construct_min_vertex_2, construct_min_vertex_2>
     (c, classes.m_construct_min_vertex_2)) {
-    classes.m_construct_min_vertex_2->def("__call__", &Construct_min_vertex_2::operator());
+    classes.m_construct_min_vertex_2->
+      def("__call__", &Construct_min_vertex_2::operator());
   }
 
   // Construct_max_vertex_2
   static const char construct_max_vertex_2[] = "Construct_max_vertex_2";
   if (add_class_object<Construct_max_vertex_2, construct_max_vertex_2>
     (c, classes.m_construct_max_vertex_2)) {
-    classes.m_construct_max_vertex_2->def("__call__", &Construct_max_vertex_2::operator());
+    classes.m_construct_max_vertex_2->
+      def("__call__", &Construct_max_vertex_2::operator());
   }
 
   // Is_vertical_2
@@ -113,16 +117,20 @@ void export_AosBasicTraits(C c, Concepts& concepts) {
   static const char compare_y_at_x_right_2[] = "Compare_y_at_x_right_2";
   if (add_class_object<Compare_y_at_x_right_2, compare_y_at_x_right_2>
     (c, classes.m_compare_y_at_x_right_2)) {
-    classes.m_compare_y_at_x_right_2->def("__call__", &Compare_y_at_x_right_2::operator());
+    classes.m_compare_y_at_x_right_2->
+      def("__call__", &Compare_y_at_x_right_2::operator());
   }
 
   // Equal_2
   static const char equal_2[] = "Equal_2";
   if (add_class_object<Equal_2, equal_2>(c, classes.m_equal_2)) {
-    using Equal1 = bool(Equal_2::*)(const Point_2&, const Point_2&) const;
-    using Equal2 = bool(Equal_2::*)(const X_monotone_curve_2&, const X_monotone_curve_2&) const;
-    classes.m_equal_2->def("__call__", static_cast<Equal1>(&Equal_2::operator()));
-    classes.m_equal_2->def("__call__", static_cast<Equal2>(&Equal_2::operator()));
+    classes.m_equal_2->def("__call__",
+                           py::overload_cast<const Point_2&, const Point_2&>
+                           (&Equal_2::operator(), py::const_));
+    classes.m_equal_2->def("__call__",
+                           py::overload_cast<const X_monotone_curve_2&,
+                                             const X_monotone_curve_2&>
+                           (&Equal_2::operator(), py::const_));
   }
 
   c.def(py::init<>())

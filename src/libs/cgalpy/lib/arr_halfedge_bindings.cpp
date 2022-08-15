@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
 
@@ -28,11 +29,11 @@ Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
 
 }
 
-void export_halfedge(py::module_& m) {
-  typedef aos2::Arrangement_2   Arr2;
-  typedef Arr2::Halfedge        Halfedge;
+void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
+  using Arr2 = aos2::Arrangement_2;
+  using Halfedge = Arr2::Halfedge;
 
-  py::class_<Halfedge>(m, "Halfedge")
+  py::class_<Halfedge>(c, "Halfedge")
     .def(py::init<>())
     .def("direction", &Halfedge::direction)
     .def("source", &aos2::source)
@@ -44,8 +45,16 @@ void export_halfedge(py::module_& m) {
     .def("curve", &aos2::curve)
     .def("ccb", &aos2::ccb)
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
+    // Use `py::overload_cast` to cast overloaded functions.
+    // 1. As a convention, add the suffix `_mutable` to the mutable version.
+    // 2. Wrap the mutable method with the `reference_internal` call policy.
+    // 3. Add the `const_` tag to the overloaded const function, as the
+    //    overloading is based on constness.
+    .def("data_mutual", py::overload_cast<>(&Halfedge::data),
+         py::rv_policy::reference_internal)
+    .def("data", py::overload_cast<>(&Halfedge::data, py::const_))
+
     .def("set_data", &Halfedge::set_data)
-    .def<Halfedge::Data& (Halfedge::*)()>("data", &Halfedge::data, Copy_non_const_reference())
 #endif
     ;
 }

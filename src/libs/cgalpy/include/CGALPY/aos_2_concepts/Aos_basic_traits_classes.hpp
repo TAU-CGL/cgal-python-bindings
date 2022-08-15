@@ -19,23 +19,30 @@ struct Compare_y_at_x_left_2_class { /* empty */ };
 
 template <typename T>
 struct Compare_y_at_x_left_2_class<T, CGAL::Tag_true> {
-  typedef typename T::Compare_y_at_x_left_2     Compare_y_at_x_left_2;
+  using Compare_y_at_x_left_2 = typename T::Compare_y_at_x_left_2;
+
+  // Constructor
+  Compare_y_at_x_left_2_class() : m_compare_y_at_x_left_2(nullptr) {}
+
+  // Destructor
+  ~Compare_y_at_x_left_2_class()
+  { if (m_compare_y_at_x_left_2) delete m_compare_y_at_x_left_2; }
 
   py::class_<Compare_y_at_x_left_2>* m_compare_y_at_x_left_2;
 };
 
 template <typename T>
 struct Aos_basic_traits_classes {
-  typedef typename T::Point_2                   Point_2;
-  typedef typename T::X_monotone_curve_2        X_monotone_curve_2;
-  typedef typename T::Compare_x_2               Compare_x_2;
-  typedef typename T::Compare_xy_2              Compare_xy_2;
-  typedef typename T::Equal_2                   Equal_2;
-  typedef typename T::Construct_min_vertex_2    Construct_min_vertex_2;
-  typedef typename T::Construct_max_vertex_2    Construct_max_vertex_2;
-  typedef typename T::Is_vertical_2             Is_vertical_2;
-  typedef typename T::Compare_y_at_x_2          Compare_y_at_x_2;
-  typedef typename T::Compare_y_at_x_right_2    Compare_y_at_x_right_2;
+  using Point_2 = typename T::Point_2;
+  using X_monotone_curve_2 = typename T::X_monotone_curve_2;
+  using Compare_x_2 = typename T::Compare_x_2;
+  using Compare_xy_2 = typename T::Compare_xy_2;
+  using Equal_2 = typename T::Equal_2;
+  using Construct_min_vertex_2 = typename T::Construct_min_vertex_2;
+  using Construct_max_vertex_2 = typename T::Construct_max_vertex_2;
+  using Is_vertical_2 = typename T::Is_vertical_2;
+  using Compare_y_at_x_2 = typename T::Compare_y_at_x_2;
+  using Compare_y_at_x_right_2 = typename T::Compare_y_at_x_right_2;
 
   // Constructor
   Aos_basic_traits_classes() :
@@ -77,7 +84,8 @@ struct Aos_basic_traits_classes {
   py::class_<Compare_y_at_x_2>* m_compare_y_at_x_2;
   py::class_<Compare_y_at_x_right_2>* m_compare_y_at_x_right_2;
 
-  typedef typename T::Has_left_category         Has_left_category;
+  using Has_left_category = typename T::Has_left_category;
+
   Compare_y_at_x_left_2_class<T, Has_left_category> m_compare_y_at_x_left_2_class;
 };
 
