@@ -123,10 +123,9 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   {
     auto sub_m = m.def_submodule("Bso2");
     export_boolean_set_operations_2(sub_m);
+    export_general_polygon_set_2(sub_m);
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
     export_polygon_set_2(sub_m);
-#else
-    export_general_polygon_set_2(sub_m);
 #endif
   };
 #endif

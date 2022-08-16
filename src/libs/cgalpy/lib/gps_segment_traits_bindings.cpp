@@ -18,23 +18,26 @@
 
 namespace py = nanobind;
 
-py::class_<aos2::Geometry_traits_2> export_arr_segment_traits(py::module_&);
-py::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits(py::module_&);
+py::object export_arr_segment_traits(py::module_&);
+py::object export_arr_non_caching_segment_traits(py::module_&);
 
 py::object export_gps_segment_traits(py::module_& m) {
-  using GT = bso2::Geometry_traits_2;
+  using AGT = CGAL::Arr_segment_traits_2<Kernel>;
+  using GT = CGAL::Gps_segment_traits_2<Kernel, Point_2_container>;
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  auto traits = export_arr_segment_traits(m);
+  export_arr_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  auto traits = export_arr_non_caching_segment_traits(m);
+  export_arr_non_caching_segment_traits(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
+  py::class_<GT, AGT> traits_co(m, "Gps_segment_traits_2");
+  traits_co.def(py::init<>());
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;
   } concepts;
-  export_GpsTraits_2<GT>(traits, concepts);
-  return traits;
+  export_GpsTraits_2<GT>(traits_co, concepts);
+  return traits_co;
 }
