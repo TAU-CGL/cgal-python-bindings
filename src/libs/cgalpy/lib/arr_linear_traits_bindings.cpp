@@ -14,6 +14,8 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/Arr_linear_traits_2.h>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
@@ -37,8 +39,9 @@ void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
 py::object export_arr_linear_traits(py::module_& m) {
-  typedef aos2::Geometry_traits_2       GT;
-  auto traits = py::class_<GT>(m, "Geometry_traits_2");
+  using GT = CGAL::Arr_linear_traits_2<Kernel>;
+
+  auto traits = py::class_<GT>(m, "Arr_linear_traits_2");
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
@@ -53,7 +56,6 @@ py::object export_arr_linear_traits(py::module_& m) {
   export_AosTraits_2<GT, Copy_const_reference>(traits, concepts);
   export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits, concepts);
   export_AosOpenBoundaryTraits_2<GT, Copy_const_reference>(traits, concepts);
-
 
   auto& cv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
   cv_co

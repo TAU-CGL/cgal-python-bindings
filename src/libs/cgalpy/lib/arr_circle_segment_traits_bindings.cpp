@@ -10,6 +10,8 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 
+#include <CGAL/Arr_circle_segment_traits_2.h>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
@@ -24,9 +26,8 @@ typedef typename aos2::Geometry_traits_2::CoordNT CoordNT;
 
 static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 
-py::class_<aos2::Geometry_traits_2>
-export_arr_circle_segment_traits(py::module_& m) {
-  using GT = aos2::Geometry_traits_2;
+py::object export_arr_circle_segment_traits(py::module_& m) {
+  using GT = CGAL::Arr_circle_segment_traits_2<Kernel>;
 
   py::class_<CoordNT>(m, "CoordNT")
     .def(py::init<>())
@@ -64,7 +65,7 @@ export_arr_circle_segment_traits(py::module_& m) {
     // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
-  py::class_<GT> traits_co(m, "Geometry_traits_2");
+  py::class_<GT> traits_co(m, "Arr_circle_segment_traits_2");
   traits_co.def(py::init<>());
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;

@@ -26,13 +26,13 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>&);
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>&);
 void export_face(py::class_<aos2::Arrangement_on_surface_2>&);
 
-py::class_<aos2::Geometry_traits_2> export_arr_linear_traits(py::module_&);
-py::class_<aos2::Geometry_traits_2> export_arr_segment_traits(py::module_&);
-py::class_<aos2::Geometry_traits_2> export_arr_non_caching_segment_traits(py::module_&);
-py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits(py::module_&);
-py::class_<aos2::Geometry_traits_2> export_arr_conic_traits(py::module_&);
-py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits(py::module_&);
-py::class_<aos2::Geometry_traits_2> export_arr_geodesic_arc_on_sphere_traits(py::module_&);
+py::object export_arr_linear_traits(py::module_&);
+py::object export_arr_segment_traits(py::module_&);
+py::object export_arr_non_caching_segment_traits(py::module_&);
+py::object export_arr_circle_segment_traits(py::module_&);
+py::object export_arr_conic_traits(py::module_&);
+py::object export_arr_algebraic_segment_traits(py::module_&);
+py::object export_arr_geodesic_arc_on_sphere_traits(py::module_&);
 
 py::object export_gps_segment_traits(py::module_&);
 py::object export_gps_circle_segment_traits(py::module_&);

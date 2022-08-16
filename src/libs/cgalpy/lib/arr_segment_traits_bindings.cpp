@@ -13,6 +13,8 @@
 #include <nanobind/nanobind.h>
 #include <boost/assert.hpp>
 
+#include <Arr_segment_traits_2.h>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
@@ -30,9 +32,10 @@ namespace py = nanobind;
 
 namespace aos2 { Segment_2 to_segment(X_monotone_curve_2& c) { return Segment_2(c); } }
 
-py::class_<aos2::Geometry_traits_2> export_arr_segment_traits(py::module_& m) {
-  typedef aos2::Geometry_traits_2       GT;
-  auto traits = py::class_<GT>(m, "Geometry_traits_2");
+py::object export_arr_segment_traits(py::module_& m) {
+  using GT = CGAL::Arr_segment_traits_2<Kernel>;
+
+  auto traits = py::class_<GT>(m, "Arr_segment_traits_2");
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
