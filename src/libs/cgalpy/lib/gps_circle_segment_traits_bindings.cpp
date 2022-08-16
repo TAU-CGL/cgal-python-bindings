@@ -18,7 +18,7 @@
 
 namespace py = nanobind;
 
-py::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits(py::module_&);
+py::object export_arr_circle_segment_traits(py::module_&);
 
 namespace bso2 {
 
@@ -43,19 +43,19 @@ py::object export_gps_circle_segment_traits(py::module_& m) {
   using AGT = CGAL::Arr_circle_segment_traits_2<Kernel>;
   using GT = CGAL::Gps_circle_segment_traits_2<Kernel>;
 
-  auto arr_traits_co = export_arr_circle_segment_traits(m);
+  export_arr_circle_segment_traits(m);
 
-  py::class_<GT, AGT> gps_traits_co(m, "Gps_circle_segment_traits_2");
-  gps_traits_co.def(py::init<>());
+  py::class_<GT, AGT> traits_co(m, "Gps_circle_segment_traits_2");
+  traits_co.def(py::init<>());
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;
   } concepts;
-  export_GpsTraits_2<GT>(gps_traits_co, concepts);
+  export_GpsTraits_2<GT>(traits_co, concepts);
   auto* tco = concepts.m_traits_classes.m_polygon_2;
   if (tco) {
     // tco->def("__init__", make_constructor(&bso2::init_polygon_2<GT>)); NB
     // tco->def("curves", py::range<py::return_internal_reference<>>
     //          (&bso2::curves_begin<GT>, &bso2::curves_end<GT>)); NB
   }
-  return gps_traits_co;
+  return traits_co;
 }

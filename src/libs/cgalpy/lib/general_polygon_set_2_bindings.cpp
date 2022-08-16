@@ -121,10 +121,6 @@ py::list polygons_with_holes(Gps_on_surface_base_2& ps) {
 //   ps.do_intersect(v.begin(), v.end());
 // }
 
-template<typename T>
-CGAL::Oriented_side oriented_side(Gps_on_surface_base_2& ps, const T& other)
-{ return ps.oriented_side(other); }
-
 }
 
 /*! Wrap General_polygon_set and its base classes.
@@ -204,10 +200,10 @@ void export_general_polygon_set_2(py::module_& m) {
     .def("clear", &Gpsb2::clear)
 
     // oriented_side
-    .def("oriented_side", &bso2::oriented_side<const GT::Point_2&>)
-    .def("oriented_side", &bso2::oriented_side<const Gpsb2&>)
-    .def("oriented_side", &bso2::oriented_side<const Pgn&>)
-    .def("oriented_side", &bso2::oriented_side<const Pwh&>)
+    .def("oriented_side", py::overload_cast<const GT::Point_2&>(&Gpsb2::oriented_side, py::const_))
+    .def("oriented_side", py::overload_cast<const Pgn&>(&Gpsb2::oriented_side, py::const_))
+    .def("oriented_side", py::overload_cast<const Pwh&>(&Gpsb2::oriented_side, py::const_))
+    .def("oriented_side", py::overload_cast<const Gpsb2&>(&Gpsb2::oriented_side, py::const_))
 
     .def("locate", &Gpsb2::locate)
 
