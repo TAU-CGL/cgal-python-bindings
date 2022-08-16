@@ -13,7 +13,7 @@
 #include <nanobind/nanobind.h>
 #include <boost/assert.hpp>
 
-#include <Arr_segment_traits_2.h>
+#include <CGAL/Arr_segment_traits_2.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
