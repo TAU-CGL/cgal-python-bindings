@@ -25,7 +25,7 @@ py::object export_gps_segment_traits(py::module_& m) {
   using GT = bso2::Geometry_traits_2;
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  auto traits = export_arr_segment_traits();
+  auto traits = export_arr_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
   auto traits = export_arr_non_caching_segment_traits(m);
 #else
