@@ -9,6 +9,10 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/Arr_conic_traits_2.h>
+#include <CGAL/Cartesian.h>
+#include <CGAL/CORE_algebraic_number_traits.h>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
@@ -19,14 +23,17 @@
 
 namespace py = nanobind;
 
-py::class_<aos2::Geometry_traits_2> export_arr_conic_traits(py::module_& m) {
+py::object export_arr_conic_traits(py::module_& m) {
   //TODO export RatKernel, AlgKernel
-  typedef aos2::Geometry_traits_2       GT;
-  typedef aos2::Curve_2                 Curve_2;
-  typedef aos2::X_monotone_curve_2      X_monotone_curve_2;
-  typedef GT::Rational                  Rational;
+  using NtTraits = CGAL::CORE_algebraic_number_traits;
+  using RatKernel = CGAL::Cartesian <NtTraits::Rational>;
+  using AlgKernel = CGAL::Cartesian <NtTraits::Algebraic>;
+  using GT = CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>;
+  using Curve_2 = GT::Curve_2;
+  using X_monotone_curve_2 = GT::X_monotone_curve_2;
+  using Rational = GT::Rational;
 
-  auto traits = py::class_<GT>(m, "Geometry_traits_2")
+  auto traits = py::class_<GT>(m, "Arr_conic_traits")
     .def(py::init<>())
     ;
 

@@ -11,16 +11,18 @@
 
 #include <boost/assert.hpp>
 
+#include <CGAL/Arr_non_caching_segment_traits_2.h>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/export_point_2.hpp"
 #include "CGALPY/export_segment_2.hpp"
 
 namespace py = nanobind;
 
-py::class_<aos2::Geometry_traits_2>
-export_arr_non_caching_segment_traits(py::module_& m) {
-  typedef aos2::Geometry_traits_2       GT;
-  py::scope traits_scope = py::class_<GT>(m, "Traits")
+py::object export_arr_non_caching_segment_traits(py::module_& m) {
+  using GT = Arr_non_caching_segment_traits_2<Kernel>;
+
+  py::scope traits_scope = py::class_<GT>(m, "Arr_non_caching_segment_traits_2")
     .def(py::init<>())
     ;
 

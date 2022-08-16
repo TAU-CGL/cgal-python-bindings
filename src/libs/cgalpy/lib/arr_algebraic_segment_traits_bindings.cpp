@@ -9,6 +9,11 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/Arr_algebraic_segment_traits_2.h>
+#include <CGAL/Polynomial.h>
+#include <CGAL/Polynomial_traits_d.h>
+#include <CGAL/Polynomial_type_generator.h>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 
@@ -139,9 +144,10 @@ py::class_<typename PT::Swap> bind_swap(py::module_& m, const char* name) {
 template<typename T>
 T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 
-py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
-  typedef aos2::Algebraic_real_1        AR1;
-  typedef aos2::Geometry_traits_2       GT;
+py::object export_arr_algebraic_segment_traits() {
+  using Integer = CORE::BigInt;
+  using AR1 = Algebraic_kernel_d_2::Algebraic_real_1;
+  using GT = CGAL::Arr_algebraic_segment_traits_2<Integer>;
 
   py::class_<aos2::Integer>("Integer")
     .def(py::init<>())
@@ -216,7 +222,7 @@ py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits() {
   m.def("ipower", &ipower<aos2::Polynomial_1>);
   m.def("ipower", &ipower<aos2::Polynomial_2>);
 
-  auto traits = py::class_<GT>(m, "Geometry_traits_2");
+  auto traits = py::class_<GT>(m, "Arr_algebraic_segment_traits");
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
