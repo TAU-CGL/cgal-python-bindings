@@ -16,6 +16,7 @@
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -85,8 +86,8 @@ template <typename PT>
 py::class_<typename PT::Type> bind_polynomial(py::module_&m, const char* name) {
   typedef typename PT::Type P;
   typedef typename PT::Coefficient_type CT;
-  return py::class_<P>(m, name)
-    .def(py::init<>())
+  py::class_<P> c(m, name);
+  c.def(py::init<>())
     .def(py::init<CT&>())
     .def(py::init<CT&, CT&>())
     .def(py::init<CT&, CT&, CT&>())
@@ -120,9 +121,12 @@ py::class_<typename PT::Type> bind_polynomial(py::module_&m, const char* name) {
     .def(CT() * py::self)
     .def(py::self *= py::self)
     .def("__getitem__", &P::operator[], Copy_const_reference())
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
+
+  add_insertion(c, "__str__");
+  add_insertion(c, "__repr__");
+
+  return c;
 }
 
 template<typename PT>
@@ -149,8 +153,8 @@ py::object export_arr_algebraic_segment_traits() {
   using AR1 = Algebraic_kernel_d_2::Algebraic_real_1;
   using GT = CGAL::Arr_algebraic_segment_traits_2<Integer>;
 
-  py::class_<aos2::Integer>("Integer")
-    .def(py::init<>())
+  py::class_<aos2::Integer> integer_co("Integer");
+  integer_co.def(py::init<>())
     .def(py::init<int>())
     .def("value", &aos2::Integer::longValue)
     .def(py::self + py::self)
@@ -158,12 +162,13 @@ py::object export_arr_algebraic_segment_traits() {
     .def(py::self - py::self)
     .def(py::self -= py::self)
     .def(py::self *= py::self)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
-  py::class_<aos2::Algebraic_real_1>("Algebraic_real_1")
-    .def(py::init<>())
+  add_insertion(integer_co, "__str__");
+  add_insertion(integer_co, "__repr__");
+
+  py::class_<aos2::Algebraic_real_1> ar1_co("Algebraic_real_1");
+  ar1_co.def(py::init<>())
     .def(py::init<AR1&>())
     .def(py::init<int>())
     .def(py::init<AR1::Rational&>())
@@ -191,21 +196,23 @@ py::object export_arr_algebraic_segment_traits() {
     .def(py::self > py::self)
     .def(py::self <= py::self)
     .def(py::self >= py::self)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
-  py::class_<aos2::Bound>("Bound")
-    .def(py::init<>())
+  add_insertion(ar1_co, "__str__");
+  add_insertion(ar1_co, "__repr__");
+
+  py::class_<aos2::Bound> bound_co("Bound");
+  bound_co.def(py::init<>())
     .def("value", &aos2::Bound::longValue)
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
     .def(py::self -= py::self)
     .def(py::self *= py::self)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
+
+  add_insertion(bound_co, "__str__");
+  add_insertion(bound_co, "__repr__");
 
   //bind_construct_polynomial<PT_1>("Construct_polynomial_1");
   //bind_construct_polynomial<PT_2>("Construct_polynomial_2");
@@ -237,8 +244,7 @@ py::object export_arr_algebraic_segment_traits() {
     ;
 
   auto& p2_co = *(concepts.m_basic_traits_classes.m_point_2);
-  p2_co
-    .def("curve", &aos2::Point_2::curve)
+  p2_co.def("curve", &aos2::Point_2::curve)
     .def("arcno", &aos2::Point_2::arcno)
     .def("to_double", &to_double)
     .def(py::self == py::self)
@@ -248,9 +254,10 @@ py::object export_arr_algebraic_segment_traits() {
     .def(py::self > py::self)
     .def(py::self <= py::self)
     .def(py::self >= py::self)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
+
+  add_insertion(p2_co, "__str__");
+  add_insertion(p2_co, "__repr__");
 
   auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
   xcv_co

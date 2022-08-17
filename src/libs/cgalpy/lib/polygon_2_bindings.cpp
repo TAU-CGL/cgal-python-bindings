@@ -14,6 +14,7 @@
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -65,8 +66,8 @@ CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
 void export_polygon_2(py::module_& m) {
   using Polygon_2 = pol2::Polygon_2;
 
-  py::class_<Polygon_2>(m, "Polygon_2")
-    .def(py::init<>())
+  py::class_<Polygon_2> c(m, "Polygon_2");
+  c.def(py::init<>())
     .def(py::init<const Polygon_2&>())
     // .def("__init__", make_constructor(&pol2::init_from_list)) NB
     .def("__init__", &pol2::init_from_list)
@@ -104,11 +105,12 @@ void export_polygon_2(py::module_& m) {
     .def("edge", &Polygon_2::edge)
     .def("clear", &Polygon_2::clear)
     .def("reverse_orientation", &Polygon_2::reverse_orientation)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     .def(py::self == py::self)
     .def(py::self != py::self)
     ;
+
+  add_insertion(c, "__str__");
+  add_insertion(c, "__repr__");
 
   // bind_copy_iterator<CopyIterator<Polygon_2::Edge_const_iterator>>("Polygon_edges_iterator"); NB
 }

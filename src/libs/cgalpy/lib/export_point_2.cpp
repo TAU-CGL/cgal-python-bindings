@@ -9,13 +9,15 @@
 
 #define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
+#include "CGALPY/add_insertion.hpp"
 
-namespace bp = boost::python;
+namespace bp = nanobind;
 
 // Determine whether the dD kernel is an an EPEC type.
 // An EPEC type has a non trivial FT
@@ -25,9 +27,9 @@ constexpr bool is_epec_type() {
           (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ));
 }
 
-void export_point_2() {
-  bp::class_<Point_2>("Point_2")
-    .def(bp::init<>())
+void export_point_2(py::module_& m) {
+  bp::class_<Point_2> p_co(m, "Point_2");
+  p_co.def(bp::init<>())
     .def(bp::init<double, double>())
     .def(bp::init<FT&, FT&>())
     .def(bp::init<RT&, RT&>())
@@ -46,8 +48,6 @@ void export_point_2() {
     .def("coordinates", bp::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end))
 #endif
     .def("dimension", &Point_2::dimension)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
     .def(bp::self == bp::self)
     .def(bp::self != bp::self)
     .def(bp::self > bp::self)
@@ -59,7 +59,10 @@ void export_point_2() {
     .def(bp::self -= Vector_2())
     .def(bp::self + Vector_2())
     .def(bp::self - Vector_2())
-    .setattr("__hash__", &hash_rational_point<is_epec_type(), Point_2>)
-    .setattr("__doc__", "Point_2")
+    // .setattr("__hash__", &hash_rational_point<is_epec_type(), Point_2>) NB
+    // .setattr("__doc__", "Point_2") NB
     ;
+
+  add_insertion(p_co, "__str__");
+  add_insertion(p_co, "__repr__");
 }

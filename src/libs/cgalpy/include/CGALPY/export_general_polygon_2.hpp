@@ -12,6 +12,7 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/add_class_object.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -28,8 +29,9 @@ void export_general_polygon_2(Parent& parent, py::class_<Type>*& co) {
   co->def("bbox", &Type::bbox);
   co->def("clear", &Type::clear);
   co->def("reverse_orientation", &Type::reverse_orientation);
-  // co->def(py::self_ns::str(py::self_ns::self)); NB
-  // co->def(py::self_ns::repr(py::self_ns::self)); NB
+
+  add_insertion(*co, "__str__");
+  add_insertion(*co, "__repr__");
 }
 
 #endif

@@ -28,6 +28,7 @@
 #include "CGALPY/aos_2_concepts/Aos_open_boundary_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -58,8 +59,7 @@ py::object export_arr_linear_traits(py::module_& m) {
   export_AosOpenBoundaryTraits_2<GT, Copy_const_reference>(traits, concepts);
 
   auto& cv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
-  cv_co
-    .def(py::init<Segment_2&>())
+  cv_co.def(py::init<Segment_2&>())
     .def(py::init<Ray_2&>())
     .def(py::init<Line_2&>())
     .def("source", &Curve_2::source)
@@ -83,9 +83,10 @@ py::object export_arr_linear_traits(py::module_& m) {
     .def("is_in_y_range", &Curve_2::is_in_y_range)
     .def("is_degenerate", &Curve_2::is_degenerate)
     .def("bbox", &Curve_2::bbox)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
+
+  add_insertion(cv_co, "__str__");
+  add_insertion(cv_co, "__repr__");
 
   return traits;
 }

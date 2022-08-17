@@ -19,6 +19,7 @@
 #include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -29,8 +30,8 @@ static double coordNT_to_double(CoordNT& c) { return CGAL::to_double(c); }
 py::object export_arr_circle_segment_traits(py::module_& m) {
   using GT = CGAL::Arr_circle_segment_traits_2<Kernel>;
 
-  py::class_<CoordNT>(m, "CoordNT")
-    .def(py::init<>())
+  py::class_<CoordNT> cnt_co(m, "CoordNT");
+  cnt_co.def(py::init<>())
     .def(py::init<CoordNT&>())
     .def(py::init<int&>())
     .def(py::init<CoordNT::NT&>())
@@ -61,9 +62,10 @@ py::object export_arr_circle_segment_traits(py::module_& m) {
     .def(py::self *= py::self)
     .def(py::self / py::self)
     .def(py::self /= py::self)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
+
+  add_insertion(cnt_co, "__str__");
+  add_insertion(cnt_co, "__repr__");
 
   py::class_<GT> traits_co(m, "Arr_circle_segment_traits_2");
   traits_co.def(py::init<>());
@@ -78,8 +80,7 @@ py::object export_arr_circle_segment_traits(py::module_& m) {
   export_AosDirectionalXMonotoneTraits_2<GT>(traits_co, concepts);
 
   auto& p2_co = *(concepts.m_basic_traits_classes.m_point_2);
-  p2_co
-    .def(py::init<FT&, FT&>())
+  p2_co.def(py::init<FT&, FT&>())
     .def(py::init<CoordNT&, CoordNT&>())
     .def(py::init<int, int>())
     .def("x", &aos2::Point_2::x)
@@ -87,9 +88,10 @@ py::object export_arr_circle_segment_traits(py::module_& m) {
     .def(py::self == py::self)
     .def(py::self != py::self)
     // .setattr("__hash__", py::object()) NB
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
+
+  add_insertion(p2_co, "__str__");
+  add_insertion(p2_co, "__repr__");
 
   auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
   xcv_co
@@ -107,9 +109,10 @@ py::object export_arr_circle_segment_traits(py::module_& m) {
     .def("supporting_line", &aos2::X_monotone_curve_2::supporting_line)
     .def("supporting_circle", &aos2::X_monotone_curve_2::supporting_circle)
     .def("bbox", &aos2::X_monotone_curve_2::bbox)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
+
+  add_insertion(xcv_co, "__str__");
+  add_insertion(xcv_co, "__repr__");
 
   auto& cv_co = *(concepts.m_traits_classes.m_curve_2);
   cv_co
