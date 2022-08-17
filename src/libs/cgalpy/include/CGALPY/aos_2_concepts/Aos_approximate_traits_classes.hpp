@@ -16,8 +16,16 @@ namespace py = nanobind;
 
 template <typename T>
 struct Aos_approximate_traits_classes {
-  typedef typename T::Approximate_2             Approximate_2;
+  using Approximate_2 = typename T::Approximate_2;
 
+  // Constructor
+  Aos_approximate_traits_classes() : m_approximate_2(nullptr) {}
+
+  // Destructor
+  ~Aos_approximate_traits_classes()
+  { if (m_approximate_2) delete m_approximate_2; }
+
+  // Class objects
   py::class_<Approximate_2>* m_approximate_2;
 };
 
