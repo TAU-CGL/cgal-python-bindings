@@ -28,6 +28,17 @@ Point_2& bottom_vertex(Polygon_2& P) { return *(P.bottom_vertex()); }
 //   return new Polygon_2(begin, end);
 // }
 
+void init_from_list(Polygon_2& pgn, py::list& lst) {
+  // auto begin = py::stl_input_iterator<Point_2>(lst);
+  // auto end = py::stl_input_iterator<Point_2>();
+  new (&pgn) Polygon_2();
+  for (auto it = lst.begin(); it != lst.end(); ++it) {
+    const Point_2& p = py::cast<const Point_2&>(*it);
+    std::cout << "p:" << p << std::endl;
+    pgn.push_back(p);
+  }
+}
+
 CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
   return new CopyIterator<Polygon_2::Edge_const_iterator>(P.edges_begin(), P.edges_end());
 }
@@ -35,12 +46,13 @@ CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
 }
 
 void export_polygon_2(py::module_& m) {
-  typedef pol2::Polygon_2               Polygon_2;
+  using Polygon_2 = pol2::Polygon_2;
 
   py::class_<Polygon_2>(m, "Polygon_2")
     .def(py::init<>())
     .def(py::init<const Polygon_2&>())
     // .def("__init__", make_constructor(&pol2::init_from_list)) NB
+    .def("__init__", &pol2::init_from_list)
     .def("push_back", &Polygon_2::push_back)
     .def("is_simple", &Polygon_2::is_simple)
     .def("is_convex", &Polygon_2::is_convex)
