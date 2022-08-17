@@ -20,6 +20,7 @@
 #include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -66,8 +67,7 @@ py::object export_arr_conic_traits(py::module_& m) {
 
   auto& cv_co = *(concepts.m_traits_classes.m_curve_2);
   //TODO add constructors
-  cv_co
-    .def(py::init<double, double, double, double, double, double>())
+  cv_co.def(py::init<double, double, double, double, double, double>())
     .def(py::init<double, double, double, double, double, double,
          CGAL::Orientation, const GT::Point_2&, const GT::Point_2&>())
     .def(py::init<const Rational&, const Rational&, const Rational&,
@@ -91,9 +91,10 @@ py::object export_arr_conic_traits(py::module_& m) {
     .def("u", &Curve_2::u)
     .def("v", &Curve_2::v)
     .def("w", &Curve_2::w)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
 
-    return traits;
+  add_insertion(cv_co, "__str__");
+  add_insertion(cv_co, "__repr__");
+
+  return traits;
 }

@@ -14,6 +14,7 @@
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/export_ft.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -103,15 +104,13 @@ void export_kernel_d(py::module_& m) {
   else py::scope().attr("FT") = py::handle<>(reg_ftd->m_class_object);
 #endif
 
-  py::class_<Point_d>(m, "Point_d")
-    .def(py::init<>())
+  py::class_<Point_d> pd_co(m, "Point_d");
+  pd_co.def(py::init<>())
     .def("__init__", py::make_constructor(&init_point_d))
     .def("dimension", &Point_d::dimension)
     .def("cartesian", &Point_d::cartesian, Kernel_d_return_value_policy())
     .def("__getitem__", &Point_d::operator[], Kernel_d_return_value_policy())
     .def("coordinates", py::range<>(&Point_d::cartesian_begin, &Point_d::cartesian_end))
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
     .def(py::self == py::self)
     .def(py::self != py::self)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
@@ -123,8 +122,11 @@ void export_kernel_d(py::module_& m) {
     .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Point_d>)
     ;
 
-  py::class_<Segment_d>(m, "Segment_d")
-    .def(py::init<Point_d&, Point_d&>())
+  add_insertion(pd_co, "__str__");
+  add_insertion(pd_co, "__repr__");
+
+  py::class_<Segment_d> sd_co(m, "Segment_d");
+  sd_co.def(py::init<Point_d&, Point_d&>())
     .def("source", &Segment_d::source, Kernel_d_return_value_policy())
     .def("target", &Segment_d::target, Kernel_d_return_value_policy())
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
@@ -142,13 +144,14 @@ void export_kernel_d(py::module_& m) {
     .def("direction", &Segment_d::direction)
     .def("has_on", &Segment_d::has_on)
     .def("is_degenerate", &Segment_d::is_degenerate)
-    .def(py::self_ns::str(py::self_ns::self))
-    .def(py::self_ns::repr(py::self_ns::self))
     .def(py::self == py::self)
     .def(py::self != py::self)
 #endif
     // .setattr("__hash__", &hash<Segment_d>)
     ;
+
+  add_insertion(sd_co, "__str__");
+  add_insertion(sd_co, "__repr__");
 
   bind_do_intersect_d(m);
 }

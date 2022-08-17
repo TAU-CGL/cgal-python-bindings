@@ -7,18 +7,18 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
+#include "CGALPY/add_insertion.hpp"
 
-namespace bp = boost::python;
+namespace bp = nanobind;
 
-void export_vector_2() {
-  bp::class_<Vector_2>("Vector_2")
-    .def(bp::init<Point_2&, Point_2&>())
+void export_vector_2(py::module_& m) {
+  bp::class_<Vector_2> v_co(m, "Vector_2");
+  v_co.def(bp::init<Point_2&, Point_2&>())
     .def(bp::init<Line_2>())
     .def(bp::init<Ray_2>())
     .def(bp::init<Segment_2>())
@@ -42,8 +42,6 @@ void export_vector_2() {
     .def("direction", &Vector_2::direction)
     .def("transform", &Vector_2::transform)
     .def("perpendicular", &Vector_2::perpendicular)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
     .def(bp::self == bp::self)
     .def(bp::self != bp::self)
     .def(bp::self != bp::self)
@@ -65,4 +63,7 @@ void export_vector_2() {
     .def(bp::self /= FT())
     //.setattr("__hash__", &hash<Vector_2>)
     ;
+
+  add_insertion(v_co, "__str__");
+  add_insertion(v_co, "__repr__");
 }

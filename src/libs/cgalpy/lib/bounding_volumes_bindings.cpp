@@ -9,11 +9,12 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/bounding_volumes_config.hpp"
-#include "CGALPY/kernel_types.hpp"
-
 #include <CGAL/Min_circle_2.h>
 #include <CGAL/Min_circle_2_traits_2.h>
+
+#include "CGALPY/bounding_volumes_config.hpp"
+#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -34,8 +35,8 @@ void insert_list(Min_circle_2& mc, py::list& lst) {
 }
 
 void export_bounding_volumes(py::module_& m) {
-  py::class_<Optimisation_circle_2>(m, "Optimization_circle_2")
-    .def(py::init<>())
+  py::class_<Optimisation_circle_2> oc_co(m, "Optimization_circle_2");
+  oc_co.def(py::init<>())
     .def<void (Optimisation_circle_2::*) (void)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&, const Point_2&)>("set", &Optimisation_circle_2::set)
@@ -47,9 +48,10 @@ void export_bounding_volumes(py::module_& m) {
     .def("is_degenerate", &Optimisation_circle_2::is_degenerate)
     .def(py::self == py::self)
     .def(py::self != py::self)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
     ;
+
+  add_insertion(oc_co, "__str__");
+  add_insertion(oc_co, "__repr__");
 
   py::class_<Min_circle_2, boost::noncopyable>(m, "Min_circle_2")
     .def(py::init<>())

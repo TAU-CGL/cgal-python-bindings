@@ -21,6 +21,7 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/Arr_overlay_traits.hpp"
 #include "CGALPY/Arr_overlay_function_traits.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 void export_vertex(py::class_<aos2::Arrangement_on_surface_2>&);
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>&);
@@ -382,16 +383,15 @@ void export_aos(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("number_of_vertices", &Aos::number_of_vertices)
     .def("assign", &aos2::assign<Aos>)
     .def("clear", &Aos::clear)
+    ;
 
     // supported only by some traits
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
+  add_insertion(c, "__str__");
+  add_insertion(c, "__repr__");
 #endif
-
-    ;
 }
 
 // Overlay traits

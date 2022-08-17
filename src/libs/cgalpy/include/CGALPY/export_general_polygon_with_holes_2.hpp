@@ -15,6 +15,7 @@
 
 #include "CGALPY/if_.hpp"
 #include "CGALPY/add_class_object.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -68,8 +69,9 @@ void export_general_polygon_with_holes_2(Parent& parent, py::class_<Type>*& co) 
   // co->def("holes", py::range<py::return_internal_reference<>>
   //         (&holes_begin<Type>, &holes_end<Type>)); NB
   co->def("number_of_holes", &Type::number_of_holes);
-  // co->def(py::self_ns::str(py::self_ns::self)); NB
-  // co->def(py::self_ns::repr(py::self_ns::self)); NB
+
+  add_insertion(*co, "__str__");
+  add_insertion(*co, "__repr__");
 }
 
 #endif

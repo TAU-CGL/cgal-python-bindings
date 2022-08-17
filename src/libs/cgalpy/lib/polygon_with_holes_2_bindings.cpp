@@ -12,6 +12,7 @@
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -38,8 +39,8 @@ void export_polygon_with_holes_2(py::module_& m) {
   using Polygon_2 = pol2::Polygon_2;
   using Polygon_with_holes_2 = pol2::Polygon_with_holes_2;
 
-  py::class_<Polygon_with_holes_2>(m, "Polygon_with_holes_2")
-    .def(py::init<>())
+  py::class_<Polygon_with_holes_2> c(m, "Polygon_with_holes_2");
+  c.def(py::init<>())
     .def(py::init<Polygon_2&>())
     // .def("__init__", make_constructor(&pol2::init_polygon_with_holes_2)) NB
     .def("is_unbounded", &Polygon_with_holes_2::is_unbounded)
@@ -64,4 +65,7 @@ void export_polygon_with_holes_2(py::module_& m) {
     .def(py::self == py::self)
     .def(py::self != py::self)
     ;
+
+  add_insertion(c, "__str__");
+  add_insertion(c, "__repr__");
 }

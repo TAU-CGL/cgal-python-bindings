@@ -27,6 +27,7 @@
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -55,8 +56,7 @@ py::object export_arr_segment_traits(py::module_& m) {
     ;
 
   auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
-  xcv_co
-    .def(py::init<Segment_2&>())
+  xcv_co.def(py::init<Segment_2&>())
     .def(py::init<aos2::Point_2&, aos2::Point_2&>())
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
     .def("source", &aos2::X_monotone_curve_2::source)
@@ -76,9 +76,10 @@ py::object export_arr_segment_traits(py::module_& m) {
 
     .def("bbox", &aos2::X_monotone_curve_2::bbox)
     .def("segment", &aos2::to_segment)
-    // .def(py::self_ns::str(py::self_ns::self)) NB
-    // .def(py::self_ns::repr(py::self_ns::self)) NB
   ;
+
+  add_insertion(xcv_co, "__str__");
+  add_insertion(xcv_co, "__repr__");
 
   py::class_<GT::Is_in_x_range_2>(m, "Is_in_x_range_2")
     .def("__call__", &GT::Is_in_x_range_2::operator());
