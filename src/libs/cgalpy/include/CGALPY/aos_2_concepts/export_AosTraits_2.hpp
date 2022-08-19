@@ -15,7 +15,7 @@
 #include "CGALPY/aos_2_concepts/export_AosXMonotoneTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 
-#include "CGALPY/add_class_object.hpp"
+#include "CGALPY/add_attr.hpp"
 
 namespace py = nanobind;
 
@@ -53,13 +53,16 @@ void export_AosTraits_2(C& c, Concepts& concepts) {
 
   auto& classes = concepts.m_traits_classes;
 
-  static const char curve_2[] = "Curve_2";
-  add_class_object<Curve_2, curve_2>(c, classes.m_curve_2);
+  if (! add_attr<Curve_2>("Curve_2", c)) {
+    classes.m_curve_2 = new py::class_<Curve_2>(c, "Curve_2");
+  }
 
-  classes.m_make_x_monotone_2 =
-    new py::class_<Make_x_monotone_2>(c, "Make_x_monotone_2");
-  classes.m_make_x_monotone_2->def("__call__",
-                                   &export_Make_x_monotone_2_call_operator<T>);
+  if (! add_attr<Make_x_monotone_2>("Make_x_monotone_2", c)) {
+    classes.m_make_x_monotone_2 =
+      new py::class_<Make_x_monotone_2>(c, "Make_x_monotone_2");
+    classes.m_make_x_monotone_2->def("__call__",
+                                     &export_Make_x_monotone_2_call_operator<T>);
+  }
 
   c.def("make_x_monotone_2_object", &T::make_x_monotone_2_object);
 

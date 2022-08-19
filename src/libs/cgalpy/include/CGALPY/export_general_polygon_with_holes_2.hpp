@@ -14,7 +14,6 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/if_.hpp"
-#include "CGALPY/add_class_object.hpp"
 #include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
