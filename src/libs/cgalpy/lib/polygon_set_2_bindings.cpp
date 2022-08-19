@@ -14,14 +14,9 @@
 #include "CGALPY/types.hpp"
 #include "CGALPY/polygon_set_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
-#include "CGALPY/add_attr.hpp"
 #include "CGALPY/append_iterator.hpp"
 
 namespace py = nanobind;
-
-namespace bso2 {
-
-}
 
 void export_polygon_set_2(py::module_& m) {
   using Gps2 = bso2::General_polygon_set_2;
@@ -29,7 +24,6 @@ void export_polygon_set_2(py::module_& m) {
   using GT = bso2::Geometry_traits_2;
   using Pgn = bso2::General_polygon_2;
   using Pwh = bso2::General_polygon_with_holes_2;
-  using Arrangement_2 = bso2::Arrangement_2;
 
   py::class_<Ps2, Gps2> ps2_co(m, "Polygon_set_2");
   ps2_co.def(py::init<>())
