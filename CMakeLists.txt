@@ -4,6 +4,11 @@ if(POLICY CMP0011)
 endif()
 project(cgalpy VERSION "1.0.0" LANGUAGES CXX)
 
+# Support for vcpkg
+if(CMAKE_TOOLCHAIN_FILE)
+    include(${CMAKE_TOOLCHAIN_FILE})
+endif(CMAKE_TOOLCHAIN_FILE)
+
 # General
 set(CGALPY_PROJECT_AUTHORS "Nir Goren and Efi Fogel")
 set(CGALPY_PROJECT_EMAILS "cgl@tau.ac.il")
