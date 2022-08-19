@@ -45,33 +45,32 @@ template <typename GeneralPolygonWithHoles_2>
 typename GeneralPolygonWithHoles_2::Hole_iterator
 holes_end(GeneralPolygonWithHoles_2& p) { return p.holes_end(); }
 
-template <typename Type, const char* Name, typename Parent>
-void export_general_polygon_with_holes_2(Parent& parent, py::class_<Type>*& co) {
-  using Polygon_2 = typename target<Type>::type;
+template <typename Type>
+void export_general_polygon_with_holes_2(py::class_<Type>& co) {
+  using Pgn = typename target<Type>::type;
 
-  if (! add_class_object<Type, Name>(parent, co)) return;
-
-  co->def(py::init<Polygon_2&>());
+  co.def(py::init<Type&>());
+  co.def(py::init<Pgn&>());
   // co->def("__init__", make_constructor(&ctr_polygon_with_holes_2<Type>));
-  co->def("is_unbounded", &Type::is_unbounded);
+  co.def("is_unbounded", &Type::is_unbounded);
 
   // Use `py::overload_cast` to cast overloaded functions.
   // 1. As a convention, add the suffix `_mutable` to the mutable version.
   // 2. Wrap the mutable method with the `reference_internal` call policy.
-  // 3. Add the `const_` tag to the overloaded const function, as the overloading
-  //    is based on constness.
-  co->def("outer_boundary_mutable",
-          py::overload_cast<>(&Type::outer_boundary),
-          py::rv_policy::reference_internal);
-  co->def("outer_boundary",
-          py::overload_cast<>(&Type::outer_boundary, py::const_));
+  // 3. Add the `const_` tag to the overloaded const function, as the
+  //    overloading is based on constness.
+  co.def("outer_boundary_mutable",
+         py::overload_cast<>(&Type::outer_boundary),
+         py::rv_policy::reference_internal);
+  co.def("outer_boundary",
+         py::overload_cast<>(&Type::outer_boundary, py::const_));
 
   // co->def("holes", py::range<py::return_internal_reference<>>
   //         (&holes_begin<Type>, &holes_end<Type>)); NB
-  co->def("number_of_holes", &Type::number_of_holes);
+  co.def("number_of_holes", &Type::number_of_holes);
 
-  add_insertion(*co, "__str__");
-  add_insertion(*co, "__repr__");
+  add_insertion(co, "__str__");
+  add_insertion(co, "__repr__");
 }
 
 #endif

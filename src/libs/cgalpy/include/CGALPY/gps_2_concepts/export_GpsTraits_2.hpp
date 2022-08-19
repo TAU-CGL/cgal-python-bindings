@@ -58,14 +58,18 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   auto& classes = concepts.m_traits_classes;
 
   // Polygon_2
-  static const char polygon_2[] = "Polygon_2";
-  export_general_polygon_2<Polygon_2, polygon_2>(c, classes.m_polygon_2);
+  if (! add_attr<Polygon_2>("Polygon_2", c)) {
+    classes.m_polygon_2 = new py::class_<Polygon_2>(c, "Polygon_2");
+    export_general_polygon_2<Polygon_2>(*(classes.m_polygon_2));
+  }
 
   // Polygon_with_holes_2
-  static const char polygon_with_holes_2[] = "Polygon_with_holes_2";
-  export_general_polygon_with_holes_2<Polygon_with_holes_2,
-                                      polygon_with_holes_2>
-    (c, classes.m_polygon_with_holes_2);
+  if (! add_attr<Polygon_with_holes_2>("Polygon_with_holes_2", c)) {
+    classes.m_polygon_with_holes_2 =
+      new py::class_<Polygon_with_holes_2>(c, "Polygon_with_holes_2");
+    export_general_polygon_with_holes_2<Polygon_with_holes_2>
+      (*(classes.m_polygon_with_holes_2));
+  }
 
   // Construct_polygon_2
   classes.m_construct_polygon_2 =

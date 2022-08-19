@@ -171,12 +171,14 @@ void export_boolean_set_operations_2(py::module_& m) {
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
   m.def("connect_holes", &bso2::connect_holes);
 #else
-  static const char pgn[] = "General_polygon_2";
-  py::class_<Pgn>* co_pgn(nullptr);
-  export_general_polygon_2<Pgn, pgn>(m, co_pgn);
 
-  static const char pwh[] = "General_polygon_with_holes_2";
-  py::class_<Pwh>* co_pwh(nullptr);
-  export_general_polygon_with_holes_2<Pwh, pwh>(m, co_pwh);
+  if (add_attr<Pgn>("General_polygon_2", parent)) return;
+  cs_pgn_c = py::class_<Pgn>(m, "General_polygon_2");
+  export_general_polygon_2<CS_pgn>(cs_pgn_c);
+
+  if (add_attr<Pwh>("General_polygon_with_holes_2", parent)) return;
+  cs_pwh_c = py::class_<Pwh>(m, "General_polygon_with_holes_2");
+  export_general_polygon_with_holes_2<Pwh>(cs_pwh_c);
+
 #endif
 }

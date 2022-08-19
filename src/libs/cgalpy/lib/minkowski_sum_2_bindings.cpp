@@ -201,11 +201,11 @@ void export_minkowski_sum_2(py::module_& m) {
   m.def("approximated_offset_2", &ms2::approximated_offset_2_pwh);
   m.def("approximated_inset_2", &ms2::approximated_inset_2);
 
-  static const char pgn[] = "Circle_segment_polygon_2";
-  py::class_<CS_pgn>* co_pgn(nullptr);
-  export_general_polygon_2<CS_pgn, pgn>(m, co_pgn);
+  if (add_attr<CS_pgn>("Circle_segment_polygon_2", parent)) return;
+  cs_pgn_c = py::class_<CS_pgn>(m, "Circle_segment_polygon_2");
+  export_general_polygon_2<CS_pgn>(co_pgn);
 
-  static const char pwh[] = "Circle_segment_polygon_with_holes_2";
-  py::class_<CS_pwh>* co_pwh(nullptr);
-  export_general_polygon_with_holes_2<CS_pwh, pwh>(m, co_pwh);
+  if (add_attr<CS_pwh>("Circle_segment_polygon_with_holes_2", parent)) return;
+  cs_pwh_c = py::class_<CS_pwh>(m, "Circle_segment_polygon_with_holes_2");
+  export_general_polygon_with_holes_2<CS_pwh>(cs_pwh_c);
 }

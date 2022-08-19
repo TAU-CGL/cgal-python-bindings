@@ -11,7 +11,6 @@
 #include <any>
 
 #include <nanobind/nanobind.h>
-#include <boost/assert.hpp>
 
 #include <CGAL/Arr_segment_traits_2.h>
 
