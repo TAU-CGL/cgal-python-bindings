@@ -8,6 +8,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
 
 #include <CGAL/Arr_algebraic_segment_traits_2.h>
 #include <CGAL/Polynomial.h>
@@ -17,6 +18,7 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -84,7 +86,7 @@ void init_polynomial(typename PT::Type& pol, py::list& lst) {
 }
 
 template <typename PT>
-py::class_<typename PT::Type> bind_polynomial(py::module_&m, const char* name) {
+py::class_<typename PT::Type> bind_polynomial(py::module_& m, const char* name) {
   typedef typename PT::Type P;
   typedef typename PT::Coefficient_type CT;
   py::class_<P> c(m, name);
@@ -99,7 +101,7 @@ py::class_<typename PT::Type> bind_polynomial(py::module_&m, const char* name) {
     .def(py::init<CT&, CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
     .def("__init__", &init_polynomial<PT>)
     .def("abs", &P::abs)
-    .def("coefficients", py::range<Copy_const_reference>(&P::begin, &P::end))
+    // .def("coefficients", py::range<Copy_const_reference>(&P::begin, &P::end))
     .def("compare", static_cast<CGAL::Comparison_result (P::*) (const typename P::NT&) const>(&P::compare))
     .def("degree", &P::degree)
     .def("diff", &P::diff)
@@ -121,7 +123,7 @@ py::class_<typename PT::Type> bind_polynomial(py::module_&m, const char* name) {
     .def(int() * py::self)
     .def(CT() * py::self)
     .def(py::self *= py::self)
-    .def("__getitem__", &P::operator[], Copy_const_reference())
+    .def("__getitem__", &P::operator[])
     ;
 
   add_insertion(c, "__str__");
@@ -149,12 +151,12 @@ py::class_<typename PT::Swap> bind_swap(py::module_& m, const char* name) {
 template<typename T>
 T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 
-py::object export_arr_algebraic_segment_traits() {
+py::object export_arr_algebraic_segment_traits(py::module_& m) {
   using Integer = CORE::BigInt;
-  using AR1 = Algebraic_kernel_d_2::Algebraic_real_1;
   using GT = CGAL::Arr_algebraic_segment_traits_2<Integer>;
+  using AR1 = GT::Algebraic_real_1;
 
-  py::class_<aos2::Integer> integer_co("Integer");
+  py::class_<aos2::Integer> integer_co(m, "Integer");
   integer_co.def(py::init<>())
     .def(py::init<int>())
     .def("value", &aos2::Integer::longValue)
@@ -168,7 +170,7 @@ py::object export_arr_algebraic_segment_traits() {
   add_insertion(integer_co, "__str__");
   add_insertion(integer_co, "__repr__");
 
-  py::class_<aos2::Algebraic_real_1> ar1_co("Algebraic_real_1");
+  py::class_<aos2::Algebraic_real_1> ar1_co(m, "Algebraic_real_1");
   ar1_co.def(py::init<>())
     .def(py::init<AR1&>())
     .def(py::init<int>())
@@ -181,7 +183,7 @@ py::object export_arr_algebraic_segment_traits() {
     .def("is_rational", &AR1::is_rational)
     .def("is_root_of", &AR1::is_root_of)
     .def("low", &AR1::low)
-    .def("polynomial", &AR1::polynomial, Copy_const_reference())
+    .def("polynomial", &AR1::polynomial)
     .def("rational", &AR1::rational)
     .def("rational_between", &AR1::rational_between)
     .def("refine", &AR1::refine)
@@ -202,7 +204,7 @@ py::object export_arr_algebraic_segment_traits() {
   add_insertion(ar1_co, "__str__");
   add_insertion(ar1_co, "__repr__");
 
-  py::class_<aos2::Bound> bound_co("Bound");
+  py::class_<aos2::Bound> bound_co(m, "Bound");
   bound_co.def(py::init<>())
     .def("value", &aos2::Bound::longValue)
     .def(py::self + py::self)
@@ -237,7 +239,7 @@ py::object export_arr_algebraic_segment_traits() {
     Aos_traits_classes<GT> m_traits_classes;
   };
   Concepts concepts;
-  export_AosTraits_2<GT, Return_by_value>(traits, concepts);
+  export_AosTraits_2<GT>(traits, concepts);
   traits
     .def("construct_curve_2_object", &GT::construct_curve_2_object)
     .def("construct_tpoint_2_object", &GT::construct_point_2_object)
@@ -261,18 +263,16 @@ py::object export_arr_algebraic_segment_traits() {
   add_insertion(p2_co, "__repr__");
 
   auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
-  xcv_co
-    .def("curve", &aos2::X_monotone_curve_2::curve)
+  xcv_co.def("curve", &aos2::X_monotone_curve_2::curve)
     .def("is_vertical", &aos2::X_monotone_curve_2::is_vertical)
     .def("is_finite", &aos2::X_monotone_curve_2::is_finite)
     .def("curve_end", &aos2::X_monotone_curve_2::curve_end)
     .def<int (aos2::X_monotone_curve_2::*)() const>("arcno", &aos2::X_monotone_curve_2::arcno)
-    .def("x", &aos2::X_monotone_curve_2::x, Copy_const_reference())
+    .def("x", &aos2::X_monotone_curve_2::x)
     ;
 
   auto& cv_co = *(concepts.m_traits_classes.m_curve_2);
-  cv_co
-    .def("polynomial_2", &aos2::Curve_2::polynomial_2)
+  cv_co.def("polynomial_2", &aos2::Curve_2::polynomial_2)
     ;
 
   py::class_<aos2::Construct_curve_2>(m, "Construct_curve_2")

@@ -15,31 +15,33 @@
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
 #include "CGALPY/export_general_polygon_2.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 
-// namespace bso2 {
+namespace bso2 {
 
 // template <typename T>
-//! This is completely messed up. The constructor should return a Polygon_2.
-// If it is just for initializing, then it's redundant!
-// void export_ctr_gp_2_op(typename T::Construct_polygon_2 m,
-//                         py::list& curves, typename T::Polygon_2& pgn) {
-//   auto begin = py::stl_input_iterator<typename T::X_monotone_curve_2>(curves);
-//   auto end = py::stl_input_iterator<typename T::X_monotone_curve_2>();
-//   return m(begin, end, pgn);
+// typename T::Polygon_2
+// export_ctr_gp_2_op(const typename T::Construct_polygon_2& ctr,
+//                    py::list& curves) {
+//   using Pgn = typename T::Polygon_2;
+
+//   auto begin = stl_input_iterator<typename T::X_monotone_curve_2>(curves);
+//   auto end = stl_input_iterator<typename T::X_monotone_curve_2>(curves, false);
+//   return ctr(begin, end);
 // }
 
-// template <typename T>
-// typename T::Polygon_with_holes_2
-// export_ctr_gpwh_2_op(typename T::Construct_general_polygon_with_holes_2 m,
-//                      const typename T::Polygon_2& boundary, py::list& holes) {
-//   auto begin = py::stl_input_iterator<typename T::Polygon_2>(holes);
-//   auto end = py::stl_input_iterator<typename T::Polygon_2>();
-//   return m(boundary, begin, end);
-// }
+template <typename T>
+typename T::Polygon_with_holes_2
+export_ctr_gpwh_2_op(const typename T::Construct_general_polygon_with_holes_2 ctr,
+                     const typename T::Polygon_2& boundary, py::list& holes) {
+  auto begin = stl_input_iterator<typename T::Polygon_2>(holes);
+  auto end = stl_input_iterator<typename T::Polygon_2>(holes, false);
+  return ctr(boundary, begin, end);
+}
 
-// }
+}
 
 template <typename T, typename C, typename Concepts>
 void export_GpsTraits_2(C& c, Concepts& concepts) {
@@ -74,18 +76,17 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   // Construct_polygon_2
   classes.m_construct_polygon_2 =
     new py::class_<Construct_polygon_2>(c, "Construct_polygon_2");
-  // classes.m_construct_polygon_2->def("__call__", &bso2::export_ctr_gp_2_op<T>); NB
+  // classes.m_construct_polygon_2->def("__call__", &bso2::export_ctr_gp_2_op<T>);
 
   // Construct_polygon_with_holes_2
   classes.m_construct_polygon_with_holes_2 =
     new py::class_<Construct_polygon_with_holes_2>
     (c, "Construct_polygon_with_holes_2");
-  using Ctr_gpwh1 =
-    Polygon_with_holes_2(Construct_polygon_with_holes_2::*)
-    (const Polygon_2&) const;
-  classes.m_construct_polygon_with_holes_2->
-    def("__call__", static_cast<Ctr_gpwh1>
-        (&Construct_polygon_with_holes_2::operator()));
+  // using Ctr_gpwh1 = Polygon_with_holes_2(Construct_polygon_with_holes_2::*)
+  //   (const Polygon_2&) const;
+  // classes.m_cons  truct_polygon_with_holes_2->
+  //   def("__call__", static_cast<Ctr_gpwh1>
+  //       (&Construct_polygon_with_holes_2::operator()));
   // classes.m_construct_polygon_with_holes_2->
   //   def("__call__", &bso2::export_ctr_gpwh_2_op<T>); NB
 

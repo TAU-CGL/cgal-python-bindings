@@ -15,6 +15,7 @@
 #include "CGALPY/general_polygon_set_2_types.hpp"
 #include "CGALPY/gps_2_concepts/export_GpsTraits_2.hpp"
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -59,8 +60,8 @@ py::object export_gps_traits(py::module_& m) {
   auto* tco = concepts.m_traits_classes.m_polygon_2;
   if (tco) {
     tco->def("__init__", &bso2::init_polygon_2<GT>);
-    tco->def("curves", py::range<py::return_internal_reference<>>
-             (&bso2::curves_begin<GT>, &bso2::curves_end<GT>));
+    // tco->def("curves", py::range<py::return_internal_reference<>>
+    //          (&bso2::curves_begin<GT>, &bso2::curves_end<GT>));
   }
   return traits;
 }
