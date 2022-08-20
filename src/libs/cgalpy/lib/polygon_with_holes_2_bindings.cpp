@@ -18,11 +18,12 @@ namespace py = nanobind;
 
 namespace pol2 {
 
-// Polygon_with_holes_2* init_polygon_with_holes_2(Polygon_2& p, py::list& lst) {
-//   auto begin = py::stl_input_iterator< Polygon_2 >(lst);
-//   auto end = py::stl_input_iterator< Polygon_2 >();
-//   return new Polygon_with_holes_2(p, begin, end);
-// }
+  void init_polygon_with_holes_2(Polygon_with_holes_2& pwh, Polygon_2& p,
+                                 py::list& lst) {
+  auto begin = stl_input_iterator<Polygon_2>(lst);
+  auto end = stl_input_iterator<Polygon_2>();
+  new (&pwh) Polygon_with_holes_2(p, begin, end);
+}
 
 Polygon_with_holes_2::Hole_const_iterator holes_begin(Polygon_with_holes_2& p)
 { return p.holes_begin(); }
@@ -42,7 +43,7 @@ void export_polygon_with_holes_2(py::module_& m) {
   py::class_<Polygon_with_holes_2> c(m, "Polygon_with_holes_2");
   c.def(py::init<>())
     .def(py::init<Polygon_2&>())
-    // .def("__init__", make_constructor(&pol2::init_polygon_with_holes_2)) NB
+    .def("__init__", &pol2::init_polygon_with_holes_2)
     .def("is_unbounded", &Polygon_with_holes_2::is_unbounded)
 
     // Use `py::overload_cast` to cast overloaded functions.

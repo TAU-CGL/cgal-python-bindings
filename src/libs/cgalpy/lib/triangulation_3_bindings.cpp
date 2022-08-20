@@ -18,10 +18,10 @@ namespace tri3 {
 
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 
-tri3::Triangulation_3* dt3_init(py::list& lst) {
-  auto begin = py::stl_input_iterator<tri3::Point>(lst);
-  auto end = py::stl_input_iterator<tri3::Point>();
-  return new tri3::Triangulation_3(begin, end);
+  void dt3_init(tri3::Triangulation_3& tri, py::list& lst) {
+  auto begin = stl_input_iterator<tri3::Point>(lst);
+  auto end = stl_input_iterator<tri3::Point>(lst, false);
+  new (&tri) tri3::Triangulation_3(begin, end);
 }
 
 std::ptrdiff_t insert_points(tri3::Triangulation_3& dt, py::list& lst) {
@@ -102,7 +102,7 @@ void export_triangulation_3() {
     .def(py::init<>())
     .def(py::init<const tri3::Traits&>())
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
-    .def("__init__", py::make_constructor(&tri3::dt3_init))
+    .def("__init__", &tri3::dt3_init)
 #endif
     // Insertion
     .def("insert", insert1)

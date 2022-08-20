@@ -26,15 +26,16 @@ struct target<T, typename if_<false, typename T::Polygon_2>::type> {
   typedef typename T::Polygon_2         type;
 };
 
-// template <typename GeneralPolygonWithHoles_2>
-// GeneralPolygonWithHoles_2*
-// ctr_polygon_with_holes_2(typename target<GeneralPolygonWithHoles_2>::type& p,
-//                          py::list& lst) {
-//   using Polygon_2 = typename target<GeneralPolygonWithHoles_2>::type;
-//   auto begin = py::stl_input_iterator<Polygon_2>(lst);
-//   auto end = py::stl_input_iterator<Polygon_2>();
-//   return new GeneralPolygonWithHoles_2(p, begin, end);
-// }
+template <typename GeneralPolygonWithHoles_2>
+void
+ctr_polygon_with_holes_2(GeneralPolygonWithHoles_2& pwh,
+                         typename target<GeneralPolygonWithHoles_2>::type& p,
+                         py::list& lst) {
+  using Polygon_2 = typename target<GeneralPolygonWithHoles_2>::type;
+  auto begin = stl_input_iterator<Polygon_2>(lst);
+  auto end = stl_input_iterator<Polygon_2>(lst, false);
+  new (&pwh) GeneralPolygonWithHoles_2(p, begin, end);
+}
 
 template <typename GeneralPolygonWithHoles_2>
 typename GeneralPolygonWithHoles_2::Hole_iterator
@@ -50,7 +51,7 @@ void export_general_polygon_with_holes_2(py::class_<Type>& co) {
 
   co.def(py::init<Type&>());
   co.def(py::init<Pgn&>());
-  // co->def("__init__", make_constructor(&ctr_polygon_with_holes_2<Type>));
+  co->def("__init__", &ctr_polygon_with_holes_2<Type>);
   co.def("is_unbounded", &Type::is_unbounded);
 
   // Use `py::overload_cast` to cast overloaded functions.

@@ -19,10 +19,10 @@ namespace py = nanobind;
 
 namespace as2 {
 
-Alpha_shape_2* as_init(py::list& lst) {
-  auto begin = py::stl_input_iterator<Point>(lst);
-  auto end = py::stl_input_iterator<Point>();
-  return new Alpha_shape_2(begin, end);
+void as_init(Alpha_shape_2& as, py::list& lst) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
+  new (&as) Alpha_shape_2(begin, end);
 }
 
 const FT& next(Alpha_iterator it) {
@@ -77,7 +77,7 @@ void export_alpha_shape_2() {
     .def(py::init<py::optional<as2::FT&, as2::Mode>>())
     .def(py::init<Tri2&, py::optional<double, as2::Mode>>())
     .def(py::init<Tri2&, py::optional<as2::FT&, as2::Mode>>())
-    .def("__init__", make_constructor(&as2::as_init))
+    .def("__init__", &as2::as_init)
     .def("clear", &As2::clear)
     .def("set_mode", &As2::set_mode)
     .def("set_alpha", &As2::set_alpha)

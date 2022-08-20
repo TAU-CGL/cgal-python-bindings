@@ -75,11 +75,12 @@ void construct_x_monotone_segment_2_call_operator2(aos2::Construct_x_monotone_se
 //}
 
 template <typename PT>
-typename PT::Type* init_polynomial(py::list& lst) {
+void init_polynomial(typename PT::Type& pol, py::list& lst) {
   typedef typename PT::Type P;
   typedef typename PT::Coefficient_type CT;
-  py::stl_input_iterator<CT> begin(lst), end;
-  return new P(begin, end);
+  auto begin = stl_input_iterator<CT>(lst);
+  auto end = stl_input_iterator<CT>(lst, false);
+  new (&pol) P(begin, end);
 }
 
 template <typename PT>
@@ -96,7 +97,7 @@ py::class_<typename PT::Type> bind_polynomial(py::module_&m, const char* name) {
     .def(py::init<CT&, CT&, CT&, CT&, CT&, CT&>())
     .def(py::init<CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
     .def(py::init<CT&, CT&, CT&, CT&, CT&, CT&, CT&, CT&>())
-    .def("__init__", make_constructor(&init_polynomial<PT>))
+    .def("__init__", &init_polynomial<PT>)
     .def("abs", &P::abs)
     .def("coefficients", py::range<Copy_const_reference>(&P::begin, &P::end))
     .def("compare", static_cast<CGAL::Comparison_result (P::*) (const typename P::NT&) const>(&P::compare))

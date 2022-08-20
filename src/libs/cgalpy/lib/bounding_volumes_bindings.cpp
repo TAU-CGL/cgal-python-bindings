@@ -22,10 +22,10 @@ typedef typename CGAL::Min_circle_2_traits_2<Kernel>     Min_circle_2_traits_2;
 typedef typename Min_circle_2_traits_2::Circle           Optimisation_circle_2;
 typedef typename CGAL::Min_circle_2<Min_circle_2_traits_2> Min_circle_2;
 
-Min_circle_2* init_min_circle_2_from_list(py::list& lst, bool random) {
-  auto begin = py::stl_input_iterator<Point_2>(lst);
-  auto end = py::stl_input_iterator<Point_2>();
-  return new Min_circle_2(begin, end, random);
+void init_min_circle_2_from_list(Min_circle_2& mc, py::list& lst, bool random) {
+  auto begin = stl_input_iterator<Point_2>(lst);
+  auto end = stl_input_iterator<Point_2>(lst, false);
+  new (&mc) Min_circle_2(begin, end, random);
 }
 
 void insert_list(Min_circle_2& mc, py::list& lst) {
@@ -58,7 +58,7 @@ void export_bounding_volumes(py::module_& m) {
     .def(py::init<const Point_2&>())
     .def(py::init<const Point_2&, const Point_2&>())
     .def(py::init<const Point_2&, const Point_2&, const Point_2&>())
-    .def("__init__", make_constructor(&init_min_circle_2_from_list))
+    .def("__init__", &init_min_circle_2_from_list)
     .def("number_of_points", &Min_circle_2::number_of_points)
     .def("number_of_support_points", &Min_circle_2::number_of_support_points)
     .def("points", py::range<py::return_internal_reference<>>(&Min_circle_2::points_begin, &Min_circle_2::points_end))
