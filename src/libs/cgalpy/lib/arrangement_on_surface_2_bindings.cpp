@@ -53,13 +53,17 @@ typedef Arr_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
                                     py::object> Arr_overlay_traits;
 
 // Free functions
+
+//
 Vertex& insert_point_default(Arrangement_2& arr, Point_2& p)
 { return *(CGAL::insert_point(arr, p)); }
 
+//
 template <typename PointLocation>
 Vertex& insert_point(Arrangement_2& arr, Point_2& p, PointLocation& pl)
 { return *(CGAL::insert_point(arr, p, pl)); }
 
+//
 template<typename CurveType>
 void insert_curve(Arrangement_2& arr, CurveType& c) { CGAL::insert(arr, c); }
 
@@ -83,13 +87,16 @@ void insert_curve(Arrangement_2& arr, CurveType& c) { CGAL::insert(arr, c); }
 //   }
 // } NB
 
+//
 Halfedge& insert_non_intersecting_curve_default(Arrangement_2& arr,
                                                 X_monotone_curve_2& c)
 { return *(CGAL::insert_non_intersecting_curve(arr, c)); }
 
+//
 template <typename PointLocation>
 Halfedge& insert_non_intersecting_curve(Arrangement_2& arr,
-                                        X_monotone_curve_2& c, PointLocation& pl)
+                                        X_monotone_curve_2& c,
+                                        PointLocation& pl)
 { return *(CGAL::insert_non_intersecting_curve(arr, c, pl)); }
 
 // void insert_non_intersecting_curves(Arrangement_2& arr, py::list& lst) {
@@ -101,10 +108,12 @@ Halfedge& insert_non_intersecting_curve(Arrangement_2& arr,
 //   CGAL::insert_non_intersecting_curves(arr, v.begin(), v.end());
 // }
 
+//
 template <typename CurveType>
 bool do_intersect_default(Arrangement_2& arr, CurveType& c)
 { return CGAL::do_intersect(arr, c); }
 
+//
 template <typename CurveType, typename PointLocation>
 bool do_intersect(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl)
 { return CGAL::do_intersect(arr, c, pl); }
@@ -122,10 +131,11 @@ Face& remove_edge_free(Arrangement_2& arr, Halfedge& e) {
   return *(CGAL::remove_edge(arr, handle));
 }
 
-bool remove_vertex_free(Arrangement_2& arr, Vertex& v) {
-  return CGAL::remove_vertex(arr, Vertex_iterator(&v));
-}
+//
+bool remove_vertex_free(Arrangement_2& arr, Vertex& v)
+{ return CGAL::remove_vertex(arr, Vertex_iterator(&v)); }
 
+//
 template<typename T1, typename T2>
 void decompose_helper2(const Vertex& vertex, const T1& below,
                        const T2& above, py::list& lst) {
@@ -134,6 +144,7 @@ void decompose_helper2(const Vertex& vertex, const T1& below,
   lst.append(outer);
 }
 
+//
 template<typename T1>
 void decompose_helper1(const Vertex& vertex, const T1& below,
                        const boost::optional<variant>& above, py::list& lst) {
@@ -154,6 +165,7 @@ void decompose_helper1(const Vertex& vertex, const T1& below,
   }
 }
 
+//
 typedef std::pair<Arrangement_2::Vertex_const_handle,
                   std::pair<boost::optional<variant>,
                             boost::optional<variant>>>        Decompose_result;
@@ -180,6 +192,7 @@ void decompose_helper(const Decompose_result& res, py::list& lst) {
   }
 }
 
+//
 py::list decompose(Arrangement_2& arr) {
   py::list lst;
   auto op = [&] (const Decompose_result& res) mutable
@@ -226,29 +239,33 @@ py::list decompose(Arrangement_2& arr) {
 
 // Arrangement methods
 template <typename Aos>
-typename Aos::Halfedge& insert_from_left_vertex(Aos& arr,
-                                                typename Aos::X_monotone_curve_2& c,
-                                                Vertex& v)
+typename Aos::Halfedge&
+insert_from_left_vertex(Aos& arr, typename Aos::X_monotone_curve_2& c,
+                        Vertex& v)
 { return *(arr.insert_from_left_vertex(c,(Vertex_iterator(&v)))); }
 
+//
 template <typename Aos>
-typename Aos::Halfedge& insert_from_right_vertex(Aos& arr,
-                                                 typename Aos::X_monotone_curve_2& c,
-                                                 Vertex& v)
+typename Aos::Halfedge&
+insert_from_right_vertex(Aos& arr, typename Aos::X_monotone_curve_2& c,
+                         Vertex& v)
 { return *(arr.insert_from_right_vertex(c, (Vertex_iterator(&v)))); }
 
+//
 template <typename Aos>
-typename Aos::Halfedge& insert_edge_in_face_interior(Aos& arr,
-                                                     typename Aos::X_monotone_curve_2& c,
-                                                     typename Aos::Face& f)
+typename Aos::Halfedge&
+insert_edge_in_face_interior(Aos& arr, typename Aos::X_monotone_curve_2& c,
+                             typename Aos::Face& f)
 { return *(arr.insert_in_face_interior(c, (Face_iterator(&f)))); }
 
+//
 template <typename Aos>
 typename Aos::Vertex& insert_vertex_in_face_interior(Aos& arr,
                                                      typename Aos::Point_2& p,
                                                      typename Aos::Face& f)
 { return *(arr.insert_in_face_interior(p, (Face_iterator(&f)))); }
 
+//
 template <typename Aos>
 typename Aos::Halfedge& insert_at_vertices(Aos& arr,
                                            typename Aos::X_monotone_curve_2& c,
@@ -258,23 +275,27 @@ typename Aos::Halfedge& insert_at_vertices(Aos& arr,
                                   (Vertex_iterator(&v2))));
 }
 
+//
 template <typename Aos>
 typename Aos::Vertex& modify_vertex(Aos& arr,
                                     typename Aos::Vertex& v,
                                     typename Aos::Point_2& p)
 { return *(arr.modify_vertex(Vertex_iterator(&v), p)); }
 
+//
 template <typename Aos>
 typename Aos::Face& remove_isolated_vertex(Aos& arr,
                                            typename Aos::Vertex& v)
 { return *(arr.remove_isolated_vertex(Vertex_iterator(&v))); }
 
+//
 template <typename Aos>
 typename Aos::Halfedge& modify_edge(Aos& arr,
                                     typename Aos::Halfedge& e,
                                     typename Aos::X_monotone_curve_2& c)
 { return *(arr.modify_edge(Halfedge_iterator(&e), c)); }
 
+//
 template <typename Aos>
 typename Aos::Halfedge& split_edge(Aos& arr,
                                    typename Aos::Halfedge& e,
@@ -282,6 +303,7 @@ typename Aos::Halfedge& split_edge(Aos& arr,
                      X_monotone_curve_2& c2)
 { return *(arr.split_edge(Halfedge_iterator(&e), c1, c2)); }
 
+//
 template <typename Aos>
 typename Aos::Halfedge& merge_edge(Aos& arr,
                                    typename Aos::Halfedge& e1,
@@ -289,6 +311,7 @@ typename Aos::Halfedge& merge_edge(Aos& arr,
                      X_monotone_curve_2& c)
 { return *(arr.merge_edge(Halfedge_iterator(&e1), Halfedge_iterator(&e2), c)); }
 
+//
 template <typename Aos>
 typename Aos::Face& remove_edge(Aos& arr,
                                 typename Aos::Halfedge& e) {
@@ -296,50 +319,63 @@ typename Aos::Face& remove_edge(Aos& arr,
   return *(arr.remove_edge(handle));
 }
 
+//
 template <typename Aos>
 typename Aos::Vertex_iterator vertices_begin(Aos& arr)
 { return arr.vertices_begin(); }
 
+//
 template <typename Aos>
 typename Aos::Vertex_iterator vertices_end(Aos& arr)
 { return arr.vertices_end(); }
 
+//
 template <typename Aos>
 typename Aos::Halfedge_iterator halfedges_begin(Aos& arr)
 { return arr.halfedges_begin(); }
 
+//
 template <typename Aos>
 typename Aos::Halfedge_iterator halfedges_end(Aos& arr)
 { return arr.halfedges_end(); }
 
+//
 template <typename Aos>
 typename Aos::Edge_iterator edges_begin(Aos& arr) { return arr.edges_begin(); }
 
+//
 template <typename Aos>
 typename Aos::Edge_iterator edges_end(Aos& arr) { return arr.edges_end(); }
 
+//
 template <typename Aos>
 typename Aos::Face_iterator faces_begin(Aos& arr) { return arr.faces_begin(); }
 
+//
 template <typename Aos>
 typename Aos::Face_iterator faces_end(Aos& arr) { return arr.faces_end(); }
 
+//
 template <typename Aos>
 typename Aos::Face_iterator unbounded_faces_begin(Aos& arr)
 { return arr.unbounded_faces_begin(); }
 
+//
 template <typename Aos>
 typename Aos::Face_iterator unbounded_faces_end(Aos& arr)
 { return arr.unbounded_faces_end(); }
 
+//
 template <typename Aos>
 typename Aos::Face& unbounded_face(Aos& arr)
 { return *(arr.unbounded_face()); }
 
+//
 template <typename Aos>
 typename Aos::Face& fictitious_face(Aos& arr)
 { return *(arr.fictitious_face()); }
 
+//
 template <typename Aos>
 void assign(Aos& arr, Aos& input_arr) { arr.assign(input_arr); }
 
@@ -422,12 +458,14 @@ void bind_overlay_function_traits(py::module_& m) {
     ;
 }
 
+//
 template <>
 void bind_overlay_function_traits<false, false, false>(py::module_& m) {
   py::class_<aos2::Arr_overlay_function_traits>(m, "Arr_overlay_function_traits")
     .def(py::init<>());
 }
 
+//
 template <>
 void bind_overlay_function_traits<false, false, true>(py::module_& m) {
   py::class_<aos2::Arr_overlay_function_traits>(m, "Arr_overlay_function_traits")
@@ -438,6 +476,7 @@ void bind_overlay_function_traits<false, false, true>(py::module_& m) {
 
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
 
+//
 void export_arr(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Arr = aos2::Arrangement_2;
@@ -454,6 +493,7 @@ void export_arr(py::module_& m) {
 
 #endif
 
+//
 void export_arrangement_on_surface_2(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Arr = aos2::Arrangement_2;
@@ -510,7 +550,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
   auto traits_c = export_arr_conic_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  auto traits_c = export_arr_algebraic_segment_traits();
+  auto traits_c = export_arr_algebraic_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
   auto traits_c = export_arr_geodesic_arc_on_sphere_traits(m);
 #else

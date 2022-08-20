@@ -45,10 +45,10 @@ py::object export_arr_conic_traits(py::module_& m) {
     Aos_directional_x_monotone_traits_classes<GT>
       m_directional_x_monotone_traits_classes;
   } concepts;
-  export_AosTraits_2<GT, Return_by_value>(traits, concepts);
-  export_AosDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits, concepts);
+  export_AosTraits_2<GT>(traits, concepts);
+  export_AosDirectionalXMonotoneTraits_2<GT>(traits, concepts);
 
-  py::class_<GT::Integer>("Integer")
+  py::class_<GT::Integer>(m, "Integer")
     .def(py::init<>())
     .def(py::init<const GT::Integer&>())
     .def(py::init<int>())
@@ -60,8 +60,7 @@ py::object export_arr_conic_traits(py::module_& m) {
     ;
 
   auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
-  xcv_co
-    .def("left", &X_monotone_curve_2::left)
+  xcv_co.def("left", &X_monotone_curve_2::left)
     .def("right", &X_monotone_curve_2::right)
     ;
 

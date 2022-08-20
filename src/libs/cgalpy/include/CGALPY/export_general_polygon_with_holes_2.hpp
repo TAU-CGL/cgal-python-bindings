@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #ifndef CGALPY_EXPORT_GENERAL_POLYGON_WITH_HOLES_2_HPP
 #define CGALPY_EXPORT_GENERAL_POLYGON_WITH_HOLES_2_HPP
@@ -15,6 +16,7 @@
 
 #include "CGALPY/if_.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -51,7 +53,7 @@ void export_general_polygon_with_holes_2(py::class_<Type>& co) {
 
   co.def(py::init<Type&>());
   co.def(py::init<Pgn&>());
-  co->def("__init__", &ctr_polygon_with_holes_2<Type>);
+  co.def("__init__", &ctr_polygon_with_holes_2<Type>);
   co.def("is_unbounded", &Type::is_unbounded);
 
   // Use `py::overload_cast` to cast overloaded functions.

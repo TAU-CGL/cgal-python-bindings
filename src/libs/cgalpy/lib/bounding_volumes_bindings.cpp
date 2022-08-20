@@ -15,6 +15,7 @@
 #include "CGALPY/bounding_volumes_config.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 

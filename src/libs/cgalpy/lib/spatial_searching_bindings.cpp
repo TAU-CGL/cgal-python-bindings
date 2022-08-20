@@ -22,6 +22,7 @@
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/General_distance_nanobind.h"
 #include "CGALPY/append_iterator.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 

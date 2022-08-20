@@ -9,10 +9,11 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/partition_2.h>
+
 #include "CGALPY/polygon_partitioning_types.hpp"
 #include "CGALPY/polygon_2_types.hpp"
-
-#include <CGAL/partition_2.h>
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -42,23 +43,23 @@ void y_monotone_partition_2(Polygon_2& p, py::list& res) {
   for (auto ym_polygon : v) res.append(ym_polygon);
 }
 
-bool partition_is_valid_2(Polygon_2& p, py::list& polygon_lst) {
-  auto begin = py::stl_input_iterator<Polygon_2>(polygon_lst);
-  auto end = py::stl_input_iterator<Polygon_2>();
+bool partition_is_valid_2(Polygon_2& p, py::list& lst) {
+  auto begin = stl_input_iterator<Polygon_2>(lst);
+  auto end = stl_input_iterator<Polygon_2>(lst, false);
   auto v = std::vector<Polygon_2>(begin, end);
   return CGAL::partition_is_valid_2(p.vertices_begin(), p.vertices_end(), v.begin(), v.end());
 }
 
-bool convex_partition_is_valid_2(Polygon_2& p, py::list& polygon_lst) {
-  auto begin = py::stl_input_iterator<Polygon_2>(polygon_lst);
-  auto end = py::stl_input_iterator<Polygon_2>();
+bool convex_partition_is_valid_2(Polygon_2& p, py::list& lst) {
+  auto begin = stl_input_iterator<Polygon_2>(lst);
+  auto end = stl_input_iterator<Polygon_2>(lst, false);
   auto v = std::vector<Polygon_2>(begin, end);
   return CGAL::convex_partition_is_valid_2(p.vertices_begin(), p.vertices_end(), v.begin(), v.end());
 }
 
-bool y_monotone_partition_is_valid_2(Polygon_2& p, py::list& polygon_lst) {
-  auto begin = py::stl_input_iterator<Polygon_2>(polygon_lst);
-  auto end = py::stl_input_iterator<Polygon_2>();
+bool y_monotone_partition_is_valid_2(Polygon_2& p, py::list& lst) {
+  auto begin = stl_input_iterator<Polygon_2>(lst);
+  auto end = stl_input_iterator<Polygon_2>(lst, false);
   auto v = std::vector<Polygon_2>(begin, end);
   return CGAL::y_monotone_partition_is_valid_2(p.vertices_begin(), p.vertices_end(), v.begin(), v.end());
 }

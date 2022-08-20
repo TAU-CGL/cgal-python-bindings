@@ -11,6 +11,7 @@
 #include "CGALPY/types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 
