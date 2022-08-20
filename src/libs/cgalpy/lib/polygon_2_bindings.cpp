@@ -14,6 +14,7 @@
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
@@ -25,36 +26,10 @@ Point_2& right_vertex(Polygon_2& P) { return *(P.right_vertex()); }
 Point_2& top_vertex(Polygon_2& P) { return *(P.top_vertex()); }
 Point_2& bottom_vertex(Polygon_2& P) { return *(P.bottom_vertex()); }
 
-// static Polygon_2* init_from_list(py::list& lst) {
-//   auto begin = py::stl_input_iterator< Point_2 >(lst);
-//   auto end = py::stl_input_iterator< Point_2 >();
-//   return new Polygon_2(begin, end);
-// }
-
-struct generator {
-  generator(const py::list& lst) : m_it(lst.begin()) {}
-  typedef const Point_2& result_type;
-  result_type operator()() {
-    return py::cast<const Point_2&>(*m_it++);
-  }
-  nanobind::detail::fast_iterator m_it;
-};
-
 void init_from_list(Polygon_2& pgn, py::list& lst) {
-#if 1
-  generator f(lst);
-  int size(lst.size());
-  auto begin = boost::make_function_input_iterator(f, 0);
-  auto end = boost::make_function_input_iterator(f, size);
+  auto begin = stl_input_iterator<Point_2>(lst);
+  auto end = stl_input_iterator<Point_2>(lst, false);
   new (&pgn) Polygon_2(begin, end);
-#else
-  new (&pgn) Polygon_2();
-  for (auto it = lst.begin(); it != lst.end(); ++it) {
-    const Point_2& p = py::cast<const Point_2&>(*it);
-    std::cout << "p:" << p << std::endl;
-    pgn.push_back(p);
-  }
-#endif
 }
 
 CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
