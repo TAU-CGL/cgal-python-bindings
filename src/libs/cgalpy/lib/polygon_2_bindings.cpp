@@ -33,7 +33,8 @@ void init_from_list(Polygon_2& pgn, py::list& lst) {
 }
 
 CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
-  return new CopyIterator<Polygon_2::Edge_const_iterator>(P.edges_begin(), P.edges_end());
+  return new CopyIterator<Polygon_2::Edge_const_iterator>(P.edges_begin(),
+                                                          P.edges_end());
 }
 
 }
@@ -44,7 +45,6 @@ void export_polygon_2(py::module_& m) {
   py::class_<Polygon_2> c(m, "Polygon_2");
   c.def(py::init<>())
     .def(py::init<const Polygon_2&>())
-    // .def("__init__", make_constructor(&pol2::init_from_list)) NB
     .def("__init__", &pol2::init_from_list)
     .def("push_back", &Polygon_2::push_back)
     .def("is_simple", &Polygon_2::is_simple)

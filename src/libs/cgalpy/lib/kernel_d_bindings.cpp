@@ -21,16 +21,16 @@ namespace py = nanobind;
 extern void export_gmpz();
 extern void export_gmpq();
 
-Point_d* init_point_d(int d, py::list& lst) {
-  auto begin = py::stl_input_iterator<FT_d>(lst);
-  auto end = py::stl_input_iterator<FT_d>();
+void init_point_d(Point_d& pd, int d, py::list& lst) {
+  auto begin = stl_input_iterator<FT_d>(lst);
+  auto end = stl_input_iterator<FT_d>(lst, false);
 #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
-  return new Point_d(d, begin, end);
+  new (&pd) Point_d(d, begin, end);
 #else
   // Workaround a bug in CGAL
   std::list<FT_d> tmp(begin, end);
-  return new Point_d(d, tmp.begin(), tmp.end());
+  new (&pd) Point_d(d, tmp.begin(), tmp.end());
 #endif
 }
 
@@ -106,7 +106,7 @@ void export_kernel_d(py::module_& m) {
 
   py::class_<Point_d> pd_co(m, "Point_d");
   pd_co.def(py::init<>())
-    .def("__init__", py::make_constructor(&init_point_d))
+    .def("__init__", &init_point_d)
     .def("dimension", &Point_d::dimension)
     .def("cartesian", &Point_d::cartesian, Kernel_d_return_value_policy())
     .def("__getitem__", &Point_d::operator[], Kernel_d_return_value_policy())

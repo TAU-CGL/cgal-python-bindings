@@ -31,35 +31,35 @@ void make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
 }
 #endif
 
-Alpha_shape_3* as_init1(py::list& lst) {
-  auto begin = py::stl_input_iterator<Point>(lst);
-  auto end = py::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end);
+  void as_init1(Alpha_shape_3& as, py::list& lst) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
+  new (&as) Alpha_shape_3(begin, end);
 }
 
-Alpha_shape_3* as_init2(py::list& lst, const FT& alpha) {
-  auto begin = py::stl_input_iterator<Point>(lst);
-  auto end = py::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end, alpha);
+  void as_init2(Alpha_shape_3& as, py::list& lst, const FT& alpha) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, fals);
+  new (&as) Alpha_shape_3(begin, end, alpha);
 }
 
-Alpha_shape_3* as_init3(py::list& lst, double alpha) {
-  auto begin = py::stl_input_iterator<Point>(lst);
-  auto end = py::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end, alpha);
+  void as_init3(Alpha_shape_3& as, py::list& lst, double alpha) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, fals);
+  new (&as) Alpha_shape_3(begin, end, alpha);
 }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-Alpha_shape_3* as_init4(py::list& lst, const FT& alpha, Mode m) {
-  auto begin = py::stl_input_iterator<Point>(lst);
-  auto end = py::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end, alpha, m);
+  void as_init4(Alpha_shape_3& as, py::list& lst, const FT& alpha, Mode m) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, fals);
+  new (&as) Alpha_shape_3(begin, end, alpha, m);
 }
 
-Alpha_shape_3* as_init5(py::list& lst, double alpha, Mode m) {
-  auto begin = py::stl_input_iterator<Point>(lst);
-  auto end = py::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end, alpha, m);
+  void as_init5(Alpha_shape_3& as, py::list& lst, double alpha, Mode m) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, fals);
+  new (&as) Alpha_shape_3(begin, end, alpha, m);
 }
 
 const FT& next(Alpha_iterator it) {
@@ -268,12 +268,12 @@ void export_alpha_shape_3() {
     .def(py::init<tri3::Triangulation_3&, py::optional<double, as3::Mode>>())
     .def(py::init<tri3::Triangulation_3&, py::optional<as3::FT&, as3::Mode>>())
 #endif
-    .def("__init__", make_constructor(&as3::as_init1))
-    .def("__init__", make_constructor(&as3::as_init2))
-    .def("__init__", make_constructor(&as3::as_init3))
+    .def("__init__", &as3::as_init1)
+    .def("__init__", &as3::as_init2)
+    .def("__init__", &as3::as_init3)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("__init__", make_constructor(&as3::as_init4))
-    .def("__init__", make_constructor(&as3::as_init5))
+    .def("__init__", &as3::as_init4)
+    .def("__init__", &as3::as_init5)
 #endif
     // Modifiers
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN

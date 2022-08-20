@@ -21,10 +21,10 @@ namespace py = nanobind;
 namespace bso2 {
 
 template <typename T>
-typename T::Polygon_2* init_polygon_2(py::list& lst) {
-  auto begin = py::stl_input_iterator<typename T::X_monotone_curve_2>(lst);
-  auto end = py::stl_input_iterator<typename T::X_monotone_curve_2>();
-  return new typename T::Polygon_2(begin, end);
+void init_polygon_2(typename T::Polygon_2& pgn, py::list& lst) {
+  auto begin = stl_input_iterator<typename T::X_monotone_curve_2>(lst);
+  auto end = stl_input_iterator<typename T::X_monotone_curve_2>(lst, false);
+  new (&pgn) typename T::Polygon_2(begin, end);
 }
 
 template <typename T>
@@ -58,7 +58,7 @@ py::object export_gps_traits(py::module_& m) {
   export_GpsTraits_2<GT>(traits, concepts);
   auto* tco = concepts.m_traits_classes.m_polygon_2;
   if (tco) {
-    tco->def("__init__", make_constructor(&bso2::init_polygon_2<GT>));
+    tco->def("__init__", &bso2::init_polygon_2<GT>);
     tco->def("curves", py::range<py::return_internal_reference<>>
              (&bso2::curves_begin<GT>, &bso2::curves_end<GT>));
   }

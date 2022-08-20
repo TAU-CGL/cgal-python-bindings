@@ -48,10 +48,10 @@ template <typename T>
 static T* init_tree() { return new T(); }
 
 template <typename T>
-static T* init_tree_from_list(const py::list& lst) {
-  auto begin = py::stl_input_iterator<typename T::Point_d >(lst);
-  auto end = py::stl_input_iterator<typename T::Point_d >();
-  return new T(begin, end);
+void init_tree_from_list(T& tree, const py::list& lst) {
+  auto begin = stl_input_iterator<typename T::Point_d>(lst);
+  auto end = stl_input_iterator<typename T::Point_d>(lst, false);
+  new (&tree) T(begin, end);
 }
 
 template <typename T>
@@ -81,7 +81,7 @@ template <typename T>
 void bind_kd_tree(const char* python_name) {
   py::class_<T, boost::noncopyable>(python_name)
     .def(py::init<>())
-    .def("__init__", make_constructor(&init_tree_from_list<T>))
+    .def("__init__", &init_tree_from_list<T>)
     .def("insert", static_cast<void (T::*) (const typename T::Point_d&)>(&T::insert))
     .def("insert", &tree_insert<T>)
     .def("remove", static_cast<void (T::*) (const typename T::Point_d&)>(&T::remove))
