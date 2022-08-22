@@ -18,8 +18,12 @@ namespace py = nanobind;
 template <typename T>
 struct stl_input_iterator :
   boost::iterator_facade<stl_input_iterator<T>, T, std::input_iterator_tag, T> {
-  stl_input_iterator(const py::list& lst, bool begin = true) :
-    m_it((begin) ? lst.begin() : lst.end())
+
+  // Default constructor.
+  stl_input_iterator() {}
+
+  stl_input_iterator(const py::list& lst, bool isbegin = true) :
+    m_it((isbegin) ? lst.begin() : lst.end())
   {}
 
   void increment() { ++m_it; }
