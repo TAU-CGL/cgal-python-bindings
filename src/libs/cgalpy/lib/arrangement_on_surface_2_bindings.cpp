@@ -7,8 +7,10 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <nanobind/nanobind.h>
 #include <boost/static_assert.hpp>
+
+#include <nanobind/nanobind.h>
+#include <nanobind/stl/tuple.h>
 
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_vertical_decomposition_2.h>
@@ -165,25 +167,35 @@ py::list decompose(Arrangement_2& arr) {
   return lst;
 }
 
-// class Zone_object_visitor : public boost::static_visitor<py::object> {
-// public:
-//   template<typename T>
-//     py::object operator()(T& operand) const {
-//       return py::handle(*operand);
-//   }
-// }; NB
+//
+class Zone_object_visitor : public boost::static_visitor<py::object> {
+public:
+  // template<typename T>
+  // py::object operator()(T& operand) const {
+  //   // return py::handle(*operand);
+  //   return py::object();
+  // }
 
-// py::list zone_default(Arrangement_2& arr, X_monotone_curve_2& c) {
-//   py::list lst;
-//   auto op =
-//     [&] (const variant& o) mutable
-//     { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
-//   // The argument type of boost::function_output_iterator (UnaryFunction) must
-//   // be Assignable and Copy Constructible; hence the application of std::ref().
-//   auto it = boost::make_function_output_iterator(std::ref(op));
-//   CGAL::zone(arr, c, it);
-//   return lst;
-// } NB
+  typedef Vertex_const_handle         Vch;
+  typedef Halfedge_const_handle       Hch;
+  typedef Face_const_handle           Fch;
+  py::object operator()(Vch operand) const { return py::object(); }
+  py::object operator()(Hch operand) const { return py::object(); }
+  py::object operator()(Fch operand) const { return py::object(); }
+};
+
+//
+py::list zone_default(Arrangement_on_surface_2& arr, X_monotone_curve_2& c) {
+  py::list lst;
+  auto op =
+    [&] (const variant& o) mutable
+    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::zone(arr, c, it);
+  return lst;
+}
 
 // template <typename PointLocation>
 // py::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
