@@ -98,29 +98,37 @@ typedef Halfedge_extended<is_halfedge_extended(), Hb, py::object>::type H;
 typedef Face_gps<boolean_set_operations_2_bindings()>::type             Fb;
 typedef Face_extended<is_face_extended(), Fb, py::object>::type         F;
 
-typedef CGAL::Arr_dcel_base<V, H, F>                        Dcel;
-typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::Topol_traits       Topology_traits;
-typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos                Arrangement_on_surface_2;
-typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::arr                Arrangement_2;
-typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::arr_with_history   Arrangement_with_history_2;
+typedef CGAL::Arr_dcel_base<V, H, F>                       Dcel;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::Topol_traits      Topology_traits;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::aos               Arrangement_on_surface_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::arr               Arrangement_2;
+typedef Aos<CGALPY_AOS2_TYPE, GT, Dcel>::arr_with_history  Arrangement_with_history_2;
 
-// Backward compatibility:
-typedef Arrangement_2::Geometry_traits_2                    Geometry_traits_2;
-typedef Arrangement_2::Point_2                              Arr_point_2;
-typedef Arrangement_2::Vertex_iterator                      Vertex_iterator;
-typedef Arrangement_2::Vertex_const_handle                  Vertex_const_handle;
-typedef Arrangement_2::Isolated_vertex_iterator             Isolated_vertex_iterator;
-typedef Arrangement_2::Vertex                               Vertex;
-typedef Arrangement_2::Inner_ccb_iterator                   Inner_ccb_iterator;
-typedef Arrangement_2::Ccb_halfedge_circulator              Ccb_halfedge_circulator;
-typedef Arrangement_2::Halfedge_around_vertex_circulator    Halfedge_around_vertex_circulator;
-typedef Arrangement_2::Halfedge_iterator                    Halfedge_iterator;
-typedef Arrangement_2::Edge_iterator                        Edge_iterator;
-typedef Arrangement_2::Halfedge_const_handle                Halfedge_const_handle;
-typedef Arrangement_2::Halfedge                             Halfedge;
-typedef Arrangement_2::Face_iterator                        Face_iterator;
-typedef Arrangement_2::Face_const_handle                    Face_const_handle;
-typedef Arrangement_2::Face                                 Face;
+typedef Arrangement_on_surface_2::Geometry_traits_2        Geometry_traits_2;
+
+typedef Arrangement_on_surface_2::Vertex_iterator          Vertex_iterator;
+typedef Arrangement_on_surface_2::Halfedge_iterator        Halfedge_iterator;
+typedef Arrangement_on_surface_2::Face_iterator            Face_iterator;
+
+typedef Arrangement_on_surface_2::Vertex_const_handle      Vertex_const_handle;
+typedef Arrangement_on_surface_2::Halfedge_const_handle    Halfedge_const_handle;
+typedef Arrangement_on_surface_2::Face_const_handle        Face_const_handle;
+
+typedef Arrangement_on_surface_2::Vertex                   Vertex;
+typedef Arrangement_on_surface_2::Halfedge                 Halfedge;
+typedef Arrangement_on_surface_2::Face                     Face;
+
+typedef Arrangement_on_surface_2::Inner_ccb_iterator       Inner_ccb_iterator;
+
+typedef Arrangement_on_surface_2::Isolated_vertex_iterator
+  Isolated_vertex_iterator;
+typedef Arrangement_on_surface_2::Ccb_halfedge_circulator
+  Ccb_halfedge_circulator;
+typedef Arrangement_on_surface_2::Halfedge_around_vertex_circulator
+  Halfedge_around_vertex_circulator;
+typedef Arrangement_on_surface_2::Vertex_iterator          Vertex_iterator;
+typedef Arrangement_on_surface_2::Edge_iterator            Edge_iterator;
+typedef Arrangement_on_surface_2::Face_iterator            Face_iterator;
 
 }
 
