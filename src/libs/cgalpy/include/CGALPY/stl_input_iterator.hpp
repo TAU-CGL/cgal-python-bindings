@@ -20,7 +20,9 @@ struct stl_input_iterator :
   boost::iterator_facade<stl_input_iterator<T>, T, std::input_iterator_tag, T> {
 
   // Default constructor.
-  stl_input_iterator() {}
+  // Workaround the lack of default constructor for py::detail::fast_iterator.
+  // stl_input_iterator() {}
+  stl_input_iterator() : m_it(py::list().end()) {}
 
   stl_input_iterator(const py::list& lst, bool isbegin = true) :
     m_it((isbegin) ? lst.begin() : lst.end())
