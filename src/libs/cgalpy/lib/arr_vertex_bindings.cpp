@@ -33,14 +33,12 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   py::class_<Vertex>(c, "Vertex")
     .def(py::init<>())
 
-    // Use `py::overload_cast` to cast overloaded functions.
-    // 1. As a convention, add the suffix `_mutable` to the mutable version.
-    // 2. Wrap the mutable method with the `reference_internal` call policy.
-    // 3. Add the `const_` tag to the overloaded const function, as the
-    //    overloading is based on constness.
-    .def("point_mutual", py::overload_cast<>(&Vertex::point),
+    // As a convention, add the suffix `_mutable` to the mutable version.
+    // Wrap the mutable method with the `reference_internal` call policy.
+    .def("point_mutable", [](Vertex* v)->const Point& { return v->point(); },
          py::rv_policy::reference_internal)
-    .def("point", py::overload_cast<>(&Vertex::point, py::const_))
+    .def("point", [](const Vertex* v)->const Point& { return v->point(); },
+         py::rv_policy::reference_internal)
 
     .def("is_isolated", &Vertex::is_isolated)
     .def("degree", &Vertex::degree)
