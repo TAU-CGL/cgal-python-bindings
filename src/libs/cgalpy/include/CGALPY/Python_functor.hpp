@@ -42,7 +42,7 @@ public:
   {}
 
   T2 operator()(T0 a, T1 b) const
-  { return py::isinstance<T2>(m_python_functor(a, b)); }
+  { return py::cast<T2>(m_python_functor(a, b)); }
 };
 
 template <typename T0, typename T1, typename T2>
