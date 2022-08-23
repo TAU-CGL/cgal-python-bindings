@@ -50,10 +50,13 @@ namespace py = nanobind;
 typedef typename boost::variant<Vertex_const_handle, Halfedge_const_handle,
                                 Face_const_handle>      variant;
 
-typedef Arr_overlay_function_traits<Arrangement_2, Arrangement_2, Arrangement_2,
+typedef Arr_overlay_function_traits<Arrangement_on_surface_2,
+                                    Arrangement_on_surface_2,
+                                    Arrangement_on_surface_2,
                                     py::object> Arr_overlay_function_traits;
-typedef Arr_overlay_traits<Arrangement_2, Arrangement_2, Arrangement_2,
-                                    py::object> Arr_overlay_traits;
+typedef Arr_overlay_traits<Arrangement_on_surface_2, Arrangement_on_surface_2,
+                           Arrangement_on_surface_2, py::object>
+                                                        Arr_overlay_traits;
 
 // Free functions
 
@@ -170,18 +173,10 @@ py::list decompose(Arrangement_2& arr) {
 //
 class Zone_object_visitor : public boost::static_visitor<py::object> {
 public:
-  // template<typename T>
-  // py::object operator()(T& operand) const {
-  //   // return py::handle(*operand);
-  //   return py::object();
-  // }
-
-  typedef Vertex_const_handle         Vch;
-  typedef Halfedge_const_handle       Hch;
-  typedef Face_const_handle           Fch;
-  py::object operator()(Vch operand) const { return py::object(); }
-  py::object operator()(Hch operand) const { return py::object(); }
-  py::object operator()(Fch operand) const { return py::object(); }
+  template<typename T>
+  py::object operator()(T operand) const {
+    return py::cast(*operand);
+  }
 };
 
 //
@@ -197,18 +192,18 @@ py::list zone_default(Arrangement_on_surface_2& arr, X_monotone_curve_2& c) {
   return lst;
 }
 
-// template <typename PointLocation>
-// py::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
-//   py::list lst;
-//   auto op =
-//     [&] (const variant& o) mutable
-//     { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
-//   // The argument type of boost::function_output_iterator (UnaryFunction) must
-//   // be Assignable and Copy Constructible; hence the application of std::ref().
-//   auto it = boost::make_function_output_iterator(std::ref(op));
-//   CGAL::zone(arr, c, it, pl);
-//   return lst;
-// } NB
+template <typename PointLocation>
+py::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
+  py::list lst;
+  auto op =
+    [&] (const variant& o) mutable
+    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::zone(arr, c, it, pl);
+  return lst;
+}
 
 // Arrangement methods
 template <typename Aos>
@@ -475,10 +470,10 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Point = GT::Point_2;
   using Cv = GT::Curve_2;
   using Xcv = GT::X_monotone_curve_2;
-  using Naive_pl = CGAL::Arr_naive_point_location<Arr>;
-  using Wal_pl = CGAL::Arr_walk_along_line_point_location<Arr>;
-  using Landmarks_pl = CGAL::Arr_landmarks_point_location<Arr>;
-  using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Arr>;
+  using Naive_pl = CGAL::Arr_naive_point_location<Aos>;
+  using Wal_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
+  using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
+  using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
 
   py::enum_<CGAL::Arr_halfedge_direction>(m, "Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
@@ -611,15 +606,16 @@ void export_arrangement_on_surface_2(py::module_& m) {
 
   m.def("decompose", &aos2::decompose);
 
-  // m.def("zone", &aos2::zone<Naive_pl>); NB
-  // m.def("zone", &aos2::zone_default); NB
-  // m.def("zone", &aos2::zone<Wal_pl>); NB
-  // m.def("zone", &aos2::zone<Trapezoid_pl>); NB
+  m.def("zone", &aos2::zone<Naive_pl>)
+    .def("zone", &aos2::zone_default)
+    .def("zone", &aos2::zone<Wal_pl>)
+    .def("zone", &aos2::zone<Trapezoid_pl>)
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-  // m.def("zone", &aos2::zone<Landmarks_pl>); NB
+    .def("zone", &aos2::zone<Landmarks_pl>)
 #endif
+    ;
 
   m.def("remove_edge", &aos2::remove_edge_free);
   m.def("remove_vertex", &aos2::remove_vertex_free);
