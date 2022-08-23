@@ -16,22 +16,28 @@ namespace py = nanobind;
 
 namespace aos2 {
 
+//
 Iterator_from_circulator<Ccb_halfedge_circulator>* outer_ccb(Face& f)
 { return new Iterator_from_circulator<Ccb_halfedge_circulator>(f.outer_ccb()); }
 
+//
 Iterator_of_circulators<Inner_ccb_iterator>* inner_ccbs(Face& f)
 {
-  return new Iterator_of_circulators<Inner_ccb_iterator>(f.inner_ccbs_begin(), f.inner_ccbs_end());
+  return new Iterator_of_circulators<Inner_ccb_iterator>(f.inner_ccbs_begin(),
+                                                         f.inner_ccbs_end());
 }
 
+//
 Isolated_vertex_iterator isolated_vertices_begin(Face& f)
 { return f.isolated_vertices_begin(); }
 
+//
 Isolated_vertex_iterator isolated_vertices_end(Face& f)
 { return f.isolated_vertices_end(); }
 
 }
 
+//
 void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Arr2 = aos2::Arrangement_2;
   using Face = Arr2::Face;
@@ -53,8 +59,12 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
     // .def("isolated_vertices", py::range<py::return_internal_reference<>>(&aos2::isolated_vertices_begin, &aos2::isolated_vertices_end)) NB
 #ifdef CGALPY_AOS2_FACE_EXTENDED
-    .def("set_data", &Face::set_data)
-    .def<Face::Data& (Face::*)()>("data", &Face::data)
+    // The member functions set_data() and data() are defined in a base class of
+    // Face. Therefore, we cannot directly refere to any of them, e.g.,
+    // `Face::set_data`. Instead, we introduce lambda functions that call the
+    // appropriate member functions.
+    .def("set_data", [](Face* face, py::object obj) { face->set_data(obj); })
+    .def("data", [](const Face* face)->py::object { return face->data(); })
 #endif
     ;
 
