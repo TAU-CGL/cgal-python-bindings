@@ -14,12 +14,14 @@
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/export_ft.hpp"
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 
-extern void export_gmpz();
-extern void export_gmpq();
+extern void export_gmpz(py::module_& m);
+extern void export_gmpq(py::module_& m);
 
 void init_point_d(Point_d& pd, int d, py::list& lst) {
   auto begin = stl_input_iterator<FT_d>(lst);
@@ -83,34 +85,22 @@ void bind_do_intersect_d(py::module_& m) {
 void export_kernel_d(py::module_& m) {
 #if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
      (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
-  const py::type_info info_gmpz = py::type_id<CGAL::Gmpz>();
-  const auto* reg_gmpz = py::converter::registry::query(info_gmpz);
-  if ((reg_gmpz == nullptr) || ((*reg_gmpz).m_to_python == nullptr))
-    export_gmpz();
-  else py::scope().attr("Gmpz") = py::handle<>(reg_gmpz->m_class_object);
-
-  const py::type_info info_gmpq = py::type_id<CGAL::Gmpq>();
-  const auto* reg_gmpq = py::converter::registry::query(info_gmpq);
-  if ((reg_gmpq == nullptr) || ((*reg_gmpq).m_to_python == nullptr))
-    export_gmpq();
-  else py::scope().attr("Gmpq") = py::handle<>(reg_gmpq->m_class_object);
-
-  const py::type_info info_ftd = py::type_id<FT_d>();
-  const auto* reg_ftd = py::converter::registry::query(info_ftd);
-  if ((reg_ftd == nullptr) || ((*reg_ftd).m_to_python == nullptr)) {
-    auto ftc = py::class_<FT_d>("FT");
+  if (! add_attr<CGAL::Gmpz>("Gmpz", m)) export_gmpz(m);
+  if (! add_attr<CGAL::Gmpq>("Gmpq", m)) export_gmpq(m);
+  if (! add_attr<FT_d>("FT", m)) {
+    auto ftc = py::class_<FT_d>(m, "FT");
     export_ft<FT_d>(ftc);
   }
-  else py::scope().attr("FT") = py::handle<>(reg_ftd->m_class_object);
 #endif
 
   py::class_<Point_d> pd_co(m, "Point_d");
   pd_co.def(py::init<>())
     .def("__init__", &init_point_d)
     .def("dimension", &Point_d::dimension)
-    .def("cartesian", &Point_d::cartesian, Kernel_d_return_value_policy())
-    .def("__getitem__", &Point_d::operator[], Kernel_d_return_value_policy())
-    .def("coordinates", py::range<>(&Point_d::cartesian_begin, &Point_d::cartesian_end))
+    .def("cartesian", &Point_d::cartesian)
+    .def("__getitem__", &Point_d::operator[])
+    // .def("coordinates", py::range<>(&Point_d::cartesian_begin,
+    //                                 &Point_d::cartesian_end)) NB
     .def(py::self == py::self)
     .def(py::self != py::self)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
@@ -119,7 +109,7 @@ void export_kernel_d(py::module_& m) {
     .def(py::self <= py::self)
     .def(py::self >= py::self)
 #endif
-    .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Point_d>)
+    // .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Point_d>) NB
     ;
 
   add_insertion(pd_co, "__str__");
@@ -127,18 +117,18 @@ void export_kernel_d(py::module_& m) {
 
   py::class_<Segment_d> sd_co(m, "Segment_d");
   sd_co.def(py::init<Point_d&, Point_d&>())
-    .def("source", &Segment_d::source, Kernel_d_return_value_policy())
-    .def("target", &Segment_d::target, Kernel_d_return_value_policy())
+    .def("source", &Segment_d::source)
+    .def("target", &Segment_d::target)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
     .def("opposite", &Segment_d::opposite)
-    .def("__getitem__", &Segment_d::operator[], Kernel_d_return_value_policy())
+    .def("__getitem__", &Segment_d::operator[])
 #endif
 #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
-    .def("vertex", &Segment_d::vertex, Kernel_d_return_value_policy())
-    .def("point", &Segment_d::point, Kernel_d_return_value_policy())
-    .def("min", &Segment_d::min, Kernel_d_return_value_policy())
-    .def("max", &Segment_d::max, Kernel_d_return_value_policy())
+    .def("vertex", &Segment_d::vertex)
+    .def("point", &Segment_d::point)
+    .def("min", &Segment_d::min)
+    .def("max", &Segment_d::max)
     .def("supporting_line", &Segment_d::supporting_line)
     .def("squared_length", &Segment_d::squared_length)
     .def("direction", &Segment_d::direction)
