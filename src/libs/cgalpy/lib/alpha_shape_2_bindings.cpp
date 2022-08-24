@@ -14,6 +14,7 @@
 #include "CGALPY/alpha_shape_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -51,9 +52,9 @@ py::list alpha_shape_vertices(const as2::Alpha_shape_2& as) {
 
 } // end of as2 namespace
 
-void export_alpha_shape_2() {
-  typedef as2::Alpha_shape_2                    As2;
-  typedef tri2::Triangulation_2                 Tri2;
+void export_alpha_shape_2(py::module_& m) {
+  using As2 = as2::Alpha_shape_2;
+  using Tri2 = tri2::Triangulation_2;
 
   as2::size_type (As2::*number_of_solid_components1)() const                     = &As2::number_of_solid_components;
   as2::size_type (As2::*number_of_solid_components2)(const as2::FT& alpha) const = &As2::number_of_solid_components;
@@ -70,9 +71,8 @@ void export_alpha_shape_2() {
   as2::Classification_type (As2::*classify9)(const as2::Face_handle& s) const         = &As2::classify;
   as2::Classification_type (As2::*classify10)(const as2::Face_handle& s, int i) const = &As2::classify;
 
-  py::scope as2_scope =
-    py::class_<As2, boost::noncopyable>("Alpha_shape_2")
-    .def(py::init<>())
+  py::class_<As2, boost::noncopyable> as2_c(m, "Alpha_shape_2");
+  as2_c.def(py::init<>())
     .def(py::init<py::optional<double, as2::Mode>>())
     .def(py::init<py::optional<as2::FT&, as2::Mode>>())
     .def(py::init<Tri2&, py::optional<double, as2::Mode>>())
@@ -110,12 +110,12 @@ void export_alpha_shape_2() {
   // Alpha_shape_vertices_iterator;
   // Alpha_shape_edges_iterator;
 
-  py::class_<as2::Alpha_iterator>("Alpha_iterator")
+  py::class_<as2::Alpha_iterator>(as2_c, "Alpha_iterator")
     .def("__iter__", &pass_through)
     .def("__next__", &as2::next, Copy_const_reference())
     ;
 
-  py::enum_<as2::Classification_type>("Classification_type")
+  py::enum_<as2::Classification_type>(as2_c, "Classification_type")
     .value("EXTERIOR", As2::EXTERIOR)
     .value("SINGULAR", As2::SINGULAR)
     .value("REGULAR", As2::REGULAR)
@@ -123,7 +123,7 @@ void export_alpha_shape_2() {
     .export_values()
     ;
 
-  py::enum_<as2::Mode>("Mode")
+  py::enum_<as2::Mode>(as2_c, "Mode")
     .value("GENERAL", As2::GENERAL)
     .value("REGULARIZED", As2::REGULARIZED)
     .export_values()
@@ -134,22 +134,22 @@ void export_alpha_shape_2() {
     // \todo: generate bindings for periodic traits
     ;
   else {
-    if (! add_attr<as2::Gt>("Gt", as2_scope))
+    if (! add_attr<as2::Gt>("Gt", as2_c))
       std::cerr << "'as2::Gt' not registered!\n";
   }
-  add_attr<as2::Point>("Point", as2_scope);
+  add_attr<as2::Point>("Point", as2_c);
   if (is_exact_ft()) {
-    if (! add_attr<as2::FT>("FT", as2_scope))
+    if (! add_attr<as2::FT>("FT", as2_c))
       std::cerr << "'as2::FT' not registered!\n";
   }
-  if (! add_attr<as2::Tds>("Tds", as2_scope))
+  if (! add_attr<as2::Tds>("Tds", as2_c))
     std::cerr << "'as2::Tds' not registered!\n";
-  if (! add_attr<as2::Vertex>("Vertex", as2_scope))
+  if (! add_attr<as2::Vertex>("Vertex", as2_c))
     std::cerr << "'as2::Vertex' not registered!\n";
-  if (! add_attr<as2::Edge>("Edge", as2_scope))
+  if (! add_attr<as2::Edge>("Edge", as2_c))
     std::cerr << "'as2::Edge' not registered!\n";
-  if (! add_attr<as2::Vertex_handle>("Vertex_handle", as2_scope))
+  if (! add_attr<as2::Vertex_handle>("Vertex_handle", as2_c))
     std::cerr << "'as2::Vertex_handle' not registered!\n";
-  if (! add_attr<as2::Face_handle>("Face_handle", as2_scope))
+  if (! add_attr<as2::Face_handle>("Face_handle", as2_c))
     std::cerr << "'as2::Face_handle' not registered!\n";
 }

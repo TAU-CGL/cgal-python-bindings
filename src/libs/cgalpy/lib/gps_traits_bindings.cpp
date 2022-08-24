@@ -23,8 +23,9 @@ namespace bso2 {
 
 template <typename T>
 void init_polygon_2(typename T::Polygon_2& pgn, py::list& lst) {
-  auto begin = stl_input_iterator<typename T::X_monotone_curve_2>(lst);
-  auto end = stl_input_iterator<typename T::X_monotone_curve_2>(lst, false);
+  using Xcv = typename T::X_monotone_curve_2;
+  auto begin = stl_input_iterator<Xcv>(lst);
+  auto end = stl_input_iterator<Xcv>(lst, false);
   new (&pgn) typename T::Polygon_2(begin, end);
 }
 
@@ -43,7 +44,6 @@ py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits();
 
 py::object export_gps_traits(py::module_& m) {
   using GT = bso2::Geometry_traits_2;
-  // auto traits = py::class_<GT>("Traits_2");
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
   auto traits = export_arr_conic_traits();

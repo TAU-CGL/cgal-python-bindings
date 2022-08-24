@@ -28,97 +28,92 @@ py::list polygons_with_holes(Gps_on_surface_base_2& ps) {
 
 void insert_range0(Gps_on_surface_base_2& ps, py::list& pgn_lst,
                    py::list& pwh_lst) {
-  auto begin0 = stl_input_iterator<General_polygon_2>(pgn_lst);
-  auto end0 = stl_input_iterator<General_polygon_2>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst, false);
-  auto v0 = std::vector<General_polygon_2>(begin0, end0);
-  auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
-  ps.insert(v0.begin(), v0.end(), v1.begin(), v1.end());
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  ps.insert(begin0, end0, begin1, end1);
 }
 
 template <typename T>
 void insert_range(Gps_on_surface_base_2& ps, py::list& lst) {
   auto begin = stl_input_iterator<T>(lst);
   auto end = stl_input_iterator<T>(lst, false);
-  auto v = std::vector<T>(begin, end);
-  ps.insert(v.begin(), v.end());
+  ps.insert(begin, end);
 }
 
 void intersection_range0(Gps_on_surface_base_2& ps, py::list& pgn_lst,
                          py::list& pwh_lst) {
-  auto begin0 = stl_input_iterator<General_polygon_2>(pgn_lst);
-  auto end0 = stl_input_iterator<General_polygon_2>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst, false);
-  auto v0 = std::vector<General_polygon_2>(begin0, end0);
-  auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
-  ps.intersection(v0.begin(), v0.end(), v1.begin(), v1.end());
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  ps.intersection(begin0, end0, begin1, end1);
 }
 
 template <typename T>
 void intersection_range(Gps_on_surface_base_2& ps, py::list& lst) {
   auto begin = stl_input_iterator<T>(lst);
   auto end = stl_input_iterator<T>(lst, false);
-  auto v = std::vector<T>(begin, end);
-  ps.intersection(v.begin(), v.end());
+  ps.intersection(begin, end);
 }
 
 void join_range0(Gps_on_surface_base_2& ps, py::list& pgn_lst,
                  py::list& pwh_lst) {
-  auto begin0 = stl_input_iterator<General_polygon_2>(pgn_lst);
-  auto end0 = stl_input_iterator<General_polygon_2>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst, false);
-  auto v0 = std::vector<General_polygon_2>(begin0, end0);
-  auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
-  ps.join(v0.begin(), v0.end(), v1.begin(), v1.end());
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  ps.join(begin0, end0, begin1, end1);
 }
 
 template <typename T>
 void join_range(Gps_on_surface_base_2& ps, py::list& lst) {
   auto begin = stl_input_iterator<T>(lst);
   auto end = stl_input_iterator<T>(lst, false);
-  auto v = std::vector<T>(begin, end);
-  ps.join(v.begin(), v.end());
+  ps.join(begin, end);
 }
 
 void symmetric_difference_range0(Gps_on_surface_base_2& ps,
                                  py::list& pgn_lst, py::list& pwh_lst) {
-  auto begin0 = stl_input_iterator<General_polygon_2>(pgn_lst);
-  auto end0 = stl_input_iterator<General_polygon_2>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst, false);
-  auto v0 = std::vector<General_polygon_2>(begin0, end0);
-  auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
-  ps.symmetric_difference(v0.begin(), v0.end(), v1.begin(), v1.end());
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  ps.symmetric_difference(begin0, end0, begin1, end1);
 }
 
 template <typename T>
 void symmetric_difference_range(Gps_on_surface_base_2& ps, py::list& lst) {
   auto begin = stl_input_iterator<T>(lst);
   auto end = stl_input_iterator<T>(lst, false);
-  auto v = std::vector<T>(begin, end);
-  ps.symmetric_difference(v.begin(), v.end());
+  ps.symmetric_difference(begin, end);
 }
 
 bool do_intersect_range0(Gps_on_surface_base_2& ps,
                          py::list& pgn_lst, py::list& pwh_lst) {
-  auto begin0 = stl_input_iterator<General_polygon_2>(pgn_lst);
-  auto end0 = stl_input_iterator<General_polygon_2>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst);
-  auto end1 = stl_input_iterator<General_polygon_with_holes_2>(pwh_lst, false);
-  auto v0 = std::vector<General_polygon_2>(begin0, end0);
-  auto v1 = std::vector<General_polygon_with_holes_2>(begin1, end1);
-  return ps.do_intersect(v0.begin(), v0.end(), v1.begin(), v1.end());
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  return ps.do_intersect(begin0, end0, begin1, end1);
 }
 
 template <typename T>
 void do_intersect_range(Gps_on_surface_base_2& ps, py::list& lst) {
   auto begin = stl_input_iterator<T>(lst);
   auto end = stl_input_iterator<T>(lst, false);
-  auto v = std::vector<T>(begin, end);
-  ps.do_intersect(v.begin(), v.end());
+  ps.do_intersect(begin, end);
 }
 
 }

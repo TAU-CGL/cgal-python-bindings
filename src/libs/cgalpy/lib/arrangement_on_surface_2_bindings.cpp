@@ -76,7 +76,7 @@ void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
   else std::runtime_error("Attempting to insert a list of of object of unrecognized type to an arrangement!");
 }
 
-// Insert a list of x-monotone curves into an arrangement.
+// Insert a list of pairwise disjoint x-monotone curves into an arrangement.
 void insert_non_intersecting_curves(Arrangement_on_surface_2& arr,
                                     py::list& lst) {
   auto begin = stl_input_iterator<X_monotone_curve_2>(lst);
@@ -84,7 +84,7 @@ void insert_non_intersecting_curves(Arrangement_on_surface_2& arr,
   CGAL::insert_non_intersecting_curves(arr, begin, end);
 }
 
-//
+// Overlay two arrangements
 template <typename OverlayTraits>
 void overlay(Arrangement_on_surface_2& arr1, Arrangement_on_surface_2& arr2,
              Arrangement_on_surface_2& arr_res,
@@ -149,7 +149,7 @@ void decompose_helper(const Decompose_result& res, py::list& lst) {
   auto var = (below.get());
   if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&var)) {
     decompose_helper1<const Vertex>(vertex, *(*v), above, lst);
-   }
+  }
   else if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
     decompose_helper1<const Halfedge>(vertex, *(*e), above, lst);
   }
@@ -356,12 +356,14 @@ void export_aos(py::module_& m, const py::object& traits_c) {
   c.def(py::init<>())
     .def(py::init<const Aos&>())
     .def(py::init<const GT*>())
+    // .def("vertices", py::make_iterator(&aos2::vertices_begin<Aos>,
+    //                                    &aos2::vertices_end<Aos>),
+    //      py::keep_alive<0, 1>())
     // .def("halfedges", [](Aos& arr) {
     //                     return py::iterator(arr.halfedges_begin(),
     //                                         arr.halfedges_end());
     //                   }) NB
     // .def("halfedges", py::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>)) NB
-    // .def("vertices", py::make_iterator(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>), py::keep_alive<0, 1>()) NB
     // .def("faces", py::range<RIR>(&aos2::faces_begin<Aos>, &aos2::faces_end<Aos>)) NB
     // .def("edges", py::range<RIR>(&aos2::edges_begin<Aos>, &aos2::edges_end<Aos>)) NB
     // .def("unbounded_faces", py::range<RIR>(&aos2::unbounded_faces_begin<Aos>, &aos2::unbounded_faces_end<Aos>)) NB

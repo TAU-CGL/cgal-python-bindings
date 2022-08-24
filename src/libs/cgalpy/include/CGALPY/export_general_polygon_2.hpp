@@ -17,17 +17,19 @@
 
 namespace py = nanobind;
 
+//
 template <typename Type>
 void export_general_polygon_2(py::class_<Type>& co) {
-  co.def(py::init<>());
-  co.def(py::init<Type>());
-  co.def("push_back", &Type::push_back);
-  co.def("orientation", &Type::orientation);
-  co.def("is_empty", &Type::is_empty);
-  co.def("size", &Type::size);
-  co.def("bbox", &Type::bbox);
-  co.def("clear", &Type::clear);
-  co.def("reverse_orientation", &Type::reverse_orientation);
+  co.def(py::init<>())
+    .def(py::init<const Type&>())
+    .def("push_back", &Type::push_back)
+    .def("orientation", &Type::orientation)
+    .def("is_empty", &Type::is_empty)
+    .def("size", &Type::size)
+    .def("bbox", &Type::bbox)
+    .def("clear", &Type::clear)
+    .def("reverse_orientation", &Type::reverse_orientation)
+    ;
 
   add_insertion(co, "__str__");
   add_insertion(co, "__repr__");

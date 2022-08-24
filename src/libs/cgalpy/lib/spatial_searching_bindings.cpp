@@ -51,15 +51,17 @@ static T* init_tree() { return new T(); }
 
 template <typename T>
 void init_tree_from_list(T& tree, const py::list& lst) {
-  auto begin = stl_input_iterator<typename T::Point_d>(lst);
-  auto end = stl_input_iterator<typename T::Point_d>(lst, false);
+  using Pntd = typename T::Point_d;
+  auto begin = stl_input_iterator<Pntd>(lst);
+  auto end = stl_input_iterator<Pntd>(lst, false);
   new (&tree) T(begin, end);
 }
 
 template <typename T>
 void tree_insert(T& tree, const py::list& lst) {
-  auto begin = stl_input_iterator<typename T::Point_d>(lst);
-  auto end = stl_input_iterator<typename T::Point_d>(lst, false);
+  using Pntd = typename T::Point_d;
+  auto begin = stl_input_iterator<Pntd>(lst);
+  auto end = stl_input_iterator<Pntd>(lst, false);
   tree.insert(begin, end);
 }
 

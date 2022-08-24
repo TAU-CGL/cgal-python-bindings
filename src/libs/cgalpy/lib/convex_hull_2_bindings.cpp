@@ -25,96 +25,85 @@ namespace py = nanobind;
 void ch_akl_toussaint(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v0 = std::vector<Point_2>(begin, end);
-  auto v1 = std::vector<Point_2>();
-  CGAL::ch_akl_toussaint(v0.begin(), v0.end(), std::back_inserter(v1));
-  for (auto p : v1) res.append(p);
+  auto v = std::vector<Point_2>();
+  CGAL::ch_akl_toussaint(begin, end, std::back_inserter(v));
+  for (auto p : v) res.append(p);
 }
 
 void ch_bykat(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v0 = std::vector<Point_2>(begin, end);
-  auto v1 = std::vector<Point_2>();
-  CGAL::ch_bykat(v0.begin(), v0.end(), std::back_inserter(v1));
-  for (auto p : v1) res.append(p);
+  auto v = std::vector<Point_2>();
+  CGAL::ch_bykat(begin, end, std::back_inserter(v));
+  for (auto p : v) res.append(p);
 }
 
 void ch_eddy(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v0 = std::vector<Point_2>(begin, end);
-  auto v1 = std::vector<Point_2>();
-  CGAL::ch_eddy(v0.begin(), v0.end(), std::back_inserter(v1));
-  for (auto p : v1) res.append(p);
+  auto v = std::vector<Point_2>();
+  CGAL::ch_eddy(begin, end, std::back_inserter(v));
+  for (auto p : v) res.append(p);
 }
 
 void ch_graham_andrew(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v0 = std::vector<Point_2>(begin, end);
-  auto v1 = std::vector<Point_2>();
-  CGAL::ch_graham_andrew(v0.begin(), v0.end(), std::back_inserter(v1));
-  for (auto p : v1) res.append(p);
+  auto v = std::vector<Point_2>();
+  CGAL::ch_graham_andrew(begin, end, std::back_inserter(v));
+  for (auto p : v) res.append(p);
 }
 
 void ch_jarvis(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v0 = std::vector<Point_2>(begin, end);
-  auto v1 = std::vector<Point_2>();
-  CGAL::ch_jarvis(v0.begin(), v0.end(), std::back_inserter(v1));
-  for (auto p : v1) res.append(p);
+  auto v = std::vector<Point_2>();
+  CGAL::ch_jarvis(begin, end, std::back_inserter(v));
+  for (auto p : v) res.append(p);
 }
 
 void ch_melkman(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v0 = std::vector<Point_2>(begin, end);
-  auto v1 = std::vector<Point_2>();
-  CGAL::ch_melkman(v0.begin(), v0.end(), std::back_inserter(v1));
-  for (auto p : v1) res.append(p);
+  auto v = std::vector<Point_2>();
+  CGAL::ch_melkman(begin, end, std::back_inserter(v));
+  for (auto p : v) res.append(p);
 }
 
 void convex_hull_2(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v0 = std::vector<Point_2>(begin, end);
-  auto v1 = std::vector<Point_2>();
-  CGAL::convex_hull_2(v0.begin(), v0.end(), std::back_inserter(v1));
-  for (auto p : v1) res.append(p);
+  auto v = std::vector<Point_2>();
+  CGAL::convex_hull_2(begin, end, std::back_inserter(v));
+  for (auto p : v) res.append(p);
 }
 
 bool is_ccw_strongly_convex_2(py::list& lst) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v = std::vector<Point_2>(begin, end);
-  return CGAL::is_ccw_strongly_convex_2(v.begin(), v.end());
+  return CGAL::is_ccw_strongly_convex_2(begin, end);
 }
 
 bool is_cw_strongly_convex_2(py::list& lst) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v = std::vector<Point_2>(begin, end);
-  return CGAL::is_cw_strongly_convex_2(v.begin(), v.end());
+  return CGAL::is_cw_strongly_convex_2(begin, end);
 }
 
 void lower_hull_points_2(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v0 = std::vector<Point_2>(begin, end);
-  auto v1 = std::vector<Point_2>();
-  CGAL::lower_hull_points_2(v0.begin(), v0.end(), std::back_inserter(v1));
-  for (auto p : v1) res.append(p);
+  auto v = std::vector<Point_2>();
+  CGAL::lower_hull_points_2(begin, end, std::back_inserter(v));
+  for (auto p : v) res.append(p);
 }
 
 void upper_hull_points_2(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  auto v0 = std::vector<Point_2>(begin, end);
-  auto v1 = std::vector<Point_2>();
-  CGAL::upper_hull_points_2(v0.begin(), v0.end(), std::back_inserter(v1));
-  for (auto p : v1) res.append(p);
+  auto v = std::vector<Point_2>();
+  CGAL::upper_hull_points_2(begin, end, std::back_inserter(v));
+  for (auto p : v) res.append(p);
 }
 
 void export_convex_hull_2_bindings(py::module_& m) {

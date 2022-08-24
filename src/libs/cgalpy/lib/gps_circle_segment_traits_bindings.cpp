@@ -24,8 +24,9 @@ namespace bso2 {
 
 template <typename T>
 void init_polygon_2(typename T::Polygon_2& pgn, py::list& lst) {
-  auto begin = stl_input_iterator<typename T::X_monotone_curve_2>(lst);
-  auto end = stl_input_iterator<typename T::X_monotone_curve_2>(lst, false);
+  using Xcv = typename T::X_monotone_curve_2;
+  auto begin = stl_input_iterator<Xcv>(lst);
+  auto end = stl_input_iterator<Xcv>(lst, false);
   new (&pgn) typename T::Polygon_2(begin, end);
 }
 

@@ -69,8 +69,8 @@ void construct_x_monotone_segment_2_call_operator2(aos2::Construct_x_monotone_se
 //template <typename PT>
 //py::class_<typename PT::Construct_polynomial> bind_construct_polynomial(const char* name)
 //{
-//  typedef typename PT::Construct_polynomial T;
-//  typedef typename PT::Type P;
+//  using T = typename PT::Construct_polynomial;
+//  using P = typename PT::Type;
 //  return py::class_<T>(m, name)
 //    .def(init<>())
 //    ;
@@ -78,8 +78,8 @@ void construct_x_monotone_segment_2_call_operator2(aos2::Construct_x_monotone_se
 
 template <typename PT>
 void init_polynomial(typename PT::Type& pol, py::list& lst) {
-  typedef typename PT::Type P;
-  typedef typename PT::Coefficient_type CT;
+  using P = typename PT::Type;
+  using CT = typename PT::Coefficient_type;
   auto begin = stl_input_iterator<CT>(lst);
   auto end = stl_input_iterator<CT>(lst, false);
   new (&pol) P(begin, end);
@@ -87,8 +87,8 @@ void init_polynomial(typename PT::Type& pol, py::list& lst) {
 
 template <typename PT>
 py::class_<typename PT::Type> bind_polynomial(py::module_& m, const char* name) {
-  typedef typename PT::Type P;
-  typedef typename PT::Coefficient_type CT;
+  using P = typename PT::Type;
+  using CT = typename PT::Coefficient_type ;
   py::class_<P> c(m, name);
   c.def(py::init<>())
     .def(py::init<CT&>())

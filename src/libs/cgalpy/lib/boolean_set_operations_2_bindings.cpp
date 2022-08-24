@@ -47,9 +47,7 @@ bool do_intersect_range(py::list& pgn_lst, py::list& pwh_lst) {
   auto end0 = stl_input_iterator<T0>(pgn_lst, false);
   auto begin1 = stl_input_iterator<T1>(pwh_lst);
   auto end1 = stl_input_iterator<T1>(pwh_lst, false);
-  auto v0 = std::vector<T0>(begin0, end0);
-  auto v1 = std::vector<T1>(begin1, end1);
-  return do_intersect(v0.begin(), v0.end(), v1.begin(), v1.end());
+  return do_intersect(begin0, end0, begin1, end1);
 }
 
 //
@@ -67,11 +65,8 @@ void intersection_range(py::list& pgn_lst, py::list& pwh_lst, py::list& lst) {
   auto end0 = stl_input_iterator<T0>(pgn_lst, false);
   auto begin1 = stl_input_iterator<T1>(pwh_lst);
   auto end1 = stl_input_iterator<T1>(pwh_lst, false);
-  auto v0 = std::vector<T0>(begin0, end0);
-  auto v1 = std::vector<T1>(begin1, end1);
   auto res = std::vector<T1>();
-  CGAL::intersection(v0.begin(), v0.end(), v1.begin(), v1.end(),
-                     std::back_inserter(res));
+  CGAL::intersection(begin0, end0, begin1, end1, std::back_inserter(res));
   for (auto p : res) lst.append(p);
 }
 
@@ -95,11 +90,8 @@ void join_range(py::list& pgn_lst, py::list& pwh_lst, py::list& lst) {
   auto end0 = stl_input_iterator<T0>(pgn_lst, false);
   auto begin1 = stl_input_iterator<T1>(pwh_lst);
   auto end1 = stl_input_iterator<T1>(pwh_lst, false);
-  auto v0 = std::vector<T0>(begin0, end0);
-  auto v1 = std::vector<T1>(begin1, end1);
   auto res = std::vector<T1>();
-  CGAL::join(v0.begin(), v0.end(), v1.begin(), v1.end(),
-             std::back_inserter(res));
+  CGAL::join(begin0, end0, begin1, end1, std::back_inserter(res));
   for (auto p : res) lst.append(p);
 }
 
@@ -119,10 +111,8 @@ void symmetric_difference_range(py::list& pgn_lst, py::list& pwh_lst,
   auto end0 = stl_input_iterator<T0>(pgn_lst, false);
   auto begin1 = stl_input_iterator<T1>(pwh_lst);
   auto end1 = stl_input_iterator<T1>(pwh_lst, false);
-  auto v0 = std::vector<T0>(begin0, end0);
-  auto v1 = std::vector<T1>(begin1, end1);
   auto res = std::vector<T1>();
-  CGAL::symmetric_difference(v0.begin(), v0.end(), v1.begin(), v1.end(),
+  CGAL::symmetric_difference(begin0, end0, begin1, end1,
                              std::back_inserter(res));
   for (auto p : res) lst.append(p);
 }
@@ -185,13 +175,15 @@ void export_boolean_set_operations_2(py::module_& m) {
   m.def("connect_holes", &bso2::connect_holes);
 #else
 
-  if (add_attr<Pgn>("General_polygon_2", m)) return;
-  auto cs_pgn_c = py::class_<Pgn>(m, "General_polygon_2");
-  export_general_polygon_2<Pgn>(cs_pgn_c);
+  if (! add_attr<Pgn>("General_polygon_2", m)) {
+    auto cs_pgn_c = py::class_<Pgn>(m, "General_polygon_2");
+    export_general_polygon_2<Pgn>(cs_pgn_c);
+  }
 
-  if (add_attr<Pwh>("General_polygon_with_holes_2", m)) return;
-  auto cs_pwh_c = py::class_<Pwh>(m, "General_polygon_with_holes_2");
-  export_general_polygon_with_holes_2<Pwh>(cs_pwh_c);
+  if (! add_attr<Pwh>("General_polygon_with_holes_2", m)) {
+    auto cs_pwh_c = py::class_<Pwh>(m, "General_polygon_with_holes_2");
+    export_general_polygon_with_holes_2<Pwh>(cs_pwh_c);
+  }
 
 #endif
 }
