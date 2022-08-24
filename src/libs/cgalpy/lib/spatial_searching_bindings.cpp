@@ -20,8 +20,9 @@
 
 #include "CGALPY/spatial_searching_config.hpp"
 #include "CGALPY/kernel_d_types.hpp"
-#include "CGALPY/General_distance_nanobind.h"
+#include "CGALPY/General_distance_python.hpp"
 #include "CGALPY/append_iterator.hpp"
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
@@ -57,11 +58,9 @@ void init_tree_from_list(T& tree, const py::list& lst) {
 
 template <typename T>
 void tree_insert(T& tree, const py::list& lst) {
-  //copying into a vector because of an apparent bug with py::stl_input_iterator
-  auto begin = py::stl_input_iterator<typename T::Point_d >(lst);
-  auto end = py::stl_input_iterator<typename T::Point_d >();
-  auto v = std::vector<typename T::Point_d>(begin, end);
-  tree.insert(v.begin(), v.end());
+  auto begin = stl_input_iterator<typename T::Point_d>(lst);
+  auto end = stl_input_iterator<typename T::Point_d>(lst, false);
+  tree.insert(begin, end);
 }
 
 template <typename T, typename FQI>
@@ -79,13 +78,13 @@ py::list points(const T& tree) {
 }
 
 template <typename T>
-void bind_kd_tree(const char* python_name) {
-  py::class_<T, boost::noncopyable>(python_name)
+void bind_kd_tree(py::module_& m, const char* python_name) {
+  py::class_<T>(m, python_name)
     .def(py::init<>())
     .def("__init__", &init_tree_from_list<T>)
-    .def("insert", static_cast<void (T::*) (const typename T::Point_d&)>(&T::insert))
+    .def("insert", static_cast<void(T::*)(const typename T::Point_d&)>(&T::insert))
     .def("insert", &tree_insert<T>)
-    .def("remove", static_cast<void (T::*) (const typename T::Point_d&)>(&T::remove))
+    .def("remove", static_cast<void(T::*)(const typename T::Point_d&)>(&T::remove))
     .def("build", static_cast<void (T::*)()>(&T::build))
     .def("invalidate_build", &T::invalidate_build)
     .def("points", &points<T>)
@@ -106,19 +105,17 @@ py::list k_neighbors(T& neighbor_search) {
 }
 
 template <typename T>
-void bind_neighbor_search(const char* python_name) {
-  using namespace bp;
-  class_<T>(python_name, init<const typename T::Tree&, typename T::Query_item,
-   unsigned int, FT_d, bool, typename T::Distance, bool>())
+void bind_neighbor_search(py::module_& m, const char* python_name) {
+  py::class_<T>(m, python_name)
+    .def(py::init<const typename T::Tree&, typename T::Query_item,
+         unsigned int, FT_d, bool, typename T::Distance, bool>())
     .def("k_neighbors", &k_neighbors<T>)
     ;
 }
 
 void export_spatial_searching(py::module_& m) {
-  const py::type_info info = py::type_id<Point_d>();
-  const py::converter::registration* reg = py::converter::registry::query(info);
-  BOOST_ASSERT((reg != nullptr) && ((*reg).m_to_python != nullptr));
-  py::scope().attr("Point_d") = py::handle<>(reg->m_class_object);
+  auto res = add_attr<Point_d>("Point_d", m);
+  BOOST_ASSERT(res);
 
   py::class_<Fuzzy_iso_box>(m, "Fuzzy_iso_box")
     .def(py::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
@@ -147,7 +144,7 @@ void export_spatial_searching(py::module_& m) {
     .def("split", &Kd_tree_rectangle::split)
     ;
 
-  bind_kd_tree<Kd_tree>("Kd_tree");
+  bind_kd_tree<Kd_tree>(m, "Kd_tree");
 
   py::class_<Distance_python>(m, "Distance_python")
     .def(py::init<py::object, py::object, py::object, py::object, py::object>())
@@ -167,9 +164,9 @@ void export_spatial_searching(py::module_& m) {
     //.def("inverse_of_transformed_distance", &Euclidean_distance::inverse_of_transformed_distance)
     ;
 
-  bind_neighbor_search<K_neighbor_search_python>("K_neighbor_search_python");
+  bind_neighbor_search<K_neighbor_search_python>(m, "K_neighbor_search_python");
 
-  bind_neighbor_search<K_neighbor_search>("K_neighbor_search");
+  bind_neighbor_search<K_neighbor_search>(m, "K_neighbor_search");
 
   m.def("get_spatial_searching_dimension", &get_spatial_searching_dimension);
 }
