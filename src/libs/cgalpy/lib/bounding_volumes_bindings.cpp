@@ -30,8 +30,8 @@ void init_min_circle_2_from_list(Min_circle_2& mc, py::list& lst, bool random) {
 }
 
 void insert_list(Min_circle_2& mc, py::list& lst) {
-  auto begin = py::stl_input_iterator<Point_2>(lst);
-  auto end = py::stl_input_iterator<Point_2>();
+  auto begin = stl_input_iterator<Point_2>(lst);
+  auto end = stl_input_iterator<Point_2>(lst, false);
   mc.insert(begin, end);
 }
 

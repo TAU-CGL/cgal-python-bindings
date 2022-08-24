@@ -21,28 +21,32 @@ namespace py = nanobind;
 
 namespace bso2 {
 
-// template <typename T>
-// typename T::Polygon_2
-// export_ctr_gp_2_op(const typename T::Construct_polygon_2& ctr,
-//                    py::list& curves) {
-//   using Pgn = typename T::Polygon_2;
+//
+template <typename T>
+typename T::Polygon_2
+export_ctr_gp_2_op(const typename T::Construct_polygon_2& ctr,
+                   py::list& curves) {
+  using Xcv = typename T::X_monotone_curve_2;
+  auto begin = stl_input_iterator<Xcv>(curves);
+  auto end = stl_input_iterator<Xcv>(curves, false);
+  return ctr(begin, end);
+}
 
-//   auto begin = stl_input_iterator<typename T::X_monotone_curve_2>(curves);
-//   auto end = stl_input_iterator<typename T::X_monotone_curve_2>(curves, false);
-//   return ctr(begin, end);
-// }
-
+//
 template <typename T>
 typename T::Polygon_with_holes_2
-export_ctr_gpwh_2_op(const typename T::Construct_general_polygon_with_holes_2 ctr,
-                     const typename T::Polygon_2& boundary, py::list& holes) {
-  auto begin = stl_input_iterator<typename T::Polygon_2>(holes);
-  auto end = stl_input_iterator<typename T::Polygon_2>(holes, false);
+export_ctr_gpwh_2_op
+(const typename T::Construct_general_polygon_with_holes_2 ctr,
+ const typename T::Polygon_2& boundary, py::list& holes) {
+  using Xcv = typename T::Polygon_2;
+  auto begin = stl_input_iterator<const Xcv&>(holes);
+  auto end = stl_input_iterator<const Xcv&>(holes, false);
   return ctr(boundary, begin, end);
 }
 
 }
 
+//
 template <typename T, typename C, typename Concepts>
 void export_GpsTraits_2(C& c, Concepts& concepts) {
   static bool exported = false;
@@ -82,13 +86,13 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   classes.m_construct_polygon_with_holes_2 =
     new py::class_<Construct_polygon_with_holes_2>
     (c, "Construct_polygon_with_holes_2");
-  // using Ctr_gpwh1 = Polygon_with_holes_2(Construct_polygon_with_holes_2::*)
-  //   (const Polygon_2&) const;
-  // classes.m_cons  truct_polygon_with_holes_2->
-  //   def("__call__", static_cast<Ctr_gpwh1>
-  //       (&Construct_polygon_with_holes_2::operator()));
+  using Ctr_gpwh1 = Polygon_with_holes_2(Construct_polygon_with_holes_2::*)
+    (const Polygon_2&) const;
+  classes.m_construct_polygon_with_holes_2->
+    def("__call__", static_cast<Ctr_gpwh1>
+        (&Construct_polygon_with_holes_2::operator()));
   // classes.m_construct_polygon_with_holes_2->
-  //   def("__call__", &bso2::export_ctr_gpwh_2_op<T>); NB
+  //   def("__call__", &bso2::export_ctr_gpwh_2_op<T>);
 
   // Construct_outer_boundary
   classes.m_construct_outer_boundary =

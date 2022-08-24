@@ -26,12 +26,14 @@ Point_2& right_vertex(Polygon_2& P) { return *(P.right_vertex()); }
 Point_2& top_vertex(Polygon_2& P) { return *(P.top_vertex()); }
 Point_2& bottom_vertex(Polygon_2& P) { return *(P.bottom_vertex()); }
 
-void init_from_list(Polygon_2& pgn, py::list& lst) {
+//
+void init_polygon_2(Polygon_2& pgn, py::list& lst) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
   new (&pgn) Polygon_2(begin, end);
 }
 
+//
 CopyIterator<Polygon_2::Edge_const_iterator>* edges_iterator(Polygon_2& P) {
   return new CopyIterator<Polygon_2::Edge_const_iterator>(P.edges_begin(),
                                                           P.edges_end());
@@ -45,7 +47,7 @@ void export_polygon_2(py::module_& m) {
   py::class_<Polygon_2> c(m, "Polygon_2");
   c.def(py::init<>())
     .def(py::init<const Polygon_2&>())
-    .def("__init__", &pol2::init_from_list)
+    .def("__init__", &pol2::init_polygon_2)
     .def("push_back", &Polygon_2::push_back)
     .def("is_simple", &Polygon_2::is_simple)
     .def("is_convex", &Polygon_2::is_convex)

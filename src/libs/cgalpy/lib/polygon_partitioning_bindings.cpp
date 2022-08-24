@@ -21,47 +21,52 @@ namespace pp2 {
 
 void approx_convex_partition_2(Polygon_2& p, py::list& res) {
   auto v = std::vector<Polygon_2>();
-  CGAL::approx_convex_partition_2(p.vertices_begin(), p.vertices_end(), std::back_inserter(v));
+  CGAL::approx_convex_partition_2(p.vertices_begin(), p.vertices_end(),
+                                  std::back_inserter(v));
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
 void greene_approx_convex_partition_2(Polygon_2& p, py::list& res) {
   auto v = std::vector<Polygon_2>();
-  CGAL::greene_approx_convex_partition_2(p.vertices_begin(), p.vertices_end(), std::back_inserter(v));
+  CGAL::greene_approx_convex_partition_2(p.vertices_begin(), p.vertices_end(),
+                                         std::back_inserter(v));
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
 void optimal_convex_partition_2(Polygon_2& p, py::list& res) {
   auto v = std::vector<Polygon_2>();
-  CGAL::optimal_convex_partition_2(p.vertices_begin(), p.vertices_end(), std::back_inserter(v));
+  CGAL::optimal_convex_partition_2(p.vertices_begin(), p.vertices_end(),
+                                   std::back_inserter(v));
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
 void y_monotone_partition_2(Polygon_2& p, py::list& res) {
   auto v = std::vector<Polygon_2>();
-  CGAL::y_monotone_partition_2(p.vertices_begin(), p.vertices_end(), std::back_inserter(v));
+  CGAL::y_monotone_partition_2(p.vertices_begin(), p.vertices_end(),
+                               std::back_inserter(v));
   for (auto ym_polygon : v) res.append(ym_polygon);
 }
 
 bool partition_is_valid_2(Polygon_2& p, py::list& lst) {
   auto begin = stl_input_iterator<Polygon_2>(lst);
   auto end = stl_input_iterator<Polygon_2>(lst, false);
-  auto v = std::vector<Polygon_2>(begin, end);
-  return CGAL::partition_is_valid_2(p.vertices_begin(), p.vertices_end(), v.begin(), v.end());
+  return CGAL::partition_is_valid_2(p.vertices_begin(), p.vertices_end(),
+                                    begin, end);
 }
 
 bool convex_partition_is_valid_2(Polygon_2& p, py::list& lst) {
   auto begin = stl_input_iterator<Polygon_2>(lst);
   auto end = stl_input_iterator<Polygon_2>(lst, false);
-  auto v = std::vector<Polygon_2>(begin, end);
-  return CGAL::convex_partition_is_valid_2(p.vertices_begin(), p.vertices_end(), v.begin(), v.end());
+  return CGAL::convex_partition_is_valid_2(p.vertices_begin(), p.vertices_end(),
+                                           begin, end);
 }
 
 bool y_monotone_partition_is_valid_2(Polygon_2& p, py::list& lst) {
   auto begin = stl_input_iterator<Polygon_2>(lst);
   auto end = stl_input_iterator<Polygon_2>(lst, false);
-  auto v = std::vector<Polygon_2>(begin, end);
-  return CGAL::y_monotone_partition_is_valid_2(p.vertices_begin(), p.vertices_end(), v.begin(), v.end());
+  return CGAL::y_monotone_partition_is_valid_2(p.vertices_begin(),
+                                               p.vertices_end(),
+                                               begin, end);
 }
 
 bool is_y_monotone_2(Polygon_2& p)
@@ -88,7 +93,8 @@ void polygon_triangulation_decomposition_2
 }
 
 void small_side_angle_bisector_decomposition_2
-(Small_side_angle_bisector_decomposition_2& ssabd, Polygon_2& polygon, py::list& res)
+(Small_side_angle_bisector_decomposition_2& ssabd,
+ Polygon_2& polygon, py::list& res)
 {
   auto v = std::vector<Polygon_2>();
   ssabd(polygon, std::back_inserter(v));
@@ -98,11 +104,11 @@ void small_side_angle_bisector_decomposition_2
 }
 
 void export_polygon_partition_2(py::module_& m) {
-  typedef pp2::Polygon_2                                        Pgn_2;
-  typedef pp2::Polygon_with_holes_2                             Pwh_2;
-  typedef pp2::Polygon_vertical_decomposition_2                 PVD_2;
-  typedef pp2::Polygon_triangulation_decomposition_2            PTD_2;
-  typedef pp2::Small_side_angle_bisector_decomposition_2        SSABD_2;
+  using Pgn_2 = pp2::Polygon_2;
+  using Pwh_2 = pp2::Polygon_with_holes_2;
+  using PVD_2 = pp2::Polygon_vertical_decomposition_2;
+  using PTD_2 = pp2::Polygon_triangulation_decomposition_2;
+  using SSABD_2 = pp2::Small_side_angle_bisector_decomposition_2;
 
   m.def("approx_convex_partition_2", &pp2::approx_convex_partition_2);
   m.def("greene_approx_convex_partition_2", &pp2::greene_approx_convex_partition_2);
