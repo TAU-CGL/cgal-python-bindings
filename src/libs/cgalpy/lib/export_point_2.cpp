@@ -43,7 +43,7 @@ void export_point_2(py::module_& m) {
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
     // TODO: Returning address of local variable or temporary with EPEC kernel
-    .def("coordinates", bp::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end))
+    // def("coordinates", bp::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end)) NB
 #endif
     .def("dimension", &Point_2::dimension)
     .def(bp::self == bp::self)

@@ -81,9 +81,9 @@ vertices_around_vertex_iterator1(Triangulation_2& t, Vertex& v, Face& f) {
 }
 
 void insert_list(Triangulation_2& t, py::list& lst) {
-  auto v = std::vector<Point>(py::stl_input_iterator<Point>(lst),
-                              py::stl_input_iterator<Point>());
-  t.insert(v.begin(), v.end());
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
+  t.insert(begin, end);
 }
 
 void flip(Triangulation_2& t, Face& f, int i) {
@@ -118,40 +118,39 @@ const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
 
 } // End of namespace tri2
 
-void export_triangulation_2() {
-  typedef tri2::Triangulation_2                 Tri2;
+void export_triangulation_2(py::module_& m) {
+  using Tri2 = tri2::Triangulation_2;
 
-  py::scope tri2_scope =
-    py::class_<Tri2>("Triangulation_2")
-    .def(py::init<>())
+  py::class_<Tri2> tri2_c(m, "Triangulation_2");
+  tri2_c.def(py::init<>())
     .def(py::init<Tri2&>())
     .def("dimension", &Tri2::dimension)
     .def("number_of_vertices", &Tri2::number_of_vertices)
     .def("number_of_faces", &Tri2::number_of_faces)
-    .def("infinite_face", &tri2::infinite_face, py::return_internal_reference<>())
-    .def("infinite_vertex", &tri2::infinite_vertex, py::return_internal_reference<>())
-    .def("finite_vertex", &tri2::finite_vertex, py::return_internal_reference<>())
+    .def("infinite_face", &tri2::infinite_face)
+    .def("infinite_vertex", &tri2::infinite_vertex)
+    .def("finite_vertex", &tri2::finite_vertex)
     .def("clear", &Tri2::clear)
     .def("insert", &tri2::insert_list)
-    .def("insert", &tri2::insert_point, py::return_internal_reference<>())
+    .def("insert", &tri2::insert_point)
     .def("triangle", &tri2::triangle)
     .def("circumcenter", &tri2::circumcenter)
     .def("flip", &tri2::flip)
     .def("remove", &tri2::remove)
-    .def("all_vertices", py::range<py::return_internal_reference<>>(&Tri2::all_vertices_begin, &Tri2::all_vertices_end))
-    .def("finite_vertices", py::range<py::return_internal_reference<>>(&Tri2::finite_vertices_begin, &Tri2::finite_vertices_end))
-    .def("all_edges", &tri2::all_edges_iterator, Manage_new_object())
-    .def("finite_edges", &tri2::finite_edges_iterator, Manage_new_object())
-    .def("all_faces", py::range<py::return_internal_reference<>>(&Tri2::all_faces_begin, &Tri2::all_faces_end))
-    .def("finite_faces", py::range<py::return_internal_reference<>>(&Tri2::finite_faces_begin, &Tri2::finite_faces_end))
-    .def("points", py::range<py::return_internal_reference<>>(&Tri2::points_begin, &Tri2::points_end))
+    // .def("all_vertices", py::range<py::return_internal_reference<>>(&Tri2::all_vertices_begin, &Tri2::all_vertices_end)) NB
+    // .def("finite_vertices", py::range<py::return_internal_reference<>>(&Tri2::finite_vertices_begin, &Tri2::finite_vertices_end)) NB
+    .def("all_edges", &tri2::all_edges_iterator)
+    .def("finite_edges", &tri2::finite_edges_iterator)
+    // .def("all_faces", py::range<py::return_internal_reference<>>(&Tri2::all_faces_begin, &Tri2::all_faces_end)) NB
+    // .def("finite_faces", py::range<py::return_internal_reference<>>(&Tri2::finite_faces_begin, &Tri2::finite_faces_end)) NB
+    // .def("points", py::range<py::return_internal_reference<>>(&Tri2::points_begin, &Tri2::points_end)) NB
     //circulators
-    .def("incident_vertices", &tri2::vertices_around_vertex_iterator0, Manage_new_object())
-    .def("incident_vertices", &tri2::vertices_around_vertex_iterator1, Manage_new_object())
-    .def("incident_edges", &tri2::edges_around_vertex_iterator0, Manage_new_object())
-    .def("incident_edges", &tri2::edges_around_vertex_iterator1, Manage_new_object())
-    .def("incident_faces", &tri2::faces_around_vertex_iterator0, Manage_new_object())
-    .def("incident_faces", &tri2::faces_around_vertex_iterator1, Manage_new_object())
+    .def("incident_vertices", &tri2::vertices_around_vertex_iterator0)
+    .def("incident_vertices", &tri2::vertices_around_vertex_iterator1)
+    .def("incident_edges", &tri2::edges_around_vertex_iterator0)
+    .def("incident_edges", &tri2::edges_around_vertex_iterator1)
+    .def("incident_faces", &tri2::faces_around_vertex_iterator0)
+    .def("incident_faces", &tri2::faces_around_vertex_iterator1)
     .def("mirror_edge", &Tri2::mirror_edge)
     .def("segment", static_cast<tri2::Segment(Tri2::*)(const tri2::Edge&) const>(&Tri2::segment))
     .def("is_infinite", static_cast<bool (Tri2::*)(const tri2::Edge&) const>(&Tri2::is_infinite))
@@ -159,7 +158,7 @@ void export_triangulation_2() {
     .def("cw", &Tri2::cw)
     ;
 
-  py::enum_<tri2::Locate_type>("Locate_type")
+  py::enum_<tri2::Locate_type>(tri2_c, "Locate_type")
     .value("VERTEX", Tri2::VERTEX)
     .value("EDGE", Tri2::EDGE)
     .value("FACE", Tri2::FACE)
@@ -175,44 +174,44 @@ void export_triangulation_2() {
   ;
 #else
   // In the case of non-priodic triangulation the kernel serves as the traits.
-  if (! add_attr<tri2::Geom_traits>("Geom_traits", tri2_scope))
+  if (! add_attr<tri2::Geom_traits>("Geom_traits", tri2_c))
     std::cerr << "'tri2::Geom_traits' not registered!\n";
 #endif
 
-  if (! add_attr<tri2::Point>("Point", tri2_scope))
+  if (! add_attr<tri2::Point>("Point", tri2_c))
     std::cerr << "'tri2::Point' not registered!\n";
-  if (! add_attr<tri2::Segment>("Segment", tri2_scope))
+  if (! add_attr<tri2::Segment>("Segment", tri2_c))
     std::cerr << "'tri2::Segment' not registered!\n";
-  if (! add_attr<tri2::Triangle>("Triangle", tri2_scope))
+  if (! add_attr<tri2::Triangle>("Triangle", tri2_c))
     std::cerr << "'tri2::Triangle' not registered!\n";
 
-  py::class_<tri2::Vertex>("Vertex")
-    .def<tri2::Point&(tri2::Vertex::*)()>("point", &tri2::Vertex::point, py::return_internal_reference<>())
+  py::class_<tri2::Vertex>(tri2_c, "Vertex")
+    .def<tri2::Point&(tri2::Vertex::*)()>("point", &tri2::Vertex::point)
     ;
 
-  py::class_<tri2::Edge>("Edge")
+  py::class_<tri2::Edge>(tri2_c, "Edge")
     .def_readwrite("first", &tri2::Edge::first)
     .def_readwrite("second", &tri2::Edge::second)
     ;
 
-  py::class_<tri2::Face>("Face")
+  py::class_<tri2::Face>(tri2_c, "Face")
     .def("is_valid", &tri2::Face::is_valid)
     ;
 
-  py::class_<tri2::Vertex_handle>("Vertex_handle")
+  py::class_<tri2::Vertex_handle>(tri2_c, "Vertex_handle")
     .def(py::init<>())
-    .def("value", &tri2::value<tri2::Vertex_handle>, Reference_existing_object())
+    .def("value", &tri2::value<tri2::Vertex_handle>)
     ;
 
-  py::class_<tri2::Face_handle>("Face_handle")
+  py::class_<tri2::Face_handle>(tri2_c, "Face_handle")
     .def(py::init<>())
-    .def("value", &tri2::value<tri2::Face_handle>, Reference_existing_object())
+    .def("value", &tri2::value<tri2::Face_handle>)
     ;
 
-  bind_copy_iterator<CopyIterator<tri2::All_edges_iterator>>("Triangulation_all_edges_iterator");
-  bind_copy_iterator<CopyIterator<tri2::Finite_edges_iterator>>("Triangulation_finite_edges_iterator");
-  bind_copy_iterator<Copy_iterator_from_circulator<tri2::Edge_circulator>>("Triangulation_edges_iterator");
+  bind_copy_iterator<CopyIterator<tri2::All_edges_iterator>>(m, "Triangulation_all_edges_iterator");
+  bind_copy_iterator<CopyIterator<tri2::Finite_edges_iterator>>(m, "Triangulation_finite_edges_iterator");
+  bind_copy_iterator<Copy_iterator_from_circulator<tri2::Edge_circulator>>(m, "Triangulation_edges_iterator");
 
-  bind_iterator<Iterator_from_circulator<tri2::Face_circulator>>("Triangulation_faces_iterator");
-  bind_iterator<Iterator_from_circulator<tri2::Vertex_circulator>>("Triangulation_vertices_iterator");
+  bind_iterator<Iterator_from_circulator<tri2::Face_circulator>>(m, "Triangulation_faces_iterator");
+  bind_iterator<Iterator_from_circulator<tri2::Vertex_circulator>>(m, "Triangulation_vertices_iterator");
 }
