@@ -53,24 +53,20 @@ assert(type(res_lm_1) == Aos2.Arrangement_2.Face)
 res_lm_1.set_data("some data")
 print(res_lm_1.data())
 
-# for face in arr.faces():
-#     print(face.data())
+for face in arr.faces():
+    print(face.data())
 
 # batch point location
 batch_query = [q1, q2]
 res = Aos2.locate(arr, batch_query)
 
-# del arr # the lifetime of the array is tied to the lifetime of the results
+del arr # the lifetime of the arrangement is tied to the lifetime of the results
 assert(type(res[0][1]) == Aos2.Arrangement_2.Face)
 assert(type(res[1][1]) == Aos2.Arrangement_2.Vertex)
 
-print('xxxxxxxxxx')
-xxx = naive_pl.locate(q1)
-print(xxx)
-print(res_naive_1)
-print(res[0][1])
+print('Expect to get "other data":')
+res[0][1].set_data("other data")
 
 print(res[0][1].data())
-# print(res3[0][1].data(), res3[1][1].point())
-f.set_data("other data")
-print(res.data())
+print(res_naive_1.data())
+print(res_lm_1.data())

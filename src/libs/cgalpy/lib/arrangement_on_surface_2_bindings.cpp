@@ -174,9 +174,7 @@ py::list decompose(Arrangement_2& arr) {
 class Zone_object_visitor : public boost::static_visitor<py::object> {
 public:
   template<typename T>
-  py::object operator()(T operand) const {
-    return py::cast(*operand);
-  }
+  py::object operator()(T operand) const { return py::cast(&(*operand)); }
 };
 
 //
@@ -363,7 +361,7 @@ void export_aos(py::module_& m, const py::object& traits_c) {
     //                                         arr.halfedges_end());
     //                   }) NB
     // .def("halfedges", py::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>)) NB
-    // .def("vertices", py::make_iterator(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>), py::py::keep_alive<0, 1>()) NB
+    // .def("vertices", py::make_iterator(&aos2::vertices_begin<Aos>, &aos2::vertices_end<Aos>), py::keep_alive<0, 1>()) NB
     // .def("faces", py::range<RIR>(&aos2::faces_begin<Aos>, &aos2::faces_end<Aos>)) NB
     // .def("edges", py::range<RIR>(&aos2::edges_begin<Aos>, &aos2::edges_end<Aos>)) NB
     // .def("unbounded_faces", py::range<RIR>(&aos2::unbounded_faces_begin<Aos>, &aos2::unbounded_faces_end<Aos>)) NB
