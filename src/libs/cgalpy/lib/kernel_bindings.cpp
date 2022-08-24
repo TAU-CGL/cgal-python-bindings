@@ -184,7 +184,7 @@ void export_kernel(py::module_& m) {
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
     // TODO: Returning address of local variable or temporary with EPEC kernel
-    .def("coordinates", py::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end))
+    // .def("coordinates", py::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end)) NB
 #endif
     .def("dimension", &Point_2::dimension)
     .def("__str__", to_string<Point_2>)
@@ -416,7 +416,7 @@ void export_kernel(py::module_& m) {
     .def("__getitem__", &Vector_2::operator[])
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
     // TODO: Returning address of local variable or temporary with EPEC kernel
-    .def("cartesian_coordinates", py::range<>(&Vector_2::cartesian_begin, & Vector_2::cartesian_end))
+    // .def("cartesian_coordinates", py::range<>(&Vector_2::cartesian_begin, & Vector_2::cartesian_end)) NB
 #endif
     .def("dimension", &Vector_2::dimension)
     .def("direction", &Vector_2::direction)

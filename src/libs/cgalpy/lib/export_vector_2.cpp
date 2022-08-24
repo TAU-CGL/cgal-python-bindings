@@ -36,7 +36,7 @@ void export_vector_2(py::module_& m) {
     .def("__getitem__", &Vector_2::operator[])
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
     // TODO: Returning address of local variable or temporary with EPEC kernel
-    .def("cartesian_coordinates", bp::range<>(&Vector_2::cartesian_begin, & Vector_2::cartesian_end))
+    // .def("cartesian_coordinates", bp::range<>(&Vector_2::cartesian_begin, & Vector_2::cartesian_end)) NB
 #endif
     .def("dimension", &Vector_2::dimension)
     .def("direction", &Vector_2::direction)
