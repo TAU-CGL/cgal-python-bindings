@@ -288,11 +288,6 @@ typename Aos::Face& remove_edge(Aos& arr, typename Aos::Halfedge& e) {
 
 //
 template <typename Aos>
-py::object vertices(const Aos& arr)
-{ return py::make_iterator(arr.vertices_begin(), arr.vertices_end()); }
-
-//
-template <typename Aos>
 typename Aos::Halfedge_iterator halfedges_begin(Aos& arr)
 { return arr.halfedges_begin(); }
 
@@ -352,11 +347,11 @@ void export_aos(py::module_& m, const py::object& traits_c) {
   aos_c.def(py::init<>())
     .def(py::init<const Aos&>())
     .def(py::init<const GT*>())
-    .def("vertices", [&](const Aos& arr) {
-                       return py::make_iterator<py::rv_policy::reference_internal>(aos_c,
-                                                arr.vertices_begin(),
-                                                arr.vertices_end());
-                     }, py::keep_alive<0, 1>())
+    // .def("vertices", [&](const Aos& arr) {
+    //                    return py::make_iterator<py::rv_policy::reference_internal>(aos_c,
+    //                                             arr.vertices_begin(),
+    //                                             arr.vertices_end());
+    //                  }, py::keep_alive<0, 1>())
     // .def("vertices", &aos2::vertices<Aos>, py::keep_alive<0, 1>())
     // .def("halfedges", [](Aos& arr) {
     //                     return py::iterator(arr.halfedges_begin(),
@@ -389,6 +384,49 @@ void export_aos(py::module_& m, const py::object& traits_c) {
     .def("assign", &aos2::assign<Aos>)
     .def("clear", &Aos::clear)
     ;
+
+  constexpr auto ri(py::rv_policy::reference_internal);
+  using Vci = Aos::Vertex_const_iterator;
+  using V = Aos::Vertex;
+#if 1
+  add_iterator<ri, Vci, Vci, const V&>("Vertex_iterator", aos_c);
+  aos_c.def("vertices",
+            [](const Aos& arr) {
+              using state = iterator_state<Vci, Vci>;
+              return py::cast(state{arr.vertices_begin(),
+                                    arr.vertices_end(), true});
+            }, py::keep_alive<0, 1>());
+#else
+  aos_c.def("vertices",
+            [&](const Aos& arr) {
+              return make_iterator<ri, Vci, Vci,
+                                   const V&>("Vertex_iterator",
+                                             arr,
+                                             arr.vertices_begin(),
+                                             arr.vertices_end());
+            }, py::keep_alive<0, 1>());
+#endif
+
+  // Halfedges
+  using Hci = Aos::Halfedge_const_iterator;
+  using H = Aos::Halfedge;
+  add_iterator<ri, Hci, Hci, const H&>("Halfedge_iterator", aos_c);
+  aos_c.def("halfedges",
+            [](const Aos& arr) {
+              using state = iterator_state<Hci, Hci>;
+              return py::cast(state{arr.halfedges_begin(),
+                                    arr.halfedges_end(), true});
+            }, py::keep_alive<0, 1>());
+
+  // Faces
+  using Fci = Aos::Face_const_iterator;
+  using F = Aos::Face;
+  add_iterator<ri, Fci, Fci, const F&>("Face_iterator", aos_c);
+  aos_c.def("faces",
+            [](const Aos& arr) {
+              using state = iterator_state<Fci, Fci>;
+              return py::cast(state{arr.faces_begin(), arr.faces_end(), true});
+            }, py::keep_alive<0, 1>());
 
     // supported only by some traits
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
