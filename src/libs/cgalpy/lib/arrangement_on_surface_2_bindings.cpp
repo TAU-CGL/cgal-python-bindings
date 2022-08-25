@@ -26,6 +26,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 void export_vertex(py::class_<aos2::Arrangement_on_surface_2>&);
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>&);
@@ -191,7 +192,8 @@ py::list zone_default(Arrangement_on_surface_2& arr, X_monotone_curve_2& c) {
 }
 
 template <typename PointLocation>
-py::list zone(Arrangement_2& arr, X_monotone_curve_2& c, PointLocation& pl) {
+py::list zone(Arrangement_on_surface_2& arr, X_monotone_curve_2& c,
+              PointLocation& pl) {
   py::list lst;
   auto op =
     [&] (const variant& o) mutable
@@ -279,21 +281,15 @@ typename Aos::Halfedge& merge_edge(Aos& arr,
 
 //
 template <typename Aos>
-typename Aos::Face& remove_edge(Aos& arr,
-                                typename Aos::Halfedge& e) {
+typename Aos::Face& remove_edge(Aos& arr, typename Aos::Halfedge& e) {
   auto handle = e.twin();
   return *(arr.remove_edge(handle));
 }
 
 //
 template <typename Aos>
-typename Aos::Vertex_iterator vertices_begin(Aos& arr)
-{ return arr.vertices_begin(); }
-
-//
-template <typename Aos>
-typename Aos::Vertex_iterator vertices_end(Aos& arr)
-{ return arr.vertices_end(); }
+py::object vertices(const Aos& arr)
+{ return py::make_iterator(arr.vertices_begin(), arr.vertices_end()); }
 
 //
 template <typename Aos>
@@ -352,13 +348,16 @@ void export_aos(py::module_& m, const py::object& traits_c) {
   using Aos = aos2::Arrangement_on_surface_2;
   using GT = aos2::Geometry_traits_2;
 
-  py::class_<Aos> c(m, "Arrangement_on_surface_2");
-  c.def(py::init<>())
+  py::class_<Aos> aos_c(m, "Arrangement_on_surface_2");
+  aos_c.def(py::init<>())
     .def(py::init<const Aos&>())
     .def(py::init<const GT*>())
-    // .def("vertices", py::make_iterator(&aos2::vertices_begin<Aos>,
-    //                                    &aos2::vertices_end<Aos>),
-    //      py::keep_alive<0, 1>())
+    .def("vertices", [&](const Aos& arr) {
+                       return py::make_iterator<py::rv_policy::reference_internal>(aos_c,
+                                                arr.vertices_begin(),
+                                                arr.vertices_end());
+                     }, py::keep_alive<0, 1>())
+    // .def("vertices", &aos2::vertices<Aos>, py::keep_alive<0, 1>())
     // .def("halfedges", [](Aos& arr) {
     //                     return py::iterator(arr.halfedges_begin(),
     //                                         arr.halfedges_end());
@@ -395,15 +394,15 @@ void export_aos(py::module_& m, const py::object& traits_c) {
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
+  add_insertion(aos_c, "__str__");
+  add_insertion(aos_c, "__repr__");
 #endif
 
-  export_vertex(c);
-  export_halfedge(c);
-  export_face(c);
+  export_vertex(aos_c);
+  export_halfedge(aos_c);
+  export_face(aos_c);
 
-  c.attr("Geometry_traits_2") = traits_c;
+  aos_c.attr("Geometry_traits_2") = traits_c;
 }
 
 // Overlay traits
