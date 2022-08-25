@@ -43,11 +43,14 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Face = Arr2::Face;
   using Inner_ccb_iterator = Arr2::Inner_ccb_iterator;
 
-  py::class_<Face>(c, "Face")
+  py::class_<CGAL::Arr_face_base>(c, "Arr_face_base")
+    .def("is_unbounded", &CGAL::Arr_face_base::is_unbounded)
+    .def("is_fictitious", &CGAL::Arr_face_base::is_fictitious)
+    ;
+
+  py::class_<Face, CGAL::Arr_face_base>(c, "Face")
     .def(py::init<>())
     .def("assign", &Face::assign)
-    .def("is_unbounded", &Face::is_unbounded)
-    .def("is_fictitious", &Face::is_fictitious)
     .def("has_outer_ccb", &Face::has_outer_ccb)
     .def("number_of_inner_ccbs", &Face::number_of_inner_ccbs)
     .def("number_of_outer_ccbs", &Face::number_of_outer_ccbs)
@@ -58,6 +61,7 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("holes", &aos2::inner_ccbs)
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
     // .def("isolated_vertices", py::range<py::return_internal_reference<>>(&aos2::isolated_vertices_begin, &aos2::isolated_vertices_end)) NB
+
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
