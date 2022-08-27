@@ -14,6 +14,7 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace bp = nanobind;
 
@@ -26,8 +27,8 @@ constexpr bool is_epec_type() {
 }
 
 void export_point_2(py::module_& m) {
-  bp::class_<Point_2> p_co(m, "Point_2");
-  p_co.def(bp::init<>())
+  bp::class_<Point_2> point_c(m, "Point_2");
+  point_c.def(bp::init<>())
     .def(bp::init<double, double>())
     .def(bp::init<FT&, FT&>())
     .def(bp::init<RT&, RT&>())
@@ -40,11 +41,6 @@ void export_point_2(py::module_& m) {
     .def("bbox", &Point_2::bbox)
     .def("cartesian", &Point_2::cartesian)
     .def("__getitem__", &Point_2::operator[])
-#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
-     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
-    // TODO: Returning address of local variable or temporary with EPEC kernel
-    // def("coordinates", bp::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end)) NB
-#endif
     .def("dimension", &Point_2::dimension)
     .def(bp::self == bp::self)
     .def(bp::self != bp::self)
@@ -61,6 +57,17 @@ void export_point_2(py::module_& m) {
     // .setattr("__doc__", "Point_2") NB
     ;
 
-  add_insertion(p_co, "__str__");
-  add_insertion(p_co, "__repr__");
+#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
+     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
+  using Cci = Kernel::Cartesian_const_iterator_2;
+  constexpr auto ri(py::rv_policy::reference_internal);
+  add_iterator<ri, Cci, Cci, const FT&>("cartesian_iterator", point_c);
+  point_c.def("cartesians",
+              [] (const Point_2& p)
+              { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
+              py::keep_alive<0, 1>());
+#endif
+
+  add_insertion(point_c, "__str__");
+  add_insertion(point_c, "__repr__");
 }
