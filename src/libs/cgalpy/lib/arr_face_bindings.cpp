@@ -11,6 +11,7 @@
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -27,29 +28,21 @@ Iterator_of_circulators<Inner_ccb_iterator>* inner_ccbs(Face& f)
                                                          f.inner_ccbs_end());
 }
 
-//
-Isolated_vertex_iterator isolated_vertices_begin(Face& f)
-{ return f.isolated_vertices_begin(); }
-
-//
-Isolated_vertex_iterator isolated_vertices_end(Face& f)
-{ return f.isolated_vertices_end(); }
-
 }
 
 //
 void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
-  using Arr2 = aos2::Arrangement_2;
-  using Face = Arr2::Face;
-  using Inner_ccb_iterator = Arr2::Inner_ccb_iterator;
+  using Aos = aos2::Arrangement_on_surface_2;
+  using Face = Aos::Face;
+  using Inner_ccb_iterator = Aos::Inner_ccb_iterator;
 
   py::class_<CGAL::Arr_face_base>(c, "Arr_face_base")
     .def("is_unbounded", &CGAL::Arr_face_base::is_unbounded)
     .def("is_fictitious", &CGAL::Arr_face_base::is_fictitious)
     ;
 
-  py::class_<Face, CGAL::Arr_face_base>(c, "Face")
-    .def(py::init<>())
+  py::class_<Face, CGAL::Arr_face_base> face_c(c, "Face");
+  face_c.def(py::init<>())
     .def("assign", &Face::assign)
     .def("has_outer_ccb", &Face::has_outer_ccb)
     .def("number_of_inner_ccbs", &Face::number_of_inner_ccbs)
@@ -60,8 +53,6 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("inner_ccbs", &aos2::inner_ccbs)
     .def("holes", &aos2::inner_ccbs)
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
-    // .def("isolated_vertices", py::range<py::return_internal_reference<>>(&aos2::isolated_vertices_begin, &aos2::isolated_vertices_end)) NB
-
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
@@ -72,8 +63,20 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
 #endif
     ;
 
-  bind_iterator<Iterator_from_circulator<Arr2::Ccb_halfedge_circulator>>
-    (c, "Ccb_halfedge_iterator");
+  // Isolated vertices
+  using Vci = Aos::Vertex_const_iterator;
+  using V = Aos::Vertex;
+  constexpr auto ri(py::rv_policy::reference_internal);
+  add_iterator<ri, Vci, Vci, const V&>("Vertex_iterator", face_c);
+  face_c.def("isolated_vertices",
+             [](const Face& face) {
+              return make_iterator(face.isolated_vertices_begin(),
+                                   face.isolated_vertices_end());
+             },
+             py::keep_alive<0, 1>());
+
+  bind_iterator<Iterator_from_circulator<Aos::Ccb_halfedge_circulator>>
+    (face_c, "Ccb_halfedge_iterator");
   bind_iterator_of_circulators<Iterator_of_circulators<Inner_ccb_iterator>>
-    (c, "Inner_ccbs_iterator");
+    (face_c, "Inner_ccbs_iterator");
 }

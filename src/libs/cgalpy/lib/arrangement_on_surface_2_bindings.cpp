@@ -288,32 +288,6 @@ typename Aos::Face& remove_edge(Aos& arr, typename Aos::Halfedge& e) {
 
 //
 template <typename Aos>
-typename Aos::Halfedge_iterator halfedges_begin(Aos& arr)
-{ return arr.halfedges_begin(); }
-
-//
-template <typename Aos>
-typename Aos::Halfedge_iterator halfedges_end(Aos& arr)
-{ return arr.halfedges_end(); }
-
-//
-template <typename Aos>
-typename Aos::Edge_iterator edges_begin(Aos& arr) { return arr.edges_begin(); }
-
-//
-template <typename Aos>
-typename Aos::Edge_iterator edges_end(Aos& arr) { return arr.edges_end(); }
-
-//
-template <typename Aos>
-typename Aos::Face_iterator faces_begin(Aos& arr) { return arr.faces_begin(); }
-
-//
-template <typename Aos>
-typename Aos::Face_iterator faces_end(Aos& arr) { return arr.faces_end(); }
-
-//
-template <typename Aos>
 typename Aos::Face_iterator unbounded_faces_begin(Aos& arr)
 { return arr.unbounded_faces_begin(); }
 
@@ -324,8 +298,7 @@ typename Aos::Face_iterator unbounded_faces_end(Aos& arr)
 
 //
 template <typename Aos>
-typename Aos::Face& unbounded_face(Aos& arr)
-{ return *(arr.unbounded_face()); }
+typename Aos::Face& unbounded_face(Aos& arr) { return *(arr.unbounded_face()); }
 
 //
 template <typename Aos>
@@ -335,6 +308,31 @@ typename Aos::Face& fictitious_face(Aos& arr)
 //
 template <typename Aos>
 void assign(Aos& arr, Aos& input_arr) { arr.assign(input_arr); }
+
+//
+template <typename Aos>
+py::object vertices(const Aos& arr)
+{ return make_iterator(arr.vertices_begin(), arr.vertices_end()); }
+
+//
+template <typename Aos>
+py::object halfedges(const Aos& arr)
+{ return make_iterator(arr.halfedges_begin(), arr.halfedges_end()); }
+
+//
+template <typename Aos>
+py::object edges(const Aos& arr)
+{ return make_iterator(arr.edges_begin(), arr.edges_end()); }
+
+//
+template <typename Aos>
+py::object faces(const Aos& arr)
+{ return make_iterator(arr.faces_begin(), arr.faces_end()); }
+
+//
+template <typename Aos>
+py::object unbounded_faces(const Aos& arr)
+{ return make_iterator(arr.unbounded_faces_begin(), arr.unbounded_faces_end()); }
 
 }
 
@@ -347,20 +345,6 @@ void export_aos(py::module_& m, const py::object& traits_c) {
   aos_c.def(py::init<>())
     .def(py::init<const Aos&>())
     .def(py::init<const GT*>())
-    // .def("vertices", [&](const Aos& arr) {
-    //                    return py::make_iterator<py::rv_policy::reference_internal>(aos_c,
-    //                                             arr.vertices_begin(),
-    //                                             arr.vertices_end());
-    //                  }, py::keep_alive<0, 1>())
-    // .def("vertices", &aos2::vertices<Aos>, py::keep_alive<0, 1>())
-    // .def("halfedges", [](Aos& arr) {
-    //                     return py::iterator(arr.halfedges_begin(),
-    //                                         arr.halfedges_end());
-    //                   }) NB
-    // .def("halfedges", py::range<RIR>(&aos2::halfedges_begin<Aos>, &aos2::halfedges_end<Aos>)) NB
-    // .def("faces", py::range<RIR>(&aos2::faces_begin<Aos>, &aos2::faces_end<Aos>)) NB
-    // .def("edges", py::range<RIR>(&aos2::edges_begin<Aos>, &aos2::edges_end<Aos>)) NB
-    // .def("unbounded_faces", py::range<RIR>(&aos2::unbounded_faces_begin<Aos>, &aos2::unbounded_faces_end<Aos>)) NB
     .def("fictitious_face", &aos2::fictitious_face<Aos>)
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex<Aos>)
     .def("insert_from_right_vertex", &aos2::insert_from_right_vertex<Aos>)
@@ -387,46 +371,24 @@ void export_aos(py::module_& m, const py::object& traits_c) {
 
   constexpr auto ri(py::rv_policy::reference_internal);
   using Vci = Aos::Vertex_const_iterator;
-  using V = Aos::Vertex;
-#if 1
-  add_iterator<ri, Vci, Vci, const V&>("Vertex_iterator", aos_c);
-  aos_c.def("vertices",
-            [](const Aos& arr) {
-              using state = iterator_state<Vci, Vci>;
-              return py::cast(state{arr.vertices_begin(),
-                                    arr.vertices_end(), true});
-            }, py::keep_alive<0, 1>());
-#else
-  aos_c.def("vertices",
-            [&](const Aos& arr) {
-              return make_iterator<ri, Vci, Vci,
-                                   const V&>("Vertex_iterator",
-                                             arr,
-                                             arr.vertices_begin(),
-                                             arr.vertices_end());
-            }, py::keep_alive<0, 1>());
-#endif
-
-  // Halfedges
   using Hci = Aos::Halfedge_const_iterator;
-  using H = Aos::Halfedge;
-  add_iterator<ri, Hci, Hci, const H&>("Halfedge_iterator", aos_c);
-  aos_c.def("halfedges",
-            [](const Aos& arr) {
-              using state = iterator_state<Hci, Hci>;
-              return py::cast(state{arr.halfedges_begin(),
-                                    arr.halfedges_end(), true});
-            }, py::keep_alive<0, 1>());
-
-  // Faces
+  using Eci = Aos::Edge_const_iterator;
   using Fci = Aos::Face_const_iterator;
+  using V = Aos::Vertex;
+  using H = Aos::Halfedge;
   using F = Aos::Face;
+
+  // Iterators
+  add_iterator<ri, Vci, Vci, const V&>("Vertex_iterator", aos_c);
+  add_iterator<ri, Hci, Hci, const H&>("Halfedge_iterator", aos_c);
+  add_iterator<ri, Hci, Hci, const H&>("Edge_iterator", aos_c);
   add_iterator<ri, Fci, Fci, const F&>("Face_iterator", aos_c);
-  aos_c.def("faces",
-            [](const Aos& arr) {
-              using state = iterator_state<Fci, Fci>;
-              return py::cast(state{arr.faces_begin(), arr.faces_end(), true});
-            }, py::keep_alive<0, 1>());
+
+  aos_c.def("vertices", &aos2::vertices<Aos>, py::keep_alive<0, 1>())
+    .def("halfedges", &aos2::halfedges<Aos>, py::keep_alive<0, 1>())
+    .def("edges", &aos2::edges<Aos>, py::keep_alive<0, 1>())
+    .def("faces", &aos2::faces<Aos>, py::keep_alive<0, 1>())
+    .def("unbounded_faces", &aos2::unbounded_faces<Aos>, py::keep_alive<0, 1>());
 
     // supported only by some traits
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
