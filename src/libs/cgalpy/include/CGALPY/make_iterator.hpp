@@ -151,18 +151,9 @@ void add_iterator(const char* name, C& c, Extra&&... extra) {
                     Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
-// Make an iterator
-template <py::rv_policy Policy = py::rv_policy::reference_internal,
-          typename Iterator, typename Sentinel,
-          typename ValueType = decltype(*std::declval<Iterator>()),
-          typename... Extra,
-          typename C>
-py::object make_iterator(const char* name, C& c,
-                         Iterator begin, Sentinel end,
-                         Extra&&... extra) {
-  add_iterator_impl<Policy,
-                    Iterator, Sentinel, ValueType,
-                    Extra...>(name, c, std::forward<Extra>(extra)...);
+//
+template <typename Iterator, typename Sentinel>
+py::object make_iterator(Iterator begin, Sentinel end) {
   using state = iterator_state<Iterator, Sentinel>;
   return py::cast(state{begin, end, true});
 }
