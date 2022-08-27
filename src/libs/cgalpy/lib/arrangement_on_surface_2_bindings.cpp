@@ -369,20 +369,19 @@ void export_aos(py::module_& m, const py::object& traits_c) {
     .def("clear", &Aos::clear)
     ;
 
-  constexpr auto ri(py::rv_policy::reference_internal);
   using Vci = Aos::Vertex_const_iterator;
   using Hci = Aos::Halfedge_const_iterator;
   using Eci = Aos::Edge_const_iterator;
   using Fci = Aos::Face_const_iterator;
-  using V = Aos::Vertex;
-  using H = Aos::Halfedge;
-  using F = Aos::Face;
+  using Vertex = Aos::Vertex;
+  using Halfedge = Aos::Halfedge;
+  using Face = Aos::Face;
 
   // Iterators
-  add_iterator<ri, Vci, Vci, const V&>("Vertex_iterator", aos_c);
-  add_iterator<ri, Hci, Hci, const H&>("Halfedge_iterator", aos_c);
-  add_iterator<ri, Hci, Hci, const H&>("Edge_iterator", aos_c);
-  add_iterator<ri, Fci, Fci, const F&>("Face_iterator", aos_c);
+  add_iterator<Vci, Vci, const Vertex&>("Vertex_iterator", aos_c);
+  add_iterator<Hci, Hci, const Halfedge&>("Halfedge_iterator", aos_c);
+  add_iterator<Hci, Hci, const Halfedge&>("Edge_iterator", aos_c);
+  add_iterator<Fci, Fci, const Face&>("Face_iterator", aos_c);
 
   aos_c.def("vertices", &aos2::vertices<Aos>, py::keep_alive<0, 1>())
     .def("halfedges", &aos2::halfedges<Aos>, py::keep_alive<0, 1>())

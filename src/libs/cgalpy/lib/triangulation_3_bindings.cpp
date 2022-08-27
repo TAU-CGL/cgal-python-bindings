@@ -12,6 +12,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -81,47 +82,83 @@ bool cell_is_valid2(const tri3::Cell& cell, bool verbose)
 //
 bool cell_is_valid3(const tri3::Cell& cell) { return cell.is_valid(); }
 
+//
+py::object all_vertices(const Triangulation_3& tri)
+{ return make_iterator(tri.all_vertices_begin(), tri.all_vertices_end()); }
+
+//
+py::object all_edges(const Triangulation_3& tri)
+{ return make_iterator(tri.all_edges_begin(), tri.all_edges_end()); }
+
+//
+py::object all_cells(const Triangulation_3& tri)
+{ return make_iterator(tri.all_cells_begin(), tri.all_cells_end()); }
+
+//
+py::object all_facets(const Triangulation_3& tri)
+{ return make_iterator(tri.all_facets_begin(), tri.all_facets_end()); }
+
+//
+py::object finite_vertices(const Triangulation_3& tri)
+{ return make_iterator(tri.finite_vertices_begin(), tri.finite_vertices_end()); }
+
+//
+py::object finite_edges(const Triangulation_3& tri)
+{ return make_iterator(tri.finite_edges_begin(), tri.finite_edges_end()); }
+
+//
+py::object finite_cells(const Triangulation_3& tri)
+{ return make_iterator(tri.finite_cells_begin(), tri.finite_cells_end()); }
+
+//
+py::object finite_facets(const Triangulation_3& tri)
+{ return make_iterator(tri.finite_facets_begin(), tri.finite_facets_end()); }
+
+//
+py::object points(const Triangulation_3& tri)
+{ return make_iterator(tri.points_begin(), tri.points_end()); }
+
 } // End of namespace tri3
 
 #endif
 
 //
 void export_triangulation_3(py::module_& m) {
-  using Tri3 = tri3::Triangulation_3;
+  using Tri = tri3::Triangulation_3;
 
-  CGAL::Bounded_side(Tri3::*side_of_sphere)(tri3::Cell_handle, const tri3::Point&, bool) const =
-    &Tri3::side_of_sphere;
-  CGAL::Bounded_side(Tri3::*side_of_circle1)(const tri3::Facet&, const tri3::Point&, bool) const =
-    &Tri3::side_of_circle;
-  CGAL::Bounded_side(Tri3::*side_of_circle2)(tri3::Cell_handle, int, const tri3::Point& p, bool) const =
-    &Tri3::side_of_circle;
+  CGAL::Bounded_side(Tri::*side_of_sphere)(tri3::Cell_handle, const tri3::Point&, bool) const =
+    &Tri::side_of_sphere;
+  CGAL::Bounded_side(Tri::*side_of_circle1)(const tri3::Facet&, const tri3::Point&, bool) const =
+    &Tri::side_of_circle;
+  CGAL::Bounded_side(Tri::*side_of_circle2)(tri3::Cell_handle, int, const tri3::Point& p, bool) const =
+    &Tri::side_of_circle;
 
-  bool(Tri3::*is_valid1)(bool, int) const =
-    &Tri3::is_valid;
-  // bool(Tri3::*is_valid2)(tri3::Cell_handle, bool, int) const =
-  //   &Tri3::is_valid;
+  bool(Tri::*is_valid1)(bool, int) const =
+    &Tri::is_valid;
+  // bool(Tri::*is_valid2)(tri3::Cell_handle, bool, int) const =
+  //   &Tri::is_valid;
 
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
-  tri3::Vertex_handle(Tri3::*insert1)(const tri3::Point&, tri3::Cell_handle, bool*) =
-    &Tri3::insert;
-  tri3::Vertex_handle(Tri3::*insert2)(const tri3::Point&, tri3::Vertex_handle, bool*) =
-    &Tri3::insert;
-  tri3::Vertex_handle(Tri3::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int, bool*) =
-    &Tri3::insert;
+  tri3::Vertex_handle(Tri::*insert1)(const tri3::Point&, tri3::Cell_handle, bool*) =
+    &Tri::insert;
+  tri3::Vertex_handle(Tri::*insert2)(const tri3::Point&, tri3::Vertex_handle, bool*) =
+    &Tri::insert;
+  tri3::Vertex_handle(Tri::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int, bool*) =
+    &Tri::insert;
 #else
-  tri3::Vertex_handle(Tri3::*insert1)(const tri3::Point&, tri3::Cell_handle) =
-    &Tri3::insert;
-  tri3::Vertex_handle(Tri3::*insert2)(const tri3::Point&, tri3::Vertex_handle) =
-    &Tri3::insert;
-  tri3::Vertex_handle(Tri3::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int) =
-    &Tri3::insert;
+  tri3::Vertex_handle(Tri::*insert1)(const tri3::Point&, tri3::Cell_handle) =
+    &Tri::insert;
+  tri3::Vertex_handle(Tri::*insert2)(const tri3::Point&, tri3::Vertex_handle) =
+    &Tri::insert;
+  tri3::Vertex_handle(Tri::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int) =
+    &Tri::insert;
 #endif
 
-  tri3::Vertex_handle(Tri3::*nearest_vertex)(const tri3::Point&, tri3::Cell_handle) const =
-    &Tri3::nearest_vertex;
+  tri3::Vertex_handle(Tri::*nearest_vertex)(const tri3::Point&, tri3::Cell_handle) const =
+    &Tri::nearest_vertex;
 
-  py::class_<Tri3> tri3_c(m, "Triangulation_3");
-  tri3_c.def(py::init<>())
+  py::class_<Tri> tri_c(m, "Triangulation_3");
+  tri_c.def(py::init<>())
     .def(py::init<const tri3::Traits&>())
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
     .def("__init__", &tri3::dt3_init)
@@ -141,12 +178,12 @@ void export_triangulation_3(py::module_& m) {
     // std::ptrdiff_t insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
 
     // Displacement
-    .def("move_if_no_collision", &Tri3::move_if_no_collision)
-    .def("move", &Tri3::move)
+    .def("move_if_no_collision", &Tri::move_if_no_collision)
+    .def("move", &Tri::move)
 
     // Removal
-    .def<void(Tri3::*)(tri3::Vertex_handle)>("remove", &Tri3::remove)
-    // .def<bool(Tri3::*)(tri3::Vertex_handle, bool*)>("remove", &Tri3::remove)
+    .def<void(Tri::*)(tri3::Vertex_handle)>("remove", &Tri::remove)
+    // .def<bool(Tri::*)(tri3::Vertex_handle, bool*)>("remove", &Tri::remove)
 
     // template<typename InputIterator >
     // int remove (InputIterator first, InputIterator beyond)
@@ -159,20 +196,20 @@ void export_triangulation_3(py::module_& m) {
     .def("side_of_circle", side_of_circle1)
     .def("side_of_circle", side_of_circle2)
     .def("nearest_vertex", nearest_vertex)
-    .def("nearest_vertex_in_cell", &Tri3::nearest_vertex_in_cell)
+    .def("nearest_vertex_in_cell", &Tri::nearest_vertex_in_cell)
     .def("is_valid", is_valid1)
     // .def("is_valid", is_valid2)
     ;
 
   // Triangulation_data_structure
   // Lock_data_structure
-  py::enum_<tri3::Locate_type>(tri3_c, "Locate_type")
-    .value("VERTEX", Tri3::VERTEX)
-    .value("EDGE", Tri3::EDGE)
-    .value("FACET", Tri3::FACET)
-    .value("CELL", Tri3::CELL)
-    .value("OUTSIDE_CONVEX_HULL", Tri3::OUTSIDE_CONVEX_HULL)
-    .value("OUTSIDE_AFFINE_HULL", Tri3::OUTSIDE_AFFINE_HULL)
+  py::enum_<tri3::Locate_type>(tri_c, "Locate_type")
+    .value("VERTEX", Tri::VERTEX)
+    .value("EDGE", Tri::EDGE)
+    .value("FACET", Tri::FACET)
+    .value("CELL", Tri::CELL)
+    .value("OUTSIDE_CONVEX_HULL", Tri::OUTSIDE_CONVEX_HULL)
+    .value("OUTSIDE_AFFINE_HULL", Tri::OUTSIDE_AFFINE_HULL)
     .export_values()
     ;
 
@@ -184,16 +221,16 @@ void export_triangulation_3(py::module_& m) {
   ;
 #else
   // In the case of non-priodic triangulation the kernel serves as the traits.
-  add_attr<tri3::Geom_traits>("Geom_traits", tri3_c);
+  add_attr<tri3::Geom_traits>("Geom_traits", tri_c);
 #endif
 
-  if (! add_attr<tri3::Point>("Point", tri3_c))
+  if (! add_attr<tri3::Point>("Point", tri_c))
     std::cerr << "'tri3::Point' not registered!\n";
-  add_attr<tri3::Segment>("Segment", tri3_c);
-  add_attr<tri3::Triangle>("Triangle", tri3_c);
-  add_attr<tri3::Tetrahedron>("Tetrahedron", tri3_c);
+  add_attr<tri3::Segment>("Segment", tri_c);
+  add_attr<tri3::Triangle>("Triangle", tri_c);
+  add_attr<tri3::Tetrahedron>("Tetrahedron", tri_c);
 
-  py::class_<tri3::Vertex>(tri3_c, "Vertex")
+  py::class_<tri3::Vertex>(tri_c, "Vertex")
     .def(py::init<>())
     // Access Functions
     .def<tri3::Cell_handle(tri3::Vertex::*)()const>("cell", &tri3::Vertex::cell)
@@ -214,7 +251,7 @@ void export_triangulation_3(py::module_& m) {
                                    tri3::Cell_handle, tri3::Cell_handle) =
     &tri3::Cell::set_neighbors;
 
-  py::class_<tri3::Cell>(tri3_c, "Cell")
+  py::class_<tri3::Cell>(tri_c, "Cell")
     .def(py::init<>())
     // Access Functions
     .def("vertex", &tri3::Cell::vertex)
@@ -236,41 +273,73 @@ void export_triangulation_3(py::module_& m) {
     .def("is_valid", &tri3::cell_is_valid3)
     ;
 
-  py::class_<tri3::Facet>(tri3_c, "Facet")
+  py::class_<tri3::Facet>(tri_c, "Facet")
     .def_readwrite("first", &tri3::Facet::first)
     .def_readwrite("second", &tri3::Facet::second)
     ;
 
-  py::class_<tri3::Edge>(tri3_c, "Edge")
+  py::class_<tri3::Edge>(tri_c, "Edge")
     .def_readwrite("first", &tri3::Edge::first)
     .def_readwrite("second", &tri3::Edge::second)
     .def_readwrite("third", &tri3::Edge::third)
     ;
 
-  py::class_<tri3::Vertex_handle>(tri3_c, "Vertex_handle")
+  py::class_<tri3::Vertex_handle>(tri_c, "Vertex_handle")
     .def(py::init<>())
     .def("value", &tri3::value<tri3::Vertex_handle>)
     ;
 
-  py::class_<tri3::Cell_handle>(tri3_c, "Cell_handle")
+  py::class_<tri3::Cell_handle>(tri_c, "Cell_handle")
     .def(py::init<>())
     .def("value", &tri3::value<tri3::Cell_handle>)
+    ;
+
+  using Avi = Tri::All_vertices_iterator;
+  using Aei = Tri::All_edges_iterator;
+  using Aci = Tri::All_cells_iterator;
+  using Afi = Tri::All_facets_iterator;
+
+  using Fvi = Tri::Finite_vertices_iterator;
+  using Fei = Tri::Finite_edges_iterator;
+  using Fci = Tri::Finite_cells_iterator;
+  using Ffi = Tri::Finite_facets_iterator;
+
+  using Pi = Tri::Point_iterator;
+
+  using Vertex = Tri::Vertex;
+  using Edge = Tri::Vertex;
+  using Cell = Tri::Cell;
+  using Face = Tri::Facet;
+
+  using Point = Tri::Point;
+
+  // Iterators
+  add_iterator<Avi, Avi, const Vertex&>("All_vertices_iterator", tri_c);
+  add_iterator<Aei, Aei>("All_edges_iterator", tri_c);
+  add_iterator<Aci, Aci, const Cell&>("All_cells_iterator", tri_c);
+  add_iterator<Afi, Afi, const Face&>("All_facets_iterator", tri_c);
+
+  add_iterator<Fvi, Fvi, const Vertex&>("Finite_vertices_iterator", tri_c);
+  add_iterator<Fei, Fei>("Finite_edges_iterator", tri_c);
+  add_iterator<Fci, Fci, const Cell&>("Finite_cells_iterator", tri_c);
+  add_iterator<Ffi, Ffi, const Face&>("Finite_facets_iterator", tri_c);
+
+  add_iterator<Pi, Pi, const Point&>("Point_iterator", tri_c);
+
+  tri_c.def("all_vertices", &tri3::all_vertices, py::keep_alive<0, 1>())
+    .def("all_edges", &tri3::all_edges, py::keep_alive<0, 1>())
+    .def("all_cells", &tri3::all_cells, py::keep_alive<0, 1>())
+    .def("all_facets", &tri3::all_facets, py::keep_alive<0, 1>())
+    .def("finite_vertices", &tri3::finite_vertices, py::keep_alive<0, 1>())
+    .def("finite_edges", &tri3::finite_edges, py::keep_alive<0, 1>())
+    .def("finite_cells", &tri3::finite_cells, py::keep_alive<0, 1>())
+    .def("finite_facets", &tri3::finite_facets, py::keep_alive<0, 1>())
+    .def("points", &tri3::points, py::keep_alive<0, 1>())
     ;
 
   // Todo
   // Simplex;
 
-  // All_vertices_iterator;
-  // All_edges_iterator;
-  // All_facets_iterator;
-  // All_cells_iterator;
-
-  // Finite_vertices_iterator;
-  // Finite_edges_iterator;
-  // Finite_facets_iterator;
-  // Finite_cells_iterator;
-
-  // Point_iterator;
   // Facet_iterator;
   // Cell_iterator;
   // Segment_cell_iterator;

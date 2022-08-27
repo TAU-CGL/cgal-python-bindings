@@ -64,8 +64,7 @@ void export_vector_2(py::module_& m) {
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
   using Cci = Kernel::Cartesian_const_iterator_2;
-  constexpr auto ri(py::rv_policy::reference_internal);
-  add_iterator<ri, Cci, Cci, const FT&>("cartesian_iterator", vector_c);
+  add_iterator<Cci, Cci, const FT&>("Cartesian_iterator", vector_c);
   vector_c.def("cartesians",
                [] (const Vector_2& v)
                { return make_iterator(v.cartesian_begin(), v.cartesian_end()); },

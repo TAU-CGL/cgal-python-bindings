@@ -17,6 +17,7 @@
 #include "CGALPY/if_.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -28,51 +29,50 @@ struct target<T, typename if_<false, typename T::Polygon_2>::type> {
   typedef typename T::Polygon_2         type;
 };
 
+// Initialize a general polygon with hole from the outer boundary and a list
+// of holes.
 template <typename GeneralPolygonWithHoles_2>
 void
-ctr_polygon_with_holes_2(GeneralPolygonWithHoles_2& pwh,
-                         typename target<GeneralPolygonWithHoles_2>::type& p,
-                         py::list& lst) {
+init_polygon_with_holes_2(GeneralPolygonWithHoles_2& pwh,
+                          typename target<GeneralPolygonWithHoles_2>::type& p,
+                          py::list& lst) {
   using Polygon_2 = typename target<GeneralPolygonWithHoles_2>::type;
   auto begin = stl_input_iterator<Polygon_2>(lst);
   auto end = stl_input_iterator<Polygon_2>(lst, false);
   new (&pwh) GeneralPolygonWithHoles_2(p, begin, end);
 }
 
-template <typename GeneralPolygonWithHoles_2>
-typename GeneralPolygonWithHoles_2::Hole_iterator
-holes_begin(GeneralPolygonWithHoles_2& p) { return p.holes_begin(); }
-
-template <typename GeneralPolygonWithHoles_2>
-typename GeneralPolygonWithHoles_2::Hole_iterator
-holes_end(GeneralPolygonWithHoles_2& p) { return p.holes_end(); }
-
 template <typename Type>
-void export_general_polygon_with_holes_2(py::class_<Type>& co) {
+void export_general_polygon_with_holes_2(py::class_<Type>& pwh_c) {
+  using Pwh = Type;
   using Pgn = typename target<Type>::type;
 
-  co.def(py::init<Type&>());
-  co.def(py::init<Pgn&>());
-  co.def("__init__", &ctr_polygon_with_holes_2<Type>);
-  co.def("is_unbounded", &Type::is_unbounded);
+  pwh_c.def(py::init<Pwh&>())
+    .def(py::init<Pgn&>())
+    .def("__init__", &init_polygon_with_holes_2<Pwh>)
+    .def("is_unbounded", &Pwh::is_unbounded)
 
-  // Use `py::overload_cast` to cast overloaded functions.
-  // 1. As a convention, add the suffix `_mutable` to the mutable version.
-  // 2. Wrap the mutable method with the `reference_internal` call policy.
-  // 3. Add the `const_` tag to the overloaded const function, as the
-  //    overloading is based on constness.
-  co.def("outer_boundary_mutable",
-         py::overload_cast<>(&Type::outer_boundary),
-         py::rv_policy::reference_internal);
-  co.def("outer_boundary",
-         py::overload_cast<>(&Type::outer_boundary, py::const_));
+    // Use `py::overload_cast` to cast overloaded functions.
+    // 1. As a convention, add the suffix `_mutable` to the mutable version.
+    // 2. Wrap the mutable method with the `reference_internal` call policy.
+    // 3. Add the `const_` tag to the overloaded const function, as the
+    //    overloading is based on constness.
+    .def("outer_boundary_mutable", py::overload_cast<>(&Pwh::outer_boundary),
+         py::rv_policy::reference_internal)
+    .def("outer_boundary",
+         py::overload_cast<>(&Pwh::outer_boundary, py::const_))
+    .def("number_of_holes", &Pwh::number_of_holes)
+    ;
 
-  // co->def("holes", py::range<py::return_internal_reference<>>
-  //         (&holes_begin<Type>, &holes_end<Type>)); NB
-  co.def("number_of_holes", &Type::number_of_holes);
+  using Hci = typename Pwh::Hole_const_iterator;
+  add_iterator<Hci, Hci, const Pgn&>("Hole_iterator", pwh_c);
+  pwh_c.def("holes",
+            [] (const Pwh& pwh)
+            { return make_iterator(pwh.holes_begin(), pwh.holes_end()); },
+            py::keep_alive<0, 1>());
 
-  add_insertion(co, "__str__");
-  add_insertion(co, "__repr__");
+  add_insertion(pwh_c, "__str__");
+  add_insertion(pwh_c, "__repr__");
 }
 
 #endif
