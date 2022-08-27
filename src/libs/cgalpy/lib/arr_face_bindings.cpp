@@ -66,8 +66,7 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   // Isolated vertices
   using Vci = Aos::Vertex_const_iterator;
   using V = Aos::Vertex;
-  constexpr auto ri(py::rv_policy::reference_internal);
-  add_iterator<ri, Vci, Vci, const V&>("Vertex_iterator", face_c);
+  add_iterator<Vci, Vci, const V&>("Vertex_iterator", face_c);
   face_c.def("isolated_vertices",
              [](const Face& face) {
               return make_iterator(face.isolated_vertices_begin(),

@@ -25,7 +25,6 @@ void export_polygon_with_holes_2(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
 void export_general_polygon_set_2(py::module_&);
-void export_polygon_with_holes_2(py::module_&);
 void export_minkowski_sum_2(py::module_&);
 void export_boolean_set_operations_2(py::module_&);
 void export_triangulation_2(py::module_&);
