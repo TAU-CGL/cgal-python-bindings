@@ -13,12 +13,13 @@
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace bp = nanobind;
 
 void export_vector_2(py::module_& m) {
-  bp::class_<Vector_2> v_co(m, "Vector_2");
-  v_co.def(bp::init<Point_2&, Point_2&>())
+  bp::class_<Vector_2> vector_c(m, "Vector_2");
+  vector_c.def(bp::init<Point_2&, Point_2&>())
     .def(bp::init<Line_2>())
     .def(bp::init<Ray_2>())
     .def(bp::init<Segment_2>())
@@ -34,10 +35,6 @@ void export_vector_2(py::module_& m) {
     .def("homogeneous", &Vector_2::homogeneous)
     .def("cartesian", &Vector_2::cartesian)
     .def("__getitem__", &Vector_2::operator[])
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
-    // TODO: Returning address of local variable or temporary with EPEC kernel
-    // .def("cartesian_coordinates", bp::range<>(&Vector_2::cartesian_begin, & Vector_2::cartesian_end)) NB
-#endif
     .def("dimension", &Vector_2::dimension)
     .def("direction", &Vector_2::direction)
     .def("transform", &Vector_2::transform)
@@ -51,19 +48,30 @@ void export_vector_2(py::module_& m) {
     .def(bp::self -= bp::self)
     .def(-bp::self)
     .def(bp::self * bp::self)
-    //.def(self*RT())
     .def(bp::self * FT())
-    //.def(RT() * bp::self)
-    .def(FT()*bp::self)
-    //.def(bp::self *= RT())
-    .def(bp::self*=FT())
-    //.def(bp::self / RT())
+    .def(FT() * bp::self)
+    .def(bp::self *= FT())
     .def(bp::self / FT())
-    //.def(bp::self /= RT())
     .def(bp::self /= FT())
+    //.def(py::self * RT())
+    //.def(RT() * bp::self)
+    //.def(bp::self *= RT())
+    //.def(bp::self / RT())
+    //.def(bp::self /= RT())
     //.setattr("__hash__", &hash<Vector_2>)
     ;
 
-  add_insertion(v_co, "__str__");
-  add_insertion(v_co, "__repr__");
+#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
+     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
+  using Cci = Kernel::Cartesian_const_iterator_2;
+  constexpr auto ri(py::rv_policy::reference_internal);
+  add_iterator<ri, Cci, Cci, const FT&>("cartesian_iterator", vector_c);
+  vector_c.def("cartesians",
+               [] (const Vector_2& v)
+               { return make_iterator(v.cartesian_begin(), v.cartesian_end()); },
+               py::keep_alive<0, 1>());
+#endif
+
+  add_insertion(vector_c, "__str__");
+  add_insertion(vector_c, "__repr__");
 }

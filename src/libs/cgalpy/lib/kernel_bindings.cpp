@@ -14,10 +14,13 @@
 #include "CGALPY/common.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_ft.hpp"
 
 namespace py = nanobind;
 
+extern void export_point_2(py::module_& m);
+extern void export_vector_2(py::module_& m);
 extern void export_gmpz(py::module_&);
 extern void export_gmpq(py::module_&);
 
@@ -25,8 +28,7 @@ Kernel::Equal_2 kernel_equal_2(Kernel& k)
 { return (Kernel::Equal_2)(k.equal_2_object()); }
 
 //template<typename T>
-//size_t hash(T& immutable)
-//{
+//size_t hash(T& immutable) {
 //  std::ostringstream stream;
 //  stream << immutable;
 //  std::string s = stream.str();
@@ -72,24 +74,16 @@ constexpr bool is_epec_type() {
 }
 
 void export_kernel(py::module_& m) {
-  const py::handle info_gmpz = py::type<CGAL::Gmpz>();
-  if (! info_gmpz.is_valid() || ! py::type_check(info_gmpz))
-    export_gmpz(m);
-  else m.attr("Gmpz") = info_gmpz;
-
-  const py::handle info_gmpq = py::type<CGAL::Gmpq>();
-  if (! info_gmpq.is_valid() || ! py::type_check(info_gmpq)) export_gmpq(m);
-  else m.attr("Gmpq") = info_gmpq;
+  if (! add_attr<CGAL::Gmpz>("Gmpz", m)) export_gmpz(m);
+  if (! add_attr<CGAL::Gmpq>("Gmpq", m)) export_gmpq(m);
 
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                           \
      (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||                 \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
-  const py::handle info_ft = py::type<FT>();
-  if (! info_ft.is_valid() || ! py::type_check(info_ft)) {
+  if (! add_attr<FT>("FT", m)) {
     py::class_<FT> ftc(m, "FT");
     export_ft<FT>(ftc);
   }
-  else m.attr("FT") = info_ft;
 #endif
 
   //class_<RT>(m, "RT")
@@ -167,42 +161,8 @@ void export_kernel(py::module_& m) {
   //  //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
   //  ;
 
-  py::class_<Point_2>(m, "Point_2")
-    .def(py::init<>())
-    .def(py::init<double, double>())
-    .def(py::init<FT&, FT&>())
-    .def(py::init<RT&, RT&>())
-    .def(py::init<Point_2&>())
-    .def("x", &Point_2::x)
-    .def("y", &Point_2::y)
-    .def("hx", &Point_2::hx)
-    .def("hy", &Point_2::hy)
-    .def("hw", &Point_2::hw)
-    .def("bbox", &Point_2::bbox)
-    .def("cartesian", &Point_2::cartesian)
-    .def("__getitem__", &Point_2::operator[])
-#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
-     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
-    // TODO: Returning address of local variable or temporary with EPEC kernel
-    // .def("coordinates", py::range<>(&Point_2::cartesian_begin, &Point_2::cartesian_end)) NB
-#endif
-    .def("dimension", &Point_2::dimension)
-    .def("__str__", to_string<Point_2>)
-    .def("__repr__", to_string<Point_2>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    .def(py::self > py::self)
-    .def(py::self < py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
-    .def(py::self - py::self)
-    .def(py::self += Vector_2())
-    .def(py::self -= Vector_2())
-    .def(py::self + Vector_2())
-    .def(py::self - Vector_2())
-    /* .setattr("__hash__", &hash_rational_point<is_epec_type(), Point_2>) NB */
-    /* .setattr("__doc__", "AAAAAAAAAAAAAAAA") NB */
-    ;
+  if (! add_attr<Point_2>("Point_2", m)) export_point_2(m);
+  if (! add_attr<Vector_2>("Vecotr_2", m)) export_vector_2(m);
 
   py::class_<Segment_2>(m, "Segment_2")
     .def(py::init<Point_2&, Point_2&>())
@@ -395,55 +355,6 @@ void export_kernel(py::module_& m) {
     .def(py::self >= py::self)
     .def(-py::self)
     //.setattr("__hash__", &hash<Direction_2>)
-    ;
-
-  py::class_<Vector_2>(m, "Vector_2")
-    .def(py::init<Point_2&, Point_2&>())
-    .def(py::init<Line_2>())
-    .def(py::init<Ray_2>())
-    .def(py::init<Segment_2>())
-    .def(py::init<FT&, FT&, FT&>())
-    .def(py::init<FT&, FT&>())
-    .def(py::init<double, double>())
-    .def("hx", &Vector_2::hx)
-    .def("hy", &Vector_2::hy)
-    .def("hw", &Vector_2::hw)
-    .def("x", &Vector_2::x)
-    .def("y", &Vector_2::y)
-    .def("squared_length", &Vector_2::squared_length)
-    .def("homogeneous", &Vector_2::homogeneous)
-    .def("cartesian", &Vector_2::cartesian)
-    .def("__getitem__", &Vector_2::operator[])
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
-    // TODO: Returning address of local variable or temporary with EPEC kernel
-    // .def("cartesian_coordinates", py::range<>(&Vector_2::cartesian_begin, & Vector_2::cartesian_end)) NB
-#endif
-    .def("dimension", &Vector_2::dimension)
-    .def("direction", &Vector_2::direction)
-    .def("transform", &Vector_2::transform)
-    .def("perpendicular", &Vector_2::perpendicular)
-    .def("__str__", to_string<Vector_2>)
-    .def("__repr__", to_string<Vector_2>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    .def(py::self != py::self)
-    .def(py::self + py::self)
-    .def(py::self += py::self)
-    .def(py::self - py::self)
-    .def(py::self -= py::self)
-    .def(-py::self)
-    .def(py::self * py::self)
-    //.def(self*RT())
-    .def(py::self * FT())
-    //.def(RT() * py::self)
-    .def(FT()*py::self)
-    //.def(py::self *= RT())
-    .def(py::self*=FT())
-    //.def(py::self / RT())
-    .def(py::self / FT())
-    //.def(py::self /= RT())
-    .def(py::self /= FT())
-    //.setattr("__hash__", &hash<Vector_2>)
     ;
 
   py::class_<Bbox_2>(m, "Bbox_2")
