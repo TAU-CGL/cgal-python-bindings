@@ -15,6 +15,7 @@
 #include "CGALPY/general_polygon_set_2_types.hpp"
 #include "CGALPY/gps_2_concepts/export_GpsTraits_2.hpp"
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -22,6 +23,7 @@ py::object export_arr_circle_segment_traits(py::module_&);
 
 namespace bso2 {
 
+// Initialize a polygon from a list of circle/segment x-monotone curves.
 template <typename T>
 void init_polygon_2(typename T::Polygon_2& pgn, py::list& lst) {
   using Xcv = typename T::X_monotone_curve_2;
@@ -30,33 +32,33 @@ void init_polygon_2(typename T::Polygon_2& pgn, py::list& lst) {
   new (&pgn) typename T::Polygon_2(begin, end);
 }
 
-template <typename T>
-typename T::Polygon_2::Curve_iterator curves_begin(typename T::Polygon_2& p)
-{ return p.curves_begin(); }
-
-template <typename T>
-typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
-{ return p.curves_end(); }
-
 }
 
+// Wrap the instance Gps_circle_segment_traits_2 traits <Kernel>.
 py::object export_gps_circle_segment_traits(py::module_& m) {
   using AGT = CGAL::Arr_circle_segment_traits_2<Kernel>;
   using GT = CGAL::Gps_circle_segment_traits_2<Kernel>;
+  using Pgn = GT::Polygon_2;
+  using Xcv = GT::X_monotone_curve_2;
 
   export_arr_circle_segment_traits(m);
 
-  py::class_<GT, AGT> traits_co(m, "Gps_circle_segment_traits_2");
-  traits_co.def(py::init<>());
+  py::class_<GT, AGT> traits_c(m, "Gps_circle_segment_traits_2");
+  traits_c.def(py::init<>());
   struct Concepts {
     Gps_traits_classes<GT> m_traits_classes;
   } concepts;
-  export_GpsTraits_2<GT>(traits_co, concepts);
-  auto* tco = concepts.m_traits_classes.m_polygon_2;
-  if (tco) {
-    tco->def("__init__", &bso2::init_polygon_2<GT>);
-    // tco->def("curves", py::range<py::return_internal_reference<>>
-    //          (&bso2::curves_begin<GT>, &bso2::curves_end<GT>)); NB
-  }
-  return traits_co;
+  export_GpsTraits_2<GT>(traits_c, concepts);
+  BOOST_ASSERT(concepts.m_traits_classes.m_polygon_2);
+  auto& pgn_c = *(concepts.m_traits_classes.m_polygon_2);
+  pgn_c.def("__init__", &bso2::init_polygon_2<GT>);
+
+  using Cci = Pgn::Curve_const_iterator;
+  add_iterator<Cci, Cci, const Xcv&>("Curve_iterator", pgn_c);
+  pgn_c.def("curves",
+            [](const Pgn& pgn)
+            { return make_iterator(pgn.curves_begin(), pgn.curves_end()); },
+            py::keep_alive<0, 1>());
+
+  return traits_c;
 }

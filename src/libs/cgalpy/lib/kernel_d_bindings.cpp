@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
 
@@ -17,6 +18,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -36,12 +38,6 @@ void init_point_d(Point_d& pd, int d, py::list& lst) {
 #endif
 }
 
-// const FT_d* point_d_cartesian_begin(Point_d& p)
-// { return p.cartesian_begin(); }
-
-// const FT_d* point_d_cartesian_end(Point_d& p)
-// { return p.cartesian_end(); }
-
 // Determine whether the dD kernel is an an EPEC type.
 // An EPEC type has a non trivial FT
 constexpr bool is_epec_d_type() {
@@ -49,8 +45,9 @@ constexpr bool is_epec_d_type() {
           (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ));
 }
 
-// Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2) are not a valid overload for do_intersect
-// in which case the second version (which does nothing) will be used instead (SFINAE)
+// Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2)
+// are not a valid overload for do_intersect in which case the second version
+// (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
 void bind_do_intersect_d_2T(py::module_& m,
                             decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
@@ -83,6 +80,8 @@ void bind_do_intersect_d(py::module_& m) {
 }
 
 void export_kernel_d(py::module_& m) {
+  using Pnt = Point_d;
+
 #if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
      (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
   if (! add_attr<CGAL::Gmpz>("Gmpz", m)) export_gmpz(m);
@@ -93,14 +92,12 @@ void export_kernel_d(py::module_& m) {
   }
 #endif
 
-  py::class_<Point_d> pd_co(m, "Point_d");
-  pd_co.def(py::init<>())
+  py::class_<Pnt> pd_c(m, "Point_d");
+  pd_c.def(py::init<>())
     .def("__init__", &init_point_d)
-    .def("dimension", &Point_d::dimension)
-    .def("cartesian", &Point_d::cartesian)
-    .def("__getitem__", &Point_d::operator[])
-    // .def("coordinates", py::range<>(&Point_d::cartesian_begin,
-    //                                 &Point_d::cartesian_end)) NB
+    .def("dimension", &Pnt::dimension)
+    .def("cartesian", &Pnt::cartesian)
+    .def("__getitem__", &Pnt::operator[])
     .def(py::self == py::self)
     .def(py::self != py::self)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
@@ -109,11 +106,18 @@ void export_kernel_d(py::module_& m) {
     .def(py::self <= py::self)
     .def(py::self >= py::self)
 #endif
-    // .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Point_d>) NB
+    // .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Pnt>) NB
     ;
 
-  add_insertion(pd_co, "__str__");
-  add_insertion(pd_co, "__repr__");
+  using Cci = Pnt::Cartesian_const_iterator;
+  add_iterator<Cci, Cci, const FT_d&>("Cartesian_iterator", pd_c);
+  pd_c.def("cartesians",
+            [](const Pnt& p)
+            { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
+           py::keep_alive<0, 1>());
+
+  add_insertion(pd_c, "__str__");
+  add_insertion(pd_c, "__repr__");
 
   py::class_<Segment_d> sd_co(m, "Segment_d");
   sd_co.def(py::init<Point_d&, Point_d&>())
