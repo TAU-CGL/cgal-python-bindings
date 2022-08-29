@@ -53,11 +53,11 @@ void export_AosTraits_2(C& c, Concepts& concepts) {
 
   auto& classes = concepts.m_traits_classes;
 
-  if (! add_attr<Curve_2>("Curve_2", c)) {
+  if (! add_attr<Curve_2>(c, "Curve_2")) {
     classes.m_curve_2 = new py::class_<Curve_2>(c, "Curve_2");
   }
 
-  if (! add_attr<Make_x_monotone_2>("Make_x_monotone_2", c)) {
+  if (! add_attr<Make_x_monotone_2>(c, "Make_x_monotone_2")) {
     classes.m_make_x_monotone_2 =
       new py::class_<Make_x_monotone_2>(c, "Make_x_monotone_2");
     classes.m_make_x_monotone_2->def("__call__",

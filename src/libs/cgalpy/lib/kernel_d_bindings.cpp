@@ -84,9 +84,9 @@ void export_kernel_d(py::module_& m) {
 
 #if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
      (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
-  if (! add_attr<CGAL::Gmpz>("Gmpz", m)) export_gmpz(m);
-  if (! add_attr<CGAL::Gmpq>("Gmpq", m)) export_gmpq(m);
-  if (! add_attr<FT_d>("FT", m)) {
+  if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
+  if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
+  if (! add_attr<FT_d>(m, "FT")) {
     auto ftc = py::class_<FT_d>(m, "FT");
     export_ft<FT_d>(ftc);
   }

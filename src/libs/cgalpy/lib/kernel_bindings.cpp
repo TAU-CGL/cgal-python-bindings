@@ -74,13 +74,13 @@ constexpr bool is_epec_type() {
 }
 
 void export_kernel(py::module_& m) {
-  if (! add_attr<CGAL::Gmpz>("Gmpz", m)) export_gmpz(m);
-  if (! add_attr<CGAL::Gmpq>("Gmpq", m)) export_gmpq(m);
+  if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
+  if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
 
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                           \
      (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||                 \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
-  if (! add_attr<FT>("FT", m)) {
+  if (! add_attr<FT>(m, "FT")) {
     py::class_<FT> ftc(m, "FT");
     export_ft<FT>(ftc);
   }
@@ -161,8 +161,8 @@ void export_kernel(py::module_& m) {
   //  //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
   //  ;
 
-  if (! add_attr<Point_2>("Point_2", m)) export_point_2(m);
-  if (! add_attr<Vector_2>("Vecotr_2", m)) export_vector_2(m);
+  if (! add_attr<Point_2>(m, "Point_2")) export_point_2(m);
+  if (! add_attr<Vector_2>(m, "Vecotr_2")) export_vector_2(m);
 
   py::class_<Segment_2>(m, "Segment_2")
     .def(py::init<Point_2&, Point_2&>())

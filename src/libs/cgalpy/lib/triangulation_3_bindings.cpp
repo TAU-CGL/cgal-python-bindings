@@ -221,14 +221,14 @@ void export_triangulation_3(py::module_& m) {
   ;
 #else
   // In the case of non-priodic triangulation the kernel serves as the traits.
-  add_attr<tri3::Geom_traits>("Geom_traits", tri_c);
+  add_attr<tri3::Geom_traits>(tri_c, "Geom_traits");
 #endif
 
-  if (! add_attr<tri3::Point>("Point", tri_c))
+  if (! add_attr<tri3::Point>(tri_c, "Point"))
     std::cerr << "'tri3::Point' not registered!\n";
-  add_attr<tri3::Segment>("Segment", tri_c);
-  add_attr<tri3::Triangle>("Triangle", tri_c);
-  add_attr<tri3::Tetrahedron>("Tetrahedron", tri_c);
+  add_attr<tri3::Segment>(tri_c, "Segment");
+  add_attr<tri3::Triangle>(tri_c, "Triangle");
+  add_attr<tri3::Tetrahedron>(tri_c, "Tetrahedron");
 
   py::class_<tri3::Vertex>(tri_c, "Vertex")
     .def(py::init<>())

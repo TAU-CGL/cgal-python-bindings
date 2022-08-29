@@ -116,7 +116,7 @@ void bind_neighbor_search(py::module_& m, const char* python_name) {
 }
 
 void export_spatial_searching(py::module_& m) {
-  auto res = add_attr<Point_d>("Point_d", m);
+  auto res = add_attr<Point_d>(m, "Point_d");
   BOOST_ASSERT(res);
 
   py::class_<Fuzzy_iso_box>(m, "Fuzzy_iso_box")

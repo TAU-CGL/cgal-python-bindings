@@ -212,15 +212,15 @@ void export_triangulation_2(py::module_& m) {
   ;
 #else
   // In the case of non-priodic triangulation the kernel serves as the traits.
-  if (! add_attr<tri2::Geom_traits>("Geom_traits", tri_c))
+  if (! add_attr<tri2::Geom_traits>(tri_c, "Geom_traits"))
     std::cerr << "'tri2::Geom_traits' not registered!\n";
 #endif
 
-  if (! add_attr<tri2::Point>("Point", tri_c))
+  if (! add_attr<tri2::Point>(tri_c, "Point"))
     std::cerr << "'tri2::Point' not registered!\n";
-  if (! add_attr<tri2::Segment>("Segment", tri_c))
+  if (! add_attr<tri2::Segment>(tri_c, "Segment"))
     std::cerr << "'tri2::Segment' not registered!\n";
-  if (! add_attr<tri2::Triangle>("Triangle", tri_c))
+  if (! add_attr<tri2::Triangle>(tri_c, "Triangle"))
     std::cerr << "'tri2::Triangle' not registered!\n";
 
   py::class_<tri2::Vertex>(tri_c, "Vertex")

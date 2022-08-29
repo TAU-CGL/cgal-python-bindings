@@ -134,22 +134,22 @@ void export_alpha_shape_2(py::module_& m) {
     // \todo: generate bindings for periodic traits
     ;
   else {
-    if (! add_attr<as2::Gt>("Gt", as2_c))
+    if (! add_attr<as2::Gt>(as2_c, "Gt"))
       std::cerr << "'as2::Gt' not registered!\n";
   }
-  add_attr<as2::Point>("Point", as2_c);
+  add_attr<as2::Point>(as2_c, "Point");
   if (is_exact_ft()) {
-    if (! add_attr<as2::FT>("FT", as2_c))
+    if (! add_attr<as2::FT>(as2_c, "FT"))
       std::cerr << "'as2::FT' not registered!\n";
   }
-  if (! add_attr<as2::Tds>("Tds", as2_c))
+  if (! add_attr<as2::Tds>(as2_c, "Tds"))
     std::cerr << "'as2::Tds' not registered!\n";
-  if (! add_attr<as2::Vertex>("Vertex", as2_c))
+  if (! add_attr<as2::Vertex>(as2_c, "Vertex"))
     std::cerr << "'as2::Vertex' not registered!\n";
-  if (! add_attr<as2::Edge>("Edge", as2_c))
+  if (! add_attr<as2::Edge>(as2_c, "Edge"))
     std::cerr << "'as2::Edge' not registered!\n";
-  if (! add_attr<as2::Vertex_handle>("Vertex_handle", as2_c))
+  if (! add_attr<as2::Vertex_handle>(as2_c, "Vertex_handle"))
     std::cerr << "'as2::Vertex_handle' not registered!\n";
-  if (! add_attr<as2::Face_handle>("Face_handle", as2_c))
+  if (! add_attr<as2::Face_handle>(as2_c, "Face_handle"))
     std::cerr << "'as2::Face_handle' not registered!\n";
 }

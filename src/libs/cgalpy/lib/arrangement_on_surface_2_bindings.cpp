@@ -61,6 +61,30 @@ typedef Arr_overlay_traits<Arrangement_on_surface_2, Arrangement_on_surface_2,
 
 // Free functions
 
+template <typename T>
+struct Object_input_iterator :
+  boost::iterator_facade<Object_input_iterator<T>, CGAL::Object, std::input_iterator_tag, CGAL::Object>
+{
+
+  // Default constructor.
+  // Workaround the lack of default constructor for py::detail::fast_iterator.
+  // Object_input_iterator() {}
+  Object_input_iterator() : m_it(py::list().end()) {}
+
+  Object_input_iterator(const py::list& lst, bool isbegin = true) :
+    m_it((isbegin) ? lst.begin() : lst.end())
+  {}
+
+  void increment() { ++m_it; }
+  CGAL::Object dereference() const
+  { return CGAL::make_object(py::cast<T>(*m_it)); }
+
+  bool equal(Object_input_iterator<T> const& o) const { return m_it == o.m_it; }
+
+private:
+  py::detail::fast_iterator m_it;
+};
+
 // Insert a list of curves into an arrangement.
 void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
   if (lst.size() == 0) return;
@@ -72,6 +96,12 @@ void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
   else if (py::isinstance<Curve_2>(lst[0])) {
     auto begin = stl_input_iterator<Curve_2>(lst);
     auto end = stl_input_iterator<Curve_2>(lst, false);
+    CGAL::insert(arr, begin, end);
+  }
+  else if (py::isinstance<Point_2>(lst[0])) {
+    // Points must be wrapped into CGAL::Objects???
+    auto begin = Object_input_iterator<Point_2>(lst);
+    auto end = Object_input_iterator<Point_2>(lst, false);
     CGAL::insert(arr, begin, end);
   }
   else std::runtime_error("Attempting to insert a list of of object of unrecognized type to an arrangement!");
@@ -525,10 +555,10 @@ void export_arrangement_on_surface_2(py::module_& m) {
 #endif
 
   // Arrangement on surface
-  if (! add_attr<Aos>("Arrangement_on_surface_2", m)) export_aos(m, traits_c);
+  if (! add_attr<Aos>(m, "Arrangement_on_surface_2")) export_aos(m, traits_c);
 
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-  if (! add_attr<Arr>("Arrangement_2", m)) export_arr(m);
+  if (! add_attr<Arr>(m, "Arrangement_2")) export_arr(m);
 #endif
 
   using Vh = aos2::Arrangement_on_surface_2::Vertex_handle;

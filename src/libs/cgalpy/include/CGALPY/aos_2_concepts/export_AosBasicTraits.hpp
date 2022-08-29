@@ -22,7 +22,7 @@ template <typename T, typename C, typename Classes>
 void export_Compare_y_at_x_left_2(C& c, Classes& classes, CGAL::Tag_true) {
   using Compare_y_at_x_left_2 = typename T::Compare_y_at_x_left_2;
 
-  if (! add_attr<Compare_y_at_x_left_2>("Compare_y_at_x_left_2", c)) {
+  if (! add_attr<Compare_y_at_x_left_2>(c, "Compare_y_at_x_left_2")) {
     classes.m_compare_y_at_x_left_2 =
       new py::class_<Compare_y_at_x_left_2>(c, "Compare_y_at_x_left_2");
     classes.m_compare_y_at_x_left_2->
@@ -57,14 +57,14 @@ void export_AosBasicTraits(C& c, Concepts& concepts) {
   auto& classes = concepts.m_basic_traits_classes;
 
   // Point_2
-  if (! add_attr<Point_2>("Point_2", c)) {
+  if (! add_attr<Point_2>(c, "Point_2")) {
     classes.m_point_2 = new py::class_<Point_2>(c, "Point_2");
     classes.m_point_2->def(py::init<>());
     classes.m_point_2->def(py::init<const Point_2&>());
   }
 
   // X_monotone_curve_2
-  if (! add_attr<X_monotone_curve_2>("X_monotone_curve_2", c)) {
+  if (! add_attr<X_monotone_curve_2>(c, "X_monotone_curve_2")) {
     classes.m_x_monotone_curve_2 =
       new py::class_<X_monotone_curve_2>(c, "X_monotone_curve_2");
     classes.m_x_monotone_curve_2->def(py::init<>());
@@ -72,19 +72,19 @@ void export_AosBasicTraits(C& c, Concepts& concepts) {
   }
 
   // Compare_x_2
-  if (! add_attr<Compare_x_2>("Compare_x_2", c)) {
+  if (! add_attr<Compare_x_2>(c, "Compare_x_2")) {
     classes.m_compare_x_2 = new py::class_<Compare_x_2>(c, "Compare_x_2");
     classes.m_compare_x_2->def("__call__", &Compare_x_2::operator());
   }
 
   // Compare_xy_2
-  if (! add_attr<Compare_xy_2>("Compare_xy_2", c)) {
+  if (! add_attr<Compare_xy_2>(c, "Compare_xy_2")) {
     classes.m_compare_xy_2 = new py::class_<Compare_xy_2>(c, "Compare_xy_2");
     classes.m_compare_xy_2->def("__call__", &Compare_xy_2::operator());
   }
 
   // Construct_min_vertex_2
-  if (! add_attr<Construct_min_vertex_2>("Construct_min_vertex_2", c)) {
+  if (! add_attr<Construct_min_vertex_2>(c, "Construct_min_vertex_2")) {
     classes.m_construct_min_vertex_2 =
       new py::class_<Construct_min_vertex_2>(c, "Construct_min_vertex_2");
     classes.m_construct_min_vertex_2->
@@ -92,7 +92,7 @@ void export_AosBasicTraits(C& c, Concepts& concepts) {
   }
 
   // Construct_max_vertex_2
-  if (! add_attr<Construct_max_vertex_2>("Construct_max_vertex_2", c)) {
+  if (! add_attr<Construct_max_vertex_2>(c, "Construct_max_vertex_2")) {
     classes.m_construct_max_vertex_2 =
       new py::class_<Construct_max_vertex_2>(c, "Construct_max_vertex_2");
     classes.m_construct_max_vertex_2->
@@ -100,19 +100,20 @@ void export_AosBasicTraits(C& c, Concepts& concepts) {
   }
 
   // Is_vertical_2
-  if (! add_attr<Is_vertical_2>("Is_vertical_2", c)) {
+  if (! add_attr<Is_vertical_2>(c, "Is_vertical_2")) {
     classes.m_is_vertical_2 = new py::class_<Is_vertical_2>(c, "Is_vertical_2");
     classes.m_is_vertical_2->def("__call__", &Is_vertical_2::operator());
   }
 
   // Compare_y_at_x_2
-  if (! add_attr<Compare_y_at_x_2>("Compare_y_at_x_2", c)) {
-    classes.m_compare_y_at_x_2 = new py::class_<Compare_y_at_x_2>(c, "Compare_y_at_x_2");
+  if (! add_attr<Compare_y_at_x_2>(c, "Compare_y_at_x_2")) {
+    classes.m_compare_y_at_x_2 =
+      new py::class_<Compare_y_at_x_2>(c, "Compare_y_at_x_2");
     classes.m_compare_y_at_x_2->def("__call__", &Compare_y_at_x_2::operator());
   }
 
   // Compare_y_at_x_right_2
-  if (! add_attr<Compare_y_at_x_right_2>("Compare_y_at_x_right_2", c)) {
+  if (! add_attr<Compare_y_at_x_right_2>(c, "Compare_y_at_x_right_2")) {
     classes.m_compare_y_at_x_right_2 =
       new py::class_<Compare_y_at_x_right_2>(c, "Compare_y_at_x_right_2");
     classes.m_compare_y_at_x_right_2->
@@ -120,7 +121,7 @@ void export_AosBasicTraits(C& c, Concepts& concepts) {
   }
 
   // Equal_2
-  if (! add_attr<Equal_2>("Equal_2", c)) {
+  if (! add_attr<Equal_2>(c, "Equal_2")) {
     classes.m_equal_2 = new py::class_<Equal_2>(c, "Equal_2");
     classes.m_equal_2->def("__call__",
                            py::overload_cast<const Point_2&, const Point_2&>
