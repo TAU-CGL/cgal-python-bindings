@@ -7,6 +7,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#define CGAL_USE_BASIC_VIEWER
+
 #include <boost/static_assert.hpp>
 
 #include <nanobind/nanobind.h>
@@ -18,6 +20,7 @@
 #include <CGAL/Arr_walk_along_line_point_location.h>
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
+#include <CGAL/draw_arrangement_2.h>
 
 #include "CGALPY/Python_functor.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
@@ -61,6 +64,7 @@ typedef Arr_overlay_traits<Arrangement_on_surface_2, Arrangement_on_surface_2,
 
 // Free functions
 
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 template <typename T>
 struct Object_input_iterator :
   boost::iterator_facade<Object_input_iterator<T>, CGAL::Object, std::input_iterator_tag, CGAL::Object>
@@ -84,6 +88,7 @@ struct Object_input_iterator :
 private:
   py::detail::fast_iterator m_it;
 };
+#endif
 
 // Insert a list of curves into an arrangement.
 void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
@@ -98,12 +103,14 @@ void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
     auto end = stl_input_iterator<Curve_2>(lst, false);
     CGAL::insert(arr, begin, end);
   }
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
   else if (py::isinstance<Point_2>(lst[0])) {
     // Points must be wrapped into CGAL::Objects???
     auto begin = Object_input_iterator<Point_2>(lst);
     auto end = Object_input_iterator<Point_2>(lst, false);
     CGAL::insert(arr, begin, end);
   }
+#endif
   else std::runtime_error("Attempting to insert a list of of object of unrecognized type to an arrangement!");
 }
 
@@ -252,13 +259,13 @@ insert_from_right_vertex(Aos& arr, typename Aos::X_monotone_curve_2& c,
 //
 template <typename Aos>
 typename Aos::Halfedge&
-insert_edge_in_face_interior(Aos& arr, typename Aos::X_monotone_curve_2& c,
+insert_xcv_in_face_interior(Aos& arr, typename Aos::X_monotone_curve_2& c,
                              typename Aos::Face& f)
 { return *(arr.insert_in_face_interior(c, (Face_iterator(&f)))); }
 
 //
 template <typename Aos>
-typename Aos::Vertex& insert_vertex_in_face_interior(Aos& arr,
+typename Aos::Vertex& insert_pnt_in_face_interior(Aos& arr,
                                                      typename Aos::Point_2& p,
                                                      typename Aos::Face& f)
 { return *(arr.insert_in_face_interior(p, (Face_iterator(&f)))); }
@@ -269,8 +276,10 @@ typename Aos::Halfedge& insert_at_vertices(Aos& arr,
                                            typename Aos::X_monotone_curve_2& c,
                                            typename Aos::Vertex& v1,
                                            typename Aos::Vertex& v2) {
-  return *(arr.insert_at_vertices(c, (Vertex_iterator(&v1)),
-                                  (Vertex_iterator(&v2))));
+  std::cout << "before\n";
+  return *(arr.insert_at_vertices(c, (Vertex_handle(&v1)),
+                                  (Vertex_handle(&v2))));
+  std::cout << "after\n";
 }
 
 //
@@ -364,12 +373,16 @@ template <typename Aos>
 py::object unbounded_faces(const Aos& arr)
 { return make_iterator(arr.unbounded_faces_begin(), arr.unbounded_faces_end()); }
 
+// Draw an arrangement.
+void draw(const Arrangement_2& arr) { CGAL::draw(arr); }
+
 }
 
 // Export common members of Aos types
 void export_aos(py::module_& m, const py::object& traits_c) {
   using Aos = aos2::Arrangement_on_surface_2;
   using GT = aos2::Geometry_traits_2;
+  constexpr auto ka = py::keep_alive<0, 1>();
 
   py::class_<Aos> aos_c(m, "Arrangement_on_surface_2");
   aos_c.def(py::init<>())
@@ -378,9 +391,9 @@ void export_aos(py::module_& m, const py::object& traits_c) {
     .def("fictitious_face", &aos2::fictitious_face<Aos>)
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex<Aos>)
     .def("insert_from_right_vertex", &aos2::insert_from_right_vertex<Aos>)
-    .def("insert_in_face_interior", &aos2::insert_edge_in_face_interior<Aos>)
-    .def("insert_in_face_interior", &aos2::insert_vertex_in_face_interior<Aos>)
-    .def("insert_at_vertices", &aos2::insert_at_vertices<Aos>)
+    .def("insert_in_face_interior", &aos2::insert_xcv_in_face_interior<Aos>)
+    .def("insert_in_face_interior", &aos2::insert_pnt_in_face_interior<Aos>)
+    .def("insert_at_vertices", &aos2::insert_at_vertices<Aos>, ka)
     .def("modify_vertex", &aos2::modify_vertex<Aos>)
     .def("remove_isolated_vertex", &aos2::remove_isolated_vertex<Aos>)
     .def("modify_edge", &aos2::modify_edge<Aos>)
@@ -478,13 +491,15 @@ void export_arr(py::module_& m) {
   using Arr = aos2::Arrangement_2;
   using GT = aos2::Geometry_traits_2;
 
-  auto arr_co = py::class_<Arr, Aos>(m, "Arrangement_2")
+  py::class_<Arr, Aos>(m, "Arrangement_2")
     .def(py::init<>())
     .def(py::init<const Arr&>())
     .def(py::init<const GT*>())
     .def("unbounded_face", &aos2::unbounded_face<Arr>)
     .def("number_of_vertices_at_infinity",
          &Arr::number_of_vertices_at_infinity);
+
+  m.def("draw", &aos2::draw);
 }
 
 #endif
@@ -494,7 +509,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Arr = aos2::Arrangement_2;
   using Awh = aos2::Arrangement_with_history_2;
-  using GT = Arr::Geometry_traits_2;
+  using GT = Aos::Geometry_traits_2;
+  using Dcel = Aos::Dcel;
   using Point = GT::Point_2;
   using Cv = GT::Curve_2;
   using Xcv = GT::X_monotone_curve_2;
