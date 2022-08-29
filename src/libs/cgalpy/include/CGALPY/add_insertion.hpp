@@ -14,13 +14,16 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
-template <typename PyClass>
-void add_insertion(PyClass& cls, std::string const& method) {
-  cls.def(method.c_str(), [](typename PyClass::Type const& self) {
-                            std::ostringstream os;
-                            os << self;
-                            return os.str();
-                          });
+#include <CGAL/basic.h>
+
+template <typename PyClass, bool pretty = true>
+void add_insertion(PyClass& cls, const char* method) {
+  cls.def(method, [](typename PyClass::Type const& self) {
+                    std::ostringstream os;
+                    if (pretty) CGAL::IO::set_pretty_mode(os);
+                    os << self;
+                    return os.str();
+                  });
 }
 
 #endif

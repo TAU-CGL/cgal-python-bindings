@@ -14,6 +14,7 @@
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/alpha_shape_3_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
@@ -382,24 +383,24 @@ void export_alpha_shape_3(py::module_& m) {
     // \todo: generate bindings for periodic traits
     ;
   else {
-    if (! add_attr<tri3::Geom_traits>("Gt", as3_scope))
+    if (! add_attr<tri3::Geom_traits>(as3_scope, "Gt"))
       std::cerr << "'tri3::Geom_traits' not registered!\n";
   }
-  if (! add_attr<as3::Point>("Point", as3_c))
+  if (! add_attr<as3::Point>(as3_c, "Point"))
     std::cerr << "'as3::Point' not registered!\n";
   if (is_exact_ft()) {
-    if (! add_attr<as3::FT>("FT", as3_c))
+    if (! add_attr<as3::FT>(as3_c, "FT"))
       std::cerr << "'as3::FT' not registered!\n";
   }
-  if (! add_attr<as3::Vertex>("Vertex", as3_c))
+  if (! add_attr<as3::Vertex>(as3_c, "Vertex"))
     std::cerr << "'as3::Vertex' not registered!\n";
-  if (! add_attr<as3::Edge>("Edge", as3_c))
+  if (! add_attr<as3::Edge>(as3_c, "Edge"))
     std::cerr << "'as3::Edge' not registered!\n";
-  if (! add_attr<as3::Facet>("Facet", as3_c))
+  if (! add_attr<as3::Facet>(as3_c, "Facet"))
     std::cerr << "'as3::Facet' not registered!\n";
-  if (! add_attr<as3::Vertex_handle>("Vertex_handle", as3_c))
+  if (! add_attr<as3::Vertex_handle>(as3_c, "Vertex_handle"))
     std::cerr << "'as3::Vertex_handle' not registered!\n";
-  if (! add_attr<as3::Cell_handle>("Cell_handle", as3_c))
+  if (! add_attr<as3::Cell_handle>(as3_c, "Cell_handle"))
     std::cerr << "'as3::Cell_handle' not registered!\n";
 
 #endif

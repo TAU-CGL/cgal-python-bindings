@@ -12,7 +12,6 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;

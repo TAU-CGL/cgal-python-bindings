@@ -122,7 +122,7 @@ template <py::rv_policy Policy,
           typename C>
 void add_iterator_impl(const char* name, C& c, Extra&&... extra) {
   using state = iterator_state<Iterator, Sentinel>;
-  if (add_attr<state>(name, c)) return;
+  if (add_attr<state>(c, name)) return;
 
   py::class_<state>(c, name)
     .def("__iter__", [](state& s)->state& { return s; })
