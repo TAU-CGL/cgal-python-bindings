@@ -1,4 +1,6 @@
 def construct_segment_arrangement(arr):
+  Point = arr.Point_2
+  Segment = arr.X_monotone_curve_2
   p0 = Point(3,2)
   p1 = Point(0,3)
   p2 = Point(2,5)

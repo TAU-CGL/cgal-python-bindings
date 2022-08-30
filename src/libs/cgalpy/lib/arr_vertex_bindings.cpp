@@ -37,12 +37,12 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
     // As a convention, add the suffix `_mutable` to the mutable version.
     // Wrap the mutable method with the `reference_internal` call policy.
-    .def("point_mutable", [](Vertex* v)->const Point& { return v->point(); },
+    .def("point_mutable", [](Vertex& v)->Point& { return v.point(); },
          py::rv_policy::reference_internal)
-    .def("point", [](const Vertex* v)->const Point& { return v->point(); },
+    .def("point", [](const Vertex& v)->const Point& { return v.point(); },
          py::rv_policy::reference_internal)
 
-    .def("is_isolated", &Vertex::is_isolated)
+    .def("is_isolated", [](const Vertex& v)->bool { return v.is_isolated(); })
     .def("degree", &Vertex::degree)
     .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator)
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
