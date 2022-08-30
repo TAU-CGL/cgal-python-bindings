@@ -40,6 +40,7 @@ py::object export_arr_segment_traits(py::module_&);
 py::object export_arr_non_caching_segment_traits(py::module_&);
 py::object export_arr_circle_segment_traits(py::module_&);
 py::object export_arr_conic_traits(py::module_&);
+py::object export_arr_bezier_traits(py::module_&);
 py::object export_arr_algebraic_segment_traits(py::module_&);
 py::object export_arr_geodesic_arc_on_sphere_traits(py::module_&);
 
@@ -355,11 +356,11 @@ template <typename Aos>
 py::object unbounded_faces(const Aos& arr)
 { return make_iterator(arr.unbounded_faces_begin(), arr.unbounded_faces_end()); }
 
-/// \name Functions ofr Arrangement_2
+/// \name Functions for Arrangement_2
 /// @{
 
 // Draw an arrangement.
-void draw(const Arrangement_2& arr) { CGAL::draw(arr); }
+// void draw(const Arrangement_2& arr) { CGAL::draw(arr); }
 
 // //! Obtain the unbounded face of an arrangement.
 typename Arrangement_2::Face& unbounded_face(Arrangement_2& arr)
@@ -495,7 +496,7 @@ void export_arr(py::module_& m) {
     .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity)
     ;
 
-  m.def("draw", &aos2::draw);
+  // m.def("draw", &aos2::draw);
 }
 
 #endif
@@ -557,6 +558,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
   auto traits_c = export_arr_circle_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
   auto traits_c = export_arr_conic_traits(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
+  auto traits_c = export_arr_bezier_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
   auto traits_c = export_arr_algebraic_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS

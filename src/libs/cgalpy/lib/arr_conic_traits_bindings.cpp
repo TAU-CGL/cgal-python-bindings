@@ -26,15 +26,15 @@ namespace py = nanobind;
 
 py::object export_arr_conic_traits(py::module_& m) {
   //TODO export RatKernel, AlgKernel
-  using NtTraits = CGAL::CORE_algebraic_number_traits;
-  using RatKernel = CGAL::Cartesian <NtTraits::Rational>;
-  using AlgKernel = CGAL::Cartesian <NtTraits::Algebraic>;
-  using GT = CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>;
+  using Nt_traits = CGAL::CORE_algebraic_number_traits;
+  using Rat_kernel = CGAL::Cartesian <Nt_traits::Rational>;
+  using Alg_kernel = CGAL::Cartesian <Nt_traits::Algebraic>;
+  using GT = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
   using Curve_2 = GT::Curve_2;
   using X_monotone_curve_2 = GT::X_monotone_curve_2;
   using Rational = GT::Rational;
 
-  auto traits = py::class_<GT>(m, "Arr_conic_traits")
+  auto traits = py::class_<GT>(m, "Arr_conic_traits_2")
     .def(py::init<>())
     ;
 
