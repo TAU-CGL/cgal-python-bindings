@@ -323,10 +323,6 @@ typename Aos::Face& remove_edge(Aos& arr, typename Aos::Halfedge& e) {
 
 //
 template <typename Aos>
-typename Aos::Face& unbounded_face(Aos& arr) { return *(arr.unbounded_face()); }
-
-//
-template <typename Aos>
 typename Aos::Face& fictitious_face(Aos& arr)
 { return *(arr.fictitious_face()); }
 
@@ -359,27 +355,36 @@ template <typename Aos>
 py::object unbounded_faces(const Aos& arr)
 { return make_iterator(arr.unbounded_faces_begin(), arr.unbounded_faces_end()); }
 
+/// \name Functions ofr Arrangement_2
+/// @{
+
 // Draw an arrangement.
 void draw(const Arrangement_2& arr) { CGAL::draw(arr); }
+
+// //! Obtain the unbounded face of an arrangement.
+typename Arrangement_2::Face& unbounded_face(Arrangement_2& arr)
+{ return *(arr.unbounded_face()); }
+
+/// @}
 
 }
 
 // Export common members of Aos types
-void export_aos(py::module_& m, const py::object& traits_c) {
+void export_aos(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
   using GT = aos2::Geometry_traits_2;
-  constexpr auto ka = py::keep_alive<0, 1>();
   constexpr auto ri(py::rv_policy::reference_internal);
+
   py::class_<Aos> aos_c(m, "Arrangement_on_surface_2");
   aos_c.def(py::init<>())
     .def(py::init<const Aos&>())
     .def(py::init<const GT*>())
     .def("fictitious_face", &aos2::fictitious_face<Aos>)
-    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex, ri, ka)
-    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex, ri, ka)
-    .def("insert_in_face_interior", &aos2::insert_xcv_in_face_interior, ri, ka)
-    .def("insert_in_face_interior", &aos2::insert_pnt_in_face_interior, ri, ka)
-    .def("insert_at_vertices", &aos2::insert_at_vertices<Aos>, ri, ka)
+    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex, ri)
+    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex, ri)
+    .def("insert_in_face_interior", &aos2::insert_xcv_in_face_interior, ri)
+    .def("insert_in_face_interior", &aos2::insert_pnt_in_face_interior, ri)
+    .def("insert_at_vertices", &aos2::insert_at_vertices<Aos>, ri)
     .def("modify_vertex", &aos2::modify_vertex<Aos>)
     .def("remove_isolated_vertex", &aos2::remove_isolated_vertex<Aos>)
     .def("modify_edge", &aos2::modify_edge<Aos>)
@@ -430,7 +435,11 @@ void export_aos(py::module_& m, const py::object& traits_c) {
   export_halfedge(aos_c);
   export_face(aos_c);
 
-  aos_c.attr("Geometry_traits_2") = traits_c;
+  // Add convenient attributes:
+  add_attr<GT>(aos_c, "Geometry_traits_2");
+  add_attr<GT::Point_2>(aos_c, "Point_2");
+  add_attr<GT::Curve_2>(aos_c, "Curve_2");
+  add_attr<GT::X_monotone_curve_2>(aos_c, "X_monotone_curve_2");
 }
 
 // Overlay traits
@@ -476,14 +485,15 @@ void export_arr(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Arr = aos2::Arrangement_2;
   using GT = aos2::Geometry_traits_2;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Arr, Aos>(m, "Arrangement_2")
     .def(py::init<>())
     .def(py::init<const Arr&>())
     .def(py::init<const GT*>())
-    .def("unbounded_face", &aos2::unbounded_face<Arr>)
-    .def("number_of_vertices_at_infinity",
-         &Arr::number_of_vertices_at_infinity);
+    .def("unbounded_face", &aos2::unbounded_face, ri)
+    .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity)
+    ;
 
   m.def("draw", &aos2::draw);
 }
@@ -557,7 +567,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
 #endif
 
   // Arrangement on surface
-  if (! add_attr<Aos>(m, "Arrangement_on_surface_2")) export_aos(m, traits_c);
+  if (! add_attr<Aos>(m, "Arrangement_on_surface_2")) export_aos(m);
 
 #if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
   if (! add_attr<Arr>(m, "Arrangement_2")) export_arr(m);
