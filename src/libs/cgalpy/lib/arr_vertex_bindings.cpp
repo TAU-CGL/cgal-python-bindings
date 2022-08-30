@@ -16,6 +16,7 @@ namespace py = nanobind;
 
 namespace aos2 {
 
+//
 Iterator_from_circulator<Halfedge_around_vertex_circulator>*
 halfedge_around_vertex_iterator(Vertex& v) {
   return new Iterator_from_circulator<Halfedge_around_vertex_circulator>(v.incident_halfedges());
@@ -23,15 +24,16 @@ halfedge_around_vertex_iterator(Vertex& v) {
 
 }
 
+//
 void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
-  using Arr2 = aos2::Arrangement_2;
-  using Vertex = Arr2::Vertex;
-  using Point = Arr2::Point_2;
+  using Aos = aos2::Arrangement_on_surface_2;
+  using Vertex = Aos::Vertex;
+  using Point = Aos::Point_2;
   using Halfedge_around_vertex_circulator =
-    Arr2::Halfedge_around_vertex_circulator;
+    Aos::Halfedge_around_vertex_circulator;
 
-  py::class_<Vertex>(c, "Vertex")
-    .def(py::init<>())
+  py::class_<Vertex> vertex_c(c, "Vertex");
+  vertex_c.def(py::init<>())
 
     // As a convention, add the suffix `_mutable` to the mutable version.
     // Wrap the mutable method with the `reference_internal` call policy.
@@ -58,5 +60,5 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
     ;
 
   bind_iterator<Iterator_from_circulator<Halfedge_around_vertex_circulator>>
-    (c, "Halfedge_around_vertex_iterator");
+    (vertex_c, "Halfedge_around_vertex_iterator");
 }

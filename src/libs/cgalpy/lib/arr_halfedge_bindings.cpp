@@ -16,6 +16,7 @@ namespace py = nanobind;
 
 namespace aos2 {
 
+//
 Vertex& source(Halfedge& e) { return (*(e.source())); }
 Vertex& target(Halfedge& e) { return (*(e.target())); }
 Halfedge& next(Halfedge& e) { return (*(e.next())); }
@@ -29,15 +30,18 @@ Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
 
 }
 
+//
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
-  using Arr2 = aos2::Arrangement_2;
-  using Halfedge = Arr2::Halfedge;
+  using Aos = aos2::Arrangement_on_surface_2;
+  using Halfedge = Aos::Halfedge;
+  constexpr auto ka = py::keep_alive<0, 1>();
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Halfedge>(c, "Halfedge")
     .def(py::init<>())
     .def("direction", &Halfedge::direction)
-    .def("source", &aos2::source)
-    .def("target", &aos2::target)
+    .def("source", &aos2::source, ri, ka)
+    .def("target", &aos2::target, ri, ka)
     .def("twin", &aos2::twin)
     .def("face", &aos2::face)
     .def("next", &aos2::next)
