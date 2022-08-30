@@ -33,10 +33,10 @@ v: Arrangement_2.Vertex
 for v in arr.vertices():
   print(v.point())
 
-# e: Arrangement_2.Halfedge
-# for e in arr.halfedges():
-#   print(e.curve())
+e: Arrangement_2.Halfedge
+for e in arr.halfedges():
+  print(e.curve())
 
-# f: Arrangement_2.Face
-# for f in arr.faces():
-#   print(f.is_unbounded())
+f: Arrangement_2.Face
+for f in arr.faces():
+  print(f.is_unbounded())

@@ -30,6 +30,8 @@ void export_point_2(py::module_& m) {
   bp::class_<Point_2> point_c(m, "Point_2");
   point_c.def(bp::init<>())
     .def(bp::init<double, double>())
+    .def(bp::init<double, FT>())
+    .def(bp::init<FT, double>())
     .def(bp::init<FT&, FT&>())
     .def(bp::init<RT&, RT&>())
     .def(bp::init<Point_2&>())
