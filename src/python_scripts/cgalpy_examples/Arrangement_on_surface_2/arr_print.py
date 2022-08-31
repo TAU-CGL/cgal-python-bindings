@@ -35,18 +35,18 @@ def print_face(f):
     print_ccb(f.outer_ccb())
 
   # Print the boundary of each of the holes.
-  index = 1
+  ind = 1
   for hole in f.holes():
-    print('    Hole #{}: '.format(index), end='')
+    print('    Hole #{}: '.format(ind), end='')
     print_ccb(hole)
-    index = index + 1
+    ind = ind + 1
 
   # Print the isolated vertices.
-  index = 1
+  ind = 1
   iv: f.Vertex
   for iv in f.isolated_vertices():
-    print('    Isolated vertex #{}: ({})'.format(index), iv.point())
-    index = index + 1
+    print('    Isolated vertex #{}: ({})'.format(ind, iv.point()))
+    ind = ind + 1
 
 # Print an arrangement object
 def print_arrangement(arr):
