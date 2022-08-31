@@ -28,9 +28,11 @@ halfedge_around_vertex_iterator(Vertex& v) {
 void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Vertex = Aos::Vertex;
+  using Face = Aos::Face;
   using Point = Aos::Point_2;
   using Halfedge_around_vertex_circulator =
     Aos::Halfedge_around_vertex_circulator;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Vertex> vertex_c(c, "Vertex");
   vertex_c.def(py::init<>())
@@ -39,11 +41,11 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
     // Wrap the mutable method with the `reference_internal` call policy.
     .def("point_mutable", [](Vertex& v)->Point& { return v.point(); },
          py::rv_policy::reference_internal)
-    .def("point", [](const Vertex& v)->const Point& { return v.point(); },
-         py::rv_policy::reference_internal)
+    .def("point", [](const Vertex& v)->const Point& { return v.point(); }, ri)
 
     .def("is_isolated", [](const Vertex& v)->bool { return v.is_isolated(); })
     .def("degree", &Vertex::degree)
+    .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
     .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator)
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
     // Use `py::overload_cast` to cast overloaded functions.
