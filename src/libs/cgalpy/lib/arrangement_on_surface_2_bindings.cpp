@@ -48,9 +48,9 @@ py::object export_gps_segment_traits(py::module_&);
 py::object export_gps_circle_segment_traits(py::module_&);
 py::object export_gps_traits(py::module_&);
 
-namespace aos2 {
-
 namespace py = nanobind;
+
+namespace aos2 {
 
 typedef typename boost::variant<Vertex_const_handle, Halfedge_const_handle,
                                 Face_const_handle>      variant;
