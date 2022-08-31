@@ -38,7 +38,7 @@ void export_Compare_y_at_x_left_2(C& c, Classes& classes, CGAL::Tag_false) {}
 
 //! Export the basic traits function objects
 template <typename T, typename C, typename Concepts>
-void export_AosBasicTraits(C& c, Concepts& concepts) {
+void export_AosBasicTraits_2(C& c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
