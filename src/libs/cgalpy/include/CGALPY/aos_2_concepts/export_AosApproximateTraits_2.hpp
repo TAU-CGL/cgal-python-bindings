@@ -12,18 +12,19 @@
 
 #include <nanobind/nanobind.h>
 
-namespace py = nanobind;
-
+#include "CGALPY/aos_2_concepts/export_AosBasicTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
+
+namespace py = nanobind;
 
 template <typename T, typename C, typename Concepts>
 void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T>(c, concepts);
+  export_AosBasicTraits_2<T>(c, concepts);
 
-  typedef typename T::Approximate_2             Approximate_2;
+  using Approximate_2 = typename T::Approximate_2;
 
   auto& classes = concepts.m_approximate_traits_classes;
 

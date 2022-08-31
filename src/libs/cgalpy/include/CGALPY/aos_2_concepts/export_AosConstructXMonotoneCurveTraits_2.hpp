@@ -12,7 +12,7 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
+#include "CGALPY/aos_2_concepts/export_AosBasicTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 
 namespace py = nanobind;
@@ -22,19 +22,19 @@ void export_AosConstructXMonotoneCurveTraits_2(C c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T>(c, concepts);
+  export_AosBasicTraits_2<T>(c, concepts);
 
-  typedef typename T::Point_2                       Point_2;
-  typedef typename T::X_monotone_curve_2            X_monotone_curve_2;
-  typedef typename T::Construct_x_monotone_curve_2  Construct_x_monotone_curve_2;
+  using Pnt = typename T::Point_2;
+  using Xcv = typename T::X_monotone_curve_2;
+  using Ctr_xcv = typename T::Construct_x_monotone_curve_2;
 
   auto& classes = concepts.m_construct_x_monotone_curve_traits_classes;
 
-  using Ctr_xcv = X_monotone_curve_2(Construct_x_monotone_curve_2::*)(const Point_2&, const Point_2&) const;
+  using Ctr_xcv_fnc = Xcv(Ctr_xcv::*)(const Pnt&, const Pnt&) const;
   classes.m_construct_x_monotone_curve_2 =
-    new py::class_<Construct_x_monotone_curve_2>(c, "Construct_x_monotone_curve_2");
+    new py::class_<Ctr_xcv>(c, "Construct_x_monotone_curve_2");
   classes.m_construct_x_monotone_curve_2->
-    def("__call__", static_cast<Ctr_xcv>(&Construct_x_monotone_curve_2::operator()));
+    def("__call__", static_cast<Ctr_xcv_fnc>(&Ctr_xcv::operator()));
 
   c.def("construct_x_monotone_curve_2_object", &T::construct_x_monotone_curve_2_object);
 

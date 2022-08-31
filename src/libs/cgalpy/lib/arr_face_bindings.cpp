@@ -48,9 +48,9 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     ;
 
   // Isolated vertices
-  using Vci = Aos::Vertex_const_iterator;
+  using Ivci = Aos::Isolated_vertex_const_iterator;
   using V = Aos::Vertex;
-  add_iterator<Vci, Vci, const V&>("Vertex_iterator", face_base_c);
+  add_iterator<Ivci, Ivci, const V&>("Isolated_vertex_iterator", face_base_c);
   face_base_c.def("isolated_vertices",
                   [](const Face& face) {
                     return make_iterator(face.isolated_vertices_begin(),
@@ -66,9 +66,9 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("number_of_outer_ccbs", &aos2::number_of_outer_ccbs)
     .def("outer_ccbs", &aos2::inner_ccbs)
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
-    // .def("holes", &aos2::inner_ccbs)
-    // .def("outer_ccb", &aos2::outer_ccb)
-    // .def("has_outer_ccb", &Face::has_outer_ccb)
+    .def("holes", &aos2::inner_ccbs)
+    .def("outer_ccb", &aos2::outer_ccb)
+    .def("has_outer_ccb", &Face::has_outer_ccb)
 
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
@@ -84,4 +84,6 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     (face_c, "Ccb_halfedge_iterator");
   bind_iterator_of_circulators<Iterator_of_circulators<Inner_ccb_iterator>>
     (face_c, "Inner_ccbs_iterator");
+
+  add_attr<V>(face_c, "Vertex");
 }

@@ -424,14 +424,6 @@ void export_aos(py::module_& m) {
     .def("faces", &aos2::faces<Aos>, py::keep_alive<0, 1>())
     .def("unbounded_faces", &aos2::unbounded_faces<Aos>, py::keep_alive<0, 1>());
 
-    // supported only by some traits
-#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-  add_insertion(aos_c, "__str__");
-  add_insertion(aos_c, "__repr__");
-#endif
-
   export_vertex(aos_c);
   export_halfedge(aos_c);
   export_face(aos_c);
@@ -488,14 +480,20 @@ void export_arr(py::module_& m) {
   using GT = aos2::Geometry_traits_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<Arr, Aos>(m, "Arrangement_2")
-    .def(py::init<>())
+  py::class_<Arr, Aos> arr_c(m, "Arrangement_2");
+  arr_c.def(py::init<>())
     .def(py::init<const Arr&>())
     .def(py::init<const GT*>())
     .def("unbounded_face", &aos2::unbounded_face, ri)
     .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity)
     ;
 
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
+  add_insertion(arr_c, "__str__");
+  add_insertion(arr_c, "__repr__");
+#endif
   // m.def("draw", &aos2::draw);
 }
 

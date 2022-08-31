@@ -12,7 +12,7 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/aos_2_concepts/export_AosBasicTraits.hpp"
+#include "CGALPY/aos_2_concepts/export_AosBasicTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
 
 namespace py = nanobind;
@@ -70,7 +70,7 @@ void export_AosXMonotoneTraits_2(C& c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  export_AosBasicTraits<T>(c, concepts);
+  export_AosBasicTraits_2<T>(c, concepts);
 
   using Has_merge_category = typename T::Has_merge_category;
   using Intersect_2 = typename T::Intersect_2;

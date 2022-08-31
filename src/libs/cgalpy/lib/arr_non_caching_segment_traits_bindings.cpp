@@ -9,38 +9,47 @@
 
 #include <nanobind/nanobind.h>
 
-#include <boost/assert.hpp>
-
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/export_point_2.hpp"
-#include "CGALPY/export_segment_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosBasicTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
+
+#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_landmark_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 
 namespace py = nanobind;
 
-py::object export_arr_non_caching_segment_traits(py::module_& m) {
-  using GT = Arr_non_caching_segment_traits_2<Kernel>;
+//
+py::object export_arr_segment_traits(py::module_& m) {
+  using BGT = CGAL::Arr_non_caching_segment_basic_traits_2<Kernel>;
+  using GT = CGAL::Arr_non_caching_segment_traits_2<Kernel>;
 
-  py::scope traits_scope = py::class_<GT>(m, "Arr_non_caching_segment_traits_2")
-    .def(py::init<>())
-    ;
+  struct Concepts {
+    Aos_basic_traits_classes<GT> m_basic_traits_classes;
+    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
+    Aos_traits_classes<GT> m_traits_classes;
+    Aos_landmark_traits_classes<GT> m_landmark_traits_classes;
+    Aos_directional_x_monotone_traits_classes<GT> m_directional_x_monotone_traits_classes;
+    Aos_approximate_traits_classes<GT> m_approximate_traits_classes;
+    Aos_construct_x_monotone_curve_traits_classes<GT>
+      m_construct_x_monotone_curve_traits_classes;
+  } concepts;
 
-  const py::type_info pt_info = py::type_id<Point_2>();
-  const py::converter::registration* pt_reg =
-    py::converter::registry::query(pt_info);
-  BOOST_ASSERT((pt_reg != nullptr) || ((*pt_reg).m_to_python != nullptr));
-  traits_scope.attr("Point_2") = py::handle<>(pt_reg->m_class_object);
+  py::class_<BGT, Kernel> basic_traits_c(m, "Arr_non_caching_segment_basic_traits_2");
+  // export_AosBasicTraits_2<BGT>(basic_traits_c, concepts);
 
-  const py::type_info cv_info = py::type_id<Curve_2>();
-  const py::converter::registration* cv_reg =
-    py::converter::registry::query(cv_info);
-  BOOST_ASSERT((cv_reg != nullptr) || ((*cv_reg).m_to_python != nullptr));
-  traits_scope.attr("Curve_2") = py::handle<>(cv_reg->m_class_object);
+  py::class_<GT, BGT> traits_c(m, "Arr_non_caching_segment_traits_2");
+  // export_AosTraits_2<GT>(traits_c, concepts);
+  // export_AosLandmarkTraits_2<GT>(traits_c, concepts);
+  // export_AosDirectionalXMonotoneTraits_2<GT>(traits_c, concepts);
 
-  const py::type_info cv_info = py::type_id<X_monotone_curve_2>();
-  const py::converter::registration* cv_reg =
-    py::converter::registry::query(cv_info);
-  BOOST_ASSERT((cv_reg != nullptr) || ((*cv_reg).m_to_python != nullptr));
-  traits_scope.attr("X_monotone_curve_2") = py::handle<>(cv_reg->m_class_object);
+  return traits_c;
 }
