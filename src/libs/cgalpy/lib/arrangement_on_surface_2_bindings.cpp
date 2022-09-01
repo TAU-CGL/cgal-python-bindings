@@ -115,14 +115,6 @@ void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
   else std::runtime_error("Attempting to insert a list of of object of unrecognized type to an arrangement!");
 }
 
-// Insert a list of pairwise disjoint x-monotone curves into an arrangement.
-void insert_non_intersecting_curves(Arrangement_on_surface_2& arr,
-                                    py::list& lst) {
-  auto begin = stl_input_iterator<X_monotone_curve_2>(lst);
-  auto end = stl_input_iterator<X_monotone_curve_2>(lst, false);
-  CGAL::insert_non_intersecting_curves(arr, begin, end);
-}
-
 // Overlay two arrangements
 template <typename OverlayTraits>
 void overlay(Arrangement_on_surface_2& arr1, Arrangement_on_surface_2& arr2,
@@ -353,6 +345,11 @@ Arrangement_on_surface_2::Face& remove_edge(Arrangement_on_surface_2& arr,
 Arrangement_on_surface_2::Face& fictitious_face(Arrangement_on_surface_2& arr)
 { return *(arr.fictitious_face()); }
 
+/// @}
+
+/// \name Iterators
+/// @{
+
 //
 py::object vertices(const Arrangement_on_surface_2& arr)
 { return make_iterator(arr.vertices_begin(), arr.vertices_end()); }
@@ -372,6 +369,55 @@ py::object faces(const Arrangement_on_surface_2& arr)
 //
 py::object unbounded_faces(const Arrangement_on_surface_2& arr)
 { return make_iterator(arr.unbounded_faces_begin(), arr.unbounded_faces_end()); }
+
+/// @}
+
+/// \name Points and curves insertions
+/// @{
+
+/*! Insert a point into an arrangement.
+ * \param arr the input arrangement
+ */
+Vertex& insert_point(Arrangement_on_surface_2& arr, const Point_2& p)
+{ return *(CGAL::insert_point(arr, p)); }
+
+/*! Insert a point into an arrangement.
+ * \param arr the input arrangement
+ */
+template <typename PoinLocation>
+Vertex& insert_point_pl(Arrangement_on_surface_2& arr, const Point_2& p,
+                        const PoinLocation& pl)
+{ return *(CGAL::insert_point(arr, p, pl)); }
+
+/*! Insert an x-monotone curve into an arrangement.
+ * \param arr the input arrangement
+ * \pre: `xcv` does not intersect any curve in the arrangement in their
+ *       interiors.
+ */
+Halfedge& insert_ni_cv(Arrangement_on_surface_2& arr,
+                       const X_monotone_curve_2& xcv)
+{ return *(CGAL::insert_non_intersecting_curve(arr, xcv)); }
+
+/*! Insert a list of x-monotone curves into an arrangement.
+ * \pre: The curves in the input list are pairwise interior disjoint any of
+ *       them does not intersect any curve in the arrangement in their
+ *       interiors.
+ */
+void insert_ni_cvs(Arrangement_on_surface_2& arr, py::list& lst) {
+  auto begin = stl_input_iterator<X_monotone_curve_2>(lst);
+  auto end = stl_input_iterator<X_monotone_curve_2>(lst, false);
+  CGAL::insert_non_intersecting_curves(arr, begin, end);
+}
+
+/*! Insert an x-monotone curve into an arrangement.
+ * \param arr the input arrangement
+ * \pre: `xcv` does not intersect any curve in the arrangement in their
+ *       interiors.
+ */
+template <typename PoinLocation>
+Halfedge& insert_ni_cv_pl(Arrangement_on_surface_2& arr,
+                          const X_monotone_curve_2& xcv, const PoinLocation& pl)
+{ return *(CGAL::insert_non_intersecting_curve(arr, xcv, pl)); }
 
 /// @}
 
@@ -439,7 +485,7 @@ void export_aos(py::module_& m) {
   // Iterators
   add_iterator<Vci, Vci, const Vertex&>("Vertex_iterator", aos_c);
   add_iterator<Hci, Hci, const Halfedge&>("Halfedge_iterator", aos_c);
-  add_iterator<Hci, Hci, const Halfedge&>("Edge_iterator", aos_c);
+  add_iterator<Eci, Eci, const Halfedge&>("Edge_iterator", aos_c);
   add_iterator<Fci, Fci, const Face&>("Face_iterator", aos_c);
 
   aos_c.def("vertices", &aos2::vertices, py::keep_alive<0, 1>())
@@ -598,20 +644,30 @@ void export_arrangement_on_surface_2(py::module_& m) {
   if (! add_attr<Arr>(m, "Arrangement_2")) export_arr(m);
 #endif
 
-  using Vh = aos2::Arrangement_on_surface_2::Vertex_handle;
-  using Hh = aos2::Arrangement_on_surface_2::Halfedge_handle;
+  /// Free functions
 
-  using Insert_point = Vh(*)(Aos&, const Point&);
-  using Insert_point_nv_pl = Vh(*)(Aos&, const Point&, const Naive_pl&);
-  using Insert_point_wl_pl = Vh(*)(Aos&, const Point&, const Wal_pl&);
-  using Insert_point_tr_pl = Vh(*)(Aos&, const Point&, const Trapezoid_pl&);
-  using Insert_point_lm_pl = Vh(*)(Aos&, const Point&, const Landmarks_pl&);
+  m.def("insert_point", &aos2::insert_point)
+    .def("insert_point", &aos2::insert_point_pl<Naive_pl>)
+    .def("insert_point", &aos2::insert_point_pl<Wal_pl>)
+    .def("insert_point", &aos2::insert_point_pl<Trapezoid_pl>)
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
+    .def("insert_point", &aos2::insert_point_pl<Landmarks_pl>)
+#endif
+    ;
 
-  using Insert_ni_xcv = Hh(*)(Aos&, const Xcv&);
-  using Insert_ni_xcv_nv_pl = Hh(*)(Aos&, const Xcv&, const Naive_pl&);
-  using Insert_ni_xcv_wl_pl = Hh(*)(Aos&, const Xcv&, const Wal_pl&);
-  using Insert_ni_xcv_tr_pl = Hh(*)(Aos&, const Xcv&, const Wal_pl&);
-  using Insert_ni_xcv_lm_pl = Hh(*)(Aos&, const Xcv&, const Landmarks_pl&);
+  m.def("insert_non_intersecting_curve", &aos2::insert_ni_cv)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Naive_pl>)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Wal_pl>)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Trapezoid_pl>)
+    .def("insert_non_intersecting_curves", &aos2::insert_ni_cvs)
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Landmarks_pl>)
+#endif
+    ;
 
   using Insert_cv = void(*)(Aos&, const Cv&);
   using Insert_xcv = void(*)(Aos&, const Xcv&);
@@ -619,39 +675,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Do_intersect = bool(*)(Aos&, const Xcv&);
   using Do_intersect_nv_pl = bool(*)(Aos&, const Xcv&, const Naive_pl&);
   using Do_intersect_wl_pl = bool(*)(Aos&, const Xcv&, const Wal_pl&);
-  using Do_intersect_tr_pl = bool(*)(Aos&, const Xcv&, const Wal_pl&);
+  using Do_intersect_tr_pl = bool(*)(Aos&, const Xcv&, const Trapezoid_pl&);
   using Do_intersect_lm_pl = bool(*)(Aos&, const Xcv&, const Landmarks_pl&);
-
-  /// Free functions
-
-  m.def("insert_point", static_cast<Insert_point>(CGAL::insert_point))
-    .def("insert_point", static_cast<Insert_point_nv_pl>(CGAL::insert_point))
-    .def("insert_point", static_cast<Insert_point_wl_pl>(CGAL::insert_point))
-    .def("insert_point", static_cast<Insert_point_tr_pl>(CGAL::insert_point))
-#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-    .def("insert_point", static_cast<Insert_point_lm_pl>(CGAL::insert_point))
-#endif
-    ;
-
-  m.def("insert_non_intersecting_curve",
-        static_cast<Insert_ni_xcv>(CGAL::insert_non_intersecting_curve))
-    .def("insert_non_intersecting_curve",
-         static_cast<Insert_ni_xcv_nv_pl>(CGAL::insert_non_intersecting_curve))
-    .def("insert_non_intersecting_curve",
-         static_cast<Insert_ni_xcv_wl_pl>(CGAL::insert_non_intersecting_curve))
-    .def("insert_non_intersecting_curve",
-         static_cast<Insert_ni_xcv_tr_pl>(CGAL::insert_non_intersecting_curve))
-    .def("insert_non_intersecting_curves",
-          &aos2::insert_non_intersecting_curves)
-#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-    .def("insert_non_intersecting_curve",
-         static_cast<Insert_ni_xcv_lm_pl>(CGAL::insert_non_intersecting_curve))
-#endif
-    ;
 
   m.def("insert", static_cast<Insert_cv>(CGAL::insert))
     .def("insert", static_cast<Insert_xcv>(CGAL::insert))

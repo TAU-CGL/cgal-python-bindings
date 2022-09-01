@@ -39,8 +39,7 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
     // As a convention, add the suffix `_mutable` to the mutable version.
     // Wrap the mutable method with the `reference_internal` call policy.
-    .def("point_mutable", [](Vertex& v)->Point& { return v.point(); },
-         py::rv_policy::reference_internal)
+    .def("point_mutable", [](Vertex& v)->Point& { return v.point(); }, ri)
     .def("point", [](const Vertex& v)->const Point& { return v.point(); }, ri)
 
     .def("is_isolated", [](const Vertex& v)->bool { return v.is_isolated(); })
@@ -48,16 +47,12 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
     .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator)
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
-    // Use `py::overload_cast` to cast overloaded functions.
-    // 1. As a convention, add the suffix `_mutable` to the mutable version.
-    // 2. Wrap the mutable method with the `reference_internal` call policy.
-    // 3. Add the `const_` tag to the overloaded const function, as the
-    //    overloading is based on constness.
-    .def("data_mutual", py::overload_cast<>(&Vertex::data),
-         py::rv_policy::reference_internal)
-    .def("data", py::overload_cast<>(&Vertex::data, py::const_))
-
-    .def("set_data", &Vertex::set_data)
+    // The member functions set_data() and data() are defined in a base class of
+    // Face. Therefore, we cannot directly refere to any of them, e.g.,
+    // `Face::set_data`. Instead, we introduce lambda functions that call the
+    // appropriate member functions.
+    .def("set_data", [](Vertex& v, py::object obj) { v.set_data(obj); })
+    .def("data", [](const Vertex& v)->py::object { return v.data(); })
 #endif
     ;
 

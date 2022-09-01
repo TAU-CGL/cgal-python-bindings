@@ -49,15 +49,12 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("curve", &aos2::curve, ri)
     .def("ccb", &aos2::ccb, ri)
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
-    // Use `py::overload_cast` to cast overloaded functions.
-    // 1. As a convention, add the suffix `_mutable` to the mutable version.
-    // 2. Wrap the mutable method with the `reference_internal` call policy.
-    // 3. Add the `const_` tag to the overloaded const function, as the
-    //    overloading is based on constness.
-    .def("data_mutual", py::overload_cast<>(&Halfedge::data), ri)
-    .def("data", py::overload_cast<>(&Halfedge::data, py::const_))
-
-    .def("set_data", &Halfedge::set_data)
+    // The member functions set_data() and data() are defined in a base class of
+    // Face. Therefore, we cannot directly refere to any of them, e.g.,
+    // `Face::set_data`. Instead, we introduce lambda functions that call the
+    // appropriate member functions.
+    .def("set_data", [](Halfedge& h, py::object obj) { h.set_data(obj); })
+    .def("data", [](const Halfedge& h)->py::object { return h.data(); })
 #endif
     ;
 }

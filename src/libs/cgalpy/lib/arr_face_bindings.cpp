@@ -75,8 +75,8 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
     // `Face::set_data`. Instead, we introduce lambda functions that call the
     // appropriate member functions.
-    .def("set_data", [](Face* face, py::object obj) { face->set_data(obj); })
-    .def("data", [](const Face* face)->py::object { return face->data(); })
+    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); })
+    .def("data", [](const Face& f)->py::object { return f.data(); })
 #endif
     ;
 
