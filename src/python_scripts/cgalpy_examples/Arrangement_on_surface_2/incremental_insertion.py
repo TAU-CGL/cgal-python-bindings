@@ -1,41 +1,46 @@
-//! \file examples/Arrangement_on_surface_2/incremental_insertion.cpp
-// Using the global incremental insertion functions.
+#!/usr/bin/python3
+# export PYTHONPATH=...
+import os
+import sys
+import importlib
+from enum import Enum
+from arr_print import *
 
-#include <CGAL/basic.h>
-#include <CGAL/Arr_naive_point_location.h>
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
 
-#include "arr_exact_construction_segments.h"
-#include "arr_print.h"
+CGALPY = importlib.import_module(lib)
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
+Point = Arrangement.Geometry_traits_2.Point_2
+Traits = Arrangement.Geometry_traits_2
+Segment = Traits.X_monotone_curve_2
+Naive_pl = Aos2.Arr_naive_point_location
 
-typedef CGAL::Arr_naive_point_location<Arrangement>             Naive_pl;
-typedef CGAL::Arr_point_location_result<Arrangement>::Type      Pl_result_type;
+arr = Arrangement()
+pl = Naive_pl(arr)
 
-int main() {
-  // Construct the arrangement of five intersecting segments.
-  Arrangement arr;
-  Naive_pl pl(arr);
+s1 = Segment(Point(1, 0), Point(2, 4))
+s2 = Segment(Point(5, 0), Point(5, 5))
+s3 = Segment(Point(1, 0), Point(5, 3))
+s4 = Segment(Point(0, 2), Point(6, 0))
+s5 = Segment(Point(3, 0), Point(5, 5))
 
-  Segment s1(Point(1, 0), Point(2, 4));
-  Segment s2(Point(5, 0), Point(5, 5));
-  Segment s3(Point(1, 0), Point(5, 3));
-  Segment s4(Point(0, 2), Point(6, 0));
-  Segment s5(Point(3, 0), Point(5, 5));
+e = Aos2.insert_non_intersecting_curve(arr, s1, pl)
+Aos2.insert_non_intersecting_curve(arr, s2, pl)
+Aos2.insert(arr, s3, e.source())
+# Aos2.insert(arr, s3)
+Aos2.insert(arr, s4, pl)
+Aos2.insert(arr, s5, pl)
+print_arrangement_size(arr)
 
-  auto e = insert_non_intersecting_curve(arr, s1, pl);
-  insert_non_intersecting_curve(arr, s2, pl);
-  insert(arr, s3, Pl_result_type(e->source()));
-  insert(arr, s4, pl);
-  insert(arr, s5, pl);
-  print_arrangement_size(arr);
-
-  // Perform a point-location query on the resulting arrangement and print
-  // the boundary of the face that contains it.
-  Point q(4, 1);
-  auto obj = pl.locate(q);
-  auto* f = boost::get<Arrangement::Face_const_handle>(&obj);
-
-  std::cout << "The query point (" << q << ") is located in: ";
-  print_face<Arrangement>(*f);
-
-  return 0;
-}
+# Perform a point-location query on the resulting arrangement and print
+# the boundary of the face that contains it.
+q = Point(4, 1)
+f = pl.locate(q)
+assert(type(f) == Arrangement.Face)
+print('The query point ({}) is located in: '.format(q))
+print_face(f)

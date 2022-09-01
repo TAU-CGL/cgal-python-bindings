@@ -9,6 +9,7 @@
 
 #define CGAL_USE_BASIC_VIEWER
 
+#include <boost/variant/variant.hpp>
 #include <boost/static_assert.hpp>
 
 #include <nanobind/nanobind.h>
@@ -52,8 +53,9 @@ namespace py = nanobind;
 
 namespace aos2 {
 
-typedef typename boost::variant<Vertex_const_handle, Halfedge_const_handle,
-                                Face_const_handle>      variant;
+typedef typename boost::variant<Vertex_const_handle,
+                                Halfedge_const_handle,
+                                Face_const_handle>      Cell_const_variant;
 
 typedef Arr_overlay_function_traits<Arrangement_on_surface_2,
                                     Arrangement_on_surface_2,
@@ -144,7 +146,8 @@ void decompose_helper2(const Vertex& vertex, const T1& below,
 //
 template<typename T1>
 void decompose_helper1(const Vertex& vertex, const T1& below,
-                       const boost::optional<variant>& above, py::list& lst) {
+                       const boost::optional<Cell_const_variant>& above,
+                       py::list& lst) {
   if (! above) {
     py::object none;
     decompose_helper2<T1, py::object>(vertex, below, none, lst);
@@ -164,13 +167,14 @@ void decompose_helper1(const Vertex& vertex, const T1& below,
 
 //
 typedef std::pair<Arrangement_2::Vertex_const_handle,
-                  std::pair<boost::optional<variant>,
-                            boost::optional<variant>>>        Decompose_result;
+                  std::pair<boost::optional<Cell_const_variant>,
+                            boost::optional<Cell_const_variant>>>
+  Decompose_result;
 
 void decompose_helper(const Decompose_result& res, py::list& lst) {
   const Vertex& vertex = *(res.first);
-  const boost::optional<variant>& below = res.second.first;
-  const boost::optional<variant>& above = res.second.second;
+  const boost::optional<Cell_const_variant>& below = res.second.first;
+  const boost::optional<Cell_const_variant>& above = res.second.second;
 
   if (! below) {
     py::object none;
@@ -209,10 +213,9 @@ public:
 };
 
 //
-py::list zone_default(Arrangement_on_surface_2& arr, X_monotone_curve_2& c) {
+py::list zone(Arrangement_on_surface_2& arr, X_monotone_curve_2& c) {
   py::list lst;
-  auto op =
-    [&] (const variant& o) mutable
+  auto op = [&] (const Cell_const_variant& o) mutable
     { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
   // be Assignable and Copy Constructible; hence the application of std::ref().
@@ -222,11 +225,10 @@ py::list zone_default(Arrangement_on_surface_2& arr, X_monotone_curve_2& c) {
 }
 
 template <typename PointLocation>
-py::list zone(Arrangement_on_surface_2& arr, X_monotone_curve_2& c,
-              PointLocation& pl) {
+py::list zone_pl(Arrangement_on_surface_2& arr, X_monotone_curve_2& c,
+                 PointLocation& pl) {
   py::list lst;
-  auto op =
-    [&] (const variant& o) mutable
+  auto op = [&] (const Cell_const_variant& o) mutable
     { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
   // be Assignable and Copy Constructible; hence the application of std::ref().
@@ -419,6 +421,41 @@ Halfedge& insert_ni_cv_pl(Arrangement_on_surface_2& arr,
                           const X_monotone_curve_2& xcv, const PoinLocation& pl)
 { return *(CGAL::insert_non_intersecting_curve(arr, xcv, pl)); }
 
+// Insert a curve into an arrangement.
+void insert_cv(Arrangement_on_surface_2& arr, const Curve_2& cv)
+{ CGAL::insert(arr, cv); }
+
+// Insert a curve into an arrangement.
+template <typename PoinLocation>
+void insert_cv_pl(Arrangement_on_surface_2& arr, const Curve_2& cv,
+                  const PoinLocation& pl)
+{ CGAL::insert(arr, cv, pl); }
+
+// Insert a curve into an arrangement.
+void insert_xcv(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv)
+{ CGAL::insert(arr, xcv); }
+
+// Insert a curve into an arrangement.
+void insert_xcv_vertex(Arrangement_on_surface_2& arr,
+                       const X_monotone_curve_2& xcv, const Vertex& v)
+{ CGAL::insert(arr, xcv, Cell_const_variant(Vertex_const_handle(&v))); }
+
+// Insert a curve into an arrangement.
+void insert_xcv_halfedge(Arrangement_on_surface_2& arr,
+                         const X_monotone_curve_2& xcv, const Halfedge& h)
+{ CGAL::insert(arr, xcv, Cell_const_variant(Halfedge_const_handle(&h))); }
+
+// Insert a curve into an arrangement.
+void insert_xcv_face(Arrangement_on_surface_2& arr,
+                     const X_monotone_curve_2& xcv, const Face& f)
+{ CGAL::insert(arr, xcv, Cell_const_variant(Face_const_handle(&f))); }
+
+// Insert a curve into an arrangement.
+template <typename PoinLocation>
+void insert_xcv_pl(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv,
+                   const PoinLocation& pl)
+{ CGAL::insert(arr, xcv, pl); }
+
 /// @}
 
 /// \name Functions for Arrangement_2
@@ -576,7 +613,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Awh = aos2::Arrangement_with_history_2;
   using GT = Aos::Geometry_traits_2;
   using Dcel = Aos::Dcel;
-  using Point = GT::Point_2;
+  using Pnt = GT::Point_2;
   using Cv = GT::Curve_2;
   using Xcv = GT::X_monotone_curve_2;
   using Naive_pl = CGAL::Arr_naive_point_location<Aos>;
@@ -650,11 +687,6 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .def("insert_point", &aos2::insert_point_pl<Naive_pl>)
     .def("insert_point", &aos2::insert_point_pl<Wal_pl>)
     .def("insert_point", &aos2::insert_point_pl<Trapezoid_pl>)
-#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-    .def("insert_point", &aos2::insert_point_pl<Landmarks_pl>)
-#endif
     ;
 
   m.def("insert_non_intersecting_curve", &aos2::insert_ni_cv)
@@ -662,15 +694,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Wal_pl>)
     .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Trapezoid_pl>)
     .def("insert_non_intersecting_curves", &aos2::insert_ni_cvs)
-#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Landmarks_pl>)
-#endif
     ;
-
-  using Insert_cv = void(*)(Aos&, const Cv&);
-  using Insert_xcv = void(*)(Aos&, const Xcv&);
 
   using Do_intersect = bool(*)(Aos&, const Xcv&);
   using Do_intersect_nv_pl = bool(*)(Aos&, const Xcv&, const Naive_pl&);
@@ -678,8 +702,17 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Do_intersect_tr_pl = bool(*)(Aos&, const Xcv&, const Trapezoid_pl&);
   using Do_intersect_lm_pl = bool(*)(Aos&, const Xcv&, const Landmarks_pl&);
 
-  m.def("insert", static_cast<Insert_cv>(CGAL::insert))
-    .def("insert", static_cast<Insert_xcv>(CGAL::insert))
+  m.def("insert", &aos2::insert_cv)
+    .def("insert", &aos2::insert_cv_pl<Naive_pl>)
+    .def("insert", &aos2::insert_cv_pl<Wal_pl>)
+    .def("insert", &aos2::insert_cv_pl<Trapezoid_pl>)
+    .def("insert", &aos2::insert_xcv)
+    .def("insert", &aos2::insert_xcv_pl<Naive_pl>)
+    .def("insert", &aos2::insert_xcv_pl<Wal_pl>)
+    .def("insert", &aos2::insert_xcv_pl<Trapezoid_pl>)
+    .def("insert", &aos2::insert_xcv_vertex)
+    .def("insert", &aos2::insert_xcv_halfedge)
+    .def("insert", &aos2::insert_xcv_face)
     .def("insert", &aos2::insert_curves)
     ;
 
@@ -687,25 +720,27 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .def("do_intersect", static_cast<Do_intersect_nv_pl>(CGAL::do_intersect))
     .def("do_intersect", static_cast<Do_intersect_wl_pl>(CGAL::do_intersect))
     .def("do_intersect", static_cast<Do_intersect_tr_pl>(CGAL::do_intersect))
-#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-    .def("do_intersect", static_cast<Do_intersect_lm_pl>(CGAL::do_intersect))
-#endif
     ;
 
   m.def("decompose", &aos2::decompose);
 
-  m.def("zone", &aos2::zone<Naive_pl>)
-    .def("zone", &aos2::zone_default)
-    .def("zone", &aos2::zone<Wal_pl>)
-    .def("zone", &aos2::zone<Trapezoid_pl>)
+  m.def("zone", &aos2::zone)
+    .def("zone", &aos2::zone_pl<Naive_pl>)
+    .def("zone", &aos2::zone_pl<Wal_pl>)
+    .def("zone", &aos2::zone_pl<Trapezoid_pl>)
+    ;
+
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-    .def("zone", &aos2::zone<Landmarks_pl>)
-#endif
+  m.def("insert_point", &aos2::insert_point_pl<Landmarks_pl>)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Landmarks_pl>)
+    .def("insert", &aos2::insert_cv_pl<Landmarks_pl>)
+    .def("insert", &aos2::insert_xcv_pl<Landmarks_pl>)
+    .def("do_intersect", static_cast<Do_intersect_lm_pl>(CGAL::do_intersect))
+    .def("zone", &aos2::zone_pl<Landmarks_pl>)
     ;
+#endif
 
   m.def("remove_edge", &aos2::remove_edge_free);
   m.def("remove_vertex", &aos2::remove_vertex_free);
