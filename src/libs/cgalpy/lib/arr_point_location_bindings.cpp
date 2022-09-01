@@ -71,11 +71,11 @@ py::object locate(PL& pl, const Point_2& p) {
 }
 
 void export_point_location(py::module_& m) {
-  typedef aos2::Arrangement_on_surface_2                Aos;
-  typedef CGAL::Arr_naive_point_location<Aos>           Naive_pl;
-  typedef CGAL::Arr_walk_along_line_point_location<Aos> Walk_pl;
-  typedef CGAL::Arr_landmarks_point_location<Aos>       Landmarks_pl;
-  typedef CGAL::Arr_trapezoid_ric_point_location<Aos>   Trapezoid_pl;
+  using Aos = aos2::Arrangement_on_surface_2;
+  using Naive_pl = CGAL::Arr_naive_point_location<Aos>;
+  using Walk_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
+  using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
+  using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
 
   // Supported only by some of the traits
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
