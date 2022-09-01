@@ -38,7 +38,9 @@ Segment_2 to_segment(X_monotone_curve_2& c) { return Segment_2(c); }
 py::object export_arr_segment_traits(py::module_& m) {
   using GT = CGAL::Arr_segment_traits_2<Kernel>;
   using Pnt = GT::Point_2;
+  using Lin = GT::Line_2;
   using Xcv = aos2::X_monotone_curve_2;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<GT> traits_c(m, "Arr_segment_traits_2");
   struct Concepts {
@@ -63,22 +65,27 @@ py::object export_arr_segment_traits(py::module_& m) {
   xcv_c.def(py::init<Segment_2&>())
     .def(py::init<Pnt&, Pnt&>())
     .def(py::init<Line_2&, Pnt&, Pnt&>())
-    .def("source", &Xcv::source)
-    .def("target", &Xcv::target)
-    .def("line", &Xcv::line)
-    .def("is_vertical", &Xcv::is_vertical)
     .def("flip", &Xcv::flip)
-    .def("left", &Xcv::left)
-    .def("right", &Xcv::right)
-    .def("set_left", &Xcv::set_left)
-    .def("set_right", &Xcv::set_right)
-    .def("is_directed_right", &Xcv::is_directed_right)
+    .def("bbox", &Xcv::bbox)
+
+    // Members defined in the base class:
+    .def("source", [](const Xcv& xcv)->const Pnt& { return xcv.source(); }, ri)
+    .def("target", [](const Xcv& xcv)->const Pnt& { return xcv.target(); }, ri)
+    .def("line", [](const Xcv& xcv)->const Lin& { return xcv.line(); }, ri)
+    .def("is_vertical", [](const Xcv& xcv)->bool { return xcv.is_vertical(); })
+    .def("left", [](const Xcv& xcv)->const Pnt& { return xcv.left(); }, ri)
+    .def("right", [](const Xcv& xcv)->const Pnt& { return xcv.right(); }, ri)
+    .def("set_left",
+         [](Xcv& xcv, const Pnt& p)->void { return xcv.set_left(p); })
+    .def("set_right",
+         [](Xcv& xcv, const Pnt& p)->void { return xcv.set_right(p); })
+    .def("is_directed_right",
+         [](const Xcv& xcv)->bool { return xcv.is_directed_right(); })
 
     // Deprecated
     // .def("is_in_x_range", &X_monotone_curve_2::is_in_x_range)
     // .def("is_in_y_range", &X_monotone_curve_2::is_in_y_range)
 
-    .def("bbox", &Xcv::bbox)
     .def("segment", &aos2::to_segment)
   ;
 

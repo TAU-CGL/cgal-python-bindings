@@ -1,69 +1,81 @@
-//! \file examples/Arrangement_on_surface_2/dcel_extension.cpp
-// Extending all DCEL records (vertices, edges and faces).
+#!/usr/bin/python3
+# export PYTHONPATH=...
+import os
+import sys
+import importlib
+from enum import Enum
+from arr_print import *
 
-#include <CGAL/basic.h>
-#include <CGAL/Arr_extended_dcel.h>
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
 
-#include "arr_exact_construction_segments.h"
+CGALPY = importlib.import_module(lib)
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
+Point = Arrangement.Geometry_traits_2.Point_2
+Traits = Arrangement.Geometry_traits_2
+Segment = Traits.X_monotone_curve_2
 
-enum Color {BLUE, RED, WHITE};
+class Color(Enum):
+  BLUE = 0
+  RED = 1
+  WHITE = 2
 
-typedef CGAL::Arr_extended_dcel<Traits, Color, bool, size_t> Dcel;
-typedef CGAL::Arrangement_2<Traits, Dcel>                    Ex_arrangement;
+# typedef CGAL::Arr_extended_dcel<Traits, Color, bool, size_t> Dcel
 
-int main() {
-  // Construct the arrangement containing two intersecting triangles.
-  Traits traits;
-  Ex_arrangement arr(&traits);
-  insert_non_intersecting_curve(arr, Segment(Point(4, 1), Point(7, 6)));
-  insert_non_intersecting_curve(arr, Segment(Point(1, 6), Point(7, 6)));
-  insert_non_intersecting_curve(arr, Segment(Point(4, 1), Point(1, 6)));
-  insert(arr, Segment(Point(1, 3), Point(7, 3)));
-  insert(arr, Segment(Point(1, 3), Point(4, 8)));
-  insert(arr, Segment(Point(4, 8), Point(7, 3)));
-  insert_point(arr, Point(4, 4.5));
+# Construct the arrangement containing two intersecting triangles.
+traits = Traits ()
+arr = Arrangement(traits)
+Aos2.insert_non_intersecting_curve(arr, Segment(Point(4, 1), Point(7, 6)))
+Aos2.insert_non_intersecting_curve(arr, Segment(Point(1, 6), Point(7, 6)))
+Aos2.insert_non_intersecting_curve(arr, Segment(Point(4, 1), Point(1, 6)))
+Aos2.insert(arr, Segment(Point(1, 3), Point(7, 3)))
+Aos2.insert(arr, Segment(Point(1, 3), Point(4, 8)))
+Aos2.insert(arr, Segment(Point(4, 8), Point(7, 3)))
+Aos2.insert_point(arr, Point(4, 4.5))
 
-  // Go over all arrangement edges and set their flags.
-  // Recall that the value type of the edge iterator is the halfedge type.
-  for (auto vit = arr.vertices_begin(); vit != arr.vertices_end(); ++vit) {
-    auto degree = vit->degree();
-    vit->set_data((degree == 0) ? BLUE : ((degree <= 2) ? RED : WHITE));
-  }
+# Go over all arrangement edges and set their flags.
+# Recall that the value type of the edge iterator is the halfedge type.
+v: Arrangement.Vertex
+for v in arr.vertices():
+  degree = v.degree()
+  if degree == 0: v.set_data(Color.BLUE)
+  elif degree == 2: v.set_data(Color.RED)
+  else: v.set_data(Color.WHITE)
 
-  auto equal = traits.equal_2_object();
-  for (auto eit = arr.edges_begin(); eit != arr.edges_end(); ++eit) {
-    // Check whether the halfegde has the same direction as its segment.
-    bool flag = equal(eit->source()->point(),eit->curve().source());
-    eit->set_data(flag);
-    eit->twin()->set_data(!flag);
-  }
+equal = traits.equal_2_object()
+e: Arrangement.Halfedge
+for e in arr.edges():
+  # Check whether the halfegde has the same direction as its segment.
+  flag = equal(e.source().point(), e.curve().source())
+  e.set_data(flag)
+  e.twin().set_data(not flag)
 
-  // Store the size of the outer boundary of every face of the arrangement.
-  for (auto fit = arr.faces_begin(); fit != arr.faces_end(); ++fit) {
-    size_t boundary_size = 0;
-    if (! fit->is_unbounded()) {
-      Ex_arrangement::Ccb_halfedge_circulator curr = fit->outer_ccb();
-      boundary_size = std::distance(++curr, fit->outer_ccb())+1;
-    }
-    fit->set_data(boundary_size);
-  }
+# Store the size of the outer boundary of every face of the arrangement.
+f: Arrangement.Face
+for f in arr.faces():
+  boundary_size = 0
+  if not f.is_unbounded():
+    boundary_size = sum(1 for _ in f.outer_ccb())
+  f.set_data(boundary_size)
 
-  // Copy the arrangement and print the vertices along with their colors.
-  Ex_arrangement arr2 = arr;
+# # Copy the arrangement and print the vertices along with their colors.
+#   Ex_arrangement arr2 = arr
 
-  std::cout << "The arrangement vertices:\n";
-  for (auto vit = arr2.vertices_begin(); vit != arr2.vertices_end(); ++vit) {
-    std::cout << '(' << vit->point() << ") - ";
-    switch (vit->data()) {
-      case BLUE  : std::cout << "BLUE.\n"; break;
-      case RED   : std::cout << "RED.\n"; break;
-      case WHITE : std::cout << "WHITE.\n"; break;
-    }
-  }
+print("The arrangement vertices:")
+for v in arr.vertices():
+  print('({}) - '.format(v.point()), end='')
+  color = v.data()
+  if color == Color.BLUE: print("BLUE.")
+  elif color == Color.RED: print("RED.")
+  elif color == Color.WHITE: print("WHITE.")
+  else: print('undefined color')
 
-  std::cout << "The arrangement outer-boundary sizes:";
-  for (auto fit = arr2.faces_begin(); fit != arr2.faces_end(); ++fit)
-    std::cout << " " << fit->data();
-  std::cout << std::endl;
-  return 0;
-}
+print("The arrangement outer-boundary sizes:", end='')
+f: Arrangement.Face
+for f in arr.faces():
+  print('', f.data(), end='')
+print()
