@@ -243,118 +243,137 @@ py::list zone(Arrangement_on_surface_2& arr, X_monotone_curve_2& c,
   return lst;
 }
 
-// Arrangement methods
+/// Arrangement on surface methods
+/// @{
+
+// Insert from the endpoint on the left given the vertex of the endpoint.
 Arrangement_on_surface_2::Halfedge&
-insert_from_left_vertex(Arrangement_on_surface_2& arr,
-                        Arrangement_on_surface_2::X_monotone_curve_2& c,
-                        Arrangement_on_surface_2::Vertex& v)
+insert_from_left_vertex1(Arrangement_on_surface_2& arr,
+                         X_monotone_curve_2& c, Vertex& v)
 { return *(arr.insert_from_left_vertex(c, Vertex_handle(&v))); }
 
-//
+// Insert from the endpoint on the left given the halfedge that is incident
+// to the vertex of the endpoint.
+// The newly halfedge must be added immediately after the given halfedge in
+// the circular list around the vertex.
 Arrangement_on_surface_2::Halfedge&
-insert_from_right_vertex(Arrangement_on_surface_2& arr,
+insert_from_left_vertex2(Arrangement_on_surface_2& arr,
+                         X_monotone_curve_2& c, Halfedge& h)
+{ return *(arr.insert_from_left_vertex(c, Halfedge_handle(&h))); }
+
+// Insert from the endpoint on the right given the vertex of the endpoint.
+Arrangement_on_surface_2::Halfedge&
+insert_from_right_vertex1(Arrangement_on_surface_2& arr,
                          Arrangement_on_surface_2::X_monotone_curve_2& c,
                          Arrangement_on_surface_2::Vertex& v)
 { return *(arr.insert_from_right_vertex(c, Vertex_handle(&v))); }
 
+// Insert from the endpoint on the right given the halfedge that is incident
+// to the vertex of the endpoint.
+// The newly halfedge must be added immediately after the given halfedge in
+// the circular list around the vertex.
+Arrangement_on_surface_2::Halfedge&
+insert_from_right_vertex2(Arrangement_on_surface_2& arr,
+                          X_monotone_curve_2& c, Halfedge& h)
+{ return *(arr.insert_from_right_vertex(c, Halfedge_handle(&h))); }
+
 //
 Arrangement_on_surface_2::Halfedge&
 insert_xcv_in_face_interior(Arrangement_on_surface_2& arr,
-                            Arrangement_on_surface_2::X_monotone_curve_2& c,
-                            Arrangement_on_surface_2::Face& f)
+                            X_monotone_curve_2& c, Face& f)
 { return *(arr.insert_in_face_interior(c, Face_handle(&f))); }
 
 //
-typename Arrangement_on_surface_2::Vertex&
+Arrangement_on_surface_2::Vertex&
 insert_pnt_in_face_interior(Arrangement_on_surface_2& arr,
-                            Arrangement_on_surface_2::Point_2& p,
-                            Arrangement_on_surface_2::Face& f)
+                            Point_2& p, Face& f)
 { return *(arr.insert_in_face_interior(p, Face_handle(&f))); }
 
-//
-template <typename Aos>
-typename Aos::Halfedge& insert_at_vertices(Aos& arr,
-                                           typename Aos::X_monotone_curve_2& c,
-                                           typename Aos::Vertex& v1,
-                                           typename Aos::Vertex& v2)
+// Insert between the endpoints given the two vertices of the endpoints.
+Arrangement_on_surface_2::Halfedge&
+insert_at_vertices1(Arrangement_on_surface_2& arr,
+                    X_monotone_curve_2& c, Vertex& v1, Vertex& v2)
 { return *(arr.insert_at_vertices(c, Vertex_handle(&v1), Vertex_handle(&v2))); }
 
+// // Insert between the endpoints.
+// Arrangement_on_surface_2::Halfedge&
+// insert_at_vertices2(Arrangement_on_surface_2& arr,
+//                     X_monotone_curve_2& c, Vertex& v1, Halfedge& h2)
+// { return *(arr.insert_at_vertices(c, Vertex_handle(&v1), Halfedge_handle(&h2))); }
+
+// Insert between the endpoints.
+Arrangement_on_surface_2::Halfedge&
+insert_at_vertices3(Arrangement_on_surface_2& arr,
+                    X_monotone_curve_2& c, Halfedge& h1, Vertex& v2)
+{ return *(arr.insert_at_vertices(c, Halfedge_handle(&h1), Vertex_handle(&v2))); }
+
+// Insert between the endpoints.
+Arrangement_on_surface_2::Halfedge&
+insert_at_vertices4(Arrangement_on_surface_2& arr,
+                    X_monotone_curve_2& c, Halfedge& h1, Halfedge& h2)
+{ return *(arr.insert_at_vertices(c, Halfedge_handle(&h1), Halfedge_handle(&h2))); }
+
 //
-template <typename Aos>
-typename Aos::Vertex& modify_vertex(Aos& arr,
-                                    typename Aos::Vertex& v,
-                                    typename Aos::Point_2& p)
+Arrangement_on_surface_2::Vertex& modify_vertex(Arrangement_on_surface_2& arr,
+                                                Vertex& v, Point_2& p)
 { return *(arr.modify_vertex(Vertex_handle(&v), p)); }
 
 //
-template <typename Aos>
-typename Aos::Face& remove_isolated_vertex(Aos& arr,
-                                           typename Aos::Vertex& v)
+Arrangement_on_surface_2::Face&
+remove_isolated_vertex(Arrangement_on_surface_2& arr, Vertex& v)
 { return *(arr.remove_isolated_vertex(Vertex_handle(&v))); }
 
 //
-template <typename Aos>
-typename Aos::Halfedge& modify_edge(Aos& arr,
-                                    typename Aos::Halfedge& e,
-                                    typename Aos::X_monotone_curve_2& c)
+Arrangement_on_surface_2::Halfedge& modify_edge(Arrangement_on_surface_2& arr,
+                                                Halfedge& e,
+                                                X_monotone_curve_2& c)
 { return *(arr.modify_edge(Halfedge_handle(&e), c)); }
 
 //
-template <typename Aos>
-typename Aos::Halfedge& split_edge(Aos& arr,
-                                   typename Aos::Halfedge& e,
-                                   typename Aos::X_monotone_curve_2& c1,
-                     X_monotone_curve_2& c2)
+Arrangement_on_surface_2::Halfedge& split_edge(Arrangement_on_surface_2& arr,
+                                               Halfedge& e,
+                                               X_monotone_curve_2& c1,
+                                               X_monotone_curve_2& c2)
 { return *(arr.split_edge(Halfedge_handle(&e), c1, c2)); }
 
 //
-template <typename Aos>
-typename Aos::Halfedge& merge_edge(Aos& arr,
-                                   typename Aos::Halfedge& e1,
-                                   typename Aos::Halfedge& e2,
-                                   X_monotone_curve_2& c)
+Arrangement_on_surface_2::Halfedge& merge_edge(Arrangement_on_surface_2& arr,
+                                               Halfedge& e1, Halfedge& e2,
+                                               X_monotone_curve_2& c)
 { return *(arr.merge_edge(Halfedge_handle(&e1), Halfedge_handle(&e2), c)); }
 
 //
-template <typename Aos>
-typename Aos::Face& remove_edge(Aos& arr, typename Aos::Halfedge& e) {
+Arrangement_on_surface_2::Face& remove_edge(Arrangement_on_surface_2& arr,
+                                            Halfedge& e) {
   auto handle = e.twin();
   return *(arr.remove_edge(handle));
 }
 
 //
-template <typename Aos>
-typename Aos::Face& fictitious_face(Aos& arr)
+Arrangement_on_surface_2::Face& fictitious_face(Arrangement_on_surface_2& arr)
 { return *(arr.fictitious_face()); }
 
 //
-template <typename Aos>
-void assign(Aos& arr, Aos& input_arr) { arr.assign(input_arr); }
-
-//
-template <typename Aos>
-py::object vertices(const Aos& arr)
+py::object vertices(const Arrangement_on_surface_2& arr)
 { return make_iterator(arr.vertices_begin(), arr.vertices_end()); }
 
 //
-template <typename Aos>
-py::object halfedges(const Aos& arr)
+py::object halfedges(const Arrangement_on_surface_2& arr)
 { return make_iterator(arr.halfedges_begin(), arr.halfedges_end()); }
 
 //
-template <typename Aos>
-py::object edges(const Aos& arr)
+py::object edges(const Arrangement_on_surface_2& arr)
 { return make_iterator(arr.edges_begin(), arr.edges_end()); }
 
 //
-template <typename Aos>
-py::object faces(const Aos& arr)
+py::object faces(const Arrangement_on_surface_2& arr)
 { return make_iterator(arr.faces_begin(), arr.faces_end()); }
 
 //
-template <typename Aos>
-py::object unbounded_faces(const Aos& arr)
+py::object unbounded_faces(const Arrangement_on_surface_2& arr)
 { return make_iterator(arr.unbounded_faces_begin(), arr.unbounded_faces_end()); }
+
+/// @}
 
 /// \name Functions for Arrangement_2
 /// @{
@@ -380,18 +399,23 @@ void export_aos(py::module_& m) {
   aos_c.def(py::init<>())
     .def(py::init<const Aos&>())
     .def(py::init<const GT*>())
-    .def("fictitious_face", &aos2::fictitious_face<Aos>)
-    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex, ri)
-    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex, ri)
+    .def("fictitious_face", &aos2::fictitious_face, ri)
+    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex1, ri)
+    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex2, ri)
+    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex1, ri)
+    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex2, ri)
     .def("insert_in_face_interior", &aos2::insert_xcv_in_face_interior, ri)
     .def("insert_in_face_interior", &aos2::insert_pnt_in_face_interior, ri)
-    .def("insert_at_vertices", &aos2::insert_at_vertices<Aos>, ri)
-    .def("modify_vertex", &aos2::modify_vertex<Aos>)
-    .def("remove_isolated_vertex", &aos2::remove_isolated_vertex<Aos>)
-    .def("modify_edge", &aos2::modify_edge<Aos>)
-    .def("split_edge", &aos2::split_edge<Aos>)
-    .def("merge_edge", &aos2::merge_edge<Aos>)
-    .def("remove_edge", &aos2::remove_edge<Aos>)
+    .def("insert_at_vertices", &aos2::insert_at_vertices1, ri)
+    // .def("insert_at_vertices", &aos2::insert_at_vertices2, ri)
+    .def("insert_at_vertices", &aos2::insert_at_vertices3, ri)
+    .def("insert_at_vertices", &aos2::insert_at_vertices4, ri)
+    .def("modify_vertex", &aos2::modify_vertex, ri)
+    .def("remove_isolated_vertex", &aos2::remove_isolated_vertex, ri)
+    .def("modify_edge", &aos2::modify_edge, ri)
+    .def("split_edge", &aos2::split_edge, ri)
+    .def("merge_edge", &aos2::merge_edge, ri)
+    .def("remove_edge", &aos2::remove_edge, ri)
     .def("is_empty", &Aos::is_empty)
     .def("is_valid", &Aos::is_valid)
     .def("number_of_edges", &Aos::number_of_edges)
@@ -400,7 +424,7 @@ void export_aos(py::module_& m) {
     .def("number_of_isolated_vertices", &Aos::number_of_isolated_vertices)
     .def("number_of_unbounded_faces", &Aos::number_of_unbounded_faces)
     .def("number_of_vertices", &Aos::number_of_vertices)
-    .def("assign", &aos2::assign<Aos>)
+    .def("assign", &Aos::assign)
     .def("clear", &Aos::clear)
     ;
 
@@ -418,11 +442,11 @@ void export_aos(py::module_& m) {
   add_iterator<Hci, Hci, const Halfedge&>("Edge_iterator", aos_c);
   add_iterator<Fci, Fci, const Face&>("Face_iterator", aos_c);
 
-  aos_c.def("vertices", &aos2::vertices<Aos>, py::keep_alive<0, 1>())
-    .def("halfedges", &aos2::halfedges<Aos>, py::keep_alive<0, 1>())
-    .def("edges", &aos2::edges<Aos>, py::keep_alive<0, 1>())
-    .def("faces", &aos2::faces<Aos>, py::keep_alive<0, 1>())
-    .def("unbounded_faces", &aos2::unbounded_faces<Aos>, py::keep_alive<0, 1>());
+  aos_c.def("vertices", &aos2::vertices, py::keep_alive<0, 1>())
+    .def("halfedges", &aos2::halfedges, py::keep_alive<0, 1>())
+    .def("edges", &aos2::edges, py::keep_alive<0, 1>())
+    .def("faces", &aos2::faces, py::keep_alive<0, 1>())
+    .def("unbounded_faces", &aos2::unbounded_faces, py::keep_alive<0, 1>());
 
   export_vertex(aos_c);
   export_halfedge(aos_c);
