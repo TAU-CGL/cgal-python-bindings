@@ -25,6 +25,7 @@ Halfedge& twin(Halfedge& e) { return (*(e.twin())); }
 Face& face(Halfedge& e) { return (*(e.face())); }
 X_monotone_curve_2& curve(Halfedge& e) { return (e.curve()); }
 
+//
 Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
 { return new Iterator_from_circulator<Ccb_halfedge_circulator>(e.ccb()); }
 
@@ -34,28 +35,26 @@ Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Halfedge = Aos::Halfedge;
-  constexpr auto ka = py::keep_alive<0, 1>();
   constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Halfedge>(c, "Halfedge")
     .def(py::init<>())
     .def("direction", &Halfedge::direction)
-    .def("source", &aos2::source, ri, ka)
-    .def("target", &aos2::target, ri, ka)
-    .def("twin", &aos2::twin)
-    .def("face", &aos2::face)
-    .def("next", &aos2::next)
-    .def("prev", &aos2::prev)
-    .def("curve", &aos2::curve)
-    .def("ccb", &aos2::ccb)
+    .def("source", &aos2::source, ri)
+    .def("target", &aos2::target, ri)
+    .def("twin", &aos2::twin, ri)
+    .def("face", &aos2::face, ri)
+    .def("next", &aos2::next, ri)
+    .def("prev", &aos2::prev, ri)
+    .def("curve", &aos2::curve, ri)
+    .def("ccb", &aos2::ccb, ri)
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
     // Use `py::overload_cast` to cast overloaded functions.
     // 1. As a convention, add the suffix `_mutable` to the mutable version.
     // 2. Wrap the mutable method with the `reference_internal` call policy.
     // 3. Add the `const_` tag to the overloaded const function, as the
     //    overloading is based on constness.
-    .def("data_mutual", py::overload_cast<>(&Halfedge::data),
-         py::rv_policy::reference_internal)
+    .def("data_mutual", py::overload_cast<>(&Halfedge::data), ri)
     .def("data", py::overload_cast<>(&Halfedge::data, py::const_))
 
     .def("set_data", &Halfedge::set_data)
