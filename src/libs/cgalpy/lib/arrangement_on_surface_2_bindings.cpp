@@ -25,6 +25,7 @@
 
 #include "CGALPY/Python_functor.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/Arr_observer.hpp"
 #include "CGALPY/Arr_overlay_traits.hpp"
 #include "CGALPY/Arr_overlay_function_traits.hpp"
 #include "CGALPY/add_attr.hpp"
@@ -64,6 +65,8 @@ typedef Arr_overlay_function_traits<Arrangement_on_surface_2,
 typedef Arr_overlay_traits<Arrangement_on_surface_2, Arrangement_on_surface_2,
                            Arrangement_on_surface_2, py::object>
                                                         Arr_overlay_traits;
+
+typedef Arr_observer<Arrangement_on_surface_2, py::object> Arr_observer;
 
 // Free functions
 
@@ -118,10 +121,14 @@ void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
 }
 
 // Overlay two arrangements
-template <typename OverlayTraits>
 void overlay(Arrangement_on_surface_2& arr1, Arrangement_on_surface_2& arr2,
-             Arrangement_on_surface_2& arr_res,
-             OverlayTraits& traits)
+             Arrangement_on_surface_2& arr_res)
+{ CGAL::overlay(arr1, arr2, arr_res); }
+
+template <typename OverlayTraits>
+void overlay_tr(Arrangement_on_surface_2& arr1, Arrangement_on_surface_2& arr2,
+                Arrangement_on_surface_2& arr_res,
+                OverlayTraits& traits)
 { CGAL::overlay(arr1, arr2, arr_res, traits); }
 
 //
@@ -132,7 +139,7 @@ Face& remove_edge_free(Arrangement_2& arr, Halfedge& e) {
 
 //
 bool remove_vertex_free(Arrangement_2& arr, Vertex& v)
-{ return CGAL::remove_vertex(arr, Vertex_iterator(&v)); }
+{ return CGAL::remove_vertex(arr, Vertex_handle(&v)); }
 
 //
 template<typename T1, typename T2>
@@ -766,6 +773,13 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .def("set_ff_f", &aos2::Arr_overlay_traits::set_ff_f)
     ;
 
-  m.def("overlay", &aos2::overlay<aos2::Arr_overlay_function_traits>);
-  m.def("overlay", &aos2::overlay<aos2::Arr_overlay_traits>);
+  m.def("overlay", &aos2::overlay);
+  m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_function_traits>);
+  m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_traits>);
+
+  py::class_<aos2::Arr_observer>(m, "Arr_observer")
+    .def(py::init<>())
+    .def(py::init<Aos&>())
+    .def("set_after_split_face", &aos2::Arr_observer::set_after_split_face)
+    ;
 }
