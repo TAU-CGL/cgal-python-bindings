@@ -14,6 +14,8 @@
 
 #include <nanobind/nanobind.h>
 
+#include "CGALPY/reference_wrapper_caster.hpp"
+
 namespace py = nanobind;
 
 //https://stackoverflow.com/a/26833886 regarding calling a python functor in C++
@@ -66,15 +68,16 @@ private:
   py::object m_python_functor;
 
 public:
-  Python_functor_3_ref() {}
+  Python_functor_3_ref() : m_python_functor(py::none()) {}
   Python_functor_3_ref(py::object python_functor) :
     m_python_functor(python_functor)
   {}
+  ~Python_functor_3_ref() { m_python_functor = py::none(); }
 
   void operator()(const T0& a, const T1& b, T2& r) const {
     // By default, arguments are copied into new Python objects.
     // Override this behavior by the use of boost::ref()
-    if (! m_python_functor.is_none()) m_python_functor(a, b, boost::ref(r));
+    if (! m_python_functor.is_none()) m_python_functor(a, b, std::ref(r));
   }
 };
 

@@ -11,6 +11,7 @@
 #define CGALPY_ARR_OVERLAY_TRAITS_HPP
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/function.h>
 
 #include <CGAL/Arr_default_dcel.h>
 #include <CGAL/Arr_extended_dcel.h>
@@ -93,6 +94,8 @@ private:
   Function_fe_e m_fe_e;
   Function_ff_f m_ff_f;
 
+  using Func_vv_v = std::function<bool(py::object, py::object, py::object)>;
+
 public:
   /// Constructors
   /// @{
@@ -105,6 +108,11 @@ public:
     Arr_default_overlay_traits(),
     m_ff_f(py_function)
   {}
+
+  // Destruct
+  ~Arr_overlay_traits() {
+    std::cout << "XXXX ~Arr_overlay_traits()\n";
+  }
 
   // Constructor with all operators
   Arr_overlay_traits(py::object py_function0, py::object py_function1,
@@ -202,10 +210,11 @@ public:
   /*! Create a face f that matches the overlapping region between f1 and f2.
    */
   void create_face(Face_handle_a f1, Face_handle_b f2, Face_handle_r f) const
-  {
-    m_ff_f(*f1, *f2, *f);
-    // f->set_data(f1->data() + f2->data());
-  }
+  { m_ff_f(*f1, *f2, *f); }
+
+  Func_vv_v m_func;
+
+  void set_func(Func_vv_v func) { m_func = func; }
 
   /// @}
 };
