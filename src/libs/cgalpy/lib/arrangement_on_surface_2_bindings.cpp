@@ -14,6 +14,7 @@
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/tuple.h>
+#include <nanobind/stl/function.h>
 
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_vertical_decomposition_2.h>
@@ -753,9 +754,11 @@ void export_arrangement_on_surface_2(py::module_& m) {
   m.def("remove_vertex", &aos2::remove_vertex_free);
 
   // Export overlay & overlay traits
-  bind_overlay_function_traits<aos2::is_vertex_extended(),
-                               aos2::is_halfedge_extended(),
-                               aos2::is_face_extended()>(m);
+  // bind_overlay_function_traits<aos2::is_vertex_extended(),
+  //                              aos2::is_halfedge_extended(),
+  //                              aos2::is_face_extended()>(m);
+
+  constexpr auto ri(py::rv_policy::reference_internal);
   py::class_<aos2::Arr_overlay_traits>(m, "Arr_overlay_traits")
     .def(py::init<>())
     .def(py::init<py::object>())
@@ -771,15 +774,16 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .def("set_ef_e", &aos2::Arr_overlay_traits::set_ef_e)
     .def("set_fe_e", &aos2::Arr_overlay_traits::set_fe_e)
     .def("set_ff_f", &aos2::Arr_overlay_traits::set_ff_f)
+    .def("set_func", &aos2::Arr_overlay_traits::set_func)
     ;
 
-  m.def("overlay", &aos2::overlay);
-  m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_function_traits>);
+  // m.def("overlay", &aos2::overlay);
+  // m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_function_traits>);
   m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_traits>);
 
-  py::class_<aos2::Arr_observer>(m, "Arr_observer")
-    .def(py::init<>())
-    .def(py::init<Aos&>())
-    .def("set_after_split_face", &aos2::Arr_observer::set_after_split_face)
-    ;
+  // py::class_<aos2::Arr_observer>(m, "Arr_observer")
+  //   .def(py::init<>())
+  //   .def(py::init<Aos&>())
+  //   .def("set_after_split_face", &aos2::Arr_observer::set_after_split_face)
+  //   ;
 }

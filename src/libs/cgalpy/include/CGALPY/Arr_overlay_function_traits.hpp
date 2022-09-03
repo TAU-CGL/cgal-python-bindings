@@ -200,6 +200,9 @@ public:
     m_ff_f(py_function9)
     {}
 
+  // Destruct
+  ~Arr_overlay_function_traits() {}
+
   /// @}
 
   /// Setters
