@@ -40,6 +40,7 @@ void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
 py::object export_arr_linear_traits(py::module_& m) {
   using GT = CGAL::Arr_linear_traits_2<Kernel>;
+  using Pnt = GT::Point_2;
   using Cv = GT::Curve_2;
   using overload = void (Cv::*)();
   using Segment = GT::Segment_2;
@@ -63,9 +64,10 @@ py::object export_arr_linear_traits(py::module_& m) {
   export_AosOpenBoundaryTraits_2<GT>(traits_c, concepts);
 
   auto& cv_c = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
-  cv_c.def(py::init<Segment_2&>())
-    .def(py::init<Ray_2&>())
-    .def(py::init<Line_2&>())
+  cv_c.def(py::init<Segment&>())
+    .def(py::init<Ray&>())
+    .def(py::init<Line&>())
+    .def(py::init<Pnt&, Pnt&>())
     .def("source", &Cv::source)
     .def("target", &Cv::target)
     .def("line", &Cv::line)
