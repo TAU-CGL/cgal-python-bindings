@@ -69,6 +69,7 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("holes", &aos2::inner_ccbs)
     .def("outer_ccb", &aos2::outer_ccb)
     .def("has_outer_ccb", &Face::has_outer_ccb)
+    .def("number_of_holes", &Face::number_of_holes)
 
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of

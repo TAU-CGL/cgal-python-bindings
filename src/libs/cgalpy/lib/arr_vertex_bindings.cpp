@@ -41,11 +41,14 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
     // Wrap the mutable method with the `reference_internal` call policy.
     .def("point_mutable", [](Vertex& v)->Point& { return v.point(); }, ri)
     .def("point", [](const Vertex& v)->const Point& { return v.point(); }, ri)
-
     .def("is_isolated", [](const Vertex& v)->bool { return v.is_isolated(); })
+
+    // Immediate members
+    .def("is_at_open_boundary", &Vertex::is_at_open_boundary)
     .def("degree", &Vertex::degree)
     .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
     .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator)
+
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
     // Face. Therefore, we cannot directly refere to any of them, e.g.,

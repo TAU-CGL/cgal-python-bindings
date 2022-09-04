@@ -24,8 +24,6 @@ class Color(Enum):
   RED = 1
   WHITE = 2
 
-# typedef CGAL::Arr_extended_dcel<Traits, Color, bool, size_t> Dcel
-
 # Construct the arrangement containing two intersecting triangles.
 traits = Traits ()
 arr = Arrangement(traits)

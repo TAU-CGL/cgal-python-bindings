@@ -18,3 +18,7 @@ def print_point_location(arr, point, obj):
 
   print('inside a bounded face')
   return
+
+def locate_point(arr, pl, point):
+  obj = pl.locate(point)		# perform the point-location query.
+  print_point_location(arr, point, obj)	# print the result.

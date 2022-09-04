@@ -12,12 +12,6 @@ CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
 
 #
-def print_arrangement_size(arr):
-  print('The arrangement size:')
-  print('   |V| =  {}, |E| = {}, |F| = {}'.format(arr.number_of_vertices(),
-                                                  arr.number_of_edges(),
-                                                  arr.number_of_faces()))
-
 def print_ccb(ccb):
   e = next(ccb)
   print('({})'.format(e.source().point()), end='')
@@ -26,6 +20,7 @@ def print_ccb(ccb):
     print(' [{}] ({})'.format(e.curve(), e.target().point()), end='')
   print()
 
+#
 def print_face(f):
   # Print the outer boundary.
   if f.is_unbounded():
@@ -72,3 +67,19 @@ def print_arrangement(arr):
   f: Arrangement.Face
   for f in arr.faces():
     print_face(f)
+
+# Print the number of cells of a given arrangement.
+def print_arrangement_size(arr):
+  print('The arrangement size:')
+  print('   |V| =  {}, |E| = {}, |F| = {}'.format(arr.number_of_vertices(),
+                                                  arr.number_of_edges(),
+                                                  arr.number_of_faces()))
+
+def print_unbounded_arrangement_size(arr):
+  print("The arrangement size:")
+  print('   |V| = {} (plus {} at infinity), |E| = {}, |F| = {} ({} unbounded)'.
+        format(arr.number_of_vertices(),
+               arr.number_of_vertices_at_infinity(),
+               arr.number_of_edges(),
+               arr.number_of_faces(),
+               arr.number_of_unbounded_faces()))

@@ -40,6 +40,8 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
   py::class_<Halfedge>(c, "Halfedge")
     .def(py::init<>())
     .def("direction", &Halfedge::direction)
+
+    .def("is_fictitious", &Halfedge::is_fictitious)
     .def("source", &aos2::source, ri)
     .def("target", &aos2::target, ri)
     .def("twin", &aos2::twin, ri)
