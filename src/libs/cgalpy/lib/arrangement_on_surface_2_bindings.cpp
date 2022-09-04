@@ -775,8 +775,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .def("set_ff_f", &aos2::Arr_overlay_traits::set_ff_f)
     ;
 
-  // m.def("overlay", &aos2::overlay);
-  // m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_function_traits>);
+  m.def("overlay", &aos2::overlay);
+  m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_function_traits>);
   m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_traits>);
 
   // py::class_<aos2::Arr_observer>(m, "Arr_observer")

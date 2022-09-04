@@ -24,24 +24,6 @@ Line = Traits.Line_2
 v: Arrangement.Vertex
 f: Arrangement.Face
 
-#include "arr_linear.h"
-
-# Define a functor for creating a label from a characer and an integer.
-# struct Overlay_label {
-#   std::string operator()(char c, unsigned int i) const
-#   { return c + boost::lexical_cast<std::string>(i); }
-# };
-
-# typedef CGAL::Arr_face_extended_dcel<Traits, char>         Dcel_dlue;
-# typedef CGAL::Arrangement_2<Traits, Dcel_dlue>             Arrangement_blue;
-# typedef CGAL::Arr_face_extended_dcel<Traits, unsigned int> Dcel_red;
-# typedef CGAL::Arrangement_2<Traits, Dcel_red>              Arrangement_red;
-# typedef CGAL::Arr_face_extended_dcel<Traits, std::string>  Dcel_res;
-# typedef CGAL::Arrangement_2<Traits, Dcel_res>              Arrangement_res;
-# typedef CGAL::Arr_face_overlay_traits<Arrangement_blue, Arrangement_red,
-#                                       Arrangement_res, Overlay_label>
-#                                                            Overlay_traits;
-
 # Construct the first arrangement, induced by two lines y = x and y = -x.
 arr1 = Arrangement()	# blue
 Aos2.insert(arr1, X_monotone_curve_2(Line(Point(0, 0), Point(1, 1))))
