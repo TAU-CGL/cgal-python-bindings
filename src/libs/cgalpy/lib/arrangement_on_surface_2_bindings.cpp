@@ -24,7 +24,6 @@
 #include <CGAL/Arr_landmarks_point_location.h>
 #include <CGAL/draw_arrangement_2.h>
 
-#include "CGALPY/Python_functor.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/Arr_observer.hpp"
 #include "CGALPY/Arr_overlay_traits.hpp"
@@ -774,7 +773,6 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .def("set_ef_e", &aos2::Arr_overlay_traits::set_ef_e)
     .def("set_fe_e", &aos2::Arr_overlay_traits::set_fe_e)
     .def("set_ff_f", &aos2::Arr_overlay_traits::set_ff_f)
-    .def("set_func", &aos2::Arr_overlay_traits::set_func)
     ;
 
   // m.def("overlay", &aos2::overlay);
