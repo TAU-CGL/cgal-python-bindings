@@ -76,9 +76,8 @@ for f in arr2.faces():
 
 # Compute the overlay of the two arrangements.
 arr = Arrangement()
-overlay_traits = Aos2.Arr_overlay_traits()
-overlay_traits.set_ff_f(lambda f1, f2, f: f.set_data(f1.data()+str(f2.data())))
-# overlay_traits.set_func(lambda f1, f2, f: f.set_data(f1.data()+str(f2.data())))
+Ot = Aos2.Arr_overlay_traits
+overlay_traits = Ot(lambda f1, f2, f: f.set_data(f1.data()+str(f2.data())))
 Aos2.overlay(arr1, arr2, arr, overlay_traits)
 
 # Go over the faces of the overlay arrangement and print their labels.
