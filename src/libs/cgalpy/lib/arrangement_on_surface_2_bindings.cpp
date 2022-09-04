@@ -522,6 +522,7 @@ void export_aos(py::module_& m) {
   using Hci = Aos::Halfedge_const_iterator;
   using Eci = Aos::Edge_const_iterator;
   using Fci = Aos::Face_const_iterator;
+  using Ufci = Aos::Unbounded_face_const_iterator;
   using Vertex = Aos::Vertex;
   using Halfedge = Aos::Halfedge;
   using Face = Aos::Face;
@@ -531,6 +532,7 @@ void export_aos(py::module_& m) {
   add_iterator<Hci, Hci, const Halfedge&>("Halfedge_iterator", aos_c);
   add_iterator<Eci, Eci, const Halfedge&>("Edge_iterator", aos_c);
   add_iterator<Fci, Fci, const Face&>("Face_iterator", aos_c);
+  add_iterator<Ufci, Ufci, const Face&>("Unbounded_face_iterator", aos_c);
 
   aos_c.def("vertices", &aos2::vertices, py::keep_alive<0, 1>())
     .def("halfedges", &aos2::halfedges, py::keep_alive<0, 1>())

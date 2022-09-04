@@ -1,4 +1,4 @@
-def construct_segment_arrangement(Aos2):
+def construct_segment_arrangement(Aos2, arr):
   Point = Aos2.Arrangement_2.Point_2
   Segment = Aos2.Arrangement_2.X_monotone_curve_2
   p0 = Point(3,2)

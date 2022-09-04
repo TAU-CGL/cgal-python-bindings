@@ -1,54 +1,62 @@
-//! \file examples/Arrangement_on_surface_2/unbounded_non_intersecting.cpp
-// Constructing an arrangement of unbounded linear objects using the insertion
-// function for non-intersecting curves.
+#!/usr/bin/python3
+# export PYTHONPATH=...
+import os
+import sys
+import importlib
+import string
+from arr_print import *
 
-#include <cassert>
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
 
-#include "arr_linear.h"
-#include "arr_print.h"
+CGALPY = importlib.import_module(lib)
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
+Traits = Aos2.Arr_linear_traits_2
+Xcv = Traits.X_monotone_curve_2
+Point = Traits.Point_2
+Segment = Traits.Segment_2
+Line = Traits.Line_2
+Ray = Traits.Ray_2
 
-int main() {
-  Arrangement arr;
+arr = Arrangement()
 
-  // Insert a line in the (currently single) unbounded face of the arrangement;
-  // then, insert a point that lies on the line splitting it into two.
-  X_monotone_curve c1 = Line(Point(-1, 0), Point(1, 0));
-  arr.insert_in_face_interior(c1, arr.unbounded_face());
-  Vertex_handle v = insert_point(arr, Point(0,0));
-  assert(! v->is_at_open_boundary());
+# Insert a line in the (currently single) unbounded face of the arrangement
+# then, insert a point that lies on the line splitting it into two.
+c1 = Xcv(Line(Point(-1, 0), Point(1, 0)))
+arr.insert_in_face_interior(c1, arr.unbounded_face())
+v = Aos2.insert_point(arr, Point(0,0))
+assert(not v.is_at_open_boundary())
 
-  // Add two more rays using the specialized insertion functions.
-  arr.insert_from_right_vertex(Ray(Point(0, 0), Point(-1, 1)), v); // c2
-  arr.insert_from_left_vertex(Ray(Point(0, 0), Point(1, 1)), v);   // c3
+# Add two more rays using the specialized insertion functions.
+arr.insert_from_right_vertex(Xcv(Ray(Point(0, 0), Point(-1, 1))), v) # c2
+arr.insert_from_left_vertex(Xcv(Ray(Point(0, 0), Point(1, 1))), v)   # c3
 
-  // Insert three more interior-disjoint rays, c4, c5, and c6.
-  insert_non_intersecting_curve(arr, Ray(Point(0, -1), Point(-2, -2)));
-  insert_non_intersecting_curve(arr, Ray(Point(0, -1), Point(2, -2)));
-  insert_non_intersecting_curve(arr, Ray(Point(0, 0), Point(0, 1)));
+# Insert three more interior-disjoint rays, c4, c5, and c6.
+Aos2.insert_non_intersecting_curve(arr, Xcv(Ray(Point(0, -1), Point(-2, -2))))
+Aos2.insert_non_intersecting_curve(arr, Xcv(Ray(Point(0, -1), Point(2, -2))))
+Aos2.insert_non_intersecting_curve(arr, Xcv(Ray(Point(0, 0), Point(0, 1))))
 
-  print_unbounded_arrangement_size(arr);
+print_unbounded_arrangement_size(arr)
 
-  // Print the outer CCBs of the unbounded faces.
-  int k = 1;
-  for (auto it = arr.unbounded_faces_begin(); it != arr.unbounded_faces_end();
-       ++it)
-  {
-    std::cout << "Face no. " << k++ << "(" << it->is_unbounded() << ","
-              << it->number_of_holes() << ")" << ": ";
-    Arrangement::Ccb_halfedge_const_circulator first = it->outer_ccb();
-    auto curr = first;
-    if (! curr->source()->is_at_open_boundary())
-      std::cout << "(" << curr->source()->point() << ")";
+# Print the outer CCBs of the unbounded faces.
+k = 0
+f: Arrangement.Face
+for f in arr.unbounded_faces():
+  k = k + 1
+  print('Face no. {}({},{}): '.format(k, f.is_unbounded(), f.number_of_holes()), end='')
+  ccb = f.outer_ccb()
+  e = next(ccb)
+  if not e.source().is_at_open_boundary():
+    print('({})'.format(e.source().point()), end='')
+  for e in ccb:
+    if not e.is_fictitious():
+      print(' [{}]'.format(e.curve()), end='')
+    else: print (" [ ... ] ", end='')
 
-    do {
-      Arrangement::Halfedge_const_handle e = curr;
-      if (! e->is_fictitious()) std::cout << " [" << e->curve() << "] ";
-      else std::cout << " [ ... ] ";
-
-      if (! e->target()->is_at_open_boundary())
-        std::cout << "(" << e->target()->point() << ")";
-    } while (++curr != first);
-    std::cout << std::endl;
-  }
-  return 0;
-}
+    if not e.target().is_at_open_boundary():
+      print('({})'.format(e.target().point()), end='')
+  print()

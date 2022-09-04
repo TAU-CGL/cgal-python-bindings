@@ -1,32 +1,40 @@
-//! \file examples/Arrangement_on_surface_2/point_location.cpp
-// Answering point-location queries.
+#!/usr/bin/python3
+# export PYTHONPATH=...
 
-#include <CGAL/basic.h>
-#include <CGAL/Arr_naive_point_location.h>
-#include <CGAL/Arr_landmarks_point_location.h>
+import os
+import sys
+import importlib
+from construct_segment_arrangement import *
+from point_location_utils import *
 
-#include "arr_inexact_construction_segments.h"
-#include "point_location_utils.h"
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
 
-typedef CGAL::Arr_naive_point_location<Arrangement>         Naive_pl;
-typedef CGAL::Arr_landmarks_point_location<Arrangement>     Landmarks_pl;
+CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
+Segment = Arrangement.Geometry_traits_2.Curve_2
+Point = Arrangement.Geometry_traits_2.Point_2
 
-int main() {
-  // Construct the arrangement.
-  Arrangement arr;
-  construct_segments_arr(arr);
+Naive_pl = Aos2.Arr_naive_point_location
+Landmarks_pl = Aos2.Arr_landmarks_point_location
 
-  // Perform some point-location queries using the naive strategy.
-  Naive_pl naive_pl(arr);
-  locate_point(naive_pl, Point(1, 4));          // q1
-  locate_point(naive_pl, Point(4, 3));          // q2
-  locate_point(naive_pl, Point(6, 3));          // q3
+# Construct the arrangement.
+arr = Arrangement()
+construct_segment_arrangement(Aos2, arr)
 
-  // Perform some point-location queries using the landmark strategy.
-  Landmarks_pl landmarks_pl(arr);
-  locate_point(landmarks_pl, Point(3, 2));      // q4
-  locate_point(landmarks_pl, Point(5, 2));      // q5
-  locate_point(landmarks_pl, Point(1, 0));      // q6
+# Perform some point-location queries using the naive strategy.
+naive_pl = Naive_pl(arr)
+locate_point(arr, naive_pl, Point(1, 4))          # q1
+locate_point(arr, naive_pl, Point(4, 3))          # q2
+locate_point(arr, naive_pl, Point(6, 3))          # q3
 
-  return 0;
-}
+# Perform some point-location queries using the landmark strategy.
+landmarks_pl = Landmarks_pl(arr)
+locate_point(arr, landmarks_pl, Point(3, 2))      # q4
+locate_point(arr, landmarks_pl, Point(5, 2))      # q5
+locate_point(arr, landmarks_pl, Point(1, 0))      # q6
