@@ -1,81 +1,87 @@
-//! \file examples/Arrangement_on_surface_2/dual_lines.cpp
-// Checking whether there are three collinear points in a given input set
-// using the arrangement of the dual lines.
+#!/usr/bin/python3
+# export PYTHONPATH=...
+import os
+import sys
+import importlib
+import string
+import random
+from arr_print import *
+from read_objects import *
 
-#include <cstdlib>
-#include <cassert>
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
+
+CGALPY = importlib.import_module(lib)
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
+Traits = Aos2.Arr_linear_traits_2
+X_monotone_curve_2 = Traits.X_monotone_curve_2
+Point = Traits.Point_2
+Line = Traits.Line_2
 
 #include "arr_linear.h"
 #include "read_objects.h"
 
-int main(int argc, char* argv[]) {
-  // Get the name of the input file from the command line, or use the default
-  // points.dat file if no command-line parameters are given.
-  const char* filename = (argc > 1) ? argv[1] : "points.dat";
+# Get the name of the input file from the command line, or use the default
+# points.dat file if no command-line parameters are given.
+try:
+  filename = argv[1]
+except:
+  filename = 'points.dat'
 
-  // Open the input file.
-  std::ifstream in_file(filename);
+# Open the input file.
+# Read the points from the file, and construct their dual lines.
+# The input file format should be (all coordinate values are integers):
+# <n>                               # number of point.
+# <x_1> <y_1>                       # point #1.
+# <x_2> <y_2>                       # point #2.
+#   :      :       :      :
+# <x_n> <y_n>                       # point #n.
+points = read_objects<Point>(filename)
+dual_lines = []
+for p in points:
+  dual_lines.append(Line(p.x(), -1, -p.y()))
 
-  if (! in_file.is_open()) {
-    std::cerr << "Failed to open " << filename << "!\n";
-    return 1;
-  }
+# Construct the dual arrangement by aggregately inserting the lines.
+arr = Arrangement()
+Aos2.insert(arr, dual_lines.begin(), dual_lines.end())
+print('The dual arrangement size:')
+print('V = {} (+ {}  at infinity),  E = {},  F = {} ( unbounded)'.
+      format(arr.number_of_vertices(),
+             arr.number_of_vertices_at_infinity(),
+             arr.number_of_edges(),
+             arr.number_of_faces(),
+             arr.number_of_unbounded_faces()))
 
-  // Read the points from the file, and construct their dual lines.
-  // The input file format should be (all coordinate values are integers):
-  // <n>                                 // number of point.
-  // <x_1> <y_1>                         // point #1.
-  // <x_2> <y_2>                         // point #2.
-  //   :      :       :      :
-  // <x_n> <y_n>                         // point #n.
-  std::vector<Point> points;
-  read_objects<Point>(filename, std::back_inserter(points));
-  std::list<X_monotone_curve> dual_lines;
-  for (const auto& p : points) dual_lines.push_back(Line(p.x(), -1, -p.y()));
+# Look for a vertex whose degree is greater than 4.
+found_collinear = False
+v: Arrangement.Vertex
+for v in arr.vertices():
+  if v.degree() > 4:
+    found_collinear = True
+    break
+  if found_collinear:
+    print("Found at least three collinear points in the input set.")
+  else:
+    print("No three collinear points are found in the input set.")
 
-  // Construct the dual arrangement by aggregately inserting the lines.
-  Arrangement arr;
-  insert(arr, dual_lines.begin(), dual_lines.end());
-  std::cout << "The dual arrangement size:\n"
-            << "V = " << arr.number_of_vertices()
-            << " (+ " << arr.number_of_vertices_at_infinity()
-            << " at infinity)"
-            << ",  E = " << arr.number_of_edges()
-            << ",  F = " << arr.number_of_faces()
-            << " (" << arr.number_of_unbounded_faces()
-            << " unbounded)\n";
+# Pick two points from the input set, compute their midpoint and insert
+# its dual line into the arrangement.
+ker = Ker.Kernel()
+n = points.size()
+k1 = random() % n,
+k2 = (k1 + 1) % n
+p_mid = ker.construct_midpoint_2_object()(points[k1], points[k2])
+dual_p_mid = X_monotone_curve(Line(p_mid.x(), -1, -p_mid.y()))
+Aos2.insert(arr, dual_p_mid)
 
-  // Look for a vertex whose degree is greater than 4.
-  bool found_collinear = false;
-  for (auto vit = arr.vertices_begin(); vit != arr.vertices_end(); ++vit) {
-    if (vit->degree() > 4) {
-      found_collinear = true;
-      break;
-    }
-  }
-  if (found_collinear)
-    std::cout << "Found at least three collinear points in the input set.\n";
-  else
-    std::cout << "No three collinear points are found in the input set.\n";
-
-  // Pick two points from the input set, compute their midpoint and insert
-  // its dual line into the arrangement.
-  Kernel ker;
-  const auto n = points.size();
-  const auto k1 = std::rand() % n, k2 = (k1 + 1) % n;
-  Point p_mid = ker.construct_midpoint_2_object()(points[k1], points[k2]);
-  X_monotone_curve dual_p_mid = Line(p_mid.x(), -1, -p_mid.y());
-  insert(arr, dual_p_mid);
-
-  // Make sure that we now have three collinear points.
-  found_collinear = false;
-  for (auto vit = arr.vertices_begin(); vit != arr.vertices_end(); ++vit) {
-    if (vit->degree() > 4) {
-      found_collinear = true;
-      break;
-    }
-  }
-  assert(found_collinear);
-
-  return (0);
-}
+# Make sure that we now have three collinear points.
+found_collinear = false
+for v in arr.vertices():
+  if v.degree() > 4:
+    found_collinear = true
+    break
+assert(found_collinear)

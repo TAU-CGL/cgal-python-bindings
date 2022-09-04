@@ -1,32 +1,39 @@
-//! \file examples/Arrangement_on_surface_2/ex_vertical_ray_shooting.cpp
-// Answering vertical ray-shooting queries.
+#!/usr/bin/python3
+# export PYTHONPATH=...
 
-#include <CGAL/basic.h>
-#include <CGAL/Arr_walk_along_line_point_location.h>
-#include <CGAL/Arr_trapezoid_ric_point_location.h>
+import os
+import sys
+import importlib
+from construct_segment_arrangement import *
+from point_location_utils import *
 
-#include "arr_inexact_construction_segments.h"
-#include "point_location_utils.h"
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
 
-typedef CGAL::Arr_walk_along_line_point_location<Arrangement> Walk_pl;
-typedef CGAL::Arr_trapezoid_ric_point_location<Arrangement>   Trap_pl;
+CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
+Point = Arrangement.Geometry_traits_2.Point_2
 
-int main() {
-  // Construct the arrangement.
-  Arrangement arr;
-  construct_segments_arr(arr);
+Walk_pl = Aos2.Arr_walk_along_line_point_location
+Trap_pl = Aos2.Arr_trapezoid_ric_point_location
 
-  // Perform some vertical ray-shooting queries using the walk strategy.
-  Walk_pl walk_pl(arr);
-  shoot_vertical_ray(walk_pl, Point(1, 4));
-  shoot_vertical_ray(walk_pl, Point(4, 3));
-  shoot_vertical_ray(walk_pl, Point(6, 3));
+# Construct the arrangement.
+arr = Arrangement()
+construct_segment_arrangement(Aos2, arr)
 
-  // Attach the trapezoid-RIC object to the arrangement and perform queries.
-  Trap_pl trap_pl(arr);
-  shoot_vertical_ray(trap_pl, Point(3, 2));
-  shoot_vertical_ray(trap_pl, Point(5, 2));
-  shoot_vertical_ray(trap_pl, Point(1, 0));
+# Perform some vertical ray-shooting queries using the walk strategy.
+walk_pl = Walk_pl(arr)
+shoot_vertical_ray(arr, walk_pl, Point(1, 4))
+shoot_vertical_ray(arr, walk_pl, Point(4, 3))
+shoot_vertical_ray(arr, walk_pl, Point(6, 3))
 
-  return 0;
-}
+# Attach the trapezoid-RIC object to the arrangement and perform queries.
+trap_pl = Trap_pl(arr)
+shoot_vertical_ray(arr, trap_pl, Point(3, 2))
+shoot_vertical_ray(arr, trap_pl, Point(5, 2))
+shoot_vertical_ray(arr, trap_pl, Point(1, 0))
