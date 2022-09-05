@@ -21,6 +21,7 @@
 #include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
+#include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/Kernel/export_point_2.hpp"
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_circle_2.hpp"
@@ -126,6 +127,9 @@ py::object export_arr_conic_traits(py::module_& m) {
       .def("right", &Xcv::right, ri)
       .def("is_directed_right", &Xcv::is_directed_right, ri)
       ;
+
+    add_insertion(xcv_c, "__str__");
+    add_insertion(xcv_c, "__repr__");
   }
 
   // Export by concepts
@@ -138,13 +142,14 @@ py::object export_arr_conic_traits(py::module_& m) {
     .def(py::init_implicit<int>())
     ;
 
-  py::class_<Rational>(traits_c, "Rational")
-    .def(py::init<>())
-    .def(py::init<const Rational&>())
-    .def(py::init_implicit<int>())
-    .def(py::init_implicit<Integer>())
-    .def(py::init<const Integer&, const Integer&>())
-    ;
+  if (! add_attr<Rational>(traits_c, "Rational")) {
+    py::class_<Rational> rat_c(traits_c, "Rational");
+    export_ft(rat_c);
+    rat_c.def(py::init_implicit<Integer>())
+      .def(py::init_implicit<int>())
+      .def(py::init<const Integer&, const Integer&>())
+      ;
+  }
 
   py::class_<Algebraic>(traits_c, "Algebraic")
     .def(py::init<>())
@@ -167,9 +172,13 @@ py::object export_arr_conic_traits(py::module_& m) {
     export_circle_2<Rat_kernel>(rat_circle_c);
   }
 
+  // Export additional point attributes:
   auto& pnt_c = *(concepts.m_basic_traits_classes.m_point_2);
   pnt_c.def(py::init<const Algebraic&, const Algebraic&>())
     ;
+
+  add_insertion(pnt_c, "__str__");
+  add_insertion(pnt_c, "__repr__");
 
   add_attr<Integer>(traits_c, "Integer");
   add_attr<Rational>(traits_c, "Rational");

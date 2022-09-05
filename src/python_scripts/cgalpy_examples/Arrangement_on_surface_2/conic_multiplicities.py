@@ -1,50 +1,48 @@
-//! \file examples/Arrangement_on_surface_2/conic_multiplicities.cpp
-// Handling intersection points with multiplicity between conic arcs.
+#!/usr/bin/python3
+# export PYTHONPATH=...
+import os
+import sys
+import importlib
+from enum import Enum
+from arr_print import *
 
-#include <CGAL/config.h>
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
 
-#ifdef CGAL_USE_CORE
+CGALPY = importlib.import_module(lib)
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
+Traits = Arrangement.Geometry_traits_2
+Point = Traits.Point_2
+Rational = Traits.Rational
+Conic_arc = Traits.Curve_2
+Naive_pl = Aos2.Arr_naive_point_location
 
-#include <CGAL/basic.h>
-#include <CGAL/Arr_naive_point_location.h>
+Ker = CGALPY.Ker
+Rat_point = Traits.Rat_point_2
+Rat_segment = Traits.Rat_segment_2
+Rat_circle = Traits.Rat_circle_2
 
-#include "arr_conics.h"
-#include "arr_print.h"
+arr = Arrangement()
+pl = Naive_pl(arr);
 
-typedef CGAL::Arr_naive_point_location<Arrangement>             Naive_pl;
+# Insert a hyperbolic arc, supported by the hyperbola y = x^2/(1-x)
+# (or: x^2 + xy - y = 0) with the endpoints (-1, 1/2) and (1/2, 1/2).
+# Note that the arc is counterclockwise oriented.
+ps1 = Point(-1, Rational(1,2));
+pt1 = Point(Rational(1,2), Rational(1,2));
+cv1 = Conic_arc(1, 0, 1, 0, -1, 0, Ker.COUNTERCLOCKWISE, ps1, pt1);
+Aos2.insert(arr, cv1, pl);
 
-int main() {
-  Arrangement arr;
-  Naive_pl pl(arr);
+# Insert the bottom half of the circle centered at (0, 1/2) whose radius
+# is 1/2 (therefore its squared radius is 1/4).
+circ2 = Rat_circle(Rat_point(0, Rational(1,2)), Rational(1,4));
+ps2 = Point(-Rational(1,2), Rational(1,2));
+pt2 = Point(Rational(1,2), Rational(1,2));
+cv2 = Conic_arc(circ2, Ker.COUNTERCLOCKWISE, ps2, pt2);
+Aos2.insert(arr, cv2, pl);
 
-  // Insert a hyperbolic arc, supported by the hyperbola y = x^2/(1-x)
-  // (or: x^2 + xy - y = 0) with the endpoints (-1, 1/2) and (1/2, 1/2).
-  // Note that the arc is counterclockwise oriented.
-  Point ps1(-1, Rational(1,2));
-  Point pt1(Rational(1,2), Rational(1,2));
-  Conic_arc cv1(1, 0, 1, 0, -1, 0, CGAL::COUNTERCLOCKWISE, ps1, pt1);
-  insert(arr, cv1, pl);
-
-  // Insert the bottom half of the circle centered at (0, 1/2) whose radius
-  // is 1/2 (therefore its squared radius is 1/4).
-  Rat_circle circ2(Rat_point(0, Rational(1,2)), Rational(1,4));
-  Point ps2(-Rational(1,2), Rational(1,2));
-  Point pt2(Rational(1,2), Rational(1,2));
-  Conic_arc cv2(circ2, CGAL::COUNTERCLOCKWISE, ps2, pt2);
-  insert(arr, cv2, pl);
-
-  print_arrangement (arr);
-  return 0;
-}
-
-#else
-
-#include <iostream>
-
-int main ()
-{
-  std::cout << "Sorry, this example needs GMP and CORE\n";
-  return 0;
-}
-
-#endif
+print_arrangement(arr);
