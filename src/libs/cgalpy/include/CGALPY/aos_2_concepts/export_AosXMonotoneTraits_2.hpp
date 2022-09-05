@@ -14,32 +14,11 @@
 
 #include "CGALPY/aos_2_concepts/export_AosBasicTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/intersect_2_call_operator.hpp"
 
 namespace py = nanobind;
 
-template <typename T>
-void intersect_2_call_operator(typename T::Intersect_2& i,
-                               typename T::X_monotone_curve_2& xc1,
-                               typename T::X_monotone_curve_2& xc2,
-                               py::list& res) {
-  using Point_2 = typename T::Point_2;
-  using X_monotone_curve_2 = typename T::X_monotone_curve_2;
-  using Multiplicity = typename T::Multiplicity;
-  using pair = std::pair<Point_2, Multiplicity>;
-
-  auto v = std::vector<boost::variant<pair, X_monotone_curve_2>>();
-  i(xc1, xc2, std::back_inserter(v));
-  for (auto o : v) {
-    if (pair* pa = boost::get<pair>(&o)) {
-      py::tuple tup = py::make_tuple(pa->first, pa->second);
-      res.append(tup);
-    }
-    else if (X_monotone_curve_2* curve = boost::get<X_monotone_curve_2>(&o)){
-      res.append(*curve);
-    }
-  }
-}
-
+//
 template<typename T, typename C, typename Classes>
 void export_Merge_2(C& c, Classes& classes, CGAL::Tag_true) {
   using Merge_2 = typename T::Merge_2;
@@ -49,9 +28,11 @@ void export_Merge_2(C& c, Classes& classes, CGAL::Tag_true) {
   c.def("merge_2_object", &T::merge_2_object);
 }
 
+//
 template<typename T, typename C, typename Classes>
 void export_Merge_2(C& c, Classes& classes, CGAL::Tag_false) {}
 
+//
 template<typename T, typename C, typename Classes>
 void export_Are_mergeable_2(C& c, Classes& classes, CGAL::Tag_true) {
   using Are_mergeable_2 = typename T::Are_mergeable_2;
@@ -62,9 +43,11 @@ void export_Are_mergeable_2(C& c, Classes& classes, CGAL::Tag_true) {
   c.def("are_mergeable_2_object", &T::are_mergeable_2_object);
 }
 
+//
 template<typename T, typename C, typename Classes>
 void export_Are_mergeable_2(C& c, Classes& classes, CGAL::Tag_false) {}
 
+//
 template <typename T, typename C, typename Concepts>
 void export_AosXMonotoneTraits_2(C& c, Concepts& concepts) {
   static bool exported = false;

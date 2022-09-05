@@ -12,20 +12,14 @@
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/aos_2_concepts/export_AosBasicTraits_2.hpp"
-#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
-#include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
-#include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
-
-#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_landmark_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/aos_2_concepts/make_x_monotone_2_call_operator.hpp"
+#include "CGALPY/aos_2_concepts/intersect_2_call_operator.hpp"
 
 namespace py = nanobind;
+
+namespace aos2 {
+}
 
 //
 py::object export_arr_non_caching_segment_traits(py::module_& m) {
@@ -80,7 +74,7 @@ py::object export_arr_non_caching_segment_traits(py::module_& m) {
   add_attr<Curve_2>(traits_c, "Curve_2");
 
   py::class_<Intersect_2>(traits_c, "Intersect_2")
-    // .def("__call__", &Intersect_2::operator())
+    .def("__call__", &intersect_2_call_operator<GT>)
     ;
 
   py::class_<Split_2>(traits_c, "Split_2")
@@ -96,7 +90,7 @@ py::object export_arr_non_caching_segment_traits(py::module_& m) {
     ;
 
   py::class_<Make_x_monotone_2>(traits_c, "Make_x_monotone_2")
-    // .def("__call__", &Make_x_monotone_2::operator())
+    .def("__call__", &make_x_monotone_2_call_operator<GT>)
     ;
 
   traits_c.def(py::init<>())
@@ -107,6 +101,13 @@ py::object export_arr_non_caching_segment_traits(py::module_& m) {
     .def("merge_2_object", &GT::merge_2_object)
     .def("make_x_monotone_2_object", &GT::make_x_monotone_2_object);
     ;
+
+    // Approximate_2
+    // Construct_x_monotone_curve_2
+
+    // Construct_opposite_segment_2
+    // Compare_endpoints_xy_2
+    // Construct_curve_2
 
     /// @}
 
