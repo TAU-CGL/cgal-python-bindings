@@ -21,22 +21,23 @@ Rational = Traits.Rational
 Conic_arc = Traits.Curve_2
 
 Ker = CGALPY.Ker
-Rat_segment = Ker.Segment_2
-Rat_point = Ker.Point_2
-Rat_circle  = Ker.Rat_circle
+Rat_point = Traits.Rat_point_2
+Rat_segment = Traits.Rat_segment_2
+Rat_circle = Traits.Rat_circle_2
 
 arr = Arrangement()
 
 # Insert a hyperbolic arc (C1), supported by the hyperbola y = 1/x
 # (or: xy - 1 = 0) with the endpoints (1/4, 4) and (2, 1/2).
 # The arc is counterclockwise oriented.
-Aos2.insert(arr, Conic_arc(0, 0, 1, 0, 0, -1, Ker.COUNTERCLOCKWISE,
-                           Point(Rational(1,4), 4), Point(2, Rational(1,2))))
+p11 = Point(Rational(1,4), 4)
+p12 = Point(2, Rational(1,2))
+Aos2.insert(arr, Conic_arc(0, 0, 1, 0, 0, -1, Ker.COUNTERCLOCKWISE, p11, p12))
 
 # Insert a full ellipse (C2), which is (x/4)^2 + (y/2)^2 = 0 rotated by
 # phi = 36.87 degrees (such that sin(phi) = 0.6, cos(phi) = 0.8),
 # yielding: 58x^2 + 72y^2 - 48xy - 360 = 0.
-Aos2.insert(arr, Conic_arc (58, 72, -48, 0, 0, -360))
+Aos2.insert(arr, Conic_arc(58, 72, -48, 0, 0, -360))
 
 # Insert the segment (C3) (1, 1) -- (0, -3).
 Aos2.insert(arr, Conic_arc(Rat_segment(Rat_point(1, 1), Rat_point(0, -3))))
