@@ -14,13 +14,13 @@
 
 #include "CGALPY/common.hpp"
 #include "CGALPY/kernel_types.hpp"
+#include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/Kernel/export_point_2.hpp"
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_vector_2.hpp"
 #include "CGALPY/Kernel/export_circle_2.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/export_ft.hpp"
 
 namespace py = nanobind;
 
@@ -76,6 +76,12 @@ Line_2 transform_line(Aff_transformation_2& t, Line_2& l)
 { return t.transform(l); }
 
 //
+const FT::Exact_type& ft_exact(const FT& ft) { return ft.exact(); }
+
+//
+const FT::Approximate_type& ft_approx(const FT& ft) { return ft.approx(); }
+
+//
 void export_kernel(py::module_& m) {
   if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
   if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
@@ -84,8 +90,13 @@ void export_kernel(py::module_& m) {
      (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||                 \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
   if (! add_attr<FT>(m, "FT")) {
-    py::class_<FT> ftc(m, "FT");
-    export_ft<FT>(ftc);
+    py::class_<FT> ft_c(m, "FT");
+    export_ft(ft_c);
+    ft_c.def(py::init<FT::Exact_type>())
+      .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); })
+      .def("exact", &ft_exact)
+      .def("approx", &ft_approx)
+      ;
   }
 #endif
 
