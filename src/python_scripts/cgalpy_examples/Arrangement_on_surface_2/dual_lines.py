@@ -18,11 +18,10 @@ CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
 Arrangement = Aos2.Arrangement_2
 Traits = Aos2.Arr_linear_traits_2
-X_monotone_curve = Traits.X_monotone_curve_2
+Xcv = Traits.X_monotone_curve_2
 Point = Traits.Point_2
 Line = Traits.Line_2
 Ker = CGALPY.Ker
-FT = Ker.FT
 
 # Get the name of the input file from the command line, or use the default
 # points.dat file if no command-line parameters are given.
@@ -42,7 +41,7 @@ except:
 points = read_objects(Point, filename)
 dual_lines = []
 for p in points:
-  dual_lines.append(Line(p.x(), -1, -p.y()))
+  dual_lines.append(Xcv(Line(p.x(), -1, -p.y())))
 
 # Construct the dual arrangement by aggregately inserting the lines.
 arr = Arrangement()
@@ -74,7 +73,7 @@ n = len(points)
 k1 = random.randint(0, n-1)
 k2 = (k1 + 1) % n
 p_mid = ker.construct_midpoint_2_object()(points[k1], points[k2])
-dual_p_mid = X_monotone_curve(Line(p_mid.x(), -1, -p_mid.y()))
+dual_p_mid = Xcv(Line(p_mid.x(), -1, -p_mid.y()))
 Aos2.insert(arr, dual_p_mid)
 
 # Make sure that we now have three collinear points.

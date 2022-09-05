@@ -46,6 +46,7 @@ py::object export_arr_linear_traits(py::module_& m) {
   using Segment = GT::Segment_2;
   using Ray = GT::Ray_2;
   using Line = GT::Line_2;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<GT> traits_c(m, "Arr_linear_traits_2");
   struct Concepts {
@@ -64,22 +65,22 @@ py::object export_arr_linear_traits(py::module_& m) {
   export_AosOpenBoundaryTraits_2<GT>(traits_c, concepts);
 
   auto& cv_c = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
-  cv_c.def(py::init<Segment&>())
-    .def(py::init<Ray&>())
-    .def(py::init<Line&>())
-    .def(py::init<Pnt&, Pnt&>())
-    .def("source", &Cv::source)
-    .def("target", &Cv::target)
-    .def("line", &Cv::line)
-    .def("is_vertical", &Cv::is_vertical)
+  cv_c.def(py::init_implicit<const Segment&>())
+    .def(py::init_implicit<const Ray&>())
+    .def(py::init_implicit<const Line&>())
+    .def(py::init<const Pnt&, const Pnt&>())
+    .def("source", &Cv::source, ri)
+    .def("target", &Cv::target, ri)
     .def("is_segment", &Cv::is_segment)
     .def("segment", &Cv::segment)
     .def("is_ray", &Cv::ray)
+    .def("ray", &Cv::ray)
     .def("is_line", &Cv::is_line)
     .def("line", &Cv::line)
-    .def("supporting_line", &Cv::supporting_line)
-    .def("left", &Cv::left)
-    .def("right", &Cv::right)
+    .def("supporting_line", &Cv::supporting_line, ri)
+    .def("is_vertical", &Cv::is_vertical)
+    .def("left", &Cv::left, ri)
+    .def("right", &Cv::right, ri)
     .def("set_left", static_cast<overload>(&Cv::set_left))
     .def("set_left", set_left)
     .def("set_right", static_cast<overload>(&Cv::set_right))
