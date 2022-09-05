@@ -86,4 +86,12 @@ typedef CGAL::Translation                              Translation;
 
 typedef CGAL::Object                                   Object;
 
+// Determine whether the dD kernel is an an EPEC type.
+// An EPEC type has a non trivial FT
+constexpr bool is_epec_type() {
+  return ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||
+          (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||
+          (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ));
+}
+
 #endif //CGALPY_KERNEL_TYPES_HPP
