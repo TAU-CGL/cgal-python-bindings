@@ -117,7 +117,7 @@ void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
     CGAL::insert(arr, begin, end);
   }
 #endif
-  else std::runtime_error("Attempting to insert a list of of object of unrecognized type to an arrangement!");
+  else throw std::runtime_error("Attempting to insert a list of of object of unrecognized type to an arrangement!");
 }
 
 // Overlay two arrangements
