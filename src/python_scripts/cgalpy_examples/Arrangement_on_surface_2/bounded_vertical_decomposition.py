@@ -1,55 +1,54 @@
-//! \file examples/Arrangement_on_surface_2/vertical_decomposition.cpp
-// Performing vertical decomposition of an arrangement.
+#!/usr/bin/python3
+# export PYTHONPATH=...
 
-#include <list>
+import os
+import sys
+import importlib
+import time
+from read_objects import *
+from arr_print import *
 
-#include <CGAL/basic.h>
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
+
+CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
+Traits = Arrangement.Geometry_traits_2
+Segment = Traits.Curve_2
+Point = Traits.Point_2
+
 #include <CGAL/Arr_vertical_decomposition_2.h>
 
-#include "arr_exact_construction_segments.h"
+# Construct the arrangement.
+segments = [Segment(Point(0, 0), Point(3, 3)),
+            Segment(Point(3, 3), Point(6, 0)),
+            Segment(Point(2, 0), Point(5, 3)),
+            Segment(Point(5, 3), Point(8, 0))]
+arr = Arrangement()
+Aos2.insert(arr, segments)
 
-typedef std::pair<CGAL::Object, CGAL::Object>           Object_pair;
-typedef std::pair<Vertex_const_handle, Object_pair>     Vert_decomp_entry;
-typedef std::list<Vert_decomp_entry>                    Vert_decomp_list;
+# Perform vertical ray-shooting from every vertex and locate the feature
+# that lie below it and the feature that lies above it.
+vd_list = Aos2.decompose(arr)
 
-int main() {
-  // Construct the arrangement.
-  Segment segments[] = {Segment(Point(0, 0), Point(3, 3)),
-                        Segment(Point(3, 3), Point(6, 0)),
-                        Segment(Point(2, 0), Point(5, 3)),
-                        Segment(Point(5, 3), Point(8, 0))};
-  Arrangement arr;
-  insert(arr, segments, segments + sizeof(segments)/sizeof(Segment));
+# Print the results.
+for vd_item in vd_list:
+  curr = vd_item[1]
+  print('Vertex ({}) : '.format(vd_item[0]->point()), end='')
 
-  // Perform vertical ray-shooting from every vertex and locate the feature
-  // that lie below it and the feature that lies above it.
-  Vert_decomp_list vd_list;
-  CGAL::decompose(arr, std::back_inserter(vd_list));
+  print(' feature below: ', end='')
+  if type(curr[0] == Halfedge: print('[{}]'.format(hh->curve()), end='')
+  elif type(curr[0]) == Vertex: print('({})'.format(vh->point()), end='')
+  elif type(curr[0] == Face: print('NONE', end='')
+  else print('EMPTY', end='')
 
-  // Print the results.
-  for (auto vd_iter = vd_list.begin(); vd_iter != vd_list.end(); ++vd_iter) {
-    const Object_pair& curr = vd_iter->second;
-    std::cout << "Vertex (" << vd_iter->first->point() << ") : ";
-
-    Vertex_const_handle vh;
-    Halfedge_const_handle hh;
-    Face_const_handle fh;
-
-    std::cout << " feature below: ";
-    if (CGAL::assign(hh, curr.first)) std::cout << '[' << hh->curve() << ']';
-    else if (CGAL::assign(vh, curr.first))
-      std::cout << '(' << vh->point() << ')';
-    else if (CGAL::assign(fh, curr.first)) std::cout << "NONE";
-    else std::cout << "EMPTY";
-
-    std::cout << "   feature above: ";
-    if (CGAL::assign(hh, curr.second))
-      std::cout << '[' << hh->curve() << "]\n";
-    else if (CGAL::assign(vh, curr.second))
-      std::cout << '(' << vh->point() << ")\n";
-    else if (CGAL::assign(fh, curr.second)) std::cout << "NONE\n";
-    else std::cout << "EMPTY\n";
-  }
-
-  return 0;
-}
+  print(' feature above: ', end='')
+  if type(curr[1] == Halfedge: print('[{}]'.format(hh->curve()))
+  elif type(curr[1] == Vertex: print('({})'.format(vh->point()))
+  else if (CGAL::assign(fh, curr.second)) print('NONE')
+  else print('EMPTY')

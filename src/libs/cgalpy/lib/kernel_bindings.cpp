@@ -72,29 +72,28 @@ Line_2 transform_line(Aff_transformation_2& t, Line_2& l)
 { return t.transform(l); }
 
 //
-const FT::Exact_type& ft_exact(const FT& ft) { return ft.exact(); }
-
-//
-const FT::Approximate_type& ft_approx(const FT& ft) { return ft.approx(); }
-
-//
 void export_kernel(py::module_& m) {
   if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
   if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
 
-#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                           \
-     (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||                 \
+#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                              \
+     (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||                    \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
+
   if (! add_attr<FT>(m, "FT")) {
+    using Fte = FT::Exact_type;
+    using Fta = FT::Approximate_type;
+
     py::class_<FT> ft_c(m, "FT");
     export_ft(ft_c);
-    ft_c.def(py::init<FT::Exact_type>())
+    ft_c.def(py::init<Fte>())
       .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); })
-      .def("exact", &ft_exact)
-      .def("approx", &ft_approx)
+      // .def("exact", &ft_exact)
+      .def("exact", [](const FT& ft)->const Fte& { return ft.exact();} )
+      .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} )
       ;
   }
-#endif
+  #endif
 
   //class_<RT>(m, "RT")
   //  .def(init<RT::Exact_type>())
@@ -185,7 +184,7 @@ void export_kernel(py::module_& m) {
 #endif
   }
 
-  if (! add_attr<Vector_2>(m, "Segment_2")) {
+  if (! add_attr<Segment_2>(m, "Segment_2")) {
     py::class_<Segment_2> seg_c(m, "Segment_2");
     export_segment_2<Kernel>(seg_c);
   }
