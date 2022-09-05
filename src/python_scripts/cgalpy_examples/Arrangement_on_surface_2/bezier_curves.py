@@ -17,6 +17,7 @@ CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Aos2 = CGALPY.Aos2
 Arrangement = Aos2.Arrangement_2
+Curve = Arrangement.Curve_2
 
 # Get the name of the input file from the command line, or use the default
 # Bezier.dat file if no command-line parameters are given.
@@ -26,7 +27,7 @@ except:
   filename = 'Bezier.dat'
 
 # Read the Bezier curves.
-curves = read_objects(Aos2, filename)
+curves = read_objects(Curve, filename)
 
 arr = Arrangement()
 # Construct the arrangement.

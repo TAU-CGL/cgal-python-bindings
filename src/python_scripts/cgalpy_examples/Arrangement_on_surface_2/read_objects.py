@@ -1,11 +1,10 @@
-def read_objects(module, filename):
-  Curve = module.Arrangement_2.Curve_2
+def read_objects(Type, filename):
   lst = []
   with open(filename, 'r') as f:
     line = next(f)
     n = int(line)
     for i in range(n):
       line = next(f)
-      lst.append(Curve(line))
+      lst.append(Type(line))
     f.close()
   return lst

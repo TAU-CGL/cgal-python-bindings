@@ -17,6 +17,7 @@
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "CGALPY/add_extraction.hpp"
 
 namespace py = nanobind;
 
@@ -61,6 +62,7 @@ void export_point_2(C& c) {
 
   add_insertion(c, "__str__");
   add_insertion(c, "__repr__");
+  add_extraction(c);
 }
 
 #endif
