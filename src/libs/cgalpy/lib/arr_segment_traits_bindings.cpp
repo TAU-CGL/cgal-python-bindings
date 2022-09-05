@@ -24,6 +24,7 @@
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/add_extraction.hpp"
 
 namespace py = nanobind;
 
@@ -91,6 +92,7 @@ py::object export_arr_segment_traits(py::module_& m) {
 
   add_insertion(xcv_c, "__str__");
   add_insertion(xcv_c, "__repr__");
+  add_extraction(xcv_c);
 
   py::class_<GT::Is_in_x_range_2>(traits_c, "Is_in_x_range_2")
     .def("__call__", &GT::Is_in_x_range_2::operator());

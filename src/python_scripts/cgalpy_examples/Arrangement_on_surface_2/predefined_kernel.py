@@ -5,9 +5,8 @@ import os
 import sys
 import importlib
 import time
-from construct_segment_arrangement import *
-from point_location_utils import *
 from read_objects import *
+from arr_print import *
 
 if len(sys.argv) < 2:
   sys.path.append(os.path.abspath('../precompiled'))
@@ -19,6 +18,7 @@ CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Aos2 = CGALPY.Aos2
 Arrangement = Aos2.Arrangement_2
+Segment = Arrangement.Curve_2
 
 # Get the name of the input file from the command line, or use the default
 # fan_grids.dat file if no command-line parameters are given.
@@ -28,7 +28,7 @@ except:
   filename = 'fan_grids.dat'
 
 # Open the input file.
-segments = read_objects(Aos2, filename)
+segments = read_objects(Segment, filename)
 
 # Construct the arrangement by aggregately inserting all segments.
 arr = Arrangement()
