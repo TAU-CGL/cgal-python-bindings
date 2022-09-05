@@ -18,20 +18,24 @@
 
 namespace py = nanobind;
 
+//
 template <typename FT_>
 const typename FT_::Exact_type& ft_exact(const FT_& ft)
 { return ft.exact(); }
 
+//
 template <typename FT_>
 const typename FT_::Approximate_type& ft_approx(const FT_& ft)
 { return ft.approx(); }
 
+//
 template <typename FT_>
 double ft_to_double(const FT_& ft)
 { return CGAL::to_double(ft); }
 
+//
 template <typename FT_, typename C>
-void export_ft(C c) {
+void export_ft(C& c) {
   c.def(py::init<double>())
     .def(py::init<typename FT_::Exact_type>())
     .def(py::init<FT_>())
