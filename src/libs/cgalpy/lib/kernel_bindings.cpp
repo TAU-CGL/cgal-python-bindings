@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
@@ -13,17 +14,20 @@
 
 #include "CGALPY/common.hpp"
 #include "CGALPY/kernel_types.hpp"
+#include "CGALPY/Kernel/export_point_2.hpp"
+#include "CGALPY/Kernel/export_segment_2.hpp"
+#include "CGALPY/Kernel/export_vector_2.hpp"
+#include "CGALPY/Kernel/export_circle_2.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_ft.hpp"
 
 namespace py = nanobind;
 
-extern void export_point_2(py::module_& m);
-extern void export_vector_2(py::module_& m);
 extern void export_gmpz(py::module_&);
 extern void export_gmpq(py::module_&);
 
+//
 Kernel::Equal_2 kernel_equal_2(Kernel& k)
 { return (Kernel::Equal_2)(k.equal_2_object()); }
 
@@ -35,6 +39,7 @@ Kernel::Equal_2 kernel_equal_2(Kernel& k)
 //  return boost::hash<std::string>()(s); // TODO: two equal objects can have different string representation
 //}
 
+//
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
 void bind_squared_distance_first_type(py::module_& m) {
   m.def<FT(const T1&, const T1&)>("squared_distance", &CGAL::squared_distance);
@@ -44,6 +49,7 @@ void bind_squared_distance_first_type(py::module_& m) {
   m.def<FT(const T1&, const T5&)>("squared_distance", &CGAL::squared_distance);
 }
 
+//
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
 void bind_squared_distance_types(py::module_& m) {
   bind_squared_distance_first_type< T1, T2, T3, T4, T5 >(m);
@@ -53,26 +59,23 @@ void bind_squared_distance_types(py::module_& m) {
   bind_squared_distance_first_type< T5, T2, T3, T4, T1 >(m);
 }
 
+//
 Point_2 transform_point(Aff_transformation_2& t, Point_2& p)
 { return t.transform(p); }
 
+//
 Vector_2 transform_vector(Aff_transformation_2& t, Vector_2 & v)
 { return t.transform(v); }
 
+//
 Direction_2 transform_direction(Aff_transformation_2& t, Direction_2& d)
 { return t.transform(d); }
 
+//
 Line_2 transform_line(Aff_transformation_2& t, Line_2& l)
 { return t.transform(l); }
 
-// Determine whether the dD kernel is an an EPEC type.
-// An EPEC type has a non trivial FT
-constexpr bool is_epec_type() {
-  return ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||
-          (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||
-          (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ));
-}
-
+//
 void export_kernel(py::module_& m) {
   if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
   if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
@@ -161,35 +164,45 @@ void export_kernel(py::module_& m) {
   //  //.def<bool (Kernel::Equal_2::*)(const Rational_point&, const Rational_point&) const>("__call__", &Kernel::Equal_2::operator())
   //  ;
 
-  if (! add_attr<Point_2>(m, "Point_2")) export_point_2(m);
-  if (! add_attr<Vector_2>(m, "Vecotr_2")) export_vector_2(m);
+  if (! add_attr<Point_2>(m, "Point_2")) {
+    py::class_<Point_2> pnt_c(m, "Point_2");
+    export_point_2<Kernel>(pnt_c);
 
-  py::class_<Segment_2>(m, "Segment_2")
-    .def(py::init<Point_2&, Point_2&>())
-    .def("source", &Segment_2::source)
-    .def("target", &Segment_2::target)
-    .def("vertex", &Segment_2::vertex)
-    .def("point", &Segment_2::point)
-    .def("__getitem__", &Segment_2::operator[])
-    .def("min", &Segment_2::min)
-    .def("max", &Segment_2::max)
-    .def("opposite", &Segment_2::opposite)
-    .def("to_vector", &Segment_2::to_vector)
-    .def("supporting_line", &Segment_2::supporting_line)
-    .def("squared_length", &Segment_2::squared_length)
-    .def("direction", &Segment_2::direction)
-    .def("has_on", &Segment_2::has_on)
-    .def("collinear_has_on", &Segment_2::collinear_has_on)
-    .def("is_degenerate", &Segment_2::is_degenerate)
-    .def("is_horizontal", &Segment_2::is_horizontal)
-    .def("is_vertical", &Segment_2::is_vertical)
-    .def("bbox", &Segment_2::bbox)
-    .def("__str__", to_string<Segment_2>)
-    .def("__repr__", to_string<Segment_2>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    // .setattr("__hash__", &hash<Segment_2>)
-    ;
+#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
+     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
+    using Cci = Kernel::Cartesian_const_iterator_2;
+    add_iterator<Cci, Cci, const FT&>("Cartesian_iterator", pnt_c);
+    pnt_c.def("cartesians",
+              [] (const Point_2& p)
+              { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
+              py::keep_alive<0, 1>());
+#endif
+  }
+
+  if (! add_attr<Vector_2>(m, "Vecotr_2")) {
+    py::class_<Vector_2> vec_c(m, "Vecotr_2");
+    export_vector_2<Kernel>(vec_c);
+
+#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
+     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
+    using Cci = Kernel::Cartesian_const_iterator_2;
+    add_iterator<Cci, Cci, const FT&>("Cartesian_iterator", vec_c);
+    vec_c.def("cartesians",
+              [] (const Vector_2& v)
+              { return make_iterator(v.cartesian_begin(), v.cartesian_end()); },
+              py::keep_alive<0, 1>());
+#endif
+  }
+
+  if (! add_attr<Vector_2>(m, "Segment_2")) {
+    py::class_<Segment_2> seg_c(m, "Segment_2");
+    export_segment_2<Kernel>(seg_c);
+  }
+
+  if (! add_attr<Circle_2>(m, "Circle_2")) {
+    py::class_<Circle_2> circle_c(m, "Circle_2");
+    export_circle_2<Kernel>(circle_c);
+  }
 
   py::class_<Line_2>(m, "Line_2")
     .def(py::init<RT&, RT&, RT&>())
@@ -299,36 +312,6 @@ void export_kernel(py::module_& m) {
     .def(py::self == py::self)
     .def(py::self != py::self)
     //.setattr("__hash__", &hash<Iso_rectangle_2>)
-    ;
-
-  py::class_<Circle_2>(m, "Circle_2")
-    .def(py::init<>())
-    .def(py::init<Point_2&, FT&, CGAL::Orientation>())
-    .def(py::init<Point_2&, double, CGAL::Orientation>())
-    .def(py::init<Point_2&, Point_2&, CGAL::Orientation>())
-    .def(py::init<Point_2&, CGAL::Orientation>())
-    .def(py::init<Point_2&, FT&>())
-    .def(py::init<Point_2&, double>())
-    .def(py::init<Point_2&, Point_2&>())
-    .def(py::init<Point_2&>())
-    .def(py::init<Point_2&, Point_2&, Point_2&>())
-    .def("center", &Circle_2::center)
-    .def("squared_radius", &Circle_2::squared_radius)
-    .def("orientation", &Circle_2::orientation)
-    .def("is_degenerate", &Circle_2::is_degenerate)
-    .def("oriented_side", &Circle_2::oriented_side)
-    .def("bounded_side", &Circle_2::bounded_side)
-    .def("has_on_positive_side", &Circle_2::has_on_positive_side)
-    .def("has_on_negative_side", &Circle_2::has_on_negative_side)
-    .def("has_on_boundary", &Circle_2::has_on_boundary)
-    .def("has_on_bounded_side", &Circle_2::has_on_bounded_side)
-    .def("has_on_unbounded_side", &Circle_2::has_on_unbounded_side)
-    .def("orthogonal_transform", &Circle_2::orthogonal_transform)
-    .def("__str__", to_string<Circle_2>)
-    .def("__repr__", to_string<Circle_2>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    //.setattr("__hash__", &hash<Circle_2>)
     ;
 
   py::class_<Direction_2>(m, "Direction_2")
