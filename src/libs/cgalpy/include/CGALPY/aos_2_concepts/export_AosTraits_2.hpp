@@ -16,30 +16,9 @@
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/aos_2_concepts/make_x_monotone_2_call_operator.hpp"
 
 namespace py = nanobind;
-
-//! Apply the make_x_monotone operator and append the resulting X-monotone
-// elements to the returned Python list.
-template <typename T>
-py::list export_Make_x_monotone_2_call_operator(typename T::Make_x_monotone_2 m,
-                                                typename T::Curve_2& c) {
-  using X_monotone_curve_2 = typename T::X_monotone_curve_2;
-  using Point_2 = typename T::Point_2;
-  using Result = boost::variant<Point_2, X_monotone_curve_2>;
-
-  py::list lst;
-  auto op =
-    [&] (const Result& o) mutable {
-      if (auto* point = boost::get<Point_2>(&o)) lst.append(*point);
-      else if (auto* cv = boost::get<X_monotone_curve_2>(&o)) lst.append(*cv);
-    };
-  // The argument type of boost::function_output_iterator (UnaryFunction) must
-  // be Assignable and Copy Constructible; hence the application of std::ref().
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  m(c, it);
-  return lst;
-}
 
 template <typename T, typename C, typename Concepts>
 void export_AosTraits_2(C& c, Concepts& concepts) {
@@ -61,7 +40,7 @@ void export_AosTraits_2(C& c, Concepts& concepts) {
     classes.m_make_x_monotone_2 =
       new py::class_<Make_x_monotone_2>(c, "Make_x_monotone_2");
     classes.m_make_x_monotone_2->def("__call__",
-                                     &export_Make_x_monotone_2_call_operator<T>);
+                                     &make_x_monotone_2_call_operator<T>);
   }
 
   c.def("make_x_monotone_2_object", &T::make_x_monotone_2_object);
