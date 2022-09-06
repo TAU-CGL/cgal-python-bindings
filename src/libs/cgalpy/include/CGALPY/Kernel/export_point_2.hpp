@@ -56,7 +56,7 @@ void export_point_2(C& c) {
     .def(py::self -= Vec())
     .def(py::self + Vec())
     .def(py::self - Vec())
-    // .setattr("__hash__", &hash_rational_point<is_epec_type(), Pnt>) NB
+    // .setattr("__hash__", &hash_rational_point<is_exact_ft(), Pnt>) NB
     // .setattr("__doc__", "Pnt") NB
     ;
 
