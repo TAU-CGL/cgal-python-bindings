@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <sstream>
+#include <iostream>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
@@ -16,16 +17,14 @@ namespace py = nanobind;
 namespace CGAL {
 
 std::ostream& operator<<(std::ostream& os, const py::object& obj) {
-  os << "XXX";
+  os << py::cast<std::string>(py::str(obj));
   return os;
 }
 
 std::istream& operator>>(std::istream& is, py::object& obj) {
-  // std::string str;
-  // is >> str;
-  // if (str == "BLUE") color = BLUE;
-  // else if (str == "RED") color = RED;
-  // else if (str == "WHITE") color = WHITE;
+  std::string str;
+  is >> str;
+  obj = py::cast(str);
   return is;
 }
 
