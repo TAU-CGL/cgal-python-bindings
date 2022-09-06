@@ -149,7 +149,7 @@ void export_kernel(py::module_& m) {
 
   // Kernel objects
   using Pnt_2 = Kernel::Point_2;
-  using Segment_2 = Kernel::Segment_2;
+  using Seg_2 = Kernel::Segment_2;
   using Line_2 = Kernel::Line_2;
   using Vector_2 = Kernel::Vector_2;
   using Circle_2 = Kernel::Circle_2;
@@ -184,8 +184,8 @@ void export_kernel(py::module_& m) {
 #endif
   }
 
-  if (! add_attr<Segment_2>(m, "Segment_2")) {
-    py::class_<Segment_2> seg_c(m, "Segment_2");
+  if (! add_attr<Seg_2>(m, "Segment_2")) {
+    py::class_<Seg_2> seg_c(m, "Segment_2");
     export_segment_2<Kernel>(seg_c);
   }
 
@@ -199,7 +199,7 @@ void export_kernel(py::module_& m) {
     .def(py::init<Pnt_2&, Pnt_2&>())
     .def(py::init<Pnt_2&, Direction_2&>())
     .def(py::init<Pnt_2&, Vector_2&>())
-    .def(py::init<Segment_2&>())
+    .def(py::init<Seg_2&>())
     .def(py::init<Ray_2&>())
     .def("a", &Line_2::a)
     .def("b", &Line_2::b)
@@ -308,7 +308,7 @@ void export_kernel(py::module_& m) {
     .def(py::init<Vector_2>())
     .def(py::init<Line_2>())
     .def(py::init<Ray_2>())
-    .def(py::init<Segment_2>())
+    .def(py::init<Seg_2>())
     .def(py::init<RT&, RT&>())
     .def(py::init<double, double>())
     .def("dx", &Direction_2::dx)
@@ -443,15 +443,20 @@ void export_kernel(py::module_& m) {
   /// \name Kernel operations
   /// @{
   using Equal_2 = Kernel::Equal_2;
+  using Ctr_seg_2 = Kernel::Construct_segment_2;
   using Ctr_midpnt_2 = Kernel::Construct_midpoint_2;
 
   py::class_<Kernel> ker_c(m, "Kernel");
   ker_c.def(py::init<>())
-    .def("equal_2_object", [](const Kernel& k)->Equal_2
-                           { return k.equal_2_object(); })
+    .def("equal_2_object",
+         [](const Kernel& k)->Equal_2
+         { return k.equal_2_object(); })
     .def("construct_midpoint_2_object",
          [](const Kernel& k)->Ctr_midpnt_2
          { return k.construct_midpoint_2_object(); })
+    .def("construct_segment_2_object",
+         [](const Kernel& k)->Ctr_seg_2
+         { return k.construct_segment_2_object(); })
     ;
 
   // Equal_2
@@ -466,6 +471,13 @@ void export_kernel(py::module_& m) {
     .def("__call__", static_cast<Equal_2_line>(&Equal_2::operator()))
     .def("__call__", static_cast<Equal_2_ray>(&Equal_2::operator()))
     .def("__call__", static_cast<Equal_2_circle>(&Equal_2::operator()))
+    ;
+
+  // Construct_segment_2
+  using Ctr_seg_2_op =
+    Seg_2(Ctr_seg_2::*)(const Pnt_2&, const Pnt_2&)const;
+  py::class_<Ctr_seg_2>(ker_c, "Construct_segment_2")
+    .def("__call__", static_cast<Ctr_seg_2_op>(&Ctr_seg_2::operator()))
     ;
 
   // Construct_midpoint_2
