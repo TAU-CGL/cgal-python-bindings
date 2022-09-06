@@ -16,7 +16,7 @@
 
 #include <CGAL/basic.h>
 
-template <typename PyClass, bool pretty = true>
+template <typename PyClass, bool pretty = false>
 void add_insertion(PyClass& cls, const char* method) {
   cls.def(method, [](typename PyClass::Type const& self) {
                     std::ostringstream os;
