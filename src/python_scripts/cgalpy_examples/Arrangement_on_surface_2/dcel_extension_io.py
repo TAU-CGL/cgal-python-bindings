@@ -23,6 +23,10 @@ class Color(Enum):
   BLUE = 0
   RED = 1
   WHITE = 2
+  def __str__(self):
+    if self.value == 0: return "BLUE"
+    elif self.value == 1: return "RED"
+    else: return "WHITE"
 
 # Construct the arrangement containing two intersecting triangles.
 traits = Traits()
@@ -81,10 +85,20 @@ in_file = open("arr_ex_dcel_io.dat", 'r')
 arr2 = Arrangement(in_file.read())
 in_file.close()
 
-# CGAL::IO::read(arr2, in_file, formatter)
-# for v in arr2.vertices():
-#   v.set_data(Color.WHITE)
-
 print("The arrangement vertices:")
+
+# Observe that we always write (and read) auxliary data as text. It implies,
+# for example, that the Python color enumerations stored at the vertices
+# of the first arrangement are written to the temporary text file as text; then
+# they are read back as text, and stored at the vertices of the second
+# arrangement as text. Below we convert the color texts back to color
+# enumerations
 for v in arr2.vertices():
+  # v.set_data(Color(v.data()))
+  color = v.data()
+  if color == "BLUE": v.set_data(Color.BLUE)
+  elif color == "RED": v.set_data(Color.RED)
+  elif color == "WHITE": v.set_data(Color.WHITE)
+  else: raise Exception('Unrecognized color {}'.format(color))
+
   print('({}) - {}'.format(v.point(), v.data()))
