@@ -24,31 +24,9 @@ class Color(Enum):
   RED = 1
   WHITE = 2
 
-# std::ostream& operator<<(std::ostream& os, const Color& color) {
-#   switch (color) {
-#    case BLUE: os << "BLUE"  break
-#    case RED: os << "RED"   break
-#    case WHITE: os << "WHITE" break
-#    default: os << "ERROR!"
-#   }
-#   return os
-# }
-
-# std::istream& operator>>(std::istream& is, Color& color) {
-#   std::string str
-#   is >> str
-#   if (str == "BLUE") color = BLUE
-#   else if (str == "RED") color = RED
-#   else if (str == "WHITE") color = WHITE
-#   return is
-# }
-
-# typedef CGAL::Arr_extended_dcel<Traits, Color, bool, int>       Ext_dcel
-# typedef CGAL::Arrangement_2<Traits, Ext_dcel>                   Ext_arrangement
-# typedef CGAL::Arr_extended_dcel_text_formatter<Ext_arrangement> Formatter
-
 # Construct the arrangement containing two intersecting triangles.
-arr = Arrangement()
+traits = Traits()
+arr = Arrangement(traits)
 
 s1 = Segment(Point(4, 1), Point(7, 6))
 s2 = Segment(Point(1, 6), Point(7, 6))
@@ -69,13 +47,13 @@ v: Arrangement.Vertex
 for v in arr.vertices():
   degree = v.degree()
   if degree == 0: v.set_data(Color.BLUE)    	# Isolated vertex
-   elif if degree <= 2): v.set_data(Color.RED)	# Vertex represents an endpoint
-   else v.set_data(Color.WHITE)    # Vertex represents an intersection point
-  }
+  elif degree <= 2: v.set_data(Color.RED)	# Vertex represents an endpoint
+  else: v.set_data(Color.WHITE)    # Vertex represents an intersection point
 
 # Go over all arrangement edges and set their flags.
 equal = traits.equal_2_object()
 e: Arrangement.Halfedge
+for e in arr.edges():
   # Check if the halfedge has the same direction as its associated
   # segment. Note that its twin always has an opposite direction.
   flag = equal(e.source().point(), e.curve().source())
@@ -91,17 +69,21 @@ for f in arr.faces():
   f.set_data(boundary_size)
 
 # Write the arrangement to a file.
-std::ofstream out_file("arr_ex_dcel_io.dat")
-Formatter formatter
-CGAL::IO::write(arr, out_file, formatter)
+out_file = open("arr_ex_dcel_io.dat", 'w')
+out_file.write(str(arr))
 out_file.close()
 
-# Read the arrangement from the file.
-arr2 = Arrangement()
-std::ifstream in_file("arr_ex_dcel_io.dat")
+# Formatter formatter
+# CGAL::IO::write(arr, out_file, formatter)
 
-CGAL::IO::read(arr2, in_file, formatter)
+# Read the arrangement from the file.
+in_file = open("arr_ex_dcel_io.dat", 'r')
+arr2 = Arrangement(in_file.read())
 in_file.close()
+
+# CGAL::IO::read(arr2, in_file, formatter)
+# for v in arr2.vertices():
+#   v.set_data(Color.WHITE)
 
 print("The arrangement vertices:")
 for v in arr2.vertices():

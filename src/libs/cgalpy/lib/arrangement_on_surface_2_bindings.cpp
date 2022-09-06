@@ -29,8 +29,6 @@
 #include "CGALPY/Arr_overlay_traits.hpp"
 #include "CGALPY/Arr_overlay_function_traits.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_extraction.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
@@ -50,6 +48,9 @@ py::object export_arr_geodesic_arc_on_sphere_traits(py::module_&);
 py::object export_gps_segment_traits(py::module_&);
 py::object export_gps_circle_segment_traits(py::module_&);
 py::object export_gps_traits(py::module_&);
+
+extern void export_arrangement_2_io(py::class_<aos2::Arrangement_2,
+                                    aos2::Arrangement_on_surface_2>&);
 
 namespace py = nanobind;
 
@@ -605,13 +606,8 @@ void export_arr(py::module_& m) {
     .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity)
     ;
 
-#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-  add_insertion(arr_c, "__str__");
-  add_insertion(arr_c, "__repr__");
-  add_extraction(arr_c);
-#endif
+  export_arrangement_2_io(arr_c);
+
   // m.def("draw", &aos2::draw);
 }
 
