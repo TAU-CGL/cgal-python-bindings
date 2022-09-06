@@ -30,6 +30,7 @@
 #include "CGALPY/Arr_overlay_function_traits.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/add_extraction.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
@@ -609,6 +610,7 @@ void export_arr(py::module_& m) {
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
   add_insertion(arr_c, "__str__");
   add_insertion(arr_c, "__repr__");
+  add_extraction(arr_c);
 #endif
   // m.def("draw", &aos2::draw);
 }
