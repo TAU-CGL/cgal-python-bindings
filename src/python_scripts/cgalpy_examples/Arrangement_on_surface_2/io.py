@@ -1,34 +1,37 @@
-//! \file examples/Arrangement_on_surface_2/io.cpp
-// Using the arrangement I/O operators.
+#!/usr/bin/python3
+# export PYTHONPATH=...
 
-#include <fstream>
+import os
+import sys
+import importlib
+from construct_segment_arrangement import *
+from arr_print import *
 
-#include <CGAL/basic.h>
-#include <CGAL/IO/Arr_iostream.h>
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
 
-#include "arr_inexact_construction_segments.h"
-#include "arr_print.h"
-#include "point_location_utils.h"
+CGALPY = importlib.import_module(lib)
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
 
-int main() {
-  // Construct the arrangement.
-  Arrangement arr1;
-  construct_segments_arr(arr1);
-  std::cout << "Writing\n";
-  print_arrangement_size(arr1);
+# Construct the arrangement.
+arr1 = Arrangement()
+construct_segment_arrangement(Aos2, arr1)
+print("Writing")
+print_arrangement_size(arr1)
 
-  // Write the arrangement to a file.
-  std::ofstream out_file("arr_ex_io.dat");
-  out_file << arr1;
-  out_file.close();
+# Write the arrangement to a file.
+out_file = open("arr_ex_io.dat", 'w')
+out_file.write(str(arr1))
+out_file.close()
 
-  // Read the arrangement from the file.
-  Arrangement arr2;
-  std::ifstream in_file("arr_ex_io.dat");
-  in_file >> arr2;
-  in_file.close();
-  std::cout << "Reading\n";
-  print_arrangement_size(arr2);
+# Read the arrangement from the file.
+in_file = open("arr_ex_io.dat", 'r')
+arr2 = Arrangement(in_file.read())
+in_file.close()
 
-  return 0;
-}
+print("Reading")
+print_arrangement_size(arr2)
