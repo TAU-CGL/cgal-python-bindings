@@ -1,56 +1,61 @@
-//! \file examples/Arrangement_2/io_unbounded.cpp
-// Using the I/O operators with an arrangement of unbounded curves.
+#!/usr/bin/python3
+# export PYTHONPATH=...
+import os
+import sys
+import importlib
+import string
+from arr_print import *
 
-#include <list>
-#include <fstream>
+if len(sys.argv) < 2:
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
+else:
+  lib = sys.argv[1]
 
-#include <CGAL/basic.h>
-#include <CGAL/IO/Arr_iostream.h>
+CGALPY = importlib.import_module(lib)
+Aos2 = CGALPY.Aos2
+Arrangement = Aos2.Arrangement_2
+Traits = Aos2.Arr_linear_traits_2
+Xcv = Traits.X_monotone_curve_2
+Point = Traits.Point_2
+Segment = Traits.Segment_2
+Line = Traits.Line_2
+Ray = Traits.Ray_2
 
-#include "arr_linear.h"
+# Construct an arrangement of five linear objects.
+arr1 = Arrangement()
+curves = []
+curves.append(Xcv(Line(Point(0, 0), Point(2, 1))))
+curves.append(Xcv(Line(Point(0, 0), Point(2, -1))))
+curves.append(Xcv(Line(Point(-1, 0), Point(-1, 1))))
+curves.append(Xcv(Ray(Point(2, 3), Point(2, 4))))
+curves.append(Xcv(Segment(Point(0, 1), Point(0, 2))))
 
-int main() {
-  // Construct an arrangement of five linear objects.
-  Arrangement arr;
-  std::list<X_monotone_curve> curves;
+Aos2.insert(arr1, curves)
 
-  curves.push_back(Line(Point(0, 0), Point(2, 1)));
-  curves.push_back(Line(Point(0, 0), Point(2, -1)));
-  curves.push_back(Line(Point(-1, 0), Point(-1, 1)));
-  curves.push_back(Ray(Point(2, 3), Point(2, 4)));
-  curves.push_back(Segment(Point(0, 1), Point(0, 2)));
+# Print out the size of the resulting arrangement.
+print('Writing an arrangement of size:')
+print('  V = {} (plus {} at infinity),  E = {},  F = {} ({} unbounded)'.
+      format(arr1.number_of_vertices(),
+             arr1.number_of_vertices_at_infinity(),
+             arr1.number_of_edges(),
+             arr1.number_of_faces(),
+             arr1.number_of_unbounded_faces()))
 
-  insert(arr, curves.begin(), curves.end());
+# Write the arrangement to a file.
+out_file = open("arr_ex_io_unbounded.dat", 'w')
+out_file.write(str(arr1))
+out_file.close()
 
-  // Print out the size of the resulting arrangement.
-  std::cout << "Writing an arrangement of size:\n"
-            << "   V = " << arr.number_of_vertices()
-            << " (plus " << arr.number_of_vertices_at_infinity()
-            << " at infinity)"
-            << ",  E = " << arr.number_of_edges()
-            << ",  F = " << arr.number_of_faces()
-            << " (" << arr.number_of_unbounded_faces() << " unbounded)\n\n";
+# Read the arrangement from the file.
+in_file = open("arr_ex_io_unbounded.dat", 'r')
+arr2 = Arrangement(in_file.read())
+in_file.close()
 
-  // Write the arrangement to a file.
-  std::ofstream out_file("arr_ex_io_unbounded.dat");
-
-  out_file << arr;
-  out_file.close();
-
-  // Read the arrangement from the file.
-  Arrangement arr2;
-  std::ifstream in_file("arr_ex_io_unbounded.dat");
-
-  in_file >> arr2;
-  in_file.close();
-
-  std::cout << "Read an arrangement of size:\n"
-            << "   V = " << arr2.number_of_vertices()
-            << " (plus " << arr2.number_of_vertices_at_infinity()
-            << " at infinity)"
-            << ",  E = " << arr2.number_of_edges()
-            << ",  F = " << arr2.number_of_faces()
-            << " (" << arr2.number_of_unbounded_faces() << " unbounded)\n\n";
-
-  return 0;
-}
+print('Reading an arrangement of size:')
+print('  V = {} (plus {} at infinity),  E = {},  F = {} ({} unbounded)'.
+      format(arr2.number_of_vertices(),
+             arr2.number_of_vertices_at_infinity(),
+             arr2.number_of_edges(),
+             arr2.number_of_faces(),
+             arr2.number_of_unbounded_faces()))
