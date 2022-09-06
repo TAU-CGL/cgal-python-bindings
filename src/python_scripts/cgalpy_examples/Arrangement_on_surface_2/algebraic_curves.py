@@ -3,7 +3,7 @@
 import os
 import sys
 import importlib
-import arr_print as ap
+from arr_print import *
 
 if len(sys.argv) < 2:
     sys.path.append(os.path.abspath('../precompiled'))
@@ -58,4 +58,4 @@ cv4 = construct_curve(f4)
 print('Inserting curve', f4)
 Aos2.insert(arr, cv4)
 
-ap.print_arrangement_size(arr)
+print_arrangement_size(arr)

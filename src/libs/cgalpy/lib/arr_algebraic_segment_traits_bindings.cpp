@@ -65,9 +65,9 @@ py::list ctr_xseg_operator1(aos2::Construct_x_monotone_segment_2& construct,
 }
 
 //
-py::list  ctr_xseg_operator2(aos2::Construct_x_monotone_segment_2& construct,
-                             aos2::Curve_2& cv, aos2::Point_2& p,
-                             aos2::Geometry_traits_2::Site_of_point& site_of_p)
+py::list ctr_xseg_operator2(aos2::Construct_x_monotone_segment_2& construct,
+                            aos2::Curve_2& cv, aos2::Point_2& p,
+                            aos2::Geometry_traits_2::Site_of_point& site_of_p)
 {
   auto v = std::vector<aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
@@ -115,7 +115,7 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
 
   py::class_<Integer> integer_c(m, "Integer");
   integer_c.def(py::init<>())
-    .def(py::init<int>())
+    .def(py::init_implicit<int>())
     .def("value", &Integer::longValue)
     .def(py::self + py::self)
     .def(py::self += py::self)
@@ -130,7 +130,7 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
   py::class_<AR1> ar1_c(m, "Algebraic_real_1");
   ar1_c.def(py::init<>())
     .def(py::init<AR1&>())
-    .def(py::init<int>())
+    .def(py::init_implicit<int>())
     .def(py::init<AR1::Rational&>())
     .def(py::init<const aos2::Polynomial_1&, AR1::Rational, AR1::Rational>())
     .def("bisect", &AR1::bisect)
