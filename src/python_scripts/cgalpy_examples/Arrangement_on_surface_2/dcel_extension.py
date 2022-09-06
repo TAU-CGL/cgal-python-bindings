@@ -25,7 +25,7 @@ class Color(Enum):
   WHITE = 2
 
 # Construct the arrangement containing two intersecting triangles.
-traits = Traits ()
+traits = Traits()
 arr = Arrangement(traits)
 Aos2.insert_non_intersecting_curve(arr, Segment(Point(4, 1), Point(7, 6)))
 Aos2.insert_non_intersecting_curve(arr, Segment(Point(1, 6), Point(7, 6)))
