@@ -42,6 +42,7 @@ py::object export_arr_non_caching_segment_traits(py::module_&);
 py::object export_arr_circle_segment_traits(py::module_&);
 py::object export_arr_conic_traits(py::module_&);
 py::object export_arr_bezier_traits(py::module_&);
+py::object export_arr_rational_function_traits(py::module_&);
 py::object export_arr_algebraic_segment_traits(py::module_&);
 py::object export_arr_geodesic_arc_on_sphere_traits(py::module_&);
 
@@ -654,6 +655,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
   auto traits_c = export_gps_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
   auto traits_c = export_gps_traits(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
+  auto traits_c = export_gps_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
   auto traits_c = export_gps_traits(m);
 #else
@@ -672,6 +675,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
   auto traits_c = export_arr_conic_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
   auto traits_c = export_arr_bezier_traits(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
+  auto traits_c = export_arr_rational_function_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
   auto traits_c = export_arr_algebraic_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
