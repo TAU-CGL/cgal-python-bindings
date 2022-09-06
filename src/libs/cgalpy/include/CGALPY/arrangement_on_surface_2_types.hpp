@@ -35,6 +35,8 @@
 #include <CGAL/Arr_Bezier_curve_traits_2.h>
 #include <CGAL/Cartesian.h>
 #include <CGAL/CORE_algebraic_number_traits.h>
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
+#include <CGAL/Arr_rational_function_traits_2.h>
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 #include <CGAL/Arr_algebraic_segment_traits_2.h>
 #include <CGAL/Polynomial.h>
@@ -68,6 +70,13 @@ typedef typename CGAL::CORE_algebraic_number_traits             NtTraits;
 typedef typename CGAL::Cartesian <NtTraits::Rational>           RatKernel;
 typedef typename CGAL::Cartesian <NtTraits::Algebraic>          AlgKernel;
 typedef typename CGAL::Arr_Bezier_curve_traits_2<RatKernel,AlgKernel, NtTraits>    BGT;
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
+typedef CORE::BigInt                                            Integer;
+typedef CGAL::Algebraic_kernel_d_1<Integer>                     Algebraic_kernel_d_1;
+typedef Algebraic_kernel_d_1::Polynomial_1                      Polynomial_1;
+typedef CGAL::Polynomial_traits_d<Polynomial_1>                 PT_1;
+
+typedef CGAL::Arr_rational_function_traits_2<Algebraic_kernel_d_1> BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 typedef CORE::BigInt                                            Integer;
 typedef CGAL::Algebraic_kernel_d_1<Integer>                     Algebraic_kernel_d_1;
