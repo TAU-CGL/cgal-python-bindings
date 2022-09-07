@@ -72,6 +72,7 @@ typedef typename CGAL::Cartesian <NtTraits::Algebraic>          AlgKernel;
 typedef typename CGAL::Arr_Bezier_curve_traits_2<RatKernel,AlgKernel, NtTraits>    BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
 typedef CORE::BigInt                                            Integer;
+typedef CORE::BigRat                                            Rational;
 typedef CGAL::Algebraic_kernel_d_1<Integer>                     Algebraic_kernel_d_1;
 typedef Algebraic_kernel_d_1::Polynomial_1                      Polynomial_1;
 typedef CGAL::Polynomial_traits_d<Polynomial_1>                 PT_1;
