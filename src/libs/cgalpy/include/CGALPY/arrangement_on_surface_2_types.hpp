@@ -75,7 +75,7 @@ typedef CORE::BigInt                                            Integer;
 typedef CORE::BigRat                                            Rational;
 typedef CGAL::Algebraic_kernel_d_1<Integer>                     Algebraic_kernel_d_1;
 typedef Algebraic_kernel_d_1::Polynomial_1                      Polynomial_1;
-typedef CGAL::Polynomial_traits_d<Polynomial_1>                 PT_1;
+typedef CGAL::Polynomial_traits_d<Polynomial_1>                 Polynomial_traits_1;
 
 typedef CGAL::Arr_rational_function_traits_2<Algebraic_kernel_d_1> BGT;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
@@ -90,8 +90,8 @@ typedef Algebraic_kernel_d_2::Bound                             Bound;
 typedef CGAL::Polynomial_traits_d<Polynomial_2>                 PT_2;
 typedef PT_2::Construct_polynomial                              Construct_polynomial_2;
 typedef PT_2::Coefficient_type                                  Polynomial_1;
-typedef CGAL::Polynomial_traits_d<Polynomial_1>                 PT_1;
-typedef PT_1::Construct_polynomial                              Construct_polynomial_1;
+typedef CGAL::Polynomial_traits_d<Polynomial_1>                 Polynomial_traits_1;
+typedef Polynomial_traits_1::Construct_polynomial               Construct_polynomial_1;
 
 typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>  BGT;
 typedef typename BGT::Construct_curve_2                         Construct_curve_2;

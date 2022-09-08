@@ -23,25 +23,6 @@ Bound = Aos2.Bound
 Rational = Aos2.Rational
 Traits = Aos2.Arr_rational_function_traits_2
 
-#include <CGAL/CORE_BigInt.h>                      // Integer
-#include <CGAL/CORE_BigRat.h>                      // Rational
-#include <CGAL/Algebraic_kernel_d_1.h>             // Algebraic Kernel
-#include <CGAL/Arr_rational_function_traits_2.h>   // Traits
-#include <CGAL/Arrangement_2.h>                    // Arrangement
-
-# typedef CORE::BigInt                               Integer;
-# typedef CORE::BigRat                               Rational;
-# typedef CGAL::Algebraic_kernel_d_1<Integer>           AK1;
-# typedef CGAL::Arr_rational_function_traits_2<AK1>  Traits_2;
-
-# typedef std::vector<Rational>                      Rat_vec;
-# typedef Traits_2::Algebraic_real_1                 Alg_real_1;
-
-# typedef CGAL::Arrangement_2<Traits_2>              Arrangement_2;
-
-# CGAL::IO::set_pretty_mode(std::cout);             // for nice printouts.
-
-# Traits class object
 traits = Traits()
 ctr_arc = traits.construct_x_monotone_curve_2_object()
 
