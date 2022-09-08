@@ -109,7 +109,7 @@ T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 py::object export_arr_algebraic_segment_traits(py::module_& m) {
   using Integer = CORE::BigInt;
   using GT = CGAL::Arr_algebraic_segment_traits_2<Integer>;
-  using AR1 = GT::Algebraic_real_1;
+  using Ar = GT::Algebraic_real_1;
   using Cv = GT::Curve_2;
   using Xcv = GT::X_monotone_curve_2;
 
@@ -127,28 +127,28 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
   add_insertion(integer_c, "__str__");
   add_insertion(integer_c, "__repr__");
 
-  py::class_<AR1> ar1_c(m, "Algebraic_real_1");
+  py::class_<Ar> ar1_c(m, "Algebraic_real_1");
   ar1_c.def(py::init<>())
-    .def(py::init<AR1&>())
+    .def(py::init<Ar&>())
     .def(py::init_implicit<int>())
-    .def(py::init<AR1::Rational&>())
-    .def(py::init<const aos2::Polynomial_1&, AR1::Rational, AR1::Rational>())
-    .def("bisect", &AR1::bisect)
-    .def< CGAL::Comparison_result(AR1::*)(const AR1&) const>("compare", &AR1::compare)
-    .def("degree", &AR1::degree)
-    .def("high", &AR1::high)
-    .def("is_rational", &AR1::is_rational)
-    .def("is_root_of", &AR1::is_root_of)
-    .def("low", &AR1::low)
-    .def("polynomial", &AR1::polynomial)
-    .def("rational", &AR1::rational)
-    .def("rational_between", &AR1::rational_between)
-    .def("refine", &AR1::refine)
-    .def("refine_to", &AR1::refine_to)
-    .def("sign_at_low", &AR1::sign_at_low)
-    .def("simplify", &AR1::simplify)
-    .def("to_double", &AR1::to_double)
-    .def("upper", &AR1::upper)
+    .def(py::init<Ar::Rational&>())
+    .def(py::init<const aos2::Polynomial_1&, Ar::Rational, Ar::Rational>())
+    .def("bisect", &Ar::bisect)
+    .def< CGAL::Comparison_result(Ar::*)(const Ar&) const>("compare", &Ar::compare)
+    .def("degree", &Ar::degree)
+    .def("high", &Ar::high)
+    .def("is_rational", &Ar::is_rational)
+    .def("is_root_of", &Ar::is_root_of)
+    .def("low", &Ar::low)
+    .def("polynomial", &Ar::polynomial)
+    .def("rational", &Ar::rational)
+    .def("rational_between", &Ar::rational_between)
+    .def("refine", &Ar::refine)
+    .def("refine_to", &Ar::refine_to)
+    .def("sign_at_low", &Ar::sign_at_low)
+    .def("simplify", &Ar::simplify)
+    .def("to_double", &Ar::to_double)
+    .def("upper", &Ar::upper)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self != py::self)
@@ -239,9 +239,9 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
 
   using Ctr_pnt = GT::Construct_point_2;
   py::class_<Ctr_pnt> ctr_pnt_c(traits_c, "Construct_point_2");
-  export_ctr_pnt_operator<AR1, Cv, int>(ctr_pnt_c);
-  export_ctr_pnt_operator<AR1, Xcv>(ctr_pnt_c);
-  export_ctr_pnt_operator<AR1, AR1>(ctr_pnt_c);
+  export_ctr_pnt_operator<Ar, Cv, int>(ctr_pnt_c);
+  export_ctr_pnt_operator<Ar, Xcv>(ctr_pnt_c);
+  export_ctr_pnt_operator<Ar, Ar>(ctr_pnt_c);
   export_ctr_pnt_operator<aos2::Bound, aos2::Bound>(ctr_pnt_c);
   export_ctr_pnt_operator<Integer, Integer>(ctr_pnt_c);
   export_ctr_pnt_operator<int, int>(ctr_pnt_c);

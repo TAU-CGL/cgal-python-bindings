@@ -86,6 +86,9 @@ py::class_<typename PT::Type> bind_polynomial(py::module_& m, const char* name) 
     .def(py::self * CT())
     .def(py::self *= py::self)
 
+    // Unary
+    .def(-py::self)
+
     .def("__getitem__", &P::operator[])
     ;
 

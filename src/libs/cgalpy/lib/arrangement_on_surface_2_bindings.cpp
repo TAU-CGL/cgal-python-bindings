@@ -11,6 +11,7 @@
 
 #include <boost/variant/variant.hpp>
 #include <boost/static_assert.hpp>
+#include <boost/iterator/function_output_iterator.hpp>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/tuple.h>
