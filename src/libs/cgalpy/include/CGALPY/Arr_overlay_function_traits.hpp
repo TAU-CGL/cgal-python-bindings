@@ -11,17 +11,19 @@
 #define CGALPY_ARR_OVERLAY_FUNCTION_TRAITS_HPP
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/tuple.h>
+#include <nanobind/stl/vector.h>
+#include <nanobind/stl/function.h>
 
 #include <CGAL/Arr_default_dcel.h>
 #include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Surface_sweep_2/Arr_default_overlay_traits_base.h>
 
 #include "CGALPY/config.hpp"
-#include "CGALPY/Python_functor.hpp"
 
 #if 1
 // Fall through; T::data() does not exist
-template <typename A> py::object data_a(...) { return py::object(); }
+template <typename A> py::object data_a(...) { return py::none(); }
 
 // T::data() exists
 template <typename A, typename = decltype(std::declval<A>().data())>
@@ -34,6 +36,7 @@ template <typename A, typename B, typename R, typename Fnc> void apply(...) {}
 template <typename A, typename B, typename R, typename Fnc,
           typename = decltype(std::declval<R>().set_data(std::declval<typename R::Data>()))>
 void apply(const A* a, const B* b, R* r, Fnc fnc) {
+  if (fnc.is_none()) return;
   r->set_data(fnc(data_a<A>(a), data_a<B>(b)));
 }
 
@@ -150,34 +153,53 @@ public:
   typedef typename Arrangement_b::Face_const_handle     Face_handle_b;
   typedef typename Arrangement_r::Face_handle           Face_handle_r;
 
-  typedef Python_functor_2<Data, Data, Data>            Function;
-
 private:
   typedef CGAL::_Arr_default_overlay_traits_base<Arrangement_a, Arrangement_b,
                                                  Arrangement_r>
     Arr_default_overlay_traits;
 
-  Function m_vv_v;
-  Function m_ve_v;
-  Function m_vf_v;
-  Function m_ev_v;
-  Function m_fv_v;
-  Function m_ee_v;
-  Function m_ee_e;
-  Function m_ef_e;
-  Function m_fe_e;
-  Function m_ff_f;
+  py::object m_vv_v;
+  py::object m_ve_v;
+  py::object m_vf_v;
+  py::object m_ev_v;
+  py::object m_fv_v;
+  py::object m_ee_v;
+  py::object m_ee_e;
+  py::object m_ef_e;
+  py::object m_fe_e;
+  py::object m_ff_f;
 
 public:
   /// Constructors
   /// @{
 
   // Default constructor
-  Arr_overlay_function_traits() : Arr_default_overlay_traits() {}
+  Arr_overlay_function_traits() :
+    Arr_default_overlay_traits(),
+    m_vv_v(py::none()),
+    m_ve_v(py::none()),
+    m_vf_v(py::none()),
+    m_ev_v(py::none()),
+    m_fv_v(py::none()),
+    m_ee_v(py::none()),
+    m_ee_e(py::none()),
+    m_ef_e(py::none()),
+    m_fe_e(py::none()),
+    m_ff_f(py::none())
+  {}
 
   // Constructor with one operator
   Arr_overlay_function_traits(py::object py_function) :
     Arr_default_overlay_traits(),
+    m_vv_v(py::none()),
+    m_ve_v(py::none()),
+    m_vf_v(py::none()),
+    m_ev_v(py::none()),
+    m_fv_v(py::none()),
+    m_ee_v(py::none()),
+    m_ee_e(py::none()),
+    m_ef_e(py::none()),
+    m_fe_e(py::none()),
     m_ff_f(py_function)
   {}
 
@@ -228,62 +250,62 @@ public:
    */
   void create_vertex(Vertex_handle_a v1, Vertex_handle_b v2, Vertex_handle_r v)
     const
-  { apply<Vertex_a, Vertex_b, Vertex_r, Function>(&*v1, &*v2, &*v, m_vv_v); }
+  { apply<Vertex_a, Vertex_b, Vertex_r, py::object>(&*v1, &*v2, &*v, m_vv_v); }
 
   /*! Create the vertex v induced by the vertex v1 that lies on the halfedge e2.
    */
   void create_vertex(Vertex_handle_a v1, Halfedge_handle_b e2, Vertex_handle_r v)
     const
-  { apply<Vertex_a, Halfedge_b, Vertex_r, Function>(&*v1, &*e2, &*v, m_ve_v); }
+  { apply<Vertex_a, Halfedge_b, Vertex_r, py::object>(&*v1, &*e2, &*v, m_ve_v); }
 
   /*! Create the vertex v induced by the vertex v1 that lies inside the face f2.
    */
   void create_vertex(Vertex_handle_a v1, Face_handle_b f2, Vertex_handle_r v)
     const
-  { apply<Vertex_a, Face_b, Vertex_r, Function>(&*v1, &*f2, &*v, m_vf_v); }
+  { apply<Vertex_a, Face_b, Vertex_r, py::object>(&*v1, &*f2, &*v, m_vf_v); }
 
   /* Create the vertex v induced by the vertex v2 that lies on the halfedge e1.
    */
   void create_vertex(Halfedge_handle_a e1, Vertex_handle_b v2,
                      Vertex_handle_r v) const
-  { apply<Halfedge_a, Vertex_b, Vertex_r, Function>(&*e1, &*v2, &*v, m_ev_v); }
+  { apply<Halfedge_a, Vertex_b, Vertex_r, py::object>(&*e1, &*v2, &*v, m_ev_v); }
 
   /* Create the vertex v induced by the vertex v2 that lies inside the face f1.
    */
   void create_vertex(Face_handle_a f1, Vertex_handle_b v2, Vertex_handle_r v)
     const
-  { apply<Face_a, Vertex_b, Vertex_r, Function>(&*f1, &*v2, &*v, m_fv_v); }
+  { apply<Face_a, Vertex_b, Vertex_r, py::object>(&*f1, &*v2, &*v, m_fv_v); }
 
   /* Create the vertex v induced by the intersection of the halfedges e1 and e2.
    */
   void create_vertex(Halfedge_handle_a e1, Halfedge_handle_b e2,
                      Vertex_handle_r v) const
-  { apply<Halfedge_a, Halfedge_b, Vertex_r, Function>(&*e1, &*e2, &*v, m_ee_v); }
+  { apply<Halfedge_a, Halfedge_b, Vertex_r, py::object>(&*e1, &*e2, &*v, m_ee_v); }
 
   /* Create the halfedge e induced by an overlap between the halfedges e1 and e2.
    */
   void create_edge(Halfedge_handle_a e1, Halfedge_handle_b e2,
                    Halfedge_handle_r e) const
   {
-    apply<Halfedge_a, Halfedge_b, Halfedge_r, Function>(&*e1, &*e2, &*e, m_ee_e);
+    apply<Halfedge_a, Halfedge_b, Halfedge_r, py::object>(&*e1, &*e2, &*e, m_ee_e);
   }
 
   /* Create the halfedge e induced by the halfedge e1 contained the face f2.
    */
   void create_edge(Halfedge_handle_a e1, Face_handle_b f2, Halfedge_handle_r e)
     const
-  { apply<Halfedge_a, Face_b, Halfedge_r, Function>(&*e1, &*f2, &*e, m_ef_e); }
+  { apply<Halfedge_a, Face_b, Halfedge_r, py::object>(&*e1, &*f2, &*e, m_ef_e); }
 
   /* Create the halfedge e induced by the halfedge e2 contained in the face f1.
    */
   void create_edge(Face_handle_a f1, Halfedge_handle_b e2, Halfedge_handle_r e)
     const
-  { apply<Face_a, Halfedge_b, Halfedge_r, Function>(&*f1, &*e2, &*e, m_fe_e); }
+  { apply<Face_a, Halfedge_b, Halfedge_r, py::object>(&*f1, &*e2, &*e, m_fe_e); }
 
   /*! Create a face f that matches the overlapping region between f1 and f2.
    */
   void create_face(Face_handle_a f1, Face_handle_b f2, Face_handle_r f) const
-  { apply<Face_a, Face_b, Face_r, Function>(&*f1, &*f2, &*f, m_ff_f); }
+  { apply<Face_a, Face_b, Face_r, py::object>(&*f1, &*f2, &*f, m_ff_f); }
 
   /// @}
 };

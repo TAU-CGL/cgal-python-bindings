@@ -23,9 +23,12 @@ Arr_observer = Aos2.Arr_observer
 id = 0
 arr = Arrangement()
 arr.unbounded_face().set_data(id);
+id = id + 1
 
 def index_face(f, new_f, is_hole):
-  new_f.set_data(5)
+  global id
+  new_f.set_data(id)
+  id = id + 1
 
 obs = Arr_observer(arr)
 obs.set_after_split_face(index_face)
@@ -42,12 +45,14 @@ Aos2.insert(arr, Segment(Point(4, 8), Point(7, 3)))
 print('{} faces:'.format(arr.number_of_faces()))
 f: Arrangement.Face
 for f in arr.faces():
-  # print('Face no. {}: '.format(f.data()), end='')
+  print('Face no. {}: '.format(f.data()), end='')
   if f.is_unbounded(): print("Unbounded.")
   else:
     ccb = f.outer_ccb()
     e = next(ccb)
-    print('{}'.format(e.source().point()), end='')
+    print('{} -> {}'.format(e.source().point(), e.target().point()), end='')
     for e in ccb:
       print(' --> {}'.format(e.target().point()), end='')
     print()
+
+del obs
