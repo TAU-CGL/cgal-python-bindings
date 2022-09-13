@@ -45,3 +45,5 @@ Aos2.overlay(arr1, arr2, result, traits)
 
 for v in result.vertices():
   print("({})".format(v.point()), v.data())
+
+del traits
