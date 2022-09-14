@@ -16,6 +16,11 @@
 template <bool b>
 struct Hash_rational_point {};
 
+// exact_impl() dispatches between the case where the type of the number
+// passed has the exact() method. The second parameter is used to resolve
+// overload ambiguity in case the exact() method does exist. In this case
+// 'int' is preferred over ellipsis (...).
+
 // Fall through; T::exact() does not exist
 template <typename T> const T& exact_impl(const T& val, ...) { return val; }
 
@@ -24,6 +29,7 @@ template <typename T, typename = decltype(std::declval<T>().exact())>
 decltype(std::declval<T>().exact())
 exact_impl(const T& val, int) { return val.exact(); }
 
+//
 template <>
 struct Hash_rational_point<true> {
   template <typename Point>
