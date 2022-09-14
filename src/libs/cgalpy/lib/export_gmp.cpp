@@ -19,7 +19,8 @@ namespace py = nanobind;
 
 void export_gmpz(py::module_& m) {
   py::class_<CGAL::Gmpz>(m, "Gmpz")
-    .def(py::init<int>())
+    .def(py::init_implicit<int>())
+    .def(py::init_implicit<double>())
     .def(py::init<CGAL::Gmpz&>())
     .def("to_double", &CGAL::Gmpz::to_double)
     .def("__str__", to_string<CGAL::Gmpz>)
@@ -44,11 +45,12 @@ void export_gmpz(py::module_& m) {
 
 void export_gmpq(py::module_& m) {
   py::class_<CGAL::Gmpq>(m, "Gmpq")
+    .def(py::init_implicit<int>())
+    .def(py::init_implicit<double>())
+    .def(py::init_implicit<CGAL::Gmpz>())
     .def(py::init<CGAL::Gmpz, CGAL::Gmpz>())
-    .def(py::init<unsigned long, unsigned long>())
     .def(py::init<const std::string&>())
     .def(py::init<CGAL::Gmpq&>())
-    .def(py::init<double>())
     .def("to_double", &CGAL::Gmpq::to_double)
     .def("numerator", &CGAL::Gmpq::numerator)
     .def("denominator", &CGAL::Gmpq::denominator)

@@ -56,8 +56,8 @@ void export_point_2(C& c) {
     .def(py::self -= Vec())
     .def(py::self + Vec())
     .def(py::self - Vec())
-    // .setattr("__hash__", &hash_rational_point<is_exact_ft(), Pnt>) NB
-    // .setattr("__doc__", "Pnt") NB
+    .def("__hash__", &hash_rational_point<is_exact_ft(), Pnt>)
+    // .setattr("__doc__", "Point_2") NB
     ;
 
   add_insertion(c, "__str__");
