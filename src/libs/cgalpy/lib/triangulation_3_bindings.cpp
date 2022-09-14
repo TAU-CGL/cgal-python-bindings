@@ -126,6 +126,8 @@ py::object points(const Triangulation_3& tri)
 void export_triangulation_3(py::module_& m) {
   using Tri = tri3::Triangulation_3;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
+
   CGAL::Bounded_side(Tri::*side_of_sphere)(tri3::Cell_handle, const tri3::Point&, bool) const =
     &Tri::side_of_sphere;
   CGAL::Bounded_side(Tri::*side_of_circle1)(const tri3::Facet&, const tri3::Point&, bool) const =
@@ -234,7 +236,7 @@ void export_triangulation_3(py::module_& m) {
     .def(py::init<>())
     // Access Functions
     .def<tri3::Cell_handle(tri3::Vertex::*)()const>("cell", &tri3::Vertex::cell)
-    .def<const tri3::Point&(tri3::Vertex::*)() const>("point", &tri3::Vertex::point)
+    .def<const tri3::Point&(tri3::Vertex::*)() const>("point", &tri3::Vertex::point, ri)
     // Setting
     .def("set_cell", &tri3::Vertex::set_cell)
     .def("set_point", &tri3::Vertex::set_point)
@@ -286,12 +288,12 @@ void export_triangulation_3(py::module_& m) {
 
   py::class_<tri3::Vertex_handle>(tri_c, "Vertex_handle")
     .def(py::init<>())
-    .def("value", &tri3::value<tri3::Vertex_handle>)
+    .def("value", &tri3::value<tri3::Vertex_handle>, ri)
     ;
 
   py::class_<tri3::Cell_handle>(tri_c, "Cell_handle")
     .def(py::init<>())
-    .def("value", &tri3::value<tri3::Cell_handle>)
+    .def("value", &tri3::value<tri3::Cell_handle>, ri)
     ;
 
   using Avi = Tri::All_vertices_iterator;

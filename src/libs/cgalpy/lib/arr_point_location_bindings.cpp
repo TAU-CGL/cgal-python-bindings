@@ -93,6 +93,8 @@ void export_point_location(py::module_& m) {
   using Walk_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
   using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
   using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
+  using Aob = CGAL::Arr_observer<Aos>;
+
   constexpr auto ri(py::rv_policy::reference_internal);
 
   // Supported only by some of the traits
@@ -110,7 +112,7 @@ void export_point_location(py::module_& m) {
     ;
 #endif
 
-  py::class_<Trapezoid_pl>(m, "Arr_trapezoid_ric_point_location")
+  py::class_<Trapezoid_pl, Aob>(m, "Arr_trapezoid_ric_point_location")
     .def(py::init<>())
     .def(py::init<Aos&>())
     .def("attach", &Trapezoid_pl::attach)
@@ -118,7 +120,6 @@ void export_point_location(py::module_& m) {
     .def("depth", &Trapezoid_pl::depth)
     .def("longest_query_path_length", &Trapezoid_pl::longest_query_path_length)
     .def("with_guarantees", &Trapezoid_pl::with_guarantees)
-    // .def<Aos*(Trapezoid_pl::*)()>("arrangement", &Trapezoid_pl::arrangement)
     .def("locate", &aos2::locate<Trapezoid_pl>, ri)
     .def("ray_shoot_up", &aos2::ray_shoot_up<Trapezoid_pl>, ri)
     .def("ray_shoot_down", &aos2::ray_shoot_down<Trapezoid_pl>, ri)

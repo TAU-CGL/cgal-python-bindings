@@ -142,18 +142,20 @@ py::object points(const Triangulation_2& tri)
 void export_triangulation_2(py::module_& m) {
   using Tri = tri2::Triangulation_2;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
+
   py::class_<Tri> tri_c(m, "Triangulation_2");
   tri_c.def(py::init<>())
     .def(py::init<Tri&>())
     .def("dimension", &Tri::dimension)
     .def("number_of_vertices", &Tri::number_of_vertices)
     .def("number_of_faces", &Tri::number_of_faces)
-    .def("infinite_face", &tri2::infinite_face)
-    .def("infinite_vertex", &tri2::infinite_vertex)
-    .def("finite_vertex", &tri2::finite_vertex)
+    .def("infinite_face", &tri2::infinite_face, ri)
+    .def("infinite_vertex", &tri2::infinite_vertex, ri)
+    .def("finite_vertex", &tri2::finite_vertex, ri)
     .def("clear", &Tri::clear)
     .def("insert", &tri2::insert_list)
-    .def("insert", &tri2::insert_point)
+    .def("insert", &tri2::insert_point, ri)
     .def("triangle", &tri2::triangle)
     .def("circumcenter", &tri2::circumcenter)
     .def("flip", &tri2::flip)
@@ -224,7 +226,7 @@ void export_triangulation_2(py::module_& m) {
     std::cerr << "'tri2::Triangle' not registered!\n";
 
   py::class_<tri2::Vertex>(tri_c, "Vertex")
-    .def<tri2::Point&(tri2::Vertex::*)()>("point", &tri2::Vertex::point)
+    .def<tri2::Point&(tri2::Vertex::*)()>("point", &tri2::Vertex::point, ri)
     ;
 
   py::class_<tri2::Edge>(tri_c, "Edge")
@@ -238,12 +240,12 @@ void export_triangulation_2(py::module_& m) {
 
   py::class_<tri2::Vertex_handle>(tri_c, "Vertex_handle")
     .def(py::init<>())
-    .def("value", &tri2::value<tri2::Vertex_handle>)
+    .def("value", &tri2::value<tri2::Vertex_handle>, ri)
     ;
 
   py::class_<tri2::Face_handle>(tri_c, "Face_handle")
     .def(py::init<>())
-    .def("value", &tri2::value<tri2::Face_handle>)
+    .def("value", &tri2::value<tri2::Face_handle>, ri)
     ;
 
   bind_copy_iterator<CopyIterator<tri2::All_edges_iterator>>(m, "Triangulation_all_edges_iterator");

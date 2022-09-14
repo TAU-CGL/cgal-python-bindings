@@ -131,6 +131,8 @@ void export_general_polygon_set_2(py::module_& m) {
   using Pwh = bso2::General_polygon_with_holes_2;
   using Arrangement_2 = bso2::Arrangement_2;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
+
   py::class_<Gpsb2> gpsb2_co(m, "Gps_on_surface_base_2");
   gpsb2_co.def(py::init<>())
     .def(py::init<const Gpsb2&>())
@@ -224,8 +226,7 @@ void export_general_polygon_set_2(py::module_& m) {
     // 2. Wrap the mutable method with the `reference_internal` call policy.
     // 3. Add the `const_` tag to the overloaded const function, as the
     //    overloading is based on constness.
-    .def("arrangement_mutable", py::overload_cast<>(&Gpsb2::arrangement),
-         py::rv_policy::reference_internal)
+    .def("arrangement_mutable", py::overload_cast<>(&Gpsb2::arrangement), ri)
     .def("arrangement", py::overload_cast<>(&Gpsb2::arrangement, py::const_))
 
     .def("is_valid", &Gpsb2::is_valid)
@@ -252,8 +253,7 @@ void export_general_polygon_set_2(py::module_& m) {
     // 2. Wrap the mutable method with the `reference_internal` call policy.
     // 3. Add the `const_` tag to the overloaded const function, as the
     //    overloading is based on constness.
-    .def("arrangement_mutable", py::overload_cast<>(&Gps2::arrangement),
-         py::rv_policy::reference_internal)
+    .def("arrangement_mutable", py::overload_cast<>(&Gps2::arrangement), ri)
     .def("arrangement", py::overload_cast<>(&Gps2::arrangement, py::const_))
     ;
 

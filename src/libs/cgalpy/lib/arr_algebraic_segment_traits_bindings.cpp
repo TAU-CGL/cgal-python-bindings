@@ -18,6 +18,7 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/bind_polynomial.hpp"
 
 namespace py = nanobind;
 
@@ -109,9 +110,16 @@ T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 py::object export_arr_algebraic_segment_traits(py::module_& m) {
   using Integer = CORE::BigInt;
   using GT = CGAL::Arr_algebraic_segment_traits_2<Integer>;
-  using Ar = GT::Algebraic_real_1;
   using Cv = GT::Curve_2;
   using Xcv = GT::X_monotone_curve_2;
+
+  using Alg_kernel_d_1 = CGAL::Algebraic_kernel_d_1<Integer>;
+  using Alg_kernel_d_2 = CGAL::Algebraic_curve_kernel_2<Alg_kernel_d_1>;
+  using Polynomial_1 = Alg_kernel_d_1::Polynomial_1;
+  using Polynomial_2 = Alg_kernel_d_2::Polynomial_2;
+  using Ar = Alg_kernel_d_2::Algebraic_real_1;
+  using Pt1 = CGAL::Polynomial_traits_d<Polynomial_1>;
+  using Pt2 = CGAL::Polynomial_traits_d<Polynomial_2>;
 
   py::class_<Integer> integer_c(m, "Integer");
   integer_c.def(py::init<>())
@@ -174,17 +182,17 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
   add_insertion(bound_c, "__str__");
   add_insertion(bound_c, "__repr__");
 
-  //bind_construct_polynomial<PT_1>("Construct_polynomial_1");
-  //bind_construct_polynomial<PT_2>("Construct_polynomial_2");
+  //bind_construct_polynomial<Pt1>("Construct_polynomial_1");
+  //bind_construct_polynomial<Pt2>("Construct_polynomial_2");
 
-  bind_polynomial<aos2::PT_1>(m, "Polynomial_1");
-  bind_polynomial<aos2::PT_2>(m, "Polynomial_2");
+  bind_polynomial<Pt1>(m, "Polynomial_1");
+  bind_polynomial<Pt2>(m, "Polynomial_2");
 
-  bind_shift<aos2::PT_1>(m, "PT_1_Shift");
-  bind_shift<aos2::PT_2>(m, "PT_2_Shift");
+  bind_shift<Pt1>(m, "Pt1_Shift");
+  bind_shift<Pt2>(m, "Pt2_Shift");
 
-  bind_swap<aos2::PT_1>(m, "PT_1_Swap");
-  bind_swap<aos2::PT_2>(m, "PT_2_Swap");
+  bind_swap<Pt1>(m, "Pt1_Swap");
+  bind_swap<Pt2>(m, "Pt2_Swap");
 
   m.def("ipower", &ipower<aos2::Polynomial_1>);
   m.def("ipower", &ipower<aos2::Polynomial_2>);
