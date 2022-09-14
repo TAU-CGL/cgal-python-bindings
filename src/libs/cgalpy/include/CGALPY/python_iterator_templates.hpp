@@ -27,6 +27,7 @@ private:
 
 public:
   Iterator_from_circulator(circulator first) : m_first(first), m_curr(first) {}
+
   typename circulator::value_type& next() {
     if (m_curr != 0) {
       if (first || m_curr != m_first) {
@@ -63,7 +64,7 @@ template<typename iterator, typename Parent>
 void bind_iterator_of_circulators(Parent& parent, const char* python_name) {
   py::class_<iterator>(parent, python_name)
     .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next)
+    .def("__next__", &iterator::next, py::rv_policy::reference_internal)
     ;
 }
 

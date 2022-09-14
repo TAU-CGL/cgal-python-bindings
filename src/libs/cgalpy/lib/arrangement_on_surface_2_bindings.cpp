@@ -588,10 +588,12 @@ void bind_overlay_function_traits<false, false, false>(py::module_& m) {
 //
 template <>
 void bind_overlay_function_traits<false, false, true>(py::module_& m) {
+  constexpr auto ka_1_2 = py::keep_alive<1, 2>();
+
   py::class_<aos2::Arr_overlay_function_traits>(m, "Arr_overlay_function_traits")
     .def(py::init<>())
     .def(py::init<py::object>())
-    .def("set_ff_f", &aos2::Arr_overlay_function_traits::set_ff_f)
+    .def("set_ff_f", &aos2::Arr_overlay_function_traits::set_ff_f, ka_1_2)
     ;
 }
 
@@ -790,9 +792,15 @@ void export_arrangement_on_surface_2(py::module_& m) {
   m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_function_traits>);
   m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_traits>);
 
+  using Aob = CGAL::Arr_observer<Aos>;
   using Ao = aos2::Arr_observer;
 
-  py::class_<aos2::Arr_observer>(m, "Arr_observer")
+  py::class_<Aob>(m, "Arr_observer_base")
+    .def(py::init<>())
+    .def(py::init<Aos&>())
+    ;
+
+  py::class_<Ao, Aob>(m, "Arr_observer")
     .def(py::init<>())
     .def(py::init<Aos&>())
     .def("set_after_split_face", &Ao::set_after_split_face)
