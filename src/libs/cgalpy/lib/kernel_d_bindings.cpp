@@ -95,6 +95,7 @@ void export_kernel_d(py::module_& m) {
   py::class_<Pnt> pd_c(m, "Point_d");
   pd_c.def(py::init<>())
     .def("__init__", &init_point_d)
+    .def("__hash__", &hash_rational_point<is_epec_d_type(), Pnt>)
     .def("dimension", &Pnt::dimension)
     .def("cartesian", &Pnt::cartesian)
     .def("__getitem__", &Pnt::operator[])
@@ -106,7 +107,6 @@ void export_kernel_d(py::module_& m) {
     .def(py::self <= py::self)
     .def(py::self >= py::self)
 #endif
-    // .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Pnt>) NB
     ;
 
   using Cci = Pnt::Cartesian_const_iterator;
