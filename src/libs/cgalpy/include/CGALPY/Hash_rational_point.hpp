@@ -16,13 +16,21 @@
 template <bool b>
 struct Hash_rational_point {};
 
+// Fall through; T::exact() does not exist
+template <typename T> const T& exact_impl(const T& val, ...) { return val; }
+
+// T::exact() exists
+template <typename T, typename = decltype(std::declval<T>().exact())>
+decltype(std::declval<T>().exact())
+exact_impl(const T& val, int) { return val.exact(); }
+
 template <>
 struct Hash_rational_point<true> {
   template <typename Point>
   static size_t hash_rational_point(Point& p) {
     size_t seed = 0;
     for (auto c = p.cartesian_begin(); c != p.cartesian_end(); ++c) {
-      auto q = (*c).exact();
+      auto q = exact_impl(*c, 0);
       auto simplify =
         typename CGAL::Algebraic_structure_traits<decltype(q)>::Simplify();
       CGAL::Rational_traits<decltype(q)> traits;
