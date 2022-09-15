@@ -67,3 +67,4 @@ for f in arr.faces():
   for e in ccb:
     print(' -> {}'.format(e.target().point()), end='')
   print()
+del overlay_traits
