@@ -14,11 +14,11 @@
 #include "CGALPY/common.hpp"
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
-#include "CGALPY/export_ft.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "CGALPY/Kernel/export_ft.hpp"
 
 namespace py = nanobind;
 
@@ -88,7 +88,7 @@ void export_kernel_d(py::module_& m) {
   if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
   if (! add_attr<FT_d>(m, "FT")) {
     auto ftc = py::class_<FT_d>(m, "FT");
-    export_ft<FT_d>(ftc);
+    export_ft(ftc);
   }
 #endif
 
