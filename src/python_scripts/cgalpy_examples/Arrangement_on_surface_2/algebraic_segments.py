@@ -17,7 +17,7 @@ Aos2 = CGALPY.Aos2
 CGALPY = importlib.import_module(lib)
 
 Aos2 = CGALPY.Aos2
-PT_2_Shift = Aos2.PT_2_Shift
+Pt2_Shift = Aos2.Pt2_Shift
 Arrangement_2 = Aos2.Arrangement_2
 Polynomial_1 = Aos2.Polynomial_1
 Polynomial_2 = Aos2.Polynomial_2
@@ -35,7 +35,7 @@ ctr_pt = traits.construct_point_2_object()
 ctr_xseg = traits.construct_x_monotone_segment_2_object()
 
 i = Polynomial_2(Polynomial_1(Integer(1)))
-shift = PT_2_Shift()
+shift = Pt2_Shift()
 x = shift(i, 1, 0)
 y = shift(i, 1, 1)
 
