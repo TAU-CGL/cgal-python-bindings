@@ -30,9 +30,9 @@ py::object export_arr_non_caching_segment_traits(py::module_& m) {
 
   /// \name AosBaiscTraits
   /// @{
-  using Point_2 = BGT::Point_2;
-  using X_monotone_curve_2 = BGT::X_monotone_curve_2;
-  using Construct_x_monotone_curve_2 = BGT::Construct_x_monotone_curve_2;
+  using Pnt = BGT::Point_2;
+  using Xcv = BGT::X_monotone_curve_2;
+  using Ctr_xcv = BGT::Construct_x_monotone_curve_2;
   using Compare_x_2 = BGT::Compare_x_2;
   using Compare_xy_2 = BGT::Compare_xy_2;
   using Construct_min_vertex_2 = BGT::Construct_min_vertex_2;
@@ -43,8 +43,8 @@ py::object export_arr_non_caching_segment_traits(py::module_& m) {
   using Compare_y_at_x_left_2 = BGT::Compare_y_at_x_left_2;
   using Equal_2 = BGT::Equal_2;
 
-  add_attr<X_monotone_curve_2>(bt_c, "X_monotone_curve_2");
-  add_attr<Construct_x_monotone_curve_2>(bt_c, "Construct_x_monotone_curve_2");
+  add_attr<Xcv>(bt_c, "X_monotone_curve_2");
+  add_attr<Ctr_xcv>(bt_c, "Construct_x_monotone_curve_2");
 
   py::class_<Compare_y_at_x_right_2>(bt_c, "Compare_y_at_x_right_2")
     .def("__call__", &Compare_y_at_x_right_2::operator())
@@ -66,8 +66,8 @@ py::object export_arr_non_caching_segment_traits(py::module_& m) {
   /// \name AosXMonotoneTraits & AosTraits
   /// @{
 
-  using Curve_2 = GT::Curve_2;
-  using Construct_curve_2 = GT::Construct_curve_2;
+  using Cv = GT::Curve_2;
+  using Ctr_cv = GT::Construct_curve_2;
   using Intersect_2 = GT::Intersect_2;
   using Split_2 = GT::Split_2;
   using Merge_2 = GT::Merge_2;
@@ -76,8 +76,8 @@ py::object export_arr_non_caching_segment_traits(py::module_& m) {
 
   py::class_<GT, BGT> traits_c(m, "Arr_non_caching_segment_traits_2");
 
-  add_attr<Curve_2>(traits_c, "Curve_2");
-  add_attr<Construct_curve_2>(bt_c, "Construct_curve_2");
+  add_attr<Cv>(traits_c, "Curve_2");
+  add_attr<Ctr_cv>(bt_c, "Construct_curve_2");
 
   py::class_<Intersect_2>(traits_c, "Intersect_2")
     .def("__call__", &intersect_2_call_operator<GT>)
@@ -99,21 +99,21 @@ py::object export_arr_non_caching_segment_traits(py::module_& m) {
     .def("__call__", &make_x_monotone_2_call_operator<GT>)
     ;
 
-  using Approximate_2 = GT::Approximate_2;
-  using Construct_opposite_segment_2 = GT::Construct_opposite_segment_2;
-  using Compare_endpoints_xy_2 = GT::Compare_endpoints_xy_2;
+  using Approx = GT::Approximate_2;
+  using Ctr_opposite = GT::Construct_opposite_2;
+  using Cmp_endpoints_xy = GT::Compare_endpoints_xy_2;
 
-  py::class_<Approximate_2>(traits_c, "Approximate_2")
-    .def("__call__", &Approximate_2::operator())
+  py::class_<Approx>(traits_c, "Approximate_2")
+    .def("__call__", &Approx::operator())
     ;
 
-  py::class_<Construct_opposite_segment_2>(traits_c,
-                                           "Construct_opposite_segment_2")
-    .def("__call__", &Construct_opposite_segment_2::operator())
+  py::class_<Ctr_opposite>(traits_c, "Construct_opposite_2")
+    .def("__call__", [](const Ctr_opposite& ctr_opp, const Xcv& xcv)->Xcv
+                     { return ctr_opp(xcv); })
     ;
 
-  py::class_<Compare_endpoints_xy_2>(traits_c, "Compare_endpoints_xy_2")
-    .def("__call__", &Compare_endpoints_xy_2::operator())
+  py::class_<Cmp_endpoints_xy>(traits_c, "Compare_endpoints_xy_2")
+    .def("__call__", &Cmp_endpoints_xy::operator())
     ;
 
   traits_c.def(py::init<>())
