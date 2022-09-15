@@ -133,8 +133,8 @@ void export_general_polygon_set_2(py::module_& m) {
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<Gpsb2> gpsb2_co(m, "Gps_on_surface_base_2");
-  gpsb2_co.def(py::init<>())
+  py::class_<Gpsb2> gpsb2_c(m, "Gps_on_surface_base_2");
+  gpsb2_c.def(py::init<>())
     .def(py::init<const Gpsb2&>())
     .def(py::init<const GT&>())
     .def("simplify", &Gpsb2::simplify)
@@ -233,14 +233,14 @@ void export_general_polygon_set_2(py::module_& m) {
     .def("polygons_with_holes", &bso2::polygons_with_holes)
     ;
 
-  py::class_<Gpsos2, Gpsb2> gpsos2_co(m, "General_polygon_set_on_surface_2");
-  gpsos2_co.def(py::init<>())
+  py::class_<Gpsos2, Gpsb2> gpsos2_c(m, "General_polygon_set_on_surface_2");
+  gpsos2_c.def(py::init<>())
     .def(py::init<const Gpsos2&>())
     .def(py::init<const GT&>())
     ;
 
-  py::class_<Gps2, Gpsos2> gps2_co(m, "General_polygon_set_2");
-  gps2_co.def(py::init<>())
+  py::class_<Gps2, Gpsos2> gps2_c(m, "General_polygon_set_2");
+  gps2_c.def(py::init<>())
     .def(py::init<const Gps2&>())
     .def(py::init<const GT&>())
     .def(py::init<const Pgn&>())
@@ -258,14 +258,14 @@ void export_general_polygon_set_2(py::module_& m) {
     ;
 
   // Types that have been registered already:
-  if (! add_attr<GT>(gps2_co, "Geometry_traits_2"))
+  if (! add_attr<GT>(gps2_c, "Geometry_traits_2"))
     std::cerr << "bso2::Geometry_traits_2 not registered!\n";
-  if (! add_attr<GT>(gps2_co, "Traits_2"))
+  if (! add_attr<GT>(gps2_c, "Traits_2"))
     std::cerr << "bso2::Traits_2 not registered!\n";
-  if (! add_attr<Pgn>(gps2_co, "Polygon_2"))
+  if (! add_attr<Pgn>(gps2_c, "Polygon_2"))
     std::cerr << "bso2::General_polygon_2 not registered!\n";
-  if (! add_attr<Pwh>(gps2_co, "Polygon_with_holes_2"))
+  if (! add_attr<Pwh>(gps2_c, "Polygon_with_holes_2"))
     std::cerr << "bso2::General_polygon_with_holes_2 not registered!\n";
-  if (! add_attr<bso2::Arrangement_2>(gps2_co, "Arrangement_2"))
+  if (! add_attr<bso2::Arrangement_2>(gps2_c, "Arrangement_2"))
     std::cerr << "bso2::Arrangement_2 not registered!\n";
 }
