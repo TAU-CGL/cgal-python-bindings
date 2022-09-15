@@ -35,7 +35,7 @@ void ctr_pgn_op(const typename T::Construct_polygon_2& ctr,
   using Xcv = typename T::X_monotone_curve_2;
   auto begin = stl_input_iterator<Xcv>(curves);
   auto end = stl_input_iterator<Xcv>(curves, false);
-  pgn.init(begin, end);
+  ctr(begin, end, pgn);
 }
 
 /* Export an operator() of the Construct_polygon_with_holes_2 function object
@@ -100,10 +100,10 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   auto& ctr_curves_c = *(classes.m_construct_curves_2);
   using Cci = typename T::Curve_const_iterator;
   using Xcv = typename T::X_monotone_curve_2;
-  add_iterator<Cci, Cci, const Xcv&>("Curve_iterator", ctr_curves_c);
+  add_iterator<Cci, Cci, Xcv>("Curve_iterator", ctr_curves_c);
   ctr_curves_c.def("curves",
                    [](const Pgn& pgn) {
-                     return make_iterator(pgn.curves_begin(), pgn.curves_end());
+                     return make_iterator(pgn.edges_begin(), pgn.edges_end());
                    },
                    py::keep_alive<0, 1>());
 
