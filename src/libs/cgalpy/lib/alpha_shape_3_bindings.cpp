@@ -45,20 +45,20 @@ void make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
 
   void as_init3(Alpha_shape_3& as, py::list& lst, double alpha) {
   auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, fals);
+  auto end = stl_input_iterator<Point>(lst, false);
   new (&as) Alpha_shape_3(begin, end, alpha);
 }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   void as_init4(Alpha_shape_3& as, py::list& lst, const FT& alpha, Mode m) {
   auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, fals);
+  auto end = stl_input_iterator<Point>(lst, false);
   new (&as) Alpha_shape_3(begin, end, alpha, m);
 }
 
   void as_init5(Alpha_shape_3& as, py::list& lst, double alpha, Mode m) {
   auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, fals);
+  auto end = stl_input_iterator<Point>(lst, false);
   new (&as) Alpha_shape_3(begin, end, alpha, m);
 }
 
@@ -272,8 +272,8 @@ void export_alpha_shape_3(py::module_& m) {
 
 #endif
 
-  py::class_<As3> as3_c(m, "Alpha_shape_3")
-    .def(py::init<>())
+  py::class_<As3> as3_c(m, "Alpha_shape_3");
+  as3_c.def(py::init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def(py::init<py::optional<double, as3::Mode>>())
     .def(py::init<py::optional<as3::FT&, as3::Mode>>())
@@ -370,7 +370,7 @@ void export_alpha_shape_3(py::module_& m) {
 
   py::class_<as3::Alpha_iterator>(as3_c, "Alpha_iterator")
     .def("__iter__", &pass_through)
-    .def("__next__", &as3::next, py::return_value_policy<py::copy_const_reference>())
+    .def("__next__", &as3::next, py::rv_policy::reference_internal)
     ;
 
 #endif
