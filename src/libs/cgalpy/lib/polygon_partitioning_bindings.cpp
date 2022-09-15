@@ -19,62 +19,99 @@ namespace py = nanobind;
 
 namespace pp2 {
 
-void approx_convex_partition_2(Polygon_2& p, py::list& res) {
+//
+void approx_convex_partition_2(const Polygon_2& p, py::list& res) {
   auto v = std::vector<Polygon_2>();
   CGAL::approx_convex_partition_2(p.vertices_begin(), p.vertices_end(),
                                   std::back_inserter(v));
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
-void greene_approx_convex_partition_2(Polygon_2& p, py::list& res) {
+//
+void greene_approx_convex_partition_2(const Polygon_2& p, py::list& res) {
   auto v = std::vector<Polygon_2>();
   CGAL::greene_approx_convex_partition_2(p.vertices_begin(), p.vertices_end(),
                                          std::back_inserter(v));
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
-void optimal_convex_partition_2(Polygon_2& p, py::list& res) {
+//
+void optimal_convex_partition_2(const Polygon_2& p, py::list& res) {
   auto v = std::vector<Polygon_2>();
   CGAL::optimal_convex_partition_2(p.vertices_begin(), p.vertices_end(),
                                    std::back_inserter(v));
   for (auto c_polygon : v) res.append(c_polygon);
 }
 
-void y_monotone_partition_2(Polygon_2& p, py::list& res) {
+//
+void y_monotone_partition_2(const Polygon_2& p, py::list& res) {
   auto v = std::vector<Polygon_2>();
   CGAL::y_monotone_partition_2(p.vertices_begin(), p.vertices_end(),
                                std::back_inserter(v));
   for (auto ym_polygon : v) res.append(ym_polygon);
 }
 
-bool partition_is_valid_2(Polygon_2& p, py::list& lst) {
+/*! Bind partition is valid.
+ * \todo for some reason using stl_input_iterator does not work. Instead we
+ * introduce and intermediate array.
+ */
+bool partition_is_valid_2(const Polygon_2& p, const py::list& lst) {
+#if 1
+  std::vector<Polygon_2> pgns;
+  for (auto it = lst.begin(); it != lst.end(); ++it)
+    pgns.push_back(py::cast<Polygon_2>(*it));
+  auto begin = pgns.begin();
+  auto end = pgns.end();
+#else
   auto begin = stl_input_iterator<Polygon_2>(lst);
   auto end = stl_input_iterator<Polygon_2>(lst, false);
+#endif
   return CGAL::partition_is_valid_2(p.vertices_begin(), p.vertices_end(),
                                     begin, end);
 }
 
-bool convex_partition_is_valid_2(Polygon_2& p, py::list& lst) {
+//
+bool convex_partition_is_valid_2(Polygon_2& p, const py::list& lst) {
+#if 1
+  std::vector<Polygon_2> pgns;
+  for (auto it = lst.begin(); it != lst.end(); ++it)
+    pgns.push_back(py::cast<Polygon_2>(*it));
+  auto begin = pgns.begin();
+  auto end = pgns.end();
+#else
   auto begin = stl_input_iterator<Polygon_2>(lst);
   auto end = stl_input_iterator<Polygon_2>(lst, false);
+#endif
   return CGAL::convex_partition_is_valid_2(p.vertices_begin(), p.vertices_end(),
                                            begin, end);
 }
 
-bool y_monotone_partition_is_valid_2(Polygon_2& p, py::list& lst) {
+//
+bool y_monotone_partition_is_valid_2(Polygon_2& p, const py::list& lst) {
+#if 1
+  std::vector<Polygon_2> pgns;
+  for (auto it = lst.begin(); it != lst.end(); ++it)
+    pgns.push_back(py::cast<Polygon_2>(*it));
+  auto begin = pgns.begin();
+  auto end = pgns.end();
+#else
   auto begin = stl_input_iterator<Polygon_2>(lst);
   auto end = stl_input_iterator<Polygon_2>(lst, false);
+#endif
   return CGAL::y_monotone_partition_is_valid_2(p.vertices_begin(),
                                                p.vertices_end(),
                                                begin, end);
 }
 
+//
 bool is_y_monotone_2(Polygon_2& p)
 { return CGAL::is_y_monotone_2(p.vertices_begin(), p.vertices_end()); }
 
+//
 bool is_convex_2(Polygon_2& p)
 { return CGAL::is_convex_2(p.vertices_begin(), p.vertices_end()); }
 
+//
 template<typename T>
 void polygon_vertical_decomposition_2(Polygon_vertical_decomposition_2& pvd,
                                       T& polygon, py::list& res) {
@@ -83,6 +120,7 @@ void polygon_vertical_decomposition_2(Polygon_vertical_decomposition_2& pvd,
   for (auto trapezoid : v) res.append(trapezoid);
 }
 
+//
 template<typename T>
 void polygon_triangulation_decomposition_2
 (Polygon_triangulation_decomposition_2& ptd, T& polygon, py::list& res)
@@ -92,6 +130,7 @@ void polygon_triangulation_decomposition_2
   for (auto triangle : v) res.append(triangle);
 }
 
+//
 void small_side_angle_bisector_decomposition_2
 (Small_side_angle_bisector_decomposition_2& ssabd,
  Polygon_2& polygon, py::list& res)
@@ -111,12 +150,14 @@ void export_polygon_partition_2(py::module_& m) {
   using SSABD_2 = pp2::Small_side_angle_bisector_decomposition_2;
 
   m.def("approx_convex_partition_2", &pp2::approx_convex_partition_2);
-  m.def("greene_approx_convex_partition_2", &pp2::greene_approx_convex_partition_2);
+  m.def("greene_approx_convex_partition_2",
+        &pp2::greene_approx_convex_partition_2);
   m.def("optimal_convex_partition_2", &pp2::optimal_convex_partition_2);
   m.def("y_monotone_partition_2", &pp2::y_monotone_partition_2);
   m.def("partition_is_valid_2", &pp2::partition_is_valid_2);
   m.def("convex_partition_is_valid_2", &pp2::convex_partition_is_valid_2);
-  m.def("y_monotone_partition_is_valid_2", &pp2::y_monotone_partition_is_valid_2);
+  m.def("y_monotone_partition_is_valid_2",
+        &pp2::y_monotone_partition_is_valid_2);
   m.def("is_y_monotone_2", &pp2::is_y_monotone_2);
   m.def("is_convex_2", &pp2::is_convex_2);
 
