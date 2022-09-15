@@ -39,16 +39,16 @@ typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
 
 }
 
-py::class_<aos2::Geometry_traits_2> export_arr_conic_traits();
-py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits();
+py::class_<aos2::Geometry_traits_2> export_arr_conic_traits(py::module_& m);
+py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits(py::module_& m);
 
 py::object export_gps_traits(py::module_& m) {
   using GT = bso2::Geometry_traits_2;
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-  auto traits = export_arr_conic_traits();
+  auto traits = export_arr_conic_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  auto traits = export_arr_algebraic_segment_traits();
+  auto traits = export_arr_algebraic_segment_traits(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
