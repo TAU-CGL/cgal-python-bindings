@@ -4,6 +4,9 @@ import os
 import sys
 import importlib
 
+# The following is needed to get implicit conversion from int to Algebraic???
+from enum import Enum
+
 if len(sys.argv) < 2:
   sys.path.append(os.path.abspath('../precompiled'))
   lib = 'CGALPY'
