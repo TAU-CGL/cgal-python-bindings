@@ -22,8 +22,8 @@ py::object export_arr_segment_traits(py::module_&);
 py::object export_arr_non_caching_segment_traits(py::module_&);
 
 py::object export_gps_segment_traits(py::module_& m) {
-  using AGT = CGAL::Arr_segment_traits_2<Kernel>;
-  using GT = CGAL::Gps_segment_traits_2<Kernel, Point_2_container>;
+  using Agt = aos2::Arr_geometry_traits_2;
+  using Ggt = CGAL::Gps_segment_traits_2<Kernel, Point_2_container>;
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
   export_arr_segment_traits(m);
@@ -33,11 +33,11 @@ py::object export_gps_segment_traits(py::module_& m) {
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-  py::class_<GT, AGT> traits_co(m, "Gps_segment_traits_2");
-  traits_co.def(py::init<>());
+  py::class_<Ggt, Agt> traits_c(m, "Gps_segment_traits_2");
+  traits_c.def(py::init<>());
   struct Concepts {
-    Gps_traits_classes<GT> m_traits_classes;
+    Gps_traits_classes<Ggt> m_traits_classes;
   } concepts;
-  export_GpsTraits_2<GT>(traits_co, concepts);
-  return traits_co;
+  export_GpsTraits_2<Ggt>(traits_c, concepts);
+  return traits_c;
 }

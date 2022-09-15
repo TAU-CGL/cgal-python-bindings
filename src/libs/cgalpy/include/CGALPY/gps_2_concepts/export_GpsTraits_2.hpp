@@ -103,7 +103,7 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   add_iterator<Cci, Cci, Xcv>("Curve_iterator", ctr_curves_c);
   ctr_curves_c.def("curves",
                    [](const Pgn& pgn) {
-                     return make_iterator(pgn.edges_begin(), pgn.edges_end());
+                     return make_iterator(pgn.curves_begin(), pgn.curves_end());
                    },
                    py::keep_alive<0, 1>());
 

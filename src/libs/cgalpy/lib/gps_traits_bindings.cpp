@@ -21,6 +21,7 @@ namespace py = nanobind;
 
 namespace bso2 {
 
+//
 template <typename T>
 void init_polygon_2(typename T::Polygon_2& pgn, py::list& lst) {
   using Xcv = typename T::X_monotone_curve_2;
@@ -29,10 +30,12 @@ void init_polygon_2(typename T::Polygon_2& pgn, py::list& lst) {
   new (&pgn) typename T::Polygon_2(begin, end);
 }
 
+//
 template <typename T>
 typename T::Polygon_2::Curve_iterator curves_begin(typename T::Polygon_2& p)
 { return p.curves_begin(); }
 
+//
 template <typename T>
 typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
 { return p.curves_end(); }
@@ -42,26 +45,30 @@ typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
 py::class_<aos2::Geometry_traits_2> export_arr_conic_traits(py::module_& m);
 py::class_<aos2::Geometry_traits_2> export_arr_algebraic_segment_traits(py::module_& m);
 
+//
 py::object export_gps_traits(py::module_& m) {
-  using GT = bso2::Geometry_traits_2;
+  using Agt = aos2::Arr_geometry_traits_2;
+  using Ggt = CGAL::Gps_traits_2<Agt>;
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-  auto traits = export_arr_conic_traits(m);
+  export_arr_conic_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  auto traits = export_arr_algebraic_segment_traits(m);
+  export_arr_algebraic_segment_traits(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
+  py::class_<Ggt, Agt> traits_c(m, "Gps_traits_2");
+  traits_c.def(py::init<>());
   struct Concepts {
-    Gps_traits_classes<GT> m_traits_classes;
+    Gps_traits_classes<Ggt> m_traits_classes;
   } concepts;
-  export_GpsTraits_2<GT>(traits, concepts);
+  export_GpsTraits_2<Ggt>(traits_c, concepts);
   auto* tco = concepts.m_traits_classes.m_polygon_2;
   if (tco) {
-    tco->def("__init__", &bso2::init_polygon_2<GT>);
+    tco->def("__init__", &bso2::init_polygon_2<Ggt>);
     // tco->def("curves", py::range<py::return_internal_reference<>>
-    //          (&bso2::curves_begin<GT>, &bso2::curves_end<GT>));
+    //          (&bso2::curves_begin<Agt>, &bso2::curves_end<Agt>));
   }
-  return traits;
+  return traits_c;
 }
