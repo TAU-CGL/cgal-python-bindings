@@ -57,6 +57,54 @@ py::object export_arr_conic_traits(py::module_& m) {
       m_directional_x_monotone_traits_classes;
   } concepts;
 
+  py::class_<Integer>(traits_c, "Integer")
+    .def(py::init<>())
+    .def(py::init<const Integer&>())
+    .def(py::init_implicit<int>())
+    ;
+
+  if (! add_attr<Rational>(traits_c, "Rational")) {
+    py::class_<Rational> rat_c(traits_c, "Rational");
+    export_ft(rat_c);
+    rat_c.def(py::init_implicit<Integer>())
+      .def(py::init_implicit<int>())
+      .def(py::init<const Integer&, const Integer&>())
+      ;
+  }
+
+  py::class_<Algebraic>(traits_c, "Algebraic")
+    .def(py::init<>())
+    .def(py::init_implicit<double>())
+    .def(py::init_implicit<Rational>())
+    ;
+
+  if (! add_attr<Rat_pnt>(traits_c, "Rat_point_2")) {
+    py::class_<Rat_pnt> rat_pnt_c(traits_c, "Rat_point_2");
+    export_point_2<Rat_kernel>(rat_pnt_c);
+  }
+
+  if (! add_attr<Rat_seg>(traits_c, "Rat_segment_2")) {
+    py::class_<Rat_seg> rat_seg_c(traits_c, "Rat_segment_2");
+    export_segment_2<Rat_kernel>(rat_seg_c);
+  }
+
+  if (! add_attr<Rat_circle>(traits_c, "Rat_circle_2")) {
+    py::class_<Rat_circle> rat_circle_c(traits_c, "Rat_circle_2");
+    export_circle_2<Rat_kernel>(rat_circle_c);
+  }
+
+  if (! add_attr<Pnt>(traits_c, "Point_2")) {
+    concepts.m_basic_traits_classes.m_point_2 =
+      new py::class_<Pnt>(traits_c, "Point_2");
+    auto& pnt_c = *(concepts.m_basic_traits_classes.m_point_2);
+    pnt_c.def(py::init<const Algebraic&, const Algebraic&>())
+      .def(py::init<const Algebraic&, const Algebraic&, const Algebraic&>())
+      ;
+
+    add_insertion(pnt_c, "__str__");
+    add_insertion(pnt_c, "__repr__");
+  }
+
   // Export Curve_2 and X_monotone_curve_2 (which derives from Curve_2)
   // explicitly here, instead of exporting them in export_AosTraits_2 and
   // aos_TraitsBasicTraitse_2, since X_monotone_curve_2 derives from Curve_2.
@@ -132,54 +180,11 @@ py::object export_arr_conic_traits(py::module_& m) {
     add_insertion(xcv_c, "__repr__");
   }
 
-  // Export by concepts
+  // Export additional concepts
   export_AosTraits_2<GT>(traits_c, concepts);
   export_AosDirectionalXMonotoneTraits_2<GT>(traits_c, concepts);
 
-  py::class_<Integer>(traits_c, "Integer")
-    .def(py::init<>())
-    .def(py::init<const Integer&>())
-    .def(py::init_implicit<int>())
-    ;
-
-  if (! add_attr<Rational>(traits_c, "Rational")) {
-    py::class_<Rational> rat_c(traits_c, "Rational");
-    export_ft(rat_c);
-    rat_c.def(py::init_implicit<Integer>())
-      .def(py::init_implicit<int>())
-      .def(py::init<const Integer&, const Integer&>())
-      ;
-  }
-
-  py::class_<Algebraic>(traits_c, "Algebraic")
-    .def(py::init<>())
-    .def(py::init_implicit<double>())
-    .def(py::init_implicit<Rational>())
-    ;
-
-  if (! add_attr<Rat_pnt>(traits_c, "Rat_point_2")) {
-    py::class_<Rat_pnt> rat_pnt_c(traits_c, "Rat_point_2");
-    export_point_2<Rat_kernel>(rat_pnt_c);
-  }
-
-  if (! add_attr<Rat_seg>(traits_c, "Rat_segment_2")) {
-    py::class_<Rat_seg> rat_seg_c(traits_c, "Rat_segment_2");
-    export_segment_2<Rat_kernel>(rat_seg_c);
-  }
-
-  if (! add_attr<Rat_circle>(traits_c, "Rat_circle_2")) {
-    py::class_<Rat_circle> rat_circle_c(traits_c, "Rat_circle_2");
-    export_circle_2<Rat_kernel>(rat_circle_c);
-  }
-
-  // Export additional point attributes:
-  auto& pnt_c = *(concepts.m_basic_traits_classes.m_point_2);
-  pnt_c.def(py::init<const Algebraic&, const Algebraic&>())
-    ;
-
-  add_insertion(pnt_c, "__str__");
-  add_insertion(pnt_c, "__repr__");
-
+  // Convenient attributes
   add_attr<Integer>(traits_c, "Integer");
   add_attr<Rational>(traits_c, "Rational");
   add_attr<Rational>(traits_c, "Algebraic");

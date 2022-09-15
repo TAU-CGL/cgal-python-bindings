@@ -22,7 +22,7 @@ Point = Arrangement.Geometry_traits_2.Point_2
 
 # Construct the arrangement.
 arr = Arrangement()
-construct_segment_arrangement(arr)
+construct_segment_arrangement(Aos2, arr)
 
 # Perform a batched point-location query.
 points = [Point(1, 4), Point(4, 3), Point(6, 3), Point(3, 2), Point(5, 2), Point(1, 0)]

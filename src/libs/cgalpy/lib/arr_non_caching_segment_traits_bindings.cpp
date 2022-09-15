@@ -15,6 +15,8 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/aos_2_concepts/make_x_monotone_2_call_operator.hpp"
 #include "CGALPY/aos_2_concepts/intersect_2_call_operator.hpp"
+#include "CGALPY/Kernel/export_point_2.hpp"
+#include "CGALPY/Kernel/export_segment_2.hpp"
 
 namespace py = nanobind;
 
@@ -43,7 +45,18 @@ py::object export_arr_non_caching_segment_traits(py::module_& m) {
   using Compare_y_at_x_left_2 = BGT::Compare_y_at_x_left_2;
   using Equal_2 = BGT::Equal_2;
 
-  add_attr<Xcv>(bt_c, "X_monotone_curve_2");
+  // Point
+  if (! add_attr<Pnt>(bt_c, "Point_2")) {
+    py::class_<Pnt> pnt_c(bt_c, "Point_2");
+    export_point_2<Kernel>(pnt_c);
+  }
+
+  // X-monotone curve
+  if (! add_attr<Xcv>(bt_c, "X_monotone_curve_2")) {
+    py::class_<Xcv> xcv_c(bt_c, "X_monotone_curve_2");
+    export_segment_2<Kernel>(xcv_c);
+  }
+
   add_attr<Ctr_xcv>(bt_c, "Construct_x_monotone_curve_2");
 
   py::class_<Compare_y_at_x_right_2>(bt_c, "Compare_y_at_x_right_2")
