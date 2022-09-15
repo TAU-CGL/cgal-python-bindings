@@ -5,10 +5,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
@@ -16,11 +16,10 @@ Aos2 = CGALPY.Aos2
 Bso2 = CGALPY.Bso2
 General_polygon_set = Bso2.General_polygon_set_2
 Traits = General_polygon_set.Traits_2
-Polygon = General_polygon_set.Polygon_2
+Point = Traits.Point_2
 Curve = Traits.Curve_2
 X_monotone_curve = Traits.X_monotone_curve_2
-curve = Traits.Curve_2
-Point = Traits.Point_2
+Polygon = General_polygon_set.Polygon_2
 
 def append_conic_arc(polygon, arc):
   traits = Traits()

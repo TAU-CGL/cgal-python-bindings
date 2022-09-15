@@ -36,22 +36,22 @@ void init_polygon_2(typename T::Polygon_2& pgn, py::list& lst) {
 
 // Wrap the instance Gps_circle_segment_traits_2 traits <Kernel>.
 py::object export_gps_circle_segment_traits(py::module_& m) {
-  using AGT = CGAL::Arr_circle_segment_traits_2<Kernel>;
-  using GT = CGAL::Gps_circle_segment_traits_2<Kernel>;
-  using Pgn = GT::Polygon_2;
-  using Xcv = GT::X_monotone_curve_2;
+  using Agt = aos2::Arr_geometry_traits_2;
+  using Xcv = Agt::X_monotone_curve_2;
+  using Ggt = CGAL::Gps_circle_segment_traits_2<Kernel>;
+  using Pgn = Ggt::Polygon_2;
 
   export_arr_circle_segment_traits(m);
 
-  py::class_<GT, AGT> traits_c(m, "Gps_circle_segment_traits_2");
+  py::class_<Ggt, Agt> traits_c(m, "Gps_circle_segment_traits_2");
   traits_c.def(py::init<>());
   struct Concepts {
-    Gps_traits_classes<GT> m_traits_classes;
+    Gps_traits_classes<Ggt> m_traits_classes;
   } concepts;
-  export_GpsTraits_2<GT>(traits_c, concepts);
+  export_GpsTraits_2<Ggt>(traits_c, concepts);
   BOOST_ASSERT(concepts.m_traits_classes.m_polygon_2);
   auto& pgn_c = *(concepts.m_traits_classes.m_polygon_2);
-  pgn_c.def("__init__", &bso2::init_polygon_2<GT>);
+  pgn_c.def("__init__", &bso2::init_polygon_2<Ggt>);
 
   using Cci = Pgn::Curve_const_iterator;
   add_iterator<Cci, Cci, const Xcv&>("Curve_iterator", pgn_c);
