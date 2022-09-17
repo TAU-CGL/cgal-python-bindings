@@ -57,26 +57,36 @@ py::object export_arr_conic_traits(py::module_& m) {
       m_directional_x_monotone_traits_classes;
   } concepts;
 
-  py::class_<Integer>(traits_c, "Integer")
-    .def(py::init<>())
-    .def(py::init<const Integer&>())
-    .def(py::init_implicit<int>())
-    ;
+  if (! add_attr<Integer>(traits_c, "Integer")) {
+    py::class_<Integer> int_c(traits_c, "Integer");
+    int_c.def(py::init<const Integer&>())
+      .def(py::init_implicit<int>())
+      ;
+
+    add_insertion(int_c, "__str__");
+    add_insertion(int_c, "__repr__");
+}
 
   if (! add_attr<Rational>(traits_c, "Rational")) {
     py::class_<Rational> rat_c(traits_c, "Rational");
     export_ft(rat_c);
     rat_c.def(py::init_implicit<Integer>())
-      .def(py::init_implicit<int>())
       .def(py::init<const Integer&, const Integer&>())
       ;
+
+    add_insertion(rat_c, "__str__");
+    add_insertion(rat_c, "__repr__");
   }
 
-  py::class_<Algebraic>(traits_c, "Algebraic")
-    .def(py::init<>())
-    .def(py::init_implicit<double>())
-    .def(py::init_implicit<Rational>())
-    ;
+  if (! add_attr<Algebraic>(traits_c, "Algebraic")) {
+    py::class_<Algebraic> alg_c(traits_c, "Algebraic");
+    alg_c.def(py::init_implicit<double>())
+      .def(py::init_implicit<Rational>())
+      ;
+
+    add_insertion(alg_c, "__str__");
+    add_insertion(alg_c, "__repr__");
+  }
 
   if (! add_attr<Rat_pnt>(traits_c, "Rat_point_2")) {
     py::class_<Rat_pnt> rat_pnt_c(traits_c, "Rat_point_2");
@@ -187,7 +197,7 @@ py::object export_arr_conic_traits(py::module_& m) {
   // Convenient attributes
   add_attr<Integer>(traits_c, "Integer");
   add_attr<Rational>(traits_c, "Rational");
-  add_attr<Rational>(traits_c, "Algebraic");
+  add_attr<Algebraic>(traits_c, "Algebraic");
 
   return traits_c;
 }
