@@ -61,7 +61,12 @@ void export_general_polygon_with_holes_2(py::class_<Type>& pwh_c) {
          py::rv_policy::reference_internal)
     .def("outer_boundary",
          py::overload_cast<>(&Pwh::outer_boundary, py::const_))
+    .def("add_hole", py::overload_cast<const Pgn&>(&Pwh::add_hole))
+    .def("erase_hole", &Pwh::erase_hole)
+    .def("has_holes", &Pwh::has_holes)
     .def("number_of_holes", &Pwh::number_of_holes)
+    .def("clear", &Pwh::clear)
+    .def("is_plane", &Pwh::is_plane)
     ;
 
   using Hci = typename Pwh::Hole_const_iterator;
