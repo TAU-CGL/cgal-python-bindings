@@ -55,6 +55,39 @@ ctr_pwh_op(const typename T::Construct_polygon_with_holes_2 ctr,
   return ctr(boundary, begin, end);
 }
 
+// make_curve_iterator dispatches between the case where T::Polygon_2 has
+// begin_curves()/end_curves() and the case it has begin_edges()/end_edges().
+
+// Fall through
+template <typename Pgn, typename C>
+void make_curve_iterator_using_edges(C& ctr_curves_c, ...) { return; }
+
+//
+template <typename Pgn, typename C,
+          typename = decltype(std::declval<Pgn>().edges_end())>
+void make_curve_iterator_using_edges(C& ctr_curves_c, int) {
+  ctr_curves_c.def("curves",
+                   [](const Pgn& pgn) {
+                     return make_iterator(pgn.edges_begin(), pgn.edges_end());
+                   },
+                   py::keep_alive<0, 1>());
+}
+
+// Fall through
+template <typename Pgn, typename C>
+void make_curve_iterator_using_curves(C& ctr_curves_c, ...) { return; }
+
+//
+template <typename Pgn, typename C,
+          typename = decltype(std::declval<Pgn>().curves_end())>
+void make_curve_iterator_using_curves(C& ctr_curves_c, int) {
+  ctr_curves_c.def("curves",
+                   [](const Pgn& pgn) {
+                     return make_iterator(pgn.curves_begin(), pgn.curves_end());
+                   },
+                   py::keep_alive<0, 1>());
+}
+
 }
 
 //
@@ -74,7 +107,17 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
 
   auto& classes = concepts.m_traits_classes;
 
-  // Polygon_2
+  // `Pgn` (resp. Pwh) is either an instance of `CGAL::Polygon_2` (resp.
+  // `CGAL::Polygon_with_holes_2`) or an instance of `CGAL::General_polygon_2`
+  // (resp. `CGAL::General_polygon_with_holes_2`). If the former option holds,
+  // `Pgn` (resp. `Pwh`) is wrapped as part of the wrapping of the `Polygon`
+  // package; see export_polygon_2() (resp.
+  // `export_general_polygon_with_holes_2()`.
+  // Observe that these two functions must be invoked before this function is
+  // invoked. Otherwise, `add_attr()` will return `true` in both calls below,
+  // and as a consequence, `General_polygon_with_holes_2` will be wrapped as
+  // "Polygon_with_holes_2" and `Polygon_with_holes_2` will not be wrapped at
+  // all.
   if (! add_attr<Pgn>(c, "Polygon_2")) {
     classes.m_polygon_2 = new py::class_<Pgn>(c, "Polygon_2");
     export_general_polygon_2<Pgn>(*(classes.m_polygon_2));
@@ -98,14 +141,22 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   classes.m_construct_curves_2 =
     new py::class_<Ctr_curves_2>(c, "Construct_curves_2");
   auto& ctr_curves_c = *(classes.m_construct_curves_2);
+
+  // The code that handles CGAL::Polygon_2 and CGAL::General_polygon_2 differs.
+  // In particular:
+  // (i) The value type of the T::Curve_const_iterator iterator is
+  // `X_monotone_curve_2` in case `T::Polygon_2` is `CGAL::Polygon_2` and
+  // `const X_monotone_curve_2&` in case T::Polygon_2 is
+  // `CGAL::General_polygon_2.
+  // (ii) `CGAL::Polygon_2` has members `edges_begin()` and `edges_end()`, while
+  // `CGAL::General_polygon_2` has `curves_begin()` and `curves_end()`.
+  // Displatch a call (untill the CGAL code is the same if at all.)
+  using Pgn = typename T::Polygon_2;
   using Cci = typename T::Curve_const_iterator;
-  using Xcv = typename T::X_monotone_curve_2;
-  add_iterator<Cci, Cci, Xcv>("Curve_iterator", ctr_curves_c);
-  ctr_curves_c.def("curves",
-                   [](const Pgn& pgn) {
-                     return make_iterator(pgn.curves_begin(), pgn.curves_end());
-                   },
-                   py::keep_alive<0, 1>());
+  using value_type = decltype(*(std::declval<Cci>()));
+  add_iterator<Cci, Cci, value_type>("Curve_iterator", ctr_curves_c);
+  bso2::make_curve_iterator_using_edges<Pgn>(ctr_curves_c, 0);
+  bso2::make_curve_iterator_using_curves<Pgn>(ctr_curves_c, 0);
 
   // Construct_polygon_with_holes_2
   classes.m_construct_polygon_with_holes_2 =
