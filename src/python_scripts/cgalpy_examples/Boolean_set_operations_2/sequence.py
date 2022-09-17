@@ -3,6 +3,7 @@
 import os
 import sys
 import importlib
+from print_utils import *
 
 if len(sys.argv) < 2:
     sys.path.append(os.path.abspath('../precompiled'))
@@ -50,4 +51,5 @@ S.intersection(rect)        # Intersect with the clipping rectangle.
 # Print the result.
 print("The result contains ", S.number_of_polygons_with_holes(), " components:")
 res = S.polygons_with_holes()
-print(res)
+for pwh in res:
+  print_polygon_with_holes(pwh)

@@ -4,9 +4,6 @@ import os
 import sys
 import importlib
 
-# The following is needed to get implicit conversion from int to Algebraic???
-from enum import Enum
-
 if len(sys.argv) < 2:
   sys.path.append(os.path.abspath('../precompiled'))
   lib = 'CGALPY'
@@ -52,8 +49,5 @@ Q = Polygon()
 append_conic_arc(Q, Curve(-1, -9, 0, 0, 0, 9))
 
 # Compute the intersection of the two polygons.
-print(type(P))
-
 res = Bso2.intersection(P, Q)
-print("The intersection:")
 print(res)

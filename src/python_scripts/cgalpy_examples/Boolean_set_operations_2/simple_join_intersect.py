@@ -3,6 +3,7 @@
 import os
 import sys
 import importlib
+from print_utils import *
 
 if len(sys.argv) < 2:
     sys.path.append(os.path.abspath('../precompiled'))
@@ -30,8 +31,8 @@ print("Q = ", Q)
 # Compute the union of P and Q.
 unionR = Polygon_with_holes()
 if Bso2.join(P, Q, unionR):
-  print("The union: ")
-  print(unionR)
+  print("The union: ", end='')
+  print_polygon_with_holes(unionR)
 else:
   print("P and Q are disjoint and their union is trivial.")
 
@@ -39,4 +40,6 @@ else:
 intR = Bso2.intersection(P, Q)
 
 print("The intersection:")
-print(intR)
+for pwh in intR:
+  print('--> ', end='')
+  print_polygon_with_holes(pwh)
