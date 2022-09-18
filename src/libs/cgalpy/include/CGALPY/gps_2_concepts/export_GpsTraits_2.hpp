@@ -132,53 +132,64 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   }
 
   // Construct_polygon_2
-  classes.m_construct_polygon_2 =
-    new py::class_<Ctr_pgn>(c, "Construct_polygon_2");
-  auto& ctr_pgn_c = *(classes.m_construct_polygon_2);
-  ctr_pgn_c.def("__call__", &bso2::ctr_pgn_op<T>);
+  if (! add_attr<Ctr_pgn>(c, "Construct_polygon_2")) {
+    classes.m_construct_polygon_2 =
+      new py::class_<Ctr_pgn>(c, "Construct_polygon_2");
+    auto& ctr_pgn_c = *(classes.m_construct_polygon_2);
+    ctr_pgn_c.def("__call__", &bso2::ctr_pgn_op<T>);
+  }
 
   // Construct_curves_2
-  classes.m_construct_curves_2 =
-    new py::class_<Ctr_curves_2>(c, "Construct_curves_2");
-  auto& ctr_curves_c = *(classes.m_construct_curves_2);
+  if (! add_attr<Ctr_curves_2>(c, "Construct_curves_2")) {
+    classes.m_construct_curves_2 =
+      new py::class_<Ctr_curves_2>(c, "Construct_curves_2");
+    auto& ctr_curves_c = *(classes.m_construct_curves_2);
 
-  // The code that handles CGAL::Polygon_2 and CGAL::General_polygon_2 differs.
-  // In particular:
-  // (i) The value type of the T::Curve_const_iterator iterator is
-  // `X_monotone_curve_2` in case `T::Polygon_2` is `CGAL::Polygon_2` and
-  // `const X_monotone_curve_2&` in case T::Polygon_2 is
-  // `CGAL::General_polygon_2.
-  // (ii) `CGAL::Polygon_2` has members `edges_begin()` and `edges_end()`, while
-  // `CGAL::General_polygon_2` has `curves_begin()` and `curves_end()`.
-  // Displatch a call (untill the CGAL code is the same if at all.)
-  using Pgn = typename T::Polygon_2;
-  using Cci = typename T::Curve_const_iterator;
-  using value_type = decltype(*(std::declval<Cci>()));
-  add_iterator<Cci, Cci, value_type>("Curve_iterator", ctr_curves_c);
-  bso2::make_curve_iterator_using_edges<Pgn>(ctr_curves_c, 0);
-  bso2::make_curve_iterator_using_curves<Pgn>(ctr_curves_c, 0);
+    // The code that handles CGAL::Polygon_2 and CGAL::General_polygon_2
+    // differs.  In particular: (i) The value type of the
+    // T::Curve_const_iterator iterator is `X_monotone_curve_2` in case
+    // `T::Polygon_2` is `CGAL::Polygon_2` and `const X_monotone_curve_2&` in
+    // case T::Polygon_2 is `CGAL::General_polygon_2.  (ii) `CGAL::Polygon_2`
+    // has members `edges_begin()` and `edges_end()`, while
+    // `CGAL::General_polygon_2` has `curves_begin()` and `curves_end()`.
+    // Displatch a call (untill the CGAL code is the same if at all.)
+    using Pgn = typename T::Polygon_2;
+    using Cci = typename T::Curve_const_iterator;
+    using value_type = decltype(*(std::declval<Cci>()));
+    add_iterator<Cci, Cci, value_type>("Curve_iterator", ctr_curves_c);
+    bso2::make_curve_iterator_using_edges<Pgn>(ctr_curves_c, 0);
+    bso2::make_curve_iterator_using_curves<Pgn>(ctr_curves_c, 0);
+  }
 
   // Construct_polygon_with_holes_2
-  classes.m_construct_polygon_with_holes_2 =
-    new py::class_<Ctr_pwh>(c, "Construct_polygon_with_holes_2");
-  auto& ctr_pwh_c = *(classes.m_construct_polygon_with_holes_2);
-  using Ctr_pwh_op1 = Pwh(Ctr_pwh::*)(const Pgn&) const;
-  ctr_pwh_c.def("__call__", static_cast<Ctr_pwh_op1>(&Ctr_pwh::operator()));
-  ctr_pwh_c.def("__call__", &bso2::ctr_pwh_op<T>);
+  if (! add_attr<Ctr_pwh>(c, "Construct_polygon_with_holes_2")) {
+    classes.m_construct_polygon_with_holes_2 =
+      new py::class_<Ctr_pwh>(c, "Construct_polygon_with_holes_2");
+    auto& ctr_pwh_c = *(classes.m_construct_polygon_with_holes_2);
+    using Ctr_pwh_op1 = Pwh(Ctr_pwh::*)(const Pgn&) const;
+    ctr_pwh_c.def("__call__", static_cast<Ctr_pwh_op1>(&Ctr_pwh::operator()));
+    ctr_pwh_c.def("__call__", &bso2::ctr_pwh_op<T>);
+  }
 
   // Construct_outer_boundary
-  classes.m_construct_outer_boundary =
-    new py::class_<Ctr_outer_boundary>(c, "Construct_outer_boundary");
-  classes.m_construct_outer_boundary->
-    def("__call__", &Ctr_outer_boundary::operator());
+  if (! add_attr<Ctr_outer_boundary>(c, "Construct_outer_boundary")) {
+    classes.m_construct_outer_boundary =
+      new py::class_<Ctr_outer_boundary>(c, "Construct_outer_boundary");
+    classes.m_construct_outer_boundary->
+      def("__call__", &Ctr_outer_boundary::operator());
+  }
 
   // Construct_holes
-  classes.m_construct_holes = new py::class_<Ctr_holes>(c, "Construct_holes");
-  classes.m_construct_holes->def("__call__", &Ctr_holes::operator());
+  if (! add_attr<Ctr_holes>(c, "Construct_holes")) {
+    classes.m_construct_holes = new py::class_<Ctr_holes>(c, "Construct_holes");
+    classes.m_construct_holes->def("__call__", &Ctr_holes::operator());
+  }
 
   // Is unbounded
-  classes.m_is_unbounded = new py::class_<Is_unbounded>(c, "Is_unbounded");
-  classes.m_is_unbounded->def("__call__", &Is_unbounded::operator());
+  if (! add_attr<Is_unbounded>(c, "Is_unbounded")) {
+    classes.m_is_unbounded = new py::class_<Is_unbounded>(c, "Is_unbounded");
+    classes.m_is_unbounded->def("__call__", &Is_unbounded::operator());
+  }
 
   c.def("construct_polygon_2_object", &T::construct_polygon_2_object)
     .def("construct_curves_2_object", &T::construct_curves_2_object)
