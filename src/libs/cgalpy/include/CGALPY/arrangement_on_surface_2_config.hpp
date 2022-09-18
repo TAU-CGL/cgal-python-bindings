@@ -10,6 +10,9 @@
 #ifndef CGALPY_ARRANGEMENT_ON_SURFACE_2_CONFIG_HPP
 #define CGALPY_ARRANGEMENT_ON_SURFACE_2_CONFIG_HPP
 
+#include <CGAL/Arr_segment_traits_2.h>
+#include <CGAL/Arr_non_caching_segment_traits_2.h>
+#include <CGAL/Arr_circle_segment_traits_2.h>
 #include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Arrangement_on_surface_2.h>
 #include <CGAL/Arrangement_on_surface_with_history_2.h>
@@ -68,6 +71,10 @@ template <typename Base>
 struct Tr<false, Base> { typedef Base type; };
 template <>
 struct Tr<true, CGAL::Arr_segment_traits_2<Kernel>> {
+  typedef CGAL::Gps_segment_traits_2<Kernel, Point_2_container> type;
+};
+template <>
+struct Tr<true, CGAL::Arr_non_caching_segment_traits_2<Kernel>> {
   typedef CGAL::Gps_segment_traits_2<Kernel, Point_2_container> type;
 };
 template <>
