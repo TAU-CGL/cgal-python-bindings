@@ -648,48 +648,38 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .export_values()
     ;
 
-  // Export the traits classes
-#ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  auto traits_c = export_gps_segment_traits(m);
+  export_arr_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  auto traits_c = export_gps_segment_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-  auto traits_c = export_gps_circle_segment_traits(m);
+  export_arr_non_caching_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-  auto traits_c = export_gps_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-  auto traits_c = export_gps_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  auto traits_c = export_gps_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
-  auto traits_c = export_gps_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  auto traits_c = export_gps_traits(m);
-#else
-  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_GPS_TRAITS");
-#endif
-#else
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  auto traits_c = export_arr_segment_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  auto traits_c = export_arr_non_caching_segment_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-  auto traits_c = export_arr_linear_traits(m);
+  export_arr_linear_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-  auto traits_c = export_arr_circle_segment_traits(m);
+  export_arr_circle_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-  auto traits_c = export_arr_conic_traits(m);
+  export_arr_conic_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
-  auto traits_c = export_arr_bezier_traits(m);
+  export_arr_bezier_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
-  auto traits_c = export_arr_rational_function_traits(m);
+  export_arr_rational_function_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  auto traits_c = export_arr_algebraic_segment_traits(m);
+  export_arr_algebraic_segment_traits(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  auto traits_c = export_arr_geodesic_arc_on_sphere_traits(m);
+  export_arr_geodesic_arc_on_sphere_traits(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
+#endif
+
+#if defined(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
+#if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS))
+  export_gps_segment_traits(m);
+#else
+  export_gps_traits(m);
+#endif
+
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+  export_gps_circle_segment_traits(m);
 #endif
 #endif
 
