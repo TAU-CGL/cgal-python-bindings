@@ -155,8 +155,7 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
     // Displatch a call (untill the CGAL code is the same if at all.)
     using Pgn = typename T::Polygon_2;
     using Cci = typename T::Curve_const_iterator;
-    using value_type = decltype(*(std::declval<Cci>()));
-    add_iterator<Cci, Cci, value_type>("Curve_iterator", ctr_curves_c);
+    add_iterator<Cci, Cci>("Curve_iterator", ctr_curves_c);
     bso2::make_curve_iterator_using_edges<Pgn>(ctr_curves_c, 0);
     bso2::make_curve_iterator_using_curves<Pgn>(ctr_curves_c, 0);
   }
