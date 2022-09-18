@@ -12,15 +12,30 @@
 
 #include <nanobind/nanobind.h>
 
+#include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
+
+namespace bso2 {
+
+// Initialize a general polygon from a list of x-monotone curves.
+template <typename T>
+void init_polygon_2(T& pgn, py::list& lst) {
+  using Xcv = typename T::X_monotone_curve_2;
+  auto begin = stl_input_iterator<Xcv>(lst);
+  auto end = stl_input_iterator<Xcv>(lst, false);
+  new (&pgn) T(begin, end);
+}
+
+}
 
 //
 template <typename Type>
 void export_general_polygon_2(py::class_<Type>& co) {
   co.def(py::init<>())
     .def(py::init<const Type&>())
+    .def("__init__", &bso2::init_polygon_2<Type>)
     .def("push_back", &Type::push_back)
     .def("orientation", &Type::orientation)
     .def("is_empty", &Type::is_empty)
