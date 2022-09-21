@@ -167,6 +167,12 @@ if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
   list (APPEND CGALPY_MODULES Ss)
   set (CGALPY_Ss_FILTERS [=[{}]=])
 endif()
+# Surface mesh
+if (CGALPY_SURFACE_MESH_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/surface_mesh_bindings.cpp)
+  list (APPEND CGALPY_MODULES Sm)
+  set (CGALPY_Sm_FILTERS [=[{}]=])
+endif()
 # 2D triangulation
 if (CGALPY_TRIANGULATION_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_2_bindings.cpp)
@@ -251,6 +257,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   # Spatial searching
   if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
     get_spatial_searching_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
+  # Surface mesh
+  if (CGALPY_SURFACE_MESH_BINDINGS)
+    get_surface_mesh_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D triangulation
