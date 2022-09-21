@@ -112,23 +112,21 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   // (resp. `CGAL::General_polygon_with_holes_2`). If the former option holds,
   // `Pgn` (resp. `Pwh`) is wrapped as part of the wrapping of the `Polygon`
   // package; see export_polygon_2() (resp.
-  // `export_general_polygon_with_holes_2()`.
-  // Observe that these two functions must be invoked before this function is
-  // invoked. Otherwise, `add_attr()` will return `true` in both calls below,
-  // and as a consequence, `General_polygon_with_holes_2` will be wrapped as
-  // "Polygon_with_holes_2" and `Polygon_with_holes_2` will not be wrapped at
-  // all.
+  // `export_general_polygon_with_holes_2()`.  Observe that these two functions
+  // must be invoked before this function is invoked. Otherwise, `add_attr()`
+  // will return `false` in both calls below, and as a consequence, an attempt
+  // will be made to wrap `Polygon_2` and `Polygon_with_holes_2` as
+  // "General_polygon_2" and `General_polygon_with_holes_2`, respectively.
   if (! add_attr<Pgn>(c, "Polygon_2")) {
     classes.m_polygon_2 = new py::class_<Pgn>(c, "Polygon_2");
-    export_general_polygon_2<Pgn>(*(classes.m_polygon_2));
+    export_general_polygon_2(*(classes.m_polygon_2));
   }
 
   // Polygon_with_holes_2
   if (! add_attr<Pwh>(c, "Polygon_with_holes_2")) {
     classes.m_polygon_with_holes_2 =
       new py::class_<Pwh>(c, "Polygon_with_holes_2");
-    export_general_polygon_with_holes_2<Pwh>
-      (*(classes.m_polygon_with_holes_2));
+    export_general_polygon_with_holes_2(*(classes.m_polygon_with_holes_2));
   }
 
   // Construct_polygon_2

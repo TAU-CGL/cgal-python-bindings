@@ -16,6 +16,7 @@
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
+#include "CGALPY/add_extraction.hpp"
 
 namespace py = nanobind;
 
@@ -57,5 +58,6 @@ void export_polygon_with_holes_2(py::module_& m) {
 
     add_insertion(pwh_c, "__str__");
     add_insertion(pwh_c, "__repr__");
+    add_extraction(pwh_c);
   }
 }
