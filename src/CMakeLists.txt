@@ -80,6 +80,7 @@ select_boolean_set_operations_2()
 select_polygon_partitioning()
 select_triangulation_3()
 select_alpha_shape_3()
+select_surface_mesh()
 
 if (${CGALPY_KERNEL_D_BINDINGS} AND
     ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
