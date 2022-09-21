@@ -155,6 +155,12 @@ if (CGALPY_POLYGON_2_BINDINGS)
   list (APPEND CGALPY_MODULES Pol2)
   set (CGALPY_Pol2_FILTERS [=[{}]=])
 endif()
+# Polygon mesh processinf
+if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_mesh_processing_bindings.cpp)
+  list (APPEND CGALPY_MODULES Pmp)
+  set (CGALPY_Pmp_FILTERS [=[{}]=])
+endif()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
@@ -247,6 +253,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   # 2D Minkowski sum
   if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
     get_minkowski_sum_2_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
+  # Polygon mesh processing
+  if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
+    get_polygon_mesh_processing_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D polygon partitioning
