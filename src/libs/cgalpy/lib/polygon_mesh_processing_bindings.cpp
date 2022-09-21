@@ -44,17 +44,22 @@ connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor
 
 //
 template <typename PolygonMesh>
-int connected_components(const PolygonMesh& pmesh, py::dict fcm,
-                         py::dict parameters = py::dict()) {
+py::list connected_components(const PolygonMesh& pmesh,
+                               py::dict parameters = py::dict()) {
   using Pm = PolygonMesh;
   // using Fi = typename Pm::Face_index;
 
   auto fccmap = CGAL::get(CGAL::dynamic_face_property_t<std::size_t>(), pmesh);
   auto num = pmp::connected_components(pmesh, fccmap);
   py::dict dct;
-  for (auto f : pmesh.faces())
+  for (auto f : pmesh.faces()) {
     std::cout << "Index: " << f.idx() << ": " << get(fccmap, f) << std::endl;
-  return num;
+    dct[py::cast(f)] = py::cast(get(fccmap, f));
+  }
+  py::list lst;
+  lst.append(num);
+  lst.append(std::move(dct));
+  return lst;
 }
 
 }
@@ -63,7 +68,9 @@ int connected_components(const PolygonMesh& pmesh, py::dict fcm,
 void export_polygon_mesh_processing(py::module_& m) {
   using Sm_3 = CGAL::Surface_mesh<Kernel::Point_3>;
 
-  m.def("connected_component", &detail::connected_component<Sm_3>);
+  m.def("connected_component", &detail::connected_component<Sm_3>,
+        py::arg("seed_face"), py::arg("pmesh"),
+        py::arg("parameters") = py::dict());
   m.def("connected_components", &detail::connected_components<Sm_3>,
-        py::arg("pmesh"), py::arg("fcm"), py::arg("parameters") = py::dict());
+        py::arg("pmesh"), py::arg("parameters") = py::dict());
 }
