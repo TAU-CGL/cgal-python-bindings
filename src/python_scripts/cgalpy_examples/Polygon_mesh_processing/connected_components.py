@@ -24,5 +24,6 @@ p4 = Point_3(1, 0, 2)
 mesh = Sm.make_tetrahedron(p1, p2, p3, p4)
 fcp = {}
 params = {}
-res = Pmp.connected_components(mesh, fcp)
-print(res)
+num, fccmap = Pmp.connected_components(mesh)
+print(num)
+print(fccmap)

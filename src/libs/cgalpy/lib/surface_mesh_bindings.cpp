@@ -8,6 +8,8 @@
 
 #define CGAL_USE_BASIC_VIEWER
 
+#include <string>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
@@ -104,6 +106,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     py::class_<Vi, Sm_vi>(m, "Vertex_index")
       .def(py::init<>())
       .def(py::init<size_type>())
+      .def("__str__", [](const Vi& smi){ return std::to_string(smi.idx()); })
+      .def("__repr__", [](const Vi& smi){ return std::to_string(smi.idx()); })
       ;
   }
 
@@ -116,6 +120,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("idx", &Ei::idx)
       .def("reset", &Ei::reset)
       .def("is_valid", &Ei::is_valid)
+      .def("__str__", [](const Ei& smi){ return std::to_string(smi.idx()); })
+      .def("__repr__", [](const Ei& smi){ return std::to_string(smi.idx()); })
       ;
   }
 
@@ -130,6 +136,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     py::class_<Hi, Sm_hi>(m, "Halfedge_index")
       .def(py::init<>())
       .def(py::init<size_type>())
+      .def("__str__", [](const Hi& smi){ return std::to_string(smi.idx()); })
+      .def("__repr__", [](const Hi& smi){ return std::to_string(smi.idx()); })
       ;
   }
 
@@ -144,6 +152,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     py::class_<Fi, Sm_fi>(m, "Face_index")
       .def(py::init<>())
       .def(py::init<size_type>())
+      .def("__str__", [](const Fi& smi){ return std::to_string(smi.idx()); })
+      .def("__repr__", [](const Fi& smi){ return std::to_string(smi.idx()); })
       ;
   }
 
