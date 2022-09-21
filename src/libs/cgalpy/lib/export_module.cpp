@@ -22,6 +22,7 @@ void export_point_location(py::module_&);
 void export_object(py::module_&);
 void export_polygon_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
+void export_polygon_mesh_processing(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
 void export_general_polygon_set_2(py::module_&);
@@ -131,5 +132,10 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_SURFACE_MESH_BINDINGS
   auto sm_m = m.def_submodule("Sm");
   export_surface_mesh(sm_m);
+#endif
+
+#ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
+  auto pmp_m = m.def_submodule("Pmp");
+  export_polygon_mesh_processing(pmp_m);
 #endif
 }

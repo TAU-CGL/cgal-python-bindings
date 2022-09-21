@@ -22,10 +22,25 @@ namespace py = nanobind;
 
 namespace sm {
 
+//
+template <typename SurfaceMesh>
+SurfaceMesh make_tetrahedron(const typename SurfaceMesh::Point& p1,
+                             const typename SurfaceMesh::Point& p2,
+                             const typename SurfaceMesh::Point& p3,
+                             const typename SurfaceMesh::Point& p4) {
+  using Sm = SurfaceMesh;
+
+  Sm sm;
+  CGAL::make_tetrahedron(p1, p2, p3, p4, sm);
+  return sm;
+}
+
 // Read a surface mesh from a file.
 template <typename SurfaceMesh>
 SurfaceMesh read_polygon_mesh(const std::string& filename) {
-  SurfaceMesh sm;
+  using Sm = SurfaceMesh;
+
+  Sm sm;
   if (! CGAL::IO::read_polygon_mesh(filename, sm))
     throw std::runtime_error("Cannot read file!");
   return sm;
@@ -51,6 +66,18 @@ typename SurfaceMesh::Face_index add_face(SurfaceMesh& sm, py::list& lst) {
   return sm.add_face(CGAL::make_range(begin, end));
 }
 
+template <typename SurfaceMesh, typename C>
+void add_sm_index(C& c) {
+  using Sm = SurfaceMesh;
+  using size_type = typename Sm::size_type;
+  using Sm_i = typename C::Type;
+
+  c.def(py::init<>())
+    .def(py::init<size_type>())
+    .def("idx", &Sm_i::idx)
+    ;
+}
+
 }
 
 // Export Surface_mesh.
@@ -67,8 +94,14 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   // Vertex_index
+  using Sm_vi = typename CGAL::SM_Index<Vi>;
+  if (! add_attr<Sm_vi>(m, "SM_Index_vertex_index")) {
+    py::class_<Sm_vi> sm_vi_c(m, "SM_vertex_index");
+    sm::add_sm_index<Sm>(sm_vi_c);
+  }
+
   if (! add_attr<Vi>(m, "Vertex_index")) {
-    py::class_<Vi>(m, "Vertex_index")
+    py::class_<Vi, Sm_vi>(m, "Vertex_index")
       .def(py::init<>())
       .def(py::init<size_type>())
       ;
@@ -79,25 +112,42 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     py::class_<Ei>(m, "Edge_index")
       .def(py::init<>())
       .def(py::init<size_type>())
+      .def("halfedge", &Ei::halfedge)
+      .def("idx", &Ei::idx)
+      .def("reset", &Ei::reset)
+      .def("is_valid", &Ei::is_valid)
       ;
   }
 
   // Halfedge_index
+  using Sm_hi = typename CGAL::SM_Index<Hi>;
+  if (! add_attr<Sm_hi>(m, "SM_halfedge_index")) {
+    py::class_<Sm_hi> sm_hi_c(m, "SM_halfedge_index");
+    sm::add_sm_index<Sm>(sm_hi_c);
+  }
+
   if (! add_attr<Hi>(m, "Halfedge_index")) {
-    py::class_<Hi>(m, "Halfedge_index")
+    py::class_<Hi, Sm_hi>(m, "Halfedge_index")
       .def(py::init<>())
       .def(py::init<size_type>())
       ;
   }
 
   // Face_index
+  using Sm_fi = typename CGAL::SM_Index<Fi>;
+  if (! add_attr<Sm_fi>(m, "SM_face_index")) {
+    py::class_<Sm_fi> sm_fi_c(m, "SM_face_index");
+    sm::add_sm_index<Sm>(sm_fi_c);
+  }
+
   if (! add_attr<Fi>(m, "Face_index")) {
-    py::class_<Fi>(m, "Face_index")
+    py::class_<Fi, Sm_fi>(m, "Face_index")
       .def(py::init<>())
       .def(py::init<size_type>())
       ;
   }
 
+  // Surface mesh
   if (! add_attr<Sm>(m, name)) {
 
     py::class_<Sm> sm3_c(m, name);
@@ -155,6 +205,7 @@ void export_surface_mesh(py::module_& m) {
 
   // Read
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>);
+  m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
 }
 
 namespace py = nanobind;
