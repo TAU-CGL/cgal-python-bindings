@@ -14,39 +14,52 @@
 
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/add_extraction.hpp"
 
 namespace py = nanobind;
 
 namespace bso2 {
 
 // Initialize a general polygon from a list of x-monotone curves.
-template <typename T>
-void init_polygon_2(T& pgn, py::list& lst) {
-  using Xcv = typename T::X_monotone_curve_2;
+template <typename GeneralPolygon_2>
+void init_polygon_2(GeneralPolygon_2& pgn, py::list& lst) {
+  using Gpgn = GeneralPolygon_2;
+  using Xcv = typename Gpgn::X_monotone_curve_2;
   auto begin = stl_input_iterator<Xcv>(lst);
   auto end = stl_input_iterator<Xcv>(lst, false);
-  new (&pgn) T(begin, end);
+  new (&pgn) Gpgn(begin, end);
 }
 
 }
 
-//
-template <typename Type>
-void export_general_polygon_2(py::class_<Type>& co) {
-  co.def(py::init<>())
-    .def(py::init<const Type&>())
-    .def("__init__", &bso2::init_polygon_2<Type>)
-    .def("push_back", &Type::push_back)
-    .def("orientation", &Type::orientation)
-    .def("is_empty", &Type::is_empty)
-    .def("size", &Type::size)
-    .def("bbox", &Type::bbox)
-    .def("clear", &Type::clear)
-    .def("reverse_orientation", &Type::reverse_orientation)
+// Export the attributes of General_polygon_2.
+template <typename GeneralPolygon_2>
+inline void
+export_general_polygon_2(py::class_<GeneralPolygon_2>& pgn_c) {
+  using Gpgn = GeneralPolygon_2;
+  pgn_c.def(py::init<>())
+    .def(py::init<const Gpgn&>())
+    .def("__init__", &bso2::init_polygon_2<Gpgn>)
+    .def("push_back", &Gpgn::push_back)
+    .def("orientation", &Gpgn::orientation)
+    .def("is_empty", &Gpgn::is_empty)
+    .def("size", &Gpgn::size)
+    .def("bbox", &Gpgn::bbox)
+    .def("clear", &Gpgn::clear)
+    .def("reverse_orientation", &Gpgn::reverse_orientation)
     ;
 
-  add_insertion(co, "__str__");
-  add_insertion(co, "__repr__");
+  add_insertion(pgn_c, "__str__");
+  add_insertion(pgn_c, "__repr__");
+  add_extraction(pgn_c);
+}
+
+/*! Capture the call to export a Polygon_2<> and ensure that it is not invoked.
+ */
+template <typename Kernel, typename Container>
+inline void export_general_polygon_2
+(py::class_<CGAL::Polygon_2<Kernel, Container>>& /* pgn_c */) {
+  throw std::runtime_error("Attempting to export Polygon_2 as General_polygon_2!");
 }
 
 #endif
