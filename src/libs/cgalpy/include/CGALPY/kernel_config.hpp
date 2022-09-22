@@ -27,6 +27,8 @@
 #define CGALPY_KERNEL 0
 #endif
 
+// Determine whether the dD kernel is an an EPEC type.
+// An EPEC type has a non trivial FT
 constexpr bool is_exact_ft() {
   return ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                      \
           (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||            \

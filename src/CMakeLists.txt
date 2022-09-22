@@ -2,7 +2,8 @@ set(CGALPY_PY_MIN_VERSION 3.5)
 set(CGALPY_BOOST_MIN_VERSION 1.68.0)
 
 # Find required libraries
-find_package(CGAL REQUIRED COMPONENTS Core)
+# \todo Include Qt5 conditionally
+find_package(CGAL REQUIRED COMPONENTS Core Qt5)
 if (NOT CGAL_FOUND)
   message(STATUS "This library cannot be compiled, as it requires CGAL.")
   return()
@@ -33,6 +34,9 @@ if(NOT Boost_FOUND)
   message (STATUS "This library cannot be compiled, as it requires Boost.")
   return()
 endif()
+
+# find_package(tsl-robin-map CONFIG REQUIRED)
+find_package(nanobind CONFIG REQUIRED)
 
 # Add includes and libs
 include_directories(${PYTHON_INCLUDE_DIRS})
@@ -76,6 +80,8 @@ select_boolean_set_operations_2()
 select_polygon_partitioning()
 select_triangulation_3()
 select_alpha_shape_3()
+select_surface_mesh()
+select_polygon_mesh_processing()
 
 if (${CGALPY_KERNEL_D_BINDINGS} AND
     ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR

@@ -10,69 +10,73 @@
 #ifndef CGALPY_PYTHON_FUNCTOR
 #define CGALPY_PYTHON_FUNCTOR
 
-#include <boost/python.hpp>
+#include <boost/core/ref.hpp>
 
-namespace bp = boost::python;
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
 
 //https://stackoverflow.com/a/26833886 regarding calling a python functor in C++
 template <typename T0, typename T1>
 class Python_functor_1 {
 private:
-  bp::object m_python_functor;
+  py::object m_python_functor;
 
 public:
   Python_functor_1() {}
-  Python_functor_1(bp::object python_functor) : m_python_functor(python_functor)
+  Python_functor_1(py::object python_functor) : m_python_functor(python_functor)
   {}
 
-  T1 operator()(T0 a) const { return bp::extract<T1>(m_python_functor(a)); }
+  T1 operator()(T0 a) const { return py::cast<T1>(m_python_functor(a)); }
 };
 
 template <typename T0, typename T1, typename T2>
 class Python_functor_2 {
 private:
-  bp::object m_python_functor;
+  py::object m_python_functor;
 
 public:
   Python_functor_2() {}
-  Python_functor_2(bp::object python_functor) :
+  Python_functor_2(py::object python_functor) :
     m_python_functor(python_functor)
   {}
 
   T2 operator()(T0 a, T1 b) const
-  { return bp::extract<T2>(m_python_functor(a, b)); }
+  { return py::cast<T2>(m_python_functor(a, b)); }
 };
 
 template <typename T0, typename T1, typename T2>
 class Python_functor_2_ref {
 private:
-  bp::object m_python_functor;
+  py::object m_python_functor;
 
 public:
   Python_functor_2_ref() {}
-  Python_functor_2_ref(bp::object python_functor) :
+  Python_functor_2_ref(py::object python_functor) :
     m_python_functor(python_functor)
   {}
 
   T2 operator()(const T0& a, const T1& b) const
-  { return bp::extract<T2>(m_python_functor(a, b)); }
+  { return py::cast<T2>(m_python_functor(a, b)); }
 };
 
 template <typename T0, typename T1, typename T2>
 class Python_functor_3_ref {
 private:
-  bp::object m_python_functor;
+  py::object m_python_functor;
 
 public:
-  Python_functor_3_ref() {}
-  Python_functor_3_ref(bp::object python_functor) :
+  Python_functor_3_ref() : m_python_functor(py::none()) {}
+  Python_functor_3_ref(py::object python_functor) :
     m_python_functor(python_functor)
   {}
+  ~Python_functor_3_ref() { m_python_functor = py::none(); }
 
   void operator()(const T0& a, const T1& b, T2& r) const {
     // By default, arguments are copied into new Python objects.
-    // Override this behavior by the use of boost::ref()
-    if (! m_python_functor.is_none()) m_python_functor(a, b, boost::ref(r));
+    // This behavior can be override by the use of std::ref(x),
+    // or, better yet, passing a pointer, which is automatically wrapped.
+    if (! m_python_functor.is_none()) m_python_functor(&a, &b, &r);
   }
 };
 

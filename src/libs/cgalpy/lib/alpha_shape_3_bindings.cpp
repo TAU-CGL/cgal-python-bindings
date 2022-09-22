@@ -6,9 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include <CGAL/iterator.h>
 
@@ -16,58 +14,58 @@
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/alpha_shape_3_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace as3 {
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-void make_alpha_shape(Alpha_shape_3& as, bp::list& lst) {
+void make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
   if (! lst) return;
-  if (! bp::extract<Point>(lst[0]).check()) return;
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
-  // auto v = std::vector<Point>(begin, end);
-  // as.make_alpha_shape(v.begin(), v.end());
+  if (! py::isinstance<Point>(lst[0])) return;
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
   as.make_alpha_shape(begin, end);
 }
 #endif
 
-Alpha_shape_3* as_init1(bp::list& lst) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end);
+  void as_init1(Alpha_shape_3& as, py::list& lst) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
+  new (&as) Alpha_shape_3(begin, end);
 }
 
-Alpha_shape_3* as_init2(bp::list& lst, const FT& alpha) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end, alpha);
+  void as_init2(Alpha_shape_3& as, py::list& lst, const FT& alpha) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
+  new (&as) Alpha_shape_3(begin, end, alpha);
 }
 
-Alpha_shape_3* as_init3(bp::list& lst, double alpha) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end, alpha);
+  void as_init3(Alpha_shape_3& as, py::list& lst, double alpha) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
+  new (&as) Alpha_shape_3(begin, end, alpha);
 }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-Alpha_shape_3* as_init4(bp::list& lst, const FT& alpha, Mode m) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end, alpha, m);
+  void as_init4(Alpha_shape_3& as, py::list& lst, const FT& alpha, Mode m) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
+  new (&as) Alpha_shape_3(begin, end, alpha, m);
 }
 
-Alpha_shape_3* as_init5(bp::list& lst, double alpha, Mode m) {
-  auto begin = bp::stl_input_iterator<Point>(lst);
-  auto end = bp::stl_input_iterator<Point>();
-  return new Alpha_shape_3(begin, end, alpha, m);
+  void as_init5(Alpha_shape_3& as, py::list& lst, double alpha, Mode m) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
+  new (&as) Alpha_shape_3(begin, end, alpha, m);
 }
 
 const FT& next(Alpha_iterator it) {
   if (it == Alpha_iterator()) {
     PyErr_SetString(PyExc_StopIteration, "Invalid alpha iterator");
-    bp::throw_error_already_set();
+    py::throw_error_already_set();
   }
   return *it++;
 }
@@ -93,6 +91,7 @@ private:
 
 public:
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
+  //
   Alpha_shape_3_test(const Alpha_shape_3& as, Classification_type type,
                      const FT& alpha) :
     m_alpha_shape(as),
@@ -100,12 +99,14 @@ public:
     m_alpha(alpha)
   {}
 #else
+  //
   Alpha_shape_3_test(const Alpha_shape_3& as, Classification_type type) :
     m_alpha_shape(as),
     m_type(type)
   {}
 #endif
 
+  //
   bool operator()(Finite_cells_iterator cit) const {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(cit, m_alpha) == m_type;
@@ -114,6 +115,7 @@ public:
 #endif
   }
 
+  //
   bool operator()(Finite_facets_iterator fit) const {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(*fit, m_alpha) == m_type;
@@ -122,6 +124,7 @@ public:
 #endif
   }
 
+  //
   bool operator()(Finite_edges_iterator eit) const {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(*eit, m_alpha) == m_type;
@@ -130,6 +133,7 @@ public:
 #endif
   }
 
+  //
   bool operator()(Finite_vertices_iterator vit) const {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     return m_alpha_shape.classify(vit, m_alpha) == m_type;
@@ -145,8 +149,8 @@ typedef CGAL::Filter_iterator<Finite_facets_iterator, Test>    Filter_facet_iter
 typedef CGAL::Filter_iterator<Finite_edges_iterator, Test>     Filter_edge_iterator;
 typedef CGAL::Filter_iterator<Finite_vertices_iterator, Test>  Filter_vertex_iterator;
 
-
-bp::list alpha_shape_cells(const Alpha_shape_3& as,
+//
+py::list alpha_shape_cells(const Alpha_shape_3& as,
                            Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
                            , const FT& alpha
@@ -159,15 +163,16 @@ bp::list alpha_shape_cells(const Alpha_shape_3& as,
 #endif
   Filter_cell_iterator first(as.finite_cells_end(), test_as_cell, as.finite_cells_begin());
   Filter_cell_iterator last(as.finite_cells_end(), test_as_cell, as.finite_cells_end());
-  // return bp::range<return_internal_reference<>, Alpha_shape_3>(&Alpha_shape_3::finite_cells_begin,
+  // return py::range<return_internal_reference<>, Alpha_shape_3>(&Alpha_shape_3::finite_cells_begin,
   //                                                                         &Alpha_shape_3::finite_cells_end);
-  // return bp::range<return_internal_reference<>>(first, last);
-  bp::list lst;
+  // return py::range<return_internal_reference<>>(first, last);
+  py::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
-  bp::list alpha_shape_facets(const Alpha_shape_3& as,
+//
+py::list alpha_shape_facets(const Alpha_shape_3& as,
                               Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
                               , const FT& alpha
@@ -180,12 +185,13 @@ bp::list alpha_shape_cells(const Alpha_shape_3& as,
 #endif
   Filter_facet_iterator first(as.finite_facets_end(), test_as_facet, as.finite_facets_begin());
   Filter_facet_iterator last(as.finite_facets_end(), test_as_facet, as.finite_facets_end());
-  bp::list lst;
+  py::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
-bp::list alpha_shape_edges(const Alpha_shape_3& as,
+//
+py::list alpha_shape_edges(const Alpha_shape_3& as,
                            Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
                            , const FT& alpha
@@ -198,12 +204,13 @@ bp::list alpha_shape_edges(const Alpha_shape_3& as,
 #endif
   Filter_edge_iterator first(as.finite_edges_end(), test_as_edge, as.finite_edges_begin());
   Filter_edge_iterator last(as.finite_edges_end(), test_as_edge, as.finite_edges_end());
-  bp::list lst;
+  py::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
-bp::list alpha_shape_vertices(const Alpha_shape_3& as,
+//
+py::list alpha_shape_vertices(const Alpha_shape_3& as,
                               Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
                               , const FT& alpha
@@ -216,28 +223,31 @@ bp::list alpha_shape_vertices(const Alpha_shape_3& as,
 #endif
   Filter_vertex_iterator first(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_begin());
   Filter_vertex_iterator last(as.finite_vertices_end(), test_as_vertex, as.finite_vertices_end());
-  bp::list lst;
+  py::list lst;
   for (auto it = first; it != last; ++it) lst.append(*it);
   return lst;
 }
 
 #ifdef CGALPY_AS3_EXACT_COMPARISON
 
-const typename FT::Exact_nt& FT_exact(const FT& ft)
-{ return ft.exact(); }
+//
+const typename FT::Exact_nt& FT_exact(const FT& ft) { return ft.exact(); }
 
+//
 const typename FT::Approximate_nt& FT_approx(const FT& ft)
 { return ft.approx(); }
 
+//
 double FT_to_double(FT& ft) { return CGAL::to_double(ft); }
 
 #endif
 
 } // end of as3 namespace
 
-void export_alpha_shape_3() {
-  typedef as3::Alpha_shape_3                    As3;
-  typedef tri3::Triangulation_3                 Tri3;
+//
+void export_alpha_shape_3(py::module_& m) {
+  using As3 = as3::Alpha_shape_3;
+  using Tri3 = tri3::Triangulation_3;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   as3::size_type (As3::*number_of_solid_components1)() const                     = &As3::number_of_solid_components;
@@ -262,20 +272,20 @@ void export_alpha_shape_3() {
 
 #endif
 
-  bp::class_<As3, boost::noncopyable>("Alpha_shape_3")
-    .def(bp::init<>())
+  py::class_<As3> as3_c(m, "Alpha_shape_3");
+  as3_c.def(py::init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def(bp::init<bp::optional<double, as3::Mode>>())
-    .def(bp::init<bp::optional<as3::FT&, as3::Mode>>())
-    .def(bp::init<tri3::Triangulation_3&, bp::optional<double, as3::Mode>>())
-    .def(bp::init<tri3::Triangulation_3&, bp::optional<as3::FT&, as3::Mode>>())
+    .def(py::init<py::optional<double, as3::Mode>>())
+    .def(py::init<py::optional<as3::FT&, as3::Mode>>())
+    .def(py::init<tri3::Triangulation_3&, py::optional<double, as3::Mode>>())
+    .def(py::init<tri3::Triangulation_3&, py::optional<as3::FT&, as3::Mode>>())
 #endif
-    .def("__init__", make_constructor(&as3::as_init1))
-    .def("__init__", make_constructor(&as3::as_init2))
-    .def("__init__", make_constructor(&as3::as_init3))
+    .def("__init__", &as3::as_init1)
+    .def("__init__", &as3::as_init2)
+    .def("__init__", &as3::as_init3)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("__init__", make_constructor(&as3::as_init4))
-    .def("__init__", make_constructor(&as3::as_init5))
+    .def("__init__", &as3::as_init4)
+    .def("__init__", &as3::as_init5)
 #endif
     // Modifiers
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
@@ -315,7 +325,7 @@ void export_alpha_shape_3() {
     // Traversal of the alpha-Values
     .def("alpha_begin", &As3::alpha_begin)
     .def("alpha_end", &As3::alpha_end)
-    .def("alphas", bp::range(&As3::alpha_begin, &As3::alpha_end))
+    .def("alphas", py::range(&As3::alpha_begin, &As3::alpha_end))
     .def("alpha_find", &As3::alpha_find)
     .def("alpha_lower_bound", &As3::alpha_lower_bound)
     .def("alpha_upper_bound", &As3::alpha_upper_bound)
@@ -327,7 +337,7 @@ void export_alpha_shape_3() {
 #endif
     ;
 
-  bp::enum_<as3::Classification_type>("Classification_type")
+  py::enum_<as3::Classification_type>(as3_c, "Classification_type")
     .value("EXTERIOR", As3::EXTERIOR)
     .value("SINGULAR", As3::SINGULAR)
     .value("REGULAR", As3::REGULAR)
@@ -336,14 +346,14 @@ void export_alpha_shape_3() {
     ;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  bp::enum_<as3::Mode>("Mode")
+  py::enum_<as3::Mode>(as3_c, "Mode")
     .value("GENERAL", As3::GENERAL)
     .value("REGULARIZED", As3::REGULARIZED)
     .export_values()
     ;
 
-  bp::class_<as3::Alpha_status>("Alpha_status")
-    .def(bp::init<>())
+  py::class_<as3::Alpha_status>(as3_c, "Alpha_status")
+    .def(py::init<>())
     // Modifiers
     .def("set_is_Gabriel", &as3::Alpha_status::set_is_Gabriel)
     .def("set_is_on_chull", &as3::Alpha_status::set_is_on_chull)
@@ -358,9 +368,9 @@ void export_alpha_shape_3() {
     .def("alpha_max", &as3::Alpha_status::alpha_max)
     ;
 
-  bp::class_<as3::Alpha_iterator>("Alpha_iterator")
+  py::class_<as3::Alpha_iterator>(as3_c, "Alpha_iterator")
     .def("__iter__", &pass_through)
-    .def("__next__", &as3::next, bp::return_value_policy<bp::copy_const_reference>())
+    .def("__next__", &as3::next, py::rv_policy::reference_internal)
     ;
 
 #endif
@@ -373,24 +383,24 @@ void export_alpha_shape_3() {
     // \todo: generate bindings for periodic traits
     ;
   else {
-    if (! add_attr<tri3::Geom_traits>("Gt", tri3_scope))
+    if (! add_attr<tri3::Geom_traits>(as3_scope, "Gt"))
       std::cerr << "'tri3::Geom_traits' not registered!\n";
   }
-  if (! add_attr<as3::Point>("Point", as3_scope))
+  if (! add_attr<as3::Point>(as3_c, "Point"))
     std::cerr << "'as3::Point' not registered!\n";
   if (is_exact_ft()) {
-    if (! add_attr<as3::FT>("FT", as3_scope))
+    if (! add_attr<as3::FT>(as3_c, "FT"))
       std::cerr << "'as3::FT' not registered!\n";
   }
-  if (! add_attr<as3::Vertex>("Vertex", as3_scope))
+  if (! add_attr<as3::Vertex>(as3_c, "Vertex"))
     std::cerr << "'as3::Vertex' not registered!\n";
-  if (! add_attr<as3::Edge>("Edge", as3_scope))
+  if (! add_attr<as3::Edge>(as3_c, "Edge"))
     std::cerr << "'as3::Edge' not registered!\n";
-  if (! add_attr<as3::Facet>("Facet", as3_scope))
+  if (! add_attr<as3::Facet>(as3_c, "Facet"))
     std::cerr << "'as3::Facet' not registered!\n";
-  if (! add_attr<as3::Vertex_handle>("Vertex_handle", as3_scope))
+  if (! add_attr<as3::Vertex_handle>(as3_c, "Vertex_handle"))
     std::cerr << "'as3::Vertex_handle' not registered!\n";
-  if (! add_attr<as3::Cell_handle>("Cell_handle", as3_scope))
+  if (! add_attr<as3::Cell_handle>(as3_c, "Cell_handle"))
     std::cerr << "'as3::Cell_handle' not registered!\n";
 
 #endif

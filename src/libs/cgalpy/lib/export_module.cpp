@@ -7,163 +7,135 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+#include <nanobind/nanobind.h>
 
-#include <boost/python.hpp>
 #include "CGALPY/arrangement_on_surface_2_config.hpp"
 #include "CGALPY/config.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
-void export_kernel();
-void export_kernel_d();
-void export_arrangement_on_surface_2();
-void export_intersections_2();
-void export_point_location();
-void export_object();
-void export_polygon_2();
-void export_polygon_with_holes_2();
-void export_polygon_partition_2();
-void export_polygon_set_2();
-void export_general_polygon_set_2();
-void export_polygon_with_holes_2();
-void export_minkowski_sum_2();
-void export_boolean_set_operations_2();
-void export_triangulation_2();
-void export_convex_hull_2_bindings();
-void export_spatial_searching();
-void export_bounding_volumes();
-void export_triangulation_3();
-void export_alpha_shape_2();
-void export_alpha_shape_3();
+void export_kernel(py::module_&);
+void export_kernel_d(py::module_&);
+void export_arrangement_on_surface_2(py::module_&);
+void export_intersections_2(py::module_&);
+void export_point_location(py::module_&);
+void export_object(py::module_&);
+void export_polygon_2(py::module_&);
+void export_polygon_with_holes_2(py::module_&);
+void export_polygon_mesh_processing(py::module_&);
+void export_polygon_partition_2(py::module_&);
+void export_polygon_set_2(py::module_&);
+void export_general_polygon_set_2(py::module_&);
+void export_minkowski_sum_2(py::module_&);
+void export_boolean_set_operations_2(py::module_&);
+void export_triangulation_2(py::module_&);
+void export_convex_hull_2_bindings(py::module_&);
+void export_spatial_searching(py::module_&);
+void export_surface_mesh(py::module_&);
+void export_bounding_volumes(py::module_&);
+void export_triangulation_3(py::module_&);
+void export_alpha_shape_2(py::module_&);
+void export_alpha_shape_3(py::module_&);
 
-#define SET_SCOPE(x)  \
-std::string module_name = std::string(XSTR(CGALPY_MODULE_NAME))+std::string(".")+std::string(x); \
-bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule(module_name.c_str())))); \
-bp::scope().attr(x) = module; \
-bp::scope module_scope = module;
+#define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
 
-BOOST_PYTHON_MODULE(CGALPY_MODULE_NAME) {
+MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
-  bp::object package = bp::scope();
-  package.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
+  m.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
 #ifdef CGALPY_KERNEL_BINDINGS
-  {
-    SET_SCOPE("Ker")
-    export_kernel();
+  auto ker_m = m.def_submodule("Ker");
+  export_kernel(ker_m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
-    export_intersections_2();
+  export_intersections_2(ker_m);
 #endif
-  }
 #endif
 
 #ifdef CGALPY_KERNEL_D_BINDINGS
-  {
-    SET_SCOPE("Kerd")
-    export_kernel_d();
-  }
+  auto kerd_m = m.def_submodule("Kerd");
+  export_kernel_d(kerd_m);
 #endif
 
 #ifdef CGALPY_POLYGON_2_BINDINGS
-  {
-    SET_SCOPE("Pol2")
-    export_polygon_2();
-    export_polygon_with_holes_2();
-  };
+  auto pol2_m = m.def_submodule("Pol2");
+  export_polygon_2(pol2_m);
+  export_polygon_with_holes_2(pol2_m);
 #endif
 
 #ifdef CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS
   // Aos2 must succeed Pol2
-  {
-    SET_SCOPE("Aos2")
-    export_arrangement_on_surface_2();
-
+  auto aos2_m = m.def_submodule("Aos2");
+  export_arrangement_on_surface_2(aos2_m);
 #ifdef CGALPY_AOS2_POINT_LOCATION_BINDINGS
-    export_point_location();
+  export_point_location(aos2_m);
 #endif
-  }
 #endif
 
 #ifdef CGALPY_CONVEX_HULL_2_BINDINGS
-  {
-    SET_SCOPE("Ch2")
-    export_convex_hull_2_bindings();
-  };
+  auto ch2_m = m.def_submodule("Ch2");
+  export_convex_hull_2_bindings(ch2_m);
 #endif
 
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
-  {
-    SET_SCOPE("Tri2")
-    export_triangulation_2();
-  };
-
+  auto tri2_m = m.def_submodule("Tri2");
+  export_triangulation_2(tri2_m);
 #endif
 
   // 2D Alpha shape must be bound after 2D triangulation!
 #ifdef CGALPY_ALPHA_SHAPE_2_BINDINGS
   // AS2 must scceed Tri2
-  {
-    SET_SCOPE("As2")
-    export_alpha_shape_2();
-  }
+  auto as2_m = m.def_submodule("As2");
+  export_alpha_shape_2(as2_m);
 #endif
 
 #ifdef CGALPY_SPATIAL_SEARCHING_BINDINGS
-  {
-    SET_SCOPE("Ss")
-    export_spatial_searching();
-  };
+  auto ss_m = m.def_submodule("Ss");
+  export_spatial_searching(ss_m);
 #endif
 
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
-  {
-    SET_SCOPE("Bv")
-    export_bounding_volumes();
-  };
-
+  auto bv_m = m.def_submodule("Bv");
+  export_bounding_volumes(bv_m);
 #endif
 
 #ifdef CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS
   // BSO2 must succeed Aos2
-  {
-    SET_SCOPE("Bso2")
-    export_boolean_set_operations_2();
+  auto bso2_m = m.def_submodule("Bso2");
+  export_boolean_set_operations_2(bso2_m);
+  export_general_polygon_set_2(bso2_m);
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-    export_polygon_set_2();
-#else
-    export_general_polygon_set_2();
+  export_polygon_set_2(bso2_m);
 #endif
-  };
 #endif
 
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
-  {
-    SET_SCOPE("Pp2")
-    export_polygon_partition_2();
-  };
+  auto pp2_m = m.def_submodule("Pp2");
+  export_polygon_partition_2(pp2_m);
 #endif
 
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
-  {
-    SET_SCOPE("Ms2")
-    export_minkowski_sum_2();
-  };
+  auto ms2_m = m.def_submodule("Ms2");
+  export_minkowski_sum_2(ms2_m);
 #endif
 
 #ifdef CGALPY_TRIANGULATION_3_BINDINGS
-  {
-    SET_SCOPE("Tri3")
-    export_triangulation_3();
-  };
+  auto tri3_m = m.def_submodule("Tri3");
+  export_triangulation_3(tri3_m);
 #endif
 
   // 3D Alpha shape must be bound after 3D triangulation!
 #ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
-  {
-    SET_SCOPE("As3")
-    export_alpha_shape_3();
-  }
+  auto as3_m = m.def_submodule("As3");
+  export_alpha_shape_3(as3_m);
 #endif
 
+#ifdef CGALPY_SURFACE_MESH_BINDINGS
+  auto sm_m = m.def_submodule("Sm");
+  export_surface_mesh(sm_m);
+#endif
+
+#ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
+  auto pmp_m = m.def_submodule("Pmp");
+  export_polygon_mesh_processing(pmp_m);
+#endif
 }

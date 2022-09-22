@@ -10,6 +10,10 @@
 #ifndef CGALPY_AOS_CONSTRUCT_X_MONOTONE_CURVE_TRAITS_CLASSES_HPP
 #define CGALPY_AOS_CONSTRUCT_X_MONOTONE_CURVE_TRAITS_CLASSES_HPP
 
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
+
 template <typename T>
 struct Aos_construct_x_monotone_curve_traits_classes {
   typedef typename T::Point_2                       Point_2;
@@ -27,7 +31,7 @@ struct Aos_construct_x_monotone_curve_traits_classes {
   }
 
   // Class objects
-  bp::class_<Construct_x_monotone_curve_2>* m_construct_x_monotone_curve_2;
+  py::class_<Construct_x_monotone_curve_2>* m_construct_x_monotone_curve_2;
 };
 
 #endif

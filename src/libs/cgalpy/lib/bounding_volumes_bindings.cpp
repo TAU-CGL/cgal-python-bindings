@@ -7,62 +7,65 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#include <boost/python.hpp>
-
-#include "CGALPY/bounding_volumes_config.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include <nanobind/nanobind.h>
 
 #include <CGAL/Min_circle_2.h>
 #include <CGAL/Min_circle_2_traits_2.h>
 
-namespace bp = boost::python;
+#include "CGALPY/bounding_volumes_config.hpp"
+#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/add_insertion.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
-typedef typename CGAL::Min_circle_2_traits_2<Kernel>       Min_circle_2_traits_2;
-typedef typename Min_circle_2_traits_2::Circle             Optimisation_circle_2;
+namespace py = nanobind;
+
+typedef typename CGAL::Min_circle_2_traits_2<Kernel>     Min_circle_2_traits_2;
+typedef typename Min_circle_2_traits_2::Circle           Optimisation_circle_2;
 typedef typename CGAL::Min_circle_2<Min_circle_2_traits_2> Min_circle_2;
 
-Min_circle_2* init_min_circle_2_from_list(bp::list& lst, bool random) {
-  auto begin = bp::stl_input_iterator<Point_2>(lst);
-  auto end = bp::stl_input_iterator<Point_2>();
-  return new Min_circle_2(begin, end, random);
+void init_min_circle_2_from_list(Min_circle_2& mc, py::list& lst, bool random) {
+  auto begin = stl_input_iterator<Point_2>(lst);
+  auto end = stl_input_iterator<Point_2>(lst, false);
+  new (&mc) Min_circle_2(begin, end, random);
 }
 
-void insert_list(Min_circle_2& mc, bp::list& lst) {
-  auto begin = bp::stl_input_iterator<Point_2>(lst);
-  auto end = bp::stl_input_iterator<Point_2>();
+void insert_list(Min_circle_2& mc, py::list& lst) {
+  auto begin = stl_input_iterator<Point_2>(lst);
+  auto end = stl_input_iterator<Point_2>(lst, false);
   mc.insert(begin, end);
 }
 
-void export_bounding_volumes() {
-  bp::class_<Optimisation_circle_2>("Optimization_circle_2")
-    .def(bp::init<>())
+void export_bounding_volumes(py::module_& m) {
+  py::class_<Optimisation_circle_2> oc_co(m, "Optimization_circle_2");
+  oc_co.def(py::init<>())
     .def<void (Optimisation_circle_2::*) (void)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&, const Point_2&)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&, const Point_2&, const Point_2&)>("set", &Optimisation_circle_2::set)
     .def<void (Optimisation_circle_2::*) (const Point_2&, const FT&)>("set", &Optimisation_circle_2::set)
-    .def("center", &Optimisation_circle_2::center, bp::return_internal_reference<>())
-    .def("squared_radius", &Optimisation_circle_2::squared_radius, Kernel_return_value_policy())
+    .def("center", &Optimisation_circle_2::center)
+    .def("squared_radius", &Optimisation_circle_2::squared_radius)
     .def("is_empty", &Optimisation_circle_2::is_empty)
     .def("is_degenerate", &Optimisation_circle_2::is_degenerate)
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
+    .def(py::self == py::self)
+    .def(py::self != py::self)
     ;
 
-  bp::class_<Min_circle_2, boost::noncopyable>("Min_circle_2")
-    .def(bp::init<>())
-    .def(bp::init<const Point_2&>())
-    .def(bp::init<const Point_2&, const Point_2&>())
-    .def(bp::init<const Point_2&, const Point_2&, const Point_2&>())
-    .def("__init__", make_constructor(&init_min_circle_2_from_list))
+  add_insertion(oc_co, "__str__");
+  add_insertion(oc_co, "__repr__");
+
+  py::class_<Min_circle_2, boost::noncopyable>(m, "Min_circle_2")
+    .def(py::init<>())
+    .def(py::init<const Point_2&>())
+    .def(py::init<const Point_2&, const Point_2&>())
+    .def(py::init<const Point_2&, const Point_2&, const Point_2&>())
+    .def("__init__", &init_min_circle_2_from_list)
     .def("number_of_points", &Min_circle_2::number_of_points)
     .def("number_of_support_points", &Min_circle_2::number_of_support_points)
-    .def("points", bp::range<bp::return_internal_reference<>>(&Min_circle_2::points_begin, &Min_circle_2::points_end))
-    .def("support_points", bp::range<bp::return_internal_reference<>>(&Min_circle_2::support_points_begin, &Min_circle_2::support_points_end))
-    .def("support_point", &Min_circle_2::support_point, bp::return_internal_reference<>())
-    .def("circle", &Min_circle_2::circle, bp::return_value_policy<bp::copy_const_reference>())
+    .def("points", py::range<py::return_internal_reference<>>(&Min_circle_2::points_begin, &Min_circle_2::points_end))
+    .def("support_points", py::range<py::return_internal_reference<>>(&Min_circle_2::support_points_begin, &Min_circle_2::support_points_end))
+    .def("support_point", &Min_circle_2::support_point, py::return_internal_reference<>())
+    .def("circle", &Min_circle_2::circle)
     .def("bounded_side", &Min_circle_2::bounded_side)
     .def("has_on_bounded_side", &Min_circle_2::has_on_bounded_side)
     .def("has_on_boundary", &Min_circle_2::has_on_boundary)

@@ -19,6 +19,16 @@ namespace bso2 {
 
 typedef aos2::Dcel                                  Dcel;
 typedef aos2::Geometry_traits_2                     Geometry_traits_2;
+typedef aos2::Topology_traits                       Topology_traits;
+
+typedef CGAL::Boolean_set_operation_2_internal::PreconditionValidationPolicy
+  Precondition_validation_policy;
+typedef CGAL::Gps_on_surface_base_2<Geometry_traits_2, Topology_traits,
+                                    Precondition_validation_policy>
+  Gps_on_surface_base_2;
+typedef CGAL::General_polygon_set_on_surface_2<Geometry_traits_2,
+                                               Topology_traits>
+  General_polygon_set_on_surface_2;
 typedef CGAL::General_polygon_set_2<Geometry_traits_2, Dcel>
                                                     General_polygon_set_2;
 typedef General_polygon_set_2::Polygon_2            General_polygon_2;

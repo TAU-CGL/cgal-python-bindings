@@ -14,8 +14,9 @@ pybind11
 --------
 # Install from sources:
 > git clone git@github.com:pybind/pybind11.git
+# Assume <pybind11_DIR> points at the pybind11 build directory
+> cd <pybind11_DIR>
 # Assume <pybind11_SRC_DIR> points at the repository root directory
-> cd $pybind11_DIR
 > cmake -DCMAKE_BUILD_TYPE=Release -DPYBIND11_TEST:BOOL=Off <pybind11_SRC_DIR>
 # For some reason it does not work without installing, so
 > sudo make install
@@ -23,11 +24,21 @@ pybind11
 
 nanobind
 --------
-# Install from sources:
+# Install nanobind from sources:
 git clone git@github.com:wjakob/nanobind.git
+# Assume <nanobind_DIR> points at the nanobind build directory
+> cd <nanobind_DIR>
 # Assume <nanobind_SRC_DIR> points at the repository root directory
 > cmake -DCMAKE_BUILD_TYPE=Release <nanobind_SRC_DIR>
 > export nanobind_DIR=`pwd`
+
+# Install tsl-robin-map from sources:
+git clone git@github.com:Tessil/robin-map.git
+# Assume <tsl-robin-map_DIR> points at the tsl-robin-map build directory
+> cd <tsl-robin-map_DIR>
+# Assume <tsl-robin-map_SRC_DIR> points at the repository root directory
+> cmake -DCMAKE_BUILD_TYPE=Release <tsl-robin-map_SRC_DIR>
+> export tsl_robin_map_DIR=`pwd`
 
 swig
 ----

@@ -10,6 +10,9 @@
 #ifndef CGALPY_ARRANGEMENT_ON_SURFACE_2_CONFIG_HPP
 #define CGALPY_ARRANGEMENT_ON_SURFACE_2_CONFIG_HPP
 
+#include <CGAL/Arr_segment_traits_2.h>
+#include <CGAL/Arr_non_caching_segment_traits_2.h>
+#include <CGAL/Arr_circle_segment_traits_2.h>
 #include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Arrangement_on_surface_2.h>
 #include <CGAL/Arrangement_on_surface_with_history_2.h>
@@ -40,7 +43,7 @@
 #define CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS           4
 #define CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS              5
 #define CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS                      6
-#define CGALPY_AOS2_RATIONAL_GEOMETRY_TRAITS                    7
+#define CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS           7
 #define CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS      8
 
 #ifndef CGALPY_AOS2_GEOMETRY_TRAITS
@@ -68,6 +71,10 @@ template <typename Base>
 struct Tr<false, Base> { typedef Base type; };
 template <>
 struct Tr<true, CGAL::Arr_segment_traits_2<Kernel>> {
+  typedef CGAL::Gps_segment_traits_2<Kernel, Point_2_container> type;
+};
+template <>
+struct Tr<true, CGAL::Arr_non_caching_segment_traits_2<Kernel>> {
   typedef CGAL::Gps_segment_traits_2<Kernel, Point_2_container> type;
 };
 template <>
@@ -114,7 +121,6 @@ template <typename Fb, typename Data> struct Face_extended<true, Fb, Data>
 template <int i, typename GeomTraits, typename Dcel> struct Aos {
   typedef typename CGAL::Default_planar_topology<GeomTraits, Dcel>::Traits      Topol_traits;
   typedef CGAL::Arrangement_on_surface_2<GeomTraits, Topol_traits>              aos;
-  typedef CGAL::Arrangement_on_surface_with_history_2<GeomTraits, Topol_traits> aos_with_history;
   typedef CGAL::Arrangement_2<GeomTraits, Dcel>                                 arr;
   typedef CGAL::Arrangement_with_history_2<GeomTraits, Dcel>                    arr_with_history;
 };

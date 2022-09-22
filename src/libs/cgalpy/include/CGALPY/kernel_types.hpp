@@ -44,22 +44,17 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
 typedef CGAL::Exact_predicates_inexact_constructions_kernel     Kernel;
-typedef Copy_const_reference                Kernel_return_value_policy;
 #elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
 typedef CGAL::Exact_predicates_exact_constructions_kernel       Kernel;
-typedef Return_by_value                     Kernel_return_value_policy;
 #elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
 typedef CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt
                                                                 Kernel;
-typedef Copy_const_reference                Kernel_return_value_policy;
 #elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE
 typedef double                                                  NT;
 typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
-typedef Copy_const_reference                Kernel_return_value_policy;
 #elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
 typedef CGAL::Lazy_exact_nt<CGAL::Gmpq>                         NT;
 typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
-typedef Copy_const_reference                Kernel_return_value_policy;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif
