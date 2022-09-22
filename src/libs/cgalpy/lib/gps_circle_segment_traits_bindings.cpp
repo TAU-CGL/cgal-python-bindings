@@ -7,7 +7,7 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#include <nanobind/nanobind.h>
 
 #include <CGAL/Gps_circle_segment_traits_2.h>
 #include <CGAL/General_polygon_set_2.h>
@@ -16,43 +16,27 @@
 #include "CGALPY/gps_2_concepts/export_GpsTraits_2.hpp"
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
-bp::class_<aos2::Geometry_traits_2> export_arr_circle_segment_traits();
+// Export the instance Gps_circle_segment_traits_2 traits <Kernel>.
+py::object export_gps_circle_segment_traits(py::module_& m) {
+  using Agt = aos2::Arr_geometry_traits_2;
+  using Xcv = Agt::X_monotone_curve_2;
+  using Bgt = CGAL::Gps_traits_2<Agt>;
+  using Pgn = Bgt::Polygon_2;
+  using Ggt = CGAL::Gps_circle_segment_traits_2<Kernel>;
 
-namespace bso2 {
-
-template <typename T>
-typename T::Polygon_2* init_polygon_2(bp::list& lst) {
-  auto begin = bp::stl_input_iterator<typename T::X_monotone_curve_2>(lst);
-  auto end = bp::stl_input_iterator<typename T::X_monotone_curve_2>();
-  return new typename T::Polygon_2(begin, end);
-}
-
-template <typename T>
-typename T::Polygon_2::Curve_iterator curves_begin(typename T::Polygon_2& p)
-{ return p.curves_begin(); }
-
-template <typename T>
-typename T::Polygon_2::Curve_iterator curves_end(typename T::Polygon_2& p)
-{ return p.curves_end(); }
-
-}
-
-bp::object export_gps_circle_segment_traits() {
-  auto traits = export_arr_circle_segment_traits();
-
-  typedef bso2::Geometry_traits_2       GT;
-  bp::scope traits_scope(traits);
+  py::class_<Ggt, Bgt> traits_c(m, "Gps_circle_segment_traits_2");
+  traits_c.def(py::init<>());
   struct Concepts {
-    Gps_traits_classes<GT> m_traits_classes;
+    Gps_traits_classes<Ggt> m_traits_classes;
   } concepts;
-  export_GpsTraits_2<GT>(traits, concepts);
-  auto* tco = concepts.m_traits_classes.m_polygon_2;
-  if (tco) {
-    tco->def("__init__", make_constructor(&bso2::init_polygon_2<GT>));
-    tco->def("curves", bp::range<bp::return_internal_reference<>>
-             (&bso2::curves_begin<GT>, &bso2::curves_end<GT>));
-  }
-  return traits;
+
+  // `Gps_circle_segment_traits_2<Kernel>` derives from
+  // `Gps_traits_2<Arr_circle_segment_traits_2<Kernel>>`, but nothing is added
+  // to the API. Thus, the following call is redundant (but harmless, because
+  // all wrappers are guarded).
+  export_GpsTraits_2<Ggt>(traits_c, concepts);
+
+  return traits_c;
 }

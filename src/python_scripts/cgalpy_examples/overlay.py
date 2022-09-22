@@ -74,6 +74,7 @@ Aos2.overlay(arr1, arr2, result, traits)
 for f in result.faces():
   print(f.data())
 
+del traits
 #  0  |----------|
 #     |   1      |
 # |----------|   |

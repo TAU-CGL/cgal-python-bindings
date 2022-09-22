@@ -10,13 +10,13 @@
 #ifndef CGALPY_PYTHON_ITERATOR_TEMPLATES
 #define CGALPY_PYTHON_ITERATOR_TEMPLATES
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
-inline bp::object pass_through(bp::object const& o) { return o; }
+inline py::object pass_through(py::object const& o) { return o; }
 
-//these template classes are used to allow more natural iteration in python
+// These template classes are used to allow more natural iteration in Python
 
 template <typename circulator>
 class Iterator_from_circulator {
@@ -27,15 +27,15 @@ private:
 
 public:
   Iterator_from_circulator(circulator first) : m_first(first), m_curr(first) {}
+
   typename circulator::value_type& next() {
     if (m_curr != 0) {
       if (first || m_curr != m_first) {
         first = false;
-        return *(m_curr++);
+        return *m_curr++;
       }
     }
-    PyErr_SetString(PyExc_StopIteration, "No more data.");
-    bp::throw_error_already_set();
+    throw py::stop_iteration();
     return *m_curr;
   }
 };
@@ -55,25 +55,24 @@ public:
   modified_circulator* next() {
     if (m_curr != m_end)
       return new modified_circulator(modified_circulator(*(m_curr++)));
-    PyErr_SetString(PyExc_StopIteration, "No more data.");
-    bp::throw_error_already_set();
+    throw py::stop_iteration();
     return new modified_circulator(modified_circulator(*m_curr));
   }
 };
 
-template<typename iterator>
-void bind_iterator_of_circulators(const char* python_name) {
-  bp::class_<iterator>(python_name, bp::no_init)
+template<typename iterator, typename Parent>
+void bind_iterator_of_circulators(Parent& parent, const char* python_name) {
+  py::class_<iterator>(parent, python_name)
     .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next, bp::return_value_policy<bp::manage_new_object>())
+    .def("__next__", &iterator::next, py::rv_policy::reference_internal)
     ;
 }
 
-template<typename iterator>
-void bind_iterator(const char* python_name) {
-  bp::class_<iterator>(python_name, bp::no_init)
+template<typename iterator, typename Parent>
+void bind_iterator(Parent& parent, const char* python_name) {
+  py::class_<iterator>(parent, python_name)
     .def("__iter__", &pass_through)
-    .def("__next__", &iterator::next, bp::return_value_policy<bp::reference_existing_object>())
+    .def("__next__", &iterator::next)
     ;
 }
 
@@ -87,9 +86,8 @@ private:
 public:
   Copy_iterator(iterator begin, iterator end) : m_curr(begin), m_end(end) {}
   typename iterator::value_type next() {
-    if (m_curr != m_end) return *(m_curr++);
-    PyErr_SetString(PyExc_StopIteration, "No more data.");
-    bp::throw_error_already_set();
+    if (m_curr != m_end) return *m_curr++;
+    throw py::stop_iteration();
     return *m_curr;
   }
 };
@@ -114,15 +112,14 @@ public:
         return *(m_curr++);
       }
     }
-    PyErr_SetString(PyExc_StopIteration, "No more data.");
-    bp::throw_error_already_set();
+    throw py::stop_iteration();
     return *m_curr;
   }
 };
 
 template<typename iterator>
-void bind_copy_iterator(const char* python_name) {
-  bp::class_<iterator>(python_name, bp::no_init)
+void bind_copy_iterator(py::module_& m, const char* python_name) {
+  py::class_<iterator>(m, python_name)
     .def("__iter__", &pass_through)
     .def("__next__", &iterator::next)
     ;

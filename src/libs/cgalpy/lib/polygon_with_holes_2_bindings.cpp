@@ -7,54 +7,59 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
-#include "CGALPY/export_unique.hpp"
+#include "CGALPY/add_insertion.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/export_general_polygon_with_holes_2.hpp"
+#include "CGALPY/add_extraction.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace pol2 {
 
-Polygon_with_holes_2* init_polygon_with_holes_2(Polygon_2& p, bp::list& lst) {
-  auto begin = bp::stl_input_iterator< Polygon_2 >(lst);
-  auto end = bp::stl_input_iterator< Polygon_2 >();
-  return new Polygon_with_holes_2(p, begin, end);
+// Initialize a polygon with holes from an outer boundary and a list of holes.
+void init_polygon_with_holes_2(Polygon_with_holes_2& pwh, Polygon_2& p,
+                               py::list& lst) {
+  auto begin = stl_input_iterator<Polygon_2>(lst);
+  auto end = stl_input_iterator<Polygon_2>(lst, false);
+  new (&pwh) Polygon_with_holes_2(p, begin, end);
 }
-
-Polygon_with_holes_2::Hole_const_iterator holes_begin(Polygon_with_holes_2& p)
-{ return p.holes_begin(); }
-
-Polygon_with_holes_2::Hole_const_iterator holes_end(Polygon_with_holes_2& p)
-{ return p.holes_end(); }
-
-Polygon_2& outer_boundary(Polygon_with_holes_2& p)
-{ return p.outer_boundary(); }
 
 }
 
-void register_polygon_with_holes_2(const char* name) {
-  typedef pol2::Polygon_2               Polygon_2;
-  typedef pol2::Polygon_with_holes_2    Polygon_with_holes_2;
+/*! Export `CGAL::Polygon_with_holes_2<>`, which derives from
+ * `CGAL::General_polygon_with_holes_2<>`
+ */
+void export_polygon_with_holes_2(py::module_& m) {
+  using Pgn = pol2::Polygon_2;
+  using Pwh = pol2::Polygon_with_holes_2;
+  using Gpwh = pol2::General_polygon_with_holes_2;
 
-  bp::class_<Polygon_with_holes_2>(name)
-    .def(bp::init<Polygon_2&>())
-    .def("__init__", make_constructor(&pol2::init_polygon_with_holes_2))
-    .def("is_unbounded", &Polygon_with_holes_2::is_unbounded)
-    .def("outer_boundary", &pol2::outer_boundary,
-         bp::return_internal_reference<>())
-    .def("holes", bp::range<bp::return_internal_reference<>>(&pol2::holes_begin,
-                                                             &pol2::holes_end))
-    .def("number_of_holes", &Polygon_with_holes_2::number_of_holes)
-    .def("bbox", &Polygon_with_holes_2::bbox)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    ;
+  if (! add_attr<Gpwh>(m, "General_polygon_with_holes_2")) {
+    py::class_<Gpwh> gpwh_c(m, "General_polygon_with_holes_2");
+    export_general_polygon_with_holes_2(gpwh_c);
+  }
+
+  if (! add_attr<Pwh>(m, "Polygon_with_holes_2")) {
+    py::class_<Pwh, Gpwh> pwh_c(m, "Polygon_with_holes_2");
+    pwh_c.def(py::init<>())
+      .def(py::init<Pgn&>())
+      .def("__init__", &pol2::init_polygon_with_holes_2)
+
+      .def("bbox", &Pwh::bbox)
+      .def(py::self == py::self)
+      .def(py::self != py::self)
+      ;
+
+    add_insertion(pwh_c, "__str__");
+    add_insertion(pwh_c, "__repr__");
+    add_extraction(pwh_c);
+  }
 }
 
 void export_polygon_with_holes_2() {

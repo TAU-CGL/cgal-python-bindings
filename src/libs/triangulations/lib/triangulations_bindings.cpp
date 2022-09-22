@@ -4,7 +4,7 @@
 #include <CGAL/Constrained_triangulation_2.h>
 //#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
-#include <CGAL/Filtered_kernel.h> 
+#include <CGAL/Filtered_kernel.h>
 #include <CGAL/Cartesian.h>
 #include <boost/python.hpp>
 #include <string>
@@ -14,29 +14,27 @@ namespace bp = boost::python;
 //typedef CGAL::Exact_predicates_inexact_constructions_kernel     Kernel;
 //typedef CGAL::Cartesian<int>                             Kernel_base;
 //typedef CGAL::Filtered_kernel<Kernel_base>                  Kernel;
-typedef CGAL::Exact_predicates_exact_constructions_kernel       Kernel;
-typedef Kernel::FT                                              FT;
-typedef Kernel::Point_2                                         Point_2;
-typedef Kernel::Segment_2                                       Segment_2;
-typedef CGAL::Triangulation_2<Kernel>                           Triangulation_2;
-typedef CGAL::Delaunay_triangulation_2<Kernel>                  Delaunay_triangulation_2;
-typedef Triangulation_2::Vertex                                 Vertex;
-typedef Triangulation_2::Vertex_iterator                        Vertex_iterator;
-typedef Triangulation_2::All_vertices_iterator                  All_vertices_iterator;
-typedef Triangulation_2::Finite_vertices_iterator               Finite_vertices_iterator;
-typedef Triangulation_2::Edge                                   Edge;
-typedef Triangulation_2::Edge_iterator                          Edges_iterator;
-typedef Triangulation_2::All_edges_iterator                     All_edges_iterator;
-typedef Triangulation_2::Finite_edges_iterator                  Finite_edges_iterator;
-typedef Triangulation_2::Face                                   Face;
-typedef Triangulation_2::Face_iterator                          Face_iterator;
-typedef Triangulation_2::Face_handle                            Face_handle;
-typedef Triangulation_2::All_faces_iterator                     All_faces_iterator;
-typedef Triangulation_2::Finite_faces_iterator                  Finite_faces_iterator;
-typedef Triangulation_2::Point_iterator                         Point_iterator;
-
-
-typedef typename bp::return_value_policy<bp::copy_const_reference>       Kernel_return_value_policy;
+typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
+typedef Kernel::FT                                        FT;
+typedef Kernel::Point_2                                   Point_2;
+typedef Kernel::Segment_2                                 Segment_2;
+typedef CGAL::Triangulation_2<Kernel>                     Triangulation_2;
+typedef CGAL::Delaunay_triangulation_2<Kernel>
+  Delaunay_triangulation_2;
+typedef Triangulation_2::Vertex                           Vertex;
+typedef Triangulation_2::Vertex_iterator                  Vertex_iterator;
+typedef Triangulation_2::All_vertices_iterator            All_vertices_iterator;
+typedef Triangulation_2::Finite_vertices_iterator         Finite_vertices_iterator;
+typedef Triangulation_2::Edge                             Edge;
+typedef Triangulation_2::Edge_iterator                    Edges_iterator;
+typedef Triangulation_2::All_edges_iterator               All_edges_iterator;
+typedef Triangulation_2::Finite_edges_iterator            Finite_edges_iterator;
+typedef Triangulation_2::Face                             Face;
+typedef Triangulation_2::Face_iterator                    Face_iterator;
+typedef Triangulation_2::Face_handle                      Face_handle;
+typedef Triangulation_2::All_faces_iterator               All_faces_iterator;
+typedef Triangulation_2::Finite_faces_iterator            Finite_faces_iterator;
+typedef Triangulation_2::Point_iterator                   Point_iterator;
 
 
 inline bp::object pass_through(bp::object const& o) { return o; }
@@ -51,12 +49,9 @@ private:
 
 public:
   Iterator_from_circulator(circulator first) : m_first(first), m_curr(first) {}
-  typename circulator::value_type& next()
-  {
-    if (m_curr != 0)
-    {
-      if (first || m_curr != m_first)
-      {
+  typename circulator::value_type& next() {
+    if (m_curr != 0) {
+      if (first || m_curr != m_first) {
         first = false;
         return *(m_curr++);
       }
@@ -68,8 +63,7 @@ public:
 };
 
 template <typename iterator>
-class CopyIterator
-{
+class CopyIterator {
 private:
   iterator m_curr;
   iterator m_end;

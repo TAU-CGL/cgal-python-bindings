@@ -10,16 +10,14 @@
 #ifndef CGALPY_TRIANGULATION_2_TYPES_HPP
 #define CGALPY_TRIANGULATION_2_TYPES_HPP
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/triangulation_2_config.hpp"
 #include "CGALPY/alpha_shape_2_config.hpp"
 #include "CGALPY/kernel_types.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace tri2 {
 
@@ -30,7 +28,7 @@ typedef Tr<CGALPY_TRI2, Kernel>::type                           Traits;
 // Vertex
 typedef Vertex_base_name<is_periodic(), CGALPY_TRI2, Traits>::type
                                                                 Vb;
-typedef Vertex_with_info<vertex_with_info(), Vb, bp::object, Traits>::type
+typedef Vertex_with_info<vertex_with_info(), Vb, py::object, Traits>::type
                                                                 Vbi;
 typedef Vertex_alpha_shape<alpha_shape_2_bindings(), Vbi, Traits, Ec>::type
                                                                 Vbia;
@@ -39,7 +37,7 @@ typedef Vertex_hierarchy<hierarchy(), Vbia>::type               V;
 // Face
 typedef Face_base_name<is_periodic(), CGALPY_TRI2, Traits>::type
                                                                 Fb;
-typedef Face_with_info<face_with_info(), Fb, bp::object, Traits>::type
+typedef Face_with_info<face_with_info(), Fb, py::object, Traits>::type
                                                                 Fbi;
 typedef Face_alpha_shape<alpha_shape_2_bindings(), Fbi, Traits, Ec>::type
                                                                 F;

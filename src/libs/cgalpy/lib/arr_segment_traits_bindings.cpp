@@ -7,13 +7,9 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
+#include <nanobind/nanobind.h>
 
-#include <unordered_set>
-#include <any>
-
-#include <boost/python.hpp>
-#include <boost/assert.hpp>
+#include <CGAL/Arr_segment_traits_2.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
@@ -27,15 +23,27 @@
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
+#include "CGALPY/add_insertion.hpp"
+#include "CGALPY/add_extraction.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
-namespace aos2 { Segment_2 to_segment(X_monotone_curve_2& c) { return Segment_2(c); } }
+namespace aos2 {
 
-bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
-  typedef aos2::Geometry_traits_2       GT;
-  auto traits = bp::class_<GT>("Geometry_traits_2");
-  bp::scope traits_scope(traits);
+//
+Segment_2 to_segment(X_monotone_curve_2& c) { return Segment_2(c); }
+
+}
+
+//
+py::object export_arr_segment_traits(py::module_& m) {
+  using GT = CGAL::Arr_segment_traits_2<Kernel>;
+  using Pnt = GT::Point_2;
+  using Lin = GT::Line_2;
+  using Xcv = aos2::X_monotone_curve_2;
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  py::class_<GT> traits_c(m, "Arr_segment_traits_2");
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
@@ -46,47 +54,53 @@ bp::class_<aos2::Geometry_traits_2> export_arr_segment_traits() {
     Aos_construct_x_monotone_curve_traits_classes<GT>
       m_construct_x_monotone_curve_traits_classes;
   } concepts;
-  export_AosTraits_2<GT, Copy_const_reference>(traits, concepts);
-  export_AosLandmarkTraits_2<GT, Copy_const_reference>(traits, concepts);
-  export_AosDirectionalXMonotoneTraits_2<GT, Copy_const_reference>(traits, concepts);
-  traits
+  export_AosTraits_2<GT>(traits_c, concepts);
+  export_AosLandmarkTraits_2<GT>(traits_c, concepts);
+  export_AosDirectionalXMonotoneTraits_2<GT>(traits_c, concepts);
+  traits_c
     .def("is_in_x_range_2_object", &GT::is_in_x_range_2_object)
     .def("is_in_y_range_2_object", &GT::is_in_y_range_2_object)
     ;
 
-  auto& xcv_co = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
-  xcv_co
-    .def(bp::init<Segment_2&>())
-    .def(bp::init<aos2::Point_2&, aos2::Point_2&>())
-    .def(bp::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
-    .def("source", &aos2::X_monotone_curve_2::source, Copy_const_reference())
-    .def("target", &aos2::X_monotone_curve_2::target, Copy_const_reference())
-    .def("line", &aos2::X_monotone_curve_2::line, Copy_const_reference())
-    .def("is_vertical", &aos2::X_monotone_curve_2::is_vertical)
-    .def("flip", &aos2::X_monotone_curve_2::flip)
-    .def("left", &aos2::X_monotone_curve_2::left, Copy_const_reference())
-    .def("right", &aos2::X_monotone_curve_2::right, Copy_const_reference())
-    .def("set_left", &aos2::X_monotone_curve_2::set_left)
-    .def("set_right", &aos2::X_monotone_curve_2::set_right)
-    .def("is_directed_right", &aos2::X_monotone_curve_2::is_directed_right)
+  auto& xcv_c = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
+  xcv_c.def(py::init<Segment_2&>())
+    .def(py::init<Pnt&, Pnt&>())
+    .def(py::init<Line_2&, Pnt&, Pnt&>())
+    .def("flip", &Xcv::flip)
+    .def("bbox", &Xcv::bbox)
+
+    // Members defined in the base class:
+    .def("source", [](const Xcv& xcv)->const Pnt& { return xcv.source(); }, ri)
+    .def("target", [](const Xcv& xcv)->const Pnt& { return xcv.target(); }, ri)
+    .def("line", [](const Xcv& xcv)->const Lin& { return xcv.line(); }, ri)
+    .def("is_vertical", [](const Xcv& xcv)->bool { return xcv.is_vertical(); })
+    .def("left", [](const Xcv& xcv)->const Pnt& { return xcv.left(); }, ri)
+    .def("right", [](const Xcv& xcv)->const Pnt& { return xcv.right(); }, ri)
+    .def("set_left",
+         [](Xcv& xcv, const Pnt& p)->void { return xcv.set_left(p); })
+    .def("set_right",
+         [](Xcv& xcv, const Pnt& p)->void { return xcv.set_right(p); })
+    .def("is_directed_right",
+         [](const Xcv& xcv)->bool { return xcv.is_directed_right(); })
 
     // Deprecated
     // .def("is_in_x_range", &X_monotone_curve_2::is_in_x_range)
     // .def("is_in_y_range", &X_monotone_curve_2::is_in_y_range)
 
-    .def("bbox", &aos2::X_monotone_curve_2::bbox)
     .def("segment", &aos2::to_segment)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
   ;
 
-  bp::class_<GT::Is_in_x_range_2>("Is_in_x_range_2", bp::no_init)
+  add_insertion(xcv_c, "__str__");
+  add_insertion(xcv_c, "__repr__");
+  add_extraction(xcv_c);
+
+  py::class_<GT::Is_in_x_range_2>(traits_c, "Is_in_x_range_2")
     .def("__call__", &GT::Is_in_x_range_2::operator());
   ;
 
-  bp::class_<GT::Is_in_y_range_2>("Is_in_y_range_2", bp::no_init)
+  py::class_<GT::Is_in_y_range_2>(traits_c, "Is_in_y_range_2")
     .def("__call__", &GT::Is_in_y_range_2::operator());
   ;
 
-  return traits;
+  return traits_c;
 }

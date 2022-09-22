@@ -20,8 +20,6 @@ if (CGALPY_KERNEL_BINDINGS)
   list (APPEND CGALPY_MODULES Ker)
   set (CGALPY_Ker_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_point_2.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_vector_2.cpp)
   if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
   endif()
@@ -58,7 +56,7 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_algebraic_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS})
     set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_Bezier_curve_traits_2\\\"\",\"Arr_Bezier_curve_traits_2\":\"true\"}]=])
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_Bezier_curve_traits_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_bezier_curve_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
     set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_circle_segment_traits_2\\\"\",\"Arr_circle_segment_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_circle_segment_traits_bindings.cpp)
@@ -71,9 +69,10 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
     set (CGALPY_Aos2_FILTERS [=[{\"Arr_non_caching_segment_basic_traits_2\":\"true\",\"AosBasicTraits_2.Point_2\":\"false\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_non_caching_segment_traits_bindings.cpp)
-  elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_GEOMETRY_TRAITS})
+  elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS})
     set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_rational_function_traits_2\\\"\",\"Arr_rational_function_traits_2\":\"true\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_rational_function_traits_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_algebraic_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
     set (CGALPY_Aos2_FILTERS [=[{\"Aos2.Geometry_traits_2\":\"\\\"Arr_segment_traits_2\\\"\",\"Arr_segment_traits_2\":\"true\",\"AosBasicTraits_2.Point_2\":\"false\",\"AosBasicTraits_2.Equal_2\":\"false\"}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_segment_traits_bindings.cpp)
@@ -96,6 +95,7 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_object_bindings.cpp)
 
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arrangement_on_surface_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arrangement_2_io_bindings.cpp)
 endif()
 
 # 2D Regularized Boolean operations
@@ -103,11 +103,9 @@ if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
   list (APPEND CGALPY_MODULES Bso2)
   set (CGALPY_Bso2_FILTERS [=[{}]=])
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/boolean_set_operations_2_bindings.cpp)
-
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_set_2_bindings.cpp)
   if(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_set_2_bindings.cpp)
-  else()
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_set_2_bindings.cpp)
   endif()
 
   # Geometry Traits
@@ -116,6 +114,7 @@ if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/gps_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/gps_traits_bindings.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/gps_circle_segment_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/gps_traits_bindings.cpp)
@@ -125,7 +124,7 @@ if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/gps_traits_bindings.cpp)
   elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS})
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/gps_traits_bindings.cpp)
-  elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_GEOMETRY_TRAITS})
+  elseif(${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS})
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/gps_traits_bindings.cpp)
   endif()
 
@@ -156,6 +155,12 @@ if (CGALPY_POLYGON_2_BINDINGS)
   list (APPEND CGALPY_MODULES Pol2)
   set (CGALPY_Pol2_FILTERS [=[{}]=])
 endif()
+# Polygon mesh processinf
+if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_mesh_processing_bindings.cpp)
+  list (APPEND CGALPY_MODULES Pmp)
+  set (CGALPY_Pmp_FILTERS [=[{}]=])
+endif()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
@@ -167,6 +172,12 @@ if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_searching_bindings.cpp)
   list (APPEND CGALPY_MODULES Ss)
   set (CGALPY_Ss_FILTERS [=[{}]=])
+endif()
+# Surface mesh
+if (CGALPY_SURFACE_MESH_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/surface_mesh_bindings.cpp)
+  list (APPEND CGALPY_MODULES Sm)
+  set (CGALPY_Sm_FILTERS [=[{}]=])
 endif()
 # 2D triangulation
 if (CGALPY_TRIANGULATION_2_BINDINGS)
@@ -188,22 +199,10 @@ include_directories(include)
 link_directories(${Boost_LIBRARY_DIRS})
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  add_definitions(/wd4251)
-endif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-
-# Add the library target
-# Always build a shared library
-# add_library(CGALPY SHARED ${CGALPY_SRC_FILES})
-Python_add_library(CGALPY MODULE ${CGALPY_SRC_FILES})
-set(CGALPY_BUILD_DEPENDS CGALPY)
-
-set_target_properties(CGALPY PROPERTIES
-  VERSION "${CMAKE_PROJECT_VERSION}"
-  SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
-
-target_link_libraries(CGALPY PRIVATE
-  ${Boost_LIBRARIES}
-  ${PYTHON_LIBRARIES})
+  add_compile_options(/wd4251)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  add_compile_options(-fvisibility=hidden)
+endif()
 
 set(CGALPY_LIB_NAME "CGALPY")
 if (NOT CGALPY_FIXED_LIBRARY_NAME)
@@ -256,6 +255,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     get_minkowski_sum_2_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
+  # Polygon mesh processing
+  if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
+    get_polygon_mesh_processing_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
   # 2D polygon partitioning
   if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
     get_polygon_partitioning_lib_name(ret)
@@ -264,6 +268,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   # Spatial searching
   if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
     get_spatial_searching_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
+  # Surface mesh
+  if (CGALPY_SURFACE_MESH_BINDINGS)
+    get_surface_mesh_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D triangulation
@@ -276,27 +285,40 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     get_triangulation_3_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
-  set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 endif()
+add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
+
+# Add the library target
+# Always build a shared library
+nanobind_add_module(CGALPY ${CGALPY_SRC_FILES})
+set(CGALPY_BUILD_DEPENDS CGALPY)
+
+set_target_properties(CGALPY PROPERTIES
+  VERSION "${CMAKE_PROJECT_VERSION}"
+  SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
+
+target_link_libraries(CGALPY PRIVATE
+  ${Boost_LIBRARIES}
+  ${PYTHON_LIBRARIES})
+
+set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
 # Use a generator expression to get rid of per-configuration subdirectory appended by Multi-configuration generators (e.g Visual Studio)
 # https://cmake.org/cmake/help/latest/prop_tgt/LIBRARY_OUTPUT_DIRECTORY.html
 set_target_properties(CGALPY PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
 reportWithEmphasis(${CGALPY_LIB_NAME} ${CGALPY_LIB_DIR} ${CGALPY_INSTALL_PYTHON_DIR})
 
-add_definitions(-DCGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
-
-# don't prepend wrapper library name with lib
+# Don't prepend wrapper library name with lib
 set_target_properties(CGALPY PROPERTIES PREFIX "")
 
-set (CGALPY_LIBRARY_SUFFIX ".so")
-if(WIN32)
-  set (CGALPY_LIBRARY_SUFFIX ".pyd")
-  set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
-elseif(APPLE)
-  set (CMAKE_SHARED_LIBRARY_SUFFIX ".so")
-  set_target_properties(CGALPY PROPERTIES BUNDLE ON)
-endif()
+set (CGALPY_LIBRARY_SUFFIX ${NB_SUFFIX})
+# if(WIN32)
+#   set (CGALPY_LIBRARY_SUFFIX ".pyd")
+#   set_target_properties(CGALPY PROPERTIES SUFFIX ".pyd")
+# elseif(APPLE)
+#   set (CMAKE_SHARED_LIBRARY_SUFFIX ".so")
+#   set_target_properties(CGALPY PROPERTIES BUNDLE ON)
+# endif()
 
 ################################################################################
 # Documentation

@@ -18,9 +18,9 @@
 
 namespace pol2 {
 
-typedef CGAL::Polygon_2<Kernel, Point_2_container>             Polygon_2;
-typedef CGAL::Polygon_with_holes_2<Kernel, Point_2_container>  Polygon_with_holes_2;
-
+typedef CGAL::Polygon_2<Kernel, Point_2_container>            Polygon_2;
+typedef CGAL::Polygon_with_holes_2<Kernel, Point_2_container> Polygon_with_holes_2;
+typedef CGAL::General_polygon_with_holes_2<Polygon_2>         General_polygon_with_holes_2;
 }
 
 #endif //CGALPY_POLYGON_2_TYPES_HPP

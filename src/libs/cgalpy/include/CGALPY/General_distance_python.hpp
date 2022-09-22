@@ -10,9 +10,13 @@
 #ifndef CGALPY_GENERAL_DISTANCE_PYTHON_HPP
 #define CGALPY_GENERAL_DISTANCE_PYTHON_HPP
 
+#include <nanobind/nanobind.h>
+
 #include "CGALPY/Python_functor.hpp"
 
 #include <CGAL/Kd_tree_rectangle.h>
+
+namespace py = nanobind;
 
 template <typename D_, typename FT_, typename Point_d_, typename Query_item_>
 class General_distance_python {
@@ -34,9 +38,8 @@ private:
 public:
   General_distance_python() {}
 
-  General_distance_python(bp::object py_functor0, bp::object py_functor1,
-    bp::object py_functor2, bp::object py_functor3,
-    bp::object py_functor4)
+  General_distance_python(py::object py_functor0, py::object py_functor1,
+    py::object py_functor2, py::object py_functor3, py::object py_functor4)
   {
     f0 = Python_functor_2_ref<Query_item, Point_d, FT>(py_functor0);
     f1 = Python_functor_2_ref<Query_item, Kd_tree_rectangle, FT>(py_functor1);

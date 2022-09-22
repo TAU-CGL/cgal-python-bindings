@@ -5,41 +5,38 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include <CGAL/intersections_d.h>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
-#include "CGALPY/export_ft.hpp"
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/add_insertion.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/make_iterator.hpp"
+#include "CGALPY/Kernel/export_ft.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
-extern void export_gmpz();
-extern void export_gmpq();
+extern void export_gmpz(py::module_& m);
+extern void export_gmpq(py::module_& m);
 
-Point_d* init_point_d(int d, bp::list& lst) {
-  auto begin = bp::stl_input_iterator<FT_d>(lst);
-  auto end = bp::stl_input_iterator<FT_d>();
+void init_point_d(Point_d& pd, int d, py::list& lst) {
+  auto begin = stl_input_iterator<FT_d>(lst);
+  auto end = stl_input_iterator<FT_d>(lst, false);
 #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
-  return new Point_d(d, begin, end);
+  new (&pd) Point_d(d, begin, end);
 #else
   // Workaround a bug in CGAL
   std::list<FT_d> tmp(begin, end);
-  return new Point_d(d, tmp.begin(), tmp.end());
+  new (&pd) Point_d(d, tmp.begin(), tmp.end());
 #endif
 }
-
-// const FT_d* point_d_cartesian_begin(Point_d& p)
-// { return p.cartesian_begin(); }
-
-// const FT_d* point_d_cartesian_end(Point_d& p)
-// { return p.cartesian_end(); }
 
 // Determine whether the dD kernel is an an EPEC type.
 // An EPEC type has a non trivial FT
@@ -48,108 +45,107 @@ constexpr bool is_epec_d_type() {
           (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ));
 }
 
-// Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2) are not a valid overload for do_intersect
-// in which case the second version (which does nothing) will be used instead (SFINAE)
+// Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2)
+// are not a valid overload for do_intersect in which case the second version
+// (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
-void bind_do_intersect_d_2T(decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
+void bind_do_intersect_d_2T(py::module_& m,
+                            decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
 {
-  bp::def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel_d>);
+  m.def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel_d>);
 }
 
 template<typename, typename>
-void bind_do_intersect_d_2T(...) {}
+void bind_do_intersect_d_2T(py::module_& m, ...) {}
 
 template <typename T>
-void bind_do_intersect_d_1T() {
-  bind_do_intersect_d_2T<T, Point_d>(true);
-  bind_do_intersect_d_2T<T, Segment_d>(true);
-  // bind_do_intersect_d_2T<T, Line_d>(true);
-  // bind_do_intersect_d_2T<T, Ray_d>(true);
-  // bind_do_intersect_d_2T<T, Triangle_d>(true);
-  // bind_do_intersect_d_2T<T, Iso_rectangle_d>(true);
-  // bind_do_intersect_d_2T<T, Circle_d>(true);
+void bind_do_intersect_d_1T(py::module_& m) {
+  bind_do_intersect_d_2T<T, Point_d>(m, true);
+  bind_do_intersect_d_2T<T, Segment_d>(m, true);
+  // bind_do_intersect_d_2T<T, Line_d>(m, true);
+  // bind_do_intersect_d_2T<T, Ray_d>(m, true);
+  // bind_do_intersect_d_2T<T, Triangle_d>(m, true);
+  // bind_do_intersect_d_2T<T, Iso_rectangle_d>(m, true);
+  // bind_do_intersect_d_2T<T, Circle_d>(m, true);
 }
 
-void bind_do_intersect_d() {
-  bind_do_intersect_d_1T<Point_d>();
-  bind_do_intersect_d_1T<Segment_d>();
-  // bind_do_intersect_d_1T<Line_d>();
-  // bind_do_intersect_d_1T<Ray_d>();
-  // bind_do_intersect_d_1T<Triangle_d>();
-  // bind_do_intersect_d_1T<Iso_rectangle_d>();
-  // bind_do_intersect_d_1T<Circle_d>();
+void bind_do_intersect_d(py::module_& m) {
+  bind_do_intersect_d_1T<Point_d>(m);
+  bind_do_intersect_d_1T<Segment_d>(m);
+  // bind_do_intersect_d_1T<Line_d>(m);
+  // bind_do_intersect_d_1T<Ray_d>(m);
+  // bind_do_intersect_d_1T<Triangle_d>(m);
+  // bind_do_intersect_d_1T<Iso_rectangle_d>(m);
+  // bind_do_intersect_d_1T<Circle_d>(m);
 }
 
-void export_kernel_d() {
+void export_kernel_d(py::module_& m) {
+  using Pnt = Point_d;
+
 #if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
      (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
-  const bp::type_info info_gmpz = bp::type_id<CGAL::Gmpz>();
-  const auto* reg_gmpz = bp::converter::registry::query(info_gmpz);
-  if ((reg_gmpz == nullptr) || ((*reg_gmpz).m_to_python == nullptr))
-    export_gmpz();
-  else bp::scope().attr("Gmpz") = bp::handle<>(reg_gmpz->m_class_object);
-
-  const bp::type_info info_gmpq = bp::type_id<CGAL::Gmpq>();
-  const auto* reg_gmpq = bp::converter::registry::query(info_gmpq);
-  if ((reg_gmpq == nullptr) || ((*reg_gmpq).m_to_python == nullptr))
-    export_gmpq();
-  else bp::scope().attr("Gmpq") = bp::handle<>(reg_gmpq->m_class_object);
-
-  const bp::type_info info_ftd = bp::type_id<FT_d>();
-  const auto* reg_ftd = bp::converter::registry::query(info_ftd);
-  if ((reg_ftd == nullptr) || ((*reg_ftd).m_to_python == nullptr)) {
-    auto ftc = bp::class_<FT_d>("FT");
-    export_ft<FT_d>(ftc);
+  if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
+  if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
+  if (! add_attr<FT_d>(m, "FT")) {
+    auto ftc = py::class_<FT_d>(m, "FT");
+    export_ft(ftc);
   }
-  else bp::scope().attr("FT") = bp::handle<>(reg_ftd->m_class_object);
 #endif
 
-  bp::class_<Point_d>("Point_d")
-    .def(bp::init<>())
-    .def("__init__", bp::make_constructor(&init_point_d))
-    .def("dimension", &Point_d::dimension)
-    .def("cartesian", &Point_d::cartesian, Kernel_d_return_value_policy())
-    .def("__getitem__", &Point_d::operator[], Kernel_d_return_value_policy())
-    .def("coordinates", bp::range<>(&Point_d::cartesian_begin, &Point_d::cartesian_end))
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
+  py::class_<Pnt> pd_c(m, "Point_d");
+  pd_c.def(py::init<>())
+    .def("__init__", &init_point_d)
+    .def("__hash__", &hash_rational_point<is_epec_d_type(), Pnt>)
+    .def("dimension", &Pnt::dimension)
+    .def("cartesian", &Pnt::cartesian)
+    .def("__getitem__", &Pnt::operator[])
+    .def(py::self == py::self)
+    .def(py::self != py::self)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
-    .def(bp::self > bp::self)
-    .def(bp::self < bp::self)
-    .def(bp::self <= bp::self)
-    .def(bp::self >= bp::self)
+    .def(py::self > py::self)
+    .def(py::self < py::self)
+    .def(py::self <= py::self)
+    .def(py::self >= py::self)
 #endif
-    .setattr("__hash__", &hash_rational_point<is_epec_d_type(), Point_d>)
     ;
 
-  bp::class_<Segment_d>("Segment_d")
-    .def(bp::init<Point_d&, Point_d&>())
-    .def("source", &Segment_d::source, Kernel_d_return_value_policy())
-    .def("target", &Segment_d::target, Kernel_d_return_value_policy())
+  using Cci = Pnt::Cartesian_const_iterator;
+  add_iterator<Cci, Cci, const FT_d&>("Cartesian_iterator", pd_c);
+  pd_c.def("cartesians",
+            [](const Pnt& p)
+            { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
+           py::keep_alive<0, 1>());
+
+  add_insertion(pd_c, "__str__");
+  add_insertion(pd_c, "__repr__");
+
+  py::class_<Segment_d> sd_co(m, "Segment_d");
+  sd_co.def(py::init<Point_d&, Point_d&>())
+    .def("source", &Segment_d::source)
+    .def("target", &Segment_d::target)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
     .def("opposite", &Segment_d::opposite)
-    .def("__getitem__", &Segment_d::operator[], Kernel_d_return_value_policy())
+    .def("__getitem__", &Segment_d::operator[])
 #endif
 #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
-    .def("vertex", &Segment_d::vertex, Kernel_d_return_value_policy())
-    .def("point", &Segment_d::point, Kernel_d_return_value_policy())
-    .def("min", &Segment_d::min, Kernel_d_return_value_policy())
-    .def("max", &Segment_d::max, Kernel_d_return_value_policy())
+    .def("vertex", &Segment_d::vertex)
+    .def("point", &Segment_d::point)
+    .def("min", &Segment_d::min)
+    .def("max", &Segment_d::max)
     .def("supporting_line", &Segment_d::supporting_line)
     .def("squared_length", &Segment_d::squared_length)
     .def("direction", &Segment_d::direction)
     .def("has_on", &Segment_d::has_on)
     .def("is_degenerate", &Segment_d::is_degenerate)
-    .def(bp::self_ns::str(bp::self_ns::self))
-    .def(bp::self_ns::repr(bp::self_ns::self))
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
+    .def(py::self == py::self)
+    .def(py::self != py::self)
 #endif
     // .setattr("__hash__", &hash<Segment_d>)
     ;
 
-  bind_do_intersect_d();
+  add_insertion(sd_co, "__str__");
+  add_insertion(sd_co, "__repr__");
+
+  bind_do_intersect_d(m);
 }

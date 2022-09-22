@@ -9,15 +9,13 @@
 #ifndef CGALPY_TRIANGULATION_3_TYPES_HPP
 #define CGALPY_TRIANGULATION_3_TYPES_HPP
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS 1
-
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
 #include "CGALPY/alpha_shape_3_config.hpp"
 #include "CGALPY/triangulation_3_config.hpp"
 #include "CGALPY/kernel_types.hpp"
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 namespace tri3 {
 
@@ -27,7 +25,7 @@ typedef Tr<CGALPY_TRI3, Kernel>::type                           Traits;
 // Vertex type
 typedef Vertex_periodic<is_periodic()>::type                    Vbd;
 typedef Vertex_base_name<is_regular(), Vbd, Traits>::type       Vb;
-typedef Vertex_with_info<vertex_with_info(), Vb, bp::object, Traits>::type
+typedef Vertex_with_info<vertex_with_info(), Vb, py::object, Traits>::type
                                                                 Vbi;
 #ifdef CGALPY_AS3
 typedef Vertex_alpha_shape<CGALPY_AS3, Vbi, Traits, Ec>::type   Vbia;
@@ -39,7 +37,7 @@ typedef Vertex_hierarchy<hierarchy(), Vbia>::type               V;
 // Cell type
 typedef Cell_periodic<is_periodic()>::type                      Cbd;
 typedef Cell_base_name<is_regular(), Cbd, Traits>::type         Cb;
-typedef Cell_with_info<cell_with_info(), Cb, bp::object, Traits>::type
+typedef Cell_with_info<cell_with_info(), Cb, py::object, Traits>::type
                                                                 Cbi;
 # ifdef CGALPY_AS3
 typedef Cell_alpha_shape<CGALPY_AS3, Cbi, Traits, Ec>::type     C;
