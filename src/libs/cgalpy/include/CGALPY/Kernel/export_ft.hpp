@@ -25,8 +25,8 @@ void export_ft(C& c) {
   using FT = typename C::Type;
 
   c.def(py::init<const FT&>())
-    .def(py::init_implicit<int>())
     .def(py::init_implicit<double>())
+    .def(py::init_implicit<int>())
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self < py::self)
