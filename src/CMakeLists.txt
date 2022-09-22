@@ -81,6 +81,7 @@ select_polygon_partitioning()
 select_triangulation_3()
 select_alpha_shape_3()
 select_surface_mesh()
+select_polyhedron_3()
 select_polygon_mesh_processing()
 
 if (${CGALPY_KERNEL_D_BINDINGS} AND

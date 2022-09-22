@@ -14,28 +14,29 @@
 
 namespace py = nanobind;
 
+void export_alpha_shape_2(py::module_&);
+void export_alpha_shape_3(py::module_&);
+void export_arrangement_on_surface_2(py::module_&);
+void export_boolean_set_operations_2(py::module_&);
+void export_bounding_volumes(py::module_&);
+void export_convex_hull_2_bindings(py::module_&);
+void export_general_polygon_set_2(py::module_&);
+void export_intersections_2(py::module_&);
 void export_kernel(py::module_&);
 void export_kernel_d(py::module_&);
-void export_arrangement_on_surface_2(py::module_&);
-void export_intersections_2(py::module_&);
-void export_point_location(py::module_&);
+void export_minkowski_sum_2(py::module_&);
 void export_object(py::module_&);
+void export_point_location(py::module_&);
+void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
-void export_polygon_with_holes_2(py::module_&);
 void export_polygon_mesh_processing(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
-void export_general_polygon_set_2(py::module_&);
-void export_minkowski_sum_2(py::module_&);
-void export_boolean_set_operations_2(py::module_&);
-void export_triangulation_2(py::module_&);
-void export_convex_hull_2_bindings(py::module_&);
+void export_polygon_with_holes_2(py::module_&);
 void export_spatial_searching(py::module_&);
 void export_surface_mesh(py::module_&);
-void export_bounding_volumes(py::module_&);
+void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
-void export_alpha_shape_2(py::module_&);
-void export_alpha_shape_3(py::module_&);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
 
@@ -127,6 +128,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
   auto as3_m = m.def_submodule("As3");
   export_alpha_shape_3(as3_m);
+#endif
+
+#ifdef CGALPY_POLYHEDRON_3_BINDINGS
+  auto pol3_m = m.def_submodule("Pol3");
+  export_polyhedron_3(pol3_m);
 #endif
 
 #ifdef CGALPY_SURFACE_MESH_BINDINGS

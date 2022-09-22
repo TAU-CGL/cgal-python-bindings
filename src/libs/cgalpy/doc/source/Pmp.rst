@@ -1,6 +1,6 @@
 Bindings for CGAL Polygon mesh processing Module
 ================================================
 
-.. automodule:: @SPHINX_TARGET_NAME@.pmp
+.. automodule:: @SPHINX_TARGET_NAME@.Pmp
     :members:
     :undoc-members:

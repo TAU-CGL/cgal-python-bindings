@@ -148,6 +148,12 @@ if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
   list (APPEND CGALPY_MODULES Ms2)
   set (CGALPY_Ms2_FILTERS [=[{}]=])
 endif()
+# 3D Polyhedron
+if (CGALPY_POLYHEDRON_3_BINDINGS)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polyhedron_3_bindings.cpp)
+  list (APPEND CGALPY_MODULES Pol3)
+  set (CGALPY_Pol3_FILTERS [=[{}]=])
+endif()
 # 2D Polygon
 if (CGALPY_POLYGON_2_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
@@ -243,6 +249,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   # 2D convex hull
   if (CGALPY_CONVEX_HULL_2_BINDINGS)
     get_convex_hull_2_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
+  # 3D Polyhedron
+  if (CGALPY_POLYHEDRON_3_BINDINGS)
+    get_polyhedron_3_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
   # 2D Polygon
