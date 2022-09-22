@@ -12,7 +12,7 @@ else:
 
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
-Polyhedron_3 = Pol3.Polyhedron_3
+Polyhedron = Pol3.Polyhedron_3
 
 # Get the name of the input file from the command line, or use the default
 # file if no command-line parameters are given.
@@ -22,5 +22,5 @@ except:
   filename = 'meshes/cross_quad.off'
 
 with open(filename, 'r') as f:
-  prn = Polyhedron_3(f.read())
+  prn = Polyhedron(f.read())
   Pol3.draw(prn)

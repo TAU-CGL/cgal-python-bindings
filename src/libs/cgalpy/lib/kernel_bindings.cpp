@@ -16,6 +16,7 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/Kernel/export_point_2.hpp"
+#include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_vector_2.hpp"
 #include "CGALPY/Kernel/export_circle_2.hpp"
@@ -156,34 +157,34 @@ void export_kernel(py::module_& m) {
   using Vector_2 = Kernel::Vector_2;
   using Circle_2 = Kernel::Circle_2;
 
-  if (! add_attr<Pnt_2>(m, "Point_2")) {
-    py::class_<Pnt_2> pnt_c(m, "Point_2");
-    export_point_2<Kernel>(pnt_c);
+  using Pnt_3 = Kernel::Point_3;
 
-#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
-     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
-    using Cci = Kernel::Cartesian_const_iterator_2;
-    add_iterator<Cci, Cci, const FT&>("Cartesian_iterator", pnt_c);
-    pnt_c.def("cartesians",
-              [] (const Pnt_2& p)
-              { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
-              py::keep_alive<0, 1>());
-#endif
+  if (! add_attr<Pnt_2>(m, "Point_2")) {
+    py::class_<Pnt_2> pnt2_c(m, "Point_2");
+    export_point_2<Kernel>(pnt2_c);
+
+    if (! is_exact_ft()) {
+      using Cci = Kernel::Cartesian_const_iterator_2;
+      add_iterator<Cci, Cci>("Cartesian_iterator", pnt2_c);
+      pnt2_c.def("cartesians",
+                [] (const Pnt_2& p)
+                { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
+                py::keep_alive<0, 1>());
+    }
   }
 
   if (! add_attr<Vector_2>(m, "Vecotr_2")) {
     py::class_<Vector_2> vec_c(m, "Vecotr_2");
     export_vector_2<Kernel>(vec_c);
 
-#if ((CGALPY_KERNEL == CGALPY_KERNEL_EPIC) ||                           \
-     (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE))
-    using Cci = Kernel::Cartesian_const_iterator_2;
-    add_iterator<Cci, Cci, const FT&>("Cartesian_iterator", vec_c);
-    vec_c.def("cartesians",
-              [] (const Vector_2& v)
-              { return make_iterator(v.cartesian_begin(), v.cartesian_end()); },
-              py::keep_alive<0, 1>());
-#endif
+    if (! is_exact_ft()) {
+      using Cci = Kernel::Cartesian_const_iterator_2;
+      add_iterator<Cci, Cci>("Cartesian_iterator", vec_c);
+      vec_c.def("cartesians",
+                [] (const Vector_2& v)
+                { return make_iterator(v.cartesian_begin(), v.cartesian_end()); },
+                py::keep_alive<0, 1>());
+    }
   }
 
   if (! add_attr<Seg_2>(m, "Segment_2")) {
@@ -351,30 +352,19 @@ void export_kernel(py::module_& m) {
     .def(py::self + py::self)
     ;
 
-  py::class_<Point_3>(m, "Point_3")
-    .def(py::init<>())
-    .def(py::init<double, double, double>())
-    .def(py::init<FT&, FT&, FT&>())
-    .def(py::init<RT&, RT&, RT&>())
-    .def("x", &Point_3::x)
-    .def("y", &Point_3::y)
-    .def("z", &Point_3::z)
-    .def("hx", &Point_3::hx)
-    .def("hy", &Point_3::hy)
-    .def("hz", &Point_3::hz)
-    .def("hw", &Point_3::hw)
-    .def("dimension", &Pnt_2::dimension)
-    .def("__str__", to_string<Point_3>)
-    .def("__repr__", to_string<Point_3>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    .def(py::self > py::self)
-    .def(py::self < py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
-    .def(py::self - py::self)
-    //.setattr("__hash__", &hash<Point_3>)
-    ;
+  if (! add_attr<Pnt_3>(m, "Point_3")) {
+    py::class_<Pnt_3> pnt3_c(m, "Point_3");
+    export_point_3<Kernel>(pnt3_c);
+
+    if (! is_exact_ft()) {
+      using Cci = Kernel::Cartesian_const_iterator_3;
+      add_iterator<Cci, Cci>("Cartesian_iterator", pnt3_c);
+      pnt3_c.def("cartesians",
+                 [] (const Pnt_3& p)
+                 { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
+                 py::keep_alive<0, 1>());
+    }
+  }
 
   py::class_<Weighted_point_3>(m, "Weighted_point_3")
     .def(py::init<>())

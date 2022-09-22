@@ -17,31 +17,120 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "CGALPY/Kernel/export_point_3.hpp"
 
 namespace py = nanobind;
 
 namespace pol3 {
 
-typedef CGAL::Polyhedron_3<Kernel>            Polyhedron;
+typedef CGAL::Polyhedron_3<Kernel>              Polyhedron_3;
+typedef Polyhedron_3::Point_3                   Point_3;
+typedef Polyhedron_3::Vertex                    Vertex;
+typedef Polyhedron_3::Halfedge                  Halfedge;
+typedef Polyhedron_3::Facet                     Facet;
+
+typedef Polyhedron_3::Vertex_handle             Vertex_handle;
+typedef Polyhedron_3::Halfedge_handle           Halfedge_handle;
+typedef Polyhedron_3::Facet_handle              Facet_handle;
+
+typedef Polyhedron_3::Vertex_const_handle       Vertex_const_handle;
+typedef Polyhedron_3::Halfedge_const_handle     Halfedge_const_handle;
+typedef Polyhedron_3::Facet_const_handle        Facet_const_handle;
 
 // Draw a polyhedron.
-void draw(const Polyhedron& prn) { CGAL::draw(prn); }
+void draw(const Polyhedron_3& prn) { CGAL::draw(prn); }
+
+//
+Halfedge& make_tetrahedron1(Polyhedron_3& prn,
+                            const Point_3& p1, const Point_3& p2,
+                            const Point_3& p3, const Point_3& p4)
+{ return *(prn.make_tetrahedron(p1, p2, p3, p4)); }
+
+//
+Halfedge& make_tetrahedron2(Polyhedron_3& prn)
+{ return *(prn.make_tetrahedron()); }
+
+//
+bool is_tetrahedron(const Polyhedron_3& prn, const Halfedge& h)
+{ return prn.is_tetrahedron(Halfedge_const_handle(&h)); }
 
 }
 
-// Export Polyhedron.
+// Export Vertex
+template <typename C>
+void export_vertex(C& prn_c) {
+  using Prn = pol3::Polyhedron_3;
+  using Vertex = Prn::Vertex;
+
+  if (! add_attr<Vertex>(prn_c, "Vertex")) {
+    py::class_<Vertex> vertex_c(prn_c, "Vertex");
+    vertex_c.def(py::init<>())
+      ;
+  }
+}
+
+// Export Vertex
+template <typename C>
+void export_halfedge(C& prn_c) {
+  using Prn = pol3::Polyhedron_3;
+  using Halfedge = Prn::Halfedge;
+
+  if (! add_attr<Halfedge>(prn_c, "Halfedge")) {
+    py::class_<Halfedge> halfedge_c(prn_c, "Halfedge");
+    halfedge_c.def(py::init<>())
+      ;
+  }
+}
+
+// Export Vertex
+template <typename C>
+void export_facet(C& prn_c) {
+  using Prn = pol3::Polyhedron_3;
+  using Face = Prn::Face;
+
+  if (! add_attr<Face>(prn_c, "Face")) {
+    py::class_<Face> face_c(prn_c, "Face");
+    face_c.def(py::init<>())
+      ;
+  }
+}
+
+// Export Polyhedron_3.
 void export_polyhedron_3(py::module_& m) {
-  using Prn = pol3::Polyhedron;
+  using Prn = pol3::Polyhedron_3;
+  using Pnt = Prn::Point_3;
+  using Vertex = Prn::Vertex;
+  using Halfedge = Prn::Halfedge;
+  using Facet = Prn::Facet;
+
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  if (! add_attr<Pnt>(m, "Point_3")) {
+    py::class_<Pnt> pnt_c(m, "Point_3");
+    export_point_3<Kernel>(pnt_c);
+  }
+
+  export_vertex(m);
+  export_halfedge(m);
+  export_facet(m);
 
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");
     prn_c.def(py::init<>())
       .def(py::init<const Prn&>())
+      .def("make_tetrahedron", &pol3::make_tetrahedron1, ri)
+      .def("make_tetrahedron", &pol3::make_tetrahedron2, ri)
+      .def("is_tetrahedron", &pol3::is_tetrahedron)
       ;
 
     add_insertion(prn_c, "__str__");
     add_insertion(prn_c, "__repr__");
     add_extraction(prn_c);
+
+    add_attr<Pnt>(prn_c, "Point_3");
+    add_attr<Vertex>(prn_c, "Vertex");
+    add_attr<Halfedge>(prn_c, "Halfedge");
+    add_attr<Facet>(prn_c, "Facet");
   }
 
   m.def("draw", &pol3::draw);
