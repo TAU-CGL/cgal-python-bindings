@@ -47,15 +47,11 @@ template <typename PolygonMesh>
 py::list connected_components(const PolygonMesh& pmesh,
                                py::dict parameters = py::dict()) {
   using Pm = PolygonMesh;
-  // using Fi = typename Pm::Face_index;
 
   auto fccmap = CGAL::get(CGAL::dynamic_face_property_t<std::size_t>(), pmesh);
   auto num = pmp::connected_components(pmesh, fccmap);
   py::dict dct;
-  for (auto f : pmesh.faces()) {
-    std::cout << "Index: " << f.idx() << ": " << get(fccmap, f) << std::endl;
-    dct[py::cast(f)] = py::cast(get(fccmap, f));
-  }
+  for (auto f : pmesh.faces()) dct[py::cast(f)] = py::cast(get(fccmap, f));
   py::list lst;
   lst.append(num);
   lst.append(std::move(dct));
