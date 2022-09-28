@@ -9,6 +9,8 @@
 #ifndef CGALPY_HDS_HALFEDGE_WITH_DATA_HPP
 #define CGALPY_HDS_HALFEDGE_WITH_DATA_HPP
 
+#include <CGAL/HalfedgeDS_halfedge_base.h>
+
 // Halfedge with data
 
 template <typename Refs_, typename Data_>
@@ -38,15 +40,15 @@ public:
 
   /*! Obtain a non-const reference of the halfedge data.
    */
-  Data& data() { return m_data; }
+  Data& data();
 
   /*! Obtain a const reference of the halfedge data.
    */
-  const Data& data() const { return m_data; }
+  const Data& data() const;
 
   /*! Set the general purpose halfedge data.
    */
-  void set_data(const Data& data) { m_data = data; }
+  void set_data(const Data& data);
 };
 
 //! \brief constructs default
@@ -59,7 +61,7 @@ Hds_halfedge_with_data<Refs, Data>::
 Hds_halfedge_with_data(const Data& data) : m_data(data) {}
 
 //! \brief obtains a non-const reference of the halfedge data.
-template <typename Refs, typename typename Data>
+template <typename Refs, typename Data>
 Data& Hds_halfedge_with_data<Refs, Data>::data() { return m_data; }
 
 //! \brief obtains a const reference of the halfedge data.

@@ -10,32 +10,30 @@
 
 #include <nanobind/nanobind.h>
 
-#include <CGAL/Polyhedron_3.h>
+#include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 #include <CGAL/draw_polyhedron.h>
 
 #include "CGALPY/kernel_types.hpp"
+#include "CGALPY/Kernel/export_point_3.hpp"
+#include "CGALPY/polyhedron_3_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
-#include "CGALPY/Kernel/export_point_3.hpp"
 
 namespace py = nanobind;
 
 namespace pol3 {
 
-typedef CGAL::Polyhedron_3<Kernel>              Polyhedron_3;
-typedef Polyhedron_3::Point_3                   Point_3;
-typedef Polyhedron_3::Vertex                    Vertex;
-typedef Polyhedron_3::Halfedge                  Halfedge;
-typedef Polyhedron_3::Facet                     Facet;
+// Read a surface mesh from a file.
+template <typename Polyhedron_3>
+Polyhedron_3 read_polygon_mesh(const std::string& filename) {
+  using Prn = Polyhedron_3;
 
-typedef Polyhedron_3::Vertex_handle             Vertex_handle;
-typedef Polyhedron_3::Halfedge_handle           Halfedge_handle;
-typedef Polyhedron_3::Facet_handle              Facet_handle;
-
-typedef Polyhedron_3::Vertex_const_handle       Vertex_const_handle;
-typedef Polyhedron_3::Halfedge_const_handle     Halfedge_const_handle;
-typedef Polyhedron_3::Facet_const_handle        Facet_const_handle;
+  Prn pol;
+  if (! CGAL::IO::read_polygon_mesh(filename, pol))
+    throw std::runtime_error("Cannot read file!");
+  return pol;
+}
 
 // Draw a polyhedron.
 void draw(const Polyhedron_3& prn) { CGAL::draw(prn); }
@@ -134,4 +132,5 @@ void export_polyhedron_3(py::module_& m) {
   }
 
   m.def("draw", &pol3::draw);
+  m.def("read_polygon_mesh", &pol3::read_polygon_mesh<Prn>);
 }

@@ -11,7 +11,8 @@
 
 #include <nanobind/nanobind.h>
 
-#include <CGAL/HalfedgeDS_vertex_base.h>
+#include <CGAL/Polyhedron_items_3.h>
+#include <CGAL/Polyhedron_3.h>
 
 #include "CGALPY/polyhedron_3_config.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -24,22 +25,37 @@ struct Polyhedron_items : public CGAL::Polyhedron_items_3 {
   template <typename Refs, typename Traits>
   struct Vertex_wrapper {
     using Pnt = typename Traits::Point_3;
-    typedef Vertex_extended<is_face_extended(), Refs, Pnt, py::object> Vertex;
+    typedef typename Vertex_extended<is_vertex_extended(), Refs, Pnt,
+                                     py::object>::type          Vertex;
   };
 
   template <typename Refs, typename Traits>
   struct Halfedge_wrapper {
-    typedef Halfedge_extended<is_halfedge_extended(), Refs, py::object> Halfedge;
+    typedef typename Halfedge_extended<is_halfedge_extended(), Refs,
+                                       py::object>::type        Halfedge;
   };
 
   template <typename Refs, typename Traits>
   struct Face_wrapper {
     using Pln = typename Traits::Plane_3;
-    typedef Facet_extended<is_facet_extended(), Refs, Pln, py::object> Face;
+    typedef typename Facet_extended<is_facet_extended(), Refs, Pln,
+                                    py::object>::type           Face;
   };
 };
 
-typedef CGAL::Polyhedron_3<Kernel, Polyhedron_items> Polyhedron_2;
+typedef CGAL::Polyhedron_3<Kernel, Polyhedron_items> Polyhedron_3;
+typedef Polyhedron_3::Point_3                        Point_3;
+typedef Polyhedron_3::Vertex                         Vertex;
+typedef Polyhedron_3::Halfedge                       Halfedge;
+typedef Polyhedron_3::Facet                          Facet;
+
+typedef Polyhedron_3::Vertex_handle                  Vertex_handle;
+typedef Polyhedron_3::Halfedge_handle                Halfedge_handle;
+typedef Polyhedron_3::Facet_handle                   Facet_handle;
+
+typedef Polyhedron_3::Vertex_const_handle            Vertex_const_handle;
+typedef Polyhedron_3::Halfedge_const_handle          Halfedge_const_handle;
+typedef Polyhedron_3::Facet_const_handle             Facet_const_handle;
 
 }
 

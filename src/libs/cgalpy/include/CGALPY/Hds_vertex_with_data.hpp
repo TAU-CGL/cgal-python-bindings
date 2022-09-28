@@ -9,6 +9,8 @@
 #ifndef CGALPY_HDS_VERTEX_WITH_DATA_HPP
 #define CGALPY_HDS_VERTEX_WITH_DATA_HPP
 
+#include <CGAL/HalfedgeDS_vertex_base.h>
+
 // Vertex with data
 
 template <typename Refs_, typename Point_, typename Data_>
@@ -41,15 +43,15 @@ public:
 
   /*! Obtain a non-const reference of the vertex data.
    */
-  Data& data() { return m_data; }
+  Data& data();
 
   /*! Obtain a const reference of the vertex data.
    */
-  const Data& data() const { return m_data; }
+  const Data& data() const;
 
   /*! Set the general purpose vertex data.
    */
-  void set_data(const Data& data) { m_data = data; }
+  void set_data(const Data& data);
 };
 
 //! \brief constructs default

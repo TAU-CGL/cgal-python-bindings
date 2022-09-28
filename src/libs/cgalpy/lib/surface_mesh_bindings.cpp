@@ -13,12 +13,13 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
-#include <CGAL/Surface_mesh.h>
+#include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 #include <CGAL/draw_surface_mesh.h>
 
-#include "CGALPY/kernel_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/surface_mesh_types.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -196,6 +197,9 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     add_attr<Ei>(sm3_c, "Edge_index");
     add_attr<Hi>(sm3_c, "Halfedge_index");
     add_attr<Fi>(sm3_c, "Face_index");
+
+    add_insertion(sm3_c, "__str__");
+    add_insertion(sm3_c, "__repr__");
   }
 
   m.def("draw", &sm::draw<Sm>);
@@ -205,15 +209,14 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 // Export Surface_mesh<Pnt>
 void export_surface_mesh(py::module_& m) {
   // 2D Surface mesh
-  // using Sm_2 = CGAL::Surface_mesh<Kernel::Point_2>;
+  // using Sm_2 = sm::Surface_mesh_2;
   // export_surface_mesh_impl<Sm_2>(m, "Surface_mesh_2");
 
   // 3D Surface mesh
-  using Sm_3 = CGAL::Surface_mesh<Kernel::Point_3>;
+  using Sm_3 = sm::Surface_mesh_3;
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
-  // Read
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>);
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
 }
