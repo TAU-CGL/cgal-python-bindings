@@ -103,21 +103,21 @@ typedef CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>       Agt;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-typedef Tr<boolean_set_operations_2_bindings(), Agt>::type      Ggt;
-typedef typename Ggt::Point_2                                   Point_2;
-typedef typename Ggt::Curve_2                                   Curve_2;
-typedef typename Ggt::X_monotone_curve_2                        X_monotone_curve_2;
+typedef Tr<boolean_set_operations_2_bindings(), Agt>::type  Ggt;
+typedef typename Ggt::Point_2                               Point_2;
+typedef typename Ggt::Curve_2                               Curve_2;
+typedef typename Ggt::X_monotone_curve_2                    X_monotone_curve_2;
 
-typedef CGAL::Arr_vertex_base<Ggt::Point_2>                              Vb;
+typedef CGAL::Arr_vertex_base<Ggt::Point_2>                             Vb;
 typedef Vertex_extended<is_vertex_extended(), Vb, py::object>::type     V;
 
-typedef Halfedge_gps<boolean_set_operations_2_bindings(), Ggt>::type     Hb;
+typedef Halfedge_gps<boolean_set_operations_2_bindings(), Ggt>::type    Hb;
 typedef Halfedge_extended<is_halfedge_extended(), Hb, py::object>::type H;
 
 typedef Face_gps<boolean_set_operations_2_bindings()>::type             Fb;
 typedef Face_extended<is_face_extended(), Fb, py::object>::type         F;
 
-typedef CGAL::Arr_dcel_base<V, H, F>                       Dcel;
+typedef CGAL::Arr_dcel_base<V, H, F>                        Dcel;
 typedef Aos<CGALPY_AOS2_TYPE, Ggt, Dcel>::Topol_traits      Topology_traits;
 typedef Aos<CGALPY_AOS2_TYPE, Ggt, Dcel>::aos               Arrangement_on_surface_2;
 typedef Aos<CGALPY_AOS2_TYPE, Ggt, Dcel>::arr               Arrangement_2;
@@ -126,11 +126,11 @@ typedef Aos<CGALPY_AOS2_TYPE, Ggt, Dcel>::arr_with_history  Arrangement_with_his
 // Define the geometry traits hierarchy:
 typedef Agt                                     Arr_geometry_traits_2;
 typedef Ggt                                     Gps_geometry_traits_2;
-//! \todo Ass support for Basic geometry traits and x-monotone
+//! \todo Add support for Basic geometry traits and x-monotone
 // typedef ....                                 Ba_geometry_traits_2;
 // typedef ....                                 Xm_geometry_traits_2;
-//! \todo Ass support for Data-curve geometry traits
-//! \todo Ass support for counting and tracing geometry traits
+//! \todo Add support for Data-curve geometry traits
+//! \todo Add support for counting and tracing geometry traits
 // typedef ....                                 Dc_geometry_traits_2;
 // typedef ....                                 Trc_geometry_traits_2;
 

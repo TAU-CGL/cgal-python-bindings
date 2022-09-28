@@ -10,6 +10,8 @@
 #ifndef CGALPY_ARRANGEMENT_ON_SURFACE_2_CONFIG_HPP
 #define CGALPY_ARRANGEMENT_ON_SURFACE_2_CONFIG_HPP
 
+#include <nanobind/nanobind.h>
+
 #include <CGAL/Arr_segment_traits_2.h>
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
 #include <CGAL/Arr_circle_segment_traits_2.h>
@@ -26,6 +28,8 @@
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
+
+namespace py = nanobind;
 
 // Arrangement type options
 #define CGALPY_AOS2_ARRANGEMENT                         0
