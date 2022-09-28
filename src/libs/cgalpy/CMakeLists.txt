@@ -161,7 +161,7 @@ if (CGALPY_POLYGON_2_BINDINGS)
   list (APPEND CGALPY_MODULES Pol2)
   set (CGALPY_Pol2_FILTERS [=[{}]=])
 endif()
-# Polygon mesh processinf
+# Polygon mesh processing
 if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_mesh_processing_bindings.cpp)
   list (APPEND CGALPY_MODULES Pmp)
@@ -266,11 +266,6 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     get_minkowski_sum_2_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
-  # Polygon mesh processing
-  if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
-    get_polygon_mesh_processing_lib_name(ret)
-    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
-  endif()
   # 2D polygon partitioning
   if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
     get_polygon_partitioning_lib_name(ret)
@@ -294,6 +289,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
   # 3D triangulation
   if (CGALPY_TRIANGULATION_3_BINDINGS)
     get_triangulation_3_lib_name(ret)
+    set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+  endif()
+  # Polygon mesh processing
+  if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
+    get_polygon_mesh_processing_lib_name(ret)
     set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
   endif()
 endif()

@@ -11,7 +11,7 @@
 
 #include "CGALPY/Hds_vertex_with_data.hpp"
 #include "CGALPY/Hds_halfedge_with_data.hpp"
-#include "CGALPY/Hds_facet_with_data.hpp"
+#include "CGALPY/Hds_face_with_data.hpp"
 
 namespace pol3 {
 
@@ -25,7 +25,7 @@ constexpr bool is_halfedge_extended()
 
 // Indicates whether the halfedge type is extended
 constexpr bool is_facet_extended()
-{ return DETECT_EXIST(CGALPY_POL3_FACE_EXTENDED); }
+{ return DETECT_EXIST(CGALPY_POL3_FACET_EXTENDED); }
 
 // Vertex expension
 template <bool b, typename Refs, typename Point, typename Data>
@@ -38,9 +38,9 @@ struct Vertex_extended<true, Refs, Point, Data>
 { typedef Hds_vertex_with_data<Refs, Point, Data> type; };
 
 // Halfedge expension
-template <bool b, typename Refs, typename typename Data>
+template <bool b, typename Refs, typename Data>
 struct Halfedge_extended {};
-template <typename Refs, typename typename Data>
+template <typename Refs, typename Data>
 struct Halfedge_extended<false, Refs, Data>
 { typedef CGAL::HalfedgeDS_halfedge_base<Refs, CGAL::Tag_true,
                                          CGAL::Tag_true, CGAL::Tag_true> type; };
