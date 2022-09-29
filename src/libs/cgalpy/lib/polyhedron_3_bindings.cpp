@@ -19,6 +19,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -52,6 +53,27 @@ Halfedge& make_tetrahedron2(Polyhedron_3& prn)
 bool is_tetrahedron(const Polyhedron_3& prn, const Halfedge& h)
 { return prn.is_tetrahedron(Halfedge_const_handle(&h)); }
 
+/// \name Iterators
+/// @{
+
+//
+py::object my_vertices(const Polyhedron_3& prn)
+{ return make_iterator(prn.vertices_begin(), prn.vertices_end()); }
+
+//
+py::object my_halfedges(const Polyhedron_3& prn)
+{ return make_iterator(prn.halfedges_begin(), prn.halfedges_end()); }
+
+//
+py::object my_edges(const Polyhedron_3& prn)
+{ return make_iterator(prn.edges_begin(), prn.edges_end()); }
+
+//
+py::object my_faces(const Polyhedron_3& prn)
+{ return make_iterator(prn.facets_begin(), prn.facets_end()); }
+
+/// @}
+
 }
 
 // Export Vertex
@@ -82,7 +104,7 @@ void export_halfedge(C& prn_c) {
 
 // Export Vertex
 template <typename C>
-void export_facet(C& prn_c) {
+void export_face(C& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Face = Prn::Face;
 
@@ -90,6 +112,13 @@ void export_facet(C& prn_c) {
     py::class_<Face> face_c(prn_c, "Face");
     face_c.def(py::init<>())
       ;
+
+    // Until 'consteval' is supported (C++20), we cannot assume that
+    // pol3::face_with_id() is evaluated at compiletime
+#if defined(CGALPY_POL3_FACE_WITH_ID)
+    if constexpr(pol3::face_with_id())
+      face_c.def("id", [](const Face& f){ return f.id(); });
+#endif
   }
 }
 
@@ -99,7 +128,7 @@ void export_polyhedron_3(py::module_& m) {
   using Pnt = Prn::Point_3;
   using Vertex = Prn::Vertex;
   using Halfedge = Prn::Halfedge;
-  using Facet = Prn::Facet;
+  using Face = Prn::Face;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -110,7 +139,7 @@ void export_polyhedron_3(py::module_& m) {
 
   export_vertex(m);
   export_halfedge(m);
-  export_facet(m);
+  export_face(m);
 
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");
@@ -121,6 +150,22 @@ void export_polyhedron_3(py::module_& m) {
       .def("is_tetrahedron", &pol3::is_tetrahedron)
       ;
 
+    using Vci = Prn::Vertex_const_iterator;
+    using Hci = Prn::Halfedge_const_iterator;
+    using Eci = Prn::Edge_const_iterator;
+    using Fci = Prn::Face_const_iterator;
+
+    add_iterator<Vci, Vci>("Vertex_iterator", prn_c);
+    add_iterator<Hci, Hci>("Halfedge_iterator", prn_c);
+    add_iterator<Eci, Eci>("Edge_iterator", prn_c);
+    add_iterator<Fci, Fci>("Face_iterator", prn_c);
+
+    prn_c.def("vertices", &pol3::my_vertices, py::keep_alive<0, 1>())
+      .def("halfedges", &pol3::my_halfedges, py::keep_alive<0, 1>())
+      .def("edges", &pol3::my_edges, py::keep_alive<0, 1>())
+      .def("faces", &pol3::my_faces, py::keep_alive<0, 1>())
+      ;
+
     add_insertion(prn_c, "__str__");
     add_insertion(prn_c, "__repr__");
     add_extraction(prn_c);
@@ -128,7 +173,7 @@ void export_polyhedron_3(py::module_& m) {
     add_attr<Pnt>(prn_c, "Point_3");
     add_attr<Vertex>(prn_c, "Vertex");
     add_attr<Halfedge>(prn_c, "Halfedge");
-    add_attr<Facet>(prn_c, "Facet");
+    add_attr<Face>(prn_c, "Face");
   }
 
   m.def("draw", &pol3::draw);

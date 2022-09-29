@@ -13,15 +13,12 @@
 
 // Vertex with data
 
-template <typename Refs_, typename Point_, typename Data_>
-class Hds_vertex_with_data :
-  public CGAL::HalfedgeDS_vertex_base<Refs_, CGAL::Tag_true, Point_>
-{
+template <typename Base_, typename Data_>
+class Hds_vertex_with_data : public Base_ {
 public:
-  using Refs = Refs_;
+  using Base = Base_;
   using Data = Data_;
-  using Point = Point_;
-  using Base = CGAL::HalfedgeDS_vertex_base<Refs, CGAL::Tag_true, Point>;
+  using Point_2 = typename Base::Point_2;
 
 private:
   /*! General purpose data.
@@ -35,11 +32,11 @@ public:
 
   /*! Construct from a point.
    */
-  Hds_vertex_with_data(Point const& p);
+  Hds_vertex_with_data(Point_2 const& p);
 
   /*! Construct from a point and a vertex data.
    */
-  Hds_vertex_with_data(Point const& p, const Data& data);
+  Hds_vertex_with_data(Point_2 const& p, const Data& data);
 
   /*! Obtain a non-const reference of the vertex data.
    */
@@ -55,36 +52,36 @@ public:
 };
 
 //! \brief constructs default
-template <typename Refs, typename Point, typename Data>
-Hds_vertex_with_data<Refs, Point, Data>::Hds_vertex_with_data() : m_data() {}
+template <typename Base, typename Data>
+Hds_vertex_with_data<Base, Data>::Hds_vertex_with_data() : m_data() {}
 
 //! \brief constructs from a point.
-template <typename Refs, typename Point, typename Data>
-Hds_vertex_with_data<Refs, Point, Data>::Hds_vertex_with_data(Point const& p) :
+template <typename Base, typename Data>
+Hds_vertex_with_data<Base, Data>::Hds_vertex_with_data(Point_2 const& p) :
   Base(p),
   m_data()
 {}
 
 //! \brief constructs from a point and a vertex data.
-template <typename Refs, typename Point, typename Data>
-Hds_vertex_with_data<Refs, Point, Data>::
-Hds_vertex_with_data(Point const& p,const Data& data) :
+template <typename Base, typename Data>
+Hds_vertex_with_data<Base, Data>::
+Hds_vertex_with_data(Point_2 const& p,const Data& data) :
   Base(p),
   m_data(data)
 {}
 
 //! \brief obtains a non-const reference of the vertex data.
-template <typename Refs, typename Point, typename Data>
-Data& Hds_vertex_with_data<Refs, Point, Data>::data() { return m_data; }
+template <typename Base, typename Data>
+Data& Hds_vertex_with_data<Base, Data>::data() { return m_data; }
 
 //! \brief obtains a const reference of the vertex data.
-template <typename Refs, typename Point, typename Data>
-const Data& Hds_vertex_with_data<Refs, Point, Data>::data() const
+template <typename Base, typename Data>
+const Data& Hds_vertex_with_data<Base, Data>::data() const
 { return m_data; }
 
 //! \brief sets the general purpose vertex data.
-template <typename Refs, typename Point, typename Data>
-void Hds_vertex_with_data<Refs, Point, Data>::set_data(const Data& data)
+template <typename Base, typename Data>
+void Hds_vertex_with_data<Base, Data>::set_data(const Data& data)
 { m_data = data; }
 
 #endif

@@ -20,6 +20,7 @@
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/surface_mesh_types.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -69,6 +70,34 @@ typename SurfaceMesh::Face_index add_face(SurfaceMesh& sm, py::list& lst) {
   return sm.add_face(CGAL::make_range(begin, end));
 }
 
+/// \name Iterators
+/// @{
+
+//
+template <typename SurfaceMesh>
+py::object my_vertices(const SurfaceMesh& sm)
+{ return make_iterator(sm.vertices_begin(), sm.vertices_end()); }
+
+//
+template <typename SurfaceMesh>
+py::object my_halfedges(const SurfaceMesh& sm)
+{ return make_iterator(sm.halfedges_begin(), sm.halfedges_end()); }
+
+//
+template <typename SurfaceMesh>
+py::object my_edges(const SurfaceMesh& sm)
+{ return make_iterator(sm.edges_begin(), sm.edges_end()); }
+
+//
+template <typename SurfaceMesh>
+py::object my_faces(const SurfaceMesh& sm)
+{ return make_iterator(sm.faces_begin(), sm.faces_end()); }
+
+/// @}
+
+}
+
+//
 template <typename SurfaceMesh, typename C>
 void add_sm_index(C& c) {
   using Sm = SurfaceMesh;
@@ -77,10 +106,9 @@ void add_sm_index(C& c) {
 
   c.def(py::init<>())
     .def(py::init<size_type>())
+    .def("id", &Sm_i::idx)
     .def("idx", &Sm_i::idx)
     ;
-}
-
 }
 
 // Export Surface_mesh.
@@ -100,7 +128,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   using Sm_vi = typename CGAL::SM_Index<Vi>;
   if (! add_attr<Sm_vi>(m, "SM_Index_vertex_index")) {
     py::class_<Sm_vi> sm_vi_c(m, "SM_vertex_index");
-    sm::add_sm_index<Sm>(sm_vi_c);
+    add_sm_index<Sm>(sm_vi_c);
   }
 
   if (! add_attr<Vi>(m, "Vertex_index")) {
@@ -130,7 +158,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   using Sm_hi = typename CGAL::SM_Index<Hi>;
   if (! add_attr<Sm_hi>(m, "SM_halfedge_index")) {
     py::class_<Sm_hi> sm_hi_c(m, "SM_halfedge_index");
-    sm::add_sm_index<Sm>(sm_hi_c);
+    add_sm_index<Sm>(sm_hi_c);
   }
 
   if (! add_attr<Hi>(m, "Halfedge_index")) {
@@ -146,7 +174,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   using Sm_fi = typename CGAL::SM_Index<Fi>;
   if (! add_attr<Sm_fi>(m, "SM_face_index")) {
     py::class_<Sm_fi> sm_fi_c(m, "SM_face_index");
-    sm::add_sm_index<Sm>(sm_fi_c);
+    add_sm_index<Sm>(sm_fi_c);
   }
 
   if (! add_attr<Fi>(m, "Face_index")) {
@@ -161,8 +189,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   // Surface mesh
   if (! add_attr<Sm>(m, name)) {
 
-    py::class_<Sm> sm3_c(m, name);
-    sm3_c.def(py::init<>())
+    py::class_<Sm> sm_c(m, name);
+    sm_c.def(py::init<>())
       .def(py::init<const Sm&>())
       // .def("assign", &Sm::assign, ri)
       .def("add_vertex", py::overload_cast<>(&Sm::add_vertex))
@@ -193,13 +221,29 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("is_valid", py::overload_cast<Fi>(&Sm::is_valid, py::const_))
       ;
 
-    add_attr<Vi>(sm3_c, "Vertex_index");
-    add_attr<Ei>(sm3_c, "Edge_index");
-    add_attr<Hi>(sm3_c, "Halfedge_index");
-    add_attr<Fi>(sm3_c, "Face_index");
+    add_attr<Vi>(sm_c, "Vertex_index");
+    add_attr<Ei>(sm_c, "Edge_index");
+    add_attr<Hi>(sm_c, "Halfedge_index");
+    add_attr<Fi>(sm_c, "Face_index");
 
-    add_insertion(sm3_c, "__str__");
-    add_insertion(sm3_c, "__repr__");
+    using Vci = typename Sm::Vertex_iterator;
+    using Hci = typename Sm::Halfedge_iterator;
+    using Eci = typename Sm::Edge_iterator;
+    using Fci = typename Sm::Face_iterator;
+
+    add_iterator<Vci, Vci>("Vertex_iterator", sm_c);
+    add_iterator<Hci, Hci>("Halfedge_iterator", sm_c);
+    add_iterator<Eci, Eci>("Edge_iterator", sm_c);
+    add_iterator<Fci, Fci>("Face_iterator", sm_c);
+
+    sm_c.def("vertices", &sm::my_vertices<Sm>, py::keep_alive<0, 1>())
+      .def("halfedges", &sm::my_halfedges<Sm>, py::keep_alive<0, 1>())
+      .def("edges", &sm::my_edges<Sm>, py::keep_alive<0, 1>())
+      .def("faces", &sm::my_faces<Sm>, py::keep_alive<0, 1>())
+      ;
+
+    add_insertion(sm_c, "__str__");
+    add_insertion(sm_c, "__repr__");
   }
 
   m.def("draw", &sm::draw<Sm>);
