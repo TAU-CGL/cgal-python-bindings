@@ -75,22 +75,22 @@ typename SurfaceMesh::Face_index add_face(SurfaceMesh& sm, py::list& lst) {
 
 //
 template <typename SurfaceMesh>
-py::object my_vertices(const SurfaceMesh& sm)
+py::object vertices(const SurfaceMesh& sm)
 { return make_iterator(sm.vertices_begin(), sm.vertices_end()); }
 
 //
 template <typename SurfaceMesh>
-py::object my_halfedges(const SurfaceMesh& sm)
+py::object halfedges(const SurfaceMesh& sm)
 { return make_iterator(sm.halfedges_begin(), sm.halfedges_end()); }
 
 //
 template <typename SurfaceMesh>
-py::object my_edges(const SurfaceMesh& sm)
+py::object edges(const SurfaceMesh& sm)
 { return make_iterator(sm.edges_begin(), sm.edges_end()); }
 
 //
 template <typename SurfaceMesh>
-py::object my_faces(const SurfaceMesh& sm)
+py::object faces(const SurfaceMesh& sm)
 { return make_iterator(sm.faces_begin(), sm.faces_end()); }
 
 /// @}
@@ -236,10 +236,10 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     add_iterator<Eci, Eci>("Edge_iterator", sm_c);
     add_iterator<Fci, Fci>("Face_iterator", sm_c);
 
-    sm_c.def("vertices", &sm::my_vertices<Sm>, py::keep_alive<0, 1>())
-      .def("halfedges", &sm::my_halfedges<Sm>, py::keep_alive<0, 1>())
-      .def("edges", &sm::my_edges<Sm>, py::keep_alive<0, 1>())
-      .def("faces", &sm::my_faces<Sm>, py::keep_alive<0, 1>())
+    sm_c.def("vertices", &sm::vertices<Sm>, py::keep_alive<0, 1>())
+      .def("halfedges", &sm::halfedges<Sm>, py::keep_alive<0, 1>())
+      .def("edges", &sm::edges<Sm>, py::keep_alive<0, 1>())
+      .def("faces", &sm::faces<Sm>, py::keep_alive<0, 1>())
       ;
 
     add_insertion(sm_c, "__str__");
