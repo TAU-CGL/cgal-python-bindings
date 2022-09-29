@@ -13,15 +13,12 @@
 
 // Vertex with data
 
-template <typename Refs_, typename Plane_, typename Data_>
-class Hds_face_with_data :
-  public CGAL::HalfedgeDS_face_base<Refs_, CGAL::Tag_true, Plane_>
-{
+template <typename Base_, typename Data_>
+class Hds_face_with_data : Base_ {
 public:
-  using Refs = Refs_;
+  using Base = Base_;
   using Data = Data_;
-  using Plane = Plane_;
-  using Base = CGAL::HalfedgeDS_face_base<Refs, CGAL::Tag_true, Plane>;
+  using Plane_3 = typename Base::Plane_3;
 
 private:
   /*! General purpose data.
@@ -35,11 +32,11 @@ public:
 
   /*! Construct from a plane.
    */
-  Hds_face_with_data(Plane const& p);
+  Hds_face_with_data(Plane_3 const& p);
 
   /*! Construct from a plane and a face data.
    */
-  Hds_face_with_data(Plane const& p, const Data& data);
+  Hds_face_with_data(Plane_3 const& p, const Data& data);
 
   /*! Obtain a non-const reference of the face data.
    */
@@ -55,36 +52,36 @@ public:
 };
 
 //! \brief constructs default
-template <typename Refs, typename Plane, typename Data>
-Hds_face_with_data<Refs, Plane, Data>::Hds_face_with_data() : m_data() {}
+template <typename Base, typename Data>
+Hds_face_with_data<Base, Data>::Hds_face_with_data() : m_data() {}
 
 //! \brief constructs from a plane.
-template <typename Refs, typename Plane, typename Data>
-Hds_face_with_data<Refs, Plane, Data>::Hds_face_with_data(Plane const& p) :
+template <typename Base, typename Data>
+Hds_face_with_data<Base, Data>::Hds_face_with_data(Plane_3 const& p) :
   Base(p),
   m_data()
 {}
 
 //! \brief constructs from a plane and a face data.
-template <typename Refs, typename Plane, typename Data>
-Hds_face_with_data<Refs, Plane, Data>::
-Hds_face_with_data(Plane const& p,const Data& data) :
+template <typename Base, typename Data>
+Hds_face_with_data<Base, Data>::
+Hds_face_with_data(Plane_3 const& p, const Data& data) :
   Base(p),
   m_data(data)
 {}
 
 //! \brief obtains a non-const reference of the face data.
-template <typename Refs, typename Plane, typename Data>
-Data& Hds_face_with_data<Refs, Plane, Data>::data() { return m_data; }
+template <typename Base, typename Data>
+Data& Hds_face_with_data<Base, Data>::data() { return m_data; }
 
 //! \brief obtains a const reference of the face data.
-template <typename Refs, typename Plane, typename Data>
-const Data& Hds_face_with_data<Refs, Plane, Data>::data() const
+template <typename Base, typename Data>
+const Data& Hds_face_with_data<Base, Data>::data() const
 { return m_data; }
 
 //! \brief sets the general purpose face data.
-template <typename Refs, typename Plane, typename Data>
-void Hds_face_with_data<Refs, Plane, Data>::set_data(const Data& data)
+template <typename Base, typename Data>
+void Hds_face_with_data<Base, Data>::set_data(const Data& data)
 { m_data = data; }
 
 #endif

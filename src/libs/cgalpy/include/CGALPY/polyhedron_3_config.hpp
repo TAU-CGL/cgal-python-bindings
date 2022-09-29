@@ -13,7 +13,23 @@
 #include "CGALPY/Hds_halfedge_with_data.hpp"
 #include "CGALPY/Hds_face_with_data.hpp"
 
+#include <CGAL/HalfedgeDS_vertex_max_base_with_id.h>
+#include <CGAL/HalfedgeDS_halfedge_max_base_with_id.h>
+#include <CGAL/HalfedgeDS_face_max_base_with_id.h>
+
 namespace pol3 {
+
+// Indicates whether the vertex type has an id
+constexpr bool vertex_with_id()
+{ return DETECT_EXIST(CGALPY_POL3_VERTEX_WITH_ID); }
+
+// Indicates whether the halfedge type has an id
+constexpr bool halfedge_with_id()
+{ return DETECT_EXIST(CGALPY_POL3_HALFEDGE_WITH_ID); }
+
+// Indicates whether the halfedge type has an id
+constexpr bool face_with_id()
+{ return DETECT_EXIST(CGALPY_POL3_FACE_WITH_ID); }
 
 // Indicates whether the vertex type is extended
 constexpr bool is_vertex_extended()
@@ -24,20 +40,29 @@ constexpr bool is_halfedge_extended()
 { return DETECT_EXIST(CGALPY_POL3_HALFEDGE_EXTENDED); }
 
 // Indicates whether the halfedge type is extended
-constexpr bool is_facet_extended()
-{ return DETECT_EXIST(CGALPY_POL3_FACET_EXTENDED); }
+constexpr bool is_face_extended()
+{ return DETECT_EXIST(CGALPY_POL3_FACE_EXTENDED); }
 
-// Vertex expension
-template <bool b, typename Refs, typename Point, typename Data>
-struct Vertex_extended {};
-template <typename Refs, typename Point, typename Data>
-struct Vertex_extended<false, Refs, Point, Data>
+// Vertex expansion
+template <bool b, typename Refs, typename Point> struct Vertex_with_id {};
+template <typename Refs, typename Point>
+struct Vertex_with_id<false, Refs, Point>
 { typedef CGAL::HalfedgeDS_vertex_base<Refs, CGAL::Tag_true, Point> type; };
-template <typename Refs, typename Point, typename Data>
-struct Vertex_extended<true, Refs, Point, Data>
-{ typedef Hds_vertex_with_data<Refs, Point, Data> type; };
+template <typename Refs, typename Point>
+struct Vertex_with_id<true, Refs, Point>
+{
+  typedef CGAL::HalfedgeDS_vertex_max_base_with_id<Refs, Point, std::size_t>
+                                                                type;
+};
 
-// Halfedge expension
+template <bool b, typename Vb, typename Data> struct Vertex_extended {};
+template <typename Vb, typename Data>
+struct Vertex_extended<false, Vb, Data> { typedef Vb type; };
+template <typename Vb, typename Data>
+struct Vertex_extended<true, Vb, Data>
+{ typedef Hds_vertex_with_data<Vb, Data> type; };
+
+// Halfedge expansion
 template <bool b, typename Refs, typename Data>
 struct Halfedge_extended {};
 template <typename Refs, typename Data>
@@ -48,15 +73,24 @@ template <typename Refs, typename Data>
 struct Halfedge_extended<true, Refs, Data>
 { typedef Hds_halfedge_with_data<Refs, Data> type; };
 
-// Facet expension
-template <bool b, typename Refs, typename Plane, typename Data>
-struct Facet_extended {};
-template <typename Refs, typename Plane, typename Data>
-struct Facet_extended<false, Refs, Plane, Data>
+// Face expansion
+template <bool b, typename Refs, typename Plane> struct Face_with_id {};
+template <typename Refs, typename Plane>
+struct Face_with_id<false, Refs, Plane>
 { typedef CGAL::HalfedgeDS_face_base<Refs, CGAL::Tag_true, Plane> type; };
-template <typename Refs, typename Plane, typename Data>
-struct Facet_extended<true, Refs, Plane, Data>
-{ typedef Hds_face_with_data<Refs, Plane, Data> type; };
+template <typename Refs, typename Plane>
+struct Face_with_id<true, Refs, Plane>
+{
+  typedef CGAL::HalfedgeDS_face_max_base_with_id<Refs, CGAL::Tag_false,
+                                                 std::size_t>   type;
+};
+
+template <bool b, typename Fb, typename Data> struct Face_extended {};
+template <typename Fb, typename Data>
+struct Face_extended<false, Fb, Data> { typedef Fb type; };
+template <typename Fb, typename Data>
+struct Face_extended<true, Fb, Data>
+{ typedef Hds_face_with_data<Fb, Data> type; };
 
 }
 
