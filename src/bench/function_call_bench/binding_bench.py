@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# export PYTHONPATH=...
+# export PYTHONPATH=swig:pybind11:boost:nanobind
 
 import square_pybind11
 import square_swig

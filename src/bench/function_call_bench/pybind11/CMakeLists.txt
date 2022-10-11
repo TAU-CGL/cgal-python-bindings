@@ -23,9 +23,3 @@ add_library(square_pybind11 SHARED square.cpp)
 
 # don't prepend wrapper library name with lib
 set_target_properties(square_pybind11 PROPERTIES PREFIX "")
-
-# install targets
-# install(TARGETS square
-#  RUNTIME DESTINATION ${BIN_DIR}
-#  LIBRARY DESTINATION ${LIB_DIR}
-#  ARCHIVE DESTINATION ${LIB_DIR})
