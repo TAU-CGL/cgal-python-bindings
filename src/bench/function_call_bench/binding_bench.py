@@ -18,35 +18,35 @@ t1 = time.process_time()
 for i in range(j, times):
     square_swig.square(i)
 t2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
 
 print(small + "boost python")
 t1 = time.process_time()
 for i in range(j, times):
     square_boost.square(i)
 t2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
 
 print(small + "pybind11")
 t1 = time.process_time()
 for i in range(j, times):
     square_pybind11.square(i)
 t2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
 
 print(small + "nanobind")
 t1 = time.process_time()
 for i in range(j, times):
     square_nanobind.square(i)
 t2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
 
 print(small + "native python")
 t1 = time.process_time()
 for i in range(j, times):
     math.sqrt(i)
 t2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
 
 
 big = "one big task: "
@@ -55,25 +55,25 @@ print(big + "swig")
 t1 = time.process_time()
 square_swig.squareTimes(j, times)
 t2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
 
 print(big + "boost python")
 t1 = time.process_time()
 square_boost.squareTimes(j, times)
 t2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
 
 print(big + "pybind11")
 t1 = time.process_time()
 square_pybind11.squareTimes(j, times)
 t2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
 
 print(big + "nanobind")
 t1 = time.process_time()
 square_nanobind.squareTimes(j, times)
 t2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
 
 print(big + "native python")
 t1 = time.process_time()
@@ -82,4 +82,4 @@ for i in range(0, times):
     res += j
     res = math.sqrt(res)
 T2 = time.process_time()
-print(t2-t1)
+print("%.3f" % float(t2-t1))
