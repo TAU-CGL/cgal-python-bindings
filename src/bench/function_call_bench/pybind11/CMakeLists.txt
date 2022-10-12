@@ -16,7 +16,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 set(PY_VERSION 3.8)
 find_package(PythonLibs ${PY_VERSION} REQUIRED)
-find_package(pybind11 REQUIRED)
+find_package(pybind11 CONFIG)
 
 include_directories(${PYTHON_INCLUDE_DIRS})
 add_library(square_pybind11 SHARED square.cpp)
