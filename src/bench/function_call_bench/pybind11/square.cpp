@@ -16,7 +16,7 @@ double square_times(double i, int times)
   return res;
 }
 
-PYBIND11_MODULE(square, m) {
+PYBIND11_MODULE(square_pybind11, m) {
   m.doc() = "pybind11 example plugin"; // optional module docstring
 
   m.def("square", &square, "A function that calculates the square root of a number");
