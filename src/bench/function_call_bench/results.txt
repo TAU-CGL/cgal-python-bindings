@@ -1,21 +1,25 @@
 many small tasks: swig
-13.140625
+9.112
 many small tasks: boost python
-13.65625
+7.545
 many small tasks: pybind11
-26.71875
+11.532
+many small tasks: nanobind
+6.231
 many small tasks: native python
-13.359375
+5.265
 one big task: swig
-0.734375
+0.353
 one big task: boost python
-0.71875
+0.354
 one big task: pybind11
-0.71875
+0.354
+one big task: nanobind
+0.354
 one big task: native python
-17.84375
+-0.000
 
-generated file size comparison:
-pybind11: 92kb
-boost python: 108kb
-swig: 30kb
+32K	boost/square_boost.so
+160K	nanobind/square_nanobind.cpython-38-x86_64-linux-gnu.so
+148K	pybind11/square_pybind11.so
+36K	swig/_square_swig.so

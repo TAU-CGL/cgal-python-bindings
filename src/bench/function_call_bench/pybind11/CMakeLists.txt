@@ -16,16 +16,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 set(PY_VERSION 3.8)
 find_package(PythonLibs ${PY_VERSION} REQUIRED)
-find_package(pybind11 REQUIRED)
+find_package(pybind11 CONFIG)
 
 include_directories(${PYTHON_INCLUDE_DIRS})
 add_library(square_pybind11 SHARED square.cpp)
 
 # don't prepend wrapper library name with lib
 set_target_properties(square_pybind11 PROPERTIES PREFIX "")
-
-# install targets
-# install(TARGETS square
-#  RUNTIME DESTINATION ${BIN_DIR}
-#  LIBRARY DESTINATION ${LIB_DIR}
-#  ARCHIVE DESTINATION ${LIB_DIR})

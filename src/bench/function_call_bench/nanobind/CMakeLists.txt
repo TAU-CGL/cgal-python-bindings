@@ -17,7 +17,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(PY_VERSION 3.8)
 find_package(Python ${PY_VERSION} COMPONENTS Interpreter Development REQUIRED)
 
-find_package(tsl-robin-map REQUIRED)
 find_package(nanobind CONFIG REQUIRED)
 
 include_directories(${tsl-robin-map_INCLUDE_DIRS})
