@@ -13,7 +13,7 @@
 #include <sstream>
 
 template <typename T>
-std::string std::to_string(const T& n) {
+std::string to_string(const T& n) {
   std::ostringstream os;
   os << n;
   return os.str();
