@@ -17,7 +17,7 @@ Point = Ker.Point_2
 Pol2 = CGALPY.Pol2
 Polygon = Pol2.Polygon_2
 Polygon_with_holes = Pol2.Polygon_with_holes_2
-MS2 = CGALPY.Ms2
+Ms2 = CGALPY.Ms2
 
 def read_polygon(inp):
   pgn = Polygon()
@@ -39,7 +39,7 @@ with open(filename, 'r') as inp:
   # Approximate the offset polygon.
   tic = time.perf_counter()
   radius = Ker.FT(1)
-  inset_polygons = MS2.approximated_inset_2(P, radius, 0.00001)
+  inset_polygons = Ms2.approximated_inset_2(P, radius, 0.00001)
   toc = time.perf_counter()
 
   print("The inset comprises", len(inset_polygons), " polygon(s).")
