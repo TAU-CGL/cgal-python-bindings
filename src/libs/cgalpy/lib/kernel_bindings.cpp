@@ -173,8 +173,8 @@ void export_kernel(py::module_& m) {
     }
   }
 
-  if (! add_attr<Vector_2>(m, "Vecotr_2")) {
-    py::class_<Vector_2> vec_c(m, "Vecotr_2");
+  if (! add_attr<Vector_2>(m, "Vector_2")) {
+    py::class_<Vector_2> vec_c(m, "Vector_2");
     export_vector_2<Kernel>(vec_c);
 
     if (! is_exact_ft()) {
