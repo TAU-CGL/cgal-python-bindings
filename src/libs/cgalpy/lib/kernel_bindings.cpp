@@ -483,107 +483,123 @@ void export_kernel(py::module_& m) {
 
   /// \name Global kernel functions
   /// @{
-  m.def<CGAL::Angle(const Vector_2&, const Vector_2&)>("angle", &CGAL::angle);
-  m.def<CGAL::Angle(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("angle", &CGAL::angle);
-  m.def<CGAL::Angle(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("angle", &CGAL::angle);
+  using Angle_fnc1 = CGAL::Angle(*)(const Vector_2&, const Vector_2&);
+  using Angle_fnc2 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  using Angle_fnc3 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  m.def("angle", static_cast<Angle_fnc1>(&CGAL::angle<Kernel>));
+  m.def("angle", static_cast<Angle_fnc2>(&CGAL::angle<Kernel>));
+  m.def("angle", static_cast<Angle_fnc3>(&CGAL::angle<Kernel>));
 
-  m.def<FT (const Pnt_2&, const Pnt_2&, const Pnt_2&)>("area", &CGAL::area);
+  using Area_fnc = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  m.def("area", static_cast<Area_fnc>(&CGAL::area<Kernel>));
 
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("are_ordered_along_line", &CGAL::are_ordered_along_line);
+  using Aoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  m.def("are_ordered_along_line", static_cast<Aoal_fnc>(&CGAL::are_ordered_along_line<Kernel>));
 
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("are_strictly_ordered_along_line", &CGAL::are_strictly_ordered_along_line);
+  using Asoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  m.def("are_strictly_ordered_along_line", static_cast<Asoal_fnc>(&CGAL::are_strictly_ordered_along_line<Kernel>));
 
-  m.def<Pnt_2(const Pnt_2&, const FT&, const Pnt_2&, const FT&)>("barycenter", &CGAL::barycenter);
-  m.def<Pnt_2(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&, const FT&)>("barycenter", &CGAL::barycenter);
-  m.def<Pnt_2(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&, const FT&)>("barycenter", &CGAL::barycenter);
+  using barycenter_fnc1 = Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&);
+  using barycenter_fnc2 = Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&, const FT&);
+  using barycenter_fnc3 = Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&, const FT&);
+  m.def("barycenter", static_cast<barycenter_fnc1>(&CGAL::barycenter<Kernel>));
+  m.def("barycenter", static_cast<barycenter_fnc2>(&CGAL::barycenter<Kernel>));
+  m.def("barycenter", static_cast<barycenter_fnc3>(&CGAL::barycenter<Kernel>));
 
-  m.def<Line_2(const Pnt_2&, const Pnt_2&)>("bisector", &CGAL::bisector);
+  using Bisector_fnc = Line_2(*)(const Pnt_2&, const Pnt_2&);
+  m.def("bisector", static_cast<Bisector_fnc>(&CGAL::bisector<Kernel>));
 
   // Requires sqrt operation
   //def<Line_2(const Line_2&, const Line_2&)>("bisector", &CGAL::bisector);
 
-  m.def<Pnt_2(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("centroid", &CGAL::centroid);
-  m.def<Pnt_2(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("centroid", &CGAL::centroid);
-  m.def<Pnt_2(const Triangle_2&)>("centroid", &CGAL::centroid);
+  using Centroid_fnc1 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  using Centroid_fnc2 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  using Centroid_fnc3 = Pnt_2(*)(const Triangle_2&);
+  m.def("centroid", static_cast<Centroid_fnc1>(&CGAL::centroid<Kernel>));
+  m.def("centroid", static_cast<Centroid_fnc2>(&CGAL::centroid<Kernel>));
+  m.def("centroid", static_cast<Centroid_fnc3>(&CGAL::centroid<Kernel>));
 
-  m.def<Pnt_2(const Pnt_2&, const Pnt_2&)>("circumcenter", &CGAL::circumcenter);
-  m.def<Pnt_2(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("circumcenter", &CGAL::circumcenter);
-  m.def<Pnt_2(const Triangle_2&)>("circumcenter", &CGAL::circumcenter);
+  using Circumcenter_fnc1 = Pnt_2(*)(const Pnt_2&, const Pnt_2&);
+  using Circumcenter_fnc2 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  using Circumcenter_fnc3 = Pnt_2(*)(const Triangle_2&);
+  m.def("circumcenter", static_cast<Circumcenter_fnc1>(&CGAL::circumcenter<Kernel>));
+  m.def("circumcenter", static_cast<Circumcenter_fnc2>(&CGAL::circumcenter<Kernel>));
+  m.def("circumcenter", static_cast<Circumcenter_fnc3>(&CGAL::circumcenter<Kernel>));
 
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("collinear_are_ordered_along_line", &CGAL::collinear_are_ordered_along_line);
+  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("collinear_are_ordered_along_line", &CGAL::collinear_are_ordered_along_line<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("collinear_are_strictly_ordered_along_line", &CGAL::collinear_are_strictly_ordered_along_line);
+  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("collinear_are_strictly_ordered_along_line", &CGAL::collinear_are_strictly_ordered_along_line<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("collinear", &CGAL::collinear);
+  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("collinear", &CGAL::collinear<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("compare_distance_to_point", &CGAL::compare_distance_to_point);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("compare_distance_to_point", &CGAL::compare_distance_to_point<Kernel>);
 
-  m.def <CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_lexicographically", &CGAL::compare_lexicographically);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_lexicographically", &CGAL::compare_lexicographically<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Line_2&, const Pnt_2&, const Pnt_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line);
+  m.def<CGAL::Comparison_result(const Line_2&, const Pnt_2&, const Pnt_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line);
-  m.def<CGAL::Comparison_result(const Line_2&, const Pnt_2&, const Pnt_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line<Kernel>);
+  m.def<CGAL::Comparison_result(const Line_2&, const Pnt_2&, const Pnt_2&)>("compare_signed_distance_to_line", &CGAL::compare_signed_distance_to_line<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&)>("compare_slope", &CGAL::compare_slope);
-  m.def<CGAL::Comparison_result(const Segment_2&, const Segment_2&)>("compare_slope", &CGAL::compare_slope);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&)>("compare_slope", &CGAL::compare_slope<Kernel>);
+  m.def<CGAL::Comparison_result(const Segment_2&, const Segment_2&)>("compare_slope", &CGAL::compare_slope<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&, const FT&)>("compare_squared_distance", &CGAL::compare_squared_distance);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&, const FT&)>("compare_squared_distance", &CGAL::compare_squared_distance<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_x", &CGAL::compare_x);
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x);
-  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x);
-  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_x", &CGAL::compare_x<Kernel>);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x<Kernel>);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x<Kernel>);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_x", &CGAL::compare_x<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_xy", &CGAL::compare_xy);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_xy", &CGAL::compare_xy<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
-  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
-  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y<Kernel>);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y<Kernel>);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y<Kernel>);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_x_at_y", &CGAL::compare_x_at_y<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Segment_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Segment_2&, const Segment_2&)>("compare_y_at_x", &CGAL::compare_y_at_x);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x<Kernel>);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x<Kernel>);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x<Kernel>);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_y_at_x", &CGAL::compare_y_at_x<Kernel>);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Segment_2&)>("compare_y_at_x", &CGAL::compare_y_at_x<Kernel>);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Segment_2&, const Segment_2&)>("compare_y_at_x", &CGAL::compare_y_at_x<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_y", &CGAL::compare_y);
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y);
-  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y);
-  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_y", &CGAL::compare_y<Kernel>);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y<Kernel>);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y<Kernel>);
+  m.def<CGAL::Comparison_result(const Line_2&, const Line_2&, const Line_2&, const Line_2&)>("compare_y", &CGAL::compare_y<Kernel>);
 
-  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_yx", &CGAL::compare_yx);
-  m.def<FT(const Vector_2&, const Vector_2&)>("determinant", &CGAL::determinant);
+  m.def<CGAL::Comparison_result(const Pnt_2&, const Pnt_2&)>("compare_yx", &CGAL::compare_yx<Kernel>);
+  m.def<FT(const Vector_2&, const Vector_2&)>("determinant", &CGAL::determinant<Kernel>);
 
-  m.def<bool (const Pnt_2&, const Pnt_2&, const Pnt_2&)>("has_larger_distace_to_point", &CGAL::has_larger_distance_to_point);
+  m.def<bool (const Pnt_2&, const Pnt_2&, const Pnt_2&)>("has_larger_distace_to_point", &CGAL::has_larger_distance_to_point<Kernel>);
 
-  m.def<bool(const Line_2&, const Pnt_2&, const Pnt_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line);
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line);
+  m.def<bool(const Line_2&, const Pnt_2&, const Pnt_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line<Kernel>);
+  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("has_larger_signed_distance_to_line", &CGAL::has_larger_signed_distance_to_line<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("has_smaller_distace_to_point", &CGAL::has_smaller_distance_to_point);
+  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("has_smaller_distace_to_point", &CGAL::has_smaller_distance_to_point<Kernel>);
 
-  m.def<bool(const Line_2&, const Pnt_2&, const Pnt_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line);
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line);
+  m.def<bool(const Line_2&, const Pnt_2&, const Pnt_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line<Kernel>);
+  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("has_smaller_signed_distance_to_line", &CGAL::has_smaller_signed_distance_to_line<Kernel>);
 
-  m.def<FT(const Pnt_2&, const Pnt_2&)>("l_infinity_distance", &CGAL::l_infinity_distance);
+  m.def<FT(const Pnt_2&, const Pnt_2&)>("l_infinity_distance", &CGAL::l_infinity_distance<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("left_turn", &CGAL::left_turn);
+  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("left_turn", &CGAL::left_turn<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&)>("lexicographically_xy_larger", &CGAL::lexicographically_xy_larger);
+  m.def<bool(const Pnt_2&, const Pnt_2&)>("lexicographically_xy_larger", &CGAL::lexicographically_xy_larger<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&)>("lexicographically_xy_larger_or_equal", &CGAL::lexicographically_xy_larger_or_equal);
+  m.def<bool(const Pnt_2&, const Pnt_2&)>("lexicographically_xy_larger_or_equal", &CGAL::lexicographically_xy_larger_or_equal<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&)>("lexicographically_xy_smaller", &CGAL::lexicographically_xy_smaller);
+  m.def<bool(const Pnt_2&, const Pnt_2&)>("lexicographically_xy_smaller", &CGAL::lexicographically_xy_smaller<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&)>("lexicographically_xy_smaller_or_equal", &CGAL::lexicographically_xy_smaller_or_equal);
+  m.def<bool(const Pnt_2&, const Pnt_2&)>("lexicographically_xy_smaller_or_equal", &CGAL::lexicographically_xy_smaller_or_equal<Kernel>);
 
-  m.def<Pnt_2(const Iso_rectangle_2&)>("max_vertex", &CGAL::max_vertex);
+  m.def<Pnt_2(const Iso_rectangle_2&)>("max_vertex", &CGAL::max_vertex<Kernel>);
 
-  m.def<Pnt_2(const Pnt_2&, const Pnt_2&)>("midpoint", &CGAL::midpoint);
+  m.def<Pnt_2(const Pnt_2&, const Pnt_2&)>("midpoint", &CGAL::midpoint<Kernel>);
 
-  m.def<Pnt_2(const Iso_rectangle_2&)>("min_vertex", &CGAL::min_vertex);
+  m.def<Pnt_2(const Iso_rectangle_2&)>("min_vertex", &CGAL::min_vertex<Kernel>);
 
   m.def<CGAL::Orientation(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("orientation", CGAL::orientation);
   m.def<CGAL::Orientation(const Vector_2&, const Vector_2&)>("orientation", CGAL::orientation);
@@ -592,28 +608,29 @@ void export_kernel(py::module_& m) {
   m.def<bool(const Ray_2&, const Ray_2&)>("parallel", CGAL::parallel);
   m.def<bool(const Segment_2&, const Segment_2&)>("parallel", CGAL::parallel);
 
-  m.def<Line_2 (const Circle_2&, const Circle_2&)>("radical_line", &CGAL::radical_line);
+  m.def<Line_2 (const Circle_2&, const Circle_2&)>("radical_line", &CGAL::radical_line<Kernel>);
 
-  m.def<void(const RT&, const RT&, RT&, RT&, RT&, const RT&, const RT&)>("rational_rotation_approximation", &CGAL::rational_rotation_approximation);
+  // Parameterized by FT (not Kernel)
+  m.def<void(const RT&, const RT&, RT&, RT&, RT&, const RT&, const RT&)>("rational_rotation_approximation", &CGAL::rational_rotation_approximation<FT>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("right_turn", &CGAL::right_turn);
+  m.def<bool(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("right_turn", &CGAL::right_turn<Kernel>);
 
-  m.def<FT(const Vector_2&, const Vector_2&)>("scalar_product", &CGAL::scalar_product);
+  m.def<FT(const Vector_2&, const Vector_2&)>("scalar_product", &CGAL::scalar_product<Kernel>);
 
-  m.def<CGAL::Bounded_side(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("side_of_bounded_circle", &CGAL::side_of_bounded_circle);
-  m.def<CGAL::Bounded_side(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("side_of_bounded_circle", &CGAL::side_of_bounded_circle);
+  m.def<CGAL::Bounded_side(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("side_of_bounded_circle", &CGAL::side_of_bounded_circle<Kernel>);
+  m.def<CGAL::Bounded_side(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("side_of_bounded_circle", &CGAL::side_of_bounded_circle<Kernel>);
 
-  m.def<CGAL::Oriented_side(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("side_of_oriented_circle", &CGAL::side_of_oriented_circle);
+  m.def<CGAL::Oriented_side(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&)>("side_of_oriented_circle", &CGAL::side_of_oriented_circle<Kernel>);
 
   bind_squared_distance_types<Pnt_2, Line_2, Ray_2, Segment_2, Triangle_2>(m);
 
-  m.def<FT(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("squared_radius", &CGAL::squared_radius);
-  m.def<FT(const Pnt_2&, const Pnt_2&)>("squared_radius", &CGAL::squared_radius);
-  m.def<FT(const Pnt_2&)>("squared_radius", &CGAL::squared_radius);
+  m.def<FT(const Pnt_2&, const Pnt_2&, const Pnt_2&)>("squared_radius", &CGAL::squared_radius<Kernel>);
+  m.def<FT(const Pnt_2&, const Pnt_2&)>("squared_radius", &CGAL::squared_radius<Kernel>);
+  m.def<FT(const Pnt_2&)>("squared_radius", &CGAL::squared_radius<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&)>("x_equal", &CGAL::x_equal);
+  m.def<bool(const Pnt_2&, const Pnt_2&)>("x_equal", &CGAL::x_equal<Kernel>);
 
-  m.def<bool(const Pnt_2&, const Pnt_2&)>("y_equal", &CGAL::y_equal);
+  m.def<bool(const Pnt_2&, const Pnt_2&)>("y_equal", &CGAL::y_equal<Kernel>);
 
   m.def<bool(const Bbox_2&, const Bbox_2&)>("do_overlap", &CGAL::do_overlap);
 
