@@ -304,9 +304,11 @@ add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 nanobind_add_module(CGALPY ${CGALPY_SRC_FILES})
 set(CGALPY_BUILD_DEPENDS CGALPY)
 
+if(NOT APPLE)
 set_target_properties(CGALPY PROPERTIES
   VERSION "${CMAKE_PROJECT_VERSION}"
   SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
+endif()
 
 target_link_libraries(CGALPY PRIVATE
   ${Boost_LIBRARIES}
