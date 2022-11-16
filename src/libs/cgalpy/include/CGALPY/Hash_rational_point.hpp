@@ -25,8 +25,12 @@ struct Hash_rational_point {};
 template <typename T> const T& exact_impl(const T& val, ...) { return val; }
 
 // T::exact() exists
+// The parentheses around the decltype argument are necessary.
+// The argument is neither an id-expression nor a member access expression;
+// therefore, it does not denote a named object. As the expression is an
+// lvalue, its deduced type retains the original typ, which is const referenced
 template <typename T, typename = decltype(std::declval<T>().exact())>
-const decltype(std::declval<T>().exact())
+decltype((std::declval<T>().exact()))
 exact_impl(const T& val, int) { return val.exact(); }
 
 //
