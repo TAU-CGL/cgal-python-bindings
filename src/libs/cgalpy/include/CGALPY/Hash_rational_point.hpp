@@ -26,7 +26,7 @@ template <typename T> const T& exact_impl(const T& val, ...) { return val; }
 
 // T::exact() exists
 template <typename T, typename = decltype(std::declval<T>().exact())>
-decltype(std::declval<T>().exact())
+const decltype(std::declval<T>().exact())
 exact_impl(const T& val, int) { return val.exact(); }
 
 //
