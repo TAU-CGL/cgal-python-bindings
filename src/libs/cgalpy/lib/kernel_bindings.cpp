@@ -39,21 +39,26 @@ extern void export_gmpq(py::module_&);
 //
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
 void bind_squared_distance_first_type(py::module_& m) {
-  m.def<FT(const T1&, const T1&)>("squared_distance", &CGAL::squared_distance);
-  m.def<FT(const T1&, const T2&)>("squared_distance", &CGAL::squared_distance);
-  m.def<FT(const T1&, const T3&)>("squared_distance", &CGAL::squared_distance);
-  m.def<FT(const T1&, const T4&)>("squared_distance", &CGAL::squared_distance);
-  m.def<FT(const T1&, const T5&)>("squared_distance", &CGAL::squared_distance);
+  using Sd_fnc1 = FT(*)(const T1&, const T1&);
+  using Sd_fnc2 = FT(*)(const T1&, const T2&);
+  using Sd_fnc3 = FT(*)(const T1&, const T3&);
+  using Sd_fnc4 = FT(*)(const T1&, const T4&);
+  using Sd_fnc5 = FT(*)(const T1&, const T5&);
+  m.def("squared_distance", static_cast<Sd_fnc1>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance", static_cast<Sd_fnc2>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance", static_cast<Sd_fnc3>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance", static_cast<Sd_fnc4>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance", static_cast<Sd_fnc5>(&CGAL::squared_distance<Kernel>));
 }
 
 //
 template <typename T1, typename T2, typename T3, typename T4, typename T5>
 void bind_squared_distance_types(py::module_& m) {
-  bind_squared_distance_first_type< T1, T2, T3, T4, T5 >(m);
-  bind_squared_distance_first_type< T2, T1, T3, T4, T5 >(m);
-  bind_squared_distance_first_type< T3, T2, T1, T4, T5 >(m);
-  bind_squared_distance_first_type< T4, T2, T3, T1, T5 >(m);
-  bind_squared_distance_first_type< T5, T2, T3, T4, T1 >(m);
+  bind_squared_distance_first_type<T1, T2, T3, T4, T5>(m);
+  bind_squared_distance_first_type<T2, T1, T3, T4, T5>(m);
+  bind_squared_distance_first_type<T3, T2, T1, T4, T5>(m);
+  bind_squared_distance_first_type<T4, T2, T3, T1, T5>(m);
+  bind_squared_distance_first_type<T5, T2, T3, T4, T1>(m);
 }
 
 //
