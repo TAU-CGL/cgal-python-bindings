@@ -15,6 +15,7 @@
 #include <nanobind/stl/string.h>
 
 #include <CGAL/basic.h>
+#include <CGAL/IO/io.h>
 
 template <typename PyClass, bool pretty = false>
 void add_insertion(PyClass& cls, const char* method) {
