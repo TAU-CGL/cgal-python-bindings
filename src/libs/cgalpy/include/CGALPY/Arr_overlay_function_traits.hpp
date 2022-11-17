@@ -30,12 +30,12 @@ template <typename A, typename = decltype(std::declval<A>().data())>
 const py::object& data_a(const A* a) { return a->data(); }
 
 // Fall through; target does not exist
-template <typename A, typename B, typename R, typename Fnc> void apply(...) {}
+template <typename Fnc, typename A, typename B, typename R> void apply(Fnc fnc, ...) {}
 
 // Target does exsist
-template <typename A, typename B, typename R, typename Fnc,
+template <typename Fnc, typename A, typename B, typename R,
           typename = decltype(std::declval<R>().set_data(std::declval<typename R::Data>()))>
-void apply(const A* a, const B* b, R* r, Fnc fnc) {
+void apply(Fnc fnc, const A* a, const B* b, R* r) {
   if (fnc.is_none()) return;
   r->set_data(fnc(data_a<A>(a), data_a<B>(b)));
 }
@@ -44,64 +44,64 @@ void apply(const A* a, const B* b, R* r, Fnc fnc) {
 #include "CGALPY/if_.hpp"
 
 // First operand (A) does exist; second operand (B) does not exsist
-template <typename A, typename B, typename R, typename Fnc, typename = void>
+template <typename Fnc, typename A, typename B, typename R, typename = void>
 struct ApplyAB {
-  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+  void operator()(Fnc fnc, const A* a, const B* b, R* r) {
     r->set_data(fnc(a->data(), py::object()));
   }
 };
 
 // First operand (A) does exist; second operand (B) does exsist
-template <typename A, typename B, typename R, typename Fnc>
-struct ApplyAB<A, B, R, Fnc,
+template <typename Fnc, typename A, typename B, typename R>
+struct ApplyAB<Fnc, A, B, R,
                typename if_<false, decltype(std::declval<B>().data())>::type> {
-  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+  void operator()(Fnc fnc, const A* a, const B* b, R* r) {
     r->set_data(fnc(a->data(), b->data()));
   }
 };
 
 // First operand (A) does not exist; second operand (B) does not exsist
-template <typename A, typename B, typename R, typename Fnc, typename = void>
+template <typename Fnc, typename A, typename B, typename R, typename = void>
 struct ApplyB {
-  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+  void operator()(Fnc fnc, const A* a, const B* b, R* r) {
     r->set_data(fnc(py::object(), py::object()));
   }
 };
 
 // First operand (A) does not exist; second operand (B) does exsist
-template <typename A, typename B, typename R, typename Fnc>
-struct ApplyB<A, B, R, Fnc,
+template <typename Fnc, typename A, typename B, typename R>
+struct ApplyB<Fnc, A, B, R,
               typename if_<false, decltype(std::declval<B>().data())>::type> {
-  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
+  void operator()(Fnc fnc, const A* a, const B* b, R* r) {
     r->set_data(fnc(py::object(), b->data()));
   }
 };
 
 // First operand (A) does not exsist
-template <typename A, typename B, typename R, typename Fnc, typename = void>
+template <typename Fnc, typename A, typename B, typename R, typename = void>
 struct ApplyA {
-  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
-    ApplyB<A, B, R, Fnc>()(a, b, r, fnc);
+  void operator()(Fnc fnc, const A* a, const B* b, R* r) {
+    ApplyB<Fnc, A, B, R>()(fnc, a, b, r);
   }
 };
 
 // First operand (A) does exsist
-template <typename A, typename B, typename R, typename Fnc>
-struct ApplyA<A, B, R, Fnc,
+template <typename Fnc, typename A, typename B, typename R>
+struct ApplyA<Fnc, A, B, R,
               typename if_<false, decltype(std::declval<A>().data())>::type> {
-  void operator()(const A* a, const B* b, R* r, Fnc fnc) {
-    ApplyAB<A, B, R, Fnc>()(a, b, r, fnc);
+  void operator()(Fnc fnc, const A* a, const B* b, R* r) {
+    ApplyAB<Fnc, A, B, R>()(fnc, a, b, r);
   }
 };
 
 // Fall through; target does not exist
-template <typename A, typename B, typename R, typename Fnc> void apply(...) {}
+template <typename Fnc, typename A, typename B, typename R> void apply(Fnc fnc, ...) {}
 
 // Target does exist
-template <typename A, typename B, typename R, typename Fnc,
+template <typename Fnc, typename A, typename B, typename R,
           typename = decltype(std::declval<R>().set_data(std::declval<typename R::Data>()))>
-void apply(const A* a, const B* b, R* r, Fnc fnc) {
-  ApplyA<A, B, R, Fnc>()(a, b, r, fnc);
+void apply(Fnc fnc, const A* a, const B* b, R* r) {
+  ApplyA<Fnc, A, B, R>()(fnc, a, b, r);
 }
 
 #endif
@@ -250,62 +250,62 @@ public:
    */
   void create_vertex(Vertex_handle_a v1, Vertex_handle_b v2, Vertex_handle_r v)
     const
-  { apply<Vertex_a, Vertex_b, Vertex_r, py::object>(&*v1, &*v2, &*v, m_vv_v); }
+  { apply<py::object, Vertex_a, Vertex_b, Vertex_r>(m_vv_v, &*v1, &*v2, &*v); }
 
   /*! Create the vertex v induced by the vertex v1 that lies on the halfedge e2.
    */
   void create_vertex(Vertex_handle_a v1, Halfedge_handle_b e2, Vertex_handle_r v)
     const
-  { apply<Vertex_a, Halfedge_b, Vertex_r, py::object>(&*v1, &*e2, &*v, m_ve_v); }
+  { apply<py::object, Vertex_a, Halfedge_b, Vertex_r>(m_ve_v, &*v1, &*e2, &*v); }
 
   /*! Create the vertex v induced by the vertex v1 that lies inside the face f2.
    */
   void create_vertex(Vertex_handle_a v1, Face_handle_b f2, Vertex_handle_r v)
     const
-  { apply<Vertex_a, Face_b, Vertex_r, py::object>(&*v1, &*f2, &*v, m_vf_v); }
+  { apply<py::object, Vertex_a, Face_b, Vertex_r>(m_vf_v, &*v1, &*f2, &*v); }
 
   /* Create the vertex v induced by the vertex v2 that lies on the halfedge e1.
    */
   void create_vertex(Halfedge_handle_a e1, Vertex_handle_b v2,
                      Vertex_handle_r v) const
-  { apply<Halfedge_a, Vertex_b, Vertex_r, py::object>(&*e1, &*v2, &*v, m_ev_v); }
+  { apply<py::object, Halfedge_a, Vertex_b, Vertex_r>(m_ev_v, &*e1, &*v2, &*v); }
 
   /* Create the vertex v induced by the vertex v2 that lies inside the face f1.
    */
   void create_vertex(Face_handle_a f1, Vertex_handle_b v2, Vertex_handle_r v)
     const
-  { apply<Face_a, Vertex_b, Vertex_r, py::object>(&*f1, &*v2, &*v, m_fv_v); }
+  { apply<py::object, Face_a, Vertex_b, Vertex_r>(m_fv_v, &*f1, &*v2, &*v); }
 
   /* Create the vertex v induced by the intersection of the halfedges e1 and e2.
    */
   void create_vertex(Halfedge_handle_a e1, Halfedge_handle_b e2,
                      Vertex_handle_r v) const
-  { apply<Halfedge_a, Halfedge_b, Vertex_r, py::object>(&*e1, &*e2, &*v, m_ee_v); }
+  { apply<py::object, Halfedge_a, Halfedge_b, Vertex_r>(m_ee_v, &*e1, &*e2, &*v); }
 
   /* Create the halfedge e induced by an overlap between the halfedges e1 and e2.
    */
   void create_edge(Halfedge_handle_a e1, Halfedge_handle_b e2,
                    Halfedge_handle_r e) const
   {
-    apply<Halfedge_a, Halfedge_b, Halfedge_r, py::object>(&*e1, &*e2, &*e, m_ee_e);
+    apply<py::object, Halfedge_a, Halfedge_b, Halfedge_r>(m_ee_e, &*e1, &*e2, &*e);
   }
 
-  /* Create the halfedge e induced by the halfedge e1 contained the face f2.
+  /* Create the halfedge e induced by the halfedge e1 contained in the face f2.
    */
   void create_edge(Halfedge_handle_a e1, Face_handle_b f2, Halfedge_handle_r e)
     const
-  { apply<Halfedge_a, Face_b, Halfedge_r, py::object>(&*e1, &*f2, &*e, m_ef_e); }
+  { apply<py::object, Halfedge_a, Face_b, Halfedge_r>(m_ef_e, &*e1, &*f2, &*e); }
 
   /* Create the halfedge e induced by the halfedge e2 contained in the face f1.
    */
   void create_edge(Face_handle_a f1, Halfedge_handle_b e2, Halfedge_handle_r e)
     const
-  { apply<Face_a, Halfedge_b, Halfedge_r, py::object>(&*f1, &*e2, &*e, m_fe_e); }
+  { apply<py::object, Face_a, Halfedge_b, Halfedge_r>(m_fe_e, &*f1, &*e2, &*e); }
 
   /*! Create a face f that matches the overlapping region between f1 and f2.
    */
   void create_face(Face_handle_a f1, Face_handle_b f2, Face_handle_r f) const
-  { apply<Face_a, Face_b, Face_r, py::object>(&*f1, &*f2, &*f, m_ff_f); }
+  { apply<py::object, Face_a, Face_b, Face_r>(m_ff_f, &*f1, &*f2, &*f); }
 
   /// @}
 };
