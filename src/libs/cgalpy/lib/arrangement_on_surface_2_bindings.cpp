@@ -23,7 +23,7 @@
 #include <CGAL/Arr_walk_along_line_point_location.h>
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
-#include <CGAL/draw_arrangement_2.h>
+// #include <CGAL/draw_arrangement_2.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/Arr_observer.hpp"
