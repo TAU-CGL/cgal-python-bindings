@@ -17,7 +17,7 @@ namespace py = nanobind;
 
 template <typename T>
 struct stl_input_iterator :
-  boost::iterator_facade<stl_input_iterator<T>, T, std::input_iterator_tag, T> {
+  boost::iterator_facade<stl_input_iterator<T>, T, std::forward_iterator_tag, T> {
 
   // Default constructor.
   // Workaround the lack of default constructor for py::detail::fast_iterator.
