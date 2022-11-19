@@ -15,11 +15,18 @@
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
+
+// 2D functors
+#include "CGALPY/Kernel/export_circle_2.hpp"
+#include "CGALPY/Kernel/export_dir_2.hpp"
+#include "CGALPY/Kernel/export_line_2.hpp"
 #include "CGALPY/Kernel/export_point_2.hpp"
-#include "CGALPY/Kernel/export_point_3.hpp"
+#include "CGALPY/Kernel/export_ray_2.hpp"
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_vector_2.hpp"
-#include "CGALPY/Kernel/export_circle_2.hpp"
+
+// 3D functors
+#include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_attr.hpp"
 
@@ -66,7 +73,7 @@ Point_2 transform_point(Aff_transformation_2& t, Point_2& p)
 { return t.transform(p); }
 
 //
-Vector_2 transform_vector(Aff_transformation_2& t, Vector_2 & v)
+Vector_2 transform_vector(Aff_transformation_2& t, Vector_2& v)
 { return t.transform(v); }
 
 //
@@ -156,14 +163,35 @@ void export_kernel(py::module_& m) {
     ;
 
   // Kernel objects
-  using Pnt_2 = Kernel::Point_2;
-  using Seg_2 = Kernel::Segment_2;
-  using Line_2 = Kernel::Line_2;
-  using Vector_2 = Kernel::Vector_2;
   using Circle_2 = Kernel::Circle_2;
+  using Dir_2 = Kernel::Direction_2;
+  using Line_2 = Kernel::Line_2;
+  using Pnt_2 = Kernel::Point_2;
+  using Ray_2 = Kernel::Ray_2;
+  using Seg_2 = Kernel::Segment_2;
+  using Vec_2 = Kernel::Vector_2;
 
   using Pnt_3 = Kernel::Point_3;
 
+  // Circle_2
+  if (! add_attr<Circle_2>(m, "Circle_2")) {
+    py::class_<Circle_2> circle2_c(m, "Circle_2");
+    export_circle_2<Kernel>(circle2_c);
+  }
+
+  // Direction_2
+  if (! add_attr<Dir_2>(m, "Direction_2")) {
+    py::class_<Dir_2> dir2_c(m, "Direction_2");
+    export_dir_2<Kernel>(dir2_c);
+  }
+
+  // Line_2
+  if (! add_attr<Line_2>(m, "Line_2")) {
+    py::class_<Line_2> line2_c(m, "Line_2");
+    export_line_2<Kernel>(line2_c);
+  }
+
+  // Point_2
   if (! add_attr<Pnt_2>(m, "Point_2")) {
     py::class_<Pnt_2> pnt2_c(m, "Point_2");
     export_point_2<Kernel>(pnt2_c);
@@ -178,86 +206,33 @@ void export_kernel(py::module_& m) {
     }
   }
 
-  if (! add_attr<Vector_2>(m, "Vector_2")) {
-    py::class_<Vector_2> vec_c(m, "Vector_2");
-    export_vector_2<Kernel>(vec_c);
+  // Ray_2
+  if (! add_attr<Ray_2>(m, "Ray_2")) {
+    py::class_<Ray_2> ray2_c(m, "Ray_2");
+    export_ray_2<Kernel>(ray2_c);
+  }
+
+  // Segment_2
+  if (! add_attr<Seg_2>(m, "Segment_2")) {
+    py::class_<Seg_2> seg2_c(m, "Segment_2");
+    export_segment_2<Kernel>(seg2_c);
+  }
+
+  // Vector_2
+  if (! add_attr<Vec_2>(m, "Vector_2")) {
+    py::class_<Vec_2> vec2_c(m, "Vector_2");
+    export_vector_2<Kernel>(vec2_c);
 
     if (! is_exact_ft()) {
       using Cci = Kernel::Cartesian_const_iterator_2;
-      add_iterator<Cci, Cci>("Cartesian_iterator", vec_c);
-      vec_c.def("cartesians",
-                [] (const Vector_2& v)
-                { return make_iterator(v.cartesian_begin(), v.cartesian_end()); },
-                py::keep_alive<0, 1>());
+      add_iterator<Cci, Cci>("Cartesian_iterator", vec2_c);
+      vec2_c.def("cartesians",
+                 [] (const Vec_2& v)
+                 { return make_iterator(v.cartesian_begin(), v.cartesian_end()); },
+                 py::keep_alive<0, 1>());
     }
   }
 
-  if (! add_attr<Seg_2>(m, "Segment_2")) {
-    py::class_<Seg_2> seg_c(m, "Segment_2");
-    export_segment_2<Kernel>(seg_c);
-  }
-
-  if (! add_attr<Circle_2>(m, "Circle_2")) {
-    py::class_<Circle_2> circle_c(m, "Circle_2");
-    export_circle_2<Kernel>(circle_c);
-  }
-
-  py::class_<Line_2>(m, "Line_2")
-    .def(py::init<RT&, RT&, RT&>())
-    .def(py::init<Pnt_2&, Pnt_2&>())
-    .def(py::init<Pnt_2&, Direction_2&>())
-    .def(py::init<Pnt_2&, Vector_2&>())
-    .def(py::init<Seg_2&>())
-    .def(py::init<Ray_2&>())
-    .def("a", &Line_2::a)
-    .def("b", &Line_2::b)
-    .def("c", &Line_2::c)
-    .def("is_degenerate", &Line_2::is_degenerate)
-    .def("is_horizontal", &Line_2::is_horizontal)
-    .def("is_vertical", &Line_2::is_vertical)
-    .def("oriented_side", &Line_2::oriented_side)
-    .def("has_on", &Line_2::has_on)
-    .def("has_on_boundary", &Line_2::has_on_boundary)
-    .def("has_on_negative_side", &Line_2::has_on_negative_side)
-    .def("has_on_positive_side", &Line_2::has_on_positive_side)
-    .def("projection", &Line_2::projection)
-    .def("direction", &Line_2::direction)
-    .def("to_vector", &Line_2::to_vector)
-    .def("opposite", &Line_2::opposite)
-    .def("transform", &Line_2::transform)
-    .def("perpendicular", &Line_2::perpendicular)
-    .def("x_at_y", &Line_2::x_at_y)
-    .def("y_at_x", &Line_2::y_at_x)
-    .def("__str__", to_string<Line_2>)
-    .def("__repr__", to_string<Line_2>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    //.setattr("__hash__", &hash<Line_2>)
-    ;
-
-  py::class_<Ray_2>(m, "Ray_2")
-    .def(py::init<Pnt_2&, Pnt_2&>())
-    .def(py::init<Pnt_2&, Direction_2&>())
-    .def(py::init<Pnt_2&, Vector_2&>())
-    .def(py::init<Pnt_2&, Line_2&>())
-    .def("is_degenerate", &Ray_2::is_degenerate)
-    .def("is_horizontal", &Ray_2::is_horizontal)
-    .def("is_vertical", &Ray_2::is_vertical)
-    .def("direction", &Ray_2::direction)
-    .def("to_vector", &Ray_2::to_vector)
-    .def("has_on", &Ray_2::has_on)
-    .def("collinear_has_on", &Ray_2::collinear_has_on)
-    .def("point", &Ray_2::point)
-    .def("supporting_line", &Ray_2::supporting_line)
-    .def("opposite", &Ray_2::opposite)
-    .def("transform", &Ray_2::transform)
-    .def("source", &Ray_2::source)
-    .def("__str__", to_string<Ray_2>)
-    .def("__repr__", to_string<Ray_2>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    //.setattr("__hash__", &hash<Ray_2>)
-    ;
 
   py::class_<Triangle_2>(m, "Triangle_2")
     .def(py::init < Pnt_2&, Pnt_2&, Pnt_2&>())
@@ -312,31 +287,6 @@ void export_kernel(py::module_& m) {
     //.setattr("__hash__", &hash<Iso_rectangle_2>)
     ;
 
-  py::class_<Direction_2>(m, "Direction_2")
-    .def(py::init<Vector_2>())
-    .def(py::init<Line_2>())
-    .def(py::init<Ray_2>())
-    .def(py::init<Seg_2>())
-    .def(py::init<RT&, RT&>())
-    .def(py::init<double, double>())
-    .def("dx", &Direction_2::dx)
-    .def("dy", &Direction_2::dy)
-    .def("vector", &Direction_2::vector)
-    .def("transform", &Direction_2::transform)
-    .def("counterclockwise_in_between", &Direction_2::counterclockwise_in_between)
-    .def("delta", &Direction_2::delta)
-    .def("__str__", to_string<Direction_2>)
-    .def("__repr__", to_string<Direction_2>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    .def(py::self != py::self)
-    .def(py::self < py::self)
-    .def(py::self > py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
-    .def(-py::self)
-    //.setattr("__hash__", &hash<Direction_2>)
-    ;
 
   py::class_<Bbox_2>(m, "Bbox_2")
     .def(py::init<>())
@@ -410,9 +360,9 @@ void export_kernel(py::module_& m) {
     .def(py::init<RT, RT, RT, RT>())
     .def(py::init<RT&, RT&, RT&, RT&, RT&, RT&, RT&>())
     .def(py::init<RT, RT, RT, RT, RT, RT, RT>())
-    .def(py::init<const Translation, const Vector_2&>())
-    .def(py::init<const Rotation, const Direction_2&, const RT&, const RT&>())
-    .def(py::init<const Rotation, const Direction_2&, const RT, const RT>())
+    .def(py::init<const Translation, const Vec_2&>())
+    .def(py::init<const Rotation, const Dir_2&, const RT&, const RT&>())
+    .def(py::init<const Rotation, const Dir_2&, const RT, const RT>())
     .def(py::init<const Rotation, const RT&, const RT&, const RT&>())
     .def(py::init<const Rotation, const RT, const RT, const RT>())
     .def(py::init<Scaling, const RT&, const RT&>())
@@ -442,6 +392,7 @@ void export_kernel(py::module_& m) {
   using Equal_2 = Kernel::Equal_2;
   using Ctr_seg_2 = Kernel::Construct_segment_2;
   using Ctr_midpnt_2 = Kernel::Construct_midpoint_2;
+  using Cc_in_between_2 = Kernel::Counterclockwise_in_between_2;
 
   py::class_<Kernel> ker_c(m, "Kernel");
   ker_c.def(py::init<>())
@@ -457,17 +408,21 @@ void export_kernel(py::module_& m) {
     ;
 
   // Equal_2
+  using Equal_2_circle = bool(Equal_2::*)(const Circle_2&, const Circle_2&)const;
+  using Equal_2_dir = bool(Equal_2::*)(const Dir_2&, const Dir_2&)const;
+  using Equal_2_line = bool(Equal_2::*)(const Line_2&, const Line_2&)const;
   using Equal_2_pnt = bool(Equal_2::*)(const Pnt_2&, const Pnt_2&)const;
-  using Equal_2_seg = bool(Equal_2::*)(const Pnt_2&, const Pnt_2&)const;
-  using Equal_2_line = bool(Equal_2::*)(const Pnt_2&, const Pnt_2&)const;
-  using Equal_2_ray = bool(Equal_2::*)(const Pnt_2&, const Pnt_2&)const;
-  using Equal_2_circle = bool(Equal_2::*)(const Pnt_2&, const Pnt_2&)const;
+  using Equal_2_seg = bool(Equal_2::*)(const Seg_2&, const Seg_2&)const;
+  using Equal_2_ray = bool(Equal_2::*)(const Ray_2&, const Ray_2&)const;
+  using Equal_2_vec = bool(Equal_2::*)(const Vec_2&, const Vec_2&)const;
   py::class_<Equal_2>(ker_c, "Equal_2")
-    .def("__call__", static_cast<Equal_2_pnt>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_seg>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_line>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_ray>(&Equal_2::operator()))
     .def("__call__", static_cast<Equal_2_circle>(&Equal_2::operator()))
+    .def("__call__", static_cast<Equal_2_dir>(&Equal_2::operator()))
+    .def("__call__", static_cast<Equal_2_line>(&Equal_2::operator()))
+    .def("__call__", static_cast<Equal_2_pnt>(&Equal_2::operator()))
+    .def("__call__", static_cast<Equal_2_ray>(&Equal_2::operator()))
+    .def("__call__", static_cast<Equal_2_seg>(&Equal_2::operator()))
+    .def("__call__", static_cast<Equal_2_vec>(&Equal_2::operator()))
     ;
 
   // Construct_segment_2
@@ -484,11 +439,18 @@ void export_kernel(py::module_& m) {
     .def("__call__", static_cast<Ctr_midpnt_2_op>(&Ctr_midpnt_2::operator()))
     ;
 
+  // Counterclockwise_in_between_2
+  using Cc_in_between_2_op =
+    bool(Cc_in_between_2::*)(const Dir_2&, const Dir_2&, const Dir_2&)const;
+  py::class_<Cc_in_between_2>(ker_c, "Counterclockwise_in_between_2")
+    .def("__call__", static_cast<Cc_in_between_2_op>(&Cc_in_between_2::operator()))
+    ;
+
   /// @}
 
   /// \name Global kernel functions
   /// @{
-  using Angle_fnc1 = CGAL::Angle(*)(const Vector_2&, const Vector_2&);
+  using Angle_fnc1 = CGAL::Angle(*)(const Vec_2&, const Vec_2&);
   using Angle_fnc2 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Angle_fnc3 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("angle", static_cast<Angle_fnc1>(&CGAL::angle<Kernel>));
@@ -607,7 +569,7 @@ void export_kernel(py::module_& m) {
   using Cyx_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   m.def("compare_yx", static_cast<Cyx_fnc>(&CGAL::compare_yx<Kernel>));
 
-  using Dt_fnc = FT(*)(const Vector_2&, const Vector_2&);
+  using Dt_fnc = FT(*)(const Vec_2&, const Vec_2&);
   m.def("determinant", static_cast<Dt_fnc>(&CGAL::determinant<Kernel>));
 
   using Hldtp_fnc = bool (*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
@@ -654,7 +616,7 @@ void export_kernel(py::module_& m) {
   m.def("min_vertex", static_cast<Minv_fnc>(&CGAL::min_vertex<Kernel>));
 
   using Or_fnc1 = CGAL::Orientation(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  using Or_fnc2 = CGAL::Orientation(*)(const Vector_2&, const Vector_2&);
+  using Or_fnc2 = CGAL::Orientation(*)(const Vec_2&, const Vec_2&);
   m.def<>("orientation", static_cast<Or_fnc1>(&CGAL::orientation));
   m.def<>("orientation", static_cast<Or_fnc2>(&CGAL::orientation));
 
@@ -675,7 +637,7 @@ void export_kernel(py::module_& m) {
   using Rt_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("right_turn", static_cast<Rt_fnc>(&CGAL::right_turn<Kernel>));
 
-  using Sp_fnc = FT(*)(const Vector_2&, const Vector_2&);
+  using Sp_fnc = FT(*)(const Vec_2&, const Vec_2&);
   m.def("scalar_product", static_cast<Sp_fnc>(&CGAL::scalar_product<Kernel>));
 
   using Sobc_fnc1 = CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
