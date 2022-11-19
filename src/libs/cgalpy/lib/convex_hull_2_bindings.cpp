@@ -15,6 +15,7 @@
 #include <CGAL/ch_eddy.h>
 #include <CGAL/ch_jarvis.h>
 #include <CGAL/ch_melkman.h>
+#include <CGAL/ch_akl_toussaint.h>
 
 #include "CGALPY/convex_hull_2_config.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -26,7 +27,8 @@ void ch_akl_toussaint(py::list& lst, py::list& res) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
   auto v = std::vector<Point_2>();
-  CGAL::ch_akl_toussaint(begin, end, std::back_inserter(v));
+  // Commented out due a bug in CGAL (until it is fixed).
+  // CGAL::ch_akl_toussaint(begin, end, std::back_inserter(v));
   for (auto p : v) res.append(p);
 }
 
