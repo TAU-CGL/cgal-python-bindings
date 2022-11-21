@@ -5,35 +5,40 @@ set(CGALPY_BOOST_MIN_VERSION 1.68.0)
 # \todo Include Qt5 conditionally
 find_package(CGAL REQUIRED COMPONENTS Core Qt5)
 if (NOT CGAL_FOUND)
-  message(STATUS "This library cannot be compiled, as it requires CGAL.")
-  return()
-endif()
-include(${CGAL_USE_FILE})
+    message(STATUS "This library cannot be compiled, as it requires CGAL.")
+    return()
+endif ()
 
-if(CGALPY_USE_SHARED_LIBS)
-  set(Boost_USE_STATIC_LIBS OFF)
+if (NOT SKBUILD)
+    include(${CGAL_USE_FILE})
+
+    if (CGALPY_USE_SHARED_LIBS)
+        set(Boost_USE_STATIC_LIBS OFF)
+    else ()
+        set(Boost_USE_STATIC_LIBS ON)
+        add_definitions(-DBOOST_PYTHON_STATIC_LIB)
+    endif ()
+    set(CGALPY_BOOST_LIBRARIES)
+
+    find_package(Python ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
+    find_package(PythonLibs ${Python_VERSION_MAJOR}.${Python_VERSION_MINOR} EXACT REQUIRED)
+
+    if (PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
+        set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python)
+    else ()
+        # Set the Boost python library name (e.g., python35)
+        set(CGALPY_BOOST_PYTHON_LIB_NAME python${Python_VERSION_MAJOR}${Python_VERSION_MINOR})
+        set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} ${CGALPY_BOOST_PYTHON_LIB_NAME})
+    endif ()
+    find_package(Boost ${CGALPY_BOOST_MIN_VERSION} REQUIRED COMPONENTS ${CGALPY_BOOST_LIBRARIES})
+
+    if (NOT Boost_FOUND)
+        message(STATUS "This library cannot be compiled, as it requires Boost.")
+        return()
+    endif ()
 else()
-  set(Boost_USE_STATIC_LIBS ON)
-  add_definitions(-DBOOST_PYTHON_STATIC_LIB)
-endif()
-set(CGALPY_BOOST_LIBRARIES)
-
-find_package(Python ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
-find_package(PythonLibs ${Python_VERSION_MAJOR}.${Python_VERSION_MINOR} EXACT REQUIRED)
-
-if (PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
-  set (CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python)
-else()
-  # Set the Boost python library name (e.g., python35)
-  set(CGALPY_BOOST_PYTHON_LIB_NAME python${Python_VERSION_MAJOR}${Python_VERSION_MINOR})
-  set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} ${CGALPY_BOOST_PYTHON_LIB_NAME})
-endif()
-find_package(Boost ${CGALPY_BOOST_MIN_VERSION} REQUIRED COMPONENTS ${CGALPY_BOOST_LIBRARIES})
-
-if(NOT Boost_FOUND)
-  message (STATUS "This library cannot be compiled, as it requires Boost.")
-  return()
-endif()
+    find_package(Boost REQUIRED)
+endif ()
 
 # find_package(tsl-robin-map CONFIG REQUIRED)
 find_package(nanobind CONFIG REQUIRED)
@@ -43,29 +48,30 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 include_directories(${Boost_INCLUDE_DIR})
 
 # Add some compiler options
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  add_compile_options(-GR)
-  add_compile_options(-vmg)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    add_compile_options(-GR)
+    add_compile_options(-vmg)
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-  add_compile_options(-Wno-error=non-pod-varargs)
-  message(WARNING "detected Clang")
-endif()
+    add_compile_options(-Wno-error=non-pod-varargs)
+    message(WARNING "detected Clang")
+endif ()
 
 # Use C++17 for this directory and its sub-directories.
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-set(CGALPY_INSTALL_INC_DIR "include"
-    CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
-set(CGALPY_INSTALL_LIB_DIR "lib"
-    CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
-set(CGALPY_INSTALL_BIN_DIR "bin"
-    CACHE STRING "The folder where CGALPY executables, e.g., binaries and scripts, will be installed, relative to CMAKE_INSTALL_PREFIX")
-set(CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
-    CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
-set(CGALPY_INSTALL_PYTHON_DIR "${CGALPY_INSTALL_LIB_DIR}/Python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/dist-packages"
-    CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
-
+if (NOT SKBUILD)
+    set(CGALPY_INSTALL_INC_DIR "include"
+            CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
+    set(CGALPY_INSTALL_LIB_DIR "lib"
+            CACHE STRING "The folder where CGALPY libraries will be installed, relative to CMAKE_INSTALL_PREFIX")
+    set(CGALPY_INSTALL_BIN_DIR "bin"
+            CACHE STRING "The folder where CGALPY executables, e.g., binaries and scripts, will be installed, relative to CMAKE_INSTALL_PREFIX")
+    set(CGALPY_INSTALL_CMAKE_DIR "${CGALPY_INSTALL_LIB_DIR}/CGALPY"
+            CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
+    set(CGALPY_INSTALL_PYTHON_DIR "${CGALPY_INSTALL_LIB_DIR}/Python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/dist-packages"
+            CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
+endif ()
 select_kernel()
 select_kernel_d()
 select_arrangement_2()
@@ -85,17 +91,17 @@ select_polyhedron_3()
 select_polygon_mesh_processing()
 
 if (${CGALPY_KERNEL_D_BINDINGS} AND
-    ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
-    (${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPEC_D})))
-  find_package(Eigen3 3.3 REQUIRED)
-  if (NOT EIGEN3_FOUND)
-    SET(CGALPY_KERNEL_D_BINDINGS OFF)
-    SET(CGALPY_SPATIAL_SEARCHING_BINDINGS OFF)
-    message(WARNING "Eigen3 not found!\nTurning of the generations of\n(i) dD Kernel, and\n(ii) spatial searching bindings")
-  endif()
-#  include(CGAL_Eigen3_support)
-  include_directories( ${EIGEN3_INCLUDE_DIR})
-endif()
+((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
+(${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPEC_D})))
+    find_package(Eigen3 3.3 REQUIRED)
+    if (NOT EIGEN3_FOUND)
+        SET(CGALPY_KERNEL_D_BINDINGS OFF)
+        SET(CGALPY_SPATIAL_SEARCHING_BINDINGS OFF)
+        message(WARNING "Eigen3 not found!\nTurning of the generations of\n(i) dD Kernel, and\n(ii) spatial searching bindings")
+    endif ()
+    #  include(CGAL_Eigen3_support)
+    include_directories(${EIGEN3_INCLUDE_DIR})
+endif ()
 
 
 # Add subdirectories
