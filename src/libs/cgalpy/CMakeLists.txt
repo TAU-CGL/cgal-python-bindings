@@ -566,5 +566,5 @@ else ()
             CGAL::CGAL
             ${Boost_LIBRARIES}
             ${PYTHON_LIBRARIES})
-    install(TARGETS CGALPY DESTINATION .)
+    install(TARGETS CGALPY DESTINATION python/cgalpy/)
 endif ()
