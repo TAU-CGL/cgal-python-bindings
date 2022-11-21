@@ -1,0 +1,5 @@
+[requires]
+cgal/[==5.5]
+
+[generators]
+cmake_find_package
