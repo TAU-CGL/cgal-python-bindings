@@ -101,9 +101,14 @@ The next step has been the source of most of my problems when packaging a native
 
 The target of your bindings needs to define a `install(...)` directive, such that CMake and scikit-build know where to place the binary (you may think this to be obvious for simple projects, but you still have to specify it, and there are non-obvious cases for complex projects). During installation, scikit-build will copy the Python-elements of your project (specified later in `setup.py`) and copy the just built binary to exactly this location, before copying it to your installation folder.
 
-I recommend to have the Python-code within a `python` subfolder, but you don’t have to. If you don’t have any Python-code but directly build the module, you should create a folder `python/your_module_name` and add a `__init__.py` within it. In this `__init__.py` you just import the binary, e.g., `from .your_module_name import *` . Note the `.` in the beginning. In case you want to add some Python-code on top, things are now much easier.
+We recommend to have the Python-code within a `python` subfolder, but you don’t have to.
+If you don’t have any Python-code but directly build the module,
+you should create a folder `python/your_module_name` and add a `__init__.py` within it.
+In this `__init__.py` you just import the binary, e.g., `from .your_module_name import *`.
+Note the `.` in the beginning.
+In case you want to add some Python-code on top, things are now much easier.
 
-Your install directive should be
+Your install-directive should be
 
 ```cmake
 install(TARGETS mybindings DESTINATION python/your_module_name/)
@@ -113,7 +118,10 @@ which will copy the binary of target `mybindings` to `python/your_module_name/` 
 
 ## Step 3: Add Python-development requirements.txt
 
-We are going to use some Python-tools to build the package. These will automatically installed in the next step when executing `pip install XXX` , but you may want to do some things by hand to get more feedback on what is happening (especially, if it doesn’t work right away). For this reason, we a requirement with the essential packages for developing this package.
+We are going to use some Python-tools to build the package.
+These will automatically be installed in the next step when executing `pip install XXX`,
+but you may want to do some things by hand to get more feedback on what is happening
+(especially, if it doesn't work right away). For this reason, we add `requirements.txt` with the essential packages for developing this package.
 
 Just create a file `requirements.txt` with all Python dependencies a developer using your module should have. It should at least contain the following:
 
@@ -130,7 +138,7 @@ Install it using `pip install -r requirements.txt` .
 
 ## Step 4: Add a pyproject.toml
 
-We don’t want the user to install the requirements by hand and just specifying it in `[setup.py](http://setup.py)` may be too late, because `setup.py` may already be requiring some of the dependencies (such as scikit-build). For this reason, we add a `pyproject.toml` that tells `pip` what to install before trying to build and install this package. You can just copy the following file to the root of your project.
+We don’t want the user to install the requirements by hand and just specifying it in `setup.py` may be too late, because `setup.py` may already be requiring some of the dependencies (such as scikit-build). For this reason, we add a `pyproject.toml` that tells `pip` what to install before trying to build and install this package. You can just copy the following file to the root of your project.
 
 ```toml
 [build-system]
@@ -148,7 +156,7 @@ It will for example tell Python that we need `cmake`, `conan` , `ninja` and stuf
 
 ## Step 5: Add a setup.py
 
-The `[setup.py](http://setup.py)` is going to be the entry point for actually building the project. The following file is a good template in which you can simply adapt things as needed. Note that this file expects the Python-code to be in `python` and you need to adapt it if this is not the case.
+The `setup.py` is going to be the entry point for actually building the project. The following file is a good template in which you can simply adapt things as needed. Note that this file expects the Python-code to be in `python` and you need to adapt it if this is not the case.
 
 ```python
 """
@@ -243,11 +251,11 @@ setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
 )
 ```
 
-Note that `[setup.py](http://setup.py)` will be run before CMake, so if you are using CMake to specify version and stuff like this, you have to do it redundantly here.
+Note that `setup.py` will be run before CMake, so if you are using CMake to specify version and stuff like this, you have to do it redundantly here.
 
 ## Step 6: Add a MANIFEST.in
 
-This file at project root defines, which files should be shipped, i.e., are required for build the package on a foreign machine. You can probably just copy and paste the following (again expecting the Python-code to be in `python`, C++ code in `src` and `include`).
+This file at project root defines, which files should be shipped, i.e., are required for building the package on a foreign machine. You can probably just copy and paste the following (again expecting the Python-code to be in `python`, C++ code in `src` and `include`).
 
 ```txt
 exclude tests
