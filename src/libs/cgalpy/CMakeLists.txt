@@ -553,19 +553,19 @@ if (NOT SKBUILD)
         install(DIRECTORY ${MODULE_OUTPUT_PATH} DESTINATION ${CGALPY_INSTALL_PYTHON_DIR})
     endforeach ()
 else ()
-    add_compile_definitions(CGALPY_MODULE_NAME=CGALPY)
-    nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
-    set(CGALPY_BUILD_DEPENDS CGALPY)
+    add_compile_definitions(CGALPY_MODULE_NAME=_CGALPY)
+    nanobind_add_module(_CGALPY NB_STATIC ${CGALPY_SRC_FILES})
+    set(CGALPY_BUILD_DEPENDS _CGALPY)
 
     if (NOT APPLE)
-        set_target_properties(CGALPY PROPERTIES
+        set_target_properties(_CGALPY PROPERTIES
                 VERSION "${CMAKE_PROJECT_VERSION}"
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
 
-    target_link_libraries(CGALPY PRIVATE
+    target_link_libraries(_CGALPY PRIVATE
             CGAL::CGAL
             ${Boost_LIBRARIES}
             ${PYTHON_LIBRARIES})
-    install(TARGETS CGALPY DESTINATION python/cgalpy/)
+    install(TARGETS _CGALPY DESTINATION python/${CGALPY_IMPORT_NAME}/)
 endif ()

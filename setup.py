@@ -12,9 +12,30 @@ The setup options are documented here:
 https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
 """
 
-from setuptools import find_packages
 from skbuild import setup
 import sys
+import os
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Configure CGALPY here
+PACKAGE_NAME = "cgalpy"  # The name on PyPI you will use  for `pip install`
+IMPORT_NAME = "CGALPY_epec_arrangements"  # The name for `import ...`
+CGALPY_CONFIGURATION = ["-DCGALPY_KERNEL_BINDINGS=epec",
+                        "-DCGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS=ON", ]
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+def prepare():
+    # Automatically create proxy modules for new configurations.
+    folder = f"python/{IMPORT_NAME}"
+    proxy_init = "# This file has been automatically created by setup.py.\n" \
+                 "# It is a proxy to import the compiled CGALPY code.\n" \
+                 "from ._CGALPY import *"
+    if not os.path.exists(f"{folder}/__init__.py"):
+        print(f"Automatically creating proxy package '{folder}'.")
+        os.makedirs(f"{folder}", exist_ok=True)
+        with open(f"{folder}/__init__.py", "w") as f:
+            f.write(proxy_init)
+
 
 def run_conan():
     import subprocess
@@ -23,15 +44,18 @@ def run_conan():
     cmd = "-m conans.conan install . -if cmake --build=missing"
     subprocess.run([sys.executable, *cmd.split(" ")], check=True)
 
+
 def readme():
     # Simply return the README.md as string
     with open("README.md") as file:
         return file.read()
 
+
+prepare()
 run_conan()  # automatically running conan. Ugly workaround, but does its job.
 setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     # ~~~~~~~~~ BASIC INFORMATION ~~~~~~~~~~~
-    name="cgalpy",
+    name=PACKAGE_NAME,
     version="1.0.0",  # TODO: Use better approach for managing version number.
     description="CGAL Bindings",
     long_description=readme(),
@@ -41,13 +65,13 @@ setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     author_email="...",
     classifiers=[
         "Development Status :: 4 - Beta",
-   #     "License :: OSI Approved :: MIT License",
-   #     "Programming Language :: Python :: 3",
+        #     "License :: OSI Approved :: MIT License",
+        #     "Programming Language :: Python :: 3",
     ],
     # ~~~~~~~~~~~~ CRITICAL PYTHON SETUP ~~~~~~~~~~~~~~~~~~~
     # This project structures defines the python packages in a subfolder.
     # Thus, we have to collect this subfolder and define it as root.
-    packages=find_packages("python"),  # Include all packages in `./python`.
+    packages=[f"{IMPORT_NAME}"],
     package_dir={"": "python"},  # The root for our python package is in `./python`.
     python_requires=">=3.7",  # lowest python version supported.
     install_requires=[
@@ -83,8 +107,7 @@ setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     #
     # Some CMake-projects allow you to configure it using parameters. You
     # can specify them for this Python-package using the following line.
-    # cmake_args=["-DCGALPY_KERNEL_BINDINGS=epec",
-    #             "-DCGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS=ON",]
+    cmake_args=[f"-DCGALPY_IMPORT_NAME={IMPORT_NAME}"] + CGALPY_CONFIGURATION
     #
     # There are further options, but you should be fine with these above.
 )
