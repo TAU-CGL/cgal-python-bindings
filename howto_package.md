@@ -14,6 +14,10 @@ In the following, are going to use the following tools. You probably know alread
 - **conan**: For handling complex C++-dependencies, if there are any.
 - **scikit-build**: For building a `setup.py` that allows the Python-package to build itself.
 
+As a further step: Continuous Integration to automatically test building the package on various systems and upload new version to PyPI.
+Currently, GitHub gives you 200 minutes/month of CI-time for free, which suffices to
+build projects even using template-heavy libraries like CGAL multiple times a month.
+
 ## What is given?
 
 You have to have a C++-project with
