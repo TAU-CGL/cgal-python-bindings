@@ -297,6 +297,7 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
 endif ()
+
 if (NOT SKBUILD)
     add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
