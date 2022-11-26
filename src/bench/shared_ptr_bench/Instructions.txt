@@ -1,1 +1,0 @@
-The benchmark shared_ptr_bench.py should be run on windows, with python 3.6 64bit

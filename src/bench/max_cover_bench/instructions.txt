@@ -1,4 +1,0 @@
-This benchmark is based on running code equivalent to the max_cover solution found in tcgl\src\cmds\max_cover
-To run the benchmark (on windows 64 bit, python 3.6 64 bit):
-Import main() from the corresponding python script (max_cover_boost or max_cover_pybind11)
-Run main with parameters r and filename (one of the input files found in each directory)

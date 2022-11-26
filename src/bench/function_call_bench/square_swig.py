@@ -1,1 +1,0 @@
-swig/square_swig.py
