@@ -61,9 +61,3 @@ void export_polygon_with_holes_2(py::module_& m) {
     add_extraction(pwh_c);
   }
 }
-
-void export_polygon_with_holes_2() {
-  typedef pol2::Polygon_with_holes_2    Polygon_with_holes_2;
-  export_unique<Polygon_with_holes_2>("Polygon_with_holes_2",
-                                      register_polygon_with_holes_2);
-}
