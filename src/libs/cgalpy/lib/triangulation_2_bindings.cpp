@@ -248,8 +248,8 @@ void export_triangulation_2(py::module_& m) {
     .def("value", &tri2::value<tri2::Face_handle>, ri)
     ;
 
-  bind_copy_iterator<CopyIterator<tri2::All_edges_iterator>>(m, "Triangulation_all_edges_iterator");
-  bind_copy_iterator<CopyIterator<tri2::Finite_edges_iterator>>(m, "Triangulation_finite_edges_iterator");
+  bind_copy_iterator<Copy_iterator<tri2::All_edges_iterator>>(m, "Triangulation_all_edges_iterator");
+  bind_copy_iterator<Copy_iterator<tri2::Finite_edges_iterator>>(m, "Triangulation_finite_edges_iterator");
   bind_copy_iterator<Copy_iterator_from_circulator<tri2::Edge_circulator>>(m, "Triangulation_edges_iterator");
 
   bind_iterator<Iterator_from_circulator<tri2::Face_circulator>>(m, "Triangulation_faces_iterator");
