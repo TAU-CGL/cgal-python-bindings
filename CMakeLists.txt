@@ -71,6 +71,7 @@ option(CGALPY_BUILD_SHARED_LIBS "Build shared libs versus static libs" ON)
 option(CGALPY_FIXED_LIBRARY_NAME "The library name is fixed" ON)
 option(CGALPY_BUILD_DEV_DOC "Build the development documentation" OFF)
 option(CGALPY_BUILD_DOC "Build the documentation" ON)
+option(CGALPY_WITH_VISUAL "Display" OFF)
 
 set(default_build_type "Release")
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)

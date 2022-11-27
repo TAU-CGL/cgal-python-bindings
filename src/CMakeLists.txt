@@ -2,12 +2,18 @@ set(CGALPY_PY_MIN_VERSION 3.5)
 set(CGALPY_BOOST_MIN_VERSION 1.68.0)
 
 # Find required libraries
-# \todo Include Qt5 conditionally
-find_package(CGAL REQUIRED COMPONENTS Core Qt5)
+if (CGALPY_WITH_VISUAL)
+  add_definitions(-DCGALPY_HAS_VISUAL=)
+  find_package(CGAL REQUIRED COMPONENTS Core Qt5)
+else()
+  find_package(CGAL REQUIRED COMPONENTS Core)
+endif()
+
 if (NOT CGAL_FOUND)
     message(STATUS "This library cannot be compiled, as it requires CGAL.")
     return()
 endif ()
+
 
 if (NOT SKBUILD)
     include(${CGAL_USE_FILE})
