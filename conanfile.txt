@@ -1,5 +1,6 @@
 [requires]
 cgal/[==5.5]
+boost/[==1.79]
 
 [generators]
 cmake_find_package
