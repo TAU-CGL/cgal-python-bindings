@@ -112,6 +112,8 @@ void export_point_location(py::module_& m) {
     ;
 #endif
 
+  // Compile in only if we use CGAL version >= 5.6.0; see PR #6810
+#if CGAL_VERSION_NR >= 1050600900
   py::class_<Trapezoid_pl, Aob>(m, "Arr_trapezoid_ric_point_location")
     .def(py::init<>())
     .def(py::init<Aos&>())
@@ -124,6 +126,7 @@ void export_point_location(py::module_& m) {
     .def("ray_shoot_up", &aos2::ray_shoot_up<Trapezoid_pl>, ri)
     .def("ray_shoot_down", &aos2::ray_shoot_down<Trapezoid_pl>, ri)
     ;
+#endif
 
   py::class_<Walk_pl>(m, "Arr_walk_along_line_point_location")
     .def(py::init<>())

@@ -51,7 +51,15 @@ export_general_polygon_2(py::class_<GeneralPolygon_2>& pgn_c) {
 
   add_insertion(pgn_c, "__str__");
   add_insertion(pgn_c, "__repr__");
+
+  // Compile in only if we use CGAL version > 5.6.0
+  // There are geometry traits that do not support the extraction of a curve
+  // to an output stream. In particular, the Arr_circle_segment_traits_2.
+  // A PR for Arr_circle_segment_traits_2 is on the way.
+  // The reamining unsupported traits should be compiled out.
+#if CGAL_VERSION_NR > 1050600900
   add_extraction(pgn_c);
+#endif
 }
 
 /*! Capture the call to export a Polygon_2<> and ensure that it is not invoked.
