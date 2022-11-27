@@ -14,7 +14,9 @@
 #include <nanobind/stl/string.h>
 
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
+#ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_surface_mesh.h>
+#endif
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
@@ -51,8 +53,10 @@ SurfaceMesh read_polygon_mesh(const std::string& filename) {
 }
 
 // Draw a surface mesh.
+#ifdef CGALPY_HAS_VISUAL
 template <typename SurfaceMesh>
 void draw(const SurfaceMesh& sm) { CGAL::draw(sm); }
+#endif
 
 // Obtain the null face.
 template <typename SurfaceMesh>
@@ -246,7 +250,9 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     add_insertion(sm_c, "__repr__");
   }
 
+#ifdef CGALPY_HAS_VISUAL
   m.def("draw", &sm::draw<Sm>);
+#endif
   m.def("null_face", &sm::null_face<Sm>);
 }
 

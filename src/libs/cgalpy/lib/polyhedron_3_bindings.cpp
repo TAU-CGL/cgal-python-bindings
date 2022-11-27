@@ -11,7 +11,9 @@
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
+#ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_polyhedron.h>
+#endif
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
@@ -37,7 +39,9 @@ Polyhedron_3 read_polygon_mesh(const std::string& filename) {
 }
 
 // Draw a polyhedron.
+#ifdef CGALPY_HAS_VISUAL
 void draw(const Polyhedron_3& prn) { CGAL::draw(prn); }
+#endif
 
 //
 Halfedge& make_tetrahedron1(Polyhedron_3& prn,
@@ -176,6 +180,8 @@ void export_polyhedron_3(py::module_& m) {
     add_attr<Face>(prn_c, "Face");
   }
 
+#ifdef CGALPY_HAS_VISUAL
   m.def("draw", &pol3::draw);
+#endif
   m.def("read_polygon_mesh", &pol3::read_polygon_mesh<Prn>);
 }
