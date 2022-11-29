@@ -22,9 +22,10 @@ typedef typename Kernel::Intersect_2                               Intersect_2;
 // are not a valid overload for do_intersect in which case the second version
 // (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
-void bind_do_intersect_pair(py::module_& m, decltype(CGAL::do_intersect<Kernel>(T1(), T2())))
-{
-  m.def("do_intersect", static_cast<bool(*)(const T1&, const T2&)>(&CGAL::do_intersect<Kernel>));
+void bind_do_intersect_pair(py::module_& m,
+                            decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
+  using Do_intersect = bool(*)(const T1&, const T2&);
+  m.def("do_intersect", static_cast<Do_intersect>(&CGAL::do_intersect<Kernel>));
 }
 
 template<typename, typename>
