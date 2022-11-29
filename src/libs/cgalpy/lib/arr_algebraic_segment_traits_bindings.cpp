@@ -31,15 +31,17 @@ py::list to_double(aos2::Point_2& p) {
 }
 
 template<typename T, typename S>
-void export_ctr_pnt_operator(py::class_<aos2::Construct_point_2>& cp_2_binding)
-{
-  cp_2_binding.def<aos2::Point_2(aos2::Construct_point_2::*)(const T&, const S&)>("__call__", &aos2::Construct_point_2::operator());
+void export_ctr_pnt_operator(py::class_<aos2::Construct_point_2>& co) {
+  using Ctr_pnt = aos2::Point_2(aos2::Construct_point_2::*)(const T&, const S&);
+  co.def("__call__", static_cast<Ctr_pnt>(&aos2::Construct_point_2::operator()));
 }
 
 template<typename T, typename S, typename R>
-void export_ctr_pnt_operator(py::class_<aos2::Construct_point_2>& cp_2_binding)
-{
-  cp_2_binding.def<aos2::Point_2(aos2::Construct_point_2::*)(const T&, const S&, R)>("__call__", &aos2::Construct_point_2::operator());
+void export_ctr_pnt_operator(py::class_<aos2::Construct_point_2>& co) {
+  using Ctr_pnt =
+    aos2::Point_2(aos2::Construct_point_2::*)(const T&, const S&, R);
+  co.def("__call__",
+         static_cast<Ctr_pnt>(&aos2::Construct_point_2::operator()));
 }
 
 //! Construct `x`-monotone segments from a curve and two points.
@@ -135,6 +137,7 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
   add_insertion(integer_c, "__str__");
   add_insertion(integer_c, "__repr__");
 
+  using Cmp = CGAL::Comparison_result(Ar::*)(const Ar&) const;
   py::class_<Ar> ar1_c(m, "Algebraic_real_1");
   ar1_c.def(py::init<>())
     .def(py::init<Ar&>())
@@ -142,7 +145,7 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
     .def(py::init<Ar::Rational&>())
     .def(py::init<const aos2::Polynomial_1&, Ar::Rational, Ar::Rational>())
     .def("bisect", &Ar::bisect)
-    .def< CGAL::Comparison_result(Ar::*)(const Ar&) const>("compare", &Ar::compare)
+    .def("compare", static_cast<Cmp>(&Ar::compare<Ar>))
     .def("degree", &Ar::degree)
     .def("high", &Ar::high)
     .def("is_rational", &Ar::is_rational)
