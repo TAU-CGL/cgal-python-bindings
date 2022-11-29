@@ -24,7 +24,7 @@ typedef typename Kernel::Intersect_2                               Intersect_2;
 template<typename T1, typename T2>
 void bind_do_intersect_pair(py::module_& m, decltype(CGAL::do_intersect<Kernel>(T1(), T2())))
 {
-  m.def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel>);
+  m.def("do_intersect", static_cast<bool(*)(const T1&, const T2&)>(&CGAL::do_intersect<Kernel>));
 }
 
 template<typename, typename>
