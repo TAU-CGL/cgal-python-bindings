@@ -148,22 +148,26 @@ void export_spatial_searching(py::module_& m) {
 
   bind_kd_tree<Kd_tree>(m, "Kd_tree");
 
-  py::class_<Distance_python>(m, "Distance_python")
+  using Dp = Distance_python;
+  py::class_<Dp>(m, "Distance_python")
     .def(py::init<py::object, py::object, py::object, py::object, py::object>())
-    .def<FT_d (Distance_python::*) (const Distance_python::Query_item&, const Distance_python::Point_d&)const>("transformed_distance", &Distance_python::transformed_distance)
-    .def("min_distance_to_rectangle", &Distance_python::min_distance_to_rectangle)
-    .def("max_distance_to_rectangle", &Distance_python::max_distance_to_rectangle)
-    .def<FT_d (Distance_python::*) (const FT_d&)const>("transformed_distance", &Distance_python::transformed_distance)
-    .def("inverse_of_transformed_distance", &Distance_python::inverse_of_transformed_distance)
+    .def("transformed_distance",
+         py::overload_cast<const Dp::Query_item&, const Dp::Point_d&>
+         (&Dp::transformed_distance, py::const_))
+    .def("min_distance_to_rectangle", &Dp::min_distance_to_rectangle)
+    .def("max_distance_to_rectangle", &Dp::max_distance_to_rectangle)
+    .def("transformed_distance", py::overload_cast<const FT_d&>(&Dp::transformed_distance, py::const_))
+    .def("inverse_of_transformed_distance", &Dp::inverse_of_transformed_distance)
     ;
 
-  py::class_<Euclidean_distance>(m, "Euclidean_distance")
+  using Ed = Euclidean_distance;
+  py::class_<Ed>(m, "Euclidean_distance")
     .def(py::init<>())
-    .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Euclidean_distance::Point_d&) const>("transformed_distance", &Euclidean_distance::transformed_distance)
-    .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("min_distance_to_rectangle", &Euclidean_distance::min_distance_to_rectangle)
-    .def<FT_d (Euclidean_distance::*) (const Euclidean_distance::Query_item&, const Kd_tree_rectangle&) const>("max_distance_to_rectangle", &Euclidean_distance::max_distance_to_rectangle)
-    .def<FT_d (Euclidean_distance::*) (FT_d) const>("transformed_distance", &Euclidean_distance::transformed_distance)
-    //.def("inverse_of_transformed_distance", &Euclidean_distance::inverse_of_transformed_distance)
+    .def("transformed_distance", py::overload_cast<const Ed::Query_item&, const Ed::Point_d&>(&Ed::transformed_distance, py::const_))
+    .def("min_distance_to_rectangle", py::overload_cast<const Ed::Query_item&, const Kd_tree_rectangle&>(&Ed::min_distance_to_rectangle, py::const_))
+    .def("max_distance_to_rectangle", py::overload_cast<const Ed::Query_item&, const Kd_tree_rectangle&>(&Ed::max_distance_to_rectangle, py::const_))
+    .def("transformed_distance", py::overload_cast<FT_d>(&Ed::transformed_distance, py::const_))
+    //.def("inverse_of_transformed_distance", &Ed::inverse_of_transformed_distance)
     ;
 
   bind_neighbor_search<K_neighbor_search_python>(m, "K_neighbor_search_python");

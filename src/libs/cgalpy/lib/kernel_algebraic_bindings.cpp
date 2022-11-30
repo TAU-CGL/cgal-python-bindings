@@ -46,6 +46,7 @@ void export_alg_real(py::module_& m) {
   using Rational = Arithmetic_kernel::Rational;
   using Bound = Arithmetic_kernel::Rational;
 
+  using Cmp = CGAL::Comparison_result(Ar::*)(const Ar&) const;
   py::class_<Ar> ar1_c(m, "Algebraic_real_1");
   ar1_c.def(py::init<>())
     .def(py::init<Ar&>())
@@ -54,7 +55,7 @@ void export_alg_real(py::module_& m) {
     .def(py::init<const Rational&>())
     .def(py::init<const Polynomial&, const Rational&, const Rational&>())
     .def("bisect", &Ar::bisect)
-    .def<CGAL::Comparison_result(Ar::*)(const Ar&) const>("compare", &Ar::compare)
+    .def("compare", static_cast<Cmp>(&Ar::compare))
     .def("degree", &Ar::degree)
     .def("high", &Ar::high)
     .def("is_rational", &Ar::is_rational)

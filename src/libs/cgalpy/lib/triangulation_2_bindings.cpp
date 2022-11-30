@@ -226,7 +226,7 @@ void export_triangulation_2(py::module_& m) {
     std::cerr << "'tri2::Triangle' not registered!\n";
 
   py::class_<tri2::Vertex>(tri_c, "Vertex")
-    .def<tri2::Point&(tri2::Vertex::*)()>("point", &tri2::Vertex::point, ri)
+    .def("point", py::overload_cast<>(&tri2::Vertex::point), ri)
     ;
 
   py::class_<tri2::Edge>(tri_c, "Edge")

@@ -51,8 +51,9 @@ template <typename T1, typename T2, typename T3,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T3()(T2(), typename target<T2>::type()))>
 void bind_mink_sum_decomp_one_strategy_3T(py::module_& m, bool) {
-  m.def<Polygon_with_holes_2(const T1&, const T2&, const T3&)>
-    ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>);
+  m.def("minkowski_sum_2",
+        static_cast<Polygon_with_holes_2(*)(const T1&, const T2&, const T3&)>
+          (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>));
 }
 
 template <typename T1, typename T2>
@@ -82,8 +83,9 @@ template <typename T1, typename T2, typename T3, typename T4,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T4()(T2(), typename target<T1>::type()))>
 void bind_mink_sum_decomp_two_strategies_pair(py::module_& m, bool) {
-  m.def<Polygon_with_holes_2(const T1&, const T2&, const T3&, const T4&)>
-    ("minkowski_sum_2", &CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>);
+  m.def("minkowski_sum_2",
+        static_cast<Polygon_with_holes_2(*)(const T1&, const T2&, const T3&, const T4&)>
+          (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>));
 }
 
 template <typename P1, typename P2, typename T> void

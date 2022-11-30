@@ -52,7 +52,8 @@ template<typename T1, typename T2>
 void bind_do_intersect_d_2T(py::module_& m,
                             decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
 {
-  m.def<bool(const T1&, const T2&)>("do_intersect", &CGAL::do_intersect<Kernel_d>);
+  m.def("do_intersect",
+        static_cast<bool(*)(const T1&, const T2&)>(&CGAL::do_intersect<Kernel_d>));
 }
 
 template<typename, typename>
@@ -110,7 +111,8 @@ void export_kernel_d(py::module_& m) {
     ;
 
 // Why does the following fail?
-#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
+#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D) && \
+  (CGALPY_KERNEL_D != CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ)
   using Cci = Pnt::Cartesian_const_iterator_d;
   add_iterator<Cci, Cci, const FT_d&>("Cartesian_iterator", pd_c);
   pd_c.def("cartesians",
