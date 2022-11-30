@@ -40,8 +40,7 @@ template<typename T, typename S, typename R>
 void export_ctr_pnt_operator(py::class_<aos2::Construct_point_2>& co) {
   using Ctr_pnt =
     aos2::Point_2(aos2::Construct_point_2::*)(const T&, const S&, R);
-  co.def("__call__",
-         static_cast<Ctr_pnt>(&aos2::Construct_point_2::operator()));
+  co.def("__call__", static_cast<Ctr_pnt>(&aos2::Construct_point_2::operator()));
 }
 
 //! Construct `x`-monotone segments from a curve and two points.
@@ -235,7 +234,7 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
     .def("is_vertical", &Xcv::is_vertical)
     .def("is_finite", &Xcv::is_finite)
     .def("curve_end", &Xcv::curve_end)
-    .def<int (Xcv::*)() const>("arcno", &Xcv::arcno)
+    .def("arcno", py::overload_cast<>(&Xcv::arcno, py::const_))
     .def("x", &Xcv::x)
     ;
 

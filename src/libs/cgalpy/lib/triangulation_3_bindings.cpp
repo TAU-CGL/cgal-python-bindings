@@ -184,8 +184,8 @@ void export_triangulation_3(py::module_& m) {
     .def("move", &Tri::move)
 
     // Removal
-    .def<void(Tri::*)(tri3::Vertex_handle)>("remove", &Tri::remove)
-    // .def<bool(Tri::*)(tri3::Vertex_handle, bool*)>("remove", &Tri::remove)
+    .def("remove", static_cast<void(Tri::*)(tri3::Vertex_handle)>(&Tri::remove))
+    // .def("remove", py::overload_cast<tri3::Vertex_handle, bool*>(&Tri::remove))
 
     // template<typename InputIterator >
     // int remove (InputIterator first, InputIterator beyond)
@@ -235,8 +235,8 @@ void export_triangulation_3(py::module_& m) {
   py::class_<tri3::Vertex>(tri_c, "Vertex")
     .def(py::init<>())
     // Access Functions
-    .def<tri3::Cell_handle(tri3::Vertex::*)()const>("cell", &tri3::Vertex::cell)
-    .def<const tri3::Point&(tri3::Vertex::*)() const>("point", &tri3::Vertex::point, ri)
+    .def("cell", py::overload_cast<>(&tri3::Vertex::cell, py::const_))
+    .def("point", py::overload_cast<>(&tri3::Vertex::point, py::const_), ri)
     // Setting
     .def("set_cell", &tri3::Vertex::set_cell)
     .def("set_point", &tri3::Vertex::set_point)
@@ -257,13 +257,13 @@ void export_triangulation_3(py::module_& m) {
     .def(py::init<>())
     // Access Functions
     .def("vertex", &tri3::Cell::vertex)
-    .def<int(tri3::Cell::*)(tri3::Vertex_handle) const>("index", &tri3::Cell::index)
-    .def<int(tri3::Cell::*)(tri3::Cell_handle) const>("index", &tri3::Cell::index)
-    .def<bool(tri3::Cell::*)(tri3::Vertex_handle) const>("has_vertex", &tri3::Cell::has_vertex)
-    .def<bool(tri3::Cell::*)(tri3::Vertex_handle, int&) const>("has_vertex", &tri3::Cell::has_vertex)
+    .def("index", py::overload_cast<tri3::Vertex_handle>(&tri3::Cell::index, py::const_))
+    .def("index", py::overload_cast<tri3::Cell_handle>(&tri3::Cell::index, py::const_))
+    .def("has_vertex", py::overload_cast<tri3::Vertex_handle>(&tri3::Cell::has_vertex, py::const_))
+    .def("has_vertex", py::overload_cast<tri3::Vertex_handle, int&>(&tri3::Cell::has_vertex, py::const_))
     .def("neighbor", &tri3::Cell::neighbor)
-    .def<bool(tri3::Cell::*)(tri3::Cell_handle n) const>("has_neighbor", &tri3::Cell::has_neighbor)
-    .def<bool(tri3::Cell::*)(tri3::Cell_handle n, int &i) const>("has_neighbor", &tri3::Cell::has_neighbor)
+    .def("has_neighbor", py::overload_cast<tri3::Cell_handle>(&tri3::Cell::has_neighbor, py::const_))
+    .def("has_neighbor", py::overload_cast<tri3::Cell_handle, int&>(&tri3::Cell::has_neighbor, py::const_))
     // Setting
     .def("set_vertex", &tri3::Cell::set_vertex)
     .def("set_vertices", set_vertices)

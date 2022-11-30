@@ -617,8 +617,8 @@ void export_kernel(py::module_& m) {
 
   using Or_fnc1 = CGAL::Orientation(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Or_fnc2 = CGAL::Orientation(*)(const Vec_2&, const Vec_2&);
-  m.def<>("orientation", static_cast<Or_fnc1>(&CGAL::orientation));
-  m.def<>("orientation", static_cast<Or_fnc2>(&CGAL::orientation));
+  m.def("orientation", static_cast<Or_fnc1>(&CGAL::orientation));
+  m.def("orientation", static_cast<Or_fnc2>(&CGAL::orientation));
 
   using Pl_fnc1 = bool(*)(const Line_2&, const Line_2&);
   using Pl_fnc2 = bool(*)(const Ray_2&, const Ray_2&);
