@@ -405,6 +405,9 @@ void export_kernel(py::module_& m) {
     .def("construct_segment_2_object",
          [](const Kernel& k)->Ctr_seg_2
          { return k.construct_segment_2_object(); })
+    .def("counterclockwise_in_between_2_object",
+         [](const Kernel& k)->Cc_in_between_2
+         { return k.counterclockwise_in_between_2_object(); })
     ;
 
   // Equal_2
