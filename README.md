@@ -44,11 +44,10 @@ instances of the same template.
 
 There are two ways to build & install the bindings.
 Novice users who may only wish to quickly experiment with the bindings may
-exploit the simple self-compiling build \& install mechanism to obtain a single
+exploit the simple self-compiling build & install mechanism to obtain a single
 library that supports bindings for a large set of instances.
 This binding library cannot be mutually used with other binding libraries though.
 
-## Simple but Limited
 All you need to do is:
 
     git clone git@bitbucket.org:taucgl/cgal-python-bindings.git
@@ -60,11 +59,11 @@ From the name, you can infer that this module provides binding for
 C++ instances that are bsed on the exact-predicate exact-construction
 kernel.
 
-## Flexible but Involved
-You need to install at least C++17, Python 3.8+, [CMake
-3.15+](https://cmake.org/install/),
-[nanobind](https://github.com/wjakob/nanobind#dependencies), and [CGAL
-5.0+](https://doc.cgal.org/latest/Manual/installation.html) before
+If you want to explot the full power of the bindings, you need to perform 
+a few steps. You need to install at least C++17, Python 3.8+, 
+[CMake 3.15+](https://cmake.org/install/),
+[nanobind](https://github.com/wjakob/nanobind#dependencies), and 
+[CGAL 5.0+](https://doc.cgal.org/latest/Manual/installation.html) before
 attempting to use the bindings.
 
 ## Building
