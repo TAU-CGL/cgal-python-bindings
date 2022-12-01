@@ -128,3 +128,5 @@ If you would like to build the documentation for both, type:
     make doc
 
 ## Details
+
+For details consult the wiki pages of this repository.
