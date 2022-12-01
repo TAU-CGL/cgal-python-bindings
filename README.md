@@ -1,37 +1,68 @@
 # cgalpy: CGAL Python Bindings
 
-We introduce bindings that enable the convenient, efficient, and reliable use of software modules of [https://www.cgal.org/](CGAL) (Computational Geometry Algorithm Library), which are written in C++, from within code written in Python.
+We introduce bindings that enable the convenient, efficient, and
+reliable use of software modules of [https://www.cgal.org/](CGAL)
+(Computational Geometry Algorithm Library), which are written in C++,
+from within code written in Python.
 
-The bindings exploits [nanobind](https://github.com/wjakob/nanobind), a lightweight header-only binding generation tool.
+The bindings exploits [nanobind](https://github.com/wjakob/nanobind),
+a lightweight header-only binding generation tool.
 
 ## Python Bindings
 
-When running Python code that uses bindings for some C++ modules, one or more libraries that provide the bindings must be accessible.  A software package in C++ that adheres to the generic programming paradigm, such as CGAL, consists of function and class templates; these templates are instantiated at compile time of the binding libraries. In other words, the types of the C++ objects that are bound, that is, instances (instantiated types) of C++ function and class templates, must be known when the bindings are generated.
+When running Python code that uses bindings for some C++ modules, one
+or more libraries that provide the bindings must be accessible.  A
+software package in C++ that adheres to the generic programming
+paradigm, such as CGAL, consists of function and class templates;
+these templates are instantiated at compile time of the binding
+libraries. In other words, the types of the C++ objects that are
+bound, that is, instances (instantiated types) of C++ function and
+class templates, must be known when the bindings are generated.
 
 ## Bindings for CGAL
 
-Instantiated types in CGAL are characterized by long instantiation chains of C++ class templates. An instantiated type is a template that has one or more template parameters and every parameter is substituted by another type that is typically an instance of another template. While the number of models of most concepts is contained, the number of potential types of objects that could be bound is enormous. Offering bindings for all these types in advance is practically impossible. Moreover, in some cases models need to be extended with types provided by the user. Our objective is to enable concurrent bindings, of a great portion of this set, in a convenient way.
+Instantiated types in CGAL are characterized by long instantiation
+chains of C++ class templates. An instantiated type is a template that
+has one or more template parameters and every parameter is substituted
+by another type that is typically an instance of another
+template. While the number of models of most concepts is contained,
+the number of potential types of objects that could be bound is
+enormous. Offering bindings for all these types in advance is
+practically impossible. Moreover, in some cases models need to be
+extended with types provided by the user. Our objective is to enable
+concurrent bindings, of a great portion of this set, in a convenient
+way.
 
-Bindings are generated according to your prescriptions, which enables the convenient use of any subset of bound object types concurrently.  You can generate a single library that contains bindings for instances of different \cgal{} templates,
-or several libraries (which can be used concurrently), such that distinct libraries contain different instances of the same template.
+Bindings are generated according to your prescriptions, which enables
+the convenient use of any subset of bound object types concurrently.
+You can generate a single library that contains bindings for instances
+of different \cgal{} templates, or several libraries (which can be
+used concurrently), such that distinct libraries contain different
+instances of the same template.
 
 ## Installing
 
-You need to install at least C++17, Python 3.8+, [CMake 3.15+](https://cmake.org/install/), [nanobind](https://github.com/wjakob/nanobind#dependencies), and [CGAL 5.0+](https://doc.cgal.org/latest/Manual/installation.html) before attempting to use the bindings.
+You need to install at least C++17, Python 3.8+, [CMake
+3.15+](https://cmake.org/install/),
+[nanobind](https://github.com/wjakob/nanobind#dependencies), and [CGAL
+5.0+](https://doc.cgal.org/latest/Manual/installation.html) before
+attempting to use the bindings.
 
 ## Building
 
-If you install CGAL from sources, don't forget to set the environment variable `CGAL_DIR` to point at the CGAL build directory.
+If you install CGAL from sources, don't forget to set the environment
+variable `CGAL_DIR` to point at the CGAL build directory.
 
-As nanobind includes a git submodule, do not forget to issue the following command after cloning the nanobind repository:
-```
-git submodule update --init
-```
-Also, set the environment variable `nanobind_DIR` to point at the root of the clone.
+As nanobind includes a git submodule, do not forget to issue the
+following command after cloning the nanobind repository: ``` git
+submodule update --init ``` Also, set the environment variable
+`nanobind_DIR` to point at the root of the clone.
 
 ## Building
 
-Let's say that you would like to generate bindings for the *2D/3D Kernel* and *2D Arrangements* packages of **CGAL**, and in particular for the following:
+Let's say that you would like to generate bindings for the *2D/3D
+Kernel* and *2D Arrangements* packages of **CGAL**, and in particular
+for the following:
 
 * `Kernel`, and
 * `CGAL::Arrangement<GeometryTraits, Dcel>`
@@ -48,11 +79,15 @@ Assuming you have all dependencies installed, type:
     make -j4
     pip3 install --user src/libs/cgalpy/dist/CGALPY-1.0-py3-none-any.whl
 
-Then, you should be able to execute the program `<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`.
+Then, you should be able to execute the program
+`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`.
 
-At some point you will need bindings for additional instances (I assume); see Section [**Details**](markdown-header-details) for the relevant instructions.
+At some point you will need bindings for additional instances (I
+assume); see Section [**Details**](markdown-header-details) for the
+relevant instructions.
 
-If you are a developer and would like to build the *cpp* documentation, type:
+If you are a developer and would like to build the *cpp*
+documentation, type:
 
     make CGALPY_CPP_DOC
 
@@ -60,7 +95,9 @@ If you would like to build the Python documentation, type:
 
     make CGALPY_DOC
 
-The Python html manual pages are generated under `src/libs/cgalpy/CGALPY/build/html/`. The pdf single file is generated under `src/libs/cgalpy/CGALPY/build/latex/`.
+The Python html manual pages are generated under
+`src/libs/cgalpy/CGALPY/build/html/`. The pdf single file is generated
+under `src/libs/cgalpy/CGALPY/build/latex/`.
 
 Observe that the `CGALPY` prefix in the target of the above `make` is the binding library based name; this name can be different then `CGALPY`, and depends on your selections; see Section [**CGAL** Bindings](#markdown-header-cgal-bindings).
 
