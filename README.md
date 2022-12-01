@@ -36,12 +36,29 @@ way.
 Bindings are generated according to your prescriptions, which enables
 the convenient use of any subset of bound object types concurrently.
 You can generate a single library that contains bindings for instances
-of different \cgal{} templates, or several libraries (which can be
+of different CGAL templates, or several libraries (which can be
 used concurrently), such that distinct libraries contain different
 instances of the same template.
 
 ## Installing
 
+There are two ways to build & install the bindings. 
+Novice users who may only wish to quickly experiment with the bindings may 
+exploit the simple self-compiling build \& install mechanism to obtain a single 
+library that supports bindings for a large set of instances. 
+This binding library cannot be mutually used with other binding libraries though. 
+
+### Simple but Limited
+All you need to do is:
+
+git clone git@bitbucket.org:taucgl/cgal-python-bindings.git
+pip3 install --user <CGALPY_SRC_DIR>
+
+This will install a Python module called CGALPY_epec.
+From the name, you can infer that this module provides binding for instances
+that are bsed on the exact-predicate exact-construction kernel.
+
+### Flexible but Involved
 You need to install at least C++17, Python 3.8+, [CMake
 3.15+](https://cmake.org/install/),
 [nanobind](https://github.com/wjakob/nanobind#dependencies), and [CGAL
