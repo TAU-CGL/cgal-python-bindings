@@ -55,9 +55,15 @@ All you need to do is:
 
 where `<CGALPY_SRC_DIR>` is the root directory of your local clone of
 this repository. This will install a Python module called `CGALPY_epec`.
-From the name, you can infer that this module provides binding for
-C++ instances that are bsed on the exact-predicate exact-construction
-kernel.
+From the name, you can guess that this module provides access to
+C++ instances that are based on the EPEC (exact predicate exact construction)
+kernel. While this option is limited (because it generates a binding library
+of a fixed set of C++ instances) you may still change this set and
+the import name accordingly. For example, if you want to obtain a 
+library that supports bindings for C++ instances that are based on the EPIC 
+(exact predicate inexact construction) kernel, edit the file `setup.py`, which 
+resides under the `<CGALPY_SRC_DIR>` directory. In particular, replace `epec` 
+with `epic`.
 
 If you want to explot the full power of the bindings, you need to perform 
 a few steps. You need to install at least C++17, Python 3.8+, 
