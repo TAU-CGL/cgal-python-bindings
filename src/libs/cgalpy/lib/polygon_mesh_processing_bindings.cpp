@@ -63,6 +63,14 @@ bool do_intersect_polyline_ranges(const py::list& lsts1, const py::list& lsts2) 
 
 //
 template <typename PolygonMesh>
+bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
+                         const py::dict& np1 = py::dict(),
+                         const py::dict& np2 = py::dict()) {
+  return PMP::do_intersect(pm1, pm2);
+}
+
+//
+template <typename PolygonMesh>
 bool do_intersect_mesh_polyline(const PolygonMesh& pm, const py::list& lst) {
   auto begin = stl_input_iterator<Point_3>(lst);
   auto end = stl_input_iterator<Point_3>(lst, false);
@@ -72,7 +80,8 @@ bool do_intersect_mesh_polyline(const PolygonMesh& pm, const py::list& lst) {
 
 //
 template <typename PolygonMesh>
-bool do_intersect_mesh_polyline_range(const PolygonMesh& pm, const py::list& lsts) {
+bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
+                                      const py::list& lsts) {
   std::vector<std::vector<Point_3>> range;
   for (const auto& lh : lsts) {
     auto begin1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh));
@@ -242,12 +251,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("do_intersect_polylines", &pmp::do_intersect_polylines);
   m.def("do_intersect_polyline_ranges", &pmp::do_intersect_polyline_ranges);
-  m.def("do_intersect_meshes",
-        [](const Pm& pm1, const Pm& pm2, const Np& np1, const Np& np2)->bool
-        { return PMP::do_intersect(pm1, pm2, np1, np2); },
+  m.def("do_intersect_meshes", &pmp::do_intersect_meshes<Pm>,
         py::arg("pm1"), py::arg("pm2"),
-        py::arg("parameters1") = py::dict(),
-        py::arg("parameters2") = py::dict());
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
   m.def("do_intersect_mesh_polyline", &pmp::do_intersect_mesh_polyline<Pm>);
   m.def("do_intersect_mesh_polyline_range", &pmp::do_intersect_mesh_polyline_range<Pm>);
 
