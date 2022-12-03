@@ -138,6 +138,13 @@ py::list self_intersections_faces(const py::list& face_range,
 
 //
 template <typename PolygonMesh>
+bool does_self_intersect(const PolygonMesh& pm,
+                         const py::dict& parameters = py::dict()) {
+  return PMP::does_self_intersect(pm);
+}
+
+//
+template <typename PolygonMesh>
 bool does_self_intersect_faces(const py::list& face_range,
                                const PolygonMesh& pm,
                                const py::dict& parameters = py::dict()) {
@@ -211,8 +218,10 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Np_tag = CGAL::internal_np::all_default_t;
   using Np_base = CGAL::internal_np::No_property;
   using Np_class = CGAL::Named_function_parameters<Np_t, Np_tag, Np_base>;
-
   using Concurrency_tag = CGAL::Sequential_tag;
+
+  py::class_<Np_class>(m, "Named_function_parameters")
+    .def(py::init<>());
 
 #if 0
   // The following fails because the 5th parameter is a reference to void,
@@ -250,9 +259,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("face_range"), py::arg("pm"),
         py::arg("parameters") = py::dict());
 
-  using Dsi = bool(*)(const Pm&, const Np_class&);
-  m.def("does_self_intersect",
-        static_cast<Dsi>(&PMP::does_self_intersect<Concurrency_tag, Pm>),
+  m.def("does_self_intersect", &pmp::does_self_intersect<Pm>,
         py::arg("pm"), py::arg("parameters") = py::dict());
 
   m.def("does_self_intersect_faces", &pmp::does_self_intersect_faces<Pm>,
