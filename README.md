@@ -50,8 +50,8 @@ This binding library cannot be mutually used with other binding libraries though
 
 All you need to do is:
 
-    git clone git@bitbucket.org:taucgl/cgal-python-bindings.git
-    pip3 install --user <CGALPY_SRC_DIR>
+    git clone git clone https://bitbucket.org/taucgl/cgal-python-bindings.git cgalpy
+    pip3 install --user -e <CGALPY_SRC_DIR>
 
 where `<CGALPY_SRC_DIR>` is the root directory of your local clone of
 this repository. This will install a Python module called `CGALPY_epec`.
