@@ -50,11 +50,14 @@ This binding library cannot be mutually used with other binding libraries though
 
 All you need to do is:
 
-    git clone https://bitbucket.org/taucgl/cgal-python-bindings.git cgalpy
-    pip3 install --user -e <CGALPY_SRC_DIR>
+    pip3 install --user git+https://bitbucket.org/taucgl/cgal-python-bindings/src/master/
 
-where `<CGALPY_SRC_DIR>` is the root directory of your local clone of
-this repository. This will install a Python module called `CGALPY_epec`.
+which is short for:
+
+    git clone https://bitbucket.org/taucgl/cgal-python-bindings.git
+    pip3 install --user -e cgal-python-bindings
+
+This will install a Python module called `CGALPY_epec`.
 From the name, you can guess that this module provides access to
 C++ instances that are based on the EPEC (exact predicate exact construction)
 kernel. While this option is limited (because it generates a binding library
