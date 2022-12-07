@@ -11,15 +11,18 @@
 #include <stdexcept>
 
 #include <boost/iterator/function_output_iterator.hpp>
+#include <boost/range/iterator_range.hpp>
 
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
+#include <CGAL/Polygon_mesh_processing/intersection.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/Corefine_visitor.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -27,12 +30,149 @@ namespace PARMS = CGAL::parameters;
 
 namespace pmp {
 
+/*! Determine whether two polylines intersect.
+ * It's a shame that we cannot pass the begin1,end1,begin2,end2
+ * directly to the CGAL do_intersect function.
+ */
+bool do_intersect_polylines(const py::list& lst1, const py::list& lst2) {
+  auto begin1 = stl_input_iterator<Point_3>(lst1);
+  auto end1 = stl_input_iterator<Point_3>(lst1, false);
+  std::vector<Point_3> polyline1(begin1, end1);
+  auto begin2 = stl_input_iterator<Point_3>(lst2);
+  auto end2 = stl_input_iterator<Point_3>(lst2, false);
+  std::vector<Point_3> polyline2(begin2, end2);
+  return PMP::do_intersect(polyline1, polyline2);
+}
+
+/*! Determine whether two ranges of polylines intersect.
+ */
+bool do_intersect_polyline_ranges(const py::list& lsts1, const py::list& lsts2) {
+  std::vector<std::vector<Point_3>> range1, range2;
+  for (const auto& lh1 : lsts1) {
+    auto begin1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh1));
+    auto end1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh1), false);
+    range1.emplace_back(begin1, end1);
+  }
+  for (const auto& lh2 : lsts2) {
+    auto begin1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh2));
+    auto end1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh2), false);
+    range2.emplace_back(begin1, end1);
+  }
+  return PMP::do_intersect(range1, range2);
+}
+
+//
+template <typename PolygonMesh>
+bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
+                         const py::dict& np1 = py::dict(),
+                         const py::dict& np2 = py::dict()) {
+  return PMP::do_intersect(pm1, pm2);
+}
+
+//
+template <typename PolygonMesh>
+bool do_intersect_mesh_polyline(const PolygonMesh& pm, const py::list& lst) {
+  auto begin = stl_input_iterator<Point_3>(lst);
+  auto end = stl_input_iterator<Point_3>(lst, false);
+  std::vector<Point_3> polyline(begin, end);
+  return PMP::do_intersect(pm, polyline);
+}
+
+//
+template <typename PolygonMesh>
+bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
+                                      const py::list& lsts) {
+  std::vector<std::vector<Point_3>> range;
+  for (const auto& lh : lsts) {
+    auto begin1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh));
+    auto end1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh), false);
+    range.emplace_back(begin1, end1);
+  }
+  return PMP::do_intersect(pm, range);
+}
+
+//
+template <typename PolygonMesh>
+py::list intersecting_meshes(const py::list& lst) {
+  using Pm = PolygonMesh;
+
+  py::list result;
+  auto begin = stl_input_iterator<Pm>(lst);
+  auto end = stl_input_iterator<Pm>(lst, false);
+  auto op = [&] (const std::pair<std::size_t, std::size_t>& res) mutable
+            { result.append(res); };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  PMP::intersecting_meshes(boost::make_iterator_range(begin, end), it);
+
+  return result;
+}
+
+//
+template <typename PolygonMesh>
+py::list self_intersections(const PolygonMesh& pm,
+                            const py::dict& parameters = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+
+  py::list result;
+  auto op = [&] (const std::pair<Fd, Fd>& res) mutable
+            { result.append(res); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  PMP::self_intersections(pm, it);
+  return result;
+}
+
+//
+template <typename PolygonMesh>
+py::list self_intersections_faces(const py::list& face_range,
+                                  const PolygonMesh& pm,
+                                  const py::dict& parameters = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+
+  auto begin = stl_input_iterator<Fd>(face_range);
+  auto end = stl_input_iterator<Fd>(face_range, false);
+
+  py::list result;
+  auto op = [&] (const std::pair<Fd, Fd>& res) mutable
+            { result.append(res); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  PMP::self_intersections(boost::make_iterator_range(begin, end), pm, it);
+  return result;
+}
+
+//
+template <typename PolygonMesh>
+bool does_self_intersect(const PolygonMesh& pm,
+                         const py::dict& parameters = py::dict()) {
+  return PMP::does_self_intersect(pm);
+}
+
+//
+template <typename PolygonMesh>
+bool does_self_intersect_faces(const py::list& face_range,
+                               const PolygonMesh& pm,
+                               const py::dict& parameters = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+
+  auto begin = stl_input_iterator<Fd>(face_range);
+  auto end = stl_input_iterator<Fd>(face_range, false);
+  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm);
+}
+
 //
 template <typename PolygonMesh>
 py::list
 connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor
                       seed_face,
-                    const PolygonMesh& pm, py::dict parameters) {
+                    const PolygonMesh& pm,
+                    const py::dict& parameters = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
@@ -48,7 +188,7 @@ connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor
 //
 template <typename PolygonMesh>
 py::list connected_components(const PolygonMesh& pm,
-                              py::dict parameters = py::dict()) {
+                              const py::dict& parameters = py::dict()) {
   using Pm = PolygonMesh;
 
   auto fccmap = CGAL::get(CGAL::dynamic_face_property_t<std::size_t>(), pm);
@@ -80,12 +220,57 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
 // Export Polygon_mesh_processing
 void export_polygon_mesh_processing(py::module_& m) {
   using Pm = pmp::Polygonal_mesh;
+  using Polyline = std::vector<Kernel::Point_3>;
+  using Np = CGAL::parameters::Default_named_parameters;
+
+  using Np_t = bool;
+  using Np_tag = CGAL::internal_np::all_default_t;
+  using Np_base = CGAL::internal_np::No_property;
+  using Np_class = CGAL::Named_function_parameters<Np_t, Np_tag, Np_base>;
+  using Concurrency_tag = CGAL::Sequential_tag;
+
+  py::class_<Np_class>(m, "Named_function_parameters")
+    .def(py::init<>());
+
+#if 0
+  // The following fails because the 5th parameter is a reference to void,
+  // which cannot be handled by nanobind.
+  using Has_range = boost::has_range_const_iterator<Pm>::value;
+  using Do_intersect_meshes = bool(*)(const Pm&, const Pm&,
+                                      const Np_class&, const Np_class&,
+                                      const std::enable_if_t<! Has_range>*);
+
+  m.def("do_intersect", static_cast<Do_intersect1>(&PMP::do_intersect<Pm>));
+#endif
 
   m.def("connected_component", &pmp::connected_component<Pm>,
         py::arg("seed_face"), py::arg("pm"),
         py::arg("parameters") = py::dict());
   m.def("connected_components", &pmp::connected_components<Pm>,
         py::arg("pm"), py::arg("parameters") = py::dict());
+
+  m.def("do_intersect_polylines", &pmp::do_intersect_polylines);
+  m.def("do_intersect_polyline_ranges", &pmp::do_intersect_polyline_ranges);
+  m.def("do_intersect_meshes", &pmp::do_intersect_meshes<Pm>,
+        py::arg("pm1"), py::arg("pm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+  m.def("do_intersect_mesh_polyline", &pmp::do_intersect_mesh_polyline<Pm>);
+  m.def("do_intersect_mesh_polyline_range", &pmp::do_intersect_mesh_polyline_range<Pm>);
+
+  m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>);
+
+  m.def("self_intersections", &pmp::self_intersections<Pm>,
+        py::arg("pm"), py::arg("parameters") = py::dict());
+  m.def("self_intersections_faces", &pmp::self_intersections_faces<Pm>,
+        py::arg("face_range"), py::arg("pm"),
+        py::arg("parameters") = py::dict());
+
+  m.def("does_self_intersect", &pmp::does_self_intersect<Pm>,
+        py::arg("pm"), py::arg("parameters") = py::dict());
+
+  m.def("does_self_intersect_faces", &pmp::does_self_intersect_faces<Pm>,
+        py::arg("pm"), py::arg("face_range"),
+        py::arg("parameters") = py::dict());
 
   // corefine
   using Cv = pmp::Corefine_visitor<Pm>;
