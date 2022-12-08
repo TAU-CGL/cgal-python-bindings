@@ -2,11 +2,13 @@ set(CGALPY_PY_MIN_VERSION 3.5)
 set(CGALPY_BOOST_MIN_VERSION 1.68.0)
 
 # Find required libraries
+if (NOT SKBUILD)
 if (CGALPY_WITH_VISUAL)
   add_definitions(-DCGALPY_HAS_VISUAL=)
   find_package(CGAL REQUIRED COMPONENTS Core Qt5)
 else()
   find_package(CGAL REQUIRED COMPONENTS Core)
+endif()
 endif()
 
 if (NOT CGAL_FOUND)
@@ -24,18 +26,11 @@ if (NOT SKBUILD)
         set(Boost_USE_STATIC_LIBS ON)
         add_definitions(-DBOOST_PYTHON_STATIC_LIB)
     endif ()
-    set(CGALPY_BOOST_LIBRARIES)
+    set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES})
 
     find_package(Python ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
     find_package(PythonLibs ${Python_VERSION_MAJOR}.${Python_VERSION_MINOR} EXACT REQUIRED)
 
-    if (PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
-        set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} python)
-    else ()
-        # Set the Boost python library name (e.g., python35)
-        set(CGALPY_BOOST_PYTHON_LIB_NAME python${Python_VERSION_MAJOR}${Python_VERSION_MINOR})
-        set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} ${CGALPY_BOOST_PYTHON_LIB_NAME})
-    endif ()
     find_package(Boost ${CGALPY_BOOST_MIN_VERSION} REQUIRED COMPONENTS ${CGALPY_BOOST_LIBRARIES})
 
     if (NOT Boost_FOUND)
@@ -99,14 +94,16 @@ select_polygon_mesh_processing()
 if (${CGALPY_KERNEL_D_BINDINGS} AND
 ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
 (${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPEC_D})))
+  if (NOT SKBUILD)
     find_package(Eigen3 3.3 REQUIRED)
     if (NOT EIGEN3_FOUND)
         SET(CGALPY_KERNEL_D_BINDINGS OFF)
         SET(CGALPY_SPATIAL_SEARCHING_BINDINGS OFF)
         message(WARNING "Eigen3 not found!\nTurning of the generations of\n(i) dD Kernel, and\n(ii) spatial searching bindings")
-    endif ()
-    #  include(CGAL_Eigen3_support)
-    include_directories(${EIGEN3_INCLUDE_DIR})
+    endif()
+  endif()
+  #  include(CGAL_Eigen3_support)
+  include_directories(${EIGEN3_INCLUDE_DIR})
 endif ()
 
 
