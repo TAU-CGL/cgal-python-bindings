@@ -38,7 +38,7 @@ if (NOT SKBUILD)
         set(CGALPY_BOOST_PYTHON_LIB_NAME python${Python_VERSION_MAJOR}${Python_VERSION_MINOR})
         set(CGALPY_BOOST_LIBRARIES ${CGALPY_BOOST_LIBRARIES} ${CGALPY_BOOST_PYTHON_LIB_NAME})
     endif ()
-    find_package(Boost ${CGALPY_BOOST_MIN_VERSION} REQUIRED COMPONENTS ${CGALPY_BOOST_LIBRARIES})
+    find_package(Boost ${CGALPY_BOOST_MIN_VERSION} REQUIRED COMPONENTS)
 
     if (NOT Boost_FOUND)
         message(STATUS "This library cannot be compiled, as it requires Boost.")
