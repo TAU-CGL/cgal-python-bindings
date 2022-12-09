@@ -1,14 +1,17 @@
 set(CGALPY_PY_MIN_VERSION 3.5)
 set(CGALPY_BOOST_MIN_VERSION 1.68.0)
 
-# Find required libraries
-if (NOT SKBUILD)
 if (CGALPY_WITH_VISUAL)
   add_definitions(-DCGALPY_HAS_VISUAL=)
-  find_package(CGAL REQUIRED COMPONENTS Core Qt5)
-else()
-  find_package(CGAL REQUIRED COMPONENTS Core)
 endif()
+
+# Find required libraries
+if (NOT SKBUILD)
+  if (CGALPY_WITH_VISUAL)
+    find_package(CGAL REQUIRED COMPONENTS Core Qt5)
+  else()
+    find_package(CGAL REQUIRED COMPONENTS Core)
+  endif()
 endif()
 
 if (NOT CGAL_FOUND)
@@ -39,7 +42,6 @@ else()
     find_package(Boost REQUIRED)
 endif ()
 
-# find_package(tsl-robin-map CONFIG REQUIRED)
 find_package(nanobind CONFIG REQUIRED)
 
 # Add includes and libs
