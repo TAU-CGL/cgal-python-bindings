@@ -62,16 +62,16 @@ From the name, you can guess that this module provides access to
 C++ instances that are based on the EPEC (exact predicate exact construction)
 kernel. While this option is limited (because it generates a binding library
 of a fixed set of C++ instances) you may still change this set and
-the import name accordingly. For example, if you want to obtain a 
-library that supports bindings for C++ instances that are based on the EPIC 
-(exact predicate inexact construction) kernel, edit the file `setup.py`, which 
-resides under the `<CGALPY_SRC_DIR>` directory. In particular, replace `epec` 
+the import name accordingly. For example, if you want to obtain a
+library that supports bindings for C++ instances that are based on the EPIC
+(exact predicate inexact construction) kernel, edit the file `setup.py`, which
+resides under the `<CGALPY_SRC_DIR>` directory. In particular, replace `epec`
 with `epic`.
 
-If you want to explot the full power of the bindings, you need to perform 
-a few steps. You need to install at least C++17, Python 3.8+, 
+If you want to exploit the full power of the bindings, you need to perform
+a few steps. You need to install at least C++17, Python 3.8+,
 [CMake 3.15+](https://cmake.org/install/),
-[nanobind](https://github.com/wjakob/nanobind#dependencies), and 
+[nanobind](https://github.com/wjakob/nanobind#dependencies), and
 [CGAL 5.0+](https://doc.cgal.org/latest/Manual/installation.html) before
 attempting to use the bindings.
 
