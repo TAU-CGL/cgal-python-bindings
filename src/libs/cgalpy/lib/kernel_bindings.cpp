@@ -586,9 +586,13 @@ void export_kernel(py::module_& m) {
   using Hsdtp_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_smaller_distace_to_point", static_cast<Hsdtp_fnc>(&CGAL::has_smaller_distance_to_point<Kernel>));
 
+#if !defined(_MSC_VER)
+  // MSVC does handle the following for some reason....
   using Hssdtl_fnc1 = bool(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
-  using Hssdtl_fnc2 = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_smaller_signed_distance_to_line", static_cast<Hssdtl_fnc1>(&CGAL::has_smaller_signed_distance_to_line<Kernel>));
+#endif
+
+  using Hssdtl_fnc2 = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_smaller_signed_distance_to_line", static_cast<Hssdtl_fnc2>(&CGAL::has_smaller_signed_distance_to_line<Kernel>));
 
   using Lid_fnc = FT(*)(const Pnt_2&, const Pnt_2&);
