@@ -31,7 +31,8 @@ if (NOT SKBUILD)
     endif ()
 
     find_package(Python ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
-    find_package(PythonLibs ${Python_VERSION_MAJOR}.${Python_VERSION_MINOR} EXACT REQUIRED)
+    # The following is not needed anylonger
+    # find_package(PythonLibs ${Python_VERSION_MAJOR}.${Python_VERSION_MINOR} EXACT REQUIRED)
     find_package(Boost ${CGALPY_BOOST_MIN_VERSION} REQUIRED COMPONENTS system thread)
     if (NOT Boost_FOUND)
         message(STATUS "This library cannot be compiled, as it requires Boost.")
