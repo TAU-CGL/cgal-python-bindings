@@ -513,9 +513,12 @@ void export_kernel(py::module_& m) {
   using Cl_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   m.def("compare_lexicographically", static_cast<Cl_fnc>(&CGAL::compare_lexicographically<Kernel>));
 
+#if !defined(_MSC_VER)
+  // MSVC does handle the following for some reason....
   using Csdtl_fnc1 = CGAL::Comparison_result(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
-  using Csdtl_fnc2 = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("compare_signed_distance_to_line", static_cast<Csdtl_fnc1>(&CGAL::compare_signed_distance_to_line<Kernel>));
+#endif
+  using Csdtl_fnc2 = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("compare_signed_distance_to_line", static_cast<Csdtl_fnc2>(&CGAL::compare_signed_distance_to_line<Kernel>));
 
   using Cs_fnc1 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&);
@@ -578,9 +581,12 @@ void export_kernel(py::module_& m) {
   using Hldtp_fnc = bool (*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_larger_distace_to_point", static_cast<Hldtp_fnc>(&CGAL::has_larger_distance_to_point<Kernel>));
 
+#if !defined(_MSC_VER)
+  // MSVC does handle the following for some reason....
   using Hldtl_fnc1 = bool(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
-  using Hldtl_fnc2 = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_larger_signed_distance_to_line", static_cast<Hldtl_fnc1>(&CGAL::has_larger_signed_distance_to_line<Kernel>));
+#endif
+  using Hldtl_fnc2 = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_larger_signed_distance_to_line", static_cast<Hldtl_fnc2>(&CGAL::has_larger_signed_distance_to_line<Kernel>));
 
   using Hsdtp_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
