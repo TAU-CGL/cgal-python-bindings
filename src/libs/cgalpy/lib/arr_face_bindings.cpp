@@ -64,7 +64,7 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("number_of_inner_ccbs", &aos2::number_of_inner_ccbs)
     .def("inner_ccbs", &aos2::inner_ccbs)
     .def("number_of_outer_ccbs", &aos2::number_of_outer_ccbs)
-    .def("outer_ccbs", &aos2::inner_ccbs)
+    .def("outer_ccbs", &aos2::outer_ccbs)
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
     .def("holes", &aos2::inner_ccbs)
     .def("outer_ccb", &aos2::outer_ccb)
