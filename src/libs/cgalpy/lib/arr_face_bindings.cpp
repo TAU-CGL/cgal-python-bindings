@@ -22,10 +22,15 @@ Iterator_from_circulator<Ccb_halfedge_circulator>* outer_ccb(Face& f)
 { return new Iterator_from_circulator<Ccb_halfedge_circulator>(f.outer_ccb()); }
 
 //
-Iterator_of_circulators<Inner_ccb_iterator>* inner_ccbs(Face& f)
-{
+Iterator_of_circulators<Inner_ccb_iterator>* inner_ccbs(Face& f) {
   return new Iterator_of_circulators<Inner_ccb_iterator>(f.inner_ccbs_begin(),
                                                          f.inner_ccbs_end());
+}
+
+//
+Iterator_of_circulators<Inner_ccb_iterator>* outer_ccbs(Face& f) {
+  return new Iterator_of_circulators<Inner_ccb_iterator>(f.outer_ccbs_begin(),
+                                                         f.outer_ccbs_end());
 }
 
 //
