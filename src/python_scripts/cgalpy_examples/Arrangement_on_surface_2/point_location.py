@@ -22,6 +22,7 @@ Point = Arrangement.Geometry_traits_2.Point_2
 
 Naive_pl = Aos2.Arr_naive_point_location
 Landmarks_pl = Aos2.Arr_landmarks_point_location
+Ric_pl = Aos2.Arr_trapezoid_ric_point_location
 
 # Construct the arrangement.
 arr = Arrangement()
@@ -38,3 +39,9 @@ landmarks_pl = Landmarks_pl(arr)
 locate_point(arr, landmarks_pl, Point(3, 2))      # q4
 locate_point(arr, landmarks_pl, Point(5, 2))      # q5
 locate_point(arr, landmarks_pl, Point(1, 0))      # q6
+
+# Perform some point-location queries using the ric strategy.
+ric_pl = Ric_pl(arr)
+locate_point(arr, ric_pl, Point(3, 2))      # q4
+locate_point(arr, ric_pl, Point(5, 2))      # q5
+locate_point(arr, ric_pl, Point(1, 0))      # q6
