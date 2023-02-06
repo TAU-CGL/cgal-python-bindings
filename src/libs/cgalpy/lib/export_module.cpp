@@ -37,6 +37,7 @@ void export_spatial_searching(py::module_&);
 void export_surface_mesh(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
+void export_visibility_2(py::module_&);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
 
@@ -143,5 +144,10 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   auto pmp_m = m.def_submodule("Pmp");
   export_polygon_mesh_processing(pmp_m);
+#endif
+
+#ifdef CGALPY_VISIBILITY_2_BINDINGS
+  auto vis2_m = m.def_submodule("Vis2");
+  export_visibility_2(vis2_m);
 #endif
 }
