@@ -91,6 +91,7 @@ select_alpha_shape_3()
 select_surface_mesh()
 select_polyhedron_3()
 select_polygon_mesh_processing()
+select_visibility_2()
 
 if (${CGALPY_KERNEL_D_BINDINGS} AND
 ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
