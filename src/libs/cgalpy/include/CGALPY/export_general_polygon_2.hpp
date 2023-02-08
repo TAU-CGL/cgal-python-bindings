@@ -15,6 +15,7 @@
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -48,6 +49,13 @@ export_general_polygon_2(py::class_<GeneralPolygon_2>& pgn_c) {
     .def("clear", &Gpgn::clear)
     .def("reverse_orientation", &Gpgn::reverse_orientation)
     ;
+
+  using Cci = typename Gpgn::Curve_const_iterator;
+  add_iterator<Cci, Cci>("Curve_iterator", pgn_c);
+  pgn_c.def("curves",
+            [] (const Gpgn& pgn)
+            { return make_iterator(pgn.curves_begin(), pgn.curves_end()); },
+            py::keep_alive<0, 1>());
 
   add_insertion(pgn_c, "__str__");
   add_insertion(pgn_c, "__repr__");
