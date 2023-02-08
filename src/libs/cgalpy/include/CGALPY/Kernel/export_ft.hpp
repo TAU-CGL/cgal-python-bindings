@@ -12,7 +12,6 @@
 
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
-#include <nanobind/stl/string.h>
 
 #include "CGALPY/to_string.hpp"
 #include "CGALPY/add_insertion.hpp"
