@@ -10,4 +10,20 @@
 #ifndef CGALPY_VISIBILITY_2_CONFIG_HPP
 #define CGALPY_VISIBILITY_2_CONFIG_HPP
 
+#include <CGAL/tags.h>
+
+#include "CGALPY/config.hpp"
+
+namespace vis2 {
+
+constexpr bool regularization_category()
+{ return DETECT_EXIST(CGALPY_VIS2_REGULARIZATION_CATEGORY); }
+
+// Exact comparison
+template <bool b> struct Regularization_category {};
+template <> struct Regularization_category<false> { typedef CGAL::Tag_false type; };
+template <> struct Regularization_category<true> { typedef CGAL::Tag_true type; };
+
+}
+
 #endif
