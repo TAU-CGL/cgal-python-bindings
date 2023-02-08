@@ -9,6 +9,7 @@
 
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
+#include <nanobind/stl/string.h>
 
 #include "CGALPY/to_string.hpp"
 
@@ -100,12 +101,13 @@ void export_kernel(py::module_& m) {
     py::class_<FT> ft_c(m, "FT");
     export_ft(ft_c);
     ft_c.def(py::init<Fte>())
+      .def("__init__", [](FT& self, const std::string& str)
+                       { new (&self) FT(Fte(str)); })
+      .def("__init__", [](FT& self, int nom, int den)
+                       { new (&self) FT(Fte(nom, den)); })
       .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); })
       .def("exact", [](const FT& ft)->const Fte& { return ft.exact();} )
       .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} )
-      .def("__init__", [](FT& self, int nom, int den) {
-                         new (&self) FT(Fte(nom, den));
-                       })
       ;
   }
   #endif
