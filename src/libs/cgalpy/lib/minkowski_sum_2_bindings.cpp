@@ -11,6 +11,7 @@
 
 #include <CGAL/minkowski_sum_2.h>
 #include <CGAL/approximated_offset_2.h>
+#include <CGAL/offset_polygon_2.h>
 
 #include "CGALPY/minkowski_sum_2_types.hpp"
 #include "CGALPY/polygon_partitioning_types.hpp"
@@ -85,7 +86,7 @@ template <typename T1, typename T2, typename T3, typename T4,
 void bind_mink_sum_decomp_two_strategies_pair(py::module_& m, bool) {
   m.def("minkowski_sum_2",
         static_cast<Polygon_with_holes_2(*)(const T1&, const T2&, const T3&, const T4&)>
-          (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>));
+        (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>));
 }
 
 template <typename P1, typename P2, typename T> void
@@ -94,8 +95,8 @@ bind_mink_sum_decomp_two_strategies_inner(py::module_& m, T) {}
 template <typename P1, typename P2, typename T1, typename T2, typename... Ts>
 void bind_mink_sum_decomp_two_strategies_inner(py::module_& m,
                                                T1 arg1, T2 arg2, Ts... args) {
-  typedef typename std::remove_pointer<T1>::type        PT1;
-  typedef typename std::remove_pointer<T2>::type        PT2;
+  using PT1 = typename std::remove_pointer<T1>::type;
+  using PT2 = typename std::remove_pointer<T2>::type;
   bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT1, PT2>(m, true);
   bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT2, PT1>(m, true);
   bind_mink_sum_decomp_two_strategies_inner<P1, P2>(m, arg1, args...);
@@ -103,7 +104,7 @@ void bind_mink_sum_decomp_two_strategies_inner(py::module_& m,
 
 template <typename P1, typename P2, typename T>
 void bind_mink_sum_decomp_two_strategies_outer(py::module_& m, T arg) {
-  typedef typename std::remove_pointer<T>::type         PT;
+  using PT = typename std::remove_pointer<T>::type;
   bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT, PT>(m, true);
 }
 
@@ -112,7 +113,7 @@ void bind_mink_sum_decomp_two_strategies_outer(py::module_& m,
                                                T1 arg, Ts... args) {
   bind_mink_sum_decomp_two_strategies_inner<P1, P2>(m, arg, args...);
   bind_mink_sum_decomp_two_strategies_outer<P1, P2>(m, args...);
-  typedef typename std::remove_pointer<T1>::type        PT1;
+  using PT1 = typename std::remove_pointer<T1>::type;
   bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT1, PT1>(m, true);
 }
 
@@ -169,13 +170,20 @@ py::list approximated_inset_2(const Polygon_2& p, const FT& r, double eps) {
   return lst;
 }
 
+Conic_polygon_with_holes_2
+offset_polygon_2(const Rat_polygon_2& pgn, const Rat_FT& r,
+                 const Conic_traits& traits)
+{ return CGAL::offset_polygon_2(pgn, r, traits); }
+
 }
 
 void export_minkowski_sum_2(py::module_& m) {
-  typedef ms2::Polygon_2                                Pgn;
-  typedef ms2::Polygon_with_holes_2                     Pwh;
-  typedef ms2::Circle_segment_polygon_2                 CS_pgn;
-  typedef ms2::Circle_segment_polygon_with_holes_2      CS_pwh;
+  using Pgn = ms2::Polygon_2;
+  using Pwh = ms2::Polygon_with_holes_2;
+  using CS_pgn = ms2::Circle_segment_polygon_2;
+  using CS_pwh = ms2::Circle_segment_polygon_with_holes_2;
+  using Conic_pgn = ms2::Conic_polygon_2;
+  using Conic_pwh = ms2::Conic_polygon_with_holes_2;
 
 #if CGAL_VERSION_NR > 1050500000
   // By decomposition
@@ -205,6 +213,8 @@ void export_minkowski_sum_2(py::module_& m) {
   m.def("approximated_offset_2", &ms2::approximated_offset_2_pwh);
   m.def("approximated_inset_2", &ms2::approximated_inset_2);
 
+  m.def("offset_polygon_2", &ms2::offset_polygon_2);
+
   if (add_attr<CS_pgn>(m, "Circle_segment_polygon_2")) return;
   auto cs_pgn_c = py::class_<CS_pgn>(m, "Circle_segment_polygon_2");
   export_general_polygon_2<CS_pgn>(cs_pgn_c);
@@ -212,4 +222,12 @@ void export_minkowski_sum_2(py::module_& m) {
   if (add_attr<CS_pwh>(m, "Circle_segment_polygon_with_holes_2")) return;
   auto cs_pwh_c = py::class_<CS_pwh>(m, "Circle_segment_polygon_with_holes_2");
   export_general_polygon_with_holes_2<CS_pwh>(cs_pwh_c);
+
+  if (add_attr<Conic_pgn>(m, "Conic_polygon_2")) return;
+  auto conic_pgn_c = py::class_<Conic_pgn>(m, "Conic_polygon_2");
+  export_general_polygon_2<Conic_pgn>(conic_pgn_c);
+
+  if (add_attr<Conic_pwh>(m, "Conic_polygon_with_holes_2")) return;
+  auto conic_pwh_c = py::class_<Conic_pwh>(m, "Conic_polygon_with_holes_2");
+  export_general_polygon_with_holes_2<Conic_pwh>(conic_pwh_c);
 }
