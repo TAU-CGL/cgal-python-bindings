@@ -24,12 +24,12 @@
 namespace py = nanobind;
 
 template <typename PT>
-void init_polynomial(typename PT::Type& pol, py::list& lst) {
+void init_polynomial(typename PT::Type* pol, py::list& lst) {
   using P = typename PT::Type;
   using CT = typename PT::Coefficient_type;
   auto begin = stl_input_iterator<CT>(lst);
   auto end = stl_input_iterator<CT>(lst, false);
-  new (&pol) P(begin, end);
+  new (pol) P(begin, end);      // placement new
 }
 
 template <typename PT>

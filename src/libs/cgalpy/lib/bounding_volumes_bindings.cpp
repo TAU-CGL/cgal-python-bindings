@@ -23,10 +23,10 @@ typedef typename CGAL::Min_circle_2_traits_2<Kernel>     Min_circle_2_traits_2;
 typedef typename Min_circle_2_traits_2::Circle           Optimisation_circle_2;
 typedef typename CGAL::Min_circle_2<Min_circle_2_traits_2> Min_circle_2;
 
-void init_min_circle_2_from_list(Min_circle_2& mc, py::list& lst, bool random) {
+void init_min_circle_2_from_list(Min_circle_2* mc, py::list& lst, bool random) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  new (&mc) Min_circle_2(begin, end, random);
+  new (mc) Min_circle_2(begin, end, random);    // placement new
 }
 
 void insert_list(Min_circle_2& mc, py::list& lst) {

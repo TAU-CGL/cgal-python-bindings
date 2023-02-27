@@ -16,11 +16,11 @@
 
 template <typename PyClass>
 void add_extraction(PyClass& cls) {
-  cls.def("__init__", [](typename PyClass::Type& self,
+  cls.def("__init__", [](typename PyClass::Type* self,
                          const std::string& str) {
                         std::istringstream is(str);
-                        new (&self) typename PyClass::Type();
-                        is >> self;
+                        new (self) typename PyClass::Type();    // placement new
+                        is >> *self;
                       });
 }
 #endif

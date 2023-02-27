@@ -65,9 +65,9 @@ void export_arrangement_2_io(py::class_<aos2::Arrangement_2,
                           CGAL::IO::write(arr, os, formatter);
                           return os.str();
                         });
-  arr_c.def("__init__", [](Arr& arr, const std::string& str) {
+  arr_c.def("__init__", [](Arr* arr, const std::string& str) {
                           std::istringstream is(str);
-                          new (&arr) Arr();
+                          new (arr) Arr();      // placement new
                           Formatter formatter;
                           CGAL::IO::read(arr, is, formatter);
                         });

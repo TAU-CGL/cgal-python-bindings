@@ -25,16 +25,16 @@ namespace py = nanobind;
 extern void export_gmpz(py::module_& m);
 extern void export_gmpq(py::module_& m);
 
-void init_point_d(Point_d& pd, int d, py::list& lst) {
+void init_point_d(Point_d* pd, int d, py::list& lst) {
   auto begin = stl_input_iterator<FT_d>(lst);
   auto end = stl_input_iterator<FT_d>(lst, false);
 #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
-  new (&pd) Point_d(d, begin, end);
+  new (pd) Point_d(d, begin, end);              // placement new
 #else
   // Workaround a bug in CGAL
   std::list<FT_d> tmp(begin, end);
-  new (&pd) Point_d(d, tmp.begin(), tmp.end());
+  new (pd) Point_d(d, tmp.begin(), tmp.end());  // placement new
 #endif
 }
 

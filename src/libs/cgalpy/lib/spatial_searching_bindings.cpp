@@ -50,11 +50,11 @@ template <typename T>
 static T* init_tree() { return new T(); }
 
 template <typename T>
-void init_tree_from_list(T& tree, const py::list& lst) {
+void init_tree_from_list(T* tree, const py::list& lst) {
   using Pntd = typename T::Point_d;
   auto begin = stl_input_iterator<Pntd>(lst);
   auto end = stl_input_iterator<Pntd>(lst, false);
-  new (&tree) T(begin, end);
+  new (tree) T(begin, end);     // placement new
 }
 
 template <typename T>

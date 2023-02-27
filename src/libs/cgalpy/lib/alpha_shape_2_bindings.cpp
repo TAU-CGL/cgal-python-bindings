@@ -20,10 +20,10 @@ namespace py = nanobind;
 
 namespace as2 {
 
-void as_init(Alpha_shape_2& as, py::list& lst) {
+void as_init(Alpha_shape_2* as, py::list& lst) {
   auto begin = stl_input_iterator<Point>(lst);
   auto end = stl_input_iterator<Point>(lst, false);
-  new (&as) Alpha_shape_2(begin, end);
+  new (as) Alpha_shape_2(begin, end);   // placement new
 }
 
 const FT& next(Alpha_iterator it) {

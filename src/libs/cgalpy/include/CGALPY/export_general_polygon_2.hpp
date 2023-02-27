@@ -23,12 +23,12 @@ namespace bso2 {
 
 // Initialize a general polygon from a list of x-monotone curves.
 template <typename GeneralPolygon_2>
-void init_polygon_2(GeneralPolygon_2& pgn, py::list& lst) {
+void init_polygon_2(GeneralPolygon_2* pgn, py::list& lst) {
   using Gpgn = GeneralPolygon_2;
   using Xcv = typename Gpgn::X_monotone_curve_2;
   auto begin = stl_input_iterator<Xcv>(lst);
   auto end = stl_input_iterator<Xcv>(lst, false);
-  new (&pgn) Gpgn(begin, end);
+  new (pgn) Gpgn(begin, end);   // placement new
 }
 
 }

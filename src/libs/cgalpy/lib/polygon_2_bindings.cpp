@@ -27,10 +27,10 @@ Point_2& top_vertex(Polygon_2& pgn) { return *(pgn.top_vertex()); }
 Point_2& bottom_vertex(Polygon_2& pgn) { return *(pgn.bottom_vertex()); }
 
 // Initialize a polygon from a list of vertices.
-void init_polygon_2(Polygon_2& pgn, py::list& lst) {
+void init_polygon_2(Polygon_2* pgn, py::list& lst) {
   auto begin = stl_input_iterator<Point_2>(lst);
   auto end = stl_input_iterator<Point_2>(lst, false);
-  new (&pgn) Polygon_2(begin, end);
+  new (pgn) Polygon_2(begin, end);      // placement new
 }
 
 }

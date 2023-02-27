@@ -24,7 +24,7 @@ namespace py = nanobind;
 // Initialize a general polygon with hole from the outer boundary and a list
 // of holes.
 template <typename GeneralPolygonWithHoles_2>
-void init_polygon_with_holes_2(GeneralPolygonWithHoles_2& pwh,
+void init_polygon_with_holes_2(GeneralPolygonWithHoles_2* pwh,
                                typename
                                GeneralPolygonWithHoles_2::General_polygon_2& p,
                                py::list& lst) {
@@ -32,7 +32,7 @@ void init_polygon_with_holes_2(GeneralPolygonWithHoles_2& pwh,
   using Gpgn = typename Gpwh::General_polygon_2;
   auto begin = stl_input_iterator<Gpgn>(lst);
   auto end = stl_input_iterator<Gpgn>(lst, false);
-  new (&pwh) Gpwh(p, begin, end);
+  new (pwh) Gpwh(p, begin, end);        // placement new
 }
 
 // Export the attributes of General_polygon_with_holes_2.

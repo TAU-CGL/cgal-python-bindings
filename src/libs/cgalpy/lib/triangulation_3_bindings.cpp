@@ -21,10 +21,10 @@ namespace tri3 {
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 
 //
-void dt3_init(tri3::Triangulation_3& tri, py::list& lst) {
+void dt3_init(tri3::Triangulation_3* tri, py::list& lst) {
   auto begin = stl_input_iterator<tri3::Point>(lst);
   auto end = stl_input_iterator<tri3::Point>(lst, false);
-  new (&tri) tri3::Triangulation_3(begin, end);
+  new (tri) tri3::Triangulation_3(begin, end);  // placement new
 }
 
 //
