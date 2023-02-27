@@ -11,9 +11,7 @@ if __name__ == '__main__':
   multiline_modules = ''
   for module in args.modules:
     multiline_modules += '   ' + module + '\n'
-  fin = open(args.filename, 'rt')
-  fout = open(args.output_file, 'wt')
-  for line in fin:
-    fout.write(line.replace('@SPHINX_MULTILINE_MODULES@', multiline_modules))
-  fin.close()
-  fout.close()
+  with open(args.filename, 'rt') as fin:
+    with open(args.output_file, 'wt') as fout:
+      for line in fin:
+        fout.write(line.replace('@SPHINX_MULTILINE_MODULES@', multiline_modules))
