@@ -16,10 +16,15 @@
 #include "CGALPY/python_iterator_templates.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
 namespace as3 {
+
+//
+py::object alphas(const Alpha_shape_3& as)
+{ return make_iterator(as.alpha_begin(), as.alpha_end()); }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
 void make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
@@ -31,41 +36,41 @@ void make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
 }
 #endif
 
-  void as_init1(Alpha_shape_3& as, py::list& lst) {
+  void as_init1(Alpha_shape_3* as, py::list& lst) {
   auto begin = stl_input_iterator<Point>(lst);
   auto end = stl_input_iterator<Point>(lst, false);
-  new (&as) Alpha_shape_3(begin, end);
+  new (as) Alpha_shape_3(begin, end);           // placement new
 }
 
-  void as_init2(Alpha_shape_3& as, py::list& lst, const FT& alpha) {
+  void as_init2(Alpha_shape_3* as, py::list& lst, const FT& alpha) {
   auto begin = stl_input_iterator<Point>(lst);
   auto end = stl_input_iterator<Point>(lst, false);
-  new (&as) Alpha_shape_3(begin, end, alpha);
+  new (as) Alpha_shape_3(begin, end, alpha);    // placement new
 }
 
-  void as_init3(Alpha_shape_3& as, py::list& lst, double alpha) {
+  void as_init3(Alpha_shape_3* as, py::list& lst, double alpha) {
   auto begin = stl_input_iterator<Point>(lst);
   auto end = stl_input_iterator<Point>(lst, false);
-  new (&as) Alpha_shape_3(begin, end, alpha);
+  new (as) Alpha_shape_3(begin, end, alpha);    // placement new
 }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  void as_init4(Alpha_shape_3& as, py::list& lst, const FT& alpha, Mode m) {
+  void as_init4(Alpha_shape_3* as, py::list& lst, const FT& alpha, Mode m) {
   auto begin = stl_input_iterator<Point>(lst);
   auto end = stl_input_iterator<Point>(lst, false);
-  new (&as) Alpha_shape_3(begin, end, alpha, m);
+  new (as) Alpha_shape_3(begin, end, alpha, m); // placement new
 }
 
-  void as_init5(Alpha_shape_3& as, py::list& lst, double alpha, Mode m) {
+  void as_init5(Alpha_shape_3* as, py::list& lst, double alpha, Mode m) {
   auto begin = stl_input_iterator<Point>(lst);
   auto end = stl_input_iterator<Point>(lst, false);
-  new (&as) Alpha_shape_3(begin, end, alpha, m);
+  new (as) Alpha_shape_3(begin, end, alpha, m); // placement new
 }
 
 const FT& next(Alpha_iterator it) {
   if (it == Alpha_iterator()) {
     PyErr_SetString(PyExc_StopIteration, "Invalid alpha iterator");
-    py::throw_error_already_set();
+    py::python_error();
   }
   return *it++;
 }
@@ -150,8 +155,7 @@ typedef CGAL::Filter_iterator<Finite_edges_iterator, Test>     Filter_edge_itera
 typedef CGAL::Filter_iterator<Finite_vertices_iterator, Test>  Filter_vertex_iterator;
 
 //
-py::list alpha_shape_cells(const Alpha_shape_3& as,
-                           Classification_type type
+py::list alpha_shape_cells(const Alpha_shape_3& as, Classification_type type
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
                            , const FT& alpha
 #endif
@@ -275,10 +279,14 @@ void export_alpha_shape_3(py::module_& m) {
   py::class_<As3> as3_c(m, "Alpha_shape_3");
   as3_c.def(py::init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def(py::init<py::optional<double, as3::Mode>>())
-    .def(py::init<py::optional<as3::FT&, as3::Mode>>())
-    .def(py::init<tri3::Triangulation_3&, py::optional<double, as3::Mode>>())
-    .def(py::init<tri3::Triangulation_3&, py::optional<as3::FT&, as3::Mode>>())
+    .def(py::init<double, as3::Mode>(),
+         py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+    .def(py::init<as3::FT&, as3::Mode>(),
+         py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+    .def(py::init<tri3::Triangulation_3&, double, as3::Mode>(),
+         py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+    .def(py::init<tri3::Triangulation_3&, as3::FT&, as3::Mode>(),
+         py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
 #endif
     .def("__init__", &as3::as_init1)
     .def("__init__", &as3::as_init2)
@@ -295,10 +303,10 @@ void export_alpha_shape_3(py::module_& m) {
 #endif
     .def("clear", &As3::clear)
     // Query Functions
-    .def("get_alpha", &As3::get_alpha, Copy_const_reference())
+    .def("get_alpha", &As3::get_alpha)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def("get_mode", &As3::get_mode)
-    .def("get_nth_alpha", &As3::get_nth_alpha, Copy_const_reference())
+    .def("get_nth_alpha", &As3::get_nth_alpha)
     .def("number_of_alphas", &As3::number_of_alphas)
     .def("classify", classify1)
     .def("classify", classify2)
@@ -325,7 +333,7 @@ void export_alpha_shape_3(py::module_& m) {
     // Traversal of the alpha-Values
     .def("alpha_begin", &As3::alpha_begin)
     .def("alpha_end", &As3::alpha_end)
-    .def("alphas", py::range(&As3::alpha_begin, &As3::alpha_end))
+    .def("alphas", &as3::alphas, py::keep_alive<0, 1>())
     .def("alpha_find", &As3::alpha_find)
     .def("alpha_lower_bound", &As3::alpha_lower_bound)
     .def("alpha_upper_bound", &As3::alpha_upper_bound)
