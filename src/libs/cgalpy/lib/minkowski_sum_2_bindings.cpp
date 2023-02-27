@@ -33,16 +33,14 @@ namespace ms2 {
 // target<T>::type select:
 //   std::list<T>::iterator if T is Polygon_2
 //   std::list<T::Polygon_2>::iterator if T is Polygon_with_holes_2
-template <typename T> struct has { typedef void type; };
+template <typename... Ts> using void_t = void;
 
-template <typename T, typename = void> struct target {
-  typedef typename std::list<T>::iterator type;
-};
+template <typename T, typename = void> struct target
+{ using type = typename std::list<T>::iterator; };
 
 template <typename T>
-struct target<T, typename has<typename T::Polygon_2>::type> {
-  typedef typename std::list<typename T::Polygon_2>::iterator type;
-};
+struct target<T, void_t<typename T::Polygon_2>>
+{ using type = typename std::list<typename T::Polygon_2>::iterator; };
 
 // One Decomposition Strategy
 template <typename T1, typename T2, typename T3>
