@@ -18,17 +18,16 @@ namespace py = nanobind;
 ///@{
 
 // Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2)
-// are not a valid overload for do_intersect in which case the second version
+// are not a valid overload for do_intersect in which case the first version
 // (which does nothing) will be used instead (SFINAE)
+template<typename, typename> void bind_do_intersect(py::module_&, ...) {}
+
 template<typename T1, typename T2>
-void bind_do_intersect_pair(py::module_& m,
-                            decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
+void bind_do_intersect(py::module_& m,
+                       decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
   using Do_intersect = bool(*)(const T1&, const T2&);
   m.def("do_intersect", static_cast<Do_intersect>(&CGAL::do_intersect<Kernel>));
 }
-
-template<typename, typename>
-void bind_do_intersect_pair(py::module_&, ...) {}
 
 // Intersections
 class Intersection_visitor : public boost::static_visitor<py::object> {
@@ -59,19 +58,18 @@ py::object cgalpy_intersection(const T1& t1, const T2& t2) {
 // CGAL::intersection(T1& t1, T2& t2) function, but we do not try to match
 // this type to the type of an argument. Instead, we use this type as the
 // default value of an unnamed template parameter.
+template<typename, typename> void bind_intersection(py::module_&, ...) {}
+
 template <typename T1, typename T2,
           typename = decltype(CGAL::intersection<Kernel>(T1(), T2()))>
-void bind_intersection_pair(py::module_& m, bool) {
+void bind_intersection(py::module_& m, bool) {
   m.def("intersection", &cgalpy_intersection<T1, T2>);
 }
 
-template<typename, typename>
-void bind_intersection_pair(py::module_&, ...) {}
-
 template <typename Arg, typename ... Types> struct Wrapper {
   void operator()(Arg& arg) {
-    bind_intersection_pair<Types...>(arg, true);
-    bind_do_intersect_pair<Types...>(arg, true);
+    bind_do_intersect<Types...>(arg, true);
+    bind_intersection<Types...>(arg, true);
     // ((std::cout << typeid(Types).name() << " "), ...);
     // std::cout << std::endl;
   }

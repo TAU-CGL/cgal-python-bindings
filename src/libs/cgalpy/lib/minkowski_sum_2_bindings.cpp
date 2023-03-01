@@ -18,6 +18,7 @@
 #include "CGALPY/export_general_polygon_2.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
 #include "CGALPY/append_iterator.hpp"
+#include "CGALPY/cartesian_product.hpp"
 
 namespace py = nanobind;
 
@@ -44,96 +45,29 @@ struct target<T, void_t<typename T::Polygon_2>>
 
 // One Decomposition Strategy
 template <typename T1, typename T2, typename T3>
-void bind_mink_sum_decomp_one_strategy_3T(py::module_& m, ...) {}
+void bind_mink_sum_decomp_one_strategy(py::module_& m, ...) {}
 
 template <typename T1, typename T2, typename T3,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T3()(T2(), typename target<T2>::type()))>
-void bind_mink_sum_decomp_one_strategy_3T(py::module_& m, bool) {
+void bind_mink_sum_decomp_one_strategy(py::module_& m, bool) {
   m.def("minkowski_sum_2",
         static_cast<Polygon_with_holes_2(*)(const T1&, const T2&, const T3&)>
           (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>));
 }
 
-template <typename T1, typename T2>
-void bind_mink_sum_decomp_one_strategy_2T(py::module_& m) {
-  bind_mink_sum_decomp_one_strategy_3T<T1, T2, ms2::Polygon_nop_decomposition_2>(m, true);
-  bind_mink_sum_decomp_one_strategy_3T<T1, T2, pp2::Polygon_vertical_decomposition_2>(m, true);
-  bind_mink_sum_decomp_one_strategy_3T<T1, T2, pp2::Polygon_triangulation_decomposition_2>(m, true);
-  bind_mink_sum_decomp_one_strategy_3T<T1, T2, pp2::Small_side_angle_bisector_decomposition_2>(m, true);
-}
-
-template <typename T>
-void bind_mink_sum_decomp_one_strategy_1T(py::module_& m) {
-  bind_mink_sum_decomp_one_strategy_2T<T, Polygon_2>(m);
-  bind_mink_sum_decomp_one_strategy_2T<T, Polygon_with_holes_2>(m);
-}
-
-void bind_mink_sum_decomp_one_strategy(py::module_& m) {
-  bind_mink_sum_decomp_one_strategy_1T<Polygon_2>(m);
-  bind_mink_sum_decomp_one_strategy_1T<Polygon_with_holes_2>(m);
-}
-
 // Two Decomposition Staretegies
 template <typename T1, typename T2, typename T3, typename T4>
-void bind_mink_sum_decomp_two_strategies_pair(py::module_& m, ...) {}
+void bind_mink_sum_decomp_two_strategies(py::module_& m, ...) {}
 
 template <typename T1, typename T2, typename T3, typename T4,
           typename = decltype(T3()(T1(), typename target<T1>::type())),
           typename = decltype(T4()(T2(), typename target<T1>::type()))>
-void bind_mink_sum_decomp_two_strategies_pair(py::module_& m, bool) {
+void bind_mink_sum_decomp_two_strategies(py::module_& m, bool) {
   m.def("minkowski_sum_2",
-        static_cast<Polygon_with_holes_2(*)(const T1&, const T2&, const T3&, const T4&)>
+        static_cast<Polygon_with_holes_2(*)(const T1&, const T2&,
+                                            const T3&, const T4&)>
         (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>));
-}
-
-template <typename P1, typename P2, typename T> void
-bind_mink_sum_decomp_two_strategies_inner(py::module_& m, T) {}
-
-template <typename P1, typename P2, typename T1, typename T2, typename... Ts>
-void bind_mink_sum_decomp_two_strategies_inner(py::module_& m,
-                                               T1 arg1, T2 arg2, Ts... args) {
-  using PT1 = typename std::remove_pointer<T1>::type;
-  using PT2 = typename std::remove_pointer<T2>::type;
-  bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT1, PT2>(m, true);
-  bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT2, PT1>(m, true);
-  bind_mink_sum_decomp_two_strategies_inner<P1, P2>(m, arg1, args...);
-}
-
-template <typename P1, typename P2, typename T>
-void bind_mink_sum_decomp_two_strategies_outer(py::module_& m, T arg) {
-  using PT = typename std::remove_pointer<T>::type;
-  bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT, PT>(m, true);
-}
-
-template <typename P1, typename P2, typename T1, typename... Ts>
-void bind_mink_sum_decomp_two_strategies_outer(py::module_& m,
-                                               T1 arg, Ts... args) {
-  bind_mink_sum_decomp_two_strategies_inner<P1, P2>(m, arg, args...);
-  bind_mink_sum_decomp_two_strategies_outer<P1, P2>(m, args...);
-  using PT1 = typename std::remove_pointer<T1>::type;
-  bind_mink_sum_decomp_two_strategies_pair<P1, P2, PT1, PT1>(m, true);
-}
-
-template <typename P1, typename P2>
-void bind_mink_sum_decomp_two_strategies_2T(py::module_& m) {
-  ms2::Polygon_nop_decomposition_2* pnp(nullptr);
-  pp2::Polygon_vertical_decomposition_2* pvd(nullptr);
-  pp2::Polygon_triangulation_decomposition_2* ptd(nullptr);
-  pp2::Small_side_angle_bisector_decomposition_2* ssabd(nullptr);
-
-  bind_mink_sum_decomp_two_strategies_outer<P1, P2>(m, pnp, pvd, ptd, ssabd);
-}
-
-template <typename T>
-void bind_mink_sum_decomp_two_strategies_1T(py::module_& m) {
-  bind_mink_sum_decomp_two_strategies_2T<T, Polygon_2>(m);
-  bind_mink_sum_decomp_two_strategies_2T<T, Polygon_with_holes_2>(m);
-}
-
-void bind_mink_sum_decomp_two_strategies(py::module_& m) {
-  bind_mink_sum_decomp_two_strategies_1T<Polygon_2>(m);
-  bind_mink_sum_decomp_two_strategies_1T<Polygon_with_holes_2>(m);
 }
 
 #endif
@@ -173,6 +107,18 @@ offset_polygon_2(const Rat_polygon_2& pgn, const Rat_FT& r,
                  const Conic_traits& traits)
 { return CGAL::offset_polygon_2(pgn, r, traits); }
 
+template <typename Arg, typename ... Types> struct Wrapper_one_strategy {
+  void operator()(Arg& arg) {
+    bind_mink_sum_decomp_one_strategy<Types...>(arg, true);
+  }
+};
+
+template <typename Arg, typename ... Types> struct Wrapper_two_strategies {
+  void operator()(Arg& arg) {
+    bind_mink_sum_decomp_two_strategies<Types...>(arg, true);
+  }
+};
+
 }
 
 void export_minkowski_sum_2(py::module_& m) {
@@ -186,8 +132,22 @@ void export_minkowski_sum_2(py::module_& m) {
 #if CGAL_VERSION_NR > 1050500000
   // By decomposition
   // ================
-  ms2::bind_mink_sum_decomp_one_strategy(m);
-  ms2::bind_mink_sum_decomp_two_strategies(m);
+
+  using Pnp = ms2::Polygon_nop_decomposition_2;
+  using Pvd = pp2::Polygon_vertical_decomposition_2;
+  using Ptd = pp2::Polygon_triangulation_decomposition_2;
+  using Ssabd = pp2::Small_side_angle_bisector_decomposition_2;
+
+  CGALPY::Type_list<Pgn, Pwh> polygon_types;
+  CGALPY::Type_list<Pnp, Pvd, Ptd, Ssabd> strategy_types;
+
+  CGALPY::cartesian_product<ms2::Wrapper_one_strategy>(m, polygon_types,
+                                                       polygon_types,
+                                                       strategy_types);
+  CGALPY::cartesian_product<ms2::Wrapper_two_strategies>(m, polygon_types,
+                                                         polygon_types,
+                                                         strategy_types,
+                                                         strategy_types);
 #endif
 
   m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>);
