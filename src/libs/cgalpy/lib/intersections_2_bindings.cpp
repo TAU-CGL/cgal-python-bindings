@@ -10,13 +10,12 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/kernel_types.hpp"
+#include "CGALPY/cartesian_product.hpp"
 
 namespace py = nanobind;
 
-/// Handle do_intersect
+/// Handle Intersections
 ///@{
-
-typedef typename Kernel::Intersect_2                               Intersect_2;
 
 // Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2)
 // are not a valid overload for do_intersect in which case the second version
@@ -31,34 +30,7 @@ void bind_do_intersect_pair(py::module_& m,
 template<typename, typename>
 void bind_do_intersect_pair(py::module_&, ...) {}
 
-template<typename T> void bind_do_intersect_inner(py::module_&, T) {}
-
-template<typename T1, typename T2, typename... Ts>
-void bind_do_intersect_inner(py::module_& m, T1 arg1, T2 arg2, Ts... args) {
-  typedef typename std::remove_pointer<T1>::type        PT1;
-  typedef typename std::remove_pointer<T2>::type        PT2;
-  bind_do_intersect_pair<PT1, PT2>(m, true);
-  bind_do_intersect_pair<PT2, PT1>(m, true);
-  bind_do_intersect_inner(m, arg1, args...);
-}
-
-template<typename T>
-void bind_do_intersect(py::module_& m, T arg) {
-  typedef typename std::remove_pointer<T>::type         PT;
-  bind_do_intersect_pair<PT, PT>(m, true);
-}
-
-template <typename T1, typename... Ts>
-void bind_do_intersect(py::module_& m, T1 arg, Ts... args) {
-  bind_do_intersect_inner(m, arg, args...);
-  bind_do_intersect(m, args...);
-  typedef typename std::remove_pointer<T1>::type         PT1;
-  bind_do_intersect_pair<PT1, PT1>(m, true);
-}
-///@}
-
-/// Handle intersections
-///@{
+// Intersections
 class Intersection_visitor : public boost::static_visitor<py::object> {
 public:
   template<typename T>
@@ -96,42 +68,19 @@ void bind_intersection_pair(py::module_& m, bool) {
 template<typename, typename>
 void bind_intersection_pair(py::module_&, ...) {}
 
-template<typename T> void bind_intersection_inner(py::module_&, T) {}
-
-template<typename T1, typename T2, typename... Ts>
-void bind_intersection_inner(py::module_& m, T1 arg1, T2 arg2, Ts... args) {
-  typedef typename std::remove_pointer<T1>::type        PT1;
-  typedef typename std::remove_pointer<T2>::type        PT2;
-  bind_intersection_pair<PT1, PT2>(m, true);
-  bind_intersection_pair<PT2, PT1>(m, true);
-  bind_intersection_inner(m, arg1, args...);
-}
-
-template<typename T>
-void bind_intersection(py::module_& m, T arg) {
-  typedef typename std::remove_pointer<T>::type         PT;
-  bind_intersection_pair<PT, PT>(m, true);
-}
-
-template <typename T1, typename... Ts>
-void bind_intersection(py::module_& m, T1 arg, Ts... args) {
-  bind_intersection_inner(m, arg, args...);
-  bind_intersection(m, args...);
-  typedef typename std::remove_pointer<T1>::type        PT1;
-  bind_intersection_pair<PT1, PT1>(m, true);
-}
+template <typename Arg, typename ... Types> struct Wrapper {
+  void operator()(Arg& arg) {
+    bind_intersection_pair<Types...>(arg, true);
+    bind_do_intersect_pair<Types...>(arg, true);
+    // ((std::cout << typeid(Types).name() << " "), ...);
+    // std::cout << std::endl;
+  }
+};
 
 void export_intersections_2(py::module_& m) {
-  Iso_rectangle_2* iso_rectangle_2(nullptr);
-  Line_2* line_2(nullptr);
-  Ray_2* ray_2(nullptr);
-  Segment_2* segment_2(nullptr);
-  Triangle_2* triangle_2(nullptr);
-  Point_2* point_2(nullptr);
-  Circle_2* circle_2(nullptr);
-  bind_intersection(m, iso_rectangle_2, line_2, ray_2, segment_2,
-                    triangle_2, point_2, circle_2);
-  bind_do_intersect(m, iso_rectangle_2, line_2, ray_2, segment_2,
-                    triangle_2, point_2, circle_2);
+  CGALPY::Type_list<Iso_rectangle_2, Line_2, Ray_2, Segment_2, Triangle_2,
+                    Point_2, Circle_2> type_list_2;
+  CGALPY::cartesian_product<Wrapper>(m, type_list_2, type_list_2);
 }
+
 ///@}
