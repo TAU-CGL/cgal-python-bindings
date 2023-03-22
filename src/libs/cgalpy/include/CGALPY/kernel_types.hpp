@@ -82,7 +82,7 @@ typedef Kernel::Tetrahedron_3                          Tetrahedron_3;
 typedef Kernel::Triangle_3                             Triangle_3;
 typedef Kernel::Sphere_3                               Sphere_3;
 
-typedef std::list<Point_2>                             Point_2_container;
+typedef std::vector<Point_2>                           Point_2_container;
 
 typedef CGAL::Aff_transformation_2<Kernel>             Aff_transformation_2;
 typedef CGAL::Aff_transformation_3<Kernel>             Aff_transformation_3;
