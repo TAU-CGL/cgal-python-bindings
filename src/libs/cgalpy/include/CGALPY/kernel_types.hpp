@@ -74,8 +74,15 @@ typedef Kernel::Triangle_2                             Triangle_2;
 typedef Kernel::Iso_rectangle_2                        Iso_rectangle_2;
 typedef Kernel::Point_3                                Point_3;
 typedef Kernel::Weighted_point_3                       Weighted_point_3;
+typedef Kernel::Iso_cuboid_3                           Iso_cuboid_3;
+typedef Kernel::Line_3                                 Line_3;
+typedef Kernel::Ray_3                                  Ray_3;
+typedef Kernel::Segment_3                              Segment_3;
+typedef Kernel::Tetrahedron_3                          Tetrahedron_3;
+typedef Kernel::Triangle_3                             Triangle_3;
+typedef Kernel::Sphere_3                               Sphere_3;
 
-typedef std::list<Point_2>                             Point_2_container;
+typedef std::vector<Point_2>                           Point_2_container;
 
 typedef CGAL::Aff_transformation_2<Kernel>             Aff_transformation_2;
 typedef CGAL::Aff_transformation_3<Kernel>             Aff_transformation_3;

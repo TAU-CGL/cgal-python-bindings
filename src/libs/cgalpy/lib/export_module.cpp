@@ -21,7 +21,7 @@ void export_boolean_set_operations_2(py::module_&);
 void export_bounding_volumes(py::module_&);
 void export_convex_hull_2_bindings(py::module_&);
 void export_general_polygon_set_2(py::module_&);
-void export_intersections_2(py::module_&);
+void export_intersections(py::module_&);
 void export_kernel(py::module_&);
 void export_kernel_d(py::module_&);
 void export_minkowski_sum_2(py::module_&);
@@ -49,7 +49,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   auto ker_m = m.def_submodule("Ker");
   export_kernel(ker_m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
-  export_intersections_2(ker_m);
+  export_intersections(ker_m);
 #endif
 #endif
 
