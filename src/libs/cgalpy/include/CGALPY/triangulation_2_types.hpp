@@ -39,7 +39,8 @@ typedef Face_base_name<is_periodic(), CGALPY_TRI2, Traits>::type
                                                                 Fb;
 typedef Face_with_info<face_with_info(), Fb, py::object, Traits>::type
                                                                 Fbi;
-typedef Face_alpha_shape<alpha_shape_2_bindings(), Fbi, Traits, Ec>::type
+typedef Face_constrained<is_constrained(), Fbi, Traits>::type   Fbic;
+typedef Face_alpha_shape<alpha_shape_2_bindings(), Fbic, Traits, Ec>::type
                                                                 F;
 
   // Triangulation data structure

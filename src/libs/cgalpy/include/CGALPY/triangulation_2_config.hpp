@@ -76,6 +76,12 @@ constexpr bool is_periodic() {
           (CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_DELAUNAY));
 }
 
+// Indicates whether the selected triangulation is constrained
+constexpr bool is_constrained() {
+  return ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
+          (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY));
+}
+
 // Traits selection
 template <int i, typename K> struct Tr { typedef K type; };
 template <typename K> struct Tr<CGALPY_TRI2_PERIODIC_PLAIN, K>
@@ -140,6 +146,15 @@ struct Face_with_info<false, Fb, Data, Tr> { typedef Fb type; };
 template <typename Fb, typename Data, typename Tr>
 struct Face_with_info<true, Fb, Data, Tr>
 { typedef CGAL::Triangulation_face_base_with_info_2<Data, Tr, Fb> type; };
+
+// Face constrianed
+template <bool b, typename Fb, typename Tr>
+struct Face_constrained {};
+template <typename Fb, typename Tr>
+struct Face_constrained<false, Fb, Tr> { typedef Fb type; };
+template <typename Fb, typename Tr>
+struct Face_constrained<true, Fb, Tr>
+{ typedef CGAL::Constrained_triangulation_face_base_2<Tr, Fb> type; };
 
 // Face alpha shape
 template <bool b, typename Fb, typename Tr, typename ExactComparison>
