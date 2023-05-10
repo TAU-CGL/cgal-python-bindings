@@ -22,7 +22,7 @@ namespace py = nanobind;
 
 namespace tri2 {
 
-bool equal(Face& f1, Face& f2) {
+bool equal(const Face& f1, const Face& f2) {
   return (f1.has_vertex(f2.vertex(0)) && f1.has_vertex(f2.vertex(1)) &&
           f1.has_vertex(f2.vertex(2)));
 }
@@ -30,9 +30,8 @@ bool equal(Face& f1, Face& f2) {
 //! \brief obtaines a face handle from a face
 Face_handle face_to_handle(Face& f) {
   auto n = f.neighbor(0);
-  for (auto i = 0; i < 3; ++i) {
+  for (auto i = 0; i < 3; ++i)
     if (equal(*(n->neighbor(i)), f)) return n->neighbor(i);
-  }
   return Face_handle();
 }
 
@@ -135,14 +134,19 @@ py::object finite_faces(const Triangulation_2& tri)
 py::object points(const Triangulation_2& tri)
 { return make_iterator(tri.points_begin(), tri.points_end()); }
 
-void insert_constraint(const Triangulation_2& tri,
+void insert_constraint(Triangulation_2& tri,
                        const Vertex& va, const Vertex& vb) {
+  auto ha = Vertex_handle(const_cast<Vertex*>(&va));
+  auto hb = Vertex_handle(const_cast<Vertex*>(&vb));
+  tri.insert_constraint(ha, hb);
 }
 
 } // End of namespace tri2
 
 void export_triangulation_2(py::module_& m) {
   using Tri = tri2::Triangulation_2;
+
+  if (add_attr<Tri>(m, "Triangulation_2")) return;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
