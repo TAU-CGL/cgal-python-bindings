@@ -275,6 +275,10 @@ void export_triangulation_2(py::module_& m) {
 #endif
     ;
 
+  // We wrap the handles, because, e.g., the edges iterator value is a handle
+  // to a face.
+  // \todo Fix the finite_edges iterator to return an iterator the value of
+  // which, is pair of <face, index> (which translates to a python tuple).
   py::class_<tri2::Vertex_handle>(tri_c, "Vertex_handle")
     .def(py::init<>())
     .def("value", &tri2::value<tri2::Vertex_handle>, ri)
