@@ -10,6 +10,7 @@
 #include <iostream>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/pair.h>
 
 #include "CGALPY/triangulation_2_types.hpp"
 #include "CGALPY/types.hpp"
@@ -40,10 +41,10 @@ Copy_iterator<All_edges_iterator>* all_edges_iterator(Triangulation_2& t) {
                                                t.all_edges_end());
 }
 
-Copy_iterator<Finite_edges_iterator>* finite_edges_iterator(Triangulation_2& t) {
-  return new Copy_iterator<Finite_edges_iterator>(t.finite_edges_begin(),
-                                                  t.finite_edges_end());
-}
+// Copy_iterator<Finite_edges_iterator>* finite_edges_iterator(Triangulation_2& t) {
+//   return new Copy_iterator<Finite_edges_iterator>(t.finite_edges_begin(),
+//                                                   t.finite_edges_end());
+// }
 
 Copy_iterator_from_circulator<Edge_circulator>*
 edges_around_vertex_iterator0(Triangulation_2& t, Vertex& v) {
@@ -131,15 +132,19 @@ py::object finite_faces(const Triangulation_2& tri)
 { return make_iterator(tri.finite_faces_begin(), tri.finite_faces_end()); }
 
 //
-py::object points(const Triangulation_2& tri)
-{ return make_iterator(tri.points_begin(), tri.points_end()); }
+  py::object finite_edges(const Triangulation_2& tri)
+  { return make_iterator(tri.finite_edges_begin(), tri.finite_edges_end()); }
 
-void insert_constraint(Triangulation_2& tri,
-                       const Vertex& va, const Vertex& vb) {
-  auto ha = Vertex_handle(const_cast<Vertex*>(&va));
-  auto hb = Vertex_handle(const_cast<Vertex*>(&vb));
-  tri.insert_constraint(ha, hb);
-}
+  //
+  py::object points(const Triangulation_2& tri)
+  { return make_iterator(tri.points_begin(), tri.points_end()); }
+
+  void insert_constraint(Triangulation_2& tri,
+                         const Vertex& va, const Vertex& vb) {
+    auto ha = Vertex_handle(const_cast<Vertex*>(&va));
+    auto hb = Vertex_handle(const_cast<Vertex*>(&vb));
+    tri.insert_constraint(ha, hb);
+  }
 
 } // End of namespace tri2
 
@@ -158,7 +163,7 @@ void export_triangulation_2(py::module_& m) {
     .def("number_of_faces", &Tri::number_of_faces)
     .def("infinite_face", &tri2::infinite_face, ri)
     .def("infinite_vertex", &tri2::infinite_vertex, ri)
-    .def("finite_vertex", &tri2::finite_vertex, ri)
+    // .def("finite_vertex", &tri2::finite_vertex, ri)
     .def("clear", &Tri::clear)
     .def("insert", &tri2::insert_list)
     .def("insert", &tri2::insert_point, ri)
@@ -167,7 +172,7 @@ void export_triangulation_2(py::module_& m) {
     .def("flip", &tri2::flip)
     .def("remove", &tri2::remove)
     .def("all_edges", &tri2::all_edges_iterator)
-    .def("finite_edges", &tri2::finite_edges_iterator)
+    // .def("finite_edges", &tri2::finite_edges_iterator)
     .def("incident_vertices", &tri2::vertices_around_vertex_iterator0)
     .def("incident_vertices", &tri2::vertices_around_vertex_iterator1)
     .def("incident_edges", &tri2::edges_around_vertex_iterator0)
@@ -177,21 +182,27 @@ void export_triangulation_2(py::module_& m) {
     .def("mirror_edge", &Tri::mirror_edge)
     .def("segment", static_cast<tri2::Segment(Tri::*)(const tri2::Edge&) const>(&Tri::segment))
     .def("is_infinite", static_cast<bool (Tri::*)(const tri2::Edge&) const>(&Tri::is_infinite))
-    .def("ccw", &Tri::ccw)
-    .def("cw", &Tri::cw)
+    .def("ccw", static_cast<int(*)(int)>(&Tri::ccw))
+    .def("cw", static_cast<int(*)(int)>(&Tri::cw))
 #if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
      (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
     .def("insert_constraint", &tri2::insert_constraint)
 #endif
     ;
 
+  m.def("ccw", static_cast<int(*)(int)>(&Tri::ccw))
+    .def("cw", static_cast<int(*)(int)>(&Tri::cw))
+    ;
+
   using Avi = Tri::All_vertices_iterator;
   using Fvi = Tri::Finite_vertices_iterator;
   using Afi = Tri::All_faces_iterator;
   using Ffi = Tri::Finite_faces_iterator;
+  using Fei = Tri::Finite_edges_iterator;
   using Pi = Tri::Point_iterator;
   using Vertex = Tri::Vertex;
   using Face = Tri::Face;
+  using Edge = Tri::Edge;
   using Pnt = Tri::Point;
 
   // Iterators
@@ -199,12 +210,14 @@ void export_triangulation_2(py::module_& m) {
   add_iterator<Fvi, Fvi, const Vertex&>("Finite_vertices_iterator", tri_c);
   add_iterator<Afi, Afi, const Face&>("All_faces_iterator", tri_c);
   add_iterator<Ffi, Ffi, const Face&>("Finite_faces_iterator", tri_c);
+  add_iterator<Fei, Fei, const Edge&>("Finite_edges_iterator", tri_c);
   add_iterator<Pi, Pi, const Pnt&>("Point_iterator", tri_c);
 
   tri_c.def("all_vertices", &tri2::all_vertices, py::keep_alive<0, 1>())
     .def("finite_vertices", &tri2::finite_vertices, py::keep_alive<0, 1>())
     .def("all_faces", &tri2::all_faces, py::keep_alive<0, 1>())
     .def("finite_faces", &tri2::finite_faces, py::keep_alive<0, 1>())
+    .def("finite_edges", &tri2::finite_edges, py::keep_alive<0, 1>())
     .def("points", &tri2::points, py::keep_alive<0, 1>())
     ;
 
@@ -252,10 +265,13 @@ void export_triangulation_2(py::module_& m) {
 
   py::class_<Face>(tri_c, "Face")
     .def("is_valid", &Face::is_valid)
+    .def("neighbor", [](const Face& f, int i)->const Face& { return *(f.neighbor(i)); }, ri)
+    .def("vertex", [](const Face& f, int i)->const Vertex& { return *(f.vertex(i)); }, ri)
+    .def("info", [](const Face& f)->py::object { return f.info(); })
+    .def("set_info", [](Face& f, py::object obj) { f.info() = obj; })
 #if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
      (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
-    .def("info", [](const Face& f)->py::object { return f.info(); })
-    .def("set_info", [](Vertex& v, py::object obj) { v.info() = obj; })
+    .def("is_constrained", [](const Face& f, int i)->bool { return f.is_constrained(i); })
 #endif
     ;
 
