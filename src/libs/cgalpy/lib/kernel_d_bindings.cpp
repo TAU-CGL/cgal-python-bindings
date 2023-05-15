@@ -110,16 +110,12 @@ void export_kernel_d(py::module_& m) {
 #endif
     ;
 
-// Why does the following fail?
-#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D) && \
-  (CGALPY_KERNEL_D != CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ)
-  using Cci = Pnt::Cartesian_const_iterator_d;
+  using Cci = Kernel_d::Cartesian_const_iterator_d;
   add_iterator<Cci, Cci, const FT_d&>("Cartesian_iterator", pd_c);
   pd_c.def("cartesians",
             [](const Pnt& p)
             { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
            py::keep_alive<0, 1>());
-#endif
 
   add_insertion(pd_c, "__str__");
   add_insertion(pd_c, "__repr__");
@@ -149,7 +145,8 @@ void export_kernel_d(py::module_& m) {
     // .setattr("__hash__", &hash<Segment_d>)
     ;
 
-#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
+#if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) && \
+     (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
   add_insertion(sd_co, "__str__");
   add_insertion(sd_co, "__repr__");
 #endif
