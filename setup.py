@@ -37,11 +37,11 @@ CGALPY_CONFIGURATION = ["-DCGALPY_KERNEL_BINDINGS=epec",
                         "-DCGALPY_SPATIAL_SEARCHING_BINDINGS=OFF",
                         "-DCGALPY_KERNEL_D_BINDINGS=ON",
                         "-DCGALPY_KERNEL_D_NAME=epecd",
-                        "-DCGALPY_TRIANGULATION_2_BINDINGS=OFF",
-                        "-DCGALPY_TRI2_VERTEX_WITH_INFO=OFF",
-                        "-DCGALPY_TRI2_FACE_WITH_INFO=OFF",
-                        "-DCGALPY_TRI2_HIERARCHY=OFF",
-                        "-DCGALPY_TRIANGULATION_3_BINDINGS=OFF",
+                        "-DCGALPY_TRIANGULATION_2_BINDINGS=ON",
+                        "-DCGALPY_TRI2_VERTEX_WITH_INFO=ON",
+                        "-DCGALPY_TRI2_FACE_WITH_INFO=ON",
+                        "-DCGALPY_TRI2_HIERARCHY=ON",
+                        "-DCGALPY_TRIANGULATION_3_BINDINGS=ON",
                         "-DCGALPY_TRI3_NAME=delaunay"]
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
