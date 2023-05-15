@@ -276,14 +276,14 @@ void export_triangulation_3(py::module_& m) {
     ;
 
   py::class_<tri3::Facet>(tri_c, "Facet")
-    .def_readwrite("first", &tri3::Facet::first)
-    .def_readwrite("second", &tri3::Facet::second)
+    // .def_readwrite("first", &tri3::Facet::first)
+    // .def_readwrite("second", &tri3::Facet::second)
     ;
 
   py::class_<tri3::Edge>(tri_c, "Edge")
-    .def_readwrite("first", &tri3::Edge::first)
-    .def_readwrite("second", &tri3::Edge::second)
-    .def_readwrite("third", &tri3::Edge::third)
+    // .def_readwrite("first", &tri3::Edge::first)
+    // .def_readwrite("second", &tri3::Edge::second)
+    // .def_readwrite("third", &tri3::Edge::third)
     ;
 
   py::class_<tri3::Vertex_handle>(tri_c, "Vertex_handle")
