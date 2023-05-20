@@ -205,6 +205,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi)>(&Sm::add_face))
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face))
       .def("add_face", &sm::add_face<Sm>)
+
       // void remove_vertex(Vertex_index v)
       // void remove_edge(Edge_index e)
       // remove_face(Face_index f)
@@ -218,11 +219,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
       // void resize(size_type nvertices, size_type nedges, size_type nfaces )
       // join(const Surface_mesh& other)
+
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Vi>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Ei>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Hi>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Fi>(&Sm::is_valid, py::const_))
+      .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_))
+      .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_))
+      .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_))
+      .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_))
       ;
 
     add_attr<Vi>(sm_c, "Vertex_index");

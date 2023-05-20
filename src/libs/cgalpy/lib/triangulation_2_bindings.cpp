@@ -132,19 +132,22 @@ py::object finite_faces(const Triangulation_2& tri)
 { return make_iterator(tri.finite_faces_begin(), tri.finite_faces_end()); }
 
 //
-  py::object finite_edges(const Triangulation_2& tri)
-  { return make_iterator(tri.finite_edges_begin(), tri.finite_edges_end()); }
+py::object finite_edges(const Triangulation_2& tri)
+{ return make_iterator(tri.finite_edges_begin(), tri.finite_edges_end()); }
 
-  //
-  py::object points(const Triangulation_2& tri)
-  { return make_iterator(tri.points_begin(), tri.points_end()); }
+//
+py::object points(const Triangulation_2& tri)
+{ return make_iterator(tri.points_begin(), tri.points_end()); }
 
-  void insert_constraint(Triangulation_2& tri,
-                         const Vertex& va, const Vertex& vb) {
-    auto ha = Vertex_handle(const_cast<Vertex*>(&va));
-    auto hb = Vertex_handle(const_cast<Vertex*>(&vb));
-    tri.insert_constraint(ha, hb);
-  }
+#if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
+     (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
+void insert_constraint(Triangulation_2& tri,
+                       const Vertex& va, const Vertex& vb) {
+  auto ha = Vertex_handle(const_cast<Vertex*>(&va));
+  auto hb = Vertex_handle(const_cast<Vertex*>(&vb));
+  tri.insert_constraint(ha, hb);
+}
+#endif
 
 } // End of namespace tri2
 
