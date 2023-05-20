@@ -331,7 +331,7 @@ if (NOT SKBUILD)
     set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
     # Use a generator expression to get rid of per-configuration subdirectory appended by Multi-configuration generators (e.g Visual Studio)
     # https://cmake.org/cmake/help/latest/prop_tgt/LIBRARY_OUTPUT_DIRECTORY.html
-    set_target_properties(CGALPY PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
+    set_target_properties(CGALPY PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
     reportWithEmphasis(${CGALPY_LIB_NAME} ${CGALPY_LIB_DIR} ${CGALPY_INSTALL_PYTHON_DIR})
 
     # Don't prepend wrapper library name with lib
