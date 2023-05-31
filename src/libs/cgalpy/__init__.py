@@ -1,1 +1,1 @@
-from .CGALPY import *
+from .@CGALPY_LIB_NAME@ import *

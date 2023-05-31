@@ -310,6 +310,8 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
 endif ()
 
 if (NOT SKBUILD)
+    set(CGALPY_PACKAGE_NAME ${CGALPY_LIB_NAME})
+
     add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
     # Add the library target
@@ -469,12 +471,36 @@ if (NOT SKBUILD)
     ################################################################################
     # Post build
     ################################################################################
+    #
+    # Add __init__.py
+    get_directory("${GMP_LIBRARIES}" GMP_LIBRARY_DIR)
+    get_directory("${MPFR_LIBRARIES}" MPFR_LIBRARY_DIR)
+    if(WIN32)
+        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/__init__.py")
+    else()
+        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
+    endif()
+    set(CGALPY_TRG_INIT "${CGALPY_LIB_DIR}/__init__.py")
+    add_custom_command(
+        OUTPUT ${CGALPY_TRG_INIT}
+        COMMAND "${CMAKE_COMMAND}"
+        "-DFILE_IN=${CGALPY_SRC_INIT}"
+        "-DFILE_OUT=${CGALPY_TRG_INIT}"
+        "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
+        "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
+        "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
+	"-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
+        -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
+        DEPENDS ${CGALPY_SRC_INIT})
+
+    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_INIT})
+
     # Setup generation
     set(CGALPY_SRC_SETUP "${CMAKE_CURRENT_LIST_DIR}/setup.py")
     set(CGALPY_TRG_SETUP "${CGALPY_LIB_DIR}/setup.py")
     set(CGALPY_TARGET_LINKER_FILE ${CGALPY_LIB_NAME}${CGALPY_LIBRARY_SUFFIX})
     set(CGALPY_SETUP_DATA "'${CGALPY_TARGET_LINKER_FILE}'")
-    list(APPEND CGALPY_SETUP_DATA "'CGALPY_add_dlls/__init__.py'")
+    list(APPEND CGALPY_SETUP_DATA "'__init__.py'")
     list(APPEND CGALPY_SETUP_DATA "'${CGALPY_LIB_NAME}.pyi'")
     foreach (MODULE IN LISTS CGALPY_MODULES)
         list(APPEND CGALPY_SETUP_DATA "'${MODULE}/__init__.pyi'")
@@ -490,7 +516,9 @@ if (NOT SKBUILD)
             "-DTARGET_VERSION=${PROJECT_VERSION}"
             "-DTARGET_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}"
             "-DTARGET_VERSION_MINOR=${PROJECT_VERSION_MINOR}"
+            "-DTARGET_VERSION_PATCH=${PROJECT_VERSION_PATCH}"
             "-DTARGET_DATA='${CGALPY_SETUP_DATA}'"
+            "-DTARGET_PACKAGE_NAME='${CGALPY_PACKAGE_NAME}'"
             "-DTARGET_LINKER_FILE=${CGALPY_TARGET_LINKER_FILE}"
             "-DTARGET_MODULES=${CGALPY_LIB_NAME}"
             "-DTARGET_AUTHOR=${CGALPY_PROJECT_AUTHORS}"
@@ -516,32 +544,16 @@ if (NOT SKBUILD)
 
     list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_README})
 
-    # Add CGALPY_add_dlls.py
-    get_directory("${GMP_LIBRARIES}" GMP_LIBRARY_DIR)
-    get_directory("${MPFR_LIBRARIES}" MPFR_LIBRARY_DIR)
-    set(CGALPY_SRC_ADD_DLLS "${CMAKE_CURRENT_LIST_DIR}/CGALPY_add_dlls/__init__.py")
-    set(CGALPY_TRG_ADD_DLLS "${CGALPY_LIB_DIR}/CGALPY_add_dlls/__init__.py")
-    add_custom_command(
-            OUTPUT ${CGALPY_TRG_ADD_DLLS}
-            COMMAND "${CMAKE_COMMAND}"
-            "-DFILE_IN=${CGALPY_SRC_ADD_DLLS}"
-            "-DFILE_OUT=${CGALPY_TRG_ADD_DLLS}"
-            "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
-            "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
-            "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
-            -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
-            DEPENDS ${CGALPY_SRC_ADD_DLLS})
-
-    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_ADD_DLLS})
-
     # Setup application
     set(CGALPY_BUILD_OUTPUT_DIR "${CGALPY_LIB_DIR}/dist")
-    set(CGALPY_TAR ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_LIB_NAME}-1.0.tar.gz)
-    set(CGALPY_WHL ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_LIB_NAME}-1.0-py3-none-any.whl)
+    set (CGALPY_TAR ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_PACKAGE_NAME}-${cgalpy_VERSION}.tar.gz)
+    set (CGALPY_PYTHON_TAG "cp${CGALPY_PY_MAJOR_MINOR_VERSION}")
+    set (CGALPY_ABI_TAG "cp${CGALPY_PY_MAJOR_MINOR_VERSION}")
+    execute_process(COMMAND ${Python_EXECUTABLE} -c "import distutils;from distutils import util;print(distutils.util.get_platform().replace('-','_').replace('.','_'),end='')" OUTPUT_VARIABLE CGALPY_PLATFORM_TAG)
+    set (CGALPY_WHL ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_PACKAGE_NAME}-${cgalpy_VERSION}-${CGALPY_PYTHON_TAG}-${CGALPY_ABI_TAG}-${CGALPY_PLATFORM_TAG}.whl)
     set(CGALPY_BUILD_OUTPUT ${CGALPY_TAR} ${CGALPY_WHL})
     set(CGALPY_BUILD_CMD ${Python_EXECUTABLE})
     set(CGALPY_BUILD_ARGS -m build ${CGALPY_LIB_DIR})
-    set(CGALPY_BUILD_DEPENDS CGALPY ${CGALPY_STUBS} ${CGALPY_TRG_SETUP} ${CGALPY_TRG_README} ${CGALPY_TRG_ADD_DLLS})
     add_custom_command(
             OUTPUT ${CGALPY_BUILD_OUTPUT}
             COMMAND ${CGALPY_BUILD_CMD}
