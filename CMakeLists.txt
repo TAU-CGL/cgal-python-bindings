@@ -4,6 +4,7 @@ if (POLICY CMP0011)
 endif ()
 project(cgalpy VERSION "1.0.0" LANGUAGES CXX)
 
+# Include windows toolchain path (if available)
 if (CMAKE_TOOLCHAIN_FILE)
     include(${CMAKE_TOOLCHAIN_FILE})
 endif (CMAKE_TOOLCHAIN_FILE)
