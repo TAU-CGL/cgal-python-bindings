@@ -77,7 +77,7 @@ void export_general_polygon_with_holes_2(py::class_<Type>& pwh_c) {
   // to an output stream. In particular, the Arr_circle_segment_traits_2.
   // A PR for Arr_circle_segment_traits_2 is on the way.
   // The reamining unsupported traits should be compiled out.
-#if CGAL_VERSION_NR > 1050600900
+#if CGAL_VERSION_NR > 1050600910
   add_extraction(pwh_c);
 #endif
 }
