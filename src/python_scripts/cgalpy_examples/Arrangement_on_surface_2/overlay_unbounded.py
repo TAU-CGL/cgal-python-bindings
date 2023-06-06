@@ -51,10 +51,8 @@ Aos2.insert_non_intersecting_curve(arr2, xcv4)
 
 # Give the unbounded face the index 1, and the bounded face the index 2.
 for f in arr2.faces():
-  if f.is_unbounded:
-    f.set_data(1)
-  else:
-    f.set_data(2)
+  if f.is_unbounded: f.set_data(1)
+  else: f.set_data(2)
 
 # Compute the overlay of the two arrangements.
 arr = Arrangement()
@@ -71,8 +69,6 @@ Aos2.overlay(arr1, arr2, arr, overlay_traits)
 # Go over the faces of the overlay arrangement and print their labels.
 print("The overlay faces are:")
 for f in arr.faces():
-  if f.is_unbounded():
-    print('  {} (unbounded)'.format(f.data()))
-  else:
-    print('  {} (bounded)'.format(f.data()))
+  if f.is_unbounded(): print('  {} (unbounded)'.format(f.data()))
+  else: print('  {} (bounded)'.format(f.data()))
 del overlay_traits

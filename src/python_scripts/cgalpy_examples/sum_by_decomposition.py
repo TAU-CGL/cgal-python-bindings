@@ -5,8 +5,8 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
     lib = sys.argv[1]
 
@@ -17,7 +17,7 @@ Pol2 = CGALPY.Pol2
 Polygon = Pol2.Polygon_2
 Polygon_with_holes = Pol2.Polygon_with_holes_2
 Ms2 = CGALPY.Ms2
-PP2 = CGALPY.Pp2
+Pp2 = CGALPY.Pp2
 
 def read_polygon(inp):
   pgn = Polygon()
@@ -41,7 +41,7 @@ with open(filename, 'r') as inp:
 
   # Compute the Minkowski sum using the decomposition approach.
   # Minkowski sum by decompisition is temporarily commented out
-  ssab_decomp = PP2.Small_side_angle_bisector_decomposition()
+  ssab_decomp = Pp2.Small_side_angle_bisector_decomposition()
   sum1 = Ms2.minkowski_sum_2(P, Q, ssab_decomp, ssab_decomp)
   sum2 = Ms2.minkowski_sum_2(P, Q, ssab_decomp)
   sum3 = Ms2.minkowski_sum_2(P, Q)

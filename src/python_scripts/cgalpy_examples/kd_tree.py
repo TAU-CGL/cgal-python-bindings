@@ -1,25 +1,24 @@
 #!/usr/bin/python3
 # export PYTHONPATH=...
+
 import os
 import sys
 import importlib
 import timeit
 
 if len(sys.argv) < 2:
-    print('Library name missing, assuming CGALPY')
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  print('Library name missing, assuming CGALPY')
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 CGALPY = importlib.import_module(lib)
 
 Kerd = CGALPY.Kerd
 Ss = CGALPY.Ss
 
-if hasattr(Kerd, 'FT'):
-    FT = Kerd.FT
-else:
-    FT = float
+if hasattr(Kerd, 'FT'): FT = Kerd.FT
+else: FT = float
 Point_d = Ss.Point_d
 
 # Verify that the bindings are generated with the CMake flag
@@ -34,8 +33,7 @@ points = [Point_d(2, [FT(n) for n in [4, 0]]),
           Point_d(2, [FT(n) for n in [1, 0]])]
 tree = Ss.Kd_tree(points)	# Insert the points into a k-d tree
 all_points = tree.points()
-for x in all_points:
-    print(x)
+for x in all_points: print(x)
 query = Point_d(2, [FT(n) for n in [0, 0]])
 eps = FT(0.0)           # 0.0 for exact NN, otherwise approximate NN
 search_nearest = True  	# set to False to search farthest
@@ -51,22 +49,20 @@ print("Neighbors search took ", timeit.default_timer() - starttime)
 
 print("Found", len(lst), "neighbors")
 for pair in lst:
-    print("Neighboring point is: ", pair[0])
-    print("Squared distance from query is: ", pair[1])
+  print("Neighboring point is: ", pair[0])
+  print("Squared distance from query is: ", pair[1])
 
 # Search for points inside a sphere
 s = Ss.Fuzzy_sphere(Point_d(2, [FT(0), FT(0)]), FT(5), FT(0))
 res = tree.search(s)
 print("Points within distance 5 from (0,0):")
-for p in res:
-    print(p)
+for p in res: print(p)
 
 # Search for points inside a box
 s = Ss.Fuzzy_iso_box(Point_d(2, [FT(-1), FT(-1)]), Point_d(2, [FT(1), FT(1)]), FT(0))
 res = tree.search(s)
 print("Points with no coordinate exceeding absolute value of 1:")
-for p in res:
-    print(p)
+for p in res: print(p)
 
 # CGALPY specific:
 # In order to use a custom distance metric, define the following:

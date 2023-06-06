@@ -74,6 +74,5 @@ for v in arr.vertices():
 
 print("The arrangement outer-boundary sizes:", end='')
 f: Arrangement.Face
-for f in arr.faces():
-  print('', f.data(), end='')
+for f in arr.faces(): print('', f.data(), end='')
 print()

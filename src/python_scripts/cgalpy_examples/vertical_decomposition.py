@@ -6,10 +6,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
@@ -28,14 +28,7 @@ for pair in d:
   v0 = pair[0]
   print(v0.point())
   for obj in pair[1]:
-    if type(obj) is Arrangement_2.Vertex:
-      v = obj
-      print("  ", v.point())
-    elif type(obj) is Arrangement_2.Halfedge:
-      he = obj
-      print("  ", he.curve())
-    elif type(obj) is Arrangement_2.Face:
-      f = obj
-      print("  unbounded face")
-    else:
-      print("  none")
+    if type(obj) is Arrangement_2.Vertex: print("  ", obj.point())
+    elif type(obj) is Arrangement_2.Halfedge: print("  ", obj.curve())
+    elif type(obj) is Arrangement_2.Face: print("  unbounded face")
+    else: print("  none")

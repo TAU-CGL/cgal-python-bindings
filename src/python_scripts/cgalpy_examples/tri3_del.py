@@ -6,10 +6,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY_kerEpic_pol2_tri3DelAsAsComSeq'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY_kerEpic_pol2_tri3DelAsAsComSeq'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker

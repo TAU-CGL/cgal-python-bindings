@@ -6,10 +6,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
@@ -53,8 +53,7 @@ assert(type(res_lm_1) == Aos2.Arrangement_2.Face)
 res_lm_1.set_data("some data")
 print(res_lm_1.data())
 
-for face in arr.faces():
-    print(face.data())
+for face in arr.faces(): print(face.data())
 
 # batch point location
 batch_query = [q1, q2]

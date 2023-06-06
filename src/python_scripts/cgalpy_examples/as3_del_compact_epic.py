@@ -6,17 +6,17 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY_kerEpic_as3Plain_pol2_tri3DelAsAsComSeq'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY_kerEpic_as3Plain_pol2_tri3DelAsAsComSeq'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-AS3 = CGALPY.As3
+As3 = CGALPY.As3
 Point_3 = Ker.Point_3
-Alpha_shape_3 = AS3.Alpha_shape_3
-Mode = AS3.Mode
+Alpha_shape_3 = As3.Alpha_shape_3
+Mode = As3.Mode
 p1 = Point_3(492, 291, 677)
 p2 = Point_3(493, 314, 533)
 p3 = Point_3(494, 326, 462)

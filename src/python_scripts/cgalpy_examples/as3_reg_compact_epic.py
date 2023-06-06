@@ -6,10 +6,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY_kerEpic_as3Plain_pol2_tri3RegAsrAsrComSeq'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY_kerEpic_as3Plain_pol2_tri3RegAsrAsrComSeq'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
@@ -38,11 +38,6 @@ print(len(regularFacets), "regular facets")
 print(len(singularFacets), "singular facets")
 print(len(singularEdges), "singular edges")
 
-for cell in interiorCells:
-    print(cell.is_valid())
-
-for facet in regularFacets:
-    print(facet.second)
-
-for edge in singularEdges:
-    print(edge.second, edge.third)
+for cell in interiorCells: print(cell.is_valid())
+for facet in regularFacets: print(facet.second)
+for edge in singularEdges: print(edge.second, edge.third)

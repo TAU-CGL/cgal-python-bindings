@@ -53,8 +53,7 @@ for f in arr.unbounded_faces():
   if not e.source().is_at_open_boundary():
     print('({})'.format(e.source().point()), end='')
   for e in ccb:
-    if not e.is_fictitious():
-      print(' [{}]'.format(e.curve()), end='')
+    if not e.is_fictitious(): print(' [{}]'.format(e.curve()), end='')
     else: print (" [ ... ] ", end='')
 
     if not e.target().is_at_open_boundary():

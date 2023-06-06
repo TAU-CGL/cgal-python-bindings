@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # export PYTHONPATH=...
+
 import os
 import sys
 import importlib
@@ -12,10 +13,8 @@ else:
 CGALPY = importlib.import_module(lib)
 
 Kerd = CGALPY.Kerd
-if hasattr(Kerd, 'FT'):
-    FT = Kerd.FT
-else:
-    FT = float
+if hasattr(Kerd, 'FT'): FT = Kerd.FT
+else: FT = float
 Point_d = Kerd.Point_d
 Segment_d = Kerd.Segment_d
 p11 = Point_d(4, [FT(n) for n in [0, 0, 0, 0]])

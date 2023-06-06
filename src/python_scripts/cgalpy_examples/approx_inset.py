@@ -6,10 +6,10 @@ import importlib
 import time
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker

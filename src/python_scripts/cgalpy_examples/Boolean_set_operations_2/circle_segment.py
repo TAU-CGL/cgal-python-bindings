@@ -32,10 +32,6 @@ def ctr_circle_polygon(circle):
     assert(len(objects) == 2)
 
     # Construct a polygon that comprises the two x-monotone arcs.
-    # p = Polygon()
-    # p.push_back(objects[0]);
-    # p.push_back(objects[1]);
-    # return p;
     return Polygon([objects[0], objects[1]])
 
 def ctr_quad_polygon(p1, p2, p3, p4):
@@ -43,12 +39,6 @@ def ctr_quad_polygon(p1, p2, p3, p4):
     c2 = X_monotone_curve(p2, p3)
     c3 = X_monotone_curve(p3, p4)
     c4 = X_monotone_curve(p4, p1)
-    # p = Polygon()
-    # p.push_back(c1)
-    # p.push_back(c2)
-    # p.push_back(c3)
-    # p.push_back(c4)
-    # return p
     return Polygon([c1, c2, c3, c4])
 
 S = General_polygon_set()

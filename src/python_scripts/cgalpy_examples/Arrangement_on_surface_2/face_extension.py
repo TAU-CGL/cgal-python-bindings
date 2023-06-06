@@ -51,8 +51,7 @@ for f in arr.faces():
     ccb = f.outer_ccb()
     e = next(ccb)
     print('{} -> {}'.format(e.source().point(), e.target().point()), end='')
-    for e in ccb:
-      print(' --> {}'.format(e.target().point()), end='')
+    for e in ccb: print(' --> {}'.format(e.target().point()), end='')
     print()
 
 del obs

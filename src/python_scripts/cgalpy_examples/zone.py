@@ -6,10 +6,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
@@ -36,11 +36,7 @@ res = Aos2.zone(arr, c)
 # res contains the objects of the arrangement that the curve intersects
 # in the order when going from left to right
 for obj in res:
-    if type(obj) is Arrangement_2.Vertex:
-        print("vertex")
-    elif type(obj) is Arrangement_2.Halfedge:
-        print("halfedge")
-    elif type(obj) is Arrangement_2.Face:
-        print("face")
-    else:
-        print("Error: unknown type")
+  if type(obj) is Arrangement_2.Vertex: print("vertex")
+  elif type(obj) is Arrangement_2.Halfedge: print("halfedge")
+  elif type(obj) is Arrangement_2.Face: print("face")
+  else: print("Error: unknown type")

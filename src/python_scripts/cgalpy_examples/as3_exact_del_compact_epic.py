@@ -6,10 +6,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY_kerEpic_as3PlainExa_pol2_tri3DelAsAsComSeq'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY_kerEpic_as3PlainExa_pol2_tri3DelAsAsComSeq'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
@@ -29,5 +29,4 @@ alphaShape = Alpha_shape_3([p1, p2, p3, p4], 0, Mode.GENERAL)
 print("Alpha shape computed in GENERAL mode")
 alphas = alphaShape.alphas()
 # print(alphas)
-for x in alphas:
-    print(x)
+for x in alphas: print(x)
