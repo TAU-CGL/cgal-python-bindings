@@ -1,16 +1,28 @@
-import distutils
-from distutils.core import Extension, setup
+import setuptools
+import sysconfig
+from setuptools import setup
+
+# Use a custom bdist_wheel to force non-pure wheel file aka no 'pyX-none-any'
+try:
+  from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
+  class bdist_wheel(_bdist_wheel):
+    def finalize_options(self):
+      _bdist_wheel.finalize_options(self)
+      self.root_is_pure = False
+except ImportError:
+  bdist_wheel = None
+
 package_data = {'@TARGET_PACKAGE_NAME@': [@TARGET_DATA@] }
-setup(name='@TARGET_NAME@',
-      version='@TARGET_VERSION_MAJOR@.@TARGET_VERSION_MINOR@.@TARGET_VERSION_PATCH@',
+
+setup(version='@TARGET_VERSION_MAJOR@.@TARGET_VERSION_MINOR@.@TARGET_VERSION_PATCH@',
       description='CGAL Python Bindings',
       packages=['@TARGET_PACKAGE_NAME@'],
       # platforms=['any'], # linux_x86_64, darwin_arm64
-      platforms=[distutils.util.get_platform().replace('-','_').replace('.','_')],
+      platforms=[sysconfig.get_platform().replace('-','_').replace('.','_')],
       author='@TARGET_AUTHOR@',
       author_email='@TARGET_EMAIL@',
       url='@TARGET_URL@',
       package_dir={'@TARGET_PACKAGE_NAME@': '.'},
       package_data=package_data,
       license='GPLv3+',
-      ext_modules=[Extension('fake', sources=[])])
+      cmdclass={'bdist_wheel': bdist_wheel})
