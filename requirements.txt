@@ -1,4 +1,4 @@
-conan>=1.53.0
+conan>=1.60.1
 pytest>=7.1.2
 scikit-build>=0.15.0
 setuptools>=61.2.0
