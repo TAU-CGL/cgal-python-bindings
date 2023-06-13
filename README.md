@@ -2,7 +2,7 @@
 
 We introduce bindings that enable the convenient, efficient, and
 reliable use of software modules of [https://www.cgal.org/](CGAL)
-(Computational Geometry Algorithm Library), which are written in C++,
+(Computational Geometry Algorithms Library), which are written in C++,
 from within code written in Python.
 
 The bindings exploits [nanobind](https://github.com/wjakob/nanobind),
@@ -16,7 +16,7 @@ software package in C++ that adheres to the generic programming
 paradigm, such as CGAL, consists of function and class templates;
 these templates are instantiated at compile time of the binding
 libraries. In other words, the types of the C++ objects that are
-bound, that is, instances (instantiated types) of C++ function and
+bound, that are, instances (instantiated types) of C++ function and
 class templates, must be known when the bindings are generated.
 
 ## Bindings for CGAL
@@ -65,8 +65,9 @@ of a fixed set of C++ instances) you may still change this set and
 the import name accordingly. For example, if you want to obtain a
 library that supports bindings for C++ instances that are based on the EPIC
 (exact predicate inexact construction) kernel, edit the file `setup.py`, which
-resides under the `<CGALPY_SRC_DIR>` directory. In particular, replace `epec`
-with `epic`.
+resides under the root directory of the clone. In particular, replace `epec`
+with `epic` and, naturally, edit the statement that assigns the
+`CGALPY_CONFIGURATION` variable.
 
 If you want to exploit the full power of the bindings, you need to perform
 a few steps. You need to install at least C++17, Python 3.8+,
@@ -105,7 +106,8 @@ Assuming you have all dependencies installed, type:
     pip3 install --user src/libs/cgalpy/dist/CGALPY-1.0-py3-none-any.whl
 
 Then, you should be able to execute the program
-`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`.
+`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`
+where `<CGALPY_SRC_DIR>` is the root of your clone.
 
 At some point you will need bindings for additional instances (I
 assume); see Section [**Details**](markdown-header-details) for the
@@ -124,7 +126,9 @@ The Python html manual pages are generated under
 `src/libs/cgalpy/CGALPY/build/html/`. The pdf single file is generated
 under `src/libs/cgalpy/CGALPY/build/latex/`.
 
-Observe that the `CGALPY` prefix in the target of the above `make` is the binding library based name; this name can be different then `CGALPY`, and depends on your selections; see Section [**CGAL** Bindings](#markdown-header-cgal-bindings).
+Observe that the `CGALPY` prefix in the target of the above `make` is the binding library based name; 
+this name can be different then `CGALPY`, and depends on your selections; 
+see Section [**CGAL** Bindings](#markdown-header-cgal-bindings).
 
 If you would like to build the documentation for both, type:
 
