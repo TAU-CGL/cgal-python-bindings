@@ -121,11 +121,13 @@ needed for different Python scripts.
 `CONDA_DLL_SEARCH_MODIFICATION_ENABLE` to 1 apriori.
 3. If you are not operating in a virtual environment, consider installing as user:
 
-    pip install --user src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
+        pip install --user src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
     
 4. If you repeat the installation, don't forget to force overidding the new bindings:
 
-    pip install --user --force-reinstall src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
+        pip install --user --force-reinstall src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
+
+### Additional Targets
 
 At some point you will need bindings for additional instances (I
 assume); see Section [**Details**](markdown-header-details) for the
