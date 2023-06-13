@@ -221,10 +221,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       // join(const Surface_mesh& other)
 
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
+#if CGAL_VERSION_NR >= 1050600000
       .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_))
       .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_))
       .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_))
       .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_))
+#endif
       ;
 
     add_attr<Vi>(sm_c, "Vertex_index");
