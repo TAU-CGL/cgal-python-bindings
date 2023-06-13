@@ -31,11 +31,9 @@ def shoot_vertical_ray(arr, vrs, q):
   # Print the result.
   print('Shooting up from ({}) : hit '.format(q), end='')
   if type(obj) == arr.Vertex:
-    if obj.is_isolated():
-      print('an isolated vertex: {}'.format(obj.point()))
+    if obj.is_isolated(): print('an isolated vertex: {}'.format(obj.point()))
     else: print('a vertex: {}'.format(obj.point()))
-  elif type(obj) == arr.Halfedge:
-    print('an edge: {}'.format(obj.curve()))
+  elif type(obj) == arr.Halfedge: print('an edge: {}'.format(obj.curve()))
   elif type(obj) == arr.Face:
     assert(obj.is_unbounded())
     print("nothing.")

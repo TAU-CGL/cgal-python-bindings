@@ -5,10 +5,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
@@ -29,5 +29,4 @@ print("Number of faces in the arrangement:", arr.number_of_faces())
 unb_face = arr.unbounded_face()
 unb_face.set_data(0)
 next(next(unb_face.inner_ccbs())).twin().face().set_data(1)
-for f in arr.faces():
-  print(f.is_unbounded(), f.data())
+for f in arr.faces(): print(f.is_unbounded(), f.data())

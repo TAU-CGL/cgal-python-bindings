@@ -6,10 +6,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
@@ -43,7 +43,6 @@ traits.set_fv_v(lambda x, y: y)
 traits.set_ee_v(lambda x, y: 6)
 Aos2.overlay(arr1, arr2, result, traits)
 
-for v in result.vertices():
-  print("({})".format(v.point()), v.data())
+for v in result.vertices(): print("({})".format(v.point()), v.data())
 
 del traits

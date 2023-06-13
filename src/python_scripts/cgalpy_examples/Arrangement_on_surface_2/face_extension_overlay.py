@@ -46,8 +46,7 @@ Aos2.insert_non_intersecting_curve(arr2, Segment(Point(7, 4), Point(4, 7)))
 Aos2.insert_non_intersecting_curve(arr2, Segment(Point(4, 7), Point(1, 4)))
 Aos2.insert_non_intersecting_curve(arr2, Segment(Point(1, 4), Point(4, 1)))
 
-for f in arr2.faces():
-  f.set_data(not f.is_unbounded())
+for f in arr2.faces(): f.set_data(not f.is_unbounded())
 
 # Compute the overlay of the two arrangements, marking only the faces that
 # are intersections of two marked faces in arr1 and arr2, respectively.
@@ -59,12 +58,10 @@ Aos2.overlay(arr1, arr2, arr, overlay_traits)
 # Go over the faces of the resulting arrangement and print the marked ones.
 print("The intersection is: ", end='')
 for f in arr.faces():
-  if not f.data():
-    continue
+  if not f.data(): continue
   ccb = f.outer_ccb()
   e = next(ccb)
   print(e.source().point(), end='')
-  for e in ccb:
-    print(' -> {}'.format(e.target().point()), end='')
+  for e in ccb: print(' -> {}'.format(e.target().point()), end='')
   print()
 del overlay_traits

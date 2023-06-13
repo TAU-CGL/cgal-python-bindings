@@ -6,10 +6,10 @@ import importlib
 from arr_print import *
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY_kerEpec_aos2Alg'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY_kerEpec_aos2Alg'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2

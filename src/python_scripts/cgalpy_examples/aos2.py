@@ -5,10 +5,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2
@@ -30,13 +30,10 @@ print("Number of vertices in the arrangement:", arr.number_of_vertices())
 
 # Iteration example
 v: Arrangement_2.Vertex
-for v in arr.vertices():
-  print(v.point())
+for v in arr.vertices(): print(v.point())
 
 e: Arrangement_2.Halfedge
-for e in arr.halfedges():
-  print(e.curve())
+for e in arr.halfedges(): print(e.curve())
 
 f: Arrangement_2.Face
-for f in arr.faces():
-  print(f.is_unbounded())
+for f in arr.faces(): print(f.is_unbounded())

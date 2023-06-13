@@ -5,10 +5,10 @@ import sys
 import importlib
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Bso2 = CGALPY.Bso2
@@ -25,9 +25,7 @@ Q = Polygon(qpoints)
 print(Q)
 unionR = Polygon_with_holes()
 res = Bso2.join(P, Q, unionR)
-if res:
-    print(unionR)
-else:
-    print("P and Q are disjoint and their union is trivial.")
+if res: print(unionR)
+else: print("P and Q are disjoint and their union is trivial.")
 intersectionR = Bso2.intersection(P, Q)
 print(intersectionR)

@@ -6,10 +6,10 @@ import importlib
 import time
 
 if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
+  sys.path.append(os.path.abspath('../precompiled'))
+  lib = 'CGALPY'
 else:
-    lib = sys.argv[1]
+  lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
@@ -43,6 +43,5 @@ with open(filename, 'r') as inp:
   toc = time.perf_counter()
 
   print("The inset comprises", len(inset_polygons), " polygon(s).")
-  for pgn in inset_polygons:
-    print(pgn)
+  for pgn in inset_polygons: print(pgn)
   print(f"Inset computation took {toc - tic:0.4f} seconds")
