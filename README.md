@@ -76,7 +76,7 @@ a few steps. You need to install at least C++17, Python 3.8+,
 [CGAL 5.0+](https://doc.cgal.org/latest/Manual/installation.html) before
 attempting to use the bindings.
 
-## Building
+## Building & Running
 
 If you install CGAL from sources, don't forget to set the environment
 variable `CGAL_DIR` to point at the CGAL build directory.
@@ -103,11 +103,29 @@ Assuming you have all dependencies installed, type:
 
     cmake -C <CGALPY_SRC_DIR>/cmake/tests/release/aos2_epec_fixed_release.cmake <CGALPY_SRC_DIR>
     make -j4
-    pip3 install --user src/libs/cgalpy/dist/CGALPY-1.0-py3-none-any.whl
+    pip install src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
 
 Then, you should be able to execute the program
 `<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`
 where `<CGALPY_SRC_DIR>` is the root of your clone.
+
+The cmake script `<CGALPY_SRC_DIR>/cmake/tests/release/aos2_epec_fixed_release.cmake` sets the flags
+that are needed for the generation of bindings used in the Python script 
+`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`. Additional python programs that exploit 
+the bindings reside under `<CGALPY_SRC_DIR>/src/python_scripts`. Naturally, different bindings are
+needed for different Python scripts.
+
+### Notes
+1. The name of the generated `whl` file is platform dependant.
+2. If you are operating in a conda virtual environment on Window, set the environment variable
+`CONDA_DLL_SEARCH_MODIFICATION_ENABLE` to 1 apriori.
+3. If you are not operating in a virtual environment, consider installing as user:
+
+    pip install --user src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
+    
+4. If you repeat the installation, don't forget to force overidding the new bindings:
+
+    pip install --user --force-reinstall src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
 
 At some point you will need bindings for additional instances (I
 assume); see Section [**Details**](markdown-header-details) for the
