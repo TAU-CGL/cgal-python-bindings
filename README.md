@@ -50,12 +50,12 @@ This binding library cannot be mutually used with other binding libraries though
 
 All you need to do is:
 
-    pip3 install --user git+https://bitbucket.org/taucgl/cgal-python-bindings/src/master/
+    pip install git+https://bitbucket.org/taucgl/cgal-python-bindings/src/master/
 
 which is short for:
 
     git clone https://bitbucket.org/taucgl/cgal-python-bindings.git
-    pip3 install --user -e cgal-python-bindings
+    pip install -e cgal-python-bindings
 
 This will install a Python module called `CGALPY_epec`.
 From the name, you can guess that this module provides access to
