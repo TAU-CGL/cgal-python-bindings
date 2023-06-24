@@ -17,6 +17,10 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_iterator.hpp"
 
+#include <CGAL/Gps_circle_segment_traits_2.h>
+#include <CGAL/CORE_algebraic_number_traits.h>
+#include <CGAL/Arr_conic_traits_2.h>
+
 namespace py = nanobind;
 
 namespace bso2 {
@@ -65,8 +69,24 @@ export_general_polygon_2(py::class_<GeneralPolygon_2>& pgn_c) {
   // to an output stream. In particular, the Arr_circle_segment_traits_2.
   // A PR for Arr_circle_segment_traits_2 is on the way.
   // The reamining unsupported traits should be compiled out.
-#if CGAL_VERSION_NR > 1050600910
-  add_extraction(pgn_c);
+#if ((CGAL_VERSION_NR > 1050600910) && \
+     (CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS))
+
+  // In minkowski_sum_2_bindings we explicitly calls this function passing
+  // objects that do not support extraction. Thus, we need to eliminate the call
+  // to add_extraction(pgn_c) in such cases.
+  using CS_pgn = CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2;
+  using Nt_traits = CGAL::CORE_algebraic_number_traits;
+  using Rational = Nt_traits::Rational;
+  using Algebraic = Nt_traits::Algebraic;
+  using Rat_kernel = CGAL::Cartesian<Rational>;
+  using Alg_kernel = CGAL::Cartesian<Algebraic>;
+  using Conic_traits = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
+  using Conic_pgn = CGAL::Gps_traits_2<Conic_traits>::Polygon_2;
+
+  if constexpr ((! std::is_same<Gpgn, CS_pgn>::value) &&
+                (! std::is_same<Gpgn, Conic_pgn>::value))
+    add_extraction(pgn_c);
 #endif
 }
 
