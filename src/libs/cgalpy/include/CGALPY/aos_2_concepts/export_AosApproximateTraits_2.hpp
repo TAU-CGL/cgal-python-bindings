@@ -24,12 +24,22 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
 
   export_AosBasicTraits_2<T>(c, concepts);
 
+  using Pt = typename T::Point_2;
   using Approximate_2 = typename T::Approximate_2;
+  using Ant = typename T::Approximate_number_type;
+  using Ak = typename T::Approximate_kernel;
+  using Ap = typename T::Approximate_point_2;
 
   auto& classes = concepts.m_approximate_traits_classes;
 
   classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
-  classes.m_approximate_2->def("__call__", &T::Approximate_2::operator());
+
+  using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
+  using ovld2 = Ap(Approximate_2::*)(const Pt&) const;
+  classes.m_approximate_2->def("__call__",
+                               static_cast<ovld1>(&T::Approximate_2::operator()));
+  classes.m_approximate_2->def("__call__",
+                               static_cast<ovld2>(&T::Approximate_2::operator()));
 
   c.def("approximate_2_object", &T::approximate_2_object);
 
