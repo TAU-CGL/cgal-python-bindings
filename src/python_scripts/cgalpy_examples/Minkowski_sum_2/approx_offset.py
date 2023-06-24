@@ -18,7 +18,6 @@ Pol2 = CGALPY.Pol2
 Polygon = Pol2.Polygon_2
 Polygon_with_holes = Pol2.Polygon_with_holes_2
 Ms2 = CGALPY.Ms2
-PP2 = CGALPY.Pp2
 
 def read_polygon(inp):
   pgn = Polygon()
