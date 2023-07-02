@@ -179,7 +179,7 @@ void decompose_helper1(const Vertex& vertex, const T1& below,
 }
 
 //
-typedef std::pair<Arrangement_2::Vertex_const_handle,
+typedef std::pair<Arrangement_on_surface_2::Vertex_const_handle,
                   std::pair<boost::optional<Cell_const_variant>,
                             boost::optional<Cell_const_variant>>>
   Decompose_result;
