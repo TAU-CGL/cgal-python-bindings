@@ -207,7 +207,7 @@ void decompose_helper(const Decompose_result& res, py::list& lst) {
 }
 
 //
-py::list decompose(Arrangement_2& arr) {
+py::list decompose(Arrangement_on_surface_2& arr) {
   py::list lst;
   auto op = [&] (const Decompose_result& res) mutable
             { decompose_helper(res, lst); };
