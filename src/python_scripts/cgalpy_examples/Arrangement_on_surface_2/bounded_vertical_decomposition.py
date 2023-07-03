@@ -39,16 +39,16 @@ vd_list = Aos2.decompose(arr)
 # Print the results.
 for vd_item in vd_list:
   curr = vd_item[1]
-  print('Vertex ({}) : '.format(vd_item[0]->point()), end='')
+  print('Vertex ({}) : '.format(vd_item[0].point()), end='')
 
   print(' feature below: ', end='')
-  if type(curr[0] == Halfedge: print('[{}]'.format(hh->curve()), end='')
-  elif type(curr[0]) == Vertex: print('({})'.format(vh->point()), end='')
-  elif type(curr[0] == Face: print('NONE', end='')
-  else print('EMPTY', end='')
+  if type(curr[0]) == Arrangement.Halfedge: print('[{}]'.format(curr[0].curve()), end='')
+  elif type(curr[0]) == Arrangement.Vertex: print('({})'.format(curr[0].point()), end='')
+  elif type(curr[0]) == Arrangement.Face: print('NONE', end='')
+  else: print('EMPTY', end='')
 
   print(' feature above: ', end='')
-  if type(curr[1] == Halfedge: print('[{}]'.format(hh->curve()))
-  elif type(curr[1] == Vertex: print('({})'.format(vh->point()))
-  else if (CGAL::assign(fh, curr.second)) print('NONE')
-  else print('EMPTY')
+  if type(curr[1]) == Arrangement.Halfedge: print('[{}]'.format(curr[1].curve()))
+  elif type(curr[1]) == Arrangement.Vertex: print('({})'.format(curr[1].point()))
+  elif  type(curr[1]) == Arrangement.Face: print('NONE')
+  else: print('EMPTY')
