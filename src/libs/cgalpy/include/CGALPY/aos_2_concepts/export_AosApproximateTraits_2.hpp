@@ -14,9 +14,44 @@
 
 #include "CGALPY/aos_2_concepts/export_AosBasicTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/Kernel/export_point_2.hpp"
 
 namespace py = nanobind;
 
+// Not all traits classes support the type T::Approximate_point_2 (and the
+// operator:
+//      T::Approximate_point_2 T::Approximate_2:operator(const T::Point_2&)
+// We use SFINAE-constrained overloads to dispatch the appropriate function.
+
+//! Fall through---do nothing
+template <typename T, typename C, typename Concepts>
+void export_approximate_point(C& c, Concepts& concepts, ...) {}
+
+// Bind the approximate point related objects
+template <typename T, typename C, typename Concepts,
+          typename = typename T::Approximate_point_2>
+void export_approximate_point(C& c, Concepts& concepts, bool) {
+  using Pt = typename T::Point_2;
+  using Approximate_2 = typename T::Approximate_2;
+  using Ant = typename T::Approximate_number_type;
+  using Ak = typename T::Approximate_kernel;
+  using Ap = typename T::Approximate_point_2;
+  using ovld2 = Ap(Approximate_2::*)(const Pt&) const;
+
+  // Bind the approximate point
+  if (! add_attr<Ap>(c, "Approximate_point_2")) {
+    py::class_<Ap> apnt(c, "Approximate_point_2");
+    export_point_2<Ak>(apnt);
+  }
+
+  // Bind the operator
+  auto& classes = concepts.m_approximate_traits_classes;
+  classes.m_approximate_2->def("__call__",
+                               static_cast<ovld2>(&Approximate_2::operator()));
+}
+
+// Bind the Approximate_2 traits functor
 template <typename T, typename C, typename Concepts>
 void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
   static bool exported = false;
@@ -28,18 +63,15 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
   using Approximate_2 = typename T::Approximate_2;
   using Ant = typename T::Approximate_number_type;
   using Ak = typename T::Approximate_kernel;
-  using Ap = typename T::Approximate_point_2;
 
   auto& classes = concepts.m_approximate_traits_classes;
 
   classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
 
   using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
-  using ovld2 = Ap(Approximate_2::*)(const Pt&) const;
   classes.m_approximate_2->def("__call__",
-                               static_cast<ovld1>(&T::Approximate_2::operator()));
-  classes.m_approximate_2->def("__call__",
-                               static_cast<ovld2>(&T::Approximate_2::operator()));
+                               static_cast<ovld1>(&Approximate_2::operator()));
+  export_approximate_point<T>(c, concepts, true);
 
   c.def("approximate_2_object", &T::approximate_2_object);
 
