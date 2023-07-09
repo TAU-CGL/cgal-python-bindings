@@ -162,27 +162,30 @@ void decompose_helper1(const Vertex& vertex, const T1& below,
                        const boost::optional<Cell_const_variant>& above,
                        py::list& lst) {
   if (! above) {
-    py::object none;
+    auto none = py::none();
     decompose_helper2<T1, py::object>(vertex, below, none, lst);
     return;
   }
   auto var = (above.get());
   if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&var)) {
     decompose_helper2<T1, const Vertex>(vertex, below, *(*v), lst);
+    return;
   }
-  else if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
+if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
     decompose_helper2<T1, const Halfedge>(vertex, below, *(*e), lst);
+    return;
   }
-  else if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
+  if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
     decompose_helper2<T1, const Face>(vertex, below, *(*f), lst);
+    return;
   }
 }
 
 //
-typedef std::pair<Arrangement_on_surface_2::Vertex_const_handle,
-                  std::pair<boost::optional<Cell_const_variant>,
-                            boost::optional<Cell_const_variant>>>
-  Decompose_result;
+using Decompose_result =
+  std::pair<Arrangement_on_surface_2::Vertex_const_handle,
+            std::pair<boost::optional<Cell_const_variant>,
+                      boost::optional<Cell_const_variant>>>;
 
 void decompose_helper(const Decompose_result& res, py::list& lst) {
   const Vertex& vertex = *(res.first);
@@ -190,19 +193,22 @@ void decompose_helper(const Decompose_result& res, py::list& lst) {
   const boost::optional<Cell_const_variant>& above = res.second.second;
 
   if (! below) {
-    py::object none;
+    auto none = py::none();
     decompose_helper1<py::object>(vertex, none, above, lst);
     return;
   }
   auto var = (below.get());
   if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&var)) {
     decompose_helper1<const Vertex>(vertex, *(*v), above, lst);
+    return;
   }
-  else if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
+  if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
     decompose_helper1<const Halfedge>(vertex, *(*e), above, lst);
+    return;
   }
-  else if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
+  if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
     decompose_helper1<const Face>(vertex, *(*f), above, lst);
+    return;
   }
 }
 
