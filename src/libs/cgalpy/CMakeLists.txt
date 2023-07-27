@@ -1,8 +1,6 @@
 ######## Packages ###############################################################
 ################################################################################
 
-find_package(CGAL REQUIRED)
-
 # Generate config.hpp
 configure_file(config.hpp.in include/config.hpp)
 
