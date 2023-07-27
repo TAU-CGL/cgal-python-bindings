@@ -1,6 +1,8 @@
 ######## Packages ###############################################################
 ################################################################################
 
+find_package(CGAL REQUIRED)
+
 # Generate config.hpp
 configure_file(config.hpp.in include/config.hpp)
 
@@ -587,6 +589,7 @@ else ()
     endif ()
 
     target_link_libraries(_CGALPY PRIVATE
+            CGAL::CGAL
             ${Boost_LIBRARIES}
             ${PYTHON_LIBRARIES})
     install(TARGETS _CGALPY DESTINATION python/${CGALPY_IMPORT_NAME}/)
