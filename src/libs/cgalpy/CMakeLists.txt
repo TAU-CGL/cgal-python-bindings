@@ -587,7 +587,7 @@ else ()
     endif ()
 
     target_link_libraries(_CGALPY PRIVATE
-            CGAL::CGAL
+            cgal::cgal
             ${Boost_LIBRARIES}
             ${PYTHON_LIBRARIES})
     install(TARGETS _CGALPY DESTINATION python/${CGALPY_IMPORT_NAME}/)
