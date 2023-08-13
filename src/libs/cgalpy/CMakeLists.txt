@@ -585,10 +585,17 @@ else ()
                 VERSION "${CMAKE_PROJECT_VERSION}"
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
-
-    target_link_libraries(_CGALPY PRIVATE
-            cgal::cgal
-            ${Boost_LIBRARIES}
-            ${PYTHON_LIBRARIES})
+    
+    if(WIN32)
+        target_link_libraries(_CGALPY PRIVATE
+                cgal::cgal
+                ${Boost_LIBRARIES}
+                ${PYTHON_LIBRARIES})
+    else()
+        target_link_libraries(_CGALPY PRIVATE
+                CGAL::CGAL
+                ${Boost_LIBRARIES}
+                ${PYTHON_LIBRARIES})
+    endif()
     install(TARGETS _CGALPY DESTINATION python/${CGALPY_IMPORT_NAME}/)
 endif ()
