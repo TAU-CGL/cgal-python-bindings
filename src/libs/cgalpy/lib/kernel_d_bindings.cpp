@@ -7,6 +7,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <list>
+
 #include <nanobind/nanobind.h>
 
 #include <CGAL/intersections_d.h>
