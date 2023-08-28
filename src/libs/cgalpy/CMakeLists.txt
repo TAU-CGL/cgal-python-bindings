@@ -593,7 +593,7 @@ else ()
                 ${PYTHON_LIBRARIES})
     else()
         target_link_libraries(_CGALPY PRIVATE
-                CGAL::CGAL
+                cgal::cgal
                 ${Boost_LIBRARIES}
                 ${PYTHON_LIBRARIES})
     endif()
