@@ -1,6 +1,5 @@
 [requires]
-cgal/5.5
+cgal/[==5.5]
 
 [generators]
-CMakeDeps
-CMakeToolchain
+cmake_find_package
