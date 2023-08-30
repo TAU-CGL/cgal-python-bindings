@@ -75,7 +75,6 @@ def readme():
     with open("README.md") as file:
         return file.read()
 
-
 prepare()
 run_conan()  # automatically running conan. Ugly workaround, but does its job.
 setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
@@ -132,7 +131,7 @@ setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     #
     # Some CMake-projects allow you to configure it using parameters. You
     # can specify them for this Python-package using the following line.
-    cmake_args=[f"-DCGALPY_IMPORT_NAME={IMPORT_NAME}"] + CGALPY_CONFIGURATION
+    cmake_args=[f"-DCGALPY_IMPORT_NAME={IMPORT_NAME}", f'-DCMAKE_PREFIX_PATH={os.path.join(os.getcwd(), "cmake")}'] + CGALPY_CONFIGURATION
     #
     # There are further options, but you should be fine with these above.
 )
