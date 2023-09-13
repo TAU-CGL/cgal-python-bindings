@@ -7,7 +7,12 @@ configure_file(config.hpp.in include/config.hpp)
 # Add source files
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
 
-if (GMP_FOUND)
+# A workaround an oversight in the conen CGAL setup files
+if (SKBUILD)
+   set(CGAL_USE_GMP TRUE)
+endif()
+
+if (CGAL_USE_GMP)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gmp.cpp)
 endif ()
 
@@ -326,8 +331,9 @@ if (NOT SKBUILD)
     endif ()
 
     target_link_libraries(CGALPY PRIVATE
-            ${Boost_LIBRARIES}
-            ${PYTHON_LIBRARIES})
+        CGAL::CGAL
+        ${Boost_LIBRARIES}
+        ${PYTHON_LIBRARIES})
 
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
     set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
@@ -489,7 +495,7 @@ if (NOT SKBUILD)
         "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
         "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
         "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
-	"-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
+        "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
         -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
         DEPENDS ${CGALPY_SRC_INIT})
 
