@@ -591,7 +591,6 @@ else ()
                 VERSION "${CMAKE_PROJECT_VERSION}"
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
-
     target_link_libraries(_CGALPY PRIVATE
         CGAL::CGAL
         ${Boost_LIBRARIES}
