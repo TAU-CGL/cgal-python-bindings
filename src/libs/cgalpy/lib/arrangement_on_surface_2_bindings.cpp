@@ -9,6 +9,7 @@
 
 #define CGAL_USE_BASIC_VIEWER
 
+#include <variant>
 #include <boost/variant/variant.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/iterator/function_output_iterator.hpp>
@@ -60,9 +61,11 @@ namespace py = nanobind;
 
 namespace aos2 {
 
-typedef typename boost::variant<Vertex_const_handle,
-                                Halfedge_const_handle,
-                                Face_const_handle>      Cell_const_variant;
+using Cell_variant = std::variant<Vertex_handle, Halfedge_handle, Face_handle>;
+
+using Cell_const_variant = std::variant<Vertex_const_handle,
+                                        Halfedge_const_handle,
+                                        Face_const_handle>;
 
 typedef Arr_overlay_function_traits<Arrangement_on_surface_2,
                                     Arrangement_on_surface_2,
@@ -159,23 +162,22 @@ void decompose_helper2(const Vertex& vertex, const T1& below,
 //
 template<typename T1>
 void decompose_helper1(const Vertex& vertex, const T1& below,
-                       const boost::optional<Cell_const_variant>& above,
+                       const std::optional<Cell_const_variant>& above,
                        py::list& lst) {
   if (! above) {
     auto none = py::none();
     decompose_helper2<T1, py::object>(vertex, below, none, lst);
     return;
   }
-  auto var = (above.get());
-  if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&var)) {
+  if (auto* v = std::get_if<Vertex_const_handle>(&*above)) {
     decompose_helper2<T1, const Vertex>(vertex, below, *(*v), lst);
     return;
   }
-if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
+  if (auto* e = std::get_if<Halfedge_const_handle>(&*above)) {
     decompose_helper2<T1, const Halfedge>(vertex, below, *(*e), lst);
     return;
   }
-  if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
+  if (auto* f = std::get_if<Face_const_handle>(&*above)) {
     decompose_helper2<T1, const Face>(vertex, below, *(*f), lst);
     return;
   }
@@ -184,29 +186,28 @@ if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
 //
 using Decompose_result =
   std::pair<Arrangement_on_surface_2::Vertex_const_handle,
-            std::pair<boost::optional<Cell_const_variant>,
-                      boost::optional<Cell_const_variant>>>;
+            std::pair<std::optional<Cell_const_variant>,
+                      std::optional<Cell_const_variant>>>;
 
 void decompose_helper(const Decompose_result& res, py::list& lst) {
   const Vertex& vertex = *(res.first);
-  const boost::optional<Cell_const_variant>& below = res.second.first;
-  const boost::optional<Cell_const_variant>& above = res.second.second;
+  const auto& below = res.second.first;
+  const auto& above = res.second.second;
 
   if (! below) {
     auto none = py::none();
     decompose_helper1<py::object>(vertex, none, above, lst);
     return;
   }
-  auto var = (below.get());
-  if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&var)) {
+  if (auto* v = std::get_if<Vertex_const_handle>(&*below)) {
     decompose_helper1<const Vertex>(vertex, *(*v), above, lst);
     return;
   }
-  if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
+  if (auto* e = std::get_if<Halfedge_const_handle>(&*below)) {
     decompose_helper1<const Halfedge>(vertex, *(*e), above, lst);
     return;
   }
-  if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
+  if (auto* f = std::get_if<Face_const_handle>(&*below)) {
     decompose_helper1<const Face>(vertex, *(*f), above, lst);
     return;
   }
@@ -225,7 +226,7 @@ py::list decompose(Arrangement_on_surface_2& arr) {
 }
 
 //
-class Zone_object_visitor : public boost::static_visitor<py::object> {
+class Zone_object_visitor {
 public:
   template<typename T>
   py::object operator()(T operand) const { return py::cast(&(*operand)); }
@@ -234,8 +235,8 @@ public:
 //
 py::list zone(Arrangement_on_surface_2& arr, X_monotone_curve_2& c) {
   py::list lst;
-  auto op = [&] (const Cell_const_variant& o) mutable
-    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+  auto op = [&] (const Cell_variant& o) mutable
+    { lst.append(std::visit(Zone_object_visitor(), o)); };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -247,8 +248,8 @@ template <typename PointLocation>
 py::list zone_pl(Arrangement_on_surface_2& arr, X_monotone_curve_2& c,
                  PointLocation& pl) {
   py::list lst;
-  auto op = [&] (const Cell_const_variant& o) mutable
-    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+  auto op = [&] (const Cell_variant& o) mutable
+    { lst.append(std::visit(Zone_object_visitor(), o)); };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));

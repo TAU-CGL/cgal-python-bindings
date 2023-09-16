@@ -96,9 +96,6 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
         set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_point_location_bindings.cpp)
     endif ()
 
-    # Object
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_object_bindings.cpp)
-
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arrangement_on_surface_2_bindings.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arrangement_2_io_bindings.cpp)
 endif ()

@@ -91,6 +91,4 @@ typedef CGAL::Rotation                                 Rotation;
 typedef CGAL::Scaling                                  Scaling;
 typedef CGAL::Translation                              Translation;
 
-typedef CGAL::Object                                   Object;
-
 #endif //CGALPY_KERNEL_TYPES_HPP

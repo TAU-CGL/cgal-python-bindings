@@ -30,7 +30,7 @@ void bind_do_intersect(py::module_& m,
 }
 
 // Intersections
-class Intersection_visitor : public boost::static_visitor<py::object> {
+class Intersection_visitor {
 public:
   template<typename T>
   py::object operator()(T& operand) const { return py::cast(operand); }
@@ -47,7 +47,7 @@ template <typename T1, typename T2>
 py::object cgalpy_intersection(const T1& t1, const T2& t2) {
   auto result = CGAL::intersection<Kernel>(t1, t2);
   if (! result) return py::object();    // no intersection
-  return boost::apply_visitor(Intersection_visitor(), *result);
+  return std::visit(Intersection_visitor(), *result);
 }
 
 // The supported overloaded functions CGAL::intersection(T1& t1, T2& t2) have

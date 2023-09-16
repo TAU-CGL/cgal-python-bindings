@@ -9,7 +9,7 @@
 #ifndef CGALPY_INTERSECT_2_CALL_OPERATOR_HPP
 #define CGALPY_INTERSECT_2_CALL_OPERATOR_HPP
 
-#include <boost/tuple/tuple.hpp>
+#include <variant>
 
 #include <nanobind/nanobind.h>
 
@@ -26,14 +26,14 @@ void intersect_2_call_operator(typename T::Intersect_2& i,
   using Multiplicity = typename T::Multiplicity;
   using pair = std::pair<Point_2, Multiplicity>;
 
-  auto v = std::vector<boost::variant<pair, X_monotone_curve_2>>();
+  auto v = std::vector<std::variant<pair, X_monotone_curve_2>>();
   i(xc1, xc2, std::back_inserter(v));
   for (auto o : v) {
-    if (pair* pa = boost::get<pair>(&o)) {
+    if (pair* pa = std::get_if<pair>(&o)) {
       py::tuple tup = py::make_tuple(pa->first, pa->second);
       res.append(tup);
     }
-    else if (X_monotone_curve_2* curve = boost::get<X_monotone_curve_2>(&o)){
+    else if (X_monotone_curve_2* curve = std::get_if<X_monotone_curve_2>(&o)){
       res.append(*curve);
     }
   }

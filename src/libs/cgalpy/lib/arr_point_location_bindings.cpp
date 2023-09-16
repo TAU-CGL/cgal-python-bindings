@@ -32,7 +32,7 @@ typedef typename CGAL::Arr_point_location_result<Arrangement_on_surface_2>::Type
 typedef typename std::pair<Point_2, Pl_result>                  Pl_query_result;
 
 //
-class Point_location_result_visitor : public boost::static_visitor<py::object> {
+class Point_location_result_visitor {
 public:
   template<typename T>
   py::object operator()(T& operand) const
@@ -45,7 +45,7 @@ py::list locate_batch(const Arrangement_on_surface_2& arr, const py::list& lst)
   py::list res;
   auto op = [&] (const Pl_query_result& p) mutable {
       const auto& result =
-        boost::apply_visitor(Point_location_result_visitor(), p.second);
+        std::visit(Point_location_result_visitor(), p.second);
       res.append(py::make_tuple(p.first, result));
     };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
@@ -61,21 +61,21 @@ py::list locate_batch(const Arrangement_on_surface_2& arr, const py::list& lst)
 template <typename PL>
 py::object locate(PL& pl, const Point_2& p) {
   auto result = pl.locate(p);
-  return boost::apply_visitor(Point_location_result_visitor(), result);
+  return std::visit(Point_location_result_visitor(), result);
 }
 
 //
 template <typename PL>
 py::object ray_shoot_up(PL& pl, const Point_2& p) {
   auto result = pl.ray_shoot_up(p);
-  return boost::apply_visitor(Point_location_result_visitor(), result);
+  return std::visit(Point_location_result_visitor(), result);
 }
 
 //
 template <typename PL>
 py::object ray_shoot_down(PL& pl, const Point_2& p) {
   auto result = pl.ray_shoot_down(p);
-  return boost::apply_visitor(Point_location_result_visitor(), result);
+  return std::visit(Point_location_result_visitor(), result);
 }
 
 // #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
