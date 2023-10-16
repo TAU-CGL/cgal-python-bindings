@@ -56,7 +56,7 @@ def print_arrangement(arr):
   # Print the arrangement edges.
   print('{} edges:'.format(arr.number_of_edges()))
   e: Arrangement.Halfedge
-  for e in arr.halfedges(): print('[{}]'.format(e.curve()))
+  for e in arr.edges(): print('[{}]'.format(e.curve()))
 
   # Print the arrangement faces.
   print('{} faces:'.format(arr.number_of_faces()))
