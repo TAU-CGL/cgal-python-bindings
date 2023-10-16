@@ -20,6 +20,7 @@ void export_arrangement_on_surface_2(py::module_&);
 void export_boolean_set_operations_2(py::module_&);
 void export_bounding_volumes(py::module_&);
 void export_convex_hull_2_bindings(py::module_&);
+void export_convex_hull_3_bindings(py::module_&);
 void export_general_polygon_set_2(py::module_&);
 void export_intersections(py::module_&);
 void export_kernel(py::module_&);
@@ -118,6 +119,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
   auto ms2_m = m.def_submodule("Ms2");
   export_minkowski_sum_2(ms2_m);
+#endif
+
+#ifdef CGALPY_CONVEX_HULL_3_BINDINGS
+  auto ch3_m = m.def_submodule("Ch3");
+  export_convex_hull_3_bindings(ch3_m);
 #endif
 
 #ifdef CGALPY_TRIANGULATION_3_BINDINGS

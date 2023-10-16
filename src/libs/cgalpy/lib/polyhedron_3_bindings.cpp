@@ -89,6 +89,7 @@ void export_vertex(C& prn_c) {
   if (! add_attr<Vertex>(prn_c, "Vertex")) {
     py::class_<Vertex> vertex_c(prn_c, "Vertex");
     vertex_c.def(py::init<>())
+      .def("point", [](const Vertex& v){ return v.point(); })
       ;
   }
 }
@@ -102,6 +103,8 @@ void export_halfedge(C& prn_c) {
   if (! add_attr<Halfedge>(prn_c, "Halfedge")) {
     py::class_<Halfedge> halfedge_c(prn_c, "Halfedge");
     halfedge_c.def(py::init<>())
+      .def("vertex", [](const Halfedge& h){ return *(h.vertex()); })
+      .def("next", [](const Halfedge& h){ return *(h.next()); })
       ;
   }
 }
@@ -111,10 +114,17 @@ template <typename C>
 void export_face(C& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Face = Prn::Face;
+  using Plane_3 = Prn::Plane_3;
 
   if (! add_attr<Face>(prn_c, "Face")) {
     py::class_<Face> face_c(prn_c, "Face");
     face_c.def(py::init<>())
+      .def("plane", [](const Face& f){ return f.plane(); })
+      .def("set_plane", [](Face& f, const Plane_3& plane){ f.plane() = plane; })
+      .def("halfedge", [](const Face& f){ return *(f.halfedge());  })
+      .def("facet_degree", [](const Face& f){ return f.facet_degree(); })
+      .def("is_triangle", [](const Face& f){ return f.is_triangle(); })
+      .def("is_quad", [](const Face& f){ return f.is_quad(); })
       ;
 
     // Until 'consteval' is supported (C++20), we cannot assume that
@@ -152,6 +162,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("make_tetrahedron", &pol3::make_tetrahedron1, ri)
       .def("make_tetrahedron", &pol3::make_tetrahedron2, ri)
       .def("is_tetrahedron", &pol3::is_tetrahedron)
+      .def("clear", &Prn::clear)
       ;
 
     using Vci = Prn::Vertex_const_iterator;
