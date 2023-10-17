@@ -28,6 +28,13 @@ namespace py = nanobind;
 
 namespace pol3 {
 
+// Access functions
+const Vertex& vertex(const Halfedge& e) { return (*(e.vertex())); }
+const Halfedge& opposite(const Halfedge& e) { return (*(e.opposite())); }
+const Halfedge& next(const Halfedge& e) { return (*(e.next())); }
+const Halfedge& prev(const Halfedge& e) { return (*(e.prev())); }
+const Halfedge& halfedge(const Face& f) { return (*(f.halfedge())); }
+
 // Read a surface mesh from a file.
 template <typename Polyhedron_3>
 Polyhedron_3 read_polygon_mesh(const std::string& filename) {
@@ -115,10 +122,10 @@ void export_halfedge(C& prn_c) {
 
   py::class_<Halfedge> halfedge_c(prn_c, "Halfedge");
   halfedge_c.def(py::init<>())
-    .def("vertex", [](const Halfedge& h){ return h.vertex(); }, ri)
-    .def("opposite", [](const Halfedge& h){ return h.opposite(); }, ri)
-    .def("next", [](const Halfedge& h){ return h.next(); }, ri)
-    .def("prev", [](const Halfedge& h){ return h.prev(); }, ri)
+    .def("vertex", &pol3::vertex, ri)
+    .def("opposite", &pol3::opposite, ri)
+    .def("next", &pol3::next, ri)
+    .def("prev", &pol3::prev, ri)
     ;
 }
 
@@ -136,7 +143,7 @@ void export_face(C& prn_c) {
   face_c.def(py::init<>())
     .def("plane", [](const Face& f){ return f.plane(); }, ri)
     .def("set_plane", [](Face& f, const Plane_3& plane){ f.plane() = plane; })
-    .def("halfedge", [](const Face& f){ return f.halfedge(); }, ri)
+    .def("halfedge", &pol3::halfedge, ri)
     .def("facet_degree", [](const Face& f){ return f.facet_degree(); })
     .def("is_triangle", [](const Face& f){ return f.is_triangle(); })
     .def("is_quad", [](const Face& f){ return f.is_quad(); })
