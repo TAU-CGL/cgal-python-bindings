@@ -444,6 +444,7 @@ void export_kernel(py::module_& m) {
   /// \name Kernel operations
   /// @{
   using Equal_2 = Kernel::Equal_2;
+  using Ctr_pnt_2 = Kernel::Construct_point_2;
   using Ctr_seg_2 = Kernel::Construct_segment_2;
   using Ctr_midpnt_2 = Kernel::Construct_midpoint_2;
   using Cc_in_between_2 = Kernel::Counterclockwise_in_between_2;
@@ -458,6 +459,9 @@ void export_kernel(py::module_& m) {
       .def("construct_midpoint_2_object",
            [](const Kernel& k)->Ctr_midpnt_2
            { return k.construct_midpoint_2_object(); })
+      .def("construct_point_2_object",
+           [](const Kernel& k)->Ctr_pnt_2
+           { return k.construct_point_2_object(); })
       .def("construct_segment_2_object",
            [](const Kernel& k)->Ctr_seg_2
            { return k.construct_segment_2_object(); })
@@ -482,6 +486,12 @@ void export_kernel(py::module_& m) {
       .def("__call__", static_cast<Equal_2_ray>(&Equal_2::operator()))
       .def("__call__", static_cast<Equal_2_seg>(&Equal_2::operator()))
       .def("__call__", static_cast<Equal_2_vec>(&Equal_2::operator()))
+      ;
+
+    // Construct_point_2
+    using Ctr_pnt_2_op = Pnt_2(Ctr_pnt_2::*)(const FT&, const FT&)const;
+    py::class_<Ctr_pnt_2>(ker_c, "Construct_point_2")
+      .def("__call__", static_cast<Ctr_pnt_2_op>(&Ctr_pnt_2::operator()))
       ;
 
     // Construct_segment_2
