@@ -43,7 +43,7 @@ py::object export_arr_segment_traits(py::module_& m) {
   using Xcv = aos2::X_monotone_curve_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<GT> traits_c(m, "Arr_segment_traits_2");
+  py::class_<GT, Kernel> traits_c(m, "Arr_segment_traits_2");
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
     Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
