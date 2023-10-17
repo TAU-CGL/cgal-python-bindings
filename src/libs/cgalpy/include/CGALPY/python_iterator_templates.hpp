@@ -40,6 +40,28 @@ public:
   }
 };
 
+template <typename circulator>
+class Iterator_from_const_circulator {
+private:
+  bool first = true;
+  circulator m_first;
+  circulator m_curr;
+
+public:
+  Iterator_from_const_circulator(circulator first) : m_first(first), m_curr(first) {}
+
+  const typename circulator::value_type& next() {
+    if (m_curr != 0) {
+      if (first || m_curr != m_first) {
+        first = false;
+        return *m_curr++;
+      }
+    }
+    throw py::stop_iteration();
+    return *m_curr;
+  }
+};
+
 template <typename iterator>
 class Iterator_of_circulators {
   typedef Iterator_from_circulator<typename iterator::value_type> modified_circulator;
