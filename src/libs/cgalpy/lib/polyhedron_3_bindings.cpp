@@ -22,6 +22,7 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "CGALPY/python_iterator_templates.hpp"
 
 namespace py = nanobind;
 
@@ -76,6 +77,14 @@ py::object my_edges(const Polyhedron_3& prn)
 py::object my_faces(const Polyhedron_3& prn)
 { return make_iterator(prn.facets_begin(), prn.facets_end()); }
 
+//
+//
+Iterator_from_const_circulator<Halfedge_around_facet_const_circulator>*
+halfedges_around_face(Face& f) {
+  return new
+    Iterator_from_const_circulator<Halfedge_around_facet_const_circulator>(f.facet_begin());
+}
+
 /// @}
 
 }
@@ -85,13 +94,14 @@ template <typename C>
 void export_vertex(C& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Vertex = Prn::Vertex;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
-  if (! add_attr<Vertex>(prn_c, "Vertex")) {
-    py::class_<Vertex> vertex_c(prn_c, "Vertex");
-    vertex_c.def(py::init<>())
-      .def("point", [](const Vertex& v){ return v.point(); })
-      ;
-  }
+  if (add_attr<Vertex>(prn_c, "Vertex")) return;
+
+  py::class_<Vertex> vertex_c(prn_c, "Vertex");
+  vertex_c.def(py::init<>())
+    .def("point", [](const Vertex& v){ return v.point(); }, ri)
+    ;
 }
 
 // Export Vertex
@@ -99,14 +109,17 @@ template <typename C>
 void export_halfedge(C& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Halfedge = Prn::Halfedge;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
-  if (! add_attr<Halfedge>(prn_c, "Halfedge")) {
-    py::class_<Halfedge> halfedge_c(prn_c, "Halfedge");
-    halfedge_c.def(py::init<>())
-      .def("vertex", [](const Halfedge& h){ return *(h.vertex()); })
-      .def("next", [](const Halfedge& h){ return *(h.next()); })
-      ;
-  }
+  if (add_attr<Halfedge>(prn_c, "Halfedge")) return;
+
+  py::class_<Halfedge> halfedge_c(prn_c, "Halfedge");
+  halfedge_c.def(py::init<>())
+    .def("vertex", [](const Halfedge& h){ return h.vertex(); }, ri)
+    .def("opposite", [](const Halfedge& h){ return h.opposite(); }, ri)
+    .def("next", [](const Halfedge& h){ return h.next(); }, ri)
+    .def("prev", [](const Halfedge& h){ return h.prev(); }, ri)
+    ;
 }
 
 // Export Vertex
@@ -115,25 +128,31 @@ void export_face(C& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Face = Prn::Face;
   using Plane_3 = Prn::Plane_3;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
-  if (! add_attr<Face>(prn_c, "Face")) {
-    py::class_<Face> face_c(prn_c, "Face");
-    face_c.def(py::init<>())
-      .def("plane", [](const Face& f){ return f.plane(); })
-      .def("set_plane", [](Face& f, const Plane_3& plane){ f.plane() = plane; })
-      .def("halfedge", [](const Face& f){ return *(f.halfedge());  })
-      .def("facet_degree", [](const Face& f){ return f.facet_degree(); })
-      .def("is_triangle", [](const Face& f){ return f.is_triangle(); })
-      .def("is_quad", [](const Face& f){ return f.is_quad(); })
-      ;
+  if (add_attr<Face>(prn_c, "Face")) return;
 
-    // Until 'consteval' is supported (C++20), we cannot assume that
-    // pol3::face_with_id() is evaluated at compiletime
+  py::class_<Face> face_c(prn_c, "Face");
+  face_c.def(py::init<>())
+    .def("plane", [](const Face& f){ return f.plane(); }, ri)
+    .def("set_plane", [](Face& f, const Plane_3& plane){ f.plane() = plane; })
+    .def("halfedge", [](const Face& f){ return f.halfedge(); }, ri)
+    .def("facet_degree", [](const Face& f){ return f.facet_degree(); })
+    .def("is_triangle", [](const Face& f){ return f.is_triangle(); })
+    .def("is_quad", [](const Face& f){ return f.is_quad(); })
+    .def("halfedges", &pol3::halfedges_around_face)
+    ;
+
+  // Until 'consteval' is supported (C++20), we cannot assume that
+  // pol3::face_with_id() is evaluated at compiletime
 #if defined(CGALPY_POL3_FACE_WITH_ID)
-    if constexpr(pol3::face_with_id())
-      face_c.def("id", [](const Face& f){ return f.id(); });
+  if constexpr(pol3::face_with_id())
+    face_c.def("id", [](const Face& f){ return f.id(); });
 #endif
-  }
+
+  using Hafc = pol3::Halfedge_around_facet_const_circulator;
+  bind_iterator<Iterator_from_const_circulator<Hafc>>
+    (face_c, "Halfedge_around_facet_const_circulator");
 }
 
 // Export Polyhedron_3.
