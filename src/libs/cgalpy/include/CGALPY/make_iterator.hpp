@@ -32,7 +32,7 @@ void add_iterator_impl(const char* name, C& c, Extra&&... extra) {
   if (add_attr<state>(c, name)) return;
 
   py::class_<state>(c, name)
-    .def("__iter__", [](state& s)->state& { return s; })
+    .def("__iter__", [](state& s) -> state& { return s; })
     .def("__next__", [](state& s) -> ValueType {
                        if (! s.first_or_done) ++s.it;
                        else s.first_or_done = false;
@@ -53,8 +53,7 @@ template <typename Iterator, typename Sentinel,
           typename... Extra,
           typename C>
 void add_iterator(const char* name, C& c, Extra&&... extra) {
-  add_iterator_impl<Policy,
-                    Iterator, Sentinel, ValueType,
+  add_iterator_impl<Policy, Iterator, Sentinel, ValueType,
                     Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
