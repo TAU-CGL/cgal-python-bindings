@@ -628,7 +628,9 @@ void export_arr(py::module_& m) {
   export_arrangement_2_io(arr_c);
 
 #ifdef CGALPY_HAS_VISUAL
-  m.def("draw", &aos2::draw);
+  using Draw = void(*)(const aos2::Arrangement_2&, const char*, bool);
+  m.def("draw", static_cast<Draw>(CGAL::draw),
+        py::arg("arr"), py::arg("title"), py::arg("draw_vertices") = false);
 #endif
 }
 
