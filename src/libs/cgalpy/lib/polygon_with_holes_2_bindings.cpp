@@ -11,7 +11,6 @@
 #include <nanobind/operators.h>
 
 #include "CGALPY/polygon_2_types.hpp"
-#include "CGALPY/python_iterator_templates.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/add_attr.hpp"
