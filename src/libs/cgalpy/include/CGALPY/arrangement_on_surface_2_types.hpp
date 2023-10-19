@@ -153,8 +153,6 @@ typedef Arrangement_on_surface_2::Vertex                   Vertex;
 typedef Arrangement_on_surface_2::Halfedge                 Halfedge;
 typedef Arrangement_on_surface_2::Face                     Face;
 
-typedef Arrangement_on_surface_2::Inner_ccb_iterator       Inner_ccb_iterator;
-
 typedef Arrangement_on_surface_2::Isolated_vertex_iterator
   Isolated_vertex_iterator;
 typedef Arrangement_on_surface_2::Ccb_halfedge_circulator
