@@ -36,7 +36,6 @@ size_t number_of_outer_ccbs(const Face& f) { return f.number_of_outer_ccbs(); }
 void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Face = Aos::Face;
-  using Inner_ccb_iterator = Aos::Inner_ccb_iterator;
 
   // Face base
   py::class_<CGAL::Arr_face_base> face_base_c(c, "Arr_face_base");
@@ -62,7 +61,6 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("number_of_inner_ccbs", &aos2::number_of_inner_ccbs)
     .def("number_of_outer_ccbs", &aos2::number_of_outer_ccbs)
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
-    .def("holes", &aos2::inner_ccbs)
     .def("has_outer_ccb", &Face::has_outer_ccb)
     .def("number_of_holes", &Face::number_of_holes)
 
@@ -80,12 +78,13 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Icci = Aos::Inner_ccb_const_iterator;
   using Occi = Aos::Outer_ccb_const_iterator;
   add_circulator<Chcc>("Ccb_halfedge_circulator", face_c);
-  add_iterator<Icci, Icci>("Inner_ccb_iterator", face_c);
-  add_iterator<Occi, Occi>("Outer_ccb_iterator", face_c);
+  add_iterator_of_circulator<Icci, Icci, Chcc>("Inner_ccb_iterator", face_c);
+  add_iterator_of_circulator<Occi, Occi, Chcc>("Outer_ccb_iterator", face_c);
 
   face_c.def("outer_ccb", &aos2::outer_ccb, py::keep_alive<0, 1>());
   face_c.def("outer_ccbs", &aos2::outer_ccbs, py::keep_alive<0, 1>());
   face_c.def("inner_ccbs", &aos2::inner_ccbs, py::keep_alive<0, 1>());
+  face_c.def("holes", &aos2::inner_ccbs, py::keep_alive<0, 1>());
 
   add_attr<V>(face_c, "Vertex");
 }

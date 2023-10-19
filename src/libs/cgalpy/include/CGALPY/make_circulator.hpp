@@ -12,18 +12,11 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/circulator_state.hpp"
 
 namespace py = nanobind;
 
 //
-template <typename Iterator>
-struct circulator_state {
-  Iterator it;
-  Iterator end;
-  bool first;
-  bool done;
-};
-
 template <py::rv_policy Policy,
           typename Iterator, typename ValueType,
           typename... Extra,

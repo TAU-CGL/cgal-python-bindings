@@ -12,17 +12,12 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/iterator_state.hpp"
+#include "CGALPY/circulator_state.hpp"
 
 namespace py = nanobind;
 
 //
-template <typename Iterator, typename Sentinel>
-struct iterator_state {
-  Iterator it;
-  Sentinel end;
-  bool first_or_done;
-};
-
 template <py::rv_policy Policy,
           typename Iterator, typename Sentinel, typename ValueType,
           typename... Extra,
@@ -55,6 +50,41 @@ template <typename Iterator, typename Sentinel,
 void add_iterator(const char* name, C& c, Extra&&... extra) {
   add_iterator_impl<Policy, Iterator, Sentinel, ValueType,
                     Extra...>(name, c, std::forward<Extra>(extra)...);
+}
+
+template <py::rv_policy Policy,
+          typename Iterator, typename Sentinel, typename ValueType,
+          typename... Extra,
+          typename C>
+void add_iterator_of_circulator_impl(const char* name, C& c, Extra&&... extra) {
+  using state = iterator_state<Iterator, Sentinel>;
+  using sub_state = circulator_state<ValueType>;
+  if (add_attr<state>(c, name)) return;
+
+  py::class_<state>(c, name)
+    .def("__iter__", [](state& s) -> state& { return s; })
+    .def("__next__", [](state& s) -> sub_state {
+                       if (! s.first_or_done) ++s.it;
+                       else s.first_or_done = false;
+                       if (s.it == s.end) {
+                         s.first_or_done = true;
+                         throw py::stop_iteration();
+                       }
+                       return sub_state{*s.it, *s.it, true, false};
+                     },
+      std::forward<Extra>(extra)..., Policy)
+    ;
+}
+
+// Add (wrap) an iterator
+template <typename Iterator, typename Sentinel,
+          typename ValueType = decltype(*std::declval<Iterator>()),
+          py::rv_policy Policy = py::rv_policy::reference_internal,
+          typename... Extra,
+          typename C>
+void add_iterator_of_circulator(const char* name, C& c, Extra&&... extra) {
+  add_iterator_of_circulator_impl<Policy, Iterator, Sentinel, ValueType,
+                                  Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
 // Obtain a Python iterator
