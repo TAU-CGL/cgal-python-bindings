@@ -13,8 +13,6 @@
 
 #include "CGALPY/types.hpp"
 #include "CGALPY/polygon_set_2_types.hpp"
-#include "CGALPY/python_iterator_templates.hpp"
-#include "CGALPY/append_iterator.hpp"
 
 namespace py = nanobind;
 
