@@ -22,7 +22,7 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/make_circulator.hpp"
 
 namespace py = nanobind;
 
@@ -86,11 +86,8 @@ py::object my_faces(const Polyhedron_3& prn)
 
 //
 //
-Iterator_from_const_circulator<Halfedge_around_facet_const_circulator>*
-halfedges_around_face(Face& f) {
-  return new
-    Iterator_from_const_circulator<Halfedge_around_facet_const_circulator>(f.facet_begin());
-}
+py::object halfedges_around_facet(const Face& f)
+{ return make_circulator(f.facet_begin()); }
 
 /// @}
 
@@ -147,8 +144,11 @@ void export_face(C& prn_c) {
     .def("facet_degree", [](const Face& f){ return f.facet_degree(); })
     .def("is_triangle", [](const Face& f){ return f.is_triangle(); })
     .def("is_quad", [](const Face& f){ return f.is_quad(); })
-    .def("halfedges", &pol3::halfedges_around_face)
     ;
+
+  using Hafcc = pol3::Halfedge_around_facet_const_circulator;
+  add_circulator<Hafcc>("Halfedge_around_facet_circulator", face_c);
+  face_c.def("halfedges", &pol3::halfedges_around_facet, py::keep_alive<0, 1>());
 
   // Until 'consteval' is supported (C++20), we cannot assume that
   // pol3::face_with_id() is evaluated at compiletime
@@ -156,10 +156,6 @@ void export_face(C& prn_c) {
   if constexpr(pol3::face_with_id())
     face_c.def("id", [](const Face& f){ return f.id(); });
 #endif
-
-  using Hafc = pol3::Halfedge_around_facet_const_circulator;
-  bind_iterator<Iterator_from_const_circulator<Hafc>>
-    (face_c, "Halfedge_around_facet_const_circulator");
 }
 
 // Export Polyhedron_3.
