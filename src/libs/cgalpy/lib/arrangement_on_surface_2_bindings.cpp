@@ -24,9 +24,6 @@
 #include <CGAL/Arr_walk_along_line_point_location.h>
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
-#ifdef CGALPY_HAS_VISUAL
-#include <CGAL/draw_arrangement_2.h>
-#endif
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/Arr_observer.hpp"
@@ -35,6 +32,15 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
+
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+  (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
+  (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
+  (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS)
+#ifdef CGALPY_HAS_VISUAL
+#include <CGAL/draw_arrangement_2.h>
+#endif
+#endif
 
 void export_vertex(py::class_<aos2::Arrangement_on_surface_2>&);
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>&);
@@ -481,11 +487,6 @@ void insert_xcv_pl(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv,
 /// \name Functions for Arrangement_2
 /// @{
 
-// Draw an arrangement.
-#ifdef CGALPY_HAS_VISUAL
-void draw(const Arrangement_2& arr) { CGAL::draw(arr); }
-#endif
-
 // //! Obtain the unbounded face of an arrangement.
 typename Arrangement_2::Face& unbounded_face(Arrangement_2& arr)
 { return *(arr.unbounded_face()); }
@@ -627,10 +628,15 @@ void export_arr(py::module_& m) {
 
   export_arrangement_2_io(arr_c);
 
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+  (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
+  (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
+  (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS)
 #ifdef CGALPY_HAS_VISUAL
   using Draw = void(*)(const aos2::Arrangement_2&, const char*, bool);
   m.def("draw", static_cast<Draw>(CGAL::draw),
         py::arg("arr"), py::arg("title"), py::arg("draw_vertices") = false);
+#endif
 #endif
 }
 
