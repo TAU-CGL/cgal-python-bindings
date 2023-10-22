@@ -32,8 +32,8 @@ namespace py = nanobind;
 py::object export_arr_conic_traits(py::module_& m) {
   //TODO export RatKernel, AlgKernel
   using Nt_traits = CGAL::CORE_algebraic_number_traits;
-  using Rat_kernel = CGAL::Cartesian <Nt_traits::Rational>;
-  using Alg_kernel = CGAL::Cartesian <Nt_traits::Algebraic>;
+  using Rat_kernel = CGAL::Cartesian<Nt_traits::Rational>;
+  using Alg_kernel = CGAL::Cartesian<Nt_traits::Algebraic>;
   using GT = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
   using Pnt = GT::Point_2;
   using Cv = GT::Curve_2;
@@ -47,7 +47,11 @@ py::object export_arr_conic_traits(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<GT> traits_c(m, "Arr_conic_traits_2");
-  traits_c.def(py::init<>());
+  traits_c.def(py::init<>())
+    .def("construct_curve_2_object", &GT::construct_curve_2_object)
+    .def("construct_x_monotone_curve_2_object",
+         &GT::construct_x_monotone_curve_2_object)
+    ;
 
   struct Concepts {
     Aos_basic_traits_classes<GT> m_basic_traits_classes;
@@ -123,24 +127,8 @@ py::object export_arr_conic_traits(py::module_& m) {
     concepts.m_traits_classes.m_curve_2 =
       new py::class_<Cv>(traits_c, "Curve_2");
     auto& cv_c = *(concepts.m_traits_classes.m_curve_2);
-    cv_c.def(py::init<const Pnt&, const Pnt&>())
-      .def(py::init<const Rat_seg&>())
-      .def(py::init<const Rat_circle&>())
-      .def(py::init<const Rat_circle&, CGAL::Orientation,
-           const Pnt&, const Pnt&>())
-      .def(py::init<const Rat_pnt&, const Rat_pnt&, const Rat_pnt&>())
-      .def(py::init<const Rat_pnt&, const Rat_pnt&, const Rat_pnt&,
-           const Rat_pnt&, const Rat_pnt&>())
-      .def(py::init<const Rational&, const Rational&, const Rational&,
-           const Rational&, const Rational&, const Rational&>())
-      .def(py::init<const Rational&, const Rational&, const Rational&,
-           const Rational&, const Rational&, const Rational&,
-           CGAL::Orientation, const Pnt&, const Pnt&>())
-      .def(py::init<Rational, Rational, Rational, Rational, Rational, Rational,
-           CGAL::Orientation, const Pnt&,
-           Rational, Rational, Rational, Rational, Rational, Rational,
-           const Pnt&,
-           Rational, Rational, Rational, Rational, Rational, Rational>())
+    cv_c.def(py::init<>())
+      .def(py::init<const Cv&>())
       .def("is_valid", &Cv::is_valid)
       .def("r", &Cv::r, ri)
       .def("s", &Cv::s, ri)
@@ -148,13 +136,13 @@ py::object export_arr_conic_traits(py::module_& m) {
       .def("u", &Cv::u, ri)
       .def("v", &Cv::v, ri)
       .def("w", &Cv::w, ri)
-      .def("is_x_monotone", &Cv::is_x_monotone)
-      .def("is_y_monotone", &Cv::is_y_monotone)
+      // .def("is_x_monotone", &Cv::is_x_monotone)
+      // .def("is_y_monotone", &Cv::is_y_monotone)
       .def("is_full_conic", &Cv::is_full_conic)
-      .def("source", &Cv::source, ri)
-      .def("target", &Cv::target, ri)
+      .def("source", py::overload_cast<>(&Cv::source, py::const_), ri)
+      .def("target", py::overload_cast<>(&Cv::target, py::const_), ri)
       .def("orientation", &Cv::orientation)
-      .def("bbox", &Cv::bbox)
+      // .def("bbox", &Cv::bbox)
       .def("set_source", &Cv::set_source)
       .def("set_target", &Cv::set_target)
       ;
@@ -170,11 +158,7 @@ py::object export_arr_conic_traits(py::module_& m) {
       // new py::class_<Xcv, Cv>(traits_c, "X_monotone_curve_2");
       new py::class_<Xcv>(traits_c, "X_monotone_curve_2");
     auto& xcv_c = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
-    xcv_c.def(py::init<>())
-      .def(py::init<const Xcv&>())
-      .def(py::init<const Pnt&, const Pnt&>())
-      .def(py::init<const Algebraic&, const Algebraic&, const Algebraic&,
-           const Pnt&, const Pnt&>())
+    xcv_c
       .def("r", &Xcv::r, ri)
       .def("s", &Xcv::s, ri)
       .def("t", &Xcv::t, ri)
@@ -193,6 +177,61 @@ py::object export_arr_conic_traits(py::module_& m) {
   // Export additional concepts
   export_AosTraits_2<GT>(traits_c, concepts);
   export_AosDirectionalXMonotoneTraits_2<GT>(traits_c, concepts);
+
+  // Export additional curve attributes:
+  using Ctr_cv = GT::Construct_curve_2;
+  using ctr_cv_op0 = Cv(Ctr_cv::*)(const Pnt&, const Pnt&)const;
+  using ctr_cv_op1 = Cv(Ctr_cv::*)(const Rat_seg&)const;
+  using ctr_cv_op2 = Cv(Ctr_cv::*)(const Rat_circle&)const;
+  using ctr_cv_op3 = Cv(Ctr_cv::*)(const Rat_circle&, CGAL::Orientation,
+                                   const Pnt&, const Pnt&)const;
+  using ctr_cv_op4 = Cv(Ctr_cv::*)(const Rat_pnt&, const Rat_pnt&,
+                                   const Rat_pnt&)const;
+  using ctr_cv_op5 = Cv(Ctr_cv::*)(const Rat_pnt&, const Rat_pnt&,
+                                   const Rat_pnt&, const Rat_pnt&,
+                                   const Rat_pnt&)const;
+  using ctr_cv_op6 = Cv(Ctr_cv::*)(const Rational&, const Rational&,
+                                   const Rational&, const Rational&,
+                                   const Rational&, const Rational&)const;
+  using ctr_cv_op7 = Cv(Ctr_cv::*)(const Rational&, const Rational&,
+                                   const Rational&, const Rational&,
+                                   const Rational&, const Rational&,
+                                   CGAL::Orientation,
+                                   const Pnt&, const Pnt&)const;
+  using ctr_cv_op8 = Cv(Ctr_cv::*)(const Rational&, const Rational&,
+                                   const Rational&, const Rational&,
+                                   const Rational&, const Rational&,
+                                   CGAL::Orientation, const Pnt&,
+                                   const Rational&, const Rational&,
+                                   const Rational&, const Rational&,
+                                   const Rational&, const Rational&,
+                                   const Pnt&,
+                                   const Rational&, const Rational&,
+                                   const Rational&, const Rational&,
+                                   const Rational&, const Rational&)const;
+
+  py::class_<Ctr_cv>(traits_c, "Construct_curve_2")
+    .def("__call__", static_cast<ctr_cv_op0>(&Ctr_cv::operator()))
+    .def("__call__", static_cast<ctr_cv_op1>(&Ctr_cv::operator()))
+    .def("__call__", static_cast<ctr_cv_op2>(&Ctr_cv::operator()))
+    .def("__call__", static_cast<ctr_cv_op3>(&Ctr_cv::operator()))
+    .def("__call__", static_cast<ctr_cv_op4>(&Ctr_cv::operator()))
+    .def("__call__", static_cast<ctr_cv_op5>(&Ctr_cv::operator()))
+    .def("__call__", static_cast<ctr_cv_op6>(&Ctr_cv::operator()))
+    .def("__call__", static_cast<ctr_cv_op7>(&Ctr_cv::operator()))
+    .def("__call__", static_cast<ctr_cv_op8>(&Ctr_cv::operator()))
+    ;
+
+  using Ctr_xcv = GT::Construct_x_monotone_curve_2;
+  using ctr_xcv_op0 = Xcv(Ctr_xcv::*)(const Pnt&, const Pnt&)const;
+  using ctr_xcv_op1 = Xcv(Ctr_xcv::*)(const Algebraic&, const Algebraic&,
+                                      const Algebraic&,
+                                      const Pnt&, const Pnt&)const;
+
+  py::class_<Ctr_xcv>(traits_c, "Construct_x_monotone_curve_2")
+    .def("__call__", static_cast<ctr_xcv_op0>(&Ctr_xcv::operator()))
+    .def("__call__", static_cast<ctr_xcv_op1>(&Ctr_xcv::operator()))
+    ;
 
   // Convenient attributes
   add_attr<Integer>(traits_c, "Integer");
