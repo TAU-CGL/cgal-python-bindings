@@ -35,12 +35,8 @@ typedef CGAL::Polygon_nop_decomposition_2<Kernel, Point_2_container>
 
 
 typedef CGAL::CORE_algebraic_number_traits            Nt_traits;
-#if 1
 typedef Nt_traits::Rational                           Rational;
 typedef CGAL::Cartesian<Rational>                     Rat_kernel;
-#else
-typedef Kernel                                        Rat_kernel;
-#endif
 typedef Rat_kernel::FT                                Rat_FT;
 typedef Rat_kernel::Point_2                           Rat_point;
 typedef Rat_kernel::Segment_2                         Rat_segment;

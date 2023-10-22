@@ -29,6 +29,9 @@
 #include <CGAL/Simple_cartesian.h>
 #include <CGAL/Lazy_exact_nt.h>
 #include <CGAL/Gmpq.h>
+#elif CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL
+#include <CGAL/Cartesian.h>
+#include <CGAL/CORE_algebraic_number_traits.h>
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif
@@ -55,6 +58,12 @@ typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
 #elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
 typedef CGAL::Lazy_exact_nt<CGAL::Gmpq>                         NT;
 typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
+
+#elif CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL
+using Nt_traits = CGAL::CORE_algebraic_number_traits;
+using NT = Nt_traits::Rational;
+using Kernel = CGAL::Cartesian<NT>;
+
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif

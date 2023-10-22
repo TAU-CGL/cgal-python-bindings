@@ -90,6 +90,13 @@ Line_2 transform_line(Aff_transformation_2& t, Line_2& l)
 
 //
 void export_kernel(py::module_& m) {
+#if (CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL)
+  if (! add_attr<FT>(m, "FT")) {
+    py::class_<FT> ft_c(m, "FT");
+    export_ft(ft_c);
+  }
+#else
+
   if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
   if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
 
@@ -98,11 +105,11 @@ void export_kernel(py::module_& m) {
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
 
   if (! add_attr<FT>(m, "FT")) {
-    using Fte = FT::Exact_type;
-    using Fta = FT::Approximate_type;
-
     py::class_<FT> ft_c(m, "FT");
     export_ft(ft_c);
+
+    using Fte = FT::Exact_type;
+    using Fta = FT::Approximate_type;
     ft_c.def(py::init<Fte>())
       .def("__init__", [](FT* self, const std::string& str)
                        { new (self) FT(Fte(str)); })
@@ -113,7 +120,8 @@ void export_kernel(py::module_& m) {
       .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} )
       ;
   }
-  #endif
+#endif
+#endif
 
   //class_<RT>(m, "RT")
   //  .def(init<RT::Exact_type>())
