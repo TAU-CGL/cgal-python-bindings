@@ -274,5 +274,3 @@ void export_surface_mesh(py::module_& m) {
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>);
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
 }
-
-namespace py = nanobind;
