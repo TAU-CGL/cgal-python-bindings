@@ -13,6 +13,10 @@
 
 #include "CGALPY/types.hpp"
 #include "CGALPY/polygon_set_2_types.hpp"
+#ifdef CGALPY_HAS_VISUAL
+#define CGAL_USE_BASIC_VIEWER
+#include <CGAL/draw_polygon_set_2.h>
+#endif
 
 namespace py = nanobind;
 
@@ -29,4 +33,12 @@ void export_polygon_set_2(py::module_& m) {
     .def(py::init<const Pwh&>())
     .def(py::init<const Ps2&>())
     ;
+
+#ifdef CGALPY_HAS_VISUAL
+  using Draw = void(*)(const Ps2&, const char*, bool, bool);
+  m.def("draw", static_cast<Draw>(CGAL::draw),
+        py::arg("ps"), py::arg("title") = "",
+        py::arg("draw_vertices") = false,
+        py::arg("draw_unbounded") = false);
+#endif
 }
