@@ -10,11 +10,14 @@
 #include <nanobind/nanobind.h>
 
 #include <CGAL/General_polygon_set_2.h>
+#include <CGAL/IO/Gps_iostream.h>
 
 #include "CGALPY/general_polygon_set_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/append_iterator.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/add_insertion.hpp"
+#include "CGALPY/add_extraction.hpp"
 
 namespace py = nanobind;
 
@@ -268,4 +271,8 @@ void export_general_polygon_set_2(py::module_& m) {
     std::cerr << "bso2::General_polygon_with_holes_2 not registered!\n";
   if (! add_attr<bso2::Arrangement_2>(gps2_c, "Arrangement_2"))
     std::cerr << "bso2::Arrangement_2 not registered!\n";
+
+  add_insertion(gps2_c, "__str__");
+  add_insertion(gps2_c, "__repr__");
+  add_extraction(gps2_c);
 }
