@@ -27,8 +27,11 @@ namespace py = nanobind;
 namespace bso2 {
 
 //
-void complement0(General_polygon_2& pgn, General_polygon_with_holes_2& res)
-{ CGAL::complement(pgn, res); }
+General_polygon_with_holes_2 complement0(General_polygon_2& pgn) {
+  General_polygon_with_holes_2 res;
+  CGAL::complement(pgn, res);
+  return res;
+}
 
 //
 void complement1(General_polygon_with_holes_2& pgn, py::list& lst) {
@@ -137,6 +140,7 @@ void connect_holes(General_polygon_with_holes_2& pwh, py::list& lst) {
 
 //
 void export_boolean_set_operations_2(py::module_& m) {
+  using Pnt = bso2::Geometry_traits_2::Point_2;
   using Pgn = bso2::General_polygon_2;
   using Pwh = bso2::General_polygon_with_holes_2;
 
@@ -166,6 +170,8 @@ void export_boolean_set_operations_2(py::module_& m) {
   m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pgn>);
   m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pwh>);
   m.def("symmetric_difference", &bso2::symmetric_difference_range<Pgn, Pwh>);
+  m.def("oriented_side", &bso2::oriented_side<Pnt, Pgn>);
+  m.def("oriented_side", &bso2::oriented_side<Pnt, Pwh>);
   m.def("oriented_side", &bso2::oriented_side<Pgn, Pgn>);
   m.def("oriented_side", &bso2::oriented_side<Pgn, Pwh>);
   m.def("oriented_side", &bso2::oriented_side<Pwh, Pgn>);
