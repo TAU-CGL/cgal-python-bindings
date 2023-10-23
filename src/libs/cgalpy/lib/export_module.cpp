@@ -36,6 +36,7 @@ void export_polygon_set_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
 void export_spatial_searching(py::module_&);
 void export_surface_mesh(py::module_&);
+void export_surface_sweep_2(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
 void export_visibility_2(py::module_&);
@@ -145,6 +146,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_SURFACE_MESH_BINDINGS
   auto sm_m = m.def_submodule("Sm");
   export_surface_mesh(sm_m);
+#endif
+
+#ifdef CGALPY_SURFACE_SWEEP_2_BINDINGS
+  auto ss2_m = m.def_submodule("Ss2");
+  export_surface_sweep_2(ss2_m);
 #endif
 
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
