@@ -19,6 +19,15 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
 
+// The following might be needed in the future when extraction support is added
+// to specific curves types. At that point we can add support for extraction
+// of general polygons with holes bounded by curves of the specific types.
+
+// #include <CGAL/Gps_circle_segment_traits_2.h>
+// #include <CGAL/CORE_algebraic_number_traits.h>
+// #include <CGAL/Arr_conic_traits_2.h>
+// #include <CGAL/Arr_Bezier_curve_traits_2.h>
+
 namespace py = nanobind;
 
 namespace bso2 {
@@ -274,5 +283,21 @@ void export_general_polygon_set_2(py::module_& m) {
 
   add_insertion(gps2_c, "__str__");
   add_insertion(gps2_c, "__repr__");
-  add_extraction(gps2_c);
+
+  // Support extraction only for geometry traits that do support extraction:
+  // using Cs_pgn = CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2;
+  // using Nt_traits = CGAL::CORE_algebraic_number_traits;
+  // using Rational = Nt_traits::Rational;
+  // using Algebraic = Nt_traits::Algebraic;
+  // using Rat_kernel = CGAL::Cartesian<Rational>;
+  // using Alg_kernel = CGAL::Cartesian<Algebraic>;
+  // using Conic_traits = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
+  // using Conic_pgn = CGAL::Gps_traits_2<Conic_traits>::Polygon_2;
+  // using Bezier_traits = CGAL::Arr_Bezier_curve_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
+  // using Bezier_pgn = CGAL::Gps_traits_2<Bezier_traits>::Polygon_2;
+  // None of the traits above support extraction....
+  // if constexpr ((std::is_same<Gpgn, Cs_pgn>::value) ||
+  //               (std::is_same<Gpgn, Conic_pgn>::value)
+  //               (std::is_same<Gpgn, Bezier_pgn>::value))
+  //   add_extraction(gps2_c);
 }
