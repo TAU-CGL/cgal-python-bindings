@@ -10,9 +10,11 @@
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Polygon_set_2.h>
+#include <CGAL/IO/Gps_iostream.h>
 
 #include "CGALPY/types.hpp"
 #include "CGALPY/polygon_set_2_types.hpp"
+#include "CGALPY/add_extraction.hpp"
 #ifdef CGALPY_HAS_VISUAL
 #define CGAL_USE_BASIC_VIEWER
 #include <CGAL/draw_polygon_set_2.h>
@@ -27,8 +29,8 @@ void export_polygon_set_2(py::module_& m) {
   using Pgn = bso2::General_polygon_2;
   using Pwh = bso2::General_polygon_with_holes_2;
 
-  py::class_<Ps2, Gps2> ps2_co(m, "Polygon_set_2");
-  ps2_co.def(py::init<>())
+  py::class_<Ps2, Gps2> ps2_c(m, "Polygon_set_2");
+  ps2_c.def(py::init<>())
     .def(py::init<const Pgn&>())
     .def(py::init<const Pwh&>())
     .def(py::init<const Ps2&>())
@@ -41,4 +43,6 @@ void export_polygon_set_2(py::module_& m) {
         py::arg("draw_vertices") = false,
         py::arg("draw_unbounded") = false);
 #endif
+
+  add_extraction(ps2_c);
 }
