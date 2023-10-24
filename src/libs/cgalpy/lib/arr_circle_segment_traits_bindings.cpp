@@ -144,5 +144,9 @@ py::object export_arr_circle_segment_traits(py::module_& m) {
 
   traits_c.attr("CoordNT") = cnt_c;
 
+  add_attr<GT::Rational_point_2>(traits_c, "Rational_point_2");
+  add_attr<GT::Rational_segment_2>(traits_c, "Rational_segment_2");
+  add_attr<GT::Rational_circle_2>(traits_c, "Rational_circle_2");
+
   return traits_c;
 }
