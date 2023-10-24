@@ -759,8 +759,18 @@ void export_kernel(py::module_& m) {
   m.def("do_overlap", static_cast<Do_fnc>(&CGAL::do_overlap));
 
   using Cmp3_fnc = CGAL::Comparison_result(*)(const Pnt_3&, const Pnt_3&);
-  m.def("compare_z", static_cast<Cmp3_fnc>(&CGAL::compare_z<Kernel>))
-    ;
+  m.def("compare_z", static_cast<Cmp3_fnc>(&CGAL::compare_z<Kernel>));
+
+  //! From number_utils.h. \todo move to algebraic foundations
+  using Cmp_fnc = CGAL::Comparison_result(*)(const FT&, const FT&);
+  m.def("compare", static_cast<Cmp_fnc>(&CGAL::compare<FT>));
+
+  using Sign_fnc = CGAL::Comparison_result(*)(const FT&);
+  m.def("sign", static_cast<Sign_fnc>(&CGAL::sign<FT>));
+
+  using Square_res = CGAL::Algebraic_structure_traits<FT>::Square::result_type;
+  using Square_fnc = Square_res(*)(const FT&);
+  m.def("square", static_cast<Square_fnc>(&CGAL::square<FT>));
 
   /// @}
 }
