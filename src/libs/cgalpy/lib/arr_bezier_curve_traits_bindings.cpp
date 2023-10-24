@@ -28,10 +28,10 @@ namespace py = nanobind;
 
 namespace aos2 {
 
-// Initialize a Bezier curve from a list of control points..
+// Initialize a Bezier curve from a list of rational control points.
 void init_from_points(Curve_2* cv, py::list& lst) {
-  auto begin = stl_input_iterator<Point_2>(lst);
-  auto end = stl_input_iterator<Point_2>(lst, false);
+  auto begin = stl_input_iterator<Kernel::Point_2>(lst);
+  auto end = stl_input_iterator<Kernel::Point_2>(lst, false);
   new (cv) Curve_2(begin, end);         // placement new
 }
 
