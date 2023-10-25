@@ -1,6 +1,9 @@
 if(NOT TRIANGULATION_2_OPTIONS_FILE_INCLUDED)
 set(TRIANGULATION_2_OPTIONS_FILE_INCLUDED)
 
+######## Heirarchy
+set(CGALPY_TRI2_HIERARCHY false CACHE BOOL "The heirarchy option")
+
 ######## 2D Triangulations intersection tag
 set(CGALPY_TRI2_INTERSECTION_TAG_NCI                            0)
 set(CGALPY_TRI2_INTERSECTION_TAG_NCI_REQUIRING_CONSTRUCTIONS    1)
