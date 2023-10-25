@@ -25,6 +25,7 @@
 #include <CGAL/Gps_segment_traits_2.h>
 #include <CGAL/Gps_circle_segment_traits_2.h>
 #include <CGAL/Boolean_set_operations_2/Gps_default_dcel.h>
+#include <CGAL/Arr_geodesic_arc_on_sphere_traits_2.h>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -121,18 +122,21 @@ struct Face_extended<false, Fb, Data> { typedef Fb type; };
 template <typename Fb, typename Data> struct Face_extended<true, Fb, Data>
 { typedef CGAL::Arr_extended_face<Fb, Data> type; };
 
+// Geometry traits types:
+using Gaost = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
+
 // Aos type
-template <int i, typename GeomTraits, typename Dcel> struct Aos {
-  typedef typename CGAL::Default_planar_topology<GeomTraits, Dcel>::Traits      Topol_traits;
-  typedef CGAL::Arrangement_on_surface_2<GeomTraits, Topol_traits>              aos;
-  typedef CGAL::Arrangement_2<GeomTraits, Dcel>                                 arr;
-  typedef CGAL::Arrangement_with_history_2<GeomTraits, Dcel>                    arr_with_history;
+template <typename GeomTraits, typename Dcel> struct Aos {
+  typedef typename CGAL::Default_planar_topology<GeomTraits, Dcel>::Traits  Topol_traits;
+  typedef CGAL::Arrangement_on_surface_2<GeomTraits, Topol_traits>          aos;
+  typedef CGAL::Arrangement_2<GeomTraits, Dcel>                             arr;
+  typedef CGAL::Arrangement_with_history_2<GeomTraits, Dcel>                arr_with_history;
 };
-template <typename GeomTraits, typename Dcel>
-struct Aos<CGALPY_AOS2_ARRANGEMENT_ON_SURFACE, GeomTraits, Dcel> {
-  typedef CGAL::Arr_spherical_topology_traits_2<GeomTraits, Dcel>               Topol_traits;
-  typedef CGAL::Arrangement_on_surface_2<GeomTraits, Topol_traits>              aos;
-  typedef CGAL::Arrangement_on_surface_with_history_2<GeomTraits, Topol_traits> aos_with_history;
+template <typename Dcel>
+struct Aos<Gaost, Dcel> {
+  typedef CGAL::Arr_spherical_topology_traits_2<Gaost, Dcel>                Topol_traits;
+  typedef CGAL::Arrangement_on_surface_2<Gaost, Topol_traits>               aos;
+  typedef CGAL::Arrangement_on_surface_with_history_2<Gaost, Topol_traits>  aos_with_history;
 };
 
 } // end of aos2 namespace

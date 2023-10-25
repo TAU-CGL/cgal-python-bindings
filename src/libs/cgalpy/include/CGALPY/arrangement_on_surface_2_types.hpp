@@ -117,11 +117,11 @@ typedef Halfedge_extended<is_halfedge_extended(), Hb, py::object>::type H;
 typedef Face_gps<boolean_set_operations_2_bindings()>::type             Fb;
 typedef Face_extended<is_face_extended(), Fb, py::object>::type         F;
 
-typedef CGAL::Arr_dcel_base<V, H, F>                        Dcel;
-typedef Aos<CGALPY_AOS2_TYPE, Ggt, Dcel>::Topol_traits      Topology_traits;
-typedef Aos<CGALPY_AOS2_TYPE, Ggt, Dcel>::aos               Arrangement_on_surface_2;
-typedef Aos<CGALPY_AOS2_TYPE, Ggt, Dcel>::arr               Arrangement_2;
-typedef Aos<CGALPY_AOS2_TYPE, Ggt, Dcel>::arr_with_history  Arrangement_with_history_2;
+typedef CGAL::Arr_dcel_base<V, H, F>            Dcel;
+typedef Aos<Ggt, Dcel>::Topol_traits            Topology_traits;
+typedef Aos<Ggt, Dcel>::aos                     Arrangement_on_surface_2;
+typedef Aos<Ggt, Dcel>::arr                     Arrangement_2;
+typedef Aos<Ggt, Dcel>::arr_with_history        Arrangement_with_history_2;
 
 // Define the geometry traits hierarchy:
 typedef Agt                                     Arr_geometry_traits_2;
