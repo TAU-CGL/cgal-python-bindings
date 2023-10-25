@@ -26,7 +26,7 @@ PolygonMesh convex_hull_3(py::list& lst) {
   return pm;
 }
 
-void export_convex_hull_3_bindings(py::module_& m) {
+void export_convex_hull_3(py::module_& m) {
   using Pm = ch3::Polygonal_mesh;
 
   m.def("convex_hull_3", &convex_hull_3<Pm>);

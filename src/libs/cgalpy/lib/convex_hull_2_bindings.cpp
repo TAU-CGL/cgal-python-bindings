@@ -138,7 +138,7 @@ py::list upper_hull_points_2(py::list& lst) {
   return res;
 }
 
-void export_convex_hull_2_bindings(py::module_& m) {
+void export_convex_hull_2(py::module_& m) {
   m.def("ch_akl_toussaint", &ch_akl_toussaint);
   m.def("ch_bykat", &ch_bykat);
   m.def("ch_eddy", &ch_eddy);
