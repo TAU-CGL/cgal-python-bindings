@@ -1,19 +1,6 @@
 if(NOT ARRANGEMENT_ON_SURFACE_2_OPTIONS_FILE_INCLUDED)
 set(ARRANGEMENT_ON_SURFACE_2_OPTIONS_FILE_INCLUDED)
 
-# Arrangement type options
-set(CGALPY_AOS2_ARRANGEMENT                         0)
-set(CGALPY_AOS2_ARRANGEMENT_ON_SURFACE              1)
-
-# Arrangement type name
-set(CGALPY_AOS2_TYPE_SHORT_NAMES arr aos)
-set(CGALPY_AOS2_TYPE_NAMES arrangement arrangementOnSurface)
-
-# Arrangement type default
-SET(CGALPY_AOS2_TYPE_NAME "arrangement" CACHE STRING "The arrangement type to use")
-set(CGALPY_AOS2_TYPE ${CGALPY_AOS2_ARRANGEMENT} CACHE INTERNAL "")
-set_property(CACHE CGALPY_AOS2_TYPE_NAME PROPERTY STRINGS arrangement arrangementOnSurface)
-
 # Geometry Traits Options
 set(CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS              0)
 set(CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS             1)
@@ -41,15 +28,6 @@ option(CGALPY_AOS2_HALFEDGE_EXTENDED "Extend the Halfedge record")
 option(CGALPY_AOS2_FACE_EXTENDED "Extend the Face record")
 
 # Selection
-function(select_arrangement_type)
-  if     ("${CGALPY_AOS2_TYPE_NAME}" STREQUAL "arrangement")
-    set(CGALPY_AOS2_TYPE ${CGALPY_AOS2_ARRANGEMENT} CACHE INTERNAL "")
-  elseif ("${CGALPY_AOS2_TYPE_NAME}" STREQUAL "arrangementOnSurface")
-    set(CGALPY_AOS2_TYPE ${CGALPY_AOS2_ARRANGEMENT_ON_SURFACE} CACHE INTERNAL "")
-  endif()
-  add_definitions(-DCGALPY_AOS2_TYPE=${CGALPY_AOS2_TYPE})
-endfunction()
-
 function(select_aos2_geometry_traits)
   if     ("${CGALPY_AOS2_GEOMETRY_TRAITS_NAME}" STREQUAL "linear")
     set(CGALPY_AOS2_GEOMETRY_TRAITS ${CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS} CACHE INTERNAL "")
@@ -93,7 +71,6 @@ endfunction()
 
 function(select_arrangement_2)
   if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
-    select_arrangement_type()
     select_aos2_geometry_traits()
     select_aos2_dcel()
     select_aos2_point_location()
@@ -102,23 +79,21 @@ function(select_arrangement_2)
 endfunction()
 
 function(get_arrangement_on_surface_2_lib_name ret)
-  list(GET CGALPY_AOS2_TYPE_SHORT_NAMES ${CGALPY_AOS2_TYPE} part1)
-  capitalize_first(part1)
-  list(GET CGALPY_AOS2_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_AOS2_GEOMETRY_TRAITS} part2)
-  capitalize_first(part2)
+  list(GET CGALPY_AOS2_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_AOS2_GEOMETRY_TRAITS} pasrt1)
+  capitalize_first(pasrt1)
   if(${CGALPY_AOS2_VERTEX_EXTENDED})
-    set(part3 "Ve")
+    set(part2 "Ve")
   endif()
   if(${CGALPY_AOS2_HALFEDGE_EXTENDED})
-    set(part4 "He")
+    set(part3 "He")
   endif()
   if(${CGALPY_AOS2_FACE_EXTENDED})
-    set(part5 "Fe")
+    set(part4 "Fe")
   endif()
   if(${CGALPY_AOS2_POINT_LOCATION_BINDINGS})
-    set(part6 "Pl")
+    set(part5 "Pl")
   endif()
-  set(${ret} "aos2${part1}${part2}${part3}${part4}${part5}${part6}" PARENT_SCOPE)
+  set(${ret} "aos2${pasrt1}${part2}${part3}${part4}${part5}" PARENT_SCOPE)
 endfunction()
 
 endif()
