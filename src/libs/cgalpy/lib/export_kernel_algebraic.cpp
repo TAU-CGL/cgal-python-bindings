@@ -47,6 +47,9 @@ void export_alg_real(py::module_& m) {
   using Bound = Arithmetic_kernel::Rational;
 
   using Cmp = CGAL::Comparison_result(Ar::*)(const Ar&) const;
+
+  if (add_attr<Ar>(m, "Algebraic_real_1")) return;
+
   py::class_<Ar> ar1_c(m, "Algebraic_real_1");
   ar1_c.def(py::init<>())
     .def(py::init<Ar&>())
@@ -95,6 +98,8 @@ void export_kernal_algebraic(py::module_& m) {
   using Rational = Arithmetic_kernel::Rational;
   using Solve = Alg_kernel::Solve_1;
 
+  if (add_attr<Alg_kernel>(m, "Algebraic_kernel_d_1")) return;
+
   py::class_<Alg_kernel> ak_c(m, "Algebraic_kernel_d_1");
   ak_c.def(py::init<>())
     .def("solve_1_object",
@@ -105,5 +110,5 @@ void export_kernal_algebraic(py::module_& m) {
     .def("__call__", &solve_1)
     ;
 
-  if (! add_attr<Ar>(m, "Algebraic_real_1")) export_alg_real(m);
+  export_alg_real(m);
 }

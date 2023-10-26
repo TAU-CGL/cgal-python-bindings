@@ -141,7 +141,7 @@ void export_AosOpenBoundaryTraits_2 (C& c, Concepts& concepts) {
   static bool exported = false;
   if (exported) return;
 
-  auto& classes = concepts.m_open_boundary_traits_classes;
+  auto& classes = concepts.m_aos_open_boundary_traits_2_classes;
 
   export_AosBasicTraits_2<T>(c, concepts);
   export_Compare_x_on_boundary_2<T>(c, classes, Bt_approach_side());

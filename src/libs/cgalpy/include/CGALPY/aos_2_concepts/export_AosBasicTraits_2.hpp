@@ -7,8 +7,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_EXPORT_AOSBASICTRAITS_HPP
-#define CGALPY_EXPORT_AOSBASICTRAITS_HPP
+#ifndef CGALPY_EXPORT_AOSBASICTRAITS_2_HPP
+#define CGALPY_EXPORT_AOSBASICTRAITS_2_HPP
 
 #include <nanobind/nanobind.h>
 
@@ -54,7 +54,7 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
   using Compare_y_at_x_2 = typename T::Compare_y_at_x_2;
   using Compare_y_at_x_right_2 = typename T::Compare_y_at_x_right_2;
 
-  auto& classes = concepts.m_basic_traits_classes;
+  auto& classes = concepts.m_aos_basic_traits_2_classes;
 
   // Point_2
   if (! add_attr<Point_2>(c, "Point_2")) {

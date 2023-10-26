@@ -29,36 +29,39 @@
 
 namespace py = nanobind;
 
-py::object export_arr_conic_traits(py::module_& m) {
+void export_arr_conic_traits_2(py::module_& m) {
   //TODO export RatKernel, AlgKernel
   using Nt_traits = CGAL::CORE_algebraic_number_traits;
   using Rat_kernel = CGAL::Cartesian<Nt_traits::Rational>;
   using Alg_kernel = CGAL::Cartesian<Nt_traits::Algebraic>;
-  using GT = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
-  using Pnt = GT::Point_2;
-  using Cv = GT::Curve_2;
-  using Xcv = GT::X_monotone_curve_2;
+  using Gt = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
+  using Pnt = Gt::Point_2;
+  using Cv = Gt::Curve_2;
+  using Xcv = Gt::X_monotone_curve_2;
   using Integer = Nt_traits::Integer;
   using Rational = Nt_traits::Rational;
   using Algebraic = Alg_kernel::FT;
   using Rat_pnt = Rat_kernel::Point_2;
   using Rat_seg = Rat_kernel::Segment_2;
   using Rat_circle = Rat_kernel::Circle_2;
+
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<GT> traits_c(m, "Arr_conic_traits_2");
+  if (add_attr<Gt>(m, "Arr_conic_traits_2")) return;
+
+  py::class_<Gt> traits_c(m, "Arr_conic_traits_2");
   traits_c.def(py::init<>())
-    .def("construct_curve_2_object", &GT::construct_curve_2_object)
+    .def("construct_curve_2_object", &Gt::construct_curve_2_object)
     .def("construct_x_monotone_curve_2_object",
-         &GT::construct_x_monotone_curve_2_object)
+         &Gt::construct_x_monotone_curve_2_object)
     ;
 
   struct Concepts {
-    Aos_basic_traits_classes<GT> m_basic_traits_classes;
-    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
-    Aos_traits_classes<GT> m_traits_classes;
-    Aos_directional_x_monotone_traits_classes<GT>
-      m_directional_x_monotone_traits_classes;
+    Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
+    Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
+    Aos_traits_classes<Gt> m_aos_traits_2_classes;
+    Aos_directional_x_monotone_traits_classes<Gt>
+      m_aos_directional_x_monotone_traits_2_classes;
   } concepts;
 
   if (! add_attr<Integer>(traits_c, "Integer")) {
@@ -69,7 +72,7 @@ py::object export_arr_conic_traits(py::module_& m) {
 
     add_insertion(int_c, "__str__");
     add_insertion(int_c, "__repr__");
-}
+  }
 
   if (! add_attr<Rational>(traits_c, "Rational")) {
     py::class_<Rational> rat_c(traits_c, "Rational");
@@ -108,9 +111,9 @@ py::object export_arr_conic_traits(py::module_& m) {
   }
 
   if (! add_attr<Pnt>(traits_c, "Point_2")) {
-    concepts.m_basic_traits_classes.m_point_2 =
+    concepts.m_aos_basic_traits_2_classes.m_point_2 =
       new py::class_<Pnt>(traits_c, "Point_2");
-    auto& pnt_c = *(concepts.m_basic_traits_classes.m_point_2);
+    auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
     pnt_c.def(py::init<const Algebraic&, const Algebraic&>())
       .def(py::init<const Algebraic&, const Algebraic&, const Algebraic&>())
       ;
@@ -124,9 +127,9 @@ py::object export_arr_conic_traits(py::module_& m) {
   // aos_TraitsBasicTraitse_2, since X_monotone_curve_2 derives from Curve_2.
   // Export Cv:
   if (! add_attr<Cv>(traits_c, "Curve_2")) {
-    concepts.m_traits_classes.m_curve_2 =
+    concepts.m_aos_traits_2_classes.m_curve_2 =
       new py::class_<Cv>(traits_c, "Curve_2");
-    auto& cv_c = *(concepts.m_traits_classes.m_curve_2);
+    auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
     cv_c.def(py::init<>())
       .def(py::init<const Cv&>())
       .def("is_valid", &Cv::is_valid)
@@ -154,10 +157,10 @@ py::object export_arr_conic_traits(py::module_& m) {
   // Export X_monotone_curve_2:
   if (! add_attr<Xcv>(traits_c, "X_monotone_curve_2")) {
     // The inheritance Curve_2 - X_monotone_curve_2 is currently private:
-    concepts.m_basic_traits_classes.m_x_monotone_curve_2 =
+    concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2 =
       // new py::class_<Xcv, Cv>(traits_c, "X_monotone_curve_2");
       new py::class_<Xcv>(traits_c, "X_monotone_curve_2");
-    auto& xcv_c = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
+    auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
     xcv_c
       .def("r", &Xcv::r, ri)
       .def("s", &Xcv::s, ri)
@@ -175,11 +178,11 @@ py::object export_arr_conic_traits(py::module_& m) {
   }
 
   // Export additional concepts
-  export_AosTraits_2<GT>(traits_c, concepts);
-  export_AosDirectionalXMonotoneTraits_2<GT>(traits_c, concepts);
+  export_AosTraits_2<Gt>(traits_c, concepts);
+  export_AosDirectionalXMonotoneTraits_2<Gt>(traits_c, concepts);
 
   // Export additional curve attributes:
-  using Ctr_cv = GT::Construct_curve_2;
+  using Ctr_cv = Gt::Construct_curve_2;
   using ctr_cv_op0 = Cv(Ctr_cv::*)(const Pnt&, const Pnt&)const;
   using ctr_cv_op1 = Cv(Ctr_cv::*)(const Rat_seg&)const;
   using ctr_cv_op2 = Cv(Ctr_cv::*)(const Rat_circle&)const;
@@ -222,7 +225,7 @@ py::object export_arr_conic_traits(py::module_& m) {
     .def("__call__", static_cast<ctr_cv_op8>(&Ctr_cv::operator()))
     ;
 
-  using Ctr_xcv = GT::Construct_x_monotone_curve_2;
+  using Ctr_xcv = Gt::Construct_x_monotone_curve_2;
   using ctr_xcv_op0 = Xcv(Ctr_xcv::*)(const Pnt&, const Pnt&)const;
   using ctr_xcv_op1 = Xcv(Ctr_xcv::*)(const Algebraic&, const Algebraic&,
                                       const Algebraic&,
@@ -237,6 +240,4 @@ py::object export_arr_conic_traits(py::module_& m) {
   add_attr<Integer>(traits_c, "Integer");
   add_attr<Rational>(traits_c, "Rational");
   add_attr<Algebraic>(traits_c, "Algebraic");
-
-  return traits_c;
 }

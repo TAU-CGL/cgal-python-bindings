@@ -10,21 +10,25 @@
 #define CGALPY_ENVELOPE_3TYPES_HPP
 
 #include <CGAL/envelope_3.h>
+#include <CGAL/Env_surface_data_traits_3.h>
 
+#include "CGALPY/kernel_types.hpp"
 #include "CGALPY/envelope_3_config.hpp"
 
 namespace env3 {
 
 using Bgt = Base_tr<CGALPY_ENV3_GEOMETRY_TRAITS, Kernel>::type;
-using Cnv = CGAL::_Default_convert_functor<py::object, py::object>
+using Cnv = CGAL::_Default_convert_func<py::object, py::object>;
 using Gt = Tr<surface_data(), Bgt, py::object, py::object, Cnv>::type;
-using Envelope_diagram_on_surface_2 = CGAL::Envelope_diagram_on_surface_2<Gt, Tt>;
-
-using Surface_3 = Envelope_diagram_on_surface_2::Surface_3;
-using Geometry_traits_2 = Envelope_diagram_on_surface_2::Traits_3;
-using Topology_traits = Envelope_diagram_on_surface_2::TopTraits;
-using Dcel = Envelope_diagram_on_surface_2::Env_dcel;
+using Dcel = CGAL::Envelope_3::Envelope_pm_dcel<Gt, Gt::Xy_monotone_surface_3>;
+using Tt = CGAL::Default_planar_topology<Gt, Dcel>::Traits;
+using Envelope_diagram_on_surface_2 =
+  CGAL::Envelope_diagram_on_surface_2<Gt, Tt>;
 using Envelope_diagram_2 = CGAL::Envelope_diagram_2<Gt, Dcel>;
+
+using Geometry_traits_3 = Envelope_diagram_on_surface_2::Traits_3;
+using Topology_traits = Envelope_diagram_on_surface_2::TopTraits;
+using Surface_3 = Geometry_traits_3::Surface_3;
 
 }
 

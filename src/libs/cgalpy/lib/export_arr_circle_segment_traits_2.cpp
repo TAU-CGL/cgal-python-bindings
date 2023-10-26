@@ -30,28 +30,30 @@ double coordNT_to_double(Geometry_traits_2::CoordNT& c)
 
 }
 
-py::object export_arr_circle_segment_traits(py::module_& m) {
-  using GT = CGAL::Arr_circle_segment_traits_2<Kernel>;
-  using CoordNT = GT::CoordNT;
+void export_arr_circle_segment_traits_2(py::module_& m) {
+  using Gt = CGAL::Arr_circle_segment_traits_2<Kernel>;
+  using Coord_nt = Gt::CoordNT;
 
-  py::class_<CoordNT> cnt_c(m, "CoordNT");
+  if (add_attr<Gt>(m, "Arr_circle_segment_traits_2")) return;
+
+  py::class_<Coord_nt> cnt_c(m, "CoordNT");
   cnt_c.def(py::init<>())
-    .def(py::init<CoordNT&>())
+    .def(py::init<Coord_nt&>())
     .def(py::init<int&>())
-    .def(py::init<CoordNT::NT&>())
+    .def(py::init<Coord_nt::NT&>())
     .def(py::init<int, int, int>())
-    .def(py::init<CoordNT::NT, CoordNT::NT, CoordNT::ROOT>())
+    .def(py::init<Coord_nt::NT, Coord_nt::NT, Coord_nt::ROOT>())
     .def(py::init<FT, FT, int>())
-    .def("a0", py::overload_cast<>(&CoordNT::a0))
-    .def("a1", py::overload_cast<>(&CoordNT::a1))
-    .def("root", py::overload_cast<>(&CoordNT::root, py::const_))
-    .def("is_extended", &CoordNT::is_extended)
-    .def("simplify", &CoordNT::simplify)
-    .def("is_zero", &CoordNT::is_zero)
-    .def("sign", &CoordNT::sign)
-    .def("abs", &CoordNT::abs)
+    .def("a0", py::overload_cast<>(&Coord_nt::a0))
+    .def("a1", py::overload_cast<>(&Coord_nt::a1))
+    .def("root", py::overload_cast<>(&Coord_nt::root, py::const_))
+    .def("is_extended", &Coord_nt::is_extended)
+    .def("simplify", &Coord_nt::simplify)
+    .def("is_zero", &Coord_nt::is_zero)
+    .def("sign", &Coord_nt::sign)
+    .def("abs", &Coord_nt::abs)
     .def("to_double", &aos2::coordNT_to_double)
-    //.def("compare", &CoordNT::compare)
+    //.def("compare", &Coord_nt::compare)
     .def(py::self == py::self)
     .def(py::self != py::self)
     .def(py::self != py::self)
@@ -72,23 +74,23 @@ py::object export_arr_circle_segment_traits(py::module_& m) {
   add_insertion(cnt_c, "__str__");
   add_insertion(cnt_c, "__repr__");
 
-  py::class_<GT> traits_c(m, "Arr_circle_segment_traits_2");
+  py::class_<Gt> traits_c(m, "Arr_circle_segment_traits_2");
   traits_c.def(py::init<>());
   struct Concepts {
-    Aos_basic_traits_classes<GT> m_basic_traits_classes;
-    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
-    Aos_traits_classes<GT> m_traits_classes;
-    Aos_directional_x_monotone_traits_classes<GT>
-      m_directional_x_monotone_traits_classes;
+    Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
+    Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
+    Aos_traits_classes<Gt> m_aos_traits_2_classes;
+    Aos_directional_x_monotone_traits_classes<Gt>
+      m_aos_directional_x_monotone_traits_2_classes;
   } concepts;
-  export_AosTraits_2<GT>(traits_c, concepts);
-  export_AosDirectionalXMonotoneTraits_2<GT>(traits_c, concepts);
+  export_AosTraits_2<Gt>(traits_c, concepts);
+  export_AosDirectionalXMonotoneTraits_2<Gt>(traits_c, concepts);
 
-  auto& pnt_c = *(concepts.m_basic_traits_classes.m_point_2);
+  auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
   pnt_c.def(py::init<FT&, FT&>())
-    .def(py::init<CoordNT&, CoordNT&>())
-    .def(py::init<FT&, CoordNT&>())
-    .def(py::init<CoordNT&, FT&>())
+    .def(py::init<Coord_nt&, Coord_nt&>())
+    .def(py::init<FT&, Coord_nt&>())
+    .def(py::init<Coord_nt&, FT&>())
     .def(py::init<int, int>())
     .def("x", &aos2::Point_2::x)
     .def("y", &aos2::Point_2::y)
@@ -100,7 +102,7 @@ py::object export_arr_circle_segment_traits(py::module_& m) {
   add_insertion(pnt_c, "__str__");
   add_insertion(pnt_c, "__repr__");
 
-  auto& xcv_c = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
+  auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
   xcv_c
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
@@ -121,7 +123,7 @@ py::object export_arr_circle_segment_traits(py::module_& m) {
   add_insertion(xcv_c, "__str__");
   add_insertion(xcv_c, "__repr__");
 
-  auto& cv_c = *(concepts.m_traits_classes.m_curve_2);
+  auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
   cv_c.def(py::init<Segment_2&>())
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
@@ -142,11 +144,9 @@ py::object export_arr_circle_segment_traits(py::module_& m) {
     .def("supporting_circle", &aos2::Curve_2::supporting_circle)
     ;
 
-  traits_c.attr("CoordNT") = cnt_c;
+  traits_c.attr("Coord_nt") = cnt_c;
 
-  add_attr<GT::Rational_point_2>(traits_c, "Rational_point_2");
-  add_attr<GT::Rational_segment_2>(traits_c, "Rational_segment_2");
-  add_attr<GT::Rational_circle_2>(traits_c, "Rational_circle_2");
-
-  return traits_c;
+  add_attr<Gt::Rational_point_2>(traits_c, "Rational_point_2");
+  add_attr<Gt::Rational_segment_2>(traits_c, "Rational_segment_2");
+  add_attr<Gt::Rational_circle_2>(traits_c, "Rational_circle_2");
 }

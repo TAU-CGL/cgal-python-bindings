@@ -28,7 +28,7 @@ void export_AosConstructXMonotoneCurveTraits_2(C c, Concepts& concepts) {
   using Xcv = typename T::X_monotone_curve_2;
   using Ctr_xcv = typename T::Construct_x_monotone_curve_2;
 
-  auto& classes = concepts.m_construct_x_monotone_curve_traits_classes;
+  auto& classes = concepts.m_aos_construct_x_monotone_curve_traits_2_classes;
 
   using Ctr_xcv_fnc = Xcv(Ctr_xcv::*)(const Pnt&, const Pnt&) const;
   classes.m_construct_x_monotone_curve_2 =

@@ -38,33 +38,36 @@ void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
-py::object export_arr_linear_traits(py::module_& m) {
-  using GT = CGAL::Arr_linear_traits_2<Kernel>;
-  using Pnt = GT::Point_2;
-  using Cv = GT::Curve_2;
+void export_arr_linear_traits_2(py::module_& m) {
+  using Gt = CGAL::Arr_linear_traits_2<Kernel>;
+  using Pnt = Gt::Point_2;
+  using Cv = Gt::Curve_2;
   using overload = void (Cv::*)();
-  using Segment = GT::Segment_2;
-  using Ray = GT::Ray_2;
-  using Line = GT::Line_2;
+  using Segment = Gt::Segment_2;
+  using Ray = Gt::Ray_2;
+  using Line = Gt::Line_2;
+
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<GT> traits_c(m, "Arr_linear_traits_2");
+  if (add_attr<Gt>(m, "Arr_linear_traits_2")) return;
+
+  py::class_<Gt, Kernel> traits_c(m, "Arr_linear_traits_2");
   struct Concepts {
-    Aos_basic_traits_classes<GT> m_basic_traits_classes;
-    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
-    Aos_traits_classes<GT> m_traits_classes;
-    Aos_landmark_traits_classes<GT> m_landmark_traits_classes;
-    Aos_open_boundary_traits_classes<GT> m_open_boundary_traits_classes;
-    Aos_approximate_traits_classes<GT> m_approximate_traits_classes;
-    Aos_construct_x_monotone_curve_traits_classes<GT>
-      m_construct_x_monotone_curve_traits_classes;
+    Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
+    Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
+    Aos_traits_classes<Gt> m_aos_traits_2_classes;
+    Aos_landmark_traits_classes<Gt> m_aos_landmark_traits_2_classes;
+    Aos_open_boundary_traits_classes<Gt> m_aos_open_boundary_traits_2_classes;
+    Aos_approximate_traits_classes<Gt> m_aos_approximate_traits_2_classes;
+    Aos_construct_x_monotone_curve_traits_classes<Gt>
+      m_aos_construct_x_monotone_curve_traits_2_classes;
   };
   Concepts concepts;
-  export_AosTraits_2<GT>(traits_c, concepts);
-  export_AosLandmarkTraits_2<GT>(traits_c, concepts);
-  export_AosOpenBoundaryTraits_2<GT>(traits_c, concepts);
+  export_AosTraits_2<Gt>(traits_c, concepts);
+  export_AosLandmarkTraits_2<Gt>(traits_c, concepts);
+  export_AosOpenBoundaryTraits_2<Gt>(traits_c, concepts);
 
-  auto& cv_c = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
+  auto& cv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
   cv_c.def(py::init_implicit<const Segment&>())
     .def(py::init_implicit<const Ray&>())
     .def(py::init_implicit<const Line&>())
@@ -98,6 +101,4 @@ py::object export_arr_linear_traits(py::module_& m) {
 
   add_insertion(cv_c, "__str__");
   add_insertion(cv_c, "__repr__");
-
-  return traits_c;
 }

@@ -105,7 +105,7 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   using Ctr_holes = typename T::Construct_holes;
   using Is_unbounded = typename T::Is_unbounded;
 
-  auto& classes = concepts.m_traits_classes;
+  auto& classes = concepts.m_gps_traits_2_classes;
 
   // `Pgn` (resp. Pwh) is either an instance of `CGAL::Polygon_2` (resp.
   // `CGAL::Polygon_with_holes_2`) or an instance of `CGAL::General_polygon_2`

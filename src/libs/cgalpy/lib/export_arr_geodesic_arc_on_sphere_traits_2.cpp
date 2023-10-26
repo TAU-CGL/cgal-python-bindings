@@ -15,19 +15,22 @@
 
 namespace py = nanobind;
 
-py::object export_arr_geodesic_arc_on_sphere_traits() {
-  using GT = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
+py::object export_arr_geodesic_arc_on_sphere_traits_2() {
+  using Gt = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
 
-  auto traits = py::class_<GT>("Arr_geodesic_arc_on_sphere_traits_2")
-    .def(py::init<>());
+  if (add_attr<Gt>(m, "Arr_geodesic_arc_on_sphere_traits_2")) return;
+
+  py::class_<Gt, Kernel> traits_c("Arr_geodesic_arc_on_sphere_traits_2")
+    .def(py::init<>())
+    ;
+
   struct Concepts {
-    Aos_basic_traits_classes<GT> m_basic_traits_classes;
-    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
-    Aos_traits_classes<GT> m_traits_classes;
-    Aos_directional_x_monotone_traits_classes<GT> m_directional_x_monotone_traits_classes;
+    Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
+    Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
+    Aos_traits_classes<Gt> m_traits_classes;
+    Aos_directional_x_monotone_traits_classes<Gt>
+      m_aos_directional_x_monotone_traits_2_classes;
   } concepts;
-  export_AosTraits_2<GT, Return_by_value>(traits, concepts);
-  export_AosDirectionalXMonotoneTraits_2<GT, Return_by_value>(traits, concepts);
-
-  return traits;
+  export_AosTraits_2<Gt, Return_by_value>(traits_c, concepts);
+  export_AosDirectionalXMonotoneTraits_2<Gt, Return_by_value>(traits_c, concepts);
 }

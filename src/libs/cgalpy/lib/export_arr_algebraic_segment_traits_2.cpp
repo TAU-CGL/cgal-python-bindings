@@ -108,11 +108,11 @@ py::class_<typename PT::Swap> bind_swap(py::module_& m, const char* name) {
 template<typename T>
 T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 
-py::object export_arr_algebraic_segment_traits(py::module_& m) {
+void export_arr_algebraic_segment_traits_2(py::module_& m) {
   using Integer = CORE::BigInt;
-  using GT = CGAL::Arr_algebraic_segment_traits_2<Integer>;
-  using Cv = GT::Curve_2;
-  using Xcv = GT::X_monotone_curve_2;
+  using Gt = CGAL::Arr_algebraic_segment_traits_2<Integer>;
+  using Cv = Gt::Curve_2;
+  using Xcv = Gt::X_monotone_curve_2;
 
   using Alg_kernel_d_1 = CGAL::Algebraic_kernel_d_1<Integer>;
   using Alg_kernel_d_2 = CGAL::Algebraic_curve_kernel_2<Alg_kernel_d_1>;
@@ -121,6 +121,8 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
   using Ar = Alg_kernel_d_2::Algebraic_real_1;
   using Pt1 = CGAL::Polynomial_traits_d<Polynomial_1>;
   using Pt2 = CGAL::Polynomial_traits_d<Polynomial_2>;
+
+  if (add_attr<Gt>(m, "Arr_algebraic_segment_traits")) return;
 
   py::class_<Integer> integer_c(m, "Integer");
   integer_c.def(py::init<>())
@@ -199,23 +201,23 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
   m.def("ipower", &ipower<aos2::Polynomial_1>);
   m.def("ipower", &ipower<aos2::Polynomial_2>);
 
-  py::class_<GT> traits_c(m, "Arr_algebraic_segment_traits");
+  py::class_<Gt> traits_c(m, "Arr_algebraic_segment_traits");
   struct Concepts {
-    Aos_basic_traits_classes<GT> m_basic_traits_classes;
-    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
-    Aos_traits_classes<GT> m_traits_classes;
+    Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
+    Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
+    Aos_traits_classes<Gt> m_aos_traits_2_classes;
   };
   Concepts concepts;
-  export_AosTraits_2<GT>(traits_c, concepts);
-  traits_c.def("construct_curve_2_object", &GT::construct_curve_2_object)
-    .def("construct_point_2_object", &GT::construct_point_2_object)
+  export_AosTraits_2<Gt>(traits_c, concepts);
+  traits_c.def("construct_curve_2_object", &Gt::construct_curve_2_object)
+    .def("construct_point_2_object", &Gt::construct_point_2_object)
     .def("construct_x_monotone_segment_2_object",
-         &GT::construct_x_monotone_segment_2_object)
+         &Gt::construct_x_monotone_segment_2_object)
     ;
 
-  auto& pnt_c = *(concepts.m_basic_traits_classes.m_point_2);
-  pnt_c.def("curve", &GT::Point_2::curve)
-    .def("arcno", &GT::Point_2::arcno)
+  auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
+  pnt_c.def("curve", &Gt::Point_2::curve)
+    .def("arcno", &Gt::Point_2::arcno)
     .def("to_double", &to_double)
     .def(py::self == py::self)
     .def(py::self != py::self)
@@ -229,7 +231,7 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
   add_insertion(pnt_c, "__str__");
   add_insertion(pnt_c, "__repr__");
 
-  auto& xcv_c = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
+  auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
   xcv_c.def("curve", &Xcv::curve)
     .def("is_vertical", &Xcv::is_vertical)
     .def("is_finite", &Xcv::is_finite)
@@ -238,16 +240,16 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
     .def("x", &Xcv::x)
     ;
 
-  auto& cv_c = *(concepts.m_traits_classes.m_curve_2);
+  auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
   cv_c.def("polynomial_2", &Cv::polynomial_2)
     ;
 
-  using Ctr_cv = GT::Construct_curve_2;
+  using Ctr_cv = Gt::Construct_curve_2;
   py::class_<Ctr_cv>(traits_c, "Construct_curve_2")
     .def("__call__", &Ctr_cv::operator());
   ;
 
-  using Ctr_pnt = GT::Construct_point_2;
+  using Ctr_pnt = Gt::Construct_point_2;
   py::class_<Ctr_pnt> ctr_pnt_c(traits_c, "Construct_point_2");
   export_ctr_pnt_operator<Ar, Cv, int>(ctr_pnt_c);
   export_ctr_pnt_operator<Ar, Xcv>(ctr_pnt_c);
@@ -256,19 +258,17 @@ py::object export_arr_algebraic_segment_traits(py::module_& m) {
   export_ctr_pnt_operator<Integer, Integer>(ctr_pnt_c);
   export_ctr_pnt_operator<int, int>(ctr_pnt_c);
 
-  using Ctr_xseg = GT::Construct_x_monotone_segment_2;
+  using Ctr_xseg = Gt::Construct_x_monotone_segment_2;
   py::class_<Ctr_xseg>(traits_c, "Construct_x_monotone_segment_2")
     .def("__call__", &ctr_xseg_operator0)
     .def("__call__", &ctr_xseg_operator1)
     .def("__call__", &ctr_xseg_operator2)
     ;
 
-  py::enum_<GT::Site_of_point>(traits_c, "Site_of_point")
-    .value("POINT_IN_INTERIOR", GT::Site_of_point::POINT_IN_INTERIOR)
-    .value("MIN_ENDPOINT", GT::Site_of_point::MIN_ENDPOINT)
-    .value("MAX_ENDPOINT", GT::Site_of_point::MAX_ENDPOINT)
+  py::enum_<Gt::Site_of_point>(traits_c, "Site_of_point")
+    .value("POINT_IN_INTERIOR", Gt::Site_of_point::POINT_IN_INTERIOR)
+    .value("MIN_ENDPOINT", Gt::Site_of_point::MIN_ENDPOINT)
+    .value("MAX_ENDPOINT", Gt::Site_of_point::MAX_ENDPOINT)
     .export_values()
     ;
-
-  return traits_c;
 }

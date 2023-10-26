@@ -46,7 +46,7 @@ void export_approximate_point(C& c, Concepts& concepts, bool) {
   }
 
   // Bind the operator
-  auto& classes = concepts.m_approximate_traits_classes;
+  auto& classes = concepts.m_aos_approximate_traits_2_classes;
   classes.m_approximate_2->def("__call__",
                                static_cast<ovld2>(&Approximate_2::operator()));
 }
@@ -64,7 +64,7 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
   using Ant = typename T::Approximate_number_type;
   using Ak = typename T::Approximate_kernel;
 
-  auto& classes = concepts.m_approximate_traits_classes;
+  auto& classes = concepts.m_aos_approximate_traits_2_classes;
 
   classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
 

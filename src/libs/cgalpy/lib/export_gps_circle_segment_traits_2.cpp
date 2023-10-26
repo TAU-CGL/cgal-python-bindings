@@ -19,17 +19,19 @@
 namespace py = nanobind;
 
 // Export the instance Gps_circle_segment_traits_2 traits <Kernel>.
-py::object export_gps_circle_segment_traits(py::module_& m) {
+void export_gps_circle_segment_traits_2(py::module_& m) {
   using Agt = aos2::Arr_geometry_traits_2;
   using Xcv = Agt::X_monotone_curve_2;
   using Bgt = CGAL::Gps_traits_2<Agt>;
   using Pgn = Bgt::Polygon_2;
   using Ggt = CGAL::Gps_circle_segment_traits_2<Kernel>;
 
+  if (add_attr<Ggt>(m, "Gps_circle_segment_traits_2")) return;
+
   py::class_<Ggt, Bgt> traits_c(m, "Gps_circle_segment_traits_2");
   traits_c.def(py::init<>());
   struct Concepts {
-    Gps_traits_classes<Ggt> m_traits_classes;
+    Gps_traits_classes<Ggt> m_gps_traits_2_classes;
   } concepts;
 
   // `Gps_circle_segment_traits_2<Kernel>` derives from
@@ -37,6 +39,4 @@ py::object export_gps_circle_segment_traits(py::module_& m) {
   // to the API. Thus, the following call is redundant (but harmless, because
   // all wrappers are guarded).
   export_GpsTraits_2<Ggt>(traits_c, concepts);
-
-  return traits_c;
 }

@@ -20,16 +20,16 @@
 namespace py = nanobind;
 
 //
-py::object export_gps_traits(py::module_& m) {
+void export_gps_traits_2(py::module_& m) {
   using Agt = aos2::Arr_geometry_traits_2;
   using Ggt = CGAL::Gps_traits_2<Agt>;
+
+   if (add_attr<Ggt>(m, "Gps_traits_2")) return;
 
   py::class_<Ggt, Agt> traits_c(m, "Gps_traits_2");
   traits_c.def(py::init<>());
   struct Concepts {
-    Gps_traits_classes<Ggt> m_traits_classes;
+    Gps_traits_classes<Ggt> m_gps_traits_2_classes;
   } concepts;
   export_GpsTraits_2<Ggt>(traits_c, concepts);
-
-  return traits_c;
 }

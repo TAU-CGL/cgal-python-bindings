@@ -27,7 +27,7 @@ void export_AosDirectionalXMonotoneTraits_2(C& c, Concepts& concepts) {
   using Compare_endpoints_xy_2 = typename T::Compare_endpoints_xy_2;
   using Construct_opposite_2 = typename T::Construct_opposite_2;
 
-  auto& classes = concepts.m_directional_x_monotone_traits_classes;
+  auto& classes = concepts.m_aos_directional_x_monotone_traits_2_classes;
 
   classes.m_compare_endpoints_xy_2 =
     new py::class_<Compare_endpoints_xy_2>(c, "Compare_endpoints_xy_2");

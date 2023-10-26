@@ -51,8 +51,8 @@ Xcv ctr_from_rats(const Ctr_xcv& ctr,
  * Rational, and Bound separately.
 */
 void export_integer(py::module_& m) {
-  using GT = aos2::Geometry_traits_2;
-  using Integer = GT::Integer;
+  using Gt = aos2::Geometry_traits_2;
+  using Integer = Gt::Integer;
 
   py::class_<Integer> integer_c(m, "Integer");
   integer_c.def(py::init<>())
@@ -71,9 +71,9 @@ void export_integer(py::module_& m) {
 
 //
 void export_rational(py::module_& m) {
-  using GT = aos2::Geometry_traits_2;
-  using Integer = GT::Integer;
-  using Rational = GT::Rational;
+  using Gt = aos2::Geometry_traits_2;
+  using Integer = Gt::Integer;
+  using Rational = Gt::Rational;
 
   py::class_<Rational> rational_c(m, "Rational");
   rational_c.def(py::init<>())
@@ -95,9 +95,9 @@ void export_rational(py::module_& m) {
 
 //
 void export_bound(py::module_& m) {
-  using GT = aos2::Geometry_traits_2;
-  using Integer = GT::Integer;
-  using Bound = GT::Bound;
+  using Gt = aos2::Geometry_traits_2;
+  using Integer = Gt::Integer;
+  using Bound = Gt::Bound;
 
   py::class_<Bound> bound_c(m, "Bound");
   bound_c.def(py::init<>())
@@ -119,48 +119,50 @@ void export_bound(py::module_& m) {
 /*! Export the Arr_rational_traits_2 traits class instance.
  * \todo Combine the calls here with the calls in the algebraic traits.
  */
-py::object export_arr_rational_function_traits(py::module_& m) {
+void export_arr_rational_function_traits_2(py::module_& m) {
   using Integer = CORE::BigInt;
   using Alg_kernel = CGAL::Algebraic_kernel_d_1<Integer>;
-  using GT = CGAL::Arr_rational_function_traits_2<Alg_kernel>;
-  using Rational = GT::Rational;
-  using Polynomial = GT::Polynomial_1;
-  using Cv = GT::Curve_2;
-  using Xcv = GT::X_monotone_curve_2;
-  using Ar = GT::Algebraic_real_1;
-  using Bound = GT::Bound;
-  using Pt = GT::Polynomial_traits_1;
+  using Gt = CGAL::Arr_rational_function_traits_2<Alg_kernel>;
+  using Rational = Gt::Rational;
+  using Polynomial = Gt::Polynomial_1;
+  using Cv = Gt::Curve_2;
+  using Xcv = Gt::X_monotone_curve_2;
+  using Ar = Gt::Algebraic_real_1;
+  using Bound = Gt::Bound;
+  using Pt = Gt::Polynomial_traits_1;
 
   // Export the algebraic kernel.
   //\ This should probably move to somewhere else.
   export_kernal_algebraic(m);
 
   // Export the rational-function traits itself.
-  py::class_<GT> traits_c(m, "Arr_rational_function_traits_2");
+  if (add_attr<Gt>(m, "Arr_rational_function_traits_2")) return;
+
+  py::class_<Gt> traits_c(m, "Arr_rational_function_traits_2");
   traits_c.def(py::init<>())
-    .def(py::init<const GT&>())
+    .def(py::init<const Gt&>())
     .def(py::init<Alg_kernel*>())
-    .def("construct_curve_2_object", &GT::construct_curve_2_object)
+    .def("construct_curve_2_object", &Gt::construct_curve_2_object)
     .def("construct_x_monotone_curve_2_object",
-         &GT::construct_x_monotone_curve_2_object)
+         &Gt::construct_x_monotone_curve_2_object)
     ;
 
   struct Concepts {
-    Aos_basic_traits_classes<GT> m_basic_traits_classes;
-    Aos_x_monotone_traits_classes<GT> m_x_monotone_traits_classes;
-    Aos_traits_classes<GT> m_traits_classes;
+    Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
+    Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
+    Aos_traits_classes<Gt> m_aos_traits_2_classes;
   };
   Concepts concepts;
-  export_AosTraits_2<GT>(traits_c, concepts);
+  export_AosTraits_2<Gt>(traits_c, concepts);
 
   // Export additional point attributes:
-  auto& pnt_c = *(concepts.m_basic_traits_classes.m_point_2);
+  auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
   add_insertion(pnt_c, "__str__");
   add_insertion(pnt_c, "__repr__");
 
   // Export additional curve attributes:
   //! \todo Export missing constructors (operator()).
-  using Ctr_cv = GT::Construct_curve_2;
+  using Ctr_cv = Gt::Construct_curve_2;
 
   using ctr_cv_op0 = Cv(Ctr_cv::*)(const Polynomial&)const;
   using ctr_cv_op1 = Cv(Ctr_cv::*)(const Polynomial&,
@@ -178,7 +180,7 @@ py::object export_arr_rational_function_traits(py::module_& m) {
 
   // Export additional x-monotone curve attributes:
   //! \todo Export missing constructors (operator()).
-  using Ctr_xcv = GT::Construct_x_monotone_curve_2;
+  using Ctr_xcv = Gt::Construct_x_monotone_curve_2;
   using ctr_xcv_op0 = Xcv(Ctr_xcv::*)(const Polynomial&)const;
   using ctr_xcv_op1 = Xcv(Ctr_xcv::*)(const Polynomial&,
                                       const Ar&, const Ar&)const;
@@ -192,7 +194,7 @@ py::object export_arr_rational_function_traits(py::module_& m) {
     .def("__call__", &ctr_from_rats)
     ;
 
-  auto& xcv_c = *(concepts.m_basic_traits_classes.m_x_monotone_curve_2);
+  auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
   add_insertion(xcv_c, "__str__");
   add_insertion(xcv_c, "__repr__");
 
@@ -219,6 +221,4 @@ py::object export_arr_rational_function_traits(py::module_& m) {
   add_attr<Bound>(traits_c, "Bound");
   add_attr<Ar>(traits_c, "Algebraic_real_1");
   add_attr<Polynomial>(traits_c, "Polynomial_1");
-
-  return traits_c;
 }
