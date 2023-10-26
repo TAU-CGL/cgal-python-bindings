@@ -20,7 +20,7 @@ struct Env_traits_classes {
   using Make_xy_monotone_3 = typename T::Make_xy_monotone_3;
   using Cpb_2 = typename T::Construct_projected_boundary_2;
   using Cpi_2 = typename T::Construct_projected_intersections_2;
-  using Cmp_z_at_xy_3 = typename T::Compare_z_at_xy_above_3;
+  using Cmp_z_at_xy_3 = typename T::Compare_z_at_xy_3;
   using Cmp_z_at_xy_above_3 = typename T::Compare_z_at_xy_above_3;
   using Cmp_z_at_xy_below_3 = typename T::Compare_z_at_xy_below_3;
 

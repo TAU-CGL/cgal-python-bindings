@@ -69,7 +69,7 @@ void export_envelope_3(py::module_& m) {
 #if CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_PLANE_GEOMETRY_TRAITS
   export_env_plane_traits_3(m);
 #elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_SPHERE_GEOMETRY_TRAITS
-  export_env_sphere_traits_3(m)
+  export_env_sphere_traits_3(m);
 #elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_TRIANGLE_GEOMETRY_TRAITS
     export_env_tri_traits_3(m);
 #else
