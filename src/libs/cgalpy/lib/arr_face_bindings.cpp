@@ -9,6 +9,8 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/Envelope_3/Envelope_base.h>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/make_circulator.hpp"
@@ -30,6 +32,11 @@ py::object inner_ccbs(const Face& f)
 size_t number_of_inner_ccbs(const Face& f) { return f.number_of_inner_ccbs(); }
 size_t number_of_outer_ccbs(const Face& f) { return f.number_of_outer_ccbs(); }
 
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+py::object surfaces(const Face& f)
+{ return make_iterator(f.surfaces_begin(), f.surfaces_end()); }
+#endif
+
 }
 
 //
@@ -44,16 +51,10 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("is_fictitious", &CGAL::Arr_face_base::is_fictitious)
     ;
 
-  // Isolated vertices
-  using Ivci = Aos::Isolated_vertex_const_iterator;
-  using V = Aos::Vertex;
-  add_iterator<Ivci, Ivci, const V&>("Isolated_vertex_iterator", face_base_c);
-  face_base_c.def("isolated_vertices",
-                  [](const Face& face) {
-                    return make_iterator(face.isolated_vertices_begin(),
-                                         face.isolated_vertices_end());
-                  },
-                  py::keep_alive<0, 1>());
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  using Env_data = Face::Face_data;
+  using Dd = CGAL::Dac_decision;
+#endif
 
   // Face
   py::class_<Face, CGAL::Arr_face_base> face_c(c, "Face");
@@ -72,6 +73,35 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); })
     .def("data", [](const Face& f)->py::object { return f.data(); })
 #endif
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  // Nanobind does not support multiple inheritance; therfore, we bind
+  // Envelope_pm_face members, using explicit lamda functions
+    .def("get_is_set", [](Face& f)->bool { return f.get_is_set(); })
+    .def("set_is_set", [](Face& f, bool b) { f.set_is_set(b); })
+    .def("is_decision_set", [](Face& f)->bool { return f.is_decision_set(); })
+    .def("get_decision", [](Face& f)->Dd { return f.get_decision(); })
+    .def("set_decision",
+         [](Face& f, CGAL::Comparison_result cr) { f.set_decision(cr); })
+    .def("set_decision", [](Face& f, Dd dd) { f.set_decision(dd); })
+    .def("number_of_surfaces", [](Face& f) { return f.number_of_surfaces(); })
+    .def("surfaces", &aos2::surfaces, py::keep_alive<0, 1>())
+    .def("surface", [](Face& f)->const Env_data& { return f.surface(); })
+    .def("number_of_data_objects",
+         [](Face& f)->int { return f.number_of_data_objects(); })
+    .def("has_no_data", [](Face& f)->bool { return f.has_no_data(); })
+    .def("get_env_data",
+         [](Face& f)->const Env_data&  { return f.get_env_data(); })
+    .def("set_env_data",
+         [](Face& f, const Env_data& data) { f.set_env_data(data); })
+    //.def("set_env_data", [](Face& f) { f.set_env_data(); })
+    .def("set_no_data", [](Face& f) { f.set_no_data(); })
+    .def("add_data", [](Face& f, const Env_data& data) { f.add_data(data); })
+    //.def("add_data", [](Face& f) { f.add_data(); })
+    .def("clear_data", [](Face& f) { f.clear_data(); })
+    //.def("is_equal_data", [](Face& f) { f.is_equal_data(); })
+    //.def("has_equal_data", [](Face& f) { f.has_equal_data(); })
+#endif
     ;
 
   using Chcc = Aos::Ccb_halfedge_const_circulator;
@@ -86,5 +116,21 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   face_c.def("inner_ccbs", &aos2::inner_ccbs, py::keep_alive<0, 1>());
   face_c.def("holes", &aos2::inner_ccbs, py::keep_alive<0, 1>());
 
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  using Si = Face::Data_const_iterator;
+  add_iterator<Si, Si>("Surface_iterator", face_c);
+#endif
+
+  using V = Aos::Vertex;
   add_attr<V>(face_c, "Vertex");
+
+  // Isolated vertices
+  using Ivci = Aos::Isolated_vertex_const_iterator;
+  add_iterator<Ivci, Ivci, const V&>("Isolated_vertex_iterator", face_base_c);
+  face_base_c.def("isolated_vertices",
+                  [](const Face& face) {
+                    return make_iterator(face.isolated_vertices_begin(),
+                                         face.isolated_vertices_end());
+                  },
+                  py::keep_alive<0, 1>());
 }

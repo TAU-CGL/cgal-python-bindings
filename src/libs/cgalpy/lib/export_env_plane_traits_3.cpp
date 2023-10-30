@@ -12,31 +12,19 @@
 #include <CGAL/Env_plane_traits_3.h>
 
 #include "CGALPY/kernel_types.hpp"
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/envelope_3_types.hpp"
+#include "CGALPY/add_attr.hpp"
 
-#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_landmark_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_open_boundary_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
-#include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
-#include "CGALPY/aos_2_concepts/export_AosOpenBoundaryTraits_2.hpp"
 #include "CGALPY/env_3_concepts/Env_traits_classes.hpp"
 #include "CGALPY/env_3_concepts/export_EnvelopeTraits_3.hpp"
-#include "CGALPY/Kernel/export_ft.hpp"
-#include "CGALPY/Kernel/export_point_2.hpp"
-#include "CGALPY/Kernel/export_segment_2.hpp"
-#include "CGALPY/Kernel/export_circle_2.hpp"
 #include "CGALPY/add_insertion.hpp"
+
+void export_arr_linear_traits_2(py::module_&);
 
 namespace py = nanobind;
 
 void export_env_plane_traits_3(py::module_& m) {
-  using Aos2_gt = CGAL::Arr_linear_traits_2<Kernel>;
+  using Linear_gt = CGAL::Arr_linear_traits_2<Kernel>;
   using Gt = CGAL::Env_plane_traits_3<Kernel>;
   using Env_pln = Gt::_Env_plane;
   using Pln = Gt::Plane_3;
@@ -44,29 +32,24 @@ void export_env_plane_traits_3(py::module_& m) {
 
   if (add_attr<Gt>(m, "Env_plane_traits_3")) return;
 
-  py::class_<Gt, Aos2_gt> traits_c(m, "Env_plane_traits_3");
+  if (! add_attr<Linear_gt>(m, "Arr_linear_traits_2"))
+    export_arr_linear_traits_2(m);
+  py::class_<Gt, Linear_gt> traits_c(m, "Env_plane_traits_3");
 
   py::class_<Env_pln>(m, "_Env_plane")
     .def(py::init<>())
     .def(py::init<const Pln&>())
     .def(py::init<const Pln&, const Line_2&>())
+    .def("is_vertical", &Env_pln::is_vertical)
+    .def("is_all_plane", &Env_pln::is_all_plane)
+    .def("plane", &Env_pln::plane)
+    .def("line", &Env_pln::line)
     ;
 
   struct Concepts {
-    Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
-    Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
-    Aos_traits_classes<Gt> m_aos_traits_2_classes;
-    Aos_landmark_traits_classes<Gt> m_aos_landmark_traits_2_classes;
-    Aos_open_boundary_traits_classes<Gt> m_aos_open_boundary_traits_2_classes;
-    Aos_approximate_traits_classes<Gt> m_aos_approximate_traits_2_classes;
-    Aos_construct_x_monotone_curve_traits_classes<Gt>
-      m_aos_construct_x_monotone_curve_traits_2_classes;
     Env_traits_classes<Gt> m_env_traits_3_classes;
   };
   Concepts concepts;
-  export_AosTraits_2<Gt>(traits_c, concepts);
-  export_AosLandmarkTraits_2<Gt>(traits_c, concepts);
-  export_AosOpenBoundaryTraits_2<Gt>(traits_c, concepts);
   export_EnvelopeTraits_3<Gt>(traits_c, concepts);
 
   using Xy_monotone_srf_3 = typename Gt::Xy_monotone_surface_3;

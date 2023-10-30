@@ -9,7 +9,6 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/envelope_3_types.hpp"
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 
@@ -60,6 +59,16 @@ Envelope_diagram_2 upper_envelope_xy_monotone_3(const py::list& surfaces) {
 }
 
 void export_envelope_3(py::module_& m) {
+  using Dd = CGAL::Dac_decision;
+  if (! add_attr<Dd>(m, "Dac_decision")) {
+    py::enum_<Dd>(m, "Dac_decision")
+      .value("DAC_DECISION_FIRST", CGAL::DAC_DECISION_FIRST)
+      .value("DAC_DECISION_BOTH", CGAL::DAC_DECISION_BOTH)
+      .value("DAC_DECISION_SECOND", CGAL::DAC_DECISION_SECOND)
+      .value("DAC_DECISION_NOT_SET", CGAL::DAC_DECISION_NOT_SET)
+      ;
+  }
+
   using Ed = env3::Envelope_diagram_2;
   using Edos = env3::Envelope_diagram_on_surface_2;
   using Aos = Edos::Base;
@@ -71,17 +80,15 @@ void export_envelope_3(py::module_& m) {
 #elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_SPHERE_GEOMETRY_TRAITS
   export_env_sphere_traits_3(m);
 #elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_TRIANGLE_GEOMETRY_TRAITS
-    export_env_tri_traits_3(m);
+  export_env_tri_traits_3(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ENV3_TRAITS");
 #endif
 
   if (! add_attr<Aos>(m, "Arrangement_on_surface_2")) {
-    py::class_<Aos> aos_c(m, "Envelope_diagram_on_surface_2");
-    aos_c.def(py::init<>())
-      .def(py::init<const Aos&>())
-      .def(py::init<const Traits*>())
-      ;
+    PyErr_SetString(PyExc_StopIteration,
+                    "Arrangement_on_surface_2 hasn't been registered");
+    py::python_error();
   }
 
   if (! add_attr<Edos>(m, "Envelope_diagram_on_surface_2")) {

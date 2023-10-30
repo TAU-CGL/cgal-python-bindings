@@ -14,14 +14,14 @@
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/envelope_3_config.hpp"
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
 
 namespace env3 {
 
-using Bgt = Base_tr<CGALPY_ENV3_GEOMETRY_TRAITS, Kernel>::type;
-using Cnv = CGAL::_Default_convert_func<py::object, py::object>;
-using Gt = Tr<surface_data(), Bgt, py::object, py::object, Cnv>::type;
-using Dcel = CGAL::Envelope_3::Envelope_pm_dcel<Gt, Gt::Xy_monotone_surface_3>;
-using Tt = CGAL::Default_planar_topology<Gt, Dcel>::Traits;
+using Gt = aos2::Geometry_traits_2;
+using Dcel = aos2::Dcel;
+using Tt = aos2::Topology_traits;
+
 using Envelope_diagram_on_surface_2 =
   CGAL::Envelope_diagram_on_surface_2<Gt, Tt>;
 using Envelope_diagram_2 = CGAL::Envelope_diagram_2<Gt, Dcel>;

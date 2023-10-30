@@ -15,9 +15,11 @@
 #include <CGAL/Arr_default_dcel.h>
 #include <CGAL/Arrangement_2.h>
 #include <CGAL/Arrangement_with_history_2.h>
+#include <CGAL/Env_surface_data_traits_3.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/arrangement_on_surface_2_config.hpp"
+#include "CGALPY/envelope_3_config.hpp"
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
 #include <CGAL/Arr_linear_traits_2.h>
@@ -51,81 +53,99 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 namespace aos2 {
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-typedef typename CGAL::Arr_segment_traits_2<Kernel>             Agt;
-typedef typename Agt::Is_in_x_range_2                           Is_in_x_range_2;
-typedef typename Agt::Is_in_y_range_2                           Is_in_y_range_2;
+using Agt = typename CGAL::Arr_segment_traits_2<Kernel>;
+using Is_in_x_range_2 = typename Agt::Is_in_x_range_2;
+using Is_in_y_range_2 = typename Agt::Is_in_y_range_2;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-typedef typename CGAL::Arr_non_caching_segment_traits_2<Kernel> Agt;
+using Agt = typename CGAL::Arr_non_caching_segment_traits_2<Kernel>;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-typedef typename CGAL::Arr_linear_traits_2<Kernel>              Agt;
+using Agt = typename CGAL::Arr_linear_traits_2<Kernel>;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-typedef typename CGAL::Arr_circle_segment_traits_2<Kernel>      Agt;
+using Agt = typename CGAL::Arr_circle_segment_traits_2<Kernel>;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-typedef typename CGAL::CORE_algebraic_number_traits             NtTraits;
-typedef typename CGAL::Cartesian <NtTraits::Rational>           RatKernel;
-typedef typename CGAL::Cartesian <NtTraits::Algebraic>          AlgKernel;
-typedef typename CGAL::Arr_conic_traits_2<RatKernel,AlgKernel, NtTraits>    Agt;
+using Nt_traits = CGAL::CORE_algebraic_number_traits;
+using Rat_kernel = typename CGAL::Cartesian<Nt_traits::Rational>;
+using Alg_kernel = typename CGAL::Cartesian<Nt_traits::Algebraic>;
+using Agt = typename CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
-typedef typename CGAL::CORE_algebraic_number_traits             NtTraits;
-typedef typename CGAL::Cartesian <NtTraits::Rational>           RatKernel;
-typedef typename CGAL::Cartesian <NtTraits::Algebraic>          AlgKernel;
-typedef typename CGAL::Arr_Bezier_curve_traits_2<RatKernel,AlgKernel, NtTraits>    Agt;
+using Nt_traits = CGAL::CORE_algebraic_number_traits;
+using Rat_kernel = typename CGAL::Cartesian<Nt_traits::Rational>;
+using Alg_kernel = typename CGAL::Cartesian<Nt_traits::Algebraic>;
+using Agt =
+  typename CGAL::Arr_Bezier_curve_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
-typedef CORE::BigInt                                            Integer;
-typedef CORE::BigRat                                            Rational;
-typedef CGAL::Algebraic_kernel_d_1<Integer>                     Algebraic_kernel_d_1;
-typedef Algebraic_kernel_d_1::Polynomial_1                      Polynomial_1;
-typedef CGAL::Polynomial_traits_d<Polynomial_1>                 Polynomial_traits_1;
+using Integer = CORE::BigInt;
+using Rational = CORE::BigRat;
+using Algebraic_kernel_d_1 = CGAL::Algebraic_kernel_d_1<Integer>;
+using Polynomial_1 = Algebraic_kernel_d_1::Polynomial_1;
+using Polynomial_traits_1 = CGAL::Polynomial_traits_d<Polynomial_1>;
 
-typedef CGAL::Arr_rational_function_traits_2<Algebraic_kernel_d_1> Agt;
+using Agt = CGAL::Arr_rational_function_traits_2<Algebraic_kernel_d_1>;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-typedef CORE::BigInt                                            Integer;
-typedef CGAL::Algebraic_kernel_d_1<Integer>                     Algebraic_kernel_d_1;
-typedef CGAL::Algebraic_curve_kernel_2<Algebraic_kernel_d_1>    Algebraic_kernel_d_2;
-typedef Algebraic_kernel_d_1::Polynomial_1                      Polynomial_1;
-typedef Algebraic_kernel_d_2::Polynomial_2                      Polynomial_2;
-typedef Algebraic_kernel_d_2::Algebraic_real_1                  Algebraic_real_1;
-typedef Algebraic_kernel_d_2::Bound                             Bound;
+using Integer = CORE::BigInt;
+using Algebraic_kernel_d_1 = CGAL::Algebraic_kernel_d_1<Integer>;
+using Algebraic_kernel_d_2 =
+  CGAL::Algebraic_curve_kernel_2<Algebraic_kernel_d_1>;
+using Polynomial_1 = Algebraic_kernel_d_1::Polynomial_1;
+using Polynomial_2 = Algebraic_kernel_d_2::Polynomial_2;
+using Algebraic_real_1 = Algebraic_kernel_d_2::Algebraic_real_1;
+using Bound = Algebraic_kernel_d_2::Bound;
 
-typedef CGAL::Polynomial_traits_d<Polynomial_2>                 PT_2;
-typedef PT_2::Construct_polynomial                              Construct_polynomial_2;
-typedef PT_2::Coefficient_type                                  Polynomial_1;
-typedef CGAL::Polynomial_traits_d<Polynomial_1>                 Polynomial_traits_1;
-typedef Polynomial_traits_1::Construct_polynomial               Construct_polynomial_1;
+using PT_2 = CGAL::Polynomial_traits_d<Polynomial_2>;
+using Construct_polynomial_2 = PT_2::Construct_polynomial;
+using Polynomial_1 = PT_2::Coefficient_type;
+using Polynomial_traits_1 = CGAL::Polynomial_traits_d<Polynomial_1>;
+using Construct_polynomial_1 = Polynomial_traits_1::Construct_polynomial;
 
-typedef typename CGAL::Arr_algebraic_segment_traits_2<Integer>  Agt;
-typedef typename Agt::Construct_curve_2                         Construct_curve_2;
-typedef typename Agt::Construct_point_2                         Construct_point_2;
-typedef typename Agt::Construct_x_monotone_segment_2            Construct_x_monotone_segment_2;
+using Agt = CGAL::Arr_algebraic_segment_traits_2<Integer>;
+using Construct_curve_2 = typename Agt::Construct_curve_2;
+using Construct_point_2 = typename Agt::Construct_point_2;
+using Construct_x_monotone_segment_2 = typename Agt::Construct_x_monotone_segment_2;
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-typedef CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>       Agt;
+using Agt = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-typedef Tr<boolean_set_operations_2_bindings(), Agt>::type  Ggt;
-typedef typename Ggt::Point_2                               Point_2;
-typedef typename Ggt::Curve_2                               Curve_2;
-typedef typename Ggt::X_monotone_curve_2                    X_monotone_curve_2;
+constexpr bool env_surface_data()
+{ return DETECT_EXIST(CGALPY_ENV3_SURFACE_DATA); }
 
-typedef CGAL::Arr_vertex_base<Ggt::Point_2>                             Vb;
-typedef Vertex_extended<is_vertex_extended(), Vb, py::object>::type     V;
+using Egt_base =
+  Base_env_tr<envelope_3_bindings(), CGALPY_ENV3_GEOMETRY_TRAITS, Agt>::type;
+using Cnv = CGAL::_Default_convert_func<py::object, py::object>;
+using Egt = Env_tr<envelope_3_bindings(), env_surface_data(), Egt_base,
+                     py::object, py::object, Cnv>::type;
+using Ggt = Bso_tr<boolean_set_operations_2_bindings(), Egt>::type;
 
-typedef Halfedge_gps<boolean_set_operations_2_bindings(), Ggt>::type    Hb;
-typedef Halfedge_extended<is_halfedge_extended(), Hb, py::object>::type H;
+using Point_2 = typename Ggt::Point_2;
+using Curve_2 = typename Ggt::Curve_2;
+using X_monotone_curve_2 = typename Ggt::X_monotone_curve_2;
 
-typedef Face_gps<boolean_set_operations_2_bindings()>::type             Fb;
-typedef Face_extended<is_face_extended(), Fb, py::object>::type         F;
+// Vertex
+using Vb = CGAL::Arr_vertex_base<Ggt::Point_2>;
+using Vbe = Vertex_env<envelope_3_bindings(), Vb, Ggt>::type;
+using V = Vertex_extended<is_vertex_extended(), Vbe, py::object>::type;
 
-typedef CGAL::Arr_dcel_base<V, H, F>            Dcel;
-typedef Aos<Ggt, Dcel>::Topol_traits            Topology_traits;
-typedef Aos<Ggt, Dcel>::aos                     Arrangement_on_surface_2;
-typedef Aos<Ggt, Dcel>::arr                     Arrangement_2;
-typedef Aos<Ggt, Dcel>::arr_with_history        Arrangement_with_history_2;
+// Halfedge
+using Hb = Halfedge_gps<boolean_set_operations_2_bindings(), Ggt>::type;
+using Hbe = Halfedge_env<envelope_3_bindings(), Hb, Ggt>::type;
+using H = Halfedge_extended<is_halfedge_extended(), Hbe, py::object>::type;
+
+// Face
+using Fb = Face_gps<boolean_set_operations_2_bindings()>::type;
+using Fbe = Face_env<envelope_3_bindings(), Fb, Ggt>::type;
+using F = Face_extended<is_face_extended(), Fbe, py::object>::type;
+
+// Genereal
+using Dcel = CGAL::Arr_dcel_base<V, H, F>;
+using Arrangement_on_surface_2 = Aos<Ggt, Dcel>::aos;
+using Arrangement_2 = Aos<Ggt, Dcel>::arr;
+using Arrangement_with_history_2 = Aos<Ggt, Dcel>::arr_with_history;
 
 // Define the geometry traits hierarchy:
-typedef Agt                                     Arr_geometry_traits_2;
-typedef Ggt                                     Gps_geometry_traits_2;
+using Arr_geometry_traits_2 = Agt;
+using Env_geometry_traits_2 = Egt;
+using Gps_geometry_traits_2 = Ggt;
 //! \todo Add support for Basic geometry traits and x-monotone
 // typedef ....                                 Ba_geometry_traits_2;
 // typedef ....                                 Xm_geometry_traits_2;
@@ -135,31 +155,31 @@ typedef Ggt                                     Gps_geometry_traits_2;
 // typedef ....                                 Trc_geometry_traits_2;
 
 // Define the arrangement-on-surface types:
-typedef Arrangement_on_surface_2::Geometry_traits_2        Geometry_traits_2;
+using Geometry_traits_2 = Arrangement_on_surface_2::Geometry_traits_2;
+using Topology_traits = Arrangement_on_surface_2::Topology_traits;
 
-typedef Arrangement_on_surface_2::Vertex_iterator          Vertex_iterator;
-typedef Arrangement_on_surface_2::Halfedge_iterator        Halfedge_iterator;
-typedef Arrangement_on_surface_2::Face_iterator            Face_iterator;
+using Vertex_iterator = Arrangement_on_surface_2::Vertex_iterator;
+using Halfedge_iterator = Arrangement_on_surface_2::Halfedge_iterator;
+using Face_iterator = Arrangement_on_surface_2::Face_iterator;
 
-typedef Arrangement_on_surface_2::Vertex_handle            Vertex_handle;
-typedef Arrangement_on_surface_2::Halfedge_handle          Halfedge_handle;
-typedef Arrangement_on_surface_2::Face_handle              Face_handle;
+using Vertex_handle = Arrangement_on_surface_2::Vertex_handle;
+using Halfedge_handle = Arrangement_on_surface_2::Halfedge_handle;
+using Face_handle = Arrangement_on_surface_2::Face_handle;
 
-typedef Arrangement_on_surface_2::Vertex_const_handle      Vertex_const_handle;
-typedef Arrangement_on_surface_2::Halfedge_const_handle    Halfedge_const_handle;
-typedef Arrangement_on_surface_2::Face_const_handle        Face_const_handle;
+using Vertex_const_handle = Arrangement_on_surface_2::Vertex_const_handle;
+using Halfedge_const_handle = Arrangement_on_surface_2::Halfedge_const_handle;
+using Face_const_handle = Arrangement_on_surface_2::Face_const_handle;
 
-typedef Arrangement_on_surface_2::Vertex                   Vertex;
-typedef Arrangement_on_surface_2::Halfedge                 Halfedge;
-typedef Arrangement_on_surface_2::Face                     Face;
+using Vertex = Arrangement_on_surface_2::Vertex;
+using Halfedge = Arrangement_on_surface_2::Halfedge;
+using Face = Arrangement_on_surface_2::Face;
 
-typedef Arrangement_on_surface_2::Isolated_vertex_iterator
-  Isolated_vertex_iterator;
-typedef Arrangement_on_surface_2::Ccb_halfedge_circulator
-  Ccb_halfedge_circulator;
-typedef Arrangement_on_surface_2::Halfedge_around_vertex_circulator
-  Halfedge_around_vertex_circulator;
-
+using Isolated_vertex_iterator =
+  Arrangement_on_surface_2::Isolated_vertex_iterator;
+using Ccb_halfedge_circulator =
+  Arrangement_on_surface_2::Ccb_halfedge_circulator;
+using Halfedge_around_vertex_circulator =
+  Arrangement_on_surface_2::Halfedge_around_vertex_circulator;
 }
 
 #endif //CGALPY_ARRANGEMENT_ON_SURFACE_2_TYPES_HPP

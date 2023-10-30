@@ -16,6 +16,7 @@
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
 #include <CGAL/Arr_circle_segment_traits_2.h>
 #include <CGAL/Arr_extended_dcel.h>
+#include <CGAL/Envelope_3/Envelope_pm_dcel.h>
 #include <CGAL/Arrangement_on_surface_2.h>
 #include <CGAL/Arrangement_on_surface_with_history_2.h>
 #include <CGAL/Arrangement_2.h>
@@ -26,8 +27,12 @@
 #include <CGAL/Gps_circle_segment_traits_2.h>
 #include <CGAL/Boolean_set_operations_2/Gps_default_dcel.h>
 #include <CGAL/Arr_geodesic_arc_on_sphere_traits_2.h>
+#include <CGAL/Env_sphere_traits_3.h>
+#include <CGAL/Env_triangle_traits_3.h>
+#include <CGAL/Env_surface_data_traits_3.h>
 
 #include "CGALPY/config.hpp"
+#include "CGALPY/envelope_3_config.hpp"
 #include "CGALPY/kernel_types.hpp"
 
 namespace py = nanobind;
@@ -69,25 +74,78 @@ constexpr bool is_halfedge_extended()
 constexpr bool is_face_extended()
 { return DETECT_EXIST(CGALPY_AOS2_FACE_EXTENDED); }
 
-// Boolean set operation
+// 3D Envelope traits
+template <bool b, int i, typename Base> struct Base_env_tr {};
 
-template <bool b, typename BaseTr> struct Tr {};
+template <int i, typename Base>
+struct Base_env_tr<false, i, Base> { using type = Base; };
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
 template <typename Base>
-struct Tr<false, Base> { typedef Base type; };
+struct Base_env_tr<true, CGALPY_ENV3_PLANE_GEOMETRY_TRAITS, Base> {
+  using Linear_tr = CGAL::Arr_linear_traits_2<Kernel>;
+  BOOST_STATIC_ASSERT_MSG(std::is_same<Base, Linear_tr>::value,
+                          "Mismatch Aos2/Env3 geometry traits!");
+  using type = CGAL::Env_plane_traits_3<Kernel>;
+};
+
+template <typename Base>
+struct Base_env_tr<true, CGALPY_ENV3_SPHERE_GEOMETRY_TRAITS, Base> {
+  using Nt_traits = CGAL::CORE_algebraic_number_traits;
+  using Rat_kernel = CGAL::Cartesian <Nt_traits::Rational>;
+  using Alg_kernel = CGAL::Cartesian <Nt_traits::Algebraic>;
+  using Conic_tr = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
+  BOOST_STATIC_ASSERT_MSG(std::is_same<Base, Conic_tr>::value,
+                          "Mismatch Aos2/Env3 geometry traits!");
+  using type = CGAL::Env_sphere_traits_3<Base>;
+};
+
+template <typename Base>
+struct Base_env_tr<true, CGALPY_ENV3_TRIANGLE_GEOMETRY_TRAITS, Base> {
+  using Seg_tr = CGAL::Arr_segment_traits_2<Kernel>;
+  BOOST_STATIC_ASSERT_MSG(std::is_same<Base, Seg_tr>::value,
+                          "Mismatch Aos2/Env3 geometry traits!");
+  using type = CGAL::Env_triangle_traits_3<Kernel>;
+};
+#endif
+
+// Surface data
+
+template <bool e, bool b, typename Btr, typename XyData, typename SData,
+          typename Cnv>
+struct Env_tr {};
+
+template <bool b, typename Btr, typename XyData, typename SData, typename Cnv>
+struct Env_tr<false, b, Btr, XyData, SData, Cnv> { using type = Btr; };
+
+template <typename Btr, typename XyData, typename SData, typename Cnv>
+struct Env_tr<true, false, Btr, XyData, SData, Cnv> { using type = Btr; };
+
+template <typename Btr, typename XyData, typename SData, typename Cnv>
+struct Env_tr<true, true, Btr, XyData, SData, Cnv>
+{ using type = CGAL::Env_surface_data_traits_3<Btr, XyData, SData, Cnv>; };
+
+// 2D regualrized Boolean set operation traits
+
+template <bool b, typename Base> struct Bso_tr {};
+template <typename Base>
+struct Bso_tr<false, Base> { typedef Base type; };
 template <>
-struct Tr<true, CGAL::Arr_segment_traits_2<Kernel>> {
+struct Bso_tr<true, CGAL::Arr_segment_traits_2<Kernel>> {
   typedef CGAL::Gps_segment_traits_2<Kernel, Point_2_container> type;
 };
 template <>
-struct Tr<true, CGAL::Arr_non_caching_segment_traits_2<Kernel>> {
+struct Bso_tr<true, CGAL::Arr_non_caching_segment_traits_2<Kernel>> {
   typedef CGAL::Gps_segment_traits_2<Kernel, Point_2_container> type;
 };
 template <>
-struct Tr<true, CGAL::Arr_circle_segment_traits_2<Kernel>> {
+struct Bso_tr<true, CGAL::Arr_circle_segment_traits_2<Kernel>> {
   typedef CGAL::Gps_circle_segment_traits_2<Kernel> type;
 };
 template <typename Base>
-struct Tr<true, Base> { typedef CGAL::Gps_traits_2<Base> type; };
+struct Bso_tr<true, Base> { typedef CGAL::Gps_traits_2<Base> type; };
+
+// Boolean set operations extension
 
 template <bool b, typename Tr> struct Halfedge_gps {};
 template <typename Tr>
@@ -100,6 +158,35 @@ struct Halfedge_gps<true, Tr>
 template <bool b> struct Face_gps {};
 template <> struct Face_gps<false> { typedef CGAL::Arr_face_base type; };
 template <> struct Face_gps<true> { typedef CGAL::Gps_face_base type; };
+
+// Envelope 3 extension
+
+template <bool b, typename Vb, typename Tr> struct Vertex_env {};
+template <typename Vb, typename Tr>
+struct Vertex_env<false, Vb, Tr> { using type = Vb; };
+template <typename Vb, typename Tr>
+struct Vertex_env<true, Vb, Tr> {
+  using Data = typename Tr::Xy_monotone_surface_3;
+  using type = CGAL::Envelope_3::Envelope_pm_vertex<Vb, Data>;
+};
+
+template <bool b, typename Vb, typename Tr> struct Halfedge_env {};
+template <typename Vb, typename Tr>
+struct Halfedge_env<false, Vb, Tr> { using type = Vb; };
+template <typename Vb, typename Tr>
+struct Halfedge_env<true, Vb, Tr> {
+  using Data = typename Tr::Xy_monotone_surface_3;
+  using type = CGAL::Envelope_3::Envelope_pm_halfedge<Vb, Data>;
+};
+
+template <bool b, typename Vb, typename Tr> struct Face_env {};
+template <typename Vb, typename Tr>
+struct Face_env<false, Vb, Tr> { using type = Vb; };
+template <typename Vb, typename Tr>
+struct Face_env<true, Vb, Tr> {
+  using Data = typename Tr::Xy_monotone_surface_3;
+  using type = CGAL::Envelope_3::Envelope_pm_face<Vb, Data>;
+};
 
 // General extension
 
