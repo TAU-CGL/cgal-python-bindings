@@ -11,6 +11,8 @@
 #include <nanobind/operators.h>
 #include <nanobind/stl/string.h>
 
+#include <CGAL/Sphere_3.h>
+
 #include "CGALPY/to_string.hpp"
 
 #include "CGALPY/config.hpp"
@@ -25,6 +27,7 @@
 #include "CGALPY/Kernel/export_ray_2.hpp"
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_vector_2.hpp"
+#include "CGALPY/Kernel/export_sphere_3.hpp"
 
 // 3D functors
 #include "CGALPY/Kernel/export_point_3.hpp"
@@ -203,6 +206,7 @@ void export_kernel(py::module_& m) {
   using Pnt_3 = Kernel::Point_3;
   using Vec_3 = Kernel::Vector_3;
   using Pln_3 = Kernel::Plane_3;
+  using Sfr_3 = Kernel::Sphere_3;
 
   // Circle_2
   if (! add_attr<Circle_2>(m, "Circle_2")) {
@@ -447,6 +451,12 @@ void export_kernel(py::module_& m) {
   if (! add_attr<Pln_3>(m, "Plane_3")) {
     py::class_<Pln_3> pln3_c(m, "Plane_3");
     export_plane_3<Kernel>(pln3_c);
+  }
+
+  // Sphere_3
+  if (! add_attr<Sfr_3>(m, "Sphere_3")) {
+    py::class_<Sfr_3> sfr3_c(m, "Sphere_3");
+    export_sphere_3<Kernel>(sfr3_c);
   }
 
   /// \name Kernel operations
