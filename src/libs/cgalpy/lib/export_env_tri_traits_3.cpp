@@ -9,6 +9,7 @@
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Arr_segment_traits_2.h>
+#include <CGAL/Env_triangle_traits_3.h>
 
 #include "CGALPY/envelope_3_types.hpp"
 #include "CGALPY/add_attr.hpp"
@@ -22,7 +23,7 @@ namespace py = nanobind;
 
 void export_env_tri_traits_3(py::module_& m) {
   using Seg_gt = CGAL::Arr_segment_traits_2<Kernel>;
-  using Gt = env3::Geometry_traits_3;
+  using Gt = CGAL::Env_triangle_traits_3<Kernel>;
 
   if (add_attr<Gt>(m, "Env_triangle_traits_3")) return;
 
@@ -35,4 +36,19 @@ void export_env_tri_traits_3(py::module_& m) {
   };
   Concepts concepts;
   export_EnvelopeTraits_3<Gt>(traits_c, concepts);
+
+  using Xsrf = Gt::Xy_monotone_surface_3;
+  using Pnt = Kernel::Point_3;
+  using Pln = Kernel::Plane_3;
+  using Tri = Kernel::Triangle_3;
+
+  auto& srf_c = *(concepts.m_env_traits_3_classes.m_surface_3);
+  srf_c.def(py::init<const Tri&>())
+    .def(py::init<const Pnt&, const Pnt&, const Pnt&>())
+    .def(py::init<const Pln&, const Pnt&, const Pnt&, const Pnt&>())
+    .def(py::init<const Pnt&, const Pnt&>())
+    .def("Triangle_3", &Xsrf::operator Triangle_3)
+    .def("Segment_3", &Xsrf::operator Segment_3)
+    .def("bbox", &Xsrf::bbox)
+    ;
 }

@@ -56,9 +56,20 @@ void export_arr_rational_function_traits_2(py::module_&);
 void export_arr_algebraic_segment_traits_2(py::module_&);
 void export_arr_geodesic_arc_on_sphere_traits_2(py::module_&);
 
+#if defined(CGALPY_ENVELOPE_3_BINDINGS)
+void export_env_plane_traits_3(py::module_&);
+void export_env_sphere_traits_3(py::module_&);
+void export_env_tri_traits_3(py::module_&);
+#if defined(CGALPY_ENV3_SURFACE_DATA)
+void export_env_surface_data_traits_3(py::module_&);
+#endif
+#endif
+
+#if defined(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
 void export_gps_segment_traits_2(py::module_&);
 void export_gps_circle_segment_traits_2(py::module_&);
 void export_gps_traits_2(py::module_&);
+#endif
 
 extern void export_arrangement_2_io(py::class_<aos2::Arrangement_2,
                                     aos2::Arrangement_on_surface_2>&);
@@ -691,6 +702,24 @@ void export_arrangement_on_surface_2(py::module_& m) {
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
+  // 3D Envelopes
+#if defined(CGALPY_ENVELOPE_3_BINDINGS)
+#if CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_PLANE_GEOMETRY_TRAITS
+  export_env_plane_traits_3(m);
+#elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_SPHERE_GEOMETRY_TRAITS
+  export_env_sphere_traits_3(m);
+#elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_TRIANGLE_GEOMETRY_TRAITS
+  export_env_tri_traits_3(m);
+#else
+  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ENV3_TRAITS");
+#endif
+#if defined(CGALPY_ENV3_SURFACE_DATA)
+  export_env_surface_data_traits_3(m);
+#endif
+
+#endif
+
+  // 2D Regularized Boolean set operations
 #if defined(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS))

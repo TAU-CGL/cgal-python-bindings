@@ -12,10 +12,6 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 
-void export_env_plane_traits_3(py::module_&);
-void export_env_sphere_traits_3(py::module_&);
-void export_env_tri_traits_3(py::module_&);
-
 namespace py = nanobind;
 
 namespace env3 {
@@ -43,7 +39,7 @@ Envelope_diagram_2 upper_envelope_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
   auto begin = stl_input_iterator<Surface_3>(surfaces);
   auto end = stl_input_iterator<Surface_3>(surfaces, false);
-  CGAL::lower_envelope_3(begin,	end, ed);
+  CGAL::upper_envelope_3(begin,	end, ed);
   return ed;
 }
 
@@ -52,7 +48,7 @@ Envelope_diagram_2 upper_envelope_xy_monotone_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
   auto begin = stl_input_iterator<Surface_3>(surfaces);
   auto end = stl_input_iterator<Surface_3>(surfaces, false);
-  CGAL::lower_envelope_3(begin,	end, ed);
+  CGAL::upper_envelope_3(begin,	end, ed);
   return ed;
 }
 
@@ -74,16 +70,6 @@ void export_envelope_3(py::module_& m) {
   using Aos = Edos::Base;
   using Traits = env3::Geometry_traits_3;
   using Srf = env3::Surface_3;
-
-#if CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_PLANE_GEOMETRY_TRAITS
-  export_env_plane_traits_3(m);
-#elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_SPHERE_GEOMETRY_TRAITS
-  export_env_sphere_traits_3(m);
-#elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_TRIANGLE_GEOMETRY_TRAITS
-  export_env_tri_traits_3(m);
-#else
-  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ENV3_TRAITS");
-#endif
 
   if (! add_attr<Aos>(m, "Arrangement_on_surface_2")) {
     PyErr_SetString(PyExc_StopIteration,

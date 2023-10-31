@@ -9,6 +9,7 @@
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Arr_conic_traits_2.h>
+#include <CGAL/Env_sphere_traits_3.h>
 
 #include "CGALPY/envelope_3_types.hpp"
 #include "CGALPY/add_attr.hpp"
@@ -25,7 +26,7 @@ void export_env_sphere_traits_3(py::module_& m) {
   using Rat_kernel = CGAL::Cartesian<Nt_traits::Rational>;
   using Alg_kernel = CGAL::Cartesian<Nt_traits::Algebraic>;
   using Conic_gt = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
-  using Gt = env3::Geometry_traits_3;
+  using Gt = CGAL::Env_sphere_traits_3<Conic_gt>;
 
   if (add_attr<Gt>(m, "Env_sphere_traits_3")) return;
 

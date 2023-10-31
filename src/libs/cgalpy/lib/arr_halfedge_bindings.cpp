@@ -9,8 +9,11 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/Envelope_3/Envelope_base.h>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -29,19 +32,29 @@ X_monotone_curve_2& curve(Halfedge& e) { return (e.curve()); }
 Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
 { return new Iterator_from_circulator<Ccb_halfedge_circulator>(e.ccb()); }
 
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+py::object surfaces(const Halfedge& h)
+{ return make_iterator(h.surfaces_begin(), h.surfaces_end()); }
+#endif
+
 }
 
 //
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Aos = aos2::Arrangement_on_surface_2;
-  using Halfedge = Aos::Halfedge;
+  using He = Aos::Halfedge;
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<Halfedge>(c, "Halfedge")
-    .def(py::init<>())
-    .def("direction", &Halfedge::direction)
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  using Env_data = He::Halfedge_data;
+  using Dd = CGAL::Dac_decision;
+#endif
 
-    .def("is_fictitious", &Halfedge::is_fictitious)
+  py::class_<He> halfedge_c(c, "Halfedge");
+  halfedge_c.def(py::init<>())
+    .def("direction", &He::direction)
+
+    .def("is_fictitious", &He::is_fictitious)
     .def("source", &aos2::source, ri)
     .def("target", &aos2::target, ri)
     .def("twin", &aos2::twin, ri)
@@ -50,13 +63,24 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("prev", &aos2::prev, ri)
     .def("curve", &aos2::curve, ri)
     .def("ccb", &aos2::ccb, ri)
+
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
     // `Face::set_data`. Instead, we introduce lambda functions that call the
     // appropriate member functions.
-    .def("set_data", [](Halfedge& h, py::object obj) { h.set_data(obj); })
-    .def("data", [](const Halfedge& h)->py::object { return h.data(); })
+    .def("set_data", [](He& h, py::object obj) { h.set_data(obj); })
+    .def("data", [](const He& h)->py::object { return h.data(); })
+#endif
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+    .def("number_of_surfaces", [](He& h) { return h.number_of_surfaces(); })
+    .def("surfaces", &aos2::surfaces, py::keep_alive<0, 1>())
 #endif
     ;
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  using Si = He::Data_const_iterator;
+  add_iterator<Si, Si>("Surface_iterator", halfedge_c);
+#endif
 }

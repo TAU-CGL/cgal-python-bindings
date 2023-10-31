@@ -21,7 +21,27 @@ template <typename T>
 py::list mk_xy_monotone_3_call_operator(const typename T::Make_xy_monotone_3& m,
                                         const typename T::Surface_3& s,
                                         bool is_lower) {
+  using Pnt = typename T::Point_2;
+  using Multiplicity = typename T::Multiplicity;
+  using Xcv = typename T::X_monotone_curve_2;
+  using Xcv_res = std::pair<Xcv, Multiplicity>;
+  using Result = std::variant<Xcv_res, Pnt>;
+
   py::list res;
+  // auto op =
+  //   [&] (const Result& o) mutable {
+  //     if (auto* xcv_res = std::get_if<Xcv_res>(&o)) {
+  //       py::list xcv_lst;
+  //       xcv_lst.append(xcv_res->first);
+  //       xcv_lst.append(xcv_res->second);
+  //       res.append(xcv_lst);
+  //     }
+  //     else if (auto* p = std::get_if<Pnt>(&o)) res.append(*p);
+  //   };
+  // // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // // be Assignable and Copy Constructible; hence the application of std::ref().
+  // auto it = boost::make_function_output_iterator(std::ref(op));
+  // m(s, is_lower, it);
   return res;
 }
 
