@@ -19,7 +19,7 @@
 namespace env3 {
 
 using Egt = aos2::Egt;
-using Egt_base = aos2::Egt_base;
+using Base_egt = aos2::Base_egt;
 
 using Gt = aos2::Geometry_traits_2;
 using Dcel = aos2::Dcel;

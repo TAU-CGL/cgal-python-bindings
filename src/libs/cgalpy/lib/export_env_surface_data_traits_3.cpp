@@ -35,14 +35,14 @@ void export_env_surface_data_traits_3(py::module_& m) {
     .def("__call__", &mk_xy_monotone_3_call_operator<Egt>)
     ;
 
-  using Egt_base = env3::Egt_base;
-  py::class_<Egt, Egt_base> traits_c(m, "Env_surface_data_traits_3");
+  using Base_egt = env3::Base_egt;
+  py::class_<Egt, Base_egt> traits_c(m, "Env_surface_data_traits_3");
   traits_c.def(py::init<>())
-    .def(py::init<env3::Egt_base>())
+    .def(py::init<env3::Base_egt>())
     .def("make_xy_monotone_3_object", &Egt::make_xy_monotone_3_object)
     ;
 
-  using Base_srf = Egt_base::Surface_3;
+  using Base_srf = Base_egt::Surface_3;
   using Srf = Egt::Surface_3;
 
   if (! add_attr<Srf>(traits_c, "Surface_3")) {

@@ -110,10 +110,10 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 constexpr bool env_surface_data()
 { return DETECT_EXIST(CGALPY_ENV3_SURFACE_DATA); }
 
-using Egt_base =
+using Base_egt =
   Base_env_tr<envelope_3_bindings(), CGALPY_ENV3_GEOMETRY_TRAITS, Agt>::type;
 using Cnv = CGAL::_Default_convert_func<py::object, py::object>;
-using Egt = Env_tr<envelope_3_bindings(), env_surface_data(), Egt_base,
+using Egt = Env_tr<envelope_3_bindings(), env_surface_data(), Base_egt,
                      py::object, py::object, Cnv>::type;
 using Ggt = Bso_tr<boolean_set_operations_2_bindings(), Egt>::type;
 

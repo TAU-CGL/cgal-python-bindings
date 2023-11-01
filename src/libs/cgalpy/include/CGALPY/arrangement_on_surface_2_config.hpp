@@ -92,8 +92,8 @@ struct Base_env_tr<true, CGALPY_ENV3_PLANE_GEOMETRY_TRAITS, Base> {
 template <typename Base>
 struct Base_env_tr<true, CGALPY_ENV3_SPHERE_GEOMETRY_TRAITS, Base> {
   using Nt_traits = CGAL::CORE_algebraic_number_traits;
-  using Rat_kernel = CGAL::Cartesian <Nt_traits::Rational>;
-  using Alg_kernel = CGAL::Cartesian <Nt_traits::Algebraic>;
+  using Rat_kernel = CGAL::Cartesian<Nt_traits::Rational>;
+  using Alg_kernel = CGAL::Cartesian<Nt_traits::Algebraic>;
   using Conic_tr = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
   BOOST_STATIC_ASSERT_MSG(std::is_same<Base, Conic_tr>::value,
                           "Mismatch Aos2/Env3 geometry traits!");
@@ -129,35 +129,37 @@ struct Env_tr<true, true, Btr, XyData, SData, Cnv>
 
 template <bool b, typename Base> struct Bso_tr {};
 template <typename Base>
-struct Bso_tr<false, Base> { typedef Base type; };
+struct Bso_tr<false, Base> { using type = Base; };
 template <>
 struct Bso_tr<true, CGAL::Arr_segment_traits_2<Kernel>> {
-  typedef CGAL::Gps_segment_traits_2<Kernel, Point_2_container> type;
+  using Base_gt = CGAL::Arr_segment_traits_2<Kernel>;
+  using type = CGAL::Gps_segment_traits_2<Kernel, Point_2_container, Base_gt>;
 };
 template <>
 struct Bso_tr<true, CGAL::Arr_non_caching_segment_traits_2<Kernel>> {
-  typedef CGAL::Gps_segment_traits_2<Kernel, Point_2_container> type;
+  using Base_gt = CGAL::Arr_non_caching_segment_traits_2<Kernel>;
+  using type = CGAL::Gps_segment_traits_2<Kernel, Point_2_container, Base_gt>;
 };
 template <>
 struct Bso_tr<true, CGAL::Arr_circle_segment_traits_2<Kernel>> {
-  typedef CGAL::Gps_circle_segment_traits_2<Kernel> type;
+  using type = CGAL::Gps_circle_segment_traits_2<Kernel>;
 };
 template <typename Base>
-struct Bso_tr<true, Base> { typedef CGAL::Gps_traits_2<Base> type; };
+struct Bso_tr<true, Base> { using type = CGAL::Gps_traits_2<Base>; };
 
 // Boolean set operations extension
 
 template <bool b, typename Tr> struct Halfedge_gps {};
 template <typename Tr>
 struct Halfedge_gps<false, Tr>
-{ typedef CGAL::Arr_halfedge_base<typename Tr::X_monotone_curve_2> type; };
+{ using type = CGAL::Arr_halfedge_base<typename Tr::X_monotone_curve_2>; };
 template <typename Tr>
 struct Halfedge_gps<true, Tr>
-{ typedef CGAL::Gps_halfedge_base<typename Tr::X_monotone_curve_2> type; };
+{ using type = CGAL::Gps_halfedge_base<typename Tr::X_monotone_curve_2>; };
 
 template <bool b> struct Face_gps {};
-template <> struct Face_gps<false> { typedef CGAL::Arr_face_base type; };
-template <> struct Face_gps<true> { typedef CGAL::Gps_face_base type; };
+template <> struct Face_gps<false> { using type = CGAL::Arr_face_base; };
+template <> struct Face_gps<true> { using type = CGAL::Gps_face_base; };
 
 // Envelope 3 extension
 
@@ -192,38 +194,40 @@ struct Face_env<true, Vb, Tr> {
 
 template <bool b, typename Vb, typename Data> struct Vertex_extended {};
 template <typename Vb, typename Data>
-struct Vertex_extended<false, Vb, Data> { typedef Vb type; };
+struct Vertex_extended<false, Vb, Data> { using type = Vb; };
 template <typename Vb, typename Data>
 struct Vertex_extended<true, Vb, Data>
-{ typedef CGAL::Arr_extended_vertex<Vb, Data> type; };
+{ using type = CGAL::Arr_extended_vertex<Vb, Data>; };
 
 template <bool b, typename Hb, typename Data> struct Halfedge_extended {};
 template <typename Hb, typename Data>
-struct Halfedge_extended<false, Hb, Data> { typedef Hb type; };
+struct Halfedge_extended<false, Hb, Data> { using type = Hb; };
 template <typename Hb, typename Data> struct Halfedge_extended<true, Hb, Data>
-{ typedef CGAL::Arr_extended_halfedge<Hb, Data> type; };
+{ using type = CGAL::Arr_extended_halfedge<Hb, Data>; };
 
 template <bool b, typename Fb, typename Data> struct Face_extended {};
 template <typename Fb, typename Data>
-struct Face_extended<false, Fb, Data> { typedef Fb type; };
+struct Face_extended<false, Fb, Data> { using type = Fb; };
 template <typename Fb, typename Data> struct Face_extended<true, Fb, Data>
-{ typedef CGAL::Arr_extended_face<Fb, Data> type; };
+{ using type = CGAL::Arr_extended_face<Fb, Data>; };
 
 // Geometry traits types:
 using Gaost = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
 
 // Aos type
 template <typename GeomTraits, typename Dcel> struct Aos {
-  typedef typename CGAL::Default_planar_topology<GeomTraits, Dcel>::Traits  Topol_traits;
-  typedef CGAL::Arrangement_on_surface_2<GeomTraits, Topol_traits>          aos;
-  typedef CGAL::Arrangement_2<GeomTraits, Dcel>                             arr;
-  typedef CGAL::Arrangement_with_history_2<GeomTraits, Dcel>                arr_with_history;
+  using Topol_traits =
+    typename CGAL::Default_planar_topology<GeomTraits, Dcel>::Traits;
+  using aos = CGAL::Arrangement_on_surface_2<GeomTraits, Topol_traits>;
+  using arr = CGAL::Arrangement_2<GeomTraits, Dcel>;
+  using arr_with_history = CGAL::Arrangement_with_history_2<GeomTraits, Dcel>;
 };
 template <typename Dcel>
 struct Aos<Gaost, Dcel> {
-  typedef CGAL::Arr_spherical_topology_traits_2<Gaost, Dcel>                Topol_traits;
-  typedef CGAL::Arrangement_on_surface_2<Gaost, Topol_traits>               aos;
-  typedef CGAL::Arrangement_on_surface_with_history_2<Gaost, Topol_traits>  aos_with_history;
+  using Topol_traits = CGAL::Arr_spherical_topology_traits_2<Gaost, Dcel>;
+  using aos = CGAL::Arrangement_on_surface_2<Gaost, Topol_traits>;
+  using aos_with_history =
+    CGAL::Arrangement_on_surface_with_history_2<Gaost, Topol_traits>;
 };
 
 } // end of aos2 namespace
