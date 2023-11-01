@@ -38,7 +38,7 @@ void export_env_plane_traits_3(py::module_& m) {
 
   py::class_<Env_pln>(m, "_Env_plane")
     .def(py::init<>())
-    .def(py::init<const Pln&>())
+    .def(py::init_implicit<const Pln&>())
     .def(py::init<const Pln&, const Line_2&>())
     .def("is_vertical", &Env_pln::is_vertical)
     .def("is_all_plane", &Env_pln::is_all_plane)

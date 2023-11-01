@@ -41,6 +41,18 @@ void export_ft(C& c) {
     .def(py::self / py::self)
     .def(py::self /= py::self)
     .def(-py::self)
+    .def(int() * py::self)
+    .def(float() * py::self)
+    .def(int() + py::self)
+    .def(float() + py::self)
+    .def(int() - py::self)
+    .def(float() - py::self)
+    .def(py::self * int())
+    .def(py::self * float())
+    .def(py::self + int())
+    .def(py::self + float())
+    .def(py::self - int())
+    .def(py::self - float())
     ;
 
   add_insertion(c, "__str__");
