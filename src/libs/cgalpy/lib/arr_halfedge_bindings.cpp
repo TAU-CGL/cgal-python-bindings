@@ -12,7 +12,7 @@
 #include <CGAL/Envelope_3/Envelope_base.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/make_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
@@ -28,9 +28,8 @@ Halfedge& twin(Halfedge& e) { return (*(e.twin())); }
 Face& face(Halfedge& e) { return (*(e.face())); }
 X_monotone_curve_2& curve(Halfedge& e) { return (e.curve()); }
 
-//
-Iterator_from_circulator<Ccb_halfedge_circulator>* ccb(Halfedge& e)
-{ return new Iterator_from_circulator<Ccb_halfedge_circulator>(e.ccb()); }
+py::object ccb(const Halfedge& h)
+{ return make_circulator(h.ccb()); }
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
 py::object surfaces(const Halfedge& h)
@@ -62,7 +61,7 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("next", &aos2::next, ri)
     .def("prev", &aos2::prev, ri)
     .def("curve", &aos2::curve, ri)
-    .def("ccb", &aos2::ccb, ri)
+    .def("ccb", &aos2::ccb, py::keep_alive<0, 1>())
 
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
@@ -83,4 +82,7 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Si = He::Data_const_iterator;
   add_iterator<Si, Si>("Surface_iterator", halfedge_c);
 #endif
+
+  using Chcc = Aos::Ccb_halfedge_const_circulator;
+  add_circulator<Chcc>("Halfedge_around_vertex_circulator", halfedge_c);
 }

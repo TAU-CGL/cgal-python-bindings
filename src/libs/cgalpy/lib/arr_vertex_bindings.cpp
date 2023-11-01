@@ -12,18 +12,16 @@
 #include <CGAL/Envelope_3/Envelope_base.h>
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/python_iterator_templates.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "CGALPY/make_circulator.hpp"
 
 namespace py = nanobind;
 
 namespace aos2 {
 
 //
-Iterator_from_circulator<Halfedge_around_vertex_circulator>*
-halfedge_around_vertex_iterator(Vertex& v) {
-  return new Iterator_from_circulator<Halfedge_around_vertex_circulator>(v.incident_halfedges());
-}
+py::object incident_halfedges(const Vertex& v)
+{ return make_circulator(v.incident_halfedges()); }
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
 py::object surfaces(const Vertex& v)
@@ -38,8 +36,7 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Vertex = Aos::Vertex;
   using Face = Aos::Face;
   using Point = Aos::Point_2;
-  using Halfedge_around_vertex_circulator =
-    Aos::Halfedge_around_vertex_circulator;
+  using Havcc = Aos::Halfedge_around_vertex_const_circulator;
   constexpr auto ri(py::rv_policy::reference_internal);
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
@@ -60,7 +57,7 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("is_at_open_boundary", &Vertex::is_at_open_boundary)
     .def("degree", &Vertex::degree)
     .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
-    .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator)
+    .def("incident_halfedges", &aos2::incident_halfedges, py::keep_alive<0, 1>())
 
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
@@ -82,6 +79,5 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   add_iterator<Si, Si>("Surface_iterator", vertex_c);
 #endif
 
-  bind_iterator<Iterator_from_circulator<Halfedge_around_vertex_circulator>>
-    (vertex_c, "Halfedge_around_vertex_iterator");
+  add_circulator<Havcc>("Halfedge_around_vertex_circulator", vertex_c);
 }
