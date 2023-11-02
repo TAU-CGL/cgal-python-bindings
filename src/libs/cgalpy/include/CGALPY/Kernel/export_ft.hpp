@@ -15,6 +15,7 @@
 
 #include "CGALPY/to_string.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/add_extraction.hpp"
 
 namespace py = nanobind;
 
@@ -57,6 +58,7 @@ void export_ft(C& c) {
 
   add_insertion(c, "__str__");
   add_insertion(c, "__repr__");
+  add_extraction(c);
 }
 
 #endif
