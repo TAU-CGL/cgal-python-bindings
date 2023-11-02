@@ -371,7 +371,7 @@ if (NOT SKBUILD)
     endif ()
 
     target_link_libraries(CGALPY PRIVATE
-        CGAL::CGAL
+        ${CGAL_LIBRARIES}
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
 
@@ -632,7 +632,7 @@ else ()
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
     target_link_libraries(_CGALPY PRIVATE
-        CGAL::CGAL
+        ${CGAL_LIBRARIES}
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
     install(TARGETS _CGALPY DESTINATION python/${CGALPY_IMPORT_NAME}/)
