@@ -21,27 +21,13 @@ template <typename T>
 py::list mk_xy_monotone_3_call_operator(const typename T::Make_xy_monotone_3& m,
                                         const typename T::Surface_3& s,
                                         bool is_lower) {
-  using Pnt = typename T::Point_2;
-  using Multiplicity = typename T::Multiplicity;
-  using Xcv = typename T::X_monotone_curve_2;
-  using Xcv_res = std::pair<Xcv, Multiplicity>;
-  using Result = std::variant<Xcv_res, Pnt>;
-
+  using Xy_srf = typename T::Xy_monotone_surface_3;
   py::list res;
-  // auto op =
-  //   [&] (const Result& o) mutable {
-  //     if (auto* xcv_res = std::get_if<Xcv_res>(&o)) {
-  //       py::list xcv_lst;
-  //       xcv_lst.append(xcv_res->first);
-  //       xcv_lst.append(xcv_res->second);
-  //       res.append(xcv_lst);
-  //     }
-  //     else if (auto* p = std::get_if<Pnt>(&o)) res.append(*p);
-  //   };
-  // // The argument type of boost::function_output_iterator (UnaryFunction) must
-  // // be Assignable and Copy Constructible; hence the application of std::ref().
-  // auto it = boost::make_function_output_iterator(std::ref(op));
-  // m(s, is_lower, it);
+  auto op = [&] (const Xy_srf& o) mutable { res.append(o); };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  m(s, is_lower, it);
   return res;
 }
 
@@ -50,7 +36,25 @@ template <typename T>
 py::list
 cpb_2_call_operator(const typename T::Construct_projected_boundary_2& m,
                     const typename T::Xy_monotone_surface_3& s) {
+  using Pnt = typename T::Point_2;
+  using Xcv = typename T::X_monotone_curve_2;
+  using Xcv_res = std::pair<Xcv, CGAL::Oriented_side>;
+  using Result = std::variant<Xcv_res, Pnt>;
   py::list res;
+  auto op =
+    [&] (const Result& o) mutable {
+      if (auto* xcv_res = std::get_if<Xcv_res>(&o)) {
+        py::list xcv_lst;
+        xcv_lst.append(xcv_res->first);
+        xcv_lst.append(xcv_res->second);
+        res.append(xcv_lst);
+      }
+      else if (auto* p = std::get_if<Pnt>(&o)) res.append(*p);
+    };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  m(s, it);
   return res;
 }
 
@@ -60,7 +64,26 @@ py::list
 cpi_2_call_operator(const typename T::Construct_projected_intersections_2& m,
                     const typename T::Xy_monotone_surface_3& s1,
                     const typename T::Xy_monotone_surface_3& s2) {
+  using Pnt = typename T::Point_2;
+  using Multiplicity = typename T::Multiplicity;
+  using Xcv = typename T::X_monotone_curve_2;
+  using Xcv_res = std::pair<Xcv, Multiplicity>;
+  using Result = std::variant<Xcv_res, Pnt>;
   py::list res;
+  auto op =
+    [&] (const Result& o) mutable {
+      if (auto* xcv_res = std::get_if<Xcv_res>(&o)) {
+        py::list xcv_lst;
+        xcv_lst.append(xcv_res->first);
+        xcv_lst.append(xcv_res->second);
+        res.append(xcv_lst);
+      }
+      else if (auto* p = std::get_if<Pnt>(&o)) res.append(*p);
+    };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  m(s1, s2, it);
   return res;
 }
 

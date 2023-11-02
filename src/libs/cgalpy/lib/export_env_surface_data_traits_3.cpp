@@ -20,7 +20,13 @@ template <typename T>
 py::list mk_xy_monotone_3_call_operator(const typename T::Make_xy_monotone_3& m,
                                         const typename T::Surface_3& s,
                                         bool is_lower) {
+  using Xy_srf = typename T::Xy_monotone_surface_3;
   py::list res;
+  auto op = [&] (const Xy_srf& o) mutable { res.append(o); };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  m(s, is_lower, it);
   return res;
 }
 
