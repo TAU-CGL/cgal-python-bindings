@@ -102,17 +102,32 @@ py::list approximated_inset_2(const Polygon_2& p, const FT& r, double eps) {
   return lst;
 }
 
+//
 Conic_polygon_with_holes_2
 offset_polygon_2(const Rat_polygon_2& pgn, const Rat_FT& r,
                  const Conic_traits& traits)
 { return CGAL::offset_polygon_2(pgn, r, traits); }
 
+//
+py::list inset_polygon_2(const Rat_polygon_2& pgn, const Rat_FT& r,
+                         const Conic_traits& traits) {
+  py::list lst;
+  auto op = [&] (const Conic_polygon_2& pwh) mutable { lst.append(pwh); };
+  // The argument type of boost::function_output_iterator (UnaryFunction) must
+  // be Assignable and Copy Constructible; hence the application of std::ref().
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::inset_polygon_2(pgn, r, traits, it);
+  return lst;
+}
+
+//
 template <typename Arg, typename ... Types> struct Wrapper_one_strategy {
   void operator()(Arg& arg) {
     bind_mink_sum_decomp_one_strategy<Types...>(arg, true);
   }
 };
 
+//
 template <typename Arg, typename ... Types> struct Wrapper_two_strategies {
   void operator()(Arg& arg) {
     bind_mink_sum_decomp_two_strategies<Types...>(arg, true);
@@ -172,6 +187,7 @@ void export_minkowski_sum_2(py::module_& m) {
   m.def("approximated_inset_2", &ms2::approximated_inset_2);
 
   m.def("offset_polygon_2", &ms2::offset_polygon_2);
+  m.def("inset_polygon_2", &ms2::inset_polygon_2);
 
   if (add_attr<CS_pgn>(m, "Circle_segment_polygon_2")) return;
   auto cs_pgn_c = py::class_<CS_pgn>(m, "Circle_segment_polygon_2");
