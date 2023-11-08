@@ -86,6 +86,10 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
         set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_geodesic_arc_on_sphere_traits_2.cpp)
     endif ()
 
+    if (CGALPY_AOS2_CURVE_DATA)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_curve_data_traits_2.cpp)
+    endif ()
+
     # Cells
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_vertex_bindings.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_halfedge_bindings.cpp)
@@ -149,6 +153,12 @@ if (CGALPY_CONVEX_HULL_3_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/convex_hull_3_bindings.cpp)
     list(APPEND CGALPY_MODULES Ch3)
     set(CGALPY_Ch3_FILTERS [=[{}]=])
+endif ()
+# 2D envelopes
+if (CGALPY_ENVELOPE_2_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/envelope_2_bindings.cpp)
+    list(APPEND CGALPY_MODULES Env2)
+    set(CGALPY_Env2_FILTERS [=[{}]=])
 endif ()
 # 3D envelopes
 if (CGALPY_ENVELOPE_3_BINDINGS)
@@ -290,6 +300,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     # 3D convex hull
     if (CGALPY_CONVEX_HULL_3_BINDINGS)
         get_convex_hull_3_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # 2D envelopes
+    if (CGALPY_ENVELOPE_2_BINDINGS)
+        get_envelope_2_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
     # 3D envelopes
