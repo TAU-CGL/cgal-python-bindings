@@ -55,6 +55,7 @@ void export_arr_bezier_traits_2(py::module_&);
 void export_arr_rational_function_traits_2(py::module_&);
 void export_arr_algebraic_segment_traits_2(py::module_&);
 void export_arr_geodesic_arc_on_sphere_traits_2(py::module_&);
+void export_arr_curve_data_traits_2(py::module_&);
 
 #if defined(CGALPY_ENVELOPE_3_BINDINGS)
 void export_env_plane_traits_3(py::module_&);
@@ -700,6 +701,11 @@ void export_arrangement_on_surface_2(py::module_& m) {
   export_arr_geodesic_arc_on_sphere_traits_2(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
+#endif
+
+// Curve data
+#if defined(CGALPY_AOS2_CURVE_DATA)
+  export_arr_curve_data_traits_2(m);
 #endif
 
   // 3D Envelopes

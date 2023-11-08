@@ -107,11 +107,15 @@ using Agt = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
+// Curve Data:
+using Cgt = Cd_tr<aos2_curve_data(), Agt, py::object>::type;
+
+// 3D Envelope
 constexpr bool env_surface_data()
 { return DETECT_EXIST(CGALPY_ENV3_SURFACE_DATA); }
 
 using Base_egt =
-  Base_env_tr<envelope_3_bindings(), CGALPY_ENV3_GEOMETRY_TRAITS, Agt>::type;
+  Base_env_tr<envelope_3_bindings(), CGALPY_ENV3_GEOMETRY_TRAITS, Cgt>::type;
 using Cnv = CGAL::_Default_convert_func<py::object, py::object>;
 using Egt = Env_tr<envelope_3_bindings(), env_surface_data(), Base_egt,
                      py::object, py::object, Cnv>::type;
@@ -144,6 +148,7 @@ using Arrangement_with_history_2 = Aos<Ggt, Dcel>::arr_with_history;
 
 // Define the geometry traits hierarchy:
 using Arr_geometry_traits_2 = Agt;
+using Cd_geometry_traits_2 = Cgt;
 using Env_geometry_traits_2 = Egt;
 using Gps_geometry_traits_2 = Ggt;
 //! \todo Add support for Basic geometry traits and x-monotone

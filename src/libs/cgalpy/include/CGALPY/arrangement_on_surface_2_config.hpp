@@ -27,6 +27,7 @@
 #include <CGAL/Gps_circle_segment_traits_2.h>
 #include <CGAL/Boolean_set_operations_2/Gps_default_dcel.h>
 #include <CGAL/Arr_geodesic_arc_on_sphere_traits_2.h>
+#include <CGAL/Arr_curve_data_traits_2.h>
 #include <CGAL/Env_sphere_traits_3.h>
 #include <CGAL/Env_triangle_traits_3.h>
 #include <CGAL/Env_surface_data_traits_3.h>
@@ -62,6 +63,10 @@ namespace py = nanobind;
 
 namespace aos2 {
 
+// Indicates whether the curv s type is extended with data
+constexpr bool aos2_curve_data()
+{ return DETECT_EXIST(CGALPY_AOS2_CURVE_DATA); }
+
 // Indicates whether the vertex type is extended
 constexpr bool is_vertex_extended()
 { return DETECT_EXIST(CGALPY_AOS2_VERTEX_EXTENDED); }
@@ -73,6 +78,18 @@ constexpr bool is_halfedge_extended()
 // Indicates whether the halfedge type is extended
 constexpr bool is_face_extended()
 { return DETECT_EXIST(CGALPY_AOS2_FACE_EXTENDED); }
+
+// Curve data
+
+template <bool b, typename Btr, typename XData>
+struct Cd_tr {};
+
+template <typename Btr, typename XData>
+struct Cd_tr<false, Btr, XData> { using type = Btr; };
+
+template <typename Btr, typename XData>
+struct Cd_tr<true, Btr, XData>
+{ using type = CGAL::Arr_curve_data_traits_2<Btr, XData>; };
 
 // 3D Envelope traits
 template <bool b, int i, typename Base> struct Base_env_tr {};
