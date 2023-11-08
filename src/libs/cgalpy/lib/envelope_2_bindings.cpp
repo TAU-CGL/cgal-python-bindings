@@ -13,10 +13,16 @@
 #include "CGALPY/envelope_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
 namespace env2 {
+
+//
+template <typename Cell>
+py::object curves(const Cell& c)
+{ return make_iterator(c.curves_begin(), c.curves_end()); }
 
 //
 Envelope_diagram_1 lower_envelope_2(const py::list& curvess) {
@@ -68,27 +74,37 @@ void export_envelope_2 (py::module_& m) {
   using Vertex = Ed::Vertex;
   using Edge = Ed::Edge;
   using Pnt = Ed::Point_2;
+  using Xcv = Ed::X_monotone_curve_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Vertex>(m, "Vertex")) {
-    py::class_<Vertex>(m, "Vertex")
-      .def(py::init<>())
+    py::class_<Vertex> vertex_c(m, "Vertex");
+    vertex_c.def(py::init<>())
       .def(py::init<const Pnt&>())
       .def("point", &Vertex::point, ri)
       .def("number_of_curves", &Vertex::number_of_curves)
       .def("left", [](const Vertex& v)->const Edge& { return *(v.left()); }, ri)
       .def("right", [](const Vertex& v)->const Edge& { return *(v.right()); }, ri)
+      .def("curves", &env2::curves<Vertex>, py::keep_alive<0, 1>())
       ;
+
+    using Cci = Ed::Curve_const_iterator;
+    add_iterator<Cci, Cci>("Curve_iterator", vertex_c);
   }
 
   if (! add_attr<Edge>(m, "Edge")) {
-    py::class_<Edge>(m, "Edge")
-      .def(py::init<>())
+    py::class_<Edge> edge_c(m, "Edge");
+    edge_c.def(py::init<>())
       .def("is_empty", &Edge::is_empty)
+      .def("number_of_curves", &Edge::number_of_curves)
       .def("curve", &Edge::curve, ri)
       .def("left", [](const Edge& e)->const Vertex& { return *(e.left()); }, ri)
       .def("right", [](const Edge& e)->const Vertex& { return *(e.right()); }, ri)
+      .def("curves", &env2::curves<Edge>, py::keep_alive<0, 1>())
       ;
+
+    using Cci = Ed::Curve_const_iterator;
+    add_iterator<Cci, Cci>("Curve_iterator", edge_c);
   }
 
   if (! add_attr<Ed>(m, "Envelope_diagram_1")) {
