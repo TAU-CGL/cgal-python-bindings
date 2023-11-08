@@ -22,6 +22,8 @@ using Envelope_diagram_1 = CGAL::Envelope_diagram_1<Gt>;
 using Geometry_traits_2 = Envelope_diagram_1::Traits_2;
 using X_monotone_curve_2 = Envelope_diagram_1::X_monotone_curve_2;
 using Curve_2 = Geometry_traits_2::Curve_2;
+using Vertex = Envelope_diagram_1::Vertex;
+using Edge = Envelope_diagram_1::Edge;
 
 }
 
