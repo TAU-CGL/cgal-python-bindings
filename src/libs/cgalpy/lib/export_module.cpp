@@ -21,6 +21,7 @@ void export_boolean_set_operations_2(py::module_&);
 void export_bounding_volumes(py::module_&);
 void export_convex_hull_2(py::module_&);
 void export_convex_hull_3(py::module_&);
+void export_envelope_2(py::module_&);
 void export_envelope_3(py::module_&);
 void export_general_polygon_set_2(py::module_&);
 void export_intersections(py::module_&);
@@ -126,6 +127,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_CONVEX_HULL_3_BINDINGS
   auto ch3_m = m.def_submodule("Ch3");
   export_convex_hull_3(ch3_m);
+#endif
+
+#ifdef CGALPY_ENVELOPE_2_BINDINGS
+  auto env2_m = m.def_submodule("Env2");
+  export_envelope_2(env2_m);
 #endif
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
