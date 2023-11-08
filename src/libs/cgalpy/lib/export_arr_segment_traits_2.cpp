@@ -66,7 +66,7 @@ void export_arr_segment_traits_2(py::module_& m) {
     ;
 
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
-  xcv_c.def(py::init<Segment_2&>())
+  xcv_c.def(py::init_implicit<Segment_2&>())
     .def(py::init<Pnt&, Pnt&>())
     .def(py::init<Line_2&, Pnt&, Pnt&>())
     .def("flip", &Xcv::flip)
