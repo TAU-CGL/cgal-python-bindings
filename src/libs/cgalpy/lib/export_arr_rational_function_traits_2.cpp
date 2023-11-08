@@ -28,10 +28,14 @@ template<typename T> T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 //
 template<typename T> T shift(T& p, int i) { return CGAL::shift(p, i); }
 
-typedef aos2::Geometry_traits_2::X_monotone_curve_2           Xcv;
-typedef aos2::Geometry_traits_2::Construct_x_monotone_curve_2 Ctr_xcv;
-typedef aos2::Geometry_traits_2::Algebraic_real_1             Alg_real;
-typedef aos2::Geometry_traits_2::Rational                     Rational;
+using Integer = CORE::BigInt;
+using Alg_kernel = CGAL::Algebraic_kernel_d_1<Integer>;
+using Gt = CGAL::Arr_rational_function_traits_2<Alg_kernel>;
+using Xcv = Gt::X_monotone_curve_2;
+using Ctr_xcv = Gt::Construct_x_monotone_curve_2;
+using Alg_real = Gt::Algebraic_real_1;
+using Rational = Gt::Rational;
+using Bound = Gt::Bound;
 
 /* Construct an `x`-monotone curve from a list of rational numerators, a
  * list of rational denominators, and two bounds.
@@ -51,9 +55,6 @@ Xcv ctr_from_rats(const Ctr_xcv& ctr,
  * Rational, and Bound separately.
 */
 void export_integer(py::module_& m) {
-  using Gt = aos2::Geometry_traits_2;
-  using Integer = Gt::Integer;
-
   py::class_<Integer> integer_c(m, "Integer");
   integer_c.def(py::init<>())
     .def(py::init_implicit<int>())
@@ -71,10 +72,6 @@ void export_integer(py::module_& m) {
 
 //
 void export_rational(py::module_& m) {
-  using Gt = aos2::Geometry_traits_2;
-  using Integer = Gt::Integer;
-  using Rational = Gt::Rational;
-
   py::class_<Rational> rational_c(m, "Rational");
   rational_c.def(py::init<>())
     .def(py::init<const Integer&, const Integer&>())
@@ -95,10 +92,6 @@ void export_rational(py::module_& m) {
 
 //
 void export_bound(py::module_& m) {
-  using Gt = aos2::Geometry_traits_2;
-  using Integer = Gt::Integer;
-  using Bound = Gt::Bound;
-
   py::class_<Bound> bound_c(m, "Bound");
   bound_c.def(py::init<>())
     .def(py::init<double>())
