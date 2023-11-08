@@ -6,8 +6,8 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_ENVELOPE_3TYPES_HPP
-#define CGALPY_ENVELOPE_3TYPES_HPP
+#ifndef CGALPY_ENVELOPE_3_TYPES_HPP
+#define CGALPY_ENVELOPE_3_TYPES_HPP
 
 #include <CGAL/envelope_3.h>
 #include <CGAL/Env_surface_data_traits_3.h>
@@ -32,6 +32,7 @@ using Envelope_diagram_2 = CGAL::Envelope_diagram_2<Gt, Dcel>;
 using Geometry_traits_3 = Envelope_diagram_on_surface_2::Traits_3;
 using Topology_traits = Envelope_diagram_on_surface_2::TopTraits;
 using Surface_3 = Geometry_traits_3::Surface_3;
+using Xy_monotone_surface_3 = Geometry_traits_3::Xy_monotone_surface_3;
 
 }
 

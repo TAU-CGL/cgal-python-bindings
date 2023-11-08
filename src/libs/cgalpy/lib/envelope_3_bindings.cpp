@@ -21,16 +21,16 @@ Envelope_diagram_2 lower_envelope_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
   auto begin = stl_input_iterator<Surface_3>(surfaces);
   auto end = stl_input_iterator<Surface_3>(surfaces, false);
-  CGAL::lower_envelope_3(begin,	end, ed);
+  CGAL::lower_envelope_3(begin, end, ed);
   return ed;
 }
 
 //
 Envelope_diagram_2 lower_envelope_xy_monotone_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
-  auto begin = stl_input_iterator<Surface_3>(surfaces);
-  auto end = stl_input_iterator<Surface_3>(surfaces, false);
-  CGAL::lower_envelope_3(begin,	end, ed);
+  auto begin = stl_input_iterator<Xy_monotone_surface_3>(surfaces);
+  auto end = stl_input_iterator<Xy_monotone_surface_3>(surfaces, false);
+  CGAL::lower_envelope_xy_monotone_3(begin, end, ed);
   return ed;
 }
 
@@ -39,16 +39,16 @@ Envelope_diagram_2 upper_envelope_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
   auto begin = stl_input_iterator<Surface_3>(surfaces);
   auto end = stl_input_iterator<Surface_3>(surfaces, false);
-  CGAL::upper_envelope_3(begin,	end, ed);
+  CGAL::upper_envelope_3(begin, end, ed);
   return ed;
 }
 
 //
 Envelope_diagram_2 upper_envelope_xy_monotone_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
-  auto begin = stl_input_iterator<Surface_3>(surfaces);
-  auto end = stl_input_iterator<Surface_3>(surfaces, false);
-  CGAL::upper_envelope_3(begin,	end, ed);
+  auto begin = stl_input_iterator<Xy_monotone_surface_3>(surfaces);
+  auto end = stl_input_iterator<Xy_monotone_surface_3>(surfaces, false);
+  CGAL::upper_envelope_xy_monotone_3(begin, end, ed);
   return ed;
 }
 
@@ -94,7 +94,7 @@ void export_envelope_3(py::module_& m) {
   }
 
   m.def("lower_envelope_3", &env3::lower_envelope_3);
-  m.def("lower_envelope_xy_monotone_3", &env3::lower_envelope_3);
+  m.def("lower_envelope_xy_monotone_3", &env3::lower_envelope_xy_monotone_3);
   m.def("upper_envelope_3", &env3::upper_envelope_3);
-  m.def("upper_envelope_xy_monotone_3", &env3::upper_envelope_3);
+  m.def("upper_envelope_xy_monotone_3", &env3::upper_envelope_xy_monotone_3);
 }
