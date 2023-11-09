@@ -18,6 +18,8 @@ namespace py = nanobind;
 void export_arr_curve_data_traits_2(py::module_& m) {
   using Agt = aos2::Agt;
   using Cgt = aos2::Cgt;
+  using Base_cv = Agt::Curve_2;
+  using Cv = Cgt::Curve_2;
   using Base_xcv = Agt::X_monotone_curve_2;
   using Xcv = Cgt::X_monotone_curve_2;
 
@@ -25,6 +27,16 @@ void export_arr_curve_data_traits_2(py::module_& m) {
 
   py::class_<Cgt, Agt> traits_c(m, "Arr_curve_data_traits_2");
   traits_c.def(py::init<>());
+
+  if (! add_attr<Cv>(traits_c, "Curve_2")) {
+    py::class_<Cv, Base_cv>(traits_c, "Curve_2")
+      .def(py::init<>())
+      .def(py::init<const Base_cv&>())
+      .def(py::init<const Base_cv&, py::object>())
+      .def("data", py::overload_cast<>(&Cv::data, py::const_))
+      .def("set_data", &Cv::set_data)
+      ;
+  }
 
   if (! add_attr<Xcv>(traits_c, "X_monotone_curve_2")) {
     py::class_<Xcv, Base_xcv>(traits_c, "X_monotone_curve_2")
