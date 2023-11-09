@@ -31,18 +31,29 @@ template<typename T> T shift(T& p, int i) { return CGAL::shift(p, i); }
 using Integer = CORE::BigInt;
 using Alg_kernel = CGAL::Algebraic_kernel_d_1<Integer>;
 using Gt = CGAL::Arr_rational_function_traits_2<Alg_kernel>;
+using Cv = Gt::Curve_2;
 using Xcv = Gt::X_monotone_curve_2;
+using Ctr_cv = Gt::Construct_curve_2;
 using Ctr_xcv = Gt::Construct_x_monotone_curve_2;
 using Alg_real = Gt::Algebraic_real_1;
 using Rational = Gt::Rational;
 using Bound = Gt::Bound;
 
+/* Construct a curve from a list of rationals, a bound, and a Boolean
+ */
+Cv ctr_cv_from_rats(const Ctr_cv& ctr, const py::list& rats,
+                  const Alg_real& x_s, bool dir_right) {
+  auto begin = stl_input_iterator<Rational>(rats);
+  auto end = stl_input_iterator<Rational>(rats, false);
+  return ctr(begin, end, x_s, dir_right);
+}
+
 /* Construct an `x`-monotone curve from a list of rational numerators, a
  * list of rational denominators, and two bounds.
  */
-Xcv ctr_from_rats(const Ctr_xcv& ctr,
-                  const py::list& numers, const py::list& demons,
-                  const Alg_real& x_s, const Alg_real& x_t) {
+Xcv ctr_xcv_from_rats(const Ctr_xcv& ctr,
+                   const py::list& numers, const py::list& demons,
+                   const Alg_real& x_s, const Alg_real& x_t) {
   auto begin1 = stl_input_iterator<Rational>(numers);
   auto end1 = stl_input_iterator<Rational>(numers, false);
   auto begin2 = stl_input_iterator<Rational>(demons);
@@ -118,6 +129,7 @@ void export_arr_rational_function_traits_2(py::module_& m) {
   using Gt = CGAL::Arr_rational_function_traits_2<Alg_kernel>;
   using Rational = Gt::Rational;
   using Polynomial = Gt::Polynomial_1;
+  using Pnt = Gt::Point_2;
   using Cv = Gt::Curve_2;
   using Xcv = Gt::X_monotone_curve_2;
   using Ar = Gt::Algebraic_real_1;
@@ -150,6 +162,9 @@ void export_arr_rational_function_traits_2(py::module_& m) {
 
   // Export additional point attributes:
   auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
+  pnt_c.def("x", py::overload_cast<>(&Pnt::x, py::const_))
+    .def("y", py::overload_cast<>(&Pnt::y, py::const_))
+    ;
   add_insertion(pnt_c, "__str__");
   add_insertion(pnt_c, "__repr__");
 
@@ -169,6 +184,7 @@ void export_arr_rational_function_traits_2(py::module_& m) {
     .def("__call__", static_cast<ctr_cv_op1>(&Ctr_cv::operator()))
     .def("__call__", static_cast<ctr_cv_op2>(&Ctr_cv::operator()))
     .def("__call__", static_cast<ctr_cv_op3>(&Ctr_cv::operator()))
+    .def("__call__", &ctr_cv_from_rats)
     ;
 
   // Export additional x-monotone curve attributes:
@@ -184,7 +200,7 @@ void export_arr_rational_function_traits_2(py::module_& m) {
     .def("__call__", static_cast<ctr_xcv_op0>(&Ctr_xcv::operator()))
     .def("__call__", static_cast<ctr_xcv_op1>(&Ctr_xcv::operator()))
     .def("__call__", static_cast<ctr_xcv_op2>(&Ctr_xcv::operator()))
-    .def("__call__", &ctr_from_rats)
+    .def("__call__", &ctr_xcv_from_rats)
     ;
 
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
