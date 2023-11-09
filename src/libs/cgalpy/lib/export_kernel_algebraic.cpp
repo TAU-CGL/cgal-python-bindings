@@ -110,5 +110,7 @@ void export_kernal_algebraic(py::module_& m) {
     .def("__call__", &solve_1)
     ;
 
+  m.def("to_double", &CGAL::to_double<Ar>);
+
   export_alg_real(m);
 }
