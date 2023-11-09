@@ -782,5 +782,6 @@ void export_kernel(py::module_& m) {
   using Square_fnc = Square_res(*)(const FT&);
   m.def("square", static_cast<Square_fnc>(&CGAL::square<FT>));
 
+  m.def("to_double", &CGAL::to_double<FT>);
   /// @}
 }
