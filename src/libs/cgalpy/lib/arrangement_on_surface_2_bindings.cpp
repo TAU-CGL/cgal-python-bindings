@@ -499,9 +499,17 @@ void insert_xcv_pl(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv,
 /// \name Functions for Arrangement_2
 /// @{
 
-// //! Obtain the unbounded face of an arrangement.
+//! Obtain the unbounded face of an arrangement.
 typename Arrangement_2::Face& unbounded_face(Arrangement_2& arr)
 { return *(arr.unbounded_face()); }
+
+//! Obtain the geometry traits.
+const Geometry_traits_2& geometry_traits(const Arrangement_on_surface_2& aos)
+{ return *(aos.geometry_traits()); }
+
+//! Obtain the topology traits.
+const Topology_traits& topology_traits(const Arrangement_on_surface_2& aos)
+{ return *(aos.topology_traits()); }
 
 /// @}
 
@@ -517,6 +525,8 @@ void export_aos(py::module_& m) {
   aos_c.def(py::init<>())
     .def(py::init<const Aos&>())
     .def(py::init<const GT*>())
+    .def("geometry_traits", &aos2::geometry_traits, ri)
+    .def("topology_traits", &aos2::topology_traits, ri)
     .def("fictitious_face", &aos2::fictitious_face, ri)
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex1, ri)
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex2, ri)
