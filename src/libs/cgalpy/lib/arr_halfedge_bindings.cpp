@@ -51,8 +51,7 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
   py::class_<He> halfedge_c(c, "Halfedge");
   halfedge_c.def(py::init<>())
-    .def("direction", &He::direction)
-
+    .def("direction", [](const He& h)->bool{ return h.direction(); })
     .def("is_fictitious", &He::is_fictitious)
     .def("source", &aos2::source, ri)
     .def("target", &aos2::target, ri)
