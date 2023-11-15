@@ -140,17 +140,24 @@ using Fb = Face_gps<boolean_set_operations_2_bindings()>::type;
 using Fbe = Face_env<envelope_3_bindings(), Fb, Ggt>::type;
 using F = Face_extended<is_face_extended(), Fbe, py::object>::type;
 
-// Genereal
-using Dcel = CGAL::Arr_dcel_base<V, H, F>;
-using Arrangement_on_surface_2 = Aos<Ggt, Dcel>::aos;
-using Arrangement_2 = Aos<Ggt, Dcel>::arr;
-using Arrangement_with_history_2 = Aos<Ggt, Dcel>::arr_with_history;
-
 // Define the geometry traits hierarchy:
 using Arr_geometry_traits_2 = Agt;
 using Cd_geometry_traits_2 = Cgt;
 using Env_geometry_traits_2 = Egt;
 using Gps_geometry_traits_2 = Ggt;
+
+// Define the arrangement-on-surface types:
+using Dcel = CGAL::Arr_default_dcel<Ggt, V, H, F>;
+using Arrangement_on_surface_2 = With_history<with_history(), Ggt, Dcel>::Aos;
+using Arrangement_2 = With_history<with_history(), Ggt, Dcel>::Arr;
+using Arrangement_on_surface_with_history_2 =
+  With_history<with_history(), Ggt, Dcel>::Aos_with_history;
+using Arrangement_with_history_2 =
+  With_history<with_history(), Ggt, Dcel>::Arr_with_history;
+
+using Geometry_traits_2 = Arrangement_on_surface_2::Geometry_traits_2;
+using Topology_traits = Arrangement_on_surface_2::Topology_traits;
+
 //! \todo Add support for Basic geometry traits and x-monotone
 // typedef ....                                 Ba_geometry_traits_2;
 // typedef ....                                 Xm_geometry_traits_2;
@@ -158,10 +165,6 @@ using Gps_geometry_traits_2 = Ggt;
 //! \todo Add support for counting and tracing geometry traits
 // typedef ....                                 Dc_geometry_traits_2;
 // typedef ....                                 Trc_geometry_traits_2;
-
-// Define the arrangement-on-surface types:
-using Geometry_traits_2 = Arrangement_on_surface_2::Geometry_traits_2;
-using Topology_traits = Arrangement_on_surface_2::Topology_traits;
 
 using Vertex_iterator = Arrangement_on_surface_2::Vertex_iterator;
 using Halfedge_iterator = Arrangement_on_surface_2::Halfedge_iterator;

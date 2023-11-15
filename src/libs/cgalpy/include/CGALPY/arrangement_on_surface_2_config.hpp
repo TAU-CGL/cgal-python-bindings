@@ -38,14 +38,6 @@
 
 namespace py = nanobind;
 
-// Arrangement type options
-#define CGALPY_AOS2_ARRANGEMENT                         0
-#define CGALPY_AOS2_ARRANGEMENT_ON_SURFACE              1
-
-#ifndef CGALPY_AOS2_TYPE
-#define CGALPY_AOS2_TYPE                                0
-#endif
-
 // Geometry traits options
 #define CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS                      0
 #define CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS                     1
@@ -62,6 +54,10 @@ namespace py = nanobind;
 #endif
 
 namespace aos2 {
+
+// Indicates whether arrangement with history is prescribed
+constexpr bool with_history()
+{ return DETECT_EXIST(CGALPY_AOS2_WITH_HISTORY); }
 
 // Indicates whether the curv s type is extended with data
 constexpr bool aos2_curve_data()
@@ -228,24 +224,42 @@ struct Face_extended<false, Fb, Data> { using type = Fb; };
 template <typename Fb, typename Data> struct Face_extended<true, Fb, Data>
 { using type = CGAL::Arr_extended_face<Fb, Data>; };
 
-// Geometry traits types:
-using Gaost = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
+// Aos types
+template <bool WithHistory, typename GeomTraits, typename Dcel>
+struct With_history {};
 
-// Aos type
-template <typename GeomTraits, typename Dcel> struct Aos {
-  using Topol_traits =
-    typename CGAL::Default_planar_topology<GeomTraits, Dcel>::Traits;
-  using aos = CGAL::Arrangement_on_surface_2<GeomTraits, Topol_traits>;
-  using arr = CGAL::Arrangement_2<GeomTraits, Dcel>;
-  using arr_with_history = CGAL::Arrangement_with_history_2<GeomTraits, Dcel>;
+template <typename GeomTraits, typename Dcel>
+struct With_history<false, GeomTraits, Dcel> {
+  using Gt = GeomTraits;
+  using Tt = typename CGAL::Default_planar_topology<Gt, Dcel>::Traits;
+  using Aos = CGAL::Arrangement_on_surface_2<Gt, Tt>;
+  using Arr = CGAL::Arrangement_2<Gt, Dcel>;
+  using Aos_with_history = void;
+  using Arr_with_history = void;
 };
-template <typename Dcel>
-struct Aos<Gaost, Dcel> {
-  using Topol_traits = CGAL::Arr_spherical_topology_traits_2<Gaost, Dcel>;
-  using aos = CGAL::Arrangement_on_surface_2<Gaost, Topol_traits>;
-  using aos_with_history =
-    CGAL::Arrangement_on_surface_with_history_2<Gaost, Topol_traits>;
+
+template <typename GeomTraits, typename Dcel>
+struct With_history<true, GeomTraits, Dcel> {
+  using Gt = GeomTraits;
+  using Tt = typename CGAL::Default_planar_topology<Gt, Dcel>::Traits;
+  using Aos_with_history = CGAL::Arrangement_on_surface_with_history_2<Gt, Tt>;
+  using Arr_with_history = CGAL::Arrangement_with_history_2<Gt, Dcel>;
+  using Aos = typename Aos_with_history::Base_arrangement_2;
+
+  using Geometry_traits_2 = typename Aos::Geometry_traits_2;
+  using Arr = CGAL::Arrangement_2<Geometry_traits_2, typename Aos::Dcel>;
 };
+
+// Geometry traits types:
+//using Gaost = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
+
+// template <typename Dcel>
+// struct Aos<Gaost, Dcel> {
+//   using Topol_traits = CGAL::Arr_spherical_topology_traits_2<Gaost, Dcel>;
+//   using aos = CGAL::Arrangement_on_surface_2<Gaost, Topol_traits>;
+//   using aos_with_history =
+//     CGAL::Arrangement_on_surface_with_history_2<Gaost, Topol_traits>;
+// };
 
 } // end of aos2 namespace
 
