@@ -12,7 +12,7 @@
 
 #include <boost/static_assert.hpp>
 
-#include <CGAL/Arr_default_dcel.h>
+#include <CGAL/Arr_dcel.h>
 #include <CGAL/Arrangement_2.h>
 #include <CGAL/Arrangement_with_history_2.h>
 #include <CGAL/Env_surface_data_traits_3.h>
@@ -147,7 +147,7 @@ using Env_geometry_traits_2 = Egt;
 using Gps_geometry_traits_2 = Ggt;
 
 // Define the arrangement-on-surface types:
-using Dcel = CGAL::Arr_default_dcel<Ggt, V, H, F>;
+using Dcel = CGAL::Arr_dcel<Ggt, V, H, F>;
 using Arrangement_on_surface_2 = With_history<with_history(), Ggt, Dcel>::Aos;
 using Arrangement_2 = With_history<with_history(), Ggt, Dcel>::Arr;
 using Arrangement_on_surface_with_history_2 =
