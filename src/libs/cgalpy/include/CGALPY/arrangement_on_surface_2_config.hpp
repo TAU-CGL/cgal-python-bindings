@@ -77,14 +77,12 @@ constexpr bool is_face_extended()
 
 // Curve data
 
-template <bool b, typename Btr, typename XData>
-struct Cd_tr {};
+template <bool b, typename Btr, typename XData> struct Cd_tr {};
 
-template <typename Btr, typename XData>
-struct Cd_tr<false, Btr, XData> { using type = Btr; };
+template <typename Btr, typename XData> struct Cd_tr<false, Btr, XData>
+{ using type = Btr; };
 
-template <typename Btr, typename XData>
-struct Cd_tr<true, Btr, XData>
+template <typename Btr, typename XData> struct Cd_tr<true, Btr, XData>
 { using type = CGAL::Arr_curve_data_traits_2<Btr, XData>; };
 
 // 3D Envelope traits

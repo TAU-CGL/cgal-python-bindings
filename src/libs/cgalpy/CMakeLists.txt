@@ -86,8 +86,8 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
         set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_geodesic_arc_on_sphere_traits_2.cpp)
     endif ()
 
-    if (CGALPY_AOS2_CURVE_DATA)
-      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_curve_data_traits_2.cpp)
+    if (CGALPY_AOS2_WITH_HISTORY)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_consolidated_curve_data_traits_2.cpp)
     endif ()
 
     # Cells

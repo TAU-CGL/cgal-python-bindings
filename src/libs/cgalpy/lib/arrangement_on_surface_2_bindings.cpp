@@ -32,6 +32,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "CGALPY/export_arr_curve_data_traits_2.h"
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
   (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
@@ -55,7 +56,7 @@ void export_arr_bezier_traits_2(py::module_&);
 void export_arr_rational_function_traits_2(py::module_&);
 void export_arr_algebraic_segment_traits_2(py::module_&);
 void export_arr_geodesic_arc_on_sphere_traits_2(py::module_&);
-void export_arr_curve_data_traits_2(py::module_&);
+void export_arr_consolidated_curve_data_traits_2(py::module_&);
 
 #if defined(CGALPY_ENVELOPE_3_BINDINGS)
 void export_env_plane_traits_3(py::module_&);
@@ -388,7 +389,7 @@ Arrangement_on_surface_2::Face& fictitious_face(Arrangement_on_surface_2& arr)
 
 /// @}
 
-/// \name Iterators
+/// \name Aos Iterators
 /// @{
 
 //
@@ -410,6 +411,19 @@ py::object faces(const Arrangement_on_surface_2& arr)
 //
 py::object unbounded_faces(const Arrangement_on_surface_2& arr)
 { return make_iterator(arr.unbounded_faces_begin(), arr.unbounded_faces_end()); }
+
+/// @}
+
+/// \name Aos With History Iterators
+/// @{
+
+//
+py::object
+originating_curves(const Arrangement_on_surface_with_history_2& arr_wh,
+                   Halfedge& e) {
+  return make_iterator(arr_wh.originating_curves_begin(Halfedge_handle(&e)),
+                       arr_wh.originating_curves_end(Halfedge_handle(&e)));
+}
 
 /// @}
 
@@ -495,15 +509,6 @@ void insert_xcv_pl(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv,
                    const PoinLocation& pl)
 { CGAL::insert(arr, xcv, pl); }
 
-/// @}
-
-/// \name Functions for Arrangement_2
-/// @{
-
-//! Obtain the unbounded face of an arrangement.
-typename Arrangement_2::Face& unbounded_face(Arrangement_2& arr)
-{ return *(arr.unbounded_face()); }
-
 //! Obtain the geometry traits.
 const Geometry_traits_2& geometry_traits(const Arrangement_on_surface_2& aos)
 { return *(aos.geometry_traits()); }
@@ -511,6 +516,16 @@ const Geometry_traits_2& geometry_traits(const Arrangement_on_surface_2& aos)
 //! Obtain the topology traits.
 const Topology_traits& topology_traits(const Arrangement_on_surface_2& aos)
 { return *(aos.topology_traits()); }
+
+/// @}
+
+/// \name Functions for Arrangement_2
+/// @{
+
+//! Obtain the unbounded face of an arrangement.
+template <typename Arrangement_>
+typename Arrangement_::Face& unbounded_face(Arrangement_& arr)
+{ return *(arr.unbounded_face()); }
 
 /// @}
 
@@ -603,7 +618,11 @@ void export_aos_with_history(py::module_& m) {
   awh_c.def(py::init<>())
     .def(py::init<const Aos_wh&>())
     .def(py::init<const Gt*>())
+    .def("originating_curves", &aos2::originating_curves, py::keep_alive<0, 1>())
     ;
+
+  using Oci = Aos_wh::Originating_curve_iterator;
+  add_iterator<Oci, Oci>("Originating_curve_iterator", awh_c);
 
   m.def("insert", &aos2::insert_curves<Aos_wh>)
     ;
@@ -664,7 +683,7 @@ void export_arr(py::module_& m) {
   arr_c.def(py::init<>())
     .def(py::init<const Arr&>())
     .def(py::init<const Gt*>())
-    .def("unbounded_face", &aos2::unbounded_face, ri)
+    .def("unbounded_face", &aos2::unbounded_face<Arr>, ri)
     .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity)
     ;
 
@@ -695,6 +714,7 @@ void export_arr_with_history(py::module_& m) {
   awh_c.def(py::init<>())
     .def(py::init<const Arr_wh&>())
     .def(py::init<const Gt*>())
+    .def("unbounded_face", &aos2::unbounded_face<Arr_wh>, ri)
     ;
 }
 
@@ -752,7 +772,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
 
 // Curve data
 #if defined(CGALPY_AOS2_CURVE_DATA)
-  export_arr_curve_data_traits_2(m);
+  export_arr_curve_data_traits_2<aos2::Cgt>(m));
 #endif
 
   // 3D Envelopes
@@ -796,6 +816,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
       export_aos_with_history(m);
     if (! add_attr<Arr_wh>(m, "Arrangement_with_history_2"))
       export_arr_with_history(m);
+    export_arr_consolidated_curve_data_traits_2(m);
   }
 #endif
 
