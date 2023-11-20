@@ -138,8 +138,8 @@ void insert_curves(Aos_2& arr, py::list& lst) {
 
   using Cv = typename Aos_2::Geometry_traits_2::Curve_2;
   if (py::isinstance<Cv>(lst[0])) {
-    auto begin = stl_input_iterator<Cv>(lst);
-    auto end = stl_input_iterator<Cv>(lst, false);
+    auto begin = stl_input_iterator<const Cv&>(lst);
+    auto end = stl_input_iterator<const Cv&>(lst, false);
     CGAL::insert(arr, begin, end);
     return;
   }
@@ -426,6 +426,8 @@ py::object unbounded_faces(const Arrangement_on_surface_2& arr)
 /// \name Aos With History Iterators
 /// @{
 
+#if defined(CGALPY_AOS2_WITH_HISTORY)
+
 //
 py::object
 originating_curves(const Arrangement_on_surface_with_history_2& arr_wh,
@@ -433,6 +435,22 @@ originating_curves(const Arrangement_on_surface_with_history_2& arr_wh,
   return make_iterator(arr_wh.originating_curves_begin(Halfedge_handle(&e)),
                        arr_wh.originating_curves_end(Halfedge_handle(&e)));
 }
+
+//
+py::object curves(const Arrangement_on_surface_with_history_2& arr_wh)
+{ return make_iterator(arr_wh.curves_begin(), arr_wh.curves_end()); }
+
+//
+// py::object
+// induced_edges(const Arrangement_on_surface_with_history_2& arr_wh,
+//               Arrangement_on_surface_with_history_2::Curve_2& cv) {
+//   using Curve_const_handle =
+//     Arrangement_on_surface_with_history_2::Curve_const_handle;
+//   return make_iterator(arr_wh.induced_edges_begin(Curve_const_handle(&cv)),
+//                        arr_wh.induced_edges_end(Curve_const_handle(&cv)));
+// }
+
+#endif
 
 /// @}
 
@@ -628,11 +646,20 @@ void export_aos_with_history(py::module_& m) {
   awh_c.def(py::init<>())
     .def(py::init<const Aos_wh&>())
     .def(py::init<const Gt*>())
+    .def("number_of_originating_curves", &Aos_wh::number_of_originating_curves)
     .def("originating_curves", &aos2::originating_curves, py::keep_alive<0, 1>())
+    .def("number_of_curves", &Aos_wh::number_of_curves)
+    .def("curves", &aos2::curves, py::keep_alive<0, 1>())
+    .def("number_of_induced_edges", &Aos_wh::number_of_induced_edges)
+    // .def("induced_edges", &aos2::edges, py::keep_alive<0, 1>())
     ;
 
   using Oci = Aos_wh::Originating_curve_iterator;
+  using Cci = Aos_wh::Curve_const_iterator;
+  using Iei = Aos_wh::Originating_curve_iterator;
   add_iterator<Oci, Oci>("Originating_curve_iterator", awh_c);
+  add_iterator<Cci, Cci>("Curve_iterator", awh_c);
+  add_iterator<Iei, Iei>("Induced_edge_iterator", awh_c);
 
   m.def("insert", &aos2::insert_curves<Aos_wh>)
     .def("insert", &aos2::insert_cv<Aos_wh>)
