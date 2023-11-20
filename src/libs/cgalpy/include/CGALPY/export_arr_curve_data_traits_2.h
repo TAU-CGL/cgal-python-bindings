@@ -45,7 +45,7 @@ void export_arr_curve_data_traits_2(py::module_& m) {
   if (! add_attr<Cv>(traits_c, "Curve_2")) {
     py::class_<Cv, Base_cv>(traits_c, "Curve_2")
       .def(py::init<>())
-      .def(py::init<const Base_cv&>())
+      .def(py::init_implicit<const Base_cv&>())
       .def(py::init<const Base_cv&, Cv_data>())
       .def("data", py::overload_cast<>(&Cv::data, py::const_))
       .def("set_data", &Cv::set_data)
@@ -55,7 +55,7 @@ void export_arr_curve_data_traits_2(py::module_& m) {
   if (! add_attr<Xcv>(traits_c, "X_monotone_curve_2")) {
     py::class_<Xcv, Base_xcv>(traits_c, "X_monotone_curve_2")
       .def(py::init<>())
-      .def(py::init<const Base_xcv&>())
+      .def(py::init_implicit<const Base_xcv&>())
       .def(py::init<const Base_xcv&, Xcv_data>())
       .def("data", py::overload_cast<>(&Xcv::data, py::const_))
       .def("set_data", &Xcv::set_data)
