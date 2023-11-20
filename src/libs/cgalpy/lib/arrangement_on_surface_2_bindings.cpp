@@ -128,25 +128,34 @@ private:
 template <typename Aos_2>
 void insert_curves(Aos_2& arr, py::list& lst) {
   if (lst.size() == 0) return;
-  if (py::isinstance<X_monotone_curve_2>(lst[0])) {
-    auto begin = stl_input_iterator<X_monotone_curve_2>(lst);
-    auto end = stl_input_iterator<X_monotone_curve_2>(lst, false);
+  using Xcv = typename Aos_2::Geometry_traits_2::X_monotone_curve_2;
+  if (py::isinstance<Xcv>(lst[0])) {
+    auto begin = stl_input_iterator<Xcv>(lst);
+    auto end = stl_input_iterator<Xcv>(lst, false);
     CGAL::insert(arr, begin, end);
+    return;
   }
-  else if (py::isinstance<Curve_2>(lst[0])) {
-    auto begin = stl_input_iterator<Curve_2>(lst);
-    auto end = stl_input_iterator<Curve_2>(lst, false);
+
+  using Cv = typename Aos_2::Geometry_traits_2::Curve_2;
+  if (py::isinstance<Cv>(lst[0])) {
+    auto begin = stl_input_iterator<Cv>(lst);
+    auto end = stl_input_iterator<Cv>(lst, false);
     CGAL::insert(arr, begin, end);
+    return;
   }
+
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  else if (py::isinstance<Point_2>(lst[0])) {
+  using Pnt = typename Aos_2::Geometry_traits_2::Point_2;
+  if (py::isinstance<Pnt>(lst[0])) {
     // Points must be wrapped into CGAL::Objects???
-    auto begin = Object_input_iterator<Point_2>(lst);
-    auto end = Object_input_iterator<Point_2>(lst, false);
+    auto begin = Object_input_iterator<Pnt>(lst);
+    auto end = Object_input_iterator<Pnt>(lst, false);
     CGAL::insert(arr, begin, end);
+    return;
   }
 #endif
-  else throw std::runtime_error("Attempting to insert a list of of object of unrecognized type to an arrangement!");
+
+  throw std::runtime_error("Attempting to insert a list of object of unrecognized type to an arrangement!");
 }
 
 // Overlay two arrangements
@@ -475,7 +484,8 @@ Halfedge& insert_ni_cv_pl(Arrangement_on_surface_2& arr,
 { return *(CGAL::insert_non_intersecting_curve(arr, xcv, pl)); }
 
 // Insert a curve into an arrangement.
-void insert_cv(Arrangement_on_surface_2& arr, const Curve_2& cv)
+template <typename Aos_2>
+void insert_cv(Aos_2& arr, const typename Aos_2::Geometry_traits_2::Curve_2& cv)
 { CGAL::insert(arr, cv); }
 
 // Insert a curve into an arrangement.
@@ -625,6 +635,7 @@ void export_aos_with_history(py::module_& m) {
   add_iterator<Oci, Oci>("Originating_curve_iterator", awh_c);
 
   m.def("insert", &aos2::insert_curves<Aos_wh>)
+    .def("insert", &aos2::insert_cv<Aos_wh>)
     ;
 }
 
@@ -772,7 +783,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
 
 // Curve data
 #if defined(CGALPY_AOS2_CURVE_DATA)
-  export_arr_curve_data_traits_2<aos2::Cgt>(m));
+  export_arr_curve_data_traits_2<aos2::Cgt>(m);
 #endif
 
   // 3D Envelopes
@@ -841,7 +852,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Do_intersect_tr_pl = bool(*)(Aos&, const Xcv&, const Trapezoid_pl&);
   using Do_intersect_lm_pl = bool(*)(Aos&, const Xcv&, const Landmarks_pl&);
 
-  m.def("insert", &aos2::insert_cv)
+  m.def("insert", &aos2::insert_cv<Aos>)
     .def("insert", &aos2::insert_cv_pl<Naive_pl>)
     .def("insert", &aos2::insert_cv_pl<Wal_pl>)
     .def("insert", &aos2::insert_cv_pl<Trapezoid_pl>)
