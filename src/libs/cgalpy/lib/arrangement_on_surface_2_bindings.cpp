@@ -441,14 +441,23 @@ py::object curves(const Arrangement_on_surface_with_history_2& arr_wh)
 { return make_iterator(arr_wh.curves_begin(), arr_wh.curves_end()); }
 
 //
-// py::object
-// induced_edges(const Arrangement_on_surface_with_history_2& arr_wh,
-//               Arrangement_on_surface_with_history_2::Curve_2& cv) {
-//   using Curve_const_handle =
-//     Arrangement_on_surface_with_history_2::Curve_const_handle;
-//   return make_iterator(arr_wh.induced_edges_begin(Curve_const_handle(&cv)),
-//                        arr_wh.induced_edges_end(Curve_const_handle(&cv)));
-// }
+py::object induced_edges(const Arrangement_on_surface_with_history_2& arr_wh,
+                         const Arrangement_on_surface_with_history_2::
+                         Curve_halfedges& ch) {
+  using Aos_wh = Arrangement_on_surface_with_history_2;
+  using Cch = Aos_wh::Curve_const_handle;
+  return make_iterator(arr_wh.induced_edges_begin(Cch(&ch)),
+                       arr_wh.induced_edges_end(Cch(&ch)));
+}
+
+//
+Arrangement_on_surface_with_history_2::Size
+number_of_induced_edges(const Arrangement_on_surface_with_history_2& arr,
+                        const Arrangement_on_surface_with_history_2::
+                        Curve_halfedges& ch) {
+  using Aos_wh = Arrangement_on_surface_with_history_2;
+  return arr.number_of_induced_edges(Aos_wh::Curve_const_handle(&ch));
+}
 
 #endif
 
@@ -640,6 +649,7 @@ void export_aos_with_history(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Aos_wh = aos2::Arrangement_on_surface_with_history_2;
   using Gt = Aos_wh::Geometry_traits_2;
+  using Cv = Gt::Curve_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Aos_wh, Aos> awh_c(m, "Arrangement_on_surface_with_history_2");
@@ -650,8 +660,8 @@ void export_aos_with_history(py::module_& m) {
     .def("originating_curves", &aos2::originating_curves, py::keep_alive<0, 1>())
     .def("number_of_curves", &Aos_wh::number_of_curves)
     .def("curves", &aos2::curves, py::keep_alive<0, 1>())
-    .def("number_of_induced_edges", &Aos_wh::number_of_induced_edges)
-    // .def("induced_edges", &aos2::edges, py::keep_alive<0, 1>())
+    .def("number_of_induced_edges", &aos2::number_of_induced_edges)
+    .def("induced_edges", &aos2::edges, py::keep_alive<0, 1>())
     ;
 
   using Oci = Aos_wh::Originating_curve_iterator;
@@ -664,6 +674,15 @@ void export_aos_with_history(py::module_& m) {
   m.def("insert", &aos2::insert_curves<Aos_wh>)
     .def("insert", &aos2::insert_cv<Aos_wh>)
     ;
+
+  using Ch = Aos_wh::Curve_halfedges;
+  if (! add_attr<Ch>(awh_c, "Curve_halfedges")) {
+    py::class_<Ch, Cv>(awh_c, "Curve_halfedges")
+      .def(py::init<>())
+      .def(py::init_implicit<const Cv&>())
+      ;
+  }
+
 }
 
 #endif
