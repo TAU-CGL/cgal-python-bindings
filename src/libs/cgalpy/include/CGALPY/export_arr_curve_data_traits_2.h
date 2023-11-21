@@ -5,15 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
-
-// Copyright (c) 2019 Israel.
-// All rights reserved to Tel Aviv University.
-//
-// SPDX-License-Identifier: GPL-3.0-or-later.
-// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
-//
-// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
-//            Efi Fogel         <efifogel@gmail.com>
+//            Nir Goren         <nirgoren@mail.tau.ac.il>
 
 #ifndef CGALPY_EXPORT_ARR_CURVE_DATA_TRAITS_2_HPP
 #define CGALPY_EXPORT_ARR_CURVE_DATA_TRAITS_2_HPP
