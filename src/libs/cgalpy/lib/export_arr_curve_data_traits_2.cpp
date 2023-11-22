@@ -7,9 +7,6 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 //            Nir Goren         <nirgoren@mail.tau.ac.il>
 
-#ifndef CGALPY_EXPORT_ARR_CURVE_DATA_TRAITS_2_HPP
-#define CGALPY_EXPORT_ARR_CURVE_DATA_TRAITS_2_HPP
-
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Arr_curve_data_traits_2.h>
@@ -19,19 +16,19 @@
 
 namespace py = nanobind;
 
-template <typename Traits>
 void export_arr_curve_data_traits_2(py::module_& m) {
-  using Base_traits = typename Traits::Base_traits_2;
-  using Cv = typename Traits::Curve_2;
-  using Cv_data = typename Traits::Curve_data;
-  using Base_cv = typename Base_traits::Curve_2;
-  using Xcv_data = typename Traits::X_monotone_curve_data;
-  using Xcv = typename Traits::X_monotone_curve_2;
-  using Base_xcv = typename Base_traits::X_monotone_curve_2;
+  using Gt = aos2::Cd_geometry_traits_2;
+  using Base_gt = Gt::Base_traits_2;
+  using Cv = Gt::Curve_2;
+  using Cv_data = Gt::Curve_data;
+  using Base_cv = Base_gt::Curve_2;
+  using Xcv_data = Gt::X_monotone_curve_data;
+  using Xcv = Gt::X_monotone_curve_2;
+  using Base_xcv = Base_gt::X_monotone_curve_2;
 
-  if (add_attr<Traits>(m, "Arr_curve_data_traits_2")) return;
+  if (add_attr<Gt>(m, "Arr_curve_data_traits_2")) return;
 
-  py::class_<Traits, Base_traits> traits_c(m, "Arr_curve_data_traits_2");
+  py::class_<Gt, Base_gt> traits_c(m, "Arr_curve_data_traits_2");
   traits_c.def(py::init<>());
 
   if (! add_attr<Cv>(traits_c, "Curve_2")) {
@@ -54,5 +51,3 @@ void export_arr_curve_data_traits_2(py::module_& m) {
       ;
   }
 }
-
-#endif

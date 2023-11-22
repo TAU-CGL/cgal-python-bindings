@@ -86,8 +86,26 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
         set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_geodesic_arc_on_sphere_traits_2.cpp)
     endif ()
 
+    if (CGALPY_AOS2_CONSOLIDATED_CURVE_DATA)
+      if (NOT CGALPY_AOS2_CURVE_DATA)
+        message(FATAL_ERROR "CGALPY_AOS2_CURVE_DATA not set!\nTurning off CGALPY_AOS2_CONSOLIDATED_CURVE_DATA")
+	set (CGALPY_AOS2_CONSOLIDATED_CURVE_DATA OFF)
+      endif()
+    endif ()
+
     if (CGALPY_AOS2_WITH_HISTORY)
+      if (NOT CGALPY_AOS2_CONSOLIDATED_CURVE_DATA)
+        message(FATAL_ERROR "CGALPY_AOS2_CONSOLIDATED_CURVE_DATA not set!\nTurning off CGALPY_AOS2_WITH_HISTORY")
+	set (CGALPY_AOS2_WITH_HISTORY OFF)
+      endif()
+    endif()
+
+    if (CGALPY_AOS2_CONSOLIDATED_CURVE_DATA)
       set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_consolidated_curve_data_traits_2.cpp)
+    endif ()
+
+    if (CGALPY_AOS2_CURVE_DATA)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_curve_data_traits_2.cpp)
     endif ()
 
     # Cells

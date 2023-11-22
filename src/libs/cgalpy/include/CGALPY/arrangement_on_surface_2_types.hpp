@@ -107,54 +107,78 @@ using Agt = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
-// Curve Data:
-using Cgt = Cd_tr<aos2_curve_data(), Agt, py::object>::type;
-
 // 3D Envelope
 constexpr bool env_surface_data()
 { return DETECT_EXIST(CGALPY_ENV3_SURFACE_DATA); }
 
 using Base_egt =
-  Base_env_tr<envelope_3_bindings(), CGALPY_ENV3_GEOMETRY_TRAITS, Cgt>::type;
+  Base_env_tr<envelope_3_bindings(), CGALPY_ENV3_GEOMETRY_TRAITS, Agt>::type;
 using Cnv = CGAL::_Default_convert_func<py::object, py::object>;
 using Egt = Env_tr<envelope_3_bindings(), env_surface_data(), Base_egt,
                      py::object, py::object, Cnv>::type;
+
+// General polygon
 using Ggt = Bso_tr<boolean_set_operations_2_bindings(), Egt>::type;
 
-using Point_2 = typename Ggt::Point_2;
-using Curve_2 = typename Ggt::Curve_2;
-using X_monotone_curve_2 = typename Ggt::X_monotone_curve_2;
+// Curve Data & Consolidated curve data:
+#if defined(CGALPY_AOS2_WITH_HISTORY)
+using Cd_data = Ggt::Curve_2*;
+#else
+using Cd_data = py::object;
+#endif
+using Cgt =
+  Cd_tr<aos2_consolidated_curve_data(), aos2_curve_data(), Ggt, Cd_data>::Cgt;
+using Ccgt =
+  Cd_tr<aos2_consolidated_curve_data(), aos2_curve_data(), Ggt, Cd_data>::Ccgt;
+
+// The arrangement on surface with history is parameterized with a geometry
+// traits that os not extended with the consolidated curve-data traits (and
+// the curve-data traits itself).
+// Define the final geometry traits in the hierarchy:
+#if defined(CGALPY_AOS2_WITH_HISTORY)
+using Fgt = Ggt;
+#else
+using Fgt = Ccgt;
+#endif
+
+// Define the geometry traits hierarchy:
+using Arr_geometry_traits_2 = Agt;
+using Env_geometry_traits_2 = Egt;
+using Gps_geometry_traits_2 = Ggt;
+using Cd_geometry_traits_2 = Cgt;
+using Ccd_geometry_traits_2 = Ccgt;
+using Final_geometry_traits_2 = Fgt;
+
+// General
+using Point_2 = typename Fgt::Point_2;
+using Curve_2 = typename Fgt::Curve_2;
+using X_monotone_curve_2 = typename Cgt::X_monotone_curve_2;
 
 // Vertex
-using Vb = CGAL::Arr_vertex_base<Ggt::Point_2>;
-using Vbe = Vertex_env<envelope_3_bindings(), Vb, Ggt>::type;
+using Vb = CGAL::Arr_vertex_base<Fgt::Point_2>;
+using Vbe = Vertex_env<envelope_3_bindings(), Vb, Fgt>::type;
 using V = Vertex_extended<is_vertex_extended(), Vbe, py::object>::type;
 
 // Halfedge
-using Hb = Halfedge_gps<boolean_set_operations_2_bindings(), Ggt>::type;
-using Hbe = Halfedge_env<envelope_3_bindings(), Hb, Ggt>::type;
+using Hb = Halfedge_gps<boolean_set_operations_2_bindings(), Fgt>::type;
+using Hbe = Halfedge_env<envelope_3_bindings(), Hb, Fgt>::type;
 using H = Halfedge_extended<is_halfedge_extended(), Hbe, py::object>::type;
 
 // Face
 using Fb = Face_gps<boolean_set_operations_2_bindings()>::type;
-using Fbe = Face_env<envelope_3_bindings(), Fb, Ggt>::type;
+using Fbe = Face_env<envelope_3_bindings(), Fb, Fgt>::type;
 using F = Face_extended<is_face_extended(), Fbe, py::object>::type;
 
-// Define the geometry traits hierarchy:
-using Arr_geometry_traits_2 = Agt;
-using Cd_geometry_traits_2 = Cgt;
-using Env_geometry_traits_2 = Egt;
-using Gps_geometry_traits_2 = Ggt;
-
 // Define the arrangement-on-surface types:
-using Dcel = CGAL::Arr_dcel<Ggt, V, H, F>;
-using Arrangement_on_surface_2 = With_history<with_history(), Ggt, Dcel>::Aos;
-using Arrangement_2 = With_history<with_history(), Ggt, Dcel>::Arr;
+using Dcel = CGAL::Arr_dcel<Fgt, V, H, F>;
+using Arrangement_on_surface_2 = With_history<with_history(), Fgt, Dcel>::Aos;
+using Arrangement_2 = With_history<with_history(), Fgt, Dcel>::Arr;
 using Arrangement_on_surface_with_history_2 =
-  With_history<with_history(), Ggt, Dcel>::Aos_with_history;
+  With_history<with_history(), Fgt, Dcel>::Aos_with_history;
 using Arrangement_with_history_2 =
-  With_history<with_history(), Ggt, Dcel>::Arr_with_history;
+  With_history<with_history(), Fgt, Dcel>::Arr_with_history;
 
+// Define the actual traits:
 using Geometry_traits_2 = Arrangement_on_surface_2::Geometry_traits_2;
 using Topology_traits = Arrangement_on_surface_2::Topology_traits;
 

@@ -127,7 +127,7 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   cv_c.def(py::init<Segment_2&>())
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
-    .def(py::init<Circle_2&>())
+    .def(py::init_implicit<Circle_2&>())
     .def(py::init<Point_2&, FT&>())
     .def(py::init<Point_2&, FT&, CGAL::Orientation>())
     .def(py::init<Circle_2&, aos2::Point_2&, aos2::Point_2&>())

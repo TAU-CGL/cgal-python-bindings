@@ -32,7 +32,6 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/export_arr_curve_data_traits_2.h"
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
   (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
@@ -56,6 +55,7 @@ void export_arr_bezier_traits_2(py::module_&);
 void export_arr_rational_function_traits_2(py::module_&);
 void export_arr_algebraic_segment_traits_2(py::module_&);
 void export_arr_geodesic_arc_on_sphere_traits_2(py::module_&);
+void export_arr_curve_data_traits_2(py::module_&);
 void export_arr_consolidated_curve_data_traits_2(py::module_&);
 
 #if defined(CGALPY_ENVELOPE_3_BINDINGS)
@@ -764,7 +764,7 @@ void export_arr(py::module_& m) {
 void export_arr_with_history(py::module_& m) {
   using Aos_wh = aos2::Arrangement_on_surface_with_history_2;
   using Arr_wh = aos2::Arrangement_with_history_2;
-  using Gt = aos2::Ggt;
+  using Gt = Arr_wh::Geometry_traits_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Arr_wh, Aos_wh> awh_c(m, "Arrangement_with_history_2");
@@ -829,10 +829,15 @@ void export_arrangement_on_surface_2(py::module_& m) {
 
 // Curve data
 #if defined(CGALPY_AOS2_CURVE_DATA)
-  export_arr_curve_data_traits_2<aos2::Cgt>(m);
+  export_arr_curve_data_traits_2(m);
 #endif
 
-  // 3D Envelopes
+// Consolidated curve data
+#if defined(CGALPY_AOS2_CONSOLIDATED_CURVE_DATA)
+  export_arr_consolidated_curve_data_traits_2(m);
+#endif
+
+// 3D Envelopes
 #if defined(CGALPY_ENVELOPE_3_BINDINGS)
 #if CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_PLANE_GEOMETRY_TRAITS
   export_env_plane_traits_3(m);
@@ -873,7 +878,6 @@ void export_arrangement_on_surface_2(py::module_& m) {
       export_aos_with_history(m);
     if (! add_attr<Arr_wh>(m, "Arrangement_with_history_2"))
       export_arr_with_history(m);
-    export_arr_consolidated_curve_data_traits_2(m);
   }
 #endif
 

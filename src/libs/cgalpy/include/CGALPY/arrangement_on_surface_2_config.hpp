@@ -28,6 +28,7 @@
 #include <CGAL/Boolean_set_operations_2/Gps_default_dcel.h>
 #include <CGAL/Arr_geodesic_arc_on_sphere_traits_2.h>
 #include <CGAL/Arr_curve_data_traits_2.h>
+#include <CGAL/Arr_consolidated_curve_data_traits_2.h>
 #include <CGAL/Env_sphere_traits_3.h>
 #include <CGAL/Env_triangle_traits_3.h>
 #include <CGAL/Env_surface_data_traits_3.h>
@@ -59,7 +60,11 @@ namespace aos2 {
 constexpr bool with_history()
 { return DETECT_EXIST(CGALPY_AOS2_WITH_HISTORY); }
 
-// Indicates whether the curv s type is extended with data
+// Indicates whether the curve type is extended with consolidated data
+constexpr bool aos2_consolidated_curve_data()
+{ return DETECT_EXIST(CGALPY_AOS2_CONSOLIDATED_CURVE_DATA); }
+
+// Indicates whether the curve type is extended with data
 constexpr bool aos2_curve_data()
 { return DETECT_EXIST(CGALPY_AOS2_CURVE_DATA); }
 
@@ -75,15 +80,25 @@ constexpr bool is_halfedge_extended()
 constexpr bool is_face_extended()
 { return DETECT_EXIST(CGALPY_AOS2_FACE_EXTENDED); }
 
-// Curve data
+// Curve data & Consolidated curve data
+template <bool ccd, bool cd, typename Btr, typename Data> struct Cd_tr {};
 
-template <bool b, typename Btr, typename XData> struct Cd_tr {};
+template <typename Btr, typename Data> struct Cd_tr<false, false, Btr, Data> {
+  using Cgt = Btr;
+  using Ccgt = Btr;
+};
 
-template <typename Btr, typename XData> struct Cd_tr<false, Btr, XData>
-{ using type = Btr; };
+template <typename Btr, typename Data> struct Cd_tr<false, true, Btr, Data> {
+  using Cgt = CGAL::Arr_curve_data_traits_2<Btr, Data>;
+  using Ccgt = Cgt;
+};
 
-template <typename Btr, typename XData> struct Cd_tr<true, Btr, XData>
-{ using type = CGAL::Arr_curve_data_traits_2<Btr, XData>; };
+template <typename Btr, typename Data> struct Cd_tr<true, true, Btr, Data> {
+  using Ul = CGAL::_Unique_list<Data>;
+  using Cul = CGAL::_Consolidate_unique_lists<Data>;
+  using Cgt = CGAL::Arr_curve_data_traits_2<Btr, Ul, Cul, Data>;
+  using Ccgt = CGAL::Arr_consolidated_curve_data_traits_2<Btr, Data>;
+};
 
 // 3D Envelope traits
 template <bool b, int i, typename Base> struct Base_env_tr {};
