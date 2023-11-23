@@ -751,8 +751,12 @@ void export_arr(py::module_& m) {
   (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
   (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS)
 #ifdef CGALPY_HAS_VISUAL
-  using Draw = void(*)(const aos2::Arrangement_2&, const char*, bool);
-  m.def("draw", static_cast<Draw>(CGAL::draw),
+  //! \todo The draw function should be applied only to arrangement on surface
+  using Draw_arr = void(*)(const Arr&, const char*, bool);
+  m.def("draw", static_cast<Draw_arr>(CGAL::draw),
+        py::arg("arr"), py::arg("title"), py::arg("draw_vertices") = false);
+  using Draw_aos = void(*)(const Aos&, const char*, bool);
+  m.def("draw", static_cast<Draw_aos>(CGAL::draw),
         py::arg("arr"), py::arg("title"), py::arg("draw_vertices") = false);
 #endif
 #endif
