@@ -125,10 +125,10 @@ private:
 #endif
 
 // Insert a list of curves into an arrangement.
-template <typename Aos_2>
-void insert_curves(Aos_2& arr, py::list& lst) {
+void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
   if (lst.size() == 0) return;
-  using Xcv = typename Aos_2::Geometry_traits_2::X_monotone_curve_2;
+  using Gt = Arrangement_on_surface_2::Geometry_traits_2;
+  using Xcv = Gt::X_monotone_curve_2;
   if (py::isinstance<Xcv>(lst[0])) {
     auto begin = stl_input_iterator<Xcv>(lst);
     auto end = stl_input_iterator<Xcv>(lst, false);
@@ -136,7 +136,7 @@ void insert_curves(Aos_2& arr, py::list& lst) {
     return;
   }
 
-  using Cv = typename Aos_2::Geometry_traits_2::Curve_2;
+  using Cv = Gt::Curve_2;
   if (py::isinstance<Cv>(lst[0])) {
     auto begin = stl_input_iterator<const Cv&>(lst);
     auto end = stl_input_iterator<const Cv&>(lst, false);
@@ -145,11 +145,11 @@ void insert_curves(Aos_2& arr, py::list& lst) {
   }
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  using Pnt = typename Aos_2::Geometry_traits_2::Point_2;
+  using Pnt = Gt::Point_2;
   if (py::isinstance<Pnt>(lst[0])) {
     // Points must be wrapped into CGAL::Objects???
-    auto begin = Object_input_iterator<Pnt>(lst);
-    auto end = Object_input_iterator<Pnt>(lst, false);
+    auto begin = Object_input_iterator<const Pnt&>(lst);
+    auto end = Object_input_iterator<const Pnt&>(lst, false);
     CGAL::insert(arr, begin, end);
     return;
   }
@@ -423,10 +423,47 @@ py::object unbounded_faces(const Arrangement_on_surface_2& arr)
 
 /// @}
 
+#if defined(CGALPY_AOS2_WITH_HISTORY)
+
+// Insert a curve into an arrangement with history
+Arrangement_on_surface_with_history_2::Curve_halfedges&
+insert_cv_with_history(Arrangement_on_surface_with_history_2& arr,
+                       const Arrangement_on_surface_with_history_2::
+                       Geometry_traits_2::Curve_2& cv)
+{
+  using Cha = Arrangement_on_surface_with_history_2::Curve_handle;
+  using Che = Arrangement_on_surface_with_history_2::Curve_halfedges;
+  Cha cha = CGAL::insert(arr, cv);
+  Che& x = *cha;
+  return x;
+}
+
+// Insert a list of curves into an arrangement with history.
+void insert_curves_with_history(Arrangement_on_surface_with_history_2& arr,
+                                py::list& lst) {
+  if (lst.size() == 0) return;
+  using Gt = Arrangement_on_surface_with_history_2::Geometry_traits_2;
+  using Cv = Gt::Curve_2;
+  if (py::isinstance<Cv>(lst[0])) {
+    auto begin = stl_input_iterator<const Cv&>(lst);
+    auto end = stl_input_iterator<const Cv&>(lst, false);
+    CGAL::insert(arr, begin, end);
+    return;
+  }
+
+  throw std::runtime_error("Attempting to insert a list of object of unrecognized type to an arrangement with history!");
+}
+
+// Remove a curve from an arrangement with history.
+Arrangement_on_surface_with_history_2::Size
+remove_curve_with_history(Arrangement_on_surface_with_history_2& arr,
+                          Arrangement_on_surface_with_history_2::Curve_halfedges& ch) {
+  using Aos_wh = Arrangement_on_surface_with_history_2;
+  return CGAL::remove_curve(arr, Aos_wh::Curve_handle(&ch));
+}
+
 /// \name Aos With History Iterators
 /// @{
-
-#if defined(CGALPY_AOS2_WITH_HISTORY)
 
 //
 py::object
@@ -459,9 +496,23 @@ number_of_induced_edges(const Arrangement_on_surface_with_history_2& arr,
   return arr.number_of_induced_edges(Aos_wh::Curve_const_handle(&ch));
 }
 
-#endif
+//
+Arrangement_on_surface_with_history_2::Halfedge&
+split_edge_with_history(Arrangement_on_surface_with_history_2& arr,
+                        Arrangement_on_surface_with_history_2::Halfedge& e,
+                        const Arrangement_on_surface_with_history_2::Point_2& p)
+{ return *(arr.split_edge(Halfedge_handle(&e), p)); }
+
+//
+Arrangement_on_surface_with_history_2::Halfedge&
+merge_edge_with_history(Arrangement_on_surface_with_history_2& arr,
+                        Arrangement_on_surface_with_history_2::Halfedge& e1,
+                        Arrangement_on_surface_with_history_2::Halfedge& e2)
+{ return *(arr.merge_edge(Halfedge_handle(&e1), Halfedge_handle(&e2))); }
 
 /// @}
+
+#endif
 
 /// \name Points and curves insertions
 /// @{
@@ -651,6 +702,7 @@ void export_aos_with_history(py::module_& m) {
   using Gt = Aos_wh::Geometry_traits_2;
   using Cv = Gt::Curve_2;
   constexpr auto ri(py::rv_policy::reference_internal);
+  constexpr auto ref(py::rv_policy::reference);
 
   py::class_<Aos_wh, Aos> awh_c(m, "Arrangement_on_surface_with_history_2");
   awh_c.def(py::init<>())
@@ -662,6 +714,8 @@ void export_aos_with_history(py::module_& m) {
     .def("curves", &aos2::curves, py::keep_alive<0, 1>())
     .def("number_of_induced_edges", &aos2::number_of_induced_edges)
     .def("induced_edges", &aos2::edges, py::keep_alive<0, 1>())
+    .def("split_edge", &aos2::split_edge_with_history, ri)
+    .def("merge_edge", &aos2::merge_edge_with_history, ri)
     ;
 
   using Oci = Aos_wh::Originating_curve_iterator;
@@ -671,18 +725,19 @@ void export_aos_with_history(py::module_& m) {
   add_iterator<Cci, Cci>("Curve_iterator", awh_c);
   add_iterator<Iei, Iei>("Induced_edge_iterator", awh_c);
 
-  m.def("insert", &aos2::insert_curves<Aos_wh>)
-    .def("insert", &aos2::insert_cv<Aos_wh>)
-    ;
-
   using Ch = Aos_wh::Curve_halfedges;
   if (! add_attr<Ch>(awh_c, "Curve_halfedges")) {
-    py::class_<Ch, Cv>(awh_c, "Curve_halfedges")
-      .def(py::init<>())
+    py::class_<Ch, Cv> ch_c(awh_c, "Curve_halfedges");
+    ch_c.def(py::init<>())
       .def(py::init_implicit<const Cv&>())
       ;
   }
 
+  //! \todo Why the f... reference_internal doesn't work?
+  m.def("insert", &aos2::insert_curves_with_history)
+    .def("insert_curve", &aos2::insert_cv_with_history, ref)
+    .def("remove_curve", &aos2::remove_curve_with_history)
+    ;
 }
 
 #endif
@@ -917,7 +972,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .def("insert", &aos2::insert_xcv_vertex)
     .def("insert", &aos2::insert_xcv_halfedge)
     .def("insert", &aos2::insert_xcv_face)
-    .def("insert", &aos2::insert_curves<Aos>)
+    .def("insert", &aos2::insert_curves)
     ;
 
   m.def("do_intersect", static_cast<Do_intersect>(CGAL::do_intersect))
