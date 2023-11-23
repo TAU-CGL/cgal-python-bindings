@@ -15,9 +15,6 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/aos_2_concepts/make_x_monotone_2_call_operator.hpp"
 #include "CGALPY/aos_2_concepts/intersect_2_call_operator.hpp"
-#include "CGALPY/Kernel/export_point_2.hpp"
-#include "CGALPY/Kernel/export_segment_2.hpp"
-#include "CGALPY/Kernel/export_arr_non_caching_segment_basic_traits_2.hpp"
 
 namespace py = nanobind;
 
@@ -42,7 +39,7 @@ void export_arr_non_caching_segment_traits_2(py::module_& m) {
   py::class_<Gt, Bgt> traits_c(m, "Arr_non_caching_segment_traits_2");
 
   add_attr<Cv>(traits_c, "Curve_2");
-  add_attr<Ctr_cv>(bt_c, "Construct_curve_2");
+  add_attr<Ctr_cv>(traits_c, "Construct_curve_2");
 
   py::class_<Intersect_2>(traits_c, "Intersect_2")
     .def("__call__", &intersect_2_call_operator<Gt>)
@@ -64,13 +61,8 @@ void export_arr_non_caching_segment_traits_2(py::module_& m) {
     .def("__call__", &make_x_monotone_2_call_operator<Gt>)
     ;
 
-  using Approx = Gt::Approximate_2;
   using Ctr_opposite = Gt::Construct_opposite_2;
   using Cmp_endpoints_xy = Gt::Compare_endpoints_xy_2;
-
-  py::class_<Approx>(traits_c, "Approximate_2")
-    .def("__call__", &Approx::operator())
-    ;
 
   py::class_<Ctr_opposite>(traits_c, "Construct_opposite_2")
     .def("__call__", [](const Ctr_opposite& ctr_opp, const Xcv& xcv)->Xcv
@@ -88,7 +80,6 @@ void export_arr_non_caching_segment_traits_2(py::module_& m) {
     .def("are_mergeable_2_object", &Gt::are_mergeable_2_object)
     .def("merge_2_object", &Gt::merge_2_object)
     .def("make_x_monotone_2_object", &Gt::make_x_monotone_2_object)
-    .def("approximate_2_object", &Gt::approximate_2_object)
     .def("construct_opposite_2_object", &Gt::construct_opposite_2_object)
     .def("compare_endpoints_xy_2_object", &Gt::compare_endpoints_xy_2_object)
     .def("construct_curve_2_object", &Gt::construct_curve_2_object)
