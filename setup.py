@@ -12,7 +12,7 @@ The setup options are documented here:
 https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
 """
 
-from skbuild import setup
+from skbuild_conan import setup
 import sys
 import os
 
@@ -62,21 +62,13 @@ def prepare():
             f.write(proxy_init)
 
 
-def run_conan():
-    import subprocess
-
-    # Make sure to access the local conan
-    cmd = "-m conans.conan install . -if cmake --build=missing"
-    subprocess.run([sys.executable, *cmd.split(" ")], check=True)
-
-
 def readme():
     # Simply return the README.md as string
     with open("README.md") as file:
         return file.read()
 
+
 prepare()
-run_conan()  # automatically running conan. Ugly workaround, but does its job.
 setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     # ~~~~~~~~~ BASIC INFORMATION ~~~~~~~~~~~
     name=PACKAGE_NAME,
@@ -104,10 +96,11 @@ setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
         "networkx>=2.5.1",
         "requests>=2.25.1",
     ],
+    conan_requirements=["cgal/[>=5.6]"],
     # ~~~~~~~~~~~ CRITICAL CMAKE SETUP ~~~~~~~~~~~~~~~~~~~~~
     # Especially LTS systems often have very old CMake version (or none at all).
     # Defining this will automatically install locally a working version.
-    cmake_minimum_required_version="3.26",
+    cmake_minimum_required_version="3.15",
     #
     # By default, the `install` target is built (automatically provided).
     # To compile a specific target, use the following line.
@@ -131,7 +124,7 @@ setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     #
     # Some CMake-projects allow you to configure it using parameters. You
     # can specify them for this Python-package using the following line.
-    cmake_args=[f"-DCGALPY_IMPORT_NAME={IMPORT_NAME}", f'-DCMAKE_PREFIX_PATH={os.path.join(os.getcwd(), "cmake")}'] + CGALPY_CONFIGURATION
+    cmake_args=[f"-DCGALPY_IMPORT_NAME={IMPORT_NAME}"] + CGALPY_CONFIGURATION
     #
     # There are further options, but you should be fine with these above.
 )
