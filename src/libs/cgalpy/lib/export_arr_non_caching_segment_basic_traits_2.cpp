@@ -9,12 +9,18 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/Arr_non_caching_segment_basic_traits_2.h>
+
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/Kernel/export_point_2.hpp"
+#include "CGALPY/Kernel/export_segment_2.hpp"
+
 namespace py = nanobind;
 
 //
 void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
   using Bgt = CGAL::Arr_non_caching_segment_basic_traits_2<Kernel>;
-  using Gt = CGAL::Arr_non_caching_segment_traits_2<Kernel>;
 
   if (add_attr<Bgt>(m, "Arr_non_caching_segment_basic_traits_2")) return;
 
@@ -57,11 +63,19 @@ void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
     .def("__call__", &Compare_y_at_x_left_2::operator())
     ;
 
+  using Ant = Bgt::Approximate_number_type;
+  using Approx = Bgt::Approximate_2;
+  using ovld1 = Ant(Approx::*)(const Pnt&, int i) const;
+  py::class_<Approx>(bt_c, "Approximate_2")
+    .def("__call__", static_cast<ovld1>(&Approx::operator()))
+    ;
+
   bt_c.def(py::init<>())
     .def(py::init<const Bgt&>())
     .def("compare_y_at_x_right_2_object", &Bgt::compare_y_at_x_right_2_object)
     .def("compare_y_at_x_left_2_object", &Bgt::compare_y_at_x_left_2_object)
     .def("construct_x_monotone_curve_2_object",
-         &Bgt::construct_x_monotone_curve_2_object);
+         &Bgt::construct_x_monotone_curve_2_object)
+    .def("approximate_2_object", &Bgt::approximate_2_object)
     ;
 }
