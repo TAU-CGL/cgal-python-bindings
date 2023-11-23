@@ -38,8 +38,8 @@ py::list polygons_with_holes(Gps_on_surface_base_2& ps) {
   return lst;
 }
 
-void insert_range0(Gps_on_surface_base_2& ps, py::list& pgn_lst,
-                   py::list& pwh_lst) {
+//
+void insert1(Gps_on_surface_base_2& ps, py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
   auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
@@ -49,15 +49,31 @@ void insert_range0(Gps_on_surface_base_2& ps, py::list& pgn_lst,
   ps.insert(begin0, end0, begin1, end1);
 }
 
-template <typename T>
-void insert_range(Gps_on_surface_base_2& ps, py::list& lst) {
-  auto begin = stl_input_iterator<T>(lst);
-  auto end = stl_input_iterator<T>(lst, false);
-  ps.insert(begin, end);
+//
+void insert2(Gps_on_surface_base_2& ps, py::list& lst) {
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+
+  if (py::isinstance<Pgn>(lst[0])) {
+    auto begin = stl_input_iterator<Pgn>(lst);
+    auto end = stl_input_iterator<Pgn>(lst, false);
+    ps.insert(begin, end);
+    return;
+  }
+
+  if (py::isinstance<Pwh>(lst[0])) {
+    auto begin = stl_input_iterator<Pwh>(lst);
+    auto end = stl_input_iterator<Pwh>(lst, false);
+    ps.insert(begin, end);
+    return;
+  }
+
+  throw std::runtime_error("Attempting to insert a list of objects of unrecognized type!");
 }
 
-void intersection_range0(Gps_on_surface_base_2& ps, py::list& pgn_lst,
-                         py::list& pwh_lst) {
+//
+void intersection1(Gps_on_surface_base_2& ps,
+                   py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
   auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
@@ -67,15 +83,30 @@ void intersection_range0(Gps_on_surface_base_2& ps, py::list& pgn_lst,
   ps.intersection(begin0, end0, begin1, end1);
 }
 
-template <typename T>
-void intersection_range(Gps_on_surface_base_2& ps, py::list& lst) {
-  auto begin = stl_input_iterator<T>(lst);
-  auto end = stl_input_iterator<T>(lst, false);
-  ps.intersection(begin, end);
+//
+void intersection2(Gps_on_surface_base_2& ps, py::list& lst) {
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+
+  if (py::isinstance<Pgn>(lst[0])) {
+    auto begin = stl_input_iterator<Pgn>(lst);
+    auto end = stl_input_iterator<Pgn>(lst, false);
+    ps.intersection(begin, end);
+    return;
+  }
+
+  if (py::isinstance<Pwh>(lst[0])) {
+    auto begin = stl_input_iterator<Pwh>(lst);
+    auto end = stl_input_iterator<Pwh>(lst, false);
+    ps.intersection(begin, end);
+    return;
+  }
+
+  throw std::runtime_error("Attempting to intersect a list of objects of unrecognized type!");
 }
 
-void join_range0(Gps_on_surface_base_2& ps, py::list& pgn_lst,
-                 py::list& pwh_lst) {
+//
+void join1(Gps_on_surface_base_2& ps, py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
   auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
@@ -85,15 +116,31 @@ void join_range0(Gps_on_surface_base_2& ps, py::list& pgn_lst,
   ps.join(begin0, end0, begin1, end1);
 }
 
-template <typename T>
-void join_range(Gps_on_surface_base_2& ps, py::list& lst) {
-  auto begin = stl_input_iterator<T>(lst);
-  auto end = stl_input_iterator<T>(lst, false);
-  ps.join(begin, end);
+//
+void join2(Gps_on_surface_base_2& ps, py::list& lst) {
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+
+  if (py::isinstance<Pgn>(lst[0])) {
+    auto begin = stl_input_iterator<Pgn>(lst);
+    auto end = stl_input_iterator<Pgn>(lst, false);
+    ps.join(begin, end);
+    return;
+  }
+
+  if (py::isinstance<Pwh>(lst[0])) {
+    auto begin = stl_input_iterator<Pwh>(lst);
+    auto end = stl_input_iterator<Pwh>(lst, false);
+    ps.join(begin, end);
+    return;
+  }
+
+  throw std::runtime_error("Attempting to join a list of objects of unrecognized type!");
 }
 
-void symmetric_difference_range0(Gps_on_surface_base_2& ps,
-                                 py::list& pgn_lst, py::list& pwh_lst) {
+//
+void symmetric_difference1(Gps_on_surface_base_2& ps,
+                           py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
   auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
@@ -103,15 +150,29 @@ void symmetric_difference_range0(Gps_on_surface_base_2& ps,
   ps.symmetric_difference(begin0, end0, begin1, end1);
 }
 
-template <typename T>
-void symmetric_difference_range(Gps_on_surface_base_2& ps, py::list& lst) {
-  auto begin = stl_input_iterator<T>(lst);
-  auto end = stl_input_iterator<T>(lst, false);
-  ps.symmetric_difference(begin, end);
+//
+void symmetric_difference2(Gps_on_surface_base_2& ps, py::list& lst) {
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+
+  if (py::isinstance<Pgn>(lst[0])) {
+    auto begin = stl_input_iterator<Pgn>(lst);
+    auto end = stl_input_iterator<Pgn>(lst, false);
+    return ps.symmetric_difference(begin, end);
+  }
+
+  if (py::isinstance<Pwh>(lst[0])) {
+    auto begin = stl_input_iterator<Pwh>(lst);
+    auto end = stl_input_iterator<Pwh>(lst, false);
+    return ps.symmetric_difference(begin, end);
+  }
+
+  throw std::runtime_error("Attempting to compute the symmetric difference of a list of objects of unrecognized type!");
 }
 
-bool do_intersect_range0(Gps_on_surface_base_2& ps,
-                         py::list& pgn_lst, py::list& pwh_lst) {
+//
+bool do_intersect1(Gps_on_surface_base_2& ps,
+                   py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
   auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
@@ -121,11 +182,25 @@ bool do_intersect_range0(Gps_on_surface_base_2& ps,
   return ps.do_intersect(begin0, end0, begin1, end1);
 }
 
-template <typename T>
-void do_intersect_range(Gps_on_surface_base_2& ps, py::list& lst) {
-  auto begin = stl_input_iterator<T>(lst);
-  auto end = stl_input_iterator<T>(lst, false);
-  ps.do_intersect(begin, end);
+//
+bool do_intersect2(Gps_on_surface_base_2& ps, py::list& lst) {
+  using Pgn = General_polygon_2;
+  using Pwh = General_polygon_with_holes_2;
+
+  if (py::isinstance<Pgn>(lst[0])) {
+    auto begin = stl_input_iterator<Pgn>(lst);
+    auto end = stl_input_iterator<Pgn>(lst, false);
+    return ps.do_intersect(begin, end);
+  }
+
+  if (py::isinstance<Pwh>(lst[0])) {
+    auto begin = stl_input_iterator<Pwh>(lst);
+    auto end = stl_input_iterator<Pwh>(lst, false);
+    return ps.do_intersect(begin, end);
+  }
+
+  throw std::runtime_error("Attempting to test for intersection a list of objects of unrecognized type!");
+  return false;
 }
 
 }
@@ -158,9 +233,8 @@ void export_general_polygon_set_2(py::module_& m) {
     // insert
     .def("insert", static_cast<void(Gpsb2::*)(const Pgn&)>(&Gpsb2::insert))
     .def("insert", static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::insert))
-    .def("insert", &bso2::insert_range0)
-    .def("insert_polygons", &bso2::insert_range<Pgn>)
-    .def("insert_polygons_with_holes", &bso2::insert_range<Pwh>)
+    .def("insert", &bso2::insert1)
+    .def("insert", &bso2::insert2)
 
     // do_intersect
     .def("do_intersect",
@@ -169,9 +243,8 @@ void export_general_polygon_set_2(py::module_& m) {
          static_cast<bool(Gpsb2::*)(const Pwh&)const>(&Gpsb2::do_intersect))
     .def("do_intersect",
          static_cast<bool(Gpsb2::*)(const Gpsb2&)const>(&Gpsb2::do_intersect))
-    .def("do_intersect", &bso2::do_intersect_range0)
-    .def("do_intersect_polygons", &bso2::do_intersect_range<Pgn>)
-    .def("do_intersect_polygons_with_holes", &bso2::do_intersect_range<Pwh>)
+    .def("do_intersect", &bso2::do_intersect1)
+    .def("do_intersect", &bso2::do_intersect2)
 
     // intersection
     .def("intersection",
@@ -182,18 +255,16 @@ void export_general_polygon_set_2(py::module_& m) {
          static_cast<void(Gpsb2::*)(const Gpsb2&)>(&Gpsb2::intersection))
     .def("intersection",
          static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::intersection))
-    .def("intersection", &bso2::intersection_range0)
-    .def("intersection_polygons", &bso2::intersection_range<Pgn>)
-    .def("intersection_polygons_with_holes", &bso2::intersection_range<Pwh>)
+    .def("intersection", &bso2::intersection1)
+    .def("intersection", &bso2::intersection2)
 
     // join
     .def("join", static_cast<void(Gpsb2::*)(const Pgn&)>(&Gpsb2::join))
     .def("join", static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::join))
     .def("join", static_cast<void(Gpsb2::*)(const Gpsb2&)>(&Gpsb2::join))
     .def("join", static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::join))
-    .def("join", &bso2::join_range0)
-    .def("join_polygons", &bso2::join_range<Pgn>)
-    .def("join_polygons_with_holes", &bso2::join_range<Pwh>)
+    .def("join", &bso2::join1)
+    .def("join", &bso2::join2)
 
     // difference
     .def("difference", py::overload_cast<const Pgn&>(&Gpsb2::difference))
@@ -210,10 +281,8 @@ void export_general_polygon_set_2(py::module_& m) {
          static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::symmetric_difference))
     .def("symmetric_difference",
          static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::symmetric_difference))
-    .def("symmetric_difference", &bso2::symmetric_difference_range0)
-    .def("symmetric_difference_polygons", &bso2::symmetric_difference_range<Pgn>)
-    .def("symmetric_difference_polygons_with_holes",
-         &bso2::symmetric_difference_range<Pwh>)
+    .def("symmetric_difference", &bso2::symmetric_difference1)
+    .def("symmetric_difference", &bso2::symmetric_difference2)
 
     .def("number_of_polygons_with_holes",
          &Gpsb2::number_of_polygons_with_holes)
@@ -239,7 +308,7 @@ void export_general_polygon_set_2(py::module_& m) {
     // 3. Add the `const_` tag to the overloaded const function, as the
     //    overloading is based on constness.
     .def("arrangement_mutable", py::overload_cast<>(&Gpsb2::arrangement), ri)
-    .def("arrangement", py::overload_cast<>(&Gpsb2::arrangement, py::const_))
+    .def("arrangement", py::overload_cast<>(&Gpsb2::arrangement, py::const_), ri)
 
     .def("is_valid", &Gpsb2::is_valid)
     .def("polygons_with_holes", &bso2::polygons_with_holes)
