@@ -78,6 +78,13 @@ extern void export_arrangement_2_io(py::class_<aos2::Arrangement_2,
 
 namespace py = nanobind;
 
+namespace CGAL {
+
+inline bool operator==(const py::object a, const py::object b)
+{ return a.equal(b); }
+
+}
+
 namespace aos2 {
 
 using Cell_variant = std::variant<Vertex_handle, Halfedge_handle, Face_handle>;

@@ -20,6 +20,13 @@
 
 namespace py = nanobind;
 
+namespace CGAL {
+
+inline bool operator==(const py::object a, const py::object b)
+{ return a.equal(b); }
+
+}
+
 namespace aos2 {
 
 typedef typename aos2::Arrangement_2 Arrangement_2;

@@ -25,6 +25,7 @@ void export_arr_curve_data_traits_2(py::module_& m) {
   using Xcv_data = Gt::X_monotone_curve_data;
   using Xcv = Gt::X_monotone_curve_2;
   using Base_xcv = Base_gt::X_monotone_curve_2;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   if (add_attr<Gt>(m, "Arr_curve_data_traits_2")) return;
 
@@ -36,7 +37,7 @@ void export_arr_curve_data_traits_2(py::module_& m) {
       .def(py::init<>())
       .def(py::init_implicit<const Base_cv&>())
       .def(py::init<const Base_cv&, Cv_data>())
-      .def("data", py::overload_cast<>(&Cv::data, py::const_))
+      .def("data", py::overload_cast<>(&Cv::data, py::const_), ri)
       .def("set_data", &Cv::set_data)
       ;
   }
@@ -46,7 +47,7 @@ void export_arr_curve_data_traits_2(py::module_& m) {
       .def(py::init<>())
       .def(py::init_implicit<const Base_xcv&>())
       .def(py::init<const Base_xcv&, Xcv_data>())
-      .def("data", py::overload_cast<>(&Xcv::data, py::const_))
+      .def("data", py::overload_cast<>(&Xcv::data, py::const_), ri)
       .def("set_data", &Xcv::set_data)
       ;
   }
