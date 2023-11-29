@@ -31,7 +31,8 @@ namespace py = nanobind;
 namespace aos2 {
 
 //
-Segment_2 to_segment(X_monotone_curve_2& c) { return Segment_2(c); }
+Segment_2 to_segment(CGAL::Arr_segment_traits_2<Kernel>::X_monotone_curve_2& c)
+{ return Segment_2(c); }
 
 }
 
@@ -40,7 +41,7 @@ void export_arr_segment_traits_2(py::module_& m) {
   using Gt = CGAL::Arr_segment_traits_2<Kernel>;
   using Pnt = Gt::Point_2;
   using Lin = Gt::Line_2;
-  using Xcv = aos2::X_monotone_curve_2;
+  using Xcv = Gt::X_monotone_curve_2;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -87,8 +88,8 @@ void export_arr_segment_traits_2(py::module_& m) {
          [](const Xcv& xcv)->bool { return xcv.is_directed_right(); })
 
     // Deprecated
-    // .def("is_in_x_range", &X_monotone_curve_2::is_in_x_range)
-    // .def("is_in_y_range", &X_monotone_curve_2::is_in_y_range)
+    // .def("is_in_x_range", &Xcv::is_in_x_range)
+    // .def("is_in_y_range", &Xcv::is_in_y_range)
 
     .def("segment", &aos2::to_segment)
   ;
