@@ -888,6 +888,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
   export_arr_non_caching_segment_traits_2(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS
+  export_arr_segment_traits_2(m);
   export_arr_polyline_traits_2(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
   export_arr_segment_traits_2(m);
