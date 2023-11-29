@@ -12,6 +12,8 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 
+#include <CGAL/Iso_rectangle_2.h>
+
 #include "CGALPY/config.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_insertion.hpp"
@@ -29,12 +31,11 @@ void export_iso_rectangle_2(C& c) {
   using Pnt_2 = typename Ker::Point_2;
   using Iso_rect_2 = typename Ker::Iso_rectangle_2;
 
-  c.def(py::init<Pnt_2&, Pnt_2&>())
-    .def(py::init<Pnt_2&, Pnt_2&, int>())
-    .def(py::init<Pnt_2&, Pnt_2&, Pnt_2&, Pnt_2&>())
-    .def(py::init<RT&, RT&, RT&, RT&, RT&>())
-    .def(py::init<RT, RT, RT, RT>())
-    .def(py::init<CGAL::Bbox_2&>())
+  c.def(py::init<const Pnt_2&, const Pnt_2&>())
+    .def(py::init<const Pnt_2&, const Pnt_2&, int>())
+    .def(py::init<const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&>())
+    .def(py::init<const Rt&, const Rt&, const Rt&, const Rt&, const Rt&>())
+    .def(py::init<const CGAL::Bbox_2&>())
     .def("vertex", &Iso_rect_2::vertex)
     .def("__getitem__", &Iso_rect_2::operator[])
     .def("xmin", &Iso_rect_2::xmin)

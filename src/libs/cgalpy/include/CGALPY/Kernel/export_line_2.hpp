@@ -22,46 +22,48 @@
 namespace py = nanobind;
 
 // Export a two-dimensional line of a kernel.
-template <typename Kernel, typename C>
+template <typename Kernel_, typename C>
 void export_line_2(C& c) {
-  using FT = typename Kernel::FT;
-  using RT = typename Kernel::RT;
-  using Dir = typename Kernel::Direction_2;
-  using Pnt = typename Kernel::Point_2;
-  using Ray = typename Kernel::Ray_2;
-  using Seg = typename Kernel::Segment_2;
-  using Vec = typename Kernel::Vector_2;
+  using Ker = Kernel_;
+  // using Ft = typename Kernel::FT;
+  using Rt = typename Ker::RT;
+  using Dir = typename Ker::Direction_2;
+  using Pnt = typename Ker::Point_2;
+  using Ray = typename Ker::Ray_2;
+  using Seg = typename Ker::Segment_2;
+  using Vec = typename Ker::Vector_2;
+  using Lin = typename Ker::Line_2;
 
-  c.def(py::init<RT&, RT&, RT&>())
+  c.def(py::init<Rt&, Rt&, Rt&>())
     .def(py::init<Pnt&, Pnt&>())
     .def(py::init<Pnt&, Dir&>())
     .def(py::init<Pnt&, Vec&>())
     .def(py::init<Seg&>())
     .def(py::init<Ray&>())
-    .def("a", &Line_2::a)
-    .def("b", &Line_2::b)
-    .def("c", &Line_2::c)
-    .def("is_degenerate", &Line_2::is_degenerate)
-    .def("is_horizontal", &Line_2::is_horizontal)
-    .def("is_vertical", &Line_2::is_vertical)
-    .def("oriented_side", &Line_2::oriented_side)
-    .def("has_on", &Line_2::has_on)
-    .def("has_on_boundary", &Line_2::has_on_boundary)
-    .def("has_on_negative_side", &Line_2::has_on_negative_side)
-    .def("has_on_positive_side", &Line_2::has_on_positive_side)
-    .def("projection", &Line_2::projection)
-    .def("direction", &Line_2::direction)
-    .def("to_vector", &Line_2::to_vector)
-    .def("opposite", &Line_2::opposite)
-    .def("transform", &Line_2::transform)
-    .def("perpendicular", &Line_2::perpendicular)
-    .def("x_at_y", &Line_2::x_at_y)
-    .def("y_at_x", &Line_2::y_at_x)
-    .def("__str__", to_string<Line_2>)
-    .def("__repr__", to_string<Line_2>)
+    .def("a", &Lin::a)
+    .def("b", &Lin::b)
+    .def("c", &Lin::c)
+    .def("is_degenerate", &Lin::is_degenerate)
+    .def("is_horizontal", &Lin::is_horizontal)
+    .def("is_vertical", &Lin::is_vertical)
+    .def("oriented_side", &Lin::oriented_side)
+    .def("has_on", &Lin::has_on)
+    .def("has_on_boundary", &Lin::has_on_boundary)
+    .def("has_on_negative_side", &Lin::has_on_negative_side)
+    .def("has_on_positive_side", &Lin::has_on_positive_side)
+    .def("projection", &Lin::projection)
+    .def("direction", &Lin::direction)
+    .def("to_vector", &Lin::to_vector)
+    .def("opposite", &Lin::opposite)
+    .def("transform", &Lin::transform)
+    .def("perpendicular", &Lin::perpendicular)
+    .def("x_at_y", &Lin::x_at_y)
+    .def("y_at_x", &Lin::y_at_x)
+    .def("__str__", to_string<Lin>)
+    .def("__repr__", to_string<Lin>)
     .def(py::self == py::self)
     .def(py::self != py::self)
-    //.setattr("__hash__", &hash<Line_2>)
+    //.setattr("__hash__", &hash<Lin>)
     ;
 
   add_insertion(c, "__str__");

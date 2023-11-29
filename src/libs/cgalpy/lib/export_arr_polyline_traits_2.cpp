@@ -54,6 +54,7 @@ void export_arr_polyline_traits_2(py::module_& m) {
 
   if (! add_attr<Pcbgt>(m, "Arr_polycurve_basic_traits_2")) {
     py::class_<Pcbgt> pcbgt_c(m, "Arr_polycurve_basic_traits_2");
+    // export_AosBasicTraits_2<Pcbgt>(pcbgt_c, concepts);
   }
 
   if (! add_attr<Pcgt>(m, "Arr_polycurve_traits_2")) {

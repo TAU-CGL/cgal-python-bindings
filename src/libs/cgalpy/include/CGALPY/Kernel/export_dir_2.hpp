@@ -18,33 +18,35 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "CGALPY/to_string.hpp"
 
 namespace py = nanobind;
 
 // Export a two-dimensional direction of a kernel.
-template <typename Kernel, typename C>
+template <typename Kernel_, typename C>
 void export_dir_2(C& c) {
-  using FT = typename Kernel::FT;
-  using RT = typename Kernel::RT;
-  using Dir = typename Kernel::Direction_2;
-  using Line = typename Kernel::Line_2;
-  using Pnt = typename Kernel::Point_2;
-  using Ray = typename Kernel::Ray_2;
-  using Seg = typename Kernel::Segment_2;
-  using Vec = typename Kernel::Vector_2;
+  using Ker = Kernel_;
+  // using Ft = typename Ker::FT;
+  using Rt = typename Ker::RT;
+  using Dir = typename Ker::Direction_2;
+  using Line = typename Ker::Line_2;
+  using Pnt = typename Ker::Point_2;
+  using Ray = typename Ker::Ray_2;
+  using Seg = typename Ker::Segment_2;
+  using Vec = typename Ker::Vector_2;
 
   c.def(py::init<Vec>())
     .def(py::init<Line>())
     .def(py::init<Ray>())
     .def(py::init<Seg>())
-    .def(py::init<RT&, RT&>())
+    .def(py::init<Rt&, Rt&>())
     .def(py::init<double, double>())
     .def("dx", &Dir::dx)
     .def("dy", &Dir::dy)
     .def("vector", &Dir::vector)
     .def("transform", &Dir::transform)
     .def("counterclockwise_in_between", &Dir::counterclockwise_in_between)
-    .def("delta", &Direction_2::delta)
+    .def("delta", &Dir::delta)
     .def("__str__", to_string<Dir>)
     .def("__repr__", to_string<Dir>)
     .def(py::self == py::self)

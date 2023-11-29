@@ -11,13 +11,12 @@
 #include <nanobind/operators.h>
 #include <nanobind/stl/string.h>
 
-#include <CGAL/Sphere_3.h>
-
 #include "CGALPY/to_string.hpp"
-
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
+#include "CGALPY/Kernel/export_kernel.hpp"
+#include "CGALPY/add_attr.hpp"
 
 // 2D functors
 #include "CGALPY/Kernel/export_circle_2.hpp"
@@ -35,12 +34,6 @@
 #include "CGALPY/Kernel/export_vector_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
 #include "CGALPY/Kernel/export_weighted_point_3.hpp"
-
-#include "CGALPY/Kernel/export_aff_transformation_2.hpp"
-#include "CGALPY/Kernel/export_iso_rectangle_2.hpp"
-
-#include "CGALPY/Hash_rational_point.hpp"
-#include "CGALPY/add_attr.hpp"
 
 namespace py = nanobind;
 
@@ -83,94 +76,6 @@ void bind_squared_distance_types(py::module_& m) {
 }
 
 //
-template <typename Kernel_, typename C_>
-void export_kernel(C_& ker_c) {
-  using Ker = Kernel_;
-
-  // Kernel objects
-  using Circle_2 = typename Ker::Circle_2;
-  using Dir_2 = typename Ker::Direction_2;
-  using Line_2 = typename Ker::Line_2;
-  using Pnt_2 = typename Ker::Point_2;
-  using Ray_2 = typename Ker::Ray_2;
-  using Seg_2 = typename Ker::Segment_2;
-  using Vec_2 = typename Ker::Vector_2;
-
-  using Pnt_3 = typename Ker::Point_3;
-  using Vec_3 = typename Ker::Vector_3;
-  using Pln_3 = typename Ker::Plane_3;
-  using Sfr_3 = typename Ker::Sphere_3;
-
-  // Kernel operators
-  using Equal_2 = typename Ker::Equal_2;
-  using Ctr_pnt_2 = typename Ker::Construct_point_2;
-  using Ctr_seg_2 = typename Ker::Construct_segment_2;
-  using Ctr_midpnt_2 = typename Ker::Construct_midpoint_2;
-  using Cc_in_between_2 = typename Ker::Counterclockwise_in_between_2;
-
-  ker_c.def(py::init<>())
-    .def("equal_2_object",
-         [](const Ker& k)->Equal_2{ return k.equal_2_object(); })
-    .def("construct_midpoint_2_object",
-         [](const Ker& k)->Ctr_midpnt_2
-         { return k.construct_midpoint_2_object(); })
-    .def("construct_point_2_object",
-         [](const Ker& k)->Ctr_pnt_2
-         { return k.construct_point_2_object(); })
-    .def("construct_segment_2_object",
-         [](const Ker& k)->Ctr_seg_2
-         { return k.construct_segment_2_object(); })
-    .def("counterclockwise_in_between_2_object",
-         [](const Ker& k)->Cc_in_between_2
-         { return k.counterclockwise_in_between_2_object(); })
-    ;
-
-  // Equal_2
-  using Equal_2_circle = bool(Equal_2::*)(const Circle_2&, const Circle_2&)const;
-  using Equal_2_dir = bool(Equal_2::*)(const Dir_2&, const Dir_2&)const;
-  using Equal_2_line = bool(Equal_2::*)(const Line_2&, const Line_2&)const;
-  using Equal_2_pnt = bool(Equal_2::*)(const Pnt_2&, const Pnt_2&)const;
-  using Equal_2_seg = bool(Equal_2::*)(const Seg_2&, const Seg_2&)const;
-  using Equal_2_ray = bool(Equal_2::*)(const Ray_2&, const Ray_2&)const;
-  using Equal_2_vec = bool(Equal_2::*)(const Vec_2&, const Vec_2&)const;
-  py::class_<Equal_2>(ker_c, "Equal_2")
-    .def("__call__", static_cast<Equal_2_circle>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_dir>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_line>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_pnt>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_ray>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_seg>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_vec>(&Equal_2::operator()))
-    ;
-
-  // Construct_point_2
-  using Ctr_pnt_2_op = Pnt_2(Ctr_pnt_2::*)(const FT&, const FT&)const;
-  py::class_<Ctr_pnt_2>(ker_c, "Construct_point_2")
-    .def("__call__", static_cast<Ctr_pnt_2_op>(&Ctr_pnt_2::operator()))
-    ;
-
-  // Construct_segment_2
-  using Ctr_seg_2_op = Seg_2(Ctr_seg_2::*)(const Pnt_2&, const Pnt_2&)const;
-  py::class_<Ctr_seg_2>(ker_c, "Construct_segment_2")
-    .def("__call__", static_cast<Ctr_seg_2_op>(&Ctr_seg_2::operator()))
-    ;
-
-  // Construct_midpoint_2
-  using Ctr_midpnt_2_op =
-    Pnt_2(Ctr_midpnt_2::*)(const Pnt_2&, const Pnt_2&)const;
-  py::class_<Ctr_midpnt_2>(ker_c, "Construct_midpoint_2")
-    .def("__call__", static_cast<Ctr_midpnt_2_op>(&Ctr_midpnt_2::operator()))
-    ;
-
-  // Counterclockwise_in_between_2
-  using Cc_in_between_2_op =
-    bool(Cc_in_between_2::*)(const Dir_2&, const Dir_2&, const Dir_2&)const;
-  py::class_<Cc_in_between_2>(ker_c, "Counterclockwise_in_between_2")
-    .def("__call__", static_cast<Cc_in_between_2_op>(&Cc_in_between_2::operator()))
-    ;
-}
-
-//
 void export_kernel_module(py::module_& m) {
 #if (CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL)
   if (! add_attr<FT>(m, "FT")) {
@@ -210,6 +115,18 @@ void export_kernel_module(py::module_& m) {
   //  .def(self_ns::str(self_ns::self))
   //  .def(self == self)
   //  ;
+
+  // Kernel
+  if (! add_attr<Kernel>(m, "Kernel")) {
+    py::class_<Kernel> ker_c(m, "Kernel");
+    export_kernel<Kernel>(ker_c);
+  }
+
+  // Bbox_2
+  if (! add_attr<Bbox_2>(m, "Bbox_2")) {
+    py::class_<Bbox_2> bbox_c(m, "Bbox_2");
+    export_bbox_2(bbox_c);
+  }
 
   // Kernel objects
   using Circle_2 = Kernel::Circle_2;
@@ -280,12 +197,6 @@ void export_kernel_module(py::module_& m) {
     export_iso_rectangle_2<Kernel>(iso2_c);
   }
 
-  // Bbox_2
-  if (! add_attr<Bbox_2>(m, "Bbox_2")) {
-    py::class_<Bbox_2> bbox_c(m, "Bbox_2");
-    export_bbox_2(bbox_c);
-  }
-
   // Aff_transformation_2
   if (! add_attr<Aff_transformation_2>(m, "Aff_transformation_2")) {
     py::class_<Aff_transformation_2> aff2_c(m, "Aff_transformation_2");
@@ -329,12 +240,6 @@ void export_kernel_module(py::module_& m) {
   if (! add_attr<Sfr_3>(m, "Sphere_3")) {
     py::class_<Sfr_3> sfr3_c(m, "Sphere_3");
     export_sphere_3<Kernel>(sfr3_c);
-  }
-
-  // Kernel
-  if (! add_attr<Kernel>(m, "Kernel")) {
-    py::class_<Kernel> ker_c(m, "Kernel");
-    export_kernel<Kernel>(ker_c);
   }
 
   /// \name Global kernel functions

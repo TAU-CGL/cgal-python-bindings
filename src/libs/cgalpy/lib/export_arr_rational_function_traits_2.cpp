@@ -20,7 +20,7 @@
 
 namespace py = nanobind;
 
-extern void export_kernal_algebraic(py::module_&);
+extern void export_kernel_algebraic(py::module_&);
 
 //
 template<typename T> T ipower(T& p, int i) { return CGAL::ipower(p, i); }
@@ -138,7 +138,7 @@ void export_arr_rational_function_traits_2(py::module_& m) {
 
   // Export the algebraic kernel.
   //\ This should probably move to somewhere else.
-  export_kernal_algebraic(m);
+  export_kernel_algebraic(m);
 
   // Export the rational-function traits itself.
   if (add_attr<Gt>(m, "Arr_rational_function_traits_2")) return;

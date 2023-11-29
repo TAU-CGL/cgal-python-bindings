@@ -87,7 +87,7 @@ void export_alg_real(py::module_& m) {
 }
 
 //
-void export_kernal_algebraic(py::module_& m) {
+void export_kernel_algebraic(py::module_& m) {
   using Integer = CORE::BigInt;
   using Alg_kernel = CGAL::Algebraic_kernel_d_1<Integer>;
   using Polynomial = Alg_kernel::Polynomial_1;

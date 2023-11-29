@@ -40,8 +40,7 @@ void export_approximate_point(C& c, Concepts& concepts, bool) {
 
   // Bind the approximate point
   if (! add_attr<Ap>(c, "Approximate_point_2")) {
-    PyErr_SetString(PyExc_StopIteration, "Approximate_point_2 is not bound!");
-    py::python_error();
+    throw std::runtime_error("Approximate_point_2 is not bound!");
   }
 
   // Bind the operator
