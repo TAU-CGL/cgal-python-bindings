@@ -19,24 +19,29 @@
 
 namespace bp = nanobind;
 
-// Export a two-dimensional vector of a kernel.
-template <typename Kernel, typename C>
-void export_vector_2(C& c) {
-  using FT = typename Kernel::FT;
-  using RT = typename Kernel::RT;
-  using Pnt = typename Kernel::Point_2;
-  using Vec = typename Kernel::Vector_2;
-  using Line = typename Kernel::Line_2;
-  using Ray = typename Kernel::Ray_2;
-  using Seg = typename Kernel::Segment_2;
+//
+template <typename Kernel_>
+py::object cartesians_v2(const typename Kernel_::Vector_2& v)
+{ return make_iterator(v.cartesian_begin(), v.cartesian_end()); }
 
-  c.def(bp::init<Pnt&, Pnt&>())
+// Export a two-dimensional vector of a kernel.
+template <typename Kernel_, typename C>
+void export_vector_2(C& c) {
+  using Ker = Kernel_;
+  using Ft = typename Ker::FT;
+  using Rt = typename Ker::RT;
+  using Pnt = typename Ker::Point_2;
+  using Vec = typename Ker::Vector_2;
+  using Line = typename Ker::Line_2;
+  using Ray = typename Ker::Ray_2;
+  using Seg = typename Ker::Segment_2;
+
+  c.def(bp::init<const Rt&, const Rt&, const Rt&>())
+    .def(bp::init<const Ft&, const Ft&>())
+    .def(bp::init<Pnt&, Pnt&>())
     .def(bp::init<Line>())
     .def(bp::init<Ray>())
     .def(bp::init<Seg>())
-    .def(bp::init<FT&, FT&, FT&>())
-    .def(bp::init<FT&, FT&>())
-    .def(bp::init<double, double>())
     .def("hx", &Vec::hx)
     .def("hy", &Vec::hy)
     .def("hw", &Vec::hw)
@@ -59,21 +64,29 @@ void export_vector_2(C& c) {
     .def(bp::self -= bp::self)
     .def(-bp::self)
     .def(bp::self * bp::self)
-    .def(bp::self * FT())
-    .def(FT() * bp::self)
-    .def(bp::self *= FT())
-    .def(bp::self / FT())
-    .def(bp::self /= FT())
-    //.def(py::self * RT())
-    //.def(RT() * bp::self)
-    //.def(bp::self *= RT())
-    //.def(bp::self / RT())
-    //.def(bp::self /= RT())
+    .def(bp::self * Ft())
+    .def(Ft() * bp::self)
+    .def(bp::self *= Ft())
+    .def(bp::self / Ft())
+    .def(bp::self /= Ft())
+    //.def(py::self * Rt())
+    //.def(Rt() * bp::self)
+    //.def(bp::self *= Rt())
+    //.def(bp::self / Rt())
+    //.def(bp::self /= Rt())
     //.setattr("__hash__", &hash<Vec>)
     ;
 
+  if (! is_exact_ft()) {
+    c.def("cartesians", &cartesians_v2<Ker>, py::keep_alive<0, 1>());
+
+    using Cci = typename Ker::Cartesian_const_iterator_2;
+    add_iterator<Cci, Cci>("Cartesian_iterator", c);
+  }
+
   add_insertion(c, "__str__");
   add_insertion(c, "__repr__");
+  add_extraction(c);
 }
 
 #endif

@@ -25,7 +25,7 @@ void export_envelope_2(py::module_&);
 void export_envelope_3(py::module_&);
 void export_general_polygon_set_2(py::module_&);
 void export_intersections(py::module_&);
-void export_kernel(py::module_&);
+void export_kernel_module(py::module_&);
 void export_kernel_d(py::module_&);
 void export_minkowski_sum_2(py::module_&);
 void export_object(py::module_&);
@@ -42,6 +42,7 @@ void export_surface_sweep_2(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
 void export_visibility_2(py::module_&);
+void export_cgal(py::module_& m);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
 
@@ -49,9 +50,13 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
   m.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
+  // Export CGAL general types (which do not depend on a kernel)
+  export_cgal(m);
+
 #ifdef CGALPY_KERNEL_BINDINGS
   auto ker_m = m.def_submodule("Ker");
-  export_kernel(ker_m);
+  export_cgal(ker_m);
+  export_kernel_module(ker_m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
   export_intersections(ker_m);
 #endif

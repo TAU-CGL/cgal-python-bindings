@@ -46,15 +46,17 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>&);
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>&);
 void export_face(py::class_<aos2::Arrangement_on_surface_2>&);
 
-void export_arr_linear_traits_2(py::module_&);
-void export_arr_segment_traits_2(py::module_&);
-void export_arr_non_caching_segment_traits_2(py::module_&);
+void export_arr_algebraic_segment_traits_2(py::module_&);
+void export_arr_bezier_traits_2(py::module_&);
 void export_arr_circle_segment_traits_2(py::module_&);
 void export_arr_conic_traits_2(py::module_&);
-void export_arr_bezier_traits_2(py::module_&);
-void export_arr_rational_function_traits_2(py::module_&);
-void export_arr_algebraic_segment_traits_2(py::module_&);
 void export_arr_geodesic_arc_on_sphere_traits_2(py::module_&);
+void export_arr_linear_traits_2(py::module_&);
+void export_arr_non_caching_segment_traits_2(py::module_&);
+void export_arr_polyline_traits_2(py::module_&);
+void export_arr_segment_traits_2(py::module_&);
+void export_arr_rational_function_traits_2(py::module_&);
+
 void export_arr_curve_data_traits_2(py::module_&);
 void export_arr_consolidated_curve_data_traits_2(py::module_&);
 
@@ -871,24 +873,26 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .export_values()
     ;
 
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  export_arr_segment_traits_2(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  export_arr_non_caching_segment_traits_2(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-  export_arr_linear_traits_2(m);
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+  export_arr_algebraic_segment_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
+  export_arr_bezier_traits_2(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
   export_arr_circle_segment_traits_2(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
   export_arr_conic_traits_2(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
-  export_arr_bezier_traits_2(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
-  export_arr_rational_function_traits_2(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  export_arr_algebraic_segment_traits_2(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
   export_arr_geodesic_arc_on_sphere_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
+  export_arr_linear_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
+  export_arr_non_caching_segment_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS
+  export_arr_polyline_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+  export_arr_segment_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
+  export_arr_rational_function_traits_2(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif

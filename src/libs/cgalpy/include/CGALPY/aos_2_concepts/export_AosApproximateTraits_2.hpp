@@ -35,14 +35,13 @@ void export_approximate_point(C& c, Concepts& concepts, bool) {
   using Pt = typename T::Point_2;
   using Approximate_2 = typename T::Approximate_2;
   using Ant = typename T::Approximate_number_type;
-  using Ak = typename T::Approximate_kernel;
   using Ap = typename T::Approximate_point_2;
   using ovld2 = Ap(Approximate_2::*)(const Pt&) const;
 
   // Bind the approximate point
   if (! add_attr<Ap>(c, "Approximate_point_2")) {
-    py::class_<Ap> apnt(c, "Approximate_point_2");
-    export_point_2<Ak>(apnt);
+    PyErr_SetString(PyExc_StopIteration, "Approximate_point_2 is not bound!");
+    py::python_error();
   }
 
   // Bind the operator
@@ -62,7 +61,6 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
   using Pt = typename T::Point_2;
   using Approximate_2 = typename T::Approximate_2;
   using Ant = typename T::Approximate_number_type;
-  using Ak = typename T::Approximate_kernel;
 
   auto& classes = concepts.m_aos_approximate_traits_2_classes;
 

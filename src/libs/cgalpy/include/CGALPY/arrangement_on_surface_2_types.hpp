@@ -21,67 +21,41 @@
 #include "CGALPY/arrangement_on_surface_2_config.hpp"
 #include "CGALPY/envelope_3_config.hpp"
 
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-#include <CGAL/Arr_linear_traits_2.h>
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-#include <CGAL/Arr_segment_traits_2.h>
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-#include <CGAL/Arr_non_caching_segment_traits_2.h>
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+#include <CGAL/Arr_algebraic_segment_traits_2.h>
+#include <CGAL/Polynomial.h>
+#include <CGAL/Polynomial_traits_d.h>
+#include <CGAL/Polynomial_type_generator.h>
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
+#include <CGAL/Arr_Bezier_curve_traits_2.h>
+#include <CGAL/Cartesian.h>
+#include <CGAL/CORE_algebraic_number_traits.h>
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
 #include <CGAL/Arr_circle_segment_traits_2.h>
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
 #include <CGAL/Arr_conic_traits_2.h>
 #include <CGAL/Cartesian.h>
 #include <CGAL/CORE_algebraic_number_traits.h>
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
-#include <CGAL/Arr_Bezier_curve_traits_2.h>
-#include <CGAL/Cartesian.h>
-#include <CGAL/CORE_algebraic_number_traits.h>
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
-#include <CGAL/Arr_rational_function_traits_2.h>
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-#include <CGAL/Arr_algebraic_segment_traits_2.h>
-#include <CGAL/Polynomial.h>
-#include <CGAL/Polynomial_traits_d.h>
-#include <CGAL/Polynomial_type_generator.h>
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
 #include <CGAL/Arr_geodesic_arc_on_sphere_traits_2.h>
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
+#include <CGAL/Arr_linear_traits_2.h>
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
+#include <CGAL/Arr_non_caching_segment_traits_2.h>
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS
+#include <CGAL/Arr_segment_traits_2.h>
+#include <CGAL/Arr_polyline_traits_2.h>
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+#include <CGAL/Arr_segment_traits_2.h>
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
+#include <CGAL/Arr_rational_function_traits_2.h>
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
 namespace aos2 {
 
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-using Agt = typename CGAL::Arr_segment_traits_2<Kernel>;
-using Is_in_x_range_2 = typename Agt::Is_in_x_range_2;
-using Is_in_y_range_2 = typename Agt::Is_in_y_range_2;
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-using Agt = typename CGAL::Arr_non_caching_segment_traits_2<Kernel>;
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-using Agt = typename CGAL::Arr_linear_traits_2<Kernel>;
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-using Agt = typename CGAL::Arr_circle_segment_traits_2<Kernel>;
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-using Nt_traits = CGAL::CORE_algebraic_number_traits;
-using Rat_kernel = typename CGAL::Cartesian<Nt_traits::Rational>;
-using Alg_kernel = typename CGAL::Cartesian<Nt_traits::Algebraic>;
-using Agt = typename CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
-using Nt_traits = CGAL::CORE_algebraic_number_traits;
-using Rat_kernel = typename CGAL::Cartesian<Nt_traits::Rational>;
-using Alg_kernel = typename CGAL::Cartesian<Nt_traits::Algebraic>;
-using Agt =
-  typename CGAL::Arr_Bezier_curve_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
-using Integer = CORE::BigInt;
-using Rational = CORE::BigRat;
-using Algebraic_kernel_d_1 = CGAL::Algebraic_kernel_d_1<Integer>;
-using Polynomial_1 = Algebraic_kernel_d_1::Polynomial_1;
-using Polynomial_traits_1 = CGAL::Polynomial_traits_d<Polynomial_1>;
-
-using Agt = CGAL::Arr_rational_function_traits_2<Algebraic_kernel_d_1>;
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 using Integer = CORE::BigInt;
 using Algebraic_kernel_d_1 = CGAL::Algebraic_kernel_d_1<Integer>;
 using Algebraic_kernel_d_2 =
@@ -101,8 +75,48 @@ using Agt = CGAL::Arr_algebraic_segment_traits_2<Integer>;
 using Construct_curve_2 = typename Agt::Construct_curve_2;
 using Construct_point_2 = typename Agt::Construct_point_2;
 using Construct_x_monotone_segment_2 = typename Agt::Construct_x_monotone_segment_2;
+
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
+using Nt_traits = CGAL::CORE_algebraic_number_traits;
+using Rat_kernel = typename CGAL::Cartesian<Nt_traits::Rational>;
+using Alg_kernel = typename CGAL::Cartesian<Nt_traits::Algebraic>;
+using Agt =
+  typename CGAL::Arr_Bezier_curve_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
+
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+using Agt = typename CGAL::Arr_circle_segment_traits_2<Kernel>;
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
+using Nt_traits = CGAL::CORE_algebraic_number_traits;
+using Rat_kernel = typename CGAL::Cartesian<Nt_traits::Rational>;
+using Alg_kernel = typename CGAL::Cartesian<Nt_traits::Algebraic>;
+using Agt = typename CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
+
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
 using Agt = CGAL::Arr_geodesic_arc_on_sphere_traits_2<Kernel>;
+
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
+using Agt = typename CGAL::Arr_linear_traits_2<Kernel>;
+
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
+using Agt = typename CGAL::Arr_non_caching_segment_traits_2<Kernel>;
+
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS
+using Sgt = typename CGAL::Arr_segment_traits_2<Kernel>;
+using Agt = typename CGAL::Arr_polyline_traits_2<Sgt>;
+
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+using Agt = typename CGAL::Arr_segment_traits_2<Kernel>;
+using Is_in_x_range_2 = typename Agt::Is_in_x_range_2;
+using Is_in_y_range_2 = typename Agt::Is_in_y_range_2;
+
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
+using Integer = CORE::BigInt;
+using Rational = CORE::BigRat;
+using Algebraic_kernel_d_1 = CGAL::Algebraic_kernel_d_1<Integer>;
+using Polynomial_1 = Algebraic_kernel_d_1::Polynomial_1;
+using Polynomial_traits_1 = CGAL::Polynomial_traits_d<Polynomial_1>;
+
+using Agt = CGAL::Arr_rational_function_traits_2<Algebraic_kernel_d_1>;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
