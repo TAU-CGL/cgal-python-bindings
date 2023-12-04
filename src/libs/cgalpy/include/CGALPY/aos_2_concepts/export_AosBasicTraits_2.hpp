@@ -43,8 +43,8 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
   if (exported) return;
 
   using Has_left_category = typename T::Has_left_category;
-  using Point_2 = typename T::Point_2;
-  using X_monotone_curve_2 = typename T::X_monotone_curve_2;
+  using Pnt = typename T::Point_2;
+  using Xcv = typename T::X_monotone_curve_2;
   using Compare_x_2 = typename T::Compare_x_2;
   using Compare_xy_2 = typename T::Compare_xy_2;
   using Equal_2 = typename T::Equal_2;
@@ -57,30 +57,34 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
   auto& classes = concepts.m_aos_basic_traits_2_classes;
 
   // Point_2
-  if (! add_attr<Point_2>(c, "Point_2")) {
-    classes.m_point_2 = new py::class_<Point_2>(c, "Point_2");
+  if (! add_attr<Pnt>(c, "Point_2")) {
+    classes.m_point_2 = new py::class_<Pnt>(c, "Point_2");
     classes.m_point_2->def(py::init<>());
-    classes.m_point_2->def(py::init<const Point_2&>());
+    classes.m_point_2->def(py::init<const Pnt&>());
   }
 
   // X_monotone_curve_2
-  if (! add_attr<X_monotone_curve_2>(c, "X_monotone_curve_2")) {
+  if (! add_attr<Xcv>(c, "X_monotone_curve_2")) {
     classes.m_x_monotone_curve_2 =
-      new py::class_<X_monotone_curve_2>(c, "X_monotone_curve_2");
+      new py::class_<Xcv>(c, "X_monotone_curve_2");
     classes.m_x_monotone_curve_2->def(py::init<>());
-    classes.m_x_monotone_curve_2->def(py::init<const X_monotone_curve_2&>());
+    classes.m_x_monotone_curve_2->def(py::init<const Xcv&>());
   }
 
   // Compare_x_2
   if (! add_attr<Compare_x_2>(c, "Compare_x_2")) {
     classes.m_compare_x_2 = new py::class_<Compare_x_2>(c, "Compare_x_2");
-    classes.m_compare_x_2->def("__call__", &Compare_x_2::operator());
+    classes.m_compare_x_2->def("__call__",
+                               py::overload_cast<const Pnt&, const Pnt&>
+                               (&Compare_x_2::operator(), py::const_));
   }
 
   // Compare_xy_2
   if (! add_attr<Compare_xy_2>(c, "Compare_xy_2")) {
     classes.m_compare_xy_2 = new py::class_<Compare_xy_2>(c, "Compare_xy_2");
-    classes.m_compare_xy_2->def("__call__", &Compare_xy_2::operator());
+    classes.m_compare_xy_2->def("__call__",
+                                py::overload_cast<const Pnt&, const Pnt&>
+                                (&Compare_xy_2::operator(), py::const_));
   }
 
   // Construct_min_vertex_2
@@ -109,7 +113,9 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
   if (! add_attr<Compare_y_at_x_2>(c, "Compare_y_at_x_2")) {
     classes.m_compare_y_at_x_2 =
       new py::class_<Compare_y_at_x_2>(c, "Compare_y_at_x_2");
-    classes.m_compare_y_at_x_2->def("__call__", &Compare_y_at_x_2::operator());
+    classes.m_compare_y_at_x_2->def("__call__",
+                                    py::overload_cast<const Pnt&, const Xcv&>
+                                    (&Compare_y_at_x_2::operator(), py::const_));
   }
 
   // Compare_y_at_x_right_2
@@ -124,11 +130,10 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
   if (! add_attr<Equal_2>(c, "Equal_2")) {
     classes.m_equal_2 = new py::class_<Equal_2>(c, "Equal_2");
     classes.m_equal_2->def("__call__",
-                           py::overload_cast<const Point_2&, const Point_2&>
+                           py::overload_cast<const Pnt&, const Pnt&>
                            (&Equal_2::operator(), py::const_));
     classes.m_equal_2->def("__call__",
-                           py::overload_cast<const X_monotone_curve_2&,
-                                             const X_monotone_curve_2&>
+                           py::overload_cast<const Xcv&, const Xcv&>
                            (&Equal_2::operator(), py::const_));
   }
 
