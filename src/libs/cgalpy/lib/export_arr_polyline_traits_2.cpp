@@ -69,37 +69,32 @@ void export_arr_polyline_traits_2(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   struct Concepts {
-    Aos_basic_traits_classes<Plgt> m_aos_basic_traits_2_classes;
-    Aos_x_monotone_traits_classes<Plgt> m_aos_x_monotone_traits_2_classes;
-    Aos_traits_classes<Plgt> m_aos_traits_2_classes;
-    Aos_landmark_traits_classes<Plgt> m_aos_landmark_traits_2_classes;
-    Aos_directional_x_monotone_traits_classes<Plgt> m_aos_directional_x_monotone_traits_2_classes;
-    Aos_approximate_traits_classes<Plgt> m_aos_approximate_traits_2_classes;
+    Aos_basic_traits_classes<Pcbgt> m_aos_basic_traits_2_classes;
+    Aos_x_monotone_traits_classes<Pcgt> m_aos_x_monotone_traits_2_classes;
+    Aos_traits_classes<Pcgt> m_aos_traits_2_classes;
+    Aos_landmark_traits_classes<Pcgt> m_aos_landmark_traits_2_classes;
+    Aos_directional_x_monotone_traits_classes<Pcgt> m_aos_directional_x_monotone_traits_2_classes;
+    Aos_approximate_traits_classes<Pcgt> m_aos_approximate_traits_2_classes;
     Aos_construct_x_monotone_curve_traits_classes<Plgt>
       m_aos_construct_x_monotone_curve_traits_2_classes;
   } concepts;
 
   if (! add_attr<Pcbgt>(m, "Arr_polycurve_basic_traits_2")) {
     py::class_<Pcbgt> pcbgt_c(m, "Arr_polycurve_basic_traits_2");
-    //! \todo fix me
-    // export_AosBasicTraits_2<Pcbgt>(pcbgt_c, concepts);
-    add_attr<Pnt>(pcbgt_c, "Point_2");
+    export_AosBasicTraits_2<Pcbgt>(pcbgt_c, concepts);
+    export_AosApproximateTraits_2<Pcbgt>(pcbgt_c, concepts);
   }
 
   if (! add_attr<Pcgt>(m, "Arr_polycurve_traits_2")) {
     py::class_<Pcgt, Pcbgt> pcgt_c(m, "Arr_polycurve_traits_2");
+    export_AosTraits_2<Pcgt>(pcgt_c, concepts);
+    export_AosDirectionalXMonotoneTraits_2<Pcgt>(pcgt_c, concepts);
+    //! \todo add Push_back_2, Push_fron_2, Construct_curve_2
   }
 
   if (add_attr<Plgt>(m, "Arr_polyline_traits_2")) return;
   py::class_<Plgt, Pcgt> plgt_c(m, "Arr_polyline_traits_2");
-
-  //! \todo fix me
-  // export_AosTraits_2<Plgt>(plgt_c, concepts);
-  // export_AosLandmarkTraits_2<Plgt>(plgt_c, concepts);
-  // export_AosDirectionalXMonotoneTraits_2<Plgt>(plgt_c, concepts);
-  if (! add_attr<Cv>(plgt_c, "Curve_2")) {
-    py::class_<Cv>(plgt_c, "Curve_2");
-  }
+  export_AosConstructXMonotoneCurveTraits_2<Plgt>(plgt_c, concepts);
 
   // The sub curve type
   add_attr<Seg>(plgt_c, "Segment_2");
