@@ -63,12 +63,13 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
 
   auto& classes = concepts.m_aos_approximate_traits_2_classes;
 
-  classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
-
-  using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
-  classes.m_approximate_2->def("__call__",
-                               static_cast<ovld1>(&Approximate_2::operator()));
-  export_approximate_point<T>(c, concepts, true);
+  if (! add_attr<Approximate_2>(c, "Approximate_2")) {
+    classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
+    using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
+    classes.m_approximate_2->def("__call__",
+                                 static_cast<ovld1>(&Approximate_2::operator()));
+    export_approximate_point<T>(c, concepts, true);
+  }
 
   c.def("approximate_2_object", &T::approximate_2_object);
 
