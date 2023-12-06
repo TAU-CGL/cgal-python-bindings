@@ -96,15 +96,16 @@ using Cell_const_variant = std::variant<Vertex_const_handle,
                                         Halfedge_const_handle,
                                         Face_const_handle>;
 
-typedef Arr_overlay_function_traits<Arrangement_on_surface_2,
-                                    Arrangement_on_surface_2,
-                                    Arrangement_on_surface_2,
-                                    py::object> Arr_overlay_function_traits;
-typedef Arr_overlay_traits<Arrangement_on_surface_2, Arrangement_on_surface_2,
-                           Arrangement_on_surface_2, py::object>
-                                                        Arr_overlay_traits;
+using Arr_overlay_function_traits =
+  Arr_overlay_function_traits<Arrangement_on_surface_2,
+                              Arrangement_on_surface_2,
+                              Arrangement_on_surface_2,
+                              py::object>;
+using Arr_overlay_traits =
+  Arr_overlay_traits<Arrangement_on_surface_2, Arrangement_on_surface_2,
+                     Arrangement_on_surface_2, py::object>;
 
-typedef Arr_observer<Arrangement_on_surface_2, py::object> Arr_observer;
+using Arr_observer = Arr_observer<Arrangement_on_surface_2, py::object>;
 
 // Free functions
 

@@ -135,15 +135,27 @@ using Egt = Env_tr<envelope_3_bindings(), env_surface_data(), Base_egt,
 using Ggt = Bso_tr<boolean_set_operations_2_bindings(), Egt>::type;
 
 // Curve Data & Consolidated curve data:
-#if defined(CGALPY_AOS2_WITH_HISTORY)
-using Cd_data = Ggt::Curve_2*;
-#else
-using Cd_data = py::object;
-#endif
-using Cgt =
-  Cd_tr<aos2_consolidated_curve_data(), aos2_curve_data(), Ggt, Cd_data>::Cgt;
-using Ccgt =
-  Cd_tr<aos2_consolidated_curve_data(), aos2_curve_data(), Ggt, Cd_data>::Ccgt;
+// #if defined(CGALPY_AOS2_WITH_HISTORY)
+// using Cd_cv_data = Ggt::Curve_2*;
+// using Cd_xcv_data = CGAL::_Unique_list<Cd_cv_data>;
+// using Cd_merge = CGAL::_Consolidate_unique_lists<Cd_cv_data>;
+// using Cd_convert = CGAL::_Default_convert_func<Cd_cv_data, Cd_xcv_data>;
+// #elif defined(CGALPY_AOS2_CONSOLIDATED_CURVE_DATA)
+// using Cd_cv_data = py::object;
+// using Cd_xcv_data = CGAL::_Unique_list<Cd_cv_data>;
+// using Cd_merge = CGAL::_Consolidate_unique_lists<Cd_cv_data>;
+// using Cd_convert = CGAL::_Default_convert_func<Cd_cv_data, Cd_xcv_data>;
+// #else
+// using Cd_cv_data = py::object;
+// using Cd_xcv_data = py::object;
+// using Cd_merge = py::object;
+// using Cd_convert = CGAL::_Default_convert_func<Cd_cv_data, Cd_xcv_data>;
+// #endif
+using My_cd_tr =
+  Cd_tr<aos2_with_history(), aos2_consolidated_curve_data(),
+        aos2_curve_data(), Ggt>;
+using Cgt = My_cd_tr::Cgt;
+using Ccgt = My_cd_tr::Ccgt;
 
 // The arrangement on surface with history is parameterized with a geometry
 // traits that os not extended with the consolidated curve-data traits (and
@@ -185,12 +197,13 @@ using F = Face_extended<is_face_extended(), Fbe, py::object>::type;
 
 // Define the arrangement-on-surface types:
 using Dcel = CGAL::Arr_dcel<Fgt, V, H, F>;
-using Arrangement_on_surface_2 = With_history<with_history(), Fgt, Dcel>::Aos;
-using Arrangement_2 = With_history<with_history(), Fgt, Dcel>::Arr;
+using Arrangement_on_surface_2 =
+  With_history<aos2_with_history(), Fgt, Dcel>::Aos;
+using Arrangement_2 = With_history<aos2_with_history(), Fgt, Dcel>::Arr;
 using Arrangement_on_surface_with_history_2 =
-  With_history<with_history(), Fgt, Dcel>::Aos_with_history;
+  With_history<aos2_with_history(), Fgt, Dcel>::Aos_with_history;
 using Arrangement_with_history_2 =
-  With_history<with_history(), Fgt, Dcel>::Arr_with_history;
+  With_history<aos2_with_history(), Fgt, Dcel>::Arr_with_history;
 
 // Define the actual traits:
 using Geometry_traits_2 = Arrangement_on_surface_2::Geometry_traits_2;

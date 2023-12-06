@@ -215,6 +215,16 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
          &Gt::construct_x_monotone_segment_2_object)
     ;
 
+  // Apparently, the Compare_xy_2::operator() accepts a 3rd parameter (of type
+  // bool) with a default value. This prevents the normal bindings that takes
+  // place by the call to export_AosTraits_2(). Instead, bind this operator:
+  auto& cmp_xy_c = *(concepts.m_aos_basic_traits_2_classes.m_compare_xy_2);
+  // cmp_xy_c.def("__call__", py::overload_cast<const Pnt&, const Pnt&, bool>
+  //              (&Compare_xy_2::operator(), py::const_));
+  using Compare_xy_2 = typename Gt::Compare_xy_2;
+  cmp_xy_c.def("__call__", &Compare_xy_2::operator());
+
+  // Enhance the bindings of the point_2 type
   auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
   pnt_c.def("curve", &Gt::Point_2::curve)
     .def("arcno", &Gt::Point_2::arcno)

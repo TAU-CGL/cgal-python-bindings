@@ -58,7 +58,7 @@ namespace py = nanobind;
 namespace aos2 {
 
 // Indicates whether arrangement with history is prescribed
-constexpr bool with_history()
+constexpr bool aos2_with_history()
 { return DETECT_EXIST(CGALPY_AOS2_WITH_HISTORY); }
 
 // Indicates whether the curve type is extended with consolidated data
@@ -82,23 +82,69 @@ constexpr bool is_face_extended()
 { return DETECT_EXIST(CGALPY_AOS2_FACE_EXTENDED); }
 
 // Curve data & Consolidated curve data
-template <bool ccd, bool cd, typename Btr, typename Data> struct Cd_tr {};
+template <bool wh, bool ccd, bool cd, typename Btr> struct Cd_tr {};
 
-template <typename Btr, typename Data> struct Cd_tr<false, false, Btr, Data> {
+template <typename Btr>
+struct Cd_tr<false, false, false, Btr> {
   using Cgt = Btr;
   using Ccgt = Btr;
 };
 
-template <typename Btr, typename Data> struct Cd_tr<false, true, Btr, Data> {
-  using Cgt = CGAL::Arr_curve_data_traits_2<Btr, Data>;
+class Curve_data_merge {
+public:
+  /*! Construct
+   */
+  Curve_data_merge() {}
+
+  /*! Destruct
+   */
+  ~Curve_data_merge() {}
+
+  static void set_func(py::object func) { s_func = func; }
+  static void reset_func() { s_func = py::none(); }
+  static py::object func() { return s_func; }
+
+  /*! Apply the callback function
+   */
+  py::object operator()(py::object a, py::object b) const
+  { return (s_func.is_none()) ? a : s_func(a, b); }
+
+private:
+  //! The callback function to apply
+  inline static py::object s_func = py::none();
+};
+
+template <typename Btr>
+struct Cd_tr<false, false, true, Btr> {
+  using Cv_data = py::object;
+  using Xcv_data = py::object;
+  using Merge = Curve_data_merge;
+  using Convert = CGAL::_Default_convert_func<Cv_data, Xcv_data>;
+  using Cgt =
+    CGAL::Arr_curve_data_traits_2<Btr, Xcv_data, Merge, Cv_data, Convert>;
   using Ccgt = Cgt;
 };
 
-template <typename Btr, typename Data> struct Cd_tr<true, true, Btr, Data> {
-  using Ul = CGAL::_Unique_list<Data>;
-  using Cul = CGAL::_Consolidate_unique_lists<Data>;
-  using Cgt = CGAL::Arr_curve_data_traits_2<Btr, Ul, Cul, Data>;
-  using Ccgt = CGAL::Arr_consolidated_curve_data_traits_2<Btr, Data>;
+template <typename Btr>
+struct Cd_tr<false, true, true, Btr> {
+  using Cv_data = py::object;
+  using Xcv_data = CGAL::_Unique_list<Cv_data>;
+  using Merge = CGAL::_Consolidate_unique_lists<Cv_data>;
+  using Convert = CGAL::_Default_convert_func<Cv_data, Xcv_data>;
+  using Cgt =
+    CGAL::Arr_curve_data_traits_2<Btr, Xcv_data, Merge, Cv_data, Convert>;
+  using Ccgt = CGAL::Arr_consolidated_curve_data_traits_2<Btr, Cv_data>;
+};
+
+template <typename Btr>
+struct Cd_tr<true, true, true, Btr> {
+  using Cv_data = typename Btr::Curve_2*;
+  using Xcv_data = CGAL::_Unique_list<Cv_data>;
+  using Merge = CGAL::_Consolidate_unique_lists<Cv_data>;
+  using Convert = CGAL::_Default_convert_func<Cv_data, Xcv_data>;
+  using Cgt =
+    CGAL::Arr_curve_data_traits_2<Btr, Xcv_data, Merge, Cv_data, Convert>;
+  using Ccgt = CGAL::Arr_consolidated_curve_data_traits_2<Btr, Cv_data>;
 };
 
 // 3D Envelope traits
