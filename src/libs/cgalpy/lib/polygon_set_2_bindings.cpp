@@ -25,7 +25,7 @@ namespace py = nanobind;
 void export_polygon_set_2(py::module_& m) {
   using Gps2 = bso2::General_polygon_set_2;
   using Ps2 = bso2::Polygon_set_2;
-  using GT = bso2::Geometry_traits_2;
+  using Gt = bso2::Geometry_traits_2;
   using Pgn = bso2::General_polygon_2;
   using Pwh = bso2::General_polygon_with_holes_2;
 
@@ -34,6 +34,7 @@ void export_polygon_set_2(py::module_& m) {
     .def(py::init<const Pgn&>())
     .def(py::init<const Pwh&>())
     .def(py::init<const Ps2&>())
+    .def(py::init<const Gt&>())
     ;
 
 #ifdef CGALPY_HAS_VISUAL
