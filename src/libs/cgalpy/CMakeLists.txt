@@ -10,11 +10,15 @@ set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
 # A workaround an oversight in the conen CGAL setup files
 if (SKBUILD)
    set(CGAL_USE_GMP TRUE)
+   if (CGALPY_WITH_VISUAL)
+     set(WITH_CGAL_Qt5 TRUE)
+   endif()
 endif()
 
 if (CGAL_USE_GMP)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gmp.cpp)
 endif ()
+
 
 #############
 # Add modules
