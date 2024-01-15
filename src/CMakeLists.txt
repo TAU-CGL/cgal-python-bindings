@@ -10,7 +10,7 @@ if (NOT SKBUILD)
   if (CGALPY_WITH_VISUAL)
     find_package(CGAL REQUIRED COMPONENTS Core Qt5)
   else()
-    find_package(CGAL REQUIRED COMPONENTS Core)
+    find_package(CGAL REQUIRED COMPONENTS Core Qt5)
   endif()
 endif()
 

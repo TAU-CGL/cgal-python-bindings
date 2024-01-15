@@ -1,5 +1,6 @@
 [requires]
 cgal/[==5.5]
+Qt/[=5.15.2]
 
 [generators]
 CMakeDeps

@@ -17,6 +17,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
 #include "CGALPY/add_extraction.hpp"
+#ifdef CGALPY_HAS_VISUAL
+#define CGAL_USE_BASIC_VIEWER
+#include <CGAL/draw_polygon_with_holes_2.h>
+#endif
 
 namespace py = nanobind;
 
@@ -60,4 +64,10 @@ void export_polygon_with_holes_2(py::module_& m) {
     add_insertion(pwh_c, "__repr__");
     add_extraction(pwh_c);
   }
+
+#ifdef CGALPY_HAS_VISUAL
+  using Draw = void(*)(const Pwh&, const char*);
+  m.def("draw", static_cast<Draw>(CGAL::draw),
+        py::arg("pwh"), py::arg("title") = "");
+#endif
 }
