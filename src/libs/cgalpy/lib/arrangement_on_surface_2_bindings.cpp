@@ -23,9 +23,9 @@
 #include <CGAL/Arr_walk_along_line_point_location.h>
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
-#ifdef CGALPY_HAS_VISUAL
-#include <CGAL/draw_arrangement_2.h>
-#endif
+// #ifdef CGALPY_HAS_VISUAL
+// #include <CGAL/draw_arrangement_2.h>
+// #endif
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/Arr_observer.hpp"
@@ -481,9 +481,9 @@ void insert_xcv_pl(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv,
 /// @{
 
 // Draw an arrangement.
-#ifdef CGALPY_HAS_VISUAL
-void draw(const Arrangement_2& arr) { CGAL::draw(arr); }
-#endif
+// #ifdef CGALPY_HAS_VISUAL
+// void draw(const Arrangement_2& arr) { CGAL::draw(arr); }
+// #endif
 
 // //! Obtain the unbounded face of an arrangement.
 typename Arrangement_2::Face& unbounded_face(Arrangement_2& arr)
@@ -626,9 +626,9 @@ void export_arr(py::module_& m) {
 
   export_arrangement_2_io(arr_c);
 
-#ifdef CGALPY_HAS_VISUAL
-  m.def("draw", &aos2::draw);
-#endif
+// #ifdef CGALPY_HAS_VISUAL
+//   m.def("draw", &aos2::draw);
+// #endif
 }
 
 #endif
