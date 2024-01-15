@@ -330,10 +330,12 @@ if (NOT SKBUILD)
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
 
-    target_link_libraries(CGALPY PRIVATE
-        CGAL::CGAL
-        ${Boost_LIBRARIES}
-        ${PYTHON_LIBRARIES})
+    target_link_libraries(CGALPY PRIVATE CGAL::CGAL)
+    if (CGALPY_WITH_VISUAL)
+      target_link_libraries(CGALPY PRIVATE
+	CGAL::CGAL_Qt5 Qt5::Core Qt5::Gui Qt5::Widgets)
+    endif()
+    target_link_libraries(CGALPY PRIVATE ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
     set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
