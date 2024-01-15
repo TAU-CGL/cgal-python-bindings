@@ -35,7 +35,11 @@ if (SKBUILD)  # scikit-build
     # run `conan install .. --build=missing` in `./cmake`.
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-    find_package(CGAL REQUIRED)
+    if (CGALPY_WITH_VISUAL)
+      find_package(CGAL REQUIRED COMPONENTS Qt5)
+    else()
+      find_package(CGAL REQUIRED)
+    endif()
     find_package(Boost REQUIRED)
 
     # ~~~~~~~~~ nanobind  ~~~~~~~~~~~~~~~~~~
