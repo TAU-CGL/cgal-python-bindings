@@ -593,9 +593,12 @@ else ()
                 VERSION "${CMAKE_PROJECT_VERSION}"
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
-    target_link_libraries(_CGALPY PRIVATE
-        CGAL::CGAL
-        ${Boost_LIBRARIES}
-        ${PYTHON_LIBRARIES})
+
+    target_link_libraries(CGALPY PRIVATE CGAL::CGAL)
+    if (CGALPY_WITH_VISUAL)
+      target_link_libraries(CGALPY PRIVATE
+	CGAL::CGAL_Qt5 Qt5::Core Qt5::Gui Qt5::Widgets)
+    endif()
+    target_link_libraries(CGALPY PRIVATE ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
     install(TARGETS _CGALPY DESTINATION python/${CGALPY_IMPORT_NAME}/)
 endif ()
