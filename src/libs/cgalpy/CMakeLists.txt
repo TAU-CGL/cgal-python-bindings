@@ -330,17 +330,9 @@ if (NOT SKBUILD)
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
 
-    if(WIN32)
-      target_link_libraries(_CGALPY PRIVATE
-        cgal::cgal
-        ${Boost_LIBRARIES}
-        ${PYTHON_LIBRARIES})
-    else()
-      target_link_libraries(_CGALPY PRIVATE
-        cgal::cgal
-        ${Boost_LIBRARIES}
-        ${PYTHON_LIBRARIES})
-    endif()
+    target_link_libraries(CGALPY PRIVATE
+            ${Boost_LIBRARIES}
+            ${PYTHON_LIBRARIES})
 
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
     set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
@@ -598,9 +590,17 @@ else ()
                 VERSION "${CMAKE_PROJECT_VERSION}"
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
-    target_link_libraries(_CGALPY PRIVATE
-        CGAL::CGAL
-        ${Boost_LIBRARIES}
-        ${PYTHON_LIBRARIES})
+
+    if(WIN32)
+        target_link_libraries(_CGALPY PRIVATE
+                cgal::cgal
+                ${Boost_LIBRARIES}
+                ${PYTHON_LIBRARIES})
+    else()
+        target_link_libraries(_CGALPY PRIVATE
+                cgal::cgal
+                ${Boost_LIBRARIES}
+                ${PYTHON_LIBRARIES})
+    endif()
     install(TARGETS _CGALPY DESTINATION python/${CGALPY_IMPORT_NAME}/)
 endif ()
