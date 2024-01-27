@@ -330,10 +330,17 @@ if (NOT SKBUILD)
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
 
-    target_link_libraries(CGALPY PRIVATE
-        CGAL::CGAL
+    if(WIN32)
+      target_link_libraries(_CGALPY PRIVATE
+        cgal::cgal
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
+    else()
+      target_link_libraries(_CGALPY PRIVATE
+        cgal::cgal
+        ${Boost_LIBRARIES}
+        ${PYTHON_LIBRARIES})
+    endif()
 
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
     set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
