@@ -13,7 +13,7 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/export_compare_pnt_pnt.hpp"
+#include "CGALPY/aos_2_concepts/export_op_pnt_pnt.hpp"
 #include "CGALPY/add_attr.hpp"
 
 namespace py = nanobind;
@@ -83,7 +83,7 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
   // Compare_xy_2
   if (! add_attr<Compare_xy_2>(c, "Compare_xy_2")) {
     classes.m_compare_xy_2 = new py::class_<Compare_xy_2>(c, "Compare_xy_2");
-    export_compare_pnt_pnt<T>(*(classes.m_compare_xy_2));
+    export_op_pnt_pnt<T>(*(classes.m_compare_xy_2));
   }
 
   // Construct_min_vertex_2

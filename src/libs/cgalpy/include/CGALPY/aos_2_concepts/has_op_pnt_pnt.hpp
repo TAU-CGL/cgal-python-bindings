@@ -6,20 +6,20 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_HAS_OP_HPP
-#define CGALPY_HAS_OP_HPP
+#ifndef CGALPY_HAS_OP_PNT_PNT_HPP
+#define CGALPY_HAS_OP_PNT_PNT_HPP
 
-struct Cmp_result_pnt_pnt {};
+struct Op_pnt_pnt_result {};
 
 template <typename T, typename Gt>
-struct has_op {
+struct has_op_pnt_pnt {
   using Pnt = typename Gt::Point_2;
 
   // operator-has-correct-sig :)
   template<typename A>
-  static Cmp_result_pnt_pnt
+  static Op_pnt_pnt_result
   test(CGAL::Comparison_result(A::*)(const Pnt&, const Pnt&) const)
-  { return Cmp_result_pnt_pnt(); }
+  { return Op_pnt_pnt_result(); }
 
   // operator-exists :)
   template <typename A>
