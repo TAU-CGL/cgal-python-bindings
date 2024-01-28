@@ -15,8 +15,17 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "CGALPY/has_istream_operator.hpp"
 
 namespace py = nanobind;
+
+//!
+template <typename T>
+void export_extraction(T& xcv_c, std::false_type) {}
+
+//!
+template <typename T>
+void export_extraction(T& xcv_c, std::true_type) { add_extraction(xcv_c); }
 
 //
 void export_arr_curve_data_traits_2(py::module_& m) {
@@ -68,6 +77,8 @@ void export_arr_curve_data_traits_2(py::module_& m) {
 
     add_insertion(xcv_c, "__str__");
     add_insertion(xcv_c, "__repr__");
-    add_extraction(xcv_c);
+
+    // Add extraction if import is supported
+    export_extraction(xcv_c, typename has_istream_operator<Xcv>::type());
   }
 }
