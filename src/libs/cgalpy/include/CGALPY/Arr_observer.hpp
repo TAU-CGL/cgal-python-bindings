@@ -9,6 +9,8 @@
 #ifndef CGALPY_ARR_OBSERVER_HPP
 #define CGALPY_ARR_OBSERVER_HPP
 
+#include <CGAL/Arr_observer.h>
+
 #include <nanobind/nanobind.h>
 
 namespace py = nanobind;
