@@ -947,7 +947,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
   if (! add_attr<Arr>(m, "Arrangement_2")) export_arr(m);
 
 #if defined(CGALPY_AOS2_WITH_HISTORY)
-  if constexpr(aos2::with_history()) {
+  if constexpr(aos2::aos2_with_history()) {
     if (! add_attr<Aos_wh>(m, "Arrangement_on_surface_with_history_2"))
       export_aos_with_history(m);
     if (! add_attr<Arr_wh>(m, "Arrangement_with_history_2"))
