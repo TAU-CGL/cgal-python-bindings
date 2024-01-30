@@ -2,6 +2,7 @@
 .vscode/
 cmake-build-debug/CMakeFiles/
 build/
+_skbuild/
 cmake-build*/
 src/python_scripts/cgalpy_examples/__pycache__/
 src/python_scripts/cgalpy_demos/gui/__pycache__/
