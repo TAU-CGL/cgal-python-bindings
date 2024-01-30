@@ -77,28 +77,28 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
   // Nanobind does not support multiple inheritance; therfore, we bind
   // Envelope_pm_face members, using explicit lamda functions
-    .def("get_is_set", [](Face& f)->bool { return f.get_is_set(); })
-    .def("set_is_set", [](Face& f, bool b) { f.set_is_set(b); })
+    .def("is_env_set", [](Face& f)->bool { return f.is_env_set(); })
+    .def("set_is_env_set", [](Face& f, bool b) { f.set_is_env_set(b); })
     .def("is_decision_set", [](Face& f)->bool { return f.is_decision_set(); })
-    .def("get_decision", [](Face& f)->Dd { return f.get_decision(); })
-    .def("set_decision",
-         [](Face& f, CGAL::Comparison_result cr) { f.set_decision(cr); })
+    .def("decision", [](Face& f)->Dd { return f.decision(); })
+    .def("set_decision", [](Face& f, CGAL::Comparison_result cr) { f.set_decision(cr); })
     .def("set_decision", [](Face& f, Dd dd) { f.set_decision(dd); })
     .def("number_of_surfaces", [](Face& f) { return f.number_of_surfaces(); })
     .def("surfaces", &aos2::surfaces, py::keep_alive<0, 1>())
     .def("surface", [](Face& f)->const Env_data& { return f.surface(); })
-    .def("number_of_data_objects",
-         [](Face& f)->int { return f.number_of_data_objects(); })
-    .def("has_no_data", [](Face& f)->bool { return f.has_no_data(); })
-    .def("get_env_data",
-         [](Face& f)->const Env_data&  { return f.get_env_data(); })
+    .def("number_of_surfaces",
+         [](Face& f)->int { return f.number_of_surfaces(); })
+    .def("has_no_env_data", [](Face& f)->bool { return f.has_no_env_data(); })
+    .def("env_data_front",
+         [](Face& f)->const Env_data&  { return f.env_data_front(); })
     .def("set_env_data",
          [](Face& f, const Env_data& data) { f.set_env_data(data); })
     //.def("set_env_data", [](Face& f) { f.set_env_data(); })
-    .def("set_no_data", [](Face& f) { f.set_no_data(); })
-    .def("add_data", [](Face& f, const Env_data& data) { f.add_data(data); })
+    .def("set_no_env_data", [](Face& f) { f.set_no_env_data(); })
+    .def("add_env_data",
+         [](Face& f, const Env_data& data) { f.add_env_data(data); })
     //.def("add_data", [](Face& f) { f.add_data(); })
-    .def("clear_data", [](Face& f) { f.clear_data(); })
+    .def("clear_env_data", [](Face& f) { f.clear_env_data(); })
     //.def("is_equal_data", [](Face& f) { f.is_equal_data(); })
     //.def("has_equal_data", [](Face& f) { f.has_equal_data(); })
 #endif
