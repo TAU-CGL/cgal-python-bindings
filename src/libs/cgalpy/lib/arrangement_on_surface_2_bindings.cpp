@@ -191,34 +191,33 @@ bool remove_vertex_free(Arrangement_2& arr, Vertex& v)
 { return CGAL::remove_vertex(arr, Vertex_handle(&v)); }
 
 //
-template<typename T1, typename T2>
-void decompose_helper2(const Vertex& vertex, const T1& below,
-                       const T2& above, py::list& lst) {
+void decompose_helper2(const Vertex& vertex,
+                       const py::object& below, const py::object& above,
+                       py::list& lst) {
   py::tuple inner = py::make_tuple(below, above);
   py::tuple outer = py::make_tuple(vertex, inner);
   lst.append(outer);
 }
 
 //
-template<typename T1>
-void decompose_helper1(const Vertex& vertex, const T1& below,
+void decompose_helper1(const Vertex& vertex, const py::object& below,
                        const std::optional<Cell_const_variant>& above,
                        py::list& lst) {
   if (! above) {
     auto none = py::none();
-    decompose_helper2<T1, py::object>(vertex, below, none, lst);
+    decompose_helper2(vertex, below, none, lst);
     return;
   }
   if (auto* v = std::get_if<Vertex_const_handle>(&*above)) {
-    decompose_helper2<T1, const Vertex>(vertex, below, *(*v), lst);
+    decompose_helper2(vertex, below, py::cast(&*(*v)), lst);
     return;
   }
   if (auto* e = std::get_if<Halfedge_const_handle>(&*above)) {
-    decompose_helper2<T1, const Halfedge>(vertex, below, *(*e), lst);
+    decompose_helper2(vertex, below, py::cast(&*(*e)), lst);
     return;
   }
   if (auto* f = std::get_if<Face_const_handle>(&*above)) {
-    decompose_helper2<T1, const Face>(vertex, below, *(*f), lst);
+    decompose_helper2(vertex, below, py::cast(&*(*f)), lst);
     return;
   }
 }
@@ -236,19 +235,19 @@ void decompose_helper(const Decompose_result& res, py::list& lst) {
 
   if (! below) {
     auto none = py::none();
-    decompose_helper1<py::object>(vertex, none, above, lst);
+    decompose_helper1(vertex, none, above, lst);
     return;
   }
   if (auto* v = std::get_if<Vertex_const_handle>(&*below)) {
-    decompose_helper1<const Vertex>(vertex, *(*v), above, lst);
+    decompose_helper1(vertex, py::cast(&*(*v)), above, lst);
     return;
   }
   if (auto* e = std::get_if<Halfedge_const_handle>(&*below)) {
-    decompose_helper1<const Halfedge>(vertex, *(*e), above, lst);
+    decompose_helper1(vertex, py::cast(&*(*e)), above, lst);
     return;
   }
   if (auto* f = std::get_if<Face_const_handle>(&*below)) {
-    decompose_helper1<const Face>(vertex, *(*f), above, lst);
+    decompose_helper1(vertex, py::cast(&*(*f)), above, lst);
     return;
   }
 }
@@ -863,6 +862,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Wal_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
   using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
   using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   py::enum_<CGAL::Arr_halfedge_direction>(m, "Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
@@ -996,7 +996,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .def("do_intersect", static_cast<Do_intersect_tr_pl>(CGAL::do_intersect))
     ;
 
-  m.def("decompose", &aos2::decompose);
+  m.def("decompose", &aos2::decompose, ri, py::keep_alive<1, 0>());
 
   m.def("zone", &aos2::zone)
     .def("zone", &aos2::zone_pl<Naive_pl>)
@@ -1024,7 +1024,6 @@ void export_arrangement_on_surface_2(py::module_& m) {
                                aos2::is_halfedge_extended(),
                                aos2::is_face_extended()>(m);
 
-  constexpr auto ri(py::rv_policy::reference_internal);
   constexpr auto ka_1_2 = py::keep_alive<1, 2>();
   py::class_<aos2::Arr_overlay_traits>(m, "Arr_overlay_traits")
     .def(py::init<>())
