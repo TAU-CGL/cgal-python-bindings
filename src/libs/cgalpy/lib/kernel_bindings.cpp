@@ -7,6 +7,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/basic.h>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 #include <nanobind/stl/string.h>
@@ -257,6 +259,9 @@ void export_kernel_module(py::module_& m) {
   using Aoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_ordered_along_line",
         static_cast<Aoal_fnc>(&CGAL::are_ordered_along_line<Kernel>));
+
+  using Ll2_fnc = bool(*)(const Line_2&, const Line_2&);
+  m.def("parallel", static_cast<Ll2_fnc>(&CGAL::parallel<Line_2>));
 
   using Asoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_strictly_ordered_along_line",
