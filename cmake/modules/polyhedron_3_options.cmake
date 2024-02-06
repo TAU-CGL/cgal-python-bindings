@@ -1,6 +1,19 @@
 if(NOT POLYHEDRON_3_OPTIONS_FILE_INCLUDED)
 set(POLYHEDRON_3_OPTIONS_FILE_INCLUDED)
 
+# Geometry Traits Options
+set(CGALPY_POL3_KERNEL_GEOMETRY_TRAITS          0)
+set(CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS    1)
+
+# Geometry Traits Names
+set(CGALPY_POL3_GEOMETRY_TRAITS_SHORT_NAMES ker wn)
+set(CGALPY_POL3_GEOMETRY_TRAITS_NAMES kernel withNormals)
+
+# Geometry Traits Default
+SET(CGALPY_POL3_GEOMETRY_TRAITS_NAME "kernel" CACHE STRING "The geometry traits to use")
+set(CGALPY_POL3_GEOMETRY_TRAITS ${CGALPY_POL3_KERNEL_GEOMETRY_TRAITS} CACHE INTERNAL "")
+set_property(CACHE CGALPY_POL3_GEOMETRY_TRAITS_NAME PROPERTY STRINGS kernel withNormals)
+
 # HDS
 option(CGALPY_POL3_VERTEX_WITH_ID "Extend the Vertex record with an id")
 option(CGALPY_POL3_HALFEDGE_WITH_ID "Extend the Halfedge record with an id")
@@ -11,6 +24,15 @@ option(CGALPY_POL3_HALFEDGE_EXTENDED "Extend the Halfedge record")
 option(CGALPY_POL3_FACE_EXTENDED "Extend the Facet record")
 
 # Selection
+function(select_pol3_geometry_traits)
+  if     ("${CGALPY_POL3_GEOMETRY_TRAITS_NAME}" STREQUAL "kernel")
+    set(CGALPY_POL3_GEOMETRY_TRAITS ${CGALPY_POL3_KERNEL_GEOMETRY_TRAITS} CACHE INTERNAL "")
+  elseif ("${CGALPY_POL3_GEOMETRY_TRAITS_NAME}" STREQUAL "withNormals")
+    set(CGALPY_POL3_GEOMETRY_TRAITS ${CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS} CACHE INTERNAL "")
+  endif()
+  add_definitions(-DCGALPY_POL3_GEOMETRY_TRAITS=${CGALPY_POL3_GEOMETRY_TRAITS})
+endfunction()
+
 function(select_pol3_hds)
   if (${CGALPY_POL3_VERTEX_WITH_ID})
     add_definitions(-DCGALPY_POL3_VERTEX_WITH_ID=)
@@ -35,6 +57,7 @@ endfunction()
 
 function(select_polyhedron_3)
   if(${CGALPY_POLYHEDRON_3_BINDINGS})
+    select_pol3_geometry_traits()
     select_pol3_hds()
     add_definitions(-DCGALPY_POLYHEDRON_3_BINDINGS=)
   endif()
@@ -42,25 +65,27 @@ endfunction()
 
 # Library name
 function(get_polyhedron_3_lib_name ret)
+  list(GET CGALPY_POL3_GEOMETRY_TRAITS_SHORT_NAMES ${CGALPY_POL3_GEOMETRY_TRAITS} part1)
+  capitalize_first(part1)
   if(${CGALPY_POL3_VERTEX_WITH_ID})
-    set(part1 "Vid")
+    set(part2 "Vid")
   endif()
   if(${CGALPY_POL3_HALFEDGE_WITH_ID})
-    set(part2 "Hid")
+    set(part3 "Hid")
   endif()
   if(${CGALPY_POL3_FACE_WITH_ID})
-    set(part3 "Fid")
+    set(part4 "Fid")
   endif()
   if(${CGALPY_POL3_VERTEX_EXTENDED})
-    set(part4 "Ve")
+    set(part5 "Ve")
   endif()
   if(${CGALPY_POL3_HALFEDGE_EXTENDED})
-    set(part5 "He")
+    set(part6 "He")
   endif()
   if(${CGALPY_POL3_FACE_EXTENDED})
-    set(part6 "Fe")
+    set(part7 "Fe")
   endif()
-  set(${ret} "pol3${part1}${part2}${part3}${part4}${part5}${part6}" PARENT_SCOPE)
+  set(${ret} "pol3${part1}${part2}${part3}${part4}${part5}${part6}${part7}" PARENT_SCOPE)
 endfunction()
 
 endif()

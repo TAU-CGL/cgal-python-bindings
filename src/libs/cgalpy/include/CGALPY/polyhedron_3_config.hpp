@@ -17,6 +17,10 @@
 #include <CGAL/HalfedgeDS_halfedge_max_base_with_id.h>
 #include <CGAL/HalfedgeDS_face_max_base_with_id.h>
 
+// Geometry traits options
+#define CGALPY_POL3_KERNEL_GEOMETRY_TRAITS              0
+#define CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS        1
+
 namespace pol3 {
 
 // Indicates whether the vertex type has an id

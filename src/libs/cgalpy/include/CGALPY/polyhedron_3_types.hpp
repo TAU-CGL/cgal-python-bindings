@@ -13,6 +13,7 @@
 
 #include <CGAL/Polyhedron_items_3.h>
 #include <CGAL/Polyhedron_3.h>
+#include <CGAL/Polyhedron_traits_with_normals_3.h>
 
 #include "CGALPY/polyhedron_3_config.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -45,7 +46,15 @@ struct Polyhedron_items : public CGAL::Polyhedron_items_3 {
   };
 };
 
-typedef CGAL::Polyhedron_3<Kernel, Polyhedron_items> Polyhedron_3;
+#if CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_KERNEL_GEOMETRY_TRAITS
+using Traits = Kernel;
+#elif CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS
+using Traits = CGAL::Polyhedron_traits_with_normals_3<Kernel>;
+#else
+BOOST_STATIC_ASSERT_MSG(false, "CGALPY_POL3_GEOMETRY_TRAITS");
+#endif
+
+typedef CGAL::Polyhedron_3<Traits, Polyhedron_items> Polyhedron_3;
 typedef Polyhedron_3::Point_3                        Point_3;
 typedef Polyhedron_3::Vertex                         Vertex;
 typedef Polyhedron_3::Halfedge                       Halfedge;
