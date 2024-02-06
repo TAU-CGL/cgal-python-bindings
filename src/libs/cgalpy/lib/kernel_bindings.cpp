@@ -246,6 +246,8 @@ void export_kernel_module(py::module_& m) {
 
   /// \name Global kernel functions
   /// @{
+  m.def("abs", &CGAL::abs<FT>);
+
   using Angle_fnc1 = CGAL::Angle(*)(const Vec_2&, const Vec_2&);
   using Angle_fnc2 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Angle_fnc3 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
@@ -259,9 +261,6 @@ void export_kernel_module(py::module_& m) {
   using Aoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_ordered_along_line",
         static_cast<Aoal_fnc>(&CGAL::are_ordered_along_line<Kernel>));
-
-  using Ll2_fnc = bool(*)(const Line_2&, const Line_2&);
-  m.def("parallel", static_cast<Ll2_fnc>(&CGAL::parallel<Line_2>));
 
   using Asoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_strictly_ordered_along_line",
@@ -371,6 +370,9 @@ void export_kernel_module(py::module_& m) {
   using Cyx_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   m.def("compare_yx", static_cast<Cyx_fnc>(&CGAL::compare_yx<Kernel>));
 
+  using Cp_fnc3 = Vec_3(*)(const Vec_3&, const Vec_3&);
+  m.def("cross_product", static_cast<Cp_fnc3>(&CGAL::cross_product<Kernel>));
+
   using Dt_fnc = FT(*)(const Vec_2&, const Vec_2&);
   m.def("determinant", static_cast<Dt_fnc>(&CGAL::determinant<Kernel>));
 
@@ -432,9 +434,9 @@ void export_kernel_module(py::module_& m) {
   using Pl_fnc1 = bool(*)(const Line_2&, const Line_2&);
   using Pl_fnc2 = bool(*)(const Ray_2&, const Ray_2&);
   using Pl_fnc3 = bool(*)(const Segment_2&, const Segment_2&);
-  m.def("parallel", static_cast<Pl_fnc1>(&CGAL::parallel));
-  m.def("parallel", static_cast<Pl_fnc2>(&CGAL::parallel));
-  m.def("parallel", static_cast<Pl_fnc3>(&CGAL::parallel));
+  m.def("parallel", static_cast<Pl_fnc1>(&CGAL::parallel<Line_2>));
+  m.def("parallel", static_cast<Pl_fnc2>(&CGAL::parallel<Ray_2>));
+  m.def("parallel", static_cast<Pl_fnc3>(&CGAL::parallel<Segment_2>));
 
   using Rl_fnc = Line_2 (*)(const Circle_2&, const Circle_2&);
   m.def("radical_line", static_cast<Rl_fnc>(&CGAL::radical_line<Kernel>));
@@ -450,9 +452,6 @@ void export_kernel_module(py::module_& m) {
   using Sp_fnc3 = FT(*)(const Vec_3&, const Vec_3&);
   m.def("scalar_product", static_cast<Sp_fnc2>(&CGAL::scalar_product<Kernel>));
   m.def("scalar_product", static_cast<Sp_fnc3>(&CGAL::scalar_product<Kernel>));
-
-  using Cp_fnc3 = Vec_3(*)(const Vec_3&, const Vec_3&);
-  m.def("cross_product", static_cast<Cp_fnc3>(&CGAL::cross_product<Kernel>));
 
   using Sobc_fnc1 = CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Sobc_fnc2 = CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
