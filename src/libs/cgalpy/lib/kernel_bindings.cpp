@@ -32,6 +32,7 @@
 #include "CGALPY/Kernel/export_sphere_3.hpp"
 
 // 3D functors
+#include "CGALPY/Kernel/export_dir_3.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/Kernel/export_vector_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
@@ -139,6 +140,7 @@ void export_kernel_module(py::module_& m) {
   using Seg_2 = Kernel::Segment_2;
   using Vec_2 = Kernel::Vector_2;
 
+  using Dir_3 = Kernel::Direction_3;
   using Pnt_3 = Kernel::Point_3;
   using Vec_3 = Kernel::Vector_3;
   using Pln_3 = Kernel::Plane_3;
@@ -214,6 +216,12 @@ void export_kernel_module(py::module_& m) {
 
   // 3D Objects
 
+  // Direction_3
+  if (! add_attr<Dir_3>(m, "Direction_3")) {
+    py::class_<Dir_3> dir3_c(m, "Direction_3");
+    export_dir_3<Kernel>(dir3_c);
+  }
+
   // Point_3
   if (! add_attr<Pnt_3>(m, "Point_3")) {
     py::class_<Pnt_3> pnt3_c(m, "Point_3");
@@ -250,10 +258,16 @@ void export_kernel_module(py::module_& m) {
 
   using Angle_fnc1 = CGAL::Angle(*)(const Vec_2&, const Vec_2&);
   using Angle_fnc2 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  using Angle_fnc3 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  using Angle_fnc3 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
+                                    const Pnt_2&);
+  using Angle_fnc4 = CGAL::Angle(*)(const Pnt_3&, const Pnt_3&, const Pnt_3&);
+  using Angle_fnc5 = CGAL::Angle(*)(const Pnt_3&, const Pnt_3&, const Pnt_3&,
+                                    const Pnt_3&);
   m.def("angle", static_cast<Angle_fnc1>(&CGAL::angle<Kernel>));
   m.def("angle", static_cast<Angle_fnc2>(&CGAL::angle<Kernel>));
   m.def("angle", static_cast<Angle_fnc3>(&CGAL::angle<Kernel>));
+  m.def("angle", static_cast<Angle_fnc4>(&CGAL::angle<Kernel>));
+  m.def("angle", static_cast<Angle_fnc5>(&CGAL::angle<Kernel>));
 
   using Area_fnc = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("area", static_cast<Area_fnc>(&CGAL::area<Kernel>));

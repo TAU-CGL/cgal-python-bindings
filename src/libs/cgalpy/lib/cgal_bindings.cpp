@@ -104,4 +104,7 @@ void export_cgal(py::module_& m) {
       .export_values()
       ;
   }
+
+  m.attr("ORIGIN") = &CGAL::ORIGIN;
+  // m.attr("NULL_VECTOR") = &CGAL::NULL_VECTOR;
 }
