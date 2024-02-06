@@ -876,6 +876,13 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .export_values()
     ;
 
+  add_attr<CGAL::Box_parameter_space_2>(m, "Arr_parameter_space");
+  m.attr("ARR_LEFT_BOUNDARY") = &CGAL::ARR_LEFT_BOUNDARY;
+  m.attr("ARR_RIGHT_BOUNDARY") = &CGAL::ARR_RIGHT_BOUNDARY;
+  m.attr("ARR_BOTTOM_BOUNDARY") = &CGAL::ARR_BOTTOM_BOUNDARY;
+  m.attr("ARR_TOP_BOUNDARY") = &CGAL::ARR_TOP_BOUNDARY;
+  m.attr("ARR_INTERIOR") = &CGAL::ARR_INTERIOR;
+
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
   export_arr_algebraic_segment_traits_2(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS

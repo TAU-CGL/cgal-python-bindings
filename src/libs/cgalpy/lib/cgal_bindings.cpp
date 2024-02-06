@@ -91,4 +91,17 @@ void export_cgal(py::module_& m) {
     py::class_<CGAL::Bbox_2> bbox_c(m, "Bbox_2");
     export_bbox_2(bbox_c);
   }
+
+  // Box_parameter_space_2
+  if (! add_attr<CGAL::Box_parameter_space_2>(m, "Box_parameter_space_2")) {
+    py::enum_<CGAL::Box_parameter_space_2>(m, "Box_parameter_space_2")
+      .value("LEFT_BOUNDARY", CGAL::LEFT_BOUNDARY)
+      .value("RIGHT_BOUNDARY", CGAL::RIGHT_BOUNDARY)
+      .value("BOTTOM_BOUNDARY", CGAL::BOTTOM_BOUNDARY)
+      .value("TOP_BOUNDARY", CGAL::TOP_BOUNDARY)
+      .value("INTERIOR", CGAL::INTERIOR)
+      .value("EXTERIOR", CGAL::EXTERIOR)
+      .export_values()
+      ;
+  }
 }

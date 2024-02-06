@@ -55,6 +55,12 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
     // Immediate members
     .def("is_at_open_boundary", &Vertex::is_at_open_boundary)
+    .def("parameter_space_in_x",
+         [](const Vertex& v)->CGAL::Arr_parameter_space
+         { return v.parameter_space_in_x(); })
+    .def("parameter_space_in_y",
+         [](const Vertex& v)->CGAL::Arr_parameter_space
+         { return v.parameter_space_in_y(); })
     .def("degree", &Vertex::degree)
     .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
     .def("incident_halfedges", &aos2::incident_halfedges, py::keep_alive<0, 1>())
