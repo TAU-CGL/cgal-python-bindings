@@ -412,9 +412,14 @@ if (NOT SKBUILD)
     endif ()
 
     target_link_libraries(CGALPY PRIVATE
-        ${CGAL_LIBRARIES}
-        ${Boost_LIBRARIES}
-        ${PYTHON_LIBRARIES})
+      CGAL::CGAL
+      ${Boost_LIBRARIES}
+      ${PYTHON_LIBRARIES})
+
+    if (CGAL_Qt6_FOUND)
+      target_link_libraries(CGALPY PRIVATE
+        CGAL::CGAL_Qt6 Qt6::Core Qt6::Gui Qt6::Widgets)
+    endif()
 
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
     set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
