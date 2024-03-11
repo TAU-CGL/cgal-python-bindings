@@ -4,7 +4,7 @@ set(CGALPY_BOOST_MIN_VERSION 1.68.0)
 # Find required libraries
 if (NOT SKBUILD)
   if (CGALPY_WITH_VISUAL)
-    find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+    find_package(Qt6 COMPONENTS Core Gui Widgets)
     if (NOT Qt6_FOUND)
       message(WARNING "Qt6 not found; all Qt6-dependant binding will be excluded.")
       option(CGALPY_WITH_VISUAL "" OFF)
