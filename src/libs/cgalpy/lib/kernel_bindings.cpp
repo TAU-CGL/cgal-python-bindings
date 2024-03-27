@@ -28,6 +28,7 @@
 
 // 3D functors
 #include "CGALPY/Kernel/export_point_3.hpp"
+#include "CGALPY/Kernel/export_vector_3.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_attr.hpp"
 
@@ -174,6 +175,7 @@ void export_kernel(py::module_& m) {
   using Vec_2 = Kernel::Vector_2;
 
   using Pnt_3 = Kernel::Point_3;
+  using Vec_3 = Kernel::Vector_3;
 
   // Circle_2
   if (! add_attr<Circle_2>(m, "Circle_2")) {
@@ -321,6 +323,12 @@ void export_kernel(py::module_& m) {
                  { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
                  py::keep_alive<0, 1>());
     }
+  }
+
+  // Vector_3
+  if (! add_attr<Vec_3>(m, "Vector_3")) {
+    py::class_<Vec_3> vec3_c(m, "Vector_3");
+    export_vector_3<Kernel>(vec3_c);
   }
 
   py::class_<Weighted_point_3>(m, "Weighted_point_3")
