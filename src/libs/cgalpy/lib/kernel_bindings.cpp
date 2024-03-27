@@ -681,5 +681,8 @@ void export_kernel(py::module_& m) {
   using Do_fnc = bool(*)(const Bbox_2&, const Bbox_2&);
   m.def("do_overlap", static_cast<Do_fnc>(&CGAL::do_overlap));
 
+  using Cp_fnc3 = Vec_3(*)(const Vec_3&, const Vec_3&);
+  m.def("cross_product", static_cast<Cp_fnc3>(&CGAL::cross_product<Kernel>));
+
   /// @}
 }
