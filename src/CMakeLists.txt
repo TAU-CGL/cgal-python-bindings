@@ -51,6 +51,11 @@ if (NOT SKBUILD)
         return()
     endif ()
 
+    # The following is needed for Windows. We extract the directory names
+    # of the dlls that we depend on, and use them later on
+    get_filename_component(MPFR_LIBRARY_DIR ${MPFR_LIBRARIES} DIRECTORY)
+    get_filename_component(GMP_LIBRARY_DIR ${GMP_LIBRARIES} DIRECTORY)
+
 else()
     find_package(Boost REQUIRED)
 endif ()
