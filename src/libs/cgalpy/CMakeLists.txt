@@ -331,6 +331,7 @@ if (NOT SKBUILD)
     endif ()
 
     target_link_libraries(CGALPY PRIVATE
+            CGAL::CGAL
             ${Boost_LIBRARIES}
             ${PYTHON_LIBRARIES})
 
