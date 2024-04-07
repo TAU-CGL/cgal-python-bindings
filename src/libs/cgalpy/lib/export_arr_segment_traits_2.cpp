@@ -23,6 +23,7 @@
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
 
