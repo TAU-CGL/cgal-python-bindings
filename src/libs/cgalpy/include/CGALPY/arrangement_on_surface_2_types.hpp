@@ -195,27 +195,38 @@ using Fb = Face_gps<boolean_set_operations_2_bindings()>::type;
 using Fbe = Face_env<envelope_3_bindings(), Fb, Fgt>::type;
 using F = Face_extended<is_face_extended(), Fbe, py::object>::type;
 
-// Define the arrangement-on-surface types:
+// Define the DCEL:
 using Dcel = CGAL::Arr_dcel<Fgt, V, H, F>;
+
+// Define the topology trais
+
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS)
+using Att = CGAL::Arr_spherical_topology_traits_2<Fgt, Dcel>;
+#elif ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS) || \
+       (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
+       (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS))
+using Att = CGAL::Arr_unb_planar_topology_traits_2<Fgt, Dcel>;
+#else
+using Att = CGAL::Arr_bounded_planar_topology_traits_2<Fgt, Dcel>;
+#endif
+
+// Define the arrangement-on-surface types:
 using Arrangement_on_surface_2 =
-  With_history<aos2_with_history(), Fgt, Dcel>::Aos;
-using Arrangement_2 = With_history<aos2_with_history(), Fgt, Dcel>::Arr;
+  With_history<aos2_with_history(), Fgt, Att>::Aos;
 using Arrangement_on_surface_with_history_2 =
-  With_history<aos2_with_history(), Fgt, Dcel>::Aos_with_history;
-using Arrangement_with_history_2 =
-  With_history<aos2_with_history(), Fgt, Dcel>::Arr_with_history;
+  With_history<aos2_with_history(), Fgt, Att>::Aos_with_history;
 
 // Define the actual traits:
 using Geometry_traits_2 = Arrangement_on_surface_2::Geometry_traits_2;
 using Topology_traits = Arrangement_on_surface_2::Topology_traits;
 
-//! \todo Add support for Basic geometry traits and x-monotone
-// typedef ....                                 Ba_geometry_traits_2;
-// typedef ....                                 Xm_geometry_traits_2;
-//! \todo Add support for Data-curve geometry traits
+// Define the arrangement types:
+#if (CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS)
+using Arrangement_2 = CGAL::Arrangement_2<Geometry_traits_2, Dcel>;
+using Arrangement_with_history_2 = CGAL::Arrangement_with_history_2<Fgt, Dcel>;
+#endif
+
 //! \todo Add support for counting and tracing geometry traits
-// typedef ....                                 Dc_geometry_traits_2;
-// typedef ....                                 Trc_geometry_traits_2;
 
 using Vertex_iterator = Arrangement_on_surface_2::Vertex_iterator;
 using Halfedge_iterator = Arrangement_on_surface_2::Halfedge_iterator;

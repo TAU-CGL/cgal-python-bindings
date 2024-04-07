@@ -285,29 +285,32 @@ template <typename Fb, typename Data> struct Face_extended<true, Fb, Data>
 { using type = CGAL::Arr_extended_face<Fb, Data>; };
 
 // Aos types
-template <bool WithHistory, typename GeomTraits, typename Dcel>
+template <bool WithHistory, typename GeomTraits, typename TopolTraits>
 struct With_history {};
 
-template <typename GeomTraits, typename Dcel>
-struct With_history<false, GeomTraits, Dcel> {
+template <typename GeomTraits, typename TopolTraits>
+struct With_history<false, GeomTraits, TopolTraits> {
   using Gt = GeomTraits;
-  using Tt = typename CGAL::Default_planar_topology<Gt, Dcel>::Traits;
+  using Tt = TopolTraits;
   using Aos = CGAL::Arrangement_on_surface_2<Gt, Tt>;
-  using Arr = CGAL::Arrangement_2<Gt, Dcel>;
   using Aos_with_history = void;
+
+  using Dcel = typename Tt::Dcel;
+  using Arr = CGAL::Arrangement_2<Gt, Dcel>;
   using Arr_with_history = void;
 };
 
-template <typename GeomTraits, typename Dcel>
-struct With_history<true, GeomTraits, Dcel> {
+template <typename GeomTraits, typename TopolTraits>
+struct With_history<true, GeomTraits, TopolTraits> {
   using Gt = GeomTraits;
-  using Tt = typename CGAL::Default_planar_topology<Gt, Dcel>::Traits;
+  using Tt = TopolTraits;
   using Aos_with_history = CGAL::Arrangement_on_surface_with_history_2<Gt, Tt>;
-  using Arr_with_history = CGAL::Arrangement_with_history_2<Gt, Dcel>;
   using Aos = typename Aos_with_history::Base_arrangement_2;
-
   using Geometry_traits_2 = typename Aos::Geometry_traits_2;
-  using Arr = CGAL::Arrangement_2<Geometry_traits_2, typename Aos::Dcel>;
+
+  // using Dcel = typename Tt::Dcel;
+  // using Arr = CGAL::Arrangement_2<Geometry_traits_2, typename Aos::Dcel>;
+  // using Arr_with_history = CGAL::Arrangement_with_history_2<Gt, Dcel>;
 };
 
 // Geometry traits types:
