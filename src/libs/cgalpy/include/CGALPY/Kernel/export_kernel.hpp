@@ -20,7 +20,6 @@
 #include "CGALPY/Kernel/export_point_2.hpp"
 #include "CGALPY/Kernel/export_ray_2.hpp"
 #include "CGALPY/Kernel/export_segment_2.hpp"
-#include "CGALPY/Kernel/export_sphere_3.hpp"
 #include "CGALPY/Kernel/export_triangle_2.hpp"
 #include "CGALPY/Kernel/export_vector_2.hpp"
 
@@ -28,6 +27,8 @@
 #include "CGALPY/Kernel/export_dir_3.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
+#include "CGALPY/Kernel/export_sphere_3.hpp"
+#include "CGALPY/Kernel/export_triangle_3.hpp"
 #include "CGALPY/Kernel/export_vector_3.hpp"
 #include "CGALPY/Kernel/export_weighted_point_3.hpp"
 
@@ -42,16 +43,16 @@ void export_kernel(C_& ker_c) {
   using Ft = typename Ker::FT;
 
   // Kernel 2D objects
+  using Aff_trans_2 = typename Ker::Aff_transformation_2;
   using Circle_2 = typename Ker::Circle_2;
   using Dir_2 = typename Ker::Direction_2;
+  using Iso_rect_2 = typename Ker::Iso_rectangle_2;
   using Line_2 = typename Ker::Line_2;
   using Pnt_2 = typename Ker::Point_2;
   using Ray_2 = typename Ker::Ray_2;
   using Seg_2 = typename Ker::Segment_2;
-  using Vec_2 = typename Ker::Vector_2;
   using Tri_2 = typename Ker::Triangle_2;
-  using Iso_rect_2 = typename Ker::Iso_rectangle_2;
-  using Aff_trans_2 = typename Ker::Aff_transformation_2;
+  using Vec_2 = typename Ker::Vector_2;
 
   // Kernel 3D objects
   using Aff_trans_3 = typename Ker::Aff_transformation_3;
@@ -59,6 +60,7 @@ void export_kernel(C_& ker_c) {
   using Pln_3 = typename Ker::Plane_3;
   using Pnt_3 = typename Ker::Point_3;
   using Sfr_3 = typename Ker::Sphere_3;
+  using Tri_3 = typename Ker::Triangle_3;
   using Vec_3 = typename Ker::Vector_3;
   using Wd_pnt_3 = typename Ker::Weighted_point_3;
 
@@ -175,9 +177,13 @@ void export_kernel(C_& ker_c) {
   //////// 2D Operators
 
   // Construct_point_2
-  using Ctr_pnt_2_op = Pnt_2(Ctr_pnt_2::*)(const Ft&, const Ft&)const;
   py::class_<Ctr_pnt_2>(ker_c, "Construct_point_2")
-    .def("__call__", static_cast<Ctr_pnt_2_op>(&Ctr_pnt_2::operator()))
+    .def("__call__", [](Ctr_pnt_2 ctr, const Pnt_2& other)->Pnt_2 const
+                     { return ctr(other); })
+    .def("__call__", [](Ctr_pnt_2 ctr, CGAL::Origin org)->Pnt_2 const
+                     { return ctr(org); })
+    .def("__call__", [](Ctr_pnt_2 ctr, const Ft& x, const Ft& y)->Pnt_2 const
+                     { return ctr(x, y); })
     ;
 
   // Construct_midpoint_2
@@ -191,7 +197,8 @@ void export_kernel(C_& ker_c) {
   using Ctr_proj_xy_pnt_2_op =
     Pnt_2(Ctr_proj_xy_pnt_2::*)(const Pln_3&, const Pnt_3&)const;
   py::class_<Ctr_proj_xy_pnt_2>(ker_c, "Construct_projected_xy_point_2")
-    .def("__call__", static_cast<Ctr_proj_xy_pnt_2_op>(&Ctr_proj_xy_pnt_2::operator()))
+    .def("__call__",
+         static_cast<Ctr_proj_xy_pnt_2_op>(&Ctr_proj_xy_pnt_2::operator()))
     ;
 
   // Construct_segment_2
@@ -260,6 +267,12 @@ void export_kernel(C_& ker_c) {
     export_sphere_3<Ker>(sfr3_c);
   }
 
+  // Triangle_3
+  if (! add_attr<Tri_3>(ker_c, "Triangle_3")) {
+    py::class_<Tri_3> tri3_c(ker_c, "Triangle_3");
+    export_triangle_3<Ker>(tri3_c);
+  }
+
   // Vector_3
   if (! add_attr<Vec_3>(ker_c, "Vector_3")) {
     py::class_<Vec_3> vec3_c(ker_c, "Vector_3");
@@ -287,13 +300,16 @@ void export_kernel(C_& ker_c) {
     .def("__call__", static_cast<Ctr_pln_3_op>(&Ctr_pln_3::operator()))
     ;
 
-  // Construct_point_3
-  using Ctr_pnt_3_op1 = const Pnt_3&(Ctr_pnt_3::*)(const Pnt_3&)const;
-  using Ctr_pnt_3_op2 = Pnt_3(Ctr_pnt_3::*)(CGAL::Origin)const;
+  // // Construct_point_3
   py::class_<Ctr_pnt_3>(ker_c, "Construct_point_3")
-    .def("__call__", static_cast<Ctr_pnt_3_op1>(&Ctr_pnt_3::operator()))
+    .def("__call__",
+         [](Ctr_pnt_3 ctr, const Pnt_3& other)->Pnt_3 const
+         { return ctr(other); })
     .def("__call__",
          [](Ctr_pnt_3 ctr, CGAL::Origin org)->Pnt_3 const { return ctr(org); })
+    .def("__call__",
+         [](Ctr_pnt_3 ctr, const Ft& x, const Ft& y, const Ft& z)->Pnt_3 const
+         { return ctr(x, y, z); })
     ;
 
   // Construct_translated_point_3

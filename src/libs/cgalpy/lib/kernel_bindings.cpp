@@ -29,13 +29,14 @@
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_triangle_2.hpp"
 #include "CGALPY/Kernel/export_vector_2.hpp"
-#include "CGALPY/Kernel/export_sphere_3.hpp"
 
 // 3D functors
 #include "CGALPY/Kernel/export_dir_3.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
-#include "CGALPY/Kernel/export_vector_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
+#include "CGALPY/Kernel/export_sphere_3.hpp"
+#include "CGALPY/Kernel/export_triangle_3.hpp"
+#include "CGALPY/Kernel/export_vector_3.hpp"
 #include "CGALPY/Kernel/export_weighted_point_3.hpp"
 
 namespace py = nanobind;
@@ -138,13 +139,15 @@ void export_kernel_module(py::module_& m) {
   using Pnt_2 = Kernel::Point_2;
   using Ray_2 = Kernel::Ray_2;
   using Seg_2 = Kernel::Segment_2;
+  using Tri_2 = Kernel::Triangle_2;
   using Vec_2 = Kernel::Vector_2;
 
   using Dir_3 = Kernel::Direction_3;
-  using Pnt_3 = Kernel::Point_3;
-  using Vec_3 = Kernel::Vector_3;
   using Pln_3 = Kernel::Plane_3;
+  using Pnt_3 = Kernel::Point_3;
   using Sfr_3 = Kernel::Sphere_3;
+  using Tri_3 = Kernel::Triangle_3;
+  using Vec_3 = Kernel::Vector_3;
   using Wd_pnt_3 = Kernel::Weighted_point_3;
 
   // Circle_2
@@ -190,8 +193,8 @@ void export_kernel_module(py::module_& m) {
   }
 
   // Triangle_2
-  if (! add_attr<Triangle_2>(m, "Triangle_2")) {
-    py::class_<Triangle_2> tri2_c(m, "Triangle_2");
+  if (! add_attr<Tri_2>(m, "Triangle_2")) {
+    py::class_<Tri_2> tri2_c(m, "Triangle_2");
     export_triangle_2<Kernel>(tri2_c);
   }
 
@@ -226,6 +229,12 @@ void export_kernel_module(py::module_& m) {
   if (! add_attr<Pnt_3>(m, "Point_3")) {
     py::class_<Pnt_3> pnt3_c(m, "Point_3");
     export_point_3<Kernel>(pnt3_c);
+  }
+
+  // Triangle_2
+  if (! add_attr<Tri_3>(m, "Triangle_3")) {
+    py::class_<Tri_3> tri3_c(m, "Triangle_3");
+    export_triangle_3<Kernel>(tri3_c);
   }
 
   // Weighted_point_3
@@ -295,14 +304,14 @@ void export_kernel_module(py::module_& m) {
 
   using Cr_fnc1 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Cr_fnc2 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  using Cr_fnc3 = Pnt_2(*)(const Triangle_2&);
+  using Cr_fnc3 = Pnt_2(*)(const Tri_2&);
   m.def("centroid", static_cast<Cr_fnc1>(&CGAL::centroid<Kernel>));
   m.def("centroid", static_cast<Cr_fnc2>(&CGAL::centroid<Kernel>));
   m.def("centroid", static_cast<Cr_fnc3>(&CGAL::centroid<Kernel>));
 
   using Cc_fnc1 = Pnt_2(*)(const Pnt_2&, const Pnt_2&);
   using Cc_fnc2 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  using Cc_fnc3 = Pnt_2(*)(const Triangle_2&);
+  using Cc_fnc3 = Pnt_2(*)(const Tri_2&);
   m.def("circumcenter", static_cast<Cc_fnc1>(&CGAL::circumcenter<Kernel>));
   m.def("circumcenter", static_cast<Cc_fnc2>(&CGAL::circumcenter<Kernel>));
   m.def("circumcenter", static_cast<Cc_fnc3>(&CGAL::circumcenter<Kernel>));
@@ -475,7 +484,7 @@ void export_kernel_module(py::module_& m) {
   using Sooc_fnc = CGAL::Oriented_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("side_of_oriented_circle", static_cast<Sooc_fnc>(&CGAL::side_of_oriented_circle<Kernel>));
 
-  bind_squared_distance_types<Pnt_2, Line_2, Ray_2, Segment_2, Triangle_2>(m);
+  bind_squared_distance_types<Pnt_2, Line_2, Ray_2, Segment_2, Tri_2>(m);
 
   using Sd_fnc1 = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Sd_fnc2 = FT(*)(const Pnt_2&, const Pnt_2&);
