@@ -723,9 +723,8 @@ void export_aos(py::module_& m) {
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS))
 #ifdef CGALPY_HAS_VISUAL
-  using Draw_aos = void(*)(const Aos&, const char*, bool);
-  m.def("draw", static_cast<Draw_aos>(CGAL::draw),
-        py::arg("arr"), py::arg("title"), py::arg("draw_vertices") = false);
+  using Draw_aos = void(*)(const Aos&, const char*);
+  m.def("draw", static_cast<Draw_aos>(CGAL::draw));
 #endif
 #endif
 }
@@ -846,9 +845,9 @@ void export_arr(py::module_& m) {
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS))
 #ifdef CGALPY_HAS_VISUAL
   //! \todo The draw function should be applied only to arrangement on surface
-  using Draw_arr = void(*)(const Arr&, const char*, bool);
-  m.def("draw", static_cast<Draw_arr>(CGAL::draw),
-        py::arg("arr"), py::arg("title"), py::arg("draw_vertices") = false);
+  using Draw_arr = void(*)(const Arr&, const char*);
+  m.def("draw", [](const Arr& arr, const char* title )
+  { CGAL::draw(arr, title); });
 #endif
 #endif
 }
