@@ -127,7 +127,7 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
   py::class_<Integer> integer_c(m, "Integer");
   integer_c.def(py::init<>())
     .def(py::init_implicit<int>())
-    .def("value", &Integer::longValue)
+    // .def("value", &Integer::longValue)
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
@@ -175,7 +175,7 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
 
   py::class_<aos2::Bound> bound_c(m, "Bound");
   bound_c.def(py::init<>())
-    .def("value", &aos2::Bound::longValue)
+    // .def("value", &aos2::Bound::longValue)
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
