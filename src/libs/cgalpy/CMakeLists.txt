@@ -565,8 +565,6 @@ if (NOT SKBUILD)
     ################################################################################
     #
     # Add __init__.py
-    get_directory("${GMP_LIBRARIES}" GMP_LIBRARY_DIR)
-    get_directory("${MPFR_LIBRARIES}" MPFR_LIBRARY_DIR)
     if(WIN32)
         set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/__init__.py")
     else()
