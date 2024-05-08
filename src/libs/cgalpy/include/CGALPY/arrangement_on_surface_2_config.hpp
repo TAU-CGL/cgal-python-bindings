@@ -100,18 +100,22 @@ public:
    */
   ~Curve_data_merge() {}
 
-  static void set_func(py::object func) { s_func = func; }
-  static void reset_func() { s_func = py::none(); }
+  static void set_func(py::object func) {
+    s_func = func;
+    is_initialized = true;
+  }
+  static void reset_func() { is_initialized=false; }
   static py::object func() { return s_func; }
 
   /*! Apply the callback function
    */
   py::object operator()(py::object a, py::object b) const
-  { return (s_func.is_none()) ? a : s_func(a, b); }
+  { return (is_initialized) ? a : s_func(a, b); }
 
 private:
   //! The callback function to apply
-  inline static py::object s_func = py::none();
+  inline static py::object s_func;
+  inline static bool is_initialized = false;
 };
 
 template <typename Btr>

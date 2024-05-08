@@ -393,8 +393,8 @@ void export_kernel_module(py::module_& m) {
   using Cyx_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   m.def("compare_yx", static_cast<Cyx_fnc>(&CGAL::compare_yx<Kernel>));
 
-  using Cp_fnc3 = Vec_3(*)(const Vec_3&, const Vec_3&);
-  m.def("cross_product", static_cast<Cp_fnc3>(&CGAL::cross_product<Kernel>));
+  // using Cp_fnc3 = Vec_3(*)(const Vec_3&, const Vec_3&);
+  // m.def("cross_product", static_cast<Cp_fnc3>(&CGAL::cross_product<Kernel>));
 
   using Dt_fnc = FT(*)(const Vec_2&, const Vec_2&);
   m.def("determinant", static_cast<Dt_fnc>(&CGAL::determinant<Kernel>));
