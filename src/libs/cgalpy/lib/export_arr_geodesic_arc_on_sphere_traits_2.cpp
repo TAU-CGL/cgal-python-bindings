@@ -64,4 +64,15 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
   py::class_<Ctr_cv>(traits_c, "Construct_curve_2")
     .def("__call__", static_cast<Ctr_cv_op>(&Ctr_cv::operator()));
   ;
+
+  using Ctr_xcv = Gt::Construct_x_monotone_curve_2;
+  using Ctr_xcv_op = Xcv(Ctr_xcv::*)(const Pnt&, const Pnt&)const;
+  py::class_<Ctr_xcv>(traits_c, "Construct_x_monotone_curve_2")
+    .def("__call__", static_cast<Ctr_xcv_op>(&Ctr_xcv::operator()));
+  ;
+
+  auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
+  add_insertion(xcv_c, "__str__");
+  add_insertion(xcv_c, "__repr__");
+  add_extraction(xcv_c);
 }
