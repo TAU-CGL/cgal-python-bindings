@@ -38,11 +38,8 @@ void export_polygon_set_2(py::module_& m) {
     ;
 
 #ifdef CGALPY_HAS_VISUAL
-  using Draw = void(*)(const Ps2&, const char*, bool, bool);
-  m.def("draw", static_cast<Draw>(CGAL::draw),
-        py::arg("ps"), py::arg("title") = "",
-        py::arg("draw_vertices") = false,
-        py::arg("draw_unbounded") = false);
+  using Draw = void(*)(const Ps2&, const char*);
+  m.def("draw", static_cast<Draw>(CGAL::draw));
 #endif
 
   add_extraction(ps2_c);
