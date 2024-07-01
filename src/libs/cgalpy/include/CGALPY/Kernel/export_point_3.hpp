@@ -13,7 +13,6 @@
 #include <nanobind/operators.h>
 
 #include "CGALPY/config.hpp"
-#include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
@@ -38,8 +37,8 @@ void export_point_3(C& c) {
   c.def(py::init<>())
     .def(py::init<const Ft&, const Ft&, const Ft&>())
     .def(py::init<const Rt&, const Rt&, const Rt&, const Rt&>())
-    .def(py::init<Pnt&>())
-    .def(py::init<CGAL::Origin&>())
+    .def(py::init<const Pnt&>())
+    .def(py::init<const CGAL::Origin&>())
     .def("x", &Pnt::x)
     .def("y", &Pnt::y)
     .def("z", &Pnt::z)
