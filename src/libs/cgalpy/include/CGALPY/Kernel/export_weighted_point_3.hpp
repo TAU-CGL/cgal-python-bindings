@@ -29,10 +29,10 @@ void export_weighted_point_3(C& c) {
   using Wd_pnt_3 = typename Ker::Weighted_point_3;
 
   c.def(py::init<>())
-    .def(py::init<const CGAL::Origin&>())
+    // .def(py::init<const CGAL::Origin&>())
     .def(py::init<const Pnt_3&>())
     .def(py::init<const Pnt_3&, const Ft&>())
-    .def(py::init<const Ft&, const Ft&, const Ft&>())
+    // .def(py::init<const Ft&, const Ft&, const Ft&>())
     // Accessors
     .def("point", &Wd_pnt_3::point)
     .def("weight", &Wd_pnt_3::weight)
