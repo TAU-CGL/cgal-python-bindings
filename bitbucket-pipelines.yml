@@ -5,8 +5,10 @@ pipelines:
             name: Test
             image: ubuntu:latest
             script:
+              - export DEBIAN_FRONTEND=noninteractive
+              - export TZ=Asia/Kolkata
               - apt-get update
-              - apt-get install -y g++ cmake python3-pip python3 libcgal-dev git
+              - apt-get install -yq --no-install-recommends g++ cmake python3-pip python3 libcgal-dev git
               - git clone https://github.com/wjakob/nanobind.git
               - export nanobind_DIR=$(pwd)/nanobind
               - mkdir build
