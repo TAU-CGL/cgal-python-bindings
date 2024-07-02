@@ -8,18 +8,18 @@ pipelines:
               - export DEBIAN_FRONTEND=noninteractive
               - export TZ=Asia/Kolkata
               - apt-get update
-              - apt-get install -yq --no-install-recommends g++ cmake python3-pip python3 libcgal-dev git python3.12-venv
+              - apt-get install -yq cmake g++ python3-pip python3 libcgal-dev git python3.12-venv make
               - python3 -m venv venv
               - source venv/bin/activate
               - git clone https://github.com/wjakob/nanobind.git
-              - export nanobind_DIR=$(pwd)/nanobind
-              - ls
-              - git clone -b gsoc2024-python_bindings-radekaadek https://radekaadek@bitbucket.org/taucgl/cgal-python-bindings.git
-              - cd cgal-python-bindings
+              - cd nanobind
+              - git submodule update --init --recursive
+              - export nanobind_DIR=$(pwd)
+              - cd ..
               - mkdir build
               - cd build
               - cmake -C ../cmake/tests/release/aos2_epec_fixed_release.cmake ../
-              - make -j4
+              - make
               - pip install ../src/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
 
         # - step:
@@ -34,3 +34,4 @@ pipelines:
         #       # Execute your C++ application after compilation to check success
         #       - make distcheck
         #
+
