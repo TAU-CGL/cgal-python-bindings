@@ -14,6 +14,7 @@
 #include <nanobind/stl/string.h>
 
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
+#include <CGAL/boost/graph/generators.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_surface_mesh.h>
 #endif
