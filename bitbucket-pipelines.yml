@@ -8,11 +8,14 @@ pipelines:
               - export DEBIAN_FRONTEND=noninteractive
               - export TZ=Asia/Kolkata
               - apt-get update
-              - apt-get install -yq --no-install-recommends g++ cmake python3-pip python3 libcgal-dev git python3-venv
+              - apt-get install -yq --no-install-recommends g++ cmake python3-pip python3 libcgal-dev git
               - python3 -m venv venv
               - source venv/bin/activate
               - git clone https://github.com/wjakob/nanobind.git
               - export nanobind_DIR=$(pwd)/nanobind
+              - ls
+              - git clone -b gsoc2024-python_bindings-radekaadek https://radekaadek@bitbucket.org/taucgl/cgal-python-bindings.git
+              - cd cgal-python-bindings
               - mkdir build
               - cd build
               - cmake -C ../src/cmake/tests/release/aos2_epec_fixed_release.cmake ../
