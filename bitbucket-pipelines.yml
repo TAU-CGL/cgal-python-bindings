@@ -5,7 +5,8 @@ pipelines:
             name: Test
             image: ubuntu:latest
             script:
-              - apt-get install -y g++
+              - apt-get update
+              - apt-get install -y g++ cmake
               - mkdir build
               - cd build
               - cmake -C ../src/cmake/tests/release/aos3_epec_fixed_release.cmake src
