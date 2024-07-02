@@ -19,7 +19,7 @@ pipelines:
               - mkdir build
               - cd build
               - cmake -C ../cmake/tests/release/aos2_epec_fixed_release.cmake ../
-              - make -j4
+              - make
               - pip install ../src/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
 
         # - step:
