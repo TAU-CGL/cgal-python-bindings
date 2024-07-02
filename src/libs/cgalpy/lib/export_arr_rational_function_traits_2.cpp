@@ -69,7 +69,6 @@ void export_integer(py::module_& m) {
   py::class_<Integer> integer_c(m, "Integer");
   integer_c.def(py::init<>())
     .def(py::init_implicit<int>())
-    .def("value", &Integer::longValue)
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
@@ -89,7 +88,6 @@ void export_rational(py::module_& m) {
     .def(py::init_implicit<double>())
     .def(py::init_implicit<int>())
     .def(py::init_implicit<const Integer&>())
-    .def("value", &Rational::longValue)
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
@@ -108,7 +106,6 @@ void export_bound(py::module_& m) {
     .def(py::init<double>())
     .def(py::init_implicit<int>())
     .def(py::init_implicit<const Integer&>())
-    .def("value", &Bound::longValue)
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
