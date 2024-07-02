@@ -8,7 +8,7 @@ pipelines:
               - export DEBIAN_FRONTEND=noninteractive
               - export TZ=Asia/Kolkata
               - apt-get update
-              - apt-get install -yq --no-install-recommends g++ cmake python3-pip python3 libcgal-dev git
+              - apt-get install -yq --no-install-recommends g++ cmake python3-pip python3 libcgal-dev git python3.12-venv
               - python3 -m venv venv
               - source venv/bin/activate
               - git clone https://github.com/wjakob/nanobind.git
