@@ -46,7 +46,7 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
   // Face base
   py::class_<CGAL::Arr_face_base> face_base_c(c, "Arr_face_base");
-  face_base_c.def("assign", &Face::assign)
+  face_base_c.def("assign", &CGAL::Arr_face_base::assign)
     .def("is_unbounded", &CGAL::Arr_face_base::is_unbounded)
     .def("is_fictitious", &CGAL::Arr_face_base::is_fictitious)
     ;
