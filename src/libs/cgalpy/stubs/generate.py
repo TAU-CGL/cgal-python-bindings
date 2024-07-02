@@ -45,7 +45,8 @@ def replace_variables(s: str, variables_map: dict):
   variables = [splits[i] for i in range(len(splits)) if i%2 == 1]
   for variable in variables:
     print(variable)
-    s = s.replace('@' + variable + '@', variables_map[variable])
+    print(variables_map[variable])
+    s = s.replace('@' + variable + '@', '"' + variables_map[variable] + '"')
   return s
 
 def add_missing_fields_to_function(f: dict):
@@ -180,9 +181,17 @@ if __name__ == "__main__":
                       help='external imports')
   parser.add_argument('--filters-file', dest='filters_basename',
                       help='filters disctionary file name')
-  parser.add_argument('-f', '--filters', type=json.loads, dest='filters',
-                       help='filter dictionary')
+  # parser.add_argument('-f', '--filters', type=json.loads, dest='filters',
+  #                      help='filter dictionary')
+  # string argument eg. 
+  # Aos2.Arr_algebraic_segment_geometry_traits_2
+  parser.add_argument('-f', '--filters', type=str, dest='filters_argument',
+                      help='filter dictionary argument')
+  parser.add_argument('--config-path', type=str, nargs='*', dest='config_path',
+                      help='config.json file path', default='config.json')
   args = parser.parse_args()
+
+
 
   # Extract node name:
   name = args.name
@@ -191,7 +200,20 @@ if __name__ == "__main__":
   output_path = args.output_path
   pyi_basename = args.pyi_basename
   external_imports = args.imports
-  external_filters = args.filters
+  filters_arg = args.filters_argument
+  # external_filters = args.filters
+  # load config.json and set external_filters to the --filters-argument value
+  # this script basename+config_path
+  if filters_arg and filters_arg != "{}":
+    config_file_path = Path(__file__).parent / args.config_path
+    config_file = open(str(config_file_path), 'r')
+    config = json.load(config_file)
+    config_file.close()
+    external_filters = config[filters_arg]
+  else:
+    external_filters = {}
+
+
 
   if not name and not spec_basename:
     parser.error("Both the the class name and the file name are missing!")
@@ -210,6 +232,7 @@ if __name__ == "__main__":
 
   # Obtain specification input full file name:
   spec_fullname = full_filename(args.input_paths, spec_basename)
+  print(spec_fullname)
   if not spec_fullname:
     parser.error("The file %s cannot be found!" % spec_basename)
     exit(-1)
