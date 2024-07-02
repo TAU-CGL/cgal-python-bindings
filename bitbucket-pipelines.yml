@@ -9,7 +9,7 @@ pipelines:
               - apt-get install -y g++ cmake
               - mkdir build
               - cd build
-              - cmake -C ../src/cmake/tests/release/aos2_epec_fixed_release.cmake src
+              - cmake -C ../src/cmake/tests/release/aos2_epec_fixed_release.cmake ../src
               - make -j4
               - pip install src/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
 
