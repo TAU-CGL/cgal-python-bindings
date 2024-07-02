@@ -8,7 +8,7 @@ pipelines:
               - export DEBIAN_FRONTEND=noninteractive
               - export TZ=Asia/Kolkata
               - apt-get update
-              - apt-get install -yq --no-install-recommends g++ cmake python3-pip python3 libcgal-dev git
+              - apt-get install -yq --no-install-recommends g++ cmake python3-pip python3 libcgal-dev git python3.12-venv
               - python3 -m venv venv
               - source venv/bin/activate
               - git clone https://github.com/wjakob/nanobind.git
@@ -17,7 +17,7 @@ pipelines:
               - cd build
               - cmake -C ../src/cmake/tests/release/aos2_epec_fixed_release.cmake ../src
               - make -j4
-              - pip install src/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
+              - pip install ../src/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
 
         # - step:
         #     name: Lint
