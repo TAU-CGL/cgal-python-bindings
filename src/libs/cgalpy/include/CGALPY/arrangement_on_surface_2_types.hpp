@@ -158,7 +158,7 @@ using Cgt = My_cd_tr::Cgt;
 using Ccgt = My_cd_tr::Ccgt;
 
 // The arrangement on surface with history is parameterized with a geometry
-// traits that os not extended with the consolidated curve-data traits (and
+// traits that is not extended with the consolidated curve-data traits (and
 // the curve-data traits itself).
 // Define the final geometry traits in the hierarchy:
 #if defined(CGALPY_AOS2_WITH_HISTORY)
@@ -178,7 +178,7 @@ using Final_geometry_traits_2 = Fgt;
 // General
 using Point_2 = typename Fgt::Point_2;
 using Curve_2 = typename Fgt::Curve_2;
-using X_monotone_curve_2 = typename Cgt::X_monotone_curve_2;
+using X_monotone_curve_2 = typename Fgt::X_monotone_curve_2;
 
 // Vertex
 using Vb = CGAL::Arr_vertex_base<Fgt::Point_2>;
@@ -222,7 +222,7 @@ using Topology_traits = Arrangement_on_surface_2::Topology_traits;
 
 // Define the arrangement types:
 #if (CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS)
-using Arrangement_2 = CGAL::Arrangement_2<Geometry_traits_2, Dcel>;
+using Arrangement_2 = CGAL::Arrangement_2<Geometry_traits_2, Topology_traits::Dcel>;
 using Arrangement_with_history_2 = CGAL::Arrangement_with_history_2<Fgt, Dcel>;
 #endif
 
