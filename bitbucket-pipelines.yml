@@ -2,7 +2,7 @@ pipelines:
   default:
     - parallel:
         - step:
-            name: Test
+            name: Test compilation
             image: ubuntu:latest
             script:
               - export DEBIAN_FRONTEND=noninteractive
@@ -29,17 +29,33 @@ pipelines:
               - python -m pip install build
               - make
               - pip install src/libs/cgalpy/dist/CGALPY-1.0.0-py3-none-any.whl
-
-        # - step:
-        #     name: Lint
-        #     script:
-        #       # apt update && apt -y install cppcheck && cppcheck .
-        #       - make lint
-        # - step:
-        #     name: Build and Run
-        #     script:
-        #       - make compile
-        #       # Execute your C++ application after compilation to check success
-        #       - make distcheck
-        #
+        - step:
+            name: Test all examples
+            image: ubuntu:latest
+            script:
+              - export DEBIAN_FRONTEND=noninteractive
+              - export TZ=Asia/Kolkata
+              - apt-get update
+              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev
+              - git clone https://github.com/CGAL/cgal.git
+              - cd cgal
+              - mkdir build
+              - cd build
+              - cmake ..
+              - make install
+              - cd ../..
+              - python3 -m venv venv
+              - source venv/bin/activate
+              - git clone https://github.com/wjakob/nanobind.git
+              - cd nanobind
+              - git submodule update --init --recursive
+              - export nanobind_DIR=$(pwd)
+              - cd ..
+              # now install all
+              - cd src/scripts
+              - ./run2.sh
+              # run all examples
+              - cd ../python-scripts/cgalpy_examples
+              - chmod +x find_and_run.sh
+              - ./find_and_run.sh
 
