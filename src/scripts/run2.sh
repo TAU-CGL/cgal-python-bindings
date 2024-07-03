@@ -9,6 +9,7 @@ for file in ../../cmake/tests/release/*.cmake; do
   # run the command
   cmake -C ../$file ../../../
   make
+  python -m pip install build
   # install eg. pip install src/libs/cgalpy/dist/CGALPY_kerEpecInt_aos2AlgPl-1.0.0-py3-none-any.whl
   pip install src/libs/cgalpy/dist/*.whl
   # leave the directory
