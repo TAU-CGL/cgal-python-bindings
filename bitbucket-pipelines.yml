@@ -1,31 +1,33 @@
 
 pipelines:
   default:
+    - step: # sequential step
+        image: ubuntu:latest
+        script:
+          - export DEBIAN_FRONTEND=noninteractive
+          - export TZ=Asia/Kolkata
+          - apt-get update
+          - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+          - git clone https://github.com/CGAL/cgal.git
+          - cd cgal
+          - mkdir build
+          - cd build
+          - cmake ..
+          - make install
+          - cd ../..
+          - python3 -m venv venv
+          - source venv/bin/activate
+          - git clone https://github.com/wjakob/nanobind.git
+          - cd nanobind
+          - git submodule update --init --recursive
+          - export nanobind_DIR=$(pwd)
+          - cd ..
+          - mkdir build
+          - cd build
     - parallel:
+       steps:
         - step:
             name: Test aos2_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -33,28 +35,6 @@ pipelines:
         
         - step:
             name: Test as3_del_compact_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/as3_del_compact_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -62,28 +42,6 @@ pipelines:
         
         - step:
             name: Test as3_del_compact_parallel_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/as3_del_compact_parallel_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -91,28 +49,6 @@ pipelines:
         
         - step:
             name: Test as3_del_fast_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/as3_del_fast_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -120,28 +56,6 @@ pipelines:
         
         - step:
             name: Test as3_exact_del_compact_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/as3_exact_del_compact_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -149,28 +63,6 @@ pipelines:
         
         - step:
             name: Test as3_reg_compact_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/as3_reg_compact_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -178,28 +70,6 @@ pipelines:
         
         - step:
             name: Test bso2_epec_fixed_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/bso2_epec_fixed_release.cmake ../
               - python -m pip install build
               - make
@@ -207,28 +77,6 @@ pipelines:
         
         - step:
             name: Test cdd_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/cdd_release.cmake ../
               - python -m pip install build
               - make
@@ -236,28 +84,6 @@ pipelines:
         
         - step:
             name: Test epec_all_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/epec_all_release.cmake ../
               - python -m pip install build
               - make
@@ -265,28 +91,6 @@ pipelines:
         
         - step:
             name: Test epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/epec_release.cmake ../
               - python -m pip install build
               - make
@@ -294,28 +98,6 @@ pipelines:
         
         - step:
             name: Test epecd_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/epecd_release.cmake ../
               - python -m pip install build
               - make
@@ -323,28 +105,6 @@ pipelines:
         
         - step:
             name: Test epic_all_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/epic_all_release.cmake ../
               - python -m pip install build
               - make
@@ -352,28 +112,6 @@ pipelines:
         
         - step:
             name: Test epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/epic_release.cmake ../
               - python -m pip install build
               - make
@@ -381,28 +119,6 @@ pipelines:
         
         - step:
             name: Test epicd_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/epicd_release.cmake ../
               - python -m pip install build
               - make
@@ -410,28 +126,6 @@ pipelines:
         
         - step:
             name: Test pol3_face_with_id_pmp_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/pol3_face_with_id_pmp_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -439,28 +133,6 @@ pipelines:
         
         - step:
             name: Test pol3_pmp_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/pol3_pmp_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -468,28 +140,6 @@ pipelines:
         
         - step:
             name: Test sm_pmp_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/sm_pmp_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -497,28 +147,6 @@ pipelines:
         
         - step:
             name: Test ss_2_cdlg_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/ss_2_cdlg_release.cmake ../
               - python -m pip install build
               - make
@@ -526,28 +154,6 @@ pipelines:
         
         - step:
             name: Test tri2_ct_wi_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/tri2_ct_wi_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -555,28 +161,6 @@ pipelines:
         
         - step:
             name: Test tri3_del_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/tri3_del_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -584,28 +168,6 @@ pipelines:
         
         - step:
             name: Test vis2_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/vis2_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -613,28 +175,6 @@ pipelines:
         
         - step:
             name: Test aos2_alg_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_alg_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -642,28 +182,6 @@ pipelines:
         
         - step:
             name: Test aos2_bezier_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_bezier_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -671,28 +189,6 @@ pipelines:
         
         - step:
             name: Test aos2_ccd_seg_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_ccd_seg_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -700,28 +196,6 @@ pipelines:
         
         - step:
             name: Test aos2_cd_pos_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_cd_pos_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -729,28 +203,6 @@ pipelines:
         
         - step:
             name: Test aos2_conic_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_conic_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -758,28 +210,6 @@ pipelines:
         
         - step:
             name: Test aos2_cs_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_cs_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -787,28 +217,6 @@ pipelines:
         
         - step:
             name: Test aos2_cs_ve_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_cs_ve_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -816,28 +224,6 @@ pipelines:
         
         - step:
             name: Test aos2_epec_fixed_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_epec_fixed_release.cmake ../
               - python -m pip install build
               - make
@@ -845,28 +231,6 @@ pipelines:
         
         - step:
             name: Test aos2_fe_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_fe_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -874,28 +238,6 @@ pipelines:
         
         - step:
             name: Test aos2_geodesic_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_geodesic_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -903,28 +245,6 @@ pipelines:
         
         - step:
             name: Test aos2_linear_ae_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_linear_ae_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -932,28 +252,6 @@ pipelines:
         
         - step:
             name: Test aos2_linear_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_linear_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -961,28 +259,6 @@ pipelines:
         
         - step:
             name: Test aos2_linear_fe_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_linear_fe_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -990,28 +266,6 @@ pipelines:
         
         - step:
             name: Test aos2_ncseg_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_ncseg_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1019,28 +273,6 @@ pipelines:
         
         - step:
             name: Test aos2_ncseg_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_ncseg_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -1048,28 +280,6 @@ pipelines:
         
         - step:
             name: Test aos2_pl_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_pl_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1077,28 +287,6 @@ pipelines:
         
         - step:
             name: Test aos2_pos_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_pos_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1106,28 +294,6 @@ pipelines:
         
         - step:
             name: Test aos2_rational_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_rational_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1135,28 +301,6 @@ pipelines:
         
         - step:
             name: Test aos2_seg_ae_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_seg_ae_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1164,28 +308,6 @@ pipelines:
         
         - step:
             name: Test aos2_seg_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_seg_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1193,28 +315,6 @@ pipelines:
         
         - step:
             name: Test aos2_seg_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_seg_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -1222,28 +322,6 @@ pipelines:
         
         - step:
             name: Test aos2_wh_cs_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_wh_cs_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1251,28 +329,6 @@ pipelines:
         
         - step:
             name: Test aos2_wh_seg_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_wh_seg_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1280,28 +336,6 @@ pipelines:
         
         - step:
             name: Test aos2_wh_seg_fe_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/aos2_wh_seg_fe_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1309,28 +343,6 @@ pipelines:
         
         - step:
             name: Test as2_del_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/as2_del_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -1338,28 +350,6 @@ pipelines:
         
         - step:
             name: Test bso2_bezier_ccr_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/bso2_bezier_ccr_release.cmake ../
               - python -m pip install build
               - make
@@ -1367,28 +357,6 @@ pipelines:
         
         - step:
             name: Test bso2_conic_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/bso2_conic_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1396,28 +364,6 @@ pipelines:
         
         - step:
             name: Test bso2_conic_fe_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/bso2_conic_fe_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1425,28 +371,6 @@ pipelines:
         
         - step:
             name: Test bso2_cs_epec_fixed_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/bso2_cs_epec_fixed_release.cmake ../
               - python -m pip install build
               - make
@@ -1454,28 +378,6 @@ pipelines:
         
         - step:
             name: Test bso2_cs_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/bso2_cs_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1483,28 +385,6 @@ pipelines:
         
         - step:
             name: Test bso2_seg_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/bso2_seg_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1512,28 +392,6 @@ pipelines:
         
         - step:
             name: Test cdlg_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/cdlg_release.cmake ../
               - python -m pip install build
               - make
@@ -1541,28 +399,6 @@ pipelines:
         
         - step:
             name: Test ch2_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/ch2_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1570,28 +406,6 @@ pipelines:
         
         - step:
             name: Test ch2_epic_fixed_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/ch2_epic_fixed_release.cmake ../
               - python -m pip install build
               - make
@@ -1599,28 +413,6 @@ pipelines:
         
         - step:
             name: Test ch2_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/ch2_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -1628,28 +420,6 @@ pipelines:
         
         - step:
             name: Test env2_linear_cd_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/env2_linear_cd_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1657,28 +427,6 @@ pipelines:
         
         - step:
             name: Test env2_rat_cd_ccr_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/env2_rat_cd_ccr_release.cmake ../
               - python -m pip install build
               - make
@@ -1686,28 +434,6 @@ pipelines:
         
         - step:
             name: Test env2_seg_cd_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/env2_seg_cd_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1715,28 +441,6 @@ pipelines:
         
         - step:
             name: Test env3_plane_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/env3_plane_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1744,28 +448,6 @@ pipelines:
         
         - step:
             name: Test env3_plane_sd_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/env3_plane_sd_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1773,28 +455,6 @@ pipelines:
         
         - step:
             name: Test env3_sphere_ccr_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/env3_sphere_ccr_release.cmake ../
               - python -m pip install build
               - make
@@ -1802,28 +462,6 @@ pipelines:
         
         - step:
             name: Test env3_sphere_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/env3_sphere_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1831,28 +469,6 @@ pipelines:
         
         - step:
             name: Test env3_tri_sd_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/env3_tri_sd_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1860,28 +476,6 @@ pipelines:
         
         - step:
             name: Test epec_fixed_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/epec_fixed_release.cmake ../
               - python -m pip install build
               - make
@@ -1889,28 +483,6 @@ pipelines:
         
         - step:
             name: Test ms2_conic_ccr_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/ms2_conic_ccr_release.cmake ../
               - python -m pip install build
               - make
@@ -1918,28 +490,6 @@ pipelines:
         
         - step:
             name: Test ms2_cs_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/ms2_cs_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1947,28 +497,6 @@ pipelines:
         
         - step:
             name: Test ms2_seg_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/ms2_seg_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -1976,28 +504,6 @@ pipelines:
         
         - step:
             name: Test pol3_bso2_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/pol3_bso2_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -2005,28 +511,6 @@ pipelines:
         
         - step:
             name: Test pol3_ch3_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/pol3_ch3_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -2034,28 +518,6 @@ pipelines:
         
         - step:
             name: Test pol3_ch3_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/pol3_ch3_epic_release.cmake ../
               - python -m pip install build
               - make
@@ -2063,28 +525,6 @@ pipelines:
         
         - step:
             name: Test ss2_seg_epec_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/ss2_seg_epec_release.cmake ../
               - python -m pip install build
               - make
@@ -2092,28 +532,6 @@ pipelines:
         
         - step:
             name: Test tri2_wi_hi_epic_release
-            image: ubuntu:latest
-            script:
-              - export DEBIAN_FRONTEND=noninteractive
-              - export TZ=Asia/Kolkata
-              - apt-get update
-              - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
-              - git clone https://github.com/CGAL/cgal.git
-              - cd cgal
-              - mkdir build
-              - cd build
-              - cmake ..
-              - make install
-              - cd ../..
-              - python3 -m venv venv
-              - source venv/bin/activate
-              - git clone https://github.com/wjakob/nanobind.git
-              - cd nanobind
-              - git submodule update --init --recursive
-              - export nanobind_DIR=$(pwd)
-              - cd ..
-              - mkdir build
-              - cd build
               - cmake -C ../cmake/tests/release/tri2_wi_hi_epic_release.cmake ../
               - python -m pip install build
               - make
