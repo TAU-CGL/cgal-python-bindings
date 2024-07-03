@@ -53,3 +53,4 @@ if __name__ == "__main__":
     path_to_cmakes = sys.argv[1]
     yml = generate_yml(path_to_cmakes)
     print(yml)
+
