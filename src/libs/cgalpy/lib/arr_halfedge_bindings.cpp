@@ -26,7 +26,6 @@ Halfedge& next(Halfedge& e) { return (*(e.next())); }
 Halfedge& prev(Halfedge& e) { return (*(e.prev())); }
 Halfedge& twin(Halfedge& e) { return (*(e.twin())); }
 Face& face(Halfedge& e) { return (*(e.face())); }
-X_monotone_curve_2& curve(Halfedge& e) { return (e.curve()); }
 
 py::object ccb(const Halfedge& h)
 { return make_circulator(h.ccb()); }
@@ -41,6 +40,7 @@ py::object surfaces(const Halfedge& h)
 //
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Aos = aos2::Arrangement_on_surface_2;
+  using Xcv = Aos::X_monotone_curve_2;
   using He = Aos::Halfedge;
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -59,7 +59,8 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("face", &aos2::face, ri)
     .def("next", &aos2::next, ri)
     .def("prev", &aos2::prev, ri)
-    .def("curve", &aos2::curve, ri)
+    .def("curve_mutable", [](He& h)->Xcv& { return h.curve(); }, ri)
+    .def("curve", [](const He& h)->const Xcv& { return h.curve(); }, ri)
     .def("ccb", &aos2::ccb, py::keep_alive<0, 1>())
 
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
