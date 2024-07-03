@@ -26,8 +26,9 @@ pipelines:
               - mkdir aos2_epec_fixed_release
               - cd aos2_epec_fixed_release
               - cmake -C ../cmake/tests/release/aos2_epec_fixed_release.cmake ../
+              - python -m pip install build
               - make
-              - pip install ../src/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
+              - pip install src/libs/cgalpy/dist/CGALPY-1.0.0-py3-none-any.whl
 
         # - step:
         #     name: Lint
