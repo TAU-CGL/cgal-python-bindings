@@ -53,6 +53,7 @@ pipelines:
               - cd ..
               # now install all
               - cd src/scripts
+              - chmod +x run2.sh
               - ./run2.sh
               # run all examples
               - cd ../python-scripts/cgalpy_examples
