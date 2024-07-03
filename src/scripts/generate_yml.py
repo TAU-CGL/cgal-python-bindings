@@ -38,10 +38,11 @@ pipelines:
     if file.endswith(".cmake"):
       yml += f"""
         - step:
-            name: Test {name}
-              - cmake -C ../cmake/tests/release/{file} ../
-              - make
-              - pip install src/libs/cgalpy/dist/*.whl
+          name: Test {name}
+          script:
+            - cmake -C ../cmake/tests/release/{file} ../
+            - make
+            - pip install src/libs/cgalpy/dist/*.whl
         """
   return yml
 
