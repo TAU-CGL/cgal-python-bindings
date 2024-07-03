@@ -23,8 +23,8 @@ pipelines:
               - git submodule update --init --recursive
               - export nanobind_DIR=$(pwd)
               - cd ..
-              - mkdir build
-              - cd build
+              - mkdir aos2_epec_fixed_release
+              - cd aos2_epec_fixed_release
               - cmake -C ../cmake/tests/release/aos2_epec_fixed_release.cmake ../
               - make
               - pip install ../src/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
