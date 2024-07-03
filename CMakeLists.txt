@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.14)
 if (POLICY CMP0011)
-    cmake_policy(SET CMP0011 NEW)
-endif ()
+  cmake_policy(SET CMP0011 NEW)
+endif()
+# Policy CMP0148 is set to old, because FindSphinx still uses FindPythonInterp
+if (POLICY CMP0148)
+  cmake_policy(SET CMP0148 OLD)
+endif()
 project(cgalpy VERSION "1.0.0" LANGUAGES CXX)
 
 # Include windows toolchain path (if available)
