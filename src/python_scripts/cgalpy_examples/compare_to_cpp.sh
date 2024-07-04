@@ -98,13 +98,12 @@ echo "-------------------------------------------------"
 echo ""
 # check if length of failed commands is 0
 if [ ${#no_cpp[@]} -eq 0 ]; then
-  echo "No C++ file found for the following Python scripts:"
+  echo "All Python scripts have corresponding C++ files"
+else
+  echo "The following Python scripts do not have corresponding C++ files:"
   for file in ${no_cpp[@]}; do
     echo $file
   done
-  echo ""
-else
-  echo "All Python scripts have corresponding C++ files"
 fi
 
 echo ""
