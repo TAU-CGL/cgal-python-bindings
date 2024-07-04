@@ -25,19 +25,22 @@ Ker = CGALPY.Ker
 
 # Get the name of the input file from the command line, or use the default
 # points.dat file if no command-line parameters are given.
-try:
-  filename = argv[1]
-except:
-  filename = 'coll_points.dat'
+if len(sys.argv) > 1:
+    filename = sys.argv[1]
+else:
+    filename = 'coll_points.dat'
 
 points = read_objects(Point, filename)
 dual_lines = []
 k = 0
-std::transform(points.begin(), points.end(), dual_lines.begin(),
-               [&](const Point& p) {
-                 Line dual_line(p.x(), -1, -(p.y()))
-                 return Data_x_monotone_curve_2(dual_line, k++)
-               })
+# std::transform(points.begin(), points.end(), dual_lines.begin(),
+#                [&](const Point& p) {
+#                  Line dual_line(p.x(), -1, -(p.y()))
+#                  return Data_x_monotone_curve_2(dual_line, k++)
+#                })
+for p in points:
+  dual_lines.append(Xcv(Line(p.x(), -1, -(p.y())), k))
+  k += 1
 
 # Construct the dual arrangement by aggregately inserting the lines.
 arr = Arrangement()

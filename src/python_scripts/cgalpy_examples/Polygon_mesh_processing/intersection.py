@@ -4,6 +4,13 @@ import os
 import sys
 import importlib
 
+if len(sys.argv) < 3:
+  print("Usage: intersection.py <file1.off> <file2.off> [lib]")
+  exit()
+
+filename1 = sys.argv[1]
+filename2 = sys.argv[2]
+
 if len(sys.argv) < 4:
   sys.path.append(os.path.abspath('../precompiled'))
   lib = 'CGALPY'
@@ -16,13 +23,6 @@ Point_3 = Ker.Point_3
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-try:
-  filename1 = sys.argv[1]
-  filename2 = sys.argv[2]
-
-except Exception:
-  print("Usage: intersection.py <file1.off> <file2.off>")
-  exit()
 
 sm1 = Sm.read_polygon_mesh(filename1)
 sm2 = Sm.read_polygon_mesh(filename1)
