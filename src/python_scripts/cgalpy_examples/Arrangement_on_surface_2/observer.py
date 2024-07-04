@@ -52,15 +52,6 @@ Aos2.insert_non_intersecting_curve(arr, Segment(Point(-1, 0), Point(0, 1)))
 Aos2.insert_non_intersecting_curve(arr, Segment(Point(0, 1), Point(1, 0)))
 Aos2.insert_non_intersecting_curve(arr, Segment(Point(1, 0), Point(0, -1)))
 Aos2.insert_non_intersecting_curve(arr, Segment(Point(0, -1), Point(-1, 0)))
-# Python output:
-# -> The insertion of [0 -1 -1 0] causes a face to split -> The insertion of [0 -1 0 1] causes a face to split -> The insertion of [-1 0 0 -0] causes a face to split -> The insertion of [0 -0 1 0] causes a face to split The arrangement size: |V| = 5, |E| = 8, |F| = 5 -> The removal of [0 -1 0 -0] causes two faces to merge The arrangement size: |V| = 5, |E| = 7, |F| = 4
-# C++ output:
-# -> The insertion of : [ 0 -1 -1 0 ] causes a face to split. -> The insertion of : [ 0 -1 0 1 ] causes a face to split. -> The insertion of : [ -1 0 0 -0 ] causes a face to split. -> The insertion of : [ 0 -0 1 0 ] causes a face to split. The arrangement size: |V| = 5, |E| = 8, |F| = 5 -> The removal of : [ 0 -1 0 -0 ] causes two faces to merge. The arrangement size: |V| = 5, |E| = 7, |F| = 4
-# Difference:
-# 1c1
-# < -> The insertion of [0 -1 -1 0] causes a face to split -> The insertion of [0 -1 0 1] causes a face to split -> The insertion of [-1 0 0 -0] causes a face to split -> The insertion of [0 -0 1 0] causes a face to split The arrangement size: |V| = 5, |E| = 8, |F| = 5 -> The removal of [0 -1 0 -0] causes two faces to merge The arrangement size: |V| = 5, |E| = 7, |F| = 4
-# ---
-# > -> The insertion of : [ 0 -1 -1 0 ] causes a face to split. -> The insertion of : [ 0 -1 0 1 ] causes a face to split. -> The insertion of : [ -1 0 0 -0 ] causes a face to split. -> The insertion of : [ 0 -0 1 0 ] causes a face to split. The arrangement size: |V| = 5, |E| = 8, |F| = 5 -> The removal of : [ 0 -1 0 -0 ] causes two faces to merge. The arrangement size: |V| = 5, |E| = 7, |F| = 4
 
 # Insert a vertical segment dividing the diamond into two, and a
 # a horizontal segment further dividing the diamond into four.

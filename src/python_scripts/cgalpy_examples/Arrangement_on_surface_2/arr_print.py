@@ -1,16 +1,6 @@
 import os
 import sys
 import importlib
-# Python output:
-# 5 vertices: (3 3) - Isolated (1 3) - degree 2 (3 5) - degree 2 (5 3) - degree 2 (3 1) - degree 2 4 edges: [1 3 3 5] [3 5 5 3] [5 3 3 1] [3 1 1 3] 2 faces: Unbounded face. Hole #1: (1 3) [1 3 3 5] (3 5) [3 5 5 3] (5 3) [5 3 3 1] (3 1) [3 1 1 3] (1 3) Outer boundary: (1 3) [3 1 1 3] (3 1) [5 3 3 1] (5 3) [3 5 5 3] (3 5) [1 3 3 5] (1 3) Isolated vertex #1: (3 3)
-# C++ output:
-# 5 vertices: (3 3) - Isolated. (1 3) - degree 2 (3 5) - degree 2 (5 3) - degree 2 (3 1) - degree 2 4 edges: [1 3 3 5] [3 5 5 3] [5 3 3 1] [3 1 1 3] 2 faces: Unbounded face. Hole #1: (1 3) [1 3 3 5] (3 5) [3 5 5 3] (5 3) [5 3 3 1] (3 1) [3 1 1 3] (1 3) Outer boundary: (1 3) [3 1 1 3] (3 1) [5 3 3 1] (5 3) [3 5 5 3] (3 5) [1 3 3 5] (1 3) Isolated vertex #1: (3 3)
-# Difference:
-# 1c1
-# < 5 vertices: (3 3) - Isolated (1 3) - degree 2 (3 5) - degree 2 (5 3) - degree 2 (3 1) - degree 2 4 edges: [1 3 3 5] [3 5 5 3] [5 3 3 1] [3 1 1 3] 2 faces: Unbounded face. Hole #1: (1 3) [1 3 3 5] (3 5) [3 5 5 3] (5 3) [5 3 3 1] (3 1) [3 1 1 3] (1 3) Outer boundary: (1 3) [3 1 1 3] (3 1) [5 3 3 1] (5 3) [3 5 5 3] (3 5) [1 3 3 5] (1 3) Isolated vertex #1: (3 3)
-# ---
-# > 5 vertices: (3 3) - Isolated. (1 3) - degree 2 (3 5) - degree 2 (5 3) - degree 2 (3 1) - degree 2 4 edges: [1 3 3 5] [3 5 5 3] [5 3 3 1] [3 1 1 3] 2 faces: Unbounded face. Hole #1: (1 3) [1 3 3 5] (3 5) [3 5 5 3] (5 3) [5 3 3 1] (3 1) [3 1 1 3] (1 3) Outer boundary: (1 3) [3 1 1 3] (3 1) [5 3 3 1] (5 3) [3 5 5 3] (3 5) [1 3 3 5] (1 3) Isolated vertex #1: (3 3)
-# fix this file
 
 if len(sys.argv) < 2:
   sys.path.append(os.path.abspath('../precompiled'))
