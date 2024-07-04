@@ -51,8 +51,6 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
   m.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
-  // Export CGAL general types (which do not depend on a kernel)
-  export_cgal(m);
   export_approximate_kernel(m);
 
 #ifdef CGALPY_KERNEL_BINDINGS
