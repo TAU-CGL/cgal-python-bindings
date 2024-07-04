@@ -576,45 +576,61 @@ void insert_ni_cvs(Arrangement_on_surface_2& arr, py::list& lst) {
  * \pre: `xcv` does not intersect any curve in the arrangement in their
  *       interiors.
  */
-template <typename PoinLocation>
-Halfedge& insert_ni_cv_pl(Arrangement_on_surface_2& arr,
-                          const X_monotone_curve_2& xcv, const PoinLocation& pl)
+template <typename Aos, typename PoinLocation>
+Halfedge&
+insert_ni_xcv_pl(Arrangement_on_surface_2& arr,
+                 const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+                 const PoinLocation& pl)
 { return *(CGAL::insert_non_intersecting_curve(arr, xcv, pl)); }
 
 // Insert a curve into an arrangement.
-template <typename Aos_2>
-void insert_cv(Aos_2& arr, const typename Aos_2::Geometry_traits_2::Curve_2& cv)
+template <typename Aos>
+void insert_cv(Aos& arr, const typename Aos::Geometry_traits_2::Curve_2& cv)
 { CGAL::insert(arr, cv); }
 
 // Insert a curve into an arrangement.
-template <typename PoinLocation>
-void insert_cv_pl(Arrangement_on_surface_2& arr, const Curve_2& cv,
+template <typename Aos, typename PoinLocation>
+void insert_cv_pl(Aos& arr,
+                  const typename Aos::Geometry_traits_2::Curve_2& cv,
                   const PoinLocation& pl)
 { CGAL::insert(arr, cv, pl); }
 
 // Insert a curve into an arrangement.
-void insert_xcv(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv)
-{ CGAL::insert(arr, xcv); }
+template <typename Aos>
+void insert_xcv(Aos& aos,
+                const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv)
+{ CGAL::insert(aos, xcv); }
 
 // Insert a curve into an arrangement.
-void insert_xcv_vertex(Arrangement_on_surface_2& arr,
-                       const X_monotone_curve_2& xcv, const Vertex& v)
+template <typename Aos>
+void
+insert_xcv_vertex(Aos& arr,
+                  const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+                  const Vertex& v)
 { CGAL::insert(arr, xcv, Cell_const_variant(Vertex_const_handle(&v))); }
 
 // Insert a curve into an arrangement.
-void insert_xcv_halfedge(Arrangement_on_surface_2& arr,
-                         const X_monotone_curve_2& xcv, const Halfedge& h)
+template <typename Aos>
+void
+insert_xcv_halfedge(Aos& arr,
+                    const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+                    const Halfedge& h)
 { CGAL::insert(arr, xcv, Cell_const_variant(Halfedge_const_handle(&h))); }
 
 // Insert a curve into an arrangement.
-void insert_xcv_face(Arrangement_on_surface_2& arr,
-                     const X_monotone_curve_2& xcv, const Face& f)
+template <typename Aos>
+void
+insert_xcv_face(Aos& arr,
+                const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+                const Face& f)
 { CGAL::insert(arr, xcv, Cell_const_variant(Face_const_handle(&f))); }
 
 // Insert a curve into an arrangement.
-template <typename PoinLocation>
-void insert_xcv_pl(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv,
-                   const PoinLocation& pl)
+template <typename Aos, typename PoinLocation>
+void
+insert_xcv_pl(Aos& arr,
+              const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+              const PoinLocation& pl)
 { CGAL::insert(arr, xcv, pl); }
 
 //! Obtain the geometry traits.
@@ -1008,11 +1024,11 @@ void export_arrangement_on_surface_2(py::module_& m) {
     ;
 
   m.def("insert_non_intersecting_curve", &aos2::insert_ni_cv)
-    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Naive_pl>)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_xcv_pl<Aos, Naive_pl>)
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Wal_pl>)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_xcv_pl<Aos, Wal_pl>)
 #endif
-    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Trapezoid_pl>)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_xcv_pl<Aos, Trapezoid_pl>)
     .def("insert_non_intersecting_curves", &aos2::insert_ni_cvs)
     ;
 
@@ -1025,20 +1041,20 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Do_intersect_lm_pl = bool(*)(Aos&, const Xcv&, const Landmarks_pl&);
 
   m.def("insert", &aos2::insert_cv<Aos>)
-    .def("insert", &aos2::insert_cv_pl<Naive_pl>)
+    .def("insert", &aos2::insert_cv_pl<Aos, Naive_pl>)
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-    .def("insert", &aos2::insert_cv_pl<Wal_pl>)
+    .def("insert", &aos2::insert_cv_pl<Aos, Wal_pl>)
 #endif
-    .def("insert", &aos2::insert_cv_pl<Trapezoid_pl>)
-    .def("insert", &aos2::insert_xcv)
-    .def("insert", &aos2::insert_xcv_pl<Naive_pl>)
+    .def("insert", &aos2::insert_cv_pl<Aos, Trapezoid_pl>)
+    .def("insert", &aos2::insert_xcv<Aos>)
+    .def("insert", &aos2::insert_xcv_pl<Aos, Naive_pl>)
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-    .def("insert", &aos2::insert_xcv_pl<Wal_pl>)
+    .def("insert", &aos2::insert_xcv_pl<Aos, Wal_pl>)
 #endif
-    .def("insert", &aos2::insert_xcv_pl<Trapezoid_pl>)
-    .def("insert", &aos2::insert_xcv_vertex)
-    .def("insert", &aos2::insert_xcv_halfedge)
-    .def("insert", &aos2::insert_xcv_face)
+    .def("insert", &aos2::insert_xcv_pl<Aos, Trapezoid_pl>)
+    .def("insert", &aos2::insert_xcv_vertex<Aos>)
+    .def("insert", &aos2::insert_xcv_halfedge<Aos>)
+    .def("insert", &aos2::insert_xcv_face<Aos>)
     .def("insert", &aos2::insert_curves)
     ;
 
@@ -1064,9 +1080,9 @@ void export_arrangement_on_surface_2(py::module_& m) {
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
   m.def("insert_point", &aos2::insert_point_pl<Landmarks_pl>)
-    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Landmarks_pl>)
-    .def("insert", &aos2::insert_cv_pl<Landmarks_pl>)
-    .def("insert", &aos2::insert_xcv_pl<Landmarks_pl>)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_xcv_pl<Aos, Landmarks_pl>)
+    .def("insert", &aos2::insert_cv_pl<Aos, Landmarks_pl>)
+    .def("insert", &aos2::insert_xcv_pl<Aos, Landmarks_pl>)
     .def("do_intersect", static_cast<Do_intersect_lm_pl>(CGAL::do_intersect))
     .def("zone", &aos2::zone_pl<Landmarks_pl>)
     ;
