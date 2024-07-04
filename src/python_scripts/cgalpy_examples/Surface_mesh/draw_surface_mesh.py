@@ -15,10 +15,7 @@ Sm = CGALPY.Sm
 
 # Get the name of the input file from the command line, or use the default
 # file if no command-line parameters are given.
-try:
-  filename = sys.argv[1]
-except Exception:
-  filename = 'meshes/elephant.off'
+filename = sys.argv[1] if len(sys.argv) > 1 else 'meshes/elephant.off'
 
 sm = Sm.read_polygon_mesh(filename)
 Sm.draw(sm)

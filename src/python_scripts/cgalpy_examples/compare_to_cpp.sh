@@ -161,28 +161,3 @@ else
   done
 fi
 
-# echo "Failed to compile the following C++ programs:"
-# for file in ${compile_error[@]}; do
-#   echo $file
-# done
-# echo ""
-# echo "Failed to execute the following Python scripts:"
-# for file in ${python_error[@]}; do
-#   echo $file
-# done
-# echo ""
-# echo "Failed to execute the following C++ files:"
-# for file in ${cpp_error[@]}; do
-#   echo $file
-# done
-# echo ""
-# echo "Outputs of the following scripts differ:"
-# for file in ${different_output[@]}; do
-#   echo $file
-# done
-# echo ""
-# echo "Outputs of the following C++ programs and Python scripts are the same:"
-# for file in ${successes[@]}; do
-#   echo $file
-# done
-#
