@@ -64,7 +64,7 @@ for file in $(find . -name "*.py"); do
     cpp_error+=($file)
     continue
   fi
-  rm $raw_name # clean up
+  rm ./$raw_name # clean up
   # trim the outputs by piping them to xargs
   output=$(echo $output | xargs)
   cpp_output=$(echo $cpp_output | xargs)
