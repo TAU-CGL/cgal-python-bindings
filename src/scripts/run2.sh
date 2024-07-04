@@ -37,7 +37,7 @@ for file in $cmakes_path; do
     bad_make_files+=($file)
   fi
   # install eg. pip install src/libs/cgalpy/dist/CGALPY_kerEpecInt_aos2AlgPl-1.0.0-py3-none-any.whl
-  pip install src/libs/cgalpy/dist/*.whl
+  pip install --force-reinstall src/libs/cgalpy/dist/*.whl
   # leave the directory
   cd ..
 done
