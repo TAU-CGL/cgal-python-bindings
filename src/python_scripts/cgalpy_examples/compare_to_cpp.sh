@@ -1,6 +1,12 @@
 # save failed commands in a table and print them at the end
-failed_commands=()
-success_commands=()
+# failed_commands=()
+# success_commands=()
+no_cpp=()
+compile_error=()
+python_error=()
+cpp_error=()
+different_output=()
+successes=()
 
 if [ -z "$1" ]; then
   echo "Usage: $0 <cgal_path>"
@@ -29,7 +35,7 @@ for file in $(find . -name "*.py"); do
   if [ -z "$cpp_file" ]; then
     echo "No C++ file found for $file"
     # add the command to the failed commands
-    failed_commands+=($file)
+    no_cpp+=($file)
     continue
   fi
   cpp_full_path=$(realpath $cpp_file)
@@ -38,7 +44,7 @@ for file in $(find . -name "*.py"); do
     msg="Error compiling $cpp_file"
     echo ""
     echo $msg
-    failed_commands+=($file)
+    compile_error+=($file)
     continue
   fi
   if ! output=$(python3 $file); then
@@ -48,14 +54,14 @@ for file in $(find . -name "*.py"); do
     msg="Error executing $script"
     echo ""
     echo $msg
-    failed_commands+=($file)
+    python_error+=($file)
     continue
   fi
   if ! cpp_output=$(./$raw_name); then
     msg="Error executing $cpp_file"
     echo ""
     echo $msg
-    failed_commands+=($file)
+    cpp_error+=($file)
     continue
   fi
   rm $raw_name # clean up
@@ -78,21 +84,106 @@ for file in $(find . -name "*.py"); do
     diff <(echo $output) <(echo $cpp_output)
     echo ""
     echo "-------------------------------------------------"
-    failed_commands+=($file)
+    different_output+=($file)
   else
     echo "Outputs of $script and $(basename $cpp_file) are the same"
-    success_commands+=($file)
+    successes+=($file)
   fi
 done
 
-echo "Successfull scripts:"
-for command in ${success_commands[@]}; do
-  echo $command
-done
+echo ""
+echo "-------------------------------------------------"
+echo "Summary"
+echo "-------------------------------------------------"
+echo ""
+# check if length of failed commands is 0
+if [ ${#no_cpp[@]} -eq 0 ]; then
+  echo "No C++ file found for the following Python scripts:"
+  for file in ${no_cpp[@]}; do
+    echo $file
+  done
+  echo ""
+else
+  echo "All Python scripts have corresponding C++ files"
+fi
 
-echo "Failed scripts:"
-for command in ${failed_commands[@]}; do
-  echo $command
-done
+echo ""
 
+if [ ${#compile_error[@]} -eq 0 ]; then
+  echo "All C++ files compiled successfully"
+else
+  echo "Failed to compile the following C++ programs:"
+  for file in ${compile_error[@]}; do
+    echo $file
+  done
+fi
 
+echo ""
+
+if [ ${#python_error[@]} -eq 0 ]; then
+  echo "All Python scripts executed successfully"
+else
+  echo "Failed to execute the following Python scripts:"
+  for file in ${python_error[@]}; do
+    echo $file
+  done
+fi
+
+echo ""
+
+if [ ${#cpp_error[@]} -eq 0 ]; then
+  echo "All C++ files executed successfully"
+else
+  echo "Failed to execute the following C++ files:"
+  for file in ${cpp_error[@]}; do
+    echo $file
+  done
+fi
+
+echo ""
+
+if [ ${#different_output[@]} -eq 0 ]; then
+  echo "All outputs are the same"
+else
+  echo "Outputs of the following scripts differ:"
+  for file in ${different_output[@]}; do
+    echo $file
+  done
+fi
+
+echo ""
+
+if [ ${#successes[@]} -eq 0 ]; then
+  echo "No scripts executed successfully"
+else
+  echo "Outputs of the following C++ programs and Python scripts are the same:"
+  for file in ${successes[@]}; do
+    echo $file
+  done
+fi
+
+# echo "Failed to compile the following C++ programs:"
+# for file in ${compile_error[@]}; do
+#   echo $file
+# done
+# echo ""
+# echo "Failed to execute the following Python scripts:"
+# for file in ${python_error[@]}; do
+#   echo $file
+# done
+# echo ""
+# echo "Failed to execute the following C++ files:"
+# for file in ${cpp_error[@]}; do
+#   echo $file
+# done
+# echo ""
+# echo "Outputs of the following scripts differ:"
+# for file in ${different_output[@]}; do
+#   echo $file
+# done
+# echo ""
+# echo "Outputs of the following C++ programs and Python scripts are the same:"
+# for file in ${successes[@]}; do
+#   echo $file
+# done
+#
