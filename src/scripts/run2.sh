@@ -4,13 +4,6 @@
 # cmakes_path=../../cmake/tests/release/*.cmake
 cmakes_path=${1:-../../cmake/tests/release/*.cmake}
 
-# check if the cmake files exist
-if [ ! -f $cmakes_path ]; then
-  echo "No cmake files found in $cmakes_path"
-  echo "Usage: $0 <cmake_files_path>"
-  exit 1
-fi
-
 echo "Using cmake files in $cmakes_path"
 
 # check if the user is in a venv
