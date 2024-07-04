@@ -1,6 +1,18 @@
 # cmake -C ../../cmake/tests/release/aos2_epec_fixed_release.cmake ../../
 # now execute the command for all files in ../../cmake/tests/release
 
+# cmakes_path=../../cmake/tests/release/*.cmake
+cmakes_path=${1:-../../cmake/tests/release/*.cmake}
+
+# check if the cmake files exist
+if [ ! -f $cmakes_path ]; then
+  echo "No cmake files found in $cmakes_path"
+  echo "Usage: $0 <cmake_files_path>"
+  exit 1
+fi
+
+echo "Using cmake files in $cmakes_path"
+
 # check if the user is in a venv
 if [ -z "$VIRTUAL_ENV" ]; then
   echo "Please activate the virtual environment"
@@ -11,7 +23,7 @@ fi
 python3 -m pip install build
 
 
-for file in ../../cmake/tests/release/*.cmake; do
+for file in $cmakes_path; do
   # make a directory for each file and enter it
   dir=$(basename $file .cmake)
   mkdir -p $dir
