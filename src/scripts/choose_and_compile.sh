@@ -1,10 +1,13 @@
 #!/bin/bash
 # This script lets the user choose a cmake file, compile it and install the resulting wheel file.
-# Usage: ./choose_and_compile.sh [cmake_files_path=../../cmake/tests/release/*.cmake]
+# Usage: ./choose_and_compile.sh [root_dir=../..]
 # cmake_files_path is the path to the directory containing the cmake files
 # Example: ./choose_and_compile.sh ../../cmake/tests/release/*.cmake
 
-cmakes_path=${1:-../../cmake/tests/release/*.cmake}
+root_dir=${1:-../..}
+root_real=$(realpath $root_dir)
+cmakes_path=$root_real/cmake/tests/release/*.cmake
+
 
 # check if the user is in a virtual environment, this is useful to me
 if [ -z "$VIRTUAL_ENV" ]; then
@@ -59,7 +62,7 @@ if ! make; then
 fi
 
 # Install the wheel file
-if ! pip install --force-reinstall src/libs/cgalpy/dist/*.whl; then
+if ! pip install src/libs/cgalpy/dist/*.whl; then
   echo "pip Installation failed"
   exit 1
 fi
