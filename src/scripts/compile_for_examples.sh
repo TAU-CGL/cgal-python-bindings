@@ -11,12 +11,8 @@ python3 -m pip install --quiet build
 
 mode=${1:-release}
 
-# cmakes_path=${1:-../../cmake/tests/release/*.cmake}
-# examples_path=${2:-../python_scripts/cgalpy_examples}
-# cmake2example_path=${3:-./example2cmake/cmake2example.txt}
 root_path=${2:-../../}
 root_dir=$(realpath $root_path)
-# cmakes_path=$(realpath $root_dir/cmake/tests/release)
 cmakes_path=$(realpath $root_dir/cmake/tests/$mode)
 examples_path=$(realpath $root_dir/src/python_scripts/cgalpy_examples)
 cmake2example_path=$(realpath $root_dir/src/scripts/example2cmake/cmake2example.txt)
