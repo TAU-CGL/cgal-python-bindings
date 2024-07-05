@@ -62,6 +62,7 @@ pipelines:
             - make
             - pip install src/libs/cgalpy/dist/*.whl
             - cd .. # go back to root
+            - 
         """
   
   return yml

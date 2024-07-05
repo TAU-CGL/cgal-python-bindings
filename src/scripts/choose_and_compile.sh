@@ -1,11 +1,14 @@
+#!/bin/bash
 # This script lets the user choose a cmake file, compile it and install the resulting wheel file.
-
-# The script takes an optional argument, which is the path to the cmake files. If no argument is given, the default path is used.
+# Usage: ./choose_and_compile.sh [cmake_files_path=../../cmake/tests/release/*.cmake]
+# cmake_files_path is the path to the directory containing the cmake files
+# Example: ./choose_and_compile.sh ../../cmake/tests/release/*.cmake
 
 cmakes_path=${1:-../../cmake/tests/release/*.cmake}
 
+# check if the user is in a virtual environment, this is useful to me
 if [ -z "$VIRTUAL_ENV" ]; then
-  echo "Please activate the virtual environment"
+  echo "Please activate a virtual environment"
   exit 1
 fi
 

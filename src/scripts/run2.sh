@@ -1,13 +1,13 @@
+#!/bin/bash
+# This script installs all .cmake files in the cmake/tests
+# Usage: ./run2.sh [cmake_mode=release] [root_dir=../..]
+
 # cmake -C ../../cmake/tests/release/aos2_epec_fixed_release.cmake ../../
-# now execute the command for all files in ../../cmake/tests/release
-
-# cmakes_path=../../cmake/tests/release/*.cmake
-# cmakes_path=${1:-../../cmake/tests/release/*.cmake}
 root_dir=${1:-../..}
-cmake_path=$(realpath $root_dir/cmake/tests/release) # *.cmake
+root_real=$(realpath $root_dir)
+mode=${2:-release}
+cmake_path=$(realpath $root_dir/cmake/tests/$mode)
 cmakes_path=$(ls $cmake_path/*.cmake)
-
-echo "Using cmake files in $cmakes_path"
 
 # check if the user is in a venv
 if [ -z "$VIRTUAL_ENV" ]; then
@@ -33,7 +33,7 @@ for file in $cmakes_path; do
   # run the command
   # cmake -C ../$file ../../../
   # if ! cmake -C ../$file ../../../; then
-  if ! cmake -C $file_real $root_dir; then
+  if ! cmake -C $file_real $root_real; then
     bad_cmake_files+=($file)
     cd ..
     continue

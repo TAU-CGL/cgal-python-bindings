@@ -65,7 +65,7 @@ do
   example_files=${cmake2example[$key]}
   cmake_file=$full_cmakes_path/$key
   dir=$(basename $cmake_file .cmake)
-  mkdir -p $dir
+  # mkdir -p $dir
   cd $dir
   echo "Compiling $(basename $cmake_file)"
   if ! cmake -C $cmake_file $root_dir; then
