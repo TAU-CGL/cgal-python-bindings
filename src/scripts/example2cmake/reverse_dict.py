@@ -39,5 +39,10 @@ reverse_dict = {key: value for key, value in reverse_dict.items()}
 # now write the reverse dict to a file
 reverse_dict_path = "cmake2example.txt"
 with open(reverse_dict_path, "w") as f:
-    for key, value in reverse_dict.items():
+    # for key, value in reverse_dict.items():
+    #     f.write(f"{key} {value}\n")
+    # sort the keys and then values before writing
+    keys = sorted(reverse_dict.keys())
+    for key in keys:
+        value = reverse_dict[key]
         f.write(f"{key} {value}\n")
