@@ -31,7 +31,7 @@ lines_dict = {line[0]: line[1] for line in lines_split}
 reverse_dict = {}
 for key, value in lines_dict.items():
     if value in reverse_dict:
-        reverse_dict[value] += "," + key
+        reverse_dict[value] += " " + key
     else:
         reverse_dict[value] = key
 reverse_dict = {key: value for key, value in reverse_dict.items()}
