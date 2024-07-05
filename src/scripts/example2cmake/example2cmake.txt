@@ -1,0 +1,17 @@
+sequence.py bso2_seg_epec_release.cmake
+approx_offset.py ms2_cs_epec_release.cmake
+exact_offset.py ms2_conic_ccr_release.cmake
+approx_inset.py ms2_cs_epec_release.cmake
+batched_point_location.py aos2_seg_epec_release.cmake
+conic_multiplicities.py aos2_conic_epec_release.cmake
+conics.py aos2_conic_epec_release.cmake
+dcel_extension.py aos2_seg_ae_epec_release.cmake
+dcel_extension_io.py aos2_seg_ae_epec_release.cmake
+face_extension.py aos2_seg_ae_epec_release.cmake
+face_extension_overlay.py aos2_seg_ae_epec_release.cmake
+incremental_insertion.py aos2_seg_epec_release.cmake
+io_unbounded.py aos2_linear_epec_release.cmake
+overlay_color.py aos2_seg_ae_epec_release.cmake
+point_location.py aos2_seg_epec_release.cmake
+algebraic_segments.py aos2_alg_epec_release.cmake
+algebraic_curves.py aos2_alg_epec_release.cmake
