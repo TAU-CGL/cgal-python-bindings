@@ -2,7 +2,10 @@
 # now execute the command for all files in ../../cmake/tests/release
 
 # cmakes_path=../../cmake/tests/release/*.cmake
-cmakes_path=${1:-../../cmake/tests/release/*.cmake}
+# cmakes_path=${1:-../../cmake/tests/release/*.cmake}
+root_dir=${1:-../..}
+cmake_path=$(realpath $root_dir/cmake/tests/release) # *.cmake
+cmakes_path=$(ls $cmake_path/*.cmake)
 
 echo "Using cmake files in $cmakes_path"
 
@@ -18,14 +21,19 @@ python3 -m pip install build
 bad_cmake_files=()
 bad_make_files=()
 
+mkdir -p build
+cd build
+
 for file in $cmakes_path; do
+  file_real=$(realpath $file)
   # make a directory for each file and enter it
   dir=$(basename $file .cmake)
   mkdir -p $dir
   cd $dir
   # run the command
   # cmake -C ../$file ../../../
-  if ! cmake -C ../$file ../../../; then
+  # if ! cmake -C ../$file ../../../; then
+  if ! cmake -C $file_real $root_dir; then
     bad_cmake_files+=($file)
     cd ..
     continue
@@ -41,6 +49,9 @@ for file in $cmakes_path; do
   # leave the directory
   cd ..
 done
+
+# exit build
+cd ..
 
 
 echo ""
