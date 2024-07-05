@@ -46,14 +46,23 @@ tri2_ct_wi_epic'     'kerEpic_tri2CdelNciWiWi')";
 tri2_wi_hi_epic'     'kerEpic_tri2PlainNciWiWiHi')";            
 tri3_del_epic'       'kerEpic_tri3DelComSeq')";                 
 vis2_epic'           'kerEpic_aos2SegPl_vis2')";                
+'aos2_wh_seg_epec'    'kerEpecInt_aos2SegCdCcdWhPl')";  
+'aos2_wh_cs_epec'     'kerEpecInt_aos2CsCdCcdWhPl')";   
+'aos2_wh_seg_fe_epec' 'kerEpecInt_aos2SegCdCcdFeWhPl')";
+'env3_tri_epec'       'kerEpecInt_aos2SegPl_env3Tri')"; 
+
 
 """
 
+# 'aos2_epec_fixed'     '')";                            (
+# 'ch2_epic_fixed '     '')";                            (
+# 'epec_fixed'          '')";                            (
 # delete 's, )s, ;s and ;s form the text
 text = text.replace("'", "")
 text = text.replace(")", "")
 text = text.replace(";", "")
 text = text.replace('"', "")
+text = text.replace("(", "")
 
 # split the text into lines, and add _release to the end of the first word, combine all again and print
 lines = text.split("\n")
