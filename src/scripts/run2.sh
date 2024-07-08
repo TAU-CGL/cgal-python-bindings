@@ -5,7 +5,7 @@
 # cmake -C ../../cmake/tests/release/aos2_epec_fixed_release.cmake ../../
 root_dir=${1:-../..}
 root_real=$(realpath $root_dir)
-mode=${2:-release}
+mode=${2:-test}
 cmake_path=$(realpath $root_dir/cmake/tests/$mode)
 cmakes_path=$(ls $cmake_path/*.cmake)
 

@@ -2,11 +2,11 @@
 # This script lets the user choose a cmake file, compile it and install the resulting wheel file.
 # Usage: ./choose_and_compile.sh [root_dir=../..]
 # cmake_files_path is the path to the directory containing the cmake files
-# Example: ./choose_and_compile.sh ../../cmake/tests/release/*.cmake
+# Example: ./choose_and_compile.sh ../../cmake/tests/test/*.cmake
 
 root_dir=${1:-../..}
 root_real=$(realpath $root_dir)
-cmakes_path=$root_real/cmake/tests/release/*.cmake
+cmakes_path=$root_real/cmake/tests/test/*.cmake
 
 
 # check if the user is in a virtual environment, this is useful to me
@@ -14,6 +14,8 @@ if [ -z "$VIRTUAL_ENV" ]; then
   echo "Please activate a virtual environment"
   exit 1
 fi
+
+python3 -m pip install build
 
 echo "Using CMake files in $cmakes_path"
 echo ""

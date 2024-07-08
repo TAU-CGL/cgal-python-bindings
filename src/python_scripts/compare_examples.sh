@@ -22,8 +22,10 @@ if [ -z "$1" ]; then
   echo "Usage: $0 <cgal_path> <example1> <example2> ..."
   exit 1
 fi
-
-cgal_path=$(realpath $1)
+# cgal_path=$(realpath $1)
+# set to CGAL_DIR environment variable
+cgal_path=$CGAL_DIR
+echo "CGAL_DIR: $cgal_path"
 # check if the path exists
 if [ ! -d "$cgal_path" ]; then
   echo "Path $cgal_path does not exist"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # This script compiles for all examples in the example2cmake file
-# Usage: ./compile_for_examples.sh [cmakes_mode=release] [root_path=../../]
+# Usage: ./compile_for_examples.sh [cmakes_mode=test] [root_path=../../]
 
 if [ -z "$VIRTUAL_ENV" ]; then
   echo "Please activate a virtual environment"
@@ -9,7 +9,7 @@ fi
 # to be sure
 python3 -m pip install --quiet build
 
-mode=${1:-release}
+mode=${1:-test}
 
 root_path=${2:-../../}
 root_dir=$(realpath $root_path)

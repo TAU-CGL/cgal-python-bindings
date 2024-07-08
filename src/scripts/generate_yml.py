@@ -50,15 +50,15 @@ pipelines:
           - make
           - pip install src/libs/cgalpy/dist/*.whl
           - cd ../src/python_scripts # go to examples
-          - ./compare_examples.sh {" ".join(examples)} # run examples
+          - ./compare_examples.sh ../../../cgal {" ".join(examples)} # run examples
       """
   
   return yml
 
 @click.command()
-@click.option('--mode', '-m', help='Compile mode [release/debug]', type=str, default="release", show_default=True)
+@click.option('--mode', '-m', help='Compile mode [release/debug/test]', type=str, default="test", show_default=True)
 @click.option('--cmake2example', '-c', help='Path to cmake2example file', type=str, default="example2cmake/cmake2example.txt")
-@click.option('--output', '-o', help='Path to the bitbucket-pipelines.yml output file', type=click.Path(), default="bitbucket-pipelines.yml")
+@click.option('--output', '-o', help='Path to the bitbucket-pipelines.yml output file', type=click.Path(), default="../../bitbucket-pipelines.yml")
 def main(mode, cmake2example, output):
   """This script generates bitbucket-pipelines.yml to test CGAL examples"""
   path_to_cmakes = f"cmake/tests/{mode}"
