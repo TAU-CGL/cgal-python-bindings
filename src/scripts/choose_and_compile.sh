@@ -50,7 +50,7 @@ mkdir -p $dir
 cd $dir
 
 # Run the cmake command
-if ! cmake -C ../$cmake_file ../../../; then
+if ! cmake -C $cmake_file $root_real; then
   echo "CMake command failed"
   exit 1
 fi
