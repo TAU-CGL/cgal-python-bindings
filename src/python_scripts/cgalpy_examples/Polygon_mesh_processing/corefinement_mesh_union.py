@@ -7,7 +7,6 @@ if len(sys.argv) < 4:
 else:
   lib = sys.argv[3]
 CGALPY = importlib.import_module(lib)
-
 Ker = CGALPY.Ker
 Point_3 = Ker.Point_3
 Sm = CGALPY.Sm
@@ -26,10 +25,9 @@ except:
   raise ValueError("Invalid input.")
 
 try:
-    out = Pmp.corefine_and_compute_union(mesh1, mesh2)
+    out = Pmp.corefine_and_compute_union(mesh1, mesh2, Pmp.Corefine_visitor())
 except:
     raise ValueError("Cannot compute union!")
 
 print("Union was successfully computed")
 Sm.write_polygon_mesh("union.off", out);
-
