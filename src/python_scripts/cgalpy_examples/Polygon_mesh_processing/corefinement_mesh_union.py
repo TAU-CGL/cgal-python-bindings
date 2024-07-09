@@ -8,7 +8,6 @@ else:
   lib = sys.argv[3]
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-Point_3 = Ker.Point_3
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 

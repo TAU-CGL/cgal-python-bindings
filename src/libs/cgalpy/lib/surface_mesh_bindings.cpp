@@ -52,9 +52,6 @@ SurfaceMesh read_polygon_mesh(const std::string& filename) {
     throw std::runtime_error("Cannot read file!");
   return sm;
 }
-// bool write_polygon_mesh(const std::string& fname,
-//                         Graph& g,
-//                         const NamedParameters& np = parameters::default_values())
 
 //
 template <typename SurfaceMesh>

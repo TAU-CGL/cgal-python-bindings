@@ -22,9 +22,7 @@ if [ -z "$1" ]; then
   echo "Usage: $0 <cgal_path> <example1> <example2> ..."
   exit 1
 fi
-# cgal_path=$(realpath $1)
-# set to CGAL_DIR environment variable
-cgal_path=$CGAL_DIR
+cgal_path=$(realpath $1)
 echo "CGAL_DIR: $cgal_path"
 # check if the path exists
 if [ ! -d "$cgal_path" ]; then
@@ -82,7 +80,7 @@ for file in "${@:2}"; do
     cd $current_dir
     continue
   fi
-  if ! cpp_output=$($raw_name); then
+  if ! cpp_output=$(./$raw_name); then
     msg="Error executing $raw_name"
     echo ""
     echo $msg
@@ -91,7 +89,13 @@ for file in "${@:2}"; do
     continue
   fi
   if [ "$output" != "$cpp_output" ]; then
-    msg="Different output for $file"
+    msg="Different output for $file:"
+
+    echo "Python output:"
+    echo $output
+    echo "C++ output:"
+    echo $cpp_output
+
     echo ""
     echo $msg
     different_output+=($file)
