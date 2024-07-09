@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/boost/graph/Face_filtered_graph.h>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <string>
@@ -81,6 +82,17 @@ typename SurfaceMesh::Face_index add_face(SurfaceMesh& sm, py::list& lst) {
   auto end = stl_input_iterator<Vi>(lst, false);
   return sm.add_face(CGAL::make_range(begin, end));
 }
+
+//
+template <typename SurfaceMesh>
+typename SurfaceMesh::Halfedge_index halfedge(const typename SurfaceMesh::Face_index& f,
+                                              const SurfaceMesh& sm)
+{ return CGAL::halfedge(f, sm); }
+
+//
+template <typename SurfaceMesh>
+bool is_triangle(const typename SurfaceMesh::Halfedge_index& h, const SurfaceMesh& sm)
+{ return CGAL::is_triangle(h, sm); }
 
 /// \name Iterators
 /// @{
@@ -222,6 +234,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       // size_type number_of_edges() const
       // size_type number_of_faces() const
       // bool is_empty() const
+      .def("is_empty", &Sm::is_empty)
+      .def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm>)
       // void clear_without_removing_property_maps();
       // void clear();
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
@@ -283,4 +297,6 @@ void export_surface_mesh(py::module_& m) {
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
   m.def("write_polygon_mesh", &sm::write_polygon_mesh<Sm_3>,
         py::arg("fname"), py::arg("pm"), py::arg("parameters") = py::dict());
+  m.def("halfedge", &sm::halfedge<Sm_3>);
+  m.def("is_triangle", &sm::is_triangle<Sm_3>);
 }

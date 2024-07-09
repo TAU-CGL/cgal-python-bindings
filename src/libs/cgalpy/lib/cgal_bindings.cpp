@@ -10,6 +10,7 @@
 
 #include <CGAL/basic.h>
 #include <CGAL/Bbox_2.h>
+#include <CGAL/boost/graph/helpers.h>
 
 #include "CGALPY/add_attr.hpp"
 

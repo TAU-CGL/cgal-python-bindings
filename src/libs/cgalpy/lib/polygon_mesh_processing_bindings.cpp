@@ -19,6 +19,7 @@
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
 #include <CGAL/Polygon_mesh_processing/intersection.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
+#include <CGAL/Polygon_mesh_processing/triangulate_faces.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
@@ -215,94 +216,8 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
   if (! valid) throw std::runtime_error("Cannot compute union!");
   return out;
 }
-//   template <typename PointRange1,
-//             typename PointRange2,
-//             typename OutputIterator,
-//             typename NamedParameters = parameters::Default_named_parameters>
-//   OutputIterator
-//   triangulate_hole_polyline(const PointRange1& points,
-//                             const PointRange2& third_points,
-//                             OutputIterator out,
-//                             const NamedParameters& np = parameters::default_values())
-//   {
-//     if (points.empty()) return out;
-//
-//     using parameters::choose_parameter;
-//     using parameters::get_parameter;
-//     using parameters::get_parameter_reference;
-//
-// #ifndef CGAL_HOLE_FILLING_DO_NOT_USE_CDT2
-//     bool use_cdt = choose_parameter(get_parameter(np, internal_np::use_2d_constrained_delaunay_triangulation), false);
-// #endif
-// bool use_dt3 =
-// #ifdef CGAL_HOLE_FILLING_DO_NOT_USE_DT3
-//       false;
-// #else
-//       choose_parameter(get_parameter(np, internal_np::use_delaunay_triangulation), true);
-// #endif
-//
-//     typedef CGAL::internal::Weight_min_max_dihedral_and_area      Weight;
-//     typedef CGAL::internal::Weight_calculator<Weight,
-//                   CGAL::internal::Is_not_degenerate_triangle>  WC;
-//     typedef std::vector<std::pair<int, int> > Holes;
-//     typedef std::back_insert_iterator<Holes>  Holes_out;
-//
-//     Holes holes;//just to check there is no holes left
-//
-//     typedef typename value_type_traits<OutputIterator>::type OutputIteratorValueType;
-//     CGAL::internal::Tracer_polyline_incomplete<OutputIteratorValueType, OutputIterator, Holes_out>
-//       tracer(out, Holes_out(holes));
-//
-//     typedef typename PointRange1::iterator InIterator;
-//     typedef typename std::iterator_traits<InIterator>::value_type Point;
-//     typedef typename CGAL::Kernel_traits<Point>::Kernel Kernel;
-//
-//     Hole_filling::Default_visitor default_visitor;
-//
-// #ifndef CGAL_HOLE_FILLING_DO_NOT_USE_CDT2
-//     if (use_cdt)
-//     {
-//       struct Always_valid
-//       {
-//         bool operator()(const std::vector<Point>&, int,int,int) const { return true; }
-//       };
-//       Always_valid is_valid;
-//
-//       const typename Kernel::Iso_cuboid_3 bbox = CGAL::bounding_box(points.begin(), points.end());
-//       typename Kernel::FT default_squared_distance = CGAL::abs(CGAL::squared_distance(bbox.vertex(0), bbox.vertex(5)));
-//       default_squared_distance /= typename Kernel::FT(16); // one quarter of the bbox height
-//
-//       const typename Kernel::FT threshold_distance = choose_parameter(
-//         get_parameter(np, internal_np::threshold_distance), typename Kernel::FT(-1));
-//       typename Kernel::FT max_squared_distance = default_squared_distance;
-//       if(threshold_distance >= typename Kernel::FT(0))
-//         max_squared_distance = threshold_distance * threshold_distance;
-//
-//       CGAL_assertion(max_squared_distance >= typename Kernel::FT(0));
-//       if (triangulate_hole_polyline_with_cdt(
-//            points,
-//            tracer,
-//            choose_parameter(get_parameter_reference(np, internal_np::visitor), default_visitor),
-//            is_valid,
-//            choose_parameter<Kernel>(get_parameter(np, internal_np::geom_traits)),
-//            max_squared_distance))
-//       {
-//         CGAL_assertion(holes.empty());
-//         return tracer.out;
-//       }
-//     }
-// #endif
-//     triangulate_hole_polyline(points, third_points, tracer, WC(),
-//                               choose_parameter(get_parameter_reference(np, internal_np::visitor), default_visitor),
-//                               use_dt3,
-//                               choose_parameter(get_parameter(np, internal_np::do_not_use_cubic_algorithm), false),
-//                               choose_parameter<Kernel>(get_parameter(np, internal_np::geom_traits)));
-//
-//     CGAL_assertion(holes.empty());
-//     return tracer.out;
-//   }
 
-// just like in do_intersect_polylines
+//
 template <typename PolygonMesh>
 py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2) {
   auto begin1 = stl_input_iterator<Point_3>(lst1);
@@ -321,6 +236,20 @@ py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2) {
     result.append(py::make_tuple(t.first, t.second, t.third));
   }
   return result;
+}
+
+template <typename PolygonMesh>
+PolygonMesh triangulate_faces(const PolygonMesh& pm,
+                              const py::dict& parameters) {
+  using Pm = PolygonMesh;
+
+  // make a copy of the input mesh
+  Pm out(pm);
+
+  // triangulate the faces
+  // PMP::triangulate_faces(out);
+  if (!PMP::triangulate_faces(out)) throw std::runtime_error("Could not triangulate faces!");
+  return out;
 }
 
 } // namespace pmp
@@ -380,6 +309,19 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("face_range"),
         py::arg("parameters") = py::dict());
 
+  m.def("corefine_and_compute_union", &pmp::corefine_and_compute_union<Pm>);
+
+  m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline<Pm>,
+        py::arg("lst1"), py::arg("lst2") = py::list());
+
+  // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
+  //       py::arg("face_range"), py::arg("pm"),
+  //       py::arg("parameters") = py::dict());
+
+  m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
+        py::arg("pm"), py::arg("parameters") = py::dict());
+
+
   // corefine
   using Cv = pmp::Corefine_visitor<Pm>;
   py::class_<Cv>(m, "Corefine_visitor")
@@ -426,7 +368,4 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def("set_in_place_operations", &Cv::set_in_place_operations)
     ;
 
-  m.def("corefine_and_compute_union", &pmp::corefine_and_compute_union<Pm>);
-  m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline<Pm>,
-        py::arg("lst1"), py::arg("lst2") = py::list());
 }
