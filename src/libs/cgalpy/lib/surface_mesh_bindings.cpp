@@ -52,6 +52,16 @@ SurfaceMesh read_polygon_mesh(const std::string& filename) {
     throw std::runtime_error("Cannot read file!");
   return sm;
 }
+// bool write_polygon_mesh(const std::string& fname,
+//                         Graph& g,
+//                         const NamedParameters& np = parameters::default_values())
+
+//
+template <typename SurfaceMesh>
+bool write_polygon_mesh(std::string fname, const SurfaceMesh& pm,
+                        const py::dict& parameters = py::dict()) {
+  return CGAL::IO::write_polygon_mesh(fname, pm);
+}
 
 // Draw a surface mesh.
 #ifdef CGALPY_HAS_VISUAL
@@ -100,7 +110,7 @@ py::object faces(const SurfaceMesh& sm)
 
 /// @}
 
-}
+} // namespace sm
 
 //
 template <typename SurfaceMesh, typename C>
@@ -274,4 +284,6 @@ void export_surface_mesh(py::module_& m) {
 
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>);
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
+  m.def("write_polygon_mesh", &sm::write_polygon_mesh<Sm_3>,
+        py::arg("fname"), py::arg("pm"), py::arg("parameters") = py::dict());
 }

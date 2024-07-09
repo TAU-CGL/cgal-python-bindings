@@ -64,7 +64,7 @@ if ! make; then
 fi
 
 # Install the wheel file
-if ! pip install src/libs/cgalpy/dist/*.whl; then
+if ! pip install --force-reinstall src/libs/cgalpy/dist/*.whl; then
   echo "pip Installation failed"
   exit 1
 fi
