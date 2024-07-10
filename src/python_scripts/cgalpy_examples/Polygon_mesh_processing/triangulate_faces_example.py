@@ -1,7 +1,7 @@
 import os
 import sys
 import importlib
-if len(sys.argv) < 3:
+if len(sys.argv) < 4:
   sys.path.append(os.path.abspath('../precompiled'))
   lib = 'CGALPY'
 else:
