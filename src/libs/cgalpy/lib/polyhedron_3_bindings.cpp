@@ -91,7 +91,8 @@ py::object halfedges_around_facet(const Face& f)
 
 /// @}
 
-}
+
+} // namespace pol3
 
 // Export Vertex
 template <typename C>

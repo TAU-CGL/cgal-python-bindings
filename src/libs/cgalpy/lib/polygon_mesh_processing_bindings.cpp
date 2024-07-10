@@ -20,6 +20,7 @@
 #include <CGAL/Polygon_mesh_processing/intersection.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_faces.h>
+#include <CGAL/Polygon_mesh_processing/remesh.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
@@ -252,6 +253,66 @@ PolygonMesh triangulate_faces(const PolygonMesh& pm,
   return out;
 }
 
+//
+template <typename PolygonMesh>
+PolygonMesh isotropic_remeshing(const py::list& face_range,
+                                double target_edge_length,
+                                const PolygonMesh& pmesh,
+                                const py::dict& parameters = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+
+  // copy the input mesh
+  Pm out(pmesh);
+
+  PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
+                                                      stl_input_iterator<Fd>(face_range, false)),
+                           target_edge_length, out);
+  return out;
+
+}
+
+// template <typename PolygonMesh, typename Face_normal_map, typename NamedParameters = parameters::Default_named_parameters>
+// void compute_face_normals(const PolygonMesh& pmesh,
+//                           Face_normal_map face_normals,
+//                           const NamedParameters& np = parameters::default_values())
+// {
+//   typedef typename GetGeomTraits<PolygonMesh,NamedParameters>::type Kernel;
+//
+//   for(typename boost::graph_traits<PolygonMesh>::face_descriptor f : faces(pmesh))
+//   {
+//     typename Kernel::Vector_3 vec = compute_face_normal(f, pmesh, np);
+//     put(face_normals, f, vec);
+// #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
+//     std::cout << "normal at face " << f << " is " << get(face_normals, f) << std::endl;
+// #endif
+//   }
+// }
+// PMP::compute_normals(mesh, boost::make_assoc_property_map(vnormals),
+//                            boost::make_assoc_property_map(fnormals));
+
+// template <typename PolygonMesh>
+// py::dict compute_face_normals(const PolygonMesh& pm) {
+//   using Pm = PolygonMesh;
+//   using Gt = boost::graph_traits<Pm>;
+//   using Fd = typename Gt::face_descriptor;
+//   using Vector = typename Kernel::Vector_3;
+//
+//   std::unordered_map<Fd, Vector> fnormals;
+//   // Instead of std::map you may use std::unordered_map, boost::unordered_map
+//   // or CGAL::Unique_hash_map
+//   // CGAL::Unique_hash_map<face_descriptor,Vector> fnormals;
+//   // boost::unordered_map<vertex_descriptor,Vector> vnormals;
+//   auto pmap = boost::make_assoc_property_map(fnormals);
+//   PMP::compute_face_normals(pm, pmap);
+//   py::dict result;
+//   for (const auto& [f, v] : fnormals) {
+//     result[f] = v;
+//   }
+//   return result;
+// }
+
 } // namespace pmp
 
 // Export Polygon_mesh_processing
@@ -320,6 +381,14 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
         py::arg("pm"), py::arg("parameters") = py::dict());
+
+  // m.def("compute_face_normals", &pmp::compute_face_normals<Pm>,
+  //       py::arg("pm"));
+
+// Pmp.isotropic_remeshing(tm2.faces(), 0.05, tm2)
+  m.def("isotropic_remeshing", &pmp::isotropic_remeshing<Pm>,
+        py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
+        py::arg("parameters") = py::dict());
 
 
   // corefine
