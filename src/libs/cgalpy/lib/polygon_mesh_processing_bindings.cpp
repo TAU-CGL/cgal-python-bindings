@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/tags.h>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <stdexcept>
@@ -21,11 +22,13 @@
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_faces.h>
 #include <CGAL/Polygon_mesh_processing/remesh.h>
+#include <CGAL/Polygon_mesh_processing/distance.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/parse_named_params.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -273,6 +276,28 @@ PolygonMesh isotropic_remeshing(const py::list& face_range,
 
 }
 
+template <typename PolygonMesh>
+PolygonMesh tangential_relaxation(const PolygonMesh& tm,
+                                  const py::dict& parameters = py::dict()) {
+  using Pm = PolygonMesh;
+
+  Pm out(tm);
+  PMP::tangential_relaxation(out, parse_params::parse_named_parameters(parameters));
+  return out;
+}
+
+template <typename PolygonMesh>
+double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh& tm2,
+                                      const py::dict& np1 = py::dict(),
+                                      const py::dict& np2 = py::dict()) {
+  using TAG = CGAL::Sequential_tag;
+  return PMP::approximate_Hausdorff_distance<TAG>(tm1, tm2,
+                                             parse_params::parse_named_parameters(np1),
+                                             parse_params::parse_named_parameters(np2));
+}
+
+
+
 // template <typename PolygonMesh, typename Face_normal_map, typename NamedParameters = parameters::Default_named_parameters>
 // void compute_face_normals(const PolygonMesh& pmesh,
 //                           Face_normal_map face_normals,
@@ -385,10 +410,16 @@ void export_polygon_mesh_processing(py::module_& m) {
   // m.def("compute_face_normals", &pmp::compute_face_normals<Pm>,
   //       py::arg("pm"));
 
-// Pmp.isotropic_remeshing(tm2.faces(), 0.05, tm2)
   m.def("isotropic_remeshing", &pmp::isotropic_remeshing<Pm>,
         py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
         py::arg("parameters") = py::dict());
+
+  m.def("tangential_relaxation", &pmp::tangential_relaxation<Pm>,
+        py::arg("pm"), py::arg("parameters") = py::dict());
+
+  m.def("approximate_Hausdorff_distance", &pmp::approximate_Hausdorff_distance<Pm>,
+        py::arg("tm1"), py::arg("tm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
 
 
   // corefine
