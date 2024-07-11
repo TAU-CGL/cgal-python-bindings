@@ -29,7 +29,7 @@ CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> parse_na
   CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> cgal_parameters = CGAL::parameters::all_default();
   // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
-    std::string key = py::cast<std::string>(item.first);
+    const std::string key = py::cast<std::string>(item.first);
     switch (Hash(key.c_str())) {
       case Hash("number_of_points_per_area_unit"):
         cgal_parameters = cgal_parameters.number_of_points_per_area_unit(py::cast<int>(item.second));
@@ -155,9 +155,10 @@ CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> parse_na
         break;
     #ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
       case Hash("allow_move_functor"):
+        // auto no_move = [](typename boost::graph_traits<Mesh>::vertex_descriptor, Point, Point)
         typedef Kernel::Point_3 Point;
         typedef pmp::Polygonal_mesh Mesh;
-        typedef Mesh::Vertex_descriptor Vertex_descriptor;
+        typedef boost::graph_traits<Mesh>::vertex_descriptor Vertex_descriptor;
         cgal_parameters = cgal_parameters.allow_move_functor(py::cast<std::function<bool(Vertex_descriptor, Point, Point)>>(item.second));
         break;
     #endif
