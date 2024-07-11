@@ -235,7 +235,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       // size_type number_of_faces() const
       // bool is_empty() const
       .def("is_empty", &Sm::is_empty)
-      .def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm>)
       // void clear_without_removing_property_maps();
       // void clear();
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
@@ -299,4 +298,5 @@ void export_surface_mesh(py::module_& m) {
         py::arg("fname"), py::arg("pm"), py::arg("parameters") = py::dict());
   m.def("halfedge", &sm::halfedge<Sm_3>);
   m.def("is_triangle", &sm::is_triangle<Sm_3>);
+  m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>);
 }

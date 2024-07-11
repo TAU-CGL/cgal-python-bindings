@@ -28,7 +28,7 @@
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
-#include "CGALPY/parse_named_params.hpp"
+#include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -72,29 +72,33 @@ template <typename PolygonMesh>
 bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
                          const py::dict& np1 = py::dict(),
                          const py::dict& np2 = py::dict()) {
-  return PMP::do_intersect(pm1, pm2);
+  return PMP::do_intersect(pm1, pm2,
+                           internal::parse_named_parameters(np1),
+                           internal::parse_named_parameters(np2));
 }
 
 //
 template <typename PolygonMesh>
-bool do_intersect_mesh_polyline(const PolygonMesh& pm, const py::list& lst) {
+bool do_intersect_mesh_polyline(const PolygonMesh& pm, const py::list& lst,
+                                const py::dict& parameters = py::dict()) {
   auto begin = stl_input_iterator<Point_3>(lst);
   auto end = stl_input_iterator<Point_3>(lst, false);
   std::vector<Point_3> polyline(begin, end);
-  return PMP::do_intersect(pm, polyline);
+  return PMP::do_intersect(pm, polyline, internal::parse_named_parameters(parameters));
 }
 
 //
 template <typename PolygonMesh>
 bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
-                                      const py::list& lsts) {
+                                      const py::list& lsts,
+                                      const py::dict& parameters = py::dict()) {
   std::vector<std::vector<Point_3>> range;
   for (const auto& lh : lsts) {
     auto begin1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh));
     auto end1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh), false);
     range.emplace_back(begin1, end1);
   }
-  return PMP::do_intersect(pm, range);
+  return PMP::do_intersect(pm, range, internal::parse_named_parameters(parameters));
 }
 
 //
@@ -127,7 +131,7 @@ py::list self_intersections(const PolygonMesh& pm,
   auto op = [&] (const std::pair<Fd, Fd>& res) mutable
             { result.append(res); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::self_intersections(pm, it);
+  PMP::self_intersections(pm, it, internal::parse_named_parameters(parameters));
   return result;
 }
 
@@ -147,7 +151,8 @@ py::list self_intersections_faces(const py::list& face_range,
   auto op = [&] (const std::pair<Fd, Fd>& res) mutable
             { result.append(res); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::self_intersections(boost::make_iterator_range(begin, end), pm, it);
+  PMP::self_intersections(boost::make_iterator_range(begin, end), pm, it,
+                          internal::parse_named_parameters(parameters));
   return result;
 }
 
@@ -155,7 +160,7 @@ py::list self_intersections_faces(const py::list& face_range,
 template <typename PolygonMesh>
 bool does_self_intersect(const PolygonMesh& pm,
                          const py::dict& parameters = py::dict()) {
-  return PMP::does_self_intersect(pm);
+  return PMP::does_self_intersect(pm, internal::parse_named_parameters(parameters));
 }
 
 //
@@ -169,7 +174,7 @@ bool does_self_intersect_faces(const py::list& face_range,
 
   auto begin = stl_input_iterator<Fd>(face_range);
   auto end = stl_input_iterator<Fd>(face_range, false);
-  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm);
+  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_named_parameters(parameters));
 }
 
 //
@@ -187,7 +192,7 @@ connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor
   auto op = [&] (Fd face_descriptor) mutable
             { lst.append(py::cast(face_descriptor)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::connected_component(seed_face, pm, it);
+  PMP::connected_component(seed_face, pm, it, internal::parse_named_parameters(parameters));
   return lst;
 }
 
@@ -198,7 +203,8 @@ py::list connected_components(const PolygonMesh& pm,
   using Pm = PolygonMesh;
 
   auto fccmap = CGAL::get(CGAL::dynamic_face_property_t<std::size_t>(), pm);
-  auto num = PMP::connected_components(pm, fccmap);
+  auto num = PMP::connected_components(pm, fccmap,
+                                       internal::parse_named_parameters(parameters));
   py::dict dct;
   for (auto f : CGAL::faces(pm)) dct[py::cast(f)] = py::cast(get(fccmap, f));
   py::list lst;
@@ -223,7 +229,8 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
 
 //
 template <typename PolygonMesh>
-py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2) {
+py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2,
+                                   const py::dict& parameters = py::dict()) {
   auto begin1 = stl_input_iterator<Point_3>(lst1);
   auto end1 = stl_input_iterator<Point_3>(lst1, false);
   std::vector<Point_3> polyline1(begin1, end1);
@@ -233,7 +240,8 @@ py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2) {
 
   typedef CGAL::Triple<int, int, int> Triangle_int;
   std::vector<Triangle_int> out;
-  PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out));
+  PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out),
+                                  internal::parse_named_parameters(parameters));
   // convert to a list of integers
   py::list result;
   for (const auto& t : out) {
@@ -252,7 +260,7 @@ PolygonMesh triangulate_faces(const PolygonMesh& pm,
 
   // triangulate the faces
   // PMP::triangulate_faces(out);
-  if (!PMP::triangulate_faces(out)) throw std::runtime_error("Could not triangulate faces!");
+  if (!PMP::triangulate_faces(out, internal::parse_named_parameters(parameters))) throw std::runtime_error("Could not triangulate faces!");
   return out;
 }
 
@@ -271,7 +279,8 @@ PolygonMesh isotropic_remeshing(const py::list& face_range,
 
   PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                       stl_input_iterator<Fd>(face_range, false)),
-                           target_edge_length, out);
+                           target_edge_length, out,
+                           internal::parse_named_parameters(parameters));
   return out;
 
 }
@@ -282,7 +291,7 @@ PolygonMesh tangential_relaxation(const PolygonMesh& tm,
   using Pm = PolygonMesh;
 
   Pm out(tm);
-  PMP::tangential_relaxation(out, parse_params::parse_named_parameters(parameters));
+  PMP::tangential_relaxation(out, internal::parse_named_parameters(parameters));
   return out;
 }
 
@@ -292,8 +301,8 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
                                       const py::dict& np2 = py::dict()) {
   using TAG = CGAL::Sequential_tag;
   return PMP::approximate_Hausdorff_distance<TAG>(tm1, tm2,
-                                             parse_params::parse_named_parameters(np1),
-                                             parse_params::parse_named_parameters(np2));
+                                             internal::parse_named_parameters(np1),
+                                             internal::parse_named_parameters(np2));
 }
 
 
@@ -377,8 +386,12 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("do_intersect_meshes", &pmp::do_intersect_meshes<Pm>,
         py::arg("pm1"), py::arg("pm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("do_intersect_mesh_polyline", &pmp::do_intersect_mesh_polyline<Pm>);
-  m.def("do_intersect_mesh_polyline_range", &pmp::do_intersect_mesh_polyline_range<Pm>);
+  m.def("do_intersect_mesh_polyline", &pmp::do_intersect_mesh_polyline<Pm>,
+        py::arg("pm"), py::arg("lst"),
+        py::arg("parameters") = py::dict());
+  m.def("do_intersect_mesh_polyline_range", &pmp::do_intersect_mesh_polyline_range<Pm>,
+        py::arg("pm"), py::arg("lst"),
+        py::arg("parameters") = py::dict());
 
   m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>);
 
@@ -398,7 +411,8 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("corefine_and_compute_union", &pmp::corefine_and_compute_union<Pm>);
 
   m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline<Pm>,
-        py::arg("lst1"), py::arg("lst2") = py::list());
+        py::arg("lst1"), py::arg("lst2") = py::list(),
+        py::arg("parameters") = py::dict());
 
   // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
   //       py::arg("face_range"), py::arg("pm"),

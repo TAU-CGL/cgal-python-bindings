@@ -21,7 +21,7 @@ except:
     raise ValueError("Error: Invalid input.")
 if mesh.is_empty():
     raise ValueError("Warning: empty file?")
-if not mesh.is_triangle_mesh():
+if not Sm.is_triangle_mesh(mesh):
     print("Input mesh is not triangulated.")
 
 try:
