@@ -7,183 +7,159 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
+#include "kernel_types.hpp"
+#ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
+#include "CGALPY/polygon_mesh_processing_config.hpp"
+#endif
+
+
+
 
 namespace py = nanobind;
 
 namespace internal {
+
+// string hash function from: https://gist.github.com/EvanMcBroom/2a9bed888c2755153a9616aa7ae1f79a
+template <typename _T>
+unsigned int constexpr Hash(_T const* input) {
+    return *input ? static_cast<unsigned int>(*input) + 33 * Hash(input + 1) : 5381;
+}
 
 CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> parse_named_parameters(const py::dict& params) {
   CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> cgal_parameters = CGAL::parameters::all_default();
   // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
     std::string key = py::cast<std::string>(item.first);
-    if (key == "number_of_points_per_area_unit") {
-      int value = py::cast<int>(item.second);
-      cgal_parameters = cgal_parameters.number_of_points_per_area_unit(value);
-    }
-    else if (key == "number_of_iterations") {
-      unsigned int value = py::cast<unsigned int>(item.second);
-      cgal_parameters = cgal_parameters.number_of_iterations(value);
-    }
-    else if (key == "do_self_intersection_tests") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_self_intersection_tests(value);
-    }
-    else if (key == "do_orientation_tests") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_orientation_tests(value);
-    }
-    else if (key == "relax_constraints") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.relax_constraints(value);
-    }
-    else if (key == "dry_run") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.dry_run(value);
-    }
-    else if (key == "density_control_factor") {
-      double value = py::cast<double>(item.second);
-      cgal_parameters = cgal_parameters.density_control_factor(value);
-    }
-    else if (key == "do_not_use_cubic_algorithm") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_not_use_cubic_algorithm(value);
-    }
-    else if (key == "threshold_distance") {
-      double value = py::cast<double>(item.second);
-      cgal_parameters = cgal_parameters.threshold_distance(value);
-    }
-    else if (key == "use_2d_constrained_delaunay_triangulation") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_2d_constrained_delaunay_triangulation(value);
-    }
-    else if (key == "use_delaunay_triangulation") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_delaunay_triangulation(value);
-    }
-    else if (key == "fairing_continuity") {
-      unsigned int value = py::cast<unsigned int>(item.second);
-      cgal_parameters = cgal_parameters.fairing_continuity(value);
-    }
-    else if (key == "use_angle_smoothing") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_angle_smoothing(value);
-    }
-    else if (key == "use_area_smoothing") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_area_smoothing(value);
-    }
-    else if (key == "use_safety_constraints") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_safety_constraints(value);
-    }
-    else if (key == "use_Delaunay_flips") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_Delaunay_flips(value);
-    }
-    else if (key == "do_project") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_project(value);
-    }
-    else if (key == "do_flip") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_flip(value);
-    }
-    else if (key == "do_collapse") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_collapse(value);
-    }
-    else if (key == "do_not_triangulate_faces") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_not_triangulate_faces(value);
-    }
-    else if (key == "do_sample_edges") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_sample_edges(value);
-    }
-    else if (key == "do_sample_vertices") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_sample_vertices(value);
-    }
-    else if (key == "do_sample_faces") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_sample_faces(value);
-    }
-    else if (key == "do_overlap_test_of_bounded_sides") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_overlap_test_of_bounded_sides(value);
-    }
-    else if (key == "do_split") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_split(value);
-    }
-    else if (key == "do_not_modify") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_not_modify(value);
-    }
-    else if (key == "do_scale") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_scale(value);
-    }
-    else if (key == "do_lock_mesh") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_lock_mesh(value);
-    }
-    else if (key == "do_simplify_border") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_simplify_border(value);
-    }
-    else if (key == "do_enforce_manifoldness") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_enforce_manifoldness(value);
-    }
-    else if (key == "do_freeze") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_freeze(value);
-    }
-    else if (key == "do_reset_c3t3") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.do_reset_c3t3(value);
-    }
-    else if (key == "use_random_uniform_sampling") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_random_uniform_sampling(value);
-    }
-    else if (key == "use_grid_sampling") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_grid_sampling(value);
-    }
-    else if (key == "use_monte_carlo_sampling") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_monte_carlo_sampling(value);
-    }
-    else if (key == "use_compact_clipper") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_compact_clipper(value);
-    }
-    else if (key == "use_relaxed_order") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_relaxed_order(value);
-    }
-    else if (key == "use_smoothing") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_smoothing(value);
-    }
-    else if (key == "use_bool_op_to_clip_surface") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_bool_op_to_clip_surface(value);
-    }
-    else if (key == "use_convex_hull") {
-      bool value = py::cast<bool>(item.second);
-      cgal_parameters = cgal_parameters.use_convex_hull(value);
-    }
-    else if (key == "size") {
-      size_t value = py::cast<size_t>(item.second);
-      cgal_parameters = cgal_parameters.size(value);
-    }
-
-    else {
-      std::cerr << "Unknown parameter: " << key << "\n";
+    switch (Hash(key.c_str())) {
+      case Hash("number_of_points_per_area_unit"):
+        cgal_parameters = cgal_parameters.number_of_points_per_area_unit(py::cast<int>(item.second));
+        break;
+      case Hash("number_of_iterations"):
+        cgal_parameters = cgal_parameters.number_of_iterations(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("do_self_intersection_tests"):
+        cgal_parameters = cgal_parameters.do_self_intersection_tests(py::cast<bool>(item.second));
+        break;
+      case Hash("do_orientation_tests"):
+        cgal_parameters = cgal_parameters.do_orientation_tests(py::cast<bool>(item.second));
+        break;
+      case Hash("relax_constraints"):
+        cgal_parameters = cgal_parameters.relax_constraints(py::cast<bool>(item.second));
+        break;
+      case Hash("dry_run"):
+        cgal_parameters = cgal_parameters.dry_run(py::cast<bool>(item.second));
+        break;
+      case Hash("density_control_factor"):
+        cgal_parameters = cgal_parameters.density_control_factor(py::cast<double>(item.second));
+        break;
+      case Hash("do_not_use_cubic_algorithm"):
+        cgal_parameters = cgal_parameters.do_not_use_cubic_algorithm(py::cast<bool>(item.second));
+        break;
+      case Hash("threshold_distance"):
+        cgal_parameters = cgal_parameters.threshold_distance(py::cast<double>(item.second));
+        break;
+      case Hash("use_2d_constrained_delaunay_triangulation"):
+        cgal_parameters = cgal_parameters.use_2d_constrained_delaunay_triangulation(py::cast<bool>(item.second));
+        break;
+      case Hash("use_delaunay_triangulation"):
+        cgal_parameters = cgal_parameters.use_delaunay_triangulation(py::cast<bool>(item.second));
+        break;
+      case Hash("fairing_continuity"):
+        cgal_parameters = cgal_parameters.fairing_continuity(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("use_angle_smoothing"):
+        cgal_parameters = cgal_parameters.use_angle_smoothing(py::cast<bool>(item.second));
+        break;
+      case Hash("use_area_smoothing"):
+        cgal_parameters = cgal_parameters.use_area_smoothing(py::cast<bool>(item.second));
+        break;
+      case Hash("use_safety_constraints"):
+        cgal_parameters = cgal_parameters.use_safety_constraints(py::cast<bool>(item.second));
+        break;
+      case Hash("use_Delaunay_flips"):
+        cgal_parameters = cgal_parameters.use_Delaunay_flips(py::cast<bool>(item.second));
+        break;
+      case Hash("do_project"):
+        cgal_parameters = cgal_parameters.do_project(py::cast<bool>(item.second));
+        break;
+      case Hash("do_flip"):
+        cgal_parameters = cgal_parameters.do_flip(py::cast<bool>(item.second));
+        break;
+      case Hash("do_collapse"):
+        cgal_parameters = cgal_parameters.do_collapse(py::cast<bool>(item.second));
+        break;
+      case Hash("do_not_triangulate_faces"):
+        cgal_parameters = cgal_parameters.do_not_triangulate_faces(py::cast<bool>(item.second));
+        break;
+      case Hash("do_sample_edges"):
+        cgal_parameters = cgal_parameters.do_sample_edges(py::cast<bool>(item.second));
+        break;
+      case Hash("do_sample_vertices"):
+        cgal_parameters = cgal_parameters.do_sample_vertices(py::cast<bool>(item.second));
+        break;
+      case Hash("do_sample_faces"):
+        cgal_parameters = cgal_parameters.do_sample_faces(py::cast<bool>(item.second));
+        break;
+      case Hash("do_overlap_test_of_bounded_sides"):
+        cgal_parameters = cgal_parameters.do_overlap_test_of_bounded_sides(py::cast<bool>(item.second));
+        break;
+      case Hash("do_split"):
+        cgal_parameters = cgal_parameters.do_split(py::cast<bool>(item.second));
+        break;
+      case Hash("do_not_modify"):
+        cgal_parameters = cgal_parameters.do_not_modify(py::cast<bool>(item.second));
+        break;
+      case Hash("do_scale"):
+        cgal_parameters = cgal_parameters.do_scale(py::cast<bool>(item.second));
+        break;
+      case Hash("do_lock_mesh"):
+        cgal_parameters = cgal_parameters.do_lock_mesh(py::cast<bool>(item.second));
+        break;
+      case Hash("do_simplify_border"):
+        cgal_parameters = cgal_parameters.do_simplify_border(py::cast<bool>(item.second));
+        break;
+      case Hash("do_enforce_manifoldness"):
+        cgal_parameters = cgal_parameters.do_enforce_manifoldness(py::cast<bool>(item.second));
+        break;
+      case Hash("do_freeze"):
+        cgal_parameters = cgal_parameters.do_freeze(py::cast<bool>(item.second));
+        break;
+      case Hash("do_reset_c3t3"):
+        cgal_parameters = cgal_parameters.do_reset_c3t3(py::cast<bool>(item.second));
+        break;
+      case Hash("use_random_uniform_sampling"):
+        cgal_parameters = cgal_parameters.use_random_uniform_sampling(py::cast<bool>(item.second));
+        break;
+      case Hash("use_grid_sampling"):
+        cgal_parameters = cgal_parameters.use_grid_sampling(py::cast<bool>(item.second));
+        break;
+      case Hash("use_monte_carlo_sampling"):
+        cgal_parameters = cgal_parameters.use_monte_carlo_sampling(py::cast<bool>(item.second));
+        break;
+      case Hash("use_compact_clipper"):
+        cgal_parameters = cgal_parameters.use_compact_clipper(py::cast<bool>(item.second));
+      case Hash("use_relaxed_order"):
+        cgal_parameters = cgal_parameters.use_relaxed_order(py::cast<bool>(item.second));
+        break;
+      case Hash("use_smoothing"):
+        cgal_parameters = cgal_parameters.use_smoothing(py::cast<bool>(item.second));
+        break;
+      case Hash("use_bool_op_to_clip_surface"):
+        cgal_parameters = cgal_parameters.use_bool_op_to_clip_surface(py::cast<bool>(item.second));
+        break;
+      case Hash("use_convex_hull"):
+        cgal_parameters = cgal_parameters.use_convex_hull(py::cast<bool>(item.second));
+        break;
+      case Hash("size"):
+        cgal_parameters = cgal_parameters.size(py::cast<size_t>(item.second));
+        break;
+    #ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
+      case Hash("allow_move_functor"):
+        cgal_parameters = cgal_parameters.allow_move_functor(py::cast<std::function<bool(Vertex_descriptor, Point, Point)>>(item.second));
+        break;
+    #endif
+      default:
+        throw std::invalid_argument("Unknown parameter: " + key);
     }
   }
   return cgal_parameters;
