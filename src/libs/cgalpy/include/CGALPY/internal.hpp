@@ -155,6 +155,9 @@ CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> parse_na
         break;
     #ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
       case Hash("allow_move_functor"):
+        typedef Kernel::Point_3 Point;
+        typedef pmp::Polygonal_mesh Mesh;
+        typedef Mesh::Vertex_descriptor Vertex_descriptor;
         cgal_parameters = cgal_parameters.allow_move_functor(py::cast<std::function<bool(Vertex_descriptor, Point, Point)>>(item.second));
         break;
     #endif
