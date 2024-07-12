@@ -145,6 +145,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   using Ei = typename Sm::Edge_index;
   using Hi = typename Sm::Halfedge_index;
   using Fi = typename Sm::Face_index;
+  using Gt = boost::graph_traits<Sm>;
+  using Fd = typename Gt::face_descriptor;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -210,6 +212,18 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       ;
   }
 
+  // Face descriptor
+  if (! add_attr<Fd>(m, "Face_descriptor")) {
+    py::class_<Fd>(m, "Face_descriptor")
+      .def(py::init<>())
+      .def(py::init<Fi>())
+      .def("idx", &Fd::idx)
+      .def("is_valid", &Fd::is_valid)
+      .def("__str__", [](const Fd& fd){ return std::to_string(fd.idx()); })
+      .def("__repr__", [](const Fd& fd){ return std::to_string(fd.idx()); })
+      ;
+  }
+
   // Surface mesh
   if (! add_attr<Sm>(m, name)) {
 
@@ -254,6 +268,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     add_attr<Ei>(sm_c, "Edge_index");
     add_attr<Hi>(sm_c, "Halfedge_index");
     add_attr<Fi>(sm_c, "Face_index");
+    add_attr<Fd>(sm_c, "Face_descriptor");
 
     using Vci = typename Sm::Vertex_iterator;
     using Hci = typename Sm::Halfedge_iterator;

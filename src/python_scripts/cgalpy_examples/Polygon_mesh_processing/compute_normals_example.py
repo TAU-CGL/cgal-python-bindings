@@ -10,9 +10,9 @@ CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename1 = 'meshes/eight.off' if len(sys.argv) < 2 else sys.argv[1]
+filename = 'meshes/eight.off' if len(sys.argv) < 2 else sys.argv[1]
 
-mesh = Sm.read_polygon_mesh(filename1)
+mesh = Sm.read_polygon_mesh(filename)
 
 normals = Pmp.compute_normals(mesh) # normals = ((face_handle, Vector), (vertex_handle, Vector))
 face_normal = normals[0]

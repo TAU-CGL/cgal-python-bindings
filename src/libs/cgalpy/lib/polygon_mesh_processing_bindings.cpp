@@ -129,9 +129,10 @@ py::list self_intersections(const PolygonMesh& pm,
 
   py::list result;
   auto op = [&] (const std::pair<Fd, Fd>& res) mutable
-            { result.append(res); };
+            { result.append(py::make_tuple(res.first, res.second)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
   PMP::self_intersections(pm, it, internal::parse_named_parameters(parameters));
+
   return result;
 }
 
