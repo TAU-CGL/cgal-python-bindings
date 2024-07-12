@@ -111,6 +111,19 @@ void export_vertex(C& prn_c) {
 
 // Export Vertex
 template <typename C>
+void export_vertex_handle(C& prn_c) {
+  using Prn = pol3::Polyhedron_3;
+  using Vertex_handle = Prn::Vertex_handle;
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  if (add_attr<Vertex_handle>(prn_c, "Vertex_handle")) return;
+
+  py::class_<Vertex_handle> vertex_handle_c(prn_c, "Vertex_handle");
+  vertex_handle_c.def(py::init<>());
+}
+
+// Export Vertex
+template <typename C>
 void export_halfedge(C& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Halfedge = Prn::Halfedge;
@@ -159,6 +172,19 @@ void export_face(C& prn_c) {
 #endif
 }
 
+// export Face_handle
+template <typename C>
+void export_face_handle(C& prn_c) {
+  using Prn = pol3::Polyhedron_3;
+  using Face_handle = Prn::Face_handle;
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  if (add_attr<Face_handle>(prn_c, "Face_handle")) return;
+
+  py::class_<Face_handle> face_handle_c(prn_c, "Face_handle");
+  face_handle_c.def(py::init<>());
+}
+
 // Export Polyhedron_3.
 void export_polyhedron_3(py::module_& m) {
   using Prn = pol3::Polyhedron_3;
@@ -175,8 +201,10 @@ void export_polyhedron_3(py::module_& m) {
   }
 
   export_vertex(m);
+  export_vertex_handle(m);
   export_halfedge(m);
   export_face(m);
+  export_face_handle(m);
 
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");

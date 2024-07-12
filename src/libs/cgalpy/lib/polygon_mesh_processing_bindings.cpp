@@ -305,15 +305,14 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
                                              internal::parse_named_parameters(np2));
 }
 
-template <typename PolygonMesh>
-Vector_3 compute_face_normal(const typename PolygonMesh::Face_index& f, const PolygonMesh& sm) {
-  return PMP::compute_face_normal(f, sm);
-}
+// template <typename PolygonMesh>
+// Vector_3 compute_face_normal(const typename Face_handle& f, const PolygonMesh& sm) {
+//   return PMP::compute_face_normal(f, sm);
+// }
 
 template <typename PolygonMesh>
 py::tuple compute_face_normals(const PolygonMesh& sm) {
   using Pm = PolygonMesh;
-  using Fi = typename Pm::Face_index;
 
   py::list faces_list;
   py::list fnormals_list;
@@ -326,15 +325,14 @@ py::tuple compute_face_normals(const PolygonMesh& sm) {
   return py::make_tuple(faces_list, fnormals_list);
 }
 
-template <typename PolygonMesh>
-Vector_3 compute_vertex_normal(const typename PolygonMesh::Vertex_index& v, const PolygonMesh& sm) {
-  return PMP::compute_vertex_normal(v, sm);
-}
+// template <typename PolygonMesh>
+// Vector_3 compute_vertex_normal(const typename Vertex_handle& v, const PolygonMesh& sm) {
+//   return PMP::compute_vertex_normal(v, sm);
+// }
 
 template <typename PolygonMesh>
 py::tuple compute_vertex_normals(const PolygonMesh& sm) {
   using Pm = PolygonMesh;
-  using Vi = typename Pm::Vertex_index;
 
   py::list vertices_list;
   py::list vnormals_list;
@@ -442,9 +440,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("tm1"), py::arg("tm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
 
-  m.def("compute_face_normal", &pmp::compute_face_normal<Pm>);
+  // m.def("compute_face_normal", &pmp::compute_face_normal<Pm>);
   m.def("compute_face_normals", &pmp::compute_face_normals<Pm>);
-  m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>);
+  // m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>);
   m.def("compute_vertex_normals", &pmp::compute_vertex_normals<Pm>);
   m.def("compute_normals", &pmp::compute_normals<Pm>);
 
