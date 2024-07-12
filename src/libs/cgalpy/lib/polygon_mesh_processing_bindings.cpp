@@ -305,47 +305,54 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
                                              internal::parse_named_parameters(np2));
 }
 
+template <typename PolygonMesh>
+Vector_3 compute_face_normal(const typename PolygonMesh::Face_index& f, const PolygonMesh& sm) {
+  return PMP::compute_face_normal(f, sm);
+}
 
+template <typename PolygonMesh>
+py::tuple compute_face_normals(const PolygonMesh& sm) {
+  using Pm = PolygonMesh;
+  using Fi = typename Pm::Face_index;
 
-// template <typename PolygonMesh, typename Face_normal_map, typename NamedParameters = parameters::Default_named_parameters>
-// void compute_face_normals(const PolygonMesh& pmesh,
-//                           Face_normal_map face_normals,
-//                           const NamedParameters& np = parameters::default_values())
-// {
-//   typedef typename GetGeomTraits<PolygonMesh,NamedParameters>::type Kernel;
-//
-//   for(typename boost::graph_traits<PolygonMesh>::face_descriptor f : faces(pmesh))
-//   {
-//     typename Kernel::Vector_3 vec = compute_face_normal(f, pmesh, np);
-//     put(face_normals, f, vec);
-// #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-//     std::cout << "normal at face " << f << " is " << get(face_normals, f) << std::endl;
-// #endif
-//   }
-// }
-// PMP::compute_normals(mesh, boost::make_assoc_property_map(vnormals),
-//                            boost::make_assoc_property_map(fnormals));
+  py::list faces_list;
+  py::list fnormals_list;
+  for (auto f : faces(sm)) {
+    faces_list.append(f);
+    auto n = PMP::compute_face_normal(f, sm);
+    fnormals_list.append(n);
+  }
 
-// template <typename PolygonMesh>
-// py::dict compute_face_normals(const PolygonMesh& pm) {
-//   using Pm = PolygonMesh;
-//   using Gt = boost::graph_traits<Pm>;
-//   using Fd = typename Gt::face_descriptor;
-//   using Vector = typename Kernel::Vector_3;
-//
-//   std::unordered_map<Fd, Vector> fnormals;
-//   // Instead of std::map you may use std::unordered_map, boost::unordered_map
-//   // or CGAL::Unique_hash_map
-//   // CGAL::Unique_hash_map<face_descriptor,Vector> fnormals;
-//   // boost::unordered_map<vertex_descriptor,Vector> vnormals;
-//   auto pmap = boost::make_assoc_property_map(fnormals);
-//   PMP::compute_face_normals(pm, pmap);
-//   py::dict result;
-//   for (const auto& [f, v] : fnormals) {
-//     result[f] = v;
-//   }
-//   return result;
-// }
+  return py::make_tuple(faces_list, fnormals_list);
+}
+
+template <typename PolygonMesh>
+Vector_3 compute_vertex_normal(const typename PolygonMesh::Vertex_index& v, const PolygonMesh& sm) {
+  return PMP::compute_vertex_normal(v, sm);
+}
+
+template <typename PolygonMesh>
+py::tuple compute_vertex_normals(const PolygonMesh& sm) {
+  using Pm = PolygonMesh;
+  using Vi = typename Pm::Vertex_index;
+
+  py::list vertices_list;
+  py::list vnormals_list;
+  for (auto v : vertices(sm)) {
+    vertices_list.append(v);
+    auto n = PMP::compute_vertex_normal(v, sm);
+    vnormals_list.append(n);
+  }
+
+  return py::make_tuple(vertices_list, vnormals_list);
+}
+
+template<typename PolygonMesh>
+py::tuple compute_normals(const PolygonMesh& pm) {
+  auto fn = compute_face_normals(pm);
+  auto vn = compute_vertex_normals(pm);
+  return py::make_tuple(fn, vn);
+}
 
 } // namespace pmp
 
@@ -434,6 +441,12 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("approximate_Hausdorff_distance", &pmp::approximate_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+
+  m.def("compute_face_normal", &pmp::compute_face_normal<Pm>);
+  m.def("compute_face_normals", &pmp::compute_face_normals<Pm>);
+  m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>);
+  m.def("compute_vertex_normals", &pmp::compute_vertex_normals<Pm>);
+  m.def("compute_normals", &pmp::compute_normals<Pm>);
 
 
   // corefine

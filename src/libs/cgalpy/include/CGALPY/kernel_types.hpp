@@ -90,6 +90,7 @@ typedef Kernel::Segment_3                              Segment_3;
 typedef Kernel::Tetrahedron_3                          Tetrahedron_3;
 typedef Kernel::Triangle_3                             Triangle_3;
 typedef Kernel::Sphere_3                               Sphere_3;
+typedef Kernel::Vector_3                               Vector_3;
 
 typedef std::vector<Point_2>                           Point_2_container;
 
