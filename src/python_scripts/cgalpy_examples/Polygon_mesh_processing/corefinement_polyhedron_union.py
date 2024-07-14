@@ -177,7 +177,7 @@ cv.set_end_building_output(end_building_output)
 start = timeit.timeit()
 
 try:
-  out = Pmp.corefine_and_compute_union(mesh1, mesh2, cv)
+  out = Pmp.corefine_and_compute_union(mesh1, mesh2, {'visitor': cv})
 except:
   raise ValueError("Union could not be computed.")
 

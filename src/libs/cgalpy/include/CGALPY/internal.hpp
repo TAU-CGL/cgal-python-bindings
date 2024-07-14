@@ -10,6 +10,7 @@
 #include "kernel_types.hpp"
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
 #include "CGALPY/polygon_mesh_processing_config.hpp"
+#include "CGALPY/Corefine_visitor.hpp"
 #endif
 
 
@@ -19,14 +20,37 @@ namespace py = nanobind;
 
 namespace internal {
 
+typedef CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> Named_params;
+
 // string hash function from: https://gist.github.com/EvanMcBroom/2a9bed888c2755153a9616aa7ae1f79a
 template <typename _T>
 unsigned int constexpr Hash(_T const* input) {
     return *input ? static_cast<unsigned int>(*input) + 33 * Hash(input + 1) : 5381;
 }
 
-CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> parse_named_parameters(const py::dict& params) {
-  CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> cgal_parameters = CGAL::parameters::all_default();
+#ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
+template <typename Mesh>
+Named_params handle_visitor(const py::handle& visitor, Named_params cgal_parameters) {
+  // nanobind throws a runtime error even when casting to parent class
+  try {
+    pmp::Default_visitor<Mesh> v = py::cast<pmp::Default_visitor<Mesh>>(visitor);
+    return cgal_parameters.visitor(v);
+  }
+  catch (const std::exception&) {
+  }
+  try {
+    pmp::Corefine_visitor<Mesh> v = py::cast<pmp::Corefine_visitor<Mesh>>(visitor);
+    return cgal_parameters.visitor(v);
+  }
+  catch (const std::exception&) {
+  }
+  return cgal_parameters;
+}
+#endif
+
+
+Named_params parse_named_parameters(const py::dict& params) {
+  Named_params cgal_parameters = CGAL::parameters::all_default();
   // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
     const std::string key = py::cast<std::string>(item.first);
@@ -162,8 +186,14 @@ CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> parse_na
         cgal_parameters = cgal_parameters.allow_move_functor(py::cast<std::function<bool(Vertex_descriptor, Point, Point)>>(item.second));
         break;
     #endif
+    #ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
+      case Hash("visitor"):
+        cgal_parameters = handle_visitor<Mesh>(item.second, cgal_parameters);
+        break;
+    #endif
       default:
         throw std::invalid_argument("Unknown parameter: " + key);
+        break;
     }
   }
   return cgal_parameters;

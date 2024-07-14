@@ -137,6 +137,7 @@ void export_halfedge(C& prn_c) {
     .def("opposite", &pol3::opposite, ri)
     .def("next", &pol3::next, ri)
     .def("prev", &pol3::prev, ri)
+    .def("is_border", [](const Halfedge& e){ return e.is_border(); })
     ;
 }
 

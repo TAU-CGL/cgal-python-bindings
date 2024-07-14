@@ -15,6 +15,7 @@
 #include <boost/range/iterator_range.hpp>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/bind_map.h>
 
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
@@ -26,8 +27,11 @@
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
-#include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+
+#include "CGALPY/Corefine_visitor.hpp"
+#include "CGALPY/Default_visitor.hpp"
+
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
@@ -217,13 +221,18 @@ py::list connected_components(const PolygonMesh& pm,
 //
 template <typename PolygonMesh>
 PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
-                                       Corefine_visitor<PolygonMesh>& visitor) {
+                                      const py::dict& np1 = py::dict(),
+                                      const py::dict& np2 = py::dict(),
+                                      const py::dict& np_out = py::dict()) {
   using Pm = PolygonMesh;
 
   Pm out;
 
   bool valid =
-    PMP::corefine_and_compute_union(pm1, pm2, out, PARMS::visitor(visitor));
+    PMP::corefine_and_compute_union(pm1, pm2, out,
+                                    internal::parse_named_parameters(np1),
+                                    internal::parse_named_parameters(np2),
+                                    internal::parse_named_parameters(np_out));
   if (! valid) throw std::runtime_error("Cannot compute union!");
   return out;
 }
@@ -250,6 +259,40 @@ py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2,
   }
   return result;
 }
+// corefine_and_compute_intersection(      TriangleMesh& tm1,
+//                                         TriangleMesh& tm2,
+//                                         TriangleMesh& tm_out,
+//                                   const NamedParameters1& np1 = parameters::default_values(),
+//                                   const NamedParameters2& np2 = parameters::default_values(),
+//                                   const NamedParametersOut& np_out = parameters::default_values())
+template <typename PolygonMesh>
+PolygonMesh corefine_and_compute_intersection(PolygonMesh& pm1, PolygonMesh& pm2,
+                                             const py::dict& np1 = py::dict(),
+                                             const py::dict& np2 = py::dict(),
+                                             const py::dict& np_out = py::dict()) {
+  using Pm = PolygonMesh;
+
+  Pm out;
+
+  bool valid =
+    PMP::corefine_and_compute_intersection(pm1, pm2, out,
+                                           internal::parse_named_parameters(np1),
+                                           internal::parse_named_parameters(np2),
+                                           internal::parse_named_parameters(np_out));
+  if (! valid) throw std::runtime_error("Intersection was successfully computed but is non-manifold");
+  return out;
+}
+
+// template <typename PolygonMesh>
+// PolygonMesh triangulate_refine_and_fair_hole(const PolygonMesh& pmesh,
+//     typename boost::graph_traits<PolygonMesh>::halfedge_descriptor border_halfedge,
+//                                              const py::dict& parameters = py::dict()) {
+//   using Pm = PolygonMesh;
+//   Pm out(pmesh);
+//   PMP::triangulate_refine_and_fair_hole(out, border_halfedge,
+//                                         internal::parse_named_parameters(parameters));
+//   return out;
+// }
 
 template <typename PolygonMesh>
 PolygonMesh triangulate_faces(const PolygonMesh& pm,
@@ -414,11 +457,23 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("face_range"),
         py::arg("parameters") = py::dict());
 
-  m.def("corefine_and_compute_union", &pmp::corefine_and_compute_union<Pm>);
+  m.def("corefine_and_compute_union", &pmp::corefine_and_compute_union<Pm>,
+        py::arg("pm1"), py::arg("pm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        py::arg("np_out") = py::dict());
 
   m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline<Pm>,
         py::arg("lst1"), py::arg("lst2") = py::list(),
         py::arg("parameters") = py::dict());
+
+  m.def("corefine_and_compute_intersection", &pmp::corefine_and_compute_intersection<Pm>,
+        py::arg("pm1"), py::arg("pm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        py::arg("np_out") = py::dict());
+
+  // m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
+  //       py::arg("pmesh"), py::arg("border_halfedge"),
+  //       py::arg("parameters") = py::dict());
 
   // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
   //       py::arg("face_range"), py::arg("pm"),
@@ -447,6 +502,11 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("compute_vertex_normals", &pmp::compute_vertex_normals<Pm>);
   m.def("compute_normals", &pmp::compute_normals<Pm>);
 
+  // default visitor
+  using Dv = pmp::Default_visitor<Pm>;
+  py::class_<Dv>(m, "Default_visitor")
+    .def(py::init<>())
+    ;
 
   // corefine
   using Cv = pmp::Corefine_visitor<Pm>;
