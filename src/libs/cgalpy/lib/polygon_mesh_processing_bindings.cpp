@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/iterator.h>
 #include <CGAL/tags.h>
 #define CGAL_USE_BASIC_VIEWER
 
@@ -30,9 +31,11 @@
 #include "CGALPY/stl_input_iterator.hpp"
 
 #include "CGALPY/Corefine_visitor.hpp"
+#include "CGALPY/Non_manifold_output_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
 
-#include "CGALPY/internal.hpp"
+
+#include "internal.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -283,17 +286,21 @@ PolygonMesh corefine_and_compute_intersection(PolygonMesh& pm1, PolygonMesh& pm2
   return out;
 }
 
-// template <typename PolygonMesh>
-// PolygonMesh triangulate_refine_and_fair_hole(const PolygonMesh& pmesh,
-//     typename boost::graph_traits<PolygonMesh>::halfedge_descriptor border_halfedge,
-//                                              const py::dict& parameters = py::dict()) {
-//   using Pm = PolygonMesh;
-//   Pm out(pmesh);
-//   PMP::triangulate_refine_and_fair_hole(out, border_halfedge,
-//                                         internal::parse_named_parameters(parameters));
-//   return out;
-// }
+//
+template <typename PolygonMesh>
+auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
+                                          typename PolygonMesh::Halfedge& border_halfedge,
+                                          const py::dict& parameters = py::dict()) {
+  using Pm = PolygonMesh;
+  using Graph_traits = boost::graph_traits<Pm>;
+  using halfedge_descriptor = typename Graph_traits::halfedge_descriptor;
+  // convert a halfedge reference to a a halfedge descriptor
+  auto bhd = halfedge_descriptor(&border_halfedge);
+  auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_named_parameters(parameters));
+  return py::make_tuple(std::get<0>(res));
+}
 
+//
 template <typename PolygonMesh>
 PolygonMesh triangulate_faces(const PolygonMesh& pm,
                               const py::dict& parameters) {
@@ -304,7 +311,8 @@ PolygonMesh triangulate_faces(const PolygonMesh& pm,
 
   // triangulate the faces
   // PMP::triangulate_faces(out);
-  if (!PMP::triangulate_faces(out, internal::parse_named_parameters(parameters))) throw std::runtime_error("Could not triangulate faces!");
+  if (!PMP::triangulate_faces(out, internal::parse_named_parameters(parameters)))
+    throw std::runtime_error("Could not triangulate faces!");
   return out;
 }
 
@@ -350,12 +358,12 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
 }
 
 // template <typename PolygonMesh>
-// Vector_3 compute_face_normal(const typename Face_handle& f, const PolygonMesh& sm) {
+// Vector_3 compute_face_normal(const typename PolygonMesh::Face_handle& f, const PolygonMesh& sm) { ????????????????????
 //   return PMP::compute_face_normal(f, sm);
 // }
 
 template <typename PolygonMesh>
-py::tuple compute_face_normals(const PolygonMesh& sm) {
+py::tuple compute_face_normals(const PolygonMesh& sm) { // unordered_map<Face_handle, Vector_3> type caster?
   using Pm = PolygonMesh;
 
   py::list faces_list;
@@ -370,7 +378,7 @@ py::tuple compute_face_normals(const PolygonMesh& sm) {
 }
 
 // template <typename PolygonMesh>
-// Vector_3 compute_vertex_normal(const typename Vertex_handle& v, const PolygonMesh& sm) {
+// Vector_3 compute_vertex_normal(const typename Vertex_handle& v, const PolygonMesh& sm) { ????????????????????
 //   return PMP::compute_vertex_normal(v, sm);
 // }
 
@@ -401,6 +409,9 @@ py::tuple compute_normals(const PolygonMesh& pm) {
 // Export Polygon_mesh_processing
 void export_polygon_mesh_processing(py::module_& m) {
   using Pm = pmp::Polygonal_mesh;
+  // using Vid = pmp::Vertex_identifier;
+  // using Hid = pmp::Halfedge_identifier;
+  // using Fid = pmp::Face_identifier;
   using Polyline = std::vector<Kernel::Point_3>;
   using Np = CGAL::parameters::Default_named_parameters;
 
@@ -471,9 +482,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
 
-  // m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
-  //       py::arg("pmesh"), py::arg("border_halfedge"),
-  //       py::arg("parameters") = py::dict());
+  m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
+        py::arg("pmesh"), py::arg("border_halfedge"),
+        py::arg("parameters") = py::dict());
 
   // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
   //       py::arg("face_range"), py::arg("pm"),
@@ -506,6 +517,15 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Dv = pmp::Default_visitor<Pm>;
   py::class_<Dv>(m, "Default_visitor")
     .def(py::init<>())
+    ;
+
+  // non-manifold
+  using Nmv = pmp::Non_manifold_output_visitor<Pm>;
+  py::class_<Nmv>(m, "Non_manifold_output_visitor")
+    // constructor with 2 PolygonMesh arguments
+    .def(py::init<Pm&, Pm&>())
+    // visitor.extract_intersection(points, polygons);
+    // .def("extract_intersection", &Nmv::extract_intersection)
     ;
 
   // corefine

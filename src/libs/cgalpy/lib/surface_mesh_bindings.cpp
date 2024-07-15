@@ -147,6 +147,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   using Fi = typename Sm::Face_index;
   using Gt = boost::graph_traits<Sm>;
   using Fd = typename Gt::face_descriptor;
+  using Hd = typename Gt::halfedge_descriptor;
+  using Vd = typename Gt::vertex_descriptor;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -179,6 +181,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("__repr__", [](const Ei& smi){ return std::to_string(smi.idx()); })
       ;
   }
+
+  // 
 
   // Halfedge_index
   using Sm_hi = typename CGAL::SM_Index<Hi>;
@@ -221,6 +225,30 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("is_valid", &Fd::is_valid)
       .def("__str__", [](const Fd& fd){ return std::to_string(fd.idx()); })
       .def("__repr__", [](const Fd& fd){ return std::to_string(fd.idx()); })
+      ;
+  }
+
+  // Halfedge descriptor
+  if (! add_attr<Hd>(m, "Halfedge_descriptor")) {
+    py::class_<Hd>(m, "Halfedge_descriptor")
+      .def(py::init<>())
+      .def(py::init<Hi>())
+      .def("idx", &Hd::idx)
+      .def("is_valid", &Hd::is_valid)
+      .def("__str__", [](const Hd& hd){ return std::to_string(hd.idx()); })
+      .def("__repr__", [](const Hd& hd){ return std::to_string(hd.idx()); })
+      ;
+  }
+
+  // Vertex_descriptor
+  if (! add_attr<Vd>(m, "Vertex_descriptor")) {
+    py::class_<Vd>(m, "Vertex_descriptor")
+      .def(py::init<>())
+      .def(py::init<Vi>())
+      .def("idx", &Vd::idx)
+      .def("is_valid", &Vd::is_valid)
+      .def("__str__", [](const Vd& vd){ return std::to_string(vd.idx()); })
+      .def("__repr__", [](const Vd& vd){ return std::to_string(vd.idx()); })
       ;
   }
 
@@ -268,7 +296,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     add_attr<Ei>(sm_c, "Edge_index");
     add_attr<Hi>(sm_c, "Halfedge_index");
     add_attr<Fi>(sm_c, "Face_index");
-    add_attr<Fd>(sm_c, "Face_descriptor");
 
     using Vci = typename Sm::Vertex_iterator;
     using Hci = typename Sm::Halfedge_iterator;

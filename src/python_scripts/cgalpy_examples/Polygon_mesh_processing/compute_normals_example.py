@@ -14,9 +14,7 @@ filename = 'meshes/eight.off' if len(sys.argv) < 2 else sys.argv[1]
 
 mesh = Sm.read_polygon_mesh(filename)
 
-normals = Pmp.compute_normals(mesh) # normals = ((face_handle, Vector), (vertex_handle, Vector))
-face_normal = normals[0]
-vertex_normal = normals[1]
+face_normal, vertex_normal = Pmp.compute_normals(mesh) # normals = ((face_handle, Vector), (vertex_handle, Vector))
 
 print("Vertex normals :")
 for n in vertex_normal[1]:

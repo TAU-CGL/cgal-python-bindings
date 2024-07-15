@@ -23,6 +23,7 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/make_circulator.hpp"
+// #include "internal.hpp"
 
 namespace py = nanobind;
 
@@ -37,13 +38,24 @@ const Halfedge& halfedge(const Face& f) { return (*(f.halfedge())); }
 
 // Read a surface mesh from a file.
 template <typename Polyhedron_3>
-Polyhedron_3 read_polygon_mesh(const std::string& filename) {
+Polyhedron_3 read_polygon_mesh(const std::string& filename,
+                              const py::dict& np = py::dict()) {
+
   using Prn = Polyhedron_3;
 
   Prn pol;
   if (! CGAL::IO::read_polygon_mesh(filename, pol))
+                                    // internal::parse_named_parameters(np)))
     throw std::runtime_error("Cannot read file!");
   return pol;
+}
+
+// Write a surface mesh to a file.
+template <typename Polyhedron_3>
+bool write_polygon_mesh(std::string fname, const Polyhedron_3& pm,
+                        const py::dict& np = py::dict()) {
+  return CGAL::IO::write_polygon_mesh(fname, pm);
+                                      // internal::parse_named_parameters(np));
 }
 
 // Draw a polyhedron.
@@ -202,10 +214,10 @@ void export_polyhedron_3(py::module_& m) {
   }
 
   export_vertex(m);
-  export_vertex_handle(m);
+  // export_vertex_handle(m);
   export_halfedge(m);
   export_face(m);
-  export_face_handle(m);
+  // export_face_handle(m);
 
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");
@@ -246,5 +258,8 @@ void export_polyhedron_3(py::module_& m) {
 #ifdef CGALPY_HAS_VISUAL
   m.def("draw", &pol3::draw);
 #endif
-  m.def("read_polygon_mesh", &pol3::read_polygon_mesh<Prn>);
+  m.def("read_polygon_mesh", &pol3::read_polygon_mesh<Prn>,
+        py::arg("filename"), py::arg("np") = py::dict());
+  m.def("write_polygon_mesh", &pol3::write_polygon_mesh<Prn>,
+        py::arg("filename"), py::arg("pm"), py::arg("np") = py::dict());
 }

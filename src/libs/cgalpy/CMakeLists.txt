@@ -309,7 +309,12 @@ if (CGALPY_VISIBILITY_2_BINDINGS)
 endif ()
 
 # Add all include directories
-include_directories(include)
+include_directories(include/CGALPY_includes)
+
+# Internal dependencies
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/internal.cpp)
+
+include_directories(include/internal_include)
 
 # Add dependencies
 link_directories(${Boost_LIBRARY_DIRS})
