@@ -135,6 +135,25 @@ void add_sm_index(C& c) {
     ;
 }
 
+// Export halfedge
+// template <typename C>
+// void export_halfedge(C& sm_c) {
+//   using Sm = sm::Surface_mesh_3;
+//   using Halfedge = typename Sm::Halfedge;
+//   constexpr auto ri(py::rv_policy::reference_internal);
+//
+//   if (add_attr<Halfedge>(sm_c, "Halfedge")) return;
+//
+//   py::class_<Halfedge> halfedge_c(sm_c, "Halfedge");
+//   halfedge_c.def(py::init<>())
+//     .def("vertex", &sm::vertex<Sm>, ri)
+//     .def("opposite", &sm::opposite<Sm>, ri)
+//     .def("next", &sm::next<Sm>, ri)
+//     .def("prev", &sm::prev<Sm>, ri)
+//     .def("is_border", [](const Halfedge& e){ return e.is_border(); })
+//     ;
+// }
+
 // Export Surface_mesh.
 template <typename SurfaceMesh>
 void export_surface_mesh_impl(py::module_& m, const char* name) {
@@ -296,6 +315,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     add_attr<Ei>(sm_c, "Edge_index");
     add_attr<Hi>(sm_c, "Halfedge_index");
     add_attr<Fi>(sm_c, "Face_index");
+    // add_attr<Halfedge>(sm_c, "Halfedge");
 
     using Vci = typename Sm::Vertex_iterator;
     using Hci = typename Sm::Halfedge_iterator;
@@ -333,6 +353,10 @@ void export_surface_mesh(py::module_& m) {
   using Sm_3 = sm::Surface_mesh_3;
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
+
+  // export_halfedge(m);
+
+  m.def("Halfedge", &sm::Halfedge<Sm_3>);
 
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>);
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
