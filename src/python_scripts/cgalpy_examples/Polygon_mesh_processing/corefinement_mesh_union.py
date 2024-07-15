@@ -24,7 +24,7 @@ except:
   raise ValueError("Invalid input.")
 
 try:
-    out = Pmp.corefine_and_compute_union(mesh1, mesh2, Pmp.Corefine_visitor())
+    out = Pmp.corefine_and_compute_union(mesh1, mesh2, {'visitor': Pmp.Corefine_visitor()})
 except:
     raise ValueError("Cannot compute union!")
 
