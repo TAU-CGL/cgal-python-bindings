@@ -321,16 +321,16 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
     for (const auto& vid : vids) vertices.append(vid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
   } else if (faces_flag) {
-    auto op = [&] (auto face_descriptor) mutable
-                { facets.append(face_descriptor); };
-    auto it = boost::make_function_output_iterator(std::ref(op));
+    std::vector<Face_identifier> fids;
+    auto it = std::back_inserter(fids);
     auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters).face_output_iterator(it));
+    for (const auto& fid : fids) facets.append(fid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
   } else if (vertices_flag) {
-    auto op = [&] (auto vertex_descriptor) mutable
-                { vertices.append(vertex_descriptor); };
-    auto it = boost::make_function_output_iterator(std::ref(op));
+    std::vector<Vertex_identifier> vids;
+    auto it = std::back_inserter(vids);
     auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters).vertex_output_iterator(it));
+    for (const auto& vid : vids) vertices.append(vid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
   }
   else {
