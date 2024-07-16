@@ -18,9 +18,8 @@ nb_holes = 0
 
 for h in mesh.halfedges():
     if h.is_border():
-        patch_facets = []
-        patch_vertices = []
-        success = Pmp.triangulate_refine_and_fair_hole(mesh, h, {'face_output_iterator': patch_facets, 'vertex_output_iterator': patch_vertices})
+        success, patch_facets, patch_vertices = Pmp.triangulate_refine_and_fair_hole(mesh, h, \
+                                                                                    {'face_output_iterator': True, 'vertex_output_iterator': True})
         print(f"Number of facets in constructed patch: {len(patch_facets)}")
         print(f"Number of vertices in constructed patch: {len(patch_vertices)}")
         print(f"Fairing : {'succeeded' if success else 'failed'}")
