@@ -34,8 +34,7 @@
 #include "CGALPY/Non_manifold_output_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
 
-
-#include "internal.hpp"
+#include "CGALPY/pmp_np_parser.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -80,8 +79,8 @@ bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
                          const py::dict& np1 = py::dict(),
                          const py::dict& np2 = py::dict()) {
   return PMP::do_intersect(pm1, pm2,
-                           internal::parse_named_parameters(np1),
-                           internal::parse_named_parameters(np2));
+                           internal::parse_pmp_np(np1),
+                           internal::parse_pmp_np(np2));
 }
 
 //
@@ -91,7 +90,7 @@ bool do_intersect_mesh_polyline(const PolygonMesh& pm, const py::list& lst,
   auto begin = stl_input_iterator<Point_3>(lst);
   auto end = stl_input_iterator<Point_3>(lst, false);
   std::vector<Point_3> polyline(begin, end);
-  return PMP::do_intersect(pm, polyline, internal::parse_named_parameters(parameters));
+  return PMP::do_intersect(pm, polyline, internal::parse_pmp_np(parameters));
 }
 
 //
@@ -105,7 +104,7 @@ bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
     auto end1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh), false);
     range.emplace_back(begin1, end1);
   }
-  return PMP::do_intersect(pm, range, internal::parse_named_parameters(parameters));
+  return PMP::do_intersect(pm, range, internal::parse_pmp_np(parameters));
 }
 
 //
@@ -138,7 +137,7 @@ py::list self_intersections(const PolygonMesh& pm,
   auto op = [&] (const std::pair<Fd, Fd>& res) mutable
             { result.append(py::make_tuple(res.first, res.second)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::self_intersections(pm, it, internal::parse_named_parameters(parameters));
+  PMP::self_intersections(pm, it, internal::parse_pmp_np(parameters));
 
   return result;
 }
@@ -160,7 +159,7 @@ py::list self_intersections_faces(const py::list& face_range,
             { result.append(res); };
   auto it = boost::make_function_output_iterator(std::ref(op));
   PMP::self_intersections(boost::make_iterator_range(begin, end), pm, it,
-                          internal::parse_named_parameters(parameters));
+                          internal::parse_pmp_np(parameters));
   return result;
 }
 
@@ -168,7 +167,7 @@ py::list self_intersections_faces(const py::list& face_range,
 template <typename PolygonMesh>
 bool does_self_intersect(const PolygonMesh& pm,
                          const py::dict& parameters = py::dict()) {
-  return PMP::does_self_intersect(pm, internal::parse_named_parameters(parameters));
+  return PMP::does_self_intersect(pm, internal::parse_pmp_np(parameters));
 }
 
 //
@@ -182,7 +181,7 @@ bool does_self_intersect_faces(const py::list& face_range,
 
   auto begin = stl_input_iterator<Fd>(face_range);
   auto end = stl_input_iterator<Fd>(face_range, false);
-  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_named_parameters(parameters));
+  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_pmp_np(parameters));
 }
 
 //
@@ -200,7 +199,7 @@ connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor
   auto op = [&] (Fd face_descriptor) mutable
             { lst.append(py::cast(face_descriptor)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::connected_component(seed_face, pm, it, internal::parse_named_parameters(parameters));
+  PMP::connected_component(seed_face, pm, it, internal::parse_pmp_np(parameters));
   return lst;
 }
 
@@ -212,7 +211,7 @@ py::list connected_components(const PolygonMesh& pm,
 
   auto fccmap = CGAL::get(CGAL::dynamic_face_property_t<std::size_t>(), pm);
   auto num = PMP::connected_components(pm, fccmap,
-                                       internal::parse_named_parameters(parameters));
+                                       internal::parse_pmp_np(parameters));
   py::dict dct;
   for (auto f : CGAL::faces(pm)) dct[py::cast(f)] = py::cast(get(fccmap, f));
   py::list lst;
@@ -233,9 +232,9 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
 
   bool valid =
     PMP::corefine_and_compute_union(pm1, pm2, out,
-                                    internal::parse_named_parameters(np1),
-                                    internal::parse_named_parameters(np2),
-                                    internal::parse_named_parameters(np_out));
+                                    internal::parse_pmp_np(np1),
+                                    internal::parse_pmp_np(np2),
+                                    internal::parse_pmp_np(np_out));
   if (! valid) throw std::runtime_error("Cannot compute union!");
   return out;
 }
@@ -254,7 +253,7 @@ py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2,
   typedef CGAL::Triple<int, int, int> Triangle_int;
   std::vector<Triangle_int> out;
   PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out),
-                                  internal::parse_named_parameters(parameters));
+                                  internal::parse_pmp_np(parameters));
   // convert to a list of integers
   py::list result;
   for (const auto& t : out) {
@@ -279,9 +278,9 @@ PolygonMesh corefine_and_compute_intersection(PolygonMesh& pm1, PolygonMesh& pm2
 
   bool valid =
     PMP::corefine_and_compute_intersection(pm1, pm2, out,
-                                           internal::parse_named_parameters(np1),
-                                           internal::parse_named_parameters(np2),
-                                           internal::parse_named_parameters(np_out));
+                                           internal::parse_pmp_np(np1),
+                                           internal::parse_pmp_np(np2),
+                                           internal::parse_pmp_np(np_out));
   if (! valid) throw std::runtime_error("Intersection was successfully computed but is non-manifold");
   return out;
 }
@@ -294,9 +293,8 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   using Pm = PolygonMesh;
   using Graph_traits = boost::graph_traits<Pm>;
   using halfedge_descriptor = typename Graph_traits::halfedge_descriptor;
-  // convert a halfedge reference to a a halfedge descriptor
   auto bhd = halfedge_descriptor(&border_halfedge);
-  auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_named_parameters(parameters));
+  auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters));
   return py::make_tuple(std::get<0>(res));
 }
 
@@ -311,7 +309,7 @@ PolygonMesh triangulate_faces(const PolygonMesh& pm,
 
   // triangulate the faces
   // PMP::triangulate_faces(out);
-  if (!PMP::triangulate_faces(out, internal::parse_named_parameters(parameters)))
+  if (!PMP::triangulate_faces(out, internal::parse_pmp_np(parameters)))
     throw std::runtime_error("Could not triangulate faces!");
   return out;
 }
@@ -332,7 +330,7 @@ PolygonMesh isotropic_remeshing(const py::list& face_range,
   PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                       stl_input_iterator<Fd>(face_range, false)),
                            target_edge_length, out,
-                           internal::parse_named_parameters(parameters));
+                           internal::parse_pmp_np(parameters));
   return out;
 
 }
@@ -343,7 +341,7 @@ PolygonMesh tangential_relaxation(const PolygonMesh& tm,
   using Pm = PolygonMesh;
 
   Pm out(tm);
-  PMP::tangential_relaxation(out, internal::parse_named_parameters(parameters));
+  PMP::tangential_relaxation(out, internal::parse_pmp_np(parameters));
   return out;
 }
 
@@ -353,17 +351,17 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
                                       const py::dict& np2 = py::dict()) {
   using TAG = CGAL::Sequential_tag;
   return PMP::approximate_Hausdorff_distance<TAG>(tm1, tm2,
-                                             internal::parse_named_parameters(np1),
-                                             internal::parse_named_parameters(np2));
+                                             internal::parse_pmp_np(np1),
+                                             internal::parse_pmp_np(np2));
 }
 
 // template <typename PolygonMesh>
-// Vector_3 compute_face_normal(const typename PolygonMesh::Face_handle& f, const PolygonMesh& sm) { ????????????????????
+// Vector_3 compute_face_normal(const typename PolygonMesh::Face_handle& f, const PolygonMesh& sm) {
 //   return PMP::compute_face_normal(f, sm);
-// }
+// 
 
 template <typename PolygonMesh>
-py::tuple compute_face_normals(const PolygonMesh& sm) { // unordered_map<Face_handle, Vector_3> type caster?
+py::tuple compute_face_normals(const PolygonMesh& sm) {
   using Pm = PolygonMesh;
 
   py::list faces_list;
@@ -378,7 +376,7 @@ py::tuple compute_face_normals(const PolygonMesh& sm) { // unordered_map<Face_ha
 }
 
 // template <typename PolygonMesh>
-// Vector_3 compute_vertex_normal(const typename Vertex_handle& v, const PolygonMesh& sm) { ????????????????????
+// Vector_3 compute_vertex_normal(const typename Vertex_handle& v, const PolygonMesh& sm) {
 //   return PMP::compute_vertex_normal(v, sm);
 // }
 
@@ -482,9 +480,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
 
-  m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
-        py::arg("pmesh"), py::arg("border_halfedge"),
-        py::arg("parameters") = py::dict());
+  // m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
+  //       py::arg("pmesh"), py::arg("border_halfedge"),
+  //       py::arg("parameters") = py::dict());
 
   // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
   //       py::arg("face_range"), py::arg("pm"),

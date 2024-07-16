@@ -356,7 +356,7 @@ void export_surface_mesh(py::module_& m) {
 
   // export_halfedge(m);
 
-  m.def("Halfedge", &sm::Halfedge<Sm_3>);
+  m.def("Halfedge", &sm::halfedge<Sm_3>);
 
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>);
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);

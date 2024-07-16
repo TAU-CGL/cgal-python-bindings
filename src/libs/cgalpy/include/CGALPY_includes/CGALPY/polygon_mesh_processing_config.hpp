@@ -12,6 +12,8 @@
 #include "CGALPY/polyhedron_3_types.hpp"
 #include "CGALPY/surface_mesh_types.hpp"
 
+#include "internal.hpp"
+
 #define CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH          0
 #define CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH        1
 

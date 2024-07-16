@@ -1,54 +1,10 @@
 #include "internal.hpp"
 
-#ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
-// #include "CGALPY/polygon_mesh_processing_types.hpp"
-#include "CGALPY/polygon_mesh_processing_config.hpp"
-#include "CGALPY/Corefine_visitor.hpp"
-#endif
-
 namespace py = nanobind;
 
 namespace internal {
 
-#ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
-typedef pmp::Polygonal_mesh Mesh;
-typedef Kernel::Point_3 Point;
-typedef boost::graph_traits<Mesh>::vertex_descriptor Vertex_descriptor;
-template <typename Mesh>
-Named_params handle_visitor(const py::handle& visitor, Named_params cgal_parameters) {
-  // nanobind throws a runtime error even when casting to parent class
-  try {
-    return cgal_parameters.visitor(py::cast<pmp::Default_visitor<Mesh>>(visitor));
-  }
-  catch (const std::exception&) {
-  }
-  try {
-    return cgal_parameters.visitor(py::cast<pmp::Corefine_visitor<Mesh>>(visitor));
-  }
-  catch (const std::exception&) {
-  }
-  try {
-    return cgal_parameters.visitor(py::cast<pmp::Non_manifold_output_visitor<Mesh>>(visitor));
-  }
-  catch (const std::exception&) {
-  }
-  throw std::invalid_argument("Unknown visitor type");
-}
-
-template <typename Mesh>
-Named_params handle_face_output_iterator(py::handle& face_output_iterator, Named_params cgal_parameters) {
-  // try {
-  //   return cgal_parameters.face_output_iterator(py::cast<pmp::Face_output_iterator<Mesh>>(face_output_iterator));
-  // }
-  // catch (const std::exception&) {
-  // }
-  // throw std::invalid_argument("Unknown face_output_iterator type");
-  return cgal_parameters;
-}
-#endif // CGALPY_POLYGON_MESH_PROCESSING_BINDINGS_HPP
-
-Named_params parse_named_parameters(const py::dict& params) {
-  Named_params cgal_parameters = CGAL::parameters::all_default();
+Named_params parse_named_parameters(const py::dict& params, Named_params cgal_parameters) {
   // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
     const std::string key = py::cast<std::string>(item.first);
@@ -178,22 +134,9 @@ Named_params parse_named_parameters(const py::dict& params) {
       case Hash("size"):
         cgal_parameters = cgal_parameters.size(py::cast<size_t>(item.second));
         break;
-    #ifdef CGALPY_POLYGON_MESH_PROCESSING_TYPES_HPP
-      case Hash("visitor"):
-        // handle visitor takes a pointer
-        cgal_parameters = handle_visitor<Mesh>(item.second, cgal_parameters);
-        break;
-      case Hash("face_output_iterator"):
-        cgal_parameters = handle_face_output_iterator<Mesh>(item.second, cgal_parameters);
-        break;
-      case Hash("allow_move_functor"):
-        // auto no_move = [](typename boost::graph_traits<Mesh>::vertex_descriptor, Point, Point)
-        cgal_parameters = cgal_parameters.allow_move_functor(py::cast<std::function<bool(Vertex_descriptor, Point, Point)>>(item.second));
-        break;
-    #endif
-      default:
-        throw std::invalid_argument("Unknown parameter: " + key);
-        break;
+      // default:
+      //   throw std::invalid_argument("Unknown parameter: " + key);
+      //   break;
     }
   }
   return cgal_parameters;
