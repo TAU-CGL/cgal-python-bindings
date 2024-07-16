@@ -306,23 +306,37 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   auto bhd = halfedge_descriptor(&border_halfedge);
   py::list facets, vertices;
   internal::Named_params np = CGAL::parameters::default_values();
-  // check parameters if face_output_iterator is true
-  if (parameters.contains("face_output_iterator") && py::cast<bool>(parameters["face_output_iterator"])) {
-    auto op = [&] (Face_identifier face_descriptor) mutable
-              { facets.append(py::cast(face_descriptor)); };
-    auto it = boost::make_function_output_iterator(std::ref(op));
-    np.face_output_iterator(it);
-  }
-  std::vector<Vertex_identifier> patch_vertices;
-  if (parameters.contains("vertex_output_iterator") && py::cast<bool>(parameters["vertex_output_iterator"])) {
-    auto op = [&] (Vertex_identifier point) mutable
-              { vertices.append(point); };
-    auto it = boost::make_function_output_iterator(std::ref(op));
-    np.vertex_output_iterator(it);
-  }
 
-  auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters, np));
-  return py::make_tuple(std::get<0>(res), facets, vertices);
+  // this is dirty, but it works, i'm open to other solutions that work and are more elegant
+  // the use of auto avoids some probles with types
+  bool faces_flag = parameters.contains("face_output_iterator") && py::cast<bool>(parameters["face_output_iterator"]);
+  bool vertices_flag = parameters.contains("vertex_output_iterator") && py::cast<bool>(parameters["vertex_output_iterator"]);
+  if (faces_flag && vertices_flag) {
+    std::vector<Face_identifier> fids;
+    std::vector<Vertex_identifier> vids;
+    auto it1 = std::back_inserter(fids);
+    auto it2 = std::back_inserter(vids);
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters).face_output_iterator(it1).vertex_output_iterator(it2));
+    for (const auto& fid : fids) facets.append(fid);
+    for (const auto& vid : vids) vertices.append(vid);
+    return py::make_tuple(std::get<0>(res), facets, vertices);
+  } else if (faces_flag) {
+    auto op = [&] (auto face_descriptor) mutable
+                { facets.append(face_descriptor); };
+    auto it = boost::make_function_output_iterator(std::ref(op));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters).face_output_iterator(it));
+    return py::make_tuple(std::get<0>(res), facets, vertices);
+  } else if (vertices_flag) {
+    auto op = [&] (auto vertex_descriptor) mutable
+                { vertices.append(vertex_descriptor); };
+    auto it = boost::make_function_output_iterator(std::ref(op));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters).vertex_output_iterator(it));
+    return py::make_tuple(std::get<0>(res), facets, vertices);
+  }
+  else {
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters));
+    return py::make_tuple(std::get<0>(res), facets, vertices);
+  }
 }
 
 //

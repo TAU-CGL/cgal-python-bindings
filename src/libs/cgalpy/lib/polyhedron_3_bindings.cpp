@@ -214,10 +214,10 @@ void export_polyhedron_3(py::module_& m) {
   }
 
   export_vertex(m);
-  // export_vertex_handle(m);
+  export_vertex_handle(m);
   export_halfedge(m);
   export_face(m);
-  // export_face_handle(m);
+  export_face_handle(m);
 
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");
