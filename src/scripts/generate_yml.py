@@ -29,7 +29,7 @@ pipelines:
           - mkdir build
           - cd build
     - parallel:
-      steps:"""
+        steps:"""
   # for file in os.listdir(path_to_cmakes):
   #   name = file.split(".")[0]
     # if file.endswith(".cmake"):
@@ -43,14 +43,14 @@ pipelines:
     #     """
   for cmake_name, examples in cmake2example.items():
     yml += f"""
-      - step:
-        name: Test {cmake_name} examples
-        script:
-          - cmake -C ../{path_to_cmakes}/{cmake_name}_{compile_mode}.cmake ../
-          - make
-          - pip install src/libs/cgalpy/dist/*.whl
-          - cd ../src/python_scripts # go to examples
-          - ./compare_examples.sh ../../../cgal {" ".join(examples)} # run examples
+          - step:
+              name: Test {cmake_name} examples
+              script:
+                - cmake -C ../{path_to_cmakes}/{cmake_name}_{compile_mode}.cmake ../
+                - make
+                - pip install src/libs/cgalpy/dist/*.whl
+                - cd ../src/python_scripts # go to examples
+                - ./compare_examples.sh ../../../cgal {" ".join(examples)} # run examples
       """
   
   return yml
