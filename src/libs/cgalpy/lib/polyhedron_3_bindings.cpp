@@ -23,7 +23,7 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/make_circulator.hpp"
-#include "internal.hpp"
+#include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
 

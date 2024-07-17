@@ -36,7 +36,7 @@
 #include "CGALPY/Default_visitor.hpp"
 
 #include "CGALPY/pmp_np_parser.hpp"
-#include "internal.hpp"
+#include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -394,17 +394,6 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
                                              internal::parse_pmp_np(np1),
                                              internal::parse_pmp_np(np2));
 }
-
-
-// operations = Pmp.corefine_and_compute_boolean_operations(mesh1, mesh2,
-//                                                          {}, # mesh1 named parameters
-//                                                          {}, # mesh2 named parameters
-//                                                          ({}, {}, {},{}) # named parameters for out_union, out_intersection, tm1_minus_tm2, tm2_minus_tm1
-//                                                          )
-//
-// union, intersection, tm1_minus_tm2, tm2_minus_tm1 = operations
-//
-// if union is not None: # these values get set to None if the operation was not successful
 
 template <typename PolygonMesh>
 py::tuple corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,

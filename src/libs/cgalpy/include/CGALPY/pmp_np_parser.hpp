@@ -9,7 +9,7 @@
 #include "CGALPY/Default_visitor.hpp"
 #include "CGALPY/Non_manifold_output_visitor.hpp"
 
-#include "internal.hpp"
+#include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
 

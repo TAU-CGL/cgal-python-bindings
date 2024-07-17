@@ -25,7 +25,7 @@
 #include "CGALPY/surface_mesh_types.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "internal.hpp"
+#include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
 
