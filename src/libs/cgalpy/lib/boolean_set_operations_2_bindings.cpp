@@ -65,6 +65,13 @@ py::list intersection_linear(T0& p0, T1& p1) {
   return lst;
 }
 
+  template <typename T0, typename T1, typename Traits>
+  py::list intersection_linear(T0& p0, T1& p1, const Traits& traits) {
+  py::list lst;
+  CGAL::intersection(p0, p1, append_iterator(lst), traits);
+  return lst;
+}
+
 //
 template<typename T0, typename T1>
 py::list intersection_range(py::list& pgn_lst, py::list& pwh_lst) {
@@ -157,7 +164,8 @@ py::list connect_holes(General_polygon_with_holes_2& pwh) {
 
 //
 void export_boolean_set_operations_2(py::module_& m) {
-  using Pnt = bso2::Geometry_traits_2::Point_2;
+  using Gt = bso2::Geometry_traits_2;
+  using Pnt = Gt::Point_2;
   using Pgn = bso2::General_polygon_2;
   using Pwh = bso2::General_polygon_with_holes_2;
 
@@ -172,6 +180,10 @@ void export_boolean_set_operations_2(py::module_& m) {
   m.def("intersection", &bso2::intersection_linear<Pgn, Pwh>);
   m.def("intersection", &bso2::intersection_linear<Pwh, Pgn>);
   m.def("intersection", &bso2::intersection_linear<Pwh, Pwh>);
+  m.def("intersection", &bso2::intersection_linear<Pgn, Pgn, Gt>);
+  m.def("intersection", &bso2::intersection_linear<Pgn, Pwh, Gt>);
+  m.def("intersection", &bso2::intersection_linear<Pwh, Pgn, Gt>);
+  m.def("intersection", &bso2::intersection_linear<Pwh, Pwh, Gt>);
   m.def("intersection", &bso2::intersection_range<Pgn, Pwh>);
   m.def("difference", &bso2::difference_linear<Pgn, Pgn>);
   m.def("difference", &bso2::difference_linear<Pgn, Pwh>);
