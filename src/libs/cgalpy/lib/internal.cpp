@@ -1,4 +1,11 @@
-#include "internal.hpp"
+// Copyright (c) 2024 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+
+#include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
 
@@ -144,4 +151,3 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
 
 
 }  // namespace internal
-
