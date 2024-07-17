@@ -18,7 +18,6 @@
 #include <boost/range/iterator_range.hpp>
 
 #include <nanobind/nanobind.h>
-#include <nanobind/stl/bind_map.h>
 
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
@@ -396,6 +395,54 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
                                              internal::parse_pmp_np(np2));
 }
 
+
+// operations = Pmp.corefine_and_compute_boolean_operations(mesh1, mesh2,
+//                                                          {}, # mesh1 named parameters
+//                                                          {}, # mesh2 named parameters
+//                                                          ({}, {}, {},{}) # named parameters for out_union, out_intersection, tm1_minus_tm2, tm2_minus_tm1
+//                                                          )
+//
+// union, intersection, tm1_minus_tm2, tm2_minus_tm1 = operations
+//
+// if union is not None: # these values get set to None if the operation was not successful
+
+template <typename PolygonMesh>
+py::tuple corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
+                                                 const py::dict& np1 = py::dict(),
+                                                 const py::dict& np2 = py::dict(),
+                                                 const py::tuple& np_out = py::tuple()) {
+  using Pm = PolygonMesh;
+
+  Pm out_union, out_intersection, tm1_minus_tm2, tm2_minus_tm1;
+  py::dict np_out_union, np_out_intersection, np_out_tm1_minus_tm2, np_out_tm2_minus_tm1;
+
+  if (np_out.size() > 0)
+    np_out_union = py::cast<py::dict>(np_out[0]);
+  if (np_out.size() > 1)
+    np_out_intersection = py::cast<py::dict>(np_out[1]);
+  if (np_out.size() > 2)
+    np_out_tm1_minus_tm2 = py::cast<py::dict>(np_out[2]);
+  if (np_out.size() > 3)
+    np_out_tm2_minus_tm1 = py::cast<py::dict>(np_out[3]);
+
+  std::array<bool, 4> res =
+    PMP::corefine_and_compute_boolean_operations(
+      pm1, pm2,
+      {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+      internal::parse_pmp_np(np1),
+      internal::parse_pmp_np(np2),
+      std::make_tuple(internal::parse_pmp_np(np_out_union),
+                      internal::parse_pmp_np(np_out_intersection),
+                      internal::parse_pmp_np(np_out_tm1_minus_tm2),
+                      internal::parse_pmp_np(np_out_tm2_minus_tm1)));
+
+  return py::make_tuple(res[0] ? py::cast(out_union) : py::none(),
+                        res[1] ? py::cast(out_intersection) : py::none(),
+                        res[2] ? py::cast(tm1_minus_tm2) : py::none(),
+                        res[3] ? py::cast(tm2_minus_tm1) : py::none());
+
+}
+
 // template <typename PolygonMesh>
 // Vector_3 compute_face_normal(const typename PolygonMesh::Face_handle& f, const PolygonMesh& sm) {
 //   return PMP::compute_face_normal(f, sm);
@@ -521,9 +568,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
 
-  m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
-        py::arg("pmesh"), py::arg("border_halfedge"),
-        py::arg("parameters") = py::dict());
+  // m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
+  //       py::arg("pmesh"), py::arg("border_halfedge"),
+  //       py::arg("parameters") = py::dict());
 
   // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
   //       py::arg("face_range"), py::arg("pm"),
@@ -546,6 +593,11 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("tm1"), py::arg("tm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
 
+  m.def("corefine_and_compute_boolean_operations", &pmp::corefine_and_compute_boolean_operations<Pm>,
+        py::arg("pm1"), py::arg("pm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        py::arg("np_out") = py::tuple());
+
   // m.def("compute_face_normal", &pmp::compute_face_normal<Pm>);
   m.def("compute_face_normals", &pmp::compute_face_normals<Pm>);
   // m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>);
@@ -558,13 +610,14 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def(py::init<>())
     ;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
   // non-manifold
   using Nmv = pmp::Non_manifold_output_visitor<Pm>;
   py::class_<Nmv>(m, "Non_manifold_output_visitor")
     // constructor with 2 PolygonMesh arguments
     .def(py::init<Pm&, Pm&>())
     // visitor.extract_intersection(points, polygons);
-    // .def("extract_intersection", &Nmv::extract_intersection)
+    .def("extract_intersection", &Nmv::my_extract_intersection)
     ;
 
   // corefine

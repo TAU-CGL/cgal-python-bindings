@@ -23,7 +23,7 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/make_circulator.hpp"
-// #include "internal.hpp"
+#include "internal.hpp"
 
 namespace py = nanobind;
 
@@ -44,8 +44,8 @@ Polyhedron_3 read_polygon_mesh(const std::string& filename,
   using Prn = Polyhedron_3;
 
   Prn pol;
-  if (! CGAL::IO::read_polygon_mesh(filename, pol))
-                                    // internal::parse_named_parameters(np)))
+  if (! CGAL::IO::read_polygon_mesh(filename, pol,
+                                    internal::parse_named_parameters(np)))
     throw std::runtime_error("Cannot read file!");
   return pol;
 }
@@ -54,8 +54,8 @@ Polyhedron_3 read_polygon_mesh(const std::string& filename,
 template <typename Polyhedron_3>
 bool write_polygon_mesh(std::string fname, const Polyhedron_3& pm,
                         const py::dict& np = py::dict()) {
-  return CGAL::IO::write_polygon_mesh(fname, pm);
-                                      // internal::parse_named_parameters(np));
+  return CGAL::IO::write_polygon_mesh(fname, pm,
+                                      internal::parse_named_parameters(np));
 }
 
 // Draw a polyhedron.

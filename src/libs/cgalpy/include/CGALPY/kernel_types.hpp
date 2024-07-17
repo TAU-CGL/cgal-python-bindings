@@ -93,6 +93,8 @@ typedef Kernel::Sphere_3                               Sphere_3;
 typedef Kernel::Vector_3                               Vector_3;
 
 typedef std::vector<Point_2>                           Point_2_container;
+typedef std::vector<Point_3>                           PointRange;
+typedef std::vector<std::vector<std::size_t>>          PolygonRange;
 
 typedef CGAL::Aff_transformation_2<Kernel>             Aff_transformation_2;
 typedef CGAL::Aff_transformation_3<Kernel>             Aff_transformation_3;

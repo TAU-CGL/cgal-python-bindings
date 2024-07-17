@@ -25,6 +25,7 @@
 #include "CGALPY/surface_mesh_types.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "internal.hpp"
 
 namespace py = nanobind;
 
@@ -45,11 +46,13 @@ SurfaceMesh make_tetrahedron(const typename SurfaceMesh::Point& p1,
 
 // Read a surface mesh from a file.
 template <typename SurfaceMesh>
-SurfaceMesh read_polygon_mesh(const std::string& filename) {
+SurfaceMesh read_polygon_mesh(const std::string& filename,
+                              const py::dict& parameters = py::dict()) {
   using Sm = SurfaceMesh;
 
   Sm sm;
-  if (! CGAL::IO::read_polygon_mesh(filename, sm))
+  if (! CGAL::IO::read_polygon_mesh(filename, sm,
+                                    internal::parse_named_parameters(parameters)))
     throw std::runtime_error("Cannot read file!");
   return sm;
 }
@@ -58,7 +61,8 @@ SurfaceMesh read_polygon_mesh(const std::string& filename) {
 template <typename SurfaceMesh>
 bool write_polygon_mesh(std::string fname, const SurfaceMesh& pm,
                         const py::dict& parameters = py::dict()) {
-  return CGAL::IO::write_polygon_mesh(fname, pm);
+  return CGAL::IO::write_polygon_mesh(fname, pm,
+                                      internal::parse_named_parameters(parameters));
 }
 
 // Draw a surface mesh.
@@ -358,7 +362,8 @@ void export_surface_mesh(py::module_& m) {
 
   m.def("Halfedge", &sm::halfedge<Sm_3>);
 
-  m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>);
+  m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>,
+        py::arg("fname"), py::arg("parameters") = py::dict());
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
   m.def("write_polygon_mesh", &sm::write_polygon_mesh<Sm_3>,
         py::arg("fname"), py::arg("pm"), py::arg("parameters") = py::dict());

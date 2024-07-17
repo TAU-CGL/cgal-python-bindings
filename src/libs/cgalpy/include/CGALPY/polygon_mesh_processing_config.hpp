@@ -23,15 +23,9 @@ template <int i> struct Poly_mesh {};
 template <> struct Poly_mesh<CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH> {
 
   typedef pol3::Polyhedron_3 type;
-  // typedef Poly_mesh<CGALPY_PMP_POLYGONAL_MESH>::type::Vertex_handle  Vertex_identifier;
-  // typedef Poly_mesh<CGALPY_PMP_POLYGONAL_MESH>::type::Halfedge_handle  Halfedge_identifier;
-  // typedef Poly_mesh<CGALPY_PMP_POLYGONAL_MESH>::type::Face_handle    Face_identifier;
 };
 template <> struct Poly_mesh<CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH> {
   typedef sm::Surface_mesh_3 type;
-  // typedef Poly_mesh<CGALPY_PMP_POLYGONAL_MESH>::Vertex_index  Vertex_identifier;
-  // typedef Poly_mesh<CGALPY_PMP_POLYGONAL_MESH>::Halfedge_index  Halfedge_identifier;
-  // typedef Poly_mesh<CGALPY_PMP_POLYGONAL_MESH>::Face_index    Face_identifier;
 };
 
 }
