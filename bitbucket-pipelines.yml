@@ -32,7 +32,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal algebraic_curves.py algebraic_segments.py # run examples
+                - ./compare_examples.sh ../../cgal algebraic_curves.py algebraic_segments.py # run examples
       
           - step:
               name: Test aos2_conic_epec examples
@@ -63,7 +63,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal conic_multiplicities.py conics.py # run examples
+                - ./compare_examples.sh ../../cgal conic_multiplicities.py conics.py # run examples
       
           - step:
               name: Test aos2_linear_epec examples
@@ -94,7 +94,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal io_unbounded.py # run examples
+                - ./compare_examples.sh ../../cgal io_unbounded.py # run examples
       
           - step:
               name: Test aos2_seg_ae_epec examples
@@ -125,7 +125,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal dcel_extension.py dcel_extension_io.py face_extension.py face_extension_overlay.py overlay_color.py # run examples
+                - ./compare_examples.sh ../../cgal dcel_extension.py dcel_extension_io.py face_extension.py face_extension_overlay.py overlay_color.py # run examples
       
           - step:
               name: Test aos2_seg_epec examples
@@ -156,7 +156,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal batched_point_location.py incremental_insertion.py point_location.py # run examples
+                - ./compare_examples.sh ../../cgal batched_point_location.py incremental_insertion.py point_location.py # run examples
       
           - step:
               name: Test bso2_seg_epec examples
@@ -187,7 +187,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal sequence.py # run examples
+                - ./compare_examples.sh ../../cgal sequence.py # run examples
       
           - step:
               name: Test ms2_conic_ccr examples
@@ -218,7 +218,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal exact_offset.py # run examples
+                - ./compare_examples.sh ../../cgal exact_offset.py # run examples
       
           - step:
               name: Test ms2_cs_epec examples
@@ -249,7 +249,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal approx_inset.py approx_offset.py # run examples
+                - ./compare_examples.sh ../../cgal approx_inset.py approx_offset.py # run examples
       
           - step:
               name: Test ms2_seg_epec examples
@@ -280,7 +280,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal sum_by_decomposition.py # run examples
+                - ./compare_examples.sh ../../cgal sum_by_decomposition.py # run examples
       
           - step:
               name: Test sm_pmp_epic examples
@@ -311,5 +311,5 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal triangulate_polyline_example.py corefinement_mesh_union.py hausdorff_distance_remeshing_example.py tangential_relaxation_example.py triangulate_faces_example.py triangulate_polyline_example.py # run examples
+                - ./compare_examples.sh ../../cgal triangulate_polyline_example.py corefinement_mesh_union.py hausdorff_distance_remeshing_example.py tangential_relaxation_example.py triangulate_faces_example.py compute_normals_example.py corefinement_mesh_intersection.py corefinement_mesh_union.py hole_filling_example.py self_intersections_example.py # run examples
       

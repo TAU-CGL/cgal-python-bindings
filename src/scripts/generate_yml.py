@@ -48,7 +48,7 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../../cgal {" ".join(examples)} # run examples
+                - ./compare_examples.sh ../../cgal {" ".join(examples)} # run examples
       """
   
   return yml
