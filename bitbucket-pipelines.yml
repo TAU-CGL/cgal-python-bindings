@@ -10,7 +10,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -41,7 +41,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -72,7 +72,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -103,7 +103,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -134,7 +134,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -165,7 +165,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -196,7 +196,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -227,7 +227,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -258,7 +258,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -289,7 +289,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build
@@ -311,5 +311,5 @@ pipelines:
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
                 - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../cgal triangulate_polyline_example.py corefinement_mesh_union.py hausdorff_distance_remeshing_example.py tangential_relaxation_example.py triangulate_faces_example.py compute_normals_example.py corefinement_mesh_intersection.py corefinement_mesh_union.py hole_filling_example.py self_intersections_example.py # run examples
+                - ./compare_examples.sh ../../cgal triangulate_polyline_example.py hausdorff_distance_remeshing_example.py tangential_relaxation_example.py triangulate_faces_example.py compute_normals_example.py corefinement_mesh_union_and_intersection.py corefinement_mesh_union.py hole_filling_example.py self_intersections_example.py # run examples
       

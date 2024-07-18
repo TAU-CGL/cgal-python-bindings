@@ -39,6 +39,7 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #include <CGAL/CORE_BigInt.h>
 #include <CGAL/Sqrt_extension.h>
 #include <CGAL/Bbox_2.h>
+#include <CGAL/Bbox_3.h>
 #include <CGAL/Circle_2.h>
 #include <CGAL/Triangle_2.h>
 #include <CGAL/Direction_2.h>
@@ -99,6 +100,7 @@ typedef std::vector<std::vector<std::size_t>>          PolygonRange;
 typedef CGAL::Aff_transformation_2<Kernel>             Aff_transformation_2;
 typedef CGAL::Aff_transformation_3<Kernel>             Aff_transformation_3;
 typedef CGAL::Bbox_2                                   Bbox_2;
+typedef CGAL::Bbox_3                                   Bbox_3;
 typedef CGAL::Rotation                                 Rotation;
 typedef CGAL::Scaling                                  Scaling;
 typedef CGAL::Translation                              Translation;

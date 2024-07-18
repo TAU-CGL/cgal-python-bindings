@@ -198,6 +198,18 @@ void export_face_handle(C& prn_c) {
   face_handle_c.def(py::init<>());
 }
 
+// export boost halfedge
+template<typename C>
+void export_boost_halfedge(C& prn_c) {
+  using PolygonMesh = pol3::Polyhedron_3;
+  using Halfedge = boost::graph_traits<PolygonMesh>::halfedge_descriptor;
+
+  if (add_attr<Halfedge>(prn_c, "Halfedge")) return;
+
+  py::class_<Halfedge> halfedge_c(prn_c, "Boost_halfedge");
+  halfedge_c.def(py::init<>());
+}
+
 // Export Polyhedron_3.
 void export_polyhedron_3(py::module_& m) {
   using Prn = pol3::Polyhedron_3;
@@ -218,6 +230,8 @@ void export_polyhedron_3(py::module_& m) {
   export_halfedge(m);
   export_face(m);
   export_face_handle(m);
+  export_boost_halfedge(m);
+
 
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");

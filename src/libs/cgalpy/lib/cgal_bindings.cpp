@@ -10,6 +10,7 @@
 
 #include <CGAL/basic.h>
 #include <CGAL/Bbox_2.h>
+#include <CGAL/Bbox_3.h>
 #include <CGAL/boost/graph/helpers.h>
 
 #include "CGALPY/add_attr.hpp"
@@ -17,10 +18,12 @@
 namespace py = nanobind;
 
 extern void export_bbox_2(py::class_<CGAL::Bbox_2>& c);
+extern void export_bbox_3(py::class_<CGAL::Bbox_3>& c);
 
 //
 void export_cgal(py::module_& m) {
   using Bbox_2 = CGAL::Bbox_2;
+  using Bbox_3 = CGAL::Bbox_3;
   using Rotation = CGAL::Rotation;
   using Scaling = CGAL::Scaling;
   using Translation = CGAL::Translation;
@@ -91,6 +94,12 @@ void export_cgal(py::module_& m) {
   if (! add_attr<CGAL::Bbox_2>(m, "Bbox_2")) {
     py::class_<CGAL::Bbox_2> bbox_c(m, "Bbox_2");
     export_bbox_2(bbox_c);
+  }
+
+  // Bbox_3
+  if (! add_attr<CGAL::Bbox_3>(m, "Bbox_3")) {
+    py::class_<CGAL::Bbox_3> bbox_c(m, "Bbox_3");
+    export_bbox_3(bbox_c);
   }
 
   // Box_parameter_space_2

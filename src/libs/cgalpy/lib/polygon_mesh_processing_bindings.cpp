@@ -224,6 +224,22 @@ py::list connected_components(const PolygonMesh& pm,
 
 //
 template <typename PolygonMesh>
+py::list extract_boundary_cycles(PolygonMesh& pm) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Hd = typename Gt::halfedge_descriptor;
+
+  // extract_boundary_cycles return needs output iterator
+  py::list result;
+  auto op = [&] (const Hd& res) mutable
+            { result.append(res); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  PMP::extract_boundary_cycles(pm, it);
+  return result;
+}
+
+//
+template <typename PolygonMesh>
 PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
                                       const py::dict& np1 = py::dict(),
                                       const py::dict& np2 = py::dict(),
@@ -581,6 +597,9 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("approximate_Hausdorff_distance", &pmp::approximate_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+
+  m.def("extract_boundary_cycles", &pmp::extract_boundary_cycles<Pm>,
+        py::arg("pm"));
 
   m.def("corefine_and_compute_boolean_operations", &pmp::corefine_and_compute_boolean_operations<Pm>,
         py::arg("pm1"), py::arg("pm2"),

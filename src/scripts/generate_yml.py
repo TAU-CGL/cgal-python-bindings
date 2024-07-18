@@ -6,17 +6,6 @@ pipelines:
   default:
     - parallel:
         steps:"""
-  # for file in os.listdir(path_to_cmakes):
-  #   name = file.split(".")[0]
-    # if file.endswith(".cmake"):
-    #   yml += f"""
-    #     - step:
-    #       name: Test {name}
-    #       script:
-    #         - cmake -C ../cmake/tests/release/{file} ../
-    #         - make
-    #         - pip install src/libs/cgalpy/dist/*.whl
-    #     """
   for cmake_name, examples in cmake2example.items():
     yml += f"""
           - step:
@@ -26,7 +15,7 @@ pipelines:
                 - export DEBIAN_FRONTEND=noninteractive
                 - export TZ=Asia/Kolkata
                 - apt-get update
-                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev
+                - apt-get install -yq cmake g++ python3-pip python3 git python3.12-venv make libgmp3-dev libboost-all-dev libmpfr-dev qt6-base-dev libeigen3-dev libgmp-dev
                 - git clone https://github.com/CGAL/cgal.git
                 - cd cgal
                 - mkdir build

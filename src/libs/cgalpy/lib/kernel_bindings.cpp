@@ -42,6 +42,7 @@
 namespace py = nanobind;
 
 extern void export_bbox_2(py::class_<CGAL::Bbox_2>& c);
+extern void export_bbox_3(py::class_<CGAL::Bbox_3>& c);
 
 extern void export_gmpz(py::module_&);
 extern void export_gmpq(py::module_&);
@@ -130,6 +131,12 @@ void export_kernel_module(py::module_& m) {
   if (! add_attr<Bbox_2>(m, "Bbox_2")) {
     py::class_<Bbox_2> bbox_c(m, "Bbox_2");
     export_bbox_2(bbox_c);
+  }
+
+  // Bbox_3
+  if (! add_attr<Bbox_3>(m, "Bbox_3")) {
+    py::class_<Bbox_3> bbox_c(m, "Bbox_3");
+    export_bbox_3(bbox_c);
   }
 
   // Kernel objects
@@ -501,6 +508,9 @@ void export_kernel_module(py::module_& m) {
 
   using Do_fnc = bool(*)(const Bbox_2&, const Bbox_2&);
   m.def("do_overlap", static_cast<Do_fnc>(&CGAL::do_overlap));
+
+  using Do_fnc3 = bool(*)(const Bbox_3&, const Bbox_3&);
+  m.def("do_overlap", static_cast<Do_fnc3>(&CGAL::do_overlap));
 
   using Cmp3_fnc = CGAL::Comparison_result(*)(const Pnt_3&, const Pnt_3&);
   m.def("compare_z", static_cast<Cmp3_fnc>(&CGAL::compare_z<Kernel>));
