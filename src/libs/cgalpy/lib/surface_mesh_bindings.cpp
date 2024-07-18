@@ -25,6 +25,7 @@
 #include "CGALPY/surface_mesh_types.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
@@ -306,6 +307,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       // void resize(size_type nvertices, size_type nedges, size_type nfaces )
       // join(const Surface_mesh& other)
 
+
+
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
 #if CGAL_VERSION_NR >= 1050600000
       .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_))
@@ -355,6 +358,7 @@ void export_surface_mesh(py::module_& m) {
 
   // 3D Surface mesh
   using Sm_3 = sm::Surface_mesh_3;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
@@ -370,4 +374,60 @@ void export_surface_mesh(py::module_& m) {
   m.def("halfedge", &sm::halfedge<Sm_3>);
   m.def("is_triangle", &sm::is_triangle<Sm_3>);
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>);
+
+  // boost
+  m.def("num_vertices", &boost_utils::num_vertices<Sm_3>);
+  m.def("num_edges", &boost_utils::num_edges<Sm_3>);
+  m.def("degree", &boost_utils::degree_v<Sm_3>);
+  m.def("degree", &boost_utils::degree_f<Sm_3>);
+  m.def("out_degree", &boost_utils::out_degree<Sm_3>);
+  m.def("in_degree", &boost_utils::in_degree<Sm_3>);
+  m.def("source", &boost_utils::source_e<Sm_3>);
+  m.def("source", &boost_utils::source_h<Sm_3>);
+  m.def("target", &boost_utils::target_e<Sm_3>);
+  m.def("target", &boost_utils::target_h<Sm_3>);
+  m.def("vertices", &boost_utils::my_vertices<Sm_3>);
+  m.def("edges", &boost_utils::my_edges<Sm_3>);
+  m.def("in_edges", &boost_utils::my_in_edges<Sm_3>);
+  m.def("out_edges", &boost_utils::my_out_edges<Sm_3>);
+  m.def("adjacent_vertices", &boost_utils::my_adjacent_vertices<Sm_3>);
+  m.def("edge", &boost_utils::edge<Sm_3>);
+  m.def("next", &boost_utils::next<Sm_3>);
+  m.def("prev", &boost_utils::prev<Sm_3>);
+  m.def("opposite", &boost_utils::opposite<Sm_3>);
+  m.def("edge", &boost_utils::edge_h<Sm_3>);
+  m.def("halfedge", &boost_utils::halfedge_e<Sm_3>);
+  m.def("halfedge", &boost_utils::halfedge_v<Sm_3>);
+  m.def("halfedge", &boost_utils::halfedge_vv<Sm_3>);
+  m.def("halfedges", &boost_utils::my_halfedges<Sm_3>);
+  m.def("num_halfedges", &boost_utils::num_halfedges<Sm_3>);
+  m.def("set_next", &boost_utils::set_next<Sm_3>);
+  m.def("set_target", &boost_utils::set_target<Sm_3>);
+  m.def("set_halfedge", &boost_utils::set_halfedge_vh<Sm_3>);
+  m.def("collect_garbage", &boost_utils::my_collect_garbage<Sm_3>);
+  m.def("add_edge", &boost_utils::add_edge<Sm_3>);
+  m.def("halfedge", &boost_utils::halfedge_f<Sm_3>);
+  m.def("face", &boost_utils::face_h<Sm_3>);
+  m.def("set_face", &boost_utils::set_face<Sm_3>);
+  m.def("set_halfedge", &boost_utils::set_halfedge_fh<Sm_3>);
+  m.def("num_faces", &boost_utils::num_faces<Sm_3>);
+  m.def("faces", &boost_utils::my_faces<Sm_3>);
+  m.def("add_vertex", &boost_utils::add_vertex<Sm_3>);
+  m.def("add_vertex", &boost_utils::add_vertex_p<Sm_3>);
+  m.def("reserve", &boost_utils::reserve<Sm_3>);
+  m.def("remove_vertex", &boost_utils::remove_vertex<Sm_3>);
+  // m.def("remove_edge", &boost_utils::remove_edge_vv<Sm_3>); // vv only for sm
+  m.def("remove_edge", &boost_utils::remove_edge_e<Sm_3>);
+  m.def("remove_face", &boost_utils::remove_face<Sm_3>);
+  m.def("remove_all_elements", &boost_utils::remove_all_elements<Sm_3>);
+  m.def("add_face", &boost_utils::add_face<Sm_3>);
+  // m.def("normalize_border", &boost_utils::normalize_border<Sm_3>); ???
+  m.def("is_valid_vertex_descriptor", &boost_utils::my_is_valid_vertex_descriptor<Sm_3>,
+        py::arg("v"), py::arg("g"), py::arg("verbose") = false);
+  m.def("is_valid_halfedge_descriptor", &boost_utils::my_is_valid_halfedge_descriptor<Sm_3>,
+        py::arg("h"), py::arg("g"), py::arg("verbose") = false);
+  m.def("is_valid_edge_descriptor", &boost_utils::my_is_valid_edge_descriptor<Sm_3>,
+        py::arg("e"), py::arg("g"), py::arg("verbose") = false);
+  m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Sm_3>,
+        py::arg("f"), py::arg("g"), py::arg("verbose") = false);
 }

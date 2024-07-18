@@ -306,7 +306,7 @@ PolygonMesh corefine_and_compute_intersection(PolygonMesh& pm1, PolygonMesh& pm2
 //
 template <typename PolygonMesh>
 auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
-                                          typename PolygonMesh::Halfedge& border_halfedge,
+    typename boost::graph_traits<PolygonMesh>::halfedge_descriptor& border_halfedge,
                                           const py::dict& parameters = py::dict()) {
   using Pm = PolygonMesh;
   using Graph_traits = boost::graph_traits<Pm>;
@@ -448,10 +448,12 @@ py::tuple corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh&
 
 }
 
-// template <typename PolygonMesh>
-// Vector_3 compute_face_normal(const typename PolygonMesh::Face_handle& f, const PolygonMesh& sm) {
-//   return PMP::compute_face_normal(f, sm);
-// 
+template <typename PolygonMesh>
+Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::face_descriptor& f,
+                             const PolygonMesh& sm,
+                             const py::dict& np = py::dict()) {
+  return PMP::compute_face_normal(f, sm, internal::parse_pmp_np(np));
+}
 
 template <typename PolygonMesh>
 py::tuple compute_face_normals(const PolygonMesh& sm) {
@@ -468,10 +470,12 @@ py::tuple compute_face_normals(const PolygonMesh& sm) {
   return py::make_tuple(faces_list, fnormals_list);
 }
 
-// template <typename PolygonMesh>
-// Vector_3 compute_vertex_normal(const typename Vertex_handle& v, const PolygonMesh& sm) {
-//   return PMP::compute_vertex_normal(v, sm);
-// }
+template <typename PolygonMesh>
+Vector_3 compute_vertex_normal(const typename boost::graph_traits<PolygonMesh>::vertex_descriptor& v,
+                               const PolygonMesh& sm,
+                               const py::dict& np = py::dict()) {
+  return PMP::compute_vertex_normal(v, sm, internal::parse_pmp_np(np));
+}
 
 template <typename PolygonMesh>
 py::tuple compute_vertex_normals(const PolygonMesh& sm) {
@@ -606,9 +610,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::tuple());
 
-  // m.def("compute_face_normal", &pmp::compute_face_normal<Pm>);
+  m.def("compute_face_normal", &pmp::compute_face_normal<Pm>);
   m.def("compute_face_normals", &pmp::compute_face_normals<Pm>);
-  // m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>);
+  m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>);
   m.def("compute_vertex_normals", &pmp::compute_vertex_normals<Pm>);
   m.def("compute_normals", &pmp::compute_normals<Pm>);
 
