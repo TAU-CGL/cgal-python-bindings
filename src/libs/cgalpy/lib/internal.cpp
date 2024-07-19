@@ -141,6 +141,9 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("size"):
         cgal_parameters = cgal_parameters.size(py::cast<size_t>(item.second));
         break;
+      case Hash("protect_constraints"):
+        cgal_parameters = cgal_parameters.protect_constraints(py::cast<bool>(item.second));
+        break;
       // default:
       //   throw std::invalid_argument("Unknown parameter: " + key);
       //   break;

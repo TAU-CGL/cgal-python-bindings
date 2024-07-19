@@ -356,7 +356,7 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
 
 //
 template <typename PolygonMesh>
-PolygonMesh triangulate_faces(const PolygonMesh& pm,
+PolygonMesh triangulate_faces(PolygonMesh& pm,
                               const py::dict& parameters) {
   using Pm = PolygonMesh;
 
@@ -372,33 +372,26 @@ PolygonMesh triangulate_faces(const PolygonMesh& pm,
 
 //
 template <typename PolygonMesh>
-PolygonMesh isotropic_remeshing(const py::list& face_range,
+auto isotropic_remeshing(const py::list& face_range,
                                 double target_edge_length,
-                                const PolygonMesh& pmesh,
+                                PolygonMesh& pmesh,
                                 const py::dict& parameters = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
-  // copy the input mesh
-  Pm out(pmesh);
-
   PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                       stl_input_iterator<Fd>(face_range, false)),
-                           target_edge_length, out,
+                           target_edge_length, pmesh,
                            internal::parse_pmp_np(parameters));
-  return out;
-
 }
 
 template <typename PolygonMesh>
-PolygonMesh tangential_relaxation(const PolygonMesh& tm,
+auto tangential_relaxation(PolygonMesh& tm,
                                   const py::dict& parameters = py::dict()) {
   using Pm = PolygonMesh;
 
-  Pm out(tm);
-  PMP::tangential_relaxation(out, internal::parse_pmp_np(parameters));
-  return out;
+  PMP::tangential_relaxation(tm, internal::parse_pmp_np(parameters));
 }
 
 template <typename PolygonMesh>
@@ -542,6 +535,51 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
 
 }
 
+template <typename PolygonMesh>
+auto border_halfedges(const py::list& face_range,
+                      const PolygonMesh& pm,
+                      const py::dict& parameters = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+  using Hd = typename Gt::halfedge_descriptor;
+
+  auto begin = stl_input_iterator<Fd>(face_range);
+  auto end = stl_input_iterator<Fd>(face_range, false);
+
+  std::vector<Hd> out;
+  PMP::border_halfedges(boost::make_iterator_range(begin, end), pm, std::back_inserter(out),
+                        internal::parse_pmp_np(parameters));
+  py::list result;
+  for (const auto& hd : out) result.append(hd);
+  return result;
+}
+
+// template<typename PolygonMesh
+//        , typename EdgeRange
+//        , typename SizingValue
+//        , typename NamedParameters = parameters::Default_named_parameters
+//        , typename = typename std::enable_if_t<std::is_convertible_v<SizingValue, double>>>
+// void split_long_edges(const EdgeRange& edges
+//                     , const SizingValue max_length
+//                     , PolygonMesh& pmesh
+//                     , const NamedParameters& np = parameters::default_values())
+
+template <typename PolygonMesh>
+auto split_long_edges(const py::list& edge_range,
+                      double max_length,
+                      PolygonMesh& pmesh,
+                      const py::dict& parameters = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Ed = typename Gt::edge_descriptor;
+
+  // turn edge_range to a vector
+  std::vector<Ed> edge_vec;
+  for (const auto& ed : edge_range) edge_vec.push_back(py::cast<Ed>(ed));
+  PMP::split_long_edges(edge_vec,
+                        max_length, pmesh, internal::parse_pmp_np(parameters));
+}
 
 } // namespace pmp
 
@@ -560,6 +598,8 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Np_base = CGAL::internal_np::No_property;
   using Np_class = CGAL::Named_function_parameters<Np_t, Np_tag, Np_base>;
   using Concurrency_tag = CGAL::Sequential_tag;
+
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Np_class>(m, "Named_function_parameters")
     .def(py::init<>());
@@ -665,6 +705,14 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures_v<Pm>,
         py::arg("v"), py::arg("pm"), py::arg("parameters") = py::dict());
 
+  m.def("border_halfedges", &pmp::border_halfedges<Pm>,
+        py::arg("face_range"), py::arg("pm"),
+        py::arg("parameters") = py::dict());
+
+  m.def("split_long_edges", &pmp::split_long_edges<Pm>,
+        py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
+        py::arg("parameters") = py::dict());
+
   // default visitor
   using Dv = pmp::Default_visitor<Pm>;
   py::class_<Dv>(m, "Default_visitor")
@@ -680,7 +728,6 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def_ro("max_direction", &Pcad::max_direction)
     ;
 
-  constexpr auto ri(py::rv_policy::reference_internal);
   // non-manifold
   using Nmv = pmp::Non_manifold_output_visitor<Pm>;
   py::class_<Nmv>(m, "Non_manifold_output_visitor")
