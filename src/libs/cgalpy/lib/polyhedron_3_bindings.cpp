@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <boost/math/constants/constants.hpp>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <nanobind/nanobind.h>
@@ -208,8 +209,31 @@ void export_boost_halfedge(C& prn_c) {
 
   if (add_attr<Halfedge>(prn_c, "Halfedge")) return;
 
-  py::class_<Halfedge> halfedge_c(prn_c, "Boost_halfedge");
-  halfedge_c.def(py::init<>());
+  py::class_<Halfedge> halfedge_c(prn_c, "halfedge_descriptor");
+  halfedge_c.def(py::init<>())
+    .def(py::init<>())
+    .def("facet", [](const Halfedge& e){ return e->facet(); })
+    .def("facet_begin", [](const Halfedge& e){ return e->facet_begin(); })
+    .def("is_border", [](const Halfedge& e){ return e->is_border(); })
+    .def("face", [](const Halfedge& e){ return e->face(); })
+    .def("next", [](const Halfedge& e){ return e->next(); })
+    .def("prev", [](const Halfedge& e){ return e->prev(); })
+    .def("vertex", [](const Halfedge& e){ return e->vertex(); })
+    .def("is_quad", [](const Halfedge& e){ return e->is_quad(); })
+    .def("opposite", [](const Halfedge& e){ return e->opposite(); })
+    .def("is_bivalent", [](const Halfedge& e){ return e->is_bivalent(); })
+    .def("is_triangle", [](const Halfedge& e){ return e->is_triangle(); })
+    .def("facet_degree", [](const Halfedge& e){ return e->facet_degree(); })
+    .def("is_trivalent", [](const Halfedge& e){ return e->is_trivalent(); })
+    .def("vertex_begin", [](const Halfedge& e){ return e->vertex_begin(); })
+    .def("vertex_degree", [](const Halfedge& e){ return e->vertex_degree(); })
+    .def("is_border_edge", [](const Halfedge& e){ return e->is_border_edge(); })
+    .def("next_on_vertex", [](const Halfedge& e){ return e->next_on_vertex(); })
+    .def("prev_on_vertex", [](const Halfedge& e){ return e->prev_on_vertex(); })
+    // .def("prev_link", [](const Halfedge& e){ return e->prev_link(); })
+    // .def("next_link", [](const Halfedge& e){ return e->next_link(); })
+    .def("facet", [](const Halfedge& e){ return e->facet(); })
+    ;
 
 }
 
@@ -218,11 +242,23 @@ template<typename C>
 void export_boost_vertex(C& prn_c) {
   using PolygonMesh = pol3::Polyhedron_3;
   using Vertex = boost::graph_traits<PolygonMesh>::vertex_descriptor;
+  using Halfedge = boost::graph_traits<PolygonMesh>::halfedge_descriptor;
 
   if (add_attr<Vertex>(prn_c, "Vertex")) return;
 
-  py::class_<Vertex> vertex_c(prn_c, "Boost_vertex");
-  vertex_c.def(py::init<>());
+  py::class_<Vertex> vertex_c(prn_c, "vertex_descriptor");
+  vertex_c.def(py::init<>())
+    .def("point", [](const Vertex& v){ return v->point(); })
+    .def("degree", [](const Vertex& v){ return v->degree(); })
+    .def("halfedge", [](const Vertex& v){ return v->halfedge(); })
+    .def("is_bivalent", [](const Vertex& v){ return v->is_bivalent(); })
+    .def("is_trivalent", [](const Vertex& v){ return v->is_trivalent(); })
+    .def("set_halfedge", [](Vertex& v, const Halfedge& h){ v->halfedge() = h; })
+    .def("vertex_begin", [](const Vertex& v){ return v->vertex_begin(); })
+    // .def("prev_link", [](const Vertex& v){ return v->prev_link(); })
+    // .def("next_link", [](const Vertex& v){ return v->next_link(); })
+    .def("vertex_degree", [](const Vertex& v){ return v->vertex_degree(); })
+    ;
 }
 
 // export boost face
@@ -230,11 +266,23 @@ template<typename C>
 void export_boost_face(C& prn_c) {
   using PolygonMesh = pol3::Polyhedron_3;
   using Face = boost::graph_traits<PolygonMesh>::face_descriptor;
+  using Halfedge = boost::graph_traits<PolygonMesh>::halfedge_descriptor;
 
   if (add_attr<Face>(prn_c, "Face")) return;
 
-  py::class_<Face> face_c(prn_c, "Boost_face");
-  face_c.def(py::init<>());
+  py::class_<Face> face_c(prn_c, "face_descriptor");
+  face_c.def(py::init<>())
+    .def("facet_begin", [](const Face& f){ return f->facet_begin(); })
+    .def("size", [](const Face& f){ return f->size(); })
+    .def("plane", [](const Face& f){ return f->plane(); })
+    .def("is_quad", [](const Face& f){ return f->is_quad(); })
+    .def("halfedge", [](const Face& f){ return f->halfedge(); })
+    .def("is_triangle", [](const Face& f){ return f->is_triangle(); })
+    .def("facet_degree", [](const Face& f){ return f->facet_degree(); })
+    // .def("prev_link", [](const Face& f){ return f->prev_link(); })
+    // .def("next_link", [](const Face& f){ return f->next_link(); })
+    .def("set_halfedge", [](Face& f, const Halfedge& h){ f->halfedge() = h; })
+    ;
 }
 
 // export boost edge
@@ -245,8 +293,19 @@ void export_boost_edge(C& prn_c) {
 
   if (add_attr<Edge>(prn_c, "Edge")) return;
 
-  py::class_<Edge> edge_c(prn_c, "Boost_edge");
-  edge_c.def(py::init<>());
+  py::class_<Edge> edge_c(prn_c, "edge_descriptor");
+  edge_c.def(py::init<>())
+    // this is not working
+    // .def("id", [](const Edge& e){ return e->id(); })
+    // .def("next", [](const Edge& e){ return e->next(); })
+    // .def("prev", [](const Edge& e){ return e->prev(); })
+    // .def("halfedge", [](const Edge& e){ return e->halfedge(); })
+    // .def("opposite", [](const Edge& e){ return e->opposite(); })
+    // .def("next_opposite", [](const Edge& e){ return e->next_opposite(); })
+    // .def("opposite_next", [](const Edge& e){ return e->opposite_next(); })
+    // .def("opposite_prev", [](const Edge& e){ return e->opposite_prev(); })
+    // .def("prev_opposite", [](const Edge& e){ return e->prev_opposite(); })
+    ;
 }
 
 // Export Polyhedron_3.
