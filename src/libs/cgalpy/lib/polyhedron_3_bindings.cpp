@@ -255,8 +255,8 @@ void export_boost_vertex(C& prn_c) {
     .def("is_trivalent", [](const Vertex& v){ return v->is_trivalent(); })
     .def("set_halfedge", [](Vertex& v, const Halfedge& h){ v->halfedge() = h; })
     .def("vertex_begin", [](const Vertex& v){ return v->vertex_begin(); })
-    // .def("prev_link", [](const Vertex& v){ return v->prev_link(); })
-    // .def("next_link", [](const Vertex& v){ return v->next_link(); })
+    // .def_ro("prev_link", [](const Vertex& v){ return v->prev_link(); })
+    // .def_ro("next_link", [](const Vertex& v){ return v->next_link(); })
     .def("vertex_degree", [](const Vertex& v){ return v->vertex_degree(); })
     ;
 }
@@ -279,8 +279,8 @@ void export_boost_face(C& prn_c) {
     .def("halfedge", [](const Face& f){ return f->halfedge(); })
     .def("is_triangle", [](const Face& f){ return f->is_triangle(); })
     .def("facet_degree", [](const Face& f){ return f->facet_degree(); })
-    // .def("prev_link", [](const Face& f){ return f->prev_link(); })
-    // .def("next_link", [](const Face& f){ return f->next_link(); })
+    // .def_ro("prev_link", [](const Face& f){ return f->prev_link(); })
+    // .def_ro("next_link", [](const Face& f){ return f->next_link(); })
     .def("set_halfedge", [](Face& f, const Halfedge& h){ f->halfedge() = h; })
     ;
 }

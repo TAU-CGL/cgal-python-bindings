@@ -1,3 +1,6 @@
+#ifndef CGALPY_EXPORT_BOOST_MESH_UTILS_HPP
+#define CGALPY_EXPORT_BOOST_MESH_UTILS_HPP
+
 #include <nanobind/nanobind.h>
 #include "CGALPY/make_iterator.hpp"
 
@@ -374,3 +377,5 @@ auto my_is_valid_face_descriptor(typename boost::graph_traits<PolygonMesh>::face
 
 
 } // namespace boost_utils
+
+#endif // EXPORT_BOOST_MESH_UTILS_HPP

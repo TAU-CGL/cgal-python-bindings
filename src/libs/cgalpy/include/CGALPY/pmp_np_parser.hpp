@@ -2,18 +2,23 @@
 #define PMP_NP_PARSER_HPP
 
 #include <boost/range/iterator_range_core.hpp>
+#include <functional>
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/polygon_mesh_processing_config.hpp"
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
 #include "CGALPY/Non_manifold_output_visitor.hpp"
+#include "CGALPY/kernel_types.hpp"
 
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
 
+
 namespace internal {
+
+namespace PMP = CGAL::Polygon_mesh_processing;
 
 typedef pmp::Polygonal_mesh Mesh;
 typedef Kernel::Point_3 Point;
@@ -40,6 +45,12 @@ Named_params handle_visitor(const py::handle& visitor, Named_params cgal_paramet
   throw std::invalid_argument("Unknown visitor type");
 }
 
+template <typename K>
+Named_params handle_vertex_principal_curvatures_and_directions(const py::handle& vpcad_handle, Named_params cgal_parameters) {
+  auto vpcad = py::cast<PMP::Principal_curvatures_and_directions<K>>(vpcad_handle);
+  return cgal_parameters.vertex_principal_curvatures_and_directions(std::ref(vpcad));
+}
+
 Named_params parse_pmp_np(const py::dict& params, Named_params cgal_parameters = CGAL::parameters::all_default()) {
   // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
@@ -51,6 +62,9 @@ Named_params parse_pmp_np(const py::dict& params, Named_params cgal_parameters =
         break;
       case Hash("allow_move_functor"):
         cgal_parameters = cgal_parameters.allow_move_functor(py::cast<std::function<bool(Vertex_descriptor, Point, Point)>>(item.second));
+        break;
+      case Hash("vertex_principal_curvatures_and_directions"):
+        cgal_parameters = handle_vertex_principal_curvatures_and_directions<Kernel>(item.second, cgal_parameters);
         break;
       // default:
       //   throw std::invalid_argument("Unknown parameter: " + key);

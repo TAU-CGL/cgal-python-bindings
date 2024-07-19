@@ -26,6 +26,7 @@
 #include <CGAL/Polygon_mesh_processing/triangulate_faces.h>
 #include <CGAL/Polygon_mesh_processing/remesh.h>
 #include <CGAL/Polygon_mesh_processing/distance.h>
+#include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
@@ -331,8 +332,6 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
     auto it1 = std::back_inserter(fids);
     auto it2 = std::back_inserter(vids);
     auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np(parameters).face_output_iterator(it1).vertex_output_iterator(it2));
-    std::cerr << fids.size() << std::endl;
-    std::cerr << vids.size() << std::endl;
     for (const auto& fid : fids) facets.append(fid);
     for (const auto& vid : vids) vertices.append(vid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
@@ -500,6 +499,50 @@ py::tuple compute_normals(const PolygonMesh& pm) {
   return py::make_tuple(fn, vn);
 }
 
+template <typename PolygonMesh>
+void interpolated_corrected_curvatures(const PolygonMesh& pm,
+                                       const py::dict& np = py::dict()) {
+  PMP::interpolated_corrected_curvatures(pm, internal::parse_pmp_np(np));
+}
+
+template <typename PolygonMesh>
+auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMesh>::vertex_descriptor v,
+                                       const PolygonMesh& pm,
+                                       const py::dict& np = py::dict()) {
+  // check if vertex_mean_curvature is defined and true
+  bool vertex_mean_curvature = np.contains("vertex_mean_curvature") &&
+    py::cast<bool>(np["vertex_mean_curvature"]);
+  bool vertex_Gaussian_curvature = np.contains("vertex_Gaussian_curvature") &&
+    py::cast<bool>(np["vertex_Gaussian_curvature"]);
+  py::object vmc = py::none();
+  py::object vgc = py::none();
+  if (vertex_mean_curvature && vertex_Gaussian_curvature) {
+    double vmc_d, vGc;
+    PMP::interpolated_corrected_curvatures(v, pm,
+    internal::parse_pmp_np(np).vertex_mean_curvature(std::ref(vmc_d)).vertex_Gaussian_curvature(std::ref(vGc)));
+    vmc = py::cast(vmc_d);
+    vgc = py::cast(vGc);
+  }
+  else if (vertex_mean_curvature) {
+    double vmc_d;
+    PMP::interpolated_corrected_curvatures(v, pm,
+    internal::parse_pmp_np(np).vertex_mean_curvature(std::ref(vmc_d)));
+    vmc = py::cast(vmc_d);
+  }
+  else if (vertex_Gaussian_curvature) {
+    double vGc;
+    PMP::interpolated_corrected_curvatures(v, pm,
+    internal::parse_pmp_np(np).vertex_Gaussian_curvature(std::ref(vGc)));
+    vgc = py::cast(vGc);
+  }
+  else {
+    PMP::interpolated_corrected_curvatures(v, pm, internal::parse_pmp_np(np));
+  }
+  return py::make_tuple(vmc, vgc);
+
+}
+
+
 } // namespace pmp
 
 // Export Polygon_mesh_processing
@@ -510,6 +553,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   // using Fid = pmp::Face_identifier;
   using Polyline = std::vector<Kernel::Point_3>;
   using Np = CGAL::parameters::Default_named_parameters;
+  namespace PMP = CGAL::Polygon_mesh_processing;
 
   using Np_t = bool;
   using Np_tag = CGAL::internal_np::all_default_t;
@@ -616,11 +660,24 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>);
   m.def("compute_vertex_normals", &pmp::compute_vertex_normals<Pm>);
   m.def("compute_normals", &pmp::compute_normals<Pm>);
+  m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures<Pm>,
+        py::arg("pm"), py::arg("parameters") = py::dict());
+  m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures_v<Pm>,
+        py::arg("v"), py::arg("pm"), py::arg("parameters") = py::dict());
 
   // default visitor
   using Dv = pmp::Default_visitor<Pm>;
   py::class_<Dv>(m, "Default_visitor")
     .def(py::init<>())
+    ;
+
+  using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
+  py::class_<Pcad>(m, "Principal_curvatures_and_directions")
+    .def(py::init<>())
+    .def_ro("min_curvature", &Pcad::min_curvature)
+    .def_ro("max_curvature", &Pcad::max_curvature)
+    .def_ro("min_direction", &Pcad::min_direction)
+    .def_ro("max_direction", &Pcad::max_direction)
     ;
 
   constexpr auto ri(py::rv_policy::reference_internal);
