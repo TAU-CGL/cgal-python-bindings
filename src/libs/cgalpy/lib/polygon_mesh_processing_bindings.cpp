@@ -314,11 +314,10 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   using Fd = typename Graph_traits::face_descriptor;
 
   ///// change this to a more general type
-  using Vertex_identifier = typename PolygonMesh::Vertex_handle;
-  using Face_identifier = typename PolygonMesh::Face_handle;
+  using Vertex_identifier = typename Graph_traits::vertex_descriptor;
+  using Face_identifier = typename Graph_traits::face_descriptor;
   /////
 
-  auto bhd = halfedge_descriptor(&border_halfedge);
   py::list facets, vertices;
   internal::Named_params np = CGAL::parameters::default_values();
 
@@ -331,25 +330,27 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
     std::vector<Vertex_identifier> vids;
     auto it1 = std::back_inserter(fids);
     auto it2 = std::back_inserter(vids);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters).face_output_iterator(it1).vertex_output_iterator(it2));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np(parameters).face_output_iterator(it1).vertex_output_iterator(it2));
+    std::cerr << fids.size() << std::endl;
+    std::cerr << vids.size() << std::endl;
     for (const auto& fid : fids) facets.append(fid);
     for (const auto& vid : vids) vertices.append(vid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
   } else if (faces_flag) {
     std::vector<Face_identifier> fids;
     auto it = std::back_inserter(fids);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters).face_output_iterator(it));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np(parameters).face_output_iterator(it));
     for (const auto& fid : fids) facets.append(fid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
   } else if (vertices_flag) {
     std::vector<Vertex_identifier> vids;
     auto it = std::back_inserter(vids);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters).vertex_output_iterator(it));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np(parameters).vertex_output_iterator(it));
     for (const auto& vid : vids) vertices.append(vid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
   }
   else {
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, bhd, internal::parse_pmp_np(parameters));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np(parameters));
     return py::make_tuple(std::get<0>(res), facets, vertices);
   }
 }
@@ -577,9 +578,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
 
-  // m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
-  //       py::arg("pmesh"), py::arg("border_halfedge"),
-  //       py::arg("parameters") = py::dict());
+  m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
+        py::arg("pmesh"), py::arg("border_halfedge"),
+        py::arg("parameters") = py::dict());
 
   // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
   //       py::arg("face_range"), py::arg("pm"),

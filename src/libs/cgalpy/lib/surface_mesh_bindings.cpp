@@ -26,6 +26,7 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/export_boost_mesh_utils.hpp"
+#include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
@@ -93,6 +94,11 @@ template <typename SurfaceMesh>
 typename SurfaceMesh::Halfedge_index halfedge(const typename SurfaceMesh::Face_index& f,
                                               const SurfaceMesh& sm)
 { return CGAL::halfedge(f, sm); }
+
+template <typename SurfaceMesh>
+typename SurfaceMesh::Point my_point(const SurfaceMesh& sm,
+                                     const typename SurfaceMesh::Vertex_index& v)
+{ return sm.point(v); }
 
 //
 template <typename SurfaceMesh>
@@ -307,6 +313,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       // void resize(size_type nvertices, size_type nedges, size_type nfaces )
       // join(const Surface_mesh& other)
 
+      .def("point", &sm::my_point<Sm>, ri)
 
 
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
@@ -430,4 +437,7 @@ void export_surface_mesh(py::module_& m) {
         py::arg("e"), py::arg("g"), py::arg("verbose") = false);
   m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Sm_3>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
+
+  // iterators
+  m.def("halfedges_around_face", &boost_utils::my_halfedges_around_face<Sm_3>);
 }

@@ -24,6 +24,7 @@
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/make_circulator.hpp"
 #include "CGALPY/export_boost_mesh_utils.hpp"
+#include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
@@ -373,4 +374,7 @@ void export_polyhedron_3(py::module_& m) {
   m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Prn>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
 
+
+  // iterators
+  m.def("halfedges_around_face", &boost_utils::my_halfedges_around_face<Prn>);
 }
