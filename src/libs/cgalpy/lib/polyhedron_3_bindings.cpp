@@ -55,7 +55,6 @@ Polyhedron_3 read_polygon_mesh(const std::string& filename,
 }
 
 // Read Polygon soup from a file
-template <typename SurfaceMesh>
 auto read_polygon_soup(const std::string& fname,
                               const py::dict& np = py::dict()) {
   std::vector<Point_3> points;
@@ -128,6 +127,9 @@ py::object my_faces(const Polyhedron_3& prn)
 { return make_iterator(prn.facets_begin(), prn.facets_end()); }
 
 //
+py::object my_planes(const Polyhedron_3& prn)
+{ return make_iterator(prn.planes_begin(), prn.planes_end()); }
+
 //
 py::object halfedges_around_facet(const Face& f)
 { return make_circulator(f.facet_begin()); }
@@ -366,10 +368,46 @@ void export_polyhedron_3(py::module_& m) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");
     prn_c.def(py::init<>())
       .def(py::init<const Prn&>())
-      .def("make_tetrahedron", &pol3::make_tetrahedron1, ri)
-      .def("make_tetrahedron", &pol3::make_tetrahedron2, ri)
-      .def("is_tetrahedron", &pol3::is_tetrahedron)
+      .def("add_facet_to_border", &Prn::add_facet_to_border)
+      .def("add_vertex_and_facet_to_border", &Prn::add_vertex_and_facet_to_border)
+      .def("bytes", &Prn::bytes)
+      .def("bytes_reserved", &Prn::bytes_reserved)
+      .def("capacity_of_facets", &Prn::capacity_of_facets)
+      .def("capacity_of_halfedges", &Prn::capacity_of_halfedges)
+      .def("capacity_of_vertices", &Prn::capacity_of_vertices)
       .def("clear", &Prn::clear)
+      .def("create_center_vertex", &Prn::create_center_vertex)
+      .def("erase_all", &Prn::erase_all)
+      .def("erase_center_vertex", &Prn::erase_center_vertex)
+      .def("erase_connected_component", &Prn::erase_connected_component)
+      .def("erase_facet", &Prn::erase_facet)
+      .def("fill_hole", &Prn::fill_hole)
+      .def("flip_edge", &Prn::flip_edge)
+      .def("inside_out", &Prn::inside_out)
+      .def("is_closed", &Prn::is_closed)
+      .def("is_empty", &Prn::is_empty)
+      .def("is_tetrahedron", &pol3::is_tetrahedron)
+      .def("is_triangle", &Prn::is_triangle)
+      .def("is_valid", &Prn::is_valid)
+      .def("join_facet", &Prn::join_facet)
+      .def("join_loop", &Prn::join_loop)
+      .def("join_vertex", &Prn::join_vertex)
+      .def("keep_largest_connected_components", &Prn::keep_largest_connected_components)
+      .def("make_hole", &Prn::make_hole)
+      .def("make_tetrahedron", &pol3::make_tetrahedron1, ri)
+      .def("normalize_border", &Prn::normalize_border)
+      .def("normalized_border_is_valid", &Prn::normalized_border_is_valid)
+      .def("size_of_border_edges", &Prn::size_of_border_edges)
+      .def("size_of_border_halfedges", &Prn::size_of_border_halfedges)
+      .def("size_of_facets", &Prn::size_of_facets)
+      .def("size_of_vertices", &Prn::size_of_vertices)
+      .def("split_facet", &Prn::split_facet)
+      .def("split_loop", &Prn::split_loop)
+      .def("split_vertex", &Prn::split_vertex)
+
+      // .def("is_pure_quad", &Prn::is_pure_quad)
+      // .def("is_pure_bivalent", &Prn::is_pure_bivalent)
+      // .def("is_pure_triangle", &Prn::is_pure_triangle)
       ;
 
     using Vci = Prn::Vertex_const_iterator;
@@ -386,6 +424,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("halfedges", &pol3::my_halfedges, py::keep_alive<0, 1>())
       .def("edges", &pol3::my_edges, py::keep_alive<0, 1>())
       .def("faces", &pol3::my_faces, py::keep_alive<0, 1>())
+      .def("planes", &pol3::my_planes, py::keep_alive<0, 1>())
       ;
 
     add_insertion(prn_c, "__str__");
@@ -403,7 +442,7 @@ void export_polyhedron_3(py::module_& m) {
 #endif
   m.def("read_polygon_mesh", &pol3::read_polygon_mesh<Prn>,
         py::arg("filename"), py::arg("np") = py::dict());
-  m.def("read_polygon_soup", &pol3::read_polygon_soup<Prn>,
+  m.def("read_polygon_soup", &pol3::read_polygon_soup,
         py::arg("fname"), py::arg("np") = py::dict());
   m.def("write_polygon_mesh", &pol3::write_polygon_mesh<Prn>,
         py::arg("filename"), py::arg("pm"), py::arg("np") = py::dict());
