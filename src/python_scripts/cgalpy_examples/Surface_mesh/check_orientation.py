@@ -25,4 +25,4 @@ f = m.add_face(u,v,x);
 if f == Sm.null_face():
   print("The face could not be added because of an orientation error.")
   f = m.add_face(u,x,v);
-  assert(f != Mesh.null_face());
+  assert(f != Sm.null_face());

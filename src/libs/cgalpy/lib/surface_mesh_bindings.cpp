@@ -325,19 +325,63 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("add_face", &sm::add_face<Sm>)
 
       // void remove_vertex(Vertex_index v)
+      .def("remove_vertex", &Sm::remove_vertex)
       // void remove_edge(Edge_index e)
+      .def("remove_edge", &Sm::remove_edge)
       // remove_face(Face_index f)
+      .def("remove_face", &Sm::remove_face)
       // size_type number_of_vertices() const
+      .def("num_vertices", &Sm::num_vertices)
+      .def("number_of_vertices", &Sm::number_of_vertices)
       // size_type number_of_halfedges() const
+      .def("num_halfedges", &Sm::num_halfedges)
+      .def("number_of_halfedges", &Sm::number_of_halfedges)
       // size_type number_of_edges() const
+      .def("num_edges", &Sm::num_edges)
+      .def("number_of_edges", &Sm::number_of_edges)
       // size_type number_of_faces() const
+      .def("num_faces", &Sm::num_faces)
+      .def("number_of_faces", &Sm::number_of_faces)
       // bool is_empty() const
       .def("is_empty", &Sm::is_empty)
       // void clear_without_removing_property_maps();
+      .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps)
       // void clear();
+      .def("clear", &Sm::clear)
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
       // void resize(size_type nvertices, size_type nedges, size_type nfaces )
       // join(const Surface_mesh& other)
+      .def("edge", &Sm::edge)
+      .def("face", &Sm::face)
+      .def("join", &Sm::join)
+      .def("next", &Sm::next)
+      .def("prev", &Sm::prev)
+      .def("resize", &Sm::resize)
+      .def("set_target", &Sm::set_target)
+      .def("has_garbage", &Sm::has_garbage)
+      .def("is_isolated", &Sm::is_isolated)
+      .def("halfedges_end", &Sm::halfedges_end)
+      .def("set_next_only", &Sm::set_next_only)
+      .def("set_prev_only", &Sm::set_prev_only)
+      .def("shrink_to_fit", &Sm::shrink_to_fit)
+      .def("set_recycle_garbage", &Sm::set_recycle_garbage)
+      .def("does_recycle_garbage", &Sm::does_recycle_garbage)
+
+      .def("number_of_removed_edges", &Sm::number_of_removed_edges)
+      .def("number_of_removed_faces", &Sm::number_of_removed_faces)
+      .def("number_of_removed_vertices", &Sm::number_of_removed_vertices)
+      .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges)
+
+
+      .def("null_vertex", &Sm::null_vertex)
+      .def("null_halfedge", &Sm::null_halfedge)
+
+      .def("next_around_source", &Sm::next_around_source)
+      .def("prev_around_source", &Sm::prev_around_source)
+      .def("next_around_target", &Sm::next_around_target)
+      .def("prev_around_target", &Sm::prev_around_target)
+
+      // .def("property_stats", &Sm::property_stats)
 
       .def("point", &sm::my_point<Sm>, ri)
 
@@ -380,7 +424,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 #ifdef CGALPY_HAS_VISUAL
   m.def("draw", &sm::draw<Sm>);
 #endif
-  m.def("null_face", &sm::null_face<Sm>);
 }
 
 // Export Surface_mesh<Pnt>
@@ -399,6 +442,7 @@ void export_surface_mesh(py::module_& m) {
 
   m.def("Halfedge", &sm::halfedge<Sm_3>);
 
+  m.def("null_face", &sm::null_face<Sm_3>);
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>,
         py::arg("fname"), py::arg("parameters") = py::dict());
   m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>,
