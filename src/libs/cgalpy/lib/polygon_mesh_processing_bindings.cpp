@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <CGAL/Named_function_parameters.h>
+#include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
 #include <CGAL/iterator.h>
 #include <CGAL/tags.h>
 #include <iterator>
@@ -27,10 +28,13 @@
 #include <CGAL/Polygon_mesh_processing/remesh.h>
 #include <CGAL/Polygon_mesh_processing/distance.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
+#include <CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
+
+#include "CGALPY/Adaptive_sizing_field.hpp"
 
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/Non_manifold_output_visitor.hpp"
@@ -356,18 +360,12 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
 
 //
 template <typename PolygonMesh>
-PolygonMesh triangulate_faces(PolygonMesh& pm,
+auto triangulate_faces(PolygonMesh& pm,
                               const py::dict& parameters) {
   using Pm = PolygonMesh;
 
   // make a copy of the input mesh
-  Pm out(pm);
-
-  // triangulate the faces
-  // PMP::triangulate_faces(out);
-  if (!PMP::triangulate_faces(out, internal::parse_pmp_np(parameters)))
-    throw std::runtime_error("Could not triangulate faces!");
-  return out;
+  return PMP::triangulate_faces(pm, internal::parse_pmp_np(parameters));
 }
 
 //
@@ -384,6 +382,24 @@ auto isotropic_remeshing(const py::list& face_range,
                                                       stl_input_iterator<Fd>(face_range, false)),
                            target_edge_length, pmesh,
                            internal::parse_pmp_np(parameters));
+}
+
+
+//
+template <typename PolygonMesh, typename SizingFunction>
+auto isotropic_remeshing_sf(const py::list& face_range,
+                                SizingFunction& sizing,
+                                PolygonMesh& pmesh,
+                                const py::dict& parameters = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+
+  PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
+                                                      stl_input_iterator<Fd>(face_range, false)),
+                           sizing, pmesh,
+                           internal::parse_pmp_np(parameters));
+
 }
 
 template <typename PolygonMesh>
@@ -581,6 +597,83 @@ auto split_long_edges(const py::list& edge_range,
                         max_length, pmesh, internal::parse_pmp_np(parameters));
 }
 
+py::list ptvec2ptlist(const std::vector<Point_3>& ptvec) {
+  py::list ptlist;
+  for (auto pt : ptvec) {
+    ptlist.append(pt);
+  }
+  return ptlist;
+}
+
+std::vector<Point_3> ptlist2ptvec(const py::list& ptlist) {
+  std::vector<Point_3> ptvec;
+  ptvec.reserve(py::len(ptlist));
+  for (auto pt : ptlist) {
+    ptvec.push_back(py::cast<Point_3>(pt));
+  }
+  return ptvec;
+}
+
+auto polylist2polyvec(const py::list& polylist) {
+  std::vector<std::vector<size_t>> polyvec;
+  polyvec.reserve(py::len(polylist));
+  for (auto poly : polylist) {
+    std::vector<size_t> poly_ids;
+    // poyl_ids.reserve(py::len(poly));
+    for (auto polyid : poly) {
+      size_t id = py::cast<size_t>(polyid);
+      poly_ids.push_back(id);
+    }
+    polyvec.push_back(poly_ids);
+  }
+  return polyvec;
+}
+
+auto polyvec2polylist(const std::vector<std::vector<size_t>> polyvec) {
+  py::list polylist;
+  for (auto poly : polyvec) {
+    py::list p;
+    for (auto pid : poly) {
+      p.append(pid);
+    }
+    polylist.append(p);
+  }
+  return polylist;
+}
+
+auto is_polygon_soup_a_polygon_mesh(const py::list& polygons) {
+  std::vector<std::vector<std::size_t> > polys = polylist2polyvec(polygons);
+  return PMP::is_polygon_soup_a_polygon_mesh(polys);
+}
+
+// void orient_triangle_soup_with_reference_triangle_mesh(const TriangleMesh& tm_ref,
+//                                                        const PointRange& points,
+//                                                        TriangleRange& triangles,
+//                                                        const NamedParameters1& np1 = parameters::default_values(),
+//                                                        const NamedParameters2& np2 = parameters::default_values())
+
+template <typename PolygonMesh>
+py::list orient_triangle_soup_with_reference_triangle_mesh(const PolygonMesh& tm_ref,
+                                                       const py::list& points,
+                                                       const py::list& triangles,
+                                                       const py::dict& np1 = py::dict(),
+                                                       const py::dict& np2 = py::dict()) {
+  using TAG = CGAL::Sequential_tag;
+  std::vector<Point_3> pts = ptlist2ptvec(points);
+  auto polys = polylist2polyvec(triangles);
+  PMP::orient_triangle_soup_with_reference_triangle_mesh<TAG>(tm_ref, pts, polys,
+                                                       internal::parse_pmp_np(np1), internal::parse_pmp_np(np2));
+  return polyvec2polylist(polys);
+}
+
+py::tuple duplicate_non_manifold_edges_in_polygon_soup(const py::list& points,
+                                                       const py::list& polygons) {
+  auto pointvec = ptlist2ptvec(points);
+  auto polyvec = polylist2polyvec(polygons);
+  bool duplicated = PMP::duplicate_non_manifold_edges_in_polygon_soup(pointvec, polyvec);
+  return py::make_tuple(polyvec2polylist(polyvec), ptvec2ptlist(pointvec), duplicated);
+}
+
 } // namespace pmp
 
 // Export Polygon_mesh_processing
@@ -680,6 +773,10 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
         py::arg("parameters") = py::dict());
 
+  m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Adaptive_sizing_field<Pm>>,
+        py::arg("faces"), py::arg("sizing"), py::arg("pmesh"),
+        py::arg("parameters") = py::dict());
+
   m.def("tangential_relaxation", &pmp::tangential_relaxation<Pm>,
         py::arg("pm"), py::arg("parameters") = py::dict());
 
@@ -713,11 +810,14 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
         py::arg("parameters") = py::dict());
 
-  // default visitor
-  using Dv = pmp::Default_visitor<Pm>;
-  py::class_<Dv>(m, "Default_visitor")
-    .def(py::init<>())
-    ;
+  m.def("is_polygon_soup_a_polygon_mesh", &pmp::is_polygon_soup_a_polygon_mesh,
+        py::arg("polygons"));
+
+  m.def("orient_triangle_soup_with_reference_triangle_mesh", &pmp::orient_triangle_soup_with_reference_triangle_mesh<Pm>,
+        py::arg("tm_ref"), py::arg("points"), py::arg("triangles"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+
+  m.def("duplicate_non_manifold_edges_in_polygon_soup", &pmp::duplicate_non_manifold_edges_in_polygon_soup,
+        py::arg("points"), py::arg("polygons"));
 
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
   py::class_<Pcad>(m, "Principal_curvatures_and_directions")
@@ -726,6 +826,32 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def_ro("max_curvature", &Pcad::max_curvature)
     .def_ro("min_direction", &Pcad::min_direction)
     .def_ro("max_direction", &Pcad::max_direction)
+    ;
+
+  using Asf = pmp::Adaptive_sizing_field<Pm>;
+  py::class_<Asf>(m, "Adaptive_sizing_field")
+    .def(py::init<double, py::tuple, py::list, Pm&>())
+    .def("at", &Asf::at)
+    .def("is_too_long", &Asf::is_too_long)
+    .def("is_too_short", &Asf::is_too_short)
+    .def("split_placement", &Asf::split_placement)
+    .def("register_split_vertex", &Asf::register_split_vertex)
+    ;
+
+  // using Usf = PMP::Uniform_sizing_field<Pm>; // Work in progress
+  // py::class_<Usf>(m, "Uniform_sizing_field")
+  //   .def(py::init<double, 
+  //   .def("at", &Usf::at)
+  //   .def("is_too_long", &Usf::is_too_long)
+  //   .def("is_too_short", &Usf::is_too_short)
+  //   .def("split_placement", &Usf::split_placement)
+  //   .def("register_split_vertex", &Usf::register_split_vertex)
+  //   ;
+
+  // default visitor
+  using Dv = pmp::Default_visitor<Pm>;
+  py::class_<Dv>(m, "Default_visitor")
+    .def(py::init<>())
     ;
 
   // non-manifold

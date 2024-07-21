@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #define CGAL_USE_BASIC_VIEWER
 
@@ -57,6 +58,31 @@ SurfaceMesh read_polygon_mesh(const std::string& filename,
                                     internal::parse_named_parameters(parameters)))
     throw std::runtime_error("Cannot read file!");
   return sm;
+}
+
+// Read Polygon soup from a file
+template <typename SurfaceMesh>
+auto read_polygon_soup(const std::string& fname,
+                              const py::dict& np = py::dict()) {
+  std::vector<Point_3> points;
+  std::vector<std::vector<std::size_t> > polygons;
+
+  if (! CGAL::IO::read_polygon_soup(fname, points, polygons))
+    throw std::runtime_error("Cannot read file!");
+
+  py::list pnt_lst, polygons_lst;
+  for (auto p : points) {
+    pnt_lst.append(p);
+  }
+  for (auto poly : polygons) {
+    py::list new_poly;
+    for (auto pt : poly) {
+      new_poly.append(pt);
+    }
+    polygons_lst.append(new_poly);
+  }
+
+  return py::make_tuple(pnt_lst, polygons_lst);
 }
 
 //
@@ -375,6 +401,8 @@ void export_surface_mesh(py::module_& m) {
 
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>,
         py::arg("fname"), py::arg("parameters") = py::dict());
+  m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>,
+        py::arg("fname"), py::arg("np") = py::dict());
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
   m.def("write_polygon_mesh", &sm::write_polygon_mesh<Sm_3>,
         py::arg("fname"), py::arg("pm"), py::arg("parameters") = py::dict());
@@ -440,4 +468,6 @@ void export_surface_mesh(py::module_& m) {
 
   // iterators
   m.def("halfedges_around_face", &boost_utils::my_halfedges_around_face<Sm_3>);
+  m.def("halfedges_around_target", &boost_utils::my_halfedges_around_target<Sm_3>);
+
 }

@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <boost/math/constants/constants.hpp>
+#include <stdexcept>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <nanobind/nanobind.h>
@@ -52,6 +53,33 @@ Polyhedron_3 read_polygon_mesh(const std::string& filename,
     throw std::runtime_error("Cannot read file!");
   return pol;
 }
+
+// Read Polygon soup from a file
+template <typename SurfaceMesh>
+auto read_polygon_soup(const std::string& fname,
+                              const py::dict& np = py::dict()) {
+  std::vector<Point_3> points;
+  std::vector<std::vector<std::size_t> > polygons;
+
+
+  if (! CGAL::IO::read_polygon_soup(fname, points, polygons))
+    throw std::runtime_error("Cannot read file!");
+
+  py::list pnt_lst, polygons_lst;
+  for (auto p : points) {
+    pnt_lst.append(p);
+  }
+  for (auto poly : polygons) {
+    py::list new_poly;
+    for (auto pt : poly) {
+      new_poly.append(pt);
+    }
+    polygons_lst.append(new_poly);
+  }
+
+  return py::make_tuple(pnt_lst, polygons_lst);
+}
+
 
 // Write a surface mesh to a file.
 template <typename Polyhedron_3>
@@ -375,6 +403,8 @@ void export_polyhedron_3(py::module_& m) {
 #endif
   m.def("read_polygon_mesh", &pol3::read_polygon_mesh<Prn>,
         py::arg("filename"), py::arg("np") = py::dict());
+  m.def("read_polygon_soup", &pol3::read_polygon_soup<Prn>,
+        py::arg("fname"), py::arg("np") = py::dict());
   m.def("write_polygon_mesh", &pol3::write_polygon_mesh<Prn>,
         py::arg("filename"), py::arg("pm"), py::arg("np") = py::dict());
 
@@ -436,4 +466,5 @@ void export_polyhedron_3(py::module_& m) {
 
   // iterators
   m.def("halfedges_around_face", &boost_utils::my_halfedges_around_face<Prn>);
+  m.def("halfedges_around_target", &boost_utils::my_halfedges_around_target<Prn>);
 }

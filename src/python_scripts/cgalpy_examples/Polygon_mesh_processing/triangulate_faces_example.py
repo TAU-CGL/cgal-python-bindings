@@ -24,18 +24,16 @@ if mesh.is_empty():
 if not Sm.is_triangle_mesh(mesh):
     print("Input mesh is not triangulated.")
 
-try:
-    triangulated_mesh = Pmp.triangulate_faces(mesh)
-except:
+if not Pmp.triangulate_faces(mesh):
     raise ValueError("Error: Could not triangulate faces.")
 
 # Confirm that all faces are triangles.
 faces = mesh.faces()
 for f in faces:
-    he = Sm.halfedge(f, triangulated_mesh)
-    if not Sm.is_triangle(he, triangulated_mesh):
+    he = Sm.halfedge(f, mesh)
+    if not Sm.is_triangle(he, mesh):
         raise ValueError("Error: non-triangular face left in mesh.")
 
-Sm.write_polygon_mesh(outfilename, triangulated_mesh)
+Sm.write_polygon_mesh(outfilename, mesh)
 
 
