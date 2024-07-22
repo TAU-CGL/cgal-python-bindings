@@ -165,6 +165,59 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("random_seed"):
         cgal_parameters = cgal_parameters.random_seed(py::cast<unsigned int>(item.second));
         break;
+      case Hash("maximum_number_of_faces"):
+        cgal_parameters = cgal_parameters.maximum_number_of_faces(py::cast<size_t>(item.second));
+        break;
+      case Hash("outward_orientation"):
+        cgal_parameters = cgal_parameters.outward_orientation(py::cast<bool>(item.second));
+        break;
+      case Hash("maximum_number"):
+        cgal_parameters = cgal_parameters.maximum_number(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("erase_all_duplicates"):
+        cgal_parameters = cgal_parameters.erase_all_duplicates(py::cast<bool>(item.second));
+        break;
+      case Hash("require_same_orientation"):
+        cgal_parameters = cgal_parameters.require_same_orientation(py::cast<bool>(item.second));
+        break;
+      case Hash("apply_per_connected_component"):
+        cgal_parameters = cgal_parameters.apply_per_connected_component(py::cast<bool>(item.second));
+        break;
+      case Hash("cap_threshold"):
+        cgal_parameters = cgal_parameters.cap_threshold(py::cast<double>(item.second));
+        break;
+      case Hash("needle_threshold"):
+        cgal_parameters = cgal_parameters.needle_threshold(py::cast<double>(item.second));
+        break;
+      case Hash("collapse_length_threshold"):
+        cgal_parameters = cgal_parameters.collapse_length_threshold(py::cast<double>(item.second));
+        break;
+      case Hash("flip_triangle_height_threshold"):
+        cgal_parameters = cgal_parameters.flip_triangle_height_threshold(py::cast<double>(item.second));
+        break;
+      case Hash("throw_on_self_intersection"):
+        cgal_parameters = cgal_parameters.throw_on_self_intersection(py::cast<bool>(item.second));
+        break;
+      case Hash("clip_volume"):
+        cgal_parameters = cgal_parameters.clip_volume(py::cast<bool>(item.second));
+        break;
+      case Hash("allow_self_intersections"):
+        cgal_parameters = cgal_parameters.allow_self_intersections(py::cast<bool>(item.second));
+        break;
+      case Hash("first_index"):
+        cgal_parameters = cgal_parameters.first_index(py::cast<std::size_t>(item.second));
+        break;
+      case Hash("snapping_tolerance"):
+        cgal_parameters = cgal_parameters.snapping_tolerance(py::cast<double>(item.second));
+        break;
+      case Hash("verbose"):
+        cgal_parameters = cgal_parameters.verbose(py::cast<bool>(item.second));
+        break;
+      case Hash("repair_polygon_soup"):
+        cgal_parameters = cgal_parameters.repair_polygon_soup(py::cast<bool>(item.second));
+        break;
+
+
         
       // default:
       //   throw std::invalid_argument("Unknown parameter: " + key);
