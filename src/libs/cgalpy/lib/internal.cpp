@@ -20,7 +20,7 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
         cgal_parameters = cgal_parameters.stream_precision(py::cast<int>(item.second));
         break;
       case Hash("number_of_points_per_area_unit"):
-        cgal_parameters = cgal_parameters.number_of_points_per_area_unit(py::cast<int>(item.second));
+        cgal_parameters = cgal_parameters.number_of_points_per_area_unit(py::cast<double>(item.second));
         break;
       case Hash("number_of_iterations"):
         cgal_parameters = cgal_parameters.number_of_iterations(py::cast<unsigned int>(item.second));
@@ -144,6 +144,28 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("protect_constraints"):
         cgal_parameters = cgal_parameters.protect_constraints(py::cast<bool>(item.second));
         break;
+      case Hash("number_of_points_on_edges"):
+        cgal_parameters = cgal_parameters.number_of_points_on_edges(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("number_of_points_on_faces"):
+        cgal_parameters = cgal_parameters.number_of_points_on_faces(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("number_of_points_per_distance_unit"):
+        cgal_parameters = cgal_parameters.number_of_points_per_distance_unit(py::cast<double>(item.second));
+        break;
+      case Hash("number_of_points_per_edge"):
+        cgal_parameters = cgal_parameters.number_of_points_per_edge(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("number_of_points_per_face"):
+        cgal_parameters = cgal_parameters.number_of_points_per_face(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("grid_spacing"):
+        cgal_parameters = cgal_parameters.grid_spacing(py::cast<double>(item.second));
+        break;
+      case Hash("random_seed"):
+        cgal_parameters = cgal_parameters.random_seed(py::cast<unsigned int>(item.second));
+        break;
+        
       // default:
       //   throw std::invalid_argument("Unknown parameter: " + key);
       //   break;

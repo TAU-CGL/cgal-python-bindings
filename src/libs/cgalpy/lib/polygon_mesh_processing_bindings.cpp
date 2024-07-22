@@ -528,6 +528,14 @@ auto stitch_borders(PolygonMesh& pmesh,
 }
 
 template <typename PolygonMesh>
+auto sample_triangle_mesh(const PolygonMesh& tm,
+                          const py::dict& np = py::dict()) {
+  PointRange pts;
+  PMP::sample_triangle_mesh(tm, std::back_inserter(pts), internal::parse_pmp_np(np));
+  return vec2list(pts);
+}
+
+template <typename PolygonMesh>
 py::tuple corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                                  const py::dict& np1 = py::dict(),
                                                  const py::dict& np2 = py::dict(),
@@ -909,6 +917,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("stitch_borders", &pmp::stitch_borders<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict());
+
+  m.def("sample_triangle_mesh", &pmp::sample_triangle_mesh<Pm>,
+        py::arg("tm"), py::arg("np") = py::dict());
 
 
   m.def("extract_boundary_cycles", &pmp::extract_boundary_cycles<Pm>,
