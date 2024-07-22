@@ -29,6 +29,7 @@
 #include <CGAL/Polygon_mesh_processing/distance.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h>
+#include <CGAL/Polygon_mesh_processing/autorefinement.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
@@ -262,6 +263,12 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
   return out;
 }
 
+//
+template <typename PolygonMesh>
+auto autorefine(PolygonMesh& tm,
+                const py::dict& np = py::dict()) {
+  PMP::autorefine(tm, internal::parse_pmp_np(np));
+}
 //
 template <typename PolygonMesh>
 py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2,
@@ -745,6 +752,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm1"), py::arg("pm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
+
+  m.def("autorefine", &pmp::autorefine<Pm>,
+        py::arg("tm"), py::arg("np") = py::dict());
 
   m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline<Pm>,
         py::arg("lst1"), py::arg("lst2") = py::list(),
