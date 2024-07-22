@@ -8,6 +8,7 @@
 
 #include <CGAL/Named_function_parameters.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
+#include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
 #include <CGAL/iterator.h>
 #include <CGAL/tags.h>
@@ -53,10 +54,20 @@ namespace pmp {
 
 // helper
 template <typename T>
-py::list vec2list(T vec) {
+py::list vec2list(const T& vec) {
   py::list retv;
   for (const auto& item : vec) {
     retv.append(item);
+  }
+  return retv;
+}
+
+template <typename T>
+std::vector<T> list2vec(const py::list& list) {
+  std::vector<T> retv;
+  retv.reserve(py::len(list));
+  for (const auto& item : list) {
+    retv.push_back(py::cast<T>(item));
   }
   return retv;
 }
@@ -455,6 +466,61 @@ auto surface_intersection(const PolygonMesh& tm1,
   return retv;
 }
 
+auto repair_polygon_soup(const py::list& points,
+                         const py::list& polygons,
+                         const py::dict& np = py::dict()) {
+  PointRange ptvec = list2vec<Point_3>(points);
+  PolygonRange polyvec;
+  polyvec.reserve(py::len(polygons));
+  for (const auto& item : polygons) {
+    polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
+  }
+  PMP::repair_polygon_soup(ptvec, polyvec, internal::parse_pmp_np(np));
+  py::list retpts, retpolys;
+  retpts = vec2list(ptvec);
+  for (const auto& item : polyvec) {
+    retpolys.append(vec2list(item));
+  }
+  return py::make_tuple(retpts, retpolys);
+}
+
+auto triangulate_polygons(const py::list& points,
+                         const py::list& polygons,
+                         const py::dict& np = py::dict()) {
+  PointRange ptvec = list2vec<Point_3>(points);
+  PolygonRange polyvec;
+  polyvec.reserve(py::len(polygons));
+  for (const auto& item : polygons) {
+    polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
+  }
+  PMP::triangulate_polygons(ptvec, polyvec, internal::parse_pmp_np(np));
+  py::list retpts, retpolys;
+  retpts = vec2list(ptvec);
+  for (const auto& item : polyvec) {
+    retpolys.append(vec2list(item));
+  }
+  return py::make_tuple(retpts, retpolys);
+}
+
+auto autorefine_triangle_soup(const py::list& points,
+                         const py::list& polygons,
+                         const py::dict& np = py::dict()) {
+  PointRange ptvec = list2vec<Point_3>(points);
+  PolygonRange polyvec;
+  polyvec.reserve(py::len(polygons));
+  for (const auto& item : polygons) {
+    polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
+  }
+  PMP::autorefine_triangle_soup(ptvec, polyvec, internal::parse_pmp_np(np));
+  py::list retpts, retpolys;
+  retpts = vec2list(ptvec);
+  for (const auto& item : polyvec) {
+    retpolys.append(vec2list(item));
+  }
+  return py::make_tuple(retpts, retpolys);
+}
+
+
 template <typename PolygonMesh>
 auto stitch_borders(PolygonMesh& pmesh,
                     const py::dict& np = py::dict()) {
@@ -831,6 +897,15 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("surface_intersection", &pmp::surface_intersection<Pm>,
         py::arg("tm1"), py::arg("tm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+
+  m.def("repair_polygon_soup", &pmp::repair_polygon_soup,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+
+  m.def("triangulate_polygons", &pmp::triangulate_polygons,
+      py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+
+  m.def("autorefine_triangle_soup", &pmp::autorefine_triangle_soup,
+      py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
 
   m.def("stitch_borders", &pmp::stitch_borders<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict());
