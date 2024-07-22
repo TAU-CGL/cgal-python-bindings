@@ -1,18 +1,18 @@
 import os
 import sys
 import importlib
-if len(sys.argv) < 2:
+if len(sys.argv) < 3:
   sys.path.append(os.path.abspath('../precompiled'))
   lib = 'CGALPY'
 else:
-  lib = sys.argv[1]
+  lib = sys.argv[2]
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Point_3 = Ker.Point_3
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = "meshes/elephant.off" if len(sys.argv) < 3 else sys.argv[2]
+filename = "meshes/elephant.off" if len(sys.argv) < 2 else sys.argv[1]
 
 mesh = Sm.read_polygon_mesh(filename)
 

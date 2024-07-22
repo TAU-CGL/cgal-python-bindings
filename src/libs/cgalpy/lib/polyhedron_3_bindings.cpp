@@ -400,6 +400,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("size_of_border_edges", &Prn::size_of_border_edges)
       .def("size_of_border_halfedges", &Prn::size_of_border_halfedges)
       .def("size_of_facets", &Prn::size_of_facets)
+      .def("size_of_halfedges", &Prn::size_of_halfedges)
       .def("size_of_vertices", &Prn::size_of_vertices)
       .def("split_facet", &Prn::split_facet)
       .def("split_loop", &Prn::split_loop)

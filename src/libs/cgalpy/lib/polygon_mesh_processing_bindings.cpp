@@ -8,6 +8,7 @@
 
 #include <CGAL/Named_function_parameters.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
+#include <CGAL/Polygon_mesh_processing/stitch_borders.h>
 #include <CGAL/iterator.h>
 #include <CGAL/tags.h>
 #include <iterator>
@@ -49,6 +50,16 @@ namespace PMP = CGAL::Polygon_mesh_processing;
 namespace PARMS = CGAL::parameters;
 
 namespace pmp {
+
+// helper
+template <typename T>
+py::list vec2list(T vec) {
+  py::list retv;
+  for (const auto& item : vec) {
+    retv.append(item);
+  }
+  return retv;
+}
 
 /*! Determine whether two polylines intersect.
  * It's a shame that we cannot pass the begin1,end1,begin2,end2
@@ -428,6 +439,29 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
 }
 
 template <typename PolygonMesh>
+auto surface_intersection(const PolygonMesh& tm1,
+                          const PolygonMesh& tm2,
+                          const py::dict& np1 = py::dict(),
+                          const py::dict& np2 = py::dict()) {
+  std::vector< std::vector<Point_3> > polylines;
+  PMP::surface_intersection(tm1, tm2, std::back_inserter(polylines),
+                            internal::parse_pmp_np(np1),
+                            internal::parse_pmp_np(np2));
+  py::list retv;
+  for (const auto& item : polylines) {
+    const auto linelist = vec2list(item);
+    retv.append(linelist);
+  }
+  return retv;
+}
+
+template <typename PolygonMesh>
+auto stitch_borders(PolygonMesh& pmesh,
+                    const py::dict& np = py::dict()) {
+  return PMP::stitch_borders(pmesh, internal::parse_pmp_np(np));
+}
+
+template <typename PolygonMesh>
 py::tuple corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                                  const py::dict& np1 = py::dict(),
                                                  const py::dict& np2 = py::dict(),
@@ -793,6 +827,14 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("approximate_Hausdorff_distance", &pmp::approximate_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+
+  m.def("surface_intersection", &pmp::surface_intersection<Pm>,
+        py::arg("tm1"), py::arg("tm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+
+  m.def("stitch_borders", &pmp::stitch_borders<Pm>,
+        py::arg("pmesh"), py::arg("np") = py::dict());
+
 
   m.def("extract_boundary_cycles", &pmp::extract_boundary_cycles<Pm>,
         py::arg("pm"));
