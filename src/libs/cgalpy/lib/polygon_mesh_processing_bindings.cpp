@@ -32,6 +32,7 @@
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h>
 #include <CGAL/Polygon_mesh_processing/autorefinement.h>
+#include <CGAL/Polygon_mesh_processing/refine.h>
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
@@ -520,6 +521,20 @@ auto autorefine_triangle_soup(const py::list& points,
   return py::make_tuple(retpts, retpolys);
 }
 
+template <typename PolygonMesh>
+auto refine(PolygonMesh& tmesh,
+            const py::list& faces, // those could be other index types
+            const py::dict& np = py::dict()) {
+  using Gt = boost::graph_traits<PolygonMesh>;
+  using Fd = typename Gt::face_descriptor;
+  using Vd = typename Gt::vertex_descriptor;
+  auto faces_vec = list2vec<Fd>(faces);
+  std::vector<Fd> faces_out;
+  std::vector<Vd> vertices_out;
+  PMP::refine(tmesh, faces_vec, std::back_inserter(faces_out), std::back_inserter(vertices_out),
+              internal::parse_pmp_np(np));
+  return py::make_tuple(vec2list(faces_out), vec2list(vertices_out));
+}
 
 template <typename PolygonMesh>
 auto stitch_borders(PolygonMesh& pmesh,
@@ -917,6 +932,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("stitch_borders", &pmp::stitch_borders<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict());
+
+  m.def("refine", &pmp::refine<Pm>,
+        py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict());
 
   m.def("sample_triangle_mesh", &pmp::sample_triangle_mesh<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());

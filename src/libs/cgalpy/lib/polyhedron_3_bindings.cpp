@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/IO/polygon_soup_io.h>
 #include <boost/math/constants/constants.hpp>
 #include <stdexcept>
 #define CGAL_USE_BASIC_VIEWER
@@ -77,6 +78,40 @@ auto read_polygon_soup(const std::string& fname,
   }
 
   return py::make_tuple(pnt_lst, polygons_lst);
+}
+
+auto polylist2polyvec(const py::list& polylist) {
+  std::vector<std::vector<size_t>> polyvec;
+  polyvec.reserve(py::len(polylist));
+  for (auto poly : polylist) {
+    std::vector<size_t> poly_ids;
+    // poyl_ids.reserve(py::len(poly));
+    for (auto polyid : poly) {
+      size_t id = py::cast<size_t>(polyid);
+      poly_ids.push_back(id);
+    }
+    polyvec.push_back(poly_ids);
+  }
+  return polyvec;
+}
+
+std::vector<Point_3> ptlist2ptvec(const py::list& ptlist) {
+  std::vector<Point_3> ptvec;
+  ptvec.reserve(py::len(ptlist));
+  for (auto pt : ptlist) {
+    ptvec.push_back(py::cast<Point_3>(pt));
+  }
+  return ptvec;
+}
+
+auto write_polygon_soup(const std::string& fname,
+                        const py::list& points,
+                        const py::list& polygons,
+                        const py::dict& np = py::dict()) {
+  auto ptlist = ptlist2ptvec(points);
+  auto polyvec = polylist2polyvec(polygons);
+  return CGAL::IO::write_polygon_soup(fname, ptlist, polyvec,
+                                      internal::parse_named_parameters(np));
 }
 
 
@@ -443,10 +478,15 @@ void export_polyhedron_3(py::module_& m) {
 #endif
   m.def("read_polygon_mesh", &pol3::read_polygon_mesh<Prn>,
         py::arg("filename"), py::arg("np") = py::dict());
-  m.def("read_polygon_soup", &pol3::read_polygon_soup,
-        py::arg("fname"), py::arg("np") = py::dict());
   m.def("write_polygon_mesh", &pol3::write_polygon_mesh<Prn>,
         py::arg("filename"), py::arg("pm"), py::arg("np") = py::dict());
+  m.def("read_polygon_soup", &pol3::read_polygon_soup,
+        py::arg("fname"), py::arg("np") = py::dict());
+  m.def("write_polygon_soup", &pol3::write_polygon_soup,
+        py::arg("fname"), py::arg("points"), py::arg("polygons"),
+        py::arg("np") = py::dict());
+
+  m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
 
   m.def("num_vertices", &boost_utils::num_vertices<Prn>);
   m.def("num_edges", &boost_utils::num_edges<Prn>);
