@@ -14,4 +14,5 @@ src/python_scripts/__pycache__/
 *.pyi
 *.tar.gz
 *.whl
+.cache/
 compile_commands.json
