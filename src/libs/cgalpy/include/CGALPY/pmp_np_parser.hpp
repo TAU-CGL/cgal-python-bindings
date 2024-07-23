@@ -1,6 +1,7 @@
 #ifndef PMP_NP_PARSER_HPP
 #define PMP_NP_PARSER_HPP
 
+#include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 #include <boost/range/iterator_range_core.hpp>
 #include <functional>
 
@@ -20,12 +21,12 @@ namespace internal {
 
 namespace PMP = CGAL::Polygon_mesh_processing;
 
-typedef pmp::Polygonal_mesh Mesh;
 typedef Kernel::Point_3 Point;
-typedef boost::graph_traits<Mesh>::vertex_descriptor Vertex_descriptor;
+typedef CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> Named_params;
 
 template <typename Mesh>
 Named_params handle_visitor(const py::handle& visitor, Named_params cgal_parameters) {
+  using Vertex_descriptor = typename boost::graph_traits<Mesh>::vertex_descriptor;
   // nanobind throws a runtime error even when casting to parent class
   try {
     return cgal_parameters.visitor(py::cast<pmp::Default_visitor<Mesh>>(visitor));
@@ -51,7 +52,9 @@ Named_params handle_vertex_principal_curvatures_and_directions(const py::handle&
   return cgal_parameters.vertex_principal_curvatures_and_directions(std::ref(vpcad));
 }
 
+template<typename Mesh>
 Named_params parse_pmp_np(const py::dict& params, Named_params cgal_parameters = CGAL::parameters::all_default()) {
+  using Vertex_descriptor = typename boost::graph_traits<Mesh>::vertex_descriptor;
   // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
     const std::string key = py::cast<std::string>(item.first);

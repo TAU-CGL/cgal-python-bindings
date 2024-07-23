@@ -110,8 +110,8 @@ bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
                          const py::dict& np1 = py::dict(),
                          const py::dict& np2 = py::dict()) {
   return PMP::do_intersect(pm1, pm2,
-                           internal::parse_pmp_np(np1),
-                           internal::parse_pmp_np(np2));
+                           internal::parse_pmp_np<PolygonMesh>(np1),
+                           internal::parse_pmp_np<PolygonMesh>(np2));
 }
 
 //
@@ -121,7 +121,7 @@ bool do_intersect_mesh_polyline(const PolygonMesh& pm, const py::list& lst,
   auto begin = stl_input_iterator<Point_3>(lst);
   auto end = stl_input_iterator<Point_3>(lst, false);
   std::vector<Point_3> polyline(begin, end);
-  return PMP::do_intersect(pm, polyline, internal::parse_pmp_np(parameters));
+  return PMP::do_intersect(pm, polyline, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
 //
@@ -135,7 +135,7 @@ bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
     auto end1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh), false);
     range.emplace_back(begin1, end1);
   }
-  return PMP::do_intersect(pm, range, internal::parse_pmp_np(parameters));
+  return PMP::do_intersect(pm, range, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
 //
@@ -168,7 +168,7 @@ py::list self_intersections(const PolygonMesh& pm,
   auto op = [&] (const std::pair<Fd, Fd>& res) mutable
             { result.append(py::make_tuple(res.first, res.second)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::self_intersections(pm, it, internal::parse_pmp_np(parameters));
+  PMP::self_intersections(pm, it, internal::parse_pmp_np<PolygonMesh>(parameters));
 
   return result;
 }
@@ -190,7 +190,7 @@ py::list self_intersections_faces(const py::list& face_range,
             { result.append(res); };
   auto it = boost::make_function_output_iterator(std::ref(op));
   PMP::self_intersections(boost::make_iterator_range(begin, end), pm, it,
-                          internal::parse_pmp_np(parameters));
+                          internal::parse_pmp_np<PolygonMesh>(parameters));
   return result;
 }
 
@@ -198,7 +198,7 @@ py::list self_intersections_faces(const py::list& face_range,
 template <typename PolygonMesh>
 bool does_self_intersect(const PolygonMesh& pm,
                          const py::dict& parameters = py::dict()) {
-  return PMP::does_self_intersect(pm, internal::parse_pmp_np(parameters));
+  return PMP::does_self_intersect(pm, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
 //
@@ -212,7 +212,7 @@ bool does_self_intersect_faces(const py::list& face_range,
 
   auto begin = stl_input_iterator<Fd>(face_range);
   auto end = stl_input_iterator<Fd>(face_range, false);
-  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_pmp_np(parameters));
+  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
 //
@@ -230,7 +230,7 @@ connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor
   auto op = [&] (Fd face_descriptor) mutable
             { lst.append(py::cast(face_descriptor)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::connected_component(seed_face, pm, it, internal::parse_pmp_np(parameters));
+  PMP::connected_component(seed_face, pm, it, internal::parse_pmp_np<PolygonMesh>(parameters));
   return lst;
 }
 
@@ -242,7 +242,7 @@ py::list connected_components(const PolygonMesh& pm,
 
   auto fccmap = CGAL::get(CGAL::dynamic_face_property_t<std::size_t>(), pm);
   auto num = PMP::connected_components(pm, fccmap,
-                                       internal::parse_pmp_np(parameters));
+                                       internal::parse_pmp_np<PolygonMesh>(parameters));
   py::dict dct;
   for (auto f : CGAL::faces(pm)) dct[py::cast(f)] = py::cast(get(fccmap, f));
   py::list lst;
@@ -279,9 +279,9 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
 
   bool valid =
     PMP::corefine_and_compute_union(pm1, pm2, out,
-                                    internal::parse_pmp_np(np1),
-                                    internal::parse_pmp_np(np2),
-                                    internal::parse_pmp_np(np_out));
+                                    internal::parse_pmp_np<PolygonMesh>(np1),
+                                    internal::parse_pmp_np<PolygonMesh>(np2),
+                                    internal::parse_pmp_np<PolygonMesh>(np_out));
   if (! valid) throw std::runtime_error("Cannot compute union!");
   return out;
 }
@@ -290,7 +290,7 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
 template <typename PolygonMesh>
 auto autorefine(PolygonMesh& tm,
                 const py::dict& np = py::dict()) {
-  PMP::autorefine(tm, internal::parse_pmp_np(np));
+  PMP::autorefine(tm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 //
 template <typename PolygonMesh>
@@ -306,7 +306,7 @@ py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2,
   typedef CGAL::Triple<int, int, int> Triangle_int;
   std::vector<Triangle_int> out;
   PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out),
-                                  internal::parse_pmp_np(parameters));
+                                  internal::parse_pmp_np<PolygonMesh>(parameters));
   // convert to a list of integers
   py::list result;
   for (const auto& t : out) {
@@ -331,9 +331,9 @@ PolygonMesh corefine_and_compute_intersection(PolygonMesh& pm1, PolygonMesh& pm2
 
   bool valid =
     PMP::corefine_and_compute_intersection(pm1, pm2, out,
-                                           internal::parse_pmp_np(np1),
-                                           internal::parse_pmp_np(np2),
-                                           internal::parse_pmp_np(np_out));
+                                           internal::parse_pmp_np<PolygonMesh>(np1),
+                                           internal::parse_pmp_np<PolygonMesh>(np2),
+                                           internal::parse_pmp_np<PolygonMesh>(np_out));
   if (! valid) throw std::runtime_error("Intersection was successfully computed but is non-manifold");
   return out;
 }
@@ -365,25 +365,25 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
     std::vector<Vertex_identifier> vids;
     auto it1 = std::back_inserter(fids);
     auto it2 = std::back_inserter(vids);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np(parameters).face_output_iterator(it1).vertex_output_iterator(it2));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np<PolygonMesh>(parameters).face_output_iterator(it1).vertex_output_iterator(it2));
     for (const auto& fid : fids) facets.append(fid);
     for (const auto& vid : vids) vertices.append(vid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
   } else if (faces_flag) {
     std::vector<Face_identifier> fids;
     auto it = std::back_inserter(fids);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np(parameters).face_output_iterator(it));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np<PolygonMesh>(parameters).face_output_iterator(it));
     for (const auto& fid : fids) facets.append(fid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
   } else if (vertices_flag) {
     std::vector<Vertex_identifier> vids;
     auto it = std::back_inserter(vids);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np(parameters).vertex_output_iterator(it));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np<PolygonMesh>(parameters).vertex_output_iterator(it));
     for (const auto& vid : vids) vertices.append(vid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
   }
   else {
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np(parameters));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np<PolygonMesh>(parameters));
     return py::make_tuple(std::get<0>(res), facets, vertices);
   }
 }
@@ -395,7 +395,7 @@ auto triangulate_faces(PolygonMesh& pm,
   using Pm = PolygonMesh;
 
   // make a copy of the input mesh
-  return PMP::triangulate_faces(pm, internal::parse_pmp_np(parameters));
+  return PMP::triangulate_faces(pm, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
 //
@@ -411,7 +411,7 @@ auto isotropic_remeshing(const py::list& face_range,
   PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                       stl_input_iterator<Fd>(face_range, false)),
                            target_edge_length, pmesh,
-                           internal::parse_pmp_np(parameters));
+                           internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
 
@@ -428,7 +428,7 @@ auto isotropic_remeshing_sf(const py::list& face_range,
   PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                       stl_input_iterator<Fd>(face_range, false)),
                            sizing, pmesh,
-                           internal::parse_pmp_np(parameters));
+                           internal::parse_pmp_np<PolygonMesh>(parameters));
 
 }
 
@@ -437,7 +437,7 @@ auto tangential_relaxation(PolygonMesh& tm,
                                   const py::dict& parameters = py::dict()) {
   using Pm = PolygonMesh;
 
-  PMP::tangential_relaxation(tm, internal::parse_pmp_np(parameters));
+  PMP::tangential_relaxation(tm, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
 template <typename PolygonMesh>
@@ -446,8 +446,8 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
                                       const py::dict& np2 = py::dict()) {
   using TAG = CGAL::Sequential_tag;
   return PMP::approximate_Hausdorff_distance<TAG>(tm1, tm2,
-                                             internal::parse_pmp_np(np1),
-                                             internal::parse_pmp_np(np2));
+                                             internal::parse_pmp_np<PolygonMesh>(np1),
+                                             internal::parse_pmp_np<PolygonMesh>(np2));
 }
 
 template <typename PolygonMesh>
@@ -457,8 +457,8 @@ auto surface_intersection(const PolygonMesh& tm1,
                           const py::dict& np2 = py::dict()) {
   std::vector< std::vector<Point_3> > polylines;
   PMP::surface_intersection(tm1, tm2, std::back_inserter(polylines),
-                            internal::parse_pmp_np(np1),
-                            internal::parse_pmp_np(np2));
+                            internal::parse_pmp_np<PolygonMesh>(np1),
+                            internal::parse_pmp_np<PolygonMesh>(np2));
   py::list retv;
   for (const auto& item : polylines) {
     const auto linelist = vec2list(item);
@@ -476,7 +476,7 @@ auto repair_polygon_soup(const py::list& points,
   for (const auto& item : polygons) {
     polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
   }
-  PMP::repair_polygon_soup(ptvec, polyvec, internal::parse_pmp_np(np));
+  PMP::repair_polygon_soup(ptvec, polyvec, internal::parse_named_parameters(np));
   py::list retpts, retpolys;
   retpts = vec2list(ptvec);
   for (const auto& item : polyvec) {
@@ -494,7 +494,7 @@ auto triangulate_polygons(const py::list& points,
   for (const auto& item : polygons) {
     polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
   }
-  PMP::triangulate_polygons(ptvec, polyvec, internal::parse_pmp_np(np));
+  PMP::triangulate_polygons(ptvec, polyvec, internal::parse_named_parameters(np));
   py::list retpts, retpolys;
   retpts = vec2list(ptvec);
   for (const auto& item : polyvec) {
@@ -512,7 +512,7 @@ auto autorefine_triangle_soup(const py::list& points,
   for (const auto& item : polygons) {
     polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
   }
-  PMP::autorefine_triangle_soup(ptvec, polyvec, internal::parse_pmp_np(np));
+  PMP::autorefine_triangle_soup(ptvec, polyvec, internal::parse_named_parameters(np));
   py::list retpts, retpolys;
   retpts = vec2list(ptvec);
   for (const auto& item : polyvec) {
@@ -532,21 +532,21 @@ auto refine(PolygonMesh& tmesh,
   std::vector<Fd> faces_out;
   std::vector<Vd> vertices_out;
   PMP::refine(tmesh, faces_vec, std::back_inserter(faces_out), std::back_inserter(vertices_out),
-              internal::parse_pmp_np(np));
+              internal::parse_pmp_np<PolygonMesh>(np));
   return py::make_tuple(vec2list(faces_out), vec2list(vertices_out));
 }
 
 template <typename PolygonMesh>
 auto stitch_borders(PolygonMesh& pmesh,
                     const py::dict& np = py::dict()) {
-  return PMP::stitch_borders(pmesh, internal::parse_pmp_np(np));
+  return PMP::stitch_borders(pmesh, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 template <typename PolygonMesh>
 auto sample_triangle_mesh(const PolygonMesh& tm,
                           const py::dict& np = py::dict()) {
   PointRange pts;
-  PMP::sample_triangle_mesh(tm, std::back_inserter(pts), internal::parse_pmp_np(np));
+  PMP::sample_triangle_mesh(tm, std::back_inserter(pts), internal::parse_pmp_np<PolygonMesh>(np));
   return vec2list(pts);
 }
 
@@ -573,12 +573,12 @@ py::tuple corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh&
     PMP::corefine_and_compute_boolean_operations(
       pm1, pm2,
       {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
-      internal::parse_pmp_np(np1),
-      internal::parse_pmp_np(np2),
-      std::make_tuple(internal::parse_pmp_np(np_out_union),
-                      internal::parse_pmp_np(np_out_intersection),
-                      internal::parse_pmp_np(np_out_tm1_minus_tm2),
-                      internal::parse_pmp_np(np_out_tm2_minus_tm1)));
+      internal::parse_pmp_np<PolygonMesh>(np1),
+      internal::parse_pmp_np<PolygonMesh>(np2),
+      std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                      internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                      internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                      internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
 
   return py::make_tuple(res[0] ? py::cast(out_union) : py::none(),
                         res[1] ? py::cast(out_intersection) : py::none(),
@@ -591,7 +591,7 @@ template <typename PolygonMesh>
 Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::face_descriptor& f,
                              const PolygonMesh& sm,
                              const py::dict& np = py::dict()) {
-  return PMP::compute_face_normal(f, sm, internal::parse_pmp_np(np));
+  return PMP::compute_face_normal(f, sm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 template <typename PolygonMesh>
@@ -613,7 +613,7 @@ template <typename PolygonMesh>
 Vector_3 compute_vertex_normal(const typename boost::graph_traits<PolygonMesh>::vertex_descriptor& v,
                                const PolygonMesh& sm,
                                const py::dict& np = py::dict()) {
-  return PMP::compute_vertex_normal(v, sm, internal::parse_pmp_np(np));
+  return PMP::compute_vertex_normal(v, sm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 template <typename PolygonMesh>
@@ -641,7 +641,7 @@ py::tuple compute_normals(const PolygonMesh& pm) {
 template <typename PolygonMesh>
 void interpolated_corrected_curvatures(const PolygonMesh& pm,
                                        const py::dict& np = py::dict()) {
-  PMP::interpolated_corrected_curvatures(pm, internal::parse_pmp_np(np));
+  PMP::interpolated_corrected_curvatures(pm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 template <typename PolygonMesh>
@@ -658,24 +658,24 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
   if (vertex_mean_curvature && vertex_Gaussian_curvature) {
     double vmc_d, vGc;
     PMP::interpolated_corrected_curvatures(v, pm,
-    internal::parse_pmp_np(np).vertex_mean_curvature(std::ref(vmc_d)).vertex_Gaussian_curvature(std::ref(vGc)));
+    internal::parse_pmp_np<PolygonMesh>(np).vertex_mean_curvature(std::ref(vmc_d)).vertex_Gaussian_curvature(std::ref(vGc)));
     vmc = py::cast(vmc_d);
     vgc = py::cast(vGc);
   }
   else if (vertex_mean_curvature) {
     double vmc_d;
     PMP::interpolated_corrected_curvatures(v, pm,
-    internal::parse_pmp_np(np).vertex_mean_curvature(std::ref(vmc_d)));
+    internal::parse_pmp_np<PolygonMesh>(np).vertex_mean_curvature(std::ref(vmc_d)));
     vmc = py::cast(vmc_d);
   }
   else if (vertex_Gaussian_curvature) {
     double vGc;
     PMP::interpolated_corrected_curvatures(v, pm,
-    internal::parse_pmp_np(np).vertex_Gaussian_curvature(std::ref(vGc)));
+    internal::parse_pmp_np<PolygonMesh>(np).vertex_Gaussian_curvature(std::ref(vGc)));
     vgc = py::cast(vGc);
   }
   else {
-    PMP::interpolated_corrected_curvatures(v, pm, internal::parse_pmp_np(np));
+    PMP::interpolated_corrected_curvatures(v, pm, internal::parse_pmp_np<PolygonMesh>(np));
   }
   return py::make_tuple(vmc, vgc);
 
@@ -695,7 +695,7 @@ auto border_halfedges(const py::list& face_range,
 
   std::vector<Hd> out;
   PMP::border_halfedges(boost::make_iterator_range(begin, end), pm, std::back_inserter(out),
-                        internal::parse_pmp_np(parameters));
+                        internal::parse_pmp_np<PolygonMesh>(parameters));
   py::list result;
   for (const auto& hd : out) result.append(hd);
   return result;
@@ -724,7 +724,7 @@ auto split_long_edges(const py::list& edge_range,
   std::vector<Ed> edge_vec;
   for (const auto& ed : edge_range) edge_vec.push_back(py::cast<Ed>(ed));
   PMP::split_long_edges(edge_vec,
-                        max_length, pmesh, internal::parse_pmp_np(parameters));
+                        max_length, pmesh, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
 py::list ptvec2ptlist(const std::vector<Point_3>& ptvec) {
@@ -792,7 +792,7 @@ py::list orient_triangle_soup_with_reference_triangle_mesh(const PolygonMesh& tm
   std::vector<Point_3> pts = ptlist2ptvec(points);
   auto polys = polylist2polyvec(triangles);
   PMP::orient_triangle_soup_with_reference_triangle_mesh<TAG>(tm_ref, pts, polys,
-                                                       internal::parse_pmp_np(np1), internal::parse_pmp_np(np2));
+                                                       internal::parse_pmp_np<PolygonMesh>(np1), internal::parse_pmp_np<PolygonMesh>(np2));
   return polyvec2polylist(polys);
 }
 
