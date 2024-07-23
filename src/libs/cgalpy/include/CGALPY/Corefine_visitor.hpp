@@ -9,6 +9,8 @@
 #ifndef CGALPY_COREFINE_VISITOR_HPP
 #define CGALPY_COREFINE_VISITOR_HPP
 
+#include <CGAL/Polygon_mesh_processing/internal/Corefinement/face_graph_utils.h>
+#include <boost/graph/graph_traits.hpp>
 #include <nanobind/nanobind.h>
 
 namespace py = nanobind;

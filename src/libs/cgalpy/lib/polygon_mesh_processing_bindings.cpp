@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <CGAL/Named_function_parameters.h>
+#include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
 #include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
@@ -43,6 +44,7 @@
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/Non_manifold_output_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
+#include "CGALPY/Default_orientation_visitor.hpp"
 
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/internal.hpp"
@@ -804,6 +806,19 @@ py::tuple duplicate_non_manifold_edges_in_polygon_soup(const py::list& points,
   return py::make_tuple(polyvec2polylist(polyvec), ptvec2ptlist(pointvec), duplicated);
 }
 
+template <typename PolygonMesh>
+py::tuple orient_polygon_soup(const py::list& points,
+                              const py::list& polygons,
+                              const py::dict& np = py::dict()) {
+  PointRange pts = ptlist2ptvec(points);
+  PolygonRange polys = polylist2polyvec(polygons);
+
+  bool success = PMP::orient_polygon_soup(pts, polys,
+                           internal::parse_pmp_np<PolygonMesh>(np));
+  if (!success) throw std::runtime_error("Polygon soup orientation failed!");
+  return py::make_tuple(ptvec2ptlist(pts), polyvec2polylist(polys));
+}
+
 } // namespace pmp
 
 // Export Polygon_mesh_processing
@@ -975,6 +990,10 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("duplicate_non_manifold_edges_in_polygon_soup", &pmp::duplicate_non_manifold_edges_in_polygon_soup,
         py::arg("points"), py::arg("polygons"));
 
+  m.def("orient_polygon_soup", &pmp::orient_polygon_soup<Pm>,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+
+
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
   py::class_<Pcad>(m, "Principal_curvatures_and_directions")
     .def(py::init<>())
@@ -1008,6 +1027,18 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Dv = pmp::Default_visitor<Pm>;
   py::class_<Dv>(m, "Default_visitor")
     .def(py::init<>())
+    ;
+
+  // using Dov = pmp::Default_orientation_visitor<Pm>;
+  typedef pmp::Dummy_default_orienatation_visitor Dumdov;
+  // py::class_<Dumdov/*, Dov*/>(m, "Default_orientation_visitor")
+  py::class_<Dumdov>(m, "Default_orientation_visitor")
+    .def(py::init<>())
+    .def("set_non_manifold_edge", &Dumdov::set_non_manifold_edge)
+    .def("set_non_manifold_vertex", &Dumdov::set_non_manifold_vertex)
+    .def("set_duplicated_vertex", &Dumdov::set_duplicated_vertex)
+    .def("set_vertex_id_in_polygon_replaced", &Dumdov::set_vertex_id_in_polygon_replaced)
+    .def("set_polygon_orientation_reversed", &Dumdov::set_polygon_orientation_reversed)
     ;
 
   // non-manifold

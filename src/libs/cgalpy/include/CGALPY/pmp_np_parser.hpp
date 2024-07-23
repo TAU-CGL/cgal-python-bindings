@@ -9,6 +9,7 @@
 #include "CGALPY/polygon_mesh_processing_config.hpp"
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
+#include "CGALPY/Default_orientation_visitor.hpp"
 #include "CGALPY/Non_manifold_output_visitor.hpp"
 #include "CGALPY/kernel_types.hpp"
 
@@ -40,6 +41,11 @@ Named_params handle_visitor(const py::handle& visitor, Named_params cgal_paramet
   }
   try {
     return cgal_parameters.visitor(py::cast<pmp::Non_manifold_output_visitor<Mesh>>(visitor));
+  }
+  catch (const std::exception&) {
+  }
+  try {
+    return cgal_parameters.visitor(py::cast<pmp::Dummy_default_orienatation_visitor>(visitor));
   }
   catch (const std::exception&) {
   }
