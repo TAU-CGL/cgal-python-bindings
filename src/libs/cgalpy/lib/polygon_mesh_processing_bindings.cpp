@@ -8,9 +8,11 @@
 
 #include <CGAL/Named_function_parameters.h>
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
+#include <CGAL/Polygon_mesh_processing/orientation.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
 #include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
+#include <CGAL/boost/graph/helpers.h>
 #include <CGAL/iterator.h>
 #include <CGAL/tags.h>
 #include <boost/graph/graph_traits.hpp>
@@ -879,6 +881,12 @@ py::tuple polygon_soup_to_polygon_mesh(const py::list& points,
   }
 }
 
+template <typename PolygonMesh>
+void orient_to_bound_a_volume(PolygonMesh& tm,
+                              const py::dict& np = py::dict()) {
+  PMP::orient_to_bound_a_volume(tm, internal::parse_pmp_np<PolygonMesh>(np));
+}
+
 void set_polygon_orientation_reversed(Default_orientation_visitor& v,
                            const std::function<void(std::size_t)>& f){
   v.set_polygon_orientation_reversed(f);
@@ -1086,6 +1094,17 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("polygon_soup_to_polygon_mesh", &pmp::polygon_soup_to_polygon_mesh<Pm>,
         py::arg("points"), py::arg("polygons"), py::arg("np_ps") = py::dict(), py::arg("np_pm") = py::dict());
+
+  m.def("is_closed", &CGAL::is_closed<Pm>,
+        py::arg("g"));
+
+  m.def("orient_to_bound_a_volume", &pmp::orient_to_bound_a_volume<Pm>,
+        py::arg("tm"), py::arg("np") = py::dict());
+
+  m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
+        py::arg("pmesh"));
+
+  // m.def("reverse_face_orientations")
 
   m.def("set_non_manifold_edge", &pmp::set_non_manifold_edge);
   m.def("set_non_manifold_vertex", &pmp::set_non_manifold_vertex);

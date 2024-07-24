@@ -63,4 +63,10 @@ mesh, pv, pf = Pmp.polygon_soup_to_polygon_mesh(points, polygons,
 
 index = 0
 
-#### Work in progress
+if (Pmp.is_closed(mesh)):
+    Pmp.orient_to_bound_a_volume(mesh)
+
+Sm.write_polygon_mesh("tet-oriented1.off", mesh)
+Pmp.reverse_face_orientations(mesh)
+Sm.write_polygon_mesh("tet-oriented2.off", mesh)
+
