@@ -38,6 +38,7 @@
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h>
 #include <CGAL/Polygon_mesh_processing/autorefinement.h>
 #include <CGAL/Polygon_mesh_processing/refine.h>
+#include <CGAL/Polygon_mesh_processing/clip.h>
 
 #include "CGALPY/helpers.hpp"
 
@@ -203,6 +204,41 @@ bool does_self_intersect_faces(const py::list& face_range,
   return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
+template <typename PolygonMesh>
+void corefine(PolygonMesh& tm1, PolygonMesh& tm2,
+              const py::dict& np1 = py::dict(),
+              const py::dict& np2 = py::dict()) {
+  // np1 can have a corefinement visitor
+  bool visitor = np1.contains("visitor");
+  if (visitor) {
+    // try to cast to Non_manifold_output_visitor or Default_visitor
+    try {
+      auto visitor = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np1["visitor"]);
+      PMP::corefine(tm1, tm2, internal::parse_pmp_np<PolygonMesh>(np1).visitor(visitor),
+                    internal::parse_pmp_np<PolygonMesh>(np2));
+    } catch (const py::cast_error&) {
+    }
+    try {
+      auto visitor = py::cast<pmp::Default_visitor<PolygonMesh>>(np1["visitor"]);
+      PMP::corefine(tm1, tm2, internal::parse_pmp_np<PolygonMesh>(np1).visitor(visitor),
+                    internal::parse_pmp_np<PolygonMesh>(np2));
+    } catch (const py::cast_error&) {
+    }
+    try {
+      auto visitor = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np1["visitor"]);
+      PMP::corefine(tm1, tm2, internal::parse_pmp_np<PolygonMesh>(np1).visitor(visitor),
+                    internal::parse_pmp_np<PolygonMesh>(np2));
+    }
+    catch (const py::cast_error&) {
+    }
+    throw std::runtime_error("Visitor type not recognized");
+  }
+  else {
+    PMP::corefine(tm1, tm2, internal::parse_pmp_np<PolygonMesh>(np1),
+                  internal::parse_pmp_np<PolygonMesh>(np2));
+  }
+}
+
 //
 template <typename PolygonMesh>
 py::list
@@ -255,6 +291,273 @@ py::list extract_boundary_cycles(PolygonMesh& pm) {
   return result;
 }
 
+template <typename PolygonMesh>
+py::tuple corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
+                                                 const py::dict& np1 = py::dict(),
+                                                 const py::dict& np2 = py::dict(),
+                                                 const py::tuple& np_out = py::tuple()) {
+  using Pm = PolygonMesh;
+
+  Pm out_union, out_intersection, tm1_minus_tm2, tm2_minus_tm1;
+  py::dict np_out_union, np_out_intersection, np_out_tm1_minus_tm2, np_out_tm2_minus_tm1;
+
+  if (np_out.size() > 0)
+    np_out_union = py::cast<py::dict>(np_out[0]);
+  if (np_out.size() > 1)
+    np_out_intersection = py::cast<py::dict>(np_out[1]);
+  if (np_out.size() > 2)
+    np_out_tm1_minus_tm2 = py::cast<py::dict>(np_out[2]);
+  if (np_out.size() > 3)
+    np_out_tm2_minus_tm1 = py::cast<py::dict>(np_out[3]);
+
+  std::array<bool, 4> res;
+  bool visitor1 = np_out_union.contains("visitor");
+  bool visitor2 = np_out_intersection.contains("visitor");
+
+  if (visitor1 && visitor2) {
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<Pm>>(np_out_union["visitor"]);
+      auto v2 = py::cast<pmp::Default_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<Pm>>(np_out_union["visitor"]);
+      auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<Pm>>(np_out_union["visitor"]);
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np_out_union["visitor"]);
+      auto v2 = py::cast<pmp::Default_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np_out_union["visitor"]);
+      auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np_out_union["visitor"]);
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out_union["visitor"]);
+      auto v2 = py::cast<pmp::Default_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out_union["visitor"]);
+      auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out_union["visitor"]);
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+  }
+  else if (visitor1) {
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<Pm>>(np_out_union["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np_out_union["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out_union["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+        internal::parse_pmp_np<PolygonMesh>(np2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+  }
+  else if (visitor2) {
+    try {
+      auto v2 = py::cast<pmp::Default_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out_intersection["visitor"]);
+      res = PMP::corefine_and_compute_boolean_operations(
+        pm1, pm2,
+        {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+        internal::parse_pmp_np<PolygonMesh>(np1),
+        internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2),
+        std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                        internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+    }
+    catch (const py::cast_error& e) {
+    }
+  }
+  else {
+    res = PMP::corefine_and_compute_boolean_operations(
+      pm1, pm2,
+      {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
+      internal::parse_pmp_np<PolygonMesh>(np1),
+      internal::parse_pmp_np<PolygonMesh>(np2),
+      std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
+                      internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
+                      internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
+                      internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
+  }
+
+  return py::make_tuple(res[0] ? py::cast(out_union) : py::none(),
+                        res[1] ? py::cast(out_intersection) : py::none(),
+                        res[2] ? py::cast(tm1_minus_tm2) : py::none(),
+                        res[3] ? py::cast(tm2_minus_tm1) : py::none());
+
+}
+
 //
 template <typename PolygonMesh>
 PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
@@ -264,13 +567,93 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
   using Pm = PolygonMesh;
 
   Pm out;
-
-  bool valid =
-    PMP::corefine_and_compute_union(pm1, pm2, out,
-                                    internal::parse_pmp_np<PolygonMesh>(np1),
-                                    internal::parse_pmp_np<PolygonMesh>(np2),
-                                    internal::parse_pmp_np<PolygonMesh>(np_out));
+  bool visitor = np_out.contains("visitor");
+  bool valid;
+  if (visitor) {
+    // try to cast to Non_manifold_output_visitor or Default_visitor
+    try {
+      auto visitor = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out["visitor"]);
+      valid = PMP::corefine_and_compute_union(pm1, pm2, out,
+                                              internal::parse_pmp_np<PolygonMesh>(np1),
+                                              internal::parse_pmp_np<PolygonMesh>(np2),
+                                              internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+    } catch (const py::cast_error&) {
+    }
+    try {
+      auto visitor = py::cast<pmp::Default_visitor<Pm>>(np_out["visitor"]);
+      valid = PMP::corefine_and_compute_union(pm1, pm2, out,
+                                              internal::parse_pmp_np<PolygonMesh>(np1),
+                                              internal::parse_pmp_np<PolygonMesh>(np2),
+                                              internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+    } catch (const py::cast_error&) {
+    }
+    try {
+      auto visitor = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_out["visitor"]);
+      valid = PMP::corefine_and_compute_union(pm1, pm2, out,
+                                              internal::parse_pmp_np<PolygonMesh>(np1),
+                                              internal::parse_pmp_np<PolygonMesh>(np2),
+                                              internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+    }
+    catch (const py::cast_error&) {
+    }
+    throw std::runtime_error("Visitor type not recognized");
+  }
+  else {
+    valid = PMP::corefine_and_compute_union(pm1, pm2, out,
+                                            internal::parse_pmp_np<PolygonMesh>(np1),
+                                            internal::parse_pmp_np<PolygonMesh>(np2),
+                                            internal::parse_pmp_np<PolygonMesh>(np_out));
+  }
   if (! valid) throw std::runtime_error("Cannot compute union!");
+  return out;
+}
+
+//
+template <typename PolygonMesh>
+PolygonMesh corefine_and_compute_difference(PolygonMesh& pm1, PolygonMesh& pm2,
+                                          const py::dict& np1 = py::dict(),
+                                          const py::dict& np2 = py::dict(),
+                                          const py::dict& np_out = py::dict()) {
+  using Pm = PolygonMesh;
+  bool visitor = np_out.contains("visitor");
+  Pm out;
+  bool valid;
+  if (visitor) {
+    // try to cast to Non_manifold_output_visitor or Default_visitor
+    try {
+      auto visitor = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out["visitor"]);
+      valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                           internal::parse_pmp_np<PolygonMesh>(np1),
+                                           internal::parse_pmp_np<PolygonMesh>(np2),
+                                           internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+    } catch (const py::cast_error&) {
+    }
+    try {
+      auto visitor = py::cast<pmp::Default_visitor<Pm>>(np_out["visitor"]);
+      valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                           internal::parse_pmp_np<PolygonMesh>(np1),
+                                           internal::parse_pmp_np<PolygonMesh>(np2),
+                                           internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+    } catch (const py::cast_error&) {
+    }
+    try {
+      auto visitor = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_out["visitor"]);
+      valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                           internal::parse_pmp_np<PolygonMesh>(np1),
+                                           internal::parse_pmp_np<PolygonMesh>(np2),
+                                           internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+    }
+    catch (const py::cast_error&) {
+    }
+    throw std::runtime_error("Visitor type not recognized");
+  }
+  else {
+    valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                         internal::parse_pmp_np<PolygonMesh>(np1),
+                                         internal::parse_pmp_np<PolygonMesh>(np2),
+                                         internal::parse_pmp_np<PolygonMesh>(np_out));
+  }
+  if (! valid) throw std::runtime_error("Cannot compute difference!");
   return out;
 }
 
@@ -302,27 +685,52 @@ py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2,
   }
   return result;
 }
-// corefine_and_compute_intersection(      TriangleMesh& tm1,
-//                                         TriangleMesh& tm2,
-//                                         TriangleMesh& tm_out,
-//                                   const NamedParameters1& np1 = parameters::default_values(),
-//                                   const NamedParameters2& np2 = parameters::default_values(),
-//                                   const NamedParametersOut& np_out = parameters::default_values())
+
 template <typename PolygonMesh>
 PolygonMesh corefine_and_compute_intersection(PolygonMesh& pm1, PolygonMesh& pm2,
                                              const py::dict& np1 = py::dict(),
                                              const py::dict& np2 = py::dict(),
                                              const py::dict& np_out = py::dict()) {
   using Pm = PolygonMesh;
-
   Pm out;
-
-  bool valid =
-    PMP::corefine_and_compute_intersection(pm1, pm2, out,
-                                           internal::parse_pmp_np<PolygonMesh>(np1),
-                                           internal::parse_pmp_np<PolygonMesh>(np2),
-                                           internal::parse_pmp_np<PolygonMesh>(np_out));
-  if (! valid) throw std::runtime_error("Intersection was successfully computed but is non-manifold");
+  bool visitor = np_out.contains("visitor");
+  bool valid;
+  if (visitor) {
+    // try to cast to Non_manifold_output_visitor or Default_visitor
+    try {
+      auto visitor = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out["visitor"]);
+      valid = PMP::corefine_and_compute_intersection(pm1, pm2, out,
+                                              internal::parse_pmp_np<PolygonMesh>(np1),
+                                              internal::parse_pmp_np<PolygonMesh>(np2),
+                                              internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+    } catch (const py::cast_error&) {
+    }
+    try {
+      auto visitor = py::cast<pmp::Default_visitor<Pm>>(np_out["visitor"]);
+      valid = PMP::corefine_and_compute_intersection(pm1, pm2, out,
+                                              internal::parse_pmp_np<PolygonMesh>(np1),
+                                              internal::parse_pmp_np<PolygonMesh>(np2),
+                                              internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+    } catch (const py::cast_error&) {
+    }
+    try {
+      auto visitor = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_out["visitor"]);
+      valid = PMP::corefine_and_compute_intersection(pm1, pm2, out,
+                                              internal::parse_pmp_np<PolygonMesh>(np1),
+                                              internal::parse_pmp_np<PolygonMesh>(np2),
+                                              internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+    }
+    catch (const py::cast_error&) {
+    }
+    throw std::runtime_error("Visitor type not recognized");
+  }
+  else {
+    valid = PMP::corefine_and_compute_intersection(pm1, pm2, out,
+                                            internal::parse_pmp_np<PolygonMesh>(np1),
+                                            internal::parse_pmp_np<PolygonMesh>(np2),
+                                            internal::parse_pmp_np<PolygonMesh>(np_out));
+  }
+  if (! valid) throw std::runtime_error("Cannot compute intersection!");
   return out;
 }
 
@@ -455,6 +863,138 @@ auto surface_intersection(const PolygonMesh& tm1,
   return retv;
 }
 
+template <typename PolygonMesh>
+bool clip(PolygonMesh& tm, PolygonMesh& clipper,
+          const py::dict& np1 = py::dict(),
+          const py::dict& np2 = py::dict()) {
+  using Pm = PolygonMesh;
+  bool visitor1 = np1.contains("visitor");
+  bool visitor2 = np2.contains("visitor");
+  bool res;
+  if (visitor1 && visitor2) {
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<Pm>>(np1["visitor"]);
+      auto v2 = py::cast<pmp::Default_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<Pm>>(np1["visitor"]);
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<Pm>>(np1["visitor"]);
+      auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np1["visitor"]);
+      auto v2 = py::cast<pmp::Default_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np1["visitor"]);
+      auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np1["visitor"]);
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np1["visitor"]);
+      auto v2 = py::cast<pmp::Default_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np1["visitor"]);
+      auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np1["visitor"]);
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+  } else if (visitor1) {
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<Pm>>(np1["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np1["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np1["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1).visitor(v1),
+                      internal::parse_pmp_np<PolygonMesh>(np2));
+    }
+    catch (const py::cast_error& e) {
+    }
+  } else if (visitor2) {
+    try {
+      auto v2 = py::cast<pmp::Default_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np2["visitor"]);
+      res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1),
+                      internal::parse_pmp_np<PolygonMesh>(np2).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+  } else {
+    res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np1),
+                    internal::parse_pmp_np<PolygonMesh>(np2));
+  }
+  return res;
+}
+
 auto repair_polygon_soup(const py::list& points,
                          const py::list& polygons,
                          const py::dict& np = py::dict()) {
@@ -500,7 +1040,9 @@ auto autorefine_triangle_soup(const py::list& points,
   for (const auto& item : polygons) {
     polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
   }
+
   PMP::autorefine_triangle_soup(ptvec, polyvec, internal::parse_named_parameters(np));
+
   py::list retpts, retpolys;
   retpts = vec2list(ptvec);
   for (const auto& item : polyvec) {
@@ -536,43 +1078,6 @@ auto sample_triangle_mesh(const PolygonMesh& tm,
   PointRange pts;
   PMP::sample_triangle_mesh(tm, std::back_inserter(pts), internal::parse_pmp_np<PolygonMesh>(np));
   return vec2list(pts);
-}
-
-template <typename PolygonMesh>
-py::tuple corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
-                                                 const py::dict& np1 = py::dict(),
-                                                 const py::dict& np2 = py::dict(),
-                                                 const py::tuple& np_out = py::tuple()) {
-  using Pm = PolygonMesh;
-
-  Pm out_union, out_intersection, tm1_minus_tm2, tm2_minus_tm1;
-  py::dict np_out_union, np_out_intersection, np_out_tm1_minus_tm2, np_out_tm2_minus_tm1;
-
-  if (np_out.size() > 0)
-    np_out_union = py::cast<py::dict>(np_out[0]);
-  if (np_out.size() > 1)
-    np_out_intersection = py::cast<py::dict>(np_out[1]);
-  if (np_out.size() > 2)
-    np_out_tm1_minus_tm2 = py::cast<py::dict>(np_out[2]);
-  if (np_out.size() > 3)
-    np_out_tm2_minus_tm1 = py::cast<py::dict>(np_out[3]);
-
-  std::array<bool, 4> res =
-    PMP::corefine_and_compute_boolean_operations(
-      pm1, pm2,
-      {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1},
-      internal::parse_pmp_np<PolygonMesh>(np1),
-      internal::parse_pmp_np<PolygonMesh>(np2),
-      std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out_union),
-                      internal::parse_pmp_np<PolygonMesh>(np_out_intersection),
-                      internal::parse_pmp_np<PolygonMesh>(np_out_tm1_minus_tm2),
-                      internal::parse_pmp_np<PolygonMesh>(np_out_tm2_minus_tm1)));
-
-  return py::make_tuple(res[0] ? py::cast(out_union) : py::none(),
-                        res[1] ? py::cast(out_intersection) : py::none(),
-                        res[2] ? py::cast(tm1_minus_tm2) : py::none(),
-                        res[3] ? py::cast(tm2_minus_tm1) : py::none());
-
 }
 
 template <typename PolygonMesh>
@@ -689,15 +1194,136 @@ auto border_halfedges(const py::list& face_range,
   return result;
 }
 
-// template<typename PolygonMesh
-//        , typename EdgeRange
-//        , typename SizingValue
-//        , typename NamedParameters = parameters::Default_named_parameters
-//        , typename = typename std::enable_if_t<std::is_convertible_v<SizingValue, double>>>
-// void split_long_edges(const EdgeRange& edges
-//                     , const SizingValue max_length
-//                     , PolygonMesh& pmesh
-//                     , const NamedParameters& np = parameters::default_values())
+template <typename PolygonMesh>
+void split(PolygonMesh& pm,
+           PolygonMesh& splitter,
+           const py::dict& np_tm = py::dict(),
+           const py::dict& np_s = py::dict()) {
+  // this can also have 2 visitors
+  bool visitor1 = np_tm.contains("visitor");
+  bool visitor2 = np_s.contains("visitor");
+  if (visitor1 && visitor2) {
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<PolygonMesh>>(np_tm["visitor"]);
+      auto v2 = py::cast<pmp::Default_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<PolygonMesh>>(np_tm["visitor"]);
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<PolygonMesh>>(np_tm["visitor"]);
+      auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
+      auto v2 = py::cast<pmp::Default_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
+      auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
+      auto v2 = py::cast<pmp::Default_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
+      auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+  } else if (visitor1) {
+    try {
+      auto v1 = py::cast<pmp::Default_visitor<PolygonMesh>>(np_tm["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
+                 internal::parse_pmp_np<PolygonMesh>(np_s));
+    }
+    catch (const py::cast_error& e) {
+    }
+  } else if (visitor2) {
+    try {
+      auto v2 = py::cast<pmp::Default_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+    try {
+      auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm),
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+    }
+    catch (const py::cast_error& e) {
+    }
+  } else {
+    PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm),
+               internal::parse_pmp_np<PolygonMesh>(np_s));
+  }
+}
 
 template <typename PolygonMesh>
 auto split_long_edges(const py::list& edge_range,
@@ -764,12 +1390,6 @@ auto is_polygon_soup_a_polygon_mesh(const py::list& polygons) {
   return PMP::is_polygon_soup_a_polygon_mesh(polys);
 }
 
-// void orient_triangle_soup_with_reference_triangle_mesh(const TriangleMesh& tm_ref,
-//                                                        const PointRange& points,
-//                                                        TriangleRange& triangles,
-//                                                        const NamedParameters1& np1 = parameters::default_values(),
-//                                                        const NamedParameters2& np2 = parameters::default_values())
-
 template <typename PolygonMesh>
 py::list orient_triangle_soup_with_reference_triangle_mesh(const PolygonMesh& tm_ref,
                                                        const py::list& points,
@@ -809,7 +1429,7 @@ py::tuple orient_polygon_soup(const py::list& points,
       if (!success) throw std::runtime_error("Polygon soup orientation failed!");
       return py::make_tuple(ptvec2ptlist(pts), polyvec2polylist(polys));
     }
-    catch (const std::exception&) {
+    catch (const py::cast_error&) {
     }
   }
   success = PMP::orient_polygon_soup(pts, polys,
@@ -984,6 +1604,10 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("does_self_intersect_faces", &pmp::does_self_intersect_faces<Pm>,
         py::arg("pm"), py::arg("face_range"),
         py::arg("parameters") = py::dict());
+
+  m.def("corefine", &pmp::corefine<Pm>,
+        py::arg("pm1"), py::arg("pm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
 
   m.def("corefine_and_compute_union", &pmp::corefine_and_compute_union<Pm>,
         py::arg("pm1"), py::arg("pm2"),
