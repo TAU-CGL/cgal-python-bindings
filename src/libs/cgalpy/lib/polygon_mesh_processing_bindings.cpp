@@ -13,6 +13,7 @@
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
 #include <CGAL/iterator.h>
 #include <CGAL/tags.h>
+#include <boost/graph/graph_traits.hpp>
 #include <iterator>
 #define CGAL_USE_BASIC_VIEWER
 
@@ -816,6 +817,68 @@ py::tuple orient_polygon_soup(const py::list& points,
   return py::make_tuple(ptvec2ptlist(pts), polyvec2polylist(polys));
 }
 
+template <typename PolygonMesh>
+py::tuple polygon_soup_to_polygon_mesh(const py::list& points,
+                                       const py::list& polygons,
+                                       const py::dict& np_ps = py::dict(),
+                                       const py::dict& np_pm = py::dict()) {
+  using vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
+  using fd = typename boost::graph_traits<PolygonMesh>::face_descriptor;
+  auto ptvec = ptlist2ptvec(points);
+  auto polyvec = polylist2polyvec(polygons);
+  py::object pv = py::none(), pf = py::none();
+  bool pvflag = (np_ps.contains("point_to_vertex_output_iterator") &&
+    py::cast<bool>(np_ps["point_to_vertex_output_iterator"]));
+  bool pfflag = (np_ps.contains("polygon_to_face_output_iterator") &&
+    py::cast<bool>(np_ps["polygon_to_face_output_iterator"]));
+  PolygonMesh output;
+
+  if (pvflag && pfflag) {
+    std::vector<std::pair<int, vd>> pvvec;
+    std::vector<std::pair<int, fd>> pfvec;
+    PMP::polygon_soup_to_polygon_mesh(ptvec, polyvec, output,
+                                      internal::parse_pmp_np<PolygonMesh>(np_ps)
+                                      .point_to_vertex_output_iterator(std::back_inserter(pvvec))
+                                      .polygon_to_face_output_iterator(std::back_inserter(pfvec)),
+                                      internal::parse_pmp_np<PolygonMesh>(np_pm));
+    py::list pvlist, pflist;
+    for (const auto& [p, v] : pvvec) {
+      pvlist.append(py::make_tuple(p, v));
+    }
+    for (const auto& [p, f] : pfvec) {
+      pflist.append(py::make_tuple(p, f));
+    }
+    return py::make_tuple(output, pvlist, pflist);
+  } else if (pvflag) {
+    std::vector<std::pair<int, vd>> pvvec;
+    PMP::polygon_soup_to_polygon_mesh(ptvec, polyvec, output,
+                                      internal::parse_pmp_np<PolygonMesh>(np_ps)
+                                      .point_to_vertex_output_iterator(std::back_inserter(pvvec)),
+                                      internal::parse_pmp_np<PolygonMesh>(np_pm));
+    py::list pvlist;
+    for (const auto& [p, v] : pvvec) {
+      pvlist.append(py::make_tuple(p, v));
+    }
+    return py::make_tuple(output, pvlist, pf);
+  } else if (pfflag) {
+    std::vector<std::pair<int, fd>> pfvec;
+    PMP::polygon_soup_to_polygon_mesh(ptvec, polyvec, output,
+                                      internal::parse_pmp_np<PolygonMesh>(np_ps)
+                                      .polygon_to_face_output_iterator(std::back_inserter(pfvec)),
+                                      internal::parse_pmp_np<PolygonMesh>(np_pm));
+    py::list pflist;
+    for (const auto& [p, f] : pfvec) {
+      pflist.append(py::make_tuple(p, f));
+    }
+    return py::make_tuple(output, pv, pflist);
+  } else {
+    PMP::polygon_soup_to_polygon_mesh(ptvec, polyvec, output,
+                                      internal::parse_pmp_np<PolygonMesh>(np_ps),
+                                      internal::parse_pmp_np<PolygonMesh>(np_pm));
+    return py::make_tuple(output, pv, pf);
+  }
+}
+
 void set_polygon_orientation_reversed(Default_orientation_visitor& v,
                            const std::function<void(std::size_t)>& f){
   v.set_polygon_orientation_reversed(f);
@@ -1020,6 +1083,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("orient_polygon_soup", &pmp::orient_polygon_soup<Pm>,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+
+  m.def("polygon_soup_to_polygon_mesh", &pmp::polygon_soup_to_polygon_mesh<Pm>,
+        py::arg("points"), py::arg("polygons"), py::arg("np_ps") = py::dict(), py::arg("np_pm") = py::dict());
 
   m.def("set_non_manifold_edge", &pmp::set_non_manifold_edge);
   m.def("set_non_manifold_vertex", &pmp::set_non_manifold_vertex);
