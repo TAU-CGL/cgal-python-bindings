@@ -126,6 +126,7 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
         break;
       case Hash("use_compact_clipper"):
         cgal_parameters = cgal_parameters.use_compact_clipper(py::cast<bool>(item.second));
+        break;
       case Hash("use_relaxed_order"):
         cgal_parameters = cgal_parameters.use_relaxed_order(py::cast<bool>(item.second));
         break;

@@ -23,8 +23,17 @@ if len(points) == 0:
     print("Cannot open file ")
     exit(1)
 
-v = Pmp.Default_orientation_visitor()
-# v.set_non_manifold_edge(lambda x: print(x)) #### Work in progress
+def dv(a):
+    print(a)
+
+def g(a, b):
+    print(a, b)
+
+v = Pmp.Default_orientation_visitor() # the Python user has to del this
+Pmp.set_polygon_orientation_reversed(v, dv)
+Pmp.set_link_connected_polygons(v, g)
 
 points, polygons = Pmp.orient_polygon_soup(points, polygons, {"visitor": v})
+
+del v # don't forget to del :)
 
