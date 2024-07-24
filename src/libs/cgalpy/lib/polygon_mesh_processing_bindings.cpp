@@ -52,6 +52,7 @@
 #include "CGALPY/Non_manifold_output_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
 #include "CGALPY/Default_orientation_visitor.hpp"
+#include "CGALPY/Autorefinement_visitor.hpp"
 
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/internal.hpp"
@@ -1041,7 +1042,20 @@ auto autorefine_triangle_soup(const py::list& points,
     polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
   }
 
-  PMP::autorefine_triangle_soup(ptvec, polyvec, internal::parse_named_parameters(np));
+  // PMP::autorefine_triangle_soup(ptvec, polyvec, internal::parse_named_parameters(np));
+  // check for autorefinement visitor
+  bool visitor = np.contains("visitor");
+  if (visitor) {
+    try {
+      auto v = py::cast<pmp::Autorefinement_visitor>(np["visitor"]);
+    PMP::autorefine_triangle_soup(ptvec, polyvec, internal::parse_named_parameters(np).visitor(v));
+    }
+    catch (const py::cast_error& e) {
+    }
+  }
+  else {
+    PMP::autorefine_triangle_soup(ptvec, polyvec, internal::parse_named_parameters(np));
+  }
 
   py::list retpts, retpolys;
   retpts = vec2list(ptvec);
@@ -1766,6 +1780,14 @@ void export_polygon_mesh_processing(py::module_& m) {
   //   .def("split_placement", &Usf::split_placement)
   //   .def("register_split_vertex", &Usf::register_split_vertex)
   //   ;
+
+  using Av = pmp::Autorefinement_visitor;
+  py::class_<Av>(m, "Autorefinement_visitor")
+    .def(py::init<>())
+    .def("set_number_of_output_triangles", &Av::set_number_of_output_triangles)
+    .def("set_verbatim_triangle_copy", &Av::set_verbatim_triangle_copy)
+    .def("set_new_subtriangle", &Av::set_new_subtriangle)
+    ;
 
   // default visitor
   using Dv = pmp::Default_visitor<Pm>;
