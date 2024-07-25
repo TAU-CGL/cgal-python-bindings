@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #
 # #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 # #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
@@ -69,11 +70,11 @@ filename = "meshes/sphere.off" if len(sys.argv) < 2 else sys.argv[1]
 mesh = Sm.read_polygon_mesh(filename)
 
 for v in Sm.vertices(mesh):
-    # h, g = 0.0, 0.0
-    p = Pmp.Principal_curvatures_and_directions()
-    h, g = Pmp.interpolated_corrected_curvatures(v, mesh,
-                                          {'vertex_mean_curvature': True,
-                                          'vertex_Gaussian_curvature': True,
-                                          'vertex_principal_curvatures_and_directions': p})
+  # h, g = 0.0, 0.0
+  p = Pmp.Principal_curvatures_and_directions()
+  h, g = Pmp.interpolated_corrected_curvatures(v, mesh,
+                                               {'vertex_mean_curvature': True,
+                                                'vertex_Gaussian_curvature': True,
+                                                'vertex_principal_curvatures_and_directions': p})
 
-    print(f"{v.idx()}: HC = {h}, GC = {g}, PC = [ {p.min_curvature} , {p.max_curvature} ]")
+  print(f"{v.idx()}: HC = {h}, GC = {g}, PC = [ {p.min_curvature} , {p.max_curvature} ]")

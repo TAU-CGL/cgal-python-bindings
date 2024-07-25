@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 # #include <CGAL/Surface_mesh.h>
 #
@@ -85,19 +87,19 @@ input_filename = "meshes/blobby-shuffled.off" if len(sys.argv) < 3 else sys.argv
 reference_filename = "meshes/blobby.off" if len(sys.argv) < 4 else sys.argv[3]
 
 try:
-    points, polygons = Sm.read_polygon_soup(input_filename)
+  points, polygons = Sm.read_polygon_soup(input_filename)
 except:
-    print("Error: can not read input file.")
-    exit(1)
+  print("Error: can not read input file.")
+  exit(1)
 
 if len(points) == 0 or len(polygons) == 0:
-    print("Error: can not read input file.")
+  print("Error: can not read input file.")
 
 try:
-    ref1 = Sm.read_polygon_mesh(reference_filename)
+  ref1 = Sm.read_polygon_mesh(reference_filename)
 except:
-    print("Invalid input.")
-    exit(1)
+  print("Invalid input.")
+  exit(1)
 
 print(f"Is the soup a polygon mesh ? : {Pmp.is_polygon_soup_a_polygon_mesh(polygons)}")
 
@@ -110,4 +112,3 @@ polygons, points, duplicated = Pmp.duplicate_non_manifold_edges_in_polygon_soup(
 print(f"And now ? : {Pmp.is_polygon_soup_a_polygon_mesh(polygons)}")
 
 ### Work in progress
-

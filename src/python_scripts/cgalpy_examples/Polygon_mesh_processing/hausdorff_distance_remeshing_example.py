@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -20,4 +21,3 @@ tm2 = Pmp.isotropic_remeshing(face_list, 0.05, tm1)
 dist = Pmp.approximate_Hausdorff_distance(tm1, tm2, {'number_of_points_per_area_unit': 4000})
 
 print(f"Approximated Hausdorff distance: {round(dist, 7)}")
-

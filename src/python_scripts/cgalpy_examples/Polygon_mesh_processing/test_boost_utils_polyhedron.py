@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -71,4 +72,3 @@ print("is_valid_vertex_descriptor: ", Pol3.is_valid_vertex_descriptor(vertex, me
 print("is_valid_halfedge_descriptor: ", Pol3.is_valid_halfedge_descriptor(halfedge, mesh))
 print("is_valid_edge_descriptor: ", Pol3.is_valid_edge_descriptor(edge, mesh))
 print("is_valid_face_descriptor: ", Pol3.is_valid_face_descriptor(face, mesh))
-

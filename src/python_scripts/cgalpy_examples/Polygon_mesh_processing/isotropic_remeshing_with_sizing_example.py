@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -14,10 +15,10 @@ Pmp = CGALPY.Pmp
 filename = "meshes/nefertiti.off" if len(sys.argv) < 2 else sys.argv[1]
 
 try:
-    mesh = Sm.read_polygon_mesh(filename)
+  mesh = Sm.read_polygon_mesh(filename)
 except:
-    print("Not a valid input file.")
-    sys.exit(1)
+  print("Not a valid input file.")
+  sys.exit(1)
 
 print(f"Start remeshing of {filename} ({Sm.num_faces(mesh)} faces)...")
 tol = 0.001
@@ -33,4 +34,3 @@ Pmp.isotropic_remeshing(Sm.faces(mesh), sizing_field, mesh,
 Sm.write_polygon_mesh("out.off", mesh, {"stream_precision": 17})
 
 print("Remeshing done.")
-

@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import time
 import os
 import sys
@@ -28,4 +29,3 @@ timer = time.time()
 intersected_tris = Pmp.self_intersections(mesh)
 print(f"{len(list(intersected_tris))} pairs of triangles intersect.")
 print(f"Elapsed time (self intersections): {(time.time() - timer):.7f}")
-

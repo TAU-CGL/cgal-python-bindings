@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -18,9 +19,8 @@ face_normal, vertex_normal = Pmp.compute_normals(mesh) # normals = ((face_handle
 
 print("Vertex normals :")
 for n in vertex_normal[1]:
-    print(n)
+  print(n)
 
 print("Face normals :")
 for n in face_normal[1]:
-    print(n)
-
+  print(n)

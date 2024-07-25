@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -11,13 +12,11 @@ Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-
 for i in range(2, len(sys.argv)):
-    try:
-        mesh = Sm.read_polygon_mesh(sys.argv[i])
-    except:
-        print(f"Invalid input: {sys.argv[i]}")
-        continue
-    if not Sm.is_triangle_mesh(mesh):
-        print(sys.argv[i])
-
+  try:
+    mesh = Sm.read_polygon_mesh(sys.argv[i])
+  except:
+    print(f"Invalid input: {sys.argv[i]}")
+    continue
+  if not Sm.is_triangle_mesh(mesh):
+    print(sys.argv[i])

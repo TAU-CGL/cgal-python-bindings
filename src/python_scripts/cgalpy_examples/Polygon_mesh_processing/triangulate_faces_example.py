@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -16,24 +17,22 @@ filename = "meshes/P.off" if len(sys.argv) < 2 else sys.argv[1]
 outfilename = "P_tri.off" if len(sys.argv) < 3 else sys.argv[2]
 
 try:
-    mesh = Sm.read_polygon_mesh(filename)
+  mesh = Sm.read_polygon_mesh(filename)
 except:
-    raise ValueError("Error: Invalid input.")
+  raise ValueError("Error: Invalid input.")
 if mesh.is_empty():
-    raise ValueError("Warning: empty file?")
+  raise ValueError("Warning: empty file?")
 if not Sm.is_triangle_mesh(mesh):
-    print("Input mesh is not triangulated.")
+  print("Input mesh is not triangulated.")
 
 if not Pmp.triangulate_faces(mesh):
-    raise ValueError("Error: Could not triangulate faces.")
+  raise ValueError("Error: Could not triangulate faces.")
 
 # Confirm that all faces are triangles.
 faces = mesh.faces()
 for f in faces:
-    he = Sm.halfedge(f, mesh)
-    if not Sm.is_triangle(he, mesh):
-        raise ValueError("Error: non-triangular face left in mesh.")
+  he = Sm.halfedge(f, mesh)
+  if not Sm.is_triangle(he, mesh):
+    raise ValueError("Error: non-triangular face left in mesh.")
 
 Sm.write_polygon_mesh(outfilename, mesh)
-
-

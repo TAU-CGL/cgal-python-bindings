@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 # #include <CGAL/Surface_mesh.h>
 #
@@ -52,10 +54,10 @@ Pmp = CGALPY.Pmp
 filename = "meshes/eight.off" if len(sys.argv) < 2 else sys.argv[1]
 
 try:
-    mesh = Sm.read_polygon_mesh(filename)
+  mesh = Sm.read_polygon_mesh(filename)
 except:
-    print("Invalid input.")
-    exit(1)
+  print("Invalid input.")
+  exit(1)
 
 max_size = 0.02 if len(sys.argv) < 3 else sys.argv[2]
 

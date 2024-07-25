@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -13,7 +14,6 @@ Pmp = CGALPY.Pmp
 
 def halfedge2edge(mesh, edges):
   return [Sm.edge(h, mesh) for h in edges]
-
 
 filename = "meshes/pig.off" if len(sys.argv) < 2 else sys.argv[1]
 
@@ -35,4 +35,3 @@ Pmp.isotropic_remeshing(Sm.faces(mesh), target_edge_length, mesh,
 Sm.write_polygon_mesh("out.off", mesh, {"stream_precision": 17})
 
 print("Remeshing done.")
-

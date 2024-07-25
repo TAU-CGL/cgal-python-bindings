@@ -23,7 +23,6 @@ Point_3 = Ker.Point_3
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-
 sm1 = Sm.read_polygon_mesh(filename1)
 sm2 = Sm.read_polygon_mesh(filename1)
 rc1 = Pmp.does_self_intersect(sm1)

@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -19,4 +20,3 @@ mesh = Sm.read_polygon_mesh(filename)
 Pmp.autorefine(mesh)
 
 Sm.write_polygon_mesh("autorefined.off", mesh, {"stream_precision": 17})
-

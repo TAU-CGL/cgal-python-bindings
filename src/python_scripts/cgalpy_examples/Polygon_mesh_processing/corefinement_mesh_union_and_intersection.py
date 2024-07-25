@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 # #include <CGAL/Surface_mesh.h>
 #
@@ -99,15 +101,15 @@ operations = Pmp.corefine_and_compute_boolean_operations(mesh1, mesh2,
 
 union, intersection, tm1_minus_tm2, tm2_minus_tm1 = operations
 
-if union is not None: # these values get set to None if the operation was not successful
-    print("Union was successfully computed")
-    Sm.write_polygon_mesh("union.off", union)
+if union is not None:
+  # these values get set to None if the operation was not successful
+  print("Union was successfully computed")
+  Sm.write_polygon_mesh("union.off", union)
 else:
-    print("Union could not be computed")
+  print("Union could not be computed")
 
 if intersection is not None:
-    print("Intersection was successfully computed")
-    Sm.write_polygon_mesh("intersection.off", intersection)
+  print("Intersection was successfully computed")
+  Sm.write_polygon_mesh("intersection.off", intersection)
 else:
-    print("Intersection could not be computed")
-
+  print("Intersection could not be computed")

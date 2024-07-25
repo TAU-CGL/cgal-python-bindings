@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -16,11 +17,11 @@ filename1 = "meshes/blobby.off" if len(sys.argv) < 2 else sys.argv[1]
 filename2 = "meshes/eight.off" if len(sys.argv) < 3 else sys.argv[2]
 
 try:
-    mesh1 = Sm.read_polygon_mesh(filename1)
-    mesh2 = Sm.read_polygon_mesh(filename2)
+  mesh1 = Sm.read_polygon_mesh(filename1)
+  mesh2 = Sm.read_polygon_mesh(filename2)
 except:
-    print("Invalid input.")
-    exit(1)
+  print("Invalid input.")
+  exit(1)
 
 polylines = Pmp.surface_intersection(mesh1, mesh2)
 
