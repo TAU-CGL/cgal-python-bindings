@@ -1550,7 +1550,214 @@ void set_link_connected_polygons(Default_orientation_visitor& v,
                                  const std::function<void(std::size_t, py::list)>& f) {
   v.set_link_connected_polygons(f);
 }
-
+  // std::function<void(Fd, Pm&)> before_subface_creations_fn;
+  // std::function<void(Pm&)> after_subface_creations_fn;
+  // std::function<void(Pm&)> before_subface_created_fn;
+  // std::function<void(Fd, Pm&)> after_subface_created_fn;
+  // std::function<void(Fd, const Pm&, Pm&)> before_face_copy_fn;
+  // std::function<void(Fd, const Pm&, Fd, Pm&)> after_face_copy_fn;
+  // std::function<void(Hd, Pm&)> before_edge_split_fn;
+  // std::function<void(Hd, Pm&)> edge_split_fn;
+  // std::function<void()> after_edge_split_fn;
+  // std::function<void(Hd, Pm&)> add_retriangulation_edge_fn;
+  // std::function<void(Hd, const Pm&, Pm&)> before_edge_copy_fn;
+  // std::function<void(Hd, const Pm&, Hd, Pm&)> after_edge_copy_fn;
+  // std::function<void(Hd, Pm&)> before_edge_duplicated_fn;
+  // std::function<void(Hd, Hd, Pm&)> after_edge_duplicated_fn;
+  // std::function<void(Hd, const Pm&, Hd, const Pm&, Hd, Pm&)> intersection_edge_copy_fn;
+  // std::function<void(std::size_t, Vd, const Pm&)> new_vertex_added_fn;
+  // std::function<void(std::size_t, int, Hd, Hd, const Pm&, const Pm&, bool, bool)> intersection_point_detected_fn;
+  // std::function<void(Vd, const Pm&, Pm&)> before_vertex_copy_fn;
+  // std::function<void(Vd, const Pm&, Vd, Pm&)> after_vertex_copy_fn;
+  // std::function<void()> start_filtering_intersections_fn;
+  // std::function<void(double)> progress_filtering_intersections_fn;
+  // std::function<void()> end_filtering_intersections_fn;
+  // std::function<void(std::size_t)> start_triangulating_faces_fn;
+  // std::function<void()> triangulating_faces_step_fn;
+  // std::function<void()> end_triangulating_faces_fn;
+  // std::function<void(std::size_t)> start_handling_intersection_of_coplanar_faces_fn;
+  // std::function<void()> intersection_of_coplanar_faces_step_fn;
+  // std::function<void()> end_handling_intersection_of_coplanar_faces_fn;
+  // std::function<void(std::size_t)> start_handling_edge_face_intersections_fn;
+  // std::function<void()> edge_face_intersections_step_fn;
+  // std::function<void()> end_handling_edge_face_intersections_fn;
+  // std::function<void()> start_building_output_fn;
+  // std::function<void()> end_building_output_fn;
+  // std::function<void()> filter_coplanar_edges_fn;
+  // std::function<void()> detect_patches_fn;
+  // std::function<void()> classify_patches_fn;
+  // std::function<void(const Pm&)> classify_intersection_free_patches_fn;
+  // std::function<void(Boolean_operation_type)> out_of_place_operation_fn;
+  // std::function<void(Boolean_operation_type)> in_place_operation_fn;
+  // std::function<void(Boolean_operation_type, Boolean_operation_type)> in_place_operations_fn;
+using Pm = Polygonal_mesh;
+using Gt = boost::graph_traits<Polygonal_mesh>;
+using Vd = typename Gt::vertex_descriptor;
+using Hd = typename Gt::halfedge_descriptor;
+using Fd = typename Gt::face_descriptor;
+// using Boolean_operation_type = COREFINEMENT::Boolean_operation_type;
+using Boolean_operation_type = std::size_t;
+using Cv = Corefine_visitor<Pm>;
+void set_before_subface_creations_fn(Cv& v,
+                                     const std::function<void(Fd, Pm&)>& f) {
+  v.set_before_subface_creations(f);
+}
+void set_after_subface_creations_fn(Cv& v,
+                                    const std::function<void(Pm&)>& f) {
+  v.set_after_subface_creations(f);
+}
+void set_before_subface_created_fn(Cv& v,
+                                   const std::function<void(Pm&)>& f) {
+  v.set_before_subface_created(f);
+}
+void set_after_subface_created_fn(Cv& v,
+                                  const std::function<void(Fd, Pm&)>& f) {
+  v.set_after_subface_created(f);
+}
+void set_before_face_copy_fn(Cv& v,
+                             const std::function<void(Fd, const Pm&, Pm&)>& f) {
+  v.set_before_face_copy(f);
+}
+void set_after_face_copy_fn(Cv& v,
+                            const std::function<void(Fd, const Pm&, Fd, Pm&)>& f) {
+  v.set_after_face_copy(f);
+}
+void set_before_edge_split_fn(Cv& v,
+                              const std::function<void(Hd, Pm&)>& f) {
+  v.set_before_edge_split(f);
+}
+void set_edge_split_fn(Cv& v,
+                       const std::function<void(Hd, Pm&)>& f) {
+  v.set_edge_split(f);
+}
+void set_after_edge_split_fn(Cv& v,
+                             const std::function<void()>& f) {
+  v.set_after_edge_split(f);
+}
+void set_add_retriangulation_edge_fn(Cv& v,
+                                     const std::function<void(Hd, Pm&)>& f) {
+  v.set_add_retriangulation_edge(f);
+}
+void set_before_edge_copy_fn(Cv& v,
+                             const std::function<void(Hd, const Pm&, Pm&)>& f) {
+  v.set_before_edge_copy(f);
+}
+void set_after_edge_copy_fn(Cv& v,
+                            const std::function<void(Hd, const Pm&, Hd, Pm&)>& f) {
+  v.set_after_edge_copy(f);
+}
+void set_before_edge_duplicated_fn(Cv& v,
+                                   const std::function<void(Hd, Pm&)>& f) {
+  v.set_before_edge_duplicated(f);
+}
+void set_after_edge_duplicated_fn(Cv& v,
+                                  const std::function<void(Hd, Hd, Pm&)>& f) {
+  v.set_after_edge_duplicated(f);
+}
+void set_intersection_edge_copy_fn(Cv& v,
+                                   const std::function<void(Hd, const Pm&, Hd, const Pm&, Hd, Pm&)>& f) {
+  v.set_intersection_edge_copy(f);
+}
+void set_new_vertex_added_fn(Cv& v,
+                             const std::function<void(std::size_t, Vd, const Pm&)>& f) {
+  v.set_new_vertex_added(f);
+}
+void set_intersection_point_detected_fn(Cv& v,
+                                        const std::function<void(std::size_t, int, Hd, Hd, const Pm&, const Pm&, bool, bool)>& f) {
+  v.set_intersection_point_detected(f);
+}
+void set_before_vertex_copy_fn(Cv& v,
+                               const std::function<void(Vd, const Pm&, Pm&)>& f) {
+  v.set_before_vertex_copy(f);
+}
+void set_after_vertex_copy_fn(Cv& v,
+                              const std::function<void(Vd, const Pm&, Vd, Pm&)>& f) {
+  v.set_after_vertex_copy(f);
+}
+void set_start_filtering_intersections_fn(Cv& v,
+                                          const std::function<void()>& f) {
+  v.set_start_filtering_intersections(f);
+}
+void set_progress_filtering_intersections_fn(Cv& v,
+                                             const std::function<void(double)>& f) {
+  v.set_progress_filtering_intersections(f);
+}
+void set_end_filtering_intersections_fn(Cv& v,
+                                        const std::function<void()>& f) {
+  v.set_end_filtering_intersections(f);
+}
+void set_start_triangulating_faces_fn(Cv& v,
+                                      const std::function<void(std::size_t)>& f) {
+  v.set_start_triangulating_faces(f);
+}
+void set_triangulating_faces_step_fn(Cv& v,
+                                     const std::function<void()>& f) {
+  v.set_triangulating_faces_step(f);
+}
+void set_end_triangulating_faces_fn(Cv& v,
+                                    const std::function<void()>& f) {
+  v.set_end_triangulating_faces(f);
+}
+void set_start_handling_intersection_of_coplanar_faces_fn(Cv& v,
+                                                          const std::function<void(std::size_t)>& f) {
+  v.set_start_handling_intersection_of_coplanar_faces(f);
+}
+void set_intersection_of_coplanar_faces_step_fn(Cv& v,
+                                                const std::function<void()>& f) {
+  v.set_intersection_of_coplanar_faces_step(f);
+}
+void set_end_handling_intersection_of_coplanar_faces_fn(Cv& v,
+                                                        const std::function<void()>& f) {
+  v.set_end_handling_intersection_of_coplanar_faces(f);
+}
+void set_start_handling_edge_face_intersections_fn(Cv& v,
+                                                   const std::function<void(std::size_t)>& f) {
+  v.set_start_handling_edge_face_intersections(f);
+}
+void set_edge_face_intersections_step_fn(Cv& v,
+                                         const std::function<void()>& f) {
+  v.set_edge_face_intersections_step(f);
+}
+void set_end_handling_edge_face_intersections_fn(Cv& v,
+                                                const std::function<void()>& f) {
+  v.set_end_handling_edge_face_intersections(f);
+}
+void set_start_building_output_fn(Cv& v,
+                                  const std::function<void()>& f) {
+  v.set_start_building_output(f);
+}
+void set_end_building_output_fn(Cv& v,
+                                const std::function<void()>& f) {
+  v.set_end_building_output(f);
+}
+void set_filter_coplanar_edges_fn(Cv& v,
+                                  const std::function<void()>& f) {
+  v.set_filter_coplanar_edges(f);
+}
+void set_detect_patches_fn(Cv& v,
+                           const std::function<void()>& f) {
+  v.set_detect_patches(f);
+}
+void set_classify_patches_fn(Cv& v,
+                             const std::function<void()>& f) {
+  v.set_classify_patches(f);
+}
+void set_classify_intersection_free_patches_fn(Cv& v,
+                                               const std::function<void(const Pm&)>& f) {
+  v.set_classify_intersection_free_patches(f);
+}
+void set_out_of_place_operation_fn(Cv& v,
+                                   const std::function<void(Boolean_operation_type)>& f) {
+  v.set_out_of_place_operation(f);
+}
+void set_in_place_operation_fn(Cv& v,
+                               const std::function<void(Boolean_operation_type)>& f) {
+  v.set_in_place_operation(f);
+}
+void set_in_place_operations_fn(Cv& v,
+                               const std::function<void(Boolean_operation_type, Boolean_operation_type)>& f) {
+  v.set_in_place_operations(f);
+}
 
 } // namespace pmp
 
@@ -1750,6 +1957,97 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("set_vertex_id_in_polygon_replaced", &pmp::set_vertex_id_in_polygon_replaced);
   m.def("set_polygon_orientation_reversed", &pmp::set_polygon_orientation_reversed);
   m.def("set_link_connected_polygons", &pmp::set_link_connected_polygons);
+
+  // Corefine_visitor
+  // void set_before_subface_creations(const std::function<void(Fd, Pm&)>& fn) {before_subface_creations_fn = fn;}
+  // void set_after_subface_creations(const std::function<void(Pm&)>& fn) {after_subface_creations_fn = fn;}
+  // void set_before_subface_created(const std::function<void(Pm&)>& fn) {before_subface_created_fn = fn;}
+  // void set_after_subface_created(const std::function<void(Fd, Pm&)>& fn) {after_subface_created_fn = fn;}
+  // void set_before_face_copy(const std::function<void(Fd, const Pm&, Pm&)>& fn) {before_face_copy_fn = fn;}
+  // void set_after_face_copy(const std::function<void(Fd, const Pm&, Fd, Pm&)>& fn) {after_face_copy_fn = fn;}
+  // void set_before_edge_split(const std::function<void(Hd, Pm&)>& fn) {before_edge_split_fn = fn;}
+  // void set_edge_split(const std::function<void(Hd, Pm&)>& fn) {edge_split_fn = fn;}
+  // void set_after_edge_split(const std::function<void()>& fn) {after_edge_split_fn = fn;}
+  // void set_add_retriangulation_edge(const std::function<void(Hd, Pm&)>& fn) {add_retriangulation_edge_fn = fn;}
+  // void set_before_edge_copy(const std::function<void(Hd, const Pm&, Pm&)>& fn) {before_edge_copy_fn = fn;}
+  // void set_after_edge_copy(const std::function<void(Hd, const Pm&, Hd, Pm&)>& fn) {after_edge_copy_fn = fn;}
+  // void set_before_edge_duplicated(const std::function<void(Hd, Pm&)>& fn) {before_edge_duplicated_fn = fn;}
+  // void set_after_edge_duplicated(const std::function<void(Hd, Hd, Pm&)>& fn) {after_edge_duplicated_fn = fn;}
+  // void set_intersection_edge_copy(const std::function<void(Hd, const Pm&, Hd, const Pm&, Hd, Pm&)>& fn) {intersection_edge_copy_fn = fn;}
+  // void set_new_vertex_added(const std::function<void(std::size_t, Vd, const Pm&)>& fn) {new_vertex_added_fn = fn;}
+  // void set_intersection_point_detected(const std::function<void(std::size_t, int, Hd, Hd, const Pm&, const Pm&, bool, bool)>& fn) {intersection_point_detected_fn = fn;}
+  // void set_before_vertex_copy(const std::function<void(Vd, const Pm&, Pm&)>& fn) {before_vertex_copy_fn = fn;}
+  // void set_after_vertex_copy(const std::function<void(Vd, const Pm&, Vd, Pm&)>& fn) {after_vertex_copy_fn = fn;}
+  // void set_start_filtering_intersections(const std::function<void()>& fn) {start_filtering_intersections_fn = fn;}
+  // void set_progress_filtering_intersections(const std::function<void(double)>& fn) {progress_filtering_intersections_fn = fn;}
+  // void set_end_filtering_intersections(const std::function<void()>& fn) {end_filtering_intersections_fn = fn;}
+  // void set_start_triangulating_faces(const std::function<void(std::size_t)>& fn) {start_triangulating_faces_fn = fn;}
+  // void set_triangulating_faces_step(const std::function<void()>& fn) {triangulating_faces_step_fn = fn;}
+  // void set_end_triangulating_faces(const std::function<void()>& fn) {end_triangulating_faces_fn = fn;}
+  // void set_start_handling_intersection_of_coplanar_faces(const std::function<void(std::size_t)>& fn) {start_handling_intersection_of_coplanar_faces_fn = fn;}
+  // void set_intersection_of_coplanar_faces_step(const std::function<void()>& fn) {intersection_of_coplanar_faces_step_fn = fn;}
+  // void set_end_handling_intersection_of_coplanar_faces(const std::function<void()>& fn) {end_handling_intersection_of_coplanar_faces_fn = fn;}
+  // void set_start_handling_edge_face_intersections(const std::function<void(std::size_t)>& fn) {start_handling_edge_face_intersections_fn = fn;}
+  // void set_edge_face_intersections_step(const std::function<void()>& fn) {edge_face_intersections_step_fn = fn;}
+  // void set_end_handling_edge_face_intersections(const std::function<void()>& fn) {end_handling_edge_face_intersections_fn = fn;}
+  // void set_start_building_output(const std::function<void()>& fn) {start_building_output_fn = fn;}
+  // void set_end_building_output(const std::function<void()>& fn) {end_building_output_fn = fn;}
+  // void set_filter_coplanar_edges(const std::function<void()>& fn) {filter_coplanar_edges_fn = fn;}
+  // void set_detect_patches(const std::function<void()>& fn) {detect_patches_fn = fn;}
+  // void set_classify_patches(const std::function<void()>& fn) {classify_patches_fn = fn;}
+  // void set_classify_intersection_free_patches(const std::function<void(const Pm&)>& fn) {classify_intersection_free_patches_fn = fn;}
+  // void set_out_of_place_operation(const std::function<void(Boolean_operation_type)>& fn) {out_of_place_operation_fn = fn;}
+  // void set_in_place_operation(const std::function<void(Boolean_operation_type)>& fn) {in_place_operation_fn = fn;}
+  // void set_in_place_operations(const std::function<void(Boolean_operation_type, Boolean_operation_type)>& fn) {in_place_operations_fn = fn;}
+  m.def("set_before_subface_creations", &pmp::set_before_subface_creations_fn);
+  m.def("set_after_subface_creations", &pmp::set_after_subface_creations_fn);
+  m.def("set_before_subface_created", &pmp::set_before_subface_created_fn);
+  m.def("set_after_subface_created", &pmp::set_after_subface_created_fn);
+  m.def("set_before_face_copy", &pmp::set_before_face_copy_fn);
+  m.def("set_after_face_copy", &pmp::set_after_face_copy_fn);
+  m.def("set_before_edge_split", &pmp::set_before_edge_split_fn);
+  m.def("set_edge_split", &pmp::set_edge_split_fn);
+  m.def("set_after_edge_split", &pmp::set_after_edge_split_fn);
+  m.def("set_add_retriangulation_edge", &pmp::set_add_retriangulation_edge_fn);
+  m.def("set_before_edge_copy", &pmp::set_before_edge_copy_fn);
+  m.def("set_after_edge_copy", &pmp::set_after_edge_copy_fn);
+  m.def("set_before_edge_duplicated", &pmp::set_before_edge_duplicated_fn);
+  m.def("set_after_edge_duplicated", &pmp::set_after_edge_duplicated_fn);
+  m.def("set_intersection_edge_copy", &pmp::set_intersection_edge_copy_fn);
+  m.def("set_new_vertex_added", &pmp::set_new_vertex_added_fn);
+  m.def("set_intersection_point_detected", &pmp::set_intersection_point_detected_fn);
+  m.def("set_before_vertex_copy", &pmp::set_before_vertex_copy_fn);
+  m.def("set_after_vertex_copy", &pmp::set_after_vertex_copy_fn);
+  m.def("set_start_filtering_intersections", &pmp::set_start_filtering_intersections_fn);
+  m.def("set_progress_filtering_intersections", &pmp::set_progress_filtering_intersections_fn);
+  m.def("set_end_filtering_intersections", &pmp::set_end_filtering_intersections_fn);
+  m.def("set_start_triangulating_faces", &pmp::set_start_triangulating_faces_fn);
+  m.def("set_triangulating_faces_step", &pmp::set_triangulating_faces_step_fn);
+  m.def("set_end_triangulating_faces", &pmp::set_end_triangulating_faces_fn);
+  m.def("set_start_handling_intersection_of_coplanar_faces", &pmp::set_start_handling_intersection_of_coplanar_faces_fn);
+  m.def("set_intersection_of_coplanar_faces_step", &pmp::set_intersection_of_coplanar_faces_step_fn);
+  m.def("set_end_handling_intersection_of_coplanar_faces", &pmp::set_end_handling_intersection_of_coplanar_faces_fn);
+  m.def("set_start_handling_edge_face_intersections", &pmp::set_start_handling_edge_face_intersections_fn);
+  m.def("set_edge_face_intersections_step", &pmp::set_edge_face_intersections_step_fn);
+  m.def("set_end_handling_edge_face_intersections", &pmp::set_end_handling_edge_face_intersections_fn);
+  m.def("set_start_building_output", &pmp::set_start_building_output_fn);
+  m.def("set_end_building_output", &pmp::set_end_building_output_fn);
+  m.def("set_filter_coplanar_edges", &pmp::set_filter_coplanar_edges_fn);
+  m.def("set_detect_patches", &pmp::set_detect_patches_fn);
+  m.def("set_classify_patches", &pmp::set_classify_patches_fn);
+  m.def("set_classify_intersection_free_patches", &pmp::set_classify_intersection_free_patches_fn);
+  m.def("set_out_of_place_operation", &pmp::set_out_of_place_operation_fn);
+  m.def("set_in_place_operation", &pmp::set_in_place_operation_fn);
+  m.def("set_in_place_operations", &pmp::set_in_place_operations_fn);
+
+  using Cv = pmp::Corefine_visitor<Pm>;
+  // m.def("set_before_subface_creations", &pmp::set_before_subface_creations<Cv>);
+  // m.def("set_after_subface_creations", &pmp::set_after_subface_creations<Cv>);
+  // m.def("set_before_subface_created", &pmp::set_before_subface_created<Cv>);
+  // m.def("set_after_subface_created", &pmp::set_after_subface_created<Cv>);
+  // m.def("set_before_face_copy", &pmp::set_before_face_copy<Cv>);
+  // m.def("set_after_face_copy", &pmp::set_after_face_copy<Cv>);
+
 
 
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;

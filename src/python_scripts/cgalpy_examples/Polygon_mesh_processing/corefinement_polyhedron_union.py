@@ -155,24 +155,25 @@ def end_building_output():
         format(f"{timeit.timeit():.2f}"))
 
 cv = Pmp.Corefine_visitor()
-cv.set_start_filtering_intersections(start_filtering_intersections)
-cv.set_progress_filtering_intersections(progress_filtering_intersections)
-cv.set_end_filtering_intersections(end_filtering_intersections)
 
-cv.set_start_triangulating_faces(start_triangulating_faces)
-cv.set_end_triangulating_faces(end_triangulating_faces)
+Pmp.set_start_filtering_intersections(cv, start_filtering_intersections)
+Pmp.set_progress_filtering_intersections(cv, progress_filtering_intersections)
+Pmp.set_end_filtering_intersections(cv, end_filtering_intersections)
+
+Pmp.set_start_triangulating_faces(cv, start_triangulating_faces)
+Pmp.set_end_triangulating_faces(cv, end_triangulating_faces)
 # cv.set_triangulating_faces_step(triangulating_faces_step)
 
-cv.set_start_handling_intersection_of_coplanar_faces(start_handling_intersection_of_coplanar_faces)
-cv.set_intersection_of_coplanar_faces_step(intersection_of_coplanar_faces_step)
-cv.set_end_handling_intersection_of_coplanar_faces(end_handling_intersection_of_coplanar_faces)
+Pmp.set_start_handling_intersection_of_coplanar_faces(cv, start_handling_intersection_of_coplanar_faces)
+Pmp.set_intersection_of_coplanar_faces_step(cv, intersection_of_coplanar_faces_step)
+Pmp.set_end_handling_intersection_of_coplanar_faces(cv, end_handling_intersection_of_coplanar_faces)
 
-cv.set_start_handling_edge_face_intersections(start_handling_edge_face_intersections)
-cv.set_edge_face_intersections_step(edge_face_intersections_step)
-cv.set_end_handling_edge_face_intersections(end_handling_edge_face_intersections)
+Pmp.set_start_handling_edge_face_intersections(cv, start_handling_edge_face_intersections)
+Pmp.set_edge_face_intersections_step(cv, edge_face_intersections_step)
+Pmp.set_end_handling_edge_face_intersections(cv, end_handling_edge_face_intersections)
 
-cv.set_start_building_output(start_building_output)
-cv.set_end_building_output(end_building_output)
+Pmp.set_start_building_output(cv, start_building_output)
+Pmp.set_end_building_output(cv, end_building_output)
 
 start = timeit.timeit()
 
