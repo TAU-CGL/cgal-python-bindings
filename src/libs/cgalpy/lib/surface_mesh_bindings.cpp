@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include "CGALPY/Property_map.hpp"
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #define CGAL_USE_BASIC_VIEWER
@@ -156,6 +157,25 @@ py::object faces(const SurfaceMesh& sm)
 
 /// @}
 
+// property maps
+template <typename SurfaceMesh, typename Key, typename Value>
+auto add_map(SurfaceMesh& sm, const std::string& name = std::string(),
+             const Value& default_value = Value()) {
+  using Sm = SurfaceMesh;
+  using Vi = typename Sm::Vertex_index;
+  using Pnt = typename Sm::Point;
+  using Map = typename Sm::template Property_map<Vi, Pnt>;
+  // Surface_mesh::Property_map<edge_descriptor, bool> is_constrained_map =
+  //   mesh2.add_property_map<edge_descriptor, bool>("e:is_constrained", true).first;
+
+  auto res = sm.template add_property_map<Key, Value>(name, default_value);
+  return py::make_tuple(res.first, res.second);
+}
+
+// custon default value
+// template <typename SurfaceMesh>
+// auto add_map
+
 } // namespace sm
 
 //
@@ -171,25 +191,6 @@ void add_sm_index(C& c) {
     .def("idx", &Sm_i::idx)
     ;
 }
-
-// Export halfedge
-// template <typename C>
-// void export_halfedge(C& sm_c) {
-//   using Sm = sm::Surface_mesh_3;
-//   using Halfedge = typename Sm::Halfedge;
-//   constexpr auto ri(py::rv_policy::reference_internal);
-//
-//   if (add_attr<Halfedge>(sm_c, "Halfedge")) return;
-//
-//   py::class_<Halfedge> halfedge_c(sm_c, "Halfedge");
-//   halfedge_c.def(py::init<>())
-//     .def("vertex", &sm::vertex<Sm>, ri)
-//     .def("opposite", &sm::opposite<Sm>, ri)
-//     .def("next", &sm::next<Sm>, ri)
-//     .def("prev", &sm::prev<Sm>, ri)
-//     .def("is_border", [](const Halfedge& e){ return e.is_border(); })
-//     ;
-// }
 
 // Export Surface_mesh.
 template <typename SurfaceMesh>
@@ -384,6 +385,46 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       // .def("property_stats", &Sm::property_stats)
 
       .def("point", &sm::my_point<Sm>, ri)
+  // internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map");
+  // internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
+  // internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
+  // internal::export_property_map<Sm_3, Vi, Vector_3>(m, "Vertex_vector_map");
+  // internal::export_property_map<Sm_3, Vi, int>(m, "Vertex_int_map");
+  //
+  //
+  // internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
+  //
+  // internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
+  // internal::export_property_map<Sm_3, Fi, Vector_3>(m, "Face_vector_map");
+  // internal::export_property_map<Sm_3, Fi, std::size_t>(m, "Face_size_t_map");
+  //
+  // internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
+  //
+  // internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map");
+
+      .def("add_property_map_Vertex_point", &sm::add_map<Sm, Vi, Pnt>,
+           py::arg("name") = std::string(), py::arg("default_value") = Pnt())
+      .def("add_property_map_Vertex_bool", &sm::add_map<Sm, Vi, bool>,
+           py::arg("name") = std::string(), py::arg("default_value") = bool())
+      .def("add_property_map_Vertex_size_t", &sm::add_map<Sm, Vi, std::size_t>,
+           py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
+      .def("add_property_map_Vertex_vector", &sm::add_map<Sm, Vi, Vector_3>,
+           py::arg("name") = std::string(), py::arg("default_value") = Vector_3())
+      .def("add_property_map_Vertex_int", &sm::add_map<Sm, Vi, int>,
+           py::arg("name") = std::string(), py::arg("default_value") = int())
+
+      .def("add_property_map_Edge_bool", &sm::add_map<Sm, Ei, bool>,
+           py::arg("name") = std::string(), py::arg("default_value") = bool())
+
+      .def("add_property_map_Face_double", &sm::add_map<Sm, Fi, double>,
+           py::arg("name") = std::string(), py::arg("default_value") = double())
+      .def("add_property_map_Face_vector", &sm::add_map<Sm, Fi, Vector_3>,
+           py::arg("name") = std::string(), py::arg("default_value") = Vector_3())
+      .def("add_property_map_Face_size_t", &sm::add_map<Sm, Fi, std::size_t>,
+           py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
+
+      .def("add_property_map_Halfedge_size_t", &sm::add_map<Sm, Hi, std::size_t>,
+           py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
 
 
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
@@ -434,9 +475,53 @@ void export_surface_mesh(py::module_& m) {
 
   // 3D Surface mesh
   using Sm_3 = sm::Surface_mesh_3;
+  using Vi = typename Sm_3::Vertex_index;
+  using Fi = typename Sm_3::Face_index;
+  using Hi = typename Sm_3::Halfedge_index;
+  using Ei = typename Sm_3::Edge_index;
+  using Pnt = Point_3;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
+
+  internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map");
+  internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
+  internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
+  internal::export_property_map<Sm_3, Vi, Vector_3>(m, "Vertex_vector_map");
+  internal::export_property_map<Sm_3, Vi, int>(m, "Vertex_int_map");
+
+
+  internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
+
+  internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
+  internal::export_property_map<Sm_3, Fi, Vector_3>(m, "Face_vector_map");
+  internal::export_property_map<Sm_3, Fi, std::size_t>(m, "Face_size_t_map");
+
+  internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
+
+  internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map");
+
+  // implemented:
+  // vertex_point_map
+  // edge_is_constrained_map
+  // face_index_map
+  // point_map
+  // vertex_is_constrained_map
+  // face_patch_map
+  // vertex_corner_map
+  // VPMap
+  // GeomTraits::Plane_3
+
+  // ???
+  // region_primitive_map:
+  // a property map filled by this function and that will contain for each region the plane (or only its orthognonal vector) estimated that approximates it.
+  // Type: a class model of WritablePropertyMap with the value type of RegionMap as key and GeomTraits::Plane_3 or GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
+  // Default: None
+
+
+
+	
+
 
   // export_halfedge(m);
 

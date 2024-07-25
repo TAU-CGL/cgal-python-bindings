@@ -12,6 +12,7 @@ namespace py = nanobind;
 namespace internal {
 
 Named_params parse_named_parameters(const py::dict& params, Named_params cgal_parameters) {
+  using Ft = double;
   // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
     const std::string key = py::cast<std::string>(item.first);
@@ -217,6 +218,31 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("repair_polygon_soup"):
         cgal_parameters = cgal_parameters.repair_polygon_soup(py::cast<bool>(item.second));
         break;
+      case Hash("cosine_of_maximum_angle"):
+        cgal_parameters = cgal_parameters.cosine_of_maximum_angle(py::cast<Ft>(item.second));
+        break;
+      case Hash("match_faces"):
+        cgal_parameters = cgal_parameters.match_faces(py::cast<bool>(item.second));
+        break;
+      case Hash("use_one_sided_hausdorff"):
+        cgal_parameters = cgal_parameters.use_one_sided_hausdorff(py::cast<bool>(item.second));
+        break;
+      case Hash("bbox_scaling"):
+        cgal_parameters = cgal_parameters.bbox_scaling(py::cast<double>(item.second));
+        break;
+      case Hash("maximum_distance"):
+        cgal_parameters = cgal_parameters.maximum_distance(py::cast<Ft>(item.second));
+        break;
+      case Hash("maximum_angle"):
+        cgal_parameters = cgal_parameters.maximum_angle(py::cast<Ft>(item.second));
+        break;
+      case Hash("postprocess_regions"):
+        cgal_parameters = cgal_parameters.postprocess_regions(py::cast<bool>(item.second));
+        break;
+      case Hash("minimum_region_size"):
+        cgal_parameters = cgal_parameters.minimum_region_size(py::cast<std::size_t>(item.second));
+        break;
+
 
 
         
