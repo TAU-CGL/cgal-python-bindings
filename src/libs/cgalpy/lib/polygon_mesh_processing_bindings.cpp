@@ -6,6 +6,18 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#define CGAL_USE_BASIC_VIEWER
+
+#include <stdexcept>
+#include <iterator>
+
+#include <boost/graph/graph_traits.hpp>
+#include <boost/iterator/function_output_iterator.hpp>
+#include <boost/range/iterator_range.hpp>
+
+#include <nanobind/nanobind.h>
+#include <nanobind/stl/function.h>
+
 #include <CGAL/Named_function_parameters.h>
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/orientation.h>
@@ -15,18 +27,6 @@
 #include <CGAL/boost/graph/helpers.h>
 #include <CGAL/iterator.h>
 #include <CGAL/tags.h>
-#include <boost/graph/graph_traits.hpp>
-#include <iterator>
-#define CGAL_USE_BASIC_VIEWER
-
-#include <stdexcept>
-
-#include <boost/iterator/function_output_iterator.hpp>
-#include <boost/range/iterator_range.hpp>
-
-#include <nanobind/nanobind.h>
-#include <nanobind/stl/function.h>
-
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
 #include <CGAL/Polygon_mesh_processing/intersection.h>
@@ -41,19 +41,15 @@
 #include <CGAL/Polygon_mesh_processing/clip.h>
 
 #include "CGALPY/helpers.hpp"
-
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
-
 #include "CGALPY/Adaptive_sizing_field.hpp"
-
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/Non_manifold_output_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
 #include "CGALPY/Default_orientation_visitor.hpp"
 #include "CGALPY/Autorefinement_visitor.hpp"
-
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/internal.hpp"
 
@@ -2021,7 +2017,7 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   // using Usf = PMP::Uniform_sizing_field<Pm>; // Work in progress
   // py::class_<Usf>(m, "Uniform_sizing_field")
-  //   .def(py::init<double, 
+  //   .def(py::init<double,
   //   .def("at", &Usf::at)
   //   .def("is_too_long", &Usf::is_too_long)
   //   .def("is_too_short", &Usf::is_too_short)
