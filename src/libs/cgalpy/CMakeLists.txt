@@ -463,6 +463,20 @@ if (NOT SKBUILD)
         CGAL::CGAL_Qt6 Qt6::Core Qt6::Gui Qt6::Widgets)
     endif()
 
+    # EFEF: Only certain packages need Eigen
+    find_package(Eigen3 3.2.0 QUIET) #(requires 3.2.0 or greater)
+    include(CGAL_Eigen3_support)
+    if (TARGET CGAL::Eigen3_support)
+      target_link_libraries(CGALPY PRIVATE CGAL::Eigen3_support)
+    endif ()
+
+    # EFEF: Only certain packages need METIS
+    find_package(METIS QUIET)
+    include(CGAL_METIS_support)
+    if (TARGET CGAL::METIS_support)
+      target_link_libraries(CGALPY PRIVATE CGAL::METIS_support)
+    endif()
+
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
     set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
     # Use a generator expression to get rid of per-configuration subdirectory appended by Multi-configuration generators (e.g Visual Studio)
