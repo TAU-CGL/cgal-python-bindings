@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include "CGALPY/Property_map.hpp"
+#include <CGAL/Dynamic_property_map.h>
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #define CGAL_USE_BASIC_VIEWER
@@ -172,9 +173,56 @@ auto add_map(SurfaceMesh& sm, const std::string& name = std::string(),
   return py::make_tuple(res.first, res.second);
 }
 
-// custon default value
-// template <typename SurfaceMesh>
-// auto add_map
+// gets
+// mutable
+template <typename Sm, typename T>
+typename boost::property_map<Sm, CGAL::dynamic_vertex_property_t<T> >::type
+get_d_v(CGAL::dynamic_vertex_property_t<T>, Sm& sm, const T& default_value = T()) {
+  return get(CGAL::dynamic_vertex_property_t<T>(), sm, default_value);
+}
+
+template <typename Sm, typename T>
+typename boost::property_map<Sm, CGAL::dynamic_face_property_t<T> >::type
+get_d_f(CGAL::dynamic_face_property_t<T>, Sm& sm, const T& default_value = T()) {
+  return get(CGAL::dynamic_face_property_t<T>(), sm, default_value);
+}
+
+template <typename Sm, typename T>
+typename boost::property_map<Sm, CGAL::dynamic_edge_property_t<T> >::type
+get_d_e(CGAL::dynamic_edge_property_t<T>, Sm& sm, const T& default_value = T()) {
+  return get(CGAL::dynamic_edge_property_t<T>(), sm, default_value);
+}
+
+template <typename Sm, typename T>
+typename boost::property_map<Sm, CGAL::dynamic_halfedge_property_t<T> >::type
+get_d_h(CGAL::dynamic_halfedge_property_t<T>, Sm& sm, const T& default_value = T()) {
+  return get(CGAL::dynamic_halfedge_property_t<T>(), sm, default_value);
+}
+
+// const
+template <typename Sm, typename T>
+typename boost::property_map<Sm, CGAL::dynamic_face_property_t<T> >::const_type
+get_c_f(CGAL::dynamic_face_property_t<T>, const Sm& sm, const T& default_value = T()) {
+  return get(CGAL::dynamic_face_property_t<T>(), sm, default_value);
+}
+
+template <typename Sm, typename T>
+typename boost::property_map<Sm, CGAL::dynamic_vertex_property_t<T> >::const_type
+get_c_v(CGAL::dynamic_vertex_property_t<T>, const Sm& sm, const T& default_value = T()) {
+  return get(CGAL::dynamic_vertex_property_t<T>(), sm, default_value);
+}
+
+template <typename Sm, typename T>
+typename boost::property_map<Sm, CGAL::dynamic_halfedge_property_t<T> >::const_type
+get_c_h(CGAL::dynamic_halfedge_property_t<T>, const Sm& sm, const T& default_value = T()) {
+  return get(CGAL::dynamic_halfedge_property_t<T>(), sm, default_value);
+}
+
+template <typename Sm, typename T>
+typename boost::property_map<Sm, CGAL::dynamic_edge_property_t<T> >::const_type
+get_c_e(CGAL::dynamic_edge_property_t<T>, const Sm& sm, const T& default_value = T()) {
+  return get(CGAL::dynamic_edge_property_t<T>(), sm, default_value);
+}
 
 } // namespace sm
 
@@ -521,9 +569,21 @@ void export_surface_mesh(py::module_& m) {
 
 
 	
+  // typename boost::property_map<Sm, CGAL::dynamic_vertex_property_t<T> >::type
+
+  using dfppm = typename boost::property_map<Sm_3, CGAL::dynamic_face_property_t<std::size_t>>::type;
+  py::class_<dfppm>(m, "face_size_t_map")
+    .def(py::init<>())
+    // has field map_
+    .def_ro("map_", &dfppm::map_)
+    ;
+  py::class_<CGAL::dynamic_face_property_t<std::size_t>> dfpst(m, "dynamic_face_property_size_t");
+  dfpst.def(py::init<>());
+
+  m.def("get", &sm::get_d_f<Sm_3, std::size_t>,
+        py::arg("property_map"), py::arg("sm"), py::arg("default_value") = std::size_t());
 
 
-  // export_halfedge(m);
 
   m.def("Halfedge", &sm::halfedge<Sm_3>);
 
