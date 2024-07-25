@@ -499,7 +499,7 @@ void export_surface_mesh(py::module_& m) {
 
   internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
 
-  internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map");
+  // internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map"); // this is a dict not a map??
 
   // implemented:
   // vertex_point_map

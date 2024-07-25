@@ -10,23 +10,31 @@ CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 
+def test(result, iterable):
+    map, success = result
+    if not success:
+        print("Error: could not add property map")
+        exit(1)
+    for v in iterable:
+        print(map[v])
+        break
+
 mesh = Sm.read_polygon_mesh("meshes/elephant.off")
 
-map, success = mesh.add_property_map_Vertex_point("v:point")
-map, success = mesh.add_property_map_Vertex_bool("v:bool")
-map, success = mesh.add_property_map_Vertex_size_t("v:size_t")
-map, success = mesh.add_property_map_Vertex_vector("v:vector")
-map, success = mesh.add_property_map_Vertex_int("v:int")
+test(mesh.add_property_map_Vertex_point("v:poinsdat"), mesh.vertices())
+test(mesh.add_property_map_Vertex_bool("v:bool"), mesh.vertices())
+test(mesh.add_property_map_Vertex_size_t("v:size_t"), mesh.vertices())
+test(mesh.add_property_map_Vertex_vector("v:vector"), mesh.vertices())
 
-map, success = mesh.add_property_map_Edge_bool("e:bool")
+test(mesh.add_property_map_Vertex_int("v:int"), mesh.vertices())
 
-map, success = mesh.add_property_map_Face_double("f:double")
-map, success = mesh.add_property_map_Face_size_t("f:size_t")
-map, success = mesh.add_property_map_Face_vector("f:vector")
-map, success = mesh.add_property_map_Face_size_t("f:size_t")
+test(mesh.add_property_map_Edge_bool("e:bool"), mesh.edges())
 
-map, success = mesh.add_property_map_Halfedge_size_t("h:size_t")
+test(mesh.add_property_map_Face_double("f:double"), mesh.faces())
+test(mesh.add_property_map_Face_size_t("f:size_t"), mesh.faces())
+test(mesh.add_property_map_Face_vector("f:vector"), mesh.faces())
+test(mesh.add_property_map_Face_size_t("f:sizedas_t"), mesh.faces())
 
-
+test(mesh.add_property_map_Halfedge_size_t("h:size_t"), mesh.halfedges())
 
 
