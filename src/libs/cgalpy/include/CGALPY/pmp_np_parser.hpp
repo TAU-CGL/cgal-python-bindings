@@ -5,7 +5,6 @@
 #include <boost/range/iterator_range_core.hpp>
 #include <functional>
 
-#include "CGALPY/Property_map.hpp"
 #include "CGALPY/kernel_types.hpp"
 
 #include "CGALPY/internal.hpp"
@@ -17,8 +16,8 @@ namespace internal {
 
 namespace PMP = CGAL::Polygon_mesh_processing;
 
-typedef Kernel::Point_3 Point;
-typedef CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> Named_params;
+using Named_params = CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t>;
+using Point = Kernel::Point_3;
 
 template <typename K>
 Named_params handle_vertex_principal_curvatures_and_directions(const py::handle& vpcad_handle, Named_params cgal_parameters) {

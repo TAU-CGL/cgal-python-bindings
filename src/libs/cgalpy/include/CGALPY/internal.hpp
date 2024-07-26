@@ -18,7 +18,7 @@ unsigned int constexpr Hash(_T const* input) {
 }
 
 
-typedef CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t> Named_params;
+using Named_params = CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t>;
 Named_params parse_named_parameters(const py::dict& params, Named_params cgal_parameters = CGAL::parameters::all_default());
 
 } // namespace parse_params
