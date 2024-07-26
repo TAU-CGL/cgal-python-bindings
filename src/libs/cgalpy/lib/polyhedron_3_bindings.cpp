@@ -512,6 +512,14 @@ void export_polyhedron_3(py::module_& m) {
   m.def("get", &internal::get_d_f_p<Prn, std::size_t>,
         py::arg("property_map"), py::arg("sm"));
 
+
+  // CGAL::Boolean_property_map<std::set<Mesh::Vertex_handle> > vcmap(constrained_vertices);
+  // std::set<Mesh::Vertex_handle> constrained_vertices;
+  using bpm_vertex_set = CGAL::Boolean_property_map<std::set<typename Prn::Vertex_handle>>;
+  py::class_<bpm_vertex_set>(m, "Boolean_property_map_vertex_set")
+    .def(py::init<>())
+    ;
+
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
 
   m.def("num_vertices", &boost_utils::num_vertices<Prn>);
@@ -569,6 +577,15 @@ void export_polyhedron_3(py::module_& m) {
   m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Prn>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
 
+  // helpers from helpers.h
+  m.def("is_border", &boost_utils::my_is_border_h<Prn>,
+        py::arg("hd"), py::arg("g"));
+  m.def("is_border_edge", &boost_utils::my_is_border_edge<Prn>,
+        py::arg("vd"), py::arg("g"));
+  m.def("is_border", &boost_utils::my_is_border_e<Prn>,
+        py::arg("ed"), py::arg("g"));
+  m.def("is_border", &boost_utils::my_is_border_v<Prn>,
+        py::arg("vd"), py::arg("g"));
 
   // iterators
   m.def("halfedges_around_face", &boost_utils::my_halfedges_around_face<Prn>);

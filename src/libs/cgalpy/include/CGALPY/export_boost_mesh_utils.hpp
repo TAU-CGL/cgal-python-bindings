@@ -1,7 +1,10 @@
 #ifndef CGALPY_EXPORT_BOOST_MESH_UTILS_HPP
 #define CGALPY_EXPORT_BOOST_MESH_UTILS_HPP
 
+#include <boost/graph/graph_traits.hpp>
+
 #include <nanobind/nanobind.h>
+
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
@@ -375,6 +378,32 @@ auto my_is_valid_face_descriptor(typename boost::graph_traits<PolygonMesh>::face
   return is_valid_face_descriptor(f, g, verbose);
 }
 
+// helpers from helpers.h
+
+template <typename PolygonMesh>
+auto my_is_border_h(typename boost::graph_traits<PolygonMesh>::halfedge_descriptor hd, const PolygonMesh& g)
+{
+  return is_border(hd, g);
+}
+
+template <typename PolygonMesh>
+auto my_is_border_edge(typename boost::graph_traits<PolygonMesh>::halfedge_descriptor hd, const PolygonMesh& g)
+{
+  return is_border_edge(hd, g);
+}
+
+template <typename PolygonMesh>
+auto my_is_border_e(typename boost::graph_traits<PolygonMesh>::edge_descriptor ed, const PolygonMesh& g)
+{
+  return is_border(ed, g);
+}
+
+template <typename PolygonMesh>
+py::object my_is_border_v(typename boost::graph_traits<PolygonMesh>::vertex_descriptor vd, const PolygonMesh& g)
+{
+  auto h = is_border(vd, g);
+  return h.has_value() ? py::cast(h.value()) : py::none();
+}
 
 } // namespace boost_utils
 

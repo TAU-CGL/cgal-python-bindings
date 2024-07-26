@@ -1,6 +1,7 @@
 #ifndef PMP_NP_PARSER_HPP
 #define PMP_NP_PARSER_HPP
 
+#include <CGAL/Named_function_parameters.h>
 #include <functional>
 
 #include <boost/range/iterator_range_core.hpp>
@@ -17,7 +18,6 @@ namespace internal {
 
 namespace PMP = CGAL::Polygon_mesh_processing;
 
-using Named_params = CGAL::Named_function_parameters<bool, CGAL::internal_np::all_default_t>;
 using Point = Kernel::Point_3;
 
 template <typename K>
@@ -27,30 +27,27 @@ Named_params handle_vertex_principal_curvatures_and_directions(const py::handle&
 }
 
 template<typename Mesh>
-Named_params parse_pmp_np(const py::dict& params, Named_params cgal_parameters = CGAL::parameters::all_default()) {
+auto parse_pmp_np(const py::dict& params, Named_params cgal_parameters = CGAL::parameters::verbose(false)) {
   using Vd = typename boost::graph_traits<Mesh>::vertex_descriptor;
   using Fd = typename boost::graph_traits<Mesh>::face_descriptor;
   using Hd = typename boost::graph_traits<Mesh>::halfedge_descriptor;
   using Ed = typename boost::graph_traits<Mesh>::edge_descriptor;
   using Ft = Kernel::FT;
-  // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
     const std::string key = py::cast<std::string>(item.first);
     switch (internal::Hash(key.c_str())) {
-      // case internal::Hash("visitor"):
-      //   cgal_parameters = handle_visitor<Mesh>(item.second, cgal_parameters);
-      //   break;
       case internal::Hash("allow_move_functor"):
         cgal_parameters = cgal_parameters.allow_move_functor(py::cast<std::function<bool(Vd, Point, Point)>>(item.second));
         break;
       case internal::Hash("vertex_principal_curvatures_and_directions"):
         cgal_parameters = handle_vertex_principal_curvatures_and_directions<Kernel>(item.second, cgal_parameters);
         break;
-      case internal::Hash("vertex_point_map"):
-        // typename Mesh::template Property_map<Key, Value>
-        // cgal_parameters = cgal_parameters.vertex_point_map(py::cast<boost::property_map<Mesh, CGAL::dynamic_vertex_property_t<Point_3>>>(item.second));
-        cgal_parameters = cgal_parameters.vertex_point_map(py::cast<typename Mesh::template Property_map<Vd, Point>>(item.second));
-        break;
+      // case internal::Hash("vertex_point_map"):
+      //   cgal_parameters = cgal_parameters.vertex_point_map(py::cast<typename Mesh::template Property_map<Vd, Point>>(item.second));
+      //   break;
+      // case internal::Hash("vertex_is_constrained_map"):
+      //   cgal_parameters.vertex_is_constrained_map(py::cast<typename Mesh::template Property_map<Vd, bool>>(item.second));
+      //   break;
       // case internal::Hash("vertex_index_map"):
       //   cgal_parameters = cgal_parameters.vertex_index_map(py::cast<typename Mesh::template Property_map<Vd, std::size_t>>(item.second));
       //   break;

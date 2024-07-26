@@ -18,6 +18,7 @@
 #include <CGAL/Dynamic_property_map.h>
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
+#include <CGAL/boost/graph/helpers.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_surface_mesh.h>
 #endif
@@ -491,6 +492,7 @@ void export_surface_mesh(py::module_& m) {
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
   internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map");
+  using vertex_bool_property_map = typename Sm_3::template Property_map<Vi, bool>;
   internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
   internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
   internal::export_property_map<Sm_3, Vi, Vector_3>(m, "Vertex_vector_map");
@@ -524,7 +526,7 @@ void export_surface_mesh(py::module_& m) {
   // Type: a class model of WritablePropertyMap with the value type of RegionMap as key and GeomTraits::Plane_3 or GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
   // Default: None
 
-
+  // automating this did not work for me
   using dfppm = typename boost::property_map<Sm_3, CGAL::dynamic_face_property_t<std::size_t>>::type;
   py::class_<dfppm>(m, "face_size_t_map")
     .def(py::init<>())
@@ -608,6 +610,18 @@ void export_surface_mesh(py::module_& m) {
         py::arg("e"), py::arg("g"), py::arg("verbose") = false);
   m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Sm_3>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
+
+  // helpers from helpers.h
+
+  m.def("is_border", &boost_utils::my_is_border_h<Sm_3>,
+        py::arg("hd"), py::arg("g"));
+  m.def("is_border_edge", &boost_utils::my_is_border_edge<Sm_3>,
+        py::arg("vd"), py::arg("g"));
+  m.def("is_border", &boost_utils::my_is_border_e<Sm_3>,
+        py::arg("ed"), py::arg("g"));
+  m.def("is_border", &boost_utils::my_is_border_v<Sm_3>,
+        py::arg("vd"), py::arg("g"));
+
 
   // iterators
   m.def("halfedges_around_face", &boost_utils::my_halfedges_around_face<Sm_3>);

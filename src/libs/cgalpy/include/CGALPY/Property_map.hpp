@@ -10,10 +10,11 @@ namespace py = nanobind;
 namespace internal {
 
 template <typename Mesh, typename Key, typename Value>
-void export_property_map(py::module_& m, const std::string& name) {
+auto export_property_map(py::module_& m, const std::string& name) {
   using Mesh_property_map = typename Mesh::template Property_map<Key, Value>;
 
-  py::class_<Mesh_property_map>(m, name.c_str())
+  // return for extending with .def()
+  return py::class_<Mesh_property_map>(m, name.c_str())
     .def(py::init<>())
     .def("__getitem__", [](Mesh_property_map& self, Key key) -> Value {
       return self[key];

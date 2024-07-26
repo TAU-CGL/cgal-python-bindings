@@ -37,6 +37,7 @@
 #include <CGAL/Polygon_mesh_processing/refine.h>
 #include <CGAL/Polygon_mesh_processing/remesh.h>
 #include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
+#include <CGAL/Polygon_mesh_processing/smooth_shape.h>
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_faces.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
@@ -51,12 +52,7 @@
 #include "CGALPY/Default_visitor.hpp"
 #include "CGALPY/Default_orientation_visitor.hpp"
 #include "CGALPY/Autorefinement_visitor.hpp"
-#if CGALPY_PMP_POLYGONAL_MESH == 1
 #include "CGALPY/pmp_np_parser.hpp"
-#endif
-#if CGALPY_PMP_POLYGONAL_MESH == 0
-#include "CGALPY/pmp_pol3_parser.hpp"
-#endif
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
@@ -768,7 +764,7 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   /////
 
   py::list facets, vertices;
-  internal::Named_params np = CGAL::parameters::default_values();
+  internal::Named_params np = CGAL::parameters::verbose(false);
 
   // this is dirty, but it works, i'm open to other solutions that work and are more elegant
   // the use of auto avoids some probles with types
@@ -846,11 +842,31 @@ auto isotropic_remeshing_sf(const py::list& face_range,
 
 }
 
+
+//
+template <typename PolygonMesh>
+void smooth_shape(PolygonMesh& pmesh,
+                  const double time,
+                        const py::dict& np = py::dict()) {
+  using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
+
+  using vpmap = typename PolygonMesh::template Property_map<Vd, Point_3>;
+  auto vpm = np.contains("vertex_point_map") ? py::cast<vpmap>(np["vertex_point_map"]) : pmesh.points();
+
+  using constrained_map = typename PolygonMesh::template Property_map<typename boost::graph_traits<PolygonMesh>::vertex_descriptor, bool>;
+  constrained_map propmap = np.contains("vertex_is_constrained_map") ?
+    py::cast<constrained_map>(np["vertex_is_constrained_map"]) :
+    pmesh.template add_property_map<Vd, bool>("INTERNAL_MAP1", false).first;
+
+  PMP::smooth_shape(pmesh, time,
+                    internal::parse_named_parameters(np)
+                    .vertex_is_constrained_map(propmap)
+                    .vertex_point_map(vpm));
+}
+
 template <typename PolygonMesh>
 auto tangential_relaxation(PolygonMesh& tm,
                                   const py::dict& parameters = py::dict()) {
-  using Pm = PolygonMesh;
-
   PMP::tangential_relaxation(tm, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
@@ -1861,6 +1877,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("tangential_relaxation", &pmp::tangential_relaxation<Pm>,
         py::arg("pm"), py::arg("parameters") = py::dict());
+
+  m.def("smooth_shape", &pmp::smooth_shape<Pm>,
+        py::arg("pm"), py::arg("time"), py::arg("parameters") = py::dict());
 
   m.def("approximate_Hausdorff_distance", &pmp::approximate_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"),
