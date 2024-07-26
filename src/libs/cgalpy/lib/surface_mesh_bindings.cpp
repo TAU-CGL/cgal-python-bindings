@@ -492,7 +492,6 @@ void export_surface_mesh(py::module_& m) {
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
   internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map");
-  using vertex_bool_property_map = typename Sm_3::template Property_map<Vi, bool>;
   internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
   internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
   internal::export_property_map<Sm_3, Vi, Vector_3>(m, "Vertex_vector_map");

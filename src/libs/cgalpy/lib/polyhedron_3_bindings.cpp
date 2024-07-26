@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/boost/graph/properties.h>
 #include <cstddef>
 #include <stdexcept>
 #define CGAL_USE_BASIC_VIEWER
@@ -15,6 +16,7 @@
 #include <nanobind/nanobind.h>
 
 #include <CGAL/IO/polygon_soup_io.h>
+#include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h> // needed for a type
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_polyhedron.h>
@@ -36,6 +38,8 @@
 namespace py = nanobind;
 
 namespace pol3 {
+
+struct point_vertex_dummy {};
 
 // Access functions
 const Vertex& vertex(const Halfedge& e) { return (*(e.vertex())); }
@@ -503,22 +507,44 @@ void export_polyhedron_3(py::module_& m) {
   using dfppm = typename boost::property_map<Prn, CGAL::dynamic_face_property_t<std::size_t>>::type;
   py::class_<dfppm>(m, "face_size_t_map")
     .def(py::init<>())
-    // has field map_
     .def_ro("map_", &dfppm::map_)
     ;
-
-  py::class_<CGAL::dynamic_face_property_t<std::size_t>> dfpst(m, "dynamic_face_property_size_t");
+  py::class_<CGAL::dynamic_face_property_t<std::size_t>> dfpst(m, "dynamic_property_face_size_t");
   dfpst.def(py::init<>());
   m.def("get", &internal::get_d_f_p<Prn, std::size_t>,
         py::arg("property_map"), py::arg("sm"));
 
+  using dpvft = typename boost::property_map<Prn, CGAL::dynamic_vertex_property_t<FT>>::type;
+  py::class_<dpvft>(m, "vertex_size_t_map")
+    .def(py::init<>())
+    .def_ro("map_", &dpvft::map_)
+    ;
+  py::class_<CGAL::dynamic_vertex_property_t<FT>> dpft(m, "dynamic_property_vertex_FT");
+  dpft.def(py::init<>());
+  m.def("get", &internal::get_d_v_p<Prn, FT>,
+        py::arg("property_map"), py::arg("sm"));
 
-  // CGAL::Boolean_property_map<std::set<Mesh::Vertex_handle> > vcmap(constrained_vertices);
-  // std::set<Mesh::Vertex_handle> constrained_vertices;
-  using bpm_vertex_set = CGAL::Boolean_property_map<std::set<typename Prn::Vertex_handle>>;
-  py::class_<bpm_vertex_set>(m, "Boolean_property_map_vertex_set")
+  namespace PMP = CGAL::Polygon_mesh_processing;
+  using pcprop = CGAL::dynamic_vertex_property_t<PMP::Principal_curvatures_and_directions<Kernel>>;
+  using dpvpcad = typename boost::property_map<Prn, pcprop>::type;
+  py::class_<dpvpcad>(m, "vertex_principal_curvatures_and_directions_map")
+    .def(py::init<>())
+    .def_ro("map_", &dpvpcad::map_)
+    ;
+  py::class_<pcprop> pcprop_c(m, "dynamic_property_vertex_PC");
+  pcprop_c.def(py::init<>());
+  m.def("get", &internal::get_d_v_p<Prn, PMP::Principal_curvatures_and_directions<Kernel>>,
+        py::arg("property_map"), py::arg("sm"));
+
+  // the type
+  using vertex_point_map_type = CGAL::internal::Point_accessor<CGAL::internal::In_place_list_iterator<CGAL::HalfedgeDS_in_place_list_vertex<CGAL::I_Polyhedron_vertex<CGAL::HalfedgeDS_vertex_base<CGAL::HalfedgeDS_list_types<Kernel, CGAL::I_Polyhedron_derived_items_3<pol3::Polyhedron_items>, std::allocator<int> >, std::integral_constant<bool, true>, Point_3 > > >, std::allocator<CGAL::HalfedgeDS_in_place_list_vertex<CGAL::I_Polyhedron_vertex<CGAL::HalfedgeDS_vertex_base<CGAL::HalfedgeDS_list_types<Kernel, CGAL::I_Polyhedron_derived_items_3<pol3::Polyhedron_items>, std::allocator<int> >, std::integral_constant<bool, true>, Point_3 > > > > >, Point_3, Point_3 const&, true>;
+
+  py::class_<vertex_point_map_type>(m, "vertex_point_map")
     .def(py::init<>())
     ;
+
+  m.def("get_vertex_point_map", [](const Prn& pm) { return get(CGAL::vertex_point, pm); });
+
 
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
 

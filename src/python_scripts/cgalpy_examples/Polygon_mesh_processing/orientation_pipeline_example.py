@@ -42,7 +42,7 @@ print(f"And now ? : {1 if Pmp.is_polygon_soup_a_polygon_mesh(polygons) else 0}")
 
 poly = Pmp.polygon_soup_to_polygon_mesh(points, polygons)[0]
 
-fccmap = Pol3.get(Pol3.dynamic_face_property_size_t(), poly)
+fccmap = Pol3.get(Pol3.dynamic_property_face_size_t(), poly)
 
 print(f"{Pmp.connected_components(poly, fccmap)} CCs before merge.")
 Pmp.merge_reversible_connected_components(poly)
