@@ -51,7 +51,12 @@
 #include "CGALPY/Default_visitor.hpp"
 #include "CGALPY/Default_orientation_visitor.hpp"
 #include "CGALPY/Autorefinement_visitor.hpp"
+#if CGALPY_PMP_POLYGONAL_MESH == 1
 #include "CGALPY/pmp_np_parser.hpp"
+#endif
+#if CGALPY_PMP_POLYGONAL_MESH == 0
+#include "CGALPY/pmp_pol3_parser.hpp"
+#endif
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;

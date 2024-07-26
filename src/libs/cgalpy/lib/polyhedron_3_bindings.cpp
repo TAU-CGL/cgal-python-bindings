@@ -117,7 +117,6 @@ auto write_polygon_soup(const std::string& fname,
                                       internal::parse_named_parameters(np));
 }
 
-
 // Write a surface mesh to a file.
 template <typename Polyhedron_3>
 bool write_polygon_mesh(std::string fname, const Polyhedron_3& pm,
@@ -144,6 +143,15 @@ Halfedge& make_tetrahedron2(Polyhedron_3& prn)
 //
 bool is_tetrahedron(const Polyhedron_3& prn, const Halfedge& h)
 { return prn.is_tetrahedron(Halfedge_const_handle(&h)); }
+
+auto make_triangle_empty(Polyhedron_3& prn)
+{ return prn.make_triangle(); }
+
+auto make_triangle(Polyhedron_3& prn, const typename Polyhedron_3::Point& p1,
+                   const typename Polyhedron_3::Point& p2,
+                   const typename Polyhedron_3::Point& p3) {
+  return prn.make_triangle(p1, p2, p3);
+}
 
 /// \name Iterators
 /// @{
@@ -443,6 +451,8 @@ void export_polyhedron_3(py::module_& m) {
       .def("split_facet", &Prn::split_facet)
       .def("split_loop", &Prn::split_loop)
       .def("split_vertex", &Prn::split_vertex)
+      .def("make_triangle", &pol3::make_triangle_empty)
+      .def("make_triangle", &pol3::make_triangle)
 
       // .def("is_pure_quad", &Prn::is_pure_quad)
       // .def("is_pure_bivalent", &Prn::is_pure_bivalent)
@@ -488,6 +498,7 @@ void export_polyhedron_3(py::module_& m) {
   m.def("write_polygon_soup", &pol3::write_polygon_soup,
         py::arg("fname"), py::arg("points"), py::arg("polygons"),
         py::arg("np") = py::dict());
+
 
   using dfppm = typename boost::property_map<Prn, CGAL::dynamic_face_property_t<std::size_t>>::type;
   py::class_<dfppm>(m, "face_size_t_map")

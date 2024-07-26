@@ -1,13 +1,12 @@
 #ifndef PMP_NP_PARSER_HPP
 #define PMP_NP_PARSER_HPP
 
+#include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
+#include <boost/range/iterator_range_core.hpp>
 #include <functional>
 
-#include <boost/range/iterator_range_core.hpp>
-
-#include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
-
 #include "CGALPY/kernel_types.hpp"
+
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
@@ -47,9 +46,8 @@ Named_params parse_pmp_np(const py::dict& params, Named_params cgal_parameters =
         cgal_parameters = handle_vertex_principal_curvatures_and_directions<Kernel>(item.second, cgal_parameters);
         break;
       case internal::Hash("vertex_point_map"):
-        // typename Mesh::template Property_map<Key, Value>
-        // cgal_parameters = cgal_parameters.vertex_point_map(py::cast<boost::property_map<Mesh, CGAL::dynamic_vertex_property_t<Point_3>>>(item.second));
-        cgal_parameters = cgal_parameters.vertex_point_map(py::cast<typename Mesh::template Property_map<Vd, Point>>(item.second));
+        cgal_parameters = cgal_parameters.vertex_point_map(py::cast<boost::property_map<Mesh, CGAL::dynamic_vertex_property_t<Point_3>>>(item.second));
+        // cgal_parameters = cgal_parameters.vertex_point_map(py::cast<typename Mesh::template Property_map<Vd, Point>>(item.second));
         break;
       // case internal::Hash("vertex_index_map"):
       //   cgal_parameters = cgal_parameters.vertex_index_map(py::cast<typename Mesh::template Property_map<Vd, std::size_t>>(item.second));
@@ -94,7 +92,7 @@ Named_params parse_pmp_np(const py::dict& params, Named_params cgal_parameters =
       //   break;
     }
     // pass the params to a generic function
-    cgal_parameters = parse_named_parameters(params, cgal_parameters);
+    cgal_parameters = internal::parse_named_parameters(params, cgal_parameters);
   }
   return cgal_parameters;
 }
@@ -102,4 +100,5 @@ Named_params parse_pmp_np(const py::dict& params, Named_params cgal_parameters =
 } // namespace internal
 
 #endif // PMP_NP_PARSER_HPP
+
 

@@ -139,6 +139,27 @@ template <typename SurfaceMesh>
 bool is_triangle(const typename SurfaceMesh::Halfedge_index& h, const SurfaceMesh& sm)
 { return CGAL::is_triangle(h, sm); }
 
+
+//
+template <typename SurfaceMesh>
+auto has_valid_index_v(const SurfaceMesh& sm, typename SurfaceMesh::Vertex_index& vi)
+{ return sm.is_valid(vi); }
+
+//
+template <typename SurfaceMesh>
+auto has_valid_index_e(const SurfaceMesh& sm, typename SurfaceMesh::Edge_index& ei)
+{ return sm.is_valid(ei); }
+
+//
+template <typename SurfaceMesh>
+auto has_valid_index_h(const SurfaceMesh& sm, typename SurfaceMesh::Halfedge_index& hi)
+{ return sm.is_valid(hi); }
+
+//
+template <typename SurfaceMesh>
+auto has_valid_index_f(const SurfaceMesh& sm, typename SurfaceMesh::Face_index& fi)
+{ return sm.is_valid(fi); }
+
 /// \name Iterators
 /// @{
 
@@ -329,6 +350,11 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi)>(&Sm::add_face))
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face))
       .def("add_face", &sm::add_face<Sm>)
+
+      .def("has_valid_index", &sm::has_valid_index_v<Sm>)
+      .def("has_valid_index", &sm::has_valid_index_e<Sm>)
+      .def("has_valid_index", &sm::has_valid_index_h<Sm>)
+      .def("has_valid_index", &sm::has_valid_index_f<Sm>)
 
       .def("remove_vertex", &Sm::remove_vertex)
       .def("remove_edge", &Sm::remove_edge)
