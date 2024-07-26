@@ -129,6 +129,11 @@ typename SurfaceMesh::Point my_point(const SurfaceMesh& sm,
                                      const typename SurfaceMesh::Vertex_index& v)
 { return sm.point(v); }
 
+template <typename SurfaceMesh, typename Vi, typename Pnt>
+auto points(const SurfaceMesh& sm) {
+  return sm.points();
+}
+
 //
 template <typename SurfaceMesh>
 bool is_triangle(const typename SurfaceMesh::Halfedge_index& h, const SurfaceMesh& sm)
@@ -325,29 +330,19 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face))
       .def("add_face", &sm::add_face<Sm>)
 
-      // void remove_vertex(Vertex_index v)
       .def("remove_vertex", &Sm::remove_vertex)
-      // void remove_edge(Edge_index e)
       .def("remove_edge", &Sm::remove_edge)
-      // remove_face(Face_index f)
       .def("remove_face", &Sm::remove_face)
-      // size_type number_of_vertices() const
       .def("num_vertices", &Sm::num_vertices)
       .def("number_of_vertices", &Sm::number_of_vertices)
-      // size_type number_of_halfedges() const
       .def("num_halfedges", &Sm::num_halfedges)
       .def("number_of_halfedges", &Sm::number_of_halfedges)
-      // size_type number_of_edges() const
       .def("num_edges", &Sm::num_edges)
       .def("number_of_edges", &Sm::number_of_edges)
-      // size_type number_of_faces() const
       .def("num_faces", &Sm::num_faces)
       .def("number_of_faces", &Sm::number_of_faces)
-      // bool is_empty() const
       .def("is_empty", &Sm::is_empty)
-      // void clear_without_removing_property_maps();
       .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps)
-      // void clear();
       .def("clear", &Sm::clear)
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
       // void resize(size_type nvertices, size_type nedges, size_type nfaces )
@@ -385,6 +380,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       // .def("property_stats", &Sm::property_stats)
 
       .def("point", &sm::my_point<Sm>, ri)
+      .def("points", &sm::points<Sm, Vi, Pnt>)
 
       .def("add_property_map_Vertex_point", &sm::add_map<Sm, Vi, Pnt>,
            py::arg("name") = std::string(), py::arg("default_value") = Pnt())

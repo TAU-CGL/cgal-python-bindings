@@ -61,6 +61,8 @@ except:
 
 max_size = 0.02 if len(sys.argv) < 3 else sys.argv[2]
 
-#### Work in progress
+mesh.points()
+Pmp.random_perturbation(mesh, max_size, {"vertex_point_map": mesh.points()})
 
-# Pmp.random_perturbation(mesh, max_size, {"vertex_point_map": mesh.points()})
+Sm.write_polygon_mesh("data/eight_perturbed.off", mesh, {"stream_precision": 17})
+

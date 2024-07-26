@@ -47,7 +47,9 @@ Named_params parse_pmp_np(const py::dict& params, Named_params cgal_parameters =
         cgal_parameters = handle_vertex_principal_curvatures_and_directions<Kernel>(item.second, cgal_parameters);
         break;
       case Hash("vertex_point_map"):
-        cgal_parameters = cgal_parameters.vertex_point_map(py::cast<boost::property_map<Mesh, CGAL::dynamic_vertex_property_t<Point_3>>>(item.second));
+        // typename Mesh::template Property_map<Key, Value>
+        // cgal_parameters = cgal_parameters.vertex_point_map(py::cast<boost::property_map<Mesh, CGAL::dynamic_vertex_property_t<Point_3>>>(item.second));
+        cgal_parameters = cgal_parameters.vertex_point_map(py::cast<typename Mesh::template Property_map<Vd, Point>>(item.second));
         break;
       // case Hash("vertex_index_map"):
       //   cgal_parameters = cgal_parameters.vertex_index_map(py::cast<typename Mesh::template Property_map<Vd, std::size_t>>(item.second));

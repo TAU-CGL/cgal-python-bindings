@@ -33,6 +33,7 @@
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h>
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
+#include <CGAL/Polygon_mesh_processing/random_perturbation.h>
 #include <CGAL/Polygon_mesh_processing/refine.h>
 #include <CGAL/Polygon_mesh_processing/remesh.h>
 #include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
@@ -1098,6 +1099,13 @@ auto stitch_borders(PolygonMesh& pmesh,
 }
 
 template <typename PolygonMesh>
+auto random_perturbation(PolygonMesh& tmesh,
+                         double perturbation,
+                         const py::dict& np = py::dict()) {
+  return PMP::random_perturbation(tmesh, perturbation, internal::parse_pmp_np<PolygonMesh>(np));
+}
+
+template <typename PolygonMesh>
 auto sample_triangle_mesh(const PolygonMesh& tm,
                           const py::dict& np = py::dict()) {
   PointRange pts;
@@ -1526,6 +1534,7 @@ py::tuple polygon_soup_to_polygon_mesh(const py::list& points,
   }
 }
 
+// visitor stuff
 template <typename PolygonMesh>
 void orient_to_bound_a_volume(PolygonMesh& tm,
                               const py::dict& np = py::dict()) {
@@ -1561,46 +1570,6 @@ void set_link_connected_polygons(Default_orientation_visitor& v,
                                  const std::function<void(std::size_t, py::list)>& f) {
   v.set_link_connected_polygons(f);
 }
-  // std::function<void(Fd, Pm&)> before_subface_creations_fn;
-  // std::function<void(Pm&)> after_subface_creations_fn;
-  // std::function<void(Pm&)> before_subface_created_fn;
-  // std::function<void(Fd, Pm&)> after_subface_created_fn;
-  // std::function<void(Fd, const Pm&, Pm&)> before_face_copy_fn;
-  // std::function<void(Fd, const Pm&, Fd, Pm&)> after_face_copy_fn;
-  // std::function<void(Hd, Pm&)> before_edge_split_fn;
-  // std::function<void(Hd, Pm&)> edge_split_fn;
-  // std::function<void()> after_edge_split_fn;
-  // std::function<void(Hd, Pm&)> add_retriangulation_edge_fn;
-  // std::function<void(Hd, const Pm&, Pm&)> before_edge_copy_fn;
-  // std::function<void(Hd, const Pm&, Hd, Pm&)> after_edge_copy_fn;
-  // std::function<void(Hd, Pm&)> before_edge_duplicated_fn;
-  // std::function<void(Hd, Hd, Pm&)> after_edge_duplicated_fn;
-  // std::function<void(Hd, const Pm&, Hd, const Pm&, Hd, Pm&)> intersection_edge_copy_fn;
-  // std::function<void(std::size_t, Vd, const Pm&)> new_vertex_added_fn;
-  // std::function<void(std::size_t, int, Hd, Hd, const Pm&, const Pm&, bool, bool)> intersection_point_detected_fn;
-  // std::function<void(Vd, const Pm&, Pm&)> before_vertex_copy_fn;
-  // std::function<void(Vd, const Pm&, Vd, Pm&)> after_vertex_copy_fn;
-  // std::function<void()> start_filtering_intersections_fn;
-  // std::function<void(double)> progress_filtering_intersections_fn;
-  // std::function<void()> end_filtering_intersections_fn;
-  // std::function<void(std::size_t)> start_triangulating_faces_fn;
-  // std::function<void()> triangulating_faces_step_fn;
-  // std::function<void()> end_triangulating_faces_fn;
-  // std::function<void(std::size_t)> start_handling_intersection_of_coplanar_faces_fn;
-  // std::function<void()> intersection_of_coplanar_faces_step_fn;
-  // std::function<void()> end_handling_intersection_of_coplanar_faces_fn;
-  // std::function<void(std::size_t)> start_handling_edge_face_intersections_fn;
-  // std::function<void()> edge_face_intersections_step_fn;
-  // std::function<void()> end_handling_edge_face_intersections_fn;
-  // std::function<void()> start_building_output_fn;
-  // std::function<void()> end_building_output_fn;
-  // std::function<void()> filter_coplanar_edges_fn;
-  // std::function<void()> detect_patches_fn;
-  // std::function<void()> classify_patches_fn;
-  // std::function<void(const Pm&)> classify_intersection_free_patches_fn;
-  // std::function<void(Boolean_operation_type)> out_of_place_operation_fn;
-  // std::function<void(Boolean_operation_type)> in_place_operation_fn;
-  // std::function<void(Boolean_operation_type, Boolean_operation_type)> in_place_operations_fn;
 using Pm = Polygonal_mesh;
 using Gt = boost::graph_traits<Polygonal_mesh>;
 using Vd = typename Gt::vertex_descriptor;
@@ -1907,6 +1876,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("stitch_borders", &pmp::stitch_borders<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict());
+
+  m.def("random_perturbation", &pmp::random_perturbation<Pm>,
+        py::arg("pm"), py::arg("perturbation_max_size"), py::arg("np") = py::dict());
 
   m.def("refine", &pmp::refine<Pm>,
         py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict());
