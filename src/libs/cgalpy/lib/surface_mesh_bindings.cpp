@@ -6,10 +6,6 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/Property_map.hpp"
-#include <CGAL/Dynamic_property_map.h>
-#include <CGAL/IO/polygon_soup_io.h>
-#include <CGAL/boost/graph/Face_filtered_graph.h>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <string>
@@ -19,17 +15,22 @@
 
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 #include <CGAL/boost/graph/generators.h>
+#include <CGAL/Dynamic_property_map.h>
+#include <CGAL/IO/polygon_soup_io.h>
+#include <CGAL/boost/graph/Face_filtered_graph.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_surface_mesh.h>
 #endif
 
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/Property_map.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/surface_mesh_types.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/export_mesh_iterators.hpp"
+#include "CGALPY/get.hpp"
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
@@ -173,57 +174,6 @@ auto add_map(SurfaceMesh& sm, const std::string& name = std::string(),
   return py::make_tuple(res.first, res.second);
 }
 
-// gets
-// mutable
-template <typename Sm, typename T>
-typename boost::property_map<Sm, CGAL::dynamic_vertex_property_t<T> >::type
-get_d_v(CGAL::dynamic_vertex_property_t<T>, Sm& sm, const T& default_value = T()) {
-  return get(CGAL::dynamic_vertex_property_t<T>(), sm, default_value);
-}
-
-template <typename Sm, typename T>
-typename boost::property_map<Sm, CGAL::dynamic_face_property_t<T> >::type
-get_d_f(CGAL::dynamic_face_property_t<T>, Sm& sm, const T& default_value = T()) {
-  return get(CGAL::dynamic_face_property_t<T>(), sm, default_value);
-}
-
-template <typename Sm, typename T>
-typename boost::property_map<Sm, CGAL::dynamic_edge_property_t<T> >::type
-get_d_e(CGAL::dynamic_edge_property_t<T>, Sm& sm, const T& default_value = T()) {
-  return get(CGAL::dynamic_edge_property_t<T>(), sm, default_value);
-}
-
-template <typename Sm, typename T>
-typename boost::property_map<Sm, CGAL::dynamic_halfedge_property_t<T> >::type
-get_d_h(CGAL::dynamic_halfedge_property_t<T>, Sm& sm, const T& default_value = T()) {
-  return get(CGAL::dynamic_halfedge_property_t<T>(), sm, default_value);
-}
-
-// const
-template <typename Sm, typename T>
-typename boost::property_map<Sm, CGAL::dynamic_face_property_t<T> >::const_type
-get_c_f(CGAL::dynamic_face_property_t<T>, const Sm& sm, const T& default_value = T()) {
-  return get(CGAL::dynamic_face_property_t<T>(), sm, default_value);
-}
-
-template <typename Sm, typename T>
-typename boost::property_map<Sm, CGAL::dynamic_vertex_property_t<T> >::const_type
-get_c_v(CGAL::dynamic_vertex_property_t<T>, const Sm& sm, const T& default_value = T()) {
-  return get(CGAL::dynamic_vertex_property_t<T>(), sm, default_value);
-}
-
-template <typename Sm, typename T>
-typename boost::property_map<Sm, CGAL::dynamic_halfedge_property_t<T> >::const_type
-get_c_h(CGAL::dynamic_halfedge_property_t<T>, const Sm& sm, const T& default_value = T()) {
-  return get(CGAL::dynamic_halfedge_property_t<T>(), sm, default_value);
-}
-
-template <typename Sm, typename T>
-typename boost::property_map<Sm, CGAL::dynamic_edge_property_t<T> >::const_type
-get_c_e(CGAL::dynamic_edge_property_t<T>, const Sm& sm, const T& default_value = T()) {
-  return get(CGAL::dynamic_edge_property_t<T>(), sm, default_value);
-}
-
 } // namespace sm
 
 //
@@ -235,8 +185,10 @@ void add_sm_index(C& c) {
 
   c.def(py::init<>())
     .def(py::init<size_type>())
-    .def("id", &Sm_i::idx)
+    .def("id", &Sm_i::id)
     .def("idx", &Sm_i::idx)
+    .def("is_valid", &Sm_i::is_valid)
+    .def("reset", &Sm_i::reset)
     ;
 }
 
@@ -433,22 +385,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       // .def("property_stats", &Sm::property_stats)
 
       .def("point", &sm::my_point<Sm>, ri)
-  // internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map");
-  // internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
-  // internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
-  // internal::export_property_map<Sm_3, Vi, Vector_3>(m, "Vertex_vector_map");
-  // internal::export_property_map<Sm_3, Vi, int>(m, "Vertex_int_map");
-  //
-  //
-  // internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
-  //
-  // internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
-  // internal::export_property_map<Sm_3, Fi, Vector_3>(m, "Face_vector_map");
-  // internal::export_property_map<Sm_3, Fi, std::size_t>(m, "Face_size_t_map");
-  //
-  // internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
-  //
-  // internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map");
 
       .def("add_property_map_Vertex_point", &sm::add_map<Sm, Vi, Pnt>,
            py::arg("name") = std::string(), py::arg("default_value") = Pnt())
@@ -567,20 +503,16 @@ void export_surface_mesh(py::module_& m) {
   // Default: None
 
 
-
-	
-  // typename boost::property_map<Sm, CGAL::dynamic_vertex_property_t<T> >::type
-
   using dfppm = typename boost::property_map<Sm_3, CGAL::dynamic_face_property_t<std::size_t>>::type;
   py::class_<dfppm>(m, "face_size_t_map")
     .def(py::init<>())
     // has field map_
     .def_ro("map_", &dfppm::map_)
     ;
+
   py::class_<CGAL::dynamic_face_property_t<std::size_t>> dfpst(m, "dynamic_face_property_size_t");
   dfpst.def(py::init<>());
-
-  m.def("get", &sm::get_d_f<Sm_3, std::size_t>,
+  m.def("get", &internal::get_d_f<Sm_3, std::size_t>,
         py::arg("property_map"), py::arg("sm"), py::arg("default_value") = std::size_t());
 
 

@@ -6,13 +6,15 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#include <CGAL/IO/polygon_soup_io.h>
-#include <boost/math/constants/constants.hpp>
+#include <cstddef>
 #include <stdexcept>
 #define CGAL_USE_BASIC_VIEWER
 
+#include <boost/math/constants/constants.hpp>
+
 #include <nanobind/nanobind.h>
 
+#include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_polyhedron.h>
@@ -28,6 +30,7 @@
 #include "CGALPY/make_circulator.hpp"
 #include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/export_mesh_iterators.hpp"
+#include "CGALPY/get.hpp"
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
@@ -485,6 +488,18 @@ void export_polyhedron_3(py::module_& m) {
   m.def("write_polygon_soup", &pol3::write_polygon_soup,
         py::arg("fname"), py::arg("points"), py::arg("polygons"),
         py::arg("np") = py::dict());
+
+  using dfppm = typename boost::property_map<Prn, CGAL::dynamic_face_property_t<std::size_t>>::type;
+  py::class_<dfppm>(m, "face_size_t_map")
+    .def(py::init<>())
+    // has field map_
+    .def_ro("map_", &dfppm::map_)
+    ;
+
+  py::class_<CGAL::dynamic_face_property_t<std::size_t>> dfpst(m, "dynamic_face_property_size_t");
+  dfpst.def(py::init<>());
+  m.def("get", &internal::get_d_f_p<Prn, std::size_t>,
+        py::arg("property_map"), py::arg("sm"));
 
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
 

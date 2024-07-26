@@ -77,4 +77,4 @@ for v in Sm.vertices(mesh):
                                                 'vertex_Gaussian_curvature': True,
                                                 'vertex_principal_curvatures_and_directions': p})
 
-  print(f"{v.idx()}: HC = {h}, GC = {g}, PC = [ {p.min_curvature} , {p.max_curvature} ]")
+  print(f"{v.id()}: HC = {h}, GC = {g}, PC = [ {p.min_curvature} , {p.max_curvature} ]")

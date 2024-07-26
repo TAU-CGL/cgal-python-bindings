@@ -18,27 +18,27 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/function.h>
 
-#include <CGAL/Named_function_parameters.h>
-#include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
-#include <CGAL/Polygon_mesh_processing/orientation.h>
-#include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
-#include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
-#include <CGAL/Polygon_mesh_processing/stitch_borders.h>
 #include <CGAL/boost/graph/helpers.h>
 #include <CGAL/iterator.h>
+#include <CGAL/Named_function_parameters.h>
 #include <CGAL/tags.h>
+#include <CGAL/Polygon_mesh_processing/autorefinement.h>
+#include <CGAL/Polygon_mesh_processing/clip.h>
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
-#include <CGAL/Polygon_mesh_processing/intersection.h>
-#include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
-#include <CGAL/Polygon_mesh_processing/triangulate_faces.h>
-#include <CGAL/Polygon_mesh_processing/remesh.h>
 #include <CGAL/Polygon_mesh_processing/distance.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
+#include <CGAL/Polygon_mesh_processing/intersection.h>
+#include <CGAL/Polygon_mesh_processing/orientation.h>
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h>
-#include <CGAL/Polygon_mesh_processing/autorefinement.h>
+#include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
+#include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
 #include <CGAL/Polygon_mesh_processing/refine.h>
-#include <CGAL/Polygon_mesh_processing/clip.h>
+#include <CGAL/Polygon_mesh_processing/remesh.h>
+#include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
+#include <CGAL/Polygon_mesh_processing/stitch_borders.h>
+#include <CGAL/Polygon_mesh_processing/triangulate_faces.h>
+#include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
 
 #include "CGALPY/helpers.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -55,7 +55,6 @@
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
-namespace PARMS = CGAL::parameters;
 
 namespace pmp {
 
@@ -270,6 +269,22 @@ py::list connected_components(const PolygonMesh& pm,
   lst.append(num);
   lst.append(std::move(dct));
   return lst;
+}
+
+//
+// using dfppm = typename boost::property_map<Prn, CGAL::dynamic_face_property_t<std::size_t>>::type;
+template <typename PolygonMesh>
+auto connected_components_map(const PolygonMesh& pm,
+                              typename boost::property_map<PolygonMesh, CGAL::dynamic_face_property_t<std::size_t>>::type& fccmap,
+                              const py::dict& parameters = py::dict()) {
+  return PMP::connected_components(pm, fccmap, internal::parse_pmp_np<PolygonMesh>(parameters));
+}
+
+//
+template <typename PolygonMesh>
+void merge_reversible_connected_components(PolygonMesh& pm,
+                              const py::dict& parameters = py::dict()) {
+  PMP::merge_reversible_connected_components(pm, internal::parse_pmp_np<PolygonMesh>(parameters));
 }
 
 //
@@ -1794,6 +1809,11 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("parameters") = py::dict());
   m.def("connected_components", &pmp::connected_components<Pm>,
         py::arg("pm"), py::arg("parameters") = py::dict());
+  m.def("connected_components", &pmp::connected_components_map<Pm>,
+        py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+
+  m.def ("merge_reversible_connected_components", &pmp::merge_reversible_connected_components<Pm>,
+         py::arg("pm"), py::arg("parameters") = py::dict());
 
   m.def("do_intersect_polylines", &pmp::do_intersect_polylines);
   m.def("do_intersect_polyline_ranges", &pmp::do_intersect_polyline_ranges);
