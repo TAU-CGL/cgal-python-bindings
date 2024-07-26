@@ -849,19 +849,21 @@ void smooth_shape(PolygonMesh& pmesh,
                   const double time,
                         const py::dict& np = py::dict()) {
   using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
-
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
   using vpmap = typename PolygonMesh::template Property_map<Vd, Point_3>;
+  using constrained_map = typename PolygonMesh::template Property_map<Vd, bool>;
   auto vpm = np.contains("vertex_point_map") ? py::cast<vpmap>(np["vertex_point_map"]) : pmesh.points();
-
-  using constrained_map = typename PolygonMesh::template Property_map<typename boost::graph_traits<PolygonMesh>::vertex_descriptor, bool>;
-  constrained_map propmap = np.contains("vertex_is_constrained_map") ?
+  auto propmap = np.contains("vertex_is_constrained_map") ?
     py::cast<constrained_map>(np["vertex_is_constrained_map"]) :
     pmesh.template add_property_map<Vd, bool>("INTERNAL_MAP1", false).first;
-
   PMP::smooth_shape(pmesh, time,
                     internal::parse_named_parameters(np)
                     .vertex_is_constrained_map(propmap)
                     .vertex_point_map(vpm));
+#endif
+#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
+  PMP::smooth_shape(pmesh, time, internal::parse_pmp_np<PolygonMesh>(np));
+#endif
 }
 
 template <typename PolygonMesh>
