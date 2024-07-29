@@ -39,7 +39,65 @@ namespace py = nanobind;
 
 namespace pol3 {
 
-struct point_vertex_dummy {};
+template <typename Map_type>
+void register_map(py::module_& m, const std::string& map_name) {
+  py::class_<Map_type>(m, map_name.c_str())
+    .def(py::init<>())
+    .def_ro("map_", &Map_type::map_)
+    ;
+}
+
+template <typename Dp, typename Mesh>
+void register_map_get(py::module_& m, const std::string& prop_name) {
+  py::class_<Dp> prop(m, prop_name.c_str());
+  prop.def(py::init<>());
+  m.def("get", &internal::get<Dp, Mesh>,
+        py::arg("property_map"), py::arg("sm"));
+}
+
+template <typename Pm, typename P>
+void edge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
+  using dp = CGAL::dynamic_edge_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp>(m, prop_name);
+  m.def("get", [](const map_type& p, const Ed& e) { return get(p, e); },
+        py::arg("property_map"), py::arg("edge_descriptor"));
+}
+
+template <typename Pm, typename P>
+void face_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
+  using dp = CGAL::dynamic_face_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Fd& f) { return get(p, f); },
+        py::arg("property_map"), py::arg("face_descriptor"));
+}
+
+template <typename Pm, typename P>
+void vertex_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
+  using dp = CGAL::dynamic_vertex_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Vd& v) { return get(p, v); },
+        py::arg("property_map"), py::arg("vertex_descriptor"));
+}
+
+template <typename Pm, typename P>
+void halfedge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
+  using dp = CGAL::dynamic_halfedge_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Hd& h) { return get(p, h); },
+        py::arg("property_map"), py::arg("halfedge_descriptor"));
+}
 
 // Access functions
 const Vertex& vertex(const Halfedge& e) { return (*(e.vertex())); }
@@ -503,42 +561,22 @@ void export_polyhedron_3(py::module_& m) {
         py::arg("fname"), py::arg("points"), py::arg("polygons"),
         py::arg("np") = py::dict());
 
-
-  using dfppm = typename boost::property_map<Prn, CGAL::dynamic_face_property_t<std::size_t>>::type;
-  py::class_<dfppm>(m, "face_size_t_map")
-    .def(py::init<>())
-    .def_ro("map_", &dfppm::map_)
-    ;
-  py::class_<CGAL::dynamic_face_property_t<std::size_t>> dfpst(m, "dynamic_property_face_size_t");
-  dfpst.def(py::init<>());
-  m.def("get", &internal::get_d_f_p<Prn, std::size_t>,
-        py::arg("property_map"), py::arg("sm"));
-
-  using dpvft = typename boost::property_map<Prn, CGAL::dynamic_vertex_property_t<FT>>::type;
-  py::class_<dpvft>(m, "vertex_size_t_map")
-    .def(py::init<>())
-    .def_ro("map_", &dpvft::map_)
-    ;
-  py::class_<CGAL::dynamic_vertex_property_t<FT>> dpft(m, "dynamic_property_vertex_FT");
-  dpft.def(py::init<>());
-  m.def("get", &internal::get_d_v_p<Prn, FT>,
-        py::arg("property_map"), py::arg("sm"));
-
+  pol3::face_map<Prn, std::size_t>(m, "face_size_t_map", "dynamic_property_face_size_t");
+  pol3::vertex_map<Prn, std::size_t>(m, "vertex_size_t_map", "dynamic_property_vertex_size_t");
+  pol3::vertex_map<Prn, FT>(m, "vertex_FT_map", "dynamic_property_vertex_FT");
   namespace PMP = CGAL::Polygon_mesh_processing;
-  using pcprop = CGAL::dynamic_vertex_property_t<PMP::Principal_curvatures_and_directions<Kernel>>;
-  using dpvpcad = typename boost::property_map<Prn, pcprop>::type;
-  py::class_<dpvpcad>(m, "vertex_principal_curvatures_and_directions_map")
-    .def(py::init<>())
-    .def_ro("map_", &dpvpcad::map_)
-    ;
-  py::class_<pcprop> pcprop_c(m, "dynamic_property_vertex_PC");
-  pcprop_c.def(py::init<>());
-  m.def("get", &internal::get_d_v_p<Prn, PMP::Principal_curvatures_and_directions<Kernel>>,
-        py::arg("property_map"), py::arg("sm"));
+  using pcad = PMP::Principal_curvatures_and_directions<Kernel>;
+  pol3::vertex_map<Prn, pcad>
+    (m, "vertex_principal_curvatures_and_directions_map", "dynamic_property_vertex_PC");
+
+
+
+
+  using poly_items = pol3::Polyhedron_items;
+  using poly_items_derived = CGAL::I_Polyhedron_derived_items_3<poly_items>;
 
   // the type
-  using vertex_point_map_type = CGAL::internal::Point_accessor<CGAL::internal::In_place_list_iterator<CGAL::HalfedgeDS_in_place_list_vertex<CGAL::I_Polyhedron_vertex<CGAL::HalfedgeDS_vertex_base<CGAL::HalfedgeDS_list_types<Kernel, CGAL::I_Polyhedron_derived_items_3<pol3::Polyhedron_items>, std::allocator<int> >, std::integral_constant<bool, true>, Point_3 > > >, std::allocator<CGAL::HalfedgeDS_in_place_list_vertex<CGAL::I_Polyhedron_vertex<CGAL::HalfedgeDS_vertex_base<CGAL::HalfedgeDS_list_types<Kernel, CGAL::I_Polyhedron_derived_items_3<pol3::Polyhedron_items>, std::allocator<int> >, std::integral_constant<bool, true>, Point_3 > > > > >, Point_3, Point_3 const&, true>;
-
+  using vertex_point_map_type = CGAL::internal::Point_accessor<CGAL::internal::In_place_list_iterator<CGAL::HalfedgeDS_in_place_list_vertex<CGAL::I_Polyhedron_vertex<CGAL::HalfedgeDS_vertex_base<CGAL::HalfedgeDS_list_types<Kernel, poly_items_derived, std::allocator<int> >, std::integral_constant<bool, true>, Point_3 > > >, std::allocator<CGAL::HalfedgeDS_in_place_list_vertex<CGAL::I_Polyhedron_vertex<CGAL::HalfedgeDS_vertex_base<CGAL::HalfedgeDS_list_types<Kernel, poly_items_derived, std::allocator<int> >, std::integral_constant<bool, true>, Point_3 > > > > >, Point_3, Point_3 const&, true>;
   py::class_<vertex_point_map_type>(m, "vertex_point_map")
     .def(py::init<>())
     ;

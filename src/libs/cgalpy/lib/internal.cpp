@@ -242,6 +242,9 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("minimum_region_size"):
         cgal_parameters = cgal_parameters.minimum_region_size(py::cast<std::size_t>(item.second));
         break;
+      case Hash("ball_radius"):
+        cgal_parameters = cgal_parameters.ball_radius(py::cast<Ft>(item.second));
+        break;
 
 
 

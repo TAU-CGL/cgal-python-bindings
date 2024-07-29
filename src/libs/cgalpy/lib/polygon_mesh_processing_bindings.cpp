@@ -60,6 +60,44 @@ namespace PMP = CGAL::Polygon_mesh_processing;
 
 namespace pmp {
 
+// map getters
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+template <typename PolygonMesh>
+auto get_vertex_point_map(const PolygonMesh& pm, const py::dict& np = py::dict()) {
+  using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
+  using vpmap = typename PolygonMesh::template Property_map<Vd, Point_3>;
+  auto vpm = np.contains("vertex_point_map") ? py::cast<vpmap>(np["vertex_point_map"]) : pm.points();
+  return vpm;
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
+template <typename PolygonMesh>
+auto get_vertex_point_map(PolygonMesh& pm, const py::dict& np = py::dict()) {
+  return get(CGAL::vertex_point, pm);
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 0
+
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+template <typename PolygonMesh, typename V>
+auto get_vertex_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none()) {
+  using K = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
+  using map_type = typename PolygonMesh::template Property_map<K, V>;
+  return dict_key.is_none() ? pm.template add_property_map<K, V>(map_name, V()).first :
+    py::cast<map_type>(dict_key);
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
+  // boost::property_map<Mesh, CGAL::dynamic_vertex_property_t<Epic_kernel::FT>>::type
+template <typename PolygonMesh, typename V>
+auto get_vertex_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none()) {
+  using dynamic_prop = typename CGAL::dynamic_vertex_property_t<V>;
+  using map_type = typename boost::property_map<PolygonMesh, dynamic_prop>::type;
+  return dict_key.is_none() ? get(dynamic_prop(), pm) :
+    py::cast<map_type>(dict_key);
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 0
+
+
 /*! Determine whether two polylines intersect.
  * It's a shame that we cannot pass the begin1,end1,begin2,end2
  * directly to the CGAL do_intersect function.
@@ -923,28 +961,19 @@ auto isotropic_remeshing_sf(const py::list& face_range,
 
 }
 
-
 //
 template <typename PolygonMesh>
-void smooth_shape(PolygonMesh& pmesh,
+auto smooth_shape(PolygonMesh& pmesh,
                   const double time,
                         const py::dict& np = py::dict()) {
   using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-  using vpmap = typename PolygonMesh::template Property_map<Vd, Point_3>;
-  using constrained_map = typename PolygonMesh::template Property_map<Vd, bool>;
-  auto vpm = np.contains("vertex_point_map") ? py::cast<vpmap>(np["vertex_point_map"]) : pmesh.points();
-  auto propmap = np.contains("vertex_is_constrained_map") ?
-    py::cast<constrained_map>(np["vertex_is_constrained_map"]) :
-    pmesh.template add_property_map<Vd, bool>("INTERNAL_MAP1", false).first;
-  PMP::smooth_shape(pmesh, time,
+  auto vpm = get_vertex_point_map(pmesh, np);
+  auto propmap = get_vertex_prop_map<PolygonMesh, bool>
+    (pmesh, "vertex_is_constrained_map", np.contains("vertex_is_constrained_map") ? np["vertex_is_constrained_map"] : py::none());
+  return PMP::smooth_shape(pmesh, time,
                     internal::parse_named_parameters(np)
                     .vertex_is_constrained_map(propmap)
                     .vertex_point_map(vpm));
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
-#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
-  PMP::smooth_shape(pmesh, time, internal::parse_pmp_np<PolygonMesh>(np));
-#endif // CGALPY_PMP_POLYGONAL_MESH == 0
 }
 
 template <typename PolygonMesh>
@@ -1269,9 +1298,40 @@ py::tuple compute_normals(const PolygonMesh& pm) {
 }
 
 template <typename PolygonMesh>
-void interpolated_corrected_curvatures(const PolygonMesh& pm,
+void interpolated_corrected_curvatures(PolygonMesh& pm,
                                        const py::dict& np = py::dict()) {
-  PMP::interpolated_corrected_curvatures(pm, internal::parse_pmp_np<PolygonMesh>(np));
+// vertex_mean_curvature_map
+//     Type: a class model of WritablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and GT::FT as value type
+// vertex_Gaussian_curvature_map
+//     Type: a class model of WritablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and GT::FT as value type.
+// vertex_principal_curvatures_and_directions_map
+// vertex_point_map
+//     Default: boost::get(CGAL::vertex_point, pmesh).
+// vertex_normal_map
+//     Default: get(dynamic_vertex_property_t<GT::Vector_3>(), pmesh).
+  auto vmcm = get_vertex_prop_map<PolygonMesh, FT>
+    (pm, "INTERNAL_MAP0", np.contains("vertex_mean_curvature_map") ? np["vertex_mean_curvature_map"] : py::none());
+  auto vgcm = get_vertex_prop_map<PolygonMesh, FT>
+    (pm, "INTERNAL_MAP1", np.contains("vertex_Gaussian_curvature_map") ? np["vertex_Gaussian_curvature_map"] : py::none());
+  auto vpcdm = get_vertex_prop_map<PolygonMesh, PMP::Principal_curvatures_and_directions<Kernel>>
+    (pm, "INTERNAL_MAP2", np.contains("vertex_principal_curvatures_and_directions_map") ? np["vertex_principal_curvatures_and_directions_map"] : py::none());
+
+  auto vnm = get_vertex_prop_map<PolygonMesh, Vector_3>
+    (pm, "INTERNAL_MAP3", np.contains("vertex_normal_map") ? np["vertex_normal_map"] : py::none());
+  // auto vpmap = get_vertex_point_map(pm, np); // does not work
+  PMP::interpolated_corrected_curvatures(pm, internal::parse_pmp_np<PolygonMesh>(np)
+                                         .vertex_mean_curvature_map(vmcm)
+                                         .vertex_Gaussian_curvature_map(vgcm)
+                                         .vertex_principal_curvatures_and_directions_map(vpcdm)
+                                         // .vertex_point_map(vpmap), // does not work
+                                         .vertex_normal_map(vnm)
+                                         );
+  // delete the internal map
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("vertex_Gaussian_curvature_map")) {
+    pm.remove_property_map(vgcm);
+  }
+#endif
 }
 
 template <typename PolygonMesh>
@@ -1285,23 +1345,28 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
     py::cast<bool>(np["vertex_Gaussian_curvature"]);
   py::object vmc = py::none();
   py::object vgc = py::none();
+
   if (vertex_mean_curvature && vertex_Gaussian_curvature) {
     double vmc_d, vGc;
     PMP::interpolated_corrected_curvatures(v, pm,
-    internal::parse_pmp_np<PolygonMesh>(np).vertex_mean_curvature(std::ref(vmc_d)).vertex_Gaussian_curvature(std::ref(vGc)));
+    internal::parse_pmp_np<PolygonMesh>(np)
+                                           .vertex_mean_curvature(std::ref(vmc_d))
+                                           .vertex_Gaussian_curvature(std::ref(vGc)));
     vmc = py::cast(vmc_d);
     vgc = py::cast(vGc);
   }
   else if (vertex_mean_curvature) {
     double vmc_d;
     PMP::interpolated_corrected_curvatures(v, pm,
-    internal::parse_pmp_np<PolygonMesh>(np).vertex_mean_curvature(std::ref(vmc_d)));
+    internal::parse_pmp_np<PolygonMesh>(np)
+                                           .vertex_mean_curvature(std::ref(vmc_d)));
     vmc = py::cast(vmc_d);
   }
   else if (vertex_Gaussian_curvature) {
     double vGc;
     PMP::interpolated_corrected_curvatures(v, pm,
-    internal::parse_pmp_np<PolygonMesh>(np).vertex_Gaussian_curvature(std::ref(vGc)));
+    internal::parse_pmp_np<PolygonMesh>(np)
+                                           .vertex_Gaussian_curvature(std::ref(vGc)));
     vgc = py::cast(vGc);
   }
   else {
