@@ -21,7 +21,7 @@ except:
     print("Invalid input.")
     exit(1)
 
-vcmap, success = mesh.add_property_map_Vertex_bool("v:bool")
+vcmap, success = mesh.add_property_map_vertex_bool("v:bool")
 if not success:
     print("Failed to add property map.")
     exit(1)

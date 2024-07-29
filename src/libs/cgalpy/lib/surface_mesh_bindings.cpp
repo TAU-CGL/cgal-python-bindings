@@ -469,28 +469,28 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("point", &sm::my_point<Sm>, ri)
       .def("points", &sm::points<Sm, Vi, Pnt>)
 
-      .def("add_property_map_Vertex_point", &sm::add_map<Sm, Vi, Pnt>,
+      .def("add_property_map_vertex_point", &sm::add_map<Sm, Vi, Pnt>,
            py::arg("name") = std::string(), py::arg("default_value") = Pnt())
-      .def("add_property_map_Vertex_bool", &sm::add_map<Sm, Vi, bool>,
+      .def("add_property_map_vertex_bool", &sm::add_map<Sm, Vi, bool>,
            py::arg("name") = std::string(), py::arg("default_value") = bool())
-      .def("add_property_map_Vertex_size_t", &sm::add_map<Sm, Vi, std::size_t>,
+      .def("add_property_map_vertex_size_t", &sm::add_map<Sm, Vi, std::size_t>,
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
-      .def("add_property_map_Vertex_vector", &sm::add_map<Sm, Vi, Vector_3>,
+      .def("add_property_map_vertex_vector", &sm::add_map<Sm, Vi, Vector_3>,
            py::arg("name") = std::string(), py::arg("default_value") = Vector_3())
-      .def("add_property_map_Vertex_int", &sm::add_map<Sm, Vi, int>,
+      .def("add_property_map_vertex_int", &sm::add_map<Sm, Vi, int>,
            py::arg("name") = std::string(), py::arg("default_value") = int())
 
-      .def("add_property_map_Edge_bool", &sm::add_map<Sm, Ei, bool>,
+      .def("add_property_map_edge_bool", &sm::add_map<Sm, Ei, bool>,
            py::arg("name") = std::string(), py::arg("default_value") = bool())
 
-      .def("add_property_map_Face_double", &sm::add_map<Sm, Fi, double>,
+      .def("add_property_map_face_double", &sm::add_map<Sm, Fi, double>,
            py::arg("name") = std::string(), py::arg("default_value") = double())
-      .def("add_property_map_Face_vector", &sm::add_map<Sm, Fi, Vector_3>,
+      .def("add_property_map_face_vector", &sm::add_map<Sm, Fi, Vector_3>,
            py::arg("name") = std::string(), py::arg("default_value") = Vector_3())
-      .def("add_property_map_Face_size_t", &sm::add_map<Sm, Fi, std::size_t>,
+      .def("add_property_map_face_size_t", &sm::add_map<Sm, Fi, std::size_t>,
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
 
-      .def("add_property_map_Halfedge_size_t", &sm::add_map<Sm, Hi, std::size_t>,
+      .def("add_property_map_halfedge_size_t", &sm::add_map<Sm, Hi, std::size_t>,
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
 
 

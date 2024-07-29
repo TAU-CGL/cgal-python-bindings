@@ -21,20 +21,20 @@ def test(result, iterable):
 
 mesh = Sm.read_polygon_mesh("meshes/elephant.off")
 
-test(mesh.add_property_map_Vertex_point("v:poinsdat"), mesh.vertices())
-test(mesh.add_property_map_Vertex_bool("v:bool"), mesh.vertices())
-test(mesh.add_property_map_Vertex_size_t("v:size_t"), mesh.vertices())
-test(mesh.add_property_map_Vertex_vector("v:vector"), mesh.vertices())
+test(mesh.add_property_map_vertex_point("v:poinsdat"), mesh.vertices())
+test(mesh.add_property_map_vertex_bool("v:bool"), mesh.vertices())
+test(mesh.add_property_map_vertex_size_t("v:size_t"), mesh.vertices())
+test(mesh.add_property_map_vertex_vector("v:vector"), mesh.vertices())
 
-test(mesh.add_property_map_Vertex_int("v:int"), mesh.vertices())
+test(mesh.add_property_map_vertex_int("v:int"), mesh.vertices())
 
-test(mesh.add_property_map_Edge_bool("e:bool"), mesh.edges())
+test(mesh.add_property_map_edge_bool("e:bool"), mesh.edges())
 
-test(mesh.add_property_map_Face_double("f:double"), mesh.faces())
-test(mesh.add_property_map_Face_size_t("f:size_t"), mesh.faces())
-test(mesh.add_property_map_Face_vector("f:vector"), mesh.faces())
-test(mesh.add_property_map_Face_size_t("f:sizedas_t"), mesh.faces())
+test(mesh.add_property_map_face_double("f:double"), mesh.faces())
+test(mesh.add_property_map_face_size_t("f:size_t"), mesh.faces())
+test(mesh.add_property_map_face_vector("f:vector"), mesh.faces())
+test(mesh.add_property_map_face_size_t("f:sizedas_t"), mesh.faces())
 
-test(mesh.add_property_map_Halfedge_size_t("h:size_t"), mesh.halfedges())
+test(mesh.add_property_map_halfedge_size_t("h:size_t"), mesh.halfedges())
 
 

@@ -27,6 +27,7 @@
 #include <CGAL/Polygon_mesh_processing/clip.h>
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
+#include <CGAL/Polygon_mesh_processing/detect_features.h>
 #include <CGAL/Polygon_mesh_processing/distance.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 #include <CGAL/Polygon_mesh_processing/intersection.h>
@@ -37,6 +38,7 @@
 #include <CGAL/Polygon_mesh_processing/random_perturbation.h>
 #include <CGAL/Polygon_mesh_processing/refine.h>
 #include <CGAL/Polygon_mesh_processing/remesh.h>
+#include <CGAL/Polygon_mesh_processing/remesh_planar_patches.h>
 #include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/smooth_shape.h>
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
@@ -98,6 +100,42 @@ auto get_vertex_prop_map(PolygonMesh& pm, const std::string& map_name, const py:
 }
 #endif // CGALPY_PMP_POLYGONAL_MESH == 0
 
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+template <typename PolygonMesh, typename F>
+auto get_edge_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none()) {
+  using K = typename boost::graph_traits<PolygonMesh>::edge_descriptor;
+  using map_type = typename PolygonMesh::template Property_map<K, F>;
+  return dict_key.is_none() ? pm.template add_property_map<K, F>(map_name, F()).first :
+    py::cast<map_type>(dict_key);
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
+template <typename PolygonMesh, typename F>
+auto get_edge_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none()) {
+  using dynamic_prop = typename CGAL::dynamic_edge_property_t<F>;
+  using map_type = typename boost::property_map<PolygonMesh, dynamic_prop>::type;
+  return dict_key.is_none() ? get(dynamic_prop(), pm) :
+    py::cast<map_type>(dict_key);
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 0
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+template <typename PolygonMesh, typename F>
+auto get_face_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none()) {
+  using K = typename boost::graph_traits<PolygonMesh>::face_descriptor;
+  using map_type = typename PolygonMesh::template Property_map<K, F>;
+  return dict_key.is_none() ? pm.template add_property_map<K, F>(map_name, F()).first :
+    py::cast<map_type>(dict_key);
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
+template <typename PolygonMesh, typename F>
+auto get_face_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none()) {
+  using dynamic_prop = typename CGAL::dynamic_face_property_t<F>;
+  using map_type = typename boost::property_map<PolygonMesh, dynamic_prop>::type;
+  return dict_key.is_none() ? get(dynamic_prop(), pm) :
+    py::cast<map_type>(dict_key);
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 0
 
 /*! Determine whether two polylines intersect.
  * It's a shame that we cannot pass the begin1,end1,begin2,end2
@@ -938,10 +976,25 @@ auto isotropic_remeshing(const py::list& face_range,
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "edge_is_constrained_map",
+    parameters.contains("edge_is_constrained_map") ? parameters["edge_is_constrained_map"] : py::none());
+  auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "vertex_is_constrained_map",
+    parameters.contains("vertex_is_constrained_map") ? parameters["vertex_is_constrained_map"] : py::none());
+
   PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                       stl_input_iterator<Fd>(face_range, false)),
                            target_edge_length, pmesh,
-                           internal::parse_pmp_np<PolygonMesh>(parameters));
+                           internal::parse_pmp_np<PolygonMesh>(parameters)
+                           .edge_is_constrained_map(eicm)
+                           .vertex_is_constrained_map(vicm));
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!parameters.contains("edge_is_constrained_map")) {
+    pmesh.remove_property_map(eicm);
+  }
+  if (!parameters.contains("vertex_is_constrained_map")) {
+    pmesh.remove_property_map(vicm);
+  }
+#endif
 }
 
 
@@ -960,6 +1013,53 @@ auto isotropic_remeshing_sf(const py::list& face_range,
                            sizing, pmesh,
                            internal::parse_pmp_np<PolygonMesh>(parameters));
 
+}
+
+//
+template <typename PolygonMesh>
+auto remesh_planar_patches(PolygonMesh& pmesh,
+                           const py::dict& np_in = py::dict(),
+                           const py::dict& np_out = py::dict()) {
+
+  using Pm = PolygonMesh;
+
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "edge_is_constrained_map",
+    np_in.contains("edge_is_constrained_map") ? np_in["edge_is_constrained_map"] : py::none());
+  auto fpm = get_face_prop_map<Pm, std::size_t>(pmesh, "face_patch_map",
+    np_in.contains("face_patch_map") ? np_in["face_patch_map"] : py::none());
+  auto vcm = get_vertex_prop_map<Pm, std::size_t>(pmesh, "vertex_corner_map",
+    np_in.contains("vertex_corner_map") ? np_in["vertex_corner_map"] : py::none());
+
+  auto fpm2 = get_face_prop_map<Pm, std::size_t>(pmesh, "face_patch_map",
+    np_out.contains("face_patch_map") ? np_out["face_patch_map"] : py::none());
+  auto vcm2 = get_vertex_prop_map<Pm, std::size_t>(pmesh, "vertex_corner_map",
+    np_out.contains("vertex_corner_map") ? np_out["vertex_corner_map"] : py::none());
+
+  Pm out;
+
+  PMP::remesh_planar_patches(pmesh,
+                             out,
+                             internal::parse_pmp_np<PolygonMesh>(np_in)
+                             .edge_is_constrained_map(eicm)
+                             .face_patch_map(fpm)
+                             .vertex_corner_map(vcm)
+                             ,
+                             internal::parse_pmp_np<PolygonMesh>(np_out)
+                             .face_patch_map(fpm2)
+                             .vertex_corner_map(vcm2)
+                             );
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np_in.contains("edge_is_constrained_map")) {
+    pmesh.remove_property_map(eicm);
+  }
+  if (!np_in.contains("face_patch_map")) {
+    pmesh.remove_property_map(fpm);
+  }
+  if (!np_in.contains("vertex_corner_map")) {
+    pmesh.remove_property_map(vcm);
+  }
+#endif
+  return out;
 }
 
 //
@@ -1630,7 +1730,6 @@ py::tuple orient_polygon_soup(const py::list& points,
   if (np.contains("visitor")) {
     auto vv = np["visitor"];
     try {
-      // return cgal_parameters.visitor(py::cast<pmp::Dummy_default_orienatation_visitor>(visitor));
       success = PMP::orient_polygon_soup(pts, polys,
                                internal::parse_pmp_np<PolygonMesh>(np).visitor(py::cast<pmp::Default_orientation_visitor>(vv)));
       if (!success) throw std::runtime_error("Polygon soup orientation failed!");
@@ -1705,6 +1804,25 @@ py::tuple polygon_soup_to_polygon_mesh(const py::list& points,
                                       internal::parse_pmp_np<PolygonMesh>(np_ps),
                                       internal::parse_pmp_np<PolygonMesh>(np_pm));
     return py::make_tuple(output, pv, pf);
+  }
+}
+
+template <typename PolygonMesh, typename EBMap>
+void detect_sharp_edges(PolygonMesh& pmesh,
+                        double angle_in_deg,
+                        EBMap ebmap,
+                        const py::dict& np = py::dict()) {
+  if (np.contains("vertex_face_degree_map")) {
+    auto vfdm = get_vertex_prop_map<PolygonMesh, int>
+      (pmesh, "INTERNAL_MAP0", np.contains("vertex_face_degree_map") ? np["vertex_face_degree_map"] : py::none());
+    PMP::detect_sharp_edges(pmesh, angle_in_deg, ebmap, internal::parse_pmp_np<PolygonMesh>(np)
+                            .vertex_feature_degree_map(vfdm)
+                            );
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+    pmesh.remove_property_map(vfdm);
+#endif
+  } else {
+    PMP::detect_sharp_edges(pmesh, angle_in_deg, ebmap, internal::parse_pmp_np<PolygonMesh>(np));
   }
 }
 
@@ -1924,12 +2042,23 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Polyline = std::vector<Kernel::Point_3>;
   using Np = CGAL::parameters::Default_named_parameters;
   namespace PMP = CGAL::Polygon_mesh_processing;
+  using Fd = boost::graph_traits<Pm>::face_descriptor;
+  using Hd = boost::graph_traits<Pm>::halfedge_descriptor;
+  using Vd = boost::graph_traits<Pm>::vertex_descriptor;
+  using Ed = boost::graph_traits<Pm>::edge_descriptor;
 
   using Np_t = bool;
   using Np_tag = CGAL::internal_np::all_default_t;
   using Np_base = CGAL::internal_np::No_property;
   using Np_class = CGAL::Named_function_parameters<Np_t, Np_tag, Np_base>;
   using Concurrency_tag = CGAL::Sequential_tag;
+
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  using edge_bool_map = Pm::Property_map<Ed, bool>;
+#endif
+#if CGALPY_PMP_POLYGONAL_MESH == 0
+  using edge_bool_map = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
+#endif
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -2031,6 +2160,9 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("tangential_relaxation", &pmp::tangential_relaxation<Pm>,
         py::arg("pm"), py::arg("parameters") = py::dict());
 
+  m.def("remesh_planar_patches", &pmp::remesh_planar_patches<Pm>,
+        py::arg("pm"), py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
+
   m.def("smooth_shape", &pmp::smooth_shape<Pm>,
         py::arg("pm"), py::arg("time"), py::arg("parameters") = py::dict());
 
@@ -2107,6 +2239,10 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("is_closed", &CGAL::is_closed<Pm>,
         py::arg("g"));
+
+  m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
+        py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("ebmap"),
+        py::arg("parameters") = py::dict());
 
   m.def("orient_to_bound_a_volume", &pmp::orient_to_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
