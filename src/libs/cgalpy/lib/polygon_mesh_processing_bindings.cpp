@@ -1354,29 +1354,26 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
 
   auto pcad = PMP::Principal_curvatures_and_directions<Kernel>();
 
-  auto ball_radius = np.contains("ball_radius") ? py::cast<FT>(np["ball_radius"]) : -1;
-  auto geom_traits = np.contains("geom_traits") ? py::cast<Kernel>(np["geom_traits"]) : Kernel();
-
-
   double vmc_d, vGc;
   if (np.contains("vertex_normal_map")) {
     auto vnm = get_vertex_prop_map<PolygonMesh, Vector_3>
       (pm, "INTERNAL_MAP1", np.contains("vertex_normal_map") ? np["vertex_normal_map"] : py::none());
     PMP::interpolated_corrected_curvatures(v, pm,
-    CGAL::parameters::geom_traits(geom_traits)
+    internal::parse_pmp_np<PolygonMesh>(np)
                                            .vertex_mean_curvature(std::ref(vmc_d))
                                            .vertex_Gaussian_curvature(std::ref(vGc))
                                            .vertex_principal_curvatures_and_directions(std::ref(pcad))
-                                           .ball_radius(ball_radius)
                                            .vertex_normal_map(vnm)
                                            );
+  #if CGALPY_PMP_POLYGONAL_MESH == 1
+    pm.remove_property_map(vnm);
+  #endif
   } else {
     PMP::interpolated_corrected_curvatures(v, pm,
-    CGAL::parameters::geom_traits(geom_traits)
+    internal::parse_pmp_np<Polygonal_mesh>(np)
                                            .vertex_mean_curvature(std::ref(vmc_d))
                                            .vertex_Gaussian_curvature(std::ref(vGc))
                                            .vertex_principal_curvatures_and_directions(std::ref(pcad))
-                                           .ball_radius(ball_radius)
                                            );
   }
   vmc = py::cast(vmc_d);
