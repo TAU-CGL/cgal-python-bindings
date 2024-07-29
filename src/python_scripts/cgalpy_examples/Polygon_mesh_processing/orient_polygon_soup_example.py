@@ -2,6 +2,8 @@
 import os
 import sys
 import importlib
+from typing import Any
+
 if len(sys.argv) < 2:
   sys.path.append(os.path.abspath('../precompiled'))
   lib = 'CGALPY'
@@ -9,8 +11,22 @@ else:
   lib = sys.argv[1]
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
+
+Pm: Any = None
+def p3():
+  global Pm
+  try: Pm = CGALPY.Pol3
+  except: return False
+  else: return True
+
+def sm3():
+  global Pm
+  try: Pm = CGALPY.Sm
+  except: return False
+  else: return True
+
+if not (p3() or sm3()): raise ValueError("Cannot find a polygonal mesh.")
 
 def non_manifold_edge(id1, id2, nb_poly):
   print(f"The edge {id1}, {id2} is not manifold: {nb_poly} incident polygons.")
@@ -38,7 +54,7 @@ Pmp.set_polygon_orientation_reversed(v, polygon_orientation_reversed)
 filename = "meshes/tet-shuffled.off" if len(sys.argv) < 3 else sys.argv[2]
 
 try:
-  points, polygons = Sm.read_polygon_soup(filename)
+  points, polygons = Pm.read_polygon_soup(filename)
 except:
   print("Cannot open file ")
   exit(1)
@@ -59,11 +75,14 @@ mesh, pv, pf = Pmp.polygon_soup_to_polygon_mesh(points, polygons,
                                                 {"point_to_vertex_output_iterator": True,
                                                  "polygon_to_face_output_iterator": True})
 
-index = 0
+index = 0;
+for f in mesh.faces():
+  f.set_data(index);
+  index = index + 1
 
 if (Pmp.is_closed(mesh)):
   Pmp.orient_to_bound_a_volume(mesh)
 
-Sm.write_polygon_mesh("tet-oriented1.off", mesh)
+Pm.write_polygon_mesh("tet-oriented1.off", mesh)
 Pmp.reverse_face_orientations(mesh)
-Sm.write_polygon_mesh("tet-oriented2.off", mesh)
+Pm.write_polygon_mesh("tet-oriented2.off", mesh)

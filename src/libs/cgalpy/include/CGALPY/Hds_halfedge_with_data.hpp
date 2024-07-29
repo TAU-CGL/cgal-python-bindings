@@ -13,16 +13,11 @@
 
 // Halfedge with data
 
-template <typename Refs_, typename Data_>
-class Hds_halfedge_with_data :
-  public CGAL::HalfedgeDS_halfedge_base<Refs_, CGAL::Tag_true, CGAL::Tag_true,
-                                        CGAL::Tag_true>
-{
+template <typename Base_, typename Data_>
+class Hds_halfedge_with_data : public Base_ {
 public:
-  using Refs = Refs_;
+  using Base = Base_;
   using Data = Data_;
-  using Base = CGAL::HalfedgeDS_halfedge_base<Refs, CGAL::Tag_true,
-                                              CGAL::Tag_true, CGAL::Tag_true>;
 
 private:
   /*! General purpose data.
@@ -52,26 +47,26 @@ public:
 };
 
 //! \brief constructs default
-template <typename Refs, typename Data>
-Hds_halfedge_with_data<Refs, Data>::Hds_halfedge_with_data() : m_data() {}
+template <typename Base, typename Data>
+Hds_halfedge_with_data<Base, Data>::Hds_halfedge_with_data() : m_data() {}
 
 //! \brief constructs from a halfedge data.
-template <typename Refs, typename Data>
-Hds_halfedge_with_data<Refs, Data>::
+template <typename Base, typename Data>
+Hds_halfedge_with_data<Base, Data>::
 Hds_halfedge_with_data(const Data& data) : m_data(data) {}
 
 //! \brief obtains a non-const reference of the halfedge data.
-template <typename Refs, typename Data>
-Data& Hds_halfedge_with_data<Refs, Data>::data() { return m_data; }
+template <typename Base, typename Data>
+Data& Hds_halfedge_with_data<Base, Data>::data() { return m_data; }
 
 //! \brief obtains a const reference of the halfedge data.
-template <typename Refs, typename Data>
-const Data& Hds_halfedge_with_data<Refs, Data>::data() const
+template <typename Base, typename Data>
+const Data& Hds_halfedge_with_data<Base, Data>::data() const
 { return m_data; }
 
 //! \brief sets the general purpose halfedge data.
-template <typename Refs, typename Data>
-void Hds_halfedge_with_data<Refs, Data>::set_data(const Data& data)
+template <typename Base, typename Data>
+void Hds_halfedge_with_data<Base, Data>::set_data(const Data& data)
 { m_data = data; }
 
 #endif

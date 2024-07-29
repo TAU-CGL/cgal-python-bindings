@@ -14,11 +14,11 @@
 // Vertex with data
 
 template <typename Base_, typename Data_>
-class Hds_face_with_data : Base_ {
+class Hds_face_with_data : public Base_ {
 public:
   using Base = Base_;
   using Data = Data_;
-  using Plane_3 = typename Base::Plane_3;
+  using Plane_3 = typename Base::Plane;
 
 private:
   /*! General purpose data.

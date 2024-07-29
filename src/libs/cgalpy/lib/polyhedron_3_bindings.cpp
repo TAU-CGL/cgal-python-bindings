@@ -201,6 +201,14 @@ void export_vertex(C& prn_c) {
   py::class_<Vertex> vertex_c(prn_c, "Vertex");
   vertex_c.def(py::init<>())
     .def("point", [](const Vertex& v){ return v.point(); }, ri)
+#ifdef CGALPY_POL3_VERTEX_EXTENDED
+    // The member functions set_data() and data() are defined in a base class of
+    // Vertex. Therefore, we cannot directly refere to any of them, e.g.,
+    // `Vertex::set_data`. Instead, we introduce lambda functions that call
+    // the appropriate member functions.
+    .def("set_data", [](Vertex& v, py::object obj) { v.set_data(obj); })
+    .def("data", [](const Vertex& v)->py::object { return v.data(); })
+#endif
     ;
 }
 
@@ -233,6 +241,14 @@ void export_halfedge(C& prn_c) {
     .def("next", &pol3::next, ri)
     .def("prev", &pol3::prev, ri)
     .def("is_border", [](const Halfedge& e){ return e.is_border(); })
+#ifdef CGALPY_POL3_HALFEDGE_EXTENDED
+    // The member functions set_data() and data() are defined in a base class of
+    // Halfedge. Therefore, we cannot directly refere to any of them, e.g.,
+    // `Halfedge::set_data`. Instead, we introduce lambda functions that call
+    // the appropriate member functions.
+    .def("set_data", [](Halfedge& h, py::object obj) { h.set_data(obj); })
+    .def("data", [](const Halfedge& h)->py::object { return h.data(); })
+#endif
     ;
 }
 
@@ -254,6 +270,14 @@ void export_face(C& prn_c) {
     .def("facet_degree", [](const Face& f){ return f.facet_degree(); })
     .def("is_triangle", [](const Face& f){ return f.is_triangle(); })
     .def("is_quad", [](const Face& f){ return f.is_quad(); })
+#ifdef CGALPY_POL3_FACE_EXTENDED
+    // The member functions set_data() and data() are defined in a base class of
+    // Face. Therefore, we cannot directly refere to any of them, e.g.,
+    // `Face::set_data`. Instead, we introduce lambda functions that call
+    // the appropriate member functions.
+    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); })
+    .def("data", [](const Face& f)->py::object { return f.data(); })
+#endif
     ;
 
   using Hafcc = pol3::Halfedge_around_facet_const_circulator;

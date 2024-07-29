@@ -26,23 +26,26 @@ struct Polyhedron_items : public CGAL::Polyhedron_items_3 {
   template <typename Refs, typename Traits>
   struct Vertex_wrapper {
     using Pnt = typename Traits::Point_3;
-    using Vb = typename Vertex_with_id<vertex_with_id(), Refs, Pnt>::type;
-    typedef typename Vertex_extended<is_vertex_extended(), Vb, py::object>::type
-      Vertex;
+    using Vb = CGAL::HalfedgeDS_vertex_base<Refs, CGAL::Tag_true, Pnt>;
+    using Vertex =
+      typename Vertex_extended<is_vertex_extended(), Vb, py::object>::type;
+
   };
 
   template <typename Refs, typename Traits>
   struct Halfedge_wrapper {
-    typedef typename Halfedge_extended<is_halfedge_extended(), Refs,
-                                       py::object>::type        Halfedge;
+    using True = CGAL::Tag_true;
+    using Hb = CGAL::HalfedgeDS_halfedge_base<Refs, True, True, True>;
+    using Halfedge =
+      typename Halfedge_extended<is_halfedge_extended(), Hb, py::object>::type;
   };
 
   template <typename Refs, typename Traits>
   struct Face_wrapper {
     using Pln = typename Traits::Plane_3;
-    using Fb = typename Face_with_id<face_with_id(), Refs, Pln>::type;
-    typedef typename Face_extended<is_face_extended(), Fb, py::object>::type
-      Face;
+    using Fb = CGAL::HalfedgeDS_face_base<Refs, CGAL::Tag_true, Pln>;
+    using Face =
+      typename Face_extended<is_face_extended(), Fb, py::object>::type;
   };
 };
 
