@@ -38,6 +38,66 @@ namespace py = nanobind;
 
 namespace sm {
 
+template <typename Map_type>
+void register_map(py::module_& m, const std::string& map_name) {
+  py::class_<Map_type>(m, map_name.c_str())
+    .def(py::init<>())
+    .def_ro("map_", &Map_type::map_)
+    ;
+}
+
+template <typename Dp, typename Mesh>
+void register_map_get(py::module_& m, const std::string& prop_name) {
+  py::class_<Dp> prop(m, prop_name.c_str());
+  prop.def(py::init<>());
+  m.def("get", &internal::get<Dp, Mesh>,
+        py::arg("property_map"), py::arg("sm"));
+}
+
+template <typename Pm, typename P>
+void edge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
+  using dp = CGAL::dynamic_edge_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp>(m, prop_name);
+  m.def("get", [](const map_type& p, const Ed& e) { return get(p, e); },
+        py::arg("property_map"), py::arg("edge_descriptor"));
+}
+
+template <typename Pm, typename P>
+void face_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
+  using dp = CGAL::dynamic_face_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Fd& f) { return get(p, f); },
+        py::arg("property_map"), py::arg("face_descriptor"));
+}
+
+template <typename Pm, typename P>
+void vertex_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
+  using dp = CGAL::dynamic_vertex_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Vd& v) { return get(p, v); },
+        py::arg("property_map"), py::arg("vertex_descriptor"));
+}
+
+template <typename Pm, typename P>
+void halfedge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
+  using dp = CGAL::dynamic_halfedge_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Hd& h) { return get(p, h); },
+        py::arg("property_map"), py::arg("halfedge_descriptor"));
+}
+
 //
 template <typename SurfaceMesh>
 SurfaceMesh make_tetrahedron(const typename SurfaceMesh::Point& p1,
@@ -525,18 +585,18 @@ void export_surface_mesh(py::module_& m) {
   // Type: a class model of WritablePropertyMap with the value type of RegionMap as key and GeomTraits::Plane_3 or GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
   // Default: None
 
-  // automating this did not work for me
-  using dfppm = typename boost::property_map<Sm_3, CGAL::dynamic_face_property_t<std::size_t>>::type;
-  py::class_<dfppm>(m, "face_size_t_map")
-    .def(py::init<>())
-    // has field map_
-    .def_ro("map_", &dfppm::map_)
-    ;
+  // using dfppm = typename boost::property_map<Sm_3, CGAL::dynamic_face_property_t<std::size_t>>::type;
+  // py::class_<dfppm>(m, "face_size_t_map")
+  //   .def(py::init<>())
+  //   // has field map_
+  //   .def_ro("map_", &dfppm::map_)
+  //   ;
+  // py::class_<CGAL::dynamic_face_property_t<std::size_t>> dfpst(m, "dynamic_face_property_size_t");
+  // dfpst.def(py::init<>());
+  // m.def("get", &sm::get<Sm_3, std::size_t>,
+  //       py::arg("property_map"), py::arg("sm"), py::arg("default_value") = std::size_t());
 
-  py::class_<CGAL::dynamic_face_property_t<std::size_t>> dfpst(m, "dynamic_face_property_size_t");
-  dfpst.def(py::init<>());
-  m.def("get", &internal::get_d_f<Sm_3, std::size_t>,
-        py::arg("property_map"), py::arg("sm"), py::arg("default_value") = std::size_t());
+  sm::face_map<Sm_3, std::size_t>(m, "face_size_t_map", "Face_size_t_map");
 
 
 

@@ -21,7 +21,7 @@ unsigned int constexpr Hash(_T const* input) {
 using Named_params = CGAL::Named_function_parameters<bool, CGAL::internal_np::verbose_t>;
 Named_params parse_named_parameters(const py::dict& params, Named_params cgal_parameters = CGAL::parameters::verbose(false));
 
-} // namespace parse_params
+} // namespace internal
 
 #endif //CGALPY_INTERNAL_HPP
 //
