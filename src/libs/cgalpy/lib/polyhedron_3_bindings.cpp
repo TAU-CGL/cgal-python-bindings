@@ -61,7 +61,7 @@ void edge_map(py::module_& m, const std::string& map_name, const std::string& pr
   using dp = CGAL::dynamic_edge_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
-  register_map_get<dp>(m, prop_name);
+  register_map_get<dp, Pm>(m, prop_name);
   m.def("get", [](const map_type& p, const Ed& e) { return get(p, e); },
         py::arg("property_map"), py::arg("edge_descriptor"));
 }
@@ -585,14 +585,27 @@ void export_polyhedron_3(py::module_& m) {
         py::arg("fname"), py::arg("points"), py::arg("polygons"),
         py::arg("np") = py::dict());
 
-  pol3::face_map<Prn, std::size_t>(m, "face_size_t_map", "dynamic_property_face_size_t");
   pol3::vertex_map<Prn, std::size_t>(m, "vertex_size_t_map", "dynamic_property_vertex_size_t");
   pol3::vertex_map<Prn, FT>(m, "vertex_FT_map", "dynamic_property_vertex_FT");
+  pol3::vertex_map<Prn, Pnt>(m, "vertex_point_map", "Vertex_point_map"); //this is the boost::property_map
+  pol3::vertex_map<Prn, bool>(m, "vertex_bool_map", "Vertex_bool_map");
+  pol3::vertex_map<Prn, Vector_3>(m, "vertex_vector_map", "Vertex_vector_map");
+  pol3::vertex_map<Prn, int>(m, "vertex_int_map", "Vertex_int_map");
+
+  pol3::edge_map<Prn, bool>(m, "edge_bool_map", "Edge_bool_map");
+
+  pol3::face_map<Prn, std::size_t>(m, "face_size_t_map", "dynamic_property_face_size_t");
+
   namespace PMP = CGAL::Polygon_mesh_processing;
   using pcad = PMP::Principal_curvatures_and_directions<Kernel>;
   pol3::vertex_map<Prn, pcad>
     (m, "vertex_principal_curvatures_and_directions_map", "dynamic_property_vertex_PC");
 
+  m.def("get_edge_is_feature_map", [](const Prn& sm) { return get(CGAL::edge_is_feature, sm); });
+
+  py::class_<CGAL::Polyhedron_is_feature_edge_pmap>(m, "Polyhedron_is_feature_edge_pmap")
+    .def(py::init<>())
+    ;
 
 
 

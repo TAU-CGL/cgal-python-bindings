@@ -1919,6 +1919,57 @@ auto remesh_almost_planar_patches(PolygonMesh tm_in,
   if (!retv) throw std::runtime_error("Remeshing almost planar patches failed!");
   return pm_out;
 }
+// void CGAL::Polygon_mesh_processing::angle_and_area_smoothing 	( 	const FaceRange &  	faces,
+// 		TriangleMesh &  	tmesh,
+// 		const NamedParameters &  	np = parameters::default_values() 
+// 	)
+template <typename PolygonMesh>
+auto angle_and_area_smoothing(const py::list& faces,
+                              PolygonMesh& pmesh,
+                              const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+  auto faces_vec = list2vec<Fd>(faces);
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP1",
+    np.contains("vertex_is_constrained_map") ? np["vertex_is_constrained_map"] : py::none());
+  PMP::angle_and_area_smoothing(faces_vec, pmesh,
+                                internal::parse_pmp_np<PolygonMesh>(np)
+                                .edge_is_constrained_map(eicm)
+                                .vertex_is_constrained_map(vicm));
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("edge_is_constrained_map")) {
+    pmesh.remove_property_map(eicm);
+  }
+  if (!np.contains("vertex_is_constrained_map")) {
+    pmesh.remove_property_map(vicm);
+  }
+#endif
+}
+
+template <typename PolygonMesh>
+auto angle_and_area_smoothing_m(PolygonMesh& pmesh,
+                              const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP1",
+    np.contains("vertex_is_constrained_map") ? np["vertex_is_constrained_map"] : py::none());
+  PMP::angle_and_area_smoothing(pmesh,
+                                internal::parse_pmp_np<PolygonMesh>(np)
+                                .edge_is_constrained_map(eicm)
+                                .vertex_is_constrained_map(vicm));
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("edge_is_constrained_map")) {
+    pmesh.remove_property_map(eicm);
+  }
+  if (!np.contains("vertex_is_constrained_map")) {
+    pmesh.remove_property_map(vicm);
+  }
+#endif
+}
 
 // visitor stuff
 template <typename PolygonMesh>
@@ -2362,6 +2413,12 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
 #endif
+
+  m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing<Pm>,
+        py::arg("faces"), py::arg("pmesh"), py::arg("parameters") = py::dict());
+
+  m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing_m<Pm>,
+        py::arg("pmesh"), py::arg("parameters") = py::dict());
 
   m.def("orient_to_bound_a_volume", &pmp::orient_to_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());

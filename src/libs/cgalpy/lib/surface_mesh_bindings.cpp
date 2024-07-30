@@ -62,7 +62,7 @@ void edge_map(py::module_& m, const std::string& map_name, const std::string& pr
   using dp = CGAL::dynamic_edge_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
-  register_map_get<dp>(m, prop_name);
+  register_map_get<dp, Pm>(m, prop_name);
   m.def("get", [](const map_type& p, const Ed& e) { return get(p, e); },
         py::arg("property_map"), py::arg("edge_descriptor"));
 }
@@ -563,18 +563,31 @@ void export_surface_mesh(py::module_& m) {
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
-  internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map");
+  py::class_<std::_Bit_reference>(m, "bit_reference")
+    .def(py::init<>())
+    ;
+
+  internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map"); //this is the Pm::Property_map
+  sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
   internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
+  sm::vertex_map<Sm_3, bool>(m, "vertex_bool_boost_map", "Vertex_bool_boost_map");
   internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
+  sm::vertex_map<Sm_3, std::size_t>(m, "vertex_size_t_boost_map", "Vertex_size_t_boost_map");
   internal::export_property_map<Sm_3, Vi, Vector_3>(m, "Vertex_vector_map");
+  sm::vertex_map<Sm_3, Vector_3>(m, "vertex_vector_boost_map", "Vertex_vector_boost_map");
   internal::export_property_map<Sm_3, Vi, int>(m, "Vertex_int_map");
+  sm::vertex_map<Sm_3, int>(m, "vertex_int_boost_map", "Vertex_int_boost_map");
 
 
   internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
+  sm::edge_map<Sm_3, bool>(m, "edge_bool_boost_map", "Edge_bool_boost_map");
+  m.def("get", [](const Sm_3::Property_map<Ei, bool>& p, const Ei& e) { return bool(get(p, e)); }, //this overrides get
+        py::arg("property_map"), py::arg("edge_descriptor"));
 
   internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
   internal::export_property_map<Sm_3, Fi, Vector_3>(m, "Face_vector_map");
   internal::export_property_map<Sm_3, Fi, std::size_t>(m, "Face_size_t_map");
+  sm::face_map<Sm_3, std::size_t>(m, "face_size_t_boost_map", "Face_size_t_boost_map");
 
   internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
 
@@ -597,7 +610,6 @@ void export_surface_mesh(py::module_& m) {
   // Type: a class model of WritablePropertyMap with the value type of RegionMap as key and GeomTraits::Plane_3 or GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
   // Default: None
 
-  // sm::face_map<Sm_3, std::size_t>(m, "face_size_t_map", "Face_size_t_map"); //this breaks the tests
   
   py::class_<boost::vector_property_map<Vector_3>>(m, "Vector_vector_3_map")
     .def(py::init<>())
