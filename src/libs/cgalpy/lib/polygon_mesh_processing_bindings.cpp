@@ -1875,7 +1875,6 @@ auto detect_corners_of_regions(PolygonMesh& pmesh,
 
 template <typename PolygonMesh, typename FacePatchMap, typename VertexCornerMap, typename EdgeIsConstrainedMap>
 auto remesh_almost_planar_patches(PolygonMesh tm_in,
-                                  PolygonMesh pm_out,
                                   std::size_t nb_patches,
                                   std::size_t nb_corners,
                                   FacePatchMap face_patch_map,
@@ -1884,6 +1883,8 @@ auto remesh_almost_planar_patches(PolygonMesh tm_in,
                                   const py::dict& np_in = py::dict(),
                                   const py::dict& np_out = py::dict()) {
   using Pm = PolygonMesh;
+
+  Pm pm_out;
 
   auto fpm = get_face_prop_map<Pm, std::size_t>(pm_out, "INTERNAL_MAP1",
     np_out.contains("face_patch_map") ? np_out["face_patch_map"] : py::none());
@@ -2353,7 +2354,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("parameters") = py::dict());
 
   m.def("remesh_almost_planar_patches", &pmp::remesh_almost_planar_patches<Pm, FacePatchMap, VertexCornerMap, EdgeIsConstrainedMap>,
-        py::arg("tm_in"), py::arg("pm_out"), py::arg("nb_patches"), py::arg("nb_corners"),
+        py::arg("tm_in"), py::arg("nb_patches"), py::arg("nb_corners"),
         py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
 

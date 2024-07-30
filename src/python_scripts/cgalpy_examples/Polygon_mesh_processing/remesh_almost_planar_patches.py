@@ -110,9 +110,7 @@ nb_corners = Pmp.detect_corners_of_regions(sm,
                                             "edge_is_constrained_map": ecm})
 
 # run the remeshing algorithm using filled properties
-out = Sm.Surface_mesh_3()
-Pmp.remesh_almost_planar_patches(sm,
-                                 out,
+out = Pmp.remesh_almost_planar_patches(sm,
                                  nb_regions, nb_corners,
                                  region_ids,
                                  corner_id_map,
