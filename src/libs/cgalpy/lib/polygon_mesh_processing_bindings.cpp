@@ -1720,6 +1720,22 @@ py::tuple duplicate_non_manifold_edges_in_polygon_soup(const py::list& points,
   return py::make_tuple(polyvec2polylist(polyvec), ptvec2ptlist(pointvec), duplicated);
 }
 
+template <typename PolygonMesh>
+auto duplicate_non_manifold_vertices(PolygonMesh& pm,
+                                     const py::dict& np = py::dict()) {
+  using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
+  std::vector<std::vector<Vd>> out;
+  auto vicm = get_vertex_prop_map<PolygonMesh, Vd>
+    (pm, "INTERNAL_MAP0", np.contains("vertex_index_copy_map") ? np["vertex_index_copy_map"] : py::none());
+  auto nb = PMP::duplicate_non_manifold_vertices(pm,
+                                       internal::parse_pmp_np<PolygonMesh>(np)
+                                       .output_iterator(std::back_inserter(out)));
+  py::list result;
+  for (const auto& vec : out) {
+    result.append(vec2list(vec));
+  }
+  return py::make_tuple(nb, result);
+}
 
 template <typename PolygonMesh>
 py::tuple orient_polygon_soup(const py::list& points,
@@ -2384,6 +2400,9 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("duplicate_non_manifold_edges_in_polygon_soup", &pmp::duplicate_non_manifold_edges_in_polygon_soup,
         py::arg("points"), py::arg("polygons"));
 
+  m.def("duplicate_non_manifold_vertices", &pmp::duplicate_non_manifold_vertices<Pm>,
+        py::arg("pmesh"), py::arg("np") = py::dict());
+
   m.def("orient_polygon_soup", &pmp::orient_polygon_soup<Pm>,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
 
@@ -2425,6 +2444,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
         py::arg("pmesh"));
+
+  m.def("is_non_manifold_vertex", &PMP::is_non_manifold_vertex<Pm>,
+        py::arg("v"), py::arg("pm"));
 
   // m.def("reverse_face_orientations")
 
