@@ -37,6 +37,7 @@
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
 #include <CGAL/Polygon_mesh_processing/random_perturbation.h>
 #include <CGAL/Polygon_mesh_processing/refine.h>
+#include <CGAL/Polygon_mesh_processing/region_growing.h>
 #include <CGAL/Polygon_mesh_processing/remesh.h>
 #include <CGAL/Polygon_mesh_processing/remesh_planar_patches.h>
 #include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
@@ -1023,8 +1024,8 @@ auto remesh_planar_patches(PolygonMesh& pmesh,
 
   using Pm = PolygonMesh;
 
-  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "edge_is_constrained_map",
-    np_in.contains("edge_is_constrained_map") ? np_in["edge_is_constrained_map"] : py::none());
+  auto eicm = get_edge_prop_map<Pm, bool>
+    (pmesh, "edge_is_constrained_map", np_in.contains("edge_is_constrained_map") ? np_in["edge_is_constrained_map"] : py::none());
   auto fpm = get_face_prop_map<Pm, std::size_t>(pmesh, "face_patch_map",
     np_in.contains("face_patch_map") ? np_in["face_patch_map"] : py::none());
   auto vcm = get_vertex_prop_map<Pm, std::size_t>(pmesh, "vertex_corner_map",
@@ -1826,6 +1827,98 @@ void detect_sharp_edges(PolygonMesh& pmesh,
   }
 }
 
+using Pm = Polygonal_mesh;
+using Gt = boost::graph_traits<Polygonal_mesh>;
+using Vd = typename Gt::vertex_descriptor;
+using Hd = typename Gt::halfedge_descriptor;
+using Fd = typename Gt::face_descriptor;
+
+template <typename PolygonMesh, typename RegionMap>
+auto region_growing_of_planes_on_faces(PolygonMesh& pmesh,
+                                       RegionMap region_map,
+                                       const py::dict& np = py::dict()) {
+  std::size_t num_regions;
+
+  if (np.contains("region_primitive_map")) {
+    auto rpm = py::cast<boost::vector_property_map<Vector_3>>(np["region_primitive_map"]);
+    num_regions = PMP::region_growing_of_planes_on_faces(pmesh, region_map,
+                                                         internal::parse_pmp_np<PolygonMesh>(np)
+                                                         .region_primitive_map(rpm));
+  }
+  else {
+    num_regions = PMP::region_growing_of_planes_on_faces(pmesh, region_map,
+                                                         internal::parse_pmp_np<PolygonMesh>(np));
+  }
+  return num_regions;
+}
+
+template <typename PolygonMesh, typename RegionMap, typename CornerIdMap>
+auto detect_corners_of_regions(PolygonMesh& pmesh,
+                               RegionMap region_map,
+                               std::size_t nb_regions,
+                               CornerIdMap corner_id_map,
+                               const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  std::size_t num_corners;
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
+                                          np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  std::size_t r = PMP::detect_corners_of_regions(pmesh, region_map, nb_regions, corner_id_map,
+                                                 internal::parse_pmp_np<PolygonMesh>(np)
+                                                 .edge_is_constrained_map(eicm));
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("edge_is_constrained_map")) {
+    pmesh.remove_property_map(eicm);
+  }
+#endif
+  return r;
+}
+
+template <typename PolygonMesh, typename FacePatchMap, typename VertexCornerMap, typename EdgeIsConstrainedMap>
+auto remesh_almost_planar_patches(PolygonMesh tm_in,
+                                  PolygonMesh pm_out,
+                                  std::size_t nb_patches,
+                                  std::size_t nb_corners,
+                                  FacePatchMap face_patch_map,
+                                  VertexCornerMap vertex_corner_map,
+                                  EdgeIsConstrainedMap ecm,
+                                  const py::dict& np_in = py::dict(),
+                                  const py::dict& np_out = py::dict()) {
+  using Pm = PolygonMesh;
+
+  auto fpm = get_face_prop_map<Pm, std::size_t>(pm_out, "INTERNAL_MAP1",
+    np_out.contains("face_patch_map") ? np_out["face_patch_map"] : py::none());
+  auto vcm = get_vertex_prop_map<Pm, std::size_t>(pm_out, "INTERNAL_MAP2",
+    np_out.contains("vertex_corner_map") ? np_out["vertex_corner_map"] : py::none());
+
+  bool retv;
+  if (np_in.contains("patch_normal_map")) {
+    auto rpm = py::cast<boost::vector_property_map<Vector_3>>(np_in["patch_normal_map"]);
+    retv = PMP::remesh_almost_planar_patches(tm_in, pm_out, nb_patches, nb_corners, face_patch_map, vertex_corner_map, ecm,
+                                             internal::parse_pmp_np<PolygonMesh>(np_in)
+                                             .patch_normal_map(rpm),
+                                             internal::parse_pmp_np<PolygonMesh>(np_out)
+                                             .face_patch_map(fpm)
+                                             .vertex_corner_map(vcm));
+  }
+  else {
+    retv = PMP::remesh_almost_planar_patches(tm_in, pm_out, nb_patches, nb_corners, face_patch_map, vertex_corner_map, ecm,
+                                             internal::parse_pmp_np<PolygonMesh>(np_in),
+                                             internal::parse_pmp_np<PolygonMesh>(np_out)
+                                             .face_patch_map(fpm)
+                                             .vertex_corner_map(vcm));
+  }
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np_out.contains("face_patch_map")) {
+    pm_out.remove_property_map(fpm);
+  }
+  if (!np_out.contains("vertex_corner_map")) {
+    pm_out.remove_property_map(vcm);
+  }
+#endif
+  if (!retv) throw std::runtime_error("Remeshing almost planar patches failed!");
+  return pm_out;
+}
+
 // visitor stuff
 template <typename PolygonMesh>
 void orient_to_bound_a_volume(PolygonMesh& tm,
@@ -1862,11 +1955,6 @@ void set_link_connected_polygons(Default_orientation_visitor& v,
                                  const std::function<void(std::size_t, py::list)>& f) {
   v.set_link_connected_polygons(f);
 }
-using Pm = Polygonal_mesh;
-using Gt = boost::graph_traits<Polygonal_mesh>;
-using Vd = typename Gt::vertex_descriptor;
-using Hd = typename Gt::halfedge_descriptor;
-using Fd = typename Gt::face_descriptor;
 // using Boolean_operation_type = COREFINEMENT::Boolean_operation_type;
 using Boolean_operation_type = std::size_t;
 using Cv = Corefine_visitor<Pm>;
@@ -2052,12 +2140,25 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Np_base = CGAL::internal_np::No_property;
   using Np_class = CGAL::Named_function_parameters<Np_t, Np_tag, Np_base>;
   using Concurrency_tag = CGAL::Sequential_tag;
+// FacePatchMap	a class model of ReadablePropertyMap with boost::graph_traits<TriangleMeshIn>::face_descriptor as key type and std::size_t as value type
+// EdgeIsConstrainedMap	a class model of ReadablePropertyMap with boost::graph_traits<TriangleMeshIn>::edge_descriptor as key type and bool as value type
+// VertexCornerMap	a class model of ReadablePropertyMap with boost::graph_traits<TriangleMeshIn>::vertex_descriptor as key type and std::size_t as value type
 
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   using edge_bool_map = Pm::Property_map<Ed, bool>;
+  using RegionMap = Pm::Property_map<Fd, std::size_t>;
+  using CornerIdMap = Pm::Property_map<Vd, std::size_t>;
+  using FacePatchMap = Pm::Property_map<Fd, std::size_t>;
+  using VertexCornerMap = Pm::Property_map<Vd, std::size_t>;
+  using EdgeIsConstrainedMap = Pm::Property_map<Ed, bool>;
 #endif
 #if CGALPY_PMP_POLYGONAL_MESH == 0
   using edge_bool_map = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
+  using RegionMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>;
+  using CornerIdMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<std::size_t>>;
+  using FacePatchMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>;
+  using VertexCornerMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<std::size_t>>;
+  using EdgeIsConstrainedMap = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
 #endif
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -2243,6 +2344,18 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
         py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("ebmap"),
         py::arg("parameters") = py::dict());
+
+  m.def("region_growing_of_planes_on_faces", &pmp::region_growing_of_planes_on_faces<Pm, RegionMap>,
+        py::arg("pmesh"), py::arg("region_map"), py::arg("parameters") = py::dict());
+
+  m.def("detect_corners_of_regions", &pmp::detect_corners_of_regions<Pm, RegionMap, CornerIdMap>,
+        py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"), py::arg("corner_id_map"),
+        py::arg("parameters") = py::dict());
+
+  m.def("remesh_almost_planar_patches", &pmp::remesh_almost_planar_patches<Pm, FacePatchMap, VertexCornerMap, EdgeIsConstrainedMap>,
+        py::arg("tm_in"), py::arg("pm_out"), py::arg("nb_patches"), py::arg("nb_corners"),
+        py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
+        py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
 
   m.def("orient_to_bound_a_volume", &pmp::orient_to_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());

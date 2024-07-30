@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <boost/property_map/vector_property_map.hpp>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <string>
@@ -585,9 +586,11 @@ void export_surface_mesh(py::module_& m) {
   // Type: a class model of WritablePropertyMap with the value type of RegionMap as key and GeomTraits::Plane_3 or GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
   // Default: None
 
-  sm::face_map<Sm_3, std::size_t>(m, "face_size_t_map", "Face_size_t_map");
-
-
+  // sm::face_map<Sm_3, std::size_t>(m, "face_size_t_map", "Face_size_t_map"); //this breaks the tests
+  
+  py::class_<boost::vector_property_map<Vector_3>>(m, "Vector_vector_3_map")
+    .def(py::init<>())
+    ;
 
   m.def("Halfedge", &sm::halfedge<Sm_3>);
 
