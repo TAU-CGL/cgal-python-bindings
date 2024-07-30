@@ -2346,6 +2346,10 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("ebmap"),
         py::arg("parameters") = py::dict());
 
+  // this is currently only supported for Surface_mesh, because Polyhedron would need Random_access_property_map
+  // the boost::property_map types don't work here for some reason
+  // eg. Random_access_property_map<vector<unsigned long, allocator<unsigned long>>>
+#if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("region_growing_of_planes_on_faces", &pmp::region_growing_of_planes_on_faces<Pm, RegionMap>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("parameters") = py::dict());
 
@@ -2357,6 +2361,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("tm_in"), py::arg("nb_patches"), py::arg("nb_corners"),
         py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
+#endif
 
   m.def("orient_to_bound_a_volume", &pmp::orient_to_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());

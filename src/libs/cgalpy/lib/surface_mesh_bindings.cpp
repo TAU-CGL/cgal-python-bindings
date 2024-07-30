@@ -16,6 +16,7 @@
 
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 #include <CGAL/boost/graph/generators.h>
+#include <CGAL/property_map.h>
 #include <CGAL/Dynamic_property_map.h>
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
@@ -261,6 +262,16 @@ auto add_map(SurfaceMesh& sm, const std::string& name = std::string(),
   auto res = sm.template add_property_map<Key, Value>(name, default_value);
   return py::make_tuple(res.first, res.second);
 }
+
+template <typename T>
+auto make_random_access_property_map(const py::list& lst) {
+  std::vector<T> vec;
+  for (auto v : lst) {
+    vec.push_back(py::cast<T>(v));
+  }
+  return CGAL::make_random_access_property_map(vec);
+}
+
 
 } // namespace sm
 
