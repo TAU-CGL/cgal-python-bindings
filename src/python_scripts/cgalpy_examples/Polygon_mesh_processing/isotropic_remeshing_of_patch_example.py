@@ -51,6 +51,6 @@ Pmp.isotropic_remeshing(patch, target_edge_length, mesh,
                          "face_patch_map": selected,
                          "protect_constraints": True})
 
-Sm.write_polygon_mesh("out_py.off", mesh, {"stream_precision": 17})
+Sm.write_polygon_mesh("out.off", mesh, {"stream_precision": 17})
 print("Remeshing done.")
 

@@ -2514,6 +2514,15 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
   py::class_<Pcad>(m, "Principal_curvatures_and_directions")
     .def(py::init<>())
+    .def("__init__", [](Pcad& instance, const py::list& l) {
+      if (l.size() != 4) {
+        throw std::invalid_argument("List must have 4 elements");
+      }
+      instance.min_curvature = py::cast<double>(l[0]);
+      instance.max_curvature = py::cast<double>(l[1]);
+      instance.min_direction = py::cast<Kernel::Vector_3>(l[2]);
+      instance.max_direction = py::cast<Kernel::Vector_3>(l[3]);
+    })
     .def_ro("min_curvature", &Pcad::min_curvature)
     .def_ro("max_curvature", &Pcad::max_curvature)
     .def_ro("min_direction", &Pcad::min_direction)

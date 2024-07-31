@@ -14,7 +14,6 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
-#include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 #include <CGAL/boost/graph/generators.h>
 #include <CGAL/property_map.h>
 #include <CGAL/Dynamic_property_map.h>
@@ -22,6 +21,8 @@
 #include <CGAL/boost/graph/selection.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #include <CGAL/boost/graph/helpers.h>
+#include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
+#include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_surface_mesh.h>
 #endif
@@ -424,6 +425,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   // Surface mesh
   if (! add_attr<Sm>(m, name)) {
 
+    using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
     py::class_<Sm> sm_c(m, name);
     sm_c.def(py::init<>())
       .def(py::init<const Sm&>())
@@ -504,6 +506,10 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("name") = std::string(), py::arg("default_value") = Vector_3())
       .def("add_property_map_vertex_int", &sm::add_map<Sm, Vi, int>,
            py::arg("name") = std::string(), py::arg("default_value") = int())
+      .def("add_property_map_vertex_FT", &sm::add_map<Sm, Vi, FT>,
+           py::arg("name") = std::string(), py::arg("default_value") = FT())
+      .def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
+           py::arg("name") = std::string(), py::arg("default_value"))
 
       .def("add_property_map_edge_bool", &sm::add_map<Sm, Ei, bool>,
            py::arg("name") = std::string(), py::arg("default_value") = bool())
@@ -574,13 +580,10 @@ void export_surface_mesh(py::module_& m) {
   using Hi = typename Sm_3::Halfedge_index;
   using Ei = typename Sm_3::Edge_index;
   using Pnt = Point_3;
+  using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
-
-  py::class_<std::_Bit_reference>(m, "bit_reference")
-    .def(py::init<>())
-    ;
 
   internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map"); //this is the Pm::Property_map
   sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
@@ -592,6 +595,10 @@ void export_surface_mesh(py::module_& m) {
   sm::vertex_map<Sm_3, Vector_3>(m, "vertex_vector_boost_map", "Vertex_vector_boost_map");
   internal::export_property_map<Sm_3, Vi, int>(m, "Vertex_int_map");
   sm::vertex_map<Sm_3, int>(m, "vertex_int_boost_map", "Vertex_int_boost_map");
+  internal::export_property_map<Sm_3, Vi, FT>(m, "Vertex_FT_map");
+  sm::vertex_map<Sm_3, FT>(m, "vertex_FT_boost_map", "Vertex_FT_boost_map");
+  internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
+  sm::vertex_map<Sm_3, Pcad>(m, "vertex_Principal_curvatures_and_directions_boost_map", "Vertex_Principal_curvatures_and_directions_boost_map");
 
 
   internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
