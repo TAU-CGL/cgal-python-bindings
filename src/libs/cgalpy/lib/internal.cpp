@@ -245,6 +245,12 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("ball_radius"):
         cgal_parameters = cgal_parameters.ball_radius(py::cast<Ft>(item.second));
         break;
+      case Hash("collapse_constraints"):
+        cgal_parameters = cgal_parameters.collapse_constraints(py::cast<bool>(item.second));
+        break;
+      case Hash("number_of_relaxation_steps"):
+        cgal_parameters = cgal_parameters.number_of_relaxation_steps(py::cast<unsigned int>(item.second));
+        break;
 
 
 

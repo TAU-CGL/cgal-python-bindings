@@ -19,6 +19,7 @@
 #include <CGAL/property_map.h>
 #include <CGAL/Dynamic_property_map.h>
 #include <CGAL/IO/polygon_soup_io.h>
+#include <CGAL/boost/graph/selection.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #include <CGAL/boost/graph/helpers.h>
 #ifdef CGALPY_HAS_VISUAL
@@ -34,6 +35,7 @@
 #include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/get.hpp"
+#include "CGALPY/helpers.hpp"
 #include "CGALPY/internal.hpp"
 
 namespace py = nanobind;
@@ -125,6 +127,16 @@ SurfaceMesh read_polygon_mesh(const std::string& filename,
     throw std::runtime_error("Cannot read file!");
   return sm;
 }
+  // CGAL::expand_face_selection(seed, mesh, 5, selected, std::back_inserter(patch));
+
+template <class Face, class FaceGraph, class IsFaceSelectedPMap>
+auto expand_face_selection(const py::list& seed, const FaceGraph& mesh,
+                           std::size_t max_distance, const IsFaceSelectedPMap& selected) {
+  std::vector<typename boost::graph_traits<FaceGraph>::face_descriptor> patch;
+  auto seed_vec = pmp::list2vec<Face>(seed);
+  CGAL::expand_face_selection(seed_vec, mesh, max_distance, selected, std::back_inserter(patch));
+  return pmp::vec2list(patch);
+}
 
 // Read Polygon soup from a file
 template <typename SurfaceMesh>
@@ -180,6 +192,7 @@ typename SurfaceMesh::Face_index add_face(SurfaceMesh& sm, py::list& lst) {
   auto end = stl_input_iterator<Vi>(lst, false);
   return sm.add_face(CGAL::make_range(begin, end));
 }
+
 
 //
 template <typename SurfaceMesh>
@@ -501,6 +514,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("name") = std::string(), py::arg("default_value") = Vector_3())
       .def("add_property_map_face_size_t", &sm::add_map<Sm, Fi, std::size_t>,
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
+      .def("add_property_map_face_int", &sm::add_map<Sm, Fi, int>,
+           py::arg("name") = std::string(), py::arg("default_value") = int())
 
       .def("add_property_map_halfedge_size_t", &sm::add_map<Sm, Hi, std::size_t>,
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
@@ -585,11 +600,16 @@ void export_surface_mesh(py::module_& m) {
         py::arg("property_map"), py::arg("edge_descriptor"));
 
   internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
+  sm::face_map<Sm_3, double>(m, "face_double_boost_map", "Face_double_boost_map");
   internal::export_property_map<Sm_3, Fi, Vector_3>(m, "Face_vector_map");
+  sm::face_map<Sm_3, Vector_3>(m, "face_vector_boost_map", "Face_vector_boost_map");
   internal::export_property_map<Sm_3, Fi, std::size_t>(m, "Face_size_t_map");
   sm::face_map<Sm_3, std::size_t>(m, "face_size_t_boost_map", "Face_size_t_boost_map");
+  internal::export_property_map<Sm_3, Fi, int>(m, "Face_int_map");
+  sm::face_map<Sm_3, int>(m, "face_int_boost_map", "Face_int_boost_map");
 
   internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
+  sm::halfedge_map<Sm_3, std::size_t>(m, "halfedge_size_t_boost_map", "Halfedge_size_t_boost_map");
 
   // internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map"); // this is a dict not a map??
 
@@ -620,6 +640,7 @@ void export_surface_mesh(py::module_& m) {
   m.def("null_face", &sm::null_face<Sm_3>);
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>,
         py::arg("fname"), py::arg("parameters") = py::dict());
+  m.def("expand_face_selection", &sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
   m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>,
         py::arg("fname"), py::arg("np") = py::dict());
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);

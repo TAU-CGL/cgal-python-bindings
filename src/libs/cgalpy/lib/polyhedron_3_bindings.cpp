@@ -595,6 +595,12 @@ void export_polyhedron_3(py::module_& m) {
   pol3::edge_map<Prn, bool>(m, "edge_bool_map", "Edge_bool_map");
 
   pol3::face_map<Prn, std::size_t>(m, "face_size_t_map", "dynamic_property_face_size_t");
+  pol3::face_map<Prn, double>(m, "face_double_map", "Face_double_map");
+  pol3::face_map<Prn, Vector_3>(m, "face_vector_map", "Face_vector_map");
+  pol3::face_map<Prn, std::size_t>(m, "face_size_t_map", "Face_size_t_map");
+  pol3::face_map<Prn, int>(m, "face_int_map", "Face_int_map");
+
+
 
   namespace PMP = CGAL::Polygon_mesh_processing;
   using pcad = PMP::Principal_curvatures_and_directions<Kernel>;

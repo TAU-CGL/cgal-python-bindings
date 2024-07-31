@@ -981,19 +981,31 @@ auto isotropic_remeshing(const py::list& face_range,
     parameters.contains("edge_is_constrained_map") ? parameters["edge_is_constrained_map"] : py::none());
   auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "vertex_is_constrained_map",
     parameters.contains("vertex_is_constrained_map") ? parameters["vertex_is_constrained_map"] : py::none());
+  auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "face_index_map",
+    parameters.contains("face_index_map") ? parameters["face_index_map"] : py::none());
+  auto fpm = get_face_prop_map<Pm, int>(pmesh, "face_patch_map",
+    parameters.contains("face_patch_map") ? parameters["face_patch_map"] : py::none());
 
   PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                       stl_input_iterator<Fd>(face_range, false)),
                            target_edge_length, pmesh,
                            internal::parse_pmp_np<PolygonMesh>(parameters)
                            .edge_is_constrained_map(eicm)
-                           .vertex_is_constrained_map(vicm));
+                           .vertex_is_constrained_map(vicm)
+                           .face_index_map(fim)
+                           .face_patch_map(fpm));
 #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
   if (!parameters.contains("edge_is_constrained_map")) {
     pmesh.remove_property_map(eicm);
   }
   if (!parameters.contains("vertex_is_constrained_map")) {
     pmesh.remove_property_map(vicm);
+  }
+  if (!parameters.contains("face_index_map")) {
+    pmesh.remove_property_map(fim);
+  }
+  if (!parameters.contains("face_patch_map")) {
+    pmesh.remove_property_map(fpm);
   }
 #endif
 }
