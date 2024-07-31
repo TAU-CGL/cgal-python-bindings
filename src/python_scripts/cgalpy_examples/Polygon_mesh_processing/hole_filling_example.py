@@ -25,13 +25,14 @@ for h in Pol3.halfedges(mesh):
     # - if the "face_output_iterator" parameter is set, a list of the facets of the constructed patch
     # - if the "vertex_output_iterator" parameter is set, a list of the vertices of the constructed patch
     success, patch_facets, patch_vertices = Pmp.triangulate_refine_and_fair_hole(mesh, h, \
-                                                                                     {'face_output_iterator': True, 'vertex_output_iterator': True})
-      print(f" Number of facets in constructed patch: {len(patch_facets)}")
-      print(f" Number of vertices in constructed patch: {len(patch_vertices)}")
-      print(f" Fairing : {'succeeded' if success else 'failed'}")
-      nb_holes += 1
+      {'face_output_iterator': True, 'vertex_output_iterator': True})
+    print(f" Number of facets in constructed patch: {len(patch_facets)}")
+    print(f" Number of vertices in constructed patch: {len(patch_vertices)}")
+    print(f" Fairing : {'succeeded' if success else 'failed'}")
+    nb_holes += 1
 
 print()
 print(f"{nb_holes} holes have been filled")
 
 Pol3.write_polygon_mesh('filled.off', mesh)
+

@@ -54,6 +54,7 @@
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/Non_manifold_output_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
+#include "CGALPY/HFDefault_visitor.hpp"
 #include "CGALPY/Default_orientation_visitor.hpp"
 #include "CGALPY/Autorefinement_visitor.hpp"
 #include "CGALPY/pmp_np_parser.hpp"
@@ -916,6 +917,8 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   using Graph_traits = boost::graph_traits<Pm>;
   using halfedge_descriptor = typename Graph_traits::halfedge_descriptor;
   using Fd = typename Graph_traits::face_descriptor;
+  using My_visitor = pmp::HFDefault_visitor;
+  using Visitor = CGAL::Polygon_mesh_processing::Hole_filling::Default_visitor;
 
   ///// change this to a more general type
   using Vertex_identifier = typename Graph_traits::vertex_descriptor;
@@ -925,34 +928,29 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   py::list facets, vertices;
   internal::Named_params np = CGAL::parameters::verbose(false);
 
-  // this is dirty, but it works, i'm open to other solutions that work and are more elegant
-  // the use of auto avoids some probles with types
   bool faces_flag = parameters.contains("face_output_iterator") && py::cast<bool>(parameters["face_output_iterator"]);
   bool vertices_flag = parameters.contains("vertex_output_iterator") && py::cast<bool>(parameters["vertex_output_iterator"]);
-  if (faces_flag && vertices_flag) {
-    std::vector<Face_identifier> fids;
-    std::vector<Vertex_identifier> vids;
-    auto it1 = std::back_inserter(fids);
-    auto it2 = std::back_inserter(vids);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np<PolygonMesh>(parameters).face_output_iterator(it1).vertex_output_iterator(it2));
+
+
+  std::vector<Face_identifier> fids;
+  std::vector<Vertex_identifier> vids;
+  auto it1 = std::back_inserter(fids);
+  auto it2 = std::back_inserter(vids);
+  if (parameters.contains("visitor")) {
+    My_visitor visitor = py::cast<My_visitor>(parameters["visitor"]);
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge,
+                                                     internal::parse_pmp_np<PolygonMesh>(parameters)
+                                                     .face_output_iterator(it1).vertex_output_iterator(it2)
+                                                     .visitor(visitor));
     for (const auto& fid : fids) facets.append(fid);
     for (const auto& vid : vids) vertices.append(vid);
     return py::make_tuple(std::get<0>(res), facets, vertices);
-  } else if (faces_flag) {
-    std::vector<Face_identifier> fids;
-    auto it = std::back_inserter(fids);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np<PolygonMesh>(parameters).face_output_iterator(it));
+  } else {
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge,
+                                                     internal::parse_pmp_np<PolygonMesh>(parameters)
+                                                     .face_output_iterator(it1).vertex_output_iterator(it2));
     for (const auto& fid : fids) facets.append(fid);
-    return py::make_tuple(std::get<0>(res), facets, vertices);
-  } else if (vertices_flag) {
-    std::vector<Vertex_identifier> vids;
-    auto it = std::back_inserter(vids);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np<PolygonMesh>(parameters).vertex_output_iterator(it));
     for (const auto& vid : vids) vertices.append(vid);
-    return py::make_tuple(std::get<0>(res), facets, vertices);
-  }
-  else {
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge, internal::parse_pmp_np<PolygonMesh>(parameters));
     return py::make_tuple(std::get<0>(res), facets, vertices);
   }
 }
@@ -2199,6 +2197,56 @@ void set_in_place_operations_fn(Cv& v,
   v.set_in_place_operations(f);
 }
 
+// HFDefault_visitor
+void set_start_planar_phase(HFDefault_visitor& v,
+                            const std::function<void()>& f) {
+  v.set_start_planar_phase(f);
+}
+void set_end_planar_phase(HFDefault_visitor& v,
+                          const std::function<void(bool)>& f) {
+  v.set_end_planar_phase(f);
+}
+void set_start_quadratic_phase(HFDefault_visitor& v,
+                               const std::function<void(std::size_t)>& f) {
+  v.set_start_quadratic_phase(f);
+}
+void set_quadratic_step(HFDefault_visitor& v,
+                        const std::function<void()>& f) {
+  v.set_quadratic_step(f);
+}
+void set_end_quadratic_phase(HFDefault_visitor& v,
+                             const std::function<void(bool)>& f) {
+  v.set_end_quadratic_phase(f);
+}
+void set_start_cubic_phase(HFDefault_visitor& v,
+                           const std::function<void(std::size_t)>& f) {
+  v.set_start_cubic_phase(f);
+}
+void set_cubic_step(HFDefault_visitor& v,
+                    const std::function<void()>& f) {
+  v.set_cubic_step(f);
+}
+void set_end_cubic_phase(HFDefault_visitor& v,
+                         const std::function<void()>& f) {
+  v.set_end_cubic_phase(f);
+}
+void set_start_refine_phase(HFDefault_visitor& v,
+                            const std::function<void()>& f) {
+  v.set_start_refine_phase(f);
+}
+void set_end_refine_phase(HFDefault_visitor& v,
+                          const std::function<void()>& f) {
+  v.set_end_refine_phase(f);
+}
+void set_start_fair_phase(HFDefault_visitor& v,
+                          const std::function<void()>& f) {
+  v.set_start_fair_phase(f);
+}
+void set_end_fair_phase(HFDefault_visitor& v,
+                        const std::function<void()>& f) {
+  v.set_end_fair_phase(f);
+}
+
 } // namespace pmp
 
 // Export Polygon_mesh_processing
@@ -2469,6 +2517,22 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("set_polygon_orientation_reversed", &pmp::set_polygon_orientation_reversed);
   m.def("set_link_connected_polygons", &pmp::set_link_connected_polygons);
 
+  // HFDefault_visitor
+  m.def("set_start_planar_phase", &pmp::set_start_planar_phase);
+  m.def("set_end_planar_phase", &pmp::set_end_planar_phase);
+  m.def("set_start_quadratic_phase", &pmp::set_start_quadratic_phase);
+  m.def("set_quadratic_step", &pmp::set_quadratic_step);
+  m.def("set_end_quadratic_phase", &pmp::set_end_quadratic_phase);
+  m.def("set_start_cubic_phase", &pmp::set_start_cubic_phase);
+  m.def("set_cubic_step", &pmp::set_cubic_step);
+  m.def("set_end_cubic_phase", &pmp::set_end_cubic_phase);
+  m.def("set_start_refine_phase", &pmp::set_start_refine_phase);
+  m.def("set_end_refine_phase", &pmp::set_end_refine_phase);
+  m.def("set_start_fair_phase", &pmp::set_start_fair_phase);
+  m.def("set_end_fair_phase", &pmp::set_end_fair_phase);
+
+
+
   // Corefine_visitor
   m.def("set_before_subface_creations", &pmp::set_before_subface_creations_fn);
   m.def("set_after_subface_creations", &pmp::set_after_subface_creations_fn);
@@ -2575,6 +2639,12 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def(py::init<Pm&, Pm&>())
     // visitor.extract_intersection(points, polygons);
     .def("extract_intersection", &Nmv::my_extract_intersection)
+    ;
+
+  // hole filling
+  using Hfv = pmp::HFDefault_visitor;
+  py::class_<Hfv>(m, "Hole_filling_default_visitor")
+    .def(py::init<>())
     ;
 
   // corefine
