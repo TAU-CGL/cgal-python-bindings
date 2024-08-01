@@ -21,8 +21,6 @@ except:
 
 fccmap = mesh.add_property_map_face_size_t("f:CC")[0]
 num = Pmp.connected_components(mesh, fccmap)
-# print(f"- The graph has {num} connected components (face connectivity)")
-# print on cerr
 sys.stderr.write(f"- The graph has {num} connected components (face connectivity)\n")
 
 print("The faces in component 0 are:")
@@ -36,3 +34,4 @@ if num > 1:
     ffg.set_selected_faces(components, fccmap)
     for f in Sm.faces(ffg):
         print(f"f{f}")
+

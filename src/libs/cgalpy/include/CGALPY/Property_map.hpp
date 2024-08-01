@@ -1,9 +1,11 @@
 #ifndef CGALPY_PROPERTY_MAP_HPP
 #define CGALPY_PROPERTY_MAP_HPP
 
-#include "CGALPY/make_iterator.hpp"
-#include <CGAL/boost/graph/properties.h>
 #include <nanobind/nanobind.h>
+
+#include <CGAL/boost/graph/properties.h>
+
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
