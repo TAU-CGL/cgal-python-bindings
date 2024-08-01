@@ -1970,6 +1970,41 @@ auto angle_and_area_smoothing(const py::list& faces,
 #endif
 }
 
+template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap> 
+auto sharp_edges_segmentation(PolygonMesh & pmesh,
+                              FT angle_in_deg,
+                              EdgeIsFeatureMap edge_is_feature_map,
+                              PatchIdMap patch_id_map,
+                              const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using faces_size_type = typename boost::graph_traits< PolygonMesh >::faces_size_type;
+
+  auto vfdm = get_vertex_prop_map<Pm, int>(pmesh, "INTERNAL_MAP0",
+    np.contains("vertex_face_degree_map") ? np["vertex_face_degree_map"] : py::none());
+  auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
+    np.contains("face_index_map") ? np["face_index_map"] : py::none());
+  auto vipm = get_vertex_prop_map<Pm, std::set<int>>(pmesh, "INTERNAL_MAP2",
+    np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
+
+  auto num_patches = PMP::sharp_edges_segmentation(pmesh, angle_in_deg, edge_is_feature_map, patch_id_map,
+                                              internal::parse_pmp_np<PolygonMesh>(np)
+                                              .vertex_feature_degree_map(vfdm)
+                                              .face_index_map(fim)
+                                              .vertex_incident_patches_map(vipm));
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("vertex_face_degree_map")) {
+    pmesh.remove_property_map(vfdm);
+  }
+  if (!np.contains("face_index_map")) {
+    pmesh.remove_property_map(fim);
+  }
+  if (!np.contains("vertex_index_map")) {
+    pmesh.remove_property_map(vipm);
+  }
+#endif
+  return num_patches;
+}
+
 template <typename PolygonMesh>
 auto angle_and_area_smoothing_m(PolygonMesh& pmesh,
                               const py::dict& np = py::dict()) {
@@ -2312,7 +2347,12 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::uint32_t>>,
         py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+  m.def("sharp_edges_segmentation", &pmp::sharp_edges_segmentation<Pm, Pm::Property_map<Ed, bool>, Pm::Property_map<Fd, int>>,
+        py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
+        py::arg("patch_id_map"), py::arg("parameters") = py::dict());
 #endif
+  // template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap> 
+
 
   m.def ("merge_reversible_connected_components", &pmp::merge_reversible_connected_components<Pm>,
          py::arg("pm"), py::arg("parameters") = py::dict());

@@ -591,6 +591,7 @@ void export_polyhedron_3(py::module_& m) {
   pol3::vertex_map<Prn, bool>(m, "vertex_bool_map", "Vertex_bool_map");
   pol3::vertex_map<Prn, Vector_3>(m, "vertex_vector_map", "Vertex_vector_map");
   pol3::vertex_map<Prn, int>(m, "vertex_int_map", "Vertex_int_map");
+  pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map", "Vertex_incident_patches_map");
 
   pol3::edge_map<Prn, bool>(m, "edge_bool_map", "Edge_bool_map");
 

@@ -510,6 +510,14 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("name") = std::string(), py::arg("default_value") = FT())
       .def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
            py::arg("name") = std::string(), py::arg("default_value"))
+      .def("add_property_map_vertex_set_int", [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
+        std::set<int> s;
+        for (auto v : default_value) {
+          s.insert(py::cast<int>(v));
+        }
+        return sm::add_map<Sm, Vi, std::set<int>>(sm, name, s);
+      },
+           py::arg("name") = std::string(), py::arg("default_value") = py::set())
 
       .def("add_property_map_edge_bool", &sm::add_map<Sm, Ei, bool>,
            py::arg("name") = std::string(), py::arg("default_value") = bool())
@@ -588,6 +596,8 @@ void export_surface_mesh(py::module_& m) {
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
   internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map"); //this is the Pm::Property_map
+  // m.def("get", [](const Sm_3::Property_map<Vi, Pnt>& p, const Vi& v) { return Point_3(get(p, v)); },
+  //       py::arg("property_map"), py::arg("vertex_descriptor"));
   sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
   internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
   sm::vertex_map<Sm_3, bool>(m, "vertex_bool_boost_map", "Vertex_bool_boost_map");
@@ -601,6 +611,8 @@ void export_surface_mesh(py::module_& m) {
   sm::vertex_map<Sm_3, FT>(m, "vertex_FT_boost_map", "Vertex_FT_boost_map");
   internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
   sm::vertex_map<Sm_3, Pcad>(m, "vertex_Principal_curvatures_and_directions_boost_map", "Vertex_Principal_curvatures_and_directions_boost_map");
+  internal::export_property_map<Sm_3, Vi, std::set<int>>(m, "Vertex_set_int_map");
+  sm::vertex_map<Sm_3, std::set<int>>(m, "vertex_set_int_boost_map", "Vertex_set_int_boost_map");
 
 
   internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
