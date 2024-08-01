@@ -1971,7 +1971,8 @@ auto angle_and_area_smoothing(const py::list& faces,
 }
 
 template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap> 
-auto sharp_edges_segmentation(PolygonMesh & pmesh,
+typename boost::graph_traits< PolygonMesh >::faces_size_type sharp_edges_segmentation
+                              (PolygonMesh & pmesh,
                               FT angle_in_deg,
                               EdgeIsFeatureMap edge_is_feature_map,
                               PatchIdMap patch_id_map,
@@ -2342,6 +2343,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::uint32_t>>::type>,
         py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+  m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
+        py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
+        py::arg("parameters") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
         py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());

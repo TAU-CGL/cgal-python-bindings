@@ -596,8 +596,6 @@ void export_surface_mesh(py::module_& m) {
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
   internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map"); //this is the Pm::Property_map
-  // m.def("get", [](const Sm_3::Property_map<Vi, Pnt>& p, const Vi& v) { return Point_3(get(p, v)); },
-  //       py::arg("property_map"), py::arg("vertex_descriptor"));
   sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
   internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
   sm::vertex_map<Sm_3, bool>(m, "vertex_bool_boost_map", "Vertex_bool_boost_map");
@@ -614,11 +612,10 @@ void export_surface_mesh(py::module_& m) {
   internal::export_property_map<Sm_3, Vi, std::set<int>>(m, "Vertex_set_int_map");
   sm::vertex_map<Sm_3, std::set<int>>(m, "vertex_set_int_boost_map", "Vertex_set_int_boost_map");
 
-
-  internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
-  sm::edge_map<Sm_3, bool>(m, "edge_bool_boost_map", "Edge_bool_boost_map");
   m.def("get", [](const Sm_3::Property_map<Ei, bool>& p, const Ei& e) { return bool(get(p, e)); }, //this overrides get
         py::arg("property_map"), py::arg("edge_descriptor"));
+  internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
+  sm::edge_map<Sm_3, bool>(m, "edge_bool_boost_map", "Edge_bool_boost_map");
 
   internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
   sm::face_map<Sm_3, double>(m, "face_double_boost_map", "Face_double_boost_map");
