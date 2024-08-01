@@ -336,29 +336,24 @@ connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor
 }
 
 //
-template <typename PolygonMesh>
-py::list connected_components(const PolygonMesh& pm,
-                              const py::dict& parameters = py::dict()) {
+template <typename PolygonMesh, typename FaceComponentMap>
+auto connected_components_map(PolygonMesh& pm,
+                              FaceComponentMap& fccmap,
+                              const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-
-  auto fccmap = CGAL::get(CGAL::dynamic_face_property_t<std::size_t>(), pm);
-  auto num = PMP::connected_components(pm, fccmap,
-                                       internal::parse_pmp_np<PolygonMesh>(parameters));
-  py::dict dct;
-  for (auto f : CGAL::faces(pm)) dct[py::cast(f)] = py::cast(get(fccmap, f));
-  py::list lst;
-  lst.append(num);
-  lst.append(std::move(dct));
-  return lst;
-}
-
-//
-// using dfppm = typename boost::property_map<Prn, CGAL::dynamic_face_property_t<std::size_t>>::type;
-template <typename PolygonMesh>
-auto connected_components_map(const PolygonMesh& pm,
-                              typename boost::property_map<PolygonMesh, CGAL::dynamic_face_property_t<std::size_t>>::type& fccmap,
-                              const py::dict& parameters = py::dict()) {
-  return PMP::connected_components(pm, fccmap, internal::parse_pmp_np<PolygonMesh>(parameters));
+  auto eicm = get_edge_prop_map<Pm, bool>(pm, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
+  auto fim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
+    np.contains("face_index_map") ? np["face_internal_map"] : py::none());
+  auto retv = PMP::connected_components(pm, fccmap,
+                                   internal::parse_pmp_np<PolygonMesh>(np)
+                                   .edge_is_constrained_map(eicm)
+                                   .face_index_map(fim));
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
+  if (!np.contains("face_index_map")) pm.remove_property_map(fim);
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+  return retv;
 }
 
 //
@@ -975,13 +970,13 @@ auto isotropic_remeshing(const py::list& face_range,
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
-  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "edge_is_constrained_map",
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
     parameters.contains("edge_is_constrained_map") ? parameters["edge_is_constrained_map"] : py::none());
-  auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "vertex_is_constrained_map",
+  auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP1",
     parameters.contains("vertex_is_constrained_map") ? parameters["vertex_is_constrained_map"] : py::none());
-  auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "face_index_map",
+  auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
     parameters.contains("face_index_map") ? parameters["face_index_map"] : py::none());
-  auto fpm = get_face_prop_map<Pm, int>(pmesh, "face_patch_map",
+  auto fpm = get_face_prop_map<Pm, int>(pmesh, "INTERNAL_MAP3",
     parameters.contains("face_patch_map") ? parameters["face_patch_map"] : py::none());
 
   PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
@@ -2308,10 +2303,16 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("connected_component", &pmp::connected_component<Pm>,
         py::arg("seed_face"), py::arg("pm"),
         py::arg("parameters") = py::dict());
-  m.def("connected_components", &pmp::connected_components<Pm>,
-        py::arg("pm"), py::arg("parameters") = py::dict());
-  m.def("connected_components", &pmp::connected_components_map<Pm>,
+  m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>::type>,
         py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+  m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::uint32_t>>::type>,
+        py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
+        py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+  m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::uint32_t>>,
+        py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+#endif
 
   m.def ("merge_reversible_connected_components", &pmp::merge_reversible_connected_components<Pm>,
          py::arg("pm"), py::arg("parameters") = py::dict());

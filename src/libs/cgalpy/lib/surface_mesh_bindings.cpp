@@ -522,6 +522,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
       .def("add_property_map_face_int", &sm::add_map<Sm, Fi, int>,
            py::arg("name") = std::string(), py::arg("default_value") = int())
+      // .def("add_property_map_face_uint32_t", &sm::add_map<Sm, Fi, std::uint32_t>,
+      //      py::arg("name") = std::string(), py::arg("default_value") = std::uint32_t())
 
       .def("add_property_map_halfedge_size_t", &sm::add_map<Sm, Hi, std::size_t>,
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
@@ -614,6 +616,8 @@ void export_surface_mesh(py::module_& m) {
   sm::face_map<Sm_3, std::size_t>(m, "face_size_t_boost_map", "Face_size_t_boost_map");
   internal::export_property_map<Sm_3, Fi, int>(m, "Face_int_map");
   sm::face_map<Sm_3, int>(m, "face_int_boost_map", "Face_int_boost_map");
+  // internal::export_property_map<Sm_3, Fi, std::uint32_t>(m, "Face_uint32_t_map");
+  // sm::face_map<Sm_3, std::uint32_t>(m, "face_uint32_t_boost_map", "Face_uint32_t_boost_map");
 
   internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
   sm::halfedge_map<Sm_3, std::size_t>(m, "halfedge_size_t_boost_map", "Halfedge_size_t_boost_map");
@@ -640,6 +644,28 @@ void export_surface_mesh(py::module_& m) {
   
   py::class_<boost::vector_property_map<Vector_3>>(m, "Vector_vector_3_map")
     .def(py::init<>())
+    ;
+
+  // void set_selected_faces(const FacePatchIDRange& selected_face_patch_ids,
+  //                         FacePatchIDMap face_patch_id_map
+  py::class_<CGAL::Face_filtered_graph<Sm_3>>(m, "Face_filtered_graph")
+    .def(py::init<const Sm_3&, std::size_t, const Sm_3::Property_map<Fi, std::size_t>&>())
+    .def("graph", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.graph(); })
+    .def("reset_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.reset_indices(); })
+    .def("number_of_faces", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_faces(); })
+    .def("invert_selection", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.invert_selection(); })
+    .def("get_face_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_face_index_map(); })
+    .def("number_of_vertices", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_vertices(); })
+    .def("number_of_halfedges", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_halfedges(); })
+    .def("get_vertex_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_vertex_index_map(); })
+    .def("get_halfedge_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_halfedge_index_map(); })
+    .def("initialize_face_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_face_indices(); })
+    .def("initialize_vertex_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_vertex_indices(); })
+    .def("initialize_halfedge_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_halfedge_indices(); })
+    .def("set_selected_faces", [](CGAL::Face_filtered_graph<Sm_3>& ffg, const py::list& lst, const Sm_3::Property_map<Fi, std::size_t>& fccmap) {
+        auto vec = pmp::list2vec<std::size_t>(lst);
+        return ffg.set_selected_faces(vec, fccmap);
+      })
     ;
 
   m.def("Halfedge", &sm::halfedge<Sm_3>);
@@ -694,6 +720,7 @@ void export_surface_mesh(py::module_& m) {
   m.def("set_halfedge", &boost_utils::set_halfedge_fh<Sm_3>);
   m.def("num_faces", &boost_utils::num_faces<Sm_3>);
   m.def("faces", &boost_utils::my_faces<Sm_3>);
+  m.def("faces", &boost_utils::my_faces<CGAL::Face_filtered_graph<Sm_3>>);
   m.def("add_vertex", &boost_utils::add_vertex<Sm_3>);
   m.def("add_vertex", &boost_utils::add_vertex_p<Sm_3>);
   m.def("reserve", &boost_utils::reserve<Sm_3>);
