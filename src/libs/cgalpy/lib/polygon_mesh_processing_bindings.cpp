@@ -515,6 +515,148 @@ auto keep_large_connected_components(PolygonMesh& pmesh,
   return retv;
 }
 
+template <typename PolygonMesh>
+auto keep_largest_connected_components(PolygonMesh& pmesh,
+                                       std::size_t nb_components_to_keep,
+                                      const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
+  auto fsm = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
+    np.contains("face_size_map") ? np["face_size_map"] : py::none(), 1);
+  bool vimap = np.contains("vertex_index_map");
+  bool fimap = np.contains("face_index_map");
+  std::size_t retv;
+
+  if (vimap && fimap) {
+    auto vim = get_vertex_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
+      np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
+    auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP3",
+      np.contains("face_index_map") ? np["face_internal_map"] : py::none());
+    retv = PMP::keep_largest_connected_components(pmesh, nb_components_to_keep,
+                                                      internal::parse_pmp_np<PolygonMesh>(np)
+                                                      .edge_is_constrained_map(eicm)
+                                                      .face_size_map(fsm)
+                                                      .vertex_index_map(vim)
+                                                      .face_index_map(fim));
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+    if (!np.contains("vertex_index_map")) pmesh.remove_property_map(vim);
+    if (!np.contains("face_index_map")) pmesh.remove_property_map(fim);
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+  }
+  else if (vimap) {
+    auto vim = get_vertex_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
+      np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
+    retv = PMP::keep_largest_connected_components(pmesh, nb_components_to_keep,
+                                                      internal::parse_pmp_np<PolygonMesh>(np)
+                                                      .edge_is_constrained_map(eicm)
+                                                      .face_size_map(fsm)
+                                                      .vertex_index_map(vim));
+  #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+    if (!np.contains("vertex_index_map")) pmesh.remove_property_map(vim);
+  #endif // CGALPY_PMP_POLYGONAL_MESH == 1
+  }
+  else if (fimap) {
+    auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
+      np.contains("face_index_map") ? np["face_internal_map"] : py::none());
+    retv = PMP::keep_largest_connected_components(pmesh, nb_components_to_keep,
+                                                      internal::parse_pmp_np<PolygonMesh>(np)
+                                                      .edge_is_constrained_map(eicm)
+                                                      .face_size_map(fsm)
+                                                      .face_index_map(fim));
+  #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+    if (!np.contains("face_index_map")) pmesh.remove_property_map(fim);
+  #endif // CGALPY_PMP_POLYGONAL_MESH == 1
+  }
+  else {
+    retv = PMP::keep_largest_connected_components(pmesh, nb_components_to_keep,
+                                                      internal::parse_pmp_np<PolygonMesh>(np)
+                                                      .edge_is_constrained_map(eicm)
+                                                      .face_size_map(fsm));
+  }
+
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np.contains("edge_is_constrained_map")) pmesh.remove_property_map(eicm);
+  if (!np.contains("face_size_map")) pmesh.remove_property_map(fsm);
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+  
+  return retv;
+}
+
+template <typename PolygonMesh, typename FaceComponentMap>
+auto remove_connected_components(PolygonMesh& pm,
+                                 const py::list& components_to_remove,
+                                 const FaceComponentMap& fccmap,
+                                 const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using faces_size_type = typename Gt::faces_size_type;
+  auto ctr = list2vec<std::size_t>(components_to_remove);
+
+  if (np.contains("vertex_index_map")) {
+    auto vim = get_vertex_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP0",
+      np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
+    return PMP::remove_connected_components(pm, ctr, fccmap,
+                                            internal::parse_pmp_np<PolygonMesh>(np)
+                                            .vertex_index_map(vim));
+  #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+    if (!np.contains("vertex_index_map")) pm.remove_property_map(vim);
+  #endif // CGALPY_PMP_POLYGONAL_MESH == 1
+  }
+  else {
+    return PMP::remove_connected_components(pm, ctr, fccmap,
+                                            internal::parse_pmp_np<PolygonMesh>(np));
+  }
+}
+
+template <typename PolygonMesh>
+auto remove_connected_components(PolygonMesh& pm,
+                                 const py::list& components_to_remove,
+                                 const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+  auto ctr = list2vec<Fd>(components_to_remove);
+  auto eicm = get_edge_prop_map<Pm, bool>(pm, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
+  bool vimap = np.contains("vertex_index_map");
+  bool fimap = np.contains("face_index_map");
+  if (vimap && fimap) {
+    auto vim = get_vertex_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
+      np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
+    auto fim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP2",
+      np.contains("face_index_map") ? np["face_internal_map"] : py::none());
+    PMP::remove_connected_components(pm, ctr,
+                                            internal::parse_pmp_np<PolygonMesh>(np)
+                                            .edge_is_constrained_map(eicm)
+                                            .vertex_index_map(vim)
+                                            .face_index_map(fim));
+  }
+  else if (vimap) {
+    auto vim = get_vertex_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
+      np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
+    PMP::remove_connected_components(pm, ctr,
+                                            internal::parse_pmp_np<PolygonMesh>(np)
+                                            .edge_is_constrained_map(eicm)
+                                            .vertex_index_map(vim));
+  }
+  else if (fimap) {
+    auto fim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
+      np.contains("face_index_map") ? np["face_internal_map"] : py::none());
+    PMP::remove_connected_components(pm, ctr,
+                                            internal::parse_pmp_np<PolygonMesh>(np)
+                                            .edge_is_constrained_map(eicm)
+                                            .face_index_map(fim));
+  }
+  else {
+    PMP::remove_connected_components(pm, ctr,
+                                            internal::parse_pmp_np<PolygonMesh>(np));
+  }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+}
+
 //
 template <typename PolygonMesh>
 void merge_reversible_connected_components(PolygonMesh& pm,
@@ -2639,9 +2781,14 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("min_size"), py::arg("parameters") = py::dict());
   m.def("keep_large_connected_components", &pmp::keep_large_connected_components<Pm, double>,
         py::arg("pm"), py::arg("min_size"), py::arg("parameters") = py::dict());
+  m.def("keep_largest_connected_components", &pmp::keep_largest_connected_components<Pm>,
+        py::arg("pm"), py::arg("nb_components_to_keep"), py::arg("parameters") = py::dict());
   m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
         py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
         py::arg("parameters") = py::dict());
+  m.def("remove_connected_components", &pmp::remove_connected_components<Pm>,
+        py::arg("pm"), py::arg("components_to_remove"), py::arg("np") = py::dict());
+  // m.def("split_connected_components")
   // m.def("surface_Delaunay_remeshing", &pmp::surface_Delaunay_remeshing<Pm>,
   //       py::arg("pm"), py::arg("parameters") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
