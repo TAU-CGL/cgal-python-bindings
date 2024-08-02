@@ -2429,9 +2429,6 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
         py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
         py::arg("parameters") = py::dict());
-  m.def("compatible_orientations", &pmp::compatible_orientations<Pm, FaceBitMap>,
-        py::arg("pm"), py::arg("face_bit_map"),
-        py::arg("parameters") = py::dict());
   // m.def("surface_Delaunay_remeshing", &pmp::surface_Delaunay_remeshing<Pm>,
   //       py::arg("pm"), py::arg("parameters") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
@@ -2442,6 +2439,9 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("sharp_edges_segmentation", &pmp::sharp_edges_segmentation<Pm, Pm::Property_map<Ed, bool>, Pm::Property_map<Fd, int>>,
         py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
         py::arg("patch_id_map"), py::arg("parameters") = py::dict());
+  m.def("compatible_orientations", &pmp::compatible_orientations<Pm, FaceBitMap>,
+        py::arg("pm"), py::arg("face_bit_map"),
+        py::arg("parameters") = py::dict());
 #endif
   // template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap> 
 
