@@ -7,6 +7,8 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <CGAL/Dynamic_property_map.h>
+#include <CGAL/Mesh_constant_domain_field_3.h>
+#include <limits>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <stdexcept>
@@ -23,6 +25,7 @@
 #include <CGAL/iterator.h>
 #include <CGAL/Named_function_parameters.h>
 #include <CGAL/tags.h>
+#include <CGAL/Mesh_facet_topology.h>
 #include <CGAL/Polygon_mesh_processing/autorefinement.h>
 #include <CGAL/Polygon_mesh_processing/clip.h>
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
@@ -45,6 +48,7 @@
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_faces.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
+#include <CGAL/Polygon_mesh_processing/surface_Delaunay_remeshing.h>
 
 #include "CGALPY/helpers.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -1031,12 +1035,12 @@ auto remesh_planar_patches(PolygonMesh& pmesh,
 
   auto eicm = get_edge_prop_map<Pm, bool>
     (pmesh, "edge_is_constrained_map", np_in.contains("edge_is_constrained_map") ? np_in["edge_is_constrained_map"] : py::none());
-  auto fpm = get_face_prop_map<Pm, std::size_t>(pmesh, "face_patch_map",
+  auto fpm = get_face_prop_map<Pm, int>(pmesh, "face_patch_map",
     np_in.contains("face_patch_map") ? np_in["face_patch_map"] : py::none());
   auto vcm = get_vertex_prop_map<Pm, std::size_t>(pmesh, "vertex_corner_map",
     np_in.contains("vertex_corner_map") ? np_in["vertex_corner_map"] : py::none());
 
-  auto fpm2 = get_face_prop_map<Pm, std::size_t>(pmesh, "face_patch_map",
+  auto fpm2 = get_face_prop_map<Pm, int>(pmesh, "face_patch_map",
     np_out.contains("face_patch_map") ? np_out["face_patch_map"] : py::none());
   auto vcm2 = get_vertex_prop_map<Pm, std::size_t>(pmesh, "vertex_corner_map",
     np_out.contains("vertex_corner_map") ? np_out["vertex_corner_map"] : py::none());
@@ -1907,9 +1911,9 @@ auto remesh_almost_planar_patches(PolygonMesh tm_in,
 
   Pm pm_out;
 
-  auto fpm = get_face_prop_map<Pm, std::size_t>(pm_out, "INTERNAL_MAP1",
+  auto fpm = get_face_prop_map<Pm, int>(pm_out, "INTERNAL_MAP1",
     np_out.contains("face_patch_map") ? np_out["face_patch_map"] : py::none());
-  auto vcm = get_vertex_prop_map<Pm, std::size_t>(pm_out, "INTERNAL_MAP2",
+  auto vcm = get_vertex_prop_map<Pm, int>(pm_out, "INTERNAL_MAP2",
     np_out.contains("vertex_corner_map") ? np_out["vertex_corner_map"] : py::none());
 
   bool retv;
@@ -1968,6 +1972,54 @@ auto angle_and_area_smoothing(const py::list& faces,
     pmesh.remove_property_map(vicm);
   }
 #endif
+}
+
+template <typename PolygonMesh>
+auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
+                                const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  auto eicm = get_edge_prop_map<Pm, bool>(tmesh, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  auto fpm = get_face_prop_map<Pm, int>(tmesh, "INTERNAL_MAP1",
+    np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
+
+  
+  auto mfs = np.contains("mesh_facet_size") ? py::cast<FT>(np["mesh_facet_size"]) : 0;
+  auto mfa = np.contains("mesh_facet_angle") ? py::cast<FT>(np["mesh_facet_angle"]) : 0;
+  auto mfd = np.contains("mesh_facet_distance") ? py::cast<FT>(np["mesh_facet_distance"]) : 0;
+  PolygonMesh retv;
+
+  if (np.contains("mesh_edge_size")) {
+    auto mes = py::cast<CGAL::Mesh_constant_domain_field_3<Kernel, int>>(np["mesh_edge_size"]);
+    retv = PMP::surface_Delaunay_remeshing(tmesh,
+                                           internal::parse_pmp_np<PolygonMesh>(np)
+                                           .edge_is_constrained_map(eicm)
+                                           .face_patch_map(fpm)
+                                           .facet_size(mfs)
+                                           .facet_angle(mfa)
+                                           .facet_distance(mfd)
+                                           .mesh_edge_size(mes)
+                                           );
+  }
+  else {
+    retv = PMP::surface_Delaunay_remeshing(tmesh,
+                                           internal::parse_pmp_np<PolygonMesh>(np)
+                                           .edge_is_constrained_map(eicm)
+                                           .face_patch_map(fpm)
+                                           .facet_size(mfs)
+                                           .facet_angle(mfa)
+                                           .facet_distance(mfd)
+                                           );
+  }
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("edge_is_constrained_map")) {
+    tmesh.remove_property_map(eicm);
+  }
+  if (!np.contains("face_patch_map")) {
+    tmesh.remove_property_map(fpm);
+  }
+#endif
+  return retv;
 }
 
 template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap> 
@@ -2346,6 +2398,8 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
         py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
         py::arg("parameters") = py::dict());
+  // m.def("surface_Delaunay_remeshing", &pmp::surface_Delaunay_remeshing<Pm>,
+  //       py::arg("pm"), py::arg("parameters") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
         py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
@@ -2516,10 +2570,6 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("is_closed", &CGAL::is_closed<Pm>,
         py::arg("g"));
-
-  m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
-        py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("ebmap"),
-        py::arg("parameters") = py::dict());
 
   // this is currently only supported for Surface_mesh, because Polyhedron would need Random_access_property_map
   // the boost::property_map types don't work here for some reason

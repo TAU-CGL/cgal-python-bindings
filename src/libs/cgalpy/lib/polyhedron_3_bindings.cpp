@@ -6,7 +6,6 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#include <CGAL/boost/graph/properties.h>
 #include <cstddef>
 #include <stdexcept>
 #define CGAL_USE_BASIC_VIEWER
@@ -18,6 +17,7 @@
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h> // needed for a type
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
+#include <CGAL/boost/graph/properties.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_polyhedron.h>
 #endif

@@ -8,6 +8,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <CGAL/basic.h>
+#include <CGAL/Mesh_constant_domain_field_3.h>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
@@ -38,6 +39,8 @@
 #include "CGALPY/Kernel/export_triangle_3.hpp"
 #include "CGALPY/Kernel/export_vector_3.hpp"
 #include "CGALPY/Kernel/export_weighted_point_3.hpp"
+
+#include "CGALPY/Kernel/export_mesh_constant_domain_field_3.hpp"
 
 namespace py = nanobind;
 
@@ -157,6 +160,8 @@ void export_kernel_module(py::module_& m) {
   using Vec_3 = Kernel::Vector_3;
   using Wd_pnt_3 = Kernel::Weighted_point_3;
 
+  using Mesh_df_int = CGAL::Mesh_constant_domain_field_3<Kernel, int>;
+
   // Circle_2
   if (! add_attr<Circle_2>(m, "Circle_2")) {
     py::class_<Circle_2> circle2_c(m, "Circle_2");
@@ -266,6 +271,11 @@ void export_kernel_module(py::module_& m) {
   if (! add_attr<Sfr_3>(m, "Sphere_3")) {
     py::class_<Sfr_3> sfr3_c(m, "Sphere_3");
     export_sphere_3<Kernel>(sfr3_c);
+  }
+
+  if (! add_attr<Mesh_df_int>(m, "Mesh_constant_domain_field_3_int")) {
+    py::class_<Mesh_df_int> mesh_df_int_c(m, "Mesh_constant_domain_field_3_int");
+    export_mesh_constant_domain_field_3<Kernel, Mesh_df_int>(mesh_df_int_c);
   }
 
   /// \name Global kernel functions

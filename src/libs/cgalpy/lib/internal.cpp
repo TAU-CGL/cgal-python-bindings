@@ -5,7 +5,11 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 
+#include <CGAL/Mesh_facet_topology.h>
+
+#include "CGALPY/helpers.hpp"
 #include "CGALPY/internal.hpp"
+#include "CGALPY/kernel_types.hpp"
 
 namespace py = nanobind;
 
@@ -251,8 +255,27 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("number_of_relaxation_steps"):
         cgal_parameters = cgal_parameters.number_of_relaxation_steps(py::cast<unsigned int>(item.second));
         break;
-
-
+      case Hash("features_angle_bound"):
+        cgal_parameters = cgal_parameters.features_angle_bound(py::cast<Ft>(item.second));
+        break;
+      // case Hash("mesh_edge_size"): // can be a different type
+      //   cgal_parameters = cgal_parameters.mesh_edge_size(py::cast<Ft>(item.second));
+      //   break;
+      // case Hash("mesh_facet_size"): // can be a different type
+      //   cgal_parameters = cgal_parameters.mesh_facet_size(py::cast<Ft>(item.second));
+      //   break;
+      // case Hash("mesh_facet_angle"): // can be a different type
+      //   cgal_parameters = cgal_parameters.mesh_facet_angle(py::cast<Ft>(item.second));
+      //   break;
+      // case Hash("mesh_facet_distance"): // can be a different type
+      //   cgal_parameters = cgal_parameters.mesh_facet_distance(py::cast<Ft>(item.second));
+      //   break;
+      case Hash("polyline_constraints"):
+        cgal_parameters = cgal_parameters.polyline_constraints(pmp::list2vec<Point_3>(py::cast<py::list>(item.second)));
+        break;
+      case Hash("mesh_facet_topology"):
+        cgal_parameters = cgal_parameters.mesh_facet_topology(py::cast<CGAL::Mesh_facet_topology>(item.second));
+        break;
 
         
       // default:
