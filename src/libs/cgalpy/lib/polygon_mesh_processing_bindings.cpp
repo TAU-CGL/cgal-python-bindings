@@ -359,9 +359,6 @@ auto connected_components_map(PolygonMesh& pm,
                                      internal::parse_pmp_np<PolygonMesh>(np)
                                      .edge_is_constrained_map(eicm)
                                      .face_index_map(fim));
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-  if (!np.contains("face_index_map")) pm.remove_property_map(fim);
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
   }
   else {
     retv = PMP::connected_components(pm, fccmap,
@@ -386,9 +383,6 @@ auto keep_connected_components(PolygonMesh& pm,
     PMP::keep_connected_components(pm, ctk, fccmap,
                                           internal::parse_pmp_np<PolygonMesh>(np)
                                           .vertex_index_map(vim));
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-    if (!np.contains("vertex_index_map")) pm.remove_property_map(vim);
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
   }
   else {
     PMP::keep_connected_components(pm, ctk, fccmap,
@@ -471,10 +465,6 @@ auto keep_large_connected_components(PolygonMesh& pmesh,
                                                      .face_size_map(fsm)
                                                      .vertex_index_map(vim)
                                                      .face_index_map(fim));
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-    if (!np.contains("vertex_index_map")) pmesh.remove_property_map(vim);
-    if (!np.contains("face_index_map")) pmesh.remove_property_map(fim);
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
   }
   else if (vimap) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
@@ -484,9 +474,6 @@ auto keep_large_connected_components(PolygonMesh& pmesh,
                                                      .edge_is_constrained_map(eicm)
                                                      .face_size_map(fsm)
                                                      .vertex_index_map(vim));
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-    if (!np.contains("vertex_index_map")) pmesh.remove_property_map(vim);
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
   }
   else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
@@ -496,9 +483,6 @@ auto keep_large_connected_components(PolygonMesh& pmesh,
                                                      .edge_is_constrained_map(eicm)
                                                      .face_size_map(fsm)
                                                      .face_index_map(fim));
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-    if (!np.contains("face_index_map")) pmesh.remove_property_map(fim);
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
   }
   else {
     retv = PMP::keep_large_connected_components(pmesh, threshold_value,
@@ -539,10 +523,6 @@ auto keep_largest_connected_components(PolygonMesh& pmesh,
                                                       .face_size_map(fsm)
                                                       .vertex_index_map(vim)
                                                       .face_index_map(fim));
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-    if (!np.contains("vertex_index_map")) pmesh.remove_property_map(vim);
-    if (!np.contains("face_index_map")) pmesh.remove_property_map(fim);
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
   }
   else if (vimap) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
@@ -552,9 +532,6 @@ auto keep_largest_connected_components(PolygonMesh& pmesh,
                                                       .edge_is_constrained_map(eicm)
                                                       .face_size_map(fsm)
                                                       .vertex_index_map(vim));
-  #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-    if (!np.contains("vertex_index_map")) pmesh.remove_property_map(vim);
-  #endif // CGALPY_PMP_POLYGONAL_MESH == 1
   }
   else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
@@ -564,9 +541,6 @@ auto keep_largest_connected_components(PolygonMesh& pmesh,
                                                       .edge_is_constrained_map(eicm)
                                                       .face_size_map(fsm)
                                                       .face_index_map(fim));
-  #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-    if (!np.contains("face_index_map")) pmesh.remove_property_map(fim);
-  #endif // CGALPY_PMP_POLYGONAL_MESH == 1
   }
   else {
     retv = PMP::keep_largest_connected_components(pmesh, nb_components_to_keep,
@@ -599,9 +573,6 @@ auto remove_connected_components(PolygonMesh& pm,
     return PMP::remove_connected_components(pm, ctr, fccmap,
                                             internal::parse_pmp_np<PolygonMesh>(np)
                                             .vertex_index_map(vim));
-  #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-    if (!np.contains("vertex_index_map")) pm.remove_property_map(vim);
-  #endif // CGALPY_PMP_POLYGONAL_MESH == 1
   }
   else {
     return PMP::remove_connected_components(pm, ctr, fccmap,
@@ -654,6 +625,28 @@ auto remove_connected_components(PolygonMesh& pm,
   }
 #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
   if (!np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+}
+
+template <typename PolygonMesh>
+auto split_connected_components(PolygonMesh& pmesh,
+                                const py::list& cc_meshes,
+                                const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  auto pmrange = list2vec<Pm>(cc_meshes);
+
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
+  auto fpm = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
+    np.contains("face_patch_map") ? np["face_internal_map"] : py::none());
+  // TODO: add index maps
+  PMP::split_connected_components(pmesh, pmrange,
+                                  internal::parse_pmp_np<PolygonMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  .face_patch_map(fpm));
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np.contains("edge_is_constrained_map")) pmesh.remove_property_map(eicm);
+  if (!np.contains("face_patch_map")) pmesh.remove_property_map(fpm);
 #endif // CGALPY_PMP_POLYGONAL_MESH == 1
 }
 
@@ -1289,11 +1282,6 @@ auto isotropic_remeshing(const py::list& face_range,
                              .vertex_is_constrained_map(vicm)
                              .face_index_map(fim)
                              .face_patch_map(fpm));
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-    if (!parameters.contains("face_index_map")) {
-      pmesh.remove_property_map(fim);
-    }
-#endif
   }
   else {
     PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
@@ -2372,14 +2360,6 @@ typename boost::graph_traits< PolygonMesh >::faces_size_type sharp_edges_segment
                                                 .vertex_feature_degree_map(vfdm)
                                                 .face_index_map(fim)
                                                 .vertex_incident_patches_map(vipm));
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (!np.contains("face_index_map")) {
-      pmesh.remove_property_map(fim);
-    }
-    if (!np.contains("vertex_index_map")) {
-      pmesh.remove_property_map(vipm);
-    }
-#endif
   } else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
       np.contains("face_index_map") ? np["face_index_map"] : py::none());
@@ -2387,11 +2367,6 @@ typename boost::graph_traits< PolygonMesh >::faces_size_type sharp_edges_segment
                                                 internal::parse_pmp_np<PolygonMesh>(np)
                                                 .vertex_feature_degree_map(vfdm)
                                                 .face_index_map(fim));
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (!np.contains("face_index_map")) {
-      pmesh.remove_property_map(fim);
-    }
-#endif
   } else if (vimap) {
     auto vipm = get_vertex_prop_map<Pm, std::set<int>>(pmesh, "INTERNAL_MAP2",
       np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
@@ -2399,11 +2374,6 @@ typename boost::graph_traits< PolygonMesh >::faces_size_type sharp_edges_segment
                                                 internal::parse_pmp_np<PolygonMesh>(np)
                                                 .vertex_feature_degree_map(vfdm)
                                                 .vertex_incident_patches_map(vipm));
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (!np.contains("vertex_index_map")) {
-      pmesh.remove_property_map(vipm);
-    }
-#endif
   } else {
     num_patches = PMP::sharp_edges_segmentation(pmesh, angle_in_deg, edge_is_feature_map, patch_id_map,
                                                 internal::parse_pmp_np<PolygonMesh>(np)
@@ -2788,7 +2758,8 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("parameters") = py::dict());
   m.def("remove_connected_components", &pmp::remove_connected_components<Pm>,
         py::arg("pm"), py::arg("components_to_remove"), py::arg("np") = py::dict());
-  // m.def("split_connected_components")
+  m.def("split_connected_components", &pmp::split_connected_components<Pm>,
+        py::arg("pm"), py::arg("cc_meshes"), py::arg("np") = py::dict());
   // m.def("surface_Delaunay_remeshing", &pmp::surface_Delaunay_remeshing<Pm>,
   //       py::arg("pm"), py::arg("parameters") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
