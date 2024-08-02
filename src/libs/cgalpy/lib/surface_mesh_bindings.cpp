@@ -458,6 +458,36 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("is_empty", &Sm::is_empty)
       .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps)
       .def("clear", &Sm::clear)
+      .def("halfedge", [](const Sm& sm, Vi v) { return sm.halfedge(v); },
+           py::arg("v"))
+      .def("halfedge", [](const Sm& sm, Fi f) { return sm.halfedge(f); },
+           py::arg("f"))
+      .def("halfedge", [](const Sm& sm, Ei e) { return sm.halfedge(e); },
+           py::arg("e"))
+      .def("halfedge", [](const Sm& sm, Ei e, unsigned int i) { return sm.halfedge(e, i); },
+           py::arg("e"), py::arg("i"))
+      .def("halfedge", [](const Sm& sm, Vi source, Vi target) { return sm.halfedge(source, target); },
+           py::arg("source"), py::arg("target"))
+      .def("degree", [](const Sm& sm, Vi v) { return sm.degree(v); },
+           py::arg("v"))
+      .def("degree", [](const Sm& sm, Fi f) { return sm.degree(f); },
+           py::arg("f"))
+      .def("is_border", [](const Sm& sm, Hi h) { return sm.is_border(h); },
+           py::arg("h"))
+      .def("is_border", [](const Sm& sm, Ei e) { return sm.is_border(e); },
+           py::arg("e"))
+      .def("is_border", [](const Sm& sm, Vi v, bool check_all_incident_halfedges = true) { return sm.is_border(v, check_all_incident_halfedges); },
+           py::arg("v"), py::arg("check_all_incident_halfedges") = true)
+      .def("is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); },
+           py::arg("v"))
+      .def("is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); },
+           py::arg("e"))
+      .def("is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); },
+           py::arg("f"))
+      .def("is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); },
+           py::arg("h"))
+      .def("source", &Sm::source)
+      .def("target", &Sm::target)
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
       // void resize(size_type nvertices, size_type nedges, size_type nfaces )
       // join(const Surface_mesh& other)
@@ -530,6 +560,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
       .def("add_property_map_face_int", &sm::add_map<Sm, Fi, int>,
            py::arg("name") = std::string(), py::arg("default_value") = int())
+      .def("add_property_map_face_bool", &sm::add_map<Sm, Fi, bool>,
+           py::arg("name") = std::string(), py::arg("default_value") = false)
       // .def("add_property_map_face_uint32_t", &sm::add_map<Sm, Fi, std::uint32_t>,
       //      py::arg("name") = std::string(), py::arg("default_value") = std::uint32_t())
 
@@ -625,6 +657,8 @@ void export_surface_mesh(py::module_& m) {
   sm::face_map<Sm_3, std::size_t>(m, "face_size_t_boost_map", "Face_size_t_boost_map");
   internal::export_property_map<Sm_3, Fi, int>(m, "Face_int_map");
   sm::face_map<Sm_3, int>(m, "face_int_boost_map", "Face_int_boost_map");
+  internal::export_property_map<Sm_3, Fi, bool>(m, "Face_bool_map");
+  sm::face_map<Sm_3, bool>(m, "face_bool_boost_map", "Face_bool_boost_map");
   // internal::export_property_map<Sm_3, Fi, std::uint32_t>(m, "Face_uint32_t_map");
   // sm::face_map<Sm_3, std::uint32_t>(m, "face_uint32_t_boost_map", "Face_uint32_t_boost_map");
 
@@ -676,6 +710,9 @@ void export_surface_mesh(py::module_& m) {
         return ffg.set_selected_faces(vec, fccmap);
       })
     ;
+
+  m.def("clear", &CGAL::clear<Sm_3>);
+  m.def("is_closed", &CGAL::is_closed<Sm_3>);
 
   m.def("Halfedge", &sm::halfedge<Sm_3>);
 

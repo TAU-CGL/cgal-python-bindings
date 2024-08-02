@@ -599,6 +599,7 @@ void export_polyhedron_3(py::module_& m) {
   pol3::face_map<Prn, double>(m, "face_double_map", "Face_double_map");
   pol3::face_map<Prn, Vector_3>(m, "face_vector_map", "Face_vector_map");
   pol3::face_map<Prn, int>(m, "face_int_map", "Face_int_map");
+  pol3::face_map<Prn, bool>(m, "face_bool_map", "Face_bool_map");
 
 
 
@@ -628,6 +629,8 @@ void export_polyhedron_3(py::module_& m) {
 
 
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
+  m.def("clear", &CGAL::clear<Prn>);
+  m.def("is_closed", &CGAL::is_closed<Prn>);
 
   m.def("num_vertices", &boost_utils::num_vertices<Prn>);
   m.def("num_edges", &boost_utils::num_edges<Prn>);

@@ -1974,6 +1974,19 @@ auto angle_and_area_smoothing(const py::list& faces,
 #endif
 }
 
+template <typename PolygonMesh, typename FaceBitMap>
+auto compatible_orientations(PolygonMesh& pm,
+                             FaceBitMap fbm,
+                             const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  auto fpim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP0",
+    np.contains("face_patch_index_map") ? np["face_patch_index_map"] : py::none());
+
+  return PMP::compatible_orientations(pm, fbm,
+                                          internal::parse_pmp_np<PolygonMesh>(np)
+                                          .face_partition_id_map(fpim));
+}
+
 template <typename PolygonMesh>
 auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
                                 const py::dict& np = py::dict()) {
@@ -2080,13 +2093,29 @@ auto angle_and_area_smoothing_m(PolygonMesh& pmesh,
 #endif
 }
 
-// visitor stuff
+template <typename PolygonMesh>
+auto reverse_face_orientations(const py::list& face_range,
+                               PolygonMesh& pm)
+{
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+
+  auto begin = stl_input_iterator<Fd>(face_range);
+  auto end = stl_input_iterator<Fd>(face_range, false);
+
+  std::vector<Fd> out;
+  PMP::reverse_face_orientations(boost::make_iterator_range(begin, end), pm);
+}
+
 template <typename PolygonMesh>
 void orient_to_bound_a_volume(PolygonMesh& tm,
                               const py::dict& np = py::dict()) {
   PMP::orient_to_bound_a_volume(tm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
+
+// visitor stuff
 void set_polygon_orientation_reversed(Default_orientation_visitor& v,
                            const std::function<void(std::size_t)>& f){
   v.set_polygon_orientation_reversed(f);
@@ -2362,6 +2391,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   using FacePatchMap = Pm::Property_map<Fd, std::size_t>;
   using VertexCornerMap = Pm::Property_map<Vd, std::size_t>;
   using EdgeIsConstrainedMap = Pm::Property_map<Ed, bool>;
+  using FaceBitMap = Pm::Property_map<Fd, bool>;
 #endif
 #if CGALPY_PMP_POLYGONAL_MESH == 0
   using edge_bool_map = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
@@ -2370,6 +2400,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   using FacePatchMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>;
   using VertexCornerMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<std::size_t>>;
   using EdgeIsConstrainedMap = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
+  using FaceBitMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<bool>>;
 #endif
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -2397,6 +2428,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
   m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
         py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
+        py::arg("parameters") = py::dict());
+  m.def("compatible_orientations", &pmp::compatible_orientations<Pm, FaceBitMap>,
+        py::arg("pm"), py::arg("face_bit_map"),
         py::arg("parameters") = py::dict());
   // m.def("surface_Delaunay_remeshing", &pmp::surface_Delaunay_remeshing<Pm>,
   //       py::arg("pm"), py::arg("parameters") = py::dict());
@@ -2599,6 +2633,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
         py::arg("pmesh"));
+
+  m.def("reverse_face_orientations", &pmp::reverse_face_orientations<Pm>,
+        py::arg("face_range"), py::arg("pm"));
 
   m.def("is_non_manifold_vertex", &PMP::is_non_manifold_vertex<Pm>,
         py::arg("v"), py::arg("pm"));
