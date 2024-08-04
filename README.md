@@ -103,7 +103,7 @@ Assuming you have all dependencies installed, type:
 
     cmake -C <CGALPY_SRC_DIR>/cmake/tests/release/aos2_epec_fixed_release.cmake <CGALPY_SRC_DIR>
     make -j4
-    pip install src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
+    pip install src/libs/cgalpy/dist/*.whl
 
 Then, you should be able to execute the program
 `<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`
@@ -121,11 +121,11 @@ needed for different Python scripts.
 `CONDA_DLL_SEARCH_MODIFICATION_ENABLE` to 1 apriori.
 3. If you are not operating in a virtual environment, consider installing as user:
 
-        pip install --user src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
+        pip install --user src/libs/cgalpy/dist/*.whl
     
 4. If you repeat the installation, don't forget to force overidding the new bindings:
 
-        pip install --user --force-reinstall src/libs/cgalpy/dist/CGALPY-1.0.0-cp38-cp38-linux_x86_64.whl
+        pip install --user --force-reinstall src/libs/cgalpy/dist/*.whl
 
 ### Additional Targets
 
