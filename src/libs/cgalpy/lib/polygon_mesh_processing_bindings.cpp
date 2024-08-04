@@ -553,15 +553,15 @@ auto keep_largest_connected_components(PolygonMesh& pmesh,
   if (!np.contains("edge_is_constrained_map")) pmesh.remove_property_map(eicm);
   if (!np.contains("face_size_map")) pmesh.remove_property_map(fsm);
 #endif // CGALPY_PMP_POLYGONAL_MESH == 1
-  
+
   return retv;
 }
 
 template <typename PolygonMesh, typename FaceComponentMap>
-auto remove_connected_components(PolygonMesh& pm,
-                                 const py::list& components_to_remove,
-                                 const FaceComponentMap& fccmap,
-                                 const py::dict& np = py::dict()) {
+auto remove_connected_components_map(PolygonMesh& pm,
+                                     const py::list& components_to_remove,
+                                     const FaceComponentMap& fccmap,
+                                     const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using faces_size_type = typename Gt::faces_size_type;
@@ -1291,7 +1291,7 @@ auto isotropic_remeshing(const py::list& face_range,
                              .edge_is_constrained_map(eicm)
                              .vertex_is_constrained_map(vicm)
                              .face_patch_map(fpm));
-  
+
   }
 #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
   if (!parameters.contains("edge_is_constrained_map")) {
@@ -2245,7 +2245,7 @@ auto remesh_almost_planar_patches(PolygonMesh tm_in,
 }
 // void CGAL::Polygon_mesh_processing::angle_and_area_smoothing 	( 	const FaceRange &  	faces,
 // 		TriangleMesh &  	tmesh,
-// 		const NamedParameters &  	np = parameters::default_values() 
+// 		const NamedParameters &  	np = parameters::default_values()
 // 	)
 template <typename PolygonMesh>
 auto angle_and_area_smoothing(const py::list& faces,
@@ -2295,7 +2295,7 @@ auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
   auto fpm = get_face_prop_map<Pm, int>(tmesh, "INTERNAL_MAP1",
     np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
 
-  
+
   auto mfs = np.contains("mesh_facet_size") ? py::cast<FT>(np["mesh_facet_size"]) : 0;
   auto mfa = np.contains("mesh_facet_angle") ? py::cast<FT>(np["mesh_facet_angle"]) : 0;
   auto mfd = np.contains("mesh_facet_distance") ? py::cast<FT>(np["mesh_facet_distance"]) : 0;
@@ -2334,7 +2334,7 @@ auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
   return retv;
 }
 
-template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap> 
+template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap>
 typename boost::graph_traits< PolygonMesh >::faces_size_type sharp_edges_segmentation
                               (PolygonMesh & pmesh,
                               FT angle_in_deg,
@@ -2778,7 +2778,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("keep_connected_components", &pmp::keep_connected_components_map<Pm, FaceComponentMap>,
         py::arg("pm"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("parameters") = py::dict());
 #endif
-  // template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap> 
+  // template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap>
 
 
   m.def ("merge_reversible_connected_components", &pmp::merge_reversible_connected_components<Pm>,
