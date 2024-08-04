@@ -372,7 +372,7 @@ auto connected_components_map(PolygonMesh& pm,
 }
 
 template <typename PolygonMesh, typename FaceComponentMap>
-auto keep_connected_components(PolygonMesh& pm,
+auto keep_connected_components_map(PolygonMesh& pm,
                                const py::list& components_to_keep,
                                FaceComponentMap& fccmap,
                                const py::dict& np = py::dict()) {
@@ -2775,7 +2775,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("compatible_orientations", &pmp::compatible_orientations<Pm, FaceBitMap>,
         py::arg("pm"), py::arg("face_bit_map"),
         py::arg("parameters") = py::dict());
-  m.def("keep_connected_components", &pmp::keep_connected_components<Pm, FaceComponentMap>,
+  m.def("keep_connected_components", &pmp::keep_connected_components_map<Pm, FaceComponentMap>,
         py::arg("pm"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("parameters") = py::dict());
 #endif
   // template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap> 
