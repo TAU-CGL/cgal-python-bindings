@@ -6,8 +6,6 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#include <CGAL/Dynamic_property_map.h>
-#include <CGAL/Mesh_constant_domain_field_3.h>
 #include <limits>
 #define CGAL_USE_BASIC_VIEWER
 
@@ -21,6 +19,9 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/function.h>
 
+#include <CGAL/Dynamic_property_map.h>
+#include <CGAL/Mesh_constant_domain_field_3.h>
+#include <CGAL/Polygon_mesh_processing/angle_and_area_smoothing.h>
 #include <CGAL/boost/graph/helpers.h>
 #include <CGAL/iterator.h>
 #include <CGAL/Named_function_parameters.h>
@@ -32,6 +33,7 @@
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
 #include <CGAL/Polygon_mesh_processing/detect_features.h>
 #include <CGAL/Polygon_mesh_processing/distance.h>
+#include <CGAL/Polygon_mesh_processing/extrude.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 #include <CGAL/Polygon_mesh_processing/intersection.h>
 #include <CGAL/Polygon_mesh_processing/orientation.h>
@@ -1332,56 +1334,56 @@ auto triangulate_faces(PolygonMesh& pm,
 }
 
 //
-template <typename PolygonMesh>
-auto isotropic_remeshing(const py::list& face_range,
-                                double target_edge_length,
-                                PolygonMesh& pmesh,
-                                const py::dict& np = py::dict()) {
-  using Pm = PolygonMesh;
-  using Gt = boost::graph_traits<Pm>;
-  using Fd = typename Gt::face_descriptor;
-
-  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
-    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
-  auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP1",
-    np.contains("vertex_is_constrained_map") ? np["vertex_is_constrained_map"] : py::none());
-  auto fpm = get_face_prop_map<Pm, int>(pmesh, "INTERNAL_MAP3",
-    np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
-
-  if (np.contains("face_index_map")) {
-    auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
-      np.contains("face_index_map") ? np["face_index_map"] : py::none());
-    PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
-                                                        stl_input_iterator<Fd>(face_range, false)),
-                             target_edge_length, pmesh,
-                             internal::parse_pmp_np<PolygonMesh>(np)
-                             .edge_is_constrained_map(eicm)
-                             .vertex_is_constrained_map(vicm)
-                             .face_index_map(fim)
-                             .face_patch_map(fpm));
-  }
-  else {
-    PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
-                                                        stl_input_iterator<Fd>(face_range, false)),
-                             target_edge_length, pmesh,
-                             internal::parse_pmp_np<PolygonMesh>(np)
-                             .edge_is_constrained_map(eicm)
-                             .vertex_is_constrained_map(vicm)
-                             .face_patch_map(fpm));
-
-  }
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-  if (!np.contains("edge_is_constrained_map")) {
-    pmesh.remove_property_map(eicm);
-  }
-  if (!np.contains("vertex_is_constrained_map")) {
-    pmesh.remove_property_map(vicm);
-  }
-  if (!np.contains("face_patch_map")) {
-    pmesh.remove_property_map(fpm);
-  }
-#endif
-}
+// template <typename PolygonMesh>
+// auto isotropic_remeshing(const py::list& face_range,
+//                                 double target_edge_length,
+//                                 PolygonMesh& pmesh,
+//                                 const py::dict& np = py::dict()) {
+//   using Pm = PolygonMesh;
+//   using Gt = boost::graph_traits<Pm>;
+//   using Fd = typename Gt::face_descriptor;
+//
+//   auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
+//     np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+//   auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP1",
+//     np.contains("vertex_is_constrained_map") ? np["vertex_is_constrained_map"] : py::none());
+//   auto fpm = get_face_prop_map<Pm, int>(pmesh, "INTERNAL_MAP3",
+//     np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
+//
+//   if (np.contains("face_index_map")) {
+//     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
+//       np.contains("face_index_map") ? np["face_index_map"] : py::none());
+//     PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
+//                                                         stl_input_iterator<Fd>(face_range, false)),
+//                              target_edge_length, pmesh,
+//                              internal::parse_pmp_np<PolygonMesh>(np)
+//                              .edge_is_constrained_map(eicm)
+//                              .vertex_is_constrained_map(vicm)
+//                              .face_index_map(fim)
+//                              .face_patch_map(fpm));
+//   }
+//   else {
+//     PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
+//                                                         stl_input_iterator<Fd>(face_range, false)),
+//                              target_edge_length, pmesh,
+//                              internal::parse_pmp_np<PolygonMesh>(np)
+//                              .edge_is_constrained_map(eicm)
+//                              .vertex_is_constrained_map(vicm)
+//                              .face_patch_map(fpm));
+//
+//   }
+// #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+//   if (!np.contains("edge_is_constrained_map")) {
+//     pmesh.remove_property_map(eicm);
+//   }
+//   if (!np.contains("vertex_is_constrained_map")) {
+//     pmesh.remove_property_map(vicm);
+//   }
+//   if (!np.contains("face_patch_map")) {
+//     pmesh.remove_property_map(fpm);
+//   }
+// #endif
+// }
 
 
 //
@@ -1718,11 +1720,34 @@ auto stitch_borders(PolygonMesh& pmesh,
   return PMP::stitch_borders(pmesh, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
-template <typename PolygonMesh>
-auto random_perturbation(PolygonMesh& tmesh,
-                         double perturbation,
+template <typename TriangleMesh>
+auto random_perturbation(TriangleMesh& tmesh,
+                         const double& perturbation_max_size,
                          const py::dict& np = py::dict()) {
-  return PMP::random_perturbation(tmesh, perturbation, internal::parse_pmp_np<PolygonMesh>(np));
+  auto vicm = get_vertex_prop_map<TriangleMesh, Point_3>
+    (tmesh, "INTERNAL_MAP0", np.contains("vertex_point_map") ? np["vertex_point_map"] : py::none());
+  PMP::random_perturbation(tmesh, perturbation_max_size,
+                           internal::parse_pmp_np<TriangleMesh>(np)
+                           .vertex_point_map(vicm));
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("vertex_point_map")) {
+    tmesh.remove_property_map(vicm);
+  }
+#endif
+}
+
+template <typename PolygonMesh>
+auto random_perturbation_v(const py::list& vertices,
+                           PolygonMesh& pmesh,
+                           const double& perturbation_max_size,
+                           const py::dict& np = py::dict()) {
+  using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
+  auto vicm = get_vertex_prop_map<PolygonMesh, Point_3>
+    (pmesh, "INTERNAL_MAP0", np.contains("vertex_point_map") ? np["vertex_point_map"] : py::none());
+  std::vector<Vd> vertices_vec = list2vec<Vd>(vertices);
+  PMP::random_perturbation(vertices_vec, pmesh, perturbation_max_size,
+                           internal::parse_pmp_np<PolygonMesh>(np)
+                           .vertex_point_map(vicm));
 }
 
 template <typename PolygonMesh>
@@ -2320,10 +2345,7 @@ auto remesh_almost_planar_patches(PolygonMesh tm_in,
   if (!retv) throw std::runtime_error("Remeshing almost planar patches failed!");
   return pm_out;
 }
-// void CGAL::Polygon_mesh_processing::angle_and_area_smoothing 	( 	const FaceRange &  	faces,
-// 		TriangleMesh &  	tmesh,
-// 		const NamedParameters &  	np = parameters::default_values()
-// 	)
+
 template <typename PolygonMesh>
 auto angle_and_area_smoothing(const py::list& faces,
                               PolygonMesh& pmesh,
@@ -2485,6 +2507,42 @@ auto angle_and_area_smoothing_m(PolygonMesh& pmesh,
   }
 #endif
 }
+
+// template <typename InputMesh, typename OutputMesh, typename BottomFunctor, typename TopFunctor>
+// auto extrude_mesh(const InputMesh& imesh,
+//                   OutputMesh& omesh,
+//                   BottomFunctor bottom,
+//                   TopFunctor top,
+//                   const py::dict& np = py::dict()) {
+//   using Im = InputMesh;
+//   using Om = OutputMesh;
+//   PMP::extrude_mesh(imesh, omesh, bottom, top,
+//                     internal::parse_pmp_np<Om>(np),
+//                     internal::parse_pmp_np<Om>(np));
+// }
+
+template <typename InputMesh, typename OutputMesh>
+auto extrude_mesh_v(const InputMesh& imesh,
+                  OutputMesh& omesh,
+                  Vector_3 v,
+                  const py::dict& np_in = py::dict(),
+                  const py::dict& np_out = py::dict()) {
+  PMP::extrude_mesh(imesh, omesh, v,
+                    internal::parse_pmp_np<OutputMesh>(np_in),
+                    internal::parse_pmp_np<OutputMesh>(np_out));
+}
+
+// only for polyhedron!
+template <typename TriangleMesh>
+auto fair(TriangleMesh& tmesh,
+          const py::list& vertices,
+          const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Vh = typename TriangleMesh::Vertex_handle;
+  std::vector<Vh> vvec = list2vec<Vd>(vertices);
+  return PMP::fair(tmesh, vvec, internal::parse_pmp_np<Tm>(np));
+}
+
 
 template <typename PolygonMesh>
 auto reverse_face_orientations(const py::list& face_range,
@@ -2854,6 +2912,34 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pmesh"), py::arg("border_halfedge"),
         py::arg("np") = py::dict());
 
+  // Meshing
+  m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing<Pm>,
+        py::arg("faces"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing_m<Pm>,
+        py::arg("pmesh"), py::arg("np") = py::dict());
+  // m.def("extrude_mesh", &pmp::extrude_mesh<Pm, Pm, 
+  //       py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
+        py::arg("imesh"), py::arg("omesh"), py::arg("v"),
+        py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
+  // fair only for polyhedron
+
+
+
+  // m.def("isotropic_remeshing", &pmp::isotropic_remeshing<Pm>, // deprecated?
+  //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
+  //       py::arg("np") = py::dict());
+  m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Adaptive_sizing_field<Pm>>,
+        py::arg("faces"), py::arg("sizing"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+  m.def("random_perturbation", &pmp::random_perturbation<Pm>,
+        py::arg("tmesh"), py::arg("perturbation_max_size"),
+        py::arg("np") = py::dict());
+  m.def("random_perturbation", &pmp::random_perturbation_v<Pm>,
+        py::arg("vertices"), py::arg("tmesh"), py::arg("perturbation_max_size"),
+        py::arg("np") = py::dict());
+
 
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
@@ -2873,7 +2959,12 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("keep_connected_components", &pmp::keep_connected_components_map<Pm, FaceComponentMap>,
         py::arg("pm"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("np") = py::dict());
 #endif
-  // template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap>
+#if CGALPY_PMP_POLYGONAL_MESH == 0
+  // only for polyhedron
+  m.def("fair", &pmp::fair<Pm>,
+        py::arg("tmesh"), py::arg("vertices"),
+        py::arg("np") = py::dict());
+#endif
 
 
   m.def ("merge_reversible_connected_components", &pmp::merge_reversible_connected_components<Pm>,
@@ -2933,13 +3024,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   // m.def("compute_face_normals", &pmp::compute_face_normals<Pm>,
   //       py::arg("pm"));
 
-  m.def("isotropic_remeshing", &pmp::isotropic_remeshing<Pm>,
-        py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
-        py::arg("np") = py::dict());
 
-  m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Adaptive_sizing_field<Pm>>,
-        py::arg("faces"), py::arg("sizing"), py::arg("pmesh"),
-        py::arg("np") = py::dict());
 
   m.def("tangential_relaxation", &pmp::tangential_relaxation<Pm>,
         py::arg("pm"), py::arg("np") = py::dict());
@@ -2969,9 +3054,6 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("stitch_borders", &pmp::stitch_borders<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict());
-
-  m.def("random_perturbation", &pmp::random_perturbation<Pm>,
-        py::arg("pm"), py::arg("perturbation_max_size"), py::arg("np") = py::dict());
 
   m.def("refine", &pmp::refine<Pm>,
         py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict());
@@ -3043,12 +3125,6 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
 #endif
-
-  m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing<Pm>,
-        py::arg("faces"), py::arg("pmesh"), py::arg("np") = py::dict());
-
-  m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing_m<Pm>,
-        py::arg("pmesh"), py::arg("np") = py::dict());
 
   m.def("orient_to_bound_a_volume", &pmp::orient_to_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
