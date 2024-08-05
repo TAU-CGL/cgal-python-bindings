@@ -84,6 +84,7 @@ auto get_vertex_point_map(const PolygonMesh& pm, const py::dict& np = py::dict()
 #if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
 template <typename PolygonMesh>
 auto get_vertex_point_map(PolygonMesh& pm, const py::dict& np = py::dict()) {
+  // TODO: get the map from the dict
   return get(CGAL::vertex_point, pm);
 }
 #endif // CGALPY_PMP_POLYGONAL_MESH == 0
@@ -1009,9 +1010,9 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
   using vpmap = typename PolygonMesh::template Property_map<Vd, Point_3>;
   using fimap = typename PolygonMesh::template Property_map<Fd, std::size_t>;
   using constrained_map = typename PolygonMesh::template Property_map<Ed, bool>;
-  auto vpm1 = np1.contains("vertex_point_map") ? py::cast<vpmap>(np1["vertex_point_map"]) : pm1.points();
-  auto vpm2 = np2.contains("vertex_point_map") ? py::cast<vpmap>(np2["vertex_point_map"]) : pm2.points();
-  auto vpm3 = np_out.contains("vertex_point_map") ? py::cast<vpmap>(np_out["vertex_point_map"]) : out.points();
+  // auto vpm1 = np1.contains("vertex_point_map") ? py::cast<vpmap>(np1["vertex_point_map"]) : pm1.points();
+  // auto vpm2 = np2.contains("vertex_point_map") ? py::cast<vpmap>(np2["vertex_point_map"]) : pm2.points();
+  // auto vpm3 = np_out.contains("vertex_point_map") ? py::cast<vpmap>(np_out["vertex_point_map"]) : out.points();
   auto propmap1 = np1.contains("edge_is_constrained_map") ?
     py::cast<constrained_map>(np1["edge_is_constrained_map"]) :
     pm1.template add_property_map<Ed, bool>("INTERNAL_MAP1", false).first;
@@ -1035,17 +1036,17 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
       auto visitor = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out["visitor"]);
       valid = PMP::corefine_and_compute_union(pm1, pm2, out,
                                               internal::parse_pmp_np<PolygonMesh>(np1)
-                                              .vertex_point_map(vpm1)
+                                              // .vertex_point_map(vpm1)
                                               .edge_is_constrained_map(propmap1)
                                               // .face_index_map(fimap1)
                                               .visitor(visitor),
                                               internal::parse_pmp_np<PolygonMesh>(np2)
-                                              .vertex_point_map(vpm2)
+                                              // .vertex_point_map(vpm2)
                                               .edge_is_constrained_map(propmap2)
                                               // .face_index_map(fimap2)
                                               .visitor(visitor),
                                               internal::parse_pmp_np<PolygonMesh>(np_out)
-                                              .vertex_point_map(vpm3)
+                                              // .vertex_point_map(vpm3)
                                               .edge_is_constrained_map(propmap3)
                                               );
     } catch (const py::cast_error&) {
@@ -1054,17 +1055,17 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
       auto visitor = py::cast<pmp::Default_visitor<Pm>>(np_out["visitor"]);
       valid = PMP::corefine_and_compute_union(pm1, pm2, out,
                                               internal::parse_pmp_np<PolygonMesh>(np1)
-                                              .vertex_point_map(vpm1)
+                                              // .vertex_point_map(vpm1)
                                               .edge_is_constrained_map(propmap1)
                                               // .face_index_map(fimap1)
                                               .visitor(visitor),
                                               internal::parse_pmp_np<PolygonMesh>(np2)
-                                              .vertex_point_map(vpm2)
+                                              // .vertex_point_map(vpm2)
                                               .edge_is_constrained_map(propmap2)
                                               // .face_index_map(fimap2)
                                               .visitor(visitor),
                                               internal::parse_pmp_np<PolygonMesh>(np_out)
-                                              .vertex_point_map(vpm3)
+                                              // .vertex_point_map(vpm3)
                                               .edge_is_constrained_map(propmap3)
                                               );
     } catch (const py::cast_error&) {
@@ -1076,17 +1077,17 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
                                               // internal::parse_pmp_np<PolygonMesh>(np2),
                                               // internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
                                               internal::parse_pmp_np<PolygonMesh>(np1)
-                                              .vertex_point_map(vpm1)
+                                              // .vertex_point_map(vpm1)
                                               .edge_is_constrained_map(propmap1)
                                               // .face_index_map(fimap1)
                                               .visitor(visitor),
                                               internal::parse_pmp_np<PolygonMesh>(np2)
-                                              .vertex_point_map(vpm2)
+                                              // .vertex_point_map(vpm2)
                                               .edge_is_constrained_map(propmap2)
                                               // .face_index_map(fimap2)
                                               .visitor(visitor),
                                               internal::parse_pmp_np<PolygonMesh>(np_out)
-                                              .vertex_point_map(vpm3)
+                                              // .vertex_point_map(vpm3)
                                               .edge_is_constrained_map(propmap3)
                                               );
     }
@@ -1097,17 +1098,17 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
   else {
     valid = PMP::corefine_and_compute_union(pm1, pm2, out,
                                             internal::parse_pmp_np<PolygonMesh>(np1)
-                                            .vertex_point_map(vpm1)
+                                            // .vertex_point_map(vpm1)
                                             .edge_is_constrained_map(propmap1)
                                             // .face_index_map(fimap1)
                                             ,
                                             internal::parse_pmp_np<PolygonMesh>(np2)
-                                            .vertex_point_map(vpm2)
+                                            // .vertex_point_map(vpm2)
                                             .edge_is_constrained_map(propmap2)
                                             // .face_index_map(fimap2)
                                             ,
                                             internal::parse_pmp_np<PolygonMesh>(np_out)
-                                            .vertex_point_map(vpm3)
+                                            // .vertex_point_map(vpm3)
                                             .edge_is_constrained_map(propmap3)
                                             );
   }
@@ -1328,9 +1329,25 @@ template <typename PolygonMesh>
 auto triangulate_faces(PolygonMesh& pm,
                               const py::dict& np) {
   using Pm = PolygonMesh;
+  // TODO: visitor?
+  auto vpm = get_vertex_point_map(pm, np);
+  return PMP::triangulate_faces(pm, internal::parse_pmp_np<PolygonMesh>(np)
+                                // .vertex_point_map(vpm)
+                                );
+}
 
-  // make a copy of the input mesh
-  return PMP::triangulate_faces(pm, internal::parse_pmp_np<PolygonMesh>(np));
+template <typename PolygonMesh>
+auto triangulate_faces_r(const py::list& face_range,
+                         PolygonMesh& pm,
+                         const py::dict& np) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+  // auto vpm = get_vertex_point_map(pm, np);
+  auto facevec = list2vec<Fd>(face_range);
+  return PMP::triangulate_faces(facevec, pm, internal::parse_pmp_np<PolygonMesh>(np)
+                                // .vertex_point_map(vpm)
+                                );
 }
 
 //
@@ -1465,11 +1482,11 @@ auto smooth_shape(PolygonMesh& pmesh,
                     .vertex_point_map(vpm));
 }
 
-template <typename PolygonMesh>
-auto tangential_relaxation(PolygonMesh& tm,
-                                  const py::dict& np = py::dict()) {
-  PMP::tangential_relaxation(tm, internal::parse_pmp_np<PolygonMesh>(np));
-}
+// template <typename PolygonMesh>
+// auto tangential_relaxation(PolygonMesh& tm,
+//                                   const py::dict& np = py::dict()) {
+//   PMP::tangential_relaxation(tm, internal::parse_pmp_np<PolygonMesh>(np));
+// }
 
 template <typename PolygonMesh>
 double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh& tm2,
@@ -1762,51 +1779,55 @@ template <typename PolygonMesh>
 Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::face_descriptor& f,
                              const PolygonMesh& sm,
                              const py::dict& np = py::dict()) {
-  return PMP::compute_face_normal(f, sm, internal::parse_pmp_np<PolygonMesh>(np));
+  // auto vpm = get_vertex_point_map(sm, np);
+  return PMP::compute_face_normal(f, sm, internal::parse_pmp_np<PolygonMesh>(np)
+                                  // .vertex_point_map(vpm)
+                                  );
 }
 
-template <typename PolygonMesh>
-py::tuple compute_face_normals(const PolygonMesh& sm) {
+template <typename PolygonMesh, typename Face_normal_map>
+auto compute_face_normals(const PolygonMesh& pmesh,
+                               Face_normal_map face_normals,
+                               const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-
-  py::list faces_list;
-  py::list fnormals_list;
-  for (auto f : faces(sm)) {
-    faces_list.append(f);
-    auto n = PMP::compute_face_normal(f, sm);
-    fnormals_list.append(n);
-  }
-
-  return py::make_tuple(faces_list, fnormals_list);
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  return PMP::compute_face_normals(pmesh, face_normals, internal::parse_pmp_np<Pm>(np)
+                            .face_normal_map(face_normals)
+                           // .vertex_point_map(vpm)
+                           );
 }
 
 template <typename PolygonMesh>
 Vector_3 compute_vertex_normal(const typename boost::graph_traits<PolygonMesh>::vertex_descriptor& v,
                                const PolygonMesh& sm,
                                const py::dict& np = py::dict()) {
-  return PMP::compute_vertex_normal(v, sm, internal::parse_pmp_np<PolygonMesh>(np));
+  // auto vpm = get_vertex_point_map(sm, np);
+  return PMP::compute_vertex_normal(v, sm, internal::parse_pmp_np<PolygonMesh>(np)
+                                    // .vertex_point_map(vpm)
+                                    );
 }
 
-template <typename PolygonMesh>
-py::tuple compute_vertex_normals(const PolygonMesh& sm) {
+template <typename PolygonMesh, typename VertexNormalMap>
+auto compute_vertex_normals(const PolygonMesh& pmesh,
+                                 VertexNormalMap vertex_normals,
+                                 const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(sm, np);
+  return PMP::compute_vertex_normals(pmesh, vertex_normals, internal::parse_pmp_np<PolygonMesh>(np)
+                              // .vertex_point_map(vpm)
+                              );
+}
+
+template<typename PolygonMesh, typename VertexNormalMap, typename FaceNormalMap>
+auto compute_normals(const PolygonMesh& pm,
+                     VertexNormalMap vnormals,
+                     FaceNormalMap fnormals,
+                     const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
+  // auto vpm = get_vertex_point_map(pm, np);
+  return PMP::compute_normals(pm, vnormals, fnormals, internal::parse_pmp_np<Pm>(np)
+                       // .vertex_point_map(vpm)
+                       );
 
-  py::list vertices_list;
-  py::list vnormals_list;
-  for (auto v : vertices(sm)) {
-    vertices_list.append(v);
-    auto n = PMP::compute_vertex_normal(v, sm);
-    vnormals_list.append(n);
-  }
-
-  return py::make_tuple(vertices_list, vnormals_list);
-}
-
-template<typename PolygonMesh>
-py::tuple compute_normals(const PolygonMesh& pm) {
-  auto fn = compute_face_normals(pm);
-  auto vn = compute_vertex_normals(pm);
-  return py::make_tuple(fn, vn);
 }
 
 template <typename PolygonMesh>
@@ -2051,12 +2072,22 @@ auto split_long_edges(const py::list& edge_range,
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Ed = typename Gt::edge_descriptor;
-
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP0",
+    np.contains("face_index_map") ? np["face_patch_index_map"] : py::none());
+  auto fpm = get_face_prop_map<Pm, int>(pmesh, "INTERNAL_MAP1",
+    np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP2",
+    np.contains("edge_index_copy_map") ? np["edge_index_copy_map"] : py::none());
   // turn edge_range to a vector
   std::vector<Ed> edge_vec;
   for (const auto& ed : edge_range) edge_vec.push_back(py::cast<Ed>(ed));
-  PMP::split_long_edges(edge_vec,
-                        max_length, pmesh, internal::parse_pmp_np<PolygonMesh>(np));
+  return PMP::split_long_edges(edge_vec,
+                        max_length, pmesh, internal::parse_pmp_np<PolygonMesh>(np)
+                        // .vertex_point_map(vpm)
+                        .face_index_map(fim)
+                        .face_patch_map(fpm)
+                        .edge_is_constrained_map(eicm));
 }
 
 py::list ptvec2ptlist(const std::vector<Point_3>& ptvec) {
@@ -2393,6 +2424,7 @@ auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
     np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
   auto fpm = get_face_prop_map<Pm, int>(tmesh, "INTERNAL_MAP1",
     np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
+  // auto vpm = get_vertex_point_map(tmesh, np);
 
 
   auto mfs = np.contains("mesh_facet_size") ? py::cast<FT>(np["mesh_facet_size"]) : 0;
@@ -2410,6 +2442,7 @@ auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
                                            .facet_angle(mfa)
                                            .facet_distance(mfd)
                                            .mesh_edge_size(mes)
+                                           // .vertex_point_map(vpm)
                                            );
   }
   else {
@@ -2420,6 +2453,7 @@ auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
                                            .facet_size(mfs)
                                            .facet_angle(mfa)
                                            .facet_distance(mfd)
+                                           // .vertex_point_map(vpm)
                                            );
   }
 #if CGALPY_PMP_POLYGONAL_MESH == 1
@@ -2845,6 +2879,8 @@ void export_polygon_mesh_processing(py::module_& m) {
   using EdgeIsConstrainedMap = Pm::Property_map<Ed, bool>;
   using FaceBitMap = Pm::Property_map<Fd, bool>;
   using FaceComponentMap = Pm::Property_map<Fd, faces_size_type>;
+  using FaceVectorMap = Pm::Property_map<Fd, Vector_3>;
+  using VertexVectorMap = Pm::Property_map<Vd, Vector_3>;
 #endif
 #if CGALPY_PMP_POLYGONAL_MESH == 0
   using edge_bool_map = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
@@ -2855,6 +2891,8 @@ void export_polygon_mesh_processing(py::module_& m) {
   using EdgeIsConstrainedMap = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
   using FaceBitMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<bool>>;
   using FaceComponentMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<faces_size_type>>;
+  using FaceVectorMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<Vector_3>>;
+  using VertexVectorMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<Vector_3>>;
 #endif
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -2924,9 +2962,6 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("imesh"), py::arg("omesh"), py::arg("v"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
   // fair only for polyhedron
-
-
-
   // m.def("isotropic_remeshing", &pmp::isotropic_remeshing<Pm>, // deprecated?
   //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
   //       py::arg("np") = py::dict());
@@ -2939,6 +2974,52 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("random_perturbation", &pmp::random_perturbation_v<Pm>,
         py::arg("vertices"), py::arg("tmesh"), py::arg("perturbation_max_size"),
         py::arg("np") = py::dict());
+  m.def("refine", &pmp::refine<Pm>,
+        py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict());
+  m.def("remesh_planar_patches", &pmp::remesh_planar_patches<Pm>,
+        py::arg("pm"), py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
+  m.def("smooth_shape", &pmp::smooth_shape<Pm>,
+        py::arg("pm"), py::arg("time"), py::arg("np") = py::dict());
+  m.def("split_long_edges", &pmp::split_long_edges<Pm>,
+        py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+  // m.def("tangential_relaxation", &pmp::tangential_relaxation<Pm>, // changed in master
+  //       py::arg("pm"), py::arg("np") = py::dict());
+  m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
+        py::arg("pm"), py::arg("np") = py::dict());
+  m.def("triangulate_faces_r", &pmp::triangulate_faces_r<Pm>,
+        py::arg("face_range"), py::arg("pm"),
+        py::arg("np") = py::dict());
+  m.def("triangulate_polygons", &pmp::triangulate_polygons,
+      py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+
+  // Corrected Curvature Computation
+  m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures<Pm>,
+        py::arg("pm"), py::arg("np") = py::dict());
+  m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures_v<Pm>,
+        py::arg("v"), py::arg("pm"), py::arg("np") = py::dict());
+
+  // Normal Computation
+  m.def("compute_face_normal", &pmp::compute_face_normal<Pm>,
+        py::arg("f"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only working for sm
+  m.def("compute_face_normals", &pmp::compute_face_normals<Pm, FaceVectorMap>,
+        py::arg("pmesh"), py::arg("face_normals"),
+        py::arg("np") = py::dict());
+  m.def("compute_normals", &pmp::compute_normals<Pm, VertexVectorMap, FaceVectorMap>,
+        py::arg("vnormals"), py::arg("fnormals"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+#endif
+  m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>,
+        py::arg("v"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only working for sm
+  m.def("compute_vertex_normals", &pmp::compute_vertex_normals<Pm, VertexVectorMap>,
+        py::arg("pmesh"), py::arg("vertex_normals"),
+        py::arg("np") = py::dict());
+#endif
+
 
 
 #if CGALPY_PMP_POLYGONAL_MESH == 1
@@ -3018,23 +3099,6 @@ void export_polygon_mesh_processing(py::module_& m) {
   //       py::arg("face_range"), py::arg("pm"),
   //       py::arg("parameters") = py::dict());
 
-  m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
-        py::arg("pm"), py::arg("np") = py::dict());
-
-  // m.def("compute_face_normals", &pmp::compute_face_normals<Pm>,
-  //       py::arg("pm"));
-
-
-
-  m.def("tangential_relaxation", &pmp::tangential_relaxation<Pm>,
-        py::arg("pm"), py::arg("np") = py::dict());
-
-  m.def("remesh_planar_patches", &pmp::remesh_planar_patches<Pm>,
-        py::arg("pm"), py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
-
-  m.def("smooth_shape", &pmp::smooth_shape<Pm>,
-        py::arg("pm"), py::arg("time"), py::arg("np") = py::dict());
-
   m.def("approximate_Hausdorff_distance", &pmp::approximate_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
@@ -3046,17 +3110,11 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("repair_polygon_soup", &pmp::repair_polygon_soup,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
 
-  m.def("triangulate_polygons", &pmp::triangulate_polygons,
-      py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
-
   m.def("autorefine_triangle_soup", &pmp::autorefine_triangle_soup,
       py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
 
   m.def("stitch_borders", &pmp::stitch_borders<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict());
-
-  m.def("refine", &pmp::refine<Pm>,
-        py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict());
 
   m.def("sample_triangle_mesh", &pmp::sample_triangle_mesh<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
@@ -3070,22 +3128,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::tuple());
 
-  m.def("compute_face_normal", &pmp::compute_face_normal<Pm>);
-  m.def("compute_face_normals", &pmp::compute_face_normals<Pm>);
-  m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>);
-  m.def("compute_vertex_normals", &pmp::compute_vertex_normals<Pm>);
-  m.def("compute_normals", &pmp::compute_normals<Pm>);
-  m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures<Pm>,
-        py::arg("pm"), py::arg("np") = py::dict());
-  m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures_v<Pm>,
-        py::arg("v"), py::arg("pm"), py::arg("np") = py::dict());
 
   m.def("border_halfedges", &pmp::border_halfedges<Pm>,
         py::arg("face_range"), py::arg("pm"),
-        py::arg("np") = py::dict());
-
-  m.def("split_long_edges", &pmp::split_long_edges<Pm>,
-        py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
         py::arg("np") = py::dict());
 
   m.def("is_polygon_soup_a_polygon_mesh", &pmp::is_polygon_soup_a_polygon_mesh,
