@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/Polygon_mesh_processing/measure.h>
 #include <limits>
 #define CGAL_USE_BASIC_VIEWER
 
@@ -1817,6 +1818,143 @@ auto compute_vertex_normals(const PolygonMesh& pmesh,
                               );
 }
 
+template <typename TriangleMesh>
+auto area(const TriangleMesh& tm,
+          const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::area(tm, internal::parse_pmp_np<TriangleMesh>(np)
+                   // .vertex_point_map(vpm)
+                  );
+}
+
+template <typename TriangleMesh>
+auto area_f(const py::list& face_range,
+            const TriangleMesh& tm,
+            const py::dict& np = py::dict()) {
+  using Gt = boost::graph_traits<TriangleMesh>;
+  using Fd = typename Gt::face_descriptor;
+  auto facevec = list2vec<Fd>(face_range);
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::area(facevec, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                   // .vertex_point_map(vpm)
+                  );
+}
+
+template <typename TriangleMesh>
+auto centroid(const TriangleMesh& tm,
+              const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::centroid(tm, internal::parse_pmp_np<TriangleMesh>(np)
+                      // .vertex_point_map(vpm)
+                      );
+}
+
+template <typename TriangleMesh>
+auto edge_length(typename boost::graph_traits<TriangleMesh>::edge_descriptor& e,
+                 const TriangleMesh& tm,
+                 const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::edge_length(e, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                          // .vertex_point_map(vpm)
+                          );
+}
+
+template <typename TriangleMesh>
+auto face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
+               const TriangleMesh& tm,
+               const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::face_area(f, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                        // .vertex_point_map(vpm)
+                        );
+}
+
+template <typename TriangleMesh>
+auto face_aspect_ratio(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
+                       const TriangleMesh& tm,
+                       const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::face_aspect_ratio(f, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                                // .vertex_point_map(vpm)
+                                );
+}
+
+template <typename TriangleMesh>
+auto face_border_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& h,
+                        const TriangleMesh& tm,
+                        const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::face_border_length(h, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                                // .vertex_point_map(vpm)
+                                );
+}
+
+template <typename TriangleMesh>
+auto longest_border(const TriangleMesh& tm,
+                    const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  auto pair = PMP::longest_border(tm, internal::parse_pmp_np<TriangleMesh>(np)
+                            // .vertex_point_map(vpm)
+                            );
+  return py::make_tuple(pair.first, pair.second);
+}
+
+template <typename TriangleMesh>
+auto match_faces(const TriangleMesh& tm1,
+                 const TriangleMesh& tm2,
+                 const py::dict& np1 = py::dict(),
+                 const py::dict& np2 = py::dict()) {
+  // auto vpm1 = get_vertex_point_map(tm1, np1);
+  // auto vpm2 = get_vertex_point_map(tm2, np2);
+  using Tm = TriangleMesh;
+  using Gt = boost::graph_traits<Tm>;
+  using Fd = typename Gt::face_descriptor;
+  std::vector<std::pair<Fd, Fd>> common;
+  std::vector<Fd> m1_only, m2_only;
+  PMP::match_faces(tm1, tm2, std::back_inserter(common), std::back_inserter(m1_only), std::back_inserter(m2_only),
+                   internal::parse_pmp_np<TriangleMesh>(np1)
+                   // .vertex_point_map(vpm1)
+                   ,
+                   internal::parse_pmp_np<TriangleMesh>(np2)
+                   // .vertex_point_map(vpm2)
+                   );
+  // convert common to list of tuples
+  py::list common_list;
+  for (const auto& item : common) {
+    common_list.append(py::make_tuple(item.first, item.second));
+  }
+  return py::make_tuple(common_list, vec2list(m1_only), vec2list(m2_only));
+}
+
+template <typename TriangleMesh>
+auto squared_edge_length(typename boost::graph_traits<TriangleMesh>::edge_descriptor& e,
+                         const TriangleMesh& tm,
+                         const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::squared_edge_length(e, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                                  // .vertex_point_map(vpm)
+                                  );
+}
+
+template <typename TriangleMesh>
+auto squared_face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
+                       const TriangleMesh& tm,
+                       const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::squared_face_area(f, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                                // .vertex_point_map(vpm)
+                                );
+}
+
+template <typename TriangleMesh>
+auto volume(const TriangleMesh& tm,
+            const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::volume(tm, internal::parse_pmp_np<TriangleMesh>(np)
+                    // .vertex_point_map(vpm)
+                    );
+}
+
 template<typename PolygonMesh, typename VertexNormalMap, typename FaceNormalMap>
 auto compute_normals(const PolygonMesh& pm,
                      VertexNormalMap vnormals,
@@ -3020,6 +3158,39 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np") = py::dict());
 #endif
 
+  // Geometric Measure Functions
+  m.def("area", &pmp::area<Pm>,
+        py::arg("tmesh"), py::arg("np") = py::dict());
+  m.def("area", &pmp::area_f<Pm>,
+        py::arg("face_range"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("centroid", &pmp::centroid<Pm>,
+        py::arg("tmesh"), py::arg("np") = py::dict());
+  m.def("edge_length", &pmp::edge_length<Pm>,
+        py::arg("h"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("face_area", &pmp::face_area<Pm>,
+        py::arg("f"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("face_aspect_ratio", &pmp::face_aspect_ratio<Pm>,
+        py::arg("f"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("face_border_length", &pmp::face_border_length<Pm>,
+        py::arg("f"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("longest_border", &pmp::longest_border<Pm>,
+        py::arg("tmesh"), py::arg("np") = py::dict());
+  m.def("match_faces", &pmp::match_faces<Pm>,
+        py::arg("m1"), py::arg("m2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+  m.def("squared_edge_length", &pmp::squared_edge_length<Pm>,
+        py::arg("h"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("squared_face_area", &pmp::squared_face_area<Pm>,
+        py::arg("f"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("volume", &pmp::volume<Pm>,
+        py::arg("tmesh"), py::arg("np") = py::dict());
 
 
 #if CGALPY_PMP_POLYGONAL_MESH == 1
