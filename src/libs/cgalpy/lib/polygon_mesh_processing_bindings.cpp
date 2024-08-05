@@ -187,25 +187,25 @@ bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
 //
 template <typename PolygonMesh>
 bool do_intersect_mesh_polyline(const PolygonMesh& pm, const py::list& lst,
-                                const py::dict& parameters = py::dict()) {
+                                const py::dict& np = py::dict()) {
   auto begin = stl_input_iterator<Point_3>(lst);
   auto end = stl_input_iterator<Point_3>(lst, false);
   std::vector<Point_3> polyline(begin, end);
-  return PMP::do_intersect(pm, polyline, internal::parse_pmp_np<PolygonMesh>(parameters));
+  return PMP::do_intersect(pm, polyline, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 //
 template <typename PolygonMesh>
 bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
                                       const py::list& lsts,
-                                      const py::dict& parameters = py::dict()) {
+                                      const py::dict& np = py::dict()) {
   std::vector<std::vector<Point_3>> range;
   for (const auto& lh : lsts) {
     auto begin1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh));
     auto end1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh), false);
     range.emplace_back(begin1, end1);
   }
-  return PMP::do_intersect(pm, range, internal::parse_pmp_np<PolygonMesh>(parameters));
+  return PMP::do_intersect(pm, range, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 //
@@ -229,7 +229,7 @@ py::list intersecting_meshes(const py::list& lst) {
 //
 template <typename PolygonMesh>
 py::list self_intersections(const PolygonMesh& pm,
-                            const py::dict& parameters = py::dict()) {
+                            const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
@@ -238,7 +238,7 @@ py::list self_intersections(const PolygonMesh& pm,
   auto op = [&] (const std::pair<Fd, Fd>& res) mutable
             { result.append(py::make_tuple(res.first, res.second)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::self_intersections(pm, it, internal::parse_pmp_np<PolygonMesh>(parameters));
+  PMP::self_intersections(pm, it, internal::parse_pmp_np<PolygonMesh>(np));
 
   return result;
 }
@@ -247,7 +247,7 @@ py::list self_intersections(const PolygonMesh& pm,
 template <typename PolygonMesh>
 py::list self_intersections_faces(const py::list& face_range,
                                   const PolygonMesh& pm,
-                                  const py::dict& parameters = py::dict()) {
+                                  const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
@@ -260,29 +260,29 @@ py::list self_intersections_faces(const py::list& face_range,
             { result.append(res); };
   auto it = boost::make_function_output_iterator(std::ref(op));
   PMP::self_intersections(boost::make_iterator_range(begin, end), pm, it,
-                          internal::parse_pmp_np<PolygonMesh>(parameters));
+                          internal::parse_pmp_np<PolygonMesh>(np));
   return result;
 }
 
 //
 template <typename PolygonMesh>
 bool does_self_intersect(const PolygonMesh& pm,
-                         const py::dict& parameters = py::dict()) {
-  return PMP::does_self_intersect(pm, internal::parse_pmp_np<PolygonMesh>(parameters));
+                         const py::dict& np = py::dict()) {
+  return PMP::does_self_intersect(pm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 //
 template <typename PolygonMesh>
 bool does_self_intersect_faces(const py::list& face_range,
                                const PolygonMesh& pm,
-                               const py::dict& parameters = py::dict()) {
+                               const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
   auto begin = stl_input_iterator<Fd>(face_range);
   auto end = stl_input_iterator<Fd>(face_range, false);
-  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_pmp_np<PolygonMesh>(parameters));
+  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 template <typename PolygonMesh>
@@ -650,11 +650,60 @@ auto split_connected_components(PolygonMesh& pmesh,
 #endif // CGALPY_PMP_POLYGONAL_MESH == 1
 }
 
+template <typename PolygonMesh>
+auto triangulate_and_refine_hole(PolygonMesh& pmesh,
+		typename boost::graph_traits< PolygonMesh >::halfedge_descriptor border_halfedge,
+		const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+  std::vector<Fd> faces;
+  if (np.contains("visitor")) {
+    // HFDefault_visitor
+    try {
+      auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
+      PMP::triangulate_and_refine_hole(pmesh, border_halfedge,
+                                       internal::parse_pmp_np<PolygonMesh>(np)
+                                       .visitor(visitor)
+                                       .output_iterator(std::back_inserter(faces)));
+    } catch (const py::cast_error&) {
+      throw std::runtime_error("Visitor type not recognized");
+    }
+  }
+  else {
+    PMP::triangulate_and_refine_hole(pmesh, border_halfedge,
+                                     internal::parse_pmp_np<PolygonMesh>(np)
+                                     .output_iterator(std::back_inserter(faces)));
+  }
+  return vec2list(faces);
+}
+
+template <typename PolygonMesh>
+auto triangulate_hole(PolygonMesh& pmesh,
+    typename boost::graph_traits< PolygonMesh >::halfedge_descriptor border_halfedge,
+    const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  if (np.contains("visitor")) {
+    // HFDefault_visitor
+    try {
+      auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
+      return PMP::triangulate_hole(pmesh, border_halfedge,
+                                   internal::parse_pmp_np<PolygonMesh>(np).visitor(visitor));
+    } catch (const py::cast_error&) {
+      throw std::runtime_error("Visitor type not recognized");
+    }
+  }
+  else {
+    return PMP::triangulate_hole(pmesh, border_halfedge,
+                                 internal::parse_pmp_np<PolygonMesh>(np));
+  }
+}
+
 //
 template <typename PolygonMesh>
 void merge_reversible_connected_components(PolygonMesh& pm,
-                              const py::dict& parameters = py::dict()) {
-  PMP::merge_reversible_connected_components(pm, internal::parse_pmp_np<PolygonMesh>(parameters));
+                              const py::dict& np = py::dict()) {
+  PMP::merge_reversible_connected_components(pm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 //
@@ -1129,7 +1178,7 @@ auto autorefine(PolygonMesh& tm,
 //
 template <typename PolygonMesh>
 py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2,
-                                   const py::dict& parameters = py::dict()) {
+                                   const py::dict& np = py::dict()) {
   auto begin1 = stl_input_iterator<Point_3>(lst1);
   auto end1 = stl_input_iterator<Point_3>(lst1, false);
   std::vector<Point_3> polyline1(begin1, end1);
@@ -1139,8 +1188,38 @@ py::list triangulate_hole_polyline(const py::list& lst1, const py::list& lst2,
 
   typedef CGAL::Triple<int, int, int> Triangle_int;
   std::vector<Triangle_int> out;
-  PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out),
-                                  internal::parse_pmp_np<PolygonMesh>(parameters));
+  if (py::len(lst2) == 0) {
+    if (np.contains("visitor")) {
+      // HFDefault_visitor
+      try {
+        auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
+        PMP::triangulate_hole_polyline(polyline1, std::back_inserter(out),
+                                       internal::parse_pmp_np<PolygonMesh>(np).visitor(visitor));
+      } catch (const py::cast_error&) {
+        throw std::runtime_error("Visitor type not recognized");
+      }
+    }
+    else {
+      PMP::triangulate_hole_polyline(polyline1, std::back_inserter(out),
+                                     internal::parse_pmp_np<PolygonMesh>(np));
+    }
+  }
+  else {
+    if (np.contains("visitor")) {
+      // HFDefault_visitor
+      try {
+        auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
+        PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out),
+                                       internal::parse_pmp_np<PolygonMesh>(np).visitor(visitor));
+      } catch (const py::cast_error&) {
+        throw std::runtime_error("Visitor type not recognized");
+      }
+    }
+    else {
+      PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out),
+                                     internal::parse_pmp_np<PolygonMesh>(np));
+    }
+  }
   // convert to a list of integers
   py::list result;
   for (const auto& t : out) {
@@ -1201,7 +1280,7 @@ PolygonMesh corefine_and_compute_intersection(PolygonMesh& pm1, PolygonMesh& pm2
 template <typename PolygonMesh>
 auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
     typename boost::graph_traits<PolygonMesh>::halfedge_descriptor& border_halfedge,
-                                          const py::dict& parameters = py::dict()) {
+                                          const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Graph_traits = boost::graph_traits<Pm>;
   using halfedge_descriptor = typename Graph_traits::halfedge_descriptor;
@@ -1215,20 +1294,18 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   /////
 
   py::list facets, vertices;
-  internal::Named_params np = CGAL::parameters::verbose(false);
-
-  bool faces_flag = parameters.contains("face_output_iterator") && py::cast<bool>(parameters["face_output_iterator"]);
-  bool vertices_flag = parameters.contains("vertex_output_iterator") && py::cast<bool>(parameters["vertex_output_iterator"]);
+  bool faces_flag = np.contains("face_output_iterator") && py::cast<bool>(np["face_output_iterator"]);
+  bool vertices_flag = np.contains("vertex_output_iterator") && py::cast<bool>(np["vertex_output_iterator"]);
 
 
   std::vector<Face_identifier> fids;
   std::vector<Vertex_identifier> vids;
   auto it1 = std::back_inserter(fids);
   auto it2 = std::back_inserter(vids);
-  if (parameters.contains("visitor")) {
-    My_visitor visitor = py::cast<My_visitor>(parameters["visitor"]);
+  if (np.contains("visitor")) {
+    My_visitor visitor = py::cast<My_visitor>(np["visitor"]);
     auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge,
-                                                     internal::parse_pmp_np<PolygonMesh>(parameters)
+                                                     internal::parse_pmp_np<PolygonMesh>(np)
                                                      .face_output_iterator(it1).vertex_output_iterator(it2)
                                                      .visitor(visitor));
     for (const auto& fid : fids) facets.append(fid);
@@ -1236,7 +1313,7 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
     return py::make_tuple(std::get<0>(res), facets, vertices);
   } else {
     auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge,
-                                                     internal::parse_pmp_np<PolygonMesh>(parameters)
+                                                     internal::parse_pmp_np<PolygonMesh>(np)
                                                      .face_output_iterator(it1).vertex_output_iterator(it2));
     for (const auto& fid : fids) facets.append(fid);
     for (const auto& vid : vids) vertices.append(vid);
@@ -1247,11 +1324,11 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
 //
 template <typename PolygonMesh>
 auto triangulate_faces(PolygonMesh& pm,
-                              const py::dict& parameters) {
+                              const py::dict& np) {
   using Pm = PolygonMesh;
 
   // make a copy of the input mesh
-  return PMP::triangulate_faces(pm, internal::parse_pmp_np<PolygonMesh>(parameters));
+  return PMP::triangulate_faces(pm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 //
@@ -1259,25 +1336,25 @@ template <typename PolygonMesh>
 auto isotropic_remeshing(const py::list& face_range,
                                 double target_edge_length,
                                 PolygonMesh& pmesh,
-                                const py::dict& parameters = py::dict()) {
+                                const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
   auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
-    parameters.contains("edge_is_constrained_map") ? parameters["edge_is_constrained_map"] : py::none());
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
   auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP1",
-    parameters.contains("vertex_is_constrained_map") ? parameters["vertex_is_constrained_map"] : py::none());
+    np.contains("vertex_is_constrained_map") ? np["vertex_is_constrained_map"] : py::none());
   auto fpm = get_face_prop_map<Pm, int>(pmesh, "INTERNAL_MAP3",
-    parameters.contains("face_patch_map") ? parameters["face_patch_map"] : py::none());
+    np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
 
-  if (parameters.contains("face_index_map")) {
+  if (np.contains("face_index_map")) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
-      parameters.contains("face_index_map") ? parameters["face_index_map"] : py::none());
+      np.contains("face_index_map") ? np["face_index_map"] : py::none());
     PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                         stl_input_iterator<Fd>(face_range, false)),
                              target_edge_length, pmesh,
-                             internal::parse_pmp_np<PolygonMesh>(parameters)
+                             internal::parse_pmp_np<PolygonMesh>(np)
                              .edge_is_constrained_map(eicm)
                              .vertex_is_constrained_map(vicm)
                              .face_index_map(fim)
@@ -1287,20 +1364,20 @@ auto isotropic_remeshing(const py::list& face_range,
     PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                         stl_input_iterator<Fd>(face_range, false)),
                              target_edge_length, pmesh,
-                             internal::parse_pmp_np<PolygonMesh>(parameters)
+                             internal::parse_pmp_np<PolygonMesh>(np)
                              .edge_is_constrained_map(eicm)
                              .vertex_is_constrained_map(vicm)
                              .face_patch_map(fpm));
 
   }
 #if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-  if (!parameters.contains("edge_is_constrained_map")) {
+  if (!np.contains("edge_is_constrained_map")) {
     pmesh.remove_property_map(eicm);
   }
-  if (!parameters.contains("vertex_is_constrained_map")) {
+  if (!np.contains("vertex_is_constrained_map")) {
     pmesh.remove_property_map(vicm);
   }
-  if (!parameters.contains("face_patch_map")) {
+  if (!np.contains("face_patch_map")) {
     pmesh.remove_property_map(fpm);
   }
 #endif
@@ -1312,7 +1389,7 @@ template <typename PolygonMesh, typename SizingFunction>
 auto isotropic_remeshing_sf(const py::list& face_range,
                                 SizingFunction& sizing,
                                 PolygonMesh& pmesh,
-                                const py::dict& parameters = py::dict()) {
+                                const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
@@ -1320,7 +1397,7 @@ auto isotropic_remeshing_sf(const py::list& face_range,
   PMP::isotropic_remeshing(boost::make_iterator_range(stl_input_iterator<Fd>(face_range),
                                                       stl_input_iterator<Fd>(face_range, false)),
                            sizing, pmesh,
-                           internal::parse_pmp_np<PolygonMesh>(parameters));
+                           internal::parse_pmp_np<PolygonMesh>(np));
 
 }
 
@@ -1388,8 +1465,8 @@ auto smooth_shape(PolygonMesh& pmesh,
 
 template <typename PolygonMesh>
 auto tangential_relaxation(PolygonMesh& tm,
-                                  const py::dict& parameters = py::dict()) {
-  PMP::tangential_relaxation(tm, internal::parse_pmp_np<PolygonMesh>(parameters));
+                                  const py::dict& np = py::dict()) {
+  PMP::tangential_relaxation(tm, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 template <typename PolygonMesh>
@@ -1793,7 +1870,7 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
 template <typename PolygonMesh>
 auto border_halfedges(const py::list& face_range,
                       const PolygonMesh& pm,
-                      const py::dict& parameters = py::dict()) {
+                      const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
@@ -1804,7 +1881,7 @@ auto border_halfedges(const py::list& face_range,
 
   std::vector<Hd> out;
   PMP::border_halfedges(boost::make_iterator_range(begin, end), pm, std::back_inserter(out),
-                        internal::parse_pmp_np<PolygonMesh>(parameters));
+                        internal::parse_pmp_np<PolygonMesh>(np));
   py::list result;
   for (const auto& hd : out) result.append(hd);
   return result;
@@ -1945,7 +2022,7 @@ template <typename PolygonMesh>
 auto split_long_edges(const py::list& edge_range,
                       double max_length,
                       PolygonMesh& pmesh,
-                      const py::dict& parameters = py::dict()) {
+                      const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Ed = typename Gt::edge_descriptor;
@@ -1954,7 +2031,7 @@ auto split_long_edges(const py::list& edge_range,
   std::vector<Ed> edge_vec;
   for (const auto& ed : edge_range) edge_vec.push_back(py::cast<Ed>(ed));
   PMP::split_long_edges(edge_vec,
-                        max_length, pmesh, internal::parse_pmp_np<PolygonMesh>(parameters));
+                        max_length, pmesh, internal::parse_pmp_np<PolygonMesh>(np));
 }
 
 py::list ptvec2ptlist(const std::vector<Point_3>& ptvec) {
@@ -2738,51 +2815,69 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("do_intersect", static_cast<Do_intersect1>(&PMP::do_intersect<Pm>));
 #endif // 0
 
+  // Connected Components
   m.def("connected_component", &pmp::connected_component<Pm>,
         py::arg("seed_face"), py::arg("pm"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>::type>,
-        py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::uint32_t>>::type>,
-        py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
   m.def("keep_connected_components", &pmp::keep_connected_components<Pm>,
-        py::arg("pm"), py::arg("components_to_keep"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("components_to_keep"), py::arg("np") = py::dict());
   m.def("keep_large_connected_components", &pmp::keep_large_connected_components<Pm, std::size_t>,
-        py::arg("pm"), py::arg("min_size"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("min_size"), py::arg("np") = py::dict());
   m.def("keep_large_connected_components", &pmp::keep_large_connected_components<Pm, double>,
-        py::arg("pm"), py::arg("min_size"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("min_size"), py::arg("np") = py::dict());
   m.def("keep_largest_connected_components", &pmp::keep_largest_connected_components<Pm>,
-        py::arg("pm"), py::arg("nb_components_to_keep"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("nb_components_to_keep"), py::arg("np") = py::dict());
   m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
         py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
   m.def("remove_connected_components", &pmp::remove_connected_components<Pm>,
         py::arg("pm"), py::arg("components_to_remove"), py::arg("np") = py::dict());
   m.def("split_connected_components", &pmp::split_connected_components<Pm>,
-        py::arg("pm"), py::arg("cc_meshes"), py::arg("np") = py::dict());
-  // m.def("surface_Delaunay_remeshing", &pmp::surface_Delaunay_remeshing<Pm>,
-  //       py::arg("pm"), py::arg("parameters") = py::dict());
+        py::arg("pmesh"), py::arg("cc_meshes"), py::arg("np") = py::dict());
+
+
+  // Hole Filling
+  m.def("triangulate_and_refine_hole", &pmp::triangulate_and_refine_hole<Pm>,
+        py::arg("pm"), py::arg("hole_boundary"),
+        py::arg("np") = py::dict());
+  m.def("triangulate_hole", &pmp::triangulate_hole<Pm>,
+        py::arg("pmesh"), py::arg("border_halfedge"),
+        py::arg("np") = py::dict());
+  m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline<Pm>,
+        py::arg("points"), py::arg("third_points") = py::list(),
+        py::arg("np") = py::dict());
+  m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
+        py::arg("pmesh"), py::arg("border_halfedge"),
+        py::arg("np") = py::dict());
+
+
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
-        py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::uint32_t>>,
-        py::arg("pm"), py::arg("fcm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
   m.def("sharp_edges_segmentation", &pmp::sharp_edges_segmentation<Pm, Pm::Property_map<Ed, bool>, Pm::Property_map<Fd, int>>,
         py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
-        py::arg("patch_id_map"), py::arg("parameters") = py::dict());
+        py::arg("patch_id_map"), py::arg("np") = py::dict());
 
   // only for sm
   m.def("compatible_orientations", &pmp::compatible_orientations<Pm, FaceBitMap>,
         py::arg("pm"), py::arg("face_bit_map"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
+  m.def("remove_connected_components_map", &pmp::remove_connected_components_map<Pm, FaceComponentMap>,
+        py::arg("pm"), py::arg("components_to_remove"), py::arg("fccmap"), py::arg("np") = py::dict());
   m.def("keep_connected_components", &pmp::keep_connected_components_map<Pm, FaceComponentMap>,
-        py::arg("pm"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("np") = py::dict());
 #endif
   // template<typename PolygonMesh, typename EdgeIsFeatureMap, typename PatchIdMap>
 
 
   m.def ("merge_reversible_connected_components", &pmp::merge_reversible_connected_components<Pm>,
-         py::arg("pm"), py::arg("parameters") = py::dict());
+         py::arg("pm"), py::arg("np") = py::dict());
 
   m.def("do_intersect_polylines", &pmp::do_intersect_polylines);
   m.def("do_intersect_polyline_ranges", &pmp::do_intersect_polyline_ranges);
@@ -2791,25 +2886,25 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
   m.def("do_intersect_mesh_polyline", &pmp::do_intersect_mesh_polyline<Pm>,
         py::arg("pm"), py::arg("lst"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
   m.def("do_intersect_mesh_polyline_range", &pmp::do_intersect_mesh_polyline_range<Pm>,
         py::arg("pm"), py::arg("lst"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
 
   m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>);
 
   m.def("self_intersections", &pmp::self_intersections<Pm>,
-        py::arg("pm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("np") = py::dict());
   m.def("self_intersections_faces", &pmp::self_intersections_faces<Pm>,
         py::arg("face_range"), py::arg("pm"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
 
   m.def("does_self_intersect", &pmp::does_self_intersect<Pm>,
-        py::arg("pm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("np") = py::dict());
 
   m.def("does_self_intersect_faces", &pmp::does_self_intersect_faces<Pm>,
         py::arg("pm"), py::arg("face_range"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
 
   m.def("corefine", &pmp::corefine<Pm>,
         py::arg("pm1"), py::arg("pm2"),
@@ -2823,45 +2918,37 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("autorefine", &pmp::autorefine<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
 
-  m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline<Pm>,
-        py::arg("lst1"), py::arg("lst2") = py::list(),
-        py::arg("parameters") = py::dict());
-
   m.def("corefine_and_compute_intersection", &pmp::corefine_and_compute_intersection<Pm>,
         py::arg("pm1"), py::arg("pm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
-
-  m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
-        py::arg("pmesh"), py::arg("border_halfedge"),
-        py::arg("parameters") = py::dict());
 
   // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
   //       py::arg("face_range"), py::arg("pm"),
   //       py::arg("parameters") = py::dict());
 
   m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
-        py::arg("pm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("np") = py::dict());
 
   // m.def("compute_face_normals", &pmp::compute_face_normals<Pm>,
   //       py::arg("pm"));
 
   m.def("isotropic_remeshing", &pmp::isotropic_remeshing<Pm>,
         py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
 
   m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Adaptive_sizing_field<Pm>>,
         py::arg("faces"), py::arg("sizing"), py::arg("pmesh"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
 
   m.def("tangential_relaxation", &pmp::tangential_relaxation<Pm>,
-        py::arg("pm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("np") = py::dict());
 
   m.def("remesh_planar_patches", &pmp::remesh_planar_patches<Pm>,
         py::arg("pm"), py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
 
   m.def("smooth_shape", &pmp::smooth_shape<Pm>,
-        py::arg("pm"), py::arg("time"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("time"), py::arg("np") = py::dict());
 
   m.def("approximate_Hausdorff_distance", &pmp::approximate_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"),
@@ -2907,17 +2994,17 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("compute_vertex_normals", &pmp::compute_vertex_normals<Pm>);
   m.def("compute_normals", &pmp::compute_normals<Pm>);
   m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures<Pm>,
-        py::arg("pm"), py::arg("parameters") = py::dict());
+        py::arg("pm"), py::arg("np") = py::dict());
   m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures_v<Pm>,
-        py::arg("v"), py::arg("pm"), py::arg("parameters") = py::dict());
+        py::arg("v"), py::arg("pm"), py::arg("np") = py::dict());
 
   m.def("border_halfedges", &pmp::border_halfedges<Pm>,
         py::arg("face_range"), py::arg("pm"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
 
   m.def("split_long_edges", &pmp::split_long_edges<Pm>,
         py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
 
   m.def("is_polygon_soup_a_polygon_mesh", &pmp::is_polygon_soup_a_polygon_mesh,
         py::arg("polygons"));
@@ -2945,11 +3032,11 @@ void export_polygon_mesh_processing(py::module_& m) {
   // eg. Random_access_property_map<vector<unsigned long, allocator<unsigned long>>>
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("region_growing_of_planes_on_faces", &pmp::region_growing_of_planes_on_faces<Pm, RegionMap>,
-        py::arg("pmesh"), py::arg("region_map"), py::arg("parameters") = py::dict());
+        py::arg("pmesh"), py::arg("region_map"), py::arg("np") = py::dict());
 
   m.def("detect_corners_of_regions", &pmp::detect_corners_of_regions<Pm, RegionMap, CornerIdMap>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"), py::arg("corner_id_map"),
-        py::arg("parameters") = py::dict());
+        py::arg("np") = py::dict());
 
   m.def("remesh_almost_planar_patches", &pmp::remesh_almost_planar_patches<Pm, FacePatchMap, VertexCornerMap, EdgeIsConstrainedMap>,
         py::arg("tm_in"), py::arg("nb_patches"), py::arg("nb_corners"),
@@ -2958,10 +3045,10 @@ void export_polygon_mesh_processing(py::module_& m) {
 #endif
 
   m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing<Pm>,
-        py::arg("faces"), py::arg("pmesh"), py::arg("parameters") = py::dict());
+        py::arg("faces"), py::arg("pmesh"), py::arg("np") = py::dict());
 
   m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing_m<Pm>,
-        py::arg("pmesh"), py::arg("parameters") = py::dict());
+        py::arg("pmesh"), py::arg("np") = py::dict());
 
   m.def("orient_to_bound_a_volume", &pmp::orient_to_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
