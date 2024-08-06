@@ -2373,11 +2373,11 @@ auto orient_triangle_soup_with_reference_triangle_soup(const py::list& ref_point
                                                        const py::list& faces,
                                                        const py::dict& np1 = py::dict(),
                                                        const py::dict& np2 = py::dict()) {
-  // const auto ref_points_v = ptlist2ptvec(ref_points);
-  // const auto ref_faces_v = polylist2polyvec(ref_faces);
-  // const auto pts_v = ptlist2ptvec(points);
-  // const auto faces_v = polylist2polyvec(faces);
-  // PMP::orient_triangle_soup_with_reference_triangle_soup(ref_points_v, ref_faces_v, pts_v, faces_v);
+  // const std::vector<Point_3> ref_points_v = ptlist2ptvec(ref_points);
+  // const std::vector<std::vector<std::size_t>> ref_faces_v = polylist2polyvec(ref_faces);
+  // const std::vector<Point_3> pts_v = ptlist2ptvec(points);
+  // const std::vector<std::vector<std::size_t>> faces_v = polylist2polyvec(faces);
+  // PMP::orient_triangle_soup_with_reference_triangle_soup(ref_points_v, ref_faces_v, pts_v, faces_v); // doesn't work for some reason
 }
 
 py::tuple duplicate_non_manifold_edges_in_polygon_soup(const py::list& points,
@@ -2808,41 +2808,88 @@ template <typename TriangleMesh, typename VolumeFaceIndexMap>
 auto volume_connected_components(TriangleMesh& tm,
                                  VolumeFaceIndexMap volume_id_map,
                                  const py::dict& np = py::dict()) {
-  // // auto vpm = get_vertex_point_map(tm, np);
-  // std::vector<std::size_t> vi, ccitvi, nl;
-  // std::vector<bool> icoo;
-  // std::vector<std::pair<std::size_t, std::size_t>> ivpot;
-  //   // vertex_point_map
-  //   // geom_traits
-  //   // face_index_map
-  //   // face_connected_component_map
-  //   // volume_inclusions
-  //   // do_orientation_tests
-  //   // error_codes
-  //   // do_self_intersection_tests
-  //   // connected_component_id_to_volume_id
-  //   // nesting_levels
-  //   // is_cc_outward_oriented
-  //   // intersecting_volume_pairs_output_iterator
-  // if (np.contains("face_index_map")) {
-  //   auto fim = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP0",
-  //     np.contains("face_index_map") ? np["face_index_map"] : py::none());
-  //   if (np.contains("face_connected_component_map")) {
-  //     auto fccm = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP1",
-  //       np.contains("face_connected_component_map") ? np["face_connected_component_map"] : py::none());
-  //     PMP::volume_connected_components(tm, internal::parse_pmp_np<TriangleMesh>(np)
-  //                                     // .vertex_point_map(vpm)
-  //                                     .face_index_map(fim)
-  //                                     .face_connected_component_map(fccm)
-  //                                     .volume_inclusions(std::back_inserter(vi))
-  //                                     .connected_component_id_to_volume_id(std::back_inserter(ccitvi))
-  //                                     .nesting_levels(std::back_inserter(nl))
-  //                                     .is_cc_outward_oriented(std::back_inserter(icoo))
-  //                                     .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot)));
-  //
-  //   }
-  // }
-  //
+  // auto vpm = get_vertex_point_map(tm, np);
+  std::vector<std::size_t> ccitvi, nl;
+  std::vector<bool> icoo;
+  std::vector<std::vector<std::size_t>> vi;
+  std::vector<std::pair<std::size_t, std::size_t>> ivpot;
+  std::size_t retv;
+  if (np.contains("face_index_map")) {
+    auto fim = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP0",
+      np.contains("face_index_map") ? np["face_index_map"] : py::none());
+    if (np.contains("face_connected_component_map")) {
+      auto fccm = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP1",
+        np.contains("face_connected_component_map") ? np["face_connected_component_map"] : py::none());
+        retv = PMP::volume_connected_components(tm, volume_id_map, internal::parse_pmp_np<TriangleMesh>(np)
+                                        // .vertex_point_map(vpm)
+                                        .face_index_map(fim)
+                                        .face_connected_component_map(fccm)
+                                        .volume_inclusions(std::ref(vi))
+                                        .connected_component_id_to_volume_id(std::ref(ccitvi))
+                                        .nesting_levels(std::ref(nl))
+                                        .is_cc_outward_oriented(std::ref(icoo))
+                                        .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot))
+                                        );
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+        tm.remove_property_map(fccm);
+#endif
+    }
+    else {
+      retv = PMP::volume_connected_components(tm, volume_id_map, internal::parse_pmp_np<TriangleMesh>(np)
+                                      // .vertex_point_map(vpm)
+                                      .face_index_map(fim)
+                                      .volume_inclusions(std::ref(vi))
+                                      .connected_component_id_to_volume_id(std::ref(ccitvi))
+                                      .nesting_levels(std::ref(nl))
+                                      .is_cc_outward_oriented(std::ref(icoo))
+                                      .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot))
+                                      );
+    }
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+    tm.remove_property_map(fim);
+#endif
+  }
+  else {
+    if (np.contains("face_connected_component_map")) {
+      auto fccm = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP1",
+        np.contains("face_connected_component_map") ? np["face_connected_component_map"] : py::none());
+      retv = PMP::volume_connected_components(tm, volume_id_map, internal::parse_pmp_np<TriangleMesh>(np)
+                                      // .vertex_point_map(vpm)
+                                      .face_connected_component_map(fccm)
+                                      .volume_inclusions(std::ref(vi))
+                                      .connected_component_id_to_volume_id(std::ref(ccitvi))
+                                      .nesting_levels(std::ref(nl))
+                                      .is_cc_outward_oriented(std::ref(icoo))
+                                      .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot))
+                                      );
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+      tm.remove_property_map(fccm);
+#endif
+    }
+    else {
+      retv = PMP::volume_connected_components(tm, volume_id_map, internal::parse_pmp_np<TriangleMesh>(np)
+                                      // .vertex_point_map(vpm)
+                                      .volume_inclusions(std::ref(vi))
+                                      .connected_component_id_to_volume_id(std::ref(ccitvi))
+                                      .nesting_levels(std::ref(nl))
+                                      .is_cc_outward_oriented(std::ref(icoo))
+                                      .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot))
+                                      );
+    }
+  }
+  py::list ccitvi_list, nl_list, ico_list;
+  ccitvi_list = vec2list(ccitvi);
+  nl_list = vec2list(nl);
+  ico_list = vec2list(icoo);
+  py::list vi_list;
+  for (const auto& v : vi) {
+    vi_list.append(vec2list(v));
+  }
+  py::list ivpot_list;
+  for (const auto& [i, j] : ivpot) {
+    ivpot_list.append(py::make_tuple(i, j));
+  }
+  return py::make_tuple(retv, ccitvi_list, nl_list, ico_list, vi_list, ivpot_list);
 }
 
 template <typename PolygonMesh>
@@ -3141,6 +3188,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   using RegionMap = Pm::Property_map<Fd, std::size_t>;
   using CornerIdMap = Pm::Property_map<Vd, std::size_t>;
   using FacePatchMap = Pm::Property_map<Fd, std::size_t>;
+  using FaceSizeTypeMap = Pm::Property_map<Fd, faces_size_type>;
   using VertexCornerMap = Pm::Property_map<Vd, std::size_t>;
   using EdgeIsConstrainedMap = Pm::Property_map<Ed, bool>;
   using FaceBitMap = Pm::Property_map<Fd, bool>;
@@ -3153,6 +3201,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   using RegionMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>;
   using CornerIdMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<std::size_t>>;
   using FacePatchMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>;
+  using FaceSizeTypeMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<faces_size_type>>;
   using VertexCornerMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<std::size_t>>;
   using EdgeIsConstrainedMap = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
   using FaceBitMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<bool>>;
@@ -3343,9 +3392,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("face_range"), py::arg("pmesh"));
   m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
         py::arg("pmesh"));
-  // m.def("volume_connected_components", &pmp::volume_connected_components<Pm>,
-  //       py::arg("tm"), py::arg("volume_id_map"),
-  //       py::arg("np") = py::dict());
+  m.def("volume_connected_components", &pmp::volume_connected_components<Pm, FaceSizeTypeMap>,
+        py::arg("tm"), py::arg("volume_id_map"),
+        py::arg("np") = py::dict());
 
 
 
