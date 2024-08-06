@@ -183,9 +183,15 @@ template <typename PolygonMesh>
 bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
                          const py::dict& np1 = py::dict(),
                          const py::dict& np2 = py::dict()) {
+  // auto vpm1 = get_vertex_point_map(pm1, np1);
+  // auto vpm2 = get_vertex_point_map(pm2, np2);
   return PMP::do_intersect(pm1, pm2,
-                           internal::parse_pmp_np<PolygonMesh>(np1),
-                           internal::parse_pmp_np<PolygonMesh>(np2));
+                           internal::parse_pmp_np<PolygonMesh>(np1)
+                           // .vertex_point_map(vpm1)
+                           ,
+                           internal::parse_pmp_np<PolygonMesh>(np2)
+                           // .vertex_point_map(vpm2)
+                           );
 }
 
 //
@@ -195,7 +201,10 @@ bool do_intersect_mesh_polyline(const PolygonMesh& pm, const py::list& lst,
   auto begin = stl_input_iterator<Point_3>(lst);
   auto end = stl_input_iterator<Point_3>(lst, false);
   std::vector<Point_3> polyline(begin, end);
-  return PMP::do_intersect(pm, polyline, internal::parse_pmp_np<PolygonMesh>(np));
+  // auto vpm = get_vertex_point_map(pm, np);
+  return PMP::do_intersect(pm, polyline, internal::parse_pmp_np<PolygonMesh>(np)
+                                         // .vertex_point_map(vpm)
+                                         );
 }
 
 //
@@ -209,23 +218,29 @@ bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
     auto end1 = stl_input_iterator<Point_3>(py::cast<py::list>(lh), false);
     range.emplace_back(begin1, end1);
   }
-  return PMP::do_intersect(pm, range, internal::parse_pmp_np<PolygonMesh>(np));
+  // auto vpm = get_vertex_point_map(pm, np);
+  return PMP::do_intersect(pm, range, internal::parse_pmp_np<PolygonMesh>(np)
+                                      // .vertex_point_map(vpm)
+                                      );
 }
 
 //
 template <typename PolygonMesh>
-py::list intersecting_meshes(const py::list& lst) {
+py::list intersecting_meshes(const py::list& range,
+                             const py::dict& np = py::dict(),
+                             const py::list& nps = py::list()) {
   using Pm = PolygonMesh;
 
   py::list result;
-  auto begin = stl_input_iterator<Pm>(lst);
-  auto end = stl_input_iterator<Pm>(lst, false);
+  auto begin = stl_input_iterator<Pm>(range);
+  auto end = stl_input_iterator<Pm>(range, false);
   auto op = [&] (const std::pair<std::size_t, std::size_t>& res) mutable
             { result.append(res); };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::intersecting_meshes(boost::make_iterator_range(begin, end), it);
+  PMP::intersecting_meshes(boost::make_iterator_range(begin, end), it,
+                            internal::parse_pmp_np<PolygonMesh>(np));
 
   return result;
 }
@@ -238,11 +253,15 @@ py::list self_intersections(const PolygonMesh& pm,
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
+  // auto vpm = get_vertex_point_map(pm, np);
+
   py::list result;
   auto op = [&] (const std::pair<Fd, Fd>& res) mutable
             { result.append(py::make_tuple(res.first, res.second)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  PMP::self_intersections(pm, it, internal::parse_pmp_np<PolygonMesh>(np));
+  PMP::self_intersections(pm, it, internal::parse_pmp_np<PolygonMesh>(np)
+                          // .vertex_point_map(vpm)
+                          );
 
   return result;
 }
@@ -256,6 +275,8 @@ py::list self_intersections_faces(const py::list& face_range,
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
+  // auto vpm = get_vertex_point_map(pm, np);
+
   auto begin = stl_input_iterator<Fd>(face_range);
   auto end = stl_input_iterator<Fd>(face_range, false);
 
@@ -264,15 +285,54 @@ py::list self_intersections_faces(const py::list& face_range,
             { result.append(res); };
   auto it = boost::make_function_output_iterator(std::ref(op));
   PMP::self_intersections(boost::make_iterator_range(begin, end), pm, it,
-                          internal::parse_pmp_np<PolygonMesh>(np));
+                          internal::parse_pmp_np<PolygonMesh>(np)
+                          // .vertex_point_map(vpm)
+                          );
   return result;
+}
+
+auto triangle_soup_self_intersections(const py::list& points,
+                                      const py::list& triangles,
+                                      const py::dict& np = py::dict()) {
+
+  const auto ptvec = list2vec<Point_3>(points);
+  std::vector<std::array<std::size_t, 3>> trivec;
+  for (const auto& tri : triangles) {
+    std::array<std::size_t, 3> triarr;
+    for (std::size_t i = 0; i < 3; ++i) {
+      triarr[i] = py::cast<std::size_t>(tri[i]);
+    }
+    trivec.push_back(triarr);
+  }
+  std::vector<std::pair<std::size_t, std::size_t>> result;
+  PMP::triangle_soup_self_intersections(ptvec, trivec, std::back_inserter(result));
+  py::list lst;
+  for (const auto& res : result) {
+    lst.append(py::make_tuple(res.first, res.second));
+  }
+  return lst;
 }
 
 //
 template <typename PolygonMesh>
 bool does_self_intersect(const PolygonMesh& pm,
                          const py::dict& np = py::dict()) {
-  return PMP::does_self_intersect(pm, internal::parse_pmp_np<PolygonMesh>(np));
+  // auto vpm = get_vertex_point_map(pm, np);
+  return PMP::does_self_intersect(pm, internal::parse_pmp_np<PolygonMesh>(np)
+                                      // .vertex_point_map(get_vertex_point_map(pm, np))
+                                      );
+}
+
+auto does_triangle_soup_self_intersect(const py::list& points,
+                                       const py::list& triangles,
+                                       const py::dict& np = py::dict()) {
+  auto begin = stl_input_iterator<Point_3>(points);
+  auto end = stl_input_iterator<Point_3>(points, false);
+  std::vector<Point_3> points_vec(begin, end);
+  auto begin2 = stl_input_iterator<std::array<std::size_t, 3>>(triangles);
+  auto end2 = stl_input_iterator<std::array<std::size_t, 3>>(triangles, false);
+  std::vector<std::array<std::size_t, 3>> triangles_vec(begin2, end2);
+  return PMP::does_triangle_soup_self_intersect(points_vec, triangles_vec);
 }
 
 //
@@ -283,10 +343,13 @@ bool does_self_intersect_faces(const py::list& face_range,
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
+  // auto vpm = get_vertex_point_map(pm, np);
 
   auto begin = stl_input_iterator<Fd>(face_range);
   auto end = stl_input_iterator<Fd>(face_range, false);
-  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_pmp_np<PolygonMesh>(np));
+  return PMP::does_self_intersect(boost::make_iterator_range(begin, end), pm, internal::parse_pmp_np<PolygonMesh>(np)
+                                                                      // .vertex_point_map(get_vertex_point_map(pm, np))
+                                                                      );
 }
 
 template <typename PolygonMesh>
@@ -3399,6 +3462,39 @@ void export_polygon_mesh_processing(py::module_& m) {
 #endif
 
 
+  // Intersection Functions
+  m.def("do_intersect", &pmp::do_intersect_polylines);
+  m.def("do_intersect", &pmp::do_intersect_polyline_ranges);
+  m.def("do_intersect", &pmp::do_intersect_meshes<Pm>,
+        py::arg("pm1"), py::arg("pm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+  m.def("do_intersect", &pmp::do_intersect_mesh_polyline<Pm>,
+        py::arg("pm"), py::arg("lst"),
+        py::arg("np") = py::dict());
+  m.def("do_intersect", &pmp::do_intersect_mesh_polyline_range<Pm>,
+        py::arg("pm"), py::arg("lst"),
+        py::arg("np") = py::dict());
+  m.def("does_self_intersect_faces", &pmp::does_self_intersect_faces<Pm>,
+        py::arg("face_range"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("does_self_intersect", &pmp::does_self_intersect<Pm>,
+        py::arg("pm"), py::arg("np") = py::dict());
+  m.def("does_triangle_soup_self_intersect", &pmp::does_triangle_soup_self_intersect, // TODO: point_map
+        py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict());
+  m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>, py::arg("range"),
+        py::arg("np") = py::dict(), py::arg("nps") = py::dict());
+  m.def("self_intersections", &pmp::self_intersections<Pm>,
+        py::arg("pm"), py::arg("np") = py::dict());
+  m.def("self_intersections", &pmp::self_intersections_faces<Pm>,
+        py::arg("face_range"), py::arg("pm"),
+        py::arg("np") = py::dict());
+  m.def("triangle_soup_self_intersections", &pmp::triangle_soup_self_intersections, // TODO: point_map
+        py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict());
+
+
+
+
+
 
 
 
@@ -3427,33 +3523,6 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np") = py::dict());
 #endif
 
-
-  m.def("do_intersect_polylines", &pmp::do_intersect_polylines);
-  m.def("do_intersect_polyline_ranges", &pmp::do_intersect_polyline_ranges);
-  m.def("do_intersect_meshes", &pmp::do_intersect_meshes<Pm>,
-        py::arg("pm1"), py::arg("pm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("do_intersect_mesh_polyline", &pmp::do_intersect_mesh_polyline<Pm>,
-        py::arg("pm"), py::arg("lst"),
-        py::arg("np") = py::dict());
-  m.def("do_intersect_mesh_polyline_range", &pmp::do_intersect_mesh_polyline_range<Pm>,
-        py::arg("pm"), py::arg("lst"),
-        py::arg("np") = py::dict());
-
-  m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>);
-
-  m.def("self_intersections", &pmp::self_intersections<Pm>,
-        py::arg("pm"), py::arg("np") = py::dict());
-  m.def("self_intersections_faces", &pmp::self_intersections_faces<Pm>,
-        py::arg("face_range"), py::arg("pm"),
-        py::arg("np") = py::dict());
-
-  m.def("does_self_intersect", &pmp::does_self_intersect<Pm>,
-        py::arg("pm"), py::arg("np") = py::dict());
-
-  m.def("does_self_intersect_faces", &pmp::does_self_intersect_faces<Pm>,
-        py::arg("pm"), py::arg("face_range"),
-        py::arg("np") = py::dict());
 
   m.def("corefine", &pmp::corefine<Pm>,
         py::arg("pm1"), py::arg("pm2"),
