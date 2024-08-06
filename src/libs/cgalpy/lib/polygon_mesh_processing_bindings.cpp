@@ -3392,9 +3392,11 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("face_range"), py::arg("pmesh"));
   m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
         py::arg("pmesh"));
+#if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("volume_connected_components", &pmp::volume_connected_components<Pm, FaceSizeTypeMap>,
         py::arg("tm"), py::arg("volume_id_map"),
         py::arg("np") = py::dict());
+#endif
 
 
 
