@@ -83,6 +83,7 @@ typedef Kernel::Circle_2                               Circle_2;
 typedef Kernel::Triangle_2                             Triangle_2;
 typedef Kernel::Iso_rectangle_2                        Iso_rectangle_2;
 typedef Kernel::Point_3                                Point_3;
+typedef Kernel::Plane_3                                Plane_3;
 typedef Kernel::Weighted_point_3                       Weighted_point_3;
 typedef Kernel::Iso_cuboid_3                           Iso_cuboid_3;
 typedef Kernel::Line_3                                 Line_3;
