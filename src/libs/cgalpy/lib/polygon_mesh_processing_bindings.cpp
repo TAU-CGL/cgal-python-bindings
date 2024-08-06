@@ -2373,11 +2373,11 @@ auto orient_triangle_soup_with_reference_triangle_soup(const py::list& ref_point
                                                        const py::list& faces,
                                                        const py::dict& np1 = py::dict(),
                                                        const py::dict& np2 = py::dict()) {
-  const auto ref_points_v = ptlist2ptvec(ref_points);
-  const auto ref_faces_v = polylist2polyvec(ref_faces);
-  const auto pts_v = ptlist2ptvec(points);
-  const auto faces_v = polylist2polyvec(faces);
-  PMP::orient_triangle_soup_with_reference_triangle_soup(ref_points_v, ref_faces_v, pts_v, faces_v);
+  // const auto ref_points_v = ptlist2ptvec(ref_points);
+  // const auto ref_faces_v = polylist2polyvec(ref_faces);
+  // const auto pts_v = ptlist2ptvec(points);
+  // const auto faces_v = polylist2polyvec(faces);
+  // PMP::orient_triangle_soup_with_reference_triangle_soup(ref_points_v, ref_faces_v, pts_v, faces_v);
 }
 
 py::tuple duplicate_non_manifold_edges_in_polygon_soup(const py::list& points,
@@ -2802,6 +2802,47 @@ auto reverse_face_orientations(const py::list& face_range,
 
   std::vector<Fd> out;
   PMP::reverse_face_orientations(boost::make_iterator_range(begin, end), pm);
+}
+
+template <typename TriangleMesh, typename VolumeFaceIndexMap>
+auto volume_connected_components(TriangleMesh& tm,
+                                 VolumeFaceIndexMap volume_id_map,
+                                 const py::dict& np = py::dict()) {
+  // // auto vpm = get_vertex_point_map(tm, np);
+  // std::vector<std::size_t> vi, ccitvi, nl;
+  // std::vector<bool> icoo;
+  // std::vector<std::pair<std::size_t, std::size_t>> ivpot;
+  //   // vertex_point_map
+  //   // geom_traits
+  //   // face_index_map
+  //   // face_connected_component_map
+  //   // volume_inclusions
+  //   // do_orientation_tests
+  //   // error_codes
+  //   // do_self_intersection_tests
+  //   // connected_component_id_to_volume_id
+  //   // nesting_levels
+  //   // is_cc_outward_oriented
+  //   // intersecting_volume_pairs_output_iterator
+  // if (np.contains("face_index_map")) {
+  //   auto fim = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP0",
+  //     np.contains("face_index_map") ? np["face_index_map"] : py::none());
+  //   if (np.contains("face_connected_component_map")) {
+  //     auto fccm = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP1",
+  //       np.contains("face_connected_component_map") ? np["face_connected_component_map"] : py::none());
+  //     PMP::volume_connected_components(tm, internal::parse_pmp_np<TriangleMesh>(np)
+  //                                     // .vertex_point_map(vpm)
+  //                                     .face_index_map(fim)
+  //                                     .face_connected_component_map(fccm)
+  //                                     .volume_inclusions(std::back_inserter(vi))
+  //                                     .connected_component_id_to_volume_id(std::back_inserter(ccitvi))
+  //                                     .nesting_levels(std::back_inserter(nl))
+  //                                     .is_cc_outward_oriented(std::back_inserter(icoo))
+  //                                     .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot)));
+  //
+  //   }
+  // }
+  //
 }
 
 template <typename PolygonMesh>
@@ -3296,8 +3337,16 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("tm"), py::arg("np") = py::dict());
   m.def("orient_triangle_soup_with_reference_triangle_mesh", &pmp::orient_triangle_soup_with_reference_triangle_mesh<Pm>, // TODO: point_map
         py::arg("tm_ref"), py::arg("points"), py::arg("triangles"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("orient_triangle_soup_with_reference_triangle_soup", &pmp::orient_triangle_soup_with_reference_triangle_soup, // TODO: point_map
-        py::arg("ref_points"), py::arg("ref_faces"), py::arg("points"), py::arg("faces"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+  // m.def("orient_triangle_soup_with_reference_triangle_soup", &pmp::orient_triangle_soup_with_reference_triangle_soup, // TODO: point_map
+  //       py::arg("ref_points"), py::arg("ref_faces"), py::arg("points"), py::arg("faces"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+  m.def("reverse_face_orientations", &pmp::reverse_face_orientations<Pm>,
+        py::arg("face_range"), py::arg("pmesh"));
+  m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
+        py::arg("pmesh"));
+  // m.def("volume_connected_components", &pmp::volume_connected_components<Pm>,
+  //       py::arg("tm"), py::arg("volume_id_map"),
+  //       py::arg("np") = py::dict());
+
 
 
 
@@ -3439,16 +3488,8 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
 #endif
 
-  m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
-        py::arg("pmesh"));
-
-  m.def("reverse_face_orientations", &pmp::reverse_face_orientations<Pm>,
-        py::arg("face_range"), py::arg("pm"));
-
   m.def("is_non_manifold_vertex", &PMP::is_non_manifold_vertex<Pm>,
         py::arg("v"), py::arg("pm"));
-
-  // m.def("reverse_face_orientations")
 
   m.def("set_non_manifold_edge", &pmp::set_non_manifold_edge);
   m.def("set_non_manifold_vertex", &pmp::set_non_manifold_vertex);
