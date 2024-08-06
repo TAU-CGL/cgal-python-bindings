@@ -41,6 +41,7 @@
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h>
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
+#include <CGAL/Polygon_mesh_processing/merge_border_vertices.h>
 #include <CGAL/Polygon_mesh_processing/random_perturbation.h>
 #include <CGAL/Polygon_mesh_processing/refine.h>
 #include <CGAL/Polygon_mesh_processing/region_growing.h>
@@ -1842,9 +1843,88 @@ auto refine(PolygonMesh& tmesh,
 }
 
 template <typename PolygonMesh>
+auto stitch_borders_bc(const py::list& boundary_cycle_representatives,
+                       PolygonMesh& pmesh,
+                       const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Hd = typename Gt::halfedge_descriptor;
+  const auto bc_vec = list2vec<Hd>(boundary_cycle_representatives);
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  if (np.contains("face_index_map")) {
+    auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP0",
+      np.contains("face_index_map") ? np["face_index_map"] : py::none());
+    return PMP::stitch_borders(bc_vec, pmesh, internal::parse_pmp_np<PolygonMesh>(np)
+                        // .vertex_point_map(vpm)
+                        .face_index_map(fim));
+  } else {
+    return PMP::stitch_borders(bc_vec, pmesh, internal::parse_pmp_np<PolygonMesh>(np)
+                        // .vertex_point_map(vpm)
+                        );
+  }
+}
+
+template <typename PolygonMesh>
+auto stitch_borders_he(PolygonMesh& pmesh,
+                       const py::list& hedge_pairs_to_stitch,
+                       const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Hd = typename Gt::halfedge_descriptor;
+  std::vector<std::pair<Hd, Hd>> hedge_pairs;
+  for (const auto& item : hedge_pairs_to_stitch) {
+    std::pair<Hd, Hd> pair;
+    pair.first = py::cast<Hd>(item[0]);
+    pair.second = py::cast<Hd>(item[1]);
+  }
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  return PMP::stitch_borders(pmesh, hedge_pairs, internal::parse_pmp_np<PolygonMesh>(np)
+                      // .vertex_point_map(vpm)
+                      );
+}
+
+
+
+template <typename PolygonMesh>
 auto stitch_borders(PolygonMesh& pmesh,
                     const py::dict& np = py::dict()) {
-  return PMP::stitch_borders(pmesh, internal::parse_pmp_np<PolygonMesh>(np));
+  // return PMP::stitch_borders(pmesh, internal::parse_pmp_np<PolygonMesh>(np));
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  if (np.contains("face_index_map")) {
+    auto fim = get_face_prop_map<PolygonMesh, std::size_t>(pmesh, "INTERNAL_MAP0",
+      np.contains("face_index_map") ? np["face_index_map"] : py::none());
+    return PMP::stitch_borders(pmesh, internal::parse_pmp_np<PolygonMesh>(np)
+                        // .vertex_point_map(vpm)
+                        .face_index_map(fim));
+  } else {
+    return PMP::stitch_borders(pmesh, internal::parse_pmp_np<PolygonMesh>(np)
+                        // .vertex_point_map(vpm)
+                        );
+  }
+}
+
+template <typename PolygonMesh>
+auto stitch_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfedge_descriptor& h,
+                           PolygonMesh& pmesh,
+                           const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  return PMP::stitch_boundary_cycle(h, pmesh, internal::parse_pmp_np<PolygonMesh>(np)
+                      // .vertex_point_map(vpm)
+                      );
+}
+
+template <typename PolygonMesh>
+auto stitch_boundary_cycles(const py::list& boundary_cycle_representatives,
+                            PolygonMesh& pmesh,
+                            const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Hd = typename Gt::halfedge_descriptor;
+  const auto bc_vec = list2vec<Hd>(boundary_cycle_representatives);
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  return PMP::stitch_boundary_cycles(bc_vec, pmesh, internal::parse_pmp_np<PolygonMesh>(np)
+                      // .vertex_point_map(vpm)
+                      );
 }
 
 template <typename TriangleMesh>
@@ -2071,16 +2151,11 @@ auto does_bound_a_volume(TriangleMesh& tm,
   bool retv;
   if (np.contains("face_index_map")) {
     auto fim = get_face_prop_map<TriangleMesh, bool>
-      (tm, "INTERNAL_MAP0", np.contains("face_is_in_volume_map") ? np["face_is_in_volume_map"] : py::none());
+      (tm, "INTERNAL_MAP0", np.contains("face_index_map") ? np["face_index_map"] : py::none());
     retv = PMP::does_bound_a_volume(tm, internal::parse_pmp_np<TriangleMesh>(np)
                                     .face_index_map(fim)
                                   // .vertex_point_map(vpm)
                                   );
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (!np.contains("face_is_in_volume_map")) {
-      tm.remove_property_map(fim);
-    }
-#endif
   }
   else {
     retv = PMP::does_bound_a_volume(tm, internal::parse_pmp_np<TriangleMesh>(np)
@@ -2412,6 +2487,65 @@ auto is_polygon_soup_a_polygon_mesh(const py::list& polygons) {
   return PMP::is_polygon_soup_a_polygon_mesh(polys);
 }
 
+auto merge_duplicate_points_in_polygon_soup(const py::list& points,
+                                            const py::list& polygons,
+                                            const py::dict& np = py::dict()) {
+  auto pointvec = ptlist2ptvec(points);
+  auto polyvec = polylist2polyvec(polygons);
+  return PMP::merge_duplicate_points_in_polygon_soup(pointvec, polyvec,
+                                             internal::parse_named_parameters(np));
+}
+
+auto merge_duplicate_polygons_in_polygon_soup(const py::list& points,
+                                              const py::list& polygons,
+                                              const py::dict& np = py::dict()) {
+  auto pointvec = ptlist2ptvec(points);
+  auto polyvec = polylist2polyvec(polygons);
+  return PMP::merge_duplicate_polygons_in_polygon_soup(pointvec, polyvec,
+                                             internal::parse_named_parameters(np));
+}
+
+template <typename PolygonMesh>
+auto merge_duplicated_vertices_in_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfedge_descriptor& h,
+                                                 PolygonMesh& pm,
+                                                 const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pm, np);
+  return PMP::merge_duplicated_vertices_in_boundary_cycle(h, pm, internal::parse_pmp_np<PolygonMesh>(np)
+                                                        // .vertex_point_map(vpm)
+                                                        );
+}
+
+template <typename PolygonMesh>
+auto merge_duplicated_vertices_in_boundary_cycles(PolygonMesh& pm,
+                                                  const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pm, np);
+  return PMP::merge_duplicated_vertices_in_boundary_cycles(pm, internal::parse_pmp_np<PolygonMesh>(np)
+                                                        // .vertex_point_map(vpm)
+                                                        );
+}
+
+template <typename PolygonMesh>
+auto non_manifold_vertices(PolygonMesh& pm) {
+  using Hd = typename boost::graph_traits<PolygonMesh>::halfedge_descriptor;
+  std::vector<Hd> out;
+  PMP::non_manifold_vertices(pm, std::back_inserter(out));
+  return vec2list(out);
+}
+
+template <typename PolygonMesh>
+auto polygon_mesh_to_polygon_soup(const PolygonMesh& pm,
+                                  const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Vd = typename Gt::vertex_descriptor;
+  using Fd = typename Gt::face_descriptor;
+  std::vector<Point_3> pts;
+  std::vector<std::vector<std::size_t>> polys;
+  PMP::polygon_mesh_to_polygon_soup(pm, pts, polys,
+                                    internal::parse_pmp_np<Pm>(np));
+  return py::make_tuple(ptvec2ptlist(pts), polyvec2polylist(polys));
+}
+
 template <typename PolygonMesh>
 py::list orient_triangle_soup_with_reference_triangle_mesh(const PolygonMesh& tm_ref,
                                                        const py::list& points,
@@ -2465,11 +2599,18 @@ auto duplicate_non_manifold_vertices(PolygonMesh& pm,
                                      const py::dict& np = py::dict()) {
   using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
   std::vector<std::vector<Vd>> out;
+  // auto vpm = get_vertex_point_map(pm, np);
   auto vicm = get_vertex_prop_map<PolygonMesh, Vd>
-    (pm, "INTERNAL_MAP0", np.contains("vertex_index_copy_map") ? np["vertex_index_copy_map"] : py::none());
+    (pm, "INTERNAL_MAP0", np.contains("vertex_is_constrained_map") ? np["vertex_is_constrained_map"] : py::none());
   auto nb = PMP::duplicate_non_manifold_vertices(pm,
                                        internal::parse_pmp_np<PolygonMesh>(np)
+                                       // .vertex_point_map(vpm)
                                        .output_iterator(std::back_inserter(out)));
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("vertex_is_constrained_map")) {
+    pm.remove_property_map(vicm);
+  }
+#endif
   py::list result;
   for (const auto& vec : out) {
     result.append(vec2list(vec));
@@ -2487,56 +2628,34 @@ py::tuple polygon_soup_to_polygon_mesh(const py::list& points,
   auto ptvec = ptlist2ptvec(points);
   auto polyvec = polylist2polyvec(polygons);
   py::object pv = py::none(), pf = py::none();
-  bool pvflag = (np_ps.contains("point_to_vertex_output_iterator") &&
-    py::cast<bool>(np_ps["point_to_vertex_output_iterator"]));
-  bool pfflag = (np_ps.contains("polygon_to_face_output_iterator") &&
-    py::cast<bool>(np_ps["polygon_to_face_output_iterator"]));
   PolygonMesh output;
 
-  if (pvflag && pfflag) {
-    std::vector<std::pair<int, vd>> pvvec;
-    std::vector<std::pair<int, fd>> pfvec;
-    PMP::polygon_soup_to_polygon_mesh(ptvec, polyvec, output,
-                                      internal::parse_pmp_np<PolygonMesh>(np_ps)
-                                      .point_to_vertex_output_iterator(std::back_inserter(pvvec))
-                                      .polygon_to_face_output_iterator(std::back_inserter(pfvec)),
-                                      internal::parse_pmp_np<PolygonMesh>(np_pm));
-    py::list pvlist, pflist;
-    for (const auto& [p, v] : pvvec) {
-      pvlist.append(py::make_tuple(p, v));
-    }
-    for (const auto& [p, f] : pfvec) {
-      pflist.append(py::make_tuple(p, f));
-    }
-    return py::make_tuple(output, pvlist, pflist);
-  } else if (pvflag) {
-    std::vector<std::pair<int, vd>> pvvec;
-    PMP::polygon_soup_to_polygon_mesh(ptvec, polyvec, output,
-                                      internal::parse_pmp_np<PolygonMesh>(np_ps)
-                                      .point_to_vertex_output_iterator(std::back_inserter(pvvec)),
-                                      internal::parse_pmp_np<PolygonMesh>(np_pm));
-    py::list pvlist;
-    for (const auto& [p, v] : pvvec) {
-      pvlist.append(py::make_tuple(p, v));
-    }
-    return py::make_tuple(output, pvlist, pf);
-  } else if (pfflag) {
-    std::vector<std::pair<int, fd>> pfvec;
-    PMP::polygon_soup_to_polygon_mesh(ptvec, polyvec, output,
-                                      internal::parse_pmp_np<PolygonMesh>(np_ps)
-                                      .polygon_to_face_output_iterator(std::back_inserter(pfvec)),
-                                      internal::parse_pmp_np<PolygonMesh>(np_pm));
-    py::list pflist;
-    for (const auto& [p, f] : pfvec) {
-      pflist.append(py::make_tuple(p, f));
-    }
-    return py::make_tuple(output, pv, pflist);
-  } else {
-    PMP::polygon_soup_to_polygon_mesh(ptvec, polyvec, output,
-                                      internal::parse_pmp_np<PolygonMesh>(np_ps),
-                                      internal::parse_pmp_np<PolygonMesh>(np_pm));
-    return py::make_tuple(output, pv, pf);
+  // auto vpm2 = get_vertex_point_map(output, np_pm);
+
+  std::vector<std::pair<int, vd>> pvvec;
+  std::vector<std::pair<int, fd>> pfvec;
+  PMP::polygon_soup_to_polygon_mesh(ptvec, polyvec, output,
+                                    internal::parse_pmp_np<PolygonMesh>(np_ps)
+                                    .point_to_vertex_output_iterator(std::back_inserter(pvvec))
+                                    .polygon_to_face_output_iterator(std::back_inserter(pfvec)),
+                                    internal::parse_pmp_np<PolygonMesh>(np_pm)
+                                    // .vertex_point_map(vpm2)
+                                    );
+  py::list pvlist, pflist;
+  for (const auto& [p, v] : pvvec) {
+    pvlist.append(py::make_tuple(p, v));
   }
+  for (const auto& [p, f] : pfvec) {
+    pflist.append(py::make_tuple(p, f));
+  }
+  return py::make_tuple(output, pvlist, pflist);
+}
+
+auto remove_isolated_points_in_polygon_soup(const py::list& points,
+                                            const py::list& polygons) {
+  auto pointvec = ptlist2ptvec(points);
+  auto polyvec = polylist2polyvec(polygons);
+  return PMP::remove_isolated_points_in_polygon_soup(pointvec, polyvec);
 }
 
 template <typename PolygonMesh, typename EBMap>
@@ -2685,9 +2804,15 @@ auto compatible_orientations(PolygonMesh& pm,
   auto fpim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP0",
     np.contains("face_patch_index_map") ? np["face_patch_index_map"] : py::none());
 
-  return PMP::compatible_orientations(pm, fbm,
+  auto retv = PMP::compatible_orientations(pm, fbm,
                                           internal::parse_pmp_np<PolygonMesh>(np)
                                           .face_partition_id_map(fpim));
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("face_patch_index_map")) {
+    pm.remove_property_map(fpim);
+  }
+#endif
+  return retv;
 }
 
 template <typename PolygonMesh>
@@ -2893,9 +3018,6 @@ auto volume_connected_components(TriangleMesh& tm,
                                         .is_cc_outward_oriented(std::ref(icoo))
                                         .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot))
                                         );
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-        tm.remove_property_map(fccm);
-#endif
     }
     else {
       retv = PMP::volume_connected_components(tm, volume_id_map, internal::parse_pmp_np<TriangleMesh>(np)
@@ -2908,9 +3030,6 @@ auto volume_connected_components(TriangleMesh& tm,
                                       .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot))
                                       );
     }
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    tm.remove_property_map(fim);
-#endif
   }
   else {
     if (np.contains("face_connected_component_map")) {
@@ -2925,9 +3044,6 @@ auto volume_connected_components(TriangleMesh& tm,
                                       .is_cc_outward_oriented(std::ref(icoo))
                                       .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot))
                                       );
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-      tm.remove_property_map(fccm);
-#endif
     }
     else {
       retv = PMP::volume_connected_components(tm, volume_id_map, internal::parse_pmp_np<TriangleMesh>(np)
@@ -2965,9 +3081,6 @@ void orient_to_bound_a_volume(PolygonMesh& tm,
     PMP::orient_to_bound_a_volume(tm, internal::parse_pmp_np<PolygonMesh>(np)
                                   // .vertex_point_map(vpm)
                                   .face_index_map(fim));
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    tm.remove_property_map(fim);
-#endif
   } else {
     PMP::orient_to_bound_a_volume(tm, internal::parse_pmp_np<PolygonMesh>(np)
                                   // .vertex_point_map(vpm)
@@ -3492,6 +3605,45 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict());
 
 
+  // Combinatorial Repair
+  m.def("duplicate_non_manifold_vertices", &pmp::duplicate_non_manifold_vertices<Pm>,
+        py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("is_non_manifold_vertex", &PMP::is_non_manifold_vertex<Pm>,
+        py::arg("v"), py::arg("pm"));
+  m.def("is_polygon_soup_a_polygon_mesh", &pmp::is_polygon_soup_a_polygon_mesh,
+        py::arg("polygons"));
+  m.def("merge_duplicate_points_in_polygon_soup", &pmp::merge_duplicate_points_in_polygon_soup,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+  m.def("merge_duplicate_polygons_in_polygon_soup", &pmp::merge_duplicate_polygons_in_polygon_soup,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+  m.def("merge_duplicated_vertices_in_boundary_cycle", &pmp::merge_duplicated_vertices_in_boundary_cycle<Pm>,
+        py::arg("h"), py::arg("pm"), py::arg("np") = py::dict());
+  m.def("merge_duplicated_vertices_in_boundary_cycles", &pmp::merge_duplicated_vertices_in_boundary_cycles<Pm>,
+        py::arg("pm"), py::arg("np") = py::dict());
+  m.def("non_manifold_vertices", &pmp::non_manifold_vertices<Pm>,
+        py::arg("pm"));
+  m.def("polygon_mesh_to_polygon_soup", &pmp::polygon_mesh_to_polygon_soup<Pm>,
+        py::arg("pm"), py::arg("np") = py::dict());
+  m.def("polygon_soup_to_polygon_mesh", &pmp::polygon_soup_to_polygon_mesh<Pm>, // TODO: point_map, ptvm, ptfm
+        py::arg("points"), py::arg("polygons"), py::arg("np_ps") = py::dict(), py::arg("np_pm") = py::dict());
+  m.def("remove_isolated_points_in_polygon_soup", &pmp::remove_isolated_points_in_polygon_soup,
+        py::arg("points"), py::arg("polygons"));
+  m.def("repair_polygon_soup", &pmp::repair_polygon_soup,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+  m.def("stitch_borders", &pmp::stitch_borders_bc<Pm>,
+        py::arg("boundary_cycle_representatives"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+  m.def("stitch_borders", &pmp::stitch_borders_he<Pm>,
+        py::arg("pmesh"), py::arg("hedge_pairs_to_stitch"),
+        py::arg("np") = py::dict());
+  m.def("stitch_borders", &pmp::stitch_borders<Pm>,
+        py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("stitch_boundary_cycle", &pmp::stitch_boundary_cycle<Pm>,
+        py::arg("h"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+  m.def("stitch_boundary_cycles", &pmp::stitch_boundary_cycles<Pm>,
+        py::arg("boundary_cycle_representatives"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
 
 
 
@@ -3559,9 +3711,6 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("autorefine_triangle_soup", &pmp::autorefine_triangle_soup,
       py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
 
-  m.def("stitch_borders", &pmp::stitch_borders<Pm>,
-        py::arg("pmesh"), py::arg("np") = py::dict());
-
   m.def("sample_triangle_mesh", &pmp::sample_triangle_mesh<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
 
@@ -3578,15 +3727,6 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("border_halfedges", &pmp::border_halfedges<Pm>,
         py::arg("face_range"), py::arg("pm"),
         py::arg("np") = py::dict());
-
-  m.def("is_polygon_soup_a_polygon_mesh", &pmp::is_polygon_soup_a_polygon_mesh,
-        py::arg("polygons"));
-
-  m.def("duplicate_non_manifold_vertices", &pmp::duplicate_non_manifold_vertices<Pm>,
-        py::arg("pmesh"), py::arg("np") = py::dict());
-
-  m.def("polygon_soup_to_polygon_mesh", &pmp::polygon_soup_to_polygon_mesh<Pm>,
-        py::arg("points"), py::arg("polygons"), py::arg("np_ps") = py::dict(), py::arg("np_pm") = py::dict());
 
   m.def("is_closed", &CGAL::is_closed<Pm>,
         py::arg("g"));
@@ -3607,9 +3747,6 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
 #endif
-
-  m.def("is_non_manifold_vertex", &PMP::is_non_manifold_vertex<Pm>,
-        py::arg("v"), py::arg("pm"));
 
   m.def("set_non_manifold_edge", &pmp::set_non_manifold_edge);
   m.def("set_non_manifold_vertex", &pmp::set_non_manifold_vertex);
