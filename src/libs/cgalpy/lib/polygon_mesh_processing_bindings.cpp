@@ -1174,49 +1174,104 @@ PolygonMesh corefine_and_compute_union(PolygonMesh& pm1, PolygonMesh& pm2,
 }
 
 //
-template <typename PolygonMesh>
-PolygonMesh corefine_and_compute_difference(PolygonMesh& pm1, PolygonMesh& pm2,
+template <typename TriangleMesh>
+TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm2,
                                           const py::dict& np1 = py::dict(),
                                           const py::dict& np2 = py::dict(),
                                           const py::dict& np_out = py::dict()) {
-  using Pm = PolygonMesh;
-  bool visitor = np_out.contains("visitor");
-  Pm out;
+  using Tm = TriangleMesh;
+
+  Tm out;
   bool valid;
-  if (visitor) {
-    // try to cast to Non_manifold_output_visitor or Default_visitor
+
+  // auto vpm1 = get_vertex_point_map(pm1, np1);
+  // auto vpm2 = get_vertex_point_map(pm2, np2);
+  // auto vpm3 = get_vertex_point_map(out, np_out);
+  auto eicm1 = get_edge_prop_map<Tm, bool>(pm1, "INTERNAL_MAP0",
+    np1.contains("edge_is_constrained_map") ? np1["edge_internal_map"] : py::none());
+  auto eicm2 = get_edge_prop_map<Tm, bool>(pm2, "INTERNAL_MAP1",
+    np2.contains("edge_is_constrained_map") ? np2["edge_internal_map"] : py::none());
+  auto eicm_out = get_edge_prop_map<Tm, bool>(out, "INTERNAL_MAP2",
+    np_out.contains("edge_is_constrained_map") ? np_out["edge_internal_map"] : py::none());
+
+  pmp::Corefine_visitor<Tm> visitor;
+  if (np_out.contains("visitor")) {
     try {
-      auto visitor = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_out["visitor"]);
-      valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
-                                           internal::parse_pmp_np<PolygonMesh>(np1),
-                                           internal::parse_pmp_np<PolygonMesh>(np2),
-                                           internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
+      visitor = py::cast<pmp::Corefine_visitor<Tm>>(np_out["visitor"]);
     } catch (const py::cast_error&) {
+      throw std::runtime_error("Visitor type not recognized");
     }
-    try {
-      auto visitor = py::cast<pmp::Corefine_visitor<Pm>>(np_out["visitor"]);
+  }
+
+  bool fimb1 = np1.contains("face_index_map");
+  bool fimb2 = np2.contains("face_index_map");
+  if (fimb1 && fimb2) {
+    auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
+      np1.contains("face_index_map") ? np1["face_internal_map"] : py::none());
+    auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
+      np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
       valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
-                                           internal::parse_pmp_np<PolygonMesh>(np1),
-                                           internal::parse_pmp_np<PolygonMesh>(np2),
-                                           internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
-    } catch (const py::cast_error&) {
-    }
-    try {
-      auto visitor = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_out["visitor"]);
-      valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
-                                           internal::parse_pmp_np<PolygonMesh>(np1),
-                                           internal::parse_pmp_np<PolygonMesh>(np2),
-                                           internal::parse_pmp_np<PolygonMesh>(np_out).visitor(visitor));
-    }
-    catch (const py::cast_error&) {
-    }
-    throw std::runtime_error("Visitor type not recognized");
+                                                  internal::parse_pmp_np<TriangleMesh>(np1)
+                                                  // .vertex_point_map(vpm1)
+                                                  .edge_is_constrained_map(eicm1)
+                                                  .face_index_map(fim1)
+                                                  .visitor(visitor),
+                                                  internal::parse_pmp_np<TriangleMesh>(np2)
+                                                  // .vertex_point_map(vpm2)
+                                                  .face_index_map(fim2)
+                                                  .edge_is_constrained_map(eicm2),
+                                                  internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                  // .vertex_point_map(vpm3)
+                                                  .edge_is_constrained_map(eicm_out)
+                                                  );
+  }
+  else if (fimb1) {
+    auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
+      np1.contains("face_index_map") ? np1["face_internal_map"] : py::none());
+    valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                                internal::parse_pmp_np<TriangleMesh>(np1)
+                                                // .vertex_point_map(vpm1)
+                                                .edge_is_constrained_map(eicm1)
+                                                .face_index_map(fim1)
+                                                .visitor(visitor),
+                                                internal::parse_pmp_np<TriangleMesh>(np2)
+                                                // .vertex_point_map(vpm2)
+                                                .edge_is_constrained_map(eicm2),
+                                                internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                // .vertex_point_map(vpm3)
+                                                .edge_is_constrained_map(eicm_out)
+                                                );
+  }
+  else if (fimb2) {
+    auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP3",
+      np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
+    valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                                internal::parse_pmp_np<TriangleMesh>(np1)
+                                                // .vertex_point_map(vpm1)
+                                                .edge_is_constrained_map(eicm1)
+                                                .visitor(visitor),
+                                                internal::parse_pmp_np<TriangleMesh>(np2)
+                                                // .vertex_point_map(vpm2)
+                                                .face_index_map(fim2)
+                                                .edge_is_constrained_map(eicm2),
+                                                internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                // .vertex_point_map(vpm3)
+                                                .edge_is_constrained_map(eicm_out)
+                                                );
   }
   else {
     valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
-                                         internal::parse_pmp_np<PolygonMesh>(np1),
-                                         internal::parse_pmp_np<PolygonMesh>(np2),
-                                         internal::parse_pmp_np<PolygonMesh>(np_out));
+                                                internal::parse_pmp_np<TriangleMesh>(np1)
+                                                // .vertex_point_map(vpm1)
+                                                .edge_is_constrained_map(eicm1)
+                                                .visitor(visitor),
+                                                internal::parse_pmp_np<TriangleMesh>(np2)
+                                                // .vertex_point_map(vpm2)
+                                                .edge_is_constrained_map(eicm2),
+                                                internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                // .vertex_point_map(vpm3)
+                                                .edge_is_constrained_map(eicm_out)
+                                                );
   }
   if (! valid) throw std::runtime_error("Cannot compute difference!");
   return out;
@@ -3770,6 +3825,9 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm1"), py::arg("pm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::tuple());
+  m.def("corefine_and_compute_difference", &pmp::corefine_and_compute_difference<Pm>,
+        py::arg("tm1"), py::arg("tm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(), py::arg("np_out") = py::dict());
 
 
 
