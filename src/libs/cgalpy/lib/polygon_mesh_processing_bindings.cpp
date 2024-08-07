@@ -4541,6 +4541,14 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::uint32_t>>::type>,
         py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
+        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
+  m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::uint32_t>>,
+        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
+  m.def("keep_connected_components", &pmp::keep_connected_components_map<Pm, FaceComponentMap>,
+        py::arg("pm"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("np") = py::dict());
+#endif
   m.def("keep_connected_components", &pmp::keep_connected_components<Pm>,
         py::arg("pm"), py::arg("components_to_keep"), py::arg("np") = py::dict());
   m.def("keep_large_connected_components", &pmp::keep_large_connected_components<Pm, std::size_t>,
@@ -4549,6 +4557,10 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("min_size"), py::arg("np") = py::dict());
   m.def("keep_largest_connected_components", &pmp::keep_largest_connected_components<Pm>,
         py::arg("pm"), py::arg("nb_components_to_keep"), py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  m.def("remove_connected_components_map", &pmp::remove_connected_components_map<Pm, FaceComponentMap>,
+        py::arg("pm"), py::arg("components_to_remove"), py::arg("fccmap"), py::arg("np") = py::dict());
+#endif
   m.def("remove_connected_components", &pmp::remove_connected_components<Pm>,
         py::arg("pm"), py::arg("components_to_remove"), py::arg("np") = py::dict());
   m.def("split_connected_components", &pmp::split_connected_components<Pm>,
@@ -4575,7 +4587,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np") = py::dict());
   m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing_m<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict());
-  // m.def("extrude_mesh", &pmp::extrude_mesh<Pm, Pm, 
+  // m.def("extrude_mesh", &pmp::extrude_mesh<Pm, Pm>, 
   //       py::arg("pmesh"), py::arg("np") = py::dict());
   m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
         py::arg("imesh"), py::arg("omesh"), py::arg("v"),
@@ -4584,6 +4596,11 @@ void export_polygon_mesh_processing(py::module_& m) {
   // m.def("isotropic_remeshing", &pmp::isotropic_remeshing<Pm>, // deprecated?
   //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
   //       py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 0 // only working for polyhedron
+  m.def("fair", &pmp::fair<Pm>,
+        py::arg("tmesh"), py::arg("vertices"),
+        py::arg("np") = py::dict());
+#endif
   m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Adaptive_sizing_field<Pm>>,
         py::arg("faces"), py::arg("sizing"), py::arg("pmesh"),
         py::arg("np") = py::dict());
@@ -4595,6 +4612,12 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np") = py::dict());
   m.def("refine", &pmp::refine<Pm>,
         py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only working for sm
+  m.def("remesh_almost_planar_patches", &pmp::remesh_almost_planar_patches<Pm, FacePatchMap, VertexCornerMap, EdgeIsConstrainedMap>,
+        py::arg("tm_in"), py::arg("nb_patches"), py::arg("nb_corners"),
+        py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
+        py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
+#endif
   m.def("remesh_planar_patches", &pmp::remesh_planar_patches<Pm>,
         py::arg("pm"), py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
   m.def("smooth_shape", &pmp::smooth_shape<Pm>,
@@ -4676,6 +4699,11 @@ void export_polygon_mesh_processing(py::module_& m) {
   // Orientation Functions
   m.def("does_bound_a_volume", &pmp::does_bound_a_volume<Pm>, // TODO: is_cc_outward_oriented
         py::arg("tm"), py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  m.def("compatible_orientations", &pmp::compatible_orientations<Pm, FaceBitMap>,
+        py::arg("pm"), py::arg("face_bit_map"),
+        py::arg("np") = py::dict());
+#endif
   m.def("duplicate_non_manifold_edges_in_polygon_soup", &pmp::duplicate_non_manifold_edges_in_polygon_soup,
         py::arg("points"), py::arg("polygons"));
   m.def("is_outward_oriented", &pmp::is_outward_oriented<Pm>,
@@ -4896,45 +4924,13 @@ void export_polygon_mesh_processing(py::module_& m) {
 
 
 
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-  m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
-        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
-  m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::uint32_t>>,
-        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
-
   // only for sm
-  m.def("compatible_orientations", &pmp::compatible_orientations<Pm, FaceBitMap>,
-        py::arg("pm"), py::arg("face_bit_map"),
-        py::arg("np") = py::dict());
-  m.def("remove_connected_components_map", &pmp::remove_connected_components_map<Pm, FaceComponentMap>,
-        py::arg("pm"), py::arg("components_to_remove"), py::arg("fccmap"), py::arg("np") = py::dict());
-  m.def("keep_connected_components", &pmp::keep_connected_components_map<Pm, FaceComponentMap>,
-        py::arg("pm"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("np") = py::dict());
-#endif
-#if CGALPY_PMP_POLYGONAL_MESH == 0
-  // only for polyhedron
-  m.def("fair", &pmp::fair<Pm>,
-        py::arg("tmesh"), py::arg("vertices"),
-        py::arg("np") = py::dict());
-#endif
 
 
   // this is currently only supported for Surface_mesh, because Polyhedron would need Random_access_property_map
   // the boost::property_map types don't work here for some reason
   // eg. Random_access_property_map<vector<unsigned long, allocator<unsigned long>>>
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-  m.def("region_growing_of_planes_on_faces", &pmp::region_growing_of_planes_on_faces<Pm, RegionMap>,
-        py::arg("pmesh"), py::arg("region_map"), py::arg("np") = py::dict());
 
-  m.def("detect_corners_of_regions", &pmp::detect_corners_of_regions<Pm, RegionMap, CornerIdMap>,
-        py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"), py::arg("corner_id_map"),
-        py::arg("np") = py::dict());
-
-  m.def("remesh_almost_planar_patches", &pmp::remesh_almost_planar_patches<Pm, FacePatchMap, VertexCornerMap, EdgeIsConstrainedMap>,
-        py::arg("tm_in"), py::arg("nb_patches"), py::arg("nb_corners"),
-        py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
-        py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
-#endif
 
   // other
   m.def("add_bbox", &pmp::add_bbox<Pm>,
@@ -4945,9 +4941,11 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("border_halfedges", &pmp::border_halfedges<Pm>,
         py::arg("face_range"), py::arg("pm"),
         py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("detect_corners_of_regions", &pmp::detect_corners_of_regions<Pm, RegionMap, CornerIdMap>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"), py::arg("corner_id_map"),
         py::arg("np") = py::dict());
+#endif
   m.def("edge_bbox", &pmp::edge_bbox<Pm>,
         py::arg("ed"), py::arg("pmesh"),
         py::arg("np") = py::dict());
@@ -4956,13 +4954,21 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("face_bbox", &pmp::face_bbox<Pm>,
         py::arg("f"), py::arg("pmesh"),
         py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("refine_mesh_at_isolevel", &pmp::refine_mesh_at_isolevel<Pm, ValueMap>,
         py::arg("pm"), py::arg("value_map"), py::arg("isovalue"),
         py::arg("np") = py::dict());
+  m.def("region_growing_of_planes_on_faces", &pmp::region_growing_of_planes_on_faces<Pm, RegionMap>,
+        py::arg("pmesh"), py::arg("region_map"), py::arg("np") = py::dict());
+#endif
+
   // region growing only for sm
   // TODO: transform
   m.def("triangle", &pmp::triangle<Pm>,
         py::arg("f"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("vertex_bbox", &pmp::vertex_bbox<Pm>,
+        py::arg("vd"), py::arg("pmesh"),
         py::arg("np") = py::dict());
 
 
