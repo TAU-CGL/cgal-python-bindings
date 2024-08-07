@@ -1,24 +1,27 @@
 #!/usr/bin/python
+
 import os
 import sys
 import importlib
-if len(sys.argv) < 3:
+
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[2]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = "meshes/nefertiti.off" if len(sys.argv) < 2 else sys.argv[1]
-
-try:
-  mesh = Sm.read_polygon_mesh(filename)
-except:
-  print("Not a valid input file.")
-  sys.exit(1)
+filename = sys.argv[i] if len(sys.argv) > i else "meshes/nefertiti.off"
+try: mesh = Sm.read_polygon_mesh(filename)
+except: raise ValueError("Invalid input.")
 
 print(f"Start remeshing of {filename} ({Sm.num_faces(mesh)} faces)...")
 tol = 0.001

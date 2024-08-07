@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 # #include <CGAL/Surface_mesh.h>
 #
@@ -26,6 +28,8 @@
 #     return 1;
 #   }
 #
+#!/usr/bin/python
+
 #   // Constrain edges with a dihedral angle over 60°
 #   typedef boost::property_map<Mesh, CGAL::edge_is_feature_t>::type EIFMap;
 #   EIFMap eif = get(CGAL::edge_is_feature, mesh);
@@ -57,24 +61,28 @@
 import os
 import sys
 import importlib
-if len(sys.argv) < 4:
+
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[3]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
+filename = sys.argv[i] if len(sys.argv) > i else 'meshes/anchor_dense.off'
+i += 1
+nb_iterations = int(sys.argv[i]) if len(sys.argv) > i else 10
 
-filename = "meshes/anchor_dense.off" if len(sys.argv) < 2 else sys.argv[1]
-
-try:
-    mesh = Sm.read_polygon_mesh(filename)
-except:
-    print("Invalid input.")
-    exit(1)
+try: mesh = Sm.read_polygon_mesh(filename)
+except: raise ValueError("Invalid input.")
 
 # Constrain edges with a dihedral angle over 60°
 eif = mesh.add_property_map_edge_bool("e:is_feature")[0]
@@ -82,13 +90,10 @@ Pmp.detect_sharp_edges(mesh, 60, eif)
 
 sharp_counter = 0
 for e in mesh.edges():
-    if Sm.get(eif, e):
-        sharp_counter += 1
+  if Sm.get(eif, e):
+    sharp_counter += 1
 
 print(f"{sharp_counter} sharp edges")
-
-nb_iterations = 10 if len(sys.argv) < 3 else int(sys.argv[2])
-
 print(f"Smoothing mesh... ({nb_iterations} iterations)")
 
 # Smooth with both angle and area criteria + Delaunay flips
@@ -99,4 +104,3 @@ Pmp.angle_and_area_smoothing(mesh, {"number_of_iterations": nb_iterations,
 Sm.write_polygon_mesh("mesh_smoothed.off", mesh, {"stream_precision": 17})
 
 print("Done!")
-

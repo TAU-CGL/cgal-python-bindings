@@ -1,33 +1,40 @@
 #!/usr/bin/python
+
 import os
 import sys
 import importlib
-if len(sys.argv) < 4:
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[3]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename1 = 'meshes/blobby.off' if len(sys.argv) < 2 else sys.argv[1]
-filename2 = 'meshes/eight.off' if len(sys.argv) < 3 else sys.argv[2]
+filename1 = sys.argv[i] if len(sys.argv) > i else 'meshes/blobby.off'
+i += 1
+filename2 = sys.argv[i] if len(sys.argv) > i else 'meshes/eight.off'
+
+try: mesh1 = Sm.read_polygon_mesh(filename1)
+except: raise ValueError("Invalid input.")
+Sm.draw(mesh1)
+
+try: mesh2 = Sm.read_polygon_mesh(filename2)
+except: raise ValueError("Invalid input.")
+Sm.draw(mesh2)
 
 try:
-  mesh1 = Sm.read_polygon_mesh(filename1)
+  out = Pmp.corefine_and_compute_union(mesh1, mesh2, {'visitor': Pmp.Corefine_visitor()})
 except:
-  raise ValueError("Invalid input.")
-try:
-  mesh2 = Sm.read_polygon_mesh(filename2)
-except:
-  raise ValueError("Invalid input.")
-
-try:
-    out = Pmp.corefine_and_compute_union(mesh1, mesh2, {'visitor': Pmp.Corefine_visitor()})
-except:
-    raise ValueError("Cannot compute union!")
+  raise ValueError("Cannot compute union!")
+Sm.draw(out)
 
 print("Union was successfully computed")
 Sm.write_polygon_mesh("union.off", out);

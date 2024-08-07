@@ -1,18 +1,25 @@
 #!/usr/bin/python
+
 import os
 import sys
 import importlib
-if len(sys.argv) < 2:
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[1]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Pol3 = CGALPY.Pol3
 
-filename = "meshes/blobby.off" if len(sys.argv) < 3 else sys.argv[2]
-mesh = Pol3.read_polygon_mesh(filename)
+filename = sys.argv[i] if len(sys.argv) > i else 'meshes/blobby.off'
+try: mesh = Pol3.read_polygon_mesh(filename)
+except: raise ValueError("Invalid input.")
 
 vertex = Pol3.vertices(mesh)[0]
 edge = Pol3.edges(mesh)[0]

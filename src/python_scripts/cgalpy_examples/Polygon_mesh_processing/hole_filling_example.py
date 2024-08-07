@@ -1,17 +1,23 @@
 #!/usr/bin/python
+
 import os
 import sys
 import importlib
-if len(sys.argv) < 3:
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[2]
+
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
 Pmp = CGALPY.Pmp
 
-filename = 'meshes/mech-holes-shark.off' if len(sys.argv) < 2 else sys.argv[1]
+filename = sys.argv[i] if len(sys.argv) > i else 'meshes/mech-holes-shark.off'
 
 mesh = Pol3.read_polygon_mesh(filename)
 
@@ -35,4 +41,3 @@ print()
 print(f"{nb_holes} holes have been filled")
 
 Pol3.write_polygon_mesh('filled.off', mesh)
-

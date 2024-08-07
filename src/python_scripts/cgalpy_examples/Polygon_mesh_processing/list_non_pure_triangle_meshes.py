@@ -1,22 +1,28 @@
 #!/usr/bin/python
+
 import os
 import sys
 import importlib
-if len(sys.argv) < 2:
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[1]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-for i in range(2, len(sys.argv)):
-  try:
-    mesh = Sm.read_polygon_mesh(sys.argv[i])
+for j in range(i, len(sys.argv)):
+  filename = sys.argv[j]
+  try: mesh = Sm.read_polygon_mesh(filename)
   except:
-    print(f"Invalid input: {sys.argv[i]}")
+    print(f"Invalid input: {sys.argv[j]}")
     continue
   if not Sm.is_triangle_mesh(mesh):
-    print(sys.argv[i])
+    print(filename)

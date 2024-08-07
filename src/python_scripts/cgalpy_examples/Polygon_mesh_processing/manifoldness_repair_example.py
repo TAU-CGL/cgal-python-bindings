@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 # #include <CGAL/Surface_mesh.h>
 #
@@ -81,31 +83,34 @@
 import os
 import sys
 import importlib
-if len(sys.argv) < 3:
+
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[2]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
 def merge_vertices(v_keep, v_rm, mesh):
-    print(f"merging vertices v{v_keep} and v{v_rm}")
+  print(f"merging vertices v{v_keep} and v{v_rm}")
 
-    for h in Sm.halfedges_around_target(v_rm, mesh):
-        Sm.set_target(h, v_keep, mesh) # to ensure that no halfedge points at the deleted vertex
+  for h in Sm.halfedges_around_target(v_rm, mesh):
+    Sm.set_target(h, v_keep, mesh) # to ensure that no halfedge points at the deleted vertex
 
-    Sm.remove_vertex(v_rm, mesh)
+  Sm.remove_vertex(v_rm, mesh)
 
-filename = "meshes/blobby.off" if len(sys.argv) < 2 else sys.argv[1]
+filename = sys.argv[i] if len(sys.argv) > i else 'meshes/blobby.off'
 
-try:
-    mesh = Sm.read_polygon_mesh(filename)
-except:
-    print(f"Invalid input: {filename}")
-    sys.exit(1)
+try: mesh = Sm.read_polygon_mesh(filename)
+except: raise ValueError("Invalid input.")
 
 # Artificially create non-manifoldness for the sake of the example by merging some vertices
 v0 = Sm.vertices(mesh)[0]
@@ -115,9 +120,9 @@ merge_vertices(v0, v1, mesh)
 # Count non manifold vertices
 counter = 0
 for v in Sm.vertices(mesh):
-    if Pmp.is_non_manifold_vertex(v, mesh):
-        print(f"vertex v{v} is non-manifold")
-        counter += 1
+  if Pmp.is_non_manifold_vertex(v, mesh):
+    print(f"vertex v{v} is non-manifold")
+    counter += 1
 
 print(f"{counter} non-manifold occurrence(s)")
 
@@ -127,8 +132,7 @@ new_vertices_nb, duplicated_vertices = Pmp.duplicate_non_manifold_vertices(mesh)
 print(f"{new_vertices_nb} vertices have been added to fix mesh manifoldness")
 
 for i in range(len(duplicated_vertices)):
-    print(f"Non-manifold vertex v{duplicated_vertices[i][0]} was fixed by creating", end="")
-    for j in range(1, len(duplicated_vertices[i])):
-        print(f" v{duplicated_vertices[i][j]}", end="")
-    print()
-
+  print(f"Non-manifold vertex v{duplicated_vertices[i][0]} was fixed by creating", end="")
+  for j in range(1, len(duplicated_vertices[i])):
+    print(f" v{duplicated_vertices[i][j]}", end="")
+  print()

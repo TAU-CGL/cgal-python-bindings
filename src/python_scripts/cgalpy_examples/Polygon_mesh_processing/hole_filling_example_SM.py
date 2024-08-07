@@ -1,11 +1,17 @@
+#!/usr/bin/python
 import os
 import sys
 import importlib
-if len(sys.argv) < 5:
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[4]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
@@ -31,12 +37,13 @@ def is_small_hole(h, mesh, max_hole_diam, max_num_hole_edges):
 
   return True
 
-filename = "meshes/mech-holes-shark.off" if len(sys.argv) < 2 else sys.argv[1]
+filename = sys.argv[i] if len(sys.argv) > i else "meshes/mech-holes-shark.off"
+i += 1
+max_hole_diam = float(sys.argv[i]) if len(sys.argv) > i else -1.0
+i += 1
+max_num_hole_edges = int(sys.argv[i]) if len(sys.argv) > i else -1
 
 mesh = Sm.read_polygon_mesh(filename)
-
-max_hole_diam = -1.0 if len(sys.argv) < 3 else float(sys.argv[2])
-max_num_hole_edges = -1 if len(sys.argv) < 4 else int(sys.argv[3])
 
 nb_holes = 0
 border_cycles = Pmp.extract_boundary_cycles(mesh)

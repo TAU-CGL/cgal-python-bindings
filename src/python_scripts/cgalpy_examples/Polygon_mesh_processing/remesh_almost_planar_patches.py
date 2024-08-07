@@ -1,19 +1,27 @@
+#!/usr/bin/python
+
 import time
 import os
 import sys
 import importlib
-if len(sys.argv) < 3:
+import importlib
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[2]
+
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
 MAX_UINT_64 = 2**64 - 1
 
-filename = 'meshes/fandisk.off' if len(sys.argv) < 2 else sys.argv[1]
+filename = sys.argv[i] if len(sys.argv) > i else 'meshes/fandisk.off'
 
 sm = Sm.read_polygon_mesh(filename)
 
@@ -50,4 +58,3 @@ out = Pmp.remesh_almost_planar_patches(sm,
                                  {"patch_normal_map": normal_map})
 
 Sm.write_polygon_mesh("fandisk_remeshed.off", out)
-

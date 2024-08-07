@@ -1,14 +1,20 @@
 #!/usr/bin/python
+
 import os
 import sys
 import importlib
 from typing import Any
 
-if len(sys.argv) < 2:
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[1]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Pmp = CGALPY.Pmp
@@ -51,22 +57,14 @@ Pmp.set_duplicated_vertex(v, duplicated_vertex)
 Pmp.set_vertex_id_in_polygon_replaced(v, vertex_id_in_polygon_replaced)
 Pmp.set_polygon_orientation_reversed(v, polygon_orientation_reversed)
 
-filename = "meshes/tet-shuffled.off" if len(sys.argv) < 3 else sys.argv[2]
+filename = sys.argv[i] if len(sys.argv) > i else 'meshes/tet-shuffled.off'
 
-try:
-  points, polygons = Pm.read_polygon_soup(filename)
-except:
-  print("Cannot open file ")
-  exit(1)
-
-if len(points) == 0:
-  print("Cannot open file ")
-  exit(1)
+try: points, polygons = Pm.read_polygon_soup(filename)
+except: raise ValueError("Cannot open file")
+if len(points) == 0: raise ValueError("Input file empty")
 
 points, polygons = Pmp.orient_polygon_soup(points, polygons, {"visitor": v})
-
 mesh = Pmp.polygon_soup_to_polygon_mesh(points, polygons)
-
 del v # don't forget to del :)
 
 # this returns a tuple, the pv or pf values are set to none if

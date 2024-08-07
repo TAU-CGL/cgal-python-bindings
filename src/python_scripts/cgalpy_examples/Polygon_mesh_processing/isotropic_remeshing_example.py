@@ -1,12 +1,18 @@
 #!/usr/bin/python
+
 import os
 import sys
 import importlib
-if len(sys.argv) < 5:
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[4]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
@@ -15,12 +21,13 @@ Pmp = CGALPY.Pmp
 def halfedge2edge(mesh, edges):
   return [Sm.edge(h, mesh) for h in edges]
 
-filename = "meshes/pig.off" if len(sys.argv) < 2 else sys.argv[1]
+filename = sys.argv[i] if len(sys.argv) > i else 'meshes/pig.off'
+i += 1
+target_edge_length = float(sys.argv[i]) if len(sys.argv) > i else 0.04
+i += 1
+nb_iter = int(sys.argv[i]) if len(sys.argv) > i else 10
 
 mesh = Sm.read_polygon_mesh(filename)
-
-target_edge_length = 0.04 if len(sys.argv) < 3 else float(sys.argv[2])
-nb_iter = 10 if len(sys.argv) < 4 else int(sys.argv[3])
 
 print("Split border...", end="")
 

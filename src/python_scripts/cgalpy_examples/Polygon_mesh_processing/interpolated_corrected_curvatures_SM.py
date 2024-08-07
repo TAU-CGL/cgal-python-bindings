@@ -1,23 +1,28 @@
+#!/usr/bin/python3
+
 import os
 import sys
 import importlib
-if len(sys.argv) < 3:
+
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[2]
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = "meshes/sphere.off" if len(sys.argv) < 2 else sys.argv[1]
+filename = sys.argv[i] if len(sys.argv) > i else 'meshes/sphere.off'
 
-try:
-    mesh = Sm.read_polygon_mesh(filename)
-except:
-    print("Invalid input file.")
-    sys.exit(1)
+try: mesh = Sm.read_polygon_mesh(filename)
+except: raise ValueError("Invalid input.")
 
 mean_curvature_map, created = mesh.add_property_map_vertex_FT("v:mean_curvature_map", 0)
 assert created
@@ -34,7 +39,6 @@ Pmp.interpolated_corrected_curvatures(mesh,
                                        "vertex_principal_curvatures_and_directions_map": principal_curvatures_and_directions_map})
 
 for v in Sm.vertices(mesh):
-    PC = principal_curvatures_and_directions_map[v]
-    print(f"{v.id()}: HC = {round(mean_curvature_map[v], 5)}, GC = {round(Gaussian_curvature_map[v], 5)}")
-    print(f", PC = [ {round(PC.min_curvature, 5)} , {round(PC.max_curvature, 5)} ]")
-    
+  PC = principal_curvatures_and_directions_map[v]
+  print(f"{v.id()}: HC = {round(mean_curvature_map[v], 5)}, GC = {round(Gaussian_curvature_map[v], 5)}")
+  print(f", PC = [ {round(PC.min_curvature, 5)} , {round(PC.max_curvature, 5)} ]")

@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 # #include <CGAL/Polyhedron_3.h>
 #
@@ -84,16 +86,20 @@
 #   return 0;
 # }
 
-
-#!/usr/bin/python
 import os
 import sys
 import importlib
-if len(sys.argv) < 3:
+
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[2]
+
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
 Pmp = CGALPY.Pmp
@@ -112,17 +118,12 @@ def extract_k_ring(v, k):
     current_index += 1
   #### WORK IN PROGRESS
 
-filename = 'meshes/blobby.off' if len(sys.argv) < 2 else sys.argv[1]
-
-try:
-  poly = Pol3.read_polygon_mesh(filename)
-except:
-  print("Invalid input.")
-  exit(1)
+filename = sys.argv[i] if len(sys.argv) > i else 'meshes/blobby.off'
+try: poly = Pol3.read_polygon_mesh(filename)
+except: raise ValueError("Invalid input.")
 
 if not Pol3.is_triangle_mesh(poly):
-  print("Invalid input.")
-  exit(1)
+  except: raise ValueError("Invalid input.")
 
 new_facets, new_vertices = Pmp.refine(poly, Pol3.faces(poly), {"density_control_factor": 2.})
 
@@ -131,8 +132,5 @@ Pol3.write_polygon_mesh("refined.off", poly)
 print(f"Refinement added {len(new_vertices)} vertices.")
 
 v = Pol3.vertices(poly)[82]
-
 region = extract_k_ring(v, 12)
-
 success = Pmp.fair(poly, region)
-
