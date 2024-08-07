@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/Kernel/Dimension_utils.h>
 #include <CGAL/Polygon_mesh_processing/measure.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #define CGAL_USE_BASIC_VIEWER
@@ -3771,6 +3772,113 @@ auto angle_and_area_smoothing_m(PolygonMesh& pmesh,
 #endif
 }
 
+template <typename TriangleMesh>
+auto degenerate_edges_r(const py::list& edges,
+                         const TriangleMesh& tmesh,
+                         const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Gt = boost::graph_traits<Tm>;
+  using Ed = typename Gt::edge_descriptor;
+  auto edge_vec = list2vec<Ed>(edges);
+  std::vector<Ed> out;
+  // auto vpm = get_vertex_point_map(tmesh, np);
+  PMP::degenerate_edges(edge_vec, tmesh, std::back_inserter(out),
+                        internal::parse_pmp_np<Tm>(np)
+                        // .vertex_point_map(vpm)
+                        );
+  return vec2list(out);
+}
+
+template <typename TriangleMesh>
+auto degenerate_edges(TriangleMesh& tmesh,
+                      const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Gt = boost::graph_traits<Tm>;
+  using Ed = typename Gt::edge_descriptor;
+  std::vector<Ed> out;
+  // auto vpm = get_vertex_point_map(tmesh, np);
+  PMP::degenerate_edges(tmesh, std::back_inserter(out),
+                        internal::parse_pmp_np<Tm>(np)
+                        // .vertex_point_map(vpm)
+                        );
+  return vec2list(out);
+}
+
+template <typename TriangleMesh>
+auto degenerate_faces_r(const py::list& faces,
+                        const TriangleMesh& tmesh,
+                        const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Gt = boost::graph_traits<Tm>;
+  using Fd = typename Gt::face_descriptor;
+  auto face_vec = list2vec<Fd>(faces);
+  std::vector<Fd> out;
+  // auto vpm = get_vertex_point_map(tmesh, np);
+  PMP::degenerate_faces(face_vec, tmesh, std::back_inserter(out),
+                        internal::parse_pmp_np<Tm>(np)
+                        // .vertex_point_map(vpm)
+                        );
+  return vec2list(out);
+}
+
+template <typename TriangleMesh>
+auto degenerate_faces(TriangleMesh& tmesh,
+                      const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Gt = boost::graph_traits<Tm>;
+  using Fd = typename Gt::face_descriptor;
+  std::vector<Fd> out;
+  // auto vpm = get_vertex_point_map(tmesh, np);
+  PMP::degenerate_faces(tmesh, std::back_inserter(out),
+                        internal::parse_pmp_np<Tm>(np)
+                        // .vertex_point_map(vpm)
+                        );
+  return vec2list(out);
+}
+
+template <typename TriangleMesh>
+auto is_cap_triangle_face(typename boost::graph_traits<TriangleMesh>::face_descriptor f,
+                          const TriangleMesh& tm,
+                          const double threshold,
+                          const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  auto retv = PMP::is_cap_triangle_face(f, tm, threshold, internal::parse_pmp_np<TriangleMesh>(np)
+                                        // .vertex_point_map(vpm)
+                                        );
+  return retv != boost::graph_traits<TriangleMesh>::null_halfedge() ? py::cast(retv) : py::none();
+}
+
+template <typename TriangleMesh>
+auto is_degenerate_edge(typename boost::graph_traits<TriangleMesh>::edge_descriptor e,
+                        const TriangleMesh& tm,
+                        const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::is_degenerate_edge(e, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                                // .vertex_point_map(vpm)
+                                );
+}
+
+template <typename TriangleMesh>
+auto is_degenerate_triangle_face(typename boost::graph_traits<TriangleMesh>::face_descriptor f,
+                                 const TriangleMesh& tm,
+                                 const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::is_degenerate_triangle_face(f, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                                        // .vertex_point_map(vpm)
+                                        );
+}
+
+template <typename TriangleMesh>
+auto is_needle_triangle_face(typename boost::graph_traits<TriangleMesh>::face_descriptor f,
+                             const TriangleMesh& tm,
+                             const double threshold,
+                             const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::is_needle_triangle_face(f, tm, threshold, internal::parse_pmp_np<TriangleMesh>(np)
+                                    // .vertex_point_map(vpm)
+                                    );
+}
+
 // template <typename InputMesh, typename OutputMesh, typename BottomFunctor, typename TopFunctor>
 // auto extrude_mesh(const InputMesh& imesh,
 //                   OutputMesh& omesh,
@@ -4556,6 +4664,31 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pmesh"), py::arg("patch_id_map"),
         py::arg("vertex_incident_patches_map"), py::arg("np") = py::dict());
 #endif
+
+
+  // Predicates
+  m.def("degenerate_edges", &pmp::degenerate_edges_r<Pm>,
+        py::arg("edges"), py::arg("tm"),
+        py::arg("np") = py::dict());
+  m.def("degenerate_faces", &pmp::degenerate_edges<Pm>,
+        py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_faces", &pmp::degenerate_faces_r<Pm>,
+        py::arg("faces"), py::arg("tm"),
+        py::arg("np") = py::dict());
+  m.def("degenerate_faces", &pmp::degenerate_faces<Pm>,
+        py::arg("tm"), py::arg("np") = py::dict());
+  m.def("is_cap_triangle_face", &pmp::is_cap_triangle_face<Pm>,
+        py::arg("f"), py::arg("tm"),
+        py::arg("threshold"), py::arg("np") = py::dict());
+  m.def("is_degenerate_edge", &pmp::is_degenerate_edge<Pm>,
+        py::arg("e"), py::arg("pm"),
+        py::arg("np") = py::dict());
+  m.def("is_degenerate_triangle_face", &pmp::is_degenerate_triangle_face<Pm>,
+        py::arg("f"), py::arg("tm"),
+        py::arg("np") = py::dict());
+  m.def("is_needle_triangle_face", &pmp::is_needle_triangle_face<Pm>,
+        py::arg("f"), py::arg("tm"),
+        py::arg("threshold"), py::arg("np") = py::dict());
 
 
 
