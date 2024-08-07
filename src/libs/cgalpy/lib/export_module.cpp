@@ -55,7 +55,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
   export_approximate_kernel(m);
 
-  m.def("data_file_path", &CGAL::data_file_path);
+#ifdef CGALPY_DATA_DIR
+  m.def("data_file_path", [](const std::string& file_name) {
+    return std::string(CGALPY_DATA_DIR) + "/" + file_name;
+  });
+#endif
 
 #ifdef CGALPY_KERNEL_BINDINGS
   auto ker_m = m.def_submodule("Ker");

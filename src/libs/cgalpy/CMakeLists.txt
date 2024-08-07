@@ -16,6 +16,9 @@ if (CGAL_USE_GMP)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gmp.cpp)
 endif ()
 
+set(CGALPY_DATA_DIR "${CGAL_DIR}/Data/data")
+add_compile_definitions(CGALPY_DATA_DIR="${CGALPY_DATA_DIR}")
+
 #############
 # Add modules
 #############
