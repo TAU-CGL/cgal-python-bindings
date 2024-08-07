@@ -49,6 +49,7 @@
 #include <CGAL/Polygon_mesh_processing/region_growing.h>
 #include <CGAL/Polygon_mesh_processing/remesh.h>
 #include <CGAL/Polygon_mesh_processing/remesh_planar_patches.h>
+#include <CGAL/Polygon_mesh_processing/locate.h>
 #include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/smooth_shape.h>
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
@@ -3941,6 +3942,164 @@ auto detect_vertex_incident_patches(PolygonMesh& pmesh,
   return retv;
 }
 
+auto barycentic_coordinates(const Point_3& p, const Point_3& a, const Point_3& b, const Point_3& c) {
+  auto retv = PMP::barycentric_coordinates(p, a, b, c, Kernel());
+  return py::make_tuple(retv[0], retv[1], retv[2]);
+}
+// using CGAL::Polygon_mesh_processing::Face_location = typedef std::pair<typename boost::graph_traits<TriangleMesh>::face_descriptor, Barycentric_coordinates<FT> >
+template <typename TriangleMesh>
+auto construct_point(const py::tuple& loc,
+                     const TriangleMesh& tm,
+                     const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  using Tm = TriangleMesh;
+  using Gt = boost::graph_traits<Tm>;
+  using Fd = typename Gt::face_descriptor;
+  using Barycentric_coordinates = std::array<FT, 3>;
+  if (py::len(loc) != 2) throw std::runtime_error("Location must be a tuple of size 2");
+  Fd f;
+  py::tuple bc;
+  try {
+    f = py::cast<Fd>(loc[0]);
+  }
+  catch (const py::cast_error& e) {
+    throw std::runtime_error("First element of location must be a face descriptor");
+  }
+  try {
+    bc = loc[1];
+    if (py::len(bc) != 3) throw std::runtime_error("Second element of location must be a tuple of size 3");
+  }
+  catch (const py::cast_error& e) {
+    throw std::runtime_error("Second element of location must be a tuple");
+  }
+  Barycentric_coordinates bary;
+  for (int i = 0; i < 3; ++i) {
+    bary[i] = py::cast<FT>(bc[i]);
+  }
+  std::pair<Fd, Barycentric_coordinates> loc_p = std::make_pair(f, bary);
+  return PMP::construct_point(loc_p, tm, internal::parse_pmp_np<TriangleMesh>(np)
+                                  // .vertex_point_map(vpm)
+                                  );
+}
+
+template <typename TriangleMesh>
+auto tuple2face_loc(const py::tuple& l) {
+  using Tm = TriangleMesh;
+  using Gt = boost::graph_traits<Tm>;
+  using Fd = typename Gt::face_descriptor;
+  using Vd = typename Gt::vertex_descriptor;
+  using Hd = typename Gt::halfedge_descriptor;
+  using Barycentric_coordinates = std::array<FT, 3>;
+
+  if (py::len(l) != 2) throw std::runtime_error("Location must be a tuple of size 2");
+  Fd f;
+  py::tuple bc;
+  try {
+    f = py::cast<Fd>(l[0]);
+  }
+  catch (const py::cast_error& e) {
+    throw std::runtime_error("First element of location must be a face descriptor");
+  }
+  try {
+    bc = l[1];
+    if (py::len(bc) != 3) throw std::runtime_error("Second element of location must be a tuple of size 3");
+  }
+  catch (const py::cast_error& e) {
+    throw std::runtime_error("Second element of location must be a tuple");
+  }
+  Barycentric_coordinates bary;
+  for (int i = 0; i < 3; ++i) {
+    bary[i] = py::cast<FT>(bc[i]);
+  }
+  return std::make_pair(f, bary);
+}
+
+template <typename TriangleMesh>
+auto get_descriptor_from_location(const py::tuple& loc,
+                                  const TriangleMesh& tm) {
+  using Tm = TriangleMesh;
+  using Gt = boost::graph_traits<Tm>;
+  using Fd = typename Gt::face_descriptor;
+  using Vd = typename Gt::vertex_descriptor;
+  using Hd = typename Gt::halfedge_descriptor;
+  using Barycentric_coordinates = std::array<FT, 3>;
+  std::pair<Fd, Barycentric_coordinates> loc_p = tuple2face_loc<TriangleMesh>(loc);
+  // returns a variant of vertex_descriptor, halfedge_descriptor, face_descriptor
+  try {
+    return py::cast(std::get<Vd>(PMP::get_descriptor_from_location(loc_p, tm)));
+  }
+  catch (const std::bad_variant_access& e) {
+    try {
+      return py::cast(std::get<Hd>(PMP::get_descriptor_from_location(loc_p, tm)));
+    }
+    catch (const std::bad_variant_access& e) {
+      try {
+        return py::cast(std::get<Fd>(PMP::get_descriptor_from_location(loc_p, tm)));
+      }
+      catch (const std::bad_variant_access& e) {
+        throw std::runtime_error("get_descriptor_from_location failed");
+      }
+    }
+  }
+}
+
+template <typename TriangleMesh>
+auto is_in_face_bar(const py::tuple& bar,
+                const TriangleMesh& tm) {
+  using Tm = TriangleMesh;
+  using Gt = boost::graph_traits<Tm>;
+  using Fd = typename Gt::face_descriptor;
+  using Vd = typename Gt::vertex_descriptor;
+  using Hd = typename Gt::halfedge_descriptor;
+  using Barycentric_coordinates = std::array<FT, 3>;
+  auto len = py::len(bar);
+  if (len == 3) {
+    std::array<FT, 3> bary;
+    for (int i = 0; i < 3; ++i) {
+      bary[i] = py::cast<FT>(bar[i]);
+    }
+    return PMP::is_in_face(bary, tm);
+  }
+  else if (len == 2) {
+    auto loc_p = tuple2face_loc<TriangleMesh>(bar);
+    return PMP::is_in_face(loc_p, tm);
+  }
+  else {
+    throw std::runtime_error("bar must be a tuple of size 2 or 3");
+  }
+}
+
+template <typename TriangleMesh>
+auto is_on_face_border(const py::tuple& loc,
+                       const TriangleMesh& tm) {
+  auto loc_p = tuple2face_loc<TriangleMesh>(loc);
+  return PMP::is_on_face_border(loc_p, tm);
+}
+
+template <typename TriangleMesh>
+auto is_on_halfedge(const py::tuple& loc,
+                    const typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& hd,
+                    const TriangleMesh& tm) {
+  auto loc_p = tuple2face_loc<TriangleMesh>(loc);
+  return PMP::is_on_halfedge(loc_p, hd, tm);
+}
+
+template <typename TriangleMesh>
+auto is_on_mesh_border(const py::tuple& loc,
+                       const TriangleMesh& tm) {
+  auto loc_p = tuple2face_loc<TriangleMesh>(loc);
+  return PMP::is_on_mesh_border(loc_p, tm);
+}
+
+template <typename TriangleMesh>
+auto is_on_vertex(const py::tuple& loc,
+                  const typename boost::graph_traits<TriangleMesh>::vertex_descriptor& vd,
+                  const TriangleMesh& tm) {
+  auto loc_p = tuple2face_loc<TriangleMesh>(loc);
+  return PMP::is_on_vertex(loc_p, vd, tm);
+}
+
+
 template <typename PolygonMesh>
 auto angle_and_area_smoothing_m(PolygonMesh& pmesh,
                               const py::dict& np = py::dict()) {
@@ -4896,6 +5055,19 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("vertex_incident_patches_map"), py::arg("np") = py::dict());
 #endif
 
+  // Location Functions
+  m.def("barycentic_coordinates", &pmp::barycentic_coordinates,
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("query"));
+  m.def("construct_point", &pmp::construct_point<Pm>,
+        py::arg("loc"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("get_descriptor_from_location", &pmp::get_descriptor_from_location<Pm>,
+        py::arg("loc"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("is_in_face", &pmp::is_in_face_bar<Pm>,
+        py::arg("bar"), py::arg("tm"));
+  m.def("is_on_face_border", &pmp::is_on_face_border<Pm>,
+        py::arg("loc"), py::arg("tm"));
 
   // Predicates
   m.def("degenerate_edges", &pmp::degenerate_edges_r<Pm>,
