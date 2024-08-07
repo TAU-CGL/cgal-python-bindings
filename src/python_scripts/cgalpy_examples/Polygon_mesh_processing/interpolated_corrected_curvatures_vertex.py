@@ -17,7 +17,7 @@ Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else "meshes/sphere.off"
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/sphere.off")
 
 mesh = Sm.read_polygon_mesh(filename)
 

@@ -16,7 +16,7 @@ CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 
-filename = sys.argv[i] if len(sys.argv) > i else "meshes/blobby.off"
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off")
 try: mesh = Sm.read_polygon_mesh(filename)
 except: raise ValueError("Invalid input.")
 

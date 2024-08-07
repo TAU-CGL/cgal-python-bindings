@@ -23,7 +23,7 @@ def test(result, iterable):
     print(map[v])
     break
 
-try: mesh = Sm.read_polygon_mesh("meshes/elephant.off")
+try: mesh = Sm.read_polygon_mesh(CGALPY.data_file_path("meshes/elephant.off"))
 except: raise ValueError("Invalid input.")
 
 test(mesh.add_property_map_vertex_point("v:poinsdat"), mesh.vertices())

@@ -37,7 +37,7 @@ def is_small_hole(h, mesh, max_hole_diam, max_num_hole_edges):
 
   return True
 
-filename = sys.argv[i] if len(sys.argv) > i else "meshes/mech-holes-shark.off"
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/mech-holes-shark.off")
 i += 1
 max_hole_diam = float(sys.argv[i]) if len(sys.argv) > i else -1.0
 i += 1

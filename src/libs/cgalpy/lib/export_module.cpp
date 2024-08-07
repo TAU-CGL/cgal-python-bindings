@@ -7,7 +7,9 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/config.h>
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/string.h>
 
 #include "CGALPY/arrangement_on_surface_2_config.hpp"
 #include "CGALPY/config.hpp"
@@ -52,6 +54,8 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   m.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
   export_approximate_kernel(m);
+
+  m.def("data_file_path", &CGAL::data_file_path);
 
 #ifdef CGALPY_KERNEL_BINDINGS
   auto ker_m = m.def_submodule("Ker");

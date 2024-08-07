@@ -21,7 +21,7 @@ Point_3 = Ker.Point_3
 Pmp = CGALPY.Pmp
 Sm = CGALPY.Sm
 
-filename = sys.argv[i] if len(sys.argv) > i else "meshes/elephant.off"
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/elephant.off")
 try: input_points, input_triangles = Sm.read_polygon_soup(filename)
 except: raise ValueError("Invalid input.")
 

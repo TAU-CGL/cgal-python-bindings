@@ -34,7 +34,7 @@
 #
 # int main(int argc, char* argv[])
 # {
-#   const std::string filename = (argc > 1) ? argv[1] : CGAL::data_file_path("meshes/blobby.off");
+#   const std::string filename = (argc > 1) ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/blobby.off");)
 #
 #   Mesh mesh;
 #   if(!PMP::IO::read_polygon_mesh(filename, mesh) || CGAL::is_empty(mesh))
