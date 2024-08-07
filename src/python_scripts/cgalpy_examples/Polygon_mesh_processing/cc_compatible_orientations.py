@@ -17,7 +17,7 @@ Pmp = CGALPY.Pmp
 Sm = CGALPY.Sm
 
 def create_mesh_with_cc_to_orient():
-  try: mesh = Sm.read_polygon_mesh(CGALPY.data_file_path("meshes/elephant.off"))
+  try: mesh = Sm.read_polygon_mesh(CGALPY.data_file_path("meshes/elephant.off")))
   except: raise ValueError("Invalid input.")
 
   # turn the mesh into a triangle soup, duplicating all the vertices and shuffling orientations

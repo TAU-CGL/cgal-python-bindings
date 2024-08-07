@@ -21,7 +21,7 @@ Point_3 = Ker.Point_3
 Pmp = CGALPY.Pmp
 Sm = CGALPY.Sm
 
-filename = sys.argv[i] if len(sys.argv) > i else 'meshes/pig.off'
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/pig.off')
 i += 1
 nb_iterations = int(sys.argv[i]) if len(sys.argv) > i else 1000
 i += 1

@@ -19,9 +19,9 @@ Ker = CGALPY.Ker
 Pol3 = CGALPY.Pol3
 Pmp = CGALPY.Pmp
 
-input_filename = sys.argv[i] if len(sys.argv) > i else 'meshes/blobby-shuffled.off'
+input_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby-shuffled.off')
 i += 1
-reference_filename = sys.argv[i] if len(sys.argv) > i else 'meshes/blobby.off'
+reference_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off')
 
 try: points, polygons = Pol3.read_polygon_soup(input_filename)
 except: raise ValueError("Error: can not read input file.")

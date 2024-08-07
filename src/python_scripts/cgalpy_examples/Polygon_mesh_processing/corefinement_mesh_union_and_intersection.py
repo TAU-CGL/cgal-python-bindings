@@ -19,8 +19,8 @@
 #
 # int main(int argc, char* argv[])
 # {
-#   const std::string filename1 = (argc > 1) ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/blobby.off");)
-#   const std::string filename2 = (argc > 2) ? argv[2] : CGAL::data_file_path(CGALPY.data_file_path("meshes/eight.off");)
+#   const std::string filename1 = (argc > 1) ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/blobby.off");))
+#   const std::string filename2 = (argc > 2) ? argv[2] : CGAL::data_file_path(CGALPY.data_file_path("meshes/eight.off");))
 #
 #   Mesh mesh1, mesh2;
 #   if(!PMP::IO::read_polygon_mesh(filename1, mesh1) || !PMP::IO::read_polygon_mesh(filename2, mesh2))
@@ -87,9 +87,9 @@ Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename1 = sys.argv[i] if len(sys.argv) > i else 'meshes/blobby.off'
+filename1 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off')
 i += 1
-filename2 = sys.argv[i] if len(sys.argv) > i else 'meshes/eight.off'
+filename2 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off')
 
 try:
   mesh1 = Sm.read_polygon_mesh(filename1)

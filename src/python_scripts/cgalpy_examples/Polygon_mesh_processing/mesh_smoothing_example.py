@@ -19,7 +19,7 @@
 #
 # int main(int argc, char** argv)
 # {
-#   const std::string filename = argc > 1 ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/anchor_dense.off");)
+#   const std::string filename = argc > 1 ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/anchor_dense.off");))
 #
 #   Mesh mesh;
 #   if(!PMP::IO::read_polygon_mesh(filename, mesh))
@@ -77,7 +77,7 @@ Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else 'meshes/anchor_dense.off'
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/anchor_dense.off')
 i += 1
 nb_iterations = int(sys.argv[i]) if len(sys.argv) > i else 10
 

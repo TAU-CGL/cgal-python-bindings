@@ -18,7 +18,7 @@ Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else 'meshes/pig.off'
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/pig.off')
 i += 1
 nb_iter = int(sys.argv[i]) if len(sys.argv) < i else 10
 

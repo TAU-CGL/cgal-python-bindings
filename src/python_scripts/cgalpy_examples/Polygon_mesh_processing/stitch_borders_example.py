@@ -20,7 +20,7 @@ Point_3 = Ker.Point_3
 Pol3 = CGALPY.Pol3
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/quads_to_stitch.off")
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/quads_to_stitch.off"))
 try: mesh = Pol3.read_polygon_mesh(filename)
 except: raise ValueError("Invalid input.")
 

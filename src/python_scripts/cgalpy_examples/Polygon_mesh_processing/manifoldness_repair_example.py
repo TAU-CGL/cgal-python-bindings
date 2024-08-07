@@ -34,7 +34,7 @@
 #
 # int main(int argc, char* argv[])
 # {
-#   const std::string filename = (argc > 1) ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/blobby.off");)
+#   const std::string filename = (argc > 1) ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/blobby.off");))
 #
 #   Mesh mesh;
 #   if(!PMP::IO::read_polygon_mesh(filename, mesh) || CGAL::is_empty(mesh))
@@ -107,7 +107,7 @@ def merge_vertices(v_keep, v_rm, mesh):
 
   Sm.remove_vertex(v_rm, mesh)
 
-filename = sys.argv[i] if len(sys.argv) > i else 'meshes/blobby.off'
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off')
 
 try: mesh = Sm.read_polygon_mesh(filename)
 except: raise ValueError("Invalid input.")

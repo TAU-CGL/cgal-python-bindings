@@ -47,7 +47,7 @@
 #
 # int main(int argc, char* argv[])
 # {
-#   const std::string filename = (argc > 1) ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/blobby.off");)
+#   const std::string filename = (argc > 1) ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/blobby.off");))
 #
 #   Mesh poly;
 #   if(!PMP::IO::read_polygon_mesh(filename, poly) || !CGAL::is_triangle_mesh(poly))
@@ -118,7 +118,7 @@ def extract_k_ring(v, k):
     current_index += 1
   #### WORK IN PROGRESS
 
-filename = sys.argv[i] if len(sys.argv) > i else 'meshes/blobby.off'
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off')
 try: poly = Pol3.read_polygon_mesh(filename)
 except: raise ValueError("Invalid input.")
 

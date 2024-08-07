@@ -57,7 +57,7 @@ Pmp.set_duplicated_vertex(v, duplicated_vertex)
 Pmp.set_vertex_id_in_polygon_replaced(v, vertex_id_in_polygon_replaced)
 Pmp.set_polygon_orientation_reversed(v, polygon_orientation_reversed)
 
-filename = sys.argv[i] if len(sys.argv) > i else 'meshes/tet-shuffled.off'
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/tet-shuffled.off')
 
 try: points, polygons = Pm.read_polygon_soup(filename)
 except: raise ValueError("Cannot open file")
