@@ -5062,12 +5062,17 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("loc"), py::arg("tmesh"),
         py::arg("np") = py::dict());
   m.def("get_descriptor_from_location", &pmp::get_descriptor_from_location<Pm>,
-        py::arg("loc"), py::arg("tmesh"),
-        py::arg("np") = py::dict());
+        py::arg("loc"), py::arg("tm"));
   m.def("is_in_face", &pmp::is_in_face_bar<Pm>,
         py::arg("bar"), py::arg("tm"));
   m.def("is_on_face_border", &pmp::is_on_face_border<Pm>,
         py::arg("loc"), py::arg("tm"));
+  m.def("is_on_halfedge", &pmp::is_on_halfedge<Pm>,
+        py::arg("loc"), py::arg("hd"), py::arg("tm"));
+  m.def("is_on_mesh_border", &pmp::is_on_mesh_border<Pm>,
+        py::arg("loc"), py::arg("tm"));
+  m.def("is_on_vertex", &pmp::is_on_vertex<Pm>,
+        py::arg("loc"), py::arg("vd"), py::arg("tm"));
 
   // Predicates
   m.def("degenerate_edges", &pmp::degenerate_edges_r<Pm>,
