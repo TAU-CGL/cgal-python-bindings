@@ -45,12 +45,14 @@
 #include <CGAL/Polygon_mesh_processing/merge_border_vertices.h>
 #include <CGAL/Polygon_mesh_processing/random_perturbation.h>
 #include <CGAL/Polygon_mesh_processing/refine.h>
+#include <CGAL/Polygon_mesh_processing/refine_mesh_at_isolevel.h>
 #include <CGAL/Polygon_mesh_processing/region_growing.h>
 #include <CGAL/Polygon_mesh_processing/remesh.h>
 #include <CGAL/Polygon_mesh_processing/remesh_planar_patches.h>
 #include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/smooth_shape.h>
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
+#include <CGAL/Polygon_mesh_processing/triangle.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_faces.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
 #include <CGAL/Polygon_mesh_processing/surface_Delaunay_remeshing.h>
@@ -842,6 +844,62 @@ auto orient_polygon_soup(const py::list& vertices,
   return PMP::orient_polygon_soup(v, f);
 }
 
+template <typename PolygonMesh>
+auto edge_bbox(const typename boost::graph_traits<PolygonMesh>::edge_descriptor ed,
+               const PolygonMesh& pm,
+               const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pm, np);
+  return PMP::edge_bbox(ed, pm, internal::parse_pmp_np<PolygonMesh>(np)
+                        // .vertex_point_map(vpm)
+                        );
+}
+
+template <typename PolygonMesh>
+auto face_bbox(const typename boost::graph_traits<PolygonMesh>::face_descriptor fd,
+               const PolygonMesh& pm,
+               const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pm, np);
+  return PMP::face_bbox(fd, pm, internal::parse_pmp_np<PolygonMesh>(np)
+                        // .vertex_point_map(vpm)
+                        );
+}
+
+template <typename PolygonMesh, typename ValueMap>
+auto refine_mesh_at_isolevel(PolygonMesh& pm,
+                             ValueMap value_map,
+                             typename boost::property_traits<ValueMap>::value_type isovalue,
+                             const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pm, np);
+  auto eicm = get_edge_prop_map<PolygonMesh, bool>(pm, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
+  return PMP::refine_mesh_at_isolevel(pm, value_map, isovalue,
+                                      internal::parse_pmp_np<PolygonMesh>(np)
+                                      .edge_is_constrained_map(eicm)
+                                      // .vertex_point_map(vpm)
+                                      );
+}
+
+
+template <typename TriangleMesh>
+auto triangle(typename boost::graph_traits<TriangleMesh>::face_descriptor fd,
+              const TriangleMesh& tmesh,
+              const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::triangle(fd, tmesh, internal::parse_pmp_np<TriangleMesh>(np)
+                      // .vertex_point_map(vpm)
+                      );
+}
+
+template <typename PolygonMesh>
+auto vertex_bbox(typename boost::graph_traits<PolygonMesh>::vertex_descriptor vd,
+                 const PolygonMesh& pm,
+                 const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pm, np);
+  return PMP::vertex_bbox(vd, pm, internal::parse_pmp_np<PolygonMesh>(np)
+                        // .vertex_point_map(vpm)
+                        );
+}
+
 //
 template <typename PolygonMesh>
 py::list extract_boundary_cycles(PolygonMesh& pm) {
@@ -856,6 +914,24 @@ py::list extract_boundary_cycles(PolygonMesh& pm) {
   auto it = boost::make_function_output_iterator(std::ref(op));
   PMP::extract_boundary_cycles(pm, it);
   return result;
+}
+
+template <typename PolygonMesh>
+auto add_bbox(PolygonMesh& pmesh,
+              const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  PMP::add_bbox(pmesh, internal::parse_pmp_np<PolygonMesh>(np)
+                // .vertex_point_map(vpm)
+                );
+}
+
+template <typename PolygonMesh>
+auto bbox(PolygonMesh& pmesh,
+          const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  return PMP::bbox(pmesh, internal::parse_pmp_np<PolygonMesh>(np)
+                   // .vertex_point_map(vpm)
+                   );
 }
 
 template <typename PolygonMesh>
@@ -3082,7 +3158,7 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
 
 template <typename PolygonMesh>
 auto border_halfedges(const py::list& face_range,
-                      const PolygonMesh& pm,
+                      PolygonMesh& pmesh,
                       const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
@@ -3093,8 +3169,19 @@ auto border_halfedges(const py::list& face_range,
   auto end = stl_input_iterator<Fd>(face_range, false);
 
   std::vector<Hd> out;
-  PMP::border_halfedges(boost::make_iterator_range(begin, end), pm, std::back_inserter(out),
-                        internal::parse_pmp_np<PolygonMesh>(np));
+  if (np.contains("face_index_map")) {
+    auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP0",
+      np.contains("face_index_map") ? np["face_patch_index_map"] : py::none());
+    PMP::border_halfedges(boost::make_iterator_range(begin, end), pmesh, std::back_inserter(out),
+                          internal::parse_pmp_np<PolygonMesh>(np)
+                          .face_index_map(fim)
+                          );
+  }
+  else {
+    PMP::border_halfedges(boost::make_iterator_range(begin, end), pmesh, std::back_inserter(out),
+                          internal::parse_pmp_np<PolygonMesh>(np)
+                          );
+  }
   py::list result;
   for (const auto& hd : out) result.append(hd);
   return result;
@@ -3616,11 +3703,14 @@ auto detect_corners_of_regions(PolygonMesh& pmesh,
                                const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   std::size_t num_corners;
+  // auto vpm = get_vertex_point_map(pmesh, np);
   auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
                                           np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
   std::size_t r = PMP::detect_corners_of_regions(pmesh, region_map, nb_regions, corner_id_map,
                                                  internal::parse_pmp_np<PolygonMesh>(np)
-                                                 .edge_is_constrained_map(eicm));
+                                                 .edge_is_constrained_map(eicm)
+                                                 // .vertex_point_map(vpm)
+                                                 );
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   if (!np.contains("edge_is_constrained_map")) {
     pmesh.remove_property_map(eicm);
@@ -4410,6 +4500,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   using FaceComponentMap = Pm::Property_map<Fd, faces_size_type>;
   using FaceVectorMap = Pm::Property_map<Fd, Vector_3>;
   using VertexVectorMap = Pm::Property_map<Vd, Vector_3>;
+  using ValueMap = Pm::Property_map<Vd, double>;
 #endif
 #if CGALPY_PMP_POLYGONAL_MESH == 0
   using edge_bool_map = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
@@ -4423,6 +4514,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   using FaceComponentMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<faces_size_type>>;
   using FaceVectorMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<Vector_3>>;
   using VertexVectorMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<Vector_3>>;
+  using ValueMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<double>>;
 #endif
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -4827,24 +4919,6 @@ void export_polygon_mesh_processing(py::module_& m) {
 #endif
 
 
-  // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
-  //       py::arg("face_range"), py::arg("pm"),
-  //       py::arg("parameters") = py::dict());
-
-  m.def("repair_polygon_soup", &pmp::repair_polygon_soup,
-        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
-
-  m.def("extract_boundary_cycles", &pmp::extract_boundary_cycles<Pm>,
-        py::arg("pm"));
-
-
-  m.def("border_halfedges", &pmp::border_halfedges<Pm>,
-        py::arg("face_range"), py::arg("pm"),
-        py::arg("np") = py::dict());
-
-  m.def("is_closed", &CGAL::is_closed<Pm>,
-        py::arg("g"));
-
   // this is currently only supported for Surface_mesh, because Polyhedron would need Random_access_property_map
   // the boost::property_map types don't work here for some reason
   // eg. Random_access_property_map<vector<unsigned long, allocator<unsigned long>>>
@@ -4861,6 +4935,36 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
 #endif
+
+  // other
+  m.def("add_bbox", &pmp::add_bbox<Pm>,
+        py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("bbox", &pmp::bbox<Pm>,
+        py::arg("pmesh"),
+        py::arg("np") = py::dict());
+  m.def("border_halfedges", &pmp::border_halfedges<Pm>,
+        py::arg("face_range"), py::arg("pm"),
+        py::arg("np") = py::dict());
+  m.def("detect_corners_of_regions", &pmp::detect_corners_of_regions<Pm, RegionMap, CornerIdMap>,
+        py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"), py::arg("corner_id_map"),
+        py::arg("np") = py::dict());
+  m.def("edge_bbox", &pmp::edge_bbox<Pm>,
+        py::arg("ed"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+  m.def("extract_boundary_cycles", &pmp::extract_boundary_cycles<Pm>,
+        py::arg("pmesh"));
+  m.def("face_bbox", &pmp::face_bbox<Pm>,
+        py::arg("f"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+  m.def("refine_mesh_at_isolevel", &pmp::refine_mesh_at_isolevel<Pm, ValueMap>,
+        py::arg("pm"), py::arg("value_map"), py::arg("isovalue"),
+        py::arg("np") = py::dict());
+  // region growing only for sm
+  // TODO: transform
+  m.def("triangle", &pmp::triangle<Pm>,
+        py::arg("f"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+
 
   m.def("set_non_manifold_edge", &pmp::set_non_manifold_edge);
   m.def("set_non_manifold_vertex", &pmp::set_non_manifold_vertex);
