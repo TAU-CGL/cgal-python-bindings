@@ -19,7 +19,7 @@ Point_3 = Ker.Point_3
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/P.off"))
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/P.off")
 i += 1
 outfilename = sys.argv[i] if len(sys.argv) > i else "P_tri.off"
 
