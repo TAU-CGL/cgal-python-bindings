@@ -7,7 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <CGAL/Polygon_mesh_processing/measure.h>
-#include <limits>
+#include <CGAL/boost/graph/Face_filtered_graph.h>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <stdexcept>
@@ -403,6 +403,10 @@ void corefine(PolygonMesh& tm1, PolygonMesh& tm2,
                   .edge_is_constrained_map(eicm2)
                   );
   }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np1.contains("edge_is_constrained_map")) tm1.remove_property_map(eicm1);
+  if (!np2.contains("edge_is_constrained_map")) tm2.remove_property_map(eicm2);
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
 }
 
 //
@@ -1446,6 +1450,11 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
                                                 .edge_is_constrained_map(eicm_out)
                                                 );
   }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np1.contains("edge_is_constrained_map")) pm1.remove_property_map(eicm1);
+  if (!np2.contains("edge_is_constrained_map")) pm2.remove_property_map(eicm2);
+  if (!np_out.contains("edge_is_constrained_map")) out.remove_property_map(eicm_out);
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
   if (! valid) throw std::runtime_error("Cannot compute difference!");
   return out;
 }
@@ -1673,6 +1682,11 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
                                                 .edge_is_constrained_map(eicm_out)
                                                 );
   }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np1.contains("edge_is_constrained_map")) pm1.remove_property_map(eicm1);
+  if (!np2.contains("edge_is_constrained_map")) pm2.remove_property_map(eicm2);
+  if (!np_out.contains("edge_is_constrained_map")) out.remove_property_map(eicm_out);
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
   if (! valid) throw std::runtime_error("Cannot compute difference!");
   return out;
 }
@@ -1900,6 +1914,11 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
                                                 .edge_is_constrained_map(eicm_out)
                                                 );
   }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np1.contains("edge_is_constrained_map")) pm1.remove_property_map(eicm1);
+  if (!np2.contains("edge_is_constrained_map")) pm2.remove_property_map(eicm2);
+  if (!np_out.contains("edge_is_constrained_map")) out.remove_property_map(eicm_out);
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
   if (! valid) throw std::runtime_error("Cannot compute difference!");
   return out;
 }
@@ -2273,9 +2292,15 @@ auto surface_intersection(const PolygonMesh& tm1,
                           const py::dict& np1 = py::dict(),
                           const py::dict& np2 = py::dict()) {
   std::vector< std::vector<Point_3> > polylines;
+  // auto vpm1 = get_vertex_point_map(tm1, np1);
+  // auto vpm2 = get_vertex_point_map(tm2, np2);
   PMP::surface_intersection(tm1, tm2, std::back_inserter(polylines),
-                            internal::parse_pmp_np<PolygonMesh>(np1),
-                            internal::parse_pmp_np<PolygonMesh>(np2));
+                            internal::parse_pmp_np<PolygonMesh>(np1)
+                            // .vertex_point_map(vpm1)
+                            ,
+                            internal::parse_pmp_np<PolygonMesh>(np2)
+                            // .vertex_point_map(vpm2)
+                            );
   py::list retv;
   for (const auto& item : polylines) {
     const auto linelist = vec2list(item);
@@ -2371,6 +2396,14 @@ bool clip(PolygonMesh& tm, PolygonMesh& clipper,
     res = PMP::clip(tm, clipper, internal::parse_pmp_np<PolygonMesh>(np_tm).edge_is_constrained_map(eicm1),
                     internal::parse_pmp_np<PolygonMesh>(np_c).edge_is_constrained_map(eicm2));
   }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  if (!np_tm.contains("edge_is_constrained_map")) {
+    tm.remove_property_map(eicm1);
+  }
+  if (!np_c.contains("edge_is_constrained_map")) {
+    clipper.remove_property_map(eicm2);
+  }
+#endif
   return res;
 }
 
@@ -2970,6 +3003,8 @@ void split(PolygonMesh& pm,
            PolygonMesh& splitter,
            const py::dict& np_tm = py::dict(),
            const py::dict& np_s = py::dict()) {
+  // auto vpm1 = get_vertex_point_map(pm, np_tm);
+  // auto vpm2 = get_vertex_point_map(splitter, np_s);
   // this can also have 2 visitors
   bool visitor1 = np_tm.contains("visitor");
   bool visitor2 = np_s.contains("visitor");
@@ -2977,124 +3012,209 @@ void split(PolygonMesh& pm,
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
   } else if (visitor1) {
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1),
-                 internal::parse_pmp_np<PolygonMesh>(np_s));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm).visitor(v1)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
   } else if (visitor2) {
     try {
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm),
-                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2));
+      PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm)
+                 // .vertex_point_map(vpm1)
+                 ,
+                 internal::parse_pmp_np<PolygonMesh>(np_s).visitor(v2)
+                 // .vertex_point_map(vpm2)
+                 );
     }
     catch (const py::cast_error& e) {
     }
   } else {
-    PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm),
-               internal::parse_pmp_np<PolygonMesh>(np_s));
+    PMP::split(pm, splitter, internal::parse_pmp_np<PolygonMesh>(np_tm)
+               // .vertex_point_map(vpm1)
+               ,
+               internal::parse_pmp_np<PolygonMesh>(np_s)
+               // .vertex_point_map(vpm2)
+               );
   }
 }
+
+template <typename TriangleMesh>
+auto split_c(TriangleMesh& tm,
+             const Iso_cuboid_3& bbox,
+             const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::split(tm, bbox, internal::parse_pmp_np<TriangleMesh>(np)
+                    // .vertex_point_map(vpm)
+                    );
+}
+
+template <typename TriangleMesh>
+auto split_p(TriangleMesh& tm,
+             const Plane_3& plane,
+             const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tm, np);
+  return PMP::split(tm, plane, internal::parse_pmp_np<TriangleMesh>(np)
+                    // .vertex_point_map(vpm)
+                    );
+}
+
 
 template <typename PolygonMesh>
 auto split_long_edges(const py::list& edge_range,
@@ -3603,6 +3723,32 @@ typename boost::graph_traits< PolygonMesh >::faces_size_type sharp_edges_segment
   return num_patches;
 }
 
+template<typename PolygonMesh, typename PatchIdMap, typename VdSetMap, typename EdgeIsFeatureMap>
+auto detect_vertex_incident_patches(PolygonMesh& pmesh,
+                                    const PatchIdMap patch_id_map,
+                                    const EdgeIsFeatureMap edge_is_feature_map,
+                                    const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Vd = typename Gt::vertex_descriptor;
+  using Fd = typename Gt::face_descriptor;
+  using Vt = typename boost::property_traits<PatchIdMap>::value_type;
+  typedef typename boost::property_map<PolygonMesh, CGAL::vertex_incident_patches_t<int> >::type VIP;
+
+  VIP vip = get(CGAL::vertex_incident_patches_t<Vt>(), pmesh);
+  PMP::detect_vertex_incident_patches(pmesh, patch_id_map, vip, edge_is_feature_map);
+  // go back to the py::set for the map
+  VdSetMap retv;
+  for (auto v : vertices(pmesh)) {
+    py::set s;
+    for (auto p : vip[v]) {
+      s.add(p);
+    }
+    retv[v] = s;
+  }
+  return retv;
+}
+
 template <typename PolygonMesh>
 auto angle_and_area_smoothing_m(PolygonMesh& pmesh,
                               const py::dict& np = py::dict()) {
@@ -4102,9 +4248,6 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("min_size"), py::arg("np") = py::dict());
   m.def("keep_largest_connected_components", &pmp::keep_largest_connected_components<Pm>,
         py::arg("pm"), py::arg("nb_components_to_keep"), py::arg("np") = py::dict());
-  m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
-        py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
-        py::arg("np") = py::dict());
   m.def("remove_connected_components", &pmp::remove_connected_components<Pm>,
         py::arg("pm"), py::arg("components_to_remove"), py::arg("np") = py::dict());
   m.def("split_connected_components", &pmp::split_connected_components<Pm>,
@@ -4360,10 +4503,10 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("autorefine_triangle_soup", &pmp::autorefine_triangle_soup,
         py::arg("soup_points"), py::arg("soup_triangles"), py::arg("np") = py::dict());
   m.def("clip", &pmp::clip_c<Pm>,
-        py::arg("tm"), py::arg("plane"),
+        py::arg("tm"), py::arg("iso_cuboid"),
         py::arg("np") = py::dict());
   m.def("clip", &pmp::clip_p<Pm>,
-        py::arg("tm"), py::arg("iso_cuboid"),
+        py::arg("tm"), py::arg("plane"),
         py::arg("np") = py::dict());
   m.def("clip", &pmp::clip<Pm>,
         py::arg("tm"), py::arg("clipper"),
@@ -4386,11 +4529,33 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm1"), py::arg("pm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
+  m.def("split", &pmp::split_c<Pm>,
+        py::arg("tm"), py::arg("iso_cuboid"),
+        py::arg("np") = py::dict());
+  m.def("split", &pmp::split_p<Pm>,
+        py::arg("tm"), py::arg("plane"),
+        py::arg("np") = py::dict());
+  m.def("split", &pmp::split<Pm>,
+        py::arg("tm"), py::arg("splitter"),
+        py::arg("np_tm") = py::dict(), py::arg("np_s") = py::dict());
+  m.def("surface_intersection", &pmp::surface_intersection<Pm>,
+        py::arg("tm1"), py::arg("tm2"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
 
 
-
-
-
+  // Feature Detection Functions
+  m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
+        py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
+        py::arg("np") = py::dict());
+  // only for sm
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  m.def("sharp_edges_segmentation", &pmp::sharp_edges_segmentation<Pm, Pm::Property_map<Ed, bool>, Pm::Property_map<Fd, int>>,
+        py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
+        py::arg("patch_id_map"), py::arg("np") = py::dict());
+  m.def("detect_vertex_incident_patches", &pmp::detect_vertex_incident_patches<Pm, Pm::Property_map<Fd, int>, Pm::Property_map<Vd, py::set>, Pm::Property_map<Ed, bool>>,
+        py::arg("pmesh"), py::arg("patch_id_map"),
+        py::arg("vertex_incident_patches_map"), py::arg("np") = py::dict());
+#endif
 
 
 
@@ -4400,9 +4565,6 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::uint32_t>>,
         py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
-  m.def("sharp_edges_segmentation", &pmp::sharp_edges_segmentation<Pm, Pm::Property_map<Ed, bool>, Pm::Property_map<Fd, int>>,
-        py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
-        py::arg("patch_id_map"), py::arg("np") = py::dict());
 
   // only for sm
   m.def("compatible_orientations", &pmp::compatible_orientations<Pm, FaceBitMap>,
@@ -4424,10 +4586,6 @@ void export_polygon_mesh_processing(py::module_& m) {
   // m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
   //       py::arg("face_range"), py::arg("pm"),
   //       py::arg("parameters") = py::dict());
-
-  m.def("surface_intersection", &pmp::surface_intersection<Pm>,
-        py::arg("tm1"), py::arg("tm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
 
   m.def("repair_polygon_soup", &pmp::repair_polygon_soup,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
