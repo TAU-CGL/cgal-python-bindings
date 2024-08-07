@@ -2626,6 +2626,107 @@ auto stitch_boundary_cycles(const py::list& boundary_cycle_representatives,
                       );
 }
 
+template <typename PolygonMesh>
+auto remove_almost_degenerate_faces_r(const py::list& face_range,
+                                     PolygonMesh& pmesh,
+                                     const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Gt = boost::graph_traits<Pm>;
+  using Fd = typename Gt::face_descriptor;
+  auto facevec = list2vec<Fd>(face_range);
+  // auto vpm = get_vertex_point_map(pmesh, np);
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  auto vicm = get_vertex_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP1",
+    np.contains("vertex_is_constrained_map") ? np["vertex_is_constrained_map"] : py::none());
+  std::function<bool(Point_3, Point_3, Point_3)> filter = [](const Point_3&, const Point_3&, const Point_3&) {
+    return true;
+  };
+  if (np.contains("filter")) {
+    filter = py::cast<std::function<bool(Point_3, Point_3, Point_3)>>(np["filter"]);
+  }
+  struct Filter {
+    std::function<bool(Point_3, Point_3, Point_3)> filter;
+    bool operator()(const Point_3& p0, const Point_3& p1, const Point_3& p2) const {
+      return filter(p0, p1, p2);
+    }
+  };
+  Filter f; f.filter = filter;
+  auto retv = PMP::remove_almost_degenerate_faces(facevec, pmesh,
+                                     internal::parse_pmp_np<PolygonMesh>(np)
+                                     // .vertex_point_map(vpm)
+                                     .edge_is_constrained_map(eicm)
+                                     .vertex_is_constrained_map(vicm)
+                                     .filter(f));
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  !np.contains("edge_is_constrained_map") ? pmesh.remove_property_map(eicm) : void();
+  !np.contains("vertex_is_constrained_map") ? pmesh.remove_property_map(vicm) : void();
+#endif
+  return retv;
+}
+
+template <typename TriangleMesh>
+auto remove_almost_degenerate_faces(TriangleMesh& tmesh,
+                                    const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tmesh, np);
+  auto eicm = get_edge_prop_map<TriangleMesh, bool>(tmesh, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  auto vicm = get_vertex_prop_map<TriangleMesh, bool>(tmesh, "INTERNAL_MAP1",
+    np.contains("vertex_is_constrained_map") ? np["vertex_is_constrained_map"] : py::none());
+  std::function<bool(Point_3, Point_3, Point_3)> filter = [](const Point_3&, const Point_3&, const Point_3&) {
+    return true;
+  };
+  if (np.contains("filter")) {
+    filter = py::cast<std::function<bool(Point_3, Point_3, Point_3)>>(np["filter"]);
+  }
+  struct Filter {
+    std::function<bool(Point_3, Point_3, Point_3)> filter;
+    bool operator()(const Point_3& p0, const Point_3& p1, const Point_3& p2) const {
+      return filter(p0, p1, p2);
+    }
+  };
+  Filter f; f.filter = filter;
+  auto retv = PMP::remove_almost_degenerate_faces(tmesh,
+                                     internal::parse_pmp_np<TriangleMesh>(np)
+                                     // .vertex_point_map(vpm)
+                                     .edge_is_constrained_map(eicm)
+                                     .vertex_is_constrained_map(vicm)
+                                     .filter(f));
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  !np.contains("edge_is_constrained_map") ? tmesh.remove_property_map(eicm) : void();
+  !np.contains("vertex_is_constrained_map") ? tmesh.remove_property_map(vicm) : void();
+#endif
+  return retv;
+}
+
+template <typename TriangleMesh>
+auto remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
+                                                    const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(tmesh, np);
+  auto eicm = get_edge_prop_map<TriangleMesh, bool>(tmesh, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  bool fim_flag = np.contains("face_index_map");
+  std::size_t retv;
+  if (fim_flag) {
+    auto fim = get_face_prop_map<TriangleMesh, std::size_t>(tmesh, "INTERNAL_MAP1",
+      np["face_index_map"]);
+    retv = PMP::remove_connected_components_of_negligible_size(tmesh,
+                                                               internal::parse_pmp_np<TriangleMesh>(np)
+                                                               // .vertex_point_map(vpm)
+                                                               .edge_is_constrained_map(eicm)
+                                                               .face_index_map(fim));
+  } else {
+    retv = PMP::remove_connected_components_of_negligible_size(tmesh,
+                                                               internal::parse_pmp_np<TriangleMesh>(np)
+                                                               // .vertex_point_map(vpm)
+                                                               .edge_is_constrained_map(eicm));
+  }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+  !np.contains("edge_is_constrained_map") ? tmesh.remove_property_map(eicm) : void();
+#endif
+  return retv;
+}
+
 template <typename TriangleMesh>
 auto random_perturbation(TriangleMesh& tmesh,
                          const double& perturbation_max_size,
@@ -4580,6 +4681,16 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("boundary_cycle_representatives"), py::arg("pmesh"),
         py::arg("np") = py::dict());
 
+  // Geometric Repair
+  m.def("remove_almost_degenerate_faces", &pmp::remove_almost_degenerate_faces_r<Pm>,
+        py::arg("face_range"), py::arg("tmesh"),
+        py::arg("np") = py::dict());
+  m.def("remove_almost_degenerate_faces", &pmp::remove_almost_degenerate_faces<Pm>,
+        py::arg("tmesh"), py::arg("np") = py::dict());
+  m.def("remove_connected_components_of_negligible_size", &pmp::remove_connected_components_of_negligible_size<Pm>, // TODO: output_iterator
+        py::arg("tmesh"), py::arg("np") = py::dict());
+  m.def("remove_isolated_vertices", &PMP::remove_isolated_vertices<Pm>,
+        py::arg("pmesh"));
 
   // Distance Functions
   m.def("approximate_Hausdorff_distance", &pmp::approximate_Hausdorff_distance<Pm>,
