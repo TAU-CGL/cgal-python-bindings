@@ -1,5 +1,0 @@
-set(CMAKE_BUILD_TYPE "Release"              CACHE STRING "build type" FORCE)
-set(CGALPY_USE_SHARED_LIBS ON               CACHE BOOL "" FORCE)
-set(CGALPY_FIXED_LIBRARY_NAME OFF           CACHE BOOL "" FORCE)
-set(CGALPY_KERNEL_NAME "epic"               CACHE STRING "use EPIC kernel" FORCE)
-set(CGALPY_KERNEL_INTERSECTION_BINDINGS OFF CACHE BOOL "without intersections" FORCE)
