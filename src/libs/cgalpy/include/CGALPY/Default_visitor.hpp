@@ -2,6 +2,7 @@
 #define CGALPY_DEFAULT_VISITOR_HPP
 
 #include <nanobind/nanobind.h>
+#include <CGAL/Polygon_mesh_processing/corefinement.h>
 
 namespace py = nanobind;
 

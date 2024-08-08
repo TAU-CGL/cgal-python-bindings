@@ -72,86 +72,14 @@
 #include "CGALPY/Autorefinement_visitor.hpp"
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/internal.hpp"
+#include "CGALPY/Polyhedral_envelope.hpp"
+#include "CGALPY/pmp_helpers.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 
 namespace pmp {
 
-// map getters
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-template <typename PolygonMesh>
-auto get_vertex_point_map(const PolygonMesh& pm, const py::dict& np = py::dict()) {
-  using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
-  using vpmap = typename PolygonMesh::template Property_map<Vd, Point_3>;
-  auto vpm = np.contains("vertex_point_map") ? py::cast<vpmap>(np["vertex_point_map"]) : pm.points();
-  return vpm;
-}
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
-#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
-template <typename PolygonMesh>
-auto get_vertex_point_map(PolygonMesh& pm, const py::dict& np = py::dict()) {
-  // TODO: get the map from the dict
-  return get(CGAL::vertex_point, pm);
-}
-#endif // CGALPY_PMP_POLYGONAL_MESH == 0
-
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-template <typename PolygonMesh, typename V>
-auto get_vertex_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none(), const V& default_value = V()) {
-  using K = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
-  using map_type = typename PolygonMesh::template Property_map<K, V>;
-  return dict_key.is_none() ? pm.template add_property_map<K, V>(map_name, V()).first :
-    py::cast<map_type>(dict_key);
-}
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
-#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
-  // boost::property_map<Mesh, CGAL::dynamic_vertex_property_t<Epic_kernel::FT>>::type
-template <typename PolygonMesh, typename V>
-auto get_vertex_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none(), const V& default_value = V()) {
-  using dynamic_prop = typename CGAL::dynamic_vertex_property_t<V>;
-  using map_type = typename boost::property_map<PolygonMesh, dynamic_prop>::type;
-  return dict_key.is_none() ? get(dynamic_prop(), pm) :
-    py::cast<map_type>(dict_key);
-}
-#endif // CGALPY_PMP_POLYGONAL_MESH == 0
-
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-template <typename PolygonMesh, typename F>
-auto get_edge_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none(), const F& default_value = F()) {
-  using K = typename boost::graph_traits<PolygonMesh>::edge_descriptor;
-  using map_type = typename PolygonMesh::template Property_map<K, F>;
-  return dict_key.is_none() ? pm.template add_property_map<K, F>(map_name, F()).first :
-    py::cast<map_type>(dict_key);
-}
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
-#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
-template <typename PolygonMesh, typename F>
-auto get_edge_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none(), const F& default_value = F()) {
-  using dynamic_prop = typename CGAL::dynamic_edge_property_t<F>;
-  using map_type = typename boost::property_map<PolygonMesh, dynamic_prop>::type;
-  return dict_key.is_none() ? get(dynamic_prop(), pm) :
-    py::cast<map_type>(dict_key);
-}
-#endif // CGALPY_PMP_POLYGONAL_MESH == 0
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-template <typename PolygonMesh, typename F>
-auto get_face_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none(), const F& default_value = F()) {
-  using K = typename boost::graph_traits<PolygonMesh>::face_descriptor;
-  using map_type = typename PolygonMesh::template Property_map<K, F>;
-  return dict_key.is_none() ? pm.template add_property_map<K, F>(map_name, F()).first :
-    py::cast<map_type>(dict_key);
-}
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
-#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
-template <typename PolygonMesh, typename F>
-auto get_face_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none(), const F& default_value = F()) {
-  using dynamic_prop = typename CGAL::dynamic_face_property_t<F>;
-  using map_type = typename boost::property_map<PolygonMesh, dynamic_prop>::type;
-  return dict_key.is_none() ? get(dynamic_prop(), pm) :
-    py::cast<map_type>(dict_key);
-}
-#endif // CGALPY_PMP_POLYGONAL_MESH == 0
 
 /*! Determine whether two polylines intersect.
  * It's a shame that we cannot pass the begin1,end1,begin2,end2
@@ -5217,6 +5145,21 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("set_out_of_place_operation", &pmp::set_out_of_place_operation_fn);
   m.def("set_in_place_operation", &pmp::set_in_place_operation_fn);
   m.def("set_in_place_operations", &pmp::set_in_place_operations_fn);
+
+  using Pe = pmp::Polyhedral_envelope<Pm, Kernel>;
+  py::class_<Pe>(m, "Polyhedral_envelope")
+    .def(py::init<Pm&, double, const py::dict&>())
+    .def(py::init<const py::list&, Pm&, double, const py::dict&>())
+    .def("is_empty", &Pe::is_empty)
+    .def("inside", [](const Pe& i, const Point_3& query) { return i(query); })
+    .def("inside", [](const Pe& i, const Point_3& source, const Point_3& target) { return i(source, target); })
+    .def("inside", [](const Pe& i, const Point_3& t0, const Point_3& t1, const Point_3& t2) { return i(t0, t1, t2); })
+  //   bool CGAL::Polyhedral_envelope< GeomTraits >::operator() 	( 	const TriangleMesh &  	tmesh,
+		// const NamedParameters &  	np = parameters::default_values() 
+	// )
+    .def("inside", [](const Pe& i, const Pm& tmesh, const py::dict& np) { return i(tmesh, internal::parse_pmp_np<Pm>(np)); })
+    // TODO: inside triangle range
+    ;
 
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
   py::class_<Pcad>(m, "Principal_curvatures_and_directions")

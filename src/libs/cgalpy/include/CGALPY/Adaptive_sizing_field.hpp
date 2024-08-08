@@ -17,7 +17,7 @@ struct Adaptive_sizing_field : public CGAL::Polygon_mesh_processing::Adaptive_si
   using halfedge_descriptor = typename boost::graph_traits<PolygonMesh>::halfedge_descriptor;
   using face_descriptor = typename boost::graph_traits<PolygonMesh>::face_descriptor;
   Adaptive_sizing_field(const FT tol, const py::tuple& edge_len_min_max, const py::list& face_range, PolygonMesh& pmesh,
-    const py::dict& np) :
+                        const py::dict& np = py::dict()) :
     CGAL::Polygon_mesh_processing::Adaptive_sizing_field<PolygonMesh>
     (tol, {py::cast<FT>(edge_len_min_max[0]), py::cast<FT>(edge_len_min_max[1])},
     list2vec<face_descriptor>(face_range), pmesh, internal::parse_pmp_np<PolygonMesh>(np)) {};
