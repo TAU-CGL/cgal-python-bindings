@@ -63,6 +63,7 @@
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/Adaptive_sizing_field.hpp"
+#include "CGALPY/Uniform_sizing_field.hpp"
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/Non_manifold_output_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
@@ -4763,6 +4764,9 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Adaptive_sizing_field<Pm>>,
         py::arg("faces"), py::arg("sizing"), py::arg("pmesh"),
         py::arg("np") = py::dict());
+  // m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Uniform_sizing_field<Pm>>,
+  //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
+  //       py::arg("np") = py::dict());
   m.def("random_perturbation", &pmp::random_perturbation<Pm>,
         py::arg("tmesh"), py::arg("perturbation_max_size"),
         py::arg("np") = py::dict());
@@ -5234,7 +5238,7 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   using Asf = pmp::Adaptive_sizing_field<Pm>;
   py::class_<Asf>(m, "Adaptive_sizing_field")
-    .def(py::init<double, py::tuple, py::list, Pm&>())
+    .def(py::init<FT, py::tuple, py::list, Pm&, const py::dict&>())
     .def("at", &Asf::at)
     .def("is_too_long", &Asf::is_too_long)
     .def("is_too_short", &Asf::is_too_short)
@@ -5242,15 +5246,15 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def("register_split_vertex", &Asf::register_split_vertex)
     ;
 
-  // using Usf = PMP::Uniform_sizing_field<Pm>; // Work in progress
-  // py::class_<Usf>(m, "Uniform_sizing_field")
-  //   .def(py::init<double,
-  //   .def("at", &Usf::at)
-  //   .def("is_too_long", &Usf::is_too_long)
-  //   .def("is_too_short", &Usf::is_too_short)
-  //   .def("split_placement", &Usf::split_placement)
-  //   .def("register_split_vertex", &Usf::register_split_vertex)
-  //   ;
+  using Usf = pmp::Uniform_sizing_field<Pm>; // Work in progress
+  py::class_<Usf>(m, "Uniform_sizing_field")
+    .def(py::init<const FT, const Pm&>())
+    .def("at", &Usf::at)
+    // .def("is_too_long", &Usf::is_too_long)
+    // .def("is_too_short", &Usf::is_too_short)
+    .def("split_placement", &Usf::split_placement)
+    .def("register_split_vertex", &Usf::register_split_vertex)
+    ;
 
   using Av = pmp::Autorefinement_visitor;
   py::class_<Av>(m, "Autorefinement_visitor")

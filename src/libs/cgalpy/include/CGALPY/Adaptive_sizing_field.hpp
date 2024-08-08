@@ -3,36 +3,42 @@
 
 #include <nanobind/nanobind.h>
 #include <CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h>
+#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/helpers.hpp"
+#include "CGALPY/pmp_np_parser.hpp"
 
 namespace py = nanobind;
 
-namespace PMP = CGAL::Polygon_mesh_processing;
-
 namespace pmp {
 
-template <typename Pm>
-struct Adaptive_sizing_field : public PMP::Adaptive_sizing_field<Pm> {
-  using my_fd = typename boost::graph_traits<Pm>::face_descriptor;
-private:
-  static auto list2vec(const py::list& lst) {
-    std::vector<my_fd> vec;
-    vec.reserve(py::len(lst));
-    for (const auto& item : lst) {
-      vec.push_back(py::cast<my_fd>(item));
-    }
-    return vec;
-  }
-
-public:
-  Adaptive_sizing_field(double tol, py::tuple edge_min_max, py::list faces, Pm& mesh) :
-    PMP::Adaptive_sizing_field<Pm>(tol,
-                                    std::make_pair(py::cast<double>(edge_min_max[0]), py::cast<double>(edge_min_max[1])),
-                                    list2vec(faces),
-                                    mesh) {};
-
+template <typename PolygonMesh>
+struct Adaptive_sizing_field : public CGAL::Polygon_mesh_processing::Adaptive_sizing_field<PolygonMesh> {
+  using vertex_descriptor = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
+  using halfedge_descriptor = typename boost::graph_traits<PolygonMesh>::halfedge_descriptor;
+  using face_descriptor = typename boost::graph_traits<PolygonMesh>::face_descriptor;
+  Adaptive_sizing_field(const FT tol, const py::tuple& edge_len_min_max, const py::list& face_range, PolygonMesh& pmesh,
+    const py::dict& np) :
+    CGAL::Polygon_mesh_processing::Adaptive_sizing_field<PolygonMesh>
+    (tol, {py::cast<FT>(edge_len_min_max[0]), py::cast<FT>(edge_len_min_max[1])},
+    list2vec<face_descriptor>(face_range), pmesh, internal::parse_pmp_np<PolygonMesh>(np)) {};
+  // py::object is_too_long(const vertex_descriptor va, const vertex_descriptor vb, const PolygonMesh& mesh) {
+  //   auto res = CGAL::Polygon_mesh_processing::Adaptive_sizing_field<PolygonMesh>::is_too_long(va, vb, mesh);
+  //   if (res) {
+  //     return py::cast(res.value());
+  //   } else {
+  //     return py::none();
+  //   }
+  // }
+  // py::object is_too_short(const halfedge_descriptor h, const PolygonMesh& mesh) {
+  //   auto res = CGAL::Polygon_mesh_processing::Adaptive_sizing_field<PolygonMesh>::is_too_short(h, mesh);
+  //   if (res) {
+  //     return py::cast(res.value());
+  //   } else {
+  //     return py::none();
+  //   }
+  // }
 };
 
 } // namespace pmp
 
 #endif // CGALPY_ADAPTIVE_SIZING_FIELD_HPP
-
