@@ -2864,7 +2864,7 @@ auto centroid(const TriangleMesh& tm,
 }
 
 template <typename TriangleMesh>
-auto edge_length(typename boost::graph_traits<TriangleMesh>::edge_descriptor& e,
+auto edge_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& e,
                  const TriangleMesh& tm,
                  const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(tm, np);
@@ -4692,9 +4692,9 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Adaptive_sizing_field<Pm>>,
         py::arg("faces"), py::arg("sizing"), py::arg("pmesh"),
         py::arg("np") = py::dict());
-  // m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Uniform_sizing_field<Pm>>,
-  //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
-  //       py::arg("np") = py::dict());
+  m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Uniform_sizing_field<Pm>>,
+        py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
   m.def("random_perturbation", &pmp::random_perturbation<Pm>,
         py::arg("tmesh"), py::arg("perturbation_max_size"),
         py::arg("np") = py::dict());
@@ -5148,16 +5148,19 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   using Pe = pmp::Polyhedral_envelope<Pm, Kernel>;
   py::class_<Pe>(m, "Polyhedral_envelope")
-    .def(py::init<Pm&, double, const py::dict&>())
-    .def(py::init<const py::list&, Pm&, double, const py::dict&>())
+    .def(py::init<Pm&, double, const py::dict&>(),
+         py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
+    .def(py::init<const py::list&, Pm&, double, const py::dict&>(),
+         py::arg("face_range"), py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
     .def("is_empty", &Pe::is_empty)
-    .def("inside", [](const Pe& i, const Point_3& query) { return i(query); })
-    .def("inside", [](const Pe& i, const Point_3& source, const Point_3& target) { return i(source, target); })
-    .def("inside", [](const Pe& i, const Point_3& t0, const Point_3& t1, const Point_3& t2) { return i(t0, t1, t2); })
-  //   bool CGAL::Polyhedral_envelope< GeomTraits >::operator() 	( 	const TriangleMesh &  	tmesh,
-		// const NamedParameters &  	np = parameters::default_values() 
-	// )
-    .def("inside", [](const Pe& i, const Pm& tmesh, const py::dict& np) { return i(tmesh, internal::parse_pmp_np<Pm>(np)); })
+    .def("inside", [](const Pe& i, const Point_3& query) { return i(query); },
+         py::arg("query"))
+    .def("inside", [](const Pe& i, const Point_3& source, const Point_3& target) { return i(source, target); },
+         py::arg("source"), py::arg("target"))
+    .def("inside", [](const Pe& i, const Point_3& t0, const Point_3& t1, const Point_3& t2) { return i(t0, t1, t2); },
+         py::arg("t0"), py::arg("t1"), py::arg("t2"))
+    .def("inside", [](const Pe& i, const Pm& tmesh, const py::dict& np) { return i(tmesh, internal::parse_pmp_np<Pm>(np)); },
+         py::arg("tmesh"), py::arg("np") = py::dict())
     // TODO: inside triangle range
     ;
 

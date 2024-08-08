@@ -18,7 +18,7 @@ Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
 
-tmesh = Sm.read_polygon_mesh("meshes/blobby.off")
+tmesh = Sm.read_polygon_mesh(CGALPY.data_file_path("meshes/blobby.off"))
 
 eps = sys.argv[a] if len(sys.argv) > a else 0.2
 a += 1
