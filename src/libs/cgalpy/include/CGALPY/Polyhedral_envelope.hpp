@@ -5,6 +5,7 @@
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/pmp_helpers.hpp"
 #include "CGALPY/helpers.hpp"
+#include "CGALPY/internal.hpp"
 #include <CGAL/Polyhedral_envelope.h>
 
 namespace py = nanobind;
@@ -38,6 +39,14 @@ struct Polyhedral_envelope : CGAL::Polyhedral_envelope<GeomTraits> {
       (tmesh, "INTERNAL_MAP0",
        np.contains("face_epsilon_map") ? np["face_epsilon_map"] : py::none(),
        epsilon)))
+  {
+    // the map isn't deleted! and there is no way to delete it
+  }
+
+  // now with list of Point_3 and list of lists of size_t: polygons
+  Polyhedral_envelope(const py::list& points, const py::list& polygons, double epsilon, const py::dict& np = py::dict())// {
+    : CGAL::Polyhedral_envelope<GeomTraits>
+     (list2vec<Point_3>(points), internal::polylist2polyvec_i(polygons), epsilon)
   {
     // the map isn't deleted! and there is no way to delete it
   }

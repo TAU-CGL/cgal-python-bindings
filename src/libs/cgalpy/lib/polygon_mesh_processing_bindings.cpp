@@ -5152,6 +5152,8 @@ void export_polygon_mesh_processing(py::module_& m) {
          py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
     .def(py::init<const py::list&, Pm&, double, const py::dict&>(),
          py::arg("face_range"), py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
+    .def(py::init<const py::list&, const py::list&, double, const py::dict&>(),
+         py::arg("points"), py::arg("polygons"), py::arg("epsilon"), py::arg("np") = py::dict()) // TODO: handle face_epsilon_map
     .def("is_empty", &Pe::is_empty)
     .def("inside", [](const Pe& i, const Point_3& query) { return i(query); },
          py::arg("query"))
