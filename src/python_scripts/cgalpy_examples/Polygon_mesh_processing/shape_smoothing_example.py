@@ -21,7 +21,7 @@ Point_3 = Ker.Point_3
 Pmp = CGALPY.Pmp
 Sm = CGALPY.Sm
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/pig.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/pig.off")
 i += 1
 nb_iterations = int(sys.argv[i]) if len(sys.argv) > i else 1000
 i += 1
@@ -32,7 +32,7 @@ except: raise ValueError("Invalid input.")
 
 vcmap, success = mesh.add_property_map_vertex_bool("v:bool")
 if not success:
-  except: raise ValueError("Failed to add property map.")
+  raise ValueError("Failed to add property map.")
 
 constrained_vertices = 0
 

@@ -107,7 +107,7 @@ def merge_vertices(v_keep, v_rm, mesh):
 
   Sm.remove_vertex(v_rm, mesh)
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off")
 
 try: mesh = Sm.read_polygon_mesh(filename)
 except: raise ValueError("Invalid input.")

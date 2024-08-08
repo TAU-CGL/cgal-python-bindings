@@ -17,7 +17,7 @@ CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/mech-holes-shark.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/mech-holes-shark.off")
 
 mesh = Pol3.read_polygon_mesh(filename)
 

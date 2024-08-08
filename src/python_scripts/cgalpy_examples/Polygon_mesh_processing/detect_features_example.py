@@ -19,7 +19,7 @@ Ker = CGALPY.Ker
 Pmp = CGALPY.Pmp
 Sm = CGALPY.Sm
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/P.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/P.off")
 
 try: mesh = Sm.read_polygon_mesh(filename)
 except: raise ValueError("Invalid input.")

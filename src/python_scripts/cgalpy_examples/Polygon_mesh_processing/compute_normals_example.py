@@ -17,7 +17,7 @@ CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off")
 
 mesh = Sm.read_polygon_mesh(filename)
 

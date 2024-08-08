@@ -62,9 +62,9 @@ Ker = CGALPY.Ker
 Pmp = CGALPY.Pmp
 Pol3 = CGALPY.Pol3
 
-filename1 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off"))
+filename1 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off")
 i += 1
-filename2 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off"))
+filename2 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off")
 
 try: mesh1 = Pol3.read_polygon_mesh(filename1)
 except: raise ValueError("Invalid input 1.")

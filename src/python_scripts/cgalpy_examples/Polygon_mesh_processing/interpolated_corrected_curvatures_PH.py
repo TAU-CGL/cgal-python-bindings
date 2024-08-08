@@ -19,7 +19,7 @@ Ker = CGALPY.Ker
 Pol3 = CGALPY.Pol3
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/sphere.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/sphere.off")
 try: polyhedron = Pol3.read_polygon_mesh(filename)
 except: raise ValueError("Invalid input.")
 

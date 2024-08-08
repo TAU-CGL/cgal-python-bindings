@@ -21,7 +21,7 @@ Pmp = CGALPY.Pmp
 def halfedge2edge(mesh, edges):
   return [Sm.edge(h, mesh) for h in edges]
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/pig.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/pig.off")
 try: mesh = Sm.read_polygon_mesh(filename)
 except: raise ValueError("Invalid input.")
 

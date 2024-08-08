@@ -21,7 +21,7 @@ Pmp = CGALPY.Pmp
 
 MAX_UINT_64 = 2**64 - 1
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/fandisk.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/fandisk.off")
 
 sm = Sm.read_polygon_mesh(filename)
 

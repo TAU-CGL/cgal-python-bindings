@@ -19,7 +19,7 @@ Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off"))
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off")
 i += 1
 max_size = sys.argv[i] if len(sys.argv) < i else 0.02
 

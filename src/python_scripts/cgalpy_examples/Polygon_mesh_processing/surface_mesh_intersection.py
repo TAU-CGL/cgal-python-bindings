@@ -20,15 +20,15 @@ Point_3 = Ker.Point_3
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename1 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off"))
+filename1 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off")
 i += 1
-filename2 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off"))
+filename2 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off")
 
 try: mesh1 = Sm.read_polygon_mesh(filename1)
-except: except: raise ValueError("Invalid input 1.")
+except: raise ValueError("Invalid input 1.")
 
 try: mesh2 = Sm.read_polygon_mesh(filename2)
-except: except: raise ValueError("Invalid input 2.")
+excep: raise ValueError("Invalid input 2.")
 
 polylines = Pmp.surface_intersection(mesh1, mesh2)
 

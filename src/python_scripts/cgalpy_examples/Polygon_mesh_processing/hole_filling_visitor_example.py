@@ -101,7 +101,7 @@ class Progress():
   def end_cubic_phase(self):
     print("End cubic phase")
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/mech-holes-shark.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/mech-holes-shark.off")
 i += 1
 max_hole_diam = float(sys.argv[i]) if len(sys.argv) > i else -1.0
 i += 1

@@ -118,12 +118,12 @@ def extract_k_ring(v, k):
     current_index += 1
   #### WORK IN PROGRESS
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off')
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off")
 try: poly = Pol3.read_polygon_mesh(filename)
 except: raise ValueError("Invalid input.")
 
 if not Pol3.is_triangle_mesh(poly):
-  except: raise ValueError("Invalid input.")
+  raise ValueError("Invalid input.")
 
 new_facets, new_vertices = Pmp.refine(poly, Pol3.faces(poly), {"density_control_factor": 2.})
 

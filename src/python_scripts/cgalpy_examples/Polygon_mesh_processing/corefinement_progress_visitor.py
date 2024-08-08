@@ -18,7 +18,7 @@ if lib == 'CGALPY':
 CGALPY = importlib.import_module(lib)
 Pmp = CGALPY.Pmp
 
-filename1 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off')
+filename1 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off")
 i += 1
 filename2 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off')
 
