@@ -55,10 +55,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
   export_approximate_kernel(m);
 
-#ifdef CGALPY_DATA_DIR
-  m.def("data_file_path", [](const std::string& file_name) {
-    return std::string(CGALPY_DATA_DIR) + "/" + file_name;
-  });
+#ifndef CGAL_DATA_DIR
+  #warning "CGAL_DATA_DIR is not defined. The data_file_path function will not be available."
+#endif
+#ifdef CGAL_DATA_DIR
+  m.def("data_file_path", &CGAL::data_file_path);
 #endif
 
 #ifdef CGALPY_KERNEL_BINDINGS

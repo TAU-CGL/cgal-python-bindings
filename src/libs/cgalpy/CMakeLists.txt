@@ -16,8 +16,8 @@ if (CGAL_USE_GMP)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gmp.cpp)
 endif ()
 
-set(CGALPY_DATA_DIR "${CGAL_DIR}/Data/data")
-add_compile_definitions(CGALPY_DATA_DIR="${CGALPY_DATA_DIR}")
+# set(CGALPY_DATA_DIR "${CGAL_DIR}/Data/data")
+# add_compile_definitions(CGALPY_DATA_DIR="${CGALPY_DATA_DIR}")
 
 #############
 # Add modules
@@ -458,6 +458,7 @@ if (NOT SKBUILD)
 
     target_link_libraries(CGALPY PRIVATE
       CGAL::CGAL
+      CGAL::Data
       ${Boost_LIBRARIES}
       ${PYTHON_LIBRARIES})
 
