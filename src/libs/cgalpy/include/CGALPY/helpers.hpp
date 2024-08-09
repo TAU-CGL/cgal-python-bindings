@@ -23,7 +23,14 @@ std::vector<T> list2vec(const py::list& list) {
   std::vector<T> retv;
   retv.reserve(py::len(list));
   for (const auto& item : list) {
-    retv.push_back(py::cast<T>(item));
+    T i;
+    try {
+      i = py::cast<T>(item);
+    }
+    catch(const py::cast_error& e) {
+      throw std::runtime_error("Failed to cast list item to desired type");
+    }
+    retv.push_back(i);
   }
   return retv;
 }
