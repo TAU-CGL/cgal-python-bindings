@@ -19,10 +19,12 @@ Pmp = CGALPY.Pmp
 
 filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off")
 mesh = Pol3.read_polygon_mesh(filename)
-face_normal, vertex_normal = Pmp.compute_normals(mesh) # normals = ((face_handle, Vector), (vertex_handle, Vector))
 
 print("Face normals :")
-for n in face_normal[1]: print(n)
+for f in Pol3.faces(mesh):
+    print(Pmp.compute_face_normal(f, mesh))
 
 print("Vertex normals :")
-for n in vertex_normal[1]: print(n)
+for f in Pol3.vertices(mesh):
+    print(Pmp.compute_vertex_normal(f, mesh))
+

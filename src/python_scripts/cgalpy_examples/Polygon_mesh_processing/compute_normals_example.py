@@ -21,12 +21,16 @@ filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/e
 
 mesh = Sm.read_polygon_mesh(filename)
 
-face_normal, vertex_normal = Pmp.compute_normals(mesh) # normals = ((face_handle, Vector), (vertex_handle, Vector))
+vertex_normal_map = mesh.add_property_map_vertex_vector("vn")[0]
+face_normal_map = mesh.add_property_map_face_vector("fn")[0]
+
+Pmp.compute_normals(mesh, vertex_normal_map, face_normal_map)
 
 print("Vertex normals :")
-for n in vertex_normal[1]:
-  print(n)
+for v in mesh.vertices():
+    print(vertex_normal_map[v])
 
 print("Face normals :")
-for n in face_normal[1]:
-  print(n)
+for f in mesh.faces():
+    print(face_normal_map[f])
+
