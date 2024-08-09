@@ -265,6 +265,7 @@ if (CGALPY_POLYGON_2_BINDINGS)
 endif ()
 # Polygon mesh processing
 if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/connected_components.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_mesh_processing_bindings.cpp)
     list(APPEND CGALPY_MODULES Pmp)
     set(CGALPY_Pmp_FILTERS [=[{}]=])

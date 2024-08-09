@@ -6,9 +6,6 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#include <CGAL/Kernel/Dimension_utils.h>
-#include <CGAL/Polygon_mesh_processing/measure.h>
-#include <CGAL/boost/graph/Face_filtered_graph.h>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <stdexcept>
@@ -21,6 +18,9 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/function.h>
 
+#include <CGAL/Kernel/Dimension_utils.h>
+#include <CGAL/Polygon_mesh_processing/measure.h>
+#include <CGAL/boost/graph/Face_filtered_graph.h>
 #include <CGAL/Dynamic_property_map.h>
 #include <CGAL/Mesh_constant_domain_field_3.h>
 #include <CGAL/Polygon_mesh_processing/angle_and_area_smoothing.h>
@@ -74,6 +74,7 @@
 #include "CGALPY/internal.hpp"
 #include "CGALPY/Polyhedral_envelope.hpp"
 #include "CGALPY/pmp_helpers.hpp"
+#include "CGALPY/connected_components.h"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -342,27 +343,6 @@ void corefine(PolygonMesh& tm1, PolygonMesh& tm2,
 #endif // CGALPY_PMP_POLYGONAL_MESH == 1
 }
 
-//
-template <typename PolygonMesh>
-py::list connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor
-                      seed_face,
-                    PolygonMesh& pm,
-                    const py::dict& np = py::dict()) {
-  using Pm = PolygonMesh;
-  using Gt = boost::graph_traits<Pm>;
-  using Fd = typename Gt::face_descriptor;
-
-  py::list lst;
-  auto op = [&] (Fd face_descriptor) mutable
-            { lst.append(py::cast(face_descriptor)); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
-
-  auto eicm = get_edge_prop_map<Pm, bool>(pm, "INTERNAL_MAP0",
-    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
-
-  PMP::connected_component(seed_face, pm, it, internal::parse_pmp_np<PolygonMesh>(np));
-  return lst;
-}
 
 //
 template <typename PolygonMesh, typename FaceComponentMap>
