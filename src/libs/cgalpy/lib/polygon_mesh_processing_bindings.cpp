@@ -2183,12 +2183,6 @@ auto smooth_shape(PolygonMesh& pmesh,
                     .vertex_point_map(vpm));
 }
 
-// template <typename PolygonMesh>
-// auto tangential_relaxation(PolygonMesh& tm,
-//                                   const py::dict& np = py::dict()) {
-//   PMP::tangential_relaxation(tm, internal::parse_pmp_np<PolygonMesh>(np));
-// }
-
 template <typename PolygonMesh>
 double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh& tm2,
                                       const py::dict& np1 = py::dict(),
@@ -2457,7 +2451,14 @@ auto repair_polygon_soup(const py::list& points,
   PolygonRange polyvec;
   polyvec.reserve(py::len(polygons));
   for (const auto& item : polygons) {
-    polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
+    py::list i;
+    try {
+      i = py::cast<py::list>(item);
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Polygon type not recognized");
+    }
+    polyvec.push_back(list2vec<size_t>(i));
   }
   PMP::repair_polygon_soup(ptvec, polyvec, internal::parse_named_parameters(np));
   py::list retpts, retpolys;
@@ -2475,7 +2476,12 @@ auto triangulate_polygons(const py::list& points,
   PolygonRange polyvec;
   polyvec.reserve(py::len(polygons));
   for (const auto& item : polygons) {
-    polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
+    try {
+      polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Polygon type not recognized");
+    }
   }
   PMP::triangulate_polygons(ptvec, polyvec, internal::parse_named_parameters(np));
   py::list retpts, retpolys;
@@ -2493,7 +2499,13 @@ auto autorefine_triangle_soup(const py::list& points,
   PolygonRange polyvec;
   polyvec.reserve(py::len(polygons));
   for (const auto& item : polygons) {
-    polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
+    // polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
+    try {
+      polyvec.push_back(list2vec<size_t>(py::cast<py::list>(item)));
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Polygon type not recognized");
+    }
   }
 
   // PMP::autorefine_triangle_soup(ptvec, polyvec, internal::parse_named_parameters(np));
@@ -2567,8 +2579,13 @@ auto stitch_borders_he(PolygonMesh& pmesh,
   std::vector<std::pair<Hd, Hd>> hedge_pairs;
   for (const auto& item : hedge_pairs_to_stitch) {
     std::pair<Hd, Hd> pair;
-    pair.first = py::cast<Hd>(item[0]);
-    pair.second = py::cast<Hd>(item[1]);
+    try {
+      pair.first = py::cast<Hd>(item[0]);
+      pair.second = py::cast<Hd>(item[1]);
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Failed to cast to a halfedge descriptor");
+    }
   }
   // auto vpm = get_vertex_point_map(pmesh, np);
   return PMP::stitch_borders(pmesh, hedge_pairs, internal::parse_pmp_np<PolygonMesh>(np)
@@ -2637,7 +2654,12 @@ auto remove_almost_degenerate_faces_r(const py::list& face_range,
     return true;
   };
   if (np.contains("filter")) {
-    filter = py::cast<std::function<bool(Point_3, Point_3, Point_3)>>(np["filter"]);
+    try {
+      filter = py::cast<std::function<bool(Point_3, Point_3, Point_3)>>(np["filter"]);
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Failed to cast filter to std::function<bool(Point_3, Point_3, Point_3)>");
+    }
   }
   struct Filter {
     std::function<bool(Point_3, Point_3, Point_3)> filter;
@@ -2671,7 +2693,12 @@ auto remove_almost_degenerate_faces(TriangleMesh& tmesh,
     return true;
   };
   if (np.contains("filter")) {
-    filter = py::cast<std::function<bool(Point_3, Point_3, Point_3)>>(np["filter"]);
+    try {
+      filter = py::cast<std::function<bool(Point_3, Point_3, Point_3)>>(np["filter"]);
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Failed to cast filter to std::function<bool(Point_3, Point_3, Point_3)>");
+    }
   }
   struct Filter {
     std::function<bool(Point_3, Point_3, Point_3)> filter;
@@ -2770,7 +2797,12 @@ auto sample_triangle_soup(const py::list& points,
   for (const auto& item : triangles) {
     std::array<std::size_t, 3> tri;
     for (std::size_t i = 0; i < 3; ++i) {
-      tri[i] = py::cast<std::size_t>(item[i]);
+      try {
+        tri[i] = py::cast<std::size_t>(item[i]);
+      }
+      catch (const py::cast_error&) {
+        throw std::runtime_error("Failed to cast to a size_t");
+      }
     }
   }
   PointRange pts;
@@ -3340,7 +3372,14 @@ auto split_long_edges(const py::list& edge_range,
     np.contains("edge_index_copy_map") ? np["edge_index_copy_map"] : py::none());
   // turn edge_range to a vector
   std::vector<Ed> edge_vec;
-  for (const auto& ed : edge_range) edge_vec.push_back(py::cast<Ed>(ed));
+  for (const auto& ed : edge_range) {
+    try {
+      edge_vec.push_back(py::cast<Ed>(ed));
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Failed to cast to an edge descriptor");
+    }
+  }
   return PMP::split_long_edges(edge_vec,
                         max_length, pmesh, internal::parse_pmp_np<PolygonMesh>(np)
                         // .vertex_point_map(vpm)
@@ -3361,7 +3400,12 @@ std::vector<Point_3> ptlist2ptvec(const py::list& ptlist) {
   std::vector<Point_3> ptvec;
   ptvec.reserve(py::len(ptlist));
   for (auto pt : ptlist) {
-    ptvec.push_back(py::cast<Point_3>(pt));
+    try {
+      ptvec.push_back(py::cast<Point_3>(pt));
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Failed to cast to a Point_3");
+    }
   }
   return ptvec;
 }
@@ -3373,7 +3417,14 @@ auto polylist2polyvec(const py::list& polylist) {
     std::vector<size_t> poly_ids;
     // poyl_ids.reserve(py::len(poly));
     for (auto polyid : poly) {
-      size_t id = py::cast<size_t>(polyid);
+      std::size_t id;
+      try {
+        std::size_t id = py::cast<size_t>(polyid);
+        poly_ids.push_back(id);
+      }
+      catch (const py::cast_error&) {
+        throw std::runtime_error("Failed to cast to a size_t");
+      }
       poly_ids.push_back(id);
     }
     polyvec.push_back(poly_ids);
@@ -3601,7 +3652,13 @@ auto region_growing_of_planes_on_faces(PolygonMesh& pmesh,
   std::size_t num_regions;
 
   if (np.contains("region_primitive_map")) {
-    auto rpm = py::cast<boost::vector_property_map<Vector_3>>(np["region_primitive_map"]);
+    boost::vector_property_map<Vector_3> rpm;
+    try {
+      rpm = py::cast<boost::vector_property_map<Vector_3>>(np["region_primitive_map"]);
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Failed to cast to a vector property map");
+    }
     num_regions = PMP::region_growing_of_planes_on_faces(pmesh, region_map,
                                                          internal::parse_pmp_np<PolygonMesh>(np)
                                                          .region_primitive_map(rpm));
@@ -3657,7 +3714,14 @@ auto remesh_almost_planar_patches(PolygonMesh tm_in,
 
   bool retv;
   if (np_in.contains("patch_normal_map")) {
-    auto rpm = py::cast<boost::vector_property_map<Vector_3>>(np_in["patch_normal_map"]);
+    // auto rpm = py::cast<boost::vector_property_map<Vector_3>>(np_in["patch_normal_map"]);
+    boost::vector_property_map<Vector_3> rpm;
+    try {
+      rpm = py::cast<boost::vector_property_map<Vector_3>>(np_in["patch_normal_map"]);
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Failed to cast to a vector property map");
+    }
     retv = PMP::remesh_almost_planar_patches(tm_in, pm_out, nb_patches, nb_corners, face_patch_map, vertex_corner_map, ecm,
                                              internal::parse_pmp_np<PolygonMesh>(np_in)
                                              .patch_normal_map(rpm),
@@ -3739,10 +3803,15 @@ auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
     np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
   // auto vpm = get_vertex_point_map(tmesh, np);
 
-
-  auto mfs = np.contains("mesh_facet_size") ? py::cast<FT>(np["mesh_facet_size"]) : 0;
-  auto mfa = np.contains("mesh_facet_angle") ? py::cast<FT>(np["mesh_facet_angle"]) : 0;
-  auto mfd = np.contains("mesh_facet_distance") ? py::cast<FT>(np["mesh_facet_distance"]) : 0;
+  FT mfs, mfa, mfd;
+  try {
+    mfs = np.contains("mesh_facet_size") ? py::cast<FT>(np["mesh_facet_size"]) : 0;
+    mfa = np.contains("mesh_facet_angle") ? py::cast<FT>(np["mesh_facet_angle"]) : 0;
+    mfd = np.contains("mesh_facet_distance") ? py::cast<FT>(np["mesh_facet_distance"]) : 0;
+  }
+  catch (const py::cast_error& e) {
+    throw std::runtime_error("Failed to cast mesh facet size, angle, or distance");
+  }
   PolygonMesh retv;
 
   if (np.contains("mesh_edge_size")) {
@@ -3926,7 +3995,13 @@ auto tuple2face_loc(const py::tuple& l) {
   }
   Barycentric_coordinates bary;
   for (int i = 0; i < 3; ++i) {
-    bary[i] = py::cast<FT>(bc[i]);
+    try {
+      bary[i] = py::cast<FT>(bc[i]);
+    }
+    catch (const py::cast_error& e) {
+      throw std::runtime_error("Failed to cast to a FT");
+    
+    }
   }
   return std::make_pair(f, bary);
 }
@@ -3973,7 +4048,12 @@ auto is_in_face_bar(const py::tuple& bar,
   if (len == 3) {
     std::array<FT, 3> bary;
     for (int i = 0; i < 3; ++i) {
-      bary[i] = py::cast<FT>(bar[i]);
+      try {
+        bary[i] = py::cast<FT>(bar[i]);
+      }
+      catch (const py::cast_error& e) {
+        throw std::runtime_error("Failed to cast to a FT");
+      }
     }
     return PMP::is_in_face(bary, tm);
   }
