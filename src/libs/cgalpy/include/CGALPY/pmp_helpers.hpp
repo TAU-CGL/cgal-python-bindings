@@ -19,7 +19,7 @@ auto get_vertex_point_map(const PolygonMesh& pm, const py::dict& np = py::dict()
   // improve cast error handling
   if(np.contains("vertex_point_map")) {
     try {
-      auto r =py::cast<vpmap>(np["vertex_point_map"]);
+      return py::cast<vpmap>(np["vertex_point_map"]);
     }
     catch(py::cast_error& e) {
       throw std::runtime_error("Failed to cast vertex_point_map to desired type");
