@@ -59,6 +59,7 @@
 #include <CGAL/Polygon_mesh_processing/surface_Delaunay_remeshing.h>
 
 #include "CGALPY/helpers.hpp"
+#include "CGALPY/Custom_sizing_field.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
@@ -235,7 +236,12 @@ auto triangle_soup_self_intersections(const py::list& points,
   for (const auto& tri : triangles) {
     std::array<std::size_t, 3> triarr;
     for (std::size_t i = 0; i < 3; ++i) {
-      triarr[i] = py::cast<std::size_t>(tri[i]);
+      try {
+        triarr[i] = py::cast<std::size_t>(tri[i]);
+      }
+      catch(py::cast_error& e) {
+        throw std::runtime_error("Triangle indices must be integers");
+      }
     }
     trivec.push_back(triarr);
   }
@@ -859,7 +865,12 @@ py::tuple corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh&
 
   std::array<py::dict, 4> np_out_arr;
   for (std::size_t i = 0; i < np_out.size(); ++i) {
-    np_out_arr[i] = py::cast<py::dict>(np_out[i]);
+    try {
+      np_out_arr[i] = py::cast<py::dict>(np_out[i]);
+    }
+    catch(py::cast_error& e) {
+      const std::string msg = "np_out[" + std::to_string(i) + "] is not a dict";
+    }
   }
 
   // auto vpm_out1 = get_vertex_point_map(pm_out1, np_out_arr[0]);
@@ -1990,9 +2001,6 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   /////
 
   py::list facets, vertices;
-  bool faces_flag = np.contains("face_output_iterator") && py::cast<bool>(np["face_output_iterator"]);
-  bool vertices_flag = np.contains("vertex_output_iterator") && py::cast<bool>(np["vertex_output_iterator"]);
-
 
   std::vector<Face_identifier> fids;
   std::vector<Vertex_identifier> vids;
@@ -4530,6 +4538,58 @@ void set_end_fair_phase(HFDefault_visitor& v,
   v.set_end_fair_phase(f);
 }
 
+
+// Custom_sizing_field
+
+  // std::function<FT(const vertex_descriptor, const PolygonMesh&)> at_;
+  // std::function<std::optional<FT>(const vertex_descriptor, const vertex_descriptor, const PolygonMesh&)> is_too_long_;
+  // std::function<std::optional<FT>(const halfedge_descriptor, const PolygonMesh&)> is_too_short_;
+  // std::function<Point_3(const halfedge_descriptor, const PolygonMesh&)> split_placement_;
+  // std::function<void(const vertex_descriptor, const PolygonMesh&)> register_split_vertex_;
+// using Csf = pmp::Custom_sizing_field<Pm>;
+// void set_at(Csf& f,
+//             const std::function<double(Vd, const Pm&)>& fn) {
+//   f.set_at(fn);
+// }
+
+
+template <typename ReturnType, typename... Args>
+std::function<std::optional<ReturnType>(Args...)> convert_to_optional(std::function<py::object(Args...)> f) {
+    return [f](Args... args) -> std::optional<ReturnType> {
+        py::object result = f(std::forward<Args>(args)...);
+        if (result.is_none()) {
+            return std::nullopt;
+        } else {
+            ReturnType rc;
+            try {
+              rc = py::cast<ReturnType>(result);
+            }
+            catch(py::cast_error& e) {
+              throw std::runtime_error("Failed to cast to ReturnType");
+            }
+            return std::optional<ReturnType>(rc);
+        }
+    };
+}
+
+// void set_is_too_long(Csf& f,
+//                      const std::function<py::object(Vd, Vd, const Pm&)>& fn) {
+//     f.set_is_too_long(convert_to_optional<double, Vd, Vd, const Pm&>(fn));
+// }
+//
+// void set_is_too_short(Csf& f,
+//                       const std::function<std::optional<double>(Hd, const Pm&)>& fn) {
+//     f.set_is_too_short(fn);
+// }
+// void set_split_placement(Csf& f,
+//                          const std::function<Point_3(Hd, const Pm&)>& fn) {
+//   f.set_split_placement(fn);
+// }
+// void set_register_split_vertex(Csf& f,
+//                                const std::function<void(Vd, const Pm&)>& fn) {
+//   f.set_register_split_vertex(fn);
+// }
+
 } // namespace pmp
 
 // Export Polygon_mesh_processing
@@ -4602,9 +4662,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 #endif // 0
 
   // Connected Components
-  m.def("connected_component", &pmp::connected_component<Pm>,
-        py::arg("seed_face"), py::arg("pm"),
-        py::arg("np") = py::dict());
+  // m.def("connected_component", &pmp::connected_component<Pm>,
+  //       py::arg("seed_face"), py::arg("pm"),
+  //       py::arg("np") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>::type>,
         py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::uint32_t>>::type>,
@@ -4675,6 +4735,9 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Uniform_sizing_field<Pm>>,
         py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
         py::arg("np") = py::dict());
+  // m.def("isotropic_remeshing", &pmp::isotropic_remeshing_sf<Pm, pmp::Custom_sizing_field<Pm>>,
+  //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
+  //       py::arg("np") = py::dict());
   m.def("random_perturbation", &pmp::random_perturbation<Pm>,
         py::arg("tmesh"), py::arg("perturbation_max_size"),
         py::arg("np") = py::dict());
@@ -5083,7 +5146,6 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("set_end_fair_phase", &pmp::set_end_fair_phase);
 
 
-
   // Corefine_visitor
   m.def("set_before_subface_creations", &pmp::set_before_subface_creations_fn);
   m.def("set_after_subface_creations", &pmp::set_after_subface_creations_fn);
@@ -5126,6 +5188,16 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("set_in_place_operation", &pmp::set_in_place_operation_fn);
   m.def("set_in_place_operations", &pmp::set_in_place_operations_fn);
 
+
+  // Custom sizing field
+  // m.def("set_at", &pmp::set_at);
+  // m.def("set_is_too_long", &pmp::set_is_too_long);
+  // m.def("set_is_too_short", &pmp::set_is_too_short);
+  // m.def("set_split_placement", &pmp::set_split_placement);
+  // m.def("set_register_split_vertex", &pmp::set_register_split_vertex);
+
+
+
   using Pe = pmp::Polyhedral_envelope<Pm, Kernel>;
   py::class_<Pe>(m, "Polyhedral_envelope")
     .def(py::init<Pm&, double, const py::dict&>(),
@@ -5153,10 +5225,20 @@ void export_polygon_mesh_processing(py::module_& m) {
       if (l.size() != 4) {
         throw std::invalid_argument("List must have 4 elements");
       }
-      instance.min_curvature = py::cast<double>(l[0]);
-      instance.max_curvature = py::cast<double>(l[1]);
-      instance.min_direction = py::cast<Kernel::Vector_3>(l[2]);
-      instance.max_direction = py::cast<Kernel::Vector_3>(l[3]);
+      try {
+        instance.min_curvature = py::cast<double>(l[0]);
+        instance.max_curvature = py::cast<double>(l[1]);
+      }
+      catch(py::cast_error& e) {
+        throw std::invalid_argument("First two elements must be of type float");
+      }
+      try {
+        instance.min_direction = py::cast<Kernel::Vector_3>(l[2]);
+        instance.max_direction = py::cast<Kernel::Vector_3>(l[3]);
+      }
+      catch(py::cast_error& e) {
+        throw std::invalid_argument("Last two elements must be of type Vector_3");
+      }
     })
     .def_ro("min_curvature", &Pcad::min_curvature)
     .def_ro("max_curvature", &Pcad::max_curvature)
@@ -5168,8 +5250,8 @@ void export_polygon_mesh_processing(py::module_& m) {
   py::class_<Asf>(m, "Adaptive_sizing_field")
     .def(py::init<FT, py::tuple, py::list, Pm&, const py::dict&>())
     .def("at", &Asf::at)
-    .def("is_too_long", &Asf::is_too_long)
-    .def("is_too_short", &Asf::is_too_short)
+    // .def("is_too_long", &Asf::is_too_long)
+    // .def("is_too_short", &Asf::is_too_short)
     .def("split_placement", &Asf::split_placement)
     .def("register_split_vertex", &Asf::register_split_vertex)
     ;
@@ -5183,6 +5265,11 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def("split_placement", &Usf::split_placement)
     .def("register_split_vertex", &Usf::register_split_vertex)
     ;
+
+  // using Csf = pmp::Custom_sizing_field<Pm>;
+  // py::class_<Csf>(m, "Custom_sizing_field")
+  //   .def(py::init<>())
+  //   ;
 
   using Av = pmp::Autorefinement_visitor;
   py::class_<Av>(m, "Autorefinement_visitor")

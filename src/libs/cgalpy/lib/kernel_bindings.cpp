@@ -463,6 +463,13 @@ void export_kernel_module(py::module_& m) {
   using Mp_fnc = Pnt_2(*)(const Pnt_2&, const Pnt_2&);
   m.def("midpoint", static_cast<Mp_fnc>(&CGAL::midpoint<Kernel>));
 
+  using Mp3_fnc = Pnt_3(*)(const Pnt_3&, const Pnt_3&);
+  m.def("midpoint", static_cast<Mp3_fnc>(&CGAL::midpoint<Kernel>));
+
+  // squared_distance, temporary!
+  using Md_fnc1 = FT(*)(const Pnt_3&, const Pnt_3&);
+  m.def("squared_distance", static_cast<Md_fnc1>(&CGAL::squared_distance<Kernel>));
+
   using Minv_fnc = Pnt_2(*)(const Iso_rectangle_2&);
   m.def("min_vertex", static_cast<Minv_fnc>(&CGAL::min_vertex<Kernel>));
 
