@@ -270,6 +270,12 @@ if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
     list(APPEND CGALPY_MODULES Pmp)
     set(CGALPY_Pmp_FILTERS [=[{}]=])
 endif ()
+# Triangulated Surface Mesh Simplification
+if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_simplification_bindings.cpp)
+    list(APPEND CGALPY_MODULES Sms)
+    set(CGALPY_Sms_FILTERS [=[{}]=])
+endif ()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
@@ -432,6 +438,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     # Polygon mesh processing
     if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
         get_polygon_mesh_processing_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Triangulated Surface Mesh Simplification
+  if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
+        get_triangulated_surface_mesh_simplification_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
     # 2D Visibility
