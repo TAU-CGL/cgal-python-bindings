@@ -150,5 +150,41 @@ auto get_face_prop_map(PolygonMesh& pm, const std::string& map_name, const py::o
   }
 }
 #endif // CGALPY_PMP_POLYGONAL_MESH == 0
+#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
+template <typename PolygonMesh, typename F>
+auto get_halfedge_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none(), const F& default_value = F()) {
+  using K = typename boost::graph_traits<PolygonMesh>::halfedge_descriptor;
+  using map_type = typename PolygonMesh::template Property_map<K, F>;
+  if (dict_key.is_none()) {
+    return pm.template add_property_map<K, F>(map_name, default_value).first;
+  }
+  else {
+    try {
+      return py::cast<map_type>(dict_key);
+    }
+    catch(py::cast_error& e) {
+      throw std::runtime_error("Failed to cast halfedge property map to desired type");
+    }
+  }
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+#if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
+template <typename PolygonMesh, typename F>
+auto get_halfedge_prop_map(PolygonMesh& pm, const std::string& map_name, const py::object& dict_key = py::none(), const F& default_value = F()) {
+  using dynamic_prop = typename CGAL::dynamic_halfedge_property_t<F>;
+  using map_type = typename boost::property_map<PolygonMesh, dynamic_prop>::type;
+  if (dict_key.is_none()) {
+    return get(dynamic_prop(), pm);
+  }
+  else {
+    try {
+      return py::cast<map_type>(dict_key);
+    }
+    catch(py::cast_error& e) {
+      throw std::runtime_error("Failed to cast halfedge property map to desired type");
+    }
+  }
+}
+#endif // CGALPY_PMP_POLYGONAL_MESH == 0
 
 #endif // CGALPY_PMP_HELPERS_HPP

@@ -9,6 +9,7 @@
 #ifndef CGALPY_POLYHEDRON_3_CONFIG_HPP
 #define CGALPY_POLYHEDRON_3_CONFIG_HPP
 
+#include "CGALPY/config.hpp"
 #include "CGALPY/Hds_vertex_with_data.hpp"
 #include "CGALPY/Hds_halfedge_with_data.hpp"
 #include "CGALPY/Hds_face_with_data.hpp"
