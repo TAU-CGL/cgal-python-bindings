@@ -3,11 +3,11 @@
 #include <CGAL/Surface_mesh_simplification/edge_collapse.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_count_ratio_stop_predicate.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_count_stop_predicate.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_cost.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_stop_predicate.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_cost.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_stop_predicate.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_ratio_stop_predicate.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_stop_predicate.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_ratio_stop_predicate.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_stop_predicate.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_policies.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h>
@@ -120,13 +120,36 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   //   std::size_t m_edge_count_threshold;
   // };
 
+  using edges_size_type = boost::graph_traits<Tm>::edges_size_type;
+
   using Ecsp = SMS::Edge_count_stop_predicate<Tm>;
   py::class_<Ecsp>(m, "Edge_count_stop_predicate")
-    .def(py::init<std::size_t>())
+    .def(py::init<edges_size_type>(), py::arg("threshold"));
+    ;
+
+  using Ecrsp = SMS::Edge_count_ratio_stop_predicate<Tm>;
+  py::class_<Ecrsp>(m, "Edge_count_ratio_stop_predicate")
+    .def(py::init<double>(), py::arg("ratio"));
+    ;
+
+  using Fcsp = SMS::Face_count_stop_predicate<Tm>;
+  py::class_<Fcsp>(m, "Face_count_stop_predicate")
+    .def(py::init<edges_size_type>(), py::arg("threshold"));
+    ;
+
+  using Fcrsp = SMS::Face_count_ratio_stop_predicate<Tm>;
+  py::class_<Fcrsp>(m, "Face_count_ratio_stop_predicate")
+    .def(py::init<double, const Tm&>(), py::arg("ratio"), py::arg("tmesh"));
     ;
 
 
   m.def("edge_collapse", &sms::edge_collapse<Tm, Ecsp>,
+    py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
+  m.def("edge_collapse", &sms::edge_collapse<Tm, Ecrsp>,
+    py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
+  m.def("edge_collapse", &sms::edge_collapse<Tm, Fcsp>,
+    py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
+  m.def("edge_collapse", &sms::edge_collapse<Tm, Fcrsp>,
     py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
 }
 

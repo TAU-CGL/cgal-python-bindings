@@ -72,7 +72,8 @@ for file in "${@:2}"; do
     continue
   fi
   cpp_full_path=$(realpath $cpp_file)
-  if ! res=$(g++ -lgmp -lmpfr -lboost_thread -lboost_system -I $cgal_path/include -o $raw_name $cpp_full_path); then
+  # O3 to compare with optimized C++
+  if ! res=$(g++ -O3 -lgmp -lmpfr -lboost_thread -lboost_system -I $cgal_path/include -o $raw_name $cpp_full_path); then
     msg="Error compiling $cpp_file"
     echo ""
     echo $msg
