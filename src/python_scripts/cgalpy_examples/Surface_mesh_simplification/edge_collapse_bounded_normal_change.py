@@ -127,6 +127,6 @@ r = Sms.edge_collapse(surface_mesh, stop,
                        "get_placement": Sms.LindstromTurk_placement()
                       })
 print(f"{(time.perf_counter_ns() - timer) / 1e9} sec")
-Sm.write_polygon_mesh(sys.argv[i] if len(sys.argv) > i else "out.off", surface_mesh, {"stream_precision": 17})
+Sm.write_polygon_mesh(sys.argv[i] if len(sys.argv) > i else "out_py.off", surface_mesh, {"stream_precision": 17})
 i += 1
 
