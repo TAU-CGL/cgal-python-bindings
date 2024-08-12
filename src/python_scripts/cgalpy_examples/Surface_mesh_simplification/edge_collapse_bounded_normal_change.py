@@ -122,7 +122,7 @@ timer = time.perf_counter_ns()
 print(f"Collapsing edges of mesh: {filename}, aiming for {stop_n} final edges...")
 filter = Sms.Bounded_normal_change_filter()
 r = Sms.edge_collapse(surface_mesh, stop,
-                      {"cost": Sms.LindstromTurk_cost(),
+                      {"get_cost": Sms.LindstromTurk_cost(),
                        "filter": filter,
                        "get_placement": Sms.LindstromTurk_placement()
                       })

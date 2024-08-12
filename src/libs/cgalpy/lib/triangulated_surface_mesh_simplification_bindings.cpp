@@ -46,7 +46,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
   bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
   bool vim = np.contains("vertex_index_map");
   bool place = np.contains("placement");
-  bool cost = np.contains("cost");
+  bool cost = np.contains("get_cost");
   auto filter = np.contains("filter");
   int retv;
   if (vim) {
@@ -61,7 +61,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .vertex_index_map(vimap)
                                   .get_placement(py::cast<PlacementType>(np["placement"]))
-                                  .get_cost(py::cast<CostType>(np["cost"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
                                   );
       }
@@ -75,7 +75,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .vertex_index_map(vimap)
                                   .get_placement(py::cast<PlacementType>(np["placement"]))
-                                  .get_cost(py::cast<CostType>(np["cost"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
                                   );
       }
@@ -90,7 +90,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                 // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                 .vertex_index_map(vimap)
                                 .get_placement(py::cast<PlacementType>(np["placement"]))
-                                .get_cost(py::cast<CostType>(np["cost"]))
+                                .get_cost(py::cast<CostType>(np["get_cost"]))
                                 );
     }
   }
@@ -103,7 +103,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   .edge_is_constrained_map(eicm)
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .get_placement(py::cast<PlacementType>(np["placement"]))
-                                  .get_cost(py::cast<CostType>(np["cost"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
                                   );
       }
@@ -116,7 +116,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   .edge_is_constrained_map(eicm)
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .get_placement(py::cast<PlacementType>(np["placement"]))
-                                  .get_cost(py::cast<CostType>(np["cost"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
                                   );
       }
@@ -130,7 +130,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                 .edge_is_constrained_map(eicm)
                                 // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                 .get_placement(py::cast<PlacementType>(np["placement"]))
-                                .get_cost(py::cast<CostType>(np["cost"]))
+                                .get_cost(py::cast<CostType>(np["get_cost"]))
                                 );
     }
   }
@@ -152,7 +152,7 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
   bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
   bool vim = np.contains("vertex_index_map");
   bool place = np.contains("placement");
-  bool cost = np.contains("cost");
+  bool cost = np.contains("get_cost");
   auto filter = np.contains("filter");
   int retv;
   ;
@@ -280,7 +280,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
 
   bool place = np.contains("placement");
   bool vim = np.contains("vertex_index_map");
-  bool cost = np.contains("cost");
+  bool cost = np.contains("get_cost");
   if (place && !cost) {
     auto r = edge_collapse_placement<TriangleMesh, StopPolicy, MpBicm>(pm, stop_policy, np);
     if (r) return r.value();
