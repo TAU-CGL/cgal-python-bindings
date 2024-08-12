@@ -601,6 +601,9 @@ void export_polyhedron_3(py::module_& m) {
   pol3::face_map<Prn, int>(m, "face_int_map", "Face_int_map");
   pol3::face_map<Prn, bool>(m, "face_bool_map", "Face_bool_map");
 
+  pol3::halfedge_map<Prn, py::tuple>(m, "halfedge_tuple_map", "Halfedge_tuple_map");
+  pol3::halfedge_map<Prn, bool>(m, "halfedge_bool_map", "Halfedge_bool_map");
+  pol3::halfedge_map<Prn, std::size_t>(m, "halfedge_size_t_map", "dynamic_property_halfedge_size_t");
 
 
   namespace PMP = CGAL::Polygon_mesh_processing;

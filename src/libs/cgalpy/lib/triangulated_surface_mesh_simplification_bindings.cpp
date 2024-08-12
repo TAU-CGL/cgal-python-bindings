@@ -13,14 +13,14 @@
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_triangle_policies.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_cost.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_placement.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Midpoint_placement.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_cost.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_placement.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Midpoint_placement.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h>
 // #include <CGAL/Surface_mesh_simplification/Edge_collapse_visitor_base.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_filter.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_placement.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Constrained_placement.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Constrained_placement.h>
 
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
@@ -64,27 +64,99 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
   // auto vpm = get_vertex_point_map(pm, np);
   using Tm = TriangleMesh;
   using Gt = typename boost::graph_traits<Tm>;
-  using Hd = typename Gt::halfedge_descriptor;
+  using Fd = typename boost::graph_traits<Tm>::face_descriptor;
+  using Hd = typename boost::graph_traits<Tm>::halfedge_descriptor;
+  using Vd = typename boost::graph_traits<Tm>::vertex_descriptor;
+  using Ed = typename boost::graph_traits<Tm>::edge_descriptor;
+  using faces_size_type = typename boost::graph_traits<Tm>::faces_size_type;
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  using edge_bool_map = typename Tm::template Property_map<Ed, bool>;
+  using RegionMap = typename Tm::template Property_map<Fd, std::size_t>;
+  using CornerIdMap = typename Tm::template Property_map<Vd, std::size_t>;
+  using FacePatchMap = typename Tm::template Property_map<Fd, std::size_t>;
+  using FaceSizeTypeMap = typename Tm::template Property_map<Fd, faces_size_type>;
+  using VertexCornerMap = typename Tm::template Property_map<Vd, std::size_t>;
+  using EdgeIsConstrainedMap = typename Tm::template Property_map<Ed, bool>;
+  using FaceBitMap = typename Tm::template Property_map<Fd, bool>;
+  using FaceComponentMap = typename Tm::template Property_map<Fd, faces_size_type>;
+  using FaceVectorMap = typename Tm::template Property_map<Fd, Vector_3>;
+  using VertexVectorMap = typename Tm::template Property_map<Vd, Vector_3>;
+  using ValueMap = typename Tm::template Property_map<Vd, double>;
+#endif
+#if CGALPY_PMP_POLYGONAL_MESH == 0
+  using edge_bool_map = boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
+  using RegionMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<std::size_t>>;
+  using CornerIdMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<std::size_t>>;
+  using FacePatchMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<std::size_t>>;
+  using FaceSizeTypeMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<faces_size_type>>;
+  using VertexCornerMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<std::size_t>>;
+  using EdgeIsConstrainedMap = boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
+  using FaceBitMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<bool>>;
+  using FaceComponentMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<faces_size_type>>;
+  using FaceVectorMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<Vector_3>>;
+  using VertexVectorMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<Vector_3>>;
+  using ValueMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<double>>;
+#endif
+  using Mp = SMS::Midpoint_placement<Tm>;
+  using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
   // auto him = get_halfedge_prop_map<Tm, std::size_t>(pm, "halfedge_index_map",
   //   np.contains("halfedge_index_map") ? np["halfedge_index_map"] : py::none());
-  auto eicm = get_edge_prop_map<Tm, bool>(pm, "edge_is_constrained_map",
+  auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
     np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
   bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
   bool vim = np.contains("vertex_index_map");
+  bool place = np.contains("placement");
   if (vim) {
-    return SMS::edge_collapse(pm, stop_policy,
-                              internal::parse_pmp_np<TriangleMesh>(np)
-                              .edge_is_constrained_map(eicm)
-                              // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                              .vertex_index_map(vim)
-                              );
+    auto vimap = get_vertex_prop_map<Tm, std::size_t>(pm, "INTERNAL_MAP1",
+      np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
+    if (place) {
+      MpBicm placement;
+      try {
+        placement = py::cast<MpBicm>(np["placement"]);
+      }
+      catch (const py::cast_error& e) {
+        throw std::runtime_error("failed to cast placement");
+      }
+      return SMS::edge_collapse(pm, stop_policy,
+                                internal::parse_pmp_np<TriangleMesh>(np)
+                                .edge_is_constrained_map(eicm)
+                                // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                .vertex_index_map(vimap)
+                                .get_placement(placement)
+                                );
+    }
+    else {
+      return SMS::edge_collapse(pm, stop_policy,
+                                internal::parse_pmp_np<TriangleMesh>(np)
+                                .edge_is_constrained_map(eicm)
+                                // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                .vertex_index_map(vimap)
+                                );
+    }
   }
   else {
-    return SMS::edge_collapse(pm, stop_policy,
-                              internal::parse_pmp_np<TriangleMesh>(np)
-                              .edge_is_constrained_map(eicm)
-                              // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                              );
+    if (place) {
+      MpBicm placement;
+      try {
+        placement = py::cast<MpBicm>(np["placement"]);
+      }
+      catch (const py::cast_error& e) {
+        throw std::runtime_error("failed to cast placement");
+      }
+      return SMS::edge_collapse(pm, stop_policy,
+                                internal::parse_pmp_np<TriangleMesh>(np)
+                                .edge_is_constrained_map(eicm)
+                                // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                .get_placement(placement)
+                                );
+    }
+    else {
+      return SMS::edge_collapse(pm, stop_policy,
+                                internal::parse_pmp_np<TriangleMesh>(np)
+                                .edge_is_constrained_map(eicm)
+                                // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                );
+    }
   }
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   if (!np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
@@ -96,6 +168,39 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
 // Export Polygon_mesh_processing
 void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Tm = pmp::Polygonal_mesh;
+  using Fd = boost::graph_traits<Tm>::face_descriptor;
+  using Hd = boost::graph_traits<Tm>::halfedge_descriptor;
+  using Vd = boost::graph_traits<Tm>::vertex_descriptor;
+  using Ed = boost::graph_traits<Tm>::edge_descriptor;
+  using faces_size_type = boost::graph_traits<Tm>::faces_size_type;
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  using edge_bool_map = Tm::Property_map<Ed, bool>;
+  using RegionMap = Tm::Property_map<Fd, std::size_t>;
+  using CornerIdMap = Tm::Property_map<Vd, std::size_t>;
+  using FacePatchMap = Tm::Property_map<Fd, std::size_t>;
+  using FaceSizeTypeMap = Tm::Property_map<Fd, faces_size_type>;
+  using VertexCornerMap = Tm::Property_map<Vd, std::size_t>;
+  using EdgeIsConstrainedMap = Tm::Property_map<Ed, bool>;
+  using FaceBitMap = Tm::Property_map<Fd, bool>;
+  using FaceComponentMap = Tm::Property_map<Fd, faces_size_type>;
+  using FaceVectorMap = Tm::Property_map<Fd, Vector_3>;
+  using VertexVectorMap = Tm::Property_map<Vd, Vector_3>;
+  using ValueMap = Tm::Property_map<Vd, double>;
+#endif
+#if CGALPY_PMP_POLYGONAL_MESH == 0
+  using edge_bool_map = boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
+  using RegionMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<std::size_t>>;
+  using CornerIdMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<std::size_t>>;
+  using FacePatchMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<std::size_t>>;
+  using FaceSizeTypeMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<faces_size_type>>;
+  using VertexCornerMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<std::size_t>>;
+  using EdgeIsConstrainedMap = boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
+  using FaceBitMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<bool>>;
+  using FaceComponentMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<faces_size_type>>;
+  using FaceVectorMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<Vector_3>>;
+  using VertexVectorMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<Vector_3>>;
+  using ValueMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<double>>;
+#endif
   // template<class TM_>
   // class Edge_count_stop_predicate
   // {
@@ -124,7 +229,7 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
 
   using Ecsp = SMS::Edge_count_stop_predicate<Tm>;
   py::class_<Ecsp>(m, "Edge_count_stop_predicate")
-    .def(py::init<edges_size_type>(), py::arg("threshold"));
+    .def(py::init<edges_size_type>(), py::arg("threshold"))
     ;
 
   using Ecrsp = SMS::Edge_count_ratio_stop_predicate<Tm>;
@@ -132,20 +237,42 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
     .def(py::init<double>(), py::arg("ratio"));
     ;
 
+  using Elsp = SMS::Edge_length_stop_predicate<FT>;
+  py::class_<Elsp>(m, "Edge_length_stop_predicate")
+    .def(py::init<const FT>(), py::arg("threshold"))
+    ;
+
   using Fcsp = SMS::Face_count_stop_predicate<Tm>;
   py::class_<Fcsp>(m, "Face_count_stop_predicate")
-    .def(py::init<edges_size_type>(), py::arg("threshold"));
+    .def(py::init<edges_size_type>(), py::arg("threshold"))
     ;
 
   using Fcrsp = SMS::Face_count_ratio_stop_predicate<Tm>;
   py::class_<Fcrsp>(m, "Face_count_ratio_stop_predicate")
-    .def(py::init<double, const Tm&>(), py::arg("ratio"), py::arg("tmesh"));
+    .def(py::init<double, const Tm&>(), py::arg("ratio"), py::arg("tmesh"))
+    ;
+
+  using Elc = SMS::Edge_length_cost<Tm>;
+  py::class_<Elc>(m, "Edge_length_cost")
+    .def(py::init<>())
+    ;
+
+  using Mp = SMS::Midpoint_placement<Tm>;
+  py::class_<Mp>(m, "Midpoint_placement")
+    .def(py::init<>())
+    ;
+  
+  using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
+  py::class_<MpBicm>(m, "Constrained_placement_Midpoint_placement_Edge_bool_map")
+    .def(py::init<edge_bool_map, Mp>(), py::arg("edge_is_constrained_map") = edge_bool_map(), py::arg("get_placement") = Mp())
     ;
 
 
   m.def("edge_collapse", &sms::edge_collapse<Tm, Ecsp>,
     py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
   m.def("edge_collapse", &sms::edge_collapse<Tm, Ecrsp>,
+    py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
+  m.def("edge_collapse", &sms::edge_collapse<Tm, Elsp>,
     py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
   m.def("edge_collapse", &sms::edge_collapse<Tm, Fcsp>,
     py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());

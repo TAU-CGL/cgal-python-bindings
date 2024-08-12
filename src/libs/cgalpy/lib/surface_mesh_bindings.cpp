@@ -567,6 +567,10 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
       .def("add_property_map_halfedge_size_t", &sm::add_map<Sm, Hi, std::size_t>,
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
+      .def("add_property_map_halfedge_tuple", &sm::add_map<Sm, Hi, py::tuple>,
+           py::arg("name") = std::string(), py::arg("default_value") = py::tuple())
+      .def("add_property_map_halfedge_bool", &sm::add_map<Sm, Hi, bool>,
+           py::arg("name") = std::string(), py::arg("default_value") = false)
 
 
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
@@ -664,6 +668,10 @@ void export_surface_mesh(py::module_& m) {
 
   internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
   sm::halfedge_map<Sm_3, std::size_t>(m, "halfedge_size_t_boost_map", "Halfedge_size_t_boost_map");
+  internal::export_property_map<Sm_3, Hi, py::tuple>(m, "Halfedge_tuple_map");
+  sm::halfedge_map<Sm_3, py::tuple>(m, "halfedge_tuple_boost_map", "Halfedge_tuple_boost_map");
+  internal::export_property_map<Sm_3, Hi, bool>(m, "Halfedge_bool_map");
+  sm::halfedge_map<Sm_3, bool>(m, "halfedge_bool_boost_map", "Halfedge_bool_boost_map");
 
   // internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map"); // this is a dict not a map??
 
