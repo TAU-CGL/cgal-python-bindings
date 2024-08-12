@@ -71,31 +71,9 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
   using faces_size_type = typename boost::graph_traits<Tm>::faces_size_type;
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   using edge_bool_map = typename Tm::template Property_map<Ed, bool>;
-  using RegionMap = typename Tm::template Property_map<Fd, std::size_t>;
-  using CornerIdMap = typename Tm::template Property_map<Vd, std::size_t>;
-  using FacePatchMap = typename Tm::template Property_map<Fd, std::size_t>;
-  using FaceSizeTypeMap = typename Tm::template Property_map<Fd, faces_size_type>;
-  using VertexCornerMap = typename Tm::template Property_map<Vd, std::size_t>;
-  using EdgeIsConstrainedMap = typename Tm::template Property_map<Ed, bool>;
-  using FaceBitMap = typename Tm::template Property_map<Fd, bool>;
-  using FaceComponentMap = typename Tm::template Property_map<Fd, faces_size_type>;
-  using FaceVectorMap = typename Tm::template Property_map<Fd, Vector_3>;
-  using VertexVectorMap = typename Tm::template Property_map<Vd, Vector_3>;
-  using ValueMap = typename Tm::template Property_map<Vd, double>;
 #endif
 #if CGALPY_PMP_POLYGONAL_MESH == 0
-  using edge_bool_map = boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
-  using RegionMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<std::size_t>>;
-  using CornerIdMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<std::size_t>>;
-  using FacePatchMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<std::size_t>>;
-  using FaceSizeTypeMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<faces_size_type>>;
-  using VertexCornerMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<std::size_t>>;
-  using EdgeIsConstrainedMap = boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
-  using FaceBitMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<bool>>;
-  using FaceComponentMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<faces_size_type>>;
-  using FaceVectorMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<Vector_3>>;
-  using VertexVectorMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<Vector_3>>;
-  using ValueMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<double>>;
+  using edge_bool_map = typename boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
 #endif
   using Mp = SMS::Midpoint_placement<Tm>;
   using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
