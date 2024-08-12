@@ -244,6 +244,11 @@ py::object halfedges_around_facet(const Face& f)
 
 /// @}
 
+// Obtain the null face.
+template <typename Pm>
+auto null_face()
+{ return boost::graph_traits<Pm>::null_face(); }
+
 
 } // namespace pol3
 
@@ -634,6 +639,7 @@ void export_polyhedron_3(py::module_& m) {
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
   m.def("clear", &CGAL::clear<Prn>);
   m.def("is_closed", &CGAL::is_closed<Prn>);
+  m.def("null_face", &pol3::null_face<Prn>);
 
   m.def("num_vertices", &boost_utils::num_vertices<Prn>);
   m.def("num_edges", &boost_utils::num_edges<Prn>);
