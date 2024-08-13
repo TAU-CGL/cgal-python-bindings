@@ -43,7 +43,22 @@ template <typename Map_type>
 void register_map(py::module_& m, const std::string& map_name) {
   py::class_<Map_type>(m, map_name.c_str())
     .def(py::init<>())
+    .def("clear", &Map_type::clear)
+    .def("default_value", &Map_type::default_value)
+    .def("put", [](Map_type& p, const typename Map_type::key_type& k,
+                   const typename Map_type::value_type& v) { put(p, k, v); },
+         py::arg("key"), py::arg("value"))
+    .def("__setitem__", [](Map_type& p, const typename Map_type::key_type& k,
+                          const typename Map_type::value_type& v) { put(p, k, v); },
+         py::arg("key"), py::arg("value"))
+    .def("get", [](const Map_type& p, const typename Map_type::key_type& k) {
+        return get(p, k);
+      })
+    .def("__getitem__", [](const Map_type& p, const typename Map_type::key_type& k) {
+        return get(p, k);
+      })
     .def_ro("map_", &Map_type::map_)
+    .def_ro("default_value_", &Map_type::default_value_)
     ;
 }
 
@@ -482,6 +497,8 @@ void export_polyhedron_3(py::module_& m) {
   using Vertex = Prn::Vertex;
   using Halfedge = Prn::Halfedge;
   using Face = Prn::Face;
+  using Gt = boost::graph_traits<Prn>;
+  using vertex_descriptor = Gt::vertex_descriptor;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -634,6 +651,7 @@ void export_polyhedron_3(py::module_& m) {
     ;
 
   m.def("get_vertex_point_map", [](const Prn& pm) { return get(CGAL::vertex_point, pm); });
+  m.def("get_vertex_point", [](const Prn& pm, const vertex_descriptor& vd) { return get(CGAL::vertex_point, pm, vd); });
 
 
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);

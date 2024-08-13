@@ -544,5 +544,8 @@ void export_kernel_module(py::module_& m) {
   m.def("square", static_cast<Square_fnc>(&CGAL::square<FT>));
 
   m.def("to_double", &CGAL::to_double<FT>);
+
+  m.def("approximate_dihedral_angle", &CGAL::approximate_dihedral_angle<Kernel>,
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
   /// @}
 }
