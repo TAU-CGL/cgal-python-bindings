@@ -1,3 +1,4 @@
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_policies.h>
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Surface_mesh_simplification/edge_collapse.h>
@@ -8,11 +9,11 @@
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_ratio_stop_predicate.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_stop_predicate.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h>
 // #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_policies.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_triangle_policies.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_triangle_policies.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_cost.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_placement.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Midpoint_placement.h>
@@ -30,38 +31,347 @@
 namespace py = nanobind;
 
 namespace SMS = CGAL::Surface_mesh_simplification;
-// template<class TM_>
-// class Edge_count_ratio_stop_predicate
-// {
-// public:
-//   typedef TM_                                                 TM;
-//   typedef typename boost::graph_traits<TM>::edges_size_type   size_type;
-//
-//   Edge_count_ratio_stop_predicate(const double ratio)
-//     : m_ratio(ratio)
-//   {
-//     CGAL_warning(0. < ratio && ratio <= 1.);
-//   }
-//
-//   template <typename F, typename Profile>
-//   bool operator()(const F& /*current_cost*/,
-//                   const Profile& /*profile*/,
-//                   size_type initial_edge_count,
-//                   size_type current_edge_count) const
-//   {
-//     return (static_cast<double>(current_edge_count) / static_cast<double>(initial_edge_count)) < m_ratio;
-//   }
-//
-// private:
-//   double m_ratio;
-// };
 
 namespace sms {
 
-template <typename TriangleMesh, typename StopPolicy>
-auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
+template <typename TriangleMesh, typename StopPolicy, typename PlacementType, typename CostType> // this assumes cost
+std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy stop_policy,
                    const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(pm, np);
+  using Tm = TriangleMesh;
+  // auto him = get_halfedge_prop_map<Tm, std::size_t>(pm, "halfedge_index_map",
+  //   np.contains("halfedge_index_map") ? np["halfedge_index_map"] : py::none());
+  auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
+  bool vim = np.contains("vertex_index_map");
+  bool place = np.contains("get_placement");
+  bool cost = np.contains("get_cost");
+  auto filter = np.contains("filter");
+  std::optional<int> retv = std::nullopt;
+  if (vim) {
+    auto vimap = get_vertex_prop_map<Tm, std::size_t>(pm, "INTERNAL_MAP1",
+    np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
+    if (filter) { // yyy
+      try {
+        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .vertex_index_map(vimap)
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only works for surface mesh
+      try {
+        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .vertex_index_map(vimap)
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#endif
+    }
+    else { //yyn
+      try {
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .vertex_index_map(vimap)
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+    }
+  }
+  else {
+    if (filter) { // nyy
+      try {
+        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only works for surface mesh
+      try {
+        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#endif
+    }
+    else { // nyn
+      try {
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+    }
+  }
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
+#endif
+  return retv;
+}
+
+template <typename TriangleMesh, typename StopPolicy, typename PlacementType> // this assumes no cost
+std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_policy,
+                   const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pm, np);
+  using Tm = TriangleMesh;
+  // auto him = get_halfedge_prop_map<Tm, std::size_t>(pm, "halfedge_index_map",
+  //   np.contains("halfedge_index_map") ? np["halfedge_index_map"] : py::none());
+  auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
+  bool vim = np.contains("vertex_index_map");
+  bool place = np.contains("get_placement");
+  bool cost = np.contains("get_cost");
+  auto filter = np.contains("filter");
+  std::optional<int> retv = std::nullopt;
+  if (vim) {
+    auto vimap = get_vertex_prop_map<Tm, std::size_t>(pm, "INTERNAL_MAP1",
+      np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
+    if (filter) { // yyy
+      try {
+        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .vertex_index_map(vimap)
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only works for surface mesh
+      try {
+        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .vertex_index_map(vimap)
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#endif
+    }
+    else { //yyn
+      try {
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .vertex_index_map(vimap)
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+    }
+  }
+  else {
+    if (filter) { // nyy
+      try {
+        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only works for surface mesh
+      try {
+        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#endif
+    }
+    else { // nyn
+      try {
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+    }
+  }
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
+#endif
+  return retv;
+}
+
+template <typename TriangleMesh, typename StopPolicy, typename CostType> // this assumes cost but no placement
+std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
+                   const py::dict& np = py::dict()) {
+  // auto vpm = get_vertex_point_map(pm, np);
+  using Tm = TriangleMesh;
+  // auto him = get_halfedge_prop_map<Tm, std::size_t>(pm, "halfedge_index_map",
+  //   np.contains("halfedge_index_map") ? np["halfedge_index_map"] : py::none());
+  auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
+  bool vim = np.contains("vertex_index_map");
+  auto filter = np.contains("filter");
+  std::optional<int> retv = std::nullopt;
+
+  if (vim) {
+    auto vimap = get_vertex_prop_map<Tm, std::size_t>(pm, "INTERNAL_MAP1",
+      np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
+    if (filter) {
+      try {
+        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .vertex_index_map(vimap)
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only works for surface mesh
+      try {
+        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .vertex_index_map(vimap)
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#endif
+    }
+    else {
+      try {
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .vertex_index_map(vimap)
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+    }
+  }
+  else {
+    if (filter) {
+      try {
+        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only works for surface mesh
+      try {
+        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .filter(f)
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+#endif
+    }
+    else {
+      try {
+        retv = SMS::edge_collapse(pm, stop_policy,
+                                  internal::parse_pmp_np<TriangleMesh>(np)
+                                  .edge_is_constrained_map(eicm)
+                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
+                                  .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  );
+      }
+      catch (const py::cast_error& e) {
+      }
+    }
+  }
+
+
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  if (!np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
+#endif
+  return retv;
+}
+template <typename TriangleMesh, typename StopPolicy>
+auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
   using Gt = typename boost::graph_traits<Tm>;
   using Fd = typename boost::graph_traits<Tm>::face_descriptor;
@@ -75,163 +385,171 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
 #if CGALPY_PMP_POLYGONAL_MESH == 0
   using edge_bool_map = typename boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
 #endif
+  using Pef = SMS::Polyhedral_envelope_filter<Kernel,SMS::Bounded_normal_change_filter<>>;
   using Mp = SMS::Midpoint_placement<Tm>;
+  using Ltp = SMS::LindstromTurk_placement<Tm>;
+  using Bncp = SMS::Bounded_normal_change_placement<Mp>;
+  using Ghplacement = typename SMS::GarlandHeckbert_policies<Tm, Kernel>::Get_placement;
   using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
-  // auto him = get_halfedge_prop_map<Tm, std::size_t>(pm, "halfedge_index_map",
-  //   np.contains("halfedge_index_map") ? np["halfedge_index_map"] : py::none());
-  auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
-    np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
-  bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
+  using LtpBicm = SMS::Constrained_placement<Ltp, edge_bool_map>;
+  using BncpBicm = SMS::Constrained_placement<Bncp, edge_bool_map>;
+  using GhplacementBicm = SMS::Constrained_placement<Ghplacement, edge_bool_map>;
+  using Ghpp = SMS::GarlandHeckbert_plane_policies<Tm, Kernel>;
+  using BncpGhpp = SMS::Bounded_normal_change_placement<Ghpp>;
+  using Ghtp = SMS::GarlandHeckbert_triangle_policies<Tm, Kernel>;
+  using BncpGhtp = SMS::Bounded_normal_change_placement<Ghtp>;
+
+  using Elc = SMS::Edge_length_cost<Tm>;
+  using Ltc = SMS::LindstromTurk_cost<Tm>;
+  using Ghcost = typename SMS::GarlandHeckbert_policies<Tm, Kernel>::Get_cost;
+
+
+  bool place = np.contains("get_placement");
   bool vim = np.contains("vertex_index_map");
-  bool place = np.contains("placement");
-  bool cost = np.contains("cost");
-  auto filter = np.contains("filter");
-  int retv;
-  if (vim) {
-    auto vimap = get_vertex_prop_map<Tm, std::size_t>(pm, "INTERNAL_MAP1",
-      np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
-    if (place) {
-      MpBicm placement;
-      try {
-        placement = py::cast<MpBicm>(np["placement"]);
-      }
-      catch (const py::cast_error& e) {
-        throw std::runtime_error("failed to cast placement");
-      }
-      if (filter) { // yyy
-        try {
-          auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    internal::parse_pmp_np<TriangleMesh>(np)
-                                    .edge_is_constrained_map(eicm)
-                                    // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                                    .vertex_index_map(vimap)
-                                    .get_placement(placement)
-                                    .get_cost(SMS::LindstromTurk_cost<TriangleMesh>())
-                                    .filter(f)
-                                    );
-        }
-        catch (const py::cast_error& e) {
-        }
-        try {
-          auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    internal::parse_pmp_np<TriangleMesh>(np)
-                                    .edge_is_constrained_map(eicm)
-                                    // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                                    .vertex_index_map(vimap)
-                                    .get_placement(placement)
-                                    .get_cost(SMS::LindstromTurk_cost<TriangleMesh>())
-                                    .filter(f)
-                                    );
-        }
-        catch (const py::cast_error& e) {
-          throw std::runtime_error("failed to cast filter");
-        }
-      }
-      else { //yyn
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  internal::parse_pmp_np<TriangleMesh>(np)
-                                  .edge_is_constrained_map(eicm)
-                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                                  .vertex_index_map(vimap)
-                                  .get_placement(placement)
-                                  );
-      }
-    }
-    else {
-      // return SMS::edge_collapse(pm, stop_policy,
-      //                           internal::parse_pmp_np<TriangleMesh>(np)
-      //                           .edge_is_constrained_map(eicm)
-      //                           // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-      //                           .vertex_index_map(vimap)
-      //                           );
-      if (filter) { // yny
-        try {
-          auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    internal::parse_pmp_np<TriangleMesh>(np)
-                                    .edge_is_constrained_map(eicm)
-                                    // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                                    .vertex_index_map(vimap)
-                                    .filter(f)
-                                    );
-        }
-        catch (const py::cast_error& e) {
-        }
-        try {
-          auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    internal::parse_pmp_np<TriangleMesh>(np)
-                                    .edge_is_constrained_map(eicm)
-                                    // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                                    .vertex_index_map(vimap)
-                                    .filter(f)
-                                    );
-        }
-        catch (const py::cast_error& e) {
-          throw std::runtime_error("failed to cast filter");
-        }
-      }
-      else { // ynn
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  internal::parse_pmp_np<TriangleMesh>(np)
-                                  .edge_is_constrained_map(eicm)
-                                  // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                                  .vertex_index_map(vimap)
-                                  );
-      }
-    }
+  bool cost = np.contains("get_cost");
+  bool filter = np.contains("filter");
+  if (place && !cost) {
+    std::optional<int> r;
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, MpBicm>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, LtpBicm>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, MpBicm>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, GhplacementBicm>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, Mp>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, Ltp>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, Bncp>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, BncpGhpp>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, BncpGhtp>(pm, stop_policy, np);
+    if (r) return r.value();
+    throw std::runtime_error("Invalid placement type");
+  }
+  else if (place && cost) {
+    // every combination of placement and cost
+    std::optional<int> r;
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, MpBicm, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, MpBicm, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, MpBicm, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, LtpBicm, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, LtpBicm, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, LtpBicm, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, GhplacementBicm, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, GhplacementBicm, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, GhplacementBicm, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Mp, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Mp, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Mp, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ltp, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ltp, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ltp, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Bncp, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Bncp, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Bncp, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhpp, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhpp, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhpp, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhtp, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhtp, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhtp, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    throw std::runtime_error("Invalid placement or cost type");
+  }
+  else if (!place && cost) {
+    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
+      np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+    std::optional<int> r;
+    r = edge_collapse_cost<TriangleMesh, StopPolicy, Elc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_cost<TriangleMesh, StopPolicy, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_cost<TriangleMesh, StopPolicy, Ghcost>(pm, stop_policy, np);
+    if (r) return r.value();
+    throw std::runtime_error("Invalid cost type");
   }
   else {
-    if (place) {
-      MpBicm placement;
-      try {
-        placement = py::cast<MpBicm>(np["placement"]);
-      }
-      catch (const py::cast_error& e) {
-        throw std::runtime_error("failed to cast placement");
-      }
-      if (filter) { // nyy
+    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
+      np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+    bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
+    bool vim = np.contains("vertex_index_map");
+    bool filter = np.contains("filter");
+    std::optional<int> retv = std::nullopt;
+    if (vim) {
+      auto vimap = get_vertex_prop_map<Tm, std::size_t>(pm, "INTERNAL_MAP1",
+        np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
+      if (filter) {
         try {
           auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
           retv = SMS::edge_collapse(pm, stop_policy,
                                     internal::parse_pmp_np<TriangleMesh>(np)
                                     .edge_is_constrained_map(eicm)
                                     // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                                    .get_placement(placement)
-                                    .get_cost(SMS::LindstromTurk_cost<TriangleMesh>())
+                                    .vertex_index_map(vimap)
                                     .filter(f)
                                     );
         }
         catch (const py::cast_error& e) {
         }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only works for surface mesh
         try {
           auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
           retv = SMS::edge_collapse(pm, stop_policy,
                                     internal::parse_pmp_np<TriangleMesh>(np)
                                     .edge_is_constrained_map(eicm)
                                     // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                                    .get_placement(placement)
-                                    .get_cost(SMS::LindstromTurk_cost<TriangleMesh>())
+                                    .vertex_index_map(vimap)
                                     .filter(f)
                                     );
         }
         catch (const py::cast_error& e) {
-          throw std::runtime_error("failed to cast filter");
         }
+#endif
       }
-      else { // nyn
+      else {
         retv = SMS::edge_collapse(pm, stop_policy,
                                   internal::parse_pmp_np<TriangleMesh>(np)
                                   .edge_is_constrained_map(eicm)
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
-                                  .get_placement(placement)
+                                  .vertex_index_map(vimap)
                                   );
       }
     }
     else {
-      if (filter) { // nny
+      if (filter) {
         try {
           auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
           retv = SMS::edge_collapse(pm, stop_policy,
@@ -243,6 +561,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
         }
         catch (const py::cast_error& e) {
         }
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // only works for surface mesh
         try {
           auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
           retv = SMS::edge_collapse(pm, stop_policy,
@@ -253,10 +572,10 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
                                     );
         }
         catch (const py::cast_error& e) {
-          throw std::runtime_error("failed to cast filter");
         }
+#endif
       }
-      else { // nnn
+      else {
         retv = SMS::edge_collapse(pm, stop_policy,
                                   internal::parse_pmp_np<TriangleMesh>(np)
                                   .edge_is_constrained_map(eicm)
@@ -264,12 +583,14 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
                                   );
       }
     }
-  }
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   if (!np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
 #endif
-  return retv;
+  if (retv) return retv.value();
+  else throw std::runtime_error("Invalid named parameters");
+  }
 }
+
 
 } // namespace sms
 
@@ -309,31 +630,10 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using VertexVectorMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<Vector_3>>;
   using ValueMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<double>>;
 #endif
-  // template<class TM_>
-  // class Edge_count_stop_predicate
-  // {
-  // public:
-  //   typedef TM_                                                                   TM;
-  //   typedef typename boost::graph_traits<TM>::edges_size_type                     size_type;
-  //
-  //   Edge_count_stop_predicate(const std::size_t edge_count_threshold)
-  //     : m_edge_count_threshold(edge_count_threshold)
-  //   { }
-  //
-  //   template <typename F, typename Profile>
-  //   bool operator()(const F& /*current_cost*/,
-  //                   const Profile& /*profile*/,
-  //                   std::size_t /*initial_edge_count*/,
-  //                   std::size_t current_edge_count) const
-  //   {
-  //     return current_edge_count < m_edge_count_threshold;
-  //   }
-  //
-  // private:
-  //   std::size_t m_edge_count_threshold;
-  // };
 
   using edges_size_type = boost::graph_traits<Tm>::edges_size_type;
+
+  // Predicates //
 
   using Ecsp = SMS::Edge_count_stop_predicate<Tm>;
   py::class_<Ecsp>(m, "Edge_count_stop_predicate")
@@ -360,25 +660,114 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
     .def(py::init<double, const Tm&>(), py::arg("ratio"), py::arg("tmesh"))
     ;
 
+  // Policies //
+
+// typedef SMS::GarlandHeckbert_plane_policies<Surface_mesh, Kernel>                  Classic_plane;
+// typedef SMS::GarlandHeckbert_probabilistic_plane_policies<Surface_mesh, Kernel>    Prob_plane;
+// typedef SMS::GarlandHeckbert_triangle_policies<Surface_mesh, Kernel>               Classic_tri;
+// typedef SMS::GarlandHeckbert_probabilistic_triangle_policies<Surface_mesh, Kernel> Prob_tri;
+  using Ghpp = SMS::GarlandHeckbert_plane_policies<Tm, Kernel>;
+  py::class_<Ghpp>(m, "GarlandHeckbert_plane_policies")
+    .def(py::init<Tm&>(), py::arg("tmesh"))
+    .def("get_placement", &Ghpp::get_placement)
+    .def("get_cost", &Ghpp::get_cost)
+    ;
+
+  // using Ghppp = SMS::GarlandHeckbert_probabilistic_plane_policies<Tm, Kernel>;
+  // py::class_<Ghppp>(m, "GarlandHeckbert_probabilistic_plane_policies")
+  //   .def(py::init<Tm&>(), py::arg("tmesh"))
+  //   ;
+  
+  using Ghtp = SMS::GarlandHeckbert_triangle_policies<Tm, Kernel>;
+  py::class_<Ghtp>(m, "GarlandHeckbert_triangle_policies")
+    .def(py::init<Tm&>(), py::arg("tmesh"))
+    .def("get_placement", &Ghtp::get_placement)
+    .def("get_cost", &Ghtp::get_cost)
+    ;
+
+  // using Ghtpp = SMS::GarlandHeckbert_probabilistic_triangle_policies<Tm, Kernel>;
+  // py::class_<Ghtpp>(m, "GarlandHeckbert_probabilistic_triangle_policies")
+  //  .def(py::init<Tm&>(), py::arg("tmesh"))
+
+
+  // Costs //
+
   using Elc = SMS::Edge_length_cost<Tm>;
   py::class_<Elc>(m, "Edge_length_cost")
     .def(py::init<>())
     ;
 
+  using Ltc = SMS::LindstromTurk_cost<Tm>;
+  py::class_<Ltc>(m, "LindstromTurk_cost")
+    .def(py::init<>())
+    ;
+
+  // Placements //
+
   using Mp = SMS::Midpoint_placement<Tm>;
   py::class_<Mp>(m, "Midpoint_placement")
     .def(py::init<>())
-    ;
-  
-  using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
-  py::class_<MpBicm>(m, "Constrained_placement_Midpoint_placement_Edge_bool_map")
-    .def(py::init<edge_bool_map, Mp>(), py::arg("edge_is_constrained_map") = edge_bool_map(), py::arg("get_placement") = Mp())
     ;
 
   using Ltp = SMS::LindstromTurk_placement<Tm>;
   py::class_<Ltp>(m, "LindstromTurk_placement")
     .def(py::init<>())
     ;
+
+  using Bncp = SMS::Bounded_normal_change_placement<Mp>;
+  using BncpGhpp = SMS::Bounded_normal_change_placement<Ghpp>;
+  using BncpGhtp = SMS::Bounded_normal_change_placement<Ghtp>;
+  py::class_<Bncp>(m, "Bounded_normal_change_placement_Midpoint_placement")
+    .def(py::init<Mp>())
+    ;
+
+  // placements for all 
+// typedef SMS::GarlandHeckbert_plane_policies<Surface_mesh, Kernel>                  Classic_plane;
+// typedef SMS::GarlandHeckbert_probabilistic_plane_policies<Surface_mesh, Kernel>    Prob_plane;
+// typedef SMS::GarlandHeckbert_triangle_policies<Surface_mesh, Kernel>               Classic_tri;
+// typedef SMS::GarlandHeckbert_probabilistic_triangle_policies<Surface_mesh, Kernel> Prob_tri;
+  // TODO: check prob
+  py::class_<BncpGhpp>(m, "Bounded_normal_change_placement_GarlandHeckbert_plane_policies")
+    .def(py::init<Ghpp>())
+    ;
+  py::class_<BncpGhtp>(m, "Bounded_normal_change_placement_GarlandHeckbert_triangle_policies")
+    .def(py::init<Ghtp>())
+    ;
+
+  struct Dummy_placement {};
+  // upon calling this classs constructor it gives the correct placement overload
+  py::class_<Dummy_placement>(m, "Bounded_normal_change_placement")
+    .def(py::init<>())
+    .def("__call__", [](Dummy_placement& self, Mp& bncp) { return Mp(bncp); })
+    .def("__call__", [](Dummy_placement& self, Ghpp& bncp) { return BncpGhpp(bncp); })
+    .def("__call__", [](Dummy_placement& self, Ghtp& bncp) { return BncpGhtp(bncp); })
+  ;
+
+
+  // Constrained_placement //
+
+  using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
+  py::class_<MpBicm>(m, "Constrained_placement_Midpoint_placement_Edge_bool_map")
+    .def(py::init<edge_bool_map, Mp>(), py::arg("edge_is_constrained_map") = edge_bool_map(), py::arg("get_placement") = Mp())
+    ;
+  
+  using LtpBicm = SMS::Constrained_placement<Ltp, edge_bool_map>;
+  py::class_<LtpBicm>(m, "Constrained_placement_LindstromTurk_placement_Edge_bool_map")
+    .def(py::init<edge_bool_map, Ltp>(), py::arg("edge_is_constrained_map") = edge_bool_map(), py::arg("get_placement") = Ltp())
+    ;
+
+  using BncpBicm = SMS::Constrained_placement<Bncp, edge_bool_map>;
+  py::class_<BncpBicm>(m, "Constrained_placement_Bounded_normal_change_placement_Edge_bool_map")
+    .def(py::init<edge_bool_map, Bncp>(), py::arg("edge_is_constrained_map") = edge_bool_map(), py::arg("get_placement") = Bncp())
+    ;
+
+  using Ghplacement = Ghpp::Get_placement;
+  using GhplacementBicm = SMS::Constrained_placement<Ghplacement, edge_bool_map>;
+  py::class_<GhplacementBicm>(m, "Constrained_placement_GarlandHeckbert_policies_Edge_bool_map")
+    .def(py::init<edge_bool_map, Ghplacement>(), py::arg("edge_is_constrained_map"), py::arg("get_placement"))
+    ;
+
+  // Filters //
 
   using Bncf = SMS::Bounded_normal_change_filter<>;
   py::class_<Bncf>(m, "Bounded_normal_change_filter")

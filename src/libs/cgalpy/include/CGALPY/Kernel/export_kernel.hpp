@@ -25,6 +25,7 @@
 
 // 3D functors
 #include "CGALPY/Kernel/export_dir_3.hpp"
+#include "CGALPY/Kernel/export_iso_cuboid_3.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
 #include "CGALPY/Kernel/export_sphere_3.hpp"
@@ -285,6 +286,12 @@ void export_kernel(C_& ker_c) {
     export_weighted_point_3<Ker>(wd_pnt3_c);
   }
 
+  // Iso_cuboid_3
+  if (! add_attr<Iso_cuboid_3>(ker_c, "Iso_cuboid_3")) {
+    py::class_<Iso_cuboid_3> iso3_c(ker_c, "Iso_cuboid_3");
+    export_iso_cuboid_3<Ker>(iso3_c);
+  }
+  
   //////// 3D Operators
 
   // Compare_z_3
