@@ -593,43 +593,58 @@ if (NOT SKBUILD)
             --imports "${STR_MODULES}"
             CGALPY.json)
 
-    add_custom_command(
-            OUTPUT ${CGALPY_MODULE_OUTPUT}
-            COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
-            ARGS ${CGALPY_MODULE_ARGS}
-            DEPENDS ${CGALPY_STUBS_GENERATOR} ${CGALPY_MODULE_INPUT}
-            VERBATIM)
+    # add_custom_command(
+    #         OUTPUT ${CGALPY_MODULE_OUTPUT}
+    #         COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
+    #         ARGS ${CGALPY_MODULE_ARGS}
+    #         DEPENDS ${CGALPY_STUBS_GENERATOR} ${CGALPY_MODULE_INPUT}
+    #         VERBATIM)
 
     set(CGALPY_STUBS ${CGALPY_MODULE_OUTPUT})
 
     function(add_module name)
-        set(MODULE_OUTPUT_PATH ${CGALPY_DST_STUBS_DIR}/${name})
-        set(MODULE_OUTPUT ${MODULE_OUTPUT_PATH}/__init__.pyi)
-        set(MODULE_INPUT ${CGALPY_MODULES_DIR}/${name}.json)
-        set(MODULE_ARGS
-                --filters ${CGALPY_${name}_FILTERS}
-                --name ${name}
-                --input-path ${CGALPY_MODULES_DIR}
-                --output-path ${CGALPY_DST_STUBS_DIR})
+      set(MODULE_OUTPUT_PATH ${CGALPY_DST_STUBS_DIR}/${name})
+      set(MODULE_OUTPUT ${MODULE_OUTPUT_PATH}/__init__.pyi)
+      set(MODULE_INPUT ${CGALPY_MODULES_DIR}/${name}.json)
+      set(MODULE_ARGS
+        --filters ${CGALPY_${name}_FILTERS}
+        --name ${name}
+        --input-path ${CGALPY_MODULES_DIR}
+        --output-path ${CGALPY_DST_STUBS_DIR})
 
-        # There is no need to generate the directory, as the Python script is
-        # responsible for this task.
-        # file(MAKE_DIRECTORY ${MODULE_OUTPUT_PATH})
+      # There is no need to generate the directory, as the Python script is
+      # responsible for this task.
+      file(MAKE_DIRECTORY ${MODULE_OUTPUT_PATH})
 
-        add_custom_command(
-                OUTPUT ${MODULE_OUTPUT}
-                COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
-                ARGS ${MODULE_ARGS}
-                DEPENDS ${CGALPY_STUBS_GENERATOR} ${MODULE_INPUT})
+      # add_custom_command(
+      #   OUTPUT ${MODULE_OUTPUT}
+      #   COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
+      #   ARGS ${MODULE_ARGS}
+      #   DEPENDS ${CGALPY_STUBS_GENERATOR} ${MODULE_INPUT})
 
-        set(CGALPY_STUBS "${CGALPY_STUBS}" ${MODULE_OUTPUT} PARENT_SCOPE)
+      set(CGALPY_STUBS "${CGALPY_STUBS}" ${MODULE_OUTPUT} PARENT_SCOPE)
+
+      nanobind_add_stub(
+        CGALPY_${name}_STUBS
+        MODULE ${CGALPY_LIB_NAME}.${name}
+        OUTPUT ${name}/__init__.pyi
+        DEPENDS CGALPY
+      )
     endfunction()
 
     foreach (MODULE IN LISTS CGALPY_MODULES)
-        add_module(${MODULE})
+      add_module(${MODULE})
     endforeach ()
 
-    add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS})
+    nanobind_add_stub(
+      CGALPY_STUBS
+      MODULE ${CGALPY_LIB_NAME}
+      OUTPUT ${PYI_PREFIX}${CGALPY_LIB_NAME}.pyi
+      DEPENDS CGALPY
+      MARKER_FILE py.typed
+    )
+
+    # add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS})
     list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS})
 
     ################################################################################
@@ -665,8 +680,9 @@ if (NOT SKBUILD)
     list(APPEND CGALPY_SETUP_DATA "'__init__.py'")
     list(APPEND CGALPY_SETUP_DATA "'${CGALPY_LIB_NAME}.pyi'")
     foreach (MODULE IN LISTS CGALPY_MODULES)
-        list(APPEND CGALPY_SETUP_DATA "'${MODULE}/__init__.pyi'")
+      list(APPEND CGALPY_SETUP_DATA "'${MODULE}/__init__.pyi'")
     endforeach ()
+    list(APPEND CGALPY_SETUP_DATA "'py.typed'")
     string(REPLACE ";" "," CGALPY_SETUP_DATA "${CGALPY_SETUP_DATA}")
 
     add_custom_command(
