@@ -31,7 +31,6 @@ void export_sphere_3(C& c) {
 
   c.def(py::init<>())
     .def(py::init<const Pnt&, const FT&, CGAL::Orientation>())
-    .def(py::init<const Pnt&, double, CGAL::Orientation>())
     .def(py::init<const Pnt&, const Pnt&, const Pnt&, const Pnt&>())
     .def(py::init<const Pnt&, const Pnt&, const Pnt&, CGAL::Orientation>())
     .def(py::init<const Pnt&, const Pnt&, CGAL::Orientation>())
@@ -53,13 +52,13 @@ void export_sphere_3(C& c) {
     .def("opposite", &Sphere::opposite)
     .def("orthogonal_transform", &Sphere::orthogonal_transform)
     .def("bbox", &Sphere::bbox)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     //.setattr("__hash__", &hash<Sphere>)
     ;
 
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
   add_extraction(c);
 }
 

@@ -53,8 +53,10 @@ void export_iso_rectangle_2(C& c) {
     .def("has_on_unbounded_side", &Iso_rect_2::has_on_unbounded_side)
     .def("__str__", to_string<Iso_rect_2>)
     .def("__repr__", to_string<Iso_rect_2>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     //.setattr("__hash__", &hash<Iso_rect_2>)
     ;
 

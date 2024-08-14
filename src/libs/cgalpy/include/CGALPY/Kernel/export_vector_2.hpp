@@ -56,9 +56,10 @@ void export_vector_2(C& c) {
     .def("direction", &Vec::direction)
     .def("transform", &Vec::transform)
     .def("perpendicular", &Vec::perpendicular)
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self != bp::self)
+    .def(bp::self == bp::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(bp::self != bp::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(bp::self + bp::self)
     .def(bp::self += bp::self)
     .def(bp::self - bp::self)

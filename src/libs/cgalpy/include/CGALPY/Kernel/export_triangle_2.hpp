@@ -46,13 +46,13 @@ void export_triangle_2(C& c) {
     .def("transform", &Tri_2::transform)
     .def("__str__", to_string<Tri_2>)
     .def("__repr__", to_string<Tri_2>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     //.setattr("__hash__", &hash<Tri_2>)
     ;
 
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
   add_extraction(c);
 }
 

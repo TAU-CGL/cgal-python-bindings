@@ -49,8 +49,10 @@ void export_plane_3(C& c) {
     .def("orthogonal_direction", &Pln::orthogonal_direction)
     .def("base1", &Pln::base1)
     .def("base2", &Pln::base2)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     // .setattr("__doc__", "Plane_3") NB
     ;
 

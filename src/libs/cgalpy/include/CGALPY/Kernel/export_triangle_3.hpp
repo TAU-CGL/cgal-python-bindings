@@ -34,8 +34,10 @@ void export_triangle_3(C& c) {
     .def("is_degenerate", &Tri_3::is_degenerate)
     .def("bbox", &Tri_3::bbox)
     .def("transform", &Tri_3::transform)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     //.setattr("__hash__", &hash<Tri_3>)
     ;
 

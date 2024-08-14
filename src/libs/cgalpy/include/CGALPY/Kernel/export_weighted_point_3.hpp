@@ -17,6 +17,7 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "CGALPY/to_string.hpp"
 
 namespace py = nanobind;
 
@@ -46,8 +47,10 @@ void export_weighted_point_3(C& c) {
     // Operations
     .def("__str__", to_string<Wd_pnt_3>)
     .def("__repr__", to_string<Wd_pnt_3>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     // Convenient operations
     .def("homogeneous", &Wd_pnt_3::homogeneous)
     .def("cartesian", &Wd_pnt_3::cartesian)
@@ -60,8 +63,6 @@ void export_weighted_point_3(C& c) {
     //.setattr("__hash__", &hash<Point_3>)
     ;
 
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
   add_extraction(c);
 }
 

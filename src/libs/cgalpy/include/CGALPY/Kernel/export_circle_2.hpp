@@ -53,8 +53,10 @@ void export_circle_2(C& c) {
     .def("has_on_bounded_side", &Circle::has_on_bounded_side)
     .def("has_on_unbounded_side", &Circle::has_on_unbounded_side)
     .def("orthogonal_transform", &Circle::orthogonal_transform)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     //.setattr("__hash__", &hash<Circle>)
     ;
 

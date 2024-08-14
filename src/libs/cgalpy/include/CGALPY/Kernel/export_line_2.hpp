@@ -18,6 +18,7 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "CGALPY/to_string.hpp"
 
 namespace py = nanobind;
 
@@ -61,13 +62,13 @@ void export_line_2(C& c) {
     .def("y_at_x", &Lin::y_at_x)
     .def("__str__", to_string<Lin>)
     .def("__repr__", to_string<Lin>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     //.setattr("__hash__", &hash<Lin>)
     ;
 
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
   add_extraction(c);
 }
 

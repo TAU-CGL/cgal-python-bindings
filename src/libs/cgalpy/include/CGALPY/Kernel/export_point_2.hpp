@@ -49,8 +49,10 @@ void export_point_2(C& c) {
     .def("cartesian", &Pnt::cartesian)
     .def("__getitem__", &Pnt::operator[])
     .def("dimension", &Pnt::dimension)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self > py::self)
     .def(py::self < py::self)
     .def(py::self <= py::self)

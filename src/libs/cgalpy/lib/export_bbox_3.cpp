@@ -23,8 +23,10 @@ void export_bbox_3(py::class_<CGAL::Bbox_3>& c) {
     .def("max", &CGAL::Bbox_3::max)
     .def("__str__", to_string<CGAL::Bbox_3>)
     .def("__repr__", to_string<CGAL::Bbox_3>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self += py::self)
     .def(py::self + py::self)
     ;

@@ -15,6 +15,7 @@
 #include "CGALPY/config.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/kernel_config.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/add_extraction.hpp"
 
@@ -50,8 +51,10 @@ void export_point_3(C& c) {
     .def("cartesian", &Pnt::cartesian)
     .def("__getitem__", &Pnt::operator[])
     .def("dimension", &Pnt::dimension)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self > py::self)
     .def(py::self < py::self)
     .def(py::self <= py::self)

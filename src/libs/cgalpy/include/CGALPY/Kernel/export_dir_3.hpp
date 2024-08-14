@@ -48,15 +48,14 @@ void export_dir_3(C& c) {
     .def("delta", &Dir::delta)
     .def("__str__", to_string<Dir>)
     .def("__repr__", to_string<Dir>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(-py::self)
     //.setattr("__hash__", &hash<Dir>)
     ;
 
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
   add_extraction(c);
 }
 

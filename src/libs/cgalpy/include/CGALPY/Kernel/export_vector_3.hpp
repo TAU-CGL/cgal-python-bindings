@@ -35,7 +35,6 @@ void export_vector_3(C& c) {
     .def(bp::init<Seg>())
     .def(bp::init<FT&, FT&, FT&, FT&>())
     .def(bp::init<FT&, FT&, FT&>())
-    .def(bp::init<double, double, double>())
     .def("hx", &Vec::hx)
     .def("hy", &Vec::hy)
     .def("hz", &Vec::hz)
@@ -50,9 +49,10 @@ void export_vector_3(C& c) {
     .def("dimension", &Vec::dimension)
     .def("direction", &Vec::direction)
     .def("transform", &Vec::transform)
-    .def(bp::self == bp::self)
-    .def(bp::self != bp::self)
-    .def(bp::self != bp::self)
+    .def(bp::self == bp::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(bp::self != bp::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(bp::self + bp::self)
     .def(bp::self += bp::self)
     .def(bp::self - bp::self)
