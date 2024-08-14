@@ -37,7 +37,8 @@ void export_point_2(C& c) {
   using Vec = typename Ker::Vector_2;
 
   c.def(py::init<>())
-    .def(py::init<const Ft&, const Ft&>())
+    .def(py::init<const Ft&, const Ft&>(),
+         py::sig("def __init__(self, x: FT | float, y: FT | float, /) -> None"))
     .def(py::init<const Rt&, const Rt&, const Rt&>())
     .def(py::init<Pnt&>())
     .def("x", &Pnt::x)
