@@ -393,7 +393,6 @@ void export_boost_halfedge(C& prn_c) {
 
   py::class_<Halfedge> halfedge_c(prn_c, "halfedge_descriptor");
   halfedge_c.def(py::init<>())
-    .def(py::init<>())
     .def("facet", [](const Halfedge& e){ return e->facet(); })
     .def("facet_begin", [](const Halfedge& e){ return e->facet_begin(); })
     .def("is_border", [](const Halfedge& e){ return e->is_border(); })
@@ -414,7 +413,6 @@ void export_boost_halfedge(C& prn_c) {
     .def("prev_on_vertex", [](const Halfedge& e){ return e->prev_on_vertex(); })
     // .def("prev_link", [](const Halfedge& e){ return e->prev_link(); })
     // .def("next_link", [](const Halfedge& e){ return e->next_link(); })
-    .def("facet", [](const Halfedge& e){ return e->facet(); })
     ;
 
 }
@@ -541,7 +539,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("is_closed", &Prn::is_closed)
       .def("is_empty", &Prn::is_empty)
       .def("is_tetrahedron", &pol3::is_tetrahedron)
-      .def("is_triangle", &Prn::is_triangle)
+      // .def("is_triangle", &Prn::is_triangle) // this is probably not meant to be used
       .def("is_valid", &Prn::is_valid)
       .def("join_facet", &Prn::join_facet)
       .def("join_loop", &Prn::join_loop)
