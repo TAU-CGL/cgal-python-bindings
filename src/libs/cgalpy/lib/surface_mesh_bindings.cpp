@@ -71,6 +71,17 @@ void edge_map(py::module_& m, const std::string& map_name, const std::string& pr
 }
 
 template <typename Pm, typename P>
+void edge_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
+  using dp = CGAL::dynamic_edge_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Ed& e) { return py::bool_(get(p, e)); },
+        py::arg("property_map"), py::arg("edge_descriptor"));
+}
+
+template <typename Pm, typename P>
 void face_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Fd = typename boost::graph_traits<Pm>::face_descriptor;
   using dp = CGAL::dynamic_face_property_t<P>;
@@ -78,6 +89,17 @@ void face_map(py::module_& m, const std::string& map_name, const std::string& pr
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
   m.def("get", [](const map_type& p, const Fd& f) { return get(p, f); },
+        py::arg("property_map"), py::arg("face_descriptor"));
+}
+
+template <typename Pm, typename P>
+void face_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
+  using dp = CGAL::dynamic_face_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Fd& f) { return py::bool_(get(p, f)); },
         py::arg("property_map"), py::arg("face_descriptor"));
 }
 
@@ -93,6 +115,18 @@ void vertex_map(py::module_& m, const std::string& map_name, const std::string& 
 }
 
 template <typename Pm, typename P>
+void vertex_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
+  using dp = CGAL::dynamic_vertex_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Vd& v) { return py::bool_(get(p, v)); },
+        py::arg("property_map"), py::arg("vertex_descriptor"));
+}
+
+
+template <typename Pm, typename P>
 void halfedge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
   using dp = CGAL::dynamic_halfedge_property_t<P>;
@@ -100,6 +134,17 @@ void halfedge_map(py::module_& m, const std::string& map_name, const std::string
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
   m.def("get", [](const map_type& p, const Hd& h) { return get(p, h); },
+        py::arg("property_map"), py::arg("halfedge_descriptor"));
+}
+
+template <typename Pm, typename P>
+void halfedge_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+  using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
+  using dp = CGAL::dynamic_halfedge_property_t<P>;
+  using map_type = typename boost::property_map<Pm, dp>::type;
+  register_map<map_type>(m, map_name);
+  register_map_get<dp, Pm>(m, prop_name);
+  m.def("get", [](const map_type& p, const Hd& h) { return py::bool_(get(p, h)); },
         py::arg("property_map"), py::arg("halfedge_descriptor"));
 }
 
@@ -513,8 +558,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges)
 
 
-      .def("null_vertex", &Sm::null_vertex)
-      .def("null_halfedge", &Sm::null_halfedge)
 
       .def("next_around_source", &Sm::next_around_source)
       .def("prev_around_source", &Sm::prev_around_source)
@@ -539,7 +582,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("add_property_map_vertex_FT", &sm::add_map<Sm, Vi, FT>,
            py::arg("name") = std::string(), py::arg("default_value") = FT())
       .def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
-           py::arg("name") = std::string(), py::arg("default_value"))
+           py::arg("name"), py::arg("default_value"))
       .def("add_property_map_vertex_set_int", [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
         std::set<int> s;
         for (auto v : default_value) {
@@ -633,8 +676,11 @@ void export_surface_mesh(py::module_& m) {
 
   internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map"); //this is the Pm::Property_map
   sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
-  internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
-  sm::vertex_map<Sm_3, bool>(m, "vertex_bool_boost_map", "Vertex_bool_boost_map");
+  
+  using vbmap = typename Sm_3::template Property_map<Vi, bool>;
+  internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
+  sm::vertex_bool_map<Sm_3, bool>(m, "vertex_bool_boost_map", "Vertex_bool_boost_map");
+
   internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
   sm::vertex_map<Sm_3, std::size_t>(m, "vertex_size_t_boost_map", "Vertex_size_t_boost_map");
   internal::export_property_map<Sm_3, Vi, Vector_3>(m, "Vertex_vector_map");
@@ -648,10 +694,10 @@ void export_surface_mesh(py::module_& m) {
   internal::export_property_map<Sm_3, Vi, std::set<int>>(m, "Vertex_set_int_map");
   sm::vertex_map<Sm_3, std::set<int>>(m, "vertex_set_int_boost_map", "Vertex_set_int_boost_map");
 
-  m.def("get", [](const Sm_3::Property_map<Ei, bool>& p, const Ei& e) { return bool(get(p, e)); }, //this overrides get
-        py::arg("property_map"), py::arg("edge_descriptor"));
-  internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
-  sm::edge_map<Sm_3, bool>(m, "edge_bool_boost_map", "Edge_bool_boost_map");
+  using ebmap_type = typename Sm_3::template Property_map<Ei, bool>; // different for bools because it would return std::_Bit_reference
+  internal::export_property_map_bool<Sm_3, Ei>(m, "Edge_bool_map");
+  sm::edge_bool_map<Sm_3, bool>(m, "edge_bool_boost_map", "Edge_bool_boost_map");
+  // sm::register_map<ebmap_type>(m, "Edge_bool_map");
 
   internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
   sm::face_map<Sm_3, double>(m, "face_double_boost_map", "Face_double_boost_map");
@@ -661,8 +707,11 @@ void export_surface_mesh(py::module_& m) {
   sm::face_map<Sm_3, std::size_t>(m, "face_size_t_boost_map", "Face_size_t_boost_map");
   internal::export_property_map<Sm_3, Fi, int>(m, "Face_int_map");
   sm::face_map<Sm_3, int>(m, "face_int_boost_map", "Face_int_boost_map");
-  internal::export_property_map<Sm_3, Fi, bool>(m, "Face_bool_map");
-  sm::face_map<Sm_3, bool>(m, "face_bool_boost_map", "Face_bool_boost_map");
+  using fbmap = typename Sm_3::template Property_map<Fi, bool>;
+  internal::export_property_map_bool<Sm_3, Fi>(m, "Face_bool_map");
+  sm::face_bool_map<Sm_3, bool>(m, "face_bool_boost_map", "Face_bool_boost_map");
+
+
   // internal::export_property_map<Sm_3, Fi, std::uint32_t>(m, "Face_uint32_t_map");
   // sm::face_map<Sm_3, std::uint32_t>(m, "face_uint32_t_boost_map", "Face_uint32_t_boost_map");
 
@@ -670,8 +719,9 @@ void export_surface_mesh(py::module_& m) {
   sm::halfedge_map<Sm_3, std::size_t>(m, "halfedge_size_t_boost_map", "Halfedge_size_t_boost_map");
   internal::export_property_map<Sm_3, Hi, py::tuple>(m, "Halfedge_tuple_map");
   sm::halfedge_map<Sm_3, py::tuple>(m, "halfedge_tuple_boost_map", "Halfedge_tuple_boost_map");
-  internal::export_property_map<Sm_3, Hi, bool>(m, "Halfedge_bool_map");
-  sm::halfedge_map<Sm_3, bool>(m, "halfedge_bool_boost_map", "Halfedge_bool_boost_map");
+  using hbmap = typename Sm_3::template Property_map<Hi, bool>;
+  internal::export_property_map_bool<Sm_3, Hi>(m, "Halfedge_bool_map");
+  sm::halfedge_bool_map<Sm_3, bool>(m, "halfedge_bool_boost_map", "Halfedge_bool_boost_map");
 
   // internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map"); // this is a dict not a map??
 
@@ -737,6 +787,9 @@ void export_surface_mesh(py::module_& m) {
   m.def("is_triangle", &sm::is_triangle<Sm_3>);
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>);
 
+  m.def("null_vertex", &Sm_3::null_vertex);
+  m.def("null_halfedge", &Sm_3::null_halfedge);
+
   // boost
   m.def("num_vertices", &boost_utils::num_vertices<Sm_3>);
   m.def("num_edges", &boost_utils::num_edges<Sm_3>);
@@ -768,7 +821,7 @@ void export_surface_mesh(py::module_& m) {
   m.def("set_halfedge", &boost_utils::set_halfedge_vh<Sm_3>);
   m.def("collect_garbage", &boost_utils::my_collect_garbage<Sm_3>);
   m.def("add_edge", &boost_utils::add_edge<Sm_3>);
-  m.def("halfedge", &boost_utils::halfedge_f<Sm_3>);
+  // m.def("halfedge", &boost_utils::halfedge_f<Sm_3>); // this one is already registered
   m.def("face", &boost_utils::face_h<Sm_3>);
   m.def("set_face", &boost_utils::set_face<Sm_3>);
   m.def("set_halfedge", &boost_utils::set_halfedge_fh<Sm_3>);
