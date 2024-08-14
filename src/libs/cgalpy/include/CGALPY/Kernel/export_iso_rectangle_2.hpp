@@ -58,8 +58,6 @@ void export_iso_rectangle_2(C& c) {
     //.setattr("__hash__", &hash<Iso_rect_2>)
     ;
 
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
   add_extraction(c);
 }
 

@@ -28,7 +28,7 @@ try: mesh1 = Sm.read_polygon_mesh(filename1)
 except: raise ValueError("Invalid input 1.")
 
 try: mesh2 = Sm.read_polygon_mesh(filename2)
-excep: raise ValueError("Invalid input 2.")
+except: raise ValueError("Invalid input 2.")
 
 polylines = Pmp.surface_intersection(mesh1, mesh2)
 

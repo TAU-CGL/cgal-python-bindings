@@ -40,7 +40,6 @@ void export_dir_2(C& c) {
     .def(py::init<Ray>())
     .def(py::init<Seg>())
     .def(py::init<Rt&, Rt&>())
-    .def(py::init<double, double>())
     .def("dx", &Dir::dx)
     .def("dy", &Dir::dy)
     .def("vector", &Dir::vector)
@@ -60,8 +59,6 @@ void export_dir_2(C& c) {
     //.setattr("__hash__", &hash<Direction_2>)
     ;
 
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
   add_extraction(c);
 }
 
