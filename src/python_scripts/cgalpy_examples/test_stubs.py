@@ -14,3 +14,6 @@ p: Ker.Point_2
 p = Ker.Point_2(1, 2)
 print(p)
 
+# this fails for me:
+p = Ker.Point_2(CGALPY.Kernel.Point_2(CGALPY.Ker.FT(1), CGALPY.Ker.FT(2)))
+
