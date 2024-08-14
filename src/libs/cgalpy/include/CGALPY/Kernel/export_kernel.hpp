@@ -64,6 +64,7 @@ void export_kernel(C_& ker_c) {
   using Tri_3 = typename Ker::Triangle_3;
   using Vec_3 = typename Ker::Vector_3;
   using Wd_pnt_3 = typename Ker::Weighted_point_3;
+  using Ic_3 = typename Ker::Iso_cuboid_3;
 
   // Kernel 2D operators
   using Equal_2 = typename Ker::Equal_2;
@@ -287,11 +288,11 @@ void export_kernel(C_& ker_c) {
   }
 
   // Iso_cuboid_3
-  if (! add_attr<Iso_cuboid_3>(ker_c, "Iso_cuboid_3")) {
-    py::class_<Iso_cuboid_3> iso3_c(ker_c, "Iso_cuboid_3");
+  if (! add_attr<Ic_3>(ker_c, "Iso_cuboid_3")) {
+    py::class_<Ic_3> iso3_c(ker_c, "Iso_cuboid_3");
     export_iso_cuboid_3<Ker>(iso3_c);
   }
-  
+
   //////// 3D Operators
 
   // Compare_z_3
