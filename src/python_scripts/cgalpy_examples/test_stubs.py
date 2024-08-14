@@ -10,7 +10,7 @@ else:
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-p: Ker.Point_3
-p = Ker.Kernel.Point_3(CGALPY.Ker.FT(1), CGALPY.Ker.FT(2), CGALPY.Ker.FT(3))
+p: Ker.Point_2
+p = Ker.Point_2(1, 2)
 print(p)
 
