@@ -36,6 +36,8 @@
 #include "CGALPY/Kernel/export_dir_3.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
+#include "CGALPY/Kernel/export_line_3.hpp"
+#include "CGALPY/Kernel/export_tetrahedron_3.hpp"
 #include "CGALPY/Kernel/export_sphere_3.hpp"
 #include "CGALPY/Kernel/export_triangle_3.hpp"
 #include "CGALPY/Kernel/export_vector_3.hpp"
@@ -251,6 +253,18 @@ void export_kernel_module(py::module_& m) {
   if (! add_attr<Pnt_3>(m, "Point_3")) {
     py::class_<Pnt_3> pnt3_c(m, "Point_3");
     export_point_3<Kernel>(pnt3_c);
+  }
+
+  // Line_3
+  if (! add_attr<Line_3>(m, "Line_3")) {
+    py::class_<Line_3> line3_c(m, "Line_3");
+    export_line_3<Kernel>(line3_c);
+  }
+
+  // Tetrahedron_3
+  if (! add_attr<Tetrahedron_3>(m, "Tetrahedron_3")) {
+    py::class_<Tetrahedron_3> tet3_c(m, "Tetrahedron_3");
+    export_tetrahedron_3<Kernel>(tet3_c);
   }
 
   // Triangle_2

@@ -4766,7 +4766,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("keep_largest_connected_components", &pmp::keep_largest_connected_components<Pm>,
         py::arg("pm"), py::arg("nb_components_to_keep"), py::arg("np") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
-  m.def("remove_connected_components_map", &pmp::remove_connected_components_map<Pm, FaceComponentMap>,
+  m.def("remove_connected_components", &pmp::remove_connected_components_map<Pm, FaceComponentMap>,
         py::arg("pm"), py::arg("components_to_remove"), py::arg("fccmap"), py::arg("np") = py::dict());
 #endif
   m.def("remove_connected_components", &pmp::remove_connected_components<Pm>,

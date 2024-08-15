@@ -712,7 +712,7 @@ void export_surface_mesh(py::module_& m) {
   sm::face_bool_map<Sm_3, bool>(m, "face_bool_boost_map", "Face_bool_boost_map");
 
 
-  // internal::export_property_map<Sm_3, Fi, std::uint32_t>(m, "Face_uint32_t_map");
+  internal::export_property_map<Sm_3, Fi, std::uint32_t>(m, "Face_uint32_t_map");
   // sm::face_map<Sm_3, std::uint32_t>(m, "face_uint32_t_boost_map", "Face_uint32_t_boost_map");
 
   internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");

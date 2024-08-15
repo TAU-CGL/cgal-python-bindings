@@ -56,6 +56,9 @@ void export_cgal(py::module_& m) {
       .value("CLOCKWISE", CGAL::CLOCKWISE)
       .value("COUNTERCLOCKWISE", CGAL::COUNTERCLOCKWISE)
       .value("COPLANAR", CGAL::COPLANAR)
+
+      .value("DEGENERATE", CGAL::DEGENERATE)
+
       .export_values()
       ;
   }
@@ -71,6 +74,15 @@ void export_cgal(py::module_& m) {
       .value("OBTUSE", CGAL::OBTUSE)
       .value("RIGHT", CGAL::RIGHT)
       .value("ACUTE", CGAL::ACUTE)
+      .export_values()
+      ;
+  }
+
+  if (! add_attr<CGAL::Bounded_side>(m, "Bounded_side")) {
+    py::enum_<CGAL::Bounded_side>(m, "Bounded_side")
+      .value("ON_UNBOUNDED_SIDE", CGAL::ON_UNBOUNDED_SIDE)
+      .value("ON_BOUNDARY", CGAL::ON_BOUNDARY)
+      .value("ON_BOUNDED_SIDE", CGAL::ON_BOUNDED_SIDE)
       .export_values()
       ;
   }

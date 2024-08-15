@@ -26,6 +26,7 @@
 
 // 3D functors
 #include "CGALPY/Kernel/export_aff_transformation_3.hpp"
+#include "CGALPY/Kernel/export_circle_3.hpp"
 #include "CGALPY/Kernel/export_dir_3.hpp"
 #include "CGALPY/Kernel/export_iso_cuboid_3.hpp"
 #include "CGALPY/Kernel/export_line_3.hpp"
@@ -34,6 +35,7 @@
 #include "CGALPY/Kernel/export_ray_3.hpp"
 #include "CGALPY/Kernel/export_segment_3.hpp"
 #include "CGALPY/Kernel/export_sphere_3.hpp"
+#include "CGALPY/Kernel/export_tetrahedron_3.hpp"
 #include "CGALPY/Kernel/export_triangle_3.hpp"
 #include "CGALPY/Kernel/export_vector_3.hpp"
 #include "CGALPY/Kernel/export_weighted_point_3.hpp"
@@ -63,6 +65,7 @@ void export_kernel(C_& ker_c) {
 
   // Kernel 3D objects
   using Aff_trans_3 = typename Ker::Aff_transformation_3;
+  using Circle_3 = typename Ker::Circle_3;
   using Dir_3 = typename Ker::Direction_3;
   using Ic_3 = typename Ker::Iso_cuboid_3;
   using Line_3 = typename Ker::Line_3;
@@ -260,6 +263,12 @@ void export_kernel(C_& ker_c) {
     export_aff_transformation_3<Ker>(aff3_c);
   }
 
+  // Circle_3
+  if (! add_attr<Circle_3>(ker_c, "Circle_3")) {
+    py::class_<Circle_3> circle3_c(ker_c, "Circle_3");
+    export_circle_3<Ker>(circle3_c);
+  }
+
   // // Direction_3
   if (! add_attr<Dir_3>(ker_c, "Direction_3")) {
     py::class_<Dir_3> dir3_c(ker_c, "Direction_3");
@@ -272,9 +281,16 @@ void export_kernel(C_& ker_c) {
     export_iso_cuboid_3<Ker>(iso3_c);
   }
 
+  // Line_3
   if (! add_attr<Line_3>(ker_c, "Line_3")) {
     py::class_<Line_3> line3_c(ker_c, "Line_3");
     export_line_3<Ker>(line3_c);
+  }
+
+  // Tetrahedron_3
+  if (! add_attr<Tet_3>(ker_c, "Tetrahedron_3")) {
+    py::class_<Tet_3> tet3_c(ker_c, "Tetrahedron_3");
+    export_tetrahedron_3<Ker>(tet3_c);
   }
 
   // Plane_3
