@@ -25,6 +25,7 @@
 #include "CGALPY/Kernel/export_weighted_point_2.hpp"
 
 // 3D functors
+#include "CGALPY/Kernel/export_aff_transformation_3.hpp"
 #include "CGALPY/Kernel/export_dir_3.hpp"
 #include "CGALPY/Kernel/export_iso_cuboid_3.hpp"
 #include "CGALPY/Kernel/export_line_3.hpp"
@@ -255,9 +256,8 @@ void export_kernel(C_& ker_c) {
 
   // Aff_transformation_3
   if (! add_attr<Aff_trans_3>(ker_c, "Aff_transformation_3")) {
-    py::class_<Aff_trans_3>(ker_c, "Aff_transformation_3")
-      .def(py::init<>())
-      ;
+    py::class_<Aff_trans_3> aff3_c(ker_c, "Aff_transformation_3");
+    export_aff_transformation_3<Ker>(aff3_c);
   }
 
   // // Direction_3
