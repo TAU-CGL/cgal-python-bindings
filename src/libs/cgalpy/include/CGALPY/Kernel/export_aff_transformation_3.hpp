@@ -47,10 +47,10 @@ void export_aff_transformation_3(C& c) {
     .def("__call__", [](const Aff_3& t, const Pln_3& l) { return t(l); },
          py::sig("def __call__(self, l: Plane_3, /) -> Plane_3"))
     .def(py::self * py::self,
-         py::sig("def __mul__(self, s: Aff_transformation_3, /) -> Aff_transformation_3"))
+         py::sig("def __mul__(self, s: object, /) -> Aff_transformation_3"))
     .def("inverse", &Aff_3::inverse, "gives the inverse transformation.")
     .def(py::self == py::self,
-         py::sig("def __eq__(self, s: Aff_transformation_3, /) -> bool"))
+         py::sig("def __eq__(self, s: object, /) -> bool"))
     .def("is_even", &Aff_3::is_even, "returns true, if the transformation is not reflecting, i.e. the determinant of the involved linear transformation is non-negative.")
     .def("is_odd", &Aff_3::is_odd, "returns true, if the transformation is reflecting.")
     .def("is_scaling", &Aff_3::is_scaling, "returns true, if the object was constructed using the tag CGAL::Scaling, or is the result of the composition of only such scaling transformation objects.")

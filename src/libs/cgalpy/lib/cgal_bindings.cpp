@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/aff_transformation_tags.h>
 #include <nanobind/nanobind.h>
 
 #include <CGAL/basic.h>
@@ -27,6 +28,8 @@ void export_cgal(py::module_& m) {
   using Rotation = CGAL::Rotation;
   using Scaling = CGAL::Scaling;
   using Translation = CGAL::Translation;
+  using Identity_transformation = CGAL::Identity_transformation;
+  using Reflection = CGAL::Reflection;
 
   if (! add_attr<CGAL::Sign>(m, "Result")) {
     py::enum_<CGAL::Sign>(m, "Result")
@@ -86,6 +89,18 @@ void export_cgal(py::module_& m) {
 
   if (! add_attr<Translation>(m, "Translation")) {
     py::class_<Translation>(m, "Translation")
+      .def(py::init<>())
+      ;
+  }
+
+  if (! add_attr<Identity_transformation>(m, "Identity_transformation")) {
+    py::class_<Identity_transformation>(m, "Identity_transformation")
+      .def(py::init<>())
+      ;
+  }
+
+  if (! add_attr<Reflection>(m, "Reflection")) {
+    py::class_<Reflection>(m, "Reflection")
       .def(py::init<>())
       ;
   }

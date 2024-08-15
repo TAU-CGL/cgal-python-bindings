@@ -124,7 +124,8 @@ void export_aff_transformation_2(C& c) {
          py::sig("def __call__(self, l: Line_2, /) -> Line_2"))
     .def(py::self * py::self, py::arg("s"), "composes two affine transformations.")
     .def("inverse", &Aff_2::inverse, "gives the inverse transformation.")
-    .def(py::self == py::self, py::arg("s"), "compares two affine transformations.")
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"), "compares two affine transformations.")
     .def("is_even", &Aff_2::is_even, "returns true, if the transformation is not reflecting, i.e. the determinant of the involved linear transformation is non-negative.")
     .def("is_odd", &Aff_2::is_odd, "returns true, if the transformation is reflecting.")
     .def("is_scaling", &Aff_2::is_scaling, "returns true, if the object was constructed using the tag CGAL::Scaling, or is the result of the composition of only such scaling transformation objects.")
