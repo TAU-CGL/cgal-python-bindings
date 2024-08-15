@@ -4951,7 +4951,7 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   // Intersection Functions
   m.def("do_intersect", &pmp::do_intersect_polylines);
-  m.def("do_intersect", &pmp::do_intersect_polyline_ranges);
+  m.def("do_intersect_polyline_ranges", &pmp::do_intersect_polyline_ranges);
   m.def("do_intersect", &pmp::do_intersect_meshes<Pm>,
         py::arg("pm1"), py::arg("pm2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
@@ -5137,7 +5137,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("degenerate_edges", &pmp::degenerate_edges_r<Pm>,
         py::arg("edges"), py::arg("tm"),
         py::arg("np") = py::dict());
-  m.def("degenerate_faces", &pmp::degenerate_edges<Pm>,
+  m.def("degenerate_edges", &pmp::degenerate_edges<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
   m.def("degenerate_faces", &pmp::degenerate_faces_r<Pm>,
         py::arg("faces"), py::arg("tm"),
