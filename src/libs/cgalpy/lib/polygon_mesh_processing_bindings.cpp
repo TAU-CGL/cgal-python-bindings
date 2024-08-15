@@ -4958,7 +4958,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("do_intersect", &pmp::do_intersect_mesh_polyline<Pm>,
         py::arg("pm"), py::arg("lst"),
         py::arg("np") = py::dict());
-  m.def("do_intersect", &pmp::do_intersect_mesh_polyline_range<Pm>,
+  m.def("do_intersect_polyline_range", &pmp::do_intersect_mesh_polyline_range<Pm>,
         py::arg("pm"), py::arg("lst"),
         py::arg("np") = py::dict());
   m.def("does_self_intersect_faces", &pmp::does_self_intersect_faces<Pm>,
