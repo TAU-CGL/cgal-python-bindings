@@ -545,7 +545,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("set_target", &Sm::set_target)
       .def("has_garbage", &Sm::has_garbage)
       .def("is_isolated", &Sm::is_isolated)
-      .def("halfedges_end", &Sm::halfedges_end)
+      // .def("halfedges_end", &Sm::halfedges_end) // not needed
       .def("set_next_only", &Sm::set_next_only)
       .def("set_prev_only", &Sm::set_prev_only)
       .def("shrink_to_fit", &Sm::shrink_to_fit)
@@ -675,53 +675,53 @@ void export_surface_mesh(py::module_& m) {
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
   internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map"); //this is the Pm::Property_map
-  sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
+  // sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
   
   using vbmap = typename Sm_3::template Property_map<Vi, bool>;
   internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
-  sm::vertex_bool_map<Sm_3, bool>(m, "vertex_bool_boost_map", "Vertex_bool_boost_map");
+  // sm::vertex_bool_map<Sm_3, bool>(m, "vertex_bool_boost_map", "Vertex_bool_boost_map");
 
   internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
-  sm::vertex_map<Sm_3, std::size_t>(m, "vertex_size_t_boost_map", "Vertex_size_t_boost_map");
+  // sm::vertex_map<Sm_3, std::size_t>(m, "vertex_size_t_boost_map", "Vertex_size_t_boost_map");
   internal::export_property_map<Sm_3, Vi, Vector_3>(m, "Vertex_vector_map");
-  sm::vertex_map<Sm_3, Vector_3>(m, "vertex_vector_boost_map", "Vertex_vector_boost_map");
+  // sm::vertex_map<Sm_3, Vector_3>(m, "vertex_vector_boost_map", "Vertex_vector_boost_map");
   internal::export_property_map<Sm_3, Vi, int>(m, "Vertex_int_map");
-  sm::vertex_map<Sm_3, int>(m, "vertex_int_boost_map", "Vertex_int_boost_map");
+  // sm::vertex_map<Sm_3, int>(m, "vertex_int_boost_map", "Vertex_int_boost_map");
   internal::export_property_map<Sm_3, Vi, FT>(m, "Vertex_FT_map");
-  sm::vertex_map<Sm_3, FT>(m, "vertex_FT_boost_map", "Vertex_FT_boost_map");
+  // sm::vertex_map<Sm_3, FT>(m, "vertex_FT_boost_map", "Vertex_FT_boost_map");
   internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
-  sm::vertex_map<Sm_3, Pcad>(m, "vertex_Principal_curvatures_and_directions_boost_map", "Vertex_Principal_curvatures_and_directions_boost_map");
-  internal::export_property_map<Sm_3, Vi, std::set<int>>(m, "Vertex_set_int_map");
-  sm::vertex_map<Sm_3, std::set<int>>(m, "vertex_set_int_boost_map", "Vertex_set_int_boost_map");
+  // sm::vertex_map<Sm_3, Pcad>(m, "vertex_Principal_curvatures_and_directions_boost_map", "Vertex_Principal_curvatures_and_directions_boost_map");
+  internal::export_property_map<Sm_3, Vi, py::set>(m, "Vertex_set_map");
+  // sm::vertex_map<Sm_3, py::set>(m, "vertex_set_boost_map", "Vertex_set_boost_map");
 
   using ebmap_type = typename Sm_3::template Property_map<Ei, bool>; // different for bools because it would return std::_Bit_reference
   internal::export_property_map_bool<Sm_3, Ei>(m, "Edge_bool_map");
-  sm::edge_bool_map<Sm_3, bool>(m, "edge_bool_boost_map", "Edge_bool_boost_map");
+  // sm::edge_bool_map<Sm_3, bool>(m, "edge_bool_boost_map", "Edge_bool_boost_map");
   // sm::register_map<ebmap_type>(m, "Edge_bool_map");
 
   internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
-  sm::face_map<Sm_3, double>(m, "face_double_boost_map", "Face_double_boost_map");
+  // sm::face_map<Sm_3, double>(m, "face_double_boost_map", "Face_double_boost_map");
   internal::export_property_map<Sm_3, Fi, Vector_3>(m, "Face_vector_map");
-  sm::face_map<Sm_3, Vector_3>(m, "face_vector_boost_map", "Face_vector_boost_map");
+  // sm::face_map<Sm_3, Vector_3>(m, "face_vector_boost_map", "Face_vector_boost_map");
   internal::export_property_map<Sm_3, Fi, std::size_t>(m, "Face_size_t_map");
-  sm::face_map<Sm_3, std::size_t>(m, "face_size_t_boost_map", "Face_size_t_boost_map");
+  // sm::face_map<Sm_3, std::size_t>(m, "face_size_t_boost_map", "Face_size_t_boost_map");
   internal::export_property_map<Sm_3, Fi, int>(m, "Face_int_map");
-  sm::face_map<Sm_3, int>(m, "face_int_boost_map", "Face_int_boost_map");
+  // sm::face_map<Sm_3, int>(m, "face_int_boost_map", "Face_int_boost_map");
   using fbmap = typename Sm_3::template Property_map<Fi, bool>;
   internal::export_property_map_bool<Sm_3, Fi>(m, "Face_bool_map");
-  sm::face_bool_map<Sm_3, bool>(m, "face_bool_boost_map", "Face_bool_boost_map");
+  // sm::face_bool_map<Sm_3, bool>(m, "face_bool_boost_map", "Face_bool_boost_map");
 
 
-  // internal::export_property_map<Sm_3, Fi, std::uint32_t>(m, "Face_uint32_t_map");
+  internal::export_property_map<Sm_3, Fi, std::uint32_t>(m, "Face_uint32_t_map");
   // sm::face_map<Sm_3, std::uint32_t>(m, "face_uint32_t_boost_map", "Face_uint32_t_boost_map");
 
   internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
-  sm::halfedge_map<Sm_3, std::size_t>(m, "halfedge_size_t_boost_map", "Halfedge_size_t_boost_map");
+  // sm::halfedge_map<Sm_3, std::size_t>(m, "halfedge_size_t_boost_map", "Halfedge_size_t_boost_map");
   internal::export_property_map<Sm_3, Hi, py::tuple>(m, "Halfedge_tuple_map");
-  sm::halfedge_map<Sm_3, py::tuple>(m, "halfedge_tuple_boost_map", "Halfedge_tuple_boost_map");
+  // sm::halfedge_map<Sm_3, py::tuple>(m, "halfedge_tuple_boost_map", "Halfedge_tuple_boost_map");
   using hbmap = typename Sm_3::template Property_map<Hi, bool>;
   internal::export_property_map_bool<Sm_3, Hi>(m, "Halfedge_bool_map");
-  sm::halfedge_bool_map<Sm_3, bool>(m, "halfedge_bool_boost_map", "Halfedge_bool_boost_map");
+  // sm::halfedge_bool_map<Sm_3, bool>(m, "halfedge_bool_boost_map", "Halfedge_bool_boost_map");
 
   // internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map"); // this is a dict not a map??
 
@@ -755,11 +755,11 @@ void export_surface_mesh(py::module_& m) {
     .def("reset_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.reset_indices(); })
     .def("number_of_faces", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_faces(); })
     .def("invert_selection", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.invert_selection(); })
-    .def("get_face_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_face_index_map(); })
+    // .def("get_face_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_face_index_map(); }) // commented for stubs
     .def("number_of_vertices", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_vertices(); })
     .def("number_of_halfedges", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_halfedges(); })
-    .def("get_vertex_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_vertex_index_map(); })
-    .def("get_halfedge_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_halfedge_index_map(); })
+    // .def("get_vertex_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_vertex_index_map(); })
+    // .def("get_halfedge_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_halfedge_index_map(); })
     .def("initialize_face_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_face_indices(); })
     .def("initialize_vertex_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_vertex_indices(); })
     .def("initialize_halfedge_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_halfedge_indices(); })

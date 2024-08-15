@@ -26,9 +26,10 @@ void export_ft(C& c) {
 
   c.def(py::init<const FT&>())
     .def(py::init_implicit<double>())
-    .def(py::init_implicit<int>())
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self < py::self)
     .def(py::self > py::self)
     .def(py::self <= py::self)

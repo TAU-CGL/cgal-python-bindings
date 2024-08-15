@@ -695,15 +695,17 @@ auto triangulate_hole(PolygonMesh& pmesh,
     // HFDefault_visitor
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
-      return PMP::triangulate_hole(pmesh, border_halfedge,
+      PMP::triangulate_hole(pmesh, border_halfedge,
                                    internal::parse_pmp_np<PolygonMesh>(np).visitor(visitor));
+      return py::none();
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    return PMP::triangulate_hole(pmesh, border_halfedge,
+    PMP::triangulate_hole(pmesh, border_halfedge, // this returned an emptyset iterator
                                  internal::parse_pmp_np<PolygonMesh>(np));
+    return py::none();
   }
 }
 
@@ -4745,10 +4747,12 @@ void export_polygon_mesh_processing(py::module_& m) {
   // m.def("connected_component", &pmp::connected_component<Pm>,
   //       py::arg("seed_face"), py::arg("pm"),
   //       py::arg("np") = py::dict());
+#if CGALPY_PMP_POLYGONAL_MESH == 0
   m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>::type>,
         py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
   m.def("connected_components", &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::uint32_t>>::type>,
         py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
+#endif
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
         py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
@@ -4766,7 +4770,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("keep_largest_connected_components", &pmp::keep_largest_connected_components<Pm>,
         py::arg("pm"), py::arg("nb_components_to_keep"), py::arg("np") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
-  m.def("remove_connected_components_map", &pmp::remove_connected_components_map<Pm, FaceComponentMap>,
+  m.def("remove_connected_components", &pmp::remove_connected_components_map<Pm, FaceComponentMap>,
         py::arg("pm"), py::arg("components_to_remove"), py::arg("fccmap"), py::arg("np") = py::dict());
 #endif
   m.def("remove_connected_components", &pmp::remove_connected_components<Pm>,
@@ -4965,7 +4969,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("does_triangle_soup_self_intersect", &pmp::does_triangle_soup_self_intersect, // TODO: point_map
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict());
   m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>, py::arg("range"),
-        py::arg("np") = py::dict(), py::arg("nps") = py::dict());
+        py::arg("np") = py::dict(), py::arg("nps") = py::list());
   m.def("self_intersections", &pmp::self_intersections<Pm>,
         py::arg("pm"), py::arg("np") = py::dict());
   m.def("self_intersections", &pmp::self_intersections_faces<Pm>,
