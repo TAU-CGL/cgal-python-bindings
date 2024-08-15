@@ -32,6 +32,7 @@
 #include "CGALPY/Kernel/export_vector_2.hpp"
 
 // 3D functors
+#include "CGALPY/Kernel/export_aff_transformation_3.hpp"
 #include "CGALPY/Kernel/export_dir_3.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
@@ -234,9 +235,8 @@ void export_kernel_module(py::module_& m) {
 
   // Aff_transformation_3
   if (! add_attr<Aff_transformation_3>(m, "Aff_transformation_3")) {
-    py::class_<Aff_transformation_3>(m, "Aff_transformation_3")
-      .def(py::init<>())
-      ;
+    py::class_<Aff_transformation_3> aff3_c(m, "Aff_transformation_3");
+    export_aff_transformation_3<Kernel>(aff3_c);
   }
 
   // 3D Objects
