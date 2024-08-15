@@ -5,7 +5,6 @@
 
 #include <CGAL/Iso_cuboid_3.h>
 
-#include "CGALPY/kernel_types.hpp"
 #include "CGALPY/to_string.hpp"
 
 namespace py = nanobind;

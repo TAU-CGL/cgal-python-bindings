@@ -22,12 +22,16 @@
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_triangle_2.hpp"
 #include "CGALPY/Kernel/export_vector_2.hpp"
+#include "CGALPY/Kernel/export_weighted_point_2.hpp"
 
 // 3D functors
 #include "CGALPY/Kernel/export_dir_3.hpp"
 #include "CGALPY/Kernel/export_iso_cuboid_3.hpp"
-#include "CGALPY/Kernel/export_point_3.hpp"
+#include "CGALPY/Kernel/export_line_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
+#include "CGALPY/Kernel/export_point_3.hpp"
+#include "CGALPY/Kernel/export_ray_3.hpp"
+#include "CGALPY/Kernel/export_segment_3.hpp"
 #include "CGALPY/Kernel/export_sphere_3.hpp"
 #include "CGALPY/Kernel/export_triangle_3.hpp"
 #include "CGALPY/Kernel/export_vector_3.hpp"
@@ -54,17 +58,22 @@ void export_kernel(C_& ker_c) {
   using Seg_2 = typename Ker::Segment_2;
   using Tri_2 = typename Ker::Triangle_2;
   using Vec_2 = typename Ker::Vector_2;
+  using Wd_pnt_2 = typename Ker::Weighted_point_2;
 
   // Kernel 3D objects
   using Aff_trans_3 = typename Ker::Aff_transformation_3;
   using Dir_3 = typename Ker::Direction_3;
+  using Ic_3 = typename Ker::Iso_cuboid_3;
+  using Line_3 = typename Ker::Line_3;
   using Pln_3 = typename Ker::Plane_3;
   using Pnt_3 = typename Ker::Point_3;
+  using R_3 = typename Ker::Ray_3;
+  using Seg_3 = typename Ker::Segment_3;
   using Sfr_3 = typename Ker::Sphere_3;
+  using Tet_3 = typename Ker::Tetrahedron_3;
   using Tri_3 = typename Ker::Triangle_3;
   using Vec_3 = typename Ker::Vector_3;
   using Wd_pnt_3 = typename Ker::Weighted_point_3;
-  using Ic_3 = typename Ker::Iso_cuboid_3;
 
   // Kernel 2D operators
   using Equal_2 = typename Ker::Equal_2;
@@ -156,6 +165,12 @@ void export_kernel(C_& ker_c) {
   if (! add_attr<Vec_2>(ker_c, "Vector_2")) {
     py::class_<Vec_2> vec2_c(ker_c, "Vector_2");
     export_vector_2<Ker>(vec2_c);
+  }
+
+  // Weighted_point_2
+  if (! add_attr<Wd_pnt_2>(ker_c, "Weighted_point_2")) {
+    py::class_<Wd_pnt_2> wd_pnt2_c(ker_c, "Weighted_point_2");
+    export_weighted_point_2<Ker>(wd_pnt2_c);
   }
 
   // Triangle_2
@@ -251,6 +266,17 @@ void export_kernel(C_& ker_c) {
     export_dir_3<Ker>(dir3_c);
   }
 
+  // Iso_cuboid_3
+  if (! add_attr<Ic_3>(ker_c, "Iso_cuboid_3")) {
+    py::class_<Ic_3> iso3_c(ker_c, "Iso_cuboid_3");
+    export_iso_cuboid_3<Ker>(iso3_c);
+  }
+
+  if (! add_attr<Line_3>(ker_c, "Line_3")) {
+    py::class_<Line_3> line3_c(ker_c, "Line_3");
+    export_line_3<Ker>(line3_c);
+  }
+
   // Plane_3
   if (! add_attr<Pln_3>(ker_c, "Plane_3")) {
     py::class_<Pln_3> pln3_c(ker_c, "Plane_3");
@@ -261,6 +287,18 @@ void export_kernel(C_& ker_c) {
   if (! add_attr<Pnt_3>(ker_c, "Point_3")) {
     py::class_<Pnt_3> pnt3_c(ker_c, "Point_3");
     export_point_3<Ker>(pnt3_c);
+  }
+
+  // Ray_3
+  if (! add_attr<R_3>(ker_c, "Ray_3")) {
+    py::class_<R_3> ray3_c(ker_c, "Ray_3");
+    export_ray_3<Ker>(ray3_c);
+  }
+
+  // Segment_3
+  if (! add_attr<Seg_3>(ker_c, "Segment_3")) {
+    py::class_<Seg_3> seg3_c(ker_c, "Segment_3");
+    export_segment_3<Ker>(seg3_c);
   }
 
   // Sphere_3
@@ -285,12 +323,6 @@ void export_kernel(C_& ker_c) {
   if (! add_attr<Wd_pnt_3>(ker_c, "Weighted_point_3")) {
     py::class_<Wd_pnt_3> wd_pnt3_c(ker_c, "Weighted_point_3");
     export_weighted_point_3<Ker>(wd_pnt3_c);
-  }
-
-  // Iso_cuboid_3
-  if (! add_attr<Ic_3>(ker_c, "Iso_cuboid_3")) {
-    py::class_<Ic_3> iso3_c(ker_c, "Iso_cuboid_3");
-    export_iso_cuboid_3<Ker>(iso3_c);
   }
 
   //////// 3D Operators

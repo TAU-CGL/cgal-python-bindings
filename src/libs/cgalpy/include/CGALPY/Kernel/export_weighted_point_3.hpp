@@ -12,10 +12,8 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/Hash_rational_point.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/make_iterator.hpp"
+#include <CGAL/Origin.h>
+
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/to_string.hpp"
 
@@ -28,39 +26,36 @@ void export_weighted_point_3(C& c) {
   using Ft = typename Ker::FT;
   using Pnt_3 = typename Ker::Point_3;
   using Wd_pnt_3 = typename Ker::Weighted_point_3;
-
-  c.def(py::init<>())
-    // .def(py::init<const CGAL::Origin&>())
-    .def(py::init<const Pnt_3&>())
-    .def(py::init<const Pnt_3&, const Ft&>())
-    // .def(py::init<const Ft&, const Ft&, const Ft&>())
-    // Accessors
-    .def("point", &Wd_pnt_3::point)
-    .def("weight", &Wd_pnt_3::weight)
-    .def("x", &Wd_pnt_3::x)
-    .def("y", &Wd_pnt_3::y)
-    .def("z", &Wd_pnt_3::z)
-    .def("hx", &Wd_pnt_3::hx)
-    .def("hy", &Wd_pnt_3::hy)
-    .def("hz", &Wd_pnt_3::hz)
-    .def("hw", &Wd_pnt_3::hw)
-    // Operations
+  c.def(py::init<const CGAL::Origin&>(),
+        py::arg("ORIGIN"), "introduces a weighted point with Cartesian coordinates (0,0,0) and weight 0.")
+    .def(py::init<const Pnt_3&>(),
+         py::arg("p"), "introduces a weighted point from point p and weight 0.")
+    .def(py::init<const Pnt_3&, Ft&>(),
+         py::arg("p"), py::arg("w"), "introduces a weighted point from point p and weight w.")
+    .def(py::init<Ft&, Ft&, Ft&>(),
+         py::arg("x"), py::arg("y"), py::arg("z"), "introduces a weighted point with coordinates x, y, z and weight 0.")
+    .def("point", &Wd_pnt_3::point, "returns the point of the weighted point.")
+    .def("weight", &Wd_pnt_3::weight, "returns the weight of the weighted point.")
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"), "Test for equality.")
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"), "Test for inequality.")
+    .def("hx", &Wd_pnt_3::hx, "returns the homogeneous x coordinate.")
+    .def("hy", &Wd_pnt_3::hy, "returns the homogeneous y coordinate.")
+    .def("hz", &Wd_pnt_3::hz, "returns the homogeneous z coordinate.")
+    .def("hw", &Wd_pnt_3::hw, "returns the homogenizing coordinate.")
+    .def("x", &Wd_pnt_3::x, "returns the Cartesian x coordinate, that is hx()/hw().")
+    .def("y", &Wd_pnt_3::y, "returns the Cartesian y coordinate, that is hy()/hw().")
+    .def("z", &Wd_pnt_3::z, "returns the Cartesian z coordinate, that is hz()/hw().")
+    .def("homogeneous", &Wd_pnt_3::homogeneous, py::arg("i"), "returns the i'th homogeneous coordinate of p.")
+    .def("cartesian", &Wd_pnt_3::cartesian, py::arg("i"), "returns the i'th Cartesian coordinate of p.")
+    .def("__getitem__", &Wd_pnt_3::operator[], py::arg("i"), "returns cartesian(i).")
+    .def("dimension", &Wd_pnt_3::dimension, "returns the dimension (the constant 3).")
+    .def("bbox", &Wd_pnt_3::bbox, "returns a bounding box containing p.")
+    .def("transform", &Wd_pnt_3::transform,
+         py::arg("t"), "returns the weighted point obtained by applying t on p.")
     .def("__str__", to_string<Wd_pnt_3>)
     .def("__repr__", to_string<Wd_pnt_3>)
-    .def(py::self == py::self,
-         py::sig("def __eq__(self, arg: object, /) -> bool"))
-    .def(py::self != py::self,
-         py::sig("def __ne__(self, arg: object, /) -> bool"))
-    // Convenient operations
-    .def("homogeneous", &Wd_pnt_3::homogeneous)
-    .def("cartesian", &Wd_pnt_3::cartesian)
-    // Ker::FT 	operator[] (int i) const
-    // Cartesian_const_iterator 	cartesian_begin () const
-    // Cartesian_const_iterator 	cartesian_end () const
-    .def("dimension", &Wd_pnt_3::dimension)
-    .def("bbox", &Wd_pnt_3::bbox)
-    // .def("transform", &Wd_pnt_3::transform)
-    //.setattr("__hash__", &hash<Point_3>)
     ;
 
   add_extraction(c);

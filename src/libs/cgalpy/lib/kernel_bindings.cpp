@@ -116,6 +116,16 @@ void export_kernel_module(py::module_& m) {
       ;
   }
 #endif
+#if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) &&                              \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) &&                    \
+     (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
+
+  struct dummy {};
+  if (! add_attr<dummy>(m, "FT")) {
+    py::class_<dummy> ft_c(m, "FT", py::sig("class FT(float)"));
+  }
+
+#endif
 #endif
 
   //class_<RT>(m, "RT")
