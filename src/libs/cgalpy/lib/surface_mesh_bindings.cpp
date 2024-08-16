@@ -651,6 +651,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("resize", &Sm::resize)
       .def("set_target", &Sm::set_target)
       .def("has_garbage", &Sm::has_garbage)
+      .def("collect_garbage", [](Sm& sm) { sm.collect_garbage(); })
       .def("is_isolated", &Sm::is_isolated)
       // .def("halfedges_end", &Sm::halfedges_end) // not needed
       .def("set_next_only", &Sm::set_next_only)
