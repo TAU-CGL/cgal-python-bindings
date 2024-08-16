@@ -369,6 +369,10 @@ C add_generic_map(C& c, const std::string& map_name, const ValueType& default_va
           .def(map_name.c_str(), &Mesh::template property_map<Key, ValueType>,
                py::arg("name") = std::string(),
                "returns an optional property map named `name` with key type `I` and value type `T`.")
+          .def("remove_property_map", &Mesh::template remove_property_map<Key, ValueType>,
+               py::arg("p"),
+               "removes property map `name`. The memory allocated for that property map is freed.")
+          ;
   ;
 }
 
@@ -404,7 +408,17 @@ C add_maps(C& c) {
     .def("property_map_vertex_Principal_curvatures_and_directions", &Sm::template property_map<Vi, Pcad>,
         py::arg("name") = std::string(),
           "returns an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
+
+    .def("properties_vertex", [](const Sm& sm) { return pmp::vec2list(sm.template properties<Vi>()); },
+        "returns a vector with all strings that describe properties with the key type `Vertex_index`.")
+    .def("properties_edge", [](const Sm& sm) { return pmp::vec2list(sm.template properties<Ei>()); },
+        "returns a vector with all strings that describe properties with the key type `Edge_index`.")
+    .def("properties_halfedge", [](const Sm& sm) { return pmp::vec2list(sm.template properties<Hi>()); },
+        "returns a vector with all strings that describe properties with the key type `Halfedge_index`.")
+    .def("properties_face", [](const Sm& sm) { return pmp::vec2list(sm.template properties<Fi>()); },
+        "returns a vector with all strings that describe properties with the key type `Face_index`.")
     ;
+    
   add_generic_map<C, Sm, Vi, std::string>(c, "property_map_vertex_string");
   add_generic_map<C, Sm, Vi, CGAL::IO::Color>(c, "add_property_map_vertex_color");
   add_generic_map<C, Sm, Vi, typename Sm::Point>(c, "property_map_vertex_point");
@@ -434,6 +448,10 @@ C add_maps(C& c) {
   add_generic_map<C, Sm, Hi, py::tuple>(c, "property_map_halfedge_tuple");
   add_generic_map<C, Sm, Hi, bool>(c, "property_map_halfedge_bool");
   add_generic_map<C, Sm, Hi, CGAL::IO::Color>(c, "property_map_halfedge_color");
+
+  c.def("remove_all_property_maps", &Sm::remove_all_property_maps,
+        "removes all property maps for all index types added by a call to `add_property_map()`.\n"
+        "The memory allocated for those property maps is freed.");
   
   return c;
 }
