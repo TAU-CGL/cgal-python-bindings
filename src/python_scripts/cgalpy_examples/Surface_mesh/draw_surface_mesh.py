@@ -9,8 +9,7 @@ if len(sys.argv) < 3:
   lib = 'CGALPY'
 else:
   lib = sys.argv[2]
-# CGALPY = importlib.import_module(lib)
-import CGALPY.CGALPY as CGALPY
+CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
 
 filename = sys.argv[1] if len(sys.argv) > 1 else CGALPY.data_file_path("meshes/elephant.off")
