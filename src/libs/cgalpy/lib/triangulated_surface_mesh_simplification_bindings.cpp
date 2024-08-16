@@ -1,4 +1,3 @@
-#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_policies.h>
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Surface_mesh_simplification/edge_collapse.h>
@@ -6,11 +5,11 @@
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_count_stop_predicate.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_cost.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_stop_predicate.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_ratio_stop_predicate.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_stop_predicate.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h>
-// #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_policies.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_policies.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_triangle_policies.h>
@@ -18,13 +17,15 @@
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_placement.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Midpoint_placement.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h>
-// #include <CGAL/Surface_mesh_simplification/Edge_collapse_visitor_base.h>
+// #include <CGAL/Surface_mesh_simplification/Edge_collapse_visitor_base.h> // custom
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_filter.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_placement.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Constrained_placement.h>
 
 
+#include "CGALPY/helpers.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "CGALPY/Edge_collapse_visitor_base.hpp"
 #include "CGALPY/pmp_helpers.hpp"
 #include "CGALPY/pmp_np_parser.hpp"
 
@@ -39,8 +40,10 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                    const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(pm, np);
   using Tm = TriangleMesh;
+  using V = sms::My_ec_visitor<Tm>;
   // auto him = get_halfedge_prop_map<Tm, std::size_t>(pm, "halfedge_index_map",
   //   np.contains("halfedge_index_map") ? np["halfedge_index_map"] : py::none());
+  V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
   auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
     np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
   bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
@@ -63,6 +66,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -78,6 +82,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -93,6 +98,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   .vertex_index_map(vimap)
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -110,6 +116,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -124,6 +131,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -138,6 +146,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -155,10 +164,12 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
                    const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(pm, np);
   using Tm = TriangleMesh;
+  using V = sms::My_ec_visitor<Tm>;
   // auto him = get_halfedge_prop_map<Tm, std::size_t>(pm, "halfedge_index_map",
   //   np.contains("halfedge_index_map") ? np["halfedge_index_map"] : py::none());
   auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
     np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+  V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
   bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
   bool vim = np.contains("vertex_index_map");
   bool place = np.contains("get_placement");
@@ -178,6 +189,7 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
                                   .vertex_index_map(vimap)
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -192,6 +204,7 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
                                   .vertex_index_map(vimap)
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -206,6 +219,7 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .vertex_index_map(vimap)
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -222,6 +236,7 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -235,6 +250,7 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -248,6 +264,7 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
                                   .edge_is_constrained_map(eicm)
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .get_placement(py::cast<PlacementType>(np["get_placement"]))
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -265,8 +282,10 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
                    const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(pm, np);
   using Tm = TriangleMesh;
+  using V = sms::My_ec_visitor<Tm>;
   // auto him = get_halfedge_prop_map<Tm, std::size_t>(pm, "halfedge_index_map",
   //   np.contains("halfedge_index_map") ? np["halfedge_index_map"] : py::none());
+  V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
   auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
     np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
   bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
@@ -287,6 +306,7 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
                                   .vertex_index_map(vimap)
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -301,6 +321,7 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
                                   .vertex_index_map(vimap)
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -315,6 +336,7 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .vertex_index_map(vimap)
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -331,6 +353,7 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -344,6 +367,7 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
                                   .filter(f)
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -357,6 +381,7 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
                                   .edge_is_constrained_map(eicm)
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .get_cost(py::cast<CostType>(np["get_cost"]))
+                                  .visitor(visitor)
                                   );
       }
       catch (const py::cast_error& e) {
@@ -402,6 +427,8 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
   using Elc = SMS::Edge_length_cost<Tm>;
   using Ltc = SMS::LindstromTurk_cost<Tm>;
   using Ghcost = typename SMS::GarlandHeckbert_policies<Tm, Kernel>::Get_cost;
+
+  using V = sms::My_ec_visitor<Tm>;
 
 
   bool place = np.contains("get_placement");
@@ -502,6 +529,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
     throw std::runtime_error("Invalid cost type");
   }
   else {
+    V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
     auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
       np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
     bool relaxed_order = np.contains("relaxed_order") && py::cast<bool>(np["relaxed_order"]);
@@ -520,6 +548,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
                                     // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                     .vertex_index_map(vimap)
                                     .filter(f)
+                                    .visitor(visitor)
                                     );
         }
         catch (const py::cast_error& e) {
@@ -533,6 +562,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
                                     // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                     .vertex_index_map(vimap)
                                     .filter(f)
+                                    .visitor(visitor)
                                     );
         }
         catch (const py::cast_error& e) {
@@ -545,6 +575,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
                                   .edge_is_constrained_map(eicm)
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   .vertex_index_map(vimap)
+                                  .visitor(visitor)
                                   );
       }
     }
@@ -557,6 +588,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
                                     .edge_is_constrained_map(eicm)
                                     // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                     .filter(f)
+                                    .visitor(visitor)
                                     );
         }
         catch (const py::cast_error& e) {
@@ -569,6 +601,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
                                     .edge_is_constrained_map(eicm)
                                     // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                     .filter(f)
+                                    .visitor(visitor)
                                     );
         }
         catch (const py::cast_error& e) {
@@ -579,6 +612,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
         retv = SMS::edge_collapse(pm, stop_policy,
                                   internal::parse_pmp_np<TriangleMesh>(np)
                                   .edge_is_constrained_map(eicm)
+                                  .visitor(visitor)
                                   // .use_relaxed_order(relaxed_order ? CGAL::Tag_true() : CGAL::Tag_false())
                                   );
       }
@@ -632,6 +666,79 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
 #endif
 
   using edges_size_type = boost::graph_traits<Tm>::edges_size_type;
+
+
+  using Ep = SMS::Edge_profile<Tm>;
+  py::class_<Ep>(m, "Edge_profile")
+    .def("v0", &Ep::v0,
+         "One of vertices of the edge to be collapsed.")
+    .def("v1", &Ep::v1,
+         "The other vertex of the edge to be collapsed.")
+    .def("v0_v1", &Ep::v0_v1,
+         "One of the directed edges corresponding to the halfedge being collapsed.")
+    .def("v1_v0", &Ep::v1_v0,
+         "The other directed edge corresponding to the halfedge being collapsed.")
+    .def("p0", &Ep::p0,
+         "The point of vertex v0.")
+    .def("p1", &Ep::p1,
+         "The point of vertex v1.")
+    .def("vL", &Ep::vL,
+         "If v0v1 belongs to a finite face (is not a border edge) the third vertex of that triangular face, a null descriptor otherwise.")
+    .def("v1_vL", &Ep::v1_vL,
+         "If v0v1 belongs to a finite face (is not a border edge) the directed edge from v1 to vL, a null descriptor otherwise.")
+    .def("vL_v0", &Ep::vL_v0,
+         "If v0v1 belongs to a finite face (is not a border edge) the directed edge from vL to v0, a null descriptor otherwise.")
+    .def("vR", &Ep::vR,
+         "If v1v0 belongs to a finite face (is not a border edge) the third vertex of that triangular face, a null descriptor otherwise.")
+    .def("v0_vR", &Ep::v0_vR,
+         "If v1v0 belongs to a finite face (is not a border edge) the directed edge from v0 to vR, a null descriptor otherwise.")
+    .def("vR_v1", &Ep::vR_v1,
+         "If v1v0 belongs to a finite face (is not a border edge) the directed edge from vR to v1, a null descriptor otherwise.")
+    .def("link", [](const Ep& ep) { return pmp::vec2list(ep.link()); },
+      "The unique sequence of the vertices around v0v1 in topological order (ccw or cw depending on the relative ordering of v0 and v1 in the profile).")
+    .def("border_edges", [](const Ep& ep) { return pmp::vec2list(ep.border_edges()); },
+      "The unique collection of the border directed edges incident upon v0 and v1.")
+    .def("left_face_exists", &Ep::left_face_exists,
+      "Indicates if v0v1 belongs to a finite face of the surface mesh (i.e, v0v1 is not a border edge).")
+    .def("right_face_exists", &Ep::right_face_exists,
+         "Indicates if v0v1 belongs to a finite face of the surface mesh (i.e, v1v0 is not a border edge).")
+    .def("surface_mesh", &Ep::surface_mesh,
+         "Returns the surface mesh the edge belongs to.")
+    // .def("vertex_point_map", &Ep::vertex_point_map,
+    //      "Returns the vertex point property map.")
+    // .def("geom_traits", &Ep::geom_traits, // not supported
+    //      "Returns the geometric traits class.")
+    ;
+
+  using Ecvb = sms::My_ec_visitor<Tm>;
+  py::class_<Ecvb>(m, "Edge_collapse_visitor_base")
+    .def(py::init<>())
+    ;
+  m.def("set_OnStarted", &Ecvb::set_started,
+        py::arg("visitor"), py::arg("OnStarted"),
+        "Set the function to be called before the algorithm starts.");
+  m.def("set_OnFinished", &Ecvb::set_finished,
+        py::arg("visitor"), py::arg("OnFinished"),
+        "Set the function to be called after the algorithm finishes.");
+  m.def("set_OnStopConditionReached", &Ecvb::set_stop_condition_reached,
+        py::arg("visitor"), py::arg("OnStopConditionReached"),
+        "Set the function to be called when the StopPredicate returned true.");
+  m.def("set_OnCollected", &Ecvb::set_collected,
+        py::arg("visitor"), py::arg("OnCollected"),
+        "Set the function to be called during the collecting phase.");
+  m.def("set_OnSelected", &Ecvb::set_selected,
+        py::arg("visitor"), py::arg("OnSelected"),
+        "Set the function to be called during the processing phase.");
+  m.def("set_OnCollapsing", &Ecvb::set_collapsing,
+        py::arg("visitor"), py::arg("OnCollapsing"),
+        "Set the function to be called when an edge is about to be collapsed.");
+  m.def("set_OnCollapsed", &Ecvb::set_collapsed,
+        py::arg("visitor"), py::arg("OnCollapsed"),
+        "Set the function to be called when an edge has been collapsed.");
+  m.def("set_OnNonCollapsable", &Ecvb::set_non_collapsable,
+        py::arg("visitor"), py::arg("OnNonCollapsable"),
+        "Set the function to be called for each selected edge which cannot be collapsed.");
+
 
   // Predicates //
 
