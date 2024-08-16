@@ -55,17 +55,10 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   m.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
   export_approximate_kernel(m);
-
-#ifndef CGAL_DATA_DIR
-  #warning "CGAL_DATA_DIR is not defined. The data_file_path function will not be available."
-#endif
-#ifdef CGAL_DATA_DIR
-  m.def("data_file_path", &CGAL::data_file_path);
-#endif
+  export_cgal(m);
 
 #ifdef CGALPY_KERNEL_BINDINGS
   auto ker_m = m.def_submodule("Ker");
-  export_cgal(ker_m);
   export_kernel_module(ker_m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
   export_intersections(ker_m);

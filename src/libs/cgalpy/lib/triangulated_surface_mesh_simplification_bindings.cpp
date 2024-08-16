@@ -769,10 +769,6 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
 
   // Policies //
 
-// typedef SMS::GarlandHeckbert_plane_policies<Surface_mesh, Kernel>                  Classic_plane;
-// typedef SMS::GarlandHeckbert_probabilistic_plane_policies<Surface_mesh, Kernel>    Prob_plane;
-// typedef SMS::GarlandHeckbert_triangle_policies<Surface_mesh, Kernel>               Classic_tri;
-// typedef SMS::GarlandHeckbert_probabilistic_triangle_policies<Surface_mesh, Kernel> Prob_tri;
   using Ghpp = SMS::GarlandHeckbert_plane_policies<Tm, Kernel>;
   py::class_<Ghpp>(m, "GarlandHeckbert_plane_policies")
     .def(py::init<Tm&>(), py::arg("tmesh"))
@@ -829,10 +825,6 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
     ;
 
   // placements for all 
-// typedef SMS::GarlandHeckbert_plane_policies<Surface_mesh, Kernel>                  Classic_plane;
-// typedef SMS::GarlandHeckbert_probabilistic_plane_policies<Surface_mesh, Kernel>    Prob_plane;
-// typedef SMS::GarlandHeckbert_triangle_policies<Surface_mesh, Kernel>               Classic_tri;
-// typedef SMS::GarlandHeckbert_probabilistic_triangle_policies<Surface_mesh, Kernel> Prob_tri;
   // TODO: check prob
   py::class_<BncpGhpp>(m, "Bounded_normal_change_placement_GarlandHeckbert_plane_policies")
     .def(py::init<Ghpp>())

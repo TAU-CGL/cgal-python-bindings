@@ -23,6 +23,7 @@
 #include <CGAL/boost/graph/helpers.h>
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
+#include <CGAL/IO/Color.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_surface_mesh.h>
 #endif
@@ -326,7 +327,12 @@ template <typename T>
 auto make_random_access_property_map(const py::list& lst) {
   std::vector<T> vec;
   for (auto v : lst) {
-    vec.push_back(py::cast<T>(v));
+    try {
+      vec.push_back(py::cast<T>(v));
+    }
+    catch (const py::cast_error&) {
+      throw std::runtime_error("Cannot cast to map value type");
+    }
   }
   return CGAL::make_random_access_property_map(vec);
 }
@@ -569,6 +575,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("point", &sm::my_point<Sm>, ri)
       .def("points", &sm::points<Sm, Vi, Pnt>)
 
+      .def("add_property_map_vertex_color", &sm::add_map<Sm, Vi, CGAL::IO::Color>,
+           py::arg("name") = std::string(), py::arg("default_value") = CGAL::IO::Color())
       .def("add_property_map_vertex_point", &sm::add_map<Sm, Vi, Pnt>,
            py::arg("name") = std::string(), py::arg("default_value") = Pnt())
       .def("add_property_map_vertex_bool", &sm::add_map<Sm, Vi, bool>,
@@ -586,7 +594,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("add_property_map_vertex_set_int", [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
         std::set<int> s;
         for (auto v : default_value) {
-          s.insert(py::cast<int>(v));
+          try {
+            s.insert(py::cast<int>(v));
+          }
+          catch (const py::cast_error&) {
+            throw std::runtime_error("Cannot cast to int");
+          }
         }
         return sm::add_map<Sm, Vi, std::set<int>>(sm, name, s);
       },
@@ -594,6 +607,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
       .def("add_property_map_edge_bool", &sm::add_map<Sm, Ei, bool>,
            py::arg("name") = std::string(), py::arg("default_value") = bool())
+      .def("add_property_map_edge_color", &sm::add_map<Sm, Ei, CGAL::IO::Color>,
+           py::arg("name") = std::string(), py::arg("default_value") = CGAL::IO::Color())
 
       .def("add_property_map_face_double", &sm::add_map<Sm, Fi, double>,
            py::arg("name") = std::string(), py::arg("default_value") = double())
@@ -605,8 +620,10 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("name") = std::string(), py::arg("default_value") = int())
       .def("add_property_map_face_bool", &sm::add_map<Sm, Fi, bool>,
            py::arg("name") = std::string(), py::arg("default_value") = false)
-      // .def("add_property_map_face_uint32_t", &sm::add_map<Sm, Fi, std::uint32_t>,
-      //      py::arg("name") = std::string(), py::arg("default_value") = std::uint32_t())
+      .def("add_property_map_face_uint32_t", &sm::add_map<Sm, Fi, std::uint32_t>,
+           py::arg("name") = std::string(), py::arg("default_value") = std::uint32_t())
+      .def("add_property_map_face_color", &sm::add_map<Sm, Fi, CGAL::IO::Color>,
+           py::arg("name") = std::string(), py::arg("default_value") = CGAL::IO::Color())
 
       .def("add_property_map_halfedge_size_t", &sm::add_map<Sm, Hi, std::size_t>,
            py::arg("name") = std::string(), py::arg("default_value") = std::size_t())
@@ -614,6 +631,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("name") = std::string(), py::arg("default_value") = py::tuple())
       .def("add_property_map_halfedge_bool", &sm::add_map<Sm, Hi, bool>,
            py::arg("name") = std::string(), py::arg("default_value") = false)
+      .def("add_property_map_halfedge_color", &sm::add_map<Sm, Hi, CGAL::IO::Color>,
+           py::arg("name") = std::string(), py::arg("default_value") = CGAL::IO::Color())
 
 
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
@@ -680,6 +699,8 @@ void export_surface_mesh(py::module_& m) {
   using vbmap = typename Sm_3::template Property_map<Vi, bool>;
   internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
   // sm::vertex_bool_map<Sm_3, bool>(m, "vertex_bool_boost_map", "Vertex_bool_boost_map");
+  
+  internal::export_property_map<Sm_3, Vi, CGAL::IO::Color>(m, "Vertex_color_map");
 
   internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
   // sm::vertex_map<Sm_3, std::size_t>(m, "vertex_size_t_boost_map", "Vertex_size_t_boost_map");
@@ -699,6 +720,7 @@ void export_surface_mesh(py::module_& m) {
   // sm::edge_bool_map<Sm_3, bool>(m, "edge_bool_boost_map", "Edge_bool_boost_map");
   // sm::register_map<ebmap_type>(m, "Edge_bool_map");
 
+  internal::export_property_map<Sm_3, Ei, CGAL::IO::Color>(m, "Edge_color_map");
   internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
   // sm::face_map<Sm_3, double>(m, "face_double_boost_map", "Face_double_boost_map");
   internal::export_property_map<Sm_3, Fi, Vector_3>(m, "Face_vector_map");
@@ -710,10 +732,12 @@ void export_surface_mesh(py::module_& m) {
   using fbmap = typename Sm_3::template Property_map<Fi, bool>;
   internal::export_property_map_bool<Sm_3, Fi>(m, "Face_bool_map");
   // sm::face_bool_map<Sm_3, bool>(m, "face_bool_boost_map", "Face_bool_boost_map");
-
-
+  internal::export_property_map<Sm_3, Fi, CGAL::IO::Color>(m, "Face_color_map");
   internal::export_property_map<Sm_3, Fi, std::uint32_t>(m, "Face_uint32_t_map");
   // sm::face_map<Sm_3, std::uint32_t>(m, "face_uint32_t_boost_map", "Face_uint32_t_boost_map");
+  
+
+  internal::export_property_map<Sm_3, Hi, CGAL::IO::Color>(m, "Halfedge_color_map");
 
   internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
   // sm::halfedge_map<Sm_3, std::size_t>(m, "halfedge_size_t_boost_map", "Halfedge_size_t_boost_map");

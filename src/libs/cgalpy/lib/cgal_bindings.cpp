@@ -8,6 +8,7 @@
 
 #include <CGAL/aff_transformation_tags.h>
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/string.h>
 
 #include <CGAL/basic.h>
 #include <CGAL/Bbox_2.h>
@@ -30,6 +31,13 @@ void export_cgal(py::module_& m) {
   using Translation = CGAL::Translation;
   using Identity_transformation = CGAL::Identity_transformation;
   using Reflection = CGAL::Reflection;
+
+#ifndef CGAL_DATA_DIR
+  #warning "CGAL_DATA_DIR is not defined. The data_file_path function will not be available."
+#endif
+#ifdef CGAL_DATA_DIR
+  m.def("data_file_path", &CGAL::data_file_path);
+#endif
 
   if (! add_attr<CGAL::Sign>(m, "Result")) {
     py::enum_<CGAL::Sign>(m, "Result")
@@ -144,4 +152,61 @@ void export_cgal(py::module_& m) {
 
   m.attr("ORIGIN") = &CGAL::ORIGIN;
   // m.attr("NULL_VECTOR") = &CGAL::NULL_VECTOR;
+
+  // Colors
+  using Color = CGAL::IO::Color;
+  if (! add_attr<Color>(m, "Color")) {
+    py::class_<Color>(m, "Color")
+      .def(py::init<>(),
+           "Creates a color with rgba-value (0,0,0,255), i.e. black.")
+      .def(py::init<unsigned char, unsigned char, unsigned char, unsigned char>(),
+           py::arg("red"), py::arg("green"), py::arg("blue"), py::arg("alpha")=255,
+           "Creates a color with rgba-value (red,green,blue,alpha).")
+      .def("red", [](const Color& c) { return c.red(); },
+           "Returns the red component.")
+      .def("green", [](const Color& c) { return c.green(); },
+           "Returns the green component.")
+      .def("blue", [](const Color& c) { return c.blue(); },
+           "Returns the blue component.")
+      .def("alpha", [](const Color& c) { return c.alpha(); },
+           "Returns the alpha component.")
+      .def("set_rgb", &Color::set_rgb,
+           py::arg("red"), py::arg("green"), py::arg("blue"), py::arg("alpha")=255,
+           "Replaces the rgb values of the colors by the one given as parameters.")
+      .def("set_hsv", &Color::set_hsv,
+           py::arg("hue"), py::arg("saturation"), py::arg("value"), py::arg("alpha")=255,
+           "Replaces the rgb values of the colors by the conversion to rgb of the hsv values given as parameters.")
+      .def("__getitem__", [](const Color& c, std::size_t i) { return c[i]; },
+           "Returns the ith component of the rgb color (the 0th is red, the 1st is blue, etc).")
+      .def("__setitem__", [](Color& c, std::size_t i, unsigned char v) { c[i] = v; },
+           "Sets the ith component of the rgb color (the 0th is red, the 1st is blue, etc).")
+      .def("to_rgba", [](const Color& c){
+        const auto& rgba = c.to_rgba();
+        return py::make_tuple(rgba[0], rgba[1], rgba[2], rgba[3]);
+      },
+           "Returns the array with rgba values.")
+      .def("to_rgb", [](const Color& c){
+        const auto& rgb = c.to_rgb();
+        return py::make_tuple(rgb[0], rgb[1], rgb[2]);
+      },
+           "Returns the array with rgb values.")
+      .def("to_hsv", [](const Color& c){
+        const auto& hsv = c.to_hsv();
+        return py::make_tuple(hsv[0], hsv[1], hsv[2]);
+      },
+           "Computes the hsv (hue, saturation, value) values and returns an array representing them as float values between 0 and 1.")
+      ;
+  }
+
+  m.def("black", &CGAL::IO::black, "Constructs Color(0,0,0).");
+  m.def("blue", &CGAL::IO::blue, "Constructs Color(0,0,255).");
+  m.def("deep_blue", &CGAL::IO::deep_blue, "Constructs Color(10,0,100).");
+  m.def("gray", &CGAL::IO::gray, "Constructs Color(100,100,100).");
+  m.def("green", &CGAL::IO::green, "Constructs Color(0,255,0).");
+  m.def("orange", &CGAL::IO::orange, "Constructs Color(235,150,0).");
+  m.def("purple", &CGAL::IO::purple, "Constructs Color(100,0,70).");
+  m.def("red", &CGAL::IO::red, "Constructs Color(255,0,0).");
+  m.def("violet", &CGAL::IO::violet, "Constructs Color(255,0,255).");
+  m.def("white", &CGAL::IO::white, "Constructs Color(255,255,255).");
+  m.def("yellow", &CGAL::IO::yellow, "Constructs Color(255,255,0).");
 }
