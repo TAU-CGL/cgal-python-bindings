@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include "CGALPY/generator_functions.hpp"
 #include <cstddef>
 #include <stdexcept>
 #define CGAL_USE_BASIC_VIEWER
@@ -515,6 +516,7 @@ void export_polyhedron_3(py::module_& m) {
   export_boost_face(m);
   export_boost_edge(m);
 
+  define_generate_functions<py::module_, Prn, Kernel>(m);
 
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");
