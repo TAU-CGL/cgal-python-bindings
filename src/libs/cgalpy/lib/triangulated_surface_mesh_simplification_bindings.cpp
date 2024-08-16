@@ -724,13 +724,13 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
         py::arg("visitor"), py::arg("OnStopConditionReached"),
         "Set the function to be called when the StopPredicate returned true.");
   m.def("set_OnCollected", &Ecvb::set_collected,
-        py::arg("visitor"), py::arg("OnCollected"),
+        py::sig("def set_OnCollected(visitor: Edge_collapse_visitor_base, OnCollected: Callable[[Edge_profile, float | None], None])"),
         "Set the function to be called during the collecting phase.");
   m.def("set_OnSelected", &Ecvb::set_selected,
-        py::arg("visitor"), py::arg("OnSelected"),
+        py::sig("def set_OnSelected(visitor: Edge_collapse_visitor_base, OnSelected: Callable[[Edge_profile, float | None, int, int], None])"),
         "Set the function to be called during the processing phase.");
   m.def("set_OnCollapsing", &Ecvb::set_collapsing,
-        py::arg("visitor"), py::arg("OnCollapsing"),
+        py::sig("def set_OnCollapsing(visitor: Edge_collapse_visitor_base, OnCollapsing: Callable[[Edge_profile, CGALPY.Kernel.Point_3 | None], None])"),
         "Set the function to be called when an edge is about to be collapsed.");
   m.def("set_OnCollapsed", &Ecvb::set_collapsed,
         py::arg("visitor"), py::arg("OnCollapsed"),

@@ -154,8 +154,7 @@ if len(sys.argv) > 1:
     i = 2
 if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-# CGALPY = importlib.import_module(lib)
-import CGALPY.CGALPY as CGALPY
+CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sms = CGALPY.Sms
 Sm = CGALPY.Sm
@@ -183,7 +182,7 @@ def OnSelected(profile: Sms.Edge_profile, cost, initial: int, current: int) -> N
         sys.stderr.write(f"\n")
     sys.stderr.write(f"\r{current}")
 
-def OnCollapsing(profile: Sms.Edge_profile, placement: object) -> None:
+def OnCollapsing(profile: Sms.Edge_profile, placement: float | None) -> None:
     if placement is None:
         stats.placement_uncomputable += 1
 

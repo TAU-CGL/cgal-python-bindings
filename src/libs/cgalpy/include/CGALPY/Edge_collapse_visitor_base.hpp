@@ -17,6 +17,7 @@ struct My_ec_visitor : SMS::Edge_collapse_visitor_base<TriangleMesh> {
   using FT = typename Profile::FT;
   using size_type = typename Profile::edges_size_type;
   using vertex_descriptor = typename Profile::vertex_descriptor;
+  using Point = typename Profile::Point;
   
   void OnStarted(Tm& tm) { if (started) started(tm); }
   void OnFinished(Tm& tm) { if (finished) finished(tm); }
@@ -39,7 +40,7 @@ struct My_ec_visitor : SMS::Edge_collapse_visitor_base<TriangleMesh> {
       }
     }
   }
-  void OnCollapsing(const Profile& p, const std::optional<typename Profile::Point>& pt) {
+  void OnCollapsing(const Profile& p, const std::optional<Point>& pt) {
     if (collapsing) {
       if (pt) {
         collapsing(p, py::cast(*pt));
