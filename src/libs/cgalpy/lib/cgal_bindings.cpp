@@ -6,7 +6,6 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#include <CGAL/aff_transformation_tags.h>
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
@@ -14,6 +13,8 @@
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Bbox_3.h>
 #include <CGAL/boost/graph/helpers.h>
+#include <CGAL/aff_transformation_tags.h>
+#include <CGAL/boost/graph/properties.h>
 
 #include "CGALPY/add_attr.hpp"
 
@@ -21,6 +22,14 @@ namespace py = nanobind;
 
 extern void export_bbox_2(py::class_<CGAL::Bbox_2>& c);
 extern void export_bbox_3(py::class_<CGAL::Bbox_3>& c);
+
+template <typename C, typename T>
+C export_vertex_incident_patches(C& c, const std::string& name) {
+  py::class_<CGAL::vertex_incident_patches_t<T>>(c, ("Vertex_incident_patches_" + name).c_str())
+    .def(py::init<>())
+    ;
+  return c;
+}
 
 //
 void export_cgal(py::module_& m) {
@@ -149,6 +158,8 @@ void export_cgal(py::module_& m) {
       .export_values()
       ;
   }
+
+  export_vertex_incident_patches<py::module_, int>(m, "int");
 
   m.attr("ORIGIN") = &CGAL::ORIGIN;
   // m.attr("NULL_VECTOR") = &CGAL::NULL_VECTOR;
