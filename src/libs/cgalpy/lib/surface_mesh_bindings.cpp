@@ -339,23 +339,17 @@ auto make_random_access_property_map(const py::list& lst) {
   return CGAL::make_random_access_property_map(vec);
 }
 
-
-} // namespace sm
-
-//
-template <typename SurfaceMesh, typename C>
-void add_sm_index(C& c) {
-  using Sm = SurfaceMesh;
-  using size_type = typename Sm::size_type;
-  using Sm_i = typename C::Type;
-
-  c.def(py::init<>())
-    .def(py::init<size_type>())
-    .def("id", &Sm_i::id)
-    .def("idx", &Sm_i::idx)
-    .def("is_valid", &Sm_i::is_valid)
-    .def("reset", &Sm_i::reset)
-    ;
+template<typename C, typename Sm, typename V>
+C export_property_maps(C& c, const std::string& type_name) {
+  using Vi = typename Sm::Vertex_index;
+  using Ei = typename Sm::Edge_index;
+  using Hi = typename Sm::Halfedge_index;
+  using Fi = typename Sm::Face_index;
+  internal::export_property_map<Sm, Vi, V>(c, ("Vertex_" + type_name + "_map").c_str());
+  internal::export_property_map<Sm, Ei, V>(c, ("Edge_" + type_name + "_map").c_str());
+  internal::export_property_map<Sm, Hi, V>(c, ("Halfedge_" + type_name + "_map").c_str());
+  internal::export_property_map<Sm, Fi, V>(c, ("Face_" + type_name + "_map").c_str());
+  return c;
 }
 
 template <typename C, typename Mesh, typename Key, typename ValueType>
@@ -374,6 +368,20 @@ C add_generic_map(C& c, const std::string& map_name, const ValueType& default_va
                "removes property map `name`. The memory allocated for that property map is freed.")
           ;
   ;
+}
+
+template <typename C, typename SurfaceMesh, typename ValueType>
+C add_generic_maps(C& c, const std::string& map_name) {
+  using Sm = SurfaceMesh;
+  using Vi = typename Sm::Vertex_index;
+  using Ei = typename Sm::Edge_index;
+  using Hi = typename Sm::Halfedge_index;
+  using Fi = typename Sm::Face_index;
+  add_generic_map<C, Sm, Vi, ValueType>(c, ("property_map_vertex_" + map_name));
+  add_generic_map<C, Sm, Ei, ValueType>(c, ("property_map_edge_" + map_name));
+  add_generic_map<C, Sm, Hi, ValueType>(c, ("property_map_halfedge_" + map_name));
+  add_generic_map<C, Sm, Fi, ValueType>(c, ("property_map_face_" + map_name));
+  return c;
 }
 
 template <typename SurfaceMesh, typename C>
@@ -419,41 +427,45 @@ C add_maps(C& c) {
         "returns a vector with all strings that describe properties with the key type `Face_index`.")
     ;
     
-  add_generic_map<C, Sm, Vi, std::string>(c, "property_map_vertex_string");
-  add_generic_map<C, Sm, Vi, CGAL::IO::Color>(c, "add_property_map_vertex_color");
-  add_generic_map<C, Sm, Vi, typename Sm::Point>(c, "property_map_vertex_point");
-  add_generic_map<C, Sm, Vi, bool>(c, "property_map_vertex_bool");
-  add_generic_map<C, Sm, Vi, std::size_t>(c, "property_map_vertex_size_t");
-  add_generic_map<C, Sm, Vi, Vector_3>(c, "property_map_vertex_vector");
-  add_generic_map<C, Sm, Vi, int>(c, "property_map_vertex_int");
-  add_generic_map<C, Sm, Vi, FT>(c, "property_map_vertex_FT");
-
-  add_generic_map<C, Sm, Ei, std::string>(c, "property_map_edge_string");
-  add_generic_map<C, Sm, Ei, bool>(c, "property_map_edge_bool");
-  add_generic_map<C, Sm, Ei, CGAL::IO::Color>(c, "property_map_edge_color");
-
-  // Face property maps
-  add_generic_map<C, Sm, Fi, std::string>(c, "property_map_face_string");
-  add_generic_map<C, Sm, Fi, double>(c, "property_map_face_double");
-  add_generic_map<C, Sm, Fi, Vector_3>(c, "property_map_face_vector");
-  add_generic_map<C, Sm, Fi, std::size_t>(c, "property_map_face_size_t");
-  add_generic_map<C, Sm, Fi, int>(c, "property_map_face_int");
-  add_generic_map<C, Sm, Fi, bool>(c, "property_map_face_bool");
-  add_generic_map<C, Sm, Fi, std::uint32_t>(c, "property_map_face_uint32_t");
-  add_generic_map<C, Sm, Fi, CGAL::IO::Color>(c, "property_map_face_color");
-
-  // Halfedge property maps
-  add_generic_map<C, Sm, Hi, std::string>(c, "property_map_halfedge_string");
-  add_generic_map<C, Sm, Hi, std::size_t>(c, "property_map_halfedge_size_t");
-  add_generic_map<C, Sm, Hi, py::tuple>(c, "property_map_halfedge_tuple");
-  add_generic_map<C, Sm, Hi, bool>(c, "property_map_halfedge_bool");
-  add_generic_map<C, Sm, Hi, CGAL::IO::Color>(c, "property_map_halfedge_color");
+  add_generic_maps<C, Sm, std::string>(c, "string");
+  add_generic_maps<C, Sm, CGAL::IO::Color>(c, "color");
+  add_generic_maps<C, Sm, typename Sm::Point>(c, "point");
+  add_generic_maps<C, Sm, bool>(c, "bool");
+  add_generic_maps<C, Sm, std::size_t>(c, "size_t");
+  add_generic_maps<C, Sm, Vector_3>(c, "vector");
+  add_generic_maps<C, Sm, int>(c, "int");
+  add_generic_maps<C, Sm, FT>(c, "FT");
+  add_generic_maps<C, Sm, double>(c, "double");
+  add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t");
+  add_generic_maps<C, Sm, py::tuple>(c, "tuple");
+  add_generic_maps<C, Sm, py::set>(c, "set");
+  add_generic_maps<C, Sm, Vector_3>(c, "vector");
+  add_generic_maps<C, Sm, py::list>(c, "list");
 
   c.def("remove_all_property_maps", &Sm::remove_all_property_maps,
         "removes all property maps for all index types added by a call to `add_property_map()`.\n"
         "The memory allocated for those property maps is freed.");
   
   return c;
+}
+
+
+} // namespace sm
+
+//
+template <typename SurfaceMesh, typename C>
+void add_sm_index(C& c) {
+  using Sm = SurfaceMesh;
+  using size_type = typename Sm::size_type;
+  using Sm_i = typename C::Type;
+
+  c.def(py::init<>())
+    .def(py::init<size_type>())
+    .def("id", &Sm_i::id)
+    .def("idx", &Sm_i::idx)
+    .def("is_valid", &Sm_i::is_valid)
+    .def("reset", &Sm_i::reset)
+    ;
 }
 
 // Export Surface_mesh.
@@ -578,7 +590,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
     using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
     py::class_<Sm> sm_c(m, name);
-    add_maps<Sm, py::class_<Sm>>(sm_c);
+    sm::add_maps<Sm, py::class_<Sm>>(sm_c);
     sm_c.def(py::init<>())
       .def(py::init<const Sm&>())
       // .def("assign", &Sm::assign, ri)
@@ -726,12 +738,14 @@ void export_surface_mesh(py::module_& m) {
   // export_surface_mesh_impl<Sm_2>(m, "Surface_mesh_2");
 
   // 3D Surface mesh
+  using Kernel_ = Kernel;
   using Sm_3 = sm::Surface_mesh_3;
   using Vi = typename Sm_3::Vertex_index;
   using Fi = typename Sm_3::Face_index;
   using Hi = typename Sm_3::Halfedge_index;
   using Ei = typename Sm_3::Edge_index;
-  using Pnt = Point_3;
+  using Pnt = Kernel_::Point_3;
+  using Vector_3 = Kernel_::Vector_3;
   using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -743,58 +757,27 @@ void export_surface_mesh(py::module_& m) {
   // sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
   using vbmap = typename Sm_3::template Property_map<Vi, bool>;
   internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
-  // sm::vertex_bool_map<Sm_3, bool>(m, "vertex_bool_boost_map", "Vertex_bool_boost_map");
-  internal::export_property_map<Sm_3, Vi, CGAL::IO::Color>(m, "Vertex_color_map");
-  internal::export_property_map<Sm_3, Vi, std::size_t>(m, "Vertex_size_t_map");
-  // sm::vertex_map<Sm_3, std::size_t>(m, "vertex_size_t_boost_map", "Vertex_size_t_boost_map");
-  internal::export_property_map<Sm_3, Vi, Vector_3>(m, "Vertex_vector_map");
-  // sm::vertex_map<Sm_3, Vector_3>(m, "vertex_vector_boost_map", "Vertex_vector_boost_map");
-  internal::export_property_map<Sm_3, Vi, int>(m, "Vertex_int_map");
-  // sm::vertex_map<Sm_3, int>(m, "vertex_int_boost_map", "Vertex_int_boost_map");
-  internal::export_property_map<Sm_3, Vi, FT>(m, "Vertex_FT_map");
-  // sm::vertex_map<Sm_3, FT>(m, "vertex_FT_boost_map", "Vertex_FT_boost_map");
-  internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
-  // sm::vertex_map<Sm_3, Pcad>(m, "vertex_Principal_curvatures_and_directions_boost_map", "Vertex_Principal_curvatures_and_directions_boost_map");
-  internal::export_property_map<Sm_3, Vi, py::set>(m, "Vertex_set_map");
-  // sm::vertex_map<Sm_3, py::set>(m, "vertex_set_boost_map", "Vertex_set_boost_map");
-  internal::export_property_map<Sm_3, Vi, std::string>(m, "Vertex_string_map");
-
-  using ebmap_type = typename Sm_3::template Property_map<Ei, bool>; // different for bools because it would return std::_Bit_reference
-  internal::export_property_map_bool<Sm_3, Ei>(m, "Edge_bool_map");
-  // sm::edge_bool_map<Sm_3, bool>(m, "edge_bool_boost_map", "Edge_bool_boost_map");
-  // sm::register_map<ebmap_type>(m, "Edge_bool_map");
-  internal::export_property_map<Sm_3, Ei, std::string>(m, "Edge_string_map");
-  internal::export_property_map<Sm_3, Ei, CGAL::IO::Color>(m, "Edge_color_map");
-
-
-  internal::export_property_map<Sm_3, Fi, std::string>(m, "Face_string_map");
-  internal::export_property_map<Sm_3, Fi, double>(m, "Face_double_map");
-  // sm::face_map<Sm_3, double>(m, "face_double_boost_map", "Face_double_boost_map");
-  internal::export_property_map<Sm_3, Fi, Vector_3>(m, "Face_vector_map");
-  // sm::face_map<Sm_3, Vector_3>(m, "face_vector_boost_map", "Face_vector_boost_map");
-  internal::export_property_map<Sm_3, Fi, std::size_t>(m, "Face_size_t_map");
-  // sm::face_map<Sm_3, std::size_t>(m, "face_size_t_boost_map", "Face_size_t_boost_map");
-  internal::export_property_map<Sm_3, Fi, int>(m, "Face_int_map");
-  // sm::face_map<Sm_3, int>(m, "face_int_boost_map", "Face_int_boost_map");
   using fbmap = typename Sm_3::template Property_map<Fi, bool>;
   internal::export_property_map_bool<Sm_3, Fi>(m, "Face_bool_map");
-  // sm::face_bool_map<Sm_3, bool>(m, "face_bool_boost_map", "Face_bool_boost_map");
-  internal::export_property_map<Sm_3, Fi, CGAL::IO::Color>(m, "Face_color_map");
-  internal::export_property_map<Sm_3, Fi, std::uint32_t>(m, "Face_uint32_t_map");
-  // sm::face_map<Sm_3, std::uint32_t>(m, "face_uint32_t_boost_map", "Face_uint32_t_boost_map");
-  
-
-  internal::export_property_map<Sm_3, Hi, CGAL::IO::Color>(m, "Halfedge_color_map");
-  internal::export_property_map<Sm_3, Hi, std::string>(m, "Halfedge_string_map");
-  internal::export_property_map<Sm_3, Hi, std::size_t>(m, "Halfedge_size_t_map");
-  // sm::halfedge_map<Sm_3, std::size_t>(m, "halfedge_size_t_boost_map", "Halfedge_size_t_boost_map");
-  internal::export_property_map<Sm_3, Hi, py::tuple>(m, "Halfedge_tuple_map");
-  // sm::halfedge_map<Sm_3, py::tuple>(m, "halfedge_tuple_boost_map", "Halfedge_tuple_boost_map");
   using hbmap = typename Sm_3::template Property_map<Hi, bool>;
   internal::export_property_map_bool<Sm_3, Hi>(m, "Halfedge_bool_map");
-  // sm::halfedge_bool_map<Sm_3, bool>(m, "halfedge_bool_boost_map", "Halfedge_bool_boost_map");
+  using ebmap_type = typename Sm_3::template Property_map<Ei, bool>; // different for bools because it would return std::_Bit_reference
+  internal::export_property_map_bool<Sm_3, Ei>(m, "Edge_bool_map");
 
-  // internal::export_property_map<Sm_3, Pnt, Pnt>(m, "Point_point_map"); // this is a dict not a map??
+  internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
+
+  sm::export_property_maps<py::module_, Sm_3, std::string>(m, "string");
+  sm::export_property_maps<py::module_, Sm_3, Kernel_::Vector_3>(m, "vector");
+  sm::export_property_maps<py::module_, Sm_3, std::size_t>(m, "size_t");
+  sm::export_property_maps<py::module_, Sm_3, int>(m, "int");
+  sm::export_property_maps<py::module_, Sm_3, FT>(m, "FT");
+  sm::export_property_maps<py::module_, Sm_3, py::set>(m, "set");
+  sm::export_property_maps<py::module_, Sm_3, CGAL::IO::Color>(m, "Color");
+  sm::export_property_maps<py::module_, Sm_3, std::uint32_t>(m, "uint32_t");
+  sm::export_property_maps<py::module_, Sm_3, py::tuple>(m, "tuple");
+  sm::export_property_maps<py::module_, Sm_3, py::list>(m, "list");
+  sm::export_property_maps<py::module_, Sm_3, Kernel_::Plane_3>(m, "Plane_3");
+
 
   // implemented:
   // vertex_point_map
