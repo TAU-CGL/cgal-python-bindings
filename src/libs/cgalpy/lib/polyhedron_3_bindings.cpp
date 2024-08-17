@@ -265,6 +265,15 @@ template <typename Pm>
 auto null_face()
 { return boost::graph_traits<Pm>::null_face(); }
 
+// pol3::vertex_map<Prn, std::size_t>(m, "vertex_size_t_map", "dynamic_property_vertex_size_t");
+template <typename C, typename Pm, typename V>
+C register_maps(C& m, const std::string& prop_name){
+  vertex_map<Pm, V>(m, ("vertex_" + prop_name + "_map").c_str(), ("dynamic_property_vertex_" + prop_name).c_str());
+  halfedge_map<Pm, V>(m, ("halfedge_" + prop_name + "_map").c_str(), ("dynamic_property_halfedge_" + prop_name).c_str());
+  face_map<Pm, V>(m, ("face_" + prop_name + "_map").c_str(), ("dynamic_property_face_" + prop_name).c_str());
+  edge_map<Pm, V>(m, ("edge_" + prop_name + "_map").c_str(), ("dynamic_property_edge_" + prop_name).c_str());
+  return m;
+}
 
 } // namespace pol3
 
@@ -516,7 +525,7 @@ void export_polyhedron_3(py::module_& m) {
   export_boost_face(m);
   export_boost_edge(m);
 
-  define_generate_functions<py::module_, Prn, Kernel>(m);
+  // define_generate_functions<py::module_, Prn, Kernel>(m); // doesn't work for polyhedron
 
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");
@@ -607,26 +616,18 @@ void export_polyhedron_3(py::module_& m) {
         py::arg("fname"), py::arg("points"), py::arg("polygons"),
         py::arg("np") = py::dict());
 
-  pol3::vertex_map<Prn, std::size_t>(m, "vertex_size_t_map", "dynamic_property_vertex_size_t");
-  pol3::vertex_map<Prn, FT>(m, "vertex_FT_map", "dynamic_property_vertex_FT");
-  pol3::vertex_map<Prn, Pnt>(m, "vertex_point_map", "Vertex_point_map"); //this is the boost::property_map
-  pol3::vertex_map<Prn, bool>(m, "vertex_bool_map", "Vertex_bool_map");
-  pol3::vertex_map<Prn, Vector_3>(m, "vertex_vector_map", "Vertex_vector_map");
-  pol3::vertex_map<Prn, int>(m, "vertex_int_map", "Vertex_int_map");
-  pol3::vertex_map<Prn, std::size_t>(m, "vertex_uint_32_t_map", "Vertex_uint_32_map");
   pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map", "Vertex_incident_patches_map");
 
-  pol3::edge_map<Prn, bool>(m, "edge_bool_map", "Edge_bool_map");
-
-  pol3::face_map<Prn, std::size_t>(m, "face_size_t_map", "dynamic_property_face_size_t");
-  pol3::face_map<Prn, double>(m, "face_double_map", "Face_double_map");
-  pol3::face_map<Prn, Vector_3>(m, "face_vector_map", "Face_vector_map");
-  pol3::face_map<Prn, int>(m, "face_int_map", "Face_int_map");
-  pol3::face_map<Prn, bool>(m, "face_bool_map", "Face_bool_map");
-
-  pol3::halfedge_map<Prn, py::tuple>(m, "halfedge_tuple_map", "Halfedge_tuple_map");
-  pol3::halfedge_map<Prn, bool>(m, "halfedge_bool_map", "Halfedge_bool_map");
-  pol3::halfedge_map<Prn, std::size_t>(m, "halfedge_size_t_map", "dynamic_property_halfedge_size_t");
+  pol3::register_maps<py::module_, Prn, Pnt>(m, "point");
+  pol3::register_maps<py::module_, Prn, bool>(m, "bool");
+  pol3::register_maps<py::module_, Prn, std::size_t>(m, "size_t");
+  pol3::register_maps<py::module_, Prn, FT>(m, "FT");
+  pol3::register_maps<py::module_, Prn, Vector_3>(m, "vector");
+  pol3::register_maps<py::module_, Prn, int>(m, "int");
+  pol3::register_maps<py::module_, Prn, CGAL::IO::Color>(m, "color");
+  pol3::register_maps<py::module_, Prn, py::tuple>(m, "tuple");
+  pol3::register_maps<py::module_, Prn, py::set>(m, "set");
+  pol3::register_maps<py::module_, Prn, double>(m, "double");
 
 
   namespace PMP = CGAL::Polygon_mesh_processing;

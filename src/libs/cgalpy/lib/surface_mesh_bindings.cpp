@@ -435,7 +435,7 @@ C add_maps(C& c) {
   add_generic_maps<C, Sm, Vector_3>(c, "vector");
   add_generic_maps<C, Sm, int>(c, "int");
   add_generic_maps<C, Sm, FT>(c, "FT");
-  add_generic_maps<C, Sm, double>(c, "double");
+  // add_generic_maps<C, Sm, double>(c, "double");
   add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t");
   add_generic_maps<C, Sm, py::tuple>(c, "tuple");
   add_generic_maps<C, Sm, py::set>(c, "set");
@@ -753,7 +753,6 @@ void export_surface_mesh(py::module_& m) {
 
   define_generate_functions<py::module_, Sm_3, Kernel>(m);
 
-  internal::export_property_map<Sm_3, Vi, Pnt>(m, "Vertex_point_map"); //this is the Pm::Property_map
   // sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
   using vbmap = typename Sm_3::template Property_map<Vi, bool>;
   internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
@@ -777,6 +776,7 @@ void export_surface_mesh(py::module_& m) {
   sm::export_property_maps<py::module_, Sm_3, py::tuple>(m, "tuple");
   sm::export_property_maps<py::module_, Sm_3, py::list>(m, "list");
   sm::export_property_maps<py::module_, Sm_3, Kernel_::Plane_3>(m, "Plane_3");
+  sm::export_property_maps<py::module_, Sm_3, Kernel_::Point_3>(m, "Point_3");
 
 
   // implemented:
