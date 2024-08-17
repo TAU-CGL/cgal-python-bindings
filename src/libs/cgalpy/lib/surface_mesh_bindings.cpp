@@ -439,7 +439,6 @@ C add_maps(C& c) {
   add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t");
   add_generic_maps<C, Sm, py::tuple>(c, "tuple");
   add_generic_maps<C, Sm, py::set>(c, "set");
-  add_generic_maps<C, Sm, Vector_3>(c, "vector");
   add_generic_maps<C, Sm, py::list>(c, "list");
 
   c.def("remove_all_property_maps", &Sm::remove_all_property_maps,
