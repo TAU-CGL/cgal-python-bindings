@@ -627,6 +627,7 @@ void export_polyhedron_3(py::module_& m) {
   pol3::register_maps<py::module_, Prn, CGAL::IO::Color>(m, "color");
   pol3::register_maps<py::module_, Prn, py::tuple>(m, "tuple");
   pol3::register_maps<py::module_, Prn, py::set>(m, "set");
+  // pol3::register_maps<py::module_, Prn, std::uint32_t>(m, "uint32_t"); //no
   // pol3::register_maps<py::module_, Prn, double>(m, "double"); // shadows FT
 
 

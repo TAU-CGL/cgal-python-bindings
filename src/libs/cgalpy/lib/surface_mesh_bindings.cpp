@@ -435,8 +435,8 @@ C add_maps(C& c) {
   add_generic_maps<C, Sm, Vector_3>(c, "vector");
   add_generic_maps<C, Sm, int>(c, "int");
   add_generic_maps<C, Sm, FT>(c, "FT");
-  // add_generic_maps<C, Sm, double>(c, "double");
-  add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t");
+  // add_generic_maps<C, Sm, double>(c, "double"); // shadows FT
+  // add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t"); //no
   add_generic_maps<C, Sm, py::tuple>(c, "tuple");
   add_generic_maps<C, Sm, py::set>(c, "set");
   add_generic_maps<C, Sm, py::list>(c, "list");

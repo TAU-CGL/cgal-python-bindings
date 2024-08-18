@@ -34,7 +34,7 @@ except: raise ValueError("Invalid input.")
 
 print(f"Is the soup a polygon mesh ? : {1 if Pmp.is_polygon_soup_a_polygon_mesh(polygons) else 0}")
 
-polygons = Pmp.orient_triangle_soup_with_reference_triangle_mesh(ref1, points, polygons);
+points, polygons = Pmp.orient_triangle_soup_with_reference_triangle_mesh(ref1, points, polygons);
 
 print(f"And now ? : {1 if Pmp.is_polygon_soup_a_polygon_mesh(polygons) else 0}")
 
