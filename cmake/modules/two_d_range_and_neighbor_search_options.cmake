@@ -1,0 +1,10 @@
+if(NOT TWO_D_RANGE_AND_NEIGHBOR_SEARCH_OPTIONS_FILE_INCLUDED)
+set(TWO_D_RANGE_AND_NEIGHBOR_SEARCH_OPTIONS_FILE_INCLUDED)
+
+function(select_two_d_range_and_neighbor_search)
+  if (CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS)
+    add_definitions(-DCGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS=)
+  endif()
+endfunction()
+
+endif()

@@ -16,6 +16,8 @@
 
 namespace py = nanobind;
 
+void export_2d_range_and_neighbor_search(py::module_&);
+void export_3d_point_set(py::module_&);
 void export_alpha_shape_2(py::module_&);
 void export_alpha_shape_3(py::module_&);
 void export_arrangement_on_surface_2(py::module_&);
@@ -62,13 +64,21 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_kernel_module(ker_m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
   export_intersections(ker_m);
-#endif
-#endif
+#endif // CGALPY_KERNEL_INTERSECTION_BINDINGS
+#endif // CGALPY_KERNEL_BINDINGS
+
+#ifdef CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS
+    export_2d_range_and_neighbor_search(m); // currently under CGALPY
+#endif // CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
+  #warning "3D point set bindings"
+    export_3d_point_set(m); // currently under CGALPY
+#endif // CGALPY_3D_POINT_SET_BINDINGS
 
 #ifdef CGALPY_KERNEL_D_BINDINGS
   auto kerd_m = m.def_submodule("Kerd");
   export_kernel_d(kerd_m);
-#endif
+#endif // CGALPY_KERNEL_D_BINDINGS
 
 #ifdef CGALPY_POLYGON_2_BINDINGS
   auto pol2_m = m.def_submodule("Pol2");

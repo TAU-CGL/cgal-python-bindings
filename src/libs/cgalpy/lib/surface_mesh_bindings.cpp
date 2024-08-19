@@ -679,9 +679,13 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("point", &sm::my_point<Sm>, ri)
       .def("points", &sm::points<Sm, Vi, Pnt>)
 
+      // .def("__iadd__",
+      //      py::self += py::self,
+      //      "Inserts other into sm.")
       .def("__iadd__",
-           py::self += py::self,
-           "Inserts other into sm.")
+           [](Sm& sm, const Sm& other) { sm.join(other); return sm; },
+           "Inserts other into sm.",
+           py::is_operator())
 
 
 

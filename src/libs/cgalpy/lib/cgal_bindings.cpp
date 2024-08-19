@@ -42,7 +42,7 @@ void export_cgal(py::module_& m) {
   using Reflection = CGAL::Reflection;
 
 #ifndef CGAL_DATA_DIR
-  #warning "CGAL_DATA_DIR is not defined. The data_file_path function will not be available."
+  // #warning "CGAL_DATA_DIR is not defined. The data_file_path function will not be available." // MSVC
 #endif
 #ifdef CGAL_DATA_DIR
   m.def("data_file_path", &CGAL::data_file_path);
