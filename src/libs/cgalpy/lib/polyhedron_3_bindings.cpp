@@ -695,16 +695,6 @@ void export_polyhedron_3(py::module_& m) {
   m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Prn>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
 
-  // helpers from helpers.h
-  m.def("is_border", &boost_utils::my_is_border_h<Prn>,
-        py::arg("hd"), py::arg("g"));
-  m.def("is_border_edge", &boost_utils::my_is_border_edge<Prn>,
-        py::arg("vd"), py::arg("g"));
-  m.def("is_border", &boost_utils::my_is_border_e<Prn>,
-        py::arg("ed"), py::arg("g"));
-  m.def("is_border", &boost_utils::my_is_border_v<Prn>,
-        py::arg("vd"), py::arg("g"));
-
   // Iterators and Circulators
   boost_utils::define_boost_iterators<py::module_, Prn>(m);
 
