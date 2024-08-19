@@ -636,9 +636,6 @@ void export_polyhedron_3(py::module_& m) {
   m.def("is_closed", &CGAL::is_closed<Prn>);
   m.def("null_face", &pol3::null_face<Prn>);
 
-  // Euler operations
-  using ebmap_type = boost::property_map<Prn, CGAL::dynamic_edge_property_t<bool>>::type;
-  boost_utils::define_euler_operations<py::module_, Prn, ebmap_type>(m);
 
   m.def("num_vertices", &boost_utils::num_vertices<Prn>);
   m.def("num_edges", &boost_utils::num_edges<Prn>);
@@ -694,6 +691,10 @@ void export_polyhedron_3(py::module_& m) {
         py::arg("e"), py::arg("g"), py::arg("verbose") = false);
   m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Prn>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
+
+  // Euler operations
+  using ebmap_type = boost::property_map<Prn, CGAL::dynamic_edge_property_t<bool>>::type;
+  boost_utils::define_euler_operations<py::module_, Prn, ebmap_type>(m);
 
   // Iterators and Circulators
   boost_utils::define_boost_iterators<py::module_, Prn>(m);

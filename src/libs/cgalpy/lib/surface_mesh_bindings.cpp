@@ -894,18 +894,6 @@ void export_surface_mesh(py::module_& m) {
   // Euler operations
   boost_utils::define_euler_operations<py::module_, Sm_3, ebmap_type>(m);
 
-  // helpers from helpers.h
-
-  m.def("is_border", &boost_utils::my_is_border_h<Sm_3>,
-        py::arg("hd"), py::arg("g"));
-  m.def("is_border_edge", &boost_utils::my_is_border_edge<Sm_3>,
-        py::arg("vd"), py::arg("g"));
-  m.def("is_border", &boost_utils::my_is_border_e<Sm_3>,
-        py::arg("ed"), py::arg("g"));
-  m.def("is_border", &boost_utils::my_is_border_v<Sm_3>,
-        py::arg("vd"), py::arg("g"));
-
-
   // Iterators and Circulators
   boost_utils::define_boost_iterators<py::module_, Sm_3>(m);
 
