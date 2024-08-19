@@ -14,6 +14,11 @@
 #include <boost/math/constants/constants.hpp>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/vector.h>
+#include <nanobind/stl/optional.h>
+#include <nanobind/stl/pair.h>
+#include <nanobind/stl/tuple.h>
+
 
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h> // needed for a type
@@ -146,51 +151,13 @@ auto read_polygon_soup(const std::string& fname,
   if (! CGAL::IO::read_polygon_soup(fname, points, polygons))
     throw std::runtime_error("Cannot read file!");
 
-  py::list pnt_lst, polygons_lst;
-  for (auto p : points) {
-    pnt_lst.append(p);
-  }
-  for (auto poly : polygons) {
-    py::list new_poly;
-    for (auto pt : poly) {
-      new_poly.append(pt);
-    }
-    polygons_lst.append(new_poly);
-  }
-
-  return py::make_tuple(pnt_lst, polygons_lst);
-}
-
-auto polylist2polyvec(const py::list& polylist) {
-  std::vector<std::vector<size_t>> polyvec;
-  polyvec.reserve(py::len(polylist));
-  for (auto poly : polylist) {
-    std::vector<size_t> poly_ids;
-    // poyl_ids.reserve(py::len(poly));
-    for (auto polyid : poly) {
-      size_t id = py::cast<size_t>(polyid);
-      poly_ids.push_back(id);
-    }
-    polyvec.push_back(poly_ids);
-  }
-  return polyvec;
-}
-
-std::vector<Point_3> ptlist2ptvec(const py::list& ptlist) {
-  std::vector<Point_3> ptvec;
-  ptvec.reserve(py::len(ptlist));
-  for (auto pt : ptlist) {
-    ptvec.push_back(py::cast<Point_3>(pt));
-  }
-  return ptvec;
+  return std::make_tuple(points, polygons);
 }
 
 auto write_polygon_soup(const std::string& fname,
-                        const py::list& points,
-                        const py::list& polygons,
+                        const std::vector<Point_3>& ptlist,
+                        const std::vector<std::vector<size_t>>& polyvec,
                         const py::dict& np = py::dict()) {
-  auto ptlist = ptlist2ptvec(points);
-  auto polyvec = polylist2polyvec(polygons);
   return CGAL::IO::write_polygon_soup(fname, ptlist, polyvec,
                                       internal::parse_named_parameters(np));
 }
@@ -661,6 +628,10 @@ void export_polyhedron_3(py::module_& m) {
   m.def("clear", &CGAL::clear<Prn>);
   m.def("is_closed", &CGAL::is_closed<Prn>);
   m.def("null_face", &pol3::null_face<Prn>);
+
+  // Euler operations
+  using ebmap_type = boost::property_map<Prn, CGAL::dynamic_edge_property_t<bool>>::type;
+  boost_utils::define_euler_operations<py::module_, Prn, ebmap_type>(m);
 
   m.def("num_vertices", &boost_utils::num_vertices<Prn>);
   m.def("num_edges", &boost_utils::num_edges<Prn>);

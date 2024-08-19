@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <boost/graph/graph_traits.hpp>
 #include <boost/property_map/vector_property_map.hpp>
 #define CGAL_USE_BASIC_VIEWER
 
@@ -179,12 +180,11 @@ SurfaceMesh read_polygon_mesh(const std::string& filename,
   // CGAL::expand_face_selection(seed, mesh, 5, selected, std::back_inserter(patch));
 
 template <class Face, class FaceGraph, class IsFaceSelectedPMap>
-auto expand_face_selection(const py::list& seed, const FaceGraph& mesh,
+auto expand_face_selection(const std::vector<typename boost::graph_traits<FaceGraph>::face_descriptor>& seed, const FaceGraph& mesh,
                            std::size_t max_distance, const IsFaceSelectedPMap& selected) {
   std::vector<typename boost::graph_traits<FaceGraph>::face_descriptor> patch;
-  auto seed_vec = pmp::list2vec<Face>(seed);
-  CGAL::expand_face_selection(seed_vec, mesh, max_distance, selected, std::back_inserter(patch));
-  return pmp::vec2list(patch);
+  CGAL::expand_face_selection(seed, mesh, max_distance, selected, std::back_inserter(patch));
+  return patch;
 }
 
 // Read Polygon soup from a file
@@ -197,19 +197,7 @@ auto read_polygon_soup(const std::string& fname,
   if (! CGAL::IO::read_polygon_soup(fname, points, polygons))
     throw std::runtime_error("Cannot read file!");
 
-  py::list pnt_lst, polygons_lst;
-  for (auto p : points) {
-    pnt_lst.append(p);
-  }
-  for (auto poly : polygons) {
-    py::list new_poly;
-    for (auto pt : poly) {
-      new_poly.append(pt);
-    }
-    polygons_lst.append(new_poly);
-  }
-
-  return py::make_tuple(pnt_lst, polygons_lst);
+  return std::make_tuple(points, polygons);
 }
 
 //
@@ -233,13 +221,13 @@ static typename SurfaceMesh::Face_index null_face()
 
 // Add a face from a list of vertices.
 template <typename SurfaceMesh>
-typename SurfaceMesh::Face_index add_face(SurfaceMesh& sm, py::list& lst) {
+typename SurfaceMesh::Face_index add_face(SurfaceMesh& sm,
+                                          const std::vector<typename SurfaceMesh::Vertex_index>& lst
+                                          ) {
   using Sm = SurfaceMesh;
   using Vi = typename Sm::Vertex_index;
 
-  auto begin = stl_input_iterator<Vi>(lst);
-  auto end = stl_input_iterator<Vi>(lst, false);
-  return sm.add_face(CGAL::make_range(begin, end));
+  return sm.add_face(lst);
 }
 
 
@@ -322,20 +310,11 @@ auto add_map(SurfaceMesh& sm, const std::string& name = std::string(),
   //   mesh2.add_property_map<edge_descriptor, bool>("e:is_constrained", true).first;
 
   auto res = sm.template add_property_map<Key, Value>(name, default_value);
-  return py::make_tuple(res.first, res.second);
+  return res;
 }
 
 template <typename T>
-auto make_random_access_property_map(const py::list& lst) {
-  std::vector<T> vec;
-  for (auto v : lst) {
-    try {
-      vec.push_back(py::cast<T>(v));
-    }
-    catch (const py::cast_error&) {
-      throw std::runtime_error("Cannot cast to map value type");
-    }
-  }
+auto make_random_access_property_map(const std::vector<T>& vec) {
   return CGAL::make_random_access_property_map(vec);
 }
 
@@ -816,8 +795,7 @@ void export_surface_mesh(py::module_& m) {
     .def("initialize_face_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_face_indices(); })
     .def("initialize_vertex_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_vertex_indices(); })
     .def("initialize_halfedge_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_halfedge_indices(); })
-    .def("set_selected_faces", [](CGAL::Face_filtered_graph<Sm_3>& ffg, const py::list& lst, const Sm_3::Property_map<Fi, std::size_t>& fccmap) {
-        auto vec = pmp::list2vec<std::size_t>(lst);
+    .def("set_selected_faces", [](CGAL::Face_filtered_graph<Sm_3>& ffg, const std::vector<std::size_t>& vec, const Sm_3::Property_map<Fi, std::size_t>& fccmap) {
         return ffg.set_selected_faces(vec, fccmap);
       })
     ;
@@ -899,6 +877,9 @@ void export_surface_mesh(py::module_& m) {
         py::arg("e"), py::arg("g"), py::arg("verbose") = false);
   m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Sm_3>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
+
+  // Euler operations
+  boost_utils::define_euler_operations<py::module_, Sm_3, ebmap_type>(m);
 
   // helpers from helpers.h
 

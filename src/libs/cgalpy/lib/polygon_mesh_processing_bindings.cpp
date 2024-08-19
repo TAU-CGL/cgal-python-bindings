@@ -133,7 +133,6 @@ bool do_intersect_mesh_polyline(const PolygonMesh& pm,
 //
 template <typename PolygonMesh>
 bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
-                                      // const py::list& lsts,
                                       const std::vector<std::vector<Point_3>>& range,
                                       const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(pm, np);
@@ -145,10 +144,9 @@ bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
 //
 template <typename PolygonMesh>
 auto intersecting_meshes(
-                             // const py::list& range,
                              const std::vector<PolygonMesh>& range,
                              const py::dict& np = py::dict(),
-                             const py::list& nps = py::list()) {
+                             const std::vector<py::dict>& nps = std::vector<py::dict>()) {
   using Pm = PolygonMesh;
 
   std::vector<std::pair<std::size_t, std::size_t>> result;
@@ -347,7 +345,6 @@ auto keep_connected_components_map(PolygonMesh& pm,
 
 template <typename PolygonMesh>
 auto keep_connected_components(PolygonMesh& pm,
-                               // const py::list& components_to_keep,
                                const std::vector<
                                typename boost::graph_traits<PolygonMesh>::face_descriptor>& components_to_keep,
                                const py::dict& np = py::dict()) {
@@ -514,7 +511,6 @@ auto keep_largest_connected_components(PolygonMesh& pmesh,
 
 template <typename PolygonMesh, typename FaceComponentMap>
 auto remove_connected_components_map(PolygonMesh& pm,
-                                     // const py::list& components_to_remove,
                                      const std::vector<std::size_t>& components_to_remove,
                                      const FaceComponentMap& fccmap,
                                      const py::dict& np = py::dict()) {
@@ -769,16 +765,13 @@ auto vertex_bbox(typename boost::graph_traits<PolygonMesh>::vertex_descriptor vd
 
 //
 template <typename PolygonMesh>
-py::list extract_boundary_cycles(PolygonMesh& pm) {
+auto extract_boundary_cycles(PolygonMesh& pm) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Hd = typename Gt::halfedge_descriptor;
 
-  // extract_boundary_cycles return needs output iterator
-  py::list result;
-  auto op = [&] (const Hd& res) mutable
-            { result.append(res); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
+  std::vector<Hd> result;
+  auto it = std::back_inserter(result);
   PMP::extract_boundary_cycles(pm, it);
   return result;
 }
@@ -1983,7 +1976,6 @@ auto triangulate_faces(PolygonMesh& pm,
 
 template <typename PolygonMesh>
 auto triangulate_faces_r(
-                         // const py::list& face_range,
                          const std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& face_range,
                          PolygonMesh& pm,
                          const py::dict& np) {
@@ -1999,7 +1991,6 @@ auto triangulate_faces_r(
 //
 template <typename PolygonMesh, typename SizingFunction>
 auto isotropic_remeshing_sf(
-                                // const py::list& face_range,
                                 const std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& face_range,
                                 SizingFunction& sizing,
                                 PolygonMesh& pmesh,
@@ -2343,7 +2334,6 @@ auto triangulate_polygons(
                          std::vector<std::vector<std::size_t>>& polygons,
                          const py::dict& np = py::dict()) {
   PMP::triangulate_polygons(points, polygons, internal::parse_named_parameters(np));
-  py::list retpts, retpolys;
   return std::make_tuple(points, polygons);
 }
 
@@ -2371,7 +2361,6 @@ auto autorefine_triangle_soup(
 
 template <typename PolygonMesh>
 auto refine(PolygonMesh& tmesh,
-            // const py::list& faces,
             const std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& faces,
             const py::dict& np = py::dict()) {
   using Gt = boost::graph_traits<PolygonMesh>;
@@ -2452,7 +2441,6 @@ auto stitch_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfedge_d
 
 template <typename PolygonMesh>
 auto stitch_boundary_cycles(
-                            // const py::list& boundary_cycle_representatives,
                             const std::vector<typename boost::graph_traits<PolygonMesh>::halfedge_descriptor>& boundary_cycle_representatives,
                             PolygonMesh& pmesh,
                             const py::dict& np = py::dict()) {
@@ -2679,7 +2667,6 @@ auto area(const TriangleMesh& tm,
 
 template <typename TriangleMesh>
 auto area_f(
-            // const py::list& face_range,
             const std::vector<typename boost::graph_traits<TriangleMesh>::face_descriptor>& face_range,
             const TriangleMesh& tm,
             const py::dict& np = py::dict()) {
@@ -2917,7 +2904,6 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
 
 template <typename PolygonMesh>
 auto border_halfedges(
-                      // const py::list& face_range,
                       const std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& face_range,
                       PolygonMesh& pmesh,
                       const py::dict& np = py::dict()) {
@@ -3365,8 +3351,6 @@ auto duplicate_non_manifold_vertices(PolygonMesh& pm,
 
 template <typename PolygonMesh>
 auto polygon_soup_to_polygon_mesh(
-                                       // const py::list& points,
-                                       // const py::list& polygons,
                                        const std::vector<Point_3>& points,
                                        const std::vector<std::vector<std::size_t>>& polygons,
                                        const py::dict& np_ps = py::dict(),
@@ -3939,7 +3923,6 @@ auto fair(TriangleMesh& tmesh,
 
 template <typename PolygonMesh>
 auto reverse_face_orientations(
-                               // const py::list& face_range,
                                const std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& face_range,
                                PolygonMesh& pm)
 {
@@ -4387,7 +4370,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline<Pm>,
         py::arg("points"), py::arg("np") = py::dict());
   m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline_2<Pm>,
-        py::arg("points"), py::arg("third_points") = py::list(),
+        py::arg("points"), py::arg("third_points"),
         py::arg("np") = py::dict());
   m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
         py::arg("pmesh"), py::arg("border_halfedge"),
@@ -4399,16 +4382,10 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np") = py::dict());
   m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing_m<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict());
-  // m.def("extrude_mesh", &pmp::extrude_mesh<Pm, Pm>, 
-  //       py::arg("pmesh"), py::arg("np") = py::dict());
   m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
         py::arg("imesh"), py::arg("omesh"), py::arg("v"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
-  // fair only for polyhedron
-  // m.def("isotropic_remeshing", &pmp::isotropic_remeshing<Pm>, // deprecated?
-  //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
-  //       py::arg("np") = py::dict());
-#if CGALPY_PMP_POLYGONAL_MESH == 0 // only working for polyhedron
+#if 0 // broken for now because of CGAL
   m.def("fair", &pmp::fair<Pm>,
         py::arg("tmesh"), py::arg("vertices"),
         py::arg("np") = py::dict());
@@ -4569,7 +4546,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("does_triangle_soup_self_intersect", &pmp::does_triangle_soup_self_intersect, // TODO: point_map
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict());
   m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>, py::arg("range"),
-        py::arg("np") = py::dict(), py::arg("nps") = py::list());
+        py::arg("np") = py::dict(), py::arg("nps") = std::vector<py::dict>());
   m.def("self_intersections", &pmp::self_intersections<Pm>,
         py::arg("pm"), py::arg("np") = py::dict());
   m.def("self_intersections", &pmp::self_intersections_faces<Pm>,
@@ -4875,9 +4852,9 @@ void export_polygon_mesh_processing(py::module_& m) {
   py::class_<Pe>(m, "Polyhedral_envelope")
     .def(py::init<Pm&, double, const py::dict&>(),
          py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
-    .def(py::init<const py::list&, Pm&, double, const py::dict&>(),
+    .def(py::init<const std::vector<Fd>&, Pm&, double, const py::dict&>(),
          py::arg("face_range"), py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
-    .def(py::init<const py::list&, const py::list&, double, const py::dict&>(),
+    .def(py::init<const std::vector<Point_3>&, const std::vector<std::vector<size_t>>&, double, const py::dict&>(),
          py::arg("points"), py::arg("polygons"), py::arg("epsilon"), py::arg("np") = py::dict()) // TODO: handle face_epsilon_map
     .def("is_empty", &Pe::is_empty)
     .def("inside", [](const Pe& i, const Point_3& query) { return i(query); },
@@ -4893,26 +4870,7 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
   py::class_<Pcad>(m, "Principal_curvatures_and_directions")
-    .def(py::init<>())
-    .def("__init__", [](Pcad& instance, const py::list& l) {
-      if (l.size() != 4) {
-        throw std::invalid_argument("List must have 4 elements");
-      }
-      try {
-        instance.min_curvature = py::cast<double>(l[0]);
-        instance.max_curvature = py::cast<double>(l[1]);
-      }
-      catch(py::cast_error& e) {
-        throw std::invalid_argument("First two elements must be of type float");
-      }
-      try {
-        instance.min_direction = py::cast<Kernel::Vector_3>(l[2]);
-        instance.max_direction = py::cast<Kernel::Vector_3>(l[3]);
-      }
-      catch(py::cast_error& e) {
-        throw std::invalid_argument("Last two elements must be of type Vector_3");
-      }
-    })
+    .def(py::init<FT, FT, Vector_3, Vector_3>())
     .def_ro("min_curvature", &Pcad::min_curvature)
     .def_ro("max_curvature", &Pcad::max_curvature)
     .def_ro("min_direction", &Pcad::min_direction)

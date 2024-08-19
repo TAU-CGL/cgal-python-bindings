@@ -23,16 +23,16 @@ struct Polyhedral_envelope : CGAL::Polyhedral_envelope<GeomTraits> {
      internal::parse_pmp_np<TriangleMesh>(np)
      .face_epsilon_map(
      get_face_prop_map<TriangleMesh, double>
-     (tmesh, "INTERNAL_MAP0",
+     (tmesh, "INTERNAL_MAPA",
       np.contains("face_epsilon_map") ? np["face_epsilon_map"] : py::none(),
       epsilon)))
   {
     // the map isn't deleted! and there is no way to delete it
   }
 
-  Polyhedral_envelope(const py::list& face_range, TriangleMesh& tmesh, double epsilon, const py::dict& np = py::dict())// {
+  Polyhedral_envelope(const std::vector<Fd>& face_range, TriangleMesh& tmesh, double epsilon, const py::dict& np = py::dict())// {
     : CGAL::Polyhedral_envelope<GeomTraits>
-     (list2vec<Fd>(face_range), tmesh, epsilon,
+     (face_range, tmesh, epsilon,
       internal::parse_pmp_np<TriangleMesh>(np)
       .face_epsilon_map(
       get_face_prop_map<TriangleMesh, double>
@@ -43,12 +43,10 @@ struct Polyhedral_envelope : CGAL::Polyhedral_envelope<GeomTraits> {
     // the map isn't deleted! and there is no way to delete it
   }
 
-  // now with list of Point_3 and list of lists of size_t: polygons
-  Polyhedral_envelope(const py::list& points, const py::list& polygons, double epsilon, const py::dict& np = py::dict())// {
+  Polyhedral_envelope(const std::vector<Point_3> points, const std::vector<std::vector<size_t>>& polygons, double epsilon, const py::dict& np = py::dict())// {
     : CGAL::Polyhedral_envelope<GeomTraits>
-     (list2vec<Point_3>(points), internal::polylist2polyvec_i(polygons), epsilon)
+     (points, polygons, epsilon)
   {
-    // the map isn't deleted! and there is no way to delete it
   }
 };
 
