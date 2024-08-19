@@ -51,6 +51,7 @@ void export_point_2(C& c) {
 
   c.def(py::init<>())
     .def(py::init<Pnt&>())
+    .def(py::init_implicit<const CGAL::Origin&>())
     .def("x", &Pnt::x)
     .def("y", &Pnt::y)
     .def("hx", &Pnt::hx)
