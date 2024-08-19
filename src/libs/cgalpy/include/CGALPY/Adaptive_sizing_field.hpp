@@ -4,7 +4,6 @@
 #include <nanobind/nanobind.h>
 #include <CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h>
 #include "CGALPY/kernel_types.hpp"
-#include "CGALPY/helpers.hpp"
 #include "CGALPY/pmp_np_parser.hpp"
 
 namespace py = nanobind;
@@ -17,12 +16,6 @@ struct Adaptive_sizing_field : public CGAL::Polygon_mesh_processing::Adaptive_si
   using vertex_descriptor = typename Gt::vertex_descriptor;
   using halfedge_descriptor = typename Gt::halfedge_descriptor;
   using face_descriptor = typename Gt::face_descriptor;
-  // Adaptive_sizing_field(const FT tol, const py::tuple& edge_len_min_max, const py::list& face_range, PolygonMesh& pmesh,
-  //                       const py::dict& np = py::dict()) :
-  //   CGAL::Polygon_mesh_processing::Adaptive_sizing_field<PolygonMesh>
-  //   (tol, {py::cast<FT>(edge_len_min_max[0]), py::cast<FT>(edge_len_min_max[1])},
-  //   list2vec<face_descriptor>(face_range), pmesh, internal::parse_pmp_np<PolygonMesh>(np)) {};
-  // use std instead
   Adaptive_sizing_field(const FT tol, const std::tuple<FT, FT>& edge_len_min_max, const std::vector<face_descriptor>& face_range, PolygonMesh& pmesh,
                         const py::dict np = {}) :
     CGAL::Polygon_mesh_processing::Adaptive_sizing_field<PolygonMesh>

@@ -62,8 +62,8 @@
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
 #include <CGAL/Polygon_mesh_processing/surface_Delaunay_remeshing.h>
 
-#include "CGALPY/helpers.hpp"
 #include "CGALPY/Custom_sizing_field.hpp"
+#include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
@@ -4046,7 +4046,7 @@ void set_non_manifold_vertex(Default_orientation_visitor& v,
 }
 
 void set_link_connected_polygons(Default_orientation_visitor& v,
-                                 const std::function<void(std::size_t, py::list)>& f) {
+                                 const std::function<void(std::size_t, std::vector<std::size_t>)>& f) {
   v.set_link_connected_polygons(f);
 }
 // using Boolean_operation_type = COREFINEMENT::Boolean_operation_type;

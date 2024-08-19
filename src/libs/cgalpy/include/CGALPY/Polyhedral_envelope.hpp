@@ -4,7 +4,6 @@
 #include <nanobind/nanobind.h>
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/pmp_helpers.hpp"
-#include "CGALPY/helpers.hpp"
 #include "CGALPY/internal.hpp"
 #include <CGAL/Polyhedral_envelope.h>
 

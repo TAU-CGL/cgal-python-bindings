@@ -39,7 +39,6 @@
 #include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/get.hpp"
-#include "CGALPY/helpers.hpp"
 #include "CGALPY/internal.hpp"
 #include "CGALPY/generator_functions.hpp"
 
@@ -396,13 +395,13 @@ C add_maps(C& c) {
         py::arg("name") = std::string(),
           "returns an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
 
-    .def("properties_vertex", [](const Sm& sm) { return pmp::vec2list(sm.template properties<Vi>()); },
+    .def("properties_vertex", [](const Sm& sm) { return sm.template properties<Vi>(); },
         "returns a vector with all strings that describe properties with the key type `Vertex_index`.")
-    .def("properties_edge", [](const Sm& sm) { return pmp::vec2list(sm.template properties<Ei>()); },
+    .def("properties_edge", [](const Sm& sm) { return sm.template properties<Ei>(); },
         "returns a vector with all strings that describe properties with the key type `Edge_index`.")
-    .def("properties_halfedge", [](const Sm& sm) { return pmp::vec2list(sm.template properties<Hi>()); },
+    .def("properties_halfedge", [](const Sm& sm) { return sm.template properties<Hi>(); },
         "returns a vector with all strings that describe properties with the key type `Halfedge_index`.")
-    .def("properties_face", [](const Sm& sm) { return pmp::vec2list(sm.template properties<Fi>()); },
+    .def("properties_face", [](const Sm& sm) { return sm.template properties<Fi>(); },
         "returns a vector with all strings that describe properties with the key type `Face_index`.")
     ;
     

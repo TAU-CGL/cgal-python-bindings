@@ -286,31 +286,4 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
   return cgal_parameters;
 }
 
-std::vector<std::vector<size_t>> polylist2polyvec_i(const py::list &polylist) {
-  std::vector<std::vector<size_t>> polyvec;
-  polyvec.reserve(py::len(polylist));
-  for (auto poly : polylist) {
-    std::vector<size_t> poly_ids;
-    // poyl_ids.reserve(py::len(poly));
-    for (auto polyid : poly) {
-      size_t id = py::cast<size_t>(polyid);
-      poly_ids.push_back(id);
-    }
-    polyvec.push_back(poly_ids);
-  }
-  return polyvec;
-}
-
-py::list polyvec2polylist_i(const std::vector<std::vector<std::size_t>> polyvec) {
-  py::list polylist;
-  for (auto poly : polyvec) {
-    py::list p;
-    for (auto pid : poly) {
-      p.append(pid);
-    }
-    polylist.append(p);
-  }
-  return polylist;
-}
-
 }  // namespace internal
