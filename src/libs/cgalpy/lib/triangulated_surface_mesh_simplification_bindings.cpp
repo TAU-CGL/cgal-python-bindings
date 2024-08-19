@@ -625,6 +625,12 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
   }
 }
 
+template <typename Tm, typename... PolicyTypes>
+void define_edge_collapses(py::module_& m) {
+    (m.def("edge_collapse", &sms::edge_collapse<Tm, PolicyTypes>,
+          py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict(),
+           "Simplifies tmesh in-place by collapsing edges, and returns the number of edges effectively removed."), ...);
+}
 
 } // namespace sms
 
@@ -694,9 +700,9 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
          "If v1v0 belongs to a finite face (is not a border edge) the directed edge from v0 to vR, a null descriptor otherwise.")
     .def("vR_v1", &Ep::vR_v1,
          "If v1v0 belongs to a finite face (is not a border edge) the directed edge from vR to v1, a null descriptor otherwise.")
-    .def("link", [](const Ep& ep) { return pmp::vec2list(ep.link()); },
+    .def("link", &Ep::link,
       "The unique sequence of the vertices around v0v1 in topological order (ccw or cw depending on the relative ordering of v0 and v1 in the profile).")
-    .def("border_edges", [](const Ep& ep) { return pmp::vec2list(ep.border_edges()); },
+    .def("border_edges", &Ep::border_edges,
       "The unique collection of the border directed edges incident upon v0 and v1.")
     .def("left_face_exists", &Ep::left_face_exists,
       "Indicates if v0v1 belongs to a finite face of the surface mesh (i.e, v0v1 is not a border edge).")
@@ -745,26 +751,31 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Ecsp = SMS::Edge_count_stop_predicate<Tm>;
   py::class_<Ecsp>(m, "Edge_count_stop_predicate")
     .def(py::init<edges_size_type>(), py::arg("threshold"))
+    .def("__call__", [](Ecsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
     ;
 
   using Ecrsp = SMS::Edge_count_ratio_stop_predicate<Tm>;
   py::class_<Ecrsp>(m, "Edge_count_ratio_stop_predicate")
-    .def(py::init<double>(), py::arg("ratio"));
+    .def(py::init<double>(), py::arg("ratio"))
+    .def("__call__", [](Ecrsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
     ;
 
   using Elsp = SMS::Edge_length_stop_predicate<FT>;
   py::class_<Elsp>(m, "Edge_length_stop_predicate")
     .def(py::init<const FT>(), py::arg("threshold"))
+    .def("__call__", [](Elsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
     ;
 
   using Fcsp = SMS::Face_count_stop_predicate<Tm>;
   py::class_<Fcsp>(m, "Face_count_stop_predicate")
     .def(py::init<edges_size_type>(), py::arg("threshold"))
+    .def("__call__", [](Fcsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
     ;
 
   using Fcrsp = SMS::Face_count_ratio_stop_predicate<Tm>;
   py::class_<Fcrsp>(m, "Face_count_ratio_stop_predicate")
     .def(py::init<double, const Tm&>(), py::arg("ratio"), py::arg("tmesh"))
+    .def("__call__", [](Fcrsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
     ;
 
   // Policies //
@@ -879,15 +890,6 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
     ;
 
 
-  m.def("edge_collapse", &sms::edge_collapse<Tm, Ecsp>,
-    py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
-  m.def("edge_collapse", &sms::edge_collapse<Tm, Ecrsp>,
-    py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
-  m.def("edge_collapse", &sms::edge_collapse<Tm, Elsp>,
-    py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
-  m.def("edge_collapse", &sms::edge_collapse<Tm, Fcsp>,
-    py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
-  m.def("edge_collapse", &sms::edge_collapse<Tm, Fcrsp>,
-    py::arg("pm"), py::arg("stop_policy"), py::arg("np") = py::dict());
+  sms::define_edge_collapses<Tm, Ecsp, Ecrsp, Elsp, Fcsp, Fcrsp>(m);
 }
 

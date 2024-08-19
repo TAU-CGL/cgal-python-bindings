@@ -15,6 +15,7 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/optional.h>
+#include "nanobind/operators.h"
 
 #include <CGAL/boost/graph/generators.h>
 #include <CGAL/property_map.h>
@@ -413,14 +414,26 @@ C add_maps(C& c) {
   add_generic_maps<C, Sm, Vector_3>(c, "vector");
   add_generic_maps<C, Sm, int>(c, "int");
   add_generic_maps<C, Sm, FT>(c, "FT");
-  // add_generic_maps<C, Sm, double>(c, "double"); // shadows FT
-  // add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t"); //no
   add_generic_maps<C, Sm, py::tuple>(c, "tuple");
   add_generic_maps<C, Sm, py::set>(c, "set");
   add_generic_maps<C, Sm, py::list>(c, "list");
+  // add_generic_maps<C, Sm, double>(c, "double"); // shadows FT
+  // add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t"); //no
 
   c.def("remove_all_property_maps", &Sm::remove_all_property_maps,
         "removes all property maps for all index types added by a call to `add_property_map()`.\n"
+        "The memory allocated for those property maps is freed.");
+  c.def("remove_property_maps_vertex", &Sm::template remove_property_maps<Vi>,
+        "removes all property maps for the index type `Vertex_index` added by a call to `add_property_map()`.\n"
+        "The memory allocated for those property maps is freed.");
+  c.def("remove_property_maps_edge", &Sm::template remove_property_maps<Ei>,
+        "removes all property maps for the index type `Edge_index` added by a call to `add_property_map()`.\n"
+        "The memory allocated for those property maps is freed.");
+  c.def("remove_property_maps_halfedge", &Sm::template remove_property_maps<Hi>,
+        "removes all property maps for the index type `Halfedge_index` added by a call to `add_property_map()`.\n"
+        "The memory allocated for those property maps is freed.");
+  c.def("remove_property_maps_face", &Sm::template remove_property_maps<Fi>,
+        "removes all property maps for the index type `Face_index` added by a call to `add_property_map()`.\n"
         "The memory allocated for those property maps is freed.");
   
   return c;
@@ -665,6 +678,10 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
       .def("point", &sm::my_point<Sm>, ri)
       .def("points", &sm::points<Sm, Vi, Pnt>)
+
+      .def("__iadd__",
+           py::self += py::self,
+           "Inserts other into sm.")
 
 
 
