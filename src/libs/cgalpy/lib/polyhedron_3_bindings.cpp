@@ -6,7 +6,6 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#include "CGALPY/generator_functions.hpp"
 #include <cstddef>
 #include <stdexcept>
 #define CGAL_USE_BASIC_VIEWER
@@ -40,6 +39,10 @@
 #include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/get.hpp"
 #include "CGALPY/internal.hpp"
+#include "CGALPY/export_mesh_selection_functions.hpp"
+#include "CGALPY/export_mesh_helpers.hpp"
+#include "CGALPY/generator_functions.hpp"
+
 
 namespace py = nanobind;
 
@@ -702,7 +705,13 @@ void export_polyhedron_3(py::module_& m) {
   m.def("is_border", &boost_utils::my_is_border_v<Prn>,
         py::arg("vd"), py::arg("g"));
 
-  // iterators
+  // Iterators and Circulators
   boost_utils::define_boost_iterators<py::module_, Prn>(m);
+
+  // Selection Functions
+  boost_utils::define_boost_selection_functions<py::module_, Prn>(m);
+
+  // Helper Functions
+  boost_utils::define_boost_helpers<py::module_, Prn, Prn>(m);
 }
 

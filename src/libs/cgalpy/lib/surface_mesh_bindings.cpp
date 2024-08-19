@@ -42,6 +42,8 @@
 #include "CGALPY/get.hpp"
 #include "CGALPY/internal.hpp"
 #include "CGALPY/generator_functions.hpp"
+#include "CGALPY/export_mesh_selection_functions.hpp"
+#include "CGALPY/export_mesh_helpers.hpp"
 
 namespace py = nanobind;
 
@@ -176,15 +178,6 @@ SurfaceMesh read_polygon_mesh(const std::string& filename,
                                     internal::parse_named_parameters(parameters)))
     throw std::runtime_error("Cannot read file!");
   return sm;
-}
-  // CGAL::expand_face_selection(seed, mesh, 5, selected, std::back_inserter(patch));
-
-template <class Face, class FaceGraph, class IsFaceSelectedPMap>
-auto expand_face_selection(const std::vector<typename boost::graph_traits<FaceGraph>::face_descriptor>& seed, const FaceGraph& mesh,
-                           std::size_t max_distance, const IsFaceSelectedPMap& selected) {
-  std::vector<typename boost::graph_traits<FaceGraph>::face_descriptor> patch;
-  CGAL::expand_face_selection(seed, mesh, max_distance, selected, std::back_inserter(patch));
-  return patch;
 }
 
 // Read Polygon soup from a file
@@ -828,7 +821,7 @@ void export_surface_mesh(py::module_& m) {
   m.def("null_face", &sm::null_face<Sm_3>);
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>,
         py::arg("fname"), py::arg("parameters") = py::dict());
-  m.def("expand_face_selection", &sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
+  // m.def("expand_face_selection", &sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
   m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>,
         py::arg("fname"), py::arg("np") = py::dict());
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
@@ -913,7 +906,13 @@ void export_surface_mesh(py::module_& m) {
         py::arg("vd"), py::arg("g"));
 
 
-  // iterators
+  // Iterators and Circulators
   boost_utils::define_boost_iterators<py::module_, Sm_3>(m);
+
+  // Selection Functions
+  boost_utils::define_boost_selection_functions<py::module_, Sm_3>(m);
+
+  // Helper Functions
+  boost_utils::define_boost_helpers<py::module_, Sm_3, Sm_3>(m);
 
 }
