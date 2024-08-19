@@ -1,7 +1,13 @@
 #include <nanobind/nanobind.h>
+#include <nanobind/make_iterator.h>
+#include <nanobind/stl/bind_vector.h>
+#include <nanobind/stl/string.h>
 
 #include <CGAL/Point_set_3.h>
+#include <CGAL/Origin.h>
 
+#include "CGALPY/add_extraction.hpp"
+#include "CGALPY/add_insertion.hpp"
 #include "CGALPY/kernel_types.hpp"
 
 namespace py = nanobind;
@@ -9,302 +15,197 @@ namespace py = nanobind;
 void export_3d_point_set(py::module_& m) {
   using Kernel_ = Kernel;
   using Pt_set = CGAL::Point_set_3<Kernel_::Point_3, Kernel_::Vector_3>;
+  using Pnt_3 = Kernel_::Point_3;
+  using Vec_3 = Kernel_::Vector_3;
 
-  py::class_<Pt_set>(m, "Point_set_3")
+  py::class_<Pt_set> ptst(m, "Point_set_3");
 
     // Construction, Destruction, Assignment
-    .def(py::init<bool>(), py::arg("with_normal_map")=false,
-      "creates an empty point set with no additional property.")
+  ptst.def(py::init<bool>(),
+           py::arg("with_normal_map")=false,
+      "creates an empty point set with no additional property."
+      "\n"
+      "Parameters\n"
+      "with_normal_map  true if the normal map should be added. If false (default value), the normal map can still be added later on (see add_normal_map()).")
 
     // Related Functions
+    .def("__iadd__", [](Pt_set& ps, Pt_set& other) { return ps += other; },
+       py::arg("other"),
+      "Append other at the end of ps.\n"
+      "Shifts the indices of points of other by ps.number_of_points() + other.number_of_points().\n"
+      "Copies entries of all property maps which have the same name in ps and other. Property maps which are only in other are ignored.\n"
+      "\n"
+      "Note\n"
+      "Garbage is collected in both point sets when calling this method.",
+       py::is_operator())
+    // extraction
+    // insertion
+    // insertion
+    
+    // Member Functions
+    // NULL_VECTOR breaks this:
+    // .def("add_normal_map", [](Pt_set& ps, const Vec_3& default_value=CGAL::Null_vector()) { ps.add_normal_map(default_value); },
+    //      py::arg("default_value")=CGAL::Null_vector(),
+    //   "Convenience method that adds a normal property.\n"
+    //   "This method adds a property of type Vector and named normal.\n"
+    //   "\n"
+    //   "Returns\n"
+    //   "Returns a pair containing the normal map and a Boolean that is true if the property was added and false if it already exists (and was therefore not added but only returned). ")
+    // TODO: add_property_map
+    .def("cancel_removals", &Pt_set::cancel_removals,
+      "restores all removed points.\n"
+      "After removing one or several points, calling this method restores the point set to its initial state: points that were removed (and their associated properties) are restored.\n"
+      "\n"
+      "Note\n"
+      "This method is only guaranteed to work if no point was inserted after the removal: otherwise, some points might not be restored.\n"
+      "If collect_garbage() was called after removal, the points are irremediably lost and nothing will be restored. ")
+    .def("clear", &Pt_set::clear,
+      "Clears the point set properties and content.\n"
+      "After calling this method, the object is the same as a newly constructed object. The additional properties (such as normal vectors) are also removed and must thus be re-added if needed.")
+    .def("clear_properties", &Pt_set::clear_properties,
+      "Clears all properties created.\n"
+      "After calling this method, all properties are removed. The points are left unchanged.")
+    .def("copy_properties", &Pt_set::copy_properties,
+      py::arg("other"),
+      "Copies the properties from another point set.\n"
+      "All properties from other that do not already exist in this point set are added and filled to their default values. Properties that exist in both point sets are left unchanged.")
+    .def("garbage_size", &Pt_set::garbage_size,
+      "Number of removed points.\n")
+    .def("has_normal_map", &Pt_set::has_normal_map,
+      "Convenience method that tests whether the point set has normals.\n"
+      "This method tests whether a property of type Vector and named normal exists.")
+    // TODO: has_property_map
+    .def("insert", [](Pt_set& ps) { ps.insert(); },
+      "inserts a new element with default property values.\n"
+      "\n"
+      "Note\n"
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call. ")
+    .def("insert", [](Pt_set& ps, const Pnt_3& p) { ps.insert(p); },
+      py::arg("p"),
+      "inserts new point with default property values.\n"
+      "\n"
+      "Parameters\n"
+      "p  Point to insert\n"
+      "\n"
+      "Note\n"
+      "Properties of the added point are initialized to their default value.\n"
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n")
+    .def("insert", [](Pt_set& ps, const Pnt_3& p, const Vec_3& n) { ps.insert(p, n); },
+      py::arg("p"), py::arg("n"),
+      "Convenience method to add a point with a normal vector.\n"
+      "\n"
+      "Parameters\n"
+      "p  Point to insert\n"
+      "n  Associated normal vector\n"
+      "\n"
+      "Note\n"
+      "Properties of the added point other than its normal vector are initialized to their default value.\n"
+      "If not already added, a normal property is automatically added to the point set when using this method. The default value for normal vectors is CGAL::NULL_VECTOR.\n"
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n")
+    .def("insert", [](Pt_set& ps, const Pt_set& other, const std::size_t idx) { ps.insert(other, idx); },
+      py::arg("other"), py::arg("idx"),
+      "Convenience method to copy a point with all its properties from another point set.\n"
+      "In the case where two point sets have the same properties, this method allows the user to easily copy one point (along with the values of all its properties) from one point set to another.\n"
+      "\n"
+      "Parameters\n"
+      "other  Point set to which the point to copy belongs\n"
+      "idx  Index of the point to copy in other\n"
+      "\n"
+      "Warning\n"
+      "This point set and other must have the exact same properties, with the exact same names and types in the exact same order.\n"
+      "\n"
+      "Note\n"
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n")
+    .def("is_empty", &Pt_set::is_empty,
+      "returns true if the number of elements not marked as removed is 0, false otherwise.\n"
+      "\n"
+      "Note\n"
+      "This does not count the removed elements.\n"
+      "The method empty() is also available (see Range) and does the same thing. ")
+    .def("is_removed", [](Pt_set& ps, const std::size_t idx) { return ps.is_removed(idx); },
+      py::arg("index"),
+      "returns true if the element is marked as removed, false otherwise.\n"
+      "\n"
+      "Note\n"
+      "When iterating between begin() and end(), no element marked as removed can be found. ")
+    .def("join", &Pt_set::join,
+      py::arg("other"),
+      "merges other in the point set.\n"
+      "Shifts the indices of points of other by number_of_points() + other.number_of_points().\n"
+      "Copies entries of all property maps which have the same name in the point set and other. Property maps which are only in other are ignored.\n"
+      "\n"
+      "Note\n"
+      "If copy_properties() with other as argument is called before calling this method, then all the content of other will be copied and no property will be lost in the process.\n"
+      "Garbage is collected in both point sets when calling this method. ")
+    .def("normal", [](Pt_set& ps, const std::size_t idx) { return ps.normal(idx); },
+      py::arg("index"),
+      "returns a reference to the normal corresponding to index.\n"
+      "\n"
+      "Note\n"
+      "If not already added, a normal property is automatically added to the point set (see add_normal_map()). ")
+    .def("normal_map", [](Pt_set& ps) { return ps.normal_map(); },
+      "returns the property map of the normal property.\n"
+      "\n"
+      "Note\n"
+      "If the normal property has not been added yet to the point set before calling this method, the property map is automatically added with add_normal_map(). ")
+    // TODO: normal push map?
+    .def("number_of_points", &Pt_set::number_of_points,
+      "returns the number of elements in the point set."
+      "\n"
+      "Note\n"
+      "See number_of_removed_points() for getting the number of elements marked as removed."
+      "The method size() is also available (see Range) and does the same thing. ")
+    .def("number_of_removed_points", &Pt_set::number_of_removed_points,
+      "returns the number of elements marked as removed."
+      "\n"
+      "See also\n"
+      "garbage_size()")
+    // TODO: property map
+    .def("remove", [](Pt_set& ps, const std::size_t idx) { return ps.remove(idx); },
+      py::arg("index"),
+      "marks the element as removed.\n"
+      "\n"
+      "Note\n"
+      "The element is not actually removed from the point set, but only marked as removed. The element can be restored with cancel_removals(). ")
+    .def("remove_normal_map", &Pt_set::remove_normal_map,
+      "removes the normal property.\n"
+      "Returns\n"
+      "Returns true if the property was removed and false if it was not found.")
+    // TODO: remove property map
+    .def("reserve", &Pt_set::reserve,
+      py::arg("index"),
+      "restores the element marked as removed.\n"
+      "\n"
+      "Parameters\n"
+      "s Index of the element to restore\n"
+      "\n"
+      "Note\n"
+      "This method does not change the content of the point set and is only used for optimization.")
+    .def("resize", &Pt_set::resize,
+      py::arg("index"),
+      "changes size of the point set.\n"
+      "\n"
+      "Parameters\n"
+      "s Target size of the point set\n"
+      "\n"
+      "Note\n"
+      "If the given size is larger than the current size, the capacity of the internal container is extended. If there are element marked as removed, they may be overwritten. If the given size is smaller than the current size, garbage is collected and the container is resized.")
+
+
+    // Ranges
+    // TODO: types for these
+    .def("points", &Pt_set::points,
+      "returns a constant range of points.")
+    .def("normals", &Pt_set::normals,
+      "returns a constant range of normals.")
+
 
 
     ;
 
+  add_insertion(ptst, "__str__");
+  add_insertion(ptst, "__repr__");
+  add_extraction(ptst);
 
 }
 
-
-// template<typename Point, typename Vector>
-// class CGAL::Point_set_3< Point, Vector >
-//
-// A collection of points with dynamically associated properties.
-//
-// An instance of this class stores a set of indices of type Index, each representing a point. Properties can be associated to each point and can be retrieved using the index of the point. There are two particular properties that are hard coded by this class: the coordinates of the points and the normal vectors.
-//
-// The coordinates of a point can be accessed using the index of the point and the member function point(). This property is always present. The normal vector of a point can be accessed using the index of the point and the normal() method. This property must be explicitly created.
-//
-// All properties can be accessed as a range using the methods points(), normals(), and range() for point coordinates, normal vectors, and other properties respectively.
-//
-// Removing a point with properties is achieved by moving its index at the end of the container and keeping track of the number of removed elements. A garbage collection method must be called to really remove it from memory.
-//
-// For convenience, all functions of the package Point Set Processing automatically create the right named parameters if called with a CGAL::Point_set_3 object as argument.
-//
-// Template Parameters
-//     Point	Point type
-//     Vector	Normal vector type
-//
-// Is model of
-//     Range 
-//
-// Examples
-//     Point_set_3/draw_point_set_3.cpp, Point_set_3/point_set.cpp, Point_set_3/point_set_advanced.cpp, Point_set_3/point_set_algo.cpp, Point_set_3/point_set_property.cpp, Point_set_3/point_set_read_ply.cpp, and Point_set_3/point_set_read_xyz.cpp.
-//
-// Public Types
-// typedef Point 	Point_3
-//  	The point type.
-//  
-// typedef Vector 	Vector_3
-//  	The vector type.
-//  
-// typedef unspecified_type 	iterator
-//  	Iterator type of the point set with value type Index is model of RandomAccessIterator
-//  
-// typedef unspecified_type 	const_iterator
-//  	Constant iterator type of the point set with value type Index is model of RandomA.ccessIterator
-//  
-// typedef Property_map< Point > 	Point_map
-//  	Property map of points.
-//  
-// typedef Property_map< Vector > 	Vector_map
-//  	Property map of vectors.
-//  
-// typedef Property_range< Point > 	Point_range
-//  	Constant range of points.
-//  
-// typedef Property_range< Vector > 	Vector_range
-//  	Constant range of vectors.
-//  
-// Related Functions
-//
-// (Note that these are not member functions.)
-// template<typename Point , typename Vector >
-// Point_set_3< Point, Vector > & 	operator+= (Point_set_3< Point, Vector > &ps, Point_set_3< Point, Vector > &other)
-//  	Append other at the end of ps.
-//  
-// template<typename Point , typename Vector >
-// std::istream & 	operator>> (std::istream &is, CGAL::Point_set_3< Point, Vector > &ps)
-//  	reads the point set from an input stream.
-//  
-// template<typename Point , typename Vector >
-// std::ostream & 	operator<< (std::ostream &os, const CGAL::Point_set_3< Point, Vector > &ps)
-//  	writes the point set in an output stream in the Polygon File Format (PLY).
-//  
-// Property Handling
-//
-// A property Property_map<Type> allows to associate properties of type Type to a point.
-//
-// Properties can be added, looked up with a string and removed at runtime.
-// template<class Type >
-// using 	Property_map = unspecified_type
-//  	Model of LvaluePropertyMap with Index as a key type and Type as value type.
-//  
-// template<typename T >
-// bool 	has_property_map (const std::string &name) const
-//  	tests whether property name of type T already exists.
-//  
-// template<class T >
-// std::pair< Property_map< T >, bool > 	add_property_map (const std::string &name, const T t=T())
-//  	adds a new property name of type T with given default value.
-//  
-// template<class T >
-// std::optional< Property_map< T > > 	property_map (const std::string &name) const
-//  	returns the property name of type T.
-//  
-// template<class T >
-// bool 	remove_property_map (Property_map< T > &prop)
-//  	removes the specified property.
-//  
-// bool 	has_normal_map () const
-//  	Convenience method that tests whether the point set has normals.
-//  
-// std::pair< Vector_map, bool > 	add_normal_map (const Vector &default_value=CGAL::NULL_VECTOR)
-//  	Convenience method that adds a normal property.
-//  
-// Vector_map 	normal_map ()
-//  	returns the property map of the normal property.
-//  
-// const Vector_map 	normal_map () const
-//  	returns the property map of the normal property (constant version).
-//  
-// bool 	remove_normal_map ()
-//  	Convenience method that removes the normal property.
-//  
-// Point_map 	point_map ()
-//  	returns the property map of the point property.
-//  
-// const Point_map 	point_map () const
-//  	returns the property map of the point property (constant version).
-//  
-// void 	copy_properties (const Point_set_3 &other)
-//  	Copies the properties from another point set.
-//  
-// std::vector< std::string > 	properties () const
-//  	returns a vector with all strings that describe properties.
-//  
-// std::vector< std::pair< std::string, std::type_index > > 	properties_and_types () const
-//  	returns a vector of pairs that describe properties and associated types.
-//  
-// unspecified_type 	parameters () const
-//  	returns a sequence of Named Parameters to be used in Point Set Processing algorithms.
-//  
-// Ranges
-// template<class Type >
-// using 	Property_range = unspecified_type
-//  	Model of ConstRange that handles constant ranges for property maps with value type Type.
-//  
-// template<class T >
-// Property_range< T > 	range (const Property_map< T > &pmap) const
-//  	returns a property as a range.
-//  
-// Point_range 	points () const
-//  	returns a constant range of points.
-//  
-// Vector_range 	normals () const
-//  	returns a constant range of normals.
-//  
-// Push Property Maps and Inserters (Advanced)
-// Advanced
-//
-// The following method are specifically designed to make CGAL::Point_set_3 usable with CGAL input/output functions.
-// template<class Property >
-// using 	Property_back_inserter = unspecified_type
-//  	This is an advanced type.
-//  
-// template<class Property >
-// using 	Push_property_map = unspecified_type
-//  	This is an advanced type.
-//  
-// typedef Property_back_inserter< Index_map > 	Index_back_inserter
-//  	This is an advanced type.
-//  
-// typedef Property_back_inserter< Point_map > 	Point_back_inserter
-//  	This is an advanced type.
-//  
-// typedef Push_property_map< Point_map > 	Point_push_map
-//  	This is an advanced type.
-//  
-// typedef Push_property_map< Vector_map > 	Vector_push_map
-//  	This is an advanced type.
-//  
-// template<class T >
-// Push_property_map< Property_map< T > > 	push_property_map (Property_map< T > &prop)
-//  	This is an advanced function.
-//  
-// Point_push_map 	point_push_map ()
-//  	This is an advanced function.
-//  
-// Vector_push_map 	normal_push_map ()
-//  	This is an advanced function.
-//  
-// Index_back_inserter 	index_back_inserter ()
-//  	This is an advanced function.
-//  
-// Point_back_inserter 	point_back_inserter ()
-//  	This is an advanced function.
-//  
-// Construction, Destruction, Assignment
-//  	Point_set_3 (bool with_normal_map=false)
-//  	creates an empty point set with no additional property.
-//  
-// Point_set_3 & 	operator= (const Point_set_3 &ps)
-//  	Assignment operator, all properties with their content are copied.
-//  
-// Memory Management
-// bool 	is_empty () const
-//  	returns true if the number of elements not marked as removed is 0, false otherwise.
-//  
-// std::size_t 	number_of_points () const
-//  	returns the number of elements (not counting elements marked as removed).
-//  
-// bool 	join (Point_set_3 &other)
-//  	merges other in the point set.
-//  
-// void 	clear ()
-//  	Clears the point set properties and content.
-//  
-// void 	clear_properties ()
-//  	Clears all properties created.
-//  
-// void 	reserve (std::size_t s)
-//  	increases the capacity of internal containers to be able to efficiently accommodate at least s elements
-//  
-// void 	resize (std::size_t s)
-//  	changes size of the point set.
-//  
-// Adding Points and Normals
-// iterator 	insert ()
-//  	inserts a new element with default property values.
-//  
-// iterator 	insert (const Point &p)
-//  	inserts new point with default property values.
-//  
-// iterator 	insert (const Point &p, const Vector &n)
-//  	Convenience method to add a point with a normal vector.
-//  
-// iterator 	insert (const Point_set_3 &other, const Index &idx)
-//  	Convenience method to copy a point with all its properties from another point set.
-//  
-// Accessors and Iterators
-// iterator 	begin ()
-//  	returns the begin iterator.
-//  
-// iterator 	end ()
-//  	returns the past-the-end iterator.
-//  
-// const_iterator 	begin () const
-//  	returns the begin constant iterator.
-//  
-// const_iterator 	end () const
-//  	returns the past-the-end constant iterator.
-//  
-// Point & 	point (const Index &index)
-//  	returns a reference to the point corresponding to index.
-//  
-// const Point & 	point (const Index &index) const
-//  	returns a constant reference to the point corresponding to index.
-//  
-// Vector & 	normal (const Index &index)
-//  	returns a reference to the normal corresponding to index.
-//  
-// const Vector & 	normal (const Index &index) const
-//  	returns a constant reference to the normal corresponding to index.
-//  
-// Removal Methods
-// void 	remove (iterator first, iterator last)
-//  	marks all elements between first and last as removed.
-//  
-// void 	remove (iterator it)
-//  	marks element specified by iterator as removed.
-//  
-// void 	remove (const Index &index)
-//  	marks element specified by Index as removed.
-//  
-// Garbage Management
-// bool 	is_removed (const_iterator it) const
-//  	returns true if the element is marked as removed, false otherwise.
-//  
-// bool 	is_removed (const Index &index) const
-//  	returns true if the element is marked as removed, false otherwise.
-//  
-// const_iterator 	garbage_begin () const
-//  	returns the constant iterator to the first element marked as removed (equal to garbage_end() if no elements are marked as removed.
-//  
-// const_iterator 	garbage_end () const
-//  	returns the past-the-end constant iterator of the elements marked as removed.
-//  
-// std::size_t 	number_of_removed_points () const
-//  	Number of removed points.
-//  
-// std::size_t 	garbage_size () const
-//  	Number of removed points.
-//  
-// bool 	has_garbage () const
-//  	returns true if there are elements marked as removed, false otherwise.
-//  
-// void 	collect_garbage ()
-//  	erases from memory the elements marked as removed.
-//  
-// void 	cancel_removals ()
-//  	restores all removed points.
-//  
