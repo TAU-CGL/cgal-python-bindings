@@ -914,7 +914,6 @@ void export_surface_mesh(py::module_& m) {
 
 
   // iterators
-  m.def("halfedges_around_face", &boost_utils::my_halfedges_around_face<Sm_3>);
-  m.def("halfedges_around_target", &boost_utils::my_halfedges_around_target<Sm_3>);
+  boost_utils::define_boost_iterators<py::module_, Sm_3>(m);
 
 }

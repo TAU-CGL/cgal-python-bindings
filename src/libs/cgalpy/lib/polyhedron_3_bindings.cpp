@@ -703,7 +703,6 @@ void export_polyhedron_3(py::module_& m) {
         py::arg("vd"), py::arg("g"));
 
   // iterators
-  m.def("halfedges_around_face", &boost_utils::my_halfedges_around_face<Prn>);
-  m.def("halfedges_around_target", &boost_utils::my_halfedges_around_target<Prn>);
+  boost_utils::define_boost_iterators<py::module_, Prn>(m);
 }
 
