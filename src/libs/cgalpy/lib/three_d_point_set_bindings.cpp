@@ -129,12 +129,13 @@ void export_3d_point_set(py::module_& m) {
     .def("has_normal_map", &Pt_set::has_normal_map,
       "Convenience method that tests whether the point set has normals.\n"
       "This method tests whether a property of type Vector and named normal exists.")
-    .def("insert", [](Pt_set& ps) { ps.insert(); },
+    .def("insert", [](Pt_set& ps) { return ps.insert(); },
       "inserts a new element with default property values.\n"
       "\n"
       "Note\n"
-      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call. ")
-    .def("insert", [](Pt_set& ps, const Pnt_3& p) { ps.insert(p); },
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.",
+         py::keep_alive<1, 0>())
+    .def("insert", [](Pt_set& ps, const Pnt_3& p) { return ps.insert(p); },
       py::arg("p"),
       "inserts new point with default property values.\n"
       "\n"
@@ -143,8 +144,9 @@ void export_3d_point_set(py::module_& m) {
       "\n"
       "Note\n"
       "Properties of the added point are initialized to their default value.\n"
-      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n")
-    .def("insert", [](Pt_set& ps, const Pnt_3& p, const Vec_3& n) { ps.insert(p, n); },
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.",
+         py::keep_alive<1, 0>())
+    .def("insert", [](Pt_set& ps, const Pnt_3& p, const Vec_3& n) { return ps.insert(p, n); },
       py::arg("p"), py::arg("n"),
       "Convenience method to add a point with a normal vector.\n"
       "\n"
@@ -156,7 +158,7 @@ void export_3d_point_set(py::module_& m) {
       "Properties of the added point other than its normal vector are initialized to their default value.\n"
       "If not already added, a normal property is automatically added to the point set when using this method. The default value for normal vectors is CGAL::NULL_VECTOR.\n"
       "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n")
-    .def("insert", [](Pt_set& ps, const Pt_set& other, const std::size_t idx) { ps.insert(other, idx); },
+    .def("insert", [](Pt_set& ps, const Pt_set& other, const std::size_t idx) { return ps.insert(other, idx); },
       py::arg("other"), py::arg("idx"),
       "Convenience method to copy a point with all its properties from another point set.\n"
       "In the case where two point sets have the same properties, this method allows the user to easily copy one point (along with the values of all its properties) from one point set to another.\n"
@@ -169,7 +171,8 @@ void export_3d_point_set(py::module_& m) {
       "This point set and other must have the exact same properties, with the exact same names and types in the exact same order.\n"
       "\n"
       "Note\n"
-      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n")
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n",
+         py::keep_alive<1, 0>())
     .def("insert", [](Pt_set& pw, const Pt_set& other, const Point_set_3_index& idx) { return pw.insert(other, idx); },
          py::arg("other"), py::arg("idx"),
       "Convenience method to copy a point with all its properties from another point set.\n"
@@ -183,25 +186,32 @@ void export_3d_point_set(py::module_& m) {
       "This point set and other must have the exact same properties, with the exact same names and types in the exact same order.\n"
       "\n"
       "Note\n"
-      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n")
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n",
+         py::keep_alive<1, 0>())
     .def("is_empty", &Pt_set::is_empty,
       "returns True if the number of elements not marked as removed is 0, False otherwise.\n"
       "\n"
       "Note\n"
       "This does not count the removed elements.\n"
-      "The method empty() is also available (see Range) and does the same thing. ")
+      "The method empty() is also available (see Range) and does the same thing.")
+    .def("is_removed", [](Pt_set& ps, const Pt_set::iterator it) { return ps.is_removed(it); },
+      py::arg("it"),
+      "returns True if the element is marked as removed, False otherwise.\n"
+      "\n"
+      "Note\n"
+      "When iterating between begin() and end(), no element marked as removed can be found.")
     .def("is_removed", [](Pt_set& ps, const std::size_t idx) { return ps.is_removed(idx); },
       py::arg("index"),
       "returns True if the element is marked as removed, False otherwise.\n"
       "\n"
       "Note\n"
-      "When iterating between begin() and end(), no element marked as removed can be found. ")
+      "When iterating between begin() and end(), no element marked as removed can be found.")
     .def("is_removed", [](Pt_set& pw, const Point_set_3_index& idx) { return pw.is_removed(idx); },
       py::arg("index"),
       "returns True if the element is marked as removed, False otherwise.\n"
       "\n"
       "Note\n"
-      "When iterating between begin() and end(), no element marked as removed can be found. ")
+      "When iterating between begin() and end(), no element marked as removed can be found.")
     .def("join", &Pt_set::join,
       py::arg("other"),
       "merges other in the point set.\n"
@@ -210,13 +220,28 @@ void export_3d_point_set(py::module_& m) {
       "\n"
       "Note\n"
       "If copy_properties() with other as argument is called before calling this method, then all the content of other will be copied and no property will be lost in the process.\n"
-      "Garbage is collected in both point sets when calling this method. ")
+      "Garbage is collected in both point sets when calling this method.")
+    .def("begin", [](Pt_set& ps) { return ps.begin(); },
+      "returns the begin iterator.\n",
+         py::keep_alive<1, 0>())
+    .def("end", [](Pt_set& ps) { return ps.end(); },
+      "returns the past-the-end iterator.\n",
+         py::keep_alive<1, 0>())
     .def("point", [](Pt_set& ps, const std::size_t idx) { return ps.point(idx); },
          py::arg("index"),
          "returns a reference to the point corresponding to index.\n")
     .def("point", [](Pt_set& pw, const Point_set_3_index& idx) { return pw.point(idx); },
          py::arg("index"),
          "returns a reference to the point corresponding to index.\n")
+    .def("set_point", [](Pt_set& ps, const std::size_t idx, const Point_3& p) { ps.point(idx) = p; },
+      py::arg("index"), py::arg("p"),
+      "sets the point corresponding to index to p.\n")
+    .def("set_point", [](Pt_set& pw, const Point_set_3_index& idx, const Point_3& p) { pw.point(idx) = p; },
+         py::arg("index"), py::arg("p"),
+         "sets the point corresponding to index to p.\n")
+    .def("set_point", [](Pt_set& pw, const Pt_set::iterator it, const Point_3& p) { pw.point(*it) = p; },
+         py::arg("it"), py::arg("p"),
+         "sets the point corresponding to index to p.\n")
     .def("normal", [](Pt_set& ps, const std::size_t idx) { return ps.normal(idx); },
       py::arg("index"),
       "returns a reference to the normal corresponding to index.\n"
@@ -229,6 +254,15 @@ void export_3d_point_set(py::module_& m) {
          "\n"
          "Note\n"
          "If not already added, a normal property is automatically added to the point set (see add_normal_map()). ")
+    .def("set_normal", [](Pt_set& ps, const std::size_t idx, const Vector_3& n) { ps.normal(idx) = n; },
+         py::arg("index"), py::arg("n"),
+         "sets the normal corresponding to index to n.\n")
+    .def("set_normal", [](Pt_set& pw, const Point_set_3_index& idx, const Vector_3& n) { pw.normal(idx) = n; },
+         py::arg("index"), py::arg("n"),
+         "sets the normal corresponding to index to n.\n")
+    .def("set_normal", [](Pt_set& pw, const Pt_set::iterator it, const Vector_3& n) { pw.normal(*it) = n; },
+         py::arg("it"), py::arg("n"),
+         "sets the normal corresponding to index to n.\n")
     .def("normal_map", [](Pt_set& ps) { return ps.normal_map(); },
       "returns the property map of the normal property.\n"
       "\n"
@@ -246,7 +280,14 @@ void export_3d_point_set(py::module_& m) {
       "\n"
       "See also\n"
       "garbage_size()")
-    .def("remove", [](Pt_set& ps, const std::size_t idx) { return ps.remove(idx); },
+    .def("remove", [](Pt_set& ps, Pt_set::iterator first, Pt_set::iterator last) { return ps.remove(first, last); },
+      py::arg("first"), py::arg("last"),
+      "marks all elements between first and last as removed.\n"
+      "\n"
+      "Note\n"
+      "The elements are just marked as removed and are not erased from the memory. collect_garbage() should be called if the memory needs to be disallocated. Elements can be recovered with cancel_removals().\n"
+      "All iterators, pointers and references related to the container are invalidated. ")
+    .def("remove", [](Pt_set& ps, Pt_set::iterator it) { return ps.remove(it); },
       py::arg("index"),
       "marks the element as removed.\n"
       "\n"
@@ -372,6 +413,19 @@ void export_3d_point_set(py::module_& m) {
     .def(py::self < py::self)
     .def("next", [](Point_set_3_index& index) { return ++index; })
     .def("prev", [](Point_set_3_index& index) { return --index; })
+    // operator with an integer
+    .def("__add__", [](Point_set_3_index& index, const int& value) { return index + value; },
+         py::is_operator())
+    .def("__sub__", [](Point_set_3_index& index, const int& value) { return index - value; },
+         py::is_operator())
+    ;
+
+  py::class_<Pt_set::iterator> ptst_it(m, "Point_set_3_iterator");
+  ptst_it.def(py::init<>())
+    .def("__add__", [](Pt_set::iterator& it, const int& value) { return it + value; },
+         py::is_operator())
+    .def("__sub__", [](Pt_set::iterator& it, const int& value) { return it - value; },
+         py::is_operator())
     ;
 
   add_insertion(ptst_idx, "__str__");
