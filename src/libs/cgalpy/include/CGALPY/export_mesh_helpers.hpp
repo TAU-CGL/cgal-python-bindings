@@ -102,17 +102,17 @@ C define_boost_helpers(py::module_& m) {
         "true if g is valid, false otherwise.\n",
         py::arg("g"), py::arg("verb") = false);
 
-  m.def("remove_all_elements", &CGAL::remove_all_elements<Graph>,
-        "removes all vertices, faces and halfedges from a graph.\n"
-        "Calls remove_vertex(), remove_edge(), and remove_face(), for each vertex, edge, and face.\n"
-        "Note that some graphs have a specialized version of this function to improve complexity.\n"
-        "\n"
-        "Warning\n"
-        "This function does not perform anything more than what is advertised above. It is up to the user to e.g. clean garbage or remove internal property maps (if relevant, and desired).\n"
-        "\n"
-        "Parameters\n"
-        "g  the graph whose elements will be removed\n",
-        py::arg("g"));
+  // m.def("remove_all_elements", &CGAL::remove_all_elements<Graph>,
+  //       "removes all vertices, faces and halfedges from a graph.\n"
+  //       "Calls remove_vertex(), remove_edge(), and remove_face(), for each vertex, edge, and face.\n"
+  //       "Note that some graphs have a specialized version of this function to improve complexity.\n"
+  //       "\n"
+  //       "Warning\n"
+  //       "This function does not perform anything more than what is advertised above. It is up to the user to e.g. clean garbage or remove internal property maps (if relevant, and desired).\n"
+  //       "\n"
+  //       "Parameters\n"
+  //       "g  the graph whose elements will be removed\n",
+  //       py::arg("g"));
 
   m.def("vertex_index_in_face", &CGAL::vertex_index_in_face<Graph>,
         "returns the number of calls to next() one has to apply to the halfedge hd for source(hd, mesh) == vd to be true, starting from hd = halfedge(fd, tm).\n"
