@@ -83,9 +83,21 @@ if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
 # CGALPY = importlib.import_module(lib)
 import CGALPY.CGALPY as CGALPY
+Ker = CGALPY.Ker.Kernel
 
-Ker = CGALPY.Ker
+def print_point_set (point_set: CGALPY.Point_set_3):
+    sys.stderr.write("Content of point set:\n")
+    for pt in point_set:
+        sys.stderr.write(f"* Point {pt}: {point_set.point(pt)} with normal {point_set.normal(pt)}\n")
 
-Ker.Point_set_3()
+point_set = CGALPY.Point_set_3()
 
+# Add points
+point_set.insert (Ker.Point_3(0., 0., 0.))
+point_set.insert (Ker.Point_3(0., 0., 1.))
+point_set.insert (Ker.Point_3(0., 1., 0.))
 
+print_point_set(point_set) # Normals have default values
+
+# Change normal values
+it = next(iter(point_set))

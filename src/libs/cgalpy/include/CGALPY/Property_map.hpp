@@ -2,10 +2,9 @@
 #define CGALPY_PROPERTY_MAP_HPP
 
 #include <nanobind/nanobind.h>
+#include <nanobind/make_iterator.h>
 
 #include <CGAL/boost/graph/properties.h>
-
-#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -29,7 +28,7 @@ auto export_property_map(py::module_& m, const std::string& name) {
       self[key] = value;
     })
     .def("__iter__", [](Mesh_property_map& self) {
-      return make_iterator(self.begin(), self.end());
+      return py::make_iterator(py::type<typename Mesh_property_map::iterator>(), "Iterator", self.begin(), self.end(), py::keep_alive<0, 1>());
     })
     .def("transfer", [](Mesh_property_map& self, const Mesh_property_map& other) {
       return self.transfer(other);
@@ -59,7 +58,7 @@ auto export_property_map_bool(py::module_& m, const std::string& name) {
       self[key] = value;
     })
     .def("__iter__", [](Mesh_property_map& self) {
-      return make_iterator(self.begin(), self.end());
+      return py::make_iterator(py::type<typename Mesh_property_map::iterator>(), "Iterator", self.begin(), self.end(), py::keep_alive<0, 1>());
     })
     .def("transfer", [](Mesh_property_map& self, const Mesh_property_map& other) {
       return self.transfer(other);
