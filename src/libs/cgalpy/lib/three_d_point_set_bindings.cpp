@@ -30,6 +30,14 @@ auto define_property_map(C& c, Point_set_nb& ptst, const std::string& name) {
          py::arg("other"), py::arg("from"), py::arg("to"))
     .def("__iter__", [](Property_map& pm) { return py::make_iterator(py::type<typename Property_map::iterator>(), "Iterator", pm.begin(), pm.end()); },
          py::keep_alive<0, 1>())
+    .def("__getitem__", [](Property_map& pm, std::size_t i) { return pm[i]; },
+         py::arg("index"))
+    .def("__setitem__", [](Property_map& pm, std::size_t i, const Property& p) { pm[i] = p; },
+         py::arg("index"), py::arg("value"))
+    .def("__getitem__", [](Property_map& pm, const typename Point_set::iterator& it) { return pm[*it]; },
+         py::arg("index"))
+    .def("__setitem__", [](Property_map& pm, const typename Point_set::iterator& it, const Property& p) { pm[*it] = p; },
+         py::arg("index"), py::arg("value"))
     ;
 
   // TODO: remove property map
@@ -57,6 +65,43 @@ auto define_range(C& c, const std::string& name) {
   return r;
 }
 
+  // public:
+  //   typedef Index key_type;
+  //   typedef typename Property::value_type value_type;
+  //   typedef value_type& reference;
+  //   typedef boost::read_write_property_map_tag category;
+  //
+  //   Point_set* ps;
+  //   Property* prop;
+  //   mutable Index ind;
+  //
+  //   Push_property_map(Point_set* ps = nullptr,
+  //                     Property* prop = nullptr,
+  //                     Index ind=Index())
+  //     : ps(ps), prop(prop), ind(ind) {}
+  //
+  //   friend void put(const Push_property_map& pm, Index& i, const value_type& t)
+  //   {
+  //     if(pm.ps->size() <= (pm.ind))
+  //       pm.ps->insert();
+  //     put(*(pm.prop), pm.ind, t);
+  //     i = pm.ind;
+  //     ++pm.ind;
+  //   }
+  //
+  //   friend reference get (const Push_property_map& pm, const Index& i)
+  //   {
+  //     return ((*(pm.prop))[i]);
+  //   }
+
+template <typename Push_property_map, typename C>
+auto define_push_property_map(C& c, const std::string& name) {
+  py::class_<Push_property_map> pm(c, name.c_str());
+  pm.def(py::init<>())
+    // TODO: why is get and put not working?
+    ;
+}
+
 void export_3d_point_set(py::module_& m) {
   using Kernel_ = Kernel;
   using Pt_set = CGAL::Point_set_3<Kernel_::Point_3, Kernel_::Vector_3>;
@@ -64,6 +109,9 @@ void export_3d_point_set(py::module_& m) {
   using Vec_3 = Kernel_::Vector_3;
   using FT = Kernel_::FT;
   using Point_set_3_index = CGAL::internal::Point_set_3_index<Pnt_3, Vec_3>;
+  using Point_push_map = Pt_set::Point_push_map;
+  using Point_map = Pt_set::template Property_map<Point_3>;
+  using Vector_map = Pt_set::template Property_map<Vector_3>;
 
   py::class_<Pt_set> ptst(m, "Point_set_3",
     "A collection of points with dynamically associated properties.\n"
@@ -334,6 +382,12 @@ void export_3d_point_set(py::module_& m) {
     .def("normals", &Pt_set::normals,
       "returns a constant range of normals.")
 
+    // Push Property Maps and Inserters (Advanced)
+    .def("point_push_map", &Pt_set::point_push_map,
+      "returns the push property map of the point property.")
+    .def("normal_push_map", &Pt_set::normal_push_map,
+      "returns the push property map of the vector property.")
+
     // Undocumented
     .def("size", &Pt_set::size)
     .def("empty", &Pt_set::empty)
@@ -341,6 +395,10 @@ void export_3d_point_set(py::module_& m) {
     .def("__iter__", [](Pt_set& ps) { return py::make_iterator(py::type<typename Pt_set::iterator>(), "Iterator", ps.begin(), ps.end()); },
          py::keep_alive<0, 1>())
     ;
+
+  add_insertion(ptst, "__str__");
+  add_insertion(ptst, "__repr__");
+  add_extraction(ptst);
 
   define_property_map<Pt_set, Vec_3>(m, ptst, "vector");
   define_property_map<Pt_set, CGAL::IO::Color>(m, ptst, "color");
@@ -399,10 +457,6 @@ void export_3d_point_set(py::module_& m) {
         "Returns True if the writing was successful, False otherwise."
         );
 
-  add_insertion(ptst, "__str__");
-  add_insertion(ptst, "__repr__");
-  add_extraction(ptst);
-
   py::class_<Point_set_3_index> ptst_idx(m, "Point_set_3_index");
   ptst_idx
     .def(py::init<const Point_set_3_index&>())
@@ -421,6 +475,9 @@ void export_3d_point_set(py::module_& m) {
          py::is_operator())
     ;
 
+  add_insertion(ptst_idx, "__str__");
+  add_insertion(ptst_idx, "__repr__");
+
   py::class_<Pt_set::iterator> ptst_it(m, "Point_set_3_iterator");
   ptst_it.def(py::init<>())
     .def("__add__", [](Pt_set::iterator& it, const int& value) { return it + value; },
@@ -429,7 +486,7 @@ void export_3d_point_set(py::module_& m) {
          py::is_operator())
     ;
 
-  add_insertion(ptst_idx, "__str__");
-  add_insertion(ptst_idx, "__repr__");
+  define_push_property_map<Pt_set::Push_property_map<Point_map>>(m, "Point_push_map");
+  define_push_property_map<Pt_set::Push_property_map<Vector_map>>(m, "Vector_push_map");
 }
 

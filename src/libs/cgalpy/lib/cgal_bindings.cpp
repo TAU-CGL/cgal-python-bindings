@@ -18,6 +18,8 @@
 #include <CGAL/boost/graph/properties.h>
 
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/add_extraction.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
@@ -168,8 +170,8 @@ void export_cgal(py::module_& m) {
   // Colors
   using Color = CGAL::IO::Color;
   if (! add_attr<Color>(m, "Color")) {
-    py::class_<Color>(m, "Color")
-      .def(py::init<>(),
+    py::class_<Color> col_c(m, "Color");
+      col_c.def(py::init<>(),
            "Creates a color with rgba-value (0,0,0,255), i.e. black.")
       .def(py::init<unsigned char, unsigned char, unsigned char, unsigned char>(),
            py::arg("red"), py::arg("green"), py::arg("blue"), py::arg("alpha")=255,
@@ -208,6 +210,10 @@ void export_cgal(py::module_& m) {
       },
            "Computes the hsv (hue, saturation, value) values and returns an array representing them as float values between 0 and 1.")
       ;
+
+    add_insertion(col_c, "__str__");
+    add_insertion(col_c, "__repr__");
+    add_extraction(col_c);
   }
 
   m.def("black", &CGAL::IO::black, "Constructs Color(0,0,0).");
