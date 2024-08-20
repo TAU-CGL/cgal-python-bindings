@@ -8,6 +8,7 @@
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
+#include <nanobind/operators.h>
 
 #include <CGAL/basic.h>
 #include <CGAL/Bbox_2.h>
@@ -220,4 +221,19 @@ void export_cgal(py::module_& m) {
   m.def("violet", &CGAL::IO::violet, "Constructs Color(255,0,255).");
   m.def("white", &CGAL::IO::white, "Constructs Color(255,255,255).");
   m.def("yellow", &CGAL::IO::yellow, "Constructs Color(255,255,0).");
+
+  py::class_<std::type_index>(m, "type_index") // for Point_set_3
+    .def(py::self == py::self)
+    .def(py::self < py::self)
+    .def(py::self > py::self)
+    .def(py::self <= py::self)
+    .def(py::self >= py::self)
+    .def("name", &std::type_index::name,
+         "returns implementation defined name of the type,\n"
+         "associated with underlying type_info object")
+    .def("__hash__", [](const std::type_index& ti) { return ti.hash_code(); })
+    .def("__str__", [](const std::type_index& ti) { return ti.name(); })
+    .def("__repr__", [](const std::type_index& ti) { return ti.name(); })
+    ;
+
 }

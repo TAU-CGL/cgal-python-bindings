@@ -1,9 +1,9 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/make_iterator.h>
-#include <nanobind/stl/bind_vector.h>
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/optional.h>
 #include <nanobind/stl/pair.h>
+#include <nanobind/stl/vector.h>
 
 #include <CGAL/Point_set_3.h>
 #include <CGAL/Origin.h>
@@ -12,6 +12,7 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/internal.hpp"
 #include "CGALPY/kernel_types.hpp"
+#include "nanobind/operators.h"
 
 namespace py = nanobind;
 
@@ -95,14 +96,13 @@ void export_3d_point_set(py::module_& m) {
     // insertion
     
     // Member Functions
-    // NULL_VECTOR breaks this:
-    // .def("add_normal_map", [](Pt_set& ps, const Vec_3& default_value=CGAL::Null_vector()) { ps.add_normal_map(default_value); },
-    //      py::arg("default_value")=CGAL::Null_vector(),
-    //   "Convenience method that adds a normal property.\n"
-    //   "This method adds a property of type Vector and named normal.\n"
-    //   "\n"
-    //   "Returns\n"
-    //   "Returns a pair containing the normal map and a Boolean that is True if the property was added and false if it already exists (and was therefore not added but only returned). ")
+    .def("add_normal_map", [](Pt_set& ps, const Vec_3& default_value=Vector_3(0, 0, 0)) { ps.add_normal_map(default_value); },
+         py::arg("default_value")=Vector_3(0, 0, 0),
+      "Convenience method that adds a normal property.\n"
+      "This method adds a property of type Vector and named normal.\n"
+      "\n"
+      "Returns\n"
+      "Returns a pair containing the normal map and a Boolean that is True if the property was added and false if it already exists (and was therefore not added but only returned). ")
     .def("cancel_removals", &Pt_set::cancel_removals,
       "restores all removed points.\n"
       "After removing one or several points, calling this method restores the point set to its initial state: points that were removed (and their associated properties) are restored.\n"
@@ -345,6 +345,7 @@ void export_3d_point_set(py::module_& m) {
   define_property_map<Pt_set, Vec_3>(m, ptst, "vector");
   define_property_map<Pt_set, CGAL::IO::Color>(m, ptst, "color");
   define_property_map<Pt_set, FT>(m, ptst, "FT");
+  define_property_map<Pt_set, Pnt_3>(m, ptst, "point");
   define_range<typename Pt_set::Point_range>(m, "Point_set_point_range");
   define_range<typename Pt_set::Vector_range>(m, "Point_set_vector_range");
 
