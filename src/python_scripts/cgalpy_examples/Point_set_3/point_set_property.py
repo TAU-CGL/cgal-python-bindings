@@ -40,7 +40,7 @@ for i in range(10):
     point_set.insert(Ker.Point_3(i, i, i))
     c = CGALPY.Color(random.getrandbits(8), random.getrandbits(8), random.getrandbits(8))
     color_map[i] = c
-    intensity_map[i] = random.uniform(0, 1)
+    intensity_map[i] = random.random()
 
 print_point_set(point_set)
 
