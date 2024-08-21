@@ -258,6 +258,30 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("features_angle_bound"):
         cgal_parameters = cgal_parameters.features_angle_bound(py::cast<Ft>(item.second));
         break;
+      case Hash("k_neighbors"):
+        cgal_parameters = cgal_parameters.k_neighbors(py::cast<std::size_t>(item.second));
+        break;
+      case Hash("angle_tolerance"):
+        cgal_parameters = cgal_parameters.angle_tolerance(py::cast<Ft>(item.second));
+        break;
+      case Hash("maximum_offset"):
+        cgal_parameters = cgal_parameters.maximum_offset(py::cast<Ft>(item.second));
+        break;
+      case Hash("regularize_parallelism"):
+        cgal_parameters = cgal_parameters.regularize_parallelism(py::cast<bool>(item.second));
+        break;
+      case Hash("regularize_orthogonality"):
+        cgal_parameters = cgal_parameters.regularize_orthogonality(py::cast<bool>(item.second));
+        break;
+      case Hash("regularize_coplanarity"):
+        cgal_parameters = cgal_parameters.regularize_coplanarity(py::cast<bool>(item.second));
+        break;
+      case Hash("regularize_axis_symmetry"):
+        cgal_parameters = cgal_parameters.regularize_axis_symmetry(py::cast<bool>(item.second));
+        break;
+      case Hash("symmetry_direction"):
+        cgal_parameters = cgal_parameters.symmetry_direction(py::cast<Vector_3>(item.second));
+        break;
       // case Hash("mesh_edge_size"): // can be a different type
       //   cgal_parameters = cgal_parameters.mesh_edge_size(py::cast<Ft>(item.second));
       //   break;

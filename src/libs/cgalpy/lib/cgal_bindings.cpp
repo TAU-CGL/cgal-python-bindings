@@ -9,6 +9,7 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 #include <nanobind/operators.h>
+#include <nanobind/stl/vector.h>
 
 #include <CGAL/basic.h>
 #include <CGAL/Bbox_2.h>
@@ -229,8 +230,10 @@ void export_cgal(py::module_& m) {
   m.def("yellow", &CGAL::IO::yellow, "Constructs Color(255,255,0).");
 
   py::class_<std::type_index>(m, "type_index") // for Point_set_3
-    .def(py::self == py::self)
-    .def(py::self < py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self < py::self,
+         py::sig("def __lt__(self, arg: object, /) -> bool"))
     .def(py::self > py::self)
     .def(py::self <= py::self)
     .def(py::self >= py::self)

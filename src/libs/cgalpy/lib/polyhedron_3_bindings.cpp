@@ -144,27 +144,6 @@ Polyhedron_3 read_polygon_mesh(const std::string& filename,
   return pol;
 }
 
-// Read Polygon soup from a file
-auto read_polygon_soup(const std::string& fname,
-                              const py::dict& np = py::dict()) {
-  std::vector<Point_3> points;
-  std::vector<std::vector<std::size_t> > polygons;
-
-
-  if (! CGAL::IO::read_polygon_soup(fname, points, polygons))
-    throw std::runtime_error("Cannot read file!");
-
-  return std::make_tuple(points, polygons);
-}
-
-auto write_polygon_soup(const std::string& fname,
-                        const std::vector<Point_3>& ptlist,
-                        const std::vector<std::vector<size_t>>& polyvec,
-                        const py::dict& np = py::dict()) {
-  return CGAL::IO::write_polygon_soup(fname, ptlist, polyvec,
-                                      internal::parse_named_parameters(np));
-}
-
 // Write a surface mesh to a file.
 template <typename Polyhedron_3>
 bool write_polygon_mesh(std::string fname, const Polyhedron_3& pm,
@@ -584,11 +563,6 @@ void export_polyhedron_3(py::module_& m) {
         py::arg("filename"), py::arg("np") = py::dict());
   m.def("write_polygon_mesh", &pol3::write_polygon_mesh<Prn>,
         py::arg("filename"), py::arg("pm"), py::arg("np") = py::dict());
-  m.def("read_polygon_soup", &pol3::read_polygon_soup,
-        py::arg("fname"), py::arg("np") = py::dict());
-  m.def("write_polygon_soup", &pol3::write_polygon_soup,
-        py::arg("fname"), py::arg("points"), py::arg("polygons"),
-        py::arg("np") = py::dict());
 
   pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map", "Vertex_incident_patches_map");
 

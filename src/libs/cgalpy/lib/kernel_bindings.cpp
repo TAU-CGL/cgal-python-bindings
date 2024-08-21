@@ -7,13 +7,16 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/basic.h>
 #include <CGAL/Mesh_constant_domain_field_3.h>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 #include <nanobind/stl/string.h>
+#include <nanobind/stl/vector.h>
 
+#include "CGALPY/internal.hpp"
 #include "CGALPY/to_string.hpp"
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -572,4 +575,65 @@ void export_kernel_module(py::module_& m) {
   m.def("approximate_dihedral_angle", &CGAL::approximate_dihedral_angle<Kernel>,
         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
   /// @}
+
+  using PointRange = typename std::vector<Point_3>;
+  using PolygonRange = typename std::vector<std::vector<std::size_t>>;
+
+  m.def("read_polygon_soup", [](const std::string& fname, PointRange& points, PolygonRange& polygons, const py::dict& np = py::dict()) {
+    return CGAL::IO::read_polygon_soup(fname, points, polygons, internal::parse_named_parameters(np));
+  },
+      py::arg("fname"), py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+      "reads a polygon soup from a file.\n"
+      "Supported file formats are the following:\n"
+      "\n"
+      "Object File Format (OFF) (.off)\n"
+      "Wavefront Advanced Visualizer Object Format (OBJ) (.obj)\n"
+      "STereoLithography (STL) File Format (.stl)\n"
+      "Polygon File Format (PLY) (.ply)\n"
+      "GOCAD (TS) File Format (.ts)\n"
+      "VTK (VTU / VTP / legacy) File Formats (.vtp)\n"
+      "\n"
+      "The format is detected from the filename extension (letter case is not important).\n"
+      "\n"
+      "Parameters\n"
+      "fname\tthe name of the file.\n"
+      "points\tpoints of the soup of polygons\n"
+      "polygons\teach element in the range describes a polygon using the indices of the vertices.\n"
+      "Optional Named Parameters\n"
+      "verbose\tindicates whether output warnings and error messages should be printed or not.\n"
+      "\tType: Boolean\n"
+      "\tDefault: false\n"
+      "\n"
+      "Returns\n"
+      "true if reading was successful, false otherwise. \n")
+    ;
+
+  m.def("write_polygon_soup", [](const std::string& fname, const PointRange& points, const PolygonRange& polygons, const py::dict& np = py::dict()) {
+    return CGAL::IO::write_polygon_soup(fname, points, polygons, internal::parse_named_parameters(np));
+  },
+      py::arg("fname"), py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+      "writes the content of points and polygons in a file.\n"
+      "Supported file formats are the following:\n"
+      "\n"
+      "Object File Format (OFF) (.off)\n"
+      "Wavefront Advanced Visualizer Object Format (OBJ) (.obj)\n"
+      "STereoLithography (STL) File Format (.stl)\n"
+      "Polygon File Format (PLY) (.ply)\n"
+      "GOCAD (TS) File Format (.ts)\n"
+      "VTK (VTU / VTP / legacy) File Formats (.vtp)\n"
+      "\n"
+      "The format is detected from the filename extension (letter case is not important).\n"
+      "\n"
+      "Parameters\n"
+      "fname\tthe name of the file.\n"
+      "points\tpoints of the soup of polygons\n"
+      "polygons\teach element in the range describes a polygon using the indices of the vertices.\n"
+      "Optional Named Parameters\n"
+      "verbose\tindicates whether output warnings and error messages should be printed or not.\n"
+      "\tType: Boolean\n"
+      "\tDefault: false\n"
+      "\n"
+      "Returns\n"
+      "true if writing was successful, false otherwise. \n")
+    ;
 }
