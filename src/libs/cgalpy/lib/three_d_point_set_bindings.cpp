@@ -4,6 +4,7 @@
 #include <nanobind/stl/optional.h>
 #include <nanobind/stl/pair.h>
 #include <nanobind/stl/vector.h>
+#include <nanobind/operators.h>
 
 #include <CGAL/Point_set_3.h>
 #include <CGAL/Origin.h>
@@ -12,7 +13,6 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/internal.hpp"
 #include "CGALPY/kernel_types.hpp"
-#include "nanobind/operators.h"
 
 namespace py = nanobind;
 
@@ -435,8 +435,10 @@ void export_3d_point_set(py::module_& m) {
     .def(py::init_implicit<const std::size_t&>())
     .def(py::init<>())
     .def("__int__", [](Point_set_3_index& index) { return static_cast<std::size_t>(index); })
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self < py::self)
     .def("next", [](Point_set_3_index& index) { return ++index; })
     .def("prev", [](Point_set_3_index& index) { return --index; })
