@@ -5,6 +5,8 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 
+#include <stdexcept>
+
 #include <CGAL/Mesh_facet_topology.h>
 
 #include "CGALPY/helpers.hpp"
@@ -20,6 +22,7 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
   // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
     const std::string key = py::cast<std::string>(item.first);
+    try {
     switch (Hash(key.c_str())) {
       case Hash("stream_precision"):
         cgal_parameters = cgal_parameters.stream_precision(py::cast<int>(item.second));
@@ -243,7 +246,7 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("postprocess_regions"):
         cgal_parameters = cgal_parameters.postprocess_regions(py::cast<bool>(item.second));
         break;
-      case Hash("minimum_region_size"):
+      case Hash("minimum_region_size"): // different types for this
         cgal_parameters = cgal_parameters.minimum_region_size(py::cast<std::size_t>(item.second));
         break;
       case Hash("ball_radius"):
@@ -302,9 +305,10 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
         break;
 
         
-      // default:
-      //   throw std::invalid_argument("Unknown parameter: " + key);
-      //   break;
+    }
+    }
+    catch (const std::exception& e) {
+      throw std::invalid_argument("Error parsing parameter: " + key);
     }
   }
   return cgal_parameters;

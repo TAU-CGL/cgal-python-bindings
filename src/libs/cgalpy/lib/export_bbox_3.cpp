@@ -13,6 +13,7 @@ void export_bbox_3(py::class_<CGAL::Bbox_3>& c) {
     .def(py::init<double, double, double, double, double, double>())
     .def("dimension", &CGAL::Bbox_3::dimension)
     .def("dilate", &CGAL::Bbox_3::dilate)
+    .def("scale", &CGAL::Bbox_3::scale)
     .def("xmin", &CGAL::Bbox_3::xmin)
     .def("ymin", &CGAL::Bbox_3::ymin)
     .def("zmin", &CGAL::Bbox_3::zmin)

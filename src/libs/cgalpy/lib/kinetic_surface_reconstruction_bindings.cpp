@@ -33,7 +33,19 @@ void export_kinetic_surface_reconstruction(py::module_& m) {
     "Pipeline for piecewise planar surface reconstruction from a point cloud via inside/outside labeling of a kinetic partition using min-cut.\n");
   ksr.def("__init__", [](KSR& ksr, Point_range& points, const py::dict& np = py::dict()) {
     // return a new instance of KSR
-    new (&ksr) KSR(points, internal::parse_named_parameters(np));
+    if (np.contains("minimum_region_size")) {
+      std::size_t minimum_region_size;
+      try {
+        minimum_region_size = py::cast<std::size_t>(np["minimum_region_size"]);
+      } catch (const py::cast_error& e) {
+        throw std::runtime_error("Error converting 'minimum_region_size' parameter.");
+      }
+      new (&ksr) KSR(points, internal::parse_named_parameters(np)
+                     .minimum_region_size(minimum_region_size));
+    }
+    else {
+      new (&ksr) KSR(points, internal::parse_named_parameters(np));
+    }
   },
     py::arg("points"), py::arg("np") = py::dict(),
     "creates a Kinetic_shape_reconstruction_3 object.\n")
