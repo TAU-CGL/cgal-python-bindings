@@ -21,9 +21,6 @@ unsigned int constexpr Hash(_T const* input) {
 using Named_params = CGAL::Named_function_parameters<bool, CGAL::internal_np::verbose_t>;
 Named_params parse_named_parameters(const py::dict& params, Named_params cgal_parameters = CGAL::parameters::verbose(false));
 
-std::vector<std::vector<size_t>> polylist2polyvec_i(const py::list& polylist);
-py::list polyvec2polylist_i(const std::vector<std::vector<std::size_t>> polyvec);
-
 } // namespace internal
 
 #endif //CGALPY_INTERNAL_HPP

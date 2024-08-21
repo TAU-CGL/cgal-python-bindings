@@ -61,7 +61,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_cgal(m);
 
 #ifdef CGALPY_KERNEL_BINDINGS
-  auto ker_m = m.def_submodule("Ker");
+  auto ker_m = m.def_submodule("Ker", kernel_doc());
   export_kernel_module(ker_m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
   export_intersections(ker_m);

@@ -106,4 +106,44 @@ typedef CGAL::Rotation                                 Rotation;
 typedef CGAL::Scaling                                  Scaling;
 typedef CGAL::Translation                              Translation;
 
+// consteval for C++20, msvc needs additional option for this
+#if __cplusplus >= 202002L
+consteval
+#else
+constexpr
+#endif // __cpp_consteval >= 202002L
+const char* kernel_doc() {
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
+  return "Exact_predicates_inexact_constructions_kernel\n"
+         "A kernel that has the following properties:\n"
+         "\t• It uses Cartesian representation.\n"
+         "\t• It supports constructions of points from double Cartesian coordinates.\n"
+         "\t• It provides exact geometric predicates, but geometric constructions are not exact in general."
+         ;
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
+  return "Exact_predicates_exact_constructions_kernel\n"
+         "A kernel that has the following properties:"
+         "\t• It uses Cartesian representation.\n"
+         "\t• It supports constructions of points from double Cartesian coordinates.\n"
+         "\t• It provides both exact geometric predicates and exact geometric constructions."
+         ;
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
+  return "Exact_predicates_exact_constructions_kernel_with_sqrt\n"
+         "A kernel that has the following properties:\n"
+         "\t• It uses Cartesian representation.\n"
+         "\t• It supports constructions of points from double Cartesian coordinates.\n"
+         "\t• It provides both exact geometric predicates and exact geometric constructions.\n"
+         "\t• Its FT nested type is model of the FieldWithSqrt concept."
+         ;
+#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE
+  return "Filtered_simple_cartesian_double"
+#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
+  return "Filtered_simple_cartesian_lazy_gmpq";
+#elif CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL
+  return "Cartesian_core_rational";
+#else
+  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
+#endif
+}
+
 #endif //CGALPY_KERNEL_TYPES_HPP
