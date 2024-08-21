@@ -3205,7 +3205,7 @@ auto polylist2polyvec(const py::list& polylist) {
     for (auto polyid : poly) {
       std::size_t id;
       try {
-        std::size_t id = py::cast<size_t>(polyid);
+        id = py::cast<size_t>(polyid);
         poly_ids.push_back(id);
       }
       catch (const py::cast_error&) {
