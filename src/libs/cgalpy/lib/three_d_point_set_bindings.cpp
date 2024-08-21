@@ -65,35 +65,6 @@ auto define_range(C& c, const std::string& name) {
   return r;
 }
 
-  // public:
-  //   typedef Index key_type;
-  //   typedef typename Property::value_type value_type;
-  //   typedef value_type& reference;
-  //   typedef boost::read_write_property_map_tag category;
-  //
-  //   Point_set* ps;
-  //   Property* prop;
-  //   mutable Index ind;
-  //
-  //   Push_property_map(Point_set* ps = nullptr,
-  //                     Property* prop = nullptr,
-  //                     Index ind=Index())
-  //     : ps(ps), prop(prop), ind(ind) {}
-  //
-  //   friend void put(const Push_property_map& pm, Index& i, const value_type& t)
-  //   {
-  //     if(pm.ps->size() <= (pm.ind))
-  //       pm.ps->insert();
-  //     put(*(pm.prop), pm.ind, t);
-  //     i = pm.ind;
-  //     ++pm.ind;
-  //   }
-  //
-  //   friend reference get (const Push_property_map& pm, const Index& i)
-  //   {
-  //     return ((*(pm.prop))[i]);
-  //   }
-
 template <typename Push_property_map, typename C>
 auto define_push_property_map(C& c, const std::string& name) {
   py::class_<Push_property_map> pm(c, name.c_str());
@@ -404,6 +375,7 @@ void export_3d_point_set(py::module_& m) {
   define_property_map<Pt_set, CGAL::IO::Color>(m, ptst, "color");
   define_property_map<Pt_set, FT>(m, ptst, "FT");
   define_property_map<Pt_set, Pnt_3>(m, ptst, "point");
+  define_property_map<Pt_set, std::size_t>(m, ptst, "index");
   define_range<typename Pt_set::Point_range>(m, "Point_set_point_range");
   define_range<typename Pt_set::Vector_range>(m, "Point_set_vector_range");
 
