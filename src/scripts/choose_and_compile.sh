@@ -88,8 +88,8 @@ if ! cmake -C $new_filename $root_real; then
   exit 1
 fi
 
-# Run the make command
-if ! make; then
+# Run the make command with nproc
+if ! make -j$(nproc); then
   echo "Make command failed"
   exit 1
 fi

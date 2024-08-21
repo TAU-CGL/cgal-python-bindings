@@ -38,6 +38,7 @@ void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
 void export_polygon_mesh_processing(py::module_&);
 void export_triangulated_surface_mesh_simplification(py::module_&);
+void export_kinetic_surface_reconstruction(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
@@ -71,9 +72,12 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
     export_2d_range_and_neighbor_search(m); // currently under CGALPY
 #endif // CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS
 #ifdef CGALPY_3D_POINT_SET_BINDINGS
-  #warning "3D point set bindings"
     export_3d_point_set(m); // currently under CGALPY
 #endif // CGALPY_3D_POINT_SET_BINDINGS
+
+#ifdef CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS
+    export_kinetic_surface_reconstruction(m); // currently under CGALPY
+#endif // CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS
 
 #ifdef CGALPY_KERNEL_D_BINDINGS
   auto kerd_m = m.def_submodule("Kerd");
