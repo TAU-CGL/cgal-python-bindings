@@ -410,8 +410,13 @@ C add_maps(C& c) {
   add_generic_maps<C, Sm, py::tuple>(c, "tuple");
   add_generic_maps<C, Sm, py::set>(c, "set");
   add_generic_maps<C, Sm, py::list>(c, "list");
-  // add_generic_maps<C, Sm, double>(c, "double"); // shadows FT
   // add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t"); //no
+
+  #if __cplusplus >= 202002l
+    if constexpr (!std::is_same<double, FT>::value) {
+      add_generic_maps<C, Sm, double>(c, "float"); // shadows FT
+    }
+  #endif
 
   c.def("remove_all_property_maps", &Sm::remove_all_property_maps,
         "removes all property maps for all index types added by a call to `add_property_map()`.\n"
@@ -757,7 +762,7 @@ void export_surface_mesh(py::module_& m) {
   internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
 
   sm::export_property_maps<py::module_, Sm_3, std::string>(m, "string");
-  sm::export_property_maps<py::module_, Sm_3, Kernel_::Vector_3>(m, "vector");
+  sm::export_property_maps<py::module_, Sm_3, Kernel_::Vector_3>(m, "vector_3");
   sm::export_property_maps<py::module_, Sm_3, std::size_t>(m, "size_t");
   sm::export_property_maps<py::module_, Sm_3, int>(m, "int");
   sm::export_property_maps<py::module_, Sm_3, FT>(m, "FT");
@@ -768,6 +773,12 @@ void export_surface_mesh(py::module_& m) {
   sm::export_property_maps<py::module_, Sm_3, py::list>(m, "list");
   sm::export_property_maps<py::module_, Sm_3, Kernel_::Plane_3>(m, "Plane_3");
   sm::export_property_maps<py::module_, Sm_3, Kernel_::Point_3>(m, "Point_3");
+
+  #if __cplusplus >= 202002L
+    if constexpr (!std::is_same<double, FT>::value) {
+      sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
+    }
+  #endif
 
 
   // implemented:
@@ -898,7 +909,12 @@ void export_surface_mesh(py::module_& m) {
   boost_utils::define_boost_iterators<py::module_, Sm_3>(m);
 
   // Selection Functions
-  boost_utils::define_boost_selection_functions<py::module_, Sm_3>(m);
+// template <typename C, typename Graph, typename IsEdgeSelectedPMap, typename IsFaceSelectedPMap, typename IsVertexSelectedPMap>
+// C define_boost_selection_functions(py::module_& m) {
+  using ebmap_type = typename Sm_3::template Property_map<Ei, bool>;
+  using fbmap_type = typename Sm_3::template Property_map<Fi, bool>;
+  using vbmap_type = typename Sm_3::template Property_map<Vi, bool>;
+  boost_utils::define_boost_selection_functions<py::module_, Sm_3, ebmap_type, fbmap_type, vbmap_type>(m);
 
   // Helper Functions
   boost_utils::define_boost_helpers<py::module_, Sm_3, Sm_3>(m);

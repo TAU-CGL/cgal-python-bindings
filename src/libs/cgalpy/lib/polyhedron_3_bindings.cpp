@@ -570,13 +570,18 @@ void export_polyhedron_3(py::module_& m) {
   pol3::register_maps<py::module_, Prn, bool>(m, "bool");
   pol3::register_maps<py::module_, Prn, std::size_t>(m, "size_t");
   pol3::register_maps<py::module_, Prn, FT>(m, "FT");
-  pol3::register_maps<py::module_, Prn, Vector_3>(m, "vector");
+  pol3::register_maps<py::module_, Prn, Vector_3>(m, "vector_3");
   pol3::register_maps<py::module_, Prn, int>(m, "int");
   pol3::register_maps<py::module_, Prn, CGAL::IO::Color>(m, "color");
   pol3::register_maps<py::module_, Prn, py::tuple>(m, "tuple");
   pol3::register_maps<py::module_, Prn, py::set>(m, "set");
   // pol3::register_maps<py::module_, Prn, std::uint32_t>(m, "uint32_t"); //no
-  // pol3::register_maps<py::module_, Prn, double>(m, "double"); // shadows FT
+
+  #if __cplusplus >= 202002L
+  if constexpr (!std::is_same<double, FT>::value) {
+    pol3::register_maps<py::module_, Prn, double>(m, "double"); // shadows FT
+  }
+  #endif
 
 
   namespace PMP = CGAL::Polygon_mesh_processing;
@@ -666,15 +671,17 @@ void export_polyhedron_3(py::module_& m) {
   m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Prn>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
 
-  // Euler operations
   using ebmap_type = boost::property_map<Prn, CGAL::dynamic_edge_property_t<bool>>::type;
+  using fbmap_type = boost::property_map<Prn, CGAL::dynamic_face_property_t<bool>>::type;
+  using vbmap_type = boost::property_map<Prn, CGAL::dynamic_vertex_property_t<bool>>::type;
+  // Euler operations
   boost_utils::define_euler_operations<py::module_, Prn, ebmap_type>(m);
 
   // Iterators and Circulators
   boost_utils::define_boost_iterators<py::module_, Prn>(m);
 
   // Selection Functions
-  boost_utils::define_boost_selection_functions<py::module_, Prn>(m);
+  boost_utils::define_boost_selection_functions<py::module_, Prn, ebmap_type, fbmap_type, vbmap_type>(m);
 
   // Helper Functions
   boost_utils::define_boost_helpers<py::module_, Prn, Prn>(m);
