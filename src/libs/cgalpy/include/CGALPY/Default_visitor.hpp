@@ -1,8 +1,8 @@
 #ifndef CGALPY_DEFAULT_VISITOR_HPP
 #define CGALPY_DEFAULT_VISITOR_HPP
 
-#include <nanobind/nanobind.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
+#include <nanobind/nanobind.h>
 
 namespace py = nanobind;
 
@@ -12,9 +12,8 @@ namespace COREFINEMENT = PMP::Corefinement;
 namespace pmp {
 
 template <typename PolygonalMesh>
-struct Default_visitor : public COREFINEMENT::Default_visitor<PolygonalMesh> {
-};
+struct Default_visitor : public COREFINEMENT::Default_visitor<PolygonalMesh> {};
 
-} // namespace pmp
+}  // namespace pmp
 
-#endif // CGALPY_DEFAULT_VISITOR_HPP
+#endif  // CGALPY_DEFAULT_VISITOR_HPP

@@ -11,42 +11,42 @@
 #include <string>
 
 #include <nanobind/nanobind.h>
-#include <nanobind/stl/string.h>
-#include <nanobind/stl/optional.h>
-#include <nanobind/stl/vector.h>
 #include <nanobind/operators.h>
+#include <nanobind/stl/optional.h>
+#include <nanobind/stl/string.h>
+#include <nanobind/stl/vector.h>
 
 #include <boost/graph/graph_traits.hpp>
 #include <boost/property_map/vector_property_map.hpp>
 
-#include <CGAL/boost/graph/generators.h>
-#include <CGAL/property_map.h>
 #include <CGAL/Dynamic_property_map.h>
+#include <CGAL/IO/Color.h>
 #include <CGAL/IO/polygon_soup_io.h>
-#include <CGAL/boost/graph/selection.h>
-#include <CGAL/boost/graph/Face_filtered_graph.h>
-#include <CGAL/boost/graph/helpers.h>
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
-#include <CGAL/IO/Color.h>
+#include <CGAL/boost/graph/Face_filtered_graph.h>
+#include <CGAL/boost/graph/generators.h>
+#include <CGAL/boost/graph/helpers.h>
+#include <CGAL/boost/graph/selection.h>
+#include <CGAL/property_map.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_surface_mesh.h>
 #endif
 
-#include "CGALPY/add_attr.hpp"
 #include "CGALPY/Property_map.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
-#include "CGALPY/surface_mesh_types.hpp"
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
-#include "CGALPY/make_iterator.hpp"
 #include "CGALPY/export_boost_mesh_utils.hpp"
+#include "CGALPY/export_mesh_helpers.hpp"
 #include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/export_mesh_partitioninig_operations.hpp"
+#include "CGALPY/export_mesh_selection_functions.hpp"
+#include "CGALPY/generator_functions.hpp"
 #include "CGALPY/get.hpp"
 #include "CGALPY/internal.hpp"
-#include "CGALPY/generator_functions.hpp"
-#include "CGALPY/export_mesh_selection_functions.hpp"
-#include "CGALPY/export_mesh_helpers.hpp"
+#include "CGALPY/make_iterator.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/surface_mesh_types.hpp"
 
 namespace py = nanobind;
 
@@ -54,18 +54,14 @@ namespace sm {
 
 template <typename Map_type>
 void register_map(py::module_& m, const std::string& map_name) {
-  py::class_<Map_type>(m, map_name.c_str())
-    .def(py::init<>())
-    .def_ro("map_", &Map_type::map_)
-    ;
+  py::class_<Map_type>(m, map_name.c_str()).def(py::init<>()).def_ro("map_", &Map_type::map_);
 }
 
 template <typename Dp, typename Mesh>
 void register_map_get(py::module_& m, const std::string& prop_name) {
   py::class_<Dp> prop(m, prop_name.c_str());
   prop.def(py::init<>());
-  m.def("get", &internal::get<Dp, Mesh>,
-        py::arg("property_map"), py::arg("sm"));
+  m.def("get", &internal::get<Dp, Mesh>, py::arg("property_map"), py::arg("sm"));
 }
 
 template <typename Pm, typename P>
@@ -75,8 +71,9 @@ void edge_map(py::module_& m, const std::string& map_name, const std::string& pr
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Ed& e) { return get(p, e); },
-        py::arg("property_map"), py::arg("edge_descriptor"));
+  m.def(
+      "get", [](const map_type& p, const Ed& e) { return get(p, e); }, py::arg("property_map"),
+      py::arg("edge_descriptor"));
 }
 
 template <typename Pm, typename P>
@@ -86,8 +83,9 @@ void edge_bool_map(py::module_& m, const std::string& map_name, const std::strin
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Ed& e) { return py::bool_(get(p, e)); },
-        py::arg("property_map"), py::arg("edge_descriptor"));
+  m.def(
+      "get", [](const map_type& p, const Ed& e) { return py::bool_(get(p, e)); }, py::arg("property_map"),
+      py::arg("edge_descriptor"));
 }
 
 template <typename Pm, typename P>
@@ -97,8 +95,9 @@ void face_map(py::module_& m, const std::string& map_name, const std::string& pr
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Fd& f) { return get(p, f); },
-        py::arg("property_map"), py::arg("face_descriptor"));
+  m.def(
+      "get", [](const map_type& p, const Fd& f) { return get(p, f); }, py::arg("property_map"),
+      py::arg("face_descriptor"));
 }
 
 template <typename Pm, typename P>
@@ -108,8 +107,9 @@ void face_bool_map(py::module_& m, const std::string& map_name, const std::strin
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Fd& f) { return py::bool_(get(p, f)); },
-        py::arg("property_map"), py::arg("face_descriptor"));
+  m.def(
+      "get", [](const map_type& p, const Fd& f) { return py::bool_(get(p, f)); }, py::arg("property_map"),
+      py::arg("face_descriptor"));
 }
 
 template <typename Pm, typename P>
@@ -119,8 +119,9 @@ void vertex_map(py::module_& m, const std::string& map_name, const std::string& 
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Vd& v) { return get(p, v); },
-        py::arg("property_map"), py::arg("vertex_descriptor"));
+  m.def(
+      "get", [](const map_type& p, const Vd& v) { return get(p, v); }, py::arg("property_map"),
+      py::arg("vertex_descriptor"));
 }
 
 template <typename Pm, typename P>
@@ -130,10 +131,10 @@ void vertex_bool_map(py::module_& m, const std::string& map_name, const std::str
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Vd& v) { return py::bool_(get(p, v)); },
-        py::arg("property_map"), py::arg("vertex_descriptor"));
+  m.def(
+      "get", [](const map_type& p, const Vd& v) { return py::bool_(get(p, v)); }, py::arg("property_map"),
+      py::arg("vertex_descriptor"));
 }
-
 
 template <typename Pm, typename P>
 void halfedge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
@@ -142,8 +143,9 @@ void halfedge_map(py::module_& m, const std::string& map_name, const std::string
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Hd& h) { return get(p, h); },
-        py::arg("property_map"), py::arg("halfedge_descriptor"));
+  m.def(
+      "get", [](const map_type& p, const Hd& h) { return get(p, h); }, py::arg("property_map"),
+      py::arg("halfedge_descriptor"));
 }
 
 template <typename Pm, typename P>
@@ -153,8 +155,9 @@ void halfedge_bool_map(py::module_& m, const std::string& map_name, const std::s
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Hd& h) { return py::bool_(get(p, h)); },
-        py::arg("property_map"), py::arg("halfedge_descriptor"));
+  m.def(
+      "get", [](const map_type& p, const Hd& h) { return py::bool_(get(p, h)); }, py::arg("property_map"),
+      py::arg("halfedge_descriptor"));
 }
 
 //
@@ -172,25 +175,22 @@ SurfaceMesh make_tetrahedron(const typename SurfaceMesh::Point& p1,
 
 // Read a surface mesh from a file.
 template <typename SurfaceMesh>
-SurfaceMesh read_polygon_mesh(const std::string& filename,
-                              const py::dict& parameters = py::dict()) {
+SurfaceMesh read_polygon_mesh(const std::string& filename, const py::dict& parameters = py::dict()) {
   using Sm = SurfaceMesh;
 
   Sm sm;
-  if (! CGAL::IO::read_polygon_mesh(filename, sm,
-                                    internal::parse_named_parameters(parameters)))
+  if (!CGAL::IO::read_polygon_mesh(filename, sm, internal::parse_named_parameters(parameters)))
     throw std::runtime_error("Cannot read file!");
   return sm;
 }
 
 // Read Polygon soup from a file
 template <typename SurfaceMesh>
-auto read_polygon_soup(const std::string& fname,
-                              const py::dict& np = py::dict()) {
+auto read_polygon_soup(const std::string& fname, const py::dict& np = py::dict()) {
   std::vector<Point_3> points;
-  std::vector<std::vector<std::size_t> > polygons;
+  std::vector<std::vector<std::size_t>> polygons;
 
-  if (! CGAL::IO::read_polygon_soup(fname, points, polygons))
+  if (!CGAL::IO::read_polygon_soup(fname, points, polygons))
     throw std::runtime_error("Cannot read file!");
 
   return std::make_tuple(points, polygons);
@@ -198,45 +198,43 @@ auto read_polygon_soup(const std::string& fname,
 
 //
 template <typename SurfaceMesh>
-bool write_polygon_mesh(std::string fname, const SurfaceMesh& pm,
-                        const py::dict& parameters = py::dict()) {
-  return CGAL::IO::write_polygon_mesh(fname, pm,
-                                      internal::parse_named_parameters(parameters));
+bool write_polygon_mesh(std::string fname, const SurfaceMesh& pm, const py::dict& parameters = py::dict()) {
+  return CGAL::IO::write_polygon_mesh(fname, pm, internal::parse_named_parameters(parameters));
 }
 
 // Draw a surface mesh.
 #ifdef CGALPY_HAS_VISUAL
 template <typename SurfaceMesh>
-void draw(const SurfaceMesh& sm) { CGAL::draw(sm); }
+void draw(const SurfaceMesh& sm) {
+  CGAL::draw(sm);
+}
 #endif
 
 // Obtain the null face.
 template <typename SurfaceMesh>
-static typename SurfaceMesh::Face_index null_face()
-{ return SurfaceMesh::null_face(); }
+static typename SurfaceMesh::Face_index null_face() {
+  return SurfaceMesh::null_face();
+}
 
 // Add a face from a list of vertices.
 template <typename SurfaceMesh>
-typename SurfaceMesh::Face_index add_face(SurfaceMesh& sm,
-                                          const std::vector<typename SurfaceMesh::Vertex_index>& lst
-                                          ) {
+typename SurfaceMesh::Face_index add_face(SurfaceMesh& sm, const std::vector<typename SurfaceMesh::Vertex_index>& lst) {
   using Sm = SurfaceMesh;
   using Vi = typename Sm::Vertex_index;
 
   return sm.add_face(lst);
 }
 
-
 //
 template <typename SurfaceMesh>
-typename SurfaceMesh::Halfedge_index halfedge(const typename SurfaceMesh::Face_index& f,
-                                              const SurfaceMesh& sm)
-{ return CGAL::halfedge(f, sm); }
+typename SurfaceMesh::Halfedge_index halfedge(const typename SurfaceMesh::Face_index& f, const SurfaceMesh& sm) {
+  return CGAL::halfedge(f, sm);
+}
 
 template <typename SurfaceMesh>
-typename SurfaceMesh::Point my_point(const SurfaceMesh& sm,
-                                     const typename SurfaceMesh::Vertex_index& v)
-{ return sm.point(v); }
+typename SurfaceMesh::Point my_point(const SurfaceMesh& sm, const typename SurfaceMesh::Vertex_index& v) {
+  return sm.point(v);
+}
 
 template <typename SurfaceMesh, typename Vi, typename Pnt>
 auto points(const SurfaceMesh& sm) {
@@ -245,59 +243,66 @@ auto points(const SurfaceMesh& sm) {
 
 //
 template <typename SurfaceMesh>
-bool is_triangle(const typename SurfaceMesh::Halfedge_index& h, const SurfaceMesh& sm)
-{ return CGAL::is_triangle(h, sm); }
-
-
-//
-template <typename SurfaceMesh>
-auto has_valid_index_v(const SurfaceMesh& sm, typename SurfaceMesh::Vertex_index& vi)
-{ return sm.is_valid(vi); }
+bool is_triangle(const typename SurfaceMesh::Halfedge_index& h, const SurfaceMesh& sm) {
+  return CGAL::is_triangle(h, sm);
+}
 
 //
 template <typename SurfaceMesh>
-auto has_valid_index_e(const SurfaceMesh& sm, typename SurfaceMesh::Edge_index& ei)
-{ return sm.is_valid(ei); }
+auto has_valid_index_v(const SurfaceMesh& sm, typename SurfaceMesh::Vertex_index& vi) {
+  return sm.is_valid(vi);
+}
 
 //
 template <typename SurfaceMesh>
-auto has_valid_index_h(const SurfaceMesh& sm, typename SurfaceMesh::Halfedge_index& hi)
-{ return sm.is_valid(hi); }
+auto has_valid_index_e(const SurfaceMesh& sm, typename SurfaceMesh::Edge_index& ei) {
+  return sm.is_valid(ei);
+}
 
 //
 template <typename SurfaceMesh>
-auto has_valid_index_f(const SurfaceMesh& sm, typename SurfaceMesh::Face_index& fi)
-{ return sm.is_valid(fi); }
+auto has_valid_index_h(const SurfaceMesh& sm, typename SurfaceMesh::Halfedge_index& hi) {
+  return sm.is_valid(hi);
+}
+
+//
+template <typename SurfaceMesh>
+auto has_valid_index_f(const SurfaceMesh& sm, typename SurfaceMesh::Face_index& fi) {
+  return sm.is_valid(fi);
+}
 
 /// \name Iterators
 /// @{
 
 //
 template <typename SurfaceMesh>
-py::object vertices(const SurfaceMesh& sm)
-{ return make_iterator(sm.vertices_begin(), sm.vertices_end()); }
+py::object vertices(const SurfaceMesh& sm) {
+  return make_iterator(sm.vertices_begin(), sm.vertices_end());
+}
 
 //
 template <typename SurfaceMesh>
-py::object halfedges(const SurfaceMesh& sm)
-{ return make_iterator(sm.halfedges_begin(), sm.halfedges_end()); }
+py::object halfedges(const SurfaceMesh& sm) {
+  return make_iterator(sm.halfedges_begin(), sm.halfedges_end());
+}
 
 //
 template <typename SurfaceMesh>
-py::object edges(const SurfaceMesh& sm)
-{ return make_iterator(sm.edges_begin(), sm.edges_end()); }
+py::object edges(const SurfaceMesh& sm) {
+  return make_iterator(sm.edges_begin(), sm.edges_end());
+}
 
 //
 template <typename SurfaceMesh>
-py::object faces(const SurfaceMesh& sm)
-{ return make_iterator(sm.faces_begin(), sm.faces_end()); }
+py::object faces(const SurfaceMesh& sm) {
+  return make_iterator(sm.faces_begin(), sm.faces_end());
+}
 
 /// @}
 
 // property maps
 template <typename SurfaceMesh, typename Key, typename Value>
-auto add_map(SurfaceMesh& sm, const std::string& name = std::string(),
-             const Value& default_value = Value()) {
+auto add_map(SurfaceMesh& sm, const std::string& name = std::string(), const Value& default_value = Value()) {
   using Sm = SurfaceMesh;
   using Vi = typename Sm::Vertex_index;
   using Pnt = typename Sm::Point;
@@ -314,7 +319,7 @@ auto make_random_access_property_map(const std::vector<T>& vec) {
   return CGAL::make_random_access_property_map(vec);
 }
 
-template<typename C, typename Sm, typename V>
+template <typename C, typename Sm, typename V>
 C export_property_maps(C& c, const std::string& type_name) {
   using Vi = typename Sm::Vertex_index;
   using Ei = typename Sm::Edge_index;
@@ -329,19 +334,17 @@ C export_property_maps(C& c, const std::string& type_name) {
 
 template <typename C, typename Mesh, typename Key, typename ValueType>
 C add_generic_map(C& c, const std::string& map_name, const ValueType& default_value = ValueType()) {
-  return c.def(("add_" + map_name).c_str(), sm::add_map<Mesh, Key, ValueType>,
-               py::arg("name") = std::string(), py::arg("default_value") = default_value,
-               "adds a property map named `name` with value type `T` and default `t`\n"
-               "for index type `I`. Returns the property map together with a Boolean\n"
-               "that is `true` if a new map was created. In case it already exists\n"
-               "the existing map together with `false` is returned.")
-          .def(map_name.c_str(), &Mesh::template property_map<Key, ValueType>,
-               py::arg("name") = std::string(),
-               "returns an optional property map named `name` with key type `I` and value type `T`.")
-          .def("remove_property_map", &Mesh::template remove_property_map<Key, ValueType>,
-               py::arg("p"),
-               "removes property map `name`. The memory allocated for that property map is freed.")
-          ;
+  return c
+      .def(("add_" + map_name).c_str(), sm::add_map<Mesh, Key, ValueType>, py::arg("name") = std::string(),
+           py::arg("default_value") = default_value,
+           "adds a property map named `name` with value type `T` and default `t`\n"
+           "for index type `I`. Returns the property map together with a Boolean\n"
+           "that is `true` if a new map was created. In case it already exists\n"
+           "the existing map together with `false` is returned.")
+      .def(map_name.c_str(), &Mesh::template property_map<Key, ValueType>, py::arg("name") = std::string(),
+           "returns an optional property map named `name` with key type `I` and value type `T`.")
+      .def("remove_property_map", &Mesh::template remove_property_map<Key, ValueType>, py::arg("p"),
+           "removes property map `name`. The memory allocated for that property map is freed.");
   ;
 }
 
@@ -368,40 +371,46 @@ C add_maps(C& c) {
   using Fi = typename Sm::Face_index;
   using Pnt = typename Sm::Point;
   using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
-  c.def("property_map_vertex_set_int", [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
-          std::set<int> s;
-          for (auto v : default_value) {
-            try {
-              s.insert(py::cast<int>(v));
-            }
-            catch (const py::cast_error&) {
-              throw std::runtime_error("Cannot cast to int");
-            }
-          }
-          return sm::add_map<Sm, Vi, std::set<int>>(sm, name, s);
-        },
-        py::arg("name") = std::string(), py::arg("default_value") = py::set())
-    // this is here because it confused clang
-    .def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
-       py::arg("name"), py::arg("default_value"),
-        "adds a property map named `name` with value type `Principal_curvatures_and_directions` and default `default_value`\n"
-        "for index type `Vertex_index`. Returns the property map together with a Boolean\n"
-        "that is `true` if a new map was created. In case it already exists\n"
-        "the existing map together with `false` is returned.")
-    .def("property_map_vertex_Principal_curvatures_and_directions", &Sm::template property_map<Vi, Pcad>,
-        py::arg("name") = std::string(),
-          "returns an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
+  c.def(
+       "property_map_vertex_set_int",
+       [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
+         std::set<int> s;
+         for (auto v : default_value) {
+           try {
+             s.insert(py::cast<int>(v));
+           } catch (const py::cast_error&) {
+             throw std::runtime_error("Cannot cast to int");
+           }
+         }
+         return sm::add_map<Sm, Vi, std::set<int>>(sm, name, s);
+       },
+       py::arg("name") = std::string(), py::arg("default_value") = py::set())
+      // this is here because it confused clang
+      .def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>, py::arg("name"),
+           py::arg("default_value"),
+           "adds a property map named `name` with value type `Principal_curvatures_and_directions` and default "
+           "`default_value`\n"
+           "for index type `Vertex_index`. Returns the property map together with a Boolean\n"
+           "that is `true` if a new map was created. In case it already exists\n"
+           "the existing map together with `false` is returned.")
+      .def("property_map_vertex_Principal_curvatures_and_directions", &Sm::template property_map<Vi, Pcad>,
+           py::arg("name") = std::string(),
+           "returns an optional property map named `name` with key type `Vertex_index` and value type "
+           "`Principal_curvatures_and_directions`.")
 
-    .def("properties_vertex", [](const Sm& sm) { return sm.template properties<Vi>(); },
-        "returns a vector with all strings that describe properties with the key type `Vertex_index`.")
-    .def("properties_edge", [](const Sm& sm) { return sm.template properties<Ei>(); },
-        "returns a vector with all strings that describe properties with the key type `Edge_index`.")
-    .def("properties_halfedge", [](const Sm& sm) { return sm.template properties<Hi>(); },
-        "returns a vector with all strings that describe properties with the key type `Halfedge_index`.")
-    .def("properties_face", [](const Sm& sm) { return sm.template properties<Fi>(); },
-        "returns a vector with all strings that describe properties with the key type `Face_index`.")
-    ;
-    
+      .def(
+          "properties_vertex", [](const Sm& sm) { return sm.template properties<Vi>(); },
+          "returns a vector with all strings that describe properties with the key type `Vertex_index`.")
+      .def(
+          "properties_edge", [](const Sm& sm) { return sm.template properties<Ei>(); },
+          "returns a vector with all strings that describe properties with the key type `Edge_index`.")
+      .def(
+          "properties_halfedge", [](const Sm& sm) { return sm.template properties<Hi>(); },
+          "returns a vector with all strings that describe properties with the key type `Halfedge_index`.")
+      .def(
+          "properties_face", [](const Sm& sm) { return sm.template properties<Fi>(); },
+          "returns a vector with all strings that describe properties with the key type `Face_index`.");
+
   add_generic_maps<C, Sm, std::string>(c, "string");
   add_generic_maps<C, Sm, CGAL::IO::Color>(c, "color");
   add_generic_maps<C, Sm, typename Sm::Point>(c, "point");
@@ -416,11 +425,11 @@ C add_maps(C& c) {
   add_generic_maps<C, Sm, std::vector<double>>(c, "vector_float");
   // add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t"); //no
 
-  #if __cplusplus >= 202002l
-    if constexpr (!std::is_same<double, FT>::value) {
-      add_generic_maps<C, Sm, double>(c, "float"); // shadows FT
-    }
-  #endif
+#if __cplusplus >= 202002l
+  if constexpr (!std::is_same<double, FT>::value) {
+    add_generic_maps<C, Sm, double>(c, "float");  // shadows FT
+  }
+#endif
 
   c.def("remove_all_property_maps", &Sm::remove_all_property_maps,
         "removes all property maps for all index types added by a call to `add_property_map()`.\n"
@@ -437,12 +446,11 @@ C add_maps(C& c) {
   c.def("remove_property_maps_face", &Sm::template remove_property_maps<Fi>,
         "removes all property maps for the index type `Face_index` added by a call to `add_property_map()`.\n"
         "The memory allocated for those property maps is freed.");
-  
+
   return c;
 }
 
-
-} // namespace sm
+}  // namespace sm
 
 //
 template <typename SurfaceMesh, typename C>
@@ -452,12 +460,11 @@ void add_sm_index(C& c) {
   using Sm_i = typename C::Type;
 
   c.def(py::init<>())
-    .def(py::init<size_type>())
-    .def("id", &Sm_i::id)
-    .def("idx", &Sm_i::idx)
-    .def("is_valid", &Sm_i::is_valid)
-    .def("reset", &Sm_i::reset)
-    ;
+      .def(py::init<size_type>())
+      .def("id", &Sm_i::id)
+      .def("idx", &Sm_i::idx)
+      .def("is_valid", &Sm_i::is_valid)
+      .def("reset", &Sm_i::reset);
 }
 
 // Export Surface_mesh.
@@ -479,226 +486,223 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
   // Vertex_index
   using Sm_vi = typename CGAL::SM_Index<Vi>;
-  if (! add_attr<Sm_vi>(m, "SM_Index_vertex_index")) {
+  if (!add_attr<Sm_vi>(m, "SM_Index_vertex_index")) {
     py::class_<Sm_vi> sm_vi_c(m, "SM_vertex_index");
     add_sm_index<Sm>(sm_vi_c);
   }
 
-  if (! add_attr<Vi>(m, "Vertex_index")) {
+  if (!add_attr<Vi>(m, "Vertex_index")) {
     py::class_<Vi, Sm_vi>(m, "Vertex_index")
-      .def(py::init<>())
-      .def(py::init<size_type>())
-      .def("__str__", [](const Vi& smi){ return std::to_string(smi.idx()); })
-      .def("__repr__", [](const Vi& smi){ return std::to_string(smi.idx()); })
-      ;
+        .def(py::init<>())
+        .def(py::init<size_type>())
+        .def("__str__", [](const Vi& smi) { return std::to_string(smi.idx()); })
+        .def("__repr__", [](const Vi& smi) { return std::to_string(smi.idx()); });
   }
 
   // Edge_index
-  if (! add_attr<Ei>(m, "Edge_index")) {
+  if (!add_attr<Ei>(m, "Edge_index")) {
     py::class_<Ei>(m, "Edge_index")
-      .def(py::init<>())
-      .def(py::init<size_type>())
-      .def("halfedge", &Ei::halfedge)
-      .def("idx", &Ei::idx)
-      .def("reset", &Ei::reset)
-      .def("is_valid", &Ei::is_valid)
-      .def("__str__", [](const Ei& smi){ return std::to_string(smi.idx()); })
-      .def("__repr__", [](const Ei& smi){ return std::to_string(smi.idx()); })
-      ;
+        .def(py::init<>())
+        .def(py::init<size_type>())
+        .def("halfedge", &Ei::halfedge)
+        .def("idx", &Ei::idx)
+        .def("reset", &Ei::reset)
+        .def("is_valid", &Ei::is_valid)
+        .def("__str__", [](const Ei& smi) { return std::to_string(smi.idx()); })
+        .def("__repr__", [](const Ei& smi) { return std::to_string(smi.idx()); });
   }
 
-  // 
+  //
 
   // Halfedge_index
   using Sm_hi = typename CGAL::SM_Index<Hi>;
-  if (! add_attr<Sm_hi>(m, "SM_halfedge_index")) {
+  if (!add_attr<Sm_hi>(m, "SM_halfedge_index")) {
     py::class_<Sm_hi> sm_hi_c(m, "SM_halfedge_index");
     add_sm_index<Sm>(sm_hi_c);
   }
 
-  if (! add_attr<Hi>(m, "Halfedge_index")) {
+  if (!add_attr<Hi>(m, "Halfedge_index")) {
     py::class_<Hi, Sm_hi>(m, "Halfedge_index")
-      .def(py::init<>())
-      .def(py::init<size_type>())
-      .def("__str__", [](const Hi& smi){ return std::to_string(smi.idx()); })
-      .def("__repr__", [](const Hi& smi){ return std::to_string(smi.idx()); })
-      ;
+        .def(py::init<>())
+        .def(py::init<size_type>())
+        .def("__str__", [](const Hi& smi) { return std::to_string(smi.idx()); })
+        .def("__repr__", [](const Hi& smi) { return std::to_string(smi.idx()); });
   }
 
   // Face_index
   using Sm_fi = typename CGAL::SM_Index<Fi>;
-  if (! add_attr<Sm_fi>(m, "SM_face_index")) {
+  if (!add_attr<Sm_fi>(m, "SM_face_index")) {
     py::class_<Sm_fi> sm_fi_c(m, "SM_face_index");
     add_sm_index<Sm>(sm_fi_c);
   }
 
-  if (! add_attr<Fi>(m, "Face_index")) {
+  if (!add_attr<Fi>(m, "Face_index")) {
     py::class_<Fi, Sm_fi>(m, "Face_index")
-      .def(py::init<>())
-      .def(py::init<size_type>())
-      .def("__str__", [](const Fi& smi){ return std::to_string(smi.idx()); })
-      .def("__repr__", [](const Fi& smi){ return std::to_string(smi.idx()); })
-      ;
+        .def(py::init<>())
+        .def(py::init<size_type>())
+        .def("__str__", [](const Fi& smi) { return std::to_string(smi.idx()); })
+        .def("__repr__", [](const Fi& smi) { return std::to_string(smi.idx()); });
   }
 
   // Face descriptor
-  if (! add_attr<Fd>(m, "Face_descriptor")) {
+  if (!add_attr<Fd>(m, "Face_descriptor")) {
     py::class_<Fd>(m, "Face_descriptor")
-      .def(py::init<>())
-      .def(py::init<Fi>())
-      .def("idx", &Fd::idx)
-      .def("is_valid", &Fd::is_valid)
-      .def("__str__", [](const Fd& fd){ return std::to_string(fd.idx()); })
-      .def("__repr__", [](const Fd& fd){ return std::to_string(fd.idx()); })
-      ;
+        .def(py::init<>())
+        .def(py::init<Fi>())
+        .def("idx", &Fd::idx)
+        .def("is_valid", &Fd::is_valid)
+        .def("__str__", [](const Fd& fd) { return std::to_string(fd.idx()); })
+        .def("__repr__", [](const Fd& fd) { return std::to_string(fd.idx()); });
   }
 
   // Halfedge descriptor
-  if (! add_attr<Hd>(m, "Halfedge_descriptor")) {
+  if (!add_attr<Hd>(m, "Halfedge_descriptor")) {
     py::class_<Hd>(m, "Halfedge_descriptor")
-      .def(py::init<>())
-      .def(py::init<Hi>())
-      .def("idx", &Hd::idx)
-      .def("is_valid", &Hd::is_valid)
-      .def("__str__", [](const Hd& hd){ return std::to_string(hd.idx()); })
-      .def("__repr__", [](const Hd& hd){ return std::to_string(hd.idx()); })
-      ;
+        .def(py::init<>())
+        .def(py::init<Hi>())
+        .def("idx", &Hd::idx)
+        .def("is_valid", &Hd::is_valid)
+        .def("__str__", [](const Hd& hd) { return std::to_string(hd.idx()); })
+        .def("__repr__", [](const Hd& hd) { return std::to_string(hd.idx()); });
   }
 
   // Vertex_descriptor
-  if (! add_attr<Vd>(m, "Vertex_descriptor")) {
+  if (!add_attr<Vd>(m, "Vertex_descriptor")) {
     py::class_<Vd>(m, "Vertex_descriptor")
-      .def(py::init<>())
-      .def(py::init<Vi>())
-      .def("idx", &Vd::idx)
-      .def("is_valid", &Vd::is_valid)
-      .def("__str__", [](const Vd& vd){ return std::to_string(vd.idx()); })
-      .def("__repr__", [](const Vd& vd){ return std::to_string(vd.idx()); })
-      ;
+        .def(py::init<>())
+        .def(py::init<Vi>())
+        .def("idx", &Vd::idx)
+        .def("is_valid", &Vd::is_valid)
+        .def("__str__", [](const Vd& vd) { return std::to_string(vd.idx()); })
+        .def("__repr__", [](const Vd& vd) { return std::to_string(vd.idx()); });
   }
 
   // Surface mesh
-  if (! add_attr<Sm>(m, name)) {
-
+  if (!add_attr<Sm>(m, name)) {
     using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
     py::class_<Sm> sm_c(m, name);
     sm::add_maps<Sm, py::class_<Sm>>(sm_c);
     sm_c.def(py::init<>())
-      .def(py::init<const Sm&>())
-      // .def("assign", &Sm::assign, ri)
-      .def("add_vertex", py::overload_cast<>(&Sm::add_vertex))
-      .def("add_vertex", py::overload_cast<const Pnt&>(&Sm::add_vertex))
-      .def("add_edge", py::overload_cast<>(&Sm::add_edge))
-      .def("add_edge", py::overload_cast<Vi, Vi>(&Sm::add_edge))
-      .def("add_face", static_cast<Fi(Sm::*)()>(&Sm::add_face))
-      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi)>(&Sm::add_face))
-      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face))
-      .def("add_face", &sm::add_face<Sm>)
+        .def(py::init<const Sm&>())
+        // .def("assign", &Sm::assign, ri)
+        .def("add_vertex", py::overload_cast<>(&Sm::add_vertex))
+        .def("add_vertex", py::overload_cast<const Pnt&>(&Sm::add_vertex))
+        .def("add_edge", py::overload_cast<>(&Sm::add_edge))
+        .def("add_edge", py::overload_cast<Vi, Vi>(&Sm::add_edge))
+        .def("add_face", static_cast<Fi (Sm::*)()>(&Sm::add_face))
+        .def("add_face", static_cast<Fi (Sm::*)(Vi, Vi, Vi)>(&Sm::add_face))
+        .def("add_face", static_cast<Fi (Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face))
+        .def("add_face", &sm::add_face<Sm>)
 
-      .def("has_valid_index", &sm::has_valid_index_v<Sm>)
-      .def("has_valid_index", &sm::has_valid_index_e<Sm>)
-      .def("has_valid_index", &sm::has_valid_index_h<Sm>)
-      .def("has_valid_index", &sm::has_valid_index_f<Sm>)
+        .def("has_valid_index", &sm::has_valid_index_v<Sm>)
+        .def("has_valid_index", &sm::has_valid_index_e<Sm>)
+        .def("has_valid_index", &sm::has_valid_index_h<Sm>)
+        .def("has_valid_index", &sm::has_valid_index_f<Sm>)
 
-      .def("remove_vertex", &Sm::remove_vertex)
-      .def("remove_edge", &Sm::remove_edge)
-      .def("remove_face", &Sm::remove_face)
-      .def("num_vertices", &Sm::num_vertices)
-      .def("number_of_vertices", &Sm::number_of_vertices)
-      .def("num_halfedges", &Sm::num_halfedges)
-      .def("number_of_halfedges", &Sm::number_of_halfedges)
-      .def("num_edges", &Sm::num_edges)
-      .def("number_of_edges", &Sm::number_of_edges)
-      .def("num_faces", &Sm::num_faces)
-      .def("number_of_faces", &Sm::number_of_faces)
-      .def("is_empty", &Sm::is_empty)
-      .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps)
-      .def("clear", &Sm::clear)
-      .def("halfedge", [](const Sm& sm, Vi v) { return sm.halfedge(v); },
-           py::arg("v"))
-      .def("halfedge", [](const Sm& sm, Fi f) { return sm.halfedge(f); },
-           py::arg("f"))
-      .def("halfedge", [](const Sm& sm, Ei e) { return sm.halfedge(e); },
-           py::arg("e"))
-      .def("halfedge", [](const Sm& sm, Ei e, unsigned int i) { return sm.halfedge(e, i); },
-           py::arg("e"), py::arg("i"))
-      .def("halfedge", [](const Sm& sm, Vi source, Vi target) { return sm.halfedge(source, target); },
-           py::arg("source"), py::arg("target"))
-      .def("degree", [](const Sm& sm, Vi v) { return sm.degree(v); },
-           py::arg("v"))
-      .def("degree", [](const Sm& sm, Fi f) { return sm.degree(f); },
-           py::arg("f"))
-      .def("is_border", [](const Sm& sm, Hi h) { return sm.is_border(h); },
-           py::arg("h"))
-      .def("is_border", [](const Sm& sm, Ei e) { return sm.is_border(e); },
-           py::arg("e"))
-      .def("is_border", [](const Sm& sm, Vi v, bool check_all_incident_halfedges = true) { return sm.is_border(v, check_all_incident_halfedges); },
-           py::arg("v"), py::arg("check_all_incident_halfedges") = true)
-      .def("is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); },
-           py::arg("v"))
-      .def("is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); },
-           py::arg("e"))
-      .def("is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); },
-           py::arg("f"))
-      .def("is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); },
-           py::arg("h"))
-      .def("source", &Sm::source)
-      .def("target", &Sm::target)
-      // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
-      // void resize(size_type nvertices, size_type nedges, size_type nfaces )
-      // join(const Surface_mesh& other)
-      .def("edge", &Sm::edge)
-      .def("face", &Sm::face)
-      .def("join", &Sm::join)
-      .def("next", &Sm::next)
-      .def("prev", &Sm::prev)
-      .def("resize", &Sm::resize)
-      .def("set_target", &Sm::set_target)
-      .def("has_garbage", &Sm::has_garbage)
-      .def("collect_garbage", [](Sm& sm) { sm.collect_garbage(); })
-      .def("is_isolated", &Sm::is_isolated)
-      // .def("halfedges_end", &Sm::halfedges_end) // not needed
-      .def("set_next_only", &Sm::set_next_only)
-      .def("set_prev_only", &Sm::set_prev_only)
-      .def("shrink_to_fit", &Sm::shrink_to_fit)
-      .def("set_recycle_garbage", &Sm::set_recycle_garbage)
-      .def("does_recycle_garbage", &Sm::does_recycle_garbage)
+        .def("remove_vertex", &Sm::remove_vertex)
+        .def("remove_edge", &Sm::remove_edge)
+        .def("remove_face", &Sm::remove_face)
+        .def("num_vertices", &Sm::num_vertices)
+        .def("number_of_vertices", &Sm::number_of_vertices)
+        .def("num_halfedges", &Sm::num_halfedges)
+        .def("number_of_halfedges", &Sm::number_of_halfedges)
+        .def("num_edges", &Sm::num_edges)
+        .def("number_of_edges", &Sm::number_of_edges)
+        .def("num_faces", &Sm::num_faces)
+        .def("number_of_faces", &Sm::number_of_faces)
+        .def("is_empty", &Sm::is_empty)
+        .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps)
+        .def("clear", &Sm::clear)
+        .def(
+            "halfedge", [](const Sm& sm, Vi v) { return sm.halfedge(v); }, py::arg("v"))
+        .def(
+            "halfedge", [](const Sm& sm, Fi f) { return sm.halfedge(f); }, py::arg("f"))
+        .def(
+            "halfedge", [](const Sm& sm, Ei e) { return sm.halfedge(e); }, py::arg("e"))
+        .def(
+            "halfedge", [](const Sm& sm, Ei e, unsigned int i) { return sm.halfedge(e, i); }, py::arg("e"),
+            py::arg("i"))
+        .def(
+            "halfedge", [](const Sm& sm, Vi source, Vi target) { return sm.halfedge(source, target); },
+            py::arg("source"), py::arg("target"))
+        .def(
+            "degree", [](const Sm& sm, Vi v) { return sm.degree(v); }, py::arg("v"))
+        .def(
+            "degree", [](const Sm& sm, Fi f) { return sm.degree(f); }, py::arg("f"))
+        .def(
+            "is_border", [](const Sm& sm, Hi h) { return sm.is_border(h); }, py::arg("h"))
+        .def(
+            "is_border", [](const Sm& sm, Ei e) { return sm.is_border(e); }, py::arg("e"))
+        .def(
+            "is_border",
+            [](const Sm& sm, Vi v, bool check_all_incident_halfedges = true) {
+              return sm.is_border(v, check_all_incident_halfedges);
+            },
+            py::arg("v"), py::arg("check_all_incident_halfedges") = true)
+        .def(
+            "is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); }, py::arg("v"))
+        .def(
+            "is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); }, py::arg("e"))
+        .def(
+            "is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); }, py::arg("f"))
+        .def(
+            "is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); }, py::arg("h"))
+        .def("source", &Sm::source)
+        .def("target", &Sm::target)
+        // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
+        // void resize(size_type nvertices, size_type nedges, size_type nfaces )
+        // join(const Surface_mesh& other)
+        .def("edge", &Sm::edge)
+        .def("face", &Sm::face)
+        .def("join", &Sm::join)
+        .def("next", &Sm::next)
+        .def("prev", &Sm::prev)
+        .def("resize", &Sm::resize)
+        .def("set_target", &Sm::set_target)
+        .def("has_garbage", &Sm::has_garbage)
+        .def("collect_garbage", [](Sm& sm) { sm.collect_garbage(); })
+        .def("is_isolated", &Sm::is_isolated)
+        // .def("halfedges_end", &Sm::halfedges_end) // not needed
+        .def("set_next_only", &Sm::set_next_only)
+        .def("set_prev_only", &Sm::set_prev_only)
+        .def("shrink_to_fit", &Sm::shrink_to_fit)
+        .def("set_recycle_garbage", &Sm::set_recycle_garbage)
+        .def("does_recycle_garbage", &Sm::does_recycle_garbage)
 
-      .def("number_of_removed_edges", &Sm::number_of_removed_edges)
-      .def("number_of_removed_faces", &Sm::number_of_removed_faces)
-      .def("number_of_removed_vertices", &Sm::number_of_removed_vertices)
-      .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges)
+        .def("number_of_removed_edges", &Sm::number_of_removed_edges)
+        .def("number_of_removed_faces", &Sm::number_of_removed_faces)
+        .def("number_of_removed_vertices", &Sm::number_of_removed_vertices)
+        .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges)
 
+        .def("next_around_source", &Sm::next_around_source)
+        .def("prev_around_source", &Sm::prev_around_source)
+        .def("next_around_target", &Sm::next_around_target)
+        .def("prev_around_target", &Sm::prev_around_target)
 
+        // .def("property_stats", &Sm::property_stats)
 
-      .def("next_around_source", &Sm::next_around_source)
-      .def("prev_around_source", &Sm::prev_around_source)
-      .def("next_around_target", &Sm::next_around_target)
-      .def("prev_around_target", &Sm::prev_around_target)
+        .def("point", &sm::my_point<Sm>, ri)
+        .def("points", &sm::points<Sm, Vi, Pnt>)
 
-      // .def("property_stats", &Sm::property_stats)
+        // .def("__iadd__",
+        //      py::self += py::self,
+        //      "Inserts other into sm.")
+        .def(
+            "__iadd__",
+            [](Sm& sm, const Sm& other) {
+              sm.join(other);
+              return sm;
+            },
+            "Inserts other into sm.", py::is_operator())
 
-      .def("point", &sm::my_point<Sm>, ri)
-      .def("points", &sm::points<Sm, Vi, Pnt>)
-
-      // .def("__iadd__",
-      //      py::self += py::self,
-      //      "Inserts other into sm.")
-      .def("__iadd__",
-           [](Sm& sm, const Sm& other) { sm.join(other); return sm; },
-           "Inserts other into sm.",
-           py::is_operator())
-
-
-
-      .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
+        .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
 #if CGAL_VERSION_NR >= 1050600000
-      .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_))
+        .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_))
+        .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_))
+        .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_))
+        .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_))
 #endif
-      ;
+        ;
 
     add_attr<Vi>(sm_c, "Vertex_index");
     add_attr<Ei>(sm_c, "Edge_index");
@@ -717,10 +721,9 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     add_iterator<Fci, Fci>("Face_iterator", sm_c);
 
     sm_c.def("vertices", &sm::vertices<Sm>, py::keep_alive<0, 1>())
-      .def("halfedges", &sm::halfedges<Sm>, py::keep_alive<0, 1>())
-      .def("edges", &sm::edges<Sm>, py::keep_alive<0, 1>())
-      .def("faces", &sm::faces<Sm>, py::keep_alive<0, 1>())
-      ;
+        .def("halfedges", &sm::halfedges<Sm>, py::keep_alive<0, 1>())
+        .def("edges", &sm::edges<Sm>, py::keep_alive<0, 1>())
+        .def("faces", &sm::faces<Sm>, py::keep_alive<0, 1>());
 
     add_insertion(sm_c, "__str__");
     add_insertion(sm_c, "__repr__");
@@ -760,7 +763,8 @@ void export_surface_mesh(py::module_& m) {
   internal::export_property_map_bool<Sm_3, Fi>(m, "Face_bool_map");
   using hbmap = typename Sm_3::template Property_map<Hi, bool>;
   internal::export_property_map_bool<Sm_3, Hi>(m, "Halfedge_bool_map");
-  using ebmap_type = typename Sm_3::template Property_map<Ei, bool>; // different for bools because it would return std::_Bit_reference
+  using ebmap_type = typename Sm_3::template Property_map<Ei, bool>;  // different for bools because it would return
+                                                                      // std::_Bit_reference
   internal::export_property_map_bool<Sm_3, Ei>(m, "Edge_bool_map");
 
   internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
@@ -780,9 +784,8 @@ void export_surface_mesh(py::module_& m) {
   sm::export_property_maps<py::module_, Sm_3, std::vector<double>>(m, "vector_float");
 
   if constexpr (!std::is_same<double, FT>::value) {
-    sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
+    sm::export_property_maps<py::module_, Sm_3, double>(m, "float");  // shadows FT
   }
-
 
   // implemented:
   // vertex_point_map
@@ -797,35 +800,37 @@ void export_surface_mesh(py::module_& m) {
 
   // ???
   // region_primitive_map:
-  // a property map filled by this function and that will contain for each region the plane (or only its orthognonal vector) estimated that approximates it.
-  // Type: a class model of WritablePropertyMap with the value type of RegionMap as key and GeomTraits::Plane_3 or GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
-  // Default: None
+  // a property map filled by this function and that will contain for each region the plane (or only its orthognonal
+  // vector) estimated that approximates it. Type: a class model of WritablePropertyMap with the value type of RegionMap
+  // as key and GeomTraits::Plane_3 or GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter
+  // geom_traits Default: None
 
-  
-  py::class_<boost::vector_property_map<Vector_3>>(m, "Vector_vector_3_map")
-    .def(py::init<>())
-    ;
+  py::class_<boost::vector_property_map<Vector_3>>(m, "Vector_vector_3_map").def(py::init<>());
 
   // void set_selected_faces(const FacePatchIDRange& selected_face_patch_ids,
   //                         FacePatchIDMap face_patch_id_map
   py::class_<CGAL::Face_filtered_graph<Sm_3>>(m, "Face_filtered_graph")
-    .def(py::init<const Sm_3&, std::size_t, const Sm_3::Property_map<Fi, std::size_t>&>())
-    .def("graph", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.graph(); })
-    .def("reset_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.reset_indices(); })
-    .def("number_of_faces", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_faces(); })
-    .def("invert_selection", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.invert_selection(); })
-    // .def("get_face_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_face_index_map(); }) // commented for stubs
-    .def("number_of_vertices", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_vertices(); })
-    .def("number_of_halfedges", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_halfedges(); })
-    // .def("get_vertex_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_vertex_index_map(); })
-    // .def("get_halfedge_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_halfedge_index_map(); })
-    .def("initialize_face_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_face_indices(); })
-    .def("initialize_vertex_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_vertex_indices(); })
-    .def("initialize_halfedge_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_halfedge_indices(); })
-    .def("set_selected_faces", [](CGAL::Face_filtered_graph<Sm_3>& ffg, const std::vector<std::size_t>& vec, const Sm_3::Property_map<Fi, std::size_t>& fccmap) {
-        return ffg.set_selected_faces(vec, fccmap);
-      })
-    ;
+      .def(py::init<const Sm_3&, std::size_t, const Sm_3::Property_map<Fi, std::size_t>&>())
+      .def("graph", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.graph(); })
+      .def("reset_indices", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.reset_indices(); })
+      .def("number_of_faces", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_faces(); })
+      .def("invert_selection", [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.invert_selection(); })
+      // .def("get_face_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.get_face_index_map(); })
+      // // commented for stubs
+      .def("number_of_vertices", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_vertices(); })
+      .def("number_of_halfedges", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.number_of_halfedges(); })
+      // .def("get_vertex_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) { return
+      // ffg.get_vertex_index_map(); }) .def("get_halfedge_index_map", [](const CGAL::Face_filtered_graph<Sm_3>& ffg) {
+      // return ffg.get_halfedge_index_map(); })
+      .def("initialize_face_indices",
+           [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_face_indices(); })
+      .def("initialize_vertex_indices",
+           [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_vertex_indices(); })
+      .def("initialize_halfedge_indices",
+           [](CGAL::Face_filtered_graph<Sm_3>& ffg) { return ffg.initialize_halfedge_indices(); })
+      .def("set_selected_faces",
+           [](CGAL::Face_filtered_graph<Sm_3>& ffg, const std::vector<std::size_t>& vec,
+              const Sm_3::Property_map<Fi, std::size_t>& fccmap) { return ffg.set_selected_faces(vec, fccmap); });
 
   m.def("clear", &CGAL::clear<Sm_3>);
   m.def("is_closed", &CGAL::is_closed<Sm_3>);
@@ -833,14 +838,12 @@ void export_surface_mesh(py::module_& m) {
   m.def("Halfedge", &sm::halfedge<Sm_3>);
 
   m.def("null_face", &sm::null_face<Sm_3>);
-  m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>,
-        py::arg("fname"), py::arg("parameters") = py::dict());
+  m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>, py::arg("fname"), py::arg("parameters") = py::dict());
   // m.def("expand_face_selection", &sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
-  m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>,
-        py::arg("fname"), py::arg("np") = py::dict());
+  m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>, py::arg("fname"), py::arg("np") = py::dict());
   m.def("make_tetrahedron", &sm::make_tetrahedron<Sm_3>);
-  m.def("write_polygon_mesh", &sm::write_polygon_mesh<Sm_3>,
-        py::arg("fname"), py::arg("pm"), py::arg("parameters") = py::dict());
+  m.def("write_polygon_mesh", &sm::write_polygon_mesh<Sm_3>, py::arg("fname"), py::arg("pm"),
+        py::arg("parameters") = py::dict());
   m.def("halfedge", &sm::halfedge<Sm_3>);
   m.def("is_triangle", &sm::is_triangle<Sm_3>);
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>);
@@ -896,14 +899,14 @@ void export_surface_mesh(py::module_& m) {
   m.def("remove_all_elements", &boost_utils::remove_all_elements<Sm_3>);
   m.def("add_face", &boost_utils::add_face<Sm_3>);
   // m.def("normalize_border", &boost_utils::normalize_border<Sm_3>); ???
-  m.def("is_valid_vertex_descriptor", &boost_utils::my_is_valid_vertex_descriptor<Sm_3>,
-        py::arg("v"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_halfedge_descriptor", &boost_utils::my_is_valid_halfedge_descriptor<Sm_3>,
-        py::arg("h"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_edge_descriptor", &boost_utils::my_is_valid_edge_descriptor<Sm_3>,
-        py::arg("e"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Sm_3>,
-        py::arg("f"), py::arg("g"), py::arg("verbose") = false);
+  m.def("is_valid_vertex_descriptor", &boost_utils::my_is_valid_vertex_descriptor<Sm_3>, py::arg("v"), py::arg("g"),
+        py::arg("verbose") = false);
+  m.def("is_valid_halfedge_descriptor", &boost_utils::my_is_valid_halfedge_descriptor<Sm_3>, py::arg("h"), py::arg("g"),
+        py::arg("verbose") = false);
+  m.def("is_valid_edge_descriptor", &boost_utils::my_is_valid_edge_descriptor<Sm_3>, py::arg("e"), py::arg("g"),
+        py::arg("verbose") = false);
+  m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Sm_3>, py::arg("f"), py::arg("g"),
+        py::arg("verbose") = false);
 
   // Euler operations
   boost_utils::define_euler_operations<py::module_, Sm_3, ebmap_type>(m);
