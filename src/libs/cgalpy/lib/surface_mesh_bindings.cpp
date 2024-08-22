@@ -6,6 +6,8 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <boost/graph/graph_traits.hpp>
+#include <boost/property_map/vector_property_map.hpp>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <string>
@@ -13,11 +15,7 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/optional.h>
-#include <nanobind/stl/vector.h>
-#include <nanobind/operators.h>
-
-#include <boost/graph/graph_traits.hpp>
-#include <boost/property_map/vector_property_map.hpp>
+#include "nanobind/operators.h"
 
 #include <CGAL/boost/graph/generators.h>
 #include <CGAL/property_map.h>
@@ -41,7 +39,6 @@
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/export_mesh_iterators.hpp"
-#include "CGALPY/export_mesh_partitioninig_operations.hpp"
 #include "CGALPY/get.hpp"
 #include "CGALPY/internal.hpp"
 #include "CGALPY/generator_functions.hpp"
@@ -413,7 +410,6 @@ C add_maps(C& c) {
   add_generic_maps<C, Sm, py::tuple>(c, "tuple");
   add_generic_maps<C, Sm, py::set>(c, "set");
   add_generic_maps<C, Sm, py::list>(c, "list");
-  add_generic_maps<C, Sm, std::vector<double>>(c, "vector_float");
   // add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t"); //no
 
   #if __cplusplus >= 202002l
@@ -772,12 +768,11 @@ void export_surface_mesh(py::module_& m) {
   sm::export_property_maps<py::module_, Sm_3, FT>(m, "FT");
   sm::export_property_maps<py::module_, Sm_3, py::set>(m, "set");
   sm::export_property_maps<py::module_, Sm_3, CGAL::IO::Color>(m, "Color");
-  // sm::export_property_maps<py::module_, Sm_3, std::uint32_t>(m, "uint32_t"); //no
+  sm::export_property_maps<py::module_, Sm_3, std::uint32_t>(m, "uint32_t");
   sm::export_property_maps<py::module_, Sm_3, py::tuple>(m, "tuple");
   sm::export_property_maps<py::module_, Sm_3, py::list>(m, "list");
   sm::export_property_maps<py::module_, Sm_3, Kernel_::Plane_3>(m, "Plane_3");
   sm::export_property_maps<py::module_, Sm_3, Kernel_::Point_3>(m, "Point_3");
-  sm::export_property_maps<py::module_, Sm_3, std::vector<double>>(m, "vector_float");
 
   if constexpr (!std::is_same<double, FT>::value) {
     sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
@@ -912,6 +907,8 @@ void export_surface_mesh(py::module_& m) {
   boost_utils::define_boost_iterators<py::module_, Sm_3>(m);
 
   // Selection Functions
+// template <typename C, typename Graph, typename IsEdgeSelectedPMap, typename IsFaceSelectedPMap, typename IsVertexSelectedPMap>
+// C define_boost_selection_functions(py::module_& m) {
   using ebmap_type = typename Sm_3::template Property_map<Ei, bool>;
   using fbmap_type = typename Sm_3::template Property_map<Fi, bool>;
   using vbmap_type = typename Sm_3::template Property_map<Vi, bool>;
@@ -920,9 +917,4 @@ void export_surface_mesh(py::module_& m) {
   // Helper Functions
   boost_utils::define_boost_helpers<py::module_, Sm_3, Sm_3>(m);
 
-  // Partitioning Functions
-  using edoublemap_type = typename Sm_3::template Property_map<Ei, double>;
-  using fvmap_type = typename Sm_3::template Property_map<Fi, std::vector<double>>;
-  using vstmap_type = typename Sm_3::template Property_map<Vi, std::size_t>;
-  boost_utils::define_partitioning_functions<py::module_, Sm_3, edoublemap_type, fvmap_type, vstmap_type>(m);
 }
