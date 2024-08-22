@@ -109,6 +109,10 @@ endif ()
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
+if (MSVC)
+    add_compile_options(/Zc:__cplusplus)
+endif()
+
 if (NOT SKBUILD)
     set(CGALPY_INSTALL_INC_DIR "include"
             CACHE STRING "The folder where CGALPY header files will be installed, relative to CMAKE_INSTALL_PREFIX")
