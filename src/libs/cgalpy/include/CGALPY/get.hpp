@@ -1,8 +1,8 @@
 #ifndef CGALPY_GET_HPP
 #define CGALPY_GET_HPP
 
-#include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 #include <CGAL/boost/graph/properties.h>
+#include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 
 #include <nanobind/nanobind.h>
 
@@ -13,6 +13,6 @@ auto get(const T1& p, const T2& t) {
   return get(p, t);
 }
 
-}  // namespace internal
+} // namespace internal
 
-#endif  // CGALPY_GET_HPP
+#endif // CGALPY_GET_HPP

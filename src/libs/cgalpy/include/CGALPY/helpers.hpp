@@ -26,7 +26,8 @@ std::vector<T> list2vec(const py::list& list) {
     T i;
     try {
       i = py::cast<T>(item);
-    } catch (const py::cast_error& e) {
+    }
+    catch(const py::cast_error& e) {
       throw std::runtime_error("Failed to cast list item to desired type");
     }
     retv.push_back(i);
@@ -34,6 +35,6 @@ std::vector<T> list2vec(const py::list& list) {
   return retv;
 }
 
-}  // namespace pmp
+} // namespace pmp
 
-#endif  // CGALPY_HELPERS_HPP
+#endif // CGALPY_HELPERS_HPP
