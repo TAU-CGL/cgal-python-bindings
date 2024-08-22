@@ -33,6 +33,7 @@
 #include "CGALPY/polyhedron_3_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/export_mesh_partitioninig_operations.hpp"
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_circulator.hpp"
 #include "CGALPY/export_boost_mesh_utils.hpp"
@@ -41,6 +42,7 @@
 #include "CGALPY/internal.hpp"
 #include "CGALPY/export_mesh_selection_functions.hpp"
 #include "CGALPY/export_mesh_helpers.hpp"
+#include "CGALPY/Polyline_visitor.hpp"
 #include "CGALPY/generator_functions.hpp"
 
 
@@ -575,6 +577,7 @@ void export_polyhedron_3(py::module_& m) {
   pol3::register_maps<py::module_, Prn, CGAL::IO::Color>(m, "color");
   pol3::register_maps<py::module_, Prn, py::tuple>(m, "tuple");
   pol3::register_maps<py::module_, Prn, py::set>(m, "set");
+  pol3::register_maps<py::module_, Prn, std::vector<double>>(m, "vector_float");
   // pol3::register_maps<py::module_, Prn, std::uint32_t>(m, "uint32_t"); //no
 
   if constexpr (!std::is_same<double, FT>::value) {
@@ -683,5 +686,11 @@ void export_polyhedron_3(py::module_& m) {
 
   // Helper Functions
   boost_utils::define_boost_helpers<py::module_, Prn, Prn>(m);
+
+  // Partitioning Functions
+  using edoublemap_type = boost::property_map<Prn, CGAL::dynamic_edge_property_t<double>>;
+  using fvmap_type = boost::property_map<Prn, CGAL::dynamic_face_property_t<std::vector<double>>>;
+  using vstmap_type = boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>;
+  boost_utils::define_partitioning_functions<py::module_, Prn, edoublemap_type, fvmap_type, vstmap_type>(m);
 }
 
