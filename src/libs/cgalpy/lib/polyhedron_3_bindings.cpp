@@ -577,11 +577,9 @@ void export_polyhedron_3(py::module_& m) {
   pol3::register_maps<py::module_, Prn, py::set>(m, "set");
   // pol3::register_maps<py::module_, Prn, std::uint32_t>(m, "uint32_t"); //no
 
-  #if __cplusplus >= 202002L
   if constexpr (!std::is_same<double, FT>::value) {
     pol3::register_maps<py::module_, Prn, double>(m, "double"); // shadows FT
   }
-  #endif
 
 
   namespace PMP = CGAL::Polygon_mesh_processing;

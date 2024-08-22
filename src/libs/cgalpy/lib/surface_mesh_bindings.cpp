@@ -774,11 +774,9 @@ void export_surface_mesh(py::module_& m) {
   sm::export_property_maps<py::module_, Sm_3, Kernel_::Plane_3>(m, "Plane_3");
   sm::export_property_maps<py::module_, Sm_3, Kernel_::Point_3>(m, "Point_3");
 
-  #if __cplusplus >= 202002L
-    if constexpr (!std::is_same<double, FT>::value) {
-      sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
-    }
-  #endif
+  if constexpr (!std::is_same<double, FT>::value) {
+    sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
+  }
 
 
   // implemented:
