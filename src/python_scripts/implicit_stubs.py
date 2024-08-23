@@ -1,14 +1,6 @@
 import ast
 import astor
 
-
-file_name = '__init__.pyi'
-
-# read file
-
-with open(file_name, 'r') as f:
-    file_content = f.read()
-
 class My_visitor(ast.NodeTransformer):
     def visit_FunctionDef(self, node):
         for arg in node.args.args:
@@ -16,6 +8,10 @@ class My_visitor(ast.NodeTransformer):
                 arg.annotation.id = 'float | FT'
 
         return node
+
+file_name = 'test_pmp.py'
+with open(file_name, 'r') as f:
+    file_content = f.read()
 
 tree = ast.parse(file_content)
 tree = My_visitor().visit(tree)
