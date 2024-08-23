@@ -387,8 +387,6 @@ void export_connected_components(py::module_& m) {
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
         py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
-  m.def("connected_components", &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::uint32_t>>,
-        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
   m.def("keep_connected_components", &pmp::keep_connected_components_map<Pm, FaceComponentMap>,
         py::arg("pm"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("np") = py::dict());
 #endif

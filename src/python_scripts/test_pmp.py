@@ -1,7 +1,7 @@
 from collections.abc import Callable, Sequence
 from typing import overload
 
-import CGALPY
+import CGALPY.CGALPY as CGALPY
 
 
 class Adaptive_sizing_field:
@@ -145,11 +145,7 @@ def compute_vertex_normal(v: CGALPY.Sm.Vertex_index, pmesh: CGALPY.Sm.Surface_me
 
 def compute_vertex_normals(pmesh: CGALPY.Sm.Surface_mesh_3, vertex_normals: CGALPY.Sm.Vertex_vector_3_map, np: dict = {}) -> None: ...
 
-@overload
 def connected_components(pm: CGALPY.Sm.Surface_mesh_3, fcm: CGALPY.Sm.Face_size_t_map, np: dict = {}) -> int: ...
-
-@overload
-def connected_components(pm: CGALPY.Sm.Surface_mesh_3, fcm: CGALPY.Sm.Face_uint32_t_map, np: dict = {}) -> int: ...
 
 def corefine(pm1: CGALPY.Sm.Surface_mesh_3, pm2: CGALPY.Sm.Surface_mesh_3, np1: dict = {}, np2: dict = {}) -> None: ...
 
