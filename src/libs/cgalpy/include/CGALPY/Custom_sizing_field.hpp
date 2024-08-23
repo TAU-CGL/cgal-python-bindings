@@ -1,9 +1,12 @@
 #ifndef CGALPY_CUSTOM_SIZING_FIELD_HPP
 #define CGALPY_CUSTOM_SIZING_FIELD_HPP
 
-#include <boost/graph/graph_traits.hpp>
-#include <nanobind/nanobind.h>
 #include <stdexcept>
+
+#include <nanobind/nanobind.h>
+
+#include <boost/graph/graph_traits.hpp>
+
 #include "CGALPY/kernel_types.hpp"
 
 namespace py = nanobind;

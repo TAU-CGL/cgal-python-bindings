@@ -2,6 +2,9 @@
 #define CGALPY_NON_MANIFOLD_OUTPUT_VISITOR_HPP
 
 #include <nanobind/nanobind.h>
+
+#include <CGAL/Polygon_mesh_processing/corefinement.h>
+
 #include "CGALPY/kernel_types.hpp"
 
 namespace py = nanobind;
