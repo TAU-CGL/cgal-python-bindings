@@ -35,6 +35,7 @@ void export_kernel_module(py::module_&);
 void export_kernel_d(py::module_&);
 void export_minkowski_sum_2(py::module_&);
 void export_object(py::module_&);
+void export_orientation_functions(py::module_&);
 void export_point_location(py::module_&);
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
@@ -192,10 +193,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   auto pmp_m = m.def_submodule("Pmp");
-  export_polygon_mesh_processing(pmp_m);
   export_connected_components(pmp_m);
   export_corefinement(pmp_m);
   export_meshing(pmp_m);
+  export_orientation_functions(pmp_m);
+  export_polygon_mesh_processing(pmp_m);
 #endif
 
 #ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS
