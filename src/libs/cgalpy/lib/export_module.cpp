@@ -26,6 +26,7 @@ void export_bounding_volumes(py::module_&);
 void export_connected_components(py::module_&);
 void export_convex_hull_2(py::module_&);
 void export_convex_hull_3(py::module_&);
+void export_corefinement(py::module_&);
 void export_envelope_2(py::module_&);
 void export_envelope_3(py::module_&);
 void export_general_polygon_set_2(py::module_&);
@@ -192,6 +193,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   auto pmp_m = m.def_submodule("Pmp");
   export_polygon_mesh_processing(pmp_m);
   export_connected_components(pmp_m);
+  export_corefinement(pmp_m);
 #endif
 
 #ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS

@@ -2,13 +2,9 @@
 
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 
-#include "CGALPY/Autorefinement_visitor.hpp"
-#include "CGALPY/Corefine_visitor.hpp"
-#include "CGALPY/Default_visitor.hpp"
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/pmp_helpers.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
-#include "CGALPY/Non_manifold_output_visitor.hpp"
 
 namespace PMP = CGAL::Polygon_mesh_processing;
 namespace py = nanobind;
