@@ -47,6 +47,7 @@ void export_polygon_with_holes_2(py::module_&);
 void export_spatial_searching(py::module_&);
 void export_surface_mesh(py::module_&);
 void export_surface_sweep_2(py::module_&);
+void export_meshing(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
 void export_visibility_2(py::module_&);
@@ -194,6 +195,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_polygon_mesh_processing(pmp_m);
   export_connected_components(pmp_m);
   export_corefinement(pmp_m);
+  export_meshing(pmp_m);
 #endif
 
 #ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS
