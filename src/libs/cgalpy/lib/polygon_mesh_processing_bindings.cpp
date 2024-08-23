@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/Polygon_mesh_processing/intersection.h>
 #define CGAL_USE_BASIC_VIEWER
 
 #include <stdexcept>
@@ -53,7 +54,6 @@
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
-#include "CGALPY/Non_manifold_output_visitor.hpp"
 #include "CGALPY/HFDefault_visitor.hpp"
 #include "CGALPY/Default_orientation_visitor.hpp"
 #include "CGALPY/pmp_np_parser.hpp"
