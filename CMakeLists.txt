@@ -28,7 +28,7 @@ if (SKBUILD)  # scikit-build
     include(./cmake/CPM.cmake)  # Package manager for simple requirements.
 
     # further CPM-dependencies may be defined in the subdirectories
-    CPMAddPackage("gh:wjakob/nanobind@1.2.0")
+    CPMAddPackage("gh:wjakob/nanobind@2.1.0")
     #~~~~~~~~~~~~~~~~~ Conan dependencies ~~~~~~~~~~~~~~~~~~~~~
     # We are using the `cmake_find_package` generator to create `FindXXX`-files
     # in the `cmake`-folder. This is only necessary, if the packages are not
