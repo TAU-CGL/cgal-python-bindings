@@ -1,5 +1,5 @@
 [requires]
-cgal/[==6.0]
+cgal/[==6.0-beta1]
 
 [generators]
 CMakeDeps
