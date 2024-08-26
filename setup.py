@@ -47,6 +47,7 @@ CGALPY_CONFIGURATION = [
                         # "-DCGALPY_TRI2_HIERARCHY=ON",
                         # "-DCGALPY_TRIANGULATION_3_BINDINGS=ON",
                         # "-DCGALPY_TRI3_NAME=delaunay"
+                        "-DCGALPY_WITH_VISUAL=OFF"
                        ]
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
