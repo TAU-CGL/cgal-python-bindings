@@ -19,7 +19,7 @@ import os
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Configure CGALPY here
 PACKAGE_NAME = "cgalpy"  # The name on PyPI you will use  for `pip install`
-IMPORT_NAME = "CGALPY_epec"  # The name for `import ...`
+IMPORT_NAME = "CGALPY"  # The name for `import ...`
 CGALPY_CONFIGURATION = [
                         # "-DCGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS=ON",
                         # "-DCGALPY_AOS2_POINT_LOCATION_BINDINGS=ON",
@@ -27,7 +27,7 @@ CGALPY_CONFIGURATION = [
                         # "-DCGALPY_AOS2_HALFEDGE_EXTENDED=ON",
                         # "-DCGALPY_AOS2_FACE_EXTENDED=ON",
                         # "-DCGALPY_AOS2_GEOMETRY_TRAITS_NAME=circleSegment",
-                        "-DCGALPY_KERNEL_BINDINGS=epic",
+                        "-DCGALPY_KERNEL_BINDINGS=epec",
                         # "-DCGALPY_KERNEL_INTERSECTION_BINDINGS=ON",
                         # "-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS=ON",
                         # "-DCGALPY_CONVEX_HULL_2_BINDINGS=ON",

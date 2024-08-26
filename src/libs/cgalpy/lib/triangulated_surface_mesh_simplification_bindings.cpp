@@ -643,7 +643,7 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Vd = boost::graph_traits<Tm>::vertex_descriptor;
   using Ed = boost::graph_traits<Tm>::edge_descriptor;
   using faces_size_type = boost::graph_traits<Tm>::faces_size_type;
-#if CGALPY_PMP_POLYGONAL_MESH == 1
+#if CGALPY_PMP_POLYGONAL_MESH == 1 // Surface_mesh
   using edge_bool_map = Tm::Property_map<Ed, bool>;
   using RegionMap = Tm::Property_map<Fd, std::size_t>;
   using CornerIdMap = Tm::Property_map<Vd, std::size_t>;
@@ -657,7 +657,7 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using VertexVectorMap = Tm::Property_map<Vd, Vector_3>;
   using ValueMap = Tm::Property_map<Vd, double>;
 #endif
-#if CGALPY_PMP_POLYGONAL_MESH == 0
+#if CGALPY_PMP_POLYGONAL_MESH == 0 // Polyhedron
   using edge_bool_map = boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
   using RegionMap = boost::property_map<Tm, CGAL::dynamic_face_property_t<std::size_t>>;
   using CornerIdMap = boost::property_map<Tm, CGAL::dynamic_vertex_property_t<std::size_t>>;

@@ -57,7 +57,7 @@ auto export_property_map_bool(py::module_& m, const std::string& name) {
     .def("__setitem__", [](Mesh_property_map& self, Key key, bool value) {
       self[key] = value;
     })
-    .def("__iter__", [](Mesh_property_map& self) {
+    .def("__iter__", [](Mesh_property_map& self) { // nanobind should be able to handle std::_Bit_reference
       return py::make_iterator(py::type<typename Mesh_property_map::iterator>(), "Iterator", self.begin(), self.end(), py::keep_alive<0, 1>());
     })
     .def("transfer", [](Mesh_property_map& self, const Mesh_property_map& other) {

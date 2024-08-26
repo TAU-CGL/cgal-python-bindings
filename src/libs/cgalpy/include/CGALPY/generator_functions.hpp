@@ -14,6 +14,8 @@
 
 namespace py = nanobind;
 
+namespace boost_utils {
+
 template <typename C, typename Pm, typename Kernel_>
 void define_generate_functions(py::module_ &m) {
   using Gt = typename boost::graph_traits<Pm>;
@@ -87,5 +89,7 @@ void define_generate_functions(py::module_ &m) {
         "creates a row major ordered grid with i cells along the width and j cells along the height and adds it to the graph g."
         );
 }
+
+} // namespace boost_utils
 
 #endif // CGALPY_GENERATOR_FUNCTIONS_HPP

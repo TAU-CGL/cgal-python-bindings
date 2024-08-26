@@ -42,6 +42,7 @@
 #include "CGALPY/export_mesh_selection_functions.hpp"
 #include "CGALPY/export_mesh_helpers.hpp"
 #include "CGALPY/generator_functions.hpp"
+#include "CGALPY/export_mesh_partitioning_operations.hpp"
 
 
 namespace py = nanobind;
@@ -683,5 +684,14 @@ void export_polyhedron_3(py::module_& m) {
 
   // Helper Functions
   boost_utils::define_boost_helpers<py::module_, Prn, Prn>(m);
+
+  // Generator Functions
+  boost_utils::define_generate_functions<py::module_, Prn, Kernel>(m);
+
+  // Partitioning Operations
+  using EdgeDoubleMap = boost::property_map<Prn, CGAL::dynamic_edge_property_t<double>>::type;
+  using VertexVectorDoubleMap = boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::vector<double>>>::type;
+  using VertexSizeTMap = boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>::type;
+  boost_utils::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
 }
 

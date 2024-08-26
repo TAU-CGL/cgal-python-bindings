@@ -291,6 +291,12 @@ if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
     list(APPEND CGALPY_MODULES Sms)
     set(CGALPY_Sms_FILTERS [=[{}]=])
 endif ()
+# Triangulated Surface Mesh Skeletonization
+if (CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_skeletonization_bindings.cpp)
+    list(APPEND CGALPY_MODULES Smsk)
+    set(CGALPY_Smsk_FILTERS [=[{}]=])
+endif ()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)

@@ -6,6 +6,7 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include "CGALPY/export_mesh_partitioning_operations.hpp"
 #include <boost/graph/graph_traits.hpp>
 #include <boost/property_map/vector_property_map.hpp>
 #define CGAL_USE_BASIC_VIEWER
@@ -44,6 +45,7 @@
 #include "CGALPY/generator_functions.hpp"
 #include "CGALPY/export_mesh_selection_functions.hpp"
 #include "CGALPY/export_mesh_helpers.hpp"
+#include "CGALPY/export_mesh_partitioning_operations.hpp"
 
 namespace py = nanobind;
 
@@ -365,7 +367,9 @@ C add_maps(C& c) {
   using Fi = typename Sm::Face_index;
   using Pnt = typename Sm::Point;
   using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
-  c.def("property_map_vertex_set_int", [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
+  c
+    // TODO: add a class for this:
+    .def("property_map_vertex_set_int", [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
           std::set<int> s;
           for (auto v : default_value) {
             try {
@@ -747,8 +751,6 @@ void export_surface_mesh(py::module_& m) {
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
-  define_generate_functions<py::module_, Sm_3, Kernel>(m);
-
   // sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
   using vbmap = typename Sm_3::template Property_map<Vi, bool>;
   internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
@@ -907,8 +909,6 @@ void export_surface_mesh(py::module_& m) {
   boost_utils::define_boost_iterators<py::module_, Sm_3>(m);
 
   // Selection Functions
-// template <typename C, typename Graph, typename IsEdgeSelectedPMap, typename IsFaceSelectedPMap, typename IsVertexSelectedPMap>
-// C define_boost_selection_functions(py::module_& m) {
   using ebmap_type = typename Sm_3::template Property_map<Ei, bool>;
   using fbmap_type = typename Sm_3::template Property_map<Fi, bool>;
   using vbmap_type = typename Sm_3::template Property_map<Vi, bool>;
@@ -916,5 +916,14 @@ void export_surface_mesh(py::module_& m) {
 
   // Helper Functions
   boost_utils::define_boost_helpers<py::module_, Sm_3, Sm_3>(m);
+
+  // Generator Functions
+  boost_utils::define_generate_functions<py::module_, Sm_3, Kernel>(m);
+
+  // Partitioning Operations
+  using EdgeDoubleMap = typename Sm_3::template Property_map<Ei, double>;
+  using VertexVectorDoubleMap = typename Sm_3::template Property_map<Vi, std::vector<double>>;
+  using VertexSizeTMap = typename Sm_3::template Property_map<Vi, std::size_t>;
+  boost_utils::define_boost_partitioning_operations<py::module_, Sm_3, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
 
 }
