@@ -71,6 +71,15 @@ C define_boost_partitioning_operations(C& c) {
         "Examples\n"
         "• Surface_mesh_skeletonization/simple_mcfskel_example.py.");
 
+  c.def("split_graph_into_polylines", [](const Graph& g, Visitor& pv) {
+    return CGAL::split_graph_into_polylines(g, pv);
+  }, py::arg("g"), py::arg("pv"),
+        "splits into polylines the graph g at vertices of degree greater than 2 and at vertices for which is_terminal(v,graph)==true.\n"
+        "The polylines are reported using a visitor.\n"
+        "An overload without is_terminal is provided if no vertices but those of degree different from 2 are polyline endpoints.\n"
+        "Examples\n"
+        "• Surface_mesh_skeletonization/simple_mcfskel_example.py.");
+
   return c;
 }
 

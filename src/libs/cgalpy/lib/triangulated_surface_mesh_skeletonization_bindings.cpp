@@ -3,6 +3,7 @@
 #include <CGAL/Mean_curvature_flow_skeletonization.h>
 #include <CGAL/extract_mean_curvature_flow_skeleton.h>
 
+#include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 
 namespace py = nanobind;
@@ -138,8 +139,13 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
     .def(py::init<const Skeleton&>(),
          py::arg("x"),
          "Copy constructor. Creates a new graph that is a copy of graph x, including the edges, vertices, and properties.\n")
-
+    .def("__getitem__", [](Skeleton& skeleton, const Skeleton::vertex_descriptor& v) { return skeleton[v]; },
+         "Returns the vertex descriptor of the vertex with index v.\n")
     ;
+  m.def("num_vertices", [](const Skeleton& skeleton) { return boost::num_vertices(skeleton); },
+               "Returns the number of vertices in the skeleton.");
+  m.def("num_edges", [](const Skeleton& skeleton) { return boost::num_edges(skeleton); },
+               "Returns the number of edges in the skeleton.");
 
   m.def("extract_mean_curvature_flow_skeleton", &CGAL::extract_mean_curvature_flow_skeleton<Tm>,
         "extracts a medially centered curve skeleton for the triangle mesh tmesh. This function uses the class CGAL::Mean_curvature_flow_skeletonization with the default parameters. This function is provided only if Eigen 3.2 (or greater) is available and CGAL_EIGEN3_ENABLED is defined.\n"
