@@ -40,6 +40,7 @@ void export_point_location(py::module_&);
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
 void export_polygon_mesh_processing(py::module_&);
+void export_triangulated_surface_mesh_segmentation(py::module_&);
 void export_triangulated_surface_mesh_simplification(py::module_&);
 void export_triangulated_surface_mesh_skeletonization(py::module_&);
 void export_kinetic_surface_reconstruction(py::module_&);
@@ -199,6 +200,10 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_meshing(pmp_m);
   export_orientation_functions(pmp_m);
   export_polygon_mesh_processing(pmp_m);
+#endif
+
+#ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS
+  export_triangulated_surface_mesh_segmentation(m);
 #endif
 
 #ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS

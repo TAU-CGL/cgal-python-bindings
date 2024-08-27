@@ -285,6 +285,10 @@ if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
     list(APPEND CGALPY_MODULES Pmp)
     set(CGALPY_Pmp_FILTERS [=[{}]=])
 endif ()
+# Triangulated Surface Mesh Segmentation
+if (CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_segmentation_bindings.cpp)
+endif ()
 # Triangulated Surface Mesh Simplification
 if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_simplification_bindings.cpp)
