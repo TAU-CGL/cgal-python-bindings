@@ -827,6 +827,8 @@ void export_surface_mesh(py::module_& m) {
   m.def("clear", &CGAL::clear<Sm_3>);
   m.def("is_closed", &CGAL::is_closed<Sm_3>);
 
+  m.def("get_vertex_point", [](const Sm_3& pm, const Vi& vd) { return get(CGAL::vertex_point, pm, vd); });
+
   m.def("Halfedge", &sm::halfedge<Sm_3>);
 
   m.def("null_face", &sm::null_face<Sm_3>);
