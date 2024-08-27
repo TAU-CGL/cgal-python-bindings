@@ -2,6 +2,7 @@
 #include <nanobind/stl/function.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/make_iterator.h>
+#include <nanobind/stl/list.h>
 
 #include <CGAL/Mean_curvature_flow_skeletonization.h>
 #include <CGAL/extract_mean_curvature_flow_skeleton.h>
@@ -141,6 +142,22 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
   // TODO: this is an unspecified_type
   py::class_<Meso_skeleton> meso_skeleton(skeletonization, "Meso_skeleton");
 
+  py::class_<boost::list_edge<unsigned long, boost::no_property>>
+      boost_list_edge(skeletonization, "Boost_list_edge");
+  boost_list_edge
+    .def(py::init<>())
+    .def(py::init<const boost::list_edge<unsigned long, boost::no_property>&>())
+    .def_ro("m_source", &boost::list_edge<unsigned long, boost::no_property>::m_source)
+    .def_ro("m_target", &boost::list_edge<unsigned long, boost::no_property>::m_target)
+    ;
+
+  py::class_<Skeleton::stored_vertex> stored_vertex(skeletonization, "Stored_vertex");
+  stored_vertex
+    .def(py::init<>())
+    .def_ro("m_point", &Skeleton::stored_vertex::m_property)
+    // .def_ro("m_vertices", &Skeleton::stored_vertex::m_out_edges)
+    ;
+
   py::class_<Skeleton> skeleton(skeletonization, "Skeleton");
   skeleton
     .def(py::init<>(),
@@ -157,7 +174,11 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
                                   "Iterator",
                                   skeleton.vertex_set().begin(), skeleton.vertex_set().end());
          },
-         "Return an iterator of vertices of the skeleton.");
+         "Return an iterator of vertices of the skeleton.")
+    .def_ro("m_vertices",&Skeleton::m_vertices,
+            "Return an iterator of vertices of the skeleton.")
+    .def_ro("m_edges",&Skeleton::m_edges,
+            "Return an iterator of edges of the skeleton.")
     ;
   // m.def("vertices", [](const Skeleton& skeleton) {
   //       auto pair = vertices(skeleton);
@@ -170,6 +191,10 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
                "Returns the number of vertices in the skeleton.");
   m.def("num_edges", [](const Skeleton& skeleton) { return boost::num_edges(skeleton); },
                "Returns the number of edges in the skeleton.");
+  m.def("source", [](const boost::list_edge<unsigned long, boost::no_property>& e, const Skeleton& skeleton) { source(e, skeleton); },
+               "Returns the source vertex of the edge e.");
+  m.def("target", [](const boost::list_edge<unsigned long, boost::no_property>& e, const Skeleton& skeleton) { target(e, skeleton); },
+               "Returns the target vertex of the edge e.");
 
   using Visitor = boost_utils::Polyline_visitor<Skeleton>;
   py::class_<Visitor> pv(m, "Polyline_visitor");
