@@ -1,10 +1,14 @@
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/function.h>
+#include <nanobind/stl/vector.h>
+#include <nanobind/make_iterator.h>
 
 #include <CGAL/Mean_curvature_flow_skeletonization.h>
 #include <CGAL/extract_mean_curvature_flow_skeleton.h>
+#include <CGAL/boost/graph/split_graph_into_polylines.h>
 
-#include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "CGALPY/Polyline_visitor.hpp"
 
 namespace py = nanobind;
 
@@ -17,8 +21,11 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
   using Ed = boost::graph_traits<Tm>::edge_descriptor;
   using vertices_size_type = boost::graph_traits<Tm>::vertices_size_type;
   using Mean_curvature_flow_skeletonization = CGAL::Mean_curvature_flow_skeletonization<Tm>;
+  using Mcfs_vmap = Mean_curvature_flow_skeletonization::Vmap;
   using Meso_skeleton = Mean_curvature_flow_skeletonization::Meso_skeleton;
   using Skeleton = Mean_curvature_flow_skeletonization::Skeleton;
+  using Skeleton_vertex = Skeleton::vertex_descriptor;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Mean_curvature_flow_skeletonization> skeletonization(m, "Mean_curvature_flow_skeletonization");
   skeletonization
@@ -91,10 +98,8 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
     //      "Advanced\n"
     //      "\n"
     //      "sets the vertices in the range [begin, end) as fixed. Fixed vertices will not be moved during contraction and this will therefore prevent convergence towards the skeleton if contract_until_convergence() is used. It is useful only if the end goal is to retrieve the meso-skeleton after a number of contract_geometry(), keeping the specified vertices fixed in place.\n"
-    //      "\n"
-    //      "Template Parameters\n"
-    //      "    InputIterator	a model of InputIterator with boost::graph_traits<TriangleMesh>::vertex_descriptor as value type.\n")
-    // High Level Function
+    //      "\n");
+    // High Level Functions
     .def("__call__", &CGAL::Mean_curvature_flow_skeletonization<Tm>::operator(),
          "Creates the curve skeleton: the input surface mesh is iteratively contracted until convergence, and then turned into a curve skeleton.\n"
          "\n"
@@ -119,14 +124,18 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
          py::arg("skeleton"),
          "Converts the contracted surface mesh to a skeleton curve.\n"
          "\n"
-         "Template Parameters\n"
-         "• Skeleton	an instantiation of boost::adjacency_list as a data structure for the skeleton curve.\n"
-         "\n"
          "Parameters\n"
          "• skeleton	graph that will contain the skeleton of tmesh. It should be empty before passed to the function.\n")
     // Access to the Meso-Skeleton
     .def("meso_skeleton", &CGAL::Mean_curvature_flow_skeletonization<Tm>::meso_skeleton,
          "Access to the collapsed triangulated surface mesh.\n")
+    ;
+
+  py::class_<Mcfs_vmap> vmap(skeletonization, "Vmap");
+  vmap.def_rw("point", &Mcfs_vmap::point,
+              ri)
+    .def_rw("vertices", &Mcfs_vmap::vertices,
+            ri)
     ;
 
   // TODO: this is an unspecified_type
@@ -140,12 +149,62 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
          py::arg("x"),
          "Copy constructor. Creates a new graph that is a copy of graph x, including the edges, vertices, and properties.\n")
     .def("__getitem__", [](Skeleton& skeleton, const Skeleton::vertex_descriptor& v) { return skeleton[v]; },
-         "Returns the vertex descriptor of the vertex with index v.\n")
+         py::arg("v"),
+         "Returns the vertex descriptor of the vertex with index v.\n",
+         ri)
+    .def("vertex_set", [](const Skeleton& skeleton) {
+         return py::make_iterator(py::type<typename Skeleton::vertex_iterator>(),
+                                  "Iterator",
+                                  skeleton.vertex_set().begin(), skeleton.vertex_set().end());
+         },
+         "Return an iterator of vertices of the skeleton.");
     ;
+  // m.def("vertices", [](const Skeleton& skeleton) {
+  //       auto pair = vertices(skeleton);
+        // why is this ambiguous?
+        // return py::make_iterator(py::type<typename Skeleton::vertex_iterator>(),
+        //                          "Iterator",
+        //                          pair.first, pair.second, py::keep_alive<0, 1>());
+      // }, "Return an iterator of vertices of the skeleton.");
   m.def("num_vertices", [](const Skeleton& skeleton) { return boost::num_vertices(skeleton); },
                "Returns the number of vertices in the skeleton.");
   m.def("num_edges", [](const Skeleton& skeleton) { return boost::num_edges(skeleton); },
                "Returns the number of edges in the skeleton.");
+
+  using Visitor = boost_utils::Polyline_visitor<Skeleton>;
+  py::class_<Visitor> pv(m, "Polyline_visitor");
+  pv.def(py::init<>())
+    .def("set_start_new_polyline", &Visitor::set_start_new_polyline,
+         py::arg("fn"),
+         "set function for start_new_polyline()\n")
+    .def("set_add_node", &Visitor::set_add_node,
+         py::arg("fn"),
+         "set function for add_node()\n")
+    .def("set_end_polyline", &Visitor::set_end_polyline,
+         py::arg("fn"),
+         "set function for end_polyline()\n");
+
+  m.def("split_graph_into_polylines", [](const Skeleton& g, Visitor& pv) {
+    return CGAL::split_graph_into_polylines(g, pv);
+  }, py::arg("g"), py::arg("pv"),
+        "splits into polylines the graph g at vertices of degree greater than 2 and at vertices for which is_terminal(v,graph)==true.\n"
+        "The polylines are reported using a visitor.\n"
+        "An overload without is_terminal is provided if no vertices but those of degree different from 2 are polyline endpoints.\n"
+        "Examples\n"
+        "• Surface_mesh_skeletonization/simple_mcfskel_example.py.");
+  m.def("split_graph_into_polylines", [](const Skeleton& g, Visitor& pv, const std::function<bool(const Skeleton_vertex&, const Skeleton&)>& is_terminal) {
+    struct IsTerminal {
+      IsTerminal(const std::function<bool(const Skeleton_vertex&, const Skeleton&)>& is_terminal) : is_terminal(is_terminal) {}
+      bool operator()(const Skeleton_vertex& v, const Skeleton& g) const { return is_terminal(v, g); }
+      std::function<bool(const Skeleton_vertex&, const Skeleton&)> is_terminal;
+    };
+    return CGAL::split_graph_into_polylines(g, pv, IsTerminal(is_terminal));
+  }, py::arg("g"), py::arg("pv"), py::arg("is_terminal"),
+        "splits into polylines the graph g at vertices of degree greater than 2 and at vertices for which is_terminal(v,graph)==true.\n"
+        "The polylines are reported using a visitor.\n"
+        "An overload without is_terminal is provided if no vertices but those of degree different from 2 are polyline endpoints.\n"
+        "Examples\n"
+        "• Surface_mesh_skeletonization/simple_mcfskel_example.py.");
 
   m.def("extract_mean_curvature_flow_skeleton", &CGAL::extract_mean_curvature_flow_skeleton<Tm>,
         "extracts a medially centered curve skeleton for the triangle mesh tmesh. This function uses the class CGAL::Mean_curvature_flow_skeletonization with the default parameters. This function is provided only if Eigen 3.2 (or greater) is available and CGAL_EIGEN3_ENABLED is defined.\n"
