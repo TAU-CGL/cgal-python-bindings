@@ -10,8 +10,7 @@ if len(sys.argv) > 1:
     i = 2
 if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-# CGALPY = importlib.import_module(lib)
-import CGALPY.CGALPY as CGALPY
+CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
 
 # create and read Polyhedron
