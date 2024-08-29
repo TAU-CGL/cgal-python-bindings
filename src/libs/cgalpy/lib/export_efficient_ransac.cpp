@@ -4,6 +4,7 @@
 #include <nanobind/stl/string.h>
 #include <nanobind/trampoline.h>
 
+#include <CGAL/Point_with_normal_3.h>
 #include <CGAL/Shape_detection/Efficient_RANSAC.h>
 
 #include "CGALPY/kernel_types.hpp"
@@ -42,8 +43,7 @@ struct Py_base_shape : Shape {
 template<typename Traits, typename Shape, typename C>
 auto export_base_shape(C& c, const std::string& name, const std::string& doc = "") {
   using Base_shape = Py_base_shape<Shape, Traits>;
-  auto cls = py::class_<Shape, Base_shape>(c, name.c_str(), doc.c_str());
-  return cls
+  return py::class_<Shape, Base_shape>(c, name.c_str(), doc.c_str())
     .def("indices_of_assigned_points", &Base_shape::indices_of_assigned_points,
          "Returns the indices of the points in the input range assigned to this shape.")
     .def("info", &Shape::info,
@@ -63,6 +63,24 @@ auto add_shape_factory(C& c, const std::string& name) {
   );
 }
 
+template<typename Traits, typename Kernel_, typename Shape, typename C>
+auto export_point_to_shape_index_map(C& c, const std::string& name) {
+  using Point_to_shape_index_map = SD::Point_to_shape_index_map<Traits>;
+  using PointRange = std::vector<Kernel::Point_3>;
+  using NormalRange = std::vector<CGAL::Point_with_normal_3<Kernel>>;
+  using ShapeRange = std::vector<Shape>;
+  return py::class_<Point_to_shape_index_map>(c,
+    ("Point_to_" + name + "_index_map").c_str(),
+    ("Property map that associates a point index to its assigned " + name + " found by the Sd.Efficient_RANSAC algorithm.").c_str())
+    // the following literally crashed clang
+    // .def("__init__", Point_to_shape_index_map::template Point_to_shape_index_map<PointRange, ShapeRange>,
+    //      py::arg("points"), py::arg("shapes"),
+    //      ("Constructs a property map to map points to " + name + " shapes.\n"
+    //       "Note\n"
+    //       "• shapes must be a range of shapes detected using points.").c_str())
+  ;
+}
+
 void export_efficient_ransac(py::module_& m) {
   using Kernel_ = Kernel;
   using Gt = Kernel_;
@@ -72,6 +90,8 @@ void export_efficient_ransac(py::module_& m) {
   using InputNormalMap = CGAL::Second_of_pair_property_map<Point_with_normal>;
   using RANSAC_traits = SD::Efficient_RANSAC_traits<Gt, Input_range, InputPointMap, InputNormalMap>;
   using RANSAC = SD::Efficient_RANSAC<RANSAC_traits>;
+  using Point_to_shape_index_map = SD::Point_to_shape_index_map<RANSAC>;
+  using Plane_map = SD::Plane_map<RANSAC>;
 
   // Shapes
   using Cone = SD::Cone<RANSAC_traits>;
@@ -219,7 +239,15 @@ void export_efficient_ransac(py::module_& m) {
   add_shape_factory<RANSAC, Sphere>(eff_ransac, "sphere");
   add_shape_factory<RANSAC, Torus>(eff_ransac, "torus");
 
-
+  // Property Maps
+  using Point = typename Kernel::Point_3;
+  // template<typename Traits, typename Point, typename Shape>
+  // auto export_point_to_shape_index_map(py::class_<Traits>& c, const std::string& name) {
+  export_point_to_shape_index_map<RANSAC_traits, Point, Cone>(m, "cone");
+  // export_point_to_shape_index_map<RANSAC_traits, Point, Cylinder>(m, "cylinder");
+  // export_point_to_shape_index_map<RANSAC_traits, Point, Plane>(m, "plane");
+  // export_point_to_shape_index_map<RANSAC_traits, Point, Sphere>(m, "sphere");
+  // export_point_to_shape_index_map<RANSAC_traits, Point, Torus>(m, "torus");
 
 
 }
