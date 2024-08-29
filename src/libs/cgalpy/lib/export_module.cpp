@@ -50,6 +50,7 @@ void export_polygon_with_holes_2(py::module_&);
 void export_spatial_searching(py::module_&);
 void export_surface_mesh(py::module_&);
 void export_surface_sweep_2(py::module_&);
+void export_efficient_ransac(py::module_&);
 void export_meshing(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
@@ -214,6 +215,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS
   auto tsmsk_m = m.def_submodule("Smsk");
   export_triangulated_surface_mesh_skeletonization(tsmsk_m);
+#endif
+
+#ifdef CGALPY_SHAPE_DETECTION_BINDINGS
+  auto sd_m = m.def_submodule("Sd");
+  export_efficient_ransac(sd_m);
 #endif
 
 #ifdef CGALPY_VISIBILITY_2_BINDINGS

@@ -301,6 +301,12 @@ if (CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS)
     list(APPEND CGALPY_MODULES Smsk)
     set(CGALPY_Smsk_FILTERS [=[{}]=])
 endif ()
+# Shape Detection
+if (CGALPY_SHAPE_DETECTION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_efficient_ransac.cpp)
+    list(APPEND CGALPY_MODULES Sd)
+    set(CGALPY_Sd_FILTERS [=[{}]=])
+endif ()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
