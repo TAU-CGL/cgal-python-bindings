@@ -89,9 +89,16 @@ void export_kernel(C_& ker_c) {
 
   // Kernel 3D operators
   using Ctr_pln_3 = typename Ker::Construct_plane_3;
-  using Ctr_pnt_3 = typename Ker::Construct_point_3;
   using Ctr_tran_pnt_3 = typename Ker::Construct_translated_point_3;
   using Cmp_z_3 = typename Ker::Compare_z_3;
+
+  using Ctr_pnt_3 = typename Ker::Construct_point_3;
+  using Ctr_seg_3 = typename Ker::Construct_segment_3;
+  using Ctr_tri_3 = typename Ker::Construct_triangle_3;
+  using Ctr_tet_3 = typename Ker::Construct_tetrahedron_3;
+  using Cmp_xyz_3 = typename Ker::Compare_xyz_3;
+  using Coplanar_orient_3 = typename Ker::Coplanar_orientation_3;
+  using Orient_3 = typename Ker::Orientation_3;
 
   ker_c.def(py::init<>())
     // 2D operators
@@ -374,6 +381,120 @@ void export_kernel(C_& ker_c) {
   py::class_<Ctr_tran_pnt_3>(ker_c, "Construct_translated_point_3")
     .def("__call__", static_cast<Ctr_tran_pnt_3_op>(&Ctr_tran_pnt_3::operator()))
     ;
+
+  // Construct_segment_3
+  py::class_<Ctr_seg_3>(ker_c, "Construct_segment_3")
+    .def("__call__",
+         [](Ctr_seg_3 ctr, const Pnt_3& p, const Pnt_3& q)->Seg_3 const
+         { return ctr(p, q); })
+    ;
+
+  // Construct_triangle_3
+  py::class_<Ctr_tri_3>(ker_c, "Construct_triangle_3")
+    .def("__call__",
+         [](Ctr_tri_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
+         ->Tri_3 const
+         { return ctr(p, q, r); })
+    ;
+
+  // Construct_tetrahedron_3
+  py::class_<Ctr_tet_3>(ker_c, "Construct_tetrahedron_3")
+    .def("__call__",
+         [](Ctr_tet_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r,
+            const Pnt_3& s)
+         ->Tet_3 const
+         { return ctr(p, q, r, s); })
+    ;
+
+  // Compare_xyz_3
+  using Cmp_xyz_3_op =
+    CGAL::Comparison_result(Cmp_xyz_3::*)(const Pnt_3&, const Pnt_3&)const;
+  py::class_<Cmp_xyz_3>(ker_c, "Compare_xyz_3")
+    .def("__call__", static_cast<Cmp_xyz_3_op>(&Cmp_xyz_3::operator()))
+    ;
+
+  // Coplanar_orientation_3
+  using Coplanar_orient_3_op =
+    CGAL::Orientation(Coplanar_orient_3::*)(const Pnt_3&, const Pnt_3&,
+                                            const Pnt_3&)const;
+  py::class_<Coplanar_orient_3>(ker_c, "Coplanar_orientation_3")
+    .def("__call__", static_cast<Coplanar_orient_3_op>(&Coplanar_orient_3::operator()))
+    ;
+
+  // Orientation_3
+  using Orient_3_op =
+    CGAL::Orientation(Orient_3::*)(const Pnt_3&, const Pnt_3&, const Pnt_3&,
+                                   const Pnt_3&)const;
+  py::class_<Orient_3>(ker_c, "Orientation_3")
+    .def("__call__", static_cast<Orient_3_op>(&Orient_3::operator()))
+    ;
 }
 
 #endif
+// ◆ Compare_xyz_3
+// typedef unspecified_type TriangulationTraits_3::Compare_xyz_3
+//
+// A predicate object that must provide the function operator.
+//
+// Comparison_result operator()(Point_3 p, Point_3 q),
+//
+// which returns EQUAL if the two points are equal. Otherwise it must return a consistent order for any two points chosen in a same line.
+// ◆ Construct_point_3
+// typedef unspecified_type TriangulationTraits_3::Construct_point_3
+//
+// A constructor object that must provide the function operator.
+//
+// Point_3 operator()(Point_3 p),
+//
+// which simply returns p.
+//
+// Note
+//     It is advised to return a const reference to p to avoid useless copies.
+//     This peculiar requirement is necessary because CGAL::Triangulation_3 internally manipulates points with a Point type that is not always Point_3. 
+//
+// ◆ Construct_segment_3
+// typedef unspecified_type TriangulationTraits_3::Construct_segment_3
+//
+// A constructor object that must provide the function operator.
+//
+// Segment_3 operator()(Point_3 p, Point_3 q),
+//
+// which constructs a segment from two points.
+// ◆ Construct_tetrahedron_3
+// typedef unspecified_type TriangulationTraits_3::Construct_tetrahedron_3
+//
+// A constructor object that must provide the function operator.
+//
+// Tetrahedron_3 operator()(Point_3 p, Point_3 q, Point_3 r, Point_3 s),
+//
+// which constructs a tetrahedron from four points.
+// ◆ Construct_triangle_3
+// typedef unspecified_type TriangulationTraits_3::Construct_triangle_3
+//
+// A constructor object that must provide the function operator.
+//
+// Triangle_3 operator()(Point_3 p, Point_3 q, Point_3 r ),
+//
+// which constructs a triangle from three points.
+// ◆ Coplanar_orientation_3
+// typedef unspecified_type TriangulationTraits_3::Coplanar_orientation_3
+//
+// A predicate object that must provide the function operator.
+//
+// Orientation operator()(Point_3 p, Point_3 q, Point_3 r),
+//
+// which returns COLLINEAR if the points are collinear. Otherwise it must return a consistent orientation for any three points chosen in a same plane.
+// ◆ Orientation_3
+// typedef unspecified_type TriangulationTraits_3::Orientation_3
+//
+// A predicate object that must provide the function operator.
+//
+// Orientation operator()(Point_3 p, Point_3 q, Point_3 r, Point_3 s),
+//
+// which returns POSITIVE, if s lies on the positive side of the oriented plane h defined by p, q, and r, returns NEGATIVE if s lies on the negative side of h, and returns COPLANAR if s lies on h.
+// ◆ Point_3
+// typedef unspecified_type TriangulationTraits_3::Point_3
+//
+// The point type.
+//
+// It must be DefaultConstructible, CopyConstructible and Assignable.

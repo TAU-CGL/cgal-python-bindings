@@ -63,22 +63,35 @@ auto add_shape_factory(C& c, const std::string& name) {
   );
 }
 
-template<typename Traits, typename Kernel_, typename Shape, typename C>
-auto export_point_to_shape_index_map(C& c, const std::string& name) {
-  using Point_to_shape_index_map = SD::Point_to_shape_index_map<Traits>;
-  using PointRange = std::vector<Kernel::Point_3>;
-  using NormalRange = std::vector<CGAL::Point_with_normal_3<Kernel>>;
-  using ShapeRange = std::vector<Shape>;
-  return py::class_<Point_to_shape_index_map>(c,
-    ("Point_to_" + name + "_index_map").c_str(),
-    ("Property map that associates a point index to its assigned " + name + " found by the Sd.Efficient_RANSAC algorithm.").c_str())
-    // the following literally crashed clang
-    // .def("__init__", Point_to_shape_index_map::template Point_to_shape_index_map<PointRange, ShapeRange>,
-    //      py::arg("points"), py::arg("shapes"),
-    //      ("Constructs a property map to map points to " + name + " shapes.\n"
-    //       "Note\n"
-    //       "• shapes must be a range of shapes detected using points.").c_str())
-  ;
+// template<typename Traits, typename Kernel_, typename ShapeRange, typename C>
+// auto export_point_to_shape_index_map(C& c, const std::string& name) {
+//   using Point_to_shape_index_map = SD::Point_to_shape_index_map<Traits>;
+//   using PointRange = std::vector<Kernel::Point_3>;
+//   c.def(("get_Point_to_" + name + "_index_map").c_str(),
+//         [](const PointRange& points, const ShapeRange& shapes) {
+//           return Point_to_shape_index_map(points, shapes);
+//         },
+//         ("Property map that associates a point index to its assigned " + name + " found by the Sd.Efficient_RANSAC algorithm.").c_str()
+//         );
+//   return py::class_<Point_to_shape_index_map>(c,
+//     ("Point_to_" + name + "_index_map").c_str(),
+//     ("Property map that associates a point index to its assigned " + name + " found by the Sd.Efficient_RANSAC algorithm.").c_str())
+//     .def(py::init<const PointRange&, const ShapeRange&>(), // this doesnt work
+//          py::arg("points"), py::arg("shapes"),
+//          ("Constructs a property map to map points to " + name + " shapes.\n"
+//           "Note\n"
+//           "• shapes must be a range of shapes detected using points.").c_str())
+//   ;
+// }
+
+template <typename Map>
+auto export_input_map(py::module_& m, const std::string& name) {
+  return py::class_<Map>(m, name.c_str(),
+    ("Map that associates a point index to its assigned " + name).c_str())
+    .def(py::init<>())
+    .def("__getitem__", &Map::operator[])
+    .def("__setitem__", &Map::operator[])
+    ;
 }
 
 void export_efficient_ransac(py::module_& m) {
@@ -92,6 +105,9 @@ void export_efficient_ransac(py::module_& m) {
   using RANSAC = SD::Efficient_RANSAC<RANSAC_traits>;
   using Point_to_shape_index_map = SD::Point_to_shape_index_map<RANSAC>;
   using Plane_map = SD::Plane_map<RANSAC>;
+
+  export_input_map<InputPointMap>(m, "Input_point_map");
+  export_input_map<InputNormalMap>(m, "Input_normal_map");
 
   // Shapes
   using Cone = SD::Cone<RANSAC_traits>;
@@ -239,15 +255,8 @@ void export_efficient_ransac(py::module_& m) {
   add_shape_factory<RANSAC, Sphere>(eff_ransac, "sphere");
   add_shape_factory<RANSAC, Torus>(eff_ransac, "torus");
 
-  // Property Maps
+  // Property Maps (weird)
   using Point = typename Kernel::Point_3;
-  // template<typename Traits, typename Point, typename Shape>
-  // auto export_point_to_shape_index_map(py::class_<Traits>& c, const std::string& name) {
-  export_point_to_shape_index_map<RANSAC_traits, Point, Cone>(m, "cone");
-  // export_point_to_shape_index_map<RANSAC_traits, Point, Cylinder>(m, "cylinder");
-  // export_point_to_shape_index_map<RANSAC_traits, Point, Plane>(m, "plane");
-  // export_point_to_shape_index_map<RANSAC_traits, Point, Sphere>(m, "sphere");
-  // export_point_to_shape_index_map<RANSAC_traits, Point, Torus>(m, "torus");
-
+  // export_point_to_shape_index_map<RANSAC_traits, RANSAC::Plane_range, Cone>(m, "cone");
 
 }
