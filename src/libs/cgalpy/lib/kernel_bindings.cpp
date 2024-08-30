@@ -158,6 +158,8 @@ void export_kernel_module(py::module_& m) {
     export_bbox_3(bbox_c);
   }
 
+  using Orientation = CGAL::Orientation;
+
   // Kernel objects
   using Circle_2 = Kernel::Circle_2;
   using Dir_2 = Kernel::Direction_2;
@@ -171,6 +173,7 @@ void export_kernel_module(py::module_& m) {
   using Dir_3 = Kernel::Direction_3;
   using Pln_3 = Kernel::Plane_3;
   using Pnt_3 = Kernel::Point_3;
+  using Seg_3 = Kernel::Segment_3;
   using Sfr_3 = Kernel::Sphere_3;
   using Tri_3 = Kernel::Triangle_3;
   using Vec_3 = Kernel::Vector_3;
@@ -304,6 +307,229 @@ void export_kernel_module(py::module_& m) {
     py::class_<Mesh_df_int> mesh_df_int_c(m, "Mesh_constant_domain_field_3_int");
     export_mesh_constant_domain_field_3<Kernel, Mesh_df_int>(mesh_df_int_c);
   }
+
+  // Kernel Function Objects
+  using Construct_vector_2 = typename Kernel::Construct_vector_2;
+  using Construct_vector_3 = typename Kernel::Construct_vector_3;
+  using Construct_sphere_3 = typename Kernel::Construct_sphere_3;
+  using Construct_line_3 = typename Kernel::Construct_line_3;
+  using Construct_circle_2 = typename Kernel::Construct_circle_2;
+
+  // Kernel Function Objects
+  py::class_<Construct_vector_2>(m, "Construct_vector_2")
+    .def(py::init<>())
+    .def("__call__", [](Construct_vector_2 ctr, const Pnt_2& a, const Pnt_2& b)->Vec_2
+                     { return ctr(a, b); },
+         py::arg("a"), py::arg("b"),
+         "Introduces the vector b-a.")
+    .def("__call__", [](Construct_vector_2 ctr, const CGAL::Origin& o, const Pnt_2& b)->Vec_2
+                     { return ctr(o, b); }, py::arg("o"), py::arg("b"),
+         "Introduces the vector b.")
+    .def("__call__", [](Construct_vector_2 ctr, const Pnt_2& a, const CGAL::Origin& o)->Vec_2
+                     { return ctr(a, o); }, py::arg("a"), py::arg("o"),
+         "Introduces the vector -a.")
+    .def("__call__", [](Construct_vector_2 ctr, const Seg_2& s)->Vec_2
+                     { return ctr(s); }, py::arg("s"),
+         "Introduces the vector s.target()-s.source().")
+    .def("__call__", [](Construct_vector_2 ctr, const Ray_2& r)->Vec_2
+                     { return ctr(r); }, py::arg("r"),
+         "Introduces a vector having the same direction as r.")
+    .def("__call__", [](Construct_vector_2 ctr, const Line_2& l)->Vec_2
+                     { return ctr(l); }, py::arg("l"),
+         "Introduces a vector having the same direction as l.")
+    .def("__call__", [](Construct_vector_2 ctr, const CGAL::Null_vector& NULL_VECTOR)->Vec_2
+                     { return ctr(NULL_VECTOR); }, py::arg("NULL_VECTOR"),
+         "Introduces the null vector.")
+    ;
+
+  py::class_<Construct_vector_3>(m, "Construct_vector_3")
+    .def(py::init<>())
+    .def("__call__", [](Construct_vector_3 ctr, const Pnt_3& a, const Pnt_3& b)->Vec_3
+                     { return ctr(a, b); },
+         py::arg("a"), py::arg("b"),
+         "Introduces the vector b-a.")
+    .def("__call__", [](Construct_vector_3 ctr, const CGAL::Origin& o, const Pnt_3& b)->Vec_3
+                     { return ctr(o, b); },
+         py::arg("o"), py::arg("b"),
+         "Introduces the vector b.")
+    .def("__call__", [](Construct_vector_3 ctr, const Pnt_3& a, const CGAL::Origin& o)->Vec_3
+                     { return ctr(a, o); },
+         py::arg("a"), py::arg("o"),
+         "Introduces the vector -a.")
+    .def("__call__", [](Construct_vector_3 ctr, const Seg_3& s)->Vec_3
+                     { return ctr(s); },
+         py::arg("s"),
+         "Introduces the vector s.target()-s.source().")
+    .def("__call__", [](Construct_vector_3 ctr, const Ray_3& r)->Vec_3
+                     { return ctr(r); },
+         py::arg("r"),
+         "Introduces a vector having the same direction as r.")
+    .def("__call__", [](Construct_vector_3 ctr, const Line_3& l)->Vec_3
+                     { return ctr(l); },
+         py::arg("l"),
+         "Introduces a vector having the same direction as l.")
+    .def("__call__", [](Construct_vector_3 ctr, const CGAL::Null_vector& NULL_VECTOR)->Vec_3
+                     { return ctr(NULL_VECTOR); },
+         py::arg("NULL_VECTOR"),
+         "Introduces the null vector.")
+    ;
+
+
+  py::class_<Construct_sphere_3>(m, "Construct_sphere_3")
+    .def(py::init<>())
+    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& center, const FT& squared_radius, const Orientation& orientation)->Sphere_3
+                     { return ctr(center, squared_radius, orientation); },
+         py::arg("center"), py::arg("squared_radius"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
+         "Introduces a sphere initialized to the sphere with center center, squared radius squared_radius and orientation orientation.\n\n"
+         "Precondition\n"
+         "• orientation != CGAL::COPLANAR and squared_radius >= 0. \n\n")
+    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& center, const Orientation& orientation)->Sphere_3
+                      { return ctr(center, orientation); },
+         py::arg("center"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
+         "Introduces a sphere s initialized to the sphere with center center, squared radius zero and orientation orientation.\n\n"
+         "Precondition\n"
+         "• orientation != CGAL::COPLANAR. \n\n"
+         "Postcondition\n"
+         "• s.is_degenerate() = true. \n\n")
+    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r, const Pnt_3& s)->Sphere_3
+                      { return ctr(p, q, r, s); },
+         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+         "Introduces a sphere initialized to the unique sphere which passes through the points p, q, r and s.\n\n"
+         "The orientation of the sphere is the orientation of the point quadruple p, q, r, s.\n\n"
+         "Precondition\n"
+         "• p, q, r, and s are not coplanar. \n\n")
+    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r, const Orientation& o)->Sphere_3
+                      { return ctr(p, q, r, o); },
+         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("o") = CGAL::COUNTERCLOCKWISE,
+         "Introduces a sphere initialized to the smallest sphere which passes through the points p, q, and r.\n\n"
+         "The orientation of the sphere is o.\n\n"
+         "Precondition\n"
+         "• o != CGAL::COPLANAR. \n\n")
+    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q, const Orientation& o)->Sphere_3
+                      { return ctr(p, q, o); },
+         py::arg("p"), py::arg("q"), py::arg("o") = CGAL::COUNTERCLOCKWISE,
+         "Introduces a sphere initialized to the smallest sphere which passes through the points p and q.\n\n"
+         "The orientation of the sphere is o.\n\n"
+         "Precondition\n"
+         "• o != CGAL::COPLANAR. \n\n")
+    ;
+  
+  py::class_<Construct_line_3>(m, "Construct_line_3")
+    .def(py::init<>())
+    .def("__call__", [](Construct_line_3 ctr, const Pnt_3& p, const Pnt_3& q)->Line_3
+                     { return ctr(p, q); },
+         py::arg("p"), py::arg("q"),
+         "Introduces a line passing through the points p and q.\n"
+         "Line is directed from p to q.")
+    .def("__call__", [](Construct_line_3 ctr, const Pnt_3& p, const Vec_3& v)->Line_3
+                     { return ctr(p, v); },
+         py::arg("p"), py::arg("v"),
+         "Introduces a line passing through point p and oriented by v.")
+    .def("__call__", [](Construct_line_3 ctr, const Pnt_3& p, const Dir_3& d)->Line_3
+                     { return ctr(p, d); },
+         py::arg("p"), py::arg("d"),
+         "Introduces a line passing through point p with direction d.")
+    .def("__call__", [](Construct_line_3 ctr, const Seg_3& s)->Line_3
+                     { return ctr(s); },
+         py::arg("s"),
+         "Returns the line supporting the segment s, oriented from source to target.")
+    .def("__call__", [](Construct_line_3 ctr, const Ray_3& r)->Line_3
+                     { return ctr(r); },
+         py::arg("r"),
+         "Returns the line supporting the ray r, with the same orientation.")
+    ;
+
+  py::class_<Construct_circle_2>(m, "Construct_circle_2")
+    .def(py::init<>())
+    .def("__call__", [](Construct_circle_2 ctr, const Pnt_2& center, const FT& squared_radius, const Orientation& orientation)->Circle_2
+                     { return ctr(center, squared_radius, orientation); },
+         py::arg("center"), py::arg("squared_radius"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
+         "Introduces a circle initialized to the circle with center center, squared radius squared_radius and orientation orientation.\n\n"
+         "Precondition\n"
+         "• orientation != CGAL::COLLINEAR and squared_radius >= 0.")
+    .def("__call__", [](Construct_circle_2 ctr, const Pnt_2& center, const Orientation& orientation)->Circle_2
+                      { return ctr(center, orientation); },
+         py::arg("center"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
+         "Introduces a circle initialized to the circle with center center, squared radius zero and orientation orientation.\n\n"
+         "Precondition\n"
+         "• orientation != CGAL::COLLINEAR.\n\n"
+         "Postcondition\n"
+         "• .is_degenerate() = true.")
+    .def("__call__", [](Construct_circle_2 ctr, const Pnt_2& p, const Pnt_2& q, const Pnt_2& r)->Circle_2
+                      { return ctr(p, q, r); },
+         py::arg("p"), py::arg("q"), py::arg("r"),
+         "Introduces a circle initialized to the unique circle which passes through the points p, q and r.\n\n"
+         "The orientation of the circle is the orientation of the point triple p, q, r.\n\n"
+         "Precondition\n"
+         "• p, q, and r are not collinear.")
+    .def("__call__", [](Construct_circle_2 ctr, const Pnt_2& p, const Pnt_2& q, const Orientation& orientation)->Circle_2
+                      { return ctr(p, q, orientation); },
+         py::arg("p"), py::arg("q"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
+         "Introduces a circle initialized to the circle with diameter pq and orientation orientation.\n\n"
+         "Precondition\n"
+         "• orientation != CGAL::COLLINEAR.")
+
+    ;
+
+
+// ◆ operator()() [1/4]
+// Kernel::Circle_2 Kernel::ConstructCircle_2::operator() 	( 	Kernel::Point_2 const &  	center,
+// 		Kernel::FT const &  	squared_radius,
+// 		Orientation const &  	orientation = COUNTERCLOCKWISE 
+// 	) 		
+//
+// introduces a variable of type Kernel::Circle_2.
+//
+// It is initialized to the circle with center center, squared radius squared_radius and orientation orientation.
+//
+// Precondition
+//     orientation != CGAL::COLLINEAR and squared_radius >= 0. 
+//
+// ◆ operator()() [2/4]
+// Kernel::Circle_2 Kernel::ConstructCircle_2::operator() 	( 	Kernel::Point_2 const &  	center,
+// 		Orientation const &  	orientation = COUNTERCLOCKWISE 
+// 	) 		
+//
+// introduces a variable of type Kernel::Circle_2.
+//
+// It is initialized to the circle with center center, squared radius zero and orientation orientation.
+//
+// Precondition
+//     orientation != CGAL::COLLINEAR. 
+//
+// Postcondition
+//     .is_degenerate() = true. 
+//
+// ◆ operator()() [3/4]
+// Kernel::Circle_2 Kernel::ConstructCircle_2::operator() 	( 	Kernel::Point_2 const &  	p,
+// 		Kernel::Point_2 const &  	q,
+// 		Kernel::Point_2 const &  	r 
+// 	) 		
+//
+// introduces a variable of type Kernel::Circle_2.
+//
+// It is initialized to the unique circle which passes through the points p, q and r. The orientation of the circle is the orientation of the point triple p, q, r.
+//
+// Precondition
+//     p, q, and r are not collinear. 
+//
+// ◆ operator()() [4/4]
+// Kernel::Circle_2 Kernel::ConstructCircle_2::operator() 	( 	Kernel::Point_2 const &  	p,
+// 		Kernel::Point_2 const &  	q,
+// 		Orientation const &  	orientation = COUNTERCLOCKWISE 
+// 	) 		
+//
+// introduces a variable of type Kernel::Circle_2.
+//
+// It is initialized to the circle with diameter pq and orientation orientation.
+//
+// Precondition
+//     orientation != CGAL::COLLINEAR. 
+//
+//     Kernel
+//     ConstructCircle_2
+//     Generated by doxygen 1.9.6
+
 
   /// \name Global kernel functions
   /// @{
