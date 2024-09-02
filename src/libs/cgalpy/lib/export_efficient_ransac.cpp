@@ -14,7 +14,7 @@ namespace SD = CGAL::Shape_detection;
 
 template <typename Shape, typename Traits>
 struct Py_base_shape : Shape {
-  NB_TRAMPOLINE(Shape, 7);
+  NB_TRAMPOLINE(Shape, 2);
   std::string info() const override {
     NB_OVERRIDE(info);
   }
@@ -232,20 +232,20 @@ void export_efficient_ransac(py::module_& m) {
          "Retrieves the point property map.")
     .def("normal", &RANSAC::normal,
          "Retrieves the normal property map.")
-    .def("input_iterator_first", &RANSAC::input_iterator_first)
-    .def("input_iterator_beyond", &RANSAC::input_iterator_beyond)
-    // .def("set_input", &RANSAC::set_input,
-    //      py::arg("input_range"),
-    //      py::arg("point_map") = InputPointMap(),
-    //      py::arg("normal_map") = InputNormalMap(),
-    //      "Sets the input data.\n\n"
-    //      "The range must stay valid until the detection has been performed and the access to the results is no longer required. The data in the input is reordered by the methods detect() and preprocess(). This function first calls clear().\n\n"
-    //      "Parameters\n"
-    //      "• input_range:	Range of input data.\n"
-    //      "• point_map:	Property map to access the position of an input point.\n"
-    //      "• normal_map:	Property map to access the normal of an input point.\n"
-    //      "Examples\n"
-    //      "    Shape_detection/efficient_RANSAC_with_custom_shape.py.")
+    // .def("input_iterator_first", &RANSAC::input_iterator_first)
+    // .def("input_iterator_beyond", &RANSAC::input_iterator_beyond)
+    .def("set_input", &RANSAC::set_input,
+         py::arg("input_range"),
+         py::arg("point_map") = InputPointMap(),
+         py::arg("normal_map") = InputNormalMap(),
+         "Sets the input data.\n\n"
+         "The range must stay valid until the detection has been performed and the access to the results is no longer required. The data in the input is reordered by the methods detect() and preprocess(). This function first calls clear().\n\n"
+         "Parameters\n"
+         "• input_range:	Range of input data.\n"
+         "• point_map:	Property map to access the position of an input point.\n"
+         "• normal_map:	Property map to access the normal of an input point.\n"
+         "Examples\n"
+         "    Shape_detection/efficient_RANSAC_with_custom_shape.py.")
     ;
 
   add_shape_factory<RANSAC, Cone>(eff_ransac, "cone");

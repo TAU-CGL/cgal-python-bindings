@@ -51,6 +51,7 @@ void export_spatial_searching(py::module_&);
 void export_surface_mesh(py::module_&);
 void export_surface_sweep_2(py::module_&);
 void export_efficient_ransac(py::module_&);
+void export_region_growing(py::module_&);
 void export_meshing(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
@@ -218,8 +219,12 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 
 #ifdef CGALPY_SHAPE_DETECTION_BINDINGS
-  auto sd_m = m.def_submodule("Sd");
+  auto sd_m = m.def_submodule("Sd",
+    "This CGAL component implements two algorithms for shape detection:\n\n"
+    "• the Efficient RANSAC (RANdom SAmple Consensus) method, contributed by Schnabel et al. [2];\n"
+    "• the Region Growing method, contributed by Lafarge and Mallet [1].");
   export_efficient_ransac(sd_m);
+  export_region_growing(sd_m);
 #endif
 
 #ifdef CGALPY_VISIBILITY_2_BINDINGS

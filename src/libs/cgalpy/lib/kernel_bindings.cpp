@@ -1064,6 +1064,7 @@ void export_kernel_module(py::module_& m) {
       "true if reading was successful, false otherwise. \n")
     ;
 
+  #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC
   m.def("write_polygon_soup", [](const std::string& fname, const PointRange& points, const PolygonRange& polygons, const py::dict& np = py::dict()) {
     return CGAL::IO::write_polygon_soup(fname, points, polygons, internal::parse_named_parameters(np));
   },
@@ -1092,4 +1093,5 @@ void export_kernel_module(py::module_& m) {
       "Returns\n"
       "true if writing was successful, false otherwise. \n")
     ;
+  #endif
 }

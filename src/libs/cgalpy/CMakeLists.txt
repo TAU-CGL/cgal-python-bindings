@@ -304,6 +304,7 @@ endif ()
 # Shape Detection
 if (CGALPY_SHAPE_DETECTION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_efficient_ransac.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_region_growing.cpp)
     list(APPEND CGALPY_MODULES Sd)
     set(CGALPY_Sd_FILTERS [=[{}]=])
 endif ()
