@@ -71,29 +71,67 @@ auto define_push_property_map(C& c, const std::string& name) {
   pm.def(py::init<>())
     // TODO: why is get and put not working?
     ;
+  return pm;
 }
 
-void export_3d_point_set(py::module_& m) {
-  using Kernel_ = Kernel;
-  using Pt_set = CGAL::Point_set_3<Kernel_::Point_3, Kernel_::Vector_3>;
-  using Pnt_3 = Kernel_::Point_3;
-  using Vec_3 = Kernel_::Vector_3;
-  using FT = Kernel_::FT;
-  using Point_set_3_index = CGAL::internal::Point_set_3_index<Pnt_3, Vec_3>;
-  using Point_push_map = Pt_set::Point_push_map;
-  using Point_map = Pt_set::template Property_map<Point_3>;
-  using Vector_map = Pt_set::template Property_map<Vector_3>;
+template <typename Point_set_3_index, typename C>
+auto export_point_set_index(C& m, const std::string& name) {
+    auto ptst_idx = py::class_<Point_set_3_index>(m, ("Point_set_3_" + name + "_index").c_str())
+    .def(py::init<const Point_set_3_index&>())
+    .def(py::init_implicit<const std::size_t&>())
+    .def(py::init<>())
+    .def("__int__", [](Point_set_3_index& index) { return static_cast<std::size_t>(index); })
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
+    .def(py::self < py::self)
+    .def("next", [](Point_set_3_index& index) { return ++index; })
+    .def("prev", [](Point_set_3_index& index) { return --index; })
+    // operator with an integer
+    .def("__add__", [](Point_set_3_index& index, const int& value) { return index + value; },
+         py::is_operator())
+    .def("__sub__", [](Point_set_3_index& index, const int& value) { return index - value; },
+         py::is_operator())
+    ;
 
-  py::class_<Pt_set> ptst(m, "Point_set_3",
+  add_insertion(ptst_idx, "__str__");
+  add_insertion(ptst_idx, "__repr__");
+
+  return ptst_idx;
+}
+
+template <typename Point_set_3_iterator, typename C>
+auto export_point_set_3_iterator(C& m) {
+  py::class_<Point_set_3_iterator> ptst_it(m, "Point_set_3_iterator");
+  ptst_it.def(py::init<>())
+    .def("__add__", [](Point_set_3_iterator& it, const int& value) { return it + value; },
+         py::is_operator())
+    .def("__sub__", [](Point_set_3_iterator& it, const int& value) { return it - value; },
+         py::is_operator())
+    ;
+  return ptst_it;
+}
+
+
+template <typename Pnt, typename Vec, typename C>
+auto export_point_set_3(C& c, const std::string& name) {
+  using Point_set_3_index = CGAL::internal::Point_set_3_index<Pnt, Vec>;
+  using Pt_set = CGAL::Point_set_3<Pnt, Vec>;
+  py::class_<Pt_set> ptst(c, ("Point_set_3_" + name).c_str(),
     "A collection of points with dynamically associated properties.\n"
     "An instance of this class stores a set of indices of type Index, each representing a point. Properties can be associated to each point and can be retrieved using the index of the point. There are two particular properties that are hard coded by this class: the coordinates of the points and the normal vectors.\n"
     "The coordinates of a point can be accessed using the index of the point and the member function point(). This property is always present. The normal vector of a point can be accessed using the index of the point and the normal() method. This property must be explicitly created.\n"
     "All properties can be accessed as a range using the methods points(), normals(), and range() for point coordinates, normal vectors, and other properties respectively.\n"
     "Removing a point with properties is achieved by moving its index at the end of the container and keeping track of the number of removed elements. A garbage collection method must be called to really remove it from memory.\n"
-    "For convenience, all functions of the package Point Set Processing automatically create the right named parameters if called with a CGAL::Point_set_3 object as argument.\n");
+    "For convenience, all functions of the package Point Set Processing automatically create the right named parameters if called with a CGAL::Point_set_3 object as argument.");
+
+  add_insertion(ptst, "__str__");
+  add_insertion(ptst, "__repr__");
+  // add_extraction(ptst);
 
     // Construction, Destruction, Assignment
-  ptst.def(py::init<bool>(),
+  return ptst.def(py::init<bool>(),
            py::arg("with_normal_map")=false,
       "creates an empty point set with no additional property."
       "\n"
@@ -115,7 +153,7 @@ void export_3d_point_set(py::module_& m) {
     // insertion
     
     // Member Functions
-    .def("add_normal_map", [](Pt_set& ps, const Vec_3& default_value=Vector_3(0, 0, 0)) { ps.add_normal_map(default_value); },
+    .def("add_normal_map", [](Pt_set& ps, const Vec& default_value=Vec()) { ps.add_normal_map(default_value); },
          py::arg("default_value")=Vector_3(0, 0, 0),
       "Convenience method that adds a normal property.\n"
       "This method adds a property of type Vector and named normal.\n"
@@ -154,7 +192,7 @@ void export_3d_point_set(py::module_& m) {
       "Note\n"
       "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.",
          py::keep_alive<1, 0>())
-    .def("insert", [](Pt_set& ps, const Pnt_3& p) { return ps.insert(p); },
+    .def("insert", [](Pt_set& ps, const Pnt& p) { return ps.insert(p); },
       py::arg("p"),
       "inserts new point with default property values.\n"
       "\n"
@@ -165,7 +203,7 @@ void export_3d_point_set(py::module_& m) {
       "Properties of the added point are initialized to their default value.\n"
       "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.",
          py::keep_alive<1, 0>())
-    .def("insert", [](Pt_set& ps, const Pnt_3& p, const Vec_3& n) { return ps.insert(p, n); },
+    .def("insert", [](Pt_set& ps, const Pnt& p, const Vec& n) { return ps.insert(p, n); },
       py::arg("p"), py::arg("n"),
       "Convenience method to add a point with a normal vector.\n"
       "\n"
@@ -176,7 +214,7 @@ void export_3d_point_set(py::module_& m) {
       "Note\n"
       "Properties of the added point other than its normal vector are initialized to their default value.\n"
       "If not already added, a normal property is automatically added to the point set when using this method. The default value for normal vectors is CGAL::NULL_VECTOR.\n"
-      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n")
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.")
     .def("insert", [](Pt_set& ps, const Pt_set& other, const std::size_t idx) { return ps.insert(other, idx); },
       py::arg("other"), py::arg("idx"),
       "Convenience method to copy a point with all its properties from another point set.\n"
@@ -190,7 +228,7 @@ void export_3d_point_set(py::module_& m) {
       "This point set and other must have the exact same properties, with the exact same names and types in the exact same order.\n"
       "\n"
       "Note\n"
-      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n",
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.",
          py::keep_alive<1, 0>())
     .def("insert", [](Pt_set& pw, const Pt_set& other, const Point_set_3_index& idx) { return pw.insert(other, idx); },
          py::arg("other"), py::arg("idx"),
@@ -205,7 +243,7 @@ void export_3d_point_set(py::module_& m) {
       "This point set and other must have the exact same properties, with the exact same names and types in the exact same order.\n"
       "\n"
       "Note\n"
-      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.\n",
+      "If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.",
          py::keep_alive<1, 0>())
     .def("is_empty", &Pt_set::is_empty,
       "returns True if the number of elements not marked as removed is 0, False otherwise.\n"
@@ -213,7 +251,7 @@ void export_3d_point_set(py::module_& m) {
       "Note\n"
       "This does not count the removed elements.\n"
       "The method empty() is also available (see Range) and does the same thing.")
-    .def("is_removed", [](Pt_set& ps, const Pt_set::iterator it) { return ps.is_removed(it); },
+    .def("is_removed", [](Pt_set& ps, const typename Pt_set::iterator it) { return ps.is_removed(it); },
       py::arg("it"),
       "returns True if the element is marked as removed, False otherwise.\n"
       "\n"
@@ -240,25 +278,26 @@ void export_3d_point_set(py::module_& m) {
       "Note\n"
       "If copy_properties() with other as argument is called before calling this method, then all the content of other will be copied and no property will be lost in the process.\n"
       "Garbage is collected in both point sets when calling this method.")
-    .def("begin", [](Pt_set& ps) { return ps.begin(); },
-      "returns the begin iterator.\n",
-         py::keep_alive<1, 0>())
-    .def("end", [](Pt_set& ps) { return ps.end(); },
-      "returns the past-the-end iterator.\n",
-         py::keep_alive<1, 0>())
+    // Iterators
+    // .def("begin", [](Pt_set& ps) { return ps.begin(); },
+    //   "returns the begin iterator.\n",
+    //      py::keep_alive<1, 0>())
+    // .def("end", [](Pt_set& ps) { return ps.end(); },
+    //   "returns the past-the-end iterator.\n",
+    //      py::keep_alive<1, 0>())
     .def("point", [](Pt_set& ps, const std::size_t idx) { return ps.point(idx); },
          py::arg("index"),
          "returns a reference to the point corresponding to index.\n")
     .def("point", [](Pt_set& pw, const Point_set_3_index& idx) { return pw.point(idx); },
          py::arg("index"),
          "returns a reference to the point corresponding to index.\n")
-    .def("set_point", [](Pt_set& ps, const std::size_t idx, const Point_3& p) { ps.point(idx) = p; },
+    .def("set_point", [](Pt_set& ps, const std::size_t idx, const Pnt& p) { ps.point(idx) = p; },
       py::arg("index"), py::arg("p"),
       "sets the point corresponding to index to p.\n")
-    .def("set_point", [](Pt_set& pw, const Point_set_3_index& idx, const Point_3& p) { pw.point(idx) = p; },
+    .def("set_point", [](Pt_set& pw, const Point_set_3_index& idx, const Pnt& p) { pw.point(idx) = p; },
          py::arg("index"), py::arg("p"),
          "sets the point corresponding to index to p.\n")
-    .def("set_point", [](Pt_set& pw, const Pt_set::iterator it, const Point_3& p) { pw.point(*it) = p; },
+    .def("set_point", [](Pt_set& pw, const typename Pt_set::iterator it, const Pnt& p) { pw.point(*it) = p; },
          py::arg("it"), py::arg("p"),
          "sets the point corresponding to index to p.\n")
     .def("normal", [](Pt_set& ps, const std::size_t idx) { return ps.normal(idx); },
@@ -273,13 +312,13 @@ void export_3d_point_set(py::module_& m) {
          "\n"
          "Note\n"
          "If not already added, a normal property is automatically added to the point set (see add_normal_map()). ")
-    .def("set_normal", [](Pt_set& ps, const std::size_t idx, const Vector_3& n) { ps.normal(idx) = n; },
+    .def("set_normal", [](Pt_set& ps, const std::size_t idx, const Vec& n) { ps.normal(idx) = n; },
          py::arg("index"), py::arg("n"),
          "sets the normal corresponding to index to n.\n")
-    .def("set_normal", [](Pt_set& pw, const Point_set_3_index& idx, const Vector_3& n) { pw.normal(idx) = n; },
+    .def("set_normal", [](Pt_set& pw, const Point_set_3_index& idx, const Vec& n) { pw.normal(idx) = n; },
          py::arg("index"), py::arg("n"),
          "sets the normal corresponding to index to n.\n")
-    .def("set_normal", [](Pt_set& pw, const Pt_set::iterator it, const Vector_3& n) { pw.normal(*it) = n; },
+    .def("set_normal", [](Pt_set& pw, const typename Pt_set::iterator it, const Vec& n) { pw.normal(*it) = n; },
          py::arg("it"), py::arg("n"),
          "sets the normal corresponding to index to n.\n")
     .def("normal_map", [](Pt_set& ps) { return ps.normal_map(); },
@@ -299,14 +338,14 @@ void export_3d_point_set(py::module_& m) {
       "\n"
       "See also\n"
       "garbage_size()")
-    .def("remove", [](Pt_set& ps, Pt_set::iterator first, Pt_set::iterator last) { return ps.remove(first, last); },
+    .def("remove", [](Pt_set& ps, typename Pt_set::iterator first, typename Pt_set::iterator last) { return ps.remove(first, last); },
       py::arg("first"), py::arg("last"),
       "marks all elements between first and last as removed.\n"
       "\n"
       "Note\n"
       "The elements are just marked as removed and are not erased from the memory. collect_garbage() should be called if the memory needs to be disallocated. Elements can be recovered with cancel_removals().\n"
       "All iterators, pointers and references related to the container are invalidated. ")
-    .def("remove", [](Pt_set& ps, Pt_set::iterator it) { return ps.remove(it); },
+    .def("remove", [](Pt_set& ps, typename Pt_set::iterator it) { return ps.remove(it); },
       py::arg("index"),
       "marks the element as removed.\n"
       "\n"
@@ -363,48 +402,65 @@ void export_3d_point_set(py::module_& m) {
     .def("size", &Pt_set::size)
     .def("empty", &Pt_set::empty)
     .def("info", &Pt_set::info)
+    
+    // Other
     .def("__iter__", [](Pt_set& ps) { return py::make_iterator(py::type<typename Pt_set::iterator>(), "Iterator", ps.begin(), ps.end()); },
+         py::keep_alive<0, 1>())
+    .def("const_iter", [](const Pt_set& ps) { return py::make_iterator(py::type<typename Pt_set::const_iterator>(), "ConstIterator", ps.begin(), ps.end()); },
          py::keep_alive<0, 1>())
     ;
 
-  add_insertion(ptst, "__str__");
-  add_insertion(ptst, "__repr__");
-  add_extraction(ptst);
+}
 
-  define_property_map<Pt_set, Vec_3>(m, ptst, "vector");
-  define_property_map<Pt_set, CGAL::IO::Color>(m, ptst, "color");
-  define_property_map<Pt_set, FT>(m, ptst, "FT");
-  define_property_map<Pt_set, Pnt_3>(m, ptst, "point");
-  define_property_map<Pt_set, std::size_t>(m, ptst, "index");
-  define_range<typename Pt_set::Point_range>(m, "Point_set_point_range");
-  define_range<typename Pt_set::Vector_range>(m, "Point_set_vector_range");
+template <typename Pnt, typename Vec, typename C>
+auto export_point_set_iterator(C& m, const std::string& name) {
+  using It = typename CGAL::Point_set_3<Pnt, Vec>::iterator;
+  py::class_<It> ptst_it(m, ("Point_set_3_" + name + "_iterator").c_str());
+}
 
-  m.def("read_point_set", [](const std::string& fname, Pt_set& ps, const py::dict& np = py::dict()) {
-    return CGAL::IO::read_point_set<Pnt_3, Vec_3>(fname, ps, internal::parse_named_parameters(np));
-  },
-        py::arg("fname"), py::arg("ps"), py::arg("np") = py::dict(),
-        "reads the point set from an input file.\n"
-        "Supported file formats are the following:\n"
-        "\n"
-        "Object File Format (OFF) (.off)\n"
-        "Polygon File Format (PLY) (.ply)\n"
-        "LAS (Lidar) File Format (.las)\n"
-        "XYZ File Format (.xyz)\n"
-        "\n"
-        "The format is detected from the filename extension (letter case is not important). If the file contains normal vectors, the normal map is added to the point set. For PLY input, all point properties found in the header are added.\n"
-        "\n"
-        "Parameters\n"
-        "fname	name of the input file\n"
-        "ps	the point set\n"
-        "np	an optional sequence of Named Parameters among the ones listed below\n"
-        "\n"
-        "Optional Named Parameters\n"
-        "use_binary_mode (bool) = True\n"
-        "\n"
-        "Returns\n"
-        "True if the reading was successful, False otherwise."
-        );
-  m.def("write_point_set", [](const std::string& fname, Pt_set& ps, const py::dict& np = py::dict()) {
+template <typename Pnt, typename Vec, typename C>
+auto export_point_set_3_class(C& m, const std::string& name) {
+  using Pt_set_3 = CGAL::Point_set_3<Pnt, Vec>;
+  auto ptst = export_point_set_3<Pnt, Vec>(m, name);
+
+
+  return ptst;
+}
+
+template <typename Pnt, typename Vec, typename FT, typename C, typename Pt_st_c>
+void export_property_maps(C& m, Pt_st_c& ptst, const std::string& name) {
+  using Pt_set_3 = CGAL::Point_set_3<Pnt, Vec>;
+
+  define_property_map<Pt_set_3, Vec>(m, ptst, ("Point_set_3_" + name + "_vector").c_str());
+  define_property_map<Pt_set_3, CGAL::IO::Color>(m, ptst, ("Point_set_3_" + name + "_color").c_str());
+  define_property_map<Pt_set_3, FT>(m, ptst, ("Point_set_3_" + name + "_FT").c_str());
+  define_property_map<Pt_set_3, Pnt>(m, ptst, ("Point_set_3_" + name + "_point").c_str());
+  define_property_map<Pt_set_3, std::size_t>(m, ptst, ("Point_set_3_" + name + "_index").c_str());
+  define_range<typename Pt_set_3::Point_range>(m, ("Point_set_3_" + name + "_point_range").c_str());
+  define_range<typename Pt_set_3::Vector_range>(m, ("Point_set_3_" + name + "_vector_range").c_str());
+
+}
+
+
+void export_3d_point_set(py::module_& m) {
+  using Kernel_ = Kernel;
+  using Pt_set_3 = CGAL::Point_set_3<Kernel_::Point_3, Kernel_::Vector_3>;
+  using Pnt_2 = Kernel_::Point_2;
+  using Pnt_3 = Kernel_::Point_3;
+  using Vec_3 = Kernel_::Vector_3;
+  using Vec_2 = Kernel_::Vector_2;
+  using FT = Kernel_::FT;
+  using Point_set_3_index = CGAL::internal::Point_set_3_index<Pnt_3, Vec_3>;
+  using Point_push_map = Pt_set_3::Point_push_map;
+  using Point_map = Pt_set_3::template Property_map<Point_3>;
+  using Vector_map = Pt_set_3::template Property_map<Vector_3>;
+
+
+  auto ptst = export_point_set_3<Pnt_3, Vec_3>(m, "3");
+  // this idx has to be here because the compiler ignored it otherwise
+  auto ptst_idx = export_point_set_index<CGAL::internal::Point_set_3_index<Pnt_3, Vec_3>>(m, "3");
+
+  m.def("write_point_set", [](const std::string& fname, Pt_set_3& ps, const py::dict& np = py::dict()) {
     return CGAL::IO::write_point_set<Pnt_3, Vec_3>(fname, ps, internal::parse_named_parameters(np));
   },
         py::arg("fname"), py::arg("ps"), py::arg("np") = py::dict(),
@@ -429,38 +485,52 @@ void export_3d_point_set(py::module_& m) {
         "Returns True if the writing was successful, False otherwise."
         );
 
-  py::class_<Point_set_3_index> ptst_idx(m, "Point_set_3_index");
-  ptst_idx
-    .def(py::init<const Point_set_3_index&>())
-    .def(py::init_implicit<const std::size_t&>())
-    .def(py::init<>())
-    .def("__int__", [](Point_set_3_index& index) { return static_cast<std::size_t>(index); })
-    .def(py::self == py::self,
-         py::sig("def __eq__(self, arg: object, /) -> bool"))
-    .def(py::self != py::self,
-         py::sig("def __ne__(self, arg: object, /) -> bool"))
-    .def(py::self < py::self)
-    .def("next", [](Point_set_3_index& index) { return ++index; })
-    .def("prev", [](Point_set_3_index& index) { return --index; })
-    // operator with an integer
-    .def("__add__", [](Point_set_3_index& index, const int& value) { return index + value; },
-         py::is_operator())
-    .def("__sub__", [](Point_set_3_index& index, const int& value) { return index - value; },
-         py::is_operator())
-    ;
+  m.def("read_point_set", [](const std::string& fname, Pt_set_3& ps, const py::dict& np = py::dict()) {
+    return CGAL::IO::read_point_set<Pnt_3, Vec_3>(fname, ps, internal::parse_named_parameters(np));
+  },
+        py::arg("fname"), py::arg("ps"), py::arg("np") = py::dict(),
+        "reads the point set from an input file.\n"
+        "Supported file formats are the following:\n"
+        "\n"
+        "Object File Format (OFF) (.off)\n"
+        "Polygon File Format (PLY) (.ply)\n"
+        "LAS (Lidar) File Format (.las)\n"
+        "XYZ File Format (.xyz)\n"
+        "\n"
+        "The format is detected from the filename extension (letter case is not important). If the file contains normal vectors, the normal map is added to the point set. For PLY input, all point properties found in the header are added.\n"
+        "\n"
+        "Parameters\n"
+        "fname	name of the input file\n"
+        "ps	the point set\n"
+        "np	an optional sequence of Named Parameters among the ones listed below\n"
+        "\n"
+        "Optional Named Parameters\n"
+        "use_binary_mode (bool) = True\n"
+        "\n"
+        "Returns\n"
+        "True if the reading was successful, False otherwise."
+        );
 
-  add_insertion(ptst_idx, "__str__");
-  add_insertion(ptst_idx, "__repr__");
 
-  py::class_<Pt_set::iterator> ptst_it(m, "Point_set_3_iterator");
-  ptst_it.def(py::init<>())
-    .def("__add__", [](Pt_set::iterator& it, const int& value) { return it + value; },
-         py::is_operator())
-    .def("__sub__", [](Pt_set::iterator& it, const int& value) { return it - value; },
-         py::is_operator())
-    ;
 
-  define_push_property_map<Pt_set::Push_property_map<Point_map>>(m, "Point_push_map");
-  define_push_property_map<Pt_set::Push_property_map<Vector_map>>(m, "Vector_push_map");
+// template <typename Pnt, typename Vec, typename FT, typename C, typename Pt_st_c>
+// void export_property_maps(C& m, Pt_st_c& ptst, const std::string& name) {
+  export_property_maps<Pnt_3, Vec_3, FT>(ptst, ptst, "3");
+  using Point_map_3 = typename Pt_set_3::template Property_map<Point_3>;
+  using Vector_map_3 = typename Pt_set_3::template Property_map<Vector_3>;
+  define_push_property_map<Pt_set_3::template Push_property_map<Point_map_3>>(ptst, "Point_push_map_3");
+  define_push_property_map<Pt_set_3::template Push_property_map<Vector_map_3>>(ptst, "Vector_push_map_3");
+  export_point_set_iterator<Pnt_3, Vec_3>(ptst, "3");
+
+  auto ptst_2 = export_point_set_3_class<Pnt_2, Vec_2>(m, "2");
+  auto ptst_2_idx = export_point_set_index<CGAL::internal::Point_set_3_index<Pnt_2, Vec_2>>(m, "2");
+  export_property_maps<Pnt_2, Vec_2, FT>(ptst_2, ptst_2, "2");
+  using Point_map_2 = typename Pt_set_3::template Property_map<Point_2>;
+  using Vector_map_2 = typename Pt_set_3::template Property_map<Vector_2>;
+  auto ppm2 = define_push_property_map<Pt_set_3::template Push_property_map<Point_map_2>>(ptst_2, "Point_push_map_2");
+  auto vpm2 = define_push_property_map<Pt_set_3::template Push_property_map<Vector_map_2>>(ptst_2, "Vector_push_map_2");
+  export_point_set_iterator<Pnt_2, Vec_2>(ptst_2, "2");
+
+
 }
 

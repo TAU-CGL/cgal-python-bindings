@@ -5,9 +5,6 @@
 
 namespace py = nanobind;
 
-// typedef CGAL::Exact_predicates_inexact_constructions_kernel         K;
-// typedef CGAL::Triangulation_vertex_base_with_info_2<unsigned, K>    Vb;
-
 
 void export_2d_range_and_neighbor_search(py::module_& m) {
   using K = Kernel;
