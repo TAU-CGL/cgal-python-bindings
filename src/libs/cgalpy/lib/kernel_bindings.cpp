@@ -19,7 +19,7 @@
 #include "CGALPY/internal.hpp"
 #include "CGALPY/to_string.hpp"
 #include "CGALPY/config.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/kernel_type.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/Kernel/export_kernel.hpp"
 #include "CGALPY/add_attr.hpp"

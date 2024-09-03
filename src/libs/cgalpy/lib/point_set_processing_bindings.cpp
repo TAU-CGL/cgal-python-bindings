@@ -1,6 +1,3 @@
-#include <CGAL/Named_function_parameters.h>
-#include <iostream>
-
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/pair.h>
@@ -9,30 +6,181 @@
 
 #include <CGAL/bilateral_smooth_point_set.h>
 #include <CGAL/cluster_point_set.h>
+#include <CGAL/compute_average_spacing.h>
+#include <CGAL/edge_aware_upsample_point_set.h>
+#include <CGAL/estimate_scale.h>
+#include <CGAL/vcm_estimate_normals.h>
 #include <CGAL/Point_set_3.h>
+#include <CGAL/Named_function_parameters.h>
 
 #include "CGALPY/internal.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/kernel_type.hpp"
 
 namespace py = nanobind;
+
+template <typename PointRange, typename Point, typename Vector, typename C>
+void export_multiple_dimension_functions(C& c) {
+  using K = Kernel;
+
+  c.def("estimate_global_k_neighbor_scale", [](const PointRange& points, const py::kwargs& np = py::kwargs())
+        { return CGAL::estimate_global_k_neighbor_scale(points,
+                  internal::parse_named_parameters(np)
+                         .geom_traits(K())
+                          ); },
+        py::arg("points"), py::arg("np"),
+        "Estimates the global scale in a K nearest neighbors sense.\n"
+        "The computed scale corresponds to the smallest scale such that the K subsets of points have the appearance of a surface in 3D or the appearance of a curve in 2D (see Automatic Scale Estimation).\n"
+        "Parameters\n"
+        "• points:	input point range\n"
+        "• np:	an optional sequence of Named Parameters among the ones listed below\n"
+        "Note\n"
+        "• This function accepts both 2D and 3D points.\n\n"
+        "Returns\n"
+        "• The estimated scale in the K nearest neighbors sense.\n\n"
+        "Examples\n"
+        "• Point_set_processing_3/scale_estimation.py."
+        );
+
+  c.def("estimate_global_range_scale", [](PointRange& points, const py::kwargs& np = py::kwargs())
+        { CGAL::estimate_global_range_scale(points,
+                  internal::parse_named_parameters(np)
+                         .geom_traits(K())
+                          ); },
+        py::arg("points"), py::arg("np"),
+        "Estimates the global scale in a range sense.\n"
+        "The computed scale corresponds to the smallest scale such that the subsets of points inside the sphere range have the appearance of a surface in 3D or the appearance of a curve in 2D (see Automatic Scale Estimation).\n\n"
+        "Parameters\n"
+        "• points:	input point range\n"
+        "• np:	an optional sequence of Named Parameters among the ones listed below\n\n"
+        "Note\n"
+        "• This function accepts both 2D and 3D points.\n\n"
+        "Returns\n"
+        "• The estimated scale in the range sense. The return type FT is a number type. It is either deduced from the geom_traits Named Parameters if provided, or the geometric traits class deduced from the point property map of points.\n\n"
+        "Examples\n"
+        "• Point_set_processing_3/scale_estimation.py."
+        );
+
+
+}
+
+template <typename PointRange, typename Point, typename Vector, typename C>
+void export_functions_with_point_range(C& c) {
+  using K = Kernel;
+  using Tag = CGAL::Sequential_tag;
+
+  c.def("compute_vcm", [](const PointRange& points,
+                        double offset_radius,
+                        double convolution_radius,
+                        const py::kwargs& np = py::kwargs())
+      { std::vector<std::array<double, 6>> ccov;
+        return CGAL::compute_vcm(points, ccov, offset_radius, convolution_radius,
+                internal::parse_named_parameters(np)
+                         .geom_traits(K())
+                                      );
+      },
+      py::arg("points"), py::arg("offset_radius"), py::arg("convolution_radius"), py::arg("np"),
+      "Computes the Voronoi Covariance Measure (VCM) of a point cloud, a construction that can be used for normal estimation and sharp feature detection.\n"
+      "The VCM associates to each point the covariance matrix of its Voronoi cell intersected with the ball of radius offset_radius. In addition, if the second radius convolution_radius is positive, the covariance matrices are smoothed via a convolution process. More specifically, each covariance matrix is replaced by the average of the matrices of the points located at a distance at most convolution_radius. The choice for parameter offset_radius should refer to the geometry of the underlying surface while the choice for parameter convolution_radius should refer to the noise level in the point cloud. For example, if the point cloud is a uniform and noise-free sampling of a smooth surface, offset_radius should be set to the minimum local feature size of the surface, while convolution_radius can be set to zero.\n"
+      "The Voronoi covariance matrix of each vertex is stored in an array a of length 6 and is as follow:\n"
+      "⎡⎣⎢a[0]a[1]a[2]a[1]a[3]a[4]a[2]a[4]a[5]⎤⎦⎥\n\n"
+      "Parameters\n"
+      "• points: input point range\n"
+      "• offset_radius: offset_radius.\n"
+      "• convolution_radius: convolution_radius.\n\n"
+      "Returns\n"
+      "average spacing (scalar). The return type FT is a number type."
+      "Examples\n"
+      "Point_set_processing_3/scale_estimation_example.py."
+      );
+
+  c.def("edge_aware_upsample_point_set", [](const PointRange& points, const py::kwargs& np = py::kwargs())
+        { std::vector<std::pair<Point, Vector>> output;
+          CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output),
+                  internal::parse_named_parameters(np)
+                         .geom_traits(K())
+                                      );
+          return output;
+        },
+        py::arg("points"), py::arg("np"),
+        "This method progressively upsamples the point set while approaching the edge singularities (detected by normal variation), which generates a denser point set from an input point set.\n"
+        "This has applications in point-based rendering, hole filling, and sparse surface reconstruction. Normals of points are required as input. For more details, please refer to [5].\n\n"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n"
+        "Optional Named Parameters\n"
+        "• sharpness_angle\n"
+        "• edge_sensitivity\n"
+        "• number_of_output_points\n"
+        "• neighbor_radius"
+        );
+
+}
+
+
+template <typename Points, typename C>
+void export_functions_with_point_range(C& c) {
+  using K = Kernel;
+  c.def("estimate_local_k_neighbor_scales", [](const Points& points,
+                                               const Points& queries,
+                                               const py::kwargs& np = py::kwargs())
+        { std::vector<std::size_t> output;
+          return CGAL::estimate_local_k_neighbor_scales(points, queries, std::back_inserter(output),
+                  internal::parse_named_parameters(np)
+                         .geom_traits(K())
+                          );
+        },
+        py::arg("points"), py::arg("queries"), py::arg("np"),
+        "Estimates the local scale in a K nearest neighbors sense on a set of user-defined query points.\n"
+        "The computed scales correspond to the smallest scales such that the K subsets of points have the appearance of a surface in 3D or the appearance of a curve in 2D (see Automatic Scale Estimation).\n\n"
+        "Parameters\n\n"
+        "• points: input point range\n"
+        "• queries:	range of locations where scale must be estimated\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n\n"
+        "Note\n"
+        "• This function accepts both 2D and 3D points, but sample points and query must have the same dimension.\n\n"
+        "Returns\n"
+        "• The estimated scales in the K nearest neighbors sense. The return type is a vector of FTs. It is either deduced from the geom_traits Named Parameters if provided, or the geometric traits class deduced from the point property map of points.\n\n"
+        "Examples\n"
+        "• Point_set_processing_3/scale_estimation_2d_example.py."
+        );
+}
+
 
 void export_point_set_processing(py::module_& m) {
   using Tag = CGAL::Sequential_tag;
   using K = Kernel;
-  using Point = typename K::Point_3;
-  using Vector = typename K::Vector_3;
-  using PointVectorPair = std::pair<Point, Vector>;
-  using PointRange = std::vector<std::pair<Point, Vector>>;
-  using PointSet = CGAL::Point_set_3<Point>;
-  using ClusterMap = PointSet::Property_map<int>;
+  using Point_2 = typename K::Point_2;
+  using Point_3 = typename K::Point_3;
+  using Vector_2 = typename K::Vector_2;
+  using Vector_3 = typename K::Vector_3;
+  using PointVector_2 = std::vector<Point_2>;
+  using PointVector_3 = std::vector<Point_3>;
+  using PointVectorPair_2 = std::pair<Point_2, Vector_2>;
+  using PointVectorPair_3 = std::pair<Point_3, Vector_3>;
+  using PointRange_2 = std::vector<std::pair<Point_2, Vector_2>>;
+  using PointRange_3 = std::vector<std::pair<Point_3, Vector_3>>;
+  using PointSet_2 = CGAL::Point_set_3<Point_2>;
+  using PointSet_3 = CGAL::Point_set_3<Point_3>;
+  using ClusterMap_2 = PointSet_2::Property_map<int>;
+  using ClusterMap_3 = PointSet_3::Property_map<int>;
 
+  export_functions_with_point_range<PointVector_3, Point_3, Vector_3>(m);
+  export_functions_with_point_range<PointSet_3, Point_3, Vector_3>(m);
+
+
+  // export_multiple_dimension_functions<PointVector_2, Point_2, Vector_2>(m);
+  // export_multiple_dimension_functions<PointSet_2, Point_2, Vector_2>(m);
+  export_multiple_dimension_functions<PointVector_3, Point_3, Vector_3>(m);
+  export_multiple_dimension_functions<PointSet_3, Point_3, Vector_3>(m);
+
+  export_functions_with_point_range<PointVector_3>(m);
 
   // Algorithms
-  m.def("bilateral_smooth_point_set", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs())
+  m.def("bilateral_smooth_point_set", [](PointRange_3& points, unsigned int k, const py::kwargs& np = py::kwargs())
         { return CGAL::bilateral_smooth_point_set<Tag>(points, k,
                   internal::parse_named_parameters(np)
-                           .point_map(CGAL::First_of_pair_property_map<PointVectorPair>())
-                           .normal_map(CGAL::Second_of_pair_property_map<PointVectorPair>())
+                           .point_map(CGAL::First_of_pair_property_map<PointVectorPair_3>())
+                           .normal_map(CGAL::Second_of_pair_property_map<PointVectorPair_3>())
                            .geom_traits(K())); },
         py::arg("points"), py::arg("k"), py::arg("np"),
         "This function smooths an input point set by iteratively projecting each point onto the implicit surface patch fitted over its nearest neighbors. \n"
@@ -48,7 +196,7 @@ void export_point_set_processing(py::module_& m) {
         "• neighbor_radius\n"
         "• sharpness_angle\n"
         );
-  m.def("cluster_point_set", [](PointSet& points, ClusterMap& cluster_map,
+  m.def("cluster_point_set", [](PointSet_3& points, ClusterMap_3& cluster_map,
                                 const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                 const py::kwargs& np = py::kwargs()) {
         std::vector<std::pair<std::size_t, std::size_t>> adj;
@@ -61,21 +209,50 @@ void export_point_set_processing(py::module_& m) {
                          );
         return std::make_tuple(res, adj);
         }
-        // ,
-        // py::arg("points"), py::arg("cluster_map"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
-        // "Identifies connected components on a nearest neighbor graph built using a query sphere of fixed radius centered on each point.\n\n"
-        // "Parameters\n"
-        // "• points: input point range\n"
-        // "• cluster_map: maps each point to the index of the cluster it belongs to.\n"
-        // "• np: optional sequence of Named Parameters among the ones listed below.\n"
-        // "Optional Named Parameters\n"
-        // "• neighbor_radius\n"
-        // "• attraction_factor\n\n"
-        // "Returns\n"
-        // "A tuple of the number of clusters identified and adjacencies.\n\n"
-        // "Examples\n"
-        // "Point_set_processing_3/clustering_example.py."
+        ,
+        py::arg("points"), py::arg("cluster_map"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+        "Identifies connected components on a nearest neighbor graph built using a query sphere of fixed radius centered on each point.\n\n"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• cluster_map: maps each point to the index of the cluster it belongs to.\n"
+        "• callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+        "• np: optional sequence of Named Parameters among the ones listed below.\n"
+        "Optional Named Parameters\n"
+        "• neighbor_radius\n"
+        "• attraction_factor\n\n"
+        "Returns\n"
+        "A tuple of the number of clusters identified and adjacencies.\n\n"
+        "Examples\n"
+        "Point_set_processing_3/clustering_example.py."
         );
+
+  m.def("compute_average_spacing", [](const PointSet_3& points, const unsigned int k,
+                                      const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                                      const py::kwargs& np = py::kwargs())
+        { return CGAL::compute_average_spacing<Tag>(points, k,
+                  internal::parse_named_parameters(np)
+                         .callback(callback)
+                         .geom_traits(K())
+                          ); },
+        py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+        "Computes average spacing from k nearest neighbors.\n"
+        "Precondition\n"
+        "• k >= 2.\n\n"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• k: number of neighbors.\n"
+        "• callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n"
+        "Optional Named Parameters\n"
+        "• callback\n"
+        "• geom_traits\n\n"
+        "Returns\n"
+        "average spacing (scalar). The return type FT is a number type."
+        );
+
+  // TODO: compute_registration_transformation() needs OpenGR
+  // TODO: compute_registration_transformation() needs PointMatcher
+
 
 }
 // Function Documentation

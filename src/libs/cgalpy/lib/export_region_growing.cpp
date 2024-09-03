@@ -5,7 +5,7 @@
 #include <CGAL/Shape_detection/Region_growing.h>
 
 #include "CGALPY/internal.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/kernel_type.hpp"
 
 namespace py = nanobind;
 namespace SD = CGAL::Shape_detection;
@@ -13,6 +13,7 @@ namespace PS = SD::Point_set;
 
 void export_region_growing(py::module_& m) {
   using Kernel_ = Kernel;
+  using Point_3 = Kernel_::Point_3;
   using Input_range = CGAL::Point_set_3<Point_3>;
   using Point_set = Input_range;
   using Point_map   = typename Input_range::Point_map;

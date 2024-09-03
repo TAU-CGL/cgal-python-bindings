@@ -1,7 +1,7 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/Triangulation_2.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/kernel_type.hpp"
 
 namespace py = nanobind;
 

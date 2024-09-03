@@ -12,7 +12,7 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/internal.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/kernel_type.hpp"
 
 namespace py = nanobind;
 
@@ -118,6 +118,8 @@ template <typename Pnt, typename Vec, typename C>
 auto export_point_set_3(C& c, const std::string& name) {
   using Point_set_3_index = CGAL::internal::Point_set_3_index<Pnt, Vec>;
   using Pt_set = CGAL::Point_set_3<Pnt, Vec>;
+  using Vector_3 = Kernel::Vector_3;
+  using Point_3 = Kernel::Point_3;
   py::class_<Pt_set> ptst(c, ("Point_set_3_" + name).c_str(),
     "A collection of points with dynamically associated properties.\n"
     "An instance of this class stores a set of indices of type Index, each representing a point. Properties can be associated to each point and can be retrieved using the index of the point. There are two particular properties that are hard coded by this class: the coordinates of the points and the normal vectors.\n"
@@ -431,13 +433,14 @@ template <typename Pnt, typename Vec, typename FT, typename C, typename Pt_st_c>
 void export_property_maps(C& m, Pt_st_c& ptst, const std::string& name) {
   using Pt_set_3 = CGAL::Point_set_3<Pnt, Vec>;
 
-  define_property_map<Pt_set_3, Vec>(m, ptst, ("Point_set_3_" + name + "_vector").c_str());
-  define_property_map<Pt_set_3, CGAL::IO::Color>(m, ptst, ("Point_set_3_" + name + "_color").c_str());
+  define_property_map<Pt_set_3, int>(m, ptst, ("Point_set_3_" + name + "_int").c_str());
+  define_property_map<Pt_set_3, Vec>(m, ptst, ("Point_set_3_" + name + "_Vector").c_str());
+  define_property_map<Pt_set_3, CGAL::IO::Color>(m, ptst, ("Point_set_3_" + name + "_Color").c_str());
   define_property_map<Pt_set_3, FT>(m, ptst, ("Point_set_3_" + name + "_FT").c_str());
-  define_property_map<Pt_set_3, Pnt>(m, ptst, ("Point_set_3_" + name + "_point").c_str());
-  define_property_map<Pt_set_3, std::size_t>(m, ptst, ("Point_set_3_" + name + "_index").c_str());
-  define_range<typename Pt_set_3::Point_range>(m, ("Point_set_3_" + name + "_point_range").c_str());
-  define_range<typename Pt_set_3::Vector_range>(m, ("Point_set_3_" + name + "_vector_range").c_str());
+  define_property_map<Pt_set_3, Pnt>(m, ptst, ("Point_set_3_" + name + "_Point").c_str());
+  define_property_map<Pt_set_3, std::size_t>(m, ptst, ("Point_set_3_" + name + "_Index").c_str());
+  define_range<typename Pt_set_3::Point_range>(m, ("Point_set_3_" + name + "_Point_range").c_str());
+  define_range<typename Pt_set_3::Vector_range>(m, ("Point_set_3_" + name + "_Vector_range").c_str());
 
 }
 
@@ -452,6 +455,8 @@ void export_3d_point_set(py::module_& m) {
   using FT = Kernel_::FT;
   using Point_set_3_index = CGAL::internal::Point_set_3_index<Pnt_3, Vec_3>;
   using Point_push_map = Pt_set_3::Point_push_map;
+  using Point_3 = Kernel_::Point_3;
+  using Vector_3 = Kernel_::Vector_3;
   using Point_map = Pt_set_3::template Property_map<Point_3>;
   using Vector_map = Pt_set_3::template Property_map<Vector_3>;
 
@@ -523,6 +528,8 @@ void export_3d_point_set(py::module_& m) {
   auto ptst_2 = export_point_set_3_class<Pnt_2, Vec_2>(m, "2");
   auto ptst_2_idx = export_point_set_index<CGAL::internal::Point_set_3_index<Pnt_2, Vec_2>>(m, "2");
   export_property_maps<Pnt_2, Vec_2, FT>(ptst_2, ptst_2, "2");
+  using Point_2 = Kernel_::Point_2;
+  using Vector_2 = Kernel_::Vector_2;
   using Point_map_2 = typename Pt_set_3::template Property_map<Point_2>;
   using Vector_map_2 = typename Pt_set_3::template Property_map<Vector_2>;
   auto ppm2 = define_push_property_map<Pt_set_3::template Push_property_map<Point_map_2>>(ptst_2, "Point_push_map_2");

@@ -7,7 +7,7 @@
 #include <CGAL/Point_with_normal_3.h>
 #include <CGAL/Shape_detection/Efficient_RANSAC.h>
 
-#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/kernel_type.hpp"
 
 namespace py = nanobind;
 namespace SD = CGAL::Shape_detection;
@@ -144,7 +144,7 @@ void export_efficient_ransac(py::module_& m) {
     "The plane is represented by the normal vector and the distance to the origin.\n"
     "Examples\n"
     "Shape_detection/efficient_RANSAC_basic.py, Shape_detection/efficient_RANSAC_with_callback.py, Shape_detection/efficient_RANSAC_with_parameters.py, and Shape_detection/efficient_RANSAC_with_point_access.py.")
-    .def("get_plane", &Plane::operator Plane_3,
+    .def("get_plane", &Plane::operator Kernel::Plane_3,
          "Conversion operator to Plane_3 type.")
     .def("get_normal", &Plane::plane_normal,
          "Normal vector of the plane.")
@@ -161,7 +161,7 @@ void export_efficient_ransac(py::module_& m) {
     "The sphere is represented by its center and the radius.\n"
     "Examples\n"
     "Shape_detection/efficient_RANSAC_with_parameters.py.")
-    .def("get_sphere", &Sphere::operator Sphere_3,
+    .def("get_sphere", &Sphere::operator Kernel::Sphere_3,
          "Conversion operator to Sphere_3 type.")
     .def("center", &Sphere::center,
          "Access to the center.")
