@@ -16,7 +16,8 @@
 #include <nanobind/operators.h>
 
 #include "CGALPY/config.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/kernel_config.hpp"
+#include "CGALPY/kernel_type.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
@@ -45,8 +46,8 @@ void export_point_2(C& c) {
            py::sig("def __init__(self, x: RT | float, y: RT | float, w: RT | float, /) -> None"));
   }
   else {
-    c.def(py::init<const FT&, const FT&>())
-      .def(py::init<const RT&, const RT&, const RT&>());
+    c.def(py::init<const Kernel::FT&, const Kernel::FT&>())
+      .def(py::init<const Kernel::RT&, const Kernel::RT&, const Kernel::RT&>());
   }
 
   c.def(py::init<>())

@@ -14,7 +14,8 @@
 #include <nanobind/operators.h>
 
 #include "CGALPY/config.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/kernel_config.hpp"
+#include "CGALPY/kernel_type.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
 

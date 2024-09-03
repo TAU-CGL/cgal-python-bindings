@@ -11,7 +11,7 @@
 
 #include "CGALPY/helpers.hpp"
 #include "CGALPY/internal.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/kernel_type.hpp"
 
 namespace py = nanobind;
 
@@ -283,7 +283,7 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
         cgal_parameters = cgal_parameters.regularize_axis_symmetry(py::cast<bool>(item.second));
         break;
       case Hash("symmetry_direction"):
-        cgal_parameters = cgal_parameters.symmetry_direction(py::cast<Vector_3>(item.second));
+        cgal_parameters = cgal_parameters.symmetry_direction(py::cast<Kernel::Vector_3>(item.second));
         break;
       // case Hash("mesh_edge_size"): // can be a different type
       //   cgal_parameters = cgal_parameters.mesh_edge_size(py::cast<Ft>(item.second));
@@ -298,7 +298,7 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       //   cgal_parameters = cgal_parameters.mesh_facet_distance(py::cast<Ft>(item.second));
       //   break;
       case Hash("polyline_constraints"):
-        cgal_parameters = cgal_parameters.polyline_constraints(pmp::list2vec<Point_3>(py::cast<py::list>(item.second)));
+        cgal_parameters = cgal_parameters.polyline_constraints(pmp::list2vec<Kernel::Point_3>(py::cast<py::list>(item.second)));
         break;
       case Hash("mesh_facet_topology"):
         cgal_parameters = cgal_parameters.mesh_facet_topology(py::cast<CGAL::Mesh_facet_topology>(item.second));
