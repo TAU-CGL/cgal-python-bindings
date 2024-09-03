@@ -105,6 +105,7 @@ option(CGALPY_ENVELOPE_3_BINDINGS "Compile bindings for 3D Envelopes")
 option(CGALPY_POLYHEDRON_3_BINDINGS "Compile bindings for 3D polyhedron")
 option(CGALPY_POLYGON_2_BINDINGS "Compile bindings for 2D polygon")
 option(CGALPY_POLYGON_MESH_PROCESSING_BINDINGS "Compile bindings for polygon mesh processing")
+option(CGALPY_POINT_SET_PROCESSING_PACKAGE_BINDINGS "Compile bindings for point set processing")
 option(CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS "Compile bindings for surface mesh segmentation")
 option(CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS "Compile bindings for surface mesh simplification")
 option(CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS "Compile bindings for surface mesh skeletonization")
@@ -124,6 +125,7 @@ option(CGALPY_VISIBILITY_2_BINDINGS "Compile bindings for 2D Visibility")
 
 include(polygonal_mesh_options) # needs to be before packages using polygonal_mesh
 include(kinetic_surface_reconstruction_options) # needs to be before 3D Point Set
+include(point_set_processing_options) # needs to be before 3D Point Set
 include(three_d_point_set_options)
 include(two_d_range_and_neighbor_search_options)
 include(alpha_shape_2_options)

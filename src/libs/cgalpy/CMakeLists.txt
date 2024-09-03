@@ -308,6 +308,10 @@ if (CGALPY_SHAPE_DETECTION_BINDINGS)
     list(APPEND CGALPY_MODULES Sd)
     set(CGALPY_Sd_FILTERS [=[{}]=])
 endif ()
+# Point Set Processing
+if (CGALPY_POINT_SET_PROCESSING_PACKAGE_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/point_set_processing_bindings.cpp)
+endif ()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)

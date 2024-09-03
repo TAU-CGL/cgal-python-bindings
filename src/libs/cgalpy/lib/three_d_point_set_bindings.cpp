@@ -513,8 +513,6 @@ void export_3d_point_set(py::module_& m) {
 
 
 
-// template <typename Pnt, typename Vec, typename FT, typename C, typename Pt_st_c>
-// void export_property_maps(C& m, Pt_st_c& ptst, const std::string& name) {
   export_property_maps<Pnt_3, Vec_3, FT>(ptst, ptst, "3");
   using Point_map_3 = typename Pt_set_3::template Property_map<Point_3>;
   using Vector_map_3 = typename Pt_set_3::template Property_map<Vector_3>;

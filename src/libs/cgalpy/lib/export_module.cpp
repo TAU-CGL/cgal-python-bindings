@@ -37,6 +37,7 @@ void export_minkowski_sum_2(py::module_&);
 void export_object(py::module_&);
 void export_orientation_functions(py::module_&);
 void export_point_location(py::module_&);
+void export_point_set_processing(py::module_&);
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
 void export_polygon_mesh_processing(py::module_&);
@@ -142,6 +143,10 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
   export_polygon_set_2(bso2_m);
 #endif
+#endif
+
+#ifdef CGALPY_POINT_SET_PROCESSING_PACKAGE_BINDINGS
+  export_point_set_processing(m);
 #endif
 
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS

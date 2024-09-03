@@ -126,6 +126,7 @@ if (NOT SKBUILD)
             CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
 endif ()
 select_kinetic_surface_reconstruction() # needs to be before 3D Point Set
+select_point_set_processing() # needs to be before 3D Point Set
 select_three_d_point_set()
 select_two_d_range_and_neighbor_search()
 select_alpha_shape_2()
