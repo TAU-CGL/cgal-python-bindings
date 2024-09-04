@@ -33,6 +33,13 @@
 
 namespace py = nanobind;
 
+struct dummy_callback {
+  dummy_callback(const std::function<bool(double)>& callback) : callback(callback) {}
+  bool operator()(double d) const { return callback(d); }
+private:
+  std::function<bool(double)> callback;
+};
+
 template <typename PointRange, typename Point, typename Vector, typename C>
 void export_multiple_dimension_functions(C& c) {
   using K = Kernel;
@@ -129,11 +136,17 @@ void export_functions_with_point_range(C& c) {
         "• neighbor_radius"
         );
 
-  c.def("grid_simplify_point_set", [](PointRange& points, double epsilon, const py::kwargs& np = py::kwargs()) {
-    auto el = *CGAL::grid_simplify_point_set(points, epsilon, internal::parse_named_parameters(np));
+  c.def("grid_simplify_point_set", [](PointRange& points, double epsilon,
+                                      const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                                      const py::kwargs& np = py::kwargs()) {
+    auto cb_class = dummy_callback(callback);
+    unsigned int min_points_per_cell = np.contains("min_points_per_cell") ? py::cast<unsigned int>(np["min_points_per_cell"]) : 1;
+    auto el = *CGAL::grid_simplify_point_set(points, epsilon, CGAL::parameters::min_points_per_cell(min_points_per_cell)
+                                             .callback(cb_class)
+                                             );
     return std::make_pair(points, el);
   },
-      py::arg("points"), py::arg("epsilon"), py::arg("np"),
+      py::arg("points"), py::arg("epsilon"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
       "merges points which belong to the same cell of a grid of cell size = epsilon.\n"
       "This method modifies the order of input points so as to pack all remaining points first, and returns the first point to remove (see erase-remove idiom). For this reason it should not be called on sorted containers.\n\n"
         "Precondition\n"
@@ -153,8 +166,12 @@ void export_functions_with_point_range(C& c) {
   c.def("hierarchy_simplify_point_set", [](PointRange& points,
                                            const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                            const py::kwargs& np = py::kwargs()) {
-        auto el = *CGAL::hierarchy_simplify_point_set(points, internal::parse_named_parameters(np)
-                                                        .callback(callback)
+        auto cb_class = dummy_callback(callback);
+        unsigned int size = np.contains("size") ? py::cast<unsigned int>(np["size"]) : 10;
+        double var_max = np.contains("maximum_variation") ? py::cast<double>(np["maximum_variation"]) : 1/3.0f;
+        auto el = *CGAL::hierarchy_simplify_point_set(points, CGAL::parameters::size(size)
+                                                        .maximum_variation(var_max)
+                                                        .callback(cb_class)
                                                         );
         return std::make_pair(points, el);
   },
@@ -202,8 +219,14 @@ void export_functions_with_point_range(C& c) {
   c.def("jet_smooth_point_set", [](PointRange& points, unsigned int k,
                                    const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                    const py::kwargs& np = py::kwargs()) {
-        CGAL::jet_smooth_point_set<Tag>(points, k, internal::parse_named_parameters(np)
-                                        .callback(callback)
+        auto cb_class = dummy_callback(callback);
+        double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
+        double df = np.contains("degree_fitting") ? py::cast<double>(np["degree_fitting"]) : 2;
+        double dm = np.contains("degree_monge") ? py::cast<double>(np["degree_monge"]) : 2;
+        CGAL::jet_smooth_point_set<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
+                                        .degree_fitting(df)
+                                        .degree_monge(dm)
+                                        .callback(cb_class)
                                         );
         return points;
   },
@@ -256,8 +279,10 @@ void export_functions_with_point_range(C& c) {
         );
 
   c.def("pca_estimate_normals", [](PointRange& points, unsigned int k, const std::function<bool(double)>& callback = std::function<bool(double)>(), const py::kwargs& np = py::kwargs()) {
-        CGAL::pca_estimate_normals<Tag>(points, k, internal::parse_named_parameters(np)
-                                        .callback(callback)
+        auto cb_class = dummy_callback(callback);
+        double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
+        CGAL::pca_estimate_normals<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
+                                        .callback(cb_class)
                                         );
         return points;
   },
@@ -296,9 +321,14 @@ void export_functions_with_point_range(C& c) {
   c.def("remove_outliers", [](PointRange& points, unsigned int k,
                               const std::function<bool(double)>& callback = std::function<bool(double)>(),
                               const py::kwargs& np = py::kwargs()) {
-        auto it = *CGAL::remove_outliers<Tag>(points, k, internal::parse_named_parameters(np)
-                                              .callback(callback)
-                                              );
+        auto cb_class = dummy_callback(callback);
+        double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
+        double tp = np.contains("threshold_percent") ? py::cast<double>(np["threshold_percent"]) : 10;
+        double td = np.contains("threshold_distance") ? py::cast<double>(np["threshold_distance"]) : 0;
+        auto it = *CGAL::remove_outliers<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
+                                              .threshold_percent(tp)
+                                              .threshold_distance(td)
+                                              .callback(cb_class));
         return std::make_pair(points, it);
   },
       py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
@@ -401,11 +431,30 @@ void export_functions_with_point_range(C& c) {
                                                      const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                                      const py::kwargs& np = py::kwargs()) {
         std::vector<Kernel::Point_3> output;
-        CGAL::wlop_simplify_and_regularize_point_set<Tag>(points, std::back_inserter(output),
-                                                     internal::parse_named_parameters(np)
-                                                         .callback(callback)
-                                                         .geom_traits(K())
-                                                         );
+        auto cb_class = dummy_callback(callback);
+        double sp = np.contains("select_percentage") ? py::cast<double>(np["select_percentage"]) : 5;
+        unsigned int noi = np.contains("number_of_iterations") ? py::cast<unsigned int>(np["number_of_iterations"]) : 35;
+        bool rus = np.contains("require_uniform_sampling") ? py::cast<bool>(np["require_uniform_sampling"]) : false;
+        if (np.contains("neighbor_radius")) {
+          auto nr = py::cast<double>(np["neighbor_radius"]);
+          CGAL::wlop_simplify_and_regularize_point_set<Tag>(points, std::back_inserter(output),
+                                                            CGAL::parameters::select_percentage(sp)
+                                                            .number_of_iterations(noi)
+                                                            .require_uniform_sampling(rus)
+                                                            .neighbor_radius(nr)
+                                                            .callback(cb_class)
+                                                            .geom_traits(K())
+                                                            );
+        }
+        else {
+          CGAL::wlop_simplify_and_regularize_point_set<Tag>(points, std::back_inserter(output),
+                                                            CGAL::parameters::select_percentage(sp)
+                                                            .number_of_iterations(noi)
+                                                            .require_uniform_sampling(rus)
+                                                            .callback(cb_class)
+                                                            .geom_traits(K())
+                                                            );
+        }
         return std::make_pair(output, points);
   },
       py::arg("points"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
@@ -530,15 +579,30 @@ void export_point_set_processing(py::module_& m) {
   m.def("cluster_point_set", [](PointSet_3& points, ClusterMap_3& cluster_map,
                                 const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                 const py::kwargs& np = py::kwargs()) {
+        auto cb_class = dummy_callback(callback);
+        double af = np.contains("attraction_factor") ? py::cast<double>(np["attraction_factor"]) : 0;
         std::vector<std::pair<std::size_t, std::size_t>> adj;
-        auto res = CGAL::cluster_point_set(points, cluster_map
-                                           ,
-                internal::parse_named_parameters(np)
-                         .callback(callback)
-                         .adjacencies(std::back_inserter(adj))
-                         // .geom_traits(K())
-                         );
-        return std::make_pair(res, adj);
+        std::size_t res;
+        if (np.contains("neighbor_radius")) {
+          double nr = py::cast<double>(np["neighbor_radius"]);
+          res = CGAL::cluster_point_set(points, cluster_map
+                                             ,
+                  internal::parse_named_parameters(np)
+                           .callback(cb_class)
+                           .attraction_factor(af)
+                           .adjacencies(std::back_inserter(adj))
+                           .neighbor_radius(nr)
+                           );
+        }
+        else {
+          res = CGAL::cluster_point_set(points, cluster_map
+                                             ,
+                  internal::parse_named_parameters(np)
+                           .callback(cb_class)
+                           .adjacencies(std::back_inserter(adj))
+                           );
+        }
+          return std::make_pair(res, adj);
         }
         ,
         py::arg("points"), py::arg("cluster_map"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
@@ -560,9 +624,10 @@ void export_point_set_processing(py::module_& m) {
   m.def("compute_average_spacing", [](const PointSet_3& points, const unsigned int k,
                                       const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                       const py::kwargs& np = py::kwargs())
-        { return CGAL::compute_average_spacing<Tag>(points, k,
+        { auto cb_class = dummy_callback(callback);
+        return CGAL::compute_average_spacing<Tag>(points, k,
                   internal::parse_named_parameters(np)
-                         .callback(callback)
+                         .callback(cb_class)
                          .geom_traits(K())
                           ); },
         py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
@@ -581,11 +646,10 @@ void export_point_set_processing(py::module_& m) {
   m.def("compute_average_spacing", [](const PointVector_3& points, const unsigned int k,
                                       const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                       const py::kwargs& np = py::kwargs())
-        { return CGAL::compute_average_spacing<Tag>(points, k,
-                  internal::parse_named_parameters(np)
-                         .callback(callback)
-                         .geom_traits(K())
-                          ); },
+        { auto cb_class = dummy_callback(callback);
+          return CGAL::compute_average_spacing<Tag>(points, k,
+                        CGAL::parameters::callback(cb_class));
+        },
         py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
         "Computes average spacing from k nearest neighbors.\n"
         "Precondition\n"

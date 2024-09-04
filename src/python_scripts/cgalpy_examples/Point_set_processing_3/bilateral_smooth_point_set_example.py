@@ -15,6 +15,7 @@ CGALPY = importlib.import_module(lib)
 input_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/fin90_with_PCA_normals.xyz")
 i += 1
 output_filename = sys.argv[i] if len(sys.argv) > i else "data/fin90_with_PCA_normals_bilateral_smoothed.xyz"
+i += 1
 
 # Reads a point set file in points[] * with normals *.
 result, points = CGALPY.read_points_with_normals(input_filename)

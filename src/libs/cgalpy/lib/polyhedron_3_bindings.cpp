@@ -464,11 +464,6 @@ void export_polyhedron_3(py::module_& m) {
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  if (! add_attr<Pnt>(m, "Point_3")) {
-    py::class_<Pnt> pnt_c(m, "Point_3");
-    export_point_3<Kernel>(pnt_c);
-  }
-
   export_vertex(m);
   export_vertex_handle(m);
   export_halfedge(m);
