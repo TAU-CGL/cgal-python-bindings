@@ -26,7 +26,7 @@ auto define_property_map(C& c, Point_set_nb& ptst, const std::string& name) {
     .def("data", &Property_map::data)
     .def("transfer", [](Property_map& pm, const Property_map& other) { pm.transfer(other); },
          py::arg("other"))
-    .def("transfer", [](Property_map& pm, const Property_map& other, std::size_t from, std::size_t to) { pm.transfer(other, from, to); },
+    .def("transfer_from_to", [](Property_map& pm, const Property_map& other, std::size_t from, std::size_t to) { pm.transfer(other, from, to); },
          py::arg("other"), py::arg("from"), py::arg("to"))
     .def("__iter__", [](Property_map& pm) { return py::make_iterator(py::type<typename Property_map::iterator>(), "Iterator", pm.begin(), pm.end()); },
          py::keep_alive<0, 1>())

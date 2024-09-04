@@ -303,6 +303,56 @@ Named_params parse_named_parameters(const py::dict& params, Named_params cgal_pa
       case Hash("mesh_facet_topology"):
         cgal_parameters = cgal_parameters.mesh_facet_topology(py::cast<CGAL::Mesh_facet_topology>(item.second));
         break;
+      case Hash("sharpness_angle"):
+        cgal_parameters = cgal_parameters.sharpness_angle(py::cast<double>(item.second));
+        break;
+      case Hash("neighbor_radius"):
+        cgal_parameters = cgal_parameters.neighbor_radius(py::cast<double>(item.second));
+        break;
+      case Hash("attraction_factor"):
+        cgal_parameters = cgal_parameters.attraction_factor(py::cast<double>(item.second));
+        break;
+      case Hash("edge_sensitivity"):
+        cgal_parameters = cgal_parameters.edge_sensitivity(py::cast<double>(item.second));
+        break;
+      case Hash("min_points_per_cell"):
+        cgal_parameters = cgal_parameters.min_points_per_cell(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("maximum_variation"):
+        cgal_parameters = cgal_parameters.maximum_variation(py::cast<double>(item.second));
+        break;
+      case Hash("degree_fitting"):
+        cgal_parameters = cgal_parameters.degree_fitting(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("degree_monge"):
+        cgal_parameters = cgal_parameters.degree_monge(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("number_of_samples"):
+        cgal_parameters = cgal_parameters.number_of_samples(py::cast<unsigned int>(item.second));
+        break;
+      case Hash("maximum_normal_deviation"):
+        cgal_parameters = cgal_parameters.maximum_normal_deviation(py::cast<double>(item.second));
+        break;
+      case Hash("accuracy"):
+        cgal_parameters = cgal_parameters.accuracy(py::cast<double>(item.second));
+        break;
+      case Hash("overlap"):
+        cgal_parameters = cgal_parameters.overlap(py::cast<double>(item.second));
+        break;
+      case Hash("maximum_running_time"):
+        cgal_parameters = cgal_parameters.maximum_running_time(py::cast<double>(item.second));
+        break;
+      case Hash("threshold_percent"):
+        cgal_parameters = cgal_parameters.threshold_percent(py::cast<double>(item.second));
+        break;
+      case Hash("select_percentage"):
+        cgal_parameters = cgal_parameters.select_percentage(py::cast<double>(item.second));
+        break;
+      case Hash("require_uniform_sampling"):
+        cgal_parameters = cgal_parameters.require_uniform_sampling(py::cast<bool>(item.second));
+        break;
+
+
 
         
     }

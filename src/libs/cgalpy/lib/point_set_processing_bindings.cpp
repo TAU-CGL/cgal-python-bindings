@@ -3,6 +3,7 @@
 #include <nanobind/stl/pair.h>
 #include <nanobind/stl/tuple.h>
 #include <nanobind/stl/function.h>
+#include <nanobind/stl/array.h>
 
 #include <CGAL/bilateral_smooth_point_set.h>
 #include <CGAL/cluster_point_set.h>
@@ -102,9 +103,9 @@ void export_functions_with_point_range(C& c) {
       "• offset_radius: offset_radius.\n"
       "• convolution_radius: convolution_radius.\n\n"
       "Returns\n"
-      "average spacing (scalar). The return type FT is a number type."
+      "• average spacing (scalar). The return type FT is a number type.\n\n"
       "Examples\n"
-      "Point_set_processing_3/scale_estimation_example.py."
+      "• Point_set_processing_3/scale_estimation_example.py."
       );
 
   c.def("edge_aware_upsample_point_set", [](const PointRange& points, const py::kwargs& np = py::kwargs())
@@ -573,9 +574,27 @@ void export_point_set_processing(py::module_& m) {
         "• k: number of neighbors.\n"
         "• callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
         "• np: an optional sequence of Named Parameters among the ones listed below\n"
-        "Optional Named Parameters\n"
-        "• callback\n"
-        "• geom_traits\n\n"
+        "Returns\n"
+        "average spacing (scalar). The return type FT is a number type."
+        );
+
+  m.def("compute_average_spacing", [](const PointVector_3& points, const unsigned int k,
+                                      const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                                      const py::kwargs& np = py::kwargs())
+        { return CGAL::compute_average_spacing<Tag>(points, k,
+                  internal::parse_named_parameters(np)
+                         .callback(callback)
+                         .geom_traits(K())
+                          ); },
+        py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+        "Computes average spacing from k nearest neighbors.\n"
+        "Precondition\n"
+        "• k >= 2.\n\n"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• k: number of neighbors.\n"
+        "• callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n"
         "Returns\n"
         "average spacing (scalar). The return type FT is a number type."
         );
@@ -586,6 +605,30 @@ void export_point_set_processing(py::module_& m) {
   // TODO: register_point_sets() needs PointMatcher
 
   m.def("read_points", [](const std::string& fname, const py::kwargs& np = py::kwargs()) {
+        std::vector<Kernel::Point_3> output;
+        bool success = CGAL::IO::read_points(fname, std::back_inserter(output), internal::parse_named_parameters(np));
+        return std::make_pair(success, output);
+        },
+        py::arg("fname"), py::arg("np"),
+        "reads the point set from an input file.\n"
+        "Supported file formats are the following:\n"
+        "• Object File Format (OFF) (.off)\n"
+        "• Polygon File Format (PLY) (.ply)\n"
+        "• LAS (Lidar) File Format (.las)\n"
+        "• XYZ File Format (.xyz)\n"
+        "The format is detected from the filename extension (letter case is not important).\n\n"
+        "Parameters\n"
+        "• fname: the name of the input file.\n"
+        "• np: optional sequence of Named Parameters among the ones listed below.\n\n"
+        "Optional Named Parameters\n"
+        "• use_binary_mode: indicates whether data should be read in binary (true) or in ASCII (false) Default: true\n\n"
+        "Returns\n"
+        "a tuple of a boolean indicating if reading was successful and the output points.\n\n"
+        "Examples\n"
+        "Point_set_processing_3/average_spacing_example.py, Point_set_processing_3/bilateral_smooth_point_set_example.py, Point_set_processing_3/edge_aware_upsample_point_set_example.py, Point_set_processing_3/edges_example.py, Point_set_processing_3/grid_simplification_example.py, Point_set_processing_3/hierarchy_simplification_example.py, Point_set_processing_3/normals_example.py, Point_set_processing_3/registration_with_OpenGR.py, Point_set_processing_3/registration_with_opengr_pointmatcher_pipeline.py, Point_set_processing_3/registration_with_pointmatcher.py, Point_set_processing_3/remove_outliers_example.py, Point_set_processing_3/scale_estimation_example.py, Point_set_processing_3/structuring_example.py, and Point_set_processing_3/wlop_simplify_and_regularize_point_set_example.py."
+        );
+
+  m.def("read_points_with_normals", [](const std::string& fname, const py::kwargs& np = py::kwargs()) {
         using PointVectorPair = std::pair<Kernel::Point_3, Kernel::Vector_3>;
         using Point_map = CGAL::First_of_pair_property_map<PointVectorPair>;
         using Normal_map = CGAL::Second_of_pair_property_map<PointVectorPair>;
@@ -595,7 +638,7 @@ void export_point_set_processing(py::module_& m) {
                                              .point_map(Point_map())
                                              .normal_map(Normal_map())
                                              );
-        return std::make_pair(output, success);
+        return std::make_pair(success, output);
         },
         py::arg("fname"), py::arg("np"),
         "reads the point set from an input file.\n"
