@@ -431,10 +431,11 @@ void export_functions_with_point_range(C& c) {
                         double convolution_radius,
                         const py::kwargs& np = py::kwargs())
       { std::vector<std::array<double, 6>> ccov;
-        return CGAL::compute_vcm(points, ccov, offset_radius, convolution_radius,
+        CGAL::compute_vcm(points, ccov, offset_radius, convolution_radius,
                 internal::parse_named_parameters(np)
                          .geom_traits(K())
                                       );
+        return ccov;
       },
       py::arg("points"), py::arg("offset_radius"), py::arg("convolution_radius"), py::arg("np"),
       "Computes the Voronoi Covariance Measure (VCM) of a point cloud, a construction that can be used for normal estimation and sharp feature detection.\n"
