@@ -41,6 +41,342 @@ private:
 };
 
 template <typename PointRange, typename Point, typename Vector, typename C>
+void export_functions_without_normals(C& c) {
+  using K = Kernel;
+  using Tag = CGAL::Sequential_tag;
+  c.def("bilateral_smooth_point_set", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs())
+        { double r = CGAL::bilateral_smooth_point_set<Tag>(points, k,
+                  internal::parse_named_parameters(np)
+                           .geom_traits(K()));
+          return std::make_pair(r, points);
+        },
+        py::arg("points"), py::arg("k"), py::arg("np"),
+        "This function smooths an input point set by iteratively projecting each point onto the implicit surface patch fitted over its nearest neighbors. \n"
+        "Bilateral projection preserves sharp features according to the normal (gradient) information. Both point positions and normals will be modified. For more details, please see section 4 in [5].\n\n"
+        "Precondition\n"
+        "• Normals must be unit vectors \n"
+        "• k >= 2"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• k: size of the neighborhood for the implicit surface patch fitting. The larger the value is, the smoother the result will be.\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n"
+        "Optional Named Parameters\n"
+        "• neighbor_radius\n"
+        "• sharpness_angle\n"
+        "Returns\n"
+        "a tuple of the average point movement error. It's a convergence criterium for the algorithm. This value can help the user to decide how many iterations are sufficient, and the resulting points"
+        );
+
+  c.def("edge_aware_upsample_point_set", [](const PointRange& points, const py::kwargs& np = py::kwargs())
+        { std::vector<std::pair<Point, Vector>> output;
+          CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output),
+                  internal::parse_named_parameters(np)
+                         .geom_traits(K())
+                                      );
+          return output;
+        },
+        py::arg("points"), py::arg("np"),
+        "This method progressively upsamples the point set while approaching the edge singularities (detected by normal variation), which generates a denser point set from an input point set.\n"
+        "This has applications in point-based rendering, hole filling, and sparse surface reconstruction. Normals of points are required as input. For more details, please refer to [5].\n\n"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n"
+        "Optional Named Parameters\n"
+        "• sharpness_angle\n"
+        "• edge_sensitivity\n"
+        "• number_of_output_points\n"
+        "• neighbor_radius"
+        );
+
+  c.def("scanline_orient_normals", [](PointRange& points, const py::kwargs& np = py::kwargs()) {
+        // TODO: handle scan_angle_map and scanline_id_map
+        CGAL::scanline_orient_normals(points, internal::parse_named_parameters(np));
+        return points;
+  },
+      py::arg("points"), py::arg("np"),
+      "orients the normals of the range of points by estimating a line of sight and checking its consistency with the current normal orientation.\n\n"
+      "Warning\n"
+      "This function requires the input points to be ordered along scanlines aligned on the XY-plane. It is typically designed for 2.5D urban datasets acquired through, for example, airborne LIDAR devices.\n\n"
+      "First, scanlines are estimated as subranges of points by iterating on points:\n"
+      "• if the named parameter scanline_id_map is provided, the range is cut every time the id changes.\n"
+      "• if no scanline ID map is provided, a fallback method simply cuts the range every time 3 consecutive points form an acute angle on the projected XY-plane. This fallback method gives suboptimal results.\n\n"
+      "Then, the line of sight (estimated vector between a point and the position of the scanner at its time of acquisition) is estimated:\n"
+      "• if scan_angle is provided, the line of sight can be directly computed as a combination of the estimated scanline and of the scan angle.\n"
+      "• if no scan angle map is provided, then for each scanline, the position of the scanner is estimated as being above of the barycenter of the points of the scanline projected on the XY-plane. This fallback method gives suboptimal results.\n\n"
+      "Once the line of sight is estimated for each point, the normals are oriented by checking, for each of them, if the line of sight and the normal vector give a positive scalar product. If they don't, then the normal vector is inverted.\n\n"
+      "Note\n"
+      "This method gives optimal results when scanline_id_map and scan_angle are provided. Correct results may still be produced in the absence of either one or both of these properties, as long as the point set is ordered in 2.5D scanlines.\n\n"
+      "Parameters\n"
+      "• points: input point range.\n"
+      "• np: an optional sequence of Named Parameters among the ones listed below\n\n"
+      "Optional Named Parameters\n\n"
+      "Returns\n"
+      "the modified point set.\n\n"
+      "Examples\n"
+      "• Point_set_processing_3/orient_scanlines_example.py."
+      );
+
+
+  c.def("vcm_estimate_normals", [](PointRange& points, double offset_radius, double convolution_radius,
+                                   const py::kwargs& np = py::kwargs()) {
+        CGAL::vcm_estimate_normals(points, offset_radius, convolution_radius, internal::parse_named_parameters(np));
+        return points;
+  },
+      py::arg("points"), py::arg("offset_radius"), py::arg("convolution_radius"), py::arg("np"),
+      "Estimates normal directions of the range of points using the Voronoi Covariance Measure with a radius for the convolution.\n"
+      "The output normals are randomly oriented.\n"
+      "See compute_vcm() for a detailed description of the parameters offset_radius and convolution_radius and of the Voronoi Covariance Measure.\n\n"
+      "Parameters\n"
+      "• points: input point range\n"
+      "• offset_radius: offset_radius.\n"
+      "• convolution_radius: convolution_radius.\n\n"
+      "Returns\n"
+      "the modified point set.\n\n"
+      );
+
+  c.def("vcm_estimate_normals_neighbors", [](PointRange& points, double offset_radius, unsigned int k,
+                                             const py::kwargs& np = py::kwargs()) {
+        CGAL::vcm_estimate_normals(points, offset_radius, k, internal::parse_named_parameters(np));
+        return points;
+  },
+      py::arg("points"), py::arg("offset_radius"), py::arg("k"), py::arg("np"),
+      "Estimates normal directions of the range of points using the Voronoi Covariance Measure with a number of neighbors for the convolution.\n"
+      "The output normals are randomly oriented.\n"
+      "See compute_vcm() for a detailed description of the parameter offset_radius and of the Voronoi Covariance Measure.\n\n"
+      "Parameters\n"
+      "• points: input point range\n"
+      "• offset_radius: offset_radius.\n"
+      "• k: number of neighbor points used for convolution.\n\n"
+      "Returns\n"
+      "the modified point set.\n\n"
+      );
+
+
+  c.def("wlop_simplify_and_regularize_point_set", [](PointRange& points,
+                                                     const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                                                     const py::kwargs& np = py::kwargs()) {
+        std::vector<Kernel::Point_3> output;
+        auto cb_class = dummy_callback(callback);
+        double sp = np.contains("select_percentage") ? py::cast<double>(np["select_percentage"]) : 5;
+        unsigned int noi = np.contains("number_of_iterations") ? py::cast<unsigned int>(np["number_of_iterations"]) : 35;
+        bool rus = np.contains("require_uniform_sampling") ? py::cast<bool>(np["require_uniform_sampling"]) : false;
+        if (np.contains("neighbor_radius")) {
+          auto nr = py::cast<double>(np["neighbor_radius"]);
+          CGAL::wlop_simplify_and_regularize_point_set<Tag>(points, std::back_inserter(output),
+                                                            CGAL::parameters::select_percentage(sp)
+                                                            .number_of_iterations(noi)
+                                                            .require_uniform_sampling(rus)
+                                                            .neighbor_radius(nr)
+                                                            .callback(cb_class)
+                                                            .geom_traits(K())
+                                                            );
+        }
+        else {
+          CGAL::wlop_simplify_and_regularize_point_set<Tag>(points, std::back_inserter(output),
+                                                            CGAL::parameters::select_percentage(sp)
+                                                            .number_of_iterations(noi)
+                                                            .require_uniform_sampling(rus)
+                                                            .callback(cb_class)
+                                                            .geom_traits(K())
+                                                            );
+        }
+        return std::make_pair(output, points);
+  },
+      py::arg("points"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+      "This is an implementation of the Weighted Locally Optimal Projection (WLOP) simplification algorithm.\n"
+      "The WLOP simplification algorithm can produce a set of denoised, outlier-free and evenly distributed particles over the original dense point cloud. The core of the algorithm is a Weighted Locally Optimal Projection operator with a density uniformization term. For more details, please refer to [4].\n\n"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n\n"
+        "Optional Named Parameters\n"
+        "• select_percentage\n: percentage of points to retain (default: 5)\n"
+        "• neighbor_radius\n: the spherical neighborhood radius (default: 8 times the average spacing of the point set)\n"
+        "• number_of_iterations: number of iterations to solve the optimsation problem (default: 35)\n"
+        "• require_uniform_sampling: If true, an optional preprocessing is applied, which will give better results if the distribution of the input points is highly non-uniform. (default: false)\n"
+        "Returns\n"
+        "a tuple of the modified point set and the output points.\n\n"
+        );
+
+}
+
+template <typename PointRange, typename PointMap, typename NormalMap, typename Point, typename Vector, typename C>
+void export_functions_with_normals(C& c) {
+  using K = Kernel;
+  using Tag = CGAL::Sequential_tag;
+  c.def("bilateral_smooth_point_set", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs())
+        { double r = CGAL::bilateral_smooth_point_set<Tag>(points, k,
+                  internal::parse_named_parameters(np)
+                           .point_map(PointMap())
+                           .normal_map(NormalMap())
+                           .geom_traits(K()));
+          return std::make_pair(r, points);
+        },
+        py::arg("points"), py::arg("k"), py::arg("np"),
+        "This function smooths an input point set by iteratively projecting each point onto the implicit surface patch fitted over its nearest neighbors. \n"
+        "Bilateral projection preserves sharp features according to the normal (gradient) information. Both point positions and normals will be modified. For more details, please see section 4 in [5].\n\n"
+        "Precondition\n"
+        "• Normals must be unit vectors \n"
+        "• k >= 2"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• k: size of the neighborhood for the implicit surface patch fitting. The larger the value is, the smoother the result will be.\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n"
+        "Optional Named Parameters\n"
+        "• neighbor_radius\n"
+        "• sharpness_angle\n"
+        "Returns\n"
+        "a tuple of the average point movement error. It's a convergence criterium for the algorithm. This value can help the user to decide how many iterations are sufficient, and the resulting points"
+        );
+
+  c.def("edge_aware_upsample_point_set", [](const PointRange& points, const py::kwargs& np = py::kwargs())
+        { std::vector<std::pair<Point, Vector>> output;
+          CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output),
+                  internal::parse_named_parameters(np)
+                         .geom_traits(K())
+                         .point_map(PointMap())
+                         .normal_map(NormalMap())
+                                      );
+          return output;
+        },
+        py::arg("points"), py::arg("np"),
+        "This method progressively upsamples the point set while approaching the edge singularities (detected by normal variation), which generates a denser point set from an input point set.\n"
+        "This has applications in point-based rendering, hole filling, and sparse surface reconstruction. Normals of points are required as input. For more details, please refer to [5].\n\n"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n"
+        "Optional Named Parameters\n"
+        "• sharpness_angle\n"
+        "• edge_sensitivity\n"
+        "• number_of_output_points\n"
+        "• neighbor_radius"
+        );
+
+    c.def("scanline_orient_normals", [](PointRange& points, const py::kwargs& np = py::kwargs()) {
+        // TODO: handle scan_angle_map and scanline_id_map
+        CGAL::scanline_orient_normals(points, internal::parse_named_parameters(np)
+                                      .point_map(PointMap())
+                                      .normal_map(NormalMap())
+                                      );
+        return points;
+  },
+      py::arg("points"), py::arg("np"),
+      "orients the normals of the range of points by estimating a line of sight and checking its consistency with the current normal orientation.\n\n"
+      "Warning\n"
+      "This function requires the input points to be ordered along scanlines aligned on the XY-plane. It is typically designed for 2.5D urban datasets acquired through, for example, airborne LIDAR devices.\n\n"
+      "First, scanlines are estimated as subranges of points by iterating on points:\n"
+      "• if the named parameter scanline_id_map is provided, the range is cut every time the id changes.\n"
+      "• if no scanline ID map is provided, a fallback method simply cuts the range every time 3 consecutive points form an acute angle on the projected XY-plane. This fallback method gives suboptimal results.\n\n"
+      "Then, the line of sight (estimated vector between a point and the position of the scanner at its time of acquisition) is estimated:\n"
+      "• if scan_angle is provided, the line of sight can be directly computed as a combination of the estimated scanline and of the scan angle.\n"
+      "• if no scan angle map is provided, then for each scanline, the position of the scanner is estimated as being above of the barycenter of the points of the scanline projected on the XY-plane. This fallback method gives suboptimal results.\n\n"
+      "Once the line of sight is estimated for each point, the normals are oriented by checking, for each of them, if the line of sight and the normal vector give a positive scalar product. If they don't, then the normal vector is inverted.\n\n"
+      "Note\n"
+      "This method gives optimal results when scanline_id_map and scan_angle are provided. Correct results may still be produced in the absence of either one or both of these properties, as long as the point set is ordered in 2.5D scanlines.\n\n"
+      "Parameters\n"
+      "• points: input point range.\n"
+      "• np: an optional sequence of Named Parameters among the ones listed below\n\n"
+      "Optional Named Parameters\n\n"
+      "Returns\n"
+      "the modified point set.\n\n"
+      "Examples\n"
+      "• Point_set_processing_3/orient_scanlines_example.py."
+      );
+
+
+  c.def("vcm_estimate_normals", [](PointRange& points, double offset_radius, double convolution_radius,
+                                   const py::kwargs& np = py::kwargs()) {
+        CGAL::vcm_estimate_normals(points, offset_radius, convolution_radius, internal::parse_named_parameters(np)
+                                   .point_map(PointMap())
+                                   .normal_map(NormalMap())
+                                   );
+        return points;
+  },
+      py::arg("points"), py::arg("offset_radius"), py::arg("convolution_radius"), py::arg("np"),
+      "Estimates normal directions of the range of points using the Voronoi Covariance Measure with a radius for the convolution.\n"
+      "The output normals are randomly oriented.\n"
+      "See compute_vcm() for a detailed description of the parameters offset_radius and convolution_radius and of the Voronoi Covariance Measure.\n\n"
+      "Parameters\n"
+      "• points: input point range\n"
+      "• offset_radius: offset_radius.\n"
+      "• convolution_radius: convolution_radius.\n\n"
+      "Returns\n"
+      "the modified point set.\n\n"
+      );
+
+  c.def("vcm_estimate_normals_neighbors", [](PointRange& points, double offset_radius, unsigned int k,
+                                             const py::kwargs& np = py::kwargs()) {
+        CGAL::vcm_estimate_normals(points, offset_radius, k, internal::parse_named_parameters(np)
+                                   .point_map(PointMap())
+                                   .normal_map(NormalMap())
+                                   );
+        return points;
+  },
+      py::arg("points"), py::arg("offset_radius"), py::arg("k"), py::arg("np"),
+      "Estimates normal directions of the range of points using the Voronoi Covariance Measure with a number of neighbors for the convolution.\n"
+      "The output normals are randomly oriented.\n"
+      "See compute_vcm() for a detailed description of the parameter offset_radius and of the Voronoi Covariance Measure.\n\n"
+      "Parameters\n"
+      "• points: input point range\n"
+      "• offset_radius: offset_radius.\n"
+      "• k: number of neighbor points used for convolution.\n\n"
+      "Returns\n"
+      "the modified point set.\n\n"
+      );
+
+
+  c.def("wlop_simplify_and_regularize_point_set", [](PointRange& points,
+                                                     const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                                                     const py::kwargs& np = py::kwargs()) {
+        std::vector<Kernel::Point_3> output;
+        auto cb_class = dummy_callback(callback);
+        double sp = np.contains("select_percentage") ? py::cast<double>(np["select_percentage"]) : 5;
+        unsigned int noi = np.contains("number_of_iterations") ? py::cast<unsigned int>(np["number_of_iterations"]) : 35;
+        bool rus = np.contains("require_uniform_sampling") ? py::cast<bool>(np["require_uniform_sampling"]) : false;
+        if (np.contains("neighbor_radius")) {
+          auto nr = py::cast<double>(np["neighbor_radius"]);
+          CGAL::wlop_simplify_and_regularize_point_set<Tag>(points, std::back_inserter(output),
+                                                            CGAL::parameters::select_percentage(sp)
+                                                            .point_map(PointMap())
+                                                            .normal_map(NormalMap())
+                                                            .number_of_iterations(noi)
+                                                            .require_uniform_sampling(rus)
+                                                            .neighbor_radius(nr)
+                                                            .callback(cb_class)
+                                                            .geom_traits(K())
+                                                            );
+        }
+        else {
+          CGAL::wlop_simplify_and_regularize_point_set<Tag>(points, std::back_inserter(output),
+                                                            CGAL::parameters::select_percentage(sp)
+                                                            .point_map(PointMap())
+                                                            .normal_map(NormalMap())
+                                                            .number_of_iterations(noi)
+                                                            .require_uniform_sampling(rus)
+                                                            .callback(cb_class)
+                                                            .geom_traits(K())
+                                                            );
+        }
+        return std::make_pair(output, points);
+  },
+      py::arg("points"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+      "This is an implementation of the Weighted Locally Optimal Projection (WLOP) simplification algorithm.\n"
+      "The WLOP simplification algorithm can produce a set of denoised, outlier-free and evenly distributed particles over the original dense point cloud. The core of the algorithm is a Weighted Locally Optimal Projection operator with a density uniformization term. For more details, please refer to [4].\n\n"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n\n"
+        "Optional Named Parameters\n"
+        "• select_percentage\n: percentage of points to retain (default: 5)\n"
+        "• neighbor_radius\n: the spherical neighborhood radius (default: 8 times the average spacing of the point set)\n"
+        "• number_of_iterations: number of iterations to solve the optimsation problem (default: 35)\n"
+        "• require_uniform_sampling: If true, an optional preprocessing is applied, which will give better results if the distribution of the input points is highly non-uniform. (default: false)\n"
+        "Returns\n"
+        "a tuple of the modified point set and the output points.\n\n"
+        );
+}
+
+template <typename PointRange, typename Point, typename Vector, typename C>
 void export_multiple_dimension_functions(C& c) {
   using K = Kernel;
 
@@ -114,27 +450,6 @@ void export_functions_with_point_range(C& c) {
       "Examples\n"
       "• Point_set_processing_3/scale_estimation_example.py."
       );
-
-  c.def("edge_aware_upsample_point_set", [](const PointRange& points, const py::kwargs& np = py::kwargs())
-        { std::vector<std::pair<Point, Vector>> output;
-          CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output),
-                  internal::parse_named_parameters(np)
-                         .geom_traits(K())
-                                      );
-          return output;
-        },
-        py::arg("points"), py::arg("np"),
-        "This method progressively upsamples the point set while approaching the edge singularities (detected by normal variation), which generates a denser point set from an input point set.\n"
-        "This has applications in point-based rendering, hole filling, and sparse surface reconstruction. Normals of points are required as input. For more details, please refer to [5].\n\n"
-        "Parameters\n"
-        "• points: input point range\n"
-        "• np: an optional sequence of Named Parameters among the ones listed below\n"
-        "Optional Named Parameters\n"
-        "• sharpness_angle\n"
-        "• edge_sensitivity\n"
-        "• number_of_output_points\n"
-        "• neighbor_radius"
-        );
 
   c.def("grid_simplify_point_set", [](PointRange& points, double epsilon,
                                       const std::function<bool(double)>& callback = std::function<bool(double)>(),
@@ -352,69 +667,7 @@ void export_functions_with_point_range(C& c) {
       "There are two thresholds that can be used: threshold_percent and threshold_distance. This function returns the smallest number of outliers such that at least one of these threshold is fulfilled. This means that if threshold_percent=100, only threshold_distance is taken into account; if threshold_distance=0 only threshold_percent is taken into account. \n"
       );
 
-  c.def("scanline_orient_normals", [](PointRange& points, const py::kwargs& np = py::kwargs()) {
-        // TODO: handle scan_angle_map and scanline_id_map
-        CGAL::scanline_orient_normals(points, internal::parse_named_parameters(np));
-        return points;
-  },
-      py::arg("points"), py::arg("np"),
-      "orients the normals of the range of points by estimating a line of sight and checking its consistency with the current normal orientation.\n\n"
-      "Warning\n"
-      "This function requires the input points to be ordered along scanlines aligned on the XY-plane. It is typically designed for 2.5D urban datasets acquired through, for example, airborne LIDAR devices.\n\n"
-      "First, scanlines are estimated as subranges of points by iterating on points:\n"
-      "• if the named parameter scanline_id_map is provided, the range is cut every time the id changes.\n"
-      "• if no scanline ID map is provided, a fallback method simply cuts the range every time 3 consecutive points form an acute angle on the projected XY-plane. This fallback method gives suboptimal results.\n\n"
-      "Then, the line of sight (estimated vector between a point and the position of the scanner at its time of acquisition) is estimated:\n"
-      "• if scan_angle is provided, the line of sight can be directly computed as a combination of the estimated scanline and of the scan angle.\n"
-      "• if no scan angle map is provided, then for each scanline, the position of the scanner is estimated as being above of the barycenter of the points of the scanline projected on the XY-plane. This fallback method gives suboptimal results.\n\n"
-      "Once the line of sight is estimated for each point, the normals are oriented by checking, for each of them, if the line of sight and the normal vector give a positive scalar product. If they don't, then the normal vector is inverted.\n\n"
-      "Note\n"
-      "This method gives optimal results when scanline_id_map and scan_angle are provided. Correct results may still be produced in the absence of either one or both of these properties, as long as the point set is ordered in 2.5D scanlines.\n\n"
-      "Parameters\n"
-      "• points: input point range.\n"
-      "• np: an optional sequence of Named Parameters among the ones listed below\n\n"
-      "Optional Named Parameters\n\n"
-      "Returns\n"
-      "the modified point set.\n\n"
-      "Examples\n"
-      "• Point_set_processing_3/orient_scanlines_example.py."
-      );
-
-  // TODO: structure_point_set() needs RANSAC
-
-  c.def("vcm_estimate_normals", [](PointRange& points, double offset_radius, double convolution_radius,
-                                   const py::kwargs& np = py::kwargs()) {
-        CGAL::vcm_estimate_normals(points, offset_radius, convolution_radius, internal::parse_named_parameters(np));
-        return points;
-  },
-      py::arg("points"), py::arg("offset_radius"), py::arg("convolution_radius"), py::arg("np"),
-      "Estimates normal directions of the range of points using the Voronoi Covariance Measure with a radius for the convolution.\n"
-      "The output normals are randomly oriented.\n"
-      "See compute_vcm() for a detailed description of the parameters offset_radius and convolution_radius and of the Voronoi Covariance Measure.\n\n"
-      "Parameters\n"
-      "• points: input point range\n"
-      "• offset_radius: offset_radius.\n"
-      "• convolution_radius: convolution_radius.\n\n"
-      "Returns\n"
-      "the modified point set.\n\n"
-      );
-
-  c.def("vcm_estimate_normals_neighbors", [](PointRange& points, double offset_radius, unsigned int k,
-                                             const py::kwargs& np = py::kwargs()) {
-        CGAL::vcm_estimate_normals(points, offset_radius, k, internal::parse_named_parameters(np));
-        return points;
-  },
-      py::arg("points"), py::arg("offset_radius"), py::arg("k"), py::arg("np"),
-      "Estimates normal directions of the range of points using the Voronoi Covariance Measure with a number of neighbors for the convolution.\n"
-      "The output normals are randomly oriented.\n"
-      "See compute_vcm() for a detailed description of the parameter offset_radius and of the Voronoi Covariance Measure.\n\n"
-      "Parameters\n"
-      "• points: input point range\n"
-      "• offset_radius: offset_radius.\n"
-      "• k: number of neighbor points used for convolution.\n\n"
-      "Returns\n"
-      "the modified point set.\n\n"
-      );
+  // TODO: structure_point_set() needs RANSAC planes too
 
   c.def("vcm_is_on_feature_edge", &CGAL::vcm_is_on_feature_edge<Kernel::FT>,
         py::arg("cov"), py::arg("threshold"),
@@ -426,52 +679,6 @@ void export_functions_with_point_range(C& c) {
       "Examples\n"
       "Point_set_processing_3/edges_example.py."
       );
-
-  c.def("wlop_simplify_and_regularize_point_set", [](PointRange& points,
-                                                     const std::function<bool(double)>& callback = std::function<bool(double)>(),
-                                                     const py::kwargs& np = py::kwargs()) {
-        std::vector<Kernel::Point_3> output;
-        auto cb_class = dummy_callback(callback);
-        double sp = np.contains("select_percentage") ? py::cast<double>(np["select_percentage"]) : 5;
-        unsigned int noi = np.contains("number_of_iterations") ? py::cast<unsigned int>(np["number_of_iterations"]) : 35;
-        bool rus = np.contains("require_uniform_sampling") ? py::cast<bool>(np["require_uniform_sampling"]) : false;
-        if (np.contains("neighbor_radius")) {
-          auto nr = py::cast<double>(np["neighbor_radius"]);
-          CGAL::wlop_simplify_and_regularize_point_set<Tag>(points, std::back_inserter(output),
-                                                            CGAL::parameters::select_percentage(sp)
-                                                            .number_of_iterations(noi)
-                                                            .require_uniform_sampling(rus)
-                                                            .neighbor_radius(nr)
-                                                            .callback(cb_class)
-                                                            .geom_traits(K())
-                                                            );
-        }
-        else {
-          CGAL::wlop_simplify_and_regularize_point_set<Tag>(points, std::back_inserter(output),
-                                                            CGAL::parameters::select_percentage(sp)
-                                                            .number_of_iterations(noi)
-                                                            .require_uniform_sampling(rus)
-                                                            .callback(cb_class)
-                                                            .geom_traits(K())
-                                                            );
-        }
-        return std::make_pair(output, points);
-  },
-      py::arg("points"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
-      "This is an implementation of the Weighted Locally Optimal Projection (WLOP) simplification algorithm.\n"
-      "The WLOP simplification algorithm can produce a set of denoised, outlier-free and evenly distributed particles over the original dense point cloud. The core of the algorithm is a Weighted Locally Optimal Projection operator with a density uniformization term. For more details, please refer to [4].\n\n"
-        "Parameters\n"
-        "• points: input point range\n"
-        "• callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
-        "• np: an optional sequence of Named Parameters among the ones listed below\n\n"
-        "Optional Named Parameters\n"
-        "• select_percentage\n: percentage of points to retain (default: 5)\n"
-        "• neighbor_radius\n: the spherical neighborhood radius (default: 8 times the average spacing of the point set)\n"
-        "• number_of_iterations: number of iterations to solve the optimsation problem (default: 35)\n"
-        "• require_uniform_sampling: If true, an optional preprocessing is applied, which will give better results if the distribution of the input points is highly non-uniform. (default: false)\n"
-        "Returns\n"
-        "a tuple of the modified point set and the output points.\n\n"
-        );
 
 
 }
@@ -544,6 +751,9 @@ void export_point_set_processing(py::module_& m) {
   using ClusterMap_2 = PointSet_2::Property_map<int>;
   using ClusterMap_3 = PointSet_3::Property_map<int>;
 
+  using Fopopm = CGAL::First_of_pair_property_map<PointVectorPair_3>;
+  using Sopopm = CGAL::Second_of_pair_property_map<PointVectorPair_3>;
+
   export_functions_with_point_range<PointVector_3, Point_3, Vector_3>(m);
   export_functions_with_point_range<PointSet_3, Point_3, Vector_3>(m);
 
@@ -555,51 +765,31 @@ void export_point_set_processing(py::module_& m) {
 
   export_functions_with_point_vec<PointVector_3>(m);
 
+  export_functions_with_normals<PointRange_3, Fopopm, Sopopm, Point_3, Vector_3>(m);
+  export_functions_without_normals<PointVector_3, Point_3, Vector_3>(m);
+
   // Algorithms
-  m.def("bilateral_smooth_point_set", [](PointRange_3& points, unsigned int k, const py::kwargs& np = py::kwargs())
-        { return CGAL::bilateral_smooth_point_set<Tag>(points, k,
-                  internal::parse_named_parameters(np)
-                           .point_map(CGAL::First_of_pair_property_map<PointVectorPair_3>())
-                           .normal_map(CGAL::Second_of_pair_property_map<PointVectorPair_3>())
-                           .geom_traits(K())); },
-        py::arg("points"), py::arg("k"), py::arg("np"),
-        "This function smooths an input point set by iteratively projecting each point onto the implicit surface patch fitted over its nearest neighbors. \n"
-        "Bilateral projection preserves sharp features according to the normal (gradient) information. Both point positions and normals will be modified. For more details, please see section 4 in [5].\n\n"
-        "Precondition\n"
-        "• Normals must be unit vectors \n"
-        "• k >= 2"
-        "Parameters\n"
-        "• points: input point range\n"
-        "• k: size of the neighborhood for the implicit surface patch fitting. The larger the value is, the smoother the result will be.\n"
-        "• np: an optional sequence of Named Parameters among the ones listed below\n"
-        "Optional Named Parameters\n"
-        "• neighbor_radius\n"
-        "• sharpness_angle\n"
-        );
   m.def("cluster_point_set", [](PointSet_3& points, ClusterMap_3& cluster_map,
                                 const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                 const py::kwargs& np = py::kwargs()) {
-        auto cb_class = dummy_callback(callback);
+        // auto cb_class = dummy_callback(callback);
         double af = np.contains("attraction_factor") ? py::cast<double>(np["attraction_factor"]) : 0;
         std::vector<std::pair<std::size_t, std::size_t>> adj;
         std::size_t res;
         if (np.contains("neighbor_radius")) {
           double nr = py::cast<double>(np["neighbor_radius"]);
-          res = CGAL::cluster_point_set(points, cluster_map
-                                             ,
-                  internal::parse_named_parameters(np)
-                           .callback(cb_class)
-                           .attraction_factor(af)
+          res = CGAL::cluster_point_set(points, cluster_map,
+                    CGAL::parameters::attraction_factor(af)
+                           // .callback(callback) // this crashes for some reason
                            .adjacencies(std::back_inserter(adj))
                            .neighbor_radius(nr)
                            );
         }
         else {
-          res = CGAL::cluster_point_set(points, cluster_map
-                                             ,
-                  internal::parse_named_parameters(np)
-                           .callback(cb_class)
+          res = CGAL::cluster_point_set(points, cluster_map,
+                      CGAL::parameters::attraction_factor(af)
                            .adjacencies(std::back_inserter(adj))
+                           // .callback(callback)
                            );
         }
           return std::make_pair(res, adj);
@@ -624,11 +814,10 @@ void export_point_set_processing(py::module_& m) {
   m.def("compute_average_spacing", [](const PointSet_3& points, const unsigned int k,
                                       const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                       const py::kwargs& np = py::kwargs())
-        { auto cb_class = dummy_callback(callback);
-        return CGAL::compute_average_spacing<Tag>(points, k,
-                  internal::parse_named_parameters(np)
-                         .callback(cb_class)
-                         .geom_traits(K())
+        { /* auto cb_class = dummy_callback(callback); */
+        return CGAL::compute_average_spacing<Tag>(points, k
+                         //                          ,
+                         // CGAL::parameters::callback(callback)
                           ); },
         py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
         "Computes average spacing from k nearest neighbors.\n"

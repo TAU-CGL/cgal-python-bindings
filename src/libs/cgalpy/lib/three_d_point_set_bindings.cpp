@@ -40,7 +40,6 @@ auto define_property_map(C& c, Point_set_nb& ptst, const std::string& name) {
          py::arg("index"), py::arg("value"))
     ;
 
-  // TODO: remove property map
   ptst.def(("add_property_map_" + name).c_str(), &Point_set::template add_property_map<Property>,
            py::arg("name") = std::string(), py::arg("default_value") = Property())
     .def(("property_map_" + name).c_str(), &Point_set::template property_map<Property>,
@@ -430,17 +429,18 @@ auto export_point_set_3_class(C& m, const std::string& name) {
 }
 
 template <typename Pnt, typename Vec, typename FT, typename C, typename Pt_st_c>
-void export_property_maps(C& m, Pt_st_c& ptst, const std::string& name) {
+void export_property_maps(C& m, Pt_st_c& ptst) {
   using Pt_set_3 = CGAL::Point_set_3<Pnt, Vec>;
 
-  define_property_map<Pt_set_3, int>(m, ptst, ("Point_set_3_" + name + "_int").c_str());
-  define_property_map<Pt_set_3, Vec>(m, ptst, ("Point_set_3_" + name + "_Vector").c_str());
-  define_property_map<Pt_set_3, CGAL::IO::Color>(m, ptst, ("Point_set_3_" + name + "_Color").c_str());
-  define_property_map<Pt_set_3, FT>(m, ptst, ("Point_set_3_" + name + "_FT").c_str());
-  define_property_map<Pt_set_3, Pnt>(m, ptst, ("Point_set_3_" + name + "_Point").c_str());
-  define_property_map<Pt_set_3, std::size_t>(m, ptst, ("Point_set_3_" + name + "_Index").c_str());
-  define_range<typename Pt_set_3::Point_range>(m, ("Point_set_3_" + name + "_Point_range").c_str());
-  define_range<typename Pt_set_3::Vector_range>(m, ("Point_set_3_" + name + "_Vector_range").c_str());
+  define_property_map<Pt_set_3, int>(m, ptst, "int");
+  define_property_map<Pt_set_3, Vec>(m, ptst, "Vector");
+  define_property_map<Pt_set_3, CGAL::IO::Color>(m, ptst, "Color");
+  define_property_map<Pt_set_3, FT>(m, ptst, "FT");
+  define_property_map<Pt_set_3, Pnt>(m, ptst, "Point");
+  define_property_map<Pt_set_3, std::size_t>(m, ptst, "Index");
+  define_property_map<Pt_set_3, unsigned char>(m, ptst, "unsigned_char");
+  define_range<typename Pt_set_3::Point_range>(m, "Point_range");
+  define_range<typename Pt_set_3::Vector_range>(m, "Vector_range");
 
 }
 
@@ -465,10 +465,10 @@ void export_3d_point_set(py::module_& m) {
   // this idx has to be here because the compiler ignored it otherwise
   auto ptst_idx = export_point_set_index<CGAL::internal::Point_set_3_index<Pnt_3, Vec_3>>(m, "3");
 
-  m.def("write_point_set", [](const std::string& fname, Pt_set_3& ps, const py::dict& np = py::dict()) {
+  m.def("write_point_set", [](const std::string& fname, Pt_set_3& ps, const py::kwargs& np = py::kwargs()) {
     return CGAL::IO::write_point_set<Pnt_3, Vec_3>(fname, ps, internal::parse_named_parameters(np));
   },
-        py::arg("fname"), py::arg("ps"), py::arg("np") = py::dict(),
+        py::arg("fname"), py::arg("ps"), py::arg("np") = py::kwargs(),
         "writes the point set in an output file.\n"
         "Supported file formats are the following:\n"
         "\n"
@@ -490,10 +490,10 @@ void export_3d_point_set(py::module_& m) {
         "Returns True if the writing was successful, False otherwise."
         );
 
-  m.def("read_point_set", [](const std::string& fname, Pt_set_3& ps, const py::dict& np = py::dict()) {
+  m.def("read_point_set", [](const std::string& fname, Pt_set_3& ps, const py::kwargs& np = py::kwargs()) {
     return CGAL::IO::read_point_set<Pnt_3, Vec_3>(fname, ps, internal::parse_named_parameters(np));
   },
-        py::arg("fname"), py::arg("ps"), py::arg("np") = py::dict(),
+        py::arg("fname"), py::arg("ps"), py::arg("np") = py::kwargs(),
         "reads the point set from an input file.\n"
         "Supported file formats are the following:\n"
         "\n"
@@ -518,7 +518,7 @@ void export_3d_point_set(py::module_& m) {
 
 
 
-  export_property_maps<Pnt_3, Vec_3, FT>(ptst, ptst, "3");
+  export_property_maps<Pnt_3, Vec_3, FT>(ptst, ptst);
   using Point_map_3 = typename Pt_set_3::template Property_map<Point_3>;
   using Vector_map_3 = typename Pt_set_3::template Property_map<Vector_3>;
   define_push_property_map<Pt_set_3::template Push_property_map<Point_map_3>>(ptst, "Point_push_map_3");
@@ -527,7 +527,7 @@ void export_3d_point_set(py::module_& m) {
 
   auto ptst_2 = export_point_set_3_class<Pnt_2, Vec_2>(m, "2");
   auto ptst_2_idx = export_point_set_index<CGAL::internal::Point_set_3_index<Pnt_2, Vec_2>>(m, "2");
-  export_property_maps<Pnt_2, Vec_2, FT>(ptst_2, ptst_2, "2");
+  export_property_maps<Pnt_2, Vec_2, FT>(ptst_2, ptst_2);
   using Point_2 = Kernel_::Point_2;
   using Vector_2 = Kernel_::Vector_2;
   using Point_map_2 = typename Pt_set_3::template Property_map<Point_2>;
