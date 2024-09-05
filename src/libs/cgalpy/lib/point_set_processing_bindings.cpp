@@ -254,6 +254,29 @@ void export_functions_with_normals(C& c) {
       "â�¢ Point_set_processing_3/edges_example.py."
       );
 
+  c.def("compute_average_spacing_with_normals", [](const PointRange& points, const unsigned int k,
+                                      const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                                      const py::kwargs& np = py::kwargs())
+        { auto cb_class = dummy_callback(callback);
+          return CGAL::compute_average_spacing<Tag>(points, k,
+                        CGAL::parameters::point_map(PointMap())
+                        .normal_map(NormalMap())
+                        // .callback(cb_class)
+                                );
+        },
+        py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+        "Computes average spacing from k nearest neighbors.\n"
+        "Precondition\n"
+        "• k >= 2.\n\n"
+        "Parameters\n"
+        "• points: input point range\n"
+        "• k: number of neighbors.\n"
+        "• callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+        "• np: an optional sequence of Named Parameters among the ones listed below\n"
+        "Returns\n"
+        "average spacing (scalar). The return type FT is a number type."
+        );
+
   c.def("edge_aware_upsample_point_set", [](const PointRange& points, const py::kwargs& np = py::kwargs())
         { std::vector<std::pair<Point, Vector>> output;
           CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output),
@@ -312,7 +335,7 @@ void export_functions_with_normals(C& c) {
         auto cb_class = dummy_callback(callback);
         double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
         CGAL::pca_estimate_normals<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
-                                        .callback(cb_class)
+                                        // .callback(cb_class) // doesnt work
                                         .point_map(PointMap())
                                         .normal_map(NormalMap())
                                         );
@@ -642,7 +665,8 @@ void export_functions_with_point_range_normals(C& c) {
                                               .threshold_percent(tp)
                                               .threshold_distance(td)
                                               .point_map(PointMap())
-                                              .callback(cb_class));
+                                              // .callback(cb_class)
+                                              );
         return std::make_pair(points, std::distance(points.begin(), it));
   },
       py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
@@ -844,7 +868,8 @@ void export_functions_with_point_range(C& c) {
         auto it = CGAL::remove_outliers<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
                                               .threshold_percent(tp)
                                               .threshold_distance(td)
-                                              .callback(cb_class));
+                                              // .callback(cb_class)
+                                              );
         return std::make_pair(points, std::distance(points.begin(), it));
   },
       py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
@@ -1038,8 +1063,10 @@ void export_point_set_processing(py::module_& m) {
                                       const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                       const py::kwargs& np = py::kwargs())
         { auto cb_class = dummy_callback(callback);
-          return CGAL::compute_average_spacing<Tag>(points, k,
-                        CGAL::parameters::callback(cb_class));
+          return CGAL::compute_average_spacing<Tag>(points, k
+                        //                             ,
+                        // CGAL::parameters::callback(cb_class)
+                                                    );
         },
         py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
         "Computes average spacing from k nearest neighbors.\n"
@@ -1139,7 +1166,7 @@ void export_point_set_processing(py::module_& m) {
         "Point_set_processing_3/edge_aware_upsample_point_set_example.py, Point_set_processing_3/hierarchy_simplification_example.py, Point_set_processing_3/registration_with_OpenGR.py, Point_set_processing_3/registration_with_opengr_pointmatcher_pipeline.py, Point_set_processing_3/registration_with_pointmatcher.py, Point_set_processing_3/structuring_example.py, and Point_set_processing_3/wlop_simplify_and_regularize_point_set_example.py."
         );
 
-  m.def("write_points", [](const std::string& fname, const std::vector<std::pair<Point_3, Vector_3>>& points, const py::kwargs& np = py::kwargs()) {
+  m.def("write_points_with_normals", [](const std::string& fname, const std::vector<std::pair<Point_3, Vector_3>>& points, const py::kwargs& np = py::kwargs()) {
         bool success = CGAL::IO::write_points(fname, points, internal::parse_named_parameters(np)
                                               .point_map(CGAL::First_of_pair_property_map<std::pair<Point_3, Vector_3>>())
                                               .normal_map(CGAL::Second_of_pair_property_map<std::pair<Point_3, Vector_3>>())

@@ -136,9 +136,9 @@ estimate = "quadric" # estimate normals by jet fitting
 orient = "MST" # orient normals using a Minimum Spanning Tree
 
 # decode parameters
-input_filename  = CGALPY.data_file_path("meshes/ChineseDragon-10kv.pwn") if len(sys.argv)==1 else sys.argv[i]
+input_filename  = CGALPY.data_file_path("meshes/ChineseDragon-10kv.off") if len(sys.argv)==1 else sys.argv[i]
 i += 1
-output_filename = "ChineseDragon-10kv.off" if len(sys.argv)==1 else sys.argv[i]
+output_filename = "ChineseDragon-10kv.pwn" if len(sys.argv)==1 else sys.argv[i]
 i += 1
 if len(sys.argv)==2:
     nb_neighbors_jet_fitting_normals = 10
