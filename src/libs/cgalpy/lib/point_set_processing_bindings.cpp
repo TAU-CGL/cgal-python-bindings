@@ -229,6 +229,31 @@ void export_functions_with_normals(C& c) {
         "a tuple of the average point movement error. It's a convergence criterium for the algorithm. This value can help the user to decide how many iterations are sufficient, and the resulting points"
         );
 
+  c.def("jet_estimate_normals", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
+        CGAL::jet_estimate_normals<Tag>(points, k, internal::parse_named_parameters(np)
+                                        .point_map(PointMap())
+                                        .normal_map(NormalMap())
+                                        );
+        return points;
+  },
+      py::arg("points"), py::arg("k"), py::arg("np"),
+      "Estimates normal directions of the range of points using jet fitting on the nearest neighbors.\n"
+      "The output normals are randomly oriented.\n\n"
+      "Precondition\n"
+      "â�¢ k >= 2\n\n"
+      "Parameters\n"
+      "â�¢ points: input point range\n"
+      "â�¢ k: number of neighbors\n"
+      "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n\n"
+      "Optional Named Parameters\n"
+      "â�¢ neighbor_radius\n"
+      "â�¢ degree_fitting\n"
+      "Returns\n"
+      "â�¢ the modified point set.\n\n"
+      "Examples\n"
+      "â�¢ Point_set_processing_3/edges_example.py."
+      );
+
   c.def("edge_aware_upsample_point_set", [](const PointRange& points, const py::kwargs& np = py::kwargs())
         { std::vector<std::pair<Point, Vector>> output;
           CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output),
@@ -421,6 +446,225 @@ void export_multiple_dimension_functions(C& c) {
 
 }
 
+template <typename PointRange, typename Point, typename Vector, typename PointMap, typename C>
+void export_functions_with_point_range_normals(C& c) {
+  using K = Kernel;
+  using Tag = CGAL::Sequential_tag;
+    c.def("compute_vcm_with_normals", [](const PointRange& points,
+                        double offset_radius,
+                        double convolution_radius,
+                        const py::kwargs& np = py::kwargs())
+      { std::vector<std::array<double, 6>> ccov;
+        CGAL::compute_vcm(points, ccov, offset_radius, convolution_radius,
+                internal::parse_named_parameters(np)
+                         .point_map(PointMap())
+                         .geom_traits(K())
+                                      );
+        return ccov;
+      },
+      py::arg("points"), py::arg("offset_radius"), py::arg("convolution_radius"), py::arg("np"),
+      "Computes the Voronoi Covariance Measure (VCM) of a point cloud, a construction that can be used for normal estimation and sharp feature detection.\n"
+      "The VCM associates to each point the covariance matrix of its Voronoi cell intersected with the ball of radius offset_radius. In addition, if the second radius convolution_radius is positive, the covariance matrices are smoothed via a convolution process. More specifically, each covariance matrix is replaced by the average of the matrices of the points located at a distance at most convolution_radius. The choice for parameter offset_radius should refer to the geometry of the underlying surface while the choice for parameter convolution_radius should refer to the noise level in the point cloud. For example, if the point cloud is a uniform and noise-free sampling of a smooth surface, offset_radius should be set to the minimum local feature size of the surface, while convolution_radius can be set to zero.\n"
+      "The Voronoi covariance matrix of each vertex is stored in an array a of length 6 and is as follow:\n"
+      "â�¡â�£â�¢a[0]a[1]a[2]a[1]a[3]a[4]a[2]a[4]a[5]â�¤â�¦â�¥\n\n"
+      "Parameters\n"
+      "â�¢ points: input point range\n"
+      "â�¢ offset_radius: offset_radius.\n"
+      "â�¢ convolution_radius: convolution_radius.\n\n"
+      "Returns\n"
+      "â�¢ average spacing (scalar). The return type FT is a number type.\n\n"
+      "Examples\n"
+      "â�¢ Point_set_processing_3/scale_estimation_example.py."
+      );
+
+  c.def("grid_simplify_point_set_with_normals", [](PointRange& points, double epsilon,
+                                      const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                                      const py::kwargs& np = py::kwargs()) {
+    auto cb_class = dummy_callback(callback);
+    unsigned int min_points_per_cell = np.contains("min_points_per_cell") ? py::cast<unsigned int>(np["min_points_per_cell"]) : 1;
+    auto el = CGAL::grid_simplify_point_set(points, epsilon, CGAL::parameters::min_points_per_cell(min_points_per_cell)
+                                             .point_map(PointMap())
+                                             .callback(cb_class)
+                                             );
+    return std::make_pair(points, std::distance(points.begin(), el));
+  },
+      py::arg("points"), py::arg("epsilon"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+      "merges points which belong to the same cell of a grid of cell size = epsilon.\n"
+      "This method modifies the order of input points so as to pack all remaining points first, and returns the first point to remove (see erase-remove idiom). For this reason it should not be called on sorted containers.\n\n"
+        "Precondition\n"
+        "â�¢ epsilon > 0\n\n"
+        "Parameters\n"
+        "â�¢ points: input point range\n"
+        "â�¢ epsilon: tolerance value when merging 3D points.\n"
+        "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n"
+        "Optional Named Parameters\n"
+        "â�¢ min_points_per_cell:  minimum number of points in a cell such that a point in this cell is kept after simplification (default: 1)\n\n"
+        "Returns\n"
+        "â�¢ a tuple of the modified point set and the index of the first point to remove.\n\n"
+        "Examples\n"
+        "â�¢ Point_set_processing_3/callback_example.py, Point_set_processing_3/grid_simplification_example.py, Point_set_processing_3/grid_simplify_indices.py, and Point_set_processing_3/scale_estimation_example.py."
+      );
+
+  c.def("hierarchy_simplify_point_set_with_normals", [](PointRange& points,
+                                           const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                                           const py::kwargs& np = py::kwargs()) {
+        auto cb_class = dummy_callback(callback);
+        unsigned int size = np.contains("size") ? py::cast<unsigned int>(np["size"]) : 10;
+        double var_max = np.contains("maximum_variation") ? py::cast<double>(np["maximum_variation"]) : 1/3.0f;
+        auto el = CGAL::hierarchy_simplify_point_set(points, CGAL::parameters::size(size)
+                                                        .maximum_variation(var_max)
+                                                        .point_map(PointMap())
+                                                        .callback(cb_class)
+                                                        );
+        return std::make_pair(points, std::distance(points.begin(), el));
+  },
+      py::arg("points"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+      "Recursively split the point set in smaller clusters until the clusters have fewer than size elements and until their variation factor is below var_max.\n"
+      "This method modifies the order of input points so as to pack all remaining points first, and returns the first point to remove (see erase-remove idiom). For this reason it should not be called on sorted containers.\n\n"
+      "Precondition\n"
+      "â�¢ 0 < maximum_variation <= 1/3 \n"
+      "â�¢ size > 0\n\n"
+      "Parameters\n"
+      "â�¢ points: input point range\n"
+      "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n"
+      "Optional Named Parameters\n"
+      "â�¢ size\n"
+      "â�¢ maximum_variation\n"
+      "Returns\n"
+      "â�¢ a tuple of the modified point set and the index first point to remove.\n\n"
+      "Examples\n"
+      "â�¢ Point_set_processing_3/hierarchy_simplification_example.py."
+      );
+
+  c.def("jet_smooth_point_set", [](PointRange& points, unsigned int k,
+                                   const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                                   const py::kwargs& np = py::kwargs()) {
+        auto cb_class = dummy_callback(callback);
+        double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
+        double df = np.contains("degree_fitting") ? py::cast<double>(np["degree_fitting"]) : 2;
+        double dm = np.contains("degree_monge") ? py::cast<double>(np["degree_monge"]) : 2;
+        CGAL::jet_smooth_point_set<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
+                                        .degree_fitting(df)
+                                        .degree_monge(dm)
+                                        .callback(cb_class)
+                                        .point_map(PointMap())
+                                        );
+        return points;
+  },
+      py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+      "Smoothes the range of points using jet fitting on the nearest neighbors and reprojection onto the jet.\n"
+      "As this method relocates the points, it should not be called on containers sorted w.r.t. point locations.\n\n"
+      "Precondition\n"
+      "â�¢ k >= 2\n\n"
+      "Parameters\n"
+      "â�¢ points: input point range\n"
+      "â�¢ k: number of neighbors\n"
+      "â�¢ callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+      "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n\n"
+      "Optional Named Parameters\n"
+      "â�¢ neighbor_radius:  the spherical neighborhood radius (default: 0 (no limit))\n"
+      "â�¢ degree_fitting:  the degree of fitting (default: 2)\n"
+      "â�¢ degree_monge:  the Monge degree (default: 2)\n"
+      "Returns\n"
+      "â�¢ the modified point set.\n\n"
+      "Examples\n"
+      "â�¢ Point_set_processing_3/edges_example.py."
+      );
+
+  c.def("mst_orient_normals", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
+        if (np.contains("point_is_constrained_map")) { // TODO: handle constrained points
+            auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np)
+                                                .point_map(PointMap())
+                                                );
+            return std::make_pair(points, std::distance(points.begin(), it));
+        }
+        else {
+          auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np)
+                                              .point_map(PointMap())
+                                              );
+          return std::make_pair(points, std::distance(points.begin(), it));
+        }
+  },
+        py::arg("points"), py::arg("k"), py::arg("np"),
+        "Orients the normals of the range of points using the propagation of a seed orientation through a minimum spanning tree of the Riemannian graph.\n"
+        "This method modifies the order of input points so as to pack all successfully oriented points first, and returns an index over the first point with an unoriented normal (see erase-remove idiom). For this reason it should not be called on sorted containers. It is based on [3].\n\n"
+        "Precondition\n"
+        "â�¢ Normals must be unit vectors \n"
+        "â�¢ k >= 2\n\n"
+        "Parameters\n"
+        "â�¢ points: input point range\n"
+        "â�¢ k: number of neighbors.\n"
+        "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n\n"
+        "Optional Named Parameters\n"
+        "â�¢ neighbor_radius:  the spherical neighborhood radius (default: 0 (no limit))\n"
+        "Returns\n"
+        "â�¢ a tuple of the modified point set and the first index of a point with an unoriented normal.\n\n"
+        "Examples\n"
+        "â�¢ Point_set_processing_3/normals_example.py."
+        );
+
+  c.def("pca_estimate_normals", [](PointRange& points, unsigned int k, const std::function<bool(double)>& callback = std::function<bool(double)>(), const py::kwargs& np = py::kwargs()) {
+        auto cb_class = dummy_callback(callback);
+        double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
+        CGAL::pca_estimate_normals<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
+                                        .callback(cb_class)
+                                        .point_map(PointMap())
+                                        );
+        return points;
+  },
+      py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+      "Estimates normal directions of the range of points by linear least squares fitting of a plane over the nearest neighbors.\n"
+      "The output normals are randomly oriented.\n\n"
+      "Precondition\n"
+      "â�¢ k >= 2\n\n"
+      "Parameters\n"
+      "â�¢ points: input point range\n"
+      "â�¢ k: number of neighbors\n"
+      "â�¢ callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+      "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n\n"
+      "Optional Named Parameters\n"
+      "â�¢ neighbor_radius:  the spherical neighborhood radius (default: 0 (no limit))\n"
+      "Returns\n"
+      "â�¢ the modified point set."
+      );
+
+  c.def("remove_outliers", [](PointRange& points, unsigned int k,
+                              const std::function<bool(double)>& callback = std::function<bool(double)>(),
+                              const py::kwargs& np = py::kwargs()) {
+        auto cb_class = dummy_callback(callback);
+        double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
+        double tp = np.contains("threshold_percent") ? py::cast<double>(np["threshold_percent"]) : 10;
+        double td = np.contains("threshold_distance") ? py::cast<double>(np["threshold_distance"]) : 0;
+        auto it = CGAL::remove_outliers<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
+                                              .threshold_percent(tp)
+                                              .threshold_distance(td)
+                                              .point_map(PointMap())
+                                              .callback(cb_class));
+        return std::make_pair(points, std::distance(points.begin(), it));
+  },
+      py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+      "Removes outliers:\n"
+      "â�¢ computes average squared distance to the nearest neighbors,\n"
+      "â�¢ and partitions the points either using a threshold on the of average distance or selecting a fixed percentage of points with the highest average distances\n"
+      "This method modifies the order of input points so as to pack all remaining points first, and returns an index over the first point to remove (see erase-remove idiom). For this reason it should not be called on sorted containers.\n\n"
+      "Precondition\n"
+      "â�¢ k >= 2\n\n"
+      "Parameters\n"
+      "â�¢ points: input point range\n"
+      "â�¢ k: number of neighbors\n"
+      "â�¢ callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+      "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n\n"
+      "Optional Named Parameters\n"
+      "â�¢ threshold_percent\n"
+      "â�¢ threshold_distance\n"
+      "Returns\n"
+      "a tuple of the modified point set and the index of the first point to remove.\n\n"
+      "Note\n"
+      "There are two thresholds that can be used: threshold_percent and threshold_distance. This function returns the smallest number of outliers such that at least one of these threshold is fulfilled. This means that if threshold_percent=100, only threshold_distance is taken into account; if threshold_distance=0 only threshold_percent is taken into account. \n"
+      );
+
+}
+
 template <typename PointRange, typename Point, typename Vector, typename C>
 void export_functions_with_point_range(C& c) {
   using K = Kernel;
@@ -457,10 +701,10 @@ void export_functions_with_point_range(C& c) {
                                       const py::kwargs& np = py::kwargs()) {
     auto cb_class = dummy_callback(callback);
     unsigned int min_points_per_cell = np.contains("min_points_per_cell") ? py::cast<unsigned int>(np["min_points_per_cell"]) : 1;
-    auto el = *CGAL::grid_simplify_point_set(points, epsilon, CGAL::parameters::min_points_per_cell(min_points_per_cell)
+    auto el = CGAL::grid_simplify_point_set(points, epsilon, CGAL::parameters::min_points_per_cell(min_points_per_cell)
                                              .callback(cb_class)
                                              );
-    return std::make_pair(points, el);
+    return std::make_pair(points, std::distance(points.begin(), el));
   },
       py::arg("points"), py::arg("epsilon"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
       "merges points which belong to the same cell of a grid of cell size = epsilon.\n"
@@ -474,7 +718,7 @@ void export_functions_with_point_range(C& c) {
         "Optional Named Parameters\n"
         "• min_points_per_cell:  minimum number of points in a cell such that a point in this cell is kept after simplification (default: 1)\n\n"
         "Returns\n"
-        "• a tuple of the modified point set and the first point to remove.\n\n"
+        "• a tuple of the modified point set and the index of the first point to remove.\n\n"
         "Examples\n"
         "• Point_set_processing_3/callback_example.py, Point_set_processing_3/grid_simplification_example.py, Point_set_processing_3/grid_simplify_indices.py, and Point_set_processing_3/scale_estimation_example.py."
       );
@@ -485,11 +729,11 @@ void export_functions_with_point_range(C& c) {
         auto cb_class = dummy_callback(callback);
         unsigned int size = np.contains("size") ? py::cast<unsigned int>(np["size"]) : 10;
         double var_max = np.contains("maximum_variation") ? py::cast<double>(np["maximum_variation"]) : 1/3.0f;
-        auto el = *CGAL::hierarchy_simplify_point_set(points, CGAL::parameters::size(size)
+        auto el = CGAL::hierarchy_simplify_point_set(points, CGAL::parameters::size(size)
                                                         .maximum_variation(var_max)
                                                         .callback(cb_class)
                                                         );
-        return std::make_pair(points, el);
+        return std::make_pair(points, std::distance(points.begin(), el));
   },
       py::arg("points"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
       "Recursively split the point set in smaller clusters until the clusters have fewer than size elements and until their variation factor is below var_max.\n"
@@ -504,32 +748,9 @@ void export_functions_with_point_range(C& c) {
       "• size\n"
       "• maximum_variation\n"
       "Returns\n"
-      "• a tuple of the modified point set and the first point to remove.\n\n"
+      "• a tuple of the modified point set and the index of the first point to remove.\n\n"
       "Examples\n"
       "• Point_set_processing_3/hierarchy_simplification_example.py."
-      );
-
-  c.def("jet_estimate_normals", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
-        CGAL::jet_estimate_normals<Tag>(points, k, internal::parse_named_parameters(np));
-        return points;
-  },
-      py::arg("points"), py::arg("k"), py::arg("np"),
-      "Estimates normal directions of the range of points using jet fitting on the nearest neighbors.\n"
-      "The output normals are randomly oriented.\n\n"
-      "Precondition\n"
-      "• k >= 2\n\n"
-      "Parameters\n"
-      "• points: input point range\n"
-      "• k: number of neighbors\n"
-      "• np: an optional sequence of Named Parameters among the ones listed below\n\n"
-      "Optional Named Parameters\n"
-      "• neighbor_radius\n"
-      "• degree_fitting\n"
-      "• geom_traits\n\n"
-      "Returns\n"
-      "• the modified point set.\n\n"
-      "Examples\n"
-      "• Point_set_processing_3/edges_example.py."
       );
 
   c.def("jet_smooth_point_set", [](PointRange& points, unsigned int k,
@@ -568,17 +789,17 @@ void export_functions_with_point_range(C& c) {
 
   c.def("mst_orient_normals", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
         if (np.contains("point_is_constrained_map")) { // TODO: handle constrained points
-            auto it = *CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np));
-            return std::make_pair(points, it);
+            auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np));
+            return std::make_pair(points, std::distance(points.begin(), it));
         }
         else {
-          auto it = *CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np));
-          return std::make_pair(points, it);
+          auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np));
+          return std::make_pair(points, std::distance(points.begin(), it));
         }
   },
         py::arg("points"), py::arg("k"), py::arg("np"),
         "Orients the normals of the range of points using the propagation of a seed orientation through a minimum spanning tree of the Riemannian graph.\n"
-        "This method modifies the order of input points so as to pack all successfully oriented points first, and returns an iterator over the first point with an unoriented normal (see erase-remove idiom). For this reason it should not be called on sorted containers. It is based on [3].\n\n"
+        "This method modifies the order of input points so as to pack all successfully oriented points first, and returns an index over the first point with an unoriented normal (see erase-remove idiom). For this reason it should not be called on sorted containers. It is based on [3].\n\n"
         "Precondition\n"
         "• Normals must be unit vectors \n"
         "• k >= 2\n\n"
@@ -589,7 +810,7 @@ void export_functions_with_point_range(C& c) {
         "Optional Named Parameters\n"
         "• neighbor_radius:  the spherical neighborhood radius (default: 0 (no limit))\n"
         "Returns\n"
-        "• a tuple of the modified point set and the first point with an unoriented normal.\n\n"
+        "• a tuple of the modified point set and the index of the first point with an unoriented normal.\n\n"
         "Examples\n"
         "• Point_set_processing_3/normals_example.py."
         );
@@ -619,17 +840,17 @@ void export_functions_with_point_range(C& c) {
       );
 
   c.def("random_simplify_point_set", [](PointRange& points, double removed_percentage) {
-        auto it = *CGAL::random_simplify_point_set(points, removed_percentage);
-        return std::make_pair(points, it);
+        auto it = CGAL::random_simplify_point_set(points, removed_percentage);
+        return std::make_pair(points, std::distance(points.begin(), it));
   },
       py::arg("points"), py::arg("removed_percentage"),
       "Randomly deletes a user-specified fraction of the input points.\n"
-      "This method modifies the order of input points so as to pack all remaining points first, and returns an iterator over the first point to remove (see erase-remove idiom). For this reason it should not be called on sorted containers.\n\n"
+      "This method modifies the order of input points so as to pack all remaining points first, and returns an index over the first point to remove (see erase-remove idiom). For this reason it should not be called on sorted containers.\n\n"
       "Parameters\n"
       "• points: input point range\n"
       "• removed_percentage: percentage of points to remove\n"
       "Returns\n"
-      "• a tuple of the modified point set and the first point to remove.\n\n"
+      "• a tuple of the modified point set and the index of the first point to remove.\n\n"
       "Examples\n"
       "• Point_set_processing_3/random_simplification_example.py."
       );
@@ -641,17 +862,17 @@ void export_functions_with_point_range(C& c) {
         double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
         double tp = np.contains("threshold_percent") ? py::cast<double>(np["threshold_percent"]) : 10;
         double td = np.contains("threshold_distance") ? py::cast<double>(np["threshold_distance"]) : 0;
-        auto it = *CGAL::remove_outliers<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
+        auto it = CGAL::remove_outliers<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
                                               .threshold_percent(tp)
                                               .threshold_distance(td)
                                               .callback(cb_class));
-        return std::make_pair(points, it);
+        return std::make_pair(points, std::distance(points.begin(), it));
   },
       py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
       "Removes outliers:\n"
       "• computes average squared distance to the nearest neighbors,\n"
       "• and partitions the points either using a threshold on the of average distance or selecting a fixed percentage of points with the highest average distances\n"
-      "This method modifies the order of input points so as to pack all remaining points first, and returns an iterator over the first point to remove (see erase-remove idiom). For this reason it should not be called on sorted containers.\n\n"
+      "This method modifies the order of input points so as to pack all remaining points first, and returns an index over the first point to remove (see erase-remove idiom). For this reason it should not be called on sorted containers.\n\n"
       "Precondition\n"
       "• k >= 2\n\n"
       "Parameters\n"
@@ -663,7 +884,7 @@ void export_functions_with_point_range(C& c) {
       "• threshold_percent\n"
       "• threshold_distance\n"
       "Returns\n"
-      "a tuple of the modified point set and the first point to remove.\n\n"
+      "a tuple of the modified point set and the index of the first point to remove.\n\n"
       "Note\n"
       "There are two thresholds that can be used: threshold_percent and threshold_distance. This function returns the smallest number of outliers such that at least one of these threshold is fulfilled. This means that if threshold_percent=100, only threshold_distance is taken into account; if threshold_distance=0 only threshold_percent is taken into account. \n"
       );
@@ -757,6 +978,7 @@ void export_point_set_processing(py::module_& m) {
 
   export_functions_with_point_range<PointVector_3, Point_3, Vector_3>(m);
   export_functions_with_point_range<PointSet_3, Point_3, Vector_3>(m);
+  export_functions_with_point_range_normals<PointRange_3, Point_3, Vector_3, Fopopm>(m);
 
 
   // export_multiple_dimension_functions<PointVector_2, Point_2, Vector_2>(m);
