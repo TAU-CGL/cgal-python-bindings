@@ -16,9 +16,6 @@ CGALPY = importlib.import_module(lib)
 fname = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/oni.pwn")
 i += 1
 
-fname = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/oni.pwn")
-i += 1
-
 # Reads a point set file in points[].
 success, points = CGALPY.read_points(fname)
 if not success:

@@ -308,6 +308,66 @@ void export_functions_with_normals(C& c) {
       "• Point_set_processing_3/orient_scanlines_example.py."
       );
 
+  c.def("pca_estimate_normals", [](PointRange& points, unsigned int k, const std::function<bool(double)>& callback = std::function<bool(double)>(), const py::kwargs& np = py::kwargs()) {
+        auto cb_class = dummy_callback(callback);
+        double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
+        CGAL::pca_estimate_normals<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
+                                        .callback(cb_class)
+                                        .point_map(PointMap())
+                                        .normal_map(NormalMap())
+                                        );
+        return points;
+  },
+      py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
+      "Estimates normal directions of the range of points by linear least squares fitting of a plane over the nearest neighbors.\n"
+      "The output normals are randomly oriented.\n\n"
+      "Precondition\n"
+      "â�¢ k >= 2\n\n"
+      "Parameters\n"
+      "â�¢ points: input point range\n"
+      "â�¢ k: number of neighbors\n"
+      "â�¢ callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
+      "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n\n"
+      "Optional Named Parameters\n"
+      "â�¢ neighbor_radius:  the spherical neighborhood radius (default: 0 (no limit))\n"
+      "Returns\n"
+      "â�¢ the modified point set."
+      );
+
+  c.def("mst_orient_normals", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
+        if (np.contains("point_is_constrained_map")) { // TODO: handle constrained points
+            auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np)
+                                                .point_map(PointMap())
+                                                .normal_map(NormalMap())
+                                                );
+            return std::make_pair(points, std::distance(points.begin(), it));
+        }
+        else {
+          auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np)
+                                              .point_map(PointMap())
+                                              .normal_map(NormalMap())
+                                              );
+          return std::make_pair(points, std::distance(points.begin(), it));
+        }
+  },
+        py::arg("points"), py::arg("k"), py::arg("np"),
+        "Orients the normals of the range of points using the propagation of a seed orientation through a minimum spanning tree of the Riemannian graph.\n"
+        "This method modifies the order of input points so as to pack all successfully oriented points first, and returns an index over the first point with an unoriented normal (see erase-remove idiom). For this reason it should not be called on sorted containers. It is based on [3].\n\n"
+        "Precondition\n"
+        "â�¢ Normals must be unit vectors \n"
+        "â�¢ k >= 2\n\n"
+        "Parameters\n"
+        "â�¢ points: input point range\n"
+        "â�¢ k: number of neighbors.\n"
+        "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n\n"
+        "Optional Named Parameters\n"
+        "â�¢ neighbor_radius:  the spherical neighborhood radius (default: 0 (no limit))\n"
+        "Returns\n"
+        "â�¢ a tuple of the modified point set and the first index of a point with an unoriented normal.\n\n"
+        "Examples\n"
+        "â�¢ Point_set_processing_3/normals_example.py."
+        );
+
 
   c.def("vcm_estimate_normals", [](PointRange& points, double offset_radius, double convolution_radius,
                                    const py::kwargs& np = py::kwargs()) {
@@ -536,7 +596,7 @@ void export_functions_with_point_range_normals(C& c) {
       "â�¢ Point_set_processing_3/hierarchy_simplification_example.py."
       );
 
-  c.def("jet_smooth_point_set", [](PointRange& points, unsigned int k,
+  c.def("jet_smooth_point_set_with_normals", [](PointRange& points, unsigned int k,
                                    const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                    const py::kwargs& np = py::kwargs()) {
         auto cb_class = dummy_callback(callback);
@@ -569,63 +629,6 @@ void export_functions_with_point_range_normals(C& c) {
       "â�¢ the modified point set.\n\n"
       "Examples\n"
       "â�¢ Point_set_processing_3/edges_example.py."
-      );
-
-  c.def("mst_orient_normals", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
-        if (np.contains("point_is_constrained_map")) { // TODO: handle constrained points
-            auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np)
-                                                .point_map(PointMap())
-                                                );
-            return std::make_pair(points, std::distance(points.begin(), it));
-        }
-        else {
-          auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np)
-                                              .point_map(PointMap())
-                                              );
-          return std::make_pair(points, std::distance(points.begin(), it));
-        }
-  },
-        py::arg("points"), py::arg("k"), py::arg("np"),
-        "Orients the normals of the range of points using the propagation of a seed orientation through a minimum spanning tree of the Riemannian graph.\n"
-        "This method modifies the order of input points so as to pack all successfully oriented points first, and returns an index over the first point with an unoriented normal (see erase-remove idiom). For this reason it should not be called on sorted containers. It is based on [3].\n\n"
-        "Precondition\n"
-        "â�¢ Normals must be unit vectors \n"
-        "â�¢ k >= 2\n\n"
-        "Parameters\n"
-        "â�¢ points: input point range\n"
-        "â�¢ k: number of neighbors.\n"
-        "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n\n"
-        "Optional Named Parameters\n"
-        "â�¢ neighbor_radius:  the spherical neighborhood radius (default: 0 (no limit))\n"
-        "Returns\n"
-        "â�¢ a tuple of the modified point set and the first index of a point with an unoriented normal.\n\n"
-        "Examples\n"
-        "â�¢ Point_set_processing_3/normals_example.py."
-        );
-
-  c.def("pca_estimate_normals", [](PointRange& points, unsigned int k, const std::function<bool(double)>& callback = std::function<bool(double)>(), const py::kwargs& np = py::kwargs()) {
-        auto cb_class = dummy_callback(callback);
-        double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
-        CGAL::pca_estimate_normals<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
-                                        .callback(cb_class)
-                                        .point_map(PointMap())
-                                        );
-        return points;
-  },
-      py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
-      "Estimates normal directions of the range of points by linear least squares fitting of a plane over the nearest neighbors.\n"
-      "The output normals are randomly oriented.\n\n"
-      "Precondition\n"
-      "â�¢ k >= 2\n\n"
-      "Parameters\n"
-      "â�¢ points: input point range\n"
-      "â�¢ k: number of neighbors\n"
-      "â�¢ callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
-      "â�¢ np: an optional sequence of Named Parameters among the ones listed below\n\n"
-      "Optional Named Parameters\n"
-      "â�¢ neighbor_radius:  the spherical neighborhood radius (default: 0 (no limit))\n"
-      "Returns\n"
-      "â�¢ the modified point set."
       );
 
   c.def("remove_outliers", [](PointRange& points, unsigned int k,
@@ -763,7 +766,7 @@ void export_functions_with_point_range(C& c) {
         CGAL::jet_smooth_point_set<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
                                         .degree_fitting(df)
                                         .degree_monge(dm)
-                                        .callback(cb_class)
+                                        // .callback(cb_class)
                                         );
         return points;
   },
@@ -814,30 +817,6 @@ void export_functions_with_point_range(C& c) {
         "Examples\n"
         "• Point_set_processing_3/normals_example.py."
         );
-
-  c.def("pca_estimate_normals", [](PointRange& points, unsigned int k, const std::function<bool(double)>& callback = std::function<bool(double)>(), const py::kwargs& np = py::kwargs()) {
-        auto cb_class = dummy_callback(callback);
-        double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
-        CGAL::pca_estimate_normals<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
-                                        .callback(cb_class)
-                                        );
-        return points;
-  },
-      py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
-      "Estimates normal directions of the range of points by linear least squares fitting of a plane over the nearest neighbors.\n"
-      "The output normals are randomly oriented.\n\n"
-      "Precondition\n"
-      "• k >= 2\n\n"
-      "Parameters\n"
-      "• points: input point range\n"
-      "• k: number of neighbors\n"
-      "• callback: a mechanism to get feedback on the advancement of the algorithm while it's running and to interrupt it if needed\n"
-      "• np: an optional sequence of Named Parameters among the ones listed below\n\n"
-      "Optional Named Parameters\n"
-      "• neighbor_radius:  the spherical neighborhood radius (default: 0 (no limit))\n"
-      "Returns\n"
-      "• the modified point set."
-      );
 
   c.def("random_simplify_point_set", [](PointRange& points, double removed_percentage) {
         auto it = CGAL::random_simplify_point_set(points, removed_percentage);
