@@ -10,8 +10,7 @@ if len(sys.argv) > 1:
     i = 2
 if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
-# CGALPY = importlib.import_module(lib)
-import CGALPY.CGALPY as CGALPY
+CGALPY = importlib.import_module(lib)
 
 fname = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/fin90_with_PCA_normals.xyz")
 i += 1
@@ -23,13 +22,15 @@ if not success:
   sys.exit(1)
 
 print(f"{len(points)} input points")
-indices = list(range(len(points)))
+point_to_index = dict(zip(points, range(len(points))))
+
 # simplification by clustering using erase-remove idiom
 cell_size = 0.05
 points, k = CGALPY.grid_simplify_point_set_with_normals(points, cell_size)
 
-print(f"Keep {k} of {len(indices)} indices")
+print(f"Keep {k} of {len(points)} points")
 
-points = points[:k]
+points = list(map(lambda x: points[0], points[:k]))
+normals = list(map(lambda x: points[1], points[:k]))
 
-print(f"{len(points)} points after the simplification")
+print(f"{k} points after simplification")
