@@ -514,7 +514,7 @@ void export_functions_with_point_range_normals(C& c) {
         auto el = CGAL::hierarchy_simplify_point_set(points, CGAL::parameters::size(size)
                                                         .maximum_variation(var_max)
                                                         .point_map(PointMap())
-                                                        .callback(cb_class)
+                                                        // .callback(cb_class)
                                                         );
         return std::make_pair(points, std::distance(points.begin(), el));
   },
@@ -731,7 +731,7 @@ void export_functions_with_point_range(C& c) {
         double var_max = np.contains("maximum_variation") ? py::cast<double>(np["maximum_variation"]) : 1/3.0f;
         auto el = CGAL::hierarchy_simplify_point_set(points, CGAL::parameters::size(size)
                                                         .maximum_variation(var_max)
-                                                        .callback(cb_class)
+                                                        // .callback(cb_class) // this doesnt work
                                                         );
         return std::make_pair(points, std::distance(points.begin(), el));
   },

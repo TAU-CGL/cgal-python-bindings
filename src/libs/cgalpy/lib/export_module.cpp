@@ -58,6 +58,7 @@ void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
 void export_visibility_2(py::module_&);
 void export_cgal(py::module_& m);
+void export_tools(py::module_& m);
 void export_approximate_kernel(py::module_& m);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
@@ -68,6 +69,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
   export_approximate_kernel(m);
   export_cgal(m);
+  export_tools(m);
 
 #ifdef CGALPY_KERNEL_BINDINGS
   auto ker_m = m.def_submodule("Ker", kernel_doc());

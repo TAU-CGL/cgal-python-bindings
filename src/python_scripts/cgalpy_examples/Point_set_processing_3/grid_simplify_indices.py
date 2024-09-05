@@ -30,7 +30,6 @@ points, k = CGALPY.grid_simplify_point_set_with_normals(points, cell_size)
 
 print(f"Keep {k} of {len(points)} points")
 
-points = list(map(lambda x: points[0], points[:k]))
-normals = list(map(lambda x: points[1], points[:k]))
+points, normals = zip(*points)
 
 print(f"{k} points after simplification")
