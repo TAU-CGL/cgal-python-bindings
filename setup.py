@@ -13,6 +13,7 @@ https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
 """
 
 from skbuild import setup
+import shutil
 import sys
 import os
 
@@ -37,9 +38,9 @@ CGALPY_CONFIGURATION = [
                         # "-DCGALPY_POLYGON_2_BINDINGS=ON",
                         # "-DCGALPY_MINKOWSKI_SUM_2_BINDINGS=ON",
                         # "-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=ON",
-                        # "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
+                        "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
                         # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON"
-                        # "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
+                        "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
                         # "-DCGALPY_SPATIAL_SEARCHING_BINDINGS=ON",
                         # "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
                         # "-DCGALPY_TRIANGULATION_2_BINDINGS=ON",
@@ -53,6 +54,8 @@ CGALPY_CONFIGURATION = [
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def prepare():
+    # Replace src/libs/cgalpy/include/CGALPY/kernel_type.hpp with epec.hpp
+    shutil.copyfile("src/libs/cgalpy/include/CGALPY/epec.hpp", "src/libs/cgalpy/include/CGALPY/kernel_type.hpp")
     # Automatically create proxy modules for new configurations.
     folder = f"python/{IMPORT_NAME}"
     proxy_init = "# This file has been automatically created by setup.py.\n" \
@@ -69,8 +72,9 @@ def run_conan():
     import subprocess
 
     # Make sure to access the local conan
-    cmd = "-m conans.conan install . --build missing"
+    cmd = "-m conans.conan install . --build missing -s compiler.cppstd=gnu17"
     subprocess.run([sys.executable, *cmd.split(" ")], check=True)
+    # CIBW_BEFORE_BUILD="pip install conan && conan profile detect && conan install . --build missing -s compiler.cppstd=gnu17 -s compiler.version=14.2 && export CONAN_CXX_FLAGS='-std=c++17'" CIBW_BUILD="cp312-*" cibuildwheel
 
 
 def readme():
