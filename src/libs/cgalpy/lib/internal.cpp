@@ -18,7 +18,7 @@ namespace py = nanobind;
 namespace internal {
 
 Named_params parse_named_parameters(const py::dict& params, Named_params cgal_parameters) {
-  using Ft = double;
+  using Ft = typename Kernel::FT;
   // iterate throught all params and add them to the cgal_parameters
   for (const auto& item : params) {
     const std::string key = py::cast<std::string>(item.first);

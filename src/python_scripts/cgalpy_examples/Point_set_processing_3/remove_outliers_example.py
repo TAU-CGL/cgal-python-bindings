@@ -11,7 +11,6 @@ if len(sys.argv) > 1:
 if lib == 'CGALPY':
   sys.path.append(os.path.abspath('../precompiled'))
 CGALPY = importlib.import_module(lib)
-import CGALPY.CGALPY as CGALPY
 
 fname = sys.argv[i] if len(sys.argv)>i else CGALPY.data_file_path("points_3/oni.pwn")
 i += 1

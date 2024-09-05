@@ -167,7 +167,7 @@ void export_functions_without_normals(C& c) {
                                                             .number_of_iterations(noi)
                                                             .require_uniform_sampling(rus)
                                                             .neighbor_radius(nr)
-                                                            .callback(cb_class)
+                                                            // .callback(cb_class)
                                                             .geom_traits(K())
                                                             );
         }
@@ -176,7 +176,7 @@ void export_functions_without_normals(C& c) {
                                                             CGAL::parameters::select_percentage(sp)
                                                             .number_of_iterations(noi)
                                                             .require_uniform_sampling(rus)
-                                                            .callback(cb_class)
+                                                            // .callback(cb_class)
                                                             .geom_traits(K())
                                                             );
         }
@@ -433,7 +433,7 @@ void export_functions_with_normals(C& c) {
       );
 
 
-  c.def("wlop_simplify_and_regularize_point_set", [](PointRange& points,
+  c.def("wlop_simplify_and_regularize_point_set_with_normals", [](PointRange& points,
                                                      const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                                      const py::kwargs& np = py::kwargs()) {
         std::vector<Kernel::Point_3> output;
@@ -450,7 +450,7 @@ void export_functions_with_normals(C& c) {
                                                             .number_of_iterations(noi)
                                                             .require_uniform_sampling(rus)
                                                             .neighbor_radius(nr)
-                                                            .callback(cb_class)
+                                                            // .callback(cb_class)
                                                             .geom_traits(K())
                                                             );
         }
@@ -461,11 +461,11 @@ void export_functions_with_normals(C& c) {
                                                             .normal_map(NormalMap())
                                                             .number_of_iterations(noi)
                                                             .require_uniform_sampling(rus)
-                                                            .callback(cb_class)
+                                                            // .callback(cb_class)
                                                             .geom_traits(K())
                                                             );
         }
-        return std::make_pair(output, points);
+        return std::make_pair(points, output);
   },
       py::arg("points"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
       "This is an implementation of the Weighted Locally Optimal Projection (WLOP) simplification algorithm.\n"
@@ -507,8 +507,8 @@ void export_multiple_dimension_functions(C& c) {
         "• Point_set_processing_3/scale_estimation.py."
         );
 
-  c.def("estimate_global_range_scale", [](PointRange& points, const py::kwargs& np = py::kwargs())
-        { CGAL::estimate_global_range_scale(points,
+  c.def("estimate_global_range_scale", [](const PointRange& points, const py::kwargs& np = py::kwargs())
+        { return CGAL::estimate_global_range_scale(points,
                   internal::parse_named_parameters(np)
                          .geom_traits(K())
                           ); },
@@ -895,17 +895,6 @@ void export_functions_with_point_range(C& c) {
 
   // TODO: structure_point_set() needs RANSAC planes too
 
-  c.def("vcm_is_on_feature_edge", &CGAL::vcm_is_on_feature_edge<Kernel::FT>,
-        py::arg("cov"), py::arg("threshold"),
-      "determines if a point is on a sharp feature edge from a point set for which the Voronoi covariance Measures have been computed.\n"
-      "The sharpness of the edge, specified by parameter threshold, is used to filtered points according to the external angle around a sharp feature.\n"
-      "A point is considered to be on a sharp feature if the external angle alpha at the edge is such that alpha >= 2 / sqrt(3) * sqrt(threshold). In particular this means that if the input contains sharp features with different external angles, the one with the smallest external angle should be considered, which however would result in selecting more points on sharper regions. More details are provided in [9].\n\n"
-      "See also\n"
-      "• CGALPY.compute_vcm()\n\n"
-      "Examples\n"
-      "Point_set_processing_3/edges_example.py."
-      );
-
 
 }
 
@@ -991,6 +980,7 @@ void export_point_set_processing(py::module_& m) {
   export_multiple_dimension_functions<PointSet_3, Point_3, Vector_3>(m);
 
   export_functions_with_point_vec<PointVector_3>(m);
+  // export_functions_with_point_vec<PointVector_2>(m); // why does this not work?
 
   export_functions_with_normals<PointRange_3, Fopopm, Sopopm, Point_3, Vector_3>(m);
   export_functions_without_normals<PointVector_3, Point_3, Vector_3>(m);
@@ -1193,5 +1183,17 @@ void export_point_set_processing(py::module_& m) {
         "Examples\n"
         "Point_set_processing_3/edge_aware_upsample_point_set_example.py, Point_set_processing_3/hierarchy_simplification_example.py, Point_set_processing_3/registration_with_OpenGR.py, Point_set_processing_3/registration_with_opengr_pointmatcher_pipeline.py, Point_set_processing_3/registration_with_pointmatcher.py, Point_set_processing_3/structuring_example.py, and Point_set_processing_3/wlop_simplify_and_regularize_point_set_example.py."
         );
+
+  m.def("vcm_is_on_feature_edge", &CGAL::vcm_is_on_feature_edge<Kernel::FT>,
+        py::arg("cov"), py::arg("threshold"),
+      "determines if a point is on a sharp feature edge from a point set for which the Voronoi covariance Measures have been computed.\n"
+      "The sharpness of the edge, specified by parameter threshold, is used to filtered points according to the external angle around a sharp feature.\n"
+      "A point is considered to be on a sharp feature if the external angle alpha at the edge is such that alpha >= 2 / sqrt(3) * sqrt(threshold). In particular this means that if the input contains sharp features with different external angles, the one with the smallest external angle should be considered, which however would result in selecting more points on sharper regions. More details are provided in [9].\n\n"
+      "See also\n"
+      "• CGALPY.compute_vcm()\n\n"
+      "Examples\n"
+      "Point_set_processing_3/edges_example.py."
+      );
+
 
 }
