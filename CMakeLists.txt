@@ -13,6 +13,10 @@ if (CMAKE_TOOLCHAIN_FILE)
     include(${CMAKE_TOOLCHAIN_FILE})
 endif (CMAKE_TOOLCHAIN_FILE)
 
+# set skbuild if CGALPY_PYPI is 1
+if (DEFINED ENV{CGALPY_PYPI})
+    set(SKBUILD $ENV{CGALPY_PYPI})
+endif ()
 
 if (SKBUILD)  # scikit-build
     # this block was added for scikit-build, but should also be fine for
