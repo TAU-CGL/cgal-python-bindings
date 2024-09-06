@@ -30,7 +30,7 @@ if (CGALPY_WITH_VISUAL)
   add_definitions(-DCGALPY_HAS_VISUAL=)
 endif()
 
-if (NOT CGAL_FOUND)
+if (NOT CGAL_FOUND AND NOT DEFINED ENV{CGALPY_PYPI})
   message(FATAL_ERROR "This library cannot be compiled, as it requires CGAL.")
   return()
 endif ()

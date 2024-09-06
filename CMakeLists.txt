@@ -13,9 +13,14 @@ if (CMAKE_TOOLCHAIN_FILE)
     include(${CMAKE_TOOLCHAIN_FILE})
 endif (CMAKE_TOOLCHAIN_FILE)
 
-# set skbuild if CGALPY_PYPI is 1
 if (DEFINED ENV{CGALPY_PYPI})
-    set(SKBUILD $ENV{CGALPY_PYPI})
+    # set(SKBUILD $ENV{CGALPY_PYPI})
+    # target_include_directories(release PRIVATE /project/nanobind-2.1.0/include)
+    # set nanobind_DIR and CGAL_DIR
+    # set(nanobind_DIR /project/nanobind-2.1.0)
+    # set(CGAL_DIR /project/cgal-6.0-beta1)
+    # set(ENV{CGAL_DIR} "/project/cgal-6.0-beta1")
+    # set(ENV{nanobind_DIR} "/project/nanobind-2.1.0")
 endif ()
 
 if (SKBUILD)  # scikit-build

@@ -1,3 +1,5 @@
+[requires]
+cgal/5.6.1
 [generators]
 CMakeDeps
 CMakeToolchain
