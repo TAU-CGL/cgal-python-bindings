@@ -14,13 +14,7 @@ if (CMAKE_TOOLCHAIN_FILE)
 endif (CMAKE_TOOLCHAIN_FILE)
 
 if (DEFINED ENV{CGALPY_PYPI})
-    # set(SKBUILD $ENV{CGALPY_PYPI})
-    # target_include_directories(release PRIVATE /project/nanobind-2.1.0/include)
-    # set nanobind_DIR and CGAL_DIR
-    # set(nanobind_DIR /project/nanobind-2.1.0)
-    # set(CGAL_DIR /project/cgal-6.0-beta1)
-    # set(ENV{CGAL_DIR} "/project/cgal-6.0-beta1")
-    # set(ENV{nanobind_DIR} "/project/nanobind-2.1.0")
+  set(CGALPY_DIR "/project/cgal-6.0-beta1")
 endif ()
 
 if (SKBUILD)  # scikit-build
@@ -34,10 +28,12 @@ if (SKBUILD)  # scikit-build
     # (which conan has at the time).
     # If the dependency has complicated dependencies on its own or is slow to
     # compile, better use conan.
-    include(./cmake/CPM.cmake)  # Package manager for simple requirements.
+    # include(./cmake/CPM.cmake)  # Package manager for simple requirements.
 
     # further CPM-dependencies may be defined in the subdirectories
-    CPMAddPackage("gh:wjakob/nanobind@2.1.0")
+    # CPMAddPackage("gh:wjakob/nanobind@2.1.0")
+    find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
+    find_package(nanobind CONFIG REQUIRED)
     #~~~~~~~~~~~~~~~~~ Conan dependencies ~~~~~~~~~~~~~~~~~~~~~
     # We are using the `cmake_find_package` generator to create `FindXXX`-files
     # in the `cmake`-folder. This is only necessary, if the packages are not
@@ -48,6 +44,7 @@ if (SKBUILD)  # scikit-build
     # run `conan install .. --build=missing` in `./cmake`.
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
+    
     find_package(CGAL REQUIRED)
     find_package(Boost REQUIRED)
 
@@ -67,7 +64,6 @@ if (SKBUILD)  # scikit-build
         find_package(Python)
     endif ()
 
-    find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
 endif ()
 
 # General
