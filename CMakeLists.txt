@@ -6,7 +6,7 @@ endif()
 if (POLICY CMP0148)
   cmake_policy(SET CMP0148 OLD)
 endif()
-project(cgalpy VERSION "1.0.0" LANGUAGES CXX)
+project(cgalpy VERSION "1.0.2" LANGUAGES CXX)
 
 # Include windows toolchain path (if available)
 if (CMAKE_TOOLCHAIN_FILE)
@@ -68,7 +68,6 @@ if (SKBUILD)  # scikit-build
         find_package(PythonInterp)
         find_package(Python)
     endif ()
-
 endif ()
 
 # General
@@ -176,8 +175,9 @@ include(InstallRequiredSystemLibraries)
 if (NOT SKBUILD)
     set(CPACK_GENERATOR TGZ)
     set(CPACK_PACKAGE_VENDOR "taucgl")
-    set(CPACK_PACKAGE_VERSION_MAJOR "0")
-    set(CPACK_PACKAGE_VERSION_MINOR "1")
-    set(CPACK_PACKAGE_VERSION_PATCH "0")
+    set(CPACK_PACKAGE_VERSION_MAJOR "1")
+    set(CPACK_PACKAGE_VERSION_MINOR "0")
+    set(CPACK_PACKAGE_VERSION_PATCH "2")
     include(CPack)
 endif ()
+

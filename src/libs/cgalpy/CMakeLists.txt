@@ -549,62 +549,6 @@ if (NOT SKBUILD)
     #   set_target_properties(CGALPY PROPERTIES BUNDLE ON)
     # endif()
 
-    ################################################################################
-    # Documentation
-    ################################################################################
-
-    if (CGALPY_BUILD_DEV_DOC)
-        # Doxygen
-        find_package(Doxygen)
-
-        set(CGALPY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-
-        if (DOXYGEN_FOUND)
-            add_custom_command(
-                    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-                    COMMAND "${CMAKE_COMMAND}"
-                    "-DFILE_IN=${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
-                    "-DFILE_OUT=${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
-                    "-DCGALPY_SOURCE_DIR=${CGALPY_SOURCE_DIR}"
-                    -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
-                    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in")
-
-            set(CGALPY_CPP_DOC_DEPENDS
-                    ${CGALPY_SRC_FILES}
-                    ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
-
-            add_custom_command(
-                    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-                    COMMAND "${CMAKE_COMMAND}" -E touch "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
-                    DEPENDS ${CGALPY_CPP_DOC_DEPENDS}
-                    COMMENT "Generating API documentation with Doxygen" VERBATIM)
-            list(APPEND CGALPY_CPP_DOC_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp")
-            add_custom_target(
-                    CGALPY_CPP_DOC
-                    DEPENDS ${CGALPY_CPP_DOC_DEPENDS})
-            if (NOT TARGET doc)
-                add_custom_target(doc)
-            endif ()
-            add_dependencies(doc CGALPY_CPP_DOC)
-        endif (DOXYGEN_FOUND)
-    endif ()
-
-    if (CGALPY_BUILD_DOC)
-        # Sphinx
-        find_package(Sphinx)
-
-        if (Sphinx_FOUND)
-            add_sphinx_document(${CGALPY_LIB_NAME}
-                    MODULES "${CGALPY_MODULES}"
-                    AUTHORS "${CGALPY_PROJECT_AUTHORS}"
-                    CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
-                    INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst")
-        else ()
-            message(WARNING "No Sphinx found. Documentation target not available.")
-        endif ()
-    endif ()
 
     ################################################################################
     # Stubs (Type Annotation)
@@ -813,4 +757,64 @@ else ()
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
     install(TARGETS _CGALPY DESTINATION python/${CGALPY_IMPORT_NAME}/)
+endif ()
+
+
+
+
+################################################################################
+# Documentation
+################################################################################
+
+if (CGALPY_BUILD_DEV_DOC)
+    # Doxygen
+    find_package(Doxygen)
+
+    set(CGALPY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
+    if (DOXYGEN_FOUND)
+        add_custom_command(
+                OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+                COMMAND "${CMAKE_COMMAND}"
+                "-DFILE_IN=${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
+                "-DFILE_OUT=${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
+                "-DCGALPY_SOURCE_DIR=${CGALPY_SOURCE_DIR}"
+                -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
+                DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in")
+
+        set(CGALPY_CPP_DOC_DEPENDS
+                ${CGALPY_SRC_FILES}
+                ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+
+        add_custom_command(
+                OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
+                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+                COMMAND "${CMAKE_COMMAND}" -E touch "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp"
+                DEPENDS ${CGALPY_CPP_DOC_DEPENDS}
+                COMMENT "Generating API documentation with Doxygen" VERBATIM)
+        list(APPEND CGALPY_CPP_DOC_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp")
+        add_custom_target(
+                CGALPY_CPP_DOC
+                DEPENDS ${CGALPY_CPP_DOC_DEPENDS})
+        if (NOT TARGET doc)
+            add_custom_target(doc)
+        endif ()
+        add_dependencies(doc CGALPY_CPP_DOC)
+    endif (DOXYGEN_FOUND)
+endif ()
+
+if (CGALPY_BUILD_DOC)
+    # Sphinx
+    find_package(Sphinx)
+
+    if (Sphinx_FOUND)
+        add_sphinx_document(${CGALPY_LIB_NAME}
+                MODULES "${CGALPY_MODULES}"
+                AUTHORS "${CGALPY_PROJECT_AUTHORS}"
+                CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
+                INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst")
+    else ()
+        message(WARNING "No Sphinx found. Documentation target not available.")
+    endif ()
 endif ()

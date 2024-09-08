@@ -22,37 +22,37 @@ import os
 PACKAGE_NAME = "cgalpy"  # The name on PyPI you will use  for `pip install`
 IMPORT_NAME = "CGALPY"  # The name for `import ...`
 CGALPY_CONFIGURATION = [
-                        "-DCGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS=ON",
-                        "-DCGALPY_AOS2_POINT_LOCATION_BINDINGS=ON",
-                        "-DCGALPY_AOS2_VERTEX_EXTENDED=ON",
-                        "-DCGALPY_AOS2_HALFEDGE_EXTENDED=ON",
-                        "-DCGALPY_AOS2_FACE_EXTENDED=ON",
-                        "-DCGALPY_AOS2_GEOMETRY_TRAITS_NAME=circleSegment",
-                        # "-DCGALPY_KERNEL_BINDINGS=epic", #this doesnt work rn
-                        # "-DCGALPY_KERNEL_NAME=epic",
-                        "-DCGALPY_KERNEL_INTERSECTION_BINDINGS=ON",
-                        "-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS=ON",
-                        "-DCGALPY_CONVEX_HULL_2_BINDINGS=ON",
+                        # "-DCGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS=ON",
+                        # "-DCGALPY_AOS2_POINT_LOCATION_BINDINGS=ON",
+                        # "-DCGALPY_AOS2_VERTEX_EXTENDED=ON",
+                        # "-DCGALPY_AOS2_HALFEDGE_EXTENDED=ON",
+                        # "-DCGALPY_AOS2_FACE_EXTENDED=ON",
+                        # "-DCGALPY_AOS2_GEOMETRY_TRAITS_NAME=circleSegment",
+                        "-DCGALPY_KERNEL_BINDINGS=epic",
+                        "-DCGALPY_KERNEL_NAME=epic",
+                        # "-DCGALPY_KERNEL_INTERSECTION_BINDINGS=ON",
+                        # "-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS=ON",
+                        # "-DCGALPY_CONVEX_HULL_2_BINDINGS=ON",
                         # "-DCGALPY_KERNEL_D_BINDINGS=ON",
                         # "-DCGALPY_KERNEL_D_NAME=epicd",
-                        "-DCGALPY_POLYGON_2_BINDINGS=ON",
-                        "-DCGALPY_MINKOWSKI_SUM_2_BINDINGS=ON",
-                        "-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=ON",
-                        "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
-                        "-DCGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS=ON",
-                        "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON"
-                        "-DCGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS=ON",
-                        "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
-                        "-DCGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS=ON",
-                        "-DCGALPY_SPATIAL_SEARCHING_BINDINGS=ON",
-                        "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
-                        "-DCGALPY_SHAPE_DETECTION_BINDINGS=ON",
-                        "-DCGALPY_TRIANGULATION_2_BINDINGS=ON",
-                        "-DCGALPY_TRI2_VERTEX_WITH_INFO=ON",
-                        "-DCGALPY_TRI2_FACE_WITH_INFO=ON",
-                        "-DCGALPY_TRI2_HIERARCHY=ON",
-                        "-DCGALPY_TRIANGULATION_3_BINDINGS=ON",
-                        "-DCGALPY_TRI3_NAME=delaunay"
+                        # "-DCGALPY_POLYGON_2_BINDINGS=ON",
+                        # "-DCGALPY_MINKOWSKI_SUM_2_BINDINGS=ON",
+                        # "-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=ON",
+                        # "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
+                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS=ON",
+                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON"
+                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS=ON",
+                        # "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
+                        # "-DCGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS=ON",
+                        # "-DCGALPY_SPATIAL_SEARCHING_BINDINGS=ON",
+                        # "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
+                        # "-DCGALPY_SHAPE_DETECTION_BINDINGS=ON",
+                        # "-DCGALPY_TRIANGULATION_2_BINDINGS=ON",
+                        # "-DCGALPY_TRI2_VERTEX_WITH_INFO=ON",
+                        # "-DCGALPY_TRI2_FACE_WITH_INFO=ON",
+                        # "-DCGALPY_TRI2_HIERARCHY=ON",
+                        # "-DCGALPY_TRIANGULATION_3_BINDINGS=ON",
+                        # "-DCGALPY_TRI3_NAME=delaunay"
                         "-DCGALPY_WITH_VISUAL=OFF"
                        ]
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,7 +89,7 @@ run_conan()  # automatically running conan. Ugly workaround, but does its job.
 setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     # ~~~~~~~~~ BASIC INFORMATION ~~~~~~~~~~~
     name=PACKAGE_NAME,
-    version="1.0.2",  # TODO: Use better approach for managing version number.
+    version="1.0.3",  # TODO: Use better approach for managing version number.
     description="CGAL Bindings",
     long_description=readme(),
     url="https://bitbucket.org/taucgl/cgal-python-bindings/src/master/",
@@ -106,7 +106,7 @@ setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     # Thus, we have to collect this subfolder and define it as root.
     packages=[f"{IMPORT_NAME}"],
     package_dir={"": "python"},  # The root for our python package is in `./python`.
-    python_requires=">=3.7",  # lowest python version supported.
+    python_requires=">=3.8",  # lowest python version supported.
     install_requires=[
         # requirements necessary for basic usage (subset of requirements.txt)
         # "chardet>=4.0.0",
@@ -140,7 +140,8 @@ setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     #
     # Some CMake-projects allow you to configure it using parameters. You
     # can specify them for this Python-package using the following line.
-    cmake_args=[f"-DCGALPY_IMPORT_NAME={IMPORT_NAME}", f'-DCMAKE_PREFIX_PATH={os.path.join(os.getcwd(), "cmake")}'] + CGALPY_CONFIGURATION
-    #
+      cmake_args=[f"-DCGALPY_IMPORT_NAME={IMPORT_NAME}", f'-DCMAKE_PREFIX_PATH={os.path.join(os.getcwd(), "cmake")}', *CGALPY_CONFIGURATION,
+                  f" --parallel {os.cpu_count()}"]
+   #
     # There are further options, but you should be fine with these above.
 )

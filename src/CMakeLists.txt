@@ -1,4 +1,4 @@
-set(CGALPY_PY_MIN_VERSION 3.5)
+set(CGALPY_PY_MIN_VERSION 3.7)
 set(CGALPY_BOOST_MIN_VERSION 1.72.0)
 
 # Find required libraries
