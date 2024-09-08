@@ -1,7 +1,7 @@
 #ifndef CGALPY_KERNEL_TYPE_HPP
 #define CGALPY_KERNEL_TYPE_HPP
 
-#ifdef NOCGALPY_PYPI
+#ifndef NOCGALPY_PYPI
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 #else
