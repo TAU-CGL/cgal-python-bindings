@@ -1,6 +1,11 @@
 #ifndef CGALPY_KERNEL_TYPE_HPP
 #define CGALPY_KERNEL_TYPE_HPP
 
+#ifdef NOCGALPY_PYPI
+#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
+typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
+#else
+
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
@@ -45,7 +50,9 @@ using Kernel = CGAL::Cartesian<NT>;
 
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
-#endif
+#endif // CGALPY_KERNEL
 
-#endif
+#endif // CGALPY_PYPI
+
+#endif // CGALPY_KERNEL_TYPE_HPP
 

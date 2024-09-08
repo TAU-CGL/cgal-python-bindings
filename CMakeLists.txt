@@ -15,6 +15,9 @@ endif (CMAKE_TOOLCHAIN_FILE)
 
 if (DEFINED ENV{CGALPY_PYPI})
   set(CGALPY_DIR "/project/cgal-6.0-beta1")
+  add_definitions(-DCGALPY_PYPI)
+else ()
+  add_definitions(-DNOCGALPY_PYPI) # because defining CGALPY_PYPI doesn't work
 endif ()
 
 if (SKBUILD)  # scikit-build

@@ -28,21 +28,24 @@ CGALPY_CONFIGURATION = [
                         # "-DCGALPY_AOS2_HALFEDGE_EXTENDED=ON",
                         # "-DCGALPY_AOS2_FACE_EXTENDED=ON",
                         # "-DCGALPY_AOS2_GEOMETRY_TRAITS_NAME=circleSegment",
-                        "-DCGALPY_KERNEL_BINDINGS=epec",
-                        "-DCGALPY_KERNEL_NAME=epec",
+                        # "-DCGALPY_KERNEL_BINDINGS=epic", #this doesnt work rn
+                        # "-DCGALPY_KERNEL_NAME=epic",
                         # "-DCGALPY_KERNEL_INTERSECTION_BINDINGS=ON",
                         # "-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS=ON",
                         # "-DCGALPY_CONVEX_HULL_2_BINDINGS=ON",
-                        "-DCGALPY_KERNEL_D_BINDINGS=ON",
-                        "-DCGALPY_KERNEL_D_NAME=epecd",
+                        # "-DCGALPY_KERNEL_D_BINDINGS=ON",
+                        # "-DCGALPY_KERNEL_D_NAME=epicd",
                         # "-DCGALPY_POLYGON_2_BINDINGS=ON",
                         # "-DCGALPY_MINKOWSKI_SUM_2_BINDINGS=ON",
-                        # "-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=ON",
+                        "-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=ON",
                         "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
-                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON"
+                        "-DCGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS=ON",
+                        "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON"
                         "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
+                        "-DCGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS=ON",
                         # "-DCGALPY_SPATIAL_SEARCHING_BINDINGS=ON",
-                        # "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
+                        "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
+                        "-DCGALPY_SHAPE_DETECTION_BINDINGS=ON",
                         # "-DCGALPY_TRIANGULATION_2_BINDINGS=ON",
                         # "-DCGALPY_TRI2_VERTEX_WITH_INFO=ON",
                         # "-DCGALPY_TRI2_FACE_WITH_INFO=ON",
@@ -54,8 +57,6 @@ CGALPY_CONFIGURATION = [
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def prepare():
-    # Replace src/libs/cgalpy/include/CGALPY/kernel_type.hpp with epec.hpp
-    shutil.copyfile("src/libs/cgalpy/include/CGALPY/epec.hpp", "src/libs/cgalpy/include/CGALPY/kernel_type.hpp")
     # Automatically create proxy modules for new configurations.
     folder = f"python/{IMPORT_NAME}"
     proxy_init = "# This file has been automatically created by setup.py.\n" \
