@@ -28,8 +28,8 @@ CGALPY_CONFIGURATION = [
                         # "-DCGALPY_AOS2_HALFEDGE_EXTENDED=ON",
                         # "-DCGALPY_AOS2_FACE_EXTENDED=ON",
                         # "-DCGALPY_AOS2_GEOMETRY_TRAITS_NAME=circleSegment",
-                        "-DCGALPY_KERNEL_BINDINGS=epic",
-                        "-DCGALPY_KERNEL_NAME=epic",
+                        # "-DCGALPY_KERNEL_BINDINGS=epic",
+                        # "-DCGALPY_KERNEL_NAME=epic",
                         # "-DCGALPY_KERNEL_INTERSECTION_BINDINGS=ON",
                         # "-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS=ON",
                         # "-DCGALPY_CONVEX_HULL_2_BINDINGS=ON",
@@ -53,7 +53,7 @@ CGALPY_CONFIGURATION = [
                         # "-DCGALPY_TRI2_HIERARCHY=ON",
                         # "-DCGALPY_TRIANGULATION_3_BINDINGS=ON",
                         # "-DCGALPY_TRI3_NAME=delaunay"
-                        "-DCGALPY_WITH_VISUAL=OFF"
+                        # "-DCGALPY_WITH_VISUAL=OFF"
                        ]
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
