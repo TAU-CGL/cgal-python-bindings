@@ -13,10 +13,12 @@ if (CMAKE_TOOLCHAIN_FILE)
     include(${CMAKE_TOOLCHAIN_FILE})
 endif (CMAKE_TOOLCHAIN_FILE)
 
-if (DEFINED ENV{CGALPY_PYPI})
+if (DEFINED ENV{CGALPY_PYPI} OR SKBUILD)
+  message(STATUS "Using CGALPY_PYPI")
   set(CGALPY_DIR "/project/cgal-6.0-beta1")
   add_definitions(-DCGALPY_PYPI)
 else ()
+  message(STATUS "Not using CGALPY_PYPI")
   add_definitions(-DNOCGALPY_PYPI) # because defining CGALPY_PYPI doesn't work
 endif ()
 
