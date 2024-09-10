@@ -1,10 +1,7 @@
 #ifndef CGALPY_KERNEL_TYPE_HPP
 #define CGALPY_KERNEL_TYPE_HPP
 
-#ifndef NOCGALPY_PYPI
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-typedef CGAL::Exact_predicates_inexact_constructions_kernel     Kernel;
-#else
+#include "CGALPY/kernel_config.hpp"
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
@@ -53,6 +50,4 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif // CGALPY_KERNEL
 
 #endif // CGALPY_PYPI
-
-#endif // CGALPY_KERNEL_TYPE_HPP
 
