@@ -15,6 +15,8 @@
 
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
+#include <CGAL/GMP/Gmpz_type.h>
+#include <CGAL/GMP/Gmpq_type.h>
 
 #include "CGALPY/to_string.hpp"
 

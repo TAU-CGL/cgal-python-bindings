@@ -10,6 +10,10 @@
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/basic.h>
 #include <CGAL/Mesh_constant_domain_field_3.h>
+#include <CGAL/Gmpz.h>
+#include <CGAL/Gmpq.h>
+#include <CGAL/GMP/Gmpz_type.h>
+#include <CGAL/GMP/Gmpq_type.h>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
@@ -101,9 +105,15 @@ void export_kernel_module(py::module_& m) {
   if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
   if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
 
+
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
+    py::class_<FT> ft_c(m, "FT");
+    export_ft(ft_c);
+#endif
+
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                              \
-     (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||                    \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
+     // (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||
 
   if (! add_attr<FT>(m, "FT")) {
     py::class_<FT> ft_c(m, "FT");
@@ -1064,7 +1074,7 @@ void export_kernel_module(py::module_& m) {
       "true if reading was successful, false otherwise. \n")
     ;
 
-  #if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+  #if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   m.def("write_polygon_soup", [](const std::string& fname, const PointRange& points, const PolygonRange& polygons, const py::dict& np = py::dict()) {
     return CGAL::IO::write_polygon_soup(fname, points, polygons, internal::parse_named_parameters(np));
   },

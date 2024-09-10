@@ -49,5 +49,5 @@ using Kernel = CGAL::Cartesian<NT>;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif // CGALPY_KERNEL
 
-#endif // CGALPY_PYPI
+#endif // CGALPY_KERNEL_TYPE_HPP
 

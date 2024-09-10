@@ -44,7 +44,7 @@ template <typename PointRange, typename Point, typename Vector, typename C>
 void export_functions_without_normals(C& c) {
   using K = Kernel;
   using Tag = CGAL::Sequential_tag;
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("bilateral_smooth_point_set", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs())
         { double r = CGAL::bilateral_smooth_point_set<Tag>(points, k,
                   internal::parse_named_parameters(np)
@@ -198,14 +198,14 @@ void export_functions_without_normals(C& c) {
         "Returns\n"
         "a tuple of the modified point set and the output points.\n\n"
         );
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
 }
 
 template <typename PointRange, typename PointMap, typename NormalMap, typename Point, typename Vector, typename C>
 void export_functions_with_normals(C& c) {
   using K = Kernel;
   using Tag = CGAL::Sequential_tag;
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("bilateral_smooth_point_set", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs())
         { double r = CGAL::bilateral_smooth_point_set<Tag>(points, k,
                   internal::parse_named_parameters(np)
@@ -230,7 +230,7 @@ void export_functions_with_normals(C& c) {
         "Returns\n"
         "a tuple of the average point movement error. It's a convergence criterium for the algorithm. This value can help the user to decide how many iterations are sufficient, and the resulting points"
         );
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("jet_estimate_normals", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
         CGAL::jet_estimate_normals<Tag>(points, k, internal::parse_named_parameters(np)
                                         .point_map(PointMap())
@@ -278,7 +278,7 @@ void export_functions_with_normals(C& c) {
         "Returns\n"
         "average spacing (scalar). The return type FT is a number type."
         );
-  #if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+  #if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("edge_aware_upsample_point_set", [](const PointRange& points, const py::kwargs& np = py::kwargs())
         { std::vector<std::pair<Point, Vector>> output;
           CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output),
@@ -332,7 +332,7 @@ void export_functions_with_normals(C& c) {
       "Examples\n"
       "• Point_set_processing_3/orient_scanlines_example.py."
       );
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("pca_estimate_normals", [](PointRange& points, unsigned int k, const std::function<bool(double)>& callback = std::function<bool(double)>(), const py::kwargs& np = py::kwargs()) {
         auto cb_class = dummy_callback(callback);
         double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
@@ -358,7 +358,7 @@ void export_functions_with_normals(C& c) {
       "Returns\n"
       "â�¢ the modified point set."
       );
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("mst_orient_normals", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
         if (np.contains("point_is_constrained_map")) { // TODO: handle constrained points
             auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np)
@@ -484,13 +484,13 @@ void export_functions_with_normals(C& c) {
         "Returns\n"
         "a tuple of the modified point set and the output points.\n\n"
         );
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
 }
 
 template <typename PointRange, typename Point, typename Vector, typename C>
 void export_multiple_dimension_functions(C& c) {
   using K = Kernel;
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("estimate_global_k_neighbor_scale", [](const PointRange& points, const py::kwargs& np = py::kwargs())
         { return CGAL::estimate_global_k_neighbor_scale(points,
                   internal::parse_named_parameters(np)
@@ -529,7 +529,7 @@ void export_multiple_dimension_functions(C& c) {
         "• Point_set_processing_3/scale_estimation.py."
         );
 
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
 
 }
 
@@ -537,7 +537,7 @@ template <typename PointRange, typename Point, typename Vector, typename PointMa
 void export_functions_with_point_range_normals(C& c) {
   using K = Kernel;
   using Tag = CGAL::Sequential_tag;
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
     c.def("compute_vcm_with_normals", [](const PointRange& points,
                         double offset_radius,
                         double convolution_radius,
@@ -623,7 +623,7 @@ void export_functions_with_point_range_normals(C& c) {
       "Examples\n"
       "â�¢ Point_set_processing_3/hierarchy_simplification_example.py."
       );
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("jet_smooth_point_set_with_normals", [](PointRange& points, unsigned int k,
                                    const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                    const py::kwargs& np = py::kwargs()) {
@@ -702,7 +702,7 @@ void export_functions_with_point_range(C& c) {
   using K = Kernel;
   using Tag = CGAL::Sequential_tag;
 
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC // doesnt have sqrt
+#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("compute_vcm", [](const PointRange& points,
                         double offset_radius,
                         double convolution_radius,
@@ -785,7 +785,7 @@ void export_functions_with_point_range(C& c) {
       "Examples\n"
       "• Point_set_processing_3/hierarchy_simplification_example.py."
       );
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("jet_smooth_point_set", [](PointRange& points, unsigned int k,
                                    const std::function<bool(double)>& callback = std::function<bool(double)>(),
                                    const py::kwargs& np = py::kwargs()) {
@@ -820,7 +820,7 @@ void export_functions_with_point_range(C& c) {
       "• Point_set_processing_3/edges_example.py."
       );
 
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("mst_orient_normals", [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
         if (np.contains("point_is_constrained_map")) { // TODO: handle constrained points
             auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np));
@@ -848,7 +848,7 @@ void export_functions_with_point_range(C& c) {
         "Examples\n"
         "• Point_set_processing_3/normals_example.py."
         );
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("random_simplify_point_set", [](PointRange& points, double removed_percentage) {
         auto it = CGAL::random_simplify_point_set(points, removed_percentage);
         return std::make_pair(points, std::distance(points.begin(), it));
@@ -909,7 +909,7 @@ void export_functions_with_point_range(C& c) {
 template <typename Points, typename C>
 void export_functions_with_point_vec(C& c) {
   using K = Kernel;
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   c.def("estimate_local_k_neighbor_scales", [](const Points& points,
                                                const Points& queries,
                                                const py::kwargs& np = py::kwargs())
@@ -1192,7 +1192,7 @@ void export_point_set_processing(py::module_& m) {
         "Examples\n"
         "Point_set_processing_3/edge_aware_upsample_point_set_example.py, Point_set_processing_3/hierarchy_simplification_example.py, Point_set_processing_3/registration_with_OpenGR.py, Point_set_processing_3/registration_with_opengr_pointmatcher_pipeline.py, Point_set_processing_3/registration_with_pointmatcher.py, Point_set_processing_3/structuring_example.py, and Point_set_processing_3/wlop_simplify_and_regularize_point_set_example.py."
         );
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC
+#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
   m.def("vcm_is_on_feature_edge", &CGAL::vcm_is_on_feature_edge<Kernel::FT>,
         py::arg("cov"), py::arg("threshold"),
       "determines if a point is on a sharp feature edge from a point set for which the Voronoi covariance Measures have been computed.\n"
