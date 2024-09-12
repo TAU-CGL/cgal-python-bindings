@@ -17,11 +17,8 @@ set(CGALPY_KERNEL_NAMES "epic" "epec" "epecWithSqrt" "filteredSimpleCartesianDou
 # SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use") # TODO: ifndef def this
 # set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC} CACHE INTERNAL "")
 if(NOT CGALPY_KERNEL_NAME)
-  message(STATUS "No kernel name specified, using epec")
   set(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
   set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC} CACHE INTERNAL "")
-else ()
-  message(STATUS "Using kernel ${CGALPY_KERNEL_NAME}")
 endif()
 set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epic epec epecWithSqrt filteredSimpleCartesianDouble filteredSimpleCartesianLazyGmpq cartesianCoreRational)
 

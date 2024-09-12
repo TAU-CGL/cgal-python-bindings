@@ -16,6 +16,7 @@ from skbuild import setup
 import shutil
 import sys
 import os
+import json
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Configure CGALPY here
@@ -28,8 +29,8 @@ CGALPY_CONFIGURATION = [
                         # "-DCGALPY_AOS2_HALFEDGE_EXTENDED=ON",
                         # "-DCGALPY_AOS2_FACE_EXTENDED=ON",
                         # "-DCGALPY_AOS2_GEOMETRY_TRAITS_NAME=circleSegment",
-                        # "-DCGALPY_KERNEL_BINDINGS=epic",
-                        # "-DCGALPY_KERNEL_NAME=epic",
+                        "-DCGALPY_KERNEL_BINDINGS=epic",
+                        "-DCGALPY_KERNEL_NAME=epic",
                         # "-DCGALPY_KERNEL_INTERSECTION_BINDINGS=ON",
                         # "-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS=ON",
                         # "-DCGALPY_CONVEX_HULL_2_BINDINGS=ON",
@@ -37,24 +38,34 @@ CGALPY_CONFIGURATION = [
                         # "-DCGALPY_KERNEL_D_NAME=epicd",
                         # "-DCGALPY_POLYGON_2_BINDINGS=ON",
                         # "-DCGALPY_MINKOWSKI_SUM_2_BINDINGS=ON",
-                        # "-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=ON",
-                        # "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
-                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS=ON",
-                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON"
-                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS=ON",
-                        # "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
-                        # "-DCGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS=ON",
+                        "-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=ON",
+                        "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
+                        "-DCGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS=ON",
+                        "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON"
+                        "-DCGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS=ON",
+                        "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
+                        "-DCGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS=ON",
                         # "-DCGALPY_SPATIAL_SEARCHING_BINDINGS=ON",
-                        # "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
-                        # "-DCGALPY_SHAPE_DETECTION_BINDINGS=ON",
+                        "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
+                        "-DCGALPY_SHAPE_DETECTION_BINDINGS=ON",
                         # "-DCGALPY_TRIANGULATION_2_BINDINGS=ON",
                         # "-DCGALPY_TRI2_VERTEX_WITH_INFO=ON",
                         # "-DCGALPY_TRI2_FACE_WITH_INFO=ON",
                         # "-DCGALPY_TRI2_HIERARCHY=ON",
                         # "-DCGALPY_TRIANGULATION_3_BINDINGS=ON",
                         # "-DCGALPY_TRI3_NAME=delaunay"
-                        # "-DCGALPY_WITH_VISUAL=OFF"
+                        "-DCGALPY_WITH_VISUAL=OFF"
                        ]
+
+try:
+    with open("config.json") as f:
+        config = json.load(f)
+        CGALPY_CONFIGURATION = config["CGALPY_CONFIGURATION"]
+        PACKAGE_NAME = config["PACKAGE_NAME"]
+        IMPORT_NAME = config["IMPORT_NAME"]
+except FileNotFoundError:
+    print("config.json not found. Using default configuration.")
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def prepare():
@@ -76,8 +87,6 @@ def run_conan():
     # Make sure to access the local conan
     cmd = "-m conans.conan install . --build missing -s compiler.cppstd=gnu17"
     subprocess.run([sys.executable, *cmd.split(" ")], check=True)
-    # CIBW_BEFORE_BUILD="pip install conan && conan profile detect && conan install . --build missing -s compiler.cppstd=gnu17 -s compiler.version=14.2 && export CONAN_CXX_FLAGS='-std=c++17'" CIBW_BUILD="cp312-*" cibuildwheel
-
 
 def readme():
     # Simply return the README.md as string

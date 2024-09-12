@@ -17,3 +17,4 @@ src/python_scripts/__pycache__/
 .cache/
 compile_commands.json
 CMakeUserPresets.json
+config.json

@@ -64,74 +64,8 @@ if (SKBUILD)  # scikit-build
         # MSVC needs a little extra help finding the Python library
         find_package(PythonInterp)
         find_package(Python)
-    endif ()
-    # set(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS ON)
-    # set(CGALPY_AOS2_POINT_LOCATION_BINDINGS ON)
-    # set(CGALPY_AOS2_VERTEX_EXTENDED ON)
-    # set(CGALPY_AOS2_HALFEDGE_EXTENDED ON)
-    # set(CGALPY_AOS2_FACE_EXTENDED ON)
-    # set(CGALPY_AOS2_GEOMETRY_TRAITS_NAME circleSegment)
-    set(CGALPY_KERNEL_BINDINGS epic) #this kind of doesnt work rn
-    set(CGALPY_KERNEL_NAME epic)
-    # set(CGALPY_KERNEL_INTERSECTION_BINDINGS ON)
-    # set(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS ON)
-    # set(CGALPY_CONVEX_HULL_2_BINDINGS ON)
-    # set(CGALPY_KERNEL_D_BINDINGS ON)
-    # set(CGALPY_KERNEL_D_NAME epicd)
-    # set(CGALPY_POLYGON_2_BINDINGS ON)
-    # set(CGALPY_MINKOWSKI_SUM_2_BINDINGS ON)
-    set(CGALPY_POLYGON_MESH_PROCESSING_BINDINGS ON)
-    set(CGALPY_PMP_POLYGONAL_MESH_NAME surfaceMesh)
-    set(CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS ON)
-    set(CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS ON)
-    set(CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS ON)
-    set(CGALPY_3D_POINT_SET_BINDINGS ON)
-    set(CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS ON)
-    # set(CGALPY_SPATIAL_SEARCHING_BINDINGS ON)
-    set(CGALPY_SURFACE_MESH_BINDINGS ON)
-    set(CGALPY_SHAPE_DETECTION_BINDINGS ON)
-    # set(CGALPY_TRIANGULATION_2_BINDINGS ON)
-    # set(CGALPY_TRI2_VERTEX_WITH_INFO ON)
-    # set(CGALPY_TRI2_FACE_WITH_INFO ON)
-    # set(CGALPY_TRI2_HIERARCHY ON)
-    # set(CGALPY_TRIANGULATION_3_BINDINGS ON)
-    # set(CGALPY_TRI3_NAME delaunay)
-    set(CGALPY_WITH_VISUAL OFF)
-    
-                        # "-DCGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS=ON",
-                        # "-DCGALPY_AOS2_POINT_LOCATION_BINDINGS=ON",
-                        # "-DCGALPY_AOS2_VERTEX_EXTENDED=ON",
-                        # "-DCGALPY_AOS2_HALFEDGE_EXTENDED=ON",
-                        # "-DCGALPY_AOS2_FACE_EXTENDED=ON",
-                        # "-DCGALPY_AOS2_GEOMETRY_TRAITS_NAME=circleSegment",
-                        # "-DCGALPY_KERNEL_BINDINGS=epec", #this doesnt work rn
-                        # "-DCGALPY_KERNEL_NAME=epec",
-                        # "-DCGALPY_KERNEL_INTERSECTION_BINDINGS=ON",
-                        # "-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS=ON",
-                        # "-DCGALPY_CONVEX_HULL_2_BINDINGS=ON",
-                        # "-DCGALPY_KERNEL_D_BINDINGS=ON",
-                        # "-DCGALPY_KERNEL_D_NAME=epecd",
-                        # "-DCGALPY_POLYGON_2_BINDINGS=ON",
-                        # "-DCGALPY_MINKOWSKI_SUM_2_BINDINGS=ON",
-                        # "-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=ON",
-                        # "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
-                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS=ON",
-                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON"
-                        # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS=ON",
-                        # "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
-                        # "-DCGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS=ON",
-                        # "-DCGALPY_SPATIAL_SEARCHING_BINDINGS=ON",
-                        # "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
-                        # "-DCGALPY_SHAPE_DETECTION_BINDINGS=ON",
-                        # "-DCGALPY_TRIANGULATION_2_BINDINGS=ON",
-                        # "-DCGALPY_TRI2_VERTEX_WITH_INFO=ON",
-                        # "-DCGALPY_TRI2_FACE_WITH_INFO=ON",
-                        # "-DCGALPY_TRI2_HIERARCHY=ON",
-                        # "-DCGALPY_TRIANGULATION_3_BINDINGS=ON",
-                        # "-DCGALPY_TRI3_NAME=delaunay"
-                        # "-DCGALPY_WITH_VISUAL=OFF"
-
-endif ()
+    endif () # MSVC
+endif () # SKBUILD
 
 # General
 set(CGALPY_PROJECT_AUTHORS "Nir Goren and Efi Fogel")
