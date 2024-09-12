@@ -98,7 +98,7 @@ run_conan()  # automatically running conan. Ugly workaround, but does its job.
 setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     # ~~~~~~~~~ BASIC INFORMATION ~~~~~~~~~~~
     name=PACKAGE_NAME,
-    version="1.0.3",  # TODO: Use better approach for managing version number.
+    version="1.0.4",  # TODO: Use better approach for managing version number.
     description="CGAL Bindings",
     long_description=readme(),
     url="https://bitbucket.org/taucgl/cgal-python-bindings/src/master/",

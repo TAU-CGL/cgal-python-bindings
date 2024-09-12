@@ -5,13 +5,13 @@ requires = [
     "scikit-build>=0.13",
     "cmake>=3.26",
     "ninja",
-    "nanobind >=1.3.2",
-    "skbuild-conan"
+    "scikit-build-core >=0.4.3",
+    "nanobind >=1.3.2"
 ]
-build-backend = "setuptools.build_meta"
+build-backend = "scikit_build_core.build"
 [project]
 name = "cgalpy"
-version = "1.0.3"
+version = "1.0.4"
 description = "CGAL Bindings"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -38,13 +38,12 @@ build-dir = "build/{wheel_tag}"
 wheel.py-api = "cp312"
 
 [tool.cibuildwheel]
-# manylinux-x86_64-image = "radekaadek/cgalpy-manylinux_2_28_x86_64_image:v7"
+manylinux-x86_64-image = "radekaadek/cgalpy-manylinux_2_28_x86_64_image:v11"
 # manylinux-aarch64-image = "radekaadek/cgalpy-manylinux_2_28_aarch64_image:v4"
 # manylinux-ppc64le-image = "radekaadek/cgalpy-manylinux_2_28_ppc64le_image:v4"
 # manylinux-s390x-image = "radekaadek/cgalpy-manylinux_2_28_s390x_image:v4"
-manylinux-x86_64-image = "manylinux_2_28"
 build = "cp38-* cp39-* cp310-* cp311-* cp312-*"
-before-build = "dnf install -y wget && wget https://github.com/CGAL/cgal/archive/refs/tags/v6.0-beta1.tar.gz && tar -xvf v6.0-beta1.tar.gz"
+before-build = "wget https://github.com/CGAL/cgal/archive/refs/tags/v6.0-beta1.tar.gz && tar -xvf v6.0-beta1.tar.gz"
 
 environment = {CGAL_DIR="/project/cgal-6.0-beta1", nanobind_DIR="/project/nanobind", CGALPY_PYPI="1", PATH="/project/nanobind/include:$PATH"}
 
