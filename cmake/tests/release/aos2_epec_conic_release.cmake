@@ -1,7 +1,0 @@
-set(CMAKE_BUILD_TYPE "Release"                          CACHE STRING "" FORCE)
-set(CGALPY_USE_SHARED_LIBS ON                           CACHE BOOL "" FORCE)
-set(CGALPY_FIXED_LIBRARY_NAME OFF                       CACHE BOOL "" FORCE)
-set(CGALPY_KERNEL_NAME "epec"                           CACHE STRING "" FORCE)
-set(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS ON         CACHE BOOL "" FORCE)
-set(CGALPY_AOS2_GEOMETRY_TRAITS_NAME "conic"            CACHE STRING "" FORCE)
-set(CGALPY_AOS2_POINT_LOCATION_BINDINGS ON              CACHE BOOL "" FORCE)

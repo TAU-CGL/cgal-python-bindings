@@ -1,0 +1,13 @@
+# ./bezier_traits_adapter2.py CGALPY_kerCcrInt_aos2Bez_bso2
+./bezier_traits_adapter.py CGALPY_kerCcrInt_aos2Bez_bso2 char_g.dat char_m.dat
+./circle_segment.py CGALPY_kerEpecInt_aos2Cs_bso2
+./conic_traits_adapter.py CGALPY_kerEpec_aos2Conic_bso2
+# ./connect_polygon.py
+./do_intersect.py CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+./draw_polygon_set.py CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+# ./dxf_union.py
+./oriented_side.py CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+./sequence.py CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+./set_union.py CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+./simple_join_intersect.py CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+./symmetric_difference.py CGALPY_kerEpecInt_aos2Seg_bso2_pol2

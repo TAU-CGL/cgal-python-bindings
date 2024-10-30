@@ -1,194 +1,79 @@
-#!/usr/bin/python3
-# export PYTHONPATH=...
+#!/usr/bin/python
+
+# #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+# #include <CGAL/Polyhedron_3.h>
+# #include <CGAL/Polyhedron_items_with_id_3.h>
+#
+# #include <CGAL/Polygon_mesh_processing/corefinement.h>
+# #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
+#
+# #include <fstream>
+# #include <iostream>
+# #include <string>
+#
+# typedef CGAL::Exact_predicates_inexact_constructions_kernel     K;
+# typedef CGAL::Polyhedron_3<K, CGAL::Polyhedron_items_with_id_3> Mesh;
+#
+# namespace PMP = CGAL::Polygon_mesh_processing;
+#
+# int main(int argc, char* argv[])
+# {
+#   const std::string filename1 = (argc > 1) ? argv[1] : CGAL::data_file_path(CGALPY.data_file_path("meshes/blobby.off");))
+#   const std::string filename2 = (argc > 2) ? argv[2] : CGAL::data_file_path(CGALPY.data_file_path("meshes/eight.off");))
+#
+#   Mesh mesh1, mesh2;
+#   if(!PMP::IO::read_polygon_mesh(filename1, mesh1) || !PMP::IO::read_polygon_mesh(filename2, mesh2))
+#   {
+#     std::cerr << "Invalid input." << std::endl;
+#     return 1;
+#   }
+#
+#   Mesh out;
+#   bool valid_union = PMP::corefine_and_compute_union(mesh1,mesh2, out);
+#
+#   if (valid_union)
+#   {
+#     std::cout << "Union was successfully computed\n";
+#     std::ofstream output("union.off");
+#     output.precision(17);
+#     output << out;
+#     return 0;
+#   }
+#   std::cout << "Union could not be computed\n";
+#   return 1;
+# }
+
 import os
 import sys
 import importlib
-import timeit
-from typing import Any
 
-if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
-else:
-    lib = sys.argv[1]
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+if lib == 'CGALPY':
+  sys.path.append(os.path.abspath('../precompiled'))
 
 CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
 Pmp = CGALPY.Pmp
+Pol3 = CGALPY.Pol3
 
-try: filename1 = argv[1]
-except: filename1 = 'meshes/blobby.off'
-try: filename2 = argv[2]
-except: filename2 = 'meshes/eight.off'
-# print(filename1, filename2)
+filename1 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off")
+i += 1
+filename2 = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off")
 
-Pm: Any = None
-def p3():
-  global Pm
-  try: Pm = CGALPY.Pol3
-  except: return False
-  else: return True
+try: mesh1 = Pol3.read_polygon_mesh(filename1)
+except: raise ValueError("Invalid input 1.")
 
-def sm3():
-  global Pm
-  try: Pm = CGALPY.Sm
-  except: return False
-  else: return True
+try: mesh2 = Pol3.read_polygon_mesh(filename2)
+except: raise ValueError("Invalid input 2.")
 
-# Verify that the ids are consecutive
-def test_ids(faces, num):
-  f = next(faces)
-  id = f.id()
-  print('First id of mesh {}:'.format(num), id)
-  for f in faces:
-    id = id + 1
-    if f.id() != id:
-      raise ValueError('Ids of mesh {} are not consecutive.'.format(num))
-  print('Last id of mesh {}:'.format(num), id)
-
-if not (p3() or sm3()): raise ValueError("Cannot find a polygonal mesh.")
-
-try:
-  mesh1 = Pm.read_polygon_mesh(filename1)
-  mesh2 = Pm.read_polygon_mesh(filename2)
-except:
-  raise ValueError("Invalid input.")
-
-normalize = 4.0
-bound = 0.1
-total = 0
-count = 0
-
-bound_faces = 0
-tfaces = 0
-
-bound_coplanar = 0
-tcoplanar = 0
-count_coplanar = 0
-
-bound_intersection = 0
-tintersection = 0
-count_intersection = 0
-
-def start_filtering_intersections():
-  print('Visitor::start_filtering_intersections() at {} sec.'.
-        format(timeit.timeit()))
-
-def progress_filtering_intersections(d):
-  global total, bound
-  d = d / normalize
-  total = total + d
-  if total > bound:
-    print('{} % in {} sec.'.format(total*100, f"{timeit.timeit():.2f}"))
-    bound = bound + 0.1
-
-def end_filtering_intersections():
-  print('Visitor::end_filtering_intersections() at sec.'.
-        format(f"{timeit.timeit():.2f}"))
-
-def start_triangulating_faces(tf):
-  print('Visitor::start_triangulation() with {} faces at {} sec.'.
-        format(tf, f"{timeit.timeit():.2f}"))
-  global tfaces, bound_faces
-  tfaces = tf
-  bound_faces = tf/10
-
-def end_triangulating_faces():
-  print('Visitor::end_triangulating_faces() at {} sec.'.
-        format(f"{timeit.timeit():.2f}"))
-
-#
-def triangulating_faces_step(i):
-  global bound_faces, tfaces
-  if i > bound_faces:
-    print('{} %'.format(float(i)/float(tfaces) * 100))
-    bound_faces = bound_faces + tfaces/10
-
-def start_handling_intersection_of_coplanar_faces(tc):
-  global tcoplanar
-  print('Visitor::start_handling_intersection_of_coplanar_faces() at {} sec.'.
-        format(f"{timeit.timeit():.2f}"))
-  tcoplanar = tc
-  count_coplanar = 0
-  bound_coplanar = tcoplanar/10
-
-#
-def end_handling_intersection_of_coplanar_faces():
-   print('Visitor::end_handling_intersection_of_coplanar_faces() at {} sec.'.
-         format(f"{timeit.timeit():.2f}"))
-
-def intersection_of_coplanar_faces_step():
-  global count_coplanar, bound_coplanar, tcoplanar
-  count_coplanar = count_coplanar + 1
-  if count_coplanar > bound_coplanar:
-    num = float(count_coplanar)/float(tcoplanar) * 100
-    print('Visitor::coplanar_faces: {}'.format(f"{num:.2f}"))
-    bound_coplanar = bound_coplanar + tcoplanar/10
-
-#
-def start_handling_edge_face_intersections(ti):
-  global tintersection, count_intersection, bound_intersection
-  print('Visitor::start_handling_edge_face_intersections() at {} sec.'.
-        format(f"{timeit.timeit():.2f}"))
-  tintersection = ti
-  count_intersection = 0
-  bound_intersection = tintersection/10
-
-#
-def end_handling_edge_face_intersections():
-  print('Visitor::end_handling_edge_face_intersections() at {} sec.'.
-        format(f"{timeit.timeit():.2f}"))
-
-def edge_face_intersections_step():
-  global count_intersection, bound_intersection, tintersection
-  count_intersection = count_intersection + 1
-  if count_intersection > bound_intersection:
-    num = float(count_intersection)/float(tintersection) * 100
-    print('Visitor::intersection_points: {} %'.format(f"{num:.2f}"))
-    bound_intersection = bound_intersection + tintersection/10
-
-def start_building_output():
-  print('Visitor::start_building_output() at {} sec.'.
-        format(f"{timeit.timeit():.2f}"))
-
-def end_building_output():
-  print('Visitor::end_building_output() at {} sec.'.
-        format(f"{timeit.timeit():.2f}"))
-
-cv = Pmp.Corefine_visitor()
-cv.set_start_filtering_intersections(start_filtering_intersections)
-cv.set_progress_filtering_intersections(progress_filtering_intersections)
-cv.set_end_filtering_intersections(end_filtering_intersections)
-
-cv.set_start_triangulating_faces(start_triangulating_faces)
-cv.set_end_triangulating_faces(end_triangulating_faces)
-# cv.set_triangulating_faces_step(triangulating_faces_step)
-
-cv.set_start_handling_intersection_of_coplanar_faces(start_handling_intersection_of_coplanar_faces)
-cv.set_intersection_of_coplanar_faces_step(intersection_of_coplanar_faces_step)
-cv.set_end_handling_intersection_of_coplanar_faces(end_handling_intersection_of_coplanar_faces)
-
-cv.set_start_handling_edge_face_intersections(start_handling_edge_face_intersections)
-cv.set_edge_face_intersections_step(edge_face_intersections_step)
-cv.set_end_handling_edge_face_intersections(end_handling_edge_face_intersections)
-
-cv.set_start_building_output(start_building_output)
-cv.set_end_building_output(end_building_output)
-
-start = timeit.timeit()
-
-try:
-  out = Pmp.corefine_and_compute_union(mesh1, mesh2, cv)
-except:
-  raise ValueError("Union could not be computed.")
-
-face = next(mesh1.faces())
-if hasattr(face, 'id'):
-  test_ids(mesh1.faces(), 1)
-  test_ids(mesh2.faces(), 2)
-else: print("Face does not have an id.")
+try: out = Pmp.corefine_and_compute_union(mesh1, mesh2)
+except: raise ValueError("Union could not be computed.")
 
 print("Union was successfully computed")
-out_file = open("union.off", 'w')
-out_file.write(str(out))
-out_file.close()
-del cv
+Pol3.write_polygon_mesh("union.off", out, {"stream_precision": 17})

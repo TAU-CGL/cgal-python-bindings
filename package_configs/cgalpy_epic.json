@@ -1,0 +1,24 @@
+{
+    "CGALPY_CONFIGURATION": [
+                              "-DCGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS=ON",
+                              "-DCGALPY_AOS2_POINT_LOCATION_BINDINGS=ON",
+                              "-DCGALPY_AOS2_VERTEX_EXTENDED=ON",
+                              "-DCGALPY_AOS2_HALFEDGE_EXTENDED=ON",
+                              "-DCGALPY_AOS2_FACE_EXTENDED=ON",
+                              "-DCGALPY_KERNEL_BINDINGS=epic",
+                              "-DCGALPY_KERNEL_NAME=epic",
+                              "-DCGALPY_AOS2_GEOMETRY_TRAITS_NAME=circleSegment",
+                              "-DCGALPY_KERNEL_POLYGON_MESH_PROCESSING_BINDINGS=ON",
+                              "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
+                              "-DCGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS=ON",
+                              "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON",
+                              "-DCGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS=ON",
+                              "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
+                              "-DCGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS=ON",
+                              "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
+                              "-DCGALPY_SHAPE_DETECTION_BINDINGS=ON",
+                              "-DCGALPY_WITH_VISUAL=OFF"
+                             ],
+    "PACKAGE_NAME": "cgalpy",
+    "IMPORT_NAME": "CGALPY"
+}

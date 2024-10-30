@@ -15,6 +15,8 @@
 
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
+#include <CGAL/GMP/Gmpz_type.h>
+#include <CGAL/GMP/Gmpq_type.h>
 
 #include "CGALPY/to_string.hpp"
 
@@ -29,8 +31,10 @@ void export_gmpz(py::module_& m) {
     .def("to_double", &CGAL::Gmpz::to_double)
     .def("__str__", to_string<CGAL::Gmpz>)
     .def("__repr__", to_string<CGAL::Gmpz>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self < py::self)
     .def(py::self > py::self)
     .def(py::self <= py::self)
@@ -61,8 +65,10 @@ void export_gmpq(py::module_& m) {
     .def("size", &CGAL::Gmpq::size)
     .def("__str__", to_string<CGAL::Gmpq>)
     .def("__repr__", to_string<CGAL::Gmpq>)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self < py::self)
     .def(py::self > py::self)
     .def(py::self <= py::self)

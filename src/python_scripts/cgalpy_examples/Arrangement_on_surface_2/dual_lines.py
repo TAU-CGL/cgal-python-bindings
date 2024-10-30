@@ -25,10 +25,14 @@ Ker = CGALPY.Ker
 
 # Get the name of the input file from the command line, or use the default
 # points.dat file if no command-line parameters are given.
-try:
-  filename = argv[1]
-except:
-  filename = 'points.dat'
+# try:
+#   filename = argv[1]
+# except:
+#   filename = 'points.dat'
+if len(sys.argv) > 1:
+    filename = sys.argv[1]
+else:
+    filename = 'points.dat'
 
 # Open the input file.
 # Read the points from the file, and construct their dual lines.

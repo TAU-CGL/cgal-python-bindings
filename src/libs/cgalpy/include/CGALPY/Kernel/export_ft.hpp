@@ -15,6 +15,7 @@
 
 #include "CGALPY/to_string.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/add_extraction.hpp"
 
 namespace py = nanobind;
 
@@ -25,9 +26,10 @@ void export_ft(C& c) {
 
   c.def(py::init<const FT&>())
     .def(py::init_implicit<double>())
-    .def(py::init_implicit<int>())
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self < py::self)
     .def(py::self > py::self)
     .def(py::self <= py::self)
@@ -41,10 +43,23 @@ void export_ft(C& c) {
     .def(py::self / py::self)
     .def(py::self /= py::self)
     .def(-py::self)
+    .def(int() * py::self)
+    .def(float() * py::self)
+    .def(int() + py::self)
+    .def(float() + py::self)
+    .def(int() - py::self)
+    .def(float() - py::self)
+    .def(py::self * int())
+    .def(py::self * float())
+    .def(py::self + int())
+    .def(py::self + float())
+    .def(py::self - int())
+    .def(py::self - float())
     ;
 
   add_insertion(c, "__str__");
   add_insertion(c, "__repr__");
+  add_extraction(c);
 }
 
 #endif

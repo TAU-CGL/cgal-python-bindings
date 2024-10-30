@@ -8,7 +8,7 @@ from arr_print import *
 
 if len(sys.argv) < 2:
   sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY_kerEpec_aos2Alg'
+  lib = 'CGALPY_kerEpecInt_aos2AlgPl'
 else:
   lib = sys.argv[1]
 

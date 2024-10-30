@@ -29,14 +29,17 @@ void export_circle_2(C& c) {
   using Circle = typename Kernel::Circle_2;
 
   c.def(py::init<>())
-    .def(py::init<Pnt&, FT&, CGAL::Orientation>())
-    .def(py::init<Pnt&, double, CGAL::Orientation>())
-    .def(py::init<Pnt&, Pnt&, CGAL::Orientation>())
-    .def(py::init<Pnt&, CGAL::Orientation>())
+    .def(py::init<Pnt&, FT&, CGAL::Orientation>(),
+         py::arg("center"), py::arg("squared_radius"),
+         py::arg("orientation").noconvert())
+    .def(py::init<Pnt&, CGAL::Orientation>(),
+         py::arg("center"), py::arg("orientation").noconvert())
     .def(py::init<Pnt&, FT&>())
-    .def(py::init<Pnt&, double>())
-    .def(py::init<Pnt&, Pnt&>())
     .def(py::init<Pnt&>())
+    .def(py::init<Pnt&, Pnt&, CGAL::Orientation>(),
+         py::arg("p"), py::arg("q"), py::arg("orientation").noconvert())
+    .def(py::init<Pnt&, Pnt&, FT&>())
+    .def(py::init<Pnt&, Pnt&>())
     .def(py::init<Pnt&, Pnt&, Pnt&>())
     .def("center", &Circle::center)
     .def("squared_radius", &Circle::squared_radius)
@@ -50,8 +53,10 @@ void export_circle_2(C& c) {
     .def("has_on_bounded_side", &Circle::has_on_bounded_side)
     .def("has_on_unbounded_side", &Circle::has_on_unbounded_side)
     .def("orthogonal_transform", &Circle::orthogonal_transform)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     //.setattr("__hash__", &hash<Circle>)
     ;
 

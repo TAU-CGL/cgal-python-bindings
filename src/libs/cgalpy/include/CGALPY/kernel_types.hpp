@@ -15,49 +15,15 @@
 #include "CGALPY/types.hpp"
 #include "CGALPY/kernel_config.hpp"
 
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
-#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
-#include <CGAL/Exact_predicates_exact_constructions_kernel_with_sqrt.h>
-#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE
-#include <CGAL/Filtered_kernel.h>
-#include <CGAL/Simple_cartesian.h>
-#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
-#include <CGAL/Filtered_kernel.h>
-#include <CGAL/Simple_cartesian.h>
-#include <CGAL/Lazy_exact_nt.h>
-#include <CGAL/Gmpq.h>
-#else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
-#endif
+#include "CGALPY/kernel_type.hpp"
 
-#include <CGAL/CORE_BigInt.h>
-#include <CGAL/Sqrt_extension.h>
 #include <CGAL/Bbox_2.h>
+#include <CGAL/Bbox_3.h>
 #include <CGAL/Circle_2.h>
 #include <CGAL/Triangle_2.h>
 #include <CGAL/Direction_2.h>
 #include <CGAL/Vector_2.h>
 #include <CGAL/Aff_transformation_2.h>
-
-#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
-typedef CGAL::Exact_predicates_inexact_constructions_kernel     Kernel;
-#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
-typedef CGAL::Exact_predicates_exact_constructions_kernel       Kernel;
-#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
-typedef CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt
-                                                                Kernel;
-#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE
-typedef double                                                  NT;
-typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
-#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
-typedef CGAL::Lazy_exact_nt<CGAL::Gmpq>                         NT;
-typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
-#else
-BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
-#endif
 
 typedef CORE::BigInt                                   BigInt;
 
@@ -73,6 +39,7 @@ typedef Kernel::Circle_2                               Circle_2;
 typedef Kernel::Triangle_2                             Triangle_2;
 typedef Kernel::Iso_rectangle_2                        Iso_rectangle_2;
 typedef Kernel::Point_3                                Point_3;
+typedef Kernel::Plane_3                                Plane_3;
 typedef Kernel::Weighted_point_3                       Weighted_point_3;
 typedef Kernel::Iso_cuboid_3                           Iso_cuboid_3;
 typedef Kernel::Line_3                                 Line_3;
@@ -81,16 +48,58 @@ typedef Kernel::Segment_3                              Segment_3;
 typedef Kernel::Tetrahedron_3                          Tetrahedron_3;
 typedef Kernel::Triangle_3                             Triangle_3;
 typedef Kernel::Sphere_3                               Sphere_3;
+typedef Kernel::Vector_3                               Vector_3;
 
 typedef std::vector<Point_2>                           Point_2_container;
+typedef std::vector<Point_3>                           PointRange;
+typedef std::vector<std::vector<std::size_t>>          PolygonRange;
 
 typedef CGAL::Aff_transformation_2<Kernel>             Aff_transformation_2;
 typedef CGAL::Aff_transformation_3<Kernel>             Aff_transformation_3;
 typedef CGAL::Bbox_2                                   Bbox_2;
+typedef CGAL::Bbox_3                                   Bbox_3;
 typedef CGAL::Rotation                                 Rotation;
 typedef CGAL::Scaling                                  Scaling;
 typedef CGAL::Translation                              Translation;
 
-typedef CGAL::Object                                   Object;
+// consteval for C++20, msvc needs additional option for this
+#if __cplusplus >= 202002L
+consteval
+#else
+constexpr
+#endif // __cpp_consteval >= 202002L
+const char* kernel_doc() {
+#if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
+  return "Exact_predicates_inexact_constructions_kernel\n"
+         "A kernel that has the following properties:\n"
+         "\t• It uses Cartesian representation.\n"
+         "\t• It supports constructions of points from double Cartesian coordinates.\n"
+         "\t• It provides exact geometric predicates, but geometric constructions are not exact in general."
+         ;
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC
+  return "Exact_predicates_exact_constructions_kernel\n"
+         "A kernel that has the following properties:"
+         "\t• It uses Cartesian representation.\n"
+         "\t• It supports constructions of points from double Cartesian coordinates.\n"
+         "\t• It provides both exact geometric predicates and exact geometric constructions."
+         ;
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
+  return "Exact_predicates_exact_constructions_kernel_with_sqrt\n"
+         "A kernel that has the following properties:\n"
+         "\t• It uses Cartesian representation.\n"
+         "\t• It supports constructions of points from double Cartesian coordinates.\n"
+         "\t• It provides both exact geometric predicates and exact geometric constructions.\n"
+         "\t• Its FT nested type is model of the FieldWithSqrt concept."
+         ;
+#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE
+  return "Filtered_simple_cartesian_double"
+#elif CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ
+  return "Filtered_simple_cartesian_lazy_gmpq";
+#elif CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL
+  return "Cartesian_core_rational";
+#else
+  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
+#endif
+}
 
 #endif //CGALPY_KERNEL_TYPES_HPP

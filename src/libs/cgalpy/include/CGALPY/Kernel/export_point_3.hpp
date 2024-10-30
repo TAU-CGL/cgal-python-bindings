@@ -15,26 +15,31 @@
 #include "CGALPY/config.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/kernel_config.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/add_extraction.hpp"
 
 namespace py = nanobind;
 
+//
+template <typename Kernel_>
+py::object cartesians_p3(const typename Kernel_::Point_3& p)
+{ return make_iterator(p.cartesian_begin(), p.cartesian_end()); }
+
 // Export a two-dimensional point of a kernel.
-template <typename Kernel, typename C>
+template <typename Kernel_, typename C>
 void export_point_3(C& c) {
-  using FT = typename Kernel::FT;
-  using RT = typename Kernel::RT;
-  using Pnt = typename Kernel::Point_3;
-  using Vec = typename Kernel::Vector_3;
+  using Ker = Kernel_;
+  using Ft = typename Ker::FT;
+  using Rt = typename Ker::RT;
+  using Pnt = typename Ker::Point_3;
+  using Vec = typename Ker::Vector_3;
 
   c.def(py::init<>())
-    .def(py::init<Pnt&>())
-    .def(py::init<const FT&, const FT&, const FT&>())
-    // .def(py::init<double, FT>())
-    // .def(py::init<FT, double>())
-    // .def(py::init<FT&, FT&>())
-    // .def(py::init<RT&, RT&>())
+    .def(py::init<const Ft&, const Ft&, const Ft&>())
+    .def(py::init<const Rt&, const Rt&, const Rt&, const Rt&>())
+    .def(py::init<const Pnt&>())
+    .def(py::init_implicit<const CGAL::Origin&>())
     .def("x", &Pnt::x)
     .def("y", &Pnt::y)
     .def("z", &Pnt::z)
@@ -46,8 +51,10 @@ void export_point_3(C& c) {
     .def("cartesian", &Pnt::cartesian)
     .def("__getitem__", &Pnt::operator[])
     .def("dimension", &Pnt::dimension)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self > py::self)
     .def(py::self < py::self)
     .def(py::self <= py::self)
@@ -60,6 +67,13 @@ void export_point_3(C& c) {
     .def("__hash__", &hash_rational_point<is_exact_ft(), Pnt>)
     // .setattr("__doc__", "Point_3") NB
     ;
+
+  if (! is_exact_ft()) {
+    c.def("cartesians", &cartesians_p3<Ker>, py::keep_alive<0, 1>());
+
+    using Cci = typename Ker::Cartesian_const_iterator_3;
+    add_iterator<Cci, Cci>("Cartesian_iterator", c);
+  }
 
   add_insertion(c, "__str__");
   add_insertion(c, "__repr__");

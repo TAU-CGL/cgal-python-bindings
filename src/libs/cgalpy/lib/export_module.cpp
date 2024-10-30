@@ -7,37 +7,59 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <CGAL/config.h>
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/string.h>
 
 #include "CGALPY/arrangement_on_surface_2_config.hpp"
 #include "CGALPY/config.hpp"
 
 namespace py = nanobind;
 
+void export_2d_range_and_neighbor_search(py::module_&);
+void export_3d_point_set(py::module_&);
 void export_alpha_shape_2(py::module_&);
 void export_alpha_shape_3(py::module_&);
 void export_arrangement_on_surface_2(py::module_&);
 void export_boolean_set_operations_2(py::module_&);
 void export_bounding_volumes(py::module_&);
-void export_convex_hull_2_bindings(py::module_&);
+void export_connected_components(py::module_&);
+void export_convex_hull_2(py::module_&);
+void export_convex_hull_3(py::module_&);
+void export_corefinement(py::module_&);
+void export_envelope_2(py::module_&);
+void export_envelope_3(py::module_&);
 void export_general_polygon_set_2(py::module_&);
 void export_intersections(py::module_&);
-void export_kernel(py::module_&);
+void export_kernel_module(py::module_&);
 void export_kernel_d(py::module_&);
 void export_minkowski_sum_2(py::module_&);
 void export_object(py::module_&);
+void export_orientation_functions(py::module_&);
 void export_point_location(py::module_&);
+void export_point_set_processing(py::module_&);
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
 void export_polygon_mesh_processing(py::module_&);
+void export_triangulated_surface_mesh_segmentation(py::module_&);
+void export_triangulated_surface_mesh_simplification(py::module_&);
+void export_triangulated_surface_mesh_skeletonization(py::module_&);
+void export_kinetic_surface_reconstruction(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
 void export_spatial_searching(py::module_&);
 void export_surface_mesh(py::module_&);
+void export_surface_sweep_2(py::module_&);
+void export_efficient_ransac(py::module_&);
+void export_region_growing(py::module_&);
+void export_meshing(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
 void export_visibility_2(py::module_&);
+void export_cgal(py::module_& m);
+void export_tools(py::module_& m);
+void export_approximate_kernel(py::module_& m);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
 
@@ -45,18 +67,33 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   // http://isolation-nation.blogspot.com/2008/09/packages-in-python-extension-modules.html
   m.attr("__path__") = XSTR(CGALPY_MODULE_NAME);
 
+  export_approximate_kernel(m);
+  export_cgal(m);
+  export_tools(m);
+
 #ifdef CGALPY_KERNEL_BINDINGS
-  auto ker_m = m.def_submodule("Ker");
-  export_kernel(ker_m);
+  auto ker_m = m.def_submodule("Ker", kernel_doc());
+  export_kernel_module(ker_m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
   export_intersections(ker_m);
-#endif
-#endif
+#endif // CGALPY_KERNEL_INTERSECTION_BINDINGS
+#endif // CGALPY_KERNEL_BINDINGS
+
+#ifdef CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS
+    export_2d_range_and_neighbor_search(m); // currently under CGALPY
+#endif // CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
+    export_3d_point_set(m); // currently under CGALPY
+#endif // CGALPY_3D_POINT_SET_BINDINGS
+
+#ifdef CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS
+    export_kinetic_surface_reconstruction(m); // currently under CGALPY
+#endif // CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS
 
 #ifdef CGALPY_KERNEL_D_BINDINGS
   auto kerd_m = m.def_submodule("Kerd");
   export_kernel_d(kerd_m);
-#endif
+#endif // CGALPY_KERNEL_D_BINDINGS
 
 #ifdef CGALPY_POLYGON_2_BINDINGS
   auto pol2_m = m.def_submodule("Pol2");
@@ -75,7 +112,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #ifdef CGALPY_CONVEX_HULL_2_BINDINGS
   auto ch2_m = m.def_submodule("Ch2");
-  export_convex_hull_2_bindings(ch2_m);
+  export_convex_hull_2(ch2_m);
 #endif
 
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
@@ -110,6 +147,10 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 #endif
 
+#ifdef CGALPY_POINT_SET_PROCESSING_PACKAGE_BINDINGS
+  export_point_set_processing(m);
+#endif
+
 #ifdef CGALPY_POLYGON_PARTITIONING_BINDINGS
   auto pp2_m = m.def_submodule("Pp2");
   export_polygon_partition_2(pp2_m);
@@ -118,6 +159,21 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_MINKOWSKI_SUM_2_BINDINGS
   auto ms2_m = m.def_submodule("Ms2");
   export_minkowski_sum_2(ms2_m);
+#endif
+
+#ifdef CGALPY_CONVEX_HULL_3_BINDINGS
+  auto ch3_m = m.def_submodule("Ch3");
+  export_convex_hull_3(ch3_m);
+#endif
+
+#ifdef CGALPY_ENVELOPE_2_BINDINGS
+  auto env2_m = m.def_submodule("Env2");
+  export_envelope_2(env2_m);
+#endif
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  auto env3_m = m.def_submodule("Env3");
+  export_envelope_3(env3_m);
 #endif
 
 #ifdef CGALPY_TRIANGULATION_3_BINDINGS
@@ -141,9 +197,41 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_surface_mesh(sm_m);
 #endif
 
+#ifdef CGALPY_SURFACE_SWEEP_2_BINDINGS
+  auto ss2_m = m.def_submodule("Ss2");
+  export_surface_sweep_2(ss2_m);
+#endif
+
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   auto pmp_m = m.def_submodule("Pmp");
+  export_connected_components(pmp_m);
+  export_corefinement(pmp_m);
+  export_meshing(pmp_m);
+  export_orientation_functions(pmp_m);
   export_polygon_mesh_processing(pmp_m);
+#endif
+
+#ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS
+  export_triangulated_surface_mesh_segmentation(m);
+#endif
+
+#ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS
+  auto tsms_m = m.def_submodule("Sms");
+  export_triangulated_surface_mesh_simplification(tsms_m);
+#endif
+
+#ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS
+  auto tsmsk_m = m.def_submodule("Smsk");
+  export_triangulated_surface_mesh_skeletonization(tsmsk_m);
+#endif
+
+#ifdef CGALPY_SHAPE_DETECTION_BINDINGS
+  auto sd_m = m.def_submodule("Sd",
+    "This CGAL component implements two algorithms for shape detection:\n\n"
+    "• the Efficient RANSAC (RANdom SAmple Consensus) method, contributed by Schnabel et al. [2];\n"
+    "• the Region Growing method, contributed by Lafarge and Mallet [1].");
+  export_efficient_ransac(sd_m);
+  export_region_growing(sd_m);
 #endif
 
 #ifdef CGALPY_VISIBILITY_2_BINDINGS

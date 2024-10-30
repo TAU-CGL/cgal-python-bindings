@@ -1,5 +1,10 @@
 [requires]
-cgal/[==5.5]
-
+gmp/6.3.0
+mpfr/4.2.1
+eigen/3.4.0
+boost/1.86.0
 [generators]
 CMakeDeps
+CMakeToolchain
+[layout]
+cmake_layout

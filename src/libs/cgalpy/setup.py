@@ -24,5 +24,5 @@ setup(version='@TARGET_VERSION_MAJOR@.@TARGET_VERSION_MINOR@.@TARGET_VERSION_PAT
       url='@TARGET_URL@',
       package_dir={'@TARGET_PACKAGE_NAME@': '.'},
       package_data=package_data,
-      license='GPLv3+',
-      cmdclass={'bdist_wheel': bdist_wheel})
+      cmdclass={'bdist_wheel': bdist_wheel},
+      license='GPLv3+')

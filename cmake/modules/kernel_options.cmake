@@ -7,15 +7,20 @@ set(CGALPY_KERNEL_EPEC 1)
 set(CGALPY_KERNEL_EPEC_WITH_SQRT 2)
 set(CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE 3)
 set(CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ 4)
+set(CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL 5)
 
 # Names
-set(CGALPY_KERNEL_SHORT_NAMES "epic" "epec" "epecws" "fscd" "fsclg")
-set(CGALPY_KERNEL_NAMES "epic" "epec" "epecWithSqrt" "filteredSimpleCartesianDouble" "filteredSimpleCartesianLazyGmpq")
+set(CGALPY_KERNEL_SHORT_NAMES "epic" "epec" "epecws" "fscd" "fsclg" "ccr")
+set(CGALPY_KERNEL_NAMES "epic" "epec" "epecWithSqrt" "filteredSimpleCartesianDouble" "filteredSimpleCartesianLazyGmpq" "cartesianCoreRational")
 
 # Default
-SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
-set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC} CACHE INTERNAL "")
-set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epic epec epecWithSqrt filteredSimpleCartesianDouble filteredSimpleCartesianLazyGmpq)
+# SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use") # TODO: ifndef def this
+# set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC} CACHE INTERNAL "")
+if(NOT CGALPY_KERNEL_NAME)
+  set(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use")
+  set(CGALPY_KERNEL ${CGALPY_KERNEL_EPEC} CACHE INTERNAL "")
+endif()
+set_property(CACHE CGALPY_KERNEL_NAME PROPERTY STRINGS epic epec epecWithSqrt filteredSimpleCartesianDouble filteredSimpleCartesianLazyGmpq cartesianCoreRational)
 
 # Selection
 function(select_kernel_intersection)
@@ -36,6 +41,10 @@ function(select_kernel)
       set(CGALPY_KERNEL ${CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE} CACHE INTERNAL "")
     elseif ("${CGALPY_KERNEL_NAME}" STREQUAL "filteredSimpleCartesianLazyGmpq")
       set(CGALPY_KERNEL ${CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ} CACHE INTERNAL "")
+    elseif ("${CGALPY_KERNEL_NAME}" STREQUAL "cartesianCoreRational")
+      set(CGALPY_KERNEL ${CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL} CACHE INTERNAL "")
+    else()
+      message(FATAL_ERROR "Unknown kernel ${CGALPY_KERNEL_NAME}")
     endif()
     add_definitions(-DCGALPY_KERNEL=${CGALPY_KERNEL})
     select_kernel_intersection()

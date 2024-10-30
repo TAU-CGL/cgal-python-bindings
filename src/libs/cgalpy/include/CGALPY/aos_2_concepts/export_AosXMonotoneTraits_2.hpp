@@ -59,7 +59,7 @@ void export_AosXMonotoneTraits_2(C& c, Concepts& concepts) {
   using Intersect_2 = typename T::Intersect_2;
   using Split_2 = typename T::Split_2;
 
-  auto& classes = concepts.m_x_monotone_traits_classes;
+  auto& classes = concepts.m_aos_x_monotone_traits_2_classes;
 
   classes.m_intersect_2 = new py::class_<Intersect_2>(c, "Intersect_2");
   classes.m_intersect_2->def("__call__", &intersect_2_call_operator<T>);

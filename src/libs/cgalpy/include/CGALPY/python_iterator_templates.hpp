@@ -12,6 +12,30 @@
 
 #include <nanobind/nanobind.h>
 
+#define CGALPY_DEPRECATED_HEADER "CGALPY/python_iterator_templates.hpp"
+#define CGALPY_REPLACEMENT_HEADER "CGALPY/make_iterator.hpp"
+#define CGALPY_INTERNAL_DEPRECATED_MESSAGE_STATUS "Warning: "
+#define CGALPY_INTERNAL_DEPRECATED_MESSAGE_DEPRECATED_HEADER \
+  "The header `" CGALPY_DEPRECATED_HEADER "` is deprecated"
+#define CGALPY_INTERNAL_NO_DEPRECATED_CODE_MESSAGE "."
+#define CGALPY_INTERNAL_DEPRECATED_MESSAGE_HEADERS \
+  CGALPY_INTERNAL_DEPRECATED_MESSAGE_DEPRECATED_HEADER \
+  CGALPY_INTERNAL_NO_DEPRECATED_CODE_MESSAGE \
+  " Please use `" CGALPY_REPLACEMENT_HEADER "` instead. "
+
+#define CGALPY_INTERNAL_DEPRECATED_MESSAGE \
+  CGALPY_INTERNAL_DEPRECATED_MESSAGE_STATUS \
+  CGALPY_INTERNAL_DEPRECATED_MESSAGE_HEADERS
+
+#  if defined(_MSC_VER) || defined(__BORLANDC__) || defined(__DMC__)
+#    pragma message (CGALPY_INTERNAL_DEPRECATED_MESSAGE)
+#  elif (__GNUC__ > 0) || defined(__HP_aCC) || defined(__SUNPRO_CC) || defined(__IBMCPP__)
+     // warning does not expand its arguments, issue a warning and add the message.
+#    warning "A deprecated header has been included."
+#    pragma message (CGALPY_INTERNAL_DEPRECATED_MESSAGE)
+#  endif //defined
+
+
 namespace py = nanobind;
 
 inline py::object pass_through(py::object const& o) { return o; }
@@ -29,6 +53,28 @@ public:
   Iterator_from_circulator(circulator first) : m_first(first), m_curr(first) {}
 
   typename circulator::value_type& next() {
+    if (m_curr != 0) {
+      if (first || m_curr != m_first) {
+        first = false;
+        return *m_curr++;
+      }
+    }
+    throw py::stop_iteration();
+    return *m_curr;
+  }
+};
+
+template <typename circulator>
+class Iterator_from_const_circulator {
+private:
+  bool first = true;
+  circulator m_first;
+  circulator m_curr;
+
+public:
+  Iterator_from_const_circulator(circulator first) : m_first(first), m_curr(first) {}
+
+  const typename circulator::value_type& next() {
     if (m_curr != 0) {
       if (first || m_curr != m_first) {
         first = false;

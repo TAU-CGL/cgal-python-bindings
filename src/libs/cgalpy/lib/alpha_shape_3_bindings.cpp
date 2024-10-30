@@ -13,7 +13,6 @@
 #include "CGALPY/config.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/alpha_shape_3_types.hpp"
-#include "CGALPY/python_iterator_templates.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
@@ -331,8 +330,6 @@ void export_alpha_shape_3(py::module_& m) {
     // .def("filtration_with_alpha_values", &As3::filtration_with_alpha_values)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     // Traversal of the alpha-Values
-    .def("alpha_begin", &As3::alpha_begin)
-    .def("alpha_end", &As3::alpha_end)
     .def("alphas", &as3::alphas, py::keep_alive<0, 1>())
     .def("alpha_find", &As3::alpha_find)
     .def("alpha_lower_bound", &As3::alpha_lower_bound)
@@ -376,10 +373,8 @@ void export_alpha_shape_3(py::module_& m) {
     .def("alpha_max", &as3::Alpha_status::alpha_max)
     ;
 
-  py::class_<as3::Alpha_iterator>(as3_c, "Alpha_iterator")
-    .def("__iter__", &pass_through)
-    .def("__next__", &as3::next, py::rv_policy::reference_internal)
-    ;
+  using Ai = as3::Alpha_iterator;
+  add_iterator<Ai, Ai>("Alpha_iterator", as3_c);
 
 #endif
 

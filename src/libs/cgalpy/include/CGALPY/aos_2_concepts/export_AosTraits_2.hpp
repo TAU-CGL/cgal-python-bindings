@@ -30,7 +30,7 @@ void export_AosTraits_2(C& c, Concepts& concepts) {
 
   export_AosXMonotoneTraits_2<T>(c, concepts);
 
-  auto& classes = concepts.m_traits_classes;
+  auto& classes = concepts.m_aos_traits_2_classes;
 
   if (! add_attr<Curve_2>(c, "Curve_2")) {
     classes.m_curve_2 = new py::class_<Curve_2>(c, "Curve_2");

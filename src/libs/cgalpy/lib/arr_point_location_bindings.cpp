@@ -10,9 +10,12 @@
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Arr_naive_point_location.h>
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
 #include <CGAL/Arr_walk_along_line_point_location.h>
+#endif
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
+#include <CGAL/Arr_observer.h>
 
 #include "CGALPY/arr_point_location_config.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
@@ -20,9 +23,15 @@
 
 namespace py = nanobind;
 
+namespace CGAL {
+
+inline bool operator==(const py::object a, const py::object b)
+{ return a.equal(b); }
+
+}
+
 namespace aos2 {
 
-typedef typename aos2::Arrangement_2 Arrangement_2;
 typedef typename aos2::Face_const_handle Face_const_handle;
 typedef typename aos2::Halfedge_const_handle Halfedge_const_handle;
 typedef typename aos2::Vertex_const_handle Vertex_const_handle;
@@ -32,7 +41,7 @@ typedef typename CGAL::Arr_point_location_result<Arrangement_on_surface_2>::Type
 typedef typename std::pair<Point_2, Pl_result>                  Pl_query_result;
 
 //
-class Point_location_result_visitor : public boost::static_visitor<py::object> {
+class Point_location_result_visitor {
 public:
   template<typename T>
   py::object operator()(T& operand) const
@@ -45,7 +54,7 @@ py::list locate_batch(const Arrangement_on_surface_2& arr, const py::list& lst)
   py::list res;
   auto op = [&] (const Pl_query_result& p) mutable {
       const auto& result =
-        boost::apply_visitor(Point_location_result_visitor(), p.second);
+        std::visit(Point_location_result_visitor(), p.second);
       res.append(py::make_tuple(p.first, result));
     };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
@@ -61,21 +70,21 @@ py::list locate_batch(const Arrangement_on_surface_2& arr, const py::list& lst)
 template <typename PL>
 py::object locate(PL& pl, const Point_2& p) {
   auto result = pl.locate(p);
-  return boost::apply_visitor(Point_location_result_visitor(), result);
+  return std::visit(Point_location_result_visitor(), result);
 }
 
 //
 template <typename PL>
 py::object ray_shoot_up(PL& pl, const Point_2& p) {
   auto result = pl.ray_shoot_up(p);
-  return boost::apply_visitor(Point_location_result_visitor(), result);
+  return std::visit(Point_location_result_visitor(), result);
 }
 
 //
 template <typename PL>
 py::object ray_shoot_down(PL& pl, const Point_2& p) {
   auto result = pl.ray_shoot_down(p);
-  return boost::apply_visitor(Point_location_result_visitor(), result);
+  return std::visit(Point_location_result_visitor(), result);
 }
 
 // #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
@@ -90,7 +99,9 @@ py::object ray_shoot_down(PL& pl, const Point_2& p) {
 void export_point_location(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Naive_pl = CGAL::Arr_naive_point_location<Aos>;
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
   using Walk_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
+#endif
   using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
   using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
   using Aob = CGAL::Arr_observer<Aos>;
@@ -128,6 +139,7 @@ void export_point_location(py::module_& m) {
     ;
 #endif
 
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
   py::class_<Walk_pl>(m, "Arr_walk_along_line_point_location")
     .def(py::init<>())
     .def(py::init<Aos&>())
@@ -137,6 +149,7 @@ void export_point_location(py::module_& m) {
     .def("ray_shoot_up", &aos2::ray_shoot_up<Walk_pl>, ri)
     .def("ray_shoot_down", &aos2::ray_shoot_down<Walk_pl>, ri)
     ;
+#endif
 
   py::class_<Naive_pl>(m, "Arr_naive_point_location")
     .def(py::init<>())

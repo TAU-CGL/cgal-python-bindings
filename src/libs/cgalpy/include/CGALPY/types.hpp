@@ -53,6 +53,9 @@ constexpr bool convex_hull_2_bindings()
 constexpr bool convex_hull_3_bindings()
 { return DETECT_EXIST(CGALPY_CONVEX_HULL_3_BINDINGS); }
 
+constexpr bool envelope_3_bindings()
+{ return DETECT_EXIST(CGALPY_ENVELOPE_3_BINDINGS); }
+
 constexpr bool polygon_2_bindings()
 { return DETECT_EXIST(CGALPY_POLYGON_2_BINDINGS); }
 

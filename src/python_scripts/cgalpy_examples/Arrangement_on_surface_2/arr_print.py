@@ -50,13 +50,13 @@ def print_arrangement(arr):
   print('{} vertices:'.format(arr.number_of_vertices()))
   v: Arrangement.Vertex
   for v in arr.vertices():
-    if v.is_isolated(): print('({})  - Isolated'.format(v.point()))
+    if v.is_isolated(): print('({})  - Isolated.'.format(v.point()))
     else: print('({})  - degree {}'.format(v.point(), v.degree()))
 
   # Print the arrangement edges.
   print('{} edges:'.format(arr.number_of_edges()))
   e: Arrangement.Halfedge
-  for e in arr.halfedges(): print('[{}]'.format(e.curve()))
+  for e in arr.edges(): print('[{}]'.format(e.curve()))
 
   # Print the arrangement faces.
   print('{} faces:'.format(arr.number_of_faces()))

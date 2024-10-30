@@ -10,18 +10,18 @@
 #ifndef CGALPY_EXPORT_UNIQUE_HPP
 #define CGALPY_EXPORT_UNIQUE_HPP
 
-#include <boost/python.hpp>
+#include <nanobind/nanobind.h>
 
-namespace bp = boost::python;
+namespace py = nanobind;
 
 template <typename T, typename Op>
 void export_unique(const char* name, Op& op) {
-  const bp::type_info info = bp::type_id<T>();
-  const auto* reg = bp::converter::registry::query(info);
+  const py::type_info info = py::type_id<T>();
+  const auto* reg = py::converter::registry::query(info);
   if ((reg == nullptr) || ((*reg).m_to_python == nullptr))
     op(name);
   else
-    bp::scope().attr(name) = bp::handle<>(reg->m_class_object);
+    py::scope().attr(name) = py::handle<>(reg->m_class_object);
 }
 
 #endif

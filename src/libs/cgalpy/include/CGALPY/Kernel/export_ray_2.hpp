@@ -48,8 +48,10 @@ void export_ray_2(C& c) {
     .def("opposite", &Ray::opposite)
     .def("transform", &Ray::transform)
     .def("source", &Ray::source)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     //.setattr("__hash__", &hash<Ray>)
     ;
 

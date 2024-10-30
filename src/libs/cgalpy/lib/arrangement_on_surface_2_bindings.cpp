@@ -9,6 +9,7 @@
 
 #define CGAL_USE_BASIC_VIEWER
 
+#include <variant>
 #include <boost/variant/variant.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/iterator/function_output_iterator.hpp>
@@ -20,12 +21,11 @@
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_vertical_decomposition_2.h>
 #include <CGAL/Arr_naive_point_location.h>
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
 #include <CGAL/Arr_walk_along_line_point_location.h>
+#endif
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
-#ifdef CGALPY_HAS_VISUAL
-#include <CGAL/draw_arrangement_2.h>
-#endif
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/Arr_observer.hpp"
@@ -35,44 +35,82 @@
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
+#if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS))
+#ifdef CGALPY_HAS_VISUAL
+#include <CGAL/draw_arrangement_2.h>
+#endif
+#endif
+
 void export_vertex(py::class_<aos2::Arrangement_on_surface_2>&);
 void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>&);
 void export_face(py::class_<aos2::Arrangement_on_surface_2>&);
 
-py::object export_arr_linear_traits(py::module_&);
-py::object export_arr_segment_traits(py::module_&);
-py::object export_arr_non_caching_segment_traits(py::module_&);
-py::object export_arr_circle_segment_traits(py::module_&);
-py::object export_arr_conic_traits(py::module_&);
-py::object export_arr_bezier_traits(py::module_&);
-py::object export_arr_rational_function_traits(py::module_&);
-py::object export_arr_algebraic_segment_traits(py::module_&);
-py::object export_arr_geodesic_arc_on_sphere_traits(py::module_&);
+void export_arr_algebraic_segment_traits_2(py::module_&);
+void export_arr_bezier_traits_2(py::module_&);
+void export_arr_circle_segment_traits_2(py::module_&);
+void export_arr_conic_traits_2(py::module_&);
+void export_arr_geodesic_arc_on_sphere_traits_2(py::module_&);
+void export_arr_linear_traits_2(py::module_&);
+void export_arr_non_caching_segment_traits_2(py::module_&);
+void export_arr_polyline_traits_2(py::module_&);
+void export_arr_segment_traits_2(py::module_&);
+void export_arr_rational_function_traits_2(py::module_&);
 
-py::object export_gps_segment_traits(py::module_&);
-py::object export_gps_circle_segment_traits(py::module_&);
-py::object export_gps_traits(py::module_&);
+void export_arr_curve_data_traits_2(py::module_&);
+void export_arr_consolidated_curve_data_traits_2(py::module_&);
 
+#if defined(CGALPY_ENVELOPE_3_BINDINGS)
+void export_env_plane_traits_3(py::module_&);
+void export_env_sphere_traits_3(py::module_&);
+void export_env_tri_traits_3(py::module_&);
+#if defined(CGALPY_ENV3_SURFACE_DATA)
+void export_env_surface_data_traits_3(py::module_&);
+#endif
+#endif
+
+#if defined(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
+void export_gps_segment_traits_2(py::module_&);
+void export_gps_circle_segment_traits_2(py::module_&);
+void export_gps_traits_2(py::module_&);
+#endif
+
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
 extern void export_arrangement_2_io(py::class_<aos2::Arrangement_2,
                                     aos2::Arrangement_on_surface_2>&);
+#endif
 
 namespace py = nanobind;
 
+namespace CGAL {
+
+inline bool operator==(const py::object a, const py::object b)
+{ return a.equal(b); }
+
+}
+
 namespace aos2 {
 
-typedef typename boost::variant<Vertex_const_handle,
-                                Halfedge_const_handle,
-                                Face_const_handle>      Cell_const_variant;
+using Cell_variant = std::variant<Vertex_handle, Halfedge_handle, Face_handle>;
 
-typedef Arr_overlay_function_traits<Arrangement_on_surface_2,
-                                    Arrangement_on_surface_2,
-                                    Arrangement_on_surface_2,
-                                    py::object> Arr_overlay_function_traits;
-typedef Arr_overlay_traits<Arrangement_on_surface_2, Arrangement_on_surface_2,
-                           Arrangement_on_surface_2, py::object>
-                                                        Arr_overlay_traits;
+using Cell_const_variant = std::variant<Vertex_const_handle,
+                                        Halfedge_const_handle,
+                                        Face_const_handle>;
 
-typedef Arr_observer<Arrangement_on_surface_2, py::object> Arr_observer;
+using Arr_overlay_function_traits =
+  Arr_overlay_function_traits<Arrangement_on_surface_2,
+                              Arrangement_on_surface_2,
+                              Arrangement_on_surface_2,
+                              py::object>;
+using Arr_overlay_traits =
+  Arr_overlay_traits<Arrangement_on_surface_2, Arrangement_on_surface_2,
+                     Arrangement_on_surface_2, py::object>;
+
+using Arr_observer = Arr_observer<Arrangement_on_surface_2, py::object>;
 
 // Free functions
 
@@ -105,25 +143,35 @@ private:
 // Insert a list of curves into an arrangement.
 void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
   if (lst.size() == 0) return;
-  if (py::isinstance<X_monotone_curve_2>(lst[0])) {
-    auto begin = stl_input_iterator<X_monotone_curve_2>(lst);
-    auto end = stl_input_iterator<X_monotone_curve_2>(lst, false);
+  using Gt = Arrangement_on_surface_2::Geometry_traits_2;
+  using Xcv = Gt::X_monotone_curve_2;
+  if (py::isinstance<Xcv>(lst[0])) {
+    auto begin = stl_input_iterator<Xcv>(lst);
+    auto end = stl_input_iterator<Xcv>(lst, false);
     CGAL::insert(arr, begin, end);
+    return;
   }
-  else if (py::isinstance<Curve_2>(lst[0])) {
-    auto begin = stl_input_iterator<Curve_2>(lst);
-    auto end = stl_input_iterator<Curve_2>(lst, false);
+
+  using Cv = Gt::Curve_2;
+  if (py::isinstance<Cv>(lst[0])) {
+    auto begin = stl_input_iterator<const Cv&>(lst);
+    auto end = stl_input_iterator<const Cv&>(lst, false);
     CGAL::insert(arr, begin, end);
+    return;
   }
+
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  else if (py::isinstance<Point_2>(lst[0])) {
+  using Pnt = Gt::Point_2;
+  if (py::isinstance<Pnt>(lst[0])) {
     // Points must be wrapped into CGAL::Objects???
-    auto begin = Object_input_iterator<Point_2>(lst);
-    auto end = Object_input_iterator<Point_2>(lst, false);
+    auto begin = Object_input_iterator<const Pnt&>(lst);
+    auto end = Object_input_iterator<const Pnt&>(lst, false);
     CGAL::insert(arr, begin, end);
+    return;
   }
 #endif
-  else throw std::runtime_error("Attempting to insert a list of of object of unrecognized type to an arrangement!");
+
+  throw std::runtime_error("Attempting to insert a list of object of unrecognized type to an arrangement!");
 }
 
 // Overlay two arrangements
@@ -138,45 +186,43 @@ void overlay_tr(Arrangement_on_surface_2& arr1, Arrangement_on_surface_2& arr2,
 { CGAL::overlay(arr1, arr2, arr_res, traits); }
 
 //
-Face& remove_edge_free(Arrangement_2& arr, Halfedge& e) {
+Face& remove_edge_free(Arrangement_on_surface_2& aos, Halfedge& e) {
   auto handle = e.twin();
-  return *(CGAL::remove_edge(arr, handle));
+  return *(CGAL::remove_edge(aos, handle));
 }
 
 //
-bool remove_vertex_free(Arrangement_2& arr, Vertex& v)
-{ return CGAL::remove_vertex(arr, Vertex_handle(&v)); }
+bool remove_vertex_free(Arrangement_on_surface_2& aos, Vertex& v)
+{ return CGAL::remove_vertex(aos, Vertex_handle(&v)); }
 
 //
-template<typename T1, typename T2>
-void decompose_helper2(const Vertex& vertex, const T1& below,
-                       const T2& above, py::list& lst) {
+void decompose_helper2(const Vertex& vertex,
+                       const py::object& below, const py::object& above,
+                       py::list& lst) {
   py::tuple inner = py::make_tuple(below, above);
   py::tuple outer = py::make_tuple(vertex, inner);
   lst.append(outer);
 }
 
 //
-template<typename T1>
-void decompose_helper1(const Vertex& vertex, const T1& below,
-                       const boost::optional<Cell_const_variant>& above,
+void decompose_helper1(const Vertex& vertex, const py::object& below,
+                       const std::optional<Cell_const_variant>& above,
                        py::list& lst) {
   if (! above) {
     auto none = py::none();
-    decompose_helper2<T1, py::object>(vertex, below, none, lst);
+    decompose_helper2(vertex, below, none, lst);
     return;
   }
-  auto var = (above.get());
-  if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&var)) {
-    decompose_helper2<T1, const Vertex>(vertex, below, *(*v), lst);
+  if (auto* v = std::get_if<Vertex_const_handle>(&*above)) {
+    decompose_helper2(vertex, below, py::cast(&*(*v)), lst);
     return;
   }
-if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
-    decompose_helper2<T1, const Halfedge>(vertex, below, *(*e), lst);
+  if (auto* e = std::get_if<Halfedge_const_handle>(&*above)) {
+    decompose_helper2(vertex, below, py::cast(&*(*e)), lst);
     return;
   }
-  if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
-    decompose_helper2<T1, const Face>(vertex, below, *(*f), lst);
+  if (auto* f = std::get_if<Face_const_handle>(&*above)) {
+    decompose_helper2(vertex, below, py::cast(&*(*f)), lst);
     return;
   }
 }
@@ -184,30 +230,29 @@ if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
 //
 using Decompose_result =
   std::pair<Arrangement_on_surface_2::Vertex_const_handle,
-            std::pair<boost::optional<Cell_const_variant>,
-                      boost::optional<Cell_const_variant>>>;
+            std::pair<std::optional<Cell_const_variant>,
+                      std::optional<Cell_const_variant>>>;
 
 void decompose_helper(const Decompose_result& res, py::list& lst) {
   const Vertex& vertex = *(res.first);
-  const boost::optional<Cell_const_variant>& below = res.second.first;
-  const boost::optional<Cell_const_variant>& above = res.second.second;
+  const auto& below = res.second.first;
+  const auto& above = res.second.second;
 
   if (! below) {
     auto none = py::none();
-    decompose_helper1<py::object>(vertex, none, above, lst);
+    decompose_helper1(vertex, none, above, lst);
     return;
   }
-  auto var = (below.get());
-  if (Vertex_const_handle* v = boost::get<Vertex_const_handle>(&var)) {
-    decompose_helper1<const Vertex>(vertex, *(*v), above, lst);
+  if (auto* v = std::get_if<Vertex_const_handle>(&*below)) {
+    decompose_helper1(vertex, py::cast(&*(*v)), above, lst);
     return;
   }
-  if (Halfedge_const_handle* e = boost::get<Halfedge_const_handle>(&var)) {
-    decompose_helper1<const Halfedge>(vertex, *(*e), above, lst);
+  if (auto* e = std::get_if<Halfedge_const_handle>(&*below)) {
+    decompose_helper1(vertex, py::cast(&*(*e)), above, lst);
     return;
   }
-  if (Face_const_handle* f = boost::get<Face_const_handle>(&var)) {
-    decompose_helper1<const Face>(vertex, *(*f), above, lst);
+  if (auto* f = std::get_if<Face_const_handle>(&*below)) {
+    decompose_helper1(vertex, py::cast(&*(*f)), above, lst);
     return;
   }
 }
@@ -225,7 +270,7 @@ py::list decompose(Arrangement_on_surface_2& arr) {
 }
 
 //
-class Zone_object_visitor : public boost::static_visitor<py::object> {
+class Zone_object_visitor {
 public:
   template<typename T>
   py::object operator()(T operand) const { return py::cast(&(*operand)); }
@@ -234,8 +279,8 @@ public:
 //
 py::list zone(Arrangement_on_surface_2& arr, X_monotone_curve_2& c) {
   py::list lst;
-  auto op = [&] (const Cell_const_variant& o) mutable
-    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+  auto op = [&] (const Cell_variant& o) mutable
+    { lst.append(std::visit(Zone_object_visitor(), o)); };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -247,8 +292,8 @@ template <typename PointLocation>
 py::list zone_pl(Arrangement_on_surface_2& arr, X_monotone_curve_2& c,
                  PointLocation& pl) {
   py::list lst;
-  auto op = [&] (const Cell_const_variant& o) mutable
-    { lst.append(boost::apply_visitor(Zone_object_visitor(), o)); };
+  auto op = [&] (const Cell_variant& o) mutable
+    { lst.append(std::visit(Zone_object_visitor(), o)); };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -362,13 +407,18 @@ Arrangement_on_surface_2::Face& remove_edge(Arrangement_on_surface_2& arr,
   return *(arr.remove_edge(handle));
 }
 
-//
+#if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS) || \
+       (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
+       (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS))
+//! \brief
+//! \todo Turn into a template and compile in conditionaly
 Arrangement_on_surface_2::Face& fictitious_face(Arrangement_on_surface_2& arr)
 { return *(arr.fictitious_face()); }
+#endif
 
 /// @}
 
-/// \name Iterators
+/// \name Aos Iterators
 /// @{
 
 //
@@ -392,6 +442,97 @@ py::object unbounded_faces(const Arrangement_on_surface_2& arr)
 { return make_iterator(arr.unbounded_faces_begin(), arr.unbounded_faces_end()); }
 
 /// @}
+
+#if defined(CGALPY_AOS2_WITH_HISTORY)
+
+// Insert a curve into an arrangement with history
+Arrangement_on_surface_with_history_2::Curve_halfedges&
+insert_cv_with_history(Arrangement_on_surface_with_history_2& arr,
+                       const Arrangement_on_surface_with_history_2::
+                       Geometry_traits_2::Curve_2& cv)
+{
+  using Cha = Arrangement_on_surface_with_history_2::Curve_handle;
+  using Che = Arrangement_on_surface_with_history_2::Curve_halfedges;
+  Cha cha = CGAL::insert(arr, cv);
+  Che& x = *cha;
+  return x;
+}
+
+// Insert a list of curves into an arrangement with history.
+void insert_curves_with_history(Arrangement_on_surface_with_history_2& arr,
+                                py::list& lst) {
+  if (lst.size() == 0) return;
+  using Gt = Arrangement_on_surface_with_history_2::Geometry_traits_2;
+  using Cv = Gt::Curve_2;
+  if (py::isinstance<Cv>(lst[0])) {
+    auto begin = stl_input_iterator<const Cv&>(lst);
+    auto end = stl_input_iterator<const Cv&>(lst, false);
+    CGAL::insert(arr, begin, end);
+    return;
+  }
+
+  throw std::runtime_error("Attempting to insert a list of object of unrecognized type to an arrangement with history!");
+}
+
+// Remove a curve from an arrangement with history.
+Arrangement_on_surface_with_history_2::Size
+remove_curve_with_history(Arrangement_on_surface_with_history_2& arr,
+                          Arrangement_on_surface_with_history_2::Curve_halfedges& ch) {
+  using Aos_wh = Arrangement_on_surface_with_history_2;
+  return CGAL::remove_curve(arr, Aos_wh::Curve_handle(&ch));
+}
+
+/// \name Aos With History Iterators
+/// @{
+
+//
+py::object
+originating_curves(const Arrangement_on_surface_with_history_2& arr_wh,
+                   Halfedge& e) {
+  return make_iterator(arr_wh.originating_curves_begin(Halfedge_handle(&e)),
+                       arr_wh.originating_curves_end(Halfedge_handle(&e)));
+}
+
+//
+py::object curves(const Arrangement_on_surface_with_history_2& arr_wh)
+{ return make_iterator(arr_wh.curves_begin(), arr_wh.curves_end()); }
+
+//
+py::object induced_edges(const Arrangement_on_surface_with_history_2& arr_wh,
+                         const Arrangement_on_surface_with_history_2::
+                         Curve_halfedges& ch) {
+  using Aos_wh = Arrangement_on_surface_with_history_2;
+  using Cch = Aos_wh::Curve_const_handle;
+  return make_iterator(arr_wh.induced_edges_begin(Cch(&ch)),
+                       arr_wh.induced_edges_end(Cch(&ch)));
+}
+
+//
+Arrangement_on_surface_with_history_2::Size
+number_of_induced_edges(const Arrangement_on_surface_with_history_2& arr,
+                        const Arrangement_on_surface_with_history_2::
+                        Curve_halfedges& ch) {
+  using Aos_wh = Arrangement_on_surface_with_history_2;
+  return arr.number_of_induced_edges(Aos_wh::Curve_const_handle(&ch));
+}
+
+//
+Arrangement_on_surface_with_history_2::Halfedge&
+split_edge_with_history(Arrangement_on_surface_with_history_2& arr,
+                        Arrangement_on_surface_with_history_2::Halfedge& e,
+                        const Arrangement_on_surface_with_history_2::Point_2& p)
+{ return *(arr.split_edge(Halfedge_handle(&e), p)); }
+
+//
+Arrangement_on_surface_with_history_2::Halfedge&
+merge_edge_with_history(Arrangement_on_surface_with_history_2& arr,
+                        Arrangement_on_surface_with_history_2::Halfedge& e1,
+                        Arrangement_on_surface_with_history_2::Halfedge& e2)
+{ return *(arr.merge_edge(Halfedge_handle(&e1), Halfedge_handle(&e2))); }
+
+/// @}
+
+#endif
 
 /// \name Points and curves insertions
 /// @{
@@ -435,58 +576,79 @@ void insert_ni_cvs(Arrangement_on_surface_2& arr, py::list& lst) {
  * \pre: `xcv` does not intersect any curve in the arrangement in their
  *       interiors.
  */
-template <typename PoinLocation>
-Halfedge& insert_ni_cv_pl(Arrangement_on_surface_2& arr,
-                          const X_monotone_curve_2& xcv, const PoinLocation& pl)
+template <typename Aos, typename PoinLocation>
+Halfedge&
+insert_ni_xcv_pl(Arrangement_on_surface_2& arr,
+                 const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+                 const PoinLocation& pl)
 { return *(CGAL::insert_non_intersecting_curve(arr, xcv, pl)); }
 
 // Insert a curve into an arrangement.
-void insert_cv(Arrangement_on_surface_2& arr, const Curve_2& cv)
+template <typename Aos>
+void insert_cv(Aos& arr, const typename Aos::Geometry_traits_2::Curve_2& cv)
 { CGAL::insert(arr, cv); }
 
 // Insert a curve into an arrangement.
-template <typename PoinLocation>
-void insert_cv_pl(Arrangement_on_surface_2& arr, const Curve_2& cv,
+template <typename Aos, typename PoinLocation>
+void insert_cv_pl(Aos& arr,
+                  const typename Aos::Geometry_traits_2::Curve_2& cv,
                   const PoinLocation& pl)
 { CGAL::insert(arr, cv, pl); }
 
 // Insert a curve into an arrangement.
-void insert_xcv(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv)
-{ CGAL::insert(arr, xcv); }
+template <typename Aos>
+void insert_xcv(Aos& aos,
+                const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv)
+{ CGAL::insert(aos, xcv); }
 
 // Insert a curve into an arrangement.
-void insert_xcv_vertex(Arrangement_on_surface_2& arr,
-                       const X_monotone_curve_2& xcv, const Vertex& v)
+template <typename Aos>
+void
+insert_xcv_vertex(Aos& arr,
+                  const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+                  const Vertex& v)
 { CGAL::insert(arr, xcv, Cell_const_variant(Vertex_const_handle(&v))); }
 
 // Insert a curve into an arrangement.
-void insert_xcv_halfedge(Arrangement_on_surface_2& arr,
-                         const X_monotone_curve_2& xcv, const Halfedge& h)
+template <typename Aos>
+void
+insert_xcv_halfedge(Aos& arr,
+                    const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+                    const Halfedge& h)
 { CGAL::insert(arr, xcv, Cell_const_variant(Halfedge_const_handle(&h))); }
 
 // Insert a curve into an arrangement.
-void insert_xcv_face(Arrangement_on_surface_2& arr,
-                     const X_monotone_curve_2& xcv, const Face& f)
+template <typename Aos>
+void
+insert_xcv_face(Aos& arr,
+                const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+                const Face& f)
 { CGAL::insert(arr, xcv, Cell_const_variant(Face_const_handle(&f))); }
 
 // Insert a curve into an arrangement.
-template <typename PoinLocation>
-void insert_xcv_pl(Arrangement_on_surface_2& arr, const X_monotone_curve_2& xcv,
-                   const PoinLocation& pl)
+template <typename Aos, typename PoinLocation>
+void
+insert_xcv_pl(Aos& arr,
+              const typename Aos::Geometry_traits_2::X_monotone_curve_2& xcv,
+              const PoinLocation& pl)
 { CGAL::insert(arr, xcv, pl); }
+
+//! Obtain the geometry traits.
+const Geometry_traits_2& geometry_traits(const Arrangement_on_surface_2& aos)
+{ return *(aos.geometry_traits()); }
+
+//! Obtain the topology traits.
+const Topology_traits& topology_traits(const Arrangement_on_surface_2& aos)
+{ return *(aos.topology_traits()); }
 
 /// @}
 
 /// \name Functions for Arrangement_2
 /// @{
 
-// Draw an arrangement.
-#ifdef CGALPY_HAS_VISUAL
-void draw(const Arrangement_2& arr) { CGAL::draw(arr); }
-#endif
-
-// //! Obtain the unbounded face of an arrangement.
-typename Arrangement_2::Face& unbounded_face(Arrangement_2& arr)
+//! Obtain the unbounded face of an arrangement.
+template <typename Arrangement_>
+typename Arrangement_::Face& unbounded_face(Arrangement_& arr)
 { return *(arr.unbounded_face()); }
 
 /// @}
@@ -496,14 +658,20 @@ typename Arrangement_2::Face& unbounded_face(Arrangement_2& arr)
 // Export common members of Aos types
 void export_aos(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
-  using GT = aos2::Geometry_traits_2;
+  using Gt = Aos::Geometry_traits_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Aos> aos_c(m, "Arrangement_on_surface_2");
   aos_c.def(py::init<>())
     .def(py::init<const Aos&>())
-    .def(py::init<const GT*>())
+    .def(py::init<const Gt*>())
+    .def("geometry_traits", &aos2::geometry_traits, ri)
+    .def("topology_traits", &aos2::topology_traits, ri)
+#if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS) || \
+       (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
+       (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS))
     .def("fictitious_face", &aos2::fictitious_face, ri)
+#endif
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex1, ri)
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex2, ri)
     .def("insert_from_right_vertex", &aos2::insert_from_right_vertex1, ri)
@@ -559,11 +727,72 @@ void export_aos(py::module_& m) {
   export_face(aos_c);
 
   // Add convenient attributes:
-  add_attr<GT>(aos_c, "Geometry_traits_2");
-  add_attr<GT::Point_2>(aos_c, "Point_2");
-  add_attr<GT::Curve_2>(aos_c, "Curve_2");
-  add_attr<GT::X_monotone_curve_2>(aos_c, "X_monotone_curve_2");
+  add_attr<Gt>(aos_c, "Geometry_traits_2");
+  add_attr<Gt::Point_2>(aos_c, "Point_2");
+  add_attr<Gt::Curve_2>(aos_c, "Curve_2");
+  add_attr<Gt::X_monotone_curve_2>(aos_c, "X_monotone_curve_2");
+
+#if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS))
+#ifdef CGALPY_HAS_VISUAL
+  using Draw_aos = void(*)(const Aos&, const char*);
+  m.def("draw", static_cast<Draw_aos>(CGAL::draw));
+#endif
+#endif
 }
+
+#if defined(CGALPY_AOS2_WITH_HISTORY)
+
+//
+void export_aos_with_history(py::module_& m) {
+  using Aos = aos2::Arrangement_on_surface_2;
+  using Aos_wh = aos2::Arrangement_on_surface_with_history_2;
+  using Gt = Aos_wh::Geometry_traits_2;
+  using Cv = Gt::Curve_2;
+  constexpr auto ri(py::rv_policy::reference_internal);
+  constexpr auto ref(py::rv_policy::reference);
+
+  py::class_<Aos_wh, Aos> awh_c(m, "Arrangement_on_surface_with_history_2");
+  awh_c.def(py::init<>())
+    .def(py::init<const Aos_wh&>())
+    .def(py::init<const Gt*>())
+    .def("number_of_originating_curves", &Aos_wh::number_of_originating_curves)
+    .def("originating_curves", &aos2::originating_curves, py::keep_alive<0, 1>())
+    .def("number_of_curves", &Aos_wh::number_of_curves)
+    .def("curves", &aos2::curves, py::keep_alive<0, 1>())
+    .def("number_of_induced_edges", &aos2::number_of_induced_edges)
+    .def("induced_edges", &aos2::edges, py::keep_alive<0, 1>())
+    .def("split_edge", &aos2::split_edge_with_history, ri)
+    .def("merge_edge", &aos2::merge_edge_with_history, ri)
+    ;
+
+  using Oci = Aos_wh::Originating_curve_iterator;
+  using Cci = Aos_wh::Curve_const_iterator;
+  using Iei = Aos_wh::Originating_curve_iterator;
+  add_iterator<Oci, Oci>("Originating_curve_iterator", awh_c);
+  add_iterator<Cci, Cci>("Curve_iterator", awh_c);
+  add_iterator<Iei, Iei>("Induced_edge_iterator", awh_c);
+
+  using Ch = Aos_wh::Curve_halfedges;
+  if (! add_attr<Ch>(awh_c, "Curve_halfedges")) {
+    py::class_<Ch, Cv> ch_c(awh_c, "Curve_halfedges");
+    ch_c.def(py::init<>())
+      .def(py::init_implicit<const Cv&>())
+      ;
+  }
+
+  //! \todo Why the f... reference_internal doesn't work?
+  m.def("insert", &aos2::insert_curves_with_history)
+    .def("insert_curve", &aos2::insert_cv_with_history, ref)
+    .def("remove_curve", &aos2::remove_curve_with_history)
+    ;
+}
+
+#endif
 
 // Overlay function traits
 template <bool VertexExtended, bool HalfedgeExtended, bool FaceExtended>
@@ -607,46 +836,78 @@ void bind_overlay_function_traits<false, false, true>(py::module_& m) {
     ;
 }
 
-#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
-
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
 //
 void export_arr(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Arr = aos2::Arrangement_2;
-  using GT = aos2::Geometry_traits_2;
+  using Gt = aos2::Geometry_traits_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Arr, Aos> arr_c(m, "Arrangement_2");
   arr_c.def(py::init<>())
     .def(py::init<const Arr&>())
-    .def(py::init<const GT*>())
-    .def("unbounded_face", &aos2::unbounded_face, ri)
+    .def(py::init<const Gt*>())
+    .def("unbounded_face", &aos2::unbounded_face<Arr>, ri)
     .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity)
     ;
 
   export_arrangement_2_io(arr_c);
 
+#if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS))
 #ifdef CGALPY_HAS_VISUAL
-  m.def("draw", &aos2::draw);
+  //! \todo The draw function should be applied only to arrangement on surface
+  using Draw_arr = void(*)(const Arr&, const char*);
+  m.def("draw", [](const Arr& arr, const char* title )
+  { CGAL::draw(arr, title); });
+#endif
 #endif
 }
+#endif
+
+#if defined(CGALPY_AOS2_WITH_HISTORY)
+
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+//
+void export_arr_with_history(py::module_& m) {
+  using Aos_wh = aos2::Arrangement_on_surface_with_history_2;
+  using Arr_wh = aos2::Arrangement_with_history_2;
+  using Gt = Arr_wh::Geometry_traits_2;
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  py::class_<Arr_wh, Aos_wh> awh_c(m, "Arrangement_with_history_2");
+  awh_c.def(py::init<>())
+    .def(py::init<const Arr_wh&>())
+    .def(py::init<const Gt*>())
+    .def("unbounded_face", &aos2::unbounded_face<Arr_wh>, ri)
+    ;
+}
+#endif
 
 #endif
 
 //
 void export_arrangement_on_surface_2(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
-  using Arr = aos2::Arrangement_2;
-  using Awh = aos2::Arrangement_with_history_2;
-  using GT = Aos::Geometry_traits_2;
+  using Aos_wh = aos2::Arrangement_on_surface_with_history_2;
+  using Gt = Aos::Geometry_traits_2;
   using Dcel = Aos::Dcel;
-  using Pnt = GT::Point_2;
-  using Cv = GT::Curve_2;
-  using Xcv = GT::X_monotone_curve_2;
+  using Pnt = Gt::Point_2;
+  using Cv = Gt::Curve_2;
+  using Xcv = Gt::X_monotone_curve_2;
   using Naive_pl = CGAL::Arr_naive_point_location<Aos>;
+
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
   using Wal_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
+#endif
+
   using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
   using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   py::enum_<CGAL::Arr_halfedge_direction>(m, "Arr_halfedge_direction")
     .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
@@ -660,94 +921,158 @@ void export_arrangement_on_surface_2(py::module_& m) {
     .export_values()
     ;
 
-#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
-  export_arr_segment_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  export_arr_non_caching_segment_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
-  export_arr_linear_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-  export_arr_circle_segment_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
-  export_arr_conic_traits(m);
+  add_attr<CGAL::Box_parameter_space_2>(m, "Arr_parameter_space");
+  m.attr("ARR_LEFT_BOUNDARY") = &CGAL::ARR_LEFT_BOUNDARY;
+  m.attr("ARR_RIGHT_BOUNDARY") = &CGAL::ARR_RIGHT_BOUNDARY;
+  m.attr("ARR_BOTTOM_BOUNDARY") = &CGAL::ARR_BOTTOM_BOUNDARY;
+  m.attr("ARR_TOP_BOUNDARY") = &CGAL::ARR_TOP_BOUNDARY;
+  m.attr("ARR_INTERIOR") = &CGAL::ARR_INTERIOR;
+
+#if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
+  export_arr_algebraic_segment_traits_2(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS
-  export_arr_bezier_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
-  export_arr_rational_function_traits(m);
-#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
-  export_arr_algebraic_segment_traits(m);
+  export_arr_bezier_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
+  export_arr_circle_segment_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS
+  export_arr_conic_traits_2(m);
 #elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  export_arr_geodesic_arc_on_sphere_traits(m);
+  export_arr_geodesic_arc_on_sphere_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS
+  export_arr_linear_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
+  export_arr_non_caching_segment_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS
+  export_arr_segment_traits_2(m);
+  export_arr_polyline_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS
+  export_arr_segment_traits_2(m);
+#elif CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS
+  export_arr_rational_function_traits_2(m);
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
+// Curve data
+#if defined(CGALPY_AOS2_CURVE_DATA)
+  export_arr_curve_data_traits_2(m);
+#endif
+
+// Consolidated curve data
+#if defined(CGALPY_AOS2_CONSOLIDATED_CURVE_DATA)
+  export_arr_consolidated_curve_data_traits_2(m);
+#endif
+
+// 3D Envelopes
+#if defined(CGALPY_ENVELOPE_3_BINDINGS)
+#if CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_PLANE_GEOMETRY_TRAITS
+  export_env_plane_traits_3(m);
+#elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_SPHERE_GEOMETRY_TRAITS
+  export_env_sphere_traits_3(m);
+#elif CGALPY_ENV3_GEOMETRY_TRAITS == CGALPY_ENV3_TRIANGLE_GEOMETRY_TRAITS
+  export_env_tri_traits_3(m);
+#else
+  BOOST_STATIC_ASSERT_MSG(false, "CGALPY_ENV3_TRAITS");
+#endif
+#if defined(CGALPY_ENV3_SURFACE_DATA)
+  export_env_surface_data_traits_3(m);
+#endif
+
+#endif
+
+  // 2D Regularized Boolean set operations
 #if defined(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS))
-  export_gps_segment_traits(m);
+  export_gps_segment_traits_2(m);
 #else
-  export_gps_traits(m);
+  export_gps_traits_2(m);
 #endif
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS
-  export_gps_circle_segment_traits(m);
+  export_gps_circle_segment_traits_2(m);
 #endif
 #endif
 
   // Arrangement on surface
   if (! add_attr<Aos>(m, "Arrangement_on_surface_2")) export_aos(m);
-
-#if CGALPY_AOS2_TYPE == CGALPY_AOS2_ARRANGEMENT
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+  using Arr = aos2::Arrangement_2;
   if (! add_attr<Arr>(m, "Arrangement_2")) export_arr(m);
+#endif
+
+#if defined(CGALPY_AOS2_WITH_HISTORY)
+  if constexpr(aos2::aos2_with_history()) {
+    if (! add_attr<Aos_wh>(m, "Arrangement_on_surface_with_history_2"))
+      export_aos_with_history(m);
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+    using Arr_wh = aos2::Arrangement_with_history_2;
+    if (! add_attr<Arr_wh>(m, "Arrangement_with_history_2"))
+      export_arr_with_history(m);
+#endif
+  }
 #endif
 
   /// Free functions
 
   m.def("insert_point", &aos2::insert_point)
     .def("insert_point", &aos2::insert_point_pl<Naive_pl>)
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
     .def("insert_point", &aos2::insert_point_pl<Wal_pl>)
+#endif
     .def("insert_point", &aos2::insert_point_pl<Trapezoid_pl>)
     ;
 
   m.def("insert_non_intersecting_curve", &aos2::insert_ni_cv)
-    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Naive_pl>)
-    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Wal_pl>)
-    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Trapezoid_pl>)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_xcv_pl<Aos, Naive_pl>)
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_xcv_pl<Aos, Wal_pl>)
+#endif
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_xcv_pl<Aos, Trapezoid_pl>)
     .def("insert_non_intersecting_curves", &aos2::insert_ni_cvs)
     ;
 
   using Do_intersect = bool(*)(Aos&, const Xcv&);
   using Do_intersect_nv_pl = bool(*)(Aos&, const Xcv&, const Naive_pl&);
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
   using Do_intersect_wl_pl = bool(*)(Aos&, const Xcv&, const Wal_pl&);
+#endif
   using Do_intersect_tr_pl = bool(*)(Aos&, const Xcv&, const Trapezoid_pl&);
   using Do_intersect_lm_pl = bool(*)(Aos&, const Xcv&, const Landmarks_pl&);
 
-  m.def("insert", &aos2::insert_cv)
-    .def("insert", &aos2::insert_cv_pl<Naive_pl>)
-    .def("insert", &aos2::insert_cv_pl<Wal_pl>)
-    .def("insert", &aos2::insert_cv_pl<Trapezoid_pl>)
-    .def("insert", &aos2::insert_xcv)
-    .def("insert", &aos2::insert_xcv_pl<Naive_pl>)
-    .def("insert", &aos2::insert_xcv_pl<Wal_pl>)
-    .def("insert", &aos2::insert_xcv_pl<Trapezoid_pl>)
-    .def("insert", &aos2::insert_xcv_vertex)
-    .def("insert", &aos2::insert_xcv_halfedge)
-    .def("insert", &aos2::insert_xcv_face)
+  m.def("insert", &aos2::insert_cv<Aos>)
+    .def("insert", &aos2::insert_cv_pl<Aos, Naive_pl>)
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+    .def("insert", &aos2::insert_cv_pl<Aos, Wal_pl>)
+#endif
+    .def("insert", &aos2::insert_cv_pl<Aos, Trapezoid_pl>)
+    .def("insert", &aos2::insert_xcv<Aos>)
+    .def("insert", &aos2::insert_xcv_pl<Aos, Naive_pl>)
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
+    .def("insert", &aos2::insert_xcv_pl<Aos, Wal_pl>)
+#endif
+    .def("insert", &aos2::insert_xcv_pl<Aos, Trapezoid_pl>)
+    .def("insert", &aos2::insert_xcv_vertex<Aos>)
+    .def("insert", &aos2::insert_xcv_halfedge<Aos>)
+    .def("insert", &aos2::insert_xcv_face<Aos>)
     .def("insert", &aos2::insert_curves)
     ;
 
   m.def("do_intersect", static_cast<Do_intersect>(CGAL::do_intersect))
     .def("do_intersect", static_cast<Do_intersect_nv_pl>(CGAL::do_intersect))
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
     .def("do_intersect", static_cast<Do_intersect_wl_pl>(CGAL::do_intersect))
+#endif
     .def("do_intersect", static_cast<Do_intersect_tr_pl>(CGAL::do_intersect))
     ;
 
-  m.def("decompose", &aos2::decompose);
+  m.def("decompose", &aos2::decompose, ri, py::keep_alive<1, 0>());
 
   m.def("zone", &aos2::zone)
     .def("zone", &aos2::zone_pl<Naive_pl>)
+#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
     .def("zone", &aos2::zone_pl<Wal_pl>)
+#endif
     .def("zone", &aos2::zone_pl<Trapezoid_pl>)
     ;
 
@@ -755,9 +1080,9 @@ void export_arrangement_on_surface_2(py::module_& m) {
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
   m.def("insert_point", &aos2::insert_point_pl<Landmarks_pl>)
-    .def("insert_non_intersecting_curve", &aos2::insert_ni_cv_pl<Landmarks_pl>)
-    .def("insert", &aos2::insert_cv_pl<Landmarks_pl>)
-    .def("insert", &aos2::insert_xcv_pl<Landmarks_pl>)
+    .def("insert_non_intersecting_curve", &aos2::insert_ni_xcv_pl<Aos, Landmarks_pl>)
+    .def("insert", &aos2::insert_cv_pl<Aos, Landmarks_pl>)
+    .def("insert", &aos2::insert_xcv_pl<Aos, Landmarks_pl>)
     .def("do_intersect", static_cast<Do_intersect_lm_pl>(CGAL::do_intersect))
     .def("zone", &aos2::zone_pl<Landmarks_pl>)
     ;
@@ -771,7 +1096,6 @@ void export_arrangement_on_surface_2(py::module_& m) {
                                aos2::is_halfedge_extended(),
                                aos2::is_face_extended()>(m);
 
-  constexpr auto ri(py::rv_policy::reference_internal);
   constexpr auto ka_1_2 = py::keep_alive<1, 2>();
   py::class_<aos2::Arr_overlay_traits>(m, "Arr_overlay_traits")
     .def(py::init<>())

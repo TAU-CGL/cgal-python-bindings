@@ -27,14 +27,20 @@ namespace py = nanobind;
 namespace bso2 {
 
 //
-void complement0(General_polygon_2& pgn, General_polygon_with_holes_2& res)
-{ CGAL::complement(pgn, res); }
+General_polygon_with_holes_2 complement0(General_polygon_2& pgn) {
+  General_polygon_with_holes_2 res;
+  CGAL::complement(pgn, res);
+  return res;
+}
 
 //
-void complement1(General_polygon_with_holes_2& pgn, py::list& lst) {
-  auto v = std::vector<General_polygon_with_holes_2>();
-  CGAL::complement(pgn, std::back_inserter(v));
-  for (auto p : v) { lst.append(p); }
+py::list complement1(General_polygon_with_holes_2& pgn) {
+  using Gpwh = General_polygon_with_holes_2;
+  py::list res;
+  auto op = [&] (const Gpwh& gpwh) mutable { res.append(gpwh); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::complement(pgn, it);
+  return res;
 }
 
 //
@@ -59,63 +65,81 @@ py::list intersection_linear(T0& p0, T1& p1) {
   return lst;
 }
 
+  template <typename T0, typename T1, typename Traits>
+  py::list intersection_linear(T0& p0, T1& p1, const Traits& traits) {
+  py::list lst;
+  CGAL::intersection(p0, p1, append_iterator(lst), traits);
+  return lst;
+}
+
 //
 template<typename T0, typename T1>
-void intersection_range(py::list& pgn_lst, py::list& pwh_lst, py::list& lst) {
+py::list intersection_range(py::list& pgn_lst, py::list& pwh_lst) {
+  py::list res;
+  auto op = [&] (const T1& gpwh) mutable { res.append(gpwh); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
   auto begin0 = stl_input_iterator<T0>(pgn_lst);
   auto end0 = stl_input_iterator<T0>(pgn_lst, false);
   auto begin1 = stl_input_iterator<T1>(pwh_lst);
   auto end1 = stl_input_iterator<T1>(pwh_lst, false);
-  auto res = std::vector<T1>();
-  CGAL::intersection(begin0, end0, begin1, end1, std::back_inserter(res));
-  for (auto p : res) lst.append(p);
+  CGAL::intersection(begin0, end0, begin1, end1, it);
+  return res;
 }
 
 //
 template <typename T0, typename T1>
-void difference_linear(T0& p0, T1& p1, py::list& lst) {
-  auto v = std::vector<General_polygon_with_holes_2>();
-  CGAL::difference(p0, p1, std::back_inserter(v));
-  for (auto p : v) lst.append(p);
+py::list difference_linear(T0& p0, T1& p1) {
+  using Gpwh = General_polygon_with_holes_2;
+  py::list res;
+  auto op = [&] (const Gpwh& gpwh) mutable { res.append(gpwh); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::difference(p0, p1, it);
+  return res;
 }
 
-//
+// xxx
 template <typename T0, typename T1>
 bool join_linear(T0& p0, T1& p1, General_polygon_with_holes_2& pwh)
 { return CGAL::join(p0, p1, pwh); }
 
 //
 template<typename T0, typename T1>
-void join_range(py::list& pgn_lst, py::list& pwh_lst, py::list& lst) {
+py::list join_range(py::list& pgn_lst, py::list& pwh_lst) {
+  py::list res;
+  auto op = [&] (const T1& gpwh) mutable { res.append(gpwh); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
   auto begin0 = stl_input_iterator<T0>(pgn_lst);
   auto end0 = stl_input_iterator<T0>(pgn_lst, false);
   auto begin1 = stl_input_iterator<T1>(pwh_lst);
   auto end1 = stl_input_iterator<T1>(pwh_lst, false);
-  auto res = std::vector<T1>();
-  CGAL::join(begin0, end0, begin1, end1, std::back_inserter(res));
-  for (auto p : res) lst.append(p);
+  CGAL::join(begin0, end0, begin1, end1, it);
+  return res;
 }
 
 //
 template <typename T0, typename T1>
-void symmetric_difference_linear(T0& p0, T1& p1, py::list& lst) {
-  auto v = std::vector<General_polygon_with_holes_2>();
-  CGAL::symmetric_difference(p0, p1, std::back_inserter(v));
-  for (auto p : v) lst.append(p);
+py::list symmetric_difference_linear(T0& p0, T1& p1) {
+  using Gpwh = General_polygon_with_holes_2;
+  py::list res;
+  auto op = [&] (const Gpwh& gpwh) mutable { res.append(gpwh); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::symmetric_difference(p0, p1, it);
+  return res;
 }
 
 //
 template<typename T0, typename T1>
-void symmetric_difference_range(py::list& pgn_lst, py::list& pwh_lst,
-                                py::list& lst) {
+py::list symmetric_difference_range(py::list& pgn_lst, py::list& pwh_lst) {
+  using Gpwh = General_polygon_with_holes_2;
+  py::list res;
+  auto op = [&] (const Gpwh& gpwh) mutable { res.append(gpwh); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
   auto begin0 = stl_input_iterator<T0>(pgn_lst);
   auto end0 = stl_input_iterator<T0>(pgn_lst, false);
   auto begin1 = stl_input_iterator<T1>(pwh_lst);
   auto end1 = stl_input_iterator<T1>(pwh_lst, false);
-  auto res = std::vector<T1>();
-  CGAL::symmetric_difference(begin0, end0, begin1, end1,
-                             std::back_inserter(res));
-  for (auto p : res) lst.append(p);
+  CGAL::symmetric_difference(begin0, end0, begin1, end1, it);
+  return res;
 }
 
 //
@@ -126,10 +150,13 @@ CGAL::Oriented_side oriented_side(T0& p0, T1& p1)
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
 //
-void connect_holes(General_polygon_with_holes_2& pwh, py::list& lst) {
-  auto v = std::vector<Geometry_traits_2::Point_2>();
-  CGAL::connect_holes(pwh, std::back_inserter(v));
-  for (auto p : v) lst.append(p);
+py::list connect_holes(General_polygon_with_holes_2& pwh) {
+  using Pnt = Geometry_traits_2::Point_2;
+  py::list res;
+  auto op = [&] (const Pnt& p) mutable { res.append(p); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  CGAL::connect_holes(pwh, it);
+  return res;
 }
 #endif
 
@@ -137,6 +164,8 @@ void connect_holes(General_polygon_with_holes_2& pwh, py::list& lst) {
 
 //
 void export_boolean_set_operations_2(py::module_& m) {
+  using Gt = bso2::Geometry_traits_2;
+  using Pnt = Gt::Point_2;
   using Pgn = bso2::General_polygon_2;
   using Pwh = bso2::General_polygon_with_holes_2;
 
@@ -151,6 +180,10 @@ void export_boolean_set_operations_2(py::module_& m) {
   m.def("intersection", &bso2::intersection_linear<Pgn, Pwh>);
   m.def("intersection", &bso2::intersection_linear<Pwh, Pgn>);
   m.def("intersection", &bso2::intersection_linear<Pwh, Pwh>);
+  m.def("intersection", &bso2::intersection_linear<Pgn, Pgn, Gt>);
+  m.def("intersection", &bso2::intersection_linear<Pgn, Pwh, Gt>);
+  m.def("intersection", &bso2::intersection_linear<Pwh, Pgn, Gt>);
+  m.def("intersection", &bso2::intersection_linear<Pwh, Pwh, Gt>);
   m.def("intersection", &bso2::intersection_range<Pgn, Pwh>);
   m.def("difference", &bso2::difference_linear<Pgn, Pgn>);
   m.def("difference", &bso2::difference_linear<Pgn, Pwh>);
@@ -166,6 +199,8 @@ void export_boolean_set_operations_2(py::module_& m) {
   m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pgn>);
   m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pwh>);
   m.def("symmetric_difference", &bso2::symmetric_difference_range<Pgn, Pwh>);
+  m.def("oriented_side", &bso2::oriented_side<Pnt, Pgn>);
+  m.def("oriented_side", &bso2::oriented_side<Pnt, Pwh>);
   m.def("oriented_side", &bso2::oriented_side<Pgn, Pgn>);
   m.def("oriented_side", &bso2::oriented_side<Pgn, Pwh>);
   m.def("oriented_side", &bso2::oriented_side<Pwh, Pgn>);

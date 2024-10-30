@@ -9,18 +9,24 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/Envelope_3/Envelope_base.h>
+
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/python_iterator_templates.hpp"
+#include "CGALPY/make_iterator.hpp"
+#include "CGALPY/make_circulator.hpp"
 
 namespace py = nanobind;
 
 namespace aos2 {
 
 //
-Iterator_from_circulator<Halfedge_around_vertex_circulator>*
-halfedge_around_vertex_iterator(Vertex& v) {
-  return new Iterator_from_circulator<Halfedge_around_vertex_circulator>(v.incident_halfedges());
-}
+py::object incident_halfedges(const Vertex& v)
+{ return make_circulator(v.incident_halfedges()); }
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+py::object surfaces(const Vertex& v)
+{ return make_iterator(v.surfaces_begin(), v.surfaces_end()); }
+#endif
 
 }
 
@@ -30,9 +36,13 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Vertex = Aos::Vertex;
   using Face = Aos::Face;
   using Point = Aos::Point_2;
-  using Halfedge_around_vertex_circulator =
-    Aos::Halfedge_around_vertex_circulator;
+  using Havcc = Aos::Halfedge_around_vertex_const_circulator;
   constexpr auto ri(py::rv_policy::reference_internal);
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  using Env_data = Vertex::Vertex_data;
+  using Dd = CGAL::Dac_decision;
+#endif
 
   py::class_<Vertex> vertex_c(c, "Vertex");
   vertex_c.def(py::init<>())
@@ -45,9 +55,15 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
     // Immediate members
     .def("is_at_open_boundary", &Vertex::is_at_open_boundary)
+    .def("parameter_space_in_x",
+         [](const Vertex& v)->CGAL::Arr_parameter_space
+         { return v.parameter_space_in_x(); })
+    .def("parameter_space_in_y",
+         [](const Vertex& v)->CGAL::Arr_parameter_space
+         { return v.parameter_space_in_y(); })
     .def("degree", &Vertex::degree)
     .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
-    .def("incident_halfedges", &aos2::halfedge_around_vertex_iterator)
+    .def("incident_halfedges", &aos2::incident_halfedges, py::keep_alive<0, 1>())
 
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
@@ -57,8 +73,17 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("set_data", [](Vertex& v, py::object obj) { v.set_data(obj); })
     .def("data", [](const Vertex& v)->py::object { return v.data(); })
 #endif
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+    .def("number_of_surfaces", [](Vertex& v) { return v.number_of_surfaces(); })
+    .def("surfaces", &aos2::surfaces, py::keep_alive<0, 1>())
+#endif
     ;
 
-  bind_iterator<Iterator_from_circulator<Halfedge_around_vertex_circulator>>
-    (vertex_c, "Halfedge_around_vertex_iterator");
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  using Si = Vertex::Data_const_iterator;
+  add_iterator<Si, Si>("Surface_iterator", vertex_c);
+#endif
+
+  add_circulator<Havcc>("Halfedge_around_vertex_circulator", vertex_c);
 }

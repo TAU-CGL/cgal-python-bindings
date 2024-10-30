@@ -39,10 +39,15 @@ Arr_observer = Aos2.Arr_observer
 # Construct the arrangement containing one diamond-shaped face.
 arr = Arrangement()
 obs = Arr_observer(arr)
+# obs.set_before_split_face(lambda f, e:
+#                           print('-> The insertion of [{}] causes a face to split'.format(e.curve())))
+# obs.set_before_merge_face(lambda f1, f2, e:
+#                           print('-> The removal of [{}] causes two faces to merge'.format(e.curve())))
+# change to print in C++ style
 obs.set_before_split_face(lambda f, e:
-                          print('-> The insertion of [{}] causes a face to split'.format(e.curve())))
+                          print('-> The insertion of : [ {} ] causes a face to split.'.format(e.curve())))
 obs.set_before_merge_face(lambda f1, f2, e:
-                          print('-> The removal of [{}] causes two faces to merge'.format(e.curve())))
+                          print('-> The removal of : [ {} ] causes two faces to merge.'.format(e.curve())))
 Aos2.insert_non_intersecting_curve(arr, Segment(Point(-1, 0), Point(0, 1)))
 Aos2.insert_non_intersecting_curve(arr, Segment(Point(0, 1), Point(1, 0)))
 Aos2.insert_non_intersecting_curve(arr, Segment(Point(1, 0), Point(0, -1)))

@@ -1,8 +1,0 @@
-set(CMAKE_BUILD_TYPE "Release"             CACHE STRING "build type" FORCE)
-set(CGALPY_USE_SHARED_LIBS ON              CACHE BOOL "use shared libs" FORCE)
-set(CGALPY_FIXED_LIBRARY_NAME OFF          CACHE BOOL "use name CGALPY" FORCE)
-set(CGALPY_KERNEL_NAME "epic"              CACHE STRING "use EPIC kernel" FORCE)
-set(CGALPY_TRIANGULATION_2_BINDINGS ON     CACHE BOOL "2D Triangulations" FORCE)
-set(CGALPY_TRI2_VERTEX_WITH_INFO ON        CACHE BOOL "vertex with info" FORCE)
-set(CGALPY_TRI2_FACE_WITH_INFO ON          CACHE BOOL "cell with info" FORCE)
-set(CGALPY_TRI2_HIERARCHY ON               CACHE BOOL "use hierarchy" FORCE)

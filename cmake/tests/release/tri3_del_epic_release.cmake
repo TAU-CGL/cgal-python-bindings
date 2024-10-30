@@ -1,6 +1,0 @@
-set(CMAKE_BUILD_TYPE "Release"             CACHE STRING "build type" FORCE)
-set(CGALPY_USE_SHARED_LIBS ON              CACHE BOOL "use shared libs" FORCE)
-set(CGALPY_FIXED_LIBRARY_NAME OFF          CACHE BOOL "use name CGALPY" FORCE)
-set(CGALPY_KERNEL_NAME "epic"              CACHE STRING "use EPIC kernel" FORCE)
-set(CGALPY_TRIANGULATION_3_BINDINGS ON     CACHE BOOL "3D Triangulations" FORCE)
-set(CGALPY_TRI3_NAME "delaunay"            CACHE STRING "Use Delaunay" FORCE)

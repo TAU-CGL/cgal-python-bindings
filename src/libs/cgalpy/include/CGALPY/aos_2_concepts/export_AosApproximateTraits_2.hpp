@@ -35,18 +35,16 @@ void export_approximate_point(C& c, Concepts& concepts, bool) {
   using Pt = typename T::Point_2;
   using Approximate_2 = typename T::Approximate_2;
   using Ant = typename T::Approximate_number_type;
-  using Ak = typename T::Approximate_kernel;
   using Ap = typename T::Approximate_point_2;
   using ovld2 = Ap(Approximate_2::*)(const Pt&) const;
 
   // Bind the approximate point
   if (! add_attr<Ap>(c, "Approximate_point_2")) {
-    py::class_<Ap> apnt(c, "Approximate_point_2");
-    export_point_2<Ak>(apnt);
+    throw std::runtime_error("Approximate_point_2 is not bound!");
   }
 
   // Bind the operator
-  auto& classes = concepts.m_approximate_traits_classes;
+  auto& classes = concepts.m_aos_approximate_traits_2_classes;
   classes.m_approximate_2->def("__call__",
                                static_cast<ovld2>(&Approximate_2::operator()));
 }
@@ -62,16 +60,16 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
   using Pt = typename T::Point_2;
   using Approximate_2 = typename T::Approximate_2;
   using Ant = typename T::Approximate_number_type;
-  using Ak = typename T::Approximate_kernel;
 
-  auto& classes = concepts.m_approximate_traits_classes;
+  auto& classes = concepts.m_aos_approximate_traits_2_classes;
 
-  classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
-
-  using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
-  classes.m_approximate_2->def("__call__",
-                               static_cast<ovld1>(&Approximate_2::operator()));
-  export_approximate_point<T>(c, concepts, true);
+  if (! add_attr<Approximate_2>(c, "Approximate_2")) {
+    classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
+    using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
+    classes.m_approximate_2->def("__call__",
+                                 static_cast<ovld1>(&Approximate_2::operator()));
+    export_approximate_point<T>(c, concepts, true);
+  }
 
   c.def("approximate_2_object", &T::approximate_2_object);
 

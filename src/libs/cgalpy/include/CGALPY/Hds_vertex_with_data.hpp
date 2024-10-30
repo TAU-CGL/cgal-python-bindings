@@ -18,7 +18,7 @@ class Hds_vertex_with_data : public Base_ {
 public:
   using Base = Base_;
   using Data = Data_;
-  using Point_2 = typename Base::Point_2;
+  using Point_3 = typename Base::Point;
 
 private:
   /*! General purpose data.
@@ -32,11 +32,11 @@ public:
 
   /*! Construct from a point.
    */
-  Hds_vertex_with_data(Point_2 const& p);
+  Hds_vertex_with_data(Point_3 const& p);
 
   /*! Construct from a point and a vertex data.
    */
-  Hds_vertex_with_data(Point_2 const& p, const Data& data);
+  Hds_vertex_with_data(Point_3 const& p, const Data& data);
 
   /*! Obtain a non-const reference of the vertex data.
    */
@@ -57,7 +57,7 @@ Hds_vertex_with_data<Base, Data>::Hds_vertex_with_data() : m_data() {}
 
 //! \brief constructs from a point.
 template <typename Base, typename Data>
-Hds_vertex_with_data<Base, Data>::Hds_vertex_with_data(Point_2 const& p) :
+Hds_vertex_with_data<Base, Data>::Hds_vertex_with_data(Point_3 const& p) :
   Base(p),
   m_data()
 {}
@@ -65,7 +65,7 @@ Hds_vertex_with_data<Base, Data>::Hds_vertex_with_data(Point_2 const& p) :
 //! \brief constructs from a point and a vertex data.
 template <typename Base, typename Data>
 Hds_vertex_with_data<Base, Data>::
-Hds_vertex_with_data(Point_2 const& p,const Data& data) :
+Hds_vertex_with_data(Point_3 const& p,const Data& data) :
   Base(p),
   m_data(data)
 {}

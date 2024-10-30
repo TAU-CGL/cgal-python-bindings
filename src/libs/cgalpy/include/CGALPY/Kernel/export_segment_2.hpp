@@ -48,13 +48,13 @@ void export_segment_2(C& c) {
     .def("is_horizontal", &Seg::is_horizontal)
     .def("is_vertical", &Seg::is_vertical)
     .def("bbox", &Seg::bbox)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+    .def(py::self == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     // .setattr("__hash__", &hash<Seg>)
     ;
 
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
   add_extraction(c);
 }
 
