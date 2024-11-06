@@ -1,4 +1,4 @@
-set(CGALPY_USE_SHARED_LIBS on cache bool "" force)
-set(CGALPY_KERNEL_NAME "epec" cache string "" force)
-set(CGALPY_KERNEL_INTERSECTION_BINDINGS on cache bool "with intersections" force)
-set(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS on cache bool "" force)
+set(CGALPY_USE_SHARED_LIBS on CACHE BOOL "" FORCE)
+set(CGALPY_KERNEL_NAME "epec" CACHE STRING "" FORCE)
+set(CGALPY_KERNEL_INTERSECTION_BINDINGS on CACHE BOOL "with intersections" FORCE)
+set(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS on CACHE BOOL "" FORCE)

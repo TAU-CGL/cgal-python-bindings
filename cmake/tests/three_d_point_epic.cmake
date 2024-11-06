@@ -1,2 +1,2 @@
-set(CGALPY_3D_POINT_SET_BINDINGS on cache bool "" force)
-set(CGALPY_KERNEL_NAME "epic" cache string "use EPIC kernel" force)
+set(CGALPY_3D_POINT_SET_BINDINGS on CACHE BOOL "" FORCE)
+set(CGALPY_KERNEL_NAME "epic" CACHE STRING "use EPIC kernel" FORCE)
