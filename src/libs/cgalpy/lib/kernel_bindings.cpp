@@ -40,6 +40,7 @@
 
 // 3D functors
 #include "CGALPY/Kernel/export_aff_transformation_3.hpp"
+#include "CGALPY/Kernel/export_circle_3.hpp"
 #include "CGALPY/Kernel/export_dir_3.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
@@ -192,6 +193,8 @@ void export_kernel_module(py::module_& m) {
 
   using Mesh_df_int = CGAL::Mesh_constant_domain_field_3<Kernel, int>;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
+
   // Circle_2
   if (! add_attr<Circle_2>(m, "Circle_2")) {
     py::class_<Circle_2> circle2_c(m, "Circle_2");
@@ -259,6 +262,12 @@ void export_kernel_module(py::module_& m) {
   }
 
   // 3D Objects
+
+  // Circle_3
+  if (! add_attr<Circle_3>(m, "Circle_3")) {
+    py::class_<Circle_3> circle3_c(m, "Circle_3");
+    export_circle_3<Kernel>(circle3_c);
+  }
 
   // Direction_3
   if (! add_attr<Dir_3>(m, "Direction_3")) {
@@ -447,7 +456,7 @@ void export_kernel_module(py::module_& m) {
          "Precondition\n"
          "• o != CGAL::COPLANAR. \n\n")
     ;
-  
+
   py::class_<Construct_line_3>(m, "Construct_line_3")
     .def(py::init<>())
     .def("__call__", [](Construct_line_3 ctr, const Pnt_3& p, const Pnt_3& q)
@@ -691,15 +700,17 @@ void export_kernel_module(py::module_& m) {
 
   py::class_<Construct_center_3>(m, "Construct_center_3")
     .def(py::init<>())
-    .def("__call__", [](Construct_center_3 ctr, const Sphere_3& s)
-                         { return ctr(s); },
+    .def("__call__",
+         [](Construct_center_3 ctr, const Sphere_3& s) { return ctr(s); }, ri,
          py::arg("s"),
          "compute the center of the sphere s.")
-    .def("__call__", [](Construct_center_3 ctr, const Circle_3& c)
-                         { return ctr(c); },
+#if CGAL_VERSION_NR > 1060100900
+    .def("__call__",
+         [](Construct_center_3 ctr, const Circle_3& c) { return ctr(c); }, ri,
          py::arg("c"),
          "compute the center of the circle c.")
-    ;
+#endif
+      ;
 
   py::class_<Compute_squared_radius_2>(m, "Compute_squared_radius_2")
     .def(py::init<>())
