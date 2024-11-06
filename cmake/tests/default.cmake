@@ -1,1 +1,1 @@
-set(CGALPY_KERNEL_NAME "epic" CACHE STRING "use EPIC kernel" FORCE)
+set(CGALPY_KERNEL_NAME "epic" cache string "use EPIC kernel" force)

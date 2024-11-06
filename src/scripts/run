@@ -7,8 +7,7 @@ whl_dirname="./src/libs/cgalpy/dist"
 mode="release"
 prefix="CGALPY"
 # use pure wheel for now
-# suffix="1.0.0-cp38-cp38-linux_x86_64.whl"
-suffix="1.0.0-py3-none-any.whl"
+suffix="1.0.4-cp310-cp310-linux_x86_64.whl"
 
 declare -i i=0
 item="item$i"

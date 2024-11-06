@@ -1,4 +1,4 @@
-set(CGALPY_USE_SHARED_LIBS ON CACHE BOOL "" FORCE)
-set(CGALPY_KERNEL_BINDINGS OFF CACHE BOOL "disable kernel" FORCE)
-set(CGALPY_KERNEL_D_BINDINGS ON CACHE BOOL "enable dD kernel" FORCE)
-set(CGALPY_KERNEL_D_NAME "cartesiandLazyGmpq" CACHE STRING "dD kernel" FORCE)
+set(CGALPY_USE_SHARED_LIBS on cache bool "" force)
+set(CGALPY_KERNEL_BINDINGS OFF cache BOOL "disable kernel" force)
+set(CGALPY_KERNEL_D_BINDINGS on cache bool "enable dD kernel" force)
+set(CGALPY_KERNEL_D_NAME "cartesiandLazyGmpq" cache string "dD kernel" force)
