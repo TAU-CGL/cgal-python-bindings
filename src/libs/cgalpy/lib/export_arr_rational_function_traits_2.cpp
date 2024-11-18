@@ -162,8 +162,9 @@ void export_arr_rational_function_traits_2(py::module_& m) {
   pnt_c.def("x", py::overload_cast<>(&Pnt::x, py::const_))
     .def("y", py::overload_cast<>(&Pnt::y, py::const_))
     ;
-  add_insertion(pnt_c, "__str__");
-  add_insertion(pnt_c, "__repr__");
+  using Class_p = std::remove_reference<decltype(pnt_c)>::type;
+  add_insertion<Class_p, true>(pnt_c, "__str__");
+  add_insertion<Class_p, true>(pnt_c, "__repr__");
 
   // Export additional curve attributes:
   //! \todo Export missing constructors (operator()).
@@ -201,8 +202,9 @@ void export_arr_rational_function_traits_2(py::module_& m) {
     ;
 
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
-  add_insertion(xcv_c, "__str__");
-  add_insertion(xcv_c, "__repr__");
+  using Class_xcv = std::remove_reference<decltype(xcv_c)>::type;
+  add_insertion<Class_xcv, true>(xcv_c, "__str__");
+  add_insertion<Class_xcv, true>(xcv_c, "__repr__");
 
   // Export relevant attributes:
   if (! add_attr<Integer>(m, "Integer")) export_integer(m);

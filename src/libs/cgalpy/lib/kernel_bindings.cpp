@@ -77,11 +77,16 @@ void bind_squared_distance_first_type(py::module_& m) {
   using Sd_fnc3 = FT(*)(const T1&, const T3&);
   using Sd_fnc4 = FT(*)(const T1&, const T4&);
   using Sd_fnc5 = FT(*)(const T1&, const T5&);
-  m.def("squared_distance", static_cast<Sd_fnc1>(&CGAL::squared_distance<Kernel>));
-  m.def("squared_distance", static_cast<Sd_fnc2>(&CGAL::squared_distance<Kernel>));
-  m.def("squared_distance", static_cast<Sd_fnc3>(&CGAL::squared_distance<Kernel>));
-  m.def("squared_distance", static_cast<Sd_fnc4>(&CGAL::squared_distance<Kernel>));
-  m.def("squared_distance", static_cast<Sd_fnc5>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance",
+        static_cast<Sd_fnc1>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance",
+        static_cast<Sd_fnc2>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance",
+        static_cast<Sd_fnc3>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance",
+        static_cast<Sd_fnc4>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance",
+        static_cast<Sd_fnc5>(&CGAL::squared_distance<Kernel>));
 }
 
 //
@@ -348,7 +353,8 @@ void export_kernel_module(py::module_& m) {
   using Construct_sum_of_vectors_3 = typename Kernel::Construct_sum_of_vectors_3;
   using Compute_scalar_product_2 = typename Kernel::Compute_scalar_product_2;
   using Compute_scalar_product_3 = typename Kernel::Compute_scalar_product_3;
-  using Construct_cross_product_vector_3 = typename Kernel::Construct_cross_product_vector_3;
+  using Construct_cross_product_vector_3 =
+    typename Kernel::Construct_cross_product_vector_3;
   using Construct_center_2 = typename Kernel::Construct_center_2;
   using Construct_center_3 = typename Kernel::Construct_center_3;
   using Compute_squared_radius_2 = typename Kernel::Compute_squared_radius_2;
@@ -361,58 +367,72 @@ void export_kernel_module(py::module_& m) {
   // Kernel Function Objects
   py::class_<Construct_vector_2>(m, "Construct_vector_2")
     .def(py::init<>())
-    .def("__call__", [](Construct_vector_2 ctr, const Pnt_2& a, const Pnt_2& b)
-                     { return ctr(a, b); },
+    .def("__call__",
+         [](Construct_vector_2 ctr, const Pnt_2& a, const Pnt_2& b)
+         { return ctr(a, b); },
          py::arg("a"), py::arg("b"),
          "Introduces the vector b-a.")
-    .def("__call__", [](Construct_vector_2 ctr, const CGAL::Origin& o, const Pnt_2& b)
-                     { return ctr(o, b); }, py::arg("o"), py::arg("b"),
+    .def("__call__",
+         [](Construct_vector_2 ctr,
+            const CGAL::Origin& o, const Pnt_2& b)
+         { return ctr(o, b); }, py::arg("o"), py::arg("b"),
          "Introduces the vector b.")
-    .def("__call__", [](Construct_vector_2 ctr, const Pnt_2& a, const CGAL::Origin& o)
-                     { return ctr(a, o); }, py::arg("a"), py::arg("o"),
+    .def("__call__",
+         [](Construct_vector_2 ctr, const Pnt_2& a,
+            const CGAL::Origin& o)
+         { return ctr(a, o); }, py::arg("a"), py::arg("o"),
          "Introduces the vector -a.")
-    .def("__call__", [](Construct_vector_2 ctr, const Seg_2& s)
-                     { return ctr(s); }, py::arg("s"),
+    .def("__call__",
+         [](Construct_vector_2 ctr, const Seg_2& s)
+         { return ctr(s); }, py::arg("s"),
          "Introduces the vector s.target()-s.source().")
-    .def("__call__", [](Construct_vector_2 ctr, const Ray_2& r)
-                     { return ctr(r); }, py::arg("r"),
+    .def("__call__",
+         [](Construct_vector_2 ctr, const Ray_2& r)
+         { return ctr(r); }, py::arg("r"),
          "Introduces a vector having the same direction as r.")
-    .def("__call__", [](Construct_vector_2 ctr, const Line_2& l)
-                     { return ctr(l); }, py::arg("l"),
+    .def("__call__",
+         [](Construct_vector_2 ctr, const Line_2& l)
+         { return ctr(l); }, py::arg("l"),
          "Introduces a vector having the same direction as l.")
-    .def("__call__", [](Construct_vector_2 ctr, const CGAL::Null_vector& NULL_VECTOR)
-                     { return ctr(NULL_VECTOR); }, py::arg("NULL_VECTOR"),
+    .def("__call__",
+         [](Construct_vector_2 ctr,
+            const CGAL::Null_vector& NULL_VECTOR)
+         { return ctr(NULL_VECTOR); }, py::arg("NULL_VECTOR"),
          "Introduces the null vector.")
     ;
 
   py::class_<Construct_vector_3>(m, "Construct_vector_3")
     .def(py::init<>())
-    .def("__call__", [](Construct_vector_3 ctr, const Pnt_3& a, const Pnt_3& b)
-                     { return ctr(a, b); },
+    .def("__call__",
+         [](Construct_vector_3 ctr, const Pnt_3& a, const Pnt_3& b)
+         { return ctr(a, b); },
          py::arg("a"), py::arg("b"),
          "Introduces the vector b-a.")
-    .def("__call__", [](Construct_vector_3 ctr, const CGAL::Origin& o, const Pnt_3& b)
-                     { return ctr(o, b); },
+    .def("__call__",
+         [](Construct_vector_3 ctr, const CGAL::Origin& o, const Pnt_3& b)
+         { return ctr(o, b); },
          py::arg("o"), py::arg("b"),
          "Introduces the vector b.")
-    .def("__call__", [](Construct_vector_3 ctr, const Pnt_3& a, const CGAL::Origin& o)
-                     { return ctr(a, o); },
+    .def("__call__",
+         [](Construct_vector_3 ctr, const Pnt_3& a, const CGAL::Origin& o)
+         { return ctr(a, o); },
          py::arg("a"), py::arg("o"),
          "Introduces the vector -a.")
-    .def("__call__", [](Construct_vector_3 ctr, const Seg_3& s)
-                     { return ctr(s); },
+    .def("__call__",
+         [](Construct_vector_3 ctr, const Seg_3& s) { return ctr(s); },
          py::arg("s"),
          "Introduces the vector s.target()-s.source().")
-    .def("__call__", [](Construct_vector_3 ctr, const Ray_3& r)
-                     { return ctr(r); },
+    .def("__call__",
+         [](Construct_vector_3 ctr, const Ray_3& r) { return ctr(r); },
          py::arg("r"),
          "Introduces a vector having the same direction as r.")
-    .def("__call__", [](Construct_vector_3 ctr, const Line_3& l)
-                     { return ctr(l); },
+    .def("__call__",
+         [](Construct_vector_3 ctr, const Line_3& l) { return ctr(l); },
          py::arg("l"),
          "Introduces a vector having the same direction as l.")
-    .def("__call__", [](Construct_vector_3 ctr, const CGAL::Null_vector& NULL_VECTOR)
-                     { return ctr(NULL_VECTOR); },
+    .def("__call__",
+         [](Construct_vector_3 ctr, const CGAL::Null_vector& NULL_VECTOR)
+         { return ctr(NULL_VECTOR); },
          py::arg("NULL_VECTOR"),
          "Introduces the null vector.")
     ;
@@ -420,36 +440,46 @@ void export_kernel_module(py::module_& m) {
 
   py::class_<Construct_sphere_3>(m, "Construct_sphere_3")
     .def(py::init<>())
-    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& center, const FT& squared_radius, const Orientation& orientation)
-                     { return ctr(center, squared_radius, orientation); },
-         py::arg("center"), py::arg("squared_radius"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
+    .def("__call__",
+         [](Construct_sphere_3 ctr, const Pnt_3& center,
+            const FT& squared_radius, const Orientation& orientation)
+         { return ctr(center, squared_radius, orientation); },
+         py::arg("center"), py::arg("squared_radius"),
+         py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
          "Introduces a sphere initialized to the sphere with center center, squared radius squared_radius and orientation orientation.\n\n"
          "Precondition\n"
          "• orientation != CGAL::COPLANAR and squared_radius >= 0. \n\n")
-    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& center, const Orientation& orientation)
-                      { return ctr(center, orientation); },
+    .def("__call__",
+         [](Construct_sphere_3 ctr, const Pnt_3& center,
+            const Orientation& orientation)
+         { return ctr(center, orientation); },
          py::arg("center"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
          "Introduces a sphere s initialized to the sphere with center center, squared radius zero and orientation orientation.\n\n"
          "Precondition\n"
          "• orientation != CGAL::COPLANAR. \n\n"
          "Postcondition\n"
          "• s.is_degenerate() = true. \n\n")
-    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r, const Pnt_3& s)
-                      { return ctr(p, q, r, s); },
+    .def("__call__",
+         [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q,
+            const Pnt_3& r, const Pnt_3& s) { return ctr(p, q, r, s); },
          py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
          "Introduces a sphere initialized to the unique sphere which passes through the points p, q, r and s.\n\n"
          "The orientation of the sphere is the orientation of the point quadruple p, q, r, s.\n\n"
          "Precondition\n"
          "• p, q, r, and s are not coplanar. \n\n")
-    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r, const Orientation& o)
-                      { return ctr(p, q, r, o); },
-         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("o") = CGAL::COUNTERCLOCKWISE,
+    .def("__call__",
+         [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q,
+            const Pnt_3& r, const Orientation& o) { return ctr(p, q, r, o); },
+         py::arg("p"), py::arg("q"), py::arg("r"),
+         py::arg("o") = CGAL::COUNTERCLOCKWISE,
          "Introduces a sphere initialized to the smallest sphere which passes through the points p, q, and r.\n\n"
          "The orientation of the sphere is o.\n\n"
          "Precondition\n"
          "• o != CGAL::COPLANAR. \n\n")
-    .def("__call__", [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q, const Orientation& o)
-                      { return ctr(p, q, o); },
+    .def("__call__",
+         [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q,
+            const Orientation& o)
+         { return ctr(p, q, o); },
          py::arg("p"), py::arg("q"), py::arg("o") = CGAL::COUNTERCLOCKWISE,
          "Introduces a sphere initialized to the smallest sphere which passes through the points p and q.\n\n"
          "The orientation of the sphere is o.\n\n"
@@ -459,24 +489,28 @@ void export_kernel_module(py::module_& m) {
 
   py::class_<Construct_line_3>(m, "Construct_line_3")
     .def(py::init<>())
-    .def("__call__", [](Construct_line_3 ctr, const Pnt_3& p, const Pnt_3& q)
-                     { return ctr(p, q); },
+    .def("__call__",
+         [](Construct_line_3 ctr, const Pnt_3& p, const Pnt_3& q)
+         { return ctr(p, q); },
          py::arg("p"), py::arg("q"),
          "Introduces a line passing through the points p and q.\n"
          "Line is directed from p to q.")
-    .def("__call__", [](Construct_line_3 ctr, const Pnt_3& p, const Vec_3& v)
-                     { return ctr(p, v); },
+    .def("__call__",
+         [](Construct_line_3 ctr, const Pnt_3& p, const Vec_3& v)
+         { return ctr(p, v); },
          py::arg("p"), py::arg("v"),
          "Introduces a line passing through point p and oriented by v.")
-    .def("__call__", [](Construct_line_3 ctr, const Pnt_3& p, const Dir_3& d)
-                     { return ctr(p, d); },
+    .def("__call__",
+         [](Construct_line_3 ctr, const Pnt_3& p, const Dir_3& d)
+         { return ctr(p, d); },
          py::arg("p"), py::arg("d"),
          "Introduces a line passing through point p with direction d.")
-    .def("__call__", [](Construct_line_3 ctr, const Seg_3& s)
-                     { return ctr(s); },
+    .def("__call__",
+         [](Construct_line_3 ctr, const Seg_3& s) { return ctr(s); },
          py::arg("s"),
          "Returns the line supporting the segment s, oriented from source to target.")
-    .def("__call__", [](Construct_line_3 ctr, const Ray_3& r)
+    .def("__call__",
+         [](Construct_line_3 ctr, const Ray_3& r)
                      { return ctr(r); },
          py::arg("r"),
          "Returns the line supporting the ray r, with the same orientation.")
@@ -484,30 +518,40 @@ void export_kernel_module(py::module_& m) {
 
   py::class_<Construct_circle_2>(m, "Construct_circle_2")
     .def(py::init<>())
-    .def("__call__", [](Construct_circle_2 ctr, const Pnt_2& center, const FT& squared_radius, const Orientation& orientation)
-                     { return ctr(center, squared_radius, orientation); },
-         py::arg("center"), py::arg("squared_radius"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
+    .def("__call__",
+         [](Construct_circle_2 ctr, const Pnt_2& center,
+            const FT& squared_radius, const Orientation& orientation)
+         { return ctr(center, squared_radius, orientation); },
+         py::arg("center"), py::arg("squared_radius"),
+         py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
          "Introduces a circle initialized to the circle with center center, squared radius squared_radius and orientation orientation.\n\n"
          "Precondition\n"
          "• orientation != CGAL::COLLINEAR and squared_radius >= 0.")
-    .def("__call__", [](Construct_circle_2 ctr, const Pnt_2& center, const Orientation& orientation)
-                      { return ctr(center, orientation); },
+    .def("__call__",
+         [](Construct_circle_2 ctr, const Pnt_2& center,
+            const Orientation& orientation)
+         { return ctr(center, orientation); },
          py::arg("center"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
          "Introduces a circle initialized to the circle with center center, squared radius zero and orientation orientation.\n\n"
          "Precondition\n"
          "• orientation != CGAL::COLLINEAR.\n\n"
          "Postcondition\n"
          "• .is_degenerate() = true.")
-    .def("__call__", [](Construct_circle_2 ctr, const Pnt_2& p, const Pnt_2& q, const Pnt_2& r)
-                      { return ctr(p, q, r); },
+    .def("__call__",
+         [](Construct_circle_2 ctr, const Pnt_2& p, const Pnt_2& q,
+            const Pnt_2& r)
+         { return ctr(p, q, r); },
          py::arg("p"), py::arg("q"), py::arg("r"),
          "Introduces a circle initialized to the unique circle which passes through the points p, q and r.\n\n"
          "The orientation of the circle is the orientation of the point triple p, q, r.\n\n"
          "Precondition\n"
          "• p, q, and r are not collinear.")
-    .def("__call__", [](Construct_circle_2 ctr, const Pnt_2& p, const Pnt_2& q, const Orientation& orientation)
-                      { return ctr(p, q, orientation); },
-         py::arg("p"), py::arg("q"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
+    .def("__call__",
+         [](Construct_circle_2 ctr, const Pnt_2& p, const Pnt_2& q,
+            const Orientation& orientation)
+         { return ctr(p, q, orientation); },
+         py::arg("p"), py::arg("q"),
+         py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
          "Introduces a circle initialized to the circle with diameter pq and orientation orientation.\n\n"
          "Precondition\n"
          "• orientation != CGAL::COLLINEAR.")
@@ -520,23 +564,25 @@ void export_kernel_module(py::module_& m) {
          py::arg("l"), py::arg("i"),
          "return an arbitrary point on l.\n"
          "It holds point(i) == point(j), iff i==j. Furthermore, is directed from point(i) to point(j), for all i < j.")
-    .def("__call__", [](Construct_point_on_3 ctr, const Line_3& l)
-                     { return ctr(l); },
+    .def("__call__",
+         [](Construct_point_on_3 ctr, const Line_3& l) { return ctr(l); },
          py::arg("l"),
          "return point(0) on l, identical to operator()(l,0).")
-    .def("__call__", [](Construct_point_on_3 ctr, const Plane_3& h)
-                     { return ctr(h); },
+    .def("__call__",
+         [](Construct_point_on_3 ctr, const Plane_3& h) { return ctr(h); },
          py::arg("h"),
          "return an arbitrary point on h.")
-    .def("__call__", [](Construct_point_on_3 ctr, const Ray_3& r, const FT& i)
-                     { return ctr(r, i); },
+    .def("__call__",
+         [](Construct_point_on_3 ctr, const Ray_3& r, const FT& i)
+         { return ctr(r, i); },
          py::arg("r"), py::arg("i"),
          "return a point on r.\n"
          "point(0) is the source, point(i), with i>0, is different from the source.\n\n"
          "Precondition\n"
          "• i >= 0.")
-    .def("__call__", [](Construct_point_on_3 ctr, const Segment_3& s, int i)
-                     { return ctr(s, i); },
+    .def("__call__",
+         [](Construct_point_on_3 ctr, const Segment_3& s, int i)
+         { return ctr(s, i); },
          py::arg("s"), py::arg("i"),
          "return source or target of s: point(0) returns the source of s, point(1) returns the target of s."
          "The parameter i is taken modulo 2, which gives easy access to the other end point.")
@@ -544,148 +590,160 @@ void export_kernel_module(py::module_& m) {
 
   py::class_<Compute_x_2>(m, "Compute_x_2")
     .def(py::init<>())
-    .def("__call__", [](Compute_x_2 ctr, const Point_2& p)
-                     { return ctr(p); },
+    .def("__call__",
+         [](Compute_x_2 ctr, const Point_2& p) { return ctr(p); },
          py::arg("p"),
          "returns the x-coordinate of the point.")
-    .def("__call__", [](Compute_x_2 ctr, const Vector_2& v)
-                     { return ctr(v); },
+    .def("__call__",
+         [](Compute_x_2 ctr, const Vector_2& v) { return ctr(v); },
          py::arg("v"),
          "returns the x-coordinate of the vector.")
     ;
 
   py::class_<Compute_y_2>(m, "Compute_y_2")
     .def(py::init<>())
-    .def("__call__", [](Compute_y_2 ctr, const Point_2& p)
-                     { return ctr(p); },
+    .def("__call__",
+         [](Compute_y_2 ctr, const Point_2& p) { return ctr(p); },
          py::arg("p"),
          "returns the y-coordinate of the point.")
-    .def("__call__", [](Compute_y_2 ctr, const Vector_2& v)
-                     { return ctr(v); },
+    .def("__call__",
+         [](Compute_y_2 ctr, const Vector_2& v) { return ctr(v); },
          py::arg("v"),
          "returns the y-coordinate of the vector.")
     ;
 
   py::class_<Compute_x_3>(m, "Compute_x_3")
     .def(py::init<>())
-    .def("__call__", [](Compute_x_3 ctr, const Point_3& p)
-                     { return ctr(p); },
+    .def("__call__",
+         [](Compute_x_3 ctr, const Point_3& p) { return ctr(p); },
          py::arg("p"),
          "returns the x-coordinate of the point.")
-    .def("__call__", [](Compute_x_3 ctr, const Vector_3& v)
-                     { return ctr(v); },
+    .def("__call__",
+         [](Compute_x_3 ctr, const Vector_3& v) { return ctr(v); },
          py::arg("v"),
          "returns the x-coordinate of the vector.")
     ;
 
   py::class_<Compute_y_3>(m, "Compute_y_3")
     .def(py::init<>())
-    .def("__call__", [](Compute_y_3 ctr, const Point_3& p)
-                     { return ctr(p); },
+    .def("__call__",
+         [](Compute_y_3 ctr, const Point_3& p) { return ctr(p); },
          py::arg("p"),
          "returns the y-coordinate of the point.")
-    .def("__call__", [](Compute_y_3 ctr, const Vector_3& v)
-                     { return ctr(v); },
+    .def("__call__",
+         [](Compute_y_3 ctr, const Vector_3& v) { return ctr(v); },
          py::arg("v"),
          "returns the y-coordinate of the vector.")
     ;
 
   py::class_<Compute_z_3>(m, "Compute_z_3")
     .def(py::init<>())
-    .def("__call__", [](Compute_z_3 ctr, const Point_3& p)
-                     { return ctr(p); },
+    .def("__call__",
+         [](Compute_z_3 ctr, const Point_3& p) { return ctr(p); },
          py::arg("p"),
          "returns the z-coordinate of the point.")
-    .def("__call__", [](Compute_z_3 ctr, const Vector_3& v)
-                     { return ctr(v); },
+    .def("__call__",
+         [](Compute_z_3 ctr, const Vector_3& v) { return ctr(v); },
          py::arg("v"),
          "returns the z-coordinate of the vector.")
     ;
 
   py::class_<Compute_squared_length_2>(m, "Compute_squared_length_2")
     .def(py::init<>())
-    .def("__call__", [](Compute_squared_length_2 ctr, const Vector_2& v)
-                     { return ctr(v); },
+    .def("__call__",
+         [](Compute_squared_length_2 ctr, const Vector_2& v) { return ctr(v); },
          py::arg("v"),
          "returns the squared length of v.")
-    .def("__call__", [](Compute_squared_length_2 ctr, const Seg_2& s)
-                     { return ctr(s); },
+    .def("__call__",
+         [](Compute_squared_length_2 ctr, const Seg_2& s) { return ctr(s); },
          py::arg("p"),
          "returns the squared length of s.")
     ;
 
   py::class_<Compute_squared_length_3>(m, "Compute_squared_length_3")
     .def(py::init<>())
-    .def("__call__", [](Compute_squared_length_3 ctr, const Vector_3& v)
-                     { return ctr(v); },
+    .def("__call__",
+         [](Compute_squared_length_3 ctr, const Vector_3& v) { return ctr(v); },
          py::arg("v"),
          "returns the squared length of v.")
-    .def("__call__", [](Compute_squared_length_3 ctr, const Seg_3& s)
-                     { return ctr(s); },
+    .def("__call__",
+         [](Compute_squared_length_3 ctr, const Seg_3& s) { return ctr(s); },
          py::arg("p"),
          "returns the squared length of s.")
     ;
 
   py::class_<Construct_scaled_vector_2>(m, "Construct_scaled_vector_2")
     .def(py::init<>())
-    .def("__call__", [](Construct_scaled_vector_2 ctr, const Vector_2& v, const RT& scale)
-                         { return ctr(v, scale); },
+    .def("__call__",
+         [](Construct_scaled_vector_2 ctr, const Vector_2& v, const RT& scale)
+         { return ctr(v, scale); },
          py::arg("v"), py::arg("scale"),
          "produces the vector v scaled by a factor scale.")
-    .def("__call__", [](Construct_scaled_vector_2 ctr, const Vector_2& v, const FT& scale)
-                         { return ctr(v, scale); },
+    .def("__call__",
+         [](Construct_scaled_vector_2 ctr, const Vector_2& v, const FT& scale)
+         { return ctr(v, scale); },
          py::arg("v"), py::arg("scale"),
          "produces the vector v scaled by a factor scale.")
     ;
 
   py::class_<Construct_scaled_vector_3>(m, "Construct_scaled_vector_3")
     .def(py::init<>())
-    .def("__call__", [](Construct_scaled_vector_3 ctr, const Vector_3& v, const RT& scale)
-                         { return ctr(v, scale); },
+    .def("__call__",
+         [](Construct_scaled_vector_3 ctr, const Vector_3& v, const RT& scale)
+         { return ctr(v, scale); },
          py::arg("v"), py::arg("scale"),
          "produces the vector v scaled by a factor scale.")
-    .def("__call__", [](Construct_scaled_vector_3 ctr, const Vector_3& v, const FT& scale)
-                         { return ctr(v, scale); },
+    .def("__call__",
+         [](Construct_scaled_vector_3 ctr, const Vector_3& v, const FT& scale)
+         { return ctr(v, scale); },
          py::arg("v"), py::arg("scale"),
          "produces the vector v scaled by a factor scale.")
     ;
 
   py::class_<Construct_sum_of_vectors_2>(m, "Construct_sum_of_vectors_2")
     .def(py::init<>())
-    .def("__call__", [](Construct_sum_of_vectors_2 ctr, const Vector_2& v1, const Vector_2& v2)
-                         { return ctr(v1, v2); },
+    .def("__call__",
+         [](Construct_sum_of_vectors_2 ctr, const Vector_2& v1,
+            const Vector_2& v2)
+         { return ctr(v1, v2); },
          py::arg("v1"), py::arg("v2"),
          "introduces the vector v1 + v2.")
     ;
 
   py::class_<Construct_sum_of_vectors_3>(m, "Construct_sum_of_vectors_3")
     .def(py::init<>())
-    .def("__call__", [](Construct_sum_of_vectors_3 ctr, const Vector_3& v1, const Vector_3& v2)
-                         { return ctr(v1, v2); },
+    .def("__call__",
+         [](Construct_sum_of_vectors_3 ctr, const Vector_3& v1,
+            const Vector_3& v2)
+         { return ctr(v1, v2); },
          py::arg("v1"), py::arg("v2"),
          "introduces the vector v1 + v2.")
     ;
 
   py::class_<Compute_scalar_product_2>(m, "Compute_scalar_product_2")
     .def(py::init<>())
-    .def("__call__", [](Compute_scalar_product_2 ctr, const Vector_2& v, const Vector_2& w)
-                         { return ctr(v, w); },
+    .def("__call__",
+         [](Compute_scalar_product_2 ctr, const Vector_2& v, const Vector_2& w)
+         { return ctr(v, w); },
          py::arg("v"), py::arg("w"),
          "returns the scalar (inner) product of the two vectors v and w.")
     ;
 
   py::class_<Compute_scalar_product_3>(m, "Compute_scalar_product_3")
     .def(py::init<>())
-    .def("__call__", [](Compute_scalar_product_3 ctr, const Vector_3& v, const Vector_3& w)
-                         { return ctr(v, w); },
+    .def("__call__",
+         [](Compute_scalar_product_3 ctr, const Vector_3& v, const Vector_3& w)
+         { return ctr(v, w); },
          py::arg("v"), py::arg("w"),
          "returns the scalar (inner) product of the two vectors v and w.")
     ;
 
   py::class_<Construct_cross_product_vector_3>(m, "Construct_cross_product_vector_3")
     .def(py::init<>())
-    .def("__call__", [](Construct_cross_product_vector_3 ctr, const Vector_3& v, const Vector_3& w)
-                         { return ctr(v, w); },
+    .def("__call__",
+         [](Construct_cross_product_vector_3 ctr, const Vector_3& v,
+            const Vector_3& w)
+         { return ctr(v, w); },
          py::arg("v"), py::arg("w"),
          "computes the cross product of v and w.")
     ;
@@ -714,59 +772,70 @@ void export_kernel_module(py::module_& m) {
 
   py::class_<Compute_squared_radius_2>(m, "Compute_squared_radius_2")
     .def(py::init<>())
-    .def("__call__", [](Compute_squared_radius_2 ctr, const Circle_2& c)
-                         { return ctr(c); },
+    .def("__call__",
+         [](Compute_squared_radius_2 ctr, const Circle_2& c) { return ctr(c); },
          py::arg("c"),
          "returns the squared radius of c.")
-    .def("__call__", [](Compute_squared_radius_2 ctr, const Point_2& p, const Point_2& q, const Point_2& r)
-                         { return ctr(p, q, r); },
+    .def("__call__",
+         [](Compute_squared_radius_2 ctr, const Point_2& p,
+            const Point_2& q, const Point_2& r)
+         { return ctr(p, q, r); },
          py::arg("p"), py::arg("q"), py::arg("r"),
          "returns the squared radius of the circle passing through p, q and r.\n\n"
          "Precondition\n"
          "• p, q, and r are not collinear.")
-    .def("__call__", [](Compute_squared_radius_2 ctr, const Point_2& p, const Point_2& q)
-                         { return ctr(p, q); },
+    .def("__call__",
+         [](Compute_squared_radius_2 ctr, const Point_2& p, const Point_2& q)
+         { return ctr(p, q); },
          py::arg("p"), py::arg("q"),
          "returns the squared radius of the smallest circle passing through p, and q, i.e. one fourth of the squared distance between p and q.")
-    .def("__call__", [](Compute_squared_radius_2 ctr, const Point_2& p)
-                         { return ctr(p); },
+    .def("__call__",
+         [](Compute_squared_radius_2 ctr, const Point_2& p)
+         { return ctr(p); },
          py::arg("p"),
          "returns the squared radius of the smallest circle passing through p, i.e. 0.")
     ;
 
   py::class_<Compute_squared_radius_3>(m, "Compute_squared_radius_3")
     .def(py::init<>())
-    .def("__call__", [](Compute_squared_radius_3 ctr, const Sphere_3& s)
-                         { return ctr(s); },
+    .def("__call__",
+         [](Compute_squared_radius_3 ctr, const Sphere_3& s) { return ctr(s); },
          py::arg("s"),
          "returns the squared radius of s.")
-    .def("__call__", [](Compute_squared_radius_3 ctr, const Circle_3& c)
-                         { return ctr(c); },
+    .def("__call__",
+         [](Compute_squared_radius_3 ctr, const Circle_3& c) { return ctr(c); },
          py::arg("c"),
          "returns the squared radius of c.")
-    .def("__call__", [](Compute_squared_radius_3 ctr, const Point_3& p, const Point_3& q, const Point_3& r, const Point_3& s)
-                         { return ctr(p, q, r, s); },
+    .def("__call__",
+         [](Compute_squared_radius_3 ctr, const Point_3& p,
+            const Point_3& q, const Point_3& r, const Point_3& s)
+         { return ctr(p, q, r, s); },
          py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
          "returns the squared radius of the sphere passing through p, q, r and s.\n\n"
          "Precondition\n"
          "• p, q, r, and s are not coplanar.")
-    .def("__call__", [](Compute_squared_radius_3 ctr, const Point_3& p, const Point_3& q, const Point_3& r)
-                         { return ctr(p, q, r); },
+    .def("__call__",
+         [](Compute_squared_radius_3 ctr, const Point_3& p,
+            const Point_3& q, const Point_3& r)
+         { return ctr(p, q, r); },
          py::arg("p"), py::arg("q"), py::arg("r"),
          "returns the squared radius of the sphere passing through p, q and r, and whose center is in the plane defined by these three points.\n")
-    .def("__call__", [](Compute_squared_radius_3 ctr, const Point_3& p, const Point_3& q)
-                         { return ctr(p, q); },
+    .def("__call__",
+         [](Compute_squared_radius_3 ctr, const Point_3& p, const Point_3& q)
+         { return ctr(p, q); },
          py::arg("p"), py::arg("q"),
          "returns the squared radius of the smallest circle passing through p, and q, i.e. one fourth of the squared distance between p and q.")
-    .def("__call__", [](Compute_squared_radius_3 ctr, const Point_3& p)
-                         { return ctr(p); },
+    .def("__call__",
+         [](Compute_squared_radius_3 ctr, const Point_3& p)
+         { return ctr(p); },
          py::arg("p"),
          "returns the squared radius of the smallest circle passing through p, i.e. 0.")
     ;
 
   py::class_<Collinear_2>(m, "Collinear_2")
     .def(py::init<>())
-    .def("__call__", [](Collinear_2 ctr, const Pnt_2& p, const Pnt_2& q, const Pnt_2& r)
+    .def("__call__",
+         [](Collinear_2 ctr, const Pnt_2& p, const Pnt_2& q, const Pnt_2& r)
          { return ctr(p, q, r); },
          py::arg("p"), py::arg("q"), py::arg("r"),
          "returns true, if p, q, and r are collinear.")
@@ -774,7 +843,8 @@ void export_kernel_module(py::module_& m) {
 
   py::class_<Collinear_3>(m, "Collinear_3")
     .def(py::init<>())
-    .def("__call__", [](Collinear_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
+    .def("__call__",
+         [](Collinear_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
          { return ctr(p, q, r); },
          py::arg("p"), py::arg("q"), py::arg("r"),
          "returns true, if p, q, and r are collinear.")
@@ -811,8 +881,12 @@ void export_kernel_module(py::module_& m) {
         static_cast<Asoal_fnc>(&CGAL::are_strictly_ordered_along_line<Kernel>));
 
   using Bc_fnc1 = Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&);
-  using Bc_fnc2 = Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&, const FT&);
-  using Bc_fnc3 = Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&, const FT&);
+  using Bc_fnc2 =
+    Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&,
+             const FT&);
+  using Bc_fnc3 =
+    Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&,
+             const FT&, const Pnt_2&, const FT&);
   m.def("barycenter", static_cast<Bc_fnc1>(&CGAL::barycenter<Kernel>));
   m.def("barycenter", static_cast<Bc_fnc2>(&CGAL::barycenter<Kernel>));
   m.def("barycenter", static_cast<Bc_fnc3>(&CGAL::barycenter<Kernel>));
@@ -824,7 +898,8 @@ void export_kernel_module(py::module_& m) {
   //def<Line_2(const Line_2&, const Line_2&)>("bisector", &CGAL::bisector);
 
   using Cr_fnc1 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  using Cr_fnc2 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  using Cr_fnc2 =
+    Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Cr_fnc3 = Pnt_2(*)(const Tri_2&);
   m.def("centroid", static_cast<Cr_fnc1>(&CGAL::centroid<Kernel>));
   m.def("centroid", static_cast<Cr_fnc2>(&CGAL::centroid<Kernel>));
@@ -838,40 +913,58 @@ void export_kernel_module(py::module_& m) {
   m.def("circumcenter", static_cast<Cc_fnc3>(&CGAL::circumcenter<Kernel>));
 
   using Caoral_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("collinear_are_ordered_along_line", static_cast<Caoral_fnc>(&CGAL::collinear_are_ordered_along_line<Kernel>));
+  m.def("collinear_are_ordered_along_line",
+        static_cast<Caoral_fnc>(&CGAL::collinear_are_ordered_along_line<Kernel>));
 
   using Casoral_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("collinear_are_strictly_ordered_along_line", static_cast<Casoral_fnc>(&CGAL::collinear_are_strictly_ordered_along_line<Kernel>));
+  m.def("collinear_are_strictly_ordered_along_line",
+
+        static_cast<Casoral_fnc>(&CGAL::collinear_are_strictly_ordered_along_line<Kernel>));
 
   using Clr_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("collinear", static_cast<Clr_fnc>(&CGAL::collinear<Kernel>));
 
-  using Cdtp_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("compare_distance_to_point", static_cast<Cdtp_fnc>(&CGAL::compare_distance_to_point<Kernel>));
+  using Cdtp_fnc =
+    CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  m.def("compare_distance_to_point",
+        static_cast<Cdtp_fnc>(&CGAL::compare_distance_to_point<Kernel>));
 
   using Cl_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
-  m.def("compare_lexicographically", static_cast<Cl_fnc>(&CGAL::compare_lexicographically<Kernel>));
+  m.def("compare_lexicographically",
+        static_cast<Cl_fnc>(&CGAL::compare_lexicographically<Kernel>));
 
 #if !defined(_MSC_VER)
   // MSVC does handle the following for some reason....
-  using Csdtl_fnc1 = CGAL::Comparison_result(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
-  m.def("compare_signed_distance_to_line", static_cast<Csdtl_fnc1>(&CGAL::compare_signed_distance_to_line<Kernel>));
+  using Csdtl_fnc1 =
+    CGAL::Comparison_result(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
+  m.def("compare_signed_distance_to_line",
+        static_cast<Csdtl_fnc1>(&CGAL::compare_signed_distance_to_line<Kernel>));
 #endif
-  using Csdtl_fnc2 = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("compare_signed_distance_to_line", static_cast<Csdtl_fnc2>(&CGAL::compare_signed_distance_to_line<Kernel>));
+  using Csdtl_fnc2 =
+    CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
+                               const Pnt_2&);
+  m.def("compare_signed_distance_to_line",
+        static_cast<Csdtl_fnc2>(&CGAL::compare_signed_distance_to_line<Kernel>));
 
   using Cs_fnc1 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&);
-  using Cs_fnc2 = CGAL::Comparison_result(*)(const Segment_2&, const Segment_2&);
+  using Cs_fnc2 =
+    CGAL::Comparison_result(*)(const Segment_2&, const Segment_2&);
   m.def("compare_slope", static_cast<Cs_fnc1>(&CGAL::compare_slope<Kernel>));
   m.def("compare_slope", static_cast<Cs_fnc2>(&CGAL::compare_slope<Kernel>));
 
-  using Csd_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const FT&);
-  m.def("compare_squared_distance", static_cast<Csd_fnc>(&CGAL::compare_squared_distance<Kernel>));
+  using Csd_fnc =
+    CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const FT&);
+  m.def("compare_squared_distance",
+        static_cast<Csd_fnc>(&CGAL::compare_squared_distance<Kernel>));
 
   using Cx_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
-  using Cx_fnc2 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&, const Line_2&);
-  using Cx_fnc3 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&);
-  using Cx_fnc4 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&, const Line_2&);
+  using Cx_fnc2 =
+    CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&, const Line_2&);
+  using Cx_fnc3 =
+    CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&);
+  using Cx_fnc4 =
+    CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&,
+                               const Line_2&);
   m.def("compare_x", static_cast<Cx_fnc1>(&CGAL::compare_x<Kernel>));
   m.def("compare_x", static_cast<Cx_fnc2>(&CGAL::compare_x<Kernel>));
   m.def("compare_x", static_cast<Cx_fnc3>(&CGAL::compare_x<Kernel>));
@@ -881,31 +974,54 @@ void export_kernel_module(py::module_& m) {
   m.def("compare_xy", static_cast<Cxy_fnc>(&CGAL::compare_xy<Kernel>));
 
   using Cxaty_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&);
-  using Cxaty_fnc2 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&, const Line_2&);
-  using Cxaty_fnc3 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&);
-  using Cxaty_fnc4 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&, const Line_2&);
-  m.def("compare_x_at_y", static_cast<Cxaty_fnc1>(&CGAL::compare_x_at_y<Kernel>));
-  m.def("compare_x_at_y", static_cast<Cxaty_fnc2>(&CGAL::compare_x_at_y<Kernel>));
-  m.def("compare_x_at_y", static_cast<Cxaty_fnc3>(&CGAL::compare_x_at_y<Kernel>));
-  m.def("compare_x_at_y", static_cast<Cxaty_fnc4>(&CGAL::compare_x_at_y<Kernel>));
+  using Cxaty_fnc2 =
+    CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&, const Line_2&);
+  using Cxaty_fnc3 =
+    CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&);
+  using Cxaty_fnc4 =
+    CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&,
+                               const Line_2&);
+  m.def("compare_x_at_y",
+        static_cast<Cxaty_fnc1>(&CGAL::compare_x_at_y<Kernel>));
+  m.def("compare_x_at_y",
+        static_cast<Cxaty_fnc2>(&CGAL::compare_x_at_y<Kernel>));
+  m.def("compare_x_at_y",
+        static_cast<Cxaty_fnc3>(&CGAL::compare_x_at_y<Kernel>));
+  m.def("compare_x_at_y",
+        static_cast<Cxaty_fnc4>(&CGAL::compare_x_at_y<Kernel>));
 
   using Cyatx_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&);
-  using Cyatx_fnc2 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&, const Line_2&);
-  using Cyatx_fnc3 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&);
-  using Cyatx_fnc4 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&, const Line_2&);
+  using Cyatx_fnc2 =
+    CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&, const Line_2&);
+  using Cyatx_fnc3 =
+    CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&);
+  using Cyatx_fnc4 =
+    CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&,
+                               const Line_2&);
   using Cyatx_fnc5 = CGAL::Comparison_result(*)(const Pnt_2&, const Segment_2&);
-  using Cyatx_fnc6 = CGAL::Comparison_result(*)(const Pnt_2&, const Segment_2&, const Segment_2&);
-  m.def("compare_y_at_x", static_cast<Cyatx_fnc1>(&CGAL::compare_y_at_x<Kernel>));
-  m.def("compare_y_at_x", static_cast<Cyatx_fnc2>(&CGAL::compare_y_at_x<Kernel>));
-  m.def("compare_y_at_x", static_cast<Cyatx_fnc3>(&CGAL::compare_y_at_x<Kernel>));
-  m.def("compare_y_at_x", static_cast<Cyatx_fnc4>(&CGAL::compare_y_at_x<Kernel>));
-  m.def("compare_y_at_x", static_cast<Cyatx_fnc5>(&CGAL::compare_y_at_x<Kernel>));
-  m.def("compare_y_at_x", static_cast<Cyatx_fnc6>(&CGAL::compare_y_at_x<Kernel>));
+  using Cyatx_fnc6 =
+    CGAL::Comparison_result(*)(const Pnt_2&, const Segment_2&, const Segment_2&);
+  m.def("compare_y_at_x",
+        static_cast<Cyatx_fnc1>(&CGAL::compare_y_at_x<Kernel>));
+  m.def("compare_y_at_x",
+        static_cast<Cyatx_fnc2>(&CGAL::compare_y_at_x<Kernel>));
+  m.def("compare_y_at_x",
+        static_cast<Cyatx_fnc3>(&CGAL::compare_y_at_x<Kernel>));
+  m.def("compare_y_at_x",
+        static_cast<Cyatx_fnc4>(&CGAL::compare_y_at_x<Kernel>));
+  m.def("compare_y_at_x",
+        static_cast<Cyatx_fnc5>(&CGAL::compare_y_at_x<Kernel>));
+  m.def("compare_y_at_x",
+        static_cast<Cyatx_fnc6>(&CGAL::compare_y_at_x<Kernel>));
 
   using Cy_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
-  using Cy_fnc2 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&, const Line_2&);
-  using Cy_fnc3 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&);
-  using Cy_fnc4 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&, const Line_2&);
+  using Cy_fnc2 =
+    CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&, const Line_2&);
+  using Cy_fnc3 =
+    CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&);
+  using Cy_fnc4 =
+    CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&,
+                               const Line_2&);
   m.def("compare_y", static_cast<Cy_fnc1>(&CGAL::compare_y<Kernel>));
   m.def("compare_y", static_cast<Cy_fnc2>(&CGAL::compare_y<Kernel>));
   m.def("compare_y", static_cast<Cy_fnc3>(&CGAL::compare_y<Kernel>));
@@ -921,45 +1037,56 @@ void export_kernel_module(py::module_& m) {
   m.def("determinant", static_cast<Dt_fnc>(&CGAL::determinant<Kernel>));
 
   using Hldtp_fnc = bool (*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("has_larger_distace_to_point", static_cast<Hldtp_fnc>(&CGAL::has_larger_distance_to_point<Kernel>));
+  m.def("has_larger_distace_to_point",
+        static_cast<Hldtp_fnc>(&CGAL::has_larger_distance_to_point<Kernel>));
 
 #if !defined(_MSC_VER)
   // MSVC does handle the following for some reason....
   using Hldtl_fnc1 = bool(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
-  m.def("has_larger_signed_distance_to_line", static_cast<Hldtl_fnc1>(&CGAL::has_larger_signed_distance_to_line<Kernel>));
+  m.def("has_larger_signed_distance_to_line",
+        static_cast<Hldtl_fnc1>(&CGAL::has_larger_signed_distance_to_line<Kernel>));
 #endif
   using Hldtl_fnc2 = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("has_larger_signed_distance_to_line", static_cast<Hldtl_fnc2>(&CGAL::has_larger_signed_distance_to_line<Kernel>));
+  m.def("has_larger_signed_distance_to_line",
+        static_cast<Hldtl_fnc2>(&CGAL::has_larger_signed_distance_to_line<Kernel>));
 
   using Hsdtp_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("has_smaller_distace_to_point", static_cast<Hsdtp_fnc>(&CGAL::has_smaller_distance_to_point<Kernel>));
+  m.def("has_smaller_distace_to_point",
+        static_cast<Hsdtp_fnc>(&CGAL::has_smaller_distance_to_point<Kernel>));
 
 #if !defined(_MSC_VER)
   // MSVC does handle the following for some reason....
   using Hssdtl_fnc1 = bool(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
-  m.def("has_smaller_signed_distance_to_line", static_cast<Hssdtl_fnc1>(&CGAL::has_smaller_signed_distance_to_line<Kernel>));
+  m.def("has_smaller_signed_distance_to_line",
+        static_cast<Hssdtl_fnc1>(&CGAL::has_smaller_signed_distance_to_line<Kernel>));
 #endif
 
   using Hssdtl_fnc2 = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("has_smaller_signed_distance_to_line", static_cast<Hssdtl_fnc2>(&CGAL::has_smaller_signed_distance_to_line<Kernel>));
+  m.def("has_smaller_signed_distance_to_line",
+        static_cast<Hssdtl_fnc2>(&CGAL::has_smaller_signed_distance_to_line<Kernel>));
 
   using Lid_fnc = FT(*)(const Pnt_2&, const Pnt_2&);
-  m.def("l_infinity_distance", static_cast<Lid_fnc>(&CGAL::l_infinity_distance<Kernel>));
+  m.def("l_infinity_distance",
+        static_cast<Lid_fnc>(&CGAL::l_infinity_distance<Kernel>));
 
   using Lt_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("left_turn", static_cast<Lt_fnc>(&CGAL::left_turn<Kernel>));
 
   using Lxyl_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
-  m.def("lexicographically_xy_larger", static_cast<Lxyl_fnc>(&CGAL::lexicographically_xy_larger<Kernel>));
+  m.def("lexicographically_xy_larger",
+        static_cast<Lxyl_fnc>(&CGAL::lexicographically_xy_larger<Kernel>));
 
   using Lxyloe_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
-  m.def("lexicographically_xy_larger_or_equal", static_cast<Lxyloe_fnc>(&CGAL::lexicographically_xy_larger_or_equal<Kernel>));
+  m.def("lexicographically_xy_larger_or_equal",
+        static_cast<Lxyloe_fnc>(&CGAL::lexicographically_xy_larger_or_equal<Kernel>));
 
   using Lxys_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
-  m.def("lexicographically_xy_smaller", static_cast<Lxys_fnc>(&CGAL::lexicographically_xy_smaller<Kernel>));
+  m.def("lexicographically_xy_smaller",
+        static_cast<Lxys_fnc>(&CGAL::lexicographically_xy_smaller<Kernel>));
 
   using Lxysoe_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
-  m.def("lexicographically_xy_smaller_or_equal", static_cast<Lxysoe_fnc>(&CGAL::lexicographically_xy_smaller_or_equal<Kernel>));
+  m.def("lexicographically_xy_smaller_or_equal",
+        static_cast<Lxysoe_fnc>(&CGAL::lexicographically_xy_smaller_or_equal<Kernel>));
 
   using Maxv_fnc = Pnt_2(*)(const Iso_rectangle_2&);
   m.def("max_vertex", static_cast<Maxv_fnc>(&CGAL::max_vertex<Kernel>));
@@ -972,12 +1099,14 @@ void export_kernel_module(py::module_& m) {
 
   // squared_distance, temporary!
   using Md_fnc1 = FT(*)(const Pnt_3&, const Pnt_3&);
-  m.def("squared_distance", static_cast<Md_fnc1>(&CGAL::squared_distance<Kernel>));
+  m.def("squared_distance",
+        static_cast<Md_fnc1>(&CGAL::squared_distance<Kernel>));
 
   using Minv_fnc = Pnt_2(*)(const Iso_rectangle_2&);
   m.def("min_vertex", static_cast<Minv_fnc>(&CGAL::min_vertex<Kernel>));
 
-  using Or_fnc1 = CGAL::Orientation(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  using Or_fnc1 =
+    CGAL::Orientation(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Or_fnc2 = CGAL::Orientation(*)(const Vec_2&, const Vec_2&);
   m.def("orientation", static_cast<Or_fnc1>(&CGAL::orientation));
   m.def("orientation", static_cast<Or_fnc2>(&CGAL::orientation));
@@ -993,8 +1122,10 @@ void export_kernel_module(py::module_& m) {
   m.def("radical_line", static_cast<Rl_fnc>(&CGAL::radical_line<Kernel>));
 
   // Parameterized by FT (not Kernel)
-  using Rra_fnc = void(*)(const RT&, const RT&, RT&, RT&, RT&, const RT&, const RT&);
-  m.def("rational_rotation_approximation", static_cast<Rra_fnc>(&CGAL::rational_rotation_approximation<FT>));
+  using Rra_fnc =
+    void(*)(const RT&, const RT&, RT&, RT&, RT&, const RT&, const RT&);
+  m.def("rational_rotation_approximation",
+        static_cast<Rra_fnc>(&CGAL::rational_rotation_approximation<FT>));
 
   using Rt_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("right_turn", static_cast<Rt_fnc>(&CGAL::right_turn<Kernel>));
@@ -1004,13 +1135,21 @@ void export_kernel_module(py::module_& m) {
   m.def("scalar_product", static_cast<Sp_fnc2>(&CGAL::scalar_product<Kernel>));
   m.def("scalar_product", static_cast<Sp_fnc3>(&CGAL::scalar_product<Kernel>));
 
-  using Sobc_fnc1 = CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  using Sobc_fnc2 = CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("side_of_bounded_circle", static_cast<Sobc_fnc1>(&CGAL::side_of_bounded_circle<Kernel>));
-  m.def("side_of_bounded_circle", static_cast<Sobc_fnc2>(&CGAL::side_of_bounded_circle<Kernel>));
+  using Sobc_fnc1 =
+    CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
+                          const Pnt_2&);
+  using Sobc_fnc2 =
+    CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
+  m.def("side_of_bounded_circle",
+        static_cast<Sobc_fnc1>(&CGAL::side_of_bounded_circle<Kernel>));
+  m.def("side_of_bounded_circle",
+        static_cast<Sobc_fnc2>(&CGAL::side_of_bounded_circle<Kernel>));
 
-  using Sooc_fnc = CGAL::Oriented_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("side_of_oriented_circle", static_cast<Sooc_fnc>(&CGAL::side_of_oriented_circle<Kernel>));
+  using Sooc_fnc =
+    CGAL::Oriented_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
+                           const Pnt_2&);
+  m.def("side_of_oriented_circle",
+        static_cast<Sooc_fnc>(&CGAL::side_of_oriented_circle<Kernel>));
 
   bind_squared_distance_types<Pnt_2, Line_2, Ray_2, Segment_2, Tri_2>(m);
 
@@ -1056,63 +1195,74 @@ void export_kernel_module(py::module_& m) {
   using PointRange = typename std::vector<Point_3>;
   using PolygonRange = typename std::vector<std::vector<std::size_t>>;
 
-  m.def("read_polygon_soup", [](const std::string& fname, PointRange& points, PolygonRange& polygons, const py::dict& np = py::dict()) {
-    return CGAL::IO::read_polygon_soup(fname, points, polygons, internal::parse_named_parameters(np));
-  },
-      py::arg("fname"), py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
-      "reads a polygon soup from a file.\n"
-      "Supported file formats are the following:\n"
-      "\n"
-      "Object File Format (OFF) (.off)\n"
-      "Wavefront Advanced Visualizer Object Format (OBJ) (.obj)\n"
-      "STereoLithography (STL) File Format (.stl)\n"
-      "Polygon File Format (PLY) (.ply)\n"
-      "GOCAD (TS) File Format (.ts)\n"
-      "VTK (VTU / VTP / legacy) File Formats (.vtp)\n"
-      "\n"
-      "The format is detected from the filename extension (letter case is not important).\n"
-      "\n"
-      "Parameters\n"
-      "fname\tthe name of the file.\n"
-      "points\tpoints of the soup of polygons\n"
-      "polygons\teach element in the range describes a polygon using the indices of the vertices.\n"
-      "Optional Named Parameters\n"
-      "verbose\tindicates whether output warnings and error messages should be printed or not.\n"
-      "\tType: Boolean\n"
-      "\tDefault: false\n"
-      "\n"
-      "Returns\n"
-      "true if reading was successful, false otherwise. \n")
+  m.def("read_polygon_soup",
+        [](const std::string& fname, PointRange& points, PolygonRange& polygons,
+           const py::dict& np = py::dict()) {
+          return CGAL::IO::read_polygon_soup(fname, points, polygons,
+                                             internal::parse_named_parameters(np));
+        },
+        py::arg("fname"), py::arg("points"), py::arg("polygons"),
+        py::arg("np") = py::dict(),
+        "reads a polygon soup from a file.\n"
+        "Supported file formats are the following:\n"
+        "\n"
+        "Object File Format (OFF) (.off)\n"
+        "Wavefront Advanced Visualizer Object Format (OBJ) (.obj)\n"
+        "STereoLithography (STL) File Format (.stl)\n"
+        "Polygon File Format (PLY) (.ply)\n"
+        "GOCAD (TS) File Format (.ts)\n"
+        "VTK (VTU / VTP / legacy) File Formats (.vtp)\n"
+        "\n"
+        "The format is detected from the filename extension (letter case is not important).\n"
+        "\n"
+        "Parameters\n"
+        "fname\tthe name of the file.\n"
+        "points\tpoints of the soup of polygons\n"
+        "polygons\teach element in the range describes a polygon using the indices of the vertices.\n"
+        "Optional Named Parameters\n"
+        "verbose\tindicates whether output warnings and error messages should be printed or not.\n"
+        "\tType: Boolean\n"
+        "\tDefault: false\n"
+        "\n"
+        "Returns\n"
+        "true if reading was successful, false otherwise. \n")
     ;
 
-  #if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
-  m.def("write_polygon_soup", [](const std::string& fname, const PointRange& points, const PolygonRange& polygons, const py::dict& np = py::dict()) {
-    return CGAL::IO::write_polygon_soup(fname, points, polygons, internal::parse_named_parameters(np));
-  },
-      py::arg("fname"), py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
-      "writes the content of points and polygons in a file.\n"
-      "Supported file formats are the following:\n"
-      "\n"
-      "Object File Format (OFF) (.off)\n"
-      "Wavefront Advanced Visualizer Object Format (OBJ) (.obj)\n"
-      "STereoLithography (STL) File Format (.stl)\n"
-      "Polygon File Format (PLY) (.ply)\n"
-      "GOCAD (TS) File Format (.ts)\n"
-      "VTK (VTU / VTP / legacy) File Formats (.vtp)\n"
-      "\n"
-      "The format is detected from the filename extension (letter case is not important).\n"
-      "\n"
-      "Parameters\n"
-      "fname\tthe name of the file.\n"
-      "points\tpoints of the soup of polygons\n"
-      "polygons\teach element in the range describes a polygon using the indices of the vertices.\n"
-      "Optional Named Parameters\n"
-      "verbose\tindicates whether output warnings and error messages should be printed or not.\n"
-      "\tType: Boolean\n"
-      "\tDefault: false\n"
-      "\n"
-      "Returns\n"
-      "true if writing was successful, false otherwise. \n")
+#if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) &&                                \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) &&                      \
+     (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL))
+  m.def("write_polygon_soup",
+        [](const std::string& fname, const PointRange& points,
+           const PolygonRange& polygons, const py::dict& np = py::dict()) {
+          return CGAL::IO::write_polygon_soup(fname, points, polygons,
+                                              internal::parse_named_parameters(np));
+        },
+        py::arg("fname"), py::arg("points"), py::arg("polygons"),
+        py::arg("np") = py::dict(),
+        "writes the content of points and polygons in a file.\n"
+        "Supported file formats are the following:\n"
+        "\n"
+        "Object File Format (OFF) (.off)\n"
+        "Wavefront Advanced Visualizer Object Format (OBJ) (.obj)\n"
+        "STereoLithography (STL) File Format (.stl)\n"
+        "Polygon File Format (PLY) (.ply)\n"
+        "GOCAD (TS) File Format (.ts)\n"
+        "VTK (VTU / VTP / legacy) File Formats (.vtp)\n"
+        "\n"
+        "The format is detected from the filename extension (letter case is not important).\n"
+        "\n"
+        "Parameters\n"
+        "fname\tthe name of the file.\n"
+        "points\tpoints of the soup of polygons\n"
+        "polygons\teach element in the range describes a polygon using the indices of the vertices.\n"
+        "Optional Named Parameters\n"
+        "verbose\tindicates whether output warnings and error messages should be printed or not.\n"
+        "\tType: Boolean\n"
+        "\tDefault: false\n"
+        "\n"
+        "Returns\n"
+        "true if writing was successful, false otherwise. \n")
     ;
-  #endif
+#endif
 }
