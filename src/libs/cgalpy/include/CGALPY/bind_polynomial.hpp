@@ -97,11 +97,13 @@ py::class_<typename PT::Type> bind_polynomial(py::module_& m, const char* name) 
   c.def("coefficients",
         [](const P& polynomial)
         { make_iterator(polynomial.begin(), polynomial.end()); },
-        py::keep_alive<0, 1>());
-
+        py::keep_alive<0, 1>())
     // .def("coefficients", py::range<Copy_const_reference>(&P::begin, &P::end))
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
+    ;
+
+  // Use pretty mode as a rule
+  add_insertion<decltype(c), true>(c, "__str__");
+  add_insertion<decltype(c), true>(c, "__repr__");
 
   return c;
 }
