@@ -23,6 +23,7 @@ eval "declare -a $item=('aos2_cd_pos_epec'    'kerEpecInt_aos2PosCdPl')";       
 eval "declare -a $item=('aos2_cs_epec'        'kerEpecInt_aos2CsPl')";                   ((i++)); item="item$i"
 eval "declare -a $item=('aos2_cs_ve_epec'     'kerEpecInt_aos2CsVe')";                   ((i++)); item="item$i"
 eval "declare -a $item=('aos2_epic'           'kerEpic_aos2SegPl')";                     ((i++)); item="item$i"
+eval "declare -a $item=('aos2_geodesic_epec'  'kerEpecInt_aos2GosPl')";                  ((i++)); item="item$i"
 eval "declare -a $item=('aos2_linear_epec'    'kerEpecInt_aos2LinearPl')";               ((i++)); item="item$i"
 eval "declare -a $item=('aos2_ncseg_epic'     'kerEpic_aos2NcsegPl')";                   ((i++)); item="item$i"
 eval "declare -a $item=('aos2_pos_epec'       'kerEpecInt_aos2PosPl')";                  ((i++)); item="item$i"
