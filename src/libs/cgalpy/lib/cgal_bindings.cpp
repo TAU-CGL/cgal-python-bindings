@@ -53,7 +53,7 @@ void export_cgal(py::module_& m) {
 #endif
 
   if (! add_attr<CGAL::Sign>(m, "Result")) {
-    py::enum_<CGAL::Sign>(m, "Result")
+    py::enum_<CGAL::Sign>(m, "Result", py::is_arithmetic())
 
       //CGAL::Sign
       .value("NEGATIVE", CGAL::NEGATIVE)
