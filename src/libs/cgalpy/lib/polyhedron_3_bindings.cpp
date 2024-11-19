@@ -8,6 +8,7 @@
 
 #include <cstddef>
 #include <stdexcept>
+
 #define CGAL_USE_BASIC_VIEWER
 
 #include <boost/math/constants/constants.hpp>
@@ -18,7 +19,6 @@
 #include <nanobind/stl/pair.h>
 #include <nanobind/stl/tuple.h>
 #include <nanobind/make_iterator.h>
-
 
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h> // needed for a type
