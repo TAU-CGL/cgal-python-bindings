@@ -861,7 +861,7 @@ void export_arr(py::module_& m) {
 #ifdef CGALPY_HAS_VISUAL
   //! \todo The draw function should be applied only to arrangement on surface
   using Draw_arr = void(*)(const Arr&, const char*);
-  m.def("draw", [](const Arr& arr, const char* title )
+  m.def("draw", [](const Arr& arr, const char* title)
   { CGAL::draw(arr, title); });
 #endif
 #endif
