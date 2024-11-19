@@ -52,7 +52,10 @@ void export_cgal(py::module_& m) {
   m.def("data_file_path", &CGAL::data_file_path);
 #endif
 
-  if (! add_attr<CGAL::Sign>(m, "Result")) {
+  // Do not use add_attr() for enums, as py::type_check(info) is false.
+  const py::handle info_sign = py::type<CGAL::Sign>();
+  if (info_sign.is_valid()) m.attr("Result") = info_sign;
+  else {
     py::enum_<CGAL::Sign>(m, "Result", py::is_arithmetic())
 
       //CGAL::Sign
@@ -90,7 +93,10 @@ void export_cgal(py::module_& m) {
       ;
   }
 
-  if (! add_attr<CGAL::Angle>(m, "Angle")) {
+  // Do not use add_attr() for enums, as py::type_check(info) is false.
+  const py::handle info_angle = py::type<CGAL::Angle>();
+  if (info_angle.is_valid()) m.attr("Angle") = info_angle;
+  else {
     py::enum_<CGAL::Angle>(m, "Angle")
       .value("OBTUSE", CGAL::OBTUSE)
       .value("RIGHT", CGAL::RIGHT)
@@ -99,7 +105,10 @@ void export_cgal(py::module_& m) {
       ;
   }
 
-  if (! add_attr<CGAL::Bounded_side>(m, "Bounded_side")) {
+  // Do not use add_attr() for enums, as py::type_check(info) is false.
+  const py::handle info_bs = py::type<CGAL::Bounded_side>();
+  if (info_bs.is_valid()) m.attr("Bounded_side") = info_bs;
+  else {
     py::enum_<CGAL::Bounded_side>(m, "Bounded_side")
       .value("ON_UNBOUNDED_SIDE", CGAL::ON_UNBOUNDED_SIDE)
       .value("ON_BOUNDARY", CGAL::ON_BOUNDARY)
@@ -151,7 +160,10 @@ void export_cgal(py::module_& m) {
   }
 
   // Box_parameter_space_2
-  if (! add_attr<CGAL::Box_parameter_space_2>(m, "Box_parameter_space_2")) {
+  // Do not use add_attr() for enums, as py::type_check(info) is false.
+  const py::handle info_bps_2 = py::type<CGAL::Box_parameter_space_2>();
+  if (info_bps_2.is_valid()) m.attr("Box_parameter_space_2") = info_bps_2;
+  else {
     py::enum_<CGAL::Box_parameter_space_2>(m, "Box_parameter_space_2")
       .value("LEFT_BOUNDARY", CGAL::LEFT_BOUNDARY)
       .value("RIGHT_BOUNDARY", CGAL::RIGHT_BOUNDARY)
@@ -175,7 +187,8 @@ void export_cgal(py::module_& m) {
       col_c.def(py::init<>(),
            "Creates a color with rgba-value (0,0,0,255), i.e. black.")
       .def(py::init<unsigned char, unsigned char, unsigned char, unsigned char>(),
-           py::arg("red"), py::arg("green"), py::arg("blue"), py::arg("alpha")=255,
+           py::arg("red"), py::arg("green"), py::arg("blue"),
+           py::arg("alpha") = 255,
            "Creates a color with rgba-value (red,green,blue,alpha).")
       .def("red", [](const Color& c) { return c.red(); },
            "Returns the red component.")
@@ -186,29 +199,36 @@ void export_cgal(py::module_& m) {
       .def("alpha", [](const Color& c) { return c.alpha(); },
            "Returns the alpha component.")
       .def("set_rgb", &Color::set_rgb,
-           py::arg("red"), py::arg("green"), py::arg("blue"), py::arg("alpha")=255,
+           py::arg("red"), py::arg("green"), py::arg("blue"),
+           py::arg("alpha") = 255,
            "Replaces the rgb values of the colors by the one given as parameters.")
       .def("set_hsv", &Color::set_hsv,
-           py::arg("hue"), py::arg("saturation"), py::arg("value"), py::arg("alpha")=255,
+           py::arg("hue"), py::arg("saturation"), py::arg("value"),
+           py::arg("alpha")=255,
            "Replaces the rgb values of the colors by the conversion to rgb of the hsv values given as parameters.")
-      .def("__getitem__", [](const Color& c, std::size_t i) { return c[i]; },
+      .def("__getitem__",
+           [](const Color& c, std::size_t i) { return c[i]; },
            "Returns the ith component of the rgb color (the 0th is red, the 1st is blue, etc).")
-      .def("__setitem__", [](Color& c, std::size_t i, unsigned char v) { c[i] = v; },
+      .def("__setitem__",
+           [](Color& c, std::size_t i, unsigned char v) { c[i] = v; },
            "Sets the ith component of the rgb color (the 0th is red, the 1st is blue, etc).")
-      .def("to_rgba", [](const Color& c){
-        const auto& rgba = c.to_rgba();
-        return py::make_tuple(rgba[0], rgba[1], rgba[2], rgba[3]);
-      },
+      .def("to_rgba",
+           [](const Color& c) {
+             const auto& rgba = c.to_rgba();
+             return py::make_tuple(rgba[0], rgba[1], rgba[2], rgba[3]);
+           },
            "Returns the array with rgba values.")
-      .def("to_rgb", [](const Color& c){
-        const auto& rgb = c.to_rgb();
-        return py::make_tuple(rgb[0], rgb[1], rgb[2]);
-      },
+      .def("to_rgb",
+           [](const Color& c) {
+             const auto& rgb = c.to_rgb();
+             return py::make_tuple(rgb[0], rgb[1], rgb[2]);
+           },
            "Returns the array with rgb values.")
-      .def("to_hsv", [](const Color& c){
-        const auto& hsv = c.to_hsv();
-        return py::make_tuple(hsv[0], hsv[1], hsv[2]);
-      },
+      .def("to_hsv",
+           [](const Color& c){
+             const auto& hsv = c.to_hsv();
+             return py::make_tuple(hsv[0], hsv[1], hsv[2]);
+           },
            "Computes the hsv (hue, saturation, value) values and returns an array representing them as float values between 0 and 1.")
       ;
 
@@ -229,20 +249,21 @@ void export_cgal(py::module_& m) {
   m.def("white", &CGAL::IO::white, "Constructs Color(255,255,255).");
   m.def("yellow", &CGAL::IO::yellow, "Constructs Color(255,255,0).");
 
-  py::class_<std::type_index>(m, "type_index") // for Point_set_3
-    .def(py::self == py::self,
-         py::sig("def __eq__(self, arg: object, /) -> bool"))
-    .def(py::self < py::self,
-         py::sig("def __lt__(self, arg: object, /) -> bool"))
-    .def(py::self > py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
-    .def("name", &std::type_index::name,
-         "returns implementation defined name of the type,\n"
-         "associated with underlying type_info object")
-    .def("__hash__", [](const std::type_index& ti) { return ti.hash_code(); })
-    .def("__str__", [](const std::type_index& ti) { return ti.name(); })
-    .def("__repr__", [](const std::type_index& ti) { return ti.name(); })
-    ;
-
+  // for Point_set_3
+  if (! add_attr<std::type_index>(m, "type_index"))
+    py::class_<std::type_index>(m, "type_index")
+      .def(py::self == py::self,
+           py::sig("def __eq__(self, arg: object, /) -> bool"))
+      .def(py::self < py::self,
+           py::sig("def __lt__(self, arg: object, /) -> bool"))
+      .def(py::self > py::self)
+      .def(py::self <= py::self)
+      .def(py::self >= py::self)
+      .def("name", &std::type_index::name,
+           "returns implementation defined name of the type,\n"
+           "associated with underlying type_info object")
+      .def("__hash__", [](const std::type_index& ti) { return ti.hash_code(); })
+      .def("__str__", [](const std::type_index& ti) { return ti.name(); })
+      .def("__repr__", [](const std::type_index& ti) { return ti.name(); })
+      ;
 }

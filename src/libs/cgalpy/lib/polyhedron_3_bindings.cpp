@@ -185,28 +185,38 @@ auto make_triangle(Polyhedron_3& prn, const typename Polyhedron_3::Point& p1,
 /// @{
 
 //
-auto my_vertices(const Polyhedron_3& prn)
-{ return py::make_iterator(py::type<Polyhedron_3::Vertex_const_iterator>(), 
-                           "Vertex_iterator", prn.vertices_begin(), prn.vertices_end()); }
+auto my_vertices(const Polyhedron_3& prn) {
+  return py::make_iterator(py::type<Polyhedron_3::Vertex_const_iterator>(),
+                           "Vertex_iterator",
+                           prn.vertices_begin(), prn.vertices_end());
+}
 //
-auto my_halfedges(const Polyhedron_3& prn)
-{ return py::make_iterator(py::type<Polyhedron_3::Halfedge_const_iterator>(), 
-                           "Halfedge_iterator", prn.halfedges_begin(), prn.halfedges_end()); }
+auto my_halfedges(const Polyhedron_3& prn) {
+  return py::make_iterator(py::type<Polyhedron_3::Halfedge_const_iterator>(),
+                           "Halfedge_iterator",
+                           prn.halfedges_begin(), prn.halfedges_end());
+}
 
 //
-auto my_edges(const Polyhedron_3& prn)
-{ return py::make_iterator(py::type<Polyhedron_3::Edge_const_iterator>(), 
-                           "Edge_iterator", prn.edges_begin(), prn.edges_end()); }
+auto my_edges(const Polyhedron_3& prn) {
+  return py::make_iterator(py::type<Polyhedron_3::Edge_const_iterator>(),
+                           "Edge_iterator",
+                           prn.edges_begin(), prn.edges_end());
+}
 
 //
-auto my_faces(const Polyhedron_3& prn)
-{ return py::make_iterator(py::type<Polyhedron_3::Face_const_iterator>(), 
-                           "Face_iterator", prn.facets_begin(), prn.facets_end()); }
+auto my_faces(const Polyhedron_3& prn) {
+  return py::make_iterator(py::type<Polyhedron_3::Face_const_iterator>(),
+                           "Face_iterator",
+                           prn.facets_begin(), prn.facets_end());
+}
 
 //
-auto my_planes(const Polyhedron_3& prn)
-{ return py::make_iterator(py::type<Polyhedron_3::Plane_const_iterator>(), 
-                           "Plane_iterator", prn.planes_begin(), prn.planes_end()); }
+auto my_planes(const Polyhedron_3& prn) {
+  return py::make_iterator(py::type<Polyhedron_3::Plane_const_iterator>(),
+                           "Plane_iterator",
+                           prn.planes_begin(), prn.planes_end());
+}
 
 //
 auto halfedges_around_facet(const Face& f)
@@ -221,11 +231,15 @@ auto null_face()
 
 // pol3::vertex_map<Prn, std::size_t>(m, "vertex_size_t_map", "dynamic_property_vertex_size_t");
 template <typename C, typename Pm, typename V>
-C register_maps(C& m, const std::string& prop_name){
-  vertex_map<Pm, V>(m, ("vertex_" + prop_name + "_map").c_str(), ("dynamic_property_vertex_" + prop_name).c_str());
-  halfedge_map<Pm, V>(m, ("halfedge_" + prop_name + "_map").c_str(), ("dynamic_property_halfedge_" + prop_name).c_str());
-  face_map<Pm, V>(m, ("face_" + prop_name + "_map").c_str(), ("dynamic_property_face_" + prop_name).c_str());
-  edge_map<Pm, V>(m, ("edge_" + prop_name + "_map").c_str(), ("dynamic_property_edge_" + prop_name).c_str());
+C register_maps(C& m, const std::string& prop_name) {
+  vertex_map<Pm, V>(m, ("vertex_" + prop_name + "_map").c_str(),
+                    ("dynamic_property_vertex_" + prop_name).c_str());
+  halfedge_map<Pm, V>(m, ("halfedge_" + prop_name + "_map").c_str(),
+                      ("dynamic_property_halfedge_" + prop_name).c_str());
+  face_map<Pm, V>(m, ("face_" + prop_name + "_map").c_str(),
+                  ("dynamic_property_face_" + prop_name).c_str());
+  edge_map<Pm, V>(m, ("edge_" + prop_name + "_map").c_str(),
+                  ("dynamic_property_edge_" + prop_name).c_str());
   return m;
 }
 
@@ -378,7 +392,6 @@ void export_boost_halfedge(C& prn_c) {
     // .def("prev_link", [](const Halfedge& e){ return e->prev_link(); })
     // .def("next_link", [](const Halfedge& e){ return e->next_link(); })
     ;
-
 }
 
 // export boost vertex
@@ -577,19 +590,18 @@ void export_polyhedron_3(py::module_& m) {
     pol3::register_maps<py::module_, Prn, double>(m, "double"); // shadows FT
   }
 
-
   namespace PMP = CGAL::Polygon_mesh_processing;
   using pcad = PMP::Principal_curvatures_and_directions<Kernel>;
   pol3::vertex_map<Prn, pcad>
-    (m, "vertex_principal_curvatures_and_directions_map", "dynamic_property_vertex_PC");
+    (m, "vertex_principal_curvatures_and_directions_map",
+     "dynamic_property_vertex_PC");
 
-  m.def("get_edge_is_feature_map", [](const Prn& sm) { return get(CGAL::edge_is_feature, sm); });
+  m.def("get_edge_is_feature_map",
+        [](const Prn& sm) { return get(CGAL::edge_is_feature, sm); });
 
   py::class_<CGAL::Polyhedron_is_feature_edge_pmap>(m, "Polyhedron_is_feature_edge_pmap")
     .def(py::init<>())
     ;
-
-
 
   using poly_items = pol3::Polyhedron_items;
   using poly_items_derived = CGAL::I_Polyhedron_derived_items_3<poly_items>;
@@ -600,15 +612,16 @@ void export_polyhedron_3(py::module_& m) {
     .def(py::init<>())
     ;
 
-  m.def("get_vertex_point_map", [](const Prn& pm) { return get(CGAL::vertex_point, pm); });
-  m.def("get_vertex_point", [](const Prn& pm, const vertex_descriptor& vd) { return get(CGAL::vertex_point, pm, vd); });
-
+  m.def("get_vertex_point_map",
+        [](const Prn& pm) { return get(CGAL::vertex_point, pm); });
+  m.def("get_vertex_point",
+        [](const Prn& pm, const vertex_descriptor& vd)
+        { return get(CGAL::vertex_point, pm, vd); });
 
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
   m.def("clear", &CGAL::clear<Prn>);
   m.def("is_closed", &CGAL::is_closed<Prn>);
   m.def("null_face", &pol3::null_face<Prn>);
-
 
   m.def("num_vertices", &boost_utils::num_vertices<Prn>);
   m.def("num_edges", &boost_utils::num_edges<Prn>);
@@ -656,18 +669,25 @@ void export_polyhedron_3(py::module_& m) {
   m.def("remove_all_elements", &boost_utils::remove_all_elements<Prn>);
   m.def("add_face", &boost_utils::add_face<Prn>);
   // m.def("normalize_border", &boost_utils::normalize_border<Prn>); ???
-  m.def("is_valid_vertex_descriptor", &boost_utils::my_is_valid_vertex_descriptor<Prn>,
+  m.def("is_valid_vertex_descriptor",
+        &boost_utils::my_is_valid_vertex_descriptor<Prn>,
         py::arg("v"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_halfedge_descriptor", &boost_utils::my_is_valid_halfedge_descriptor<Prn>,
+  m.def("is_valid_halfedge_descriptor",
+        &boost_utils::my_is_valid_halfedge_descriptor<Prn>,
         py::arg("h"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_edge_descriptor", &boost_utils::my_is_valid_edge_descriptor<Prn>,
+  m.def("is_valid_edge_descriptor",
+        &boost_utils::my_is_valid_edge_descriptor<Prn>,
         py::arg("e"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_face_descriptor", &boost_utils::my_is_valid_face_descriptor<Prn>,
+  m.def("is_valid_face_descriptor",
+        &boost_utils::my_is_valid_face_descriptor<Prn>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
 
-  using ebmap_type = boost::property_map<Prn, CGAL::dynamic_edge_property_t<bool>>::type;
-  using fbmap_type = boost::property_map<Prn, CGAL::dynamic_face_property_t<bool>>::type;
-  using vbmap_type = boost::property_map<Prn, CGAL::dynamic_vertex_property_t<bool>>::type;
+  using ebmap_type =
+    boost::property_map<Prn, CGAL::dynamic_edge_property_t<bool>>::type;
+  using fbmap_type =
+    boost::property_map<Prn, CGAL::dynamic_face_property_t<bool>>::type;
+  using vbmap_type =
+    boost::property_map<Prn, CGAL::dynamic_vertex_property_t<bool>>::type;
   // Euler operations
   boost_utils::define_euler_operations<py::module_, Prn, ebmap_type>(m);
 
@@ -684,9 +704,11 @@ void export_polyhedron_3(py::module_& m) {
   boost_utils::define_generate_functions<py::module_, Prn, Kernel>(m);
 
   // Partitioning Operations
-  using EdgeDoubleMap = boost::property_map<Prn, CGAL::dynamic_edge_property_t<double>>::type;
-  using VertexVectorDoubleMap = boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::vector<double>>>::type;
-  using VertexSizeTMap = boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>::type;
+  using EdgeDoubleMap =
+    boost::property_map<Prn, CGAL::dynamic_edge_property_t<double>>::type;
+  using VertexVectorDoubleMap =
+    boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::vector<double>>>::type;
+  using VertexSizeTMap =
+    boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>::type;
   boost_utils::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
 }
-
