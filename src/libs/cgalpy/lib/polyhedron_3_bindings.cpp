@@ -18,7 +18,6 @@
 #include <nanobind/stl/optional.h>
 #include <nanobind/stl/pair.h>
 #include <nanobind/stl/tuple.h>
-#include <nanobind/make_iterator.h>
 
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h> // needed for a type
@@ -152,11 +151,6 @@ bool write_polygon_mesh(std::string fname, const Polyhedron_3& pm,
   return CGAL::IO::write_polygon_mesh(fname, pm,
                                       internal::parse_named_parameters(np));
 }
-
-// Draw a polyhedron.
-#ifdef CGALPY_HAS_VISUAL
-void draw(const Polyhedron_3& prn) { CGAL::draw(prn); }
-#endif
 
 //
 Halfedge& make_tetrahedron1(Polyhedron_3& prn,
@@ -552,8 +546,11 @@ void export_polyhedron_3(py::module_& m) {
   }
 
 #ifdef CGALPY_HAS_VISUAL
-  m.def("draw", &pol3::draw);
+  using Draw_arr = void(*)(const Prn&, const char*);
+  m.def("draw", [](const Prn& prn, const char* title)
+  { CGAL::draw(prn, title); });
 #endif
+
   m.def("read_polygon_mesh", &pol3::read_polygon_mesh<Prn>,
         py::arg("filename"), py::arg("np") = py::dict());
   m.def("write_polygon_mesh", &pol3::write_polygon_mesh<Prn>,
