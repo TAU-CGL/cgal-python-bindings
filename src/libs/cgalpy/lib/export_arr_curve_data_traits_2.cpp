@@ -46,7 +46,7 @@ void export_arr_curve_data_traits_2(py::module_& m) {
     .def(py::init<>())
     .def_static("func", &Cdm::func)
     .def_static("reset_func", &Cdm::reset_func)
-    .def_static("set_func", &Cdm::set_func, py::keep_alive<1, 2>())
+    .def_static("set_func", &Cdm::set_func)
     //! \todo The following fails for some reason.
     // .def_prop_rw_static("func",
     //                     [](py::handle /*unused*/) { return Cdm::func() ; },
