@@ -110,7 +110,7 @@ public:
   /*! Apply the callback function
    */
   py::object operator()(py::object a, py::object b) const
-  { return (is_initialized) ? a : s_func(a, b); }
+  { return (is_initialized) ? s_func(a, b) : a; }
 
 private:
   //! The callback function to apply
