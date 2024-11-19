@@ -449,8 +449,7 @@ py::object unbounded_faces(const Arrangement_on_surface_2& arr)
 Arrangement_on_surface_with_history_2::Curve_halfedges&
 insert_cv_with_history(Arrangement_on_surface_with_history_2& arr,
                        const Arrangement_on_surface_with_history_2::
-                       Geometry_traits_2::Curve_2& cv)
-{
+                       Geometry_traits_2::Curve_2& cv) {
   using Cha = Arrangement_on_surface_with_history_2::Curve_handle;
   using Che = Arrangement_on_surface_with_history_2::Curve_halfedges;
   Cha cha = CGAL::insert(arr, cv);
