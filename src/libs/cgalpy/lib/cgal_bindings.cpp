@@ -27,11 +27,16 @@ namespace py = nanobind;
 extern void export_bbox_2(py::class_<CGAL::Bbox_2>& c);
 extern void export_bbox_3(py::class_<CGAL::Bbox_3>& c);
 
+//
 template <typename C, typename T>
-C export_vertex_incident_patches(C& c, const std::string& name) {
-  py::class_<CGAL::vertex_incident_patches_t<T>>(c, ("Vertex_incident_patches_" + name).c_str())
-    .def(py::init<>())
-    ;
+C export_vertex_incident_patches(C& c, const std::string& suffix) {
+  auto name = "Vertex_incident_patches_" + suffix;
+  using Type = CGAL::vertex_incident_patches_t<T>;
+  if (! add_attr<Type>(c, name.c_str()))
+    py::class_<Type>(c, name.c_str())
+      .def(py::init<>())
+      ;
+
   return c;
 }
 
