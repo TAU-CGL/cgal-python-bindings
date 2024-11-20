@@ -10,6 +10,7 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/visibility_2_types.hpp"
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
 namespace py = nanobind;
@@ -34,17 +35,18 @@ void export_visibility_2(py::module_& m) {
   using Point = vis2::Point_2;
   using Face = vis2::Face;
 
-  py::class_<Spv> spv_c(m, "Simple_polygon_visibility_2");
-  spv_c.def(py::init<>())
-    .def(py::init<const Arr&>())
-    .def("is_attached", &Spv::is_attached)
-    .def("attach", &Spv::attach)
-    .def("detach", &Spv::detach)
-    .def("arrangement_2", &Spv::arrangement_2)
-    .def("compute_visibility", vis2::compute_visibility1)
-    .def("compute_visibility", vis2::compute_visibility2)
-    ;
+  if (! add_attr<Spv>(m, "Simple_polygon_visibility_2")) {
+    py::class_<Spv> spv_c(m, "Simple_polygon_visibility_2");
+    spv_c.def(py::init<>())
+      .def(py::init<const Arr&>())
+      .def("is_attached", &Spv::is_attached)
+      .def("attach", &Spv::attach)
+      .def("detach", &Spv::detach)
+      .def("arrangement_2", &Spv::arrangement_2)
+      .def("compute_visibility", vis2::compute_visibility1)
+      .def("compute_visibility", vis2::compute_visibility2)
+      ;
+  }
+
   // non_regular_visibility
-
-
 }

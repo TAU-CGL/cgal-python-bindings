@@ -6,5 +6,22 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <nanobind/nanobind.h>
+
+#include "CGALPY/basic_viewer_types.hpp"
+#include "CGALPY/add_attr.hpp"
+
+namespace py = nanobind;
+
+namespace bvr {
+}
+
 void export_basic_viewer(py::module_& m) {
+  using Gso = bvr::Graphics_scene_options;
+
+  if (! add_attr<Gso>(m, "Graphics_scene_options")) {
+    py::class_<Gso> gso_c(m, "Graphics_scene_options");
+    gso_c.def(py::init<>())
+      ;
+  }
 }

@@ -252,4 +252,4 @@ using Halfedge_around_vertex_circulator =
   Arrangement_on_surface_2::Halfedge_around_vertex_circulator;
 }
 
-#endif //CGALPY_ARRANGEMENT_ON_SURFACE_2_TYPES_HPP
+#endif

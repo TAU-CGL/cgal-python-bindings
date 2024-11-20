@@ -43,6 +43,9 @@
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS))
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_arrangement_2.h>
+#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+#include "CGALPY/basic_viewer_types.hpp"
+#endif
 #endif
 #endif
 
@@ -860,9 +863,17 @@ void export_arr(py::module_& m) {
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS))
 #ifdef CGALPY_HAS_VISUAL
   //! \todo The draw function should be applied only to arrangement on surface
-  using Draw_arr = void(*)(const Arr&, const char*);
-  m.def("draw", [](const Arr& arr, const char* title)
-  { CGAL::draw(arr, title); });
+  m.def("draw",
+        [](const Arr& arr, const char* title)
+        { CGAL::draw(arr, title); });
+
+#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+  m.def("draw",
+        [](const Arr& arr, const bvr::Graphics_scene_options& gso,
+           const char* title)
+        { CGAL::draw(arr, gso, title); });
+#endif
+
 #endif
 #endif
 }
