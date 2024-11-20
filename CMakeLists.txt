@@ -39,7 +39,7 @@ if (SKBUILD)  # scikit-build
 
     # Run conan install command
     execute_process(
-        COMMAND conan install . --build=missing
+        COMMAND conan install ${CMAKE_SOURCE_DIR} --build=missing
     )
     set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/Release/generators/conan_toolchain.cmake)
     include(${TOOLCHAIN_FILE})
