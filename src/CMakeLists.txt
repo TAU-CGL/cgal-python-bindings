@@ -125,6 +125,7 @@ if (NOT SKBUILD)
     set(CGALPY_INSTALL_PYTHON_DIR "${CGALPY_INSTALL_LIB_DIR}/Python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/dist-packages"
             CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
 endif ()
+select_basic_viewer()
 select_kinetic_surface_reconstruction() # needs to be before 3D Point Set
 select_point_set_processing() # needs to be before 3D Point Set
 select_three_d_point_set()

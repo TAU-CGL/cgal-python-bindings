@@ -60,6 +60,7 @@ void export_visibility_2(py::module_&);
 void export_cgal(py::module_& m);
 void export_tools(py::module_& m);
 void export_approximate_kernel(py::module_& m);
+void export_basic_viewer(py::module_& m);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
 
@@ -238,4 +239,10 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   auto vis2_m = m.def_submodule("Vis2");
   export_visibility_2(vis2_m);
 #endif
+
+#ifdef CGALPY_BASIC_VIEWER_BINDINGS
+  auto bvr_m = m.def_submodule("Bvr");
+  export_basic_viewer(bvr_m);
+#endif
+
 }

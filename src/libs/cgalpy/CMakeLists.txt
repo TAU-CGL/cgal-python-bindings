@@ -205,6 +205,12 @@ if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
 
 endif ()
 
+# Basic viewer
+if (CGALPY_BASIC_VIEWER_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/basic_viewer_bindings.cpp)
+    list(APPEND CGALPY_MODULES Bvr)
+    set(CGALPY_Bvr_FILTERS [=[{}]=])
+endif ()
 # Bounding volumes
 if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/bounding_volumes_bindings.cpp)
@@ -485,6 +491,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     # 2D Visibility
     if (CGALPY_VISIBILITY_2_BINDINGS)
         get_visibility_2_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Basic viewer
+    if (CGALPY_BASIC_VIEWER_BINDINGS)
+        get_basic_viewer_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
 endif ()

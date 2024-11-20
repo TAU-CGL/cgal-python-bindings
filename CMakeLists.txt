@@ -15,7 +15,7 @@ endif (CMAKE_TOOLCHAIN_FILE)
 
 if (DEFINED ENV{CGALPY_PYPI} OR SKBUILD)
   message(STATUS "Using CGALPY_PYPI")
-  set(CGALPY_DIR "/project/cgal-6.0-beta1")
+  set(CGALPY_DIR "/project/cgal-6.0.1")
   add_definitions(-DCGALPY_PYPI)
 endif ()
 
@@ -46,7 +46,6 @@ if (SKBUILD)  # scikit-build
     # run `conan install .. --build=missing` in `./cmake`.
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-    
     find_package(CGAL REQUIRED)
     find_package(Boost REQUIRED)
 
@@ -102,6 +101,7 @@ option(CGALPY_3D_POINT_SET_BINDINGS "Compile bindings for 3D Point Set")
 option(CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS "Compile bindings for 2D Arrangements on Surfaces")
 option(CGALPY_ALPHA_SHAPE_2_BINDINGS "Compile bindings for 2D Alpha Shapes")
 option(CGALPY_ALPHA_SHAPE_3_BINDINGS "Compile bindings for 3D Alpha Shapes")
+option(CGALPY_BASIC_VIEWER_BINDINGS "Compile bindings for basic viewers")
 option(CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS "Compile bindings for 2D boolean set operations")
 option(CGALPY_BOUNDING_VOLUMES_BINDINGS "Compile bindings for bounding volumes")
 option(CGALPY_CONVEX_HULL_2_BINDINGS "Compile bindings for 2D convex hull")
@@ -129,6 +129,7 @@ option(CGALPY_KERNEL_INTERSECTION_BINDINGS "Compile bindings for intersections")
 option(CGALPY_KERNEL_D_BINDINGS "Compile bindings for dD Kernel")
 option(CGALPY_VISIBILITY_2_BINDINGS "Compile bindings for 2D Visibility")
 
+include(basic_viewer_options)
 include(polygonal_mesh_options) # needs to be before packages using polygonal_mesh
 include(kinetic_surface_reconstruction_options) # needs to be before 3D Point Set
 include(point_set_processing_options) # needs to be before 3D Point Set
@@ -177,4 +178,3 @@ if (NOT SKBUILD)
     set(CPACK_PACKAGE_VERSION_PATCH "5")
     include(CPack)
 endif ()
-
