@@ -17,12 +17,18 @@
 namespace bvr {
 
 using My_ds_params = Ds_params<CGALPY_BVR_DATA_STRUCTURE>;
+using Ds = My_ds_params::Ds;
+using Vertex_descriptor = My_ds_params::Vertex_descriptor;
+using Edge_descriptor = My_ds_params::Edge_descriptor;
+using Face_descriptor = My_ds_params::Face_descriptor;
+using Volume_descriptor = My_ds_params::Volume_descriptor;
+
 using Graphics_scene_options =
-  CGAL::Graphics_scene_options<My_ds_params::Ds,
-                               My_ds_params::VertexDescriptor,
-                               My_ds_params::EdgeDescriptor,
-                               My_ds_params::FaceDescriptor,
-                               My_ds_params::VolumeDescriptor>;
+  CGAL::Graphics_scene_options<Ds,
+                               Vertex_descriptor,
+                               Edge_descriptor,
+                               Face_descriptor,
+                               Volume_descriptor>;
 }
 
 #endif
