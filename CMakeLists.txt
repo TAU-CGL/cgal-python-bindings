@@ -13,12 +13,6 @@ if (CMAKE_TOOLCHAIN_FILE)
     include(${CMAKE_TOOLCHAIN_FILE})
 endif (CMAKE_TOOLCHAIN_FILE)
 
-if (DEFINED ENV{CGALPY_PYPI} OR SKBUILD)
-  message(STATUS "Using CGALPY_PYPI")
-  set(CGALPY_DIR "/project/cgal-6.0.1")
-  add_definitions(-DCGALPY_PYPI)
-endif ()
-
 if (SKBUILD)  # scikit-build
     # this block was added for scikit-build, but should also be fine for
     # manual builds.
@@ -43,11 +37,19 @@ if (SKBUILD)  # scikit-build
     # PRO: Simple option that is compatible with scikit-build. Can work without conan.
     # CON: Difficult if you want to use changing conan settings.
 
-    # run `conan install .. --build=missing` in `./cmake`.
+    # Run conan install command
+    execute_process(
+        COMMAND conan install . --build=missing
+    )
+    set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/Release/generators/conan_toolchain.cmake)
+    include(${TOOLCHAIN_FILE})
+
+    
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
     find_package(CGAL REQUIRED)
     find_package(Boost REQUIRED)
+    include_directories(${cgal_INCLUDE_DIRS_RELEASE})
 
     # ~~~~~~~~~ nanobind  ~~~~~~~~~~~~~~~~~~
     # The following part is copied from
