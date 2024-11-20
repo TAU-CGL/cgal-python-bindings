@@ -65,6 +65,7 @@ void export_arr_segment_traits_2(py::module_& m) {
   traits_c
     .def("is_in_x_range_2_object", &Gt::is_in_x_range_2_object)
     .def("is_in_y_range_2_object", &Gt::is_in_y_range_2_object)
+    .def("construct_curve_2_object", &Gt::construct_curve_2_object)
     ;
 
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
