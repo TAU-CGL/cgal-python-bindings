@@ -18,6 +18,7 @@
 #include <nanobind/stl/optional.h>
 #include <nanobind/stl/pair.h>
 #include <nanobind/stl/tuple.h>
+#include <nanobind/make_iterator.h>
 
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h> // needed for a type
@@ -42,7 +43,6 @@
 #include "CGALPY/export_mesh_helpers.hpp"
 #include "CGALPY/generator_functions.hpp"
 #include "CGALPY/export_mesh_partitioning_operations.hpp"
-#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -179,24 +179,44 @@ auto make_triangle(Polyhedron_3& prn, const typename Polyhedron_3::Point& p1,
 /// @{
 
 //
-py::object my_vertices(const Polyhedron_3& prn)
-{ return make_iterator(prn.vertices_begin(), prn.vertices_end()); }
+auto my_vertices(const Polyhedron_3& prn) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  return py::make_iterator<ri>(py::type<Polyhedron_3::Vertex_const_iterator>(),
+                               "Vertex_iterator",
+                               prn.vertices_begin(), prn.vertices_end());
+}
 
 //
-py::object my_halfedges(const Polyhedron_3& prn)
-{ return make_iterator(prn.halfedges_begin(), prn.halfedges_end()); }
+auto my_halfedges(const Polyhedron_3& prn) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  return py::make_iterator<ri>(py::type<Polyhedron_3::Halfedge_const_iterator>(),
+                               "Halfedge_iterator",
+                               prn.halfedges_begin(), prn.halfedges_end());
+}
 
 //
-py::object my_edges(const Polyhedron_3& prn)
-{ return make_iterator(prn.edges_begin(), prn.edges_end()); }
+auto my_edges(const Polyhedron_3& prn) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  return py::make_iterator<ri>(py::type<Polyhedron_3::Edge_const_iterator>(),
+                               "Edge_iterator",
+                               prn.edges_begin(), prn.edges_end());
+}
 
 //
-py::object my_faces(const Polyhedron_3& prn)
-{ return make_iterator(prn.facets_begin(), prn.facets_end()); }
+auto my_faces(const Polyhedron_3& prn) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  return py::make_iterator<ri>(py::type<Polyhedron_3::Face_const_iterator>(),
+                               "Face_iterator",
+                               prn.facets_begin(), prn.facets_end());
+}
 
 //
-py::object my_planes(const Polyhedron_3& prn)
-{ return make_iterator(prn.planes_begin(), prn.planes_end()); }
+auto my_planes(const Polyhedron_3& prn) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  return py::make_iterator<ri>(py::type<Polyhedron_3::Plane_const_iterator>(),
+                               "Plane_iterator",
+                               prn.planes_begin(), prn.planes_end());
+}
 
 //
 auto halfedges_around_facet(const Face& f)
