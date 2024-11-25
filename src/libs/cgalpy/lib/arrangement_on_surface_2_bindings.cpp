@@ -487,7 +487,14 @@ remove_curve_with_history(Arrangement_on_surface_with_history_2& arr,
 /// \name Aos With History Iterators
 /// @{
 
-//
+//!
+std::size_t
+number_of_originating_curves(const Arrangement_on_surface_with_history_2& arr_wh,
+                             Halfedge& h) {
+  return arr_wh.number_of_originating_curves(Halfedge_handle(&h));
+}
+
+//!
 py::object
 originating_curves(const Arrangement_on_surface_with_history_2& arr_wh,
                    Halfedge& e) {
@@ -495,11 +502,11 @@ originating_curves(const Arrangement_on_surface_with_history_2& arr_wh,
                        arr_wh.originating_curves_end(Halfedge_handle(&e)));
 }
 
-//
+//!
 py::object curves(const Arrangement_on_surface_with_history_2& arr_wh)
 { return make_iterator(arr_wh.curves_begin(), arr_wh.curves_end()); }
 
-//
+//!
 py::object induced_edges(const Arrangement_on_surface_with_history_2& arr_wh,
                          const Arrangement_on_surface_with_history_2::
                          Curve_halfedges& ch) {
@@ -509,7 +516,7 @@ py::object induced_edges(const Arrangement_on_surface_with_history_2& arr_wh,
                        arr_wh.induced_edges_end(Cch(&ch)));
 }
 
-//
+//!
 Arrangement_on_surface_with_history_2::Size
 number_of_induced_edges(const Arrangement_on_surface_with_history_2& arr,
                         const Arrangement_on_surface_with_history_2::
@@ -762,7 +769,7 @@ void export_aos_with_history(py::module_& m) {
   awh_c.def(py::init<>())
     .def(py::init<const Aos_wh&>())
     .def(py::init<const Gt*>())
-    .def("number_of_originating_curves", &Aos_wh::number_of_originating_curves)
+    .def("number_of_originating_curves", &aos2::number_of_originating_curves)
     .def("originating_curves", &aos2::originating_curves, py::keep_alive<0, 1>())
     .def("number_of_curves", &Aos_wh::number_of_curves)
     .def("curves", &aos2::curves, py::keep_alive<0, 1>())
@@ -789,7 +796,7 @@ void export_aos_with_history(py::module_& m) {
 
   //! \todo Why the f... reference_internal doesn't work?
   m.def("insert", &aos2::insert_curves_with_history)
-    .def("insert_curve", &aos2::insert_cv_with_history, ref)
+    .def("insert", &aos2::insert_cv_with_history, ref)
     .def("remove_curve", &aos2::remove_curve_with_history)
     ;
 }
