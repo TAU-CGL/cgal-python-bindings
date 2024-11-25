@@ -7,6 +7,11 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
+#include <nanobind/stl/string.h>
+#include <nanobind/stl/vector.h>
+
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/basic.h>
 #include <CGAL/Mesh_constant_domain_field_3.h>
@@ -15,12 +20,7 @@
 #include <CGAL/GMP/Gmpz_type.h>
 #include <CGAL/GMP/Gmpq_type.h>
 
-#include <nanobind/nanobind.h>
-#include <nanobind/operators.h>
-#include <nanobind/stl/string.h>
-#include <nanobind/stl/vector.h>
-
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/to_string.hpp"
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_type.hpp"
@@ -1223,11 +1223,11 @@ void export_kernel_module(py::module_& m) {
         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
   /// @}
 
-  using PointRange = typename std::vector<Point_3>;
-  using PolygonRange = typename std::vector<std::vector<std::size_t>>;
+  using Pnt_range = typename std::vector<Point_3>;
+  using Png_range = typename std::vector<std::vector<std::size_t>>;
 
   m.def("read_polygon_soup",
-        [](const std::string& fname, PointRange& points, PolygonRange& polygons,
+        [](const std::string& fname, Pnt_range& points, Png_range& polygons,
            const py::dict& np = py::dict()) {
           return CGAL::IO::read_polygon_soup(fname, points, polygons,
                                              internal::parse_named_parameters(np));
@@ -1264,8 +1264,8 @@ void export_kernel_module(py::module_& m) {
      (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL))
   m.def("write_polygon_soup",
-        [](const std::string& fname, const PointRange& points,
-           const PolygonRange& polygons, const py::dict& np = py::dict()) {
+        [](const std::string& fname, const Pnt_range& points,
+           const Png_range& polygons, const py::dict& np = py::dict()) {
           return CGAL::IO::write_polygon_soup(fname, points, polygons,
                                               internal::parse_named_parameters(np));
         },

@@ -38,7 +38,7 @@
 #include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/get.hpp"
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/export_mesh_selection_functions.hpp"
 #include "CGALPY/export_mesh_helpers.hpp"
 #include "CGALPY/generator_functions.hpp"
@@ -697,8 +697,8 @@ void export_polyhedron_3(py::module_& m) {
   // Iterators and Circulators
   boost_utils::define_boost_iterators<py::module_, Prn>(m);
 
-  // Selection Functions
-  boost_utils::define_boost_selection_functions<py::module_, Prn, ebmap_type, fbmap_type, vbmap_type>(m);
+  // // Selection Functions
+  // boost_utils::define_boost_selection_functions<py::module_, Prn, ebmap_type, fbmap_type, vbmap_type>(m);
 
   // Helper Functions
   boost_utils::define_boost_helpers<py::module_, Prn, Prn>(m);

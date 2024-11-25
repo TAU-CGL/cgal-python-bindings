@@ -4,14 +4,15 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
 
 #include <stdexcept>
 
 #include <CGAL/Mesh_facet_topology.h>
 
 #include "CGALPY/helpers.hpp"
-#include "CGALPY/internal.hpp"
 #include "CGALPY/kernel_type.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 

@@ -1,3 +1,11 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #include <nanobind/nanobind.h>
 #include <nanobind/make_iterator.h>
 #include <nanobind/stl/string.h>
@@ -11,48 +19,65 @@
 
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/add_insertion.hpp"
-#include "CGALPY/internal.hpp"
 #include "CGALPY/kernel_type.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
-template <typename Point_set, typename Property, typename C, typename Point_set_nb>
+template <typename Point_set, typename Property, typename C,
+          typename Point_set_nb>
 auto define_property_map(C& c, Point_set_nb& ptst, const std::string& name) {
-  using Property_map = typename Point_set::template Property_map<Property>;
+  using Pm = typename Point_set::template Property_map<Property>;
 
-  py::class_<Property_map> pm(c, ("Property_map_" + name).c_str());
+  py::class_<Pm> pm(c, ("Property_map_" + name).c_str());
   pm.def(py::init<>())
-    .def("reset", &Property_map::reset)
-    .def("data", &Property_map::data)
-    .def("transfer", [](Property_map& pm, const Property_map& other) { pm.transfer(other); },
+    .def("reset", &Pm::reset)
+    .def("data", &Pm::data)
+    .def("transfer", [](Pm& pm, const Pm& other) { pm.transfer(other); },
          py::arg("other"))
-    .def("transfer_from_to", [](Property_map& pm, const Property_map& other, std::size_t from, std::size_t to) { pm.transfer(other, from, to); },
+    .def("transfer_from_to",
+         [](Pm& pm, const Pm& other, std::size_t from, std::size_t to)
+         { pm.transfer(other, from, to); },
          py::arg("other"), py::arg("from"), py::arg("to"))
-    .def("__iter__", [](Property_map& pm) { return py::make_iterator(py::type<typename Property_map::iterator>(), "Iterator", pm.begin(), pm.end()); },
+    .def("__iter__",
+         [](Pm& pm) {
+           return py::make_iterator(py::type<typename Pm::iterator>(),
+                                    "Iterator", pm.begin(), pm.end());
+         },
          py::keep_alive<0, 1>())
-    .def("__getitem__", [](Property_map& pm, std::size_t i) { return pm[i]; },
+    .def("__getitem__", [](Pm& pm, std::size_t i) { return pm[i]; },
          py::arg("index"))
-    .def("__setitem__", [](Property_map& pm, std::size_t i, const Property& p) { pm[i] = p; },
+    .def("__setitem__",
+         [](Pm& pm, std::size_t i, const Property& p) { pm[i] = p; },
          py::arg("index"), py::arg("value"))
-    .def("__getitem__", [](Property_map& pm, const typename Point_set::iterator& it) { return pm[*it]; },
+    .def("__getitem__",
+         [](Pm& pm, const typename Point_set::iterator& it) { return pm[*it]; },
          py::arg("index"))
-    .def("__setitem__", [](Property_map& pm, const typename Point_set::iterator& it, const Property& p) { pm[*it] = p; },
+    .def("__setitem__",
+         [](Pm& pm, const typename Point_set::iterator& it, const Property& p)
+         { pm[*it] = p; },
          py::arg("index"), py::arg("value"))
     ;
 
-  ptst.def(("add_property_map_" + name).c_str(), &Point_set::template add_property_map<Property>,
-           py::arg("name") = std::string(), py::arg("default_value") = Property())
-    .def(("property_map_" + name).c_str(), &Point_set::template property_map<Property>,
+  ptst.def(("add_property_map_" + name).c_str(),
+           &Point_set::template add_property_map<Property>,
+           py::arg("name") = std::string(),
+           py::arg("default_value") = Property())
+    .def(("property_map_" + name).c_str(),
+         &Point_set::template property_map<Property>,
          py::arg("name") = std::string())
-    .def(("has_property_map_" + name).c_str(), &Point_set::template has_property_map<Property>,
+    .def(("has_property_map_" + name).c_str(),
+         &Point_set::template has_property_map<Property>,
          py::arg("name") = std::string())
-    .def("remove_property_map", &Point_set::template remove_property_map<Property>,
+    .def("remove_property_map",
+         &Point_set::template remove_property_map<Property>,
          py::arg("prop"))
     ;
 
   return pm;
 }
 
+//!
 template <typename Range, typename C>
 auto define_range(C& c, const std::string& name) {
   py::class_<Range> r(c, name.c_str());
@@ -64,6 +89,7 @@ auto define_range(C& c, const std::string& name) {
   return r;
 }
 
+//!
 template <typename Push_property_map, typename C>
 auto define_push_property_map(C& c, const std::string& name) {
   py::class_<Push_property_map> pm(c, name.c_str());
@@ -73,6 +99,7 @@ auto define_push_property_map(C& c, const std::string& name) {
   return pm;
 }
 
+//!
 template <typename Point_set_3_index, typename C>
 auto export_point_set_index(C& m, const std::string& name) {
     auto ptst_idx = py::class_<Point_set_3_index>(m, ("Point_set_3_" + name + "_index").c_str())
@@ -100,6 +127,7 @@ auto export_point_set_index(C& m, const std::string& name) {
   return ptst_idx;
 }
 
+//!
 template <typename Point_set_3_iterator, typename C>
 auto export_point_set_3_iterator(C& m) {
   py::class_<Point_set_3_iterator> ptst_it(m, "Point_set_3_iterator");
@@ -112,7 +140,7 @@ auto export_point_set_3_iterator(C& m) {
   return ptst_it;
 }
 
-
+//!
 template <typename Pnt, typename Vec, typename C>
 auto export_point_set_3(C& c, const std::string& name) {
   using Point_set_3_index = CGAL::internal::Point_set_3_index<Pnt, Vec>;
@@ -152,7 +180,7 @@ auto export_point_set_3(C& c, const std::string& name) {
     // extraction
     // insertion
     // insertion
-    
+
     // Member Functions
     .def("add_normal_map", [](Pt_set& ps, const Vec& default_value=Vec()) { ps.add_normal_map(default_value); },
          py::arg("default_value")=Vector_3(0, 0, 0),
@@ -403,7 +431,7 @@ auto export_point_set_3(C& c, const std::string& name) {
     .def("size", &Pt_set::size)
     .def("empty", &Pt_set::empty)
     .def("info", &Pt_set::info)
-    
+
     // Other
     .def("__iter__", [](Pt_set& ps) { return py::make_iterator(py::type<typename Pt_set::iterator>(), "Iterator", ps.begin(), ps.end()); },
          py::keep_alive<0, 1>())
@@ -535,7 +563,4 @@ void export_3d_point_set(py::module_& m) {
   auto ppm2 = define_push_property_map<Pt_set_3::template Push_property_map<Point_map_2>>(ptst_2, "Point_push_map_2");
   auto vpm2 = define_push_property_map<Pt_set_3::template Push_property_map<Vector_map_2>>(ptst_2, "Vector_push_map_2");
   export_point_set_iterator<Pnt_2, Vec_2>(ptst_2, "2");
-
-
 }
-

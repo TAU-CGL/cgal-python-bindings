@@ -1,14 +1,23 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #ifndef CGALPY_HELPERS_HPP
 #define CGALPY_HELPERS_HPP
 
-#include <nanobind/nanobind.h>
 #include <vector>
+
+#include <nanobind/nanobind.h>
 
 namespace py = nanobind;
 
 namespace pmp {
 
-// helper
+//! helper
 template <typename T>
 py::list vec2list(const T& vec) {
   py::list retv;
@@ -18,6 +27,7 @@ py::list vec2list(const T& vec) {
   return retv;
 }
 
+//!
 template <typename T>
 std::vector<T> list2vec(const py::list& list) {
   std::vector<T> retv;
@@ -37,4 +47,4 @@ std::vector<T> list2vec(const py::list& list) {
 
 } // namespace pmp
 
-#endif // CGALPY_HELPERS_HPP
+#endif

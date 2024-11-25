@@ -1,3 +1,11 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/pair.h>
@@ -28,7 +36,7 @@
 #include <CGAL/IO/read_points.h>
 #include <CGAL/IO/write_points.h>
 
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/kernel_type.hpp"
 
 namespace py = nanobind;
@@ -1113,7 +1121,7 @@ void export_point_set_processing(py::module_& m) {
         using PointVectorPair = std::pair<Kernel::Point_3, Kernel::Vector_3>;
         using Point_map = CGAL::First_of_pair_property_map<PointVectorPair>;
         using Normal_map = CGAL::Second_of_pair_property_map<PointVectorPair>;
-        
+
         std::vector<PointVectorPair> output;
         bool success = CGAL::IO::read_points(fname, std::back_inserter(output), internal::parse_named_parameters(np)
                                              .point_map(Point_map())

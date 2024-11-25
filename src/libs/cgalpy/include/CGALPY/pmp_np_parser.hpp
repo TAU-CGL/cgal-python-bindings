@@ -1,3 +1,11 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #ifndef PMP_NP_PARSER_HPP
 #define PMP_NP_PARSER_HPP
 
@@ -9,7 +17,7 @@
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 
 #include "CGALPY/kernel_types.hpp"
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
@@ -20,12 +28,14 @@ namespace PMP = CGAL::Polygon_mesh_processing;
 
 using Point = Kernel::Point_3;
 
+//!
 template <typename K>
 Named_params handle_vertex_principal_curvatures_and_directions(const py::handle& vpcad_handle, Named_params cgal_parameters) {
   auto vpcad = py::cast<PMP::Principal_curvatures_and_directions<K>>(vpcad_handle);
   return cgal_parameters.vertex_principal_curvatures_and_directions(std::ref(vpcad));
 }
 
+//!
 template<typename Mesh>
 auto parse_pmp_np(const py::dict& params, Named_params cgal_parameters = CGAL::parameters::verbose(false)) {
   using Vd = typename boost::graph_traits<Mesh>::vertex_descriptor;
@@ -82,8 +92,8 @@ auto parse_pmp_np(const py::dict& params, Named_params cgal_parameters = CGAL::p
       //   cgal_parameters = cgal_parameters.vertex_mean_curvature_map(py::cast<typename Mesh::template Property_map<Vd, Ft>>(item.second));
       //   break;
       // // case internal::Hash("vertex_principal_curvatures_and_directions_map"): // polyhedron can use that too
-        
-      
+
+
 
 
       // default:
@@ -98,5 +108,4 @@ auto parse_pmp_np(const py::dict& params, Named_params cgal_parameters = CGAL::p
 
 } // namespace internal
 
-#endif // PMP_NP_PARSER_HPP
-
+#endif

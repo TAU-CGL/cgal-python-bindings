@@ -1,10 +1,18 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 
 #include <CGAL/Point_set_3.h>
 #include <CGAL/Shape_detection/Region_growing.h>
 
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/kernel_type.hpp"
 
 namespace py = nanobind;
@@ -19,7 +27,8 @@ void export_region_growing(py::module_& m) {
   using Point_map   = typename Input_range::Point_map;
   using Normal_map  = typename Input_range::Vector_map;
   // Point Set
-  py::class_<PS::K_neighbor_query<Kernel_, Point_set::Index, Point_set::Point_map>>(m, "K_neighbor_query_3",
+  py::class_<PS::K_neighbor_query<Kernel_, Point_set::Index,
+                                  Point_set::Point_map>>(m, "K_neighbor_query_3",
     "K nearest neighbors search in a set of 3D points.\n"
     "This class returns the K nearest neighbors of a query point in a point set.")
     .def(py::init<const Point_set&>(),
@@ -29,8 +38,9 @@ void export_region_growing(py::module_& m) {
          "• input_range: range of points to be indexed\n\n"
          "Precondition\n"
          "• input_range.size() > 0\n")
-         
-    .def_static("init_with_params", [](const Point_set& ps, const py::dict& params) {
+
+    .def_static("init_with_params", [](const Point_set& ps,
+                                       const py::dict& params) {
         return PS::K_neighbor_query<Kernel_, Point_set::Index, Point_set::Point_map>(ps, internal::parse_named_parameters(params));
     },
       py::arg("ps"), py::arg("params"),
@@ -40,7 +50,8 @@ void export_region_growing(py::module_& m) {
          "Precondition\n"
          "• input_range.size() > 0\n"
          "• K > 0\n")
-    .def("__call__", &PS::K_neighbor_query<Kernel_, Point_set::Index, Point_set::Point_map>::operator(),
+    .def("__call__", &PS::K_neighbor_query<Kernel_, Point_set::Index,
+         Point_set::Point_map>::operator(),
          "implements NeighborQuery::operator()().\n"
          "This operator finds the K closest points to the point around the query point query using a Kd-tree. These references to the points are returned in neighbors.\n\n"
          "Parameters\n"
@@ -48,7 +59,8 @@ void export_region_growing(py::module_& m) {
          "• neighbors: Items of points, which are neighbors of the query point")
     ;
 
-  using Lsqcf_ps3 = PS::Least_squares_circle_fit_region<Kernel_, Point_set::Index, Point_set::Point_map, Point_set::Vector_map>;
+  using Lsqcf_ps3 = PS::Least_squares_circle_fit_region<Kernel_,
+                                                        Point_set::Index, Point_set::Point_map, Point_set::Vector_map>;
   py::class_<Lsqcf_ps3>(m, "Least_squares_circle_fit_region_3",
     "Region type based on the quality of the least squares circle fit applied to 2D points.\n"
     "This class fits a circle to chunks of points in a 2D point set and controls the quality of this fit. If all quality conditions are satisfied, the chunk is accepted as a valid region, otherwise rejected.")

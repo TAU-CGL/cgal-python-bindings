@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <CGAL/Polygon_mesh_processing/intersection.h>
+
 #define CGAL_USE_BASIC_VIEWER
 
 #include <stdexcept>
@@ -53,7 +54,7 @@
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/HFDefault_visitor.hpp"
 #include "CGALPY/pmp_np_parser.hpp"
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/Polyhedral_envelope.hpp"
 #include "CGALPY/pmp_helpers.hpp"
 
@@ -1744,7 +1745,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np") = py::dict());
   m.def("volume", &pmp::volume<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict());
-  
+
   // Orientation Functions
 
 

@@ -1,3 +1,11 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #ifndef CGALPY_BOOST_UTILS_EXPORT_MESH_HELPERS_HPP
 #define CGALPY_BOOST_UTILS_EXPORT_MESH_HELPERS_HPP
 
@@ -7,14 +15,16 @@
 #include <CGAL/boost/graph/copy_face_graph.h>
 #include <CGAL/boost/graph/helpers.h>
 
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
 namespace boost_utils {
 
 template<typename Graph, typename Graph2>
-auto my_copy_face_graph(const Graph& sm, Graph2& tm, const py::dict& np1 = py::dict(), const py::dict& np2 = py::dict()) {
+auto my_copy_face_graph(const Graph& sm, Graph2& tm,
+                        const py::dict& np1 = py::dict(),
+                        const py::dict& np2 = py::dict()) {
   // TODO: handle nps
   return CGAL::copy_face_graph<Graph, Graph>(sm, tm, internal::parse_named_parameters(np1), internal::parse_named_parameters(np2));
 }
@@ -131,5 +141,4 @@ C define_boost_helpers(py::module_& m) {
 
 } // namespace boost_utils
 
-#endif // CGALPY_BOOST_UTILS_EXPORT_MESH_HELPERS_HPP
-
+#endif

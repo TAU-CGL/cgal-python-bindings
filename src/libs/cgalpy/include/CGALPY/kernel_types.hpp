@@ -102,4 +102,4 @@ const char* kernel_doc() {
 #endif
 }
 
-#endif //CGALPY_KERNEL_TYPES_HPP
+#endif

@@ -366,7 +366,7 @@ endif ()
 include_directories(include)
 
 # Internal dependencies
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/internal.cpp)
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/parse_named_parameters.cpp)
 
 # Add dependencies
 link_directories(${Boost_LIBRARY_DIRS})

@@ -1,10 +1,17 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #ifndef CGALPY_POLYHEDRAL_ENVELOPE_HPP
 #define CGALPY_POLYHEDRAL_ENVELOPE_HPP
 
 #include <nanobind/nanobind.h>
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/pmp_helpers.hpp"
-#include "CGALPY/internal.hpp"
 #include <CGAL/Polyhedral_envelope.h>
 
 namespace py = nanobind;

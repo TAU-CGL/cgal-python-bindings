@@ -41,7 +41,7 @@
 #include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/get.hpp"
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/generator_functions.hpp"
 #include "CGALPY/export_mesh_selection_functions.hpp"
 #include "CGALPY/export_mesh_helpers.hpp"
@@ -402,7 +402,7 @@ C add_maps(C& c) {
     .def("properties_face", [](const Sm& sm) { return sm.template properties<Fi>(); },
         "returns a vector with all strings that describe properties with the key type `Face_index`.")
     ;
-    
+
   add_generic_maps<C, Sm, std::string>(c, "string");
   add_generic_maps<C, Sm, CGAL::IO::Color>(c, "color");
   add_generic_maps<C, Sm, typename Sm::Point>(c, "point");
@@ -437,7 +437,7 @@ C add_maps(C& c) {
   c.def("remove_property_maps_face", &Sm::template remove_property_maps<Fi>,
         "removes all property maps for the index type `Face_index` added by a call to `add_property_map()`.\n"
         "The memory allocated for those property maps is freed.");
-  
+
   return c;
 }
 
@@ -507,7 +507,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       ;
   }
 
-  // 
+  //
 
   // Halfedge_index
   using Sm_hi = typename CGAL::SM_Index<Hi>;
@@ -798,7 +798,7 @@ void export_surface_mesh(py::module_& m) {
   // Type: a class model of WritablePropertyMap with the value type of RegionMap as key and GeomTraits::Plane_3 or GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
   // Default: None
 
-  
+
   py::class_<boost::vector_property_map<Vector_3>>(m, "Vector_vector_3_map")
     .def(py::init<>())
     ;

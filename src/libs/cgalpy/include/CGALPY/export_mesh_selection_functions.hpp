@@ -1,3 +1,11 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #ifndef CGALPY_BOOST_UTILS_EXPORT_MESH_SELECTION_FUNCTIONS_HPP
 #define CGALPY_BOOST_UTILS_EXPORT_MESH_SELECTION_FUNCTIONS_HPP
 
@@ -7,14 +15,15 @@
 
 #include <CGAL/boost/graph/selection.h>
 
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
 namespace boost_utils {
 
 
-template <typename C, typename Graph, typename IsEdgeSelectedPMap, typename IsFaceSelectedPMap, typename IsVertexSelectedPMap>
+template <typename C, typename Graph, typename IsEdgeSelectedPMap,
+          typename IsFaceSelectedPMap, typename IsVertexSelectedPMap>
 C define_boost_selection_functions(py::module_& m) {
   using EBMap = IsEdgeSelectedPMap;
   using FBMap = IsFaceSelectedPMap;
@@ -27,11 +36,14 @@ C define_boost_selection_functions(py::module_& m) {
   using FR = std::vector<Face>;
   using VR = std::vector<Vertex>;
 
-  m.def("expand_edge_selection", [](const ER& selection, Graph& fg, unsigned int k, EBMap& is_selected) {
-    std::vector<Edge> out;
-    CGAL::expand_edge_selection(selection, fg, k, is_selected, std::back_inserter(out));
-    return out;
-  }, py::arg("selection"), py::arg("fg"), py::arg("k"), py::arg("is_selected"),
+  m.def("expand_edge_selection",
+        [](const ER& selection, Graph& fg, unsigned int k, EBMap& is_selected) {
+          std::vector<Edge> out;
+          CGAL::expand_edge_selection(selection, fg, k,
+                                      is_selected, std::back_inserter(out));
+          return out;
+        }, py::arg("selection"), py::arg("fg"), py::arg("k"),
+        py::arg("is_selected"),
         "expands a selection of edges from edges adjacent to a non-selected edge.\n"
         "This process is applied k times considering all edges added in the previous steps. Two edges are said to be adjacent if they are incident to the same face or vertex. Each new edge added in the selection is added exactly once in out.\n"
         "Parameters\n"
@@ -162,8 +174,8 @@ C define_boost_selection_functions(py::module_& m) {
 // 		HalfedgeGraph &  	fg,
 // 		unsigned int  	k,
 // 		IsEdgeSelectedPMap  	is_selected,
-// 		OutputIterator  	out 
-// 	) 		
+// 		OutputIterator  	out
+// 	)
 //
 // #include <CGAL/boost/graph/selection.h>
 //
@@ -190,8 +202,8 @@ C define_boost_selection_functions(py::module_& m) {
 // 		FaceGraph &  	fg,
 // 		unsigned int  	k,
 // 		IsFaceSelectedPMap  	is_selected,
-// 		OutputIterator  	out 
-// 	) 		
+// 		OutputIterator  	out
+// 	)
 //
 // #include <CGAL/boost/graph/selection.h>
 //
@@ -216,8 +228,8 @@ C define_boost_selection_functions(py::module_& m) {
 // template<class TriangleMesh , class FaceRange , class IsSelectedMap >
 // void CGAL::expand_face_selection_for_removal 	( 	const FaceRange &  	faces_to_be_deleted,
 // 		TriangleMesh &  	tm,
-// 		IsSelectedMap  	is_selected 
-// 	) 		
+// 		IsSelectedMap  	is_selected
+// 	)
 //
 // #include <CGAL/boost/graph/selection.h>
 //
@@ -241,8 +253,8 @@ C define_boost_selection_functions(py::module_& m) {
 // 		HalfedgeGraph &  	fg,
 // 		unsigned int  	k,
 // 		IsVertexSelectedPMap  	is_selected,
-// 		OutputIterator  	out 
-// 	) 		
+// 		OutputIterator  	out
+// 	)
 //
 // #include <CGAL/boost/graph/selection.h>
 //
@@ -269,8 +281,8 @@ C define_boost_selection_functions(py::module_& m) {
 // 		HalfedgeGraph &  	fg,
 // 		unsigned int  	k,
 // 		IsEdgeSelectedPMap  	is_selected,
-// 		OutputIterator  	out 
-// 	) 		
+// 		OutputIterator  	out
+// 	)
 //
 // #include <CGAL/boost/graph/selection.h>
 //
@@ -297,8 +309,8 @@ C define_boost_selection_functions(py::module_& m) {
 // 		FaceGraph &  	fg,
 // 		unsigned int  	k,
 // 		IsFaceSelectedPMap  	is_selected,
-// 		OutputIterator  	out 
-// 	) 		
+// 		OutputIterator  	out
+// 	)
 //
 // #include <CGAL/boost/graph/selection.h>
 //
@@ -326,8 +338,8 @@ C define_boost_selection_functions(py::module_& m) {
 // 		HalfedgeGraph &  	fg,
 // 		unsigned int  	k,
 // 		IsVertexSelectedPMap  	is_selected,
-// 		OutputIterator  	out 
-// 	) 		
+// 		OutputIterator  	out
+// 	)
 //
 // #include <CGAL/boost/graph/selection.h>
 //
@@ -353,8 +365,8 @@ C define_boost_selection_functions(py::module_& m) {
 // void CGAL::regularize_face_selection_borders 	( 	TriangleMesh &  	mesh,
 // 		IsSelectedMap  	is_selected,
 // 		double  	weight,
-// 		const NamedParameters &  	np = parameters::default_values() 
-// 	) 		
+// 		const NamedParameters &  	np = parameters::default_values()
+// 	)
 //
 // #include <CGAL/boost/graph/selection.h>
 //
@@ -383,7 +395,7 @@ C define_boost_selection_functions(py::module_& m) {
 //         Default: boost::get(CGAL::vertex_point, tm)
 //         Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in TriangleMesh.
 //
-//     	
+//
 //
 //     face_index_map
 //
@@ -391,7 +403,7 @@ C define_boost_selection_functions(py::module_& m) {
 //         Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and std::size_t as value type
 //         Default: an automatically indexed internal map
 //
-//     	
+//
 //
 //     prevent_unselection
 //
@@ -400,7 +412,7 @@ C define_boost_selection_functions(py::module_& m) {
 //         Default: false
 //         Extra: The geometric traits class must be compatible with the vertex point type.
 //
-//     	
+//
 //
 //     geom_traits
 //
@@ -409,7 +421,7 @@ C define_boost_selection_functions(py::module_& m) {
 //         Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits
 //         Extra: The geometric traits class must be compatible with the vertex point type.
 //
-//     	
+//
 //
 // Examples
 //     BGL_graphcut/face_selection_borders_regularization_example.cpp.
@@ -418,8 +430,8 @@ C define_boost_selection_functions(py::module_& m) {
 // template<class HalfedgeRange , class FaceGraph , class OutputIterator >
 // OutputIterator CGAL::select_incident_faces 	( 	const HalfedgeRange &  	hedges,
 // 		FaceGraph &  	fg,
-// 		OutputIterator  	out 
-// 	) 		
+// 		OutputIterator  	out
+// 	)
 //
 // #include <CGAL/boost/graph/selection.h>
 //

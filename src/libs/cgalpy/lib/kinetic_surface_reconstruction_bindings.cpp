@@ -1,3 +1,11 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #include <nanobind/nanobind.h>
 #include <nanobind/make_iterator.h>
 #include <nanobind/stl/string.h>
@@ -10,7 +18,7 @@
 #include <CGAL/Kinetic_surface_reconstruction_3.h>
 #include <CGAL/KSR_3/Graphcut.h>
 
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/kernel_types.hpp"
 
 namespace py = nanobind;
@@ -22,8 +30,8 @@ void export_kinetic_surface_reconstruction(py::module_& m) {
   using Point_3 = typename Kernel_::Point_3;
   using Plane_3 = typename Kernel_::Plane_3;
   using Point_range = CGAL::Point_set_3<Point_3>;
-  using Point_map    = typename Point_range::Point_map;
-  using Normal_map   = typename Point_range::Vector_map;
+  using Point_map = typename Point_range::Point_map;
+  using Normal_map = typename Point_range::Vector_map;
   using KSP = CGAL::Kinetic_space_partition_3<Kernel, Intersection_kernel>;
   using KSR = CGAL::Kinetic_surface_reconstruction_3<Kernel, Point_range, Point_map, Normal_map>;
   using Graphcut = CGAL::KSR_3::Graphcut<KSP>;

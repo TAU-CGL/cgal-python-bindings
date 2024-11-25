@@ -1,3 +1,11 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #ifndef CGALPY_GENERATOR_FUNCTIONS_HPP
 #define CGALPY_GENERATOR_FUNCTIONS_HPP
 
@@ -10,7 +18,7 @@
 #include <CGAL/Point_3.h>
 #include <CGAL/boost/graph/generators.h>
 
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
@@ -73,7 +81,7 @@ void define_generate_functions(py::module_ &m) {
         py::arg("g"), py::arg("center") = P(0, 0, 0), py::arg("radius") = 1,
         "creates an icosahedron, outward oriented, centered in center and adds it to the graph g."
         );
- 
+
   m.def("make_grid", [](vertices_size_type i, vertices_size_type j, Pm &g, const std::function<P(vertices_size_type, vertices_size_type)> &calculator, bool triangulated = false) {
           // create a struct to hold the calculator
           struct Calculator {

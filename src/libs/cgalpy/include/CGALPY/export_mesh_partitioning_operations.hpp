@@ -1,3 +1,11 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #ifndef CGALPY_EXPORT_MESH_PARTITIONING_OPERATIONS_HPP
 #define CGALPY_EXPORT_MESH_PARTITIONING_OPERATIONS_HPP
 
@@ -9,7 +17,7 @@
 #include <CGAL/boost/graph/alpha_expansion_graphcut.h>
 
 #include "CGALPY/Polyline_visitor.hpp"
-#include "CGALPY/internal.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
@@ -88,4 +96,3 @@ C define_boost_partitioning_operations(C& c) {
 } // namespace boost_utils
 
 #endif // CGALPY_EXPORT_MESH_PARTITIONING_OPERATIONS_HPP
-
