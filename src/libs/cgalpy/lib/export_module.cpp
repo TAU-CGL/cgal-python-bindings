@@ -148,7 +148,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 #endif
 
-#ifdef CGALPY_POINT_SET_PROCESSING_PACKAGE_BINDINGS
+#ifdef CGALPY_POINT_SET_PROCESSING_BINDINGS
   export_point_set_processing(m);
 #endif
 

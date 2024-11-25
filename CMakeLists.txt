@@ -44,7 +44,7 @@ if (SKBUILD)  # scikit-build
     set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/Release/generators/conan_toolchain.cmake)
     include(${TOOLCHAIN_FILE})
 
-    
+
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
     find_package(CGAL REQUIRED)
@@ -113,7 +113,7 @@ option(CGALPY_ENVELOPE_3_BINDINGS "Compile bindings for 3D Envelopes")
 option(CGALPY_POLYHEDRON_3_BINDINGS "Compile bindings for 3D polyhedron")
 option(CGALPY_POLYGON_2_BINDINGS "Compile bindings for 2D polygon")
 option(CGALPY_POLYGON_MESH_PROCESSING_BINDINGS "Compile bindings for polygon mesh processing")
-option(CGALPY_POINT_SET_PROCESSING_PACKAGE_BINDINGS "Compile bindings for point set processing")
+option(CGALPY_POINT_SET_PROCESSING_BINDINGS "Compile bindings for point set processing")
 option(CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS "Compile bindings for surface mesh segmentation")
 option(CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS "Compile bindings for surface mesh simplification")
 option(CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS "Compile bindings for surface mesh skeletonization")
