@@ -23,15 +23,16 @@ endif ()
 # Add modules
 #############
 
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/cgal_bindings.cpp)
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tools_bindings.cpp)
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_bbox_2.cpp)
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_bbox_3.cpp)
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_approximate_kernel.cpp)
+
 # 2-3D Kernel
 if (CGALPY_KERNEL_BINDINGS)
     list(APPEND CGALPY_MODULES Ker)
     set(CGALPY_Ker_FILTERS [=[{}]=])
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/cgal_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tools_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_bbox_2.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_bbox_3.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_approximate_kernel.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
     if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
         set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
