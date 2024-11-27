@@ -37,13 +37,11 @@ if (SKBUILD)  # scikit-build
     # PRO: Simple option that is compatible with scikit-build. Can work without conan.
     # CON: Difficult if you want to use changing conan settings.
 
-    # Run conan install command
-    execute_process(
-        COMMAND conan install ${CMAKE_SOURCE_DIR} --build=missing
-    )
+    # Create a conan2 profile
+    execute_process(COMMAND conan profile detect --exist-ok)
+    execute_process(COMMAND conan install ${CMAKE_SOURCE_DIR} --build=missing)
     set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/Release/generators/conan_toolchain.cmake)
     include(${TOOLCHAIN_FILE})
-
 
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
