@@ -6,12 +6,16 @@ endif()
 if (POLICY CMP0148)
   cmake_policy(SET CMP0148 OLD)
 endif()
-project(cgalpy VERSION "1.0.4" LANGUAGES CXX)
+project(cgalpy VERSION "1.0.4" LANGUAGES CXX) # the pyproject.toml file sets the version
 
 # Include windows toolchain path (if available)
 if (CMAKE_TOOLCHAIN_FILE)
     include(${CMAKE_TOOLCHAIN_FILE})
 endif (CMAKE_TOOLCHAIN_FILE)
+
+if (DEFINED ENV{CGAL_DATA_DIR})
+    set(CGAL_DATA_DIR $ENV{CGAL_DATA_DIR})
+endif ()
 
 if (SKBUILD)  # scikit-build
     # this block was added for scikit-build, but should also be fine for
@@ -59,6 +63,10 @@ if (SKBUILD)  # scikit-build
     # The following line will result in conflicts with conan.
     #  set(Python_INCLUDE_DIR "${PYTHON_INCLUDE_DIR}")
     set(Python_LIBRARIES "${PYTHON_LIBRARY}")
+
+    # Get configuration from config.cmake
+    include(${CMAKE_SOURCE_DIR}/config.cmake)
+
     if (MSVC)
         # MSVC needs a little extra help finding the Python library
         find_package(PythonInterp)
