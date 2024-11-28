@@ -853,15 +853,17 @@ void export_arr(py::module_& m) {
   using Gt = aos2::Geometry_traits_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<Arr, Aos> arr_c(m, "Arrangement_2");
-  arr_c.def(py::init<>())
-    .def(py::init<const Arr&>())
-    .def(py::init<const Gt*>())
-    .def("unbounded_face", &aos2::unbounded_face<Arr>, ri)
-    .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity)
-    ;
+  if (! add_attr<Arr>(m, "Arrangement_2")) {
+    py::class_<Arr, Aos> arr_c(m, "Arrangement_2");
+    arr_c.def(py::init<>())
+      .def(py::init<const Arr&>())
+      .def(py::init<const Gt*>())
+      .def("unbounded_face", &aos2::unbounded_face<Arr>, ri)
+      .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity)
+      ;
 
-  export_arrangement_2_io(arr_c);
+    export_arrangement_2_io(arr_c);
+  }
 
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
@@ -1024,7 +1026,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
   if (! add_attr<Aos>(m, "Arrangement_on_surface_2")) export_aos(m);
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
   using Arr = aos2::Arrangement_2;
-  if (! add_attr<Arr>(m, "Arrangement_2")) export_arr(m);
+  export_arr(m);
 #endif
 
 #if defined(CGALPY_AOS2_WITH_HISTORY)
