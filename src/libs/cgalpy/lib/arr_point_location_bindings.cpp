@@ -17,6 +17,7 @@
 #include <CGAL/Arr_landmarks_point_location.h>
 #include <CGAL/Arr_observer.h>
 
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/arr_point_location_config.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
@@ -32,13 +33,13 @@ inline bool operator==(const py::object a, const py::object b)
 
 namespace aos2 {
 
-typedef typename aos2::Face_const_handle Face_const_handle;
-typedef typename aos2::Halfedge_const_handle Halfedge_const_handle;
-typedef typename aos2::Vertex_const_handle Vertex_const_handle;
+using Face_const_handle = typename aos2::Face_const_handle;
+using Halfedge_const_handle = typename aos2::Halfedge_const_handle;
+using Vertex_const_handle = typename aos2::Vertex_const_handle;
 
-typedef typename CGAL::Arr_point_location_result<Arrangement_on_surface_2>::Type
-  Pl_result;
-typedef typename std::pair<Point_2, Pl_result>                  Pl_query_result;
+using Pl_result =
+  typename CGAL::Arr_point_location_result<Arrangement_on_surface_2>::Type;
+  using Pl_query_result = typename std::pair<Point_2, Pl_result>;
 
 //
 class Point_location_result_visitor {
@@ -98,12 +99,6 @@ py::object ray_shoot_down(PL& pl, const Point_2& p) {
 
 void export_point_location(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
-  using Naive_pl = CGAL::Arr_naive_point_location<Aos>;
-#if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  using Walk_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
-#endif
-  using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
-  using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
   using Aob = CGAL::Arr_observer<Aos>;
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -112,54 +107,66 @@ void export_point_location(py::module_& m) {
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  py::class_<Landmarks_pl>(m, "Arr_landmarks_point_location")
-    .def(py::init<>())
-    .def(py::init<Aos&>())
-    .def("attach", &Landmarks_pl::attach)
-    .def("detach", &Landmarks_pl::detach)
-    .def("locate", &aos2::locate<Landmarks_pl>, ri)
-    // .def("ray_shoot_up", &aos2::ray_shoot_up<Landmarks_pl>, ri)
-    // .def("ray_shoot_down", &aos2::ray_shoot_down<Landmarks_pl>, ri)
-    ;
+  using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
+  if (! add_attr<Landmarks_pl>(m, "Arr_landmarks_point_location")) {
+    py::class_<Landmarks_pl>(m, "Arr_landmarks_point_location")
+      .def(py::init<>())
+      .def(py::init<Aos&>())
+      .def("attach", &Landmarks_pl::attach)
+      .def("detach", &Landmarks_pl::detach)
+      .def("locate", &aos2::locate<Landmarks_pl>, ri)
+      // .def("ray_shoot_up", &aos2::ray_shoot_up<Landmarks_pl>, ri)
+      // .def("ray_shoot_down", &aos2::ray_shoot_down<Landmarks_pl>, ri)
+      ;
+  }
 #endif
 
   // Compile in only if we use CGAL version >= 5.6.0; see PR #6810
 #if CGAL_VERSION_NR >= 1050600900
-  py::class_<Trapezoid_pl, Aob>(m, "Arr_trapezoid_ric_point_location")
-    .def(py::init<>())
-    .def(py::init<Aos&>())
-    .def("attach", &Trapezoid_pl::attach)
-    .def("detach", &Trapezoid_pl::detach)
-    .def("depth", &Trapezoid_pl::depth)
-    .def("longest_query_path_length", &Trapezoid_pl::longest_query_path_length)
-    .def("with_guarantees", &Trapezoid_pl::with_guarantees)
-    .def("locate", &aos2::locate<Trapezoid_pl>, ri)
-    .def("ray_shoot_up", &aos2::ray_shoot_up<Trapezoid_pl>, ri)
-    .def("ray_shoot_down", &aos2::ray_shoot_down<Trapezoid_pl>, ri)
-    ;
+  using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
+  if (! add_attr<Trapezoid_pl>(m, "Arr_trapezoid_ric_point_location")) {
+    py::class_<Trapezoid_pl, Aob>(m, "Arr_trapezoid_ric_point_location")
+      .def(py::init<>())
+      .def(py::init<Aos&>())
+      .def("attach", &Trapezoid_pl::attach)
+      .def("detach", &Trapezoid_pl::detach)
+      .def("depth", &Trapezoid_pl::depth)
+      .def("longest_query_path_length", &Trapezoid_pl::longest_query_path_length)
+      .def("with_guarantees", &Trapezoid_pl::with_guarantees)
+      .def("locate", &aos2::locate<Trapezoid_pl>, ri)
+      .def("ray_shoot_up", &aos2::ray_shoot_up<Trapezoid_pl>, ri)
+      .def("ray_shoot_down", &aos2::ray_shoot_down<Trapezoid_pl>, ri)
+      ;
+  }
 #endif
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  py::class_<Walk_pl>(m, "Arr_walk_along_line_point_location")
-    .def(py::init<>())
-    .def(py::init<Aos&>())
-    .def("attach", &Walk_pl::attach)
-    .def("detach", &Walk_pl::detach)
-    .def("locate", &aos2::locate<Walk_pl>, ri)
-    .def("ray_shoot_up", &aos2::ray_shoot_up<Walk_pl>, ri)
-    .def("ray_shoot_down", &aos2::ray_shoot_down<Walk_pl>, ri)
-    ;
+  using Walk_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
+  if (! add_attr<Walk_pl>(m, "Arr_walk_along_line_point_location")) {
+    py::class_<Walk_pl>(m, "Arr_walk_along_line_point_location")
+      .def(py::init<>())
+      .def(py::init<Aos&>())
+      .def("attach", &Walk_pl::attach)
+      .def("detach", &Walk_pl::detach)
+      .def("locate", &aos2::locate<Walk_pl>, ri)
+      .def("ray_shoot_up", &aos2::ray_shoot_up<Walk_pl>, ri)
+      .def("ray_shoot_down", &aos2::ray_shoot_down<Walk_pl>, ri)
+      ;
+  }
 #endif
 
-  py::class_<Naive_pl>(m, "Arr_naive_point_location")
-    .def(py::init<>())
-    .def(py::init<Aos&>())
-    .def("attach", &Naive_pl::attach)
-    .def("detach", &Naive_pl::detach)
-    .def("locate", &aos2::locate<Naive_pl>, ri)
-    // .def("ray_shoot_up", &aos2::ray_shoot_up<Naive_pl>, ri)
-    // .def("ray_shoot_down", &aos2::ray_shoot_down<Naive_pl>, ri)
-    ;
+  using Naive_pl = CGAL::Arr_naive_point_location<Aos>;
+  if (! add_attr<Naive_pl>(m, "Arr_naive_point_location")) {
+    py::class_<Naive_pl>(m, "Arr_naive_point_location")
+      .def(py::init<>())
+      .def(py::init<Aos&>())
+      .def("attach", &Naive_pl::attach)
+      .def("detach", &Naive_pl::detach)
+      .def("locate", &aos2::locate<Naive_pl>, ri)
+      // .def("ray_shoot_up", &aos2::ray_shoot_up<Naive_pl>, ri)
+      // .def("ray_shoot_down", &aos2::ray_shoot_down<Naive_pl>, ri)
+      ;
+  }
 
   m.def("locate", &aos2::locate_batch, ri, py::keep_alive<1, 0>());
 }

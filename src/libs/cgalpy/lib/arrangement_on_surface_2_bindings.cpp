@@ -811,7 +811,7 @@ void bind_overlay_function_traits(py::module_& m) {
     .def(py::init<>())
     .def(py::init<py::object>())
     .def(py::init<py::object, py::object, py::object, py::object, py::object,
-                  py::object, py::object, py::object, py::object, py::object>())
+         py::object, py::object, py::object, py::object, py::object>())
     .def("set_vv_v", &aos2::Arr_overlay_function_traits::set_vv_v, ka_1_2)
     .def("set_ve_v", &aos2::Arr_overlay_function_traits::set_ve_v, ka_1_2)
     .def("set_vf_v", &aos2::Arr_overlay_function_traits::set_vf_v, ka_1_2)
@@ -926,17 +926,26 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::enum_<CGAL::Arr_halfedge_direction>(m, "Arr_halfedge_direction")
-    .value("ARR_RIGHT_TO_LEFT", CGAL::Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
-    .value("ARR_LEFT_TO_RIGHT", CGAL::Arr_halfedge_direction::ARR_LEFT_TO_RIGHT)
-    .export_values()
-    ;
+  using Arr_halfedge_direction = CGAL::Arr_halfedge_direction;
+  const py::handle info_ahd = py::type<Arr_halfedge_direction>();
+  if (info_ahd.is_valid()) m.attr("Arr_halfedge_direction") = info_ahd;
+  else {
+    py::enum_<Arr_halfedge_direction>(m, "Arr_halfedge_direction")
+      .value("ARR_RIGHT_TO_LEFT", Arr_halfedge_direction::ARR_RIGHT_TO_LEFT)
+      .value("ARR_LEFT_TO_RIGHT", Arr_halfedge_direction::ARR_LEFT_TO_RIGHT)
+      .export_values()
+      ;
+  }
 
-  py::enum_<CGAL::Arr_curve_end>(m, "Arr_curve_end")
-    .value("ARR_MIN_END", CGAL::Arr_curve_end::ARR_MIN_END)
-    .value("ARR_MAX_END", CGAL::Arr_curve_end::ARR_MAX_END)
-    .export_values()
-    ;
+  const py::handle info_ce = py::type<CGAL::Arr_curve_end>();
+  if (info_ce.is_valid()) m.attr("Arr_curve_end") = info_ce;
+  else {
+    py::enum_<CGAL::Arr_curve_end>(m, "Arr_curve_end")
+      .value("ARR_MIN_END", CGAL::Arr_curve_end::ARR_MIN_END)
+      .value("ARR_MAX_END", CGAL::Arr_curve_end::ARR_MAX_END)
+      .export_values()
+      ;
+  }
 
   add_attr<CGAL::Box_parameter_space_2>(m, "Arr_parameter_space");
   m.attr("ARR_LEFT_BOUNDARY") = &CGAL::ARR_LEFT_BOUNDARY;
@@ -1109,104 +1118,119 @@ void export_arrangement_on_surface_2(py::module_& m) {
   m.def("remove_vertex", &aos2::remove_vertex_free);
 
   // Export overlay & overlay traits
-  bind_overlay_function_traits<aos2::is_vertex_extended(),
-                               aos2::is_halfedge_extended(),
-                               aos2::is_face_extended()>(m);
+  using Aoft = aos2::Arr_overlay_function_traits;
+  if (! add_attr<Aoft>(m, "Arr_overlay_function_traits"))
+    bind_overlay_function_traits<aos2::is_vertex_extended(),
+                                 aos2::is_halfedge_extended(),
+                                 aos2::is_face_extended()>(m);
 
   constexpr auto ka_1_2 = py::keep_alive<1, 2>();
-  py::class_<aos2::Arr_overlay_traits>(m, "Arr_overlay_traits")
-    .def(py::init<>())
-    .def(py::init<py::object>())
-    .def(py::init<py::object, py::object, py::object, py::object, py::object,
-                  py::object, py::object, py::object, py::object, py::object>())
-    .def("set_vv_v", &aos2::Arr_overlay_traits::set_vv_v, ka_1_2)
-    .def("set_ve_v", &aos2::Arr_overlay_traits::set_ve_v, ka_1_2)
-    .def("set_vf_v", &aos2::Arr_overlay_traits::set_vf_v, ka_1_2)
-    .def("set_ev_v", &aos2::Arr_overlay_traits::set_ev_v, ka_1_2)
-    .def("set_fv_v", &aos2::Arr_overlay_traits::set_fv_v, ka_1_2)
-    .def("set_ee_v", &aos2::Arr_overlay_traits::set_ee_v, ka_1_2)
-    .def("set_ee_e", &aos2::Arr_overlay_traits::set_ee_e, ka_1_2)
-    .def("set_ef_e", &aos2::Arr_overlay_traits::set_ef_e, ka_1_2)
-    .def("set_fe_e", &aos2::Arr_overlay_traits::set_fe_e, ka_1_2)
-    .def("set_ff_f", &aos2::Arr_overlay_traits::set_ff_f, ka_1_2)
-    ;
+  if (! add_attr<aos2::Arr_overlay_traits>(m, "Arr_overlay_traits")) {
+    py::class_<aos2::Arr_overlay_traits>(m, "Arr_overlay_traits")
+      .def(py::init<>())
+      .def(py::init<py::object>())
+      .def(py::init<py::object, py::object, py::object, py::object, py::object,
+           py::object, py::object, py::object, py::object, py::object>())
+      .def("set_vv_v", &aos2::Arr_overlay_traits::set_vv_v, ka_1_2)
+      .def("set_ve_v", &aos2::Arr_overlay_traits::set_ve_v, ka_1_2)
+      .def("set_vf_v", &aos2::Arr_overlay_traits::set_vf_v, ka_1_2)
+      .def("set_ev_v", &aos2::Arr_overlay_traits::set_ev_v, ka_1_2)
+      .def("set_fv_v", &aos2::Arr_overlay_traits::set_fv_v, ka_1_2)
+      .def("set_ee_v", &aos2::Arr_overlay_traits::set_ee_v, ka_1_2)
+      .def("set_ee_e", &aos2::Arr_overlay_traits::set_ee_e, ka_1_2)
+      .def("set_ef_e", &aos2::Arr_overlay_traits::set_ef_e, ka_1_2)
+      .def("set_fe_e", &aos2::Arr_overlay_traits::set_fe_e, ka_1_2)
+      .def("set_ff_f", &aos2::Arr_overlay_traits::set_ff_f, ka_1_2)
+      ;
+  }
 
   m.def("overlay", &aos2::overlay);
   m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_function_traits>);
   m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_traits>);
 
   using Aob = CGAL::Arr_observer<Aos>;
+  if (! add_attr<Aob>(m, "Arr_observer_base")) {
+    py::class_<Aob>(m, "Arr_observer_base")
+      .def(py::init<>())
+      .def(py::init<Aos&>())
+      ;
+  }
+
   using Ao = aos2::Arr_observer;
-
-  py::class_<Aob>(m, "Arr_observer_base")
-    .def(py::init<>())
-    .def(py::init<Aos&>())
-    ;
-
-  py::class_<Ao, Aob>(m, "Arr_observer")
-    .def(py::init<>())
-    .def(py::init<Aos&>())
-    .def("set_after_split_face", &Ao::set_after_split_face)
-    .def("set_before_assign", &Ao::set_before_assign)
-    .def("set_after_assign", &Ao::set_after_assign)
-    .def("set_before_clear", &Ao::set_before_clear)
-    .def("set_after_clear", &Ao::set_after_clear)
-    .def("set_before_global_change", &Ao::set_before_global_change)
-    .def("set_after_global_change", &Ao::set_after_global_change)
-    .def("set_before_attach", &Ao::set_before_attach)
-    .def("set_after_attach", &Ao::set_after_attach)
-    .def("set_before_detach", &Ao::set_before_detach)
-    .def("set_after_detach", &Ao::set_after_detach)
-    .def("set_before_create_vertex", &Ao::set_before_create_vertex)
-    .def("set_after_create_vertex", &Ao::set_after_create_vertex)
-    .def("set_before_create_boundary_vertex1", &Ao::set_before_create_boundary_vertex1)
-    .def("set_before_create_boundary_vertex2", &Ao::set_before_create_boundary_vertex2)
-    .def("set_after_create_boundary_vertex", &Ao::set_after_create_boundary_vertex)
-    .def("set_before_create_edge", &Ao::set_before_create_edge)
-    .def("set_after_create_edge", &Ao::set_after_create_edge)
-    .def("set_before_modify_vertex", &Ao::set_before_modify_vertex)
-    .def("set_after_modify_vertex", &Ao::set_after_modify_vertex)
-    .def("set_before_modify_edge", &Ao::set_before_modify_edge)
-    .def("set_after_modify_edge", &Ao::set_after_modify_edge)
-    .def("set_before_split_edge", &Ao::set_before_split_edge)
-    .def("set_after_split_edge", &Ao::set_after_split_edge)
-    .def("set_before_split_fictitious_edge", &Ao::set_before_split_fictitious_edge)
-    .def("set_after_split_fictitious_edge", &Ao::set_after_split_fictitious_edge)
-    .def("set_before_split_face", &Ao::set_before_split_face)
-    .def("set_after_split_face", &Ao::set_after_split_face)
-    .def("set_before_split_outer_ccb", &Ao::set_before_split_outer_ccb)
-    .def("set_after_split_outer_ccb", &Ao::set_after_split_outer_ccb)
-    .def("set_before_split_inner_ccb", &Ao::set_before_split_inner_ccb)
-    .def("set_after_split_inner_ccb", &Ao::set_after_split_inner_ccb)
-    .def("set_before_add_outer_ccb", &Ao::set_before_add_outer_ccb)
-    .def("set_after_add_outer_ccb", &Ao::set_after_add_outer_ccb)
-    .def("set_before_add_inner_ccb", &Ao::set_before_add_inner_ccb)
-    .def("set_after_add_inner_ccb", &Ao::set_after_add_inner_ccb)
-    .def("set_before_add_isolated_vertex", &Ao::set_before_add_isolated_vertex)
-    .def("set_after_add_isolated_vertex", &Ao::set_after_add_isolated_vertex)
-    .def("set_before_merge_edge", &Ao::set_before_merge_edge)
-    .def("set_after_merge_edge", &Ao::set_after_merge_edge)
-    .def("set_before_merge_fictitious_edge", &Ao::set_before_merge_fictitious_edge)
-    .def("set_after_merge_fictitious_edge", &Ao::set_after_merge_fictitious_edge)
-    .def("set_before_merge_face", &Ao::set_before_merge_face)
-    .def("set_after_merge_face", &Ao::set_after_merge_face)
-    .def("set_before_merge_outer_ccb", &Ao::set_before_merge_outer_ccb)
-    .def("set_after_merge_outer_ccb", &Ao::set_after_merge_outer_ccb)
-    .def("set_before_merge_inner_ccb", &Ao::set_before_merge_inner_ccb)
-    .def("set_after_merge_inner_ccb", &Ao::set_after_merge_inner_ccb)
-    .def("set_before_move_outer_ccb", &Ao::set_before_move_outer_ccb)
-    .def("set_after_move_outer_ccb", &Ao::set_after_move_outer_ccb)
-    .def("set_before_move_inner_ccb", &Ao::set_before_move_inner_ccb)
-    .def("set_after_move_inner_ccb", &Ao::set_after_move_inner_ccb)
-    .def("set_before_move_isolated_vertex", &Ao::set_before_move_isolated_vertex)
-    .def("set_after_move_isolated_vertex", &Ao::set_after_move_isolated_vertex)
-    .def("set_before_remove_vertex", &Ao::set_before_remove_vertex)
-    .def("set_after_remove_vertex", &Ao::set_after_remove_vertex)
-    .def("set_before_remove_edge", &Ao::set_before_remove_edge)
-    .def("set_after_remove_edge", &Ao::set_after_remove_edge)
-    .def("set_before_remove_outer_ccb", &Ao::set_before_remove_outer_ccb)
-    .def("set_after_remove_outer_ccb", &Ao::set_after_remove_outer_ccb)
-    .def("set_before_remove_inner_ccb", &Ao::set_before_remove_inner_ccb)
-    .def("set_after_remove_inner_ccb", &Ao::set_after_remove_inner_ccb)
-    ;
+  if (! add_attr<Ao>(m, "Arr_observer")) {
+    py::class_<Ao, Aob>(m, "Arr_observer")
+      .def(py::init<>())
+      .def(py::init<Aos&>())
+      .def("set_after_split_face", &Ao::set_after_split_face)
+      .def("set_before_assign", &Ao::set_before_assign)
+      .def("set_after_assign", &Ao::set_after_assign)
+      .def("set_before_clear", &Ao::set_before_clear)
+      .def("set_after_clear", &Ao::set_after_clear)
+      .def("set_before_global_change", &Ao::set_before_global_change)
+      .def("set_after_global_change", &Ao::set_after_global_change)
+      .def("set_before_attach", &Ao::set_before_attach)
+      .def("set_after_attach", &Ao::set_after_attach)
+      .def("set_before_detach", &Ao::set_before_detach)
+      .def("set_after_detach", &Ao::set_after_detach)
+      .def("set_before_create_vertex", &Ao::set_before_create_vertex)
+      .def("set_after_create_vertex", &Ao::set_after_create_vertex)
+      .def("set_before_create_boundary_vertex1",
+           &Ao::set_before_create_boundary_vertex1)
+      .def("set_before_create_boundary_vertex2",
+           &Ao::set_before_create_boundary_vertex2)
+      .def("set_after_create_boundary_vertex",
+           &Ao::set_after_create_boundary_vertex)
+      .def("set_before_create_edge", &Ao::set_before_create_edge)
+      .def("set_after_create_edge", &Ao::set_after_create_edge)
+      .def("set_before_modify_vertex", &Ao::set_before_modify_vertex)
+      .def("set_after_modify_vertex", &Ao::set_after_modify_vertex)
+      .def("set_before_modify_edge", &Ao::set_before_modify_edge)
+      .def("set_after_modify_edge", &Ao::set_after_modify_edge)
+      .def("set_before_split_edge", &Ao::set_before_split_edge)
+      .def("set_after_split_edge", &Ao::set_after_split_edge)
+      .def("set_before_split_fictitious_edge",
+           &Ao::set_before_split_fictitious_edge)
+      .def("set_after_split_fictitious_edge",
+           &Ao::set_after_split_fictitious_edge)
+      .def("set_before_split_face", &Ao::set_before_split_face)
+      .def("set_after_split_face", &Ao::set_after_split_face)
+      .def("set_before_split_outer_ccb", &Ao::set_before_split_outer_ccb)
+      .def("set_after_split_outer_ccb", &Ao::set_after_split_outer_ccb)
+      .def("set_before_split_inner_ccb", &Ao::set_before_split_inner_ccb)
+      .def("set_after_split_inner_ccb", &Ao::set_after_split_inner_ccb)
+      .def("set_before_add_outer_ccb", &Ao::set_before_add_outer_ccb)
+      .def("set_after_add_outer_ccb", &Ao::set_after_add_outer_ccb)
+      .def("set_before_add_inner_ccb", &Ao::set_before_add_inner_ccb)
+      .def("set_after_add_inner_ccb", &Ao::set_after_add_inner_ccb)
+      .def("set_before_add_isolated_vertex", &Ao::set_before_add_isolated_vertex)
+      .def("set_after_add_isolated_vertex", &Ao::set_after_add_isolated_vertex)
+      .def("set_before_merge_edge", &Ao::set_before_merge_edge)
+      .def("set_after_merge_edge", &Ao::set_after_merge_edge)
+      .def("set_before_merge_fictitious_edge",
+           &Ao::set_before_merge_fictitious_edge)
+      .def("set_after_merge_fictitious_edge",
+           &Ao::set_after_merge_fictitious_edge)
+      .def("set_before_merge_face", &Ao::set_before_merge_face)
+      .def("set_after_merge_face", &Ao::set_after_merge_face)
+      .def("set_before_merge_outer_ccb", &Ao::set_before_merge_outer_ccb)
+      .def("set_after_merge_outer_ccb", &Ao::set_after_merge_outer_ccb)
+      .def("set_before_merge_inner_ccb", &Ao::set_before_merge_inner_ccb)
+      .def("set_after_merge_inner_ccb", &Ao::set_after_merge_inner_ccb)
+      .def("set_before_move_outer_ccb", &Ao::set_before_move_outer_ccb)
+      .def("set_after_move_outer_ccb", &Ao::set_after_move_outer_ccb)
+      .def("set_before_move_inner_ccb", &Ao::set_before_move_inner_ccb)
+      .def("set_after_move_inner_ccb", &Ao::set_after_move_inner_ccb)
+      .def("set_before_move_isolated_vertex",
+           &Ao::set_before_move_isolated_vertex)
+      .def("set_after_move_isolated_vertex", &Ao::set_after_move_isolated_vertex)
+      .def("set_before_remove_vertex", &Ao::set_before_remove_vertex)
+      .def("set_after_remove_vertex", &Ao::set_after_remove_vertex)
+      .def("set_before_remove_edge", &Ao::set_before_remove_edge)
+      .def("set_after_remove_edge", &Ao::set_after_remove_edge)
+      .def("set_before_remove_outer_ccb", &Ao::set_before_remove_outer_ccb)
+      .def("set_after_remove_outer_ccb", &Ao::set_after_remove_outer_ccb)
+      .def("set_before_remove_inner_ccb", &Ao::set_before_remove_inner_ccb)
+      .def("set_after_remove_inner_ccb", &Ao::set_after_remove_inner_ccb)
+      ;
+  }
 }
