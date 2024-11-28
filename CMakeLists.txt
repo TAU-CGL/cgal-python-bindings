@@ -6,12 +6,16 @@ endif()
 if (POLICY CMP0148)
   cmake_policy(SET CMP0148 OLD)
 endif()
-project(cgalpy VERSION "1.0.4" LANGUAGES CXX)
+project(cgalpy VERSION "1.0.4" LANGUAGES CXX) # the pyproject.toml file sets the version
 
 # Include windows toolchain path (if available)
 if (CMAKE_TOOLCHAIN_FILE)
     include(${CMAKE_TOOLCHAIN_FILE})
 endif (CMAKE_TOOLCHAIN_FILE)
+
+if (DEFINED ENV{CGAL_DATA_DIR})
+    set(CGAL_DATA_DIR $ENV{CGAL_DATA_DIR})
+endif ()
 
 if (SKBUILD)  # scikit-build
     # this block was added for scikit-build, but should also be fine for
@@ -37,13 +41,11 @@ if (SKBUILD)  # scikit-build
     # PRO: Simple option that is compatible with scikit-build. Can work without conan.
     # CON: Difficult if you want to use changing conan settings.
 
-    # Run conan install command
-    execute_process(
-        COMMAND conan install ${CMAKE_SOURCE_DIR} --build=missing
-    )
+    # Create a conan2 profile
+    execute_process(COMMAND conan profile detect --exist-ok)
+    execute_process(COMMAND conan install ${CMAKE_SOURCE_DIR} --build=missing)
     set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/Release/generators/conan_toolchain.cmake)
     include(${TOOLCHAIN_FILE})
-
 
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
@@ -61,6 +63,10 @@ if (SKBUILD)  # scikit-build
     # The following line will result in conflicts with conan.
     #  set(Python_INCLUDE_DIR "${PYTHON_INCLUDE_DIR}")
     set(Python_LIBRARIES "${PYTHON_LIBRARY}")
+
+    # Get configuration from config.cmake
+    include(${CMAKE_SOURCE_DIR}/config.cmake)
+
     if (MSVC)
         # MSVC needs a little extra help finding the Python library
         find_package(PythonInterp)

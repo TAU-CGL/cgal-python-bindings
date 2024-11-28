@@ -377,8 +377,9 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     add_compile_options(-fvisibility=hidden)
 endif ()
-
-set(CGALPY_LIB_NAME "CGALPY")
+if (NOT DEFINED CGALPY_LIB_NAME)
+    set(CGALPY_LIB_NAME "CGALPY")
+endif ()
 if (NOT CGALPY_FIXED_LIBRARY_NAME)
     if (CGALPY_KERNEL_BINDINGS)
         get_kernel_lib_name(ret)
@@ -502,7 +503,7 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
 endif ()
 
 if (NOT SKBUILD)
-    set(CGALPY_PACKAGE_NAME ${CGALPY_LIB_NAME})
+    set(CGALPY_PACKAGE_NAME _CGALPY)
 
     add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 
@@ -755,7 +756,7 @@ if (NOT SKBUILD)
         install(DIRECTORY ${MODULE_OUTPUT_PATH} DESTINATION ${CGALPY_INSTALL_PYTHON_DIR})
     endforeach ()
 else ()
-    add_compile_definitions(CGALPY_MODULE_NAME=_CGALPY)
+    add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_IMPORT_NAME})
     nanobind_add_module(_CGALPY NB_STATIC ${CGALPY_SRC_FILES})
     set(CGALPY_BUILD_DEPENDS _CGALPY)
 
@@ -768,7 +769,7 @@ else ()
         ${CGAL_LIBRARIES}
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
-    install(TARGETS _CGALPY DESTINATION python/${CGALPY_IMPORT_NAME}/)
+    install(TARGETS _CGALPY DESTINATION ${CGALPY_IMPORT_NAME}/)
 endif ()
 
 
