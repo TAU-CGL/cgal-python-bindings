@@ -16,15 +16,15 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
 namespace vis2 {
-  typedef Regularization_category<regularization_category()>::type   Rc;
-  typedef aos2::Arrangement_2                           Arrangement_2;
-  typedef aos2::Point_2                                 Point_2;
-  typedef aos2::Halfedge                                Halfedge;
-  typedef aos2::Halfedge_const_handle                   Halfedge_const_handle;
-  typedef aos2::Face                                    Face;
-  typedef aos2::Face_const_handle                       Face_const_handle;
-  typedef CGAL::Simple_polygon_visibility_2<Arrangement_2, Rc>
-    Simple_polygon_visibility_2;
+  using Rc = Regularization_category<regularization_category()>::type;
+  using Arrangement_2 = aos2::Arrangement_2;
+  using Point_2 = aos2::Point_2;
+  using Halfedge = aos2::Halfedge;
+  using Halfedge_const_handle = aos2::Halfedge_const_handle;
+  using Face = aos2::Face;
+  using Face_const_handle = aos2::Face_const_handle;
+  using Simple_polygon_visibility_2 =
+    CGAL::Simple_polygon_visibility_2<Arrangement_2, Rc>;
 }
 
 #endif

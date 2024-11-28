@@ -67,7 +67,8 @@ eval "declare -a $item=('ss2_seg_epec'        'kerEpecInt_aos2SegPl_ss2')";     
 eval "declare -a $item=('tri2_ct_wi_epic'     'kerEpic_tri2CdelNciWiWi')";               ((i++)); item="item$i"
 eval "declare -a $item=('tri2_wi_hi_epic'     'kerEpic_tri2PlainNciWiWiHi')";            ((i++)); item="item$i"
 eval "declare -a $item=('tri3_del_epic'       'kerEpic_tri3DelComSeq')";                 ((i++)); item="item$i"
-eval "declare -a $item=('vis2_epic'           'kerEpic_aos2SegPl_vis2')";                ((i++)); item="item$i"
+eval "declare -a $item=('vis2_rg_epec'        'kerEpec_aos2SegPl_vis2Rg')";              ((i++)); item="item$i"
+eval "declare -a $item=('vis2_nr_epec'        'kerEpec_aos2SegPl_vis2Nr')";              ((i++)); item="item$i"
 
 ((i--))
 arr=()
