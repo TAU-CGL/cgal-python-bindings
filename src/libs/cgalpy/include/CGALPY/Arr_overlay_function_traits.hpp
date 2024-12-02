@@ -124,34 +124,34 @@ class Arr_overlay_function_traits :
                                                 ArrangementR>
 {
 private:
-  typedef ArrangementA                          Arrangement_a;
-  typedef ArrangementB                          Arrangement_b;
-  typedef ArrangementR                          Arrangement_r;
+  using Arrangement_a = ArrangementA;
+  using Arrangement_b = ArrangementB;
+  using Arrangement_r = ArrangementR;
 
-  typedef typename Arrangement_a::Vertex        Vertex_a;
-  typedef typename Arrangement_b::Vertex        Vertex_b;
-  typedef typename Arrangement_r::Vertex        Vertex_r;
+  using Vertex_a = typename Arrangement_a::Vertex;
+  using Vertex_b = typename Arrangement_b::Vertex;
+  using Vertex_r = typename Arrangement_r::Vertex;
 
-  typedef typename Arrangement_a::Halfedge      Halfedge_a;
-  typedef typename Arrangement_b::Halfedge      Halfedge_b;
-  typedef typename Arrangement_r::Halfedge      Halfedge_r;
+  using Halfedge_a = typename Arrangement_a::Halfedge;
+  using Halfedge_b = typename Arrangement_b::Halfedge;
+  using Halfedge_r = typename Arrangement_r::Halfedge;
 
-  typedef typename Arrangement_a::Face          Face_a;
-  typedef typename Arrangement_b::Face          Face_b;
-  typedef typename Arrangement_r::Face          Face_r;
+  using Face_a = typename Arrangement_a::Face;
+  using Face_b = typename Arrangement_b::Face;
+  using Face_r = typename Arrangement_r::Face;
 
 public:
-  typedef typename Arrangement_a::Vertex_const_handle   Vertex_handle_a;
-  typedef typename Arrangement_b::Vertex_const_handle   Vertex_handle_b;
-  typedef typename Arrangement_r::Vertex_handle         Vertex_handle_r;
+  using Vertex_handle_a = typename Arrangement_a::Vertex_const_handle;
+  using Vertex_handle_b = typename Arrangement_b::Vertex_const_handle;
+  using Vertex_handle_r = typename Arrangement_r::Vertex_handle;
 
-  typedef typename Arrangement_a::Halfedge_const_handle Halfedge_handle_a;
-  typedef typename Arrangement_b::Halfedge_const_handle Halfedge_handle_b;
-  typedef typename Arrangement_r::Halfedge_handle       Halfedge_handle_r;
+  using Halfedge_handle_a = typename Arrangement_a::Halfedge_const_handle;
+  using Halfedge_handle_b = typename Arrangement_b::Halfedge_const_handle;
+  using Halfedge_handle_r = typename Arrangement_r::Halfedge_handle;
 
-  typedef typename Arrangement_a::Face_const_handle     Face_handle_a;
-  typedef typename Arrangement_b::Face_const_handle     Face_handle_b;
-  typedef typename Arrangement_r::Face_handle           Face_handle_r;
+  using Face_handle_a = typename Arrangement_a::Face_const_handle;
+  using Face_handle_b = typename Arrangement_b::Face_const_handle;
+  using Face_handle_r = typename Arrangement_r::Face_handle;
 
 private:
   typedef CGAL::_Arr_default_overlay_traits_base<Arrangement_a, Arrangement_b,
