@@ -480,6 +480,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
         get_triangulation_3_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
+    # Kinetic Surface Reconstruction
+    if (CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS)
+        kinetic_surface_reconstruction_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
     # Polygon mesh processing
     if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
         get_polygon_mesh_processing_lib_name(ret)
@@ -513,9 +518,9 @@ if (NOT SKBUILD)
     set(CGALPY_BUILD_DEPENDS CGALPY)
 
     if (NOT APPLE)
-        set_target_properties(CGALPY PROPERTIES
-                VERSION "${CMAKE_PROJECT_VERSION}"
-                SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
+      set_target_properties(CGALPY PROPERTIES
+        VERSION "${CMAKE_PROJECT_VERSION}"
+        SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
 
     target_link_libraries(CGALPY PRIVATE
