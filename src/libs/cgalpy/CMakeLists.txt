@@ -8,9 +8,9 @@ configure_file(config.hpp.in include/config.hpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
 
 # A workaround an oversight in the conen CGAL setup files
-if (SKBUILD)
-   set(CGAL_USE_GMP TRUE)
-endif()
+# if (SKBUILD)
+#    set(CGAL_USE_GMP TRUE)
+# endif()
 
 if (CGAL_USE_GMP)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gmp.cpp)
