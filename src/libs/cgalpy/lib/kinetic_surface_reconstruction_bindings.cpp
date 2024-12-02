@@ -33,78 +33,85 @@ void export_kinetic_surface_reconstruction(py::module_& m) {
   using Point_map = typename Point_range::Point_map;
   using Normal_map = typename Point_range::Vector_map;
   using KSP = CGAL::Kinetic_space_partition_3<Kernel, Intersection_kernel>;
-  using KSR = CGAL::Kinetic_surface_reconstruction_3<Kernel, Point_range, Point_map, Normal_map>;
+  using KSR =
+    CGAL::Kinetic_surface_reconstruction_3<Kernel, Point_range, Point_map,
+                                           Normal_map>;
   using Graphcut = CGAL::KSR_3::Graphcut<KSP>;
-
 
   py::class_<KSR> ksr(m, "Kinetic_surface_reconstruction_3",
     "Pipeline for piecewise planar surface reconstruction from a point cloud via inside/outside labeling of a kinetic partition using min-cut.\n");
-  ksr.def("__init__", [](KSR& ksr, Point_range& points, const py::dict& np = py::dict()) {
-    // return a new instance of KSR
-    if (np.contains("minimum_region_size")) {
-      std::size_t minimum_region_size;
-      try {
-        minimum_region_size = py::cast<std::size_t>(np["minimum_region_size"]);
-      } catch (const py::cast_error& e) {
-        throw std::runtime_error("Error converting 'minimum_region_size' parameter.");
-      }
-      new (&ksr) KSR(points, internal::parse_named_parameters(np)
-                     .minimum_region_size(minimum_region_size));
-    }
-    else {
-      new (&ksr) KSR(points, internal::parse_named_parameters(np));
-    }
-  },
-    py::arg("points"), py::arg("np") = py::dict(),
-    "creates a Kinetic_shape_reconstruction_3 object.\n")
-    .def("detect_planar_shapes", [](KSR& ksr, const py::dict& np = py::dict()) {
-      return ksr.detect_planar_shapes(internal::parse_named_parameters(np));
-    },
-      py::arg("np") = py::dict(),
-      "detects shapes in the provided point cloud and regularizes them.\n")
-    .def("detected_planar_shapes", [](KSR& ksr) {
-      return ksr.detected_planar_shapes();
-    },
+  ksr.def("__init__",
+          [](KSR& ksr, Point_range& points, const py::dict& np = py::dict()) {
+            // return a new instance of KSR
+            if (np.contains("minimum_region_size")) {
+              std::size_t minimum_region_size;
+              try {
+                minimum_region_size = py::cast<std::size_t>(np["minimum_region_size"]);
+              }
+              catch (const py::cast_error& e) {
+                throw std::runtime_error("Error converting 'minimum_region_size' parameter.");
+              }
+              new (&ksr) KSR(points, internal::parse_named_parameters(np)
+                             .minimum_region_size(minimum_region_size));
+            }
+            else {
+              new (&ksr) KSR(points, internal::parse_named_parameters(np));
+            }
+          },
+          py::arg("points"), py::arg("np") = py::dict(),
+          "creates a Kinetic_shape_reconstruction_3 object.\n")
+    .def("detect_planar_shapes",
+         [](KSR& ksr, const py::dict& np = py::dict()) {
+           return ksr.detect_planar_shapes(internal::parse_named_parameters(np));
+         },
+         py::arg("np") = py::dict(),
+         "detects shapes in the provided point cloud and regularizes them.\n")
+    .def("detected_planar_shapes",
+         [](KSR& ksr) { return ksr.detected_planar_shapes(); },
       "returns the support planes of the detected and regularized shapes.\n")
-    .def("detected_planar_shape_indices", [](KSR& ksr) {
-      return ksr.detected_planar_shape_indices();
-    },
+    .def("detected_planar_shape_indices",
+         [](KSR& ksr) { return ksr.detected_planar_shape_indices(); },
       "returns the indices of detected and regularized shapes.\n")
-    .def("detection_and_partition", [](KSR& ksr, std::size_t k, const py::dict& np = py::dict()) {
-      return ksr.detection_and_partition(k, internal::parse_named_parameters(np));
-    },
-     py::arg("k"), py::arg("np") = py::dict(),
-     "detects and regularizes shapes in the provided point cloud and creates the kinetic space partition.\n"
-     "Combines calls of detect_planar_shapes(), initialize_partition() and partition().\n")
-    .def("initialize_partition", [](KSR& ksr, const py::dict& np = py::dict()) {
-      return ksr.initialize_partition(internal::parse_named_parameters(np));
-    },
+    .def("detection_and_partition",
+         [](KSR& ksr, std::size_t k, const py::dict& np = py::dict()) {
+           return ksr.detection_and_partition(k, internal::parse_named_parameters(np));
+         },
+         py::arg("k"), py::arg("np") = py::dict(),
+         "detects and regularizes shapes in the provided point cloud and creates the kinetic space partition.\n"
+         "Combines calls of detect_planar_shapes(), initialize_partition() and partition().\n")
+    .def("initialize_partition",
+         [](KSR& ksr, const py::dict& np = py::dict()) {
+           return ksr.initialize_partition(internal::parse_named_parameters(np));
+         },
       py::arg("np") = py::dict(),
       "initializes the kinetic partition.\n")
     // .def("kinetic_partition", [](const KSR& ksr) { // deprecated?
     //   return ksr.kinetic_partition();
     // },
     // "gives access to the kinetic partition.\n")
-    .def("partition", [](KSR& ksr, std::size_t k) {
-      return ksr.partition(k);
-    },
+    .def("partition", [](KSR& ksr, std::size_t k) { return ksr.partition(k); },
       py::arg("k"),
       "propagates the kinetic polygons in the initialized partition.\n")
-    .def("reconstruct", [](KSR& ksr, FT lambda, std::map<KSP::Face_support, bool> external_nodes) {
-         std::vector<std::vector<std::size_t>> polys;
-         std::vector<Point_3> vertices;
-         ksr.reconstruct(lambda, external_nodes, std::back_inserter(vertices), std::back_inserter(polys));
-         return std::make_tuple(vertices, polys);
-    },
+    .def("reconstruct",
+         [](KSR& ksr, FT lambda,
+            std::map<KSP::Face_support, bool> external_nodes) {
+           std::vector<std::vector<std::size_t>> polys;
+           std::vector<Point_3> vertices;
+           ksr.reconstruct(lambda, external_nodes, std::back_inserter(vertices),
+                           std::back_inserter(polys));
+           return std::make_tuple(vertices, polys);
+         },
          py::arg("lambda"), py::arg("external_nodes"),
          "uses min-cut to solve an inside/outside labeling of the volumes of the kinetic partition and provides the reconstructed surface as a list of indexed polygons.\n"
          "The external_nodes parameter allows to indicate the preferred labels for faces on the bounding box.\n")
-    .def("reconstruct_with_ground", [](KSR& ksr, FT lambda) {
-         std::vector<std::vector<std::size_t>> polys;
-         std::vector<Point_3> vertices;
-         ksr.reconstruct_with_ground(lambda, std::back_inserter(vertices), std::back_inserter(polys));
-         return std::make_tuple(vertices, polys);
-    },
+    .def("reconstruct_with_ground",
+         [](KSR& ksr, FT lambda) {
+           std::vector<std::vector<std::size_t>> polys;
+           std::vector<Point_3> vertices;
+           ksr.reconstruct_with_ground(lambda, std::back_inserter(vertices),
+                                       std::back_inserter(polys));
+           return std::make_tuple(vertices, polys);
+         },
       py::arg("lambda"),
       "uses min-cut to solve an inside/outside labeling of the volumes of the kinetic partition and provides the reconstructed surface as a list of indexed polygons.\n"
       "Estimates a horizontal ground plane within the detected shapes. Cells in the partition below the ground plane receive a weight to be labeled as inside. The z axis is considered as vertical upwards pointing.\n")
@@ -121,5 +128,4 @@ void export_kinetic_surface_reconstruction(py::module_& m) {
     .value("OCTREE_FACE", KSR::KSP::OCTREE_FACE)
     .export_values()
     ;
-
 }
