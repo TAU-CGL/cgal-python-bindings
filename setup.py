@@ -21,50 +21,17 @@ import json
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Configure CGALPY here
 PACKAGE_NAME = "cgalpy"  # The name on PyPI you will use  for `pip install`
-IMPORT_NAME = "CGALPY"  # The name for `import ...`
-CGALPY_CONFIGURATION = [
-                            # "-DCGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS=ON",
-                            # "-DCGALPY_AOS2_POINT_LOCATION_BINDINGS=ON",
-                            # "-DCGALPY_AOS2_VERTEX_EXTENDED=ON",
-                            # "-DCGALPY_AOS2_HALFEDGE_EXTENDED=ON",
-                            # "-DCGALPY_AOS2_FACE_EXTENDED=ON",
-                            # "-DCGALPY_AOS2_GEOMETRY_TRAITS_NAME=circleSegment",
-                        # "-DCGALPY_KERNEL_BINDINGS=epic",
-                        # "-DCGALPY_KERNEL_NAME=epic",
-                        # "-DCGALPY_KERNEL_INTERSECTION_BINDINGS=ON",
-                        # "-DCGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS=ON",
-                        # "-DCGALPY_CONVEX_HULL_2_BINDINGS=ON",
-                        # "-DCGALPY_KERNEL_D_BINDINGS=ON",
-                        # "-DCGALPY_KERNEL_D_NAME=epicd",
-                        # "-DCGALPY_POLYGON_2_BINDINGS=ON",
-                        # "-DCGALPY_MINKOWSKI_SUM_2_BINDINGS=ON",
-                            # "-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=ON",
-                            # "-DCGALPY_PMP_POLYGONAL_MESH_NAME=surfaceMesh",
-                            # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS=ON",
-                            # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS=ON"
-                            # "-DCGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS=ON",
-                            # "-DCGALPY_3D_POINT_SET_BINDINGS=ON",
-                            # "-DCGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS=ON",
-                        # "-DCGALPY_SPATIAL_SEARCHING_BINDINGS=ON",
-                            # "-DCGALPY_SURFACE_MESH_BINDINGS=ON",
-                            # "-DCGALPY_SHAPE_DETECTION_BINDINGS=ON",
-                        # "-DCGALPY_TRIANGULATION_2_BINDINGS=ON",
-                        # "-DCGALPY_TRI2_VERTEX_WITH_INFO=ON",
-                        # "-DCGALPY_TRI2_FACE_WITH_INFO=ON",
-                        # "-DCGALPY_TRI2_HIERARCHY=ON",
-                        # "-DCGALPY_TRIANGULATION_3_BINDINGS=ON",
-                        # "-DCGALPY_TRI3_NAME=delaunay"
-                        # "-DCGALPY_WITH_VISUAL=OFF"
-                       ]
-
-try:
-    with open("config.json") as f:
-        config = json.load(f)
-        CGALPY_CONFIGURATION = config["CGALPY_CONFIGURATION"]
-        PACKAGE_NAME = config["PACKAGE_NAME"]
-        IMPORT_NAME = config["IMPORT_NAME"]
-except FileNotFoundError:
-    print("config.json not found. Using default configuration.")
+IMPORT_NAME = "CGALPY"  # This is set in config.cmake unless it's not found
+# find import name in config.cmake this scripts path and look for set(CGALPY_IMPORT_NAME "CGALPY_epic" CACHE STRING "" FORCE)
+this_path = os.path.dirname(os.path.realpath(__file__))
+with open(os.path.join(this_path, "config.cmake")) as f:
+    for line in f:
+        if "set(CGALPY_IMPORT_NAME " in line:
+            IMPORT_NAME = line.split('"')[1]
+            break
+        if "set(CGALPY_PACKAGE_NAME " in line:
+            PACKAGE_NAME = line.split('"')[1]
+            break
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -80,17 +47,12 @@ def prepare():
         with open(f"{folder}/__init__.py", "w") as f:
             f.write(proxy_init)
 
-
-def run_conan():
-    pass
-
 def readme():
     # Simply return the README.md as string
     with open("README.md") as file:
         return file.read()
 
 prepare()
-run_conan()  # automatically running conan. Ugly workaround, but does its job.
 setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     # ~~~~~~~~~ BASIC INFORMATION ~~~~~~~~~~~
     name=PACKAGE_NAME,
@@ -145,7 +107,7 @@ setup(  # https://scikit-build.readthedocs.io/en/latest/usage.html#setup-options
     #
     # Some CMake-projects allow you to configure it using parameters. You
     # can specify them for this Python-package using the following line.
-      cmake_args=[f"-DCGALPY_IMPORT_NAME={IMPORT_NAME}", f'-DCMAKE_PREFIX_PATH={os.path.join(os.getcwd(), "cmake")}', *CGALPY_CONFIGURATION]
+      cmake_args=[f'-DCMAKE_PREFIX_PATH={os.path.join(os.getcwd(), "cmake")}']
    #
     # There are further options, but you should be fine with these above.
 )
