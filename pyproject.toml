@@ -16,8 +16,9 @@ description = "CGAL Bindings"
 readme = "README.md"
 requires-python = ">=3.8"
 authors = [
-    { name = "radekaadek", email = "radekaadek@gmail.com" },
-    { name = "Efi Fogel", email = "efifogel@gmail.com"}
+    { name = "Efi Fogel", email = "efifogel@gmail.com"},
+    { name = "Nir Goren", email = "nirgoren@mail.tau.ac.il"},
+    { name = "radekaadek", email = "radekaadek@gmail.com"}
 ]
 classifiers = [
     "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
