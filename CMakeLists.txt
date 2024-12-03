@@ -17,63 +17,6 @@ if (DEFINED ENV{CGAL_DATA_DIR})
     set(CGAL_DATA_DIR $ENV{CGAL_DATA_DIR})
 endif ()
 
-if (SKBUILD)  # scikit-build
-    # this block was added for scikit-build, but should also be fine for
-    # manual builds.
-    #~~~~~~~~~~~~~~~~~~~ CPM Dependencies ~~~~~~~~~~~~~~~~
-    # CPM allows us to include some simple dependencies without much fuss.
-    # Great default, for everything more complicated, uses conan.
-    # Why not always use conan? CPM works without any interaction (conan needs
-    # to be called externally). CPM also has no problems with install PyBind11
-    # (which conan has at the time).
-    # If the dependency has complicated dependencies on its own or is slow to
-    # compile, better use conan.
-    # include(./cmake/CPM.cmake)  # Package manager for simple requirements.
-
-    # further CPM-dependencies may be defined in the subdirectories
-    # CPMAddPackage("gh:wjakob/nanobind@2.1.0")
-    find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
-    find_package(nanobind CONFIG REQUIRED)
-    #~~~~~~~~~~~~~~~~~ Conan dependencies ~~~~~~~~~~~~~~~~~~~~~
-    # We are using the `cmake_find_package` generator to create `FindXXX`-files
-    # in the `cmake`-folder. This is only necessary, if the packages are not
-    # already installed. This approach is not without its problems:
-    # PRO: Simple option that is compatible with scikit-build. Can work without conan.
-    # CON: Difficult if you want to use changing conan settings.
-
-    # Create a conan2 profile
-    execute_process(COMMAND conan profile detect --exist-ok)
-    execute_process(COMMAND conan install ${CMAKE_SOURCE_DIR} --build=missing)
-    set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/Release/generators/conan_toolchain.cmake)
-    include(${TOOLCHAIN_FILE})
-
-    list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
-
-    find_package(CGAL REQUIRED)
-    find_package(Boost REQUIRED)
-    include_directories(${cgal_INCLUDE_DIRS_RELEASE})
-
-    # ~~~~~~~~~ nanobind  ~~~~~~~~~~~~~~~~~~
-    # The following part is copied from
-    # https://github.com/wjakob/nanobind_example/blob/master/CMakeLists.txt
-    # with slight modifications.
-    # Constrain FindPython to find the Python version used by scikit-build
-    set(Python_VERSION "${PYTHON_VERSION_STRING}")
-    set(Python_EXECUTABLE "${PYTHON_EXECUTABLE}")
-    # The following line will result in conflicts with conan.
-    #  set(Python_INCLUDE_DIR "${PYTHON_INCLUDE_DIR}")
-    set(Python_LIBRARIES "${PYTHON_LIBRARY}")
-
-    # Get configuration from config.cmake
-    include(${CMAKE_SOURCE_DIR}/config.cmake)
-
-    if (MSVC)
-        # MSVC needs a little extra help finding the Python library
-        find_package(PythonInterp)
-        find_package(Python)
-    endif () # MSVC
-endif () # SKBUILD
-
 # General
 set(CGALPY_PROJECT_AUTHORS "Nir Goren and Efi Fogel")
 set(CGALPY_PROJECT_EMAILS "cgl@tau.ac.il")
@@ -136,6 +79,63 @@ option(CGALPY_AOS2_POINT_LOCATION_BINDINGS "Compile bindings for point location"
 option(CGALPY_KERNEL_INTERSECTION_BINDINGS "Compile bindings for intersections")
 option(CGALPY_KERNEL_D_BINDINGS "Compile bindings for dD Kernel")
 option(CGALPY_VISIBILITY_2_BINDINGS "Compile bindings for 2D Visibility")
+
+if (SKBUILD)  # scikit-build
+    # this block was added for scikit-build, but should also be fine for
+    # manual builds.
+    #~~~~~~~~~~~~~~~~~~~ CPM Dependencies ~~~~~~~~~~~~~~~~
+    # CPM allows us to include some simple dependencies without much fuss.
+    # Great default, for everything more complicated, uses conan.
+    # Why not always use conan? CPM works without any interaction (conan needs
+    # to be called externally). CPM also has no problems with install PyBind11
+    # (which conan has at the time).
+    # If the dependency has complicated dependencies on its own or is slow to
+    # compile, better use conan.
+    # include(./cmake/CPM.cmake)  # Package manager for simple requirements.
+
+    # further CPM-dependencies may be defined in the subdirectories
+    # CPMAddPackage("gh:wjakob/nanobind@2.1.0")
+    find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
+    find_package(nanobind CONFIG REQUIRED)
+    #~~~~~~~~~~~~~~~~~ Conan dependencies ~~~~~~~~~~~~~~~~~~~~~
+    # We are using the `cmake_find_package` generator to create `FindXXX`-files
+    # in the `cmake`-folder. This is only necessary, if the packages are not
+    # already installed. This approach is not without its problems:
+    # PRO: Simple option that is compatible with scikit-build. Can work without conan.
+    # CON: Difficult if you want to use changing conan settings.
+
+    # Create a conan2 profile
+    execute_process(COMMAND conan profile detect --exist-ok)
+    execute_process(COMMAND conan install ${CMAKE_SOURCE_DIR} --build=missing)
+    set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/Release/generators/conan_toolchain.cmake)
+    include(${TOOLCHAIN_FILE})
+
+    list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+
+    find_package(CGAL REQUIRED)
+    find_package(Boost REQUIRED)
+    include_directories(${cgal_INCLUDE_DIRS_RELEASE})
+
+    # ~~~~~~~~~ nanobind  ~~~~~~~~~~~~~~~~~~
+    # The following part is copied from
+    # https://github.com/wjakob/nanobind_example/blob/master/CMakeLists.txt
+    # with slight modifications.
+    # Constrain FindPython to find the Python version used by scikit-build
+    set(Python_VERSION "${PYTHON_VERSION_STRING}")
+    set(Python_EXECUTABLE "${PYTHON_EXECUTABLE}")
+    # The following line will result in conflicts with conan.
+    #  set(Python_INCLUDE_DIR "${PYTHON_INCLUDE_DIR}")
+    set(Python_LIBRARIES "${PYTHON_LIBRARY}")
+
+    # Get configuration from config.cmake
+    include(${CMAKE_SOURCE_DIR}/config.cmake)
+
+    if (MSVC)
+        # MSVC needs a little extra help finding the Python library
+        find_package(PythonInterp)
+        find_package(Python)
+    endif () # MSVC
+endif () # SKBUILD
 
 include(basic_viewer_options)
 include(polygonal_mesh_options) # needs to be before packages using polygonal_mesh
