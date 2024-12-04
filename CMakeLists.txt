@@ -34,6 +34,16 @@ option(CGALPY_BUILD_DEV_DOC "Build the development documentation" OFF)
 option(CGALPY_BUILD_DOC "Build the documentation" ON)
 option(CGALPY_WITH_VISUAL "Display" ON)
 
+set(default_build_type "Release")
+if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
+    set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
+            STRING "Choose the type of build." FORCE)
+    # Set the possible values of build type for cmake-gui
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
+            "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif ()
+
 # Binding options. Notice that The default value of option is OFF.
 option(CGALPY_KERNEL_BINDINGS "Compile bindings for 2,3 Kernel" ON)
 option(CGALPY_KERNEL_D_BINDINGS "Compile bindings for dD Kernel")
@@ -126,16 +136,6 @@ if (SKBUILD)  # scikit-build
         find_package(Python)
     endif () # MSVC
 endif () # SKBUILD
-
-set(default_build_type "Release")
-if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-    message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
-    set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
-            STRING "Choose the type of build." FORCE)
-    # Set the possible values of build type for cmake-gui
-    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
-            "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
-endif ()
 
 include(basic_viewer_options)
 include(polygonal_mesh_options) # needs to be before packages using polygonal_mesh
