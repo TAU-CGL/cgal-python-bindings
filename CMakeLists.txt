@@ -49,7 +49,7 @@ if (SKBUILD)  # scikit-build
 
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-    find_package(CGAL REQUIRED)
+    find_package(CGAL REQUIRED COMPONENTS Core)
     find_package(Boost REQUIRED)
     include_directories(${cgal_INCLUDE_DIRS_RELEASE})
 
