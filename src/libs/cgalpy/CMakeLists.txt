@@ -514,7 +514,7 @@ if (NOT SKBUILD)
 
     # Add the library target
     # Always build a shared library
-    nanobind_add_module(CGALPY ${CGALPY_SRC_FILES})
+    nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
     set(CGALPY_BUILD_DEPENDS CGALPY)
 
     if (NOT APPLE)
@@ -722,7 +722,6 @@ if (NOT SKBUILD)
     list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_README})
 
     # Setup application
-    # Until the build process is fixed, suppress non-pure wheel
     set(CGALPY_BUILD_OUTPUT_DIR "${CGALPY_LIB_DIR}/dist")
     string(TOLOWER "${CGALPY_PACKAGE_NAME}-${cgalpy_VERSION}" CGALPY_TAR_BASENAME)
     set (CGALPY_TAR ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_TAR_BASENAME}.tar.gz)
@@ -761,20 +760,27 @@ if (NOT SKBUILD)
         install(DIRECTORY ${MODULE_OUTPUT_PATH} DESTINATION ${CGALPY_INSTALL_PYTHON_DIR})
     endforeach ()
 else ()
-    add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_IMPORT_NAME})
-    nanobind_add_module(_CGALPY NB_STATIC ${CGALPY_SRC_FILES})
-    set(CGALPY_BUILD_DEPENDS _CGALPY)
+    add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
+    nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
+    set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
+    set(CGALPY_BUILD_DEPENDS CGALPY)
 
     if (NOT APPLE)
-        set_target_properties(_CGALPY PROPERTIES
+        set_target_properties(CGALPY PROPERTIES
                 VERSION "${CMAKE_PROJECT_VERSION}"
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
-    target_link_libraries(_CGALPY PRIVATE
+    target_link_libraries(CGALPY PRIVATE
         ${CGAL_LIBRARIES}
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
-    install(TARGETS _CGALPY DESTINATION ${CGALPY_IMPORT_NAME}/)
+
+    # Workarounf a defficiency in CGAL cmake configuration
+    if (CGAL_USE_GMP)
+      target_link_libraries(CGALPY PRIVATE gmp)
+    endif ()
+
+    install(TARGETS CGALPY DESTINATION ${CGALPY_LIB_NAME})
 endif ()
 
 

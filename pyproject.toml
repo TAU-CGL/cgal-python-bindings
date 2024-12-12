@@ -2,11 +2,9 @@
 requires = [
     "conan>=2.0.0",
     "setuptools",
-    "scikit-build>=0.13",
-    "cmake>=3.26",
-    "ninja",
-    "scikit-build-core >=0.4.3",
-    "nanobind>=1.3.2"
+    "scikit-build>=0.18",
+    "scikit-build-core>=0.10.7",
+    "nanobind>=2.3.0"
 ]
 build-backend = "scikit_build_core.build"
 [project]
@@ -14,7 +12,7 @@ name = "cgalpy"
 version = "1.0.10"
 description = "CGAL Bindings"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 authors = [
     { name = "Efi Fogel", email = "efifogel@gmail.com"},
     { name = "Nir Goren", email = "nirgoren@mail.tau.ac.il"},
@@ -30,14 +28,98 @@ classifiers = [
 # Homepage = "https://bitbucket.org/taucgl/cgal-python-bindings/src/master/"
 
 [tool.scikit-build]
-# Protect the configuration against future changes in scikit-build-core
+# If CMake is not present on the system or does
+# not pass this specifier, it will be downloaded via PyPI if possible. An empty
+# string will disable this check. The default on 0.10+ is "CMakeLists.txt",
+# which will read it from the project's CMakeLists.txt file, or ">=3.15" if
+# unreadable or <0.10.
+# cmake.version = ">=3.31.0"
+# cmake.make-fallback = true
+
+# A list of args to pass to CMake when configuring the project. Setting this in
+# config or envvar will override toml. See also ``cmake.define``.
+# cmake.args = []
+
+# A table of defines to pass to CMake when configuring the project. Additive.
+# cmake.define = {}
+
+# The build type to use when building the project. Valid options are: "Debug",
+# "Release", "RelWithDebInfo", "MinSizeRel", "", etc.
+cmake.build-type = "Release"
+
+# The source directory to use when building the project. Currently only affects
+# the native builder (not the setuptools plugin).
+# cmake.source-dir = "."
+
+# The versions of Ninja to allow. If Ninja is not present on the system or does
+# not pass this specifier, it will be downloaded via PyPI if possible. An empty
+# string will disable this check.
+ninja.version = ">=1.5"
+
+# If Ninja is not present on the system or is older than required, it will be
+# downloaded via PyPI if this is false.
+ninja.make-fallback = true
+
+# The logging level to display, "DEBUG", "INFO", "WARNING", and "ERROR" are
+# possible options.
+cmake.verbose = true
+logging.level = "INFO"
+
+# A list of packages to auto-copy into the wheel. If this is not set, it will
+# default to the first of ``src/<package>``, ``python/<package>``, or
+# ``<package>`` if they exist.  The prefix(s) will be stripped from the package
+# name inside the wheel. If a dict, provides a mapping of package name to source
+# directory.
+# wheel.packages = ["src/<package>", "python/<package>", "<package>"]
+
+# The Python tags. The default (empty string) will use the default Python
+# version. You can also set this to "cp37" to enable the CPython 3.7+ Stable ABI
+# / Limited API (only on CPython and if the version is sufficient, otherwise
+# this has no effect). Or you can set it to "py3" or "py2.py3" to ignore Python
+# ABI compatibility. The ABI tag is inferred from this tag.
+wheel.py-api = "py310"
+
+# Fill out extra tags that are not required. This adds "x86_64" and "arm64" to
+# the list of platforms when "universal2" is used, which helps older Pip's
+# (before 21.0.1) find the correct wheel.
+wheel.expand-macos-universal-tags = false
+
+# The install directory for the wheel. This is relative to the platlib root. You
+# might set this to the package name. The original dir is still at
+# SKBUILD_PLATLIB_DIR (also SKBUILD_DATA_DIR, etc. are available). EXPERIMENTAL:
+# An absolute path will be one level higher than the platlib root, giving access
+# to "/platlib", "/data", "/headers", and "/scripts".
+# wheel.install-dir = ""
+
+# A list of license files to include in the wheel. Supports glob patterns.
+# wheel.license-files = ["LICEN[CS]E*", "COPYING*", "NOTICE*", "AUTHORS*"]
+wheel.license-files = []
+
+# If set to True (the default), CMake will be run before building the wheel.
+wheel.cmake = true
+
+# Target the platlib or the purelib. If not set, the default is to target the
+# platlib if wheel.cmake is true, and the purelib otherwise.
+# wheel.platlib = ""
+
+# A set of patterns to exclude from the wheel. This is additive to the SDist
+# exclude patterns. This applies to the final paths in the wheel, and can
+# exclude files from CMake output as well.  Editable installs may not respect
+# this exclusion.
+# wheel.exclude = []
+
+# The build tag to use for the wheel. If empty, no build tag is used.
+# wheel.build-tag = ""
+
+# Strictly check all config options. If False, warnings will be printed for
+# unknown options. If True, an error will be raised.
+strict-config = true
+
+# If set, this will provide a method for backward compatibility.
 minimum-version = "0.4"
 
-# Setuptools-style build caching in a local directory
+# The build directory. Defaults to a temporary directory, but can be set.
 build-dir = "build/{wheel_tag}"
-
-# Build stable ABI wheels for CPython 3.12+
-wheel.py-api = "cp312"
 
 [tool.cibuildwheel]
 manylinux-x86_64-image = "radekaadek/cgalpy-manylinux_2_28_x86_64_image:v11"
