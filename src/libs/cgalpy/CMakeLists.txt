@@ -778,12 +778,13 @@ else ()
     # EFEF
     # 1. We should link with CGAL::Data, but it is not recognized.
     # 2. In the past, we used ${CGAL_LIBRARIES} instead of CGAL::CGAL for Windows.
-    #    If you successfully install on Windows, remove this comment.
+    #    This also forced an explicit link with gmp.
+    #    If you successfully install on Windows, remove this comment and the following commented code.
 
-    # Workarounf a defficiency in CGAL cmake configuration
-    if (CGAL_USE_GMP)
-      target_link_libraries(CGALPY PRIVATE gmp)
-    endif ()
+    # Workaround a defficiency in CGAL cmake configuration
+    # if (CGAL_USE_GMP)
+    #   target_link_libraries(CGALPY PRIVATE gmp)
+    # endif ()
 
     install(TARGETS CGALPY DESTINATION ${CGALPY_LIB_NAME})
 endif ()
