@@ -771,9 +771,14 @@ else ()
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
     target_link_libraries(CGALPY PRIVATE
-        ${CGAL_LIBRARIES}
+        CGAL::CGAL
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
+
+    # EFEF
+    # 1. We should link with CGAL::Data, but it is not recognized.
+    # 2. In the past, we used ${CGAL_LIBRARIES} instead of CGAL::CGAL for Windows.
+    #    If you successfully install on Windows, remove this comment.
 
     # Workarounf a defficiency in CGAL cmake configuration
     if (CGAL_USE_GMP)
