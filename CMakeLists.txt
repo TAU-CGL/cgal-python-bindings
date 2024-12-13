@@ -51,7 +51,6 @@ if (SKBUILD)  # scikit-build
 
     find_package(CGAL REQUIRED COMPONENTS Core)
     find_package(Boost REQUIRED)
-    include_directories(${cgal_INCLUDE_DIRS_RELEASE})
 
     # ~~~~~~~~~ nanobind  ~~~~~~~~~~~~~~~~~~
     # The following part is copied from
