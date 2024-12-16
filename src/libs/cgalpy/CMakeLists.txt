@@ -526,7 +526,6 @@ if (NOT SKBUILD)
     target_link_libraries(CGALPY PRIVATE
       CGAL::CGAL
       CGAL::Data
-      ${Boost_LIBRARIES}
       ${PYTHON_LIBRARIES})
 
     if (CGAL_Qt6_FOUND)
