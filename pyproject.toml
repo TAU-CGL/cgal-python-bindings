@@ -2,10 +2,10 @@
 requires = [
     "conan>=2.0.0",
     "setuptools",
-    "scikit-build>=0.18",
+    "scikit-build>=0.15.0",
     "scikit-build-core>=0.10.7",
     "nanobind>=2.3.0",
-    "sphinx>=8.1.3"
+    "sphinx>=7.4.7"
 ]
 build-backend = "scikit_build_core.build"
 [project]
@@ -34,7 +34,7 @@ classifiers = [
 # string will disable this check. The default on 0.10+ is "CMakeLists.txt",
 # which will read it from the project's CMakeLists.txt file, or ">=3.15" if
 # unreadable or <0.10.
-# cmake.version = ">=3.31.0"
+# cmake.version = ">=3.29.6"
 # cmake.make-fallback = true
 
 # A list of args to pass to CMake when configuring the project. Setting this in
@@ -55,11 +55,8 @@ cmake.build-type = "Release"
 # The versions of Ninja to allow. If Ninja is not present on the system or does
 # not pass this specifier, it will be downloaded via PyPI if possible. An empty
 # string will disable this check.
-ninja.version = ">=1.5"
-
-# If Ninja is not present on the system or is older than required, it will be
-# downloaded via PyPI if this is false.
-ninja.make-fallback = true
+# ninja.version = ">=1.11.1"
+# ninja.make-fallback = true
 
 # The logging level to display, "DEBUG", "INFO", "WARNING", and "ERROR" are
 # possible options.

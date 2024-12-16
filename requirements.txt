@@ -2,5 +2,5 @@ conan>=2.0.0
 pytest>=7.1.2
 scikit-build>=0.15.0
 setuptools>=61.2.0
-cmake>=3.26
+cmake>=3.29.6
 ninja>=1.11.1

@@ -1,8 +1,10 @@
 set(CGALPY_PY_MIN_VERSION 3.7)
 set(CGALPY_BOOST_MIN_VERSION 1.72.0)
 
-# Find required libraries
-if (NOT SKBUILD)
+# Find required CGAL library
+if (SKBUILD)
+  find_package(CGAL REQUIRED COMPONENTS Core)
+else ()
   if (CGALPY_WITH_VISUAL)
     find_package(Qt6 COMPONENTS Core Gui Widgets)
     if (NOT Qt6_FOUND)
@@ -26,16 +28,43 @@ if (NOT SKBUILD)
   endif()
 endif()
 
-if (CGALPY_WITH_VISUAL)
-  add_definitions(-DCGALPY_HAS_VISUAL=)
-endif()
-
 if (NOT CGAL_FOUND AND NOT DEFINED ENV{CGALPY_PYPI})
   message(FATAL_ERROR "This library cannot be compiled, as it requires CGAL.")
   return()
 endif ()
 
-if (NOT SKBUILD)
+# Find required Python library
+if (SKBUILD)
+    find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
+
+    # ~~~~~~~~~ nanobind  ~~~~~~~~~~~~~~~~~~
+    # The following part is copied from
+    # https://github.com/wjakob/nanobind_example/blob/master/CMakeLists.txt
+    # with slight modifications.
+    # Constrain FindPython to find the Python version used by scikit-build
+    set(Python_VERSION "${PYTHON_VERSION_STRING}")
+    set(Python_EXECUTABLE "${PYTHON_EXECUTABLE}")
+    # The following line will result in conflicts with conan.
+    #  set(Python_INCLUDE_DIR "${PYTHON_INCLUDE_DIR}")
+    set(Python_LIBRARIES "${PYTHON_LIBRARY}")
+
+    # Get configuration from config.cmake
+    include(${CMAKE_SOURCE_DIR}/config.cmake)
+
+    if (MSVC)
+        # MSVC needs a little extra help finding the Python library
+        find_package(PythonInterp)
+        find_package(Python)
+    endif () # MSVC
+else ()
+    find_package(Python ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
+    set(CGALPY_PY_MAJOR_MINOR_VERSION "${Python_VERSION_MAJOR}${Python_VERSION_MINOR}")
+endif ()
+
+# Find required Boost library
+if (SKBUILD)
+    find_package(Boost REQUIRED)
+else ()
     if (CGALPY_USE_SHARED_LIBS)
         set(Boost_USE_STATIC_LIBS OFF)
     else ()
@@ -43,50 +72,54 @@ if (NOT SKBUILD)
         add_definitions(-DBOOST_PYTHON_STATIC_LIB)
     endif ()
 
-    find_package(Python ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
-    set(CGALPY_PY_MAJOR_MINOR_VERSION "${Python_VERSION_MAJOR}${Python_VERSION_MINOR}")
     find_package(Boost CONFIG ${CGALPY_BOOST_MIN_VERSION} REQUIRED)
     if (NOT Boost_FOUND)
         message(STATUS "This library cannot be compiled, as it requires Boost.")
         return()
     endif ()
+endif ()
 
+# Handle Gmp and Mpfr libraries
+if (NOT SKBUILD)
     # The following is needed for Windows. We extract the directory names
     # of the dlls that we depend on, and use them later on
     # \todo introduce a function and use it
-    if(WIN32)
+    if (WIN32)
       set(FLAG OFF)
-      foreach(item ${MPFR_LIBRARIES})
+      foreach (item ${MPFR_LIBRARIES})
         if (FLAG)
           get_filename_component(MPFR_LIBRARY_DIR ${item} DIRECTORY)
-          break()
+          break ()
         elseif ((${item} STREQUAL "debug") OR (${item} STREQUAL "optimized"))
           set(FLAG ON)
-        endif()
-      endforeach()
+        endif ()
+      endforeach ()
       if ("${MPFR_LIBRARY_DIR}" STREQUAL "")
         get_filename_component(MPFR_LIBRARY_DIR ${MPFR_LIBRARIES} DIRECTORY)
-      endif()
+      endif ()
 
       set(FLAG OFF)
-      foreach(item ${GMP_LIBRARIES})
+      foreach (item ${GMP_LIBRARIES})
         if (FLAG)
           get_filename_component(GMP_LIBRARY_DIR ${item} DIRECTORY)
-          break()
+          break ()
         elseif ((${item} STREQUAL "debug") OR (${item} STREQUAL "optimized"))
           set(FLAG ON)
-        endif()
-      endforeach()
+        endif ()
+      endforeach ()
       if ("${GMP_LIBRARY_DIR}" STREQUAL "")
         get_filename_component(GMP_LIBRARY_DIR ${GMP_LIBRARIES} DIRECTORY)
-      endif()
-    endif()
-
-else()
-    find_package(Boost REQUIRED)
+      endif ()
+    endif ()
 endif ()
 
+# Find required nanobind library
 find_package(nanobind CONFIG REQUIRED)
+
+# Handle Visual effects
+if (CGALPY_WITH_VISUAL)
+  add_definitions(-DCGALPY_HAS_VISUAL=)
+endif()
 
 # Add includes and libs
 if (Qt6_FOUND AND NOT SKBUILD)
@@ -125,6 +158,7 @@ if (NOT SKBUILD)
     set(CGALPY_INSTALL_PYTHON_DIR "${CGALPY_INSTALL_LIB_DIR}/Python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/dist-packages"
             CACHE STRING "The folder where CGALPY CMake modules will be installed, relative to CMAKE_INSTALL_PREFIX")
 endif ()
+
 select_basic_viewer()
 select_kinetic_surface_reconstruction() # needs to be before 3D Point Set
 select_point_set_processing() # needs to be before 3D Point Set
