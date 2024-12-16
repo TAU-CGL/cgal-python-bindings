@@ -12,7 +12,7 @@ name = "cgalpy"
 version = "1.0.10"
 description = "CGAL Bindings"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 authors = [
     { name = "Efi Fogel", email = "efifogel@gmail.com"},
     { name = "Nir Goren", email = "nirgoren@mail.tau.ac.il"},
