@@ -123,7 +123,7 @@ include(visibility_2_options)
 if (SKBUILD)
     execute_process(COMMAND conan profile detect --exist-ok)
     execute_process(COMMAND conan install ${CMAKE_SOURCE_DIR} --build=missing)
-    set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/Release/generators/conan_toolchain.cmake)
+    set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE}/generators/conan_toolchain.cmake)
     include(${TOOLCHAIN_FILE})
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 endif () # SKBUILD
