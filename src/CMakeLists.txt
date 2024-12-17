@@ -138,10 +138,6 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
     message(WARNING "detected Clang")
 endif ()
 
-# Use C++17 for this directory and its sub-directories.
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
-
 if (MSVC)
     add_compile_options(/Zc:__cplusplus)
 endif()

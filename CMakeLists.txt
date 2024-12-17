@@ -15,6 +15,10 @@ endif ()
 
 project(cgalpy VERSION "1.0.4" LANGUAGES CXX) # the pyproject.toml file sets the version
 
+# Use C++17 for this directory and its sub-directories.
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
 # Include windows toolchain path (if available)
 if (CMAKE_TOOLCHAIN_FILE)
     include(${CMAKE_TOOLCHAIN_FILE})
