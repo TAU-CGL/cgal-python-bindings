@@ -132,63 +132,59 @@ if (SKBUILD)
 
     # Determine the settings based on the current platform and build type
     if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-        set(OS_SETTING "os=Windows")
+        set(OS_SETTING -s os=Windows)
         # Assume msvc; however, can also be MinGW or clang
-        set(COMPILER_SETTING "compiler=msvc")
-	set(LIBCXX_SETTING "") # No libcxx setting for MSVC
+        set(COMPILER_SETTING -s compiler=msvc)
+        set(LIBCXX_SETTING ) # No libcxx setting for MSVC
     elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-        set(OS_SETTING "os=Linux")
-        set(COMPILER_SETTING "compiler=gcc")
-	set(LIBCXX_SETTING "compiler.libcxx=libstdc++11")
+        set(OS_SETTING -s os=Linux)
+        set(COMPILER_SETTING -s compiler=gcc)
+        set(LIBCXX_SETTING -s compiler.libcxx=libstdc++11)
     elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-        set(OS_SETTING "os=Macos")
-        set(COMPILER_SETTING "compiler=apple-clang")
-	set(LIBCXX_SETTING "compiler.libcxx=libc++")
+        set(OS_SETTING -s os=Macos)
+        set(COMPILER_SETTING -s compiler=apple-clang)
+        set(LIBCXX_SETTING -s compiler.libcxx=libc++)
     endif ()
 
     # Build type (Debug/Release)
-    set(BUILD_TYPE_SETTING "build_type=${CMAKE_BUILD_TYPE}")
+    if (CMAKE_BUILD_TYPE)
+        set(BUILD_TYPE_SETTING -s build_type=${CMAKE_BUILD_TYPE})
+    endif ()
 
     # Compile version
-    if (CMAKE_CXX_COMPILER_VERSION)
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        string(REGEX REPLACE "^([0-9]+)\\.([0-9]).*$" "\\1\\2" COMPILER_VERSION_NUM "${CMAKE_CXX_COMPILER_VERSION}")
+        set(COMPILER_VERSION -s compiler.version=${COMPILER_VERSION_NUM})
+
+    elseif (CMAKE_CXX_COMPILER_VERSION)
         # Extract only the major version
         string(REGEX MATCH "^[0-9]+" COMPILER_MAJOR_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
-        set(COMPILER_VERSION "compiler.version=${COMPILER_MAJOR_VERSION}")
-    elseif (MSVC)
-        execute_process(
-            COMMAND ${CMAKE_CXX_COMPILER} /?  # Query MSVC version
-            OUTPUT_VARIABLE msvc_output
-            ERROR_QUIET
-        )
-        string(REGEX MATCH "Version ([0-9]+)\\.[0-9]+\\.[0-9]+" _ ${msvc_output})
-        set(COMPILER_VERSION "compiler.version=${CMAKE_MATCH_1}")
+        set(COMPILER_VERSION -s compiler.version=${COMPILER_MAJOR_VERSION})
     else()
-        set(COMPILER_VERSION "compiler.version=11") # Fallback if version is not detected
+        set(COMPILER_VERSION -s compiler.version=11) # Fallback if version is not detected
     endif()
 
     # C++ Standard
-    set(CPPSTD_SETTING "compiler.cppstd=${CMAKE_CXX_STANDARD}")
+    set(CPPSTD_SETTING -s compiler.cppstd=${CMAKE_CXX_STANDARD})
 
     # Architecture
     if (CMAKE_SIZEOF_VOID_P EQUAL 8)
-        set(ARCH_SETTING "arch=x86_64")
+        set(ARCH_SETTING -s arch=x86_64)
     else()
-        set(ARCH_SETTING "arch=x86")
+        set(ARCH_SETTING -s arch=x86)
     endif()
 
     execute_process(
-        # COMMAND conan install ${CMAKE_SOURCE_DIR}
         COMMAND conan install .
-        #    --output-folder=build
-            --settings ${OS_SETTING}
-            --settings ${ARCH_SETTING}
-            --settings ${COMPILER_SETTING}
-            --settings ${COMPILER_VERSION}
-	    --settings ${CPPSTD_SETTING}
-	    --settings ${LIBCXX_SETTING}
-            --settings ${BUILD_TYPE_SETTING}
-	    --profile:build=default
-            --build=missing
+            ${OS_SETTING}
+            ${ARCH_SETTING}
+            ${COMPILER_SETTING}
+            ${COMPILER_VERSION}
+            ${CPPSTD_SETTING}
+            ${LIBCXX_SETTING}
+            ${BUILD_TYPE_SETTING}
+            --profile default
+            --build missing
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output
