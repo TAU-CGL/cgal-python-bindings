@@ -774,22 +774,15 @@ else ()
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
 
-    # EFEF
-    # 1. We should link with CGAL::Data, but it is not recognized.
-    # 2. In the past, we used ${CGAL_LIBRARIES} instead of CGAL::CGAL for Windows.
-    #    This also forced an explicit link with gmp.
-    #    If you successfully install on Windows, remove this comment and the following commented code.
+    if (CGAL_Qt6_FOUND)
+        target_link_libraries(CGALPY PRIVATE
+            CGAL::CGAL_Qt6 Qt6::Core Qt6::Gui Qt6::Widgets)
+    endif()
 
-    # Workaround a defficiency in CGAL cmake configuration
-    # if (CGAL_USE_GMP)
-    #   target_link_libraries(CGALPY PRIVATE gmp)
-    # endif ()
+    # \todo We should link with CGAL::Data, but it is not recognized.
 
     install(TARGETS CGALPY DESTINATION ${CGALPY_LIB_NAME})
 endif ()
-
-
-
 
 ################################################################################
 # Documentation

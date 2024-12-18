@@ -2,30 +2,26 @@ set(CGALPY_PY_MIN_VERSION 3.7)
 set(CGALPY_BOOST_MIN_VERSION 1.72.0)
 
 # Find required CGAL library
-if (SKBUILD)
-  find_package(CGAL REQUIRED COMPONENTS Core)
-else ()
-  if (CGALPY_WITH_VISUAL)
-    find_package(Qt6 COMPONENTS Core Gui Widgets)
-    if (NOT Qt6_FOUND)
-      message(WARNING "Qt6 not found; all Qt6-dependant binding will be excluded.")
-      set(CGALPY_WITH_VISUAL OFF)
-    else ()
-      set(CMAKE_AUTOUIC ON)
-      set(CMAKE_AUTOMOC ON)
-      set(CMAKE_AUTORCC ON)
-    endif()
+if (CGALPY_WITH_VISUAL)
+  find_package(Qt6 COMPONENTS Core Gui Widgets)
+  if (NOT Qt6_FOUND)
+    message(WARNING "Qt6 not found; all Qt6-dependant binding will be excluded.")
+    set(CGALPY_WITH_VISUAL OFF CACHE BOOL "" FORCE)
+  else ()
+    set(CMAKE_AUTOUIC ON)
+    set(CMAKE_AUTOMOC ON)
+    set(CMAKE_AUTORCC ON)
   endif()
+endif()
 
-  if (CGALPY_WITH_VISUAL)
-    find_package(CGAL REQUIRED COMPONENTS Core Qt6)
-    if (NOT CGAL_Qt6_FOUND)
-      message(WARNING "CGAL_Qt6 not found; all Qt6-dependant binding will be excluded.")
-      option(CGALPY_WITH_VISUAL "" OFF)
-    endif()
-  else()
-    find_package(CGAL REQUIRED COMPONENTS Core)
+if (CGALPY_WITH_VISUAL)
+  find_package(CGAL REQUIRED COMPONENTS Core Qt6)
+  if (NOT CGAL_Qt6_FOUND)
+    message(WARNING "CGAL_Qt6 not found; all Qt6-dependant binding will be excluded.")
+    set(CGALPY_WITH_VISUAL OFF CACHE BOOL "" FORCE)
   endif()
+else()
+  find_package(CGAL REQUIRED COMPONENTS Core)
 endif()
 
 if (NOT CGAL_FOUND AND NOT DEFINED ENV{CGALPY_PYPI})
@@ -36,7 +32,6 @@ endif ()
 # Find required Python library
 if (SKBUILD)
     find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
-
     # ~~~~~~~~~ nanobind  ~~~~~~~~~~~~~~~~~~
     # The following part is copied from
     # https://github.com/wjakob/nanobind_example/blob/master/CMakeLists.txt
@@ -47,9 +42,6 @@ if (SKBUILD)
     # The following line will result in conflicts with conan.
     #  set(Python_INCLUDE_DIR "${PYTHON_INCLUDE_DIR}")
     set(Python_LIBRARIES "${PYTHON_LIBRARY}")
-
-    # Get configuration from config.cmake
-    include(${CMAKE_SOURCE_DIR}/config.cmake)
 
     if (MSVC)
         # MSVC needs a little extra help finding the Python library
