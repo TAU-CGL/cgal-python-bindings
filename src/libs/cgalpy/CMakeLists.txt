@@ -514,7 +514,7 @@ if (NOT SKBUILD)
 
     # Add the library target
     # Always build a shared library
-    nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
+    nanobind_add_module(CGALPY NB_SHARED ${CGALPY_SRC_FILES})
     set(CGALPY_BUILD_DEPENDS CGALPY)
 
     if (NOT APPLE)
