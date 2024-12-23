@@ -7,3 +7,4 @@ CMakeToolchain
 cmake_layout
 [options]
 *:shared=True
+gmp/*:shared=False
