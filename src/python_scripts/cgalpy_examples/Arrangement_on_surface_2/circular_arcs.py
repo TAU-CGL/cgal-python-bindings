@@ -47,7 +47,7 @@ curves.append(Curve(s3.supporting_line(),
 # (1, 1) with squared radius 3. Create the circle with clockwise orientation,
 # so the arc is directed from (1 - sqrt(3), 1) to (1 + sqrt(3), 1).
 c5 = Rational_point (1, 1)
-circ5 = Circle(c5, 3, Ker.CLOCKWISE)
+circ5 = Circle(c5, 3, CGALPY.Result.CLOCKWISE)
 one_minus_sqrt_3 = CoordNT(1, -1, 3)
 one_plus_sqrt_3 = CoordNT(1, 1, 3)
 s5 = Point(one_minus_sqrt_3, CoordNT(1))
@@ -62,7 +62,7 @@ half = Number_type(1) / Number_type(2)
 sqrt_3_div_2 = CoordNT(Number_type(0), half, 3)
 s6 = Point(-half, sqrt_3_div_2)
 t6 = Point(half, sqrt_3_div_2)
-curves.append(Curve(c6, 1, Ker.CLOCKWISE, s6, t6))
+curves.append(Curve(c6, 1, CGALPY.Result.CLOCKWISE, s6, t6))
 
 # Create a circular arc (C7) defined by two endpoints and a midpoint,
 # all having rational coordinates. This arc is the upper right
