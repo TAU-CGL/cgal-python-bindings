@@ -64,7 +64,7 @@ else ()
         add_definitions(-DBOOST_PYTHON_STATIC_LIB)
     endif ()
 
-    find_package(Boost CONFIG ${CGALPY_BOOST_MIN_VERSION} REQUIRED)
+    find_package(Boost ${CGALPY_BOOST_MIN_VERSION} REQUIRED)
     if (NOT Boost_FOUND)
         message(STATUS "This library cannot be compiled, as it requires Boost.")
         return()

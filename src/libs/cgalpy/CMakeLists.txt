@@ -624,8 +624,9 @@ if (NOT SKBUILD)
 
       nanobind_add_stub(
         CGALPY_${name}_STUBS
-        MODULE ${CGALPY_LIB_NAME}.${name}
+        MODULE cgalpy.${CGALPY_LIB_NAME}.${name}
         OUTPUT ${name}/__init__.pyi
+        PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
         DEPENDS CGALPY
       )
     endfunction()
@@ -636,9 +637,10 @@ if (NOT SKBUILD)
 
     nanobind_add_stub(
       CGALPY_STUBS
-      MODULE ${CGALPY_LIB_NAME}
+      MODULE cgalpy.${CGALPY_LIB_NAME}
       OUTPUT ${PYI_PREFIX}${CGALPY_LIB_NAME}.pyi
       DEPENDS CGALPY
+      PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
       MARKER_FILE py.typed
     )
 
