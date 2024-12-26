@@ -24,10 +24,10 @@ i += 1
 reference_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off")
 
 try: points, polygons = Pol3.read_polygon_soup(input_filename)
-except: raise ValueError("Error: can not read input file.")
+except: raise ValueError("Error: cannot read input file.")
 
 if len(points) == 0 or len(polygons) == 0:
-  print("Error: can not read input file.")
+  print("Error: cannot read input file.")
 
 try: ref1 = Pol3.read_polygon_mesh(reference_filename)
 except: raise ValueError("Invalid input.")
