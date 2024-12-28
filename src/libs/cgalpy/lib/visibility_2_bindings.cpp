@@ -17,15 +17,17 @@ namespace py = nanobind;
 
 namespace vis2 {
 
-const Face& compute_visibility1(Simple_polygon_visibility_2& spv,
+template <typename Visibility>
+const Face& compute_visibility1(Visibility& vis,
                                 const Point_2& q, const Face& f,
                                 Arrangement_2& arr)
-{ return *(spv.compute_visibility(q, Face_const_handle(&f), arr)); }
+{ return *(vis.compute_visibility(q, Face_const_handle(&f), arr)); }
 
-const Face& compute_visibility2(Simple_polygon_visibility_2& spv,
+template <typename Visibility>
+const Face& compute_visibility2(Visibility& vis,
                                 const Point_2& q, const Halfedge& h,
                                 Arrangement_2& arr)
-{ return *(spv.compute_visibility(q, Halfedge_const_handle(&h), arr)); }
+{ return *(vis.compute_visibility(q, Halfedge_const_handle(&h), arr)); }
 
 }
 
@@ -43,10 +45,22 @@ void export_visibility_2(py::module_& m) {
       .def("attach", &Spv::attach)
       .def("detach", &Spv::detach)
       .def("arrangement_2", &Spv::arrangement_2)
-      .def("compute_visibility", vis2::compute_visibility1)
-      .def("compute_visibility", vis2::compute_visibility2)
+      .def("compute_visibility", vis2::compute_visibility1<Spv>)
+      .def("compute_visibility", vis2::compute_visibility2<Spv>)
       ;
   }
 
-  // non_regular_visibility
+  using Tev = vis2::Triangular_expansion_visibility_2;
+  if (! add_attr<Tev>(m, "Triangular_expansion_visibility_2")) {
+    py::class_<Tev> tev_c(m, "Triangular_expansion_visibility_2");
+    tev_c.def(py::init<>())
+      .def(py::init<const Arr&>())
+      .def("is_attached", &Tev::is_attached)
+      .def("attach", &Tev::attach)
+      .def("detach", &Tev::detach)
+      .def("arrangement_2", &Tev::arrangement_2)
+      .def("compute_visibility", vis2::compute_visibility1<Tev>)
+      .def("compute_visibility", vis2::compute_visibility2<Tev>)
+      ;
+  }
 }

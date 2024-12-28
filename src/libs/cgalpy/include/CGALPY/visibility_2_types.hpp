@@ -11,6 +11,7 @@
 #define CGALPY_VISIBILITY_2_TYPES_HPP
 
 #include <CGAL/Simple_polygon_visibility_2.h>
+#include <CGAL/Triangular_expansion_visibility_2.h>
 
 #include "CGALPY/visibility_2_config.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
@@ -23,8 +24,12 @@ namespace vis2 {
   using Halfedge_const_handle = aos2::Halfedge_const_handle;
   using Face = aos2::Face;
   using Face_const_handle = aos2::Face_const_handle;
+
   using Simple_polygon_visibility_2 =
     CGAL::Simple_polygon_visibility_2<Arrangement_2, Rc>;
+
+  using Triangular_expansion_visibility_2 =
+    CGAL::Triangular_expansion_visibility_2<Arrangement_2, Rc>;
 }
 
 #endif
