@@ -14,6 +14,7 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/make_circulator.hpp"
+#include "CGALPY/add_attr.hpp"
 
 namespace py = nanobind;
 
@@ -44,6 +45,7 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Dd = CGAL::Dac_decision;
 #endif
 
+  if (add_attr<Vertex>(c, "Vertex")) return;
   py::class_<Vertex> vertex_c(c, "Vertex");
   vertex_c.def(py::init<>())
 

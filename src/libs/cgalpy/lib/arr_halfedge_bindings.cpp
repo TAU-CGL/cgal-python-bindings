@@ -49,6 +49,7 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Dd = CGAL::Dac_decision;
 #endif
 
+  if (add_attr<He>(c, "Halfedge")) return;
   py::class_<He> halfedge_c(c, "Halfedge");
   halfedge_c.def(py::init<>())
     .def("direction", [](const He& h)->bool{ return h.direction(); })

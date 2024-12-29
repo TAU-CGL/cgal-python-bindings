@@ -14,6 +14,7 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/make_circulator.hpp"
+#include "CGALPY/add_attr.hpp"
 
 namespace py = nanobind;
 
@@ -43,13 +44,26 @@ py::object surfaces(const Face& f)
 void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Face = Aos::Face;
+  using V = Aos::Vertex;
 
   // Face base
-  py::class_<CGAL::Arr_face_base> face_base_c(c, "Arr_face_base");
-  face_base_c.def("assign", &CGAL::Arr_face_base::assign)
-    .def("is_unbounded", &CGAL::Arr_face_base::is_unbounded)
-    .def("is_fictitious", &CGAL::Arr_face_base::is_fictitious)
-    ;
+  if (! add_attr<CGAL::Arr_face_base>(c, "Arr_face_base")) {
+    py::class_<CGAL::Arr_face_base> face_base_c(c, "Arr_face_base");
+    face_base_c.def("assign", &CGAL::Arr_face_base::assign)
+      .def("is_unbounded", &CGAL::Arr_face_base::is_unbounded)
+      .def("is_fictitious", &CGAL::Arr_face_base::is_fictitious)
+      ;
+
+    // Isolated vertices
+    using Ivci = Aos::Isolated_vertex_const_iterator;
+    add_iterator<Ivci, Ivci, const V&>("Isolated_vertex_iterator", face_base_c);
+    face_base_c.def("isolated_vertices",
+                    [](const Face& face) {
+                      return make_iterator(face.isolated_vertices_begin(),
+                                           face.isolated_vertices_end());
+                    },
+                    py::keep_alive<0, 1>());
+  }
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
   using Env_data = Face::Face_data;
@@ -57,6 +71,7 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
 #endif
 
   // Face
+  if (add_attr<Face>(c, "Face")) return;
   py::class_<Face, CGAL::Arr_face_base> face_c(c, "Face");
   face_c.def(py::init<>())
     .def("number_of_inner_ccbs", &aos2::number_of_inner_ccbs)
@@ -121,16 +136,5 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   add_iterator<Si, Si>("Surface_iterator", face_c);
 #endif
 
-  using V = Aos::Vertex;
   add_attr<V>(face_c, "Vertex");
-
-  // Isolated vertices
-  using Ivci = Aos::Isolated_vertex_const_iterator;
-  add_iterator<Ivci, Ivci, const V&>("Isolated_vertex_iterator", face_base_c);
-  face_base_c.def("isolated_vertices",
-                  [](const Face& face) {
-                    return make_iterator(face.isolated_vertices_begin(),
-                                         face.isolated_vertices_end());
-                  },
-                  py::keep_alive<0, 1>());
 }
