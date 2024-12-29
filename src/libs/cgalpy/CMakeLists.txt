@@ -652,11 +652,22 @@ if (NOT SKBUILD)
     ################################################################################
     #
     # Add __init__.py
-    if(WIN32)
-        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/__init__.py")
-    else()
-        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
-    endif()
+    if (WIN32)
+      # Configure the __init__.py file to automatically load the dependant
+      # lshared ibraries, when the binding library is loaded (upon "import").
+      if (NOT Boost_LIBRARY_DIRS)
+        message(FATAL_ERROR "Boost libraries not found")
+      endif ()
+      if (NOT GMP_LIBRARY_DIR)
+        message(FATAL_ERROR "Gmp library not found")
+      endif ()
+      if (NOT MPFR_LIBRARY_DIR)
+        message(FATAL_ERROR "Mpfr library not found")
+      endif ()
+      set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/__init__.py")
+    else ()
+      set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
+    endif ()
     set(CGALPY_TRG_INIT "${CGALPY_LIB_DIR}/__init__.py")
     add_custom_command(
         OUTPUT ${CGALPY_TRG_INIT}
