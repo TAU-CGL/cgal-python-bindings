@@ -160,6 +160,13 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
       set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_curve_data_traits_2.cpp)
     endif ()
 
+    if (CGALPY_AOS2_COUNTING_TRAITS)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_counting_traits_2.cpp)
+    endif ()
+    if (CGALPY_AOS2_TRACING_TRAITS)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_tracing_traits_2.cpp)
+    endif ()
+
     # Cells
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_vertex_bindings.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_halfedge_bindings.cpp)

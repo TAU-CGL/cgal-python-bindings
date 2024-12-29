@@ -129,14 +129,22 @@ using Base_egt =
   Base_env_tr<envelope_3_bindings(), CGALPY_ENV3_GEOMETRY_TRAITS, Agt>::type;
 using Cnv = CGAL::_Default_convert_func<py::object, py::object>;
 using Egt = Env_tr<envelope_3_bindings(), env_surface_data(), Base_egt,
-                     py::object, py::object, Cnv>::type;
+                   py::object, py::object, Cnv>::type;
 
-// General polygon
+// General polygon, counting, and tracing
+constexpr bool counting_traits()
+{ return DETECT_EXIST(CGALPY_AOS2_COUNTING_TRAITS); }
+
+constexpr bool tracing_traits()
+{ return DETECT_EXIST(CGALPY_AOS2_TRACING_TRAITS); }
+
 using Ggt = Bso_tr<boolean_set_operations_2_bindings(), Egt>::type;
+using Ngt = Cnt_tr<counting_traits(), Ggt>::type;
+using Tgt = Trc_tr<tracing_traits(), Ngt>::type;
 
 // Curve Data & Consolidated curve data:
 // #if defined(CGALPY_AOS2_WITH_HISTORY)
-// using Cd_cv_data = Ggt::Curve_2*;
+// using Cd_cv_data = Tgt::Curve_2*;
 // using Cd_xcv_data = CGAL::_Unique_list<Cd_cv_data>;
 // using Cd_merge = CGAL::_Consolidate_unique_lists<Cd_cv_data>;
 // using Cd_convert = CGAL::_Default_convert_func<Cd_cv_data, Cd_xcv_data>;
@@ -153,7 +161,7 @@ using Ggt = Bso_tr<boolean_set_operations_2_bindings(), Egt>::type;
 // #endif
 using My_cd_tr =
   Cd_tr<aos2_with_history(), aos2_consolidated_curve_data(),
-        aos2_curve_data(), Ggt>;
+        aos2_curve_data(), Tgt>;
 using Cgt = My_cd_tr::Cgt;
 using Ccgt = My_cd_tr::Ccgt;
 
@@ -162,7 +170,7 @@ using Ccgt = My_cd_tr::Ccgt;
 // the curve-data traits itself).
 // Define the final geometry traits in the hierarchy:
 #if defined(CGALPY_AOS2_WITH_HISTORY)
-using Fgt = Ggt;
+using Fgt = Tgt;
 #else
 using Fgt = Ccgt;
 #endif
@@ -171,6 +179,8 @@ using Fgt = Ccgt;
 using Arr_geometry_traits_2 = Agt;
 using Env_geometry_traits_2 = Egt;
 using Gps_geometry_traits_2 = Ggt;
+using Cnt_geometry_traits_2 = Ngt;
+using Trc_geometry_traits_2 = Tgt;
 using Cd_geometry_traits_2 = Cgt;
 using Ccd_geometry_traits_2 = Ccgt;
 using Final_geometry_traits_2 = Fgt;

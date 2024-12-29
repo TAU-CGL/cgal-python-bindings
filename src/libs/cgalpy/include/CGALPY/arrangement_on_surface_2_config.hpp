@@ -12,9 +12,15 @@
 
 #include <nanobind/nanobind.h>
 
-#include <CGAL/Arr_segment_traits_2.h>
-#include <CGAL/Arr_non_caching_segment_traits_2.h>
 #include <CGAL/Arr_circle_segment_traits_2.h>
+#include <CGAL/Arr_consolidated_curve_data_traits_2.h>
+#include <CGAL/Arr_counting_traits_2.h>
+#include <CGAL/Arr_curve_data_traits_2.h>
+#include <CGAL/Arr_geodesic_arc_on_sphere_traits_2.h>
+#include <CGAL/Arr_tracing_traits_2.h>
+#include <CGAL/Arr_non_caching_segment_traits_2.h>
+#include <CGAL/Arr_segment_traits_2.h>
+
 #include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Envelope_3/Envelope_pm_dcel.h>
 #include <CGAL/Arrangement_on_surface_2.h>
@@ -26,11 +32,8 @@
 #include <CGAL/Gps_segment_traits_2.h>
 #include <CGAL/Gps_circle_segment_traits_2.h>
 #include <CGAL/Boolean_set_operations_2/Gps_default_dcel.h>
-#include <CGAL/Arr_geodesic_arc_on_sphere_traits_2.h>
-#include <CGAL/Arr_curve_data_traits_2.h>
-#include <CGAL/Arr_consolidated_curve_data_traits_2.h>
-#include <CGAL/Env_sphere_traits_3.h>
 #include <CGAL/Env_triangle_traits_3.h>
+#include <CGAL/Env_sphere_traits_3.h>
 #include <CGAL/Env_surface_data_traits_3.h>
 
 #include "CGALPY/config.hpp"
@@ -223,6 +226,18 @@ struct Bso_tr<true, CGAL::Arr_circle_segment_traits_2<Kernel>> {
 };
 template <typename Base>
 struct Bso_tr<true, Base> { using type = CGAL::Gps_traits_2<Base>; };
+
+// Counting
+template <bool b, typename Base> struct Cnt_tr {};
+template <typename Base> struct Cnt_tr<false, Base> { using type = Base; };
+template <typename Base>
+struct Cnt_tr<true, Base> { using type = CGAL::Arr_counting_traits_2<Base>; };
+
+// Tracing
+template <bool b, typename Base> struct Trc_tr {};
+template <typename Base> struct Trc_tr<false, Base> { using type = Base; };
+template <typename Base>
+struct Trc_tr<true, Base> { using type = CGAL::Arr_tracing_traits_2<Base>; };
 
 // Boolean set operations extension
 

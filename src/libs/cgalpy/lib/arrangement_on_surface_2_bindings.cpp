@@ -67,6 +67,9 @@ void export_arr_rational_function_traits_2(py::module_&);
 void export_arr_curve_data_traits_2(py::module_&);
 void export_arr_consolidated_curve_data_traits_2(py::module_&);
 
+void export_arr_counting_traits_2(py::module_&);
+void export_arr_tracing_traits_2(py::module_&);
+
 #if defined(CGALPY_ENVELOPE_3_BINDINGS)
 void export_env_plane_traits_3(py::module_&);
 void export_env_sphere_traits_3(py::module_&);
@@ -989,6 +992,14 @@ void export_arrangement_on_surface_2(py::module_& m) {
 // Consolidated curve data
 #if defined(CGALPY_AOS2_CONSOLIDATED_CURVE_DATA)
   export_arr_consolidated_curve_data_traits_2(m);
+#endif
+
+#if defined(CGALPY_AOS2_COUNTING_TRAITS)
+  export_arr_counting_traits_2(m);
+#endif
+
+#if defined(CGALPY_AOS2_TRACING_TRAITS)
+  export_arr_tracing_traits_2(m);
 #endif
 
 // 3D Envelopes
