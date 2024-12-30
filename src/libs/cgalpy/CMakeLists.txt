@@ -662,9 +662,6 @@ if (NOT SKBUILD)
     if (WIN32)
       # Configure the __init__.py file to automatically load the dependant
       # lshared ibraries, when the binding library is loaded (upon "import").
-      if (NOT Boost_LIBRARY_DIRS)
-        message(FATAL_ERROR "Boost libraries not found")
-      endif ()
       if (NOT GMP_LIBRARY_DIR)
         message(FATAL_ERROR "Gmp library not found")
       endif ()
