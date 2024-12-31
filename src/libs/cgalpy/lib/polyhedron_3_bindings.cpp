@@ -21,8 +21,13 @@
 #include <nanobind/make_iterator.h>
 
 #include <CGAL/IO/polygon_soup_io.h>
+
+//! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+#ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h> // needed for a type
+#endif
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
+
 #include <CGAL/boost/graph/properties.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_polyhedron.h>
@@ -593,11 +598,14 @@ void export_polyhedron_3(py::module_& m) {
     pol3::register_maps<py::module_, Prn, double>(m, "double"); // shadows FT
   }
 
+//! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+#ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   namespace PMP = CGAL::Polygon_mesh_processing;
   using pcad = PMP::Principal_curvatures_and_directions<Kernel>;
   pol3::vertex_map<Prn, pcad>
     (m, "vertex_principal_curvatures_and_directions_map",
      "dynamic_property_vertex_PC");
+#endif
 
   m.def("get_edge_is_feature_map",
         [](const Prn& sm) { return get(CGAL::edge_is_feature, sm); });
