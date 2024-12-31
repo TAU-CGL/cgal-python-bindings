@@ -26,7 +26,12 @@
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #include <CGAL/boost/graph/helpers.h>
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
+
+//! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+#ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
+#endif
+
 #include <CGAL/IO/Color.h>
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_surface_mesh.h>
@@ -366,7 +371,7 @@ C add_maps(C& c) {
   using Hi = typename Sm::Halfedge_index;
   using Fi = typename Sm::Face_index;
   using Pnt = typename Sm::Point;
-  using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
+
   c
     // TODO: add a class for this:
     .def("property_map_vertex_set_int", [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
@@ -383,16 +388,6 @@ C add_maps(C& c) {
         },
         py::arg("name") = std::string(), py::arg("default_value") = py::set())
     // this is here because it confused clang
-    .def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
-       py::arg("name"), py::arg("default_value"),
-        "adds a property map named `name` with value type `Principal_curvatures_and_directions` and default `default_value`\n"
-        "for index type `Vertex_index`. Returns the property map together with a Boolean\n"
-        "that is `true` if a new map was created. In case it already exists\n"
-        "the existing map together with `false` is returned.")
-    .def("property_map_vertex_Principal_curvatures_and_directions", &Sm::template property_map<Vi, Pcad>,
-        py::arg("name") = std::string(),
-          "returns an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
-
     .def("properties_vertex", [](const Sm& sm) { return sm.template properties<Vi>(); },
         "returns a vector with all strings that describe properties with the key type `Vertex_index`.")
     .def("properties_edge", [](const Sm& sm) { return sm.template properties<Ei>(); },
@@ -402,6 +397,20 @@ C add_maps(C& c) {
     .def("properties_face", [](const Sm& sm) { return sm.template properties<Fi>(); },
         "returns a vector with all strings that describe properties with the key type `Face_index`.")
     ;
+
+//! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+#ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
+  using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
+  c..def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
+       py::arg("name"), py::arg("default_value"),
+        "adds a property map named `name` with value type `Principal_curvatures_and_directions` and default `default_value`\n"
+        "for index type `Vertex_index`. Returns the property map together with a Boolean\n"
+        "that is `true` if a new map was created. In case it already exists\n"
+        "the existing map together with `false` is returned.")
+    .def("property_map_vertex_Principal_curvatures_and_directions", &Sm::template property_map<Vi, Pcad>,
+        py::arg("name") = std::string(),
+          "returns an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
+#endif
 
   add_generic_maps<C, Sm, std::string>(c, "string");
   add_generic_maps<C, Sm, CGAL::IO::Color>(c, "color");
@@ -580,7 +589,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   // Surface mesh
   if (! add_attr<Sm>(m, name)) {
 
-    using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
     py::class_<Sm> sm_c(m, name);
     sm::add_maps<Sm, py::class_<Sm>>(sm_c);
     sm_c.def(py::init<>())
@@ -746,7 +754,6 @@ void export_surface_mesh(py::module_& m) {
   using Ei = typename Sm_3::Edge_index;
   using Pnt = Kernel_::Point_3;
   using Vector_3 = Kernel_::Vector_3;
-  using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
@@ -761,7 +768,11 @@ void export_surface_mesh(py::module_& m) {
   using ebmap_type = typename Sm_3::template Property_map<Ei, bool>; // different for bools because it would return std::_Bit_reference
   internal::export_property_map_bool<Sm_3, Ei>(m, "Edge_bool_map");
 
+//! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+#ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
+  using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
   internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
+#endif
 
   sm::export_property_maps<py::module_, Sm_3, std::string>(m, "string");
   sm::export_property_maps<py::module_, Sm_3, Kernel_::Vector_3>(m, "vector_3");
