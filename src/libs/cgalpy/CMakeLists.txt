@@ -541,21 +541,8 @@ if (NOT SKBUILD)
     endif()
 
     # EFEF: Only certain packages need Eigen
-    include(CGAL_Eigen3_support)
     if (TARGET CGAL::Eigen3_support)
       target_link_libraries(CGALPY PRIVATE CGAL::Eigen3_support)
-    else ()
-      if (${CGALPY_KERNEL_D_BINDINGS} AND
-        ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
-        (${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPEC_D})))
-	  SET(CGALPY_KERNEL_D_BINDINGS OFF)
-          SET(CGALPY_SPATIAL_SEARCHING_BINDINGS OFF)
-          message(WARNING "Eigen3 not found!\nTurning off the generations of\n(i) dD Kernel, and\n(ii) spatial searching bindings")
-      endif ()
-      if (${CGALPY_POLYGON_MESH_PROCESSING_BINDINGS})
-        SET(CGALPY_POLYGON_MESH_PROCESSING_BINDINGS OFF)
-	message(WARNING "Eigen3 not found!\nTurning off the generations of Polygon Mesh Processing")
-      endif ()
     endif ()
 
     # EFEF: Only certain packages need METIS

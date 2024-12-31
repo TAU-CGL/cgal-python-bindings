@@ -29,6 +29,21 @@ if (NOT CGAL_FOUND AND NOT DEFINED ENV{CGALPY_PYPI})
   return()
 endif ()
 
+include(CGAL_Eigen3_support)
+if (NOT TARGET CGAL::Eigen3_support)
+  if (${CGALPY_KERNEL_D_BINDINGS} AND
+    ((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
+    (${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPEC_D})))
+     SET(CGALPY_KERNEL_D_BINDINGS OFF CACHE BOOL "" FORCE)
+     SET(CGALPY_SPATIAL_SEARCHING_BINDINGS OFF CACHE BOOL "" FORCE)
+      message(WARNING "Eigen3 not found!\nTurning off the generations of\n(i) dD Kernel, and\n(ii) spatial searching bindings")
+  endif ()
+  if (${CGALPY_POLYGON_MESH_PROCESSING_BINDINGS})
+    SET(CGALPY_POLYGON_MESH_PROCESSING_BINDINGS OFF CACHE BOOL "" FORCE)
+    message(WARNING "Eigen3 not found!\nTurning off the generations of Polygon Mesh Processing")
+  endif ()
+endif ()
+
 # Find required Python library
 if (SKBUILD)
     find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
