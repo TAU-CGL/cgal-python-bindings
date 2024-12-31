@@ -15,8 +15,6 @@
 
 namespace py = nanobind;
 
-namespace bvr {
-
 /*! The implementation of the bindings of the CGAL::Graphics_scene_options class
  * template presents a specific challenge. The interface of this class template
  * consists of several callback functions optionally set by the user. Let `gso`
