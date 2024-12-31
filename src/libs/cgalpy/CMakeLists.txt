@@ -662,13 +662,26 @@ if (NOT SKBUILD)
     if (WIN32)
       # Configure the __init__.py file to automatically load the dependant
       # lshared ibraries, when the binding library is loaded (upon "import").
+      if (NOT Boost_LIBRARY_DIRS)
+        message(FATAL_ERROR "Boost libraries not found")
+      endif ()
       if (NOT GMP_LIBRARY_DIR)
         message(FATAL_ERROR "Gmp library not found")
       endif ()
       if (NOT MPFR_LIBRARY_DIR)
         message(FATAL_ERROR "Mpfr library not found")
       endif ()
-      set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/__init__.py")
+      if (CGAL_Qt6_FOUND)
+        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/Qt/__init__.py")
+      else ()
+        # The Qt6 library dir seems not be exported by the find_package(Qt6..)
+	# call; thus, we set it ourselves:
+	set(Qt6_LIBRARY_DIR "${Qt6_DIR}/bin")
+        if (NOT Qt6_LIBRARY_DIR)
+          message(FATAL_ERROR "Qt6 library not found")
+	endif ()
+        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/__init__.py")
+      endif ()
     else ()
       set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
     endif ()
@@ -681,6 +694,7 @@ if (NOT SKBUILD)
         "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
         "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
         "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
+	"-DQt6_LIBRARY_DIR=${Qt6_LIBRARY_DIR}"
         "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
         -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
         DEPENDS ${CGALPY_SRC_INIT})
