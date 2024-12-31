@@ -179,21 +179,5 @@ select_triangulation_2()
 select_triangulation_3()
 select_visibility_2()
 
-if (${CGALPY_KERNEL_D_BINDINGS} AND
-((${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPIC_D}) OR
-(${CGALPY_KERNEL_D} EQUAL ${CGALPY_KERNEL_D_EPEC_D})))
-  if (NOT SKBUILD)
-    find_package(Eigen3 3.3 REQUIRED)
-    if (NOT EIGEN3_FOUND)
-        SET(CGALPY_KERNEL_D_BINDINGS OFF)
-        SET(CGALPY_SPATIAL_SEARCHING_BINDINGS OFF)
-        message(WARNING "Eigen3 not found!\nTurning off the generations of\n(i) dD Kernel, and\n(ii) spatial searching bindings")
-    endif()
-  endif()
-  #  include(CGAL_Eigen3_support)
-  include_directories(${EIGEN3_INCLUDE_DIR})
-endif ()
-
-
 # Add subdirectories
 add_subdirectory(libs)
