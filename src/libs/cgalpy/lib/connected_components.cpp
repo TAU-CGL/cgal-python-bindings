@@ -14,9 +14,9 @@ namespace pmp {
 //
 template <typename PolygonMesh>
 auto connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor
-                      seed_face,
-                    PolygonMesh& pm,
-                    const py::dict& np) {
+                         seed_face,
+                         PolygonMesh& pm,
+                         const py::dict& np) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
@@ -406,4 +406,3 @@ void export_connected_components(py::module_& m) {
 
 
 }
-
