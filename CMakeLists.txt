@@ -13,7 +13,13 @@ if (POLICY CMP0167)
   cmake_policy(SET CMP0167 OLD)
 endif ()
 
-project(cgalpy VERSION "1.0.4" LANGUAGES CXX) # the pyproject.toml file sets the version
+# The pyproject.toml file also sets the version.
+# Ideally, the version would be set in a single place
+# Similar to the minimum required version of cmake, which is set in this file,
+# I would expect the version to be set here as well.
+# Unfortunately, this is not possible.
+# Therefore, when bumping up the number, do it in both places!
+project(cgalpy VERSION "1.0.10" LANGUAGES CXX)
 
 # Use C++17 for this directory and its sub-directories.
 set(CMAKE_CXX_STANDARD 17)
