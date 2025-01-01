@@ -26,8 +26,11 @@ py::object outer_ccb(const Face& f) { return make_circulator(f.outer_ccb()); }
 py::object outer_ccbs(const Face& f)
 { return make_iterator(f.outer_ccbs_begin(), f.outer_ccbs_end()); }
 
-py::object inner_ccbs(const Face& f)
-{ return make_iterator(f.inner_ccbs_begin(), f.inner_ccbs_end()); }
+py::object inner_ccbs(const Face& f) {
+  Arrangement_on_surface_2::Inner_ccb_const_iterator begin = f.inner_ccbs_begin();
+  Arrangement_on_surface_2::Inner_ccb_const_iterator end = f.inner_ccbs_end();
+  return make_iterator(begin, end);
+}
 
 //
 size_t number_of_inner_ccbs(const Face& f) { return f.number_of_inner_ccbs(); }
