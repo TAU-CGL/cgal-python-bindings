@@ -23,12 +23,19 @@ namespace aos2 {
 // Bind iterators & circulators
 py::object outer_ccb(const Face& f) { return make_circulator(f.outer_ccb()); }
 
-py::object outer_ccbs(const Face& f)
-{ return make_iterator(f.outer_ccbs_begin(), f.outer_ccbs_end()); }
+py::object outer_ccbs(const Face& f) {
+  // Workaround a defficiency in CGAL/MSVC: explicitly specify the inner CCB iterators.
+  using Occi = Arrangement_on_surface_2::Outer_ccb_const_iterator;
+  Occi begin = f.outer_ccbs_begin();
+  Occi end = f.outer_ccbs_end();
+  return make_iterator(begin, end);
+}
 
 py::object inner_ccbs(const Face& f) {
-  Arrangement_on_surface_2::Inner_ccb_const_iterator begin = f.inner_ccbs_begin();
-  Arrangement_on_surface_2::Inner_ccb_const_iterator end = f.inner_ccbs_end();
+  // Workaround a defficiency in CGAL/MSVC: explicitly specify the inner CCB iterators.
+  using Icci = Arrangement_on_surface_2::Inner_ccb_const_iterator;
+  Icci begin = f.inner_ccbs_begin();
+  Icci end = f.inner_ccbs_end();
   return make_iterator(begin, end);
 }
 
