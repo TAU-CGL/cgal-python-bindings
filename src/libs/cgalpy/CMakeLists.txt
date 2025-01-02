@@ -571,6 +571,51 @@ if (NOT SKBUILD)
     #   set_target_properties(CGALPY PROPERTIES BUNDLE ON)
     # endif()
 
+	#
+    # Add __init__.py
+    if (WIN32)
+      # Configure the __init__.py file to automatically load the dependant
+      # lshared ibraries, when the binding library is loaded (upon "import").
+      if (NOT Boost_LIBRARY_DIRS)
+        message(FATAL_ERROR "Boost libraries not found")
+      endif ()
+      if (NOT GMP_LIBRARY_DIR)
+        message(FATAL_ERROR "Gmp library not found")
+      endif ()
+      if (NOT MPFR_LIBRARY_DIR)
+        message(FATAL_ERROR "Mpfr library not found")
+      endif ()
+      if (CGAL_Qt6_FOUND)
+        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/Qt/__init__.py")
+        # The Qt6 library dir seems not be exported by the find_package(Qt6..)
+		# call; thus, we set it ourselves:
+		if (NOT Qt6_LIBRARY_DIR)
+			set(Qt6_LIBRARY_DIR "${QT6_INSTALL_PREFIX}/bin")
+		endif()
+		if (NOT Qt6_LIBRARY_DIR)
+		  message(FATAL_ERROR "Qt6 library not found")
+		endif ()
+      else ()
+        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/__init__.py")
+      endif ()
+    else ()
+      set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
+    endif ()
+    set(CGALPY_TRG_INIT "${CGALPY_LIB_DIR}/__init__.py")
+    add_custom_command(
+        OUTPUT ${CGALPY_TRG_INIT}
+        COMMAND "${CMAKE_COMMAND}"
+        "-DFILE_IN=${CGALPY_SRC_INIT}"
+        "-DFILE_OUT=${CGALPY_TRG_INIT}"
+        "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
+        "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
+        "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
+	"-DQt6_LIBRARY_DIR=${Qt6_LIBRARY_DIR}"
+        "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
+        -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
+        DEPENDS ${CGALPY_SRC_INIT})
+
+    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_INIT})
 
     ################################################################################
     # Stubs (Type Annotation)
@@ -632,7 +677,7 @@ if (NOT SKBUILD)
         MODULE cgalpy.${CGALPY_LIB_NAME}.${name}
         OUTPUT ${name}/__init__.pyi
         PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
-        DEPENDS CGALPY
+        DEPENDS CGALPY ${CGALPY_TRG_INIT}
       )
     endfunction()
 
@@ -644,7 +689,7 @@ if (NOT SKBUILD)
       CGALPY_STUBS
       MODULE cgalpy.${CGALPY_LIB_NAME}
       OUTPUT ${PYI_PREFIX}${CGALPY_LIB_NAME}.pyi
-      DEPENDS CGALPY
+      DEPENDS CGALPY ${CGALPY_TRG_INIT}
       PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
       MARKER_FILE py.typed
     )
@@ -655,49 +700,6 @@ if (NOT SKBUILD)
     ################################################################################
     # Post build
     ################################################################################
-    #
-    # Add __init__.py
-    if (WIN32)
-      # Configure the __init__.py file to automatically load the dependant
-      # lshared ibraries, when the binding library is loaded (upon "import").
-      if (NOT Boost_LIBRARY_DIRS)
-        message(FATAL_ERROR "Boost libraries not found")
-      endif ()
-      if (NOT GMP_LIBRARY_DIR)
-        message(FATAL_ERROR "Gmp library not found")
-      endif ()
-      if (NOT MPFR_LIBRARY_DIR)
-        message(FATAL_ERROR "Mpfr library not found")
-      endif ()
-      if (CGAL_Qt6_FOUND)
-        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/Qt/__init__.py")
-        # The Qt6 library dir seems not be exported by the find_package(Qt6..)
-	# call; thus, we set it ourselves:
-	set(Qt6_LIBRARY_DIR "${Qt6_DIR}/bin")
-        if (NOT Qt6_LIBRARY_DIR)
-          message(FATAL_ERROR "Qt6 library not found")
-	endif ()
-      else ()
-        set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/__init__.py")
-      endif ()
-    else ()
-      set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
-    endif ()
-    set(CGALPY_TRG_INIT "${CGALPY_LIB_DIR}/__init__.py")
-    add_custom_command(
-        OUTPUT ${CGALPY_TRG_INIT}
-        COMMAND "${CMAKE_COMMAND}"
-        "-DFILE_IN=${CGALPY_SRC_INIT}"
-        "-DFILE_OUT=${CGALPY_TRG_INIT}"
-        "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
-        "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
-        "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
-	"-DQt6_LIBRARY_DIR=${Qt6_LIBRARY_DIR}"
-        "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
-        -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
-        DEPENDS ${CGALPY_SRC_INIT})
-
-    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_INIT})
 
     # Setup generation
     set(CGALPY_SRC_SETUP "${CMAKE_CURRENT_LIST_DIR}/setup.py")
