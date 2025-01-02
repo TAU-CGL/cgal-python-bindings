@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-# export PYTHONPATH=...
+#!/usr/bin/python
+
 import os
 import sys
 import importlib
@@ -23,4 +23,4 @@ except:
 
 with open(filename, 'r') as f:
   prn = Polyhedron(f.read())
-  Pol3.draw(prn)
+  Pol3.draw(prn, filename)
