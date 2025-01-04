@@ -1,0 +1,93 @@
+################################################################################
+# Segment traits
+################################################################################
+./aggregated_insertion.py CGALPY_kerEpecInt_aos2SegPl
+./edge_insertion.py CGALPY_kerEpecInt_aos2SegPl
+./global_insertion.py CGALPY_kerEpecInt_aos2SegPl
+./isolated_vertices.py CGALPY_kerEpecInt_aos2SegPl
+./global_removal.py CGALPY_kerEpecInt_aos2SegPl
+./overlay.py CGALPY_kerEpecInt_aos2SegPl
+./vertical_ray_shooting.py CGALPY_kerEpecInt_aos2SegPl
+./io.py CGALPY_kerEpecInt_aos2SegPl
+./point_location.py CGALPY_kerEpecInt_aos2SegPl
+./special_edge_insertion.py CGALPY_kerEpecInt_aos2SegPl
+./predefined_kernel.py CGALPY_kerEpecInt_aos2SegPl
+./incremental_insertion.py CGALPY_kerEpecInt_aos2SegPl
+./edge_manipulation.py CGALPY_kerEpecInt_aos2SegPl
+./observer.py CGALPY_kerEpecInt_aos2SegPl
+./batched_point_location.py CGALPY_kerEpecInt_aos2SegPl
+
+################################################################################
+# Non-caching segment traits
+################################################################################
+./predefined_kernel_non_intersecting.py CGALPY_kerEpec_aos2NcsegPl
+./aggregated_insertion.py CGALPY_kerEpec_aos2NcsegPl
+./edge_insertion.py CGALPY_kerEpec_aos2NcsegPl
+./global_insertion.py CGALPY_kerEpec_aos2NcsegPl
+./isolated_vertices.py CGALPY_kerEpec_aos2NcsegPl
+./global_removal.py CGALPY_kerEpec_aos2NcsegPl
+./overlay.py CGALPY_kerEpec_aos2NcsegPl
+./vertical_ray_shooting.py CGALPY_kerEpec_aos2NcsegPl
+./io.py CGALPY_kerEpec_aos2NcsegPl
+./point_location.py CGALPY_kerEpec_aos2NcsegPl
+./special_edge_insertion.py CGALPY_kerEpec_aos2NcsegPl
+./predefined_kernel.py CGALPY_kerEpec_aos2NcsegPl
+./incremental_insertion.py CGALPY_kerEpec_aos2NcsegPl
+./edge_manipulation.py CGALPY_kerEpec_aos2NcsegPl
+./observer.py CGALPY_kerEpec_aos2NcsegPl
+./batched_point_location.py CGALPY_kerEpec_aos2NcsegPl
+
+################################################################################
+# Algebraic traits
+################################################################################
+./algebraic_curves.py CGALPY_kerEpecInt_aos2AlgPl
+./algebraic_segments.py CGALPY_kerEpecInt_aos2AlgPl
+
+################################################################################
+# Bezier curve traits
+################################################################################
+./bezier_curves.py CGALPY_kerEpecInt_aos2BezPl
+
+################################################################################
+# Circle-segment traits
+################################################################################
+./circles.py CGALPY_kerEpecInt_aos2CsPl
+./circular_arcs.py CGALPY_kerEpecInt_aos2CsPl
+
+################################################################################
+# Segment traits, face extended
+################################################################################
+./face_extension_overlay.py CGALPY_kerEpecInt_aos2SegFePl
+./face_extension.py CGALPY_kerEpecInt_aos2SegFePl
+
+################################################################################
+# Conic arc traits
+################################################################################
+./conic_multiplicities.py CGALPY_kerEpecInt_aos2ConicPl
+./conics.py CGALPY_kerEpecInt_aos2ConicPl
+
+################################################################################
+# Linear traits
+################################################################################
+./dual_lines.py CGALPY_kerEpecInt_aos2LinearPl
+./io_unbounded.py CGALPY_kerEpecInt_aos2LinearPl
+./unbounded_non_intersecting.py CGALPY_kerEpecInt_aos2LinearPl
+
+################################################################################
+# Rational function traits
+################################################################################
+./rational_functions.py CGALPY_kerEpecInt_aos2RatPl
+./rational_functions_rational_coefficients.py CGALPY_kerEpecInt_aos2RatPl
+./unbounded_rational_functions.py CGALPY_kerEpecInt_aos2RatPl
+
+################################################################################
+# Segment traits, all extended
+################################################################################
+./overlay_color.py CGALPY_kerEpecInt_aos2SegVeHeFePl
+./dcel_extension_io.py CGALPY_kerEpecInt_aos2SegVeHeFePl
+./dcel_extension.py CGALPY_kerEpecInt_aos2SegVeHeFePl
+
+################################################################################
+# Linear traits, face extended
+################################################################################
+./overlay_unbounded.py CGALPY_kerEpecInt_aos2LinearFe
