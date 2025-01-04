@@ -1,9 +1,9 @@
-#!/usr/bin/python3
-# export PYTHONPATH=...
+#!/usr/bin/python
+
 import os
 import sys
 import importlib
-import arr_print as ap
+from arr_print import *
 
 if len(sys.argv) < 2:
   sys.path.append(os.path.abspath('../precompiled'))
@@ -12,10 +12,6 @@ else:
   lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
-Aos2 = CGALPY.Aos2
-
-CGALPY = importlib.import_module(lib)
-
 Aos2 = CGALPY.Aos2
 Pt2_Shift = Aos2.Pt2_Shift
 Arrangement_2 = Aos2.Arrangement_2
@@ -97,4 +93,4 @@ ip2 = ctr_pt(Integer(1), Integer(2))
 ip3 = ctr_pt(Algebraic_real(-1), Algebraic_real(2))
 Aos2.insert(arr, [ip1, ip2, ip3])
 
-ap.print_arrangement_size(arr)
+print_arrangement_size(arr)

@@ -1,15 +1,4 @@
-import os
-import sys
-import importlib
-
-if len(sys.argv) < 2:
-  sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[1]
-
-CGALPY = importlib.import_module(lib)
-Aos2 = CGALPY.Aos2
+#!/usr/bin/python
 
 #
 def print_ccb(ccb):
@@ -48,19 +37,19 @@ def print_arrangement(arr):
 
   # Print the arrangement vertices.
   print('{} vertices:'.format(arr.number_of_vertices()))
-  v: Arrangement.Vertex
+  v: arr.Vertex
   for v in arr.vertices():
     if v.is_isolated(): print('({})  - Isolated.'.format(v.point()))
     else: print('({})  - degree {}'.format(v.point(), v.degree()))
 
   # Print the arrangement edges.
   print('{} edges:'.format(arr.number_of_edges()))
-  e: Arrangement.Halfedge
+  e: arr.Halfedge
   for e in arr.edges(): print('[{}]'.format(e.curve()))
 
   # Print the arrangement faces.
   print('{} faces:'.format(arr.number_of_faces()))
-  f: Arrangement.Face
+  f: arr.Face
   for f in arr.faces(): print_face(f)
 
 # Print the number of cells of a given arrangement.

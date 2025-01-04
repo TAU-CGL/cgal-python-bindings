@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-# export PYTHONPATH=...
+#!/usr/bin/python
+
 import os
 import sys
 import importlib
@@ -28,7 +28,7 @@ Aos2.insert(arr, Segment(Point(1, 1), Point(1, 6)))
 Aos2.insert(arr, Segment(Point(5, 1), Point(5, 6)))
 
 print("The initial arrangement:")
-print_arrangement(arr)
+print_arrangement_size(arr)
 
 # Remove e1 and its incident vertices using the function remove_edge().
 v1 = e1.source()
@@ -41,4 +41,4 @@ Aos2.remove_vertex(arr, v2)
 Aos2.remove_edge(arr, e2)
 
 print("The final arrangement:")
-print_arrangement(arr)
+print_arrangement_size(arr)

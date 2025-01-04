@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-# export PYTHONPATH=...
+#!/usr/bin/python
 import os
 import sys
 import importlib
@@ -22,11 +21,15 @@ Conic_arc = Traits.Curve_2
 Naive_pl = Aos2.Arr_naive_point_location
 
 Ker = CGALPY.Ker
+Result = CGALPY.Result
 Rat_point = Traits.Rat_point_2
 Rat_segment = Traits.Rat_segment_2
 Rat_circle = Traits.Rat_circle_2
 
-arr = Arrangement()
+traits = Traits()
+ctr_cv = traits.construct_curve_2_object()
+
+arr = Arrangement(traits)
 pl = Naive_pl(arr);
 
 # Insert a hyperbolic arc, supported by the hyperbola y = x^2/(1-x)
@@ -34,7 +37,7 @@ pl = Naive_pl(arr);
 # Note that the arc is counterclockwise oriented.
 ps1 = Point(-1, Rational(1,2));
 pt1 = Point(Rational(1,2), Rational(1,2));
-cv1 = Conic_arc(1, 0, 1, 0, -1, 0, Ker.COUNTERCLOCKWISE, ps1, pt1);
+cv1 = ctr_cv(1, 0, 1, 0, -1, 0, Result.COUNTERCLOCKWISE, ps1, pt1);
 Aos2.insert(arr, cv1, pl);
 
 # Insert the bottom half of the circle centered at (0, 1/2) whose radius
@@ -42,7 +45,7 @@ Aos2.insert(arr, cv1, pl);
 circ2 = Rat_circle(Rat_point(0, Rational(1,2)), Rational(1,4));
 ps2 = Point(-Rational(1,2), Rational(1,2));
 pt2 = Point(Rational(1,2), Rational(1,2));
-cv2 = Conic_arc(circ2, Ker.COUNTERCLOCKWISE, ps2, pt2);
+cv2 = ctr_cv(circ2, Result.COUNTERCLOCKWISE, ps2, pt2);
 Aos2.insert(arr, cv2, pl);
 
 print_arrangement(arr);

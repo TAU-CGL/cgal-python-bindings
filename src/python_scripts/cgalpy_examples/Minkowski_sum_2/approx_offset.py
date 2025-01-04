@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-# export PYTHONPATH=...
+#!/usr/bin/python
+
 import os
 import sys
 import time

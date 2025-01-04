@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-# export PYTHONPATH=...
+#!/usr/bin/python
+
 import os
 import sys
 import importlib
@@ -29,10 +29,8 @@ Ker = CGALPY.Ker
 #   filename = argv[1]
 # except:
 #   filename = 'points.dat'
-if len(sys.argv) > 1:
-    filename = sys.argv[1]
-else:
-    filename = 'points.dat'
+if len(sys.argv) > 2: filename = sys.argv[2]
+else: filename = 'points.txt'
 
 # Open the input file.
 # Read the points from the file, and construct their dual lines.

@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-# export PYTHONPATH=...
+#!/usr/bin/python
+
 import os
 import sys
 import importlib
@@ -52,4 +52,4 @@ while True:
   except StopIteration:
     break;
 
-print_arrangement(arr)
+print_arrangement_size(arr)

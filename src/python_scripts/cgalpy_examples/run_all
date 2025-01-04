@@ -1,71 +1,22 @@
-# Aos2
-# ########
-# epec, circle-segment traits, vertex extended
-./aos2_cs.py CGALPY_kerEpec_aos2ArrCsVe
-./overlay_cs.py CGALPY_kerEpec_aos2ArrCsVe
+./aos2_cs.py    CGALPY_kerEpec_aos2CsVe
+./overlay_cs.py CGALPY_kerEpec_aos2CsVe
 
-# epec, segment traits, face extended
-./aos2_fex.py CGALPY_kerEpec_aos2ArrSegFePl
-./overlay.py CGALPY_kerEpec_aos2ArrSegFePl
-./vertical_decomposition.py CGALPY_kerEpec_aos2ArrSegFePl
-./zone.py CGALPY_kerEpec_aos2ArrSegFePl
-./point_location.py CGALPY_kerEpec_aos2ArrSegFePl
+./aos2_fex.py               CGALPY_kerEpec_aos2SegFePl
+./vertical_decomposition.py CGALPY_kerEpec_aos2SegFePl
+./zone.py                   CGALPY_kerEpec_aos2SegFePl
+./point_location.py         CGALPY_kerEpec_aos2SegFePl
 
-# epec, algebraic traits
-# ./aos2_algebraic_curves.py CGALPY_kerEpec_aos2ArrAlg
+./aos2_cs.py CGALPY_kerEpec_aos2Cs
 
-# epec, circle-segment traits
-./aos2_cs.py CGALPY_kerEpec_aos2ArrCs
+./vertical_decomposition.py CGALPY_kerEpec_aos2SegPl
+./zone.py                   CGALPY_kerEpec_aos2SegPl
+./aos2.py                   CGALPY_kerEpec_aos2SegPl
 
-# epec, segment traits
-
-#
-./vertical_decomposition.py CGALPY_kerEpec_aos2ArrSegPl
-./zone.py CGALPY_kerEpec_aos2ArrSegPl
-./aos2.py CGALPY_kerEpec_aos2ArrSegPl
-
-# bso2
-# ########
-#
-./circle_segment_polygons.py CGALPY_kerEpec_aos2ArrCs_bso2
-
-#
-./conic_traits_adapter.py CGALPY_kerEpec_aos2ArrConic_bso2
-
-#
-./union_intersect.py CGALPY_kerEpec_aos2ArrSeg_bso2_pol2
-./sequence.py CGALPY_kerEpec_aos2ArrSeg_bso2_pol2
-./simple_join_intersect.py CGALPY_kerEpec_aos2ArrSeg_bso2_pol2
-
-# ms2
-# ########
-./approx_inset.py CGALPY_kerEpec_pol2_ms2_pp
-./sum_by_decomposition.py CGALPY_kerEpec_pol2_ms2_pp
-
-# as3
-# ########
-./as3_del_fast_epic.py CGALPY_kerEpic_as3Plain_tri3DelFasSeq
-./as3_del_compact_epic.py CGALPY_kerEpic_as3Plain_tri3DelFasSeq
-./as3_exact_del_compact_epic.py CGALPY_kerEpic_as3Plain_tri3DelFasSeq
-./as3_reg_compact_epic.py CGALPY_kerEpic_as3Plain_tri3DelFasSeq
-
-# kerd
-# ########
-# \todo
 # ./kerd_do_intersect.py CGALPY_kerdEpicdDynamic
 
-#
 ./kerd_do_intersect.py CGALPY_kerdCdlgDynamic
 
 ./kd_tree.py CGALPY_kerdCdlgDynamic_ss2
 
-# Ker
 ./ker_intersection.py CGALPY_kerEpecInt
-
-./ker_intersection.py CGALPY
-
-./epic.py CGALPY_kerEpic
-
-# tri3
-# ########
-# tri3_del.py
+./epic.py            CGALPY_kerEpic
