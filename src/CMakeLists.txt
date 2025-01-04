@@ -29,6 +29,7 @@ if (NOT CGAL_FOUND AND NOT DEFINED ENV{CGALPY_PYPI})
   return()
 endif ()
 
+find_package(Eigen3 3.3.0 QUIET)
 include(CGAL_Eigen3_support)
 if (NOT TARGET CGAL::Eigen3_support)
   if (${CGALPY_KERNEL_D_BINDINGS} AND
