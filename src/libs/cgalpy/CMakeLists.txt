@@ -619,12 +619,12 @@ if (NOT SKBUILD)
     else ()
       set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
     endif ()
-    set(CGALPY_TRG_INIT "${CGALPY_LIB_DIR}/__init__.py")
+    set(CGALPY_OUT_INIT "${CGALPY_LIB_DIR}/__init__.py")
     add_custom_command(
-        OUTPUT ${CGALPY_TRG_INIT}
+        OUTPUT ${CGALPY_OUT_INIT}
         COMMAND "${CMAKE_COMMAND}"
         "-DFILE_IN=${CGALPY_SRC_INIT}"
-        "-DFILE_OUT=${CGALPY_TRG_INIT}"
+        "-DFILE_OUT=${CGALPY_OUT_INIT}"
         "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
         "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
         "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
@@ -632,8 +632,8 @@ if (NOT SKBUILD)
         "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
         -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
         DEPENDS ${CGALPY_SRC_INIT})
-
-    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_INIT})
+    add_custom_target(CGALPY_INIT ALL DEPENDS ${CGALPY_OUT_INIT})
+    list(APPEND CGALPY_BUILD_DEPENDS CGALPY_INIT)
 
     ################################################################################
     # Stubs (Type Annotation)
@@ -665,8 +665,18 @@ if (NOT SKBUILD)
     #         ARGS ${CGALPY_MODULE_ARGS}
     #         DEPENDS ${CGALPY_STUBS_GENERATOR} ${CGALPY_MODULE_INPUT}
     #         VERBATIM)
+    # add_custom_target(CGALPY_STUBS ALL DEPENDS ${CGALPY_MODULE_OUTPUT})
 
-    set(CGALPY_STUBS ${CGALPY_MODULE_OUTPUT})
+    nanobind_add_stub(
+      CGALPY_STUBS
+      MODULE cgalpy.${CGALPY_LIB_NAME}
+      OUTPUT ${CGALPY_LIB_NAME}.pyi
+      DEPENDS CGALPY CGALPY_INIT
+      PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
+      MARKER_FILE py.typed
+    )
+
+    list(APPEND CGALPY_STUBS_DEPENDS CGALPY_STUBS)
 
     function(add_module name)
       set(MODULE_OUTPUT_PATH ${CGALPY_DST_STUBS_DIR}/${name})
@@ -687,33 +697,27 @@ if (NOT SKBUILD)
       #   COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
       #   ARGS ${MODULE_ARGS}
       #   DEPENDS ${CGALPY_STUBS_GENERATOR} ${MODULE_INPUT})
-
-      set(CGALPY_STUBS "${CGALPY_STUBS}" ${MODULE_OUTPUT} PARENT_SCOPE)
+      # add_custom_target(CGALPY_${name}_STUBS ALL DEPENDS ${MODULE_OUTPUT})
 
       nanobind_add_stub(
         CGALPY_${name}_STUBS
         MODULE cgalpy.${CGALPY_LIB_NAME}.${name}
         OUTPUT ${name}/__init__.pyi
+        DEPENDS CGALPY CGALPY_INIT
         PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
-        DEPENDS CGALPY ${CGALPY_TRG_INIT}
       )
+
+      set(STUBS_DEPENDS ${CGALPY_STUBS_DEPENDS})
+      list(APPEND STUBS_DEPENDS CGALPY_${name}_STUBS)
+      set(CGALPY_STUBS_DEPENDS "${STUBS_DEPENDS}" PARENT_SCOPE)
     endfunction()
 
     foreach (MODULE IN LISTS CGALPY_MODULES)
       add_module(${MODULE})
     endforeach ()
 
-    nanobind_add_stub(
-      CGALPY_STUBS
-      MODULE cgalpy.${CGALPY_LIB_NAME}
-      OUTPUT ${PYI_PREFIX}${CGALPY_LIB_NAME}.pyi
-      DEPENDS CGALPY ${CGALPY_TRG_INIT}
-      PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
-      MARKER_FILE py.typed
-    )
-
-    # add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS})
-    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS})
+    add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS_DEPENDS})
+    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS_DEPENDS})
 
     ################################################################################
     # Post build
@@ -721,7 +725,7 @@ if (NOT SKBUILD)
 
     # Setup generation
     set(CGALPY_SRC_SETUP "${CMAKE_CURRENT_LIST_DIR}/setup.py")
-    set(CGALPY_TRG_SETUP "${CGALPY_LIB_DIR}/setup.py")
+    set(CGALPY_OUT_SETUP "${CGALPY_LIB_DIR}/setup.py")
     set(CGALPY_TARGET_LINKER_FILE ${CGALPY_LIB_NAME}${CGALPY_LIBRARY_SUFFIX})
     set(CGALPY_SETUP_DATA "'${CGALPY_TARGET_LINKER_FILE}'")
     list(APPEND CGALPY_SETUP_DATA "'__init__.py'")
@@ -733,10 +737,10 @@ if (NOT SKBUILD)
     string(REPLACE ";" "," CGALPY_SETUP_DATA "${CGALPY_SETUP_DATA}")
 
     add_custom_command(
-            OUTPUT ${CGALPY_TRG_SETUP}
+            OUTPUT ${CGALPY_OUT_SETUP}
             COMMAND "${CMAKE_COMMAND}"
             "-DFILE_IN=${CGALPY_SRC_SETUP}"
-            "-DFILE_OUT=${CGALPY_TRG_SETUP}"
+            "-DFILE_OUT=${CGALPY_OUT_SETUP}"
             "-DTARGET_NAME=${CGALPY_LIB_NAME}"
             "-DTARGET_VERSION=${PROJECT_VERSION}"
             "-DTARGET_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}"
@@ -752,22 +756,23 @@ if (NOT SKBUILD)
             -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
             VERBATIM
             DEPENDS ${CGALPY_SRC_SETUP})
-
-    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_SETUP})
+    add_custom_target(CGALPY_SETUP ALL DEPENDS ${CGALPY_OUT_SETUP})
+    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_SETUP})
 
     # Add README.rst
     set(CGALPY_SRC_README "${CMAKE_CURRENT_LIST_DIR}/README.rst")
-    set(CGALPY_TRG_README "${CGALPY_LIB_DIR}/README.rst")
+    set(CGALPY_OUT_README "${CGALPY_LIB_DIR}/README.rst")
     add_custom_command(
-            OUTPUT ${CGALPY_TRG_README}
+            OUTPUT ${CGALPY_OUT_README}
             COMMAND "${CMAKE_COMMAND}"
             "-DFILE_IN=${CGALPY_SRC_README}"
-            "-DFILE_OUT=${CGALPY_TRG_README}"
+            "-DFILE_OUT=${CGALPY_OUT_README}"
             "-DTARGET_NAME=${CGALPY_LIB_NAME}"
             -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
             DEPENDS ${CGALPY_SRC_README})
 
-    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_TRG_README})
+    add_custom_target(CGALPY_README ALL DEPENDS ${CGALPY_OUT_README})
+    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_README})
 
     # Setup application
     set(CGALPY_BUILD_OUTPUT_DIR "${CGALPY_LIB_DIR}/dist")
