@@ -401,15 +401,16 @@ C add_maps(C& c) {
 //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
-  c..def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
-       py::arg("name"), py::arg("default_value"),
+  c.def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
+        py::arg("name"), py::arg("default_value"),
         "adds a property map named `name` with value type `Principal_curvatures_and_directions` and default `default_value`\n"
         "for index type `Vertex_index`. Returns the property map together with a Boolean\n"
         "that is `true` if a new map was created. In case it already exists\n"
         "the existing map together with `false` is returned.")
     .def("property_map_vertex_Principal_curvatures_and_directions", &Sm::template property_map<Vi, Pcad>,
-        py::arg("name") = std::string(),
-          "returns an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
+         py::arg("name") = std::string(),
+         "returns an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
+    ;
 #endif
 
   add_generic_maps<C, Sm, std::string>(c, "string");
