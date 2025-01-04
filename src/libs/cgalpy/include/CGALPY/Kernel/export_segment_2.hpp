@@ -55,6 +55,8 @@ void export_segment_2(C& c) {
     // .setattr("__hash__", &hash<Seg>)
     ;
 
+  add_insertion(c, "__str__");
+  add_insertion(c, "__repr__");
   add_extraction(c);
 }
 
