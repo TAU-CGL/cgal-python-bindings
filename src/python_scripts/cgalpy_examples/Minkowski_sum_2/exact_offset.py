@@ -1,15 +1,12 @@
-#!/usr/bin/python3
-# export PYTHONPATH=...
+#!/usr/bin/python
+
 import os
 import sys
 import time
 import importlib
 
-if len(sys.argv) < 2:
-  sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[1]
+if len(sys.argv) < 2: lib = 'CGALPY'
+else: lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker

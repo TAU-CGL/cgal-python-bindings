@@ -4,11 +4,9 @@ import os
 import sys
 import importlib
 
-if len(sys.argv) < 3:
-  sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[2]
+if len(sys.argv) < 2: lib = 'CGALPY'
+else: lib = sys.argv[1]
+
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
 
@@ -38,5 +36,3 @@ fcm[Sm.faces(sm)[0]] = CGALPY.red()
 
 # Draw!
 Sm.draw(sm)
-
-

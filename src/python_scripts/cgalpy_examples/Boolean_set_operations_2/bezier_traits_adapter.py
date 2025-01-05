@@ -4,13 +4,11 @@ import os
 import sys
 import time
 import importlib
-if len(sys.argv) < 2:
-  sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[1]
-CGALPY = importlib.import_module(lib)
 
+if len(sys.argv) < 2: lib = 'CGALPY'
+else: lib = sys.argv[1]
+
+CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Kernel = Ker.Kernel
 Rat_point = Ker.Point_2

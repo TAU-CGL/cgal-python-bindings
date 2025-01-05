@@ -6,11 +6,8 @@ import importlib
 from construct_segment_arrangement import *
 from point_location_utils import *
 
-if len(sys.argv) < 2:
-  sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[1]
+if len(sys.argv) < 2: lib = 'CGALPY'
+else: lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
