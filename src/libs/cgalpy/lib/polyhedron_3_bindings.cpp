@@ -525,6 +525,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("keep_largest_connected_components", &Prn::keep_largest_connected_components)
       .def("make_hole", &Prn::make_hole)
       .def("make_tetrahedron", &pol3::make_tetrahedron1, ri)
+      .def("make_tetrahedron", &pol3::make_tetrahedron2, ri)
       .def("normalize_border", &Prn::normalize_border)
       .def("normalized_border_is_valid", &Prn::normalized_border_is_valid)
       .def("size_of_border_edges", &Prn::size_of_border_edges)
