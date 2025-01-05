@@ -9,8 +9,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Point_3 = Ker.Point_3
@@ -42,4 +41,3 @@ if sys.argv[-1] == "-b":
     CGALPY.write_point_set(fname, point_set, {"stream_precision": 17})
 else:
     CGALPY.write_point_set(fname, point_set, {"stream_precision": 17, "use_binary_mode": False})
-

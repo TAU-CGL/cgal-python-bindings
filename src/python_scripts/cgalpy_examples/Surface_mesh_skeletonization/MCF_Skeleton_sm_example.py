@@ -8,10 +8,8 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
-# CGALPY = importlib.import_module(lib)
-import CGALPY.CGALPY as CGALPY
+
+CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
 Smsk = CGALPY.Smsk
 Skeletonization = Smsk.Mean_curvature_flow_skeletonization
@@ -60,4 +58,3 @@ with open("correspondance-sm.polylines.txt", "w") as out:
     for v in skeleton.vertex_set():
         for vd in skeleton[v].vertices:
             out.write(f"2 {skeleton[v].point} {Sm.get_vertex_point(tmesh, vd)}\n")
-

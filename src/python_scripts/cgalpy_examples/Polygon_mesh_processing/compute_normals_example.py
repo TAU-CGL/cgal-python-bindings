@@ -10,8 +10,6 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
 
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
@@ -33,4 +31,3 @@ for v in mesh.vertices():
 print("Face normals :")
 for f in mesh.faces():
     print(face_normal_map[f])
-

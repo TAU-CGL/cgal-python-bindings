@@ -8,8 +8,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 import CGALPY.CGALPY as CGALPY
 Sm = CGALPY.Sm
@@ -32,4 +31,3 @@ number_of_segments = CGALPY.segmentation_from_sdf_values(mesh, sdf_property_map,
 print("Number of segments:", number_of_segments)
 
 #### TODO: face_filtered_graph ####
-

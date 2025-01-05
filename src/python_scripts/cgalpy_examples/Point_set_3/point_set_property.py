@@ -2,6 +2,7 @@ import random
 import os
 import sys
 import importlib
+
 lib = 'CGALPY'
 i = 1
 if len(sys.argv) > 1:
@@ -9,8 +10,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 
@@ -54,4 +54,3 @@ for pt in points_to_remove:
     point_set.remove(pt)
 
 print_point_set(point_set)  # point set is filtered
-

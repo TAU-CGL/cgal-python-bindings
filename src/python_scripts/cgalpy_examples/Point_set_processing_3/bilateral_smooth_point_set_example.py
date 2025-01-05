@@ -8,8 +8,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 
 input_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/fin90_with_PCA_normals.xyz")
@@ -37,4 +36,3 @@ for i in range(iter_number):
 if not CGALPY.write_points(output_filename, points):
   sys.stderr.write("Error: cannot write file " + output_filename + "\n")
   sys.exit(1)
-

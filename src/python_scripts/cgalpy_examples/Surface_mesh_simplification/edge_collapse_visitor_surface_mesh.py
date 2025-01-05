@@ -8,13 +8,11 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sms = CGALPY.Sms
 Sm = CGALPY.Sm
-
 
 class Stats:
   def __init__(self):
@@ -93,6 +91,3 @@ print(f"Finished!\n{r} edges removed.\n{surface_mesh.number_of_edges()} final ed
 Sm.write_polygon_mesh(sys.argv[i] if len(sys.argv) > i else "out.off", surface_mesh, {"stream_precision": 17})
 
 del my_visitor
-
-
-

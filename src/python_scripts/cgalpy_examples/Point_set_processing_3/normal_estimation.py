@@ -19,10 +19,8 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
-# CGALPY = importlib.import_module(lib)
-import CGALPY.CGALPY as CGALPY
+
+CGALPY = importlib.import_module(lib)
 
 def run_pca_estimate_normals(points, nb_neighbors_pca_normals):
     task_timer = time.perf_counter()

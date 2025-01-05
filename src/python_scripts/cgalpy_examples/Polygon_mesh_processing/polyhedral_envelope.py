@@ -9,14 +9,11 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     a = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
-
 
 tmesh = Sm.read_polygon_mesh(CGALPY.data_file_path("meshes/blobby.off"))
 
@@ -35,4 +32,3 @@ if envelope.inside(tmesh.point(Sm.Vertex_descriptor(i)),
             tmesh.point(Sm.Vertex_descriptor(j)),
             tmesh.point(Sm.Vertex_descriptor(k))):
     print("inside polyhedral envelope")
-

@@ -1,6 +1,7 @@
 import os
 import sys
 import importlib
+
 lib = 'CGALPY'
 i = 1
 if len(sys.argv) > 1:
@@ -8,16 +9,13 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
-# CGALPY = importlib.import_module(lib)
-import CGALPY.CGALPY as CGALPY
+
+CGALPY = importlib.import_module(lib)
 Sd = CGALPY.Sd
 
 print("Efficient_RANSAC")
 filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/cube.pwn")
 i += 1
-
 
 # #if defined (_MSC_VER) && !defined (_WIN64)
 # #pragma warning(disable:4244) // boost::number_distance::distance()

@@ -8,8 +8,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
 
@@ -34,8 +33,8 @@ number_of_segments = CGALPY.segmentation_from_sdf_values(mesh, sdf_property_map,
 print("Number of segments: ", number_of_segments)
 # print segment-ids
 for f in Pol3.faces(mesh):
-    # ids are between [0, number_of_segments -1]
-    print(segment_property_map[f])
+  # ids are between [0, number_of_segments -1]
+  print(segment_property_map[f])
 print()
 
 number_of_clusters = 4       # use 4 clusters in soft clustering
@@ -45,4 +44,3 @@ smoothing_lambda = 0.3  # importance of surface features, suggested to be in-bet
 # This feature is relevant for segmenting the mesh several times with different parameters.
 CGALPY.segmentation_from_sdf_values(
   mesh, sdf_property_map, segment_property_map, number_of_clusters, smoothing_lambda)
-

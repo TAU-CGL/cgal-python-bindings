@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import os
 import sys
 import importlib
@@ -9,8 +11,6 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     a = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
@@ -36,4 +36,3 @@ else:
   print("Remeshing is not inside the polyhedral envelope")
 
 Sm.write_polygon_mesh("remeshed.off", query)
-

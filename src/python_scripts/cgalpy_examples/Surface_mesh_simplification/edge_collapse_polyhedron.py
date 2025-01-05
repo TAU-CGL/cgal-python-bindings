@@ -8,8 +8,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
 Sms = CGALPY.Sms
@@ -43,4 +42,3 @@ r = Sms.edge_collapse(surface_mesh, stop)
 print(f"\nFinished!\n{r} edges removed.\n{surface_mesh.size_of_halfedges()//2} final edges.")
 
 Pol3.write_polygon_mesh("out.off", surface_mesh, {"stream_precision": 17})
-

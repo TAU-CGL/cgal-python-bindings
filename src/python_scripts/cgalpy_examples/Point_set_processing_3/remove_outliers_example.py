@@ -8,8 +8,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 
 fname = sys.argv[i] if len(sys.argv)>i else CGALPY.data_file_path("points_3/oni.pwn")
@@ -22,8 +21,8 @@ i += 1
 points = []
 success, points = CGALPY.read_points_with_normals(fname)
 if not success:
-    sys.stderr.write(f"Error: cannot read file {fname}\n")
-    sys.exit(1)
+  sys.stderr.write(f"Error: cannot read file {fname}\n")
+  sys.exit(1)
 
 # Removes outliers using erase-remove idiom.
 # The Identity_property_map property map can be omitted here as it is the default value.
@@ -49,8 +48,7 @@ sys.stderr.write(f"{100. * first_to_remove / len(points):.2f}" +
 # I know the ratio of outliers present in the point set
 removed_percentage = 5.0
 points, first_to_remove = CGALPY.remove_outliers(points,
- nb_neighbors,
- threshold_percent=removed_percentage, # Minimum percentage to remove
- threshold_distance=0.) # No distance threshold (can be omitted)
+  nb_neighbors,
+  threshold_percent=removed_percentage, # Minimum percentage to remove
+  threshold_distance = 0.) # No distance threshold (can be omitted)
 points = points[:first_to_remove]
-

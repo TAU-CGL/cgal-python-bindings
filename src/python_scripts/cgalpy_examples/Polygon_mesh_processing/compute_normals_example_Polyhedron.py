@@ -3,6 +3,7 @@
 import os
 import sys
 import importlib
+
 lib = 'CGALPY'
 i = 1
 if len(sys.argv) > 1:
@@ -10,8 +11,6 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
 
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
@@ -27,4 +26,3 @@ for f in Pol3.faces(mesh):
 print("Vertex normals :")
 for f in Pol3.vertices(mesh):
     print(Pmp.compute_vertex_normal(f, mesh))
-

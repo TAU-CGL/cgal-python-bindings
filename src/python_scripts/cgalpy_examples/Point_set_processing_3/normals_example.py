@@ -8,8 +8,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 
 fname = sys.argv[i] if len(sys.argv)>i else CGALPY.data_file_path("points_3/sphere_1k.xyz")
@@ -44,4 +43,3 @@ else: # Use a fixed number of neighbors
 # as well as property maps to access each point's position and normal.
 points, unoriented_points_index = CGALPY.mst_orient_normals(points, nb_neighbors)
 points = points[:unoriented_points_index]
-

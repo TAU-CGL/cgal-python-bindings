@@ -9,8 +9,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
 Sms = CGALPY.Sms
@@ -50,4 +49,3 @@ r = Sms.edge_collapse(surface_mesh, stop,
 print(f"{(time.perf_counter_ns() - timer) / 1e9} sec")
 Sm.write_polygon_mesh(sys.argv[i] if len(sys.argv) > i else "out_py.off", surface_mesh, {"stream_precision": 17})
 i += 1
-

@@ -1,6 +1,7 @@
 import os
 import sys
 import importlib
+
 lib = 'CGALPY'
 i = 1
 if len(sys.argv) > 1:
@@ -8,8 +9,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 
@@ -38,14 +38,13 @@ lambdas = [0.3, 0.5, 0.7, 0.8, 0.9, 0.95, 0.99]
 non_empty = False
 
 for l in lambdas:
-    vtx.clear()
-    polylist.clear()
+  vtx.clear()
+  polylist.clear()
 
-    vtx, polylist = ksr.reconstruct_with_ground(l)
+  vtx, polylist = ksr.reconstruct_with_ground(l)
 
-    if len(polylist) > 0:
-        non_empty = True
-        Ker.write_polygon_soup(f"polylist_{l}.ply", vtx, polylist)
+  if len(polylist) > 0:
+    non_empty = True
+    Ker.write_polygon_soup(f"polylist_{l}.ply", vtx, polylist)
 
 exit(1 if non_empty else 0)
-

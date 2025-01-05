@@ -8,8 +8,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker.Kernel
 
@@ -59,4 +58,3 @@ point_set.collect_garbage()
 
 # Display information (garbage should be gone)
 sys.stderr.write(f"After garbage collection: {point_set.number_of_removed_points()}\n")
-

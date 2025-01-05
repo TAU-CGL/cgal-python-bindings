@@ -3,32 +3,32 @@
 import os
 import sys
 import importlib
+
 lib = 'CGALPY'
-i = 1
+filename = 'meshes/P.off'
+outfilename = 'P_tri.off'
 if len(sys.argv) > 1:
   str = sys.argv[1]
   if str.startswith('CGALPY'):
     lib = str
-    i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+    if len(sys.argv) > 2: filename = sys.argv[2]
+    if len(sys.argv) > 3: outfilename = sys.argv[3]
+  else:
+    filename = str
+    if len(sys.argv) > 2: outfilename = sys.argv[2]
+    if len(sys.argv) > 3: lib = sys.argv[3]
 
 CGALPY = importlib.import_module(lib)
+fullname = CGALPY.data_file_path(filename)
 Ker = CGALPY.Ker
 Point_3 = Ker.Point_3
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/P.off")
-i += 1
-outfilename = sys.argv[i] if len(sys.argv) > i else "P_tri.off"
+try: mesh = Sm.read_polygon_mesh(fullname)
+except: raise ValueError("Error: Invalid input.")
 
-try:
-  mesh = Sm.read_polygon_mesh(filename)
-except:
-  raise ValueError("Error: Invalid input.")
-if mesh.is_empty():
-  raise ValueError("Warning: empty file?")
+if mesh.is_empty(): raise ValueError("Warning: empty file?")
 if not Sm.is_triangle_mesh(mesh):
   print("Input mesh is not triangulated.")
 

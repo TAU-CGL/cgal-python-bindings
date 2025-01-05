@@ -1,11 +1,10 @@
 import os
 import sys
 import importlib
-if len(sys.argv) < 2:
-    sys.path.append(os.path.abspath('../precompiled'))
-    lib = 'CGALPY'
-else:
-    lib = sys.argv[1]
+
+if len(sys.argv) < 2: lib = 'CGALPY'
+else: lib = sys.argv[1]
+
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
 
@@ -30,5 +29,3 @@ x = m.add_vertex(CGALPY.Ker.Point_3(1,0,0))
 f = m.add_face(u,v,w,x)
 
 print(f"vertices around vertex {v}")
-
-#### TODO

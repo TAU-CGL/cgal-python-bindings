@@ -9,8 +9,6 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     a = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
@@ -29,4 +27,3 @@ k = int(sys.argv[a+2]) if len(sys.argv) > a+2 else 200
 
 if envelope.inside(points[i], points[j], points[k]):
   print("inside polyhedral envelope")
-

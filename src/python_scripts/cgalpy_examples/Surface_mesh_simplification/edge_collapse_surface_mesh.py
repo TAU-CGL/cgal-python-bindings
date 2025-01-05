@@ -9,8 +9,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
 Sms = CGALPY.Sms
@@ -43,4 +42,3 @@ print(f"\nFinished!\n{r} edges removed.\n{mesh.number_of_edges()} final edges.")
 print(f"Time elapsed: {int((end_time - start_time) // 1e6)}ms")
 
 Sm.write_polygon_mesh("out.off", mesh, {"stream_precision": 17})
-

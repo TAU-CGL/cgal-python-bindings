@@ -5,11 +5,8 @@ import sys
 import importlib
 from arr_print import *
 
-if len(sys.argv) < 2:
-  sys.path.append(os.path.abspath('../precompiled'))
-  lib = 'CGALPY'
-else:
-  lib = sys.argv[1]
+if len(sys.argv) < 2: lib = 'CGALPY'
+else: lib = sys.argv[1]
 
 CGALPY = importlib.import_module(lib)
 Aos2 = CGALPY.Aos2

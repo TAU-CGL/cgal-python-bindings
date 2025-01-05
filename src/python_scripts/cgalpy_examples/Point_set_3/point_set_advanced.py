@@ -8,8 +8,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 
 filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/camel.off")
@@ -21,4 +20,3 @@ point_set.add_normal_map()
 if not CGALPY.read_point_set(filename, point_set):
   sys.stderr.write("Can't read input file\n")
   sys.exit(1)
-

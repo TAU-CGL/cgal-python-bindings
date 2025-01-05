@@ -8,8 +8,7 @@ if len(sys.argv) > 1:
   if str.startswith('CGALPY'):
     lib = str
     i = 2
-if lib == 'CGALPY':
-  sys.path.append(os.path.abspath('../precompiled'))
+
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
 Smsk = CGALPY.Smsk
@@ -59,4 +58,3 @@ with open("correspondance-poly.polylines.txt", "w") as out:
     for v in skeleton.vertex_set():
         for vd in skeleton[v].vertices:
             out.write(f"2 {skeleton[v].point} {Pol3.get_vertex_point(tmesh, vd)}\n")
-
