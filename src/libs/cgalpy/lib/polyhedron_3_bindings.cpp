@@ -138,10 +138,8 @@ const Halfedge& halfedge(const Face& f) { return (*(f.halfedge())); }
 // Read a surface mesh from a file.
 template <typename Polyhedron_3>
 Polyhedron_3 read_polygon_mesh(const std::string& filename,
-                              const py::dict& np = py::dict()) {
-
+                               const py::dict& np = py::dict()) {
   using Prn = Polyhedron_3;
-
   Prn pol;
   if (! CGAL::IO::read_polygon_mesh(filename, pol,
                                     internal::parse_named_parameters(np)))

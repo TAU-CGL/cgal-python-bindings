@@ -21,10 +21,10 @@
 #include <CGAL/boost/graph/generators.h>
 #include <CGAL/property_map.h>
 #include <CGAL/Dynamic_property_map.h>
-#include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/boost/graph/selection.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #include <CGAL/boost/graph/helpers.h>
+#include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 
 //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
@@ -177,12 +177,12 @@ SurfaceMesh make_tetrahedron(const typename SurfaceMesh::Point& p1,
 // Read a surface mesh from a file.
 template <typename SurfaceMesh>
 SurfaceMesh read_polygon_mesh(const std::string& filename,
-                              const py::dict& parameters = py::dict()) {
-  using Sm = SurfaceMesh;
+                              const py::dict& np = py::dict()) {
 
+  using Sm = SurfaceMesh;
   Sm sm;
   if (! CGAL::IO::read_polygon_mesh(filename, sm,
-                                    internal::parse_named_parameters(parameters)))
+                                    internal::parse_named_parameters(np)))
     throw std::runtime_error("Cannot read file!");
   return sm;
 }
