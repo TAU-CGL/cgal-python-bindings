@@ -6,8 +6,8 @@ import importlib
 
 if len(sys.argv) < 2: lib = 'CGALPY'
 else: lib = sys.argv[1]
-
 CGALPY = importlib.import_module(lib)
+
 Kerd = CGALPY.Kerd
 if hasattr(Kerd, 'FT'): FT = Kerd.FT
 else: FT = float
