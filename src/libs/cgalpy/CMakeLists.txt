@@ -514,6 +514,8 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     endif ()
 endif ()
 
+set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
+
 if (NOT SKBUILD)
     set(CGALPY_PACKAGE_NAME ${CGALPY_LIB_NAME})
 
@@ -553,7 +555,6 @@ if (NOT SKBUILD)
     endif()
 
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
-    set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
     # Use a generator expression to get rid of per-configuration subdirectory appended by Multi-configuration generators (e.g Visual Studio)
     # https://cmake.org/cmake/help/latest/prop_tgt/LIBRARY_OUTPUT_DIRECTORY.html
     set_target_properties(CGALPY PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
@@ -816,7 +817,21 @@ else ()
     add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
     nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
+
     set(CGALPY_BUILD_DEPENDS CGALPY)
+
+    set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
+    set(CGALPY_OUT_INIT "${CGALPY_LIB_DIR}/__init__.py")
+    add_custom_command(
+        OUTPUT ${CGALPY_OUT_INIT}
+        COMMAND "${CMAKE_COMMAND}"
+        "-DFILE_IN=${CGALPY_SRC_INIT}"
+        "-DFILE_OUT=${CGALPY_OUT_INIT}"
+        "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
+        -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
+        DEPENDS ${CGALPY_SRC_INIT})
+    add_custom_target(CGALPY_INIT ALL DEPENDS ${CGALPY_OUT_INIT})
+    list(APPEND CGALPY_BUILD_DEPENDS CGALPY_INIT)
 
     if (NOT APPLE)
         set_target_properties(CGALPY PROPERTIES
@@ -828,14 +843,16 @@ else ()
         ${Boost_LIBRARIES}
         ${PYTHON_LIBRARIES})
 
+    # Currently, the following has no effect as all comoponents of CGAL (e.g.,
+    # CGAL::CGAL_Qt6 CGAL::Data are not recognized by Conan.
+    # \todo Fix the CGAL installation process of Conan
     if (CGAL_Qt6_FOUND)
         target_link_libraries(CGALPY PRIVATE
             CGAL::CGAL_Qt6 Qt6::Core Qt6::Gui Qt6::Widgets)
     endif()
 
-    # \todo We should link with CGAL::Data, but it is not recognized.
-
     install(TARGETS CGALPY DESTINATION ${CGALPY_LIB_NAME})
+    install(FILES ${CGALPY_OUT_INIT} DESTINATION ${CGALPY_LIB_NAME})
 endif ()
 
 ################################################################################
