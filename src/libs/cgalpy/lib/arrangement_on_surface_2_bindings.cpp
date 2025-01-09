@@ -667,6 +667,32 @@ typename Arrangement_::Face& unbounded_face(Arrangement_& arr)
 
 }
 
+//! Export draw
+template <typename Aos>
+void export_draw(py::module_& m) {
+#if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
+     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS))
+#ifdef CGALPY_HAS_VISUAL
+  //! \todo The draw function should be applied only to arrangement on surface
+  m.def("draw",
+        [](const Aos& aos, const char* title)
+        { CGAL::draw(aos, title); });
+
+#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+  m.def("draw",
+        [](const Aos& aos, const bvr::Graphics_scene_options& gso,
+           const char* title)
+        { CGAL::draw(aos, gso, title); });
+#endif
+
+#endif
+#endif
+}
+
 // Export common members of Aos types
 void export_aos(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
@@ -744,17 +770,18 @@ void export_aos(py::module_& m) {
   add_attr<Gt::Curve_2>(aos_c, "Curve_2");
   add_attr<Gt::X_monotone_curve_2>(aos_c, "X_monotone_curve_2");
 
-#if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
-     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
-     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
-     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
-     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS))
-#ifdef CGALPY_HAS_VISUAL
-  using Draw_aos = void(*)(const Aos&, const char*);
-  m.def("draw", static_cast<Draw_aos>(CGAL::draw));
-#endif
-#endif
+// #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
+//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
+//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
+//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
+//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS))
+// #ifdef CGALPY_HAS_VISUAL
+//   using Draw_aos = void(*)(const Aos&, const char*);
+//   m.def("draw", static_cast<Draw_aos>(CGAL::draw));
+// #endif
+// #endif
+  export_draw<Aos>(m);
 }
 
 #if defined(CGALPY_AOS2_WITH_HISTORY)
@@ -802,6 +829,8 @@ void export_aos_with_history(py::module_& m) {
     .def("insert", &aos2::insert_cv_with_history, ref)
     .def("remove_curve", &aos2::remove_curve_with_history)
     ;
+
+  export_draw<Aos_wh>(m);
 }
 
 #endif
@@ -868,26 +897,26 @@ void export_arr(py::module_& m) {
     export_arrangement_2_io(arr_c);
   }
 
-#if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
-     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
-     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
-     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS))
-#ifdef CGALPY_HAS_VISUAL
-  //! \todo The draw function should be applied only to arrangement on surface
-  m.def("draw",
-        [](const Arr& arr, const char* title)
-        { CGAL::draw(arr, title); });
+// #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
+//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
+//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
+//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS))
+// #ifdef CGALPY_HAS_VISUAL
+//   //! \todo The draw function should be applied only to arrangement on surface
+//   m.def("draw",
+//         [](const Arr& arr, const char* title)
+//         { CGAL::draw(arr, title); });
 
-#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
-  m.def("draw",
-        [](const Arr& arr, const bvr::Graphics_scene_options& gso,
-           const char* title)
-        { CGAL::draw(arr, gso, title); });
-#endif
-
-#endif
-#endif
+// #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+//   m.def("draw",
+//         [](const Arr& arr, const bvr::Graphics_scene_options& gso,
+//            const char* title)
+//         { CGAL::draw(arr, gso, title); });
+// #endif
+// #endif
+// #endif
+  export_draw<Arr>(m);
 }
 #endif
 
@@ -907,6 +936,8 @@ void export_arr_with_history(py::module_& m) {
     .def(py::init<const Gt*>())
     .def("unbounded_face", &aos2::unbounded_face<Arr_wh>, ri)
     ;
+
+  export_draw<Arr_wh>(m);
 }
 #endif
 
