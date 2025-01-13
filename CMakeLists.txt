@@ -61,6 +61,12 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
             "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif ()
 
+if (SKBUILD)
+    # Get configuration from configuration file (default: config.cmake)
+    set(CMAKE_CONFIG_FILE "${CMAKE_SOURCE_DIR}/config.cmake" CACHE STRING "Path to configuration file")
+    include(${CMAKE_CONFIG_FILE})
+endif()
+
 # Binding options. Notice that The default value of option is OFF.
 option(CGALPY_KERNEL_BINDINGS "Compile bindings for 2,3 Kernel" ON)
 option(CGALPY_KERNEL_D_BINDINGS "Compile bindings for dD Kernel")
@@ -131,9 +137,6 @@ include(triangulated_surface_mesh_skeletonization_options)
 include(visibility_2_options)
 
 if (SKBUILD)
-    # Get configuration from config.cmake
-    include(${CMAKE_SOURCE_DIR}/config.cmake)
-
     # Create a default profile if it does not exist.
     # All the settings in the profile are overriden, so essentially a profile
     # is not needed, but conan requires a place holder.
