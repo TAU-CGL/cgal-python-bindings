@@ -8,6 +8,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/unique_ptr.h>
 
 #include <CGAL/Envelope_3/Envelope_base.h>
 
@@ -51,8 +52,14 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
     // As a convention, add the suffix `_mutable` to the mutable version.
     // Wrap the mutable method with the `reference_internal` call policy.
-    .def("point_mutable", [](Vertex& v)->Point& { return v.point(); }, ri)
-    .def("point", [](const Vertex& v)->const Point& { return v.point(); }, ri)
+    // An unsafe point that is referenced counted will most likely die when the
+    // Aos data structure that holds it dies, as the reference counter will
+    // vanish. Not all points are referenced counted (perhaps they should...).
+    .def("point_unsafe_mutable", [](Vertex& v)->Point& { return v.point(); }, ri)
+    .def("point_unsafe", [](const Vertex& v)->const Point& { return v.point(); }, ri)
+    .def("point",
+         [](const Vertex& v)->std::unique_ptr<Point>
+         { return std::make_unique<Point>(v.point()); }, ri)
     .def("is_isolated", [](const Vertex& v)->bool { return v.is_isolated(); })
 
     // Immediate members

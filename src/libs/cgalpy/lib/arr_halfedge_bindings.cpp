@@ -8,6 +8,7 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/unique_ptr.h>
 
 #include <CGAL/Envelope_3/Envelope_base.h>
 
@@ -18,6 +19,12 @@
 namespace py = nanobind;
 
 namespace aos2 {
+
+template <typename T>
+bool has_handle() {
+  using Rep = typename T::Rep;
+  return false;
+}
 
 //
 Vertex& source(Halfedge& e) { return (*(e.source())); }
@@ -60,8 +67,17 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("face", &aos2::face, ri)
     .def("next", &aos2::next, ri)
     .def("prev", &aos2::prev, ri)
-    .def("curve_mutable", [](He& h)->Xcv& { return h.curve(); }, ri)
-    .def("curve", [](const He& h)->const Xcv& { return h.curve(); }, ri)
+
+    // As a convention, add the suffix `_mutable` to the mutable version.
+    // Wrap the mutable method with the `reference_internal` call policy.
+    // An unsafe curve that is referenced counted will most likely die when the
+    // Aos data structure that holds dies, as the reference counter will vanish.
+    // Not all x-monotone curves are referenced counted (perhaps they should...).
+    .def("curve_unsafe_mutable", [](He& h)->Xcv& { return h.curve(); }, ri)
+    .def("curve_unsafe", [](He& h)->Xcv& { return h.curve(); }, ri)
+    .def("curve",
+         [](const He& h)->std::unique_ptr<Xcv>
+         { return std::make_unique<Xcv>(h.curve()); }, ri)
     .def("ccb", &aos2::ccb, py::keep_alive<0, 1>())
 
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
