@@ -468,6 +468,17 @@ void export_boost_edge(C& prn_c) {
     ;
 }
 
+// Export Polyhedron_traits_with_normals_3
+void export_polyhedron_traits_with_normals(py::module_& m) {
+  using Traits = CGAL::Polyhedron_traits_with_normals_3<Kernel>;
+  if (! add_attr<Traits>(m, "Polyhedron_traits_with_normals_3")) {
+    py::class_<Traits>(m, "Polyhedron_traits_with_normals_3")
+      .def(py::init<>())
+      .def(py::init<const Kernel&>())
+      ;
+  }
+}
+
 // Export Polyhedron_3.
 void export_polyhedron_3(py::module_& m) {
   using Prn = pol3::Polyhedron_3;
@@ -489,6 +500,7 @@ void export_polyhedron_3(py::module_& m) {
   export_boost_vertex(m);
   export_boost_face(m);
   export_boost_edge(m);
+  export_polyhedron_traits_with_normals(m);
 
   // define_generate_functions<py::module_, Prn, Kernel>(m); // doesn't work for polyhedron
 
@@ -496,6 +508,7 @@ void export_polyhedron_3(py::module_& m) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");
     prn_c.def(py::init<>())
       .def(py::init<const Prn&>())
+      .def(py::init<const pol3::Traits&>())
       .def("add_facet_to_border", &Prn::add_facet_to_border)
       .def("add_vertex_and_facet_to_border", &Prn::add_vertex_and_facet_to_border)
       .def("bytes", &Prn::bytes)
