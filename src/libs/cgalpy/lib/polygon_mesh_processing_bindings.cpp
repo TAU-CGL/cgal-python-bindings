@@ -1794,33 +1794,44 @@ void export_polygon_mesh_processing(py::module_& m) {
 // VertexCornerMap	a class model of ReadablePropertyMap with boost::graph_traits<TriangleMeshIn>::vertex_descriptor as key type and std::size_t as value type
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
-  using edge_bool_map = Pm::Property_map<Ed, bool>;
-  using RegionMap = Pm::Property_map<Fd, std::size_t>;
-  using CornerIdMap = Pm::Property_map<Vd, std::size_t>;
-  using FacePatchMap = Pm::Property_map<Fd, std::size_t>;
-  using FaceSizeTypeMap = Pm::Property_map<Fd, faces_size_type>;
-  using VertexCornerMap = Pm::Property_map<Vd, std::size_t>;
-  using EdgeIsConstrainedMap = Pm::Property_map<Ed, bool>;
-  using FaceBitMap = Pm::Property_map<Fd, bool>;
-  using FaceComponentMap = Pm::Property_map<Fd, faces_size_type>;
-  using FaceVectorMap = Pm::Property_map<Fd, Vector_3>;
-  using VertexVectorMap = Pm::Property_map<Vd, Vector_3>;
-  using ValueMap = Pm::Property_map<Vd, double>;
+  using Vertex_size_map = Pm::Property_map<Vd, std::size_t>;
+  using Vertex_vector_map = Pm::Property_map<Vd, Vector_3>;
+  using Vertex_double_map = Pm::Property_map<Vd, double>;
+  using Edge_bool_map = Pm::Property_map<Ed, bool>;
+  using Face_bool_map = Pm::Property_map<Fd, bool>;
+  using Face_size_type_map = Pm::Property_map<Fd, faces_size_type>;
+  using Face_size_map = Pm::Property_map<Fd, std::size_t>;
+  using Face_vector_map = Pm::Property_map<Fd, Vector_3>;
+  using Face_plane_map = Pm::Property_map<Fd, Plane_3>;
 #endif
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
-  using edge_bool_map = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
-  using RegionMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>;
-  using CornerIdMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<std::size_t>>;
-  using FacePatchMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>;
-  using FaceSizeTypeMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<faces_size_type>>;
-  using VertexCornerMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<std::size_t>>;
-  using EdgeIsConstrainedMap = boost::property_map<Pm, CGAL::dynamic_edge_property_t<bool>>::type;
-  using FaceBitMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<bool>>;
-  using FaceComponentMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<faces_size_type>>;
-  using FaceVectorMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<Vector_3>>;
-  using VertexVectorMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<Vector_3>>;
-  using ValueMap = boost::property_map<Pm, CGAL::dynamic_vertex_property_t<double>>;
+  using Vertex_size_tag = CGAL::dynamic_vertex_property_t<std::size_t>;
+  using Vertex_size_map = boost::property_map<Pm, Vertex_size_tag>::type;
+
+  using Vector_vector_tag = CGAL::dynamic_vertex_property_t<Vector_3>;
+  using Vertex_vector_map = boost::property_map<Pm, Vector_vector_tag>::type;
+
+  using Vector_double_tag = CGAL::dynamic_vertex_property_t<double>;
+  using Vertex_double_map = boost::property_map<Pm, Vector_double_tag>::type;
+
+  using Edge_bool_tag = CGAL::dynamic_edge_property_t<bool>;
+  using Edge_bool_map = boost::property_map<Pm, Edge_bool_tag>::type;
+
+  using Face_size_tag = CGAL::dynamic_face_property_t<std::size_t>;
+  using Face_size_map = boost::property_map<Pm, Face_size_tag>::type;
+
+  using Face_size_type_tag = CGAL::dynamic_face_property_t<faces_size_type>;
+  using Face_size_type_map = boost::property_map<Pm, Face_size_type_tag>::type;
+
+  using Face_bool_tag = CGAL::dynamic_face_property_t<bool>;
+  using Face_bool_map = boost::property_map<Pm, Face_bool_tag>::type;
+
+  using Face_vector_tag = CGAL::dynamic_face_property_t<Vector_3>;
+  using Face_vector_map = boost::property_map<Pm, Face_vector_tag>::type;
+
+  using Face_plane_tag = CGAL::dynamic_face_property_t<Plane_3>;
+  using Face_plane_map = boost::property_map<Pm, Face_plane_tag>::type;
 #endif
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -1867,16 +1878,14 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("f"), py::arg("pmesh"),
         py::arg("np") = py::dict());
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
-  m.def("compute_face_normals", &pmp::compute_face_normals<Pm, FaceVectorMap>,
+  m.def("compute_face_normals", &pmp::compute_face_normals<Pm, Face_vector_map>,
         py::arg("pmesh"), py::arg("face_normals"),
         py::arg("np") = py::dict());
 
   m.def("compute_normals",
-        &pmp::compute_normals<Pm, VertexVectorMap, FaceVectorMap>,
+        &pmp::compute_normals<Pm, Vertex_vector_map, Face_vector_map>,
         py::arg("vnormals"), py::arg("fnormals"), py::arg("pmesh"),
         py::arg("np") = py::dict());
-#endif
 
   m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>,
         py::arg("v"), py::arg("pmesh"),
@@ -1884,7 +1893,7 @@ void export_polygon_mesh_processing(py::module_& m) {
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
   m.def("compute_vertex_normals",
-        &pmp::compute_vertex_normals<Pm, VertexVectorMap>,
+        &pmp::compute_vertex_normals<Pm, Vertex_vector_map>,
         py::arg("pmesh"), py::arg("vertex_normals"),
         py::arg("np") = py::dict());
 #endif
@@ -1955,7 +1964,6 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("triangle_soup_self_intersections",
         &pmp::triangle_soup_self_intersections, // TODO: point_map
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict());
-
 
   // Combinatorial Repair
   m.def("duplicate_non_manifold_vertices",
@@ -2048,7 +2056,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict());
 
   // Feature Detection Functions
-  m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, edge_bool_map>,
+  m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, Edge_bool_map>,
         py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
         py::arg("np") = py::dict());
   // only for sm
@@ -2116,7 +2124,7 @@ void export_polygon_mesh_processing(py::module_& m) {
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
   m.def("detect_corners_of_regions",
-        &pmp::detect_corners_of_regions<Pm, RegionMap, CornerIdMap>,
+        &pmp::detect_corners_of_regions<Pm, Face_size_map, Vertex_size_map>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"),
         py::arg("corner_id_map"),
         py::arg("np") = py::dict());
@@ -2132,11 +2140,11 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
-  m.def("refine_mesh_at_isolevel", &pmp::refine_mesh_at_isolevel<Pm, ValueMap>,
+  m.def("refine_mesh_at_isolevel", &pmp::refine_mesh_at_isolevel<Pm, Vertex_double_map>,
         py::arg("pm"), py::arg("value_map"), py::arg("isovalue"),
         py::arg("np") = py::dict());
   m.def("region_growing_of_planes_on_faces",
-        &pmp::region_growing_of_planes_on_faces<Pm, RegionMap>,
+        &pmp::region_growing_of_planes_on_faces<Pm, Face_size_map>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("np") = py::dict());
 #endif
 
