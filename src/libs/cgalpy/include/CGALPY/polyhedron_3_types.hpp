@@ -57,19 +57,19 @@ using Traits = CGAL::Polyhedron_traits_with_normals_3<Kernel>;
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_POL3_GEOMETRY_TRAITS");
 #endif
 
-typedef CGAL::Polyhedron_3<Traits, Polyhedron_items> Polyhedron_3;
-typedef Polyhedron_3::Point_3                        Point_3;
-typedef Polyhedron_3::Vertex                         Vertex;
-typedef Polyhedron_3::Halfedge                       Halfedge;
-typedef Polyhedron_3::Face                           Face;
+using Polyhedron_3 = CGAL::Polyhedron_3<Traits, Polyhedron_items>;
+using Point_3 = Polyhedron_3::Point_3;
+using Vertex = Polyhedron_3::Vertex;
+using Halfedge = Polyhedron_3::Halfedge;
+using Face = Polyhedron_3::Face;
 
-typedef Polyhedron_3::Vertex_handle                  Vertex_handle;
-typedef Polyhedron_3::Halfedge_handle                Halfedge_handle;
-typedef Polyhedron_3::Face_handle                    Face_handle;
+using Vertex_handle = Polyhedron_3::Vertex_handle;
+using Halfedge_handle = Polyhedron_3::Halfedge_handle;
+using Face_handle = Polyhedron_3::Face_handle;
 
-typedef Polyhedron_3::Vertex_const_handle            Vertex_const_handle;
-typedef Polyhedron_3::Halfedge_const_handle          Halfedge_const_handle;
-typedef Polyhedron_3::Face_const_handle              Face_const_handle;
+using Vertex_const_handle = Polyhedron_3::Vertex_const_handle;
+using Halfedge_const_handle = Polyhedron_3::Halfedge_const_handle;
+using Face_const_handle = Polyhedron_3::Face_const_handle;
 
 using Halfedge_around_facet_circulator =
   Polyhedron_3::Halfedge_around_facet_circulator;
