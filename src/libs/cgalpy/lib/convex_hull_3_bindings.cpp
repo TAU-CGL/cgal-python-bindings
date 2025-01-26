@@ -26,8 +26,20 @@ PolygonMesh convex_hull_3(py::list& lst) {
   return pm;
 }
 
+template <typename PolygonMesh>
+PolygonMesh convex_hull_3_with_kernel(py::list& lst, const Kernel& kernel) {
+  using Pm = PolygonMesh;
+
+  Pm pm;
+  auto begin = stl_input_iterator<Point_3>(lst);
+  auto end = stl_input_iterator<Point_3>(lst, false);
+  CGAL::convex_hull_3(begin, end, pm, kernel);
+  return pm;
+}
+
 void export_convex_hull_3(py::module_& m) {
   using Pm = ch3::Polygonal_mesh;
 
   m.def("convex_hull_3", &convex_hull_3<Pm>);
+  m.def("convex_hull_3", &convex_hull_3_with_kernel<Pm>);
 }
