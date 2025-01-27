@@ -678,8 +678,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("number_of_removed_vertices", &Sm::number_of_removed_vertices)
       .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges)
 
-
-
       .def("next_around_source", &Sm::next_around_source)
       .def("prev_around_source", &Sm::prev_around_source)
       .def("next_around_target", &Sm::next_around_target)
@@ -697,8 +695,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            [](Sm& sm, const Sm& other) { sm.join(other); return sm; },
            "Inserts other into sm.",
            py::is_operator())
-
-
 
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
 #if CGAL_VERSION_NR >= 1050600000
@@ -839,10 +835,11 @@ void export_surface_mesh(py::module_& m) {
   m.def("clear", &CGAL::clear<Sm_3>);
   m.def("is_closed", &CGAL::is_closed<Sm_3>);
 
-  m.def("get_vertex_point", [](const Sm_3& pm, const Vi& vd) { return get(CGAL::vertex_point, pm, vd); });
+  //! \todo export CGAL::vertex_point and CGAL::get() instead.
+  m.def("get_vertex_point", [](const Sm_3& pm, const Vi& vd)
+  { return get(CGAL::vertex_point, pm, vd); });
 
   m.def("Halfedge", &sm::halfedge<Sm_3>);
-
   m.def("null_face", &sm::null_face<Sm_3>);
   m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>,
         py::arg("fname"), py::arg("parameters") = py::dict());
@@ -855,7 +852,6 @@ void export_surface_mesh(py::module_& m) {
   m.def("halfedge", &sm::halfedge<Sm_3>);
   m.def("is_triangle", &sm::is_triangle<Sm_3>);
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>);
-
   m.def("null_vertex", &Sm_3::null_vertex);
   m.def("null_halfedge", &Sm_3::null_halfedge);
 

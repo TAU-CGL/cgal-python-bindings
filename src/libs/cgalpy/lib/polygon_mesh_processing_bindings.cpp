@@ -57,26 +57,28 @@
 #include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/Polyhedral_envelope.hpp"
 #include "CGALPY/pmp_helpers.hpp"
+#include "CGALPY/Internal_face_plane_3_map.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 
 namespace pmp {
 
+using Point_3_vec = std::vector<Point_3>;
+using Size_t_vec = std::vector<size_t>;
 
 /*! Determine whether two polylines intersect.
  * It's a shame that we cannot pass the begin1,end1,begin2,end2
  * directly to the CGAL do_intersect function.
  */
-bool do_intersect_polylines(const std::vector<Point_3>& polyline1,
-                            const std::vector<Point_3>& polyline2) {
-  return PMP::do_intersect(polyline1, polyline2);
-}
+bool do_intersect_polylines(const Point_3_vec& polyline1,
+                            const Point_3_vec& polyline2)
+{ return PMP::do_intersect(polyline1, polyline2); }
 
 /*! Determine whether two ranges of polylines intersect.
  */
-bool do_intersect_polyline_ranges(const std::vector<std::vector<Point_3>>& range1,
-                                  const std::vector<std::vector<Point_3>>& range2) {
+bool do_intersect_polyline_ranges(const std::vector<Point_3_vec>& range1,
+                                  const std::vector<Point_3_vec>& range2) {
   return PMP::do_intersect(range1, range2);
 }
 
@@ -100,7 +102,7 @@ bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
 //
 template <typename PolygonMesh>
 bool do_intersect_mesh_polyline(const PolygonMesh& pm,
-                                const std::vector<Point_3>& polyline,
+                                const Point_3_vec& polyline,
                                 const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   // auto vpm = get_vertex_point_map(pm, np);
@@ -112,7 +114,7 @@ bool do_intersect_mesh_polyline(const PolygonMesh& pm,
 //
 template <typename PolygonMesh>
 bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
-                                      const std::vector<std::vector<Point_3>>& range,
+                                      const std::vector<Point_3_vec>& range,
                                       const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   // auto vpm = get_vertex_point_map(pm, np);
@@ -175,7 +177,7 @@ auto self_intersections_faces(const std::vector<
 }
 
 //!
-auto triangle_soup_self_intersections(const std::vector<Point_3>& points,
+auto triangle_soup_self_intersections(const Point_3_vec& points,
                                       const std::vector<std::array<std::size_t, 3>>& triangles,
                                       const py::dict& np = py::dict()) {
   std::vector<std::pair<std::size_t, std::size_t>> result;
@@ -195,7 +197,7 @@ bool does_self_intersect(const PolygonMesh& pm,
                                       );
 }
 
-auto does_triangle_soup_self_intersect(const std::vector<Point_3>& points,
+auto does_triangle_soup_self_intersect(const Point_3_vec& points,
                                        const std::vector<std::array<std::size_t, 3>>& triangles,
                                        const py::dict& np = py::dict()) {
   return PMP::does_triangle_soup_self_intersect(points, triangles);
@@ -371,8 +373,8 @@ auto bbox(PolygonMesh& pmesh,
 
 //
 template <typename PolygonMesh>
-auto triangulate_hole_polyline_2(const std::vector<Point_3>& polyline1,
-                                 const std::vector<Point_3>& polyline2,
+auto triangulate_hole_polyline_2(const Point_3_vec& polyline1,
+                                 const Point_3_vec& polyline2,
                                  const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Triangle_int = CGAL::Triple<int, int, int>;
@@ -397,7 +399,7 @@ auto triangulate_hole_polyline_2(const std::vector<Point_3>& polyline1,
 
 //!
 template <typename PolygonMesh>
-auto triangulate_hole_polyline(const std::vector<Point_3>& polyline,
+auto triangulate_hole_polyline(const Point_3_vec& polyline,
                                const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Triangle_int = CGAL::Triple<int, int, int>;
@@ -478,7 +480,7 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1,
   //!
 template <typename TriangleMesh>
 auto approximate_max_distance_to_point_set(const TriangleMesh& tm,
-                                           const std::vector<Point_3>& points,
+                                           const Point_3_vec& points,
                                            const double precision,
                                            const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(tm, np);
@@ -548,7 +550,7 @@ auto is_Hausdorff_distance_larger(const PolygonMesh& tm1, const PolygonMesh& tm2
 
 //!
 template <typename TriangeMesh>
-auto max_distance_to_triangle_mesh(const std::vector<Point_3>& points,
+auto max_distance_to_triangle_mesh(const Point_3_vec& points,
                                    const TriangeMesh& tm,
                                    const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(tm, np);
@@ -800,7 +802,7 @@ auto sample_triangle_mesh(const PolygonMesh& tm,
 }
 
 //!
-auto sample_triangle_soup(const std::vector<Point_3>& points,
+auto sample_triangle_soup(const Point_3_vec& points,
                           const std::vector<std::array<std::size_t, 3>>& triangles,
                           const py::dict& np = py::dict()) {
   PointRange pts;
@@ -811,52 +813,40 @@ auto sample_triangle_soup(const std::vector<Point_3>& points,
 //!
 template <typename PolygonMesh>
 Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::face_descriptor& f,
-                             const PolygonMesh& sm,
+                             const PolygonMesh& mesh,
                              const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  // auto vpm = get_vertex_point_map(sm, np);
-  return PMP::compute_face_normal(f, sm, internal::parse_pmp_np<Pm>(np)
-                                  // .vertex_point_map(vpm)
-                                  );
+  return PMP::compute_face_normal(f, mesh, internal::parse_pmp_np<Pm>(np));
 }
 
 //!
 template <typename PolygonMesh, typename FaceNormalMap>
-auto compute_face_normals(const PolygonMesh& pmesh,
+auto compute_face_normals(const PolygonMesh& mesh,
                           FaceNormalMap face_normals,
                           const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  // auto vpm = get_vertex_point_map(pmesh, np);
-  return PMP::compute_face_normals(pmesh, face_normals,
+  return PMP::compute_face_normals(mesh, face_normals,
                                    internal::parse_pmp_np<Pm>(np)
-                                   .face_normal_map(face_normals)
-                                   // .vertex_point_map(vpm)
-                                   );
+                                   .face_normal_map(face_normals));
 }
 
 //!
 template <typename PolygonMesh>
 Vector_3 compute_vertex_normal(const typename boost::graph_traits<PolygonMesh>::vertex_descriptor& v,
-                               const PolygonMesh& sm,
+                               const PolygonMesh& mesh,
                                const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  // auto vpm = get_vertex_point_map(sm, np);
-  return PMP::compute_vertex_normal(v, sm, internal::parse_pmp_np<Pm>(np)
-                                    // .vertex_point_map(vpm)
-                                    );
+  return PMP::compute_vertex_normal(v, mesh, internal::parse_pmp_np<Pm>(np));
 }
 
 //!
 template <typename PolygonMesh, typename VertexNormalMap>
-auto compute_vertex_normals(const PolygonMesh& pmesh,
+auto compute_vertex_normals(const PolygonMesh& mesh,
                             VertexNormalMap vertex_normals,
                             const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  // auto vpm = get_vertex_point_map(sm, np);
-  return PMP::compute_vertex_normals(pmesh, vertex_normals,
-                                     internal::parse_pmp_np<Pm>(np)
-                                     // .vertex_point_map(vpm)
-                                     );
+  return PMP::compute_vertex_normals(mesh, vertex_normals,
+                                     internal::parse_pmp_np<Pm>(np));
 }
 
 //!
@@ -1147,7 +1137,7 @@ auto border_halfedges(const std::vector<typename boost::graph_traits<PolygonMesh
 }
 
 //!
-py::list ptvec2ptlist(const std::vector<Point_3>& ptvec) {
+py::list ptvec2ptlist(const Point_3_vec& ptvec) {
   py::list ptlist;
   for (auto pt : ptvec) {
     ptlist.append(pt);
@@ -1156,8 +1146,8 @@ py::list ptvec2ptlist(const std::vector<Point_3>& ptvec) {
 }
 
 //!
-std::vector<Point_3> ptlist2ptvec(const py::list& ptlist) {
-  std::vector<Point_3> ptvec;
+Point_3_vec ptlist2ptvec(const py::list& ptlist) {
+  Point_3_vec ptvec;
   ptvec.reserve(py::len(ptlist));
   for (auto pt : ptlist) {
     try {
@@ -1172,7 +1162,7 @@ std::vector<Point_3> ptlist2ptvec(const py::list& ptlist) {
 
 //!
 auto polylist2polyvec(const py::list& polylist) {
-  std::vector<std::vector<size_t>> polyvec;
+  std::vector<Size_t_vec> polyvec;
   polyvec.reserve(py::len(polylist));
   for (auto poly : polylist) {
     std::vector<std::size_t> poly_ids;
@@ -1211,7 +1201,7 @@ auto is_polygon_soup_a_polygon_mesh(std::vector<std::vector<std::size_t>>& polyg
 { return PMP::is_polygon_soup_a_polygon_mesh(polygons); }
 
 //!
-auto merge_duplicate_points_in_polygon_soup(std::vector<Point_3>& pointvec,
+auto merge_duplicate_points_in_polygon_soup(Point_3_vec& pointvec,
                                             std::vector<std::vector<std::size_t> >& polyvec,
                                             const py::dict& np = py::dict()) {
   return PMP::merge_duplicate_points_in_polygon_soup(pointvec, polyvec,
@@ -1219,7 +1209,7 @@ auto merge_duplicate_points_in_polygon_soup(std::vector<Point_3>& pointvec,
 }
 
 //!
-auto merge_duplicate_polygons_in_polygon_soup(std::vector<Point_3>& points,
+auto merge_duplicate_polygons_in_polygon_soup(Point_3_vec& points,
                                               std::vector<std::vector<std::size_t> >& polygons,
                                               const py::dict& np = py::dict()) {
   return PMP::merge_duplicate_polygons_in_polygon_soup(points, polygons,
@@ -1270,7 +1260,7 @@ auto polygon_mesh_to_polygon_soup(const PolygonMesh& pm,
   using Gt = boost::graph_traits<Pm>;
   using Vd = typename Gt::vertex_descriptor;
   using Fd = typename Gt::face_descriptor;
-  std::vector<Point_3> pts;
+  Point_3_vec pts;
   std::vector<std::vector<std::size_t>> polys;
   PMP::polygon_mesh_to_polygon_soup(pm, pts, polys,
                                     internal::parse_pmp_np<Pm>(np));
@@ -1304,7 +1294,7 @@ auto duplicate_non_manifold_vertices(PolygonMesh& pm,
 
 //!
 template <typename PolygonMesh>
-auto polygon_soup_to_polygon_mesh(const std::vector<Point_3>& points,
+auto polygon_soup_to_polygon_mesh(const Point_3_vec& points,
                                   const std::vector<std::vector<std::size_t>>& polygons,
                                   const py::dict& np_ps = py::dict(),
                                   const py::dict& np_pm = py::dict()) {
@@ -1328,12 +1318,12 @@ auto polygon_soup_to_polygon_mesh(const std::vector<Point_3>& points,
 }
 
 //!
-auto remove_isolated_points_in_polygon_soup(std::vector<Point_3>& points,
+auto remove_isolated_points_in_polygon_soup(Point_3_vec& points,
                                             std::vector<std::vector<std::size_t>>& polygons)
 { return PMP::remove_isolated_points_in_polygon_soup(points, polygons); }
 
 //!
-auto repair_polygon_soup(std::vector<Point_3>& points,
+auto repair_polygon_soup(Point_3_vec& points,
                          std::vector<std::vector<std::size_t>>& polygons,
                          const py::dict& np = py::dict()) {
   PMP::repair_polygon_soup(points, polygons, internal::parse_named_parameters(np));
@@ -1878,7 +1868,14 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("f"), py::arg("pmesh"),
         py::arg("np") = py::dict());
 
-  m.def("compute_face_normals", &pmp::compute_face_normals<Pm, Face_vector_map>,
+#if ((CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH) && \
+     (CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS))
+  using Face_normal_map = pol3::Internal_face_plane_3_map<Pm>;
+#else
+  using Face_normal_map = Face_vector_map;
+#endif
+  m.def("compute_face_normals",
+        &pmp::compute_face_normals<Pm, Face_normal_map>,
         py::arg("pmesh"), py::arg("face_normals"),
         py::arg("np") = py::dict());
 
@@ -2185,7 +2182,7 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def(py::init<const std::vector<Fd>&, Pm&, double, const py::dict&>(),
          py::arg("face_range"), py::arg("tmesh"), py::arg("epsilon"),
          py::arg("np") = py::dict())
-    .def(py::init<const std::vector<Point_3>&, const std::vector<std::vector<size_t>>&, double, const py::dict&>(),
+    .def(py::init<const pmp::Point_3_vec&, const std::vector<pmp::Size_t_vec>&, double, const py::dict&>(),
          py::arg("points"), py::arg("polygons"), py::arg("epsilon"),
          py::arg("np") = py::dict()) // TODO: handle face_epsilon_map
     .def("is_empty", &Pe::is_empty)
