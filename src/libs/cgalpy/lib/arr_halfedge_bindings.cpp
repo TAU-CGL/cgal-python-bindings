@@ -49,6 +49,7 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Xcv = Aos::X_monotone_curve_2;
   using He = Aos::Halfedge;
+  using Ahd = CGAL::Arr_halfedge_direction;
   constexpr auto ri(py::rv_policy::reference_internal);
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
@@ -59,7 +60,7 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
   if (add_attr<He>(c, "Halfedge")) return;
   py::class_<He> halfedge_c(c, "Halfedge");
   halfedge_c.def(py::init<>())
-    .def("direction", [](const He& h)->bool{ return h.direction(); })
+    .def("direction", [](const He& h)->Ahd { return h.direction(); })
     .def("is_fictitious", &He::is_fictitious)
     .def("source", &aos2::source, ri)
     .def("target", &aos2::target, ri)
