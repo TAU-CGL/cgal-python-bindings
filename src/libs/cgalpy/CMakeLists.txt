@@ -818,7 +818,7 @@ if (NOT SKBUILD)
     endforeach ()
 else ()
     add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
-    nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
+    nanobind_add_module(CGALPY STABLE_ABI NB_STATIC ${CGALPY_SRC_FILES})
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
 
     set(CGALPY_BUILD_DEPENDS CGALPY)

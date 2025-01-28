@@ -60,7 +60,7 @@ cmake.build-type = "Release"
 
 # The logging level to display, "DEBUG", "INFO", "WARNING", and "ERROR" are
 # possible options.
-cmake.verbose = true
+# cmake.verbose = true
 logging.level = "INFO"
 
 # A list of packages to auto-copy into the wheel. If this is not set, it will
@@ -75,7 +75,7 @@ logging.level = "INFO"
 # / Limited API (only on CPython and if the version is sufficient, otherwise
 # this has no effect). Or you can set it to "py3" or "py2.py3" to ignore Python
 # ABI compatibility. The ABI tag is inferred from this tag.
-wheel.py-api = "py310"
+wheel.py-api = "cp312"
 
 # Fill out extra tags that are not required. This adds "x86_64" and "arm64" to
 # the list of platforms when "universal2" is used, which helps older Pip's
@@ -114,7 +114,7 @@ wheel.cmake = true
 strict-config = true
 
 # If set, this will provide a method for backward compatibility.
-minimum-version = "0.4"
+minimum-version = "build-system.requires"
 
 # The build directory. Defaults to a temporary directory, but can be set.
 build-dir = "build/{wheel_tag}"
