@@ -146,6 +146,9 @@ void halfedge_map(py::module_& m,
 
 // Global access functions
 
+// Independent on handles
+//! \todo move to a header file
+
 //!
 template <typename PolygonMesh>
 auto num_edges(const PolygonMesh& p) { return CGAL::num_edges(p); }
@@ -217,6 +220,8 @@ degree_f(Face& f, const Polyhedron_3& p) {
   using Fd = typename boost::graph_traits<Prn>::face_descriptor;
   return CGAL::degree(Fd(&f), p);
 }
+
+// Handle dependant
 
 //!
 boost::graph_traits<Polyhedron_3>::degree_size_type
