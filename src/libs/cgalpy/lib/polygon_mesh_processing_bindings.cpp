@@ -1337,7 +1337,7 @@ void detect_sharp_edges(PolygonMesh& pmesh,
                         EBMap ebmap,
                         const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
- if (np.contains("vertex_face_degree_map")) {
+  if (np.contains("vertex_face_degree_map")) {
     auto vfdm = get_vertex_prop_map<Pm, int>
       (pmesh, "INTERNAL_MAP0",
        np.contains("vertex_face_degree_map") ?
@@ -1396,9 +1396,8 @@ auto detect_corners_of_regions(PolygonMesh& pmesh,
   using Pm = PolygonMesh;
   std::size_t num_corners;
   // auto vpm = get_vertex_point_map(pmesh, np);
-  auto eicm = (get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
-                                           np.contains("edge_is_constrained_map")) ?
-               np["edge_is_constrained_map"] : py::none());
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
+                                          np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
   std::size_t r = PMP::detect_corners_of_regions(pmesh, region_map, nb_regions, corner_id_map,
                                                  internal::parse_pmp_np<Pm>(np)
                                                  .edge_is_constrained_map(eicm)
