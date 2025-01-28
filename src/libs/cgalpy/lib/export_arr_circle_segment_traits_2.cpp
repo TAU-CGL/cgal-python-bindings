@@ -33,6 +33,7 @@ double coordNT_to_double(Geometry_traits_2::CoordNT& c)
 void export_arr_circle_segment_traits_2(py::module_& m) {
   using Gt = CGAL::Arr_circle_segment_traits_2<Kernel>;
   using Coord_nt = Gt::CoordNT;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   if (add_attr<Gt>(m, "Arr_circle_segment_traits_2")) return;
 
@@ -102,27 +103,29 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   add_insertion(pnt_c, "__str__");
   add_insertion(pnt_c, "__repr__");
 
+  //! \todo Handle the functions that return reference-counted objects.
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
   xcv_c
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
     .def(py::init<Circle_2&, aos2::Point_2&, aos2::Point_2&, CGAL::Orientation>())
-    .def("source", &aos2::X_monotone_curve_2::source)
-    .def("target", &aos2::X_monotone_curve_2::target)
+    .def("source", &aos2::X_monotone_curve_2::source, ri)
+    .def("target", &aos2::X_monotone_curve_2::target, ri)
     .def("is_directed_right", &aos2::X_monotone_curve_2::is_directed_right)
-    .def("left", &aos2::X_monotone_curve_2::left)
-    .def("right", &aos2::X_monotone_curve_2::right)
+    .def("left", &aos2::X_monotone_curve_2::left, ri)
+    .def("right", &aos2::X_monotone_curve_2::right, ri)
     .def("orientation", &aos2::X_monotone_curve_2::orientation)
     .def("is_linear", &aos2::X_monotone_curve_2::is_linear)
     .def("is_circular", &aos2::X_monotone_curve_2::is_circular)
-    .def("supporting_line", &aos2::X_monotone_curve_2::supporting_line)
-    .def("supporting_circle", &aos2::X_monotone_curve_2::supporting_circle)
+    .def("supporting_line", &aos2::X_monotone_curve_2::supporting_line, ri)
+    .def("supporting_circle", &aos2::X_monotone_curve_2::supporting_circle, ri)
     .def("bbox", &aos2::X_monotone_curve_2::bbox)
     ;
 
   add_insertion(xcv_c, "__str__");
   add_insertion(xcv_c, "__repr__");
 
+  //! \todo Handle the functions that return reference-counted objects.
   auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
   cv_c.def(py::init<Segment_2&>())
     .def(py::init<Point_2&, Point_2&>())
@@ -135,14 +138,14 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
     // TODO: error below: non-constant-expression cannot be narrowed from type 'int' to 'NT' (aka 'double')
     // .def(py::init<Point_2&, int, CGAL::Orientation, aos2::Point_2&, aos2::Point_2&>())
     .def(py::init<Point_2&, Point_2&, Point_2&>())
-    .def("is_full", &aos2::Curve_2::is_full)
-    .def("source", &aos2::Curve_2::source)
-    .def("target", &aos2::Curve_2::target)
-    .def("orientation", &aos2::Curve_2::orientation)
-    .def("is_linear", &aos2::Curve_2::is_linear)
     .def("is_circular", &aos2::Curve_2::is_circular)
-    .def("supporting_line", &aos2::Curve_2::supporting_line)
-    .def("supporting_circle", &aos2::Curve_2::supporting_circle)
+    .def("is_full", &aos2::Curve_2::is_full)
+    .def("is_linear", &aos2::Curve_2::is_linear)
+    .def("orientation", &aos2::Curve_2::orientation)
+    .def("source", &aos2::Curve_2::source, ri)
+    .def("supporting_line", &aos2::Curve_2::supporting_line, ri)
+    .def("supporting_circle", &aos2::Curve_2::supporting_circle, ri)
+    .def("target", &aos2::Curve_2::target, ri)
     ;
 
   traits_c.attr("Coord_nt") = cnt_c;

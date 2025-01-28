@@ -31,6 +31,8 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
   using Pnt = typename Gt::Point_2;
   using Cv = typename Gt::Curve_2;
   using Xcv = typename Gt::X_monotone_curve_2;
+  using Dir = Kernel::Direction_3;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   if (add_attr<Gt>(m, "Arr_geodesic_arc_on_sphere_traits_2")) return;
 
@@ -53,10 +55,11 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
   export_AosDirectionalXMonotoneTraits_2<Gt>(traits_c, concepts);
 
   using Ctr_pnt = Gt::Construct_point_2;
-  using Ctr_pnt_op = Pnt(Ctr_pnt::*)(const FT&, const FT&, const FT&);
+  using Ctr_pnt_op1 = Pnt(Ctr_pnt::*)(const FT&, const FT&, const FT&);
+  using Ctr_pnt_op2 = Pnt(Ctr_pnt::*)(const Dir&);
   py::class_<Ctr_pnt>(traits_c, "Construct_point_2")
-    .def("__call__", static_cast<Ctr_pnt_op>(&Ctr_pnt::operator()));
-
+    .def("__call__", static_cast<Ctr_pnt_op1>(&Ctr_pnt::operator()))
+    .def("__call__", static_cast<Ctr_pnt_op2>(&Ctr_pnt::operator()))
   ;
 
   using Ctr_cv = Gt::Construct_curve_2;
@@ -71,7 +74,18 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
     .def("__call__", static_cast<Ctr_xcv_op>(&Ctr_xcv::operator()));
   ;
 
+  //! \todo Handle the functions that return reference-counted objects.
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
+  xcv_c
+    .def("is_directed_right", &aos2::X_monotone_curve_2::source, ri)
+    .def("is_directed_right", &aos2::X_monotone_curve_2::target, ri)
+    .def("is_directed_right", &aos2::X_monotone_curve_2::normal, ri)
+    .def("is_directed_right", &aos2::X_monotone_curve_2::left, ri)
+    .def("is_directed_right", &aos2::X_monotone_curve_2::right, ri)
+    .def("is_directed_right", &aos2::X_monotone_curve_2::is_vertical)
+    .def("is_directed_right", &aos2::X_monotone_curve_2::is_directed_right)
+    .def("is_directed_right", &aos2::X_monotone_curve_2::is_meridian)
+    ;
   add_insertion(xcv_c, "__str__");
   add_insertion(xcv_c, "__repr__");
   add_extraction(xcv_c);

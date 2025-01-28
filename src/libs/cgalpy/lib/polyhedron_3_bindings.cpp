@@ -40,7 +40,6 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_circulator.hpp"
-#include "CGALPY/export_boost_mesh_utils.hpp"
 #include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/get.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
@@ -53,6 +52,10 @@
 namespace py = nanobind;
 
 namespace pol3 {
+
+extern void export_polyhedron_vertex(py::class_<Polyhedron_3>& prn_c);
+extern void export_polyhedron_halfedge(py::class_<Polyhedron_3>& prn_c);
+extern void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c);
 
 //!
 template <typename Map_type>
@@ -141,12 +144,143 @@ void halfedge_map(py::module_& m,
         py::arg("property_map"), py::arg("halfedge_descriptor"));
 }
 
-// Access functions
-const Vertex& vertex(const Halfedge& e) { return (*(e.vertex())); }
-const Halfedge& opposite(const Halfedge& e) { return (*(e.opposite())); }
-const Halfedge& next(const Halfedge& e) { return (*(e.next())); }
-const Halfedge& prev(const Halfedge& e) { return (*(e.prev())); }
-const Halfedge& halfedge(const Face& f) { return (*(f.halfedge())); }
+// Global access functions
+
+//!
+template <typename PolygonMesh>
+auto num_edges(const PolygonMesh& p) { return CGAL::num_edges(p); }
+
+//!
+template <typename PolygonMesh>
+auto num_faces(const PolygonMesh& p) { return CGAL::num_faces(p); }
+
+//!
+template <typename PolygonMesh>
+auto num_halfedges(const PolygonMesh& p) { return CGAL::num_halfedges(p); }
+
+//!
+template <typename PolygonMesh>
+auto num_vertices(const PolygonMesh& p) { return CGAL::num_vertices(p); }
+
+//!
+template <typename PolygonMesh>
+auto my_edges(const PolygonMesh& p) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  using Pm = PolygonMesh;
+  using Ei = typename boost::graph_traits<Pm>::edge_iterator;
+  auto range = CGAL::edges(p);
+  return py::make_iterator<ri>(py::type<Ei>(),
+                               "Face_iterator",
+                               range.first, range.second);
+}
+
+//!
+template <typename PolygonMesh>
+auto my_faces(const PolygonMesh& p) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  using Pm = PolygonMesh;
+  using Fi = typename boost::graph_traits<Pm>::face_iterator;
+  auto range = CGAL::faces(p);
+  return py::make_iterator<ri>(py::type<Fi>(),
+                               "Face_iterator",
+                               range.first, range.second);
+}
+
+//!
+template <typename PolygonMesh>
+auto my_halfedges(const PolygonMesh& p) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  using Pm = PolygonMesh;
+  using Hi = typename boost::graph_traits<Pm>::halfedge_iterator;
+  auto range = CGAL::halfedges(p);
+  return py::make_iterator<ri>(py::type<Hi>(),
+                               "Face_iterator",
+                               range.first, range.second);
+}
+
+//!
+template <typename PolygonMesh>
+auto my_vertices(const PolygonMesh& p) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  using Pm = PolygonMesh;
+  using Vi = typename boost::graph_traits<Pm>::vertex_iterator;
+  auto range = CGAL::vertices(p);
+  return py::make_iterator<ri>(py::type<Vi>(),
+                               "Face_iterator",
+                               range.first, range.second);
+}
+
+//!
+boost::graph_traits<Polyhedron_3>::degree_size_type
+degree_f(Face& f, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Fd = typename boost::graph_traits<Prn>::face_descriptor;
+  return CGAL::degree(Fd(&f), p);
+}
+
+//!
+boost::graph_traits<Polyhedron_3>::degree_size_type
+degree_v(Vertex& v, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Vd = typename boost::graph_traits<Prn>::vertex_descriptor;
+  return CGAL::degree(Vd(&v), p);
+}
+
+//!
+Face& face_h(Halfedge& h, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
+  return *(CGAL::face(Hd(&h), p));
+}
+
+//!
+Halfedge& halfedge_v(Vertex& v, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Vd = typename boost::graph_traits<Prn>::vertex_descriptor;
+  return *(CGAL::halfedge(Vd(&v), p));
+}
+
+//!
+Halfedge& halfedge_f(Face& f, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Fd = typename boost::graph_traits<Prn>::face_descriptor;
+  return *(CGAL::halfedge(Fd(&f), p));
+}
+
+//!
+Halfedge& opposite_h(Halfedge& h, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
+  return *(CGAL::opposite(Hd(&h), p));
+}
+
+//!
+Halfedge& prev_h(Halfedge& h, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
+  return *(CGAL::prev(Hd(&h), p));
+}
+
+//!
+Halfedge& next_h(Halfedge& h, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
+  return *(CGAL::next(Hd(&h), p));
+}
+
+//!
+Vertex& source_h(Halfedge& h, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
+  return *(CGAL::source(Hd(&h), p));
+}
+
+//!
+Vertex& target_h(Halfedge& h, const Polyhedron_3& p) {
+  using Prn = Polyhedron_3;
+  using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
+  return *(CGAL::target(Hd(&h), p));
+}
 
 // Read a surface mesh from a file.
 template <typename Polyhedron_3>
@@ -195,7 +329,7 @@ auto make_triangle(Polyhedron_3& prn, const typename Polyhedron_3::Point& p1,
 /// @{
 
 //
-auto my_vertices(const Polyhedron_3& prn) {
+auto polyhedron_vertices(const Polyhedron_3& prn) {
   constexpr auto ri(py::rv_policy::reference_internal);
   return py::make_iterator<ri>(py::type<Polyhedron_3::Vertex_const_iterator>(),
                                "Vertex_iterator",
@@ -203,7 +337,7 @@ auto my_vertices(const Polyhedron_3& prn) {
 }
 
 //
-auto my_halfedges(const Polyhedron_3& prn) {
+auto polyhedron_halfedges(const Polyhedron_3& prn) {
   constexpr auto ri(py::rv_policy::reference_internal);
   return py::make_iterator<ri>(py::type<Polyhedron_3::Halfedge_const_iterator>(),
                                "Halfedge_iterator",
@@ -211,7 +345,7 @@ auto my_halfedges(const Polyhedron_3& prn) {
 }
 
 //
-auto my_edges(const Polyhedron_3& prn) {
+auto polyhedron_edges(const Polyhedron_3& prn) {
   constexpr auto ri(py::rv_policy::reference_internal);
   return py::make_iterator<ri>(py::type<Polyhedron_3::Edge_const_iterator>(),
                                "Edge_iterator",
@@ -219,7 +353,7 @@ auto my_edges(const Polyhedron_3& prn) {
 }
 
 //
-auto my_faces(const Polyhedron_3& prn) {
+auto polyhedron_faces(const Polyhedron_3& prn) {
   constexpr auto ri(py::rv_policy::reference_internal);
   return py::make_iterator<ri>(py::type<Polyhedron_3::Face_const_iterator>(),
                                "Face_iterator",
@@ -227,7 +361,7 @@ auto my_faces(const Polyhedron_3& prn) {
 }
 
 //
-auto my_planes(const Polyhedron_3& prn) {
+auto polyhedron_planes(const Polyhedron_3& prn) {
   constexpr auto ri(py::rv_policy::reference_internal);
   return py::make_iterator<ri>(py::type<Polyhedron_3::Plane_const_iterator>(),
                                "Plane_iterator",
@@ -235,8 +369,11 @@ auto my_planes(const Polyhedron_3& prn) {
 }
 
 //
-auto halfedges_around_facet(const Face& f)
-{ return make_circulator(f.facet_begin()); }
+auto halfedges_around_target(Vertex& v, const Polyhedron_3& prn) {
+  using Prn = Polyhedron_3;
+  using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
+  return make_circulator(Hatc(Vertex_handle(&v), prn));
+}
 
 /// @}
 
@@ -281,226 +418,6 @@ void face_put(const PropertyMap& pm,
 
 } // namespace pol3
 
-// Export Vertex
-template <typename C>
-void export_vertex(C& prn_c) {
-  using Prn = pol3::Polyhedron_3;
-  using Vertex = Prn::Vertex;
-  constexpr auto ri(py::rv_policy::reference_internal);
-
-  if (add_attr<Vertex>(prn_c, "Vertex")) return;
-
-  py::class_<Vertex> vertex_c(prn_c, "Vertex");
-  vertex_c.def(py::init<>())
-    .def("point", [](const Vertex& v){ return v.point(); }, ri)
-#ifdef CGALPY_POL3_VERTEX_EXTENDED
-    // The member functions set_data() and data() are defined in a base class of
-    // Vertex. Therefore, we cannot directly refere to any of them, e.g.,
-    // `Vertex::set_data`. Instead, we introduce lambda functions that call
-    // the appropriate member functions.
-    .def("set_data", [](Vertex& v, py::object obj) { v.set_data(obj); })
-    .def("data", [](const Vertex& v)->py::object { return v.data(); })
-#endif
-    ;
-}
-
-// Export Vertex
-template <typename C>
-void export_vertex_handle(C& prn_c) {
-  using Prn = pol3::Polyhedron_3;
-  using Vertex_handle = Prn::Vertex_handle;
-  constexpr auto ri(py::rv_policy::reference_internal);
-
-  if (add_attr<Vertex_handle>(prn_c, "Vertex_handle")) return;
-
-  py::class_<Vertex_handle> vertex_handle_c(prn_c, "Vertex_handle");
-  vertex_handle_c.def(py::init<>());
-}
-
-// Export Vertex
-template <typename C>
-void export_halfedge(C& prn_c) {
-  using Prn = pol3::Polyhedron_3;
-  using Halfedge = Prn::Halfedge;
-  constexpr auto ri(py::rv_policy::reference_internal);
-
-  if (add_attr<Halfedge>(prn_c, "Halfedge")) return;
-
-  py::class_<Halfedge> halfedge_c(prn_c, "Halfedge");
-  halfedge_c.def(py::init<>())
-    .def("vertex", &pol3::vertex, ri)
-    .def("opposite", &pol3::opposite, ri)
-    .def("next", &pol3::next, ri)
-    .def("prev", &pol3::prev, ri)
-    .def("is_border", [](const Halfedge& e){ return e.is_border(); })
-#ifdef CGALPY_POL3_HALFEDGE_EXTENDED
-    // The member functions set_data() and data() are defined in a base class of
-    // Halfedge. Therefore, we cannot directly refere to any of them, e.g.,
-    // `Halfedge::set_data`. Instead, we introduce lambda functions that call
-    // the appropriate member functions.
-    .def("set_data", [](Halfedge& h, py::object obj) { h.set_data(obj); })
-    .def("data", [](const Halfedge& h)->py::object { return h.data(); })
-#endif
-    ;
-}
-
-// Export Vertex
-template <typename C>
-void export_face(C& prn_c) {
-  using Prn = pol3::Polyhedron_3;
-  using Face = Prn::Face;
-  using Plane_3 = Prn::Plane_3;
-  constexpr auto ri(py::rv_policy::reference_internal);
-
-  if (add_attr<Face>(prn_c, "Face")) return;
-
-  py::class_<Face> face_c(prn_c, "Face");
-  face_c.def(py::init<>())
-    .def("plane", [](const Face& f){ return f.plane(); }, ri)
-    .def("set_plane", [](Face& f, const Plane_3& plane){ f.plane() = plane; })
-    .def("halfedge", &pol3::halfedge, ri)
-    .def("facet_degree", [](const Face& f){ return f.facet_degree(); })
-    .def("is_triangle", [](const Face& f){ return f.is_triangle(); })
-    .def("is_quad", [](const Face& f){ return f.is_quad(); })
-#ifdef CGALPY_POL3_FACE_EXTENDED
-    // The member functions set_data() and data() are defined in a base class of
-    // Face. Therefore, we cannot directly refere to any of them, e.g.,
-    // `Face::set_data`. Instead, we introduce lambda functions that call
-    // the appropriate member functions.
-    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); })
-    .def("data", [](const Face& f)->py::object { return f.data(); })
-#endif
-    ;
-
-  using Hafcc = pol3::Halfedge_around_facet_const_circulator;
-  add_circulator<Hafcc>("Halfedge_around_facet_circulator", face_c);
-  face_c.def("halfedges", &pol3::halfedges_around_facet, py::keep_alive<0, 1>());
-
-  // Until 'consteval' is supported (C++20), we cannot assume that
-  // pol3::face_with_id() is evaluated at compiletime
-#if defined(CGALPY_POL3_FACE_WITH_ID)
-  if constexpr(pol3::face_with_id())
-    face_c.def("id", [](const Face& f){ return f.id(); });
-#endif
-}
-
-// export Face_handle
-template <typename C>
-void export_face_handle(C& prn_c) {
-  using Prn = pol3::Polyhedron_3;
-  using Face_handle = Prn::Face_handle;
-  constexpr auto ri(py::rv_policy::reference_internal);
-
-  if (add_attr<Face_handle>(prn_c, "Face_handle")) return;
-
-  py::class_<Face_handle> face_handle_c(prn_c, "Face_handle");
-  face_handle_c.def(py::init<>());
-}
-
-// export boost halfedge
-template<typename C>
-void export_boost_halfedge(C& prn_c) {
-  using PolygonMesh = pol3::Polyhedron_3;
-  using Halfedge = boost::graph_traits<PolygonMesh>::halfedge_descriptor;
-
-  if (add_attr<Halfedge>(prn_c, "Halfedge")) return;
-
-  py::class_<Halfedge> halfedge_c(prn_c, "halfedge_descriptor");
-  halfedge_c.def(py::init<>())
-    .def("facet", [](const Halfedge& e){ return e->facet(); })
-    .def("facet_begin", [](const Halfedge& e){ return e->facet_begin(); })
-    .def("is_border", [](const Halfedge& e){ return e->is_border(); })
-    .def("face", [](const Halfedge& e){ return e->face(); })
-    .def("next", [](const Halfedge& e){ return e->next(); })
-    .def("prev", [](const Halfedge& e){ return e->prev(); })
-    .def("vertex", [](const Halfedge& e){ return e->vertex(); })
-    .def("is_quad", [](const Halfedge& e){ return e->is_quad(); })
-    .def("opposite", [](const Halfedge& e){ return e->opposite(); })
-    .def("is_bivalent", [](const Halfedge& e){ return e->is_bivalent(); })
-    .def("is_triangle", [](const Halfedge& e){ return e->is_triangle(); })
-    .def("facet_degree", [](const Halfedge& e){ return e->facet_degree(); })
-    .def("is_trivalent", [](const Halfedge& e){ return e->is_trivalent(); })
-    .def("vertex_begin", [](const Halfedge& e){ return e->vertex_begin(); })
-    .def("vertex_degree", [](const Halfedge& e){ return e->vertex_degree(); })
-    .def("is_border_edge", [](const Halfedge& e){ return e->is_border_edge(); })
-    .def("next_on_vertex", [](const Halfedge& e){ return e->next_on_vertex(); })
-    .def("prev_on_vertex", [](const Halfedge& e){ return e->prev_on_vertex(); })
-    // .def("prev_link", [](const Halfedge& e){ return e->prev_link(); })
-    // .def("next_link", [](const Halfedge& e){ return e->next_link(); })
-    ;
-}
-
-// export boost vertex
-template<typename C>
-void export_boost_vertex(C& prn_c) {
-  using PolygonMesh = pol3::Polyhedron_3;
-  using Vertex = boost::graph_traits<PolygonMesh>::vertex_descriptor;
-  using Halfedge = boost::graph_traits<PolygonMesh>::halfedge_descriptor;
-
-  if (add_attr<Vertex>(prn_c, "Vertex")) return;
-
-  py::class_<Vertex> vertex_c(prn_c, "vertex_descriptor");
-  vertex_c.def(py::init<>())
-    .def("point", [](const Vertex& v){ return v->point(); })
-    .def("degree", [](const Vertex& v){ return v->degree(); })
-    .def("halfedge", [](const Vertex& v){ return v->halfedge(); })
-    .def("is_bivalent", [](const Vertex& v){ return v->is_bivalent(); })
-    .def("is_trivalent", [](const Vertex& v){ return v->is_trivalent(); })
-    .def("set_halfedge", [](Vertex& v, const Halfedge& h){ v->halfedge() = h; })
-    .def("vertex_begin", [](const Vertex& v){ return v->vertex_begin(); })
-    // .def_ro("prev_link", [](const Vertex& v){ return v->prev_link(); })
-    // .def_ro("next_link", [](const Vertex& v){ return v->next_link(); })
-    .def("vertex_degree", [](const Vertex& v){ return v->vertex_degree(); })
-    ;
-}
-
-// export boost face
-template<typename C>
-void export_boost_face(C& prn_c) {
-  using PolygonMesh = pol3::Polyhedron_3;
-  using Face = boost::graph_traits<PolygonMesh>::face_descriptor;
-  using Halfedge = boost::graph_traits<PolygonMesh>::halfedge_descriptor;
-
-  if (add_attr<Face>(prn_c, "Face")) return;
-
-  py::class_<Face> face_c(prn_c, "face_descriptor");
-  face_c.def(py::init<>())
-    .def("facet_begin", [](const Face& f){ return f->facet_begin(); })
-    .def("size", [](const Face& f){ return f->size(); })
-    .def("plane", [](const Face& f){ return f->plane(); })
-    .def("is_quad", [](const Face& f){ return f->is_quad(); })
-    .def("halfedge", [](const Face& f){ return f->halfedge(); })
-    .def("is_triangle", [](const Face& f){ return f->is_triangle(); })
-    .def("facet_degree", [](const Face& f){ return f->facet_degree(); })
-    // .def_ro("prev_link", [](const Face& f){ return f->prev_link(); })
-    // .def_ro("next_link", [](const Face& f){ return f->next_link(); })
-    .def("set_halfedge", [](Face& f, const Halfedge& h){ f->halfedge() = h; })
-    ;
-}
-
-// export boost edge
-template<typename C>
-void export_boost_edge(C& prn_c) {
-  using PolygonMesh = pol3::Polyhedron_3;
-  using Edge = boost::graph_traits<PolygonMesh>::edge_descriptor;
-
-  if (add_attr<Edge>(prn_c, "Edge")) return;
-
-  py::class_<Edge> edge_c(prn_c, "edge_descriptor");
-  edge_c.def(py::init<>())
-    // this is not working
-    // .def("id", [](const Edge& e){ return e->id(); })
-    // .def("next", [](const Edge& e){ return e->next(); })
-    // .def("prev", [](const Edge& e){ return e->prev(); })
-    // .def("halfedge", [](const Edge& e){ return e->halfedge(); })
-    // .def("opposite", [](const Edge& e){ return e->opposite(); })
-    // .def("next_opposite", [](const Edge& e){ return e->next_opposite(); })
-    // .def("opposite_next", [](const Edge& e){ return e->opposite_next(); })
-    // .def("opposite_prev", [](const Edge& e){ return e->opposite_prev(); })
-    // .def("prev_opposite", [](const Edge& e){ return e->prev_opposite(); })
-    ;
-}
-
 // Export Polyhedron_traits_with_normals_3
 void export_polyhedron_traits_with_normals(py::module_& m) {
   using Traits = CGAL::Polyhedron_traits_with_normals_3<Kernel>;
@@ -535,19 +452,13 @@ void export_polyhedron_3(py::module_& m) {
   using Halfedge = Prn::Halfedge;
   using Face = Prn::Face;
   using Gt = boost::graph_traits<Prn>;
-  using vertex_descriptor = Gt::vertex_descriptor;
+  using Vd = Gt::vertex_descriptor;
+  using Ed = Gt::edge_descriptor;
+  using Hd = Gt::halfedge_descriptor;
+  using Fd = Gt::face_descriptor;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  export_vertex(m);
-  export_vertex_handle(m);
-  export_halfedge(m);
-  export_face(m);
-  export_face_handle(m);
-  export_boost_halfedge(m);
-  export_boost_vertex(m);
-  export_boost_face(m);
-  export_boost_edge(m);
   export_polyhedron_traits_with_normals(m);
   export_internal_face_plane_3_map(m);
 
@@ -614,22 +525,23 @@ void export_polyhedron_3(py::module_& m) {
     add_iterator<Eci, Eci>("Edge_iterator", prn_c);
     add_iterator<Fci, Fci>("Face_iterator", prn_c);
 
-    prn_c.def("vertices", &pol3::my_vertices, py::keep_alive<0, 1>())
-      .def("halfedges", &pol3::my_halfedges, py::keep_alive<0, 1>())
-      .def("edges", &pol3::my_edges, py::keep_alive<0, 1>())
-      .def("faces", &pol3::my_faces, py::keep_alive<0, 1>())
-      .def("planes", &pol3::my_planes, py::keep_alive<0, 1>())
+    prn_c.def("vertices", &pol3::polyhedron_vertices, py::keep_alive<0, 1>())
+      .def("halfedges", &pol3::polyhedron_halfedges, py::keep_alive<0, 1>())
+      .def("edges", &pol3::polyhedron_edges, py::keep_alive<0, 1>())
+      .def("faces", &pol3::polyhedron_faces, py::keep_alive<0, 1>())
+      .def("planes", &pol3::polyhedron_planes, py::keep_alive<0, 1>())
       ;
+
+    export_polyhedron_vertex(prn_c);
+    export_polyhedron_halfedge(prn_c);
+    export_polyhedron_face(prn_c);
 
     add_insertion(prn_c, "__str__");
     add_insertion(prn_c, "__repr__");
     add_extraction(prn_c);
-
-    add_attr<Pnt>(prn_c, "Point_3");
-    add_attr<Vertex>(prn_c, "Vertex");
-    add_attr<Halfedge>(prn_c, "Halfedge");
-    add_attr<Face>(prn_c, "Face");
   }
+
+  add_attr<Pnt>(m, "Point_3");
 
 #ifdef CGALPY_HAS_VISUAL
   using Draw_arr = void(*)(const Prn&, const char*);
@@ -696,67 +608,70 @@ void export_polyhedron_3(py::module_& m) {
 
   //! \todo export CGAL::vertex_point and CGAL::get() instead.
   m.def("get_vertex_point",
-        [](const Prn& pm, const vertex_descriptor& vd)
-        { return get(CGAL::vertex_point, pm, vd); });
+        [](const Prn& pm, Vertex& v)
+        { return get(CGAL::vertex_point, pm, Vd(&v)); });
 
-  m.def("add_edge", &boost_utils::add_edge<Prn>);
-  m.def("add_face", &boost_utils::add_face<Prn>);
-  m.def("add_vertex", &boost_utils::add_vertex<Prn>);
-  m.def("add_vertex", &boost_utils::add_vertex_p<Prn>);
-  m.def("adjacent_vertices", &boost_utils::my_adjacent_vertices<Prn>);
-  m.def("collect_garbage", &boost_utils::my_collect_garbage<Prn>);
-  m.def("degree", &boost_utils::degree_v<Prn>);
-  m.def("degree", &boost_utils::degree_f<Prn>);
-  m.def("edge", &boost_utils::edge<Prn>);
-  m.def("edge", &boost_utils::edge_h<Prn>);
-  m.def("edges", &boost_utils::my_edges<Prn>);
-  m.def("face", &boost_utils::face_h<Prn>);
-  m.def("faces", &boost_utils::my_faces<Prn>);
-  m.def("halfedge", &boost_utils::halfedge_e<Prn>);
-  m.def("halfedge", &boost_utils::halfedge_v<Prn>);
-  m.def("halfedge", &boost_utils::halfedge_f<Prn>);
-  m.def("halfedge", &boost_utils::halfedge_vv<Prn>);
-  m.def("halfedges", &boost_utils::my_halfedges<Prn>);
-  m.def("in_degree", &boost_utils::in_degree<Prn>);
-  m.def("in_edges", &boost_utils::my_in_edges<Prn>);
-  m.def("is_valid_vertex_descriptor",
-        &boost_utils::my_is_valid_vertex_descriptor<Prn>,
-        py::arg("v"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_halfedge_descriptor",
-        &boost_utils::my_is_valid_halfedge_descriptor<Prn>,
-        py::arg("h"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_edge_descriptor",
-        &boost_utils::my_is_valid_edge_descriptor<Prn>,
-        py::arg("e"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_face_descriptor",
-        &boost_utils::my_is_valid_face_descriptor<Prn>,
-        py::arg("f"), py::arg("g"), py::arg("verbose") = false);
-  m.def("next", &boost_utils::next<Prn>);
-  m.def("null_face", &pol3::null_face<Prn>);
-  m.def("num_edges", &boost_utils::num_edges<Prn>);
-  m.def("num_faces", &boost_utils::num_faces<Prn>);
-  m.def("num_halfedges", &boost_utils::num_halfedges<Prn>);
-  m.def("num_vertices", &boost_utils::num_vertices<Prn>);
-  m.def("opposite", &boost_utils::opposite<Prn>);
-  m.def("out_degree", &boost_utils::out_degree<Prn>);
-  m.def("out_edges", &boost_utils::my_out_edges<Prn>);
-  m.def("prev", &boost_utils::prev<Prn>);
-  m.def("remove_all_elements", &boost_utils::remove_all_elements<Prn>);
-  // m.def("remove_edge", &boost_utils::remove_edge_vv<Prn>); // vv only for sm
-  m.def("remove_edge", &boost_utils::remove_edge_e<Prn>);
-  m.def("remove_face", &boost_utils::remove_face<Prn>);
-  m.def("remove_vertex", &boost_utils::remove_vertex<Prn>);
-  m.def("reserve", &boost_utils::reserve<Prn>);
-  m.def("set_face", &boost_utils::set_face<Prn>);
-  m.def("set_halfedge", &boost_utils::set_halfedge_vh<Prn>);
-  m.def("set_halfedge", &boost_utils::set_halfedge_fh<Prn>);
-  m.def("set_next", &boost_utils::set_next<Prn>);
-  m.def("set_target", &boost_utils::set_target<Prn>);
-  m.def("source", &boost_utils::source_e<Prn>);
-  m.def("source", &boost_utils::source_h<Prn>);
-  m.def("target", &boost_utils::target_e<Prn>);
-  m.def("target", &boost_utils::target_h<Prn>);
-  m.def("vertices", &boost_utils::my_vertices<Prn>);
+  // Concept functions
+  // Global
+  m.def("edges", &pol3::my_edges<Prn>);
+  m.def("faces", &pol3::my_faces<Prn>);
+  m.def("halfedges", &pol3::my_halfedges<Prn>);
+  m.def("vertices", &pol3::my_vertices<Prn>);
+  m.def("num_edges", &pol3::num_edges<Prn>);
+  m.def("num_faces", &pol3::num_faces<Prn>);
+  m.def("num_halfedges", &pol3::num_halfedges<Prn>);
+  m.def("num_vertices", &pol3::num_vertices<Prn>);
+
+  // Dedicated to Polyhedron_3
+  m.def("degree", &pol3::degree_f);
+  m.def("degree", &pol3::degree_v);
+  m.def("face", &pol3::face_h);
+  m.def("halfedge", &pol3::halfedge_v);
+  m.def("halfedge", &pol3::halfedge_f);
+  m.def("next", &pol3::next_h);
+  m.def("opposite", &pol3::opposite_h);
+  m.def("prev", &pol3::prev_h);
+  m.def("source", &pol3::source_h);
+  m.def("target", &pol3::target_h);
+
+  // Euler functions
+
+  // m.def("halfedge", &boost_utils::halfedge_vv<Prn>);
+  // m.def("edge", &boost_utils::edge<Prn>);
+  // m.def("add_edge", &boost_utils::add_edge<Prn>);
+  // m.def("add_face", &boost_utils::add_face<Prn>);
+  // m.def("add_vertex", &boost_utils::add_vertex<Prn>);
+  // m.def("add_vertex", &boost_utils::add_vertex_p<Prn>);
+  // m.def("adjacent_vertices", &boost_utils::my_adjacent_vertices<Prn>);
+  // m.def("collect_garbage", &boost_utils::my_collect_garbage<Prn>);
+  // m.def("in_degree", &boost_utils::in_degree<Prn>);
+  // m.def("in_edges", &boost_utils::my_in_edges<Prn>);
+  // m.def("is_valid_vertex_descriptor",
+  //       &boost_utils::my_is_valid_vertex_descriptor<Prn>,
+  //       py::arg("v"), py::arg("g"), py::arg("verbose") = false);
+  // m.def("is_valid_halfedge_descriptor",
+  //       &boost_utils::my_is_valid_halfedge_descriptor<Prn>,
+  //       py::arg("h"), py::arg("g"), py::arg("verbose") = false);
+  // m.def("is_valid_edge_descriptor",
+  //       &boost_utils::my_is_valid_edge_descriptor<Prn>,
+  //       py::arg("e"), py::arg("g"), py::arg("verbose") = false);
+  // m.def("is_valid_face_descriptor",
+  //       &boost_utils::my_is_valid_face_descriptor<Prn>,
+  //       py::arg("f"), py::arg("g"), py::arg("verbose") = false);
+  // m.def("null_face", &pol3::null_face<Prn>);
+  // m.def("out_degree", &boost_utils::out_degree<Prn>);
+  // m.def("out_edges", &boost_utils::my_out_edges<Prn>);
+  // m.def("remove_all_elements", &boost_utils::remove_all_elements<Prn>);
+  // // m.def("remove_edge", &boost_utils::remove_edge_vv<Prn>); // vv only for sm
+  // m.def("remove_edge", &boost_utils::remove_edge_e<Prn>);
+  // m.def("remove_face", &boost_utils::remove_face<Prn>);
+  // m.def("remove_vertex", &boost_utils::remove_vertex<Prn>);
+  // m.def("reserve", &boost_utils::reserve<Prn>);
+  // m.def("set_face", &boost_utils::set_face<Prn>);
+  // m.def("set_halfedge", &boost_utils::set_halfedge_vh<Prn>);
+  // m.def("set_halfedge", &boost_utils::set_halfedge_fh<Prn>);
+  // m.def("set_next", &boost_utils::set_next<Prn>);
+  // m.def("set_target", &boost_utils::set_target<Prn>);
   // m.def("normalize_border", &boost_utils::normalize_border<Prn>); ???
 
   using Edge_bool_tag = CGAL::dynamic_edge_property_t<bool>;
@@ -769,19 +684,19 @@ void export_polyhedron_3(py::module_& m) {
   using vbmap_type = boost::property_map<Prn, Vertex_bool_tag>::type;
 
   // Euler operations
-  boost_utils::define_euler_operations<py::module_, Prn, ebmap_type>(m);
+  // boost_utils::define_euler_operations<py::module_, Prn, ebmap_type>(m);
 
   // Iterators and Circulators
-  boost_utils::define_boost_iterators<py::module_, Prn>(m);
+  // boost_utils::define_boost_iterators<py::module_, Prn>(m);
 
   // // Selection Functions
   // boost_utils::define_boost_selection_functions<py::module_, Prn, ebmap_type, fbmap_type, vbmap_type>(m);
 
   // Helper Functions
-  boost_utils::define_boost_helpers<py::module_, Prn, Prn>(m);
+  // boost_utils::define_boost_helpers<py::module_, Prn, Prn>(m);
 
   // Generator Functions
-  boost_utils::define_generate_functions<py::module_, Prn, Kernel>(m);
+  // boost_utils::define_generate_functions<py::module_, Prn, Kernel>(m);
 
   // Partitioning Operations
   using EdgeDoubleMap =
@@ -790,5 +705,11 @@ void export_polyhedron_3(py::module_& m) {
     boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::vector<double>>>::type;
   using VertexSizeTMap =
     boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>::type;
-  boost_utils::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
+  // boost_utils::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
+
+  // Halfedges around target circulator
+  // We use the dereference circulator, because we need to dereference twice
+  using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
+  add_dereference_circulator<Hatc>("Halfedge_around_target_circulator", m);
+  m.def("halfedges_around_target", &pol3::halfedges_around_target, py::keep_alive<0, 1>());
 }
