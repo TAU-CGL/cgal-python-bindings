@@ -232,56 +232,56 @@ degree_v(Vertex& v, const Polyhedron_3& p) {
 }
 
 //!
-Face& face_h(Halfedge& h, const Polyhedron_3& p) {
+const Face& face_h(Halfedge& h, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
   return *(CGAL::face(Hd(&h), p));
 }
 
 //!
-Halfedge& halfedge_v(Vertex& v, const Polyhedron_3& p) {
+const Halfedge& halfedge_v(Vertex& v, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Vd = typename boost::graph_traits<Prn>::vertex_descriptor;
   return *(CGAL::halfedge(Vd(&v), p));
 }
 
 //!
-Halfedge& halfedge_f(Face& f, const Polyhedron_3& p) {
+const Halfedge& halfedge_f(Face& f, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Fd = typename boost::graph_traits<Prn>::face_descriptor;
   return *(CGAL::halfedge(Fd(&f), p));
 }
 
 //!
-Halfedge& opposite_h(Halfedge& h, const Polyhedron_3& p) {
+const Halfedge& opposite_h(Halfedge& h, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
   return *(CGAL::opposite(Hd(&h), p));
 }
 
 //!
-Halfedge& prev_h(Halfedge& h, const Polyhedron_3& p) {
+const Halfedge& prev_h(Halfedge& h, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
   return *(CGAL::prev(Hd(&h), p));
 }
 
 //!
-Halfedge& next_h(Halfedge& h, const Polyhedron_3& p) {
+const Halfedge& next_h(Halfedge& h, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
   return *(CGAL::next(Hd(&h), p));
 }
 
 //!
-Vertex& source_h(Halfedge& h, const Polyhedron_3& p) {
+const Vertex& source_h(Halfedge& h, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
   return *(CGAL::source(Hd(&h), p));
 }
 
 //!
-Vertex& target_h(Halfedge& h, const Polyhedron_3& p) {
+const Vertex& target_h(Halfedge& h, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
   return *(CGAL::target(Hd(&h), p));
@@ -408,6 +408,7 @@ typename PropertyMap::value_type
 face_get(const PropertyMap& pm,
          typename PropertyMap::key_type::value_type & f) {
   using Facet_handle = typename PropertyMap::key_type;
+  const auto& v = get(pm, Facet_handle(&f));
   return get(pm, Facet_handle(&f));
 }
 
@@ -618,10 +619,10 @@ void export_polyhedron_3(py::module_& m) {
 
   // Concept functions
   // Global
-  m.def("edges", &pol3::my_edges<Prn>);
-  m.def("faces", &pol3::my_faces<Prn>);
-  m.def("halfedges", &pol3::my_halfedges<Prn>);
-  m.def("vertices", &pol3::my_vertices<Prn>);
+  m.def("edges", &pol3::my_edges<Prn>, py::keep_alive<0, 1>());
+  m.def("faces", &pol3::my_faces<Prn>, py::keep_alive<0, 1>());
+  m.def("halfedges", &pol3::my_halfedges<Prn>, py::keep_alive<0, 1>());
+  m.def("vertices", &pol3::my_vertices<Prn>, py::keep_alive<0, 1>());
   m.def("num_edges", &pol3::num_edges<Prn>);
   m.def("num_faces", &pol3::num_faces<Prn>);
   m.def("num_halfedges", &pol3::num_halfedges<Prn>);
@@ -630,14 +631,14 @@ void export_polyhedron_3(py::module_& m) {
   // Dedicated to Polyhedron_3
   m.def("degree", &pol3::degree_f);
   m.def("degree", &pol3::degree_v);
-  m.def("face", &pol3::face_h);
-  m.def("halfedge", &pol3::halfedge_v);
-  m.def("halfedge", &pol3::halfedge_f);
-  m.def("next", &pol3::next_h);
-  m.def("opposite", &pol3::opposite_h);
-  m.def("prev", &pol3::prev_h);
-  m.def("source", &pol3::source_h);
-  m.def("target", &pol3::target_h);
+  m.def("face", &pol3::face_h, ri);
+  m.def("halfedge", &pol3::halfedge_v, ri);
+  m.def("halfedge", &pol3::halfedge_f, ri);
+  m.def("next", &pol3::next_h, ri);
+  m.def("opposite", &pol3::opposite_h, ri);
+  m.def("prev", &pol3::prev_h, ri);
+  m.def("source", &pol3::source_h, ri);
+  m.def("target", &pol3::target_h, ri);
 
   // Euler functions
 
@@ -715,6 +716,6 @@ void export_polyhedron_3(py::module_& m) {
   // Halfedges around target circulator
   // We use the dereference circulator, because we need to dereference twice
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
-  add_dereference_circulator<Hatc>("Halfedge_around_target_circulator", m);
+  add_dereference_circulator<Hatc, Halfedge&>("Halfedge_around_target_circulator", m);
   m.def("halfedges_around_target", &pol3::halfedges_around_target, py::keep_alive<0, 1>());
 }
