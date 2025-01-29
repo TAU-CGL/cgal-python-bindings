@@ -58,29 +58,28 @@ extern void export_polyhedron_halfedge(py::class_<Polyhedron_3>& prn_c);
 extern void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c);
 
 //!
-template <typename Map_type>
+template <typename MapType>
 void register_map(py::module_& m, const std::string& map_name) {
-  py::class_<Map_type>(m, map_name.c_str())
+  using Mt = MapType;
+  py::class_<Mt>(m, map_name.c_str())
     .def(py::init<>())
-    .def("clear", &Map_type::clear)
-    .def("default_value", &Map_type::default_value)
+    .def("clear", &Mt::clear)
+    .def("default_value", &Mt::default_value)
     .def("put",
-         [](Map_type& p, const typename Map_type::key_type& k,
-            const typename Map_type::value_type& v)
+         [](Mt& p, const typename Mt::key_type& k,
+            const typename Mt::value_type& v)
          { put(p, k, v); },
          py::arg("key"), py::arg("value"))
     .def("__setitem__",
-         [](Map_type& p, const typename Map_type::key_type& k,
-            const typename Map_type::value_type& v) { put(p, k, v); },
+         [](Mt& p, const typename Mt::key_type& k,
+            const typename Mt::value_type& v) { put(p, k, v); },
          py::arg("key"), py::arg("value"))
     .def("get",
-         [](const Map_type& p, const typename Map_type::key_type& k)
-         { return get(p, k); })
+         [](const Mt& p, const typename Mt::key_type& k) { return get(p, k); })
     .def("__getitem__",
-         [](const Map_type& p, const typename Map_type::key_type& k)
-         { return get(p, k); })
-    .def_ro("map_", &Map_type::map_)
-    .def_ro("default_value_", &Map_type::default_value_)
+         [](const Mt& p, const typename Mt::key_type& k) { return get(p, k); })
+    .def_ro("map_", &Mt::map_)
+    .def_ro("default_value_", &Mt::default_value_)
     ;
 }
 
@@ -95,53 +94,61 @@ void register_map_get(py::module_& m, const std::string& prop_name) {
 
 //!
 template <typename Pm, typename P>
-void edge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+void edge_map(py::module_& m, const std::string& map_name,
+              const std::string& prop_name) {
+  using Halfedge = typename Pm::Halfedge;
   using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
   using dp = CGAL::dynamic_edge_property_t<P>;
-  using map_type = typename boost::property_map<Pm, dp>::type;
-  register_map<map_type>(m, map_name);
+  using Mt = typename boost::property_map<Pm, dp>::const_type;
+  register_map<Mt>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Ed& e) { return get(p, e); },
-        py::arg("property_map"), py::arg("edge_descriptor"));
+  m.def("get", [](const Mt& p, Halfedge& e) { return get(p, Ed(&e)); },
+        py::arg("property_map"), py::arg("edge"));
 }
 
 //!
-template <typename Pm, typename P>
+template <typename PolygonMesh, typename P>
 void face_map(py::module_& m,
               const std::string& map_name, const std::string& prop_name) {
+  using Pm = PolygonMesh;
+  using Face = typename Pm::Face;
   using Fd = typename boost::graph_traits<Pm>::face_descriptor;
   using dp = CGAL::dynamic_face_property_t<P>;
-  using map_type = typename boost::property_map<Pm, dp>::type;
-  register_map<map_type>(m, map_name);
+  using Mt = typename boost::property_map<Pm, dp>::const_type;
+  register_map<Mt>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Fd& f) { return get(p, f); },
-        py::arg("property_map"), py::arg("face_descriptor"));
+  m.def("get", [](const Mt& p, Face& f) { return get(p, Fd(&f)); },
+        py::arg("property_map"), py::arg("face"));
 }
 
 //!
-template <typename Pm, typename P>
+template <typename PolygonMesh, typename P>
 void vertex_map(py::module_& m,
                 const std::string& map_name, const std::string& prop_name) {
+  using Pm = PolygonMesh;
+  using Vertex = typename Pm::Vertex;
   using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
   using dp = CGAL::dynamic_vertex_property_t<P>;
-  using map_type = typename boost::property_map<Pm, dp>::type;
-  register_map<map_type>(m, map_name);
+  using Mt = typename boost::property_map<Pm, dp>::const_type;
+  register_map<Mt>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Vd& v) { return get(p, v); },
-        py::arg("property_map"), py::arg("vertex_descriptor"));
+  m.def("get", [](const Mt& pm, Vertex& v) { return get(pm, Vd(&v)); },
+        py::arg("property_map"), py::arg("vertex"));
 }
 
 //!
-template <typename Pm, typename P>
+template <typename PolygonMesh, typename P>
 void halfedge_map(py::module_& m,
                   const std::string& map_name, const std::string& prop_name) {
+  using Pm = PolygonMesh;
+  using Halfedge = typename Pm::Halfedge;
   using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
   using dp = CGAL::dynamic_halfedge_property_t<P>;
-  using map_type = typename boost::property_map<Pm, dp>::type;
-  register_map<map_type>(m, map_name);
+  using Mt = typename boost::property_map<Pm, dp>::const_type;
+  register_map<Mt>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const map_type& p, const Hd& h) { return get(p, h); },
-        py::arg("property_map"), py::arg("halfedge_descriptor"));
+  m.def("get", [](const Mt& p, Halfedge& h) { return get(p, Hd(&h)); },
+        py::arg("property_map"), py::arg("halfedge"));
 }
 
 // Global access functions
@@ -374,12 +381,19 @@ auto polyhedron_planes(const Polyhedron_3& prn) {
 }
 
 //
-auto halfedges_around_target(Vertex& v, const Polyhedron_3& prn) {
+auto halfedges_around_target_circulator(Vertex& v, const Polyhedron_3& prn) {
   using Prn = Polyhedron_3;
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
   return make_circulator(Hatc(Vertex_handle(&v), prn));
 }
 
+//
+auto halfedges_around_target(Vertex& v, const Polyhedron_3& prn) {
+  using Prn = Polyhedron_3;
+  using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
+  Hatc begin(Vertex_handle(&v), prn);
+  return make_iterator(begin, begin);
+}
 /// @}
 
 // Obtain the null face.
@@ -464,6 +478,7 @@ void export_polyhedron_3(py::module_& m) {
   using Fd = Gt::face_descriptor;
 
   constexpr auto ri(py::rv_policy::reference_internal);
+  constexpr auto ref(py::rv_policy::reference);
 
   export_polyhedron_traits_with_normals(m);
   export_internal_face_plane_3_map(m);
@@ -593,19 +608,26 @@ void export_polyhedron_3(py::module_& m) {
     .def(py::init<>())
     ;
 
-  // Vertex_property_map
+  //! \todo the following 3 functions should be replaced by something more
+  // general that applies to all maps, similar to the register_map().
+
+  //! The vertex->point property map
   using Vpt = CGAL::vertex_point_t;
-  using Vertex_point_map = boost::property_map<Prn, Vpt>::type;
-  if (! add_attr<Vertex_point_map>(m, "vertex_point_map")) {
-    py::class_<Vertex_point_map>(m, "vertex_point_map")
+  using Vpm = boost::property_map<Prn, Vpt>::const_type;
+  if (! add_attr<Vpm>(m, "Vertex_point_map")) {
+    py::class_<Vpm>(m, "Vertex_point_map")
       .def(py::init<>())
       ;
   }
 
-  //! \todo export CGAL::vertex_point and CGAL::get_property_map instead
+  //! The function that obtains the vertex->point propery map
   m.def("get_vertex_point_map",
         [](const Prn& pm)
-        { return CGAL::get_property_map(CGAL::vertex_point, pm); });
+        { return CGAL::get_const_property_map(CGAL::vertex_point, pm); }, ri);
+
+  //! The get and put functions that operate on the vertex->point property map
+  m.def("get", [](const Vpm& pm, Vertex& v) { return get(pm, Vd(&v)); }, ref,
+        py::arg("property_map"), py::arg("vertex"));
 
   // Free functions
   m.def("clear", &CGAL::clear<Prn>);
@@ -631,14 +653,14 @@ void export_polyhedron_3(py::module_& m) {
   // Dedicated to Polyhedron_3
   m.def("degree", &pol3::degree_f);
   m.def("degree", &pol3::degree_v);
-  m.def("face", &pol3::face_h, ri);
-  m.def("halfedge", &pol3::halfedge_v, ri);
-  m.def("halfedge", &pol3::halfedge_f, ri);
-  m.def("next", &pol3::next_h, ri);
-  m.def("opposite", &pol3::opposite_h, ri);
-  m.def("prev", &pol3::prev_h, ri);
-  m.def("source", &pol3::source_h, ri);
-  m.def("target", &pol3::target_h, ri);
+  m.def("face", &pol3::face_h, ref);
+  m.def("halfedge", &pol3::halfedge_v, ref);
+  m.def("halfedge", &pol3::halfedge_f, ref);
+  m.def("next", &pol3::next_h, ref);
+  m.def("opposite", &pol3::opposite_h, ref);
+  m.def("prev", &pol3::prev_h, ref);
+  m.def("source", &pol3::source_h, ref);
+  m.def("target", &pol3::target_h, ref);
 
   // Euler functions
 
@@ -717,5 +739,7 @@ void export_polyhedron_3(py::module_& m) {
   // We use the dereference circulator, because we need to dereference twice
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
   add_dereference_circulator<Hatc, Halfedge&>("Halfedge_around_target_circulator", m);
-  m.def("halfedges_around_target", &pol3::halfedges_around_target, py::keep_alive<0, 1>());
+  m.def("halfedges_around_target_circulator",
+        &pol3::halfedges_around_target_circulator,
+        py::keep_alive<0, 1>());
 }
