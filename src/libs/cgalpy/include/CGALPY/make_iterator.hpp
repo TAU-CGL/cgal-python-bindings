@@ -52,6 +52,44 @@ void add_iterator(const char* name, C& c, Extra&&... extra) {
                     Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
+// There are cases (actually so far only one), where the value type of the
+// circulator is a handle; in such cases we need to return the dereference
+// of the handle; thus the double application of the dereference operator.
+template <py::rv_policy Policy,
+          typename Iterator, typename Sentinel, typename ValueType,
+          typename... Extra,
+          typename C>
+void add_dereference_iterator_impl(const char* name, C& c, Extra&&... extra) {
+  using state = iterator_state<Iterator, Sentinel>;
+  if (add_attr<state>(c, name)) return;
+
+  py::class_<state>(c, name)
+    .def("__iter__", [](state& s) -> state& { return s; })
+    .def("__next__", [](state& s) -> ValueType {
+                       if (! s.first_or_done) ++s.it;
+                       else s.first_or_done = false;
+                       if (s.it == s.end) {
+                         s.first_or_done = true;
+                         throw py::stop_iteration();
+                       }
+                       return **s.it;
+                     },
+      std::forward<Extra>(extra)..., Policy)
+    ;
+}
+
+// Add (wrap) an iterator
+template <typename Iterator, typename Sentinel,
+          typename ValueType = decltype(*std::declval<Iterator>()),
+          py::rv_policy Policy = py::rv_policy::reference_internal,
+          typename... Extra,
+          typename C>
+void add_dereference_iterator(const char* name, C& c, Extra&&... extra) {
+  add_dereference_iterator_impl<Policy, Iterator, Sentinel, ValueType,
+                                Extra...>(name, c, std::forward<Extra>(extra)...);
+}
+
+//
 template <py::rv_policy Policy,
           typename Iterator, typename Sentinel, typename ValueType,
           typename... Extra,
