@@ -5,7 +5,8 @@ requires = [
     "scikit-build>=0.15.0",
     "scikit-build-core>=0.10.7",
     "nanobind>=2.3.0",
-    "sphinx>=7.1.2"
+    "sphinx>=7.1.2",
+    "typing-extensions"
 ]
 build-backend = "scikit_build_core.build"
 [project]
@@ -121,8 +122,8 @@ build-dir = "build/{wheel_tag}"
 
 [tool.cibuildwheel]
 manylinux-x86_64-image = "manylinux_2_28"
-manylinux-aarch64-image = "manylinux_2_28"
-manylinux-ppc64le-image = "manylinux_2_28"
-manylinux-s390x-image = "manylinux_2_28"
-build = "cp38-* cp39-* cp310-* cp311-* cp312-*"
+# manylinux-aarch64-image = "manylinux_2_28"
+# manylinux-ppc64le-image = "manylinux_2_28"
+# manylinux-s390x-image = "manylinux_2_28"
+build = "cp38-* cp39-* cp310-* cp311-* cp312-* cp313-*"
 
