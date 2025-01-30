@@ -77,16 +77,21 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
   //! \todo Handle the functions that return reference-counted objects.
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
   xcv_c
-    .def("is_directed_right", &aos2::X_monotone_curve_2::source, ri)
-    .def("is_directed_right", &aos2::X_monotone_curve_2::target, ri)
-    .def("is_directed_right", &aos2::X_monotone_curve_2::normal, ri)
-    .def("is_directed_right", &aos2::X_monotone_curve_2::left, ri)
-    .def("is_directed_right", &aos2::X_monotone_curve_2::right, ri)
-    .def("is_directed_right", &aos2::X_monotone_curve_2::is_vertical)
+    .def("source", &aos2::X_monotone_curve_2::source, ri)
+    .def("target", &aos2::X_monotone_curve_2::target, ri)
+    .def("normal", &aos2::X_monotone_curve_2::normal, ri)
+    .def("left", &aos2::X_monotone_curve_2::left, ri)
+    .def("right", &aos2::X_monotone_curve_2::right, ri)
+    .def("is_vertical", &aos2::X_monotone_curve_2::is_vertical)
     .def("is_directed_right", &aos2::X_monotone_curve_2::is_directed_right)
-    .def("is_directed_right", &aos2::X_monotone_curve_2::is_meridian)
+    .def("is_meridian", &aos2::X_monotone_curve_2::is_meridian)
     ;
   add_insertion(xcv_c, "__str__");
   add_insertion(xcv_c, "__repr__");
   add_extraction(xcv_c);
+
+  auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
+  add_insertion(pnt_c, "__str__");
+  add_insertion(pnt_c, "__repr__");
+  add_extraction(pnt_c);
 }
