@@ -519,6 +519,41 @@ endif ()
 
 set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
 
+function(add_module name)
+  set(MODULE_OUTPUT_PATH ${CGALPY_DST_STUBS_DIR}/${name})
+  set(MODULE_OUTPUT ${MODULE_OUTPUT_PATH}/__init__.pyi)
+  set(MODULE_INPUT ${CGALPY_MODULES_DIR}/${name}.json)
+  set(MODULE_ARGS
+    --filters ${CGALPY_${name}_FILTERS}
+    --name ${name}
+    --input-path ${CGALPY_MODULES_DIR}
+    --output-path ${CGALPY_DST_STUBS_DIR})
+
+  # There is no need to generate the directory, as the Python script is
+  # responsible for this task.
+  file(MAKE_DIRECTORY ${MODULE_OUTPUT_PATH})
+
+  # add_custom_command(
+  #   OUTPUT ${MODULE_OUTPUT}
+  #   COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
+  #   ARGS ${MODULE_ARGS}
+  #   DEPENDS ${CGALPY_STUBS_GENERATOR} ${MODULE_INPUT})
+  # add_custom_target(CGALPY_${name}_STUBS ALL DEPENDS ${MODULE_OUTPUT})
+
+  nanobind_add_stub(
+    CGALPY_${name}_STUBS
+    MODULE cgalpy.${CGALPY_LIB_NAME}.${name}
+    OUTPUT ${name}/__init__.pyi
+    DEPENDS CGALPY CGALPY_INIT
+    PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
+  )
+
+  set(STUBS_DEPENDS ${CGALPY_STUBS_DEPENDS})
+  list(APPEND STUBS_DEPENDS CGALPY_${name}_STUBS)
+  set(CGALPY_STUBS_DEPENDS "${STUBS_DEPENDS}" PARENT_SCOPE)
+endfunction()
+
+
 if (NOT SKBUILD)
     set(CGALPY_PACKAGE_NAME ${CGALPY_LIB_NAME})
 
@@ -682,40 +717,6 @@ if (NOT SKBUILD)
 
     list(APPEND CGALPY_STUBS_DEPENDS CGALPY_STUBS)
 
-    function(add_module name)
-      set(MODULE_OUTPUT_PATH ${CGALPY_DST_STUBS_DIR}/${name})
-      set(MODULE_OUTPUT ${MODULE_OUTPUT_PATH}/__init__.pyi)
-      set(MODULE_INPUT ${CGALPY_MODULES_DIR}/${name}.json)
-      set(MODULE_ARGS
-        --filters ${CGALPY_${name}_FILTERS}
-        --name ${name}
-        --input-path ${CGALPY_MODULES_DIR}
-        --output-path ${CGALPY_DST_STUBS_DIR})
-
-      # There is no need to generate the directory, as the Python script is
-      # responsible for this task.
-      file(MAKE_DIRECTORY ${MODULE_OUTPUT_PATH})
-
-      # add_custom_command(
-      #   OUTPUT ${MODULE_OUTPUT}
-      #   COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
-      #   ARGS ${MODULE_ARGS}
-      #   DEPENDS ${CGALPY_STUBS_GENERATOR} ${MODULE_INPUT})
-      # add_custom_target(CGALPY_${name}_STUBS ALL DEPENDS ${MODULE_OUTPUT})
-
-      nanobind_add_stub(
-        CGALPY_${name}_STUBS
-        MODULE cgalpy.${CGALPY_LIB_NAME}.${name}
-        OUTPUT ${name}/__init__.pyi
-        DEPENDS CGALPY CGALPY_INIT
-        PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
-      )
-
-      set(STUBS_DEPENDS ${CGALPY_STUBS_DEPENDS})
-      list(APPEND STUBS_DEPENDS CGALPY_${name}_STUBS)
-      set(CGALPY_STUBS_DEPENDS "${STUBS_DEPENDS}" PARENT_SCOPE)
-    endfunction()
-
     foreach (MODULE IN LISTS CGALPY_MODULES)
       add_module(${MODULE})
     endforeach ()
@@ -853,6 +854,65 @@ else ()
         target_link_libraries(CGALPY PRIVATE
             CGAL::CGAL_Qt6 Qt6::Core Qt6::Gui Qt6::Widgets)
     endif()
+
+    ################################################################################
+    # Stubs (Type Annotation)
+    ################################################################################
+    set(CGALPY_SRC_STUBS_DIR "${CMAKE_CURRENT_LIST_DIR}/stubs")
+    set(CGALPY_MODULES_DIR "${CGALPY_SRC_STUBS_DIR}/modules")
+    set(CGALPY_STUBS_GENERATOR "${CGALPY_SRC_STUBS_DIR}/generate.py")
+    if (WIN32)
+        set(CGALPY_STUBS_GENERATOR_CMD ${Python_EXECUTABLE} ${CGALPY_STUBS_GENERATOR})
+    else ()
+        set(CGALPY_STUBS_GENERATOR_CMD ${CGALPY_STUBS_GENERATOR})
+    endif ()
+
+    set(CGALPY_DST_STUBS_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
+
+    set(CGALPY_MODULE_OUTPUT ${CGALPY_DST_STUBS_DIR}/${CGALPY_LIB_NAME}.pyi)
+    set(CGALPY_MODULE_INPUT ${CGALPY_MODULES_DIR}/CGALPY.json)
+    string(REPLACE ";" " " STR_MODULES "${CGALPY_MODULES}")
+    set(CGALPY_MODULE_ARGS
+            --output-file ${CGALPY_LIB_NAME}.pyi
+            --input-path ${CGALPY_MODULES_DIR}
+            --output-path ${CGALPY_DST_STUBS_DIR}
+            --imports "${STR_MODULES}"
+            CGALPY.json)
+
+    # add_custom_command(
+    #         OUTPUT ${CGALPY_MODULE_OUTPUT}
+    #         COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
+    #         ARGS ${CGALPY_MODULE_ARGS}
+    #         DEPENDS ${CGALPY_STUBS_GENERATOR} ${CGALPY_MODULE_INPUT}
+    #         VERBATIM)
+    # add_custom_target(CGALPY_STUBS ALL DEPENDS ${CGALPY_MODULE_OUTPUT})
+
+    nanobind_add_stub(
+      CGALPY_STUBS
+      MODULE cgalpy.${CGALPY_LIB_NAME}
+      OUTPUT ${CGALPY_LIB_NAME}.pyi
+      DEPENDS CGALPY CGALPY_INIT
+      PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
+      MARKER_FILE py.typed
+    )
+
+    list(APPEND CGALPY_STUBS_DEPENDS CGALPY_STUBS)
+
+    foreach (MODULE IN LISTS CGALPY_MODULES)
+      add_module(${MODULE})
+    endforeach ()
+
+    add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS_DEPENDS})
+    list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS_DEPENDS})
+
+
+    # Install the generated stubs
+    install(FILES ${CGALPY_DST_STUBS_DIR}/${CGALPY_LIB_NAME}.pyi DESTINATION ${CGALPY_LIB_NAME})
+    install(FILES ${CGALPY_DST_STUBS_DIR}/py.typed DESTINATION ${CGALPY_LIB_NAME})
+
+    foreach (MODULE IN LISTS CGALPY_MODULES)
+        install(DIRECTORY ${CGALPY_DST_STUBS_DIR}/${MODULE} DESTINATION ${CGALPY_LIB_NAME})
+    endforeach ()
 
     install(TARGETS CGALPY DESTINATION ${CGALPY_LIB_NAME})
     install(FILES ${CGALPY_OUT_INIT} DESTINATION ${CGALPY_LIB_NAME})
