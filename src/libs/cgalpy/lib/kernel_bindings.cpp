@@ -25,6 +25,7 @@
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_type.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
+#include "CGALPY/Kernel/export_rt.hpp"
 #include "CGALPY/Kernel/export_kernel.hpp"
 #include "CGALPY/add_attr.hpp"
 
@@ -138,6 +139,12 @@ void export_kernel_module(py::module_& m) {
       .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} )
       ;
   }
+
+  if (! add_attr<RT>(m, "RT")) {
+    py::class_<RT> rt_c(m, "RT");
+    export_rt(rt_c);
+  }
+
 #endif
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) &&                              \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) &&                    \
@@ -1302,5 +1309,31 @@ void export_kernel_module(py::module_& m) {
         "Returns\n"
         "true if writing was successful, false otherwise. \n")
     ;
+#else
+  m.def("rational_rotation_approximation",
+        [](const RT& dirx, const RT& diry, const RT& eps_num, const RT& eps_den)
+        ->py::list {
+          RT sin_num;
+          RT cos_num;
+          RT denom;
+          CGAL::rational_rotation_approximation(dirx, diry,
+                                                sin_num, cos_num, denom,
+                                                eps_num, eps_den);
+          py::list res;
+          res.append(py::cast(sin_num));
+          res.append(py::cast(cos_num));
+          res.append(py::cast(denom));
+          return res;
+        },
+        py::arg("dirx"), py::arg("diry"), py::arg("eps_num"), py::arg("eps_den"),
+        "computes an approximates a given direction, such that its sine and cosine are rational numbers, and the difference between the sine and the rational approximation is bounded by a given epsilon.\n"
+        "Parameters\n"
+        "dirx\tthe x-coordinate of the direction.\n"
+        "diry\tthe y-coordinate of the direction.\n"
+        "eps_num\tthe numerator of approximation bound.\n"
+        "eps_den\tthe denominator of approximation bound.\n"
+        "Returns\n"
+        "a list of three ring-type numbers, the numerators of the sine and cosine of the computed angle approximation and their denominator.\n");
+
 #endif
 }
