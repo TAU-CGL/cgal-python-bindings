@@ -16,14 +16,14 @@ namespace py = nanobind;
 
 namespace pol3 {
 
-const Halfedge& opposite(const Halfedge& h) { return (*(h.opposite())); }
-const Halfedge& next(const Halfedge& h) { return (*(h.next())); }
-const Halfedge& next_on_vertex(const Halfedge& h) { return (*(h.next_on_vertex())); }
-const Halfedge& prev(const Halfedge& h) { return (*(h.prev())); }
-const Halfedge& prev_on_vertex(const Halfedge& h) { return (*(h.prev_on_vertex())); }
-const Face& face(const Halfedge& h) { return (*(h.face())); }
-const Face& facet(const Halfedge& h) { return (*(h.facet())); }
-const Vertex& vertex(const Halfedge& h) { return (*(h.vertex())); }
+const Halfedge& opposite(const Halfedge& h) { return *(h.opposite()); }
+const Halfedge& next(const Halfedge& h) { return *(h.next()); }
+const Halfedge& next_on_vertex(const Halfedge& h) { return *(h.next_on_vertex()); }
+const Halfedge& prev(const Halfedge& h) { return *(h.prev()); }
+const Halfedge& prev_on_vertex(const Halfedge& h) { return *(h.prev_on_vertex()); }
+const Face& face(const Halfedge& h) { return *(h.face()); }
+const Face& facet(const Halfedge& h) { return *(h.facet()); }
+const Vertex& vertex(const Halfedge& h) { return *(h.vertex()); }
 
 // Export Polyhedron Halfedge
 void export_polyhedron_halfedge(py::class_<Polyhedron_3>& prn_c) {
