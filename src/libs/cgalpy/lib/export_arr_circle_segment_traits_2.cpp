@@ -106,6 +106,7 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   //! \todo Handle the functions that return reference-counted objects.
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
   xcv_c
+    // .def(py::init_implicit<Segment_2&>())
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
     .def(py::init<Circle_2&, aos2::Point_2&, aos2::Point_2&, CGAL::Orientation>())
@@ -127,7 +128,7 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
 
   //! \todo Handle the functions that return reference-counted objects.
   auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
-  cv_c.def(py::init<Segment_2&>())
+  cv_c.def(py::init_implicit<Segment_2&>())
     .def(py::init<Point_2&, Point_2&>())
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
     .def(py::init_implicit<Circle_2&>())
