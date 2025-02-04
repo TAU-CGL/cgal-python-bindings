@@ -14,7 +14,7 @@
 
 namespace py = nanobind;
 
-//! convex_hull_2
+//! convex_hull_3
 template <typename PolygonMesh>
 PolygonMesh convex_hull_3(py::list& lst) {
   using Pm = PolygonMesh;
@@ -26,6 +26,7 @@ PolygonMesh convex_hull_3(py::list& lst) {
   return pm;
 }
 
+//!
 template <typename PolygonMesh>
 PolygonMesh convex_hull_3_with_kernel(py::list& lst, const Kernel& kernel) {
   using Pm = PolygonMesh;
@@ -37,9 +38,17 @@ PolygonMesh convex_hull_3_with_kernel(py::list& lst, const Kernel& kernel) {
   return pm;
 }
 
+//!
 void export_convex_hull_3(py::module_& m) {
   using Pm = ch3::Polygonal_mesh;
 
   m.def("convex_hull_3", &convex_hull_3<Pm>);
   m.def("convex_hull_3", &convex_hull_3_with_kernel<Pm>);
+
+  using Isc1 = bool(*)(const Pm&);
+  using Isc2 = bool(*)(const Pm&, const Kernel&);
+  m.def("is_strongly_convex_3",
+        static_cast<Isc1>(&CGAL::is_strongly_convex_3<Pm>));
+  m.def("is_strongly_convex_3",
+        static_cast<Isc2>(&CGAL::is_strongly_convex_3<Pm>));
 }
