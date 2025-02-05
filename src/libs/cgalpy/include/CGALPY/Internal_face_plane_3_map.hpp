@@ -6,8 +6,8 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY__HPP
-#define CGALPY__HPP
+#ifndef CGALPY_FACE_PLANE_3_MAP_HPP
+#define CGALPY_FACE_PLANE_3_MAP_HPP
 
 namespace pol3 {
 
