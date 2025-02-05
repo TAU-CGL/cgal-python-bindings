@@ -14,12 +14,14 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
+#include "CGALPY/aos_2_concepts/export_AosSphericalBoundaryTraits_2.hpp"
 
 #include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
+#include "CGALPY/aos_2_concepts/Aos_spherical_boundary_traits_classes.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
@@ -48,11 +50,13 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
     Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
     Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
     Aos_traits_classes<Gt> m_aos_traits_2_classes;
+    Aos_spherical_boundary_traits_classes<Gt> m_aos_spherical_boundary_traits_2_classes;
     Aos_directional_x_monotone_traits_classes<Gt>
       m_aos_directional_x_monotone_traits_2_classes;
   } concepts;
   export_AosTraits_2<Gt>(traits_c, concepts);
   export_AosDirectionalXMonotoneTraits_2<Gt>(traits_c, concepts);
+  export_AosSphericalBoundaryTraits_2<Gt>(traits_c, concepts);
 
   using Ctr_pnt = Gt::Construct_point_2;
   using Ctr_pnt_op1 = Pnt(Ctr_pnt::*)(const FT&, const FT&, const FT&);
