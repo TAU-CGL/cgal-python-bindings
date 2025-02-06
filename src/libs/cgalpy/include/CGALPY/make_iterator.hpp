@@ -17,7 +17,13 @@
 
 namespace py = nanobind;
 
-//
+/* The internal representation of an iterator wrapper.  the `__iter__` attribute
+ * wraps a function that accepts an iterator state and simply returns it. We can
+ * either accept the state by value (and return it) or accept by reference and
+ * return the reference. If we return the reference, we must Python taking
+ * ownership of it (to prevent Python destructing the state, even when the
+ * Python wrapper is garbage collected.
+ */
 template <py::rv_policy Policy,
           typename Iterator, typename Sentinel, typename ValueType,
           typename... Extra,
@@ -26,8 +32,9 @@ void add_iterator_impl(const char* name, C& c, Extra&&... extra) {
   using state = iterator_state<Iterator, Sentinel>;
   if (add_attr<state>(c, name)) return;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
   py::class_<state>(c, name)
-    .def("__iter__", [](state& s) -> state& { return s; })
+    .def("__iter__", [](state& s) -> state& { return s; }, ri)
     .def("__next__", [](state& s) -> ValueType {
                        if (! s.first_or_done) ++s.it;
                        else s.first_or_done = false;
@@ -63,8 +70,9 @@ void add_dereference_iterator_impl(const char* name, C& c, Extra&&... extra) {
   using state = iterator_state<Iterator, Sentinel>;
   if (add_attr<state>(c, name)) return;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
   py::class_<state>(c, name)
-    .def("__iter__", [](state& s) -> state& { return s; })
+    .def("__iter__", [](state& s) -> state& { return s; }, ri)
     .def("__next__", [](state& s) -> ValueType {
                        if (! s.first_or_done) ++s.it;
                        else s.first_or_done = false;
@@ -99,8 +107,9 @@ void add_iterator_of_circulator_impl(const char* name, C& c, Extra&&... extra) {
   using sub_state = circulator_state<ValueType>;
   if (add_attr<state>(c, name)) return;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
   py::class_<state>(c, name)
-    .def("__iter__", [](state& s) -> state& { return s; })
+    .def("__iter__", [](state& s) -> state& { return s; }, ri)
     .def("__next__", [](state& s) -> sub_state {
                        if (! s.first_or_done) ++s.it;
                        else s.first_or_done = false;

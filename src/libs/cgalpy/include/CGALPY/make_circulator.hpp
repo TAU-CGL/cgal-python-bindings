@@ -25,8 +25,9 @@ void add_circulator_impl(const char* name, C& c, Extra&&... extra) {
   using state = circulator_state<Iterator>;
   if (add_attr<state>(c, name)) return;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
   py::class_<state>(c, name)
-    .def("__iter__", [](state& s) -> state& { return s; })
+    .def("__iter__", [](state& s) -> state& { return s; }, ri)
     .def("__next__", [](state& s) -> ValueType {
                        if (s.first) {
                          s.first = false;
@@ -62,8 +63,9 @@ void add_dereference_circulator_impl(const char* name, C& c, Extra&&... extra) {
   using state = circulator_state<Iterator>;
   if (add_attr<state>(c, name)) return;
 
+  constexpr auto ri(py::rv_policy::reference_internal);
   py::class_<state>(c, name)
-    .def("__iter__", [](state& s) -> state& { return s; })
+    .def("__iter__", [](state& s) -> state& { return s; }, ri)
     .def("__next__", [](state& s) -> ValueType { return **s.it++; },
       std::forward<Extra>(extra)..., Policy)
     ;
