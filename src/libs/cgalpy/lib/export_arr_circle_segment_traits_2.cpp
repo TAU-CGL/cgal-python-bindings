@@ -20,6 +20,7 @@
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/export_sqrt_extension.hpp"
 
 namespace py = nanobind;
 
@@ -37,43 +38,10 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_circle_segment_traits_2")) return;
 
-  py::class_<Coord_nt> cnt_c(m, "CoordNT");
-  cnt_c.def(py::init<>())
-    .def(py::init<Coord_nt&>())
-    .def(py::init<int&>())
-    .def(py::init<Coord_nt::NT&>())
-    .def(py::init<int, int, int>())
-    .def(py::init<Coord_nt::NT, Coord_nt::NT, Coord_nt::ROOT>())
-    .def(py::init<FT, FT, int>())
-    .def("a0", py::overload_cast<>(&Coord_nt::a0))
-    .def("a1", py::overload_cast<>(&Coord_nt::a1))
-    .def("root", py::overload_cast<>(&Coord_nt::root, py::const_))
-    .def("is_extended", &Coord_nt::is_extended)
-    .def("simplify", &Coord_nt::simplify)
-    .def("is_zero", &Coord_nt::is_zero)
-    .def("sign", &Coord_nt::sign)
-    .def("abs", &Coord_nt::abs)
-    .def("to_double", &aos2::coordNT_to_double)
-    //.def("compare", &Coord_nt::compare)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    .def(py::self != py::self)
-    .def(py::self < py::self)
-    .def(py::self > py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
-    .def(py::self + py::self)
-    .def(py::self += py::self)
-    .def(py::self - py::self)
-    .def(py::self -= py::self)
-    .def(py::self * py::self)
-    .def(py::self *= py::self)
-    .def(py::self / py::self)
-    .def(py::self /= py::self)
-    ;
-
-  add_insertion(cnt_c, "__str__");
-  add_insertion(cnt_c, "__repr__");
+  if (! add_attr<Coord_nt>(m, "Coord_nt")) {
+    py::class_<Coord_nt> cnc_c(m, "Coord_nt");
+    export_sqrt_extension(cnc_c);
+  }
 
   py::class_<Gt> traits_c(m, "Arr_circle_segment_traits_2");
   traits_c.def(py::init<>());
@@ -149,9 +117,8 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
     .def("target", &aos2::Curve_2::target, ri)
     ;
 
-  traits_c.attr("Coord_nt") = cnt_c;
-
   add_attr<Gt::Rational_point_2>(traits_c, "Rational_point_2");
   add_attr<Gt::Rational_segment_2>(traits_c, "Rational_segment_2");
   add_attr<Gt::Rational_circle_2>(traits_c, "Rational_circle_2");
+  add_attr<Coord_nt>(traits_c, "Coord_nt");
 }
