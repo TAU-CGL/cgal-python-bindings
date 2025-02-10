@@ -553,72 +553,13 @@ function(add_module name)
   set(CGALPY_STUBS_DEPENDS "${STUBS_DEPENDS}" PARENT_SCOPE)
 endfunction()
 
-
-################################################################################
-# Stubs (Type Annotation)
-################################################################################
-set(CGALPY_SRC_STUBS_DIR "${CMAKE_CURRENT_LIST_DIR}/stubs")
-set(CGALPY_MODULES_DIR "${CGALPY_SRC_STUBS_DIR}/modules")
-set(CGALPY_STUBS_GENERATOR "${CGALPY_SRC_STUBS_DIR}/generate.py")
-if (WIN32)
-    set(CGALPY_STUBS_GENERATOR_CMD ${Python_EXECUTABLE} ${CGALPY_STUBS_GENERATOR})
-else ()
-    set(CGALPY_STUBS_GENERATOR_CMD ${CGALPY_STUBS_GENERATOR})
-endif ()
-
-set(CGALPY_DST_STUBS_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
-
-set(CGALPY_MODULE_OUTPUT ${CGALPY_DST_STUBS_DIR}/${CGALPY_LIB_NAME}.pyi)
-set(CGALPY_MODULE_INPUT ${CGALPY_MODULES_DIR}/CGALPY.json)
-string(REPLACE ";" " " STR_MODULES "${CGALPY_MODULES}")
-set(CGALPY_MODULE_ARGS
-        --output-file ${CGALPY_LIB_NAME}.pyi
-        --input-path ${CGALPY_MODULES_DIR}
-        --output-path ${CGALPY_DST_STUBS_DIR}
-        --imports "${STR_MODULES}"
-        CGALPY.json)
-
-# add_custom_command(
-#         OUTPUT ${CGALPY_MODULE_OUTPUT}
-#         COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
-#         ARGS ${CGALPY_MODULE_ARGS}
-#         DEPENDS ${CGALPY_STUBS_GENERATOR} ${CGALPY_MODULE_INPUT}
-#         VERBATIM)
-# add_custom_target(CGALPY_STUBS ALL DEPENDS ${CGALPY_MODULE_OUTPUT})
-
-nanobind_add_stub(
-  CGALPY_STUBS
-  MODULE cgalpy.${CGALPY_LIB_NAME}
-  OUTPUT ${CGALPY_LIB_NAME}.pyi
-  DEPENDS CGALPY CGALPY_INIT
-  PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
-  MARKER_FILE py.typed
-)
-
-list(APPEND CGALPY_STUBS_DEPENDS CGALPY_STUBS)
-
-foreach (MODULE IN LISTS CGALPY_MODULES)
-  add_module(${MODULE})
-endforeach ()
-
-add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS_DEPENDS})
-list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS_DEPENDS})
+add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
+# Add the library target
+nanobind_add_module(CGALPY STABLE_ABI NB_STATIC ${CGALPY_SRC_FILES})
+set(CGALPY_BUILD_DEPENDS CGALPY)
 
 if (NOT SKBUILD)
     set(CGALPY_PACKAGE_NAME ${CGALPY_LIB_NAME})
-
-    add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
-
-    # Add the library target
-    # Always build a shared library
-    nanobind_add_module(CGALPY NB_STATIC ${CGALPY_SRC_FILES})
-    set(CGALPY_BUILD_DEPENDS CGALPY)
-
-    if (NOT APPLE)
-      set_target_properties(CGALPY PROPERTIES
-        VERSION "${CMAKE_PROJECT_VERSION}"
-        SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
-    endif ()
 
     target_link_libraries(CGALPY PRIVATE
       CGAL::CGAL
@@ -641,6 +582,12 @@ if (NOT SKBUILD)
     if (TARGET CGAL::METIS_support)
       target_link_libraries(CGALPY PRIVATE CGAL::METIS_support)
     endif()
+
+    if (NOT APPLE)
+      set_target_properties(CGALPY PROPERTIES
+        VERSION "${CMAKE_PROJECT_VERSION}"
+        SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
+    endif ()
 
     set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
     # Use a generator expression to get rid of per-configuration subdirectory appended by Multi-configuration generators (e.g Visual Studio)
@@ -723,6 +670,98 @@ if (NOT SKBUILD)
         DEPENDS ${CGALPY_SRC_INIT})
     add_custom_target(CGALPY_INIT ALL DEPENDS ${CGALPY_OUT_INIT})
     list(APPEND CGALPY_BUILD_DEPENDS CGALPY_INIT)
+
+else ()
+    set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
+    set(CGALPY_OUT_INIT "${CGALPY_LIB_DIR}/__init__.py")
+    add_custom_command(
+        OUTPUT ${CGALPY_OUT_INIT}
+        COMMAND "${CMAKE_COMMAND}"
+        "-DFILE_IN=${CGALPY_SRC_INIT}"
+        "-DFILE_OUT=${CGALPY_OUT_INIT}"
+        "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
+        -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
+        DEPENDS ${CGALPY_SRC_INIT})
+    add_custom_target(CGALPY_INIT ALL DEPENDS ${CGALPY_OUT_INIT})
+    list(APPEND CGALPY_BUILD_DEPENDS CGALPY_INIT)
+
+    target_link_libraries(CGALPY PRIVATE
+    CGAL::CGAL
+    ${Boost_LIBRARIES}
+    ${PYTHON_LIBRARIES})
+
+    # Currently, the following has no effect as all comoponents of CGAL (e.g.,
+    # CGAL::CGAL_Qt6 CGAL::Data are not recognized by Conan.
+    # \todo Fix the CGAL installation process of Conan
+    if (CGAL_Qt6_FOUND)
+        target_link_libraries(CGALPY PRIVATE
+        CGAL::CGAL_Qt6 Qt6::Core Qt6::Gui Qt6::Widgets)
+    endif()
+
+    set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
+    # Use a generator expression to get rid of per-configuration subdirectory appended by Multi-configuration generators (e.g Visual Studio)
+    # https://cmake.org/cmake/help/latest/prop_tgt/LIBRARY_OUTPUT_DIRECTORY.html
+    set_target_properties(CGALPY PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
+
+    if (NOT APPLE)
+        set_target_properties(CGALPY PROPERTIES
+                VERSION "${CMAKE_PROJECT_VERSION}"
+                SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
+    endif ()
+endif()
+
+
+################################################################################
+# Stubs (Type Annotation)
+################################################################################
+set(CGALPY_SRC_STUBS_DIR "${CMAKE_CURRENT_LIST_DIR}/stubs")
+set(CGALPY_MODULES_DIR "${CGALPY_SRC_STUBS_DIR}/modules")
+set(CGALPY_STUBS_GENERATOR "${CGALPY_SRC_STUBS_DIR}/generate.py")
+if (WIN32)
+    set(CGALPY_STUBS_GENERATOR_CMD ${Python_EXECUTABLE} ${CGALPY_STUBS_GENERATOR})
+else ()
+    set(CGALPY_STUBS_GENERATOR_CMD ${CGALPY_STUBS_GENERATOR})
+endif ()
+
+set(CGALPY_DST_STUBS_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
+
+set(CGALPY_MODULE_OUTPUT ${CGALPY_DST_STUBS_DIR}/${CGALPY_LIB_NAME}.pyi)
+set(CGALPY_MODULE_INPUT ${CGALPY_MODULES_DIR}/CGALPY.json)
+string(REPLACE ";" " " STR_MODULES "${CGALPY_MODULES}")
+set(CGALPY_MODULE_ARGS
+        --output-file ${CGALPY_LIB_NAME}.pyi
+        --input-path ${CGALPY_MODULES_DIR}
+        --output-path ${CGALPY_DST_STUBS_DIR}
+        --imports "${STR_MODULES}"
+        CGALPY.json)
+
+# add_custom_command(
+#         OUTPUT ${CGALPY_MODULE_OUTPUT}
+#         COMMAND ${CGALPY_STUBS_GENERATOR_CMD}
+#         ARGS ${CGALPY_MODULE_ARGS}
+#         DEPENDS ${CGALPY_STUBS_GENERATOR} ${CGALPY_MODULE_INPUT}
+#         VERBATIM)
+# add_custom_target(CGALPY_STUBS ALL DEPENDS ${CGALPY_MODULE_OUTPUT})
+
+nanobind_add_stub(
+  CGALPY_STUBS
+  MODULE cgalpy.${CGALPY_LIB_NAME}
+  OUTPUT ${CGALPY_LIB_NAME}.pyi
+  DEPENDS CGALPY CGALPY_INIT
+  PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
+  MARKER_FILE py.typed
+  )
+  
+list(APPEND CGALPY_STUBS_DEPENDS CGALPY_STUBS)
+
+foreach (MODULE IN LISTS CGALPY_MODULES)
+  add_module(${MODULE})
+  endforeach ()
+
+add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS_DEPENDS})
+list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS_DEPENDS})
+
+if (NOT SKBUILD)
 
     ################################################################################
     # Post build
@@ -817,43 +856,8 @@ if (NOT SKBUILD)
         set(MODULE_OUTPUT_PATH ${CGALPY_DST_STUBS_DIR}/${name})
         install(DIRECTORY ${MODULE_OUTPUT_PATH} DESTINATION ${CGALPY_INSTALL_PYTHON_DIR})
     endforeach ()
+
 else ()
-    add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
-    nanobind_add_module(CGALPY STABLE_ABI NB_STATIC ${CGALPY_SRC_FILES})
-    set_target_properties(CGALPY PROPERTIES OUTPUT_NAME ${CGALPY_LIB_NAME})
-
-    set(CGALPY_BUILD_DEPENDS CGALPY)
-
-    set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/__init__.py")
-    set(CGALPY_OUT_INIT "${CGALPY_LIB_DIR}/__init__.py")
-    add_custom_command(
-        OUTPUT ${CGALPY_OUT_INIT}
-        COMMAND "${CMAKE_COMMAND}"
-        "-DFILE_IN=${CGALPY_SRC_INIT}"
-        "-DFILE_OUT=${CGALPY_OUT_INIT}"
-        "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
-        -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
-        DEPENDS ${CGALPY_SRC_INIT})
-    add_custom_target(CGALPY_INIT ALL DEPENDS ${CGALPY_OUT_INIT})
-    list(APPEND CGALPY_BUILD_DEPENDS CGALPY_INIT)
-
-    if (NOT APPLE)
-        set_target_properties(CGALPY PROPERTIES
-                VERSION "${CMAKE_PROJECT_VERSION}"
-                SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
-    endif ()
-    target_link_libraries(CGALPY PRIVATE
-        CGAL::CGAL
-        ${Boost_LIBRARIES}
-        ${PYTHON_LIBRARIES})
-
-    # Currently, the following has no effect as all comoponents of CGAL (e.g.,
-    # CGAL::CGAL_Qt6 CGAL::Data are not recognized by Conan.
-    # \todo Fix the CGAL installation process of Conan
-    if (CGAL_Qt6_FOUND)
-        target_link_libraries(CGALPY PRIVATE
-            CGAL::CGAL_Qt6 Qt6::Core Qt6::Gui Qt6::Widgets)
-    endif()
 
     # Install the generated stubs
     install(FILES ${CGALPY_DST_STUBS_DIR}/${CGALPY_LIB_NAME}.pyi DESTINATION ${CGALPY_LIB_NAME})
