@@ -36,6 +36,14 @@ void export_sqrt_extension(C& c) {
          py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"))
+    .def(NT() == py::self,
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(NT() != py::self,
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
+    .def(py::self == NT(),
+         py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != NT(),
+         py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self < py::self)
     .def(py::self > py::self)
     .def(py::self <= py::self)
@@ -78,6 +86,7 @@ void export_sqrt_extension(C& c) {
     .def("sign", &Se::sign)
     .def("abs", &Se::abs)
     .def("compare", py::overload_cast<const NT&>(&Se::compare, py::const_))
+    .def("to_double", [](const Se& n)->double const { return CGAL::to_double(n); })
     ;
 
   add_insertion(c, "__str__");
