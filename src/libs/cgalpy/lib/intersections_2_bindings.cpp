@@ -79,7 +79,7 @@ void export_intersections(py::module_& m) {
   CGALPY::Type_list<Iso_rectangle_2, Line_2, Ray_2, Segment_2, Triangle_2,
                     Point_2, Circle_2> type_list_2;
   CGALPY::Type_list<Iso_cuboid_3, Line_3, Ray_3, Segment_3, Tetrahedron_3,
-                    Triangle_3, Point_3, Sphere_3> type_list_3;
+                    Triangle_3, Point_3, Sphere_3, Plane_3> type_list_3;
   CGALPY::cartesian_product<Wrapper>(m, type_list_2, type_list_2);
   CGALPY::cartesian_product<Wrapper>(m, type_list_3, type_list_3);
 }
