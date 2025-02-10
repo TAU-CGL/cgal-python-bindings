@@ -38,8 +38,8 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_circle_segment_traits_2")) return;
 
-  if (! add_attr<Coord_nt>(m, "Coord_nt")) {
-    py::class_<Coord_nt> cnc_c(m, "Coord_nt");
+  if (! add_attr<Coord_nt>(m, "CoordNT")) {
+    py::class_<Coord_nt> cnc_c(m, "CoordNT");
     export_sqrt_extension(cnc_c);
   }
 
@@ -120,5 +120,5 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   add_attr<Gt::Rational_point_2>(traits_c, "Rational_point_2");
   add_attr<Gt::Rational_segment_2>(traits_c, "Rational_segment_2");
   add_attr<Gt::Rational_circle_2>(traits_c, "Rational_circle_2");
-  add_attr<Coord_nt>(traits_c, "Coord_nt");
+  add_attr<Coord_nt>(traits_c, "CoordNT");
 }
