@@ -20,6 +20,8 @@
 #elif CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL
 #include <CGAL/Cartesian.h>
 #include <CGAL/CORE_algebraic_number_traits.h>
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2
+#include <CGAL/Exact_circular_kernel_2.h>
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif
@@ -44,6 +46,9 @@ typedef CGAL::Filtered_kernel<CGAL::Simple_cartesian<NT>>       Kernel;
 using Nt_traits = CGAL::CORE_algebraic_number_traits;
 using NT = Nt_traits::Rational;
 using Kernel = CGAL::Cartesian<NT>;
+
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2
+typedef CGAL::Exact_circular_kernel_2                           Kernel;
 
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");

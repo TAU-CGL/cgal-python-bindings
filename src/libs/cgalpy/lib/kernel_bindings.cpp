@@ -107,7 +107,8 @@ void bind_squared_distance_types(py::module_& m) {
 void export_kernel_module(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
-#if (CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL)
+#if ((CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) || \
+     (CGALPY_KERNEL == CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   if (! add_attr<FT>(m, "FT")) {
     py::class_<FT> ft_c(m, "FT");
     export_ft(ft_c);
@@ -159,9 +160,11 @@ void export_kernel_module(py::module_& m) {
   }
 
 #endif
-#if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) &&                              \
-     (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) &&                    \
-     (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
+#if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
 
   struct dummy {};
   if (! add_attr<dummy>(m, "FT")) {
@@ -1287,7 +1290,8 @@ void export_kernel_module(py::module_& m) {
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) &&                                \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) &&                      \
      (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL))
+     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   m.def("write_polygon_soup",
         [](const std::string& fname, const Pnt_range& points,
            const Png_range& polygons, const py::dict& np = py::dict()) {

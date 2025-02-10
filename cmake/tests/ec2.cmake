@@ -1,0 +1,3 @@
+set(CGALPY_USE_SHARED_LIBS on CACHE BOOL "" FORCE)
+set(CGALPY_KERNEL_NAME "exactCircular2" CACHE STRING "use Exact Circular 2 kernel" FORCE)
+set(CGALPY_KERNEL_INTERSECTION_BINDINGS on CACHE BOOL "with intersections" FORCE)

@@ -68,6 +68,7 @@ consteval
 #else
 constexpr
 #endif // __cpp_consteval >= 202002L
+
 const char* kernel_doc() {
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPIC
   return "Exact_predicates_inexact_constructions_kernel\n"
@@ -97,6 +98,8 @@ const char* kernel_doc() {
   return "Filtered_simple_cartesian_lazy_gmpq";
 #elif CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL
   return "Cartesian_core_rational";
+#elif CGALPY_KERNEL == CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2
+  return "Exact_circular_kernel_2";
 #else
   BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL");
 #endif

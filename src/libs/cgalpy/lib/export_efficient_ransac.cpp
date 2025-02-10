@@ -117,7 +117,9 @@ void export_efficient_ransac(py::module_& m) {
   using Sphere = SD::Sphere<RANSAC_traits>;
   using Torus = SD::Torus<RANSAC_traits>;
 
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
+#if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   auto cone = export_base_shape<RANSAC_traits, Cone>(m, "Cone",
     "Cone implements Shape_base.\n"
     "The cone is represented by its apex, the axis, and the opening angle. This representation models an open infinite single-cone.\n"
@@ -182,8 +184,7 @@ void export_efficient_ransac(py::module_& m) {
     .def("minor_radius", &Torus::minor_radius,
          "Minor radius of the torus.")
     ;
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
-
+#endif
 
   // Property Maps
   py::class_<RANSAC_traits>(m, "Efficient_RANSAC_traits",
@@ -250,14 +251,18 @@ void export_efficient_ransac(py::module_& m) {
          "    Shape_detection/efficient_RANSAC_with_custom_shape.py.")
     ;
 
-#if CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
+#if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
+
   add_shape_factory<RANSAC, Cone>(eff_ransac, "cone");
   add_shape_factory<RANSAC, Cylinder>(eff_ransac, "cylinder");
   add_shape_factory<RANSAC, Plane>(eff_ransac, "plane");
   // add_shape_factory<RANSAC, Shape_base>(eff_ransac, "shape_base"); // needs to be not pure
   add_shape_factory<RANSAC, Sphere>(eff_ransac, "sphere");
   add_shape_factory<RANSAC, Torus>(eff_ransac, "torus");
-#endif // CGALPY_KERNEL != CGALPY_KERNEL_EPEC && CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT
+
+#endif
 
   // Property Maps (weird)
   using Point = typename Kernel::Point_3;

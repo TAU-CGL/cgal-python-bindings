@@ -1850,7 +1850,8 @@ void export_polygon_mesh_processing(py::module_& m) {
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL))
+     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   // Corrected Curvature Computation
   m.def("interpolated_corrected_curvatures",

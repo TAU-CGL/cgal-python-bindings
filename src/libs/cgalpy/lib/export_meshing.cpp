@@ -481,7 +481,8 @@ void export_meshing(py::module_& m) {
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL))
+     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   m.def("isotropic_remeshing",
         &pmp::isotropic_remeshing_sf<Pm, pmp::Adaptive_sizing_field<Pm>>,
@@ -507,7 +508,8 @@ void export_meshing(py::module_& m) {
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL))
+     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   m.def("split_long_edges", &pmp::split_long_edges<Pm>,
         py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
@@ -528,7 +530,8 @@ m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL))
+     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   m.def("smooth_shape", &pmp::smooth_shape<Pm>,
         py::arg("pm"), py::arg("time"), py::arg("np") = py::dict());
@@ -551,7 +554,8 @@ m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL))
+     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
     //! \todo Fix interpolated_corrected_curvatures to use epeck
     .def(py::init<FT, const std::tuple<FT, FT>&,
          const std::vector<face_descriptor>&, Pm&, const py::dict&>(),
@@ -567,7 +571,8 @@ m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL))
+     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
     //! \todo Fix interpolated_corrected_curvatures to use epeck
     .def("register_split_vertex", &Asf::register_split_vertex)
 #endif

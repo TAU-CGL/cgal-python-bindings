@@ -8,10 +8,11 @@ set(CGALPY_KERNEL_EPEC_WITH_SQRT 2)
 set(CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_DOUBLE 3)
 set(CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ 4)
 set(CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL 5)
+set(CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2 6)
 
 # Names
-set(CGALPY_KERNEL_SHORT_NAMES "epic" "epec" "epecws" "fscd" "fsclg" "ccr")
-set(CGALPY_KERNEL_NAMES "epic" "epec" "epecWithSqrt" "filteredSimpleCartesianDouble" "filteredSimpleCartesianLazyGmpq" "cartesianCoreRational")
+set(CGALPY_KERNEL_SHORT_NAMES "epic" "epec" "epecws" "fscd" "fsclg" "ccr" "ec2")
+set(CGALPY_KERNEL_NAMES "epic" "epec" "epecWithSqrt" "filteredSimpleCartesianDouble" "filteredSimpleCartesianLazyGmpq" "cartesianCoreRational" "exactCircular2")
 
 # Default
 # SET(CGALPY_KERNEL_NAME "epec" CACHE STRING "The kernel to use") # TODO: ifndef def this
@@ -43,6 +44,8 @@ function(select_kernel)
       set(CGALPY_KERNEL ${CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ} CACHE INTERNAL "")
     elseif ("${CGALPY_KERNEL_NAME}" STREQUAL "cartesianCoreRational")
       set(CGALPY_KERNEL ${CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL} CACHE INTERNAL "")
+    elseif("${CGALPY_KERNEL_NAME}" STREQUAL "exactCircular2")
+      set(CGALPY_KERNEL ${CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2} CACHE INTERNAL "")
     else()
       message(FATAL_ERROR "Unknown kernel ${CGALPY_KERNEL_NAME}")
     endif()
