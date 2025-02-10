@@ -1,65 +1,20 @@
-// Copyright (c) 2019 Israel.
+// Copyright (c) 2025 Israel.
 // All rights reserved to Tel Aviv University.
 //
 // SPDX-License-Identifier: LGPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
-//            Efi Fogel         <efifogel@gmail.com>
+// Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #ifndef CGALPY_EXPORT_FT_HPP
 #define CGALPY_EXPORT_FT_HPP
 
-#include <nanobind/nanobind.h>
-#include <nanobind/operators.h>
-
-#include "CGALPY/to_string.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_extraction.hpp"
+#include "CGALPY/Kernel/export_rt.hpp"
 
 namespace py = nanobind;
 
 //
 template <typename C>
-void export_ft(C& c) {
-  using FT = typename C::Type;
-
-  c.def(py::init<const FT&>())
-    .def(py::init_implicit<double>())
-    .def(py::self == py::self,
-         py::sig("def __eq__(self, arg: object, /) -> bool"))
-    .def(py::self != py::self,
-         py::sig("def __ne__(self, arg: object, /) -> bool"))
-    .def(py::self < py::self)
-    .def(py::self > py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
-    .def(py::self + py::self)
-    .def(py::self += py::self)
-    .def(py::self - py::self)
-    .def(py::self -= py::self)
-    .def(py::self * py::self)
-    .def(py::self *= py::self)
-    .def(py::self / py::self)
-    .def(py::self /= py::self)
-    .def(-py::self)
-    .def(int() * py::self)
-    .def(float() * py::self)
-    .def(int() + py::self)
-    .def(float() + py::self)
-    .def(int() - py::self)
-    .def(float() - py::self)
-    .def(py::self * int())
-    .def(py::self * float())
-    .def(py::self + int())
-    .def(py::self + float())
-    .def(py::self - int())
-    .def(py::self - float())
-    ;
-
-  add_insertion(c, "__str__");
-  add_insertion(c, "__repr__");
-  add_extraction(c);
-}
+void export_ft(C& c) { export_rt(c); }
 
 #endif

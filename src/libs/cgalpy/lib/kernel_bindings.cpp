@@ -20,13 +20,16 @@
 #include <CGAL/GMP/Gmpz_type.h>
 #include <CGAL/GMP/Gmpq_type.h>
 
-#include "CGALPY/parse_named_parameters.hpp"
-#include "CGALPY/to_string.hpp"
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/add_insertion.hpp"
+#include "CGALPY/add_extraction.hpp"
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_type.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
+#include "CGALPY/Kernel/export_rt.hpp"
 #include "CGALPY/Kernel/export_kernel.hpp"
-#include "CGALPY/add_attr.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
+#include "CGALPY/to_string.hpp"
 
 // 2D functors
 #include "CGALPY/Kernel/export_circle_2.hpp"
@@ -102,6 +105,8 @@ void bind_squared_distance_types(py::module_& m) {
 
 //
 void export_kernel_module(py::module_& m) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+
 #if (CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL)
   if (! add_attr<FT>(m, "FT")) {
     py::class_<FT> ft_c(m, "FT");
@@ -112,7 +117,6 @@ void export_kernel_module(py::module_& m) {
   if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
   if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
 
-
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
     py::class_<FT> ft_c(m, "FT");
     export_ft(ft_c);
@@ -122,22 +126,38 @@ void export_kernel_module(py::module_& m) {
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
      // (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||
 
+  using Fte = FT::Exact_type;
+  using Fta = FT::Approximate_type;
   if (! add_attr<FT>(m, "FT")) {
     py::class_<FT> ft_c(m, "FT");
     export_ft(ft_c);
 
-    using Fte = FT::Exact_type;
-    using Fta = FT::Approximate_type;
     ft_c.def(py::init<Fte>())
       .def("__init__", [](FT* self, const std::string& str)
                        { new (self) FT(Fte(str)); })
       .def("__init__", [](FT* self, int nom, int den)
                        { new (self) FT(Fte(nom, den)); })
       .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); })
-      .def("exact", [](const FT& ft)->const Fte& { return ft.exact();} )
+      .def("exact", [](const FT& ft)->const Fte& { return ft.exact();}, ri)
       .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} )
       ;
   }
+
+  if (! add_attr<Fte>(m, "Exact")) {
+    py::class_<Fte> fte_c(m, "Exact");
+    fte_c.def(py::init<const Fte&>())
+      ;
+
+    add_insertion(fte_c, "__str__");
+    add_insertion(fte_c, "__repr__");
+    add_extraction(fte_c);
+  }
+
+  if (! add_attr<RT>(m, "RT")) {
+    py::class_<RT> rt_c(m, "RT");
+    export_rt(rt_c);
+  }
+
 #endif
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) &&                              \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) &&                    \
@@ -198,8 +218,6 @@ void export_kernel_module(py::module_& m) {
   using Wd_pnt_3 = Kernel::Weighted_point_3;
 
   using Mesh_df_int = CGAL::Mesh_constant_domain_field_3<Kernel, int>;
-
-  constexpr auto ri(py::rv_policy::reference_internal);
 
   // Circle_2
   if (! add_attr<Circle_2>(m, "Circle_2")) {
@@ -1302,5 +1320,31 @@ void export_kernel_module(py::module_& m) {
         "Returns\n"
         "true if writing was successful, false otherwise. \n")
     ;
+#else
+  m.def("rational_rotation_approximation",
+        [](const RT& dirx, const RT& diry, const RT& eps_num, const RT& eps_den)
+        ->py::list {
+          RT sin_num;
+          RT cos_num;
+          RT denom;
+          CGAL::rational_rotation_approximation(dirx, diry,
+                                                sin_num, cos_num, denom,
+                                                eps_num, eps_den);
+          py::list res;
+          res.append(py::cast(sin_num));
+          res.append(py::cast(cos_num));
+          res.append(py::cast(denom));
+          return res;
+        },
+        py::arg("dirx"), py::arg("diry"), py::arg("eps_num"), py::arg("eps_den"),
+        "computes an approximates a given direction, such that its sine and cosine are rational numbers, and the difference between the sine and the rational approximation is bounded by a given epsilon.\n"
+        "Parameters\n"
+        "dirx\tthe x-coordinate of the direction.\n"
+        "diry\tthe y-coordinate of the direction.\n"
+        "eps_num\tthe numerator of approximation bound.\n"
+        "eps_den\tthe denominator of approximation bound.\n"
+        "Returns\n"
+        "a list of three ring-type numbers, the numerators of the sine and cosine of the computed angle approximation and their denominator.\n");
+
 #endif
 }

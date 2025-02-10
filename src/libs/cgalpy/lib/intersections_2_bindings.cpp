@@ -46,7 +46,7 @@ public:
 template <typename T1, typename T2>
 py::object cgalpy_intersection(const T1& t1, const T2& t2) {
   auto result = CGAL::intersection<Kernel>(t1, t2);
-  if (! result) return py::object();    // no intersection
+  if (! result) return py::none();    // no intersection
   return std::visit(Intersection_visitor(), *result);
 }
 

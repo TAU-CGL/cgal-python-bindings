@@ -61,6 +61,8 @@ extern void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c);
 template <typename MapType>
 void register_map(py::module_& m, const std::string& map_name) {
   using Mt = MapType;
+  if (add_attr<Mt>(m, map_name.c_str())) return;
+
   py::class_<Mt>(m, map_name.c_str())
     .def(py::init<>())
     .def("clear", &Mt::clear)
@@ -86,8 +88,11 @@ void register_map(py::module_& m, const std::string& map_name) {
 //!
 template <typename Dp, typename Mesh>
 void register_map_get(py::module_& m, const std::string& prop_name) {
-  py::class_<Dp> prop(m, prop_name.c_str());
-  prop.def(py::init<>());
+  if (! add_attr<Dp>(m, prop_name.c_str())) {
+    py::class_<Dp>(m, prop_name.c_str())
+      .def(py::init<>())
+      ;
+  }
   m.def("get", &internal::get<Dp, Mesh>,
         py::arg("property_map"), py::arg("sm"));
 }
@@ -454,8 +459,9 @@ void export_polyhedron_traits_with_normals(py::module_& m) {
 void export_internal_face_plane_3_map(py::module_& m) {
   using Prn = pol3::Polyhedron_3;
   using Ifpm = pol3::Internal_face_plane_3_map<Prn>;
-
   constexpr auto ri(py::rv_policy::reference_internal);
+
+  if (add_attr<Ifpm>(m, "Internal_face_plane_3_map")) return;
 
   py::class_<Ifpm>(m, "Internal_face_plane_3_map")
     .def(py::init<>())
@@ -604,9 +610,12 @@ void export_polyhedron_3(py::module_& m) {
   m.def("get_edge_is_feature_map",
         [](const Prn& sm) { return get(CGAL::edge_is_feature, sm); });
 
-  py::class_<CGAL::Polyhedron_is_feature_edge_pmap>(m, "Polyhedron_is_feature_edge_pmap")
-    .def(py::init<>())
-    ;
+  using Pifem = CGAL::Polyhedron_is_feature_edge_pmap;
+  if (! add_attr<Pifem>(m, "Polyhedron_is_feature_edge_pmap")) {
+    py::class_<Pifem>(m, "Polyhedron_is_feature_edge_pmap")
+      .def(py::init<>())
+      ;
+  }
 
   //! \todo the following 3 functions should be replaced by something more
   // general that applies to all maps, similar to the register_map().

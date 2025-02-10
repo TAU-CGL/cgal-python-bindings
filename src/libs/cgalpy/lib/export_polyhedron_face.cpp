@@ -40,9 +40,18 @@ void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c) {
     .def("halfedge", &pol3::face_halfedge, ri)
     .def("is_triangle", [](const Face& f) { return f.is_triangle(); })
     .def("is_quad", [](const Face& f) { return f.is_quad(); })
-    .def("plane", [](const Face& f) { return f.plane(); }, ri)
     .def("set_halfedge", pol3::face_set_halfedge)
-    // .def("set_plane", [](Face& f, const Plane_3& plane){ f.plane() = plane; })
+
+    // if CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS
+    // plane is actually the normal and is of type Kernel::Vector_3
+#if CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS
+    .def("normal", [](const Face& f) { return f.plane(); }, ri)
+    .def("set_normal", [](Face& f, const Vector_3& normal) { f.plane() = normal; })
+#else
+    .def("plane", [](const Face& f) { return f.plane(); }, ri)
+    .def("set_plane", [](Face& f, const Plane_3& plane) { f.plane() = plane; })
+#endif
+
     // .def("size", [](const Face& f){ return f.size(); })
 #ifdef CGALPY_POL3_FACE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
