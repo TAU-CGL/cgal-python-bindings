@@ -21,14 +21,13 @@ namespace py = nanobind;
 template <typename D_, typename FT_, typename Point_d_, typename Query_item_>
 class General_distance_python {
 public:
-  typedef D_ D;
-  typedef FT_ FT;
-  typedef Point_d_ Point_d;
-  typedef Query_item_ Query_item;
-  typedef CGAL::Kd_tree_rectangle<FT, D> Kd_tree_rectangle;
+  using D = D_;
+  using FT = FT_;
+  using Point_d = Point_d_;
+  using Query_item = Query_item_;
+  using Kd_tree_rectangle = CGAL::Kd_tree_rectangle<FT, D>;
 
 private:
-
   Python_functor_2_ref<Query_item, Point_d, FT> f0;
   Python_functor_2_ref<Query_item, Kd_tree_rectangle, FT> f1;
   Python_functor_2_ref<Query_item, Kd_tree_rectangle, FT> f2;

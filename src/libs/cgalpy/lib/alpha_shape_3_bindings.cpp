@@ -79,13 +79,14 @@ const FT& next(Alpha_iterator it) {
 template <typename AlphaShape_3>
 class Alpha_shape_3_test {
 private:
-  typedef AlphaShape_3                                     Alpha_shape_3;
-  typedef typename Alpha_shape_3::Classification_type      Classification_type;
-  typedef typename Alpha_shape_3::FT                       FT;
-  typedef typename Alpha_shape_3::Finite_cells_iterator    Finite_cells_iterator;
-  typedef typename Alpha_shape_3::Finite_facets_iterator   Finite_facets_iterator;
-  typedef typename Alpha_shape_3::Finite_edges_iterator    Finite_edges_iterator;
-  typedef typename Alpha_shape_3::Finite_vertices_iterator Finite_vertices_iterator;
+  using Alpha_shape_3 = AlphaShape_3;
+  using Classification_type = typename Alpha_shape_3::Classification_type;
+  using FT = typename Alpha_shape_3::FT;
+  using Finite_cells_iterator = typename Alpha_shape_3::Finite_cells_iterator;
+  using Finite_facets_iterator = typename Alpha_shape_3::Finite_facets_iterator;
+  using Finite_edges_iterator = typename Alpha_shape_3::Finite_edges_iterator;
+  using Finite_vertices_iterator =
+    typename Alpha_shape_3::Finite_vertices_iterator;
 
   const Alpha_shape_3& m_alpha_shape;
   Classification_type m_type;
@@ -147,11 +148,13 @@ public:
   }
 };
 
-typedef Alpha_shape_3_test<Alpha_shape_3>                      Test;
-typedef CGAL::Filter_iterator<Finite_cells_iterator, Test>     Filter_cell_iterator;
-typedef CGAL::Filter_iterator<Finite_facets_iterator, Test>    Filter_facet_iterator;
-typedef CGAL::Filter_iterator<Finite_edges_iterator, Test>     Filter_edge_iterator;
-typedef CGAL::Filter_iterator<Finite_vertices_iterator, Test>  Filter_vertex_iterator;
+using Test = Alpha_shape_3_test<Alpha_shape_3>;
+using Filter_cell_iterator = CGAL::Filter_iterator<Finite_cells_iterator, Test>;
+using Filter_facet_iterator =
+  CGAL::Filter_iterator<Finite_facets_iterator, Test>;
+using Filter_edge_iterator = CGAL::Filter_iterator<Finite_edges_iterator, Test>;
+using Filter_vertex_iterator =
+  CGAL::Filter_iterator<Finite_vertices_iterator, Test>;
 
 //
 py::list alpha_shape_cells(const Alpha_shape_3& as, Classification_type type

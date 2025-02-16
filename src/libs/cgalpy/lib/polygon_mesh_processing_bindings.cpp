@@ -1478,7 +1478,7 @@ auto detect_vertex_incident_patches(PolygonMesh& pmesh,
   using Fd = typename Gt::face_descriptor;
   using Vt = typename boost::property_traits<PatchIdMap>::value_type;
   using Vipt = CGAL::vertex_incident_patches_t<int>;
-  typedef typename boost::property_map<Pm, Vipt>::type VIP;
+  using VIP = typename boost::property_map<Pm, Vipt>::type;
 
   VIP vip = get(CGAL::vertex_incident_patches_t<Vt>(), pmesh);
   PMP::detect_vertex_incident_patches(pmesh, patch_id_map, vip,

@@ -16,9 +16,9 @@ namespace py = nanobind;
 
 template <typename T>
 struct Aos_construct_x_monotone_curve_traits_classes {
-  typedef typename T::Point_2                       Point_2;
-  typedef typename T::X_monotone_curve_2            X_monotone_curve_2;
-  typedef typename T::Construct_x_monotone_curve_2  Construct_x_monotone_curve_2;
+  using Point_2 = typename T::Point_2;
+  using X_monotone_curve_2 = typename T::X_monotone_curve_2;
+  using Construct_x_monotone_curve_2 = typename T::Construct_x_monotone_curve_2;
 
   // Constructor
   Aos_construct_x_monotone_curve_traits_classes() :
@@ -26,9 +26,8 @@ struct Aos_construct_x_monotone_curve_traits_classes {
   {}
 
   // Destructor
-  ~Aos_construct_x_monotone_curve_traits_classes() {
-    if (m_construct_x_monotone_curve_2) delete m_construct_x_monotone_curve_2;
-  }
+  ~Aos_construct_x_monotone_curve_traits_classes()
+  { if (m_construct_x_monotone_curve_2) delete m_construct_x_monotone_curve_2; }
 
   // Class objects
   py::class_<Construct_x_monotone_curve_2>* m_construct_x_monotone_curve_2;

@@ -14,9 +14,9 @@
 namespace as3 {
 
 #if CGALPY_AS3_EXACT_COMPARISON == 0
-typedef CGAL::Tag_false         Exact_comparison;
+using Exact_comparison = CGAL::Tag_false;
 #elif CGALPY_AS3_EXACT_COMPARISON == 1
-typedef CGAL::Tag_true          Exact_comparison;
+using Exact_comparison = CGAL::Tag_true;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AS3_EXACT_COMPARISON");
 #endif

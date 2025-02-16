@@ -32,7 +32,7 @@
 
 namespace py = nanobind;
 
-typedef typename aos2::Geometry_traits_2::Curve_2 Curve_2;
+using Curve_2 = typename aos2::Geometry_traits_2::Curve_2;
 
 void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 

@@ -35,7 +35,7 @@ bool get_type(Object& o, typename T0::value_type& t) {
 }
 
 void export_object(py::module_& m) {
-  typedef aos2::Arrangement_2   Arr2;
+  using Arr2 = aos2::Arrangement_2;
 
   py::class_<Object>(m, "Object")
     .def("empty", &Object::empty)

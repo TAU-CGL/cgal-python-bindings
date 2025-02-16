@@ -13,7 +13,7 @@
 
 namespace pmp {
 
-  typedef Poly_mesh<CGALPY_PMP_POLYGONAL_MESH>::type    Polygonal_mesh;
+using Polygonal_mesh = Poly_mesh<CGALPY_PMP_POLYGONAL_MESH>::type;
 
 }
 

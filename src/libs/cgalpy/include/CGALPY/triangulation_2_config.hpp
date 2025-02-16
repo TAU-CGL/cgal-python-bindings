@@ -83,133 +83,133 @@ constexpr bool is_constrained() {
 }
 
 // Traits selection
-template <int i, typename K> struct Tr { typedef K type; };
+template <int i, typename K> struct Tr { using type = K; };
 template <typename K> struct Tr<CGALPY_TRI2_PERIODIC_PLAIN, K>
-{ typedef CGAL::Periodic_2_triangulation_traits_2<K> type; };
+{ using type = CGAL::Periodic_2_triangulation_traits_2<K>; };
 template <typename K> struct Tr<CGALPY_TRI2_PERIODIC_DELAUNAY, K>
-{ typedef CGAL::Periodic_2_Delaunay_triangulation_traits_2<K> type; };
+{ using type = CGAL::Periodic_2_Delaunay_triangulation_traits_2<K>; };
 
 // Vertex base selection
 template <bool b, int i, typename Tr> struct Vertex_base_name {};
 template <typename Tr>
 struct Vertex_base_name<true, 0, Tr>
-{ typedef CGAL::Periodic_2_triangulation_vertex_base_2<Tr> type; };
+{ using type = CGAL::Periodic_2_triangulation_vertex_base_2<Tr>; };
 template <int i, typename Tr>
 struct Vertex_base_name<false, i, Tr>
-{ typedef CGAL::Triangulation_vertex_base_2<Tr> type; };
+{ using type = CGAL::Triangulation_vertex_base_2<Tr>; };
 template <typename Tr>
 struct Vertex_base_name<false, CGALPY_TRI2_REGULAR, Tr>
-{ typedef CGAL::Regular_triangulation_vertex_base_2<Tr> type; };
+{ using type = CGAL::Regular_triangulation_vertex_base_2<Tr>; };
 
 // Vertex with info
 template <bool b, typename Vb, typename Data, typename Tr>
 struct Vertex_with_info {};
 template <typename Vb, typename Data, typename Tr>
-struct Vertex_with_info<false, Vb, Data, Tr> { typedef Vb type; };
+struct Vertex_with_info<false, Vb, Data, Tr> { using type = Vb; };
 template <typename Vb, typename Data, typename Tr>
 struct Vertex_with_info<true, Vb, Data, Tr>
-{ typedef CGAL::Triangulation_vertex_base_with_info_2<Data, Tr, Vb> type; };
+{ using type = CGAL::Triangulation_vertex_base_with_info_2<Data, Tr, Vb>; };
 
 // Vertex triangulation hierarchy
 template <bool b, typename Vb> struct Vertex_hierarchy {};
-template <typename Vb> struct Vertex_hierarchy<false, Vb> { typedef Vb type; };
+template <typename Vb> struct Vertex_hierarchy<false, Vb> { using type = Vb; };
 template <typename Vb> struct Vertex_hierarchy<true, Vb>
-{ typedef CGAL::Triangulation_hierarchy_vertex_base_2<Vb> type; };
+{ using type = CGAL::Triangulation_hierarchy_vertex_base_2<Vb>; };
 
 // Vertex alpha shape
 template <bool b, typename Vb, typename Tr, typename ExactComparison>
 struct Vertex_alpha_shape {};
 template <typename Vb, typename Tr, typename ExactComparison>
 struct Vertex_alpha_shape<false, Vb, Tr, ExactComparison>
-{ typedef Vb type; };
+{ using type = Vb; };
 template <typename Vb, typename Tr, typename ExactComparison>
 struct Vertex_alpha_shape<true, Vb, Tr, ExactComparison>
-{ typedef CGAL::Alpha_shape_vertex_base_2<Tr, Vb, ExactComparison> type; };
+{ using type = CGAL::Alpha_shape_vertex_base_2<Tr, Vb, ExactComparison>; };
 
 // Face base selection
 template <bool b, int i, typename Tr> struct Face_base_name {};
 template <typename Tr>
 struct Face_base_name<true, 0, Tr>
-{ typedef CGAL::Periodic_2_triangulation_face_base_2<Tr> type; };
+{ using type = CGAL::Periodic_2_triangulation_face_base_2<Tr>; };
 template <int i, typename Tr>
 struct Face_base_name<false, i, Tr>
-{ typedef CGAL::Triangulation_face_base_2<Tr> type; };
+{ using type = CGAL::Triangulation_face_base_2<Tr>; };
 template <typename Tr>
 struct Face_base_name<false, CGALPY_TRI2_REGULAR, Tr>
-{ typedef CGAL::Regular_triangulation_face_base_2<Tr> type; };
+{ using type = CGAL::Regular_triangulation_face_base_2<Tr>; };
 
 // Face with info
 template <bool b, typename Fb, typename Data, typename Tr>
 struct Face_with_info {};
 template <typename Fb, typename Data, typename Tr>
-struct Face_with_info<false, Fb, Data, Tr> { typedef Fb type; };
+struct Face_with_info<false, Fb, Data, Tr> { using type = Fb; };
 template <typename Fb, typename Data, typename Tr>
 struct Face_with_info<true, Fb, Data, Tr>
-{ typedef CGAL::Triangulation_face_base_with_info_2<Data, Tr, Fb> type; };
+{ using type = CGAL::Triangulation_face_base_with_info_2<Data, Tr, Fb>; };
 
 // Face constrianed
 template <bool b, typename Fb, typename Tr>
 struct Face_constrained {};
 template <typename Fb, typename Tr>
-struct Face_constrained<false, Fb, Tr> { typedef Fb type; };
+struct Face_constrained<false, Fb, Tr> { using type = Fb; };
 template <typename Fb, typename Tr>
 struct Face_constrained<true, Fb, Tr>
-{ typedef CGAL::Constrained_triangulation_face_base_2<Tr, Fb> type; };
+{ using type = CGAL::Constrained_triangulation_face_base_2<Tr, Fb>; };
 
 // Face alpha shape
 template <bool b, typename Fb, typename Tr, typename ExactComparison>
 struct Face_alpha_shape {};
 template <typename Fb, typename Tr, typename ExactComparison>
 struct Face_alpha_shape<false, Fb, Tr, ExactComparison>
-{ typedef Fb type; };
+{ using type = Fb; };
 template <typename Fb, typename Tr, typename ExactComparison>
 struct Face_alpha_shape<true, Fb, Tr, ExactComparison>
-{ typedef CGAL::Alpha_shape_face_base_2<Tr, Fb, ExactComparison> type; };
+{ using type = CGAL::Alpha_shape_face_base_2<Tr, Fb, ExactComparison>; };
 
 // Intersection tag
 template <int i> struct Intersection_tag {};
 template <> struct Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG_NCI>
-{ typedef CGAL::No_constraint_intersection_tag type; };
+{ using type = CGAL::No_constraint_intersection_tag; };
 template <> struct Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG_NCI_REQUIRING_CONSTRUCTIONS>
-{ typedef CGAL::No_constraint_intersection_requiring_constructions_tag type; };
+{ using type = CGAL::No_constraint_intersection_requiring_constructions_tag; };
 template <> struct Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG_EXACT_PREDICATES>
-{ typedef CGAL::Exact_predicates_tag type; };
+{ using type = CGAL::Exact_predicates_tag; };
 template <> struct Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG_EXACT_INTERSECTIONS>
-{ typedef CGAL::Exact_intersections_tag type; };
+{ using type = CGAL::Exact_intersections_tag; };
 
 // Main triangulation
 template <int i, typename Tr, typename Tds, typename Itag>
 struct Base_tri {};
 template <typename Tr, typename Tds, typename Itag>
 struct Base_tri<CGALPY_TRI2_PLAIN, Tr, Tds, Itag>
-{ typedef CGAL::Triangulation_2<Tr, Tds> type; };
+{ using type = CGAL::Triangulation_2<Tr, Tds>; };
 template <typename Tr, typename Tds, typename Itag>
 struct Base_tri<CGALPY_TRI2_REGULAR, Tr, Tds, Itag>
-{ typedef CGAL::Regular_triangulation_2<Tr, Tds> type; };
+{ using type = CGAL::Regular_triangulation_2<Tr, Tds>; };
 template <typename Tr, typename Tds, typename Itag>
 struct Base_tri<CGALPY_TRI2_DELAUNAY, Tr, Tds, Itag>
-{ typedef CGAL::Delaunay_triangulation_2<Tr, Tds> type; };
+{ using type = CGAL::Delaunay_triangulation_2<Tr, Tds> ; };
 template <typename Tr, typename Tds, typename Itag>
 struct Base_tri<CGALPY_TRI2_CONSTRAINED, Tr, Tds, Itag>
-{ typedef CGAL::Constrained_triangulation_2<Tr, Tds, Itag> type; };
+{ using type = CGAL::Constrained_triangulation_2<Tr, Tds, Itag>; };
 template <typename Tr, typename Tds, typename Itag>
 struct Base_tri<CGALPY_TRI2_CONSTRAINED_DELAUNAY, Tr, Tds, Itag>
-{ typedef CGAL::Constrained_Delaunay_triangulation_2<Tr, Tds, Itag> type; };
+{ using type = CGAL::Constrained_Delaunay_triangulation_2<Tr, Tds, Itag>; };
 template <typename Tr, typename Tds, typename Itag>
 struct Base_tri<CGALPY_TRI2_PERIODIC_PLAIN, Tr, Tds, Itag>
-{ typedef CGAL::Periodic_2_triangulation_2<Tr, Tds> type; };
+{ using type = CGAL::Periodic_2_triangulation_2<Tr, Tds>; };
 template <typename Tr, typename Tds, typename Itag>
 struct Base_tri<CGALPY_TRI2_PERIODIC_DELAUNAY, Tr, Tds, Itag>
-{ typedef CGAL::Periodic_2_Delaunay_triangulation_2<Tr, Tds> type; };
+{ using type = CGAL::Periodic_2_Delaunay_triangulation_2<Tr, Tds>; };
 
 // Hierarchy
 template <bool b, bool, typename Tr> struct Tri {};
 template <typename Tr> struct Tri<false, false, Tr>
-{ typedef Tr type; };
+{ using type = Tr; };
 template <typename Tr> struct Tri<true, false, Tr>
-{ typedef CGAL::Triangulation_hierarchy_2<Tr> type; };
+{ using type = CGAL::Triangulation_hierarchy_2<Tr>; };
 template <typename Tr> struct Tri<true, true, Tr>
-{ typedef CGAL::Periodic_2_triangulation_hierarchy_2<Tr> type; };
+{ using type = CGAL::Periodic_2_triangulation_hierarchy_2<Tr>; };
 
 }
 

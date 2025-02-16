@@ -88,7 +88,7 @@ public:
 
 template <typename iterator>
 class Iterator_of_circulators {
-  typedef Iterator_from_circulator<typename iterator::value_type> modified_circulator;
+  using modified_circulator = Iterator_from_circulator<typename iterator::value_type>;
   iterator m_curr;
   iterator m_end;
 

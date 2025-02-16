@@ -34,28 +34,28 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D");
 
 // Dimention tag
 #if CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_STATIC
-typedef CGAL::Dimension_tag<CGALPY_KERNEL_D_DIMENSION>          Dimension_tag;
+using Dimension_tag = CGAL::Dimension_tag<CGALPY_KERNEL_D_DIMENSION>;
 #elif CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_DYNAMIC
-typedef CGAL::Dynamic_dimension_tag                             Dimension_tag;
+using Dimension_tag = CGAL::Dynamic_dimension_tag;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D_DIMENSION_TAG");
 #endif
 
 // dD Kernel
 #if CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPIC_D
-typedef CGAL::Epick_d<Dimension_tag>                            Kernel_d;
+using Kernel_d = CGAL::Epick_d<Dimension_tag>;
 #elif CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D
-typedef CGAL::Epeck_d<Dimension_tag>                            Kernel_d;
+using Kernel_d = CGAL::Epeck_d<Dimension_tag>;
 #elif CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_DOUBLE
-typedef CGAL::Cartesian_d<double>                               Kernel_d;
+using Kernel_d = CGAL::Cartesian_d<double>;
 #elif CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ
-typedef CGAL::Cartesian_d<CGAL::Lazy_exact_nt<CGAL::Gmpq>>      Kernel_d;
+using Kernel_d = CGAL::Cartesian_d<CGAL::Lazy_exact_nt<CGAL::Gmpq>>;
 #else
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D");
 #endif
 
-typedef Kernel_d::FT                                            FT_d;
-typedef Kernel_d::Point_d                                       Point_d;
-typedef Kernel_d::Segment_d                                     Segment_d;
+using FT_d = Kernel_d::FT;
+using Point_d = Kernel_d::Point_d;
+using Segment_d = Kernel_d::Segment_d;
 
 #endif

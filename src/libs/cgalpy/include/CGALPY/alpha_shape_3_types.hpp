@@ -15,41 +15,41 @@
 
 namespace as3 {
 
-typedef Exact_comparison<exact_comparison()>::type                 Ec;
-typedef Alpha_shape<CGALPY_AS3, tri3::Triangulation_3, Ec>::type Alpha_shape_3;
+using Ec = Exact_comparison<exact_comparison()>::type;
+using Alpha_shape_3 = Alpha_shape<CGALPY_AS3, tri3::Triangulation_3, Ec>::type;
 
-typedef Alpha_shape_3::Classification_type      Classification_type;
-typedef Alpha_shape_3::Gt                       Gt;
-typedef Alpha_shape_3::FT                       FT;
-typedef Alpha_shape_3::Point                    Point;
-typedef Alpha_shape_3::size_type                size_type;
+using Classification_type = Alpha_shape_3::Classification_type;
+using Gt = Alpha_shape_3::Gt;
+using FT = Alpha_shape_3::FT;
+using Point = Alpha_shape_3::Point;
+using size_type = Alpha_shape_3::size_type;
 
-typedef Alpha_shape_3::Cell_handle              Cell_handle;
-typedef Alpha_shape_3::Vertex_handle            Vertex_handle;
-typedef Alpha_shape_3::Vertex                   Vertex;
-typedef Alpha_shape_3::Edge                     Edge;
-typedef Alpha_shape_3::Facet                    Facet;
+using Cell_handle = Alpha_shape_3::Cell_handle;
+using Vertex_handle = Alpha_shape_3::Vertex_handle;
+using Vertex = Alpha_shape_3::Vertex;
+using Edge = Alpha_shape_3::Edge;
+using Facet = Alpha_shape_3::Facet;
 
-typedef Alpha_shape_3::Cell_circulator          Cell_circulator;
-typedef Alpha_shape_3::Facet_circulator         Facet_circulator;
+using Cell_circulator = Alpha_shape_3::Cell_circulator;
+using Facet_circulator = Alpha_shape_3::Facet_circulator;
 
-typedef Alpha_shape_3::Cell_iterator            Cell_iterator;
-typedef Alpha_shape_3::Facet_iterator           Facet_iterator;
-typedef Alpha_shape_3::Edge_iterator            Edge_iterator;
-typedef Alpha_shape_3::Vertex_iterator          Vertex_iterator;
+using Cell_iterator = Alpha_shape_3::Cell_iterator;
+using Facet_iterator = Alpha_shape_3::Facet_iterator;
+using Edge_iterator = Alpha_shape_3::Edge_iterator;
+using Vertex_iterator = Alpha_shape_3::Vertex_iterator;
 
-typedef Alpha_shape_3::Finite_cells_iterator    Finite_cells_iterator;
-typedef Alpha_shape_3::Finite_facets_iterator   Finite_facets_iterator;
-typedef Alpha_shape_3::Finite_edges_iterator    Finite_edges_iterator;
-typedef Alpha_shape_3::Finite_vertices_iterator Finite_vertices_iterator;
+using Finite_cells_iterator = Alpha_shape_3::Finite_cells_iterator;
+using Finite_facets_iterator = Alpha_shape_3::Finite_facets_iterator;
+using Finite_edges_iterator = Alpha_shape_3::Finite_edges_iterator;
+using Finite_vertices_iterator = Alpha_shape_3::Finite_vertices_iterator;
 
-typedef Alpha_shape_3::Locate_type              Locate_type;
-typedef Alpha_shape_3::Weighted_tag             Weighted_tag;
+using Locate_type = Alpha_shape_3::Locate_type;
+using Weighted_tag = Alpha_shape_3::Weighted_tag;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-typedef Alpha_shape_3::Mode                     Mode;
-typedef Alpha_shape_3::Alpha_iterator           Alpha_iterator;
-typedef CGAL::Alpha_status<FT>                  Alpha_status;
+using Mode = Alpha_shape_3::Mode;
+using Alpha_iterator = Alpha_shape_3::Alpha_iterator;
+using Alpha_status = CGAL::Alpha_status<FT>;
 #endif
 
 }

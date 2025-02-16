@@ -14,10 +14,10 @@
 
 namespace ss2 {
 
-typedef aos2::Geometry_traits_2 	Geometry_traits_2;
-typedef aos2::Point_2			Point_2;
-typedef aos2::Curve_2			Curve_2;
-typedef aos2::X_monotone_curve_2	X_monotone_curve_2;
+using Geometry_traits_2 = aos2::Geometry_traits_2;
+using Point_2 = aos2::Point_2;
+using Curve_2 = aos2::Curve_2;
+using X_monotone_curve_2 = aos2::X_monotone_curve_2;
 
 }
 

@@ -20,8 +20,8 @@
 
 namespace py = nanobind;
 
-typedef CORE::BigInt                            Integer;
-typedef CGAL::Algebraic_kernel_d_1<Integer>     Alg_kernel;
+using Integer = CORE::BigInt;
+using Alg_kernel = CGAL::Algebraic_kernel_d_1<Integer>;
 
 //
 py::list solve_1(const Alg_kernel::Solve_1& solver,

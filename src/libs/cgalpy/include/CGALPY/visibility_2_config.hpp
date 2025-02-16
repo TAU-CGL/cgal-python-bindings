@@ -21,8 +21,11 @@ constexpr bool regularization_category()
 
 // Exact comparison
 template <bool b> struct Regularization_category {};
-template <> struct Regularization_category<false> { typedef CGAL::Tag_false type; };
-template <> struct Regularization_category<true> { typedef CGAL::Tag_true type; };
+template <> struct Regularization_category<false>
+{ using type = CGAL::Tag_false; };
+
+template <> struct Regularization_category<true>
+{ using type = CGAL::Tag_true; };
 
 }
 

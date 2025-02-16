@@ -21,72 +21,66 @@ namespace py = nanobind;
 
 namespace tri2 {
 
-typedef as2::Exact_comparison<as2::exact_comparison()>::type    Ec;
+using Ec = as2::Exact_comparison<as2::exact_comparison()>::type;
 
-typedef Tr<CGALPY_TRI2, Kernel>::type                           Traits;
+using Traits = Tr<CGALPY_TRI2, Kernel>::type;
 
 // Vertex
-typedef Vertex_base_name<is_periodic(), CGALPY_TRI2, Traits>::type
-                                                                Vb;
-typedef Vertex_with_info<vertex_with_info(), Vb, py::object, Traits>::type
-                                                                Vbi;
-typedef Vertex_alpha_shape<alpha_shape_2_bindings(), Vbi, Traits, Ec>::type
-                                                                Vbia;
-typedef Vertex_hierarchy<hierarchy(), Vbia>::type               V;
+using Vb = Vertex_base_name<is_periodic(), CGALPY_TRI2, Traits>::type;
+using Vbi = Vertex_with_info<vertex_with_info(), Vb, py::object, Traits>::type;
+using Vbia = Vertex_alpha_shape<alpha_shape_2_bindings(), Vbi, Traits, Ec>::type;
+using V = Vertex_hierarchy<hierarchy(), Vbia>::type;
 
 // Face
-typedef Face_base_name<is_periodic(), CGALPY_TRI2, Traits>::type
-                                                                Fb;
-typedef Face_with_info<face_with_info(), Fb, py::object, Traits>::type
-                                                                Fbi;
-typedef Face_constrained<is_constrained(), Fbi, Traits>::type   Fbic;
-typedef Face_alpha_shape<alpha_shape_2_bindings(), Fbic, Traits, Ec>::type
-                                                                F;
+using Fb = Face_base_name<is_periodic(), CGALPY_TRI2, Traits>::type;
+using Fbi = Face_with_info<face_with_info(), Fb, py::object, Traits>::type;
+using Fbic = Face_constrained<is_constrained(), Fbi, Traits>::type;
+using F = Face_alpha_shape<alpha_shape_2_bindings(), Fbic, Traits, Ec>::type;
 
   // Triangulation data structure
-typedef CGAL::Triangulation_data_structure_2<V, F>              Tds;
-typedef Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG>::type    Itag;
-typedef Base_tri<CGALPY_TRI2, Traits, Tds, Itag>::type          Btr;
-typedef Tri<hierarchy(), is_periodic(), Btr>::type              Triangulation_2;
+using Tds = CGAL::Triangulation_data_structure_2<V, F>;
+using Itag = Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG>::type;
+using Btr = Base_tri<CGALPY_TRI2, Traits, Tds, Itag>::type;
+using Triangulation_2 = Tri<hierarchy(), is_periodic(), Btr>::type;
 
-typedef Triangulation_2::Geom_traits                  Geom_traits;
-typedef Triangulation_2::Triangulation_data_structure
-  Triangulation_data_structure;
-typedef Triangulation_2::Locate_type                  Locate_type;
+using Geom_traits = Triangulation_2::Geom_traits;
+using Triangulation_data_structure =
+  Triangulation_2::Triangulation_data_structure;
+using Locate_type = Triangulation_2::Locate_type;
 
-typedef Triangulation_2::Point                        Point;
-typedef Triangulation_2::Segment                      Segment;
-typedef Triangulation_2::Triangle                     Triangle;
-typedef Triangulation_2::Vertex                       Vertex;
-typedef Triangulation_2::Edge                         Edge;
-typedef Triangulation_2::Face                         Face;
-typedef Triangulation_2::size_type                    size_type;
-typedef Triangulation_2::difference_type              difference_type;
+using Point = Triangulation_2::Point;
+using Segment = Triangulation_2::Segment;
+using Triangle = Triangulation_2::Triangle;
+using Vertex = Triangulation_2::Vertex;
+using Edge = Triangulation_2::Edge;
+using Face = Triangulation_2::Face;
+using size_type = Triangulation_2::size_type;
+using difference_type = Triangulation_2::difference_type;
 
-typedef Triangulation_2::Vertex_handle                Vertex_handle;
-typedef Triangulation_2::Face_handle                  Face_handle;
+using Vertex_handle = Triangulation_2::Vertex_handle;
+using Face_handle = Triangulation_2::Face_handle;
 
-typedef Triangulation_2::All_vertices_iterator        All_vertices_iterator;
-typedef Triangulation_2::All_edges_iterator           All_edges_iterator;
-typedef Triangulation_2::All_faces_iterator           All_faces_iterator;
-typedef Triangulation_2::Finite_vertices_iterator     Finite_vertices_iterator;
-typedef Triangulation_2::Finite_edges_iterator        Finite_edges_iterator;
-typedef Triangulation_2::Finite_faces_iterator        Finite_faces_iterator;
-typedef Triangulation_2::Point_iterator               Point_iterator;
+using All_vertices_iterator = Triangulation_2::All_vertices_iterator;
+using All_edges_iterator = Triangulation_2::All_edges_iterator;
+using All_faces_iterator = Triangulation_2::All_faces_iterator;
+using Finite_vertices_iterator = Triangulation_2::Finite_vertices_iterator;
+using Finite_edges_iterator = Triangulation_2::Finite_edges_iterator;
+using Finite_faces_iterator = Triangulation_2::Finite_faces_iterator;
+using Point_iterator = Triangulation_2::Point_iterator;
 
-typedef Triangulation_2::Vertex_circulator            Vertex_circulator;
-typedef Triangulation_2::Edge_circulator              Edge_circulator;
-typedef Triangulation_2::Face_circulator              Face_circulator;
+using Vertex_circulator = Triangulation_2::Vertex_circulator;
+using Edge_circulator = Triangulation_2::Edge_circulator;
+using Face_circulator = Triangulation_2::Face_circulator;
 
-typedef Triangulation_2::Points                       Points;
-typedef Triangulation_2::Line_face_circulator         Line_face_circulator;
-typedef Triangulation_2::All_vertex_handles           All_vertex_handles;
-typedef Triangulation_2::Finite_vertex_handles        Finite_vertex_handles;
-typedef Triangulation_2::All_edges                    All_edges;
-typedef Triangulation_2::Finite_edges                 Finite_edges;
-typedef Triangulation_2::All_face_handles             All_face_handles;
-typedef Triangulation_2::Finite_face_handles          Finite_face_handles;
+using Points = Triangulation_2::Points;
+using Line_face_circulator = Triangulation_2::Line_face_circulator;
+using All_vertex_handles = Triangulation_2::All_vertex_handles;
+using Finite_vertex_handles = Triangulation_2::Finite_vertex_handles;
+using All_edges = Triangulation_2::All_edges;
+using Finite_edges = Triangulation_2::Finite_edges;
+using All_face_handles = Triangulation_2::All_face_handles;
+using Finite_face_handles = Triangulation_2::Finite_face_handles;
 
 } // End of namespace tri2
 
-#endif //CGALPY_TRIANGULATION_2_TYPES_HPP
+#endif

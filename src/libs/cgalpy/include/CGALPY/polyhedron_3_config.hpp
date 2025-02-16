@@ -38,7 +38,7 @@ template <typename Vb, typename Data>
 struct Vertex_extended<false, Vb, Data> { using type = Vb; };
 template <typename Vb, typename Data>
 struct Vertex_extended<true, Vb, Data>
-{ typedef Hds_vertex_with_data<Vb, Data> type; };
+{ using type = Hds_vertex_with_data<Vb, Data>; };
 
 // Halfedge expansion
 template <bool b, typename Hb, typename Data>

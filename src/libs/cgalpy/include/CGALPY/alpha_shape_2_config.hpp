@@ -19,8 +19,8 @@ constexpr bool exact_comparison()
 
 // Exact comparison
 template <bool b> struct Exact_comparison {};
-template <> struct Exact_comparison<false> { typedef CGAL::Tag_false type; };
-template <> struct Exact_comparison<true> { typedef CGAL::Tag_true type; };
+template <> struct Exact_comparison<false> { using type = CGAL::Tag_false; };
+template <> struct Exact_comparison<true> { using type = CGAL::Tag_true; };
 
 }
 

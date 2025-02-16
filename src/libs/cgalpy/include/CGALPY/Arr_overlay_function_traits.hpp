@@ -154,9 +154,9 @@ public:
   using Face_handle_r = typename Arrangement_r::Face_handle;
 
 private:
-  typedef CGAL::_Arr_default_overlay_traits_base<Arrangement_a, Arrangement_b,
-                                                 Arrangement_r>
-    Arr_default_overlay_traits;
+  using Arr_default_overlay_traits =
+    CGAL::_Arr_default_overlay_traits_base<Arrangement_a, Arrangement_b,
+                                           Arrangement_r>;
 
   py::object m_vv_v;
   py::object m_ve_v;

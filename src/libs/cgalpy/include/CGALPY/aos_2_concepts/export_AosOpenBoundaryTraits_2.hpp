@@ -18,25 +18,25 @@ namespace py = nanobind;
 //
 template <typename T1, typename T2>
 struct approach_side {
-  typedef CGAL::Tag_false type;
+  using type = CGAL::Tag_false;
 };
 
 //
 template<>
 struct approach_side<CGAL::Arr_open_side_tag, CGAL::Arr_oblivious_side_tag> {
-  typedef CGAL::Tag_true type;
+  using type = CGAL::Tag_true;
 };
 
 //
 template<>
 struct approach_side<CGAL::Arr_oblivious_side_tag, CGAL::Arr_open_side_tag> {
-  typedef CGAL::Tag_true type;
+  using type = CGAL::Tag_true;
 };
 
 //
 template<>
 struct approach_side<CGAL::Arr_open_side_tag, CGAL::Arr_open_side_tag> {
-  typedef CGAL::Tag_true type;
+  using type = CGAL::Tag_true;
 };
 
 //

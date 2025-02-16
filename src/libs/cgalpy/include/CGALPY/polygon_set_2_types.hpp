@@ -19,7 +19,7 @@
 
 namespace bso2 {
 
-typedef CGAL::Polygon_set_2<Kernel, Point_2_container, Dcel> Polygon_set_2;
+using Polygon_set_2 = CGAL::Polygon_set_2<Kernel, Point_2_container, Dcel>;
 
 }
 

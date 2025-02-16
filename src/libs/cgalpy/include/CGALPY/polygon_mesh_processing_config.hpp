@@ -18,13 +18,11 @@
 namespace pmp {
 
 template <int i> struct Poly_mesh {};
-template <> struct Poly_mesh<CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH> {
+template <> struct Poly_mesh<CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH>
+{ using type = pol3::Polyhedron_3; };
 
-  typedef pol3::Polyhedron_3 type;
-};
-template <> struct Poly_mesh<CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH> {
-  typedef sm::Surface_mesh_3 type;
-};
+template <> struct Poly_mesh<CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH>
+{ using type = sm::Surface_mesh_3; };
 
 }
 

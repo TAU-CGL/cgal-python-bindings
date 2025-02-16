@@ -18,28 +18,27 @@
 
 namespace as2 {
 
-typedef Exact_comparison<exact_comparison()>::type      Ec;
-typedef CGAL::Alpha_shape_2<tri2::Triangulation_2, Ec>  Alpha_shape_2;
+using Ec = Exact_comparison<exact_comparison()>::type;
+using Alpha_shape_2 = CGAL::Alpha_shape_2<tri2::Triangulation_2, Ec>;
 
-typedef Alpha_shape_2::Classification_type              Classification_type;
-typedef Alpha_shape_2::Mode                             Mode;
-typedef Alpha_shape_2::Gt                               Gt;
-typedef Alpha_shape_2::Point                            Point;
-typedef Alpha_shape_2::FT                               FT;
-typedef Alpha_shape_2::size_type                        size_type;
+using Classification_type = Alpha_shape_2::Classification_type;
+using Mode = Alpha_shape_2::Mode;
+using Gt = Alpha_shape_2::Gt;
+using Point = Alpha_shape_2::Point;
+using FT = Alpha_shape_2::FT;
+using size_type = Alpha_shape_2::size_type;
 
-typedef Alpha_shape_2::Tds                              Tds;
+using Tds = Alpha_shape_2::Tds;
 
-typedef Alpha_shape_2::Vertex                           Vertex;
-typedef Alpha_shape_2::Edge                             Edge;
-typedef Alpha_shape_2::Vertex_handle                    Vertex_handle;
-typedef Alpha_shape_2::Face_handle                      Face_handle;
+using Vertex = Alpha_shape_2::Vertex;
+using Edge = Alpha_shape_2::Edge;
+using Vertex_handle = Alpha_shape_2::Vertex_handle;
+using Face_handle = Alpha_shape_2::Face_handle;
 
-typedef Alpha_shape_2::Alpha_iterator                   Alpha_iterator;
-typedef Alpha_shape_2::Alpha_shape_vertices_iterator
-  Alpha_shape_vertices_iterator;
-typedef Alpha_shape_2::Alpha_shape_edges_iterator
-  Alpha_shape_edges_iterator;
+using Alpha_iterator = Alpha_shape_2::Alpha_iterator;
+using Alpha_shape_vertices_iterator =
+  Alpha_shape_2::Alpha_shape_vertices_iterator;
+using Alpha_shape_edges_iterator = Alpha_shape_2::Alpha_shape_edges_iterator;
 
 }
 

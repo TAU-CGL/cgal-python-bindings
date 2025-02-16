@@ -13,8 +13,9 @@
 // General utility: if_<Condition, Then, Else>::type
 // Selects 'Then' or 'Else' type based on the value of the 'Condition'
 template <bool Condition, typename Then, typename Else = void>
-struct if_ { typedef Then type; };
+struct if_ { using type = Then; };
+
 template <typename Then, typename Else>
-struct if_<false, Then, Else > { typedef Else type; };
+struct if_<false, Then, Else > { using type = Else; };
 
 #endif

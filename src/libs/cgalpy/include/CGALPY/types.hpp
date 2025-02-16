@@ -17,13 +17,13 @@
 namespace py = nanobind;
 
 #if 0
-typedef py::return_value_policy<py::copy_const_reference> Copy_const_reference;
-typedef py::return_value_policy<py::return_by_value>      Return_by_value;
-typedef py::return_value_policy<py::manage_new_object>    Manage_new_object;
-typedef py::return_value_policy<py::reference_existing_object>
-  Reference_existing_object;
-typedef py::return_value_policy<py::copy_non_const_reference>
-  Copy_non_const_reference;
+using Copy_const_reference = py::return_value_policy<py::copy_const_reference>;
+using Return_by_value = py::return_value_policy<py::return_by_value>;
+using Manage_new_object = py::return_value_policy<py::manage_new_object>;
+using Reference_existing_object =
+  py::return_value_policy<py::reference_existing_object>;
+using Copy_non_const_reference =
+  py::return_value_policy<py::copy_non_const_reference>;
 #endif
 
 constexpr bool kernel_bindings()

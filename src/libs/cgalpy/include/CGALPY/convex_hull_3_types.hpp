@@ -13,7 +13,7 @@
 
 namespace ch3 {
 
-  typedef Poly_mesh<CGALPY_CH3_POLYGONAL_MESH>::type    Polygonal_mesh;
+using Polygonal_mesh = Poly_mesh<CGALPY_CH3_POLYGONAL_MESH>::type;
 
 }
 

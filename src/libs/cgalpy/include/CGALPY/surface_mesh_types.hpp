@@ -15,8 +15,8 @@
 
 namespace sm {
 
-typedef CGAL::Surface_mesh<Kernel::Point_3> Surface_mesh_3;
-typedef CGAL::Surface_mesh<Kernel::Point_2> Surface_mesh_2;
+  using Surface_mesh_3 = CGAL::Surface_mesh<Kernel::Point_3>;
+  using Surface_mesh_2 = CGAL::Surface_mesh<Kernel::Point_2>;
 
 }
 

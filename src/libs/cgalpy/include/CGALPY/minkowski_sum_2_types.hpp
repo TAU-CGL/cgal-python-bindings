@@ -22,33 +22,32 @@
 
 namespace ms2 {
 
-typedef CGAL::Polygon_2<Kernel, Point_2_container>             Polygon_2;
-typedef CGAL::Polygon_with_holes_2<Kernel, Point_2_container>  Polygon_with_holes_2;
+using Polygon_2 = CGAL::Polygon_2<Kernel, Point_2_container>;
+using Polygon_with_holes_2 =
+  CGAL::Polygon_with_holes_2<Kernel, Point_2_container>;
 
-typedef CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2
-  Circle_segment_polygon_2;
-typedef CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_with_holes_2
-  Circle_segment_polygon_with_holes_2;
+using Circle_segment_polygon_2 =
+  CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2;
+using Circle_segment_polygon_with_holes_2 =
+  CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_with_holes_2;
 
-typedef CGAL::Polygon_nop_decomposition_2<Kernel, Point_2_container>
-  Polygon_nop_decomposition_2;
+using Polygon_nop_decomposition_2 =
+  CGAL::Polygon_nop_decomposition_2<Kernel, Point_2_container>;
 
-
-typedef CGAL::CORE_algebraic_number_traits            Nt_traits;
-typedef Nt_traits::Rational                           Rational;
-typedef CGAL::Cartesian<Rational>                     Rat_kernel;
-typedef Rat_kernel::FT                                Rat_FT;
-typedef Rat_kernel::Point_2                           Rat_point;
-typedef Rat_kernel::Segment_2                         Rat_segment;
-typedef Rat_kernel::Circle_2                          Rat_circle;
-typedef CGAL::Polygon_2<Rat_kernel>                   Rat_polygon_2;
-typedef Nt_traits::Algebraic                          Algebraic;
-typedef CGAL::Cartesian<Algebraic>                    Alg_kernel;
-typedef CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>
-                                                      Conic_traits;
-typedef CGAL::Gps_traits_2<Conic_traits>::Polygon_2   Conic_polygon_2;
-typedef CGAL::Gps_traits_2<Conic_traits>::Polygon_with_holes_2
-  Conic_polygon_with_holes_2;
+using Nt_traits = CGAL::CORE_algebraic_number_traits;
+using Rational = Nt_traits::Rational;
+using Rat_kernel = CGAL::Cartesian<Rational>;
+using Rat_FT = Rat_kernel::FT;
+using Rat_point = Rat_kernel::Point_2;
+using Rat_segment = Rat_kernel::Segment_2;
+using Rat_circle = Rat_kernel::Circle_2;
+using Rat_polygon_2 = CGAL::Polygon_2<Rat_kernel>;
+using Algebraic = Nt_traits::Algebraic;
+using Alg_kernel = CGAL::Cartesian<Algebraic>;
+using Conic_traits = CGAL::Arr_conic_traits_2<Rat_kernel, Alg_kernel, Nt_traits>;
+using Conic_polygon_2 = CGAL::Gps_traits_2<Conic_traits>::Polygon_2;
+using Conic_polygon_with_holes_2 =
+  CGAL::Gps_traits_2<Conic_traits>::Polygon_with_holes_2;
 }
 
 #endif

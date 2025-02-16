@@ -28,16 +28,16 @@ constexpr bool exact_comparison()
 
 // Exact comparison
 template <bool b> struct Exact_comparison {};
-template <> struct Exact_comparison<false> { typedef CGAL::Tag_false type; };
-template <> struct Exact_comparison<true> { typedef CGAL::Tag_true type; };
+template <> struct Exact_comparison<false> { using type = CGAL::Tag_false; };
+template <> struct Exact_comparison<true> { using type = CGAL::Tag_true; };
 
 // Alpha shape types
 template <int i, typename Tr, typename Ec> struct Alpha_shape {};
 template <typename Tr, typename Ec> struct Alpha_shape<CGALPY_AS3_PLAIN, Tr, Ec>
-{ typedef CGAL::Alpha_shape_3<Tr, Ec> type; };
+{ using type = CGAL::Alpha_shape_3<Tr, Ec>; };
 template <typename Tr, typename Ec> struct Alpha_shape<CGALPY_AS3_FIXED, Tr, Ec>
-{ typedef CGAL::Fixed_alpha_shape_3<Tr> type; };
+{ using type = CGAL::Fixed_alpha_shape_3<Tr>; };
 
 }
 
-#endif //CGALPY_ALPHA_SHAPE_3_CONFIG_HPP
+#endif

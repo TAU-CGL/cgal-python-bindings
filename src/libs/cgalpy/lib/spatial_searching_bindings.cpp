@@ -27,21 +27,21 @@
 
 namespace py = nanobind;
 
-typedef CGAL::Search_traits_d<Kernel_d, Dimension_tag>  Search_traits_d;
+using Search_traits_d = CGAL::Search_traits_d<Kernel_d, Dimension_tag>;
 //typedef CGAL::Orthogonal_incremental_neighbor_search<Search_traits_d> Orthogonal_incremental_neighbor_search;
 //typedef Orthogonal_incremental_neighbor_search::iterator NN_iterator;
 //typedef Orthogonal_incremental_neighbor_search::Tree Orthogonal_incremental_neighbor_search_tree;
-typedef CGAL::Kd_tree<Search_traits_d>                  Kd_tree;
-typedef CGAL::Sliding_midpoint<Search_traits_d>         Splitter;
-typedef CGAL::Fuzzy_iso_box<Search_traits_d>            Fuzzy_iso_box;
-typedef CGAL::Fuzzy_sphere<Search_traits_d>             Fuzzy_sphere;
-typedef CGAL::Kd_tree_rectangle<FT_d, Dimension_tag>    Kd_tree_rectangle;
-typedef CGAL::K_neighbor_search<Search_traits_d>        K_neighbor_search;
-typedef General_distance_python<Dimension_tag, FT_d, Point_d, Point_d>
-                                                        Distance_python;
-typedef CGAL::K_neighbor_search<Search_traits_d, Distance_python>
-                                                        K_neighbor_search_python;
-typedef CGAL::Euclidean_distance<Search_traits_d>       Euclidean_distance;
+using Kd_tree = CGAL::Kd_tree<Search_traits_d>;
+using Splitter = CGAL::Sliding_midpoint<Search_traits_d>;
+using Fuzzy_iso_box = CGAL::Fuzzy_iso_box<Search_traits_d>;
+using Fuzzy_sphere = CGAL::Fuzzy_sphere<Search_traits_d>;
+using Kd_tree_rectangle = CGAL::Kd_tree_rectangle<FT_d, Dimension_tag>;
+using K_neighbor_search = CGAL::K_neighbor_search<Search_traits_d>;
+using Distance_python =
+  General_distance_python<Dimension_tag, FT_d, Point_d, Point_d>;
+using K_neighbor_search_python =
+  CGAL::K_neighbor_search<Search_traits_d, Distance_python>;
+using Euclidean_distance = CGAL::Euclidean_distance<Search_traits_d>;
 
 int get_spatial_searching_dimension()
 { return CGALPY_SPATIAL_SEARCHING_DIMENSION; }
