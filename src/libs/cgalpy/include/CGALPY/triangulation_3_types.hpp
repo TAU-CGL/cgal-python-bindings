@@ -37,8 +37,7 @@ using V = Vertex_hierarchy<hierarchy(), Vbia>::type;
 // Cell type
 using Cbd = Cell_periodic<is_periodic()>::type;
 using Cb = Cell_base_name<is_regular(), Cbd, Traits>::type;
-using Traits>::typ = Cell_with_info<cell_with_info(), Cb, py::object,;
-                                                                Cbi;
+using Cbi = Cell_with_info<cell_with_info(), Cb, py::object, Traits>::type;
 # ifdef CGALPY_AS3
 using C = Cell_alpha_shape<CGALPY_AS3, Cbi, Traits, Ec>::type;
 #else
