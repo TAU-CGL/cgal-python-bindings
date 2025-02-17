@@ -44,13 +44,11 @@ void export_arr_curve_data_traits_2(py::module_& m) {
 
   py::class_<Cdm>(m, "Curve_data_merge")
     .def(py::init<>())
-    .def_static("func", &Cdm::func)
     .def_static("reset_func", &Cdm::reset_func)
     .def_static("set_func", &Cdm::set_func)
-    //! \todo The following fails for some reason.
-    // .def_prop_rw_static("func",
-    //                     [](py::handle /*unused*/) { return Cdm::func() ; },
-    //                     [](py::handle /*unused*/, py::object func) { Cdm::set_func(func); })
+    .def_prop_rw_static("func",
+                        [](py::handle /*unused*/) { return Cdm::func() ; },
+                        [](py::handle /*unused*/, py::object func) { Cdm::set_func(func); })
     ;
 
   py::class_<Gt, Base_gt> traits_c(m, "Arr_curve_data_traits_2");

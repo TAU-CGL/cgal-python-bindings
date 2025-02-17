@@ -103,22 +103,18 @@ public:
    */
   ~Curve_data_merge() {}
 
-  static void set_func(py::object func) {
-    s_func = func;
-    is_initialized = true;
-  }
-  static void reset_func() { is_initialized=false; }
+  static void set_func(py::object func) { s_func = func; }
+  static void reset_func() { s_func = py::none(); }
   static py::object func() { return s_func; }
 
   /*! Apply the callback function
    */
   py::object operator()(py::object a, py::object b) const
-  { return (is_initialized) ? s_func(a, b) : a; }
+  { return (s_func.is_none()) ? a : s_func(a, b); }
 
 private:
   //! The callback function to apply
-  inline static py::object s_func;
-  inline static bool is_initialized = false;
+  inline static py::object s_func = py::none();;
 };
 
 template <typename Btr>
@@ -345,4 +341,4 @@ struct With_history<true, GeomTraits, TopolTraits> {
 
 } // end of aos2 namespace
 
-#endif //CGALPY_ARRANGEMENT_ON_SURFACE_2_CONFIG_HPP
+#endif
