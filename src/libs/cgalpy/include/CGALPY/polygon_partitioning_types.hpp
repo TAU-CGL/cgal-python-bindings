@@ -25,8 +25,8 @@ using Polygon_2 = CGAL::Polygon_2<Kernel, Point_2_container>;
 using Polygon_with_holes_2 =
   CGAL::Polygon_with_holes_2<Kernel, Point_2_container>;
 
-using Point_2_container = CGAL::Polygon_vertical_decomposition_2<Kernel,;
-  Polygon_vertical_decomposition_2;
+using Polygon_vertical_decomposition_2 =
+  CGAL::Polygon_vertical_decomposition_2<Kernel, Point_2_container>;
 using Polygon_triangulation_decomposition_2 =
   CGAL::Polygon_triangulation_decomposition_2<Kernel, Point_2_container>;
 using Small_side_angle_bisector_decomposition_2 =
