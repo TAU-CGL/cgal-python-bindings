@@ -34,9 +34,14 @@ Halfedge& prev(Halfedge& e) { return (*(e.prev())); }
 Halfedge& twin(Halfedge& e) { return (*(e.twin())); }
 Face& face(Halfedge& e) { return (*(e.face())); }
 
-py::object ccb(const Halfedge& h)
-{ return make_circulator(h.ccb()); }
+//
+py::object ccb_circulator(const Halfedge& h) { return make_circulator(h.ccb()); }
 
+//
+py::object ccb_iterator(const Halfedge& h)
+{ return make_iterator(h.ccb().current_iterator(), h.ccb().past_the_end()); }
+
+//
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
 py::object surfaces(const Halfedge& h)
 { return make_iterator(h.surfaces_begin(), h.surfaces_end()); }
@@ -79,7 +84,8 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("curve",
          [](const He& h)->std::unique_ptr<Xcv>
          { return std::make_unique<Xcv>(h.curve()); }, ri)
-    .def("ccb", &aos2::ccb, py::keep_alive<0, 1>())
+    .def("ccb", &aos2::ccb_circulator, py::keep_alive<0, 1>())
+    .def("ccb_range", &aos2::ccb_iterator, py::keep_alive<0, 1>())
 
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
@@ -102,5 +108,7 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
 #endif
 
   using Chcc = Aos::Ccb_halfedge_const_circulator;
-  add_circulator<Chcc>("Halfedge_around_vertex_circulator", halfedge_c);
+  using Chci = Aos::Ccb_halfedge_const_circulator::Iterator;
+  add_circulator<Chcc>("Halfedge_circulator", halfedge_c);
+  add_iterator<Chci, Chci>("Halfedge_iterator", halfedge_c);
 }

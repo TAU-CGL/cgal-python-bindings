@@ -8,10 +8,13 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/circulator.h>
+
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
 #include "CGALPY/make_circulator.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -22,8 +25,17 @@ const void face_set_halfedge(Face& f, Halfedge& h)
 { f.set_halfedge(Polyhedron_3::Halfedge_handle(&h)); }
 
 //
-auto halfedges_around_facet(const Face& f)
+auto halfedges_around_facet_circulator(const Face& f)
 { return make_circulator(f.facet_begin()); }
+
+//
+auto halfedges_around_facet_iterator(const Face& f)
+{
+  using Hafcc = pol3::Halfedge_around_facet_const_circulator;
+  using Hafccc = CGAL::Container_from_circulator<Hafcc>;
+  Hafccc range(f.facet_begin());
+  return make_iterator(range.begin(), range.end());
+}
 
 // Export Polyhedron Face
 void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c) {
@@ -64,8 +76,16 @@ void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c) {
     ;
 
   using Hafcc = pol3::Halfedge_around_facet_const_circulator;
+  using Hafccc = CGAL::Container_from_circulator<Hafcc>;
+  using Hafci = Hafccc::const_iterator;
   add_circulator<Hafcc>("Halfedge_around_facet_circulator", face_c);
-  face_c.def("halfedges", &pol3::halfedges_around_facet, py::keep_alive<0, 1>());
+  face_c.def("halfedges",
+             &pol3::halfedges_around_facet_circulator, py::keep_alive<0, 1>());
+  add_iterator<Hafcc, Hafcc>("Halfedge_around_facet_iterator", face_c);
+  face_c.def("halfedges",
+             &pol3::halfedges_around_facet_circulator, py::keep_alive<0, 1>());
+  face_c.def("halfedges_range",
+             &pol3::halfedges_around_facet_iterator, py::keep_alive<0, 1>());
 
   // Until 'consteval' is supported (C++20), we cannot assume that
   // pol3::face_with_id() is evaluated at compiletime

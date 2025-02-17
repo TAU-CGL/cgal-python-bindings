@@ -393,11 +393,14 @@ auto halfedges_around_target_circulator(Vertex& v, const Polyhedron_3& prn) {
 }
 
 //
-auto halfedges_around_target(Vertex& v, const Polyhedron_3& prn) {
+auto halfedges_around_target_iterator(Vertex& v, const Polyhedron_3& prn) {
   using Prn = Polyhedron_3;
-  using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
-  Hatc begin(Vertex_handle(&v), prn);
-  return make_iterator(begin, begin);
+  using Hati = CGAL::Halfedge_around_target_iterator<Prn>;
+  auto vh = Vertex_handle(&v);
+  auto hh = CGAL::halfedge(vh, prn);
+  Hati begin, end;
+  boost::tie(begin, end) = CGAL::halfedges_around_target(hh, prn);
+  return make_iterator(begin, end);
 }
 /// @}
 
@@ -747,8 +750,14 @@ void export_polyhedron_3(py::module_& m) {
   // Halfedges around target circulator
   // We use the dereference circulator, because we need to dereference twice
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
+  using Hati = CGAL::Halfedge_around_target_iterator<Prn>;
   add_dereference_circulator<Hatc, Halfedge&>("Halfedge_around_target_circulator", m);
-  m.def("halfedges_around_target_circulator",
+  add_dereference_iterator<Hati, Hati, Halfedge&>("Halfedge_around_target_circulator", m);
+
+  m.def("halfedges_around_target",
         &pol3::halfedges_around_target_circulator,
+        py::keep_alive<0, 1>());
+  m.def("halfedges_around_target_range",
+        &pol3::halfedges_around_target_iterator,
         py::keep_alive<0, 1>());
 }

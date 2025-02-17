@@ -12,6 +12,8 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/pair.h>
 
+#include <CGAL/circulator.h>
+
 #include "CGALPY/triangulation_2_types.hpp"
 #include "CGALPY/types.hpp"
 #include "CGALPY/add_attr.hpp"
@@ -105,45 +107,118 @@ py::object points(const Triangulation_2& tri)
 // Circulators
 
 //
-py::object incident_faces0(const Triangulation_2& tri, const Vertex& v) {
+py::object incident_faces_circulator_0(const Triangulation_2& tri,
+                                       const Vertex& v) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   return make_circulator(tri.incident_faces(vh));
 }
 
 //
-py::object incident_faces1(const Triangulation_2& tri,
-                           const Vertex& v, const Face& f) {
+py::object incident_faces_circulator_1(const Triangulation_2& tri,
+                                       const Vertex& v, const Face& f) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   auto fh = Face_handle(const_cast<Face*>(&f));
   return make_circulator(tri.incident_faces(vh, fh));
 }
 
-py::object incident_edges0(const Triangulation_2& tri, const Vertex& v) {
+py::object incident_edges_circulator_0(const Triangulation_2& tri,
+                                       const Vertex& v) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   return make_circulator(tri.incident_edges(vh));
 }
 
 //
-py::object incident_edges1(const Triangulation_2& tri,
-                           const Vertex& v, const Face& f) {
+py::object incident_edges_circulator_1(const Triangulation_2& tri,
+                                       const Vertex& v, const Face& f) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   auto fh = Face_handle(const_cast<Face*>(&f));
   return make_circulator(tri.incident_edges(vh, fh));
 }
 
-py::object incident_vertices0(const Triangulation_2& tri, const Vertex& v) {
+py::object incident_vertices_circulator_0(const Triangulation_2& tri,
+                                          const Vertex& v) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   return make_circulator(tri.incident_vertices(vh));
 }
 
 //
-py::object incident_vertices1(const Triangulation_2& tri,
-                           const Vertex& v, const Face& f) {
+py::object incident_vertices_circulator_1(const Triangulation_2& tri,
+                                          const Vertex& v, const Face& f) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   auto fh = Face_handle(const_cast<Face*>(&f));
   return make_circulator(tri.incident_vertices(vh, fh));
 }
 
+// Iterators
+
+//
+py::object incident_faces_iterator_0(const Triangulation_2& tri,
+                                     const Vertex& v) {
+  using Tri = Triangulation_2;
+  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+  using Fc = Tri::Face_circulator;
+  using Fcc = CGAL::Container_from_circulator<Fc>;
+  Fcc range(tri.incident_faces(vh));
+  return make_iterator(range.begin(), range.end());
+}
+
+//
+py::object incident_faces_iterator_1(const Triangulation_2& tri,
+                                     const Vertex& v, const Face& f) {
+  using Tri = Triangulation_2;
+  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+  auto fh = Face_handle(const_cast<Face*>(&f));
+  using Fc = Tri::Face_circulator;
+  using Fcc = CGAL::Container_from_circulator<Fc>;
+  Fcc range(tri.incident_faces(vh, fh));
+  return make_iterator(range.begin(), range.end());
+}
+
+py::object incident_edges_iterator_0(const Triangulation_2& tri,
+                                       const Vertex& v) {
+  using Tri = Triangulation_2;
+  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+  using Ec = Tri::Edge_circulator;
+  using Ecc = CGAL::Container_from_circulator<Ec>;
+  Ecc range(tri.incident_edges(vh));
+  return make_iterator(range.begin(), range.end());
+}
+
+//
+py::object incident_edges_iterator_1(const Triangulation_2& tri,
+                                     const Vertex& v, const Face& f) {
+  using Tri = Triangulation_2;
+  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+  auto fh = Face_handle(const_cast<Face*>(&f));
+  using Ec = Tri::Edge_circulator;
+  using Ecc = CGAL::Container_from_circulator<Ec>;
+  Ecc range(tri.incident_edges(vh, fh));
+  return make_iterator(range.begin(), range.end());
+}
+
+py::object incident_vertices_iterator_0(const Triangulation_2& tri,
+                                          const Vertex& v) {
+  using Tri = Triangulation_2;
+  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+  using Vc = Tri::Vertex_circulator;
+  using Vcc = CGAL::Container_from_circulator<Vc>;
+  Vcc range(tri.incident_vertices(vh));
+  return make_iterator(range.begin(), range.end());
+}
+
+//
+py::object incident_vertices_iterator_1(const Triangulation_2& tri,
+                                        const Vertex& v, const Face& f) {
+  using Tri = Triangulation_2;
+  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+  auto fh = Face_handle(const_cast<Face*>(&f));
+  using Vc = Tri::Vertex_circulator;
+  using Vcc = CGAL::Container_from_circulator<Vc>;
+  Vcc range(tri.incident_vertices(vh, fh));
+  return make_iterator(range.begin(), range.end());
+}
+
+//
 #if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
      (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
 void insert_constraint(Triangulation_2& tri,
@@ -234,13 +309,34 @@ void export_triangulation_2(py::module_& m) {
   add_circulator<Ec, Edge>("Edge_circulator", tri_c);
   add_circulator<Fc>("Face_circulator", tri_c);
 
-  tri_c.def("incident_faces", &tri2::incident_faces0)
-    .def("incident_faces", &tri2::incident_faces1)
-    .def("incident_edges", &tri2::incident_edges0)
-    .def("incident_edges", &tri2::incident_edges1)
-    .def("incident_vertices", &tri2::incident_vertices0)
-    .def("incident_vertices", &tri2::incident_vertices1)
+  tri_c.def("incident_faces", &tri2::incident_faces_circulator_0)
+    .def("incident_faces", &tri2::incident_faces_circulator_1)
+    .def("incident_edges", &tri2::incident_edges_circulator_0)
+    .def("incident_edges", &tri2::incident_edges_circulator_1)
+    .def("incident_vertices", &tri2::incident_vertices_circulator_0)
+    .def("incident_vertices", &tri2::incident_vertices_circulator_1)
     ;
+
+  // Iterators
+  using Vcc = CGAL::Container_from_circulator<Vc>;
+  using Vcci = Vcc::const_iterator;
+  using Ecc = CGAL::Container_from_circulator<Ec>;
+  using Ecci = Ecc::const_iterator;
+  using Fcc = CGAL::Container_from_circulator<Fc>;
+  using Fcci = Fcc::const_iterator;
+
+  add_iterator<Vcci, Vcci>("Vertex_iterator", tri_c);
+  add_iterator<Ecci, Ecci, Edge>("Edge_iterator", tri_c);
+  add_iterator<Fcci, Fcci>("Face_iterator", tri_c);
+
+  tri_c.def("incident_faces_range", &tri2::incident_faces_iterator_0)
+    .def("incident_faces_range", &tri2::incident_faces_iterator_1)
+    .def("incident_edges_range", &tri2::incident_edges_iterator_0)
+    .def("incident_edges_range", &tri2::incident_edges_iterator_1)
+    .def("incident_vertices_range", &tri2::incident_vertices_iterator_0)
+    .def("incident_vertices_range", &tri2::incident_vertices_iterator_1)
+    ;
+
 
   // Enumerations
 

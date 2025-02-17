@@ -28,15 +28,7 @@ void add_circulator_impl(const char* name, C& c, Extra&&... extra) {
   constexpr auto ri(py::rv_policy::reference_internal);
   py::class_<state>(c, name)
     .def("__iter__", [](state& s) -> state& { return s; }, ri)
-    .def("__next__", [](state& s) -> ValueType {
-                       if (s.first) {
-                         s.first = false;
-                         return *s.it++;
-                       }
-                       if (s.it == s.end) s.done = true;
-                       if (s.done) throw py::stop_iteration();
-                       return *s.it++;
-                     },
+    .def("__next__", [](state& s) -> ValueType { return *s.it++; },
       std::forward<Extra>(extra)..., Policy)
     ;
 }
@@ -86,7 +78,7 @@ void add_dereference_circulator(const char* name, C& c, Extra&&... extra) {
 template <typename Iterator>
 py::object make_circulator(Iterator begin) {
   using state = circulator_state<Iterator>;
-  return py::cast(state{begin, begin, true, false});
+  return py::cast(state{begin, true, false});
 }
 
 #endif

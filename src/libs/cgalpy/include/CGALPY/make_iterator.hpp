@@ -117,7 +117,7 @@ void add_iterator_of_circulator_impl(const char* name, C& c, Extra&&... extra) {
                          s.first_or_done = true;
                          throw py::stop_iteration();
                        }
-                       return sub_state{*s.it, *s.it, true, false};
+                       return sub_state{*s.it, true, false};
                      },
       std::forward<Extra>(extra)..., Policy)
     ;

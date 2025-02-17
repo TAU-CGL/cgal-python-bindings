@@ -12,7 +12,6 @@
 template <typename Iterator>
 struct circulator_state {
   Iterator it;
-  Iterator end;
   bool first;
   bool done;
 };

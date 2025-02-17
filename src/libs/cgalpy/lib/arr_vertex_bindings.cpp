@@ -21,10 +21,16 @@ namespace py = nanobind;
 
 namespace aos2 {
 
-//
-py::object incident_halfedges(const Vertex& v)
+//!
+py::object incident_halfedges_circulator(const Vertex& v)
 { return make_circulator(v.incident_halfedges()); }
 
+//
+py::object incident_halfedges_iterator(const Vertex& v)
+{ return make_iterator(v.incident_halfedges().current_iterator(),
+                       v.incident_halfedges().past_the_end()); }
+
+//
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
 py::object surfaces(const Vertex& v)
 { return make_iterator(v.surfaces_begin(), v.surfaces_end()); }
@@ -38,7 +44,6 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Vertex = Aos::Vertex;
   using Face = Aos::Face;
   using Point = Aos::Point_2;
-  using Havcc = Aos::Halfedge_around_vertex_const_circulator;
   constexpr auto ri(py::rv_policy::reference_internal);
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
@@ -72,7 +77,10 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
          { return v.parameter_space_in_y(); })
     .def("degree", &Vertex::degree)
     .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
-    .def("incident_halfedges", &aos2::incident_halfedges, py::keep_alive<0, 1>())
+    .def("incident_halfedges",
+         &aos2::incident_halfedges_circulator, py::keep_alive<0, 1>())
+    .def("incident_halfedges_range",
+         &aos2::incident_halfedges_iterator, py::keep_alive<0, 1>())
 
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
@@ -94,5 +102,9 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   add_iterator<Si, Si>("Surface_iterator", vertex_c);
 #endif
 
+  using Havcc = Aos::Halfedge_around_vertex_const_circulator;
   add_circulator<Havcc>("Halfedge_around_vertex_circulator", vertex_c);
+
+  using Havci = Aos::Halfedge_around_vertex_const_circulator::Iterator;
+  add_iterator<Havci, Havci>("Halfedge_around_vertex_iterator", vertex_c);
 }
