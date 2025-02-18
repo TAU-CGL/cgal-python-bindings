@@ -134,6 +134,43 @@ void add_iterator_of_circulator(const char* name, C& c, Extra&&... extra) {
                                   Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
+///
+
+template <py::rv_policy Policy,
+          typename Iterator, typename ValueType,
+          typename... Extra,
+          typename C>
+void add_iterator_from_circulator_impl(const char* name, C& c, Extra&&... extra) {
+  using state = iterator_state<Iterator, Iterator>;
+  if (add_attr<state>(c, name)) return;
+
+  constexpr auto ri(py::rv_policy::reference_internal);
+  py::class_<state>(c, name)
+    .def("__iter__", [](state& s) -> state& { return s; }, ri)
+    .def("__next__",
+         [](state& s) -> ValueType {
+           if (s.first_or_done) {
+             s.first_or_done = false;
+             return *s.it++;
+           }
+           if (s.it == s.end) s.first_or_done = true;
+           if (s.first_or_done) throw py::stop_iteration();
+           return *s.it++;
+         },
+         std::forward<Extra>(extra)..., Policy)
+    ;
+}
+
+// Add (wrap) an iterator from a circulator
+template <typename Iterator,
+          typename ValueType = decltype(*std::declval<Iterator>()),
+          py::rv_policy Policy = py::rv_policy::reference_internal,
+          typename... Extra,
+          typename C>
+void add_iterator_from_circulator(const char* name, C& c, Extra&&... extra) {
+  add_iterator_from_circulator_impl<Policy, Iterator, ValueType,
+                                    Extra...>(name, c, std::forward<Extra>(extra)...);
+}
 // Obtain a Python iterator
 template <typename Iterator, typename Sentinel>
 py::object make_iterator(Iterator begin, Sentinel end) {
