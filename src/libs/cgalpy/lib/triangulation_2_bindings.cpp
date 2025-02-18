@@ -12,15 +12,12 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/pair.h>
 
-#include <CGAL/circulator.h>
-
 #include "CGALPY/triangulation_2_types.hpp"
 #include "CGALPY/types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/make_circulator.hpp"
-#include "CGALPY/python_iterator_templates.hpp"
 
 namespace py = nanobind;
 
@@ -154,68 +151,44 @@ py::object incident_vertices_circulator_1(const Triangulation_2& tri,
 //
 py::object incident_faces_iterator_0(const Triangulation_2& tri,
                                      const Vertex& v) {
-  using Tri = Triangulation_2;
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-  using Fc = Tri::Face_circulator;
-  using Fcc = CGAL::Container_from_circulator<Fc>;
-  Fcc range(tri.incident_faces(vh));
-  return make_iterator(range.begin(), range.end());
+  return make_iterator(tri.incident_faces(vh), tri.incident_faces(vh));
 }
 
 //
 py::object incident_faces_iterator_1(const Triangulation_2& tri,
                                      const Vertex& v, const Face& f) {
-  using Tri = Triangulation_2;
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   auto fh = Face_handle(const_cast<Face*>(&f));
-  using Fc = Tri::Face_circulator;
-  using Fcc = CGAL::Container_from_circulator<Fc>;
-  Fcc range(tri.incident_faces(vh, fh));
-  return make_iterator(range.begin(), range.end());
+  return make_iterator(tri.incident_faces(vh, fh), tri.incident_faces(vh, fh));
 }
 
 py::object incident_edges_iterator_0(const Triangulation_2& tri,
                                        const Vertex& v) {
-  using Tri = Triangulation_2;
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-  using Ec = Tri::Edge_circulator;
-  using Ecc = CGAL::Container_from_circulator<Ec>;
-  Ecc range(tri.incident_edges(vh));
-  return make_iterator(range.begin(), range.end());
+  return make_iterator(tri.incident_edges(vh), tri.incident_edges(vh));
 }
 
 //
 py::object incident_edges_iterator_1(const Triangulation_2& tri,
                                      const Vertex& v, const Face& f) {
-  using Tri = Triangulation_2;
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   auto fh = Face_handle(const_cast<Face*>(&f));
-  using Ec = Tri::Edge_circulator;
-  using Ecc = CGAL::Container_from_circulator<Ec>;
-  Ecc range(tri.incident_edges(vh, fh));
-  return make_iterator(range.begin(), range.end());
+  return make_iterator(tri.incident_edges(vh, fh), tri.incident_edges(vh, fh));
 }
 
 py::object incident_vertices_iterator_0(const Triangulation_2& tri,
                                           const Vertex& v) {
-  using Tri = Triangulation_2;
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-  using Vc = Tri::Vertex_circulator;
-  using Vcc = CGAL::Container_from_circulator<Vc>;
-  Vcc range(tri.incident_vertices(vh));
-  return make_iterator(range.begin(), range.end());
+  return make_iterator(tri.incident_vertices(vh), tri.incident_vertices(vh));
 }
 
 //
 py::object incident_vertices_iterator_1(const Triangulation_2& tri,
                                         const Vertex& v, const Face& f) {
-  using Tri = Triangulation_2;
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   auto fh = Face_handle(const_cast<Face*>(&f));
-  using Vc = Tri::Vertex_circulator;
-  using Vcc = CGAL::Container_from_circulator<Vc>;
-  Vcc range(tri.incident_vertices(vh, fh));
-  return make_iterator(range.begin(), range.end());
+  return make_iterator(tri.incident_vertices(vh, fh), tri.incident_vertices(vh, fh));
 }
 
 //
@@ -318,16 +291,9 @@ void export_triangulation_2(py::module_& m) {
     ;
 
   // Iterators
-  using Vcc = CGAL::Container_from_circulator<Vc>;
-  using Vcci = Vcc::const_iterator;
-  using Ecc = CGAL::Container_from_circulator<Ec>;
-  using Ecci = Ecc::const_iterator;
-  using Fcc = CGAL::Container_from_circulator<Fc>;
-  using Fcci = Fcc::const_iterator;
-
-  add_iterator<Vcci, Vcci>("Vertex_iterator", tri_c);
-  add_iterator<Ecci, Ecci, Edge>("Edge_iterator", tri_c);
-  add_iterator<Fcci, Fcci>("Face_iterator", tri_c);
+  add_iterator_from_circulator<Vc>("Vertex_iterator", tri_c);
+  add_iterator_from_circulator<Ec, Edge>("Edge_iterator", tri_c);
+  add_iterator_from_circulator<Fc>("Face_iterator", tri_c);
 
   tri_c.def("incident_faces_range", &tri2::incident_faces_iterator_0)
     .def("incident_faces_range", &tri2::incident_faces_iterator_1)
@@ -336,7 +302,6 @@ void export_triangulation_2(py::module_& m) {
     .def("incident_vertices_range", &tri2::incident_vertices_iterator_0)
     .def("incident_vertices_range", &tri2::incident_vertices_iterator_1)
     ;
-
 
   // Enumerations
 
