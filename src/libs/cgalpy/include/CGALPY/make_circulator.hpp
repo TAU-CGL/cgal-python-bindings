@@ -30,6 +30,10 @@ void add_circulator_impl(const char* name, C& c, Extra&&... extra) {
     .def("__iter__", [](state& s) -> state& { return s; }, ri)
     .def("__next__", [](state& s) -> ValueType { return *s.it++; },
       std::forward<Extra>(extra)..., Policy)
+    .def("size",
+         [](const state& s)->std::size_t {
+           return CGAL::circulator_size(s.it);
+         })
     ;
 }
 
