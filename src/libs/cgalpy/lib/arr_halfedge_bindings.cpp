@@ -39,7 +39,7 @@ py::object ccb_circulator(const Halfedge& h) { return make_circulator(h.ccb()); 
 
 //
 py::object ccb_iterator(const Halfedge& h)
-{ return make_iterator(h.ccb().current_iterator(), h.ccb().past_the_end()); }
+{ return make_iterator(h.ccb(), h.ccb()); }
 
 //
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
@@ -108,7 +108,6 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
 #endif
 
   using Chcc = Aos::Ccb_halfedge_const_circulator;
-  using Chci = Aos::Ccb_halfedge_const_circulator::Iterator;
   add_circulator<Chcc>("Halfedge_circulator", halfedge_c);
-  add_iterator<Chci, Chci>("Halfedge_iterator", halfedge_c);
+  add_iterator_from_circulator<Chcc>("Halfedge_iterator", halfedge_c);
 }

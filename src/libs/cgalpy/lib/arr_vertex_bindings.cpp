@@ -27,8 +27,7 @@ py::object incident_halfedges_circulator(const Vertex& v)
 
 //
 py::object incident_halfedges_iterator(const Vertex& v)
-{ return make_iterator(v.incident_halfedges().current_iterator(),
-                       v.incident_halfedges().past_the_end()); }
+{ return make_iterator(v.incident_halfedges(), v.incident_halfedges()); }
 
 //
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
@@ -104,7 +103,5 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
   using Havcc = Aos::Halfedge_around_vertex_const_circulator;
   add_circulator<Havcc>("Halfedge_around_vertex_circulator", vertex_c);
-
-  using Havci = Aos::Halfedge_around_vertex_const_circulator::Iterator;
-  add_iterator<Havci, Havci>("Halfedge_around_vertex_iterator", vertex_c);
+  add_iterator_from_circulator<Havcc>("Halfedge_around_vertex_iterator", vertex_c);
 }

@@ -8,8 +8,6 @@
 
 #include <nanobind/nanobind.h>
 
-#include <CGAL/circulator.h>
-
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
@@ -30,12 +28,7 @@ auto halfedges_around_facet_circulator(const Face& f)
 
 //
 auto halfedges_around_facet_iterator(const Face& f)
-{
-  using Hafcc = pol3::Halfedge_around_facet_const_circulator;
-  using Hafccc = CGAL::Container_from_circulator<Hafcc>;
-  Hafccc range(f.facet_begin());
-  return make_iterator(range.begin(), range.end());
-}
+{ return make_iterator(f.facet_begin(), f.facet_begin()); }
 
 // Export Polyhedron Face
 void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c) {
@@ -53,6 +46,10 @@ void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c) {
     .def("is_triangle", [](const Face& f) { return f.is_triangle(); })
     .def("is_quad", [](const Face& f) { return f.is_quad(); })
     .def("set_halfedge", pol3::face_set_halfedge)
+    .def("halfedges",
+         &pol3::halfedges_around_facet_circulator, py::keep_alive<0, 1>())
+    .def("halfedges_range",
+         &pol3::halfedges_around_facet_iterator, py::keep_alive<0, 1>())
 
     // if CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS
     // plane is actually the normal and is of type Kernel::Vector_3
@@ -76,16 +73,8 @@ void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c) {
     ;
 
   using Hafcc = pol3::Halfedge_around_facet_const_circulator;
-  using Hafccc = CGAL::Container_from_circulator<Hafcc>;
-  using Hafci = Hafccc::const_iterator;
   add_circulator<Hafcc>("Halfedge_around_facet_circulator", face_c);
-  face_c.def("halfedges",
-             &pol3::halfedges_around_facet_circulator, py::keep_alive<0, 1>());
-  add_iterator<Hafcc, Hafcc>("Halfedge_around_facet_iterator", face_c);
-  face_c.def("halfedges",
-             &pol3::halfedges_around_facet_circulator, py::keep_alive<0, 1>());
-  face_c.def("halfedges_range",
-             &pol3::halfedges_around_facet_iterator, py::keep_alive<0, 1>());
+  add_iterator_from_circulator<Hafcc>("Halfedge_around_facet_iterator", face_c);
 
   // Until 'consteval' is supported (C++20), we cannot assume that
   // pol3::face_with_id() is evaluated at compiletime

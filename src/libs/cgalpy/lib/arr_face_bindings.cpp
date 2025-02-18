@@ -28,8 +28,7 @@ py::object outer_ccb_circulator(const Face& f)
 
 //
 py::object outer_ccb_iterator(const Face& f)
-{ return make_iterator(f.outer_ccb().current_iterator(),
-                       f.outer_ccb().past_the_end()); }
+{ return make_iterator(f.outer_ccb(), f.outer_ccb()); }
 
 //
 py::object outer_ccbs(const Face& f) {
@@ -100,6 +99,9 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("has_outer_ccb", &Face::has_outer_ccb)
     .def("number_of_holes", &Face::number_of_holes)
 
+    .def("outer_ccb", &aos2::outer_ccb_circulator, py::keep_alive<0, 1>())
+    .def("outer_ccb_range", &aos2::outer_ccb_iterator, py::keep_alive<0, 1>())
+
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
@@ -140,17 +142,15 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     ;
 
   using Chcc = Aos::Ccb_halfedge_const_circulator;
-  using Chci = Chcc::Iterator;
   using Icci = Aos::Inner_ccb_const_iterator;
   using Occi = Aos::Outer_ccb_const_iterator;
+
   add_circulator<Chcc>("Ccb_halfedge_circulator", face_c);
-  add_iterator<Chci, Chci>("Ccb_halfedge_iterator", face_c);
+  add_iterator_from_circulator<Chcc>("Ccb_halfedge_iterator", face_c);
 
   add_iterator_of_circulator<Icci, Icci, Chcc>("Inner_ccb_iterator", face_c);
   add_iterator_of_circulator<Occi, Occi, Chcc>("Outer_ccb_iterator", face_c);
 
-  face_c.def("outer_ccb", &aos2::outer_ccb_circulator, py::keep_alive<0, 1>());
-  face_c.def("outer_ccb_range", &aos2::outer_ccb_iterator, py::keep_alive<0, 1>());
   face_c.def("outer_ccbs", &aos2::outer_ccbs, py::keep_alive<0, 1>());
   face_c.def("inner_ccbs", &aos2::inner_ccbs, py::keep_alive<0, 1>());
   face_c.def("holes", &aos2::inner_ccbs, py::keep_alive<0, 1>());
