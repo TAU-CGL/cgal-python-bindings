@@ -33,7 +33,7 @@ void add_circulator_impl(const char* name, C& c, Extra&&... extra) {
     ;
 }
 
-// Add (wrap) an circulator
+// Add (wrap) a circulator
 template <typename Iterator,
           typename ValueType = decltype(*std::declval<Iterator>()),
           py::rv_policy Policy = py::rv_policy::reference_internal,
@@ -63,7 +63,7 @@ void add_dereference_circulator_impl(const char* name, C& c, Extra&&... extra) {
     ;
 }
 
-// Add (wrap) an circulator
+// Add (wrap) a circulator
 template <typename Iterator,
           typename ValueType = decltype(**std::declval<Iterator>()),
           py::rv_policy Policy = py::rv_policy::reference_internal,
