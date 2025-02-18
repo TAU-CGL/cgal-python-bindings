@@ -151,9 +151,10 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   add_iterator_of_circulator<Icci, Icci, Chcc>("Inner_ccb_iterator", face_c);
   add_iterator_of_circulator<Occi, Occi, Chcc>("Outer_ccb_iterator", face_c);
 
-  face_c.def("outer_ccbs", &aos2::outer_ccbs, py::keep_alive<0, 1>());
-  face_c.def("inner_ccbs", &aos2::inner_ccbs, py::keep_alive<0, 1>());
-  face_c.def("holes", &aos2::inner_ccbs, py::keep_alive<0, 1>());
+  face_c.def("outer_ccbs", &aos2::outer_ccbs, py::keep_alive<0, 1>())
+    .def("inner_ccbs", &aos2::inner_ccbs, py::keep_alive<0, 1>())
+    .def("holes", &aos2::inner_ccbs, py::keep_alive<0, 1>())
+    ;
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
   using Si = Face::Data_const_iterator;
