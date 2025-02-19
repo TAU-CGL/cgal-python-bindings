@@ -63,7 +63,7 @@ eval "declare -a $item=('epic'                'kerEpic')";                      
 eval "declare -a $item=('ms2_conic_ccr'       'kerCcrInt_aos2Conic_pol2_ms2')";          ((i++)); item="item$i"
 eval "declare -a $item=('ms2_cs_epec'         'kerEpecInt_aos2Cs_pol2_ms2')";            ((i++)); item="item$i"
 eval "declare -a $item=('ms2_seg_epec'        'kerEpecInt_aos2SegPl_bso2_pol2_ms2_pp')"; ((i++)); item="item$i"
-eval "declare -a $item=('pol3_bso2_epec'      'kerEpecInt_bso2_pol3Wn_pol2')";           ((i++)); item="item$i"
+eval "declare -a $item=('pol3_wn_ch3_epec'    'kerEpecInt_ch3Pol3_pol3Wn')";             ((i++)); item="item$i"
 eval "declare -a $item=('pol3_ch3_epec'       'kerEpec_ch3Pol3_pol3Ker')";               ((i++)); item="item$i"
 eval "declare -a $item=('pol3_ch3_epic'       'kerEpic_ch3Pol3_pol3Ker')";               ((i++)); item="item$i"
 eval "declare -a $item=('sm_pmp_epic'         'kerEpic_sm_pmpSm')";                      ((i++)); item="item$i"
