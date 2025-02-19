@@ -58,6 +58,7 @@
 #include "CGALPY/Polyhedral_envelope.hpp"
 #include "CGALPY/pmp_helpers.hpp"
 #include "CGALPY/Internal_face_plane_3_map.hpp"
+#include "CGALPY/merge_coplanar_facets.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -808,6 +809,17 @@ auto sample_triangle_soup(const Point_3_vec& points,
   PointRange pts;
   PMP::sample_triangle_soup(points, triangles, std::back_inserter(pts), internal::parse_named_parameters(np));
   return pts;
+}
+
+//!
+template <typename PolygonMesh, typename FaceNormalMap>
+void merge_coplanar_facets(const PolygonMesh& mesh,
+                           FaceNormalMap face_normals,
+                           const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  PMP::merge_coplanar_facets(mesh, face_normals,
+                             internal::parse_pmp_np<Pm>(np)
+                             .face_normal_map(face_normals));
 }
 
 //!
@@ -1886,6 +1898,11 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>,
         py::arg("v"), py::arg("pmesh"),
+        py::arg("np") = py::dict());
+
+  m.def("merge_coplanar_facets",
+        &pmp::merge_coplanar_facets<Pm, Face_normal_map>,
+        py::arg("pmesh"), py::arg("face_normals"),
         py::arg("np") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
