@@ -183,34 +183,38 @@ endif ()
 
 # 2D Regularized Boolean operations
 if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
-    list(APPEND CGALPY_MODULES Bso2)
-    set(CGALPY_Bso2_FILTERS [=[{}]=])
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/boolean_set_operations_2_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_set_2_bindings.cpp)
-    if (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_set_2_bindings.cpp)
-    endif ()
+  if (NOT CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
+    message(WARNING "CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS not set!\nTurning off CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS")
+    set (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS OFF)
+  endif ()
 
-    # Geometry Traits
-    if (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_segment_traits_2.cpp)
-    elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_segment_traits_2.cpp)
-    elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_circle_segment_traits_2.cpp)
-    elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
-    elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS})
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
-    elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CONIC_GEOMETRY_TRAITS})
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
-    elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS})
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
-    elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS})
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
-    endif ()
+  list(APPEND CGALPY_MODULES Bso2)
+  set(CGALPY_Bso2_FILTERS [=[{}]=])
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/boolean_set_operations_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_set_2_bindings.cpp)
+  if (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_set_2_bindings.cpp)
+  endif ()
 
+  # Geometry Traits
+  if (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_segment_traits_2.cpp)
+  elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_segment_traits_2.cpp)
+  elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_circle_segment_traits_2.cpp)
+  elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
+  elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
+  elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CONIC_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
+  elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
+  elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS})
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_gps_traits_2.cpp)
+  endif ()
 endif ()
 
 # Basic viewer
@@ -751,7 +755,7 @@ nanobind_add_stub(
   PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
   MARKER_FILE py.typed
   )
-  
+
 list(APPEND CGALPY_STUBS_DEPENDS CGALPY_STUBS)
 
 foreach (MODULE IN LISTS CGALPY_MODULES)
