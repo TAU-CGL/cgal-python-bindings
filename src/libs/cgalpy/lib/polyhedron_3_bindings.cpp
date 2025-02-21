@@ -33,21 +33,21 @@
 #include <CGAL/draw_polyhedron.h>
 #endif
 
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/add_extraction.hpp"
+#include "CGALPY/add_insertion.hpp"
+// #include "CGALPY/export_mesh_iterators.hpp"
+// #include "CGALPY/export_mesh_selection_functions.hpp"
+// #include "CGALPY/export_mesh_helpers.hpp"
+// #include "CGALPY/export_mesh_partitioning_operations.hpp"
+#include "CGALPY/generator_functions.hpp"
+#include "CGALPY/get.hpp"
+#include "CGALPY/Internal_face_plane_3_map.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
-#include "CGALPY/polyhedron_3_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_circulator.hpp"
-#include "CGALPY/export_mesh_iterators.hpp"
-#include "CGALPY/get.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
-#include "CGALPY/export_mesh_selection_functions.hpp"
-#include "CGALPY/export_mesh_helpers.hpp"
-#include "CGALPY/generator_functions.hpp"
-#include "CGALPY/export_mesh_partitioning_operations.hpp"
-#include "CGALPY/Internal_face_plane_3_map.hpp"
+#include "CGALPY/polyhedron_3_types.hpp"
 
 namespace py = nanobind;
 
@@ -714,14 +714,14 @@ void export_polyhedron_3(py::module_& m) {
   // m.def("set_target", &boost_utils::set_target<Prn>);
   // m.def("normalize_border", &boost_utils::normalize_border<Prn>); ???
 
-  using Edge_bool_tag = CGAL::dynamic_edge_property_t<bool>;
-  using ebmap_type = boost::property_map<Prn, Edge_bool_tag>::type;
+  // using Edge_bool_tag = CGAL::dynamic_edge_property_t<bool>;
+  // using ebmap_type = boost::property_map<Prn, Edge_bool_tag>::type;
 
-  using Face_bool_tag = CGAL::dynamic_face_property_t<bool>;
-  using fbmap_type = boost::property_map<Prn, Face_bool_tag>::type;
+  // using Face_bool_tag = CGAL::dynamic_face_property_t<bool>;
+  // using fbmap_type = boost::property_map<Prn, Face_bool_tag>::type;
 
-  using Vertex_bool_tag = CGAL::dynamic_vertex_property_t<bool>;
-  using vbmap_type = boost::property_map<Prn, Vertex_bool_tag>::type;
+  // using Vertex_bool_tag = CGAL::dynamic_vertex_property_t<bool>;
+  // using vbmap_type = boost::property_map<Prn, Vertex_bool_tag>::type;
 
   // Euler operations
   // boost_utils::define_euler_operations<py::module_, Prn, ebmap_type>(m);
@@ -739,12 +739,12 @@ void export_polyhedron_3(py::module_& m) {
   // boost_utils::define_generate_functions<py::module_, Prn, Kernel>(m);
 
   // Partitioning Operations
-  using EdgeDoubleMap =
-    boost::property_map<Prn, CGAL::dynamic_edge_property_t<double>>::type;
-  using VertexVectorDoubleMap =
-    boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::vector<double>>>::type;
-  using VertexSizeTMap =
-    boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>::type;
+  // using EdgeDoubleMap =
+  //   boost::property_map<Prn, CGAL::dynamic_edge_property_t<double>>::type;
+  // using VertexVectorDoubleMap =
+  //   boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::vector<double>>>::type;
+  // using VertexSizeTMap =
+  //   boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>::type;
   // boost_utils::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
 
   // Halfedges around target circulator
@@ -752,7 +752,7 @@ void export_polyhedron_3(py::module_& m) {
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
   using Hati = CGAL::Halfedge_around_target_iterator<Prn>;
   add_dereference_circulator<Hatc, Halfedge&>("Halfedge_around_target_circulator", m);
-  add_dereference_iterator<Hati, Hati, Halfedge&>("Halfedge_around_target_circulator", m);
+  add_dereference_iterator<Hati, Hati, Halfedge&>("Halfedge_around_target_iterator", m);
 
   m.def("halfedges_around_target",
         &pol3::halfedges_around_target_circulator,
