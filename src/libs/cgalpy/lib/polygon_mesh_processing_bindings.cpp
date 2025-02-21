@@ -813,7 +813,7 @@ auto sample_triangle_soup(const Point_3_vec& points,
 
 //!
 template <typename PolygonMesh, typename FaceNormalMap>
-void merge_coplanar_facets(const PolygonMesh& mesh,
+void merge_coplanar_facets(PolygonMesh& mesh,
                            FaceNormalMap face_normals,
                            const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
