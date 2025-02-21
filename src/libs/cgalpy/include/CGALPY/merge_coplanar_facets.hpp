@@ -64,10 +64,10 @@ bool uf_join_faces(FaceDescriptor f1, FaceDescriptor f2,
  */
 template <typename PolygonMesh, typename FaceNormalMap,
           typename NamedParameters = parameters::Default_named_parameters>
-void merge_coplanar_facets(const PolygonMesh& mesh,
-                          FaceNormalMap normals,
-                          const NamedParameters& np =
-                            parameters::default_values()) {
+void merge_coplanar_facets(PolygonMesh& mesh,
+                           FaceNormalMap normals,
+                           const NamedParameters& np =
+                             parameters::default_values()) {
   using Pm = PolygonMesh;
   using Np = NamedParameters;
   using Kernel = typename CGAL::GetGeomTraits<Pm, Np>::type;
@@ -86,37 +86,37 @@ void merge_coplanar_facets(const PolygonMesh& mesh,
   auto eq = kernel.equal_3_object();
 
   // Group coplanar facets in subsets
-  // for (auto ed : CGAL::edges(mesh)) {
-  //   auto hd = CGAL::halfedge(ed, mesh);
-  //   auto fd = CGAL::face(hd, mesh);
-  //   auto oed = CGAL::opposite(hd, mesh);
-  //   auto ofd = CGAL::face(oed, mesh);
-  //   const auto& dir = get(normals, fd).direction();
-  //   const auto& odir = get(normals, ofd).direction();
-  //   if ((fd != ofd) && eq(dir, odir)) {
-  //      if (uf_join_faces(fd, ofd, uf_faces, uf_handles)) hds.emplace_back(hd);
-  //   }
-  // }
-  // for (auto hd : hds) CGAL::Euler::join_face(hd, mesh);
+  for (auto ed : CGAL::edges(mesh)) {
+    auto hd = CGAL::halfedge(ed, mesh);
+    auto fd = CGAL::face(hd, mesh);
+    auto oed = CGAL::opposite(hd, mesh);
+    auto ofd = CGAL::face(oed, mesh);
+    const auto& dir = get(normals, fd).direction();
+    const auto& odir = get(normals, ofd).direction();
+    if ((fd != ofd) && eq(dir, odir)) {
+       if (uf_join_faces(fd, ofd, uf_faces, uf_handles)) hds.emplace_back(hd);
+    }
+  }
+  for (auto hd : hds) CGAL::Euler::join_face(hd, mesh);
 
   // Traverse all vertices and remove antenas.
-  // bool done;
-  // do {
-  //   done = true;
-  //   for (auto vd : CGAL::vertices(mesh)) {
-  //     if (CGAL::degree(vd, mesh) != 1) continue;
-  //     auto hd = CGAL::halfedge(vd, mesh);
-  //     CGAL::Euler::remove_center_vertex(hd, mesh);
-  //     done = false;
-  //   }
-  // } while (! done);
+  bool done;
+  do {
+    done = true;
+    for (auto vd : CGAL::vertices(mesh)) {
+      if (CGAL::degree(vd, mesh) != 1) continue;
+      auto hd = CGAL::halfedge(vd, mesh);
+      CGAL::Euler::remove_center_vertex(hd, mesh);
+      done = false;
+    }
+  } while (! done);
 
-  // // Traverse all vertices and remove vertices of degree 2.
-  // for (auto vd : CGAL::vertices(mesh)) {
-  //   if (CGAL::degree(vd, mesh) != 2) continue;
-  //   auto hd = CGAL::halfedge(vd, mesh);
-  //   CGAL::Euler::join_vertex(CGAL::opposite(hd, mesh), mesh);
-  // }
+  // Traverse all vertices and remove vertices of degree 2.
+  for (auto vd : CGAL::vertices(mesh)) {
+    if (CGAL::degree(vd, mesh) != 2) continue;
+    auto hd = CGAL::halfedge(vd, mesh);
+    CGAL::Euler::join_vertex(CGAL::opposite(hd, mesh), mesh);
+  }
 }
 
 }
