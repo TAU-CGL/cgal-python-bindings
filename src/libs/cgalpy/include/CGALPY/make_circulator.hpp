@@ -18,11 +18,11 @@ namespace py = nanobind;
 
 //
 template <py::rv_policy Policy,
-          typename Iterator, typename ValueType,
+          typename Circulator, typename ValueType,
           typename... Extra,
           typename C>
 void add_circulator_impl(const char* name, C& c, Extra&&... extra) {
-  using state = circulator_state<Iterator>;
+  using state = circulator_state<Circulator>;
   if (add_attr<state>(c, name)) return;
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -38,13 +38,13 @@ void add_circulator_impl(const char* name, C& c, Extra&&... extra) {
 }
 
 // Add (wrap) a circulator
-template <typename Iterator,
-          typename ValueType = decltype(*std::declval<Iterator>()),
+template <typename Circulator,
+          typename ValueType = decltype(*std::declval<Circulator>()),
           py::rv_policy Policy = py::rv_policy::reference_internal,
           typename... Extra,
           typename C>
 void add_circulator(const char* name, C& c, Extra&&... extra) {
-  add_circulator_impl<Policy, Iterator, ValueType,
+  add_circulator_impl<Policy, Circulator, ValueType,
                       Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
@@ -52,11 +52,11 @@ void add_circulator(const char* name, C& c, Extra&&... extra) {
 // circulator is a handle; in such cases we need to return the dereference
 // of the handle; thus the double application of the dereference operator.
 template <py::rv_policy Policy,
-          typename Iterator, typename ValueType,
+          typename Circulator, typename ValueType,
           typename... Extra,
           typename C>
 void add_dereference_circulator_impl(const char* name, C& c, Extra&&... extra) {
-  using state = circulator_state<Iterator>;
+  using state = circulator_state<Circulator>;
   if (add_attr<state>(c, name)) return;
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -64,25 +64,29 @@ void add_dereference_circulator_impl(const char* name, C& c, Extra&&... extra) {
     .def("__iter__", [](state& s) -> state& { return s; }, ri)
     .def("__next__", [](state& s) -> ValueType { return **s.it++; },
       std::forward<Extra>(extra)..., Policy)
+    .def("size",
+         [](const state& s)->std::size_t {
+           return CGAL::circulator_size(s.it);
+         })
     ;
 }
 
 // Add (wrap) a circulator
-template <typename Iterator,
-          typename ValueType = decltype(**std::declval<Iterator>()),
+template <typename Circulator,
+          typename ValueType = decltype(**std::declval<Circulator>()),
           py::rv_policy Policy = py::rv_policy::reference_internal,
           typename... Extra,
           typename C>
 void add_dereference_circulator(const char* name, C& c, Extra&&... extra) {
-  add_dereference_circulator_impl<Policy, Iterator, ValueType,
+  add_dereference_circulator_impl<Policy, Circulator, ValueType,
                                   Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
 // Obtain a Python circulator
-template <typename Iterator>
-py::object make_circulator(Iterator begin) {
-  using state = circulator_state<Iterator>;
-  return py::cast(state{begin, true, false});
+template <typename Circulator>
+py::object make_circulator(Circulator begin) {
+  using state = circulator_state<Circulator>;
+  return py::cast(state{begin});
 }
 
 #endif
