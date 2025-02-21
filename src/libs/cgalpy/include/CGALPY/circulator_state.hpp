@@ -9,11 +9,9 @@
 #ifndef CGALPY_CIRCULATOR_STATE_HPP
 #define CGALPY_CIRCULATOR_STATE_HPP
 
-template <typename Iterator>
+template <typename Circulator>
 struct circulator_state {
-  Iterator it;
-  bool first;
-  bool done;
+  Circulator it;
 };
 
 #endif
