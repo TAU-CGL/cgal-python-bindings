@@ -20,19 +20,26 @@ void export_2d_range_and_neighbor_search(py::module_&);
 void export_3d_point_set(py::module_&);
 void export_alpha_shape_2(py::module_&);
 void export_alpha_shape_3(py::module_&);
+void export_approximate_kernel(py::module_& m);
 void export_arrangement_on_surface_2(py::module_&);
+void export_basic_viewer(py::module_& m);
 void export_boolean_set_operations_2(py::module_&);
 void export_bounding_volumes(py::module_&);
+void export_cgal(py::module_& m);
 void export_connected_components(py::module_&);
 void export_convex_hull_2(py::module_&);
 void export_convex_hull_3(py::module_&);
 void export_corefinement(py::module_&);
+void export_efficient_ransac(py::module_&);
 void export_envelope_2(py::module_&);
 void export_envelope_3(py::module_&);
+void export_geometric_object_generators(py::module_& m);
 void export_general_polygon_set_2(py::module_&);
 void export_intersections(py::module_&);
 void export_kernel_module(py::module_&);
 void export_kernel_d(py::module_&);
+void export_kinetic_surface_reconstruction(py::module_&);
+void export_meshing(py::module_&);
 void export_minkowski_sum_2(py::module_&);
 void export_object(py::module_&);
 void export_orientation_functions(py::module_&);
@@ -41,26 +48,20 @@ void export_point_set_processing(py::module_&);
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
 void export_polygon_mesh_processing(py::module_&);
-void export_triangulated_surface_mesh_segmentation(py::module_&);
-void export_triangulated_surface_mesh_simplification(py::module_&);
-void export_triangulated_surface_mesh_skeletonization(py::module_&);
-void export_kinetic_surface_reconstruction(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
+void export_region_growing(py::module_&);
 void export_spatial_searching(py::module_&);
 void export_surface_mesh(py::module_&);
 void export_surface_sweep_2(py::module_&);
-void export_efficient_ransac(py::module_&);
-void export_region_growing(py::module_&);
-void export_meshing(py::module_&);
+void export_tools(py::module_& m);
+void export_triangulated_surface_mesh_segmentation(py::module_&);
+void export_triangulated_surface_mesh_simplification(py::module_&);
+void export_triangulated_surface_mesh_skeletonization(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
 void export_visibility_2(py::module_&);
-void export_cgal(py::module_& m);
-void export_tools(py::module_& m);
-void export_approximate_kernel(py::module_& m);
-void export_basic_viewer(py::module_& m);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
 
@@ -245,4 +246,8 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_basic_viewer(bvr_m);
 #endif
 
+#ifdef CGALPY_GEOMETRIC_OBJECT_GENERATORS_BINDINGS
+  auto gog_m = m.def_submodule("Gog");
+  export_geometric_object_generators(gog_m);
+#endif
 }

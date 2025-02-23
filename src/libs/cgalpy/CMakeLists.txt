@@ -382,6 +382,12 @@ if (CGALPY_VISIBILITY_2_BINDINGS)
     list(APPEND CGALPY_MODULES Vis2)
     set(CGALPY_Vis2_FILTERS [=[{}]=])
 endif ()
+# Geometric object generators
+if (CGALPY_GEOMETRIC_OBJECT_GENERATORS_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/geometric_object_generators_bindings.cpp)
+    list(APPEND CGALPY_MODULES Gog)
+    set(CGALPY_Gog_FILTERS [=[{}]=])
+endif ()
 
 # Add all include directories
 include_directories(include)
@@ -523,6 +529,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     # Basic viewer
     if (CGALPY_BASIC_VIEWER_BINDINGS)
         get_basic_viewer_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Geometric object generators
+    if (CGALPY_GEOMETRIC_OBJECT_GENERATORS_BINDINGS)
+        get_geometric_object_generators_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
 endif ()

@@ -9,7 +9,7 @@
 
 #include <nanobind/nanobind.h>
 
-#include <CGAL/Cartesian.h>
+#include <CGAL/Simple_cartesian.h>
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/Kernel/export_kernel.hpp"
@@ -17,7 +17,7 @@
 namespace py = nanobind;
 
 void export_approximate_kernel(py::module_& m) {
-  using Ak = CGAL::Cartesian<double>;
+  using Ak = CGAL::Simple_cartesian<double>;
 
   if (! add_attr<Ak>(m, "Approximate_kernel")) {
     py::class_<Ak> ker_c(m, "Approximate_kernel");
