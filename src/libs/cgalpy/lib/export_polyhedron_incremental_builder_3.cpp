@@ -35,13 +35,19 @@ void export_polyhedron_incremental_builder_3(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
   if (! add_attr<Pib>(m, "Polyhedron_incremental_builder_3")) {
     py::class_<Pib>(m, "Polyhedron_incremental_builder_3")
-      .def(py::init<Hds&, bool>())
-      .def("begin_surface", &Pib::begin_surface)
+      .def(py::init<Hds&, bool>(), py::arg("hds"), py::arg("verbose") = false)
+      .def("begin_surface", &Pib::begin_surface,
+           py::arg("v"), py::arg("f"), py::arg("h") = 0,
+           py::arg("mode") = 0)
       .def("end_surface", &Pib::end_surface)
       .def("begin_facet", &pol3::begin_facet, ri)
       .def("end_facet", &pol3::end_facet, ri)
       .def("add_vertex", &pol3::add_vertex, ri)
       .def("add_vertex_to_facet", &Pib::add_vertex_to_facet)
+      .def_prop_ro_static("RELATIVE_INDEXING",
+                          [](py::handle) { return Pib::RELATIVE_INDEXING; })
+      .def_prop_ro_static("ABSOLUTE_INDEXING",
+                          [](py::handle) { return Pib::ABSOLUTE_INDEXING; })
       ;
   }
 }
