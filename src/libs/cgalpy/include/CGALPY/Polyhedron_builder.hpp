@@ -30,7 +30,7 @@ public:
   void set_data(py::object data) { m_data = data; }
 
   void operator()(Halfedge_ds& hds)
-  { if (! m_operator.is_none()) m_operator(hds, m_data); }
+  { if (! m_operator.is_none()) m_operator(&hds, m_data); }
 
   py::object data() const { return m_data; }
 };
