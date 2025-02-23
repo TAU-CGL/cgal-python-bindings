@@ -76,6 +76,8 @@ using Halfedge_around_facet_circulator =
 using Halfedge_around_facet_const_circulator =
   Polyhedron_3::Halfedge_around_facet_const_circulator;
 
+using Halfedge_ds = Polyhedron_3::HalfedgeDS;
+
 }
 
 #endif

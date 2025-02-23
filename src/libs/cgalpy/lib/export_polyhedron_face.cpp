@@ -30,8 +30,10 @@ auto halfedges_around_facet_circulator(const Face& f)
 auto halfedges_around_facet_iterator(const Face& f)
 { return make_iterator(f.facet_begin(), f.facet_begin()); }
 
+}
+
 // Export Polyhedron Face
-void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c) {
+void export_polyhedron_face(py::class_<pol3::Polyhedron_3>& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Face = Prn::Face;
   using Plane_3 = Prn::Plane_3;
@@ -82,6 +84,4 @@ void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c) {
   if constexpr(pol3::face_with_id())
     face_c.def("id", [](const Face& f){ return f.id(); });
 #endif
-}
-
 }

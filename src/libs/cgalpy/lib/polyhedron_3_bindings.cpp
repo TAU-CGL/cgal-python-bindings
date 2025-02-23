@@ -49,13 +49,17 @@
 #include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
 
+extern void export_polyhedron_traits_with_normals_3(py::module_& m);
+extern void export_polyhedron_halfedge_ds(py::module_& m);
+extern void export_polyhedron_incremental_builder_3(py::module_& m);
+extern void export_polyhedron_builder(py::module_& m);
+extern void export_polyhedron_vertex(py::class_<pol3::Polyhedron_3>& prn_c);
+extern void export_polyhedron_halfedge(py::class_<pol3::Polyhedron_3>& prn_c);
+extern void export_polyhedron_face(py::class_<pol3::Polyhedron_3>& prn_c);
+
 namespace py = nanobind;
 
 namespace pol3 {
-
-extern void export_polyhedron_vertex(py::class_<Polyhedron_3>& prn_c);
-extern void export_polyhedron_halfedge(py::class_<Polyhedron_3>& prn_c);
-extern void export_polyhedron_face(py::class_<Polyhedron_3>& prn_c);
 
 //!
 template <typename MapType>
@@ -333,14 +337,14 @@ Halfedge& make_tetrahedron2(Polyhedron_3& prn)
 bool is_tetrahedron(const Polyhedron_3& prn, const Halfedge& h)
 { return prn.is_tetrahedron(Halfedge_const_handle(&h)); }
 
+//
 auto make_triangle_empty(Polyhedron_3& prn)
 { return prn.make_triangle(); }
 
-auto make_triangle(Polyhedron_3& prn, const typename Polyhedron_3::Point& p1,
-                   const typename Polyhedron_3::Point& p2,
-                   const typename Polyhedron_3::Point& p3) {
-  return prn.make_triangle(p1, p2, p3);
-}
+//
+auto make_triangle(Polyhedron_3& prn, const Point_3& p1,
+                   const Point_3& p2, const Point_3& p3)
+{ return prn.make_triangle(p1, p2, p3); }
 
 /// \name Iterators
 /// @{
@@ -446,17 +450,6 @@ void face_put(const PropertyMap& pm,
 
 } // namespace pol3
 
-// Export Polyhedron_traits_with_normals_3
-void export_polyhedron_traits_with_normals(py::module_& m) {
-  using Traits = CGAL::Polyhedron_traits_with_normals_3<Kernel>;
-  if (! add_attr<Traits>(m, "Polyhedron_traits_with_normals_3")) {
-    py::class_<Traits>(m, "Polyhedron_traits_with_normals_3")
-      .def(py::init<>())
-      .def(py::init<const Kernel&>())
-      ;
-  }
-}
-
 /*! export Internal_face_plane_3_map
  */
 void export_internal_face_plane_3_map(py::module_& m) {
@@ -489,7 +482,10 @@ void export_polyhedron_3(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
   constexpr auto ref(py::rv_policy::reference);
 
-  export_polyhedron_traits_with_normals(m);
+  export_polyhedron_traits_with_normals_3(m);
+  export_polyhedron_halfedge_ds(m);
+  export_polyhedron_incremental_builder_3(m);
+  export_polyhedron_builder(m);
   export_internal_face_plane_3_map(m);
 
   // define_generate_functions<py::module_, Prn, Kernel>(m); // doesn't work for polyhedron
@@ -539,6 +535,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("split_vertex", &Prn::split_vertex)
       .def("make_triangle", &pol3::make_triangle_empty)
       .def("make_triangle", &pol3::make_triangle)
+      .def("delegate", &Prn::delegate)
 
       // .def("is_pure_quad", &Prn::is_pure_quad)
       // .def("is_pure_bivalent", &Prn::is_pure_bivalent)

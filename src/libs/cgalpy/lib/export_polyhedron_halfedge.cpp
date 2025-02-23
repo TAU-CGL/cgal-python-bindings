@@ -25,8 +25,10 @@ const Face& face(const Halfedge& h) { return *(h.face()); }
 const Face& facet(const Halfedge& h) { return *(h.facet()); }
 const Vertex& vertex(const Halfedge& h) { return *(h.vertex()); }
 
+}
+
 // Export Polyhedron Halfedge
-void export_polyhedron_halfedge(py::class_<Polyhedron_3>& prn_c) {
+void export_polyhedron_halfedge(py::class_<pol3::Polyhedron_3>& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Halfedge = Prn::Halfedge;
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -37,7 +39,7 @@ void export_polyhedron_halfedge(py::class_<Polyhedron_3>& prn_c) {
   halfedge_c.def(py::init<>())
     .def("facet", &pol3::facet, ri)
     .def("face", &pol3::face, ri)
-    .def("facet_degree", [](const Halfedge& h){ return h.facet_degree(); })
+    .def("facet_degree", [](const Halfedge& h) { return h.facet_degree(); })
     .def("is_border", [](const Halfedge& h) { return h.is_border(); })
     .def("is_border_edge", [](const Halfedge& h) { return h.is_border_edge(); })
     .def("is_quad", [](const Halfedge& h) { return h.is_quad(); })
@@ -60,6 +62,5 @@ void export_polyhedron_halfedge(py::class_<Polyhedron_3>& prn_c) {
     .def("data", [](const Halfedge& h)->py::object { return h.data(); })
 #endif
     ;
-}
 
 }
