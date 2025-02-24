@@ -710,29 +710,41 @@ auto sample_triangle_soup(const Point_3_vec& points,
 template <typename PolygonMesh, typename FaceNormalMap>
 void merge_coplanar_facets(PolygonMesh& mesh,
                            FaceNormalMap face_normals,
-                           const py::dict& np = py::dict()) {
+                           const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  PMP::merge_coplanar_facets(mesh, face_normals,
-                             internal::parse_pmp_np<Pm>(np));
+  for (const auto& item : params) {
+    const std::string& key = py::cast<std::string>(item.first);
+    if (key == "geom_traits") {
+      auto np = CGAL::parameters::geom_traits(py::cast<const Kernel&>(item.second));
+      return PMP::merge_coplanar_facets(mesh, face_normals, np);
+    }
+  }
+  PMP::merge_coplanar_facets(mesh, face_normals);
 }
 
 //!
 template <typename PolygonMesh>
 Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::face_descriptor& f,
                              const PolygonMesh& mesh,
-                             const py::dict& np = py::dict()) {
+                             const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_face_normal(f, mesh, internal::parse_pmp_np<Pm>(np));
+  return PMP::compute_face_normal(f, mesh, internal::parse_pmp_np<Pm>(params));
 }
 
 //!
 template <typename PolygonMesh, typename FaceNormalMap>
 auto compute_face_normals(const PolygonMesh& mesh,
                           FaceNormalMap face_normals,
-                          const py::dict& np = py::dict()) {
+                          const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_face_normals(mesh, face_normals,
-                                   internal::parse_pmp_np<Pm>(np));
+  for (const auto& item : params) {
+    const std::string& key = py::cast<std::string>(item.first);
+    if (key == "geom_traits") {
+      auto np = CGAL::parameters::geom_traits(py::cast<const Kernel&>(item.second));
+      return PMP::compute_face_normals(mesh, face_normals, np);
+    }
+  }
+  return PMP::compute_face_normals(mesh, face_normals);
 }
 
 //!
