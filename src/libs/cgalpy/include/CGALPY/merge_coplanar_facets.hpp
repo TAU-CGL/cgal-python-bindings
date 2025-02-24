@@ -68,9 +68,10 @@ void merge_coplanar_facets(PolygonMesh& mesh,
                            FaceNormalMap normals,
                            const NamedParameters& np =
                              parameters::default_values()) {
+  namespace parms = CGAL::parameters;
+
   using Pm = PolygonMesh;
   using Np = NamedParameters;
-  using Kernel = typename CGAL::GetGeomTraits<Pm, Np>::type;
   using Graph_traits = boost::graph_traits<Pm>;
   using halfedge_descriptor = typename Graph_traits::halfedge_descriptor;
   using face_descriptor = typename Graph_traits::face_descriptor;
@@ -81,7 +82,10 @@ void merge_coplanar_facets(PolygonMesh& mesh,
   std::list<halfedge_descriptor> hds;
 
   //! \todo Pass the kernel via the named-parameters.
-  Kernel kernel;
+  using Kernel = typename CGAL::GetGeomTraits<Pm, Np>::type;
+  const auto& param = parms::get_parameter(np, CGAL::internal_np::geom_traits);
+  // const auto& kernel = parms::choose_parameter<const Kernel&>(param);
+  auto kernel = parms::choose_parameter<Kernel>(param);
 
   auto eq = kernel.equal_3_object();
 

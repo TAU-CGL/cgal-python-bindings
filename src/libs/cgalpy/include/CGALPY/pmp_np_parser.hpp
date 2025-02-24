@@ -36,8 +36,10 @@ Named_params handle_vertex_principal_curvatures_and_directions(const py::handle&
 }
 
 //!
-template<typename Mesh>
-auto parse_pmp_np(const py::dict& params, Named_params cgal_parameters = CGAL::parameters::verbose(false)) {
+template <typename Mesh>
+auto parse_pmp_np(const py::dict& params,
+                  Named_params cgal_parameters =
+                    CGAL::parameters::verbose(false)) {
   using Vd = typename boost::graph_traits<Mesh>::vertex_descriptor;
   using Fd = typename boost::graph_traits<Mesh>::face_descriptor;
   using Hd = typename boost::graph_traits<Mesh>::halfedge_descriptor;
@@ -46,12 +48,17 @@ auto parse_pmp_np(const py::dict& params, Named_params cgal_parameters = CGAL::p
   for (const auto& item : params) {
     const std::string key = py::cast<std::string>(item.first);
     switch (internal::Hash(key.c_str())) {
-      case internal::Hash("allow_move_functor"):
-        cgal_parameters = cgal_parameters.allow_move_functor(py::cast<std::function<bool(Vd, Point, Point)>>(item.second));
-        break;
-      case internal::Hash("vertex_principal_curvatures_and_directions"):
-        cgal_parameters = handle_vertex_principal_curvatures_and_directions<Kernel>(item.second, cgal_parameters);
-        break;
+     case internal::Hash("geom_traits"):
+      cgal_parameters = cgal_parameters.geom_traits(item.second);
+      break;
+
+     case internal::Hash("allow_move_functor"):
+      cgal_parameters = cgal_parameters.allow_move_functor(py::cast<std::function<bool(Vd, Point, Point)>>(item.second));
+      break;
+
+     case internal::Hash("vertex_principal_curvatures_and_directions"):
+      cgal_parameters = handle_vertex_principal_curvatures_and_directions<Kernel>(item.second, cgal_parameters);
+      break;
       // case internal::Hash("vertex_point_map"):
       //   cgal_parameters = cgal_parameters.vertex_point_map(py::cast<typename Mesh::template Property_map<Vd, Point>>(item.second));
       //   break;
