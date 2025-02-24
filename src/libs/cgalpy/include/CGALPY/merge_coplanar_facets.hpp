@@ -84,7 +84,6 @@ void merge_coplanar_facets(PolygonMesh& mesh,
   //! \todo Pass the kernel via the named-parameters.
   using Kernel = typename CGAL::GetGeomTraits<Pm, Np>::type;
   const auto& param = parms::get_parameter(np, CGAL::internal_np::geom_traits);
-  // const auto& kernel = parms::choose_parameter<const Kernel&>(param);
   auto kernel = parms::choose_parameter<Kernel>(param);
 
   auto eq = kernel.equal_3_object();
