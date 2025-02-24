@@ -24,7 +24,8 @@ namespace gog {
 
 using Ak = CGAL::Cartesian<double>;
 using Approximate_point_2 = Ak::Point_2;
-using Creator = CGAL::Creator_uniform_2<FT, Approximate_point_2>;
+using Approximate_ft = Ak::FT;
+using Creator = CGAL::Creator_uniform_2<Approximate_ft, Approximate_point_2>;
 using Random_points_in_disc_2 =
   CGAL::Random_points_in_disc_2<Approximate_point_2, Creator>;
 
