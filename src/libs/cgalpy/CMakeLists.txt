@@ -650,9 +650,11 @@ if (NOT SKBUILD)
 
       # Configure the __init__.py file to automatically load the dependant
       # shared ibraries, when the binding library is loaded (upon "import").
-      if (NOT Boost_LIBRARY_DIRS)
-        message(FATAL_ERROR "Boost libraries not found")
-      endif ()
+	  
+      # only boost headers are used; no need for libraries
+      #if (NOT Boost_LIBRARY_DIRS)
+      #  message(FATAL_ERROR "Boost libraries not found")
+      #endif ()
       if (NOT GMP_LIBRARY_DIR)
         message(FATAL_ERROR "Gmp library not found")
       endif ()
