@@ -10,7 +10,7 @@
 
 #include <nanobind/nanobind.h>
 
-#include <CGAL/Simple_cartesian.h>
+#include <CGAL/Cartesian.h>
 #include <CGAL/function_objects.h>
 #include <CGAL/point_generators_2.h>
 // #include <CGAL/algorithm.h>
@@ -22,7 +22,7 @@
 
 namespace gog {
 
-using Ak = CGAL::Simple_cartesian<double>;
+using Ak = CGAL::Cartesian<double>;
 using Approximate_point_2 = Ak::Point_2;
 using Creator = CGAL::Creator_uniform_2<FT, Approximate_point_2>;
 using Random_points_in_disc_2 =
