@@ -117,6 +117,9 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
     .def("target", &aos2::Curve_2::target, ri)
     ;
 
+  add_insertion(cv_c, "__str__");
+  add_insertion(cv_c, "__repr__");
+
   add_attr<Gt::Rational_point_2>(traits_c, "Rational_point_2");
   add_attr<Gt::Rational_segment_2>(traits_c, "Rational_segment_2");
   add_attr<Gt::Rational_circle_2>(traits_c, "Rational_circle_2");
