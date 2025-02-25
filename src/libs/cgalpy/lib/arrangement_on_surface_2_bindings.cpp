@@ -702,7 +702,7 @@ void export_aos(py::module_& m) {
   py::class_<Aos> aos_c(m, "Arrangement_on_surface_2");
   aos_c.def(py::init<>())
     .def(py::init<const Aos&>())
-    .def(py::init<const Gt*>())
+    .def(py::init<const Gt*>(), py::keep_alive<1, 2>())
     .def("geometry_traits", &aos2::geometry_traits, ri)
     .def("topology_traits", &aos2::topology_traits, ri)
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS) || \
@@ -798,7 +798,7 @@ void export_aos_with_history(py::module_& m) {
   py::class_<Aos_wh, Aos> awh_c(m, "Arrangement_on_surface_with_history_2");
   awh_c.def(py::init<>())
     .def(py::init<const Aos_wh&>())
-    .def(py::init<const Gt*>())
+    .def(py::init<const Gt*>(), py::keep_alive<1, 2>())
     .def("number_of_originating_curves", &aos2::number_of_originating_curves)
     .def("originating_curves", &aos2::originating_curves, py::keep_alive<0, 1>())
     .def("number_of_curves", &Aos_wh::number_of_curves)
@@ -889,7 +889,7 @@ void export_arr(py::module_& m) {
     py::class_<Arr, Aos> arr_c(m, "Arrangement_2");
     arr_c.def(py::init<>())
       .def(py::init<const Arr&>())
-      .def(py::init<const Gt*>())
+      .def(py::init<const Gt*>(), py::keep_alive<1, 2>())
       .def("unbounded_face", &aos2::unbounded_face<Arr>, ri)
       .def("number_of_vertices_at_infinity", &Arr::number_of_vertices_at_infinity)
       ;
@@ -933,7 +933,7 @@ void export_arr_with_history(py::module_& m) {
   py::class_<Arr_wh, Aos_wh> awh_c(m, "Arrangement_with_history_2");
   awh_c.def(py::init<>())
     .def(py::init<const Arr_wh&>())
-    .def(py::init<const Gt*>())
+    .def(py::init<const Gt*>(), py::keep_alive<1, 2>())
     .def("unbounded_face", &aos2::unbounded_face<Arr_wh>, ri)
     ;
 
