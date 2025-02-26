@@ -23,7 +23,7 @@ void export_polyhedron_traits_with_normals_3(py::module_& m) {
   if (! add_attr<Traits>(m, "Polyhedron_traits_with_normals_3")) {
     py::class_<Traits>(m, "Polyhedron_traits_with_normals_3")
       .def(py::init<>())
-      .def(py::init<const Kernel&>())
+      .def(py::init<const Kernel&>(), py::keep_alive<1, 2>())
       ;
   }
 }

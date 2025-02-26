@@ -17,4 +17,4 @@ using Polygonal_mesh = Poly_mesh<CGALPY_CH3_POLYGONAL_MESH>::type;
 
 }
 
-#endif //CGALPY_CONVEX_HULL_2_TYPES_HPP
+#endif

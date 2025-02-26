@@ -304,23 +304,75 @@ const Vertex& target_h(Halfedge& h, const Polyhedron_3& p) {
 }
 
 // Read a surface mesh from a file.
-template <typename Polyhedron_3>
+void read_polygon_mesh_impl(const std::string& filename,
+                            Polyhedron_3& prn,
+                            const py::dict& params = py::dict()) {
+  using Prn = pol3::Polyhedron_3;
+
+  bool res = true;
+  auto np1 = CGAL::parameters::default_values();
+  bool verbose_found = false;
+  for (const auto& item1 : params) {
+    const std::string& key = py::cast<std::string>(item1.first);
+    if (key == "verbose") {
+      verbose_found = true;
+      auto verbose_np = np1.verbose(py::cast<bool>(item1.second));
+      bool rps_found = false;
+      for (const auto& item2 : params) {
+        const std::string& key = py::cast<std::string>(item2.first);
+        if (key == "repair_polygon_soup") {
+          rps_found = true;
+          auto rps_np = verbose_np.repair_polygon_soup(py::cast<bool>(item2.second));
+          res = CGAL::IO::read_polygon_mesh(filename, prn, rps_np);
+          break;
+        }
+      }
+      if (! rps_found) {
+        res = CGAL::IO::read_polygon_mesh(filename, prn, verbose_np);
+      }
+    }
+    break;
+  }
+  if (! verbose_found) {
+    bool rps_found = false;
+    for (const auto& item2 : params) {
+      const std::string& key = py::cast<std::string>(item2.first);
+      if (key == "repair_polygon_soup") {
+        rps_found = true;
+        auto rps_np = np1.repair_polygon_soup(py::cast<bool>(item2.second));
+        res = CGAL::IO::read_polygon_mesh(filename, prn, rps_np);
+        break;
+      }
+    }
+    if (! rps_found) {
+      res = CGAL::IO::read_polygon_mesh(filename, prn, np1);
+    }
+  }
+
+  if (! res) throw std::runtime_error("Cannot read file!");
+}
+
+// Read a polyhedron from a file.
 Polyhedron_3 read_polygon_mesh(const std::string& filename,
-                               const py::dict& np = py::dict()) {
-  using Prn = Polyhedron_3;
-  Prn pol;
-  if (! CGAL::IO::read_polygon_mesh(filename, pol,
-                                    internal::parse_named_parameters(np)))
-    throw std::runtime_error("Cannot read file!");
-  return pol;
+                               const py::dict& params = py::dict()) {
+  Polyhedron_3 prn;
+  read_polygon_mesh_impl(filename, prn, params);
+  return prn;
+}
+
+// Read a polyhedron from a file.
+Polyhedron_3 read_polygon_mesh_with_traits(const std::string& filename,
+                                           const Traits& traits,
+                                           const py::dict& params = py::dict()) {
+  Polyhedron_3 prn(traits);
+  read_polygon_mesh_impl(filename, prn, params);
+  return prn;
 }
 
 // Write a surface mesh to a file.
-template <typename Polyhedron_3>
 bool write_polygon_mesh(std::string fname, const Polyhedron_3& pm,
-                        const py::dict& np = py::dict()) {
-  return CGAL::IO::write_polygon_mesh(fname, pm,
-                                      internal::parse_named_parameters(np));
+                        const py::dict& params = py::dict()) {
+  return CGAL::IO::write_polygon_mesh(fname, pm);
 }
 
 //
@@ -576,10 +628,13 @@ void export_polyhedron_3(py::module_& m) {
   { CGAL::draw(prn, title); });
 #endif
 
-  m.def("read_polygon_mesh", &pol3::read_polygon_mesh<Prn>,
-        py::arg("filename"), py::arg("np") = py::dict());
-  m.def("write_polygon_mesh", &pol3::write_polygon_mesh<Prn>,
-        py::arg("filename"), py::arg("pm"), py::arg("np") = py::dict());
+  m.def("read_polygon_mesh", &pol3::read_polygon_mesh,
+        py::arg("filename"), py::arg("params") = py::dict());
+  m.def("read_polygon_mesh_with_traits", &pol3::read_polygon_mesh_with_traits,
+        py::arg("filename"), py::arg("traits"), py::arg("params") = py::dict(),
+        py::keep_alive<0, 2>());
+  m.def("write_polygon_mesh", &pol3::write_polygon_mesh,
+        py::arg("filename"), py::arg("pm"), py::arg("params") = py::dict());
 
   pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map", "Vertex_incident_patches_map");
 
