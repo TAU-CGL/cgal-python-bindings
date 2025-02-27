@@ -161,7 +161,69 @@ public:
   {}
 
   // Destruct
-  ~Arr_observer() {}
+  ~Arr_observer() {
+    m_before_assign = py::none();
+    m_after_assign = py::none();
+    m_before_clear = py::none();
+    m_after_clear = py::none();
+    m_before_global_change = py::none();
+    m_after_global_change = py::none();
+    m_before_attach = py::none();
+    m_after_attach = py::none();
+    m_before_detach = py::none();
+    m_after_detach = py::none();
+    m_before_create_vertex = py::none();
+    m_after_create_vertex = py::none();
+    m_before_create_boundary_vertex1 = py::none();
+    m_before_create_boundary_vertex2 = py::none();
+    m_after_create_boundary_vertex = py::none();
+    m_before_create_edge = py::none();
+    m_after_create_edge = py::none();
+    m_before_modify_vertex = py::none();
+    m_after_modify_vertex = py::none();
+    m_before_modify_edge = py::none();
+    m_after_modify_edge = py::none();
+    m_before_split_edge = py::none();
+    m_after_split_edge = py::none();
+    m_before_split_fictitious_edge = py::none();
+    m_after_split_fictitious_edge = py::none();
+    m_before_split_face = py::none();
+    m_after_split_face = py::none();
+    m_before_split_outer_ccb = py::none();
+    m_after_split_outer_ccb = py::none();
+    m_before_split_inner_ccb = py::none();
+    m_after_split_inner_ccb = py::none();
+    m_before_add_outer_ccb = py::none();
+    m_after_add_outer_ccb = py::none();
+    m_before_add_inner_ccb = py::none();
+    m_after_add_inner_ccb = py::none();
+    m_before_add_isolated_vertex = py::none();
+    m_after_add_isolated_vertex = py::none();
+    m_before_merge_edge = py::none();
+    m_after_merge_edge = py::none();
+    m_before_merge_fictitious_edge = py::none();
+    m_after_merge_fictitious_edge = py::none();
+    m_before_merge_face = py::none();
+    m_after_merge_face = py::none();
+    m_before_merge_outer_ccb = py::none();
+    m_after_merge_outer_ccb = py::none();
+    m_before_merge_inner_ccb = py::none();
+    m_after_merge_inner_ccb = py::none();
+    m_before_move_outer_ccb = py::none();
+    m_after_move_outer_ccb = py::none();
+    m_before_move_inner_ccb = py::none();
+    m_after_move_inner_ccb = py::none();
+    m_before_move_isolated_vertex = py::none();
+    m_after_move_isolated_vertex = py::none();
+    m_before_remove_vertex = py::none();
+    m_after_remove_vertex = py::none();
+    m_before_remove_edge = py::none();
+    m_after_remove_edge = py::none();
+    m_before_remove_outer_ccb = py::none();
+    m_after_remove_outer_ccb = py::none();
+    m_before_remove_inner_ccb = py::none();
+    m_after_remove_inner_ccb = py::none();
+  }
 
   /// Setters
   /// @{
