@@ -834,6 +834,218 @@ public:
 
   /// @}
 
+  //!
+  static int aos_observer_tp_traverse(PyObject* self, visitproc visit, void* arg) {
+    // Get the C++ object associated with 'self' (this always succeeds)
+    Arr_observer* w = py::inst_ptr<Arr_observer>(self);
+
+    // If w->value has an associated Python object, return it.
+    // If not, value.ptr() will equal NULL, which is also fine.
+    py::handle value_before_assign = py::find(w->m_before_assign);
+    py::handle value_after_assign = py::find(w->m_after_assign);
+    py::handle value_before_clear = py::find(w->m_before_clear);
+    py::handle value_after_clear = py::find(w->m_after_clear);
+    py::handle value_before_global_change = py::find(w->m_before_global_change);
+    py::handle value_after_global_change = py::find(w->m_after_global_change);
+    py::handle value_before_attach = py::find(w->m_before_attach);
+    py::handle value_after_attach = py::find(w->m_after_attach);
+    py::handle value_before_detach = py::find(w->m_before_detach);
+    py::handle value_after_detach = py::find(w->m_after_detach);
+    py::handle value_before_create_vertex = py::find(w->m_before_create_vertex);
+    py::handle value_after_create_vertex = py::find(w->m_after_create_vertex);
+    py::handle value_before_create_boundary_vertex1 = py::find(w->m_before_create_boundary_vertex1);
+    py::handle value_before_create_boundary_vertex2 = py::find(w->m_before_create_boundary_vertex2);
+    py::handle value_after_create_boundary_vertex = py::find(w->m_after_create_boundary_vertex);
+    py::handle value_before_create_edge = py::find(w->m_before_create_edge);
+    py::handle value_after_create_edge = py::find(w->m_after_create_edge);
+    py::handle value_before_modify_vertex = py::find(w->m_before_modify_vertex);
+    py::handle value_after_modify_vertex = py::find(w->m_after_modify_vertex);
+    py::handle value_before_modify_edge = py::find(w->m_before_modify_edge);
+    py::handle value_after_modify_edge = py::find(w->m_after_modify_edge);
+    py::handle value_before_split_edge = py::find(w->m_before_split_edge);
+    py::handle value_after_split_edge = py::find(w->m_after_split_edge);
+    py::handle value_before_split_fictitious_edge = py::find(w->m_before_split_fictitious_edge);
+    py::handle value_after_split_fictitious_edge = py::find(w->m_after_split_fictitious_edge);
+    py::handle value_before_split_face = py::find(w->m_before_split_face);
+    py::handle value_after_split_face = py::find(w->m_after_split_face);
+    py::handle value_before_split_outer_ccb = py::find(w->m_before_split_outer_ccb);
+    py::handle value_after_split_outer_ccb = py::find(w->m_after_split_outer_ccb);
+    py::handle value_before_split_inner_ccb = py::find(w->m_before_split_inner_ccb);
+    py::handle value_after_split_inner_ccb = py::find(w->m_after_split_inner_ccb);
+    py::handle value_before_add_outer_ccb = py::find(w->m_before_add_outer_ccb);
+    py::handle value_after_add_outer_ccb = py::find(w->m_after_add_outer_ccb);
+    py::handle value_before_add_inner_ccb = py::find(w->m_before_add_inner_ccb);
+    py::handle value_after_add_inner_ccb = py::find(w->m_after_add_inner_ccb);
+    py::handle value_before_add_isolated_vertex = py::find(w->m_before_add_isolated_vertex);
+    py::handle value_after_add_isolated_vertex = py::find(w->m_after_add_isolated_vertex);
+    py::handle value_before_merge_edge = py::find(w->m_before_merge_edge);
+    py::handle value_after_merge_edge = py::find(w->m_after_merge_edge);
+    py::handle value_before_merge_fictitious_edge = py::find(w->m_before_merge_fictitious_edge);
+    py::handle value_after_merge_fictitious_edge = py::find(w->m_after_merge_fictitious_edge);
+    py::handle value_before_merge_face = py::find(w->m_before_merge_face);
+    py::handle value_after_merge_face = py::find(w->m_after_merge_face);
+    py::handle value_before_merge_outer_ccb = py::find(w->m_before_merge_outer_ccb);
+    py::handle value_after_merge_outer_ccb = py::find(w->m_after_merge_outer_ccb);
+    py::handle value_before_merge_inner_ccb = py::find(w->m_before_merge_inner_ccb);
+    py::handle value_after_merge_inner_ccb = py::find(w->m_after_merge_inner_ccb);
+    py::handle value_before_move_outer_ccb = py::find(w->m_before_move_outer_ccb);
+    py::handle value_after_move_outer_ccb = py::find(w->m_after_move_outer_ccb);
+    py::handle value_before_move_inner_ccb = py::find(w->m_before_move_inner_ccb);
+    py::handle value_after_move_inner_ccb = py::find(w->m_after_move_inner_ccb);
+    py::handle value_before_move_isolated_vertex = py::find(w->m_before_move_isolated_vertex);
+    py::handle value_after_move_isolated_vertex = py::find(w->m_after_move_isolated_vertex);
+    py::handle value_before_remove_vertex = py::find(w->m_before_remove_vertex);
+    py::handle value_after_remove_vertex = py::find(w->m_after_remove_vertex);
+    py::handle value_before_remove_edge = py::find(w->m_before_remove_edge);
+    py::handle value_after_remove_edge = py::find(w->m_after_remove_edge);
+    py::handle value_before_remove_outer_ccb = py::find(w->m_before_remove_outer_ccb);
+    py::handle value_after_remove_outer_ccb = py::find(w->m_after_remove_outer_ccb);
+    py::handle value_before_remove_inner_ccb = py::find(w->m_before_remove_inner_ccb);
+    py::handle value_after_remove_inner_ccb = py::find(w->m_after_remove_inner_ccb);
+
+    // Inform the Python GC about the instance
+    Py_VISIT(value_before_assign.ptr());
+    Py_VISIT(value_after_assign.ptr());
+    Py_VISIT(value_before_clear.ptr());
+    Py_VISIT(value_after_clear.ptr());
+    Py_VISIT(value_before_global_change.ptr());
+    Py_VISIT(value_after_global_change.ptr());
+    Py_VISIT(value_before_attach.ptr());
+    Py_VISIT(value_after_attach.ptr());
+    Py_VISIT(value_before_detach.ptr());
+    Py_VISIT(value_after_detach.ptr());
+    Py_VISIT(value_before_create_vertex.ptr());
+    Py_VISIT(value_after_create_vertex.ptr());
+    Py_VISIT(value_before_create_boundary_vertex1.ptr());
+    Py_VISIT(value_before_create_boundary_vertex2.ptr());
+    Py_VISIT(value_after_create_boundary_vertex.ptr());
+    Py_VISIT(value_before_create_edge.ptr());
+    Py_VISIT(value_after_create_edge.ptr());
+    Py_VISIT(value_before_modify_vertex.ptr());
+    Py_VISIT(value_after_modify_vertex.ptr());
+    Py_VISIT(value_before_modify_edge.ptr());
+    Py_VISIT(value_after_modify_edge.ptr());
+    Py_VISIT(value_before_split_edge.ptr());
+    Py_VISIT(value_after_split_edge.ptr());
+    Py_VISIT(value_before_split_fictitious_edge.ptr());
+    Py_VISIT(value_after_split_fictitious_edge.ptr());
+    Py_VISIT(value_before_split_face.ptr());
+    Py_VISIT(value_after_split_face.ptr());
+    Py_VISIT(value_before_split_outer_ccb.ptr());
+    Py_VISIT(value_after_split_outer_ccb.ptr());
+    Py_VISIT(value_before_split_inner_ccb.ptr());
+    Py_VISIT(value_after_split_inner_ccb.ptr());
+    Py_VISIT(value_before_add_outer_ccb.ptr());
+    Py_VISIT(value_after_add_outer_ccb.ptr());
+    Py_VISIT(value_before_add_inner_ccb.ptr());
+    Py_VISIT(value_after_add_inner_ccb.ptr());
+    Py_VISIT(value_before_add_isolated_vertex.ptr());
+    Py_VISIT(value_after_add_isolated_vertex.ptr());
+    Py_VISIT(value_before_merge_edge.ptr());
+    Py_VISIT(value_after_merge_edge.ptr());
+    Py_VISIT(value_before_merge_fictitious_edge.ptr());
+    Py_VISIT(value_after_merge_fictitious_edge.ptr());
+    Py_VISIT(value_before_merge_face.ptr());
+    Py_VISIT(value_after_merge_face.ptr());
+    Py_VISIT(value_before_merge_outer_ccb.ptr());
+    Py_VISIT(value_after_merge_outer_ccb.ptr());
+    Py_VISIT(value_before_merge_inner_ccb.ptr());
+    Py_VISIT(value_after_merge_inner_ccb.ptr());
+    Py_VISIT(value_before_move_outer_ccb.ptr());
+    Py_VISIT(value_after_move_outer_ccb.ptr());
+    Py_VISIT(value_before_move_inner_ccb.ptr());
+    Py_VISIT(value_after_move_inner_ccb.ptr());
+    Py_VISIT(value_before_move_isolated_vertex.ptr());
+    Py_VISIT(value_after_move_isolated_vertex.ptr());
+    Py_VISIT(value_before_remove_vertex.ptr());
+    Py_VISIT(value_after_remove_vertex.ptr());
+    Py_VISIT(value_before_remove_edge.ptr());
+    Py_VISIT(value_after_remove_edge.ptr());
+    Py_VISIT(value_before_remove_outer_ccb.ptr());
+    Py_VISIT(value_after_remove_outer_ccb.ptr());
+    Py_VISIT(value_before_remove_inner_ccb.ptr());
+    Py_VISIT(value_after_remove_inner_ccb.ptr());
+
+    // On Python 3.9+, we must traverse the implicit dependency
+    // of an object on its associated type object.
+#if PY_VERSION_HEX >= 0x03090000
+    Py_VISIT(Py_TYPE(self));
+#endif
+
+    return 0;
+  }
+
+  //!
+  static int aos_observer_tp_clear(PyObject* self) {
+    // Get the C++ object associated with 'self' (this always succeeds)
+    Arr_observer* w = py::inst_ptr<Arr_observer>(self);
+
+    // Break reference cycles!
+    w->m_before_assign = {};
+    w->m_after_assign = {};
+    w->m_before_clear = {};
+    w->m_after_clear = {};
+    w->m_before_global_change = {};
+    w->m_after_global_change = {};
+    w->m_before_attach = {};
+    w->m_after_attach = {};
+    w->m_before_detach = {};
+    w->m_after_detach = {};
+    w->m_before_create_vertex = {};
+    w->m_after_create_vertex = {};
+    w->m_before_create_boundary_vertex1 = {};
+    w->m_before_create_boundary_vertex2 = {};
+    w->m_after_create_boundary_vertex = {};
+    w->m_before_create_edge = {};
+    w->m_after_create_edge = {};
+    w->m_before_modify_vertex = {};
+    w->m_after_modify_vertex = {};
+    w->m_before_modify_edge = {};
+    w->m_after_modify_edge = {};
+    w->m_before_split_edge = {};
+    w->m_after_split_edge = {};
+    w->m_before_split_fictitious_edge = {};
+    w->m_after_split_fictitious_edge = {};
+    w->m_before_split_face = {};
+    w->m_after_split_face = {};
+    w->m_before_split_outer_ccb = {};
+    w->m_after_split_outer_ccb = {};
+    w->m_before_split_inner_ccb = {};
+    w->m_after_split_inner_ccb = {};
+    w->m_before_add_outer_ccb = {};
+    w->m_after_add_outer_ccb = {};
+    w->m_before_add_inner_ccb = {};
+    w->m_after_add_inner_ccb = {};
+    w->m_before_add_isolated_vertex = {};
+    w->m_after_add_isolated_vertex = {};
+    w->m_before_merge_edge = {};
+    w->m_after_merge_edge = {};
+    w->m_before_merge_fictitious_edge = {};
+    w->m_after_merge_fictitious_edge = {};
+    w->m_before_merge_face = {};
+    w->m_after_merge_face = {};
+    w->m_before_merge_outer_ccb = {};
+    w->m_after_merge_outer_ccb = {};
+    w->m_before_merge_inner_ccb = {};
+    w->m_after_merge_inner_ccb = {};
+    w->m_before_move_outer_ccb = {};
+    w->m_after_move_outer_ccb = {};
+    w->m_before_move_inner_ccb = {};
+    w->m_after_move_inner_ccb = {};
+    w->m_before_move_isolated_vertex = {};
+    w->m_after_move_isolated_vertex = {};
+    w->m_before_remove_vertex = {};
+    w->m_after_remove_vertex = {};
+    w->m_before_remove_edge = {};
+    w->m_after_remove_edge = {};
+    w->m_before_remove_outer_ccb = {};
+    w->m_after_remove_outer_ccb = {};
+    w->m_before_remove_inner_ccb = {};
+    w->m_after_remove_inner_ccb = {};
+
+    return 0;
+  }
+
 private:
   py::object m_before_assign;
   py::object m_after_assign;
