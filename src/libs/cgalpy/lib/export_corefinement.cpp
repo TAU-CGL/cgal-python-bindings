@@ -1,3 +1,12 @@
+// Copyright (c) 2024 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+//            Efi Fogel          <efifogel@gmail.com>
+
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/array.h>
 #include <nanobind/stl/function.h>
@@ -260,7 +269,7 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                                  const py::dict& np2 = py::dict(),
                                                  // const py::tuple& np_out = py::tuple()) {
                                                  const std::array<py::dict, 4>& np_out = std::array<py::dict, 4>()) {
-                                                 
+
   using Pm = PolygonMesh;
   // auto vpm1 = get_vertex_point_map(pm1, np1);
   // auto vpm2 = get_vertex_point_map(pm2, np2);
@@ -390,7 +399,7 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                     )
                                     );
     }
-    
+
   }
   else if (fimb1) {
     if (visitor_flag) {
@@ -1089,17 +1098,14 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
 //
 template <typename TriangleMesh>
 TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
-                                          const py::dict& np1 = py::dict(),
-                                          const py::dict& np2 = py::dict(),
-                                          const py::dict& np_out = py::dict()) {
+                                        const py::dict& np1 = py::dict(),
+                                        const py::dict& np2 = py::dict(),
+                                        const py::dict& np_out = py::dict()) {
   using Tm = TriangleMesh;
 
   Tm out;
   bool valid;
 
-  // auto vpm1 = get_vertex_point_map(pm1, np1);
-  // auto vpm2 = get_vertex_point_map(pm2, np2);
-  // auto vpm3 = get_vertex_point_map(out, np_out);
   auto eicm1 = get_edge_prop_map<Tm, bool>(pm1, "INTERNAL_MAP0",
     np1.contains("edge_is_constrained_map") ? np1["edge_internal_map"] : py::none());
   auto eicm2 = get_edge_prop_map<Tm, bool>(pm2, "INTERNAL_MAP1",
@@ -1119,19 +1125,15 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
         auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
           np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
           valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                      internal::parse_pmp_np<TriangleMesh>(np1)
-                                                      // .vertex_point_map(vpm1)
-                                                      .edge_is_constrained_map(eicm1)
-                                                      .face_index_map(fim1)
-                                                      .visitor(visitor),
-                                                      internal::parse_pmp_np<TriangleMesh>(np2)
-                                                      // .vertex_point_map(vpm2)
-                                                      .face_index_map(fim2)
-                                                      .edge_is_constrained_map(eicm2),
-                                                      internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                      // .vertex_point_map(vpm3)
-                                                      .edge_is_constrained_map(eicm_out)
-                                                      );
+                                                  internal::parse_pmp_np<TriangleMesh>(np1)
+                                                  .edge_is_constrained_map(eicm1)
+                                                  .face_index_map(fim1)
+                                                  .visitor(visitor),
+                                                  internal::parse_pmp_np<TriangleMesh>(np2)
+                                                  .face_index_map(fim2)
+                                                  .edge_is_constrained_map(eicm2),
+                                                  internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                  .edge_is_constrained_map(eicm_out));
       } catch (const py::cast_error&) {
       }
       try {
@@ -1141,19 +1143,15 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
         auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
           np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
           valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                      internal::parse_pmp_np<TriangleMesh>(np1)
-                                                      // .vertex_point_map(vpm1)
-                                                      .edge_is_constrained_map(eicm1)
-                                                      .face_index_map(fim1)
-                                                      .visitor(visitor),
-                                                      internal::parse_pmp_np<TriangleMesh>(np2)
-                                                      // .vertex_point_map(vpm2)
-                                                      .face_index_map(fim2)
-                                                      .edge_is_constrained_map(eicm2),
-                                                      internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                      // .vertex_point_map(vpm3)
-                                                      .edge_is_constrained_map(eicm_out)
-                                                      );
+                                                  internal::parse_pmp_np<TriangleMesh>(np1)
+                                                  .edge_is_constrained_map(eicm1)
+                                                  .face_index_map(fim1)
+                                                  .visitor(visitor),
+                                                  internal::parse_pmp_np<TriangleMesh>(np2)
+                                                  .face_index_map(fim2)
+                                                  .edge_is_constrained_map(eicm2),
+                                                  internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                  .edge_is_constrained_map(eicm_out));
       } catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
@@ -1164,18 +1162,14 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
       auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
         np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
       valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                  internal::parse_pmp_np<TriangleMesh>(np1)
-                                                  // .vertex_point_map(vpm1)
-                                                  .edge_is_constrained_map(eicm1)
-                                                  .face_index_map(fim1),
-                                                  internal::parse_pmp_np<TriangleMesh>(np2)
-                                                  // .vertex_point_map(vpm2)
-                                                  .face_index_map(fim2)
-                                                  .edge_is_constrained_map(eicm2),
-                                                  internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                  // .vertex_point_map(vpm3)
-                                                  .edge_is_constrained_map(eicm_out)
-                                                  );
+                                              internal::parse_pmp_np<TriangleMesh>(np1)
+                                              .edge_is_constrained_map(eicm1)
+                                              .face_index_map(fim1),
+                                              internal::parse_pmp_np<TriangleMesh>(np2)
+                                              .face_index_map(fim2)
+                                              .edge_is_constrained_map(eicm2),
+                                              internal::parse_pmp_np<TriangleMesh>(np_out)
+                                              .edge_is_constrained_map(eicm_out));
     }
   }
   else if (fimb1) {
@@ -1185,18 +1179,14 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
         auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
           np1.contains("face_index_map") ? np1["face_internal_map"] : py::none());
         valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                    internal::parse_pmp_np<TriangleMesh>(np1)
-                                                    // .vertex_point_map(vpm1)
-                                                    .edge_is_constrained_map(eicm1)
-                                                    .face_index_map(fim1)
-                                                    .visitor(visitor),
-                                                    internal::parse_pmp_np<TriangleMesh>(np2)
-                                                    // .vertex_point_map(vpm2)
-                                                    .edge_is_constrained_map(eicm2),
-                                                    internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                    // .vertex_point_map(vpm3)
-                                                    .edge_is_constrained_map(eicm_out)
-                                                    );
+                                                internal::parse_pmp_np<TriangleMesh>(np1)
+                                                .edge_is_constrained_map(eicm1)
+                                                .face_index_map(fim1)
+                                                .visitor(visitor),
+                                                internal::parse_pmp_np<TriangleMesh>(np2)
+                                                .edge_is_constrained_map(eicm2),
+                                                internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                .edge_is_constrained_map(eicm_out));
       } catch (const py::cast_error&) {
       }
       try {
@@ -1204,18 +1194,14 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
         auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
           np1.contains("face_index_map") ? np1["face_internal_map"] : py::none());
         valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                    internal::parse_pmp_np<TriangleMesh>(np1)
-                                                    // .vertex_point_map(vpm1)
-                                                    .edge_is_constrained_map(eicm1)
-                                                    .face_index_map(fim1)
-                                                    .visitor(visitor),
-                                                    internal::parse_pmp_np<TriangleMesh>(np2)
-                                                    // .vertex_point_map(vpm2)
-                                                    .edge_is_constrained_map(eicm2),
-                                                    internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                    // .vertex_point_map(vpm3)
-                                                    .edge_is_constrained_map(eicm_out)
-                                                    );
+                                                internal::parse_pmp_np<TriangleMesh>(np1)
+                                                .edge_is_constrained_map(eicm1)
+                                                .face_index_map(fim1)
+                                                .visitor(visitor),
+                                                internal::parse_pmp_np<TriangleMesh>(np2)
+                                                .edge_is_constrained_map(eicm2),
+                                                internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                .edge_is_constrained_map(eicm_out));
       } catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
@@ -1224,17 +1210,13 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
       auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
         np1.contains("face_index_map") ? np1["face_internal_map"] : py::none());
       valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                  internal::parse_pmp_np<TriangleMesh>(np1)
-                                                  // .vertex_point_map(vpm1)
-                                                  .edge_is_constrained_map(eicm1)
-                                                  .face_index_map(fim1),
-                                                  internal::parse_pmp_np<TriangleMesh>(np2)
-                                                  // .vertex_point_map(vpm2)
-                                                  .edge_is_constrained_map(eicm2),
-                                                  internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                  // .vertex_point_map(vpm3)
-                                                  .edge_is_constrained_map(eicm_out)
-                                                  );
+                                              internal::parse_pmp_np<TriangleMesh>(np1)
+                                              .edge_is_constrained_map(eicm1)
+                                              .face_index_map(fim1),
+                                              internal::parse_pmp_np<TriangleMesh>(np2)
+                                              .edge_is_constrained_map(eicm2),
+                                              internal::parse_pmp_np<TriangleMesh>(np_out)
+                                              .edge_is_constrained_map(eicm_out));
     }
   }
   else if (fimb2) {
@@ -1244,18 +1226,14 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
         auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP3",
           np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
         valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                    internal::parse_pmp_np<TriangleMesh>(np1)
-                                                    // .vertex_point_map(vpm1)
-                                                    .edge_is_constrained_map(eicm1)
-                                                    .visitor(visitor),
-                                                    internal::parse_pmp_np<TriangleMesh>(np2)
-                                                    // .vertex_point_map(vpm2)
-                                                    .face_index_map(fim2)
-                                                    .edge_is_constrained_map(eicm2),
-                                                    internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                    // .vertex_point_map(vpm3)
-                                                    .edge_is_constrained_map(eicm_out)
-                                                    );
+                                                internal::parse_pmp_np<TriangleMesh>(np1)
+                                                .edge_is_constrained_map(eicm1)
+                                                .visitor(visitor),
+                                                internal::parse_pmp_np<TriangleMesh>(np2)
+                                                .face_index_map(fim2)
+                                                .edge_is_constrained_map(eicm2),
+                                                internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                .edge_is_constrained_map(eicm_out));
       } catch (const py::cast_error&) {
       }
       try {
@@ -1263,18 +1241,14 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
         auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP3",
           np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
         valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                    internal::parse_pmp_np<TriangleMesh>(np1)
-                                                    // .vertex_point_map(vpm1)
-                                                    .edge_is_constrained_map(eicm1)
-                                                    .visitor(visitor),
-                                                    internal::parse_pmp_np<TriangleMesh>(np2)
-                                                    // .vertex_point_map(vpm2)
-                                                    .face_index_map(fim2)
-                                                    .edge_is_constrained_map(eicm2),
-                                                    internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                    // .vertex_point_map(vpm3)
-                                                    .edge_is_constrained_map(eicm_out)
-                                                    );
+                                                internal::parse_pmp_np<TriangleMesh>(np1)
+                                                .edge_is_constrained_map(eicm1)
+                                                .visitor(visitor),
+                                                internal::parse_pmp_np<TriangleMesh>(np2)
+                                                .face_index_map(fim2)
+                                                .edge_is_constrained_map(eicm2),
+                                                internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                .edge_is_constrained_map(eicm_out));
       } catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
@@ -1283,38 +1257,33 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
       auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP3",
         np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
       valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                  internal::parse_pmp_np<TriangleMesh>(np1)
-                                                  // .vertex_point_map(vpm1)
-                                                  .edge_is_constrained_map(eicm1),
-                                                  internal::parse_pmp_np<TriangleMesh>(np2)
-                                                  // .vertex_point_map(vpm2)
-                                                  .face_index_map(fim2)
-                                                  .edge_is_constrained_map(eicm2),
-                                                  internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                  // .vertex_point_map(vpm3)
-                                                  .edge_is_constrained_map(eicm_out)
-                                                  );
+                                              internal::parse_pmp_np<TriangleMesh>(np1)
+                                              .edge_is_constrained_map(eicm1),
+                                              internal::parse_pmp_np<TriangleMesh>(np2)
+                                              .face_index_map(fim2)
+                                              .edge_is_constrained_map(eicm2),
+                                              internal::parse_pmp_np<TriangleMesh>(np_out)
+                                              .edge_is_constrained_map(eicm_out));
     }
   }
   else {
     valid = PMP::corefine_and_compute_union(pm1, pm2, out,
-                                                internal::parse_pmp_np<TriangleMesh>(np1)
-                                                // .vertex_point_map(vpm1)
-                                                .edge_is_constrained_map(eicm1),
-                                                internal::parse_pmp_np<TriangleMesh>(np2)
-                                                // .vertex_point_map(vpm2)
-                                                .edge_is_constrained_map(eicm2),
-                                                internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                // .vertex_point_map(vpm3)
-                                                .edge_is_constrained_map(eicm_out)
-                                                );
+                                            internal::parse_pmp_np<TriangleMesh>(np1)
+                                            .edge_is_constrained_map(eicm1),
+                                            internal::parse_pmp_np<TriangleMesh>(np2)
+                                            .edge_is_constrained_map(eicm2),
+                                            internal::parse_pmp_np<TriangleMesh>(np_out)
+                                            .edge_is_constrained_map(eicm_out));
   }
-#if CGALPY_PMP_POLYGONAL_MESH == 1 //surface_mesh
-  if (!np1.contains("edge_is_constrained_map")) pm1.remove_property_map(eicm1);
-  if (!np2.contains("edge_is_constrained_map")) pm2.remove_property_map(eicm2);
-  if (!np_out.contains("edge_is_constrained_map")) out.remove_property_map(eicm_out);
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
-  if (! valid) throw std::runtime_error("Cannot compute difference!");
+
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
+  if (! np1.contains("edge_is_constrained_map")) pm1.remove_property_map(eicm1);
+  if (! np2.contains("edge_is_constrained_map")) pm2.remove_property_map(eicm2);
+  if (! np_out.contains("edge_is_constrained_map")) out.remove_property_map(eicm_out);
+#endif
+
+  if (! valid) throw std::runtime_error("Cannot compute union!");
+
   return out;
 }
 
@@ -1847,4 +1816,3 @@ void export_corefinement(py::module_& m) {
     .def("extract_intersection", &Nmv::my_extract_intersection)
     ;
 }
-

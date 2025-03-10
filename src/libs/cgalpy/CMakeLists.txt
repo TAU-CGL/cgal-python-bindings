@@ -269,6 +269,12 @@ if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
     list(APPEND CGALPY_MODULES Ms2)
     set(CGALPY_Ms2_FILTERS [=[{}]=])
 endif ()
+# 3D Nef
+if (CGALPY_NEF_3_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/nef_3_bindings.cpp)
+    list(APPEND CGALPY_MODULES Nef3)
+    set(CGALPY_Nef3_FILTERS [=[{}]=])
+endif ()
 # 3D Polyhedron
 if (CGALPY_POLYHEDRON_3_BINDINGS)
   set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polyhedron_3_bindings.cpp)
@@ -461,6 +467,16 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
         get_envelope_3_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
+    # 2D Minkowski sum
+    if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
+        get_minkowski_sum_2_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # 3D Nef
+    if (CGALPY_NEF_3_BINDINGS)
+        get_nef_3_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
     # 3D Polyhedron
     if (CGALPY_POLYHEDRON_3_BINDINGS)
         get_polyhedron_3_lib_name(ret)
@@ -469,11 +485,6 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     # 2D Polygon
     if (CGALPY_POLYGON_2_BINDINGS)
         get_polygon_2_lib_name(ret)
-        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
-    endif ()
-    # 2D Minkowski sum
-    if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
-        get_minkowski_sum_2_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
     # 2D polygon partitioning
@@ -650,7 +661,7 @@ if (NOT SKBUILD)
 
       # Configure the __init__.py file to automatically load the dependant
       # shared ibraries, when the binding library is loaded (upon "import").
-	  
+
       # only boost headers are used; no need for libraries
       #if (NOT Boost_LIBRARY_DIRS)
       #  message(FATAL_ERROR "Boost libraries not found")
