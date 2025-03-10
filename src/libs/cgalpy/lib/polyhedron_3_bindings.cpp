@@ -630,7 +630,7 @@ void export_polyhedron_3(py::module_& m) {
 
   m.def("read_polygon_mesh", &pol3::read_polygon_mesh,
         py::arg("filename"), py::arg("params") = py::dict());
-  m.def("read_polygon_mesh_with_traits", &pol3::read_polygon_mesh_with_traits,
+  m.def("read_polygon_mesh", &pol3::read_polygon_mesh_with_traits,
         py::arg("filename"), py::arg("traits"), py::arg("params") = py::dict(),
         py::keep_alive<0, 2>());
   m.def("write_polygon_mesh", &pol3::write_polygon_mesh,
