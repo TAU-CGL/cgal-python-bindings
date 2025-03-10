@@ -67,7 +67,7 @@ auto remesh_planar_patches(PolygonMesh& pmesh,
                              .vertex_corner_map(vcm2)
                              );
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np_in.contains("edge_is_constrained_map"))
     pmesh.remove_property_map(eicm);
   if (! np_in.contains("face_patch_map")) pmesh.remove_property_map(fpm);
@@ -130,7 +130,7 @@ auto remesh_almost_planar_patches(PolygonMesh tm_in,
                                              .vertex_corner_map(vcm));
   }
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np_out.contains("face_patch_map")) pm_out.remove_property_map(fpm);
   if (! np_out.contains("vertex_corner_map")) pm_out.remove_property_map(vcm);
 #endif
@@ -267,7 +267,7 @@ auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
                                            );
   }
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("edge_is_constrained_map")) tmesh.remove_property_map(eicm);
   if (! np.contains("face_patch_map")) tmesh.remove_property_map(fpm);
 #endif
@@ -338,7 +338,7 @@ auto angle_and_area_smoothing(const std::vector<typename boost::graph_traits<Pol
                                 internal::parse_pmp_np<Pm>(np)
                                 .edge_is_constrained_map(eicm)
                                 .vertex_is_constrained_map(vicm));
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (!np.contains("edge_is_constrained_map")) {
     pmesh.remove_property_map(eicm);
   }
@@ -365,7 +365,7 @@ auto angle_and_area_smoothing_m(PolygonMesh& pmesh,
                                 internal::parse_pmp_np<Pm>(np)
                                 .edge_is_constrained_map(eicm)
                                 .vertex_is_constrained_map(vicm));
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("edge_is_constrained_map"))
     pmesh.remove_property_map(eicm);
   if (! np.contains("vertex_is_constrained_map"))
@@ -404,7 +404,7 @@ auto random_perturbation(TriangleMesh& tmesh,
                            internal::parse_pmp_np<Tm>(np)
                            .vertex_point_map(vicm));
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("vertex_point_map")) tmesh.remove_property_map(vicm);
 #endif
 }
@@ -434,7 +434,7 @@ void export_meshing(py::module_& m) {
   using Vd = typename Gt::vertex_descriptor;
   using Ed = typename Gt::edge_descriptor;
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   using Fpm = Pm::Property_map<Fd, std::size_t>;
   using Vcm = Pm::Property_map<Vd, std::size_t>;
   using Eicm = Pm::Property_map<Ed, bool>;
@@ -453,7 +453,7 @@ void export_meshing(py::module_& m) {
         py::arg("pm"), py::arg("np_in") = py::dict(),
         py::arg("np_out") = py::dict());
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("remesh_almost_planar_patches",
         &pmp::remesh_almost_planar_patches<Pm, Fpm, Vcm, Eicm>,
         py::arg("tm_in"), py::arg("nb_patches"), py::arg("nb_corners"),
@@ -499,7 +499,7 @@ void export_meshing(py::module_& m) {
   //       py::arg("np") = py::dict());
 #endif
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   // The CGAL code is faulty and cannot coop with Polyhedron_3
   m.def("surface_Delaunay_remeshing", &pmp::surface_Delaunay_remeshing<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict());

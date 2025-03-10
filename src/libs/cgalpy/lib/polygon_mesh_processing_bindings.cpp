@@ -602,7 +602,7 @@ auto remove_almost_degenerate_faces_r(const std::vector<typename boost::graph_tr
                                      .vertex_is_constrained_map(vicm)
                                      .filter(f));
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   ! np.contains("edge_is_constrained_map") ?
     pmesh.remove_property_map(eicm) : void();
   ! np.contains("vertex_is_constrained_map") ?
@@ -647,7 +647,7 @@ auto remove_almost_degenerate_faces(TriangleMesh& tmesh,
                                                   .vertex_is_constrained_map(vicm)
                                                   .filter(f));
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   ! np.contains("edge_is_constrained_map") ? tmesh.remove_property_map(eicm) : void();
   ! np.contains("vertex_is_constrained_map") ? tmesh.remove_property_map(vicm) : void();
 #endif
@@ -679,7 +679,7 @@ auto remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
                                                                .edge_is_constrained_map(eicm));
   }
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   ! np.contains("edge_is_constrained_map") ? tmesh.remove_property_map(eicm) : void();
 #endif
 
@@ -922,7 +922,7 @@ void interpolated_corrected_curvatures(PolygonMesh& pmesh,
                                            .vertex_principal_curvatures_and_directions_map(vpcdm)
                                            .vertex_normal_map(vnm)
                                            );
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
     if (np.contains("vertex_normal_map")) {
       pmesh.remove_property_map(vnm);
     }
@@ -935,7 +935,7 @@ void interpolated_corrected_curvatures(PolygonMesh& pmesh,
                                            );
   }
   // delete the internal maps
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("vertex_mean_curvature_map")) {
     pmesh.remove_property_map(vmcm);
   }
@@ -970,7 +970,7 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
                                            .vertex_principal_curvatures_and_directions(std::ref(pcad))
                                            .vertex_normal_map(vnm)
                                            );
-  #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+  #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
     pm.remove_property_map(vnm);
   #endif
   } else {
@@ -1149,7 +1149,7 @@ auto duplicate_non_manifold_vertices(PolygonMesh& pm,
   auto nb = PMP::duplicate_non_manifold_vertices(pm,
                                                  internal::parse_pmp_np<Pm>(np)
                                                  .output_iterator(std::back_inserter(out)));
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("vertex_is_constrained_map")) {
     pm.remove_property_map(vicm);
   }
@@ -1262,7 +1262,7 @@ auto detect_corners_of_regions(PolygonMesh& pmesh,
   std::size_t r = PMP::detect_corners_of_regions(pmesh, region_map, nb_regions, corner_id_map,
                                                  internal::parse_pmp_np<Pm>(np)
                                                  .edge_is_constrained_map(eicm));
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (!np.contains("edge_is_constrained_map")) {
     pmesh.remove_property_map(eicm);
   }
@@ -1316,7 +1316,7 @@ sharp_edges_segmentation(PolygonMesh& pmesh,
                                                 internal::parse_pmp_np<Pm>(np)
                                                 .vertex_feature_degree_map(vfdm));
   }
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("vertex_face_degree_map")) {
     pmesh.remove_property_map(vfdm);
   }
@@ -1621,7 +1621,7 @@ void export_polygon_mesh_processing(py::module_& m) {
 // EdgeIsConstrainedMap	a class model of ReadablePropertyMap with boost::graph_traits<TriangleMeshIn>::edge_descriptor as key type and bool as value type
 // VertexCornerMap	a class model of ReadablePropertyMap with boost::graph_traits<TriangleMeshIn>::vertex_descriptor as key type and std::size_t as value type
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   using Vertex_size_map = Pm::Property_map<Vd, std::size_t>;
   using Vertex_vector_map = Pm::Property_map<Vd, Vector_3>;
   using Vertex_double_map = Pm::Property_map<Vd, double>;
@@ -1732,7 +1732,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pmesh"), py::arg("face_normals"),
         py::arg("np") = py::dict());
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("compute_vertex_normals",
         &pmp::compute_vertex_normals<Pm, Vertex_vector_map>,
         py::arg("pmesh"), py::arg("vertex_normals"),
@@ -1901,7 +1901,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
         py::arg("np") = py::dict());
   // only for sm
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("sharp_edges_segmentation",
         &pmp::sharp_edges_segmentation<Pm, Pm::Property_map<Ed, bool>, Pm::Property_map<Fd, int>>,
         py::arg("pmesh"), py::arg("angle_in_deg"),
@@ -1963,7 +1963,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("face_range"), py::arg("pm"),
         py::arg("np") = py::dict());
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("detect_corners_of_regions",
         &pmp::detect_corners_of_regions<Pm, Face_size_map, Vertex_size_map>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"),
@@ -1980,7 +1980,7 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("f"), py::arg("pmesh"),
         py::arg("np") = py::dict());
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_3_POLYGONAL_MESH
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("refine_mesh_at_isolevel", &pmp::refine_mesh_at_isolevel<Pm, Vertex_double_map>,
         py::arg("pm"), py::arg("value_map"), py::arg("isovalue"),
         py::arg("np") = py::dict());

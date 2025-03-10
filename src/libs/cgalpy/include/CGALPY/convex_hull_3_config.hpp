@@ -13,7 +13,7 @@
 #include "CGALPY/surface_mesh_types.hpp"
 
 #define CGALPY_CH3_POLYHEDRON_3_POLYGONAL_MESH          0
-#define CGALPY_CH3_SURFACE_MESH_3_POLYGONAL_MESH        1
+#define CGALPY_CH3_SURFACE_MESH_POLYGONAL_MESH          1
 
 namespace ch3 {
 
@@ -21,7 +21,7 @@ template <int i> struct Poly_mesh {};
 template <> struct Poly_mesh<CGALPY_CH3_POLYHEDRON_3_POLYGONAL_MESH>
 { using type = pol3::Polyhedron_3; };
 
-template <> struct Poly_mesh<CGALPY_CH3_SURFACE_MESH_3_POLYGONAL_MESH>
+template <> struct Poly_mesh<CGALPY_CH3_SURFACE_MESH_POLYGONAL_MESH>
 { using type = sm::Surface_mesh_3; };
 
 }

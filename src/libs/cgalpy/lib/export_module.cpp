@@ -45,6 +45,7 @@ void export_object(py::module_&);
 void export_orientation_functions(py::module_&);
 void export_point_location(py::module_&);
 void export_point_set_processing(py::module_&);
+void export_nef_3(py::module_&);
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
 void export_polygon_mesh_processing(py::module_&);
@@ -187,6 +188,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
   auto as3_m = m.def_submodule("As3");
   export_alpha_shape_3(as3_m);
+#endif
+
+#ifdef CGALPY_NEF_3_BINDINGS
+  auto nef3_m = m.def_submodule("Nef3");
+  export_nef_3(nef3_m);
 #endif
 
 #ifdef CGALPY_POLYHEDRON_3_BINDINGS
