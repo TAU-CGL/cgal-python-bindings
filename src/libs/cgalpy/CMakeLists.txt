@@ -720,9 +720,8 @@ else ()
     list(APPEND CGALPY_BUILD_DEPENDS CGALPY_INIT)
 
     target_link_libraries(CGALPY PRIVATE
-    CGAL::CGAL
-    ${Boost_LIBRARIES}
-    ${PYTHON_LIBRARIES})
+        CGAL::CGAL
+        ${PYTHON_LIBRARIES})
 
     # Currently, the following has no effect as all comoponents of CGAL (e.g.,
     # CGAL::CGAL_Qt6 CGAL::Data are not recognized by Conan.
