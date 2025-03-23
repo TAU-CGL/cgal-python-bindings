@@ -534,7 +534,9 @@ void export_polyhedron_3(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
   constexpr auto ref(py::rv_policy::reference);
 
+#if CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS
   export_polyhedron_traits_with_normals_3(m);
+#endif
   export_polyhedron_halfedge_ds(m);
   export_polyhedron_incremental_builder_3(m);
   export_polyhedron_builder(m);
