@@ -195,6 +195,7 @@ select_surface_sweep_2()
 select_shape_detection()
 select_triangulation_2()
 select_triangulation_3()
+select_triangulation_d()
 select_visibility_2()
 
 # Add subdirectories

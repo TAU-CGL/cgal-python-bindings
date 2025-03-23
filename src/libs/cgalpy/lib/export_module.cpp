@@ -62,6 +62,7 @@ void export_triangulated_surface_mesh_simplification(py::module_&);
 void export_triangulated_surface_mesh_skeletonization(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
+void export_triangulation_d(py::module_&);
 void export_visibility_2(py::module_&);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
@@ -184,7 +185,12 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_triangulation_3(tri3_m);
 #endif
 
-  // 3D Alpha shape must be bound after 3D triangulation!
+#ifdef CGALPY_TRIANGULATION_D_BINDINGS
+  auto trid_m = m.def_submodule("Trid");
+  export_triangulation_3(trid_m);
+#endif
+
+// 3D Alpha shape must be bound after 3D triangulation!
 #ifdef CGALPY_ALPHA_SHAPE_3_BINDINGS
   auto as3_m = m.def_submodule("As3");
   export_alpha_shape_3(as3_m);

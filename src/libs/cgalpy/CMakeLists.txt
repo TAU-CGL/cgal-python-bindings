@@ -382,6 +382,12 @@ if (CGALPY_TRIANGULATION_3_BINDINGS)
     list(APPEND CGALPY_MODULES Tri3)
     set(CGALPY_Tri3_FILTERS [=[{}]=])
 endif ()
+# dD triangulation
+if (CGALPY_TRIANGULATION_D_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_d_bindings.cpp)
+    list(APPEND CGALPY_MODULES Trid)
+    set(CGALPY_Trid_FILTERS [=[{}]=])
+endif ()
 # 2D Visibility
 if (CGALPY_VISIBILITY_2_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/visibility_2_bindings.cpp)
@@ -515,6 +521,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     # 3D triangulation
     if (CGALPY_TRIANGULATION_3_BINDINGS)
         get_triangulation_3_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # dD triangulation
+    if (CGALPY_TRIANGULATION_D_BINDINGS)
+        get_triangulation_d_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
     # Kinetic Surface Reconstruction
