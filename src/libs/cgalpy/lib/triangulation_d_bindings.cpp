@@ -6,6 +6,8 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <boost/iterator/function_output_iterator.hpp>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/tuple.h>
 
@@ -95,81 +97,84 @@ void set_full_cell(Face& f, Full_cell& fc)
 { f.set_full_cell(Full_cell_handle(&fc)); }
 
 //
-Full_cell& locate1(const Triangulation& tri, const Point& p, Locate_type& lt,
+Full_cell& locate1(const Triangulation_d& tri, const Point& p, Locate_type& lt,
                    Face& f1, Facet& f2, Full_cell& start)
-{ return tri.locate(p, lt, f1, f2, Full_cell_handle(&start)); }
+{ return *(tri.locate(p, lt, f1, f2, Full_cell_handle(&start))); }
 
 //
-Full_cell& locate2(const Triangulation& tri, const Point& p, Locate_type& lt,
+Full_cell& locate2(const Triangulation_d& tri, const Point& p, Locate_type& lt,
                    Face& f, Facet& facet, Vertex& v)
-{ return tri.locate(p, lt, f, facet, Vertex_handle(&v)); }
+{ return *(tri.locate(p, lt, f, facet, Vertex_handle(&v))); }
 
 //
-Full_cell& locate3(const Triangulation& tri, const Point& p, Full_cell& s)
-{ return tri.locate(p, Full_cell_handle(&s)); }
+Full_cell& locate3(const Triangulation_d& tri, const Point& p, Full_cell& s)
+{ return *(tri.locate(p, Full_cell_handle(&s))); }
 
 //
-Full_cell& locate4(const Triangulation& tri, const Point& p, Vertex& v)
-{ return tri.locate(p, Vertex_handle(&v)); }
+Full_cell& locate4(const Triangulation_d& tri, const Point& p, Vertex& v)
+{ return *(tri.locate(p, Vertex_handle(&v))); }
 
 //
-size_type insert1(const Triangulation& tri, py::list& points) {
+size_type insert1(Triangulation_d& tri, py::list& points) {
   auto begin = stl_input_iterator<Point>(points);
   auto end = stl_input_iterator<Point>(points, false);
   return tri.insert(begin, end);
 }
 
-Vertex& insert2(const Triangulation& tri, const Point& p, Locate_type lt,
+Vertex& insert2(Triangulation_d& tri, const Point& p, Locate_type lt,
                 const Face& f, const Facet& ft, Full_cell& fc)
-{ return tri.insert(p, lt, f, ft, Full_cell_handle(&fc); }
+{ return *(tri.insert(p, lt, f, ft, Full_cell_handle(&fc))); }
 
 //
-Vertex& insert3(const Triangulation& tri, const Point& p, Full_cell& hint)
-{ return tri.insert(p, Full_cell_handle(&hint); }
+Vertex& insert3(Triangulation_d& tri, const Point& p, Full_cell& hint)
+{ return *(tri.insert(p, Full_cell_handle(&hint))); }
 
 //
-Vertex& insert4(const Triangulation& tri, const Point& p, Vertex& v)
-  { return tri.insert(p, Vertex_handle(&v); }
+Vertex& insert4(Triangulation_d& tri, const Point& p, Vertex& v)
+{ return *(tri.insert(p, Vertex_handle(&v))); }
 
 //
-Vertex& insert_in_hole1(const Triangulation& tri, const Point& p,
-                        ForwardIterator start, ForwardIterator end, const Facet& ft)
-{ return tri.insert_in_hole(p); }
+// std::pair<Vertex&, py::list>
+// insert_in_hole1(Triangulation_d& tri, const Point& p, py::list& full_cells,
+//                 const Facet& ft) {
+
+//   py::list res;
+//   auto op = [&] (const Full_cell& c) mutable { res.append(c); };
+//   auto it = boost::make_function_output_iterator(std::ref(op));
+//   auto begin = stl_input_iterator<Full_cell>(full_cells);
+//   auto end = stl_input_iterator<Full_cell>(full_cells, false);
+//   Vertex& v = *(tri.insert_in_hole(p, begin, end, ft, it));
+//   return std::make_pair(v, res);
+// }
 
 //
-Vertex& insert_in_hole2(const Triangulation& tri, const Point& p,
-                        py::list& vertices, const Facet& ft,
-                        OutputIterator out)
-{ return tri.insert_in_hole(p); }
+// Vertex& insert_in_hole2(Triangulation_d& tri, const Point& p,
+//                         py::list& full_cells, const Facet& ft) {
+//   auto begin = stl_input_iterator<Full_cell>(full_cells);
+//   auto end = stl_input_iterator<Full_cell>(full_cells, false);
+//   return *(tri.insert_in_hole(p, begin, end, ft));
+// }
 
 //
-Vertex& insert_in_face1(const Triangulation& tri, const Point& p,
-                        const Face& f)
-{ return tri.insert(); }
+Vertex& insert_in_face(Triangulation_d& tri, const Point& p, const Face& f)
+{ return *(tri.insert_in_face(p, f)); }
 
 //
-Vertex& insert_in_face2(const Triangulation& tri, const Point& p,
-                          const Facet& f)
-{ return tri.insert(p); }
+Vertex& insert_in_facet(Triangulation_d& tri, const Point& p, const Facet& ft)
+{ return *(tri.insert_in_facet(p, ft)); }
 
 //
-Vertex& insert_in_full_cell(const Triangulation& tri, const Point& p,
-                            Full_cell& fc)
-{ return tri.insert_in_full_cell(p); }
+Vertex& insert_in_full_cell(Triangulation_d& tri, const Point& p, Full_cell& fc)
+{ return *(tri.insert_in_full_cell(p, Full_cell_handle(&fc))); }
 
 //
-Vertex& insert_outside_convex_hull1(const Triangulation& tri, const Point& p,
-                                    Full_cell& fc)
-{ return tri.insert_outside_convex_hull_1(p); }
+Vertex& insert_outside_convex_hull(Triangulation_d& tri, const Point& p,
+                                   Full_cell& fc)
+{ return *(tri.insert_outside_convex_hull(p, Full_cell_handle(&fc))); }
 
 //
-Vertex& insert_outside_convex_hull2(const Triangulation& tri, const Point& p,
-                                    Full_cell& fc)
-{ return tri.insert_outside_convex_hull(p); }
-
-//
-Vertex& insert_outside_affine_hull(const Triangulation& tri, const Point& p)
-{ return tri.insert_outside_affine_hull(p); }
+Vertex& insert_outside_affine_hull(Triangulation_d& tri, const Point& p)
+{ return *(tri.insert_outside_affine_hull(p)); }
 
 } // End of namespace trid
 
@@ -247,19 +252,18 @@ void export_triangulation_d(py::module_& m) {
       .def("locate", &trid::locate2)
       .def("locate", &trid::locate3)
       .def("locate", &trid::locate4)
-      .def("contract_face",
-           [](Tri& tri, const Point& p, const Face& f)->Vertex&
-           { tri.contract_face(p, f); }, ri)
+      // .def("contract_face",
+      //      [](Tri& tri, const Point& p, const Face& f)->Vertex&
+      //      { return *(tri.contract_face(p, f)); }, ri)
       .def("insert", &trid::insert1)
       .def("insert", &trid::insert2)
       .def("insert", &trid::insert3)
       .def("insert", &trid::insert4)
-      .def("insert_in_hole", &trid::insert_in_hole1)
-      .def("insert_in_hole", &trid::insert_in_hole2)
-      .def("insert_in_face", &trid::insert_in_face1)
-      .def("insert_in_face", &tris::insert_in_face2)
+      // .def("insert_in_hole", &trid::insert_in_hole1)
+      // .def("insert_in_hole", &trid::insert_in_hole2)
+      .def("insert_in_face", &trid::insert_in_face)
+      .def("insert_in_facet", &trid::insert_in_facet)
       .def("insert_in_full_cell", &trid::insert_in_full_cell)
-      .def("insert_outside_convex_hull", &trid::insert_outside_convex_hull_1)
       .def("insert_outside_convex_hull", &trid::insert_outside_convex_hull)
       .def("insert_outside_affine_hull", &trid::insert_outside_affine_hull)
       .def("reorient_full_cells", &Tri::reorient_full_cells)
