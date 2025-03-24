@@ -10,6 +10,7 @@
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/tuple.h>
+#include <nanobind/stl/pair.h>
 
 #include "CGALPY/types.hpp"
 #include "CGALPY/add_attr.hpp"
@@ -22,44 +23,6 @@ namespace py = nanobind;
 
 namespace trid {
 
-// #if CGALPY_TRID == CGALPY_TRID_DELAUNAY
-
-// //
-// void dt3_init(trid::Triangulation_3* tri, py::list& lst) {
-//   auto begin = stl_input_iterator<trid::Point>(lst);
-//   auto end = stl_input_iterator<trid::Point>(lst, false);
-//   new (tri) trid::Triangulation_3(begin, end);  // placement new
-// }
-
-// //
-// std::ptrdiff_t insert_points(trid::Triangulation_3& dt, py::list& lst) {
-//   if (! lst) return 0;
-//   if (! py::isinstance<trid::Point>(lst[0])) return 0;
-//   auto begin = stl_input_iterator<trid::Point>(lst);
-//   auto end = stl_input_iterator<trid::Point>(lst, false);
-//   return dt.insert(begin, end);
-// }
-
-// #if (CGALPY_TRID_LOCATION_POLICY == CGALPY_TRID_LOCATION_POLICY_COMPACT)
-
-// //
-// trid::Vertex_handle insert4(trid::Triangulation_3& dt,
-//                             const trid::Point& p, trid::Cell_handle start)
-// { return dt.insert(p, start); }
-
-// //
-// trid::Vertex_handle insert5(trid::Triangulation_3& dt,
-//                             const trid::Point& p, trid::Vertex_handle hint)
-// { return dt.insert(p, hint); }
-
-// //
-// trid::Vertex_handle insert6(trid::Triangulation_3& dt,
-//                             const trid::Point& p, trid::Locate_type lt,
-//                             trid::Cell_handle c, int li, int lj)
-// { return dt.insert(p, lt, c, li, lj); }
-
-// #endif
-
 //
 template <typename Handle_>
 const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
@@ -70,20 +33,29 @@ const Vertex& vertex(const Triangulation_ds& tds, const Full_cell& s, int i)
 
 //
 py::list incident_full_cells1(const Triangulation_ds& tds, const Face& f) {
-  py::list lst;
-  return lst;
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tds.incident_full_cells(f, it);
+  return res;
 }
 
 //
 py::list incident_full_cells2(const Triangulation_ds& tds, const Vertex& v) {
-  py::list lst;
-  return lst;
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tds.incident_full_cells(Vertex_const_handle(&v), it);
+  return res;
 }
 
 //
-py::list star(const Triangulation_ds& tds, const Face& v) {
-  py::list lst;
-  return lst;
+py::list star(const Triangulation_ds& tds, const Face& f) {
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tds.star(f, it);
+  return res;
 }
 
 //
@@ -133,27 +105,54 @@ Vertex& insert3(Triangulation_d& tri, const Point& p, Full_cell& hint)
 Vertex& insert4(Triangulation_d& tri, const Point& p, Vertex& v)
 { return *(tri.insert(p, Vertex_handle(&v))); }
 
-//
-// std::pair<Vertex&, py::list>
-// insert_in_hole1(Triangulation_d& tri, const Point& p, py::list& full_cells,
-//                 const Facet& ft) {
+template <typename T>
+struct stl_dereference_input_iterator :
+  boost::iterator_facade<stl_input_iterator<T>, T, std::forward_iterator_tag, T> {
 
-//   py::list res;
-//   auto op = [&] (const Full_cell& c) mutable { res.append(c); };
-//   auto it = boost::make_function_output_iterator(std::ref(op));
-//   auto begin = stl_input_iterator<Full_cell>(full_cells);
-//   auto end = stl_input_iterator<Full_cell>(full_cells, false);
-//   Vertex& v = *(tri.insert_in_hole(p, begin, end, ft, it));
-//   return std::make_pair(v, res);
-// }
+  // Default constructor.
+  // Workaround the lack of default constructor for py::detail::fast_iterator.
+  // stl_dereference_input_iterator() {}
+  stl_dereference_input_iterator() : m_it(py::list().end()) {}
+
+  stl_dereference_input_iterator(const py::list& lst, bool isbegin = true) :
+    m_it((isbegin) ? lst.begin() : lst.end())
+  {}
+
+  void increment() { ++m_it; }
+  T dereference() const {
+    auto& tmp = *m_it;
+    return py::cast<T>(T(&tmp));
+  }
+
+  bool equal(stl_input_iterator<T> const& o) const { return m_it == o.m_it; }
+
+private:
+  py::detail::fast_iterator m_it;
+};
 
 //
-// Vertex& insert_in_hole2(Triangulation_d& tri, const Point& p,
-//                         py::list& full_cells, const Facet& ft) {
-//   auto begin = stl_input_iterator<Full_cell>(full_cells);
-//   auto end = stl_input_iterator<Full_cell>(full_cells, false);
-//   return *(tri.insert_in_hole(p, begin, end, ft));
-// }
+py::list
+insert_in_hole1(Triangulation_d& tri, const Point& p, py::list& full_cells,
+                const Facet& ft) {
+
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
+  auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
+  py::list final_res;
+  final_res.append(*(tri.insert_in_hole(p, begin, end, ft, it)));
+  final_res.append(res);
+  return final_res;
+}
+
+//
+Vertex& insert_in_hole2(Triangulation_d& tri, const Point& p,
+                        py::list& full_cells, const Facet& ft) {
+  auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
+  auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
+  return *(tri.insert_in_hole(p, begin, end, ft));
+}
 
 //
 Vertex& insert_in_face(Triangulation_d& tri, const Point& p, const Face& f)
@@ -175,6 +174,30 @@ Vertex& insert_outside_convex_hull(Triangulation_d& tri, const Point& p,
 //
 Vertex& insert_outside_affine_hull(Triangulation_d& tri, const Point& p)
 { return *(tri.insert_outside_affine_hull(p)); }
+
+//
+py::object vertices(const Triangulation_d& tri)
+{ return make_iterator(tri.vertices_begin(), tri.vertices_end()); }
+
+//
+py::object finite_vertices(const Triangulation_d& tri)
+{ return make_iterator(tri.finite_vertices_begin(), tri.finite_vertices_end()); }
+
+//
+py::object full_cells(const Triangulation_d& tri)
+{ return make_iterator(tri.full_cells_begin(), tri.full_cells_end()); }
+
+//
+py::object finite_full_cells(const Triangulation_d& tri)
+{ return make_iterator(tri.finite_full_cells_begin(), tri.finite_full_cells_end()); }
+
+//
+py::object facets(Triangulation_d& tri)
+{ return make_iterator(tri.facets_begin(), tri.facets_end()); }
+
+//
+py::object finite_facets(Triangulation_d& tri)
+{ return make_iterator(tri.finite_facets_begin(), tri.finite_facets_end()); }
 
 } // End of namespace trid
 
@@ -260,7 +283,7 @@ void export_triangulation_d(py::module_& m) {
       .def("insert", &trid::insert3)
       .def("insert", &trid::insert4)
       // .def("insert_in_hole", &trid::insert_in_hole1)
-      // .def("insert_in_hole", &trid::insert_in_hole2)
+      .def("insert_in_hole", &trid::insert_in_hole2)
       .def("insert_in_face", &trid::insert_in_face)
       .def("insert_in_facet", &trid::insert_in_facet)
       .def("insert_in_full_cell", &trid::insert_in_full_cell)
@@ -336,72 +359,33 @@ void export_triangulation_d(py::module_& m) {
         .def("value", &trid::value<trid::Full_cell_handle>, ri)
         ;
     }
+
+    // using Pi = Tri::Point_iterator;
+    // add_iterator<Pi, Pi, const Point&>("Point_iterator", tri_c);
+    using Vi = Tri::Vertex_iterator;
+    using Fvi = Tri::Finite_vertex_iterator;
+    using Fci = Tri::Full_cell_iterator;
+    using Ffci = Tri::Finite_full_cell_iterator;
+    using Fi = Tri::Facet_iterator;
+    using Ffi = Tri::Finite_facet_iterator;
+
+    add_iterator<Vi, Vi, const Vertex&>("Vertex_iterator", tri_c);
+    add_iterator<Fvi, Fvi, const Vertex&>("Finite_vertex_iterator", tri_c);
+    add_iterator<Fci, Fci, const Fc&>("Full_cell_iterator", tri_c);
+    add_iterator<Ffci, Ffci, const Fc&>("Finite_full_cell_iterator", tri_c);
+    add_iterator<Fi, Fi, const Facet&>("Facet_iterator", tri_c);
+    add_iterator<Ffi, Ffi, const Facet&>("Finite_facet_iterator", tri_c);
+
+    tri_c
+      .def("vertices", &trid::vertices, py::keep_alive<0, 1>())
+      .def("finite_vertices", &trid::finite_vertices, py::keep_alive<0, 1>())
+      .def("full_cells", &trid::full_cells, py::keep_alive<0, 1>())
+      .def("finite_full_cells", &trid::finite_full_cells, py::keep_alive<0, 1>())
+      .def("facets", &trid::facets, py::keep_alive<0, 1>())
+      .def("finite_facets", &trid::finite_facets, py::keep_alive<0, 1>())
+      ;
   }
-    // #if CGALPY_TRID == CGALPY_TRID_DELAUNAY
-//     .def("__init__", &trid::dt3_init)
-// #endif
-//     // Insertion
-//     .def("insert", insert1)
-//     .def("insert", insert2)
-//     .def("insert", insert3)
-// #if CGALPY_TRID_LOCATION_POLICY == CGALPY_TRID_LOCATION_POLICY_COMPACT
-//     .def("insert", &trid::insert4)
-//     .def("insert", &trid::insert5)
-//     .def("insert", &trid::insert6)
-// #endif
-//     .def("insert_points", &trid::insert_points)
 
-//     // template<class PointWithInfoInputIterator >
-//     // std::ptrdiff_t insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
-
-//     // Displacement
-//     .def("move_if_no_collision", &Tri::move_if_no_collision)
-//     .def("move", &Tri::move)
-
-//     // Removal
-//     .def("remove", static_cast<void(Tri::*)(trid::Vertex_handle)>(&Tri::remove))
-//     // .def("remove", py::overload_cast<trid::Vertex_handle, bool*>(&Tri::remove))
-
-//     // template<typename InputIterator >
-//     // int remove (InputIterator first, InputIterator beyond)
-
-//     // template<typename InputIterator >
-//     // int remove_cluster (InputIterator first, InputIterator beyond)
-
-//     // Queries
-//     .def("side_of_sphere", side_of_sphere)
-//     .def("side_of_circle", side_of_circle1)
-//     .def("side_of_circle", side_of_circle2)
-//     .def("nearest_vertex", nearest_vertex)
-//     .def("nearest_vertex_in_cell", &Tri::nearest_vertex_in_cell)
-//     .def("is_valid", is_valid1)
-//     // .def("is_valid", is_valid2)
-
-//   if (! add_attr<trid::Point>(tri_c, "Point"))
-//     std::cerr << "'trid::Point' not registered!\n";
-//   add_attr<trid::Segment>(tri_c, "Segment");
-//   add_attr<trid::Triangle>(tri_c, "Triangle");
-//   add_attr<trid::Tetrahedron>(tri_c, "Tetrahedron");
-
-//   void(trid::Cell::*set_vertices)(trid::Vertex_handle, trid::Vertex_handle,
-//                                   trid::Vertex_handle, trid::Vertex_handle) =
-//     &trid::Cell::set_vertices;
-//   void(trid::Cell::*set_neighbors)(trid::Cell_handle, trid::Cell_handle,
-//                                    trid::Cell_handle, trid::Cell_handle) =
-//     &trid::Cell::set_neighbors;
-
-//   py::class_<trid::Facet>(tri_c, "Facet")
-//     .def_rw("first", &trid::Facet::first)
-//     .def_rw("second", &trid::Facet::second)
-//     ;
-
-//   py::class_<trid::Edge>(tri_c, "Edge")
-//     .def_rw("first", &trid::Edge::first)
-//     .def_rw("second", &trid::Edge::second)
-//     .def_rw("third", &trid::Edge::third)
-//     ;
-
-//   using Avi = Tri::All_vertices_iterator;
 //   using Aei = Tri::All_edges_iterator;
 //   using Aci = Tri::All_cells_iterator;
 //   using Afi = Tri::All_facets_iterator;
@@ -410,8 +394,6 @@ void export_triangulation_d(py::module_& m) {
 //   using Fei = Tri::Finite_edges_iterator;
 //   using Fci = Tri::Finite_cells_iterator;
 //   using Ffi = Tri::Finite_facets_iterator;
-
-//   using Pi = Tri::Point_iterator;
 
 //   using Vertex = Tri::Vertex;
 //   using Edge = Tri::Vertex;
@@ -431,18 +413,6 @@ void export_triangulation_d(py::module_& m) {
 //   add_iterator<Fci, Fci, const Cell&>("Finite_cells_iterator", tri_c);
 //   add_iterator<Ffi, Ffi, const Face&>("Finite_facets_iterator", tri_c);
 
-//   add_iterator<Pi, Pi, const Point&>("Point_iterator", tri_c);
-
-//   tri_c.def("all_vertices", &trid::all_vertices, py::keep_alive<0, 1>())
-//     .def("all_edges", &trid::all_edges, py::keep_alive<0, 1>())
-//     .def("all_cells", &trid::all_cells, py::keep_alive<0, 1>())
-//     .def("all_facets", &trid::all_facets, py::keep_alive<0, 1>())
-//     .def("finite_vertices", &trid::finite_vertices, py::keep_alive<0, 1>())
-//     .def("finite_edges", &trid::finite_edges, py::keep_alive<0, 1>())
-//     .def("finite_cells", &trid::finite_cells, py::keep_alive<0, 1>())
-//     .def("finite_facets", &trid::finite_facets, py::keep_alive<0, 1>())
-//     .def("points", &trid::points, py::keep_alive<0, 1>())
-//     ;
 
   // Todo
   // Simplex;
