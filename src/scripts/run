@@ -35,8 +35,8 @@ eval "declare -a $item=('aos2_seg_ae_epec'    'kerEpecInt_aos2SegVeHeFePl')";   
 eval "declare -a $item=('aos2_seg_bvr_epec'   'kerEpecInt_aos2SegPl_bvArr2')";             ((i++)); item="item$i"
 eval "declare -a $item=('aos2_seg_epec'       'kerEpecInt_aos2SegPl')";                    ((i++)); item="item$i"
 eval "declare -a $item=('aos2_seg_epic'       'kerEpic_aos2SegPl')";                       ((i++)); item="item$i"
-# eval "declare -a $item=('aos2_trc_cnt_geodesic_epec' 'kerEpecInt_aos2TrcCntGos')";       ((i++)); item="item$i"
-eval "declare -a $item=('aos2_trc_cnt_seg_epec' 'kerEpic_aos2TrcCntSeg')";                 ((i++)); item="item$i"
+eval "declare -a $item=('aos2_trc_cnt_geodesic_epec' 'kerEpecInt_aos2TrcCntGos')";         ((i++)); item="item$i"
+eval "declare -a $item=('aos2_trc_cnt_seg_epec' 'kerEpecInt_aos2TrcCntSeg')";              ((i++)); item="item$i"
 eval "declare -a $item=('aos2_wh_seg_epec'    'kerEpecInt_aos2SegCdCcdWhPl')";             ((i++)); item="item$i"
 eval "declare -a $item=('aos2_wh_cs_epec'     'kerEpecInt_aos2CsCdCcdWhPl')";              ((i++)); item="item$i"
 eval "declare -a $item=('aos2_wh_seg_fe_epec' 'kerEpecInt_aos2SegCdCcdFeWhPl')";           ((i++)); item="item$i"
@@ -54,7 +54,7 @@ eval "declare -a $item=('env2_seg_cd_epec'    'kerEpecInt_aos2SegCdPl_env2')";  
 eval "declare -a $item=('env3_plane_epec'     'kerEpecInt_aos2LinearPl_env3Plane')";       ((i++)); item="item$i"
 eval "declare -a $item=('env3_plane_sd_epec'  'kerEpecInt_aos2LinearPl_env3PlaneSd')";     ((i++)); item="item$i"
 eval "declare -a $item=('env3_sphere_ccr'     'kerCcrInt_aos2ConicPl_env3Sphere')";        ((i++)); item="item$i"
-# eval "declare -a $item=('env3_tri_epec'       'kerEpecInt_aos2SegPl_env3Tri')";        ((i++)); item="item$i"
+eval "declare -a $item=('env3_tri_epec'       'kerEpecInt_aos2SegPl_env3Tri')";            ((i++)); item="item$i"
 eval "declare -a $item=('env3_tri_sd_epec'    'kerEpecInt_aos2SegPl_env3TriSd')";          ((i++)); item="item$i"
 eval "declare -a $item=('epecd'               'kerdEpecdDynamic')";                        ((i++)); item="item$i"
 eval "declare -a $item=('epec'                'kerEpecInt')";                              ((i++)); item="item$i"
@@ -91,7 +91,7 @@ for elm in "${arr[@]}"; do
   cmd="../run_$dir"
   whl_basename_p=$elm[1]
   whl_basename=${!whl_basename_p}
-  whl=$whl_dirname'/'${prefix}_$whl_basename-${suffix}
+  whl=$whl_dirname'/'${prefix,,}_${whl_basename,,}-${suffix}
   echo "======== $dir ========"
   eval "(mkdir -p $dir && cd $dir && $cmd && make $make_parms && pip3 $pip_parms $whl)"
 done

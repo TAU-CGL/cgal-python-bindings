@@ -187,7 +187,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #ifdef CGALPY_TRIANGULATION_D_BINDINGS
   auto trid_m = m.def_submodule("Trid");
-  export_triangulation_3(trid_m);
+  export_triangulation_d(trid_m);
 #endif
 
 // 3D Alpha shape must be bound after 3D triangulation!

@@ -12,9 +12,6 @@
 #include <CGAL/Triangulation_face.h>
 #include <CGAL/Triangulation_full_cell.h>
 #include <CGAL/Triangulation_vertex.h>
-
-#include <CGAL/Triangulation_data_structure.h>
-
 #include <CGAL/Triangulation.h>
 #include <CGAL/Regular_triangulation.h>
 #include <CGAL/Delaunay_triangulation.h>
@@ -83,24 +80,23 @@ struct Full_cell_with_data<true, Fb, Data, Tr>
 { using type = CGAL::Triangulation_full_cell<Tr, Data, Fb>; };
 
 // Dimensionality
-template <int i, int d> struct Dimensionality {}
-template <int d> struct Dimensionality<CGALPY_TRID_DIMENSION_TAG_DYNAMIC> {}
-{ using type = CGAL::Dynamic_dimension_tag; }
-template <int d> struct Dimensionality<CGALPY_TRID_DIMENSION_TAG_STATIC>
-{ using type = CGAL::Dynamic_tag<d>; }
+template <int i, int d> struct Dimensionality {};
+template <int d> struct Dimensionality<CGALPY_TRID_DIMENSION_TAG_DYNAMIC, d>
+{ using type = CGAL::Dynamic_dimension_tag; };
+template <int d> struct Dimensionality<CGALPY_TRID_DIMENSION_TAG_STATIC, d>
+{ using type = CGAL::Dimension_tag<d>; };
 
 // Main triangulation
-template <int i, typename Tr, typename Tds, typename Lp>
-struct Tri {};
-template <typename Tr, typename Tds, typename Lp>
-struct Tri<CGALPY_TRID_PLAIN, Tr, Tds, Lp>
-{ using type = CGAL::Triangulation_3<Tr, Tds>; };
-template <typename Tr, typename Tds, typename Lp>
-struct Tri<CGALPY_TRID_REGULAR, Tr, Tds, Lp>
-{ using type = CGAL::Regular_triangulation_3<Tr, Tds>; };
-template <typename Tr, typename Tds, typename Lp>
-struct Tri<CGALPY_TRID_DELAUNAY, Tr, Tds, Lp>
-{ using type = CGAL::Delaunay_triangulation_3<Tr, Tds>; };
+template <int i, typename Tr, typename Tds> struct Tri {};
+template <typename Tr, typename Tds>
+struct Tri<CGALPY_TRID_PLAIN, Tr, Tds>
+{ using type = CGAL::Triangulation<Tr, Tds>; };
+template <typename Tr, typename Tds>
+struct Tri<CGALPY_TRID_REGULAR, Tr, Tds>
+{ using type = CGAL::Regular_triangulation<Tr, Tds>; };
+template <typename Tr, typename Tds>
+struct Tri<CGALPY_TRID_DELAUNAY, Tr, Tds>
+{ using type = CGAL::Delaunay_triangulation<Tr, Tds>; };
 
 }
 
