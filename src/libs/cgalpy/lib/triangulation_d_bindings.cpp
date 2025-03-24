@@ -27,9 +27,8 @@ namespace trid {
 template <typename Handle_>
 const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
 
-//
-const Vertex& vertex(const Triangulation_ds& tds, const Full_cell& s, int i)
-{ return value(tds.vertex(Full_cell_const_handle(&s), i)); }
+/// Traingulation Data Structure
+/// @{
 
 //
 py::list incident_full_cells1(const Triangulation_ds& tds, const Face& f) {
@@ -65,8 +64,42 @@ py::list incident_faces(const Triangulation_ds& tds, const Vertex& v) {
 }
 
 //
+bool vertex_is_vertex(const Triangulation_ds& tds, const Vertex& v)
+{ return tds.is_vertex(Vertex_const_handle(&v)); }
+
+//
+bool vertex_is_full_cell(const Triangulation_ds& tds, const Full_cell& c)
+{ return tds.is_full_cell(Full_cell_const_handle(&c)); }
+
+//
+const Vertex& vertex(const Triangulation_ds& tds, const Full_cell& s, int i)
+{ return value(tds.vertex(Full_cell_const_handle(&s), i)); }
+
+//
+const Full_cell& full_cell(const Triangulation_ds& tds, const Vertex& v)
+{ return value(tds.full_cell(Vertex_const_handle(&v))); }
+
+//
+Vertex& insert_increase_dimension1(Triangulation_ds& tds, Vertex& v)
+{ return *(tds.insert_increase_dimension(Vertex_handle(&v))); }
+
+//
+Vertex& insert_increase_dimension2(Triangulation_ds& tds)
+{ return *(tds.insert_increase_dimension(Vertex_handle())); }
+
+/// @}
+
+/// Face
+/// @{
+
+//
 void set_full_cell(Face& f, Full_cell& fc)
 { f.set_full_cell(Full_cell_handle(&fc)); }
+
+/// @}
+
+/// dD Triangulation
+/// @{
 
 //
 Full_cell& locate1(const Triangulation_d& tri, const Point& p, Locate_type& lt,
@@ -199,6 +232,8 @@ py::object facets(Triangulation_d& tri)
 py::object finite_facets(Triangulation_d& tri)
 { return make_iterator(tri.finite_facets_begin(), tri.finite_facets_end()); }
 
+/// @}
+
 } // End of namespace trid
 
 //
@@ -223,8 +258,55 @@ void export_triangulation_d(py::module_& m) {
       .def("number_of_vertices", &Tds::number_of_vertices)
       .def("number_of_full_cells", &Tds::number_of_full_cells)
       .def("empty", &Tds::empty)
-      .def("vertex", &trid::vertex);
-    ;
+      .def("vertex", &trid::vertex, ri)
+      .def("is_vertex", trid::vertex_is_vertex)
+      .def("full_cell", trid::full_cell, ri)
+      .def("is_full_cell", trid::vertex_is_full_cell)
+    //   neighbor
+    //   mirror_index
+    //   index_of_covertex
+    //   is_boundary_facet
+    //   rotate_rotor
+    //   collapse_face
+    //   remove_decrease_dimension
+      .def("insert_in_full_cell",
+           [](Tds& tds, Fc& c)->Vertex&
+           { return *(tds.insert_in_full_cell(trid::Full_cell_handle(&c))); },
+           ri)
+      .def("insert_in_face",
+           [](Tds& tds, Face& f)->Vertex& { return *(tds.insert_in_face(f)); },
+           ri)
+      .def("insert_in_facet",
+           [](Tds& tds, Facet& ft)->Vertex&
+           { return *(tds.insert_in_facet(ft)); },
+           ri)
+      // insert_in_hole
+      // insert_in_tagged_hole
+      .def("insert_increase_dimension", &trid::insert_increase_dimension1, ri)
+      .def("insert_increase_dimension", &trid::insert_increase_dimension2, ri)
+      .def("clear", &Tds::clear)
+      // .def("new_vertex",
+      // .def("new_full_cell",
+      // .def("set_current_dimension",
+      // .def("delete_full_cell",
+      // .def("delete_full_cells",
+      // .def("delete_vertex",
+      // .def("associate_vertex_with_full_cell",
+      // .def("set_neighbors
+      .def("is_valid", &Tds::is_valid, py::arg("verbose") = true, py::arg("level") = 0)
+      // .def("gather_full_cells",
+      // .def("incident_full_cells",
+      // .def("star",
+      // .def("incident_upper_faces",
+      // .def("incident_faces",
+      // .def("read_full_cells",
+      // .def("write_full_cells",
+      ;
+
+    // Iterators:
+    // vertices
+    // full_cells
+    // facets
   }
 
   if (! add_attr<Tri>(m, "Triangulation")) {
@@ -308,6 +390,15 @@ void export_triangulation_d(py::module_& m) {
         .def(py::init<const Point&>())
         .def("point", &trid::Vertex::point, ri)
         .def("set_point", &trid::Vertex::set_point)
+        .def("full_cell",
+             [](const Vertex& v)->Fc& { return *(v.full_cell()); }, ri)
+        .def("set_full_cell",
+             [](Vertex& v, Fc& c)->void
+             {v.set_full_cell(trid::Full_cell_handle(&c)); })
+        .def("is_valid",
+             [](const Vertex& v, bool verbose, int level)->bool
+             { return v.is_valid(verbose, level); },
+             py::arg("verbose") = false, py::arg("level") = 0)
 
 #ifdef CGALPY_TRID_VERTEX_WITH_DATA
         .def("data", py::overload_cast<>(&Vertex::data, py::const_), ri)
@@ -385,40 +476,4 @@ void export_triangulation_d(py::module_& m) {
       .def("finite_facets", &trid::finite_facets, py::keep_alive<0, 1>())
       ;
   }
-
-//   using Aei = Tri::All_edges_iterator;
-//   using Aci = Tri::All_cells_iterator;
-//   using Afi = Tri::All_facets_iterator;
-
-//   using Fvi = Tri::Finite_vertices_iterator;
-//   using Fei = Tri::Finite_edges_iterator;
-//   using Fci = Tri::Finite_cells_iterator;
-//   using Ffi = Tri::Finite_facets_iterator;
-
-//   using Vertex = Tri::Vertex;
-//   using Edge = Tri::Vertex;
-//   using Cell = Tri::Cell;
-//   using Face = Tri::Facet;
-
-//   using Point = Tri::Point;
-
-//   // Iterators
-//   add_iterator<Avi, Avi, const Vertex&>("All_vertices_iterator", tri_c);
-//   add_iterator<Aei, Aei>("All_edges_iterator", tri_c);
-//   add_iterator<Aci, Aci, const Cell&>("All_cells_iterator", tri_c);
-//   add_iterator<Afi, Afi, const Face&>("All_facets_iterator", tri_c);
-
-//   add_iterator<Fvi, Fvi, const Vertex&>("Finite_vertices_iterator", tri_c);
-//   add_iterator<Fei, Fei>("Finite_edges_iterator", tri_c);
-//   add_iterator<Fci, Fci, const Cell&>("Finite_cells_iterator", tri_c);
-//   add_iterator<Ffi, Ffi, const Face&>("Finite_facets_iterator", tri_c);
-
-
-  // Todo
-  // Simplex;
-
-  // Facet_iterator;
-  // Cell_iterator;
-  // Segment_cell_iterator;
-  // Segment_simplex_iterator;
 }
