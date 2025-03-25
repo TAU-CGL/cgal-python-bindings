@@ -14,6 +14,8 @@
 #include <CGAL/Triangulation_ds_vertex.h>
 #include <CGAL/Triangulation_ds_full_cell.h>
 #include <CGAL/Triangulation_data_structure.h>
+#include <CGAL/Regular_triangulation.h>
+#include <CGAL/Delaunay_triangulation.h>
 
 #include "CGALPY/triangulation_d_config.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -78,6 +80,14 @@ using Weighted_tag = Triangulation_d::Weighted_tag;
 using Periodic_tag = Triangulation_d::Periodic_tag;
 
 using Rotor = Triangulation_d::Rotor;
+
+#if CGALPY_TRID == CGALPY_TRID_REGULAR
+using Regular_triangulation = CGAL::Regular_triangulation<Traits, Tds>;
+#endif
+
+#if CGALPY_TRID == CGALPY_TRID_DELAUNAY
+using Delaunay_triangulation = CGAL::Delaunay_triangulation<Traits, Tds>;
+#endif
 
 } // End of namespace trid
 

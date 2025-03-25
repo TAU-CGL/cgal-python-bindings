@@ -326,6 +326,10 @@ Vertex& insert4(Triangulation_d& tri, const Point& p, Vertex& v)
 { return *(tri.insert(p, Vertex_handle(&v))); }
 
 //
+Vertex& insert5(Triangulation_d& tri, const Point& p)
+{ return *(tri.insert(p)); }
+
+//
 py::list
 insert_in_hole1(Triangulation_d& tri, const Point& p, py::list& full_cells,
                 const Facet& ft) {
@@ -521,6 +525,7 @@ void export_triangulation_d(py::module_& m) {
       .def("insert", &trid::insert2)
       .def("insert", &trid::insert3)
       .def("insert", &trid::insert4)
+      .def("insert", &trid::insert5)
       .def("insert_in_hole", &trid::insert_in_hole1)
       .def("insert_in_hole", &trid::insert_in_hole2)
       .def("insert_in_face", &trid::insert_in_face)
@@ -632,5 +637,26 @@ void export_triangulation_d(py::module_& m) {
       .def("facets", &trid::facets, py::keep_alive<0, 1>())
       .def("finite_facets", &trid::finite_facets, py::keep_alive<0, 1>())
       ;
+
+#if CGALPY_TRID == CGALPY_TRID_REGULAR
+    using Rtri = trid::Regular_triangulation;
+
+    if (! add_attr<Rtri>(m, "Regular_triangulation")) {
+      py::class_<Rtri, Tri> rtri_c(m, "Regular_triangulation");
+    }
+#endif
+
+
+#if CGALPY_TRID == CGALPY_TRID_DELAUNAY
+    using Dtri = trid::Delaunay_triangulation;
+
+    if (! add_attr<Dtri>(m, "Delaunay_triangulation")) {
+      py::class_<Dtri, Tri> dtri_c(m, "Delaunay_triangulation");
+
+      dtri_c.def(py::init<int, const trid::Traits&>(),
+                 py::arg("dim"), py::arg("traits"))
+        ;
+    }
+#endif
   }
 }

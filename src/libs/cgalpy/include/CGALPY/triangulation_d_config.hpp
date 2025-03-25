@@ -13,8 +13,6 @@
 #include <CGAL/Triangulation_full_cell.h>
 #include <CGAL/Triangulation_vertex.h>
 #include <CGAL/Triangulation.h>
-#include <CGAL/Regular_triangulation.h>
-#include <CGAL/Delaunay_triangulation.h>
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_d_types.hpp"
@@ -91,12 +89,30 @@ template <int i, typename Tr, typename Tds> struct Tri {};
 template <typename Tr, typename Tds>
 struct Tri<CGALPY_TRID_PLAIN, Tr, Tds>
 { using type = CGAL::Triangulation<Tr, Tds>; };
+
 template <typename Tr, typename Tds>
-struct Tri<CGALPY_TRID_REGULAR, Tr, Tds>
-{ using type = CGAL::Regular_triangulation<Tr, Tds>; };
+struct Tri<CGALPY_TRID_REGULAR, Tr, Tds> {
+  using New_traits = CGAL::Regular_triangulation_traits_adapter<Tr>;
+  using New_vertex = CGAL::Triangulation_vertex<New_traits>;
+  using New_full_cell = CGAL::Triangulation_full_cell<New_traits>;
+  using New_dimension = typename New_traits::Dimension;
+  using Tmp_tds =
+    CGAL::Triangulation_data_structure<New_dimension, New_vertex, New_full_cell>;
+  using New_tds = typename CGAL::Default::Get<Tds, Tmp_tds>::type;
+  using type = CGAL::Triangulation<New_traits, New_tds>;
+};
+
 template <typename Tr, typename Tds>
-struct Tri<CGALPY_TRID_DELAUNAY, Tr, Tds>
-{ using type = CGAL::Delaunay_triangulation<Tr, Tds>; };
+struct Tri<CGALPY_TRID_DELAUNAY, Tr, Tds> {
+  using New_traits = Tr;
+  using New_vertex = CGAL::Triangulation_vertex<New_traits>;
+  using New_full_cell = CGAL::Triangulation_full_cell<New_traits>;
+  using New_dimension = typename New_traits::Dimension;
+  using Tmp_tds =
+    CGAL::Triangulation_data_structure<New_dimension, New_vertex, New_full_cell>;
+  using New_tds = typename CGAL::Default::Get<Tds, Tmp_tds>::type;
+  using type = CGAL::Triangulation<New_traits, New_tds>;
+};
 
 }
 

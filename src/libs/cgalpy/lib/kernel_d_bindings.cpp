@@ -27,6 +27,22 @@ namespace py = nanobind;
 extern void export_gmpz(py::module_& m);
 extern void export_gmpq(py::module_& m);
 
+#if CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_STATIC
+void init_point_d(Point_d* pd, py::list& lst) {
+  auto begin = stl_input_iterator<FT_d>(lst);
+  auto end = stl_input_iterator<FT_d>(lst, false);
+#if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
+     (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
+  new (pd) Point_d(begin, end);              // placement new
+#else
+  // Workaround a bug in CGAL
+  std::list<FT_d> tmp(begin, end);
+  new (pd) Point_d(tmp.begin(), tmp.end());  // placement new
+#endif
+}
+
+#else
+xxx
 void init_point_d(Point_d* pd, int d, py::list& lst) {
   auto begin = stl_input_iterator<FT_d>(lst);
   auto end = stl_input_iterator<FT_d>(lst, false);
@@ -39,6 +55,8 @@ void init_point_d(Point_d* pd, int d, py::list& lst) {
   new (pd) Point_d(d, tmp.begin(), tmp.end());  // placement new
 #endif
 }
+
+#endif
 
 // Determine whether the dD kernel is an an EPEC type.
 // An EPEC type has a non trivial FT
@@ -84,6 +102,13 @@ void bind_do_intersect_d(py::module_& m) {
 
 void export_kernel_d(py::module_& m) {
   using Pnt = Point_d;
+
+  // Kernel
+  if (! add_attr<Kernel_d>(m, "Kernel_d")) {
+    py::class_<Kernel_d>(m, "Kernel_d")
+      .def(py::init<>())
+      ;
+  }
 
 #if ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||                     \
      (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ))
