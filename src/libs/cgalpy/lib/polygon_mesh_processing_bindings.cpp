@@ -731,20 +731,51 @@ Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::fa
   return PMP::compute_face_normal(f, mesh, internal::parse_pmp_np<Pm>(params));
 }
 
+//////////////////////////////////////////////////////////////////////
+struct Np_geom_traits {
+  const std::string m_name = "geom_traits";
+  template <typename NamedParameters, typename Value>
+  auto operator()(NamedParameters& np, Value& value) const {
+    return np.geom_traits(py::cast<const Kernel&>(value));
+  }
+};
+//////////////////////////////////////////////////////////////////////
+
+template <typename PolygonMesh, typename FaceNormalMap,
+          typename NamedParameter>
+void compute_face_normals_util(const PolygonMesh& mesh,
+                               FaceNormalMap face_normals,
+                               NamedParameter& np,
+                               const py::dict& params)
+{ return PMP::compute_face_normals(mesh, face_normals, np); }
+
 //!
-template <typename PolygonMesh, typename FaceNormalMap>
-auto compute_face_normals(const PolygonMesh& mesh,
-                          FaceNormalMap face_normals,
-                          const py::dict& params = py::dict()) {
-  using Pm = PolygonMesh;
+template <typename PolygonMesh, typename FaceNormalMap,
+          typename NamedParameter, typename NamedParameterList>
+void compute_face_normals_util(const PolygonMesh& mesh,
+                               FaceNormalMap face_normals,
+                               NamedParameter& np,
+                               const py::dict& params,
+                               NamedParameterList op) {
   for (const auto& item : params) {
     const std::string& key = py::cast<std::string>(item.first);
-    if (key == "geom_traits") {
-      auto np = CGAL::parameters::geom_traits(py::cast<const Kernel&>(item.second));
-      return PMP::compute_face_normals(mesh, face_normals, np);
+    if (key == op.m_name) {
+      auto np_new = op(np, item.second);
+      compute_face_normals_util(mesh, face_normals, np_new, params);
+      return;
     }
   }
-  return PMP::compute_face_normals(mesh, face_normals);
+  compute_face_normals_util(mesh, face_normals, np, params);
+}
+
+//!
+template <typename PolygonMesh, typename FaceNormalMap>
+void compute_face_normals(const PolygonMesh& mesh,
+                          FaceNormalMap face_normals,
+                          const py::dict& params = py::dict()) {
+  auto np = CGAL::parameters::default_values();
+  Np_geom_traits op;
+  compute_face_normals_util(mesh, face_normals, np, params, op);
 }
 
 //!
