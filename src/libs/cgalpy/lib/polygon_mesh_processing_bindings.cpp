@@ -59,6 +59,9 @@
 #include "CGALPY/pmp_helpers.hpp"
 #include "CGALPY/Internal_face_plane_3_map.hpp"
 #include "CGALPY/merge_coplanar_facets.hpp"
+#include "CGALPY/Named_parameter_wrapper.hpp"
+#include "CGALPY/named_parameter_applicator.hpp"
+#include "CGALPY/Named_parameter_geom_traits.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -732,50 +735,31 @@ Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::fa
 }
 
 //////////////////////////////////////////////////////////////////////
-struct Np_geom_traits {
-  const std::string m_name = "geom_traits";
-  template <typename NamedParameters, typename Value>
-  auto operator()(NamedParameters& np, Value& value) const {
-    return np.geom_traits(py::cast<const Kernel&>(value));
+
+// Create a class template to wrap the function template
+template <typename T, typename... Args>
+struct Compute_face_normals_wrapper {
+  static void call(T np, Args&&... args) {
+    PMP::compute_face_normals(std::forward<Args>(args)..., std::forward<T>(np));
   }
 };
+
 //////////////////////////////////////////////////////////////////////
-
-template <typename PolygonMesh, typename FaceNormalMap,
-          typename NamedParameter>
-void compute_face_normals_util(const PolygonMesh& mesh,
-                               FaceNormalMap face_normals,
-                               NamedParameter& np,
-                               const py::dict& params)
-{ return PMP::compute_face_normals(mesh, face_normals, np); }
-
-//!
-template <typename PolygonMesh, typename FaceNormalMap,
-          typename NamedParameter, typename NamedParameterList>
-void compute_face_normals_util(const PolygonMesh& mesh,
-                               FaceNormalMap face_normals,
-                               NamedParameter& np,
-                               const py::dict& params,
-                               NamedParameterList op) {
-  for (const auto& item : params) {
-    const std::string& key = py::cast<std::string>(item.first);
-    if (key == op.m_name) {
-      auto np_new = op(np, item.second);
-      compute_face_normals_util(mesh, face_normals, np_new, params);
-      return;
-    }
-  }
-  compute_face_normals_util(mesh, face_normals, np, params);
-}
 
 //!
 template <typename PolygonMesh, typename FaceNormalMap>
 void compute_face_normals(const PolygonMesh& mesh,
                           FaceNormalMap face_normals,
                           const py::dict& params = py::dict()) {
+  using Pm = PolygonMesh;
+  using Fn_map = FaceNormalMap;
+
   auto np = CGAL::parameters::default_values();
-  Np_geom_traits op;
-  compute_face_normals_util(mesh, face_normals, np, params, op);
+  CGALPY::Named_parameter_geom_traits op;
+  CGALPY::Named_parameter_wrapper<Compute_face_normals_wrapper,
+                                  const Pm&, const Fn_map&>
+    wrapper(mesh, face_normals);
+  CGALPY::named_parameter_applicator(wrapper, np, params, op);
 }
 
 //!
