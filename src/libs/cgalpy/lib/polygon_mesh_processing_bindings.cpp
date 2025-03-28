@@ -734,17 +734,15 @@ Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::fa
   return PMP::compute_face_normal(f, mesh, internal::parse_pmp_np<Pm>(params));
 }
 
-//////////////////////////////////////////////////////////////////////
-
-// Create a class template to wrap the function template
+/*! A class template that wraps the function template
+ * PMP::compute_face_normals()
+ */
 template <typename T, typename... Args>
 struct Compute_face_normals_wrapper {
   static void call(T np, Args&&... args) {
     PMP::compute_face_normals(std::forward<Args>(args)..., std::forward<T>(np));
   }
 };
-
-//////////////////////////////////////////////////////////////////////
 
 //!
 template <typename PolygonMesh, typename FaceNormalMap>

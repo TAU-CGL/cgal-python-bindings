@@ -48,6 +48,10 @@
 #include "CGALPY/make_circulator.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
+#include "CGALPY/Named_parameter_wrapper.hpp"
+#include "CGALPY/named_parameter_applicator.hpp"
+#include "CGALPY/Named_parameter_repair_polygon_soup.hpp"
+#include "CGALPY/Named_parameter_verbose.hpp"
 
 extern void export_polyhedron_traits_with_normals_3(py::module_& m);
 extern void export_polyhedron_halfedge_ds(py::module_& m);
@@ -303,52 +307,29 @@ const Vertex& target_h(Halfedge& h, const Polyhedron_3& p) {
   return *(CGAL::target(Hd(&h), p));
 }
 
-// Read a surface mesh from a file.
+/*! A class template that wraps the function template
+ * CGAL::IO::read_polygon_mesh()
+ */
+template <typename NamedParameter, typename... Args>
+struct Read_polygon_mesh_wrapper {
+  static auto call(NamedParameter& np, Args&&... args) {
+    return CGAL::IO::read_polygon_mesh(std::forward<Args>(args)..., np);
+  }
+};
+
+/*! Read a surface mesh from a file.
+ */
 void read_polygon_mesh_impl(const std::string& filename,
                             Polyhedron_3& prn,
                             const py::dict& params = py::dict()) {
-  using Prn = pol3::Polyhedron_3;
-
-  bool res = true;
-  auto np1 = CGAL::parameters::default_values();
-  bool verbose_found = false;
-  for (const auto& item1 : params) {
-    const std::string& key = py::cast<std::string>(item1.first);
-    if (key == "verbose") {
-      verbose_found = true;
-      auto verbose_np = np1.verbose(py::cast<bool>(item1.second));
-      bool rps_found = false;
-      for (const auto& item2 : params) {
-        const std::string& key = py::cast<std::string>(item2.first);
-        if (key == "repair_polygon_soup") {
-          rps_found = true;
-          auto rps_np = verbose_np.repair_polygon_soup(py::cast<bool>(item2.second));
-          res = CGAL::IO::read_polygon_mesh(filename, prn, rps_np);
-          break;
-        }
-      }
-      if (! rps_found) {
-        res = CGAL::IO::read_polygon_mesh(filename, prn, verbose_np);
-      }
-    }
-    break;
-  }
-  if (! verbose_found) {
-    bool rps_found = false;
-    for (const auto& item2 : params) {
-      const std::string& key = py::cast<std::string>(item2.first);
-      if (key == "repair_polygon_soup") {
-        rps_found = true;
-        auto rps_np = np1.repair_polygon_soup(py::cast<bool>(item2.second));
-        res = CGAL::IO::read_polygon_mesh(filename, prn, rps_np);
-        break;
-      }
-    }
-    if (! rps_found) {
-      res = CGAL::IO::read_polygon_mesh(filename, prn, np1);
-    }
-  }
-
+  using Prn = Polyhedron_3;
+  auto np = CGAL::parameters::default_values();
+  CGALPY::Named_parameter_verbose op1;
+  CGALPY::Named_parameter_repair_polygon_soup op2;
+  CGALPY::Named_parameter_wrapper<Read_polygon_mesh_wrapper,
+                                  const std::string&, Prn&>
+    wrapper(filename, prn);
+  bool res = CGALPY::named_parameter_applicator(wrapper, np, params, op1, op2);
   if (! res) throw std::runtime_error("Cannot read file!");
 }
 

@@ -6,24 +6,22 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
-#ifndef CGALPY_NAMED_PARAMETER_GEOM_TRAITS_HPP
-#define CGALPY_NAMED_PARAMETER_GEOM_TRAITS_HPP
+#ifndef CGALPY_NAMED_PARAMETER_REPAIR_POLYGON_SOUP_HPP
+#define CGALPY_NAMED_PARAMETER_REPAIR_POLYGON_SOUP_HPP
 
 #include <string>
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/kernel_types.hpp"
-
 namespace py = nanobind;
 
 namespace CGALPY {
 
-struct Named_parameter_geom_traits {
-  const std::string m_name = "geom_traits";
+struct Named_parameter_repair_polygon_soup {
+  const std::string m_name = "repair_polygon_soup";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
-    return np.geom_traits(py::cast<const Kernel&>(value));
+    return np.repair_polygon_soup(py::cast<bool>(value));
   }
 };
 

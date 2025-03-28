@@ -27,13 +27,13 @@ struct Named_parameter_wrapper {
   // Function to call the stored function template with an additional parameter
   // np
   template <typename NPType>
-  void operator()(NPType&& np) {
-    std::apply([&np](StoredArgs&&... tupleArgs) {
-                 FuncTemplate<NPType, StoredArgs...>::
-                   call(std::forward<NPType>(np),
-                        std::forward<StoredArgs>(tupleArgs)...);
-               },
-               std::move(data));  // move the tuple to enable perfect forwarding
+  auto operator()(NPType&& np) {
+    return std::apply([&np](StoredArgs&&... tupleArgs) {
+                      return FuncTemplate<NPType, StoredArgs...>::
+                        call(std::forward<NPType>(np),
+                             std::forward<StoredArgs>(tupleArgs)...);
+                      },
+      std::move(data));  // move the tuple to enable perfect forwarding
   }
 };
 
