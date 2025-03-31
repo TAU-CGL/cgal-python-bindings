@@ -497,7 +497,6 @@ void export_meshing(py::module_& m) {
   //       &pmp::isotropic_remeshing_sf<Pm, pmp::Custom_sizing_field<Pm>>,
   //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
   //       py::arg("np") = py::dict());
-#endif
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   // The CGAL code is faulty and cannot coop with Polyhedron_3
@@ -505,11 +504,6 @@ void export_meshing(py::module_& m) {
         py::arg("tmesh"), py::arg("np") = py::dict());
 #endif
 
-#if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
-     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   m.def("split_long_edges", &pmp::split_long_edges<Pm>,
         py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
