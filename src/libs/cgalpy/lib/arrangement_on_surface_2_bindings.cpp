@@ -666,12 +666,17 @@ typename Arrangement_::Face& unbounded_face(Arrangement_& arr)
 /// @}
 
 //!
-static PyType_Slot aos_slots[] = {
-  {Py_tp_traverse, (void*) Arr_observer::aos_observer_tp_traverse},
-  {Py_tp_clear, (void*) Arr_observer::aos_observer_tp_clear},
+static PyType_Slot aos_observer_slots[] = {
+  {Py_tp_traverse, (void*) Arr_observer::tp_traverse},
+  {Py_tp_clear, (void*) Arr_observer::tp_clear},
   {0, nullptr}
 };
 
+static PyType_Slot aos_overlay_function_traits_slots[] = {
+  {Py_tp_traverse, (void*) Arr_overlay_function_traits::tp_traverse},
+  {Py_tp_clear, (void*) Arr_overlay_function_traits::tp_clear},
+  {0, nullptr}
+};
 }
 
 //! Export draw
@@ -845,29 +850,32 @@ void export_aos_with_history(py::module_& m) {
 // Overlay function traits
 template <bool VertexExtended, bool HalfedgeExtended, bool FaceExtended>
 void bind_overlay_function_traits(py::module_& m) {
-  constexpr auto ka_1_2 = py::keep_alive<1, 2>();
-  py::class_<aos2::Arr_overlay_function_traits>(m, "Arr_overlay_function_traits")
+  using Aoft = aos2::Arr_overlay_function_traits;
+  py::class_<Aoft>(m, "Arr_overlay_function_traits",
+                   py::type_slots(aos2::aos_overlay_function_traits_slots))
     .def(py::init<>())
     .def(py::init<py::object>())
     .def(py::init<py::object, py::object, py::object, py::object, py::object,
          py::object, py::object, py::object, py::object, py::object>())
-    .def("set_vv_v", &aos2::Arr_overlay_function_traits::set_vv_v, ka_1_2)
-    .def("set_ve_v", &aos2::Arr_overlay_function_traits::set_ve_v, ka_1_2)
-    .def("set_vf_v", &aos2::Arr_overlay_function_traits::set_vf_v, ka_1_2)
-    .def("set_ev_v", &aos2::Arr_overlay_function_traits::set_ev_v, ka_1_2)
-    .def("set_fv_v", &aos2::Arr_overlay_function_traits::set_fv_v, ka_1_2)
-    .def("set_ee_v", &aos2::Arr_overlay_function_traits::set_ee_v, ka_1_2)
-    .def("set_ee_e", &aos2::Arr_overlay_function_traits::set_ee_e, ka_1_2)
-    .def("set_ef_e", &aos2::Arr_overlay_function_traits::set_ef_e, ka_1_2)
-    .def("set_fe_e", &aos2::Arr_overlay_function_traits::set_fe_e, ka_1_2)
-    .def("set_ff_f", &aos2::Arr_overlay_function_traits::set_ff_f, ka_1_2)
+    .def("set_vv_v", &Aoft::set_vv_v)
+    .def("set_ve_v", &Aoft::set_ve_v)
+    .def("set_vf_v", &Aoft::set_vf_v)
+    .def("set_ev_v", &Aoft::set_ev_v)
+    .def("set_fv_v", &Aoft::set_fv_v)
+    .def("set_ee_v", &Aoft::set_ee_v)
+    .def("set_ee_e", &Aoft::set_ee_e)
+    .def("set_ef_e", &Aoft::set_ef_e)
+    .def("set_fe_e", &Aoft::set_fe_e)
+    .def("set_ff_f", &Aoft::set_ff_f)
     ;
 }
 
 //
 template <>
 void bind_overlay_function_traits<false, false, false>(py::module_& m) {
-  py::class_<aos2::Arr_overlay_function_traits>(m, "Arr_overlay_function_traits")
+  using Aoft = aos2::Arr_overlay_function_traits;
+  py::class_<Aoft>(m, "Arr_overlay_function_traits",
+                   py::type_slots(aos2::aos_overlay_function_traits_slots))
     .def(py::init<>())
     ;
 }
@@ -875,12 +883,13 @@ void bind_overlay_function_traits<false, false, false>(py::module_& m) {
 //
 template <>
 void bind_overlay_function_traits<false, false, true>(py::module_& m) {
-  constexpr auto ka_1_2 = py::keep_alive<1, 2>();
+  using Aoft = aos2::Arr_overlay_function_traits;
 
-  py::class_<aos2::Arr_overlay_function_traits>(m, "Arr_overlay_function_traits")
+  py::class_<Aoft>(m, "Arr_overlay_function_traits",
+                   py::type_slots(aos2::aos_overlay_function_traits_slots))
     .def(py::init<>())
     .def(py::init<py::object>())
-    .def("set_ff_f", &aos2::Arr_overlay_function_traits::set_ff_f, ka_1_2)
+    .def("set_ff_f", &Aoft::set_ff_f)
     ;
 }
 
@@ -1196,7 +1205,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
   }
 
   m.def("overlay", &aos2::overlay);
-  m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_function_traits>);
+  m.def("overlay", &aos2::overlay_tr<Aoft>);
   m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_traits>);
 
   using Aob = CGAL::Arr_observer<Aos>;
@@ -1211,7 +1220,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
 
   using Ao = aos2::Arr_observer;
   if (! add_attr<Ao>(m, "Arr_observer")) {
-    py::class_<Ao, Aob>(m, "Arr_observer", py::type_slots(aos2::aos_slots))
+    py::class_<Ao, Aob>(m, "Arr_observer",
+                        py::type_slots(aos2::aos_observer_slots))
       .def(py::init<>())
       .def(py::init<Aos&>(), py::keep_alive<1, 2>())
       //

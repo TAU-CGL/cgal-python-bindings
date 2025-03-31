@@ -835,7 +835,7 @@ public:
   /// @}
 
   //!
-  static int aos_observer_tp_traverse(PyObject* self, visitproc visit, void* arg) {
+  static int tp_traverse(PyObject* self, visitproc visit, void* arg) {
     // Get the C++ object associated with 'self' (this always succeeds)
     Arr_observer* w = py::inst_ptr<Arr_observer>(self);
 
@@ -976,7 +976,7 @@ public:
   }
 
   //!
-  static int aos_observer_tp_clear(PyObject* self) {
+  static int tp_clear(PyObject* self) {
     // Get the C++ object associated with 'self' (this always succeeds)
     Arr_observer* w = py::inst_ptr<Arr_observer>(self);
 
