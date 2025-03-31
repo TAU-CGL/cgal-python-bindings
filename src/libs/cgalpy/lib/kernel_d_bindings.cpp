@@ -42,7 +42,7 @@ void init_point_d(Point_d* pd, py::list& lst) {
 }
 
 #else
-xxx
+
 void init_point_d(Point_d* pd, int d, py::list& lst) {
   auto begin = stl_input_iterator<FT_d>(lst);
   auto end = stl_input_iterator<FT_d>(lst, false);
