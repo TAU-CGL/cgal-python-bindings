@@ -672,11 +672,20 @@ static PyType_Slot aos_observer_slots[] = {
   {0, nullptr}
 };
 
+//!
 static PyType_Slot aos_overlay_function_traits_slots[] = {
   {Py_tp_traverse, (void*) Arr_overlay_function_traits::tp_traverse},
   {Py_tp_clear, (void*) Arr_overlay_function_traits::tp_clear},
   {0, nullptr}
 };
+
+//!
+static PyType_Slot aos_overlay_traits_slots[] = {
+  {Py_tp_traverse, (void*) Arr_overlay_traits::tp_traverse},
+  {Py_tp_clear, (void*) Arr_overlay_traits::tp_clear},
+  {0, nullptr}
+};
+
 }
 
 //! Export draw
@@ -1184,29 +1193,30 @@ void export_arrangement_on_surface_2(py::module_& m) {
                                  aos2::is_halfedge_extended(),
                                  aos2::is_face_extended()>(m);
 
-  constexpr auto ka_1_2 = py::keep_alive<1, 2>();
-  if (! add_attr<aos2::Arr_overlay_traits>(m, "Arr_overlay_traits")) {
-    py::class_<aos2::Arr_overlay_traits>(m, "Arr_overlay_traits")
+  using Aot = aos2::Arr_overlay_traits;
+  if (! add_attr<Aot>(m, "Arr_overlay_traits")) {
+    py::class_<Aot>(m, "Arr_overlay_traits",
+                    py::type_slots(aos2::aos_overlay_traits_slots))
       .def(py::init<>())
       .def(py::init<py::object>())
       .def(py::init<py::object, py::object, py::object, py::object, py::object,
            py::object, py::object, py::object, py::object, py::object>())
-      .def("set_vv_v", &aos2::Arr_overlay_traits::set_vv_v, ka_1_2)
-      .def("set_ve_v", &aos2::Arr_overlay_traits::set_ve_v, ka_1_2)
-      .def("set_vf_v", &aos2::Arr_overlay_traits::set_vf_v, ka_1_2)
-      .def("set_ev_v", &aos2::Arr_overlay_traits::set_ev_v, ka_1_2)
-      .def("set_fv_v", &aos2::Arr_overlay_traits::set_fv_v, ka_1_2)
-      .def("set_ee_v", &aos2::Arr_overlay_traits::set_ee_v, ka_1_2)
-      .def("set_ee_e", &aos2::Arr_overlay_traits::set_ee_e, ka_1_2)
-      .def("set_ef_e", &aos2::Arr_overlay_traits::set_ef_e, ka_1_2)
-      .def("set_fe_e", &aos2::Arr_overlay_traits::set_fe_e, ka_1_2)
-      .def("set_ff_f", &aos2::Arr_overlay_traits::set_ff_f, ka_1_2)
+      .def("set_vv_v", &Aot::set_vv_v)
+      .def("set_ve_v", &Aot::set_ve_v)
+      .def("set_vf_v", &Aot::set_vf_v)
+      .def("set_ev_v", &Aot::set_ev_v)
+      .def("set_fv_v", &Aot::set_fv_v)
+      .def("set_ee_v", &Aot::set_ee_v)
+      .def("set_ee_e", &Aot::set_ee_e)
+      .def("set_ef_e", &Aot::set_ef_e)
+      .def("set_fe_e", &Aot::set_fe_e)
+      .def("set_ff_f", &Aot::set_ff_f)
       ;
   }
 
   m.def("overlay", &aos2::overlay);
   m.def("overlay", &aos2::overlay_tr<Aoft>);
-  m.def("overlay", &aos2::overlay_tr<aos2::Arr_overlay_traits>);
+  m.def("overlay", &aos2::overlay_tr<Aot>);
 
   using Aob = CGAL::Arr_observer<Aos>;
   if (! add_attr<Aob>(m, "Arr_observer_base")) {

@@ -115,7 +115,18 @@ public:
   {}
 
   // Destruct
-  ~Arr_overlay_traits() {}
+  ~Arr_overlay_traits() {
+    m_vv_v = py::none();
+    m_ve_v = py::none();
+    m_vf_v = py::none();
+    m_ev_v = py::none();
+    m_fv_v = py::none();
+    m_ee_v = py::none();
+    m_ee_e = py::none();
+    m_ef_e = py::none();
+    m_fe_e = py::none();
+    m_ff_f = py::none();
+  }
 
   // Constructor with all operators
   Arr_overlay_traits(py::object py_function0, py::object py_function1,
@@ -214,6 +225,64 @@ public:
    */
   void create_face(Face_handle_a f1, Face_handle_b f2, Face_handle_r f) const
   { execute(m_ff_f, *f1, *f2, *f); }
+
+  /// @}
+
+  /// Clean up
+  /// @{
+
+  //!
+  static int tp_traverse(PyObject* self, visitproc visit, void* arg) {
+    // Get the C++ object associated with 'self' (this always succeeds)
+    Arr_overlay_traits* w = py::inst_ptr<Arr_overlay_traits>(self);
+
+    // If w->value has an associated Python object, return it.
+    // If not, value.ptr() will equal NULL, which is also fine.
+    py::handle value_vv_v = py::find(w->m_vv_v);
+    py::handle value_ve_v = py::find(w->m_ve_v);
+    py::handle value_vf_v = py::find(w->m_vf_v);
+    py::handle value_ev_v = py::find(w->m_ev_v);
+    py::handle value_fv_v = py::find(w->m_fv_v);
+    py::handle value_ee_v = py::find(w->m_ee_v);
+    py::handle value_ee_e = py::find(w->m_ee_e);
+    py::handle value_ef_e = py::find(w->m_ef_e);
+    py::handle value_fe_e = py::find(w->m_fe_e);
+    py::handle value_ff_f = py::find(w->m_ff_f);
+
+    // Inform the Python GC about the instance
+    Py_VISIT(value_vv_v.ptr());
+    Py_VISIT(value_ve_v.ptr());
+    Py_VISIT(value_vf_v.ptr());
+    Py_VISIT(value_ev_v.ptr());
+    Py_VISIT(value_fv_v.ptr());
+    Py_VISIT(value_ee_v.ptr());
+    Py_VISIT(value_ee_e.ptr());
+    Py_VISIT(value_ef_e.ptr());
+    Py_VISIT(value_fe_e.ptr());
+    Py_VISIT(value_ff_f.ptr());
+
+    return 0;
+  }
+
+  //!
+  static int tp_clear(PyObject* self) {
+    // Get the C++ object associated with 'self' (this always succeeds)
+    Arr_overlay_traits* w = py::inst_ptr<Arr_overlay_traits>(self);
+
+    // Break reference cycles!
+    w->m_vv_v = {};
+    w->m_ve_v = {};
+    w->m_vf_v = {};
+    w->m_ev_v = {};
+    w->m_fv_v = {};
+    w->m_ee_v = {};
+    w->m_ee_e = {};
+    w->m_ef_e = {};
+    w->m_fe_e = {};
+    w->m_ff_f = {};
+
+    return 0;
+  }
 
   /// @}
 
