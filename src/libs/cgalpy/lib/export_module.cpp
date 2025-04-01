@@ -47,6 +47,7 @@ void export_point_location(py::module_&);
 void export_point_set_processing(py::module_&);
 void export_nef_3(py::module_&);
 void export_pmp_intersection(py::module_&);
+void export_pmp_distance(py::module_&);
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
 void export_polygon_mesh_processing(py::module_&);
@@ -226,6 +227,9 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_polygon_mesh_processing(pmp_m);
 #ifdef CGALPY_PMP_INTERSECTION_BINDINGS
   export_pmp_intersection(pmp_m);
+#endif
+#ifdef CGALPY_PMP_DISTANCE_BINDINGS
+  export_pmp_distance(pmp_m);
 #endif
 #endif
 

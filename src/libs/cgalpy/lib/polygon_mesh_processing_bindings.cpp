@@ -33,7 +33,6 @@
 #include <CGAL/tags.h>
 #include <CGAL/Mesh_facet_topology.h>
 #include <CGAL/Polygon_mesh_processing/detect_features.h>
-#include <CGAL/Polygon_mesh_processing/distance.h>
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
 #include <CGAL/Polygon_mesh_processing/merge_border_vertices.h>
@@ -288,81 +287,6 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
 
 //!
 template <typename PolygonMesh>
-double approximate_Hausdorff_distance(const PolygonMesh& tm1,
-                                      const PolygonMesh& tm2,
-                                      const py::dict& np1 = py::dict(),
-                                      const py::dict& np2 = py::dict()) {
-  using Pm = PolygonMesh;
-  using TAG = CGAL::Sequential_tag;
-  return PMP::approximate_Hausdorff_distance<TAG>(tm1, tm2,
-                                             internal::parse_pmp_np<Pm>(np1),
-                                             internal::parse_pmp_np<Pm>(np2));
-}
-
-  //!
-template <typename TriangleMesh>
-auto approximate_max_distance_to_point_set(const TriangleMesh& tm,
-                                           const Point_3_vec& points,
-                                           const double precision,
-                                           const py::dict& np = py::dict()) {
-  return PMP::approximate_max_distance_to_point_set(tm, points, precision,
-                                                    internal::parse_pmp_np<TriangleMesh>(np));
-}
-
-//!
-template <typename PolygonMesh>
-auto approximate_symmetric_Hausdorff_distance(const PolygonMesh& tm1,
-                                              const PolygonMesh& tm2,
-                                              const py::dict& np1 = py::dict(),
-                                              const py::dict& np2 = py::dict()) {
-  using Pm = PolygonMesh;
-  using TAG = CGAL::Sequential_tag;
-  return PMP::approximate_symmetric_Hausdorff_distance<TAG>(tm1, tm2,
-                                                            internal::parse_pmp_np<Pm>(np1),
-                                                            internal::parse_pmp_np<Pm>(np2));
-}
-
-//!
-template <typename PolygonMesh>
-auto bounded_error_Hausdorff_distance(const PolygonMesh& tm1,
-                                      const PolygonMesh& tm2,
-                                      const double error_bound = 0.0001,
-                                      const py::dict& np1 = py::dict(),
-                                      const py::dict& np2 = py::dict()) {
-  using Pm = PolygonMesh;
-  using TAG = CGAL::Sequential_tag;
-  return PMP::bounded_error_Hausdorff_distance<TAG>(tm1, tm2, error_bound,
-                                                 internal::parse_pmp_np<Pm>(np1),
-                                                 internal::parse_pmp_np<Pm>(np2));
-}
-
-//!
-template <typename PolygonMesh>
-auto is_Hausdorff_distance_larger(const PolygonMesh& tm1, const PolygonMesh& tm2,
-                                  const double distance_bound,
-                                  const double error_bound,
-                                  const py::dict& np1 = py::dict(),
-                                  const py::dict& np2 = py::dict()) {
-  using Pm = PolygonMesh;
-  using TAG = CGAL::Sequential_tag;
-  return PMP::is_Hausdorff_distance_larger<TAG>(tm1, tm2, distance_bound, error_bound,
-                                       internal::parse_pmp_np<Pm>(np1),
-                                       internal::parse_pmp_np<Pm>(np2));
-}
-
-//!
-template <typename TriangeMesh>
-auto max_distance_to_triangle_mesh(const Point_3_vec& points,
-                                   const TriangeMesh& tm,
-                                   const py::dict& np = py::dict()) {
-  using Tm = TriangeMesh;
-  using TAG = CGAL::Sequential_tag;
-  return PMP::max_distance_to_triangle_mesh<TAG>(points, tm,
-                                                 internal::parse_pmp_np<Tm>(np));
-}
-
-//!
-template <typename PolygonMesh>
 auto stitch_borders_bc(const std::vector<typename boost::graph_traits<PolygonMesh>::halfedge_descriptor>& boundary_cycle_representatives,
                        PolygonMesh& pmesh,
                        const py::dict& np = py::dict()) {
@@ -560,26 +484,6 @@ auto remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
 #endif
 
   return retv;
-}
-
-//!
-template <typename PolygonMesh>
-auto sample_triangle_mesh(const PolygonMesh& tm,
-                          const py::dict& np = py::dict()) {
-  using Pm = PolygonMesh;
-  PointRange pts;
-  PMP::sample_triangle_mesh(tm, std::back_inserter(pts),
-                            internal::parse_pmp_np<Pm>(np));
-  return pts;
-}
-
-//!
-auto sample_triangle_soup(const Point_3_vec& points,
-                          const std::vector<std::array<std::size_t, 3>>& triangles,
-                          const py::dict& np = py::dict()) {
-  PointRange pts;
-  PMP::sample_triangle_soup(points, triangles, std::back_inserter(pts), internal::parse_named_parameters(np));
-  return pts;
 }
 
 //!
@@ -1721,35 +1625,6 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("tmesh"), py::arg("np") = py::dict());
   m.def("remove_isolated_vertices", &PMP::remove_isolated_vertices<Pm>,
         py::arg("pmesh"));
-
-  // Distance Functions
-  m.def("approximate_Hausdorff_distance",
-        &pmp::approximate_Hausdorff_distance<Pm>,
-        py::arg("tm1"), py::arg("tm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("approximate_max_distance_to_point_set",
-        &pmp::approximate_max_distance_to_point_set<Pm>,
-        py::arg("tm"), py::arg("points"), py::arg("precision"),
-        py::arg("np") = py::dict());
-  m.def("approximate_symmetric_Hausdorff_distance",
-        &pmp::approximate_symmetric_Hausdorff_distance<Pm>,
-        py::arg("tm1"), py::arg("tm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("bounded_error_Hausdorff_distance",
-        &pmp::bounded_error_Hausdorff_distance<Pm>,
-        py::arg("tm1"), py::arg("tm2"), py::arg("error_bound") = 0.0001,
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("is_Hausdorff_distance_larger", &pmp::is_Hausdorff_distance_larger<Pm>,
-        py::arg("tm1"), py::arg("tm2"), py::arg("distance_bound"),
-        py::arg("error_bound"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("max_distance_to_triangle_mesh", &pmp::max_distance_to_triangle_mesh<Pm>,
-        py::arg("tm"), py::arg("point"),
-        py::arg("np") = py::dict());
-  m.def("sample_triangle_mesh", &pmp::sample_triangle_mesh<Pm>,
-        py::arg("tm"), py::arg("np") = py::dict());
-  m.def("sample_triangle_soup", &pmp::sample_triangle_soup,
-        py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict());
 
   // Feature Detection Functions
   m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, Edge_bool_map>,

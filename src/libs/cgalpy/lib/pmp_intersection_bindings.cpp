@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <vector>
+#include <array>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
