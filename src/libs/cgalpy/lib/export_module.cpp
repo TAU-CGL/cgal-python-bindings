@@ -46,6 +46,7 @@ void export_orientation_functions(py::module_&);
 void export_point_location(py::module_&);
 void export_point_set_processing(py::module_&);
 void export_nef_3(py::module_&);
+void export_pmp_intersection(py::module_&);
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
 void export_polygon_mesh_processing(py::module_&);
@@ -80,24 +81,24 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_kernel_module(ker_m);
 #ifdef CGALPY_KERNEL_INTERSECTION_BINDINGS
   export_intersections(ker_m);
-#endif // CGALPY_KERNEL_INTERSECTION_BINDINGS
-#endif // CGALPY_KERNEL_BINDINGS
+#endif
+#endif
 
 #ifdef CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS
     export_2d_range_and_neighbor_search(m); // currently under CGALPY
-#endif // CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS
+#endif
 #ifdef CGALPY_3D_POINT_SET_BINDINGS
     export_3d_point_set(m); // currently under CGALPY
-#endif // CGALPY_3D_POINT_SET_BINDINGS
+#endif
 
 #ifdef CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS
     export_kinetic_surface_reconstruction(m); // currently under CGALPY
-#endif // CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS
+#endif
 
 #ifdef CGALPY_KERNEL_D_BINDINGS
   auto kerd_m = m.def_submodule("Kerd");
   export_kernel_d(kerd_m);
-#endif // CGALPY_KERNEL_D_BINDINGS
+#endif
 
 #ifdef CGALPY_POLYGON_2_BINDINGS
   auto pol2_m = m.def_submodule("Pol2");
@@ -223,6 +224,9 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_meshing(pmp_m);
   export_orientation_functions(pmp_m);
   export_polygon_mesh_processing(pmp_m);
+#ifdef CGALPY_PMP_INTERSECTION_BINDINGS
+  export_pmp_intersection(pmp_m);
+#endif
 #endif
 
 #ifdef CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS
