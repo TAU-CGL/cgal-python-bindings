@@ -26,7 +26,6 @@ void export_basic_viewer(py::module_& m);
 void export_boolean_set_operations_2(py::module_&);
 void export_bounding_volumes(py::module_&);
 void export_cgal(py::module_& m);
-void export_connected_components(py::module_&);
 void export_convex_hull_2(py::module_&);
 void export_convex_hull_3(py::module_&);
 void export_corefinement(py::module_&);
@@ -47,6 +46,7 @@ void export_point_location(py::module_&);
 void export_point_set_processing(py::module_&);
 void export_nef_3(py::module_&);
 void export_pmp_intersection(py::module_&);
+void export_pmp_connected_components(py::module_&);
 void export_pmp_distance(py::module_&);
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
@@ -220,16 +220,18 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   auto pmp_m = m.def_submodule("Pmp");
-  export_connected_components(pmp_m);
   export_corefinement(pmp_m);
   export_meshing(pmp_m);
   export_orientation_functions(pmp_m);
   export_polygon_mesh_processing(pmp_m);
-#ifdef CGALPY_PMP_INTERSECTION_BINDINGS
-  export_pmp_intersection(pmp_m);
+#ifdef CGALPY_PMP_CONNECTED_COMPONENTS_BINDINGS
+  export_pmp_connected_components(pmp_m);
 #endif
 #ifdef CGALPY_PMP_DISTANCE_BINDINGS
   export_pmp_distance(pmp_m);
+#endif
+#ifdef CGALPY_PMP_INTERSECTION_BINDINGS
+  export_pmp_intersection(pmp_m);
 #endif
 #endif
 
