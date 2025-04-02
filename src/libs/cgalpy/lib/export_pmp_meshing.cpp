@@ -1,3 +1,14 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Efi Fogel         <efifogel@gmail.com>
+
+#include <vector>
+#include <tuple>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/tuple.h>
@@ -28,12 +39,11 @@ namespace PMP = CGAL::Polygon_mesh_processing;
 
 namespace pmp {
 
-//
+//!
 template <typename PolygonMesh>
 auto remesh_planar_patches(PolygonMesh& pmesh,
                            const py::dict& np_in = py::dict(),
                            const py::dict& np_out = py::dict()) {
-
   using Pm = PolygonMesh;
 
   auto eicm = get_edge_prop_map<Pm, bool>
@@ -186,10 +196,7 @@ auto triangulate_faces_r(const std::vector<typename boost::graph_traits<PolygonM
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
-  // auto vpm = get_vertex_point_map(pm, np);
-  return PMP::triangulate_faces(face_range, pm, internal::parse_pmp_np<Pm>(np)
-                                // .vertex_point_map(vpm)
-                                );
+  return PMP::triangulate_faces(face_range, pm, internal::parse_pmp_np<Pm>(np));
 }
 
 //!
@@ -251,9 +258,7 @@ auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
                                            .facet_size(mfs)
                                            .facet_angle(mfa)
                                            .facet_distance(mfd)
-                                           .mesh_edge_size(mes)
-                                           // .vertex_point_map(vpm)
-                                           );
+                                           .mesh_edge_size(mes));
   }
   else {
     retv = PMP::surface_Delaunay_remeshing(tmesh,
@@ -262,9 +267,7 @@ auto surface_Delaunay_remeshing(PolygonMesh& tmesh,
                                            .face_patch_map(fpm)
                                            .facet_size(mfs)
                                            .facet_angle(mfa)
-                                           .facet_distance(mfd)
-                                           // .vertex_point_map(vpm)
-                                           );
+                                           .facet_distance(mfd));
   }
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
@@ -338,11 +341,12 @@ auto angle_and_area_smoothing(const std::vector<typename boost::graph_traits<Pol
                                 internal::parse_pmp_np<Pm>(np)
                                 .edge_is_constrained_map(eicm)
                                 .vertex_is_constrained_map(vicm));
+
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (!np.contains("edge_is_constrained_map")) {
+  if (! np.contains("edge_is_constrained_map")) {
     pmesh.remove_property_map(eicm);
   }
-  if (!np.contains("vertex_is_constrained_map")) {
+  if (! np.contains("vertex_is_constrained_map")) {
     pmesh.remove_property_map(vicm);
   }
 #endif
@@ -365,6 +369,7 @@ auto angle_and_area_smoothing_m(PolygonMesh& pmesh,
                                 internal::parse_pmp_np<Pm>(np)
                                 .edge_is_constrained_map(eicm)
                                 .vertex_is_constrained_map(vicm));
+
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("edge_is_constrained_map"))
     pmesh.remove_property_map(eicm);
