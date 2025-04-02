@@ -424,60 +424,6 @@ void merge_coplanar_facets(PolygonMesh& mesh,
 }
 
 //!
-template <typename PolygonMesh>
-Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::face_descriptor& f,
-                             const PolygonMesh& mesh,
-                             const py::dict& params = py::dict()) {
-  using Pm = PolygonMesh;
-  return PMP::compute_face_normal(f, mesh, internal::parse_pmp_np<Pm>(params));
-}
-
-/*! A class template that wraps the function template
- * PMP::compute_face_normals()
- */
-template <typename T, typename... Args>
-struct Compute_face_normals_wrapper {
-  static void call(T np, Args&&... args) {
-    PMP::compute_face_normals(std::forward<Args>(args)..., std::forward<T>(np));
-  }
-};
-
-//!
-template <typename PolygonMesh, typename FaceNormalMap>
-void compute_face_normals(const PolygonMesh& mesh,
-                          FaceNormalMap face_normals,
-                          const py::dict& params = py::dict()) {
-  using Pm = PolygonMesh;
-  using Fn_map = FaceNormalMap;
-
-  auto np = CGAL::parameters::default_values();
-  CGALPY::Named_parameter_geom_traits op;
-  CGALPY::Named_parameter_wrapper<Compute_face_normals_wrapper,
-                                  const Pm&, const Fn_map&>
-    wrapper(mesh, face_normals);
-  CGALPY::named_parameter_applicator(wrapper, np, params, op);
-}
-
-//!
-template <typename PolygonMesh>
-Vector_3 compute_vertex_normal(const typename boost::graph_traits<PolygonMesh>::vertex_descriptor& v,
-                               const PolygonMesh& mesh,
-                               const py::dict& np = py::dict()) {
-  using Pm = PolygonMesh;
-  return PMP::compute_vertex_normal(v, mesh, internal::parse_pmp_np<Pm>(np));
-}
-
-//!
-template <typename PolygonMesh, typename VertexNormalMap>
-auto compute_vertex_normals(const PolygonMesh& mesh,
-                            VertexNormalMap vertex_normals,
-                            const py::dict& np = py::dict()) {
-  using Pm = PolygonMesh;
-  return PMP::compute_vertex_normals(mesh, vertex_normals,
-                                     internal::parse_pmp_np<Pm>(np));
-}
-
-//!
 template <typename TriangleMesh>
 auto area(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
@@ -590,17 +536,6 @@ auto volume(const TriangleMesh& tm,
 }
 
 //!
-template<typename PolygonMesh, typename VertexNormalMap, typename FaceNormalMap>
-auto compute_normals(const PolygonMesh& pm,
-                     VertexNormalMap vnormals,
-                     FaceNormalMap fnormals,
-                     const py::dict& np = py::dict()) {
-  using Pm = PolygonMesh;
-  return PMP::compute_normals(pm, vnormals, fnormals,
-                              internal::parse_pmp_np<Pm>(np));
-}
-
-//!
 template <typename PolygonMesh>
 void interpolated_corrected_curvatures(PolygonMesh& pmesh,
                                        const py::dict& np = py::dict()) {
@@ -638,7 +573,8 @@ void interpolated_corrected_curvatures(PolygonMesh& pmesh,
       pmesh.remove_property_map(vnm);
     }
 #endif
-  } else {
+  }
+  else {
     PMP::interpolated_corrected_curvatures(pmesh, internal::parse_pmp_np<Pm>(np)
                                            .vertex_mean_curvature_map(vmcm)
                                            .vertex_Gaussian_curvature_map(vgcm)
@@ -796,8 +732,7 @@ void detect_sharp_edges(PolygonMesh& pmesh,
        np["vertex_face_degree_map"] : py::none());
     PMP::detect_sharp_edges(pmesh, angle_in_deg, ebmap,
                             internal::parse_pmp_np<Pm>(np)
-                            .vertex_feature_degree_map(vfdm)
-                            );
+                            .vertex_feature_degree_map(vfdm));
   }
   else {
     PMP::detect_sharp_edges(pmesh, angle_in_deg, ebmap,
@@ -852,8 +787,9 @@ auto detect_corners_of_regions(PolygonMesh& pmesh,
   std::size_t r = PMP::detect_corners_of_regions(pmesh, region_map, nb_regions, corner_id_map,
                                                  internal::parse_pmp_np<Pm>(np)
                                                  .edge_is_constrained_map(eicm));
+
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (!np.contains("edge_is_constrained_map")) {
+  if (! np.contains("edge_is_constrained_map")) {
     pmesh.remove_property_map(eicm);
   }
 #endif
@@ -887,25 +823,29 @@ sharp_edges_segmentation(PolygonMesh& pmesh,
                                                 .vertex_feature_degree_map(vfdm)
                                                 .face_index_map(fim)
                                                 .vertex_incident_patches_map(vipm));
-  } else if (fimap) {
+  }
+  else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
       np.contains("face_index_map") ? np["face_index_map"] : py::none());
     num_patches = PMP::sharp_edges_segmentation(pmesh, angle_in_deg, edge_is_feature_map, patch_id_map,
                                                 internal::parse_pmp_np<Pm>(np)
                                                 .vertex_feature_degree_map(vfdm)
                                                 .face_index_map(fim));
-  } else if (vimap) {
+  }
+  else if (vimap) {
     auto vipm = get_vertex_prop_map<Pm, std::set<int>>(pmesh, "INTERNAL_MAP2",
       np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
     num_patches = PMP::sharp_edges_segmentation(pmesh, angle_in_deg, edge_is_feature_map, patch_id_map,
                                                 internal::parse_pmp_np<Pm>(np)
                                                 .vertex_feature_degree_map(vfdm)
                                                 .vertex_incident_patches_map(vipm));
-  } else {
+  }
+  else {
     num_patches = PMP::sharp_edges_segmentation(pmesh, angle_in_deg, edge_is_feature_map, patch_id_map,
                                                 internal::parse_pmp_np<Pm>(np)
                                                 .vertex_feature_degree_map(vfdm));
   }
+
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("vertex_face_degree_map")) {
     pmesh.remove_property_map(vfdm);
@@ -1213,22 +1153,18 @@ void export_polygon_mesh_processing(py::module_& m) {
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   using Vertex_size_map = Pm::Property_map<Vd, std::size_t>;
-  using Vertex_vector_map = Pm::Property_map<Vd, Vector_3>;
   using Vertex_double_map = Pm::Property_map<Vd, double>;
   using Edge_bool_map = Pm::Property_map<Ed, bool>;
   using Face_bool_map = Pm::Property_map<Fd, bool>;
   using Face_size_type_map = Pm::Property_map<Fd, faces_size_type>;
   using Face_size_map = Pm::Property_map<Fd, std::size_t>;
-  using Face_vector_map = Pm::Property_map<Fd, Vector_3>;
   using Face_plane_map = Pm::Property_map<Fd, Plane_3>;
+  using Face_vector_map = Pm::Property_map<Fd, Vector_3>;
 #endif
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
   using Vertex_size_tag = CGAL::dynamic_vertex_property_t<std::size_t>;
   using Vertex_size_map = boost::property_map<Pm, Vertex_size_tag>::type;
-
-  using Vector_vector_tag = CGAL::dynamic_vertex_property_t<Vector_3>;
-  using Vertex_vector_map = boost::property_map<Pm, Vector_vector_tag>::type;
 
   using Vector_double_tag = CGAL::dynamic_vertex_property_t<double>;
   using Vertex_double_map = boost::property_map<Pm, Vector_double_tag>::type;
@@ -1245,11 +1181,11 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Face_bool_tag = CGAL::dynamic_face_property_t<bool>;
   using Face_bool_map = boost::property_map<Pm, Face_bool_tag>::type;
 
-  using Face_vector_tag = CGAL::dynamic_face_property_t<Vector_3>;
-  using Face_vector_map = boost::property_map<Pm, Face_vector_tag>::type;
-
   using Face_plane_tag = CGAL::dynamic_face_property_t<Plane_3>;
   using Face_plane_map = boost::property_map<Pm, Face_plane_tag>::type;
+
+  using Face_vector_tag = CGAL::dynamic_face_property_t<Vector_3>;
+  using Face_vector_map = boost::property_map<Pm, Face_vector_tag>::type;
 #endif
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -1290,43 +1226,6 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("interpolated_corrected_curvatures",
         &pmp::interpolated_corrected_curvatures_v<Pm>,
         py::arg("v"), py::arg("pm"), py::arg("np") = py::dict());
-#endif
-
-  // Normal Computation
-  m.def("compute_face_normal", &pmp::compute_face_normal<Pm>,
-        py::arg("f"), py::arg("pmesh"),
-        py::arg("np") = py::dict());
-
-#if ((CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH) && \
-     (CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS))
-  using Face_normal_map = pol3::Internal_face_plane_3_map<Pm>;
-#else
-  using Face_normal_map = Face_vector_map;
-#endif
-  m.def("compute_face_normals",
-        &pmp::compute_face_normals<Pm, Face_normal_map>,
-        py::arg("pmesh"), py::arg("face_normals"),
-        py::arg("np") = py::dict());
-
-  m.def("compute_normals",
-        &pmp::compute_normals<Pm, Vertex_vector_map, Face_vector_map>,
-        py::arg("vnormals"), py::arg("fnormals"), py::arg("pmesh"),
-        py::arg("np") = py::dict());
-
-  m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>,
-        py::arg("v"), py::arg("pmesh"),
-        py::arg("np") = py::dict());
-
-  m.def("merge_coplanar_facets",
-        &pmp::merge_coplanar_facets<Pm, Face_normal_map>,
-        py::arg("pmesh"), py::arg("face_normals"),
-        py::arg("np") = py::dict());
-
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  m.def("compute_vertex_normals",
-        &pmp::compute_vertex_normals<Pm, Vertex_vector_map>,
-        py::arg("pmesh"), py::arg("vertex_normals"),
-        py::arg("np") = py::dict());
 #endif
 
   // Geometric Measure Functions
@@ -1548,4 +1447,15 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def(py::init<>())
     ;
 
+#if ((CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH) && \
+     (CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS))
+  using Face_normal_map = pol3::Internal_face_plane_3_map<Pm>;
+#else
+  using Face_normal_map = Face_vector_map;
+#endif
+
+  m.def("merge_coplanar_facets",
+        &pmp::merge_coplanar_facets<Pm, Face_normal_map>,
+        py::arg("pmesh"), py::arg("face_normals"),
+        py::arg("np") = py::dict());
 }
