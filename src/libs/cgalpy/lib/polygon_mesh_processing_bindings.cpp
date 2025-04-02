@@ -61,7 +61,7 @@ namespace PMP = CGAL::Polygon_mesh_processing;
 namespace pmp {
 
 using Point_3_vec = std::vector<Point_3>;
-using Size_t_vec = std::vector<size_t>;
+using Size_t_vec = std::vector<std::size_t>;
 
 //!
 template <typename PolygonMesh>

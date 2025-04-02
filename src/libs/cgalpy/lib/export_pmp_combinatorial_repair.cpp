@@ -21,6 +21,7 @@
 
 //! \todo remove
 #include "CGALPY/pmp_np_parser.hpp"
+#include "CGALPY/pmp_helpers.hpp"
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 
@@ -28,6 +29,9 @@ namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 
 namespace pmp {
+
+using Point_3_vec = std::vector<Point_3>;
+using Size_t_vec = std::vector<std::size_t>;
 
 //!
 template <typename PolygonMesh>
@@ -53,12 +57,12 @@ auto duplicate_non_manifold_vertices(PolygonMesh& pm,
 }
 
 //!
-auto is_polygon_soup_a_polygon_mesh(std::vector<std::vector<std::size_t>>& polygons)
+auto is_polygon_soup_a_polygon_mesh(std::vector<Size_t_vec>& polygons)
 { return PMP::is_polygon_soup_a_polygon_mesh(polygons); }
 
 //!
 auto merge_duplicate_points_in_polygon_soup(Point_3_vec& pointvec,
-                                            std::vector<std::vector<std::size_t> >& polyvec,
+                                            std::vector<Size_t_vec >& polyvec,
                                             const py::dict& np = py::dict()) {
   return PMP::merge_duplicate_points_in_polygon_soup(pointvec, polyvec,
                                                      internal::parse_named_parameters(np));
@@ -66,7 +70,7 @@ auto merge_duplicate_points_in_polygon_soup(Point_3_vec& pointvec,
 
 //!
 auto merge_duplicate_polygons_in_polygon_soup(Point_3_vec& points,
-                                              std::vector<std::vector<std::size_t> >& polygons,
+                                              std::vector<Size_t_vec >& polygons,
                                               const py::dict& np = py::dict()) {
   return PMP::merge_duplicate_polygons_in_polygon_soup(points, polygons,
                                                        internal::parse_named_parameters(np));
@@ -110,7 +114,7 @@ auto polygon_mesh_to_polygon_soup(const PolygonMesh& pm,
   using Vd = typename Gt::vertex_descriptor;
   using Fd = typename Gt::face_descriptor;
   Point_3_vec pts;
-  std::vector<std::vector<std::size_t>> polys;
+  std::vector<Size_t_vec> polys;
   PMP::polygon_mesh_to_polygon_soup(pm, pts, polys,
                                     internal::parse_pmp_np<Pm>(np));
   return std::make_tuple(pts, polys);
@@ -119,7 +123,7 @@ auto polygon_mesh_to_polygon_soup(const PolygonMesh& pm,
 //!
 template <typename PolygonMesh>
 auto polygon_soup_to_polygon_mesh(const Point_3_vec& points,
-                                  const std::vector<std::vector<std::size_t>>& polygons,
+                                  const std::vector<Size_t_vec>& polygons,
                                   const py::dict& np_ps = py::dict(),
                                   const py::dict& np_pm = py::dict()) {
   using Pm = PolygonMesh;
@@ -139,12 +143,12 @@ auto polygon_soup_to_polygon_mesh(const Point_3_vec& points,
 
 //!
 auto remove_isolated_points_in_polygon_soup(Point_3_vec& points,
-                                            std::vector<std::vector<std::size_t>>& polygons)
+                                            std::vector<Size_t_vec>& polygons)
 { return PMP::remove_isolated_points_in_polygon_soup(points, polygons); }
 
 //!
 auto repair_polygon_soup(Point_3_vec& points,
-                         std::vector<std::vector<std::size_t>>& polygons,
+                         std::vector<Size_t_vec>& polygons,
                          const py::dict& np = py::dict()) {
   PMP::repair_polygon_soup(points, polygons,
                            internal::parse_named_parameters(np));
