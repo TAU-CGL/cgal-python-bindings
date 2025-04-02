@@ -427,7 +427,8 @@ auto random_perturbation_v(const std::vector<typename boost::graph_traits<Polygo
 
 } // namespace pmp
 
-void export_meshing(py::module_& m) {
+//!
+void export_pmp_meshing(py::module_& m) {
   using Pm = pmp::Polygonal_mesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;

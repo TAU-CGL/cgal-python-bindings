@@ -23,7 +23,6 @@
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 
 namespace py = nanobind;
-
 namespace PMP = CGAL::Polygon_mesh_processing;
 
 namespace pmp {
@@ -314,22 +313,22 @@ void set_link_connected_polygons(Default_orientation_visitor& v,
 } // namespace pmp
 
 //!
-void export_orientation_functions(py::module_& m) {
+void export_pmp_orientation(py::module_& m) {
   using Pm = pmp::Polygonal_mesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = boost::graph_traits<Pm>::face_descriptor;
   using faces_size_type = boost::graph_traits<Pm>::faces_size_type;
   using Dov = pmp::Default_orientation_visitor;
 
-#if CGALPY_PMP_POLYGONAL_MESH == 1
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   using FaceSizeTypeMap = Pm::Property_map<Fd, faces_size_type>;
   using FaceBitMap = Pm::Property_map<Fd, bool>;
 #endif
-#if CGALPY_PMP_POLYGONAL_MESH == 0
+
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
   using FaceSizeTypeMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<faces_size_type>>;
   using FaceBitMap = boost::property_map<Pm, CGAL::dynamic_face_property_t<bool>>;
 #endif
-
 
   m.def("orient_polygon_soup", &pmp::orient_polygon_soup<Point_3, Dov>,
       py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());

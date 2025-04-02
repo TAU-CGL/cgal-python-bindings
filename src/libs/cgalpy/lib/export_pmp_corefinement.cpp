@@ -1690,11 +1690,10 @@ void set_in_place_operations_fn(Cv& v,
   v.set_in_place_operations(f);
 }
 
-
 } // namespace pmp
 
-void export_corefinement(py::module_& m) {
-
+//!
+void export_pmp_corefinement(py::module_& m) {
   using Pm = pmp::Polygonal_mesh;
 
   // Corefinement and Boolean Operations
