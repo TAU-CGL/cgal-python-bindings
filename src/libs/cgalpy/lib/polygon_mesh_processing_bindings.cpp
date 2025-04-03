@@ -23,7 +23,6 @@
 #include <nanobind/stl/tuple.h>
 
 #include <CGAL/Kernel/Dimension_utils.h>
-#include <CGAL/Polygon_mesh_processing/measure.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #include <CGAL/Dynamic_property_map.h>
 #include <CGAL/Mesh_constant_domain_field_3.h>
@@ -37,7 +36,6 @@
 #include <CGAL/Polygon_mesh_processing/refine_mesh_at_isolevel.h>
 #include <CGAL/Polygon_mesh_processing/region_growing.h>
 #include <CGAL/Polygon_mesh_processing/repair.h>
-#include <CGAL/Polygon_mesh_processing/locate.h>
 #include <CGAL/Polygon_mesh_processing/triangle.h>
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
 
@@ -424,118 +422,6 @@ void merge_coplanar_facets(PolygonMesh& mesh,
 }
 
 //!
-template <typename TriangleMesh>
-auto area(const TriangleMesh& tm, const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::area(tm, internal::parse_pmp_np<Tm>(np));
-}
-
-//!
-template <typename TriangleMesh>
-auto area_f(const std::vector<typename boost::graph_traits<TriangleMesh>::face_descriptor>& face_range,
-            const TriangleMesh& tm,
-            const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  using Gt = boost::graph_traits<TriangleMesh>;
-  using Fd = typename Gt::face_descriptor;
-  return PMP::area(face_range, tm, internal::parse_pmp_np<Tm>(np));
-}
-
-//!
-template <typename TriangleMesh>
-auto centroid(const TriangleMesh& tm,
-              const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::centroid(tm, internal::parse_pmp_np<Tm>(np));
-}
-
-//!
-template <typename TriangleMesh>
-auto edge_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& e,
-                 const TriangleMesh& tm,
-                 const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::edge_length(e, tm, internal::parse_pmp_np<Tm>(np));
-}
-
-//!
-template <typename TriangleMesh>
-auto face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
-               const TriangleMesh& tm,
-               const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::face_area(f, tm, internal::parse_pmp_np<Tm>(np));
-}
-
-template <typename TriangleMesh>
-auto face_aspect_ratio(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
-                       const TriangleMesh& tm,
-                       const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::face_aspect_ratio(f, tm, internal::parse_pmp_np<Tm>(np));
-}
-
-//!
-template <typename TriangleMesh>
-auto face_border_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& h,
-                        const TriangleMesh& tm,
-                        const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::face_border_length(h, tm, internal::parse_pmp_np<Tm>(np));
-}
-
-//!
-template <typename TriangleMesh>
-auto longest_border(const TriangleMesh& tm,
-                    const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::longest_border(tm, internal::parse_pmp_np<Tm>(np));
-}
-
-//!
-template <typename TriangleMesh>
-auto match_faces(const TriangleMesh& tm1,
-                 const TriangleMesh& tm2,
-                 const py::dict& np1 = py::dict(),
-                 const py::dict& np2 = py::dict()) {
-  using Tm = TriangleMesh;
-  using Gt = boost::graph_traits<Tm>;
-  using Fd = typename Gt::face_descriptor;
-  std::vector<std::pair<Fd, Fd>> common;
-  std::vector<Fd> m1_only, m2_only;
-  PMP::match_faces(tm1, tm2, std::back_inserter(common),
-                   std::back_inserter(m1_only), std::back_inserter(m2_only),
-                   internal::parse_pmp_np<Tm>(np1),
-                   internal::parse_pmp_np<Tm>(np2));
-  return std::make_tuple(common, m1_only, m2_only);
-}
-
-//!
-template <typename TriangleMesh>
-auto squared_edge_length(typename boost::graph_traits<TriangleMesh>::edge_descriptor& e,
-                         const TriangleMesh& tm,
-                         const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::squared_edge_length(e, tm, internal::parse_pmp_np<Tm>(np));
-}
-
-//!
-template <typename TriangleMesh>
-auto squared_face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
-                       const TriangleMesh& tm,
-                       const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::squared_face_area(f, tm, internal::parse_pmp_np<Tm>(np));
-}
-
-template <typename TriangleMesh>
-auto volume(const TriangleMesh& tm,
-            const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  return PMP::volume(tm, internal::parse_pmp_np<Tm>(np));
-}
-
-//!
 template <typename PolygonMesh>
 void interpolated_corrected_curvatures(PolygonMesh& pmesh,
                                        const py::dict& np = py::dict()) {
@@ -883,90 +769,6 @@ auto detect_vertex_incident_patches(PolygonMesh& pmesh,
 }
 
 //!
-auto barycentic_coordinates(const Point_3& p, const Point_3& a,
-                            const Point_3& b, const Point_3& c) {
-  return PMP::barycentric_coordinates(p, a, b, c, Kernel());
-}
-
-//!
-template <typename TriangleMesh>
-auto get_descriptor_from_location(const std::pair<
-                                  typename boost::graph_traits<TriangleMesh>::face_descriptor,
-                                  std::array<FT, 3> >& loc,
-                                  const TriangleMesh& tm) {
-  using Tm = TriangleMesh;
-  using Gt = boost::graph_traits<Tm>;
-  using Fd = typename Gt::face_descriptor;
-  using Vd = typename Gt::vertex_descriptor;
-  using Hd = typename Gt::halfedge_descriptor;
-  using Barycentric_coordinates = std::array<FT, 3>;
-  // returns a variant of vertex_descriptor, halfedge_descriptor, face_descriptor
-  try {
-    return py::cast(std::get<Vd>(PMP::get_descriptor_from_location(loc, tm)));
-  }
-  catch (const std::bad_variant_access& e) {
-    try {
-      return py::cast(std::get<Hd>(PMP::get_descriptor_from_location(loc, tm)));
-    }
-    catch (const std::bad_variant_access& e) {
-      try {
-        return py::cast(std::get<Fd>(PMP::get_descriptor_from_location(loc, tm)));
-      }
-      catch (const std::bad_variant_access& e) {
-        throw std::runtime_error("get_descriptor_from_location failed");
-      }
-    }
-  }
-}
-
-//!
-template <typename TriangleMesh>
-auto is_in_face_bar(const std::array<FT, 3>& bar, const TriangleMesh& tm)
-{ return PMP::is_in_face(bar, tm); }
-
-//!
-template <typename TriangleMesh>
-auto is_in_face_loc(const std::pair<
-                    typename boost::graph_traits<TriangleMesh>::face_descriptor,
-                    std::array<FT, 3>>& loc,
-                    const TriangleMesh& tm)
-{ return PMP::is_in_face(loc, tm); }
-
-//!
-template <typename TriangleMesh>
-auto is_on_face_border(const std::pair<
-                       typename boost::graph_traits<TriangleMesh>::face_descriptor,
-                       std::array<FT, 3> >& loc,
-                       const TriangleMesh& tm)
-{ return PMP::is_on_face_border(loc, tm); }
-
-//!
-template <typename TriangleMesh>
-auto is_on_halfedge(const std::pair<
-                typename boost::graph_traits<TriangleMesh>::face_descriptor,
-                std::array<FT, 3> >& loc,
-                    const typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& hd,
-                    const TriangleMesh& tm)
-{ return PMP::is_on_halfedge(loc, hd, tm); }
-
-//!
-template <typename TriangleMesh>
-auto is_on_mesh_border(const std::pair<
-                typename boost::graph_traits<TriangleMesh>::face_descriptor,
-                std::array<FT, 3> >& loc,
-                       const TriangleMesh& tm)
-{ return PMP::is_on_mesh_border(loc, tm); }
-
-//!
-template <typename TriangleMesh>
-auto is_on_vertex(const std::pair<
-                  typename boost::graph_traits<TriangleMesh>::face_descriptor,
-                  std::array<FT, 3> >& loc,
-                   const typename boost::graph_traits<TriangleMesh>::vertex_descriptor& vd,
-                   const TriangleMesh& tm)
-{ return PMP::is_on_vertex(loc, vd, tm); }
-
-//!
 template <typename TriangleMesh>
 auto degenerate_edges_r(const std::vector<
                         typename boost::graph_traits<TriangleMesh>::edge_descriptor>& edges,
@@ -1228,40 +1030,6 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("v"), py::arg("pm"), py::arg("np") = py::dict());
 #endif
 
-  // Geometric Measure Functions
-  m.def("area", &pmp::area<Pm>,
-        py::arg("tmesh"), py::arg("np") = py::dict());
-  m.def("area", &pmp::area_f<Pm>,
-        py::arg("face_range"), py::arg("tmesh"),
-        py::arg("np") = py::dict());
-  m.def("centroid", &pmp::centroid<Pm>,
-        py::arg("tmesh"), py::arg("np") = py::dict());
-  m.def("edge_length", &pmp::edge_length<Pm>,
-        py::arg("h"), py::arg("tmesh"),
-        py::arg("np") = py::dict());
-  m.def("face_area", &pmp::face_area<Pm>,
-        py::arg("f"), py::arg("tmesh"),
-        py::arg("np") = py::dict());
-  m.def("face_aspect_ratio", &pmp::face_aspect_ratio<Pm>,
-        py::arg("f"), py::arg("tmesh"),
-        py::arg("np") = py::dict());
-  m.def("face_border_length", &pmp::face_border_length<Pm>,
-        py::arg("f"), py::arg("tmesh"),
-        py::arg("np") = py::dict());
-  m.def("longest_border", &pmp::longest_border<Pm>,
-        py::arg("tmesh"), py::arg("np") = py::dict());
-  m.def("match_faces", &pmp::match_faces<Pm>,
-        py::arg("m1"), py::arg("m2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("squared_edge_length", &pmp::squared_edge_length<Pm>,
-        py::arg("h"), py::arg("tmesh"),
-        py::arg("np") = py::dict());
-  m.def("squared_face_area", &pmp::squared_face_area<Pm>,
-        py::arg("f"), py::arg("tmesh"),
-        py::arg("np") = py::dict());
-  m.def("volume", &pmp::volume<Pm>,
-        py::arg("tmesh"), py::arg("np") = py::dict());
-
   // Geometric Repair
   m.def("remove_almost_degenerate_faces",
         &pmp::remove_almost_degenerate_faces_r<Pm>,
@@ -1292,22 +1060,6 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("pmesh"), py::arg("patch_id_map"),
         py::arg("vertex_incident_patches_map"), py::arg("np") = py::dict());
 #endif
-
-  // Location Functions
-  m.def("barycentic_coordinates", &pmp::barycentic_coordinates,
-        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("query"));
-  m.def("get_descriptor_from_location", &pmp::get_descriptor_from_location<Pm>,
-        py::arg("loc"), py::arg("tm"));
-  m.def("is_in_face", &pmp::is_in_face_bar<Pm>,
-        py::arg("bar"), py::arg("tm"));
-  m.def("is_on_face_border", &pmp::is_on_face_border<Pm>,
-        py::arg("loc"), py::arg("tm"));
-  m.def("is_on_halfedge", &pmp::is_on_halfedge<Pm>,
-        py::arg("loc"), py::arg("hd"), py::arg("tm"));
-  m.def("is_on_mesh_border", &pmp::is_on_mesh_border<Pm>,
-        py::arg("loc"), py::arg("tm"));
-  m.def("is_on_vertex", &pmp::is_on_vertex<Pm>,
-        py::arg("loc"), py::arg("vd"), py::arg("tm"));
 
   // Predicates
   m.def("degenerate_edges", &pmp::degenerate_edges_r<Pm>,
