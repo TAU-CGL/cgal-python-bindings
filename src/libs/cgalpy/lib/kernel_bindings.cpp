@@ -48,6 +48,7 @@
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/Kernel/export_plane_3.hpp"
 #include "CGALPY/Kernel/export_line_3.hpp"
+#include "CGALPY/Kernel/export_ray_3.hpp"
 #include "CGALPY/Kernel/export_segment_3.hpp"
 #include "CGALPY/Kernel/export_tetrahedron_3.hpp"
 #include "CGALPY/Kernel/export_sphere_3.hpp"
@@ -215,6 +216,7 @@ void export_kernel_module(py::module_& m) {
   using Pln_3 = Kernel::Plane_3;
   using Pnt_3 = Kernel::Point_3;
   using Seg_3 = Kernel::Segment_3;
+  using Ray_3 = Kernel::Ray_3;
   using Sfr_3 = Kernel::Sphere_3;
   using Tri_3 = Kernel::Triangle_3;
   using Vec_3 = Kernel::Vector_3;
@@ -312,6 +314,12 @@ void export_kernel_module(py::module_& m) {
   if (! add_attr<Line_3>(m, "Line_3")) {
     py::class_<Line_3> line3_c(m, "Line_3");
     export_line_3<Kernel>(line3_c);
+  }
+
+  // Ray_3
+  if (! add_attr<Ray_3>(m, "Ray_3")) {
+    py::class_<Ray_3> ray3_c(m, "Ray_3");
+    export_ray_3<Kernel>(ray3_c);
   }
 
   // Segment_3
