@@ -35,7 +35,9 @@
 #include <CGAL/Polygon_mesh_processing/refine_mesh_at_isolevel.h>
 #include <CGAL/Polygon_mesh_processing/region_growing.h>
 #include <CGAL/Polygon_mesh_processing/triangle.h>
+#include <CGAL/Side_of_triangle_mesh.h>
 
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
@@ -459,6 +461,18 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def(py::init<>());
 
   // Predicates
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYGONAL_MESH
+  using Sotm = CGAL::Side_of_triangle_mesh<Pm, Kernel>;
+  using Sotm_op = CGAL::Bounded_side(Sotm::*)(const Point_3&)const;
+  if (! add_attr<Sotm>(m, "Side_of_triangle_mesh")) {
+    py::class_<Sotm>(m, "Side_of_triangle_mesh")
+      .def(py::init<const Pm&>())
+      .def(py::init<const Pm&, const Kernel&>())
+      .def("__call__", static_cast<Sotm_op>(&Sotm::operator()))
+      ;
+  }
+#endif
+
   m.def("degenerate_edges", &pmp::degenerate_edges_r<Pm>,
         py::arg("edges"), py::arg("tm"),
         py::arg("np") = py::dict());
