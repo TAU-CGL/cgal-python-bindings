@@ -7,6 +7,10 @@
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
 //            Efi Fogel          <efifogel@gmail.com>
 
+#include <utility>
+
+#include <boost/graph/graph_traits.hpp>
+
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Polygon_mesh_processing/compute_normal.h>

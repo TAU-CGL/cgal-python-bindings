@@ -6,6 +6,10 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <vector>
+
+#include <boost/graph/graph_traits.hpp>
+
 #include <nanobind/stl/vector.h>
 
 #include <CGAL/Polygon_mesh_processing/connected_components.h>

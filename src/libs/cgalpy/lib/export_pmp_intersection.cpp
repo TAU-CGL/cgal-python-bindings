@@ -9,6 +9,8 @@
 #include <vector>
 #include <array>
 
+#include <boost/graph/graph_traits.hpp>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/array.h>

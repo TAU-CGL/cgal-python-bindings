@@ -7,6 +7,13 @@
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
 //            Efi Fogel          <efifogel@gmail.com>
 
+#include <array>
+#include <functional>
+#include <tuple>
+#include <vector>
+
+#include <boost/graph/graph_traits.hpp>
+
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/array.h>
 #include <nanobind/stl/function.h>

@@ -6,6 +6,12 @@
 //
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
 
+#include <functional>
+#include <vector>
+#include <utility>
+
+#include <boost/graph/graph_traits.hpp>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/pair.h>
