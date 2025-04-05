@@ -18,6 +18,7 @@
 //! \todo remove
 #include "CGALPY/pmp_np_parser.hpp"
 
+#include "CGALPY/Internal_face_plane_3_map.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Named_parameter_wrapper.hpp"
 #include "CGALPY/named_parameter_applicator.hpp"
