@@ -390,7 +390,7 @@ auto polyhedron_vertices(const Polyhedron_3& prn) {
                                prn.vertices_begin(), prn.vertices_end());
 }
 
-//
+//!
 auto polyhedron_halfedges(const Polyhedron_3& prn) {
   constexpr auto ri(py::rv_policy::reference_internal);
   return py::make_iterator<ri>(py::type<Polyhedron_3::Halfedge_const_iterator>(),
@@ -398,7 +398,7 @@ auto polyhedron_halfedges(const Polyhedron_3& prn) {
                                prn.halfedges_begin(), prn.halfedges_end());
 }
 
-//
+//!
 auto polyhedron_edges(const Polyhedron_3& prn) {
   constexpr auto ri(py::rv_policy::reference_internal);
   return py::make_iterator<ri>(py::type<Polyhedron_3::Edge_const_iterator>(),
@@ -406,7 +406,7 @@ auto polyhedron_edges(const Polyhedron_3& prn) {
                                prn.edges_begin(), prn.edges_end());
 }
 
-//
+//!
 auto polyhedron_faces(const Polyhedron_3& prn) {
   constexpr auto ri(py::rv_policy::reference_internal);
   return py::make_iterator<ri>(py::type<Polyhedron_3::Face_const_iterator>(),
@@ -414,7 +414,15 @@ auto polyhedron_faces(const Polyhedron_3& prn) {
                                prn.facets_begin(), prn.facets_end());
 }
 
-//
+//!
+auto polyhedron_points(const Polyhedron_3& prn) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  return py::make_iterator<ri>(py::type<Polyhedron_3::Point_const_iterator>(),
+                               "Plane_iterator",
+                               prn.points_begin(), prn.points_end());
+}
+
+//!
 auto polyhedron_planes(const Polyhedron_3& prn) {
   constexpr auto ri(py::rv_policy::reference_internal);
   return py::make_iterator<ri>(py::type<Polyhedron_3::Plane_const_iterator>(),
@@ -422,14 +430,14 @@ auto polyhedron_planes(const Polyhedron_3& prn) {
                                prn.planes_begin(), prn.planes_end());
 }
 
-//
+//!
 auto halfedges_around_target_circulator(Vertex& v, const Polyhedron_3& prn) {
   using Prn = Polyhedron_3;
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
   return make_circulator(Hatc(Vertex_handle(&v), prn));
 }
 
-//
+//!
 auto halfedges_around_target_iterator(Vertex& v, const Polyhedron_3& prn) {
   using Prn = Polyhedron_3;
   using Hati = CGAL::Halfedge_around_target_iterator<Prn>;
@@ -585,16 +593,19 @@ void export_polyhedron_3(py::module_& m) {
     using Hci = Prn::Halfedge_const_iterator;
     using Eci = Prn::Edge_const_iterator;
     using Fci = Prn::Face_const_iterator;
+    using Pci = Prn::Point_const_iterator;
 
     add_iterator<Vci, Vci>("Vertex_iterator", prn_c);
     add_iterator<Hci, Hci>("Halfedge_iterator", prn_c);
     add_iterator<Eci, Eci>("Edge_iterator", prn_c);
     add_iterator<Fci, Fci>("Face_iterator", prn_c);
+    add_iterator<Pci, Pci>("Point_iterator", prn_c);
 
     prn_c.def("vertices", &pol3::polyhedron_vertices, py::keep_alive<0, 1>())
       .def("halfedges", &pol3::polyhedron_halfedges, py::keep_alive<0, 1>())
       .def("edges", &pol3::polyhedron_edges, py::keep_alive<0, 1>())
       .def("faces", &pol3::polyhedron_faces, py::keep_alive<0, 1>())
+      .def("points", &pol3::polyhedron_points, py::keep_alive<0, 1>())
       .def("planes", &pol3::polyhedron_planes, py::keep_alive<0, 1>())
       ;
 
