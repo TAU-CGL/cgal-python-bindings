@@ -215,31 +215,40 @@ void export_kernel(C_& ker_c) {
     ;
 
   // Construct_midpoint_2
-  using Ctr_midpnt_2_op =
-    Pnt_2(Ctr_midpnt_2::*)(const Pnt_2&, const Pnt_2&)const;
+  // using Ctr_midpnt_2_op =
+  //   Pnt_2(Ctr_midpnt_2::*)(const Pnt_2&, const Pnt_2&)const;
   py::class_<Ctr_midpnt_2>(ker_c, "Construct_midpoint_2")
-    .def("__call__", static_cast<Ctr_midpnt_2_op>(&Ctr_midpnt_2::operator()))
+    .def("__call__",
+         // static_cast<Ctr_midpnt_2_op>(&Ctr_midpnt_2::operator()))
+         [](Ctr_midpnt_2 ctr, const Pnt_2& p1, const Pnt_2& p2)->Pnt_2 const
+         { return ctr(p1, p2); })
     ;
 
   // Construct_projected_xy_point_2
-  using Ctr_proj_xy_pnt_2_op =
-    Pnt_2(Ctr_proj_xy_pnt_2::*)(const Pln_3&, const Pnt_3&)const;
+  // using Ctr_proj_xy_pnt_2_op =
+  //   Pnt_2(Ctr_proj_xy_pnt_2::*)(const Pln_3&, const Pnt_3&)const;
   py::class_<Ctr_proj_xy_pnt_2>(ker_c, "Construct_projected_xy_point_2")
     .def("__call__",
-         static_cast<Ctr_proj_xy_pnt_2_op>(&Ctr_proj_xy_pnt_2::operator()))
+         // static_cast<Ctr_proj_xy_pnt_2_op>(&Ctr_proj_xy_pnt_2::operator()))
+         [](Ctr_proj_xy_pnt_2 ctr, const Pln_3& pln, const Pnt_3& p)->Pnt_2 const
+         { return ctr(pln, p); })
     ;
 
   // Construct_segment_2
-  using Ctr_seg_2_op = Seg_2(Ctr_seg_2::*)(const Pnt_2&, const Pnt_2&)const;
+  // using Ctr_seg_2_op = Seg_2(Ctr_seg_2::*)(const Pnt_2&, const Pnt_2&)const;
   py::class_<Ctr_seg_2>(ker_c, "Construct_segment_2")
-    .def("__call__", static_cast<Ctr_seg_2_op>(&Ctr_seg_2::operator()))
+    .def("__call__",
+         // static_cast<Ctr_seg_2_op>(&Ctr_seg_2::operator()))
+         [](Ctr_seg_2 ctr, const Pnt_2& p1, const Pnt_2& p2)->Seg_2 const
+         { return ctr(p1, p2); })
     ;
 
   // Counterclockwise_in_between_2
   using Cc_in_between_2_op =
     bool(Cc_in_between_2::*)(const Dir_2&, const Dir_2&, const Dir_2&)const;
   py::class_<Cc_in_between_2>(ker_c, "Counterclockwise_in_between_2")
-    .def("__call__", static_cast<Cc_in_between_2_op>(&Cc_in_between_2::operator()))
+    .def("__call__",
+         static_cast<Cc_in_between_2_op>(&Cc_in_between_2::operator()))
     ;
 
   // Equal_2
@@ -358,12 +367,14 @@ void export_kernel(C_& ker_c) {
     ;
 
   // Construct_plane_3
-  using Ctr_pln_3_op = Pln_3(Ctr_pln_3::*)(const Pnt_3&, const Dir_3&)const;
+  // using Ctr_pln_3_op = Pln_3(Ctr_pln_3::*)(const Pnt_3&, const Dir_3&)const;
   py::class_<Ctr_pln_3>(ker_c, "Construct_plane_3")
-    .def("__call__", static_cast<Ctr_pln_3_op>(&Ctr_pln_3::operator()))
+    .def("__call__",
+         [](Ctr_pln_3 ctr, const Pnt_3& pnt, const Dir_3& dir)->Pln_3 const
+         { return ctr(pnt, dir); })
     ;
 
-  // // Construct_point_3
+  // Construct_point_3
   py::class_<Ctr_pnt_3>(ker_c, "Construct_point_3")
     .def("__call__",
          [](Ctr_pnt_3 ctr, const Pnt_3& other)->Pnt_3 const
@@ -376,10 +387,13 @@ void export_kernel(C_& ker_c) {
     ;
 
   // Construct_translated_point_3
-  using Ctr_tran_pnt_3_op =
-    Pnt_3(Ctr_tran_pnt_3::*)(const Pnt_3&, const Vec_3&)const;
+  // using Ctr_tran_pnt_3_op =
+  //   Pnt_3(Ctr_tran_pnt_3::*)(const Pnt_3&, const Vec_3&)const;
   py::class_<Ctr_tran_pnt_3>(ker_c, "Construct_translated_point_3")
-    .def("__call__", static_cast<Ctr_tran_pnt_3_op>(&Ctr_tran_pnt_3::operator()))
+    .def("__call__",
+         // static_cast<Ctr_tran_pnt_3_op>(&Ctr_tran_pnt_3::operator()))
+         [](Ctr_tran_pnt_3& ctr, const Pnt_3& pnt, const Vec_3& vec)->Pnt_3 const
+         { return (ctr(pnt, vec)); })
     ;
 
   // Construct_segment_3
