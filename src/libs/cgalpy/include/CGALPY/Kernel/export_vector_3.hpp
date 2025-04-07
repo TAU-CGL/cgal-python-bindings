@@ -35,6 +35,7 @@ void export_vector_3(C& c) {
     .def(bp::init<Seg>())
     .def(bp::init<FT&, FT&, FT&, FT&>())
     .def(bp::init<FT&, FT&, FT&>())
+    .def(bp::init<Pnt&, Pnt&>())
     .def("hx", &Vec::hx)
     .def("hy", &Vec::hy)
     .def("hz", &Vec::hz)
