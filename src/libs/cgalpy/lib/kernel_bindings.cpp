@@ -23,6 +23,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "CGALPY/cartesian_product.hpp"
 #include "CGALPY/config.hpp"
 #include "CGALPY/kernel_type.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
@@ -74,37 +75,31 @@ extern void export_gmpq(py::module_&);
 //  return boost::hash<std::string>()(s); // TODO: two equal objects can have different string representation
 //}
 
-//
-template <typename T1, typename T2, typename T3, typename T4, typename T5>
-void bind_squared_distance_first_type(py::module_& m) {
-  using Sd_fnc1 = FT(*)(const T1&, const T1&);
-  using Sd_fnc2 = FT(*)(const T1&, const T2&);
-  using Sd_fnc3 = FT(*)(const T1&, const T3&);
-  using Sd_fnc4 = FT(*)(const T1&, const T4&);
-  using Sd_fnc5 = FT(*)(const T1&, const T5&);
+// The supported overloaded functions CGAL::intersection(T1& t1, T2& t2) have
+// a complicated return value; it's a polymorphic object. It can be nothing or
+// one of several types  that depends on the type of the input arguments.
+// Therefore, the selection is implemented in a different way as follows. We
+// still use the type of the return value (of the particular
+// CGAL::intersection(T1& t1, T2& t2) function, but we do not try to match
+// this type to the type of an argument. Instead, we use this type as the
+// default value of an unnamed template parameter.
+template<typename, typename> void bind_squared_distance(py::module_&, ...) {}
+
+//! Implementation
+template <typename T1, typename T2,
+          typename = decltype(CGAL::squared_distance<Kernel>(T1(), T2()))>
+void bind_squared_distance(py::module_& m, bool) {
+  using Sd_fnc = FT(*)(const T1&, const T2&);
   m.def("squared_distance",
-        static_cast<Sd_fnc1>(&CGAL::squared_distance<Kernel>));
-  m.def("squared_distance",
-        static_cast<Sd_fnc2>(&CGAL::squared_distance<Kernel>));
-  m.def("squared_distance",
-        static_cast<Sd_fnc3>(&CGAL::squared_distance<Kernel>));
-  m.def("squared_distance",
-        static_cast<Sd_fnc4>(&CGAL::squared_distance<Kernel>));
-  m.def("squared_distance",
-        static_cast<Sd_fnc5>(&CGAL::squared_distance<Kernel>));
+        static_cast<Sd_fnc>(&CGAL::squared_distance<Kernel>));
 }
 
-//
-template <typename T1, typename T2, typename T3, typename T4, typename T5>
-void bind_squared_distance_types(py::module_& m) {
-  bind_squared_distance_first_type<T1, T2, T3, T4, T5>(m);
-  bind_squared_distance_first_type<T2, T1, T3, T4, T5>(m);
-  bind_squared_distance_first_type<T3, T2, T1, T4, T5>(m);
-  bind_squared_distance_first_type<T4, T2, T3, T1, T5>(m);
-  bind_squared_distance_first_type<T5, T2, T3, T4, T1>(m);
-}
+//! Squared distance wrapper
+template <typename Arg, typename ... Types> struct Sd_wrapper {
+  void operator()(Arg& arg) { bind_squared_distance<Types...>(arg, true); }
+};
 
-//
+//!
 void export_kernel_module(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -210,6 +205,7 @@ void export_kernel_module(py::module_& m) {
   using Seg_2 = Kernel::Segment_2;
   using Tri_2 = Kernel::Triangle_2;
   using Vec_2 = Kernel::Vector_2;
+  using Wd_pnt_2 = Kernel::Weighted_point_2;
 
   using Circle_3 = Kernel::Circle_3;
   using Dir_3 = Kernel::Direction_3;
@@ -1164,11 +1160,6 @@ void export_kernel_module(py::module_& m) {
   using Mp3_fnc = Pnt_3(*)(const Pnt_3&, const Pnt_3&);
   m.def("midpoint", static_cast<Mp3_fnc>(&CGAL::midpoint<Kernel>));
 
-  // squared_distance, temporary!
-  using Md_fnc1 = FT(*)(const Pnt_3&, const Pnt_3&);
-  m.def("squared_distance",
-        static_cast<Md_fnc1>(&CGAL::squared_distance<Kernel>));
-
   using Minv_fnc = Pnt_2(*)(const Iso_rectangle_2&);
   m.def("min_vertex", static_cast<Minv_fnc>(&CGAL::min_vertex<Kernel>));
 
@@ -1218,8 +1209,14 @@ void export_kernel_module(py::module_& m) {
   m.def("side_of_oriented_circle",
         static_cast<Sooc_fnc>(&CGAL::side_of_oriented_circle<Kernel>));
 
-  bind_squared_distance_types<Pnt_2, Line_2, Ray_2, Segment_2, Tri_2>(m);
+  // squared_distance() bindings
+  CGALPY::Type_list<Pnt_2, Line_2, Ray_2, Seg_2, Tri_2, Wd_pnt_2> type_list_2;
+  CGALPY::Type_list<Pnt_3, Line_3, Ray_3, Seg_3, Tri_3, Pln_3, Wd_pnt_3>
+    type_list_3;
+  CGALPY::cartesian_product<Sd_wrapper>(m, type_list_2, type_list_2);
+  CGALPY::cartesian_product<Sd_wrapper>(m, type_list_3, type_list_3);
 
+  //
   using Sd_fnc1 = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Sd_fnc2 = FT(*)(const Pnt_2&, const Pnt_2&);
   using Sd_fnc3 = FT(*)(const Pnt_2&);

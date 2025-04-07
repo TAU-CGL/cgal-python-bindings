@@ -46,6 +46,7 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/make_circulator.hpp"
+#include "CGALPY/make_iterator.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
 #include "CGALPY/Named_parameter_wrapper.hpp"
@@ -416,18 +417,13 @@ auto polyhedron_faces(const Polyhedron_3& prn) {
 
 //!
 auto polyhedron_points(const Polyhedron_3& prn) {
-  constexpr auto ri(py::rv_policy::reference_internal);
-  return py::make_iterator<ri>(py::type<Polyhedron_3::Point_const_iterator>(),
-                               "Plane_iterator",
-                               prn.points_begin(), prn.points_end());
+  using Pnt_cit = Polyhedron_3::Point_const_iterator;
+  return make_iterator<Pnt_cit, Pnt_cit>(prn.points_begin(), prn.points_end());
 }
 
 //!
 auto polyhedron_planes(const Polyhedron_3& prn) {
-  constexpr auto ri(py::rv_policy::reference_internal);
-  return py::make_iterator<ri>(py::type<Polyhedron_3::Plane_const_iterator>(),
-                               "Plane_iterator",
-                               prn.planes_begin(), prn.planes_end());
+  return make_iterator(prn.planes_begin(), prn.planes_end());
 }
 
 //!
@@ -514,6 +510,7 @@ void export_polyhedron_3(py::module_& m) {
   using Vertex = Prn::Vertex;
   using Halfedge = Prn::Halfedge;
   using Face = Prn::Face;
+  using Pln = Face::Plane_3;
   using Gt = boost::graph_traits<Prn>;
   using Vd = Gt::vertex_descriptor;
   using Ed = Gt::edge_descriptor;
@@ -593,13 +590,15 @@ void export_polyhedron_3(py::module_& m) {
     using Hci = Prn::Halfedge_const_iterator;
     using Eci = Prn::Edge_const_iterator;
     using Fci = Prn::Face_const_iterator;
-    using Pci = Prn::Point_const_iterator;
+    using Pnt_ci = Prn::Point_const_iterator;
+    using Pln_ci = Prn::Plane_const_iterator;
 
     add_iterator<Vci, Vci>("Vertex_iterator", prn_c);
     add_iterator<Hci, Hci>("Halfedge_iterator", prn_c);
     add_iterator<Eci, Eci>("Edge_iterator", prn_c);
     add_iterator<Fci, Fci>("Face_iterator", prn_c);
-    add_iterator<Pci, Pci>("Point_iterator", prn_c);
+    add_iterator<Pnt_ci, Pnt_ci>("Point_iterator", prn_c);
+    add_iterator<Pln_ci, Pln_ci>("Plane_iterator", prn_c);
 
     prn_c.def("vertices", &pol3::polyhedron_vertices, py::keep_alive<0, 1>())
       .def("halfedges", &pol3::polyhedron_halfedges, py::keep_alive<0, 1>())

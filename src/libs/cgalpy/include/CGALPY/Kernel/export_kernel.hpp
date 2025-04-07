@@ -375,6 +375,10 @@ void export_kernel(C_& ker_c) {
     .def("__call__",
          [](Ctr_pln_3 ctr, const Pnt_3& pnt, const Dir_3& dir)->Pln_3 const
          { return ctr(pnt, dir); })
+    .def("__call__",
+         [](Ctr_pln_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
+         ->Pln_3 const
+         { return ctr(p, q, r); })
     ;
 
   // Construct_point_3

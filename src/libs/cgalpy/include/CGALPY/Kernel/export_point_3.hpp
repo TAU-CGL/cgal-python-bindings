@@ -40,6 +40,7 @@ void export_point_3(C& c) {
     .def(py::init<const Rt&, const Rt&, const Rt&, const Rt&>())
     .def(py::init<const Pnt&>())
     .def(py::init_implicit<const CGAL::Origin&>())
+    .def("assign", py::overload_cast<const Pnt&>(&Pnt::operator=))
     .def("x", &Pnt::x)
     .def("y", &Pnt::y)
     .def("z", &Pnt::z)
