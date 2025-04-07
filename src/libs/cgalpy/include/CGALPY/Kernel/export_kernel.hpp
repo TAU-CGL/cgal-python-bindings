@@ -96,6 +96,7 @@ void export_kernel(C_& ker_c) {
   using Ctr_seg_3 = typename Ker::Construct_segment_3;
   using Ctr_tri_3 = typename Ker::Construct_triangle_3;
   using Ctr_tet_3 = typename Ker::Construct_tetrahedron_3;
+  using Ctr_vec_3 = typename Ker::Construct_vector_3;
   using Cmp_xyz_3 = typename Ker::Compare_xyz_3;
   using Coplanar_orient_3 = typename Ker::Coplanar_orientation_3;
   using Orient_3 = typename Ker::Orientation_3;
@@ -128,6 +129,8 @@ void export_kernel(C_& ker_c) {
     .def("construct_translated_point_3_object",
          [](const Ker& k)->Ctr_tran_pnt_3
          { return k.construct_translated_point_3_object(); })
+    .def("construct_vector_3_object",
+         [](const Ker& k)->Ctr_vec_3{ return k.construct_vector_3_object(); })
     .def("compare_z_3_object",
          [](const Ker& k)->Cmp_z_3{ return k.compare_z_3_object(); })
     ;
@@ -220,8 +223,8 @@ void export_kernel(C_& ker_c) {
   py::class_<Ctr_midpnt_2>(ker_c, "Construct_midpoint_2")
     .def("__call__",
          // static_cast<Ctr_midpnt_2_op>(&Ctr_midpnt_2::operator()))
-         [](Ctr_midpnt_2 ctr, const Pnt_2& p1, const Pnt_2& p2)->Pnt_2 const
-         { return ctr(p1, p2); })
+         [](Ctr_midpnt_2 ctr, const Pnt_2& p, const Pnt_2& q)->Pnt_2 const
+         { return ctr(p, q); })
     ;
 
   // Construct_projected_xy_point_2
@@ -239,8 +242,8 @@ void export_kernel(C_& ker_c) {
   py::class_<Ctr_seg_2>(ker_c, "Construct_segment_2")
     .def("__call__",
          // static_cast<Ctr_seg_2_op>(&Ctr_seg_2::operator()))
-         [](Ctr_seg_2 ctr, const Pnt_2& p1, const Pnt_2& p2)->Seg_2 const
-         { return ctr(p1, p2); })
+         [](Ctr_seg_2 ctr, const Pnt_2& p, const Pnt_2& q)->Seg_2 const
+         { return ctr(p, q); })
     ;
 
   // Counterclockwise_in_between_2
@@ -396,14 +399,14 @@ void export_kernel(C_& ker_c) {
          { return (ctr(pnt, vec)); })
     ;
 
-  // Construct_segment_3
+  //! Construct_segment_3
   py::class_<Ctr_seg_3>(ker_c, "Construct_segment_3")
     .def("__call__",
          [](Ctr_seg_3 ctr, const Pnt_3& p, const Pnt_3& q)->Seg_3 const
          { return ctr(p, q); })
     ;
 
-  // Construct_triangle_3
+  //! Construct_triangle_3
   py::class_<Ctr_tri_3>(ker_c, "Construct_triangle_3")
     .def("__call__",
          [](Ctr_tri_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
@@ -411,13 +414,20 @@ void export_kernel(C_& ker_c) {
          { return ctr(p, q, r); })
     ;
 
-  // Construct_tetrahedron_3
+  //! Construct_tetrahedron_3
   py::class_<Ctr_tet_3>(ker_c, "Construct_tetrahedron_3")
     .def("__call__",
          [](Ctr_tet_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r,
             const Pnt_3& s)
          ->Tet_3 const
          { return ctr(p, q, r, s); })
+    ;
+
+  //! Construct_vector_3
+  py::class_<Ctr_vec_3>(ker_c, "Construct_vector_3")
+    .def("__call__",
+         [](Ctr_vec_3 ctr, const Pnt_3& p, const Pnt_3& q)->Vec_3 const
+         { return ctr(p, q); })
     ;
 
   // Compare_xyz_3
