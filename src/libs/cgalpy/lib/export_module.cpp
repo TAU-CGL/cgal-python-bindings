@@ -46,7 +46,7 @@ void export_nef_3(py::module_&);
 // Polygon Mesh Processing
 void export_pmp_combinatorial_repair(py::module_&);
 void export_pmp_connected_components(py::module_&);
-void export_pmp_corefinement();
+void export_pmp_corefinement(py::module_&);
 void export_pmp_corrected_curvature_computation(py::module_&);
 void export_pmp_distance(py::module_&);
 void export_pmp_feature_detection(py::module_&);
