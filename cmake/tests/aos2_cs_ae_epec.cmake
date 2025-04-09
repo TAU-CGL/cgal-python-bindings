@@ -6,3 +6,4 @@ set(CGALPY_AOS2_GEOMETRY_TRAITS_NAME "circleSegment" CACHE STRING "use circle-se
 set(CGALPY_AOS2_VERTEX_EXTENDED on CACHE BOOL "extend vertex type" FORCE)
 set(CGALPY_AOS2_HALFEDGE_EXTENDED on CACHE BOOL "extend vertex type" FORCE)
 set(CGALPY_AOS2_FACE_EXTENDED on CACHE BOOL "extend vertex type" FORCE)
+set(CGALPY_AOS2_POINT_LOCATION_BINDINGS on CACHE BOOL "with point location" FORCE)
