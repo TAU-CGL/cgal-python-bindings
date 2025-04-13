@@ -90,6 +90,43 @@ public:
     this->face_color = *m_face_color_fnc;
   }
 
+  //!
+  static int tp_traverse(PyObject* self, visitproc visit, void* arg) {
+    // Get the C++ object associated with 'self' (this always succeeds)
+    Graphics_scene_options_extended* w =
+      py::inst_ptr<Graphics_scene_options_extended>(self);
+
+    // If w->value has an associated Python object, return it.
+    // If not, value.ptr() will equal NULL, which is also fine.
+    py::handle value_colored_face_object = py::find(w->m_colored_face_object);
+    py::handle value_face_color_object = py::find(w->m_face_color_object);
+
+    // Inform the Python GC about the instance
+    Py_VISIT(value_colored_face_object.ptr());
+    Py_VISIT(value_face_color_object.ptr());
+
+    // On Python 3.9+, we must traverse the implicit dependency
+    // of an object on its associated type object.
+#if PY_VERSION_HEX >= 0x03090000
+    Py_VISIT(Py_TYPE(self));
+#endif
+
+    return 0;
+  }
+
+  //!
+  static int tp_clear(PyObject* self) {
+    // Get the C++ object associated with 'self' (this always succeeds)
+    Graphics_scene_options_extended* w =
+      py::inst_ptr<Graphics_scene_options_extended>(self);
+
+    // Break reference cycles!
+    w->m_colored_face_object = {};
+    w->m_face_color_object = {};
+
+    return 0;
+  }
+
 private:
   //!
   bool execute_colored_face(const Ds& arr, const typename Ds::Face& face)

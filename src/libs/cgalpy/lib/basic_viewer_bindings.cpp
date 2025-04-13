@@ -15,6 +15,17 @@
 
 namespace py = nanobind;
 
+namespace bvr {
+
+//!
+static PyType_Slot slots[] = {
+  {Py_tp_traverse, (void*) Graphics_scene_options_extended::tp_traverse},
+  {Py_tp_clear, (void*) Graphics_scene_options_extended::tp_clear},
+  {0, nullptr}
+};
+
+}
+
 /*! The implementation of the bindings of the CGAL::Graphics_scene_options class
  * template presents a specific challenge. The interface of this class template
  * consists of several callback functions optionally set by the user. Let `gso`
@@ -50,10 +61,11 @@ void export_basic_viewer(py::module_& m) {
 
   using Gsoe = bvr::Graphics_scene_options_extended;
   if (! add_attr<Gsoe>(m, "Graphics_scene_options")) {
-    py::class_<Gsoe, Gso>(m, "Graphics_scene_options")
+    py::class_<Gsoe, Gso>(m, "Graphics_scene_options",
+                          py::type_slots(bvr::slots))
       .def(py::init<>())
-      .def("colored_face", &Gsoe::apply_colored_face, py::keep_alive<1, 2>())
-      .def("face_color", &Gsoe::apply_face_color, py::keep_alive<1, 2>())
+      .def("colored_face", &Gsoe::apply_colored_face)
+      .def("face_color", &Gsoe::apply_face_color)
       ;
   }
 }
