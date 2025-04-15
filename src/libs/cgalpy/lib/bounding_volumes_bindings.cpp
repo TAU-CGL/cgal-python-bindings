@@ -12,6 +12,7 @@
 #include <CGAL/Min_circle_2.h>
 #include <CGAL/Min_circle_2_traits_2.h>
 
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/bounding_volumes_config.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/add_insertion.hpp"
@@ -36,45 +37,52 @@ void insert_list(Min_circle_2& mc, py::list& lst) {
 }
 
 void export_bounding_volumes(py::module_& m) {
-  py::class_<Optimisation_circle_2> oc_co(m, "Optimization_circle_2");
-  oc_co.def(py::init<>())
-    .def("set", py::overload_cast<>(&Optimisation_circle_2::set))
-    .def("set", py::overload_cast<const Point_2&>(&Optimisation_circle_2::set))
-    .def("set", py::overload_cast<const Point_2&, const Point_2&>(&Optimisation_circle_2::set))
-    .def("set", py::overload_cast<const Point_2&, const Point_2&, const Point_2&>(&Optimisation_circle_2::set))
-    .def("set", py::overload_cast<const Point_2&, const FT&>(&Optimisation_circle_2::set))
-    .def("center", &Optimisation_circle_2::center)
-    .def("squared_radius", &Optimisation_circle_2::squared_radius)
-    .def("is_empty", &Optimisation_circle_2::is_empty)
-    .def("is_degenerate", &Optimisation_circle_2::is_degenerate)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    ;
+  using Oc2 = Optimisation_circle_2;
+  using Mc2 = Min_circle_2;
 
-  add_insertion(oc_co, "__str__");
-  add_insertion(oc_co, "__repr__");
+  if (! add_attr<Oc2>(m, "Optimization_circle_2")) {
+    py::class_<Oc2> oc_co(m, "Optimization_circle_2");
+    oc_co.def(py::init<>())
+      .def("set", py::overload_cast<>(&Oc2::set))
+      .def("set", py::overload_cast<const Point_2&>(&Oc2::set))
+      .def("set", py::overload_cast<const Point_2&, const Point_2&>(&Oc2::set))
+      .def("set", py::overload_cast<const Point_2&, const Point_2&, const Point_2&>(&Oc2::set))
+      .def("set", py::overload_cast<const Point_2&, const FT&>(&Oc2::set))
+      .def("center", &Oc2::center)
+      .def("squared_radius", &Oc2::squared_radius)
+      .def("is_empty", &Oc2::is_empty)
+      .def("is_degenerate", &Oc2::is_degenerate)
+      .def(py::self == py::self)
+      .def(py::self != py::self)
+      ;
 
-  py::class_<Min_circle_2, boost::noncopyable>(m, "Min_circle_2")
-    .def(py::init<>())
-    .def(py::init<const Point_2&>())
-    .def(py::init<const Point_2&, const Point_2&>())
-    .def(py::init<const Point_2&, const Point_2&, const Point_2&>())
-    .def("__init__", &init_min_circle_2_from_list)
-    .def("number_of_points", &Min_circle_2::number_of_points)
-    .def("number_of_support_points", &Min_circle_2::number_of_support_points)
-    .def("points", py::range<py::return_internal_reference<>>(&Min_circle_2::points_begin, &Min_circle_2::points_end))
-    .def("support_points", py::range<py::return_internal_reference<>>(&Min_circle_2::support_points_begin, &Min_circle_2::support_points_end))
-    .def("support_point", &Min_circle_2::support_point, py::return_internal_reference<>())
-    .def("circle", &Min_circle_2::circle)
-    .def("bounded_side", &Min_circle_2::bounded_side)
-    .def("has_on_bounded_side", &Min_circle_2::has_on_bounded_side)
-    .def("has_on_boundary", &Min_circle_2::has_on_boundary)
-    .def("has_on_unbounded_side", &Min_circle_2::has_on_unbounded_side)
-    .def("is_empty", &Min_circle_2::is_empty)
-    .def("is_degenerate", &Min_circle_2::is_degenerate)
-    .def("insert", py::overload_cast<const Point_2&>(&Min_circle_2::insert))
-    .def("insert", &insert_list)
-    .def("clear", &Min_circle_2::clear)
-    .def("is_valid", &Min_circle_2::is_valid)
-    ;
+    add_insertion(oc_co, "__str__");
+    add_insertion(oc_co, "__repr__");
+  }
+
+  if (! add_attr<Mc2>(m, "Min_circle_2")) {
+    py::class_<Mc2, boost::noncopyable>(m, "Min_circle_2")
+      .def(py::init<>())
+      .def(py::init<const Point_2&>())
+      .def(py::init<const Point_2&, const Point_2&>())
+      .def(py::init<const Point_2&, const Point_2&, const Point_2&>())
+      .def("__init__", &init_min_circle_2_from_list)
+      .def("number_of_points", &Mc2::number_of_points)
+      .def("number_of_support_points", &Mc2::number_of_support_points)
+      .def("points", py::range<py::return_internal_reference<>>(&Mc2::points_begin, &Mc2::points_end))
+      .def("support_points", py::range<py::return_internal_reference<>>(&Mc2::support_points_begin, &Mc2::support_points_end))
+      .def("support_point", &Mc2::support_point, py::return_internal_reference<>())
+      .def("circle", &Mc2::circle)
+      .def("bounded_side", &Mc2::bounded_side)
+      .def("has_on_bounded_side", &Mc2::has_on_bounded_side)
+      .def("has_on_boundary", &Mc2::has_on_boundary)
+      .def("has_on_unbounded_side", &Mc2::has_on_unbounded_side)
+      .def("is_empty", &Mc2::is_empty)
+      .def("is_degenerate", &Mc2::is_degenerate)
+      .def("insert", py::overload_cast<const Point_2&>(&Mc2::insert))
+      .def("insert", &insert_list)
+      .def("clear", &Mc2::clear)
+      .def("is_valid", &Mc2::is_valid)
+      ;
+  }
 }

@@ -189,8 +189,8 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
   //bind_construct_polynomial<Pt1>("Construct_polynomial_1");
   //bind_construct_polynomial<Pt2>("Construct_polynomial_2");
 
-  bind_polynomial<Pt1>(m, "Polynomial_1");
-  bind_polynomial<Pt2>(m, "Polynomial_2");
+  if (! add_attr<Pt1>(m, "Polynomial_1")) bind_polynomial<Pt1>(m, "Polynomial_1");
+  if (! add_attr<Pt2>(m, "Polynomial_2")) bind_polynomial<Pt2>(m, "Polynomial_2");
 
   bind_shift<Pt1>(m, "Pt1_Shift");
   bind_shift<Pt2>(m, "Pt2_Shift");

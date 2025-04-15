@@ -38,7 +38,6 @@ void export_kernel_module(py::module_&);
 void export_kernel_d(py::module_&);
 void export_kinetic_surface_reconstruction(py::module_&);
 void export_minkowski_sum_2(py::module_&);
-void export_object(py::module_&);
 void export_point_location(py::module_&);
 void export_point_set_processing(py::module_&);
 void export_nef_3(py::module_&);
