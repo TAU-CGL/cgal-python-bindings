@@ -1832,8 +1832,6 @@ void export_pmp_corefinement(py::module_& m) {
   m.def("set_in_place_operation", &pmp::set_in_place_operation_fn);
   m.def("set_in_place_operations", &pmp::set_in_place_operations_fn);
 
-
-
   using Av = pmp::Autorefinement_visitor;
   py::class_<Av>(m, "Autorefinement_visitor")
     .def(py::init<>())
