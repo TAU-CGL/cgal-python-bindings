@@ -434,8 +434,7 @@ auto export_triangulation_2(C& c) {
   py::class_<Vertex>(c, "Vertex")
     .def(py::init<>())
     .def("point", [](const Vertex& v)->const Pnt& { return v.point(); }, ri)
-#if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
-     (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
+#if (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
     .def("info", [](const Vertex& v)->py::object { return v.info(); })
     .def("set_info", [](Vertex& v, py::object obj) { v.info() = obj; })
 #endif
@@ -445,7 +444,7 @@ auto export_triangulation_2(C& c) {
     .def("is_valid", &Face::is_valid)
     .def("neighbor", [](const Face& f, int i)->const Face& { return *(f.neighbor(i)); }, ri)
     .def("vertex", [](const Face& f, int i)->const Vertex& { return *(f.vertex(i)); }, ri)
-#if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED))
+#if (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
     .def("info", [](const Face& f)->py::object { return f.info(); })
     .def("set_info", [](Face& f, py::object obj) { f.info() = obj; })
     .def("is_constrained", [](const Face& f, int i)->bool { return f.is_constrained(i); })
