@@ -34,9 +34,9 @@ auto export_triangulation_2(C& c) {
   using Point = typename Geom_traits::Point_2;
   using Segment = typename Geom_traits::Segment_2;
   using Triangle = typename Geom_traits::Triangle_2;
-  using Vertex = typename Tds::Vertex;
-  using Face = typename Tds::Face;
-  using Edge = typename Tds::Edge;
+  using Vertex = typename TriangulationType::Vertex;
+  using Face = typename TriangulationType::Face;
+  using Edge = typename TriangulationType::Edge;
   using Edge_iterator = typename Tds::Edge_iterator;
   using Locate_type = typename TriangulationType::Locate_type;
 
@@ -304,14 +304,14 @@ auto export_triangulation_2(C& c) {
          py::arg("v1"), py::arg("v2"), py::arg("v3"), py::arg("fr"),
          "true if there is a face having v1, v2 and v3 as vertices.\n"
          "In addition, if true is returned, fr is a handle to the face with v1, v2 and v3 as vertices.")
-#if (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
-    .def("insert_constraint", [](auto& tri,
-                                 const Vertex& va, const Vertex& vb) {
-      auto ha = Vertex_handle(&va);
-      auto hb = Vertex_handle(&vb);
-      tri.insert_constraint(ha, hb);
-    })
-#endif
+/*#if (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)*/
+/*    .def("insert_constraint", [](auto& tri,*/
+/*                                 const Vertex& va, const Vertex& vb) {*/
+/*      auto ha = Vertex_handle(&va);*/
+/*      auto hb = Vertex_handle(&vb);*/
+/*      tri.insert_constraint(ha, hb);*/
+/*    })*/
+/*#endif*/
     
     ;
   using Tri = TriangulationType;
@@ -434,21 +434,21 @@ auto export_triangulation_2(C& c) {
   py::class_<Vertex>(c, "Vertex")
     .def(py::init<>())
     .def("point", [](const Vertex& v)->const Pnt& { return v.point(); }, ri)
-#if (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
-    .def("info", [](const Vertex& v)->py::object { return v.info(); })
-    .def("set_info", [](Vertex& v, py::object obj) { v.info() = obj; })
-#endif
+/*#if (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)*/
+/*    .def("info", [](const Vertex& v)->py::object { return v.info(); })*/
+/*    .def("set_info", [](Vertex& v, py::object obj) { v.info() = obj; })*/
+/*#endif*/
     ;
 
   py::class_<Face>(c, "Face")
     .def("is_valid", &Face::is_valid)
     .def("neighbor", [](const Face& f, int i)->const Face& { return *(f.neighbor(i)); }, ri)
     .def("vertex", [](const Face& f, int i)->const Vertex& { return *(f.vertex(i)); }, ri)
-#if (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
-    .def("info", [](const Face& f)->py::object { return f.info(); })
-    .def("set_info", [](Face& f, py::object obj) { f.info() = obj; })
-    .def("is_constrained", [](const Face& f, int i)->bool { return f.is_constrained(i); })
-#endif
+/*#if (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)*/
+/*    .def("info", [](const Face& f)->py::object { return f.info(); })*/
+/*    .def("set_info", [](Face& f, py::object obj) { f.info() = obj; })*/
+/*    .def("is_constrained", [](const Face& f, int i)->bool { return f.is_constrained(i); })*/
+/*#endif*/
     ;
 
   // inherits from Triangulation_cw_ccw_2
