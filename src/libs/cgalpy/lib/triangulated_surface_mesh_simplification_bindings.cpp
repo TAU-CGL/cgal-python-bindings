@@ -784,8 +784,8 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Ghpp = SMS::GarlandHeckbert_plane_policies<Tm, Kernel>;
   py::class_<Ghpp>(m, "GarlandHeckbert_plane_policies")
     .def(py::init<Tm&>(), py::arg("tmesh"))
-    .def("get_placement", &Ghpp::get_placement)
-    .def("get_cost", &Ghpp::get_cost)
+    /*.def("get_placement", &Ghpp::get_placement)*/
+    /*.def("get_cost", &Ghpp::get_cost)*/
     ;
 
   // using Ghppp = SMS::GarlandHeckbert_probabilistic_plane_policies<Tm, Kernel>;
@@ -830,28 +830,16 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
     ;
 
   using Bncp = SMS::Bounded_normal_change_placement<Mp>;
-  using BncpGhpp = SMS::Bounded_normal_change_placement<Ghpp>;
-  using BncpGhtp = SMS::Bounded_normal_change_placement<Ghtp>;
   py::class_<Bncp>(m, "Bounded_normal_change_placement_Midpoint_placement")
     .def(py::init<Mp>())
     ;
 
   // placements for all 
-  // TODO: check prob
-  py::class_<BncpGhpp>(m, "Bounded_normal_change_placement_GarlandHeckbert_plane_policies")
-    .def(py::init<Ghpp>())
-    ;
-  py::class_<BncpGhtp>(m, "Bounded_normal_change_placement_GarlandHeckbert_triangle_policies")
-    .def(py::init<Ghtp>())
-    ;
-
   struct Dummy_placement {};
   // upon calling this classs constructor it gives the correct placement overload
   py::class_<Dummy_placement>(m, "Bounded_normal_change_placement")
     .def(py::init<>())
     .def("__call__", [](Dummy_placement& self, Mp& bncp) { return Mp(bncp); })
-    .def("__call__", [](Dummy_placement& self, Ghpp& bncp) { return BncpGhpp(bncp); })
-    .def("__call__", [](Dummy_placement& self, Ghtp& bncp) { return BncpGhtp(bncp); })
   ;
 
 
@@ -891,6 +879,6 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
     ;
 
 
-  sms::define_edge_collapses<Tm, Ecsp, Ecrsp, Elsp, Fcsp, Fcrsp>(m);
+  /*sms::define_edge_collapses<Tm, Ecsp, Ecrsp, Elsp, Fcsp, Fcrsp>(m); deprecated?*/
 }
 

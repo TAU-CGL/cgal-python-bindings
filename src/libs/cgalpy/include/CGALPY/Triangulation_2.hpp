@@ -6,9 +6,11 @@
 
 #include <CGAL/Triangulation_2.h>
 
-#include "CGALPY/Triangulation_cw_ccw_2.hpp"
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/make_iterator.hpp"
+#include "CGALPY/make_circulator.hpp"
+#include "CGALPY/triangulation_2_types.hpp"
 
 namespace py = nanobind;
 
@@ -16,6 +18,8 @@ namespace tri2 {
 
 template <typename TriangulationType, typename C>
 auto export_triangulation_2(C& c) {
+
+  constexpr auto ri(py::rv_policy::reference_internal);
 
   using Vertex_handle = typename TriangulationType::Vertex_handle;
   using Face_handle = typename TriangulationType::Face_handle;
@@ -40,8 +44,7 @@ auto export_triangulation_2(C& c) {
   add_insertion(c, "__str__");
   add_insertion(c, "__repr__");
   add_extraction(c);
-  c
-    .def(py::init<const TriangulationType&>(),
+  c.def(py::init<const TriangulationType&>(),
          py::arg("tr"),
          "Copy constructor.")
     .def("all_face_handles", [](const TriangulationType& tr) { return tr.all_face_handles(); },
@@ -99,7 +102,7 @@ auto export_triangulation_2(C& c) {
          "If point p is strictly outside the convex hull, p is linked to all visible points on the convex hull to form the new triangulation.\n"
          "At last, if p is outside the affine hull (in case of degenerate 1-dimensional or 0-dimensional triangulations), p is linked all the other vertices to form a triangulation whose dimension is increased by one. The last argument f is an indication to the underlying locate algorithm of where to start.\n\n"
          "Examples\n"
-         "• Triangulation_2/adding_handles.py, Triangulation_2/colored_face.py, and Triangulation_2/for_loop_2.py.")
+         "• TriangulationType/adding_handles.py, Triangulation_2/colored_face.py, and Triangulation_2/for_loop_2.py.")
     .def("insert", [](TriangulationType& tr, const std::vector<Point>& points) { return tr.insert(points.begin(), points.end()); },
          py::arg("points"),
          "Inserts the points in the given order, and returns the number of inserted points.\n")
@@ -301,499 +304,158 @@ auto export_triangulation_2(C& c) {
          py::arg("v1"), py::arg("v2"), py::arg("v3"), py::arg("fr"),
          "true if there is a face having v1, v2 and v3 as vertices.\n"
          "In addition, if true is returned, fr is a handle to the face with v1, v2 and v3 as vertices.")
+#if (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
+    .def("insert_constraint", [](auto& tri,
+                                 const Vertex& va, const Vertex& vb) {
+      auto ha = Vertex_handle(&va);
+      auto hb = Vertex_handle(&vb);
+      tri.insert_constraint(ha, hb);
+    })
+#endif
     
+    ;
+  using Tri = TriangulationType;
+
+  using Avi = All_vertices_iterator;
+  using Aei = All_edges_iterator;
+  using Afi = All_faces_iterator;
+  using Fvi = typename Tri::Finite_vertices_iterator;
+  using Fei = typename Tri::Finite_edges_iterator;
+  using Ffi = typename Tri::Finite_faces_iterator;
+  using Pi = typename Tri::Point_iterator;
+  using Pnt = Point;
+
+  // Itarators
+  add_iterator<Avi, Avi, const Vertex&>("All_vertices_iterator", c);
+  add_iterator<Aei, Aei, const Edge&>("All_edges_iterator", c);
+  add_iterator<Afi, Afi, const Face&>("All_faces_iterator", c);
+  add_iterator<Fvi, Fvi, const Vertex&>("Finite_vertices_iterator", c);
+  add_iterator<Ffi, Ffi, const Face&>("Finite_faces_iterator", c);
+  add_iterator<Fei, Fei, const Edge&>("Finite_edges_iterator", c);
+  add_iterator<Pi, Pi, const Pnt&>("Point_iterator", c);
+
+  /*c.def("all_vertices", [](const auto& tri){ return make_iterator(tri.all_vertices_begin(), tri.all_vertices_end()); }, py::keep_alive<0, 1>())*/
+  /*  .def("all_edges", [](const auto& tri){ return make_iterator(tri.all_edges_begin(), tri.all_edges_end()); }, py::keep_alive<0, 1>())*/
+  /*  .def("all_faces", [](const auto& tri){ return make_iterator(tri.all_faces_begin(), tri.all_faces_end()); }, py::keep_alive<0, 1>())*/
+  /*  .def("finite_vertices", [](const auto& tri){ return make_iterator(tri.finite_vertices_begin(), tri.finite_vertices_end()); }, py::keep_alive<0, 1>())*/
+  /*  .def("finite_edges", [](const auto& tri){ return make_iterator(tri.finite_edges_begin(), tri.finite_edges_end()); }, py::keep_alive<0, 1>())*/
+  /*  .def("finite_faces", [](const auto& tri){ return make_iterator(tri.finite_faces_begin(), tri.finite_faces_end()); }, py::keep_alive<0, 1>())*/
+  /*  .def("points", [](const auto& tri){ return make_iterator(tri.points_begin(), tri.points_end()); }, py::keep_alive<0, 1>())*/
+  /*  ;*/
+
+  using Vc = typename Tri::Vertex_circulator;
+  using Ec = typename Tri::Edge_circulator;
+  using Fc = typename Tri::Face_circulator;
+
+  // Circulators
+  add_circulator<Vc>("Vertex_circulator", c);
+  add_circulator<Ec, Edge>("Edge_circulator", c);
+  add_circulator<Fc>("Face_circulator", c);
+
+  c.def("incident_faces",
+        [](const TriangulationType& tri, const Vertex& v) {
+          auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+          return make_circulator(tri.incident_faces(vh));
+        })
+    .def("incident_faces",
+         [](const TriangulationType& tri, const Vertex& v, const Face& f) {
+           auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+           auto fh = Face_handle(const_cast<Face*>(&f));
+           return make_circulator(tri.incident_faces(vh, fh));
+         })
+    .def("incident_edges",
+         [](const TriangulationType& tri, const Vertex& v) {
+           auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+           return make_circulator(tri.incident_edges(vh));
+         })
+    .def("incident_edges",
+         [](const TriangulationType& tri, const Vertex& v, const Face& f) {
+           auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+           auto fh = Face_handle(const_cast<Face*>(&f));
+           return make_circulator(tri.incident_edges(vh, fh));
+         })
+    .def("incident_vertices",
+         [](const TriangulationType& tri, const Vertex& v) {
+           auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+           return make_circulator(tri.incident_vertices(vh));
+         })
+    .def("incident_vertices",
+         [](const TriangulationType& tri, const Vertex& v, const Face& f) {
+           auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+           auto fh = Face_handle(const_cast<Face*>(&f));
+           return make_circulator(tri.incident_vertices(vh, fh));
+         })
+    ;
+
+  // Iterators from circulator
+  add_iterator_from_circulator<Vc>("Vertex_iterator", c);
+  add_iterator_from_circulator<Ec, Edge>("Edge_iterator", c);
+  add_iterator_from_circulator<Fc>("Face_iterator", c);
+
+  c.def("incident_faces_range", [](const TriangulationType& tri, const Vertex& v) {
+    auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+    return make_range(tri.incident_faces(vh), tri.incident_faces(vh));
+  })
+    .def("incident_faces_range", [](const TriangulationType& tri, const Vertex& v, const Face& f) {
+    auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+    auto fh = Face_handle(const_cast<Face*>(&f));
+    return make_range(tri.incident_faces(vh, fh), tri.incident_faces(vh, fh));
+  })
+    .def("incident_edges_range", [](const TriangulationType& tri, const Vertex& v) {
+    auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+    return make_range(tri.incident_edges(vh), tri.incident_edges(vh));
+  })
+    .def("incident_edges_range", [](const TriangulationType& tri, const Vertex& v, const Face& f) {
+    auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+    auto fh = Face_handle(const_cast<Face*>(&f));
+    return make_range(tri.incident_edges(vh, fh), tri.incident_edges(vh, fh));
+  })
+    .def("incident_vertices_range", [](const TriangulationType& tri, const Vertex& v) {
+    auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+    return make_range(tri.incident_vertices(vh), tri.incident_vertices(vh));
+  })
+    .def("incident_vertices_range", [](const TriangulationType& tri, const Vertex& v, const Face& f) {
+    auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+    auto fh = Face_handle(const_cast<Face*>(&f));
+    return make_range(tri.incident_vertices(vh, fh), tri.incident_vertices(vh, fh));
+  })
+    ;
+
+  // Enumerations
+  py::enum_<Locate_type>(c, "Locate_type")
+    .value("VERTEX", Tri::VERTEX)
+    .value("EDGE", Tri::EDGE)
+    .value("FACE", Tri::FACE)
+    .value("OUTSIDE_CONVEX_HULL", Tri::OUTSIDE_CONVEX_HULL)
+    .value("OUTSIDE_AFFINE_HULL", Tri::OUTSIDE_AFFINE_HULL)
+    .export_values()
+    ;
+
+  py::class_<Vertex>(c, "Vertex")
+    .def(py::init<>())
+    .def("point", [](const Vertex& v)->const Pnt& { return v.point(); }, ri)
+#if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
+     (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
+    .def("info", [](const Vertex& v)->py::object { return v.info(); })
+    .def("set_info", [](Vertex& v, py::object obj) { v.info() = obj; })
+#endif
+    ;
+
+  py::class_<Face>(c, "Face")
+    .def("is_valid", &Face::is_valid)
+    .def("neighbor", [](const Face& f, int i)->const Face& { return *(f.neighbor(i)); }, ri)
+    .def("vertex", [](const Face& f, int i)->const Vertex& { return *(f.vertex(i)); }, ri)
+#if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED))
+    .def("info", [](const Face& f)->py::object { return f.info(); })
+    .def("set_info", [](Face& f, py::object obj) { f.info() = obj; })
+    .def("is_constrained", [](const Face& f, int i)->bool { return f.is_constrained(i); })
+#endif
     ;
 
   // inherits from Triangulation_cw_ccw_2
-  tri2::export_triangulation_cw_ccw_2<TriangulationType>(c);
   return c;
 }
 
 } // namespace tri2
 
 #endif // CGALPY_TRIANGULATION_2_HPP
-// Member Function Documentation
-// ◆ all_face_handles()
-// template<typename Traits , typename Tds >
-// All_face_handles CGAL::Triangulation_2< Traits, Tds >::all_face_handles 	( 		) 	const
-//
-// returns a range of iterators over all faces.
-//
-// Note
-//     While the value type of All_faces_iterator is Face, the value type of All_face_handles::iterator is Face_handle. 
-//
-// ◆ all_vertex_handles()
-// template<typename Traits , typename Tds >
-// All_vertex_handles CGAL::Triangulation_2< Traits, Tds >::all_vertex_handles 	( 		) 	const
-//
-// returns a range of iterators over all vertices.
-//
-// Note
-//     While the value type of All_vertices_iterator is Vertex, the value type of All_vertex_handles::iterator is Vertex_handle. 
-//
-// ◆ ccw()
-// template<typename Traits , typename Tds >
-// int CGAL::Triangulation_2< Traits, Tds >::ccw 	( 	int  	i	) 	const
-//
-// Returns i+1 modulo 3.
-//
-// Precondition
-//     0≤i≤2. 
-//
-// ◆ circumcenter()
-// template<typename Traits , typename Tds >
-// Point CGAL::Triangulation_2< Traits, Tds >::circumcenter 	( 	Face_handle  	f	) 	const
-//
-// Compute the circumcenter of the face pointed to by f.
-//
-// This function is available only if the corresponding function is provided in the geometric traits.
-// ◆ cw()
-// template<typename Traits , typename Tds >
-// int CGAL::Triangulation_2< Traits, Tds >::cw 	( 	int  	i	) 	const
-//
-// Returns i+2 modulo 3.
-//
-// Precondition
-//     0≤i≤2. 
-//
-// ◆ finite_face_handles()
-// template<typename Traits , typename Tds >
-// Finite_face_handles CGAL::Triangulation_2< Traits, Tds >::finite_face_handles 	( 		) 	const
-//
-// returns a range of iterators over finite faces.
-//
-// Note
-//     While the value type of Finite_faces_iterator is Face, the value type of Finite_face_handles::iterator is Face_handle. 
-//
-// ◆ finite_vertex_handles()
-// template<typename Traits , typename Tds >
-// Finite_vertex_handles CGAL::Triangulation_2< Traits, Tds >::finite_vertex_handles 	( 		) 	const
-//
-// returns a range of iterators over finite vertices.
-//
-// Note
-//     While the value type of Finite_vertices_iterator is Vertex, the value type of Finite_vertex_handles::iterator is Vertex_handle. 
-//
-// ◆ flip()
-// template<typename Traits , typename Tds >
-// void CGAL::Triangulation_2< Traits, Tds >::flip 	( 	Face_handle  	f,
-// 		int  	i 
-// 	) 		
-//
-// Exchanges the edge incident to f and f->neighbor(i) with the other diagonal of the quadrilateral formed by f and f->neighbor(i).
-//
-// Precondition
-//     The faces f and f->neighbor(i) are finite faces and their union form a convex quadrilateral. 
-//
-// ◆ incident_edges()
-// template<typename Traits , typename Tds >
-// Edge_circulator CGAL::Triangulation_2< Traits, Tds >::incident_edges 	( 	Vertex_handle  	v,
-// 		Face_handle  	f 
-// 	) 		const
-//
-// Starts at the first edge of f incident to v, in counterclockwise order around v.
-//
-// Precondition
-//     Face f is incident to vertex v. 
-//
-// ◆ incident_faces()
-// template<typename Traits , typename Tds >
-// Face_circulator CGAL::Triangulation_2< Traits, Tds >::incident_faces 	( 	Vertex_handle  	v,
-// 		Face_handle  	f 
-// 	) 		const
-//
-// Starts at face f.
-//
-// Precondition
-//     Face f is incident to vertex v. 
-//
-// ◆ incident_vertices()
-// template<typename Traits , typename Tds >
-// Vertex_circulator CGAL::Triangulation_2< Traits, Tds >::incident_vertices 	( 	Vertex_handle  	v,
-// 		Face_handle  	f 
-// 	) 		
-//
-// Starts at the first vertex of f adjacent to v in counterclockwise order around v.
-//
-// Precondition
-//     Face f is incident to vertex v. 
-//
-// ◆ includes_edge()
-// template<typename Traits , typename Tds >
-// bool CGAL::Triangulation_2< Traits, Tds >::includes_edge 	( 	Vertex_handle  	va,
-// 		Vertex_handle  	vb,
-// 		Vertex_handle &  	vbb,
-// 		Face_handle &  	fr,
-// 		int &  	i 
-// 	) 		
-//
-// true if the line segment from va to vb includes an edge e incident to va.
-//
-// If true, vbb becomes the other vertex of e, e is the edge (fr,i) where fr is a handle to the face incident to e and on the right side e oriented from va to vb.
-// ◆ inexact_locate()
-// template<typename Traits , typename Tds >
-// Face_handle CGAL::Triangulation_2< Traits, Tds >::inexact_locate 	( 	const Point &  	query,
-// 		Face_handle  	start = Face_handle() 
-// 	) 		const
-//
-// Same as locate() but uses inexact predicates.
-//
-// This function returns a handle on a face that is a good approximation of the exact location of query, while being faster. Note that it may return a handle on a face whose interior does not contain query. When the triangulation has dimension smaller than 2, start is returned.
-// ◆ insert() [1/3]
-// template<typename Traits , typename Tds >
-// Vertex_handle CGAL::Triangulation_2< Traits, Tds >::insert 	( 	const Point &  	p,
-// 		Face_handle  	f = Face_handle() 
-// 	) 		
-//
-// Inserts point p in the triangulation and returns the corresponding vertex.
-//
-// If point p coincides with an already existing vertex, this vertex is returned and the triangulation remains unchanged.
-//
-// If point p is on an edge, the two incident faces are split in two.
-//
-// If point p is strictly inside a face of the triangulation, the face is split in three.
-//
-// If point p is strictly outside the convex hull, p is linked to all visible points on the convex hull to form the new triangulation.
-//
-// At last, if p is outside the affine hull (in case of degenerate 1-dimensional or 0-dimensional triangulations), p is linked all the other vertices to form a triangulation whose dimension is increased by one. The last argument f is an indication to the underlying locate algorithm of where to start.
-//
-// Examples
-//     Triangulation_2/adding_handles.cpp, Triangulation_2/colored_face.cpp, and Triangulation_2/for_loop_2.cpp.
-//
-// ◆ insert() [2/3]
-// template<typename Traits , typename Tds >
-// template<class PointInputIterator >
-// std::ptrdiff_t CGAL::Triangulation_2< Traits, Tds >::insert 	( 	PointInputIterator  	first,
-// 		PointInputIterator  	last 
-// 	) 		
-//
-// Inserts the points in the range [first,last) in the given order, and returns the number of inserted points.
-//
-// Template Parameters
-//     PointInputIterator	must be an input iterator with value type Point.
-//
-// ◆ insert() [3/3]
-// template<typename Traits , typename Tds >
-// template<class PointWithInfoInputIterator >
-// std::ptrdiff_t CGAL::Triangulation_2< Traits, Tds >::insert 	( 	PointWithInfoInputIterator  	first,
-// 		PointWithInfoInputIterator  	last 
-// 	) 		
-//
-// inserts the points in the iterator range [first,last) in the given order, and returns the number of inserted points.
-//
-// Given a pair (p,i), the vertex v storing p also stores i, that is v.point() == p and v.info() == i. If several pairs have the same point, only one vertex is created, and one of the objects of type Vertex::Info will be stored in the vertex.
-//
-// Precondition
-//     Vertex must be model of the concept TriangulationVertexBaseWithInfo_2.
-//
-// Template Parameters
-//     PointWithInfoInputIterator	must be an input iterator with the value type std::pair<Point,Vertex::Info>.
-//
-// ◆ insert_in_edge()
-// template<typename Traits , typename Tds >
-// Vertex_handle CGAL::Triangulation_2< Traits, Tds >::insert_in_edge 	( 	const Point &  	p,
-// 		Face_handle  	f,
-// 		int  	i 
-// 	) 		
-//
-// Inserts vertex v in edge i of f.
-//
-// Precondition
-//     The point in vertex v lies on the edge opposite to the vertex i of face f. 
-//
-// ◆ insert_in_face()
-// template<typename Traits , typename Tds >
-// Vertex_handle CGAL::Triangulation_2< Traits, Tds >::insert_in_face 	( 	const Point &  	p,
-// 		Face_handle  	f 
-// 	) 		
-//
-// Inserts vertex v in face f.
-//
-// Face f is modified, two new faces are created.
-//
-// Precondition
-//     The point in vertex v lies inside face f. 
-//
-// ◆ insert_outside_convex_hull()
-// template<typename Traits , typename Tds >
-// Vertex_handle CGAL::Triangulation_2< Traits, Tds >::insert_outside_convex_hull 	( 	const Point &  	p,
-// 		Face_handle  	f 
-// 	) 		
-//
-// Inserts a point which is outside the convex hull but in the affine hull.
-//
-// Precondition
-//     The handle f points to a face which is a proof of the location ofp, see the description of the locate method above. 
-//
-// ◆ is_edge()
-// template<typename Traits , typename Tds >
-// bool CGAL::Triangulation_2< Traits, Tds >::is_edge 	( 	Vertex_handle  	va,
-// 		Vertex_handle  	vb,
-// 		Face_handle &  	fr,
-// 		int &  	i 
-// 	) 		
-//
-// as above.
-//
-// In addition, if true is returned, the edge with vertices va and vb is the edge e=(fr,i) where fr is a handle to the face incident to e and on the right side of e oriented from va to vb.
-// ◆ is_face()
-// template<typename Traits , typename Tds >
-// bool CGAL::Triangulation_2< Traits, Tds >::is_face 	( 	Vertex_handle  	v1,
-// 		Vertex_handle  	v2,
-// 		Vertex_handle  	v3,
-// 		Face_handle &  	fr 
-// 	) 		
-//
-// as above.
-//
-// In addition, if true is returned, fr is a handle to the face with v1, v2 and v3 as vertices.
-// ◆ is_valid()
-// template<typename Traits , typename Tds >
-// bool CGAL::Triangulation_2< Traits, Tds >::is_valid 	( 	bool  	verbose = false,
-// 		int  	level = 0 
-// 	) 		const
-//
-// Checks the combinatorial validity of the triangulation and also the validity of its geometric embedding.
-//
-// This method is mainly a debugging help for the users of advanced features.
-// ◆ line_walk()
-// template<typename Traits , typename Tds >
-// Line_face_circulator CGAL::Triangulation_2< Traits, Tds >::line_walk 	( 	const Point &  	p,
-// 		const Point &  	q,
-// 		Face_handle  	f = Face_handle() 
-// 	) 		const
-//
-// This function returns a circulator that allows to visit the faces intersected by the line pq.
-//
-// If there is no such face the circulator has a singular value.
-//
-// The starting point of the circulator is the face f, or the first finite face traversed by l , if f is omitted.
-//
-// The circulator wraps around the infinite vertex: after the last traversed finite face, it steps through the infinite face adjacent to this face then through the infinite face adjacent to the first traversed finite face then through the first finite traversed face again.
-//
-// Precondition
-//     The triangulation must have dimension 2. 
-//     Points p and q must be different points. 
-//     If f != nullptr, it must point to a finite face and the point p must be inside or on the boundary of f. 
-//
-// ◆ locate() [1/2]
-// template<typename Traits , typename Tds >
-// Face_handle CGAL::Triangulation_2< Traits, Tds >::locate 	( 	const Point &  	query,
-// 		Face_handle  	f = Face_handle() 
-// 	) 		const
-//
-// If the point query lies inside the convex hull of the points, a face that contains the query in its interior or on its boundary is returned.
-//
-// If the point query lies outside the convex hull of the triangulation but in the affine hull, the returned face is an infinite face which is a proof of the point's location:
-//
-//     for a two dimensional triangulation, it is a face (∞,p,q) such that query lies to the left of the oriented line pq (the rest of the triangulation lying to the right of this line).
-//     for a degenerate one dimensional triangulation it is the (degenerate one dimensional) face (∞,p,nullptr) such that query and the triangulation lie on either side of p.
-//
-// If the point query lies outside the affine hull, the returned Face_handle is nullptr.
-//
-// The optional Face_handle argument, if provided, is used as a hint of where the locate process has to start its search.
-// ◆ locate() [2/2]
-// template<typename Traits , typename Tds >
-// Face_handle CGAL::Triangulation_2< Traits, Tds >::locate 	( 	const Point &  	query,
-// 		Locate_type &  	lt,
-// 		int &  	li,
-// 		Face_handle  	h = Face_handle() 
-// 	) 		const
-//
-// Same as above.
-//
-// Additionally, the parameters lt and li describe where the query point is located. The variable lt is set to the locate type of the query. If lt==VERTEX the variable li is set to the index of the vertex, and if lt==EDGE li is set to the index of the vertex opposite to the edge. Be careful that li has no meaning when the query type is FACE, OUTSIDE_CONVEX_HULL, or OUTSIDE_AFFINE_HULL or when the triangulation is 0-dimensional.
-// ◆ mirror_edge()
-// template<typename Traits , typename Tds >
-// Edge CGAL::Triangulation_2< Traits, Tds >::mirror_edge 	( 	Edge  	e	) 	const
-//
-// returns the same edge seen from the other adjacent face.
-//
-// Precondition
-//     0≤i≤2. 
-//
-// ◆ mirror_index()
-// template<typename Traits , typename Tds >
-// int CGAL::Triangulation_2< Traits, Tds >::mirror_index 	( 	Face_handle  	f,
-// 		int  	i 
-// 	) 		const
-//
-// returns the index of f in its ith neighbor.
-//
-// Precondition
-//     0≤i≤2. 
-//
-// ◆ mirror_vertex()
-// template<typename Traits , typename Tds >
-// Vertex_handle CGAL::Triangulation_2< Traits, Tds >::mirror_vertex 	( 	Face_handle  	f,
-// 		int  	i 
-// 	) 		const
-//
-// returns the vertex of the ith neighbor of f that is opposite to f.
-//
-// Precondition
-//     0≤i≤2. 
-//
-// ◆ move()
-// template<typename Traits , typename Tds >
-// Vertex_handle CGAL::Triangulation_2< Traits, Tds >::move 	( 	Vertex_handle  	v,
-// 		const Point &  	p 
-// 	) 		
-//
-// If there is no collision during the move, this function is the same as move_if_no_collision .
-//
-// Otherwise, v is removed and the vertex at point p is returned.
-//
-// Precondition
-//     Vertex v must be finite. 
-//
-// ◆ move_if_no_collision()
-// template<typename Traits , typename Tds >
-// Vertex_handle CGAL::Triangulation_2< Traits, Tds >::move_if_no_collision 	( 	Vertex_handle  	v,
-// 		const Point &  	p 
-// 	) 		
-//
-// If there is not already another vertex placed on p, the triangulation is modified such that the new position of vertex v is p, and v is returned.
-//
-// Otherwise, the triangulation is not modified and the vertex at point p is returned.
-//
-// Precondition
-//     Vertex v must be finite. 
-//
-// ◆ operator=()
-// template<typename Traits , typename Tds >
-// Triangulation_2 CGAL::Triangulation_2< Traits, Tds >::operator= 	( 	const Triangulation_2< Traits, Tds > &  	tr	) 	
-//
-// Assignment.
-//
-// All the vertices and faces are duplicated. After the assignment, *this and tr refer to different triangulations: if tr is modified, *this is not.
-// ◆ oriented_side()
-// template<typename Traits , typename Tds >
-// Oriented_side CGAL::Triangulation_2< Traits, Tds >::oriented_side 	( 	Face_handle  	f,
-// 		const Point &  	p 
-// 	) 		const
-//
-// Returns on which side of the oriented boundary of f lies the point p.
-//
-// Precondition
-//     f is finite. 
-//
-// ◆ remove()
-// template<typename Traits , typename Tds >
-// void CGAL::Triangulation_2< Traits, Tds >::remove 	( 	Vertex_handle  	v	) 	
-//
-// Removes the vertex from the triangulation.
-//
-// The created hole is re-triangulated.
-//
-// Precondition
-//     Vertex v must be finite. 
-//
-// ◆ remove_degree_3()
-// template<typename Traits , typename Tds >
-// void CGAL::Triangulation_2< Traits, Tds >::remove_degree_3 	( 	Vertex_handle  	v	) 	
-//
-// Removes a vertex of degree three.
-//
-// Two of the incident faces are destroyed, the third one is modified.
-//
-// Precondition
-//     Vertex v is a finite vertex with degree three. 
-//
-// ◆ segment() [1/4]
-// template<typename Traits , typename Tds >
-// Segment CGAL::Triangulation_2< Traits, Tds >::segment 	( 	const Edge &  	e	) 	const
-//
-// Returns the line segment corresponding to edge e.
-//
-// Precondition
-//     e is a finite edge. 
-//
-// ◆ segment() [2/4]
-// template<typename Traits , typename Tds >
-// Segment CGAL::Triangulation_2< Traits, Tds >::segment 	( 	const Edge_circulator &  	ec	) 	const
-//
-// Returns the line segment corresponding to edge *ec.
-//
-// Precondition
-//     *ec is a finite edge. 
-//
-// ◆ segment() [3/4]
-// template<typename Traits , typename Tds >
-// Segment CGAL::Triangulation_2< Traits, Tds >::segment 	( 	const Edge_iterator &  	ei	) 	const
-//
-// Returns the line segment corresponding to edge *ei.
-//
-// Precondition
-//     *ei is a finite edge. 
-//
-// ◆ segment() [4/4]
-// template<typename Traits , typename Tds >
-// Segment CGAL::Triangulation_2< Traits, Tds >::segment 	( 	Face_handle  	f,
-// 		int  	i 
-// 	) 		const
-//
-// Returns the line segment formed by the vertices ccw(i) and cw(i) of face f.
-//
-// Precondition
-//     0≤i≤2. The vertices ccw(i) and cw(i) of f are finite. 
-//
-// ◆ set_infinite_vertex()
-// template<typename Traits , typename Tds >
-// void CGAL::Triangulation_2< Traits, Tds >::set_infinite_vertex 	( 	const Vertex_handle &  	v	) 	
-//
-// This is an advanced function.
-// Advanced
-//
-// This method is meant to be used only if you have done a low-level operation on the underlying tds that invalidated the infinite vertex. Sets the infinite vertex.
-// ◆ side_of_oriented_circle()
-// template<typename Traits , typename Tds >
-// Oriented_side CGAL::Triangulation_2< Traits, Tds >::side_of_oriented_circle 	( 	Face_handle  	f,
-// 		const Point &  	p 
-// 	) 		
-//
-// Returns on which side of the circumcircle of face f lies the point p.
-//
-// The circle is assumed to be counterclockwise oriented, so its positive side correspond to its bounded side. This predicate is available only if the corresponding predicates on points is provided in the geometric traits class.
-// ◆ star_hole() [1/2]
-// template<typename Traits , typename Tds >
-// template<class EdgeIt >
-// Vertex_handle CGAL::Triangulation_2< Traits, Tds >::star_hole 	( 	Point  	p,
-// 		EdgeIt  	edge_begin,
-// 		EdgeIt  	edge_end 
-// 	) 		
-//
-// creates a new vertex v and use it to star the hole whose boundary is described by the sequence of edges [edge_begin, edge_end).
-//
-// Returns a handle to the new vertex.
-//
-// This function is intended to be used in conjunction with the find_conflicts() member functions of Delaunay and constrained Delaunay triangulations to perform insertions.
-// ◆ star_hole() [2/2]
-// template<typename Traits , typename Tds >
-// template<class EdgeIt , class FaceIt >
-// Vertex_handle CGAL::Triangulation_2< Traits, Tds >::star_hole 	( 	Point  	p,
-// 		EdgeIt  	edge_begin,
-// 		EdgeIt  	edge_end,
-// 		FaceIt  	face_begin,
-// 		FaceIt  	face_end 
-// 	) 		
-//
-// same as above, except that the algorithm first recycles faces in the sequence [face_begin, face_end) and create new ones only when the sequence is exhausted.
-//
-// This function is intended to be used in conjunction with the find_conflicts() member functions of Delaunay and constrained Delaunay triangulations to perform insertions.
-// ◆ swap()
-// template<typename Traits , typename Tds >
-// void CGAL::Triangulation_2< Traits, Tds >::swap 	( 	Triangulation_2< Traits, Tds > &  	tr	) 	
-//
-// The triangulations tr and *this are swapped.
-//
-// This method should be used instead of assignment of copy constructor. if tr is deleted after that.
-// ◆ triangle()
-// template<typename Traits , typename Tds >
-// Triangle CGAL::Triangulation_2< Traits, Tds >::triangle 	( 	Face_handle  	f	) 	const
-//
-// Returns the triangle formed by the three vertices of f.
-//
-// Precondition
-//     The face is finite. 
-//
