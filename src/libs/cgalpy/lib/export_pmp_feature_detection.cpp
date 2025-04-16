@@ -142,6 +142,11 @@ void export_pmp_feature_detection(py::module_& m) {
   using Pm = pmp::Polygonal_mesh;
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
+  using Gt = boost::graph_traits<Pm>;
+  using Vd = typename Gt::vertex_descriptor;
+  using Ed = typename Gt::edge_descriptor;
+  using Fd = typename Gt::face_descriptor;
+
   using Edge_bool_map = Pm::Property_map<Ed, bool>;
 #endif
 
