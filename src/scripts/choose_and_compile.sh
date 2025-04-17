@@ -81,6 +81,7 @@ new_filename="$(basename $cmake_file .cmake)_user_choices.cmake"
 cat $cmake_file > $new_filename
 echo $fixed_lib_name >> $new_filename
 echo $build_type >> $new_filename
+echo "set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL \"\")" >> $new_filename
 
 # Run the cmake command with the new cmake file
 if ! cmake -C $new_filename $root_real; then
