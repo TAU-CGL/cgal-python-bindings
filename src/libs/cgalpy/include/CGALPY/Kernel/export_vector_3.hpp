@@ -36,7 +36,7 @@ void export_vector_3(C& c) {
     .def(bp::init<FT&, FT&, FT&, FT&>())
     .def(bp::init<FT&, FT&, FT&>())
     .def(bp::init<Pnt&, Pnt&>())
-    .def("assign", py::overload_cast<const Vec&>(&Vec::operator=))
+    /*.def("assign", py::overload_cast<const Vec&>(&Vec::operator=))*/
     .def("hx", &Vec::hx)
     .def("hy", &Vec::hy)
     .def("hz", &Vec::hz)

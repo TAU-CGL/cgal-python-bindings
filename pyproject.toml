@@ -11,7 +11,7 @@ requires = [
 build-backend = "scikit_build_core.build"
 [project]
 name = "cgalpy"
-version = "1.0.10"
+version = "1.0.11"
 description = "CGAL Bindings"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -121,9 +121,13 @@ minimum-version = "build-system.requires"
 build-dir = "build/{wheel_tag}"
 
 [tool.cibuildwheel]
-manylinux-x86_64-image = "manylinux_2_28"
-# manylinux-aarch64-image = "manylinux_2_28"
-# manylinux-ppc64le-image = "manylinux_2_28"
-# manylinux-s390x-image = "manylinux_2_28"
+manylinux-x86_64-image = "quay.io/pypa/manylinux_2_34:latest"
+musllinux-x86_64-image = "quay.io/pypa/musllinux_1_2_x86_64:latest"
+# manylinux-aarch64-image = "quay.io/pypa/manylinux_2_34:latest"
+# manylinux-ppc64le-image = "quay.io/pypa/manylinux_2_34:latest"
+# manylinux-s390x-image = "quay.io/pypa/manylinux_2_34:latest"
+# musllinux-aarch64-image = "quay.io/pypa/musllinux_1_2_aarch64:latest"
+# musllinux-ppc64le-image = "quay.io/pypa/musllinux_1_2_ppc64le:latest"
+# musllinux-s390x-image = "quay.io/pypa/musllinux_1_2_s390x:latest"
 build = "cp38-* cp39-* cp310-* cp311-* cp312-* cp313-*"
 

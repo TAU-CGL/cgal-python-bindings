@@ -19,7 +19,7 @@ endif ()
 # I would expect the version to be set here as well.
 # Unfortunately, this is not possible.
 # Therefore, when bumping up the number, do it in both places!
-project(cgalpy VERSION "1.0.10" LANGUAGES CXX)
+project(cgalpy VERSION "1.0.11" LANGUAGES CXX)
 
 # Use C++17 for this directory and its sub-directories.
 set(CMAKE_CXX_STANDARD 17)
