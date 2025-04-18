@@ -102,6 +102,10 @@ void export_pmp_normal_computation(py::module_& m) {
   using Pm = pmp::Polygonal_mesh;
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
+  using Gt = boost::graph_traits<Pm>;
+  using Vd = typename Gt::vertex_descriptor;
+  using Fd = typename Gt::face_descriptor;
+
   using Vertex_vector_map = Pm::Property_map<Vd, Vector_3>;
   using Face_vector_map = Pm::Property_map<Fd, Vector_3>;
 #endif
