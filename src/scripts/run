@@ -9,6 +9,33 @@ prefix="CGALPY"
 # use pure wheel for now
 suffix="1.0.10-cp310-cp310-linux_x86_64.whl"
 
+#!/bin/bash
+
+# Function to display help message
+show_help() {
+    echo "Usage: $0 [option]"
+    echo "Options:"
+    echo "  -h, --help     Show this help message"
+    echo "  -c, --clear    Clear the CMakeCache.txt files"
+}
+
+clear=false
+
+# Parse command line options
+case "$1" in
+    -h|--help)
+        show_help
+        ;;
+    -c|--clear)
+        clear=true
+        ;;
+    -*)
+        echo "Unknown option: $1"
+        echo "Use --help or -h for usage information."
+        exit 1
+        ;;
+esac
+
 declare -i i=0
 item="item$i"
 # eval "declare -a $item=('aos2_epec_fixed'     '')";                            ((i++)); item="item$i"
@@ -93,5 +120,9 @@ for elm in "${arr[@]}"; do
   whl_basename=${!whl_basename_p}
   whl=$whl_dirname'/'${prefix,,}_${whl_basename,,}-${suffix}
   echo "======== $dir ========"
-  eval "(mkdir -p $dir && cd $dir && $cmd && make $make_parms && pip3 $pip_parms $whl)"
+  if [ "$clear" = true ] ; then
+    eval "(mkdir -p $dir && cd $dir && rm -rf CMakeCache.txt && $cmd && make $make_parms && pip3 $pip_parms $whl)"
+  else
+    eval "(mkdir -p $dir && cd $dir && rm -rf CMakeCache.txt && $cmd && make $make_parms && pip3 $pip_parms $whl)"
+  fi
 done

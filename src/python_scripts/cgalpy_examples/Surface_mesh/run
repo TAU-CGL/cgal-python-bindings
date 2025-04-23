@@ -1,6 +1,6 @@
-./check_orientation.py CGALPY_kerEpic_sm_pmpSm
-./draw_surface_mesh.py CGALPY_kerEpic_sm_pmpSm
-./sm_circualtors.py CGALPY_kerEpic_sm_pmpSm
-./sm_iterators.py CGALPY_kerEpic_sm_pmpSm
-./sm_memory.py CGALPY_kerEpic_sm_pmpSm
-./sm_properties.py CGALPY_kerEpic_sm_pmpSm
+./check_orientation.py CGALPY_kerEpic_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOri
+./draw_surface_mesh.py CGALPY_kerEpic_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOri
+./sm_circualtors.py CGALPY_kerEpic_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOri
+./sm_iterators.py CGALPY_kerEpic_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOri
+./sm_memory.py CGALPY_kerEpic_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOri
+./sm_properties.py CGALPY_kerEpic_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOri
