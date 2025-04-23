@@ -13,8 +13,7 @@
 #include <CGAL/Cartesian.h>
 #include <CGAL/function_objects.h>
 #include <CGAL/point_generators_2.h>
-// #include <CGAL/algorithm.h>
-// #include <CGAL/random_selection.h>
+#include <CGAL/point_generators_3.h>
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -22,32 +21,46 @@
 
 namespace gog {
 
-using Ak = CGAL::Cartesian<double>;
-using Approximate_point_2 = Ak::Point_2;
-using Approximate_ft = Ak::FT;
-using Creator = CGAL::Creator_uniform_2<Approximate_ft, Approximate_point_2>;
+//!
+using Creator_2 = CGAL::Creator_uniform_2<double, Point_2>;
 using Random_points_in_disc_2 =
-  CGAL::Random_points_in_disc_2<Approximate_point_2, Creator>;
+  CGAL::Random_points_in_disc_2<Point_2, Creator_2>;
 
-py::list generate(Random_points_in_disc_2& generator, std::size_t num) {
-  py::list res;
-  for (auto i = 0; i < num; ++i) res.append(*generator++);
-  return res;
-}
+//!
+using Creator_3 = CGAL::Creator_uniform_3<double, Point_3>;
+using Random_points_in_sphere_3 =
+  CGAL::Random_points_in_sphere_3<Point_3, Creator_3>;
+
+//!
+// py::list generate(Random_points_in_disc_2& generator, std::size_t num) {
+//   py::list res;
+//   for (auto i = 0; i < num; ++i) res.append(*generator++);
+//   return res;
+// }
 
 }
 
 namespace py = nanobind;
 
+//!
 void export_geometric_object_generators(py::module_& m) {
   using Rpid = gog::Random_points_in_disc_2;
-  using Pt = gog::Approximate_point_2;
   constexpr auto ri(py::rv_policy::reference_internal);
+
   if (! add_attr<Rpid>(m, "Random_points_in_disc_2")) {
     py::class_<Rpid>(m, "Random_points_in_disc_2")
       .def(py::init<double>())
       .def("__iter__", [](Rpid& g) -> Rpid& { return g; }, ri)
-      .def("__next__", [](Rpid& g) -> Pt { return *g++; })
+      .def("__next__", [](Rpid& g) -> Point_2 { return *g++; })
+      ;
+  }
+
+  using Rpis = gog::Random_points_in_sphere_3;
+  if (! add_attr<Rpis>(m, "Random_points_in_sphere_3")) {
+    py::class_<Rpis>(m, "Random_points_in_sphere_3")
+      .def(py::init<double>())
+      .def("__iter__", [](Rpis& g) -> Rpis& { return g; }, ri)
+      .def("__next__", [](Rpis& g) -> Point_3 { return *g++; })
       ;
   }
 }

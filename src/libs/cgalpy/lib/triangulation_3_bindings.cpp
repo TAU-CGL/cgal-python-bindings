@@ -6,7 +6,16 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#define CGAL_USE_BASIC_VIEWER
+
 #include <nanobind/nanobind.h>
+
+#ifdef CGALPY_HAS_VISUAL
+#include <CGAL/draw_triangulation_3.h>
+#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+#include "CGALPY/basic_viewer_types.hpp"
+#endif
+#endif
 
 #include "CGALPY/types.hpp"
 #include "CGALPY/add_attr.hpp"
@@ -34,6 +43,33 @@ std::ptrdiff_t insert_points(tri3::Triangulation_3& dt, py::list& lst) {
   auto begin = stl_input_iterator<tri3::Point>(lst);
   auto end = stl_input_iterator<tri3::Point>(lst, false);
   return dt.insert(begin, end);
+}
+
+//!
+tri3::Vertex& insert_point1(tri3::Triangulation_3& dt, const tri3::Point& p) {
+  auto vh = dt.insert(p);
+  return *vh;
+}
+
+//!
+tri3::Vertex& insert_point2(tri3::Triangulation_3& dt, const tri3::Point& p,
+                            tri3::Cell& start) {
+  auto vh = dt.insert(p, tri3::Cell_handle(&start));
+  return *vh;
+}
+
+//!
+tri3::Vertex& insert_point3(tri3::Triangulation_3& dt, const tri3::Point& p,
+                            tri3::Vertex& hint) {
+  auto vh = dt.insert(p, tri3::Vertex_handle(&hint));
+  return *vh;
+}
+
+//!
+tri3::Vertex& insert_point4(tri3::Triangulation_3& dt, const tri3::Point& p,
+                            tri3::Locate_type lt, tri3::Cell& c, int li, int lj) {
+  auto vh = dt.insert(p, lt, tri3::Cell_handle(&c), li, lj);
+  return *vh;
 }
 
 #if (CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT)
@@ -140,22 +176,6 @@ void export_triangulation_3(py::module_& m) {
   // bool(Tri::*is_valid2)(tri3::Cell_handle, bool, int) const =
   //   &Tri::is_valid;
 
-#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
-  tri3::Vertex_handle(Tri::*insert1)(const tri3::Point&, tri3::Cell_handle, bool*) =
-    &Tri::insert;
-  tri3::Vertex_handle(Tri::*insert2)(const tri3::Point&, tri3::Vertex_handle, bool*) =
-    &Tri::insert;
-  tri3::Vertex_handle(Tri::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int, bool*) =
-    &Tri::insert;
-#else
-  tri3::Vertex_handle(Tri::*insert1)(const tri3::Point&, tri3::Cell_handle) =
-    &Tri::insert;
-  tri3::Vertex_handle(Tri::*insert2)(const tri3::Point&, tri3::Vertex_handle) =
-    &Tri::insert;
-  tri3::Vertex_handle(Tri::*insert3)(const tri3::Point&, tri3::Locate_type, tri3::Cell_handle, int, int) =
-    &Tri::insert;
-#endif
-
   tri3::Vertex_handle(Tri::*nearest_vertex)(const tri3::Point&, tri3::Cell_handle) const =
     &Tri::nearest_vertex;
 
@@ -166,9 +186,10 @@ void export_triangulation_3(py::module_& m) {
     .def("__init__", &tri3::dt3_init)
 #endif
     // Insertion
-    .def("insert", insert1)
-    .def("insert", insert2)
-    .def("insert", insert3)
+    .def("insert", &tri3::insert_point1)
+    .def("insert", &tri3::insert_point2)
+    .def("insert", &tri3::insert_point3)
+    .def("insert", &tri3::insert_point4)
 #if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
     .def("insert", &tri3::insert4)
     .def("insert", &tri3::insert5)
@@ -338,6 +359,19 @@ void export_triangulation_3(py::module_& m) {
     .def("finite_facets", &tri3::finite_facets, py::keep_alive<0, 1>())
     .def("points", &tri3::points, py::keep_alive<0, 1>())
     ;
+
+#ifdef CGALPY_HAS_VISUAL
+  m.def("draw",
+        [](const Tri& tri, const char* title)
+        { CGAL::draw(tri, title); });
+
+#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+  m.def("draw",
+        [](const Tri& tri, const bvr::Graphics_scene_options& gso,
+           const char* title)
+        { CGAL::draw(tri, gso, title); });
+#endif
+#endif
 
   // Todo
   // Simplex;

@@ -1,1 +1,3 @@
 tri3_del.py CGALPY_kerEpic_tri3DelComSeq
+draw_triangulation_3.py CGALPY_kerEpic_tri3DelComSeq CGALPY_kerEpic_gog
+color.py CGALPY_kerEpic_tri3DelViComSeq

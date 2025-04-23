@@ -10,6 +10,7 @@
 #define CGAL_USE_BASIC_VIEWER
 
 #include <variant>
+
 #include <boost/variant/variant.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/iterator/function_output_iterator.hpp>
