@@ -417,6 +417,8 @@ endif ()
 # 3D triangulation
 if (CGALPY_TRIANGULATION_3_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_3_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_tri3_vertex.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_tri3_cell.cpp)
     list(APPEND CGALPY_MODULES Tri3)
     set(CGALPY_Tri3_FILTERS [=[{}]=])
 endif ()
