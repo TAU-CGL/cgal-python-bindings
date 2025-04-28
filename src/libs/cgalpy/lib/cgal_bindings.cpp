@@ -10,13 +10,14 @@
 #include <nanobind/stl/string.h>
 #include <nanobind/operators.h>
 #include <nanobind/stl/vector.h>
+#include <nanobind/operators.h>
 
-#include <CGAL/basic.h>
+#include <CGAL/aff_transformation_tags.h>
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Bbox_3.h>
 #include <CGAL/boost/graph/helpers.h>
-#include <CGAL/aff_transformation_tags.h>
 #include <CGAL/boost/graph/properties.h>
+#include <CGAL/Random.h>
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_extraction.hpp"
@@ -255,7 +256,7 @@ void export_cgal(py::module_& m) {
   m.def("yellow", &CGAL::IO::yellow, "Constructs Color(255,255,0).");
 
   // for Point_set_3
-  if (! add_attr<std::type_index>(m, "type_index"))
+  if (! add_attr<std::type_index>(m, "type_index")) {
     py::class_<std::type_index>(m, "type_index")
       .def(py::self == py::self,
            py::sig("def __eq__(self, arg: object, /) -> bool"))
@@ -271,4 +272,18 @@ void export_cgal(py::module_& m) {
       .def("__str__", [](const std::type_index& ti) { return ti.name(); })
       .def("__repr__", [](const std::type_index& ti) { return ti.name(); })
       ;
+  }
+
+  if (! add_attr<CGAL::Random>(m, "Random")) {
+    py::class_<CGAL::Random>(m, "Random")
+      .def(py::init<>())
+      .def(py::init<unsigned int>())
+      .def("get_seed", &CGAL::Random::get_seed)
+      .def("get_bool", &CGAL::Random::get_bool)
+      .def("get_int", &CGAL::Random::get_int)
+      .def("get_double", &CGAL::Random::get_double)
+      .def(py::self == py::self,
+           py::sig("def __eq__(self, arg: object, /) -> bool"))
+      ;
+  }
 }
