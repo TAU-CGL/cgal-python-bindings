@@ -8,6 +8,8 @@
 
 #define CGAL_USE_BASIC_VIEWER
 
+#include <boost/iterator/function_output_iterator.hpp>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/tuple.h>
 
@@ -18,11 +20,11 @@
 #endif
 #endif
 
-#include "CGALPY/types.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/triangulation_3_types.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/triangulation_3_types.hpp"
+#include "CGALPY/types.hpp"
 
 void export_tri3_vertex(py::class_<tri3::Triangulation_3>&);
 void export_tri3_cell(py::class_<tri3::Triangulation_3>&);
@@ -30,8 +32,6 @@ void export_tri3_cell(py::class_<tri3::Triangulation_3>&);
 namespace py = nanobind;
 
 namespace tri3 {
-
-#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 
 //!
 bool are_equal1(const Triangulation_3& tri, Cell& c, int i, Cell& n, int j)
@@ -162,26 +162,68 @@ Cell& locate2(const Triangulation_3& tri, const Point& query, Cell& start) {
 }
 
 //!
+Vertex& insert_in_facet(Triangulation_3& tri, const Point& p, const Facet& f) {
+  auto vh = tri.insert_in_facet(p, f);
+  return *vh;
+}
+
+//!
+Vertex& insert_in_hole(Triangulation_3& tri, const Point& p, py::list& cells,
+                       Cell& start, int i) {
+  // auto begin = stl_input_iterator<Cell_handle>(cells);
+  // auto end = stl_input_iterator<Cell_handle>(cells, false);
+  // auto vh = tri.insert_in_hole(p, begin, end, Cell_handle(&start), i);
+  std::vector<Cell_handle> chs(cells.size());
+  for (auto i = 0; i < cells.size(); ++i)
+    chs[i] = Cell_handle(py::cast<Cell*>(cells[i]));
+  auto vh = tri.insert_in_hole(p, chs.begin(), chs.end(), Cell_handle(&start), i);
+  return *vh;
+}
+
+//!
 Cell& locate3(const Triangulation_3& tri, const Point& query, Vertex& hint) {
   auto ch = tri.locate(query, Vertex_handle(&hint));
   return *ch;
 }
 
-py::object locate4(const Triangulation_3& tri, const Point& query) {
+/*! We want to return a Python tuple of variable length. One element of the
+ * returned py::tuple, namely a `tri3::Cell`, must have `reference_internal`
+ * policy attached.
+ *
+ * In nanobind, policies like `reference_internal` are normally attached at
+ * function return time via `py::return_value_policy`. However, when manually
+ * construct a `py::tuple` to return multiple values, the policies of the
+ * individual tuple elements are determined when each element is converted into
+ * a Python object (py::cast is internally involved). Thus, to apply
+ * `reference_internal` to a specific object inside a tuple, we need to manually
+ * py::cast it with the policy we want.
+ *
+ * When you specifying `py::rv_policy::reference_internal`, we must provide the
+ * "parent" Python object as an argument to `py::cast()`.  Otherwise, nanobind
+ * throws `std::bad_cast` at runtime, because it can't set up the ownership
+ * properly. Therefore, we bind the method with self, you pass self itself as
+ * the parent.
+ */
+py::object locate_face(py::handle self, const Point& query) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  auto& tri = py::cast<Triangulation_3&>(self);
   Locate_type lt;
-  int li;
-  int lj;
+  int li, lj;
   auto ch = tri.locate(query, lt, li, lj);
+  Cell& c = *ch;
   switch (lt) {
    case Triangulation_3::FACET:
    case Triangulation_3::VERTEX:
-     return py::make_tuple(py::cast(lt), py::int_(li));
+    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li));
 
    case Triangulation_3::EDGE:
-    return py::make_tuple(py::cast(lt), py::int_(li), py::int_(lj));
+    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li),
+                          py::int_(lj));
 
    case Triangulation_3::CELL:
-   case Triangulation_3::OUTSIDE_CONVEX_HULL: return py::cast(*ch);
+   case Triangulation_3::OUTSIDE_CONVEX_HULL:
+    return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
   }
 
   throw std::runtime_error("Invalid location type");
@@ -250,9 +292,50 @@ CGAL::Bounded_side side_of_sphere(const Triangulation_3& tri, Cell& c,
                                   const Point& p)
 { return tri.side_of_sphere(Cell_handle(&c), p); }
 
-} // End of namespace tri3
+#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
+
+//! See manual of locate_face()
+py::tuple find_conflicts(py::handle self, const Point& p, Cell& start) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  auto& tri = py::cast<Triangulation_3&>(self);
+  py::list bfs;
+  auto op1 = [&] (const Facet& f) mutable { bfs.append(f); };
+  auto it1 = boost::make_function_output_iterator(std::ref(op1));
+  py::list cells;
+  auto op2 = [&] (const Cell_handle& ch) mutable {
+    Cell& c = *ch;
+    cells.append(py::cast(c, ri, self));
+  };
+  auto it2 = boost::make_function_output_iterator(std::ref(op2));
+  tri.find_conflicts(p, Cell_handle(&start), it1, it2);
+  return py::make_tuple(bfs, cells);
+}
+
+//!
+py::tuple find_conflicts_ifs(py::handle self, const Point& p, Cell& start) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  auto& tri = py::cast<Triangulation_3&>(self);
+  py::list bfs;
+  auto op1 = [&] (const Facet& f) mutable { bfs.append(f); };
+  auto it1 = boost::make_function_output_iterator(std::ref(op1));
+  py::list cells;
+  auto op2 = [&] (const Cell_handle& ch) mutable {
+    Cell& c = *ch;
+    cells.append(py::cast(c, ri, self));
+  };
+  auto it2 = boost::make_function_output_iterator(std::ref(op2));
+  py::list ifs;
+  auto op3 = [&] (const Facet& f) mutable { ifs.append(f); };
+  auto it3 = boost::make_function_output_iterator(std::ref(op3));
+  tri.find_conflicts(p, Cell_handle(&start), it1, it2, it3);
+  return py::make_tuple(bfs, cells, ifs);
+}
 
 #endif
+
+} // End of namespace tri3
 
 //
 void export_triangulation_3(py::module_& m) {
@@ -275,10 +358,7 @@ void export_triangulation_3(py::module_& m) {
   py::class_<Tri> tri_c(m, "Triangulation_3");
   tri_c.def(py::init<>())
     .def(py::init<const tri3::Traits&>())
-#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
     .def("__init__", &tri3::dt3_init)
-#endif
-
     .def("are_equal",
          py::overload_cast<const Facet&, const Facet&>(&Tri::are_equal, py::const_))
     .def("are_equal", tri3::are_equal1)
@@ -319,12 +399,14 @@ void export_triangulation_3(py::module_& m) {
     .def("insert", &tri3::insert6)
 #endif
 
+    .def("insert_in_facet", &tri3::insert_in_facet, ri)
+    .def("insert_in_hole", &tri3::insert_in_hole, ri)
     .def("insert_points", &tri3::insert_points)
 
     .def("locate", &tri3::locate1, ri)
     .def("locate", &tri3::locate2, ri)
     .def("locate", &tri3::locate3, ri)
-    .def("locate_face", &tri3::locate4, ri)
+    .def("locate_face", &tri3::locate_face, ri)
 
     // template<class PointWithInfoInputIterator >
     // std::ptrdiff_t insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
@@ -353,10 +435,13 @@ void export_triangulation_3(py::module_& m) {
     .def("side_of_sphere", &tri3::side_of_sphere)
     .def("nearest_vertex", &tri3::nearest_vertex1)
     .def("nearest_vertex", &tri3::nearest_vertex2)
+
+    .def("find_conflicts", &tri3::find_conflicts, ri)
+    .def("find_conflicts_if", &tri3::find_conflicts_ifs, ri)
 #endif
 
     .def("nearest_vertex_in_cell", &Tri::nearest_vertex_in_cell)
-    .def("is_valid", is_valid1)
+    .def("is_valid", is_valid1, py::arg("verbose") = false, py::arg("level") = 0)
     // .def("is_valid", is_valid2)
     ;
 
@@ -391,14 +476,14 @@ void export_triangulation_3(py::module_& m) {
   export_tri3_cell(tri_c);
 
   py::class_<tri3::Facet>(tri_c, "Facet")
-    .def_rw("first", &tri3::Facet::first)
-    .def_rw("second", &tri3::Facet::second)
+    .def("cell", [](tri3::Facet& f)->tri3::Cell& { return *(f.first); } , ri)
+    .def_rw("index", &tri3::Facet::second)
     ;
 
   py::class_<tri3::Edge>(tri_c, "Edge")
-    .def_rw("first", &tri3::Edge::first)
-    .def_rw("second", &tri3::Edge::second)
-    .def_rw("third", &tri3::Edge::third)
+    .def("cell", [](tri3::Edge& e)->tri3::Cell& { return *(e.first); } , ri)
+    .def_rw("start_index", &tri3::Edge::second)
+    .def_rw("end_index", &tri3::Edge::third)
     ;
 
   py::class_<Vh>(tri_c, "Vertex_handle")
