@@ -1,4 +1,5 @@
-tri3_del.py CGALPY_kerEpic_tri3DelComSeq
-draw_triangulation_3.py CGALPY_kerEpic_tri3DelComSeq CGALPY_kerEpic_gog
+./tri3_del.py CGALPY_kerEpic_tri3DelComSeq
+./draw_triangulation_3.py CGALPY_kerEpic_tri3DelComSeq CGALPY_kerEpic_gog
 color.py CGALPY_kerEpic_tri3DelViComSeq
-fast_location.py CGALPY_kerEpic_tri3DelFasSeq
+././fast_location.py CGALPY_kerEpic_tri3DelFasSeq
+./find_conflicts_3.py CGALPY_kerEpic_tri3DelComSeq CGALPY_kerEpic_gog
