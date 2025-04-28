@@ -9,6 +9,7 @@
 #define CGAL_USE_BASIC_VIEWER
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/tuple.h>
 
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_triangulation_3.h>
@@ -132,21 +133,60 @@ auto insert_del_point4(Triangulation_3& dt, const Point& p, Locate_type lt,
 #if (CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT)
 
 //
-tri3::Vertex_handle insert4(Triangulation_3& dt,
-                            const Point& p, Cell_handle start)
+Vertex_handle insert4(Triangulation_3& dt, const Point& p, Cell_handle start)
 { return dt.insert(p, start); }
 
 //
-tri3::Vertex_handle insert5(tri3::Triangulation_3& dt,
-                            const tri3::Point& p, Vertex_handle hint)
+Vertex_handle insert5(tri3::Triangulation_3& dt, const Point& p,
+                      Vertex_handle hint)
 { return dt.insert(p, hint); }
 
 //
-tri3::Vertex_handle insert6(tri3::Triangulation_3& dt, const Point& p,
-                            Locate_type lt, Cell_handle c, int li, int lj)
+Vertex_handle insert6(tri3::Triangulation_3& dt, const Point& p,
+                      Locate_type lt, Cell_handle c, int li, int lj)
 { return dt.insert(p, lt, c, li, lj); }
 
 #endif
+
+//!
+Cell& locate1(const Triangulation_3& tri, const Point& query) {
+  auto ch = tri.locate(query);
+  return *ch;
+}
+
+//!
+Cell& locate2(const Triangulation_3& tri, const Point& query, Cell& start) {
+
+  auto ch = tri.locate(query, Cell_handle(&start));
+  return *ch;
+}
+
+//!
+Cell& locate3(const Triangulation_3& tri, const Point& query, Vertex& hint) {
+  auto ch = tri.locate(query, Vertex_handle(&hint));
+  return *ch;
+}
+
+py::object locate4(const Triangulation_3& tri, const Point& query) {
+  Locate_type lt;
+  int li;
+  int lj;
+  auto ch = tri.locate(query, lt, li, lj);
+  switch (lt) {
+   case Triangulation_3::FACET:
+   case Triangulation_3::VERTEX:
+     return py::make_tuple(py::cast(lt), py::int_(li));
+
+   case Triangulation_3::EDGE:
+    return py::make_tuple(py::cast(lt), py::int_(li), py::int_(lj));
+
+   case Triangulation_3::CELL:
+   case Triangulation_3::OUTSIDE_CONVEX_HULL: return py::cast(*ch);
+  }
+
+  throw std::runtime_error("Invalid location type");
+  return py::none();
+}
 
 //
 template <typename Handle_>
@@ -281,6 +321,11 @@ void export_triangulation_3(py::module_& m) {
 
     .def("insert_points", &tri3::insert_points)
 
+    .def("locate", &tri3::locate1, ri)
+    .def("locate", &tri3::locate2, ri)
+    .def("locate", &tri3::locate3, ri)
+    .def("locate_face", &tri3::locate4, ri)
+
     // template<class PointWithInfoInputIterator >
     // std::ptrdiff_t insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
 
@@ -316,7 +361,6 @@ void export_triangulation_3(py::module_& m) {
     ;
 
   // Triangulation_data_structure
-  // Lock_data_structure
   py::enum_<tri3::Locate_type>(tri_c, "Locate_type")
     .value("VERTEX", Tri::VERTEX)
     .value("EDGE", Tri::EDGE)
