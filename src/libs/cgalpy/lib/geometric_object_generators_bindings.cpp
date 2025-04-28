@@ -11,6 +11,7 @@
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Cartesian.h>
+#include <CGAL/Random.h>
 #include <CGAL/function_objects.h>
 #include <CGAL/point_generators_2.h>
 #include <CGAL/point_generators_3.h>
@@ -58,7 +59,8 @@ void export_geometric_object_generators(py::module_& m) {
   using Rpis = gog::Random_points_in_sphere_3;
   if (! add_attr<Rpis>(m, "Random_points_in_sphere_3")) {
     py::class_<Rpis>(m, "Random_points_in_sphere_3")
-      .def(py::init<double>())
+      .def(py::init<double, CGAL::Random&>(),
+           py::arg("radius") = 1.0, py::arg("rnd") = CGAL::get_default_random())
       .def("__iter__", [](Rpis& g) -> Rpis& { return g; }, ri)
       .def("__next__", [](Rpis& g) -> Point_3 { return *g++; })
       ;
