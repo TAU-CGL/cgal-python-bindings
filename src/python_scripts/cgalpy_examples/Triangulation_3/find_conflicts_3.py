@@ -28,15 +28,18 @@ dt.insert(Point(1,0,0))
 dt.insert(Point(0,1,0))
 dt.insert(Point(0,0,1))
 Tri3.draw(dt, "3D Triangulation")
+assert(dt.dimension() == 3)
 
 generator = Gog.Random_points_in_sphere_3()
 for i in range(100):
   p = next(generator)
-  res = dt.locate_face(p)
-  if isinstance(res, tuple):
-    if res[0] == Tri3.Locate_type.VERTEX: continue # Point already exists
-#   vec = find_conflicts(p, c, CGAL::Oneset_iterator<Facet>(f))
-#   if (len(vec) & 1) == 0:  #  Even number of conflict cells ?
-#     dt.insert_in_hole(p, vec, f.first, f.second)
+  lt, c = dt.locate_face(p)
+  if lt == dt.Locate_type.VERTEX: continue # Point already exists
+  bfs, cells = dt.find_conflicts(p, c)
+  f = bfs[-1]
+  if (len(cells) % 2) == 0:  #  Even number of conflict cells ?
+    dt.insert_in_hole(p, cells, f.cell(), f.index)
 
+print("Valid:", dt.is_valid())
 print(f"Final triangulation has {dt.number_of_vertices()} vertices.")
+Tri3.draw(dt, "3D Triangulation")
