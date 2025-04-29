@@ -12,11 +12,11 @@
 ./zone.py                   CGALPY_kerEpec_aos2SegPl
 ./aos2.py                   CGALPY_kerEpec_aos2SegPl
 
-# ./kerd_do_intersect.py CGALPY_kerdEpicdDynamic
+# ./kerd_do_intersect.py CGALPY_kerdEpicdDyn
 
-./kerd_do_intersect.py CGALPY_kerdCdlgDynamic
+./kerd_do_intersect.py CGALPY_kerdCdlgDyn
 
-./kd_tree.py CGALPY_kerdCdlgDynamic_ss2
+./kd_tree.py CGALPY_kerdCdlgDyn_ss2
 
 ./ker_intersection.py CGALPY_kerEpecInt
 ./epic.py            CGALPY_kerEpic
