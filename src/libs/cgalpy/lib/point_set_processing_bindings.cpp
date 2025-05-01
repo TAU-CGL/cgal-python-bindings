@@ -5,6 +5,9 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+//            Efi Fogel          <efifogel@gmail.com>
+
+#include <boost/iterator/function_output_iterator.hpp>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
@@ -12,35 +15,85 @@
 #include <nanobind/stl/tuple.h>
 #include <nanobind/stl/function.h>
 #include <nanobind/stl/array.h>
+#include <nanobind/stl/string.h>
 
-#include <CGAL/bilateral_smooth_point_set.h>
-#include <CGAL/cluster_point_set.h>
-#include <CGAL/compute_average_spacing.h>
-#include <CGAL/edge_aware_upsample_point_set.h>
-#include <CGAL/estimate_scale.h>
-#include <CGAL/vcm_estimate_normals.h>
 #include <CGAL/Point_set_3.h>
-#include <CGAL/Named_function_parameters.h>
-#include <CGAL/grid_simplify_point_set.h>
-#include <CGAL/hierarchy_simplify_point_set.h>
-#include <CGAL/jet_estimate_normals.h>
-#include <CGAL/jet_smooth_point_set.h>
-#include <CGAL/mst_orient_normals.h>
-#include <CGAL/pca_estimate_normals.h>
-#include <CGAL/random_simplify_point_set.h>
-#include <CGAL/remove_outliers.h>
-#include <CGAL/scanline_orient_normals.h>
-#include <CGAL/vcm_estimate_normals.h>
-#include <CGAL/vcm_estimate_edges.h>
-#include <CGAL/wlop_simplify_and_regularize_point_set.h>
 #include <CGAL/IO/read_points.h>
-#include <CGAL/IO/write_points.h>
+// #include <CGAL/bilateral_smooth_point_set.h>
+// #include <CGAL/cluster_point_set.h>
+// #include <CGAL/compute_average_spacing.h>
+// #include <CGAL/edge_aware_upsample_point_set.h>
+// #include <CGAL/estimate_scale.h>
+// #include <CGAL/vcm_estimate_normals.h>
+// #include <CGAL/Named_function_parameters.h>
+// #include <CGAL/grid_simplify_point_set.h>
+// #include <CGAL/hierarchy_simplify_point_set.h>
+// #include <CGAL/jet_estimate_normals.h>
+// #include <CGAL/jet_smooth_point_set.h>
+// #include <CGAL/mst_orient_normals.h>
+// #include <CGAL/pca_estimate_normals.h>
+// #include <CGAL/random_simplify_point_set.h>
+// #include <CGAL/remove_outliers.h>
+// #include <CGAL/scanline_orient_normals.h>
+// #include <CGAL/vcm_estimate_normals.h>
+// #include <CGAL/vcm_estimate_edges.h>
+// #include <CGAL/wlop_simplify_and_regularize_point_set.h>
+// #include <CGAL/IO/write_points.h>
 
-#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/kernel_type.hpp"
+#include "CGALPY/named_parameter_applicator.hpp"
+#include "CGALPY/Named_parameter_geom_traits.hpp"
+#include "CGALPY/Named_parameter_wrapper.hpp"
+#include "CGALPY/point_set_processing_type.hpp"
+// #include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
+namespace psp {
+
+/*! A class template that wraps the function template
+ * PMP::read_points()
+ */
+template <typename T, typename... Args>
+struct Read_points_wrapper {
+  static auto call(T np, Args&&... args) {
+    return CGAL::IO::read_points(std::forward<Args>(args)..., std::forward<T>(np));
+  }
+};
+
+//!
+template <typename OutputIterator>
+bool read_points_impl(const std::string& fname, OutputIterator oi,
+                      const py::dict& params) {
+  auto np = CGAL::parameters::default_values();
+  CGALPY::Named_parameter_geom_traits op;
+  CGALPY::Named_parameter_wrapper<Read_points_wrapper,
+                                  const std::string&, OutputIterator>
+    wrapper(fname, std::move(oi));
+  return CGALPY::named_parameter_applicator(wrapper, np, params, op);
+}
+
+//! \todo replace return value with numpy array
+auto read_points(const std::string& fname,
+                 const py::dict& params = py::dict()) {
+  py::list points;
+#if 1
+  std::vector<Point_3> tmp;
+  bool res = read_points_impl(fname, std::back_inserter(tmp), params);
+  for (const auto& p : tmp) points.append(p);
+#else
+  auto op = [&] (const Point_3& p) mutable { points.append(p); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  bool res = read_points_impl(fname, it, params);
+#endif
+  if (! res) throw std::runtime_error("Cannot read points!");
+  return points;
+}
+
+}
+
+#if 0
+//!
 struct dummy_callback {
   dummy_callback(const std::function<bool(double)>& callback) : callback(callback) {}
   bool operator()(double d) const { return callback(d); }
@@ -48,6 +101,7 @@ private:
   std::function<bool(double)> callback;
 };
 
+//!
 template <typename PointRange, typename Point, typename Vector, typename C>
 void export_functions_without_normals(C& c) {
   using K = Kernel;
@@ -1043,6 +1097,8 @@ void export_functions_with_point_vec(C& c) {
 #endif
 }
 
+#endif
+
 //
 void export_point_set_processing(py::module_& m) {
   using Tag = CGAL::Sequential_tag;
@@ -1065,6 +1121,7 @@ void export_point_set_processing(py::module_& m) {
   using Fopopm = CGAL::First_of_pair_property_map<PointVectorPair_3>;
   using Sopopm = CGAL::Second_of_pair_property_map<PointVectorPair_3>;
 
+#if 0
   export_functions_with_point_range<PointVector_3, Point_3, Vector_3>(m);
   export_functions_with_point_range<PointSet_3, Point_3, Vector_3>(m);
   export_functions_with_point_range_normals<PointRange_3, Point_3, Vector_3, Fopopm>(m);
@@ -1169,31 +1226,19 @@ void export_point_set_processing(py::module_& m) {
   // TODO: compute_registration_transformation() needs PointMatcher
   // TODO: register_point_sets() needs OpenGR
   // TODO: register_point_sets() needs PointMatcher
+#endif
 
-  m.def("read_points", [](const std::string& fname, const py::kwargs& np = py::kwargs()) {
-        std::vector<Kernel::Point_3> output;
-        bool success = CGAL::IO::read_points(fname, std::back_inserter(output), internal::parse_named_parameters(np));
-        return std::make_pair(success, output);
-        },
-        py::arg("fname"), py::arg("np"),
-        "reads the point set from an input file.\n"
+  m.def("read_points", &psp::read_points,
+        py::arg("fname"), py::arg("params") = py::dict(),
+        "reads a point set from an input file.\n"
         "Supported file formats are the following:\n"
         "• Object File Format (OFF) (.off)\n"
         "• Polygon File Format (PLY) (.ply)\n"
         "• LAS (Lidar) File Format (.las)\n"
         "• XYZ File Format (.xyz)\n"
-        "The format is detected from the filename extension (letter case is not important).\n\n"
-        "Parameters\n"
-        "• fname: the name of the input file.\n"
-        "• np: optional sequence of Named Parameters among the ones listed below.\n\n"
-        "Optional Named Parameters\n"
-        "• use_binary_mode: indicates whether data should be read in binary (true) or in ASCII (false) Default: true\n\n"
-        "Returns\n"
-        "a tuple of a boolean indicating if reading was successful and the output points.\n\n"
-        "Examples\n"
-        "Point_set_processing_3/average_spacing_example.py, Point_set_processing_3/bilateral_smooth_point_set_example.py, Point_set_processing_3/edge_aware_upsample_point_set_example.py, Point_set_processing_3/edges_example.py, Point_set_processing_3/grid_simplification_example.py, Point_set_processing_3/hierarchy_simplification_example.py, Point_set_processing_3/normals_example.py, Point_set_processing_3/registration_with_OpenGR.py, Point_set_processing_3/registration_with_opengr_pointmatcher_pipeline.py, Point_set_processing_3/registration_with_pointmatcher.py, Point_set_processing_3/remove_outliers_example.py, Point_set_processing_3/scale_estimation_example.py, Point_set_processing_3/structuring_example.py, and Point_set_processing_3/wlop_simplify_and_regularize_point_set_example.py."
     );
 
+#if 0
   m.def("read_points_with_normals",
         [](const std::string& fname, const py::kwargs& np = py::kwargs()) {
           using PointVectorPair = std::pair<Kernel::Point_3, Kernel::Vector_3>;
@@ -1296,5 +1341,6 @@ void export_point_set_processing(py::module_& m) {
         "Examples\n"
         "Point_set_processing_3/edges_example.py."
         );
+#endif
 #endif
 }

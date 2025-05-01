@@ -523,6 +523,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
         get_nef_3_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
+    # Point Set Processing
+    if (CGALPY_POINT_SET_PROCESSING_BINDINGS)
+      get_point_set_processing_lib_name(ret)
+      set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
     # 3D Polyhedron
     if (CGALPY_POLYHEDRON_3_BINDINGS)
         get_polyhedron_3_lib_name(ret)

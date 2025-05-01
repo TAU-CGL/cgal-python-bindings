@@ -524,7 +524,8 @@ void export_polygon_mesh_processing(py::module_& m) {
         py::arg("np") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  m.def("refine_mesh_at_isolevel", &pmp::refine_mesh_at_isolevel<Pm, Vertex_double_map>,
+  m.def("refine_mesh_at_isolevel",
+        &pmp::refine_mesh_at_isolevel<Pm, Vertex_double_map>,
         py::arg("pm"), py::arg("value_map"), py::arg("isovalue"),
         py::arg("np") = py::dict());
   m.def("region_growing_of_planes_on_faces",

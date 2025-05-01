@@ -96,10 +96,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 
 #if defined(CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS)
-    export_2d_range_and_neighbor_search(m); // currently under CGALPY
+  export_2d_range_and_neighbor_search(m); // currently under CGALPY
 #endif
+
 #ifdef CGALPY_3D_POINT_SET_BINDINGS
-    export_3d_point_set(m); // currently under CGALPY
+  export_3d_point_set(m); // currently under CGALPY
 #endif
 
 #if defined(CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS)
@@ -164,7 +165,8 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 
 #ifdef CGALPY_POINT_SET_PROCESSING_BINDINGS
-  export_point_set_processing(m);
+  auto psp_m = m.def_submodule("Psp");
+  export_point_set_processing(psp_m);
 #endif
 
 #if defined(CGALPY_POLYGON_PARTITIONING_BINDINGS)

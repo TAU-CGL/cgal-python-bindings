@@ -9,6 +9,10 @@
 #ifndef CGALPY_NAMED_PARAMETER_APPLICATOR_HPP
 #define CGALPY_NAMED_PARAMETER_APPLICATOR_HPP
 
+#include <nanobind/nanobind.h>
+
+namespace py = nanobind;
+
 namespace CGALPY {
 
 //!
