@@ -271,6 +271,22 @@ py::object points(const Triangulation_3& tri)
 { return make_iterator(tri.points_begin(), tri.points_end()); }
 
 //!
+py::object segment_traverser_cells1(const Triangulation_3& tri,
+                                   const Point_3& ps, const Point& pt) {
+  return make_iterator(tri.segment_traverser_cells_begin(ps, pt),
+                       tri.segment_traverser_cells_end());
+}
+
+//!
+py::object segment_traverser_cells2(const Triangulation_3& tri,
+                                   const Point_3& ps, const Point& pt,
+                                   Cell& hint) {
+  return make_iterator(tri.segment_traverser_cells_begin(ps, pt,
+                                                         Cell_handle(&hint)),
+                       tri.segment_traverser_cells_end());
+}
+
+//!
 Vertex& nearest_vertex1(const Triangulation_3& tri, const Point& p) {
   auto vh = tri.nearest_vertex(p);
   return *vh;
@@ -291,6 +307,84 @@ CGAL::Bounded_side side_of_circle2(const Triangulation_3& tri, Cell& c, int i,
 CGAL::Bounded_side side_of_sphere(const Triangulation_3& tri, Cell& c,
                                   const Point& p)
 { return tri.side_of_sphere(Cell_handle(&c), p); }
+
+//!
+bool is_cell1(const Triangulation_3& tri, Cell& c)
+{ return tri.is_cell(Cell_handle(&c)); }
+
+//!
+py::tuple is_cell2(const Triangulation_3& tri, Vertex& u, Vertex& v,
+                   Vertex& w, Vertex& x) {
+  Cell_handle ch;
+  auto res = tri.is_cell(Vertex_handle(&u), Vertex_handle(&v),
+                         Vertex_handle(&w), Vertex_handle(&x), ch);
+  if (res) return py::make_tuple(res, *ch);
+  return py::make_tuple(false);
+}
+
+//!
+py::tuple is_cell3(const Triangulation_3& tri, Vertex& u, Vertex& v, Vertex& w,
+                   Vertex& x) {
+  Cell_handle ch;
+  int i, j, k, l;
+  auto res = tri.is_cell(Vertex_handle(&u), Vertex_handle(&v),
+                         Vertex_handle(&w), Vertex_handle(&x), ch, i, j, k, l);
+  if (res) return py::make_tuple(res, *ch, i, j, k, l);
+  return py::make_tuple(false);
+}
+
+//!
+py::tuple is_edge(const Triangulation_3& tri, Vertex& u, Vertex& v) {
+  Cell_handle ch;
+  int i, j;
+  auto res = tri.is_edge(Vertex_handle(&u), Vertex_handle(&v), ch, i, j);
+  if (res) return py::make_tuple(res, *ch, i, j);
+  return py::make_tuple(false);
+}
+
+//!
+py::tuple is_facet(const Triangulation_3& tri, Vertex& u, Vertex& v, Vertex& w) {
+  Cell_handle ch;
+  int i, j, k;
+  auto res = tri.is_facet(Vertex_handle(&u), Vertex_handle(&v),
+                          Vertex_handle(&w), ch, i, j, k);
+  if (res) return py::make_tuple(res, *ch, i, j, k);
+  return py::make_tuple(false);
+}
+
+//!
+bool is_infinite1(const Triangulation_3& tri, Cell& c)
+{ return tri.is_infinite(Cell_handle(&c)); }
+
+//!
+bool is_infinite2(const Triangulation_3& tri, Cell& c, int i)
+{ return tri.is_infinite(Cell_handle(&c), i); }
+
+//!
+  bool is_infinite3(const Triangulation_3& tri, Cell& c, int i, int j) {
+    return tri.is_infinite(Cell_handle(&c), i, j);
+}
+
+//!
+bool is_infinite6(const Triangulation_3& tri, Vertex& v)
+{ return tri.is_infinite(Vertex_handle(&v)); }
+
+//!
+bool is_valid2(const Triangulation_3& tri, Cell& c, bool verbose = false) {
+  return tri.is_infinite(Cell_handle(&c), verbose);
+}
+
+//!
+py::tuple is_vertex1(const Triangulation_3& tri, const Point& p) {
+  Vertex_handle vh;
+  auto res = tri.is_vertex(p, vh);
+  if (res) return py::make_tuple(res, *vh);
+  return py::make_tuple(false);
+}
+
+//!
+bool is_vertex2(const Triangulation_3& tri, Vertex& v)
+{ return tri.is_vertex(Vertex_handle(&v)); }
 
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
 
@@ -350,10 +444,6 @@ void export_triangulation_3(py::module_& m) {
 
   CGAL::Bounded_side(Tri::*side_of_circle1)(const Facet&, const Pnt&, bool) const =
     &Tri::side_of_circle;
-
-  bool(Tri::*is_valid1)(bool, int) const = &Tri::is_valid;
-  // bool(Tri::*is_valid2)(Ch, bool, int) const =
-  //   &Tri::is_valid;
 
   py::class_<Tri> tri_c(m, "Triangulation_3");
   tri_c.def(py::init<>())
@@ -427,7 +517,6 @@ void export_triangulation_3(py::module_& m) {
 
     // Queries
 
-
 #if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
     .def("side_of_circle", side_of_circle1)
     .def("side_of_circle", tri3::side_of_circle2,
@@ -441,8 +530,26 @@ void export_triangulation_3(py::module_& m) {
 #endif
 
     .def("nearest_vertex_in_cell", &Tri::nearest_vertex_in_cell)
-    .def("is_valid", is_valid1, py::arg("verbose") = false, py::arg("level") = 0)
-    // .def("is_valid", is_valid2)
+
+    .def("is_cell", &tri3::is_cell1)
+    .def("is_cell", &tri3::is_cell2)
+    .def("is_cell", &tri3::is_cell3)
+    .def("is_edge", &tri3::is_edge)
+    .def("is_facet", &tri3::is_facet)
+    .def("is_infinite", &tri3::is_infinite1)
+    .def("is_infinite", &tri3::is_infinite2)
+    .def("is_infinite", &tri3::is_infinite3)
+    .def("is_infinite",
+         py::overload_cast<const tri3::Edge&>(&Tri::is_infinite, py::const_))
+    .def("is_infinite",
+         py::overload_cast<const tri3::Facet&>(&Tri::is_infinite, py::const_))
+    .def("is_infinite", &tri3::is_infinite6)
+    .def("is_valid",
+         py::overload_cast<bool, int>(&Tri::is_valid, py::const_),
+         py::arg("verbose") = false, py::arg("level") = 0)
+    .def("is_valid", &tri3::is_valid2, py::arg("c"), py::arg("verbose") = false)
+    .def("is_vertex", &tri3::is_vertex1)
+    .def("is_vertex", &tri3::is_vertex2)
     ;
 
   // Triangulation_data_structure
@@ -508,6 +615,8 @@ void export_triangulation_3(py::module_& m) {
 
   using Pi = Tri::Point_iterator;
 
+  using Sci = Tri::Segment_cell_iterator;
+
   using Vertex = Tri::Vertex;
   using Edge = Tri::Vertex;
   using Cell = Tri::Cell;
@@ -528,6 +637,8 @@ void export_triangulation_3(py::module_& m) {
 
   add_iterator<Pi, Pi, const Point&>("Point_iterator", tri_c);
 
+  add_iterator<Sci, Sci, const Cell&>("Segment_cell_iterator", tri_c);
+
   tri_c.def("all_vertices", &tri3::all_vertices, py::keep_alive<0, 1>())
     .def("all_edges", &tri3::all_edges, py::keep_alive<0, 1>())
     .def("all_cells", &tri3::all_cells, py::keep_alive<0, 1>())
@@ -537,6 +648,10 @@ void export_triangulation_3(py::module_& m) {
     .def("finite_cells", &tri3::finite_cells, py::keep_alive<0, 1>())
     .def("finite_facets", &tri3::finite_facets, py::keep_alive<0, 1>())
     .def("points", &tri3::points, py::keep_alive<0, 1>())
+    .def("segment_traverser_cells", &tri3::segment_traverser_cells1,
+         py::keep_alive<0, 1>())
+    .def("segment_traverser_cells", &tri3::segment_traverser_cells2,
+         py::keep_alive<0, 1>())
     ;
 
 #ifdef CGALPY_HAS_VISUAL
