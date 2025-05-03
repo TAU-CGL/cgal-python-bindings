@@ -12,16 +12,15 @@ CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Point = Ker.Point_3
 Tri3 = CGALPY.Tri3
-dt = Tri3.Triangulation_3()
-P = []
 
+P = []
 for z in range(20):
   for y in range(20):
     for x in range(20):
       P.append(Point(x,y,z));
 
 # building their Delaunay triangulation.
-T = Tri3.Triangulation_3(P)
+T = Tri3.Delaunay_triangulation_3(P)
 assert(T.number_of_vertices() == 8000)
 
 # performing nearest vertex queries to a series of random points,

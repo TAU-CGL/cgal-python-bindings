@@ -22,12 +22,12 @@ Tri3 = CGALPY_TRI.Tri3
 Point = Ker.Point_3
 Gog = CGALPY_GOG.Gog
 
-dt = Tri3.Triangulation_3()
+dt = Tri3.Delaunay_triangulation_3()
 dt.insert(Point(0,0,0))
 dt.insert(Point(1,0,0))
 dt.insert(Point(0,1,0))
 dt.insert(Point(0,0,1))
-Tri3.draw(dt, "3D Triangulation")
+Tri3.draw(dt, "3D Delaunay Triangulation")
 assert(dt.dimension() == 3)
 
 generator = Gog.Random_points_in_sphere_3()
@@ -42,4 +42,4 @@ for i in range(100):
 
 print("Valid:", dt.is_valid())
 print(f"Final triangulation has {dt.number_of_vertices()} vertices.")
-Tri3.draw(dt, "3D Triangulation")
+Tri3.draw(dt, "3D Delaunay Triangulation")

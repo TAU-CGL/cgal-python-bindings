@@ -48,59 +48,78 @@ using C = Cbi;
 using Con = Concurrency<CGALPY_TRI3_CONCURRENCY>::type;
 using Tds = CGAL::Triangulation_data_structure_3<V, C, Con>;
 using Lp = Location_policy<CGALPY_TRI3_LOCATION_POLICY>::type;
-using Btr = Base_tri<CGALPY_TRI3, Traits, Tds, Lp>::type;
-using Triangulation_3 = Tri<hierarchy(), Btr>::type;
 
-using Geom_traits = Triangulation_3::Geom_traits;
-using Triangulation_data_structure =
-  Triangulation_3::Triangulation_data_structure;
+using Btri = Tri3<CGALPY_TRI3, Traits, Tds, Lp>::base_type;
+using Tri = Tri3<CGALPY_TRI3, Traits, Tds, Lp>::type;
+using Triangulation_hierarchy_3 = Th<hierarchy(), Tri>::type;
 
-using Lock_data_structure = Triangulation_3::Lock_data_structure;
-using Locate_type = Triangulation_3::Locate_type;
+#if ((CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_PLAIN) ||   \
+     (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_REGULAR) || \
+     (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_DELAUNAY))
+using Periodic_triangulation_3 = Btri;
+#if (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_REGULAR)
+using Periodic_regular_triangulation_3 = Tri;
+#elif (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_DELAUNAY)
+using Periodic_delaunay_triangulation_3 = Tri;
+#endif
+#else
+using Triangulation_3 = Btri;
+#if (CGALPY_TRI3 == CGALPY_TRI3_REGULAR)
+using Regular_triangulation_3 = Tri;
+#elif (CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY)
+using Delaunay_triangulation_3 = Tri;
+#endif
+#endif
 
-using Point = Triangulation_3::Point;
-using Segment = Triangulation_3::Segment;
-using Triangle = Triangulation_3::Triangle;
-using Tetrahedron = Triangulation_3::Tetrahedron;
-using Vertex = Triangulation_3::Vertex;
-using Edge = Triangulation_3::Edge;
-using Facet = Triangulation_3::Facet;
-using Cell = Triangulation_3::Cell;
-using size_type = Triangulation_3::size_type;
-using difference_type = Triangulation_3::difference_type;
-using Concurrency_tag = Triangulation_3::Concurrency_tag;
+using Geom_traits = Tri::Geom_traits;
+using Triangulation_data_structure = Tri::Triangulation_data_structure;
 
-using Vertex_handle = Triangulation_3::Vertex_handle;
-using Cell_handle = Triangulation_3::Cell_handle;
-using Simplex = Triangulation_3::Simplex;
+using Lock_data_structure = Tri::Lock_data_structure;
+using Locate_type = Tri::Locate_type;
 
-using All_vertices_iterator = Triangulation_3::All_vertices_iterator;
-using All_edges_iterator = Triangulation_3::All_edges_iterator;
-using All_facets_iterator = Triangulation_3::All_facets_iterator;
-using All_cells_iterator = Triangulation_3::All_cells_iterator;
+using Point = Tri::Point;
+using Segment = Tri::Segment;
+using Triangle = Tri::Triangle;
+using Tetrahedron = Tri::Tetrahedron;
+using Vertex = Tri::Vertex;
+using Edge = Tri::Edge;
+using Facet = Tri::Facet;
+using Cell = Tri::Cell;
+using size_type = Tri::size_type;
+using difference_type = Tri::difference_type;
+using Concurrency_tag = Tri::Concurrency_tag;
 
-using Finite_vertices_iterator = Triangulation_3::Finite_vertices_iterator;
-using Finite_edges_iterator = Triangulation_3::Finite_edges_iterator;
-using Finite_facets_iterator = Triangulation_3::Finite_facets_iterator;
-using Finite_cells_iterator = Triangulation_3::Finite_cells_iterator;
+using Vertex_handle = Tri::Vertex_handle;
+using Cell_handle = Tri::Cell_handle;
+using Simplex = Tri::Simplex;
 
-using Point_iterator = Triangulation_3::Point_iterator;
-using Facet_iterator = Triangulation_3::Facet_iterator;
-using Cell_iterator = Triangulation_3::Cell_iterator;
-using Segment_cell_iterator = Triangulation_3::Segment_cell_iterator;
-using Segment_simplex_iterator = Triangulation_3::Segment_simplex_iterator;
+using All_vertices_iterator = Tri::All_vertices_iterator;
+using All_edges_iterator = Tri::All_edges_iterator;
+using All_facets_iterator = Tri::All_facets_iterator;
+using All_cells_iterator = Tri::All_cells_iterator;
+
+using Finite_vertices_iterator = Tri::Finite_vertices_iterator;
+using Finite_edges_iterator = Tri::Finite_edges_iterator;
+using Finite_facets_iterator = Tri::Finite_facets_iterator;
+using Finite_cells_iterator = Tri::Finite_cells_iterator;
+
+using Point_iterator = Tri::Point_iterator;
+using Facet_iterator = Tri::Facet_iterator;
+using Cell_iterator = Tri::Cell_iterator;
+using Segment_cell_iterator = Tri::Segment_cell_iterator;
+using Segment_simplex_iterator = Tri::Segment_simplex_iterator;
 
 #if ((CGALPY_TRI3 == CGALPY_TRI3_PLAIN) || \
      (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_PLAIN))
-using Vertex_circulator = Triangulation_3::Vertex_circulator;
-using Edge_circulator = Triangulation_3::Edge_circulator;
-using Cell_circulator = Triangulation_3::Cell_circulator;
+using Vertex_circulator = Tri::Vertex_circulator;
+using Edge_circulator = Tri::Edge_circulator;
+using Cell_circulator = Tri::Cell_circulator;
 #endif
 
 #if ((CGALPY_TRI3 == CGALPY_TRI3_REGULAR) || \
      (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_REGULAR))
-using Weighted_point = Triangulation_3::Weighted_point;
-using Bare_point = Triangulation_3::Bare_point;
+using Weighted_point = Tri::Weighted_point;
+using Bare_point = Tri::Bare_point;
 #endif
 
 } // End of namespace tri3

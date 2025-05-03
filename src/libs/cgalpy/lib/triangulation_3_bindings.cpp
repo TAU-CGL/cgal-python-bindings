@@ -8,7 +8,7 @@
 
 #define CGAL_USE_BASIC_VIEWER
 
-#include <boost/iterator/function_output_iterator.hpp>
+#include <vector>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/tuple.h>
@@ -46,13 +46,13 @@ size_type degree(const Triangulation_3& tri, Vertex& v)
 { return tri.degree(Vertex_handle(&v)); }
 
 //!
-void dt3_init(tri3::Triangulation_3* tri, py::list& lst) {
+void tri3_init(tri3::Triangulation_3* tri, py::list& lst) {
   auto begin = stl_input_iterator<tri3::Point>(lst);
   auto end = stl_input_iterator<tri3::Point>(lst, false);
   new (tri) tri3::Triangulation_3(begin, end);  // placement new
 }
 
-//
+//!
 std::ptrdiff_t insert_points(Triangulation_3& dt, py::list& lst) {
   if (! lst) return 0;
   if (! py::isinstance<tri3::Point>(lst[0])) return 0;
@@ -62,91 +62,29 @@ std::ptrdiff_t insert_points(Triangulation_3& dt, py::list& lst) {
 }
 
 //!
-Vertex& insert_point1(Triangulation_3& tri, const Point& p) {
+Vertex& insert1(Triangulation_3& tri, const Point& p) {
   auto vh = tri.insert(p, Cell_handle());
   return *vh;
 }
 
 //!
-Vertex& insert_point2(Triangulation_3& tri, const Point& p, Cell& start) {
+Vertex& insert2(Triangulation_3& tri, const Point& p, Cell& start) {
   auto vh = tri.insert(p, tri3::Cell_handle(&start));
   return *vh;
 }
 
 //!
-Vertex& insert_point3(Triangulation_3& tri, const Point& p, Vertex& hint) {
+Vertex& insert3(Triangulation_3& tri, const Point& p, Vertex& hint) {
   auto vh = tri.insert(p, tri3::Vertex_handle(&hint));
   return *vh;
 }
 
 //!
-Vertex& insert_point4(Triangulation_3& tri, const Point& p,
-                      Locate_type lt, tri3::Cell& c, int li, int lj) {
+Vertex& insert4(Triangulation_3& tri, const Point& p,
+                Locate_type lt, tri3::Cell& c, int li, int lj) {
   auto vh = tri.insert(p, lt, tri3::Cell_handle(&c), li, lj);
   return *vh;
 }
-
-#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
-
-//!
-auto insert_del_point1(Triangulation_3& dt, const Point& p,
-                       bool lock_zone = false) {
-  if (! lock_zone) return &(insert_point1(dt, p));
-
-  bool could_lock_zone;
-  auto vh = dt.insert(p, Cell_handle(), &could_lock_zone);
-  return could_lock_zone ? &*vh : nullptr;
-}
-
-//!
-auto insert_del_point2(Triangulation_3& dt, const Point& p, Cell& start,
-                       bool lock_zone = false) {
-  if (! lock_zone) return &(insert_point2(dt, p, start));
-
-  bool could_lock_zone;
-  auto vh = dt.insert(p, tri3::Cell_handle(&start), &could_lock_zone);
-  return could_lock_zone ? &*vh : nullptr;
-}
-
-//!
-auto insert_del_point3(Triangulation_3& dt, const Point& p, Vertex& hint,
-                       bool lock_zone = false) {
-  if (! lock_zone) return &(insert_point3(dt, p, hint));
-
-  bool could_lock_zone;
-  auto vh = dt.insert(p, tri3::Vertex_handle(&hint), &could_lock_zone);
-  return could_lock_zone ? &*vh : nullptr;
-}
-
-//!
-auto insert_del_point4(Triangulation_3& dt, const Point& p, Locate_type lt,
-                       Cell& c, int li, int lj, bool lock_zone = false) {
-  if (! lock_zone) return &(insert_point4(dt, p, lt, c, li, lj));
-
-  bool could_lock_zone;
-  auto vh = dt.insert(p, lt, tri3::Cell_handle(&c), li, lj, &could_lock_zone);
-  return could_lock_zone ? &*vh : nullptr;
-}
-
-#endif
-
-#if (CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT)
-
-//
-Vertex_handle insert4(Triangulation_3& dt, const Point& p, Cell_handle start)
-{ return dt.insert(p, start); }
-
-//
-Vertex_handle insert5(tri3::Triangulation_3& dt, const Point& p,
-                      Vertex_handle hint)
-{ return dt.insert(p, hint); }
-
-//
-Vertex_handle insert6(tri3::Triangulation_3& dt, const Point& p,
-                      Locate_type lt, Cell_handle c, int li, int lj)
-{ return dt.insert(p, lt, c, li, lj); }
-
-#endif
 
 //!
 Cell& locate1(const Triangulation_3& tri, const Point& query) {
@@ -287,28 +225,6 @@ py::object segment_traverser_cells2(const Triangulation_3& tri,
 }
 
 //!
-Vertex& nearest_vertex1(const Triangulation_3& tri, const Point& p) {
-  auto vh = tri.nearest_vertex(p);
-  return *vh;
-}
-
-//!
-Vertex& nearest_vertex2(const Triangulation_3& tri, const Point& p, Cell& c) {
-  auto vh = tri.nearest_vertex(p, Cell_handle(&c));
-  return *vh;
-}
-
-//!
-CGAL::Bounded_side side_of_circle2(const Triangulation_3& tri, Cell& c, int i,
-                                   const Point& p, bool perturb = false)
-{ return tri.side_of_circle(Cell_handle(&c), i, p, perturb); }
-
-//!
-CGAL::Bounded_side side_of_sphere(const Triangulation_3& tri, Cell& c,
-                                  const Point& p)
-{ return tri.side_of_sphere(Cell_handle(&c), p); }
-
-//!
 bool is_cell1(const Triangulation_3& tri, Cell& c)
 { return tri.is_cell(Cell_handle(&c)); }
 
@@ -386,69 +302,23 @@ py::tuple is_vertex1(const Triangulation_3& tri, const Point& p) {
 bool is_vertex2(const Triangulation_3& tri, Vertex& v)
 { return tri.is_vertex(Vertex_handle(&v)); }
 
-#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
-
-//! See manual of locate_face()
-py::tuple find_conflicts(py::handle self, const Point& p, Cell& start) {
-  constexpr auto ri(py::rv_policy::reference_internal);
-
-  auto& tri = py::cast<Triangulation_3&>(self);
-  py::list bfs;
-  auto op1 = [&] (const Facet& f) mutable { bfs.append(f); };
-  auto it1 = boost::make_function_output_iterator(std::ref(op1));
-  py::list cells;
-  auto op2 = [&] (const Cell_handle& ch) mutable {
-    Cell& c = *ch;
-    cells.append(py::cast(c, ri, self));
-  };
-  auto it2 = boost::make_function_output_iterator(std::ref(op2));
-  tri.find_conflicts(p, Cell_handle(&start), it1, it2);
-  return py::make_tuple(bfs, cells);
-}
-
-//!
-py::tuple find_conflicts_ifs(py::handle self, const Point& p, Cell& start) {
-  constexpr auto ri(py::rv_policy::reference_internal);
-
-  auto& tri = py::cast<Triangulation_3&>(self);
-  py::list bfs;
-  auto op1 = [&] (const Facet& f) mutable { bfs.append(f); };
-  auto it1 = boost::make_function_output_iterator(std::ref(op1));
-  py::list cells;
-  auto op2 = [&] (const Cell_handle& ch) mutable {
-    Cell& c = *ch;
-    cells.append(py::cast(c, ri, self));
-  };
-  auto it2 = boost::make_function_output_iterator(std::ref(op2));
-  py::list ifs;
-  auto op3 = [&] (const Facet& f) mutable { ifs.append(f); };
-  auto it3 = boost::make_function_output_iterator(std::ref(op3));
-  tri.find_conflicts(p, Cell_handle(&start), it1, it2, it3);
-  return py::make_tuple(bfs, cells, ifs);
-}
-
-#endif
-
 } // End of namespace tri3
 
 //
 void export_triangulation_3(py::module_& m) {
   using Tri = tri3::Triangulation_3;
-  using Ch = tri3::Cell_handle;
-  using Vh = tri3::Vertex_handle;
   using Pnt = tri3::Point;
   using Vertex = tri3::Vertex;
   using Facet = tri3::Facet;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  CGAL::Bounded_side(Tri::*side_of_circle1)(const Facet&, const Pnt&, bool) const =
-    &Tri::side_of_circle;
+  if (add_attr<Tri>(m, "Triangulation_3")) return;
 
   py::class_<Tri> tri_c(m, "Triangulation_3");
   tri_c.def(py::init<>())
     .def(py::init<const tri3::Traits&>())
-    .def("__init__", &tri3::dt3_init)
+    .def("__init__", &tri3::tri3_init)
     .def("are_equal",
          py::overload_cast<const Facet&, const Facet&>(&Tri::are_equal, py::const_))
     .def("are_equal", tri3::are_equal1)
@@ -466,28 +336,12 @@ void export_triangulation_3(py::module_& m) {
     .def("number_of_vertices", &Tri::number_of_vertices)
 
     // Insertion
-#if CGALPY_TRI3 != CGALPY_TRI3_DELAUNAY
-    .def("insert", &tri3::insert_point1, ri)
-    .def("insert", &tri3::insert_point2, ri)
-    .def("insert", &tri3::insert_point3, ri)
-    .def("insert", &tri3::insert_point4, ri)
-#else
-    .def("insert", &tri3::insert_del_point1,
-         py::arg("point"), py::arg("lock_zone") = false, ri)
-    .def("insert", &tri3::insert_del_point2,
-         py::arg("point"), py::arg("start"), py::arg("lock_zone") = false, ri)
-    .def("insert", &tri3::insert_del_point3,
-         py::arg("point"), py::arg("hint"), py::arg("lock_zone") = false, ri)
-    .def("insert", &tri3::insert_del_point4,
-         py::arg("point"), py::arg("lt"), py::arg("c"), py::arg("li"),
-         py::arg("lj"), py::arg("lock_zone") = false, ri)
-#endif
 
-#if CGALPY_TRI3_LOCATION_POLICY == CGALPY_TRI3_LOCATION_POLICY_COMPACT
-    .def("insert", &tri3::insert4)
-    .def("insert", &tri3::insert5)
-    .def("insert", &tri3::insert6)
-#endif
+    .def("insert", &tri3::insert1, ri)
+    .def("insert", &tri3::insert2, ri)
+    .def("insert", &tri3::insert3, ri)
+    .def("insert", &tri3::insert4, ri)
+    //! \todo add missing insertion functions
 
     .def("insert_in_facet", &tri3::insert_in_facet, ri)
     .def("insert_in_hole", &tri3::insert_in_hole, ri)
@@ -501,14 +355,6 @@ void export_triangulation_3(py::module_& m) {
     // template<class PointWithInfoInputIterator >
     // std::ptrdiff_t insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
 
-    // Displacement
-    .def("move_if_no_collision", &Tri::move_if_no_collision)
-    .def("move", &Tri::move)
-
-    // Removal
-    .def("remove", static_cast<void(Tri::*)(Vh)>(&Tri::remove))
-    // .def("remove", py::overload_cast<Vh, bool*>(&Tri::remove))
-
     // template<typename InputIterator >
     // int remove (InputIterator first, InputIterator beyond)
 
@@ -516,20 +362,6 @@ void export_triangulation_3(py::module_& m) {
     // int remove_cluster (InputIterator first, InputIterator beyond)
 
     // Queries
-
-#if CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY
-    .def("side_of_circle", side_of_circle1)
-    .def("side_of_circle", tri3::side_of_circle2,
-         py::arg("c"), py::arg("i"), py::arg("p"), py::arg("perturb") = false)
-    .def("side_of_sphere", &tri3::side_of_sphere)
-    .def("nearest_vertex", &tri3::nearest_vertex1)
-    .def("nearest_vertex", &tri3::nearest_vertex2)
-
-    .def("find_conflicts", &tri3::find_conflicts, ri)
-    .def("find_conflicts_if", &tri3::find_conflicts_ifs, ri)
-#endif
-
-    .def("nearest_vertex_in_cell", &Tri::nearest_vertex_in_cell)
 
     .def("is_cell", &tri3::is_cell1)
     .def("is_cell", &tri3::is_cell2)
@@ -564,15 +396,13 @@ void export_triangulation_3(py::module_& m) {
     ;
 
   // Types that have been registered already:
-#if ((CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_PLAIN) ||         \
-     (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_REGULAR) ||       \
-     (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_DELAUNAY))
-  // \todo: generate bindings for periodic traits
+  if constexpr(tri3::is_periodic())
+    // \todo: generate bindings for periodic traits
   ;
-#else
-  // In the case of non-priodic triangulation the kernel serves as the traits.
-  add_attr<tri3::Geom_traits>(tri_c, "Geom_traits");
-#endif
+  else {
+    // In the case of non-priodic triangulation the kernel serves as the traits.
+    add_attr<tri3::Geom_traits>(tri_c, "Geom_traits");
+  }
 
   if (! add_attr<Pnt>(tri_c, "Point")) std::cerr << "'Point' not registered!\n";
   add_attr<tri3::Segment>(tri_c, "Segment");
@@ -593,15 +423,15 @@ void export_triangulation_3(py::module_& m) {
     .def_rw("end_index", &tri3::Edge::third)
     ;
 
-  py::class_<Vh>(tri_c, "Vertex_handle")
-    .def(py::init<>())
-    .def("value", &tri3::value<Vh>, ri)
-    ;
-
-  py::class_<Ch>(tri_c, "Cell_handle")
-    .def(py::init<>())
-    .def("value", &tri3::value<Ch>, ri)
-    ;
+  // Do not wrap handles!
+  // py::class_<Vh>(tri_c, "Vertex_handle")
+  //   .def(py::init<>())
+  //   .def("value", &tri3::value<Vh>, ri)
+  //   ;
+  // py::class_<Ch>(tri_c, "Cell_handle")
+  //   .def(py::init<>())
+  //   .def("value", &tri3::value<Ch>, ri)
+  //   ;
 
   using Avi = Tri::All_vertices_iterator;
   using Aei = Tri::All_edges_iterator;
@@ -672,6 +502,5 @@ void export_triangulation_3(py::module_& m) {
 
   // Facet_iterator;
   // Cell_iterator;
-  // Segment_cell_iterator;
   // Segment_simplex_iterator;
 }

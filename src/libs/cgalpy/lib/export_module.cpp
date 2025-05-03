@@ -8,10 +8,13 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <CGAL/config.h>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
-#include "CGALPY/arrangement_on_surface_2_config.hpp"
+#include "CGALPY/arrangement_on_surface_2_values.hpp"
+#include "CGALPY/kernel_types.hpp"
+#include "CGALPY/triangulation_3_values.hpp"
 #include "CGALPY/config.hpp"
 
 namespace py = nanobind;
@@ -74,6 +77,8 @@ void export_triangulated_surface_mesh_simplification(py::module_&);
 void export_triangulated_surface_mesh_skeletonization(py::module_&);
 void export_triangulation_2(py::module_&);
 void export_triangulation_3(py::module_&);
+void export_tri3_regular(py::module_& m);
+void export_tri3_delaunay(py::module_& m);
 void export_triangulation_d(py::module_&);
 void export_visibility_2(py::module_&);
 
@@ -197,6 +202,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #if defined(CGALPY_TRIANGULATION_3_BINDINGS)
   auto tri3_m = m.def_submodule("Tri3");
   export_triangulation_3(tri3_m);
+#if (CGALPY_TRI3 == CGALPY_TRI3_REGULAR)
+  export_tri3_regular(tri3_m);
+#elif (CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY)
+  export_tri3_delaunay(tri3_m);
+#endif
 #endif
 
 #if defined(CGALPY_TRIANGULATION_D_BINDINGS)

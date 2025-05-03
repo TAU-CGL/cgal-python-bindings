@@ -25,5 +25,5 @@ Gog = CGALPY_GOG.Gog
 generator = Gog.Random_points_in_sphere_3(1.0)
 points = []
 for i in range(50): points.append(next(generator))
-dt3 = Tri3.Triangulation_3(points)
-Tri3.draw(dt3, "3D Triangulation")
+dt3 = Tri3.Delaunay_triangulation_3(points)
+Tri3.draw(dt3, "3D Delaunay Triangulation")

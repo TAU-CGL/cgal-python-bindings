@@ -41,19 +41,7 @@
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/alpha_shape_3_config.hpp"
-
-#define CGALPY_TRI3_CONCURRENCY_SEQUENTIAL              0
-#define CGALPY_TRI3_CONCURRENCY_PARALLEL                1
-
-#define CGALPY_TRI3_LOCATION_POLICY_FAST                0
-#define CGALPY_TRI3_LOCATION_POLICY_COMPACT             1
-
-#define CGALPY_TRI3_PLAIN                               0
-#define CGALPY_TRI3_REGULAR                             1
-#define CGALPY_TRI3_DELAUNAY                            2
-#define CGALPY_TRI3_PERIODIC_PLAIN                      3
-#define CGALPY_TRI3_PERIODIC_REGULAR                    4
-#define CGALPY_TRI3_PERIODIC_DELAUNAY                   5
+#include "CGALPY/triangulation_3_values.hpp"
 
 namespace tri3 {
 
@@ -68,17 +56,23 @@ constexpr bool vertex_with_info()
 constexpr bool cell_with_info()
 { return DETECT_EXIST(CGALPY_TRI3_CELL_WITH_INFO); }
 
-// Indicates whether the selected triangulation is periodic
+//! Indicates whether the selected triangulation is periodic
 constexpr bool is_periodic() {
   return ((CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_PLAIN) ||        \
           (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_REGULAR) ||      \
           (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_DELAUNAY));
 }
 
-// Indicates whether the selected triangulation is regular
+//! Indicates whether the selected triangulation is regular
 constexpr bool is_regular() {
   return ((CGALPY_TRI3 == CGALPY_TRI3_REGULAR) ||               \
           (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_REGULAR));
+}
+
+//! Indicates whether the selected triangulation is Delaunay
+constexpr bool is_delaunay() {
+  return ((CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY) ||              \
+          (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_DELAUNAY));
 }
 
 // Traits
@@ -180,30 +174,51 @@ template <> struct Location_policy<CGALPY_TRI3_LOCATION_POLICY_FAST>
 template <> struct Location_policy<CGALPY_TRI3_LOCATION_POLICY_COMPACT>
 { using type = CGAL::Compact_location; };
 
-// Main triangulation
+// Base triangulation
 template <int i, typename Tr, typename Tds, typename Lp>
-struct Base_tri {};
+struct Tri3 {};
+
 template <typename Tr, typename Tds, typename Lp>
-struct Base_tri<CGALPY_TRI3_PLAIN, Tr, Tds, Lp>
-{ using type = CGAL::Triangulation_3<Tr, Tds>; };
+struct Tri3<CGALPY_TRI3_PLAIN, Tr, Tds, Lp> {
+  using type = typename CGAL::Triangulation_3<Tr, Tds>;
+  using base_type = type;
+};
+
 template <typename Tr, typename Tds, typename Lp>
-struct Base_tri<CGALPY_TRI3_REGULAR, Tr, Tds, Lp>
-{ using type = CGAL::Regular_triangulation_3<Tr, Tds>; };
+struct Tri3<CGALPY_TRI3_REGULAR, Tr, Tds, Lp> {
+  using type = typename CGAL::Regular_triangulation_3<Tr, Tds>;
+  using base_type = typename type::Base_tr;
+};
+
 template <typename Tr, typename Tds, typename Lp>
-struct Base_tri<CGALPY_TRI3_DELAUNAY, Tr, Tds, Lp>
-{ using type = CGAL::Delaunay_triangulation_3<Tr, Tds>; };
+struct Tri3<CGALPY_TRI3_DELAUNAY, Tr, Tds, Lp> {
+  using type = typename CGAL::Delaunay_triangulation_3<Tr, Tds>;
+  using base_type = typename type::Tr_Base;
+};
+
 template <typename Tr, typename Tds, typename Lp>
-struct Base_tri<CGALPY_TRI3_PERIODIC_PLAIN, Tr, Tds, Lp>
-{ using type = CGAL::Periodic_3_triangulation_3<Tr, Tds>; };
+struct Tri3<CGALPY_TRI3_PERIODIC_PLAIN, Tr, Tds, Lp> {
+  using type = typename CGAL::Periodic_3_triangulation_3<Tr, Tds>;
+  using base_type = type;
+};
+
 template <typename Tr, typename Tds, typename Lp>
-struct Base_tri<CGALPY_TRI3_PERIODIC_DELAUNAY, Tr, Tds, Lp>
-{ using type = CGAL::Periodic_3_Delaunay_triangulation_3<Tr, Tds>; };
+struct Tri3<CGALPY_TRI3_PERIODIC_REGULAR, Tr, Tds, Lp> {
+  using type  = typename CGAL::Periodic_3_regular_triangulation_3<Tr, Tds>;
+  using base_type = typename type::Tr_Base;
+};
+
+template <typename Tr, typename Tds, typename Lp>
+struct Tri3<CGALPY_TRI3_PERIODIC_DELAUNAY, Tr, Tds, Lp> {
+  using type = typename CGAL::Periodic_3_Delaunay_triangulation_3<Tr, Tds>;
+  using base_type = typename type::Base;
+};
 
 // Hierarchy
-template <bool b, typename Tr> struct Tri {};
-template <typename Tr> struct Tri<false, Tr>
+template <bool b, typename Tr> struct Th {};
+template <typename Tr> struct Th<false, Tr>
 { using type = Tr; };
-template <typename Tr> struct Tri<true, Tr>
+template <typename Tr> struct Th<true, Tr>
 { using type = CGAL::Triangulation_hierarchy_3<Tr>; };
 
 }
