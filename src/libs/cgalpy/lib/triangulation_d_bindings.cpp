@@ -575,7 +575,7 @@ void export_triangulation_d(py::module_& m) {
         .def(py::init<int>())
         .def(py::init<const Fc&>())
 
- #ifdef CGALPY_TRID_FULL_CELL_WITH_DATA
+#ifdef CGALPY_TRID_FULL_CELL_WITH_DATA
         .def("data", py::overload_cast<>(&Fc::data, py::const_), ri)
         .def("set_data", [](Fc& c, py::object data)->void{ c.data() = data; })
 #endif
