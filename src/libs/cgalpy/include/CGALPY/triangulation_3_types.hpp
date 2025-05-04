@@ -109,12 +109,8 @@ using Cell_iterator = Tri::Cell_iterator;
 using Segment_cell_iterator = Tri::Segment_cell_iterator;
 using Segment_simplex_iterator = Tri::Segment_simplex_iterator;
 
-#if ((CGALPY_TRI3 == CGALPY_TRI3_PLAIN) || \
-     (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_PLAIN))
-using Vertex_circulator = Tri::Vertex_circulator;
-using Edge_circulator = Tri::Edge_circulator;
+using Edge_circulator = Tri::Facet_circulator;
 using Cell_circulator = Tri::Cell_circulator;
-#endif
 
 #if ((CGALPY_TRI3 == CGALPY_TRI3_REGULAR) || \
      (CGALPY_TRI3 == CGALPY_TRI3_PERIODIC_REGULAR))

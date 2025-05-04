@@ -4,3 +4,4 @@
 ./fast_location.py CGALPY_kerEpic_tri3DelFasSeq
 ./find_conflicts_3.py CGALPY_kerEpic_tri3DelComSeq CGALPY_kerEpic_gog
 ./segment_cell_traverser_3.py CGALPY_kerEpic_tri3DelComSeq CGALPY_kerEpic_psp
+./simple_triangulation.py CGALPY_kerEpic_tri3PlainComSeq

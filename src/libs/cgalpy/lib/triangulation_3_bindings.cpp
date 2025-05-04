@@ -21,6 +21,8 @@
 #endif
 
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/add_extraction.hpp"
+#include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
@@ -53,12 +55,12 @@ void tri3_init(tri3::Triangulation_3* tri, py::list& lst) {
 }
 
 //!
-std::ptrdiff_t insert_points(Triangulation_3& dt, py::list& lst) {
-  if (! lst) return 0;
-  if (! py::isinstance<tri3::Point>(lst[0])) return 0;
+auto insert_points(Triangulation_3& tri, py::list& lst) {
+  if (! lst) return 0l;
+  if (! py::isinstance<tri3::Point>(lst[0])) return 0l;
   auto begin = stl_input_iterator<tri3::Point>(lst);
   auto end = stl_input_iterator<tri3::Point>(lst, false);
-  return dt.insert(begin, end);
+  return tri.insert(begin, end);
 }
 
 //!
@@ -341,11 +343,10 @@ void export_triangulation_3(py::module_& m) {
     .def("insert", &tri3::insert2, ri)
     .def("insert", &tri3::insert3, ri)
     .def("insert", &tri3::insert4, ri)
-    //! \todo add missing insertion functions
+    .def("insert", &tri3::insert_points)
 
     .def("insert_in_facet", &tri3::insert_in_facet, ri)
     .def("insert_in_hole", &tri3::insert_in_hole, ri)
-    .def("insert_points", &tri3::insert_points)
 
     .def("locate", &tri3::locate1, ri)
     .def("locate", &tri3::locate2, ri)
@@ -503,4 +504,8 @@ void export_triangulation_3(py::module_& m) {
   // Facet_iterator;
   // Cell_iterator;
   // Segment_simplex_iterator;
+
+  add_insertion(tri_c, "__str__");
+  add_insertion(tri_c, "__repr__");
+  add_extraction(tri_c);
 }
