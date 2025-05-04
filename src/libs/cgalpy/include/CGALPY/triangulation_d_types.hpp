@@ -33,7 +33,7 @@ using V = Vertex_with_data<vertex_with_data(), Vb, py::object, Traits>::type;
 // Cell type
 using Sd = Storage_policy<CGALPY_TRID_STORAGE_POLICY>::type;
 using Cb = CGAL::Triangulation_ds_full_cell<void, Sd>;
-using C = Full_cell_with_data<cell_with_data(), Cb, py::object, Traits>::type;
+using C = Full_cell_with_data<full_cell_with_data(), Cb, py::object, Traits>::type;
 
 // Dimensionality
 using D = Dimensionality<CGALPY_TRID_DIMENSION_TAG, CGALPY_TRID_DIMENSION>::type;

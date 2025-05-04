@@ -42,8 +42,8 @@ constexpr bool vertex_with_data()
 { return DETECT_EXIST(CGALPY_TRID_VERTEX_WITH_DATA); }
 
 // Indicates whether a vertex with infois selected
-constexpr bool cell_with_data()
-{ return DETECT_EXIST(CGALPY_TRID_CELL_WITH_DATA); }
+constexpr bool full_cell_with_data()
+{ return DETECT_EXIST(CGALPY_TRID_FULL_CELL_WITH_DATA); }
 
 // Indicates whether the selected triangulation is regular
 constexpr bool is_regular() {
