@@ -82,7 +82,7 @@ class Curve_data_merge {
 public:
   /*! Construct
    */
-  Curve_data_merge() {}
+  Curve_data_merge() { s_func = py::none(); }
 
   /*! Destruct
    */
@@ -99,7 +99,7 @@ public:
 
 private:
   //! The callback function to apply
-  inline static py::object s_func = py::none();;
+  inline static py::object s_func;
 };
 
 template <typename Btr>
