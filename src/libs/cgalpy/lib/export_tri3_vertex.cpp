@@ -15,15 +15,24 @@ namespace py = nanobind;
 
 namespace tri3 {
 
-//
+//!
+Cell& cell(const Vertex& v) {
+  auto ch = v.cell();
+  return *ch;
+}
+
+//!
+  void set_cell(Vertex& v, Cell& c) { v.set_cell(Cell_handle(&c)); }
+
+//!
 bool vertex_is_valid1(const Vertex& vertex, bool verbose, int level)
 { return vertex.is_valid(verbose, level); }
 
-//
+//!
 bool vertex_is_valid2(const Vertex& vertex, bool verbose)
 { return vertex.is_valid(verbose); }
 
-//
+//!
 bool vertex_is_valid3(const Vertex& vertex) { return vertex.is_valid(); }
 
 }
@@ -38,9 +47,9 @@ void export_tri3_vertex(py::class_<tri3::Triangulation_3>& tri_c) {
 
   py::class_<Vertex>(tri_c, "Vertex")
     .def(py::init<>())
-    .def("cell", py::overload_cast<>(&Vertex::cell, py::const_))
+    .def("cell", &tri3::cell, ri)
     .def("point", py::overload_cast<>(&Vertex::point, py::const_), ri)
-    .def("set_cell", &Vertex::set_cell)
+    .def("set_cell", &tri3::set_cell)
     .def("set_point", &Vertex::set_point)
     .def("is_valid", &tri3::vertex_is_valid1)
     .def("is_valid", &tri3::vertex_is_valid2)
