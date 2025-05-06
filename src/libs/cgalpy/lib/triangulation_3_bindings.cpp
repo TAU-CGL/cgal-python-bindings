@@ -24,6 +24,7 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "CGALPY/make_circulator.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/types.hpp"
@@ -304,6 +305,60 @@ py::tuple is_vertex1(const Triangulation_3& tri, const Point& p) {
 bool is_vertex2(const Triangulation_3& tri, Vertex& v)
 { return tri.is_vertex(Vertex_handle(&v)); }
 
+//! {
+//! Circulators
+//! Cell circulators
+//!
+py::object incident_cells1(const Triangulation_3& tri, const Edge& e)
+{ return make_circulator(tri.incident_cells(e)); }
+
+//!
+py::object incident_cells2(const Triangulation_3& tri, Cell& c, int i, int j)
+{ return make_circulator(tri.incident_cells(Cell_handle(&c), i, j)); }
+
+//!
+py::object incident_cells3(const Triangulation_3& tri, const Edge& e,
+                           Cell& start)
+{ return make_circulator(tri.incident_cells(e, Cell_handle(&start))); }
+
+//!
+py::object incident_cells4(const Triangulation_3& tri, Cell& c, int i, int j,
+                           Cell& start) {
+  return make_circulator(tri.incident_cells(Cell_handle(&c), i, j,
+                                            Cell_handle(&start)));
+}
+
+//! Facet circulators
+//!
+py::object incident_facets1(const Triangulation_3& tri, const Edge& e)
+{ return make_circulator(tri.incident_facets(e)); }
+
+//!
+py::object incident_facets2(const Triangulation_3& tri, Cell& c, int i, int j)
+{ return make_circulator(tri.incident_facets(Cell_handle(&c), i, j)); }
+
+//!
+py::object incident_facets3(const Triangulation_3& tri, const Edge& e,
+                            const Facet& start)
+{ return make_circulator(tri.incident_facets(e, start)); }
+
+//!
+py::object incident_facets4(const Triangulation_3& tri, Cell& c, int i, int j,
+                            const Facet& start)
+{ return make_circulator(tri.incident_facets(Cell_handle(&c), i, j, start)); }
+
+//!
+py::object incident_facets5(const Triangulation_3& tri, const Edge& e,
+                            Cell& start, int f)
+{ return make_circulator(tri.incident_facets(e, Cell_handle(&start), f)); }
+
+//!
+py::object incident_facets6(const Triangulation_3& tri, Cell& c, int i, int j,
+                            Cell& start, int f) {
+  return make_circulator(tri.incident_facets(Cell_handle(&c), i, j,
+                                             Cell_handle(&start), f));
+}
+
 } // End of namespace tri3
 
 //
@@ -483,6 +538,26 @@ void export_triangulation_3(py::module_& m) {
          py::keep_alive<0, 1>())
     .def("segment_traverser_cells", &tri3::segment_traverser_cells2,
          py::keep_alive<0, 1>())
+    ;
+
+  // Circulators
+  using Cc = Tri::Cell_circulator;
+  using Fc = Tri::Facet_circulator;
+
+  add_circulator<Cc>("Cell_circulator", tri_c);
+  add_circulator<Fc>("Facet_circulator", tri_c);
+
+  tri_c.def("incident_cells", &tri3::incident_cells1, py::keep_alive<0, 1>())
+    .def("incident_cells", &tri3::incident_cells2, py::keep_alive<0, 1>())
+    .def("incident_cells", &tri3::incident_cells3, py::keep_alive<0, 1>())
+    .def("incident_cells", &tri3::incident_cells4, py::keep_alive<0, 1>())
+
+    .def("incident_facets", &tri3::incident_facets1, py::keep_alive<0, 1>())
+    .def("incident_facets", &tri3::incident_facets2, py::keep_alive<0, 1>())
+    .def("incident_facets", &tri3::incident_facets3, py::keep_alive<0, 1>())
+    .def("incident_facets", &tri3::incident_facets4, py::keep_alive<0, 1>())
+    .def("incident_facets", &tri3::incident_facets5, py::keep_alive<0, 1>())
+    .def("incident_facets", &tri3::incident_facets6, py::keep_alive<0, 1>())
     ;
 
 #ifdef CGALPY_HAS_VISUAL
