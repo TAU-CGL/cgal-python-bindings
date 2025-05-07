@@ -36,10 +36,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/add_insertion.hpp"
-// #include "CGALPY/export_mesh_iterators.hpp"
-// #include "CGALPY/export_mesh_selection_functions.hpp"
-// #include "CGALPY/export_mesh_helpers.hpp"
-// #include "CGALPY/export_mesh_partitioning_operations.hpp"
+#include "CGALPY/bgl_global.hpp"
 #include "CGALPY/generator_functions.hpp"
 #include "CGALPY/get.hpp"
 #include "CGALPY/Internal_face_plane_3_map.hpp"
@@ -166,25 +163,6 @@ void halfedge_map(py::module_& m,
 }
 
 // Global access functions
-
-// Independent on handles
-//! \todo move to a header file
-
-//!
-template <typename PolygonMesh>
-auto num_edges(const PolygonMesh& p) { return CGAL::num_edges(p); }
-
-//!
-template <typename PolygonMesh>
-auto num_faces(const PolygonMesh& p) { return CGAL::num_faces(p); }
-
-//!
-template <typename PolygonMesh>
-auto num_halfedges(const PolygonMesh& p) { return CGAL::num_halfedges(p); }
-
-//!
-template <typename PolygonMesh>
-auto num_vertices(const PolygonMesh& p) { return CGAL::num_vertices(p); }
 
 //!
 template <typename PolygonMesh>
@@ -357,25 +335,25 @@ bool write_polygon_mesh(std::string fname, const Polyhedron_3& pm,
   return CGAL::IO::write_polygon_mesh(fname, pm);
 }
 
-//
+//!
 Halfedge& make_tetrahedron1(Polyhedron_3& prn,
                             const Point_3& p1, const Point_3& p2,
                             const Point_3& p3, const Point_3& p4)
 { return *(prn.make_tetrahedron(p1, p2, p3, p4)); }
 
-//
+//!
 Halfedge& make_tetrahedron2(Polyhedron_3& prn)
 { return *(prn.make_tetrahedron()); }
 
-//
+//!
 bool is_tetrahedron(const Polyhedron_3& prn, const Halfedge& h)
 { return prn.is_tetrahedron(Halfedge_const_handle(&h)); }
 
-//
+//!
 auto make_triangle_empty(Polyhedron_3& prn)
 { return prn.make_triangle(); }
 
-//
+//!
 auto make_triangle(Polyhedron_3& prn, const Point_3& p1,
                    const Point_3& p2, const Point_3& p3)
 { return prn.make_triangle(p1, p2, p3); }
@@ -700,68 +678,72 @@ void export_polyhedron_3(py::module_& m) {
         [](const Prn& pm, Vertex& v)
         { return get(CGAL::vertex_point, pm, Vd(&v)); });
 
-  // Concept functions
-  // Global
+  // CGAL and the Boost Graph Library
+
+  // Iterators
   m.def("edges", &pol3::my_edges<Prn>, py::keep_alive<0, 1>());
   m.def("faces", &pol3::my_faces<Prn>, py::keep_alive<0, 1>());
   m.def("halfedges", &pol3::my_halfedges<Prn>, py::keep_alive<0, 1>());
   m.def("vertices", &pol3::my_vertices<Prn>, py::keep_alive<0, 1>());
-  m.def("num_edges", &pol3::num_edges<Prn>);
-  m.def("num_faces", &pol3::num_faces<Prn>);
-  m.def("num_halfedges", &pol3::num_halfedges<Prn>);
-  m.def("num_vertices", &pol3::num_vertices<Prn>);
 
-  // Dedicated to Polyhedron_3
+  // Functions that do not involve handlers
+  m.def("add_edge", &bgl::my_add_edge<Prn>);
+  m.def("add_face", &bgl::my_add_face<Prn>);
+  m.def("add_vertex", &bgl::my_add_vertex<Prn>);
+  m.def("num_edges", &bgl::my_num_edges<Prn>);
+  m.def("num_faces", &bgl::my_num_faces<Prn>);
+  m.def("num_halfedges", &bgl::my_num_halfedges<Prn>);
+  m.def("num_vertices", &bgl::my_num_vertices<Prn>);
+  m.def("remove_all_elements", &bgl::my_remove_all_elements<Prn>);
+  m.def("reserve", &bgl::my_reserve<Prn>);
+
+  // Other
+  // m.def("add_vertex", &pol3::add_vertex_p);
+  // m.def("adjacent_vertices", &pol3::adjacent_vertices);
   m.def("degree", &pol3::degree_f);
   m.def("degree", &pol3::degree_v);
+  // m.def("edge", &pol3::edge);
   m.def("face", &pol3::face_h, ref);
   m.def("halfedge", &pol3::halfedge_v, ref);
   m.def("halfedge", &pol3::halfedge_f, ref);
-  m.def("next", &pol3::next_h, ref);
-  m.def("opposite", &pol3::opposite_h, ref);
-  m.def("prev", &pol3::prev_h, ref);
-  m.def("source", &pol3::source_h, ref);
-  m.def("target", &pol3::target_h, ref);
-
-  // Euler functions
-
-  // m.def("halfedge", &boost_utils::halfedge_vv<Prn>);
-  // m.def("edge", &boost_utils::edge<Prn>);
-  // m.def("add_edge", &boost_utils::add_edge<Prn>);
-  // m.def("add_face", &boost_utils::add_face<Prn>);
-  // m.def("add_vertex", &boost_utils::add_vertex<Prn>);
-  // m.def("add_vertex", &boost_utils::add_vertex_p<Prn>);
-  // m.def("adjacent_vertices", &boost_utils::my_adjacent_vertices<Prn>);
-  // m.def("collect_garbage", &boost_utils::my_collect_garbage<Prn>);
-  // m.def("in_degree", &boost_utils::in_degree<Prn>);
-  // m.def("in_edges", &boost_utils::my_in_edges<Prn>);
+  // m.def("halfedge", &pol3::halfedge_vv);
+  // m.def("in_degree", &pol3::in_degree);
   // m.def("is_valid_vertex_descriptor",
-  //       &boost_utils::my_is_valid_vertex_descriptor<Prn>,
+  //       &bgl::my_is_valid_vertex_descriptor<Prn>,
   //       py::arg("v"), py::arg("g"), py::arg("verbose") = false);
   // m.def("is_valid_halfedge_descriptor",
-  //       &boost_utils::my_is_valid_halfedge_descriptor<Prn>,
+  //       &bgl::my_is_valid_halfedge_descriptor<Prn>,
   //       py::arg("h"), py::arg("g"), py::arg("verbose") = false);
   // m.def("is_valid_edge_descriptor",
-  //       &boost_utils::my_is_valid_edge_descriptor<Prn>,
+  //       &bgl::my_is_valid_edge_descriptor<Prn>,
   //       py::arg("e"), py::arg("g"), py::arg("verbose") = false);
   // m.def("is_valid_face_descriptor",
-  //       &boost_utils::my_is_valid_face_descriptor<Prn>,
+  //       &bgl::my_is_valid_face_descriptor<Prn>,
   //       py::arg("f"), py::arg("g"), py::arg("verbose") = false);
-  // m.def("null_face", &pol3::null_face<Prn>);
-  // m.def("out_degree", &boost_utils::out_degree<Prn>);
-  // m.def("out_edges", &boost_utils::my_out_edges<Prn>);
-  // m.def("remove_all_elements", &boost_utils::remove_all_elements<Prn>);
-  // // m.def("remove_edge", &boost_utils::remove_edge_vv<Prn>); // vv only for sm
-  // m.def("remove_edge", &boost_utils::remove_edge_e<Prn>);
-  // m.def("remove_face", &boost_utils::remove_face<Prn>);
-  // m.def("remove_vertex", &boost_utils::remove_vertex<Prn>);
-  // m.def("reserve", &boost_utils::reserve<Prn>);
-  // m.def("set_face", &boost_utils::set_face<Prn>);
-  // m.def("set_halfedge", &boost_utils::set_halfedge_vh<Prn>);
-  // m.def("set_halfedge", &boost_utils::set_halfedge_fh<Prn>);
-  // m.def("set_next", &boost_utils::set_next<Prn>);
-  // m.def("set_target", &boost_utils::set_target<Prn>);
-  // m.def("normalize_border", &boost_utils::normalize_border<Prn>); ???
+  m.def("next", &pol3::next_h, ref);
+  // m.def("null_face", &bgl::null_face<Prn>);
+  // m.def("null_halfedge", &bgl::null_halfedge<Prn>);
+  // m.def("null_vertex", &bgl::null_vertex<Prn>);
+  m.def("opposite", &pol3::opposite_h, ref);
+  // m.def("out_degree", &bgl::out_degree<Prn>);
+  m.def("prev", &pol3::prev_h, ref);
+  // m.def("remove_edge", &bgl::remove_edge_vv<Prn>);
+  // m.def("remove_edge", &bgl::remove_edge_e<Prn>);
+  // m.def("remove_face", &bgl::remove_face<Prn>);
+  // m.def("remove_vertex", &bgl::remove_vertex<Prn>);
+  m.def("source", &pol3::source_h, ref);
+  m.def("target", &pol3::target_h, ref);
+  // m.def("set_face", &bgl::set_face<Prn>);
+  // m.def("set_halfedge", &bgl::set_halfedge_vh<Prn>);
+  // m.def("set_halfedge", &bgl::set_halfedge_fh<Prn>);
+  // m.def("set_next", &bgl::set_next<Prn>);
+  // m.def("set_target", &bgl::set_target<Prn>);
+
+  // m.def("in_edges", &bgl::my_in_edges<Prn>);
+  // m.def("out_edges", &bgl::my_out_edges<Prn>);
+
+  // Generators
+  m.def("make_tetrahedron", &bgl::my_make_tetrahedron<Prn>);
 
   // using Edge_bool_tag = CGAL::dynamic_edge_property_t<bool>;
   // using ebmap_type = boost::property_map<Prn, Edge_bool_tag>::type;
@@ -773,19 +755,19 @@ void export_polyhedron_3(py::module_& m) {
   // using vbmap_type = boost::property_map<Prn, Vertex_bool_tag>::type;
 
   // Euler operations
-  // boost_utils::define_euler_operations<py::module_, Prn, ebmap_type>(m);
+  // bgl::define_euler_operations<py::module_, Prn, ebmap_type>(m);
 
   // Iterators and Circulators
-  // boost_utils::define_boost_iterators<py::module_, Prn>(m);
+  // bgl::define_boost_iterators<py::module_, Prn>(m);
 
   // // Selection Functions
-  // boost_utils::define_boost_selection_functions<py::module_, Prn, ebmap_type, fbmap_type, vbmap_type>(m);
+  // bgl::define_boost_selection_functions<py::module_, Prn, ebmap_type, fbmap_type, vbmap_type>(m);
 
   // Helper Functions
-  // boost_utils::define_boost_helpers<py::module_, Prn, Prn>(m);
+  // bgl::define_boost_helpers<py::module_, Prn, Prn>(m);
 
   // Generator Functions
-  // boost_utils::define_generate_functions<py::module_, Prn, Kernel>(m);
+  // bgl::define_generate_functions<py::module_, Prn, Kernel>(m);
 
   // Partitioning Operations
   // using EdgeDoubleMap =
@@ -794,7 +776,7 @@ void export_polyhedron_3(py::module_& m) {
   //   boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::vector<double>>>::type;
   // using VertexSizeTMap =
   //   boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>::type;
-  // boost_utils::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
+  // bgl::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
 
   // Halfedges around target circulator
   // We use the dereference circulator, because we need to dereference twice
