@@ -330,34 +330,32 @@ py::object incident_cells4(const Triangulation_3& tri, Cell& c, int i, int j,
 
 //! Facet circulators
 //!
-py::object incident_facets1(const Triangulation_3& tri, const Edge& e)
-{ return make_circulator(tri.incident_facets(e)); }
+auto incident_facets1(const Triangulation_3& tri, const Edge& e)
+{ return tri.incident_facets(e); }
 
 //!
-py::object incident_facets2(const Triangulation_3& tri, Cell& c, int i, int j)
-{ return make_circulator(tri.incident_facets(Cell_handle(&c), i, j)); }
+auto incident_facets2(const Triangulation_3& tri, Cell& c, int i, int j)
+{ return tri.incident_facets(Cell_handle(&c), i, j); }
 
 //!
-py::object incident_facets3(const Triangulation_3& tri, const Edge& e,
-                            const Facet& start)
-{ return make_circulator(tri.incident_facets(e, start)); }
+auto incident_facets3(const Triangulation_3& tri, const Edge& e,
+                      const Facet& start)
+{ return tri.incident_facets(e, start); }
 
 //!
-py::object incident_facets4(const Triangulation_3& tri, Cell& c, int i, int j,
-                            const Facet& start)
-{ return make_circulator(tri.incident_facets(Cell_handle(&c), i, j, start)); }
+auto incident_facets4(const Triangulation_3& tri, Cell& c, int i, int j,
+                      const Facet& start)
+{ return tri.incident_facets(Cell_handle(&c), i, j, start); }
 
 //!
-py::object incident_facets5(const Triangulation_3& tri, const Edge& e,
-                            Cell& start, int f)
-{ return make_circulator(tri.incident_facets(e, Cell_handle(&start), f)); }
+auto incident_facets5(const Triangulation_3& tri, const Edge& e,
+                      Cell& start, int f)
+{ return tri.incident_facets(e, Cell_handle(&start), f); }
 
 //!
-py::object incident_facets6(const Triangulation_3& tri, Cell& c, int i, int j,
-                            Cell& start, int f) {
-  return make_circulator(tri.incident_facets(Cell_handle(&c), i, j,
-                                             Cell_handle(&start), f));
-}
+auto incident_facets6(const Triangulation_3& tri, Cell& c, int i, int j,
+                      Cell& start, int f)
+{ return tri.incident_facets(Cell_handle(&c), i, j, Cell_handle(&start), f); }
 
 } // End of namespace tri3
 
@@ -544,15 +542,25 @@ void export_triangulation_3(py::module_& m) {
   using Cc = Tri::Cell_circulator;
   using Fc = Tri::Facet_circulator;
 
-  add_circulator<Cc>("Cell_circulator", tri_c);
-  add_circulator<Fc>("Facet_circulator", tri_c);
+  add_circulator<Cc, Cell&>("Cell_circulator", tri_c);
 
   tri_c.def("incident_cells", &tri3::incident_cells1, py::keep_alive<0, 1>())
     .def("incident_cells", &tri3::incident_cells2, py::keep_alive<0, 1>())
     .def("incident_cells", &tri3::incident_cells3, py::keep_alive<0, 1>())
     .def("incident_cells", &tri3::incident_cells4, py::keep_alive<0, 1>())
+    ;
 
-    .def("incident_facets", &tri3::incident_facets1, py::keep_alive<0, 1>())
+  if (! add_attr<Fc>(tri_c, "Facet_circulator")) {
+    py::class_<Fc>(tri_c, "Facet_circulator")
+      .def("next", [](Fc fc)->Fc { return ++fc; })
+      .def("prev", [](Fc fc)->Fc { return --fc; })
+      .def("size", [](Fc fc)->std::size_t { return CGAL::circulator_size(fc); })
+      .def("value", [](Fc fc)->Facet { return *fc; }, ri)
+      .def("__eq__", [](const Fc a, const Fc b) { return a == b; })
+      ;
+  }
+
+  tri_c.def("incident_facets", &tri3::incident_facets1, py::keep_alive<0, 1>())
     .def("incident_facets", &tri3::incident_facets2, py::keep_alive<0, 1>())
     .def("incident_facets", &tri3::incident_facets3, py::keep_alive<0, 1>())
     .def("incident_facets", &tri3::incident_facets4, py::keep_alive<0, 1>())
