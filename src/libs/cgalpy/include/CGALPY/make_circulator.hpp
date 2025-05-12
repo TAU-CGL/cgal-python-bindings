@@ -16,7 +16,8 @@
 
 namespace py = nanobind;
 
-//
+/*!
+ */
 template <py::rv_policy Policy,
           typename Circulator, typename ValueType,
           typename... Extra,
@@ -30,12 +31,12 @@ void add_circulator_impl(const char* name, C& c, Extra&&... extra) {
     .def("__iter__", [](state& s) -> state& { return s; }, ri)
     .def("__next__", [](state& s) -> ValueType { return *s.it++; },
       std::forward<Extra>(extra)..., Policy)
+    .def("next", [](state& s) -> ValueType { return *s.it++; },
+      std::forward<Extra>(extra)..., Policy)
     .def("prev", [](state& s) -> ValueType { return *s.it--; },
       std::forward<Extra>(extra)..., Policy)
     .def("size",
-         [](const state& s)->std::size_t {
-           return CGAL::circulator_size(s.it);
-         })
+         [](const state& s)->std::size_t { return CGAL::circulator_size(s.it); })
     ;
 }
 
@@ -66,12 +67,12 @@ void add_dereference_circulator_impl(const char* name, C& c, Extra&&... extra) {
     .def("__iter__", [](state& s) -> state& { return s; }, ri)
     .def("__next__", [](state& s) -> ValueType { return **s.it++; },
       std::forward<Extra>(extra)..., Policy)
-    .def("prev", [](state& s) -> ValueType { return **s.it++; },
+    .def("next", [](state& s) -> ValueType { return **s.it++; },
+      std::forward<Extra>(extra)..., Policy)
+    .def("prev", [](state& s) -> ValueType { return **s.it--; },
       std::forward<Extra>(extra)..., Policy)
     .def("size",
-         [](const state& s)->std::size_t {
-           return CGAL::circulator_size(s.it);
-         })
+         [](const state& s)->std::size_t { return CGAL::circulator_size(s.it); })
     ;
 }
 
