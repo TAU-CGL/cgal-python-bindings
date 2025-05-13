@@ -10,7 +10,10 @@
 
 #include <vector>
 
+#include <boost/iterator/function_output_iterator.hpp>
+
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/array.h>
 #include <nanobind/stl/tuple.h>
 
 #ifdef CGALPY_HAS_VISUAL
@@ -405,6 +408,82 @@ auto incident_facets_circulator6(const Triangulation_3& tri, Cell& c, int i, int
 
 //! @}
 
+//! @{
+/// Container returning functions
+
+//! \todo change py::list to narray
+
+//!
+auto adjacent_vertices(const Triangulation_3& tri, Vertex& v) {
+  py::list res;
+  auto op = [&] (const Vertex_handle vh) mutable { res.append(*vh); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tri.adjacent_vertices(Vertex_handle(&v), it);
+  return res;
+}
+
+//!
+auto finite_incident_cells(const Triangulation_3& tri, Vertex& v) {
+  py::list res;
+  auto op = [&] (const Cell_handle ch) mutable { res.append(*ch); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tri.finite_incident_cells(Vertex_handle(&v), it);
+  return res;
+}
+
+//!
+auto finite_incident_edges(const Triangulation_3& tri, Vertex& v) {
+  py::list res;
+  auto op = [&] (const Edge& e) mutable { res.append(e); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tri.finite_incident_edges(Vertex_handle(&v), it);
+  return res;
+}
+
+//!
+auto finite_incident_facets(const Triangulation_3& tri, Vertex& v) {
+  py::list res;
+  auto op = [&] (const Facet& f) mutable { res.append(f); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tri.finite_incident_facets(Vertex_handle(&v), it);
+  return res;
+}
+
+//!
+auto finite_adjacent_vertices(const Triangulation_3& tri, Vertex& v) {
+  py::list res;
+  auto op = [&] (const Vertex_handle vh) mutable { res.append(*vh); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tri.finite_adjacent_vertices(Vertex_handle(&v), it);
+  return res;
+}
+
+//!
+auto vertices1(const Triangulation_3& tri, const Edge& e) {
+  py::list res;
+  auto vhs = tri.vertices(e);
+  for (auto vh : vhs) res.append(*vh);
+  return res;
+}
+
+//!
+auto vertices2(const Triangulation_3& tri, const Facet& f) {
+  py::list res;
+  auto vhs = tri.vertices(f);
+  for (auto vh : vhs) res.append(*vh);
+  return res;
+}
+
+//!
+auto vertices3(const Triangulation_3& tri, Cell& c) {
+  py::list res;
+  auto vhs = tri.vertices(Cell_handle(&c));
+  for (auto vh : vhs) res.append(*vh);
+  return res;
+}
+
+//! @}
+
 } // End of namespace tri3
 
 //
@@ -621,6 +700,17 @@ void export_triangulation_3(py::module_& m) {
     .def("incident_facets_circulator", &tri3::incident_facets_circulator4, py::keep_alive<0, 1>())
     .def("incident_facets_circulator", &tri3::incident_facets_circulator5, py::keep_alive<0, 1>())
     .def("incident_facets_circulator", &tri3::incident_facets_circulator6, py::keep_alive<0, 1>())
+    ;
+
+  // Container returning functions
+  tri_c.def("adjacent_vertices", &tri3::adjacent_vertices)
+    .def("finite_incident_cells", &tri3::finite_incident_cells)
+    .def("finite_incident_edges", &tri3::finite_incident_edges)
+    .def("finite_incident_facets", &tri3::finite_incident_facets)
+    .def("finite_adjacent_vertices", &tri3::finite_adjacent_vertices)
+    .def("vertices", &tri3::vertices1)
+    .def("vertices", &tri3::vertices2)
+    .def("vertices", &tri3::vertices3)
     ;
 
 #ifdef CGALPY_HAS_VISUAL
