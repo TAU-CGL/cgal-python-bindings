@@ -40,17 +40,54 @@ namespace py = nanobind;
 
 namespace tri3 {
 
-//!
+//! Determines whether two facets have the same vertices
 bool are_equal1(const Triangulation_3& tri, Cell& c, int i, Cell& n, int j)
 { return tri.are_equal(Cell_handle(&c), i, Cell_handle(&n), j); }
 
-//!
+//! Determines whether two facets have the same vertices
 bool are_equal2(const Triangulation_3& tri, const Facet& f, Cell& n, int j)
 { return tri.are_equal(f, Cell_handle(&n), j); }
 
 //!
 size_type degree(const Triangulation_3& tri, Vertex& v)
 { return tri.degree(Vertex_handle(&v)); }
+
+/// Flipers
+/// @{
+
+bool flip1(Triangulation_3& tri, Cell& c, int i) { return tri.flip(Cell_handle(&c), i); }
+bool flip2(Triangulation_3& tri, Cell& c, int i, int j) { return tri.flip(Cell_handle(&c), i, j); }
+void flip_flippable1(Triangulation_3& tri, Cell& c, int i) { tri.flip_flippable(Cell_handle(&c), i); }
+void flip_flippable2(Triangulation_3& tri, Cell& c, int i, int j) { tri.flip_flippable(Cell_handle(&c), i, j); }
+
+/// @}
+
+/// Vertex existance predicates
+/// @{
+
+//!
+auto has_vertex1(const Triangulation_3& tri, const Facet& f, Vertex& v)
+{ return tri.has_vertex(f, Vertex_handle(&v)); }
+
+//!
+auto has_vertex2(const Triangulation_3& tri, Cell& c, int i, Vertex& v)
+{ return tri.has_vertex(Cell_handle(&c), i, Vertex_handle(&v)); }
+
+//!
+auto has_vertex3(const Triangulation_3& tri, const Facet& f, Vertex& v) {
+  int j;
+  auto res = tri.has_vertex(f, Vertex_handle(&v), j);
+  return (res) ? py::make_tuple(true, j) : py::make_tuple(false);
+}
+
+//!
+auto has_vertex4(const Triangulation_3& tri, Cell& c, int i, Vertex& v) {
+  int j;
+  auto res = tri.has_vertex(Cell_handle(&c), i, Vertex_handle(&v), j);
+  return (res) ? py::make_tuple(true, j) : py::make_tuple(false);
+}
+
+/// @}
 
 //!
 void tri3_init(tri3::Triangulation_3* tri, py::list& lst) {
@@ -143,7 +180,7 @@ Cell& locate3(const Triangulation_3& tri, const Point& query, Vertex& hint) {
  * `reference_internal` to a specific object inside a tuple, we need to manually
  * py::cast it with the policy we want.
  *
- * When you specifying `py::rv_policy::reference_internal`, we must provide the
+ * When specifying `py::rv_policy::reference_internal`, we must provide the
  * "parent" Python object as an argument to `py::cast()`.  Otherwise, nanobind
  * throws `std::bad_cast` at runtime, because it can't set up the ownership
  * properly. Therefore, we bind the method with self, you pass self itself as
@@ -179,21 +216,21 @@ py::object locate_face(py::handle self, const Point& query) {
 template <typename Handle_>
 const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
 
-//
-py::object all_vertices(const Triangulation_3& tri)
-{ return make_iterator(tri.all_vertices_begin(), tri.all_vertices_end()); }
-
-//
-py::object all_edges(const Triangulation_3& tri)
-{ return make_iterator(tri.all_edges_begin(), tri.all_edges_end()); }
-
-//
+//!
 py::object all_cells(const Triangulation_3& tri)
 { return make_iterator(tri.all_cells_begin(), tri.all_cells_end()); }
 
-//
+//!
+py::object all_edges(const Triangulation_3& tri)
+{ return make_iterator(tri.all_edges_begin(), tri.all_edges_end()); }
+
+//!
 py::object all_facets(const Triangulation_3& tri)
 { return make_iterator(tri.all_facets_begin(), tri.all_facets_end()); }
+
+//!
+py::object all_vertices(const Triangulation_3& tri)
+{ return make_iterator(tri.all_vertices_begin(), tri.all_vertices_end()); }
 
 //
 py::object finite_vertices(const Triangulation_3& tri)
@@ -217,7 +254,7 @@ py::object points(const Triangulation_3& tri)
 
 //!
 py::object segment_traverser_cells1(const Triangulation_3& tri,
-                                   const Point_3& ps, const Point& pt) {
+                                    const Point_3& ps, const Point& pt) {
   return make_iterator(tri.segment_traverser_cells_begin(ps, pt),
                        tri.segment_traverser_cells_end());
 }
@@ -226,8 +263,7 @@ py::object segment_traverser_cells1(const Triangulation_3& tri,
 py::object segment_traverser_cells2(const Triangulation_3& tri,
                                    const Point_3& ps, const Point& pt,
                                    Cell& hint) {
-  return make_iterator(tri.segment_traverser_cells_begin(ps, pt,
-                                                         Cell_handle(&hint)),
+  return make_iterator(tri.segment_traverser_cells_begin(ps, pt, Cell_handle(&hint)),
                        tri.segment_traverser_cells_end());
 }
 
@@ -236,8 +272,7 @@ bool is_cell1(const Triangulation_3& tri, Cell& c)
 { return tri.is_cell(Cell_handle(&c)); }
 
 //!
-py::tuple is_cell2(const Triangulation_3& tri, Vertex& u, Vertex& v,
-                   Vertex& w, Vertex& x) {
+py::tuple is_cell2(const Triangulation_3& tri, Vertex& u, Vertex& v, Vertex& w, Vertex& x) {
   Cell_handle ch;
   auto res = tri.is_cell(Vertex_handle(&u), Vertex_handle(&v),
                          Vertex_handle(&w), Vertex_handle(&x), ch);
@@ -489,9 +524,12 @@ auto vertices3(const Triangulation_3& tri, Cell& c) {
 //
 void export_triangulation_3(py::module_& m) {
   using Tri = tri3::Triangulation_3;
+  using Edge = tri3::Edge;
+  using Cell = tri3::Cell;
+  using Face = tri3::Facet;
+  using Facet = tri3::Facet;
   using Pnt = tri3::Point;
   using Vertex = tri3::Vertex;
-  using Facet = tri3::Facet;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -502,13 +540,44 @@ void export_triangulation_3(py::module_& m) {
     .def(py::init<const tri3::Traits&>())
     .def("__init__", &tri3::tri3_init)
     .def("are_equal",
-         py::overload_cast<const Facet&, const Facet&>(&Tri::are_equal, py::const_))
-    .def("are_equal", tri3::are_equal1)
-    .def("are_equal", tri3::are_equal2)
-    .def("clear", &Tri::clear)
-    .def("degree", &tri3::degree)
-    .def("dimension", &Tri::dimension)
+         py::overload_cast<const Facet&, const Facet&>(&Tri::are_equal, py::const_),
+         "determines whether two facets have the same vertices")
+    .def("are_equal", tri3::are_equal1,
+         "determines whether two facets have the same vertices")
+    .def("are_equal", tri3::are_equal2,
+         "determines whether two facets have the same vertices")
+    .def("clear", &Tri::clear, "deletes all finite vertices and all cells")
+    .def("degree", &tri3::degree,
+         "obtains the degree of a vertex, that is, the number of incident vertices\n\
+          The infinite vertex is counted")
+    .def("dimension", &Tri::dimension, "obtains the dimension of the affine hull")
 
+    // Flip
+    .def("flip", py::overload_cast<const Edge&>(&Tri::flip),
+         "checks whether a given edge is flipapble; if so flips it")
+    .def("flip", py::overload_cast<const Facet&>(&Tri::flip),
+         "checks whether a given facet is flipapble; if so flips it")
+    .def("flip", &tri3::flip1,
+         "determines whether a given edge is flipapble; if so flips it")
+    .def("flip", &tri3::flip2,
+         "determines whether a given facet is flipapble; if so flips it")
+    .def("flip_flippable", py::overload_cast<const Edge&>(&Tri::flip_flippable), "flips an edge")
+    .def("flip_flippable", py::overload_cast<const Facet&>(&Tri::flip_flippable), "flips a facets")
+    .def("flip_flippable", &tri3::flip_flippable1, "flips an edge")
+    .def("flip_flippable", &tri3::flip_flippable1, "flips a facets")
+
+    // Geometry traits
+    .def("geom_traits", &Tri::geom_traits, ri)
+
+    // Has vertex
+    .def("has_vertex", &tri3::has_vertex1, "determines whether a facet has a vertex")
+    .def("has_vertex", &tri3::has_vertex2, "determines whether a facet has a vertex")
+    .def("has_vertex", &tri3::has_vertex3,
+         "determines whether a facet has a vertex; if so returns a tuple where the second object is the vertex index")
+    .def("has_vertex", &tri3::has_vertex4,
+         "determines whether a facet has a vertex; if so returns a tuple where the second object is the vertex index")
+
+    // Quantifiers
     .def("number_of_cells", &Tri::number_of_cells)
     .def("number_of_edges", &Tri::number_of_edges)
     .def("number_of_facets", &Tri::number_of_facets)
@@ -518,7 +587,6 @@ void export_triangulation_3(py::module_& m) {
     .def("number_of_vertices", &Tri::number_of_vertices)
 
     // Insertion
-
     .def("insert", &tri3::insert1, ri)
     .def("insert", &tri3::insert2, ri)
     .def("insert", &tri3::insert3, ri)
@@ -553,9 +621,9 @@ void export_triangulation_3(py::module_& m) {
     .def("is_infinite", &tri3::is_infinite2)
     .def("is_infinite", &tri3::is_infinite3)
     .def("is_infinite",
-         py::overload_cast<const tri3::Edge&>(&Tri::is_infinite, py::const_))
+         py::overload_cast<const Edge&>(&Tri::is_infinite, py::const_))
     .def("is_infinite",
-         py::overload_cast<const tri3::Facet&>(&Tri::is_infinite, py::const_))
+         py::overload_cast<const Facet&>(&Tri::is_infinite, py::const_))
     .def("is_infinite", &tri3::is_infinite6)
     .def("is_valid",
          py::overload_cast<bool, int>(&Tri::is_valid, py::const_),
@@ -593,15 +661,15 @@ void export_triangulation_3(py::module_& m) {
   export_tri3_vertex(tri_c);
   export_tri3_cell(tri_c);
 
-  py::class_<tri3::Facet>(tri_c, "Facet")
-    .def("cell", [](tri3::Facet& f)->tri3::Cell& { return *(f.first); } , ri)
-    .def_rw("index", &tri3::Facet::second)
+  py::class_<Facet>(tri_c, "Facet")
+    .def("cell", [](Facet& f)->tri3::Cell& { return *(f.first); } , ri)
+    .def_rw("index", &Facet::second)
     ;
 
-  py::class_<tri3::Edge>(tri_c, "Edge")
-    .def("cell", [](tri3::Edge& e)->tri3::Cell& { return *(e.first); } , ri)
-    .def_rw("start_index", &tri3::Edge::second)
-    .def_rw("end_index", &tri3::Edge::third)
+  py::class_<Edge>(tri_c, "Edge")
+    .def("cell", [](Edge& e)->tri3::Cell& { return *(e.first); } , ri)
+    .def_rw("start_index", &Edge::second)
+    .def_rw("end_index", &Edge::third)
     ;
 
   // Do not wrap handles!
@@ -628,13 +696,6 @@ void export_triangulation_3(py::module_& m) {
 
   using Sci = Tri::Segment_cell_iterator;
 
-  using Vertex = Tri::Vertex;
-  using Edge = Tri::Vertex;
-  using Cell = Tri::Cell;
-  using Face = Tri::Facet;
-
-  using Point = Tri::Point;
-
   // Iterators
   add_iterator<Avi, Avi, const Vertex&>("All_vertices_iterator", tri_c);
   add_iterator<Aei, Aei>("All_edges_iterator", tri_c);
@@ -646,18 +707,28 @@ void export_triangulation_3(py::module_& m) {
   add_iterator<Fci, Fci, const Cell&>("Finite_cells_iterator", tri_c);
   add_iterator<Ffi, Ffi, const Face&>("Finite_facets_iterator", tri_c);
 
-  add_iterator<Pi, Pi, const Point&>("Point_iterator", tri_c);
+  add_iterator<Pi, Pi, const Pnt&>("Point_iterator", tri_c);
 
   add_iterator<Sci, Sci, const Cell&>("Segment_cell_iterator", tri_c);
 
-  tri_c.def("all_vertices", &tri3::all_vertices, py::keep_alive<0, 1>())
-    .def("all_edges", &tri3::all_edges, py::keep_alive<0, 1>())
-    .def("all_cells", &tri3::all_cells, py::keep_alive<0, 1>())
-    .def("all_facets", &tri3::all_facets, py::keep_alive<0, 1>())
-    .def("finite_vertices", &tri3::finite_vertices, py::keep_alive<0, 1>())
-    .def("finite_edges", &tri3::finite_edges, py::keep_alive<0, 1>())
-    .def("finite_cells", &tri3::finite_cells, py::keep_alive<0, 1>())
-    .def("finite_facets", &tri3::finite_facets, py::keep_alive<0, 1>())
+  tri_c.def("all_cells", &tri3::all_cells, py::keep_alive<0, 1>(),
+            "obtains an iterator that traverses all cells")
+    .def("all_edges", &tri3::all_edges, py::keep_alive<0, 1>(),
+         "obtains an iterator that traverses all edges")
+    .def("all_facets", &tri3::all_facets, py::keep_alive<0, 1>(),
+         "obtains an iterator that traverses all facets")
+    .def("all_vertices", &tri3::all_vertices, py::keep_alive<0, 1>(),
+         "obtains an iterator that traverses all vertices")
+
+    .def("finite_cells", &tri3::finite_cells, py::keep_alive<0, 1>(),
+         "obtains an iterator that traverses all finite cells")
+    .def("finite_edges", &tri3::finite_edges, py::keep_alive<0, 1>(),
+         "obtains an iterator that traverses all finite edges")
+    .def("finite_facets", &tri3::finite_facets, py::keep_alive<0, 1>(),
+         "obtains an iterator that traverses all finite facets")
+    .def("finite_vertices", &tri3::finite_vertices, py::keep_alive<0, 1>(),
+         "obtains an iterator that traverses all finite vertices")
+
     .def("points", &tri3::points, py::keep_alive<0, 1>())
     .def("segment_traverser_cells", &tri3::segment_traverser_cells1,
          py::keep_alive<0, 1>())
@@ -703,11 +774,16 @@ void export_triangulation_3(py::module_& m) {
     ;
 
   // Container returning functions
-  tri_c.def("adjacent_vertices", &tri3::adjacent_vertices)
-    .def("finite_incident_cells", &tri3::finite_incident_cells)
-    .def("finite_incident_edges", &tri3::finite_incident_edges)
-    .def("finite_incident_facets", &tri3::finite_incident_facets)
-    .def("finite_adjacent_vertices", &tri3::finite_adjacent_vertices)
+  tri_c.def("adjacent_vertices", &tri3::adjacent_vertices,
+            "obtains the vertices adjacent to given vertex")
+    .def("finite_incident_cells", &tri3::finite_incident_cells,
+         "obtains the finite cells incident to given vertex")
+    .def("finite_incident_edges", &tri3::finite_incident_edges,
+         "obtains the finite edges incident to given vertex")
+    .def("finite_incident_facets", &tri3::finite_incident_facets,
+         "obtains the finite facets incident to given vertex")
+    .def("finite_adjacent_vertices", &tri3::finite_adjacent_vertices,
+         "obtains the finite vertices adjacent to given vertex")
     .def("vertices", &tri3::vertices1)
     .def("vertices", &tri3::vertices2)
     .def("vertices", &tri3::vertices3)
