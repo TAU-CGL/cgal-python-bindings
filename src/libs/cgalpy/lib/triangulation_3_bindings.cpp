@@ -1260,6 +1260,16 @@ void export_triangulation_3(py::module_& m) {
          "  tuple[ON_BOUNDARY, Locate_type.VERTEX, i], if p coincides with the vertex (c, i) on the boundary of f\n"
          "  ON_UNBOUNDED_SIDE\n, if p is outside of f")
     // .def("side_of_facet", )
+
+    // Misc.
+    .def("swap", &Tri::swap, py::arg("tri"),
+         "Swap a given triangulation and this triangulation\n"
+         "Parameters:\n"
+         "  tri (Triangulation_3) The triangulation to swap with\n")
+    // set_infinite_vertex
+    // set_lock_data_structure
+    // try_lock_and_get_incident_cells
+    // tds
     ;
 
   using Avi = Tri::All_vertices_iterator;
@@ -1309,11 +1319,21 @@ void export_triangulation_3(py::module_& m) {
     .def("finite_vertices", &tri3::finite_vertices, py::keep_alive<0, 1>(),
          "Obtain an iterator that traverses all finite vertices")
 
-    .def("points", &tri3::points, py::keep_alive<0, 1>())
-    .def("segment_traverser_cells", &tri3::segment_traverser_cells1,
-         py::keep_alive<0, 1>())
-    .def("segment_traverser_cells", &tri3::segment_traverser_cells2,
-         py::keep_alive<0, 1>())
+    .def("points", &tri3::points, py::keep_alive<0, 1>(),
+         "Obtain an iterator that traverses all points\n")
+
+    .def("segment_traverser_cells", &tri3::segment_traverser_cells1, py::keep_alive<0, 1>(),
+         py::arg("ps"), py::arg("pt"),
+         "Obtain an iterator that traverses all cells intersected by a represented line segment\n"
+         "Parameters:\n"
+         "  ps (Point_3): Together with pt represents a line segment\n"
+         "  pt (Point_3)\n")
+    .def("segment_traverser_cells", &tri3::segment_traverser_cells2, py::keep_alive<0, 1>(),
+         py::arg("ps"), py::arg("pt"), py::arg("hint"),
+         "Obtain an iterator that traverses all cells intersected by a represented line segment\n"
+         "Parameters:\n"
+         "  ps (Point_3): Together with pt represents a line segment\n"
+         "  pt (Point_3)\n")
     ;
 
   // Iterators
@@ -1406,19 +1426,12 @@ void export_triangulation_3(py::module_& m) {
 
   // Todo
   // Simplex;
-
-  // Facet_iterator;
-  // Cell_iterator;
   // Segment_simplex_iterator;
-
   // template<class PointWithInfoInputIterator >
   // std::ptrdiff_t insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
 
   // template<typename InputIterator >
   // int remove (InputIterator first, InputIterator beyond)
-
-  // template<typename InputIterator >
-  // int remove_cluster (InputIterator first, InputIterator beyond)
 
   add_insertion(tri_c, "__str__");
   add_insertion(tri_c, "__repr__");
