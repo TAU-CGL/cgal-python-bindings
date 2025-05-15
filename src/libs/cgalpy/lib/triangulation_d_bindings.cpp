@@ -12,40 +12,14 @@
 #include <nanobind/stl/tuple.h>
 #include <nanobind/stl/pair.h>
 
-#include "CGALPY/types.hpp"
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/make_iterator.hpp"
 #include "CGALPY/triangulation_d_types.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_dereference_input_iterator.hpp"
+#include "CGALPY/types.hpp"
 
 namespace py = nanobind;
-
-//
-template <typename T>
-struct stl_dereference_input_iterator :
-  boost::iterator_facade<stl_input_iterator<T>, T, std::forward_iterator_tag, T> {
-
-  // Default constructor.
-  // Workaround the lack of default constructor for py::detail::fast_iterator.
-  // stl_dereference_input_iterator() {}
-  stl_dereference_input_iterator() : m_it(py::list().end()) {}
-
-  stl_dereference_input_iterator(const py::list& lst, bool isbegin = true) :
-    m_it((isbegin) ? lst.begin() : lst.end())
-  {}
-
-  void increment() { ++m_it; }
-  T dereference() const {
-    auto& tmp = *m_it;
-    return py::cast<T>(T(&tmp));
-  }
-
-  bool equal(stl_input_iterator<T> const& o) const { return m_it == o.m_it; }
-
-private:
-  py::detail::fast_iterator m_it;
-};
 
 namespace trid {
 

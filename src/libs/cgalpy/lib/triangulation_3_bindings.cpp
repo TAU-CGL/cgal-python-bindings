@@ -29,6 +29,7 @@
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/make_circulator.hpp"
+#include "CGALPY/stl_dereference_input_iterator.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/types.hpp"
@@ -156,17 +157,24 @@ Vertex& insert_in_facet(Triangulation_3& tri, const Point& p, const Facet& f) {
 
 //!
 Vertex& insert_in_hole1(Triangulation_3& tri, const Point& p, py::list& cells, Cell& start, int i) {
-  auto begin = stl_input_iterator<Cell_handle>(cells);
-  auto end = stl_input_iterator<Cell_handle>(cells, false);
+#if 1
+  auto begin = stl_dereference_input_iterator<Cell_handle, Cell>(cells);
+  auto end = stl_dereference_input_iterator<Cell_handle, Cell>(cells, false);
   auto vh = tri.insert_in_hole(p, begin, end, Cell_handle(&start), i);
+#else
+  std::vector<Cell_handle> chs(cells.size());
+  for (auto i = 0; i < cells.size(); ++i)
+    chs[i] = Cell_handle(py::cast<Cell*>(cells[i]));
+  auto vh = tri.insert_in_hole(p, chs.begin(), chs.end(), Cell_handle(&     53 start), i);
+#endif
   return *vh;
 }
 
 //!
 Vertex& insert_in_hole2(Triangulation_3& tri, const Point& p, py::list& cells, Cell& start, int i, Vertex& newv) {
-  auto begin = stl_input_iterator<Cell_handle>(cells);
-  auto end = stl_input_iterator<Cell_handle>(cells, false);
-  auto vh = tri.insert_in_hole(p, begin, end, Cell_handle(&start), i);
+  auto begin = stl_dereference_input_iterator<Cell_handle>(cells);
+  auto end = stl_dereference_input_iterator<Cell_handle>(cells, false);
+  auto vh = tri.insert_in_hole(p, begin, end, Cell_handle(&start), i, Vertex_handle(&newv));
   return *vh;
 }
 
@@ -581,15 +589,6 @@ void export_triangulation_3(py::module_& m) {
 
   if (add_attr<Tri>(m, "Triangulation_3")) return;
 
-  // template<class PointWithInfoInputIterator >
-  // std::ptrdiff_t insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
-
-  // template<typename InputIterator >
-  // int remove (InputIterator first, InputIterator beyond)
-
-  // template<typename InputIterator >
-  // int remove_cluster (InputIterator first, InputIterator beyond)
-
   py::class_<Tri> tri_c(m, "Triangulation_3");
 
   // Locate type
@@ -663,7 +662,7 @@ void export_triangulation_3(py::module_& m) {
          "The infinite vertex is counted"
          "Parameters:\n"
          " v: the vertex\n")
-    .def("dimension", &Tri::dimension, "obtains the dimension of the affine hull\n")
+    .def("dimension", &Tri::dimension, "Obtain the dimension of the affine hull\n")
 
     // Flip
     .def("flip", py::overload_cast<const Edge&>(&Tri::flip),
@@ -888,9 +887,25 @@ void export_triangulation_3(py::module_& m) {
          "  x (Vertex)\n"
          "Return:\n"
          "  tuple[bool, Cell, int, int, int, int]: If the cell does not belong to the triangulation, return False;\n"
-         "  otherwise, return tuple (True, C, i, j, k, l)\n")
-    .def("is_edge", &tri3::is_edge)
-    .def("is_facet", &tri3::is_facet)
+         "  otherwise, return tuple (True, c, i, j, k, l), where c is the cell and i, j, k, and l are the indices of the vertices u, v, w, and x, respectively, in c\n")
+    .def("is_edge", &tri3::is_edge,
+         py::arg("u"), py::arg("v"),
+         "Determine whether a represented edge belongs to the triangulation\n"
+         "Parameters:\n"
+         "  u (Vertex): together with v represent the edge\n"
+         "Return:\n"
+         "  tuple[bool, Cell, int, int]: If the edgedoes not belong to the triangulation, return False;\n"
+         "  otherwise, return tuple (True, c, i, j), where c is the containing cell and i and, j are the indices of the vertices u and v, respectively, in c\n")
+    .def("is_facet", &tri3::is_facet,
+         py::arg("u"), py::arg("v"), py::arg("w"),
+         "Determine whether a represented facet belongs to the triangulation\n"
+         "Parameters:\n"
+         "  u (Vertex): together with v and w represent the facet\n"
+         "  v (vertex)\n"
+         "  w (vertex)\n"
+         "Return:\n"
+         "  tuple[bool, Cell, int, int, int]: If the facet does not belong to the triangulation, return False;\n"
+         "  otherwise, return tuple (True, c, i, j, k), where c is the containing cell and i, j, and k are the indices of the vertices u, v, and w, respectively, in c\n")
     .def("is_infinite", &tri3::is_infinite1)
     .def("is_infinite", &tri3::is_infinite2)
     .def("is_infinite", &tri3::is_infinite3)
@@ -952,22 +967,22 @@ void export_triangulation_3(py::module_& m) {
   add_iterator<Sci, Sci, const Cell&>("Segment_cell_iterator", tri_c);
 
   tri_c.def("all_cells", &tri3::all_cells, py::keep_alive<0, 1>(),
-            "obtains an iterator that traverses all cells")
+            "Obtain an iterator that traverses all cells")
     .def("all_edges", &tri3::all_edges, py::keep_alive<0, 1>(),
-         "obtains an iterator that traverses all edges")
+         "Obtain an iterator that traverses all edges")
     .def("all_facets", &tri3::all_facets, py::keep_alive<0, 1>(),
-         "obtains an iterator that traverses all facets")
+         "Obtain an iterator that traverses all facets")
     .def("all_vertices", &tri3::all_vertices, py::keep_alive<0, 1>(),
-         "obtains an iterator that traverses all vertices")
+         "Obtain an iterator that traverses all vertices")
 
     .def("finite_cells", &tri3::finite_cells, py::keep_alive<0, 1>(),
-         "obtains an iterator that traverses all finite cells")
+         "Obtain an iterator that traverses all finite cells")
     .def("finite_edges", &tri3::finite_edges, py::keep_alive<0, 1>(),
-         "obtains an iterator that traverses all finite edges")
+         "Obtain an iterator that traverses all finite edges")
     .def("finite_facets", &tri3::finite_facets, py::keep_alive<0, 1>(),
-         "obtains an iterator that traverses all finite facets")
+         "Obtain an iterator that traverses all finite facets")
     .def("finite_vertices", &tri3::finite_vertices, py::keep_alive<0, 1>(),
-         "obtains an iterator that traverses all finite vertices")
+         "Obtain an iterator that traverses all finite vertices")
 
     .def("points", &tri3::points, py::keep_alive<0, 1>())
     .def("segment_traverser_cells", &tri3::segment_traverser_cells1,
@@ -982,70 +997,70 @@ void export_triangulation_3(py::module_& m) {
 
   add_iterator_from_circulator<Cc>("Cell_iterator", tri_c);
   tri_c.def("incident_cells", &tri3::incident_cells1, py::keep_alive<0, 1>(),
-            "traverses all cells or all facets incident to a given edge")
+            "Traverse all cells or all facets incident to a given edge")
     .def("incident_cells", &tri3::incident_cells2, py::keep_alive<0, 1>(),
-         "traverses all cells or all facets incident to a given edge")
+         "Traverse all cells or all facets incident to a given edge")
     .def("incident_cells", &tri3::incident_cells3, py::keep_alive<0, 1>(),
-         "traverses all cells or all facets incident to a given edge starting at a given cell")
+         "Traverse all cells or all facets incident to a given edge starting at a given cell")
     .def("incident_cells", &tri3::incident_cells4, py::keep_alive<0, 1>(),
-         "traverses all cells or all facets incident to a given edge starting at a given cell")
+         "Traverse all cells or all facets incident to a given edge starting at a given cell")
     ;
 
   add_iterator_from_circulator<Fc>("Facet_iterator", tri_c);
   tri_c.def("incident_facets", &tri3::incident_facets1, py::keep_alive<0, 1>(),
-            "traverses all facets incident to a given edge")
+            "Traverse all facets incident to a given edge")
     .def("incident_facets", &tri3::incident_facets2, py::keep_alive<0, 1>(),
-            "traverses all facets incident to a given edge")
+            "Traverse all facets incident to a given edge")
     .def("incident_facets", &tri3::incident_facets3, py::keep_alive<0, 1>(),
-            "traverses all facets incident to a given edge starting at a given facet")
+            "Traverse all facets incident to a given edge starting at a given facet")
     .def("incident_facets", &tri3::incident_facets4, py::keep_alive<0, 1>(),
-            "traverses all facets incident to a given edge starting at a given facet")
+            "Traverse all facets incident to a given edge starting at a given facet")
     .def("incident_facets", &tri3::incident_facets5, py::keep_alive<0, 1>(),
-            "traverses all facets incident to a given edge starting at a given facet")
+            "Traverse all facets incident to a given edge starting at a given facet")
     .def("incident_facets", &tri3::incident_facets6, py::keep_alive<0, 1>(),
-            "traverses all facets incident to a given edge starting at a given facet")
+            "Traverse all facets incident to a given edge starting at a given facet")
     ;
 
   // Circulators
   export_circulator<Fc>(tri_c, "Facet_circulator");
   tri_c.def("incident_cells_circulator", &tri3::incident_cells_circulator1, py::keep_alive<0, 1>(),
-            "circulates through all cells or all facets incident to a given edge")
+            "Circulate through all cells or all facets incident to a given edge")
     .def("incident_cells_circulator", &tri3::incident_cells_circulator2, py::keep_alive<0, 1>(),
-            "circulates through all cells or all facets incident to a given edge")
+            "Circulate through all cells or all facets incident to a given edge")
     .def("incident_cells_circulator", &tri3::incident_cells_circulator3, py::keep_alive<0, 1>(),
-            "circulates through all cells or all facets incident to a given edge starting at a given cell")
+            "Circulate through all cells or all facets incident to a given edge starting at a given cell")
     .def("incident_cells_circulator", &tri3::incident_cells_circulator4, py::keep_alive<0, 1>(),
-            "circulates through all cells or all facets incident to a given edge starting at a given cell")
+            "Circulate through all cells or all facets incident to a given edge starting at a given cell")
     ;
 
   export_circulator<Cc>(tri_c, "Cell_circulator");
   tri_c.def("incident_facets_circulator", &tri3::incident_facets_circulator1, py::keep_alive<0, 1>(),
-            "circulates through all facets incident to a given edge")
+            "Circulate through all facets incident to a given edge")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator2, py::keep_alive<0, 1>(),
-            "circulates through all facets incident to a given edge")
+            "Circulate through all facets incident to a given edge")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator3, py::keep_alive<0, 1>(),
-            "circulates through all facets incident to a given edge starting at a given facet")
+            "Circulate through all facets incident to a given edge starting at a given facet")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator4, py::keep_alive<0, 1>(),
-            "circulates through all facets incident to a given edge starting at a given facet")
+            "Circulate through all facets incident to a given edge starting at a given facet")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator5, py::keep_alive<0, 1>(),
-            "circulates through all facets incident to a given edge starting at a given facet")
+            "Circulate through all facets incident to a given edge starting at a given facet")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator6, py::keep_alive<0, 1>(),
-            "circulates through all facets incident to a given edge starting at a given facet")
+            "Circulate through all facets incident to a given edge starting at a given facet")
     ;
 
   // Container returning functions
   tri_c.def("adjacent_vertices", &tri3::adjacent_vertices,
-            "obtains the vertices adjacent to given vertex")
+            "Obtain the vertices adjacent to given vertex")
     .def("finite_incident_cells", &tri3::finite_incident_cells,
-         "obtains the finite cells incident to given vertex")
+         "Obtain the finite cells incident to given vertex")
     .def("finite_incident_edges", &tri3::finite_incident_edges,
-         "obtains the finite edges incident to given vertex")
+         "Obtain the finite edges incident to given vertex")
     .def("finite_incident_facets", &tri3::finite_incident_facets,
-         "obtains the finite facets incident to given vertex")
+         "Obtain the finite facets incident to given vertex")
     .def("finite_adjacent_vertices", &tri3::finite_adjacent_vertices,
-         "obtains the finite vertices adjacent to given vertex")
+         "Obtain the finite vertices adjacent to given vertex")
     .def("incident_edges", &tri3::incident_edges,
-         "obtains the edges incident to given vertex")
+         "Obtain the edges incident to given vertex")
     .def("vertices", &tri3::vertices1)
     .def("vertices", &tri3::vertices2)
     .def("vertices", &tri3::vertices3)
@@ -1070,6 +1085,15 @@ void export_triangulation_3(py::module_& m) {
   // Facet_iterator;
   // Cell_iterator;
   // Segment_simplex_iterator;
+
+  // template<class PointWithInfoInputIterator >
+  // std::ptrdiff_t insert (PointWithInfoInputIterator first, PointWithInfoInputIterator last)
+
+  // template<typename InputIterator >
+  // int remove (InputIterator first, InputIterator beyond)
+
+  // template<typename InputIterator >
+  // int remove_cluster (InputIterator first, InputIterator beyond)
 
   add_insertion(tri_c, "__str__");
   add_insertion(tri_c, "__repr__");
