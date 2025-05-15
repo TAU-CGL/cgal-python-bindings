@@ -279,7 +279,6 @@ Cell& locate1(const Triangulation_3& tri, const Point& query) {
 
 //!
 Cell& locate2(const Triangulation_3& tri, const Point& query, Cell& start) {
-
   auto ch = tri.locate(query, Cell_handle(&start));
   return *ch;
 }
@@ -288,6 +287,29 @@ Cell& locate2(const Triangulation_3& tri, const Point& query, Cell& start) {
 Cell& locate3(const Triangulation_3& tri, const Point& query, Vertex& hint) {
   auto ch = tri.locate(query, Vertex_handle(&hint));
   return *ch;
+}
+
+//!
+py::object locate_dispatch(py::handle self, Cell_handle ch, Locate_type lt, int li, int lj) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  Cell& c = *ch;
+  switch (lt) {
+   case Triangulation_3::FACET:
+   case Triangulation_3::VERTEX:
+    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li));
+
+   case Triangulation_3::EDGE:
+    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li),
+                          py::int_(lj));
+
+   case Triangulation_3::CELL:
+   case Triangulation_3::OUTSIDE_CONVEX_HULL:
+    return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
+  }
+
+  throw std::runtime_error("Invalid location type");
+  return py::none();
 }
 
 /*! We want to return a Python tuple of variable length. One element of the
@@ -308,33 +330,120 @@ Cell& locate3(const Triangulation_3& tri, const Point& query, Vertex& hint) {
  * properly. Therefore, we bind the method with self, you pass self itself as
  * the parent.
  */
-py::object locate_face(py::handle self, const Point& query) {
-  constexpr auto ri(py::rv_policy::reference_internal);
-
+py::object locate_face1(py::handle self, const Point& query) {
   auto& tri = py::cast<Triangulation_3&>(self);
   Locate_type lt;
   int li, lj;
   auto ch = tri.locate(query, lt, li, lj);
-  Cell& c = *ch;
+  return locate_dispatch(self, ch, lt, li, lj);
+}
+
+//!
+py::object locate_face2(py::handle self, const Point& query, Cell& start) {
+  auto& tri = py::cast<Triangulation_3&>(self);
+  Locate_type lt;
+  int li, lj;
+  auto ch = tri.locate(query, lt, li, lj, Cell_handle(&start));
+  return locate_dispatch(self, ch, lt, li, lj);
+}
+
+//!
+py::object locate_face3(py::handle self, const Point& query, Vertex& hint) {
+  auto& tri = py::cast<Triangulation_3&>(self);
+  Locate_type lt;
+  int li, lj;
+  auto ch = tri.locate(query, lt, li, lj, Vertex_handle(&hint));
+  return locate_dispatch(self, ch, lt, li, lj);
+}
+
+//!
+int mirror_index(const Triangulation_3& tri, Cell& c, int i) { return tri.mirror_index(Cell_handle(&c), i); }
+
+//!
+Vertex& mirror_vertex(const Triangulation_3& tri, Cell& c, int i) {
+  auto vh = tri.mirror_vertex(Cell_handle(&c), i);
+  return *vh;
+}
+
+//!
+const Point_3& point1(const Triangulation_3& tri, Vertex& v) { return tri.point(Vertex_handle(&v)); }
+
+//!
+const Point_3& point2(const Triangulation_3& tri, Cell& c, int i) { return tri.point(Cell_handle(&c), i); }
+
+//!
+Segment_3 segment1(const Triangulation_3& tri, Edge& e) { return tri.segment(e); }
+
+//!
+Segment_3 segment2(const Triangulation_3& tri, Cell& c, int i, int j) { return tri.segment(Cell_handle(&c), i, j); }
+
+//!
+Triangle_3 triangle1(const Triangulation_3& tri, Facet& f) { return tri.triangle(f); }
+
+//!
+Triangle_3 triangle2(const Triangulation_3& tri, Cell& c, int i) { return tri.triangle(Cell_handle(&c), i); }
+
+//!
+Tetrahedron tetrahedron(const Triangulation_3& tri, Cell& c) { return tri.tetrahedron(Cell_handle(&c)); }
+
+//!
+py::object side_of_cell(const Triangulation_3& tri, const Point_3& p, Cell& c) {
+  Locate_type lt;
+  int li;
+  int lj;
+  auto res = tri.side_of_cell(p, Cell_handle(&c), lt, li, lj);
+  if ((res == CGAL::ON_BOUNDED_SIDE) || (res == CGAL::ON_UNBOUNDED_SIDE)) return py::make_tuple(res);
+
   switch (lt) {
    case Triangulation_3::FACET:
    case Triangulation_3::VERTEX:
-    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li));
+    return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li));
 
    case Triangulation_3::EDGE:
-    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li),
-                          py::int_(lj));
-
-   case Triangulation_3::CELL:
-   case Triangulation_3::OUTSIDE_CONVEX_HULL:
-    return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
+    return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li), py::int_(lj));
   }
 
   throw std::runtime_error("Invalid location type");
   return py::none();
 }
 
-//
+//!
+py::object side_of_facet(const Triangulation_3& tri, const Point_3& p, Facet& f) {
+  Locate_type lt;
+  int li;
+  int lj;
+  auto res = tri.side_of_facet(p, f, lt, li, lj);
+  if ((res == CGAL::ON_BOUNDED_SIDE) || (res == CGAL::ON_UNBOUNDED_SIDE)) return py::make_tuple(res);
+
+  switch (lt) {
+   case Triangulation_3::VERTEX:
+    return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li));
+
+   case Triangulation_3::EDGE:
+    return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li), py::int_(lj));
+  }
+
+  throw std::runtime_error("Invalid location type");
+  return py::none();
+}
+
+//!
+py::object side_of_edge(const Triangulation_3& tri, const Point_3& p, Edge& e) {
+  Locate_type lt;
+  int li;
+  auto res = tri.side_of_edge(p, e, lt, li);
+  if ((res == CGAL::ON_BOUNDED_SIDE) || (res == CGAL::ON_UNBOUNDED_SIDE)) return py::make_tuple(res);
+
+  switch (lt) {
+   case Triangulation_3::VERTEX:
+    return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li));
+  }
+
+  throw std::runtime_error("Invalid location type");
+  return py::none();
+}
+
+//!
 template <typename Handle_>
 const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
 
@@ -736,8 +845,8 @@ void export_triangulation_3(py::module_& m) {
          "  f: the facet\n"
          "  v: the vertex\n"
          "Return:\n"
-         "  tuple[bool, int]: If the facet does not have the vertex, return False;\n"
-         "  otherwise, return tuple (True, i), where i is the vertex index\n")
+         "  False, if the facet does not have the vertex;\n"
+         "  otherwise, tuple [True, i], where i is the vertex index\n")
     .def("has_vertex_get_index", &tri3::has_vertex4,
          "Determine whether a represented facet has a vertex\n"
          "Parameters:\n"
@@ -745,8 +854,8 @@ void export_triangulation_3(py::module_& m) {
          "  i (int)\n"
          "  v: the vertex\n"
          "Return:\n"
-         "  tuple[bool, int]: If the facet does not have the vertex, return False;\n"
-         "  otherwise, return tuple (True, i), where i is the vertex index\n")
+         "  False, if the facet does not have the vertex;\n"
+         "  otherwise, tuple [True, i], where i is the vertex index\n")
 
     // Insertion
     .def("insert", &tri3::insert1, ri,
@@ -886,16 +995,16 @@ void export_triangulation_3(py::module_& m) {
          "  w (vertex)\n"
          "  x (Vertex)\n"
          "Return:\n"
-         "  tuple[bool, Cell, int, int, int, int]: If the cell does not belong to the triangulation, return False;\n"
-         "  otherwise, return tuple (True, c, i, j, k, l), where c is the cell and i, j, k, and l are the indices of the vertices u, v, w, and x, respectively, in c\n")
+         "  False, if the cell does not belong to the triangulation,;\n"
+         "  otherwise, tuple [True, c, i, j, k, l], where c is the cell and i, j, k, and l are the indices of the vertices u, v, w, and x, respectively, in c\n")
     .def("is_edge", &tri3::is_edge,
          py::arg("u"), py::arg("v"),
          "Determine whether a represented edge belongs to the triangulation\n"
          "Parameters:\n"
          "  u (Vertex): together with v represent the edge\n"
          "Return:\n"
-         "  tuple[bool, Cell, int, int]: If the edgedoes not belong to the triangulation, return False;\n"
-         "  otherwise, return tuple (True, c, i, j), where c is the containing cell and i and, j are the indices of the vertices u and v, respectively, in c\n")
+         "  False, if the edgedoes not belong to the triangulation;\n"
+         "  otherwise, tuple [True, c, i, j], where c is the containing cell and i and, j are the indices of the vertices u and v, respectively, in c\n")
     .def("is_facet", &tri3::is_facet,
          py::arg("u"), py::arg("v"), py::arg("w"),
          "Determine whether a represented facet belongs to the triangulation\n"
@@ -904,28 +1013,154 @@ void export_triangulation_3(py::module_& m) {
          "  v (vertex)\n"
          "  w (vertex)\n"
          "Return:\n"
-         "  tuple[bool, Cell, int, int, int]: If the facet does not belong to the triangulation, return False;\n"
-         "  otherwise, return tuple (True, c, i, j, k), where c is the containing cell and i, j, and k are the indices of the vertices u, v, and w, respectively, in c\n")
-    .def("is_infinite", &tri3::is_infinite1)
-    .def("is_infinite", &tri3::is_infinite2)
-    .def("is_infinite", &tri3::is_infinite3)
-    .def("is_infinite",
-         py::overload_cast<const Edge&>(&Tri::is_infinite, py::const_))
-    .def("is_infinite",
-         py::overload_cast<const Facet&>(&Tri::is_infinite, py::const_))
-    .def("is_infinite", &tri3::is_infinite6)
+         "  False, if the facet does not belong to the triangulation\n"
+         "  otherwise, return tuple [True, c, i, j, k], where c is the containing cell and i, j, and k are the indices of the vertices u, v, and w, respectively, in c\n")
+    .def("is_infinite", &tri3::is_infinite1,
+         py::arg("c"),
+         "True, iff c is incident to the infinite vertex\n"
+         "Parameters:\n"
+         "  c (Cell): The cell\n"
+         "Return:\n"
+         "  bool\n")
+    .def("is_infinite", &tri3::is_infinite2,
+         py::arg("c"), py::arg("i"),
+         "True, iff the facet i of cell c is incident to the infinite vertex\n"
+         "Parameters:\n"
+         "  c (Cell)\n"
+         "  i (int)\n"
+         "Return:\n"
+         "  bool\n")
+    .def("is_infinite", &tri3::is_infinite3,
+         py::arg("c"), py::arg("i"), py::arg("j"),
+         "True, iff the edge (i, j) of cell c is incident to the infinite vertex\n"
+         "Parameters:\n"
+         "  c (Cell)\n"
+         "  i (int)\n"
+         "  j (int)\n"
+         "Return:\n"
+         "  bool\n")
+    .def("is_infinite", py::overload_cast<const Edge&>(&Tri::is_infinite, py::const_),
+         py::arg("e"),
+         "True, iff the edge e is incident to the infinite vertex\n"
+         "Parameters:\n"
+         "  e (Edge)\n"
+         "Return:\n"
+         "  bool\n")
+    .def("is_infinite", py::overload_cast<const Facet&>(&Tri::is_infinite, py::const_),
+         py::arg("f"),
+         "True, iff the facet f is incident to the infinite vertex\n"
+         "Parameters:\n"
+         "  f (Facet)\n"
+         "Return:\n"
+         "  bool\n")
+    .def("is_infinite", &tri3::is_infinite6,
+         py::arg("v"),
+         "True, iff vertex v is the infinite vertex\n"
+         "Parameters:\n"
+         "  v (Vertex)\n"
+         "Return:\n"
+         "  bool\n")
     .def("is_valid",
          py::overload_cast<bool, int>(&Tri::is_valid, py::const_),
-         py::arg("verbose") = false, py::arg("level") = 0)
-    .def("is_valid", &tri3::is_valid2, py::arg("c"), py::arg("verbose") = false)
-    .def("is_vertex", &tri3::is_vertex1)
-    .def("is_vertex", &tri3::is_vertex2)
+         py::arg("verbose") = false, py::arg("level") = 0,
+         "Determines wether the triangulation is valid\n"
+         "Parameters:\n"
+         "  verbose (Boolean): Indicates whether to be verbose (False)\n"
+         "  level (int): The verbose level (0)\n"
+         "Return:\n"
+         "  bool\n")
+    .def("is_valid", &tri3::is_valid2, py::arg("c"), py::arg("verbose") = false,
+         "Determines wether a cell is valid\n"
+         "Parameters:\n"
+         "  c (Cell): The cell\n"
+         "  verbose (Boolean): Indicates whether to be verbose (False)\n"
+         "Return:\n"
+         "  bool\n")
+    .def("is_vertex", &tri3::is_vertex1,
+         py::arg("p"),
+         "Determine whether p is a geometric embedding of a vertex of the triangulation by locating p\n"
+         "Parameters:\n"
+         "  p (Point_3): the point\n"
+         "Return:\n"
+         "  False, if p is not in the triangulation;\n"
+         "  otherwise, tuple [True, v], where v is vertex associated with p\n")
+    .def("is_vertex", &tri3::is_vertex2,
+         py::arg("v"),
+         "Return:\n"
+         "  bool\n")
 
     // Locators
-    .def("locate", &tri3::locate1, ri)
-    .def("locate", &tri3::locate2, ri)
-    .def("locate", &tri3::locate3, ri)
-    .def("locate_face", &tri3::locate_face, ri)
+    .def("locate", &tri3::locate1, ri, py::arg("query"),
+         "locate the query point in the triangulation\n"
+         "Parameters:\n"
+         "  query (Point_3): The query point\n"
+         "Return:\n"
+         "  Cell: If the query point lies strictly inside the convex hull of the points, obtain the cell that contains the point in its interior.\n"
+         "        If the query point lies inside a facet, on an edge, or coincides with a vertex, return one of the cells having the point on its boundary.\n"
+         "        If the query point lies outside the convex hull of the points, return an infinite cell with vertices {p,q,r,∞},  such that the tetrahedron (p,q,r,query) is positively oriented (the rest of the triangulation lies on the other side of facet (p,q,r)).\n")
+    .def("locate", &tri3::locate2, ri, py::arg("query"), py::arg("start"),
+         "locate the query point in the triangulation; start the search with start\n"
+         "Parameters:\n"
+         "  query (Point_3): The query point\n"
+         "  start (Cell)\n")
+    .def("locate", &tri3::locate3, ri,
+         py::arg("query"), py::arg("start"),
+         "locate the query point in the triangulation; start the search with hint\n"
+         "Parameters:\n"
+         "  query (Point_3): The query point\n"
+         "  hint (Vertex)\n")
+    .def("locate_face", &tri3::locate_face1, ri,
+         py::arg("query"),
+         "locate the query point in the triangulation\n"
+         "Parameters:\n"
+         "  query (Point_3): The query point\n"
+         "Return:\n"
+         "  tuple[Locate_type.CELL, c], if the query point is inside the interior of the cell c\n"
+         "  tuple[Locate_type.FACET, c, i], if the query point lies inside the interior of the facet (c, i)\n"
+         "  tuple[Locate_type.EDGE, c, i, j], if the query point lies inside the interior of the edge (c, i, j)\n"
+         "  tuple[Locate_type.VERTEX, c, i], if the query point coincides with the vertex (c, i)\n")
+    .def("locate_face", &tri3::locate_face2, ri,
+         py::arg("query"), py::arg("start"),
+         "locate the query point in the triangulation; start the search with start\n"
+         "Parameters:\n"
+         "  query (Point_3): The query point\n"
+         "  start (Cell)\n"
+         "Return:\n"
+         "  tuple[Locate_type.CELL, c], if the query point is inside the interior of the cell c\n"
+         "  tuple[Locate_type.FACET, c, i], if the query point lies inside the interior of the facet (c, i)\n"
+         "  tuple[Locate_type.EDGE, c, i, j], if the query point lies inside the interior of the edge (c, i, j)\n"
+         "  tuple[Locate_type.VERTEX, c, i], if the query point coincides with the vertex (c, i)\n")
+    .def("locate_face", &tri3::locate_face2, ri,
+         py::arg("query"), py::arg("hint"),
+         "locate the query point in the triangulation; start the search with hint\n"
+         "Parameters:\n"
+         "  query (Point_3): The query point\n"
+         "  hint (Vertex)\n"
+         "Return:\n"
+         "  tuple[Locate_type.CELL, c], if the query point is inside the interior of the cell c\n"
+         "  tuple[Locate_type.FACET, c, i], if the query point lies inside the interior of the facet (c, i)\n"
+         "  tuple[Locate_type.EDGE, c, i, j], if the query point lies inside the interior of the edge (c, i, j)\n"
+         "  tuple[Locate_type.VERTEX, c, i], if the query point coincides with the vertex (c, i)\n")
+
+    // Mirros
+    .def("mirror_facet", &Tri::mirror_facet, py::arg("f"),
+         "Obtain the facet seen from the other adjacent cell\n"
+         "Parameters:\n"
+         "  f (Facet)\n")
+    .def("mirror_index", &tri3::mirror_index, py::arg("c"), py::arg("i"),
+         "Obtain the index of a cell in its ith neighbor\n"
+         "Parameters:\n"
+         "  c (Cell)\n"
+         "  i (int)\n"
+         "Return:\n"
+         "  int\n")
+    .def("mirror_vertex", &tri3::mirror_vertex, ri, py::arg("c"), py::arg("i"),
+         "Obtain the vertex of the ith neighbor of c that is opposite to c\n"
+         "Parameters:\n"
+         "  c (Cell)\n"
+         "  i (int)\n"
+         "Return:\n"
+         "  Vertex\n")
 
     // Quantifiers
     .def("number_of_cells", &Tri::number_of_cells)
@@ -935,6 +1170,96 @@ void export_triangulation_3(py::module_& m) {
     .def("number_of_finite_edges", &Tri::number_of_finite_edges)
     .def("number_of_finite_facets", &Tri::number_of_finite_facets)
     .def("number_of_vertices", &Tri::number_of_vertices)
+
+    // Inequalities
+    .def("__eq__", [](const Tri& t1, const Tri& t2)->bool { return t1 == t2; })
+    .def("__ne__", [](const Tri& t1, const Tri& t2)->bool { return t1 != t2; })
+
+    // Point, segment, triangle, & tetrahedron
+    .def("point", &tri3::point1, ri, py::arg("v"),
+         "Obtain the geometric embedding of a vertex\n"
+         "Parameters:\n"
+         "  v (Vertex): The vertex\n"
+         "Return:\n"
+         "  Point_3\n")
+    .def("point", &tri3::point2, ri, py::arg("c"), py::arg("i"),
+         "Obtain the point represented by (c, i)\n"
+         "Parameters:\n"
+         "  c (Cell): Together with i represents a vertex\n"
+         "  i (int)\n"
+         "Return:\n"
+         "  Point_3\n")
+    .def("segment", &tri3::segment1, py::arg("e"),
+         "Obtain the geometric embedding of an edge\n"
+         "Parameters:\n"
+         "  e (Edge): The edge\n"
+         "Return:\n"
+         "  Segment_3\n")
+    .def("segment", &tri3::segment2, py::arg("c"), py::arg("i"), py::arg("j"),
+         "Obtain the segment represented by (c, i, j)\n"
+         "Parameters:\n"
+         "  c (Cell): Together with i and j represents an edge\n"
+         "  i (int)\n"
+         "  j (int)\n"
+         "Return:\n"
+         "  Segment_3\n")
+    .def("triangle", &tri3::triangle1, py::arg("f"),
+         "Obtain the geometric embedding of a facet\n"
+         "Parameters:\n"
+         "  f (Facet): The facet\n"
+         "Return:\n"
+         "  Triangle_3\n")
+    .def("triangle", &tri3::triangle2, py::arg("c"), py::arg("i"),
+         "Obtain the triangle represented by (c, i)\n"
+         "Parameters:\n"
+         "  c (Cell): Together with i represents a facet\n"
+         "  i (int)\n"
+         "  j (int)\n"
+         "Return:\n"
+         "  Triangle_3\n")
+    .def("tetrahedron", &tri3::tetrahedron, py::arg("c"),
+         "Obtain the geometric embedding of a cell\n"
+         "Parameters:\n"
+         "  c (Cell): The cell\n"
+         "Return:\n"
+         "  Tetrahedron_3\n")
+
+    // Side of
+    .def("side_of_cell", &tri3::side_of_cell,
+         py::arg("p"), py::arg("c"),
+         "Given point p, obtain an enumeration indicating on which side of the oriented boundary of a cell p lies.\n"
+         "Parameters:\n"
+         "  p (Point_3): The point\n"
+         "  c (Cell): The cell\n"
+         "Return:\n"
+         "  ON_BOUNDED_SIDE, if p is inside c\n"
+         "  tuple[ON_BOUNDARY, Locate_type.FACET, i], if p lies in the interior of the facet (c, i) on the boundary of c\n"
+         "  tuple[ON_BOUNDARY, Locate_type.EDGE, i, j], if p lies in the interior of an edge (c, i, j)  on the boundary of c\n"
+         "  tuple[ON_BOUNDARY, Locate_type.VERTEX, i], if p coincides with the vertex (c, i) on the boundary of c\n"
+         "  ON_UNBOUNDED_SIDE\n, if p is outside of c")
+    .def("side_of_edge", &tri3::side_of_edge,
+         py::arg("p"), py::arg("e"),
+         "Given point p, obtain an enumeration indicating on which side of the oriented boundary of an edge p lies.\n"
+         "Parameters:\n"
+         "  p (Point_3): The point\n"
+         "  e (Edge): The edge\n"
+         "Return:\n"
+         "  ON_BOUNDED_SIDE, if p is inside e\n"
+         "  tuple[ON_BOUNDARY, Locate_type.VERTEX, i], if p coincides with one of the endpoints of e, where i is the index of the vertex in the containg cell\n"
+         "  ON_UNBOUNDED_SIDE\n, if p is outside of e")
+    // .def("side_of_edge", )
+    .def("side_of_facet", &tri3::side_of_facet,
+         py::arg("p"), py::arg("f"),
+         "Given point p, obtain an enumeration indicating on which side of the oriented boundary of a facet p lies.\n"
+         "Parameters:\n"
+         "  p (Point_3): The point\n"
+         "  c (Cell): The cell\n"
+         "Return:\n"
+         "  ON_BOUNDED_SIDE, if p is inside f\n"
+         "  tuple[ON_BOUNDARY, Locate_type.EDGE, i, j], if p lies in the interior of an edge (c, i, j) on the boundary of f, where (i, j) are the indices of the edge in the containg cell\n"
+         "  tuple[ON_BOUNDARY, Locate_type.VERTEX, i], if p coincides with the vertex (c, i) on the boundary of f\n"
+         "  ON_UNBOUNDED_SIDE\n, if p is outside of f")
+    // .def("side_of_facet", )
     ;
 
   using Avi = Tri::All_vertices_iterator;
