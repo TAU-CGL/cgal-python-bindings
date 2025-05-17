@@ -37,6 +37,7 @@
 #include <CGAL/Env_surface_data_traits_3.h>
 
 #include "CGALPY/config.hpp"
+#include "CGALPY/Curve_data_merge.hpp"
 #include "CGALPY/arrangement_on_surface_2_values.hpp"
 #include "CGALPY/envelope_3_config.hpp"
 #include "CGALPY/kernel_types.hpp"
@@ -76,30 +77,6 @@ template <typename Btr>
 struct Cd_tr<false, false, false, Btr> {
   using Cgt = Btr;
   using Ccgt = Btr;
-};
-
-class Curve_data_merge {
-public:
-  /*! Construct
-   */
-  Curve_data_merge() { s_func = py::none(); }
-
-  /*! Destruct
-   */
-  ~Curve_data_merge() {}
-
-  static void set_func(py::object func) { s_func = func; }
-  static void reset_func() { s_func = py::none(); }
-  static py::object func() { return s_func; }
-
-  /*! Apply the callback function
-   */
-  py::object operator()(py::object a, py::object b) const
-  { return (s_func.is_none()) ? a : s_func(a, b); }
-
-private:
-  //! The callback function to apply
-  inline static py::object s_func;
 };
 
 template <typename Btr>
