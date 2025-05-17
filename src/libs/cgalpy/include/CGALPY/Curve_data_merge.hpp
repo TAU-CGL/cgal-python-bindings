@@ -16,6 +16,14 @@ namespace py = nanobind;
 
 namespace aos2 {
 
+/*! \class Curve_data_merge
+ * When two curves overlap, the following actions are performed immediately
+ * one after the other:
+ * 1. An object of this type is constructed.
+ * 2. The operator() is invoked.
+ * 3. The object is destructed.
+ * Therefore, the constructor and destructor should remain empty!
+ */
 class Curve_data_merge {
 public:
   /*! Construct
@@ -24,7 +32,7 @@ public:
 
   /*! Destruct
    */
-  ~Curve_data_merge() { reset_func(); }
+  ~Curve_data_merge() {}
 
   /*! Set the callback function.
    */
