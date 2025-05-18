@@ -28,7 +28,6 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/make_circulator.hpp"
 #include "CGALPY/stl_dereference_input_iterator.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/triangulation_3_types.hpp"

@@ -29,6 +29,5 @@ Aos2.insert_non_intersecting_curve(arr2, Segment(Point(4, 7), Point(1, 4)))
 Aos2.insert_non_intersecting_curve(arr2, Segment(Point(1, 4), Point(4, 1)))
 
 # Compute the overlay of the two arrangements.
-overlay_arr = Arrangement()
-Aos2.overlay(arr1, arr2, overlay_arr)
+overlay_arr = Aos2.overlay(arr1, arr2)
 print_arrangement_size(overlay_arr)

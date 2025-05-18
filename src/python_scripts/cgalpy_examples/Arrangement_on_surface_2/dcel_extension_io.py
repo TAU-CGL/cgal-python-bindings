@@ -99,3 +99,6 @@ for v in arr2.vertices():
   else: raise Exception('Unrecognized color {}'.format(color))
 
   print('({}) - {}'.format(v.point(), v.data()))
+
+for v in arr.vertices(): v.set_data({})
+for v in arr2.vertices(): v.set_data({})

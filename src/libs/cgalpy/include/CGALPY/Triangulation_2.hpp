@@ -8,8 +8,8 @@
 
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/make_circulator.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
 
 namespace py = nanobind;
@@ -312,7 +312,7 @@ auto export_triangulation_2(C& c) {
       tri.insert_constraint(ha, hb);
     })
 #endif
-    
+
     ;
   using Tri = TriangulationType;
 
@@ -348,42 +348,42 @@ auto export_triangulation_2(C& c) {
   using Fc = typename Tri::Face_circulator;
 
   // Circulators
-  add_circulator<Vc>("Vertex_circulator", c);
-  add_circulator<Ec, Edge>("Edge_circulator", c);
-  add_circulator<Fc>("Face_circulator", c);
+  export_circulator<Vc>(c, "Vertex_circulator");
+  export_circulator<Ec, Edge>(c, "Edge_circulator");
+  export_circulator<Fc>(c, "Face_circulator");
 
   c.def("incident_faces",
         [](const TriangulationType& tri, const Vertex& v) {
           auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-          return make_circulator(tri.incident_faces(vh));
+          return tri.incident_faces(vh);
         })
     .def("incident_faces",
          [](const TriangulationType& tri, const Vertex& v, const Face& f) {
            auto vh = Vertex_handle(const_cast<Vertex*>(&v));
            auto fh = Face_handle(const_cast<Face*>(&f));
-           return make_circulator(tri.incident_faces(vh, fh));
+           return tri.incident_faces(vh, fh);
          })
     .def("incident_edges",
          [](const TriangulationType& tri, const Vertex& v) {
            auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-           return make_circulator(tri.incident_edges(vh));
+           return ri.incident_edges(vh);
          })
     .def("incident_edges",
          [](const TriangulationType& tri, const Vertex& v, const Face& f) {
            auto vh = Vertex_handle(const_cast<Vertex*>(&v));
            auto fh = Face_handle(const_cast<Face*>(&f));
-           return make_circulator(tri.incident_edges(vh, fh));
+           return tri.incident_edges(vh, fh);
          })
     .def("incident_vertices",
          [](const TriangulationType& tri, const Vertex& v) {
            auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-           return make_circulator(tri.incident_vertices(vh));
+           return tri.incident_vertices(vh);
          })
     .def("incident_vertices",
          [](const TriangulationType& tri, const Vertex& v, const Face& f) {
            auto vh = Vertex_handle(const_cast<Vertex*>(&v));
            auto fh = Face_handle(const_cast<Face*>(&f));
-           return make_circulator(tri.incident_vertices(vh, fh));
+           return tri.incident_vertices(vh, fh);
          })
     ;
 

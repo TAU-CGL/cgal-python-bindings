@@ -37,19 +37,19 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/bgl_global.hpp"
+#include "CGALPY/export_circulator.hpp"
 #include "CGALPY/generator_functions.hpp"
 #include "CGALPY/get.hpp"
 #include "CGALPY/Internal_face_plane_3_map.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
-#include "CGALPY/make_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/parse_named_parameters.hpp"
-#include "CGALPY/polyhedron_3_types.hpp"
 #include "CGALPY/Named_parameter_wrapper.hpp"
 #include "CGALPY/named_parameter_applicator.hpp"
 #include "CGALPY/Named_parameter_repair_polygon_soup.hpp"
 #include "CGALPY/Named_parameter_verbose.hpp"
+#include "CGALPY/parse_named_parameters.hpp"
+#include "CGALPY/polyhedron_3_types.hpp"
 
 extern void export_polyhedron_traits_with_normals_3(py::module_& m);
 extern void export_polyhedron_halfedge_ds(py::module_& m);
@@ -404,14 +404,14 @@ auto polyhedron_planes(const Polyhedron_3& prn) {
   return make_iterator(prn.planes_begin(), prn.planes_end());
 }
 
-//!
+//! Wrap the function that obtains the real circulator
 auto halfedges_around_target_circulator(Vertex& v, const Polyhedron_3& prn) {
   using Prn = Polyhedron_3;
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
-  return make_circulator(Hatc(Vertex_handle(&v), prn));
+  return Hatc(Vertex_handle(&v), prn);
 }
 
-//!
+//! Wrap the iterator
 auto halfedges_around_target_iterator(Vertex& v, const Polyhedron_3& prn) {
   using Prn = Polyhedron_3;
   using Hati = CGAL::Halfedge_around_target_iterator<Prn>;
@@ -780,15 +780,16 @@ void export_polyhedron_3(py::module_& m) {
 
   // Halfedges around target circulator
   // We use the dereference circulator, because we need to dereference twice
-  using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
   using Hati = CGAL::Halfedge_around_target_iterator<Prn>;
-  add_dereference_circulator<Hatc, Halfedge&>("Halfedge_around_target_circulator", m);
   add_dereference_iterator<Hati, Hati, Halfedge&>("Halfedge_around_target_iterator", m);
 
   m.def("halfedges_around_target",
-        &pol3::halfedges_around_target_circulator,
-        py::keep_alive<0, 1>());
-  m.def("halfedges_around_target_range",
         &pol3::halfedges_around_target_iterator,
         py::keep_alive<0, 1>());
+
+  //! \todo fix this
+  using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
+  export_dereference_circulator<Hatc, Halfedge&>(m, "Halfedge_around_target_circulator");
+  m.def("halfedges_around_target_circulator",
+        &pol3::halfedges_around_target_circulator);
 }

@@ -70,7 +70,6 @@ def blend(color1, color2):
 
 # Compute the overlay of the two arrangements, while blending the colors
 # of their features.
-ovl_arr = Arrangement()
 # Overlay_color_traits<Ex_arrangement> overlay_traits
 ot = Overlay_function_traits()
 ot.set_vv_v(blend)
@@ -84,7 +83,7 @@ ot.set_ef_e(blend)
 ot.set_fe_e(blend)
 ot.set_ff_f(blend)
 
-Aos2.overlay(arr1, arr2, ovl_arr, ot)
+ovl_arr = Aos2.overlay(arr1, arr2, ot)
 
 # Print the overlay-arrangement vertices and their colors.
 for v in ovl_arr.vertices():

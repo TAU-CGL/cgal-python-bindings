@@ -29,7 +29,6 @@ for arr in [arr1, arr2]:
     v.set_data(v.degree())
 
 # Compute the overlay and update the data of the vertices.
-result = Arrangement()
 traits = Aos2.Arr_overlay_function_traits()
 traits.set_vv_v(lambda x, y: 2*x+y)
 traits.set_ve_v(lambda x, y: 2*x+2)
@@ -37,7 +36,7 @@ traits.set_vf_v(lambda x, y: 2*x)
 traits.set_ev_v(lambda x, y: 4+y)
 traits.set_fv_v(lambda x, y: y)
 traits.set_ee_v(lambda x, y: 6)
-Aos2.overlay(arr1, arr2, result, traits)
+result = Aos2.overlay(arr1, arr2, traits)
 
 for v in result.vertices(): print("({})".format(v.point()), v.data())
 

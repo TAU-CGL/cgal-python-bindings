@@ -12,12 +12,12 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/pair.h>
 
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/export_circulator.hpp"
+#include "CGALPY/make_iterator.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
 #include "CGALPY/types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/make_circulator.hpp"
 
 namespace py = nanobind;
 
@@ -103,47 +103,43 @@ py::object points(const Triangulation_2& tri)
 
 // Circulators
 
-//
-py::object incident_faces_circulator_0(const Triangulation_2& tri,
-                                       const Vertex& v) {
+//! Wrap the function that obtains the real circulator
+auto incident_faces_circulator_0(const Triangulation_2& tri, const Vertex& v) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-  return make_circulator(tri.incident_faces(vh));
+  return tri.incident_faces(vh);
 }
 
-//
-py::object incident_faces_circulator_1(const Triangulation_2& tri,
-                                       const Vertex& v, const Face& f) {
+//! Wrap the function that obtains the real circulator
+auto incident_faces_circulator_1(const Triangulation_2& tri, const Vertex& v, const Face& f) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   auto fh = Face_handle(const_cast<Face*>(&f));
-  return make_circulator(tri.incident_faces(vh, fh));
+  return tri.incident_faces(vh, fh);
 }
 
-py::object incident_edges_circulator_0(const Triangulation_2& tri,
-                                       const Vertex& v) {
+//! Wrap the function that obtains the real circulator
+auto incident_edges_circulator_0(const Triangulation_2& tri, const Vertex& v) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-  return make_circulator(tri.incident_edges(vh));
+  return tri.incident_edges(vh);
 }
 
-//
-py::object incident_edges_circulator_1(const Triangulation_2& tri,
-                                       const Vertex& v, const Face& f) {
-  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-  auto fh = Face_handle(const_cast<Face*>(&f));
-  return make_circulator(tri.incident_edges(vh, fh));
-}
-
-py::object incident_vertices_circulator_0(const Triangulation_2& tri,
-                                          const Vertex& v) {
-  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-  return make_circulator(tri.incident_vertices(vh));
-}
-
-//
-py::object incident_vertices_circulator_1(const Triangulation_2& tri,
-                                          const Vertex& v, const Face& f) {
+//! Wrap the function that obtains the real circulator
+auto incident_edges_circulator_1(const Triangulation_2& tri, const Vertex& v, const Face& f) {
   auto vh = Vertex_handle(const_cast<Vertex*>(&v));
   auto fh = Face_handle(const_cast<Face*>(&f));
-  return make_circulator(tri.incident_vertices(vh, fh));
+  return tri.incident_edges(vh, fh);
+}
+
+//! Wrap the function that obtains the real circulator
+auto incident_vertices_circulator_0(const Triangulation_2& tri, const Vertex& v) {
+  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+  return tri.incident_vertices(vh);
+}
+
+//! Wrap the function that obtains the real circulator
+auto incident_vertices_circulator_1(const Triangulation_2& tri, const Vertex& v, const Face& f) {
+  auto vh = Vertex_handle(const_cast<Vertex*>(&v));
+  auto fh = Face_handle(const_cast<Face*>(&f));
+  return tri.incident_vertices(vh, fh);
 }
 
 // Iterators
@@ -273,38 +269,38 @@ void export_triangulation_2(py::module_& m) {
     .def("points", &tri2::points, py::keep_alive<0, 1>())
     ;
 
-  // Circulators
+  // Iterators & Circulators
   using Vc = Tri::Vertex_circulator;
   using Ec = Tri::Edge_circulator;
   using Fc = Tri::Face_circulator;
-
-  add_circulator<Vc>("Vertex_circulator", tri_c);
-  add_circulator<Ec, Edge>("Edge_circulator", tri_c);
-  add_circulator<Fc>("Face_circulator", tri_c);
-
-  tri_c.def("incident_faces", &tri2::incident_faces_circulator_0)
-    .def("incident_faces", &tri2::incident_faces_circulator_1)
-    .def("incident_edges", &tri2::incident_edges_circulator_0)
-    .def("incident_edges", &tri2::incident_edges_circulator_1)
-    .def("incident_vertices", &tri2::incident_vertices_circulator_0)
-    .def("incident_vertices", &tri2::incident_vertices_circulator_1)
-    ;
 
   // Iterators
   add_iterator_from_circulator<Vc>("Vertex_iterator", tri_c);
   add_iterator_from_circulator<Ec, Edge>("Edge_iterator", tri_c);
   add_iterator_from_circulator<Fc>("Face_iterator", tri_c);
 
-  tri_c.def("incident_faces_range", &tri2::incident_faces_iterator_0)
-    .def("incident_faces_range", &tri2::incident_faces_iterator_1)
-    .def("incident_edges_range", &tri2::incident_edges_iterator_0)
-    .def("incident_edges_range", &tri2::incident_edges_iterator_1)
-    .def("incident_vertices_range", &tri2::incident_vertices_iterator_0)
-    .def("incident_vertices_range", &tri2::incident_vertices_iterator_1)
+  tri_c.def("incident_faces", &tri2::incident_faces_iterator_0)
+    .def("incident_faces", &tri2::incident_faces_iterator_1)
+    .def("incident_edges", &tri2::incident_edges_iterator_0)
+    .def("incident_edges", &tri2::incident_edges_iterator_1)
+    .def("incident_vertices", &tri2::incident_vertices_iterator_0)
+    .def("incident_vertices", &tri2::incident_vertices_iterator_1)
+    ;
+
+  // Circulators
+  export_circulator<Vc>(tri_c, "Vertex_circulator");
+  export_circulator<Ec, Edge>(tri_c, "Edge_circulator");
+  export_circulator<Fc>(tri_c, "Face_circulator");
+
+  tri_c.def("incident_faces_circulator", &tri2::incident_faces_circulator_0)
+    .def("incident_faces_circulator", &tri2::incident_faces_circulator_1)
+    .def("incident_edges_circulator", &tri2::incident_edges_circulator_0)
+    .def("incident_edges_circulator", &tri2::incident_edges_circulator_1)
+    .def("incident_vertices_circulator", &tri2::incident_vertices_circulator_0)
+    .def("incident_vertices_circulator", &tri2::incident_vertices_circulator_1)
     ;
 
   // Enumerations
-
   py::enum_<tri2::Locate_type>(tri_c, "Locate_type")
     .value("VERTEX", Tri::VERTEX)
     .value("EDGE", Tri::EDGE)

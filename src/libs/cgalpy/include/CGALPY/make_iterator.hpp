@@ -11,9 +11,10 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/circulator.h>
+
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/iterator_state.hpp"
-#include "CGALPY/circulator_state.hpp"
 
 namespace py = nanobind;
 
@@ -105,7 +106,7 @@ template <py::rv_policy Policy,
           typename C>
 void add_iterator_of_circulator_impl(const char* name, C& c, Extra&&... extra) {
   using state = iterator_state<Iterator, Sentinel>;
-  using sub_state = circulator_state<ValueType>;
+  using sub_state = iterator_state<ValueType, ValueType>;
   if (add_attr<state>(c, name)) return;
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -118,7 +119,7 @@ void add_iterator_of_circulator_impl(const char* name, C& c, Extra&&... extra) {
                          s.first_or_done = true;
                          throw py::stop_iteration();
                        }
-                       return sub_state{*s.it};
+                       return sub_state{*s.it, *s.it, true};
                      },
       std::forward<Extra>(extra)..., Policy)
     ;
@@ -165,6 +166,7 @@ void add_iterator_from_circulator_impl(const char* name, C& c, Extra&&... extra)
            return *s.it++;
          },
          std::forward<Extra>(extra)..., Policy)
+    .def("size", [](const state& s)->std::size_t { return CGAL::circulator_size(s.it); })
     ;
 }
 
