@@ -19,7 +19,3 @@ p5 = Point_3(2, 2, 2)
 p6 = Point_3(-1, 0, 1)
 dt = Tri3.Delaunay_triangulation_3([p1, p2, p3, p4, p5, p6])
 print(dt.is_valid(False, 0))
-
-for c in dt.finite_cells():
-  tet = dt.tetrahedron(c)
-  print(tet.volume())
