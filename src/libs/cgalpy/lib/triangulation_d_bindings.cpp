@@ -521,6 +521,7 @@ void export_triangulation_d(py::module_& m) {
       .export_values()
      ;
 
+    // Vertex
     if (! add_attr<Vertex>(tri_c, "Vertex")) {
       py::class_<Vertex>(tri_c, "Vertex")
         .def(py::init<const Point&>())
@@ -544,6 +545,7 @@ void export_triangulation_d(py::module_& m) {
         ;
     }
 
+    // Full cell
     if (! add_attr<Fc>(tri_c, "Full_cell")) {
       py::class_<Fc>(tri_c, "Full_cell")
         .def(py::init<int>())
@@ -556,6 +558,7 @@ void export_triangulation_d(py::module_& m) {
         ;
     }
 
+    // Face
     if (! add_attr<Face>(tri_c, "Face")) {
       py::class_<Face>(tri_c, "Face")
         .def(py::init<int>())
@@ -589,17 +592,17 @@ void export_triangulation_d(py::module_& m) {
 
     // using Pi = Tri::Point_iterator;
     // add_iterator<Pi, Pi, const Point&>("Point_iterator", tri_c);
-    using Vi = Tri::Vertex_iterator;
-    using Fvi = Tri::Finite_vertex_iterator;
-    using Fci = Tri::Full_cell_iterator;
-    using Ffci = Tri::Finite_full_cell_iterator;
+    using Vci = Tri::Vertex_const_iterator;
+    using Fvci = Tri::Finite_vertex_const_iterator;
+    using Fcci = Tri::Full_cell_const_iterator;
+    using Ffcci = Tri::Finite_full_cell_const_iterator;
     using Fi = Tri::Facet_iterator;
     using Ffi = Tri::Finite_facet_iterator;
 
-    add_iterator<Vi, Vi, const Vertex&>("Vertex_iterator", tri_c);
-    add_iterator<Fvi, Fvi, const Vertex&>("Finite_vertex_iterator", tri_c);
-    add_iterator<Fci, Fci, const Fc&>("Full_cell_iterator", tri_c);
-    add_iterator<Ffci, Ffci, const Fc&>("Finite_full_cell_iterator", tri_c);
+    add_iterator<Vci, Vci, const Vertex&>("Vertex_iterator", tri_c);
+    add_iterator<Fvci, Fvci, const Vertex&>("Finite_vertex_iterator", tri_c);
+    add_iterator<Fcci, Fcci, const Fc&>("Full_cell_iterator", tri_c);
+    add_iterator<Ffcci, Ffcci, const Fc&>("Finite_full_cell_iterator", tri_c);
     add_iterator<Fi, Fi, const Facet&>("Facet_iterator", tri_c);
     add_iterator<Ffi, Ffi, const Facet&>("Finite_facet_iterator", tri_c);
 
