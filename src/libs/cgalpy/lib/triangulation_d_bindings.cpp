@@ -21,6 +21,9 @@
 
 namespace py = nanobind;
 
+void export_trid_vertex(py::class_<trid::Triangulation_d>&);
+void export_trid_full_cell(py::class_<trid::Triangulation_d>&);
+
 namespace trid {
 
 //!
@@ -180,36 +183,12 @@ void delete_full_cells(Triangulation_ds& tds, py::list& full_cells) {
 }
 
 //!
-void associate_vertex_with_full_cell(Triangulation_ds& tds,
-                                     Full_cell& s, int i, Vertex& v)
+void associate_vertex_with_full_cell(Triangulation_ds& tds, Full_cell& s, int i, Vertex& v)
 { tds.associate_vertex_with_full_cell(Full_cell_handle(&s), i, Vertex_handle(&v)); }
 
 //!
-void tds_set_neighbors(Triangulation_ds& tds, Full_cell& s, int i,
-                       Full_cell& s1, int j)
+void tds_set_neighbors(Triangulation_ds& tds, Full_cell& s, int i, Full_cell& s1, int j)
 { tds.set_neighbors(Full_cell_handle(&s), i, Full_cell_handle(&s1), j); }
-
-//!
-bool has_neighbor(const Tds_full_cell& tdc_fc, const Full_cell& s)
-{ return tdc_fc.has_neighbor(Full_cell_const_handle(&s)); }
-
-//!
-auto has_neighbor_get_index(const Tds_full_cell& tdc_fc, const Full_cell& s) {
-  int i;
-  auto res = tdc_fc.has_neighbor(Full_cell_const_handle(&s), i);
-  return py::make_tuple(res, i);
-}
-
-//!
-bool has_vertex(const Tds_full_cell& tdc_fc, const Vertex& v)
-{ return tdc_fc.has_vertex(Vertex_const_handle(&v)); }
-
-//!
-auto has_vertex_get_index(const Tds_full_cell& tdc_fc, const Vertex& v) {
-  int i;
-  auto res = tdc_fc.has_vertex(Vertex_const_handle(&v), i);
-  return py::make_tuple(res, i);
-}
 
 /// @}
 
@@ -460,38 +439,6 @@ void export_triangulation_d(py::module_& m) {
       // read_full_cells
       // write_full_cells
       ;
-
-    // TDS Vertex
-    if (! add_attr<Tds_vertex>(tds_c, "Vertex")) {
-      py::class_<Tds_vertex>(tds_c, "Vertex")
-        .def(py::init<>())
-        // .def(py::init<const Fc&>())
-        ;
-    }
-
-    // TDS Full cell
-    if (! add_attr<Tds_fc>(tds_c, "Full_cell")) {
-      py::class_<Tds_fc>(tds_c, "Full_cell")
-        .def(py::init<int>())
-        .def(py::init<const Tds_fc&>())
-        .def("has_neighbor", &trid::has_neighbor)
-        .def("has_neighbor_get_index", &trid::has_neighbor_get_index)
-        .def("has_vertex", &trid::has_vertex)
-        .def("has_vertex_get_index", &trid::has_vertex_get_index)
-        // .def("index", )
-        // .def("neighbor", )
-        // .def("mirror_index", )
-        // .def("set_index", )
-        // .def("set_neighbor", )
-        // .def("set_mirror_index", )
-        // .def("set_vertex", )
-        // .def("swap_vertices", )
-        // .def("vertex", )
-        // .def("is_valid", )
-        // // Data is actually here
-        // .def("vertices", )
-        ;
-    }
   }
 
   // Triangulation
@@ -574,42 +521,8 @@ void export_triangulation_d(py::module_& m) {
       .export_values()
      ;
 
-    // Vertex
-    if (! add_attr<Vertex>(tri_c, "Vertex")) {
-      py::class_<Vertex>(tri_c, "Vertex")
-        .def(py::init<const Point&>())
-        .def("point", &trid::Vertex::point, ri)
-        .def("set_point", &trid::Vertex::set_point)
-        .def("full_cell",
-             [](const Vertex& v)->Fc& { return *(v.full_cell()); }, ri)
-        .def("set_full_cell",
-             [](Vertex& v, Fc& c)->void
-             {v.set_full_cell(trid::Full_cell_handle(&c)); })
-        .def("is_valid",
-             [](const Vertex& v, bool verbose, int level)->bool
-             { return v.is_valid(verbose, level); },
-             py::arg("verbose") = false, py::arg("level") = 0)
-
-#ifdef CGALPY_TRID_VERTEX_WITH_DATA
-        .def("data", py::overload_cast<>(&Vertex::data, py::const_), ri)
-        .def("set_data",
-             [](Vertex& v, py::object data)->void{ v.data() = data; })
-#endif
-        ;
-    }
-
-    // Full cell
-    if (! add_attr<Fc>(tri_c, "Full_cell")) {
-      py::class_<Fc>(tri_c, "Full_cell")
-        .def(py::init<int>())
-        .def(py::init<const Fc&>())
-
-#ifdef CGALPY_TRID_FULL_CELL_WITH_DATA
-        .def("data", py::overload_cast<>(&Fc::data, py::const_), ri)
-        .def("set_data", [](Fc& c, py::object data)->void{ c.data() = data; })
-#endif
-        ;
-    }
+    export_trid_vertex(tri_c);
+    export_trid_full_cell(tri_c);
 
     // Face
     if (! add_attr<Face>(tri_c, "Face")) {
