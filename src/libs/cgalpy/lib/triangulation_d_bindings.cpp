@@ -21,16 +21,19 @@
 
 namespace py = nanobind;
 
+void export_trid_vertex(py::class_<trid::Triangulation_d>&);
+void export_trid_full_cell(py::class_<trid::Triangulation_d>&);
+
 namespace trid {
 
-//
+//!
 template <typename Handle_>
 const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
 
 /// Traingulation Data Structure
 /// @{
 
-//
+//!
 py::list tds_incident_full_cells1(const Triangulation_ds& tds, const Face& f) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -39,7 +42,7 @@ py::list tds_incident_full_cells1(const Triangulation_ds& tds, const Face& f) {
   return res;
 }
 
-//
+//!
 py::list tds_incident_full_cells2(const Triangulation_ds& tds, const Vertex& v) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -48,7 +51,7 @@ py::list tds_incident_full_cells2(const Triangulation_ds& tds, const Vertex& v) 
   return res;
 }
 
-//
+//!
 py::list tds_star(const Triangulation_ds& tds, const Face& f) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -67,47 +70,47 @@ py::list tds_star(const Triangulation_ds& tds, const Face& f) {
 //   return res;
 // }
 
-//
+//!
 bool vertex_is_vertex(const Triangulation_ds& tds, const Vertex& v)
 { return tds.is_vertex(Vertex_const_handle(&v)); }
 
-//
+//!
 bool vertex_is_full_cell(const Triangulation_ds& tds, const Full_cell& c)
 { return tds.is_full_cell(Full_cell_const_handle(&c)); }
 
-//
+//!
 const Vertex& vertex(const Triangulation_ds& tds, const Full_cell& s, int i)
 { return value(tds.vertex(Full_cell_const_handle(&s), i)); }
 
-//
+//!
 const Full_cell& full_cell(const Triangulation_ds& tds, const Vertex& v)
 { return value(tds.full_cell(Vertex_const_handle(&v))); }
 
-//
+//!
 Vertex& insert_increase_dimension1(Triangulation_ds& tds, Vertex& v)
 { return *(tds.insert_increase_dimension(Vertex_handle(&v))); }
 
-//
+//!
 Vertex& insert_increase_dimension2(Triangulation_ds& tds)
 { return *(tds.insert_increase_dimension(Vertex_handle())); }
 
-//
+//!
 Vertex& tds_insert_in_full_cell(Triangulation_ds& tds, Full_cell& c)
 { return *(tds.insert_in_full_cell(Full_cell_handle(&c))); }
 
-//
+//!
 Vertex& tds_insert_in_face(Triangulation_ds& tds, Face& f)
 { return *(tds.insert_in_face(f)); }
 
-//
+//!
 Vertex& tds_insert_in_facet(Triangulation_ds& tds, Facet& ft)
 { return *(tds.insert_in_facet(ft)); }
 
-//
+//!
 Full_cell& neighbor(const Triangulation_ds& tds, Full_cell& s, int i)
 { return *(tds.neighbor(Full_cell_handle(&s), i)); }
 
-//
+//!
 int mirror_index(const Triangulation_ds& tds, Full_cell& s, int i)
 { return tds.mirror_index(Full_cell_handle(&s), i); }
 
@@ -119,11 +122,11 @@ int mirror_index(const Triangulation_ds& tds, Full_cell& s, int i)
 // Vertex& tds_collapse_face(Triangulation_ds& tds, const Face& f)
 // { return *(tds.collapse_face(f)); }
 
-//
+//!
 void remove_decrease_dimension(Triangulation_ds& tds, Vertex& v1, Vertex& v2)
 { tds.remove_decrease_dimension(Vertex_handle(&v1), Vertex_handle(&v2)); }
 
-//
+//!
 Vertex& tds_insert_in_hole1(Triangulation_ds& tds, py::list& full_cells,
                             Facet f) {
   auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
@@ -131,7 +134,7 @@ Vertex& tds_insert_in_hole1(Triangulation_ds& tds, py::list& full_cells,
   return *(tds.insert_in_hole(begin, end, f));
 }
 
-//
+//!
 py::list tds_insert_in_hole2(Triangulation_ds& tds, py::list& full_cells,
                              const Facet& ft) {
 
@@ -146,7 +149,7 @@ py::list tds_insert_in_hole2(Triangulation_ds& tds, py::list& full_cells,
   return final_res;
 }
 
-//
+//!
 py::list insert_in_tagged_hole(Triangulation_ds& tds, Vertex& v, Facet& f) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -157,36 +160,34 @@ py::list insert_in_tagged_hole(Triangulation_ds& tds, Vertex& v, Facet& f) {
   return lst;
 }
 
-//
+//!
 Vertex& tds_new_vertex(Triangulation_ds& tds) { return *(tds.new_vertex()); }
 
-//
+//!
 Full_cell& tds_new_full_cell(Triangulation_ds& tds)
 { return *(tds.new_full_cell()); }
 
-//
+//!
 void delete_vertex(Triangulation_ds& tds, Vertex& v)
 { tds.delete_vertex(Vertex_handle(&v)); }
 
-//
+//!
 void delete_full_cell(Triangulation_ds& tds, Full_cell& fc)
 { tds.delete_full_cell(Full_cell_handle(&fc)); }
 
-//
+//!
 void delete_full_cells(Triangulation_ds& tds, py::list& full_cells) {
   auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
   auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
   tds.delete_full_cells(begin, end);
 }
 
-//
-void associate_vertex_with_full_cell(Triangulation_ds& tds,
-                                     Full_cell& s, int i, Vertex& v)
+//!
+void associate_vertex_with_full_cell(Triangulation_ds& tds, Full_cell& s, int i, Vertex& v)
 { tds.associate_vertex_with_full_cell(Full_cell_handle(&s), i, Vertex_handle(&v)); }
 
-//
-void tds_set_neighbors(Triangulation_ds& tds, Full_cell& s, int i,
-                       Full_cell& s1, int j)
+//!
+void tds_set_neighbors(Triangulation_ds& tds, Full_cell& s, int i, Full_cell& s1, int j)
 { tds.set_neighbors(Full_cell_handle(&s), i, Full_cell_handle(&s1), j); }
 
 /// @}
@@ -194,7 +195,7 @@ void tds_set_neighbors(Triangulation_ds& tds, Full_cell& s, int i,
 /// Face
 /// @{
 
-//
+//!
 void set_full_cell(Face& f, Full_cell& fc)
 { f.set_full_cell(Full_cell_handle(&fc)); }
 
@@ -203,7 +204,7 @@ void set_full_cell(Face& f, Full_cell& fc)
 /// dD Triangulation
 /// @{
 
-//
+//!
 py::list incident_full_cells1(const Triangulation_d& tri, const Face& f) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -212,7 +213,7 @@ py::list incident_full_cells1(const Triangulation_d& tri, const Face& f) {
   return res;
 }
 
-//
+//!
 py::list incident_full_cells2(const Triangulation_d& tri, const Vertex& v) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -221,7 +222,7 @@ py::list incident_full_cells2(const Triangulation_d& tri, const Vertex& v) {
   return res;
 }
 
-//
+//!
 py::list star(const Triangulation_d& tri, const Face& f) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -230,7 +231,7 @@ py::list star(const Triangulation_d& tri, const Face& f) {
   return res;
 }
 
-//
+//!
 py::list incident_faces(const Triangulation_d& tri, const Vertex& v, int d) {
   py::list res;
   auto op = [&] (const Face& f) mutable { res.append(f); };
@@ -239,48 +240,48 @@ py::list incident_faces(const Triangulation_d& tri, const Vertex& v, int d) {
   return res;
 }
 
-//
+//!
 Full_cell& new_full_cell(Triangulation_d& tri)
 { return *(tri.new_full_cell()); }
 
-//
+//!
 Vertex& new_vertex1(Triangulation_d& tri) { return *(tri.new_vertex()); }
 
-//
+//!
 Vertex& new_vertex2(Triangulation_d& tri, const Point& p)
 { return *(tri.new_vertex(p)); }
 
-//
+//!
 void set_neighbors(Triangulation_d& tri, Full_cell& s, int i,
                    Full_cell& s1, int j)
 { tri.set_neighbors(Full_cell_handle(&s), i, Full_cell_handle(&s1), j); }
 
-//
+//!
 bool are_incident_full_cells_valid(const Triangulation_d& tri,
                                    const Vertex& v, bool verbose, int level) {
   return tri.are_incident_full_cells_valid(Vertex_const_handle(&v),
                                            verbose, level);
 }
 
-//
+//!
 Full_cell& locate1(const Triangulation_d& tri, const Point& p, Locate_type& lt,
                    Face& f1, Facet& f2, Full_cell& start)
 { return *(tri.locate(p, lt, f1, f2, Full_cell_handle(&start))); }
 
-//
+//!
 Full_cell& locate2(const Triangulation_d& tri, const Point& p, Locate_type& lt,
                    Face& f, Facet& facet, Vertex& v)
 { return *(tri.locate(p, lt, f, facet, Vertex_handle(&v))); }
 
-//
+//!
 Full_cell& locate3(const Triangulation_d& tri, const Point& p, Full_cell& s)
 { return *(tri.locate(p, Full_cell_handle(&s))); }
 
-//
+//!
 Full_cell& locate4(const Triangulation_d& tri, const Point& p, Vertex& v)
 { return *(tri.locate(p, Vertex_handle(&v))); }
 
-//
+//!
 size_type insert1(Triangulation_d& tri, py::list& points) {
   auto begin = stl_input_iterator<Point>(points);
   auto end = stl_input_iterator<Point>(points, false);
@@ -291,19 +292,19 @@ Vertex& insert2(Triangulation_d& tri, const Point& p, Locate_type lt,
                 const Face& f, const Facet& ft, Full_cell& fc)
 { return *(tri.insert(p, lt, f, ft, Full_cell_handle(&fc))); }
 
-//
+//!
 Vertex& insert3(Triangulation_d& tri, const Point& p, Full_cell& hint)
 { return *(tri.insert(p, Full_cell_handle(&hint))); }
 
-//
+//!
 Vertex& insert4(Triangulation_d& tri, const Point& p, Vertex& v)
 { return *(tri.insert(p, Vertex_handle(&v))); }
 
-//
+//!
 Vertex& insert5(Triangulation_d& tri, const Point& p)
 { return *(tri.insert(p)); }
 
-//
+//!
 py::list
 insert_in_hole1(Triangulation_d& tri, const Point& p, py::list& full_cells,
                 const Facet& ft) {
@@ -319,7 +320,7 @@ insert_in_hole1(Triangulation_d& tri, const Point& p, py::list& full_cells,
   return final_res;
 }
 
-//
+//!
 Vertex& insert_in_hole2(Triangulation_d& tri, const Point& p,
                         py::list& full_cells, const Facet& ft) {
   auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
@@ -327,48 +328,48 @@ Vertex& insert_in_hole2(Triangulation_d& tri, const Point& p,
   return *(tri.insert_in_hole(p, begin, end, ft));
 }
 
-//
+//!
 Vertex& insert_in_face(Triangulation_d& tri, const Point& p, const Face& f)
 { return *(tri.insert_in_face(p, f)); }
 
-//
+//!
 Vertex& insert_in_facet(Triangulation_d& tri, const Point& p, const Facet& ft)
 { return *(tri.insert_in_facet(p, ft)); }
 
-//
+//!
 Vertex& insert_in_full_cell(Triangulation_d& tri, const Point& p, Full_cell& fc)
 { return *(tri.insert_in_full_cell(p, Full_cell_handle(&fc))); }
 
-//
+//!
 Vertex& insert_outside_convex_hull(Triangulation_d& tri, const Point& p,
                                    Full_cell& fc)
 { return *(tri.insert_outside_convex_hull(p, Full_cell_handle(&fc))); }
 
-//
+//!
 Vertex& insert_outside_affine_hull(Triangulation_d& tri, const Point& p)
 { return *(tri.insert_outside_affine_hull(p)); }
 
-//
+//!
 py::object vertices(const Triangulation_d& tri)
 { return make_iterator(tri.vertices_begin(), tri.vertices_end()); }
 
-//
+//!
 py::object finite_vertices(const Triangulation_d& tri)
 { return make_iterator(tri.finite_vertices_begin(), tri.finite_vertices_end()); }
 
-//
+//!
 py::object full_cells(const Triangulation_d& tri)
 { return make_iterator(tri.full_cells_begin(), tri.full_cells_end()); }
 
-//
+//!
 py::object finite_full_cells(const Triangulation_d& tri)
 { return make_iterator(tri.finite_full_cells_begin(), tri.finite_full_cells_end()); }
 
-//
+//!
 py::object facets(Triangulation_d& tri)
 { return make_iterator(tri.facets_begin(), tri.facets_end()); }
 
-//
+//!
 py::object finite_facets(Triangulation_d& tri)
 { return make_iterator(tri.finite_facets_begin(), tri.finite_facets_end()); }
 
@@ -376,7 +377,7 @@ py::object finite_facets(Triangulation_d& tri)
 
 } // End of namespace trid
 
-//
+//!
 void export_triangulation_d(py::module_& m) {
   using Tri = trid::Triangulation_d;
   using Vertex = trid::Vertex;
@@ -385,13 +386,16 @@ void export_triangulation_d(py::module_& m) {
   using Face = trid::Face;
   using Rotor = trid::Rotor;
   using Tds = trid::Triangulation_ds;
+  using Tds_vertex = trid::Tds_vertex;
+  using Tds_fc = trid::Tds_full_cell;
   using Point = trid::Point;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Tds>(m, "Triangulation_ds")) {
-    py::class_<Tds>(m, "Triangulation_ds")
-      .def(py::init<int>())
+    py::class_<Tds> tds_c(m, "Triangulation_ds");
+
+    tds_c.def(py::init<int>())
       .def(py::init<const Tds&>())
       .def("maximal_dimension", &Tds::maximal_dimension)
       .def("current_dimension", &Tds::current_dimension)
@@ -435,13 +439,9 @@ void export_triangulation_d(py::module_& m) {
       // read_full_cells
       // write_full_cells
       ;
-
-    // Iterators:
-    // vertices
-    // full_cells
-    // facets
   }
 
+  // Triangulation
   if (! add_attr<Tri>(m, "Triangulation")) {
     py::class_<Tri> tri_c(m, "Triangulation");
     tri_c.def(py::init<int, const trid::Traits&>())
@@ -521,42 +521,8 @@ void export_triangulation_d(py::module_& m) {
       .export_values()
      ;
 
-    // Vertex
-    if (! add_attr<Vertex>(tri_c, "Vertex")) {
-      py::class_<Vertex>(tri_c, "Vertex")
-        .def(py::init<const Point&>())
-        .def("point", &trid::Vertex::point, ri)
-        .def("set_point", &trid::Vertex::set_point)
-        .def("full_cell",
-             [](const Vertex& v)->Fc& { return *(v.full_cell()); }, ri)
-        .def("set_full_cell",
-             [](Vertex& v, Fc& c)->void
-             {v.set_full_cell(trid::Full_cell_handle(&c)); })
-        .def("is_valid",
-             [](const Vertex& v, bool verbose, int level)->bool
-             { return v.is_valid(verbose, level); },
-             py::arg("verbose") = false, py::arg("level") = 0)
-
-#ifdef CGALPY_TRID_VERTEX_WITH_DATA
-        .def("data", py::overload_cast<>(&Vertex::data, py::const_), ri)
-        .def("set_data",
-             [](Vertex& v, py::object data)->void{ v.data() = data; })
-#endif
-        ;
-    }
-
-    // Full cell
-    if (! add_attr<Fc>(tri_c, "Full_cell")) {
-      py::class_<Fc>(tri_c, "Full_cell")
-        .def(py::init<int>())
-        .def(py::init<const Fc&>())
-
-#ifdef CGALPY_TRID_FULL_CELL_WITH_DATA
-        .def("data", py::overload_cast<>(&Fc::data, py::const_), ri)
-        .def("set_data", [](Fc& c, py::object data)->void{ c.data() = data; })
-#endif
-        ;
-    }
+    export_trid_vertex(tri_c);
+    export_trid_full_cell(tri_c);
 
     // Face
     if (! add_attr<Face>(tri_c, "Face")) {

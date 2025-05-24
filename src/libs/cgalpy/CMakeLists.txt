@@ -430,6 +430,8 @@ endif ()
 # dD triangulation
 if (CGALPY_TRIANGULATION_D_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_d_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_trid_full_cell.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_trid_vertex.cpp)
     list(APPEND CGALPY_MODULES Trid)
     set(CGALPY_Trid_FILTERS [=[{}]=])
 endif ()

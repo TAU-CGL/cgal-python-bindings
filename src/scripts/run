@@ -81,7 +81,6 @@ eval "declare -a $item=('env2_seg_cd_epec'    'kerEpecInt_aos2SegCdPl_env2')";  
 eval "declare -a $item=('env3_plane_epec'     'kerEpecInt_aos2LinearPl_env3Plane')";       ((i++)); item="item$i"
 eval "declare -a $item=('env3_plane_sd_epec'  'kerEpecInt_aos2LinearPl_env3PlaneSd')";     ((i++)); item="item$i"
 eval "declare -a $item=('env3_sphere_ccr'     'kerCcrInt_aos2ConicPl_env3Sphere')";        ((i++)); item="item$i"
-eval "declare -a $item=('env3_tri_epec'       'kerEpecInt_aos2SegPl_env3Tri')";            ((i++)); item="item$i"
 eval "declare -a $item=('env3_tri_sd_epec'    'kerEpecInt_aos2SegPl_env3TriSd')";          ((i++)); item="item$i"
 eval "declare -a $item=('epecd'               'kerdEpecdDynamic')";                        ((i++)); item="item$i"
 eval "declare -a $item=('epec'                'kerEpecInt')";                              ((i++)); item="item$i"

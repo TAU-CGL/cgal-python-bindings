@@ -45,6 +45,9 @@ using Triangulation_d = Tri<CGALPY_TRID, Traits, Tds>::type;
 using Geom_traits = Triangulation_d::Geom_traits;
 using Triangulation_ds = Triangulation_d::Triangulation_ds;
 
+using Tds_vertex = Tds::Vertex;
+using Tds_full_cell = Tds::Full_cell;
+
 using Vertex = Triangulation_d::Vertex;
 using Full_cell = Triangulation_d::Full_cell;
 using Facet = Triangulation_d::Facet;
