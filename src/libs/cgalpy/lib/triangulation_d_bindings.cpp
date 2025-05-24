@@ -127,16 +127,14 @@ void remove_decrease_dimension(Triangulation_ds& tds, Vertex& v1, Vertex& v2)
 { tds.remove_decrease_dimension(Vertex_handle(&v1), Vertex_handle(&v2)); }
 
 //!
-Vertex& tds_insert_in_hole1(Triangulation_ds& tds, py::list& full_cells,
-                            Facet f) {
+Vertex& tds_insert_in_hole1(Triangulation_ds& tds, py::list& full_cells, Facet f) {
   auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
   auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
   return *(tds.insert_in_hole(begin, end, f));
 }
 
 //!
-py::list tds_insert_in_hole2(Triangulation_ds& tds, py::list& full_cells,
-                             const Facet& ft) {
+py::list tds_insert_in_hole2(Triangulation_ds& tds, py::list& full_cells, const Facet& ft) {
 
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -426,8 +424,7 @@ void export_triangulation_d(py::module_& m) {
       .def("delete_vertex", &trid::delete_vertex)
       .def("delete_full_cell", &trid::delete_full_cell)
       .def("delete_full_cells", &trid::delete_full_cells)
-      .def("associate_vertex_with_full_cell",
-           &trid::associate_vertex_with_full_cell)
+      .def("associate_vertex_with_full_cell", &trid::associate_vertex_with_full_cell)
       .def("set_neighbors", &trid::tds_set_neighbors)
       .def("is_valid", &Tds::is_valid, py::arg("verbose") = true, py::arg("level") = 0)
       // .def("gather_full_cells", gather_full_cells, ri) // not implemented yet
@@ -446,8 +443,7 @@ void export_triangulation_d(py::module_& m) {
     py::class_<Tri> tri_c(m, "Triangulation");
     tri_c.def(py::init<int, const trid::Traits&>())
       .def(py::init<const Tri&>())
-      .def("full_cell",
-           [](Tri& tri, const Facet& f)->Fc& { return *(tri.full_cell(f)); }, ri)
+      .def("full_cell", [](Tri& tri, const Facet& f)->Fc& { return *(tri.full_cell(f)); }, ri)
       .def("index_of_covertex", &Tri::index_of_covertex)
       // .def("rotate_rotor", &Tri::rotate_rotor)
       .def("tds", py::overload_cast<>(&Tri::tds, py::const_))
@@ -457,21 +453,13 @@ void export_triangulation_d(py::module_& m) {
       .def("empty", &Tri::empty)
       .def("number_of_vertices", &Tri::number_of_vertices)
       .def("number_of_full_cells", &Tri::number_of_full_cells)
-      .def("infinite_vertex",
-           [](Tri& tri)->Vertex&
-           { return *(tri.infinite_vertex()); }, ri)
-      .def("infinite_full_cell",
-           [](Tri& tri)->Fc&
-           { return *(tri.infinite_full_cell()); }, ri)
+      .def("infinite_vertex", [](Tri& tri)->Vertex& { return *(tri.infinite_vertex()); }, ri)
+      .def("infinite_full_cell", [](Tri& tri)->Fc& { return *(tri.infinite_full_cell()); }, ri)
       .def("number_of_finite_full_cells", &Tri::number_of_finite_full_cells)
-      .def("is_infinite",
-           py::overload_cast<const Vertex&>(&Tri::is_infinite, py::const_))
-      .def("is_infinite",
-           py::overload_cast<const Fc&>(&Tri::is_infinite, py::const_))
-      .def("is_infinite",
-           py::overload_cast<const Facet&>(&Tri::is_infinite, py::const_))
-      .def("is_infinite",
-           py::overload_cast<const Face&>(&Tri::is_infinite, py::const_))
+      .def("is_infinite", py::overload_cast<const Vertex&>(&Tri::is_infinite, py::const_))
+      .def("is_infinite", py::overload_cast<const Fc&>(&Tri::is_infinite, py::const_))
+      .def("is_infinite", py::overload_cast<const Facet&>(&Tri::is_infinite, py::const_))
+      .def("is_infinite", py::overload_cast<const Face&>(&Tri::is_infinite, py::const_))
       .def("incident_full_cells", &trid::incident_full_cells1)
       .def("incident_full_cells", &trid::incident_full_cells2)
       .def("star", &trid::star)
@@ -483,10 +471,8 @@ void export_triangulation_d(py::module_& m) {
       .def("new_vertex", &trid::new_vertex1, ri)
       .def("new_vertex", &trid::new_vertex2, ri)
       .def("set_neighbors", &trid::set_neighbors)
-      .def("is_valid", &Tri::is_valid,
-           py::arg("verbos") = false, py::arg("level") = 0)
-      .def("are_incident_full_cells_valid",
-           &trid::are_incident_full_cells_valid,
+      .def("is_valid", &Tri::is_valid, py::arg("verbos") = false, py::arg("level") = 0)
+      .def("are_incident_full_cells_valid", &trid::are_incident_full_cells_valid,
            py::arg("vertex"), py::arg("verbos") = false, py::arg("level") = 0)
       .def("locate", &trid::locate1)
       .def("locate", &trid::locate2)
@@ -524,6 +510,14 @@ void export_triangulation_d(py::module_& m) {
     export_trid_vertex(tri_c);
     export_trid_full_cell(tri_c);
 
+    // Facet
+    if (! add_attr<Facet>(tri_c, "Facet")) {
+      py::class_<Facet>(tri_c, "Facet")
+        .def("full_cell", [](const Facet& f) { return *(f.full_cell()); }, ri)
+        .def("index_of_covertex", &Facet::index_of_covertex)
+        ;
+    }
+
     // Face
     if (! add_attr<Face>(tri_c, "Face")) {
       py::class_<Face>(tri_c, "Face")
@@ -531,8 +525,7 @@ void export_triangulation_d(py::module_& m) {
         .def(py::init<const Face&>())
         .def("face_dimension", &Face::face_dimension)
         .def("index", &Face::index)
-        .def("vertex",
-             [](Face& f, int i)->Vertex& { return *(f.vertex(i)); }, ri)
+        .def("vertex", [](Face& f, int i)->Vertex& { return *(f.vertex(i)); }, ri)
         .def("Full_cell", [](Face& f)->Fc& { return *(f.full_cell()); }, ri)
         .def("clear", &Face::clear)
         .def("set_full_cell", trid::set_full_cell)
@@ -542,19 +535,19 @@ void export_triangulation_d(py::module_& m) {
 
     add_attr<trid::Geom_traits>(tri_c, "Geom_traits");
 
-    if (! add_attr<trid::Vertex_handle>(tri_c, "Vertex_handle")) {
-      py::class_<trid::Vertex_handle>(tri_c, "Vertex_handle")
-        .def(py::init<>())
-        .def("value", &trid::value<trid::Vertex_handle>, ri)
-        ;
-    }
+    // if (! add_attr<trid::Vertex_handle>(tri_c, "Vertex_handle")) {
+    //   py::class_<trid::Vertex_handle>(tri_c, "Vertex_handle")
+    //     .def(py::init<>())
+    //     .def("value", &trid::value<trid::Vertex_handle>, ri)
+    //     ;
+    // }
 
-    if (! add_attr<trid::Full_cell_handle>(tri_c, "Full_cell_handle")) {
-      py::class_<trid::Full_cell_handle>(tri_c, "Full_cell_handle")
-        .def(py::init<>())
-        .def("value", &trid::value<trid::Full_cell_handle>, ri)
-        ;
-    }
+    // if (! add_attr<trid::Full_cell_handle>(tri_c, "Full_cell_handle")) {
+    //   py::class_<trid::Full_cell_handle>(tri_c, "Full_cell_handle")
+    //     .def(py::init<>())
+    //     .def("value", &trid::value<trid::Full_cell_handle>, ri)
+    //     ;
+    // }
 
     // using Pi = Tri::Point_iterator;
     // add_iterator<Pi, Pi, const Point&>("Point_iterator", tri_c);
@@ -596,8 +589,7 @@ void export_triangulation_d(py::module_& m) {
     if (! add_attr<Dtri>(m, "Delaunay_triangulation")) {
       py::class_<Dtri, Tri> dtri_c(m, "Delaunay_triangulation");
 
-      dtri_c.def(py::init<int, const trid::Traits&>(),
-                 py::arg("dim"), py::arg("traits"))
+      dtri_c.def(py::init<int, const trid::Traits&>(), py::arg("dim"), py::arg("traits"))
         ;
     }
 #endif
