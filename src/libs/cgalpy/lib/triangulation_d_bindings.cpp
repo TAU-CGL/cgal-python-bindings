@@ -97,8 +97,8 @@ const Full_cell& full_cell1(const Triangulation_ds& tds, const Vertex& v)
 { return value(tds.full_cell(Vertex_const_handle(&v))); }
 
 //!
-Vertex& insert_increase_dimension1(Triangulation_ds& tds, Vertex& v)
-{ return *(tds.insert_increase_dimension(Vertex_handle(&v))); }
+Vertex& insert_increase_dimension1(Triangulation_ds& tds, Vertex& star)
+{ return *(tds.insert_increase_dimension(Vertex_handle(&star))); }
 
 //!
 Vertex& insert_increase_dimension2(Triangulation_ds& tds)
@@ -113,8 +113,8 @@ Vertex& tds_insert_in_face(Triangulation_ds& tds, Face& f)
 { return *(tds.insert_in_face(f)); }
 
 //!
-Vertex& tds_insert_in_facet(Triangulation_ds& tds, Facet& ft)
-{ return *(tds.insert_in_facet(ft)); }
+Vertex& tds_insert_in_facet(Triangulation_ds& tds, Facet& f)
+{ return *(tds.insert_in_facet(f)); }
 
 //!
 Full_cell& neighbor(const Triangulation_ds& tds, Full_cell& s, int i)
@@ -270,8 +270,7 @@ void set_neighbors(Triangulation_d& tri, Full_cell& s, int i,
 //!
 bool are_incident_full_cells_valid(const Triangulation_d& tri,
                                    const Vertex& v, bool verbose, int level) {
-  return tri.are_incident_full_cells_valid(Vertex_const_handle(&v),
-                                           verbose, level);
+  return tri.are_incident_full_cells_valid(Vertex_const_handle(&v), verbose, level);
 }
 
 //!
@@ -359,24 +358,12 @@ Vertex& insert_outside_affine_hull(Triangulation_d& tri, const Point& p)
 { return *(tri.insert_outside_affine_hull(p)); }
 
 //!
-py::object vertices(const Triangulation_d& tri)
-{ return make_iterator(tri.vertices_begin(), tri.vertices_end()); }
-
-//!
 py::object finite_vertices(const Triangulation_d& tri)
 { return make_iterator(tri.finite_vertices_begin(), tri.finite_vertices_end()); }
 
 //!
-py::object full_cells(const Triangulation_d& tri)
-{ return make_iterator(tri.full_cells_begin(), tri.full_cells_end()); }
-
-//!
 py::object finite_full_cells(const Triangulation_d& tri)
 { return make_iterator(tri.finite_full_cells_begin(), tri.finite_full_cells_end()); }
-
-//!
-py::object facets(Triangulation_d& tri)
-{ return make_iterator(tri.facets_begin(), tri.facets_end()); }
 
 //!
 py::object finite_facets(Triangulation_d& tri)
@@ -391,6 +378,21 @@ py::object finite_facets(Triangulation_d& tri)
 template <typename Triangulation_>
 const Full_cell& full_cell2(const Triangulation_& tri, const Facet& f)
 { return value(tri.full_cell(f)); }
+
+//!
+template <typename Triangulation_>
+py::object facets(Triangulation_& tri)
+{ return make_iterator(tri.facets_begin(), tri.facets_end()); }
+
+//!
+template <typename Triangulation_>
+py::object full_cells(const Triangulation_& tri)
+{ return make_iterator(tri.full_cells_begin(), tri.full_cells_end()); }
+
+//!
+template <typename Triangulation_>
+py::object vertices(const Triangulation_& tri)
+{ return make_iterator(tri.vertices_begin(), tri.vertices_end()); }
 
 /// @}
 
@@ -422,25 +424,37 @@ void export_triangulation_d(py::module_& m) {
       .def("clear", &Tds::clear, "Initialize the triangulation to the empty complex")
       // .def("collapse_face", &trid::tds_collapse_face) // bug in CGAL
       .def("current_dimension", &Tds::current_dimension,
-           "Obtain the dimension of the full dimensional cells stored in the triangulation")
+           "Obtain the dimension of the full dimensional cells stored in the triangulation\n"
+           "Return:\n"
+           "  int the dimension\n")
       .def("delete_full_cell", &trid::delete_full_cell, py::arg("c"),
-           "Remove the full cell c from the triangulation")
+           "Remove a full cell from the triangulation\n"
+           "Parameters:\n"
+           "  c (Full_cell) the full cell to remove\n")
       .def("delete_full_cells", &trid::delete_full_cells, py::arg("full_cells"),
-           "Remove the full cells in the given list")
+           "Remove a set of full cells\n"
+           "Parameters:\n"
+           "  full_cels (list) the set of gull cells to remove\n")
       .def("delete_vertex", &trid::delete_vertex, py::arg("v"),
-           "Remove the vertex v from the triangulation")
-      .def("empty", &Tds::empty, "Determine whether triangulation is empty")
+           "Remove a vertex from the triangulation\n"
+           "Parameters:\n"
+           "  v (Vertex) the vertex to remove\n")
+      .def("empty", &Tds::empty, "Determine whether the triangulation is empty")
       .def("full_cell", &trid::full_cell1, ri, py::arg("v"),
-           "Obtain a full cell incident to the vertex v")
+           "Obtain a full cell incident to a vertex\n"
+           "Parameters:\n"
+           "  v (Vertex) the input vertex\n")
       .def("full_cell", &trid::full_cell2<Tds>, ri, py::arg("f"),
-           "Obtain a full cell containing the facet f")
+           "Obtain a full cell containing a facet\n"
+           "Parameters:\n"
+           "  f (Facet) the input facet\n")
       .def("gather_full_cells", &trid::gather_full_cells, ri, py::arg("start"), py::arg("tp"),
            "computes (gathers) a connected set of full cells satisfying a given criterion \n"
            "Parameters:\n"
            "  start (Full_cell): the starting point of the recursive traversal of adjacent full cells\n"
            "  tp (Callable): a predicate that accepts a facet implementing the criterion\n"
            "Return:\n"
-           "  tuple [f: Facet, list] the 1st element is a facet on the boundary of the set of cells, and the 2nd is a list of full cells that satisfy the criterion\n")
+           "  tuple [Facet, list] the 1st element is a facet on the boundary of the set of cells, and the 2nd is a list of full cells that satisfy the criterion\n")
       .def("incident_full_cells", &trid::tds_incident_full_cells1, py::arg("f"),
            "Obtain all the full cells that are incident to a face\n"
            "Parameters:\n"
@@ -454,40 +468,66 @@ void export_triangulation_d(py::module_& m) {
            "Return:\n"
            "  list: the full cells incident to v\n")
       .def("index_of_covertex", &Tds::index_of_covertex<Facet>, py::arg("f"),
-           "Obtain the index of the vertex of the full cell c containing f, which does not belong to c")
-      .def("insert_in_face", &trid::tds_insert_in_face, ri, py::arg("f"),
-           "Inserts a new vertex in the triangulation data structure by subdividing the face f\n"
-           "Return:\n"
-           "  v: Vertex: the new vertex\n")
-      .def("insert_in_facet", &trid::tds_insert_in_facet, ri, py::arg("f"),
-           "Inserts a new vertex in the triangulation data structure by subdividing the facet f\n"
-           "Return:\n"
-           "  v: Vertex: the new vertex\n")
-      .def("insert_in_full_cell", &trid::tds_insert_in_full_cell, ri, py::arg("c"),
-           "Insert a new vertex v in the full cell c\n"
-           "Return:\n"
-           "  v: Vertex: the new vertex\n")
-      .def("insert_in_hole", &trid::tds_insert_in_hole, ri, py::arg("full_cells"), py::arg("f"),
-           "Remove the given full cells, insert a new vertex, and connect each face of the boundary of the given set of cells to v\n"
+           "Obtain the index of the vertex of a full cell containing a facet, which does not belong to the full cell\n"
            "Parameters:\n"
-           "  list: the input full cells\n"
-           "  f (Facet): the input facet\n"
+           "  f (Facet) the input facet\n"
            "Return:\n"
-           "  v: Vertex: the new vertex\n")
-      .def("insert_in_hole", &trid::tds_insert_in_hole_get_full_cells, ri, py::arg("full_cells"), py::arg("f"),
-           "Remove the given full cells, insert a new vertex, and connect each face of the boundary of the union of given full cells to v\n"
+           "  int: the index of the vertex\n")
+      .def("insert_in_face", &trid::tds_insert_in_face, ri, py::arg("f"),
+           "Inserts a new vertex into the triangulation data structure by subdividing a face\n"
+           "Parameters:\n"
+           "  f (Face) the input face\n"
+           "Return:\n"
+           "  Vertex: the new vertex\n")
+      .def("insert_in_facet", &trid::tds_insert_in_facet, ri, py::arg("f"),
+           "Inserts a new vertex into the triangulation data structure by subdividing a facet\n"
+           "Parameters:\n"
+           "  f (Facet) the input facet\n"
+           "Return:\n"
+           "  Vertex: the new vertex\n")
+      .def("insert_in_full_cell", &trid::tds_insert_in_full_cell, ri, py::arg("c"),
+           "Insert a new vertex in a full cell into the triangulation data structure\n"
+           "Parameters:\n"
+           "  c (Full_cell) the input full cell\n"
+           "Return:\n"
+           "  Vertex: the new vertex\n")
+      .def("insert_in_hole", &trid::tds_insert_in_hole, ri, py::arg("full_cells"), py::arg("f"),
+           "Remove a set of full cells, insert a new vertex, and connect each face on the boundary of a given set of cells to the new vertex\n"
            "Parameters:\n"
            "  full_cells (list): the input full cells\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
-           "  tuple [v: Vertex, list]: the first element is the new vertex; the second is list of the newly created full cells\n")
+           "  Vertex: the new vertex\n")
+      .def("insert_in_hole", &trid::tds_insert_in_hole_get_full_cells, ri, py::arg("full_cells"), py::arg("f"),
+           "Remove a set of full cells, insert a new vertex, and connect each face on the boundary of a given set of cells to the new vertex\n"
+           "Parameters:\n"
+           "  full_cells (list): the input full cells\n"
+           "  f (Facet): the input facet\n"
+           "Return:\n"
+           "  tuple [Vertex, list]: the 1st element is the new vertex; the 2nd is a list of the newly created full cells\n")
 
-      .def("insert_in_tagged_hole", &trid::insert_in_tagged_hole, ri)
-      .def("insert_increase_dimension", &trid::insert_increase_dimension1, ri)
+      .def("insert_increase_dimension", &trid::insert_increase_dimension1, ri, py::arg("star"),
+           "Add a new vertex, therby transform a triangulation of the sphere 𝕊^d into the triangulation of 𝕊^{d+1}\n",
+           "Parameters:\n"
+           "  star (Vertex) the anchor vertex for triangulating one hemi sphere\n"
+           "Return:\n"
+           "  Vertex: the new vertex\n")
       .def("insert_increase_dimension", &trid::insert_increase_dimension2, ri)
+           .def("is_full_cell", &trid::vertex_is_full_cell, py::arg("c"),
+                "Determine whether a full cell is part of the triangulation\n"
+                "Parameters:\n"
+                "  c (Full_cell): the input full cell\n"
+                "Return:\n"
+                "  bool\n")
 
-      .def("is_full_cell", &trid::vertex_is_full_cell)
-      .def("is_valid", &Tds::is_valid, py::arg("verbose") = true, py::arg("level") = 0)
+      .def("is_valid", &Tds::is_valid, py::arg("verbose") = true, py::arg("level") = 0,
+           "Partially determine whether the triangulation is valid\n"
+           "Parameters:\n"
+           "  verbos (bool) indicates whether to be verbose\n"
+           "  level (int) the verbosity level\n"
+           "Return:\n"
+           "  bool\n")
+
       .def("is_vertex", &trid::vertex_is_vertex)
       .def("maximal_dimension", &Tds::maximal_dimension)
       .def("mirror_index", &trid::mirror_index)
@@ -503,10 +543,40 @@ void export_triangulation_d(py::module_& m) {
       .def("star", &trid::tds_star)
       .def("vertex", &trid::vertex, ri)
 
+      // Non concept
+      .def("insert_in_tagged_hole", &trid::insert_in_tagged_hole, ri, py::arg("v"), py::arg("f"),
+           "Connect each face on the boundary of a full cell c to a vertex\n"
+           "Parameters:\n"
+           "  v (Vertex) the input vertex\n"
+           "  f (Facet) the facet contained by the full cell c\n"
+           "Return:\n"
+           "  list: a list of the newly created full cells\n")
+
       // .def("incident_upper_faces", &trid::tds_incident_upper_faces) // not implemented yet
       // .def("incident_faces", &trid::tds_incident_faces) // not implemented yet
       // read_full_cells
       // write_full_cells
+      ;
+
+    // Iterators
+    using Vci = Tri::Vertex_const_iterator;
+    using Fvci = Tri::Finite_vertex_const_iterator;
+    using Fcci = Tri::Full_cell_const_iterator;
+    using Ffcci = Tri::Finite_full_cell_const_iterator;
+    using Fi = Tri::Facet_iterator;
+    using Ffi = Tri::Finite_facet_iterator;
+
+    add_iterator<Fi, Fi, const Facet&>("Facet_iterator", tds_c);
+    add_iterator<Fcci, Fcci, const Fc&>("Full_cell_iterator", tds_c);
+    add_iterator<Vci, Vci, const Vertex&>("Vertex_iterator", tds_c);
+
+    tds_c
+      .def("facets", &trid::facets<Tds>, py::keep_alive<0, 1>(),
+           "Obtain an iterator that traverses all facets")
+      .def("full_cells", &trid::full_cells<Tds>, py::keep_alive<0, 1>(),
+           "Obtain an iterator that traverses all full cells")
+      .def("vertices", &trid::vertices<Tds>, py::keep_alive<0, 1>(),
+           "Obtain an iterator that traverses all vertices")
       ;
   }
 
@@ -616,20 +686,6 @@ void export_triangulation_d(py::module_& m) {
 
     add_attr<trid::Geom_traits>(tri_c, "Geom_traits");
 
-    // if (! add_attr<trid::Vertex_handle>(tri_c, "Vertex_handle")) {
-    //   py::class_<trid::Vertex_handle>(tri_c, "Vertex_handle")
-    //     .def(py::init<>())
-    //     .def("value", &trid::value<trid::Vertex_handle>, ri)
-    //     ;
-    // }
-
-    // if (! add_attr<trid::Full_cell_handle>(tri_c, "Full_cell_handle")) {
-    //   py::class_<trid::Full_cell_handle>(tri_c, "Full_cell_handle")
-    //     .def(py::init<>())
-    //     .def("value", &trid::value<trid::Full_cell_handle>, ri)
-    //     ;
-    // }
-
     // using Pi = Tri::Point_iterator;
     // add_iterator<Pi, Pi, const Point&>("Point_iterator", tri_c);
     using Vci = Tri::Vertex_const_iterator;
@@ -647,12 +703,12 @@ void export_triangulation_d(py::module_& m) {
     add_iterator<Ffi, Ffi, const Facet&>("Finite_facet_iterator", tri_c);
 
     tri_c
-      .def("facets", &trid::facets, py::keep_alive<0, 1>())
-      .def("vertices", &trid::vertices, py::keep_alive<0, 1>())
-      .def("finite_vertices", &trid::finite_vertices, py::keep_alive<0, 1>())
-      .def("full_cells", &trid::full_cells, py::keep_alive<0, 1>())
-      .def("finite_full_cells", &trid::finite_full_cells, py::keep_alive<0, 1>())
+      .def("facets", &trid::facets<Tri>, py::keep_alive<0, 1>())
+      .def("full_cells", &trid::full_cells<Tri>, py::keep_alive<0, 1>())
+      .def("vertices", &trid::vertices<Tri>, py::keep_alive<0, 1>())
       .def("finite_facets", &trid::finite_facets, py::keep_alive<0, 1>())
+      .def("finite_full_cells", &trid::finite_full_cells, py::keep_alive<0, 1>())
+      .def("finite_vertices", &trid::finite_vertices, py::keep_alive<0, 1>())
       ;
 
 #if CGALPY_TRID == CGALPY_TRID_REGULAR
@@ -662,7 +718,6 @@ void export_triangulation_d(py::module_& m) {
       py::class_<Rtri, Tri> rtri_c(m, "Regular_triangulation");
     }
 #endif
-
 
 #if CGALPY_TRID == CGALPY_TRID_DELAUNAY
     using Dtri = trid::Delaunay_triangulation;
