@@ -34,6 +34,16 @@ const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
 /// @{
 
 //!
+auto gather_full_cells(const Triangulation_ds& tds, Full_cell& start, py::object tp) {
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  auto criterion = [tp](const Facet& f){ return py::cast<bool>(tp(f)); };
+  auto f = tds.gather_full_cells(Full_cell_handle(&start), criterion, it);
+  return py::make_tuple(f, res);
+}
+
+//!
 py::list tds_incident_full_cells1(const Triangulation_ds& tds, const Face& f) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -424,57 +434,75 @@ void export_triangulation_d(py::module_& m) {
            "Obtain a full cell incident to the vertex v")
       .def("full_cell", &trid::full_cell2<Tds>, ri, py::arg("f"),
            "Obtain a full cell containing the facet f")
-      // .def("gather_full_cells", gather_full_cells, ri) // not implemented yet
+      .def("gather_full_cells", &trid::gather_full_cells, ri, py::arg("start"), py::arg("tp"),
+           "computes (gathers) a connected set of full cells satisfying a given criterion \n"
+           "Parameters:\n"
+           "  start (Full_cell): the starting point of the recursive traversal of adjacent full cells\n"
+           "  tp (Callable): a predicate that accepts a facet implementing the criterion\n"
+           "Return:\n"
+           "  tuple [f: Facet, list] the 1st element is a facet on the boundary of the set of cells, and the 2nd is a list of full cells that satisfy the criterion\n")
+      .def("incident_full_cells", &trid::tds_incident_full_cells1, py::arg("f"),
+           "Obtain all the full cells that are incident to a face\n"
+           "Parameters:\n"
+           "  f (Facet): the input facet\n"
+           "Return:\n"
+           "  list: the full cells incident to f\n")
+      .def("incident_full_cells", &trid::tds_incident_full_cells2, py::arg("v"),
+           "Obtain all the full cells that are incident to a vertex\n"
+           "Parameters:\n"
+           "  v (Vertex): the input vertex\n"
+           "Return:\n"
+           "  list: the full cells incident to v\n")
       .def("index_of_covertex", &Tds::index_of_covertex<Facet>, py::arg("f"),
            "Obtain the index of the vertex of the full cell c containing f, which does not belong to c")
       .def("insert_in_face", &trid::tds_insert_in_face, ri, py::arg("f"),
            "Inserts a new vertex in the triangulation data structure by subdividing the face f\n"
            "Return:\n"
-           "  Vertex: the new vertex")
+           "  v: Vertex: the new vertex\n")
       .def("insert_in_facet", &trid::tds_insert_in_facet, ri, py::arg("f"),
            "Inserts a new vertex in the triangulation data structure by subdividing the facet f\n"
            "Return:\n"
-           "  Vertex: the new vertex")
+           "  v: Vertex: the new vertex\n")
       .def("insert_in_full_cell", &trid::tds_insert_in_full_cell, ri, py::arg("c"),
            "Insert a new vertex v in the full cell c\n"
            "Return:\n"
-           "  Vertex: the new vertex")
+           "  v: Vertex: the new vertex\n")
       .def("insert_in_hole", &trid::tds_insert_in_hole, ri, py::arg("full_cells"), py::arg("f"),
-           "Remove the given full cells, insert a new vertex, and connect each face of the boundary of the union of given full cells to v\n"
+           "Remove the given full cells, insert a new vertex, and connect each face of the boundary of the given set of cells to v\n"
            "Parameters:\n"
            "  list: the input full cells\n"
-           "  Facet: the input facet\n"
+           "  f (Facet): the input facet\n"
            "Return:\n"
-           "  Vertex: the new vertex\n")
+           "  v: Vertex: the new vertex\n")
       .def("insert_in_hole", &trid::tds_insert_in_hole_get_full_cells, ri, py::arg("full_cells"), py::arg("f"),
            "Remove the given full cells, insert a new vertex, and connect each face of the boundary of the union of given full cells to v\n"
            "Parameters:\n"
-           "  list: the input full cells\n"
-           "  Facet: the input facet\n"
+           "  full_cells (list): the input full cells\n"
+           "  f (Facet): the input facet\n"
            "Return:\n"
-           "  tuple [Vertex, list]: the first element is the new vertex; the second is list that consists of the newly created full cells\n")
+           "  tuple [v: Vertex, list]: the first element is the new vertex; the second is list of the newly created full cells\n")
+
       .def("insert_in_tagged_hole", &trid::insert_in_tagged_hole, ri)
       .def("insert_increase_dimension", &trid::insert_increase_dimension1, ri)
       .def("insert_increase_dimension", &trid::insert_increase_dimension2, ri)
 
-      .def("maximal_dimension", &Tds::maximal_dimension)
-      .def("number_of_vertices", &Tds::number_of_vertices)
-      .def("number_of_full_cells", &Tds::number_of_full_cells)
-      .def("vertex", &trid::vertex, ri)
-      .def("is_vertex", &trid::vertex_is_vertex)
       .def("is_full_cell", &trid::vertex_is_full_cell)
-      .def("neighbor", &trid::neighbor, ri)
+      .def("is_valid", &Tds::is_valid, py::arg("verbose") = true, py::arg("level") = 0)
+      .def("is_vertex", &trid::vertex_is_vertex)
+      .def("maximal_dimension", &Tds::maximal_dimension)
       .def("mirror_index", &trid::mirror_index)
       // .def("mirror_vertex", &trid::mirror_vertex) // bug in CGAL
-      .def("remove_decrease_dimension", &trid::remove_decrease_dimension)
-      .def("new_vertex", &trid::tds_new_vertex, ri)
+      .def("neighbor", &trid::neighbor, ri)
       .def("new_full_cell", &trid::tds_new_full_cell, ri)
+      .def("new_vertex", &trid::tds_new_vertex, ri)
+      .def("number_of_full_cells", &Tds::number_of_full_cells)
+      .def("number_of_vertices", &Tds::number_of_vertices)
+      .def("remove_decrease_dimension", &trid::remove_decrease_dimension)
       .def("set_current_dimension", &Tds::set_current_dimension)
       .def("set_neighbors", &trid::tds_set_neighbors)
-      .def("is_valid", &Tds::is_valid, py::arg("verbose") = true, py::arg("level") = 0)
-      .def("incident_full_cells", &trid::tds_incident_full_cells1)
-      .def("incident_full_cells", &trid::tds_incident_full_cells2)
       .def("star", &trid::tds_star)
+      .def("vertex", &trid::vertex, ri)
+
       // .def("incident_upper_faces", &trid::tds_incident_upper_faces) // not implemented yet
       // .def("incident_faces", &trid::tds_incident_faces) // not implemented yet
       // read_full_cells
