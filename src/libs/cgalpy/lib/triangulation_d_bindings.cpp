@@ -298,16 +298,16 @@ size_type insert1(Triangulation_d& tri, py::list& points) {
 }
 
 Vertex& insert2(Triangulation_d& tri, const Point& p, Locate_type lt,
-                const Face& f, const Facet& ft, Full_cell& fc)
-{ return *(tri.insert(p, lt, f, ft, Full_cell_handle(&fc))); }
+                const Face& f, const Facet& ft, Full_cell& c)
+{ return *(tri.insert(p, lt, f, ft, Full_cell_handle(&c))); }
 
 //!
 Vertex& insert3(Triangulation_d& tri, const Point& p, Full_cell& hint)
 { return *(tri.insert(p, Full_cell_handle(&hint))); }
 
 //!
-Vertex& insert4(Triangulation_d& tri, const Point& p, Vertex& v)
-{ return *(tri.insert(p, Vertex_handle(&v))); }
+Vertex& insert4(Triangulation_d& tri, const Point& p, Vertex& hint)
+{ return *(tri.insert(p, Vertex_handle(&hint))); }
 
 //!
 Vertex& insert5(Triangulation_d& tri, const Point& p)
@@ -648,22 +648,69 @@ void export_triangulation_d(py::module_& m) {
            "Obtain the dimension of the full dimensional cells stored in the triangulation")
       .def("empty", &Tri::empty, "Determine whether triangulation is empty")
       .def("full_cell", &trid::full_cell2<Tri>, ri, py::arg("f"),
-           "Obtain a full cell containing the facet f")
+           "Obtain a full cell containing a facet\n"
+           "Parameters:\n"
+           "  f (Facet) the input facet\n")
       .def("geom_traits", &Tri::geom_traits, ri, "Obtain the geometric traits")
       .def("index_of_covertex", &Tri::index_of_covertex, py::arg("f"),
            "Obtain the index of the vertex of the full cell c containing f, which does not belong to c")
       .def("infinite_full_cell", &trid::infinite_full_cell, ri,
-           "Obtain a full cell incident to the vertex at infinity")
+           "Obtain a full cell incident to the vertex at infinity\n"
+           "Return:\n"
+           "  Full_cell\n")
 
       // Insertion
-      .def("insert", &trid::insert1)
-      .def("insert", &trid::insert2)
-      .def("insert", &trid::insert3)
-      .def("insert", &trid::insert4)
-      .def("insert", &trid::insert5)
-      .def("insert_in_face", &trid::insert_in_face)
-      .def("insert_in_facet", &trid::insert_in_facet)
-      .def("insert_in_full_cell", &trid::insert_in_full_cell)
+      .def("insert", &trid::insert1, py::arg("points"),
+           "Insert a set of points into the triangulation\n"
+           "Parameters:\n"
+           "  points (list): the input points\n"
+           "Return:\n"
+           "  Vertex: the newly created vertex\n")
+      .def("insert", &trid::insert2, py::arg("p"), py::arg("lt"), py::arg("f"), py::arg("ft"), py::arg("c"),
+           "Insert a point into the triangulation according to a given location type\n"
+           "Parameters:\n"
+           "  p (Point_3): the point to insert\n"
+           "  lt (Location_type): the location type\n"
+           "  f (Face)\n"
+           "  ft (Facet)\n"
+           "  c (Full_cell)\n"
+           "Return:\n"
+           "  Vertex: the newly created vertex\n")
+      .def("insert", &trid::insert3, py::arg("p"), py::arg("hint"),
+           "Insert a point into the triangulation, using a hint for its location\n"
+           "Parameters:\n"
+           "  p (Point_3): the point to insert\n"
+           "  hint (Full_cell): the starting place of the search for the point location\n"
+           "Return:\n"
+           "  Vertex: the newly created vertex\n")
+      .def("insert", &trid::insert4, py::arg("p"), py::arg("hint"),
+           "Insert a point into the triangulation, using a hint for its location\n"
+           "Parameters:\n"
+           "  p (Point_3): the point to insert\n"
+           "  hint (Vertex): the starting place of the search for the point location\n"
+           "Return:\n"
+           "  Vertex: the newly created vertex\n")
+      .def("insert", &trid::insert5, py::arg("p"),
+           "Insert a point into the triangulation\n"
+           "Parameters:\n"
+           "  p (Point_3): the point to insert\n"
+           "Return:\n"
+           "  Vertex: the newly created vertex\n")
+      .def("insert_in_face", &trid::insert_in_face, py::arg("p"), py::arg("f"),
+           "Inserts a point into the triangulation in a given face\n"
+           "Parameters:\n"
+           "  p (Point_3): the point to insert\n"
+           "  f (Face) the containing face\n")
+      .def("insert_in_facet", &trid::insert_in_facet, py::arg("p"), py::arg("f"),
+           "Inserts a point into the triangulation in a given facet\n"
+           "Parameters:\n"
+           "  p (Point_3): the point to insert\n"
+           "  f (Facet) the containing facet\n")
+      .def("insert_in_full_cell", &trid::insert_in_full_cell, py::arg("p"), py::arg("c"),
+           "Inserts a point into the triangulation in a given full cell\n"
+           "Parameters:\n"
+           "  p (Point_3): the point to insert\n"
+           "  c (Full_cell) the containing full cell\n")
       .def("insert_in_hole", &trid::insert_in_hole1)
       .def("insert_in_hole", &trid::insert_in_hole2)
       .def("insert_outside_convex_hull", &trid::insert_outside_convex_hull)
