@@ -46,8 +46,8 @@ int index1(const Full_cell& fc, const Full_cell& s) { return fc.index(Full_cell_
 int index2(const Full_cell& fc, const Vertex& v) { return fc.index(Vertex_const_handle(&v)); }
 
 //!
-Full_cell& neighbor(const Full_cell& fc, const int i) {
-  auto res = fc.neighbor(i);
+Full_cell& neighbor(const Full_cell& c, const int i) {
+  auto res = c.neighbor(i);
   return *res;
 }
 

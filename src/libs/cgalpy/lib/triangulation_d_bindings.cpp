@@ -89,8 +89,8 @@ bool vertex_is_full_cell(const Triangulation_ds& tds, const Full_cell& c)
 { return tds.is_full_cell(Full_cell_const_handle(&c)); }
 
 //!
-const Vertex& vertex(const Triangulation_ds& tds, const Full_cell& s, int i)
-{ return value(tds.vertex(Full_cell_const_handle(&s), i)); }
+const Vertex& vertex(const Triangulation_ds& tds, const Full_cell& c, int i)
+{ return value(tds.vertex(Full_cell_const_handle(&c), i)); }
 
 //!
 const Full_cell& full_cell1(const Triangulation_ds& tds, const Vertex& v)
@@ -117,16 +117,15 @@ Vertex& tds_insert_in_facet(Triangulation_ds& tds, Facet& f)
 { return *(tds.insert_in_facet(f)); }
 
 //!
-Full_cell& neighbor(const Triangulation_ds& tds, Full_cell& s, int i)
-{ return *(tds.neighbor(Full_cell_handle(&s), i)); }
+Full_cell& neighbor(const Triangulation_ds& tds, Full_cell& c, int i)
+{ return *(tds.neighbor(Full_cell_handle(&c), i)); }
 
 //!
-int mirror_index(const Triangulation_ds& tds, Full_cell& s, int i)
-{ return tds.mirror_index(Full_cell_handle(&s), i); }
+int mirror_index(const Triangulation_ds& tds, Full_cell& c, int i)
+{ return tds.mirror_index(Full_cell_handle(&c), i); }
 
-// Bug in CGAL
-// int mirror_vertex(const Triangulation_ds& tds, Full_cell& s, int i)
-// { return tds.mirror_vertex(Full_cell_handle(&s), i); }
+// int mirror_vertex(const Triangulation_ds& tds, Full_cell& c, int i)
+// { return tds.mirror_vertex(Full_cell_handle(&c), i); }
 
 // Bug in CGAL
 // Vertex& tds_collapse_face(Triangulation_ds& tds, const Face& f)
@@ -194,8 +193,8 @@ void associate_vertex_with_full_cell(Triangulation_ds& tds, Full_cell& s, int i,
 { tds.associate_vertex_with_full_cell(Full_cell_handle(&s), i, Vertex_handle(&v)); }
 
 //!
-void tds_set_neighbors(Triangulation_ds& tds, Full_cell& s, int i, Full_cell& s1, int j)
-{ tds.set_neighbors(Full_cell_handle(&s), i, Full_cell_handle(&s1), j); }
+void tds_set_neighbors(Triangulation_ds& tds, Full_cell& c1, int i1, Full_cell& c2, int i2)
+{ tds.set_neighbors(Full_cell_handle(&c1), i1, Full_cell_handle(&c2), i2); }
 
 /// @}
 
@@ -473,6 +472,8 @@ void export_triangulation_d(py::module_& m) {
            "  f (Facet) the input facet\n"
            "Return:\n"
            "  int: the index of the vertex\n")
+
+      // Insertions
       .def("insert_in_face", &trid::tds_insert_in_face, ri, py::arg("f"),
            "Inserts a new vertex into the triangulation data structure by subdividing a face\n"
            "Parameters:\n"
@@ -505,7 +506,6 @@ void export_triangulation_d(py::module_& m) {
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  tuple [Vertex, list]: the 1st element is the new vertex; the 2nd is a list of the newly created full cells\n")
-
       .def("insert_increase_dimension", &trid::insert_increase_dimension1, ri, py::arg("star"),
            "Add a new vertex, therby transform a triangulation of the sphere 𝕊^d into the triangulation of 𝕊^{d+1}\n",
            "Parameters:\n"
@@ -527,21 +527,75 @@ void export_triangulation_d(py::module_& m) {
            "  level (int) the verbosity level\n"
            "Return:\n"
            "  bool\n")
-
-      .def("is_vertex", &trid::vertex_is_vertex)
-      .def("maximal_dimension", &Tds::maximal_dimension)
-      .def("mirror_index", &trid::mirror_index)
+      .def("is_vertex", &trid::vertex_is_vertex, py::arg("v"),
+           "Deteremines whether a given vertex is in the triangulation\n"
+           "Parameters:\n"
+           "  v (Vertex): the input vertex\n"
+           "Return:\n"
+           "  bool\n")
+      .def("maximal_dimension", &Tds::maximal_dimension,
+           "Obtain the maximal dimension of the full dimensional cells that can be stored in the triangulation\n"
+            "Return:\n"
+           "  int\n")
+      .def("mirror_index", &trid::mirror_index, py::arg("c"), py::arg("i"),
+           "Obtain the index of a full cell as a neighbor of its i-th neighbor\n"
+           "Parameters:\n"
+           "  c (Full_cell): the input full cell\n"
+           "  i (int) the input index\n"
+           "Return:\n"
+           "  int\n")
       // .def("mirror_vertex", &trid::mirror_vertex) // bug in CGAL
-      .def("neighbor", &trid::neighbor, ri)
-      .def("new_full_cell", &trid::tds_new_full_cell, ri)
-      .def("new_vertex", &trid::tds_new_vertex, ri)
-      .def("number_of_full_cells", &Tds::number_of_full_cells)
-      .def("number_of_vertices", &Tds::number_of_vertices)
-      .def("remove_decrease_dimension", &trid::remove_decrease_dimension)
-      .def("set_current_dimension", &Tds::set_current_dimension)
-      .def("set_neighbors", &trid::tds_set_neighbors)
-      .def("star", &trid::tds_star)
-      .def("vertex", &trid::vertex, ri)
+      .def("neighbor", &trid::neighbor, ri, py::arg("c"), py::arg("i"),
+           "Obtain a full cell opposite to the i-th vertex of a given full cell\n"
+           "Parameters:\n"
+           "  c (Full_cell): the input full cell\n"
+           "  i (int) the input index\n"
+           "Return:\n"
+           "  Full_cell: the neighbor full cell\n")
+      .def("new_full_cell", &trid::tds_new_full_cell, ri,
+           "Inserts a new full cell into the triangulation\n"
+           "Return:\n"
+           "  c (Full_cell): the new full cell\n")
+      .def("new_vertex", &trid::tds_new_vertex, ri,
+           "Inserts a new vertex into the triangulation\n"
+           "Return:\n"
+           "  v (Vertex): the new vertex\n")
+      .def("number_of_full_cells", &Tds::number_of_full_cells,
+           "Obtain the number of full cells in the triangulation\n"
+           "Return:\n"
+           "  int\n")
+      .def("number_of_vertices", &Tds::number_of_vertices,
+           "Obtain the number of vertices in the triangulation\n"
+           "Return:\n"
+           "  int\n")
+      .def("remove_decrease_dimension", &trid::remove_decrease_dimension, py::arg("v"), py::arg("star"),
+           "Do exactly the opposite of insert_increase_dimension()\n"
+           "Parameters:\n"
+           "  v (Vertex)\n"
+           "  star (Vertex)\n")
+      .def("set_current_dimension", &Tds::set_current_dimension,
+           "Forces the current dimension of the complex to to a given one\n"
+           "Parameters:\n"
+           "  d (int): the new dimension\n")
+      .def("set_neighbors", &trid::tds_set_neighbors, py::arg("c1"), py::arg("i1"), py::arg("c2"), py::arg("i2"),
+           "Sets the neighbor opposite to vertex i1 of Full_cell c1 to c2\n"
+           "Sets the neighbor opposite to vertex i2 of Full_cell c2 to c1\n"
+           "Parameters:\n"
+           "  c1 (Full_Cell)\n"
+           "  i1 (int)\n"
+           "  c2 (Full_Cell)\n"
+           "  i2 (int)\n")
+      .def("star", &trid::tds_star, ri, py::arg("f"),
+           "Obtain all the full cells that share at least one vertex with a face"
+           "Parameters:\n"
+           "  f (Face): the input face\n")
+      .def("vertex", &trid::vertex, ri, py::arg("c"), py::arg("i"),
+           "Obtain the i-th vertex of a full cell\n"
+           "Parameters:\n"
+           "  c (Full_cell): the input full cell\n"
+           "  i (int) the input index\n"
+           "Return:\n"
+           "  Vertex: the new vertex\n")
 
       // Non concept
       .def("insert_in_tagged_hole", &trid::insert_in_tagged_hole, ri, py::arg("v"), py::arg("f"),
@@ -601,6 +655,7 @@ void export_triangulation_d(py::module_& m) {
       .def("infinite_full_cell", &trid::infinite_full_cell, ri,
            "Obtain a full cell incident to the vertex at infinity")
 
+      // Insertion
       .def("insert", &trid::insert1)
       .def("insert", &trid::insert2)
       .def("insert", &trid::insert3)
