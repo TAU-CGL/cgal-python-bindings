@@ -1354,15 +1354,15 @@ void export_triangulation_3(py::module_& m) {
   tri_c.def("incident_facets", &tri3::incident_facets1, py::keep_alive<0, 1>(),
             "Traverse all facets incident to a given edge")
     .def("incident_facets", &tri3::incident_facets2, py::keep_alive<0, 1>(),
-            "Traverse all facets incident to a given edge")
+         "Traverse all facets incident to a given edge")
     .def("incident_facets", &tri3::incident_facets3, py::keep_alive<0, 1>(),
-            "Traverse all facets incident to a given edge starting at a given facet")
+         "Traverse all facets incident to a given edge starting at a given facet")
     .def("incident_facets", &tri3::incident_facets4, py::keep_alive<0, 1>(),
-            "Traverse all facets incident to a given edge starting at a given facet")
+         "Traverse all facets incident to a given edge starting at a given facet")
     .def("incident_facets", &tri3::incident_facets5, py::keep_alive<0, 1>(),
-            "Traverse all facets incident to a given edge starting at a given facet")
+         "Traverse all facets incident to a given edge starting at a given facet")
     .def("incident_facets", &tri3::incident_facets6, py::keep_alive<0, 1>(),
-            "Traverse all facets incident to a given edge starting at a given facet")
+         "Traverse all facets incident to a given edge starting at a given facet")
     ;
 
   // Circulators
@@ -1370,26 +1370,26 @@ void export_triangulation_3(py::module_& m) {
   tri_c.def("incident_cells_circulator", &tri3::incident_cells_circulator1, py::keep_alive<0, 1>(),
             "Circulate through all cells or all facets incident to a given edge")
     .def("incident_cells_circulator", &tri3::incident_cells_circulator2, py::keep_alive<0, 1>(),
-            "Circulate through all cells or all facets incident to a given edge")
+         "Circulate through all cells or all facets incident to a given edge")
     .def("incident_cells_circulator", &tri3::incident_cells_circulator3, py::keep_alive<0, 1>(),
-            "Circulate through all cells or all facets incident to a given edge starting at a given cell")
+         "Circulate through all cells or all facets incident to a given edge starting at a given cell")
     .def("incident_cells_circulator", &tri3::incident_cells_circulator4, py::keep_alive<0, 1>(),
-            "Circulate through all cells or all facets incident to a given edge starting at a given cell")
+         "Circulate through all cells or all facets incident to a given edge starting at a given cell")
     ;
 
   export_circulator<Cc>(tri_c, "Cell_circulator");
   tri_c.def("incident_facets_circulator", &tri3::incident_facets_circulator1, py::keep_alive<0, 1>(),
             "Circulate through all facets incident to a given edge")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator2, py::keep_alive<0, 1>(),
-            "Circulate through all facets incident to a given edge")
+         "Circulate through all facets incident to a given edge")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator3, py::keep_alive<0, 1>(),
-            "Circulate through all facets incident to a given edge starting at a given facet")
+         "Circulate through all facets incident to a given edge starting at a given facet")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator4, py::keep_alive<0, 1>(),
-            "Circulate through all facets incident to a given edge starting at a given facet")
+         "Circulate through all facets incident to a given edge starting at a given facet")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator5, py::keep_alive<0, 1>(),
-            "Circulate through all facets incident to a given edge starting at a given facet")
+         "Circulate through all facets incident to a given edge starting at a given facet")
     .def("incident_facets_circulator", &tri3::incident_facets_circulator6, py::keep_alive<0, 1>(),
-            "Circulate through all facets incident to a given edge starting at a given facet")
+         "Circulate through all facets incident to a given edge starting at a given facet")
     ;
 
   // Container returning functions
