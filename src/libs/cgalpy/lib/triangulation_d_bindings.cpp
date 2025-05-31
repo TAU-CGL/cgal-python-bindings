@@ -314,8 +314,7 @@ Vertex& insert5(Triangulation_d& tri, const Point& p)
 { return *(tri.insert(p)); }
 
 //!
-py::list
-insert_in_hole1(Triangulation_d& tri, const Point& p, py::list& full_cells, const Facet& ft) {
+py::list insert_in_hole(Triangulation_d& tri, const Point& p, py::list& full_cells, const Facet& ft) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -328,8 +327,7 @@ insert_in_hole1(Triangulation_d& tri, const Point& p, py::list& full_cells, cons
 }
 
 //!
-Vertex& insert_in_hole2(Triangulation_d& tri, const Point& p,
-                        py::list& full_cells, const Facet& ft) {
+Vertex& insert_in_hole_get_full_cells(Triangulation_d& tri, const Point& p, py::list& full_cells, const Facet& ft) {
   auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
   auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
   return *(tri.insert_in_hole(p, begin, end, ft));
@@ -348,8 +346,7 @@ Vertex& insert_in_full_cell(Triangulation_d& tri, const Point& p, Full_cell& fc)
 { return *(tri.insert_in_full_cell(p, Full_cell_handle(&fc))); }
 
 //!
-Vertex& insert_outside_convex_hull(Triangulation_d& tri, const Point& p,
-                                   Full_cell& fc)
+Vertex& insert_outside_convex_hull(Triangulation_d& tri, const Point& p, Full_cell& fc)
 { return *(tri.insert_outside_convex_hull(p, Full_cell_handle(&fc))); }
 
 //!
@@ -499,7 +496,7 @@ void export_triangulation_d(py::module_& m) {
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  Vertex: the new vertex\n")
-      .def("insert_in_hole", &trid::tds_insert_in_hole_get_full_cells, ri, py::arg("full_cells"), py::arg("f"),
+      .def("insert_in_hole_get_full_cells", &trid::tds_insert_in_hole_get_full_cells, ri, py::arg("full_cells"), py::arg("f"),
            "Remove a set of full cells, insert a new vertex, and connect each face on the boundary of a given set of cells to the new vertex\n"
            "Parameters:\n"
            "  full_cells (list): the input full cells\n"
@@ -669,7 +666,7 @@ void export_triangulation_d(py::module_& m) {
       .def("insert", &trid::insert2, py::arg("p"), py::arg("lt"), py::arg("f"), py::arg("ft"), py::arg("c"),
            "Insert a point into the triangulation according to a given location type\n"
            "Parameters:\n"
-           "  p (Point_3): the point to insert\n"
+           "  p (Point): the point to insert\n"
            "  lt (Location_type): the location type\n"
            "  f (Face)\n"
            "  ft (Facet)\n"
@@ -679,45 +676,65 @@ void export_triangulation_d(py::module_& m) {
       .def("insert", &trid::insert3, py::arg("p"), py::arg("hint"),
            "Insert a point into the triangulation, using a hint for its location\n"
            "Parameters:\n"
-           "  p (Point_3): the point to insert\n"
+           "  p (Point): the point to insert\n"
            "  hint (Full_cell): the starting place of the search for the point location\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
       .def("insert", &trid::insert4, py::arg("p"), py::arg("hint"),
            "Insert a point into the triangulation, using a hint for its location\n"
            "Parameters:\n"
-           "  p (Point_3): the point to insert\n"
+           "  p (Point): the point to insert\n"
            "  hint (Vertex): the starting place of the search for the point location\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
       .def("insert", &trid::insert5, py::arg("p"),
            "Insert a point into the triangulation\n"
            "Parameters:\n"
-           "  p (Point_3): the point to insert\n"
+           "  p (Point): the point to insert\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
       .def("insert_in_face", &trid::insert_in_face, py::arg("p"), py::arg("f"),
            "Inserts a point into the triangulation in a given face\n"
            "Parameters:\n"
-           "  p (Point_3): the point to insert\n"
+           "  p (Point): the point to insert\n"
            "  f (Face) the containing face\n")
       .def("insert_in_facet", &trid::insert_in_facet, py::arg("p"), py::arg("f"),
            "Inserts a point into the triangulation in a given facet\n"
            "Parameters:\n"
-           "  p (Point_3): the point to insert\n"
+           "  p (Point): the point to insert\n"
            "  f (Facet) the containing facet\n")
       .def("insert_in_full_cell", &trid::insert_in_full_cell, py::arg("p"), py::arg("c"),
            "Inserts a point into the triangulation in a given full cell\n"
            "Parameters:\n"
-           "  p (Point_3): the point to insert\n"
+           "  p (Point): the point to insert\n"
            "  c (Full_cell) the containing full cell\n")
-      .def("insert_in_hole", &trid::insert_in_hole1)
-      .def("insert_in_hole", &trid::insert_in_hole2)
-      .def("insert_outside_convex_hull", &trid::insert_outside_convex_hull)
-      .def("insert_outside_affine_hull", &trid::insert_outside_affine_hull)
+      .def("insert_in_hole", &trid::insert_in_hole,  py::arg("p"),  py::arg("full_cells"),  py::arg("f"),
+           "Remove a set of full cells, insert a new vertex at a given point, and connect each face on the boundary of a given set of cells to the new vertex\n"
+           "Parameters:\n"
+           "  p (Point): the point to insert\n"
+           "  full_cells (list): the input full cells\n"
+           "  f (Facet): the input facet\n"
+           "Return:\n"
+           "  Vertex: the new vertex\n")
+      .def("insert_in_hole_get_full_cells", &trid::insert_in_hole_get_full_cells, py::arg("p"),
+           py::arg("full_cells"), py::arg("f"),
+           "Remove a set of full cells, insert a new vertex at a given point, and connect each face on the boundary of a given set of cells to the new vertex\n"
+           "Parameters:\n"
+           "  p (Point): the point to insert\n"
+           "  full_cells (list): the input full cells\n"
+           "  f (Facet): the input facet\n"
+           "Return:\n"
+           "  tuple [Vertex, list]: the 1st element is the new vertex; the 2nd is a list of the newly created full cells\n")
+      .def("insert_outside_convex_hull", &trid::insert_outside_convex_hull, py::arg("p"), py::arg("c"),
+           "Insert a point that outside of the convex hull of the triangulation")
+      .def("insert_outside_affine_hull", &trid::insert_outside_affine_hull, py::arg("p"),
+           "Insert a point that outside of the affine hull of the triangulation")
 
       // .def("rotate_rotor", &Tri::rotate_rotor)
-      .def("tds", py::overload_cast<>(&Tri::tds, py::const_))
+      .def("tds", py::overload_cast<>(&Tri::tds, py::const_),
+           "Obtain the underlying triangulation data structure\n"
+           "Return:\n"
+           "  Traiangulation_ds\n")
       .def("maximal_dimension", &Tri::maximal_dimension)
       .def("number_of_vertices", &Tri::number_of_vertices)
       .def("number_of_full_cells", &Tri::number_of_full_cells)
