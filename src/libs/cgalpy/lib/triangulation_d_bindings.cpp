@@ -44,43 +44,6 @@ auto gather_full_cells(const Triangulation_ds& tds, Full_cell& start, py::object
 }
 
 //!
-py::list tds_incident_full_cells1(const Triangulation_ds& tds, const Face& f) {
-  py::list res;
-  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  tds.incident_full_cells(f, it);
-  return res;
-}
-
-//!
-py::list tds_incident_full_cells2(const Triangulation_ds& tds, const Vertex& v) {
-  py::list res;
-  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  tds.incident_full_cells(Vertex_const_handle(&v), it);
-  return res;
-}
-
-//!
-py::list tds_star(const Triangulation_ds& tds, const Face& f) {
-  py::list res;
-  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  tds.star(f, it);
-  return res;
-}
-
-// comparator not implemented yet
-// py::list tds_incident_faces(const Triangulation_ds& tds, const Vertex& v,
-//                             int dim, bool upper_faces) {
-//   py::list res;
-//   auto op = [&] (const Face& f) mutable { res.append(f); };
-//   auto it = boost::make_function_output_iterator(std::ref(op));
-//   tri.incident_faces(Vertex_const_handle(&v), dim, it, comparator, upper_faces);
-//   return res;
-// }
-
-//!
 bool vertex_is_vertex(const Triangulation_ds& tds, const Vertex& v)
 { return tds.is_vertex(Vertex_const_handle(&v)); }
 
@@ -213,42 +176,6 @@ void set_full_cell(Face& f, Full_cell& fc)
 //!
 const Full_cell& infinite_full_cell(const Triangulation_d& tri)
 { return value(tri.infinite_full_cell()); }
-
-//!
-py::list incident_full_cells1(const Triangulation_d& tri, const Face& f) {
-  py::list res;
-  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  tri.incident_full_cells(f, it);
-  return res;
-}
-
-//!
-py::list incident_full_cells2(const Triangulation_d& tri, const Vertex& v) {
-  py::list res;
-  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  tri.incident_full_cells(Vertex_const_handle(&v), it);
-  return res;
-}
-
-//!
-py::list star(const Triangulation_d& tri, const Face& f) {
-  py::list res;
-  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  tri.star(f, it);
-  return res;
-}
-
-//!
-py::list incident_faces(const Triangulation_d& tri, const Vertex& v, int d) {
-  py::list res;
-  auto op = [&] (const Face& f) mutable { res.append(f); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  tri.incident_faces(Vertex_const_handle(&v), d, it);
-  return res;
-}
 
 //!
 Full_cell& new_full_cell(Triangulation_d& tri)
@@ -432,6 +359,46 @@ template <typename Triangulation_>
 py::object vertices(const Triangulation_& tri)
 { return make_iterator(tri.vertices_begin(), tri.vertices_end()); }
 
+//!
+template <typename Triangulation_>
+py::list incident_faces(const Triangulation_& tri, const Vertex& v, int dim) {
+  py::list res;
+  auto op = [&] (const Face& f) mutable { res.append(f); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tri.incident_faces(Vertex_const_handle(&v), dim, it);
+  return res;
+}
+
+//!
+template <typename Triangulation_>
+py::list incident_full_cells1(const Triangulation_& tri, const Face& f) {
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tri.incident_full_cells(f, it);
+  return res;
+}
+
+//!
+template <typename Triangulation_>
+py::list incident_full_cells2(const Triangulation_& tri, const Vertex& v) {
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tri.incident_full_cells(Vertex_const_handle(&v), it);
+  return res;
+}
+
+//!
+template <typename Triangulation_>
+py::list star(const Triangulation_& tri, const Face& f) {
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  tri.star(f, it);
+  return res;
+}
+
 /// @}
 
 } // End of namespace trid
@@ -493,13 +460,20 @@ void export_triangulation_d(py::module_& m) {
            "  tp (Callable): a predicate that accepts a facet implementing the criterion\n"
            "Return:\n"
            "  tuple [Facet, list] the 1st element is a facet on the boundary of the set of cells, and the 2nd is a list of full cells that satisfy the criterion\n")
-      .def("incident_full_cells", &trid::tds_incident_full_cells1, py::arg("f"),
+      .def("incident_faces", &trid::incident_faces<Tds>, ri, py::arg("v"), py::arg("dim"),
+           "Obtain all faces of dimension dim incident to a given vertex\n"
+           "Parameters:\n"
+           "  v (Vertex: the input vertex\n"
+           "  dim (int): the dimension\n"
+           "Return:\n"
+           "  list [Face Face ...])\n")
+      .def("incident_full_cells", &trid::incident_full_cells1<Tds>, py::arg("f"),
            "Obtain all the full cells that are incident to a face\n"
            "Parameters:\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  list: the full cells incident to f\n")
-      .def("incident_full_cells", &trid::tds_incident_full_cells2, py::arg("v"),
+      .def("incident_full_cells", &trid::incident_full_cells2<Tds>, py::arg("v"),
            "Obtain all the full cells that are incident to a vertex\n"
            "Parameters:\n"
            "  v (Vertex): the input vertex\n"
@@ -538,7 +512,8 @@ void export_triangulation_d(py::module_& m) {
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  Vertex: the new vertex\n")
-      .def("insert_in_hole_get_full_cells", &trid::tds_insert_in_hole_get_full_cells, ri, py::arg("full_cells"), py::arg("f"),
+      .def("insert_in_hole_get_full_cells", &trid::tds_insert_in_hole_get_full_cells, ri,
+           py::arg("full_cells"), py::arg("f"),
            "Remove a set of full cells, insert a new vertex, and connect each face on the boundary of a given set of cells to the new vertex\n"
            "Parameters:\n"
            "  full_cells (list): the input full cells\n"
@@ -624,7 +599,7 @@ void export_triangulation_d(py::module_& m) {
            "  i1 (int)\n"
            "  c2 (Full_Cell)\n"
            "  i2 (int)\n")
-      .def("star", &trid::tds_star, ri, py::arg("f"),
+      .def("star", &trid::star<Tds>, ri, py::arg("f"),
            "Obtain all the full cells that share at least one vertex with a face"
            "Parameters:\n"
            "  f (Face): the input face\n")
@@ -644,9 +619,6 @@ void export_triangulation_d(py::module_& m) {
            "  f (Facet) the facet contained by the full cell c\n"
            "Return:\n"
            "  list: a list of the newly created full cells\n")
-
-      // .def("incident_upper_faces", &trid::tds_incident_upper_faces) // not implemented yet
-      // .def("incident_faces", &trid::tds_incident_faces) // not implemented yet
       // read_full_cells
       // write_full_cells
       ;
@@ -691,6 +663,27 @@ void export_triangulation_d(py::module_& m) {
            "Parameters:\n"
            "  f (Facet) the input facet\n")
       .def("geom_traits", &Tri::geom_traits, ri, "Obtain the geometric traits")
+
+      .def("incident_full_cells", &trid::incident_full_cells1<Tri>, py::arg("f"),
+           "Obtain all the full cells that are incident to a face\n"
+           "Parameters:\n"
+           "  f (Facet): the input facet\n"
+           "Return:\n"
+           "  list: the full cells incident to f\n")
+      .def("incident_full_cells", &trid::incident_full_cells2<Tri>, py::arg("v"),
+           "Obtain all the full cells that are incident to a vertex\n"
+           "Parameters:\n"
+           "  v (Vertex): the input vertex\n"
+           "Return:\n"
+           "  list: the full cells incident to v\n")
+      .def("incident_faces", &trid::incident_faces<Tri>, ri, py::arg("v"), py::arg("dim"),
+           "Obtain all faces of dimension dim incident to a given vertex\n"
+           "Parameters:\n"
+           "  v (Vertex: the input vertex\n"
+           "  dim (int): the dimension\n"
+           "Return:\n"
+           "  list [Face Face ...])\n")
+
       .def("index_of_covertex", &Tri::index_of_covertex, py::arg("f"),
            "Obtain the index of the vertex of the full cell c containing f, which does not belong to c")
       .def("infinite_full_cell", &trid::infinite_full_cell, ri,
@@ -869,6 +862,10 @@ void export_triangulation_d(py::module_& m) {
       //      "  c (VertexFull cell): the hint\n"
       //      "Return:\n"
       //      "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
+      .def("star", &trid::star<Tri>, ri, py::arg("f"),
+           "Obtain all the full cells that share at least one vertex with a face"
+           "Parameters:\n"
+           "  f (Face): the input face\n")
      ;
 
     // Lock_data_structure
