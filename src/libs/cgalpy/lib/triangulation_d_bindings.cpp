@@ -174,10 +174,6 @@ void set_full_cell(Face& f, Full_cell& fc)
 /// @{
 
 //!
-const Full_cell& infinite_full_cell(const Triangulation_d& tri)
-{ return value(tri.infinite_full_cell()); }
-
-//!
 Full_cell& new_full_cell(Triangulation_d& tri)
 { return *(tri.new_full_cell()); }
 
@@ -213,49 +209,49 @@ Full_cell& locate3(const Triangulation_d& tri, const Point& p, Full_cell& s)
 
 //!
 auto locate4(const Triangulation_d& tri, const Point& p) {
-  // Locate_type lt;
-  // Face face;
-  // Facet facet;
-  // auto res = tri.locate(p, lt, face, facet);
-  // switch (lt) {
-  //  case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
-  //  case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
-  //  case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
-  //  case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
-  //  case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
-  // }
+  Locate_type lt;
+  Face face(tri.maximal_dimension());
+  Facet facet;
+  auto res = tri.locate(p, lt, face, facet);
+  switch (lt) {
+   case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
+   case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
+   case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
+   case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
+   case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
+  }
   return py::make_tuple();
 }
 
 //!
 auto locate5(const Triangulation_d& tri, const Point& p, Vertex& v) {
-  // Locate_type lt;
-  // Face face;
-  // Facet facet;
-  // auto res = tri.locate(p, lt, face, facet, Vertex_handle(&v));
-  // switch (lt) {
-  //  case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
-  //  case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
-  //  case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
-  //  case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
-  //  case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
-  // }
+  Locate_type lt;
+  Face face(tri.maximal_dimension());
+  Facet facet;
+  auto res = tri.locate(p, lt, face, facet, Vertex_handle(&v));
+  switch (lt) {
+   case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
+   case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
+   case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
+   case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
+   case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
+  }
   return py::make_tuple();
 }
 
 //!
 auto locate6(const Triangulation_d& tri, const Point& p, Full_cell& c) {
-  // Locate_type lt;
-  // Face face;
-  // Facet facet;
-  // auto res = tri.locate(p, lt, face, facet, Full_cell_handle(&c));
-  // switch (lt) {
-  //  case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
-  //  case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
-  //  case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
-  //  case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
-  //  case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
-  // }
+  Locate_type lt;
+  Face face(tri.maximal_dimension());
+  Facet facet;
+  auto res = tri.locate(p, lt, face, facet, Full_cell_handle(&c));
+  switch (lt) {
+   case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
+   case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
+   case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
+   case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
+   case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
+  }
   return py::make_tuple();
 }
 
@@ -334,6 +330,14 @@ py::object finite_full_cells(const Triangulation_d& tri)
 py::object finite_facets(Triangulation_d& tri)
 { return make_iterator(tri.finite_facets_begin(), tri.finite_facets_end()); }
 
+//!
+const Full_cell& infinite_full_cell(const Triangulation_d& tri)
+{ return value(tri.infinite_full_cell()); }
+
+//!
+const Vertex& infinite_vertex(const Triangulation_d& tri)
+{ return value(tri.infinite_vertex()); }
+
 /// @}
 
 /// Common
@@ -353,11 +357,6 @@ py::object facets(Triangulation_& tri)
 template <typename Triangulation_>
 py::object full_cells(const Triangulation_& tri)
 { return make_iterator(tri.full_cells_begin(), tri.full_cells_end()); }
-
-//!
-template <typename Triangulation_>
-py::object vertices(const Triangulation_& tri)
-{ return make_iterator(tri.vertices_begin(), tri.vertices_end()); }
 
 //!
 template <typename Triangulation_>
@@ -398,6 +397,11 @@ py::list star(const Triangulation_& tri, const Face& f) {
   tri.star(f, it);
   return res;
 }
+
+//!
+template <typename Triangulation_>
+py::object vertices(const Triangulation_& tri)
+{ return make_iterator(tri.vertices_begin(), tri.vertices_end()); }
 
 /// @}
 
@@ -690,7 +694,7 @@ void export_triangulation_d(py::module_& m) {
            "Obtain a full cell incident to the vertex at infinity\n"
            "Return:\n"
            "  Full_cell\n")
-      .def("infinite_vertex", [](Tri& tri)->Vertex& { return *(tri.infinite_vertex()); }, ri,
+      .def("infinite_vertex",  &trid::infinite_vertex, ri,
            "Obtain the vertex at infinity\n",
            "Return:\n"
            "  Vertex")
@@ -769,27 +773,6 @@ void export_triangulation_d(py::module_& m) {
       .def("insert_outside_affine_hull", &trid::insert_outside_affine_hull, py::arg("p"),
            "Insert a point that outside of the affine hull of the triangulation")
 
-      // .def("rotate_rotor", &Tri::rotate_rotor)
-      .def("tds", py::overload_cast<>(&Tri::tds, py::const_),
-           "Obtain the underlying triangulation data structure\n"
-           "Return:\n"
-           "  Traiangulation_ds\n")
-      .def("maximal_dimension", &Tri::maximal_dimension,
-           "Obtain the maximal dimension of the full dimensional cells that can be stored in the triangulation\n"
-            "Return:\n"
-           "  int\n")
-      .def("number_of_vertices", &Tri::number_of_vertices,
-           "Obtain the number of vertices in the triangulation\n"
-           "Return:\n"
-           "  int\n")
-      .def("number_of_full_cells", &Tri::number_of_full_cells,
-           "Obtain the number of full cells in the triangulation\n"
-           "Return:\n"
-           "  int\n")
-      .def("number_of_finite_full_cells", &Tri::number_of_finite_full_cells,
-           "Obtain the number of finite full cells in the triangulation\n"
-           "Return:\n"
-           "  int\n")
       .def("is_infinite", py::overload_cast<const Vertex&>(&Tri::is_infinite, py::const_), py::arg("v"),
            "Determine whether a given vertex is the vertex at infinity\n"
            "Parameters\n"
@@ -841,31 +824,51 @@ void export_triangulation_d(py::module_& m) {
            "  c (VertexFull cell): the hint\n"
            "Return:\n"
            "  Full_cell\n")
-      //! \todo Doesn't compile
-      // .def("locate_get_incident", &trid::locate4, ri, py::arg("q"),
-      //      "Locate a query point\n"
-      //      "Parameters:\n"
-      //      "  q (Point): the query point\n"
-      //      "Return:\n"
-      //      "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
-      // .def("locate_get_incident", &trid::locate5, ri, py::arg("q"), py::arg("v"),
-      //      "Locate a query point given a vertex as a hint\n"
-      //      "Parameters:\n"
-      //      "  q (Point): the query point\n"
-      //      "  v (Vertex): the hint\n"
-      //      "Return:\n"
-      //      "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
-      //  .def("locate_get_incident", &trid::locate6, ri, py::arg("q"), py::arg("c"),
-      //      "Locate a query point given a full cell as a hint\n"
-      //      "Parameters:\n"
-      //      "  q (Point): the query point\n"
-      //      "  c (VertexFull cell): the hint\n"
-      //      "Return:\n"
-      //      "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
+      .def("locate_get_incident", &trid::locate4, ri, py::arg("q"),
+           "Locate a query point\n"
+           "Parameters:\n"
+           "  q (Point): the query point\n"
+           "Return:\n"
+           "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
+      .def("locate_get_incident", &trid::locate5, ri, py::arg("q"), py::arg("v"),
+           "Locate a query point given a vertex as a hint\n"
+           "Parameters:\n"
+           "  q (Point): the query point\n"
+           "  v (Vertex): the hint\n"
+           "Return:\n"
+           "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
+       .def("locate_get_incident", &trid::locate6, ri, py::arg("q"), py::arg("c"),
+           "Locate a query point given a full cell as a hint\n"
+           "Parameters:\n"
+           "  q (Point): the query point\n"
+           "  c (VertexFull cell): the hint\n"
+           "Return:\n"
+           "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
+      .def("maximal_dimension", &Tri::maximal_dimension,
+           "Obtain the maximal dimension of the full dimensional cells that can be stored in the triangulation\n"
+            "Return:\n"
+           "  int\n")
+      .def("number_of_finite_full_cells", &Tri::number_of_finite_full_cells,
+           "Obtain the number of finite full cells in the triangulation\n"
+           "Return:\n"
+           "  int\n")
+      .def("number_of_full_cells", &Tri::number_of_full_cells,
+           "Obtain the number of full cells in the triangulation\n"
+           "Return:\n"
+           "  int\n")
+      .def("number_of_vertices", &Tri::number_of_vertices,
+           "Obtain the number of vertices in the triangulation\n"
+           "Return:\n"
+           "  int\n")
+      // .def("rotate_rotor", &Tri::rotate_rotor)
       .def("star", &trid::star<Tri>, ri, py::arg("f"),
            "Obtain all the full cells that share at least one vertex with a face"
            "Parameters:\n"
            "  f (Face): the input face\n")
+      .def("tds", py::overload_cast<>(&Tri::tds, py::const_),
+           "Obtain the underlying triangulation data structure\n"
+           "Return:\n"
+           "  Traiangulation_ds\n")
      ;
 
     // Lock_data_structure
@@ -937,6 +940,8 @@ void export_triangulation_d(py::module_& m) {
 
     if (! add_attr<Rtri>(m, "Regular_triangulation")) {
       py::class_<Rtri, Tri> rtri_c(m, "Regular_triangulation");
+      rtri_c.def(py::init<int, const trid::Traits&>())
+        ;
     }
 #endif
 
