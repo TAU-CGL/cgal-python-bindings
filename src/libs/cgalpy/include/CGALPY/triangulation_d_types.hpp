@@ -42,11 +42,22 @@ using D = Dimensionality<CGALPY_TRID_DIMENSION_TAG, CGALPY_TRID_DIMENSION>::type
 using Tds = CGAL::Triangulation_data_structure<D, V, C>;
 using Sp = Storage_policy<CGALPY_TRID_STORAGE_POLICY>::type;
 using Triangulation_d = Tri<CGALPY_TRID, Traits, Tds>::type;
+
+#if CGALPY_TRID == CGALPY_TRID_REGULAR
+//! \todo This is due to a bug, or at least bad design, in CGAL
+// using Regular_triangulation_d = CGAL::Regular_triangulation<Base_traits, Tds>;
+using Regular_triangulation_d = CGAL::Regular_triangulation<Traits, Triangulation_d::Triangulation_ds>;
+#endif
+
+#if CGALPY_TRID == CGALPY_TRID_DELAUNAY
+using Delaunay_triangulation_d = CGAL::Delaunay_triangulation<Traits, Tds>;
+#endif
+
 using Geom_traits = Triangulation_d::Geom_traits;
 using Triangulation_ds = Triangulation_d::Triangulation_ds;
 
-using Tds_vertex = Tds::Vertex;
-using Tds_full_cell = Tds::Full_cell;
+using Tds_vertex = Triangulation_ds::Vertex;
+using Tds_full_cell = Triangulation_ds::Full_cell;
 
 using Vertex = Triangulation_d::Vertex;
 using Full_cell = Triangulation_d::Full_cell;
@@ -83,14 +94,6 @@ using Weighted_tag = Triangulation_d::Weighted_tag;
 using Periodic_tag = Triangulation_d::Periodic_tag;
 
 using Rotor = Triangulation_d::Rotor;
-
-#if CGALPY_TRID == CGALPY_TRID_REGULAR
-using Regular_triangulation = CGAL::Regular_triangulation<Traits, Tds>;
-#endif
-
-#if CGALPY_TRID == CGALPY_TRID_DELAUNAY
-using Delaunay_triangulation = CGAL::Delaunay_triangulation<Traits, Tds>;
-#endif
 
 } // End of namespace trid
 

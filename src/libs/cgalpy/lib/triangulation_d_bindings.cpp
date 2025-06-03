@@ -405,6 +405,23 @@ py::object vertices(const Triangulation_& tri)
 
 /// @}
 
+/// Common
+/// @{
+
+#if CGALPY_TRID == CGALPY_TRID_REGULAR
+
+// auto compute_conflict_zone(const Regular_triangulation& rtri, const Point& p, Full_cell& c) {
+//   py::list res;
+//   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+//   auto it = boost::make_function_output_iterator(std::ref(op));
+//   auto facet = CGAL::compute_conflict_zone(p, Full_cell_handle(&c), it);
+//   return py::make_tuple(facet, res);
+// }
+
+#endif
+
+/// @}
+
 } // End of namespace trid
 
 //!
@@ -425,8 +442,8 @@ void export_triangulation_d(py::module_& m) {
   if (! add_attr<Tds>(m, "Triangulation_ds")) {
     py::class_<Tds> tds_c(m, "Triangulation_ds");
 
-    tds_c.def(py::init<int>())
-      .def(py::init<const Tds&>())
+    tds_c.def(py::init<int>(), py::arg("dim") = 0, "Constructor")
+      .def(py::init<const Tds&>(), py::arg("other"), "Copy constructor")
       .def("associate_vertex_with_full_cell", &trid::associate_vertex_with_full_cell,
            py::arg("c"), py::arg("i"), py::arg("v"),
            "Set the i-th vertex of c to v and, set c as the incident full cell of v")
@@ -652,8 +669,10 @@ void export_triangulation_d(py::module_& m) {
   // Triangulation
   if (! add_attr<Tri>(m, "Triangulation")) {
     py::class_<Tri> tri_c(m, "Triangulation");
-    tri_c.def(py::init<int, const trid::Traits&>())
-      .def(py::init<const Tri&>())
+    tri_c
+      .def(py::init<int>(), py::arg("dim") = 0, "Constructor")
+      .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("gt"), "Constructor")
+      .def(py::init<const Tri&>(), py::arg("other"), "Copy constructor")
       .def("are_incident_full_cells_valid", &trid::are_incident_full_cells_valid,
            py::arg("vertex"), py::arg("verbose") = false, py::arg("level") = 0,
            "Determine whether all finite full cells incident to v have positive orientation")
@@ -936,22 +955,38 @@ void export_triangulation_d(py::module_& m) {
       ;
 
 #if CGALPY_TRID == CGALPY_TRID_REGULAR
-    using Rtri = trid::Regular_triangulation;
+    using Rtri = trid::Regular_triangulation_d;
 
     if (! add_attr<Rtri>(m, "Regular_triangulation")) {
       py::class_<Rtri, Tri> rtri_c(m, "Regular_triangulation");
-      rtri_c.def(py::init<int, const trid::Traits&>())
+      rtri_c.def(py::init<int>(), py::arg("dim") = 0, "Constructor")
+        .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("gt"), "Constructor")
+        .def(py::init<const Rtri&>(), py::arg("other"), "Copy constructor")
+        // .def("compute_conflict_zone", &trid::compute_conflict_zone, ri, py::arg("p"), py::arg("c"),
+        //      "Obtain the full cells in conflict with a given point\n"
+        //      "Parameters:\n"
+        //      "  p (Point): the input point\n"
+        //      "  c (Full_cell): the starting place of the search for conflicts\n"
+        //      "Return:\n"
+        //      "  tuple[Facet, list]: the 1st element is the facet on the boundary of the conflict zone; the 2nd element is a list of conflicting full cells\n")
+        // .def("insert_if_in_star", insert_if_in_star)
+        // .def("insert_if_in_star", insert_if_in_star)
+        // .def("insert_if_in_star", insert_if_in_star)
+        // .def("is_in_conflict", is_in_conflict)
+        // .def("number_of_hidden_vertices", number_of_hidden_vertices)
+        // .def("number_of_vertices", number_of_vertices)
         ;
     }
 #endif
 
 #if CGALPY_TRID == CGALPY_TRID_DELAUNAY
-    using Dtri = trid::Delaunay_triangulation;
+    using Dtri = trid::Delaunay_triangulation_d;
 
     if (! add_attr<Dtri>(m, "Delaunay_triangulation")) {
       py::class_<Dtri, Tri> dtri_c(m, "Delaunay_triangulation");
-
-      dtri_c.def(py::init<int, const trid::Traits&>(), py::arg("dim"), py::arg("traits"))
+      dtri_c.def(py::init<int>(), py::arg("dim") = 0, "Constructor")
+        .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("traits"), "Constructor")
+        .def(py::init<const Dtri&>(), py::arg("other"), "Copy constructor")
         ;
     }
 #endif
