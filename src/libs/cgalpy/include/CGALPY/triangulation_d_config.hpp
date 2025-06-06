@@ -46,19 +46,30 @@ constexpr bool full_cell_with_data()
 { return DETECT_EXIST(CGALPY_TRID_FULL_CELL_WITH_DATA); }
 
 // Indicates whether the selected triangulation is regular
-constexpr bool is_regular() {
-  return (CGALPY_TRID == CGALPY_TRID_REGULAR);
-}
+constexpr bool is_regular() { return (CGALPY_TRID == CGALPY_TRID_REGULAR); }
 
-// Vertex with data
-template <bool b, typename Vb, typename Data, typename Tr>
-struct Vertex_with_data {};
+// Vertex base selection
+template <bool is_regular, bool with_data, typename Vb, typename Data, typename Tr> struct Vertex_selection {};
+
 template <typename Vb, typename Data, typename Tr>
-struct Vertex_with_data<false, Vb, Data, Tr>
+struct Vertex_selection<false, false, Vb, Data, Tr>
 { using type = CGAL::Triangulation_vertex<Tr, CGAL::No_vertex_data, Vb>; };
+
 template <typename Vb, typename Data, typename Tr>
-struct Vertex_with_data<true, Vb, Data, Tr>
+struct Vertex_selection<false, true, Vb, Data, Tr>
 { using type = CGAL::Triangulation_vertex<Tr, Data, Vb>; };
+
+template <typename Vb, typename Data, typename Tr>
+struct Vertex_selection<true, false, Vb, Data, Tr> {
+  using Regular_tr = CGAL::Regular_triangulation_traits_adapter<Tr>;
+  using type = CGAL::Triangulation_vertex<Regular_tr, CGAL::No_vertex_data, Vb>;
+};
+
+template <typename Vb, typename Data, typename Tr>
+struct Vertex_selection<true, true, Vb, Data, Tr> {
+  using Regular_tr = CGAL::Regular_triangulation_traits_adapter<Tr>;
+  using type = CGAL::Triangulation_vertex<Regular_tr, Data, Vb>;
+};
 
 // Storage policy
 template <int i> struct Storage_policy {};
@@ -67,15 +78,28 @@ template <> struct Storage_policy<CGALPY_TRID_STORAGE_POLICY_DEFAULT>
 template <> struct Storage_policy<CGALPY_TRID_STORAGE_POLICY_MIRROR>
 { using type = CGAL::TDS_full_cell_mirror_storage_policy; };
 
-// Cell with data
-template <bool b, typename Fb, typename Data, typename Tr>
-struct Full_cell_with_data {};
-template <typename Fb, typename Data, typename Tr>
-struct Full_cell_with_data<false, Fb, Data, Tr>
-{ using type = CGAL::Triangulation_full_cell<Tr, CGAL::No_full_cell_data, Fb>; };
-template <typename Fb, typename Data, typename Tr>
-struct Full_cell_with_data<true, Fb, Data, Tr>
-{ using type = CGAL::Triangulation_full_cell<Tr, Data, Fb>; };
+// Cell base selection
+template <bool is_regular, bool with_data, typename Cb, typename Data, typename Tr> struct Full_cell_selection {};
+
+template <typename Cb, typename Data, typename Tr>
+struct Full_cell_selection<false, false, Cb, Data, Tr>
+{ using type = CGAL::Triangulation_full_cell<Tr, CGAL::No_full_cell_data, Cb>; };
+
+template <typename Cb, typename Data, typename Tr>
+struct Full_cell_selection<false, true, Cb, Data, Tr>
+{ using type = CGAL::Triangulation_full_cell<Tr, Data, Cb>; };
+
+template <typename Cb, typename Data, typename Tr>
+struct Full_cell_selection<true, false, Cb, Data, Tr> {
+  using Regular_tr = CGAL::Regular_triangulation_traits_adapter<Tr>;
+  using type = CGAL::Triangulation_full_cell<Regular_tr, CGAL::No_full_cell_data, Cb>;
+};
+
+template <typename Cb, typename Data, typename Tr>
+struct Full_cell_selection<true, true, Cb, Data, Tr> {
+  using Regular_tr = CGAL::Regular_triangulation_traits_adapter<Tr>;
+  using type = CGAL::Triangulation_full_cell<Regular_tr, Data, Cb>;
+};
 
 // Dimensionality
 template <int i, int d> struct Dimensionality {};
@@ -87,29 +111,16 @@ template <int d> struct Dimensionality<CGALPY_TRID_DIMENSION_TAG_STATIC, d>
 // Main triangulation
 template <int i, typename Tr, typename Tds> struct Tri {};
 template <typename Tr, typename Tds>
-struct Tri<CGALPY_TRID_PLAIN, Tr, Tds>
-{ using type = CGAL::Triangulation<Tr, Tds>; };
+struct Tri<CGALPY_TRID_PLAIN, Tr, Tds> { using type = CGAL::Triangulation<Tr, Tds>; };
 
 template <typename Tr, typename Tds>
 struct Tri<CGALPY_TRID_REGULAR, Tr, Tds> {
-  using New_traits = CGAL::Regular_triangulation_traits_adapter<Tr>;
-  using New_vertex = CGAL::Triangulation_vertex<New_traits>;
-  using New_full_cell = CGAL::Triangulation_full_cell<New_traits>;
-  using New_dimension = typename New_traits::Dimension;
-  using New_tds = CGAL::Triangulation_data_structure<New_dimension, New_vertex, New_full_cell>;
-  using type = CGAL::Triangulation<New_traits, New_tds>;
+  using Regular_traits = CGAL::Regular_triangulation_traits_adapter<Tr>;
+  using type = CGAL::Triangulation<Regular_traits, Tds>;
 };
 
 template <typename Tr, typename Tds>
-struct Tri<CGALPY_TRID_DELAUNAY, Tr, Tds> {
-  using New_traits = Tr;
-  using New_vertex = CGAL::Triangulation_vertex<New_traits>;
-  using New_full_cell = CGAL::Triangulation_full_cell<New_traits>;
-  using New_dimension = typename New_traits::Dimension;
-  using Tmp_tds = CGAL::Triangulation_data_structure<New_dimension, New_vertex, New_full_cell>;
-  using New_tds = typename CGAL::Default::Get<Tds, Tmp_tds>::type;
-  using type = CGAL::Triangulation<New_traits, New_tds>;
-};
+struct Tri<CGALPY_TRID_DELAUNAY, Tr, Tds> { using type = CGAL::Triangulation<Tr, Tds>; };
 
 }
 

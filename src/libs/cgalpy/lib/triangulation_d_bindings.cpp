@@ -410,13 +410,13 @@ py::object vertices(const Triangulation_& tri)
 
 #if CGALPY_TRID == CGALPY_TRID_REGULAR
 
-// auto compute_conflict_zone(const Regular_triangulation& rtri, const Point& p, Full_cell& c) {
-//   py::list res;
-//   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
-//   auto it = boost::make_function_output_iterator(std::ref(op));
-//   auto facet = CGAL::compute_conflict_zone(p, Full_cell_handle(&c), it);
-//   return py::make_tuple(facet, res);
-// }
+auto compute_conflict_zone(const Regular_triangulation_d& rtri, const Point& p, Full_cell& c) {
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  auto facet = rtri.compute_conflict_zone(p, Full_cell_handle(&c), it);
+  return py::make_tuple(facet, res);
+}
 
 #endif
 
@@ -962,19 +962,19 @@ void export_triangulation_d(py::module_& m) {
       rtri_c.def(py::init<int>(), py::arg("dim") = 0, "Constructor")
         .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("gt"), "Constructor")
         .def(py::init<const Rtri&>(), py::arg("other"), "Copy constructor")
-        // .def("compute_conflict_zone", &trid::compute_conflict_zone, ri, py::arg("p"), py::arg("c"),
-        //      "Obtain the full cells in conflict with a given point\n"
-        //      "Parameters:\n"
-        //      "  p (Point): the input point\n"
-        //      "  c (Full_cell): the starting place of the search for conflicts\n"
-        //      "Return:\n"
-        //      "  tuple[Facet, list]: the 1st element is the facet on the boundary of the conflict zone; the 2nd element is a list of conflicting full cells\n")
+        .def("compute_conflict_zone", &trid::compute_conflict_zone, ri, py::arg("p"), py::arg("c"),
+             "Obtain the full cells in conflict with a given point\n"
+             "Parameters:\n"
+             "  p (Point): the input point\n"
+             "  c (Full_cell): the starting place of the search for conflicts\n"
+             "Return:\n"
+             "  tuple[Facet, list]: the 1st element is the facet on the boundary of the conflict zone; the 2nd element is a list of conflicting full cells\n")
         // .def("insert_if_in_star", insert_if_in_star)
         // .def("insert_if_in_star", insert_if_in_star)
         // .def("insert_if_in_star", insert_if_in_star)
         // .def("is_in_conflict", is_in_conflict)
-        // .def("number_of_hidden_vertices", number_of_hidden_vertices)
-        // .def("number_of_vertices", number_of_vertices)
+        .def("number_of_hidden_vertices", &Rtri::number_of_hidden_vertices)
+        .def("number_of_vertices", &Rtri::number_of_vertices)
         ;
     }
 #endif
