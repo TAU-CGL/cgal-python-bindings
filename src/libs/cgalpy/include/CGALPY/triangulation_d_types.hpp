@@ -62,6 +62,9 @@ using Full_cell = Triangulation_d::Full_cell;
 using Facet = Triangulation_d::Facet;
 using Face = Triangulation_d::Face;
 using Point = Triangulation_d::Point;
+#if CGALPY_TRID == CGALPY_TRID_REGULAR
+  using Weighted_point = Point;
+#endif
 
 using Vertex_handle = Triangulation_d::Vertex_handle;
 using Vertex_iterator = Triangulation_d::Vertex_iterator;

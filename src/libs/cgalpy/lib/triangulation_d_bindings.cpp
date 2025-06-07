@@ -410,13 +410,55 @@ py::object vertices(const Triangulation_& tri)
 
 #if CGALPY_TRID == CGALPY_TRID_REGULAR
 
-auto compute_conflict_zone(const Regular_triangulation_d& rtri, const Point& p, Full_cell& c) {
+//!
+auto compute_conflict_zone(const Regular_triangulation_d& rtri, const Weighted_point& p, Full_cell& c) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
   auto it = boost::make_function_output_iterator(std::ref(op));
   auto facet = rtri.compute_conflict_zone(p, Full_cell_handle(&c), it);
   return py::make_tuple(facet, res);
 }
+
+//!
+Vertex& insert_if_in_star1(Regular_triangulation_d& rtri, const Weighted_point& p, Vertex& star_center) {
+  auto v = rtri.insert_if_in_star(p, Vertex_handle(&star_center));
+  return *v;
+}
+
+//!
+Vertex& insert_if_in_star2(Regular_triangulation_d& rtri, const Weighted_point& p, Vertex& star_center,
+                           Full_cell& start) {
+  auto v = rtri.insert_if_in_star(p, Vertex_handle(&star_center), Full_cell_handle(&start));
+  return *v;
+}
+
+//!
+Vertex& insert_if_in_star3(Regular_triangulation_d& rtri, const Weighted_point& p, Vertex& star_center,
+                           Vertex& hint) {
+  auto v = rtri.insert_if_in_star(p, Vertex_handle(&star_center), Vertex_handle(&hint));
+  return *v;
+}
+
+//!
+auto insert_if_in_star4(Regular_triangulation_d& rtri, const Weighted_point& p, Vertex& star_center,
+                        Full_cell& start) {
+  Locate_type lt;
+  Face face(rtri.maximal_dimension());
+  Facet facet;
+  auto res = rtri.insert_if_in_star(p, Vertex_handle(&star_center), lt, face, facet, Full_cell_handle(&start));
+  switch (lt) {
+   case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
+   case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
+   case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
+   case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
+   case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
+  }
+  return py::make_tuple();
+}
+
+//!
+bool is_in_conflict(const Regular_triangulation_d& rtri, const Weighted_point& p, const Full_cell& c)
+{ return rtri.is_in_conflict(p, Full_cell_const_handle(&c)); }
 
 #endif
 
@@ -856,7 +898,7 @@ void export_triangulation_d(py::module_& m) {
            "  v (Vertex): the hint\n"
            "Return:\n"
            "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
-       .def("locate_get_incident", &trid::locate6, ri, py::arg("q"), py::arg("c"),
+      .def("locate_get_incident", &trid::locate6, ri, py::arg("q"), py::arg("c"),
            "Locate a query point given a full cell as a hint\n"
            "Parameters:\n"
            "  q (Point): the query point\n"
@@ -969,13 +1011,62 @@ void export_triangulation_d(py::module_& m) {
              "  c (Full_cell): the starting place of the search for conflicts\n"
              "Return:\n"
              "  tuple[Facet, list]: the 1st element is the facet on the boundary of the conflict zone; the 2nd element is a list of conflicting full cells\n")
-        // .def("insert_if_in_star", insert_if_in_star)
-        // .def("insert_if_in_star", insert_if_in_star)
-        // .def("insert_if_in_star", insert_if_in_star)
-        // .def("is_in_conflict", is_in_conflict)
-        .def("number_of_hidden_vertices", &Rtri::number_of_hidden_vertices)
-        .def("number_of_vertices", &Rtri::number_of_vertices)
+        .def("insert_if_in_star", &trid::insert_if_in_star1, ri, py::arg("p"), py::arg("star_center"),
+             "inserts a weighted point into the triangulation on the condition "
+             "that a given vertex appears in the conflict zone of the point\n"
+             "Parameters:\n"
+             "  p (Weighted_point): the input point\n"
+             "  star_center (Full_cell): the input star full cell\n"
+             "Return:\n"
+             "  Vertex: the new vertex\n")
+        .def("insert_if_in_star", &trid::insert_if_in_star2, ri, py::arg("p"), py::arg("star_center"),
+             py::arg("start"),
+             "inserts a weighted point into the triangulation on the condition "
+             "that a given vertex appears in the conflict zone of the point\n"
+             "Parameters:\n"
+             "  p (Weighted_point): the input point\n"
+             "  star_center (Full_cell): the input star full cell\n"
+             "  start (Full_cell): the starting point of the recursive traversal of adjacent full cells\n"
+             "Return:\n"
+             "  Vertex: the new vertex\n")
+        .def("insert_if_in_star", &trid::insert_if_in_star3, ri, py::arg("p"), py::arg("star_center"),
+             py::arg("hint"),
+             "inserts a weighted point into the triangulation on the condition "
+             "that a given vertex appears in the conflict zone of the point\n"
+             "Parameters:\n"
+             "  p (Weighted_point): the input point\n"
+             "  star_center (Full_cell): the input star full cell\n"
+             "  hint (Full_cell): the starting place of the search for the point location\n"
+             "Return:\n"
+             "  Vertex: the new vertex\n")
+        .def("insert_if_in_star", &trid::insert_if_in_star4, ri, py::arg("p"), py::arg("star_center"),
+             py::arg("hint"),
+             "inserts a weighted point into the triangulation on the condition "
+             "that a given vertex appears in the conflict zone of the point\n"
+             "Parameters:\n"
+             "  p (Weighted_point): the input point\n"
+             "  star_center (Full_cell): the input star full cell\n"
+             "  hint (Full_cell): the starting place of the search for the point location\n"
+             "Return:\n"
+           "  tuple [Vertex, list]: the 1st element is the new vertex; the 2nd is a list of the newly created full cells\n")
+        .def("is_in_conflict", &trid::is_in_conflict, py::arg("p"), py::arg("c"),
+             "Determine whether a given point is in conflict with a given full cell\n"
+             "Parameters:\n"
+             "  p (Weighted_point): the input point\n"
+             "  c (Full_cell): the input full cell\n"
+             "Return:\n"
+             "  bool\n")
+        .def("number_of_hidden_vertices", &Rtri::number_of_hidden_vertices,
+             "Obtain the number of hidden vertices\n"
+             "Return:\n"
+             "  int\n")
+        .def("number_of_vertices", &Rtri::number_of_vertices,
+             "Obtain the number of finite vertices that are not hidden\n"
+             "Return:\n"
+             "  int\n")
         ;
+
+      add_attr<trid::Weighted_point>(rtri_c, "Weighted_point");
     }
 #endif
 
