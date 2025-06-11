@@ -15,9 +15,14 @@
 #include <CGAL/function_objects.h>
 #include <CGAL/point_generators_2.h>
 #include <CGAL/point_generators_3.h>
+#include <CGAL/point_generators_d.h>
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/kernel_types.hpp"
+#if defined(CGALPY_KERNEL_BINDINGS)
+#include "CGALPY/kernel_d_types.hpp"
+#endif
+
 // #include "CGALPY/geometric_object_generators_types.hpp"
 
 namespace gog {
@@ -31,6 +36,13 @@ using Random_points_in_disc_2 =
 using Creator_3 = CGAL::Creator_uniform_3<double, Point_3>;
 using Random_points_in_sphere_3 =
   CGAL::Random_points_in_sphere_3<Point_3, Creator_3>;
+
+#if defined(CGALPY_KERNEL_BINDINGS)
+
+//!
+using Random_points_in_cube_d = CGAL::Random_points_in_cube_d<Point_d>;
+
+#endif
 
 //!
 // py::list generate(Random_points_in_disc_2& generator, std::size_t num) {
@@ -65,4 +77,16 @@ void export_geometric_object_generators(py::module_& m) {
       .def("__next__", [](Rpis& g) -> Point_3 { return *g++; })
       ;
   }
+
+#if defined(CGALPY_KERNEL_BINDINGS)
+  using Rpicd = gog::Random_points_in_cube_d;
+  if (! add_attr<Rpicd>(m, "Random_points_in_cube_d")) {
+    py::class_<Rpicd>(m, "Random_points_in_cube_d")
+      .def(py::init<int, double, CGAL::Random&>(),
+           py::arg("dim"), py::arg("radius") = 1.0, py::arg("rnd") = CGAL::get_default_random())
+      .def("__iter__", [](Rpicd& g) -> Rpicd& { return g; }, ri)
+      .def("__next__", [](Rpicd& g) -> Point_d { return *g++; })
+      ;
+  }
+#endif
 }
