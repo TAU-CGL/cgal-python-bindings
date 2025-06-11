@@ -120,63 +120,67 @@ void export_kernel_d(py::module_& m) {
   }
 #endif
 
-  py::class_<Pnt> pd_c(m, "Point_d");
-  pd_c.def(py::init<>())
-    .def("__init__", &init_point_d)
-    .def("__hash__", &hash_rational_point<is_epec_d_type(), Pnt>)
-    .def("dimension", &Pnt::dimension)
-    .def("cartesian", &Pnt::cartesian)
-    .def("__getitem__", &Pnt::operator[])
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+  if (! add_attr<Pnt>(m, "Point_d")) {
+    py::class_<Pnt> pd_c(m, "Point_d");
+    pd_c.def(py::init<>())
+      .def("__init__", &init_point_d)
+      .def("__hash__", &hash_rational_point<is_epec_d_type(), Pnt>)
+      .def("dimension", &Pnt::dimension)
+      .def("cartesian", &Pnt::cartesian)
+      .def("__getitem__", &Pnt::operator[])
+      .def(py::self == py::self)
+      .def(py::self != py::self)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
-    .def(py::self > py::self)
-    .def(py::self < py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
+      .def(py::self > py::self)
+      .def(py::self < py::self)
+      .def(py::self <= py::self)
+      .def(py::self >= py::self)
 #endif
-    ;
+      ;
 
-  using Cci = Kernel_d::Cartesian_const_iterator_d;
-  add_iterator<Cci, Cci, const FT_d&>("Cartesian_iterator", pd_c);
-  pd_c.def("cartesians",
-            [](const Pnt& p)
-            { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
-           py::keep_alive<0, 1>());
+    using Cci = Kernel_d::Cartesian_const_iterator_d;
+    add_iterator<Cci, Cci, const FT_d&>("Cartesian_iterator", pd_c);
+    pd_c.def("cartesians",
+             [](const Pnt& p)
+             { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
+             py::keep_alive<0, 1>());
 
-  add_insertion(pd_c, "__str__");
-  add_insertion(pd_c, "__repr__");
+    add_insertion(pd_c, "__str__");
+    add_insertion(pd_c, "__repr__");
+  }
 
-  py::class_<Segment_d> sd_co(m, "Segment_d");
-  sd_co.def(py::init<Point_d&, Point_d&>())
-    .def("source", &Segment_d::source)
-    .def("target", &Segment_d::target)
+  if (! add_attr<Segment_d>(m, "Segment_d")) {
+    py::class_<Segment_d> sd_co(m, "Segment_d");
+    sd_co.def(py::init<Point_d&, Point_d&>())
+      .def("source", &Segment_d::source)
+      .def("target", &Segment_d::target)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
-    .def("opposite", &Segment_d::opposite)
-    .def("__getitem__", &Segment_d::operator[])
+      .def("opposite", &Segment_d::opposite)
+      .def("__getitem__", &Segment_d::operator[])
 #endif
 #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
-    .def("vertex", &Segment_d::vertex)
-    .def("point", &Segment_d::point)
-    .def("min", &Segment_d::min)
-    .def("max", &Segment_d::max)
-    .def("supporting_line", &Segment_d::supporting_line)
-    .def("squared_length", &Segment_d::squared_length)
-    .def("direction", &Segment_d::direction)
-    .def("has_on", &Segment_d::has_on)
-    .def("is_degenerate", &Segment_d::is_degenerate)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
+      .def("vertex", &Segment_d::vertex)
+      .def("point", &Segment_d::point)
+      .def("min", &Segment_d::min)
+      .def("max", &Segment_d::max)
+      .def("supporting_line", &Segment_d::supporting_line)
+      .def("squared_length", &Segment_d::squared_length)
+      .def("direction", &Segment_d::direction)
+      .def("has_on", &Segment_d::has_on)
+      .def("is_degenerate", &Segment_d::is_degenerate)
+      .def(py::self == py::self)
+      .def(py::self != py::self)
 #endif
-    // .setattr("__hash__", &hash<Segment_d>)
-    ;
+      // .setattr("__hash__", &hash<Segment_d>)
+      ;
 
 #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) && \
      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
-  add_insertion(sd_co, "__str__");
-  add_insertion(sd_co, "__repr__");
+    add_insertion(sd_co, "__str__");
+    add_insertion(sd_co, "__repr__");
 #endif
+  }
 
   bind_do_intersect_d(m);
 }
