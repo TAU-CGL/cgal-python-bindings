@@ -21,19 +21,28 @@ Ker = CGALPY_TRI.Ker
 Kerd = CGALPY_TRI.Kerd
 Trid = CGALPY_TRI.Trid
 Delaunay_triangulation = Trid.Delaunay_triangulation
-# Full_cell = Trid.Full_cell
 Gog = CGALPY_GOG.Gog
 
 points = []
 generator = Gog.Random_points_in_cube_d(4)
 for i in range(20): points.append(next(generator))
-print(points)
-# # spatial_sort(points.begin(), points.end(), t.geom_traits());
 
-# c = Full_cell()
-# cnt = 0
-# for p in points:
-#   res = tri.locate(p, hint)
+# spatial_sort(points, epicd);
+
+dt = Delaunay_triangulation()
+res = dt.locate(points[0])
+print(res)
+# lt = res[1][0]
+# assert(lt != Trid.OUTSIDE_CONVEX_HULL and lt != Trid.OUTSIDE_AFFINE_HULL)
+# f = res[1][1]
+# ft = res[1][2]
+# fch = res[1][3]
+# v = dt.insert(p, lt, f, ft, fch)
+# hint = v.full_cell()
+
+cnt = 1
+# for p in points[1:]:
+#   res = dt.locate(p, hint)
 #   lt = res[1][0]
 #   if lt != Trid.OUTSIDE_CONVEX_HULL and lt != Trid.OUTSIDE_AFFINE_HULL:
 #     hint = fch
@@ -41,8 +50,8 @@ print(points)
 #   f = res[1][1]
 #   ft = res[1][2]
 #   fch = res[1][3]
-#   v = tri.insert(p, lt, f, ft, fch)
+#   v = dt.insert(p, lt, f, ft, fch)
 #   hint = v.full_cell()
 #   cnt += 1
 
-# print(F:"{} points were actually inserted.")
+print(F"{cnt} points were actually inserted.")
