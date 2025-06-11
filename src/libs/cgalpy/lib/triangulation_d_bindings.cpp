@@ -256,29 +256,6 @@ auto locate6(const Triangulation_d& tri, const Point& p, Full_cell& c) {
 }
 
 //!
-size_type insert1(Triangulation_d& tri, py::list& points) {
-  auto begin = stl_input_iterator<Point>(points);
-  auto end = stl_input_iterator<Point>(points, false);
-  return tri.insert(begin, end);
-}
-
-Vertex& insert2(Triangulation_d& tri, const Point& p, Locate_type lt,
-                const Face& f, const Facet& ft, Full_cell& c)
-{ return *(tri.insert(p, lt, f, ft, Full_cell_handle(&c))); }
-
-//!
-Vertex& insert3(Triangulation_d& tri, const Point& p, Full_cell& hint)
-{ return *(tri.insert(p, Full_cell_handle(&hint))); }
-
-//!
-Vertex& insert4(Triangulation_d& tri, const Point& p, Vertex& hint)
-{ return *(tri.insert(p, Vertex_handle(&hint))); }
-
-//!
-Vertex& insert5(Triangulation_d& tri, const Point& p)
-{ return *(tri.insert(p)); }
-
-//!
 py::list insert_in_hole(Triangulation_d& tri, const Point& p, py::list& full_cells, const Facet& ft) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -390,6 +367,35 @@ py::list incident_full_cells2(const Triangulation_& tri, const Vertex& v) {
 
 //!
 template <typename Triangulation_>
+size_type insert1(Triangulation_& tri, py::list& points) {
+  auto begin = stl_input_iterator<Point>(points);
+  auto end = stl_input_iterator<Point>(points, false);
+  return tri.insert(begin, end);
+}
+
+//!
+template <typename Triangulation_>
+Vertex& insert2(Triangulation_& tri, const Point& p, Locate_type lt,
+                const Face& f, const Facet& ft, Full_cell& c)
+{ return *(tri.insert(p, lt, f, ft, Full_cell_handle(&c))); }
+
+//!
+template <typename Triangulation_>
+Vertex& insert3(Triangulation_& tri, const Point& p, Full_cell& hint)
+{ return *(tri.insert(p, Full_cell_handle(&hint))); }
+
+//!
+template <typename Triangulation_>
+Vertex& insert4(Triangulation_& tri, const Point& p, Vertex& hint)
+{ return *(tri.insert(p, Vertex_handle(&hint))); }
+
+//!
+template <typename Triangulation_>
+Vertex& insert5(Triangulation_& tri, const Point& p)
+{ return *(tri.insert(p)); }
+
+//!
+template <typename Triangulation_>
 py::list star(const Triangulation_& tri, const Face& f) {
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
@@ -405,19 +411,10 @@ py::object vertices(const Triangulation_& tri)
 
 /// @}
 
-/// Common
+/// Regular triangulation
 /// @{
 
 #if CGALPY_TRID == CGALPY_TRID_REGULAR
-
-//!
-auto compute_conflict_zone(const Regular_triangulation_d& rtri, const Weighted_point& p, Full_cell& c) {
-  py::list res;
-  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
-  auto facet = rtri.compute_conflict_zone(p, Full_cell_handle(&c), it);
-  return py::make_tuple(facet, res);
-}
 
 //!
 Vertex& insert_if_in_star1(Regular_triangulation_d& rtri, const Weighted_point& p, Vertex& star_center) {
@@ -456,13 +453,55 @@ auto insert_if_in_star4(Regular_triangulation_d& rtri, const Weighted_point& p, 
   return py::make_tuple();
 }
 
+#endif
+
+/// @}
+
+/// Delaunay triangulation
+/// @{
+
+#if (CGALPY_TRID == CGALPY_TRID_DELAUNAY)
+
 //!
-bool is_in_conflict(const Regular_triangulation_d& rtri, const Weighted_point& p, const Full_cell& c)
-{ return rtri.is_in_conflict(p, Full_cell_const_handle(&c)); }
+void remove1(Delaunay_triangulation_d& dtri, py::list vertices) {
+  auto begin = stl_dereference_input_iterator<Vertex_handle>(vertices);
+  auto end = stl_dereference_input_iterator<Vertex_handle>(vertices, false);
+  dtri.remove(begin, end);
+}
+
+//!
+Full_cell& remove2(Delaunay_triangulation_d& dtri, Vertex& v) {
+  auto c = dtri.remove(Vertex_handle(&v));
+  return *c;
+}
 
 #endif
 
 /// @}
+
+/// Common to Regular and Delaunay triangulation
+/// @{
+
+#if ((CGALPY_TRID == CGALPY_TRID_REGULAR) || (CGALPY_TRID == CGALPY_TRID_DELAUNAY))
+
+  //!
+template <typename Triangulation_>
+auto compute_conflict_zone(const Triangulation_& rtri, const Point& p, Full_cell& c) {
+  py::list res;
+  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  auto it = boost::make_function_output_iterator(std::ref(op));
+  auto facet = rtri.compute_conflict_zone(p, Full_cell_handle(&c), it);
+  return py::make_tuple(facet, res);
+}
+
+//!
+template <typename Triangulation_>
+bool is_in_conflict(const Triangulation_& rtri, const Point& p, const Full_cell& c)
+{ return rtri.is_in_conflict(p, Full_cell_const_handle(&c)); }
+
+/// @}
+
+#endif
 
 } // End of namespace trid
 
@@ -761,13 +800,13 @@ void export_triangulation_d(py::module_& m) {
            "  Vertex")
 
       // Insertion
-      .def("insert", &trid::insert1, py::arg("points"),
+      .def("insert", &trid::insert1<Tri>, py::arg("points"),
            "Insert a set of points into the triangulation\n"
            "Parameters:\n"
            "  points (list): the input points\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
-      .def("insert", &trid::insert2, py::arg("p"), py::arg("lt"), py::arg("f"), py::arg("ft"), py::arg("c"),
+      .def("insert", &trid::insert2<Tri>, py::arg("p"), py::arg("lt"), py::arg("f"), py::arg("ft"), py::arg("c"),
            "Insert a point into the triangulation according to a given location type\n"
            "Parameters:\n"
            "  p (Point): the point to insert\n"
@@ -777,21 +816,21 @@ void export_triangulation_d(py::module_& m) {
            "  c (Full_cell)\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
-      .def("insert", &trid::insert3, py::arg("p"), py::arg("hint"),
+      .def("insert", &trid::insert3<Tri>, py::arg("p"), py::arg("hint"),
            "Insert a point into the triangulation, using a hint for its location\n"
            "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  hint (Full_cell): the starting place of the search for the point location\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
-      .def("insert", &trid::insert4, py::arg("p"), py::arg("hint"),
+      .def("insert", &trid::insert4<Tri>, py::arg("p"), py::arg("hint"),
            "Insert a point into the triangulation, using a hint for its location\n"
            "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  hint (Vertex): the starting place of the search for the point location\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
-      .def("insert", &trid::insert5, py::arg("p"),
+      .def("insert", &trid::insert5<Tri>, py::arg("p"),
            "Insert a point into the triangulation\n"
            "Parameters:\n"
            "  p (Point): the point to insert\n"
@@ -1004,7 +1043,7 @@ void export_triangulation_d(py::module_& m) {
       rtri_c.def(py::init<int>(), py::arg("dim") = 0, "Constructor")
         .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("gt"), "Constructor")
         .def(py::init<const Rtri&>(), py::arg("other"), "Copy constructor")
-        .def("compute_conflict_zone", &trid::compute_conflict_zone, ri, py::arg("p"), py::arg("c"),
+        .def("compute_conflict_zone", &trid::compute_conflict_zone<Rtri>, ri, py::arg("p"), py::arg("c"),
              "Obtain the full cells in conflict with a given point\n"
              "Parameters:\n"
              "  p (Point): the input point\n"
@@ -1049,7 +1088,7 @@ void export_triangulation_d(py::module_& m) {
              "  hint (Full_cell): the starting place of the search for the point location\n"
              "Return:\n"
            "  tuple [Vertex, list]: the 1st element is the new vertex; the 2nd is a list of the newly created full cells\n")
-        .def("is_in_conflict", &trid::is_in_conflict, py::arg("p"), py::arg("c"),
+        .def("is_in_conflict", &trid::is_in_conflict<Rtri>, py::arg("p"), py::arg("c"),
              "Determine whether a given point is in conflict with a given full cell\n"
              "Parameters:\n"
              "  p (Weighted_point): the input point\n"
@@ -1078,6 +1117,69 @@ void export_triangulation_d(py::module_& m) {
       dtri_c.def(py::init<int>(), py::arg("dim") = 0, "Constructor")
         .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("traits"), "Constructor")
         .def(py::init<const Dtri&>(), py::arg("other"), "Copy constructor")
+        .def("compute_conflict_zone", &trid::compute_conflict_zone<Dtri>, ri, py::arg("p"), py::arg("c"),
+             "Obtain the full cells in conflict with a given point\n"
+             "Parameters:\n"
+             "  p (Point): the input point\n"
+             "  c (Full_cell): the starting place of the search for conflicts\n"
+             "Return:\n"
+             "  tuple[Facet, list]: the 1st element is the facet on the boundary of the conflict zone; the 2nd element is a list of conflicting full cells\n")
+
+        // Insertion
+        .def("insert", &trid::insert1<Dtri>, py::arg("points"),
+             "Insert a set of points into the triangulation\n"
+             "Parameters:\n"
+             "  points (list): the input points\n"
+             "Return:\n"
+             "  Vertex: the newly created vertex\n")
+        .def("insert", &trid::insert2<Dtri>, py::arg("p"), py::arg("lt"), py::arg("f"), py::arg("ft"), py::arg("c"),
+             "Insert a point into the triangulation according to a given location type\n"
+             "Parameters:\n"
+             "  p (Point): the point to insert\n"
+             "  lt (Location_type): the location type\n"
+             "  f (Face)\n"
+             "  ft (Facet)\n"
+             "  c (Full_cell)\n"
+             "Return:\n"
+             "  Vertex: the newly created vertex\n")
+        .def("insert", &trid::insert3<Dtri>, py::arg("p"), py::arg("hint"),
+             "Insert a point into the triangulation, using a hint for its location\n"
+             "Parameters:\n"
+             "  p (Point): the point to insert\n"
+             "  hint (Full_cell): the starting place of the search for the point location\n"
+             "Return:\n"
+             "  Vertex: the newly created vertex\n")
+        .def("insert", &trid::insert4<Dtri>, py::arg("p"), py::arg("hint"),
+             "Insert a point into the triangulation, using a hint for its location\n"
+             "Parameters:\n"
+             "  p (Point): the point to insert\n"
+             "  hint (Vertex): the starting place of the search for the point location\n"
+             "Return:\n"
+             "  Vertex: the newly created vertex\n")
+        .def("insert", &trid::insert5<Dtri>, py::arg("p"),
+             "Insert a point into the triangulation\n"
+             "Parameters:\n"
+             "  p (Point): the point to insert\n"
+             "Return:\n"
+             "  Vertex: the newly created vertex\n")
+
+        .def("is_in_conflict", &trid::is_in_conflict<Dtri>, py::arg("p"), py::arg("c"),
+             "Determine whether a given point is in conflict with a given full cell\n"
+             "Parameters:\n"
+             "  p (Weighted_point): the input point\n"
+             "  c (Full_cell): the input full cell\n"
+             "Return:\n"
+             "  bool\n")
+        .def("remove", &trid::remove1, py::arg("vertices"),
+             "Remove a given set of vertices"
+             "Parameters:\n"
+             "  vertices (list): the vertices to remove\n")
+        .def("remove", &trid::remove2, ri, py::arg("v"),
+             "Remove a given vertex"
+             "Parameters:\n"
+             "  v (Vertex): the vertex to remove\n"
+              "Return:\n"
+             "  Full_cell: the full cell that contains v\n")
         ;
     }
 #endif
