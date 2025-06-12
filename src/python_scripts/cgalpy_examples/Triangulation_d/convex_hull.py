@@ -21,11 +21,12 @@ Ker = CGALPY_TRI.Ker
 Kerd = CGALPY_TRI.Kerd
 Trid = CGALPY_TRI.Trid
 Delaunay_triangulation = Trid.Delaunay_triangulation
+Locate_type = Delaunay_triangulation.Locate_type
 Gog = CGALPY_GOG.Gog
 
 points = []
 generator = Gog.Random_points_in_cube_d(4)
-for i in range(20): points.append(next(generator))
+for i in range(200): points.append(next(generator))
 
 # spatial_sort(points, epicd);
 
@@ -34,16 +35,21 @@ v = dt.insert(points[0])
 hint = v.full_cell()
 cnt = 1
 for p in points[1:]:
-  res = dt.locate(p, hint)
-  lt = res[1][0]
-  if lt != Trid.OUTSIDE_CONVEX_HULL and lt != Trid.OUTSIDE_AFFINE_HULL:
-    hint = fch
-    continue
-  f = res[1][1]
-  ft = res[1][2]
-  fch = res[1][3]
-  v = dt.insert(p, lt, f, ft, fch)
-  hint = v.full_cell()
-  cnt += 1
+  res = dt.locate_get_incident(p, hint)
+  lt = res[0]
+  # print("lt: ", lt)
+  if lt == Locate_type.OUTSIDE_AFFINE_HULL:
+    v = dt.insert(p)
+    hint = v.full_cell()
+    cnt += 1
+
+  elif lt == Locate_type.OUTSIDE_CONVEX_HULL:
+    fc = res[1]
+    v = dt.insert(p, fc)
+    hint = v.full_cell()
+    cnt += 1
+
+  else:
+    hint = res[1]
 
 print(F"{cnt} points were actually inserted.")

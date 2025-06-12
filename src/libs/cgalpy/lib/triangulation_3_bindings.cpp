@@ -299,16 +299,14 @@ py::object locate_dispatch(py::handle self, Cell_handle ch, Locate_type lt, int 
     return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li));
 
    case Triangulation_3::EDGE:
-    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li),
-                          py::int_(lj));
+    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li), py::int_(lj));
 
    case Triangulation_3::CELL:
    case Triangulation_3::OUTSIDE_CONVEX_HULL:
     return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
   }
 
-  throw std::runtime_error("Invalid location type");
-  return py::none();
+  return py::none(py::cast(lt));
 }
 
 /*! We want to return a Python tuple of variable length. One element of the
