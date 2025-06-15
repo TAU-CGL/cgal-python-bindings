@@ -347,9 +347,11 @@ py::list incident_faces(const Triangulation_& tri, const Vertex& v, int dim) {
 
 //!
 template <typename Triangulation_>
-py::list incident_full_cells1(const Triangulation_& tri, const Face& f) {
+py::list incident_full_cells1(py::handle self, const Face& f) {
+  auto& tri = py::cast<Triangulation_&>(self);
   py::list res;
-  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto op = [&] (Full_cell_handle ch) mutable { res.append(py::cast(*ch,ri, self)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
   tri.incident_full_cells(f, it);
   return res;
@@ -357,9 +359,11 @@ py::list incident_full_cells1(const Triangulation_& tri, const Face& f) {
 
 //!
 template <typename Triangulation_>
-py::list incident_full_cells2(const Triangulation_& tri, const Vertex& v) {
+py::list incident_full_cells2(py::handle self, const Vertex& v) {
+  auto& tri = py::cast<Triangulation_&>(self);
   py::list res;
-  auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto op = [&] (Full_cell_handle ch) mutable { res.append(py::cast(*ch, ri, self)); };
   auto it = boost::make_function_output_iterator(std::ref(op));
   tri.incident_full_cells(Vertex_const_handle(&v), it);
   return res;
@@ -569,13 +573,13 @@ void export_triangulation_d(py::module_& m) {
            "  dim (int): the dimension\n"
            "Return:\n"
            "  list [Face Face ...])\n")
-      .def("incident_full_cells", &trid::incident_full_cells1<Tds>, py::arg("f"),
+      .def("incident_full_cells", &trid::incident_full_cells1<Tds>, ri, py::arg("f"),
            "Obtain all the full cells that are incident to a face\n"
            "Parameters:\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  list: the full cells incident to f\n")
-      .def("incident_full_cells", &trid::incident_full_cells2<Tds>, py::arg("v"),
+      .def("incident_full_cells", &trid::incident_full_cells2<Tds>, ri, py::arg("v"),
            "Obtain all the full cells that are incident to a vertex\n"
            "Parameters:\n"
            "  v (Vertex): the input vertex\n"
