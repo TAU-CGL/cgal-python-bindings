@@ -208,51 +208,50 @@ Full_cell& locate3(const Triangulation_d& tri, const Point& p, Full_cell& s)
 { return *(tri.locate(p, Full_cell_handle(&s))); }
 
 //!
-auto locate4(const Triangulation_d& tri, const Point& p) {
-  Locate_type lt;
-  Face face(tri.maximal_dimension());
-  Facet facet;
-  auto res = tri.locate(p, lt, face, facet);
+py::object locate_dispatch(py::handle self, Full_cell_handle ch, Locate_type lt,
+                           const Face& face, const Facet& facet) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+
+  Full_cell& c = *ch;
   switch (lt) {
-   case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
-   case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
-   case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
-   case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
-   case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
+   case Locate_type::IN_FACE: return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::cast(face));
+   case Locate_type::IN_FACET: return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::cast(facet));
+   case Locate_type::ON_VERTEX:
+   case Locate_type::IN_FULL_CELL:
+   case Locate_type::OUTSIDE_CONVEX_HULL: return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
   }
-  return py::make_tuple();
+
+  return py::make_tuple(py::cast(lt));
 }
 
 //!
-auto locate5(const Triangulation_d& tri, const Point& p, Vertex& v) {
+auto locate4(py::handle self, const Point& p) {
+  auto& tri = py::cast<Triangulation_d&>(self);
   Locate_type lt;
   Face face(tri.maximal_dimension());
   Facet facet;
-  auto res = tri.locate(p, lt, face, facet, Vertex_handle(&v));
-  switch (lt) {
-   case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
-   case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
-   case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
-   case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
-   case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
-  }
-  return py::make_tuple();
+  auto fch = tri.locate(p, lt, face, facet);
+  return locate_dispatch(self, fch, lt, face, facet);
 }
 
 //!
-auto locate6(const Triangulation_d& tri, const Point& p, Full_cell& c) {
+auto locate5(py::handle self, const Point& p, Vertex& v) {
+  auto& tri = py::cast<Triangulation_d&>(self);
   Locate_type lt;
   Face face(tri.maximal_dimension());
   Facet facet;
-  auto res = tri.locate(p, lt, face, facet, Full_cell_handle(&c));
-  switch (lt) {
-   case Locate_type::ON_VERTEX: return py::make_tuple(*res, lt);
-   case Locate_type::IN_FACE: return py::make_tuple(*res, lt, face);
-   case Locate_type::IN_FACET: return py::make_tuple(*res, lt, facet);
-   case Locate_type::IN_FULL_CELL: py::make_tuple(*res, lt);
-   case Locate_type::OUTSIDE_CONVEX_HULL: py::make_tuple(*res, lt);
-  }
-  return py::make_tuple();
+  auto fch = tri.locate(p, lt, face, facet, Vertex_handle(&v));
+  return locate_dispatch(self, fch, lt, face, facet);
+}
+
+//!
+auto locate6(py::handle self, const Point& p, Full_cell& c) {
+  auto& tri = py::cast<Triangulation_d&>(self);
+  Locate_type lt;
+  Face face(tri.maximal_dimension());  // There should be an empty constructor
+  Facet facet;
+  auto fch = tri.locate(p, lt, face, facet, Full_cell_handle(&c));
+  return locate_dispatch(self, fch, lt, face, facet);
 }
 
 //!

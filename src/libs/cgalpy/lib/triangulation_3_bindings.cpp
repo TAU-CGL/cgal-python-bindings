@@ -288,19 +288,17 @@ py::object locate_dispatch(py::handle self, Cell_handle ch, Locate_type lt, int 
   Cell& c = *ch;
   switch (lt) {
    case Triangulation_3::FACET:
-   case Triangulation_3::VERTEX:
-    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li));
+   case Triangulation_3::VERTEX: return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li));
 
-   case Triangulation_3::EDGE:
-    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li), py::int_(lj));
+   case Triangulation_3::EDGE: return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li), py::int_(lj));
 
    case Triangulation_3::CELL:
-   case Triangulation_3::OUTSIDE_CONVEX_HULL:
-    return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
+   case Triangulation_3::OUTSIDE_CONVEX_HULL: return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
+
+   case Triangulation_3::OUTSIDE_AFFINE_HULL: return py::tuple(py::cast(lt));
   }
 
-  throw std::runtime_error("Invalid location type");
-  return py::none();
+  return py::tuple(py::cast(lt));
 }
 
 /*! We want to return a Python tuple of variable length. One element of the
@@ -387,15 +385,17 @@ py::object side_of_cell(const Triangulation_3& tri, const Point_3& p, Cell& c) {
 
   switch (lt) {
    case Triangulation_3::FACET:
-   case Triangulation_3::VERTEX:
-    return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li));
+   case Triangulation_3::VERTEX: return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li));
 
    case Triangulation_3::EDGE:
     return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li), py::int_(lj));
+
+   case Triangulation_3::CELL:
+   case Triangulation_3::OUTSIDE_CONVEX_HULL:
+   case Triangulation_3::OUTSIDE_AFFINE_HULL: return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt));
   }
 
-  throw std::runtime_error("Invalid location type");
-  return py::none();
+  return py::make_tuple(CGAL::ON_BOUNDARY);
 }
 
 //!
@@ -407,15 +407,18 @@ py::object side_of_facet(const Triangulation_3& tri, const Point_3& p, Facet& f)
   if ((res == CGAL::ON_BOUNDED_SIDE) || (res == CGAL::ON_UNBOUNDED_SIDE)) return py::make_tuple(res);
 
   switch (lt) {
-   case Triangulation_3::VERTEX:
-    return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li));
+   case Triangulation_3::VERTEX: return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li));
 
    case Triangulation_3::EDGE:
     return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li), py::int_(lj));
+
+   case Triangulation_3::FACET:
+   case Triangulation_3::CELL:
+   case Triangulation_3::OUTSIDE_CONVEX_HULL:
+   case Triangulation_3::OUTSIDE_AFFINE_HULL: return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt));
   }
 
-  throw std::runtime_error("Invalid location type");
-  return py::none();
+  return py::make_tuple(CGAL::ON_BOUNDARY);
 }
 
 //!
@@ -426,12 +429,16 @@ py::object side_of_edge(const Triangulation_3& tri, const Point_3& p, Edge& e) {
   if ((res == CGAL::ON_BOUNDED_SIDE) || (res == CGAL::ON_UNBOUNDED_SIDE)) return py::make_tuple(res);
 
   switch (lt) {
-   case Triangulation_3::VERTEX:
-    return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li));
+   case Triangulation_3::VERTEX:return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt), py::int_(li));
+
+   case Triangulation_3::EDGE:
+   case Triangulation_3::FACET:
+   case Triangulation_3::CELL:
+   case Triangulation_3::OUTSIDE_CONVEX_HULL:
+   case Triangulation_3::OUTSIDE_AFFINE_HULL: return py::make_tuple(py::cast(CGAL::ON_BOUNDARY), py::cast(lt));
   }
 
-  throw std::runtime_error("Invalid location type");
-  return py::none();
+  return py::make_tuple(CGAL::ON_BOUNDARY);
 }
 
 //!
