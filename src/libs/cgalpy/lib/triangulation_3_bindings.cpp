@@ -156,16 +156,9 @@ Vertex& insert_in_facet(Triangulation_3& tri, const Point& p, const Facet& f) {
 
 //!
 Vertex& insert_in_hole1(Triangulation_3& tri, const Point& p, py::list& cells, Cell& start, int i) {
-#if 1
   auto begin = stl_dereference_input_iterator<Cell_handle, Cell>(cells);
   auto end = stl_dereference_input_iterator<Cell_handle, Cell>(cells, false);
   auto vh = tri.insert_in_hole(p, begin, end, Cell_handle(&start), i);
-#else
-  std::vector<Cell_handle> chs(cells.size());
-  for (auto i = 0; i < cells.size(); ++i)
-    chs[i] = Cell_handle(py::cast<Cell*>(cells[i]));
-  auto vh = tri.insert_in_hole(p, chs.begin(), chs.end(), Cell_handle(&     53 start), i);
-#endif
   return *vh;
 }
 
@@ -299,8 +292,7 @@ py::object locate_dispatch(py::handle self, Cell_handle ch, Locate_type lt, int 
     return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li));
 
    case Triangulation_3::EDGE:
-    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li),
-                          py::int_(lj));
+    return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li), py::int_(lj));
 
    case Triangulation_3::CELL:
    case Triangulation_3::OUTSIDE_CONVEX_HULL:
