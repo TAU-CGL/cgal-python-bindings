@@ -155,15 +155,36 @@ bool is_infinite2(const Triangulation_2& tri, Vertex& v) { return tri.is_infinit
 bool is_infinite3(const Triangulation_2& tri, Face& f, int i) { return tri.is_infinite(Face_handle(&f), i); }
 
 //!
-// bool is_infinite4(const Triangulation_2& tri, Edge& e) { return tri.is_infinite(e); }
+bool is_infinite4(const Triangulation_2& tri, const Edge& e) { return tri.is_infinite(e); }
+
+//!
+Face& locate1(const Triangulation_2& tri, const Point& query) { return *(tri.locate(query)); }
+
+//!
+Face& locate2(const Triangulation_2& tri, const Point& query, Face& hint)
+{ return *(tri.locate(query), Face_handle(&hint)); }
+
+//!
+auto locate_get_incident1(const Triangulation_2& tri, const Point& query) {
+  Locate_type lt;
+  int li;
+  auto fh = tri.locate(query, lt, li);
+  return py::make_tuple(lt, *fh, li);
+}
+
+//!
+auto locate_get_incident2(const Triangulation_2& tri, const Point& query, Face& hint) {
+  Locate_type lt;
+  int li;
+  auto fh = tri.locate(query, lt, li, Face_handle(&hint));
+  return py::make_tuple(lt, *fh, li);
+}
 
 Triangle triangle(Triangulation_2& t, Face& f) {
   auto fh = face_to_handle(f);
   auto res = t.triangle(fh);
   return res;
 }
-
-Vertex& insert_point(Triangulation_2& t, Point& p) { return *(t.insert(p)); }
 
 void remove(Triangulation_2& t, Vertex& v) { t.remove(v.handle()); }
 
@@ -347,11 +368,12 @@ void export_triangulation_2(py::module_& m) {
     .def("is_infinite", &tri2::is_infinite1)
     .def("is_infinite", &tri2::is_infinite2)
     .def("is_infinite", &tri2::is_infinite3)
-    // .def("is_infinite", &tri2::is_infinite4)
-    // is_valid
-    // line_walk
-    // locate
-    // locate
+    .def("is_infinite", &tri2::is_infinite4)
+    .def("is_valid", &Tri::is_valid, py::arg("verbose") = false, py::arg("level") = 0)
+    .def("locate", &tri2::locate1, ri)
+    .def("locate", &tri2::locate2, ri)
+    .def("locate_get_incident", &tri2::locate_get_incident1, ri)
+    .def("locate_get_incident", &tri2::locate_get_incident2, ri)
     .def("mirror_edge", &Tri::mirror_edge)
     // mirror_index
     // mirror_vertex
@@ -387,9 +409,7 @@ void export_triangulation_2(py::module_& m) {
 #endif
     ;
 
-  m.def("ccw", static_cast<int(*)(int)>(&Tri::ccw))
-    .def("cw", static_cast<int(*)(int)>(&Tri::cw))
-    ;
+  // line_walk
 
   using Vertex = Tri::Vertex;
   using Face = Tri::Face;
