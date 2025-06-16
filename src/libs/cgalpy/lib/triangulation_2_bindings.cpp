@@ -121,17 +121,41 @@ Vertex& insert_outside_convex_hull(Triangulation_2& tri, const Point& p, Face& f
 Vertex& insert_second(Triangulation_2& tri, const Point& p) { return *(tri.insert_second(p)); }
 
 //!
-bool is_edge(const Triangulation_2& tri, Vertex& va, Vertex& vb)
-{ return tri.is_edge(Vertex_handle(&va), Vertex_handle(&vb)); }
+bool is_edge(const Triangulation_2& tri, Vertex& v1, Vertex& v2)
+{ return tri.is_edge(Vertex_handle(&v1), Vertex_handle(&v2)); }
 
 //!
-auto is_edge_get_edge(const Triangulation_2& tri, Vertex& va, Vertex& vb) {
+auto is_edge_get_edge(const Triangulation_2& tri, Vertex& v1, Vertex& v2) {
   Face_handle fh;
   int i;
-  auto res = tri.is_edge(Vertex_handle(&va), Vertex_handle(&vb), fh, i);
+  auto res = tri.is_edge(Vertex_handle(&v1), Vertex_handle(&v2), fh, i);
   if (! res) return py::make_tuple(false);
   return py::make_tuple(true, *fh, i);
 }
+
+//!
+bool is_face(const Triangulation_2& tri, Vertex& v1, Vertex& v2, Vertex& v3)
+  { return tri.is_face(Vertex_handle(&v1), Vertex_handle(&v2), Vertex_handle(&v3)); }
+
+//!
+auto is_face_get_face(const Triangulation_2& tri, Vertex& v1, Vertex& v2, Vertex& v3) {
+  Face_handle fh;
+  auto res = tri.is_face(Vertex_handle(&v1), Vertex_handle(&v2), Vertex_handle(&v3), fh);
+  if (! res) return py::make_tuple(false);
+  return py::make_tuple(true, *fh);
+}
+
+//!
+bool is_infinite1(const Triangulation_2& tri, Face& f) { return tri.is_infinite(Face_handle(&f)); }
+
+//!
+bool is_infinite2(const Triangulation_2& tri, Vertex& v) { return tri.is_infinite(Vertex_handle(&v)); }
+
+//!
+bool is_infinite3(const Triangulation_2& tri, Face& f, int i) { return tri.is_infinite(Face_handle(&f), i); }
+
+//!
+// bool is_infinite4(const Triangulation_2& tri, Edge& e) { return tri.is_infinite(e); }
 
 Triangle triangle(Triangulation_2& t, Face& f) {
   auto fh = face_to_handle(f);
@@ -317,13 +341,13 @@ void export_triangulation_2(py::module_& m) {
     .def("insert_second", &tri2::insert_second, ri)
     .def("is_edge", &tri2::is_edge)
     .def("is_edge_get_edge", &tri2::is_edge_get_edge)
-    // is_face
-    // is_face
+    .def("is_face", &tri2::is_face)
+    .def("is_face_get_face", &tri2::is_face_get_face)
     .def("is_infinite", static_cast<bool (Tri::*)(const tri2::Edge&) const>(&Tri::is_infinite))
-    // is_infinite
-    // is_infinite
-    // is_infinite
-    // is_infinite
+    .def("is_infinite", &tri2::is_infinite1)
+    .def("is_infinite", &tri2::is_infinite2)
+    .def("is_infinite", &tri2::is_infinite3)
+    // .def("is_infinite", &tri2::is_infinite4)
     // is_valid
     // line_walk
     // locate
@@ -346,7 +370,7 @@ void export_triangulation_2(py::module_& m) {
     // segment
     // segment
     // segment
-    //     set_infinite_vertex
+    // set_infinite_vertex
     // side_of_oriented_circle
     // star_hole
     // star_hole
