@@ -86,23 +86,6 @@ Face& infinite_face(const Triangulation_2& tri) { return *(tri.infinite_face());
 Vertex& infinite_vertex(const Triangulation_2& tri) { return *(tri.infinite_vertex()); }
 
 //!
-Vertex& insert_point1(Triangulation_2& tri, const Point& p) { return *(tri.insert(p)); }
-
-//!
-Vertex& insert_point2(Triangulation_2& tri, const Point& p, Face& f) { return *(tri.insert(p, Face_handle(&f))); }
-
-//!
-Vertex& insert_point3(Triangulation_2& tri, const Point& p, Locate_type lt, Face& loc, int li)
-{ return *(tri.insert(p, lt, Face_handle(&loc), li)); }
-
-//!
-void insert_list(Triangulation_2& t, py::list& lst) {
-  auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, false);
-  t.insert(begin, end);
-}
-
-//!
 Vertex& insert_first(Triangulation_2& tri, const Point& p) { return *(tri.insert_first(p)); }
 
 //!
@@ -418,10 +401,32 @@ void export_triangulation_2(py::module_& m) {
     .def("inexact_locate", &tri2::inexact_locate2, ri)
     .def("infinite_face", &tri2::infinite_face, ri)
     .def("infinite_vertex", &tri2::infinite_vertex, ri)
-    .def("insert", &tri2::insert_point1, ri)
-    .def("insert", &tri2::insert_point2, ri)
-    .def("insert", &tri2::insert_point3, ri)
-    .def("insert", &tri2::insert_list, ri)
+    .def("insert", &tri2::insert_point1<Tri>, ri, py::arg("p"),
+         "Parameters:\n"
+         "  p (Point_2): The point\n"
+         "Return:\n"
+         "  The corresponding vertex\n")
+    .def("insert", &tri2::insert_point2<Tri>, ri, py::arg("p"), py::arg("start"),
+         "Parameters:\n"
+         "  p (Point_2): The point\n"
+         "  start (Face): Start the search at this face\n"
+         "Return:\n"
+         "  The corresponding vertex\n")
+    .def("insert", &tri2::insert_point3<Tri>, ri, py::arg("p"), py::arg("lt"), py::arg("loc"), py::arg("li"),
+         "Insert a point into the triangulation using the values returned from a previous location query\n"
+         "Parameters:\n"
+         "  p (Point_3): The point\n"
+         "  lt (Locate_type): together with loc and li the return values of a previous location query\n"
+         "  loc (Face)\n"
+         "  li (int)\n"
+         "Return:\n"
+         "  The corresponding vertex\n")
+    .def("insert", &tri2::insert_points<Tri>, ri, py::arg("points"),
+         "Insert a list of points\n"
+         "Parameters:\n"
+         "  points (list) the list of points\n"
+         "Return:\n"
+         "  The number of inserted points\n")
     .def("insert_first", &tri2::insert_first, ri)
     .def("insert_in_edge", &tri2::insert_in_edge, ri)
     .def("insert_in_face", &tri2::insert_in_face, ri)

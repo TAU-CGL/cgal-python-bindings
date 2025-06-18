@@ -879,7 +879,7 @@ void export_triangulation_3(py::module_& m) {
          "  The corresponding vertex\n")
     .def("insert", &tri3::insert4, ri,
          py::arg("p"), py::arg("lt"), py::arg("lc"), py::arg("li"), py::arg("lj"),
-         "Insert a point using the return values of a previous location query\n"
+         "Insert a point using the values returned from a previous location query\n"
          "Parameters:\n"
          "  p (Point_3): The point\n"
          "  lt (Locate_type): together with lc, li, and lj the return values of a previous location query\n"

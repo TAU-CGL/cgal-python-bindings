@@ -13,9 +13,10 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/config.hpp"
-#include "CGALPY/triangulation_2_config.hpp"
 #include "CGALPY/alpha_shape_2_config.hpp"
 #include "CGALPY/kernel_types.hpp"
+#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/triangulation_2_config.hpp"
 
 namespace py = nanobind;
 
@@ -93,6 +94,27 @@ using All_edges = Triangulation_2::All_edges;
 using Finite_edges = Triangulation_2::Finite_edges;
 using All_face_handles = Triangulation_2::All_face_handles;
 using Finite_face_handles = Triangulation_2::Finite_face_handles;
+
+//!
+template <typename Triangulation_>
+Vertex& insert_point1(Triangulation_& tri, const Point& p) { return *(tri.insert(p)); }
+
+//!
+template <typename Triangulation_>
+Vertex& insert_point2(Triangulation_& tri, const Point& p, Face& f) { return *(tri.insert(p, Face_handle(&f))); }
+
+//!
+template <typename Triangulation_>
+Vertex& insert_point3(Triangulation_& tri, const Point& p, Locate_type lt, Face& loc, int li)
+{ return *(tri.insert(p, lt, Face_handle(&loc), li)); }
+
+//!
+template <typename Triangulation_>
+int insert_points(Triangulation_& t, py::list& lst) {
+  auto begin = stl_input_iterator<Point>(lst);
+  auto end = stl_input_iterator<Point>(lst, false);
+  return t.insert(begin, end);
+}
 
 } // End of namespace tri2
 
