@@ -411,6 +411,8 @@ endif ()
 # 2D triangulation
 if (CGALPY_TRIANGULATION_2_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_tri2_vertex.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_tri2_face.cpp)
     list(APPEND CGALPY_MODULES Tri2)
     set(CGALPY_Tri2_FILTERS [=[{}]=])
 endif ()
