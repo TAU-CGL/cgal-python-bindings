@@ -15,6 +15,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "CGALPY/stl_dereference_input_iterator.hpp"
 #include "CGALPY/stl_input_iterator.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
 #include "CGALPY/types.hpp"
@@ -180,13 +181,74 @@ auto locate_get_incident2(const Triangulation_2& tri, const Point& query, Face& 
   return py::make_tuple(lt, *fh, li);
 }
 
+//!
+int mirror_index(const Triangulation_2& tri, Face& f, int i) { return tri.mirror_index(Face_handle(&f), i); }
+
+//!
+Vertex& mirror_vertex(const Triangulation_2& tri, Face& f, int i) { return *(tri.mirror_vertex(Face_handle(&f), i)); }
+
+//!
+Vertex& move(Triangulation_2& tri, Vertex& v, const Point& p) { return *(tri.move(Vertex_handle(&v), p)); }
+
+//!
+Vertex& move_if_no_collision(Triangulation_2& tri, Vertex& v, const Point& p)
+{ return *(tri.move_if_no_collision(Vertex_handle(&v), p)); }
+
+//!
+CGAL::Oriented_side oriented_side(const Triangulation_2& tri, Face& f, const Point& p)
+{ return tri.oriented_side(Face_handle(&f), p); }
+
+//!
+Vertex& push_back(Triangulation_2& tri, const Point& p) { return *(tri.push_back(p)); }
+
+//!
+void remove(Triangulation_2& tri, Vertex& v) { tri.remove(v.handle()); }
+
+//!
+void remove_degree_31(Triangulation_2& tri, Vertex& v) { tri.remove_degree_3(Vertex_handle(&v)); }
+
+//!
+void remove_degree_32(Triangulation_2& tri, Vertex& v, Face& f)
+{ tri.remove_degree_3(Vertex_handle(&v), Face_handle(&f)); }
+
+//!
+void remove_first(Triangulation_2& tri, Vertex& v) { tri.remove_first(Vertex_handle(&v)); }
+
+//!
+void remove_second(Triangulation_2& tri, Vertex& v) { tri.remove_second(Vertex_handle(&v)); }
+
+//!
+Segment segment(const Triangulation_2& tri, Face& f, int i) { return tri.segment(Face_handle(&f), i); }
+
+//!
+void set_infinite_vertex(Triangulation_2& tri, Vertex& v) { tri.set_infinite_vertex(Vertex_handle(&v)); }
+
+//!
+CGAL::Oriented_side side_of_oriented_circle(const Triangulation_2& tri, Face& f, const Point& p, bool perturb)
+{ return tri.side_of_oriented_circle(Face_handle(&f), p, perturb); }
+
+//!
+Vertex& star_hole1(Triangulation_2& tri, const Point& p, py::list& edges) {
+  auto edges_begin = stl_input_iterator<Edge>(edges);
+  auto edges_end = stl_input_iterator<Edge>(edges, false);
+  return *(tri.star_hole(p, edges_begin, edges_end));
+}
+
+//!
+Vertex& star_hole2(Triangulation_2& tri, const Point& p, py::list& edges, py::list& faces) {
+  auto edges_begin = stl_input_iterator<Edge>(edges);
+  auto edges_end = stl_input_iterator<Edge>(edges, false);
+  auto faces_begin = stl_dereference_input_iterator<Face_handle>(faces);
+  auto faces_end = stl_dereference_input_iterator<Face_handle>(faces, false);
+  return *(tri.star_hole(p, edges_begin, edges_end, faces_begin, faces_end));
+}
+
+//!
 Triangle triangle(Triangulation_2& t, Face& f) {
   auto fh = face_to_handle(f);
   auto res = t.triangle(fh);
   return res;
 }
-
-void remove(Triangulation_2& t, Vertex& v) { t.remove(v.handle()); }
 
 template <typename Handle_>
 const typename Handle_::value_type& value(Handle_ handle) { return *handle; }
@@ -333,6 +395,10 @@ void export_triangulation_2(py::module_& m) {
     ;
 
   using Tri = tri2::Triangulation_2;
+  using Vertex = Tri::Vertex;
+  using Face = Tri::Face;
+  using Edge = Tri::Edge;
+  using Pnt = Tri::Point;
 
   if (add_attr<Tri>(m, "Triangulation_2")) return;
 
@@ -375,31 +441,37 @@ void export_triangulation_2(py::module_& m) {
     .def("locate_get_incident", &tri2::locate_get_incident1, ri)
     .def("locate_get_incident", &tri2::locate_get_incident2, ri)
     .def("mirror_edge", &Tri::mirror_edge)
-    // mirror_index
-    // mirror_vertex
-    // move
-    // move_if_no_collision
+    .def("mirror_index", &tri2::mirror_index)
+    .def("mirror_vertex", &tri2::mirror_vertex, ri)
+    .def("move", &tri2::move, ri)
+    .def("move_if_no_collision", &tri2::move_if_no_collision, ri)
     .def("number_of_vertices", &Tri::number_of_vertices)
     .def("number_of_faces", &Tri::number_of_faces)
-    // operator=
-    // oriented_side
-    // push_back
+    .def("oriented_side",
+         py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&>(&Tri::oriented_side, py::const_),
+         py::arg("p0"), py::arg("p1"), py::arg("p2"), py::arg("p"))
+    .def("oriented_side", &tri2::oriented_side)
+    .def("push_back", &tri2::push_back, ri)
     .def("remove", &tri2::remove)
-    // remove_degree_3
-    // remove_first
-    // remove_second
-    .def("segment", static_cast<tri2::Segment(Tri::*)(const tri2::Edge&) const>(&Tri::segment))
-    // segment
-    // segment
-    // segment
-    // set_infinite_vertex
-    // side_of_oriented_circle
-    // star_hole
-    // star_hole
-    // swap
-    // tds
-    // tds
+    .def("remove_degree_3", &tri2::remove_degree_31)
+    .def("remove_degree_3", &tri2::remove_degree_32)
+    .def("remove_first", &tri2::remove_first)
+    .def("remove_second", &tri2::remove_second)
+    .def("segment", py::overload_cast<const Edge&>(&Tri::segment, py::const_))
+    .def("segment", &tri2::segment)
+    .def("set_infinite_vertex", &tri2::set_infinite_vertex)
+    .def("side_of_oriented_circle",
+         py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&, bool>
+         (&Tri::side_of_oriented_circle, py::const_))
+    .def("side_of_oriented_circle", &tri2::side_of_oriented_circle,
+         py::arg("f"), py::arg("p"), py::arg("perturb") = false)
+    .def("star_hole", &tri2::star_hole1, ri)
+    .def("star_hole", &tri2::star_hole2, ri)
+    .def("swap", &Tri::swap)
+    // .def("tds", &Tri::tds, ri)
     .def("triangle", &tri2::triangle)
+
+    // operator=
     // operator<<
     // operator>>
 
@@ -410,11 +482,6 @@ void export_triangulation_2(py::module_& m) {
     ;
 
   // line_walk
-
-  using Vertex = Tri::Vertex;
-  using Face = Tri::Face;
-  using Edge = Tri::Edge;
-  using Pnt = Tri::Point;
 
   // Iterators
   using Avi = Tri::All_vertices_iterator;
