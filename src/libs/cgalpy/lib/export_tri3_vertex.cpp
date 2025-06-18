@@ -16,21 +16,16 @@ namespace py = nanobind;
 namespace tri3 {
 
 //!
-Cell& cell(const Vertex& v) {
-  auto ch = v.cell();
-  return *ch;
-}
+Cell& cell(const Vertex& v) { return *(v.cell()); }
 
 //!
-  void set_cell(Vertex& v, Cell& c) { v.set_cell(Cell_handle(&c)); }
+void set_cell(Vertex& v, Cell& c) { v.set_cell(Cell_handle(&c)); }
 
 //!
-bool vertex_is_valid1(const Vertex& vertex, bool verbose, int level)
-{ return vertex.is_valid(verbose, level); }
+bool vertex_is_valid1(const Vertex& vertex, bool verbose, int level) { return vertex.is_valid(verbose, level); }
 
 //!
-bool vertex_is_valid2(const Vertex& vertex, bool verbose)
-{ return vertex.is_valid(verbose); }
+bool vertex_is_valid2(const Vertex& vertex, bool verbose) { return vertex.is_valid(verbose); }
 
 //!
 bool vertex_is_valid3(const Vertex& vertex) { return vertex.is_valid(); }
