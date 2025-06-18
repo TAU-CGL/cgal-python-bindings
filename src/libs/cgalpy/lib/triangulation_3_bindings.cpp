@@ -517,8 +517,7 @@ py::object incident_cells3(const Triangulation_3& tri, const Edge& e, Cell& star
 
 //!
 py::object incident_cells4(const Triangulation_3& tri, Cell& c, int i, int j, Cell& start) {
-  return make_iterator_from_circulator(tri.incident_cells(Cell_handle(&c), i, j,
-                                                          Cell_handle(&start)));
+  return make_iterator_from_circulator(tri.incident_cells(Cell_handle(&c), i, j, Cell_handle(&start)));
 }
 
 //! Facet Iterators
@@ -544,8 +543,7 @@ auto incident_facets5(const Triangulation_3& tri, const Edge& e, Cell& start, in
 
 //!
 auto incident_facets6(const Triangulation_3& tri, Cell& c, int i, int j, Cell& start, int f) {
-  return make_iterator_from_circulator(tri.incident_facets(Cell_handle(&c), i, j,
-                                                           Cell_handle(&start), f));
+  return make_iterator_from_circulator(tri.incident_facets(Cell_handle(&c), i, j, Cell_handle(&start), f));
 }
 
 //! Circulators

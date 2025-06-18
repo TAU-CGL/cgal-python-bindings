@@ -44,8 +44,7 @@ using Btr = Base_tri<CGALPY_TRI2, Traits, Tds, Itag>::type;
 using Triangulation_2 = Tri<hierarchy(), is_periodic(), Btr>::type;
 
 using Geom_traits = Triangulation_2::Geom_traits;
-using Triangulation_data_structure =
-  Triangulation_2::Triangulation_data_structure;
+using Triangulation_data_structure = Triangulation_2::Triangulation_data_structure;
 using Locate_type = Triangulation_2::Locate_type;
 
 using Point = Triangulation_2::Point;
