@@ -374,8 +374,7 @@ py::object incident_vertices_iterator_1(const Triangulation_2& tri,
 //
 #if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
      (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
-void insert_constraint(Triangulation_2& tri,
-                       const Vertex& va, const Vertex& vb) {
+void insert_constraint(Triangulation_2& tri, const Vertex& va, const Vertex& vb) {
   auto ha = Vertex_handle(const_cast<Vertex*>(&va));
   auto hb = Vertex_handle(const_cast<Vertex*>(&vb));
   tri.insert_constraint(ha, hb);

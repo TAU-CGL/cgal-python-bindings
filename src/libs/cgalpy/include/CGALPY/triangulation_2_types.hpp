@@ -40,8 +40,22 @@ using F = Face_alpha_shape<alpha_shape_2_bindings(), Fbic, Traits, Ec>::type;
   // Triangulation data structure
 using Tds = CGAL::Triangulation_data_structure_2<V, F>;
 using Itag = Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG>::type;
-using Btr = Base_tri<CGALPY_TRI2, Traits, Tds, Itag>::type;
-using Triangulation_2 = Tri<hierarchy(), is_periodic(), Btr>::type;
+
+using My_tri2 = Tri2<CGALPY_TRI2, Traits, Tds, Itag>;
+using Triangulation_2 = My_tri2::Triangulation_2;
+using Triangulation_hierarchy_2 = Th<hierarchy(), is_periodic(), Triangulation_2>::type;
+
+#if (CGALPY_TRI2 == CGALPY_TRI2_PLAIN)
+#elif (CGALPY_TRI2 == CGALPY_TRI2_REGULAR)
+using Regular_triangulation_2 = My_tri2::Regular_triangulation_2;
+#elif (CGALPY_TRI2 == CGALPY_TRI2_DELAUNAY)
+using Delaunay_triangulation_2 = My_tri2::Delaunay_triangulation_2;
+#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
+using Constrained_triangulation_2 = My_tri2::Constrained_triangulation_2;
+#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY)
+using Constrained_delaunay_triangulation_2 = My_tri2::Constrained_delaunay_triangulation_2;
+using Constrained_triangulation_2 = My_tri2::Constrained_triangulation_2;
+#endif
 
 using Geom_traits = Triangulation_2::Geom_traits;
 using Triangulation_data_structure = Triangulation_2::Triangulation_data_structure;

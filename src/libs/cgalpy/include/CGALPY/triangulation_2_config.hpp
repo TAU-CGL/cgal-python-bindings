@@ -179,36 +179,56 @@ template <> struct Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG_EXACT_INTERSECT
 
 // Main triangulation
 template <int i, typename Tr, typename Tds, typename Itag>
-struct Base_tri {};
+struct Tri2 {};
+
 template <typename Tr, typename Tds, typename Itag>
-struct Base_tri<CGALPY_TRI2_PLAIN, Tr, Tds, Itag>
-{ using type = CGAL::Triangulation_2<Tr, Tds>; };
+struct Tri2<CGALPY_TRI2_PLAIN, Tr, Tds, Itag> {
+  using Triangulation_2 = CGAL::Triangulation_2<Tr, Tds>;
+};
+
 template <typename Tr, typename Tds, typename Itag>
-struct Base_tri<CGALPY_TRI2_REGULAR, Tr, Tds, Itag>
-{ using type = CGAL::Regular_triangulation_2<Tr, Tds>; };
+struct Tri2<CGALPY_TRI2_REGULAR, Tr, Tds, Itag> {
+  using Regular_triangulation_2 = CGAL::Regular_triangulation_2<Tr, Tds>;
+  using Triangulation_2 = typename Regular_triangulation_2::Triangulation_base;
+};
+
 template <typename Tr, typename Tds, typename Itag>
-struct Base_tri<CGALPY_TRI2_DELAUNAY, Tr, Tds, Itag>
-{ using type = CGAL::Delaunay_triangulation_2<Tr, Tds> ; };
+struct Tri2<CGALPY_TRI2_DELAUNAY, Tr, Tds, Itag> {
+  using Delaunay_triangulation_2 = CGAL::Delaunay_triangulation_2<Tr, Tds>;
+  using Triangulation_2 = typename Delaunay_triangulation_2::Triangulation;
+};
+
 template <typename Tr, typename Tds, typename Itag>
-struct Base_tri<CGALPY_TRI2_CONSTRAINED, Tr, Tds, Itag>
-{ using type = CGAL::Constrained_triangulation_2<Tr, Tds, Itag>; };
+struct Tri2<CGALPY_TRI2_CONSTRAINED, Tr, Tds, Itag> {
+  using Constrained_triangulation_2 = CGAL::Constrained_triangulation_2<Tr, Tds, Itag>;
+  using Triangulation_2 = typename Constrained_triangulation_2::Triangulation;
+};
+
 template <typename Tr, typename Tds, typename Itag>
-struct Base_tri<CGALPY_TRI2_CONSTRAINED_DELAUNAY, Tr, Tds, Itag>
-{ using type = CGAL::Constrained_Delaunay_triangulation_2<Tr, Tds, Itag>; };
+struct Tri2<CGALPY_TRI2_CONSTRAINED_DELAUNAY, Tr, Tds, Itag> {
+  using Constrained_delaunay_triangulation_2 = CGAL::Constrained_Delaunay_triangulation_2<Tr, Tds, Itag>;
+  using Constrained_triangulation_2 = typename Constrained_delaunay_triangulation_2::Base;
+  using Triangulation_2 = typename Constrained_triangulation_2::Triangulation;
+};
+
 template <typename Tr, typename Tds, typename Itag>
-struct Base_tri<CGALPY_TRI2_PERIODIC_PLAIN, Tr, Tds, Itag>
-{ using type = CGAL::Periodic_2_triangulation_2<Tr, Tds>; };
+struct Tri2<CGALPY_TRI2_PERIODIC_PLAIN, Tr, Tds, Itag> {
+  using Periodic_2_triangulation_2 = CGAL::Periodic_2_triangulation_2<Tr, Tds>;
+};
+
 template <typename Tr, typename Tds, typename Itag>
-struct Base_tri<CGALPY_TRI2_PERIODIC_DELAUNAY, Tr, Tds, Itag>
-{ using type = CGAL::Periodic_2_Delaunay_triangulation_2<Tr, Tds>; };
+struct Tri2<CGALPY_TRI2_PERIODIC_DELAUNAY, Tr, Tds, Itag> {
+  using Periodic_2_delaunay_triangulation_2 = CGAL::Periodic_2_Delaunay_triangulation_2<Tr, Tds>;
+  using Periodic_2_triangulation_2 = typename Periodic_2_delaunay_triangulation_2::Base;
+};
 
 // Hierarchy
-template <bool b, bool, typename Tr> struct Tri {};
-template <typename Tr> struct Tri<false, false, Tr>
+template <bool b, bool, typename Tr> struct Th {};
+template <typename Tr> struct Th<false, false, Tr>
 { using type = Tr; };
-template <typename Tr> struct Tri<true, false, Tr>
+template <typename Tr> struct Th<true, false, Tr>
 { using type = CGAL::Triangulation_hierarchy_2<Tr>; };
-template <typename Tr> struct Tri<true, true, Tr>
+template <typename Tr> struct Th<true, true, Tr>
 { using type = CGAL::Periodic_2_triangulation_hierarchy_2<Tr>; };
 
 }
