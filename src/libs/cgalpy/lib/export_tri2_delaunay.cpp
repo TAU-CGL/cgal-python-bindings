@@ -74,7 +74,7 @@ void export_tri2_delaunay(py::module_& m) {
          "  points (list) the list of points\n"
          "Return:\n"
          "  The number of inserted points\n")
-    // is_valid
+    .def("is_valid", &Dtri::is_valid, py::arg("verbose") = false, py::arg("level") = 0)
     // move
     // move_if_no_collision
     // nearest_vertex

@@ -28,16 +28,20 @@ namespace py = nanobind;
 namespace tri2 {
 
 //!
-bool equal(const Face& f1, const Face& f2) {
-  return (f1.has_vertex(f2.vertex(0)) && f1.has_vertex(f2.vertex(1)) &&
-          f1.has_vertex(f2.vertex(2)));
+void tri2_init(tri2::Triangulation_2* tri, py::list& lst) {
+  auto begin = stl_input_iterator<tri2::Point>(lst);
+  auto end = stl_input_iterator<tri2::Point>(lst, false);
+  new (tri) tri2::Triangulation_2(begin, end);  // placement new
 }
+
+//!
+bool equal(const Face& f1, const Face& f2)
+{ return (f1.has_vertex(f2.vertex(0)) && f1.has_vertex(f2.vertex(1)) && f1.has_vertex(f2.vertex(2))); }
 
 //! \brief obtaines a face handle from a face
 Face_handle face_to_handle(Face& f) {
   auto n = f.neighbor(0);
-  for (auto i = 0; i < 3; ++i)
-    if (equal(*(n->neighbor(i)), f)) return n->neighbor(i);
+  for (auto i = 0; i < 3; ++i) if (equal(*(n->neighbor(i)), f)) return n->neighbor(i);
   return Face_handle();
 }
 
@@ -375,11 +379,12 @@ void export_triangulation_2(py::module_& m) {
 
   py::class_<Tricc>(m, "Triangulation_cw_ccw_2")
     .def(py::init<Tricc&>())
-    .def_prop_ro_static("ccw", [](py::handle /*unused*/, int i) { return Tricc::ccw(i) ; })
-    .def_prop_ro_static("cw", [](py::handle /*unused*/, int i) { return Tricc::cw(i) ; })
+    .def_prop_ro_static("ccw", [](py::handle /*unused*/, int i) { return Tricc::ccw(i); })
+    .def_prop_ro_static("cw", [](py::handle /*unused*/, int i) { return Tricc::cw(i); })
     ;
 
   using Tri = tri2::Triangulation_2;
+  using Traits = tri2::Traits;
   using Vertex = Tri::Vertex;
   using Face = Tri::Face;
   using Edge = Tri::Edge;
@@ -390,11 +395,13 @@ void export_triangulation_2(py::module_& m) {
   py::class_<Tri, Tricc> tri_c(m, "Triangulation_2");
   tri_c.def(py::init<>())
     .def(py::init<Tri&>())
-    .def("circumcenter", &tri2::circumcenter)
+    .def(py::init<const tri2::Traits&>())
+    .def("__init__", &tri2::tri2_init)
+    .def("circumcenter", &tri2::circumcenter, py::arg("f"))
     .def("clear", &Tri::clear)
     .def("dimension", &Tri::dimension)
     .def("finite_vertex", &tri2::finite_vertex, ri)
-    .def("flip", &tri2::flip)
+    .def("flip", &tri2::flip, py::arg("f"), py::arg("i"))
     .def("geom_traits", &Tri::geom_traits, ri, "Obtain the geometric traits object")
     .def("includes_edge", &tri2::includes_edge)
     .def("inexact_locate", &tri2::inexact_locate1, ri)
@@ -581,15 +588,5 @@ void export_triangulation_2(py::module_& m) {
   // py::class_<tri2::Edge>(tri_c, "Edge")
   //   .def_readwrite("first", &tri2::Edge::first)
   //   .def_readwrite("second", &tri2::Edge::second)
-  //   ;
-
-  // py::class_<tri2::Vertex_handle>(tri_c, "Vertex_handle")
-  //   .def(py::init<>())
-  //   .def("value", &tri2::value<tri2::Vertex_handle>, ri)
-  //   ;
-
-  // py::class_<tri2::Face_handle>(tri_c, "Face_handle")
-  //   .def(py::init<>())
-  //   .def("value", &tri2::value<tri2::Face_handle>, ri)
   //   ;
 }
