@@ -44,6 +44,10 @@ if (CGALPY_KERNEL_D_BINDINGS)
     list(APPEND CGALPY_MODULES Kerd)
     set(CGALPY_Kerd_FILTERS [=[{}]=])
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_d_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_point_d.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_linear_algebra_cd.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_segment_d.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_vector_d.cpp)
 endif ()
 
 # 2D Alpha shape
