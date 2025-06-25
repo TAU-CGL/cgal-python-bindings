@@ -99,9 +99,11 @@ void export_kernel_d(py::module_& m) {
 
     // Construct_vector_d
     if (! add_attr<Ctr_vec_d>(kerd_c, "Construct_vector_d")) {
-      using Ctr1 = Vector_d(Ctr_vec_d::*)(const Point_d&, const Point_d&)const;
+      using Ctr1 = Vecd(Ctr_vec_d::*)(const Pntd&, const Pntd&) const;
       py::class_<Ctr_vec_d>(kerd_c, "Construct_vector_d")
-        .def("__call__", static_cast<Ctr1>(&Ctr_vec_d::operator()))
+        //! \todo the following fails for clang
+        // .def("__call__", static_cast<Ctr1>(&Ctr_vec_d::operator()))
+        .def("__call__", [](Ctr_vec_d& ctr, const Pntd& p1, const Pntd& p2)->Vecd{ return ctr(p1, p2); })
         ;
     }
   }
