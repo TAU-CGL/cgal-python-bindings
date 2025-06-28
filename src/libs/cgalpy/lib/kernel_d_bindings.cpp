@@ -7,6 +7,8 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <boost/iterator/iterator_facade.hpp>
+
 #include <nanobind/nanobind.h>
 
 #include <CGAL/intersections_d.h>
@@ -28,16 +30,45 @@ extern void export_segment_d(py::class_<Segment_d>& segd_c);
 extern void export_linear_algebra_cd(py::class_<Linear_algebra_cartesian_d>& lacd_c);
 extern void export_vector_d(py::class_<Vector_d>& vecd_c);
 
+namespace kerd {
+
+/*! The following is only used as a wrokaround to an issue in CGAL that arrises here.
+ * If it turns out to be useful in other places, please move to a dedicated header file.
+ */
+template <typename It1, typename It2>
+class Diff_iterator : public boost::iterator_facade<
+  Diff_iterator<It1, It2>,
+  typename std::iterator_traits<It1>::value_type, // value_type: mapped type
+  boost::forward_traversal_tag,
+  typename std::iterator_traits<It1>::value_type> { // reference type (actual value)
+public:
+  Diff_iterator(It1 it1, It2 it2) : m_it1(it1), m_it2(it2) {}
+
+private:
+  friend class boost::iterator_core_access;
+
+  void increment() {
+    ++m_it1;
+    ++m_it2;
+  }
+
+  bool equal(const Diff_iterator& other) const { return m_it1 == other.m_it1; }
+
+  typename std::iterator_traits<It1>::value_type dereference() const
+  { return m_it2->second - m_it1->second; }
+
+  It1 m_it1;
+  It2 m_it2;
+};
+
+}
+
 // Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2)
 // are not a valid overload for do_intersect in which case the second version
 // (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
-void bind_do_intersect_d_2T(py::module_& m,
-                            decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
-{
-  m.def("do_intersect",
-        static_cast<bool(*)(const T1&, const T2&)>(&CGAL::do_intersect<Kernel_d>));
-}
+void bind_do_intersect_d_2T(py::module_& m, decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
+{ m.def("do_intersect", static_cast<bool(*)(const T1&, const T2&)>(&CGAL::do_intersect<Kernel_d>)); }
 
 template<typename, typename>
 void bind_do_intersect_d_2T(py::module_& m, ...) {}
@@ -101,9 +132,15 @@ void export_kernel_d(py::module_& m) {
     if (! add_attr<Ctr_vec_d>(kerd_c, "Construct_vector_d")) {
       using Ctr1 = Vecd(Ctr_vec_d::*)(const Pntd&, const Pntd&) const;
       py::class_<Ctr_vec_d>(kerd_c, "Construct_vector_d")
-        //! \todo the following fails for clang
+        //! \todo the following fails for clang. Using Diff_iterator doesn't work either
         // .def("__call__", static_cast<Ctr1>(&Ctr_vec_d::operator()))
-        .def("__call__", [](Ctr_vec_d& ctr, const Pntd& p1, const Pntd& p2)->Vecd{ return ctr(p1, p2); })
+        .def("__call__",
+             [](Ctr_vec_d& ctr, const Pntd& p1, const Pntd& p2)->Vecd {
+               std::vector<FT_d> vec(p1.dimension());
+               for (std::size_t i = 0; i < p1.dimension(); ++i) vec[i] = p2[i] - p1[i];
+               Vecd v(p1.dimension(), vec.begin(), vec.end());
+               return v;
+             })
         ;
     }
   }
