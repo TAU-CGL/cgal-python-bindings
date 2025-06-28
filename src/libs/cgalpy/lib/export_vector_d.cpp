@@ -21,6 +21,7 @@ namespace kerd {
 void init_vector_d(Vector_d* pd, int d, py::list& lst) {
   auto begin = stl_input_iterator<FT_d>(lst);
   auto end = stl_input_iterator<FT_d>(lst, false);
+  new (pd) Vector_d(d, begin, end);              // placement new
 }
 
 }
