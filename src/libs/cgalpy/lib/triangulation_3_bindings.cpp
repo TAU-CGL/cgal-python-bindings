@@ -736,6 +736,7 @@ void export_triangulation_3(py::module_& m) {
     ;
 
   tri_c.def(py::init<>())
+    .def(py::init<Tri&>())
     .def(py::init<const tri3::Traits&>())
     .def("__init__", &tri3::tri3_init)
     .def("are_equal",
@@ -860,7 +861,7 @@ void export_triangulation_3(py::module_& m) {
          "Parameters:\n"
          "  p (Point_3): The point\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert", &tri3::insert2, ri,
          py::arg("p"), py::arg("start"),
          "Insert a point\n"
@@ -868,7 +869,7 @@ void export_triangulation_3(py::module_& m) {
          "  p (Point_3): The point\n"
          "  start (Cell): Start the search at this cell\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert", &tri3::insert3, ri,
          py::arg("p"), py::arg("start"),
          "Insert a point\n"
@@ -876,7 +877,7 @@ void export_triangulation_3(py::module_& m) {
          "  p (Point_3): The point\n"
          "  start (Vertex): Start the search at this vertex\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert", &tri3::insert4, ri,
          py::arg("p"), py::arg("lt"), py::arg("lc"), py::arg("li"), py::arg("lj"),
          "Insert a point using the values returned from a previous location query\n"
@@ -887,14 +888,14 @@ void export_triangulation_3(py::module_& m) {
          "  li (int)\n"
          "  lj (int)\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert", &tri3::insert_points,
          py::arg("points"),
          "Insert a list of points\n"
          "Parameters:\n"
          "  points (list) the list of points\n"
          "Return:\n"
-         "  The number of inserted points\n")
+         "  int: The number of inserted points\n")
     .def("insert_in_cell", &tri3::insert_in_cell, ri,
          py::arg("p"), py::arg("c"),
          "Insert a point in a given cell\n"
@@ -902,7 +903,7 @@ void export_triangulation_3(py::module_& m) {
          "  p (Point_3): The point\n"
          "  c: The cell\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert_in_edge", &tri3::insert_in_edge1, ri,
          py::arg("p"), py::arg("e"),
          "Insert a point in a given edge\n"
@@ -910,7 +911,7 @@ void export_triangulation_3(py::module_& m) {
          "  p (Point_3): The point\n"
          "  e: The edge\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert_in_edge", &tri3::insert_in_edge2, ri,
          py::arg("p"), py::arg("c"), py::arg("i"), py::arg("j"),
          "Insert a point in a represented edge\n"
@@ -920,7 +921,7 @@ void export_triangulation_3(py::module_& m) {
          "  i (int)\n"
          "  j (int)\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert_in_facet", &tri3::insert_in_facet, ri,
          py::arg("p"), py::arg("f"),
          "Insert a point in a given facet\n"
@@ -928,7 +929,7 @@ void export_triangulation_3(py::module_& m) {
          "  p (Point_3): The point\n"
          "  f: The facet\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert_in_hole", &tri3::insert_in_hole1, ri,
          py::arg("p"), py::arg("cells"), py::arg("start"), py::arg("i"),
          "Insert a point in a hole defined by a list of cells\n"
@@ -938,7 +939,7 @@ void export_triangulation_3(py::module_& m) {
          "  start (Cell): Together with i represent a facet on the boundary of the hole\n"
          "  i (int)\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert_in_hole", &tri3::insert_in_hole2, ri,
          py::arg("p"), py::arg("cells"), py::arg("start"), py::arg("i"), py::arg("newv"),
          "Insert a vertex in a hole defined by a list of cells\n"
@@ -949,20 +950,20 @@ void export_triangulation_3(py::module_& m) {
          "  i (int)\n"
          "  newv (Vertex): \n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert_outside_affine_hull", &tri3::insert_outside_affine_hull, ri,
          "Insert a point (can be used to insert the first point in an empty triangulation)\n"
          "Parameters:\n"
          "  p (Point_3): The point\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
     .def("insert_outside_convex_hull", &tri3::insert_outside_convex_hull, ri,
          "Insert a point in an infinite cell\n"
          "Parameters:\n"
          "  p (Point_3): The point\n"
          "  c (Cell): the infinite cell\n"
          "Return:\n"
-         "  The corresponding vertex\n")
+         "  Vertex: The corresponding vertex\n")
 
     // Queries
     .def("is_cell", &tri3::is_cell1,
@@ -1098,13 +1099,17 @@ void export_triangulation_3(py::module_& m) {
          "locate the query point in the triangulation; start the search with start\n"
          "Parameters:\n"
          "  query (Point_3): The query point\n"
-         "  start (Cell)\n")
+         "  start (Cell)\n"
+         "Return:\n"
+         "  Cell\n")
     .def("locate", &tri3::locate3, ri,
          py::arg("query"), py::arg("start"),
          "locate the query point in the triangulation; start the search with hint\n"
          "Parameters:\n"
          "  query (Point_3): The query point\n"
-         "  hint (Vertex)\n")
+         "  hint (Vertex)\n"
+         "Return:\n"
+         "  Cell\n")
     .def("locate_face", &tri3::locate_face1, ri,
          py::arg("query"),
          "locate the query point in the triangulation\n"
