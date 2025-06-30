@@ -218,7 +218,8 @@ py::object locate_dispatch(py::handle self, Full_cell_handle ch, Locate_type lt,
    case Locate_type::IN_FACET: return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::cast(facet));
    case Locate_type::ON_VERTEX:
    case Locate_type::IN_FULL_CELL:
-   case Locate_type::OUTSIDE_CONVEX_HULL: return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
+   case Locate_type::OUTSIDE_CONVEX_HULL:
+   case Locate_type::OUTSIDE_AFFINE_HULL: return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
   }
 
   return py::make_tuple(py::cast(lt));
