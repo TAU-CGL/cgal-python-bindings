@@ -72,15 +72,19 @@ auto includes_edge(Triangulation_2& tri, Vertex& va, Vertex& vb) {
 }
 
 //!
-Face& inexact_locate1(const Triangulation_2& tri, const Point& query) {
+auto inexact_locate1(py::handle self, const Point& query) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto& tri = py::cast<Triangulation_2&>(self);
   auto fh = tri.inexact_locate(query);
-  return *fh;
+  return (fh == Face_handle()) ? py::none() : py::cast(*fh, ri, self);
 }
 
 //!
-Face& inexact_locate2(const Triangulation_2& tri, const Point& query, Face& start) {
+auto inexact_locate2(py::handle self, const Point& query, Face& start) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto& tri = py::cast<Triangulation_2&>(self);
   auto fh = tri.inexact_locate(query, Face_handle(&start));
-  return *fh;
+  return (fh == Face_handle()) ? py::none() : py::cast(*fh, ri, self);
 }
 
 //!
@@ -426,59 +430,107 @@ void export_triangulation_2(py::module_& m) {
          "  tuple[Flase] if the edge defined by the vertices va and vb does not include an edge incident to va\n"
          "  tuple[True, Vertex, Face, int] the line segment inncludes the edge e = edge(f,i);\n"
          "  the first vertex is the other vertex of e; f is a face incident to e and on the right side of e oriented from va to vb\n")
-    .def("inexact_locate", &tri2::inexact_locate1, ri, py::arg("query"),
+    .def("inexact_locate", &tri2::inexact_locate1, py::arg("query"),
          "Same as locate() but uses inexact predicates\n"
          "Parameters:\n"
          "  query (Point): the query point\n"
          "Return:\n"
-         "  Face: If the query point lies inside the convex hull of the points, obtain the face that contains the query in its interior or on its boundary\n."
-         "        If the query point lies outside the convex hull of the triangulation but in the affine hull, obtain the infinite face which is a proof of the point location:\n"
-         "         * for a two dimensional triangulation, it is a face (∞,p,q) such that query lies to the left of the oriented line pq (the rest of the triangulation lying to the right of this line)\n"
-         "         * for a degenerate one dimensional triangulation it is the (degenerate one dimensional) face (∞,p,nullptr) such that query and the triangulation lie on either side of p\n"
-         "  None: If the point query lies outside the affine hull\n")
-    .def("inexact_locate", &tri2::inexact_locate2, ri, py::arg("query"), py::arg("start"),
+         "  Face or None:\n"
+         "     If the query point lies inside the convex hull of the points, obtain the face that contains the query in its interior or on its boundary\n."
+         "     If the query point lies outside the convex hull of the triangulation but in the affine hull, obtain the infinite face which is a proof of the point location:\n"
+         "      * for a two dimensional triangulation, it is a face (∞,p,q) such that query lies to the left of the oriented line pq (the rest of the triangulation lying to the right of this line)\n"
+         "      * for a degenerate one dimensional triangulation it is the (degenerate one dimensional) face (∞,p,nullptr) such that query and the triangulation lie on either side of p\n"
+         "     Otherwise, the point query lies outside the affine hull---obtain None\n")
+    .def("inexact_locate", &tri2::inexact_locate2, py::arg("query"), py::arg("start"),
          "Same as locate() but uses inexact predicates\n"
          "Parameters:\n"
          "  query (Point): the query point\n"
          "  start (Face) the startinf face of the search\n"
          "Return:\n"
          "  Face or None\n")
-    .def("infinite_face", &tri2::infinite_face, ri)
-    .def("infinite_vertex", &tri2::infinite_vertex, ri)
+    .def("infinite_face", &tri2::infinite_face, ri, "Obtain a face incident to the infinite vertex\n")
+    .def("infinite_vertex", &tri2::infinite_vertex, ri, "obtain the infinite vertex\n")
     .def("insert", &tri2::insert_point1<Tri>, ri, py::arg("p"),
          "Parameters:\n"
-         "  p (Point_2): The point\n"
+         "  p (Point_2): the point\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert", &tri2::insert_point2<Tri>, ri, py::arg("p"), py::arg("start"),
          "Parameters:\n"
-         "  p (Point_2): The point\n"
+         "  p (Point_2): the point to insert\n"
          "  start (Face): Start the search at this face\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert", &tri2::insert_point3<Tri>, ri, py::arg("p"), py::arg("lt"), py::arg("loc"), py::arg("li"),
          "Insert a point into the triangulation using the values returned from a previous location query\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_2): the point to insert\n"
          "  lt (Locate_type): together with loc and li the return values of a previous location query\n"
          "  loc (Face)\n"
          "  li (int)\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert", &tri2::insert_points<Tri>, ri, py::arg("points"),
          "Insert a list of points\n"
          "Parameters:\n"
-         "  points (list) the list of points\n"
+         "  points (list): the list of points\n"
          "Return:\n"
          "  int: The number of inserted points\n")
-    .def("insert_first", &tri2::insert_first, ri)
-    .def("insert_in_edge", &tri2::insert_in_edge, ri)
-    .def("insert_in_face", &tri2::insert_in_face, ri)
-    .def("insert_outside_affine_hull", &tri2::insert_outside_affine_hull, ri)
-    .def("insert_outside_convex_hull", &tri2::insert_outside_convex_hull, ri)
-    .def("insert_second", &tri2::insert_second, ri)
-    .def("is_edge", &tri2::is_edge)
-    .def("is_edge_get_edge", &tri2::is_edge_get_edge)
+    .def("insert_first", &tri2::insert_first, ri, py::arg("p"),
+         "Insert a point that maps to the first finite vertex\n"
+         "Parameters:\n"
+         "  p (Point_2): the point to insert\n"
+         "Return:\n"
+         "  Vertex: the corresponding vertex\n")
+    .def("insert_in_edge", &tri2::insert_in_edge, ri, py::arg("p"), py::arg("f"), py::arg("i"),
+         "Insert a point that lies on the edge opposite to vertex i of face f\n"
+         "Parameters:\n"
+         "  p (Point_2): the point to insert\n"
+         "  f (Face)\n"
+         "  i (int)\n"
+         "Return:\n"
+         "  Vertex: the corresponding vertex\n")
+    .def("insert_in_face", &tri2::insert_in_face, ri, py::arg("p"), py::arg("f"),
+         "Insert a point that is contained in a given face\n"
+         "Parameters:\n"
+         "  p (Point_2): the point to insert\n"
+         "  f (Face): the face containing the point\n"
+         "Return:\n"
+         "  Vertex: the corresponding vertex\n")
+    .def("insert_outside_affine_hull", &tri2::insert_outside_affine_hull, ri, py::arg("p"),
+         "Inserts a point that is outside convex hull but inside the affine hull\n"
+         "Parameters:\n"
+         "  p (Point_2): the point to insert\n"
+         "Return:\n"
+         "  Vertex: the corresponding vertex\n")
+    .def("insert_outside_convex_hull", &tri2::insert_outside_convex_hull, ri, py::arg("p"), py::arg("f"),
+         "Inserts a point that is outside the affine hull\n"
+         "Parameters:\n"
+         "  p (Point_2): the point to insert\n"
+         "  f (Face): the face that contains p"
+         "Return:\n"
+         "  Vertex: the corresponding vertex\n")
+    .def("insert_second", &tri2::insert_second, ri, py::arg("p"),
+         "Insert a point that maps to the second finite vertex\n"
+         "Parameters:\n"
+         "  p (Point_2): the point to insert\n"
+         "Return:\n"
+         "  Vertex: the corresponding vertex\n")
+    .def("is_edge", &tri2::is_edge, py::arg("v1"), py::arg("v2"),
+         "Determine whether two given vertices define an edge\n"
+         "Parameters:\n"
+         "  v1 (Vertex): the first vertex\n"
+         "  v2 (Vertex): the second vertex\n"
+         "Return:\n"
+         "  Boolean\n")
+    .def("is_edge_get_edge", &tri2::is_edge_get_edge, py::arg("v1"), py::arg("v2"),
+         "Determine whether two given vertices define an edge, and if so, obtain the containing face and index\n"
+         "Parameters:\n"
+         "  v1 (Vertex): the first vertex\n"
+         "  v2 (Vertex): the second vertex\n"
+         "Return:\n"
+         "  tuple[False, optsion] if v1 and v2 do not define an edge;\n"
+         "  otherwise tuple[True, f, i, where the edge is opposite to vertex of the face f\n")
     .def("is_face", &tri2::is_face)
     .def("is_face_get_face", &tri2::is_face_get_face)
     .def("is_infinite", static_cast<bool (Tri::*)(const tri2::Edge&) const>(&Tri::is_infinite))

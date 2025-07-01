@@ -859,36 +859,36 @@ void export_triangulation_3(py::module_& m) {
          py::arg("p"),
          "Insert a point\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert", &tri3::insert2, ri,
          py::arg("p"), py::arg("start"),
          "Insert a point\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "  start (Cell): Start the search at this cell\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert", &tri3::insert3, ri,
          py::arg("p"), py::arg("start"),
          "Insert a point\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "  start (Vertex): Start the search at this vertex\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert", &tri3::insert4, ri,
          py::arg("p"), py::arg("lt"), py::arg("lc"), py::arg("li"), py::arg("lj"),
          "Insert a point using the values returned from a previous location query\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "  lt (Locate_type): together with lc, li, and lj the return values of a previous location query\n"
          "  lc (Cell)\n"
          "  li (int)\n"
          "  lj (int)\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert", &tri3::insert_points,
          py::arg("points"),
          "Insert a list of points\n"
@@ -900,77 +900,77 @@ void export_triangulation_3(py::module_& m) {
          py::arg("p"), py::arg("c"),
          "Insert a point in a given cell\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "  c: The cell\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert_in_edge", &tri3::insert_in_edge1, ri,
          py::arg("p"), py::arg("e"),
          "Insert a point in a given edge\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "  e: The edge\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert_in_edge", &tri3::insert_in_edge2, ri,
          py::arg("p"), py::arg("c"), py::arg("i"), py::arg("j"),
          "Insert a point in a represented edge\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "  c (Cell): Together with i and j represent the edge\n"
          "  i (int)\n"
          "  j (int)\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert_in_facet", &tri3::insert_in_facet, ri,
          py::arg("p"), py::arg("f"),
          "Insert a point in a given facet\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "  f: The facet\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert_in_hole", &tri3::insert_in_hole1, ri,
          py::arg("p"), py::arg("cells"), py::arg("start"), py::arg("i"),
          "Insert a point in a hole defined by a list of cells\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
-         "  cells (list): The list of cells\n"
+         "  p (Point_3): the point\n"
+         "  cells (list): the list of cells\n"
          "  start (Cell): Together with i represent a facet on the boundary of the hole\n"
          "  i (int)\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert_in_hole", &tri3::insert_in_hole2, ri,
          py::arg("p"), py::arg("cells"), py::arg("start"), py::arg("i"), py::arg("newv"),
          "Insert a vertex in a hole defined by a list of cells\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
-         "  cells (list): The list of cells\n"
+         "  p (Point_3): the point\n"
+         "  cells (list): the list of cells\n"
          "  start (Cell): Together with i represent a facet on the boundary of the hole\n"
          "  i (int)\n"
          "  newv (Vertex): \n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert_outside_affine_hull", &tri3::insert_outside_affine_hull, ri,
          "Insert a point (can be used to insert the first point in an empty triangulation)\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
     .def("insert_outside_convex_hull", &tri3::insert_outside_convex_hull, ri,
          "Insert a point in an infinite cell\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
+         "  p (Point_3): the point\n"
          "  c (Cell): the infinite cell\n"
          "Return:\n"
-         "  Vertex: The corresponding vertex\n")
+         "  Vertex: the corresponding vertex\n")
 
     // Queries
     .def("is_cell", &tri3::is_cell1,
          py::arg("c"),
          "Determine whether a given cell belongs to the triangulation\n"
          "Parameters:\n"
-         "  c (Cell): The cell\n"
+         "  c (Cell): the cell\n"
          "Return:\n"
          "  bool")
     .def("is_cell", &tri3::is_cell2,
@@ -1016,7 +1016,7 @@ void export_triangulation_3(py::module_& m) {
          py::arg("c"),
          "True, iff c is incident to the infinite vertex\n"
          "Parameters:\n"
-         "  c (Cell): The cell\n"
+         "  c (Cell): the cell\n"
          "Return:\n"
          "  bool\n")
     .def("is_infinite", &tri3::is_infinite2,
@@ -1063,13 +1063,13 @@ void export_triangulation_3(py::module_& m) {
          "Determines wether the triangulation is valid\n"
          "Parameters:\n"
          "  verbose (Boolean): Indicates whether to be verbose (False)\n"
-         "  level (int): The verbose level (0)\n"
+         "  level (int): the verbose level (0)\n"
          "Return:\n"
          "  bool\n")
     .def("is_valid", &tri3::is_valid2, py::arg("c"), py::arg("verbose") = false,
          "Determines wether a cell is valid\n"
          "Parameters:\n"
-         "  c (Cell): The cell\n"
+         "  c (Cell): the cell\n"
          "  verbose (Boolean): Indicates whether to be verbose (False)\n"
          "Return:\n"
          "  bool\n")
@@ -1090,7 +1090,7 @@ void export_triangulation_3(py::module_& m) {
     .def("locate", &tri3::locate1, ri, py::arg("query"),
          "locate the query point in the triangulation\n"
          "Parameters:\n"
-         "  query (Point_3): The query point\n"
+         "  query (Point_3): the query point\n"
          "Return:\n"
          "  Cell: If the query point lies strictly inside the convex hull of the points, obtain the cell that contains the point in its interior.\n"
          "        If the query point lies inside a facet, on an edge, or coincides with a vertex, return one of the cells having the point on its boundary.\n"
@@ -1098,7 +1098,7 @@ void export_triangulation_3(py::module_& m) {
     .def("locate", &tri3::locate2, ri, py::arg("query"), py::arg("start"),
          "locate the query point in the triangulation; start the search with start\n"
          "Parameters:\n"
-         "  query (Point_3): The query point\n"
+         "  query (Point_3): the query point\n"
          "  start (Cell)\n"
          "Return:\n"
          "  Cell\n")
@@ -1106,7 +1106,7 @@ void export_triangulation_3(py::module_& m) {
          py::arg("query"), py::arg("start"),
          "locate the query point in the triangulation; start the search with hint\n"
          "Parameters:\n"
-         "  query (Point_3): The query point\n"
+         "  query (Point_3): the query point\n"
          "  hint (Vertex)\n"
          "Return:\n"
          "  Cell\n")
@@ -1114,7 +1114,7 @@ void export_triangulation_3(py::module_& m) {
          py::arg("query"),
          "locate the query point in the triangulation\n"
          "Parameters:\n"
-         "  query (Point_3): The query point\n"
+         "  query (Point_3): the query point\n"
          "Return:\n"
          "  tuple[Locate_type.CELL, c], if the query point is inside the interior of the cell c\n"
          "  tuple[Locate_type.FACET, c, i], if the query point lies inside the interior of the facet (c, i)\n"
@@ -1124,7 +1124,7 @@ void export_triangulation_3(py::module_& m) {
          py::arg("query"), py::arg("start"),
          "locate the query point in the triangulation; start the search with start\n"
          "Parameters:\n"
-         "  query (Point_3): The query point\n"
+         "  query (Point_3): the query point\n"
          "  start (Cell)\n"
          "Return:\n"
          "  tuple[Locate_type.CELL, c], if the query point is inside the interior of the cell c\n"
@@ -1135,7 +1135,7 @@ void export_triangulation_3(py::module_& m) {
          py::arg("query"), py::arg("hint"),
          "locate the query point in the triangulation; start the search with hint\n"
          "Parameters:\n"
-         "  query (Point_3): The query point\n"
+         "  query (Point_3): the query point\n"
          "  hint (Vertex)\n"
          "Return:\n"
          "  tuple[Locate_type.CELL, c], if the query point is inside the interior of the cell c\n"
@@ -1180,7 +1180,7 @@ void export_triangulation_3(py::module_& m) {
     .def("point", &tri3::point1, ri, py::arg("v"),
          "Obtain the geometric embedding of a vertex\n"
          "Parameters:\n"
-         "  v (Vertex): The vertex\n"
+         "  v (Vertex): the vertex\n"
          "Return:\n"
          "  Point_3\n")
     .def("point", &tri3::point2, ri, py::arg("c"), py::arg("i"),
@@ -1193,7 +1193,7 @@ void export_triangulation_3(py::module_& m) {
     .def("segment", &tri3::segment1, py::arg("e"),
          "Obtain the geometric embedding of an edge\n"
          "Parameters:\n"
-         "  e (Edge): The edge\n"
+         "  e (Edge): the edge\n"
          "Return:\n"
          "  Segment_3\n")
     .def("segment", &tri3::segment2, py::arg("c"), py::arg("i"), py::arg("j"),
@@ -1207,7 +1207,7 @@ void export_triangulation_3(py::module_& m) {
     .def("triangle", &tri3::triangle1, py::arg("f"),
          "Obtain the geometric embedding of a facet\n"
          "Parameters:\n"
-         "  f (Facet): The facet\n"
+         "  f (Facet): the facet\n"
          "Return:\n"
          "  Triangle_3\n")
     .def("triangle", &tri3::triangle2, py::arg("c"), py::arg("i"),
@@ -1221,7 +1221,7 @@ void export_triangulation_3(py::module_& m) {
     .def("tetrahedron", &tri3::tetrahedron, py::arg("c"),
          "Obtain the geometric embedding of a cell\n"
          "Parameters:\n"
-         "  c (Cell): The cell\n"
+         "  c (Cell): the cell\n"
          "Return:\n"
          "  Tetrahedron_3\n")
 
@@ -1230,8 +1230,8 @@ void export_triangulation_3(py::module_& m) {
          py::arg("p"), py::arg("c"),
          "Given point p, obtain an enumeration indicating on which side of the oriented boundary of a cell p lies.\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
-         "  c (Cell): The cell\n"
+         "  p (Point_3): the point\n"
+         "  c (Cell): the cell\n"
          "Return:\n"
          "  ON_BOUNDED_SIDE, if p is inside c\n"
          "  tuple[ON_BOUNDARY, Locate_type.FACET, i], if p lies in the interior of the facet (c, i) on the boundary of c\n"
@@ -1242,8 +1242,8 @@ void export_triangulation_3(py::module_& m) {
          py::arg("p"), py::arg("e"),
          "Given point p, obtain an enumeration indicating on which side of the oriented boundary of an edge p lies.\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
-         "  e (Edge): The edge\n"
+         "  p (Point_3): the point\n"
+         "  e (Edge): the edge\n"
          "Return:\n"
          "  ON_BOUNDED_SIDE, if p is inside e\n"
          "  tuple[ON_BOUNDARY, Locate_type.VERTEX, i], if p coincides with one of the endpoints of e, where i is the index of the vertex in the containg cell\n"
@@ -1253,8 +1253,8 @@ void export_triangulation_3(py::module_& m) {
          py::arg("p"), py::arg("f"),
          "Given point p, obtain an enumeration indicating on which side of the oriented boundary of a facet p lies.\n"
          "Parameters:\n"
-         "  p (Point_3): The point\n"
-         "  c (Cell): The cell\n"
+         "  p (Point_3): the point\n"
+         "  c (Cell): the cell\n"
          "Return:\n"
          "  ON_BOUNDED_SIDE, if p is inside f\n"
          "  tuple[ON_BOUNDARY, Locate_type.EDGE, i, j], if p lies in the interior of an edge (c, i, j) on the boundary of f, where (i, j) are the indices of the edge in the containg cell\n"

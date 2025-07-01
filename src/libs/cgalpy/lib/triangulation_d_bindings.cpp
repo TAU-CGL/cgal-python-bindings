@@ -844,17 +844,17 @@ void export_triangulation_d(py::module_& m) {
            "Inserts a point into the triangulation in a given face\n"
            "Parameters:\n"
            "  p (Point): the point to insert\n"
-           "  f (Face) the containing face\n")
+           "  f (Face): the containing face\n")
       .def("insert_in_facet", &trid::insert_in_facet, py::arg("p"), py::arg("f"),
            "Inserts a point into the triangulation in a given facet\n"
            "Parameters:\n"
            "  p (Point): the point to insert\n"
-           "  f (Facet) the containing facet\n")
+           "  f (Facet): the containing facet\n")
       .def("insert_in_full_cell", &trid::insert_in_full_cell, py::arg("p"), py::arg("c"),
            "Inserts a point into the triangulation in a given full cell\n"
            "Parameters:\n"
            "  p (Point): the point to insert\n"
-           "  c (Full_cell) the containing full cell\n")
+           "  c (Full_cell): the containing full cell\n")
       .def("insert_in_hole", &trid::insert_in_hole,  py::arg("p"),  py::arg("full_cells"),  py::arg("f"),
            "Remove a set of full cells, insert a new vertex at a given point, and connect each face on the boundary of a given set of cells to the new vertex\n"
            "Parameters:\n"
