@@ -120,12 +120,14 @@ bool is_edge(const Triangulation_2& tri, Vertex& v1, Vertex& v2)
 { return tri.is_edge(Vertex_handle(&v1), Vertex_handle(&v2)); }
 
 //!
-auto is_edge_get_edge(const Triangulation_2& tri, Vertex& v1, Vertex& v2) {
+auto is_edge_get_edge(py::handle self, Vertex& v1, Vertex& v2) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto& tri = py::cast<Triangulation_2&>(self);
   Face_handle fh;
   int i;
   auto res = tri.is_edge(Vertex_handle(&v1), Vertex_handle(&v2), fh, i);
   if (! res) return py::make_tuple(false);
-  return py::make_tuple(true, *fh, i);
+  return py::make_tuple(true, py::cast(*fh, ri, self), i);
 }
 
 //!
@@ -133,11 +135,13 @@ bool is_face(const Triangulation_2& tri, Vertex& v1, Vertex& v2, Vertex& v3)
   { return tri.is_face(Vertex_handle(&v1), Vertex_handle(&v2), Vertex_handle(&v3)); }
 
 //!
-auto is_face_get_face(const Triangulation_2& tri, Vertex& v1, Vertex& v2, Vertex& v3) {
+auto is_face_get_face(py::handle self, Vertex& v1, Vertex& v2, Vertex& v3) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto& tri = py::cast<Triangulation_2&>(self);
   Face_handle fh;
   auto res = tri.is_face(Vertex_handle(&v1), Vertex_handle(&v2), Vertex_handle(&v3), fh);
   if (! res) return py::make_tuple(false);
-  return py::make_tuple(true, *fh);
+  return py::make_tuple(true, py::cast(*fh, ri, self));
 }
 
 //!
@@ -148,9 +152,6 @@ bool is_infinite2(const Triangulation_2& tri, Vertex& v) { return tri.is_infinit
 
 //!
 bool is_infinite3(const Triangulation_2& tri, Face& f, int i) { return tri.is_infinite(Face_handle(&f), i); }
-
-//!
-bool is_infinite4(const Triangulation_2& tri, const Edge& e) { return tri.is_infinite(e); }
 
 //!
 Face& locate1(const Triangulation_2& tri, const Point& query) { return *(tri.locate(query)); }
@@ -529,15 +530,50 @@ void export_triangulation_2(py::module_& m) {
          "  v1 (Vertex): the first vertex\n"
          "  v2 (Vertex): the second vertex\n"
          "Return:\n"
-         "  tuple[False, optsion] if v1 and v2 do not define an edge;\n"
-         "  otherwise tuple[True, f, i, where the edge is opposite to vertex of the face f\n")
-    .def("is_face", &tri2::is_face)
-    .def("is_face_get_face", &tri2::is_face_get_face)
-    .def("is_infinite", static_cast<bool (Tri::*)(const tri2::Edge&) const>(&Tri::is_infinite))
-    .def("is_infinite", &tri2::is_infinite1)
-    .def("is_infinite", &tri2::is_infinite2)
-    .def("is_infinite", &tri2::is_infinite3)
-    .def("is_infinite", &tri2::is_infinite4)
+         "  tuple[False] if v1 and v2 do not define an edge;\n"
+         "  otherwise tuple[True, f, i], where the edge is opposite to vertex of the face f\n")
+    .def("is_face", &tri2::is_face, py::arg("v1"), py::arg("v2"), py::arg("v3"),
+         "Determine whether three given vertices define a face\n"
+         "Parameters:\n"
+         "  v1 (Vertex): the first vertex\n"
+         "  v2 (Vertex): the second vertex\n"
+         "  v3 (Vertex): the third vertex\n"
+         "Return:\n"
+         "  Boolean\n")
+    .def("is_face_get_face", &tri2::is_face_get_face, py::arg("v1"), py::arg("v2"), py::arg("v3"),
+         "Determine whether three given vertices define a face, and if so, obtain the face\n"
+         "Parameters:\n"
+         "  v1 (Vertex): the first vertex\n"
+         "  v2 (Vertex): the second vertex\n"
+         "  v3 (Vertex): the third vertex\n"
+         "Return:\n"
+         "  tuple[False] if v1, v2, and v3 do not define an face;\n"
+         "  otherwise tuple[True, f]\n")
+    .def("is_infinite", static_cast<bool (Tri::*)(const tri2::Edge&) const>(&Tri::is_infinite), py::arg("e"),
+         "Determine whether a given edge is infinite\n"
+         "Parameters:\n"
+         "  e (Edge)\n"
+         "Return:\n"
+         "  Bolean\n")
+    .def("is_infinite", &tri2::is_infinite1, py::arg("f"),
+         "Determine whether a given face is infinite\n"
+         "Parameters:\n"
+         "  f (Face)\n"
+         "Return:\n"
+         "  Bolean\n")
+    .def("is_infinite", &tri2::is_infinite2, py::arg("v"),
+         "Determine whether a given vertex is the infinite vertex\n"
+         "Parameters:\n"
+         "  v (Vertex)\n"
+         "Return:\n"
+         "  Bolean\n")
+    .def("is_infinite", &tri2::is_infinite3, py::arg("f"), py::arg("i"),
+         "Determine whether a the edge opposite to vertex i of face f is infinite\n"
+         "Parameters:\n"
+         "  f (Edge)\n"
+         "  i (int)\n"
+         "Return:\n"
+         "  Bolean\n")
     .def("is_valid", &Tri::is_valid, py::arg("verbose") = false, py::arg("level") = 0)
     .def("locate", &tri2::locate1, ri)
     .def("locate", &tri2::locate2, ri)
