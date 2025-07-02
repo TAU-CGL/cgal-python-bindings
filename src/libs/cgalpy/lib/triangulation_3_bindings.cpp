@@ -124,8 +124,7 @@ Vertex& insert3(Triangulation_3& tri, const Point& p, Vertex& hint) {
 }
 
 //!
-Vertex& insert4(Triangulation_3& tri, const Point& p,
-                Locate_type lt, tri3::Cell& lc, int li, int lj) {
+Vertex& insert4(Triangulation_3& tri, const Point& p, Locate_type lt, tri3::Cell& lc, int li, int lj) {
   auto vh = tri.insert(p, lt, tri3::Cell_handle(&lc), li, lj);
   return *vh;
 }
@@ -285,20 +284,19 @@ Cell& locate3(const Triangulation_3& tri, const Point& query, Vertex& hint) {
 py::object locate_dispatch(py::handle self, Cell_handle ch, Locate_type lt, int li, int lj) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  Cell& c = *ch;
   switch (lt) {
    case Triangulation_3::FACET:
-   case Triangulation_3::VERTEX: return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li));
+   case Triangulation_3::VERTEX: return py::make_tuple(py::cast(lt), py::cast(*ch, ri, self), py::int_(li));
 
-   case Triangulation_3::EDGE: return py::make_tuple(py::cast(lt), py::cast(c, ri, self), py::int_(li), py::int_(lj));
+   case Triangulation_3::EDGE: return py::make_tuple(py::cast(lt), py::cast(*ch, ri, self), py::int_(li), py::int_(lj));
 
    case Triangulation_3::CELL:
-   case Triangulation_3::OUTSIDE_CONVEX_HULL: return py::make_tuple(py::cast(lt), py::cast(c, ri, self));
+   case Triangulation_3::OUTSIDE_CONVEX_HULL: return py::make_tuple(py::cast(lt), py::cast(*ch, ri, self));
 
-   case Triangulation_3::OUTSIDE_AFFINE_HULL: return py::tuple(py::cast(lt));
+   case Triangulation_3::OUTSIDE_AFFINE_HULL: return py::make_tuple(py::cast(lt));
   }
 
-  return py::tuple(py::cast(lt));
+  return py::make_tuple(py::cast(lt));
 }
 
 /*! We want to return a Python tuple of variable length. One element of the
@@ -319,7 +317,7 @@ py::object locate_dispatch(py::handle self, Cell_handle ch, Locate_type lt, int 
  * properly. Therefore, we bind the method with self, you pass self itself as
  * the parent.
  */
-py::object locate_face1(py::handle self, const Point& query) {
+py::object locate_get_incident1(py::handle self, const Point& query) {
   auto& tri = py::cast<Triangulation_3&>(self);
   Locate_type lt;
   int li, lj;
@@ -328,7 +326,7 @@ py::object locate_face1(py::handle self, const Point& query) {
 }
 
 //!
-py::object locate_face2(py::handle self, const Point& query, Cell& start) {
+py::object locate_get_incident2(py::handle self, const Point& query, Cell& start) {
   auto& tri = py::cast<Triangulation_3&>(self);
   Locate_type lt;
   int li, lj;
@@ -337,7 +335,7 @@ py::object locate_face2(py::handle self, const Point& query, Cell& start) {
 }
 
 //!
-py::object locate_face3(py::handle self, const Point& query, Vertex& hint) {
+py::object locate_get_incident3(py::handle self, const Point& query, Vertex& hint) {
   auto& tri = py::cast<Triangulation_3&>(self);
   Locate_type lt;
   int li, lj;
@@ -1036,15 +1034,13 @@ void export_triangulation_3(py::module_& m) {
          "  j (int)\n"
          "Return:\n"
          "  bool\n")
-    .def("is_infinite", py::overload_cast<const Edge&>(&Tri::is_infinite, py::const_),
-         py::arg("e"),
+    .def("is_infinite", py::overload_cast<const Edge&>(&Tri::is_infinite, py::const_), py::arg("e"),
          "True, iff the edge e is incident to the infinite vertex\n"
          "Parameters:\n"
          "  e (Edge)\n"
          "Return:\n"
          "  bool\n")
-    .def("is_infinite", py::overload_cast<const Facet&>(&Tri::is_infinite, py::const_),
-         py::arg("f"),
+    .def("is_infinite", py::overload_cast<const Facet&>(&Tri::is_infinite, py::const_), py::arg("f"),
          "True, iff the facet f is incident to the infinite vertex\n"
          "Parameters:\n"
          "  f (Facet)\n"
@@ -1088,7 +1084,7 @@ void export_triangulation_3(py::module_& m) {
 
     // Locators
     .def("locate", &tri3::locate1, ri, py::arg("query"),
-         "locate the query point in the triangulation\n"
+         "Locate a query point in the triangulation\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
          "Return:\n"
@@ -1096,7 +1092,7 @@ void export_triangulation_3(py::module_& m) {
          "        If the query point lies inside a facet, on an edge, or coincides with a vertex, return one of the cells having the point on its boundary.\n"
          "        If the query point lies outside the convex hull of the points, return an infinite cell with vertices {p,q,r,∞},  such that the tetrahedron (p,q,r,query) is positively oriented (the rest of the triangulation lies on the other side of facet (p,q,r)).\n")
     .def("locate", &tri3::locate2, ri, py::arg("query"), py::arg("start"),
-         "locate the query point in the triangulation; start the search with start\n"
+         "Locate a query point in the triangulation; start the search with start\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
          "  start (Cell)\n"
@@ -1104,15 +1100,14 @@ void export_triangulation_3(py::module_& m) {
          "  Cell\n")
     .def("locate", &tri3::locate3, ri,
          py::arg("query"), py::arg("start"),
-         "locate the query point in the triangulation; start the search with hint\n"
+         "Locate a query point in the triangulation; start the search with hint\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
          "  hint (Vertex)\n"
          "Return:\n"
          "  Cell\n")
-    .def("locate_face", &tri3::locate_face1, ri,
-         py::arg("query"),
-         "locate the query point in the triangulation\n"
+    .def("locate_get_incident", &tri3::locate_get_incident1, py::arg("query"),
+         "Locate a query point in the triangulation\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
          "Return:\n"
@@ -1120,9 +1115,8 @@ void export_triangulation_3(py::module_& m) {
          "  tuple[Locate_type.FACET, c, i], if the query point lies inside the interior of the facet (c, i)\n"
          "  tuple[Locate_type.EDGE, c, i, j], if the query point lies inside the interior of the edge (c, i, j)\n"
          "  tuple[Locate_type.VERTEX, c, i], if the query point coincides with the vertex (c, i)\n")
-    .def("locate_face", &tri3::locate_face2, ri,
-         py::arg("query"), py::arg("start"),
-         "locate the query point in the triangulation; start the search with start\n"
+    .def("locate_get_incident", &tri3::locate_get_incident2, py::arg("query"), py::arg("start"),
+         "locate a query point in the triangulation; start the search with start\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
          "  start (Cell)\n"
@@ -1131,9 +1125,8 @@ void export_triangulation_3(py::module_& m) {
          "  tuple[Locate_type.FACET, c, i], if the query point lies inside the interior of the facet (c, i)\n"
          "  tuple[Locate_type.EDGE, c, i, j], if the query point lies inside the interior of the edge (c, i, j)\n"
          "  tuple[Locate_type.VERTEX, c, i], if the query point coincides with the vertex (c, i)\n")
-    .def("locate_face", &tri3::locate_face2, ri,
-         py::arg("query"), py::arg("hint"),
-         "locate the query point in the triangulation; start the search with hint\n"
+    .def("locate_get_incident", &tri3::locate_get_incident3, py::arg("query"), py::arg("hint"),
+         "Locate a query point in the triangulation; start the search with hint\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
          "  hint (Vertex)\n"

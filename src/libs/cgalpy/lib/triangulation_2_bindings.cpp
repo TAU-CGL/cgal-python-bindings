@@ -11,6 +11,7 @@
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/pair.h>
+#include <nanobind/stl/tuple.h>
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_circulator.hpp"
@@ -154,26 +155,50 @@ bool is_infinite2(const Triangulation_2& tri, Vertex& v) { return tri.is_infinit
 bool is_infinite3(const Triangulation_2& tri, Face& f, int i) { return tri.is_infinite(Face_handle(&f), i); }
 
 //!
-Face& locate1(const Triangulation_2& tri, const Point& query) { return *(tri.locate(query)); }
-
-//!
-Face& locate2(const Triangulation_2& tri, const Point& query, Face& hint)
-{ return *(tri.locate(query), Face_handle(&hint)); }
-
-//!
-auto locate_get_incident1(const Triangulation_2& tri, const Point& query) {
-  Locate_type lt;
-  int li;
-  auto fh = tri.locate(query, lt, li);
-  return py::make_tuple(lt, *fh, li);
+auto locate1(py::handle self, const Point& query) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto& tri = py::cast<Triangulation_2&>(self);
+  auto fh = tri.locate(query);
+  return (fh == Face_handle()) ? py::none() : py::cast(*fh, ri, self);
 }
 
 //!
-auto locate_get_incident2(const Triangulation_2& tri, const Point& query, Face& hint) {
+auto locate2(py::handle self, const Point& query, Face& hint) {
+   constexpr auto ri(py::rv_policy::reference_internal);
+  auto& tri = py::cast<Triangulation_2&>(self);
+  auto fh =  tri.locate(query, Face_handle(&hint));
+  return (fh == Face_handle()) ? py::none() : py::cast(*fh, ri, self);
+}
+
+//!
+py::object locate_dispatch(py::handle self, Face_handle fh, Locate_type lt, int li) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  switch (lt) {
+   case Triangulation_2::VERTEX:
+   case Triangulation_2::EDGE:
+   case Triangulation_2::FACE: return py::make_tuple(py::cast(lt), py::cast(*fh, ri, self), py::int_(li));
+   case Triangulation_2::OUTSIDE_CONVEX_HULL: return py::make_tuple(py::cast(lt), py::cast(*fh, ri, self));
+   case Triangulation_2::OUTSIDE_AFFINE_HULL: return py::make_tuple(py::cast(lt));
+  }
+  return py::make_tuple(py::cast(lt));
+}
+
+//!
+py::object locate_get_incident1(py::handle self, const Point& query) {
+  auto& tri = py::cast<Triangulation_2&>(self);
+  Locate_type lt;
+  int li;
+  auto fh = tri.locate(query, lt, li);
+  return locate_dispatch(self, fh, lt, li);
+}
+
+//!
+py::object locate_get_incident2(py::handle self, const Point& query, Face& hint) {
+  auto& tri = py::cast<Triangulation_2&>(self);
   Locate_type lt;
   int li;
   auto fh = tri.locate(query, lt, li, Face_handle(&hint));
-  return py::make_tuple(lt, *fh, li);
+  return locate_dispatch(self, fh, lt, li);
 }
 
 //!
@@ -575,15 +600,78 @@ void export_triangulation_2(py::module_& m) {
          "Return:\n"
          "  Bolean\n")
     .def("is_valid", &Tri::is_valid, py::arg("verbose") = false, py::arg("level") = 0)
-    .def("locate", &tri2::locate1, ri)
-    .def("locate", &tri2::locate2, ri)
-    .def("locate_get_incident", &tri2::locate_get_incident1, ri)
-    .def("locate_get_incident", &tri2::locate_get_incident2, ri)
-    .def("mirror_edge", &Tri::mirror_edge)
-    .def("mirror_index", &tri2::mirror_index)
-    .def("mirror_vertex", &tri2::mirror_vertex, ri)
-    .def("move", &tri2::move, ri)
-    .def("move_if_no_collision", &tri2::move_if_no_collision, ri)
+    .def("locate", &tri2::locate1, py::arg("query"),
+         "Locate a query point\n"
+         "Parameters:\n"
+         "  query (Point): the query point\n"
+         "Return:\n"
+         "  Face or None:\n"
+         "     If the query point lies inside the convex hull of the points, obtain the face that contains the query in its interior or on its boundary\n."
+         "     If the query point lies outside the convex hull of the triangulation but in the affine hull, obtain the infinite face which is a proof of the point location:\n"
+         "      * for a two dimensional triangulation, it is a face (∞,p,q) such that query lies to the left of the oriented line pq (the rest of the triangulation lying to the right of this line)\n"
+         "      * for a degenerate one dimensional triangulation it is the (degenerate one dimensional) face (∞,p,nullptr) such that query and the triangulation lie on either side of p\n"
+         "     Otherwise, the point query lies outside the affine hull---obtain None\n")
+    .def("locate", &tri2::locate2, py::arg("query"), py::arg("start"),
+         "Locate a query point; start the search with start\n"
+         "Parameters:\n"
+         "  query (Point): the query point\n"
+         "  start (Face) the starting face of the search\n"
+         "Return:\n"
+         "  Face or None\n")
+    .def("locate_get_incident", &tri2::locate_get_incident1, py::arg("query"),
+         "Locate a query point and obtain incidence information\n"
+         "Parameters:\n"
+         "  query (Point): the query point\n"
+         "Return:\n"
+         "  Face or None:\n"
+         "     If the query point lies inside the convex hull of the points, obtain the face that contains the query in its interior or on its boundary\n."
+         "     If the query point lies outside the convex hull of the triangulation but in the affine hull, obtain the infinite face which is a proof of the point location:\n"
+         "      * for a two dimensional triangulation, it is a face (∞,p,q) such that query lies to the left of the oriented line pq (the rest of the triangulation lying to the right of this line)\n"
+         "      * for a degenerate one dimensional triangulation it is the (degenerate one dimensional) face (∞,p,nullptr) such that query and the triangulation lie on either side of p\n"
+         "     Otherwise, the point query lies outside the affine hull---obtain None\n")
+    .def("locate_get_incident", &tri2::locate_get_incident2, py::arg("query"), py::arg("start"),
+         "Locate a query point and obtain incidence information; start the search with start\n"
+         "Parameters:\n"
+         "  query (Point): the query point\n"
+         "  start (Face) the startinf face of the search\n"
+         "Return:\n"
+         "  Face or None\n")
+    .def("mirror_edge", &Tri::mirror_edge, py::arg("e"),
+         "Obtain an edge seen from the other adjacent edge\n",
+         "Parameters:\n"
+         "  e (Edge)\n"
+         "Return:\n"
+         "  Edge\n")
+    .def("mirror_index", &tri2::mirror_index, py::arg("f"), py::arg("i"),
+         "Obtain the index of f in its ith neighbor\n"
+         "Parameters:\n"
+         "  f (Face)\n"
+         "  i (int)\n"
+         "Return:\n"
+         "  int\n")
+    .def("mirror_vertex", &tri2::mirror_vertex, ri, py::arg("f"), py::arg("i"),
+         "Obtain the vertex of the ith neighbor of f that is opposite to f\n"
+         "Parameters:\n"
+         "  f (Face)\n"
+         "  i (int)\n"
+         "Return:\n"
+         "  Vertex\n")
+    .def("move", &tri2::move, ri, py::arg("v"), py::arg("p"),
+         "If there is no collision during the move, apply the same operation as move_if_no_collision;\n"
+         "otherwise, remove v and obtain the vertex at point p\n"
+         "Parameters:\n"
+         "  v (vertex)\n"
+         "  p (Point_2)\n"
+         "Return:\n"
+         "  Vertex\n")
+    .def("move_if_no_collision", &tri2::move_if_no_collision, ri, py::arg("v"), py::arg("p"),
+         "If there is already another vertex at p, obtain the vertex;\n"
+         "otherwise, modify the triangulation, such that the new position of vertex v is p, and obtain v\n"
+         "Parameters:\n"
+         "  v (vertex)\n"
+         "  p (Point_2)\n"
+         "Return:\n"
+         "  Vertex\n")
     .def("number_of_vertices", &Tri::number_of_vertices)
     .def("number_of_faces", &Tri::number_of_faces)
     .def("oriented_side",
