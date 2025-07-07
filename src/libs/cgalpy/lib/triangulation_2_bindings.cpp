@@ -219,6 +219,12 @@ CGAL::Oriented_side oriented_side(const Triangulation_2& tri, Face& f, const Poi
 { return tri.oriented_side(Face_handle(&f), p); }
 
 //!
+const Point& point1(const Triangulation_2& tri, Vertex& v) { return tri.point(Vertex_handle(&v)); }
+
+//!
+const Point& point2(const Triangulation_2& tri, Face& f, int i) { return tri.point(Face_handle(&f), i); }
+
+//!
 Vertex& push_back(Triangulation_2& tri, const Point& p) { return *(tri.push_back(p)); }
 
 //!
@@ -672,31 +678,124 @@ void export_triangulation_2(py::module_& m) {
          "  p (Point_2)\n"
          "Return:\n"
          "  Vertex\n")
-    .def("number_of_vertices", &Tri::number_of_vertices)
-    .def("number_of_faces", &Tri::number_of_faces)
+    .def("number_of_vertices", &Tri::number_of_vertices,
+         "Obtain the number of finite vertices\n"
+         "Return:\n"
+         "  int\n")
+    .def("number_of_faces", &Tri::number_of_faces,
+         "Obtain the number of finite faces\n"
+         "Return:\n"
+         "  int\n")
     .def("oriented_side",
          py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&>(&Tri::oriented_side, py::const_),
          py::arg("p0"), py::arg("p1"), py::arg("p2"), py::arg("p"))
-    .def("oriented_side", &tri2::oriented_side)
-    .def("push_back", &tri2::push_back, ri)
-    .def("remove", &tri2::remove)
-    .def("remove_degree_3", &tri2::remove_degree_31)
-    .def("remove_degree_3", &tri2::remove_degree_32)
-    .def("remove_first", &tri2::remove_first)
-    .def("remove_second", &tri2::remove_second)
-    .def("segment", py::overload_cast<const Edge&>(&Tri::segment, py::const_))
-    .def("segment", &tri2::segment)
-    .def("set_infinite_vertex", &tri2::set_infinite_vertex)
+    .def("oriented_side", &tri2::oriented_side, py::arg("f"), py::arg("p"),
+         "Determine on which side of the oriented boundary of face lies a given point\n"
+         "Parameters:\n"
+         "  f (Face) the input face\n"
+         "  p (Point_2) the input point\n"
+         "Return:\n"
+         "  Oriented_side\n")
+    .def("point", &tri2::point1, py::arg("v"),
+         "Obtain the point of a vertex\n"
+         "Parameters:\n"
+         "  v (Vertex) the input vertex\n"
+         "Return:\n"
+         "  Point_2\n")
+    .def("point", &tri2::point2, py::arg("f"), py::arg("i"),
+         "Obtain the point of vertex i of face f\n"
+         "Parameters:\n"
+         "  f (Face) the input face\n"
+         "  i (int)\n"
+         "Return:\n"
+         "  Point_2\n")
+    .def("push_back", &tri2::push_back, ri, py::arg("p"),
+         "Equivalent to insert(p)\n"
+         "Parameters:\n"
+         "  p (Point_2)\n"
+         "Return:\n"
+         "  Vertex\n")
+    .def("remove", &tri2::remove, py::arg("v"),
+         "Remove a given vertex\n"
+         "Parameters:\n"
+         "  v (Vertex): the vertex to remove\n")
+    .def("remove_degree_3", &tri2::remove_degree_31, py::arg("v"),
+         "Remove a vertex of degree three\n"
+         "Parameters:\n"
+         "  v (Vertex): the vertex to remove\n")
+    .def("remove_degree_3", &tri2::remove_degree_32, py::arg("v"), py::arg("f"),
+         "Remove a vertex of degree three\n"
+         "Parameters:\n"
+         "  v (Vertex): the vertex to remove\n"
+         "  f (Face)\n")
+    .def("remove_first", &tri2::remove_first, py::arg("v"),
+         "Remove the last finite vertex\n")
+    .def("remove_second", &tri2::remove_second, py::arg("v"),
+         "Remove the vertex before the last finite one\n")
+    .def("segment", py::overload_cast<const Edge&>(&Tri::segment, py::const_), py::arg("e"),
+         "Obtain the line segment corresponding to an edge\n"
+         "Parameters:\n"
+         "  e (Edge) the input edge\n"
+         "Return:\n"
+         " Segment\n")
+    .def("segment", &tri2::segment, py::arg("e"), py::arg("i"),
+         "Obtain the line segment corresponding to an edge opposite to vertex i of face f\n"
+         "Parameters:\n"
+         "  f (Face)\n"
+         "  i (int)\n"
+         "Return:\n"
+         " Segment\n")
+    .def("set_infinite_vertex", &tri2::set_infinite_vertex, py::arg("v"),
+         "Set the infinite vertex (low level function)\n"
+         "Parameters:\n"
+         "  v (Vertex)\n")
     .def("side_of_oriented_circle",
          py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&, bool>
-         (&Tri::side_of_oriented_circle, py::const_))
+         (&Tri::side_of_oriented_circle, py::const_),
+         py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p"), py::arg("perturb"),
+         "Determine on which side of the circumcircle of the a face defined by three points lies a forth point\n"
+         "Parameters:\n"
+         "  p1 (point_2)\n"
+         "  p2 (point_2)\n"
+         "  p2 (point_2)\n"
+         "  p (point_2) the input point\n"
+         "  perturb (Boolean)\n"
+         "Return:\n"
+         "  Oriented_side\n")
     .def("side_of_oriented_circle", &tri2::side_of_oriented_circle,
-         py::arg("f"), py::arg("p"), py::arg("perturb") = false)
-    .def("star_hole", &tri2::star_hole1, ri)
-    .def("star_hole", &tri2::star_hole2, ri)
-    .def("swap", &Tri::swap)
+         py::arg("f"), py::arg("p"), py::arg("perturb") = false,
+         "Determine on which side of the circumcircle of a face lies a given point\n"
+         "Parameters:\n"
+         "  f (Face)\n"
+         "  p (Point_2) the input point\n"
+         "  perturb (Boolean)\n"
+         "Return:\n"
+         "  Oriented_side\n")
+    .def("star_hole", &tri2::star_hole1, ri, py::arg("p"), py::arg("edges"),
+         "Create a new vertex at a given point, and use it to star the hole whose boundary is described by a sequence of edges\n"
+         "Parameters:\n"
+         "  p (Point_2): the input point\n"
+         "  edges (list): the input list of edges\n"
+         "Return:\n"
+         "  Vertex\n")
+    .def("star_hole", &tri2::star_hole2, ri, py::arg("p"), py::arg("edges"), py::arg("faces"),
+         "Create a new vertex at a given point, and use it to star the hole whose boundary is described by a sequence of edges\n"
+         "Use in conjunction with one of the find_conflicts() functions of Delaunay triangulations to perform an insertion\n"
+         "  p (Point_2): the input point\n"
+         "  edges (list): the input list of edges\n"
+         "  faces (list): the input list of faces\n"
+         "Return:\n"
+         "  Vertex\n")
+    .def("swap", &Tri::swap, "Swap a given triangle and this one\n"
+         "Parameters:\n"
+         "  tri (Triangulation_2): the triangulation to swap\n")
     // .def("tds", &Tri::tds, ri)
-    .def("triangle", &tri2::triangle)
+    .def("triangle", &tri2::triangle, py::arg("f"),
+         "Obtain the triangle formed by the three vertices of a face\n"
+         "Parameters:\n"
+         "  f (Face))\n"
+         "Return:\n"
+         "  Triangle\n")
 
     // operator=
     // operator<<
