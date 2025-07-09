@@ -793,7 +793,7 @@ void export_tri2_plain(py::module_& m) {
     .def("swap", &Tri::swap, "Swap a given triangle and this one\n"
          "Parameters:\n"
          "  tri (Triangulation_2): the triangulation to swap\n")
-    // .def("tds", &Tri::tds, ri)
+    .def("tds", py::overload_cast<>(&Tri::tds), ri)
     .def("triangle", &tri2::triangle, py::arg("f"),
          "Obtain the triangle formed by the three vertices of a face\n"
          "Parameters:\n"
