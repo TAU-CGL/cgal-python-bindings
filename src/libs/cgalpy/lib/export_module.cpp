@@ -84,6 +84,7 @@ void export_tri2_constrained_delaunay(py::module_&);
 void export_tri2_delaunay(py::module_&);
 
 void export_triangulation_3(py::module_&);
+void export_tri3_plain(py::module_& m);
 void export_tri3_regular(py::module_& m);
 void export_tri3_delaunay(py::module_& m);
 
@@ -222,6 +223,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #if defined(CGALPY_TRIANGULATION_3_BINDINGS)
   auto tri3_m = m.def_submodule("Tri3");
+  export_tri3_plain(tri3_m);
   export_triangulation_3(tri3_m);
 #if (CGALPY_TRI3 == CGALPY_TRI3_REGULAR)
   export_tri3_regular(tri3_m);

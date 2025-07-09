@@ -46,7 +46,8 @@ using C = Cbi;
 
 // Concurency
 using Con = Concurrency<CGALPY_TRI3_CONCURRENCY>::type;
-using Tds = CGAL::Triangulation_data_structure_3<V, C, Con>;
+using Triangulation_data_structure_3 = CGAL::Triangulation_data_structure_3<V, C, Con>;
+using Tds = Triangulation_data_structure_3;
 using Lp = Location_policy<CGALPY_TRI3_LOCATION_POLICY>::type;
 
 using Btri = Tri3<CGALPY_TRI3, Traits, Tds, Lp>::base_type;

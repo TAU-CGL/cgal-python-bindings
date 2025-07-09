@@ -21,9 +21,6 @@
 #include "CGALPY/triangulation_2_types.hpp"
 #include "CGALPY/types.hpp"
 
-void export_tri2_vertex(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);
-void export_tri2_face(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);
-
 namespace py = nanobind;
 
 namespace tri2 {
