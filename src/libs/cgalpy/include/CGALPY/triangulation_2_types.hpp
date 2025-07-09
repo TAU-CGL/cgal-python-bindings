@@ -39,7 +39,8 @@ using Fbic = Face_constrained<is_constrained(), Fbi, Traits>::type;
 using F = Face_alpha_shape<alpha_shape_2_bindings(), Fbic, Traits, Ec>::type;
 
   // Triangulation data structure
-using Tds = CGAL::Triangulation_data_structure_2<V, F>;
+using Triangulation_data_structure_2 = CGAL::Triangulation_data_structure_2<V, F>;
+using Tds = Triangulation_data_structure_2;
 using Itag = Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG>::type;
 
 using My_tri2 = Tri2<CGALPY_TRI2, Traits, Tds, Itag>;

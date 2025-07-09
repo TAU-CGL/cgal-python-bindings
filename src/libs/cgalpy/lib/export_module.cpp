@@ -75,11 +75,19 @@ void export_tools(py::module_& m);
 void export_triangulated_surface_mesh_segmentation(py::module_&);
 void export_triangulated_surface_mesh_simplification(py::module_&);
 void export_triangulated_surface_mesh_skeletonization(py::module_&);
+
 void export_triangulation_2(py::module_&);
+void export_tri2_regular(py::module_&);
+void export_tri2_constrained(py::module_&);
+void export_tri2_constrained_delaunay(py::module_&);
+void export_tri2_delaunay(py::module_&);
+
 void export_triangulation_3(py::module_&);
 void export_tri3_regular(py::module_& m);
 void export_tri3_delaunay(py::module_& m);
+
 void export_triangulation_d(py::module_&);
+
 void export_visibility_2(py::module_&);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
@@ -140,6 +148,17 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   auto tri2_m = m.def_submodule("Tri2");
   export_triangulation_2(tri2_m);
+
+#if (CGALPY_TRI2 == CGALPY_TRI2_REGULAR)
+  export_tri2_regular(tri2_m);
+#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
+  export_tri2_constrained(tri2_m);
+#elif (CGALPY_TRI2 == CGALPY_TRI2_DELAUNAY)
+  export_tri2_constrained_delaunay(tri2_m);
+#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY)
+  export_tri2_delaunay(tri2_m);
+#endif
+
 #endif
 
   // 2D Alpha shape must be bound after 2D triangulation!

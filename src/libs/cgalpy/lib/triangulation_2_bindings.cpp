@@ -28,6 +28,23 @@ namespace py = nanobind;
 
 namespace tri2 {
 
+/// Traingulation Data Structure
+/// @{
+
+Face& create_face1(Triangulation_data_structure_2& tds) { return *(tds.create_face()); }
+Face& create_face2(Triangulation_data_structure_2& tds) { return *(tds.create_face()); }
+Face& create_face3(Triangulation_data_structure_2& tds) { return *(tds.create_face()); }
+Face& create_face4(Triangulation_data_structure_2& tds) { return *(tds.create_face()); }
+Face& create_face5(Triangulation_data_structure_2& tds) { return *(tds.create_face()); }
+Face& create_face6(Triangulation_data_structure_2& tds) { return *(tds.create_face()); }
+
+Vertex& create_vertex(Triangulation_data_structure_2& tds) { return *(tds.create_vertex()); }
+
+// @}
+
+/// dD Triangulation
+/// @{
+
 //!
 void tri2_init(tri2::Triangulation_2* tri, py::list& lst) {
   auto begin = stl_input_iterator<tri2::Point>(lst);
@@ -52,6 +69,10 @@ Point circumcenter(Triangulation_2& t, Face& f) {
   auto res = t.circumcenter(fh);
   return res;
 }
+
+//!
+size_type degree(const Triangulation_2& tri, Vertex& v)
+{ return tri.degree(Vertex_handle(&v)); }
 
 //!
 Vertex& finite_vertex(const Triangulation_2& t) { return *(t.finite_vertex()); }
@@ -404,6 +425,17 @@ void insert_constraint(Triangulation_2& tri, const Vertex& va, const Vertex& vb)
 }
 #endif
 
+// @}
+
+/// Common
+/// @{
+
+//!
+template <typename Triangulation>
+size_type degree(const Triangulation& tri, Vertex& v) { return tri.degree(Vertex_handle(&v)); }
+
+// @}
+
 } // End of namespace tri2
 
 //!
@@ -412,13 +444,110 @@ void export_triangulation_2(py::module_& m) {
 
   using Tricc = CGAL::Triangulation_cw_ccw_2;
 
-  if (add_attr<Tricc>(m, "Triangulation_cw_ccw_2")) return;
+  if (! add_attr<Tricc>(m, "Triangulation_cw_ccw_2")) {
+    py::class_<Tricc>(m, "Triangulation_cw_ccw_2")
+      .def(py::init<Tricc&>())
+      .def_prop_ro_static("ccw", [](py::handle /*unused*/, int i) { return Tricc::ccw(i); })
+      .def_prop_ro_static("cw", [](py::handle /*unused*/, int i) { return Tricc::cw(i); })
+      ;
+  }
 
-  py::class_<Tricc>(m, "Triangulation_cw_ccw_2")
-    .def(py::init<Tricc&>())
-    .def_prop_ro_static("ccw", [](py::handle /*unused*/, int i) { return Tricc::ccw(i); })
-    .def_prop_ro_static("cw", [](py::handle /*unused*/, int i) { return Tricc::cw(i); })
+  using Tds = tri2::Triangulation_data_structure_2;
+
+  if (add_attr<Tds>(m, "Triangulation_data_structure_2")) return;
+
+  py::class_<Tds, Tricc> tds_c(m, "Triangulation_data_structure_2");
+  tds_c.def(py::init<>())
+    .def(py::init<Tds&>())
+    .def("clear", &Tds::clear, "Delete all faces and all finite vertices\n")
+    // .def("copy_tds", &copy_tds),
+    // .def("copy_tds", &copy_tds),
+    .def("create_face", &tri2::create_face1, ri)
+    .def("create_face", &tri2::create_face2, ri)
+    .def("create_face", &tri2::create_face3, ri)
+    .def("create_face", &tri2::create_face4, ri)
+    .def("create_face", &tri2::create_face5, ri)
+    .def("create_face", &tri2::create_face6, ri)
+    .def("create_vertex", &tri2::create_vertex, ri)
+    .def("degree", &tri2::degree<Tds>, py::arg("v"),
+         "Obtain the degree of a vertex\n"
+         "The infinite vertex is counted"
+         "Parameters:\n"
+         " v: the vertex\n"
+         "Return:\n"
+         "  int\n")
+    // .def("delete_face", &delete_face),
+    // .def("delete_vertex", &delete_vertex),
+    // .def("dim_down", &dim_down),
+    // .def("dimension", &dimension),
+    // .def("file_input", &file_input),
+    // .def("file_output", &file_output),
+    // .def("flip", &flip),
+    // .def("incident_edges", &incident_edges),
+    // .def("incident_faces", &incident_faces),
+    // .def("incident_vertices", &incident_vertices),
+    // .def("insert_dim_up", &insert_dim_up),
+    // .def("insert_first", &insert_first),
+    // .def("insert_in_edge", &insert_in_edge),
+    // .def("insert_in_face", &insert_in_face),
+    // .def("insert_in_hole", &insert_in_hole),
+    // .def("insert_in_hole", &insert_in_hole),
+    // .def("insert_second", &insert_second),
+    // .def("is_edge", &is_edge),
+    // .def("is_edge", &is_edge),
+    // .def("is_edge", &is_edge),
+    // .def("is_face", &is_face),
+    // .def("is_face", &is_face),
+    // .def("is_face", &is_face),
+    // .def("is_valid", &is_valid),
+    // .def("is_vertex", &is_vertex),
+    // .def("make_hole", &make_hole),
+    // .def("mirror_edge", &mirror_edge),
+    // .def("mirror_index", &mirror_index),
+    // .def("mirror_vertex", &mirror_vertex),
+    .def("number_of_edges", &Tds::number_of_edges,
+         "Obtain the number of edges\n"
+         "Return:\n"
+         "  int\n")
+    .def("number_of_faces", &Tds::number_of_faces,
+         "Obtain the number of two dimensional faces\n"
+         "Return:\n"
+         "  int\n")
+    .def("number_of_full_dim_faces", &Tds::number_of_full_dim_faces,
+         "Obtain the number of full dimensional faces\n"
+         "Return:\n"
+         "  int\n")
+    .def("number_of_vertices", &Tds::number_of_vertices,
+         "Obtain the number of vertices\n"
+         "Return:\n"
+         "  int\n")
+    // .def("remove_degree_3", &remove_degree_3),
+    // .def("remove_dim_down", &remove_dim_down),
+    // .def("remove_first", &remove_first),
+    // .def("remove_second", &remove_second),
+    // .def("set_dimension", &set_dimension),
+    // .def("star_hole", &star_hole),
+    // .def("star_hole", &star_hole),
+    // .def("star_hole", &star_hole),
+    // .def("star_hole", &star_hole),
+    // .def("swap", &swap),
+
+    // Non concept
+    // .def("faces", &faces)
+    // .def("faces", &faces)
+    // .def("faces", &faces)
     ;
+
+    // operator<<
+    // operator=
+    // operator>>
+
+    // edges_begin
+    // edges_end
+    // faces_begin
+    // faces_end
+    // vertices_begin
+    // vertices_end
 
   using Tri = tri2::Triangulation_2;
   using Traits = tri2::Traits;
@@ -441,7 +570,14 @@ void export_triangulation_2(py::module_& m) {
          "  f: The input facet\n"
          "Return:\n"
          "  Point_2\n")
-    .def("clear", &Tri::clear, "Deletes all faces and finite vertices resulting in an empty triangulation.")
+    .def("clear", &Tri::clear, "Delete all faces and finite vertices resulting in an empty triangulation.")
+    .def("degree", &tri2::degree<Tri>, py::arg("v"),
+         "Obtain the degree of a vertex\n"
+         "The infinite vertex is counted"
+         "Parameters:\n"
+         " v: the vertex\n"
+         "Return:\n"
+         "  int\n")
     .def("dimension", &Tri::dimension,
          "Obtain the dimension of the convex hull\n"
          "Return:\n"
@@ -483,11 +619,13 @@ void export_triangulation_2(py::module_& m) {
     .def("infinite_face", &tri2::infinite_face, ri, "Obtain a face incident to the infinite vertex\n")
     .def("infinite_vertex", &tri2::infinite_vertex, ri, "obtain the infinite vertex\n")
     .def("insert", &tri2::insert_point1<Tri>, ri, py::arg("p"),
+         "Insert a point into the triangulation\n"
          "Parameters:\n"
          "  p (Point_2): the point\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
     .def("insert", &tri2::insert_point2<Tri>, ri, py::arg("p"), py::arg("start"),
+         "Insert a point into the triangulation\n"
          "Parameters:\n"
          "  p (Point_2): the point to insert\n"
          "  start (Face): Start the search at this face\n"
