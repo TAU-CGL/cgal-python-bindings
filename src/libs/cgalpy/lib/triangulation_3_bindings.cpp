@@ -760,12 +760,12 @@ void export_triangulation_3(py::module_& m) {
          "  c: Together with i represent the second facet\n"
          "  i (int)\n")
     .def("clear", &Tri::clear, "deletes all finite vertices and all cells")
-    .def("degree", &tri3::degree,
-         py::arg("v"),
-         "Obtain the degree of a vertex, that is, the number of incident vertices\n"
-         "The infinite vertex is counted"
+    .def("degree", &tri3::degree, py::arg("v"),
+         "Obtain the degree of a vertex; the infinite vertex is counted\n"
          "Parameters:\n"
-         " v: the vertex\n")
+         " v: the vertex\n"
+         "Return:\n"
+         "  int\n")
     .def("dimension", &Tri::dimension, "Obtain the dimension of the affine hull\n")
 
     // Flip
