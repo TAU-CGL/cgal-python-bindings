@@ -15,6 +15,7 @@
 #include "CGALPY/arrangement_on_surface_2_values.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/triangulation_3_values.hpp"
+#include "CGALPY/triangulation_2_values.hpp"
 #include "CGALPY/config.hpp"
 
 namespace py = nanobind;

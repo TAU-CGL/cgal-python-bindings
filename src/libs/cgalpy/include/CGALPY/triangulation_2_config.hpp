@@ -40,22 +40,7 @@
 
 #include "CGALPY/config.hpp"
 #include "CGALPY/alpha_shape_2_config.hpp"
-
-#define CGALPY_TRI2_PLAIN                       0
-#define CGALPY_TRI2_REGULAR                     1
-#define CGALPY_TRI2_DELAUNAY                    2
-#define CGALPY_TRI2_CONSTRAINED                 3
-#define CGALPY_TRI2_CONSTRAINED_DELAUNAY        4
-#define CGALPY_TRI2_PERIODIC_PLAIN              5
-#define CGALPY_TRI2_PERIODIC_DELAUNAY           6
-
-#define CGALPY_TRI2_FACE_BASE_PLAIN             0
-#define CGALPY_TRI2_FACE_BASE_REGULAR           1
-
-#define CGALPY_TRI2_INTERSECTION_TAG_NCI                                0
-#define CGALPY_TRI2_INTERSECTION_TAG_NCI_REQUIRING_CONSTRUCTIONS        1
-#define CGALPY_TRI2_INTERSECTION_TAG_EXACT_PREDICATES                   2
-#define CGALPY_TRI2_INTERSECTION_TAG_EXACT_INTERSECTIONS                3
+#include "CGALPY/triangulation_2_values.hpp"
 
 namespace tri2 {
 
