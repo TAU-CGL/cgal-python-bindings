@@ -52,6 +52,24 @@ Vertex& create_vertex(Triangulation_data_structure_2& tds) { return *(tds.create
 //!
 size_type degree(const Triangulation_data_structure_2& tds, Vertex& v) { return tds.degree(Vertex_handle(&v)); }
 
+//!
+py::list faces(py::handle self) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto& tds = py::cast<Triangulation_data_structure_2&>(self);
+  py::list res;
+  for (auto& f : tds.faces()) res.append(py::cast(f, ri, self));
+  return res;
+}
+
+//!
+py::list vertices(py::handle self) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto& tds = py::cast<Triangulation_data_structure_2&>(self);
+  py::list res;
+  for (auto& v : tds.vertices()) res.append(py::cast(v, ri, self));
+  return res;
+}
+
 } // End of namespace tri2
 
 //!
@@ -148,9 +166,8 @@ void export_triangulation_2(py::module_& m) {
     // .def("swap", &swap),
 
     // Non concept
-    // .def("faces", &faces)
-    // .def("faces", &faces)
-    // .def("faces", &faces)
+    .def("faces", &tri2::faces)
+    .def("vertices", &tri2::vertices)
     ;
 
     // operator<<
