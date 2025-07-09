@@ -1412,8 +1412,7 @@ void export_triangulation_3(py::module_& m) {
 
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
   m.def("draw",
-        [](const Tri& tri, const bvr::Graphics_scene_options& gso,
-           const char* title)
+        [](const Tri& tri, const bvr::Graphics_scene_options& gso, const char* title)
         { CGAL::draw(tri, gso, title); });
 #endif
 #endif

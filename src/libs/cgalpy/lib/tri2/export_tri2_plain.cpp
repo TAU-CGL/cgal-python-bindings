@@ -13,6 +13,13 @@
 #include <nanobind/stl/pair.h>
 #include <nanobind/stl/tuple.h>
 
+#ifdef CGALPY_HAS_VISUAL
+#include <CGAL/draw_triangulation_2.h>
+#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+#include "CGALPY/basic_viewer_types.hpp"
+#endif
+#endif
+
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
@@ -905,4 +912,16 @@ void export_tri2_plain(py::module_& m) {
   //   .def_readwrite("first", &tri2::Edge::first)
   //   .def_readwrite("second", &tri2::Edge::second)
   //   ;
+
+#ifdef CGALPY_HAS_VISUAL
+  m.def("draw",
+        [](const Tri& tri, const char* title)
+        { CGAL::draw(tri, title); });
+
+#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+  m.def("draw",
+        [](const Tri& tri, const bvr::Graphics_scene_options& gso, const char* title)
+        { CGAL::draw(tri, gso, title); });
+#endif
+#endif
 }
