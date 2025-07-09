@@ -77,6 +77,7 @@ void export_triangulated_surface_mesh_simplification(py::module_&);
 void export_triangulated_surface_mesh_skeletonization(py::module_&);
 
 void export_triangulation_2(py::module_&);
+void export_tri2_plain(py::module_&);
 void export_tri2_regular(py::module_&);
 void export_tri2_constrained(py::module_&);
 void export_tri2_constrained_delaunay(py::module_&);
@@ -148,6 +149,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   auto tri2_m = m.def_submodule("Tri2");
   export_triangulation_2(tri2_m);
+  export_tri2_plain(tri2_m);
 
 #if (CGALPY_TRI2 == CGALPY_TRI2_REGULAR)
   export_tri2_regular(tri2_m);
