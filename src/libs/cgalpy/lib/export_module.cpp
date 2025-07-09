@@ -158,9 +158,9 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
   export_tri2_constrained(tri2_m);
 #elif (CGALPY_TRI2 == CGALPY_TRI2_DELAUNAY)
-  export_tri2_constrained_delaunay(tri2_m);
-#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY)
   export_tri2_delaunay(tri2_m);
+#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY)
+  export_tri2_constrained_delaunay(tri2_m);
 #endif
 
 #endif
