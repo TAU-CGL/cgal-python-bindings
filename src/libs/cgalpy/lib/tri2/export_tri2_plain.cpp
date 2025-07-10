@@ -912,7 +912,7 @@ void export_tri2_plain(py::module_& m) {
   export_tri2_face(tri_c);
 
   py::class_<Edge>(tri_c, "Edge")
-    // .def("face", [](Edge& e)->tri2::Face& { return *(e.first); } , ri)
+    .def("face", [](Edge& e)->tri2::Face& { return *(e.first); } , ri)
     .def_rw("index", &Edge::second)
     ;
 
