@@ -13,7 +13,8 @@
 #include <boost/iterator/function_output_iterator.hpp>
 
 #include <nanobind/nanobind.h>
-#include <nanobind/stl/array.h>
+// Do not include pair.h; if you must, you will need to fix the bindings of Facet (which is a pair...)
+// #include <nanobind/stl/pair.h>
 #include <nanobind/stl/tuple.h>
 
 #ifdef CGALPY_HAS_VISUAL

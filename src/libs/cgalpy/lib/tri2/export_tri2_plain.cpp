@@ -7,10 +7,13 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#define CGAL_USE_BASIC_VIEWER
+
 #include <iostream>
 
 #include <nanobind/nanobind.h>
-#include <nanobind/stl/pair.h>
+// Do not include pair.h; if you must, you will need to fix the bindings of Edge (which is a pair...)
+// #include <nanobind/stl/pair.h>
 #include <nanobind/stl/tuple.h>
 
 #ifdef CGALPY_HAS_VISUAL
@@ -908,10 +911,10 @@ void export_tri2_plain(py::module_& m) {
   export_tri2_vertex(tri_c);
   export_tri2_face(tri_c);
 
-  // py::class_<tri2::Edge>(tri_c, "Edge")
-  //   .def_readwrite("first", &tri2::Edge::first)
-  //   .def_readwrite("second", &tri2::Edge::second)
-  //   ;
+  py::class_<Edge>(tri_c, "Edge")
+    // .def("face", [](Edge& e)->tri2::Face& { return *(e.first); } , ri)
+    .def_rw("index", &Edge::second)
+    ;
 
 #ifdef CGALPY_HAS_VISUAL
   m.def("draw",
