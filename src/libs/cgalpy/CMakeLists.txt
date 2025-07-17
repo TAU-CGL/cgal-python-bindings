@@ -400,6 +400,12 @@ if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
     list(APPEND CGALPY_MODULES Ss)
     set(CGALPY_Ss_FILTERS [=[{}]=])
 endif ()
+# Spatial sorting
+if (CGALPY_SPATIAL_SORTING_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_sorting_bindings.cpp)
+    list(APPEND CGALPY_MODULES St)
+    set(CGALPY_St_FILTERS [=[{}]=])
+endif ()
 # Surface mesh
 if (CGALPY_SURFACE_MESH_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/surface_mesh_bindings.cpp)
@@ -570,6 +576,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     # Spatial searching
     if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
         get_spatial_searching_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Spatial sorting
+    if (CGALPY_SPATIAL_SORTING_BINDINGS)
+        get_spatial_sorting_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
     # Surface mesh

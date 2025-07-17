@@ -70,6 +70,7 @@ void export_polygon_set_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
 void export_region_growing(py::module_&);
 void export_spatial_searching(py::module_&);
+void export_spatial_sorting(py::module_&);
 void export_surface_mesh(py::module_&);
 void export_surface_sweep_2(py::module_&);
 void export_tools(py::module_& m);
@@ -175,6 +176,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #if defined(CGALPY_SPATIAL_SEARCHING_BINDINGS)
   auto ss_m = m.def_submodule("Ss");
   export_spatial_searching(ss_m);
+#endif
+
+#if defined(CGALPY_SPATIAL_SORTING_BINDINGS)
+  auto st_m = m.def_submodule("St");
+  export_spatial_sorting(st_m);
 #endif
 
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
