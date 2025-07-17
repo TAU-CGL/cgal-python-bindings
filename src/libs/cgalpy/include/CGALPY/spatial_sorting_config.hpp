@@ -10,6 +10,7 @@
 #define CGALPY_SPATIAL_SORTING_CONFIG_HPP
 
 #include <CGAL/tags.h>
+#include <CGAL/Hilbert_policy_tags.h>
 
 #include "CGALPY/spatial_sorting_values.hpp"
 
@@ -19,5 +20,12 @@ template <> struct Concurrency<CGALPY_ST_CONCURRENCY_SEQUENTIAL>
 { using type = CGAL::Sequential_tag; };
 template <> struct Concurrency<CGALPY_ST_CONCURRENCY_PARALLEL>
 { using type = CGAL::Parallel_tag; };
+
+// Policy
+template <int i> struct Policy {};
+template <> struct Policy<CGALPY_ST_POLICY_HILBERT_SORT_MEDIAN>
+{ using type = CGAL::Hilbert_sort_median_policy; };
+template <> struct Policy<CGALPY_ST_POLICY_HILBERT_SORT_MIDDLE>
+{ using type = CGAL::Hilbert_sort_middle_policy; };
 
 #endif

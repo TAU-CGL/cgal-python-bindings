@@ -12,4 +12,7 @@
 #define CGALPY_ST_CONCURRENCY_SEQUENTIAL                0
 #define CGALPY_ST_CONCURRENCY_PARALLEL                  1
 
+#define CGALPY_ST_POLICY_HILBERT_SORT_MEDIAN            0
+#define CGALPY_ST_POLICY_HILBERT_SORT_MIDDLE            1
+
 #endif

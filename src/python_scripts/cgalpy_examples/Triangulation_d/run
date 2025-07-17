@@ -1,3 +1,6 @@
 triangulation_data_structure_dynamic.py CGALPY_kerEpic_kerdEpicdDyn_tridPlainDefDyn
 delaunay_triangulation.py CGALPY_kerEpic_kerdEpicd7_tridDelDef7
-convex_hull.py CGALPY_kerEpic_kerdEpicd4_tridDelDef4 CGALPY_kerEpic_kerdEpicd4_gog
+convex_hull.py \
+  CGALPY_kerEpic_kerdEpicd4_tridDelDef4 \
+  CGALPY_kerEpic_kerdEpicd4_gog \
+  CGALPY_kerEpic_kerdEpicd4_stSeqHsmed

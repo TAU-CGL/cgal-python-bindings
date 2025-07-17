@@ -12,7 +12,16 @@ SET(CGALPY_ST_CONCURRENCY ${CGALPY_ST_CONCURRENCY_SEQUENTIAL} CACHE INTERNAL "")
 SET(CGALPY_ST_CONCURRENCY_NAME "sequential" CACHE STRING "The Spatial Sorting concurrency tag")
 set_property(CACHE CGALPY_ST_CONCURRENCY_NAME PROPERTY STRINGS sequential parallel)
 
-# PolicyTag: Hilbert_sort_median_policy, Hilbert_sort_middle_policy
+# Spatial Sorting policy
+set(CGALPY_ST_POLICY_HILBERT_SORT_MEDIAN 0)
+set(CGALPY_ST_POLICY_HILBERT_SORT_MIDDLE 1)
+
+set(CGALPY_ST_POLICY_SHORT_NAMES hsmed hsmid)
+set(CGALPY_ST_POLICY_NAMES hilbert_sort_median hilbert_sort_middle)
+# Default
+SET(CGALPY_ST_POLICY ${CGALPY_ST_POLICY_HILBERT_SORT_MEDIAN} CACHE INTERNAL "")
+SET(CGALPY_ST_POLICY_NAME "hilbert_sort_median" CACHE STRING "The Spatial Sorting policy")
+set_property(CACHE CGALPY_ST_POLICY_NAME PROPERTY STRINGS hilbert_sort_median hilbert_sort_middle)
 
 # Selection
 function(select_st_concurrency)
@@ -25,9 +34,19 @@ function(select_st_concurrency)
   add_definitions(-DCGALPY_ST_CONCURRENCY=${CGALPY_ST_CONCURRENCY})
 endfunction()
 
+function(select_st_policy)
+  if     ("${CGALPY_ST_POLICY_NAME}" STREQUAL "hilbert_sort_median")
+    set(CGALPY_ST_POLICY ${CGALPY_ST_POLICY_HILBERT_SORT_MEDIAN} CACHE INTERNAL "")
+  elseif ("${CGALPY_ST_POLICY_NAME}" STREQUAL "hilbert_sort_middle")
+    set(CGALPY_ST_POLICY ${CGALPY_ST_POLICY_HILBERT_SORT_MIDDLE} CACHE INTERNAL "")
+  endif()
+  add_definitions(-DCGALPY_ST_POLICY=${CGALPY_ST_POLICY})
+endfunction()
+
 function (select_spatial_sorting)
   if (${CGALPY_SPATIAL_SORTING_BINDINGS})
     select_st_concurrency()
+    select_st_policy()
     add_definitions(-DCGALPY_SPATIAL_SORTING_BINDINGS=)
   endif ()
 endfunction ()
@@ -36,7 +55,9 @@ function (get_spatial_sorting_lib_name ret)
   # "ss" is taken by Spatial Searching; instead we use "st"
   list(GET CGALPY_ST_CONCURRENCY_SHORT_NAMES ${CGALPY_ST_CONCURRENCY} part1)
   capitalize_first(part1)
-  set (${ret} "st${part1}" PARENT_SCOPE)
+  list(GET CGALPY_ST_POLICY_SHORT_NAMES ${CGALPY_ST_POLICY} part2)
+  capitalize_first(part2)
+  set (${ret} "st${part1}${part2}" PARENT_SCOPE)
 endfunction ()
 
 endif ()
