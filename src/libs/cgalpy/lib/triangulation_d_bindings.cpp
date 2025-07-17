@@ -16,7 +16,7 @@
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/triangulation_d_types.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/stl_dereference_input_iterator.hpp"
+#include "CGALPY/stl_dereference_forward_iterator.hpp"
 #include "CGALPY/types.hpp"
 
 namespace py = nanobind;
@@ -100,8 +100,8 @@ void remove_decrease_dimension(Triangulation_ds& tds, Vertex& v1, Vertex& v2)
 
 //!
 Vertex& tds_insert_in_hole(Triangulation_ds& tds, py::list& full_cells, const Facet f) {
-  auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
-  auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
+  auto begin = stl_dereference_forward_iterator<Full_cell_handle>(full_cells);
+  auto end = stl_dereference_forward_iterator<Full_cell_handle>(full_cells, false);
   return *(tds.insert_in_hole(begin, end, f));
 }
 
@@ -110,8 +110,8 @@ py::list tds_insert_in_hole_get_full_cells(Triangulation_ds& tds, py::list& full
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
-  auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
+  auto begin = stl_dereference_forward_iterator<Full_cell_handle>(full_cells);
+  auto end = stl_dereference_forward_iterator<Full_cell_handle>(full_cells, false);
   py::list final_res;
   final_res.append(*(tds.insert_in_hole(begin, end, f, it)));
   final_res.append(res);
@@ -146,8 +146,8 @@ void delete_full_cell(Triangulation_ds& tds, Full_cell& fc)
 
 //!
 void delete_full_cells(Triangulation_ds& tds, py::list& full_cells) {
-  auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
-  auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
+  auto begin = stl_dereference_forward_iterator<Full_cell_handle>(full_cells);
+  auto end = stl_dereference_forward_iterator<Full_cell_handle>(full_cells, false);
   tds.delete_full_cells(begin, end);
 }
 
@@ -260,8 +260,8 @@ py::list insert_in_hole(Triangulation_d& tri, const Point& p, py::list& full_cel
   py::list res;
   auto op = [&] (const Full_cell_handle& c) mutable { res.append(&c); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
-  auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
+  auto begin = stl_dereference_forward_iterator<Full_cell_handle>(full_cells);
+  auto end = stl_dereference_forward_iterator<Full_cell_handle>(full_cells, false);
   py::list final_res;
   final_res.append(*(tri.insert_in_hole(p, begin, end, ft, it)));
   final_res.append(res);
@@ -270,8 +270,8 @@ py::list insert_in_hole(Triangulation_d& tri, const Point& p, py::list& full_cel
 
 //!
 Vertex& insert_in_hole_get_full_cells(Triangulation_d& tri, const Point& p, py::list& full_cells, const Facet& ft) {
-  auto begin = stl_dereference_input_iterator<Full_cell_handle>(full_cells);
-  auto end = stl_dereference_input_iterator<Full_cell_handle>(full_cells, false);
+  auto begin = stl_dereference_forward_iterator<Full_cell_handle>(full_cells);
+  auto end = stl_dereference_forward_iterator<Full_cell_handle>(full_cells, false);
   return *(tri.insert_in_hole(p, begin, end, ft));
 }
 
@@ -468,8 +468,8 @@ auto insert_if_in_star4(Regular_triangulation_d& rtri, const Weighted_point& p, 
 
 //!
 void remove1(Delaunay_triangulation_d& dtri, py::list vertices) {
-  auto begin = stl_dereference_input_iterator<Vertex_handle>(vertices);
-  auto end = stl_dereference_input_iterator<Vertex_handle>(vertices, false);
+  auto begin = stl_dereference_forward_iterator<Vertex_handle>(vertices);
+  auto end = stl_dereference_forward_iterator<Vertex_handle>(vertices, false);
   dtri.remove(begin, end);
 }
 

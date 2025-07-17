@@ -29,7 +29,7 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_dereference_input_iterator.hpp"
+#include "CGALPY/stl_dereference_forward_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/types.hpp"
@@ -156,16 +156,16 @@ Vertex& insert_in_facet(Triangulation_3& tri, const Point& p, const Facet& f) {
 
 //!
 Vertex& insert_in_hole1(Triangulation_3& tri, const Point& p, py::list& cells, Cell& start, int i) {
-  auto begin = stl_dereference_input_iterator<Cell_handle, Cell>(cells);
-  auto end = stl_dereference_input_iterator<Cell_handle, Cell>(cells, false);
+  auto begin = stl_dereference_forward_iterator<Cell_handle, Cell>(cells);
+  auto end = stl_dereference_forward_iterator<Cell_handle, Cell>(cells, false);
   auto vh = tri.insert_in_hole(p, begin, end, Cell_handle(&start), i);
   return *vh;
 }
 
 //!
 Vertex& insert_in_hole2(Triangulation_3& tri, const Point& p, py::list& cells, Cell& start, int i, Vertex& newv) {
-  auto begin = stl_dereference_input_iterator<Cell_handle>(cells);
-  auto end = stl_dereference_input_iterator<Cell_handle>(cells, false);
+  auto begin = stl_dereference_forward_iterator<Cell_handle>(cells);
+  auto end = stl_dereference_forward_iterator<Cell_handle>(cells, false);
   auto vh = tri.insert_in_hole(p, begin, end, Cell_handle(&start), i, Vertex_handle(&newv));
   return *vh;
 }

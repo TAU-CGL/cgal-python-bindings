@@ -26,7 +26,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_dereference_input_iterator.hpp"
+#include "CGALPY/stl_dereference_forward_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
 #include "CGALPY/types.hpp"
@@ -278,8 +278,8 @@ Vertex& star_hole1(Triangulation_2& tri, const Point& p, py::list& edges) {
 Vertex& star_hole2(Triangulation_2& tri, const Point& p, py::list& edges, py::list& faces) {
   auto edges_begin = stl_forward_iterator<Edge>(edges);
   auto edges_end = stl_forward_iterator<Edge>(edges, false);
-  auto faces_begin = stl_dereference_input_iterator<Face_handle>(faces);
-  auto faces_end = stl_dereference_input_iterator<Face_handle>(faces, false);
+  auto faces_begin = stl_dereference_forward_iterator<Face_handle>(faces);
+  auto faces_end = stl_dereference_forward_iterator<Face_handle>(faces, false);
   return *(tri.star_hole(p, edges_begin, edges_end, faces_begin, faces_end));
 }
 
