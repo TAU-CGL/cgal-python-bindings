@@ -13,14 +13,14 @@
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace kerd {
 
 //!
 void init_vector_d(Vector_d* pd, int d, py::list& lst) {
-  auto begin = stl_input_iterator<FT_d>(lst);
-  auto end = stl_input_iterator<FT_d>(lst, false);
+  auto begin = stl_forward_iterator<FT_d>(lst);
+  auto end = stl_forward_iterator<FT_d>(lst, false);
   new (pd) Vector_d(d, begin, end);              // placement new
 }
 

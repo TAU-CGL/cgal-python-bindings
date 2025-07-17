@@ -11,7 +11,7 @@
 #include <nanobind/operators.h>
 
 #include "CGALPY/polygon_2_types.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
@@ -32,8 +32,8 @@ Point_2& bottom_vertex(Polygon_2& pgn) { return *(pgn.bottom_vertex()); }
 
 // Initialize a polygon from a list of vertices.
 void init_polygon_2(Polygon_2* pgn, py::list& lst) {
-  auto begin = stl_input_iterator<Point_2>(lst);
-  auto end = stl_input_iterator<Point_2>(lst, false);
+  auto begin = stl_forward_iterator<Point_2>(lst);
+  auto end = stl_forward_iterator<Point_2>(lst, false);
   new (pgn) Polygon_2(begin, end);      // placement new
 }
 

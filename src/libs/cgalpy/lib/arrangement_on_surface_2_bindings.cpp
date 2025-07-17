@@ -34,7 +34,7 @@
 #include "CGALPY/Arr_overlay_traits.hpp"
 #include "CGALPY/Arr_overlay_function_traits.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
@@ -153,16 +153,16 @@ void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
   using Gt = Arrangement_on_surface_2::Geometry_traits_2;
   using Xcv = Gt::X_monotone_curve_2;
   if (py::isinstance<Xcv>(lst[0])) {
-    auto begin = stl_input_iterator<Xcv>(lst);
-    auto end = stl_input_iterator<Xcv>(lst, false);
+    auto begin = stl_forward_iterator<Xcv>(lst);
+    auto end = stl_forward_iterator<Xcv>(lst, false);
     CGAL::insert(arr, begin, end);
     return;
   }
 
   using Cv = Gt::Curve_2;
   if (py::isinstance<Cv>(lst[0])) {
-    auto begin = stl_input_iterator<const Cv&>(lst);
-    auto end = stl_input_iterator<const Cv&>(lst, false);
+    auto begin = stl_forward_iterator<const Cv&>(lst);
+    auto end = stl_forward_iterator<const Cv&>(lst, false);
     CGAL::insert(arr, begin, end);
     return;
   }
@@ -480,8 +480,8 @@ void insert_curves_with_history(Arrangement_on_surface_with_history_2& arr,
   using Gt = Arrangement_on_surface_with_history_2::Geometry_traits_2;
   using Cv = Gt::Curve_2;
   if (py::isinstance<Cv>(lst[0])) {
-    auto begin = stl_input_iterator<const Cv&>(lst);
-    auto end = stl_input_iterator<const Cv&>(lst, false);
+    auto begin = stl_forward_iterator<const Cv&>(lst);
+    auto end = stl_forward_iterator<const Cv&>(lst, false);
     CGAL::insert(arr, begin, end);
     return;
   }
@@ -588,8 +588,8 @@ Halfedge& insert_ni_cv(Arrangement_on_surface_2& arr,
  *       interiors.
  */
 void insert_ni_cvs(Arrangement_on_surface_2& arr, py::list& lst) {
-  auto begin = stl_input_iterator<X_monotone_curve_2>(lst);
-  auto end = stl_input_iterator<X_monotone_curve_2>(lst, false);
+  auto begin = stl_forward_iterator<X_monotone_curve_2>(lst);
+  auto end = stl_forward_iterator<X_monotone_curve_2>(lst, false);
   CGAL::insert_non_intersecting_curves(arr, begin, end);
 }
 

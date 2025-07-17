@@ -9,7 +9,7 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
 
 namespace py = nanobind;
@@ -18,8 +18,8 @@ namespace tri2 {
 
 //!
 void dt2_init(tri2::Delaunay_triangulation_2* tri, py::list& lst) {
-  auto begin = stl_input_iterator<tri2::Point>(lst);
-  auto end = stl_input_iterator<tri2::Point>(lst, false);
+  auto begin = stl_forward_iterator<tri2::Point>(lst);
+  auto end = stl_forward_iterator<tri2::Point>(lst, false);
   new (tri) tri2::Delaunay_triangulation_2(begin, end);  // placement new
 }
 

@@ -15,7 +15,7 @@
 #endif
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/spatial_sorting_types.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -23,8 +23,8 @@ namespace st {
 
 // //!
 void spatial_sort_2(py::list& points) {
-  auto begin = stl_input_iterator<Point_2>(points);
-  auto end = stl_input_iterator<Point_2>(points, false);
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
 #if 1
   std::vector<Point_2> v(begin, end);
   CGAL::spatial_sort<Concurrency>(v.begin(), v.end());
@@ -35,8 +35,8 @@ void spatial_sort_2(py::list& points) {
 
 // //!
 // void spatial_sort_3(py::list& points) {
-//   auto begin = stl_input_iterator<Point_3>(points);
-//   auto end = stl_input_iterator<Point_3>(points, false);
+//   auto begin = stl_forward_iterator<Point_3>(points);
+//   auto end = stl_forward_iterator<Point_3>(points, false);
 //   CGAL::spatial_sort<Concurrency>(begin, end);
 // }
 
@@ -44,8 +44,8 @@ void spatial_sort_2(py::list& points) {
 
 // //!
 // void spatial_sort_d(py::list& points) {
-//   auto begin = stl_input_iterator<Point_d>(points);
-//   auto end = stl_input_iterator<Point_d>(points, false);
+//   auto begin = stl_forward_iterator<Point_d>(points);
+//   auto end = stl_forward_iterator<Point_d>(points, false);
 //   CGAL::spatial_sort<Concurrency>(begin, end);
 // }
 

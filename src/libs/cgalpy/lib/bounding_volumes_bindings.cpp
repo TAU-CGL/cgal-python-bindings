@@ -16,7 +16,7 @@
 #include "CGALPY/bounding_volumes_config.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/add_insertion.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -25,14 +25,14 @@ using Optimisation_circle_2 = typename Min_circle_2_traits_2::Circle;
 using Min_circle_2 = typename CGAL::Min_circle_2<Min_circle_2_traits_2>;
 
 void init_min_circle_2_from_list(Min_circle_2* mc, py::list& lst, bool random) {
-  auto begin = stl_input_iterator<Point_2>(lst);
-  auto end = stl_input_iterator<Point_2>(lst, false);
+  auto begin = stl_forward_iterator<Point_2>(lst);
+  auto end = stl_forward_iterator<Point_2>(lst, false);
   new (mc) Min_circle_2(begin, end, random);    // placement new
 }
 
 void insert_list(Min_circle_2& mc, py::list& lst) {
-  auto begin = stl_input_iterator<Point_2>(lst);
-  auto end = stl_input_iterator<Point_2>(lst, false);
+  auto begin = stl_forward_iterator<Point_2>(lst);
+  auto end = stl_forward_iterator<Point_2>(lst, false);
   mc.insert(begin, end);
 }
 

@@ -15,15 +15,15 @@
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace kerd {
 
 // #if CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_STATIC
 
 // void init_point_d(Point_d* pd, py::list& lst) {
-//   auto begin = stl_input_iterator<FT_d>(lst);
-//   auto end = stl_input_iterator<FT_d>(lst, false);
+//   auto begin = stl_forward_iterator<FT_d>(lst);
+//   auto end = stl_forward_iterator<FT_d>(lst, false);
 // #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
 //      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
 //   new (pd) Point_d(begin, end);              // placement new
@@ -37,8 +37,8 @@ namespace kerd {
 // #else
 
 // void init_point_d(Point_d* pd, int d, py::list& lst) {
-//   auto begin = stl_input_iterator<FT_d>(lst);
-//   auto end = stl_input_iterator<FT_d>(lst, false);
+//   auto begin = stl_forward_iterator<FT_d>(lst);
+//   auto end = stl_forward_iterator<FT_d>(lst, false);
 // #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
 //      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
 //   new (pd) Point_d(d, begin, end);              // placement new
@@ -53,8 +53,8 @@ namespace kerd {
 
 //!
 void init_point_d(Point_d* pd, int d, py::list& lst) {
-  auto begin = stl_input_iterator<FT_d>(lst);
-  auto end = stl_input_iterator<FT_d>(lst, false);
+  auto begin = stl_forward_iterator<FT_d>(lst);
+  auto end = stl_forward_iterator<FT_d>(lst, false);
   new (pd) Point_d(d, begin, end);              // placement new
 }
 

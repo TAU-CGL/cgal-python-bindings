@@ -15,7 +15,7 @@
 #include "CGALPY/general_polygon_set_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/append_iterator.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
 
@@ -42,10 +42,10 @@ py::list polygons_with_holes(Gps_on_surface_base_2& ps) {
 void insert1(Gps_on_surface_base_2& ps, py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
-  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
-  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
-  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  auto begin0 = stl_forward_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_forward_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_forward_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_forward_iterator<Pwh>(pwh_lst, false);
   ps.insert(begin0, end0, begin1, end1);
 }
 
@@ -54,16 +54,16 @@ void insert2(Gps_on_surface_base_2& ps, py::list& lst) {
   if (lst.size() == 0) return;
   using Pgn = General_polygon_2;
   if (py::isinstance<Pgn>(lst[0])) {
-    auto begin = stl_input_iterator<Pgn>(lst);
-    auto end = stl_input_iterator<Pgn>(lst, false);
+    auto begin = stl_forward_iterator<Pgn>(lst);
+    auto end = stl_forward_iterator<Pgn>(lst, false);
     ps.insert(begin, end);
     return;
   }
 
   using Pwh = General_polygon_with_holes_2;
   if (py::isinstance<Pwh>(lst[0])) {
-    auto begin = stl_input_iterator<Pwh>(lst);
-    auto end = stl_input_iterator<Pwh>(lst, false);
+    auto begin = stl_forward_iterator<Pwh>(lst);
+    auto end = stl_forward_iterator<Pwh>(lst, false);
     ps.insert(begin, end);
     return;
   }
@@ -76,10 +76,10 @@ void intersection1(Gps_on_surface_base_2& ps,
                    py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
-  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
-  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
-  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  auto begin0 = stl_forward_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_forward_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_forward_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_forward_iterator<Pwh>(pwh_lst, false);
   ps.intersection(begin0, end0, begin1, end1);
 }
 
@@ -88,16 +88,16 @@ void intersection2(Gps_on_surface_base_2& ps, py::list& lst) {
   if (lst.size() == 0) return;
   using Pgn = General_polygon_2;
   if (py::isinstance<Pgn>(lst[0])) {
-    auto begin = stl_input_iterator<Pgn>(lst);
-    auto end = stl_input_iterator<Pgn>(lst, false);
+    auto begin = stl_forward_iterator<Pgn>(lst);
+    auto end = stl_forward_iterator<Pgn>(lst, false);
     ps.intersection(begin, end);
     return;
   }
 
   using Pwh = General_polygon_with_holes_2;
   if (py::isinstance<Pwh>(lst[0])) {
-    auto begin = stl_input_iterator<Pwh>(lst);
-    auto end = stl_input_iterator<Pwh>(lst, false);
+    auto begin = stl_forward_iterator<Pwh>(lst);
+    auto end = stl_forward_iterator<Pwh>(lst, false);
     ps.intersection(begin, end);
     return;
   }
@@ -109,10 +109,10 @@ void intersection2(Gps_on_surface_base_2& ps, py::list& lst) {
 void join1(Gps_on_surface_base_2& ps, py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
-  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
-  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
-  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  auto begin0 = stl_forward_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_forward_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_forward_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_forward_iterator<Pwh>(pwh_lst, false);
   ps.join(begin0, end0, begin1, end1);
 }
 
@@ -121,16 +121,16 @@ void join2(Gps_on_surface_base_2& ps, py::list& lst) {
   if (lst.size() == 0) return;
   using Pgn = General_polygon_2;
   if (py::isinstance<Pgn>(lst[0])) {
-    auto begin = stl_input_iterator<Pgn>(lst);
-    auto end = stl_input_iterator<Pgn>(lst, false);
+    auto begin = stl_forward_iterator<Pgn>(lst);
+    auto end = stl_forward_iterator<Pgn>(lst, false);
     ps.join(begin, end);
     return;
   }
 
   using Pwh = General_polygon_with_holes_2;
   if (py::isinstance<Pwh>(lst[0])) {
-    auto begin = stl_input_iterator<Pwh>(lst);
-    auto end = stl_input_iterator<Pwh>(lst, false);
+    auto begin = stl_forward_iterator<Pwh>(lst);
+    auto end = stl_forward_iterator<Pwh>(lst, false);
     ps.join(begin, end);
     return;
   }
@@ -143,10 +143,10 @@ void symmetric_difference1(Gps_on_surface_base_2& ps,
                            py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
-  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
-  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
-  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  auto begin0 = stl_forward_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_forward_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_forward_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_forward_iterator<Pwh>(pwh_lst, false);
   ps.symmetric_difference(begin0, end0, begin1, end1);
 }
 
@@ -155,15 +155,15 @@ void symmetric_difference2(Gps_on_surface_base_2& ps, py::list& lst) {
   if (lst.size() == 0) return;
   using Pgn = General_polygon_2;
   if (py::isinstance<Pgn>(lst[0])) {
-    auto begin = stl_input_iterator<Pgn>(lst);
-    auto end = stl_input_iterator<Pgn>(lst, false);
+    auto begin = stl_forward_iterator<Pgn>(lst);
+    auto end = stl_forward_iterator<Pgn>(lst, false);
     return ps.symmetric_difference(begin, end);
   }
 
   using Pwh = General_polygon_with_holes_2;
   if (py::isinstance<Pwh>(lst[0])) {
-    auto begin = stl_input_iterator<Pwh>(lst);
-    auto end = stl_input_iterator<Pwh>(lst, false);
+    auto begin = stl_forward_iterator<Pwh>(lst);
+    auto end = stl_forward_iterator<Pwh>(lst, false);
     return ps.symmetric_difference(begin, end);
   }
 
@@ -175,10 +175,10 @@ bool do_intersect1(Gps_on_surface_base_2& ps,
                    py::list& pgn_lst, py::list& pwh_lst) {
   using Pgn = General_polygon_2;
   using Pwh = General_polygon_with_holes_2;
-  auto begin0 = stl_input_iterator<Pgn>(pgn_lst);
-  auto end0 = stl_input_iterator<Pgn>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<Pwh>(pwh_lst);
-  auto end1 = stl_input_iterator<Pwh>(pwh_lst, false);
+  auto begin0 = stl_forward_iterator<Pgn>(pgn_lst);
+  auto end0 = stl_forward_iterator<Pgn>(pgn_lst, false);
+  auto begin1 = stl_forward_iterator<Pwh>(pwh_lst);
+  auto end1 = stl_forward_iterator<Pwh>(pwh_lst, false);
   return ps.do_intersect(begin0, end0, begin1, end1);
 }
 
@@ -187,15 +187,15 @@ bool do_intersect2(Gps_on_surface_base_2& ps, py::list& lst) {
   if (lst.size() == 0) return false;
   using Pgn = General_polygon_2;
   if (py::isinstance<Pgn>(lst[0])) {
-    auto begin = stl_input_iterator<Pgn>(lst);
-    auto end = stl_input_iterator<Pgn>(lst, false);
+    auto begin = stl_forward_iterator<Pgn>(lst);
+    auto end = stl_forward_iterator<Pgn>(lst, false);
     return ps.do_intersect(begin, end);
   }
 
   using Pwh = General_polygon_with_holes_2;
   if (py::isinstance<Pwh>(lst[0])) {
-    auto begin = stl_input_iterator<Pwh>(lst);
-    auto end = stl_input_iterator<Pwh>(lst, false);
+    auto begin = stl_forward_iterator<Pwh>(lst);
+    auto end = stl_forward_iterator<Pwh>(lst, false);
     return ps.do_intersect(begin, end);
   }
 

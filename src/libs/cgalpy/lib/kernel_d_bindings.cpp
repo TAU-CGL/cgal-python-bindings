@@ -18,7 +18,7 @@
 #include "CGALPY/config.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/kernel_d_types.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;

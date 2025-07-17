@@ -27,7 +27,7 @@
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -36,8 +36,8 @@ typename Traits_::Curve_2
 ctr_cv(const typename Traits_::Construct_curve_2& ctr, py::list& lst) {
   using Pnt = typename Traits_::Point_2;
   if (py::isinstance<Pnt>(lst[0])) {
-    auto begin = stl_input_iterator<Pnt>(lst);
-    auto end = stl_input_iterator<Pnt>(lst, false);
+    auto begin = stl_forward_iterator<Pnt>(lst);
+    auto end = stl_forward_iterator<Pnt>(lst, false);
     //! \todo For some reason this doesn't work together with the zip iterator
     // used in ctr(begin, end)
     // return ctr(begin, end);
@@ -49,8 +49,8 @@ ctr_cv(const typename Traits_::Construct_curve_2& ctr, py::list& lst) {
 
   using Seg = typename Traits_::Segment_2;
   if (py::isinstance<Seg>(lst[0])) {
-    auto begin = stl_input_iterator<Seg>(lst);
-    auto end = stl_input_iterator<Seg>(lst, false);
+    auto begin = stl_forward_iterator<Seg>(lst);
+    auto end = stl_forward_iterator<Seg>(lst, false);
     return ctr(begin, end);
   }
 

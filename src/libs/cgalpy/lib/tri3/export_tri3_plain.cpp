@@ -30,7 +30,7 @@
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_dereference_input_iterator.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/types.hpp"
 
@@ -92,8 +92,8 @@ auto has_vertex4(const Triangulation_3& tri, Cell& c, int i, Vertex& v) {
 
 //!
 void tri3_init(tri3::Triangulation_3* tri, py::list& lst) {
-  auto begin = stl_input_iterator<tri3::Point>(lst);
-  auto end = stl_input_iterator<tri3::Point>(lst, false);
+  auto begin = stl_forward_iterator<tri3::Point>(lst);
+  auto end = stl_forward_iterator<tri3::Point>(lst, false);
   new (tri) tri3::Triangulation_3(begin, end);  // placement new
 }
 
@@ -101,8 +101,8 @@ void tri3_init(tri3::Triangulation_3* tri, py::list& lst) {
 auto insert_points(Triangulation_3& tri, py::list& lst) {
   if (! lst) return 0l;
   if (! py::isinstance<tri3::Point>(lst[0])) return 0l;
-  auto begin = stl_input_iterator<tri3::Point>(lst);
-  auto end = stl_input_iterator<tri3::Point>(lst, false);
+  auto begin = stl_forward_iterator<tri3::Point>(lst);
+  auto end = stl_forward_iterator<tri3::Point>(lst, false);
   return tri.insert(begin, end);
 }
 

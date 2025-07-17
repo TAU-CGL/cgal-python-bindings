@@ -23,7 +23,7 @@
 #include "CGALPY/General_distance_python.hpp"
 #include "CGALPY/append_iterator.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -52,16 +52,16 @@ static T* init_tree() { return new T(); }
 template <typename T>
 void init_tree_from_list(T* tree, const py::list& lst) {
   using Pntd = typename T::Point_d;
-  auto begin = stl_input_iterator<Pntd>(lst);
-  auto end = stl_input_iterator<Pntd>(lst, false);
+  auto begin = stl_forward_iterator<Pntd>(lst);
+  auto end = stl_forward_iterator<Pntd>(lst, false);
   new (tree) T(begin, end);     // placement new
 }
 
 template <typename T>
 void tree_insert(T& tree, const py::list& lst) {
   using Pntd = typename T::Point_d;
-  auto begin = stl_input_iterator<Pntd>(lst);
-  auto end = stl_input_iterator<Pntd>(lst, false);
+  auto begin = stl_forward_iterator<Pntd>(lst);
+  auto end = stl_forward_iterator<Pntd>(lst, false);
   tree.insert(begin, end);
 }
 

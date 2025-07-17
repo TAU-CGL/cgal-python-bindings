@@ -10,7 +10,7 @@
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/convex_hull_3_types.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -18,8 +18,8 @@ namespace ch3 {
 
 //! convex_hull_3
 void convex_hull_3_impl(py::list& lst, ch3::Polygonal_mesh& pm) {
-  auto begin = stl_input_iterator<Point_3>(lst);
-  auto end = stl_input_iterator<Point_3>(lst, false);
+  auto begin = stl_forward_iterator<Point_3>(lst);
+  auto end = stl_forward_iterator<Point_3>(lst, false);
   CGAL::convex_hull_3(begin, end, pm);
 }
 
@@ -33,8 +33,8 @@ ch3::Polygonal_mesh convex_hull_3(py::list& lst) {
 //!
 void convex_hull_3_with_kernel_impl(py::list& lst, ch3::Polygonal_mesh& pm,
                                     const Kernel& kernel) {
-  auto begin = stl_input_iterator<Point_3>(lst);
-  auto end = stl_input_iterator<Point_3>(lst, false);
+  auto begin = stl_forward_iterator<Point_3>(lst);
+  auto end = stl_forward_iterator<Point_3>(lst, false);
   CGAL::convex_hull_3(begin, end, pm, kernel);
 }
 

@@ -20,7 +20,7 @@
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
 #include "CGALPY/append_iterator.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -50,10 +50,10 @@ bool do_intersect(T0& p0, T1& p1) { return CGAL::do_intersect(p0, p1); }
 //
 template<typename T0, typename T1>
 bool do_intersect_range(py::list& pgn_lst, py::list& pwh_lst) {
-  auto begin0 = stl_input_iterator<T0>(pgn_lst);
-  auto end0 = stl_input_iterator<T0>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<T1>(pwh_lst);
-  auto end1 = stl_input_iterator<T1>(pwh_lst, false);
+  auto begin0 = stl_forward_iterator<T0>(pgn_lst);
+  auto end0 = stl_forward_iterator<T0>(pgn_lst, false);
+  auto begin1 = stl_forward_iterator<T1>(pwh_lst);
+  auto end1 = stl_forward_iterator<T1>(pwh_lst, false);
   return do_intersect(begin0, end0, begin1, end1);
 }
 
@@ -78,10 +78,10 @@ py::list intersection_range(py::list& pgn_lst, py::list& pwh_lst) {
   py::list res;
   auto op = [&] (const T1& gpwh) mutable { res.append(gpwh); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  auto begin0 = stl_input_iterator<T0>(pgn_lst);
-  auto end0 = stl_input_iterator<T0>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<T1>(pwh_lst);
-  auto end1 = stl_input_iterator<T1>(pwh_lst, false);
+  auto begin0 = stl_forward_iterator<T0>(pgn_lst);
+  auto end0 = stl_forward_iterator<T0>(pgn_lst, false);
+  auto begin1 = stl_forward_iterator<T1>(pwh_lst);
+  auto end1 = stl_forward_iterator<T1>(pwh_lst, false);
   CGAL::intersection(begin0, end0, begin1, end1, it);
   return res;
 }
@@ -108,10 +108,10 @@ py::list join_range(py::list& pgn_lst, py::list& pwh_lst) {
   py::list res;
   auto op = [&] (const T1& gpwh) mutable { res.append(gpwh); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  auto begin0 = stl_input_iterator<T0>(pgn_lst);
-  auto end0 = stl_input_iterator<T0>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<T1>(pwh_lst);
-  auto end1 = stl_input_iterator<T1>(pwh_lst, false);
+  auto begin0 = stl_forward_iterator<T0>(pgn_lst);
+  auto end0 = stl_forward_iterator<T0>(pgn_lst, false);
+  auto begin1 = stl_forward_iterator<T1>(pwh_lst);
+  auto end1 = stl_forward_iterator<T1>(pwh_lst, false);
   CGAL::join(begin0, end0, begin1, end1, it);
   return res;
 }
@@ -134,10 +134,10 @@ py::list symmetric_difference_range(py::list& pgn_lst, py::list& pwh_lst) {
   py::list res;
   auto op = [&] (const Gpwh& gpwh) mutable { res.append(gpwh); };
   auto it = boost::make_function_output_iterator(std::ref(op));
-  auto begin0 = stl_input_iterator<T0>(pgn_lst);
-  auto end0 = stl_input_iterator<T0>(pgn_lst, false);
-  auto begin1 = stl_input_iterator<T1>(pwh_lst);
-  auto end1 = stl_input_iterator<T1>(pwh_lst, false);
+  auto begin0 = stl_forward_iterator<T0>(pgn_lst);
+  auto end0 = stl_forward_iterator<T0>(pgn_lst, false);
+  auto begin1 = stl_forward_iterator<T1>(pwh_lst);
+  auto end1 = stl_forward_iterator<T1>(pwh_lst, false);
   CGAL::symmetric_difference(begin0, end0, begin1, end1, it);
   return res;
 }

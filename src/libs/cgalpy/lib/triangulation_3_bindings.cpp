@@ -22,7 +22,7 @@
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_dereference_input_iterator.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/types.hpp"
 

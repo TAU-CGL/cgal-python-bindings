@@ -52,7 +52,7 @@
 #include "CGALPY/export_mesh_partitioning_operations.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/Property_map.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/surface_mesh_types.hpp"
 
 namespace py = nanobind;
