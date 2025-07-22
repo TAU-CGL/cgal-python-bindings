@@ -37,9 +37,11 @@ void export_vector_d(py::class_<Vector_d>& vecd_c) {
     .def("dimension", &Vecd::dimension)
     .def("cartesian", &Vecd::cartesian)
     .def("__getitem__", &Vecd::operator[])
-#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
+#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D) || (CGAL_VERSION_NR > 1060200000)
     .def(py::self == py::self)
     .def(py::self != py::self)
+#endif
+#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
     .def(py::self > py::self)
     .def(py::self < py::self)
     .def(py::self <= py::self)
