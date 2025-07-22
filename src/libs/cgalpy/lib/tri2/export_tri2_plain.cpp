@@ -408,16 +408,6 @@ py::object incident_vertices_iterator_1(const Triangulation_2& tri,
   return make_iterator(tri.incident_vertices(vh, fh), tri.incident_vertices(vh, fh));
 }
 
-//
-#if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
-     (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
-void insert_constraint(Triangulation_2& tri, const Vertex& va, const Vertex& vb) {
-  auto ha = Vertex_handle(const_cast<Vertex*>(&va));
-  auto hb = Vertex_handle(const_cast<Vertex*>(&vb));
-  tri.insert_constraint(ha, hb);
-}
-#endif
-
 } // End of namespace tri2
 
 //! Bindings for Triangulation_2
@@ -814,11 +804,6 @@ void export_tri2_plain(py::module_& m) {
     // operator=
     // operator<<
     // operator>>
-
-#if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
-     (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
-    .def("insert_constraint", &tri2::insert_constraint)
-#endif
     ;
 
   // line_walk
