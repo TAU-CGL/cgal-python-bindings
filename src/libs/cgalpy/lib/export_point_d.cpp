@@ -82,7 +82,7 @@ void export_point_d(py::class_<Point_d>& pntd_c) {
     ;
 
   using Cci = Kerd::Cartesian_const_iterator_d;
-#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D) || (CGAL_VERSION_NR > 1060200000)
+#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
   add_iterator<Cci, Cci, const FT_d&>("Cartesian_iterator", pntd_c);
 #else
   add_iterator<Cci, Cci, FT_d>("Cartesian_iterator", pntd_c);
