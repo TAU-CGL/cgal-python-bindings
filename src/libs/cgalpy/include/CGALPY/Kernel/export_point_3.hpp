@@ -12,12 +12,11 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 
+#include "CGALPY/add_extraction.hpp"
+#include "CGALPY/add_insertion.hpp"
 #include "CGALPY/config.hpp"
 #include "CGALPY/Hash_rational_point.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/kernel_config.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/add_extraction.hpp"
 
 namespace py = nanobind;
 
@@ -52,10 +51,8 @@ void export_point_3(C& c) {
     .def("cartesian", &Pnt::cartesian)
     .def("__getitem__", &Pnt::operator[])
     .def("dimension", &Pnt::dimension)
-    .def(py::self == py::self,
-         py::sig("def __eq__(self, arg: object, /) -> bool"))
-    .def(py::self != py::self,
-         py::sig("def __ne__(self, arg: object, /) -> bool"))
+    .def(py::self == py::self, py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self, py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self > py::self)
     .def(py::self < py::self)
     .def(py::self <= py::self)
@@ -69,18 +66,16 @@ void export_point_3(C& c) {
     // .setattr("__doc__", "Point_3") NB
     ;
 
-  if (! is_exact_ft()) {
-    c.def("cartesians", &cartesians_p3<Ker>, py::keep_alive<0, 1>());
+  c.def("cartesians", &cartesians_p3<Ker>, py::keep_alive<0, 1>());
 
-    using Cci = typename Ker::Cartesian_const_iterator_3;
+  using Cci = typename Ker::Cartesian_const_iterator_3;
 
-    // There might be a better (automatic) way to handle this instead of a hard-coded '#if'...
+  // There might be a better (automatic) way to handle this instead of a hard-coded '#if'...
 #if (CGALPY_KERNEL != CGALPY_KERNEL_EPEC)
-    add_iterator<Cci, Cci, const Ft&>("Cartesian_iterator", c);
+  add_iterator<Cci, Cci, const Ft&>("Cartesian_iterator", c);
 #else
-    add_iterator<Cci, Cci, Ft>("Cartesian_iterator", c);
+  add_iterator<Cci, Cci, Ft>("Cartesian_iterator", c);
 #endif
-  }
 
   add_insertion(c, "__str__");
   add_insertion(c, "__repr__");

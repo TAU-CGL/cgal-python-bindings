@@ -50,7 +50,14 @@ void export_vector_d(py::class_<Vector_d>& vecd_c) {
     ;
 
   using Cci = Kerd::Cartesian_const_iterator_d;
+
+  // There might be a better (automatic) way to handle this instead of a hard-coded '#if'...
+#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
   add_iterator<Cci, Cci, const FT_d&>("Cartesian_iterator", vecd_c);
+#else
+  add_iterator<Cci, Cci, FT_d>("Cartesian_iterator", vecd_c);
+#endif
+
   vecd_c.def("cartesians",
              [](const Vecd& v)
              { return make_iterator(v.cartesian_begin(), v.cartesian_end()); },

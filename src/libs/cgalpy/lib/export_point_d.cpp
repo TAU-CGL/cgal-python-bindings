@@ -82,6 +82,8 @@ void export_point_d(py::class_<Point_d>& pntd_c) {
     ;
 
   using Cci = Kerd::Cartesian_const_iterator_d;
+
+  // There might be a better (automatic) way to handle this instead of a hard-coded '#if'...
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
   add_iterator<Cci, Cci, const FT_d&>("Cartesian_iterator", pntd_c);
 #else
