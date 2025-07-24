@@ -73,7 +73,13 @@ void export_point_3(C& c) {
     c.def("cartesians", &cartesians_p3<Ker>, py::keep_alive<0, 1>());
 
     using Cci = typename Ker::Cartesian_const_iterator_3;
-    add_iterator<Cci, Cci>("Cartesian_iterator", c);
+
+    // There might be a better (automatic) way to handle this instead of a hard-coded '#if'...
+#if (CGALPY_KERNEL != CGALPY_KERNEL_EPEC)
+    add_iterator<Cci, Cci, const Ft&>("Cartesian_iterator", c);
+#else
+    add_iterator<Cci, Cci, Ft>("Cartesian_iterator", c);
+#endif
   }
 
   add_insertion(c, "__str__");
