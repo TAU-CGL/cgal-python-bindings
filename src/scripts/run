@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pip_cmd=pip3
+pip_cmd=pip
 pip_parms="install --user --force-reinstall --quiet"
 make_parms="-j4 --quiet --no-print-directory"
 whl_dirname="./src/libs/cgalpy/dist"
@@ -125,8 +125,8 @@ for elm in "${arr[@]}"; do
   whl=$whl_dirname'/'${prefix,,}_${whl_basename,,}-${suffix}
   echo "======== $dir ========"
   if [ "$clear" = true ] ; then
-    eval "(mkdir -p $dir && cd $dir && rm -rf CMakeCache.txt && $cmd && make $make_parms && pip3 $pip_parms $whl)"
+    eval "(mkdir -p $dir && cd $dir && rm -rf CMakeCache.txt && $cmd && make $make_parms && $pip_cmd $pip_parms $whl)"
   else
-    eval "(mkdir -p $dir && cd $dir && rm -rf CMakeCache.txt && $cmd && make $make_parms && pip3 $pip_parms $whl)"
+    eval "(mkdir -p $dir && cd $dir && rm -rf CMakeCache.txt && $cmd && make $make_parms && $pip_cmd $pip_parms $whl)"
   fi
 done
