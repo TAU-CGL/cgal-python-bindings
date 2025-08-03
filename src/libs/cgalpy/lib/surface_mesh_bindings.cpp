@@ -62,8 +62,7 @@ namespace sm {
 // Add a face from a list of vertices.
 template <typename SurfaceMesh>
 typename SurfaceMesh::Face_index
-add_face(SurfaceMesh& sm,
-         const std::vector<typename SurfaceMesh::Vertex_index>& lst) {
+add_face(SurfaceMesh& sm, const std::vector<typename SurfaceMesh::Vertex_index>& lst) {
   using Sm = SurfaceMesh;
   using Vi = typename Sm::Vertex_index;
 
@@ -72,26 +71,22 @@ add_face(SurfaceMesh& sm,
 
 //!
 template <typename SurfaceMesh>
-auto has_valid_index_v(const SurfaceMesh& sm,
-                       typename SurfaceMesh::Vertex_index& vi)
+auto has_valid_index_v(const SurfaceMesh& sm, typename SurfaceMesh::Vertex_index& vi)
 { return sm.is_valid(vi); }
 
 //!
 template <typename SurfaceMesh>
-auto has_valid_index_e(const SurfaceMesh& sm,
-                       typename SurfaceMesh::Edge_index& ei)
+auto has_valid_index_e(const SurfaceMesh& sm, typename SurfaceMesh::Edge_index& ei)
 { return sm.is_valid(ei); }
 
 //
 template <typename SurfaceMesh>
-auto has_valid_index_h(const SurfaceMesh& sm,
-                       typename SurfaceMesh::Halfedge_index& hi)
+auto has_valid_index_h(const SurfaceMesh& sm, typename SurfaceMesh::Halfedge_index& hi)
 { return sm.is_valid(hi); }
 
 //
 template <typename SurfaceMesh>
-auto has_valid_index_f(const SurfaceMesh& sm,
-                       typename SurfaceMesh::Face_index& fi)
+auto has_valid_index_f(const SurfaceMesh& sm, typename SurfaceMesh::Face_index& fi)
 { return sm.is_valid(fi); }
 
 //!
@@ -108,14 +103,12 @@ template <typename Dp, typename Mesh>
 void register_map_get(py::module_& m, const std::string& prop_name) {
   py::class_<Dp> prop(m, prop_name.c_str());
   prop.def(py::init<>());
-  m.def("get", &internal::get<Dp, Mesh>,
-        py::arg("property_map"), py::arg("sm"));
+  m.def("get", &internal::get<Dp, Mesh>, py::arg("property_map"), py::arg("sm"));
 }
 
 //!
 template <typename Pm, typename P>
-void edge_map(py::module_& m, const std::string& map_name,
-              const std::string& prop_name) {
+void edge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
   using dp = CGAL::dynamic_edge_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
@@ -127,8 +120,7 @@ void edge_map(py::module_& m, const std::string& map_name,
 
 //!
 template <typename Pm, typename P>
-void edge_bool_map(py::module_& m, const std::string& map_name,
-                   const std::string& prop_name) {
+void edge_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
   using dp = CGAL::dynamic_edge_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
@@ -141,8 +133,7 @@ void edge_bool_map(py::module_& m, const std::string& map_name,
 
 //!
 template <typename Pm, typename P>
-void face_map(py::module_& m, const std::string& map_name,
-              const std::string& prop_name) {
+void face_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Fd = typename boost::graph_traits<Pm>::face_descriptor;
   using dp = CGAL::dynamic_face_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
@@ -154,8 +145,7 @@ void face_map(py::module_& m, const std::string& map_name,
 
 //!
 template <typename Pm, typename P>
-void face_bool_map(py::module_& m, const std::string& map_name,
-                   const std::string& prop_name) {
+void face_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Fd = typename boost::graph_traits<Pm>::face_descriptor;
   using dp = CGAL::dynamic_face_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
@@ -168,8 +158,7 @@ void face_bool_map(py::module_& m, const std::string& map_name,
 
 //!
 template <typename Pm, typename P>
-void vertex_map(py::module_& m, const std::string& map_name,
-                const std::string& prop_name) {
+void vertex_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
   using dp = CGAL::dynamic_vertex_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
@@ -181,8 +170,7 @@ void vertex_map(py::module_& m, const std::string& map_name,
 
 //!
 template <typename Pm, typename P>
-void vertex_bool_map(py::module_& m, const std::string& map_name,
-                     const std::string& prop_name) {
+void vertex_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
   using dp = CGAL::dynamic_vertex_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
@@ -195,8 +183,7 @@ void vertex_bool_map(py::module_& m, const std::string& map_name,
 
 //!
 template <typename Pm, typename P>
-void halfedge_map(py::module_& m, const std::string& map_name,
-                  const std::string& prop_name) {
+void halfedge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
   using dp = CGAL::dynamic_halfedge_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
@@ -208,8 +195,7 @@ void halfedge_map(py::module_& m, const std::string& map_name,
 
 //!
 template <typename Pm, typename P>
-void halfedge_bool_map(py::module_& m, const std::string& map_name,
-                       const std::string& prop_name) {
+void halfedge_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
   using dp = CGAL::dynamic_halfedge_property_t<P>;
   using map_type = typename boost::property_map<Pm, dp>::type;
@@ -222,21 +208,17 @@ void halfedge_bool_map(py::module_& m, const std::string& map_name,
 
 //! Read a surface mesh from a file.
 template <typename SurfaceMesh>
-SurfaceMesh read_polygon_mesh(const std::string& filename,
-                              const py::dict& np = py::dict()) {
-
+SurfaceMesh read_polygon_mesh(const std::string& filename, const py::dict& np = py::dict()) {
   using Sm = SurfaceMesh;
   Sm sm;
-  if (! CGAL::IO::read_polygon_mesh(filename, sm,
-                                    internal::parse_named_parameters(np)))
+  if (! CGAL::IO::read_polygon_mesh(filename, sm, internal::parse_named_parameters(np)))
     throw std::runtime_error("Cannot read file!");
   return sm;
 }
 
 //! Read Polygon soup from a file
 template <typename SurfaceMesh>
-auto read_polygon_soup(const std::string& fname,
-                              const py::dict& np = py::dict()) {
+auto read_polygon_soup(const std::string& fname, const py::dict& np = py::dict()) {
   std::vector<Point_3> points;
   std::vector<std::vector<std::size_t> > polygons;
 
@@ -248,28 +230,23 @@ auto read_polygon_soup(const std::string& fname,
 
 //!
 template <typename SurfaceMesh>
-bool write_polygon_mesh(std::string fname, const SurfaceMesh& pm,
-                        const py::dict& parameters = py::dict()) {
-  return CGAL::IO::write_polygon_mesh(fname, pm,
-                                      internal::parse_named_parameters(parameters));
+bool write_polygon_mesh(std::string fname, const SurfaceMesh& pm, const py::dict& parameters = py::dict()) {
+  return CGAL::IO::write_polygon_mesh(fname, pm, internal::parse_named_parameters(parameters));
 }
 
 // Draw a surface mesh.
 #ifdef CGALPY_HAS_VISUAL
 template <typename SurfaceMesh>
-void draw(const SurfaceMesh& sm) { CGAL::draw(sm); }
+void draw(const SurfaceMesh& sm, const char* title) { CGAL::draw(sm, title); }
 #endif
 
 template <typename SurfaceMesh>
-typename SurfaceMesh::Point my_point(const SurfaceMesh& sm,
-                                     const typename SurfaceMesh::Vertex_index& v)
+typename SurfaceMesh::Point my_point(const SurfaceMesh& sm, const typename SurfaceMesh::Vertex_index& v)
 { return sm.point(v); }
 
 //!
 template <typename SurfaceMesh, typename Vi, typename Pnt>
-auto points(const SurfaceMesh& sm) {
-  return sm.points();
-}
+auto points(const SurfaceMesh& sm) { return sm.points(); }
 
 //!
 template <typename SurfaceMesh>
@@ -303,8 +280,7 @@ py::object faces(const SurfaceMesh& sm)
 
 // property maps
 template <typename SurfaceMesh, typename Key, typename Value>
-auto add_map(SurfaceMesh& sm, const std::string& name = std::string(),
-             const Value& default_value = Value()) {
+auto add_map(SurfaceMesh& sm, const std::string& name = std::string(), const Value& default_value = Value()) {
   using Sm = SurfaceMesh;
   using Vi = typename Sm::Vertex_index;
   using Pnt = typename Sm::Point;
@@ -317,10 +293,10 @@ auto add_map(SurfaceMesh& sm, const std::string& name = std::string(),
 }
 
 template <typename T>
-auto make_random_access_property_map(const std::vector<T>& vec) {
-  return CGAL::make_random_access_property_map(vec);
-}
+auto make_random_access_property_map(const std::vector<T>& vec)
+{ return CGAL::make_random_access_property_map(vec); }
 
+//!
 template<typename C, typename Sm, typename V>
 C export_property_maps(C& c, const std::string& type_name) {
   using Vi = typename Sm::Vertex_index;
@@ -334,24 +310,25 @@ C export_property_maps(C& c, const std::string& type_name) {
   return c;
 }
 
+//!
 template <typename C, typename Mesh, typename Key, typename ValueType>
-C add_generic_map(C& c, const std::string& map_name, const ValueType& default_value = ValueType()) {
-  return c.def(("add_" + map_name).c_str(), sm::add_map<Mesh, Key, ValueType>,
-               py::arg("name") = std::string(), py::arg("default_value") = default_value,
-               "adds a property map named `name` with value type `T` and default `t`\n"
-               "for index type `I`. Returns the property map together with a Boolean\n"
-               "that is `true` if a new map was created. In case it already exists\n"
-               "the existing map together with `false` is returned.")
-          .def(map_name.c_str(), &Mesh::template property_map<Key, ValueType>,
-               py::arg("name") = std::string(),
-               "returns an optional property map named `name` with key type `I` and value type `T`.")
-          .def("remove_property_map", &Mesh::template remove_property_map<Key, ValueType>,
-               py::arg("p"),
-               "removes property map `name`. The memory allocated for that property map is freed.")
-          ;
-  ;
+void add_generic_map(C& c, const std::string& map_name, const ValueType& default_value = ValueType()) {
+  c.def(("add_" + map_name).c_str(), sm::add_map<Mesh, Key, ValueType>,
+        py::arg("name") = std::string(), py::arg("default_value") = default_value,
+        "adds a property map named `name` with value type `T` and default `t`\n"
+        "for index type `I`. Returns the property map together with a Boolean\n"
+        "that is `true` if a new map was created. In case it already exists\n"
+        "the existing map together with `false` is returned.")
+    .def(map_name.c_str(), &Mesh::template property_map<Key, ValueType>,
+         py::arg("name") = std::string(),
+         "returns an optional property map named `name` with key type `I` and value type `T`.")
+    .def("remove_property_map", &Mesh::template remove_property_map<Key, ValueType>,
+         py::arg("p"),
+         "removes property map `name`. The memory allocated for that property map is freed.")
+    ;
 }
 
+//!
 template <typename C, typename SurfaceMesh, typename ValueType>
 C add_generic_maps(C& c, const std::string& map_name) {
   using Sm = SurfaceMesh;
@@ -366,6 +343,7 @@ C add_generic_maps(C& c, const std::string& map_name) {
   return c;
 }
 
+//!
 template <typename SurfaceMesh, typename C>
 C add_maps(C& c) {
   using Sm = SurfaceMesh;
@@ -430,9 +408,9 @@ C add_maps(C& c) {
   // add_generic_maps<C, Sm, std::uint32_t>(c, "uint32_t"); //no
 
   #if __cplusplus >= 202002l
-    if constexpr (!std::is_same<double, FT>::value) {
-      add_generic_maps<C, Sm, double>(c, "float"); // shadows FT
-    }
+  if constexpr (!std::is_same<double, FT>::value) {
+    add_generic_maps<C, Sm, double>(c, "float"); // shadows FT
+  }
   #endif
 
   c.def("remove_all_property_maps", &Sm::remove_all_property_maps,
@@ -453,7 +431,6 @@ C add_maps(C& c) {
 
   return c;
 }
-
 
 } // namespace sm
 
@@ -519,8 +496,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("__repr__", [](const Ei& smi){ return std::to_string(smi.idx()); })
       ;
   }
-
-  //
 
   // Halfedge_index
   using Sm_hi = typename CGAL::SM_Index<Hi>;
@@ -794,10 +769,9 @@ void export_surface_mesh(py::module_& m) {
   // sm::export_property_maps<py::module_, Sm_3, Kernel_::Plane_3>(m, "Plane_3");
   // sm::export_property_maps<py::module_, Sm_3, Kernel_::Point_3>(m, "Point_3");
 
-  if constexpr (!std::is_same<double, FT>::value) {
-    sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
-  }
-
+  // if constexpr (! std::is_same<double, FT>::value) {
+  //   sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
+  // }
 
   // implemented:
   // vertex_point_map
@@ -964,7 +938,7 @@ void export_surface_mesh(py::module_& m) {
   using ebmap_type = typename Sm_3::template Property_map<Ei, bool>;
   using fbmap_type = typename Sm_3::template Property_map<Fi, bool>;
   using vbmap_type = typename Sm_3::template Property_map<Vi, bool>;
-  boost_utils::define_boost_selection_functions<py::module_, Sm_3, ebmap_type, fbmap_type, vbmap_type>(m);
+  // boost_utils::define_boost_selection_functions<py::module_, Sm_3, ebmap_type, fbmap_type, vbmap_type>(m);
 
   // Helper Functions
   boost_utils::define_boost_helpers<py::module_, Sm_3, Sm_3>(m);
