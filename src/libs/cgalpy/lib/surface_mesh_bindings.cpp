@@ -206,16 +206,6 @@ void halfedge_bool_map(py::module_& m, const std::string& map_name, const std::s
         py::arg("property_map"), py::arg("halfedge_descriptor"));
 }
 
-//! Read a surface mesh from a file.
-template <typename SurfaceMesh>
-SurfaceMesh read_polygon_mesh(const std::string& filename, const py::dict& np = py::dict()) {
-  using Sm = SurfaceMesh;
-  Sm sm;
-  if (! CGAL::IO::read_polygon_mesh(filename, sm, internal::parse_named_parameters(np)))
-    throw std::runtime_error("Cannot read file!");
-  return sm;
-}
-
 //! Read Polygon soup from a file
 template <typename SurfaceMesh>
 auto read_polygon_soup(const std::string& fname, const py::dict& np = py::dict()) {
@@ -841,8 +831,6 @@ void export_surface_mesh(py::module_& m) {
   m.def("get_vertex_point", [](const Sm_3& pm, const Vi& vd)
   { return get(CGAL::vertex_point, pm, vd); });
 
-  m.def("read_polygon_mesh", &sm::read_polygon_mesh<Sm_3>,
-        py::arg("fname"), py::arg("parameters") = py::dict());
   // m.def("expand_face_selection",
   //       &sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
   m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>,

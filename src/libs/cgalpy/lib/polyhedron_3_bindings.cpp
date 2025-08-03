@@ -44,10 +44,6 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/Named_parameter_wrapper.hpp"
-#include "CGALPY/named_parameter_applicator.hpp"
-#include "CGALPY/Named_parameter_repair_polygon_soup.hpp"
-#include "CGALPY/Named_parameter_verbose.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
 
@@ -284,49 +280,6 @@ const Vertex& target_h(Halfedge& h, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
   return *(CGAL::target(Hd(&h), p));
-}
-
-/*! A class template that wraps the function template
- * CGAL::IO::read_polygon_mesh()
- */
-template <typename NamedParameter, typename... Args>
-struct Read_polygon_mesh_wrapper {
-  static auto call(NamedParameter& np, Args&&... args) {
-    return CGAL::IO::read_polygon_mesh(std::forward<Args>(args)..., np);
-  }
-};
-
-/*! Read a surface mesh from a file.
- */
-void read_polygon_mesh_impl(const std::string& filename,
-                            Polyhedron_3& prn,
-                            const py::dict& params = py::dict()) {
-  using Prn = Polyhedron_3;
-  auto np = CGAL::parameters::default_values();
-  CGALPY::Named_parameter_verbose op1;
-  CGALPY::Named_parameter_repair_polygon_soup op2;
-  CGALPY::Named_parameter_wrapper<Read_polygon_mesh_wrapper,
-                                  const std::string&, Prn&>
-    wrapper(filename, prn);
-  bool res = CGALPY::named_parameter_applicator(wrapper, np, params, op1, op2);
-  if (! res) throw std::runtime_error("Cannot read file!");
-}
-
-// Read a polyhedron from a file.
-Polyhedron_3 read_polygon_mesh(const std::string& filename,
-                               const py::dict& params = py::dict()) {
-  Polyhedron_3 prn;
-  read_polygon_mesh_impl(filename, prn, params);
-  return prn;
-}
-
-// Read a polyhedron from a file.
-Polyhedron_3 read_polygon_mesh_with_traits(const std::string& filename,
-                                           const Traits& traits,
-                                           const py::dict& params = py::dict()) {
-  Polyhedron_3 prn(traits);
-  read_polygon_mesh_impl(filename, prn, params);
-  return prn;
 }
 
 // Write a surface mesh to a file.
@@ -603,11 +556,6 @@ void export_polyhedron_3(py::module_& m) {
   { CGAL::draw(prn, title); });
 #endif
 
-  m.def("read_polygon_mesh", &pol3::read_polygon_mesh,
-        py::arg("filename"), py::arg("params") = py::dict());
-  m.def("read_polygon_mesh", &pol3::read_polygon_mesh_with_traits,
-        py::arg("filename"), py::arg("traits"), py::arg("params") = py::dict(),
-        py::keep_alive<0, 2>());
   m.def("write_polygon_mesh", &pol3::write_polygon_mesh,
         py::arg("filename"), py::arg("pm"), py::arg("params") = py::dict());
 

@@ -99,6 +99,7 @@ option(CGALPY_PMP_FEATURE_DETECTION_BINDINGS "Compile bindings for Polygon Mesh 
 option(CGALPY_PMP_GEOMETRIC_MEASURE BINDINGS "Compile bindings for Polygon Mesh Processing geometric measure functions")
 option(CGALPY_PMP_GEOMETRIC_REPAIR_BINDINGS "Compile bindings for Polygon Mesh Processing geometric repair functions")
 option(CGALPY_PMP_HOLE_FILLING_BINDINGS "Compile bindings for Polygon Mesh Processing hole filling functions")
+option(CGALPY_PMP_IO "Compile bindings for Polygon Mesh Processing IO functions")
 option(CGALPY_PMP_INTERSECTION_BINDINGS "Compile bindings for Polygon Mesh Processing intersection functions")
 option(CGALPY_PMP_LOCATION_BINDINGS "Compile bindings for Polygon Mesh Processing location functions")
 option(CGALPY_PMP_NORMAL_COMPUTATION_BINDINGS "Compile bindings for Polygon mesh processing normal computation functions")

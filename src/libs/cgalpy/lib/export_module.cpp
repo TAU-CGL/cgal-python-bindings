@@ -61,6 +61,7 @@ void export_pmp_location(py::module_&);
 void export_pmp_normal_computation(py::module_&);
 void export_pmp_orientation(py::module_&);
 void export_pmp_meshing(py::module_&);
+void export_pmp_io(py::module_&);
 
 void export_polyhedron_3(py::module_&);
 void export_polygon_2(py::module_&);
@@ -315,6 +316,9 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 #if defined(CGALPY_PMP_MESHING_BINDINGS)
   export_pmp_meshing(pmp_m);
+#endif
+#if defined(CGALPY_PMP_IO_BINDINGS)
+  export_pmp_io(pmp_m);
 #endif
 #endif
 
