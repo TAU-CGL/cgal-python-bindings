@@ -26,7 +26,6 @@
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h> // needed for a type
 #endif
-#include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 
 #include <CGAL/boost/graph/properties.h>
 #ifdef CGALPY_HAS_VISUAL
@@ -280,12 +279,6 @@ const Vertex& target_h(Halfedge& h, const Polyhedron_3& p) {
   using Prn = Polyhedron_3;
   using Hd = typename boost::graph_traits<Prn>::halfedge_descriptor;
   return *(CGAL::target(Hd(&h), p));
-}
-
-// Write a surface mesh to a file.
-bool write_polygon_mesh(std::string fname, const Polyhedron_3& pm,
-                        const py::dict& params = py::dict()) {
-  return CGAL::IO::write_polygon_mesh(fname, pm);
 }
 
 //!
@@ -555,9 +548,6 @@ void export_polyhedron_3(py::module_& m) {
   m.def("draw", [](const Prn& prn, const char* title)
   { CGAL::draw(prn, title); });
 #endif
-
-  m.def("write_polygon_mesh", &pol3::write_polygon_mesh,
-        py::arg("filename"), py::arg("pm"), py::arg("params") = py::dict());
 
   pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map", "Vertex_incident_patches_map");
 

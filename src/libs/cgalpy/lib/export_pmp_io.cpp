@@ -71,6 +71,12 @@ PolygonalMesh read_polygon_mesh_with_traits(const std::string& filename, const T
 }
 #endif
 
+//!
+template <typename PolygonalMesh>
+bool write_polygon_mesh(const std::string& filename, const PolygonalMesh& pm, const py::dict& params = py::dict()) {
+  return CGAL::IO::write_polygon_mesh(filename, pm);
+}
+
 }
 
 //!
@@ -83,5 +89,8 @@ void export_pmp_io(py::module_& m) {
         py::arg("filename"), py::arg("traits"), py::arg("params") = py::dict(),
         py::keep_alive<0, 2>());
 #endif
+
+  m.def("write_polygon_mesh", &pmp::write_polygon_mesh<Pm>,
+        py::arg("filename"), py::arg("pm"), py::arg("params") = py::dict());
   ;
 }

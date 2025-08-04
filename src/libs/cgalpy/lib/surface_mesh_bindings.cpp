@@ -14,9 +14,11 @@
 #include <boost/property_map/vector_property_map.hpp>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/optional.h>
-#include "nanobind/operators.h"
+#include <nanobind/stl/tuple.h>
+#include <nanobind/stl/pair.h>
 
 #include <CGAL/boost/graph/generators.h>
 #include <CGAL/property_map.h>
@@ -25,7 +27,6 @@
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #include <CGAL/boost/graph/helpers.h>
 #include <CGAL/IO/polygon_soup_io.h>
-#include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 
 //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
@@ -46,12 +47,11 @@
 #include "CGALPY/export_mesh_selection_functions.hpp"
 #include "CGALPY/export_mesh_helpers.hpp"
 #include "CGALPY/export_mesh_partitioning_operations.hpp"
+#include "CGALPY/export_mesh_partitioning_operations.hpp"
+#include "CGALPY/export_property_map.hpp"
 #include "CGALPY/generator_functions.hpp"
 #include "CGALPY/get.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/export_mesh_partitioning_operations.hpp"
-#include "CGALPY/parse_named_parameters.hpp"
-#include "CGALPY/Property_map.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/surface_mesh_types.hpp"
 
@@ -59,13 +59,12 @@ namespace py = nanobind;
 
 namespace sm {
 
-// Add a face from a list of vertices.
+//! Add a face from a list of vertices.
 template <typename SurfaceMesh>
 typename SurfaceMesh::Face_index
 add_face(SurfaceMesh& sm, const std::vector<typename SurfaceMesh::Vertex_index>& lst) {
   using Sm = SurfaceMesh;
   using Vi = typename Sm::Vertex_index;
-
   return sm.add_face(lst);
 }
 
@@ -216,12 +215,6 @@ auto read_polygon_soup(const std::string& fname, const py::dict& np = py::dict()
     throw std::runtime_error("Cannot read file!");
 
   return std::make_tuple(points, polygons);
-}
-
-//!
-template <typename SurfaceMesh>
-bool write_polygon_mesh(std::string fname, const SurfaceMesh& pm, const py::dict& parameters = py::dict()) {
-  return CGAL::IO::write_polygon_mesh(fname, pm, internal::parse_named_parameters(parameters));
 }
 
 // Draw a surface mesh.
@@ -729,16 +722,15 @@ void export_surface_mesh(py::module_& m) {
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
   // sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
-  using vbmap = typename Sm_3::template Property_map<Vi, bool>;
-  // internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
-  using fbmap = typename Sm_3::template Property_map<Fi, bool>;
-  // internal::export_property_map_bool<Sm_3, Fi>(m, "Face_bool_map");
-  using hbmap = typename Sm_3::template Property_map<Hi, bool>;
-  // internal::export_property_map_bool<Sm_3, Hi>(m, "Halfedge_bool_map");
 
-  // different for bools because it would return std::_Bit_reference
+  using vbmap = typename Sm_3::template Property_map<Vi, bool>;
+  internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
+  using fbmap = typename Sm_3::template Property_map<Fi, bool>;
+  internal::export_property_map_bool<Sm_3, Fi>(m, "Face_bool_map");
+  using hbmap = typename Sm_3::template Property_map<Hi, bool>;
+  internal::export_property_map_bool<Sm_3, Hi>(m, "Halfedge_bool_map");
   using ebmap_type = typename Sm_3::template Property_map<Ei, bool>;
-  // internal::export_property_map_bool<Sm_3, Ei>(m, "Edge_bool_map");
+  internal::export_property_map_bool<Sm_3, Ei>(m, "Edge_bool_map");
 
 //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
@@ -746,22 +738,23 @@ void export_surface_mesh(py::module_& m) {
   // internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
 #endif
 
-  // sm::export_property_maps<py::module_, Sm_3, std::string>(m, "string");
-  // sm::export_property_maps<py::module_, Sm_3, Kernel_::Vector_3>(m, "vector_3");
-  // sm::export_property_maps<py::module_, Sm_3, std::size_t>(m, "size_t");
-  // sm::export_property_maps<py::module_, Sm_3, int>(m, "int");
-  // sm::export_property_maps<py::module_, Sm_3, FT>(m, "FT");
-  // sm::export_property_maps<py::module_, Sm_3, py::set>(m, "set");
-  // sm::export_property_maps<py::module_, Sm_3, CGAL::IO::Color>(m, "Color");
-  // sm::export_property_maps<py::module_, Sm_3, std::uint32_t>(m, "uint32_t");
-  // sm::export_property_maps<py::module_, Sm_3, py::tuple>(m, "tuple");
-  // sm::export_property_maps<py::module_, Sm_3, py::list>(m, "list");
-  // sm::export_property_maps<py::module_, Sm_3, Kernel_::Plane_3>(m, "Plane_3");
-  // sm::export_property_maps<py::module_, Sm_3, Kernel_::Point_3>(m, "Point_3");
+  // Export all property maps ownedhandled by Surface_mesh
+  sm::export_property_maps<py::module_, Sm_3, int>(m, "int");
+  sm::export_property_maps<py::module_, Sm_3, FT>(m, "FT");
+  sm::export_property_maps<py::module_, Sm_3, std::string>(m, "string");
+  sm::export_property_maps<py::module_, Sm_3, std::size_t>(m, "size_t");
+  sm::export_property_maps<py::module_, Sm_3, CGAL::IO::Color>(m, "Color");
+  sm::export_property_maps<py::module_, Sm_3, std::uint32_t>(m, "uint32_t"); // why is this needed?
+  sm::export_property_maps<py::module_, Sm_3, py::tuple>(m, "tuple");
+  sm::export_property_maps<py::module_, Sm_3, py::list>(m, "list");
+  sm::export_property_maps<py::module_, Sm_3, py::set>(m, "set");
+  sm::export_property_maps<py::module_, Sm_3, Vector_3>(m, "vector_3");
+  sm::export_property_maps<py::module_, Sm_3, Plane_3>(m, "Plane_3");
+  sm::export_property_maps<py::module_, Sm_3, Point_3>(m, "Point_3");
 
-  // if constexpr (! std::is_same<double, FT>::value) {
-  //   sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
-  // }
+  if constexpr (! std::is_same<double, FT>::value) {
+    sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
+  }
 
   // implemented:
   // vertex_point_map
@@ -776,8 +769,10 @@ void export_surface_mesh(py::module_& m) {
 
   // ???
   // region_primitive_map:
-  // a property map filled by this function and that will contain for each region the plane (or only its orthognonal vector) estimated that approximates it.
-  // Type: a class model of WritablePropertyMap with the value type of RegionMap as key and GeomTraits::Plane_3 or GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
+  // a property map filled by this function and that will contain for each region the plane (or only its orthognonal
+  // vector) estimated that approximates it.
+  // Type: a class model of WritablePropertyMap with the value type of RegionMap as key and GeomTraits::Plane_3 or
+  // GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
   // Default: None
 
   py::class_<boost::vector_property_map<Vector_3>>(m, "Vector_vector_3_map")
@@ -835,8 +830,6 @@ void export_surface_mesh(py::module_& m) {
   //       &sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
   m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>,
         py::arg("fname"), py::arg("np") = py::dict());
-  m.def("write_polygon_mesh", &sm::write_polygon_mesh<Sm_3>,
-        py::arg("fname"), py::arg("pm"), py::arg("parameters") = py::dict());
   m.def("is_triangle", &sm::is_triangle<Sm_3>);
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>);
 
