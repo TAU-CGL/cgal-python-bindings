@@ -13,7 +13,7 @@
 /*! \file
  * This file contains template of wrappers of free functions from the
  * "CGAL and the Boost Graph Library" package that do not involve cell
- * decriptors, cell handlers, or any other reference-counted types.
+ * descriptors, cell handlers, or any other reference-counted types.
  * They are separated from the rest, because they can be used more widely.
  */
 
@@ -79,6 +79,10 @@ auto my_reserve(PolygonMesh& p,
                 typename boost::graph_traits<PolygonMesh>::edges_size_type ne,
                 typename boost::graph_traits<PolygonMesh>::faces_size_type nf)
 { reserve(p, nv, ne, nf); }
+
+//!
+template <typename PropertyTag, typename PolygonMesh>
+auto get(PropertyTag tag, const PolygonMesh& pm) { return CGAL::get(tag, pm); }
 
 }
 

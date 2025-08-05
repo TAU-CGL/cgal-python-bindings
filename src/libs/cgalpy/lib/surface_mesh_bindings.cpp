@@ -848,6 +848,13 @@ void export_surface_mesh(py::module_& m) {
   m.def("remove_all_elements", &bgl::my_remove_all_elements<Sm_3>);
   m.def("reserve", &bgl::my_reserve<Sm_3>);
 
+  //! Obtain the propery maps
+  m.def("get", &bgl::get<CGAL::vertex_point_t, Sm_3>, ri);
+  m.def("get", &bgl::get<CGAL::vertex_index_t, Sm_3>, ri);
+  m.def("get", &bgl::get<CGAL::halfedge_index_t, Sm_3>, ri);
+  m.def("get", &bgl::get<CGAL::edge_index_t, Sm_3>, ri);
+  m.def("get", &bgl::get<CGAL::face_index_t, Sm_3>, ri);
+
   // Other
   m.def("adjacent_vertices", &bgl::adjacent_vertices<Sm_3>);
   m.def("add_vertex", &bgl::add_vertex_p<Sm_3>);

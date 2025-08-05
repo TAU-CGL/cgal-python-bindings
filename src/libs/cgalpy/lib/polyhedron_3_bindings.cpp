@@ -50,9 +50,9 @@ extern void export_polyhedron_traits_with_normals_3(py::module_& m);
 extern void export_polyhedron_halfedge_ds(py::module_& m);
 extern void export_polyhedron_incremental_builder_3(py::module_& m);
 extern void export_polyhedron_builder(py::module_& m);
-extern void export_polyhedron_vertex(py::class_<pol3::Polyhedron_3>& prn_c);
-extern void export_polyhedron_halfedge(py::class_<pol3::Polyhedron_3>& prn_c);
-extern void export_polyhedron_face(py::class_<pol3::Polyhedron_3>& prn_c);
+extern void export_pol3_vertex(py::class_<pol3::Polyhedron_3>& prn_c);
+extern void export_pol3_halfedge(py::class_<pol3::Polyhedron_3>& prn_c);
+extern void export_pol3_face(py::class_<pol3::Polyhedron_3>& prn_c);
 
 namespace py = nanobind;
 
@@ -166,9 +166,7 @@ auto my_edges(const PolygonMesh& p) {
   using Pm = PolygonMesh;
   using Ei = typename boost::graph_traits<Pm>::edge_iterator;
   auto range = CGAL::edges(p);
-  return py::make_iterator<ri>(py::type<Ei>(),
-                               "Face_iterator",
-                               range.first, range.second);
+  return py::make_iterator<ri>(py::type<Ei>(), "Face_iterator", range.first, range.second);
 }
 
 //!
@@ -178,9 +176,7 @@ auto my_faces(const PolygonMesh& p) {
   using Pm = PolygonMesh;
   using Fi = typename boost::graph_traits<Pm>::face_iterator;
   auto range = CGAL::faces(p);
-  return py::make_iterator<ri>(py::type<Fi>(),
-                               "Face_iterator",
-                               range.first, range.second);
+  return py::make_iterator<ri>(py::type<Fi>(), "Face_iterator", range.first, range.second);
 }
 
 //!
@@ -190,9 +186,7 @@ auto my_halfedges(const PolygonMesh& p) {
   using Pm = PolygonMesh;
   using Hi = typename boost::graph_traits<Pm>::halfedge_iterator;
   auto range = CGAL::halfedges(p);
-  return py::make_iterator<ri>(py::type<Hi>(),
-                               "Face_iterator",
-                               range.first, range.second);
+  return py::make_iterator<ri>(py::type<Hi>(), "Face_iterator", range.first, range.second);
 }
 
 //!
@@ -202,9 +196,7 @@ auto my_vertices(const PolygonMesh& p) {
   using Pm = PolygonMesh;
   using Vi = typename boost::graph_traits<Pm>::vertex_iterator;
   auto range = CGAL::vertices(p);
-  return py::make_iterator<ri>(py::type<Vi>(),
-                               "Face_iterator",
-                               range.first, range.second);
+  return py::make_iterator<ri>(py::type<Vi>(), "Face_iterator", range.first, range.second);
 }
 
 //!
@@ -304,7 +296,7 @@ auto make_triangle(Polyhedron_3& prn, const Point_3& p1,
                    const Point_3& p2, const Point_3& p3)
 { return prn.make_triangle(p1, p2, p3); }
 
-/// \name Iterators
+/// \name Internal Iterators
 /// @{
 
 //
@@ -350,23 +342,6 @@ auto polyhedron_planes(const Polyhedron_3& prn) {
   return make_iterator(prn.planes_begin(), prn.planes_end());
 }
 
-//! Wrap the function that obtains the real circulator
-auto halfedges_around_target_circulator(Vertex& v, const Polyhedron_3& prn) {
-  using Prn = Polyhedron_3;
-  using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
-  return Hatc(Vertex_handle(&v), prn);
-}
-
-//! Wrap the iterator
-auto halfedges_around_target_iterator(Vertex& v, const Polyhedron_3& prn) {
-  using Prn = Polyhedron_3;
-  using Hati = CGAL::Halfedge_around_target_iterator<Prn>;
-  auto vh = Vertex_handle(&v);
-  auto hh = CGAL::halfedge(vh, prn);
-  Hati begin, end;
-  boost::tie(begin, end) = CGAL::halfedges_around_target(hh, prn);
-  return make_iterator(begin, end);
-}
 /// @}
 
 // Obtain the null face.
@@ -532,9 +507,9 @@ void export_polyhedron_3(py::module_& m) {
       .def("planes", &pol3::polyhedron_planes, py::keep_alive<0, 1>())
       ;
 
-    export_polyhedron_vertex(prn_c);
-    export_polyhedron_halfedge(prn_c);
-    export_polyhedron_face(prn_c);
+    export_pol3_vertex(prn_c);
+    export_pol3_halfedge(prn_c);
+    export_pol3_face(prn_c);
 
     add_insertion(prn_c, "__str__");
     add_insertion(prn_c, "__repr__");
@@ -597,11 +572,6 @@ void export_polyhedron_3(py::module_& m) {
       ;
   }
 
-  //! The function that obtains the vertex->point propery map
-  m.def("get_vertex_point_map",
-        [](const Prn& pm)
-        { return CGAL::get_const_property_map(CGAL::vertex_point, pm); }, ri);
-
   //! The get and put functions that operate on the vertex->point property map
   m.def("get", [](const Vpm& pm, Vertex& v) { return get(pm, Vd(&v)); }, ref,
         py::arg("property_map"), py::arg("vertex"));
@@ -634,6 +604,9 @@ void export_polyhedron_3(py::module_& m) {
   m.def("num_vertices", &bgl::my_num_vertices<Prn>);
   m.def("remove_all_elements", &bgl::my_remove_all_elements<Prn>);
   m.def("reserve", &bgl::my_reserve<Prn>);
+
+  //! Obtain the propery maps
+  m.def("get", &bgl::get<CGAL::vertex_point_t, Prn>, ri);
 
   // Other
   // m.def("add_vertex", &pol3::add_vertex_p);
@@ -695,9 +668,6 @@ void export_polyhedron_3(py::module_& m) {
   // Euler operations
   // bgl::define_euler_operations<py::module_, Prn, ebmap_type>(m);
 
-  // Iterators and Circulators
-  // bgl::define_boost_iterators<py::module_, Prn>(m);
-
   // // Selection Functions
   // bgl::define_boost_selection_functions<py::module_, Prn, ebmap_type, fbmap_type, vbmap_type>(m);
 
@@ -716,18 +686,4 @@ void export_polyhedron_3(py::module_& m) {
   //   boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>::type;
   // bgl::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
 
-  // Halfedges around target circulator
-  // We use the dereference circulator, because we need to dereference twice
-  using Hati = CGAL::Halfedge_around_target_iterator<Prn>;
-  add_dereference_iterator<Hati, Hati, Halfedge&>("Halfedge_around_target_iterator", m);
-
-  m.def("halfedges_around_target",
-        &pol3::halfedges_around_target_iterator,
-        py::keep_alive<0, 1>());
-
-  //! \todo fix this
-  using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
-  export_dereference_circulator<Hatc, Halfedge&>(m, "Halfedge_around_target_circulator");
-  m.def("halfedges_around_target_circulator",
-        &pol3::halfedges_around_target_circulator);
 }

@@ -27,6 +27,7 @@ void export_alpha_shape_3(py::module_&);
 void export_approximate_kernel(py::module_& m);
 void export_arrangement_on_surface_2(py::module_&);
 void export_basic_viewer(py::module_& m);
+void export_bgl(py::module_&);
 void export_boolean_set_operations_2(py::module_&);
 void export_bounding_volumes(py::module_&);
 void export_cgal(py::module_& m);
@@ -42,11 +43,12 @@ void export_kernel_module(py::module_&);
 void export_kernel_d(py::module_&);
 void export_kinetic_surface_reconstruction(py::module_&);
 void export_minkowski_sum_2(py::module_&);
+void export_nef_3(py::module_&);
 void export_point_location(py::module_&);
 void export_point_set_processing(py::module_&);
-void export_nef_3(py::module_&);
 
 // Polygon Mesh Processing
+void export_polygon_mesh_processing(py::module_&);
 void export_pmp_combinatorial_repair(py::module_&);
 void export_pmp_connected_components(py::module_&);
 void export_pmp_corefinement(py::module_&);
@@ -63,9 +65,11 @@ void export_pmp_orientation(py::module_&);
 void export_pmp_meshing(py::module_&);
 void export_pmp_io(py::module_&);
 
+// Polyhedron_3
 void export_polyhedron_3(py::module_&);
+void export_pol3_bgl(py::module_& m);
+
 void export_polygon_2(py::module_&);
-void export_polygon_mesh_processing(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
@@ -184,6 +188,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
   export_spatial_sorting(st_m);
 #endif
 
+#ifdef CGALPY_BGL_BINDINGS
+  auto bgl_m = m.def_submodule("Bgl");
+  export_bgl(bgl_m);
+#endif
+
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
   auto bv_m = m.def_submodule("Bv");
   export_bounding_volumes(bv_m);
@@ -259,6 +268,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #if defined(CGALPY_POLYHEDRON_3_BINDINGS)
   auto pol3_m = m.def_submodule("Pol3");
   export_polyhedron_3(pol3_m);
+  export_pol3_bgl(pol3_m);
 #endif
 
 #if defined(CGALPY_SURFACE_MESH_BINDINGS)
