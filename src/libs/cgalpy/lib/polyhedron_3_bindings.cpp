@@ -36,14 +36,12 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/bgl_global.hpp"
-#include "CGALPY/export_circulator.hpp"
 #include "CGALPY/generator_functions.hpp"
 #include "CGALPY/get.hpp"
 #include "CGALPY/Internal_face_plane_3_map.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
 
 extern void export_polyhedron_traits_with_normals_3(py::module_& m);

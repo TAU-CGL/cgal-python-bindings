@@ -28,7 +28,7 @@ const Vertex& vertex(const Halfedge& h) { return *(h.vertex()); }
 }
 
 // Export Polyhedron Halfedge
-void export_polyhedron_halfedge(py::class_<pol3::Polyhedron_3>& prn_c) {
+void export_pol3_halfedge(py::class_<pol3::Polyhedron_3>& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Halfedge = Prn::Halfedge;
   constexpr auto ri(py::rv_policy::reference_internal);

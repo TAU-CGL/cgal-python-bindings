@@ -35,7 +35,7 @@ auto halfedges_around_facet_iterator(const Face& f)
 }
 
 // Export Polyhedron Face
-void export_polyhedron_face(py::class_<pol3::Polyhedron_3>& prn_c) {
+void export_pol3_face(py::class_<pol3::Polyhedron_3>& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Face = Prn::Face;
   using Plane_3 = Prn::Plane_3;

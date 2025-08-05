@@ -23,7 +23,7 @@ const void vertex_set_halfedge(Vertex& v, Halfedge& h)
 }
 
 //! Export Polhedron Vertex
-void export_polyhedron_vertex(py::class_<pol3::Polyhedron_3>& prn_c) {
+void export_pol3_vertex(py::class_<pol3::Polyhedron_3>& prn_c) {
   using Prn = pol3::Polyhedron_3;
   using Vertex = Prn::Vertex;
   constexpr auto ri(py::rv_policy::reference_internal);
