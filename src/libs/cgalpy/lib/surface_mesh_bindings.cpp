@@ -4,7 +4,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Efi Fogel         <efifogel@gmail.com>
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+//            Efi Fogel         <efifogel@gmail.com>
 
 #define CGAL_USE_BASIC_VIEWER
 
@@ -42,8 +43,8 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/bgl.hpp"
 #include "CGALPY/bgl_global.hpp"
+#include "CGALPY/export_bgl_iterators.hpp"
 #include "CGALPY/export_boost_mesh_utils.hpp"
-#include "CGALPY/export_mesh_iterators.hpp"
 #include "CGALPY/export_mesh_selection_functions.hpp"
 #include "CGALPY/export_mesh_helpers.hpp"
 #include "CGALPY/export_mesh_partitioning_operations.hpp"
@@ -920,7 +921,7 @@ void export_surface_mesh(py::module_& m) {
   boost_utils::define_euler_operations<py::module_, Sm_3, ebmap_type>(m);
 
   // Iterators and Circulators
-  boost_utils::define_boost_iterators<py::module_, Sm_3>(m);
+  export_bgl_iterators<Sm_3>(m);
 
   // Selection Functions
   using ebmap_type = typename Sm_3::template Property_map<Ei, bool>;
