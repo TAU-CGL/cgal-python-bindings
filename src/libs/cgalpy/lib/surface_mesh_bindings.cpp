@@ -462,8 +462,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     py::class_<Vi, Sm_vi>(m, "Vertex_index")
       .def(py::init<>())
       .def(py::init<size_type>())
-      .def("__str__", [](const Vi& smi){ return std::to_string(smi.idx()); })
-      .def("__repr__", [](const Vi& smi){ return std::to_string(smi.idx()); })
+      .def("__str__", [](const Vi& vi) { return std::to_string(vi.idx()); })
+      .def("__repr__", [](const Vi& vi) { return std::to_string(vi.idx()); })
+      .def("__eq__", [](const Vi& vi, const Vi& other) { return vi == other; })
+      .def("__ne__", [](const Vi& vi, const Vi& other) { return vi != other; })
+      .def("__lt__", [](const Vi& vi, const Vi& other) { return vi < other; })
+      .def("__hash__", [](const Vi& vi) { return py::hash(py::int_(vi.idx())); })
       ;
   }
 
@@ -476,8 +480,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("idx", &Ei::idx)
       .def("reset", &Ei::reset)
       .def("is_valid", &Ei::is_valid)
-      .def("__str__", [](const Ei& smi){ return std::to_string(smi.idx()); })
-      .def("__repr__", [](const Ei& smi){ return std::to_string(smi.idx()); })
+      .def("__str__", [](const Ei& ei) { return std::to_string(ei.idx()); })
+      .def("__repr__", [](const Ei& ei) { return std::to_string(ei.idx()); })
+      .def("__eq__", [](const Ei& ei, const Ei& other) { return ei == other; })
+      .def("__ne__", [](const Ei& ei, const Ei& other) { return ei != other; })
+      .def("__lt__", [](const Ei& ei, const Ei& other) { return ei < other; })
+      .def("__hash__", [](const Ei& ei) { return py::hash(py::int_(ei.idx())); })
       ;
   }
 
@@ -492,8 +500,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     py::class_<Hi, Sm_hi>(m, "Halfedge_index")
       .def(py::init<>())
       .def(py::init<size_type>())
-      .def("__str__", [](const Hi& smi){ return std::to_string(smi.idx()); })
-      .def("__repr__", [](const Hi& smi){ return std::to_string(smi.idx()); })
+      .def("__str__", [](const Hi& hi) { return std::to_string(hi.idx()); })
+      .def("__repr__", [](const Hi& hi) { return std::to_string(hi.idx()); })
+      .def("__eq__", [](const Hi& hi, const Hi& other) { return hi == other; })
+      .def("__ne__", [](const Hi& hi, const Hi& other) { return hi != other; })
+      .def("__lt__", [](const Hi& hi, const Hi& other) { return hi < other; })
+      .def("__hash__", [](const Hi& hi) { return py::hash(py::int_(hi.idx())); })
       ;
   }
 
@@ -508,8 +520,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     py::class_<Fi, Sm_fi>(m, "Face_index")
       .def(py::init<>())
       .def(py::init<size_type>())
-      .def("__str__", [](const Fi& smi){ return std::to_string(smi.idx()); })
-      .def("__repr__", [](const Fi& smi){ return std::to_string(smi.idx()); })
+      .def("__str__", [](const Fi& fi) { return std::to_string(fi.idx()); })
+      .def("__repr__", [](const Fi& fi) { return std::to_string(fi.idx()); })
+      .def("__eq__", [](const Fi& fi, const Fi& other) { return fi == other; })
+      .def("__ne__", [](const Fi& fi, const Fi& other) { return fi != other; })
+      .def("__lt__", [](const Fi& fi, const Fi& other) { return fi < other; })
+      .def("__hash__", [](const Fi& fi) { return py::hash(py::int_(fi.idx())); })
       ;
   }
 
