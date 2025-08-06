@@ -23,9 +23,7 @@ template <typename Mesh, typename Key, typename Value>
 auto export_property_map(py::module_& m, const std::string& name) {
   using Mesh_property_map = typename Mesh::template Property_map<Key, Value>;
 
-  m.def("get", [](const Mesh_property_map& p, const Key& t) {
-    return get(p, t);
-  });
+  m.def("get", [](const Mesh_property_map& p, const Key& t) { return get(p, t); });
 
   // return for extending with .def()
   return py::class_<Mesh_property_map>(m, name.c_str())

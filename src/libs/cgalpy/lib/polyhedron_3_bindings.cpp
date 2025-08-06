@@ -98,8 +98,7 @@ void register_map_get(py::module_& m, const std::string& prop_name) {
 
 //!
 template <typename Pm, typename P>
-void edge_map(py::module_& m, const std::string& map_name,
-              const std::string& prop_name) {
+void edge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
   using Halfedge = typename Pm::Halfedge;
   using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
   using dp = CGAL::dynamic_edge_property_t<P>;
