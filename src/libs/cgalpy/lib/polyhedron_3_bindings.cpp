@@ -479,8 +479,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("join_facet", &Prn::join_facet)
       .def("join_loop", &Prn::join_loop)
       .def("join_vertex", &Prn::join_vertex)
-      .def("keep_largest_connected_components",
-           &Prn::keep_largest_connected_components)
+      .def("keep_largest_connected_components", &Prn::keep_largest_connected_components)
       .def("make_hole", &Prn::make_hole)
       .def("make_tetrahedron", &pol3::make_tetrahedron1, ri)
       .def("make_tetrahedron", &pol3::make_tetrahedron2, ri)
@@ -498,12 +497,9 @@ void export_polyhedron_3(py::module_& m) {
       .def("make_triangle", &pol3::make_triangle)
       .def("delegate", &Prn::delegate)
       .def("is_pure_quad", py::overload_cast<>(&Prn::is_pure_quad, py::const_))
-      .def("is_pure_bivalent",
-           py::overload_cast<>(&Prn::is_pure_bivalent, py::const_))
-      .def("is_pure_trivalent",
-           py::overload_cast<>(&Prn::is_pure_trivalent, py::const_))
-      .def("is_pure_triangle",
-           py::overload_cast<>(&Prn::is_pure_triangle, py::const_))
+      .def("is_pure_bivalent", py::overload_cast<>(&Prn::is_pure_bivalent, py::const_))
+      .def("is_pure_trivalent", py::overload_cast<>(&Prn::is_pure_trivalent, py::const_))
+      .def("is_pure_triangle", py::overload_cast<>(&Prn::is_pure_triangle, py::const_))
       ;
 
     using Vci = Prn::Vertex_const_iterator;
