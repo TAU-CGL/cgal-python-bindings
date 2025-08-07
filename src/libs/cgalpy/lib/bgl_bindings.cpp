@@ -10,7 +10,36 @@
 
 #include <CGAL/boost/graph/properties.h>
 
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/kernel_types.hpp"
+
 namespace py = nanobind;
+
+namespace bgl {
+
+template <typename DynamicPropertyMapTag>
+void register_dynamic_property_map_tag(py::module_& m, const std::string& name) {
+  using Dpmt = DynamicPropertyMapTag;
+  if (! add_attr<Dpmt>(m, name.c_str())) py::class_<Dpmt>(m, name.c_str()).def(py::init<>());
+}
+
+//!
+template<typename T>
+void register_dynamic_property_map_tags(py::module_& m, const std::string& prop_name) {
+  using Dvpt = CGAL::dynamic_vertex_property_t<T>;
+  register_dynamic_property_map_tag<Dvpt>(m, "dynamic_vertex_" + prop_name + "_property_t");
+
+  using Dhpt = CGAL::dynamic_halfedge_property_t<T>;
+  register_dynamic_property_map_tag<Dhpt>(m, "dynamic_halfedge_" + prop_name + "_property_t");
+
+  using Dfpt = CGAL::dynamic_face_property_t<T>;
+  register_dynamic_property_map_tag<Dfpt>(m, "dynamic_face_" + prop_name + "_property_t");
+
+  using Dept = CGAL::dynamic_edge_property_t<T>;
+  register_dynamic_property_map_tag<Dept>(m, "dynamic_edge_" + prop_name + "_property_t");
+}
+
+}
 
 //!
 void export_bgl(py::module_& m) {
@@ -63,4 +92,16 @@ void export_bgl(py::module_& m) {
   if (info_face_external_index.is_valid()) m.attr("face_external_index_t") = info_face_external_index;
   else py::enum_<face_external_index_t>(m, "face_external_index_t").
          value("face_external_index", CGAL::face_external_index).export_values();
+
+  bgl::register_dynamic_property_map_tags<bool>(m, "bool");
+  bgl::register_dynamic_property_map_tags<std::size_t>(m, "size_t");
+  bgl::register_dynamic_property_map_tags<int>(m, "int");
+  bgl::register_dynamic_property_map_tags<double>(m, "double");
+  bgl::register_dynamic_property_map_tags<Point_3>(m, "point_3");
+  bgl::register_dynamic_property_map_tags<Vector_3>(m, "vector_3");
+  bgl::register_dynamic_property_map_tags<CGAL::IO::Color>(m, "color");
+  bgl::register_dynamic_property_map_tags<py::tuple>(m, "tuple");
+  bgl::register_dynamic_property_map_tags<py::set>(m, "set");
+
+  if constexpr (! std::is_same<double, FT>::value) bgl::register_dynamic_property_map_tags<FT>(m, "FT");
 }

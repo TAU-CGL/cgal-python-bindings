@@ -103,7 +103,7 @@ template <typename Dp, typename Mesh>
 void register_map_get(py::module_& m, const std::string& prop_name) {
   py::class_<Dp> prop(m, prop_name.c_str());
   prop.def(py::init<>());
-  m.def("get", &internal::get<Dp, Mesh>, py::arg("property_map"), py::arg("sm"));
+  m.def("get", &bgl::get<Dp, Mesh>, py::arg("property_map"), py::arg("sm"));
 }
 
 //!
@@ -126,8 +126,7 @@ void edge_bool_map(py::module_& m, const std::string& map_name, const std::strin
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get",
-        [](const map_type& p, const Ed& e) { return py::bool_(get(p, e)); },
+  m.def("get", [](const map_type& p, const Ed& e) { return py::bool_(get(p, e)); },
         py::arg("property_map"), py::arg("edge_descriptor"));
 }
 
@@ -151,8 +150,7 @@ void face_bool_map(py::module_& m, const std::string& map_name, const std::strin
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get",
-        [](const map_type& p, const Fd& f) { return py::bool_(get(p, f)); },
+  m.def("get", [](const map_type& p, const Fd& f) { return py::bool_(get(p, f)); },
         py::arg("property_map"), py::arg("face_descriptor"));
 }
 
@@ -176,8 +174,7 @@ void vertex_bool_map(py::module_& m, const std::string& map_name, const std::str
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get",
-        [](const map_type& p, const Vd& v) { return py::bool_(get(p, v)); },
+  m.def("get", [](const map_type& p, const Vd& v) { return py::bool_(get(p, v)); },
         py::arg("property_map"), py::arg("vertex_descriptor"));
 }
 
@@ -201,8 +198,7 @@ void halfedge_bool_map(py::module_& m, const std::string& map_name, const std::s
   using map_type = typename boost::property_map<Pm, dp>::type;
   register_map<map_type>(m, map_name);
   register_map_get<dp, Pm>(m, prop_name);
-  m.def("get",
-        [](const map_type& p, const Hd& h) { return py::bool_(get(p, h)); },
+  m.def("get", [](const map_type& p, const Hd& h) { return py::bool_(get(p, h)); },
         py::arg("property_map"), py::arg("halfedge_descriptor"));
 }
 
@@ -601,39 +597,25 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("is_empty", &Sm::is_empty)
       .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps)
       .def("clear", &Sm::clear)
-      .def("halfedge", [](const Sm& sm, Vi v) { return sm.halfedge(v); },
-           py::arg("v"))
-      .def("halfedge", [](const Sm& sm, Fi f) { return sm.halfedge(f); },
-           py::arg("f"))
-      .def("halfedge", [](const Sm& sm, Ei e) { return sm.halfedge(e); },
-           py::arg("e"))
-      .def("halfedge",
-           [](const Sm& sm, Ei e, unsigned int i) { return sm.halfedge(e, i); },
+      .def("halfedge", [](const Sm& sm, Vi v) { return sm.halfedge(v); }, py::arg("v"))
+      .def("halfedge", [](const Sm& sm, Fi f) { return sm.halfedge(f); }, py::arg("f"))
+      .def("halfedge", [](const Sm& sm, Ei e) { return sm.halfedge(e); }, py::arg("e"))
+      .def("halfedge", [](const Sm& sm, Ei e, unsigned int i) { return sm.halfedge(e, i); },
            py::arg("e"), py::arg("i"))
-      .def("halfedge",
-           [](const Sm& sm, Vi source, Vi target)
-           { return sm.halfedge(source, target); },
+      .def("halfedge", [](const Sm& sm, Vi source, Vi target) { return sm.halfedge(source, target); },
            py::arg("source"), py::arg("target"))
-      .def("degree", [](const Sm& sm, Vi v) { return sm.degree(v); },
-           py::arg("v"))
-      .def("degree", [](const Sm& sm, Fi f) { return sm.degree(f); },
-           py::arg("f"))
-      .def("is_border", [](const Sm& sm, Hi h) { return sm.is_border(h); },
-           py::arg("h"))
-      .def("is_border", [](const Sm& sm, Ei e) { return sm.is_border(e); },
-           py::arg("e"))
+      .def("degree", [](const Sm& sm, Vi v) { return sm.degree(v); }, py::arg("v"))
+      .def("degree", [](const Sm& sm, Fi f) { return sm.degree(f); }, py::arg("f"))
+      .def("is_border", [](const Sm& sm, Hi h) { return sm.is_border(h); }, py::arg("h"))
+      .def("is_border", [](const Sm& sm, Ei e) { return sm.is_border(e); }, py::arg("e"))
       .def("is_border",
            [](const Sm& sm, Vi v, bool check_all_incident_halfedges = true)
            { return sm.is_border(v, check_all_incident_halfedges); },
            py::arg("v"), py::arg("check_all_incident_halfedges") = true)
-      .def("is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); },
-           py::arg("v"))
-      .def("is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); },
-           py::arg("e"))
-      .def("is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); },
-           py::arg("f"))
-      .def("is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); },
-           py::arg("h"))
+      .def("is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); }, py::arg("v"))
+      .def("is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); }, py::arg("e"))
+      .def("is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); }, py::arg("f"))
+      .def("is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); }, py::arg("h"))
       .def("source", &Sm::source)
       .def("target", &Sm::target)
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
@@ -770,7 +752,7 @@ void export_surface_mesh(py::module_& m) {
   sm::export_property_maps<py::module_, Sm_3, Point_3>(m, "Point_3");
 
   if constexpr (! std::is_same<double, FT>::value) {
-    sm::export_property_maps<py::module_, Sm_3, double>(m, "float"); // shadows FT
+    sm::export_property_maps<py::module_, Sm_3, double>(m, "float");
   }
 
   // implemented:
@@ -805,8 +787,7 @@ void export_surface_mesh(py::module_& m) {
     .def(py::init<const Sm_3&, std::size_t, const Sm_3::Property_map<Fi, std::size_t>&>())
     .def("graph", [](const Ffg3& ffg) { return ffg.graph(); })
     .def("reset_indices", [](Ffg3& ffg) { return ffg.reset_indices(); })
-    .def("number_of_faces",
-         [](const Ffg3& ffg) { return ffg.number_of_faces(); })
+    .def("number_of_faces", [](const Ffg3& ffg) { return ffg.number_of_faces(); })
     .def("invert_selection", [](Ffg3& ffg) { return ffg.invert_selection(); })
     // commented for stubs
     // .def("get_face_index_map",
@@ -819,17 +800,13 @@ void export_surface_mesh(py::module_& m) {
     //   [](const Ffg3& ffg) { return ffg.get_vertex_index_map(); })
     // .def("get_halfedge_index_map",
     //   [](const Ffg3& ffg) { return ffg.get_halfedge_index_map(); })
-    .def("initialize_face_indices",
-         [](Ffg3& ffg) { return ffg.initialize_face_indices(); })
-    .def("initialize_vertex_indices",
-         [](Ffg3& ffg) { return ffg.initialize_vertex_indices(); })
-    .def("initialize_halfedge_indices",
-         [](Ffg3& ffg) { return ffg.initialize_halfedge_indices(); })
+    .def("initialize_face_indices", [](Ffg3& ffg) { return ffg.initialize_face_indices(); })
+    .def("initialize_vertex_indices", [](Ffg3& ffg) { return ffg.initialize_vertex_indices(); })
+    .def("initialize_halfedge_indices", [](Ffg3& ffg) { return ffg.initialize_halfedge_indices(); })
     .def("set_selected_faces",
-         [](Ffg3& ffg, const std::vector<std::size_t>& vec,
-            const Sm_3::Property_map<Fi, std::size_t>& fccmap) {
-        return ffg.set_selected_faces(vec, fccmap);
-      })
+         [](Ffg3& ffg, const std::vector<std::size_t>& vec, const Sm_3::Property_map<Fi, std::size_t>& fccmap) {
+           return ffg.set_selected_faces(vec, fccmap);
+         })
     ;
 
   // Face filtered Graph
@@ -840,13 +817,11 @@ void export_surface_mesh(py::module_& m) {
   m.def("is_closed", &CGAL::is_closed<Sm_3>);
 
   //! \todo export CGAL::vertex_point and CGAL::get() instead.
-  m.def("get_vertex_point", [](const Sm_3& pm, const Vi& vd)
-  { return get(CGAL::vertex_point, pm, vd); });
+  m.def("get_vertex_point", [](const Sm_3& pm, const Vi& vd) { return get(CGAL::vertex_point, pm, vd); });
 
   // m.def("expand_face_selection",
   //       &sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
-  m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>,
-        py::arg("fname"), py::arg("np") = py::dict());
+  m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>, py::arg("fname"), py::arg("np") = py::dict());
   m.def("is_triangle", &sm::is_triangle<Sm_3>);
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>);
 
@@ -889,17 +864,13 @@ void export_surface_mesh(py::module_& m) {
   m.def("is_border", &bgl::my_is_border_e<Sm_3>);
   m.def("is_border", &bgl::my_is_border_v<Sm_3>);
   m.def("is_border", &bgl::my_is_border_edge<Sm_3>);
-  m.def("is_valid_vertex_descriptor",
-        &bgl::my_is_valid_vertex_descriptor<Sm_3>,
+  m.def("is_valid_vertex_descriptor", &bgl::my_is_valid_vertex_descriptor<Sm_3>,
         py::arg("v"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_halfedge_descriptor",
-        &bgl::my_is_valid_halfedge_descriptor<Sm_3>,
+  m.def("is_valid_halfedge_descriptor", &bgl::my_is_valid_halfedge_descriptor<Sm_3>,
         py::arg("h"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_edge_descriptor",
-        &bgl::my_is_valid_edge_descriptor<Sm_3>,
+  m.def("is_valid_edge_descriptor", &bgl::my_is_valid_edge_descriptor<Sm_3>,
         py::arg("e"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_face_descriptor",
-        &bgl::my_is_valid_face_descriptor<Sm_3>,
+  m.def("is_valid_face_descriptor", &bgl::my_is_valid_face_descriptor<Sm_3>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
   m.def("next", &bgl::next<Sm_3>);
   m.def("null_face", &bgl::null_face<Sm_3>);

@@ -13,11 +13,12 @@
 
 #include <nanobind/nanobind.h>
 
-namespace internal {
+namespace bgl {
 
-template <typename T1, typename T2>
-auto get(const T1& p, const T2& t) { return get(p, t); }
+//! Obtain a property map attached to a graph
+template <typename PropertyMapTag, typename Graph>
+auto get(const PropertyMapTag& tag, const Graph& g) { return CGAL::get(tag, g); }
 
-} // namespace internal
+}
 
 #endif

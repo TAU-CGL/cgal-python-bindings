@@ -40,7 +40,6 @@
 #include "CGALPY/get.hpp"
 #include "CGALPY/Internal_face_plane_3_map.hpp"
 #include "CGALPY/kernel_types.hpp"
-#include "CGALPY/Kernel/export_point_3.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
 
@@ -57,101 +56,141 @@ namespace py = nanobind;
 namespace pol3 {
 
 //!
-template <typename MapType>
-void register_map(py::module_& m, const std::string& map_name) {
+template <typename MapType, typename CellType, py::rv_policy Policy, typename C>
+void export_property_map_attributes(C& c) {
   using Mt = MapType;
-  if (add_attr<Mt>(m, map_name.c_str())) return;
-
-  py::class_<Mt>(m, map_name.c_str())
-    .def(py::init<>())
-    .def("clear", &Mt::clear)
-    .def("default_value", &Mt::default_value)
-    .def("put",
-         [](Mt& p, const typename Mt::key_type& k,
-            const typename Mt::value_type& v)
-         { put(p, k, v); },
-         py::arg("key"), py::arg("value"))
-    .def("__setitem__",
-         [](Mt& p, const typename Mt::key_type& k,
-            const typename Mt::value_type& v) { put(p, k, v); },
-         py::arg("key"), py::arg("value"))
-    .def("get",
-         [](const Mt& p, const typename Mt::key_type& k) { return get(p, k); })
-    .def("__getitem__",
-         [](const Mt& p, const typename Mt::key_type& k) { return get(p, k); })
-    .def_ro("map_", &Mt::map_)
-    .def_ro("default_value_", &Mt::default_value_)
+  using Ct = CellType;
+  using Kt = const typename Mt::key_type;
+  using Vt = const typename Mt::value_type;
+  c.def("put", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); }, py::arg("key"), py::arg("value"))
+    .def("__setitem__", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); }, py::arg("key"), py::arg("value"))
+    .def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }, Policy, py::arg("key"))
+    .def("__getitem__", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }, Policy, py::arg("key"))
     ;
 }
 
 //!
-template <typename Dp, typename Mesh>
-void register_map_get(py::module_& m, const std::string& prop_name) {
-  if (! add_attr<Dp>(m, prop_name.c_str())) {
-    py::class_<Dp>(m, prop_name.c_str())
-      .def(py::init<>())
+template <typename MapType, typename CellType, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_property_map(py::module_& m, const std::string& map_name) {
+  using Mt = MapType;
+  using Ct = CellType;
+  using Kt = const typename Mt::key_type;
+  using Vt = const typename Mt::value_type;
+
+  if (! add_attr<Mt>(m, map_name.c_str())) {
+    py::class_<Mt> pm_c(m, map_name.c_str());
+    pm_c.def(py::init<>())
+      .def_ro("map_", &Mt::map_)
+      .def_ro("default_value_", &Mt::default_value_)
+      .def("clear", &Mt::clear)
+      .def("default_value", &Mt::default_value)
       ;
+    export_property_map_attributes<Mt, Ct, Policy>(pm_c);
   }
-  m.def("get", &internal::get<Dp, Mesh>,
-        py::arg("property_map"), py::arg("sm"));
+  m.def("put", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); },
+        py::arg("property_map"), py::arg("key"), py::arg("value"));
+  m.def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }), Policy, py::arg("property_map"), py::arg("key");
 }
 
 //!
-template <typename Pm, typename P>
-void edge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
-  using Halfedge = typename Pm::Halfedge;
-  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
-  using dp = CGAL::dynamic_edge_property_t<P>;
-  using Mt = typename boost::property_map<Pm, dp>::const_type;
-  register_map<Mt>(m, map_name);
-  register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const Mt& p, Halfedge& e) { return get(p, Ed(&e)); },
-        py::arg("property_map"), py::arg("edge"));
+template <typename MapType, typename CellType, py::rv_policy Policy = py::rv_policy::automatic>
+void export_property_map(py::module_& m, const std::string& name) {
+  using Mt = MapType;
+  using Ct = CellType;
+  using Kt = const typename Mt::key_type;
+  using Vt = const typename Mt::value_type;
+
+  if (! add_attr<Mt>(m, name.c_str())) {
+    py::class_<Mt> pm_c(m, name.c_str());
+    pm_c.def(py::init<>());
+    export_property_map_attributes<Mt, Ct, Policy>(pm_c);
+  }
+  m.def("put", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); },
+        py::arg("property_map"), py::arg("key"), py::arg("value"));
+  m.def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }), py::arg("property_map"), py::arg("key");
 }
 
 //!
-template <typename PolygonMesh, typename P>
-void face_map(py::module_& m,
-              const std::string& map_name, const std::string& prop_name) {
-  using Pm = PolygonMesh;
-  using Face = typename Pm::Face;
-  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
-  using dp = CGAL::dynamic_face_property_t<P>;
-  using Mt = typename boost::property_map<Pm, dp>::const_type;
-  register_map<Mt>(m, map_name);
-  register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const Mt& p, Face& f) { return get(p, Fd(&f)); },
-        py::arg("property_map"), py::arg("face"));
-}
-
-//!
-template <typename PolygonMesh, typename P>
-void vertex_map(py::module_& m,
-                const std::string& map_name, const std::string& prop_name) {
+template <typename PolygonMesh, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_vertex_map(py::module_& m, const std::string& name) {
   using Pm = PolygonMesh;
   using Vertex = typename Pm::Vertex;
-  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
-  using dp = CGAL::dynamic_vertex_property_t<P>;
-  using Mt = typename boost::property_map<Pm, dp>::const_type;
-  register_map<Mt>(m, map_name);
-  register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const Mt& pm, Vertex& v) { return get(pm, Vd(&v)); },
-        py::arg("property_map"), py::arg("vertex"));
+  using Dvpt = CGAL::dynamic_vertex_property_t<T>;
+  using Mt = typename boost::property_map<Pm, Dvpt>::const_type;
+  constexpr auto ri(py::rv_policy::reference_internal);
+  export_dynamic_property_map<Mt, Vertex, Policy>(m, name);
+  m.def("get", &bgl::get<Dvpt, Pm>, ri, py::arg("property_map_tag"), py::arg("graph"));
+
+  // Observe that Dvpt is (an instance) exported by the Bgl module.
+  // The get(t, g) function above accepts a tag as the first parameter.
+  // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
+  // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
+  m.def(("get_" + name).c_str(), [](Pm& g) { return bgl::get(Dvpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
-template <typename PolygonMesh, typename P>
-void halfedge_map(py::module_& m,
-                  const std::string& map_name, const std::string& prop_name) {
+template <typename PolygonMesh, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_halfedge_map(py::module_& m, const std::string& name) {
   using Pm = PolygonMesh;
   using Halfedge = typename Pm::Halfedge;
-  using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
-  using dp = CGAL::dynamic_halfedge_property_t<P>;
-  using Mt = typename boost::property_map<Pm, dp>::const_type;
-  register_map<Mt>(m, map_name);
-  register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const Mt& p, Halfedge& h) { return get(p, Hd(&h)); },
-        py::arg("property_map"), py::arg("halfedge"));
+  using Dhpt = CGAL::dynamic_halfedge_property_t<T>;
+  using Mt = typename boost::property_map<Pm, Dhpt>::const_type;
+  constexpr auto ri(py::rv_policy::reference_internal);
+  export_dynamic_property_map<Mt, Halfedge, Policy>(m, name);
+  m.def("get", &bgl::get<Dhpt, Pm>, ri, py::arg("property_map_tag"), py::arg("graph"));
+
+  // Observe that Dhpt is (an instance) exported by the Bgl module.
+  // The get(t, g) function above accepts a tag as the first parameter.
+  // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
+  // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
+  m.def(("get_" + name).c_str(), [](Pm& g) { return bgl::get(Dhpt(), g); }, ri, py::arg("graph"));
+}
+
+//!
+template <typename PolygonMesh, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_face_map(py::module_& m, const std::string& name) {
+  using Pm = PolygonMesh;
+  using Face = typename Pm::Face;
+  using Dfpt = CGAL::dynamic_face_property_t<T>;
+  using Mt = typename boost::property_map<Pm, Dfpt>::const_type;
+  constexpr auto ri(py::rv_policy::reference_internal);
+  export_dynamic_property_map<Mt, Face, Policy>(m, name);
+  m.def("get", &bgl::get<Dfpt, Pm>, ri, py::arg("property_map_tag"), py::arg("graph"));
+
+  // Observe that Dfpt is (an instance) exported by the Bgl module.
+  // The get(t, g) function above accepts a tag as the first parameter.
+  // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
+  // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
+  m.def(("get_" + name).c_str(), [](Pm& g) { return bgl::get(Dfpt(), g); }, ri, py::arg("graph"));
+}
+
+//!
+template <typename PolygonMesh, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_edge_map(py::module_& m, const std::string& name) {
+  using Pm = PolygonMesh;
+  using Halfedge = typename Pm::Halfedge;
+  using Dept = CGAL::dynamic_edge_property_t<T>;
+  using Mt = typename boost::property_map<Pm, Dept>::const_type;
+  constexpr auto ri(py::rv_policy::reference_internal);
+  export_dynamic_property_map<Mt, Halfedge, Policy>(m, name);
+  m.def("get", &bgl::get<Dept, Pm>, ri, py::arg("property_map_tag"), py::arg("graph"));
+
+  // Observe that Dept is (an instance) exported by the Bgl module.
+  // The get(t, g) function above accepts a tag as the first parameter.
+  // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
+  // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
+  m.def(("get_" + name).c_str(), [](Pm& g) { return bgl::get(Dept(), g); }, ri, py::arg("graph"));
+}
+
+/*! Export dynamic property maps.
+ *
+ */
+template <typename Pm, typename V, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_property_maps(py::module_& m, const std::string& prop_name) {
+  export_dynamic_vertex_map<Pm, V, Policy>(m, ("dynamic_vertex_" + prop_name + "_map").c_str());
+  export_dynamic_halfedge_map<Pm, V, Policy>(m, ("dynamic_halfedge_" + prop_name + "_map").c_str());
+  export_dynamic_face_map<Pm, V, Policy>(m, ("dynamic_face_" + prop_name + "_map").c_str());
+  export_dynamic_edge_map<Pm, V, Policy>(m, ("dynamic_edge_" + prop_name + "_map").c_str());
 }
 
 // Global access functions
@@ -341,31 +380,11 @@ auto polyhedron_planes(const Polyhedron_3& prn) {
 
 /// @}
 
-// Obtain the null face.
-template <typename Pm>
-auto null_face()
-{ return boost::graph_traits<Pm>::null_face(); }
-
-// pol3::vertex_map<Prn, std::size_t>(m, "vertex_size_t_map", "dynamic_property_vertex_size_t");
-template <typename C, typename Pm, typename V>
-C register_maps(C& m, const std::string& prop_name) {
-  vertex_map<Pm, V>(m, ("vertex_" + prop_name + "_map").c_str(),
-                    ("dynamic_property_vertex_" + prop_name).c_str());
-  halfedge_map<Pm, V>(m, ("halfedge_" + prop_name + "_map").c_str(),
-                      ("dynamic_property_halfedge_" + prop_name).c_str());
-  face_map<Pm, V>(m, ("face_" + prop_name + "_map").c_str(),
-                  ("dynamic_property_face_" + prop_name).c_str());
-  edge_map<Pm, V>(m, ("edge_" + prop_name + "_map").c_str(),
-                  ("dynamic_property_edge_" + prop_name).c_str());
-  return m;
-}
-
-/*! \todo rename to something like handle_get and handle_put
+/*! \todo Why are these needed at all?
  */
 template <typename PropertyMap>
 typename PropertyMap::value_type
-face_get(const PropertyMap& pm,
-         typename PropertyMap::key_type::value_type & f) {
+face_get(const PropertyMap& pm, typename PropertyMap::key_type::value_type& f) {
   using Facet_handle = typename PropertyMap::key_type;
   const auto& v = get(pm, Facet_handle(&f));
   return get(pm, Facet_handle(&f));
@@ -374,8 +393,7 @@ face_get(const PropertyMap& pm,
 /*!
  */
 template <typename PropertyMap>
-void face_put(const PropertyMap& pm,
-              typename PropertyMap::key_type::value_type & f,
+void face_put(const PropertyMap& pm, typename PropertyMap::key_type::value_type& f,
               const typename PropertyMap::value_type& val) {
   using Facet_handle = typename PropertyMap::key_type;
   put(pm, Facet_handle(&f), val);
@@ -388,21 +406,26 @@ void face_put(const PropertyMap& pm,
 void export_internal_face_plane_3_map(py::module_& m) {
   using Prn = pol3::Polyhedron_3;
   using Ifpm = pol3::Internal_face_plane_3_map<Prn>;
+  using Face = Prn::Face;
+  using Fd = typename boost::graph_traits<Prn>::face_descriptor;
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  if (add_attr<Ifpm>(m, "Internal_face_plane_3_map")) return;
+  if (! add_attr<Ifpm>(m, "Internal_face_plane_3_map")) {
+    py::class_<Ifpm>(m, "Internal_face_plane_3_map")
+      .def(py::init<>())
+      .def("get", &pol3::face_get<Ifpm>, ri)
+      .def("put", &pol3::face_put<Ifpm>)
+      ;
+  }
 
-  py::class_<Ifpm>(m, "Internal_face_plane_3_map")
-    .def(py::init<>())
-    .def("get", &pol3::face_get<Ifpm>, ri)
-    .def("put", &pol3::face_put<Ifpm>, ri)
-    ;
+  m.def("get", [](const Ifpm& pm, Face& f) { return get(pm, Fd(&f)); }, ri, py::arg("property_map"), py::arg("face"));
 }
 
 // Export Polyhedron_3.
 void export_polyhedron_3(py::module_& m) {
   using Prn = pol3::Polyhedron_3;
   using Pnt = Prn::Point_3;
+  using Vec = Kernel::Vector_3;
   using Vertex = Prn::Vertex;
   using Halfedge = Prn::Halfedge;
   using Face = Prn::Face;
@@ -422,6 +445,7 @@ void export_polyhedron_3(py::module_& m) {
   export_polyhedron_halfedge_ds(m);
   export_polyhedron_incremental_builder_3(m);
   export_polyhedron_builder(m);
+
   export_internal_face_plane_3_map(m);
 
   // define_generate_functions<py::module_, Prn, Kernel>(m); // doesn't work for polyhedron
@@ -521,69 +545,62 @@ void export_polyhedron_3(py::module_& m) {
   { CGAL::draw(prn, title); });
 #endif
 
-  pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map", "Vertex_incident_patches_map");
+  // CGAL and the Boost Graph Library
+  pol3::export_dynamic_property_maps<Prn, bool>(m, "bool");
+  pol3::export_dynamic_property_maps<Prn, int>(m, "int");
+  pol3::export_dynamic_property_maps<Prn, double>(m, "float");
+  pol3::export_dynamic_property_maps<Prn, std::size_t>(m, "size_t");
+  pol3::export_dynamic_property_maps<Prn, Pnt, py::rv_policy::reference_internal>(m, "point");
+  pol3::export_dynamic_property_maps<Prn, Vec, py::rv_policy::reference_internal>(m, "vector_3");
+  pol3::export_dynamic_property_maps<Prn, CGAL::IO::Color, py::rv_policy::reference_internal>(m, "color");
+  pol3::export_dynamic_property_maps<Prn, py::tuple>(m, "tuple");
+  pol3::export_dynamic_property_maps<Prn, py::set>(m, "set");
 
-  pol3::register_maps<py::module_, Prn, Pnt>(m, "point");
-  pol3::register_maps<py::module_, Prn, bool>(m, "bool");
-  pol3::register_maps<py::module_, Prn, std::size_t>(m, "size_t");
-  pol3::register_maps<py::module_, Prn, FT>(m, "FT");
-  pol3::register_maps<py::module_, Prn, Vector_3>(m, "vector_3");
-  pol3::register_maps<py::module_, Prn, int>(m, "int");
-  pol3::register_maps<py::module_, Prn, CGAL::IO::Color>(m, "color");
-  pol3::register_maps<py::module_, Prn, py::tuple>(m, "tuple");
-  pol3::register_maps<py::module_, Prn, py::set>(m, "set");
-  // pol3::register_maps<py::module_, Prn, std::uint32_t>(m, "uint32_t"); //no
+  if constexpr (! std::is_same<double, FT>::value) pol3::export_dynamic_property_maps<Prn, FT>(m, "FT");
 
-  if constexpr (!std::is_same<double, FT>::value) {
-    pol3::register_maps<py::module_, Prn, double>(m, "double"); // shadows FT
-  }
+  // \todo export CGAL::vertex_incident_patches_t<int> in bgl_bindings, then the following
+  // pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map");
 
   //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
-  namespace PMP = CGAL::Polygon_mesh_processing;
-  using pcad = PMP::Principal_curvatures_and_directions<Kernel>;
-  pol3::vertex_map<Prn, pcad>
-    (m, "vertex_principal_curvatures_and_directions_map",
-     "dynamic_property_vertex_PC");
+  // namespace PMP = CGAL::Polygon_mesh_processing;
+  // using pcad = PMP::Principal_curvatures_and_directions<Kernel>;
+  // pol3::vertex_map<Prn, pcad>
+  //   (m, "vertex_principal_curvatures_and_directions_map",
+  //    "dynamic_property_vertex_PC");
 #endif
 
-  m.def("get_edge_is_feature_map",
-        [](const Prn& sm) { return get(CGAL::edge_is_feature, sm); });
+  //! \todo add the following
+  // m.def("get_edge_is_feature_map", [](const Prn& sm) { return get(CGAL::edge_is_feature, sm); });
 
-  using Pifem = CGAL::Polyhedron_is_feature_edge_pmap;
-  if (! add_attr<Pifem>(m, "Polyhedron_is_feature_edge_pmap")) {
-    py::class_<Pifem>(m, "Polyhedron_is_feature_edge_pmap")
-      .def(py::init<>())
-      ;
-  }
+  // using Pifem = CGAL::Polyhedron_is_feature_edge_pmap;
+  // if (! add_attr<Pifem>(m, "Polyhedron_is_feature_edge_pmap")) {
+  //   py::class_<Pifem>(m, "Polyhedron_is_feature_edge_pmap")
+  //     .def(py::init<>())
+  //     ;
+  // }
 
-  //! \todo the following 3 functions should be replaced by something more
-  // general that applies to all maps, similar to the register_map().
-
-  //! The vertex->point property map
+  // Handle the vertex->point property map
   using Vpt = CGAL::vertex_point_t;
-  using Vpm = boost::property_map<Prn, Vpt>::const_type;
-  if (! add_attr<Vpm>(m, "Vertex_point_map")) {
-    py::class_<Vpm>(m, "Vertex_point_map")
-      .def(py::init<>())
-      ;
-  }
+  using Vpm = boost::property_map<Prn, Vpt>::type;
 
-  //! The get and put functions that operate on the vertex->point property map
-  m.def("get", [](const Vpm& pm, Vertex& v) { return get(pm, Vd(&v)); }, ref,
-        py::arg("property_map"), py::arg("vertex"));
+  pol3::export_property_map<Vpm, Vertex, py::rv_policy::reference_internal>(m, "vertex_point_map");
+
+#ifdef CGALPY_BGL_BINDINGS
+  // Obtain the propery map
+  m.def("get", &bgl::get<Vpt, Prn>, ri, py::arg("property_map_tag"), py::arg("graph"));
+#endif
+
+  // Observe that Vpt is (an enum) exported by the Bgl module.
+  // The get(t, g) function above accepts an enumeration as the first parameter.
+  // A Python user must create bindings for the Bgl in order to obtain the wrapped enumeration.
+  // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
+  m.def("get_vertex_point_map", [](Prn& g) { return CGAL::get(CGAL::vertex_point, g); }, ri, py::arg("graph"));
 
   // Free functions
   m.def("clear", &CGAL::clear<Prn>);
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
   m.def("is_closed", &CGAL::is_closed<Prn>);
-
-  //! \todo export CGAL::vertex_point and CGAL::get() instead.
-  m.def("get_vertex_point",
-        [](const Prn& pm, Vertex& v)
-        { return get(CGAL::vertex_point, pm, Vd(&v)); });
-
-  // CGAL and the Boost Graph Library
 
   // Iterators
   m.def("edges", &pol3::my_edges<Prn>, py::keep_alive<0, 1>());
@@ -601,9 +618,6 @@ void export_polyhedron_3(py::module_& m) {
   m.def("num_vertices", &bgl::my_num_vertices<Prn>);
   m.def("remove_all_elements", &bgl::my_remove_all_elements<Prn>);
   m.def("reserve", &bgl::my_reserve<Prn>);
-
-  //! Obtain the propery maps
-  m.def("get", &bgl::get<CGAL::vertex_point_t, Prn>, ri);
 
   // Other
   // m.def("add_vertex", &pol3::add_vertex_p);
@@ -629,9 +643,6 @@ void export_polyhedron_3(py::module_& m) {
   //       &bgl::my_is_valid_face_descriptor<Prn>,
   //       py::arg("f"), py::arg("g"), py::arg("verbose") = false);
   m.def("next", &pol3::next_h, ref);
-  // m.def("null_face", &bgl::null_face<Prn>);
-  // m.def("null_halfedge", &bgl::null_halfedge<Prn>);
-  // m.def("null_vertex", &bgl::null_vertex<Prn>);
   m.def("opposite", &pol3::opposite_h, ref);
   // m.def("out_degree", &bgl::out_degree<Prn>);
   m.def("prev", &pol3::prev_h, ref);

@@ -80,10 +80,6 @@ auto my_reserve(PolygonMesh& p,
                 typename boost::graph_traits<PolygonMesh>::faces_size_type nf)
 { reserve(p, nv, ne, nf); }
 
-//!
-template <typename PropertyTag, typename PolygonMesh>
-auto get(PropertyTag tag, const PolygonMesh& pm) { return CGAL::get(tag, pm); }
-
 }
 
 #endif
