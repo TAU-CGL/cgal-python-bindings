@@ -90,116 +90,122 @@ auto has_valid_index_f(const SurfaceMesh& sm, typename SurfaceMesh::Face_index& 
 { return sm.is_valid(fi); }
 
 //!
-template <typename Map_type>
-void register_map(py::module_& m, const std::string& map_name) {
-  py::class_<Map_type>(m, map_name.c_str())
-    .def(py::init<>())
-    .def_ro("map_", &Map_type::map_)
-    ;
+template <typename MapType>
+void export_dynamic_property_map(py::module_& m, const std::string& map_name) {
+  using Mt = MapType;
+  if (! add_attr<Mt>(m, map_name.c_str())) {
+    py::class_<Mt>(m, map_name.c_str())
+      .def(py::init<>())
+      .def_ro("map_", &Mt::map_)
+      ;
+  }
 }
 
 //!
-template <typename Dp, typename Mesh>
-void register_map_get(py::module_& m, const std::string& prop_name) {
-  py::class_<Dp> prop(m, prop_name.c_str());
-  prop.def(py::init<>());
-  m.def("get", &bgl::get<Dp, Mesh>, py::arg("property_map"), py::arg("sm"));
-}
-
-//!
-template <typename Pm, typename P>
-void export_dynamic_edge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
-  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
-  using Dept = CGAL::dynamic_edge_property_t<P>;
-  using Mt = typename boost::property_map<Pm, Dept>::type;
-  register_map<Mt>(m, map_name);
-  register_map_get<Dept, Pm>(m, prop_name);
-  m.def("get", [](const Mt& p, const Ed& e) { return get(p, e); },
-        py::arg("property_map"), py::arg("edge_descriptor"));
-}
-
-//!
-template <typename Pm, typename P>
-void export_dynamic_edge_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
-  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
-  using dp = CGAL::dynamic_edge_property_t<P>;
-  using Mt = typename boost::property_map<Pm, dp>::type;
-  register_map<Mt>(m, map_name);
-  register_map_get<dp, Pm>(m, prop_name);
-  m.def("get", [](const Mt& p, const Ed& e) { return py::bool_(get(p, e)); },
-        py::arg("property_map"), py::arg("edge_descriptor"));
-}
-
-//!
-template <typename Pm, typename P>
-void export_dynamic_face_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
-  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
-  using Dfpt = CGAL::dynamic_face_property_t<P>;
-  using Mt = typename boost::property_map<Pm, Dfpt>::type;
-  register_map<Mt>(m, map_name);
-  register_map_get<Dfpt, Pm>(m, prop_name);
-  m.def("get", [](const Mt& p, const Fd& f) { return get(p, f); },
-        py::arg("property_map"), py::arg("face_descriptor"));
-}
-
-//!
-template <typename Pm, typename P>
-void face_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
-  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
-  using Dfpt = CGAL::dynamic_face_property_t<P>;
-  using Mt = typename boost::property_map<Pm, Dfpt>::type;
-  register_map<Mt>(m, map_name);
-  register_map_get<Dfpt, Pm>(m, prop_name);
-  m.def("get", [](const Mt& p, const Fd& f) { return py::bool_(get(p, f)); },
-        py::arg("property_map"), py::arg("face_descriptor"));
-}
-
-//!
-template <typename Pm, typename P>
-void vertex_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_vertex_map(py::module_& m, const std::string& map_name) {
   using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
-  using dp = CGAL::dynamic_vertex_property_t<P>;
-  using Mt = typename boost::property_map<Pm, dp>::type;
-  register_map<Mt>(m, map_name);
-  register_map_get<dp, Pm>(m, prop_name);
+  using Dvpt = CGAL::dynamic_vertex_property_t<T>;
+  using Mt = typename boost::property_map<Pm, Dvpt>::type;
+  export_dynamic_property_map<Mt>(m, map_name);
+  m.def("get", &bgl::get<Dvpt, Pm>, py::arg("property_map"), py::arg("sm"));
   m.def("get", [](const Mt& p, const Vd& v) { return get(p, v); },
         py::arg("property_map"), py::arg("vertex_descriptor"));
 }
 
 //!
 template <typename Pm, typename P>
-void export_dynamic_vertex_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+void export_dynamic_vertex_bool_map(py::module_& m, const std::string& map_name) {
   using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
-  using dp = CGAL::dynamic_vertex_property_t<P>;
-  using Mt = typename boost::property_map<Pm, dp>::type;
-  register_map<Mt>(m, map_name);
-  register_map_get<dp, Pm>(m, prop_name);
+  using Dvpt = CGAL::dynamic_vertex_property_t<P>;
+  using Mt = typename boost::property_map<Pm, Dvpt>::type;
+  export_dynamic_property_map<Mt>(m, map_name);
+  m.def("get", &bgl::get<Dvpt, Pm>, py::arg("property_map"), py::arg("sm"));
   m.def("get", [](const Mt& p, const Vd& v) { return py::bool_(get(p, v)); },
         py::arg("property_map"), py::arg("vertex_descriptor"));
 }
 
 //!
-template <typename Pm, typename P>
-void export_dynamic_halfedge_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_halfedge_map(py::module_& m, const std::string& map_name) {
   using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
-  using dp = CGAL::dynamic_halfedge_property_t<P>;
-  using Mt = typename boost::property_map<Pm, dp>::type;
-  register_map<Mt>(m, map_name);
-  register_map_get<dp, Pm>(m, prop_name);
+  using Dhpt = CGAL::dynamic_halfedge_property_t<T>;
+  using Mt = typename boost::property_map<Pm, Dhpt>::type;
+  export_dynamic_property_map<Mt>(m, map_name);
+  m.def("get", &bgl::get<Dhpt, Pm>, py::arg("property_map"), py::arg("sm"));
   m.def("get", [](const Mt& p, const Hd& h) { return get(p, h); },
         py::arg("property_map"), py::arg("halfedge_descriptor"));
 }
 
 //!
 template <typename Pm, typename P>
-void export_dynamic_halfedge_bool_map(py::module_& m, const std::string& map_name, const std::string& prop_name) {
+void export_dynamic_halfedge_bool_map(py::module_& m, const std::string& map_name) {
   using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
-  using dp = CGAL::dynamic_halfedge_property_t<P>;
-  using Mt = typename boost::property_map<Pm, dp>::type;
-  register_map<Mt>(m, map_name);
-  register_map_get<dp, Pm>(m, prop_name);
+  using Dhpt = CGAL::dynamic_halfedge_property_t<P>;
+  using Mt = typename boost::property_map<Pm, Dhpt>::type;
+  export_dynamic_property_map<Mt>(m, map_name);
+  m.def("get", &bgl::get<Dhpt, Pm>, py::arg("property_map"), py::arg("sm"));
   m.def("get", [](const Mt& p, const Hd& h) { return py::bool_(get(p, h)); },
         py::arg("property_map"), py::arg("halfedge_descriptor"));
+}
+
+//!
+template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_face_map(py::module_& m, const std::string& map_name) {
+  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
+  using Dfpt = CGAL::dynamic_face_property_t<T>;
+  using Mt = typename boost::property_map<Pm, Dfpt>::type;
+  export_dynamic_property_map<Mt>(m, map_name);
+  m.def("get", &bgl::get<Dfpt, Pm>, py::arg("property_map"), py::arg("sm"));
+  m.def("get", [](const Mt& p, const Fd& f) { return get(p, f); },
+        py::arg("property_map"), py::arg("face_descriptor"));
+}
+
+//!
+template <typename Pm, typename T>
+void export_dynamic_face_bool_map(py::module_& m, const std::string& map_name) {
+  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
+  using Dfpt = CGAL::dynamic_face_property_t<T>;
+  using Mt = typename boost::property_map<Pm, Dfpt>::type;
+  export_dynamic_property_map<Mt>(m, map_name);
+  m.def("get", &bgl::get<Dfpt, Pm>, py::arg("property_map"), py::arg("sm"));
+  m.def("get", [](const Mt& p, const Fd& f) { return py::bool_(get(p, f)); },
+        py::arg("property_map"), py::arg("face_descriptor"));
+}
+
+//!
+template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_edge_map(py::module_& m, const std::string& map_name) {
+  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
+  using Dept = CGAL::dynamic_edge_property_t<T>;
+  using Mt = typename boost::property_map<Pm, Dept>::type;
+  export_dynamic_property_map<Mt>(m, map_name);
+  m.def("get", &bgl::get<Dept, Pm>, py::arg("property_map"), py::arg("sm"));
+  m.def("get", [](const Mt& p, const Ed& e) { return get(p, e); },
+        py::arg("property_map"), py::arg("edge_descriptor"));
+}
+
+//!
+template <typename Pm, typename P>
+void export_dynamic_edge_bool_map(py::module_& m, const std::string& map_name) {
+  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
+  using Dept = CGAL::dynamic_edge_property_t<P>;
+  using Mt = typename boost::property_map<Pm, Dept>::type;
+  export_dynamic_property_map<Mt>(m, map_name);
+  m.def("get", &bgl::get<Dept, Pm>, py::arg("property_map"), py::arg("sm"));
+  m.def("get", [](const Mt& p, const Ed& e) { return py::bool_(get(p, e)); },
+        py::arg("property_map"), py::arg("edge_descriptor"));
+}
+
+/*! Export dynamic property maps.
+ *
+ */
+template <typename Pm, typename V, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_property_maps(py::module_& m, const std::string& prop_name) {
+  export_dynamic_vertex_map<Pm, V, Policy>(m, ("dynamic_vertex_" + prop_name + "_map").c_str());
+  export_dynamic_halfedge_map<Pm, V, Policy>(m, ("dynamic_halfedge_" + prop_name + "_map").c_str());
+  export_dynamic_face_map<Pm, V, Policy>(m, ("dynamic_face_" + prop_name + "_map").c_str());
+  export_dynamic_edge_map<Pm, V, Policy>(m, ("dynamic_edge_" + prop_name + "_map").c_str());
 }
 
 //! Read Polygon soup from a file
@@ -430,6 +436,7 @@ template <typename SurfaceMesh>
 void export_surface_mesh_impl(py::module_& m, const char* name) {
   using Sm = SurfaceMesh;
   using Pnt = typename Sm::Point;
+  using Vec = Kernel::Vector_3;
   using size_type = typename Sm::size_type;
   using Vi = typename Sm::Vertex_index;
   using Ei = typename Sm::Edge_index;
@@ -560,7 +567,23 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   if (! add_attr<Sm>(m, name)) {
 
     py::class_<Sm> sm_c(m, name);
+
     sm::add_maps<Sm, py::class_<Sm>>(sm_c);
+
+    sm::export_dynamic_property_maps<Sm, bool>(m, "bool");
+    sm::export_dynamic_property_maps<Sm, int>(m, "int");
+    sm::export_dynamic_property_maps<Sm, double>(m, "float");
+    sm::export_dynamic_property_maps<Sm, std::size_t>(m, "size_t");
+    sm::export_dynamic_property_maps<Sm, Pnt, py::rv_policy::reference_internal>(m, "point");
+    sm::export_dynamic_property_maps<Sm, Vec, py::rv_policy::reference_internal>(m, "vector_3");
+    sm::export_dynamic_property_maps<Sm, CGAL::IO::Color, py::rv_policy::reference_internal>(m, "color");
+    sm::export_dynamic_property_maps<Sm, py::tuple>(m, "tuple");
+    sm::export_dynamic_property_maps<Sm, py::set>(m, "set");
+
+    if constexpr (! std::is_same<double, FT>::value)
+      sm::export_dynamic_property_maps<Sm, FT, py::rv_policy::reference_internal>(m, "FT");
+
+
     sm_c.def(py::init<>())
       .def(py::init<const Sm&>())
       // .def("assign", &Sm::assign, ri)
