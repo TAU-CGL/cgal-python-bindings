@@ -90,111 +90,97 @@ auto has_valid_index_f(const SurfaceMesh& sm, typename SurfaceMesh::Face_index& 
 { return sm.is_valid(fi); }
 
 //!
-template <typename MapType>
-void export_dynamic_property_map(py::module_& m, const std::string& map_name) {
+ template <typename MapType>
+void export_dynamic_property_map(py::module_& m, const std::string& name) {
   using Mt = MapType;
-  if (! add_attr<Mt>(m, map_name.c_str())) {
-    py::class_<Mt>(m, map_name.c_str())
+  using Key = const typename Mt::key_type;
+  using Value = const typename Mt::value_type;
+  if (! add_attr<Mt>(m, name.c_str())) {
+    py::class_<Mt>(m, name.c_str())
       .def(py::init<>())
       .def_ro("map_", &Mt::map_)
       ;
   }
+  m.def("get", [](const Mt& pm, const Key& key) { return get(pm, key); },
+        py::arg("property_map"), py::arg("key"));
+  m.def("put", [](const Mt& pm, const Key& key, const Value& value) { return put(pm, key, value); },
+        py::arg("property_map"), py::arg("key"), py::arg("value"));
 }
 
 //!
 template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
-void export_dynamic_vertex_map(py::module_& m, const std::string& map_name) {
+void export_dynamic_vertex_map(py::module_& m, const std::string& name) {
   using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
   using Dvpt = CGAL::dynamic_vertex_property_t<T>;
   using Mt = typename boost::property_map<Pm, Dvpt>::type;
-  export_dynamic_property_map<Mt>(m, map_name);
-  m.def("get", &bgl::get<Dvpt, Pm>, py::arg("property_map"), py::arg("sm"));
-  m.def("get", [](const Mt& p, const Vd& v) { return get(p, v); },
-        py::arg("property_map"), py::arg("vertex_descriptor"));
-}
+  constexpr auto ri(py::rv_policy::reference_internal);
+  export_dynamic_property_map<Mt>(m, name);
+  m.def("get", &bgl::get<Dvpt, Pm>, ri, py::arg("property_map"), py::arg("graph"));
 
-//!
-template <typename Pm, typename P>
-void export_dynamic_vertex_bool_map(py::module_& m, const std::string& map_name) {
-  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
-  using Dvpt = CGAL::dynamic_vertex_property_t<P>;
-  using Mt = typename boost::property_map<Pm, Dvpt>::type;
-  export_dynamic_property_map<Mt>(m, map_name);
-  m.def("get", &bgl::get<Dvpt, Pm>, py::arg("property_map"), py::arg("sm"));
-  m.def("get", [](const Mt& p, const Vd& v) { return py::bool_(get(p, v)); },
-        py::arg("property_map"), py::arg("vertex_descriptor"));
+  // Observe that Dvpt is (an instance) exported by the Bgl module.
+  // The get(t, g) function above accepts a tag as the first parameter.
+  // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
+  // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
+  // Also, transfer the first character into lower case
+  m.def(("get_" + std::string(1, std::tolower(name[0])) + name.substr(1)).c_str(),
+        [](Pm& g) { return bgl::get(Dvpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
 template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
-void export_dynamic_halfedge_map(py::module_& m, const std::string& map_name) {
+void export_dynamic_halfedge_map(py::module_& m, const std::string& name) {
   using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
   using Dhpt = CGAL::dynamic_halfedge_property_t<T>;
   using Mt = typename boost::property_map<Pm, Dhpt>::type;
-  export_dynamic_property_map<Mt>(m, map_name);
-  m.def("get", &bgl::get<Dhpt, Pm>, py::arg("property_map"), py::arg("sm"));
-  m.def("get", [](const Mt& p, const Hd& h) { return get(p, h); },
-        py::arg("property_map"), py::arg("halfedge_descriptor"));
-}
+  constexpr auto ri(py::rv_policy::reference_internal);
+  export_dynamic_property_map<Mt>(m, name);
+  m.def("get", &bgl::get<Dhpt, Pm>, ri, py::arg("property_map"), py::arg("graph"));
 
-//!
-template <typename Pm, typename P>
-void export_dynamic_halfedge_bool_map(py::module_& m, const std::string& map_name) {
-  using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
-  using Dhpt = CGAL::dynamic_halfedge_property_t<P>;
-  using Mt = typename boost::property_map<Pm, Dhpt>::type;
-  export_dynamic_property_map<Mt>(m, map_name);
-  m.def("get", &bgl::get<Dhpt, Pm>, py::arg("property_map"), py::arg("sm"));
-  m.def("get", [](const Mt& p, const Hd& h) { return py::bool_(get(p, h)); },
-        py::arg("property_map"), py::arg("halfedge_descriptor"));
+  // Observe that Dvpt is (an instance) exported by the Bgl module.
+  // The get(t, g) function above accepts a tag as the first parameter.
+  // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
+  // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
+  // Also, transfer the first character into lower case
+  m.def(("get_" + std::string(1, std::tolower(name[0])) + name.substr(1)).c_str(),
+        [](Pm& g) { return bgl::get(Dhpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
 template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
-void export_dynamic_face_map(py::module_& m, const std::string& map_name) {
+void export_dynamic_face_map(py::module_& m, const std::string& name) {
   using Fd = typename boost::graph_traits<Pm>::face_descriptor;
   using Dfpt = CGAL::dynamic_face_property_t<T>;
   using Mt = typename boost::property_map<Pm, Dfpt>::type;
-  export_dynamic_property_map<Mt>(m, map_name);
-  m.def("get", &bgl::get<Dfpt, Pm>, py::arg("property_map"), py::arg("sm"));
-  m.def("get", [](const Mt& p, const Fd& f) { return get(p, f); },
-        py::arg("property_map"), py::arg("face_descriptor"));
-}
+  constexpr auto ri(py::rv_policy::reference_internal);
+  export_dynamic_property_map<Mt>(m, name);
+  m.def("get", &bgl::get<Dfpt, Pm>, ri, py::arg("property_map"), py::arg("graph"));
 
-//!
-template <typename Pm, typename T>
-void export_dynamic_face_bool_map(py::module_& m, const std::string& map_name) {
-  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
-  using Dfpt = CGAL::dynamic_face_property_t<T>;
-  using Mt = typename boost::property_map<Pm, Dfpt>::type;
-  export_dynamic_property_map<Mt>(m, map_name);
-  m.def("get", &bgl::get<Dfpt, Pm>, py::arg("property_map"), py::arg("sm"));
-  m.def("get", [](const Mt& p, const Fd& f) { return py::bool_(get(p, f)); },
-        py::arg("property_map"), py::arg("face_descriptor"));
+  // Observe that Dvpt is (an instance) exported by the Bgl module.
+  // The get(t, g) function above accepts a tag as the first parameter.
+  // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
+  // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
+  // Also, transfer the first character into lower case
+  m.def(("get_" + std::string(1, std::tolower(name[0])) + name.substr(1)).c_str(),
+        [](Pm& g) { return bgl::get(Dfpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
 template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
-void export_dynamic_edge_map(py::module_& m, const std::string& map_name) {
+void export_dynamic_edge_map(py::module_& m, const std::string& name) {
   using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
   using Dept = CGAL::dynamic_edge_property_t<T>;
   using Mt = typename boost::property_map<Pm, Dept>::type;
-  export_dynamic_property_map<Mt>(m, map_name);
-  m.def("get", &bgl::get<Dept, Pm>, py::arg("property_map"), py::arg("sm"));
-  m.def("get", [](const Mt& p, const Ed& e) { return get(p, e); },
-        py::arg("property_map"), py::arg("edge_descriptor"));
-}
+  constexpr auto ri(py::rv_policy::reference_internal);
+  export_dynamic_property_map<Mt>(m, name);
+  m.def("get", &bgl::get<Dept, Pm>, ri, py::arg("property_map"), py::arg("graph"));
 
-//!
-template <typename Pm, typename P>
-void export_dynamic_edge_bool_map(py::module_& m, const std::string& map_name) {
-  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
-  using Dept = CGAL::dynamic_edge_property_t<P>;
-  using Mt = typename boost::property_map<Pm, Dept>::type;
-  export_dynamic_property_map<Mt>(m, map_name);
-  m.def("get", &bgl::get<Dept, Pm>, py::arg("property_map"), py::arg("sm"));
-  m.def("get", [](const Mt& p, const Ed& e) { return py::bool_(get(p, e)); },
-        py::arg("property_map"), py::arg("edge_descriptor"));
+  // Observe that Dvpt is (an instance) exported by the Bgl module.
+  // The get(t, g) function above accepts a tag as the first parameter.
+  // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
+  // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
+  // Also, transfer the first character into lower case
+  m.def(("get_" + std::string(1, std::tolower(name[0])) + name.substr(1)).c_str(),
+        [](Pm& g) { return bgl::get(Dept(), g); }, ri, py::arg("graph"));
 }
 
 /*! Export dynamic property maps.
@@ -202,10 +188,10 @@ void export_dynamic_edge_bool_map(py::module_& m, const std::string& map_name) {
  */
 template <typename Pm, typename V, py::rv_policy Policy = py::rv_policy::automatic>
 void export_dynamic_property_maps(py::module_& m, const std::string& prop_name) {
-  export_dynamic_vertex_map<Pm, V, Policy>(m, ("dynamic_vertex_" + prop_name + "_map").c_str());
-  export_dynamic_halfedge_map<Pm, V, Policy>(m, ("dynamic_halfedge_" + prop_name + "_map").c_str());
-  export_dynamic_face_map<Pm, V, Policy>(m, ("dynamic_face_" + prop_name + "_map").c_str());
-  export_dynamic_edge_map<Pm, V, Policy>(m, ("dynamic_edge_" + prop_name + "_map").c_str());
+  export_dynamic_vertex_map<Pm, V, Policy>(m, ("Dynamic_vertex_" + prop_name + "_map").c_str());
+  export_dynamic_halfedge_map<Pm, V, Policy>(m, ("Dynamic_halfedge_" + prop_name + "_map").c_str());
+  export_dynamic_face_map<Pm, V, Policy>(m, ("Dynamic_face_" + prop_name + "_map").c_str());
+  export_dynamic_edge_map<Pm, V, Policy>(m, ("Dynamic_edge_" + prop_name + "_map").c_str());
 }
 
 //! Read Polygon soup from a file
