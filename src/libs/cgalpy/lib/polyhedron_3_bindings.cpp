@@ -37,7 +37,6 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/bgl_global.hpp"
 #include "CGALPY/generator_functions.hpp"
-#include "CGALPY/get.hpp"
 #include "CGALPY/Internal_face_plane_3_map.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/make_iterator.hpp"
@@ -71,14 +70,14 @@ void export_property_map_attributes(C& c) {
 
 //!
 template <typename MapType, typename CellType, py::rv_policy Policy = py::rv_policy::automatic>
-void export_dynamic_property_map(py::module_& m, const std::string& map_name) {
+void export_dynamic_property_map(py::module_& m, const std::string& name) {
   using Mt = MapType;
   using Ct = CellType;
   using Kt = const typename Mt::key_type;
   using Vt = const typename Mt::value_type;
 
-  if (! add_attr<Mt>(m, map_name.c_str())) {
-    py::class_<Mt> pm_c(m, map_name.c_str());
+  if (! add_attr<Mt>(m, name.c_str())) {
+    py::class_<Mt> pm_c(m, name.c_str());
     pm_c.def(py::init<>())
       .def_ro("map_", &Mt::map_)
       .def_ro("default_value_", &Mt::default_value_)
@@ -118,14 +117,14 @@ void export_dynamic_vertex_map(py::module_& m, const std::string& name) {
   using Dvpt = CGAL::dynamic_vertex_property_t<T>;
   using Mt = typename boost::property_map<Pm, Dvpt>::const_type;
   constexpr auto ri(py::rv_policy::reference_internal);
-  export_dynamic_property_map<Mt, Vertex, Policy>(m, name);
-  m.def("get", &bgl::get<Dvpt, Pm>, ri, py::arg("property_map_tag"), py::arg("graph"));
+  export_dynamic_property_map<Mt, Vertex, Policy>(m, "Dynamic_" + name);
+  m.def("get", [](Dvpt tag, Pm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
-  m.def(("get_" + name).c_str(), [](Pm& g) { return bgl::get(Dvpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dvpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
@@ -136,14 +135,14 @@ void export_dynamic_halfedge_map(py::module_& m, const std::string& name) {
   using Dhpt = CGAL::dynamic_halfedge_property_t<T>;
   using Mt = typename boost::property_map<Pm, Dhpt>::const_type;
   constexpr auto ri(py::rv_policy::reference_internal);
-  export_dynamic_property_map<Mt, Halfedge, Policy>(m, name);
-  m.def("get", &bgl::get<Dhpt, Pm>, ri, py::arg("property_map_tag"), py::arg("graph"));
+  export_dynamic_property_map<Mt, Halfedge, Policy>(m, "Dynamic_" + name);
+  m.def("get", [](Dhpt tag, Pm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
 
   // Observe that Dhpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
-  m.def(("get_" + name).c_str(), [](Pm& g) { return bgl::get(Dhpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dhpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
@@ -154,14 +153,14 @@ void export_dynamic_face_map(py::module_& m, const std::string& name) {
   using Dfpt = CGAL::dynamic_face_property_t<T>;
   using Mt = typename boost::property_map<Pm, Dfpt>::const_type;
   constexpr auto ri(py::rv_policy::reference_internal);
-  export_dynamic_property_map<Mt, Face, Policy>(m, name);
-  m.def("get", &bgl::get<Dfpt, Pm>, ri, py::arg("property_map_tag"), py::arg("graph"));
+  export_dynamic_property_map<Mt, Face, Policy>(m, "Dynamic_" + name);
+  m.def("get", [](Dfpt tag, Pm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
 
   // Observe that Dfpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
-  m.def(("get_" + name).c_str(), [](Pm& g) { return bgl::get(Dfpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dfpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
@@ -172,25 +171,24 @@ void export_dynamic_edge_map(py::module_& m, const std::string& name) {
   using Dept = CGAL::dynamic_edge_property_t<T>;
   using Mt = typename boost::property_map<Pm, Dept>::const_type;
   constexpr auto ri(py::rv_policy::reference_internal);
-  export_dynamic_property_map<Mt, Halfedge, Policy>(m, name);
-  m.def("get", &bgl::get<Dept, Pm>, ri, py::arg("property_map_tag"), py::arg("graph"));
+  export_dynamic_property_map<Mt, Halfedge, Policy>(m, "Dynamic_" + name);
+  m.def("get", [](Dept tag, Pm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
 
   // Observe that Dept is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
-  m.def(("get_" + name).c_str(), [](Pm& g) { return bgl::get(Dept(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dept(), g); }, ri, py::arg("graph"));
 }
 
 /*! Export dynamic property maps.
- *
  */
 template <typename Pm, typename V, py::rv_policy Policy = py::rv_policy::automatic>
 void export_dynamic_property_maps(py::module_& m, const std::string& prop_name) {
-  export_dynamic_vertex_map<Pm, V, Policy>(m, ("dynamic_vertex_" + prop_name + "_map").c_str());
-  export_dynamic_halfedge_map<Pm, V, Policy>(m, ("dynamic_halfedge_" + prop_name + "_map").c_str());
-  export_dynamic_face_map<Pm, V, Policy>(m, ("dynamic_face_" + prop_name + "_map").c_str());
-  export_dynamic_edge_map<Pm, V, Policy>(m, ("dynamic_edge_" + prop_name + "_map").c_str());
+  export_dynamic_vertex_map<Pm, V, Policy>(m, ("vertex_" + prop_name + "_map").c_str());
+  export_dynamic_halfedge_map<Pm, V, Policy>(m, ("halfedge_" + prop_name + "_map").c_str());
+  export_dynamic_face_map<Pm, V, Policy>(m, ("face_" + prop_name + "_map").c_str());
+  export_dynamic_edge_map<Pm, V, Policy>(m, ("edge_" + prop_name + "_map").c_str());
 }
 
 // Global access functions
@@ -380,25 +378,6 @@ auto polyhedron_planes(const Polyhedron_3& prn) {
 
 /// @}
 
-/*! \todo Why are these needed at all?
- */
-template <typename PropertyMap>
-typename PropertyMap::value_type
-face_get(const PropertyMap& pm, typename PropertyMap::key_type::value_type& f) {
-  using Facet_handle = typename PropertyMap::key_type;
-  const auto& v = get(pm, Facet_handle(&f));
-  return get(pm, Facet_handle(&f));
-}
-
-/*!
- */
-template <typename PropertyMap>
-void face_put(const PropertyMap& pm, typename PropertyMap::key_type::value_type& f,
-              const typename PropertyMap::value_type& val) {
-  using Facet_handle = typename PropertyMap::key_type;
-  put(pm, Facet_handle(&f), val);
-}
-
 } // namespace pol3
 
 /*! export Internal_face_plane_3_map
@@ -411,14 +390,12 @@ void export_internal_face_plane_3_map(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Ifpm>(m, "Internal_face_plane_3_map")) {
-    py::class_<Ifpm>(m, "Internal_face_plane_3_map")
-      .def(py::init<>())
-      .def("get", &pol3::face_get<Ifpm>, ri)
-      .def("put", &pol3::face_put<Ifpm>)
-      ;
+    py::class_<Ifpm> ifpm_c(m, "Internal_face_plane_3_map");
+    ifpm_c.def(py::init<>());
+    pol3::export_property_map_attributes<Ifpm, Face, py::rv_policy::reference_internal>(ifpm_c);
   }
 
-  m.def("get", [](const Ifpm& pm, Face& f) { return get(pm, Fd(&f)); }, ri, py::arg("property_map"), py::arg("face"));
+  m.def("get", [](const Ifpm& pm, Face& f) { return get(pm, Fd(&f)); }, ri, py::arg("property_map"), py::arg("key"));
 }
 
 // Export Polyhedron_3.
@@ -552,7 +529,8 @@ void export_polyhedron_3(py::module_& m) {
   pol3::export_dynamic_property_maps<Prn, py::tuple>(m, "tuple");
   pol3::export_dynamic_property_maps<Prn, py::set>(m, "set");
 
-  if constexpr (! std::is_same<double, FT>::value) pol3::export_dynamic_property_maps<Prn, FT>(m, "FT");
+  if constexpr (! std::is_same<double, FT>::value)
+    pol3::export_dynamic_property_maps<Prn, FT, py::rv_policy::reference_internal>(m, "FT");
 
   // \todo export CGAL::vertex_incident_patches_t<int> in bgl_bindings, then the following
   // pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map");
@@ -584,7 +562,7 @@ void export_polyhedron_3(py::module_& m) {
 
 #ifdef CGALPY_BGL_BINDINGS
   // Obtain the propery map
-  m.def("get", &bgl::get<Vpt, Prn>, ri, py::arg("property_map_tag"), py::arg("graph"));
+  m.def("get", [](Vpt tag, Prn& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
 #endif
 
   // Observe that Vpt is (an enum) exported by the Bgl module.

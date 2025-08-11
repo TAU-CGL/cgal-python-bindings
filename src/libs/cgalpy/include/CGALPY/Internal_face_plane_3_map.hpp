@@ -32,12 +32,9 @@ public:
 
   Internal_face_plane_3_map() {}
 
-  friend value_type get(const Internal_face_plane_3_map&, Facet_handle f)
-  { return f->plane(); }
+  friend value_type get(const Internal_face_plane_3_map&, Facet_handle f) { return f->plane(); }
 
-  friend void put(const Internal_face_plane_3_map&, key_type f,
-                  const value_type& val)
-  { f->plane() = val; }
+  friend void put(const Internal_face_plane_3_map&, key_type f, const value_type& val) { f->plane() = val; }
 };
 
 } // namespace pol3

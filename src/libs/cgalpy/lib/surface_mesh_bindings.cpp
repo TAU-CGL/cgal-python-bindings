@@ -51,7 +51,6 @@
 #include "CGALPY/export_mesh_partitioning_operations.hpp"
 #include "CGALPY/export_property_map.hpp"
 #include "CGALPY/generator_functions.hpp"
-#include "CGALPY/get.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/surface_mesh_types.hpp"
@@ -108,90 +107,91 @@ void export_dynamic_property_map(py::module_& m, const std::string& name) {
 }
 
 //!
-template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+template <typename SurfaceMesh, typename T, py::rv_policy Policy = py::rv_policy::automatic>
 void export_dynamic_vertex_map(py::module_& m, const std::string& name) {
-  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
+  using Sm = SurfaceMesh;
+  using Vd = typename boost::graph_traits<Sm>::vertex_descriptor;
   using Dvpt = CGAL::dynamic_vertex_property_t<T>;
-  using Mt = typename boost::property_map<Pm, Dvpt>::type;
+  using Mt = typename boost::property_map<Sm, Dvpt>::type;
   constexpr auto ri(py::rv_policy::reference_internal);
-  export_dynamic_property_map<Mt>(m, name);
-  m.def("get", &bgl::get<Dvpt, Pm>, ri, py::arg("property_map"), py::arg("graph"));
+  export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
+  m.def("get", [](Dvpt tag, Sm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_" + std::string(1, std::tolower(name[0])) + name.substr(1)).c_str(),
-        [](Pm& g) { return bgl::get(Dvpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dvpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
-template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+template <typename SurfaceMesh, typename T, py::rv_policy Policy = py::rv_policy::automatic>
 void export_dynamic_halfedge_map(py::module_& m, const std::string& name) {
-  using Hd = typename boost::graph_traits<Pm>::halfedge_descriptor;
+  using Sm = SurfaceMesh;
+  using Hd = typename boost::graph_traits<Sm>::halfedge_descriptor;
   using Dhpt = CGAL::dynamic_halfedge_property_t<T>;
-  using Mt = typename boost::property_map<Pm, Dhpt>::type;
+  using Mt = typename boost::property_map<Sm, Dhpt>::type;
   constexpr auto ri(py::rv_policy::reference_internal);
-  export_dynamic_property_map<Mt>(m, name);
-  m.def("get", &bgl::get<Dhpt, Pm>, ri, py::arg("property_map"), py::arg("graph"));
+  export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
+  m.def("get", [](Dhpt tag, Sm& g) { return CGAL::get(tag, g); }, ri, py::arg("property_map"), py::arg("graph"));
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_" + std::string(1, std::tolower(name[0])) + name.substr(1)).c_str(),
-        [](Pm& g) { return bgl::get(Dhpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dhpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
-template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+template <typename SurfaceMesh, typename T, py::rv_policy Policy = py::rv_policy::automatic>
 void export_dynamic_face_map(py::module_& m, const std::string& name) {
-  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
+  using Sm = SurfaceMesh;
+  using Fd = typename boost::graph_traits<Sm>::face_descriptor;
   using Dfpt = CGAL::dynamic_face_property_t<T>;
-  using Mt = typename boost::property_map<Pm, Dfpt>::type;
+  using Mt = typename boost::property_map<Sm, Dfpt>::type;
   constexpr auto ri(py::rv_policy::reference_internal);
-  export_dynamic_property_map<Mt>(m, name);
-  m.def("get", &bgl::get<Dfpt, Pm>, ri, py::arg("property_map"), py::arg("graph"));
+  export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
+  m.def("get", [](Dfpt tag, Sm& g) { return CGAL::get(tag, g); }, ri, py::arg("property_map"), py::arg("graph"));
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_" + std::string(1, std::tolower(name[0])) + name.substr(1)).c_str(),
-        [](Pm& g) { return bgl::get(Dfpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dfpt(), g); }, ri, py::arg("graph"));
 }
 
 //!
-template <typename Pm, typename T, py::rv_policy Policy = py::rv_policy::automatic>
+template <typename SurfaceMesh, typename T, py::rv_policy Policy = py::rv_policy::automatic>
 void export_dynamic_edge_map(py::module_& m, const std::string& name) {
-  using Ed = typename boost::graph_traits<Pm>::edge_descriptor;
+  using Sm = SurfaceMesh;
+  using Ed = typename boost::graph_traits<Sm>::edge_descriptor;
   using Dept = CGAL::dynamic_edge_property_t<T>;
-  using Mt = typename boost::property_map<Pm, Dept>::type;
+  using Mt = typename boost::property_map<Sm, Dept>::type;
   constexpr auto ri(py::rv_policy::reference_internal);
-  export_dynamic_property_map<Mt>(m, name);
-  m.def("get", &bgl::get<Dept, Pm>, ri, py::arg("property_map"), py::arg("graph"));
+  export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
+  m.def("get", [](Dept tag, Sm& g) { return CGAL::get(tag, g); }, ri, py::arg("property_map"), py::arg("graph"));
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_" + std::string(1, std::tolower(name[0])) + name.substr(1)).c_str(),
-        [](Pm& g) { return bgl::get(Dept(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dept(), g); }, ri, py::arg("graph"));
 }
 
 /*! Export dynamic property maps.
  *
  */
-template <typename Pm, typename V, py::rv_policy Policy = py::rv_policy::automatic>
-void export_dynamic_property_maps(py::module_& m, const std::string& prop_name) {
-  export_dynamic_vertex_map<Pm, V, Policy>(m, ("Dynamic_vertex_" + prop_name + "_map").c_str());
-  export_dynamic_halfedge_map<Pm, V, Policy>(m, ("Dynamic_halfedge_" + prop_name + "_map").c_str());
-  export_dynamic_face_map<Pm, V, Policy>(m, ("Dynamic_face_" + prop_name + "_map").c_str());
-  export_dynamic_edge_map<Pm, V, Policy>(m, ("Dynamic_edge_" + prop_name + "_map").c_str());
+template <typename SurfaceMesh, typename V, py::rv_policy Policy = py::rv_policy::automatic>
+void export_dynamic_property_maps(py::module_& m, const std::string& name) {
+  using Sm = SurfaceMesh;
+  export_dynamic_vertex_map<Sm, V, Policy>(m, ("vertex_" + name + "_map").c_str());
+  export_dynamic_halfedge_map<Sm, V, Policy>(m, ("halfedge_" + name + "_map").c_str());
+  export_dynamic_face_map<Sm, V, Policy>(m, ("face_" + name + "_map").c_str());
+  export_dynamic_edge_map<Sm, V, Policy>(m, ("edge_" + name + "_map").c_str());
 }
 
 //! Read Polygon soup from a file
@@ -254,12 +254,8 @@ py::object faces(const SurfaceMesh& sm)
 template <typename SurfaceMesh, typename Key, typename Value>
 auto add_map(SurfaceMesh& sm, const std::string& name = std::string(), const Value& default_value = Value()) {
   using Sm = SurfaceMesh;
-  using Vi = typename Sm::Vertex_index;
-  using Pnt = typename Sm::Point;
-  using Map = typename Sm::template Property_map<Vi, Pnt>;
   // Surface_mesh::Property_map<edge_descriptor, bool> is_constrained_map =
   //   mesh2.add_property_map<edge_descriptor, bool>("e:is_constrained", true).first;
-
   auto res = sm.template add_property_map<Key, Value>(name, default_value);
   return res;
 }
@@ -282,18 +278,20 @@ void export_property_maps(C& c, const std::string& type_name) {
 }
 
 //!
-template <typename C, typename Mesh, typename Key, typename ValueType>
-void add_generic_map(C& c, const std::string& map_name, const ValueType& default_value = ValueType()) {
-  c.def(("add_" + map_name).c_str(), sm::add_map<Mesh, Key, ValueType>,
+template <typename C, typename SurfaceMesh, typename Key, typename Value>
+void add_generic_map(C& c, const std::string& map_name, const Value& default_value = Value()) {
+  using Sm = SurfaceMesh;
+
+  c.def(("add_" + map_name).c_str(), sm::add_map<Sm, Key, Value>,
         py::arg("name") = std::string(), py::arg("default_value") = default_value,
         "Add a property map named `name` with value type `T` and default `t`\n"
         "for index type `I`. Returns the property map together with a Boolean\n"
         "that is `true` if a new map was created. In case it already exists\n"
         "the existing map together with `false` is returned.")
-    .def(map_name.c_str(), &Mesh::template property_map<Key, ValueType>,
+    .def(map_name.c_str(), &Sm::template property_map<Key, Value>,
          py::arg("name") = std::string(),
          "Obtain an optional property map named `name` with key type `I` and value type `T`.")
-    .def("remove_property_map", &Mesh::template remove_property_map<Key, ValueType>,
+    .def("remove_property_map", &Sm::template remove_property_map<Key, Value>,
          py::arg("p"),
          "Remove the property map `name`. The memory allocated for that property map is freed.")
     ;
@@ -315,7 +313,7 @@ void add_generic_maps(C& c, const std::string& map_name) {
 
 //!
 template <typename SurfaceMesh, typename C>
-C add_maps(C& c) {
+void add_maps(C& c) {
   using Sm = SurfaceMesh;
   using Vi = typename Sm::Vertex_index;
   using Ei = typename Sm::Edge_index;
@@ -323,30 +321,30 @@ C add_maps(C& c) {
   using Fi = typename Sm::Face_index;
   using Pnt = typename Sm::Point;
 
-  c
-    // TODO: add a class for this:
-    .def("property_map_vertex_set_int", [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
-          std::set<int> s;
-          for (auto v : default_value) {
-            try {
-              s.insert(py::cast<int>(v));
-            }
-            catch (const py::cast_error&) {
-              throw std::runtime_error("Cannot cast to int");
-            }
-          }
-          return sm::add_map<Sm, Vi, std::set<int>>(sm, name, s);
-        },
-        py::arg("name") = std::string(), py::arg("default_value") = py::set())
-    // this is here because it confused clang
-    .def("properties_vertex", [](const Sm& sm) { return sm.template properties<Vi>(); },
-        "returns a vector with all strings that describe properties with the key type `Vertex_index`.")
+  c.def("properties_vertex", [](const Sm& sm) { return sm.template properties<Vi>(); },
+        "Obtain a vector with all strings that describe properties with the key type `Vertex_index`.")
     .def("properties_edge", [](const Sm& sm) { return sm.template properties<Ei>(); },
-        "returns a vector with all strings that describe properties with the key type `Edge_index`.")
+        "Obtain a vector with all strings that describe properties with the key type `Edge_index`.")
     .def("properties_halfedge", [](const Sm& sm) { return sm.template properties<Hi>(); },
-        "returns a vector with all strings that describe properties with the key type `Halfedge_index`.")
+        "Obtain a vector with all strings that describe properties with the key type `Halfedge_index`.")
     .def("properties_face", [](const Sm& sm) { return sm.template properties<Fi>(); },
-        "returns a vector with all strings that describe properties with the key type `Face_index`.")
+        "Obtain a vector with all strings that describe properties with the key type `Face_index`.")
+
+    // TODO: add a class for this:
+    .def("property_map_vertex_set_int",
+         [](Sm& sm, const std::string& name, const py::set& default_value = py::set()) {
+           std::set<int> s;
+           for (auto v : default_value) {
+             try {
+               s.insert(py::cast<int>(v));
+             }
+             catch (const py::cast_error&) {
+               throw std::runtime_error("Cannot cast to int");
+             }
+           }
+           return sm::add_map<Sm, Vi, std::set<int>>(sm, name, s);
+         },
+         py::arg("name") = std::string(), py::arg("default_value") = py::set())
     ;
 
 //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
@@ -354,13 +352,13 @@ C add_maps(C& c) {
   using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
   c.def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
         py::arg("name"), py::arg("default_value"),
-        "adds a property map named `name` with value type `Principal_curvatures_and_directions` and default `default_value`\n"
+        "Add a property map named `name` with value type `Principal_curvatures_and_directions` and default `default_value`\n"
         "for index type `Vertex_index`. Returns the property map together with a Boolean\n"
         "that is `true` if a new map was created. In case it already exists\n"
         "the existing map together with `false` is returned.")
     .def("property_map_vertex_Principal_curvatures_and_directions", &Sm::template property_map<Vi, Pcad>,
          py::arg("name") = std::string(),
-         "returns an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
+         "Obtain an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
     ;
 #endif
 
@@ -381,22 +379,20 @@ C add_maps(C& c) {
 #endif
 
   c.def("remove_all_property_maps", &Sm::remove_all_property_maps,
-        "removes all property maps for all index types added by a call to `add_property_map()`.\n"
+        "Remove all property maps for all index types added by a call to `add_property_map()`.\n"
         "The memory allocated for those property maps is freed.");
   c.def("remove_property_maps_vertex", &Sm::template remove_property_maps<Vi>,
-        "removes all property maps for the index type `Vertex_index` added by a call to `add_property_map()`.\n"
+        "Remove all property maps for the index type `Vertex_index` added by a call to `add_property_map()`.\n"
         "The memory allocated for those property maps is freed.");
   c.def("remove_property_maps_edge", &Sm::template remove_property_maps<Ei>,
-        "removes all property maps for the index type `Edge_index` added by a call to `add_property_map()`.\n"
+        "Remove all property maps for the index type `Edge_index` added by a call to `add_property_map()`.\n"
         "The memory allocated for those property maps is freed.");
   c.def("remove_property_maps_halfedge", &Sm::template remove_property_maps<Hi>,
-        "removes all property maps for the index type `Halfedge_index` added by a call to `add_property_map()`.\n"
+        "Remove all property maps for the index type `Halfedge_index` added by a call to `add_property_map()`.\n"
         "The memory allocated for those property maps is freed.");
   c.def("remove_property_maps_face", &Sm::template remove_property_maps<Fi>,
-        "removes all property maps for the index type `Face_index` added by a call to `add_property_map()`.\n"
+        "Remove all property maps for the index type `Face_index` added by a call to `add_property_map()`.\n"
         "The memory allocated for those property maps is freed.");
-
-  return c;
 }
 
 } // namespace sm
@@ -635,7 +631,6 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("has_garbage", &Sm::has_garbage)
       .def("collect_garbage", [](Sm& sm) { sm.collect_garbage(); })
       .def("is_isolated", &Sm::is_isolated)
-      // .def("halfedges_end", &Sm::halfedges_end) // not needed
       .def("set_next_only", &Sm::set_next_only)
       .def("set_prev_only", &Sm::set_prev_only)
       .def("shrink_to_fit", &Sm::shrink_to_fit)
@@ -843,11 +838,16 @@ void export_surface_mesh(py::module_& m) {
 
   //! Obtain the propery maps
 #ifdef CGALPY_BGL_BINDINGS
-  m.def("get", &bgl::get<CGAL::vertex_point_t, Sm_3>, ri);
-  m.def("get", &bgl::get<CGAL::vertex_index_t, Sm_3>, ri);
-  m.def("get", &bgl::get<CGAL::halfedge_index_t, Sm_3>, ri);
-  m.def("get", &bgl::get<CGAL::edge_index_t, Sm_3>, ri);
-  m.def("get", &bgl::get<CGAL::face_index_t, Sm_3>, ri);
+  m.def("get", [](CGAL::vertex_point_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"));
+  m.def("get", [](CGAL::vertex_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"));
+  m.def("get", [](CGAL::halfedge_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"));
+  m.def("get", [](CGAL::face_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"));
+  m.def("get", [](CGAL::edge_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"));
 #endif
 
   // Other
