@@ -205,7 +205,9 @@ if (SKBUILD)
     set(CPPSTD_SETTING -s compiler.cppstd=${CMAKE_CXX_STANDARD})
 
     # Architecture
-    set(ARCH_SETTING -s arch=${CMAKE_SYSTEM_PROCESSOR})
+    if (CMAKE_SYSTEM_PROCESSOR EQUAL "arm64")
+        set(ARCH_SETTING -s arch=armv8)
+    endif()
 
     execute_process(
         COMMAND conan install .
