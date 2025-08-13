@@ -13,6 +13,7 @@
 #include <boost/static_assert.hpp>
 
 #include <CGAL/Dimension.h>
+#include <CGAL/Linear_algebraCd.h>
 
 #include "CGALPY/kernel_d_config.hpp"
 
@@ -57,5 +58,14 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_KERNEL_D");
 using FT_d = Kernel_d::FT;
 using Point_d = Kernel_d::Point_d;
 using Segment_d = Kernel_d::Segment_d;
+using Vector_d = Kernel_d::Vector_d;
+using Linear_algebra_cartesian_d = CGAL::Linear_algebraCd<FT_d>;
+
+// Determine whether the dD kernel is an an EPEC type.
+// An EPEC type has a non trivial FT
+constexpr bool is_epec_d_type() {
+  return ((CGALPY_KERNEL_D == CGALPY_KERNEL_D_EPEC_D) ||
+          (CGALPY_KERNEL_D == CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ));
+}
 
 #endif

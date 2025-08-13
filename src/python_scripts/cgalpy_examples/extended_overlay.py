@@ -39,8 +39,6 @@ for arr in [arr1, arr2]:
   # for ccb in ubf.inner_ccbs():
   #     next(next(ubf.inner_ccbs())).twin().face().set_data(1)
 
-result = Arrangement_2()
-
 # Set the data of a face that is the intersection of two faces
 # from the original arrangements to be the sum of their data
 
@@ -64,7 +62,7 @@ result = Arrangement_2()
 # function, by default, it is the function that accepts the data items
 # of two faces and computes the data item of the overlaid face.
 traits = Aos2.Arr_overlay_traits(lambda f1, f2, f: f.set_data(f1.data()+f2.data()))
-Aos2.overlay(arr1, arr2, result, traits)
+result = Aos2.overlay(arr1, arr2, traits)
 
 for f in result.faces():
   print(f.data())

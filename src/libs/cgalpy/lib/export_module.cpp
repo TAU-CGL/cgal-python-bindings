@@ -15,6 +15,7 @@
 #include "CGALPY/arrangement_on_surface_2_values.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/triangulation_3_values.hpp"
+#include "CGALPY/triangulation_2_values.hpp"
 #include "CGALPY/config.hpp"
 
 namespace py = nanobind;
@@ -26,6 +27,7 @@ void export_alpha_shape_3(py::module_&);
 void export_approximate_kernel(py::module_& m);
 void export_arrangement_on_surface_2(py::module_&);
 void export_basic_viewer(py::module_& m);
+void export_bgl(py::module_&);
 void export_boolean_set_operations_2(py::module_&);
 void export_bounding_volumes(py::module_&);
 void export_cgal(py::module_& m);
@@ -41,11 +43,12 @@ void export_kernel_module(py::module_&);
 void export_kernel_d(py::module_&);
 void export_kinetic_surface_reconstruction(py::module_&);
 void export_minkowski_sum_2(py::module_&);
+void export_nef_3(py::module_&);
 void export_point_location(py::module_&);
 void export_point_set_processing(py::module_&);
-void export_nef_3(py::module_&);
 
 // Polygon Mesh Processing
+void export_polygon_mesh_processing(py::module_&);
 void export_pmp_combinatorial_repair(py::module_&);
 void export_pmp_connected_components(py::module_&);
 void export_pmp_corefinement(py::module_&);
@@ -60,26 +63,40 @@ void export_pmp_location(py::module_&);
 void export_pmp_normal_computation(py::module_&);
 void export_pmp_orientation(py::module_&);
 void export_pmp_meshing(py::module_&);
+void export_pmp_io(py::module_&);
 
+// Polyhedron_3
 void export_polyhedron_3(py::module_&);
+void export_pol3_bgl(py::module_& m);
+
 void export_polygon_2(py::module_&);
-void export_polygon_mesh_processing(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
 void export_region_growing(py::module_&);
 void export_spatial_searching(py::module_&);
+void export_spatial_sorting(py::module_&);
 void export_surface_mesh(py::module_&);
 void export_surface_sweep_2(py::module_&);
 void export_tools(py::module_& m);
 void export_triangulated_surface_mesh_segmentation(py::module_&);
 void export_triangulated_surface_mesh_simplification(py::module_&);
 void export_triangulated_surface_mesh_skeletonization(py::module_&);
+
 void export_triangulation_2(py::module_&);
+void export_tri2_plain(py::module_&);
+void export_tri2_regular(py::module_&);
+void export_tri2_constrained(py::module_&);
+void export_tri2_constrained_delaunay(py::module_&);
+void export_tri2_delaunay(py::module_&);
+
 void export_triangulation_3(py::module_&);
+void export_tri3_plain(py::module_& m);
 void export_tri3_regular(py::module_& m);
 void export_tri3_delaunay(py::module_& m);
+
 void export_triangulation_d(py::module_&);
+
 void export_visibility_2(py::module_&);
 
 #define MY_PYTHON_MODULE(name, m) NB_MODULE(name, m)
@@ -140,6 +157,18 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   auto tri2_m = m.def_submodule("Tri2");
   export_triangulation_2(tri2_m);
+  export_tri2_plain(tri2_m);
+
+#if (CGALPY_TRI2 == CGALPY_TRI2_REGULAR)
+  export_tri2_regular(tri2_m);
+#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
+  export_tri2_constrained(tri2_m);
+#elif (CGALPY_TRI2 == CGALPY_TRI2_DELAUNAY)
+  export_tri2_delaunay(tri2_m);
+#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY)
+  export_tri2_constrained_delaunay(tri2_m);
+#endif
+
 #endif
 
   // 2D Alpha shape must be bound after 2D triangulation!
@@ -152,6 +181,16 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #if defined(CGALPY_SPATIAL_SEARCHING_BINDINGS)
   auto ss_m = m.def_submodule("Ss");
   export_spatial_searching(ss_m);
+#endif
+
+#if defined(CGALPY_SPATIAL_SORTING_BINDINGS)
+  auto st_m = m.def_submodule("St");
+  export_spatial_sorting(st_m);
+#endif
+
+#ifdef CGALPY_BGL_BINDINGS
+  auto bgl_m = m.def_submodule("Bgl");
+  export_bgl(bgl_m);
 #endif
 
 #ifdef CGALPY_BOUNDING_VOLUMES_BINDINGS
@@ -201,6 +240,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #if defined(CGALPY_TRIANGULATION_3_BINDINGS)
   auto tri3_m = m.def_submodule("Tri3");
+  export_tri3_plain(tri3_m);
   export_triangulation_3(tri3_m);
 #if (CGALPY_TRI3 == CGALPY_TRI3_REGULAR)
   export_tri3_regular(tri3_m);
@@ -228,6 +268,7 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #if defined(CGALPY_POLYHEDRON_3_BINDINGS)
   auto pol3_m = m.def_submodule("Pol3");
   export_polyhedron_3(pol3_m);
+  export_pol3_bgl(pol3_m);
 #endif
 
 #if defined(CGALPY_SURFACE_MESH_BINDINGS)
@@ -285,6 +326,9 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 #if defined(CGALPY_PMP_MESHING_BINDINGS)
   export_pmp_meshing(pmp_m);
+#endif
+#if defined(CGALPY_PMP_IO_BINDINGS)
+  export_pmp_io(pmp_m);
 #endif
 #endif
 

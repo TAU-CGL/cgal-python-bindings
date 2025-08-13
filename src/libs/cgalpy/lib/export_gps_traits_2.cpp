@@ -15,7 +15,7 @@
 #include "CGALPY/general_polygon_set_2_types.hpp"
 #include "CGALPY/gps_2_concepts/export_GpsTraits_2.hpp"
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 

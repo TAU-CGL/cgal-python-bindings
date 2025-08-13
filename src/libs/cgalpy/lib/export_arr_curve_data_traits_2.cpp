@@ -15,6 +15,7 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "CGALPY/Curve_data_merge.hpp"
 #include "CGALPY/has_istream_operator.hpp"
 
 namespace py = nanobind;
@@ -40,16 +41,28 @@ void export_arr_curve_data_traits_2(py::module_& m) {
   using Cdm = aos2::Curve_data_merge;
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  if (add_attr<Gt>(m, "Arr_curve_data_traits_2")) return;
+  /* Wrap the Curve_data_merge class. The interface is vased on static member
+   * function and data members only. Thus, we do not wrap any constructor.On the
+   * other hand, every time that two curves are merged, a new object os this
+   * class is constructed, and the operator() is called immediately after. Thus,
+   * wrapping a constructor is redundant and actually misleading.
+   *
+   * In any case, the use of static object makes this whole scheme limited. Once
+   * a callback function is set by a user (that is, a Python script) it is
+   * applied to all arrangement objects constructed by any script that imports
+   * the same binding library.
+   */
+  if (! add_attr<Cdm>(m, "Curve_data_merge")) {
+    py::class_<Cdm>(m, "Curve_data_merge")
+      .def_static("reset_func", &Cdm::reset_func)
+      .def_static("set_func", &Cdm::set_func)
+      .def_prop_rw_static("func",
+                          [](py::handle /*unused*/) { return Cdm::func() ; },
+                          [](py::handle /*unused*/, py::object func) { Cdm::set_func(func); })
+      ;
+  }
 
-  py::class_<Cdm>(m, "Curve_data_merge")
-    .def(py::init<>())
-    .def_static("reset_func", &Cdm::reset_func)
-    .def_static("set_func", &Cdm::set_func)
-    .def_prop_rw_static("func",
-                        [](py::handle /*unused*/) { return Cdm::func() ; },
-                        [](py::handle /*unused*/, py::object func) { Cdm::set_func(func); })
-    ;
+  if (add_attr<Gt>(m, "Arr_curve_data_traits_2")) return;
 
   py::class_<Gt, Base_gt> traits_c(m, "Arr_curve_data_traits_2");
   traits_c.def(py::init<>());

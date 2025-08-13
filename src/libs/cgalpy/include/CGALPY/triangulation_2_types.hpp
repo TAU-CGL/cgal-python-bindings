@@ -13,9 +13,10 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/config.hpp"
-#include "CGALPY/triangulation_2_config.hpp"
 #include "CGALPY/alpha_shape_2_config.hpp"
 #include "CGALPY/kernel_types.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
+#include "CGALPY/triangulation_2_config.hpp"
 
 namespace py = nanobind;
 
@@ -38,14 +39,28 @@ using Fbic = Face_constrained<is_constrained(), Fbi, Traits>::type;
 using F = Face_alpha_shape<alpha_shape_2_bindings(), Fbic, Traits, Ec>::type;
 
   // Triangulation data structure
-using Tds = CGAL::Triangulation_data_structure_2<V, F>;
+using Triangulation_data_structure_2 = CGAL::Triangulation_data_structure_2<V, F>;
+using Tds = Triangulation_data_structure_2;
 using Itag = Intersection_tag<CGALPY_TRI2_INTERSECTION_TAG>::type;
-using Btr = Base_tri<CGALPY_TRI2, Traits, Tds, Itag>::type;
-using Triangulation_2 = Tri<hierarchy(), is_periodic(), Btr>::type;
+
+using My_tri2 = Tri2<CGALPY_TRI2, Traits, Tds, Itag>;
+using Triangulation_2 = My_tri2::Triangulation_2;
+using Triangulation_hierarchy_2 = Th<hierarchy(), is_periodic(), Triangulation_2>::type;
+
+#if (CGALPY_TRI2 == CGALPY_TRI2_PLAIN)
+#elif (CGALPY_TRI2 == CGALPY_TRI2_REGULAR)
+using Regular_triangulation_2 = My_tri2::Regular_triangulation_2;
+#elif (CGALPY_TRI2 == CGALPY_TRI2_DELAUNAY)
+using Delaunay_triangulation_2 = My_tri2::Delaunay_triangulation_2;
+#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
+using Constrained_triangulation_2 = My_tri2::Constrained_triangulation_2;
+#elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY)
+using Constrained_delaunay_triangulation_2 = My_tri2::Constrained_delaunay_triangulation_2;
+using Constrained_triangulation_2 = My_tri2::Constrained_triangulation_2;
+#endif
 
 using Geom_traits = Triangulation_2::Geom_traits;
-using Triangulation_data_structure =
-  Triangulation_2::Triangulation_data_structure;
+using Triangulation_data_structure = Triangulation_2::Triangulation_data_structure;
 using Locate_type = Triangulation_2::Locate_type;
 
 using Point = Triangulation_2::Point;
@@ -80,6 +95,27 @@ using All_edges = Triangulation_2::All_edges;
 using Finite_edges = Triangulation_2::Finite_edges;
 using All_face_handles = Triangulation_2::All_face_handles;
 using Finite_face_handles = Triangulation_2::Finite_face_handles;
+
+//!
+template <typename Triangulation_>
+Vertex& insert_point1(Triangulation_& tri, const Point& p) { return *(tri.insert(p)); }
+
+//!
+template <typename Triangulation_>
+Vertex& insert_point2(Triangulation_& tri, const Point& p, Face& f) { return *(tri.insert(p, Face_handle(&f))); }
+
+//!
+template <typename Triangulation_>
+Vertex& insert_point3(Triangulation_& tri, const Point& p, Locate_type lt, Face& loc, int li)
+{ return *(tri.insert(p, lt, Face_handle(&loc), li)); }
+
+//!
+template <typename Triangulation_>
+int insert_points(Triangulation_& t, py::list& lst) {
+  auto begin = stl_forward_iterator<Point>(lst);
+  auto end = stl_forward_iterator<Point>(lst, false);
+  return t.insert(begin, end);
+}
 
 } // End of namespace tri2
 

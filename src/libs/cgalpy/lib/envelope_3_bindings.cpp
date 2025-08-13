@@ -10,7 +10,7 @@
 
 #include "CGALPY/envelope_3_types.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -19,8 +19,8 @@ namespace env3 {
 //
 Envelope_diagram_2 lower_envelope_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
-  auto begin = stl_input_iterator<Surface_3>(surfaces);
-  auto end = stl_input_iterator<Surface_3>(surfaces, false);
+  auto begin = stl_forward_iterator<Surface_3>(surfaces);
+  auto end = stl_forward_iterator<Surface_3>(surfaces, false);
   CGAL::lower_envelope_3(begin, end, ed);
   return ed;
 }
@@ -28,8 +28,8 @@ Envelope_diagram_2 lower_envelope_3(const py::list& surfaces) {
 //
 Envelope_diagram_2 lower_envelope_xy_monotone_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
-  auto begin = stl_input_iterator<Xy_monotone_surface_3>(surfaces);
-  auto end = stl_input_iterator<Xy_monotone_surface_3>(surfaces, false);
+  auto begin = stl_forward_iterator<Xy_monotone_surface_3>(surfaces);
+  auto end = stl_forward_iterator<Xy_monotone_surface_3>(surfaces, false);
   CGAL::lower_envelope_xy_monotone_3(begin, end, ed);
   return ed;
 }
@@ -37,8 +37,8 @@ Envelope_diagram_2 lower_envelope_xy_monotone_3(const py::list& surfaces) {
 //
 Envelope_diagram_2 upper_envelope_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
-  auto begin = stl_input_iterator<Surface_3>(surfaces);
-  auto end = stl_input_iterator<Surface_3>(surfaces, false);
+  auto begin = stl_forward_iterator<Surface_3>(surfaces);
+  auto end = stl_forward_iterator<Surface_3>(surfaces, false);
   CGAL::upper_envelope_3(begin, end, ed);
   return ed;
 }
@@ -46,8 +46,8 @@ Envelope_diagram_2 upper_envelope_3(const py::list& surfaces) {
 //
 Envelope_diagram_2 upper_envelope_xy_monotone_3(const py::list& surfaces) {
   Envelope_diagram_2 ed;
-  auto begin = stl_input_iterator<Xy_monotone_surface_3>(surfaces);
-  auto end = stl_input_iterator<Xy_monotone_surface_3>(surfaces, false);
+  auto begin = stl_forward_iterator<Xy_monotone_surface_3>(surfaces);
+  auto end = stl_forward_iterator<Xy_monotone_surface_3>(surfaces, false);
   CGAL::upper_envelope_xy_monotone_3(begin, end, ed);
   return ed;
 }

@@ -47,10 +47,9 @@ for f in arr2.faces(): f.set_data(not f.is_unbounded())
 
 # Compute the overlay of the two arrangements, marking only the faces that
 # are intersections of two marked faces in arr1 and arr2, respectively.
-arr = Arrangement()
 Ot = Aos2.Arr_overlay_traits
 overlay_traits = Ot(lambda f1, f2, f: f.set_data(f1.data() and f2.data()))
-Aos2.overlay(arr1, arr2, arr, overlay_traits)
+arr = Aos2.overlay(arr1, arr2, overlay_traits)
 
 # Go over the faces of the resulting arrangement and print the marked ones.
 print("The intersection is: ", end='')

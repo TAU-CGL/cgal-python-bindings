@@ -7,7 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #ifndef CGALPY_CONVEX_HULL_3_TYPES_HPP
-#define CGALPY_CONVEX_HULL_2_TYPES_HPP
+#define CGALPY_CONVEX_HULL_3_TYPES_HPP
 
 #include "CGALPY/convex_hull_3_config.hpp"
 

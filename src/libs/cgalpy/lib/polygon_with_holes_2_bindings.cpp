@@ -12,7 +12,7 @@
 
 #include "CGALPY/polygon_2_types.hpp"
 #include "CGALPY/add_insertion.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
 #include "CGALPY/add_extraction.hpp"
@@ -28,8 +28,8 @@ namespace pol2 {
 // Initialize a polygon with holes from an outer boundary and a list of holes.
 void init_polygon_with_holes_2(Polygon_with_holes_2* pwh, Polygon_2& p,
                                py::list& lst) {
-  auto begin = stl_input_iterator<Polygon_2>(lst);
-  auto end = stl_input_iterator<Polygon_2>(lst, false);
+  auto begin = stl_forward_iterator<Polygon_2>(lst);
+  auto end = stl_forward_iterator<Polygon_2>(lst, false);
   new (pwh) Polygon_with_holes_2(p, begin, end);        // placement new
 }
 

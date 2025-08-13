@@ -11,10 +11,10 @@
 
 #include <CGAL/Envelope_3/Envelope_base.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/make_circulator.hpp"
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "CGALPY/export_circulator.hpp"
+#include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -22,15 +22,14 @@ namespace aos2 {
 
 // Bind iterators & circulators
 
-//
-py::object outer_ccb_circulator(const Face& f)
-{ return make_circulator(f.outer_ccb()); }
+//! Wrap the function that obtains the real circulator
+auto outer_ccb_circulator(const Face& f){ return f.outer_ccb(); }
 
-//
+//! Wrap the iterator
 py::object outer_ccb_iterator(const Face& f)
-{ return make_iterator(f.outer_ccb(), f.outer_ccb()); }
+{ return make_iterator_from_circulator(f.outer_ccb()); }
 
-//
+//!
 py::object outer_ccbs(const Face& f) {
   // Workaround a defficiency in CGAL/MSVC: explicitly specify the inner CCB iterators.
   using Occi = Arrangement_on_surface_2::Outer_ccb_const_iterator;
@@ -39,7 +38,7 @@ py::object outer_ccbs(const Face& f) {
   return make_iterator(begin, end);
 }
 
-//
+//!
 py::object inner_ccbs(const Face& f) {
   // Workaround a defficiency in CGAL/MSVC: explicitly specify the inner CCB iterators.
   using Icci = Arrangement_on_surface_2::Inner_ccb_const_iterator;
@@ -48,7 +47,7 @@ py::object inner_ccbs(const Face& f) {
   return make_iterator(begin, end);
 }
 
-//
+//!
 size_t number_of_inner_ccbs(const Face& f) { return f.number_of_inner_ccbs(); }
 size_t number_of_outer_ccbs(const Face& f) { return f.number_of_outer_ccbs(); }
 
@@ -59,7 +58,7 @@ py::object surfaces(const Face& f)
 
 }
 
-//
+//!
 void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Face = Aos::Face;
@@ -99,8 +98,10 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("has_outer_ccb", &Face::has_outer_ccb)
     .def("number_of_holes", &Face::number_of_holes)
 
-    .def("outer_ccb", &aos2::outer_ccb_circulator, py::keep_alive<0, 1>())
-    .def("outer_ccb_range", &aos2::outer_ccb_iterator, py::keep_alive<0, 1>())
+    .def("outer_ccb", &aos2::outer_ccb_iterator, py::keep_alive<0, 1>())
+
+    // Wrap also the function that obtains the real circulator
+    .def("outer_ccb_circulator", &aos2::outer_ccb_circulator)
 
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
@@ -145,9 +146,7 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   using Icci = Aos::Inner_ccb_const_iterator;
   using Occi = Aos::Outer_ccb_const_iterator;
 
-  add_circulator<Chcc>("Ccb_halfedge_circulator", face_c);
   add_iterator_from_circulator<Chcc>("Ccb_halfedge_iterator", face_c);
-
   add_iterator_of_circulator<Icci, Icci, Chcc>("Inner_ccb_iterator", face_c);
   add_iterator_of_circulator<Occi, Occi, Chcc>("Outer_ccb_iterator", face_c);
 
@@ -155,6 +154,9 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("inner_ccbs", &aos2::inner_ccbs, py::keep_alive<0, 1>())
     .def("holes", &aos2::inner_ccbs, py::keep_alive<0, 1>())
     ;
+
+  //! Weap also the real circulator
+  export_circulator<Chcc>(face_c, "Ccb_halfedge_circulator");
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
   using Si = Face::Data_const_iterator;

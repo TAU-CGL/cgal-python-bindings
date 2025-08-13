@@ -28,12 +28,12 @@ using Traits = Kernel_d;
 
 // Vertex type
 using Vb = CGAL::Triangulation_ds_vertex<void>;
-using V = Vertex_with_data<vertex_with_data(), Vb, py::object, Traits>::type;
+using V = Vertex_selection<is_regular(), vertex_with_data(), Vb, py::object, Traits>::type;
 
 // Cell type
 using Sd = Storage_policy<CGALPY_TRID_STORAGE_POLICY>::type;
 using Cb = CGAL::Triangulation_ds_full_cell<void, Sd>;
-using C = Full_cell_with_data<full_cell_with_data(), Cb, py::object, Traits>::type;
+using C = Full_cell_selection<is_regular(), full_cell_with_data(), Cb, py::object, Traits>::type;
 
 // Dimensionality
 using D = Dimensionality<CGALPY_TRID_DIMENSION_TAG, CGALPY_TRID_DIMENSION>::type;
@@ -42,14 +42,29 @@ using D = Dimensionality<CGALPY_TRID_DIMENSION_TAG, CGALPY_TRID_DIMENSION>::type
 using Tds = CGAL::Triangulation_data_structure<D, V, C>;
 using Sp = Storage_policy<CGALPY_TRID_STORAGE_POLICY>::type;
 using Triangulation_d = Tri<CGALPY_TRID, Traits, Tds>::type;
+
+#if CGALPY_TRID == CGALPY_TRID_REGULAR
+using Regular_triangulation_d = CGAL::Regular_triangulation<Traits, Tds>;
+#endif
+
+#if CGALPY_TRID == CGALPY_TRID_DELAUNAY
+using Delaunay_triangulation_d = CGAL::Delaunay_triangulation<Traits, Tds>;
+#endif
+
 using Geom_traits = Triangulation_d::Geom_traits;
 using Triangulation_ds = Triangulation_d::Triangulation_ds;
+
+using Tds_vertex = Triangulation_ds::Vertex;
+using Tds_full_cell = Triangulation_ds::Full_cell;
 
 using Vertex = Triangulation_d::Vertex;
 using Full_cell = Triangulation_d::Full_cell;
 using Facet = Triangulation_d::Facet;
 using Face = Triangulation_d::Face;
 using Point = Triangulation_d::Point;
+#if CGALPY_TRID == CGALPY_TRID_REGULAR
+  using Weighted_point = Point;
+#endif
 
 using Vertex_handle = Triangulation_d::Vertex_handle;
 using Vertex_iterator = Triangulation_d::Vertex_iterator;
@@ -80,14 +95,6 @@ using Weighted_tag = Triangulation_d::Weighted_tag;
 using Periodic_tag = Triangulation_d::Periodic_tag;
 
 using Rotor = Triangulation_d::Rotor;
-
-#if CGALPY_TRID == CGALPY_TRID_REGULAR
-using Regular_triangulation = CGAL::Regular_triangulation<Traits, Tds>;
-#endif
-
-#if CGALPY_TRID == CGALPY_TRID_DELAUNAY
-using Delaunay_triangulation = CGAL::Delaunay_triangulation<Traits, Tds>;
-#endif
 
 } // End of namespace trid
 

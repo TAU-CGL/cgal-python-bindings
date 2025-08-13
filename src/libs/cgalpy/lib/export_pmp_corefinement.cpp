@@ -171,22 +171,19 @@ bool clip(PolygonMesh& tm, PolygonMesh& clipper,
 
 //!
 template <typename TriangleMesh>
-auto clip_c(TriangleMesh& tm,
-            const Iso_cuboid_3& box,
-            const py::dict& np = py::dict()) {
+auto clip_c(TriangleMesh& tm, const Iso_cuboid_3& box, const py::dict& np = py::dict()) {
   using Pm = TriangleMesh;
   bool visitor = np.contains("visitor");
   if (visitor) {
     try {
       auto v = py::cast<pmp::Corefine_visitor<Pm>>(np["visitor"]);
-      return PMP::clip(tm, box,
-                       internal::parse_pmp_np<TriangleMesh>(np).visitor(v));
-    } catch (const py::cast_error&) {
+      return PMP::clip(tm, box, internal::parse_pmp_np<TriangleMesh>(np).visitor(v));
+    }
+    catch (const py::cast_error&) {
     }
     try {
       auto v = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np["visitor"]);
-      return PMP::clip(tm,
-                       box, internal::parse_pmp_np<TriangleMesh>(np).visitor(v));
+      return PMP::clip(tm, box, internal::parse_pmp_np<TriangleMesh>(np).visitor(v));
     }
     catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
@@ -197,29 +194,27 @@ auto clip_c(TriangleMesh& tm,
   }
 }
 
-  //!
+//!
 template <typename TriangleMesh>
-auto clip_p(TriangleMesh& tm,
-            const Plane_3& plane,
-            const py::dict& np = py::dict()) {
+auto clip_p(TriangleMesh& tm, const Plane_3& plane, const py::dict& np = py::dict()) {
   using Pm = TriangleMesh;
   bool visitor = np.contains("visitor");
   if (visitor) {
     try {
       auto v = py::cast<pmp::Corefine_visitor<Pm>>(np["visitor"]);
-      return PMP::clip(tm, plane,
-                       internal::parse_pmp_np<TriangleMesh>(np).visitor(v));
-    } catch (const py::cast_error&) {
+      return PMP::clip(tm, plane, internal::parse_pmp_np<TriangleMesh>(np).visitor(v));
+    }
+    catch (const py::cast_error&) {
     }
     try {
       auto v = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np["visitor"]);
-      return PMP::clip(tm, plane,
-                       internal::parse_pmp_np<TriangleMesh>(np).visitor(v));
+      return PMP::clip(tm, plane, internal::parse_pmp_np<TriangleMesh>(np).visitor(v));
     }
     catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
-  } else {
+  }
+  else {
     return PMP::clip(tm, plane, internal::parse_pmp_np<TriangleMesh>(np));
   }
 }
@@ -245,9 +240,9 @@ void corefine(PolygonMesh& tm1, PolygonMesh& tm2,
                     .visitor(visitor),
                     internal::parse_pmp_np<PolygonMesh>(np2)
                     // .vertex_point_map(vpm2)
-                    .edge_is_constrained_map(eicm2)
-                    );
-    } catch (const py::cast_error&) {
+                    .edge_is_constrained_map(eicm2));
+    }
+    catch (const py::cast_error&) {
     }
     try {
       auto visitor = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np1["visitor"]);
@@ -257,9 +252,9 @@ void corefine(PolygonMesh& tm1, PolygonMesh& tm2,
                     .visitor(visitor),
                     internal::parse_pmp_np<PolygonMesh>(np2)
                     // .vertex_point_map(vpm2)
-                    .edge_is_constrained_map(eicm2)
-                    );
-    } catch (const py::cast_error&) {
+                    .edge_is_constrained_map(eicm2));
+    }
+    catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
@@ -342,7 +337,8 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                                                            .edge_is_constrained_map(eicm_out3),
                                                                            internal::parse_pmp_np<PolygonMesh>(np_out[3])
                                                                            .edge_is_constrained_map(eicm_out4)));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visit = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np1["visitor"]);
@@ -373,9 +369,9 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                         internal::parse_pmp_np<PolygonMesh>(np_out[3])
                                         // .vertex_point_map(vpm_out4)
                                         .edge_is_constrained_map(eicm_out4)
-                                      )
-                                      );
-      } catch (const py::cast_error&) {
+                                      ));
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -406,7 +402,6 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                                                          // .vertex_point_map(vpm_out4)
                                                                          .edge_is_constrained_map(eicm_out4)));
     }
-
   }
   else if (fimb1) {
     if (visitor_flag) {
@@ -663,7 +658,8 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
                                                       // .vertex_point_map(vpm3)
                                                       .edge_is_constrained_map(eicm_out)
                                                       );
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
@@ -684,7 +680,8 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
                                                       internal::parse_pmp_np<TriangleMesh>(np_out)
                                                       // .vertex_point_map(vpm3)
                                                       .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -725,7 +722,8 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
                                                      internal::parse_pmp_np<TriangleMesh>(np_out)
                                                      // .vertex_point_map(vpm3)
                                                      .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
@@ -743,7 +741,8 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
                                                      internal::parse_pmp_np<TriangleMesh>(np_out)
                                                      // .vertex_point_map(vpm3)
                                                      .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -781,7 +780,8 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
                                                      internal::parse_pmp_np<TriangleMesh>(np_out)
                                                      // .vertex_point_map(vpm3)
                                                      .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
@@ -799,7 +799,8 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
                                                      internal::parse_pmp_np<TriangleMesh>(np_out)
                                                      // .vertex_point_map(vpm3)
                                                      .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -885,7 +886,8 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
                                                          internal::parse_pmp_np<TriangleMesh>(np_out)
                                                          // .vertex_point_map(vpm3)
                                                          .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
@@ -906,7 +908,8 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
                                                          internal::parse_pmp_np<TriangleMesh>(np_out)
                                                          // .vertex_point_map(vpm3)
                                                          .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -947,7 +950,8 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
                                                        internal::parse_pmp_np<TriangleMesh>(np_out)
                                                        // .vertex_point_map(vpm3)
                                                        .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
@@ -965,7 +969,8 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
                                                        internal::parse_pmp_np<TriangleMesh>(np_out)
                                                        // .vertex_point_map(vpm3)
                                                        .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -1003,7 +1008,8 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
                                                        internal::parse_pmp_np<TriangleMesh>(np_out)
                                                        // .vertex_point_map(vpm3)
                                                        .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
@@ -1022,7 +1028,8 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
                                                     // .vertex_point_map(vpm3)
                                                     .edge_is_constrained_map(eicm_out)
                                                     );
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -1102,7 +1109,8 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
                                                   .edge_is_constrained_map(eicm2),
                                                   internal::parse_pmp_np<TriangleMesh>(np_out)
                                                   .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
@@ -1120,7 +1128,8 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
                                                   .edge_is_constrained_map(eicm2),
                                                   internal::parse_pmp_np<TriangleMesh>(np_out)
                                                   .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -1155,7 +1164,8 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
                                                 .edge_is_constrained_map(eicm2),
                                                 internal::parse_pmp_np<TriangleMesh>(np_out)
                                                 .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
@@ -1170,7 +1180,8 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
                                                 .edge_is_constrained_map(eicm2),
                                                 internal::parse_pmp_np<TriangleMesh>(np_out)
                                                 .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -1202,7 +1213,8 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
                                                 .edge_is_constrained_map(eicm2),
                                                 internal::parse_pmp_np<TriangleMesh>(np_out)
                                                 .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
       }
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
@@ -1217,7 +1229,8 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
                                                 .edge_is_constrained_map(eicm2),
                                                 internal::parse_pmp_np<TriangleMesh>(np_out)
                                                 .edge_is_constrained_map(eicm_out));
-      } catch (const py::cast_error&) {
+      }
+      catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
     }
@@ -1752,9 +1765,11 @@ void export_pmp_corefinement(py::module_& m) {
   m.def("clip", &pmp::clip_c<Pm>,
         py::arg("tm"), py::arg("iso_cuboid"),
         py::arg("np") = py::dict());
+#if CGAL_VERSION_NR > 1060100900
   m.def("clip", &pmp::clip_p<Pm>,
         py::arg("tm"), py::arg("plane"),
         py::arg("np") = py::dict());
+#endif
   m.def("clip", &pmp::clip<Pm>,
         py::arg("tm"), py::arg("clipper"),
         py::arg("np_tm") = py::dict(), py::arg("np_c") = py::dict());

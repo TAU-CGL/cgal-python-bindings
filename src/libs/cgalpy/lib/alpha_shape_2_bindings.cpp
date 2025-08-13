@@ -14,7 +14,7 @@
 #include "CGALPY/types.hpp"
 #include "CGALPY/alpha_shape_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
@@ -25,8 +25,8 @@ py::object alphas(const Alpha_shape_2& as)
 { return make_iterator(as.alpha_begin(), as.alpha_end()); }
 
 void as_init(Alpha_shape_2* as, py::list& lst) {
-  auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, false);
+  auto begin = stl_forward_iterator<Point>(lst);
+  auto end = stl_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_2(begin, end);   // placement new
 }
 

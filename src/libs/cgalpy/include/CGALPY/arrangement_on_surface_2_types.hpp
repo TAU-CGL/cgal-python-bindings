@@ -258,8 +258,8 @@ using Isolated_vertex_iterator =
   Arrangement_on_surface_2::Isolated_vertex_iterator;
 using Ccb_halfedge_circulator =
   Arrangement_on_surface_2::Ccb_halfedge_circulator;
-using Halfedge_around_vertex_circulator =
-  Arrangement_on_surface_2::Halfedge_around_vertex_circulator;
+using Halfedge_around_vertex_const_circulator =
+  Arrangement_on_surface_2::Halfedge_around_vertex_const_circulator;
 }
 
 #endif

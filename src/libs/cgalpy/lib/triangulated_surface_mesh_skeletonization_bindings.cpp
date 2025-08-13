@@ -1,3 +1,11 @@
+// Copyright (c) 2022 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/function.h>
 #include <nanobind/stl/vector.h>

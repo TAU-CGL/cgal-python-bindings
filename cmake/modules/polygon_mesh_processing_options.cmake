@@ -122,6 +122,12 @@ function(select_pmp_meshing)
   endif()
 endfunction()
 
+# 15. IO
+function(select_pmp_io)
+  if(${CGALPY_PMP_IO_BINDINGS})
+    add_definitions(-DCGALPY_PMP_IO_BINDINGS=)
+  endif()
+endfunction()
 
 function(select_polygon_mesh_processing)
   select_polygonal_mesh()
@@ -140,6 +146,7 @@ function(select_polygon_mesh_processing)
     select_pmp_normal_computation()              # 12
     select_pmp_orientation()                     # 13
     select_pmp_meshing()                         # 14
+    select_pmp_io()                              # 15
     add_definitions(-DCGALPY_POLYGON_MESH_PROCESSING_BINDINGS=)
   endif()
 endfunction()
@@ -190,7 +197,10 @@ function(get_polygon_mesh_processing_lib_name ret)
   if (${CGALPY_PMP_ORIENTATION_BINDINGS})
     set (part15 "Ori")
   endif ()
-  set(${ret} "pmp${part1}${part2}${part3}${part4}${part5}${part6}${part7}${part8}${part9}${part10}${part11}${part12}${part13}${part14}${part15}" PARENT_SCOPE)
+  if (${CGALPY_PMP_IO_BINDINGS})
+    set (part16 "Io")
+  endif ()
+  set(${ret} "pmp${part1}${part2}${part3}${part4}${part5}${part6}${part7}${part8}${part9}${part10}${part11}${part12}${part13}${part14}${part15}${part16}" PARENT_SCOPE)
 endfunction()
 
 endif()

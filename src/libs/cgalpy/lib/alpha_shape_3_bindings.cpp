@@ -14,7 +14,7 @@
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/alpha_shape_3_types.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
@@ -29,40 +29,40 @@ py::object alphas(const Alpha_shape_3& as)
 void make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
   if (! lst) return;
   if (! py::isinstance<Point>(lst[0])) return;
-  auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, false);
+  auto begin = stl_forward_iterator<Point>(lst);
+  auto end = stl_forward_iterator<Point>(lst, false);
   as.make_alpha_shape(begin, end);
 }
 #endif
 
   void as_init1(Alpha_shape_3* as, py::list& lst) {
-  auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, false);
+  auto begin = stl_forward_iterator<Point>(lst);
+  auto end = stl_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end);           // placement new
 }
 
   void as_init2(Alpha_shape_3* as, py::list& lst, const FT& alpha) {
-  auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, false);
+  auto begin = stl_forward_iterator<Point>(lst);
+  auto end = stl_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end, alpha);    // placement new
 }
 
   void as_init3(Alpha_shape_3* as, py::list& lst, double alpha) {
-  auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, false);
+  auto begin = stl_forward_iterator<Point>(lst);
+  auto end = stl_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end, alpha);    // placement new
 }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   void as_init4(Alpha_shape_3* as, py::list& lst, const FT& alpha, Mode m) {
-  auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, false);
+  auto begin = stl_forward_iterator<Point>(lst);
+  auto end = stl_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end, alpha, m); // placement new
 }
 
   void as_init5(Alpha_shape_3* as, py::list& lst, double alpha, Mode m) {
-  auto begin = stl_input_iterator<Point>(lst);
-  auto end = stl_input_iterator<Point>(lst, false);
+  auto begin = stl_forward_iterator<Point>(lst);
+  auto end = stl_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end, alpha, m); // placement new
 }
 

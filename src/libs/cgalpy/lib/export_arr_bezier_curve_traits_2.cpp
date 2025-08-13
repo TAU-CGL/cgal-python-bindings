@@ -22,7 +22,7 @@
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/add_attr.hpp"
 
 namespace py = nanobind;
@@ -34,8 +34,8 @@ void init_from_points(Curve_2* cv, py::list& lst) {
   using Nt_traits = CGAL::CORE_algebraic_number_traits;
   using Rational = Nt_traits::Rational;
   using Rat_kernel = CGAL::Cartesian<Rational>;
-  auto begin = stl_input_iterator<Rat_kernel::Point_2>(lst);
-  auto end = stl_input_iterator<Rat_kernel::Point_2>(lst, false);
+  auto begin = stl_forward_iterator<Rat_kernel::Point_2>(lst);
+  auto end = stl_forward_iterator<Rat_kernel::Point_2>(lst, false);
   new (cv) Curve_2(begin, end);         // placement new
 }
 

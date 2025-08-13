@@ -15,7 +15,7 @@
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
 #include "CGALPY/export_general_polygon_2.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -33,8 +33,8 @@ void ctr_pgn_op(const typename T::Construct_polygon_2& ctr,
                 const py::list& curves,
                 typename T::Polygon_2& pgn) {
   using Xcv = typename T::X_monotone_curve_2;
-  auto begin = stl_input_iterator<Xcv>(curves);
-  auto end = stl_input_iterator<Xcv>(curves, false);
+  auto begin = stl_forward_iterator<Xcv>(curves);
+  auto end = stl_forward_iterator<Xcv>(curves, false);
   ctr(begin, end, pgn);
 }
 
@@ -50,8 +50,8 @@ ctr_pwh_op(const typename T::Construct_polygon_with_holes_2 ctr,
            const typename T::Polygon_2& boundary,
            const py::list& holes) {
   using Pgn = typename T::Polygon_2;
-  auto begin = stl_input_iterator<const Pgn&>(holes);
-  auto end = stl_input_iterator<const Pgn&>(holes, false);
+  auto begin = stl_forward_iterator<const Pgn&>(holes);
+  auto end = stl_forward_iterator<const Pgn&>(holes, false);
   return ctr(boundary, begin, end);
 }
 

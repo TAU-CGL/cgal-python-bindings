@@ -52,7 +52,6 @@ for f in arr2.faces():
   else: f.set_data(2)
 
 # Compute the overlay of the two arrangements.
-arr = Arrangement()
 Ot = Aos2.Arr_overlay_traits
 
 # You can either pass the lambda function when initializing the class object
@@ -61,7 +60,7 @@ overlay_traits = Ot(lambda f1, f2, f: f.set_data(f1.data()+str(f2.data())))
 # overlay_traits = Ot()
 # overlay_traits.set_ff_f(lambda f1, f2, f: f.set_data(f1.data()+str(f2.data())))
 
-Aos2.overlay(arr1, arr2, arr, overlay_traits)
+arr = Aos2.overlay(arr1, arr2, overlay_traits)
 
 # Go over the faces of the overlay arrangement and print their labels.
 print("The overlay faces are:")

@@ -12,7 +12,7 @@
 
 #include "CGALPY/envelope_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_input_iterator.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
@@ -27,8 +27,8 @@ py::object curves(const Cell& c)
 //
 Envelope_diagram_1 lower_envelope_2(const py::list& curvess) {
   Envelope_diagram_1 ed;
-  auto begin = stl_input_iterator<Curve_2>(curvess);
-  auto end = stl_input_iterator<Curve_2>(curvess, false);
+  auto begin = stl_forward_iterator<Curve_2>(curvess);
+  auto end = stl_forward_iterator<Curve_2>(curvess, false);
   CGAL::lower_envelope_2(begin, end, ed);
   return ed;
 }
@@ -36,8 +36,8 @@ Envelope_diagram_1 lower_envelope_2(const py::list& curvess) {
 //
 Envelope_diagram_1 lower_envelope_x_monotone_2(const py::list& curves) {
   Envelope_diagram_1 ed;
-  auto begin = stl_input_iterator<X_monotone_curve_2>(curves);
-  auto end = stl_input_iterator<X_monotone_curve_2>(curves, false);
+  auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
+  auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
   std::vector<X_monotone_curve_2> xcvs(std::distance(begin, end));
   std::copy(begin, end, xcvs.begin());
   // CGAL::lower_envelope_x_monotone_2(begin, end, ed);
@@ -49,8 +49,8 @@ Envelope_diagram_1 lower_envelope_x_monotone_2(const py::list& curves) {
 //
 Envelope_diagram_1 upper_envelope_2(const py::list& curves) {
   Envelope_diagram_1 ed;
-  auto begin = stl_input_iterator<Curve_2>(curves);
-  auto end = stl_input_iterator<Curve_2>(curves, false);
+  auto begin = stl_forward_iterator<Curve_2>(curves);
+  auto end = stl_forward_iterator<Curve_2>(curves, false);
   CGAL::upper_envelope_2(begin, end, ed);
   return ed;
 }
@@ -58,8 +58,8 @@ Envelope_diagram_1 upper_envelope_2(const py::list& curves) {
 //
 Envelope_diagram_1 upper_envelope_x_monotone_2(const py::list& curves) {
   Envelope_diagram_1 ed;
-  auto begin = stl_input_iterator<X_monotone_curve_2>(curves);
-  auto end = stl_input_iterator<X_monotone_curve_2>(curves, false);
+  auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
+  auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
   std::vector<X_monotone_curve_2> xcvs(std::distance(begin, end));
   std::copy(begin, end, xcvs.begin());
   // CGAL::upper_envelope_x_monotone_2(begin, end, ed);

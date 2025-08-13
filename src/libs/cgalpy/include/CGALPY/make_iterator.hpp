@@ -11,17 +11,18 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/circulator.h>
+
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/iterator_state.hpp"
-#include "CGALPY/circulator_state.hpp"
 
 namespace py = nanobind;
 
-/* The internal representation of an iterator wrapper.  the `__iter__` attribute
+/* The internal representation of an iterator wrapper.  The `__iter__` attribute
  * wraps a function that accepts an iterator state and simply returns it. We can
  * either accept the state by value (and return it) or accept by reference and
- * return the reference. If we return the reference, we must Python taking
- * ownership of it (to prevent Python destructing the state, even when the
+ * return the reference. If we return the reference, we must prevent Python
+ * taking ownership of it to prevent Python destructing the state, even when the
  * Python wrapper is garbage collected.
  */
 template <py::rv_policy Policy,
@@ -59,9 +60,10 @@ void add_iterator(const char* name, C& c, Extra&&... extra) {
                     Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
-// There are cases (actually so far only one), where the value type of the
-// circulator is a handle; in such cases we need to return the dereference
-// of the handle; thus the double application of the dereference operator.
+/*! There are cases (actually so far only one), where the value type of the
+ * circulator is a handle; in such cases we need to return the dereference
+ * of the handle; thus the double application of the dereference operator.
+ */
 template <py::rv_policy Policy,
           typename Iterator, typename Sentinel, typename ValueType,
           typename... Extra,
@@ -86,7 +88,7 @@ void add_dereference_iterator_impl(const char* name, C& c, Extra&&... extra) {
     ;
 }
 
-// Add (wrap) an iterator
+//! Add (wrap) an iterator
 template <typename Iterator, typename Sentinel,
           typename ValueType = decltype(*std::declval<Iterator>()),
           py::rv_policy Policy = py::rv_policy::reference_internal,
@@ -97,14 +99,14 @@ void add_dereference_iterator(const char* name, C& c, Extra&&... extra) {
                                 Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
-//
+//!
 template <py::rv_policy Policy,
           typename Iterator, typename Sentinel, typename ValueType,
           typename... Extra,
           typename C>
 void add_iterator_of_circulator_impl(const char* name, C& c, Extra&&... extra) {
   using state = iterator_state<Iterator, Sentinel>;
-  using sub_state = circulator_state<ValueType>;
+  using sub_state = iterator_state<ValueType, ValueType>;
   if (add_attr<state>(c, name)) return;
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -117,13 +119,13 @@ void add_iterator_of_circulator_impl(const char* name, C& c, Extra&&... extra) {
                          s.first_or_done = true;
                          throw py::stop_iteration();
                        }
-                       return sub_state{*s.it};
+                       return sub_state{*s.it, *s.it, true};
                      },
       std::forward<Extra>(extra)..., Policy)
     ;
 }
 
-// Add (wrap) an iterator
+//! Add (wrap) an iterator
 template <typename Iterator, typename Sentinel,
           typename ValueType = decltype(*std::declval<Iterator>()),
           py::rv_policy Policy = py::rv_policy::reference_internal,
@@ -134,14 +136,20 @@ void add_iterator_of_circulator(const char* name, C& c, Extra&&... extra) {
                                   Extra...>(name, c, std::forward<Extra>(extra)...);
 }
 
-///
+//! Obtain a Python iterator
+template <typename Iterator, typename Sentinel>
+py::object make_iterator(Iterator begin, Sentinel end) {
+  using state = iterator_state<Iterator, Sentinel>;
+  return py::cast(state{begin, end, true});
+}
 
+//!
 template <py::rv_policy Policy,
-          typename Iterator, typename ValueType,
+          typename Circulator, typename ValueType,
           typename... Extra,
           typename C>
 void add_iterator_from_circulator_impl(const char* name, C& c, Extra&&... extra) {
-  using state = iterator_state<Iterator, Iterator>;
+  using state = iterator_state<Circulator, Circulator>;
   if (add_attr<state>(c, name)) return;
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -158,24 +166,26 @@ void add_iterator_from_circulator_impl(const char* name, C& c, Extra&&... extra)
            return *s.it++;
          },
          std::forward<Extra>(extra)..., Policy)
+    .def("size", [](const state& s)->std::size_t { return CGAL::circulator_size(s.it); })
     ;
 }
 
-// Add (wrap) an iterator from a circulator
-template <typename Iterator,
-          typename ValueType = decltype(*std::declval<Iterator>()),
+//! Add (wrap) an iterator from a circulator
+template <typename Circulator,
+          typename ValueType = decltype(*std::declval<Circulator>()),
           py::rv_policy Policy = py::rv_policy::reference_internal,
           typename... Extra,
           typename C>
 void add_iterator_from_circulator(const char* name, C& c, Extra&&... extra) {
-  add_iterator_from_circulator_impl<Policy, Iterator, ValueType,
+  add_iterator_from_circulator_impl<Policy, Circulator, ValueType,
                                     Extra...>(name, c, std::forward<Extra>(extra)...);
 }
-// Obtain a Python iterator
-template <typename Iterator, typename Sentinel>
-py::object make_iterator(Iterator begin, Sentinel end) {
-  using state = iterator_state<Iterator, Sentinel>;
-  return py::cast(state{begin, end, true});
+
+//! Obtain a Python iterator from a circulator
+template <typename Circulator>
+py::object make_iterator_from_circulator(Circulator circ) {
+  using state = iterator_state<Circulator, Circulator>;
+  return py::cast(state{circ, circ, true});
 }
 
 #endif
