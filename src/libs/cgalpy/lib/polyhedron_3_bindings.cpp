@@ -88,7 +88,7 @@ void export_dynamic_property_map(py::module_& m, const std::string& name) {
   }
   m.def("put", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); },
         py::arg("property_map"), py::arg("key"), py::arg("value"));
-  m.def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }), Policy, py::arg("property_map"), py::arg("key");
+  m.def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }, Policy, py::arg("property_map"), py::arg("key"));
 }
 
 //!
