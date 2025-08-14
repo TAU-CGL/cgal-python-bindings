@@ -209,17 +209,9 @@ if (SKBUILD)
     # C++ Standard
     set(CPPSTD_SETTING -s compiler.cppstd=${CMAKE_CXX_STANDARD})
 
-    # Architecture
-    if (CMAKE_SIZEOF_VOID_P EQUAL 8)
-        set(ARCH_SETTING -s arch=x86_64)
-    else()
-        set(ARCH_SETTING -s arch=x86)
-    endif()
-
     execute_process(
         COMMAND conan install .
             ${OS_SETTING}
-            ${ARCH_SETTING}
             ${COMPILER_SETTING}
             ${COMPILER_VERSION}
             ${CPPSTD_SETTING}
