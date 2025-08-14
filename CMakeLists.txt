@@ -209,6 +209,12 @@ if (SKBUILD)
     # C++ Standard
     set(CPPSTD_SETTING -s compiler.cppstd=${CMAKE_CXX_STANDARD})
 
+    # We do not force the atchitecture (via the option `-s arch=<architecture>`); we use the default instead.
+    # Had we forced it, we would probably have used the cmake variable CMAKE_SYSTEM_PROCESSOR, (which is
+    # identical to CMAKE_HOST_SYSTEM_PROCESSOR, unless cross-compiling). Naturally, the content of this variable
+    # depends on the architecture, but also the way this variable is set depends on the architecture; the end
+    # result is that it does not quite provide what conan (version 2) expects; thus further logic would have
+    # been required to satisfy conan.
     execute_process(
         COMMAND conan install .
             ${OS_SETTING}
