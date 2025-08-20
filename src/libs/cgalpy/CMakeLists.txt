@@ -489,7 +489,8 @@ include_directories(include)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/parse_named_parameters.cpp)
 
 # Add dependencies
-link_directories(${Boost_LIBRARY_DIRS})
+# only boost headers are used; no need for libraries
+# link_directories(${Boost_LIBRARY_DIRS})
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/wd4251)
