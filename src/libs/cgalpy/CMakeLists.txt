@@ -488,10 +488,6 @@ include_directories(include)
 # Internal dependencies
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/parse_named_parameters.cpp)
 
-# Add dependencies
-# only boost headers are used; no need for libraries
-# link_directories(${Boost_LIBRARY_DIRS})
-
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/wd4251)
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -704,6 +700,7 @@ if (NOT SKBUILD)
     target_link_libraries(CGALPY PRIVATE
       CGAL::CGAL
       CGAL::Data
+      Boost::headers
       ${PYTHON_LIBRARIES})
 
     if (CGAL_Qt6_FOUND)
@@ -770,10 +767,6 @@ if (NOT SKBUILD)
       # Configure the __init__.py file to automatically load the dependant
       # shared ibraries, when the binding library is loaded (upon "import").
 
-      # only boost headers are used; no need for libraries
-      #if (NOT Boost_LIBRARY_DIRS)
-      #  message(FATAL_ERROR "Boost libraries not found")
-      #endif ()
       if (NOT GMP_LIBRARY_DIR)
         message(FATAL_ERROR "Gmp library not found")
       endif ()
@@ -829,6 +822,7 @@ else ()
 
     target_link_libraries(CGALPY PRIVATE
         CGAL::CGAL
+	Boost::headers
         ${PYTHON_LIBRARIES})
 
     # Currently, the following has no effect as all comoponents of CGAL (e.g.,
