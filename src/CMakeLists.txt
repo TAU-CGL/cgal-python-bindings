@@ -72,7 +72,9 @@ endif ()
 
 # Find required Boost library
 if (SKBUILD)
-    find_package(Boost REQUIRED COMPONENTS system)
+    find_package(Boost REQUIRED)
+    add_definitions(-DBOOST_ALL_NO_LIB)
+    add_definitions(-DBOOST_ALL_HEADER_ONLY)
 else ()
     if (CGALPY_USE_SHARED_LIBS)
         set(Boost_USE_STATIC_LIBS OFF)
