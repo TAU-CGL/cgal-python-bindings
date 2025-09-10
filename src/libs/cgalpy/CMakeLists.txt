@@ -485,12 +485,6 @@ endif ()
 # Add all include directories
 include_directories(include)
 
-# Additional linker flags
-if (APPLE)
-    target_link_options(CGALPY PRIVATE "LINKER:-dead_strip")
-#   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-dead_strip")
-endif()
-
 # Internal dependencies
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/parse_named_parameters.cpp)
 
@@ -849,6 +843,12 @@ else ()
                 VERSION "${CMAKE_PROJECT_VERSION}"
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
+endif()
+
+# Additional linker flags
+if (APPLE)
+    target_link_options(my_tgt PRIVATE "LINKER:-as-needed")
+#   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-dead_strip")
 endif()
 
 
