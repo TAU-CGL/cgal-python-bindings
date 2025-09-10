@@ -847,7 +847,7 @@ endif()
 
 # Additional linker flags
 if (APPLE)
-    target_link_options(my_tgt PRIVATE "LINKER:-as-needed")
+    target_link_options(CGALPY PRIVATE "LINKER:-dead_strip")
 #   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-dead_strip")
 endif()
 
