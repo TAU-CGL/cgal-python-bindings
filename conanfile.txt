@@ -9,3 +9,4 @@ cmake_layout
 *:shared=True
 gmp/*:shared=False
 mpfr/*:shared=False
+boost:headers_only=True
