@@ -820,7 +820,7 @@ else ()
     add_custom_target(CGALPY_INIT ALL DEPENDS ${CGALPY_OUT_INIT})
     list(APPEND CGALPY_BUILD_DEPENDS CGALPY_INIT)
 
-    target_compile_definitions(CGALPY PRIVATE "-UBOOST_ALL_DYN_LINK")
+    target_compile_options(CGALPY PRIVATE "-UBOOST_ALL_DYN_LINK")
     target_link_libraries(CGALPY PRIVATE
         CGAL::CGAL
 	Boost::headers
