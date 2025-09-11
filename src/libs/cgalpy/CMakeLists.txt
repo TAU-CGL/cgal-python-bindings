@@ -820,7 +820,7 @@ else ()
     add_custom_target(CGALPY_INIT ALL DEPENDS ${CGALPY_OUT_INIT})
     list(APPEND CGALPY_BUILD_DEPENDS CGALPY_INIT)
 
-    target_compile_options(CGALPY PRIVATE "-UBOOST_ALL_DYN_LINK")
+    # target_compile_options(CGALPY PRIVATE "-UBOOST_ALL_DYN_LINK")
     target_link_libraries(CGALPY PRIVATE
         CGAL::CGAL
 	Boost::headers
@@ -847,10 +847,10 @@ else ()
 endif()
 
 # Additional linker flags
-if (APPLE)
-    target_link_options(CGALPY PRIVATE "LINKER:-dead_strip")
-#   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-dead_strip")
-endif()
+# if (APPLE)
+#     target_link_options(CGALPY PRIVATE "LINKER:-dead_strip")
+# #   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-dead_strip")
+# endif()
 
 
 ################################################################################
