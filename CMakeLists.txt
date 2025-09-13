@@ -183,8 +183,13 @@ if (SKBUILD)
         endif ()
         set(LIBCXX_SETTING -s compiler.libcxx=libstdc++11)
     elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+        execute_process(
+            COMMAND xcrun --sdk macosx --show-sdk-path
+            OUTPUT_VARIABLE SDK_PATH
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
         set(OS_SETTING -s os=Macos)
-        set(COMPILER_SETTING -s compiler=apple-clang)
+        set(COMPILER_SETTING -s compiler=apple-clang -c tools.apple:sdk_path=${SDK_PATH} -c tools.build:sysroot=${SDK_PATH})
         set(LIBCXX_SETTING -s compiler.libcxx=libc++)
     endif ()
 

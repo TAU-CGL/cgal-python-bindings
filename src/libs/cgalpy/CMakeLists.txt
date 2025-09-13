@@ -820,7 +820,6 @@ else ()
     add_custom_target(CGALPY_INIT ALL DEPENDS ${CGALPY_OUT_INIT})
     list(APPEND CGALPY_BUILD_DEPENDS CGALPY_INIT)
 
-    # target_compile_options(CGALPY PRIVATE "-UBOOST_ALL_DYN_LINK")
     target_link_libraries(CGALPY PRIVATE
         CGAL::CGAL
 	Boost::headers
@@ -839,18 +838,19 @@ else ()
     # https://cmake.org/cmake/help/latest/prop_tgt/LIBRARY_OUTPUT_DIRECTORY.html
     set_target_properties(CGALPY PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
 
-    if (NOT APPLE)
+    if (APPLE)
+        add_custom_command(
+            TARGET CGALPY
+            POST_BUILD
+            COMMAND install_name_tool -add_rpath /opt/homebrew/opt/boost/lib $<TARGET_FILE:CGALPY>
+            COMMENT "Patching rpath of CGALPY with /opt/homebrew/opt/boost/lib"
+        )
+    else ()
         set_target_properties(CGALPY PROPERTIES
                 VERSION "${CMAKE_PROJECT_VERSION}"
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")
     endif ()
 endif()
-
-# Additional linker flags
-# if (APPLE)
-#     target_link_options(CGALPY PRIVATE "LINKER:-dead_strip")
-# #   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-dead_strip")
-# endif()
 
 
 ################################################################################
