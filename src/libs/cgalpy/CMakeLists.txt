@@ -839,11 +839,16 @@ else ()
     set_target_properties(CGALPY PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
 
     if (APPLE)
+        if(CMAKE_OSX_ARCHITECTURES MATCHES "arm64")
+            set(BOOST_LIB_PATH "/opt/homebrew/opt/boost/lib")
+        else()
+            set(BOOST_LIB_PATH "/usr/local/opt/boost/lib")
+        endif()
+
         add_custom_command(
             TARGET CGALPY
             POST_BUILD
-            COMMAND install_name_tool -add_rpath /opt/homebrew/opt/boost/lib $<TARGET_FILE:CGALPY>
-            COMMENT "Patching rpath of CGALPY with /opt/homebrew/opt/boost/lib"
+            COMMAND install_name_tool -add_rpath ${BOOST_LIB_PATH} $<TARGET_FILE:CGALPY>
         )
     else ()
         set_target_properties(CGALPY PROPERTIES
