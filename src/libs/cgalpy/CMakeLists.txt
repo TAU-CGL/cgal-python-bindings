@@ -845,6 +845,15 @@ else ()
             set(BOOST_LIB_PATH "/usr/local/opt/boost/lib")
         endif()
 
+        execute_process(
+            COMMAND conan cache path boost/1.89.0
+            OUTPUT_VARIABLE BOOST_PATH
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+
+        set(BOOST_LIB_PATH ${BOOST_PATH}/../b/lib)
+        message(STATUS "===================== ${BOOST_LIB_PATH} ==========================")
+
         add_custom_command(
             TARGET CGALPY
             POST_BUILD
