@@ -838,27 +838,7 @@ else ()
     # https://cmake.org/cmake/help/latest/prop_tgt/LIBRARY_OUTPUT_DIRECTORY.html
     set_target_properties(CGALPY PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CGALPY_LIB_DIR}/$<0:>)
 
-    if (APPLE)
-        if(CMAKE_OSX_ARCHITECTURES MATCHES "arm64")
-            set(BOOST_LIB_PATH "/opt/homebrew/opt/boost/lib")
-        else()
-            set(BOOST_LIB_PATH "/usr/local/opt/boost/lib")
-        endif()
-
-        # execute_process(
-        #     COMMAND realpath ~/.conan2/p/boost*/b/lib
-        #     OUTPUT_VARIABLE BOOST_LIB_PATH
-        #     OUTPUT_STRIP_TRAILING_WHITESPACE
-        # )
-
-        # message(STATUS "===================== ${BOOST_LIB_PATH} ==========================")
-
-        # add_custom_command(
-        #     TARGET CGALPY
-        #     POST_BUILD
-        #     COMMAND install_name_tool -add_rpath ${BOOST_LIB_PATH} $<TARGET_FILE:CGALPY>
-        # )
-    else ()
+    if (NOT APPLE)
         set_target_properties(CGALPY PROPERTIES
                 VERSION "${CMAKE_PROJECT_VERSION}"
                 SOVERSION "${CMAKE_PROJECT_VERSION_MAJOR}")

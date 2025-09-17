@@ -193,7 +193,6 @@ if (SKBUILD)
         set(LIBCXX_SETTING -s compiler.libcxx=libc++)
         set(CMAKE_MACOSX_RPATH ON)
         set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-        set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
     endif ()
 
     # Build type (Debug/Release)
