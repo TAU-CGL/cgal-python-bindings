@@ -845,19 +845,19 @@ else ()
             set(BOOST_LIB_PATH "/usr/local/opt/boost/lib")
         endif()
 
-        execute_process(
-            COMMAND realpath ~/.conan2/p/boost*/b/lib
-            OUTPUT_VARIABLE BOOST_LIB_PATH
-            OUTPUT_STRIP_TRAILING_WHITESPACE
-        )
+        # execute_process(
+        #     COMMAND realpath ~/.conan2/p/boost*/b/lib
+        #     OUTPUT_VARIABLE BOOST_LIB_PATH
+        #     OUTPUT_STRIP_TRAILING_WHITESPACE
+        # )
 
-        message(STATUS "===================== ${BOOST_LIB_PATH} ==========================")
+        # message(STATUS "===================== ${BOOST_LIB_PATH} ==========================")
 
-        add_custom_command(
-            TARGET CGALPY
-            POST_BUILD
-            COMMAND install_name_tool -add_rpath ${BOOST_LIB_PATH} $<TARGET_FILE:CGALPY>
-        )
+        # add_custom_command(
+        #     TARGET CGALPY
+        #     POST_BUILD
+        #     COMMAND install_name_tool -add_rpath ${BOOST_LIB_PATH} $<TARGET_FILE:CGALPY>
+        # )
     else ()
         set_target_properties(CGALPY PROPERTIES
                 VERSION "${CMAKE_PROJECT_VERSION}"

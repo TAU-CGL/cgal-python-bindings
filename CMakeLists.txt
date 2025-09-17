@@ -189,8 +189,10 @@ if (SKBUILD)
             OUTPUT_STRIP_TRAILING_WHITESPACE
         )
         set(OS_SETTING -s os=Macos)
-        set(COMPILER_SETTING -s compiler=apple-clang -c tools.apple:sdk_path=${SDK_PATH} -c tools.build:sysroot=${SDK_PATH})
+        set(COMPILER_SETTING -s compiler=apple-clang -c tools.apple:sdk_path=${SDK_PATH} -c tools.build:sysroot=${SDK_PATH} -c tools.build:skip_install_name_tool=True)
         set(LIBCXX_SETTING -s compiler.libcxx=libc++)
+        set(CMAKE_MACOSX_RPATH ON)
+        set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
     endif ()
 
     # Build type (Debug/Release)
