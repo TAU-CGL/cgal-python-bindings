@@ -846,12 +846,11 @@ else ()
         endif()
 
         execute_process(
-            COMMAND conan cache path boost/1.89.0
-            OUTPUT_VARIABLE BOOST_PATH
+            COMMAND realpath ~/.conan2/p/boost*/b/lib
+            OUTPUT_VARIABLE BOOST_LIB_PATH
             OUTPUT_STRIP_TRAILING_WHITESPACE
         )
 
-        set(BOOST_LIB_PATH ${BOOST_PATH}/../b/lib)
         message(STATUS "===================== ${BOOST_LIB_PATH} ==========================")
 
         add_custom_command(
