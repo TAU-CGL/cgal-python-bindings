@@ -25,11 +25,9 @@ using Face_descriptor = My_ds_params::Face_descriptor;
 using Volume_descriptor = My_ds_params::Volume_descriptor;
 
 using Graphics_scene_options =
-  CGAL::Graphics_scene_options<Ds, Vertex_descriptor, Edge_descriptor,
-                               Face_descriptor, Volume_descriptor>;
+  CGAL::Graphics_scene_options<Ds, Vertex_descriptor, Edge_descriptor, Face_descriptor, Volume_descriptor>;
 using Graphics_scene_options_extended =
-  Graphics_scene_options_extended<Ds, Vertex_descriptor, Edge_descriptor,
-                                  Face_descriptor, Volume_descriptor>;
+  Graphics_scene_options_extended<Ds, Vertex_descriptor, Edge_descriptor, Face_descriptor, Volume_descriptor>;
 
 }
 
