@@ -31,8 +31,9 @@ struct Compare_y_at_x_left_2_class<T, CGAL::Tag_true> {
   py::class_<Compare_y_at_x_left_2>* m_compare_y_at_x_left_2;
 };
 
-template <typename T>
+template <typename T, typename PointClass = py::class_<typename T::Point_2>>
 struct Aos_basic_traits_classes {
+  using Point_class = PointClass;
   using Point_2 = typename T::Point_2;
   using X_monotone_curve_2 = typename T::X_monotone_curve_2;
   using Compare_x_2 = typename T::Compare_x_2;
@@ -73,7 +74,7 @@ struct Aos_basic_traits_classes {
   }
 
   // Class objects
-  py::class_<Point_2>* m_point_2;
+  Point_class* m_point_2;
   py::class_<X_monotone_curve_2>* m_x_monotone_curve_2;
   py::class_<Compare_x_2>* m_compare_x_2;
   py::class_<Compare_xy_2>* m_compare_xy_2;

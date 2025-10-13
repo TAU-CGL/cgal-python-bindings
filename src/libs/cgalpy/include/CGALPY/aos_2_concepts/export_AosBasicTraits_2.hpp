@@ -10,6 +10,8 @@
 #ifndef CGALPY_EXPORT_AOSBASICTRAITS_2_HPP
 #define CGALPY_EXPORT_AOSBASICTRAITS_2_HPP
 
+#include <type_traits>
+
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
@@ -59,15 +61,15 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
 
   // Point_2
   if (! add_attr<Pnt>(c, "Point_2")) {
-    classes.m_point_2 = new py::class_<Pnt>(c, "Point_2");
+    using Point_class_ptr = decltype(classes.m_point_2);
+    classes.m_point_2 = new std::remove_pointer_t<Point_class_ptr>(c, "Point_2");
     classes.m_point_2->def(py::init<>());
     classes.m_point_2->def(py::init<const Pnt&>());
   }
 
   // X_monotone_curve_2
   if (! add_attr<Xcv>(c, "X_monotone_curve_2")) {
-    classes.m_x_monotone_curve_2 =
-      new py::class_<Xcv>(c, "X_monotone_curve_2");
+    classes.m_x_monotone_curve_2 = new py::class_<Xcv>(c, "X_monotone_curve_2");
     classes.m_x_monotone_curve_2->def(py::init<>());
     classes.m_x_monotone_curve_2->def(py::init<const Xcv&>());
   }
