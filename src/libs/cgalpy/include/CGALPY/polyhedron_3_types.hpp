@@ -71,10 +71,8 @@ using Vertex_const_handle = Polyhedron_3::Vertex_const_handle;
 using Halfedge_const_handle = Polyhedron_3::Halfedge_const_handle;
 using Face_const_handle = Polyhedron_3::Face_const_handle;
 
-using Halfedge_around_facet_circulator =
-  Polyhedron_3::Halfedge_around_facet_circulator;
-using Halfedge_around_facet_const_circulator =
-  Polyhedron_3::Halfedge_around_facet_const_circulator;
+using Halfedge_around_facet_circulator = Polyhedron_3::Halfedge_around_facet_circulator;
+using Halfedge_around_facet_const_circulator = Polyhedron_3::Halfedge_around_facet_const_circulator;
 
 using Halfedge_ds = Polyhedron_3::HalfedgeDS;
 
