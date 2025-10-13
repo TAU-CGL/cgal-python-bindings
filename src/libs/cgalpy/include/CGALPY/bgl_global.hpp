@@ -49,6 +49,23 @@ PolygonMesh my_make_tetrahedron(const typename PolygonMesh::Point& p1,
 }
 
 //!
+template <typename PolygonMesh>
+PolygonMesh my_make_hexahedron(const typename PolygonMesh::Point& p1,
+                               const typename PolygonMesh::Point& p2,
+                               const typename PolygonMesh::Point& p3,
+                               const typename PolygonMesh::Point& p4,
+                               const typename PolygonMesh::Point& p5,
+                               const typename PolygonMesh::Point& p6,
+                               const typename PolygonMesh::Point& p7,
+                               const typename PolygonMesh::Point& p8) {
+  using Pm = PolygonMesh;
+
+  Pm pm;
+  make_hexahedron(p1, p2, p3, p4, p5, p6, p7, p8, pm);
+  return pm;
+}
+
+//!
 // template <typename PolygonMesh>
 // auto collect_garbage(PolygonMesh& p) { collect_garbage(p); }
 
