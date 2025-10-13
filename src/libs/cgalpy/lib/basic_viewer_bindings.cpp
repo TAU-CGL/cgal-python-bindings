@@ -6,8 +6,13 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#define CGAL_USE_BASIC_VIEWER
+
 #include <nanobind/nanobind.h>
 
+#include <CGAL/draw_polyhedron.h>
+#include <CGAL/Graphics_scene.h>
+#include <CGAL/Graphics_scene_options.h>
 #include <CGAL/IO/Color.h>
 
 #include "CGALPY/basic_viewer_types.hpp"
@@ -18,7 +23,7 @@ namespace py = nanobind;
 namespace bvr {
 
 //!
-static PyType_Slot slots[] = {
+static ::PyType_Slot gsoe_slots[] = {
   {Py_tp_traverse, (void*) Graphics_scene_options_extended::tp_traverse},
   {Py_tp_clear, (void*) Graphics_scene_options_extended::tp_clear},
   {0, nullptr}
@@ -56,16 +61,28 @@ void export_basic_viewer(py::module_& m) {
   if (! add_attr<Gso>(m, "Graphics_scene_options_base")) {
     py::class_<Gso>(m, "Graphics_scene_options_base")
       .def(py::init<>())
+      .def("ignore_all_faces", &Gso::ignore_all_faces)
       ;
   }
 
   using Gsoe = bvr::Graphics_scene_options_extended;
   if (! add_attr<Gsoe>(m, "Graphics_scene_options")) {
-    py::class_<Gsoe, Gso>(m, "Graphics_scene_options",
-                          py::type_slots(bvr::slots))
+    py::class_<Gsoe, Gso>(m, "Graphics_scene_options", py::type_slots(bvr::gsoe_slots))
       .def(py::init<>())
       .def("colored_face", &Gsoe::apply_colored_face)
       .def("face_color", &Gsoe::apply_face_color)
       ;
   }
+
+  using Gs = CGAL::Graphics_scene;
+  if (! add_attr<Gs>(m, "Graphics_scene")) {
+    py::class_<Gs>(m, "Graphics_scene")
+      .def(py::init<>())
+      ;
+  }
+
+  m.def("add_to_graphics_scene", [](const bvr::Ds& ds, Gs& gs) { CGAL::add_to_graphics_scene(ds, gs); })
+    .def("add_to_graphics_scene",
+         [](const bvr::Ds& ds, Gs& gs, const Gso& gso) { CGAL::add_to_graphics_scene(ds, gs, gso); })
+    .def("draw_graphics_scene", &CGAL::draw_graphics_scene);
 }
