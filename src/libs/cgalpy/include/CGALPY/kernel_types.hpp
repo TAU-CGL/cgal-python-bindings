@@ -29,6 +29,7 @@ using BigInt = CORE::BigInt;
 
 using FT = Kernel::FT;
 using RT = Kernel::RT;
+
 using Point_2 = Kernel::Point_2;
 using Segment_2 = Kernel::Segment_2;
 using Line_2 = Kernel::Line_2;
@@ -38,6 +39,8 @@ using Vector_2 = Kernel::Vector_2;
 using Circle_2 = Kernel::Circle_2;
 using Triangle_2 = Kernel::Triangle_2;
 using Iso_rectangle_2 = Kernel::Iso_rectangle_2;
+
+using Direction_3 = Kernel::Direction_3;
 using Point_3 = Kernel::Point_3;
 using Plane_3 = Kernel::Plane_3;
 using Weighted_point_3 = Kernel::Weighted_point_3;
