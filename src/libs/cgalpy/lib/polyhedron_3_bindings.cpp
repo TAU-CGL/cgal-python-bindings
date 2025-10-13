@@ -637,6 +637,7 @@ void export_polyhedron_3(py::module_& m) {
 
   // Generators
   m.def("make_tetrahedron", &bgl::my_make_tetrahedron<Prn>);
+  m.def("make_hexahedron", &bgl::my_make_hexahedron<Prn>);
 
   // using Edge_bool_tag = CGAL::dynamic_edge_property_t<bool>;
   // using ebmap_type = boost::property_map<Prn, Edge_bool_tag>::type;
