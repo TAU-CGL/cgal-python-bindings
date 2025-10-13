@@ -41,19 +41,24 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
   py::class_<Gt, Kernel> traits_c(m, "Arr_geodesic_arc_on_sphere_traits_2");
   traits_c.def(py::init<>())
     .def("construct_point_2_object", &Gt::construct_point_2_object)
-    .def("construct_x_monotone_segment_2_object",
-         &Gt::construct_x_monotone_curve_2_object)
+    .def("construct_x_monotone_segment_2_object", &Gt::construct_x_monotone_curve_2_object)
     .def("construct_curve_2_object", &Gt::construct_curve_2_object)
     ;
 
   struct Concepts {
-    Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
+    Aos_basic_traits_classes<Gt, py::class_<Pnt, Direction_3>> m_aos_basic_traits_2_classes;
     Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
     Aos_traits_classes<Gt> m_aos_traits_2_classes;
     Aos_spherical_boundary_traits_classes<Gt> m_aos_spherical_boundary_traits_2_classes;
-    Aos_directional_x_monotone_traits_classes<Gt>
-      m_aos_directional_x_monotone_traits_2_classes;
+    Aos_directional_x_monotone_traits_classes<Gt> m_aos_directional_x_monotone_traits_2_classes;
   } concepts;
+
+  if (! add_attr<Pnt>(traits_c, "Point_2")) {
+    concepts.m_aos_basic_traits_2_classes.m_point_2 = new py::class_<Pnt, Direction_3>(traits_c, "Point_2");
+    concepts.m_aos_basic_traits_2_classes.m_point_2->def(py::init<>());
+    concepts.m_aos_basic_traits_2_classes.m_point_2->def(py::init<const Pnt&>());
+  }
+
   export_AosTraits_2<Gt>(traits_c, concepts);
   export_AosDirectionalXMonotoneTraits_2<Gt>(traits_c, concepts);
   export_AosSphericalBoundaryTraits_2<Gt>(traits_c, concepts);
