@@ -88,17 +88,19 @@ void export_kernel(C_& ker_c) {
   using Cc_in_between_2 = typename Ker::Counterclockwise_in_between_2;
 
   // Kernel 3D operators
-  using Ctr_pln_3 = typename Ker::Construct_plane_3;
-  using Ctr_tran_pnt_3 = typename Ker::Construct_translated_point_3;
+  using Cmp_xyz_3 = typename Ker::Compare_xyz_3;
   using Cmp_z_3 = typename Ker::Compare_z_3;
-
+  using Coplanar_orient_3 = typename Ker::Coplanar_orientation_3;
+  using Ctr_cross_prod_vec_3 = typename Ker::Construct_cross_product_vector_3;
+  using Ctr_lin_3 = typename Ker::Construct_line_3;
+  using Ctr_pln_3 = typename Ker::Construct_plane_3;
   using Ctr_pnt_3 = typename Ker::Construct_point_3;
   using Ctr_seg_3 = typename Ker::Construct_segment_3;
-  using Ctr_tri_3 = typename Ker::Construct_triangle_3;
   using Ctr_tet_3 = typename Ker::Construct_tetrahedron_3;
+  using Ctr_tran_pnt_3 = typename Ker::Construct_translated_point_3;
+  using Ctr_tri_3 = typename Ker::Construct_triangle_3;
   using Ctr_vec_3 = typename Ker::Construct_vector_3;
-  using Cmp_xyz_3 = typename Ker::Compare_xyz_3;
-  using Coplanar_orient_3 = typename Ker::Coplanar_orientation_3;
+  using Intersect_3 = typename Ker::Intersect_3;
   using Orient_3 = typename Ker::Orientation_3;
 
   ker_c.def(py::init<>())
@@ -122,6 +124,14 @@ void export_kernel(C_& ker_c) {
          { return k.counterclockwise_in_between_2_object(); })
 
     // 3D operators
+    .def("compare_xyz_3_object",
+         [](const Ker& k)->Cmp_xyz_3{ return k.compare_xyz_3_object(); })
+    .def("compare_z_3_object",
+         [](const Ker& k)->Cmp_z_3{ return k.compare_z_3_object(); })
+    .def("construct_cross_product_vector_3_object",
+         [](const Ker& k)->Ctr_cross_prod_vec_3{ return k.construct_cross_product_vector_3_object(); })
+    .def("construct_line_3_object",
+         [](const Ker& k)->Ctr_lin_3{ return k.construct_line_3_object(); })
     .def("construct_plane_3_object",
          [](const Ker& k)->Ctr_pln_3{ return k.construct_plane_3_object(); })
     .def("construct_point_3_object",
@@ -131,8 +141,10 @@ void export_kernel(C_& ker_c) {
          { return k.construct_translated_point_3_object(); })
     .def("construct_vector_3_object",
          [](const Ker& k)->Ctr_vec_3{ return k.construct_vector_3_object(); })
-    .def("compare_z_3_object",
-         [](const Ker& k)->Cmp_z_3{ return k.compare_z_3_object(); })
+    .def("intersect_3_object",
+         [](const Ker& k)->Intersect_3{ return k.intersect_3_object(); })
+    .def("orientation_3_object",
+         [](const Ker& k)->Orient_3{ return k.orientation_3_object(); })
     ;
 
   ////////// 2D
@@ -362,11 +374,31 @@ void export_kernel(C_& ker_c) {
 
   //////// 3D Operators
 
+  // Compare_xyz_3
+  using Cmp_xyz_3_op =
+    CGAL::Comparison_result(Cmp_xyz_3::*)(const Pnt_3&, const Pnt_3&)const;
+  py::class_<Cmp_xyz_3>(ker_c, "Compare_xyz_3")
+    .def("__call__", static_cast<Cmp_xyz_3_op>(&Cmp_xyz_3::operator()))
+    ;
+
   // Compare_z_3
-  using Cmp_z_3_op =
-    CGAL::Comparison_result(Cmp_z_3::*)(const Pnt_3&, const Pnt_3&)const;
+  using Cmp_z_3_op = CGAL::Comparison_result(Cmp_z_3::*)(const Pnt_3&, const Pnt_3&)const;
   py::class_<Cmp_z_3>(ker_c, "Compare_z_3")
     .def("__call__", static_cast<Cmp_z_3_op>(&Cmp_z_3::operator()))
+    ;
+
+  // Construct_cross_product_vector_3
+  py::class_<Ctr_cross_prod_vec_3>(ker_c, "Construct_cross_product_vector_3")
+    .def("__call__",
+         [](Ctr_cross_prod_vec_3 ctr, const Vec_3& v1, const Vec_3& v2)->Vec_3 const
+         { return ctr(v1, v2); })
+    ;
+
+  //! Construct_line_3
+  py::class_<Ctr_lin_3>(ker_c, "Construct_line_3")
+    .def("__call__",
+         [](Ctr_lin_3 ctr, const Pnt_3& p, const Pnt_3& q)->Line_3 const
+         { return ctr(p, q); })
     ;
 
   // Construct_plane_3
@@ -376,8 +408,7 @@ void export_kernel(C_& ker_c) {
          [](Ctr_pln_3 ctr, const Pnt_3& pnt, const Dir_3& dir)->Pln_3 const
          { return ctr(pnt, dir); })
     .def("__call__",
-         [](Ctr_pln_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
-         ->Pln_3 const
+         [](Ctr_pln_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)->Pln_3 const
          { return ctr(p, q, r); })
     ;
 
@@ -393,29 +424,11 @@ void export_kernel(C_& ker_c) {
          { return ctr(x, y, z); })
     ;
 
-  // Construct_translated_point_3
-  // using Ctr_tran_pnt_3_op =
-  //   Pnt_3(Ctr_tran_pnt_3::*)(const Pnt_3&, const Vec_3&)const;
-  py::class_<Ctr_tran_pnt_3>(ker_c, "Construct_translated_point_3")
-    .def("__call__",
-         // static_cast<Ctr_tran_pnt_3_op>(&Ctr_tran_pnt_3::operator()))
-         [](Ctr_tran_pnt_3& ctr, const Pnt_3& pnt, const Vec_3& vec)->Pnt_3 const
-         { return (ctr(pnt, vec)); })
-    ;
-
   //! Construct_segment_3
   py::class_<Ctr_seg_3>(ker_c, "Construct_segment_3")
     .def("__call__",
          [](Ctr_seg_3 ctr, const Pnt_3& p, const Pnt_3& q)->Seg_3 const
          { return ctr(p, q); })
-    ;
-
-  //! Construct_triangle_3
-  py::class_<Ctr_tri_3>(ker_c, "Construct_triangle_3")
-    .def("__call__",
-         [](Ctr_tri_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
-         ->Tri_3 const
-         { return ctr(p, q, r); })
     ;
 
   //! Construct_tetrahedron_3
@@ -427,6 +440,24 @@ void export_kernel(C_& ker_c) {
          { return ctr(p, q, r, s); })
     ;
 
+  // Construct_translated_point_3
+  // using Ctr_tran_pnt_3_op =
+  //   Pnt_3(Ctr_tran_pnt_3::*)(const Pnt_3&, const Vec_3&)const;
+  py::class_<Ctr_tran_pnt_3>(ker_c, "Construct_translated_point_3")
+    .def("__call__",
+         // static_cast<Ctr_tran_pnt_3_op>(&Ctr_tran_pnt_3::operator()))
+         [](Ctr_tran_pnt_3& ctr, const Pnt_3& pnt, const Vec_3& vec)->Pnt_3 const
+         { return (ctr(pnt, vec)); })
+    ;
+
+  //! Construct_triangle_3
+  py::class_<Ctr_tri_3>(ker_c, "Construct_triangle_3")
+    .def("__call__",
+         [](Ctr_tri_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
+         ->Tri_3 const
+         { return ctr(p, q, r); })
+    ;
+
   //! Construct_vector_3
   py::class_<Ctr_vec_3>(ker_c, "Construct_vector_3")
     .def("__call__",
@@ -434,25 +465,26 @@ void export_kernel(C_& ker_c) {
          { return ctr(p, q); })
     ;
 
-  // Compare_xyz_3
-  using Cmp_xyz_3_op =
-    CGAL::Comparison_result(Cmp_xyz_3::*)(const Pnt_3&, const Pnt_3&)const;
-  py::class_<Cmp_xyz_3>(ker_c, "Compare_xyz_3")
-    .def("__call__", static_cast<Cmp_xyz_3_op>(&Cmp_xyz_3::operator()))
+  //! Intersect_3
+  py::class_<Intersect_3>(ker_c, "Intersect_3")
+    .def("__call__",
+         [](Intersect_3 ctr, const Pln_3& p, const Pln_3& q)->py::object const {
+           auto result = ctr(p, q);
+           if (! result) return py::none();    // no intersection
+           const auto* lp = std::get_if<Line_3>(&*result);
+           if (! lp) return py::none();
+           return py::cast(*lp);
+         })
     ;
 
   // Coplanar_orientation_3
-  using Coplanar_orient_3_op =
-    CGAL::Orientation(Coplanar_orient_3::*)(const Pnt_3&, const Pnt_3&,
-                                            const Pnt_3&)const;
+  using Coplanar_orient_3_op = CGAL::Orientation(Coplanar_orient_3::*)(const Pnt_3&, const Pnt_3&, const Pnt_3&)const;
   py::class_<Coplanar_orient_3>(ker_c, "Coplanar_orientation_3")
     .def("__call__", static_cast<Coplanar_orient_3_op>(&Coplanar_orient_3::operator()))
     ;
 
   // Orientation_3
-  using Orient_3_op =
-    CGAL::Orientation(Orient_3::*)(const Pnt_3&, const Pnt_3&, const Pnt_3&,
-                                   const Pnt_3&)const;
+  using Orient_3_op = CGAL::Orientation(Orient_3::*)(const Pnt_3&, const Pnt_3&, const Pnt_3&, const Pnt_3&)const;
   py::class_<Orient_3>(ker_c, "Orientation_3")
     .def("__call__", static_cast<Orient_3_op>(&Orient_3::operator()))
     ;
