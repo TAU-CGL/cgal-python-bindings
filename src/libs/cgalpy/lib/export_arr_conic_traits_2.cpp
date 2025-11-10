@@ -7,12 +7,15 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <type_traits>
+
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Arr_conic_traits_2.h>
 #include <CGAL/Cartesian.h>
 #include <CGAL/CORE_algebraic_number_traits.h>
 
+#include "CGALPY/add_attr.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
@@ -26,6 +29,8 @@
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_circle_2.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "CGALPY/Kernel/export_mpz_int.hpp"
+#include "CGALPY/Kernel/export_mpq_rational.hpp"
 
 namespace py = nanobind;
 
@@ -64,25 +69,38 @@ void export_arr_conic_traits_2(py::module_& m) {
       m_aos_directional_x_monotone_traits_2_classes;
   } concepts;
 
-  if (! add_attr<Integer>(traits_c, "Integer")) {
-    py::class_<Integer> int_c(traits_c, "Integer");
-    int_c.def(py::init<const Integer&>())
-      .def(py::init_implicit<int>())
-      ;
+  if constexpr (std::is_same_v<Integer, boost::multiprecision::mpz_int>) {
+    export_mpz_int(traits_c);
+    add_attr<Integer>(traits_c, "Integer");
+  }
+  else {
+    if (! add_attr<Integer>(traits_c, "Integer")) {
+      py::class_<Integer> int_c(traits_c, "Integer");
+      int_c.def(py::init<const Integer&>())
+        .def(py::init_implicit<int>())
+        ;
 
-    add_insertion(int_c, "__str__");
-    add_insertion(int_c, "__repr__");
+      add_insertion(int_c, "__str__");
+      add_insertion(int_c, "__repr__");
+    }
   }
 
-  if (! add_attr<Rational>(traits_c, "Rational")) {
-    py::class_<Rational> rat_c(traits_c, "Rational");
-    export_ft(rat_c);
-    rat_c.def(py::init_implicit<Integer>())
-      .def(py::init<const Integer&, const Integer&>())
-      ;
+  if constexpr (std::is_same_v<Rational, boost::multiprecision::mpq_rational>) {
+    export_mpq_rational(traits_c);
+    add_attr<Rational>(traits_c, "Rational");
+  }
+  else {
+    if (! add_attr<Rational>(traits_c, "Rational")) {
+      py::class_<Rational> rat_c(traits_c, "Rational");
+      export_ft(rat_c);
+      rat_c.def(py::init<const Rational&>())
+        .def(py::init_implicit<Integer>())
+        .def(py::init<const Integer&, const Integer&>())
+        ;
 
-    add_insertion(rat_c, "__str__");
-    add_insertion(rat_c, "__repr__");
+      add_insertion(rat_c, "__str__");
+      add_insertion(rat_c, "__repr__");
+    }
   }
 
   if (! add_attr<Algebraic>(traits_c, "Algebraic")) {
