@@ -27,8 +27,11 @@ void export_aff_transformation_3(C& c) {
     .def(py::init<const CGAL::Scaling, const Rt&, const Rt&>(),
          py::arg("Scaling"), py::arg("s"), py::arg("hw") = Rt(1),
          "introduces a scaling by a scale factor s/hw.")
-    .def(py::init<const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&>(),
-         py::arg("m00"), py::arg("m01"), py::arg("m02"), py::arg("m03"), py::arg("m10"), py::arg("m11"), py::arg("m12"), py::arg("m13"), py::arg("m20"), py::arg("m21"), py::arg("m22"), py::arg("m23"), py::arg("hw") = Rt(1),
+    .def(py::init<const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&,
+         const Rt&, const Rt&, const Rt&, const Rt&, const Rt&, const Rt&>(),
+         py::arg("m00"), py::arg("m01"), py::arg("m02"), py::arg("m03"),
+         py::arg("m10"), py::arg("m11"), py::arg("m12"), py::arg("m13"),
+         py::arg("m20"), py::arg("m21"), py::arg("m22"), py::arg("m23"), py::arg("hw") = Rt(1),
          "introduces a general affine transformation of the matrix form ⎛⎝⎜⎜⎜⎜m00m10m200m01m11m210m02m12m220m03m13m23hw⎞⎠⎟⎟⎟⎟.")
     .def("transform", [](const Aff_3& t, const Pnt_3& p) { return t.transform(p); },
          py::sig("def transform(self, p: Point_3, /) -> Point_3"))
