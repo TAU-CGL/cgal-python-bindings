@@ -29,7 +29,6 @@
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_circle_2.hpp"
 #include "CGALPY/add_insertion.hpp"
-#include "CGALPY/Kernel/export_mpz_int.hpp"
 #include "CGALPY/Kernel/export_mpq_rational.hpp"
 
 namespace py = nanobind;
@@ -69,11 +68,14 @@ void export_arr_conic_traits_2(py::module_& m) {
       m_aos_directional_x_monotone_traits_2_classes;
   } concepts;
 
-  if constexpr (std::is_same_v<Integer, boost::multiprecision::mpz_int>) {
-    export_mpz_int(traits_c);
+  if constexpr (std::is_same_v<Rational, boost::multiprecision::mpq_rational>) {
+    // Export Boost multiprecision integer and rational unlimited precision types
+    export_mpq_rational(traits_c);
+    add_attr<Rational>(traits_c, "Rational");
     add_attr<Integer>(traits_c, "Integer");
   }
   else {
+    // Fall back; if other options exist, the corresponding wrappers whould be added
     if (! add_attr<Integer>(traits_c, "Integer")) {
       py::class_<Integer> int_c(traits_c, "Integer");
       int_c.def(py::init<const Integer&>())
@@ -83,13 +85,7 @@ void export_arr_conic_traits_2(py::module_& m) {
       add_insertion(int_c, "__str__");
       add_insertion(int_c, "__repr__");
     }
-  }
 
-  if constexpr (std::is_same_v<Rational, boost::multiprecision::mpq_rational>) {
-    export_mpq_rational(traits_c);
-    add_attr<Rational>(traits_c, "Rational");
-  }
-  else {
     if (! add_attr<Rational>(traits_c, "Rational")) {
       py::class_<Rational> rat_c(traits_c, "Rational");
       export_ft(rat_c);

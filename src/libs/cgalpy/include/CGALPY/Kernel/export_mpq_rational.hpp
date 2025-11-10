@@ -11,13 +11,17 @@
 #include <nanobind/nanobind.h>
 
 #include "CGALPY/add_attr.hpp"
+#include "CGALPY/Kernel/export_mpz_int.hpp"
 
 namespace py = nanobind;
 
 template <typename PyClass>
 void export_mpq_rational(PyClass& cls) {
+  export_mpz_int(cls);
+
   using mpz_int = boost::multiprecision::mpz_int;
   using mpq_rational = boost::multiprecision::mpq_rational;
+
   if (! add_attr<mpq_rational>(cls, "mpq_rational")) {
     py::class_<mpq_rational> mpq_rational_c(cls, "mpq_rational");
     mpq_rational_c.def(py::init<const mpq_rational&>())
