@@ -7,6 +7,9 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
+#include <type_traits>
+#include <boost/multiprecision/gmp.hpp> // cpp_rational is here
+
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 #include <nanobind/stl/string.h>
@@ -29,6 +32,7 @@
 #include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/Kernel/export_rt.hpp"
 #include "CGALPY/Kernel/export_kernel.hpp"
+#include "CGALPY/Kernel/export_mpq_rational.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/to_string.hpp"
 
@@ -130,24 +134,29 @@ void export_kernel_module(py::module_& m) {
     export_ft(ft_c);
 
     ft_c.def(py::init<Fte>())
-      .def("__init__", [](FT* self, const std::string& str)
-                       { new (self) FT(Fte(str)); })
-      .def("__init__", [](FT* self, int nom, int den)
-                       { new (self) FT(Fte(nom, den)); })
+      .def("__init__", [](FT* self, const std::string& str) { new (self) FT(Fte(str)); })
+      .def("__init__", [](FT* self, int nom, int den) { new (self) FT(Fte(nom, den)); })
       .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); })
       .def("exact", [](const FT& ft)->const Fte& { return ft.exact();}, ri)
       .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} )
       ;
   }
 
-  if (! add_attr<Fte>(m, "Exact")) {
-    py::class_<Fte> fte_c(m, "Exact");
-    fte_c.def(py::init<const Fte&>())
-      ;
+  else if constexpr (std::is_same_v<Fte, boost::multiprecision::mpq_rational>) {
+    export_mpq_rational(m);
+    add_attr<Fte>(m, "Exact");
+    // add_attr<Integer>(traits_c, "Integer");
+  }
+  else {
+    if (! add_attr<Fte>(m, "Exact")) {
+      py::class_<Fte> fte_c(m, "Exact");
+      fte_c.def(py::init<const Fte&>())
+        ;
 
-    add_insertion(fte_c, "__str__");
-    add_insertion(fte_c, "__repr__");
-    add_extraction(fte_c);
+      add_insertion(fte_c, "__str__");
+      add_insertion(fte_c, "__repr__");
+      add_extraction(fte_c);
+    }
   }
 
   if (! add_attr<RT>(m, "RT")) {
