@@ -550,7 +550,7 @@ m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
   using Gt = boost::graph_traits<Pm>;
   using face_descriptor = Gt::face_descriptor;
 
-#if CGAL_VERSION_NR > 1060100900
+#if CGAL_VERSION_NR > 1060200900
   py::class_<Asf>(m, "Adaptive_sizing_field")
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
