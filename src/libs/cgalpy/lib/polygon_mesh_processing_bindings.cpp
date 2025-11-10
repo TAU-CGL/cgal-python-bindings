@@ -34,6 +34,7 @@
 #include <CGAL/Polygon_mesh_processing/bbox.h>
 #include <CGAL/Polygon_mesh_processing/refine_mesh_at_isolevel.h>
 #include <CGAL/Polygon_mesh_processing/region_growing.h>
+#include <CGAL/Polygon_mesh_processing/transform.h>
 #include <CGAL/Polygon_mesh_processing/triangle.h>
 #include <CGAL/Side_of_triangle_mesh.h>
 
@@ -94,9 +95,15 @@ auto refine_mesh_at_isolevel(PolygonMesh& pm,
 }
 
 //!
+template <typename PolygonMesh>
+auto transform(const Aff_transformation_3& transformation, PolygonMesh& pmesh, const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  return PMP::transform(transformation, pmesh, internal::parse_pmp_np<Pm>(np));
+}
+
+//!
 template <typename TriangleMesh>
-auto triangle(typename boost::graph_traits<TriangleMesh>::face_descriptor fd,
-              const TriangleMesh& tmesh,
+auto triangle(typename boost::graph_traits<TriangleMesh>::face_descriptor fd, const TriangleMesh& tmesh,
               const py::dict& np = py::dict()) {
   return PMP::triangle(fd, tmesh, internal::parse_pmp_np<TriangleMesh>(np));
 }
@@ -534,13 +541,10 @@ void export_polygon_mesh_processing(py::module_& m) {
 #endif
 
   // region growing only for sm
-  // TODO: transform
-  m.def("triangle", &pmp::triangle<Pm>,
-        py::arg("f"), py::arg("tmesh"),
-        py::arg("np") = py::dict());
-  m.def("vertex_bbox", &pmp::vertex_bbox<Pm>,
-        py::arg("vd"), py::arg("pmesh"),
-        py::arg("np") = py::dict());
+
+  m.def("transform", &pmp::transform<Pm>, py::arg("transformation"), py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("triangle", &pmp::triangle<Pm>, py::arg("f"), py::arg("tmesh"), py::arg("np") = py::dict());
+  m.def("vertex_bbox", &pmp::vertex_bbox<Pm>, py::arg("vd"), py::arg("pmesh"), py::arg("np") = py::dict());
 
   // Custom sizing field
   // m.def("set_at", &pmp::set_at);
