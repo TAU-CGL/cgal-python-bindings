@@ -142,7 +142,7 @@ void export_kernel_module(py::module_& m) {
       ;
   }
 
-  else if constexpr (std::is_same_v<Fte, boost::multiprecision::mpq_rational>) {
+  if constexpr (std::is_same_v<Fte, boost::multiprecision::mpq_rational>) {
     export_mpq_rational(m);
     add_attr<Fte>(m, "Exact");
     // add_attr<Integer>(traits_c, "Integer");
