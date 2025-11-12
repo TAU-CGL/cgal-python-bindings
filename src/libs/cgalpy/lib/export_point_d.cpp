@@ -73,12 +73,10 @@ void export_point_d(py::class_<Point_d>& pntd_c) {
     .def("__getitem__", &Pntd::operator[])
     .def(py::self == py::self)
     .def(py::self != py::self)
-#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
-    .def(py::self > py::self)
-    .def(py::self < py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
-#endif
+    //.def(py::self > py::self)
+    //.def(py::self < py::self)
+    //.def(py::self <= py::self)
+    // .def(py::self >= py::self)
     ;
 
   using Cci = Kerd::Cartesian_const_iterator_d;

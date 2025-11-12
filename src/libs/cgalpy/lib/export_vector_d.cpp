@@ -41,12 +41,10 @@ void export_vector_d(py::class_<Vector_d>& vecd_c) {
     .def(py::self == py::self)
     .def(py::self != py::self)
 #endif
-#if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D) && (CGALPY_KERNEL_D != CGALPY_KERNEL_D_CARTESIAN_D_LAZY_GMPQ)
-    .def(py::self > py::self)
-    .def(py::self < py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
-#endif
+    // .def(py::self > py::self)
+    // .def(py::self < py::self)
+    // .def(py::self <= py::self)
+    // .def(py::self >= py::self)
     ;
 
   using Cci = Kerd::Cartesian_const_iterator_d;
