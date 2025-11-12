@@ -112,6 +112,9 @@ C define_euler_operations(C& c) {
         "adds and returns the edge e connecting s and t halfedge(e, g) has s as source and t as target");
   c.def("can_add_face", &CGAL::Euler::can_add_face<VertexRange, Graph>,
         py::arg("vrange"), py::arg("sm"),
+#if (CGAL_VERSION_NR > 1060200000)
+        py::arg("verbose") = false,
+#endif
         "checks whether a new face defined by a range of vertices (identified by their descriptors, boost::graph_traits<Graph>::vertex_descriptor) can be added.");
   c.def("add_face", &CGAL::Euler::add_face<Graph, VertexRange>,
         py::arg("vr"), py::arg("g"),
