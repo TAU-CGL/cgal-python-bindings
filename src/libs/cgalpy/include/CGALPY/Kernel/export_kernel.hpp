@@ -80,6 +80,7 @@ void export_kernel(C_& ker_c) {
   using Wd_pnt_3 = typename Ker::Weighted_point_3;
 
   // Kernel 2D operators
+  using Cmp_xy_2 = typename Ker::Compare_xy_2;
   using Equal_2 = typename Ker::Equal_2;
   using Ctr_midpnt_2 = typename Ker::Construct_midpoint_2;
   using Ctr_pnt_2 = typename Ker::Construct_point_2;
@@ -105,6 +106,8 @@ void export_kernel(C_& ker_c) {
 
   ker_c.def(py::init<>())
     // 2D operators
+    .def("compare_xy_2_object",
+         [](const Ker& k)->Cmp_xy_2{ return k.compare_xy_2_object(); })
     .def("equal_2_object",
          [](const Ker& k)->Equal_2{ return k.equal_2_object(); })
     .def("construct_midpoint_2_object",
@@ -218,6 +221,12 @@ void export_kernel(C_& ker_c) {
   }
 
   //////// 2D Operators
+
+  using Cmp_xy_2_op =
+    CGAL::Comparison_result(Cmp_xy_2::*)(const Pnt_2&, const Pnt_2&)const;
+  py::class_<Cmp_xy_2>(ker_c, "Compare_xy_2")
+    .def("__call__", static_cast<Cmp_xy_2_op>(&Cmp_xy_2::operator()))
+    ;
 
   // Construct_point_2
   py::class_<Ctr_pnt_2>(ker_c, "Construct_point_2")
