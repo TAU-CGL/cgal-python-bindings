@@ -715,8 +715,7 @@ void export_draw(py::module_& m) {
 
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
   m.def("draw",
-        [](const Aos& aos, const bvr::Graphics_scene_options& gso,
-           const char* title)
+        [](const Aos& aos, const bvr::Graphics_scene_options& gso, const char* title)
         { CGAL::draw(aos, gso, title); });
 #endif
 
