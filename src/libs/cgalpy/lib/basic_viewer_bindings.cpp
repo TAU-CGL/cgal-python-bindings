@@ -10,6 +10,7 @@
 
 #include <nanobind/nanobind.h>
 
+#include <CGAL/draw_arrangement_2.h>
 #include <CGAL/draw_polyhedron.h>
 #include <CGAL/Graphics_scene.h>
 #include <CGAL/Graphics_scene_options.h>
