@@ -64,11 +64,21 @@ public:
     m_face_color_object(py::none()),
     m_face_color_fnc(nullptr) {
     // Handle colored_edge
+#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
+     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
+    auto colored_edge = [&](const Ds& ds, Ed ed) -> bool { return execute_colored_edge(ds, *ed); };
+#else
     auto colored_edge = [&](const Ds& ds, Ed ed) -> bool { return execute_colored_edge(ds, *CGAL::halfedge(ed, ds)); };
+#endif
     m_colored_edge_fnc = new Colored_edge_fnc(colored_edge);
 
     // Handle edge_color
+#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
+     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
+    auto edge_color = [&](const Ds& ds, Ed ed) -> Color { return execute_edge_color(ds, *ed); };
+#else
     auto edge_color = [&](const Ds& ds, Ed ed) -> Color { return execute_edge_color(ds, *CGAL::halfedge(ed, ds)); };
+#endif
     m_edge_color_fnc = new Edge_color_fnc(edge_color);
 
     // Handle colored_face
