@@ -24,9 +24,9 @@ template <int id> struct Ds_params {};
 
 template <> struct Ds_params<CGALPY_BVR_AOS_2_DATA_STRUCTURE> {
   using Ds = aos2::Arrangement_2;
-  using Vertex_descriptor = aos2::Vertex_handle;
-  using Edge_descriptor = aos2::Halfedge_handle;
-  using Face_descriptor = aos2::Face_handle;
+  using Vertex_descriptor = aos2::Vertex_const_handle;
+  using Edge_descriptor = aos2::Halfedge_const_handle;
+  using Face_descriptor = aos2::Face_const_handle;
   using Volume_descriptor = void;
 };
 
