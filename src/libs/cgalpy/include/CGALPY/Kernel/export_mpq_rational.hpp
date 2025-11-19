@@ -27,6 +27,7 @@ void export_mpq_rational(PyClass& cls) {
   using mpq_rat = boost::multiprecision::mpq_rational;
 
   if (! add_attr<mpq_rat>(cls, "mpq_rational")) {
+    // Observe that the wrapping of the attributes numerator() and denominator() is wrapped using member-like access
     py::class_<mpq_rat> mpq_rat_c(cls, "mpq_rational");
     mpq_rat_c.def(py::init<const mpq_rat&>())
       .def(py::init_implicit<mpz_int>())

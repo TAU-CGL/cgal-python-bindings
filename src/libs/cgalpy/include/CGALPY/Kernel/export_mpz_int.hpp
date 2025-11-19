@@ -6,9 +6,13 @@
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
+#include <string>
+
 #include <boost/multiprecision/gmp.hpp>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
+#include <nanobind/stl/string.h>
 
 #include "CGALPY/add_attr.hpp"
 
@@ -22,10 +26,9 @@ void export_mpz_int(PyClass& cls) {
     mpz_int_c.def(py::init<const mpz_int&>())
       .def(py::init_implicit<int>())
       .def(py::init_implicit<double>())
-      .def(py::self == py::self,
-           py::sig("def __eq__(self, arg: object, /) -> bool"))
-      .def(py::self != py::self,
-           py::sig("def __ne__(self, arg: object, /) -> bool"))
+      .def(py::init<const std::string&>())
+      .def(py::self == py::self, py::sig("def __eq__(self, arg: object, /) -> bool"))
+      .def(py::self != py::self, py::sig("def __ne__(self, arg: object, /) -> bool"))
       .def(py::self < py::self)
       .def(py::self > py::self)
       .def(py::self <= py::self)
