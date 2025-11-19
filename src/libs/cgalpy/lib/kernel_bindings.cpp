@@ -32,7 +32,6 @@
 #include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/Kernel/export_rt.hpp"
 #include "CGALPY/Kernel/export_kernel.hpp"
-#include "CGALPY/Kernel/export_mpq_rational.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/to_string.hpp"
 
@@ -65,11 +64,17 @@
 
 namespace py = nanobind;
 
-extern void export_bbox_2(py::class_<CGAL::Bbox_2>& c);
-extern void export_bbox_3(py::class_<CGAL::Bbox_3>& c);
+extern void export_bbox_2(py::class_<CGAL::Bbox_2>&);
+extern void export_bbox_3(py::class_<CGAL::Bbox_3>&);
 
 extern void export_gmpz(py::module_&);
 extern void export_gmpq(py::module_&);
+
+extern void export_mpq_class(py::module_&);
+extern void export_mpz_class(py::module_&);
+
+extern void export_mpz_int(py::module_&);
+extern void export_mpq_rational(py::module_&);
 
 //template<typename T>
 //size_t hash(T& immutable) {
@@ -143,11 +148,20 @@ void export_kernel_module(py::module_& m) {
   }
 
   if constexpr (std::is_same_v<Fte, boost::multiprecision::mpq_rational>) {
+    export_mpz_int(m);
     export_mpq_rational(m);
     add_attr<Fte>(m, "Exact");
-    // add_attr<Integer>(traits_c, "Integer");
   }
+#if CGAL_USE_GMPXX
+  else if constexpr (std::is_same_v<Fte, ::mpq_class>) {
+    // If gmp is supported, the exact number type is mpq_class defined in the global namespace in <gmpxx.h>
+    export_mpz_class(m);
+    export_mpq_class(m);
+    add_attr<Fte>(m, "Exact");
+  }
+#endif
   else {
+    // Fall back
     if (! add_attr<Fte>(m, "Exact")) {
       py::class_<Fte> fte_c(m, "Exact");
       fte_c.def(py::init<const Fte&>())

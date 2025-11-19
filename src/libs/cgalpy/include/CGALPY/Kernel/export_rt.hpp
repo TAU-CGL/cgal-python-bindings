@@ -26,10 +26,8 @@ void export_rt(C& c) {
 
   c.def(py::init<const RT&>())
     .def(py::init_implicit<double>())
-    .def(py::self == py::self,
-         py::sig("def __eq__(self, arg: object, /) -> bool"))
-    .def(py::self != py::self,
-         py::sig("def __ne__(self, arg: object, /) -> bool"))
+    .def(py::self == py::self, py::sig("def __eq__(self, arg: object, /) -> bool"))
+    .def(py::self != py::self, py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self < py::self)
     .def(py::self > py::self)
     .def(py::self <= py::self)

@@ -15,20 +15,55 @@
 #include <nanobind/stl/string.h>
 
 #include "CGALPY/add_attr.hpp"
-#include "CGALPY/Kernel/export_mpz_int.hpp"
+#include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
 
-template <typename PyClass>
-void export_mpq_rational(PyClass& cls) {
-  export_mpz_int(cls);
+//!
+void export_mpz_int(py::module_& m) {
+  using mpz_int = boost::multiprecision::mpz_int;
+  if (! add_attr<mpz_int>(m, "mpz_int")) {
+    py::class_<mpz_int> mpz_int_c(m, "mpz_int");
+    mpz_int_c.def(py::init<const mpz_int&>())
+      .def(py::init_implicit<int>())
+      .def(py::init_implicit<double>())
+      .def(py::init<const std::string&>())
+      .def(py::self == py::self, py::sig("def __eq__(self, arg: object, /) -> bool"))
+      .def(py::self != py::self, py::sig("def __ne__(self, arg: object, /) -> bool"))
+      .def(py::self < py::self)
+      .def(py::self > py::self)
+      .def(py::self <= py::self)
+      .def(py::self >= py::self)
+      .def(py::self += py::self)
+      .def(py::self -= py::self)
+      .def(py::self *= py::self)
+      .def(py::self /= py::self)
+      .def(-py::self)
+      .def_cast(py::self + py::self)
+      .def_cast(py::self - py::self)
+      .def_cast(py::self * py::self)
+      .def_cast(py::self / py::self)
+      .def_cast(int() * py::self)
+      .def_cast(int() + py::self)
+      .def_cast(int() - py::self)
+      .def_cast(py::self * int())
+      .def_cast(py::self + int())
+      .def_cast(py::self - int())
+       ;
 
+    add_insertion(mpz_int_c, "__str__");
+    add_insertion(mpz_int_c, "__repr__");
+  }
+}
+
+//!
+void export_mpq_rational(py::module_& m) {
   using mpz_int = boost::multiprecision::mpz_int;
   using mpq_rat = boost::multiprecision::mpq_rational;
 
-  if (! add_attr<mpq_rat>(cls, "mpq_rational")) {
+  if (! add_attr<mpq_rat>(m, "mpq_rational")) {
     // Observe that the wrapping of the attributes numerator() and denominator() is wrapped using member-like access
-    py::class_<mpq_rat> mpq_rat_c(cls, "mpq_rational");
+    py::class_<mpq_rat> mpq_rat_c(m, "mpq_rational");
     mpq_rat_c.def(py::init<const mpq_rat&>())
       .def(py::init_implicit<mpz_int>())
       .def(py::init<const mpz_int&, const mpz_int&>())
