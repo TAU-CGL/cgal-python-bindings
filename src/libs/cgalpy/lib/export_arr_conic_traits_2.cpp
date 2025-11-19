@@ -29,9 +29,11 @@
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_circle_2.hpp"
 #include "CGALPY/add_insertion.hpp"
-#include "CGALPY/Kernel/export_mpq_rational.hpp"
 
 namespace py = nanobind;
+
+extern void export_mpz_int(py::module_&);
+extern void export_mpq_rational(py::module_&);
 
 void export_arr_conic_traits_2(py::module_& m) {
   //TODO export RatKernel, AlgKernel
@@ -70,7 +72,8 @@ void export_arr_conic_traits_2(py::module_& m) {
 
   if constexpr (std::is_same_v<Rational, boost::multiprecision::mpq_rational>) {
     // Export Boost multiprecision integer and rational unlimited precision types
-    export_mpq_rational(traits_c);
+    export_mpz_int(m);
+    export_mpq_rational(m);
     add_attr<Rational>(traits_c, "Rational");
     add_attr<Integer>(traits_c, "Integer");
   }
