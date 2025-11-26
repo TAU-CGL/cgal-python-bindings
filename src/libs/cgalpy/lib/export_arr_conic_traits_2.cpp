@@ -256,6 +256,13 @@ void export_arr_conic_traits_2(py::module_& m) {
     .def("__call__", static_cast<ctr_xcv_op1>(&Ctr_xcv::operator()))
     ;
 
+#if CGAL_VERSION_NR > 1060200900
+  using Approx_len = Gt::Approximate_length_2;
+  py::class_<Approx_len>(traits_c, "Approximate_length_2")
+    .def("__call__", &Approx_len::operator())
+    ;
+#endif
+
   // Convenient attributes
   add_attr<Integer>(traits_c, "Integer");
   add_attr<Rational>(traits_c, "Rational");
