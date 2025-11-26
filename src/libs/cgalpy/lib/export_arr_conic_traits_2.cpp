@@ -132,7 +132,10 @@ void export_arr_conic_traits_2(py::module_& m) {
       new py::class_<Pnt>(traits_c, "Point_2");
     auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
     pnt_c.def(py::init<const Algebraic&, const Algebraic&>())
+      // The following belong to the algebraic kernel, but for now we add them here
       .def(py::init<const Algebraic&, const Algebraic&, const Algebraic&>())
+      .def("x", &Pnt::x)
+      .def("y", &Pnt::y)
       ;
 
     add_insertion(pnt_c, "__str__");
