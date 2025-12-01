@@ -892,8 +892,7 @@ void bind_overlay_function_traits(py::module_& m) {
 template <>
 void bind_overlay_function_traits<false, false, false>(py::module_& m) {
   using Aoft = aos2::Arr_overlay_function_traits;
-  py::class_<Aoft>(m, "Arr_overlay_function_traits",
-                   py::type_slots(aos2::aos_overlay_function_traits_slots))
+  py::class_<Aoft>(m, "Arr_overlay_function_traits", py::type_slots(aos2::aos_overlay_function_traits_slots))
     .def(py::init<>())
     ;
 }
@@ -1198,14 +1197,11 @@ void export_arrangement_on_surface_2(py::module_& m) {
   // Export overlay & overlay traits
   using Aoft = aos2::Arr_overlay_function_traits;
   if (! add_attr<Aoft>(m, "Arr_overlay_function_traits"))
-    bind_overlay_function_traits<aos2::is_vertex_extended(),
-                                 aos2::is_halfedge_extended(),
-                                 aos2::is_face_extended()>(m);
+    bind_overlay_function_traits<aos2::is_vertex_extended(), aos2::is_halfedge_extended(), aos2::is_face_extended()>(m);
 
   using Aot = aos2::Arr_overlay_traits;
   if (! add_attr<Aot>(m, "Arr_overlay_traits")) {
-    py::class_<Aot>(m, "Arr_overlay_traits",
-                    py::type_slots(aos2::aos_overlay_traits_slots))
+    py::class_<Aot>(m, "Arr_overlay_traits", py::type_slots(aos2::aos_overlay_traits_slots))
       .def(py::init<>())
       .def(py::init<py::object>())
       .def(py::init<py::object, py::object, py::object, py::object, py::object,
@@ -1239,8 +1235,7 @@ void export_arrangement_on_surface_2(py::module_& m) {
 
   using Ao = aos2::Arr_observer;
   if (! add_attr<Ao>(m, "Arr_observer")) {
-    py::class_<Ao, Aob>(m, "Arr_observer",
-                        py::type_slots(aos2::aos_observer_slots))
+    py::class_<Ao, Aob>(m, "Arr_observer", py::type_slots(aos2::aos_observer_slots))
       .def(py::init<>())
       .def(py::init<Aos&>(), py::keep_alive<1, 2>())
       //
@@ -1257,12 +1252,9 @@ void export_arrangement_on_surface_2(py::module_& m) {
       .def("set_after_detach", &Ao::set_after_detach)
       .def("set_before_create_vertex", &Ao::set_before_create_vertex)
       .def("set_after_create_vertex", &Ao::set_after_create_vertex)
-      .def("set_before_create_boundary_vertex1",
-           &Ao::set_before_create_boundary_vertex1)
-      .def("set_before_create_boundary_vertex2",
-           &Ao::set_before_create_boundary_vertex2)
-      .def("set_after_create_boundary_vertex",
-           &Ao::set_after_create_boundary_vertex)
+      .def("set_before_create_boundary_vertex1", &Ao::set_before_create_boundary_vertex1)
+      .def("set_before_create_boundary_vertex2", &Ao::set_before_create_boundary_vertex2)
+      .def("set_after_create_boundary_vertex", &Ao::set_after_create_boundary_vertex)
       .def("set_before_create_edge", &Ao::set_before_create_edge)
       .def("set_after_create_edge", &Ao::set_after_create_edge)
       .def("set_before_modify_vertex", &Ao::set_before_modify_vertex)
@@ -1271,10 +1263,8 @@ void export_arrangement_on_surface_2(py::module_& m) {
       .def("set_after_modify_edge", &Ao::set_after_modify_edge)
       .def("set_before_split_edge", &Ao::set_before_split_edge)
       .def("set_after_split_edge", &Ao::set_after_split_edge)
-      .def("set_before_split_fictitious_edge",
-           &Ao::set_before_split_fictitious_edge)
-      .def("set_after_split_fictitious_edge",
-           &Ao::set_after_split_fictitious_edge)
+      .def("set_before_split_fictitious_edge", &Ao::set_before_split_fictitious_edge)
+      .def("set_after_split_fictitious_edge", &Ao::set_after_split_fictitious_edge)
       .def("set_before_split_face", &Ao::set_before_split_face)
       .def("set_after_split_face", &Ao::set_after_split_face)
       .def("set_before_split_outer_ccb", &Ao::set_before_split_outer_ccb)
@@ -1285,16 +1275,12 @@ void export_arrangement_on_surface_2(py::module_& m) {
       .def("set_after_add_outer_ccb", &Ao::set_after_add_outer_ccb)
       .def("set_before_add_inner_ccb", &Ao::set_before_add_inner_ccb)
       .def("set_after_add_inner_ccb", &Ao::set_after_add_inner_ccb)
-      .def("set_before_add_isolated_vertex",
-           &Ao::set_before_add_isolated_vertex)
-      .def("set_after_add_isolated_vertex",
-           &Ao::set_after_add_isolated_vertex)
+      .def("set_before_add_isolated_vertex", &Ao::set_before_add_isolated_vertex)
+      .def("set_after_add_isolated_vertex", &Ao::set_after_add_isolated_vertex)
       .def("set_before_merge_edge", &Ao::set_before_merge_edge)
       .def("set_after_merge_edge", &Ao::set_after_merge_edge)
-      .def("set_before_merge_fictitious_edge",
-           &Ao::set_before_merge_fictitious_edge)
-      .def("set_after_merge_fictitious_edge",
-           &Ao::set_after_merge_fictitious_edge)
+      .def("set_before_merge_fictitious_edge", &Ao::set_before_merge_fictitious_edge)
+      .def("set_after_merge_fictitious_edge", &Ao::set_after_merge_fictitious_edge)
       .def("set_before_merge_face", &Ao::set_before_merge_face)
       .def("set_after_merge_face", &Ao::set_after_merge_face)
       .def("set_before_merge_outer_ccb", &Ao::set_before_merge_outer_ccb)
@@ -1305,22 +1291,16 @@ void export_arrangement_on_surface_2(py::module_& m) {
       .def("set_after_move_outer_ccb", &Ao::set_after_move_outer_ccb)
       .def("set_before_move_inner_ccb", &Ao::set_before_move_inner_ccb)
       .def("set_after_move_inner_ccb", &Ao::set_after_move_inner_ccb)
-      .def("set_before_move_isolated_vertex",
-           &Ao::set_before_move_isolated_vertex)
-      .def("set_after_move_isolated_vertex",
-           &Ao::set_after_move_isolated_vertex)
+      .def("set_before_move_isolated_vertex", &Ao::set_before_move_isolated_vertex)
+      .def("set_after_move_isolated_vertex", &Ao::set_after_move_isolated_vertex)
       .def("set_before_remove_vertex", &Ao::set_before_remove_vertex)
       .def("set_after_remove_vertex", &Ao::set_after_remove_vertex)
       .def("set_before_remove_edge", &Ao::set_before_remove_edge)
       .def("set_after_remove_edge", &Ao::set_after_remove_edge)
-      .def("set_before_remove_outer_ccb",
-           &Ao::set_before_remove_outer_ccb)
-      .def("set_after_remove_outer_ccb",
-           &Ao::set_after_remove_outer_ccb)
-      .def("set_before_remove_inner_ccb",
-           &Ao::set_before_remove_inner_ccb)
-      .def("set_after_remove_inner_ccb",
-           &Ao::set_after_remove_inner_ccb)
+      .def("set_before_remove_outer_ccb", &Ao::set_before_remove_outer_ccb)
+      .def("set_after_remove_outer_ccb", &Ao::set_after_remove_outer_ccb)
+      .def("set_before_remove_inner_ccb", &Ao::set_before_remove_inner_ccb)
+      .def("set_after_remove_inner_ccb", &Ao::set_after_remove_inner_ccb)
       ;
   }
 }
