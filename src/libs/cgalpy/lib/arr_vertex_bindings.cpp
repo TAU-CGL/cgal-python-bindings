@@ -108,7 +108,7 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
   if (! add_attr<aos2::V>(c, "Arr_extended_vertex")) {
     py::class_<aos2::V> (c, "Arr_extended_vertex", py::type_slots(aos2::aos_vertex_slots))
-      .def("set_data", &aos2::V::set_data, py::keep_alive<0, 1>())
+      .def("set_data", &aos2::V::set_data, py::keep_alive<1, 2>())
       .def("data", py::overload_cast<>(&aos2::V::data, py::const_))
       ;
   }
@@ -138,16 +138,11 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
     // Immediate members
     .def("is_at_open_boundary", &Vertex::is_at_open_boundary)
-    .def("parameter_space_in_x",
-         [](const Vertex& v)->CGAL::Arr_parameter_space
-         { return v.parameter_space_in_x(); })
-    .def("parameter_space_in_y",
-         [](const Vertex& v)->CGAL::Arr_parameter_space
-         { return v.parameter_space_in_y(); })
+    .def("parameter_space_in_x", [](const Vertex& v)->CGAL::Arr_parameter_space { return v.parameter_space_in_x(); })
+    .def("parameter_space_in_y", [](const Vertex& v)->CGAL::Arr_parameter_space { return v.parameter_space_in_y(); })
     .def("degree", &Vertex::degree)
     .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
-    .def("incident_halfedges",
-         &aos2::incident_halfedges_iterator, py::keep_alive<0, 1>())
+    .def("incident_halfedges", &aos2::incident_halfedges_iterator, py::keep_alive<0, 1>())
 
     // Wrap also the function that obtains the circulator
     .def("incident_halfedges_circulator", &aos2::incident_halfedges_circulator)

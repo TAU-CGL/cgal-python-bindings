@@ -106,9 +106,9 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
-    // `Face::set_data`. Instead, we introduce lambda functions that call the
+    // `Face::set_data`. Instead, we introduce lambda functions that calls the
     // appropriate member functions.
-    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); }, py::keep_alive<0, 1>())
+    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); }, py::keep_alive<1, 2>())
     .def("data", [](const Face& f)->py::object { return f.data(); })
 #endif
 
