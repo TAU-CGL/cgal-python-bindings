@@ -108,7 +108,7 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
     // `Face::set_data`. Instead, we introduce lambda functions that call the
     // appropriate member functions.
-    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); })
+    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); }, py::keep_alive<0, 1>())
     .def("data", [](const Face& f)->py::object { return f.data(); })
 #endif
 
@@ -124,17 +124,13 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("number_of_surfaces", [](Face& f) { return f.number_of_surfaces(); })
     .def("surfaces", &aos2::surfaces, py::keep_alive<0, 1>())
     .def("surface", [](Face& f)->const Env_data& { return f.surface(); })
-    .def("number_of_surfaces",
-         [](Face& f)->int { return f.number_of_surfaces(); })
+    .def("number_of_surfaces", [](Face& f)->int { return f.number_of_surfaces(); })
     .def("has_no_env_data", [](Face& f)->bool { return f.has_no_env_data(); })
-    .def("env_data_front",
-         [](Face& f)->const Env_data&  { return f.env_data_front(); })
-    .def("set_env_data",
-         [](Face& f, const Env_data& data) { f.set_env_data(data); })
+    .def("env_data_front", [](Face& f)->const Env_data&  { return f.env_data_front(); })
+    .def("set_env_data", [](Face& f, const Env_data& data) { f.set_env_data(data); })
     //.def("set_env_data", [](Face& f) { f.set_env_data(); })
     .def("set_no_env_data", [](Face& f) { f.set_no_env_data(); })
-    .def("add_env_data",
-         [](Face& f, const Env_data& data) { f.add_env_data(data); })
+    .def("add_env_data", [](Face& f, const Env_data& data) { f.add_env_data(data); })
     //.def("add_data", [](Face& f) { f.add_data(); })
     .def("clear_env_data", [](Face& f) { f.clear_env_data(); })
     //.def("is_equal_data", [](Face& f) { f.is_equal_data(); })

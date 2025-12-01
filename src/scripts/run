@@ -62,7 +62,7 @@ eval "declare -a $item=('aos2_seg_ae_epec'              'kerEpecInt_aos2SegVeHeF
 eval "declare -a $item=('aos2_seg_bvr_epec'             'kerEpecInt_aos2SegPl_bvArr2')";                                        ((i++)); item="item$i"
 eval "declare -a $item=('aos2_seg_epec'                 'kerEpecInt_aos2SegPl')";                                               ((i++)); item="item$i"
 eval "declare -a $item=('aos2_seg_epic'	                'kerEpic_aos2SegPl')";                                                  ((i++)); item="item$i"
-eval "declare -a $item=('aos2_trc_cnt_geodesic_epec'    'kerEpecInt_aos2TrcCntGos')";                                           ((i++)); item="item$i"
+eval "declare -a $item=('aos2_trc_cnt_geodesic_epec'    'kerEpecInt_aos2GosTrcCnt')";                                           ((i++)); item="item$i"
 eval "declare -a $item=('aos2_trc_cnt_seg_epec'         'kerEpecInt_aos2SegCntTrc')";                                           ((i++)); item="item$i"
 eval "declare -a $item=('aos2_wh_seg_epec'              'kerEpecInt_aos2SegCdCcdWhPl')";                                        ((i++)); item="item$i"
 eval "declare -a $item=('aos2_wh_cs_epec'               'kerEpecInt_aos2CsCdCcdWhPl')";                                         ((i++)); item="item$i"

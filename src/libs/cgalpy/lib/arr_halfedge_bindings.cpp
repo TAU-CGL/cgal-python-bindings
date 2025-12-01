@@ -95,7 +95,7 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
     // `Face::set_data`. Instead, we introduce lambda functions that call the
     // appropriate member functions.
-    .def("set_data", [](He& h, py::object obj) { h.set_data(obj); })
+    .def("set_data", [](He& h, py::object obj) { h.set_data(obj); }, py::keep_alive<0, 1>())
     .def("data", [](const He& h)->py::object { return h.data(); })
 #endif
 
