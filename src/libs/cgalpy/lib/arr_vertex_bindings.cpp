@@ -107,7 +107,7 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
   if (! add_attr<aos2::V>(c, "Arr_extended_vertex")) {
-    py::class_<aos2::V> (c, "Arr_extended_vertex", py::type_slots(aos2::aos_vertex_slots))
+    py::class_<aos2::V> (c, "Arr_extended_vertex", /*py::type_slots(aos2::aos_vertex_slots)*/)
       .def("set_data", &aos2::V::set_data, py::keep_alive<1, 2>())
       .def("data", py::overload_cast<>(&aos2::V::data, py::const_))
       ;
