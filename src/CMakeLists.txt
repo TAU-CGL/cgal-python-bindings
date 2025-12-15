@@ -54,7 +54,7 @@ if (SKBUILD)
     # https://github.com/wjakob/nanobind_example/blob/master/CMakeLists.txt
     # with slight modifications.
     # Constrain FindPython to find the Python version used by scikit-build
-    set(Python_VERSION "${PYTHON_VERSION_STRING}")
+    set(Python_VERSION "${PYTHON_VERSION}")
     set(Python_EXECUTABLE "${PYTHON_EXECUTABLE}")
     # The following line will result in conflicts with conan.
     #  set(Python_INCLUDE_DIR "${PYTHON_INCLUDE_DIR}")
