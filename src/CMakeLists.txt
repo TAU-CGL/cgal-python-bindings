@@ -49,17 +49,6 @@ endif ()
 # Find required Python library
 if (SKBUILD)
     find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
-    # ~~~~~~~~~ nanobind  ~~~~~~~~~~~~~~~~~~
-    # The following part is copied from
-    # https://github.com/wjakob/nanobind_example/blob/master/CMakeLists.txt
-    # with slight modifications.
-    # Constrain FindPython to find the Python version used by scikit-build
-    # set(Python_VERSION "${PYTHON_VERSION_STRING}")
-    set(Python_EXECUTABLE "${PYTHON_EXECUTABLE}")
-    # The following line will result in conflicts with conan.
-    #  set(Python_INCLUDE_DIR "${PYTHON_INCLUDE_DIR}")
-    set(Python_LIBRARIES "${PYTHON_LIBRARY}")
-
     if (MSVC)
         # MSVC needs a little extra help finding the Python library
         find_package(PythonInterp)
