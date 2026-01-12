@@ -8,7 +8,11 @@
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <type_traits>
-#include <boost/multiprecision/gmp.hpp> // cpp_rational is here
+
+#include <boost/multiprecision/cpp_int.hpp>
+#if CGAL_USE_GMP
+#include <boost/multiprecision/gmp.hpp>
+#endif
 
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
@@ -28,6 +32,7 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/cartesian_product.hpp"
 #include "CGALPY/config.hpp"
+#include "CGALPY/export_boost_multiprecision.hpp"
 #include "CGALPY/kernel_type.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/Kernel/export_rt.hpp"
@@ -67,11 +72,15 @@ namespace py = nanobind;
 extern void export_bbox_2(py::class_<CGAL::Bbox_2>&);
 extern void export_bbox_3(py::class_<CGAL::Bbox_3>&);
 
+#if CGAL_USE_GMP
 extern void export_gmpz(py::module_&);
 extern void export_gmpq(py::module_&);
+#endif
 
+#if CGAL_USE_GMPXX
 extern void export_mpq_class(py::module_&);
 extern void export_mpz_class(py::module_&);
+#endif
 
 extern void export_mpz_int(py::module_&);
 extern void export_mpq_rational(py::module_&);
@@ -120,17 +129,19 @@ void export_kernel_module(py::module_& m) {
   }
 #else
 
+#if CGAL_USE_GMP
   if (! add_attr<CGAL::Gmpz>(m, "Gmpz")) export_gmpz(m);
   if (! add_attr<CGAL::Gmpq>(m, "Gmpq")) export_gmpq(m);
+#endif
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
-    py::class_<FT> ft_c(m, "FT");
-    export_ft(ft_c);
+  py::class_<FT> ft_c(m, "FT");
+  export_ft(ft_c);
 #endif
 
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_EPEC) ||                              \
      (CGALPY_KERNEL == CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ))
-     // (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||
+    // (CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT) ||
 
   using Fte = FT::Exact_type;
   using Fta = FT::Approximate_type;
@@ -147,30 +158,48 @@ void export_kernel_module(py::module_& m) {
       ;
   }
 
-  if constexpr (std::is_same_v<Fte, boost::multiprecision::mpq_rational>) {
-    export_mpz_int(m);
-    export_mpq_rational(m);
-    add_attr<Fte>(m, "Exact");
+  // Export GMP boost multi-precision
+#if CGAL_USE_GMP
+  using mpz_int = boost::multiprecision::mpz_int;
+  if (! add_attr<mpz_int>(m, "mpz_int")) {
+    py::class_<mpz_int> mpz_int_c(m, "mpz_int");
+    export_boost_multiprecision_int(mpz_int_c);
   }
-#if CGAL_USE_GMPXX
-  else if constexpr (std::is_same_v<Fte, ::mpq_class>) {
-    // If gmp is supported, the exact number type is mpq_class defined in the global namespace in <gmpxx.h>
-    export_mpz_class(m);
-    export_mpq_class(m);
-    add_attr<Fte>(m, "Exact");
+
+  using mpq_rat = boost::multiprecision::mpq_rational;
+  if (! add_attr<mpq_rat>(m, "mpq_rational")) {
+    py::class_<mpq_rat> mpq_rat_c(m, "mpq_rational");
+    export_boost_multiprecision_rational(mpq_rat_c);
   }
 #endif
-  else {
-    // Fall back
-    if (! add_attr<Fte>(m, "Exact")) {
-      py::class_<Fte> fte_c(m, "Exact");
-      fte_c.def(py::init<const Fte&>())
-        ;
 
-      add_insertion(fte_c, "__str__");
-      add_insertion(fte_c, "__repr__");
-      add_extraction(fte_c);
-    }
+  // Export CPP boost multi-precision
+  using cpp_int = boost::multiprecision::cpp_int;
+  if (! add_attr<cpp_int>(m, "cpp_int")) {
+    py::class_<cpp_int> cpp_int_c(m, "cpp_int");
+    export_boost_multiprecision_int(cpp_int_c);
+  }
+
+  using cpp_rat = boost::multiprecision::cpp_rational;
+  if (! add_attr<cpp_rat>(m, "cpp_rational")) {
+    py::class_<cpp_rat> cpp_rat_c(m, "cpp_rational");
+    export_boost_multiprecision_rational(cpp_rat_c);
+  }
+
+#if CGAL_USE_GMPXX
+  // If gmp is supported, the exact number type is mpq_class defined in the global namespace in <gmpxx.h>
+  export_mpz_class(m);
+  export_mpq_class(m);
+#endif
+  // Fall back
+  if (! add_attr<Fte>(m, "Exact")) {
+    py::class_<Fte> fte_c(m, "Exact");
+    fte_c.def(py::init<const Fte&>())
+      ;
+
+    add_insertion(fte_c, "__str__");
+    add_insertion(fte_c, "__repr__");
+    add_extraction(fte_c);
   }
 
   if (! add_attr<RT>(m, "RT")) {

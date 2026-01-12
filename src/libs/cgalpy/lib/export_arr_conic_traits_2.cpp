@@ -9,6 +9,11 @@
 
 #include <type_traits>
 
+#include <boost/multiprecision/cpp_int.hpp>
+#if CGAL_USE_GMP
+#include <boost/multiprecision/gmp.hpp>
+#endif
+
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Arr_conic_traits_2.h>
@@ -24,6 +29,7 @@
 #include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
+#include "CGALPY/export_boost_multiprecision.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/Kernel/export_point_2.hpp"
 #include "CGALPY/Kernel/export_segment_2.hpp"
@@ -31,9 +37,6 @@
 #include "CGALPY/add_insertion.hpp"
 
 namespace py = nanobind;
-
-extern void export_mpz_int(py::module_&);
-extern void export_mpq_rational(py::module_&);
 
 void export_arr_conic_traits_2(py::module_& m) {
   //TODO export RatKernel, AlgKernel
@@ -70,36 +73,46 @@ void export_arr_conic_traits_2(py::module_& m) {
       m_aos_directional_x_monotone_traits_2_classes;
   } concepts;
 
-  if constexpr (std::is_same_v<Rational, boost::multiprecision::mpq_rational>) {
-    // Export Boost multiprecision integer and rational unlimited precision types
-    export_mpz_int(m);
-    export_mpq_rational(m);
-    add_attr<Rational>(traits_c, "Rational");
+  // Export multiprecision integer and rational unlimited precision types
+#if CGAL_USE_GMP
+  using mpq_rat = boost::multiprecision::mpq_rational;
+  using mpz_int = boost::multiprecision::mpz_int;
+  if constexpr (std::is_same_v<Rational, mpq_rat>) {
+    if (! add_attr<mpz_int>(m, "mpz_int")) {
+      py::class_<mpz_int> mpz_int_c(m, "mpz_int");
+      export_boost_multiprecision_int(mpz_int_c);
+    }
     add_attr<Integer>(traits_c, "Integer");
+
+    if (! add_attr<mpq_rat>(m, "mpq_rational")) {
+      py::class_<mpq_rat> mpq_rat_c(m, "mpq_rational");
+      export_boost_multiprecision_rational(mpq_rat_c);
+    }
+    add_attr<Rational>(traits_c, "Rational");
   }
-  else {
-    // Fall back; if other options exist, the corresponding wrappers whould be added
-    if (! add_attr<Integer>(traits_c, "Integer")) {
-      py::class_<Integer> int_c(traits_c, "Integer");
-      int_c.def(py::init<const Integer&>())
-        .def(py::init_implicit<int>())
-        ;
+#endif
 
-      add_insertion(int_c, "__str__");
-      add_insertion(int_c, "__repr__");
-    }
+  // Fall back; if other options exist, the corresponding wrappers whould be added
+  if (! add_attr<Integer>(traits_c, "Integer")) {
+    py::class_<Integer> int_c(traits_c, "Integer");
+    int_c.def(py::init<const Integer&>())
+      .def(py::init_implicit<int>())
+      ;
 
-    if (! add_attr<Rational>(traits_c, "Rational")) {
-      py::class_<Rational> rat_c(traits_c, "Rational");
-      export_ft(rat_c);
-      rat_c.def(py::init<const Rational&>())
-        .def(py::init_implicit<Integer>())
-        .def(py::init<const Integer&, const Integer&>())
-        ;
+    add_insertion(int_c, "__str__");
+    add_insertion(int_c, "__repr__");
+  }
 
-      add_insertion(rat_c, "__str__");
-      add_insertion(rat_c, "__repr__");
-    }
+  if (! add_attr<Rational>(traits_c, "Rational")) {
+    py::class_<Rational> rat_c(traits_c, "Rational");
+    export_ft(rat_c);
+    rat_c.def(py::init<const Rational&>())
+      .def(py::init_implicit<Integer>())
+      .def(py::init<const Integer&, const Integer&>())
+      ;
+
+    add_insertion(rat_c, "__str__");
+    add_insertion(rat_c, "__repr__");
   }
 
   if (! add_attr<Algebraic>(traits_c, "Algebraic")) {

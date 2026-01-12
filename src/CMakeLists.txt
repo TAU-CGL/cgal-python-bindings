@@ -46,6 +46,10 @@ if (NOT TARGET CGAL::Eigen3_support)
   endif ()
 endif ()
 
+if (CGAL_USE_GMP)
+  add_definitions(-DCGAL_USE_GMP=1)
+endif ()
+
 # Find required Python library
 if (SKBUILD)
     find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
