@@ -22,10 +22,12 @@
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/basic.h>
 #include <CGAL/Mesh_constant_domain_field_3.h>
+#if CGAL_USE_GMP
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
 #include <CGAL/GMP/Gmpz_type.h>
 #include <CGAL/GMP/Gmpq_type.h>
+#endif
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
