@@ -46,7 +46,8 @@ void export_sphere_3(C& c) {
     .def("has_on_negative_side", &Sphere::has_on_negative_side)
     .def("has_on_boundary", &Sphere::has_on_boundary)
     .def("has_on_bounded_side", &Sphere::has_on_bounded_side)
-    .def("has_on_unbounded_side", &Sphere::has_on_unbounded_side)
+    .def("has_on_unbounded_side",
+         py::overload_cast<const Pnt&>(&Sphere::has_on_unbounded_side, py::const_))
     .def("has_on", py::overload_cast<const Pnt&>(&Sphere::has_on, py::const_))
     .def("has_on", py::overload_cast<const Circle&>(&Sphere::has_on, py::const_))
     .def("opposite", &Sphere::opposite)

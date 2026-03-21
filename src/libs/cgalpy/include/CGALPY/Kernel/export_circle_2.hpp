@@ -52,7 +52,8 @@ void export_circle_2(C& c) {
     .def("has_on_negative_side", &Circle::has_on_negative_side)
     .def("has_on_boundary", &Circle::has_on_boundary)
     .def("has_on_bounded_side", &Circle::has_on_bounded_side)
-    .def("has_on_unbounded_side", &Circle::has_on_unbounded_side)
+    .def("has_on_unbounded_side",
+         py::overload_cast<const Pnt&>(&Circle::has_on_unbounded_side, py::const_))
     .def("orthogonal_transform", &Circle::orthogonal_transform)
     .def(py::self == py::self,
          py::sig("def __eq__(self, arg: object, /) -> bool"))
