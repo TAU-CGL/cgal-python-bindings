@@ -22,7 +22,7 @@
 #include <CGAL/Polygon_mesh_processing/autorefinement.h>
 #include <CGAL/Polygon_mesh_processing/clip.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
-#include <CGAL/Polygon_mesh_processing/intersection.h>
+#include <CGAL/Polygon_mesh_processing/intersection_polylines.h>
 
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/pmp_helpers.hpp"
@@ -38,39 +38,32 @@ namespace pmp {
 
 //!
 template <typename PolygonMesh>
-auto autorefine(PolygonMesh& tm,
-                const py::dict& np = py::dict()) {
-  PMP::autorefine(tm, internal::parse_pmp_np<PolygonMesh>(np));
-}
+auto autorefine(PolygonMesh& tm, const py::dict& np = py::dict())
+{ PMP::autorefine(tm, internal::parse_pmp_np<PolygonMesh>(np)); }
 
 //!
-auto autorefine_triangle_soup(std::vector<Point_3>& points,
-                              std::vector<std::vector<std::size_t>>& polygons,
+auto autorefine_triangle_soup(std::vector<Point_3>& points, std::vector<std::vector<std::size_t>>& polygons,
                               const py::dict& np = py::dict()) {
   bool visitor = np.contains("visitor");
   if (visitor) {
     try {
       auto v = py::cast<pmp::Autorefinement_visitor>(np["visitor"]);
-      PMP::autorefine_triangle_soup(points, polygons,
-                                    internal::parse_named_parameters(np).visitor(v));
+      PMP::autorefine_triangle_soup(points, polygons, internal::parse_named_parameters(np).visitor(v));
     }
     catch (const py::cast_error& e) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::autorefine_triangle_soup(points, polygons,
-                                  internal::parse_named_parameters(np));
+    PMP::autorefine_triangle_soup(points, polygons, internal::parse_named_parameters(np));
   }
 
   return std::make_tuple(points, polygons);
 }
 
-  //!
+//!
 template <typename PolygonMesh>
-bool clip(PolygonMesh& tm, PolygonMesh& clipper,
-          const py::dict& np_tm = py::dict(),
-          const py::dict& np_c = py::dict()) {
+bool clip(PolygonMesh& tm, PolygonMesh& clipper, const py::dict& np_tm = py::dict(), const py::dict& np_c = py::dict()) {
   using Pm = PolygonMesh;
 
   auto eicm1 = get_edge_prop_map<Pm, bool>(tm, "INTERNAL_MAP0",
@@ -333,7 +326,6 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                                                            internal::parse_pmp_np<PolygonMesh>(np_out[1])
                                                                            .edge_is_constrained_map(eicm_out2),
                                                                            internal::parse_pmp_np<PolygonMesh>(np_out[2])
-
                                                                            .edge_is_constrained_map(eicm_out3),
                                                                            internal::parse_pmp_np<PolygonMesh>(np_out[3])
                                                                            .edge_is_constrained_map(eicm_out4)));
@@ -347,29 +339,27 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
         auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7",
           np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
         res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
-                                      internal::parse_pmp_np<PolygonMesh>(np1)
-                                      .face_index_map(fim1)
-                                      // .vertex_point_map(vpm1)
-                                      .edge_is_constrained_map(eicm1)
-                                      .visitor(visit),
-                                      internal::parse_pmp_np<PolygonMesh>(np2)
-                                      .face_index_map(fim2)
-                                      // .vertex_point_map(vpm2)
-                                      .edge_is_constrained_map(eicm2),
-                                      std::make_tuple(
-                                        internal::parse_pmp_np<PolygonMesh>(np_out[0])
-                                        // .vertex_point_map(vpm_out1)
-                                        .edge_is_constrained_map(eicm_out1),
-                                        internal::parse_pmp_np<PolygonMesh>(np_out[1])
-                                        // .vertex_point_map(vpm_out2)
-                                        .edge_is_constrained_map(eicm_out2),
-                                        internal::parse_pmp_np<PolygonMesh>(np_out[2])
-                                        // .vertex_point_map(vpm_out3)
-                                        .edge_is_constrained_map(eicm_out3),
-                                        internal::parse_pmp_np<PolygonMesh>(np_out[3])
-                                        // .vertex_point_map(vpm_out4)
-                                        .edge_is_constrained_map(eicm_out4)
-                                      ));
+                                                           internal::parse_pmp_np<PolygonMesh>(np1)
+                                                           .face_index_map(fim1)
+                                                           // .vertex_point_map(vpm1)
+                                                           .edge_is_constrained_map(eicm1)
+                                                           .visitor(visit),
+                                                           internal::parse_pmp_np<PolygonMesh>(np2)
+                                                           .face_index_map(fim2)
+                                                           // .vertex_point_map(vpm2)
+                                                           .edge_is_constrained_map(eicm2),
+                                                           std::make_tuple(internal::parse_pmp_np<PolygonMesh>(np_out[0])
+                                                                           // .vertex_point_map(vpm_out1)
+                                                                           .edge_is_constrained_map(eicm_out1),
+                                                                           internal::parse_pmp_np<PolygonMesh>(np_out[1])
+                                                                           // .vertex_point_map(vpm_out2)
+                                                                           .edge_is_constrained_map(eicm_out2),
+                                                                           internal::parse_pmp_np<PolygonMesh>(np_out[2])
+                                                                           // .vertex_point_map(vpm_out3)
+                                                                           .edge_is_constrained_map(eicm_out3),
+                                                                           internal::parse_pmp_np<PolygonMesh>(np_out[3])
+                                                                           // .vertex_point_map(vpm_out4)
+                                                                           .edge_is_constrained_map(eicm_out4)));
       }
       catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
@@ -377,9 +367,9 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
     }
     else {
       auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
-        np1.contains("face_index_map") ? np1["face_internal_map"] : py::none());
+                                                     np1.contains("face_index_map") ? np1["face_internal_map"] : py::none());
       auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7",
-        np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
+                                                     np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
       res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
                                                          internal::parse_pmp_np<PolygonMesh>(np1)
                                                          .face_index_map(fim1)
@@ -656,8 +646,7 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
                                                       .edge_is_constrained_map(eicm2),
                                                       internal::parse_pmp_np<TriangleMesh>(np_out)
                                                       // .vertex_point_map(vpm3)
-                                                      .edge_is_constrained_map(eicm_out)
-                                                      );
+                                                      .edge_is_constrained_map(eicm_out));
       }
       catch (const py::cast_error&) {
       }
@@ -668,18 +657,18 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
         auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
           np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
           valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
-                                                      internal::parse_pmp_np<TriangleMesh>(np1)
-                                                      // .vertex_point_map(vpm1)
-                                                      .edge_is_constrained_map(eicm1)
-                                                      .face_index_map(fim1)
-                                                      .visitor(visitor),
-                                                      internal::parse_pmp_np<TriangleMesh>(np2)
-                                                      // .vertex_point_map(vpm2)
-                                                      .face_index_map(fim2)
-                                                      .edge_is_constrained_map(eicm2),
-                                                      internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                      // .vertex_point_map(vpm3)
-                                                      .edge_is_constrained_map(eicm_out));
+                                                       internal::parse_pmp_np<TriangleMesh>(np1)
+                                                       // .vertex_point_map(vpm1)
+                                                       .edge_is_constrained_map(eicm1)
+                                                       .face_index_map(fim1)
+                                                       .visitor(visitor),
+                                                       internal::parse_pmp_np<TriangleMesh>(np2)
+                                                       // .vertex_point_map(vpm2)
+                                                       .face_index_map(fim2)
+                                                       .edge_is_constrained_map(eicm2),
+                                                       internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                       // .vertex_point_map(vpm3)
+                                                       .edge_is_constrained_map(eicm_out));
       }
       catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
@@ -1016,18 +1005,17 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
         auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP3",
           np2.contains("face_index_map") ? np2["face_internal_map"] : py::none());
         valid = PMP::corefine_and_compute_intersection(pm1, pm2, out,
-                                                    internal::parse_pmp_np<TriangleMesh>(np1)
-                                                    // .vertex_point_map(vpm1)
-                                                    .edge_is_constrained_map(eicm1)
-                                                    .visitor(visitor),
-                                                    internal::parse_pmp_np<TriangleMesh>(np2)
-                                                    // .vertex_point_map(vpm2)
-                                                    .face_index_map(fim2)
-                                                    .edge_is_constrained_map(eicm2),
-                                                    internal::parse_pmp_np<TriangleMesh>(np_out)
-                                                    // .vertex_point_map(vpm3)
-                                                    .edge_is_constrained_map(eicm_out)
-                                                    );
+                                                       internal::parse_pmp_np<TriangleMesh>(np1)
+                                                       // .vertex_point_map(vpm1)
+                                                       .edge_is_constrained_map(eicm1)
+                                                       .visitor(visitor),
+                                                       internal::parse_pmp_np<TriangleMesh>(np2)
+                                                       // .vertex_point_map(vpm2)
+                                                       .face_index_map(fim2)
+                                                       .edge_is_constrained_map(eicm2),
+                                                       internal::parse_pmp_np<TriangleMesh>(np_out)
+                                                       // .vertex_point_map(vpm3)
+                                                       .edge_is_constrained_map(eicm_out));
       }
       catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
@@ -1466,13 +1454,9 @@ void split(PolygonMesh& pm,
 }
 
 template <typename TriangleMesh>
-auto split_c(TriangleMesh& tm,
-             const Iso_cuboid_3& bbox,
-             const py::dict& np = py::dict()) {
+auto split_c(TriangleMesh& tm, const Iso_cuboid_3& bbox, const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(tm, np);
-  return PMP::split(tm, bbox, internal::parse_pmp_np<TriangleMesh>(np)
-                    // .vertex_point_map(vpm)
-                    );
+  return PMP::split(tm, bbox, internal::parse_pmp_np<TriangleMesh>(np));
 }
 
 template <typename TriangleMesh>
@@ -1480,28 +1464,21 @@ auto split_p(TriangleMesh& tm,
              const Plane_3& plane,
              const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(tm, np);
-  return PMP::split(tm, plane, internal::parse_pmp_np<TriangleMesh>(np)
-                    // .vertex_point_map(vpm)
-                    );
+  return PMP::split(tm, plane, internal::parse_pmp_np<TriangleMesh>(np));
 }
 
 template <typename PolygonMesh>
-auto surface_intersection(const PolygonMesh& tm1,
-                          const PolygonMesh& tm2,
-                          const py::dict& np1 = py::dict(),
-                          const py::dict& np2 = py::dict()) {
+auto intersection_polylines(const PolygonMesh& tm1, const PolygonMesh& tm2,
+                            const py::dict& np1 = py::dict(), const py::dict& np2 = py::dict()) {
   std::vector< std::vector<Point_3> > polylines;
   // auto vpm1 = get_vertex_point_map(tm1, np1);
   // auto vpm2 = get_vertex_point_map(tm2, np2);
-  PMP::surface_intersection(tm1, tm2, std::back_inserter(polylines),
-                            internal::parse_pmp_np<PolygonMesh>(np1)
-                            // .vertex_point_map(vpm1)
-                            ,
-                            internal::parse_pmp_np<PolygonMesh>(np2)
-                            // .vertex_point_map(vpm2)
-                            );
+  PMP::intersection_polylines(tm1, tm2, std::back_inserter(polylines),
+                              internal::parse_pmp_np<PolygonMesh>(np1),
+                              internal::parse_pmp_np<PolygonMesh>(np2));
   return polylines;
 }
+
 using Boolean_operation_type = std::size_t;
 using Pm = Polygonal_mesh;
 using Gt = boost::graph_traits<Pm>;
@@ -1512,244 +1489,143 @@ using Vd = boost::graph_traits<Pm>::vertex_descriptor;
 using Cv = Corefine_visitor<Pm>;
 
 //!
-void set_before_subface_creations_fn(Cv& v,
-                                     const std::function<void(Fd, Pm&)>& f) {
-  v.set_before_subface_creations(f);
-}
+void set_before_subface_creations_fn(Cv& v, const std::function<void(Fd, Pm&)>& f) { v.set_before_subface_creations(f); }
 
 //!
-void set_after_subface_creations_fn(Cv& v,
-                                    const std::function<void(Pm&)>& f) {
-  v.set_after_subface_creations(f);
-}
+void set_after_subface_creations_fn(Cv& v, const std::function<void(Pm&)>& f) { v.set_after_subface_creations(f); }
 
 //!
-void set_before_subface_created_fn(Cv& v,
-                                   const std::function<void(Pm&)>& f) {
-  v.set_before_subface_created(f);
-}
+void set_before_subface_created_fn(Cv& v, const std::function<void(Pm&)>& f) { v.set_before_subface_created(f); }
 
 //!
-void set_after_subface_created_fn(Cv& v,
-                                  const std::function<void(Fd, Pm&)>& f) {
-  v.set_after_subface_created(f);
-}
+void set_after_subface_created_fn(Cv& v, const std::function<void(Fd, Pm&)>& f) { v.set_after_subface_created(f); }
 
 //!
-void set_before_face_copy_fn(Cv& v,
-                             const std::function<void(Fd, const Pm&, Pm&)>& f) {
-  v.set_before_face_copy(f);
-}
+void set_before_face_copy_fn(Cv& v, const std::function<void(Fd, const Pm&, Pm&)>& f) { v.set_before_face_copy(f); }
 
 //!
-void set_after_face_copy_fn(Cv& v,
-                            const std::function<void(Fd, const Pm&, Fd, Pm&)>& f) {
-  v.set_after_face_copy(f);
-}
+void set_after_face_copy_fn(Cv& v, const std::function<void(Fd, const Pm&, Fd, Pm&)>& f) { v.set_after_face_copy(f); }
 
 //!
-void set_before_edge_split_fn(Cv& v,
-                              const std::function<void(Hd, Pm&)>& f) {
-  v.set_before_edge_split(f);
-}
+void set_before_edge_split_fn(Cv& v, const std::function<void(Hd, Pm&)>& f) { v.set_before_edge_split(f); }
 
 //!
-void set_edge_split_fn(Cv& v,
-                       const std::function<void(Hd, Pm&)>& f) {
-  v.set_edge_split(f);
-}
+void set_edge_split_fn(Cv& v, const std::function<void(Hd, Pm&)>& f) { v.set_edge_split(f); }
 
 //!
-void set_after_edge_split_fn(Cv& v,
-                             const std::function<void()>& f) {
-  v.set_after_edge_split(f);
-}
+void set_after_edge_split_fn(Cv& v, const std::function<void()>& f) { v.set_after_edge_split(f); }
 
 //!
-void set_add_retriangulation_edge_fn(Cv& v,
-                                     const std::function<void(Hd, Pm&)>& f) {
-  v.set_add_retriangulation_edge(f);
-}
+void set_add_retriangulation_edge_fn(Cv& v, const std::function<void(Hd, Pm&)>& f) { v.set_add_retriangulation_edge(f); }
 
 //!
-void set_before_edge_copy_fn(Cv& v,
-                             const std::function<void(Hd, const Pm&, Pm&)>& f) {
-  v.set_before_edge_copy(f);
-}
+void set_before_edge_copy_fn(Cv& v, const std::function<void(Hd, const Pm&, Pm&)>& f) { v.set_before_edge_copy(f); }
 
 //!
-void set_after_edge_copy_fn(Cv& v,
-                            const std::function<void(Hd, const Pm&, Hd, Pm&)>& f) {
-  v.set_after_edge_copy(f);
-}
+void set_after_edge_copy_fn(Cv& v, const std::function<void(Hd, const Pm&, Hd, Pm&)>& f) { v.set_after_edge_copy(f); }
 
 //!
-void set_before_edge_duplicated_fn(Cv& v,
-                                   const std::function<void(Hd, Pm&)>& f) {
-  v.set_before_edge_duplicated(f);
-}
+void set_before_edge_duplicated_fn(Cv& v, const std::function<void(Hd, Pm&)>& f) { v.set_before_edge_duplicated(f); }
 
 //!
-void set_after_edge_duplicated_fn(Cv& v,
-                                  const std::function<void(Hd, Hd, Pm&)>& f) {
-  v.set_after_edge_duplicated(f);
-}
+void set_after_edge_duplicated_fn(Cv& v, const std::function<void(Hd, Hd, Pm&)>& f) { v.set_after_edge_duplicated(f); }
 
 //!
-void set_intersection_edge_copy_fn(Cv& v,
-                                   const std::function<void(Hd, const Pm&, Hd, const Pm&, Hd, Pm&)>& f) {
-  v.set_intersection_edge_copy(f);
-}
+void set_intersection_edge_copy_fn(Cv& v, const std::function<void(Hd, const Pm&, Hd, const Pm&, Hd, Pm&)>& f)
+{ v.set_intersection_edge_copy(f); }
 
 //!
-void set_new_vertex_added_fn(Cv& v,
-                             const std::function<void(std::size_t, Vd, const Pm&)>& f) {
-  v.set_new_vertex_added(f);
-}
+void set_new_vertex_added_fn(Cv& v, const std::function<void(std::size_t, Vd, const Pm&)>& f)
+{ v.set_new_vertex_added(f); }
 
 //!
 void set_intersection_point_detected_fn(Cv& v,
-                                        const std::function<void(std::size_t, int, Hd, Hd, const Pm&, const Pm&, bool, bool)>& f) {
-  v.set_intersection_point_detected(f);
-}
+                                        const std::function<void(std::size_t, int, Hd, Hd, const Pm&, const Pm&, bool, bool)>& f)
+{ v.set_intersection_point_detected(f); }
 
 //!
-void set_before_vertex_copy_fn(Cv& v,
-                               const std::function<void(Vd, const Pm&, Pm&)>& f) {
-  v.set_before_vertex_copy(f);
-}
+void set_before_vertex_copy_fn(Cv& v, const std::function<void(Vd, const Pm&, Pm&)>& f) { v.set_before_vertex_copy(f); }
 
 //!
-void set_after_vertex_copy_fn(Cv& v,
-                              const std::function<void(Vd, const Pm&, Vd, Pm&)>& f) {
-  v.set_after_vertex_copy(f);
-}
+void set_after_vertex_copy_fn(Cv& v, const std::function<void(Vd, const Pm&, Vd, Pm&)>& f)
+{ v.set_after_vertex_copy(f); }
 
 //!
-void set_start_filtering_intersections_fn(Cv& v,
-                                          const std::function<void()>& f) {
-  v.set_start_filtering_intersections(f);
-}
+void set_start_filtering_intersections_fn(Cv& v, const std::function<void()>& f)
+{ v.set_start_filtering_intersections(f); }
 
 //!
-void set_progress_filtering_intersections_fn(Cv& v,
-                                             const std::function<void(double)>& f) {
-  v.set_progress_filtering_intersections(f);
-}
+void set_progress_filtering_intersections_fn(Cv& v, const std::function<void(double)>& f)
+{ v.set_progress_filtering_intersections(f); }
 
 //!
-void set_end_filtering_intersections_fn(Cv& v,
-                                        const std::function<void()>& f) {
-  v.set_end_filtering_intersections(f);
-}
+void set_end_filtering_intersections_fn(Cv& v, const std::function<void()>& f)
+{ v.set_end_filtering_intersections(f); }
 
 //!
-void set_start_triangulating_faces_fn(Cv& v,
-                                      const std::function<void(std::size_t)>& f) {
-  v.set_start_triangulating_faces(f);
-}
+void set_start_triangulating_faces_fn(Cv& v, const std::function<void(std::size_t)>& f)
+{ v.set_start_triangulating_faces(f); }
 
 //!
-void set_triangulating_faces_step_fn(Cv& v,
-                                     const std::function<void()>& f) {
-  v.set_triangulating_faces_step(f);
-}
+void set_triangulating_faces_step_fn(Cv& v, const std::function<void()>& f) { v.set_triangulating_faces_step(f); }
 
 //!
-void set_end_triangulating_faces_fn(Cv& v,
-                                    const std::function<void()>& f) {
-  v.set_end_triangulating_faces(f);
-}
+void set_end_triangulating_faces_fn(Cv& v, const std::function<void()>& f) { v.set_end_triangulating_faces(f); }
 
 //!
-void set_start_handling_intersection_of_coplanar_faces_fn(Cv& v,
-                                                          const std::function<void(std::size_t)>& f) {
-  v.set_start_handling_intersection_of_coplanar_faces(f);
-}
+void set_start_handling_intersection_of_coplanar_faces_fn(Cv& v, const std::function<void(std::size_t)>& f)
+{ v.set_start_handling_intersection_of_coplanar_faces(f); }
 
 //!
-void set_intersection_of_coplanar_faces_step_fn(Cv& v,
-                                                const std::function<void()>& f) {
-  v.set_intersection_of_coplanar_faces_step(f);
-}
+void set_intersection_of_coplanar_faces_step_fn(Cv& v, const std::function<void()>& f)
+{ v.set_intersection_of_coplanar_faces_step(f); }
 
 //!
-void set_end_handling_intersection_of_coplanar_faces_fn(Cv& v,
-                                                        const std::function<void()>& f) {
-  v.set_end_handling_intersection_of_coplanar_faces(f);
-}
+void set_end_handling_intersection_of_coplanar_faces_fn(Cv& v, const std::function<void()>& f)
+{ v.set_end_handling_intersection_of_coplanar_faces(f); }
 
 //!
-void set_start_handling_edge_face_intersections_fn(Cv& v,
-                                                   const std::function<void(std::size_t)>& f) {
-  v.set_start_handling_edge_face_intersections(f);
-}
+void set_start_handling_edge_face_intersections_fn(Cv& v, const std::function<void(std::size_t)>& f)
+{ v.set_start_handling_edge_face_intersections(f); }
 
 //!
-void set_edge_face_intersections_step_fn(Cv& v,
-                                         const std::function<void()>& f) {
-  v.set_edge_face_intersections_step(f);
-}
+void set_edge_face_intersections_step_fn(Cv& v, const std::function<void()>& f)
+{ v.set_edge_face_intersections_step(f); }
 
 //!
-void set_end_handling_edge_face_intersections_fn(Cv& v,
-                                                const std::function<void()>& f) {
-  v.set_end_handling_edge_face_intersections(f);
-}
+void set_end_handling_edge_face_intersections_fn(Cv& v, const std::function<void()>& f)
+{ v.set_end_handling_edge_face_intersections(f); }
 
 //!
-void set_start_building_output_fn(Cv& v,
-                                  const std::function<void()>& f) {
-  v.set_start_building_output(f);
-}
+void set_start_building_output_fn(Cv& v, const std::function<void()>& f) { v.set_start_building_output(f); }
 
 //!
-void set_end_building_output_fn(Cv& v,
-                                const std::function<void()>& f) {
-  v.set_end_building_output(f);
-}
+void set_end_building_output_fn(Cv& v, const std::function<void()>& f) { v.set_end_building_output(f); }
 
 //!
-void set_filter_coplanar_edges_fn(Cv& v,
-                                  const std::function<void()>& f) {
-  v.set_filter_coplanar_edges(f);
-}
+void set_filter_coplanar_edges_fn(Cv& v, const std::function<void()>& f) { v.set_filter_coplanar_edges(f); }
 
 //!
-void set_detect_patches_fn(Cv& v,
-                           const std::function<void()>& f) {
-  v.set_detect_patches(f);
-}
+void set_detect_patches_fn(Cv& v, const std::function<void()>& f) { v.set_detect_patches(f); }
 
 //!
-void set_classify_patches_fn(Cv& v,
-                             const std::function<void()>& f) {
-  v.set_classify_patches(f);
-}
+void set_classify_patches_fn(Cv& v, const std::function<void()>& f) { v.set_classify_patches(f); }
 
 //!
-void set_classify_intersection_free_patches_fn(Cv& v,
-                                               const std::function<void(const Pm&)>& f) {
-  v.set_classify_intersection_free_patches(f);
-}
+void set_classify_intersection_free_patches_fn(Cv& v, const std::function<void(const Pm&)>& f)
+{ v.set_classify_intersection_free_patches(f); }
 
 //!
-void set_out_of_place_operation_fn(Cv& v,
-                                   const std::function<void(Boolean_operation_type)>& f) {
-  v.set_out_of_place_operation(f);
-}
+void set_out_of_place_operation_fn(Cv& v, const std::function<void(Boolean_operation_type)>& f)
+{ v.set_out_of_place_operation(f); }
 
 //!
-void set_in_place_operation_fn(Cv& v,
-                               const std::function<void(Boolean_operation_type)>& f) {
-  v.set_in_place_operation(f);
-}
+void set_in_place_operation_fn(Cv& v, const std::function<void(Boolean_operation_type)>& f)
+{ v.set_in_place_operation(f); }
 
 //!
-void set_in_place_operations_fn(Cv& v,
-                               const std::function<void(Boolean_operation_type, Boolean_operation_type)>& f) {
-  v.set_in_place_operations(f);
-}
+void set_in_place_operations_fn(Cv& v, const std::function<void(Boolean_operation_type, Boolean_operation_type)>& f)
+{ v.set_in_place_operations(f); }
 
 } // namespace pmp
 
@@ -1763,47 +1639,35 @@ void export_pmp_corefinement(py::module_& m) {
   m.def("autorefine_triangle_soup", &pmp::autorefine_triangle_soup,
         py::arg("soup_points"), py::arg("soup_triangles"), py::arg("np") = py::dict());
   m.def("clip", &pmp::clip_c<Pm>,
-        py::arg("tm"), py::arg("iso_cuboid"),
-        py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict());
 #if CGAL_VERSION_NR > 1060100900
   m.def("clip", &pmp::clip_p<Pm>,
-        py::arg("tm"), py::arg("plane"),
-        py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict());
 #endif
   m.def("clip", &pmp::clip<Pm>,
-        py::arg("tm"), py::arg("clipper"),
-        py::arg("np_tm") = py::dict(), py::arg("np_c") = py::dict());
+        py::arg("tm"), py::arg("clipper"), py::arg("np_tm") = py::dict(), py::arg("np_c") = py::dict());
   m.def("corefine", &pmp::corefine<Pm>,
-        py::arg("pm1"), py::arg("pm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+        py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
   m.def("corefine_and_compute_boolean_operations", &pmp::corefine_and_compute_boolean_operations<Pm>,
-        py::arg("pm1"), py::arg("pm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::tuple());
   m.def("corefine_and_compute_difference", &pmp::corefine_and_compute_difference<Pm>,
-        py::arg("tm1"), py::arg("tm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(), py::arg("np_out") = py::dict());
+        py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        py::arg("np_out") = py::dict());
   m.def("corefine_and_compute_intersection", &pmp::corefine_and_compute_intersection<Pm>,
-        py::arg("pm1"), py::arg("pm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
   m.def("corefine_and_compute_union", &pmp::corefine_and_compute_union<Pm>,
-        py::arg("pm1"), py::arg("pm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
   m.def("split", &pmp::split_c<Pm>,
-        py::arg("tm"), py::arg("iso_cuboid"),
-        py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict());
   m.def("split", &pmp::split_p<Pm>,
-        py::arg("tm"), py::arg("plane"),
-        py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict());
   m.def("split", &pmp::split<Pm>,
-        py::arg("tm"), py::arg("splitter"),
-        py::arg("np_tm") = py::dict(), py::arg("np_s") = py::dict());
-  m.def("surface_intersection", &pmp::surface_intersection<Pm>,
-        py::arg("tm1"), py::arg("tm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-
+        py::arg("tm"), py::arg("splitter"), py::arg("np_tm") = py::dict(), py::arg("np_s") = py::dict());
+  m.def("intersection_polylines", &pmp::intersection_polylines<Pm>,
+        py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
 
   // Corefine_visitor
   m.def("set_before_subface_creations", &pmp::set_before_subface_creations_fn);

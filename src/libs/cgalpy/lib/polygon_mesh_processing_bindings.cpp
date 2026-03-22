@@ -23,6 +23,7 @@
 #include <nanobind/stl/tuple.h>
 
 #include <CGAL/Kernel/Dimension_utils.h>
+#include <CGAL/boost/graph/border.h>
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #include <CGAL/Dynamic_property_map.h>
 #include <CGAL/Mesh_constant_domain_field_3.h>
@@ -62,8 +63,7 @@ using Size_t_vec = std::vector<std::size_t>;
 
 //!
 template <typename PolygonMesh>
-auto edge_bbox(const typename boost::graph_traits<PolygonMesh>::edge_descriptor ed,
-               const PolygonMesh& pm,
+auto edge_bbox(const typename boost::graph_traits<PolygonMesh>::edge_descriptor ed, const PolygonMesh& pm,
                const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
 
@@ -72,8 +72,7 @@ auto edge_bbox(const typename boost::graph_traits<PolygonMesh>::edge_descriptor 
 
 //!
 template <typename PolygonMesh>
-auto face_bbox(const typename boost::graph_traits<PolygonMesh>::face_descriptor fd,
-               const PolygonMesh& pm,
+auto face_bbox(const typename boost::graph_traits<PolygonMesh>::face_descriptor fd, const PolygonMesh& pm,
                const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   return PMP::face_bbox(fd, pm, internal::parse_pmp_np<Pm>(np));
@@ -81,8 +80,7 @@ auto face_bbox(const typename boost::graph_traits<PolygonMesh>::face_descriptor 
 
 //!
 template <typename PolygonMesh, typename ValueMap>
-auto refine_mesh_at_isolevel(PolygonMesh& pm,
-                             ValueMap value_map,
+auto refine_mesh_at_isolevel(PolygonMesh& pm, ValueMap value_map,
                              typename boost::property_traits<ValueMap>::value_type isovalue,
                              const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
@@ -110,8 +108,7 @@ auto triangle(typename boost::graph_traits<TriangleMesh>::face_descriptor fd, co
 
 //!
 template <typename PolygonMesh>
-auto vertex_bbox(typename boost::graph_traits<PolygonMesh>::vertex_descriptor vd,
-                 const PolygonMesh& pm,
+auto vertex_bbox(typename boost::graph_traits<PolygonMesh>::vertex_descriptor vd, const PolygonMesh& pm,
                  const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   return PMP::vertex_bbox(vd, pm, internal::parse_pmp_np<Pm>(np));
@@ -126,7 +123,7 @@ auto extract_boundary_cycles(PolygonMesh& pm) {
 
   std::vector<Hd> result;
   auto it = std::back_inserter(result);
-  PMP::extract_boundary_cycles(pm, it);
+  CGAL::extract_boundary_cycles(pm, it);
   return result;
 }
 
@@ -139,17 +136,14 @@ auto add_bbox(PolygonMesh& pmesh, const py::dict& np = py::dict()) {
 
 //!
 template <typename PolygonMesh>
-auto bbox(PolygonMesh& pmesh,
-          const py::dict& np = py::dict()) {
+auto bbox(PolygonMesh& pmesh, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   return PMP::bbox(pmesh, internal::parse_pmp_np<Pm>(np));
 }
 
 //!
 template <typename PolygonMesh, typename FaceNormalMap>
-void merge_coplanar_facets(PolygonMesh& mesh,
-                           FaceNormalMap face_normals,
-                           const py::dict& params = py::dict()) {
+void merge_coplanar_facets(PolygonMesh& mesh, FaceNormalMap face_normals, const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
   for (const auto& item : params) {
     const std::string& key = py::cast<std::string>(item.first);
@@ -164,8 +158,7 @@ void merge_coplanar_facets(PolygonMesh& mesh,
 //!
 template <typename PolygonMesh>
 auto border_halfedges(const std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& face_range,
-                      PolygonMesh& pmesh,
-                      const py::dict& np = py::dict()) {
+                      PolygonMesh& pmesh, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
@@ -174,16 +167,12 @@ auto border_halfedges(const std::vector<typename boost::graph_traits<PolygonMesh
   std::vector<Hd> out;
   if (np.contains("face_index_map")) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP0",
-      np.contains("face_index_map") ? np["face_patch_index_map"] : py::none());
-    PMP::border_halfedges(face_range, pmesh, std::back_inserter(out),
-                          internal::parse_pmp_np<Pm>(np)
-                          .face_index_map(fim)
-                          );
+                                                  np.contains("face_index_map") ? np["face_patch_index_map"] : py::none());
+    CGAL::border_halfedges(face_range, pmesh, std::back_inserter(out),
+                           internal::parse_pmp_np<Pm>(np).face_index_map(fim));
   }
   else {
-    PMP::border_halfedges(face_range, pmesh, std::back_inserter(out),
-                          internal::parse_pmp_np<Pm>(np)
-                          );
+    CGAL::border_halfedges(face_range, pmesh, std::back_inserter(out), internal::parse_pmp_np<Pm>(np));
   }
   return out;
 }
@@ -191,9 +180,7 @@ auto border_halfedges(const std::vector<typename boost::graph_traits<PolygonMesh
 //!
 py::list ptvec2ptlist(const Point_3_vec& ptvec) {
   py::list ptlist;
-  for (auto pt : ptvec) {
-    ptlist.append(pt);
-  }
+  for (auto pt : ptvec) ptlist.append(pt);
   return ptlist;
 }
 
@@ -240,9 +227,7 @@ auto polyvec2polylist(const std::vector<std::vector<std::size_t>> polyvec) {
   py::list polylist;
   for (auto poly : polyvec) {
     py::list p;
-    for (auto pid : poly) {
-      p.append(pid);
-    }
+    for (auto pid : poly) p.append(pid);
     polylist.append(p);
   }
   return polylist;
@@ -256,9 +241,7 @@ using Fd = typename Gt::face_descriptor;
 
 //!
 template <typename PolygonMesh, typename RegionMap>
-auto region_growing_of_planes_on_faces(PolygonMesh& pmesh,
-                                       RegionMap region_map,
-                                       const py::dict& np = py::dict()) {
+auto region_growing_of_planes_on_faces(PolygonMesh& pmesh, RegionMap region_map, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   std::size_t num_regions;
 
@@ -271,30 +254,24 @@ auto region_growing_of_planes_on_faces(PolygonMesh& pmesh,
       throw std::runtime_error("Failed to cast to a vector property map");
     }
     num_regions = PMP::region_growing_of_planes_on_faces(pmesh, region_map,
-                                                         internal::parse_pmp_np<Pm>(np)
-                                                         .region_primitive_map(rpm));
+                                                         internal::parse_pmp_np<Pm>(np).region_primitive_map(rpm));
   }
   else {
-    num_regions = PMP::region_growing_of_planes_on_faces(pmesh, region_map,
-                                                         internal::parse_pmp_np<Pm>(np));
+    num_regions = PMP::region_growing_of_planes_on_faces(pmesh, region_map, internal::parse_pmp_np<Pm>(np));
   }
   return num_regions;
 }
 
 //!
 template <typename PolygonMesh, typename RegionMap, typename CornerIdMap>
-auto detect_corners_of_regions(PolygonMesh& pmesh,
-                               RegionMap region_map,
-                               std::size_t nb_regions,
-                               CornerIdMap corner_id_map,
-                               const py::dict& np = py::dict()) {
+auto detect_corners_of_regions(PolygonMesh& pmesh, RegionMap region_map, std::size_t nb_regions,
+                               CornerIdMap corner_id_map, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   std::size_t num_corners;
   auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
                                           np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
   std::size_t r = PMP::detect_corners_of_regions(pmesh, region_map, nb_regions, corner_id_map,
-                                                 internal::parse_pmp_np<Pm>(np)
-                                                 .edge_is_constrained_map(eicm));
+                                                 internal::parse_pmp_np<Pm>(np).edge_is_constrained_map(eicm));
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("edge_is_constrained_map")) {
@@ -306,16 +283,13 @@ auto detect_corners_of_regions(PolygonMesh& pmesh,
 
 //!
 template <typename TriangleMesh>
-auto degenerate_edges_r(const std::vector<
-                        typename boost::graph_traits<TriangleMesh>::edge_descriptor>& edges,
-                        const TriangleMesh& tmesh,
-                        const py::dict& np = py::dict()) {
+auto degenerate_edges_r(const std::vector<typename boost::graph_traits<TriangleMesh>::edge_descriptor>& edges,
+                        const TriangleMesh& tmesh, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
   using Gt = boost::graph_traits<Tm>;
   using Ed = typename Gt::edge_descriptor;
   std::vector<Ed> out;
-  PMP::degenerate_edges(edges, tmesh, std::back_inserter(out),
-                        internal::parse_pmp_np<Tm>(np));
+  PMP::degenerate_edges(edges, tmesh, std::back_inserter(out), internal::parse_pmp_np<Tm>(np));
   return out;
 }
 
@@ -326,46 +300,38 @@ auto degenerate_edges(TriangleMesh& tmesh, const py::dict& np = py::dict()) {
   using Gt = boost::graph_traits<Tm>;
   using Ed = typename Gt::edge_descriptor;
   std::vector<Ed> out;
-  PMP::degenerate_edges(tmesh, std::back_inserter(out),
-                        internal::parse_pmp_np<Tm>(np));
+  PMP::degenerate_edges(tmesh, std::back_inserter(out), internal::parse_pmp_np<Tm>(np));
   return out;
 }
 
 //!
 template <typename TriangleMesh>
 auto degenerate_faces_r(const std::vector<typename boost::graph_traits<TriangleMesh>::face_descriptor>& faces,
-                        const TriangleMesh& tmesh,
-                        const py::dict& np = py::dict()) {
+                        const TriangleMesh& tmesh, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
   using Gt = boost::graph_traits<Tm>;
   using Fd = typename Gt::face_descriptor;
   std::vector<Fd> out;
-  PMP::degenerate_faces(faces, tmesh, std::back_inserter(out),
-                        internal::parse_pmp_np<Tm>(np));
+  PMP::degenerate_faces(faces, tmesh, std::back_inserter(out), internal::parse_pmp_np<Tm>(np));
   return out;
 }
 
 //!
 template <typename TriangleMesh>
-auto degenerate_faces(TriangleMesh& tmesh,
-                      const py::dict& np = py::dict()) {
+auto degenerate_faces(TriangleMesh& tmesh, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
   using Gt = boost::graph_traits<Tm>;
   using Fd = typename Gt::face_descriptor;
   std::vector<Fd> out;
-  PMP::degenerate_faces(tmesh, std::back_inserter(out),
-                        internal::parse_pmp_np<Tm>(np));
+  PMP::degenerate_faces(tmesh, std::back_inserter(out), internal::parse_pmp_np<Tm>(np));
   return out;
 }
 
 //!
 template <typename TriangleMesh>
-auto is_cap_triangle_face(typename boost::graph_traits<TriangleMesh>::face_descriptor f,
-                          const TriangleMesh& tm,
-                          const double threshold,
-                          const py::dict& np = py::dict()) {
-  auto retv = PMP::is_cap_triangle_face(f, tm, threshold,
-                                        internal::parse_pmp_np<TriangleMesh>(np));
+auto is_cap_triangle_face(typename boost::graph_traits<TriangleMesh>::face_descriptor f, const TriangleMesh& tm,
+                          const double threshold, const py::dict& np = py::dict()) {
+  auto retv = PMP::is_cap_triangle_face(f, tm, threshold, internal::parse_pmp_np<TriangleMesh>(np));
   // return retv != boost::graph_traits<TriangleMesh>::null_halfedge() ? py::cast(retv) : py::none();
   if (retv == boost::graph_traits<TriangleMesh>::null_halfedge()) {
     throw std::runtime_error("is_cap_triangle_face failed");
@@ -376,29 +342,22 @@ auto is_cap_triangle_face(typename boost::graph_traits<TriangleMesh>::face_descr
 //!
 template <typename TriangleMesh>
 auto is_degenerate_edge(typename boost::graph_traits<TriangleMesh>::edge_descriptor e,
-                        const TriangleMesh& tm,
-                        const py::dict& np = py::dict()) {
-  return PMP::is_degenerate_edge(e, tm,
-                                 internal::parse_pmp_np<TriangleMesh>(np));
+                        const TriangleMesh& tm, const py::dict& np = py::dict()) {
+  return PMP::is_degenerate_edge(e, tm, internal::parse_pmp_np<TriangleMesh>(np));
 }
 
 //!
 template <typename TriangleMesh>
 auto is_degenerate_triangle_face(typename boost::graph_traits<TriangleMesh>::face_descriptor f,
-                                 const TriangleMesh& tm,
-                                 const py::dict& np = py::dict()) {
-  return PMP::is_degenerate_triangle_face(f, tm,
-                                          internal::parse_pmp_np<TriangleMesh>(np));
+                                 const TriangleMesh& tm, const py::dict& np = py::dict()) {
+  return PMP::is_degenerate_triangle_face(f, tm, internal::parse_pmp_np<TriangleMesh>(np));
 }
 
 //!
 template <typename TriangleMesh>
 auto is_needle_triangle_face(typename boost::graph_traits<TriangleMesh>::face_descriptor f,
-                             const TriangleMesh& tm,
-                             const double threshold,
-                             const py::dict& np = py::dict()) {
-  return PMP::is_needle_triangle_face(f, tm, threshold,
-                                      internal::parse_pmp_np<TriangleMesh>(np));
+                             const TriangleMesh& tm, const double threshold, const py::dict& np = py::dict()) {
+  return PMP::is_needle_triangle_face(f, tm, threshold, internal::parse_pmp_np<TriangleMesh>(np));
 }
 
 // using Boolean_operation_type = COREFINEMENT::Boolean_operation_type;
@@ -425,9 +384,15 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Np_base = CGAL::internal_np::No_property;
   using Np_class = CGAL::Named_function_parameters<Np_t, Np_tag, Np_base>;
   using Concurrency_tag = CGAL::Sequential_tag;
-// FacePatchMap	a class model of ReadablePropertyMap with boost::graph_traits<TriangleMeshIn>::face_descriptor as key type and std::size_t as value type
-// EdgeIsConstrainedMap	a class model of ReadablePropertyMap with boost::graph_traits<TriangleMeshIn>::edge_descriptor as key type and bool as value type
-// VertexCornerMap	a class model of ReadablePropertyMap with boost::graph_traits<TriangleMeshIn>::vertex_descriptor as key type and std::size_t as value type
+
+  // FacePatchMap a class model of ReadablePropertyMap with
+  // boost::graph_traits<TriangleMeshIn>::face_descriptor as key type and
+  // std::size_t as value type EdgeIsConstrainedMap a class model of
+  // ReadablePropertyMap with
+  // boost::graph_traits<TriangleMeshIn>::edge_descriptor as key type and bool
+  // as value type VertexCornerMap a class model of ReadablePropertyMap with
+  // boost::graph_traits<TriangleMeshIn>::vertex_descriptor as key type and
+  // std::size_t as value type
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   using Vertex_size_map = Pm::Property_map<Vd, std::size_t>;
@@ -480,61 +445,42 @@ void export_polygon_mesh_processing(py::module_& m) {
   }
 #endif
 
-  m.def("degenerate_edges", &pmp::degenerate_edges_r<Pm>,
-        py::arg("edges"), py::arg("tm"),
-        py::arg("np") = py::dict());
-  m.def("degenerate_edges", &pmp::degenerate_edges<Pm>,
-        py::arg("tm"), py::arg("np") = py::dict());
-  m.def("degenerate_faces", &pmp::degenerate_faces_r<Pm>,
-        py::arg("faces"), py::arg("tm"),
-        py::arg("np") = py::dict());
-  m.def("degenerate_faces", &pmp::degenerate_faces<Pm>,
-        py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_edges", &pmp::degenerate_edges_r<Pm>, py::arg("edges"), py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_edges", &pmp::degenerate_edges<Pm>, py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_faces", &pmp::degenerate_faces_r<Pm>, py::arg("faces"), py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_faces", &pmp::degenerate_faces<Pm>, py::arg("tm"), py::arg("np") = py::dict());
   m.def("is_cap_triangle_face", &pmp::is_cap_triangle_face<Pm>,
-        py::arg("f"), py::arg("tm"),
-        py::arg("threshold"), py::arg("np") = py::dict());
-  m.def("is_degenerate_edge", &pmp::is_degenerate_edge<Pm>,
-        py::arg("e"), py::arg("pm"),
-        py::arg("np") = py::dict());
+        py::arg("f"), py::arg("tm"), py::arg("threshold"), py::arg("np") = py::dict());
+  m.def("is_degenerate_edge", &pmp::is_degenerate_edge<Pm>, py::arg("e"), py::arg("pm"), py::arg("np") = py::dict());
   m.def("is_degenerate_triangle_face", &pmp::is_degenerate_triangle_face<Pm>,
-        py::arg("f"), py::arg("tm"),
-        py::arg("np") = py::dict());
+        py::arg("f"), py::arg("tm"), py::arg("np") = py::dict());
   m.def("is_needle_triangle_face", &pmp::is_needle_triangle_face<Pm>,
-        py::arg("f"), py::arg("tm"),
-        py::arg("threshold"), py::arg("np") = py::dict());
+        py::arg("f"), py::arg("tm"), py::arg("threshold"), py::arg("np") = py::dict());
 
   // other
-  m.def("add_bbox", &pmp::add_bbox<Pm>,
-        py::arg("pmesh"), py::arg("np") = py::dict());
-  m.def("bbox", &pmp::bbox<Pm>,
-        py::arg("pmesh"),
-        py::arg("np") = py::dict());
+  m.def("add_bbox", &pmp::add_bbox<Pm>, py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("bbox", &pmp::bbox<Pm>, py::arg("pmesh"), py::arg("np") = py::dict());
   m.def("border_halfedges", &pmp::border_halfedges<Pm>,
-        py::arg("face_range"), py::arg("pm"),
-        py::arg("np") = py::dict());
+        py::arg("face_range"), py::arg("pm"), py::arg("np") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("detect_corners_of_regions",
         &pmp::detect_corners_of_regions<Pm, Face_size_map, Vertex_size_map>,
-        py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"),
-        py::arg("corner_id_map"),
+        py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"), py::arg("corner_id_map"),
         py::arg("np") = py::dict());
 #endif
 
   m.def("edge_bbox", &pmp::edge_bbox<Pm>,
-        py::arg("ed"), py::arg("pmesh"),
-        py::arg("np") = py::dict());
+        py::arg("ed"), py::arg("pmesh"), py::arg("np") = py::dict());
   m.def("extract_boundary_cycles", &pmp::extract_boundary_cycles<Pm>,
         py::arg("pmesh"));
   m.def("face_bbox", &pmp::face_bbox<Pm>,
-        py::arg("f"), py::arg("pmesh"),
-        py::arg("np") = py::dict());
+        py::arg("f"), py::arg("pmesh"), py::arg("np") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("refine_mesh_at_isolevel",
         &pmp::refine_mesh_at_isolevel<Pm, Vertex_double_map>,
-        py::arg("pm"), py::arg("value_map"), py::arg("isovalue"),
-        py::arg("np") = py::dict());
+        py::arg("pm"), py::arg("value_map"), py::arg("isovalue"), py::arg("np") = py::dict());
   m.def("region_growing_of_planes_on_faces",
         &pmp::region_growing_of_planes_on_faces<Pm, Face_size_map>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("np") = py::dict());
@@ -558,25 +504,18 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def(py::init<Pm&, double, const py::dict&>(),
          py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
     .def(py::init<const std::vector<Fd>&, Pm&, double, const py::dict&>(),
-         py::arg("face_range"), py::arg("tmesh"), py::arg("epsilon"),
-         py::arg("np") = py::dict())
+         py::arg("face_range"), py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
     .def(py::init<const pmp::Point_3_vec&, const std::vector<pmp::Size_t_vec>&, double, const py::dict&>(),
          py::arg("points"), py::arg("polygons"), py::arg("epsilon"),
          py::arg("np") = py::dict()) // TODO: handle face_epsilon_map
     .def("is_empty", &Pe::is_empty)
-    .def("inside", [](const Pe& i, const Point_3& query) { return i(query); },
-         py::arg("query"))
-    .def("inside",
-         [](const Pe& i, const Point_3& source, const Point_3& target)
-         { return i(source, target); },
+    .def("inside", [](const Pe& i, const Point_3& query) { return i(query); }, py::arg("query"))
+    .def("inside", [](const Pe& i, const Point_3& source, const Point_3& target) { return i(source, target); },
          py::arg("source"), py::arg("target"))
-    .def("inside",
-         [](const Pe& i, const Point_3& t0, const Point_3& t1, const Point_3& t2)
-         { return i(t0, t1, t2); },
+    .def("inside", [](const Pe& i, const Point_3& t0, const Point_3& t1, const Point_3& t2) { return i(t0, t1, t2); },
          py::arg("t0"), py::arg("t1"), py::arg("t2"))
     .def("inside",
-         [](const Pe& i, const Pm& tmesh, const py::dict& np)
-         { return i(tmesh, internal::parse_pmp_np<Pm>(np)); },
+         [](const Pe& i, const Pm& tmesh, const py::dict& np) { return i(tmesh, internal::parse_pmp_np<Pm>(np)); },
          py::arg("tmesh"), py::arg("np") = py::dict())
     // TODO: inside triangle range
     ;
@@ -593,8 +532,6 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Face_normal_map = Face_vector_map;
 #endif
 
-  m.def("merge_coplanar_facets",
-        &pmp::merge_coplanar_facets<Pm, Face_normal_map>,
-        py::arg("pmesh"), py::arg("face_normals"),
-        py::arg("np") = py::dict());
+  m.def("merge_coplanar_facets", &pmp::merge_coplanar_facets<Pm, Face_normal_map>,
+        py::arg("pmesh"), py::arg("face_normals"), py::arg("np") = py::dict());
 }
