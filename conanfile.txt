@@ -1,5 +1,8 @@
 [requires]
-cgal/6.0.1
+cgal/6.1.1
+# Even though this version of Qt6 is officially supported by Conan2, the installation fails; thus, we rely on local installation
+# qt/6.10.1
+
 [generators]
 
 CMakeDeps
@@ -42,3 +45,4 @@ boost/*:without_type_erasure=True
 boost/*:without_prg_exec_monitor=True
 boost/*:without_test=True
 boost/*:without_nowide=True
+# qt/*:shared=True
