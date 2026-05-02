@@ -121,16 +121,16 @@ py::list compute_subcurves1(py::list& curves, bool mult_overlaps, const Geometry
 
 // Binding for determining whether an intersection occurs between any pair
 // of curves in a given range.
-bool do_curves_intersect0(py::list& curves) {
+  bool do_curves_intersect0(py::list& curves, bool consider_common_endpoints) {
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
     auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
-    return CGAL::do_curves_intersect(begin, end);
+    return CGAL::Surface_sweep_2::do_intersect(begin, end, consider_common_endpoints);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<Curve_2>(curves);
     auto end = stl_forward_iterator<Curve_2>(curves, false);
-    return CGAL::do_curves_intersect(begin, end);
+    return CGAL::Surface_sweep_2::do_intersect(begin, end, consider_common_endpoints);
   }
   else {
     PyErr_SetString(PyExc_StopIteration, "Invalid curve iterator");
@@ -141,16 +141,16 @@ bool do_curves_intersect0(py::list& curves) {
 
 // Binding for determining whether an intersection occurs between any pair
 // of curves in a given range.
-bool do_curves_intersect1(py::list& curves, const Geometry_traits_2& traits) {
+bool do_curves_intersect1(py::list& curves, bool consider_common_endpoints, const Geometry_traits_2& traits) {
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
     auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
-    return CGAL::do_curves_intersect(begin, end, traits);
+    return CGAL::Surface_sweep_2::do_intersect(begin, end, consider_common_endpoints, traits);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<Curve_2>(curves);
     auto end = stl_forward_iterator<Curve_2>(curves, false);
-    return CGAL::do_curves_intersect(begin, end, traits);
+    return CGAL::Surface_sweep_2::do_intersect(begin, end, consider_common_endpoints, traits);
   }
   else {
     PyErr_SetString(PyExc_StopIteration, "Invalid curve iterator");
