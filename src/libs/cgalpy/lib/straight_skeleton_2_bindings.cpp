@@ -11,7 +11,10 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/shared_ptr.h>
 
+#include <CGAL/create_offset_polygons_2.h>
 #include <CGAL/create_straight_skeleton_2.h>
+#include <CGAL/create_offset_polygons_from_polygon_with_holes_2.h>
+#include <CGAL/create_straight_skeleton_from_polygon_with_holes_2.h>
 #include <CGAL/Straight_skeleton_2.h>
 #include <CGAL/Straight_skeleton_2/IO/print.h>
 #ifdef CGALPY_HAS_VISUAL
@@ -54,6 +57,9 @@ Shared_straight_skeleton_2 create_interior_straight_skeleton_2_2(const py::list&
 #if defined(CGALPY_POLYGON_2_BINDINGS)
 Shared_straight_skeleton_2 create_interior_straight_skeleton_2_3(const pol2::Polygon_2& polygon)
 { return CGAL::create_interior_straight_skeleton_2(polygon); }
+
+Shared_straight_skeleton_2 create_interior_straight_skeleton_2_4(const pol2::Polygon_with_holes_2& pwh)
+{ return CGAL::create_interior_straight_skeleton_2(pwh); }
 #endif
 
 Shared_straight_skeleton_2 create_exterior_straight_skeleton_2_1(const FT& max_offset, const py::list& points) {
@@ -85,6 +91,7 @@ void export_straight_skeleton_2(py::module_& m) {
   m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_2);
 #if defined(CGALPY_POLYGON_2_BINDINGS)
   m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_3);
+  m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_4);
 #endif
 
   // exterior

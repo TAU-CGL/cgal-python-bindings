@@ -14,30 +14,27 @@ typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 typedef K::Point_2                   Point ;
 typedef CGAL::Polygon_2<K>           Polygon_2 ;
 typedef CGAL::Straight_skeleton_2<K> Ss ;
+#!/usr/bin/python
 
-typedef std::shared_ptr<Polygon_2> PolygonPtr ;
-typedef std::shared_ptr<Ss> SsPtr ;
+import os
+import sys
+import importlib
 
-typedef std::vector<PolygonPtr> PolygonPtrVector ;
+if len(sys.argv) < 2: lib = 'CGALPY'
+else: lib = sys.argv[1]
+CGALPY = importlib.import_module(lib)
 
-int main() {
-  Polygon_2 poly ;
-  poly.push_back( Point(-1,-1) ) ;
-  poly.push_back( Point(0,-12) ) ;
-  poly.push_back( Point(1,-1) ) ;
-  poly.push_back( Point(12,0) ) ;
-  poly.push_back( Point(1,1) ) ;
-  poly.push_back( Point(0,12) ) ;
-  poly.push_back( Point(-1,1) ) ;
-  poly.push_back( Point(-12,0) ) ;
-  assert(poly.is_counterclockwise_oriented());
+Ker = CGALPY.Ker
+Point = Ker.Point_2
+Pol2 = CGALPY.Pol2
+Polygon = Pol2.Polygon_2
+Sn2 = CGALPY.Sn2
 
-  SsPtr ss = CGAL::create_interior_straight_skeleton_2(poly);
+points = [Point(-1,-1), Point(0,-12), Point(1,-1), Point(12,0), Point(1,1), Point(0,12), Point(-1,1), Point(-12,0)]
+poly = Polygon(points)
+assert(poly.is_counterclockwise_oriented())
+ss = Sn2.create_interior_straight_skeleton_2(poly)
 
-  double lOffset = 1 ;
-  PolygonPtrVector offset_polygons = CGAL::create_offset_polygons_2<Polygon_2>(lOffset,*ss);
-
-  CGAL::Straight_skeletons_2::IO::print_polygons(offset_polygons);
-
-  return EXIT_SUCCESS;
-}
+offset = 1.0
+offset_polygons = Sn2.create_offset_polygons_2(offset, ss)
+Sn2.print_straight_skeleton(offset_polygons)

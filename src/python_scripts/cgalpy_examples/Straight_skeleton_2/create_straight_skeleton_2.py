@@ -14,14 +14,6 @@ Pol2 = CGALPY.Pol2
 Polygon = Pol2.Polygon_2
 Sn2 = CGALPY.Sn2
 
-# typedef CGAL::Exact_predicates_inexact_constructions_kernel K ;
-
-# typedef K::Point_2                   Point ;
-# typedef CGAL::Polygon_2<K>           Polygon_2 ;
-# typedef CGAL::Straight_skeleton_2<K> Ss ;
-
-# typedef std::shared_ptr<Ss> SsPtr ;
-
 points = [Point(-1,-1), Point(0,-12), Point(1,-1), Point(12,0), Point(1,1), Point(0,12), Point(-1,1), Point(-12,0)]
 poly = Polygon(points)
 assert(poly.is_counterclockwise_oriented())
