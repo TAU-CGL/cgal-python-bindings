@@ -379,6 +379,12 @@ if (CGALPY_SPATIAL_SORTING_BINDINGS)
     list(APPEND CGALPY_MODULES St)
     set(CGALPY_St_FILTERS [=[{}]=])
 endif ()
+# 2D Straight Skeleton
+if (CGALPY_STRAIGHT_SKELETON_2_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/straight_skeleton_2_bindings.cpp)
+    list(APPEND CGALPY_MODULES Sn2)
+    set(CGALPY_Sn2_FILTERS [=[{}]=])
+endif ()
 # Surface mesh
 if (CGALPY_SURFACE_MESH_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/surface_mesh_bindings.cpp)
@@ -557,6 +563,11 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     # Spatial sorting
     if (CGALPY_SPATIAL_SORTING_BINDINGS)
         get_spatial_sorting_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # 2D Straight Skeleton
+    if (CGALPY_STRAIGHT_SKELETON_2_BINDINGS)
+        get_straight_skeleton_2_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
     # Surface mesh

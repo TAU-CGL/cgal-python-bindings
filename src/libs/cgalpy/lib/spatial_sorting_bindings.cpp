@@ -10,7 +10,7 @@
 
 #include <CGAL/spatial_sort.h>
 
-#if defined(CGALPY_KERNEL_BINDINGS)
+#if defined(CGALPY_KERNEL_D_BINDINGS)
 #include "CGALPY/kernel_d_types.hpp"
 #endif
 #include "CGALPY/kernel_types.hpp"
@@ -63,7 +63,7 @@ void spatial_sort_3_2(py::list& points) {
   for (const auto& p : v) points.append(p);
 }
 
-#if defined(CGALPY_KERNEL_BINDINGS)
+#if defined(CGALPY_KERNEL_D_BINDINGS)
 
 //!
 void spatial_sort_d_1(py::list& points, const Kernel_d& kernel,

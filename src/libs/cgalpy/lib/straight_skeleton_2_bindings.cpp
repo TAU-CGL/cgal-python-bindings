@@ -1,0 +1,106 @@
+// Copyright (c) 2026 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Efi Fogel         <efifogel@gmail.com>
+
+#include <memory>
+
+#include <nanobind/nanobind.h>
+#include <nanobind/stl/shared_ptr.h>
+
+#include <CGAL/create_straight_skeleton_2.h>
+#include <CGAL/Straight_skeleton_2.h>
+#include <CGAL/Straight_skeleton_2/IO/print.h>
+#ifdef CGALPY_HAS_VISUAL
+#define CGAL_USE_BASIC_VIEWER
+#include <CGAL/draw_straight_skeleton_2.h>
+#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+#include "CGALPY/basic_viewer_types.hpp"
+#endif
+#endif
+
+#include "CGALPY/add_attr.hpp"
+#include "CGALPY/straight_skeleton_2_types.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
+#include "CGALPY/stl_nested_forward_iterator.hpp"
+#if defined(CGALPY_POLYGON_2_BINDINGS)
+#include "CGALPY/polygon_2_types.hpp"
+#endif
+
+namespace py = nanobind;
+
+namespace sn {
+
+using Shared_straight_skeleton_2 = std::shared_ptr<Straight_skeleton_2>;
+
+Shared_straight_skeleton_2 create_interior_straight_skeleton_2_1(const py::list& points) {
+  auto points_begin = stl_forward_iterator<Point_2>(points, true);
+  auto points_end = stl_forward_iterator<Point_2>(points, false);
+  return CGAL::create_interior_straight_skeleton_2(points_begin, points_end);
+}
+
+Shared_straight_skeleton_2 create_interior_straight_skeleton_2_2(const py::list& points, const py::list& holes) {
+  auto points_begin = stl_forward_iterator<Point_2>(points, true);
+  auto points_end = stl_forward_iterator<Point_2>(points, false);
+  auto holes_begin = stl_nested_forward_iterator<Point_2>(holes, true);
+  auto holes_end = stl_nested_forward_iterator<Point_2>(holes, false);
+  return CGAL::create_interior_straight_skeleton_2(points_begin, points_end, holes_begin, holes_end);
+}
+
+
+#if defined(CGALPY_POLYGON_2_BINDINGS)
+Shared_straight_skeleton_2 create_interior_straight_skeleton_2_3(const pol2::Polygon_2& polygon)
+{ return CGAL::create_interior_straight_skeleton_2(polygon); }
+#endif
+
+Shared_straight_skeleton_2 create_exterior_straight_skeleton_2_1(const FT& max_offset, const py::list& points) {
+  auto points_begin = stl_forward_iterator<Point_2>(points, true);
+  auto points_end = stl_forward_iterator<Point_2>(points, false);
+  return CGAL::create_exterior_straight_skeleton_2(max_offset, points_begin, points_end);
+}
+
+#if defined(CGALPY_POLYGON_2_BINDINGS)
+Shared_straight_skeleton_2 create_exterior_straight_skeleton_2_2(const FT& max_offset, const pol2::Polygon_2& polygon)
+{ return CGAL::create_exterior_straight_skeleton_2(max_offset, polygon); }
+#endif
+
+}
+
+void export_straight_skeleton_2(py::module_& m) {
+  using Sn = sn::Straight_skeleton_2;
+  using V = sn::Vertex;
+  using H = sn::Halfedge;
+  using F = sn::Face;
+
+  if (! add_attr<Sn>(m, "Straight_skeleton_2")) {
+    py::class_<Sn> sn_c(m, "Straight_skeleton_2");
+    sn_c.def(py::init<>());
+  }
+
+  // interior
+  m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_1);
+  m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_2);
+#if defined(CGALPY_POLYGON_2_BINDINGS)
+  m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_3);
+#endif
+
+  // exterior
+  m.def("create_exterior_straight_skeleton_2", &sn::create_exterior_straight_skeleton_2_1);
+  m.def("create_exterior_straight_skeleton_2", &sn::create_exterior_straight_skeleton_2_2);
+
+  // auxiliary
+  m.def("print_straight_skeleton", &CGAL::Straight_skeletons_2::IO::print_straight_skeleton<Kernel>);
+
+#ifdef CGALPY_HAS_VISUAL
+  m.def("draw",
+        [](const Sn& sn, const char* title) { CGAL::draw(sn, title); });
+
+#if defined(CGALPY_BASIC_VIEWER_BINDINGS)
+  m.def("draw",
+        [](const Sn& sn, const bvr::Graphics_scene_options& gso, const char* title) { CGAL::draw(sn, gso, title); });
+#endif
+#endif
+}

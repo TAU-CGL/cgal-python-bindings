@@ -76,6 +76,7 @@ void export_polygon_with_holes_2(py::module_&);
 void export_region_growing(py::module_&);
 void export_spatial_searching(py::module_&);
 void export_spatial_sorting(py::module_&);
+void export_straight_skeleton_2(py::module_&);
 void export_surface_mesh(py::module_&);
 void export_surface_sweep_2(py::module_&);
 void export_tools(py::module_& m);
@@ -186,6 +187,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #if defined(CGALPY_SPATIAL_SORTING_BINDINGS)
   auto st_m = m.def_submodule("St");
   export_spatial_sorting(st_m);
+#endif
+
+#if defined(CGALPY_STRAIGHT_SKELETON_2_BINDINGS)
+  auto sn2_m = m.def_submodule("Sn2");
+  export_straight_skeleton_2(sn2_m);
 #endif
 
 #ifdef CGALPY_BGL_BINDINGS

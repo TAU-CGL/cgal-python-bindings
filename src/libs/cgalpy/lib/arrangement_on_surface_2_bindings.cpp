@@ -7,8 +7,6 @@
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
 
-#define CGAL_USE_BASIC_VIEWER
-
 #include <variant>
 
 #include <boost/variant/variant.hpp>
@@ -43,6 +41,7 @@
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS))
 #ifdef CGALPY_HAS_VISUAL
+#define CGAL_USE_BASIC_VIEWER
 #include <CGAL/draw_arrangement_2.h>
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
 #include "CGALPY/basic_viewer_types.hpp"
