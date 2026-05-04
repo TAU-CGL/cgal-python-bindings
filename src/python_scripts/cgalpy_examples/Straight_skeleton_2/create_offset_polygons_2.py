@@ -21,4 +21,4 @@ ss = Sn2.create_interior_straight_skeleton_2(poly)
 
 offset = 1.0
 offset_polygons = Sn2.create_offset_polygons_2(offset, ss)
-Sn2.print_straight_skeleton(offset_polygons)
+Sn2.print_polygons(offset_polygons)

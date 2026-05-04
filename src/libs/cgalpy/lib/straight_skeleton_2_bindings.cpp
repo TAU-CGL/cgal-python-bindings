@@ -10,6 +10,7 @@
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/shared_ptr.h>
+#include <nanobind/stl/vector.h>
 
 #include <CGAL/create_offset_polygons_2.h>
 #include <CGAL/create_straight_skeleton_2.h>
@@ -88,14 +89,6 @@ Shared_straight_skeleton_2 create_exterior_straight_skeleton_2_2(const FT& max_o
 }
 #endif
 
-py::list create_offset_polygons_2(const FT& offset, const sn2::Straight_skeleton_2& skeleton) {
-  constexpr auto ri(py::rv_policy::reference_internal);
-  auto shared_pgns = create_offset_polygons_2(offset, skeleton);
-  py::list pgns;
-  for (auto shared_pgn : shared_pgns) pgns.append(py::cast(shared_pgn, ri));
-  return pgns;
-}
-
 }
 
 void export_straight_skeleton_2(py::module_& m) {
@@ -103,7 +96,6 @@ void export_straight_skeleton_2(py::module_& m) {
   using V = sn2::Vertex;
   using H = sn2::Halfedge;
   using F = sn2::Face;
-
   if (! add_attr<Sn>(m, "Straight_skeleton_2")) {
     py::class_<Sn> sn2_c(m, "Straight_skeleton_2");
     sn2_c.def(py::init<>());
@@ -122,10 +114,24 @@ void export_straight_skeleton_2(py::module_& m) {
   m.def("create_exterior_straight_skeleton_2", &sn2::create_exterior_straight_skeleton_2_2);
 
   // offset
-  m.def("create_offset_polygons_2", &sn2::create_offset_polygons_2);
+  // m.def("create_offset_polygons_2", &sn2::create_offset_polygons_2);
+#if defined(CGALPY_POLYGON_2_BINDINGS)
+  using Pgn = pol2::Polygon_2;
+  using Pwh = pol2::Polygon_with_holes_2;
+  m.def("create_offset_polygons_2",
+        [](const FT& offset, const sn2::Straight_skeleton_2& skeleton)
+        { return CGAL::create_offset_polygons_2<Pgn, FT, Sn, Kernel>(offset, skeleton); });
+  m.def("create_interior_skeleton_and_offset_polygons_2",
+        [](const FT& offset, const Pwh& pwh)
+        { return CGAL::create_interior_skeleton_and_offset_polygons_2(offset, pwh); });
+#endif
 
   // auxiliary
   m.def("print_straight_skeleton", &CGAL::Straight_skeletons_2::IO::print_straight_skeleton<Kernel>);
+#if defined(CGALPY_POLYGON_2_BINDINGS)
+  m.def("print_polygons", &CGAL::Straight_skeletons_2::IO::print_polygons<Kernel, Point_2_container>);
+  m.def("print_polygons", &CGAL::Straight_skeletons_2::IO::print_polygons_with_holes<Kernel, Point_2_container>);
+#endif
 
 #ifdef CGALPY_HAS_VISUAL
   m.def("draw",
