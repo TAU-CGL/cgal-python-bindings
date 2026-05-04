@@ -28,3 +28,4 @@ poly.add_hole(hole)
 
 iss = Sn2.create_interior_straight_skeleton_2(poly)
 Sn2.print_straight_skeleton(iss);
+Sn2.draw(iss, "Interior Straight Skeleton")
