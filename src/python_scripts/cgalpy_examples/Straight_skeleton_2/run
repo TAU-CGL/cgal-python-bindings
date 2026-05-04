@@ -7,4 +7,4 @@
 ./extrude_skeleton.py CGALPY_kerEpic_pol2_sn2
 ./low_level_api.py CGALPY_kerEpic_pol2_sn2
 ./show_offset_polygon.py CGALPY_kerEpic_pol2_sn2
-./show_straight_skeleton.py CGALPY_kerEpic_pol2_sn2
+./show_straight_skeleton.py CGALPY_kerEpic_pol2_sn2 sample_1.dat

@@ -42,7 +42,9 @@ using Shared_straight_skeleton_2 = std::shared_ptr<Straight_skeleton_2>;
 Shared_straight_skeleton_2 create_interior_straight_skeleton_2_1(const py::list& points) {
   auto points_begin = stl_forward_iterator<Point_2>(points, true);
   auto points_end = stl_forward_iterator<Point_2>(points, false);
-  return CGAL::create_interior_straight_skeleton_2(points_begin, points_end);
+  auto ss = CGAL::create_interior_straight_skeleton_2(points_begin, points_end);
+  if (! ss) throw std::runtime_error("Failed to create straight skeleton");
+  return ss;
 }
 
 Shared_straight_skeleton_2 create_interior_straight_skeleton_2_2(const py::list& points, const py::list& holes) {
@@ -50,27 +52,40 @@ Shared_straight_skeleton_2 create_interior_straight_skeleton_2_2(const py::list&
   auto points_end = stl_forward_iterator<Point_2>(points, false);
   auto holes_begin = stl_nested_forward_iterator<Point_2>(holes, true);
   auto holes_end = stl_nested_forward_iterator<Point_2>(holes, false);
-  return CGAL::create_interior_straight_skeleton_2(points_begin, points_end, holes_begin, holes_end);
+  auto ss = CGAL::create_interior_straight_skeleton_2(points_begin, points_end, holes_begin, holes_end);
+  if (! ss) throw std::runtime_error("Failed to create straight skeleton");
+  return ss;
 }
 
 
 #if defined(CGALPY_POLYGON_2_BINDINGS)
-Shared_straight_skeleton_2 create_interior_straight_skeleton_2_3(const pol2::Polygon_2& polygon)
-{ return CGAL::create_interior_straight_skeleton_2(polygon); }
+Shared_straight_skeleton_2 create_interior_straight_skeleton_2_3(const pol2::Polygon_2& polygon) {
+  auto ss = CGAL::create_interior_straight_skeleton_2(polygon);
+  if (! ss) throw std::runtime_error("Failed to create straight skeleton");
+  return ss;
+}
 
-Shared_straight_skeleton_2 create_interior_straight_skeleton_2_4(const pol2::Polygon_with_holes_2& pwh)
-{ return CGAL::create_interior_straight_skeleton_2(pwh); }
+Shared_straight_skeleton_2 create_interior_straight_skeleton_2_4(const pol2::Polygon_with_holes_2& pwh) {
+  auto ss = CGAL::create_interior_straight_skeleton_2(pwh);
+  if (! ss) throw std::runtime_error("Failed to create straight skeleton");
+  return ss;
+}
 #endif
 
 Shared_straight_skeleton_2 create_exterior_straight_skeleton_2_1(const FT& max_offset, const py::list& points) {
   auto points_begin = stl_forward_iterator<Point_2>(points, true);
   auto points_end = stl_forward_iterator<Point_2>(points, false);
-  return CGAL::create_exterior_straight_skeleton_2(max_offset, points_begin, points_end);
+  auto ss = CGAL::create_exterior_straight_skeleton_2(max_offset, points_begin, points_end);
+  if (! ss) throw std::runtime_error("Failed to create straight skeleton");
+  return ss;
 }
 
 #if defined(CGALPY_POLYGON_2_BINDINGS)
-Shared_straight_skeleton_2 create_exterior_straight_skeleton_2_2(const FT& max_offset, const pol2::Polygon_2& polygon)
-{ return CGAL::create_exterior_straight_skeleton_2(max_offset, polygon); }
+Shared_straight_skeleton_2 create_exterior_straight_skeleton_2_2(const FT& max_offset, const pol2::Polygon_2& polygon) {
+  auto ss = CGAL::create_exterior_straight_skeleton_2(max_offset, polygon);
+  if (! ss) throw std::runtime_error("Failed to create straight skeleton");
+  return ss;
+}
 #endif
 
 }
