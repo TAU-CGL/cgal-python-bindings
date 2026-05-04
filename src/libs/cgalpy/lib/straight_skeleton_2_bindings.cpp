@@ -35,7 +35,7 @@
 
 namespace py = nanobind;
 
-namespace sn {
+namespace sn2 {
 
 using Shared_straight_skeleton_2 = std::shared_ptr<Straight_skeleton_2>;
 
@@ -88,30 +88,41 @@ Shared_straight_skeleton_2 create_exterior_straight_skeleton_2_2(const FT& max_o
 }
 #endif
 
+py::list create_offset_polygons_2(const FT& offset, const sn2::Straight_skeleton_2& skeleton) {
+  constexpr auto ri(py::rv_policy::reference_internal);
+  auto shared_pgns = create_offset_polygons_2(offset, skeleton);
+  py::list pgns;
+  for (auto shared_pgn : shared_pgns) pgns.append(py::cast(shared_pgn, ri));
+  return pgns;
+}
+
 }
 
 void export_straight_skeleton_2(py::module_& m) {
-  using Sn = sn::Straight_skeleton_2;
-  using V = sn::Vertex;
-  using H = sn::Halfedge;
-  using F = sn::Face;
+  using Sn = sn2::Straight_skeleton_2;
+  using V = sn2::Vertex;
+  using H = sn2::Halfedge;
+  using F = sn2::Face;
 
   if (! add_attr<Sn>(m, "Straight_skeleton_2")) {
-    py::class_<Sn> sn_c(m, "Straight_skeleton_2");
-    sn_c.def(py::init<>());
+    py::class_<Sn> sn2_c(m, "Straight_skeleton_2");
+    sn2_c.def(py::init<>());
   }
 
   // interior
-  m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_1);
-  m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_2);
+  m.def("create_interior_straight_skeleton_2", &sn2::create_interior_straight_skeleton_2_1);
+  m.def("create_interior_straight_skeleton_2", &sn2::create_interior_straight_skeleton_2_2);
 #if defined(CGALPY_POLYGON_2_BINDINGS)
-  m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_3);
-  m.def("create_interior_straight_skeleton_2", &sn::create_interior_straight_skeleton_2_4);
+  m.def("create_interior_straight_skeleton_2", &sn2::create_interior_straight_skeleton_2_3);
+  m.def("create_interior_straight_skeleton_2", &sn2::create_interior_straight_skeleton_2_4);
 #endif
 
   // exterior
-  m.def("create_exterior_straight_skeleton_2", &sn::create_exterior_straight_skeleton_2_1);
-  m.def("create_exterior_straight_skeleton_2", &sn::create_exterior_straight_skeleton_2_2);
+  m.def("create_exterior_straight_skeleton_2", &sn2::create_exterior_straight_skeleton_2_1);
+  m.def("create_exterior_straight_skeleton_2", &sn2::create_exterior_straight_skeleton_2_2);
+
+  // offset
+  m.def("create_offset_polygons_2", &sn2::create_offset_polygons_2);
 
   // auxiliary
   m.def("print_straight_skeleton", &CGAL::Straight_skeletons_2::IO::print_straight_skeleton<Kernel>);
