@@ -3,6 +3,7 @@
 import os
 import sys
 import importlib
+from dump_to_eps import *
 
 if len(sys.argv) < 2: lib = 'CGALPY'
 else: lib = sys.argv[1]
@@ -12,94 +13,35 @@ Ker = CGALPY.Ker
 Point = Ker.Point_2
 Pol2 = CGALPY.Pol2
 Polygon = Pol2.Polygon_2
+Polygon_with_holes = Pol2.Polygon_with_holes_2
 Sn2 = CGALPY.Sn2
 
+# Obtain the polygon with holes file name
+try: filename = sys.argv[2]
+except: filename = 'sample_1.dat'
 
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+# Obtain the offset
+try: offset = float(sys.argv[3])
+except: offset = 0.25
 
-#include <CGAL/Polygon_with_holes_2.h>
-#include <CGAL/create_offset_polygons_from_polygon_with_holes_2.h>
-#include "dump_to_eps.h"
+# Obtain the eps file name
+try: eps_filename = sys.argv[4]
+except: eps_filename = filename + ".skeleton.eps"
 
-#include <memory>
+# Read the polygon with holes
+in_file = open(filename, 'r')
+pwh = Polygon_with_holes(in_file.read())
+assert(pwh.outer_boundary().is_counterclockwise_oriented())
+for hole in pwh.holes():
+  assert(hole.is_clockwise_oriented())
+  assert(hole.is_simple())
+Pol2.draw(pwh)
 
-#include <cassert>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
-
-typedef CGAL::Exact_predicates_inexact_constructions_kernel K ;
-
-typedef CGAL::Polygon_with_holes_2<K> Polygon_with_holes ;
-
-typedef std::shared_ptr<Polygon_with_holes> Polygon_with_holes_ptr ;
-
-typedef std::vector<Polygon_with_holes_ptr> Polygon_with_holes_ptr_vector ;
-
-int main( int argc, char* argv[] )
-{
-  Polygon_with_holes input ;
-
-  if ( argc > 1 )
-  {
-    std::string name = argv[1] ;
-
-    std::cout << "Input file: " << name << std::endl ;
-
-    std::ifstream is(name.c_str()) ;
-    if ( is )
-    {
-      is >> input ;
-
-      assert(input.outer_boundary().is_counterclockwise_oriented());
-      for(Polygon_with_holes::Hole_const_iterator it = input.holes_begin();
-          it != input.holes_end();
-          ++it){
-        assert(it->is_clockwise_oriented());
-      }
-
-      double lOffset = 0.25 ;
-
-      if ( argc > 2 )
-        lOffset = std::atof(argv[2]);
-
-      std::cout << "Offsetting at: " << lOffset << std::endl ;
-
-      Polygon_with_holes_ptr_vector offset_polygons = CGAL::create_interior_skeleton_and_offset_polygons_with_holes_2(lOffset,input);
-
-      std::string eps_name ;
-      if ( argc > 3  )
-           eps_name = argv[3];
-      else eps_name = name + ".offset.eps" ;
-
-      std::ofstream eps(eps_name.c_str()) ;
-      if ( eps )
-      {
-        std::cerr << "Result: " << eps_name << std::endl ;
-        dump_to_eps(input,offset_polygons,eps);
-      }
-      else
-      {
-        std::cerr << "Could not open result file: " << eps_name << std::endl ;
-      }
-    }
-    else
-    {
-      std::cerr << "Could not open input file: " << name << std::endl ;
-    }
-  }
-  else
-  {
-    std::cerr << "Computes the interior offset of a polygon with holes and draws the result in an EPS file." << std::endl
-                          << std::endl
-              << "Usage: show_offset_polygon <input_file> [output_eps_file]" << std::endl
-              << std::endl
-              << "       input_file  Text file describing the input polygon with holes." << std::endl
-              << "         (See input_file_format.txt for details" << std::endl
-              << "         or use input_file_example.txt)" << std::endl
-              << "       output_file     [default='input_file.offset.eps']" << std::endl ;
-  }
-
-  return 0;
-}
+offset_polygons = Sn2.create_interior_skeleton_and_offset_polygons_with_holes_2(offset, pwh)
+try:
+  print(f"Offsetting: {offset}")
+  offset_polygons = Sn2.create_interior_skeleton_and_offset_polygons_with_holes_2(offset, pwh)
+  print(f"Result: {eps_filename}")
+  dump_to_eps(pwh, offset_polygons, eps_filename)
+except:
+  print("ERROR: creating interior straight skeleton")

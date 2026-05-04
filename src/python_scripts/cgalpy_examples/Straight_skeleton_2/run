@@ -6,5 +6,5 @@
 ./create_straight_skeleton_from_polygon_with_holes_2.py CGALPY_kerEpic_pol2_sn2
 ./extrude_skeleton.py CGALPY_kerEpic_pol2_sn2
 ./low_level_api.py CGALPY_kerEpic_pol2_sn2
-./show_offset_polygon.py CGALPY_kerEpic_pol2_sn2
+./show_offset_polygon.py CGALPY_kerEpic_pol2_sn2 sample_1.dat
 ./show_straight_skeleton.py CGALPY_kerEpic_pol2_sn2 sample_1.dat

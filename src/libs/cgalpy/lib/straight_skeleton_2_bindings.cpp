@@ -121,16 +121,42 @@ void export_straight_skeleton_2(py::module_& m) {
   m.def("create_offset_polygons_2",
         [](const FT& offset, const sn2::Straight_skeleton_2& skeleton)
         { return CGAL::create_offset_polygons_2<Pgn, FT, Sn, Kernel>(offset, skeleton); });
+
+  // interior offset
+  m.def("create_interior_skeleton_and_offset_polygons_2",
+        [](const FT& offset, const Pgn& pgn)
+        { return CGAL::create_interior_skeleton_and_offset_polygons_2(offset, pgn); });
   m.def("create_interior_skeleton_and_offset_polygons_2",
         [](const FT& offset, const Pwh& pwh)
         { return CGAL::create_interior_skeleton_and_offset_polygons_2(offset, pwh); });
+  m.def("create_interior_skeleton_and_offset_polygons_with_holes_2",
+        [](const FT& offset, const Pgn& pgn)
+        { return CGAL::create_interior_skeleton_and_offset_polygons_with_holes_2(offset, pgn); });
+  m.def("create_interior_skeleton_and_offset_polygons_with_holes_2",
+        [](const FT& offset, const Pwh& pwh)
+        { return CGAL::create_interior_skeleton_and_offset_polygons_with_holes_2(offset, pwh); });
+
+  // exterior offset
+  m.def("create_exterior_skeleton_and_offset_polygons_2",
+        [](const FT& offset, const Pgn& pgn)
+        { return CGAL::create_exterior_skeleton_and_offset_polygons_2(offset, pgn); });
+  m.def("create_exterior_skeleton_and_offset_polygons_2",
+        [](const FT& offset, const Pwh& pwh)
+        { return CGAL::create_exterior_skeleton_and_offset_polygons_2(offset, pwh); });
+  m.def("create_exterior_skeleton_and_offset_polygons_with_holes_2",
+        [](const FT& offset, const Pgn& pgn)
+        { return CGAL::create_exterior_skeleton_and_offset_polygons_with_holes_2(offset, pgn); });
+  m.def("create_exterior_skeleton_and_offset_polygons_with_holes_2",
+        [](const FT& offset, const Pwh& pwh)
+        { return CGAL::create_exterior_skeleton_and_offset_polygons_with_holes_2(offset, pwh); });
 #endif
 
   // auxiliary
   m.def("print_straight_skeleton", &CGAL::Straight_skeletons_2::IO::print_straight_skeleton<Kernel>);
 #if defined(CGALPY_POLYGON_2_BINDINGS)
-  m.def("print_polygons", &CGAL::Straight_skeletons_2::IO::print_polygons<Kernel, Point_2_container>);
-  m.def("print_polygons", &CGAL::Straight_skeletons_2::IO::print_polygons_with_holes<Kernel, Point_2_container>);
+  using Pc = Point_2_container;
+  m.def("print_polygons", &CGAL::Straight_skeletons_2::IO::print_polygons<Kernel, Pc>);
+  m.def("print_polygons_with_holes", &CGAL::Straight_skeletons_2::IO::print_polygons_with_holes<Kernel, Pc>);
 #endif
 
 #ifdef CGALPY_HAS_VISUAL

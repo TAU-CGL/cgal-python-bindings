@@ -38,14 +38,14 @@ Sn2 = CGALPY.Sn2
 namespace SS = CGAL::CGAL_SS_i;
 namespace PMP = CGAL::Polygon_mesh_processing;
 
-// Kernel choice:
-// EPICK: Robust and fast
-// EPECK_with_sqrt: Exact and slow
-// EPECK: More robust, and less slow than EPECK_with_sqrt
+# Kernel choice:
+# EPICK: Robust and fast
+# EPECK_with_sqrt: Exact and slow
+# EPECK: More robust, and less slow than EPECK_with_sqrt
 
 using K = CGAL::Exact_predicates_inexact_constructions_kernel;
-// using K = CGAL::Exact_predicates_exact_constructions_kernel;
-// using K = CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt;
+# using K = CGAL::Exact_predicates_exact_constructions_kernel;
+# using K = CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt;
 
 using FT = K::FT;
 using Point_2 = K::Point_2;
@@ -73,10 +73,10 @@ int main(int argc, char** argv)
   char* speeds_filename = nullptr;
 
   FT height = FT{(std::numeric_limits<double>::max)()};
-  bool use_angles = false; // whether the input is SLS edge weights, or taper angles
-  bool flip_weights = false; // takes the opposite for weights, and the complement for angles
+  bool use_angles = false; # whether the input is SLS edge weights, or taper angles
+  bool flip_weights = false; # takes the opposite for weights, and the complement for angles
 
-  // below is only used for random weight generation
+# below is only used for random weight generation
   double min_weight = 1., max_weight = 10.;
   int seed = CGAL::get_default_random().get_seed();
 
@@ -152,7 +152,7 @@ int main(int argc, char** argv)
   out_poly.close();
 #endif
 
-  // read segment speeds (angles or weights)
+# read segment speeds (angles or weights)
   std::vector<std::vector<FT> > speeds;
   if(speeds_filename == nullptr)
     generate_random_weights(pwh, min_weight, max_weight, seed, speeds);
@@ -178,8 +178,8 @@ int main(int argc, char** argv)
   timer.stop();
   std::cout << "Reading input(s) took " << timer.time() << " s." << std::endl;
 
-  // End of I/O, do some slope preprocessing and check the validity of the input(s)
-  // -----------------------------------------------------------------------------------------------
+# End of I/O, do some slope preprocessing and check the validity of the input(s)
+# -----------------------------------------------------------------------------------------------
 
   timer.reset();
   timer.start();
@@ -196,6 +196,3 @@ int main(int argc, char** argv)
   CGAL::draw(sm);
 
   CGAL::IO::write_polygon_mesh("extruded_skeleton.off", sm, CGAL::parameters::stream_precision(17));
-
-  return EXIT_SUCCESS;
-}

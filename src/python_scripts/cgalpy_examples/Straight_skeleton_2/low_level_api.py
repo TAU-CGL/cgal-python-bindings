@@ -14,143 +14,69 @@ Pol2 = CGALPY.Pol2
 Polygon = Pol2.Polygon_2
 Sn2 = CGALPY.Sn2
 
+# A star-shaped polygon, oriented counter-clockwise as required for outer contours.
+star_points = [Point_2(-1,-1), Point_2(0,-12), Point_2(1,-1), Point_2(12,0),
+               Point_2(1,1), Point_2(0,12), Point_2(-1,1), Point_2(-12,0)]
 
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+assert(CGAL::orientation_2(pts,pts+8,Kernel()) == CGAL::COUNTERCLOCKWISE);
 
-#include <CGAL/Polygon_2.h>
-#include <CGAL/Polygon_2_algorithms.h>
-#include <CGAL/Straight_skeleton_builder_2.h>
-#include <CGAL/Polygon_offset_builder_2.h>
-#include <CGAL/compute_outer_frame_margin.h>
-#include <CGAL/Straight_skeleton_2/IO/print.h>
+# We want an offset contour in the outside.
+# Since the package doesn't support that operation directly, we use the following trick:
+# (1) Place the polygon as a hole of a big outer frame.
+# (2) Construct the skeleton on the interior of that frame (with the polygon as a hole)
+# (3) Construct the offset contours
+# (4) Identify the offset contour that corresponds to the frame and remove it from the result
 
-#include <memory>
+offset = 3.0 # the offset distance
 
-#include <vector>
-#include <cassert>
+# First we need to determine the proper separation between the polygon and the frame.
+# We use this helper function provided in the package.
+try:
+  margin = CGAL::compute_outer_frame_margin(star_points, offset);
 
-//
-// This example illustrates how to use the CGAL Straight Skeleton package
-// to construct an offset contour on the outside of a polygon
-//
+  # Proceed only if the margin was computed (an extremely sharp corner might cause overflow)
+  # Get the bbox of the polygon
+  bbox = CGAL::bbox_2(star_points);
 
-// This is the recommended kernel
-typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+  # Compute the boundaries of the frame
+  fxmin = bbox.xmin() - margin
+  fxmax = bbox.xmax() + margin
+  fymin = bbox.ymin() - margin
+  fymax = bbox.ymax() + margin
 
-typedef Kernel::Point_2 Point_2;
-typedef CGAL::Polygon_2<Kernel>    Contour;
-typedef std::shared_ptr<Contour> ContourPtr;
-typedef std::vector<ContourPtr>    ContourSequence ;
+  # Create the rectangular frame
+  frame = [Point_2(fxmin,fymin), Point_2(fxmax,fymin), Point_2(fxmax,fymax), Point_2(fxmin,fymax)]
 
-typedef CGAL::Straight_skeleton_2<Kernel> Ss;
+  # Instantiate the skeleton builder
+  ssb = Sn2.SsBuilder()
 
-typedef Ss::Halfedge_iterator Halfedge_iterator;
-typedef Ss::Halfedge_handle   Halfedge_handle;
-typedef Ss::Vertex_handle     Vertex_handle;
+  # Enter the frame
+  ssb.enter_contour(frame)
 
-typedef CGAL::Straight_skeleton_builder_traits_2<Kernel>      SsBuilderTraits;
-typedef CGAL::Straight_skeleton_builder_2<SsBuilderTraits,Ss> SsBuilder;
+  # Enter the polygon as a hole of the frame (NOTE: as it is a hole we insert it in the opposite orientation)
+  ssb.enter_contour(star.rbegin(),star.rend())
 
-typedef CGAL::Polygon_offset_builder_traits_2<Kernel>                  OffsetBuilderTraits;
-typedef CGAL::Polygon_offset_builder_2<Ss,OffsetBuilderTraits,Contour> OffsetBuilder;
+  # Construct the skeleton
+  try:
+    ss = ssb.construct_skeleton()
+    Sn2.print_straight_skeleton(ss)
 
-int main()
-{
-  // A start-shaped polygon, oriented counter-clockwise as required for outer contours.
-  Point_2 pts[] = { Point_2(-1,-1)
-                  , Point_2(0,-12)
-                  , Point_2(1,-1)
-                  , Point_2(12,0)
-                  , Point_2(1,1)
-                  , Point_2(0,12)
-                  , Point_2(-1,1)
-                  , Point_2(-12,0)
-                  } ;
+    # Instantiate the offset builder with the skeleton
+    ob = OffsetBuilder(ss)
 
-  std::vector<Point_2> star(pts,pts+8);
+    # Obtain the offset contours of type ContourSequence
+    offset_contours = ob.construct_offset_contours(offset)
 
-  assert(CGAL::orientation_2(pts,pts+8,Kernel()) == CGAL::COUNTERCLOCKWISE);
+    # Locate the offset contour that corresponds to the frame
+    # That must be the outmost offset contour, which in turn must be the one
+    # with the largetst unsigned area.
+    largest_area = 0.0
+    for oc in offset_contours:
+      area = abs(oc.area())  # Take abs() as  Polygon_2::area() is signed.
+      if area > largest_area:
+        f = oc
+        largest_area = area
 
-  // We want an offset contour in the outside.
-  // Since the package doesn't support that operation directly, we use the following trick:
-  // (1) Place the polygon as a hole of a big outer frame.
-  // (2) Construct the skeleton on the interior of that frame (with the polygon as a hole)
-  // (3) Construct the offset contours
-  // (4) Identify the offset contour that corresponds to the frame and remove it from the result
-
-
-  double offset = 3 ; // The offset distance
-
-  // First we need to determine the proper separation between the polygon and the frame.
-  // We use this helper function provided in the package.
-  std::optional<double> margin = CGAL::compute_outer_frame_margin(star.begin(),star.end(),offset);
-
-  // Proceed only if the margin was computed (an extremely sharp corner might cause overflow)
-  if ( margin )
-  {
-    // Get the bbox of the polygon
-    CGAL::Bbox_2 bbox = CGAL::bbox_2(star.begin(),star.end());
-
-    // Compute the boundaries of the frame
-    double fxmin = bbox.xmin() - *margin ;
-    double fxmax = bbox.xmax() + *margin ;
-    double fymin = bbox.ymin() - *margin ;
-    double fymax = bbox.ymax() + *margin ;
-
-    // Create the rectangular frame
-    Point_2 frame[4]= { Point_2(fxmin,fymin)
-                      , Point_2(fxmax,fymin)
-                      , Point_2(fxmax,fymax)
-                      , Point_2(fxmin,fymax)
-                      } ;
-
-    // Instantiate the skeleton builder
-    SsBuilder ssb ;
-
-    // Enter the frame
-    ssb.enter_contour(frame,frame+4);
-
-    // Enter the polygon as a hole of the frame (NOTE: as it is a hole we insert it in the opposite orientation)
-    ssb.enter_contour(star.rbegin(),star.rend());
-
-    // Construct the skeleton
-    std::shared_ptr<Ss> ss = ssb.construct_skeleton();
-
-    // Proceed only if the skeleton was correctly constructed.
-    if ( ss )
-    {
-      CGAL::Straight_skeletons_2::IO::print_straight_skeleton(*ss);
-
-      // Instantiate the container of offset contours
-      ContourSequence offset_contours ;
-
-      // Instantiate the offset builder with the skeleton
-      OffsetBuilder ob(*ss);
-
-      // Obtain the offset contours
-      ob.construct_offset_contours(offset, std::back_inserter(offset_contours));
-
-      // Locate the offset contour that corresponds to the frame
-      // That must be the outmost offset contour, which in turn must be the one
-      // with the largetst unsigned area.
-      ContourSequence::iterator f = offset_contours.end();
-      double lLargestArea = 0.0 ;
-      for (ContourSequence::iterator i = offset_contours.begin(); i != offset_contours.end(); ++ i  )
-      {
-        double lArea = CGAL_NTS abs( (*i)->area() ) ; //Take abs() as  Polygon_2::area() is signed.
-        if ( lArea > lLargestArea )
-        {
-          f = i ;
-          lLargestArea = lArea ;
-        }
-      }
-
-      // Remove the offset contour that corresponds to the frame.
-      offset_contours.erase(f);
-
-      CGAL::Straight_skeletons_2::IO::print_polygons(offset_contours);
-    }
-  }
-
-  return 0;
-}
+    # Remove the offset contour that corresponds to the frame.
+    offset_contours.erase(f)
+    Sn2.print_polygons(offset_contours)
