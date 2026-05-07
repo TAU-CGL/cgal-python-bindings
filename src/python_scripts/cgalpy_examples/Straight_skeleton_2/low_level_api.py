@@ -32,8 +32,7 @@ offset = 3.0 # the offset distance
 # First we need to determine the proper separation between the polygon and the frame.
 # We use this helper function provided in the package.
 
-# try:
-if True:
+try:
   margin = Sn2.compute_outer_frame_margin(star_points, offset)
 
   # Proceed only if the margin was computed (an extremely sharp corner might cause overflow)
@@ -82,5 +81,5 @@ if True:
   #   # Remove the offset contour that corresponds to the frame.
   #   offset_contours.erase(f)
   #   Sn2.print_polygons(offset_contours)
-# except Exception as e:
-#  print(f"An unexpected error occurred: {e}")
+except Exception as e:
+  print(f"An unexpected error occurred: {e}")
