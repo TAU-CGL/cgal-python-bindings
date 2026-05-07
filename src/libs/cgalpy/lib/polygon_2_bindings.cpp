@@ -16,6 +16,8 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/add_extraction.hpp"
+
+#include <CGAL/Polygon_2_algorithms.h>
 #ifdef CGALPY_HAS_VISUAL
 #define CGAL_USE_BASIC_VIEWER
 #include <CGAL/draw_polygon_2.h>
@@ -36,6 +38,190 @@ void init_polygon_2(Polygon_2* pgn, py::list& lst) {
   auto end = stl_forward_iterator<Point_2>(lst, false);
   new (pgn) Polygon_2(begin, end);      // placement new
 }
+
+/*!
+ */
+FT area_2_1(const py::list& points, const Kernel& kernel) {
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  FT area;
+  CGAL::area_2(begin, end, area, kernel);
+  return area;
+}
+
+/*!
+ */
+FT area_2_2(const py::list& points) { return area_2_1(points, Kernel()); }
+
+/*!
+ */
+py::object bottom_vertex_2_1(const py::list& points, const Kernel& kernel) {
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto result_it = CGAL::bottom_vertex_2(begin, end, kernel);
+  if (result_it == end) {
+    throw std::invalid_argument("Cannot find bottom vertex of an empty list.");
+  }
+  // Re-create a fresh 'begin' iterator to calculate the index distance safely.
+  // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
+  auto start_it = stl_forward_iterator<Point_2>(points);
+  std::size_t index = std::distance(start_it, result_it);
+
+  // Return the exact same Python object that was passed in!
+  return points[index];
+}
+
+/*!
+ */
+py::object bottom_vertex_2_2(const py::list& points) { return bottom_vertex_2_1(points, Kernel()); }
+
+/*!
+ */
+CGAL::Bounded_side bounded_side_2_1(const py::list& points, const Point_2& pnt, const Kernel& kernel) {
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  return CGAL::bounded_side_2(begin, end, pnt, kernel);
+}
+
+/*!
+ */
+CGAL::Bounded_side bounded_side_2_2(const py::list& points, const Point_2& pnt)
+{ return bounded_side_2_1(points, pnt, Kernel()); }
+
+/*!
+ */
+bool is_convex_2_1(const py::list& points, const Kernel& kernel) {
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  return CGAL::is_convex_2(begin, end, kernel);
+}
+
+/*!
+ */
+bool is_convex_2_2(const py::list& points) { return is_convex_2_1(points, Kernel()); }
+
+/*!
+ */
+bool is_simple_2_1(const py::list& points, const Kernel& kernel) {
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  return CGAL::is_simple_2(begin, end, kernel);
+}
+
+/*!
+ */
+bool is_simple_2_2(const py::list& points) { return is_simple_2_1(points, Kernel()); }
+
+/*!
+ */
+py::object left_vertex_2_1(const py::list& points, const Kernel& kernel) {
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto result_it = CGAL::left_vertex_2(begin, end, kernel);
+  if (result_it == end) {
+    throw std::invalid_argument("Cannot find bottom vertex of an empty list.");
+  }
+  // Re-create a fresh 'begin' iterator to calculate the index distance safely.
+  // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
+  auto start_it = stl_forward_iterator<Point_2>(points);
+  std::size_t index = std::distance(start_it, result_it);
+
+  // Return the exact same Python object that was passed in!
+  return points[index];
+}
+
+/*!
+ */
+py::object left_vertex_2_2(const py::list& points) { return left_vertex_2_1(points, Kernel()); }
+
+/*! While this introduces an $O(N)$ memory copy, it is entirely unavoidable when
+ * passing Python sequence data to a C++ algorithm that requires bidirectional
+ * traversal, which is the case with CGAL::orientation_2() at the time this code
+ * was written.
+ */
+CGAL::Orientation orientation_2_1(const py::list& points, const Kernel& kernel) {
+  std::vector<Point_2> cpp_points;
+  cpp_points.reserve(py::len(points));
+  for (auto p : points) cpp_points.push_back(py::cast<Point_2>(p));
+  return CGAL::orientation_2(cpp_points.begin(), cpp_points.end(), kernel);
+}
+
+/*!
+ */
+CGAL::Orientation orientation_2_2(const py::list& points) { return orientation_2_1(points, Kernel()); }
+
+/*! While this introduces an $O(N)$ memory copy, it is entirely unavoidable when
+ * passing Python sequence data to a C++ algorithm that requires bidirectional
+ * traversal, which is the case with CGAL::orientation_2() at the time this code
+ * was written.
+ */
+CGAL::Oriented_side oriented_side_2_1(const py::list& points, const Point_2& pnt, const Kernel& kernel) {
+  std::vector<Point_2> cpp_points;
+  cpp_points.reserve(py::len(points));
+  for (auto p : points) cpp_points.push_back(py::cast<Point_2>(p));
+  return CGAL::oriented_side_2(cpp_points.begin(), cpp_points.end(), pnt, kernel);
+}
+
+/*!
+ */
+CGAL::Oriented_side oriented_side_2_2(const py::list& points, const Point_2& pnt)
+{ return oriented_side_2_1(points, pnt, Kernel()); }
+
+/*!
+ */
+FT polygon_area_2_1(const py::list& points, const Kernel& kernel) {
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  return CGAL::polygon_area_2(begin, end, kernel);
+}
+
+/*!
+ */
+FT polygon_area_2_2(const py::list& points) { return polygon_area_2_1(points, Kernel()); }
+
+/*!
+ */
+py::object right_vertex_2_1(const py::list& points, const Kernel& kernel) {
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto result_it =  CGAL::right_vertex_2(begin, end, kernel);
+  if (result_it == end) {
+    throw std::invalid_argument("Cannot find bottom vertex of an empty list.");
+  }
+  // Re-create a fresh 'begin' iterator to calculate the index distance safely.
+  // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
+  auto start_it = stl_forward_iterator<Point_2>(points);
+  std::size_t index = std::distance(start_it, result_it);
+
+  // Return the exact same Python object that was passed in!
+  return points[index];
+}
+
+/*!
+ */
+py::object right_vertex_2_2(const py::list& points) { return right_vertex_2_1(points, Kernel()); }
+
+/*!
+ */
+py::object top_vertex_2_1(const py::list& points, const Kernel& kernel) {
+  auto begin = stl_forward_iterator<Point_2>(points);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto result_it = CGAL::top_vertex_2(begin, end, kernel);
+  if (result_it == end) {
+    throw std::invalid_argument("Cannot find bottom vertex of an empty list.");
+  }
+  // Re-create a fresh 'begin' iterator to calculate the index distance safely.
+  // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
+  auto start_it = stl_forward_iterator<Point_2>(points);
+  std::size_t index = std::distance(start_it, result_it);
+
+  // Return the exact same Python object that was passed in!
+  return points[index];
+}
+
+/*!
+ */
+py::object top_vertex_2_2(const py::list& points) { return top_vertex_2_1(points, Kernel()); }
 
 }
 
@@ -92,16 +278,11 @@ void export_polygon_2(py::module_& m) {
 
     using Eci = Pgn::Edge_const_iterator;
     add_iterator<Eci, Eci>("Edge_iterator", pgn_c);
-    pgn_c.def("edges",
-              [] (const Pgn& pgn)
-              { return make_iterator(pgn.edges_begin(), pgn.edges_end()); },
+    pgn_c.def("edges", [] (const Pgn& pgn) { return make_iterator(pgn.edges_begin(), pgn.edges_end()); },
               py::keep_alive<0, 1>());
     using Vci = Pgn::Vertex_const_iterator;
     add_iterator<Vci, Vci>("Vertex_iterator", pgn_c);
-    pgn_c.def("vertices",
-              [] (const Pgn& pgn)
-              { return make_iterator(pgn.vertices_begin(),
-                                     pgn.vertices_end()); },
+    pgn_c.def("vertices", [] (const Pgn& pgn) { return make_iterator(pgn.vertices_begin(), pgn.vertices_end()); },
               py::keep_alive<0, 1>());
 
     add_insertion(pgn_c, "__str__");
@@ -109,9 +290,32 @@ void export_polygon_2(py::module_& m) {
     add_extraction(pgn_c);
   }
 
+  // Free functions
+  m.def("area_2", &pol2::area_2_1);
+  m.def("area_2", &pol2::area_2_2);
+  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_1);
+  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_2);
+  m.def("bounded_side_2", &pol2::bounded_side_2_1);
+  m.def("bounded_side_2", &pol2::bounded_side_2_2);
+  m.def("is_convex_2", &pol2::is_convex_2_1);
+  m.def("is_convex_2", &pol2::is_convex_2_2);
+  m.def("is_simple_2", &pol2::is_simple_2_1);
+  m.def("is_simple_2", &pol2::is_simple_2_2);
+  m.def("left_vertex_2", &pol2::left_vertex_2_1);
+  m.def("left_vertex_2", &pol2::left_vertex_2_2);
+  m.def("orientation_2", &pol2::orientation_2_1);
+  m.def("orientation_2", &pol2::orientation_2_2);
+  m.def("oriented_side_2", &pol2::oriented_side_2_1);
+  m.def("oriented_side_2", &pol2::oriented_side_2_2);
+  m.def("polygon_area_2", &pol2::polygon_area_2_1);
+  m.def("polygon_area_2", &pol2::polygon_area_2_2);
+  m.def("right_vertex_2", &pol2::right_vertex_2_1);
+  m.def("right_vertex_2", &pol2::right_vertex_2_2);
+  m.def("top_vertex_2)", &pol2::top_vertex_2_1);
+  m.def("top_vertex_2)", &pol2::top_vertex_2_2);
+
 #ifdef CGALPY_HAS_VISUAL
   using Draw = void(*)(const Pgn&, const char*);
-  m.def("draw", static_cast<Draw>(CGAL::draw),
-        py::arg("pgn"), py::arg("title") = "");
+  m.def("draw", static_cast<Draw>(CGAL::draw),  py::arg("pgn"), py::arg("title") = "");
 #endif
 }
