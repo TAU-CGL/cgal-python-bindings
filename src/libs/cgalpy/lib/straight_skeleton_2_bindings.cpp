@@ -139,8 +139,7 @@ Sss2 create_interior_weighted_straight_skeleton_2_21(const py::list& points, con
 /*! creates a straight skeleton in the interior of a polygon with holes defined by its outer boundary and holes.
  */
 Sss2 create_interior_weighted_straight_skeleton_2_22(const py::list& points, const py::list& holes,
-                                                     const py::list& outer_weights, const py::list& hole_weights,
-                                                     const Kernel& kernel)
+                                                     const py::list& outer_weights, const py::list& hole_weights)
 { return create_interior_weighted_straight_skeleton_2_21(points, holes, outer_weights, hole_weights, Kernel()); }
 
 /*! creates a straight skeleton in the limited exterior of a polygon defined by its outer boundary.
@@ -281,14 +280,14 @@ void export_straight_skeleton_2(py::module_& m) {
   // Weighted
 
   // Interior weigheed
-//   m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_11,
-//         py::arg("points"), py::arg("kernel"));
-//   m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_12,
-//         py::arg("points"));
-//   m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_21,
-//         py::arg("points"), py::arg("holes"), py::arg("kernel"));
-//   m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_22,
-//         py::arg("points"), py::arg("holes"));
+  m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_11,
+        py::arg("points"), py::arg("weights"), py::arg("kernel"));
+  m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_12,
+        py::arg("points"), py::arg("weights"));
+  m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_21,
+        py::arg("points"), py::arg("holes"), py::arg("outer_weights"), py::arg("hole_weights"), py::arg("kernel"));
+  m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_22,
+        py::arg("points"), py::arg("holes"), py::arg("outer_weights"), py::arg("hole_weights"));
 #if defined(CGALPY_POLYGON_2_BINDINGS)
   m.def("create_interior_weighted_straight_skeleton_2",
         [](const Pgn& png,
@@ -530,6 +529,12 @@ void export_straight_skeleton_2(py::module_& m) {
 #endif
 
   // Auxiliary
+  // arrange_offset_polygons_2
+  // compute_outer_frame_margin
+  // convert_straight_skeleton_2
+
+  // extrude_skeleton
+
   m.def("print_straight_skeleton", &CGAL::Straight_skeletons_2::IO::print_straight_skeleton<Kernel>,
         py::arg("skeleton"));
 #if defined(CGALPY_POLYGON_2_BINDINGS)
