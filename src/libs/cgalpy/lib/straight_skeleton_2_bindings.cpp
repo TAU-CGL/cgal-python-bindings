@@ -12,6 +12,7 @@
 #include <nanobind/stl/shared_ptr.h>
 #include <nanobind/stl/vector.h>
 
+#include <CGAL/compute_outer_frame_margin.h>
 #include <CGAL/create_offset_polygons_2.h>
 #include <CGAL/create_offset_polygons_from_polygon_with_holes_2.h>
 #include <CGAL/create_straight_skeleton_2.h>
@@ -210,6 +211,16 @@ create_interior_weighted_skeleton_and_offset_polygons_2_12(const FT& offset, con
 }
 
 #endif
+
+/*!
+ */
+FT compute_outer_frame_margin(const py::list& points, const FT& offset) {
+  auto points_begin = stl_forward_iterator<Point_2>(points, true);
+  auto points_end = stl_forward_iterator<Point_2>(points, false);
+  auto res = CGAL::compute_outer_frame_margin(points_begin, points_end, offset);
+  if (! res) std::overflow_error("Cannot approximate");
+  return *res;
+}
 
 }
 
@@ -530,7 +541,10 @@ void export_straight_skeleton_2(py::module_& m) {
 
   // Auxiliary
   // arrange_offset_polygons_2
-  // compute_outer_frame_margin
+
+  m.def("compute_outer_frame_margin", sn2::compute_outer_frame_margin,
+        py::arg("points"), py::arg("ft"));
+
   // convert_straight_skeleton_2
 
   // extrude_skeleton

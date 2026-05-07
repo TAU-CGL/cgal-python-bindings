@@ -40,6 +40,7 @@
 #include "CGALPY/Kernel/export_rt.hpp"
 #include "CGALPY/Kernel/export_kernel.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
+#include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/to_string.hpp"
 
 // 2D functors
@@ -86,6 +87,16 @@ extern void export_mpz_class(py::module_&);
 
 extern void export_mpz_int(py::module_&);
 extern void export_mpq_rational(py::module_&);
+
+namespace ker {
+
+CGAL::Bbox_2 bbox_2(const py::list& points) {
+  auto begin = stl_forward_iterator<Point_2>(points, true);
+  auto end = stl_forward_iterator<Point_2>(points, false);
+  return CGAL::bbox_2(begin, end);
+}
+
+}
 
 //template<typename T>
 //size_t hash(T& immutable) {
@@ -1006,6 +1017,8 @@ void export_kernel_module(py::module_& m) {
   m.def("barycenter", static_cast<Bc_fnc1>(&CGAL::barycenter<Kernel>));
   m.def("barycenter", static_cast<Bc_fnc2>(&CGAL::barycenter<Kernel>));
   m.def("barycenter", static_cast<Bc_fnc3>(&CGAL::barycenter<Kernel>));
+
+  m.def("bbox_2", &ker::bbox_2);
 
   using Bisector_fnc = Line_2(*)(const Pnt_2&, const Pnt_2&);
   m.def("bisector", static_cast<Bisector_fnc>(&CGAL::bisector<Kernel>));

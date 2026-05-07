@@ -15,10 +15,10 @@ Polygon = Pol2.Polygon_2
 Sn2 = CGALPY.Sn2
 
 # A star-shaped polygon, oriented counter-clockwise as required for outer contours.
-star_points = [Point_2(-1,-1), Point_2(0,-12), Point_2(1,-1), Point_2(12,0),
-               Point_2(1,1), Point_2(0,12), Point_2(-1,1), Point_2(-12,0)]
+star_points = [Point(-1,-1), Point(0,-12), Point(1,-1), Point(12,0),
+               Point(1,1), Point(0,12), Point(-1,1), Point(-12,0)]
 
-assert(CGAL::orientation_2(pts,pts+8,Kernel()) == CGAL::COUNTERCLOCKWISE);
+assert(Pol2.orientation_2(star_points) == CGALPY.Result.COUNTERCLOCKWISE)
 
 # We want an offset contour in the outside.
 # Since the package doesn't support that operation directly, we use the following trick:
@@ -31,12 +31,14 @@ offset = 3.0 # the offset distance
 
 # First we need to determine the proper separation between the polygon and the frame.
 # We use this helper function provided in the package.
-try:
-  margin = CGAL::compute_outer_frame_margin(star_points, offset);
+
+# try:
+if True:
+  margin = Sn2.compute_outer_frame_margin(star_points, offset)
 
   # Proceed only if the margin was computed (an extremely sharp corner might cause overflow)
   # Get the bbox of the polygon
-  bbox = CGAL::bbox_2(star_points);
+  bbox = CGALPY.Ker.bbox_2(star_points)
 
   # Compute the boundaries of the frame
   fxmin = bbox.xmin() - margin
@@ -45,38 +47,40 @@ try:
   fymax = bbox.ymax() + margin
 
   # Create the rectangular frame
-  frame = [Point_2(fxmin,fymin), Point_2(fxmax,fymin), Point_2(fxmax,fymax), Point_2(fxmin,fymax)]
+  frame = [Point(fxmin,fymin), Point(fxmax,fymin), Point(fxmax,fymax), Point(fxmin,fymax)]
 
   # Instantiate the skeleton builder
-  ssb = Sn2.SsBuilder()
+  # ssb = Sn2.SsBuilder()
 
-  # Enter the frame
-  ssb.enter_contour(frame)
+  # # Enter the frame
+  # ssb.enter_contour(frame)
 
-  # Enter the polygon as a hole of the frame (NOTE: as it is a hole we insert it in the opposite orientation)
-  ssb.enter_contour(star.rbegin(),star.rend())
+  # # Enter the polygon as a hole of the frame (NOTE: as it is a hole we insert it in the opposite orientation)
+  # ssb.enter_contour(star.rbegin(),star.rend())
 
-  # Construct the skeleton
-  try:
-    ss = ssb.construct_skeleton()
-    Sn2.print_straight_skeleton(ss)
+  # # Construct the skeleton
+  # try:
+  #   ss = ssb.construct_skeleton()
+  #   Sn2.print_straight_skeleton(ss)
 
-    # Instantiate the offset builder with the skeleton
-    ob = OffsetBuilder(ss)
+  #   # Instantiate the offset builder with the skeleton
+  #   ob = OffsetBuilder(ss)
 
-    # Obtain the offset contours of type ContourSequence
-    offset_contours = ob.construct_offset_contours(offset)
+  #   # Obtain the offset contours of type ContourSequence
+  #   offset_contours = ob.construct_offset_contours(offset)
 
-    # Locate the offset contour that corresponds to the frame
-    # That must be the outmost offset contour, which in turn must be the one
-    # with the largetst unsigned area.
-    largest_area = 0.0
-    for oc in offset_contours:
-      area = abs(oc.area())  # Take abs() as  Polygon_2::area() is signed.
-      if area > largest_area:
-        f = oc
-        largest_area = area
+  #   # Locate the offset contour that corresponds to the frame
+  #   # That must be the outmost offset contour, which in turn must be the one
+  #   # with the largetst unsigned area.
+  #   largest_area = 0.0
+  #   for oc in offset_contours:
+  #     area = abs(oc.area())  # Take abs() as  Polygon_2::area() is signed.
+  #     if area > largest_area:
+  #       f = oc
+  #       largest_area = area
 
-    # Remove the offset contour that corresponds to the frame.
-    offset_contours.erase(f)
-    Sn2.print_polygons(offset_contours)
+  #   # Remove the offset contour that corresponds to the frame.
+  #   offset_contours.erase(f)
+  #   Sn2.print_polygons(offset_contours)
+# except Exception as e:
+#  print(f"An unexpected error occurred: {e}")
