@@ -1,3 +1,76 @@
+set(component cgalpy)
+string(TOUPPER ${component} component_upper)
+
+######## Custom Source File Generation #########################################
+################################################################################
+
+#############
+# Directories
+#############
+
+set(${component}_BINARY_SRC_DIR "${CMAKE_BINARY_DIR}/src")
+set(${component}_BINARY_LIB_DIR "${${component}_BINARY_SRC_DIR}/libs/${component}")
+
+set(${component}_GENERATED_BASE_DIR "${${component}_BINARY_LIB_DIR}")
+set(${component}_GENERATED_DIR "${${component}_GENERATED_BASE_DIR}/generated")
+set(${component}_GENERATED_LIB_DIR "${${component}_GENERATED_BASE_DIR}/lib/generated")
+set(${component}_GENERATED_INC_DIR "${${component}_GENERATED_BASE_DIR}/include/generated")
+
+file(MAKE_DIRECTORY ${${component}_GENERATED_DIR})
+
+##########
+# Commands
+##########
+
+set(${component}_GEN_DOCSTRINGS "${CMAKE_SOURCE_DIR}/src/scripts/cpp_docstrings_from_json.py")
+set(CGALPY_DOCSTRINGS_JSON_DIR ${CMAKE_CURRENT_LIST_DIR}/lib/docstrings/json)
+file(MAKE_DIRECTORY ${${component}_GENERATED_LIB_DIR})
+file(MAKE_DIRECTORY ${${component}_GENERATED_INC_DIR}/${component})
+
+if(WIN32)
+  set(${component}_GEN_DOCSTRINGS_CMD ${Python_EXECUTABLE} ${${component}_GEN_DOCSTRINGS})
+else()
+  set(${component}_GEN_DOCSTRINGS_CMD ${Python_EXECUTABLE} ${${component}_GEN_DOCSTRINGS})
+endif()
+
+function(add_module_docstring module)
+  set(${component}_GEN_DOCSTRINGS_OUTPUT
+      ${${component}_GENERATED_INC_DIR}/${component}/${module}_docstrings.hpp
+      ${${component}_GENERATED_LIB_DIR}/${module}_docstrings.cpp)
+  set(${component}_GEN_DOCSTRINGS_ARGS
+      --library ${component}
+      --module ${module}
+      --input-path ${CGALPY_DOCSTRINGS_JSON_DIR}
+      --output-inc-path ${${component}_GENERATED_INC_DIR}/${component}
+      --output-lib-path ${${component}_GENERATED_LIB_DIR})
+  set(${component}_GEN_DOCSTRINGS_DEPENDS
+      ${CGALPY_DOCSTRINGS_JSON_DIR}/${module}.json
+      ${${component}_GEN_DOCSTRINGS})
+
+  add_custom_command(
+      OUTPUT ${${component}_GEN_DOCSTRINGS_OUTPUT}
+      COMMAND ${${component}_GEN_DOCSTRINGS_CMD}
+      ARGS ${${component}_GEN_DOCSTRINGS_ARGS}
+      DEPENDS ${${component}_GEN_DOCSTRINGS_DEPENDS})
+
+  set(${component}_AUTO_GENERATED_HDR_FILES
+      ${${component}_AUTO_GENERATED_PUB_HDR_FILES}
+      ${${component}_GENERATED_INC_DIR}/${component}/${module}_docstrings.hpp
+      CACHE INTERNAL "")
+  set(${component}_AUTO_GENERATED_SRC_FILES
+      ${${component}_AUTO_GENERATED_SRC_FILES}
+      ${${component}_GENERATED_LIB_DIR}/${module}_docstrings.cpp
+      CACHE INTERNAL "")
+
+  set_source_files_properties(
+      ${${component}_GENERATED_INC_DIR}/${component}/${module}_docstrings.hpp
+      GENERATED)
+  set_source_files_properties(
+      ${${component}_GENERATED_LIB_DIR}/${module}_docstrings.cpp
+      GENERATED)
+endfunction()
+
+################################################################################
 ######## Packages ###############################################################
 ################################################################################
 
@@ -877,7 +950,8 @@ list(APPEND CGALPY_STUBS_DEPENDS CGALPY_STUBS)
 
 foreach (MODULE IN LISTS CGALPY_MODULES)
   add_module(${MODULE})
-  endforeach ()
+  add_module_docstring(${MODULE})
+endforeach ()
 
 add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS_DEPENDS})
 list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS_DEPENDS})
